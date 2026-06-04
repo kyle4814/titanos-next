@@ -1,0 +1,70 @@
+"use client";
+
+import Link from "next/link";
+
+const LINKS = [
+  { label: "Free Scan", href: "/scan", external: false },
+  { label: "Compliance", href: "/compliance", external: false },
+  { label: "AI Implementation", href: "/ai-delivery", external: false },
+  { label: "Methodology", href: "/methodology", external: false },
+  {
+    label: "Book a call",
+    href: "https://cal.com/kyle-deligny-msvz6s/15min",
+    external: true,
+  },
+  { label: "Privacy", href: "/privacy", external: false },
+  { label: "Terms", href: "/terms", external: false },
+];
+
+export default function Footer() {
+  return (
+    <footer
+      style={{
+        padding: "50px 20px",
+        borderTop: "1px solid var(--border)",
+        textAlign: "center",
+        color: "var(--dim)",
+        fontSize: "0.85rem",
+        position: "relative",
+        zIndex: 1,
+      }}
+    >
+      <div className="container-vault">
+        <div style={{ marginBottom: 14 }}>
+          {LINKS.map((l) =>
+            l.external ? (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ margin: "0 12px", color: "var(--dim)" }}
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                style={{ margin: "0 12px", color: "var(--dim)" }}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
+        </div>
+        <div>TITANOS · Kyle Deligny · Sydney, Australia</div>
+        <div
+          style={{
+            marginTop: 8,
+            fontSize: "0.75rem",
+            letterSpacing: "0.05em",
+            color: "#555",
+          }}
+        >
+          ABN 34 318 502 254 · titanos.tech · powered by Claude Code
+        </div>
+      </div>
+    </footer>
+  );
+}

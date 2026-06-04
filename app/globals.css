@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════
+   TITANOS — THE VAULT design tokens
+   ═══════════════════════════════════════════════════════════════ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --black: #000000;
+  --vault-bg: #0a0a0a;
+  --gold: #D4AF37;
+  --gold-dim: #8B7225;
+  --gold-bright: #F5D575;
+  --ice: #B9F2FF;
+  --card: #121212;
+  --border: #1A1A1A;
+  --text: #E0E0E0;
+  --dim: #777777;
+
+  /* spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-30: 120px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-black: var(--black);
+  --color-vault-bg: var(--vault-bg);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-gold-bright: var(--gold-bright);
+  --color-ice: var(--ice);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-dim: var(--dim);
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Inter', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--black);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Typography
+   ═══════════════════════════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+
+a {
+  color: var(--ice);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   View transitions (between routes)
+   ═══════════════════════════════════════════════════════════════ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: vault-out 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+::view-transition-new(root) {
+  animation: vault-in 300ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes vault-out {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.98) translateY(10px); }
+}
+@keyframes vault-in {
+  from { opacity: 0; transform: scale(1.02) translateY(-10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+::view-transition-old(vault-frame),
+::view-transition-new(vault-frame) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Utility helpers
+   ═══════════════════════════════════════════════════════════════ */
+.container-vault {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  margin: 0 20px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
