@@ -1,5 +1,670 @@
-import { stubPage } from "@/lib/stub";
-export const metadata = { title: "Compliance — TITANOS" };
-export default function Page() {
-  return stubPage("Compliance");
+import type { Metadata } from "next";
+import SectionReveal from "@/components/SectionReveal";
+import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/PageHero";
+import AnimatedButton from "@/components/AnimatedButton";
+import FaqItem from "@/components/FaqItem";
+import DeadlineCounter from "@/components/DeadlineCounter";
+import GoldThread, { type ThreadStep } from "@/components/GoldThread";
+
+const STRIPE_LINK = "https://buy.stripe.com/3cIfZh017cGd80QgGa1RC43";
+const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+
+export const metadata: Metadata = {
+  title:
+    "AU Privacy Act + Essential Eight Compliance for SMBs — 11 December 2026 Deadline | TITANOS",
+  description:
+    "Australian Privacy Act + Essential Eight compliance done with you. AU$5,997 one-time + AU$199/mo monitoring. Built for the 11 December 2026 ADM disclosure deadline. ABN 34 318 502 254.",
+  alternates: { canonical: "https://titanos.tech/compliance" },
+  openGraph: {
+    title:
+      "AU Privacy Act + Essential Eight Compliance — Done With You | Titanos",
+    description:
+      "Get compliant before 11 December 2026. AU$5,997 one-time + AU$199/mo monitoring. One done-with-you engagement, no tiers. Built for Australian SMBs.",
+    type: "website",
+    url: "https://titanos.tech/compliance",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+  robots: { index: true, follow: true },
+};
+
+const THREAD_STEPS: ThreadStep[] = [
+  {
+    num: "I",
+    title: "YOU REQUEST A SCAN",
+    body: "We map your external attack surface and feed the findings into the engagement pack.",
+  },
+  {
+    num: "II",
+    title: "EVIDENCE PACK",
+    body: "We send your evidence pack (~17pp, 13 sections) for your records — a regulator-ready artifact.",
+  },
+  {
+    num: "III",
+    title: "90-MIN IMPLEMENTATION CALL",
+    body: "We apply the changes together: DNS hygiene, M365/Workspace hardening, privacy policy + ADM disclosure deployed, NDB runbook integrated.",
+  },
+  {
+    num: "IV",
+    title: "QUARTERLY RE-SCAN + DELTA",
+    body: "Every 90 days we re-scan and send a delta report. New exposures get flagged; remediated items get logged.",
+  },
+  {
+    num: "V",
+    title: "30-DAY REVIEW CALL",
+    body: "We audit what shipped, confirm policy changes are live in customer-facing surfaces, and tune the runbook.",
+  },
+  {
+    num: "VI",
+    title: "ATTESTATION + 12 MO BRIEFINGS",
+    body: "Signed compliance attestation letter plus 12 months of industry-specific regulatory briefings.",
+  },
+];
+
+const TIMELINE = [
+  {
+    when: "10 JUNE 2025 · LIVE",
+    title: "Statutory tort for serious privacy invasions",
+    body: "Already in effect. Individuals can sue directly for serious invasions of privacy — no need to wait for the OAIC.",
+    state: "live",
+  },
+  {
+    when: "4 MARCH 2026 · LIVE",
+    title: "Mandatory IoT security standards take effect",
+    body: "Connected-device makers and importers face baseline security requirements. Cascades to any business reselling or operating IoT.",
+    state: "live",
+  },
+  {
+    when: "2 AUGUST 2026",
+    title: "EU AI Act enforcement begins",
+    body: "Applies to AU companies with EU customers. Transparency, risk-classification, and conformity obligations.",
+    state: "future",
+  },
+  {
+    when: "11 DECEMBER 2026 · THE ONE",
+    title: "ADM disclosure required in all privacy policies",
+    body: "Automated Decision-Making used in any business process must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M.",
+    state: "future",
+  },
+  {
+    when: "TRANCHE 2 · COMING",
+    title: "Small-business exemption removal",
+    body: "Pulls ~2.3M additional AU SMBs into Privacy Act scope. The current AU$3M turnover exemption is expected to be repealed in the second reform tranche.",
+    state: "coming",
+  },
+];
+
+const YOU_CONTROL = [
+  "Privacy policy content + ADM disclosure",
+  "DNS hygiene (SPF, DKIM, DMARC, CAA records)",
+  "Microsoft 365 / Google Workspace security defaults",
+  "MFA enablement across team",
+  "Breach response process documentation",
+  "Vendor risk register",
+  "Essential Eight ML1 self-attestation",
+  "Staff access management",
+];
+
+const HOST_CONTROLS = [
+  "TLS/SSL certificate management on hosted sites",
+  "HSTS headers on Squarespace / Shopify / Wix",
+  "Server-side security configurations",
+  "DDoS protection on hosted infrastructure",
+  "Database security on SaaS like Xero, Cliniko, Vend",
+];
+
+const INCLUDED = [
+  "13-section evidence pack (~17pp)",
+  "External scan with you-vs-host split",
+  "90-minute implementation working call where we apply the changes together",
+  "DNS hygiene + M365/Google Workspace hardening done with you",
+  "Privacy policy + ADM disclosure deployed",
+  "NDB runbook integrated",
+  "30-day review call",
+  "Signed compliance attestation letter",
+  "Quarterly re-scan + delta report",
+  "12 months of industry-specific regulatory update briefings",
+];
+
+export default function CompliancePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Titanos AU Privacy Act + Essential Eight Compliance — Done With You",
+    description:
+      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 12 months of regulatory update briefings.",
+    brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
+    offers: {
+      "@type": "Offer",
+      name: "Done With You",
+      price: "5997",
+      priceCurrency: "AUD",
+      availability: "https://schema.org/InStock",
+      url: STRIPE_LINK,
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <PageHero
+        badge={
+          <>
+            DEADLINE · 11 DECEMBER 2026 <DeadlineCounter />
+          </>
+        }
+        title="Australian Privacy Act Compliance for SMBs"
+        tagline="Expert-reviewed · Australian-owned · ABN-verified. New privacy laws take effect 11 December 2026. Penalties up to AU$50 million."
+        sub="We do the diagnostic, give you the evidence pack, and apply the changes together on a 90-minute working call. Built for Australian SMBs on Squarespace, WordPress, Microsoft 365, and Google Workspace."
+        trustLine={
+          <>
+            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
+            3,600+ unique businesses in our scan corpus ·{" "}
+            <a href="/methodology" style={{ color: "var(--ice)" }}>
+              Methodology
+            </a>
+          </>
+        }
+      >
+        <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel="Buy Compliance for AU$5,997">
+          BUY COMPLIANCE · AU$5,997
+        </AnimatedButton>
+        <AnimatedButton href={CAL_15} external variant="primary">
+          BOOK A 15-MIN
+        </AnimatedButton>
+      </PageHero>
+
+      <div className="divider-gold" />
+
+      {/* DEADLINE TIMELINE */}
+      <SectionReveal id="timeline" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="FOUR DEADLINES TO KNOW"
+            lead="Four legal pressure points stack between now and 11 December 2026. The compliance pack covers them all in one pass."
+          />
+          <div
+            style={{
+              maxWidth: 760,
+              margin: "0 auto",
+              borderLeft: "2px solid var(--gold-dim)",
+              padding: "8px 0 8px 30px",
+            }}
+          >
+            {TIMELINE.map((t) => (
+              <TimelineRow key={t.when} {...t} />
+            ))}
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* WHAT THE ENGAGEMENT LOOKS LIKE — gold thread */}
+      <SectionReveal id="walkthrough" style={{ padding: "90px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="WHAT THE ENGAGEMENT LOOKS LIKE"
+            lead="Six steps from scan to signed attestation. No PDF-only deliverable, no opaque hand-offs."
+          />
+          <GoldThread steps={THREAD_STEPS} />
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* YOU CONTROL vs HOST CONTROLS */}
+      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="YOU CONTROL SOME · YOUR HOST CONTROLS THE REST"
+            lead="Your hosting service controls some things. We tell you what to ask them to fix, and document the rest as “reasonable steps taken.”"
+          />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 22,
+              maxWidth: 1020,
+              margin: "0 auto",
+            }}
+          >
+            <SplitCol
+              title="YOU CONTROL"
+              sub="We apply these together on the working call."
+              items={YOU_CONTROL}
+              accent="gold"
+              prefix="✓"
+            />
+            <SplitCol
+              title="YOUR HOSTING PROVIDER CONTROLS"
+              sub="We tell you exactly how to escalate."
+              items={HOST_CONTROLS}
+              accent="ice"
+              prefix="→"
+            />
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* SINGLE OFFER */}
+      <SectionReveal id="offer" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="ONE ENGAGEMENT · DONE WITH YOU"
+            lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and stay with you for 12 months of regulatory briefings and quarterly re-scans."
+          />
+          <div style={{ maxWidth: 780, margin: "0 auto" }}>
+            <article
+              style={{
+                background: "var(--card)",
+                border: "1px solid var(--gold-dim)",
+                borderRadius: 8,
+                padding: "44px 38px",
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  color: "var(--ice)",
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.18em",
+                  marginBottom: 14,
+                  textAlign: "center",
+                }}
+              >
+                DONE WITH YOU
+              </div>
+              <h3
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  color: "var(--gold)",
+                  fontSize: "clamp(1.3rem, 3vw, 1.7rem)",
+                  letterSpacing: "0.04em",
+                  lineHeight: 1.3,
+                  textAlign: "center",
+                  marginBottom: 18,
+                }}
+              >
+                Privacy Act + Essential Eight Compliance — Done With You
+              </h3>
+              <div
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  color: "var(--gold)",
+                  fontSize: "clamp(1.9rem, 4vw, 2.4rem)",
+                  fontWeight: 700,
+                  lineHeight: 1.1,
+                  textAlign: "center",
+                }}
+              >
+                AU$5,997
+                <span
+                  style={{
+                    color: "var(--dim)",
+                    fontSize: "0.92rem",
+                    display: "block",
+                    marginTop: 8,
+                    fontWeight: 400,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  one-time + AU$199/mo monitoring
+                </span>
+              </div>
+              <p
+                style={{
+                  color: "var(--text)",
+                  fontSize: "0.95rem",
+                  lineHeight: 1.75,
+                  margin: "24px auto 20px",
+                  textAlign: "center",
+                  maxWidth: 620,
+                }}
+              >
+                Everything you need to demonstrate “reasonable steps” under the Privacy Act and
+                Essential Eight ML1, applied together with you in a single working call — then
+                maintained for 12 months.
+              </p>
+              <ul
+                style={{
+                  listStyle: "none",
+                  margin: "8px auto 28px",
+                  maxWidth: 620,
+                  padding: 0,
+                }}
+              >
+                {INCLUDED.map((it) => (
+                  <li
+                    key={it}
+                    style={{
+                      color: "var(--text)",
+                      fontSize: "0.92rem",
+                      lineHeight: 1.65,
+                      padding: "7px 0 7px 24px",
+                      position: "relative",
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        color: "#4ade80",
+                        fontWeight: 700,
+                      }}
+                    >
+                      ✓
+                    </span>
+                    {it}
+                  </li>
+                ))}
+              </ul>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  gap: 12,
+                }}
+              >
+                <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel="Buy Compliance for AU$5,997">
+                  BUY COMPLIANCE · AU$5,997
+                </AnimatedButton>
+                <AnimatedButton href={CAL_15} external variant="secondary">
+                  Book a 15-min first
+                </AnimatedButton>
+              </div>
+            </article>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* FAQ */}
+      <SectionReveal id="faq" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="QUESTIONS WE GET" />
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            <FaqItem question="How the working call works">
+              A single 90-minute video call where we apply the changes together. You share screen
+              for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
+              CMS. We walk you through each change as you make it — no opaque hand-offs, no
+              “we’ll send you instructions and check back next week.” By the end of the call, the
+              privacy policy is deployed, the ADM disclosure is live, the M365/Workspace
+              hardening is applied, the DNS records are corrected, and the NDB runbook is
+              integrated.
+            </FaqItem>
+            <FaqItem question="What access you need to grant">
+              For the working call, you remain logged into your own admin consoles — we never
+              receive credentials. You’ll need owner or admin access to: your DNS provider, your
+              Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy
+              deployment, and (optionally) your customer-record systems for the vendor risk
+              register.
+            </FaqItem>
+            <FaqItem question="What we do vs what you do on the call">
+              We do: the diagnostic, the policy drafting, the specific Essential Eight setting
+              list, the DNS record values, the M365/Workspace hardening checklist, the NDB
+              runbook, the attestation letter, and the explanation of why each change is needed.
+              You do: the actual clicks inside your own admin consoles, the privacy policy
+              publish, and the staff communication once changes are live.
+            </FaqItem>
+            <FaqItem question="I’m too small for this to matter">
+              Tranche 2 reforms are positioned to remove the AU$3M small-business turnover
+              exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope. Penalties
+              already reach AU$50M for serious or repeated interference with privacy.
+            </FaqItem>
+            <FaqItem question="Our website is on Squarespace — can you even help?">
+              Yes. The audit works on any hosting provider. We document what you control (privacy
+              policy, DNS records, account-level MFA, vendor register) versus what Squarespace
+              controls (TLS, HSTS, server config), and give you the exact escalation language for
+              the bits they own.
+            </FaqItem>
+            <FaqItem question="We use Microsoft 365 — do you cover that?">
+              Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes
+              that satisfy most Essential Eight ML1 requirements. We apply these together with
+              you on the 90-minute working call — typically a 15-minute admin sequence covering
+              MFA, conditional access, and audit logging.
+            </FaqItem>
+            <FaqItem question="What’s the difference between this and Vanta or Drata?">
+              Vanta and Drata are US$10–15K/yr enterprise compliance tools shaped for SOC 2.
+              We’re an AU$5,997 one-time + AU$199/mo engagement shaped for AU SMBs facing
+              Privacy Act + Essential Eight. Different buyer, different price, different
+              geography, different framework.
+            </FaqItem>
+            <FaqItem question="What if my hosting provider won’t fix what you find?">
+              We give you the exact escalation language. If they refuse, you have documented
+              evidence of having taken “reasonable steps” — the standard the OAIC actually
+              assesses against.
+            </FaqItem>
+            <FaqItem question="Can you guarantee I’ll be compliant?">
+              No vendor honestly can — compliance is determined by the regulator on the facts of
+              a specific incident. What we give you is the evidence pack regulators expect to see
+              when assessing whether you took “reasonable steps.”
+            </FaqItem>
+            <FaqItem question="How fast can we get this done?">
+              External scan within 48 hours of purchase. Working call scheduled inside 7 days.
+              30-day review call scheduled at the working call. Quarterly re-scans recur for the
+              life of the monitoring subscription.
+            </FaqItem>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* CROSS-LINKS */}
+      <SectionReveal
+        style={{ textAlign: "center", padding: "50px 20px", position: "relative", zIndex: 2 }}
+      >
+        <p style={{ color: "var(--dim)", fontSize: "0.95rem", marginBottom: 10 }}>
+          Want to see your current security exposure first?{" "}
+          <a href="/scan" style={{ color: "var(--gold)" }}>
+            Free scan →
+          </a>
+        </p>
+        <p style={{ color: "var(--dim)", fontSize: "0.95rem" }}>
+          Need an AI build instead?{" "}
+          <a href="/ai-delivery" style={{ color: "var(--gold)" }}>
+            AI Implementation for Business →
+          </a>
+        </p>
+      </SectionReveal>
+
+      {/* FINAL CTA */}
+      <SectionReveal
+        style={{
+          textAlign: "center",
+          padding: "90px 20px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: "'Cinzel', serif",
+            color: "var(--gold)",
+            fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
+            fontWeight: 700,
+            marginBottom: 14,
+            letterSpacing: "0.05em",
+          }}
+        >
+          SHIP COMPLIANCE BEFORE THE DEADLINE
+        </h2>
+        <p
+          style={{
+            color: "var(--ice)",
+            fontSize: "1.02rem",
+            marginBottom: 32,
+            maxWidth: 620,
+            margin: "0 auto 32px",
+            lineHeight: 1.7,
+          }}
+        >
+          One engagement, one outcome: an evidence pack a regulator accepts as “reasonable
+          steps,” with the changes already applied together on the working call.
+        </p>
+        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+          <AnimatedButton href={STRIPE_LINK} external variant="primary">
+            BUY COMPLIANCE · AU$5,997
+          </AnimatedButton>
+          <AnimatedButton href={CAL_15} external variant="primary">
+            BOOK A 15-MIN FIRST
+          </AnimatedButton>
+        </div>
+      </SectionReveal>
+
+      {/* Social proof placeholder — hidden until real testimonials land */}
+      <section
+        className="social-proof-placeholder"
+        style={{ display: "none" }}
+        aria-hidden="true"
+      >
+        {/* INSERT REAL testimonials, client names, logos, outcomes here. DO NOT FABRICATE. */}
+      </section>
+    </>
+  );
+}
+
+/* ─── local helpers ─────────────────────────────────────── */
+function TimelineRow({
+  when,
+  title,
+  body,
+  state,
+}: {
+  when: string;
+  title: string;
+  body: string;
+  state: string;
+}) {
+  const dotStyle: React.CSSProperties = {
+    position: "absolute",
+    left: -38,
+    top: 18,
+    width: 12,
+    height: 12,
+    borderRadius: "50%",
+    background: state === "live" ? "var(--gold)" : "var(--card)",
+    border:
+      state === "live"
+        ? "2px solid var(--gold)"
+        : state === "future"
+        ? "2px solid var(--ice)"
+        : "2px dashed var(--dim)",
+  };
+  return (
+    <div style={{ position: "relative", padding: "14px 0 22px" }}>
+      <span aria-hidden="true" style={dotStyle} />
+      <div
+        style={{
+          fontFamily: "'Cinzel', serif",
+          color: state === "coming" ? "var(--dim)" : "var(--gold)",
+          fontSize: "0.85rem",
+          letterSpacing: "0.06em",
+          marginBottom: 4,
+        }}
+      >
+        {when}
+      </div>
+      <h4
+        style={{
+          color: "var(--ice)",
+          fontSize: "1rem",
+          fontWeight: 600,
+          marginBottom: 6,
+          fontFamily: "'Inter', sans-serif",
+          letterSpacing: 0,
+        }}
+      >
+        {title}
+      </h4>
+      <p style={{ color: "var(--dim)", fontSize: "0.88rem", lineHeight: 1.6 }}>{body}</p>
+    </div>
+  );
+}
+
+function SplitCol({
+  title,
+  sub,
+  items,
+  accent,
+  prefix,
+}: {
+  title: string;
+  sub: string;
+  items: string[];
+  accent: "gold" | "ice";
+  prefix: string;
+}) {
+  return (
+    <article
+      style={{
+        background: "var(--card)",
+        border: `1px solid ${accent === "gold" ? "var(--gold-dim)" : "var(--border)"}`,
+        borderRadius: 6,
+        padding: "30px 26px",
+      }}
+    >
+      <h3
+        style={{
+          fontFamily: "'Cinzel', serif",
+          color: accent === "gold" ? "var(--gold)" : "var(--ice)",
+          fontSize: "1.15rem",
+          letterSpacing: "0.06em",
+          marginBottom: 6,
+          lineHeight: 1.3,
+        }}
+      >
+        {title}
+      </h3>
+      <p
+        style={{
+          color: "var(--dim)",
+          fontSize: "0.84rem",
+          marginBottom: 18,
+          lineHeight: 1.5,
+        }}
+      >
+        {sub}
+      </p>
+      <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+        {items.map((it) => (
+          <li
+            key={it}
+            style={{
+              color: "var(--text)",
+              fontSize: "0.92rem",
+              lineHeight: 1.7,
+              padding: "6px 0 6px 22px",
+              position: "relative",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: 0,
+                color: accent === "gold" ? "#4ade80" : "var(--ice)",
+                fontWeight: 700,
+              }}
+            >
+              {prefix}
+            </span>
+            {it}
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
 }
