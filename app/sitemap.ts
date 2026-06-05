@@ -1,5 +1,11 @@
 import type { MetadataRoute } from "next";
 
+// Next 16 + output: 'export' requires sitemap routes to explicitly opt
+// into static generation. Without this, build fails at page-data
+// collection:  "export const dynamic = 'force-static' not configured on
+// route /sitemap.xml with 'output: export'".
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://titanos.tech";
 
