@@ -12,7 +12,7 @@ const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
 
 export const metadata: Metadata = {
   title:
-    "AU Privacy Act + Essential Eight Compliance for SMBs — 11 December 2026 Deadline | TITANOS",
+    "Privacy Act Compliance for AU SMBs · Dec 2026 | TITANOS",
   description:
     "Australian Privacy Act + Essential Eight compliance done with you. AU$5,997 one-time + AU$199/mo monitoring. Built for the 11 December 2026 ADM disclosure deadline. ABN 34 318 502 254.",
   alternates: { canonical: "https://titanos.tech/compliance" },
@@ -158,13 +158,13 @@ export default function CompliancePage() {
             DEADLINE · 11 DECEMBER 2026 <DeadlineCounter />
           </>
         }
-        title="Australian Privacy Act Compliance for SMBs"
-        tagline="Expert-reviewed · Australian-owned · ABN-verified. New privacy laws take effect 11 December 2026. Penalties up to AU$50 million."
+        title="Privacy Act compliant by 11 December 2026 — or face up to AU$50M in penalties."
+        tagline="One done-with-you engagement. Evidence pack, scan, 90-minute working call, 12 months of monitoring. AU$5,997."
         sub="We do the diagnostic, give you the evidence pack, and apply the changes together on a 90-minute working call. Built for Australian SMBs on Squarespace, WordPress, Microsoft 365, and Google Workspace."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
-            3,600+ unique businesses in our scan corpus ·{" "}
+            3,600+ unique AU/NZ/SG businesses in our scan corpus ·{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
               Methodology
             </a>
@@ -174,9 +174,18 @@ export default function CompliancePage() {
         <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel="Buy Compliance for AU$5,997">
           BUY COMPLIANCE · AU$5,997
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="primary">
+        <AnimatedButton href={CAL_15} external variant="secondary">
           BOOK A 15-MIN
         </AnimatedButton>
+        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400 }}>
+          14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
+          <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
+            Read full terms ›
+          </a>
+        </p>
+        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400 }}>
+          Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+        </p>
       </PageHero>
 
       <div className="divider-gold" />
@@ -296,6 +305,17 @@ export default function CompliancePage() {
               >
                 Privacy Act + Essential Eight Compliance — Done With You
               </h3>
+              <p
+                style={{
+                  textDecoration: "line-through",
+                  color: "var(--dim)",
+                  fontSize: "0.9rem",
+                  marginBottom: 6,
+                  textAlign: "center",
+                }}
+              >
+                Comparable Vanta + DPO contractor: ~AU$18,000+ in year 1
+              </p>
               <div
                 style={{
                   fontFamily: "'Cinzel', serif",
@@ -331,7 +351,7 @@ export default function CompliancePage() {
                 }}
               >
                 Everything you need to demonstrate “reasonable steps” under the Privacy Act and
-                Essential Eight ML1, applied together with you in a single working call — then
+                Essential Eight Maturity Level 1 (ML1), applied together with you in a single working call — then
                 maintained for 12 months.
               </p>
               <ul
@@ -383,6 +403,15 @@ export default function CompliancePage() {
                   Book a 15-min first
                 </AnimatedButton>
               </div>
+              <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400, textAlign: "center", margin: "12px auto 0" }}>
+                14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
+                <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
+                  Read full terms ›
+                </a>
+              </p>
+              <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400, textAlign: "center", margin: "6px auto 0" }}>
+                Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+              </p>
             </article>
           </div>
         </div>
@@ -518,10 +547,19 @@ export default function CompliancePage() {
           <AnimatedButton href={STRIPE_LINK} external variant="primary">
             BUY COMPLIANCE · AU$5,997
           </AnimatedButton>
-          <AnimatedButton href={CAL_15} external variant="primary">
+          <AnimatedButton href={CAL_15} external variant="secondary">
             BOOK A 15-MIN FIRST
           </AnimatedButton>
         </div>
+        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400, margin: "12px auto 0" }}>
+          14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
+          <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
+            Read full terms ›
+          </a>
+        </p>
+        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400, margin: "6px auto 0" }}>
+          Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+        </p>
       </SectionReveal>
 
       {/* Social proof placeholder — hidden until real testimonials land */}
