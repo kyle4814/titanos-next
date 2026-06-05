@@ -21,12 +21,15 @@ const inter = Inter({
   display: "swap",
 });
 
+// SEO-03: description trimmed to 151 chars (≤155 limit)
+const META_DESCRIPTION =
+  "Free external security scan + AU Privacy Act compliance (AU$5,997 + $199/mo) + project-quoted AI implementation. Built for AU/NZ/SG operators.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
   title:
     "TITANOS — Three ways we help: Free Scan, Compliance, AI Implementation",
-  description:
-    "TITANOS helps Australian operators three ways: a free external attack-surface scan, AU Privacy Act + Essential Eight compliance (AU$5,997 + $199/mo), and full-cycle AI Implementation for Business. Powered by Claude Code. ABN 34 318 502 254.",
+  description: META_DESCRIPTION,
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },
@@ -36,8 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "TITANOS — Free Scan · Compliance · AI Implementation",
-    description:
-      "Three ways Titanos helps: free external attack-surface scan, Privacy Act + Essential Eight compliance, and AI Implementation for Business. Powered by Claude Code.",
+    description: META_DESCRIPTION,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",
   },
@@ -56,16 +58,47 @@ export default function RootLayout({
   // on first session visit; VaultFrame reads sessionStorage and decides itself.
   return (
     <html
-      lang="en"
+      lang="en-AU"
       className={`${cinzel.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body>
+        {/* SEO-06: Organisation JSON-LD on every page — page.tsx should drop its duplicate copy */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Titanos",
+              url: "https://titanos.tech",
+              logo: "https://titanos.tech/apple-touch-icon.png",
+              description:
+                "External attack-surface scanning + Privacy Act compliance + AI Implementation for AU/NZ/SG businesses.",
+              areaServed: ["AU", "NZ", "SG"],
+              identifier: {
+                "@type": "PropertyValue",
+                name: "ABN",
+                value: "34318502254",
+              },
+              sameAs: ["https://cal.com/kyle-deligny-msvz6s/15min"],
+            }),
+          }}
+        />
+        {/* A11Y-04: skip-link — visually hidden until focused, bypasses 6 nav tab stops */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-[color:var(--gold)] focus:border focus:border-[color:var(--gold)] focus:rounded"
+        >
+          Skip to main content
+        </a>
         <GoldDust />
         <VaultFrame playEntrance={true} />
         <CursorTrail />
         <Nav />
-        <main style={{ position: "relative", zIndex: 2 }}>{children}</main>
+        <main id="main" style={{ position: "relative", zIndex: 2 }}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
