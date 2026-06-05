@@ -1,12 +1,13 @@
 "use client";
 
 /**
- * FaqItem — animated <details> wrapper.
- * Open/close via height animation with framer-motion AnimatePresence.
- * Falls back gracefully without JS via standard <details> if hydration delays.
+ * FaqItem — CSS-only collapse via grid-template-rows.
+ * Answer prose is ALWAYS in the DOM (SSR-visible, SEO-indexable).
+ * Open/close animation driven by CSS transition on grid-template-rows + opacity.
+ * The `+` icon rotation uses a lightweight inline motion.span (no AnimatePresence).
  */
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, type ReactNode } from "react";
 
 export default function FaqItem({
@@ -65,29 +66,26 @@ export default function FaqItem({
           +
         </motion.span>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            style={{ overflow: "hidden" }}
+
+      {/* CSS-only collapse: answer always in DOM for SSR/SEO */}
+      <div
+        className="faq-collapse"
+        data-open={open ? "true" : "false"}
+        aria-hidden={!open}
+      >
+        <div className="faq-collapse-inner">
+          <div
+            style={{
+              padding: "0 22px 22px",
+              color: "var(--text)",
+              fontSize: "0.92rem",
+              lineHeight: 1.75,
+            }}
           >
-            <div
-              style={{
-                padding: "0 22px 22px",
-                color: "var(--text)",
-                fontSize: "0.92rem",
-                lineHeight: 1.75,
-              }}
-            >
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {children}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
