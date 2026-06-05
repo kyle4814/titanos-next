@@ -41,20 +41,20 @@ const PROBLEMS = [
 
 const DELIVERABLES = [
   {
-    title: "Working code in your repo",
-    body: "The deliverable is committed code in your own GitHub or GitLab — not a sandbox we control. You own it from day one. Reviewed by your engineers before merge.",
+    title: "Custom AI workflow",
+    body: "When the answer is \u201chave your team use AI better\u201d \u2014 a Claude Project, custom GPT, or Make.com / n8n flow your team actually opens every day. Lives in your tooling, not ours. Trained on your context, your voice, your data.",
   },
   {
-    title: "Deployed, not “deployable”",
-    body: "The capability runs in your staging environment by mid-engagement and your production by close. Live behind your auth, your DNS, your logging.",
+    title: "AI in your codebase",
+    body: "When there's a repo, we commit working code to your GitHub or GitLab \u2014 reviewed by your engineers before merge, deployed in your staging then production environment. You own it from day one.",
   },
   {
-    title: "Documented for handover",
-    body: "Runbook, architecture diagram, threat model, test coverage, and a two-page README written for the engineer who inherits the system next quarter.",
+    title: "AI-run process",
+    body: "When the right answer is \u201chave AI do this work continuously\u201d \u2014 doc generation, email triage, research, lead enrichment \u2014 we set it up and hand it over. Or operate it as a service if you'd rather. Either way, fully documented.",
   },
   {
-    title: "Optional ongoing operations",
-    body: "If you want it monitored, tuned, and incident-responded post-delivery, we offer a separate operations retainer. Most clients run it themselves; we are not your dependency.",
+    title: "Strategy, scoped sharply",
+    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 we run a 2-week diagnostic ending in a prioritised, costed build list. No slide-deck consulting; the output is what to build next, by whom, in what order.",
   },
 ];
 
@@ -168,7 +168,7 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading
             title="WHAT SHIPS"
-            lead="Four things show up in your environment, not in a slide deck."
+            lead="An outcome that solves the problem we scoped — built, integrated, live in your business. The shape depends on the problem."
           />
           <div
             style={{

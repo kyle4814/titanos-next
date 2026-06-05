@@ -32,33 +32,33 @@ export const metadata: Metadata = {
 const THREAD_STEPS: ThreadStep[] = [
   {
     num: "I",
-    title: "YOU REQUEST A SCAN",
-    body: "We map your external attack surface and feed the findings into the engagement pack.",
+    title: "INTAKE + EXTERNAL SCAN",
+    body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA + backup state, what's driving compliance). We run an external attack-surface scan on your domain — nmap banner, TLS posture, public DNS, CVE matching. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
   },
   {
     num: "II",
     title: "EVIDENCE PACK",
-    body: "We send your evidence pack (~17pp, 13 sections) for your records — a regulator-ready artifact.",
+    body: "Within 3 business days we send your evidence pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, NDB breach-response runbook, vendor risk register, scan findings split by what we directly verified vs what you affirmed. Regulator-ready as a single PDF.",
   },
   {
     num: "III",
     title: "90-MIN IMPLEMENTATION CALL",
-    body: "We apply the changes together: DNS hygiene, M365/Workspace hardening, privacy policy + ADM disclosure deployed, NDB runbook integrated.",
+    body: "Screen-shared working session. We apply changes live: SPF / DKIM / DMARC / CAA records, M365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
   },
   {
     num: "IV",
-    title: "QUARTERLY RE-SCAN + DELTA",
-    body: "Every 90 days we re-scan and send a delta report. New exposures get flagged; remediated items get logged.",
+    title: "WHAT YOU CONTROL VS YOUR HOST",
+    body: "Some controls live on Squarespace / Shopify / Xero / Cliniko — not in your hands. We give you a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
   },
   {
     num: "V",
-    title: "30-DAY REVIEW CALL",
-    body: "We audit what shipped, confirm policy changes are live in customer-facing surfaces, and tune the runbook.",
+    title: "30-DAY REVIEW CALL + ATTESTATION",
+    body: "We audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed Essential Eight ML1 self-attestation letter plus a Privacy Act compliance posture letter — both regulator-ready.",
   },
   {
     num: "VI",
-    title: "ATTESTATION + 12 MO BRIEFINGS",
-    body: "Signed compliance attestation letter plus 12 months of industry-specific regulatory briefings.",
+    title: "MONTHS 4-12 · $199/MO MONITORING",
+    body: "Quarterly re-scan (months 4, 7, 10) with delta report. Monthly regulatory-update briefing tailored to your industry. Ad-hoc questions answered within 1 business day. Cancellable any time.",
   },
 ];
 
