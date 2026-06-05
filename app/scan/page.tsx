@@ -13,7 +13,7 @@ const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
 export const metadata: Metadata = {
   title: "Free External Security Scan — TITANOS",
   description:
-    "Free external attack-surface scan for AU/NZ/SG operators. Banner-grade nmap, TLS posture, CVE matches, DNS hygiene. Report emailed within 1 business day. ABN 34 318 502 254.",
+    "Free external attack-surface scan for AU/NZ/SG operators. nmap, TLS posture, CVE matches, DNS hygiene. Report emailed within 1 business day. ABN 34 318 502 254.",
   alternates: { canonical: "https://titanos.tech/scan" },
   openGraph: {
     title: "Free External Security Scan — Titanos",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
 const PROCESS = [
   {
     num: "I",
-    title: "SUBMIT THE FORM",
-    body: "Domain, work email, name, and any scope notes. Takes under a minute.",
+    title: "EMAIL US YOUR DOMAIN",
+    body: "Your domain, your name, anything we should know. Under a minute.",
   },
   {
     num: "II",
@@ -70,7 +70,7 @@ const REPORT_ITEMS = [
 ];
 
 const WHAT_IT_IS = [
-  "Banner-grade external scan of your public attack surface",
+  "External scan of your public attack surface — every finding reproducible with a single nmap command",
   "90-day responsible-disclosure window on every finding",
   "No exploitation, no credential attempts, no DoS — ever",
   "Independently reproducible: every finding ships with the exact nmap command",
@@ -93,7 +93,7 @@ export default function ScanPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "Vulnerability Scanning",
     description:
-      "Free banner-grade external attack-surface scan with 90-day responsible-disclosure window. Report emailed within 1 business day.",
+      "Free external attack-surface scan with 90-day responsible-disclosure window. Report emailed within 1 business day.",
     areaServed: ["AU", "NZ", "SG"],
     offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
   };
@@ -109,7 +109,7 @@ export default function ScanPage() {
         badge="FREE · NO LOGIN · NO CARD"
         title="Free External Attack-Surface Scan"
         tagline="See what an attacker sees. No login. We email the report within 1 business day."
-        sub="Banner-grade, expert-reviewed, with a 90-day responsible disclosure window. Built for AU/NZ/SG operators who want to know their actual exposure before a compliance push or AI rollout."
+        sub="A real report on what an attacker can see about your business from the public internet. No login. No card. No follow-up sequence."
         trustLine={
           <>
             Expert-reviewed · Australian-owned ·{" "}
@@ -117,10 +117,10 @@ export default function ScanPage() {
           </>
         }
       >
-        <AnimatedButton href="#request" variant="primary" ariaLabel="Request your free scan">
+        <AnimatedButton href={MAILTO_SCAN} variant="primary" ariaLabel="Request your free scan">
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute call">
+        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute call">
           BOOK A 15-MIN
         </AnimatedButton>
       </PageHero>
@@ -311,10 +311,9 @@ export default function ScanPage() {
                   lineHeight: 1.6,
                 }}
               >
-                By emailing or booking, you consent to receive your scan report and occasional
-                related follow-up.
+                By emailing or booking, you're requesting your scan report.
                 <br />
-                Unsubscribe anytime — reply STOP.
+                We'll also send up to 3 related follow-ups over 6 months — reply STOP at any point and you're suppressed forever. We never sell your data.
               </p>
             </div>
           </div>
@@ -374,7 +373,7 @@ export default function ScanPage() {
               provider.
             </FaqItem>
             <FaqItem question="Is this exploitation?">
-              No. Banner-grade only. We probe what the public internet can already see — service
+              No. External-only — no exploitation, no credential attempts. We probe what the public internet can already see — service
               banners, TLS posture, DNS records, certificate transparency. No authentication
               attempts. No exploit attempts. No DoS. No data exfiltration. Full methodology at{" "}
               <a href="/methodology" style={{ color: "var(--ice)" }}>/methodology</a>.

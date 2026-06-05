@@ -72,7 +72,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
       >
         {step.num}
       </motion.div>
-      <h4
+      <h3
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
@@ -83,7 +83,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
         }}
       >
         {step.title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--text)", fontSize: "0.86rem", lineHeight: 1.65 }}>
         {step.body}
       </p>
