@@ -3,8 +3,12 @@ import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
+import DeadlineCounter from "@/components/DeadlineCounter";
+import { STATS, STAT_LABELS } from "@/lib/stats";
 
-const offers = [
+import type { Offer } from "@/components/OfferCard";
+
+const offers: Offer[] = [
   {
     tag: "OFFER 01 · FREE",
     title: "Free Scan",
@@ -22,8 +26,9 @@ const offers = [
       href: "mailto:kyle@titanos.tech?subject=Scan%20request&body=Domain%3A%20%0AYour%20name%3A%20%0ANotes%20(optional)%3A",
       external: false,
     },
-    secondary: { label: "Learn more", href: "/scan" },
-    icon: "radar" as const,
+    secondary: { label: "See the free scan", href: "/scan" },
+    icon: "radar",
+    index: 0,
   },
   {
     tag: "OFFER 02 · done with you",
@@ -31,7 +36,7 @@ const offers = [
     price: "AU$5,997",
     priceUnit: "one-time + AU$199/mo monitoring",
     body:
-      "One done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, and 12 months of regulatory update briefings.",
+      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. We translate everything into plain English on the call.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, and 12 months of regulatory update briefings.",
     bullets: [
       "13-section evidence pack (~17pp)",
       "90-minute implementation working call",
@@ -43,8 +48,9 @@ const offers = [
       href: "https://cal.com/kyle-deligny-msvz6s/15min",
       external: true,
     },
-    secondary: { label: "Learn more", href: "/compliance" },
-    icon: "shield" as const,
+    secondary: { label: "See the compliance pack", href: "/compliance" },
+    icon: "shield",
+    index: 1,
   },
   {
     tag: "OFFER 03 · PROJECT-QUOTED",
@@ -52,7 +58,7 @@ const offers = [
     price: "From AU$4,997",
     priceUnit: "scoping call first · quoted by scope",
     body:
-      "Full-cycle problem-solving → planning → building → implementation. We diagnose the problem, plan the solution, build it in your repo, and implement it in your environment. One model or many; one workflow or a full system.",
+      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. We diagnose, plan, build, and implement — quoted by scope after a 30-minute call.",
     bullets: [
       "Working code in your repo",
       "Deployed, not \"deployable\"",
@@ -64,46 +70,24 @@ const offers = [
       href: "https://cal.com/kyle-deligny-msvz6s/15min",
       external: true,
     },
-    secondary: { label: "Learn more", href: "/ai-delivery" },
-    icon: "sparkles" as const,
+    secondary: { label: "See AI Implementation", href: "/ai-delivery" },
+    icon: "sparkles",
+    index: 2,
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* JSON-LD organization schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Titanos",
-            url: "https://titanos.tech",
-            logo: "https://titanos.tech/apple-touch-icon.png",
-            description:
-              "External attack-surface scanning + Privacy Act compliance + AI Implementation for AU/NZ/SG businesses.",
-            areaServed: ["AU", "NZ", "SG"],
-            identifier: {
-              "@type": "PropertyValue",
-              name: "ABN",
-              value: "34318502254",
-            },
-            sameAs: ["https://cal.com/kyle-deligny-msvz6s/15min"],
-          }),
-        }}
-      />
-
       {/* ═══ HERO with entrance choreography ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        tagline="Three ways Titanos helps your business."
+        tagline="Get Privacy Act + Essential Eight compliant before 11 December 2026 — or start with a free scan."
         trust={
           <>
             Expert-reviewed · Australian-owned · ABN-verified ·{" "}
-            <NumberCounter value={1700} suffix="+" /> scans this month ·{" "}
-            <NumberCounter value={3600} suffix="+" /> unique businesses in scan corpus
+            <NumberCounter value={STATS.scansThisMonth} suffix="+" /> {STAT_LABELS.scansShort} ·{" "}
+            <NumberCounter value={STATS.uniqueBusinesses} suffix="+" /> {STAT_LABELS.businessesShort}
           </>
         }
       />
@@ -122,9 +106,7 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Free external attack-surface scans for AU/NZ/SG domains. Privacy Act + Essential Eight
-          compliance done with you. AI Implementation for Business, end-to-end. Built, verified,
-          and delivered by Claude Code under expert human review.
+          Free security scan for AU/NZ/SG businesses. Privacy Act compliance done together on a 90-minute call. AI builds shipped to your environment. One operator, three doors in.
         </p>
       </section>
 
@@ -146,7 +128,7 @@ export default function Home() {
                 letterSpacing: "0.06em",
               }}
             >
-              THREE WAYS WE HELP
+              PICK YOUR FRONT DOOR
             </h2>
             <div
               aria-hidden="true"
@@ -160,7 +142,8 @@ export default function Home() {
             />
             <p
               style={{
-                color: "var(--ice)",
+                color: "var(--text)",
+                fontWeight: 400,
                 fontSize: "1rem",
                 maxWidth: 680,
                 margin: "18px auto 0",
@@ -182,7 +165,14 @@ export default function Home() {
             }}
           >
             {offers.map((o, i) => (
-              <OfferCard key={o.tag} {...o} index={i} />
+              <div key={o.tag} style={{ position: "relative" }}>
+                <OfferCard {...o} />
+                {i === 1 && (
+                  <div style={{ textAlign: "center", marginTop: 8 }}>
+                    <DeadlineCounter />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -211,12 +201,12 @@ export default function Home() {
           }}
         >
           <TrustItem
-            big={<NumberCounter value={1700} suffix="+" />}
-            small="scans this month"
+            big={<NumberCounter value={STATS.scansThisMonth} suffix="+" />}
+            small={STAT_LABELS.scansShort}
           />
           <TrustItem
-            big={<NumberCounter value={3600} suffix="+" />}
-            small="unique businesses in scan corpus"
+            big={<NumberCounter value={STATS.uniqueBusinesses} suffix="+" />}
+            small={STAT_LABELS.businessesShort}
           />
           <TrustItem big="90 day" small="responsible disclosure window" />
           <TrustItem big="0%" small="auth attempts · 0% exploits" />
@@ -235,76 +225,6 @@ export default function Home() {
       >
         {/* testimonial cards go here when real content lands */}
       </section>
-
-      <div className="divider-gold" />
-
-      {/* ═══ Methodology summary ═══ */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <div style={{ textAlign: "center", marginBottom: 36 }}>
-            <h2
-              style={{
-                fontFamily: "'Cinzel', serif",
-                fontWeight: 700,
-                fontSize: "clamp(1.5rem, 4vw, 2.4rem)",
-                color: "var(--gold)",
-                letterSpacing: "0.06em",
-              }}
-            >
-              METHODOLOGY
-            </h2>
-            <div
-              aria-hidden="true"
-              style={{
-                width: 60,
-                height: 2,
-                background:
-                  "linear-gradient(90deg, transparent, var(--ice), transparent)",
-                margin: "18px auto 0",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: 14,
-              maxWidth: 900,
-              margin: "0 auto",
-            }}
-          >
-            <MethodCard title="What we do">
-              <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Banner-grade nmap (-sV)</p>
-              <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
-              <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
-              <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
-            </MethodCard>
-            <MethodCard title="What we never do">
-              <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
-              <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Exploit attempts</p>
-              <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>DoS / brute force</p>
-              <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Data exfiltration</p>
-            </MethodCard>
-            <MethodCard title="Verifiable">
-              <p>
-                Every finding ships with the exact <code>nmap</code> command to reproduce it.
-                Independently confirm any claim before acting on it.
-              </p>
-            </MethodCard>
-            <MethodCard title="Removal">
-              <p>
-                Reply <code>remove</code> to any email and your domain is suppressed forever.
-                Honoured immediately.
-              </p>
-            </MethodCard>
-          </div>
-          <p style={{ textAlign: "center", marginTop: 32 }}>
-            <AnimatedButton href="/methodology" variant="secondary">
-              See full methodology
-            </AnimatedButton>
-          </p>
-        </div>
-      </SectionReveal>
 
       <div className="divider-gold" />
 
@@ -345,16 +265,105 @@ export default function Home() {
           delivery wasn't the bottleneck.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton
-            href="https://cal.com/kyle-deligny-msvz6s/15min"
-            external
-            variant="primary"
-          >
-            BOOK A 15-MIN CALL
-          </AnimatedButton>
           <AnimatedButton href="/scan" variant="primary">
             REQUEST YOUR FREE SCAN
           </AnimatedButton>
+          <AnimatedButton
+            href="https://cal.com/kyle-deligny-msvz6s/15min"
+            external
+            variant="secondary"
+          >
+            BOOK A 15-MIN CALL
+          </AnimatedButton>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* ═══ Methodology summary ═══ */}
+      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <details>
+            <summary
+              style={{
+                cursor: "pointer",
+                textAlign: "center",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 500,
+                fontSize: "0.95rem",
+                color: "var(--ice)",
+                letterSpacing: "0.02em",
+                listStyle: "none",
+                marginBottom: 32,
+              }}
+            >
+              How we work technically (click to expand)
+            </summary>
+            <div>
+              <div style={{ textAlign: "center", marginBottom: 36 }}>
+                <h2
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    fontWeight: 700,
+                    fontSize: "clamp(1.5rem, 4vw, 2.4rem)",
+                    color: "var(--gold)",
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  METHODOLOGY
+                </h2>
+                <div
+                  aria-hidden="true"
+                  style={{
+                    width: 60,
+                    height: 2,
+                    background:
+                      "linear-gradient(90deg, transparent, var(--ice), transparent)",
+                    margin: "18px auto 0",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                  gap: 14,
+                  maxWidth: 900,
+                  margin: "0 auto",
+                }}
+              >
+                <MethodCard title="What we do">
+                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Banner-grade nmap (-sV)</p>
+                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
+                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
+                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
+                </MethodCard>
+                <MethodCard title="What we never do">
+                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
+                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Exploit attempts</p>
+                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>DoS / brute force</p>
+                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Data exfiltration</p>
+                </MethodCard>
+                <MethodCard title="Verifiable">
+                  <p>
+                    Every finding ships with the exact <code>nmap</code> command to reproduce it.
+                    Independently confirm any claim before acting on it.
+                  </p>
+                </MethodCard>
+                <MethodCard title="Removal">
+                  <p>
+                    Reply <code>remove</code> to any email and your domain is suppressed forever.
+                    Honoured immediately.
+                  </p>
+                </MethodCard>
+              </div>
+              <p style={{ textAlign: "center", marginTop: 32 }}>
+                <AnimatedButton href="/methodology" variant="secondary">
+                  See full methodology
+                </AnimatedButton>
+              </p>
+            </div>
+          </details>
         </div>
       </SectionReveal>
     </>
