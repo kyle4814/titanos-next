@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero title="Privacy Policy" tagline="Effective 2026-06-04" />
+      <PageHero title="Privacy Policy" tagline="Last updated 2026-06-04 · effective from this date" />
 
       <SectionReveal style={{ padding: "40px 20px 100px", position: "relative", zIndex: 2 }}>
         <article
@@ -124,6 +124,19 @@ export default function PrivacyPage() {
               .
             </Li>
           </ul>
+
+          <H2>How long we keep it</H2>
+          <p>
+            Lead data is retained for 24 months after your last engagement with us, then deleted.
+            Stripe and Cal.com retain their portions per their own privacy frameworks.
+          </p>
+
+          <H2>Cookies + analytics</H2>
+          <p>
+            We do not use cookies for analytics, advertising, or tracking. The site uses
+            first-party session storage only (for UI continuity — e.g. so the hero animation only
+            plays once per session). No third-party trackers are loaded.
+          </p>
 
           <H2>Contact</H2>
           <p>

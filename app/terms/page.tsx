@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <PageHero title="Terms of Service" tagline="Effective 2026-06-04" />
+      <PageHero title="Terms of Service" tagline="Last updated 2026-06-04 · effective from this date" />
 
       <SectionReveal style={{ padding: "40px 20px 100px", position: "relative", zIndex: 2 }}>
         <article
