@@ -135,11 +135,19 @@ function NavLink({
     </motion.span>
   );
 
+  // A11Y-08 — meet WCAG 2.5.8 24×24 minimum tap target at 375px viewport.
+  // 8px vertical + 4px horizontal padding lifts the link box past 24px in
+  // both dimensions; inline-block carries the padding into the hit area.
   const sharedProps = {
     onMouseEnter: () => setHovered(true),
     onMouseLeave: () => setHovered(false),
     onClick,
-    style: { marginLeft: 24, textDecoration: "none" } as const,
+    style: {
+      marginLeft: 24,
+      padding: "8px 4px",
+      display: "inline-block" as const,
+      textDecoration: "none",
+    } as const,
   };
 
   if (external) {
