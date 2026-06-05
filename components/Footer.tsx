@@ -59,7 +59,7 @@ export default function Footer() {
             marginTop: 8,
             fontSize: "0.75rem",
             letterSpacing: "0.05em",
-            color: "#555",
+            color: "var(--dim)",
           }}
         >
           ABN 34 318 502 254 · titanos.tech · powered by Claude Code

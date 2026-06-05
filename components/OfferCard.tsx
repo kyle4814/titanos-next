@@ -103,7 +103,7 @@ export default function OfferCard(props: Offer) {
         {props.price}
         <span
           style={{
-            color: "var(--dim)",
+            color: "var(--text)",
             fontSize: "0.78rem",
             fontWeight: 400,
             display: "block",
@@ -137,7 +137,7 @@ export default function OfferCard(props: Offer) {
           <li
             key={b}
             style={{
-              color: "var(--dim)",
+              color: "var(--text)",
               fontSize: "0.85rem",
               lineHeight: 1.6,
               padding: "5px 0 5px 18px",
