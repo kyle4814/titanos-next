@@ -10,7 +10,7 @@ const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
 export const metadata: Metadata = {
   title: "AI Implementation for Business — TITANOS",
   description:
-    "Titanos AI Implementation for Business: full-cycle problem-solving → planning → building → implementation. From AU$4,997, scoping call first, project-quoted. 99% Claude Code, 1% expert human review. ABN 34 318 502 254.",
+    "Custom AI implementation shipped to your repo. From AU$4,997, project-quoted after a 30-minute scoping call. 99% Claude Code, 1% expert review.",
   alternates: { canonical: "https://titanos.tech/ai-delivery" },
   openGraph: {
     title: "Titanos AI Implementation for Business — problem solved, built, shipped",
@@ -189,7 +189,7 @@ export default function AiDeliveryPage() {
                   padding: 28,
                 }}
               >
-                <h4
+                <h3
                   style={{
                     color: "var(--ice)",
                     fontSize: "1rem",
@@ -202,7 +202,7 @@ export default function AiDeliveryPage() {
                 >
                   <span style={{ color: "#4ade80", marginRight: 8, fontWeight: 400 }}>✓</span>
                   {d.title}
-                </h4>
+                </h3>
                 <p style={{ color: "var(--text)", fontSize: "0.9rem", lineHeight: 1.7 }}>
                   {d.body}
                 </p>
@@ -249,7 +249,7 @@ export default function AiDeliveryPage() {
                 >
                   {s.num}
                 </div>
-                <h4
+                <h3
                   style={{
                     fontFamily: "'Cinzel', serif",
                     color: "var(--gold)",
@@ -260,7 +260,7 @@ export default function AiDeliveryPage() {
                   }}
                 >
                   {s.title}
-                </h4>
+                </h3>
                 <p style={{ color: "var(--text)", fontSize: "0.88rem", lineHeight: 1.7 }}>
                   {s.body}
                 </p>
@@ -424,7 +424,7 @@ export default function AiDeliveryPage() {
             <strong style={{ color: "var(--gold)", fontFamily: "'Cinzel', serif" }}>
               Titanos Security
             </strong>{" "}
-            runs 1,700+ external scans per month
+            runs 1,700+ external scans this month
           </div>
           <div>
             Methodology:{" "}
