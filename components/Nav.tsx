@@ -1,20 +1,18 @@
 "use client";
 
 /**
- * Nav — sticky top, fades in 1700ms after first paint to allow the hero
- * entrance choreography to settle first. After that, it remains visible.
+ * Nav — sticky top, reveals 800ms after first paint (MOT-10 compression
+ * from prior 1700ms). After that, remains visible.
  *
- * Underline on hover grows left-to-right (180ms). Click pulses the link to
- * bright gold once before navigation.
+ * MOT-01: under prefers-reduced-motion, Nav appears instantly — no fade.
  *
  * AES-07: Framer Motion cannot interpolate CSS var(--*) colour values
- * across keyframes — values are inlined at evaluation time. NavLink
- * colour states therefore read GOLD_BRIGHT/ICE/DIM from lib/tokens.ts so
- * the canonical palette has a single source of truth.
+ * across keyframes. NavLink colour states read GOLD_BRIGHT/ICE/DIM from
+ * lib/tokens.ts so the canonical palette has a single source of truth.
  */
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 
@@ -31,11 +29,17 @@ const LINKS = [
 ];
 
 const SESSION_KEY = "titanos.vault.entranceShown";
+const REVEAL_DELAY_MS = 800;
 
 export default function Nav() {
+  const reduce = useReducedMotion();
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
+    if (reduce) {
+      setRevealed(true);
+      return;
+    }
     const already =
       typeof window !== "undefined" &&
       window.sessionStorage.getItem(SESSION_KEY) === "1";
@@ -43,15 +47,15 @@ export default function Nav() {
       setRevealed(true);
       return;
     }
-    const t = window.setTimeout(() => setRevealed(true), 1700);
+    const t = window.setTimeout(() => setRevealed(true), REVEAL_DELAY_MS);
     return () => window.clearTimeout(t);
-  }, []);
+  }, [reduce]);
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : -8 }}
-      transition={{ duration: 0.5, ease: [0, 0, 0.2, 1] }}
+      transition={{ duration: reduce ? 0 : 0.5, ease: [0, 0, 0.2, 1] }}
       style={{
         position: "sticky",
         top: 0,
@@ -106,10 +110,12 @@ function NavLink({
   href: string;
   external: boolean;
 }) {
+  const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const [pulsed, setPulsed] = useState(false);
 
   const onClick = () => {
+    if (reduce) return;
     setPulsed(true);
     window.setTimeout(() => setPulsed(false), 180);
   };
@@ -117,7 +123,7 @@ function NavLink({
   const inner = (
     <motion.span
       animate={{ color: pulsed ? GOLD_BRIGHT : hovered ? ICE : DIM }}
-      transition={{ duration: 0.18 }}
+      transition={{ duration: reduce ? 0 : 0.18 }}
       style={{
         position: "relative",
         display: "inline-block",
@@ -128,8 +134,8 @@ function NavLink({
       {label}
       <motion.span
         aria-hidden="true"
-        animate={{ width: hovered ? "100%" : "0%" }}
-        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+        animate={{ width: hovered && !reduce ? "100%" : "0%" }}
+        transition={{ duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] }}
         style={{
           position: "absolute",
           left: 0,
@@ -141,9 +147,8 @@ function NavLink({
     </motion.span>
   );
 
-  // A11Y-08 — meet WCAG 2.5.8 24×24 minimum tap target at 375px viewport.
-  // 8px vertical + 4px horizontal padding lifts the link box past 24px in
-  // both dimensions; inline-block carries the padding into the hit area.
+  // A11Y-08 — 8px vertical + 4px horizontal padding lifts the link box
+  // past WCAG 2.5.8 24×24 minimum at 375px without disturbing visual rhythm.
   const sharedProps = {
     onMouseEnter: () => setHovered(true),
     onMouseLeave: () => setHovered(false),
