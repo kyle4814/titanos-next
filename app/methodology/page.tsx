@@ -275,7 +275,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* REMOVAL */}
-      <SectionReveal style={{ padding: "60px 20px 100px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading title="REMOVAL" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>

@@ -28,7 +28,7 @@ export default function PageHero({
     <section
       style={{
         textAlign: "center",
-        padding: "100px 20px 70px",
+        padding: "var(--space-30) 20px var(--space-20)",
         position: "relative",
         zIndex: 2,
       }}

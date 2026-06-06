@@ -110,7 +110,7 @@ export default function HeroEntrance({
     <div
       style={{
         textAlign: "center",
-        padding: "120px 20px 80px",
+        padding: "var(--space-30) 20px var(--space-20)",
         position: "relative",
         zIndex: 2,
       }}
