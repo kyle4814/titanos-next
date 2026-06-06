@@ -5,19 +5,25 @@
  *
  * Each card has an animated Lucide icon (radar / shield-check / sparkles)
  * with an idle subtle animation appropriate to the icon.
+ *
+ * MOT-01: under prefers-reduced-motion the card reveal + all idle loops
+ *   are short-circuited to the settled state.
+ * MOT-03: idle loops pause when the card scrolls off-screen via an
+ *   IntersectionObserver. Saves CPU + battery on long pages.
  */
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Radar, ShieldCheck, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import AnimatedButton from "./AnimatedButton";
 import CornerBrackets from "./CornerBrackets";
 import { cardReveal } from "@/lib/motion";
 
 export type Offer = {
-  tag: string; // "OFFER 01 · FREE"
+  tag: string;
   title: string;
-  price: string; // primary price line e.g. "AU$5,997" or "$0"
-  priceUnit: string; // e.g. "one-time + AU$199/mo monitoring" or "no card · delivered within 1 business day"
+  price: string;
+  priceUnit: string;
   body: string;
   bullets: string[];
   primary: { label: string; href: string; external?: boolean };
@@ -34,15 +40,38 @@ const iconMap = {
 
 export default function OfferCard(props: Offer) {
   const Icon = iconMap[props.icon];
+  const reduce = useReducedMotion();
+  const cardRef = useRef<HTMLElement | null>(null);
+  const [onScreen, setOnScreen] = useState(false);
+
+  // MOT-03 — IntersectionObserver pauses idle loops when off-screen.
+  useEffect(() => {
+    if (reduce) {
+      setOnScreen(false);
+      return;
+    }
+    const el = cardRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) setOnScreen(e.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
 
   return (
     <motion.article
+      ref={cardRef as never}
       custom={props.index}
       variants={cardReveal}
-      initial="hidden"
-      whileInView="visible"
+      initial={reduce ? false : "hidden"}
+      animate={reduce ? "visible" : undefined}
+      whileInView={reduce ? undefined : "visible"}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      whileHover={{ y: -2, borderColor: "var(--gold)" }}
+      whileHover={reduce ? undefined : { y: -2, borderColor: "var(--gold)" }}
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
@@ -55,10 +84,9 @@ export default function OfferCard(props: Offer) {
         transition: "border-color 0.2s, transform 0.2s",
       }}
     >
-      {/* AES-08 — corner-bracket signature device */}
       <CornerBrackets />
 
-      <IdleIcon kind={props.icon}>
+      <IdleIcon kind={props.icon} onScreen={onScreen} reduce={!!reduce}>
         <Icon
           width={48}
           height={48}
@@ -180,41 +208,50 @@ export default function OfferCard(props: Offer) {
   );
 }
 
-/* ─── Idle icon wrappers ────────────────────────────────────── */
+/* ─── Idle icon wrappers ──────────────────────────────────────
+   MOT-03 pause: loops only animate when onScreen + !reduce.
+   ────────────────────────────────────────────────────────────── */
 function IdleIcon({
   kind,
+  onScreen,
+  reduce,
   children,
 }: {
   kind: Offer["icon"];
+  onScreen: boolean;
+  reduce: boolean;
   children: React.ReactNode;
 }) {
+  const active = onScreen && !reduce;
+
   if (kind === "radar") {
-    // outward pulse ring every 4s
+    // Semantic: outward pulse every 4s. Suppressed off-screen + on reduce.
     return (
       <div style={{ position: "relative", marginBottom: 14, width: 48, height: 48 }}>
         {children}
-        <motion.span
-          aria-hidden="true"
-          initial={{ opacity: 0.5, scale: 0.6 }}
-          animate={{ opacity: 0, scale: 1.6 }}
-          transition={{
-            duration: 2.2,
-            ease: "easeOut",
-            repeat: Infinity,
-            repeatDelay: 1.8,
-          }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            border: "1px solid var(--gold)",
-            borderRadius: "50%",
-          }}
-        />
+        {active && (
+          <motion.span
+            aria-hidden="true"
+            initial={{ opacity: 0.5, scale: 0.6 }}
+            animate={{ opacity: 0, scale: 1.6 }}
+            transition={{
+              duration: 2.2,
+              ease: "easeOut",
+              repeat: Infinity,
+              repeatDelay: 1.8,
+            }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              border: "1px solid var(--gold)",
+              borderRadius: "50%",
+            }}
+          />
+        )}
       </div>
     );
   }
   if (kind === "shield") {
-    // sweep highlight every 6s
     return (
       <div
         style={{
@@ -226,37 +263,43 @@ function IdleIcon({
         }}
       >
         {children}
-        <motion.span
-          aria-hidden="true"
-          initial={{ x: -80, opacity: 0 }}
-          animate={{ x: 80, opacity: [0, 0.45, 0] }}
-          transition={{
-            duration: 1.4,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatDelay: 4.6,
-          }}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: 40,
-            height: 48,
-            background:
-              "linear-gradient(110deg, transparent 30%, rgba(245,213,117,0.55) 50%, transparent 70%)",
-            pointerEvents: "none",
-            transform: "skewX(-20deg)",
-          }}
-        />
+        {active && (
+          <motion.span
+            aria-hidden="true"
+            initial={{ x: -80, opacity: 0 }}
+            animate={{ x: 80, opacity: [0, 0.45, 0] }}
+            transition={{
+              duration: 1.4,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 4.6,
+            }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: 40,
+              height: 48,
+              background:
+                "linear-gradient(110deg, transparent 30%, rgb(var(--gold-rgb) / 0.55) 50%, transparent 70%)",
+              pointerEvents: "none",
+              transform: "skewX(-20deg)",
+            }}
+          />
+        )}
       </div>
     );
   }
-  // sparkles — cross-fade twinkle
+  // sparkles — cross-fade twinkle, off-screen + reduce suppressed
   return (
     <motion.div
       style={{ marginBottom: 14, width: 48, height: 48 }}
-      animate={{ opacity: [1, 0.55, 1, 0.7, 1] }}
-      transition={{ duration: 3.4, ease: "easeInOut", repeat: Infinity }}
+      animate={active ? { opacity: [1, 0.55, 1, 0.7, 1] } : { opacity: 1 }}
+      transition={
+        active
+          ? { duration: 3.4, ease: "easeInOut", repeat: Infinity }
+          : { duration: 0 }
+      }
     >
       {children}
     </motion.div>

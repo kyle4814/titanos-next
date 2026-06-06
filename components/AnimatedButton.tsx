@@ -1,24 +1,18 @@
 "use client";
 
 /**
- * AnimatedButton — primary + secondary CTAs with full Vault micro-interactions.
+ * AnimatedButton — primary + secondary CTAs.
  *
- * Primary:
- *  - default: 1px gold border, transparent fill, gold text, Cinzel
- *  - cursor within 80px: border 1.5px + drop-shadow glow (200ms)
- *  - cursor enters: gold fill sweeps in from left → right via conic-gradient
- *    over 250ms; text colour interpolates to black at midpoint
- *  - cursor leaves: reverse sweep right → left over 200ms
- *  - click: scale to 0.98 (100ms) + gold radial flash 300ms
- *
- * Secondary (`variant="secondary"`):
- *  - "Learn more →" style; underline 0 → 100% width L→R on hover (180ms),
- *    arrow slides 4px right.
- *
- * Renders as <a> if `href` is supplied, otherwise <button>.
+ * MOT-01: under prefers-reduced-motion, proximity glow + sweep fill are
+ *   skipped. Hover/focus colour transitions stay (CSS-driven, instantaneous
+ *   feel is preserved).
+ * MOT-05: external CTAs surface a "Opening…" microcopy + radial pulse
+ *   for 600ms after click to acknowledge intent before the new tab
+ *   opens (or before the mailto handler launches). Internal Next.js
+ *   navigation skips this — the route transition itself is feedback.
  */
 
-import { motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
 import {
   useEffect,
   useRef,
@@ -37,6 +31,8 @@ type Props = {
   external?: boolean;
   ariaLabel?: string;
 };
+
+const OPENING_MS = 600;
 
 export default function AnimatedButton({
   href,
@@ -83,15 +79,18 @@ function PrimaryCTA({
   external?: boolean;
   ariaLabel?: string;
 }) {
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
   const [proximityActive, setProximityActive] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [flashing, setFlashing] = useState(false);
+  const [opening, setOpening] = useState(false);
   const sweepCtl = useAnimationControls();
   const scaleCtl = useAnimationControls();
 
-  // proximity detection within 80px
+  // proximity detection within 80px (skipped on reduce + coarse pointer)
   useEffect(() => {
+    if (reduce) return;
     const el = ref.current;
     if (!el) return;
     if (
@@ -111,32 +110,48 @@ function PrimaryCTA({
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  }, [reduce]);
 
-  // sweep fill on hover enter / leave
+  // sweep fill on hover enter / leave (skipped on reduce)
   useEffect(() => {
+    if (reduce) return;
     if (hovered) {
       sweepCtl.start({
-        // left-to-right fill
         clipPath: "inset(0% 0% 0% 0%)",
         transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
       });
     } else {
       sweepCtl.start({
-        // reverse right-to-left (clip from the right edge inward)
         clipPath: "inset(0% 0% 0% 100%)",
         transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
       });
     }
-  }, [hovered, sweepCtl]);
+  }, [hovered, reduce, sweepCtl]);
+
+  // MOT-05 — is this CTA opening something off-site?
+  // mailto: + tel: + external http(s) all qualify; internal Next.js routes do not.
+  const opensOffSite =
+    !!external ||
+    !!href?.startsWith("mailto:") ||
+    !!href?.startsWith("tel:") ||
+    /^https?:\/\//i.test(href ?? "");
 
   const handleClick = (e: ReactMouseEvent) => {
-    scaleCtl.start({
-      scale: [1, 0.98, 1],
-      transition: { duration: 0.18, ease: "easeOut" },
-    });
-    setFlashing(true);
-    window.setTimeout(() => setFlashing(false), 320);
+    if (!reduce) {
+      scaleCtl.start({
+        scale: [1, 0.98, 1],
+        transition: { duration: 0.18, ease: "easeOut" },
+      });
+      setFlashing(true);
+      window.setTimeout(() => setFlashing(false), 320);
+    }
+    if (opensOffSite) {
+      // MOT-05 microcopy + pulse, non-blocking. Browser opens the
+      // destination in the background while the user sees feedback that
+      // the click registered.
+      setOpening(true);
+      window.setTimeout(() => setOpening(false), OPENING_MS);
+    }
     onClick?.(e);
   };
 
@@ -158,18 +173,22 @@ function PrimaryCTA({
     background: "transparent",
     cursor: "pointer",
     transition: "color 250ms ease, border-width 200ms ease, filter 200ms ease",
-    filter: proximityActive ? "drop-shadow(0 0 8px rgb(var(--gold-rgb) / 0.3))" : "none",
+    filter: proximityActive
+      ? "drop-shadow(0 0 8px rgb(var(--gold-rgb) / 0.3))"
+      : "none",
     textTransform: "uppercase",
     textDecoration: "none",
   };
 
   const inner = (
     <>
-      {/* sweep fill */}
+      {/* sweep fill — kept under reduce (renders settled), animations skipped */}
       <motion.span
         aria-hidden="true"
         animate={sweepCtl}
-        initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
+        initial={
+          reduce ? { clipPath: "inset(0% 0% 0% 100%)" } : { clipPath: "inset(0% 100% 0% 0%)" }
+        }
         style={{
           position: "absolute",
           inset: 0,
@@ -177,8 +196,8 @@ function PrimaryCTA({
           zIndex: 0,
         }}
       />
-      {/* radial flash on click */}
-      {flashing && (
+      {/* radial flash on click (skipped on reduce) */}
+      {flashing && !reduce && (
         <motion.span
           aria-hidden="true"
           initial={{ opacity: 0.6, scale: 0.4 }}
@@ -194,12 +213,30 @@ function PrimaryCTA({
           }}
         />
       )}
+      {/* MOT-05 — Opening pulse + label swap. Honours reduce by skipping
+          the radial pulse but keeping the text change. */}
       <motion.span
         animate={scaleCtl}
         style={{ position: "relative", zIndex: 2, display: "inline-block" }}
       >
-        {children}
+        {opening ? "Opening…" : children}
       </motion.span>
+      {opening && !reduce && (
+        <motion.span
+          aria-hidden="true"
+          initial={{ opacity: 0.5, scale: 0.4 }}
+          animate={{ opacity: 0, scale: 1.5 }}
+          transition={{ duration: OPENING_MS / 1000, ease: "easeOut" }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(circle, rgb(var(--gold-rgb) / 0.45) 0%, transparent 60%)",
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
+        />
+      )}
     </>
   );
 
@@ -214,6 +251,7 @@ function PrimaryCTA({
         onMouseLeave={() => setHovered(false)}
         onClick={handleClick}
         aria-label={ariaLabel}
+        aria-busy={opening || undefined}
         {...(external
           ? { target: "_blank", rel: "noopener noreferrer" }
           : {})}
@@ -232,6 +270,7 @@ function PrimaryCTA({
       onMouseLeave={() => setHovered(false)}
       onClick={handleClick}
       aria-label={ariaLabel}
+      aria-busy={opening || undefined}
       type="button"
     >
       {inner}
@@ -253,6 +292,7 @@ function SecondaryLink({
   onClick?: (e: ReactMouseEvent) => void;
   external?: boolean;
 }) {
+  const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
 
   const body = (
@@ -272,8 +312,8 @@ function SecondaryLink({
         {children}
         <motion.span
           aria-hidden="true"
-          animate={{ width: hovered ? "100%" : "0%" }}
-          transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+          animate={{ width: hovered && !reduce ? "100%" : "0%" }}
+          transition={{ duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] }}
           style={{
             position: "absolute",
             left: 0,
@@ -285,8 +325,8 @@ function SecondaryLink({
       </span>
       <motion.span
         aria-hidden="true"
-        animate={{ x: hovered ? 4 : 0 }}
-        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+        animate={{ x: hovered && !reduce ? 4 : 0 }}
+        transition={{ duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] }}
       >
         →
       </motion.span>
