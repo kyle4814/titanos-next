@@ -7,6 +7,8 @@ const LINKS = [
   { label: "Compliance", href: "/compliance", external: false },
   { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Methodology", href: "/methodology", external: false },
+  { label: "Our scan", href: "/our-scan", external: false },
+  { label: "About", href: "/about", external: false },
   {
     label: "Book a call",
     href: "https://cal.com/kyle-deligny-msvz6s/15min",
@@ -58,7 +60,7 @@ export default function Footer() {
           <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
             TITANOS
           </span>
-          {" · Kyle Deligny · Sydney, Australia"}
+          {" · Kyle Deligny · Brisbane, Australia"}
         </div>
         <div
           style={{

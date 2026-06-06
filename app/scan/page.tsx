@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
+import TerminalSnippet from "@/components/TerminalSnippet";
 import ProcessSteps from "./ProcessSteps";
 
 const MAILTO_SCAN =
@@ -126,6 +127,13 @@ export default function ScanPage() {
       </PageHero>
 
       <div className="divider-gold" />
+
+      {/* AES-19 — terminal-snippet product-evidence visual */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
+          <TerminalSnippet />
+        </div>
+      </SectionReveal>
 
       {/* WHAT IT IS / WHO IT'S FOR */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>

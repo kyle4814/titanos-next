@@ -103,11 +103,16 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--black);
+  background: var(--vault-bg);
 }
 
 body {
-  background: var(--black);
+  /* AES-03 — consume --vault-bg (#0a0a0a). 10-step lift off pure black
+     gives the page a faint depth that reads as "deliberate dark" rather
+     than terminal-emulator black. The change is imperceptible side-by-
+     side with --black but cumulatively distinguishes the site from
+     defaults. */
+  background: var(--vault-bg);
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 16px;

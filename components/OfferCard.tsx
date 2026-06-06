@@ -10,6 +10,7 @@
 import { motion } from "framer-motion";
 import { Radar, ShieldCheck, Sparkles } from "lucide-react";
 import AnimatedButton from "./AnimatedButton";
+import CornerBrackets from "./CornerBrackets";
 import { cardReveal } from "@/lib/motion";
 
 export type Offer = {
@@ -54,6 +55,9 @@ export default function OfferCard(props: Offer) {
         transition: "border-color 0.2s, transform 0.2s",
       }}
     >
+      {/* AES-08 — corner-bracket signature device */}
+      <CornerBrackets />
+
       <IdleIcon kind={props.icon}>
         <Icon
           width={48}
