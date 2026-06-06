@@ -7,6 +7,31 @@ import VaultFrame from "@/components/VaultFrame";
 import GoldDust from "@/components/GoldDust";
 import CursorTrail from "@/components/CursorTrail";
 
+// SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
+//
+// Static-export + GitHub Pages cannot serve custom response headers from
+// the repo (no _headers support; next.config headers() is no-op under
+// output:'export'). Meta tags are the only repo-level enforcement layer
+// that browsers actually honour.
+//
+// Directive coverage notes:
+//   - frame-ancestors is IGNORED in meta CSP (W3C spec). Clickjacking
+//     protection is enforced by Cloudflare's managed X-Frame-Options:
+//     SAMEORIGIN header (CF Managed Transform "Add security headers").
+//   - 'unsafe-inline' on script-src / style-src is required because
+//     Next 16 static export injects inline <script> + <style> blocks.
+//   - /cdn-cgi/scripts/ allows Cloudflare's own injected scripts
+//     (Bot Management, email-decode until SEC-07 disables it).
+const CSP =
+  "default-src 'self'; " +
+  "script-src 'self' 'unsafe-inline' /cdn-cgi/scripts/; " +
+  "style-src 'self' 'unsafe-inline'; " +
+  "img-src 'self' data:; " +
+  "font-src 'self'; " +
+  "connect-src 'self'; " +
+  "base-uri 'self'; " +
+  "form-action 'self' mailto:";
+
 const cinzel = Cinzel({
   variable: "--font-cinzel",
   subsets: ["latin"],
@@ -62,6 +87,15 @@ export default function RootLayout({
       className={`${cinzel.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* SEC-01 — CSP meta hoisted into <head>. React 19 hoists from
+            anywhere, but explicit placement keeps intent obvious. */}
+        <meta httpEquiv="Content-Security-Policy" content={CSP} />
+        {/* Referrer-Policy belt-and-braces: CF Managed sets it server-side
+            (same-origin), this meta tag is a no-op when the header is
+            present but lights up if CF Managed is ever disabled. */}
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+      </head>
       <body>
         {/* SEO-06: Organisation JSON-LD on every page — page.tsx should drop its duplicate copy */}
         <script
