@@ -123,7 +123,7 @@ export default function MethodologyPage() {
               listStyle: "none",
               background: "var(--card)",
               border: "1px solid var(--border)",
-              borderRadius: 6,
+              borderRadius: "var(--radius-md)",
               padding: "24px 28px",
               margin: 0,
             }}
@@ -159,7 +159,7 @@ export default function MethodologyPage() {
               background: "var(--card)",
               borderLeft: "3px solid var(--gold)",
               padding: "20px 24px",
-              borderRadius: 2,
+              borderRadius: "var(--radius-sm)",
             }}
           >
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
@@ -322,7 +322,7 @@ function SimpleList({ items }: { items: string[] }) {
         listStyle: "none",
         background: "var(--card)",
         border: "1px solid var(--border)",
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "24px 28px",
         margin: 0,
       }}

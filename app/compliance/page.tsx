@@ -275,7 +275,7 @@ export default function CompliancePage() {
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--gold-dim)",
-                borderRadius: 8,
+                borderRadius: "var(--radius-md)",
                 padding: "44px 38px",
                 position: "relative",
               }}
@@ -650,7 +650,7 @@ function SplitCol({
       style={{
         background: "var(--card)",
         border: `1px solid ${accent === "gold" ? "var(--gold-dim)" : "var(--border)"}`,
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "30px 26px",
       }}
     >

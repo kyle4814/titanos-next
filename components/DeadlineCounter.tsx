@@ -35,7 +35,7 @@ export default function DeadlineCounter() {
         fontFamily: "'Cinzel', serif",
         fontSize: "var(--fs-sm)" /* AES-09: Cinzel ≥0.85rem (was 0.78rem) */,
         letterSpacing: "0.06em",
-        borderRadius: 24,
+        borderRadius: "var(--radius-lg)",
         verticalAlign: "middle",
       }}
       aria-live="polite"

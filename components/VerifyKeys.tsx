@@ -51,7 +51,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             style={{
               background: "var(--card)",
               border: "1px solid var(--gold-dim)",
-              borderRadius: 6,
+              borderRadius: "var(--radius-md)",
               padding: "28px 24px",
               position: "relative",
               overflow: "hidden",

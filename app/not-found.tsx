@@ -48,7 +48,7 @@ export default function NotFound() {
           fontSize: "var(--fs-sm)",
           padding: "14px 28px",
           border: "1px solid var(--gold)",
-          borderRadius: 3,
+          borderRadius: "var(--radius-sm)",
           textDecoration: "none",
           textTransform: "uppercase",
         }}

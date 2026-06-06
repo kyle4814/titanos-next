@@ -137,7 +137,7 @@ export default function AiDeliveryPage() {
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--border)",
-                  borderRadius: 6,
+                  borderRadius: "var(--radius-md)",
                   padding: 28,
                 }}
               >
@@ -185,7 +185,7 @@ export default function AiDeliveryPage() {
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--border)",
-                  borderRadius: 6,
+                  borderRadius: "var(--radius-md)",
                   padding: 28,
                 }}
               >
@@ -232,7 +232,7 @@ export default function AiDeliveryPage() {
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--gold-dim)",
-                  borderRadius: 6,
+                  borderRadius: "var(--radius-md)",
                   padding: "32px 26px 26px",
                 }}
               >
@@ -283,7 +283,7 @@ export default function AiDeliveryPage() {
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--gold-dim)",
-                borderRadius: 8,
+                borderRadius: "var(--radius-md)",
                 padding: "44px 38px",
                 position: "relative",
                 boxShadow: "0 0 0 1px rgb(var(--gold-rgb) / 0.08)",

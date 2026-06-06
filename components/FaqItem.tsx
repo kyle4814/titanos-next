@@ -23,7 +23,7 @@ export default function FaqItem({
       style={{
         background: "var(--card)",
         border: `1px solid ${open ? "var(--gold-dim)" : "var(--border)"}`,
-        borderRadius: 5,
+        borderRadius: "var(--radius-sm)",
         marginBottom: 12,
         transition: "border-color 0.2s",
       }}

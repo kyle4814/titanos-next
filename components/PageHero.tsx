@@ -43,7 +43,7 @@ export default function PageHero({
               display: "inline-block",
               border: "1px solid var(--gold-dim)",
               padding: "6px 16px",
-              borderRadius: 24,
+              borderRadius: "var(--radius-lg)",
               fontFamily: "'Cinzel', serif",
               fontSize: "var(--fs-xs)",
               color: "var(--ice)",

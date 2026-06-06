@@ -148,7 +148,7 @@ function PrimaryCTA({
     overflow: "hidden",
     padding: "14px 28px",
     minHeight: 48,
-    borderRadius: 3,
+    borderRadius: "var(--radius-sm)",
     border: `${proximityActive ? 1.5 : 1}px solid var(--gold)`,
     color: hovered ? "var(--black)" : "var(--gold)",
     fontFamily: "'Cinzel', serif",

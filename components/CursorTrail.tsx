@@ -66,7 +66,7 @@ export default function CursorTrail() {
         left: 0,
         width: 6,
         height: 6,
-        borderRadius: 999,
+        borderRadius: "var(--radius-lg)",
         background: "var(--gold)",
         boxShadow: "0 0 8px rgb(var(--gold-rgb) / 0.6)",
         pointerEvents: "none",

@@ -58,7 +58,7 @@ export function stubPage(name: string) {
           fontSize: "var(--fs-sm)",
           padding: "12px 24px",
           border: "1px solid var(--gold-dim)",
-          borderRadius: 3,
+          borderRadius: "var(--radius-sm)",
         }}
       >
         ← BACK TO HOME

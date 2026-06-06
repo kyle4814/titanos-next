@@ -52,7 +52,7 @@ export default function MirrorLists({
           style={{
             background: "var(--card)",
             border: "1px solid var(--gold-dim)",
-            borderRadius: 6,
+            borderRadius: "var(--radius-md)",
             padding: "26px 24px",
           }}
         >
@@ -110,7 +110,7 @@ export default function MirrorLists({
           style={{
             background: "var(--card)",
             border: "1px solid var(--border)",
-            borderRadius: 6,
+            borderRadius: "var(--radius-md)",
             padding: "26px 24px",
           }}
         >

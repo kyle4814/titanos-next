@@ -45,7 +45,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "28px 22px",
         position: "relative",
       }}

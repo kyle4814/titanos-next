@@ -409,7 +409,7 @@ function MethodCard({
       style={{
         background: "var(--card)",
         border: "1px solid var(--border)",
-        borderRadius: 4,
+        borderRadius: "var(--radius-sm)",
         padding: 18,
       }}
     >

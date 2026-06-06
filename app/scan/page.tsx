@@ -174,7 +174,7 @@ export default function ScanPage() {
                 listStyle: "none",
                 background: "var(--card)",
                 border: "1px solid var(--border)",
-                borderRadius: 6,
+                borderRadius: "var(--radius-md)",
                 padding: "24px 28px",
                 margin: 0,
               }}
@@ -262,7 +262,7 @@ export default function ScanPage() {
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--gold-dim)",
-                borderRadius: 8,
+                borderRadius: "var(--radius-md)",
                 padding: "36px 32px",
                 textAlign: "center",
               }}
@@ -443,7 +443,7 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "30px 26px",
       }}
     >
@@ -503,7 +503,7 @@ function MiniCard({ title, children }: { title: string; children: React.ReactNod
       style={{
         background: "var(--card)",
         border: "1px solid var(--border)",
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "24px 22px",
       }}
     >
@@ -539,7 +539,7 @@ function BridgeCard({
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
-        borderRadius: 6,
+        borderRadius: "var(--radius-md)",
         padding: "26px 24px",
       }}
     >

@@ -45,7 +45,7 @@ export default function OfferCard(props: Offer) {
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
-        borderRadius: 8,
+        borderRadius: "var(--radius-md)",
         padding: "32px 28px",
         display: "flex",
         flexDirection: "column",
