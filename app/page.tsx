@@ -115,7 +115,7 @@ export default function Home() {
       {/* ═══ THREE OFFERS ═══ */}
       <SectionReveal
         id="offers"
-        style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}
+        style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
       >
         <div className="container-vault">
           <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -232,7 +232,7 @@ export default function Home() {
       <SectionReveal
         style={{
           textAlign: "center",
-          padding: "100px 20px",
+          padding: "var(--space-30) 20px",
           position: "relative",
           zIndex: 2,
         }}
@@ -281,7 +281,7 @@ export default function Home() {
       <div className="divider-gold" />
 
       {/* ═══ Methodology summary ═══ */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <details>
             <summary

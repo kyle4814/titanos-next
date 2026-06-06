@@ -11,7 +11,7 @@ export default function NotFound() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "120px 20px",
+        padding: "var(--space-30) 20px",
         textAlign: "center",
       }}
     >

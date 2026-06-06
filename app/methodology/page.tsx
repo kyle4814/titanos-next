@@ -94,7 +94,7 @@ export default function MethodologyPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading
             title="WHAT WE SCAN · WHAT WE DON’T DO"
@@ -112,7 +112,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* TOOLS USED */}
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading
             title="TOOLS USED"
@@ -151,7 +151,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* RESPONSIBLE DISCLOSURE */}
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading title="RESPONSIBLE DISCLOSURE" />
           <div
@@ -188,7 +188,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* SCOPE */}
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading
             title="SCOPE"
@@ -208,7 +208,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* WHAT YOU GET */}
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading title="WHAT YOU GET" lead="Our standard external scan output:" />
           <SimpleList
@@ -225,7 +225,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* HOW WE DELIVER */}
-      <SectionReveal style={{ padding: "60px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading title="HOW WE DELIVER" />
           <p
@@ -262,7 +262,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       {/* HOW TO VERIFY US — three-key vault interlock */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="HOW TO VERIFY US"

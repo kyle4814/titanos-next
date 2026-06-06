@@ -119,7 +119,7 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="WHY ENTERPRISE AI PROJECTS STALL" />
           <div
@@ -164,7 +164,7 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="WHAT SHIPS"
@@ -214,7 +214,7 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="HOW IT WORKS" lead="Three steps, no surprises." />
           <div
@@ -272,7 +272,7 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal id="offer" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="ONE ENGAGEMENT · PROJECT-QUOTED"
@@ -435,7 +435,7 @@ export default function AiDeliveryPage() {
         </div>
       </SectionReveal>
 
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="THE QUESTIONS EVERY CTO ASKS FIRST" />
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -481,7 +481,7 @@ export default function AiDeliveryPage() {
       <SectionReveal
         style={{
           textAlign: "center",
-          padding: "90px 20px",
+          padding: "var(--space-20) 20px",
           position: "relative",
           zIndex: 2,
         }}

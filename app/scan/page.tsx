@@ -128,7 +128,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* WHAT IT IS / WHO IT'S FOR */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="WHAT IT IS · WHO IT’S FOR" />
           <div
@@ -149,7 +149,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* THE FULL PROCESS */}
-      <SectionReveal id="process" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="process" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="THE FULL PROCESS"
@@ -162,7 +162,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* WHAT'S INSIDE THE REPORT */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="WHAT’S INSIDE THE REPORT"
@@ -212,7 +212,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* METHODOLOGY MINI */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="METHODOLOGY · THE SHORT VERSION"
@@ -251,7 +251,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* REQUEST YOUR FREE SCAN */}
-      <SectionReveal id="request" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="request" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="REQUEST YOUR FREE SCAN"
@@ -323,7 +323,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* WHAT COMES AFTER THE SCAN */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="WHAT COMES AFTER THE SCAN"
@@ -357,7 +357,7 @@ export default function ScanPage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="QUESTIONS WE GET" />
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -393,7 +393,7 @@ export default function ScanPage() {
       <SectionReveal
         style={{
           textAlign: "center",
-          padding: "90px 20px",
+          padding: "var(--space-20) 20px",
           position: "relative",
           zIndex: 2,
         }}

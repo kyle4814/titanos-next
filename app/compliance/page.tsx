@@ -191,7 +191,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* DEADLINE TIMELINE */}
-      <SectionReveal id="timeline" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="FOUR DEADLINES TO KNOW"
@@ -215,7 +215,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* WHAT THE ENGAGEMENT LOOKS LIKE — gold thread */}
-      <SectionReveal id="walkthrough" style={{ padding: "90px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="walkthrough" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="WHAT THE ENGAGEMENT LOOKS LIKE"
@@ -228,7 +228,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* YOU CONTROL vs HOST CONTROLS */}
-      <SectionReveal style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="YOU CONTROL SOME · YOUR HOST CONTROLS THE REST"
@@ -264,7 +264,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* SINGLE OFFER */}
-      <SectionReveal id="offer" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="ONE ENGAGEMENT · DONE WITH YOU"
@@ -420,7 +420,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "80px 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="QUESTIONS WE GET" />
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -513,7 +513,7 @@ export default function CompliancePage() {
       <SectionReveal
         style={{
           textAlign: "center",
-          padding: "90px 20px",
+          padding: "var(--space-20) 20px",
           position: "relative",
           zIndex: 2,
         }}
