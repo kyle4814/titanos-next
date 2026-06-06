@@ -2,10 +2,13 @@
 
 /**
  * ProcessSteps — five numbered process cards. Stagger reveal (100ms apart)
- * + each number badge pulses (scale 1 -> 1.08 -> 1, 400ms) on entry.
+ * + each number badge pulses on entry.
+ *
+ * MOT-01: under prefers-reduced-motion, cards render settled, no reveal,
+ *   no badge pulse.
  */
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 
 export type ProcStep = {
@@ -33,15 +36,17 @@ export default function ProcessSteps({ steps }: { steps: ProcStep[] }) {
 }
 
 function Card({ step, index }: { step: ProcStep; index: number }) {
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   const delay = index * 0.1;
+  const active = !reduce && inView;
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, ease: [0, 0, 0.2, 1], delay }}
+      initial={reduce ? false : { opacity: 0, y: 30 }}
+      animate={reduce || inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: reduce ? 0 : 0.55, ease: [0, 0, 0.2, 1], delay: reduce ? 0 : delay }}
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
@@ -52,12 +57,12 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
     >
       <motion.div
         aria-hidden="true"
-        initial={{ scale: 1 }}
-        animate={inView ? { scale: [1, 1.08, 1] } : {}}
+        initial={reduce ? false : { scale: 1 }}
+        animate={active ? { scale: [1, 1.08, 1] } : {}}
         transition={{
-          duration: 0.4,
+          duration: reduce ? 0 : 0.4,
           ease: [0.4, 0, 0.2, 1],
-          delay: delay + 0.2,
+          delay: reduce ? 0 : delay + 0.2,
         }}
         style={{
           fontFamily: "'Cinzel', serif",

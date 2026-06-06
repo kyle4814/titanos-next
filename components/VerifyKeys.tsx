@@ -3,13 +3,19 @@
 /**
  * VerifyKeys — the three-key vault interlock.
  *
- * Three verification "keys" slide up from below in sequence (200ms stagger).
- * Each card gets a brief gold flash overlay as it lands. After the third
- * card settles, a "VERIFIED" stamp draws in gold (SVG pathLength animation,
- * 600ms ease-out, opacity 0.85).
+ * Three verification "keys" slide up in sequence (200ms stagger). Each
+ * gets a brief gold flash overlay as it lands. After the third settles,
+ * a "VERIFIED" stamp ring draws + the word fades in.
+ *
+ * MOT-01: under prefers-reduced-motion, every piece renders settled
+ *   immediately — no slide, no flash, no ring draw, no fade.
+ * MOT-08: previously animated `pathLength` on the SVG <text> for the
+ *   word. Browsers ignore pathLength on text per spec. Replaced with
+ *   the existing fillOpacity fade-in as the whole effect — visually
+ *   the same minus the imaginary draw stroke.
  */
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
 export type VerifyKey = {
@@ -19,8 +25,10 @@ export type VerifyKey = {
 };
 
 export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+  const show = reduce || inView;
   const finalDelay = (keys.length - 1) * 0.2 + 0.5;
 
   return (
@@ -41,12 +49,12 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
         {keys.map((k, i) => (
           <motion.article
             key={k.num}
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={reduce ? false : { opacity: 0, y: 40 }}
+            animate={show ? { opacity: 1, y: 0 } : {}}
             transition={{
-              duration: 0.5,
+              duration: reduce ? 0 : 0.5,
               ease: [0, 0, 0.2, 1],
-              delay: i * 0.2,
+              delay: reduce ? 0 : i * 0.2,
             }}
             style={{
               background: "var(--card)",
@@ -57,24 +65,26 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
               overflow: "hidden",
             }}
           >
-            {/* Gold flash on land */}
-            <motion.span
-              aria-hidden="true"
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: [0, 0.7, 0] } : {}}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: i * 0.2 + 0.45,
-              }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "radial-gradient(circle at 50% 40%, rgba(245,213,117,0.45) 0%, transparent 60%)",
-                pointerEvents: "none",
-              }}
-            />
+            {/* Gold flash on land — skipped under reduce */}
+            {!reduce && (
+              <motion.span
+                aria-hidden="true"
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: [0, 0.7, 0] } : {}}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: i * 0.2 + 0.45,
+                }}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "radial-gradient(circle at 50% 40%, rgb(var(--gold-rgb) / 0.45) 0%, transparent 60%)",
+                  pointerEvents: "none",
+                }}
+              />
+            )}
             <div
               style={{
                 fontFamily: "'Cinzel', serif",
@@ -113,7 +123,8 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
         ))}
       </div>
 
-      {/* VERIFIED stamp draws after the third key lands */}
+      {/* VERIFIED stamp — MOT-08: fillOpacity fade carries the effect; the
+          non-standard pathLength on <text> was dropped. */}
       <div
         aria-hidden="true"
         style={{
@@ -128,21 +139,25 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
           viewBox="0 0 240 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.85 } : {}}
-          transition={{ duration: 0.2, delay: finalDelay }}
+          initial={reduce ? false : { opacity: 0 }}
+          animate={show ? { opacity: 0.85 } : {}}
+          transition={{ duration: reduce ? 0 : 0.2, delay: reduce ? 0 : finalDelay }}
           style={{ display: "inline-block" }}
         >
-          {/* Outer ring */}
+          {/* Outer ring — pathLength draw kept (works on <path>) */}
           <motion.path
             d="M 20 50 a 100 100 0 1 1 200 0 a 100 100 0 1 1 -200 0"
             stroke="var(--gold)"
             strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={inView ? { pathLength: 1 } : {}}
-            transition={{ duration: 0.6, ease: "easeOut", delay: finalDelay }}
+            initial={reduce ? false : { pathLength: 0 }}
+            animate={show ? { pathLength: 1 } : {}}
+            transition={{
+              duration: reduce ? 0 : 0.6,
+              ease: "easeOut",
+              delay: reduce ? 0 : finalDelay,
+            }}
           />
-          {/* VERIFIED text drawn as path */}
+          {/* VERIFIED text — fillOpacity fade only (MOT-08). */}
           <motion.text
             x="120"
             y="58"
@@ -151,15 +166,12 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             fontWeight="700"
             fontSize="22"
             letterSpacing="3"
-            fill="none"
-            stroke="var(--gold)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, fillOpacity: 0 }}
-            animate={inView ? { pathLength: 1, fillOpacity: 0.9 } : {}}
+            initial={reduce ? false : { fillOpacity: 0 }}
+            animate={show ? { fillOpacity: 0.9 } : {}}
             transition={{
-              duration: 0.6,
+              duration: reduce ? 0 : 0.4,
               ease: "easeOut",
-              delay: finalDelay + 0.15,
+              delay: reduce ? 0 : finalDelay + 0.15,
             }}
             style={{ fill: "var(--gold)" }}
           >

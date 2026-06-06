@@ -2,8 +2,10 @@
 
 /**
  * NumberCounter — animates 0 → value over 1200ms cubic ease-out when the
- * element scrolls into view. Renders the static target server-side so the
- * page is readable without JS.
+ * element scrolls into view. Renders static target server-side.
+ *
+ * MOT-01: under prefers-reduced-motion, renders the target value
+ *   immediately and skips the IntersectionObserver + RAF chain.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -26,6 +28,16 @@ export default function NumberCounter({
   const started = useRef(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    // MOT-01 — settle to target value, skip the RAF chain.
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setDisplay(value);
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
     setDisplay(0);
@@ -38,7 +50,6 @@ export default function NumberCounter({
             const start = performance.now();
             const tick = (now: number) => {
               const t = Math.min(1, (now - start) / durationMs);
-              // cubic ease-out
               const eased = 1 - Math.pow(1 - t, 3);
               setDisplay(Math.round(value * eased));
               if (t < 1) requestAnimationFrame(tick);

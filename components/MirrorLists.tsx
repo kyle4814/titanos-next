@@ -2,12 +2,13 @@
 
 /**
  * MirrorLists — synchronized "what we do" green-tick / "what we never do"
- * red-cross lists. When scrolled into view, both lists animate in mirror:
- *   - green ticks fade-in + scale-up 80ms apart
- *   - red crosses appear + a strike line draws 0% → 100% width over 280ms each
+ * red-cross lists with a strike-through draw on the don't side.
+ *
+ * MOT-01: under prefers-reduced-motion, ticks/crosses + strike lines
+ *   render at settled state immediately (no scale-in, no width draw).
  */
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 
 export default function MirrorLists({
@@ -21,8 +22,10 @@ export default function MirrorLists({
   dontTitle?: string;
   dontItems: React.ReactNode[];
 }) {
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
+  const show = reduce || inView;
 
   return (
     <div
@@ -81,12 +84,12 @@ export default function MirrorLists({
               >
                 <motion.span
                   aria-hidden="true"
-                  initial={{ opacity: 0, scale: 0.4 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  initial={reduce ? false : { opacity: 0, scale: 0.4 }}
+                  animate={show ? { opacity: 1, scale: 1 } : {}}
                   transition={{
-                    duration: 0.28,
+                    duration: reduce ? 0 : 0.28,
                     ease: [0.4, 0, 0.2, 1],
-                    delay: i * 0.08,
+                    delay: reduce ? 0 : i * 0.08,
                   }}
                   style={{
                     position: "absolute",
@@ -139,12 +142,12 @@ export default function MirrorLists({
               >
                 <motion.span
                   aria-hidden="true"
-                  initial={{ opacity: 0, scale: 0.4 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  initial={reduce ? false : { opacity: 0, scale: 0.4 }}
+                  animate={show ? { opacity: 1, scale: 1 } : {}}
                   transition={{
-                    duration: 0.28,
+                    duration: reduce ? 0 : 0.28,
                     ease: [0.4, 0, 0.2, 1],
-                    delay: i * 0.08,
+                    delay: reduce ? 0 : i * 0.08,
                   }}
                   style={{
                     position: "absolute",
@@ -161,12 +164,12 @@ export default function MirrorLists({
                   {item}
                   <motion.span
                     aria-hidden="true"
-                    initial={{ width: "0%" }}
-                    animate={inView ? { width: "100%" } : {}}
+                    initial={reduce ? { width: "100%" } : { width: "0%" }}
+                    animate={show ? { width: "100%" } : {}}
                     transition={{
-                      duration: 0.32,
+                      duration: reduce ? 0 : 0.32,
                       ease: [0.4, 0, 0.2, 1],
-                      delay: i * 0.08 + 0.18,
+                      delay: reduce ? 0 : i * 0.08 + 0.18,
                     }}
                     style={{
                       position: "absolute",

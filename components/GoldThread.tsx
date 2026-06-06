@@ -1,19 +1,22 @@
 "use client";
 
 /**
- * GoldThread — THE signature motion of /compliance.
+ * GoldThread — the signature scroll-driven motion of /compliance.
  *
- * Renders 6 numbered steps stacked vertically, connected by 5 vertical 2px
- * gold-line connectors. As each connector enters view it "draws" via
- * GSAP ScrollTrigger animating stroke-dashoffset on an SVG <path>. As each
- * line completes, the next step's number badge briefly pulses gold.
+ * Renders numbered steps stacked vertically, connected by 2px gold-line
+ * connectors. Each connector draws via GSAP ScrollTrigger animating
+ * stroke-dashoffset as it enters viewport. On complete, the next step's
+ * badge pulses briefly.
  *
- * Cleanup-safe (gsap.context() pattern + ScrollTrigger.kill on unmount).
+ * MOT-01: under prefers-reduced-motion the GSAP timeline + ScrollTrigger
+ *   are NOT registered. All connector paths render with strokeDashoffset:0
+ *   (drawn) immediately. Step badges render settled, no pulse.
  */
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useReducedMotion } from "framer-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,14 +29,26 @@ export type ThreadStep = {
 };
 
 export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
+  const reduce = useReducedMotion();
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
+    // MOT-01 — under reduce, settle every connector to drawn state and
+    // skip the GSAP context entirely. No ScrollTriggers, no badge pulses.
+    if (reduce) {
+      const paths = root.querySelectorAll<SVGPathElement>("[data-thread-line]");
+      paths.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len}`;
+        p.style.strokeDashoffset = "0";
+      });
+      return;
+    }
+
     const ctx = gsap.context(() => {
-      // Prepare each connector path: set its dashoffset to its full length.
       const paths = root.querySelectorAll<SVGPathElement>("[data-thread-line]");
       paths.forEach((p) => {
         const len = p.getTotalLength();
@@ -41,8 +56,6 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
         p.style.strokeDashoffset = `${len}`;
       });
 
-      // For each step pair, draw the connector between them when the next
-      // step enters the viewport.
       paths.forEach((path, idx) => {
         const nextStepBadge = root.querySelector<HTMLElement>(
           `[data-thread-badge="${idx + 1}"]`
@@ -68,7 +81,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
                 { scale: 1, filter: "drop-shadow(0 0 0 rgb(var(--gold-rgb) / 0))" },
                 {
                   scale: 1.08,
-                  filter: "drop-shadow(0 0 12px rgba(245,213,117,0.85))",
+                  filter: "drop-shadow(0 0 12px rgb(245 213 117 / 0.85))",
                   duration: 0.2,
                   yoyo: true,
                   repeat: 1,
@@ -82,7 +95,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
     }, root);
 
     return () => ctx.revert();
-  }, [steps]);
+  }, [steps, reduce]);
 
   return (
     <div
@@ -116,9 +129,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
                 style={{ display: "block", margin: "0 auto" }}
                 aria-hidden="true"
               >
-                {/* Faint base */}
                 <path d="M1 0 L1 56" stroke="var(--gold-dim)" strokeOpacity="0.25" strokeWidth="2" />
-                {/* Drawing path */}
                 <path
                   data-thread-line
                   d="M1 0 L1 56"
