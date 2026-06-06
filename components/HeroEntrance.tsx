@@ -155,7 +155,7 @@ export default function HeroEntrance({
             fontWeight: 300,
             fontSize: "var(--fs-h4)",
             color: "var(--ice)",
-            maxWidth: 760,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto 18px",
             lineHeight: 1.5,
           }}
@@ -171,7 +171,7 @@ export default function HeroEntrance({
             fontFamily: "'Inter', sans-serif",
             fontSize: "var(--fs-sm)",
             color: "var(--dim)",
-            maxWidth: 760,
+            maxWidth: "var(--maxw-prose)",
             margin: "12px auto 0",
             lineHeight: 1.6,
           }}

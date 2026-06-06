@@ -27,7 +27,7 @@ export default function TermsPage() {
       <SectionReveal style={{ padding: "40px 20px 100px", position: "relative", zIndex: 2 }}>
         <article
           style={{
-            maxWidth: 780,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto",
             color: "var(--text)",
             fontSize: "var(--fs-body)",

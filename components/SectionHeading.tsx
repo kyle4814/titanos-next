@@ -37,7 +37,7 @@ export default function SectionHeading({
           style={{
             color: "var(--ice)",
             fontSize: "var(--fs-body)",
-            maxWidth: 680,
+            maxWidth: "var(--maxw-prose)",
             margin: "18px auto 0",
             lineHeight: 1.7,
           }}

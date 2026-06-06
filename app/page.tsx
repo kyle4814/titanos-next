@@ -100,7 +100,7 @@ export default function Home() {
             fontWeight: 300,
             fontSize: "var(--fs-body)",
             color: "var(--dim)",
-            maxWidth: 760,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto",
             textAlign: "center",
             lineHeight: 1.65,
@@ -145,7 +145,7 @@ export default function Home() {
                 color: "var(--text)",
                 fontWeight: 400,
                 fontSize: "var(--fs-body)",
-                maxWidth: 680,
+                maxWidth: "var(--maxw-prose)",
                 margin: "18px auto 0",
                 lineHeight: 1.7,
               }}
@@ -156,11 +156,10 @@ export default function Home() {
           </div>
 
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -196,7 +195,7 @@ export default function Home() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
             gap: 24,
-            maxWidth: 900,
+            maxWidth: "var(--maxw-content)",
             margin: "0 auto",
           }}
         >
@@ -254,7 +253,7 @@ export default function Home() {
             color: "var(--ice)",
             fontSize: "var(--fs-lg)",
             marginBottom: 32,
-            maxWidth: 600,
+            maxWidth: "var(--maxw-prose)",
             marginLeft: "auto",
             marginRight: "auto",
             lineHeight: 1.6,
@@ -328,7 +327,7 @@ export default function Home() {
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
                   gap: 14,
-                  maxWidth: 900,
+                  maxWidth: "var(--maxw-content)",
                   margin: "0 auto",
                 }}
               >

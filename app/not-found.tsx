@@ -31,7 +31,7 @@ export default function NotFound() {
         style={{
           color: "var(--dim)",
           fontSize: "var(--fs-body)",
-          maxWidth: 480,
+          maxWidth: "var(--maxw-prose)",
           marginBottom: 32,
           lineHeight: 1.65,
         }}

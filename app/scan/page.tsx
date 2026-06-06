@@ -132,11 +132,10 @@ export default function ScanPage() {
         <div className="container-vault">
           <SectionHeading title="WHAT IT IS · WHO IT’S FOR" />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -168,7 +167,7 @@ export default function ScanPage() {
             title="WHAT’S INSIDE THE REPORT"
             lead="One report, every finding ranked, every finding reproducible."
           />
-          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <ul
               style={{
                 listStyle: "none",
@@ -223,7 +222,7 @@ export default function ScanPage() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
               gap: 22,
-              maxWidth: 820,
+              maxWidth: "var(--maxw-content)",
               margin: "0 auto",
             }}
           >
@@ -257,7 +256,7 @@ export default function ScanPage() {
             title="REQUEST YOUR FREE SCAN"
             lead="Two ways to start — both land in Kyle’s inbox and we email your report within 1 business day. No card, no login."
           />
-          <div style={{ maxWidth: 680, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <div
               style={{
                 background: "var(--card)",
@@ -330,11 +329,10 @@ export default function ScanPage() {
             lead="Most teams use the free scan to decide whether they need the Compliance engagement or an AI build. Here’s where each fits."
           />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 820,
+              maxWidth: "var(--maxw-content)",
               margin: "0 auto",
             }}
           >
@@ -360,7 +358,7 @@ export default function ScanPage() {
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="QUESTIONS WE GET" />
-          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
               within 1 business day. Most run faster than that — the SLA is just the worst-case
@@ -415,7 +413,7 @@ export default function ScanPage() {
             color: "var(--ice)",
             fontSize: "var(--fs-body)",
             marginBottom: 32,
-            maxWidth: 620,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto 32px",
             lineHeight: 1.7,
           }}

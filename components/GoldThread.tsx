@@ -88,7 +88,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
     <div
       ref={rootRef}
       style={{
-        maxWidth: 760,
+        maxWidth: "var(--maxw-prose)",
         margin: "0 auto",
         position: "relative",
       }}

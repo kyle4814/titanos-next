@@ -81,7 +81,7 @@ export default function PageHero({
             style={{
               fontSize: "var(--fs-lg)",
               color: "var(--ice)",
-              maxWidth: 760,
+              maxWidth: "var(--maxw-prose)",
               margin: "0 auto 16px",
               fontWeight: 300,
               lineHeight: 1.6,
@@ -99,7 +99,7 @@ export default function PageHero({
             style={{
               fontSize: "var(--fs-body)",
               color: "var(--dim)",
-              maxWidth: 680,
+              maxWidth: "var(--maxw-prose)",
               margin: "0 auto 24px",
               lineHeight: 1.7,
             }}
@@ -129,7 +129,7 @@ export default function PageHero({
             style={{
               fontSize: "var(--fs-sm)",
               color: "var(--dim)",
-              maxWidth: 680,
+              maxWidth: "var(--maxw-prose)",
               margin: "26px auto 0",
               lineHeight: 1.7,
             }}

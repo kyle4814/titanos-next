@@ -35,7 +35,7 @@ export function stubPage(name: string) {
         style={{
           color: "var(--ice)",
           fontSize: "var(--fs-body)",
-          maxWidth: 520,
+          maxWidth: "var(--maxw-prose)",
           marginBottom: 24,
           lineHeight: 1.6,
         }}

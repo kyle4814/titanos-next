@@ -95,7 +95,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
             title="WHAT WE SCAN · WHAT WE DON’T DO"
             lead="External, publicly-reachable network surfaces only. We probe what the open internet can already see — nothing private, nothing authenticated."
@@ -113,7 +113,7 @@ export default function MethodologyPage() {
 
       {/* TOOLS USED */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
             title="TOOLS USED"
             lead="We use industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
@@ -152,7 +152,7 @@ export default function MethodologyPage() {
 
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading title="RESPONSIBLE DISCLOSURE" />
           <div
             style={{
@@ -189,7 +189,7 @@ export default function MethodologyPage() {
 
       {/* SCOPE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
             title="SCOPE"
             lead="We scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. We do not scan:"
@@ -209,7 +209,7 @@ export default function MethodologyPage() {
 
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading title="WHAT YOU GET" lead="Our standard external scan output:" />
           <SimpleList
             items={[
@@ -226,7 +226,7 @@ export default function MethodologyPage() {
 
       {/* HOW WE DELIVER */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading title="HOW WE DELIVER" />
           <p
             style={{
@@ -276,7 +276,7 @@ export default function MethodologyPage() {
 
       {/* REMOVAL */}
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading title="REMOVAL" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from us and your domain is suppressed

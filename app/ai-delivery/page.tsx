@@ -123,11 +123,10 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading title="WHY ENTERPRISE AI PROJECTS STALL" />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -171,11 +170,10 @@ export default function AiDeliveryPage() {
             lead="An outcome that solves the problem we scoped — built, integrated, live in your business. The shape depends on the problem."
           />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -218,11 +216,10 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading title="HOW IT WORKS" lead="Three steps, no surprises." />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -278,7 +275,7 @@ export default function AiDeliveryPage() {
             title="ONE ENGAGEMENT · PROJECT-QUOTED"
             lead="No tiers, no menus, no fixed-band pricing. One engagement shape, quoted after a 30-minute scoping call."
           />
-          <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
                 background: "var(--card)",
@@ -345,7 +342,7 @@ export default function AiDeliveryPage() {
                   lineHeight: 1.75,
                   margin: "24px auto 28px",
                   textAlign: "center",
-                  maxWidth: 620,
+                  maxWidth: "var(--maxw-prose)",
                 }}
               >
                 The arc: we diagnose the problem, plan the solution, build it in your repo, and
@@ -371,7 +368,7 @@ export default function AiDeliveryPage() {
                 color: "var(--ice)",
                 fontSize: "var(--fs-body)",
                 lineHeight: 1.7,
-                maxWidth: 640,
+                maxWidth: "var(--maxw-prose)",
                 margin: "32px auto 0",
               }}
             >
@@ -399,7 +396,7 @@ export default function AiDeliveryPage() {
       >
         <div
           style={{
-            maxWidth: 780,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto",
             color: "var(--text)",
             fontSize: "var(--fs-body)",
@@ -438,7 +435,7 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="THE QUESTIONS EVERY CTO ASKS FIRST" />
-          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Are you a real consulting firm or a one-person shop running an AI agent?">
               Single-operator practice. Kyle Deligny runs every engagement. The leverage comes
               from Claude Code doing the implementation work under continuous human review — the
@@ -503,7 +500,7 @@ export default function AiDeliveryPage() {
             color: "var(--ice)",
             fontSize: "var(--fs-lg)",
             marginBottom: 32,
-            maxWidth: 600,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto 32px",
             lineHeight: 1.7,
           }}

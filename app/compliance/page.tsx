@@ -177,13 +177,13 @@ export default function CompliancePage() {
         <AnimatedButton href={CAL_15} external variant="secondary">
           BOOK A 15-MIN
         </AnimatedButton>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400 }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
           <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
             Read full terms ›
           </a>
         </p>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400 }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)" }}>
           Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
         </p>
       </PageHero>
@@ -199,7 +199,7 @@ export default function CompliancePage() {
           />
           <div
             style={{
-              maxWidth: 760,
+              maxWidth: "var(--maxw-prose)",
               margin: "0 auto",
               borderLeft: "2px solid var(--gold-dim)",
               padding: "8px 0 8px 30px",
@@ -235,11 +235,10 @@ export default function CompliancePage() {
             lead="Your hosting service controls some things. We tell you what to ask them to fix, and document the rest as “reasonable steps taken.”"
           />
           <div
+            className="grid-auto-cards"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 22,
-              maxWidth: 1020,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
           >
@@ -270,7 +269,7 @@ export default function CompliancePage() {
             title="ONE ENGAGEMENT · DONE WITH YOU"
             lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and stay with you for 12 months of regulatory briefings and quarterly re-scans."
           />
-          <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
                 background: "var(--card)",
@@ -347,7 +346,7 @@ export default function CompliancePage() {
                   lineHeight: 1.75,
                   margin: "24px auto 20px",
                   textAlign: "center",
-                  maxWidth: 620,
+                  maxWidth: "var(--maxw-prose)",
                 }}
               >
                 Everything you need to demonstrate “reasonable steps” under the Privacy Act and
@@ -358,7 +357,7 @@ export default function CompliancePage() {
                 style={{
                   listStyle: "none",
                   margin: "8px auto 28px",
-                  maxWidth: 620,
+                  maxWidth: "var(--maxw-prose)",
                   padding: 0,
                 }}
               >
@@ -403,13 +402,13 @@ export default function CompliancePage() {
                   Book a 15-min first
                 </AnimatedButton>
               </div>
-              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400, textAlign: "center", margin: "12px auto 0" }}>
+              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
                 14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
                 <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
                   Read full terms ›
                 </a>
               </p>
-              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400, textAlign: "center", margin: "6px auto 0" }}>
+              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "6px auto 0" }}>
                 Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
               </p>
             </article>
@@ -423,7 +422,7 @@ export default function CompliancePage() {
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="QUESTIONS WE GET" />
-          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How the working call works">
               A single 90-minute video call where we apply the changes together. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
@@ -535,7 +534,7 @@ export default function CompliancePage() {
             color: "var(--ice)",
             fontSize: "var(--fs-body)",
             marginBottom: 32,
-            maxWidth: 620,
+            maxWidth: "var(--maxw-prose)",
             margin: "0 auto 32px",
             lineHeight: 1.7,
           }}
@@ -551,13 +550,13 @@ export default function CompliancePage() {
             BOOK A 15-MIN FIRST
           </AnimatedButton>
         </div>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400, margin: "12px auto 0" }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
           <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
             Read full terms ›
           </a>
         </p>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400, margin: "6px auto 0" }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", margin: "6px auto 0" }}>
           Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
         </p>
       </SectionReveal>

@@ -21,7 +21,7 @@ export default function ProcessSteps({ steps }: { steps: ProcStep[] }) {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
         gap: 18,
-        maxWidth: 1020,
+        maxWidth: "var(--maxw-wide)",
         margin: "0 auto",
       }}
     >

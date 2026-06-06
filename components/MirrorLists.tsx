@@ -31,7 +31,7 @@ export default function MirrorLists({
         display: "grid",
         gridTemplateColumns: "1fr",
         gap: 22,
-        maxWidth: 880,
+        maxWidth: "var(--maxw-content)",
         margin: "0 auto",
       }}
     >

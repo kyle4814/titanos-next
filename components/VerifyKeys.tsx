@@ -24,7 +24,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
   const finalDelay = (keys.length - 1) * 0.2 + 0.5;
 
   return (
-    <div ref={ref} style={{ position: "relative", maxWidth: 1020, margin: "0 auto" }}>
+    <div ref={ref} style={{ position: "relative", maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
       <style>{`
         @media (min-width: 760px) {
           .verify-grid { grid-template-columns: repeat(3, 1fr) !important; }
