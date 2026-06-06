@@ -200,7 +200,7 @@ export default function AiDeliveryPage() {
                     letterSpacing: 0,
                   }}
                 >
-                  <span style={{ color: "#4ade80", marginRight: 8, fontWeight: 400 }}>✓</span>
+                  <span style={{ color: "var(--ok)", marginRight: 8, fontWeight: 400 }}>✓</span>
                   {d.title}
                 </h3>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
@@ -286,7 +286,7 @@ export default function AiDeliveryPage() {
                 borderRadius: 8,
                 padding: "44px 38px",
                 position: "relative",
-                boxShadow: "0 0 0 1px rgba(212,175,55,0.08)",
+                boxShadow: "0 0 0 1px rgb(var(--gold-rgb) / 0.08)",
               }}
             >
               <div

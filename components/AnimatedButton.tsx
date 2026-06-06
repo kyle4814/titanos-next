@@ -158,7 +158,7 @@ function PrimaryCTA({
     background: "transparent",
     cursor: "pointer",
     transition: "color 250ms ease, border-width 200ms ease, filter 200ms ease",
-    filter: proximityActive ? "drop-shadow(0 0 8px rgba(212,175,55,0.3))" : "none",
+    filter: proximityActive ? "drop-shadow(0 0 8px rgb(var(--gold-rgb) / 0.3))" : "none",
     textTransform: "uppercase",
     textDecoration: "none",
   };
@@ -188,7 +188,7 @@ function PrimaryCTA({
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle, rgba(212,175,55,0.5) 0%, transparent 70%)",
+              "radial-gradient(circle, rgb(var(--gold-rgb) / 0.5) 0%, transparent 70%)",
             zIndex: 1,
             pointerEvents: "none",
           }}

@@ -65,7 +65,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
             if (nextStepBadge) {
               gsap.fromTo(
                 nextStepBadge,
-                { scale: 1, filter: "drop-shadow(0 0 0 rgba(212,175,55,0))" },
+                { scale: 1, filter: "drop-shadow(0 0 0 rgb(var(--gold-rgb) / 0))" },
                 {
                   scale: 1.08,
                   filter: "drop-shadow(0 0 12px rgba(245,213,117,0.85))",
@@ -159,7 +159,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
           borderRadius: "50%",
           border: "1.5px solid var(--gold)",
           color: "var(--gold)",
-          background: "rgba(212,175,55,0.06)",
+          background: "rgb(var(--gold-rgb) / 0.06)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

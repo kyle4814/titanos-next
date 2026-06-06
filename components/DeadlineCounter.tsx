@@ -29,7 +29,7 @@ export default function DeadlineCounter() {
         display: "inline-block",
         marginLeft: 10,
         padding: "3px 10px",
-        background: "rgba(212,175,55,0.08)",
+        background: "rgb(var(--gold-rgb) / 0.08)",
         border: "1px solid var(--gold-dim)",
         color: "var(--gold)",
         fontFamily: "'Cinzel', serif",

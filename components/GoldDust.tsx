@@ -87,7 +87,7 @@ export default function GoldDust() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 175, 55, ${p.o})`;
+        ctx.fillStyle = `rgb(var(--gold-rgb) / ${p.o})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(tick);

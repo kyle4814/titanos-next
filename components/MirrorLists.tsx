@@ -92,7 +92,7 @@ export default function MirrorLists({
                     position: "absolute",
                     left: 0,
                     top: 7,
-                    color: "#4ade80",
+                    color: "var(--ok)",
                     fontWeight: 700,
                     fontSize: "var(--fs-body)",
                     display: "inline-block",
@@ -150,7 +150,7 @@ export default function MirrorLists({
                     position: "absolute",
                     left: 0,
                     top: 7,
-                    color: "#f87171",
+                    color: "var(--warn)",
                     fontWeight: 700,
                     fontSize: "var(--fs-body)",
                   }}
@@ -173,7 +173,7 @@ export default function MirrorLists({
                       left: 0,
                       top: "50%",
                       height: 1,
-                      background: "#f87171",
+                      background: "var(--warn)",
                       opacity: 0.7,
                       pointerEvents: "none",
                     }}

@@ -378,7 +378,7 @@ export default function CompliancePage() {
                       style={{
                         position: "absolute",
                         left: 0,
-                        color: "#4ade80",
+                        color: "var(--ok)",
                         fontWeight: 700,
                       }}
                     >
@@ -693,7 +693,7 @@ function SplitCol({
               style={{
                 position: "absolute",
                 left: 0,
-                color: accent === "gold" ? "#4ade80" : "var(--ice)",
+                color: accent === "gold" ? "var(--ok)" : "var(--ice)",
                 fontWeight: 700,
               }}
             >

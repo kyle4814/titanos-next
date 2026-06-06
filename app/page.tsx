@@ -333,16 +333,16 @@ export default function Home() {
                 }}
               >
                 <MethodCard title="What we do">
-                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Banner-grade nmap (-sV)</p>
-                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
-                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
-                  <p><span style={{ color: "#4ade80", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Banner-grade nmap (-sV)</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
                 </MethodCard>
                 <MethodCard title="What we never do">
-                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
-                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Exploit attempts</p>
-                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>DoS / brute force</p>
-                  <p><span style={{ color: "#f87171", marginRight: 6 }}>✗</span>Data exfiltration</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Exploit attempts</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>DoS / brute force</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Data exfiltration</p>
                 </MethodCard>
                 <MethodCard title="Verifiable">
                   <p>

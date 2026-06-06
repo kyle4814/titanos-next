@@ -195,7 +195,7 @@ export default function ScanPage() {
                     style={{
                       position: "absolute",
                       left: 0,
-                      color: "#4ade80",
+                      color: "var(--ok)",
                       fontWeight: 700,
                     }}
                   >
@@ -491,10 +491,10 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
 }
 
 function Tick() {
-  return <span style={{ color: "#4ade80", marginRight: 8, fontWeight: 700 }}>✓</span>;
+  return <span style={{ color: "var(--ok)", marginRight: 8, fontWeight: 700 }}>✓</span>;
 }
 function Cross() {
-  return <span style={{ color: "#f87171", marginRight: 8, fontWeight: 700 }}>✗</span>;
+  return <span style={{ color: "var(--warn)", marginRight: 8, fontWeight: 700 }}>✗</span>;
 }
 
 function MiniCard({ title, children }: { title: string; children: React.ReactNode }) {
