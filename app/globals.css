@@ -4,8 +4,15 @@
    TITANOS — THE VAULT design tokens
    ═══════════════════════════════════════════════════════════════ */
 :root {
+  /* ── COLOUR ─────────────────────────────────────────────────────
+     --gold-rgb is the canonical gold; everywhere a translucent gold
+     was previously written as rgba(212,175,55,…) now reads
+     rgb(var(--gold-rgb) / <alpha>). --gold itself is kept for the
+     fully-opaque case so existing var(--gold) references keep working.
+     ─────────────────────────────────────────────────────────────── */
   --black: #000000;
   --vault-bg: #0a0a0a;
+  --gold-rgb: 212 175 55;
   --gold: #D4AF37;
   --gold-dim: #8B7225;
   --gold-bright: #F5D575;
@@ -14,8 +21,16 @@
   --border: #1A1A1A;
   --text: #E0E0E0;
   --dim: #777777;
+  /* Status colours (AES-04). Tailwind green-400 / red-400 kept; the
+     audit-suggested on-brand variants are easy swaps now they're
+     centralised. */
+  --ok: #4ade80;
+  --warn: #f87171;
 
-  /* spacing scale */
+  /* ── SPACING ────────────────────────────────────────────────────
+     Section padding lives on --space-16/20/30 per AES-01 (tight /
+     standard / hero). The remaining --space-* values stay declared
+     for future use by component-internal spacing. */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -26,6 +41,38 @@
   --space-16: 64px;
   --space-20: 80px;
   --space-30: 120px;
+
+  /* ── TYPE SCALE (AES-02) ────────────────────────────────────────
+     9 tokens, nearest-match policy. Cinzel sub-spec (audit AES-09)
+     sites (OfferCard tag 0.72rem, DeadlineCounter 0.78rem,
+     AnimatedButton 0.82rem) all map UP to --fs-sm so Cinzel stays
+     ≥0.85rem everywhere. Step-numerals 1.8/2.0/2.2rem map DOWN to
+     --fs-h3 1.5rem — audit-intended consolidation. */
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.86rem;
+  --fs-body: 0.95rem;
+  --fs-lg: 1.1rem;
+  --fs-h4: 1.25rem;
+  --fs-h3: 1.5rem;
+  --fs-h2: clamp(1.6rem, 4vw, 2.4rem);
+  --fs-h1: clamp(2.2rem, 5.5vw, 3.6rem);
+  --fs-display: clamp(2.8rem, 9vw, 5.5rem);
+
+  /* ── RADIUS (AES-06) — 3 tokens collapse 8→3 ──────────────────── */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 24px;
+
+  /* ── MAX-WIDTH (AES-17) — 4 page-width tokens + 1 micro footnote
+     exception. The 4 main tokens cover content; --maxw-micro 400 is
+     the dedicated tight container for in-button footnotes (refund /
+     response-time microcopy) that don't belong to the page-width
+     hierarchy. */
+  --maxw-prose: 680px;
+  --maxw-content: 820px;
+  --maxw-wide: 1020px;
+  --maxw-full: 1080px;
+  --maxw-micro: 400px;
 }
 
 @theme inline {
@@ -130,7 +177,7 @@ a {
    Utility helpers
    ═══════════════════════════════════════════════════════════════ */
 .container-vault {
-  max-width: 1080px;
+  max-width: var(--maxw-full);
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -140,6 +187,15 @@ a {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
   margin: 0 20px;
+}
+
+/* ── .grid-auto-cards (AES-18) ──────────────────────────────────
+   The repeat(auto-fit, minmax(280px, 1fr)) pattern appeared 9× inline
+   across the page tree. Now declared once. Apply via className; gap
+   stays per-section via inline style as before. */
+.grid-auto-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 /* Reduced motion */
