@@ -6,11 +6,17 @@
  *
  * Underline on hover grows left-to-right (180ms). Click pulses the link to
  * bright gold once before navigation.
+ *
+ * AES-07: Framer Motion cannot interpolate CSS var(--*) colour values
+ * across keyframes — values are inlined at evaluation time. NavLink
+ * colour states therefore read GOLD_BRIGHT/ICE/DIM from lib/tokens.ts so
+ * the canonical palette has a single source of truth.
  */
 
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 
 const LINKS = [
   { label: "Free Scan", href: "/scan", external: false },
@@ -110,7 +116,7 @@ function NavLink({
 
   const inner = (
     <motion.span
-      animate={{ color: pulsed ? "#F5D575" : hovered ? "#B9F2FF" : "#777777" }}
+      animate={{ color: pulsed ? GOLD_BRIGHT : hovered ? ICE : DIM }}
       transition={{ duration: 0.18 }}
       style={{
         position: "relative",

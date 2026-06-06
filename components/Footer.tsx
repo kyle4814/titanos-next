@@ -53,7 +53,13 @@ export default function Footer() {
             )
           )}
         </div>
-        <div>TITANOS · Kyle Deligny · Sydney, Australia</div>
+        <div>
+          {/* AES-15 — wordmark in Cinzel to match Nav + Hero */}
+          <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
+            TITANOS
+          </span>
+          {" · Kyle Deligny · Sydney, Australia"}
+        </div>
         <div
           style={{
             marginTop: 8,

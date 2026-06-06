@@ -112,7 +112,10 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.7;
-  font-weight: 300;
+  /* AES-10 — Inter body 300 was too thin on dark; 400 lands legible
+     at 14-15px sizes without losing the airy feel. The remaining
+     thin/300 usages are localised display copy. */
+  font-weight: 400;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

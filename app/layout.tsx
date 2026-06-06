@@ -32,10 +32,15 @@ const CSP =
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 
+// AES-11 — Cinzel 400 dropped (unused after AES-09 bumped sub-spec labels
+// to --fs-sm where Cinzel 700 carries the eyebrow weight). Inter 300
+// KEPT because per AES-10 the home sub-tagline + HeroEntrance trust line
+// + PageHero sub deliberately use fontWeight: 300 for the airy lead-in.
+// Default body weight is now 400 (globals.css); 300 is a local override.
 const cinzel = Cinzel({
   variable: "--font-cinzel",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["700", "900"],
   display: "swap",
 });
 
