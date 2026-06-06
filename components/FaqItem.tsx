@@ -7,7 +7,7 @@
  * The `+` icon rotation uses a lightweight inline motion.span (no AnimatePresence).
  */
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useState, type ReactNode } from "react";
 
 export default function FaqItem({
@@ -17,6 +17,7 @@ export default function FaqItem({
   question: string;
   children: ReactNode;
 }) {
+  const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   return (
     <div
@@ -53,7 +54,7 @@ export default function FaqItem({
         <motion.span
           aria-hidden="true"
           animate={{ rotate: open ? 45 : 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: reduce ? 0 : 0.2 }}
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
