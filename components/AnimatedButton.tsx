@@ -153,7 +153,7 @@ function PrimaryCTA({
     color: hovered ? "var(--black)" : "var(--gold)",
     fontFamily: "'Cinzel', serif",
     fontWeight: 700,
-    fontSize: "0.82rem",
+    fontSize: "var(--fs-sm)",
     letterSpacing: "0.08em",
     background: "transparent",
     cursor: "pointer",
@@ -264,7 +264,7 @@ function SecondaryLink({
         gap: 6,
         color: "var(--ice)",
         fontFamily: "'Inter', sans-serif",
-        fontSize: "0.85rem",
+        fontSize: "var(--fs-sm)",
         letterSpacing: "0.02em",
       }}
     >

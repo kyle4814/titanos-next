@@ -184,7 +184,7 @@ export default function ScanPage() {
                   key={it}
                   style={{
                     color: "var(--text)",
-                    fontSize: "0.95rem",
+                    fontSize: "var(--fs-body)",
                     lineHeight: 1.7,
                     padding: "8px 0 8px 26px",
                     position: "relative",
@@ -269,7 +269,7 @@ export default function ScanPage() {
             >
               <p
                 style={{
-                  fontSize: "1.05rem",
+                  fontSize: "var(--fs-lg)",
                   color: "var(--text)",
                   marginBottom: 22,
                   lineHeight: 1.7,
@@ -284,7 +284,7 @@ export default function ScanPage() {
                 </a>{" "}
                 with your domain, your name, and anything we should know about scope.
               </p>
-              <p style={{ fontSize: "0.95rem", color: "var(--dim)", marginBottom: 28 }}>
+              <p style={{ fontSize: "var(--fs-body)", color: "var(--dim)", marginBottom: 28 }}>
                 Or book a 15-minute call — we’ll capture the same details and get the scan moving
                 on the call.
               </p>
@@ -305,7 +305,7 @@ export default function ScanPage() {
               </div>
               <p
                 style={{
-                  fontSize: "0.85rem",
+                  fontSize: "var(--fs-sm)",
                   color: "var(--dim)",
                   marginTop: 26,
                   lineHeight: 1.6,
@@ -402,7 +402,7 @@ export default function ScanPage() {
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
+            fontSize: "var(--fs-h2)",
             fontWeight: 700,
             marginBottom: 14,
             letterSpacing: "0.05em",
@@ -413,7 +413,7 @@ export default function ScanPage() {
         <p
           style={{
             color: "var(--ice)",
-            fontSize: "1.02rem",
+            fontSize: "var(--fs-body)",
             marginBottom: 32,
             maxWidth: 620,
             margin: "0 auto 32px",
@@ -451,7 +451,7 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "1.15rem",
+          fontSize: "var(--fs-lg)",
           letterSpacing: "0.06em",
           marginBottom: 14,
           lineHeight: 1.3,
@@ -465,7 +465,7 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
             key={item}
             style={{
               color: "var(--text)",
-              fontSize: "0.92rem",
+              fontSize: "var(--fs-body)",
               lineHeight: 1.7,
               padding: "6px 0 6px 22px",
               position: "relative",
@@ -511,14 +511,14 @@ function MiniCard({ title, children }: { title: string; children: React.ReactNod
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "1rem",
+          fontSize: "var(--fs-body)",
           letterSpacing: "0.06em",
           marginBottom: 12,
         }}
       >
         {title}
       </h4>
-      <div style={{ color: "var(--text)", fontSize: "0.9rem", lineHeight: 1.7 }}>{children}</div>
+      <div style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>{children}</div>
     </div>
   );
 }
@@ -547,14 +547,14 @@ function BridgeCard({
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "1rem",
+          fontSize: "var(--fs-body)",
           letterSpacing: "0.06em",
           marginBottom: 10,
         }}
       >
         {title}
       </h4>
-      <p style={{ color: "var(--text)", fontSize: "0.92rem", lineHeight: 1.7, marginBottom: 14 }}>
+      <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginBottom: 14 }}>
         {body}
       </p>
       <AnimatedButton href={href} variant="secondary">

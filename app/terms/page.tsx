@@ -30,7 +30,7 @@ export default function TermsPage() {
             maxWidth: 780,
             margin: "0 auto",
             color: "var(--text)",
-            fontSize: "1rem",
+            fontSize: "var(--fs-body)",
             lineHeight: 1.75,
           }}
         >
@@ -106,7 +106,7 @@ function H2({ children }: { children: React.ReactNode }) {
       style={{
         fontFamily: "'Cinzel', serif",
         color: "var(--gold)",
-        fontSize: "1.4rem",
+        fontSize: "var(--fs-h3)",
         fontWeight: 700,
         margin: "36px 0 12px",
         letterSpacing: "0.04em",

@@ -177,13 +177,13 @@ export default function CompliancePage() {
         <AnimatedButton href={CAL_15} external variant="secondary">
           BOOK A 15-MIN
         </AnimatedButton>
-        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400 }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400 }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
           <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
             Read full terms ›
           </a>
         </p>
-        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400 }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400 }}>
           Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
         </p>
       </PageHero>
@@ -284,7 +284,7 @@ export default function CompliancePage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--ice)",
-                  fontSize: "0.78rem",
+                  fontSize: "var(--fs-xs)",
                   letterSpacing: "0.18em",
                   marginBottom: 14,
                   textAlign: "center",
@@ -296,7 +296,7 @@ export default function CompliancePage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--gold)",
-                  fontSize: "clamp(1.3rem, 3vw, 1.7rem)",
+                  fontSize: "var(--fs-h3)",
                   letterSpacing: "0.04em",
                   lineHeight: 1.3,
                   textAlign: "center",
@@ -309,7 +309,7 @@ export default function CompliancePage() {
                 style={{
                   textDecoration: "line-through",
                   color: "var(--dim)",
-                  fontSize: "0.9rem",
+                  fontSize: "var(--fs-sm)",
                   marginBottom: 6,
                   textAlign: "center",
                 }}
@@ -320,7 +320,7 @@ export default function CompliancePage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--gold)",
-                  fontSize: "clamp(1.9rem, 4vw, 2.4rem)",
+                  fontSize: "var(--fs-h2)",
                   fontWeight: 700,
                   lineHeight: 1.1,
                   textAlign: "center",
@@ -330,7 +330,7 @@ export default function CompliancePage() {
                 <span
                   style={{
                     color: "var(--dim)",
-                    fontSize: "0.92rem",
+                    fontSize: "var(--fs-body)",
                     display: "block",
                     marginTop: 8,
                     fontWeight: 400,
@@ -343,7 +343,7 @@ export default function CompliancePage() {
               <p
                 style={{
                   color: "var(--text)",
-                  fontSize: "0.95rem",
+                  fontSize: "var(--fs-body)",
                   lineHeight: 1.75,
                   margin: "24px auto 20px",
                   textAlign: "center",
@@ -367,7 +367,7 @@ export default function CompliancePage() {
                     key={it}
                     style={{
                       color: "var(--text)",
-                      fontSize: "0.92rem",
+                      fontSize: "var(--fs-body)",
                       lineHeight: 1.65,
                       padding: "7px 0 7px 24px",
                       position: "relative",
@@ -403,13 +403,13 @@ export default function CompliancePage() {
                   Book a 15-min first
                 </AnimatedButton>
               </div>
-              <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400, textAlign: "center", margin: "12px auto 0" }}>
+              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400, textAlign: "center", margin: "12px auto 0" }}>
                 14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
                 <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
                   Read full terms ›
                 </a>
               </p>
-              <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400, textAlign: "center", margin: "6px auto 0" }}>
+              <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400, textAlign: "center", margin: "6px auto 0" }}>
                 Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
               </p>
             </article>
@@ -495,13 +495,13 @@ export default function CompliancePage() {
       <SectionReveal
         style={{ textAlign: "center", padding: "50px 20px", position: "relative", zIndex: 2 }}
       >
-        <p style={{ color: "var(--dim)", fontSize: "0.95rem", marginBottom: 10 }}>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-body)", marginBottom: 10 }}>
           Want to see your current security exposure first?{" "}
           <a href="/scan" style={{ color: "var(--gold)" }}>
             Free scan →
           </a>
         </p>
-        <p style={{ color: "var(--dim)", fontSize: "0.95rem" }}>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-body)" }}>
           Need an AI build instead?{" "}
           <a href="/ai-delivery" style={{ color: "var(--gold)" }}>
             AI Implementation for Business →
@@ -522,7 +522,7 @@ export default function CompliancePage() {
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
+            fontSize: "var(--fs-h2)",
             fontWeight: 700,
             marginBottom: 14,
             letterSpacing: "0.05em",
@@ -533,7 +533,7 @@ export default function CompliancePage() {
         <p
           style={{
             color: "var(--ice)",
-            fontSize: "1.02rem",
+            fontSize: "var(--fs-body)",
             marginBottom: 32,
             maxWidth: 620,
             margin: "0 auto 32px",
@@ -551,13 +551,13 @@ export default function CompliancePage() {
             BOOK A 15-MIN FIRST
           </AnimatedButton>
         </div>
-        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 12, maxWidth: 400, margin: "12px auto 0" }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: 400, margin: "12px auto 0" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
           <a href="/terms" style={{ color: "var(--dim)", textDecoration: "underline" }}>
             Read full terms ›
           </a>
         </p>
-        <p style={{ fontSize: "0.85rem", color: "var(--dim)", marginTop: 6, maxWidth: 400, margin: "6px auto 0" }}>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: 400, margin: "6px auto 0" }}>
           Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
         </p>
       </SectionReveal>
@@ -608,7 +608,7 @@ function TimelineRow({
         style={{
           fontFamily: "'Cinzel', serif",
           color: state === "coming" ? "var(--dim)" : "var(--gold)",
-          fontSize: "0.85rem",
+          fontSize: "var(--fs-sm)",
           letterSpacing: "0.06em",
           marginBottom: 4,
         }}
@@ -618,7 +618,7 @@ function TimelineRow({
       <h4
         style={{
           color: "var(--ice)",
-          fontSize: "1rem",
+          fontSize: "var(--fs-body)",
           fontWeight: 600,
           marginBottom: 6,
           fontFamily: "'Inter', sans-serif",
@@ -627,7 +627,7 @@ function TimelineRow({
       >
         {title}
       </h4>
-      <p style={{ color: "var(--dim)", fontSize: "0.88rem", lineHeight: 1.6 }}>{body}</p>
+      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
     </div>
   );
 }
@@ -658,7 +658,7 @@ function SplitCol({
         style={{
           fontFamily: "'Cinzel', serif",
           color: accent === "gold" ? "var(--gold)" : "var(--ice)",
-          fontSize: "1.15rem",
+          fontSize: "var(--fs-lg)",
           letterSpacing: "0.06em",
           marginBottom: 6,
           lineHeight: 1.3,
@@ -669,7 +669,7 @@ function SplitCol({
       <p
         style={{
           color: "var(--dim)",
-          fontSize: "0.84rem",
+          fontSize: "var(--fs-sm)",
           marginBottom: 18,
           lineHeight: 1.5,
         }}
@@ -682,7 +682,7 @@ function SplitCol({
             key={it}
             style={{
               color: "var(--text)",
-              fontSize: "0.92rem",
+              fontSize: "var(--fs-body)",
               lineHeight: 1.7,
               padding: "6px 0 6px 22px",
               position: "relative",

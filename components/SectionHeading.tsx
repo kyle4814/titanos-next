@@ -15,7 +15,7 @@ export default function SectionHeading({
         style={{
           fontFamily: "'Cinzel', serif",
           fontWeight: 700,
-          fontSize: "clamp(1.4rem, 3.5vw, 2.2rem)",
+          fontSize: "var(--fs-h2)",
           color: "var(--gold)",
           letterSpacing: "0.08em",
         }}
@@ -36,7 +36,7 @@ export default function SectionHeading({
         <p
           style={{
             color: "var(--ice)",
-            fontSize: "1rem",
+            fontSize: "var(--fs-body)",
             maxWidth: 680,
             margin: "18px auto 0",
             lineHeight: 1.7,

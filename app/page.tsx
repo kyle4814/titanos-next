@@ -98,7 +98,7 @@ export default function Home() {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 300,
-            fontSize: "0.98rem",
+            fontSize: "var(--fs-body)",
             color: "var(--dim)",
             maxWidth: 760,
             margin: "0 auto",
@@ -123,7 +123,7 @@ export default function Home() {
               style={{
                 fontFamily: "'Cinzel', serif",
                 fontWeight: 700,
-                fontSize: "clamp(1.5rem, 4vw, 2.4rem)",
+                fontSize: "var(--fs-h2)",
                 color: "var(--gold)",
                 letterSpacing: "0.06em",
               }}
@@ -144,7 +144,7 @@ export default function Home() {
               style={{
                 color: "var(--text)",
                 fontWeight: 400,
-                fontSize: "1rem",
+                fontSize: "var(--fs-body)",
                 maxWidth: 680,
                 margin: "18px auto 0",
                 lineHeight: 1.7,
@@ -241,7 +241,7 @@ export default function Home() {
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "clamp(1.6rem, 4vw, 2.4rem)",
+            fontSize: "var(--fs-h2)",
             fontWeight: 700,
             marginBottom: 14,
             letterSpacing: "0.05em",
@@ -252,7 +252,7 @@ export default function Home() {
         <p
           style={{
             color: "var(--ice)",
-            fontSize: "1.05rem",
+            fontSize: "var(--fs-lg)",
             marginBottom: 32,
             maxWidth: 600,
             marginLeft: "auto",
@@ -290,7 +290,7 @@ export default function Home() {
                 textAlign: "center",
                 fontFamily: "'Inter', sans-serif",
                 fontWeight: 500,
-                fontSize: "0.95rem",
+                fontSize: "var(--fs-body)",
                 color: "var(--ice)",
                 letterSpacing: "0.02em",
                 listStyle: "none",
@@ -305,7 +305,7 @@ export default function Home() {
                   style={{
                     fontFamily: "'Cinzel', serif",
                     fontWeight: 700,
-                    fontSize: "clamp(1.5rem, 4vw, 2.4rem)",
+                    fontSize: "var(--fs-h2)",
                     color: "var(--gold)",
                     letterSpacing: "0.06em",
                   }}
@@ -378,13 +378,13 @@ function TrustItem({
   small: string;
 }) {
   return (
-    <div style={{ fontSize: "0.85rem", color: "var(--dim)" }}>
+    <div style={{ fontSize: "var(--fs-sm)", color: "var(--dim)" }}>
       <strong
         style={{
           display: "block",
           color: "var(--gold)",
           fontFamily: "'Cinzel', serif",
-          fontSize: "1.4rem",
+          fontSize: "var(--fs-h3)",
           marginBottom: 4,
           letterSpacing: "0.04em",
           fontWeight: 700,
@@ -416,7 +416,7 @@ function MethodCard({
       <h4
         style={{
           color: "var(--ice)",
-          fontSize: "0.95rem",
+          fontSize: "var(--fs-body)",
           fontWeight: 600,
           marginBottom: 8,
           fontFamily: "'Inter', sans-serif",
@@ -428,7 +428,7 @@ function MethodCard({
       <div
         style={{
           color: "var(--dim)",
-          fontSize: "0.85rem",
+          fontSize: "var(--fs-sm)",
           lineHeight: 1.6,
         }}
       >

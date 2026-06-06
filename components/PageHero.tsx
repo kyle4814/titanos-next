@@ -45,7 +45,7 @@ export default function PageHero({
               padding: "6px 16px",
               borderRadius: 24,
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.78rem",
+              fontSize: "var(--fs-xs)",
               color: "var(--ice)",
               letterSpacing: "0.1em",
               marginBottom: 24,
@@ -63,7 +63,7 @@ export default function PageHero({
           style={{
             fontFamily: "'Cinzel', serif",
             fontWeight: 700,
-            fontSize: "clamp(2.2rem, 5.5vw, 3.6rem)",
+            fontSize: "var(--fs-h1)",
             color: "var(--gold)",
             letterSpacing: "0.04em",
             marginBottom: 18,
@@ -79,7 +79,7 @@ export default function PageHero({
             variants={fadeUp}
             transition={{ delay: 0.1 }}
             style={{
-              fontSize: "1.15rem",
+              fontSize: "var(--fs-lg)",
               color: "var(--ice)",
               maxWidth: 760,
               margin: "0 auto 16px",
@@ -97,7 +97,7 @@ export default function PageHero({
             variants={fadeUp}
             transition={{ delay: 0.15 }}
             style={{
-              fontSize: "0.95rem",
+              fontSize: "var(--fs-body)",
               color: "var(--dim)",
               maxWidth: 680,
               margin: "0 auto 24px",
@@ -127,7 +127,7 @@ export default function PageHero({
             variants={fadeUp}
             transition={{ delay: 0.25 }}
             style={{
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-sm)",
               color: "var(--dim)",
               maxWidth: 680,
               margin: "26px auto 0",

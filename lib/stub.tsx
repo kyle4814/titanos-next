@@ -23,7 +23,7 @@ export function stubPage(name: string) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "clamp(2rem, 6vw, 3.2rem)",
+          fontSize: "var(--fs-h2)",
           fontWeight: 700,
           letterSpacing: "0.06em",
           marginBottom: 18,
@@ -34,7 +34,7 @@ export function stubPage(name: string) {
       <p
         style={{
           color: "var(--ice)",
-          fontSize: "1rem",
+          fontSize: "var(--fs-body)",
           maxWidth: 520,
           marginBottom: 24,
           lineHeight: 1.6,
@@ -55,7 +55,7 @@ export function stubPage(name: string) {
           color: "var(--gold)",
           fontFamily: "'Cinzel', serif",
           letterSpacing: "0.06em",
-          fontSize: "0.85rem",
+          fontSize: "var(--fs-sm)",
           padding: "12px 24px",
           border: "1px solid var(--gold-dim)",
           borderRadius: 3,

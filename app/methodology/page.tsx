@@ -162,7 +162,7 @@ export default function MethodologyPage() {
               borderRadius: 2,
             }}
           >
-            <p style={{ color: "var(--text)", fontSize: "0.95rem", lineHeight: 1.75 }}>
+            <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
               <strong style={{ color: "var(--gold)" }}>
                 Every Titanos finding ships with a 90-day responsible disclosure window.
               </strong>{" "}
@@ -173,7 +173,7 @@ export default function MethodologyPage() {
           <p
             style={{
               color: "var(--text)",
-              fontSize: "0.95rem",
+              fontSize: "var(--fs-body)",
               lineHeight: 1.75,
               marginTop: 18,
             }}
@@ -231,7 +231,7 @@ export default function MethodologyPage() {
           <p
             style={{
               color: "var(--text)",
-              fontSize: "0.95rem",
+              fontSize: "var(--fs-body)",
               lineHeight: 1.75,
               marginBottom: 16,
             }}
@@ -241,7 +241,7 @@ export default function MethodologyPage() {
             into. Reply to the email if you need the findings in a different format for your
             auditor.
           </p>
-          <p style={{ color: "var(--text)", fontSize: "0.95rem", lineHeight: 1.75 }}>
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Beyond the free scan, Titanos offers two paid engagements:{" "}
             <a href="/compliance" style={{ color: "var(--ice)" }}>
               AU Privacy Act + Essential Eight Compliance
@@ -278,7 +278,7 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "60px 20px 100px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SectionHeading title="REMOVAL" />
-          <p style={{ color: "var(--text)", fontSize: "0.95rem", lineHeight: 1.75 }}>
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from us and your domain is suppressed
             permanently. We honour the request immediately.
           </p>
@@ -293,7 +293,7 @@ function ToolItem({ children }: { children: React.ReactNode }) {
     <li
       style={{
         color: "var(--text)",
-        fontSize: "0.95rem",
+        fontSize: "var(--fs-body)",
         lineHeight: 1.75,
         padding: "8px 0 8px 26px",
         position: "relative",
@@ -332,7 +332,7 @@ function SimpleList({ items }: { items: string[] }) {
           key={it}
           style={{
             color: "var(--text)",
-            fontSize: "0.95rem",
+            fontSize: "var(--fs-body)",
             lineHeight: 1.7,
             padding: "8px 0 8px 26px",
             position: "relative",

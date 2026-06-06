@@ -33,7 +33,7 @@ export default function DeadlineCounter() {
         border: "1px solid var(--gold-dim)",
         color: "var(--gold)",
         fontFamily: "'Cinzel', serif",
-        fontSize: "0.78rem",
+        fontSize: "var(--fs-sm)" /* AES-09: Cinzel ≥0.85rem (was 0.78rem) */,
         letterSpacing: "0.06em",
         borderRadius: 24,
         verticalAlign: "middle",

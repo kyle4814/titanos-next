@@ -68,7 +68,7 @@ export default function OfferCard(props: Offer) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--ice)",
-          fontSize: "0.72rem",
+          fontSize: "var(--fs-sm)",
           letterSpacing: "0.16em",
           marginBottom: 12,
           textTransform: "uppercase",
@@ -81,7 +81,7 @@ export default function OfferCard(props: Offer) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "1.25rem",
+          fontSize: "var(--fs-h4)",
           letterSpacing: "0.04em",
           marginBottom: 10,
           lineHeight: 1.3,
@@ -94,7 +94,7 @@ export default function OfferCard(props: Offer) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "1.4rem",
+          fontSize: "var(--fs-h3)",
           fontWeight: 700,
           marginBottom: 4,
           lineHeight: 1.2,
@@ -104,7 +104,7 @@ export default function OfferCard(props: Offer) {
         <span
           style={{
             color: "var(--text)",
-            fontSize: "0.78rem",
+            fontSize: "var(--fs-xs)",
             fontWeight: 400,
             display: "block",
             marginTop: 4,
@@ -118,7 +118,7 @@ export default function OfferCard(props: Offer) {
       <p
         style={{
           color: "var(--text)",
-          fontSize: "0.92rem",
+          fontSize: "var(--fs-body)",
           lineHeight: 1.7,
           margin: "14px 0 18px",
           flexGrow: 1,
@@ -138,7 +138,7 @@ export default function OfferCard(props: Offer) {
             key={b}
             style={{
               color: "var(--text)",
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-sm)",
               lineHeight: 1.6,
               padding: "5px 0 5px 18px",
               position: "relative",

@@ -60,7 +60,7 @@ export default function MirrorLists({
             style={{
               fontFamily: "'Cinzel', serif",
               color: "var(--gold)",
-              fontSize: "1rem",
+              fontSize: "var(--fs-body)",
               letterSpacing: "0.08em",
               marginBottom: 14,
             }}
@@ -73,7 +73,7 @@ export default function MirrorLists({
                 key={i}
                 style={{
                   color: "var(--text)",
-                  fontSize: "0.92rem",
+                  fontSize: "var(--fs-body)",
                   lineHeight: 1.65,
                   padding: "8px 0 8px 26px",
                   position: "relative",
@@ -94,7 +94,7 @@ export default function MirrorLists({
                     top: 7,
                     color: "#4ade80",
                     fontWeight: 700,
-                    fontSize: "1rem",
+                    fontSize: "var(--fs-body)",
                     display: "inline-block",
                   }}
                 >
@@ -118,7 +118,7 @@ export default function MirrorLists({
             style={{
               fontFamily: "'Cinzel', serif",
               color: "var(--ice)",
-              fontSize: "1rem",
+              fontSize: "var(--fs-body)",
               letterSpacing: "0.08em",
               marginBottom: 14,
             }}
@@ -131,7 +131,7 @@ export default function MirrorLists({
                 key={i}
                 style={{
                   color: "var(--text)",
-                  fontSize: "0.92rem",
+                  fontSize: "var(--fs-body)",
                   lineHeight: 1.65,
                   padding: "8px 0 8px 26px",
                   position: "relative",
@@ -152,7 +152,7 @@ export default function MirrorLists({
                     top: 7,
                     color: "#f87171",
                     fontWeight: 700,
-                    fontSize: "1rem",
+                    fontSize: "var(--fs-body)",
                   }}
                 >
                   ✗

@@ -62,7 +62,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "2rem",
+          fontSize: "var(--fs-h3)",
           letterSpacing: "0.05em",
           marginBottom: 8,
           lineHeight: 1,
@@ -76,7 +76,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "0.88rem",
+          fontSize: "var(--fs-sm)",
           letterSpacing: "0.08em",
           marginBottom: 10,
           lineHeight: 1.4,
@@ -84,7 +84,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
       >
         {step.title}
       </h3>
-      <p style={{ color: "var(--text)", fontSize: "0.86rem", lineHeight: 1.65 }}>
+      <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.65 }}>
         {step.body}
       </p>
     </motion.article>

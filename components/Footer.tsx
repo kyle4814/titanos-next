@@ -24,7 +24,7 @@ export default function Footer() {
         borderTop: "1px solid var(--border)",
         textAlign: "center",
         color: "var(--dim)",
-        fontSize: "0.85rem",
+        fontSize: "var(--fs-sm)",
         position: "relative",
         zIndex: 1,
       }}
@@ -57,7 +57,7 @@ export default function Footer() {
         <div
           style={{
             marginTop: 8,
-            fontSize: "0.75rem",
+            fontSize: "var(--fs-xs)",
             letterSpacing: "0.05em",
             color: "var(--dim)",
           }}

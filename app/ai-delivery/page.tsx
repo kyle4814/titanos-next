@@ -145,7 +145,7 @@ export default function AiDeliveryPage() {
                   style={{
                     fontFamily: "'Cinzel', serif",
                     color: "var(--gold)",
-                    fontSize: "0.95rem",
+                    fontSize: "var(--fs-body)",
                     letterSpacing: "0.06em",
                     marginBottom: 12,
                     lineHeight: 1.4,
@@ -153,7 +153,7 @@ export default function AiDeliveryPage() {
                 >
                   {p.title}
                 </h4>
-                <p style={{ color: "var(--text)", fontSize: "0.9rem", lineHeight: 1.7 }}>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
                   {p.body}
                 </p>
               </article>
@@ -192,7 +192,7 @@ export default function AiDeliveryPage() {
                 <h3
                   style={{
                     color: "var(--ice)",
-                    fontSize: "1rem",
+                    fontSize: "var(--fs-body)",
                     fontWeight: 600,
                     marginBottom: 10,
                     lineHeight: 1.35,
@@ -203,7 +203,7 @@ export default function AiDeliveryPage() {
                   <span style={{ color: "#4ade80", marginRight: 8, fontWeight: 400 }}>✓</span>
                   {d.title}
                 </h3>
-                <p style={{ color: "var(--text)", fontSize: "0.9rem", lineHeight: 1.7 }}>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
                   {d.body}
                 </p>
               </article>
@@ -240,7 +240,7 @@ export default function AiDeliveryPage() {
                   style={{
                     fontFamily: "'Cinzel', serif",
                     color: "var(--gold)",
-                    fontSize: "2.2rem",
+                    fontSize: "var(--fs-h3)",
                     letterSpacing: "0.05em",
                     marginBottom: 8,
                     lineHeight: 1,
@@ -253,7 +253,7 @@ export default function AiDeliveryPage() {
                   style={{
                     fontFamily: "'Cinzel', serif",
                     color: "var(--gold)",
-                    fontSize: "0.95rem",
+                    fontSize: "var(--fs-body)",
                     letterSpacing: "0.08em",
                     marginBottom: 14,
                     lineHeight: 1.4,
@@ -261,7 +261,7 @@ export default function AiDeliveryPage() {
                 >
                   {s.title}
                 </h3>
-                <p style={{ color: "var(--text)", fontSize: "0.88rem", lineHeight: 1.7 }}>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
                   {s.body}
                 </p>
               </article>
@@ -293,7 +293,7 @@ export default function AiDeliveryPage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--ice)",
-                  fontSize: "0.78rem",
+                  fontSize: "var(--fs-xs)",
                   letterSpacing: "0.18em",
                   marginBottom: 14,
                   textAlign: "center",
@@ -305,7 +305,7 @@ export default function AiDeliveryPage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--gold)",
-                  fontSize: "clamp(1.3rem, 3vw, 1.7rem)",
+                  fontSize: "var(--fs-h3)",
                   letterSpacing: "0.04em",
                   lineHeight: 1.3,
                   textAlign: "center",
@@ -318,7 +318,7 @@ export default function AiDeliveryPage() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   color: "var(--gold)",
-                  fontSize: "clamp(1.6rem, 3.5vw, 2.1rem)",
+                  fontSize: "var(--fs-h2)",
                   fontWeight: 700,
                   lineHeight: 1.15,
                   textAlign: "center",
@@ -328,7 +328,7 @@ export default function AiDeliveryPage() {
                 <span
                   style={{
                     color: "var(--dim)",
-                    fontSize: "0.92rem",
+                    fontSize: "var(--fs-body)",
                     display: "block",
                     marginTop: 8,
                     fontWeight: 400,
@@ -341,7 +341,7 @@ export default function AiDeliveryPage() {
               <p
                 style={{
                   color: "var(--text)",
-                  fontSize: "0.95rem",
+                  fontSize: "var(--fs-body)",
                   lineHeight: 1.75,
                   margin: "24px auto 28px",
                   textAlign: "center",
@@ -369,7 +369,7 @@ export default function AiDeliveryPage() {
               style={{
                 textAlign: "center",
                 color: "var(--ice)",
-                fontSize: "0.95rem",
+                fontSize: "var(--fs-body)",
                 lineHeight: 1.7,
                 maxWidth: 640,
                 margin: "32px auto 0",
@@ -402,7 +402,7 @@ export default function AiDeliveryPage() {
             maxWidth: 780,
             margin: "0 auto",
             color: "var(--text)",
-            fontSize: "0.95rem",
+            fontSize: "var(--fs-body)",
             lineHeight: 2,
           }}
         >
@@ -490,7 +490,7 @@ export default function AiDeliveryPage() {
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "clamp(1.5rem, 4vw, 2.3rem)",
+            fontSize: "var(--fs-h2)",
             fontWeight: 700,
             marginBottom: 14,
             letterSpacing: "0.05em",
@@ -501,7 +501,7 @@ export default function AiDeliveryPage() {
         <p
           style={{
             color: "var(--ice)",
-            fontSize: "1.05rem",
+            fontSize: "var(--fs-lg)",
             marginBottom: 32,
             maxWidth: 600,
             margin: "0 auto 32px",

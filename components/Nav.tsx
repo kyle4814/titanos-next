@@ -75,7 +75,7 @@ export default function Nav() {
             color: "var(--gold)",
             fontWeight: 700,
             letterSpacing: "0.1em",
-            fontSize: "1.1rem",
+            fontSize: "var(--fs-lg)",
             textDecoration: "none",
           }}
         >
@@ -115,7 +115,7 @@ function NavLink({
       style={{
         position: "relative",
         display: "inline-block",
-        fontSize: "0.88rem",
+        fontSize: "var(--fs-sm)",
         fontFamily: "'Inter', sans-serif",
       }}
     >

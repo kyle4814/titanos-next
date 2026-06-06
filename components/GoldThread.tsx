@@ -165,7 +165,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
           justifyContent: "center",
           fontFamily: "'Cinzel', serif",
           fontWeight: 700,
-          fontSize: "1.1rem",
+          fontSize: "var(--fs-lg)",
           letterSpacing: "0.04em",
           willChange: "transform, filter",
         }}
@@ -178,7 +178,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "0.95rem",
+            fontSize: "var(--fs-body)",
             letterSpacing: "0.08em",
             marginBottom: 10,
             lineHeight: 1.4,
@@ -187,7 +187,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
         >
           {step.title}
         </h4>
-        <p style={{ color: "var(--text)", fontSize: "0.92rem", lineHeight: 1.7 }}>
+        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
           {step.body}
         </p>
       </div>

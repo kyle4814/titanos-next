@@ -79,7 +79,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
               style={{
                 fontFamily: "'Cinzel', serif",
                 color: "var(--gold)",
-                fontSize: "1.8rem",
+                fontSize: "var(--fs-h3)",
                 letterSpacing: "0.05em",
                 marginBottom: 8,
                 lineHeight: 1,
@@ -92,7 +92,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
               style={{
                 fontFamily: "'Cinzel', serif",
                 color: "var(--ice)",
-                fontSize: "0.95rem",
+                fontSize: "var(--fs-body)",
                 letterSpacing: "0.06em",
                 marginBottom: 10,
                 lineHeight: 1.4,
@@ -103,7 +103,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             <div
               style={{
                 color: "var(--text)",
-                fontSize: "0.9rem",
+                fontSize: "var(--fs-sm)",
                 lineHeight: 1.65,
               }}
             >

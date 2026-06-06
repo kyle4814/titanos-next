@@ -19,7 +19,7 @@ export default function NotFound() {
         style={{
           fontFamily: "'Cinzel', serif",
           color: "var(--gold)",
-          fontSize: "clamp(1.8rem, 5vw, 2.8rem)",
+          fontSize: "var(--fs-h2)",
           fontWeight: 700,
           letterSpacing: "0.08em",
           marginBottom: 16,
@@ -30,7 +30,7 @@ export default function NotFound() {
       <p
         style={{
           color: "var(--dim)",
-          fontSize: "0.95rem",
+          fontSize: "var(--fs-body)",
           maxWidth: 480,
           marginBottom: 32,
           lineHeight: 1.65,
@@ -45,7 +45,7 @@ export default function NotFound() {
           color: "var(--gold)",
           fontFamily: "'Cinzel', serif",
           letterSpacing: "0.08em",
-          fontSize: "0.85rem",
+          fontSize: "var(--fs-sm)",
           padding: "14px 28px",
           border: "1px solid var(--gold)",
           borderRadius: 3,

@@ -37,7 +37,7 @@ export default function FaqItem({
           padding: "18px 22px",
           color: "var(--ice)",
           fontWeight: 500,
-          fontSize: "0.98rem",
+          fontSize: "var(--fs-body)",
           background: "transparent",
           border: 0,
           cursor: "pointer",
@@ -57,7 +57,7 @@ export default function FaqItem({
           style={{
             fontFamily: "'Cinzel', serif",
             color: "var(--gold)",
-            fontSize: "1.3rem",
+            fontSize: "var(--fs-h4)",
             marginLeft: 14,
             flexShrink: 0,
             display: "inline-block",
@@ -78,7 +78,7 @@ export default function FaqItem({
             style={{
               padding: "0 22px 22px",
               color: "var(--text)",
-              fontSize: "0.92rem",
+              fontSize: "var(--fs-body)",
               lineHeight: 1.75,
             }}
           >

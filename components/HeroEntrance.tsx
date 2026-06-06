@@ -125,7 +125,7 @@ export default function HeroEntrance({
             fontWeight: 900,
             color: "var(--gold)",
             letterSpacing: "0.08em",
-            fontSize: "clamp(2.8rem, 9vw, 5.5rem)",
+            fontSize: "var(--fs-display)",
             lineHeight: 1,
             marginBottom: 18,
             position: "relative",
@@ -153,7 +153,7 @@ export default function HeroEntrance({
           style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 300,
-            fontSize: "clamp(1.05rem, 2.5vw, 1.4rem)",
+            fontSize: "var(--fs-h4)",
             color: "var(--ice)",
             maxWidth: 760,
             margin: "0 auto 18px",
@@ -169,7 +169,7 @@ export default function HeroEntrance({
           style={{
             display: "inline-block",
             fontFamily: "'Inter', sans-serif",
-            fontSize: "0.86rem",
+            fontSize: "var(--fs-sm)",
             color: "var(--dim)",
             maxWidth: 760,
             margin: "12px auto 0",
