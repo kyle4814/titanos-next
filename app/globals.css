@@ -181,6 +181,16 @@ a {
   mix-blend-mode: normal;
 }
 
+/* MOT-01 — kill the route fade/scale animation under reduce.
+   The blanket * { animation-duration: 0.01ms } rule above doesn't reach
+   the ::view-transition pseudo tree, so name it explicitly. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    Utility helpers
    ═══════════════════════════════════════════════════════════════ */

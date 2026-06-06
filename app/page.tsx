@@ -4,6 +4,7 @@ import SectionReveal from "@/components/SectionReveal";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import DeadlineCounter from "@/components/DeadlineCounter";
+import HeroScrollCue from "@/components/HeroScrollCue";
 import { STATS, STAT_LABELS } from "@/lib/stats";
 
 import type { Offer } from "@/components/OfferCard";
@@ -91,6 +92,9 @@ export default function Home() {
           </>
         }
       />
+
+      {/* MOT-06 — gold chevron scroll cue, suppresses on scroll>50 + reduce */}
+      <HeroScrollCue />
 
       {/* Sub-tagline copy from the static site */}
       <section style={{ padding: "0 20px 60px", position: "relative", zIndex: 2 }}>
