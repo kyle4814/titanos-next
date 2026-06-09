@@ -43,6 +43,8 @@ export default function OfferCard(props: Offer) {
   const reduce = useReducedMotion();
   const cardRef = useRef<HTMLElement | null>(null);
   const [onScreen, setOnScreen] = useState(false);
+  // W4 Pillar 6 — 3D tilt based on cursor position relative to card centre.
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
 
   // MOT-03 — IntersectionObserver pauses idle loops when off-screen.
   useEffect(() => {
@@ -62,6 +64,17 @@ export default function OfferCard(props: Offer) {
     return () => io.disconnect();
   }, [reduce]);
 
+  // W4 Pillar 6 — 3D tilt handler. Cursor X/Y inside the card maps to
+  // rotateY/rotateX ±4deg / ±2deg.
+  const onCardMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+    const ny = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ ry: nx * 8, rx: -ny * 4 });
+  };
+  const onCardLeave = () => setTilt({ rx: 0, ry: 0 });
+
   return (
     <motion.article
       ref={cardRef as never}
@@ -71,7 +84,8 @@ export default function OfferCard(props: Offer) {
       animate={reduce ? "visible" : undefined}
       whileInView={reduce ? undefined : "visible"}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      whileHover={reduce ? undefined : { y: -2, borderColor: "var(--gold)" }}
+      onMouseMove={onCardMove}
+      onMouseLeave={onCardLeave}
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
@@ -81,7 +95,15 @@ export default function OfferCard(props: Offer) {
         flexDirection: "column",
         position: "relative",
         zIndex: 1,
-        transition: "border-color 0.2s, transform 0.2s",
+        // 3D tilt + soft shadow that tilts with the card.
+        transform: reduce
+          ? undefined
+          : `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+        transformStyle: "preserve-3d",
+        transition: "border-color 0.2s, transform 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: reduce
+          ? "none"
+          : `${-tilt.ry * 2}px ${tilt.rx * 2}px 28px rgb(var(--gold-rgb) / 0.08)`,
       }}
     >
       <CornerBrackets />

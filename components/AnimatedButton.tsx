@@ -85,6 +85,8 @@ function PrimaryCTA({
   const [hovered, setHovered] = useState(false);
   const [flashing, setFlashing] = useState(false);
   const [opening, setOpening] = useState(false);
+  // W4 Pillar 6 — magnetic pull (translate toward cursor within 80px)
+  const [magnet, setMagnet] = useState({ x: 0, y: 0 });
   const sweepCtl = useAnimationControls();
   const scaleCtl = useAnimationControls();
 
@@ -104,13 +106,22 @@ function PrimaryCTA({
       const r = el.getBoundingClientRect();
       const cx = r.left + r.width / 2;
       const cy = r.top + r.height / 2;
-      const d = Math.hypot(e.clientX - cx, e.clientY - cy);
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const d = Math.hypot(dx, dy);
       const within = d < Math.max(r.width, r.height) / 2 + 80;
       setProximityActive(within);
+      // Magnetic pull: scale 0 at edge of detection, max 8px at center.
+      if (within) {
+        const norm = Math.max(0, 1 - d / 120);
+        setMagnet({ x: dx * 0.12 * norm, y: dy * 0.12 * norm });
+      } else if (magnet.x !== 0 || magnet.y !== 0) {
+        setMagnet({ x: 0, y: 0 });
+      }
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, [reduce]);
+  }, [reduce, magnet.x, magnet.y]);
 
   // sweep fill on hover enter / leave (skipped on reduce)
   useEffect(() => {
@@ -165,16 +176,20 @@ function PrimaryCTA({
     minHeight: 48,
     borderRadius: "var(--radius-sm)",
     border: `${proximityActive ? 1.5 : 1}px solid var(--gold)`,
-    color: hovered ? "var(--black)" : "var(--gold)",
+    color: hovered ? "var(--vault-black)" : "var(--gold)",
     fontFamily: "var(--font-display), Georgia, serif",
-    fontWeight: 700,
+    fontWeight: 400,
+    fontStyle: "italic",
     fontSize: "var(--fs-sm)",
     letterSpacing: "0.08em",
     background: "transparent",
     cursor: "pointer",
-    transition: "color 250ms ease, border-width 200ms ease, filter 200ms ease",
+    // Magnetic translate + colour/border/filter transitions.
+    transition:
+      "color 250ms ease, border-width 200ms ease, filter 200ms ease, transform 220ms cubic-bezier(0.4, 0, 0.2, 1)",
+    transform: reduce ? undefined : `translate3d(${magnet.x}px, ${magnet.y}px, 0)`,
     filter: proximityActive
-      ? "drop-shadow(0 0 8px rgb(var(--gold-rgb) / 0.3))"
+      ? "drop-shadow(0 0 12px rgb(var(--gold-rgb) / 0.45))"
       : "none",
     textTransform: "uppercase",
     textDecoration: "none",

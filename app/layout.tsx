@@ -7,6 +7,7 @@ import VaultFrame from "@/components/VaultFrame";
 import VaultBackground from "@/components/VaultBackground";
 import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
+import EasterEgg from "@/components/EasterEgg";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -117,6 +118,17 @@ export default function RootLayout({
         <meta name="referrer" content="strict-origin-when-cross-origin" />
       </head>
       <body>
+        {/*
+          ▄▄▄█████▓ ██▓▄▄▄█████▓ ▄▄▄       ███▄    █  ▒█████    ██████
+          ▓  ██▒ ▓▒▓██▒▓  ██▒ ▓▒▒████▄     ██ ▀█   █ ▒██▒  ██▒▒██    ▒
+          ▒ ▓██░ ▒░▒██▒▒ ▓██░ ▒░▒██  ▀█▄  ▓██  ▀█ ██▒▒██░  ██▒░ ▓██▄
+          ░ ▓██▓ ░ ░██░░ ▓██▓ ░ ░██▄▄▄▄██ ▓██▒  ▐▌██▒▒██   ██░  ▒   ██▒
+            ▒██▒ ░ ░██░  ▒██▒ ░  ▓█   ▓██▒▒██░   ▓██░░ ████▓▒░▒██████▒▒
+
+          Kyle Deligny · kyle@titanos.tech · ABN 34 318 502 254
+          Built with Claude Code. Reading this means you're already curious.
+          Email if you want to talk.
+        */}
         {/* SEO-06: Organisation JSON-LD on every page — page.tsx should drop its duplicate copy */}
         <script
           type="application/ld+json"
@@ -157,6 +169,7 @@ export default function RootLayout({
         <span aria-hidden="true" className="vault-edge-thread" />
         {/* W4 per-page mood swap */}
         <PageMood />
+        <EasterEgg />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
           {children}
