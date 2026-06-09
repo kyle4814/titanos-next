@@ -104,7 +104,7 @@ function H2({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontFamily: "'Cinzel', serif",
+        fontFamily: "var(--font-display), Georgia, serif",
         color: "var(--gold)",
         fontSize: "var(--fs-h3)",
         fontWeight: 700,

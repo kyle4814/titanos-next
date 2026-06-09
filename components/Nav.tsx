@@ -81,7 +81,7 @@ export default function Nav() {
           href="/"
           aria-label="TITANOS home"
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontWeight: 700,
             letterSpacing: "0.1em",
@@ -128,7 +128,7 @@ function NavLink({
         position: "relative",
         display: "inline-block",
         fontSize: "var(--fs-sm)",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "var(--font-body), system-ui, sans-serif",
       }}
     >
       {label}

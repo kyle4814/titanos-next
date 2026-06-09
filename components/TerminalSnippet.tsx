@@ -37,7 +37,7 @@ export default function TerminalSnippet() {
       <div
         aria-hidden="true"
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold-dim)",
           fontSize: "var(--fs-xs)",
           letterSpacing: "0.16em",
@@ -70,7 +70,7 @@ export default function TerminalSnippet() {
         style={{
           marginTop: 12,
           color: "var(--dim)",
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           fontSize: "var(--fs-xs)",
           lineHeight: 1.6,
         }}

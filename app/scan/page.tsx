@@ -406,7 +406,7 @@ export default function ScanPage() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             fontWeight: 700,
@@ -455,7 +455,7 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
     >
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-lg)",
           letterSpacing: "0.06em",
@@ -483,7 +483,7 @@ function CardCol({ title, items }: { title: string; items: string[] }) {
                 position: "absolute",
                 left: 0,
                 color: "var(--gold)",
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
               }}
             >
               ›
@@ -515,7 +515,7 @@ function MiniCard({ title, children }: { title: string; children: React.ReactNod
     >
       <h4
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-body)",
           letterSpacing: "0.06em",
@@ -551,7 +551,7 @@ function BridgeCard({
     >
       <h4
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-body)",
           letterSpacing: "0.06em",

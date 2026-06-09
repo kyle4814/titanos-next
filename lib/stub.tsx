@@ -21,7 +21,7 @@ export function stubPage(name: string) {
     >
       <h1
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h2)",
           fontWeight: 700,
@@ -53,7 +53,7 @@ export function stubPage(name: string) {
         href="/"
         style={{
           color: "var(--gold)",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           letterSpacing: "0.06em",
           fontSize: "var(--fs-sm)",
           padding: "12px 24px",

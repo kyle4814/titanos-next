@@ -59,7 +59,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--gold)",
               fontSize: "var(--fs-h3)",
               letterSpacing: "0.06em",
@@ -97,7 +97,7 @@ export default function AboutPage() {
 
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--gold)",
               fontSize: "var(--fs-h3)",
               letterSpacing: "0.06em",
@@ -187,7 +187,7 @@ export default function AboutPage() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             letterSpacing: "0.06em",

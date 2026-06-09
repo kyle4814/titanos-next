@@ -46,7 +46,7 @@ export default function FaqItem({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           letterSpacing: 0,
         }}
       >
@@ -56,7 +56,7 @@ export default function FaqItem({
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: reduce ? 0 : 0.2 }}
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h4)",
             marginLeft: 14,

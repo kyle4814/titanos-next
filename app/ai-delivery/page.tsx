@@ -142,7 +142,7 @@ export default function AiDeliveryPage() {
               >
                 <h4
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--gold)",
                     fontSize: "var(--fs-body)",
                     letterSpacing: "0.06em",
@@ -194,7 +194,7 @@ export default function AiDeliveryPage() {
                     fontWeight: 600,
                     marginBottom: 10,
                     lineHeight: 1.35,
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "var(--font-body), system-ui, sans-serif",
                     letterSpacing: 0,
                   }}
                 >
@@ -235,7 +235,7 @@ export default function AiDeliveryPage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--gold)",
                     fontSize: "var(--fs-h3)",
                     letterSpacing: "0.05em",
@@ -248,7 +248,7 @@ export default function AiDeliveryPage() {
                 </div>
                 <h3
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--gold)",
                     fontSize: "var(--fs-body)",
                     letterSpacing: "0.08em",
@@ -288,7 +288,7 @@ export default function AiDeliveryPage() {
             >
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--ice)",
                   fontSize: "var(--fs-xs)",
                   letterSpacing: "0.18em",
@@ -300,7 +300,7 @@ export default function AiDeliveryPage() {
               </div>
               <h3
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h3)",
                   letterSpacing: "0.04em",
@@ -313,7 +313,7 @@ export default function AiDeliveryPage() {
               </h3>
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h2)",
                   fontWeight: 700,
@@ -404,21 +404,21 @@ export default function AiDeliveryPage() {
           }}
         >
           <div>
-            <strong style={{ color: "var(--gold)", fontFamily: "'Cinzel', serif" }}>
+            <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
               ABN 34 318 502 254
             </strong>{" "}
             · AU jurisdiction · single-operator practice
           </div>
           <div>
             Powered by{" "}
-            <strong style={{ color: "var(--gold)", fontFamily: "'Cinzel', serif" }}>
+            <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
               Claude Code
             </strong>{" "}
             — Anthropic’s flagship reasoning model, AI-native delivery end-to-end
           </div>
           <div>
             Sister capability{" "}
-            <strong style={{ color: "var(--gold)", fontFamily: "'Cinzel', serif" }}>
+            <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
               Titanos Security
             </strong>{" "}
             runs 1,700+ external scans this month
@@ -485,7 +485,7 @@ export default function AiDeliveryPage() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             fontWeight: 700,

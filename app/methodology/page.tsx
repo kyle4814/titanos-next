@@ -305,7 +305,7 @@ function ToolItem({ children }: { children: React.ReactNode }) {
           position: "absolute",
           left: 0,
           color: "var(--gold)",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
         }}
       >
         ›
@@ -344,7 +344,7 @@ function SimpleList({ items }: { items: string[] }) {
               position: "absolute",
               left: 0,
               color: "var(--gold)",
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
             }}
           >
             ›

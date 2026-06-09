@@ -61,7 +61,7 @@ export default function MirrorLists({
         >
           <h3
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--gold)",
               fontSize: "var(--fs-body)",
               letterSpacing: "0.08em",
@@ -119,7 +119,7 @@ export default function MirrorLists({
         >
           <h3
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--ice)",
               fontSize: "var(--fs-body)",
               letterSpacing: "0.08em",

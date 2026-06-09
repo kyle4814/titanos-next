@@ -98,7 +98,7 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--ice)",
           fontSize: "var(--fs-sm)",
           letterSpacing: "0.16em",
@@ -111,7 +111,7 @@ export default function OfferCard(props: Offer) {
 
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h4)",
           letterSpacing: "0.04em",
@@ -124,7 +124,7 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h3)",
           fontWeight: 700,
@@ -182,7 +182,7 @@ export default function OfferCard(props: Offer) {
                 position: "absolute",
                 left: 0,
                 color: "var(--gold)",
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
               }}
             >
               ›

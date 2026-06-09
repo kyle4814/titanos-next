@@ -100,7 +100,7 @@ export default function Home() {
       <section style={{ padding: "0 20px 60px", position: "relative", zIndex: 2 }}>
         <p
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-body), system-ui, sans-serif",
             fontWeight: 300,
             fontSize: "var(--fs-body)",
             color: "var(--dim)",
@@ -125,7 +125,7 @@ export default function Home() {
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
                 fontWeight: 700,
                 fontSize: "var(--fs-h2)",
                 color: "var(--gold)",
@@ -242,7 +242,7 @@ export default function Home() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             fontWeight: 700,
@@ -291,7 +291,7 @@ export default function Home() {
               style={{
                 cursor: "pointer",
                 textAlign: "center",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
                 fontWeight: 500,
                 fontSize: "var(--fs-body)",
                 color: "var(--ice)",
@@ -306,7 +306,7 @@ export default function Home() {
               <div style={{ textAlign: "center", marginBottom: 36 }}>
                 <h2
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     fontWeight: 700,
                     fontSize: "var(--fs-h2)",
                     color: "var(--gold)",
@@ -386,7 +386,7 @@ function TrustItem({
         style={{
           display: "block",
           color: "var(--gold)",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           fontSize: "var(--fs-h3)",
           marginBottom: 4,
           letterSpacing: "0.04em",
@@ -422,7 +422,7 @@ function MethodCard({
           fontSize: "var(--fs-body)",
           fontWeight: 600,
           marginBottom: 8,
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           letterSpacing: 0,
         }}
       >

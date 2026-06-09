@@ -166,7 +166,7 @@ function PrimaryCTA({
     borderRadius: "var(--radius-sm)",
     border: `${proximityActive ? 1.5 : 1}px solid var(--gold)`,
     color: hovered ? "var(--black)" : "var(--gold)",
-    fontFamily: "'Cinzel', serif",
+    fontFamily: "var(--font-display), Georgia, serif",
     fontWeight: 700,
     fontSize: "var(--fs-sm)",
     letterSpacing: "0.08em",
@@ -303,7 +303,7 @@ function SecondaryLink({
         alignItems: "center",
         gap: 6,
         color: "var(--ice)",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "var(--font-body), system-ui, sans-serif",
         fontSize: "var(--fs-sm)",
         letterSpacing: "0.02em",
       }}

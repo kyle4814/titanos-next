@@ -174,7 +174,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           fontWeight: 700,
           fontSize: "var(--fs-lg)",
           letterSpacing: "0.04em",
@@ -187,7 +187,7 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <h4
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-body)",
             letterSpacing: "0.08em",

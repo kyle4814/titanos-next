@@ -139,7 +139,7 @@ export default function OurScanPage() {
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)" }}>
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--gold)",
               fontSize: "var(--fs-h2)",
               letterSpacing: "0.06em",
@@ -171,7 +171,7 @@ export default function OurScanPage() {
               >
                 <span
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: SEV_COLOR[f.severity],
                     fontSize: "var(--fs-xs)",
                     letterSpacing: "0.12em",
@@ -184,7 +184,7 @@ export default function OurScanPage() {
                 </span>
                 <span
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: STATUS_COLOR[f.status],
                     fontSize: "var(--fs-xs)",
                     letterSpacing: "0.12em",
@@ -197,7 +197,7 @@ export default function OurScanPage() {
                 </span>
                 <h3
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--ice)",
                     fontSize: "var(--fs-lg)",
                     letterSpacing: "0.04em",
@@ -240,7 +240,7 @@ export default function OurScanPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", textAlign: "center" }}>
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             letterSpacing: "0.06em",

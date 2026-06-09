@@ -145,7 +145,7 @@ export default function HeroEntrance({
           initial={false}
           style={{
             display: "inline-block",
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             fontWeight: 900,
             color: "var(--gold)",
             letterSpacing: "0.08em",
@@ -175,7 +175,7 @@ export default function HeroEntrance({
           animate={taglineCtl}
           initial={false}
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-body), system-ui, sans-serif",
             fontWeight: 300,
             fontSize: "var(--fs-h4)",
             color: "var(--ice)",
@@ -196,7 +196,7 @@ export default function HeroEntrance({
           initial={false}
           style={{
             display: "inline-block",
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-body), system-ui, sans-serif",
             fontSize: "var(--fs-sm)",
             color: "var(--dim)",
             maxWidth: "var(--maxw-prose)",

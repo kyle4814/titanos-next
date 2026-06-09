@@ -281,7 +281,7 @@ export default function CompliancePage() {
             >
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--ice)",
                   fontSize: "var(--fs-xs)",
                   letterSpacing: "0.18em",
@@ -293,7 +293,7 @@ export default function CompliancePage() {
               </div>
               <h3
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h3)",
                   letterSpacing: "0.04em",
@@ -317,7 +317,7 @@ export default function CompliancePage() {
               </p>
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h2)",
                   fontWeight: 700,
@@ -519,7 +519,7 @@ export default function CompliancePage() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             fontWeight: 700,
@@ -605,7 +605,7 @@ function TimelineRow({
       <span aria-hidden="true" style={dotStyle} />
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: state === "coming" ? "var(--dim)" : "var(--gold)",
           fontSize: "var(--fs-sm)",
           letterSpacing: "0.06em",
@@ -620,7 +620,7 @@ function TimelineRow({
           fontSize: "var(--fs-body)",
           fontWeight: 600,
           marginBottom: 6,
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           letterSpacing: 0,
         }}
       >
@@ -655,7 +655,7 @@ function SplitCol({
     >
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: accent === "gold" ? "var(--gold)" : "var(--ice)",
           fontSize: "var(--fs-lg)",
           letterSpacing: "0.06em",

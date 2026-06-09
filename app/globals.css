@@ -1,36 +1,54 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════
-   TITANOS — THE VAULT design tokens
+   TITANOS — THE VAULT design tokens (W4 refinement)
    ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* ── COLOUR ─────────────────────────────────────────────────────
-     --gold-rgb is the canonical gold; everywhere a translucent gold
-     was previously written as rgba(212,175,55,…) now reads
-     rgb(var(--gold-rgb) / <alpha>). --gold itself is kept for the
-     fully-opaque case so existing var(--gold) references keep working.
-     ─────────────────────────────────────────────────────────────── */
-  --black: #000000;
-  --vault-bg: #0a0a0a;
+  /* ── CANVAS (W4 Pillar 2) ───────────────────────────────────────
+     5% red+brown undertone reads "leather + ink" instead of OLED
+     default. Imperceptible side-by-side with #000 but cumulatively
+     distinguishes the site from every Lovable / v0 build. */
+  --vault-black: #0A0707;
+  --vault-deep:  #050303;
+  --vault-warm:  #1A1310;   /* card surfaces, warm undertone */
+  --vault-cool:  #0F1418;   /* steel undertone for /scan + /ai-delivery */
+
+  /* Compat alias — anything still referencing --black or --vault-bg
+     keeps working but resolves to the new warm canvas. */
+  --black: var(--vault-black);
+  --vault-bg: var(--vault-black);
+
+  /* ── GOLD TRITONE (W4 Pillar 2) ─────────────────────────────────
+     One gold is a tell. Three golds is a system. */
+  --gold-warm: #E8B855;    /* sunset gold — for warmth moments */
+  --gold:      #D4AF37;    /* primary accent — kept (back-compat) */
+  --gold-mid:  #D4AF37;    /* explicit alias */
+  --gold-cool: #C9A03A;    /* deep gold — shadows + dim states */
+  --gold-spec: #FFF0BE;    /* specular highlight — used SPARINGLY */
   --gold-rgb: 212 175 55;
-  --gold: #D4AF37;
   --gold-dim: #8B7225;
   --gold-bright: #F5D575;
-  --ice: #B9F2FF;
-  --card: #121212;
+
+  /* ── ACCENT SHARDS (W4 Pillar 2) ────────────────────────────────
+     One sharp chromatic accent per page mood. --ember used GLOBALLY
+     only for RESOLVED / urgency. The other two are per-page seeds
+     for future per-section moments. */
+  --ember:   #FF5A3A;
+  --steel:   #6B8FA8;
+  --oxblood: #5C1F1A;
+
+  /* ── INK ────────────────────────────────────────────────────────  */
+  --ice:    #B9F2FF;
+  --card:   var(--vault-warm);
   --border: #1A1A1A;
-  --text: #E0E0E0;
-  --dim: #777777;
-  /* Status colours (AES-04). Tailwind green-400 / red-400 kept; the
-     audit-suggested on-brand variants are easy swaps now they're
-     centralised. */
-  --ok: #4ade80;
+  --text:   #E0E0E0;
+  --dim:    #888888;
+
+  /* Status — A11Y palette retained */
+  --ok:   #4ade80;
   --warn: #f87171;
 
-  /* ── SPACING ────────────────────────────────────────────────────
-     Section padding lives on --space-16/20/30 per AES-01 (tight /
-     standard / hero). The remaining --space-* values stay declared
-     for future use by component-internal spacing. */
+  /* ── SPACING ─────────────────────────────────────────────────── */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -42,12 +60,7 @@
   --space-20: 80px;
   --space-30: 120px;
 
-  /* ── TYPE SCALE (AES-02) ────────────────────────────────────────
-     9 tokens, nearest-match policy. Cinzel sub-spec (audit AES-09)
-     sites (OfferCard tag 0.72rem, DeadlineCounter 0.78rem,
-     AnimatedButton 0.82rem) all map UP to --fs-sm so Cinzel stays
-     ≥0.85rem everywhere. Step-numerals 1.8/2.0/2.2rem map DOWN to
-     --fs-h3 1.5rem — audit-intended consolidation. */
+  /* ── TYPE SCALE (AES-02) ─────────────────────────────────────── */
   --fs-xs: 0.78rem;
   --fs-sm: 0.86rem;
   --fs-body: 0.95rem;
@@ -58,36 +71,59 @@
   --fs-h1: clamp(2.2rem, 5.5vw, 3.6rem);
   --fs-display: clamp(2.8rem, 9vw, 5.5rem);
 
-  /* ── RADIUS (AES-06) — 3 tokens collapse 8→3 ──────────────────── */
+  /* ── RADIUS ─────────────────────────────────────────────────── */
   --radius-sm: 3px;
   --radius-md: 6px;
   --radius-lg: 24px;
 
-  /* ── MAX-WIDTH (AES-17) — 4 page-width tokens + 1 micro footnote
-     exception. The 4 main tokens cover content; --maxw-micro 400 is
-     the dedicated tight container for in-button footnotes (refund /
-     response-time microcopy) that don't belong to the page-width
-     hierarchy. */
+  /* ── MAX-WIDTH ─────────────────────────────────────────────── */
   --maxw-prose: 680px;
   --maxw-content: 820px;
   --maxw-wide: 1020px;
   --maxw-full: 1080px;
   --maxw-micro: 400px;
+
+  /* ── TYPOGRAPHY (W4 Pillar 1)
+     The --font-display / --font-body / --font-mono values are injected
+     into <html> by next/font (see app/layout.tsx). Consumers always
+     pair them with a fallback stack: var(--font-display), Georgia,
+     serif — never just var(--font-display) alone.                  */
 }
 
 @theme inline {
   --color-black: var(--black);
   --color-vault-bg: var(--vault-bg);
+  --color-vault-warm: var(--vault-warm);
+  --color-vault-cool: var(--vault-cool);
   --color-gold: var(--gold);
+  --color-gold-warm: var(--gold-warm);
+  --color-gold-cool: var(--gold-cool);
   --color-gold-dim: var(--gold-dim);
   --color-gold-bright: var(--gold-bright);
+  --color-ember: var(--ember);
+  --color-steel: var(--steel);
+  --color-oxblood: var(--oxblood);
   --color-ice: var(--ice);
   --color-card: var(--card);
   --color-border: var(--border);
   --color-text: var(--text);
   --color-dim: var(--dim);
-  --font-display: 'Cinzel', serif;
-  --font-body: 'Inter', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PER-PAGE MOOD (W4 Pillar 2)
+   data-page on <body> swaps the secondary accent shard.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="scan"],
+body[data-page="ai-delivery"] {
+  --accent: var(--steel);
+  --card: var(--vault-cool);
+}
+body[data-page="compliance"] {
+  --accent: var(--oxblood);
+}
+body[data-page="our-scan"] {
+  --accent: var(--ember);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -103,47 +139,102 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--vault-bg);
+  background: var(--vault-black);
 }
 
 body {
-  /* AES-03 — consume --vault-bg (#0a0a0a). 10-step lift off pure black
-     gives the page a faint depth that reads as "deliberate dark" rather
-     than terminal-emulator black. The change is imperceptible side-by-
-     side with --black but cumulatively distinguishes the site from
-     defaults. */
-  background: var(--vault-bg);
+  background: var(--vault-black);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.7;
-  /* AES-10 — Inter body 300 was too thin on dark; 400 lands legible
-     at 14-15px sizes without losing the airy feel. The remaining
-     thin/300 usages are localised display copy. */
   font-weight: 400;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   W4 Pillar 3 — BACKGROUND LAYERS 0-4
+   Layered behind everything. Layer 5 (WebGL gold dust) is opt-in
+   per-page via the <VaultDustField /> component.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Layer 1 — Film grain. Always on. 7% opacity, blend overlay. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("/noise.png");
+  background-size: 256px 256px;
+  background-repeat: repeat;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+}
+
+/* Layer 2 — Blueprint lattice. 48px grid, 3% gold opacity. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgb(var(--gold-rgb) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--gold-rgb) / 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+/* Layer 3 + 4 live in <VaultBackground />.
+   It mounts in layout.tsx and renders:
+     - 3 drifting radial-gradient blobs (conic mesh)
+     - A specular gold sweep every 8s
+   Both gated on prefers-reduced-motion. */
+
+/* Make sure main content sits ABOVE the background layers */
+main {
+  position: relative;
+  z-index: 2;
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-track { background: var(--vault-deep); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
 
 ::selection {
   background: var(--gold);
-  color: var(--black);
+  color: var(--vault-black);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Typography
+   Typography (W4 Pillar 1)
    ═══════════════════════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   color: var(--gold);
+}
+
+/* The wordmark moment — display serif at 300 italic = editorial luxury */
+.font-wordmark {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+/* Eyebrow / label / technical-microcopy */
+.font-mono {
+  font-family: var(--font-mono), "SF Mono", Menlo, monospace;
+  font-weight: 400;
+  letter-spacing: 0.06em;
 }
 
 a {
@@ -153,7 +244,51 @@ a {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   View transitions (between routes)
+   W4 Pillar 3 Layer 4 — Specular gold sweep (8s loop)
+   A single diagonal light-ray sweeps top-left → bottom-right every
+   8 seconds. ~4% opacity. The reason buyers can't articulate why
+   the site feels alive.
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes vault-specular-sweep {
+  0% {
+    transform: translate(-100%, -100%) rotate(-25deg);
+    opacity: 0;
+  }
+  5% { opacity: 0.04; }
+  35% {
+    transform: translate(200%, 200%) rotate(-25deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(200%, 200%) rotate(-25deg);
+    opacity: 0;
+  }
+}
+
+.vault-specular {
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    transparent 40%,
+    rgb(var(--gold-rgb) / 0.6) 50%,
+    transparent 60%
+  );
+  width: 60vw;
+  height: 200vh;
+  animation: vault-specular-sweep 8s linear infinite;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-specular { display: none; }
+  body::before, body::after { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   View transitions (between routes) — vault-door sweep (W4 Pillar 6)
    ═══════════════════════════════════════════════════════════════ */
 @view-transition {
   navigation: auto;
@@ -181,9 +316,6 @@ a {
   mix-blend-mode: normal;
 }
 
-/* MOT-01 — kill the route fade/scale animation under reduce.
-   The blanket * { animation-duration: 0.01ms } rule above doesn't reach
-   the ::view-transition pseudo tree, so name it explicitly. */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
@@ -207,13 +339,49 @@ a {
   margin: 0 20px;
 }
 
-/* ── .grid-auto-cards (AES-18) ──────────────────────────────────
-   The repeat(auto-fit, minmax(280px, 1fr)) pattern appeared 9× inline
-   across the page tree. Now declared once. Apply via className; gap
-   stays per-section via inline style as before. */
 .grid-auto-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* W4 Pillar 5 — vault-edge gold filament, the connecting tissue.
+   1px gold line down the left edge of every page, 30% opacity.
+   Shimmer travels down its length every 12 seconds. */
+@keyframes vault-edge-shimmer {
+  0%, 70% { background-position: 0 -100%; opacity: 0.35; }
+  85% { opacity: 0.7; }
+  100% { background-position: 0 200%; opacity: 0.35; }
+}
+
+.vault-edge-thread {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 12px;
+  width: 1px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(var(--gold-rgb) / 0.6) 45%,
+      var(--gold-spec) 50%,
+      rgb(var(--gold-rgb) / 0.6) 55%,
+      transparent 100%
+    ),
+    rgb(var(--gold-rgb) / 0.18);
+  background-size: 1px 30%, 1px 100%;
+  background-repeat: no-repeat, repeat-y;
+  animation: vault-edge-shimmer 12s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .vault-edge-thread { left: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-edge-thread { animation: none; background: rgb(var(--gold-rgb) / 0.2); }
 }
 
 /* Reduced motion */
@@ -227,7 +395,7 @@ a {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   WCAG 2.4.7 — visible focus indicator, on-brand (MOT-07)
+   WCAG 2.4.7 — visible focus indicator (MOT-07)
    ═══════════════════════════════════════════════════════════════ */
 a:focus-visible,
 button:focus-visible,
@@ -245,12 +413,7 @@ button:focus-visible,
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   Skip-link (A11Y-04 helper)
-   Agent A: use class="skip-link" on the skip-nav <a> in layout.tsx.
-   Tailwind v4 sr-only exists but focus:not-sr-only variant may not
-   resolve — use this class instead to be safe.
-   ═══════════════════════════════════════════════════════════════ */
+/* Skip-link */
 .skip-link {
   position: absolute;
   top: -9999px;
@@ -262,18 +425,14 @@ button:focus-visible,
   left: 8px;
   z-index: 50;
   padding: 8px 16px;
-  background: var(--black);
+  background: var(--vault-black);
   color: var(--gold);
   border: 1px solid var(--gold);
   border-radius: 4px;
   text-decoration: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FAQ CSS-only collapse (E2 / COPY-10)
-   Answers always in DOM for SSR/SEO; height animated via
-   grid-template-rows trick — no JS-gated conditional render.
-   ═══════════════════════════════════════════════════════════════ */
+/* FAQ collapse */
 .faq-collapse {
   display: grid;
   grid-template-rows: 0fr;
@@ -291,4 +450,46 @@ button:focus-visible,
 }
 @media (prefers-reduced-motion: reduce) {
   .faq-collapse { transition: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT (W4 Pillar 7 #10) — Titanos letterhead memo
+   When a buyer prints any page, it renders as a single-page memo
+   with brand chrome. Compliance buyers print things.
+   ═══════════════════════════════════════════════════════════════ */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: Georgia, serif;
+  }
+  body::before, body::after,
+  .vault-edge-thread, .vault-specular {
+    display: none !important;
+  }
+  nav, footer, [data-no-print] {
+    display: none !important;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    font-family: Georgia, serif;
+  }
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+  main {
+    max-width: 7in;
+    margin: 0 auto;
+  }
+  main::before {
+    content: "TITANOS · Kyle Deligny · ABN 34 318 502 254 · kyle@titanos.tech";
+    display: block;
+    border-bottom: 2px solid black;
+    padding-bottom: 0.3in;
+    margin-bottom: 0.3in;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
 }

@@ -13,7 +13,7 @@ export default function SectionHeading({
     <div style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
       <h2
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           fontWeight: 700,
           fontSize: "var(--fs-h2)",
           color: "var(--gold)",

@@ -17,7 +17,7 @@ export default function NotFound() {
     >
       <h1
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h2)",
           fontWeight: 700,
@@ -43,7 +43,7 @@ export default function NotFound() {
         aria-label="Return to titanos.tech home"
         style={{
           color: "var(--gold)",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           letterSpacing: "0.08em",
           fontSize: "var(--fs-sm)",
           padding: "14px 28px",
