@@ -32,7 +32,16 @@ export default function Footer() {
       }}
     >
       <div className="container-vault">
-        <div style={{ marginBottom: 14 }}>
+        {/* MOB-03 — flex-wrap clean instead of 7 inline links wrapping ragged */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "10px 18px",
+            marginBottom: 18,
+          }}
+        >
           {LINKS.map((l) =>
             l.external ? (
               <a
@@ -40,7 +49,7 @@ export default function Footer() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ margin: "0 12px", color: "var(--dim)" }}
+                style={{ color: "var(--dim)", padding: "4px 2px" }}
               >
                 {l.label}
               </a>
@@ -48,7 +57,7 @@ export default function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                style={{ margin: "0 12px", color: "var(--dim)" }}
+                style={{ color: "var(--dim)", padding: "4px 2px" }}
               >
                 {l.label}
               </Link>

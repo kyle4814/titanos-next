@@ -66,8 +66,17 @@ export default function OfferCard(props: Offer) {
 
   // W4 Pillar 6 — 3D tilt handler. Cursor X/Y inside the card maps to
   // rotateY/rotateX ±4deg / ±2deg.
+  // MOB-10: bail on coarse pointer (mousemove fires unreliably on touch
+  // and the tilt looks broken when the card is being scrolled).
   const onCardMove = (e: React.MouseEvent<HTMLElement>) => {
     if (reduce) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      return;
+    }
     const r = e.currentTarget.getBoundingClientRect();
     const nx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
     const ny = (e.clientY - r.top) / r.height - 0.5;
@@ -78,6 +87,8 @@ export default function OfferCard(props: Offer) {
   return (
     <motion.article
       ref={cardRef as never}
+      className="vault-card-tilt"
+      data-touch="press"
       custom={props.index}
       variants={cardReveal}
       initial={reduce ? false : "hidden"}
@@ -90,7 +101,7 @@ export default function OfferCard(props: Offer) {
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
         borderRadius: "var(--radius-md)",
-        padding: "32px 28px",
+        padding: "clamp(22px, 5vw, 32px) clamp(20px, 4vw, 28px)",
         display: "flex",
         flexDirection: "column",
         position: "relative",

@@ -453,6 +453,42 @@ button:focus-visible,
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   MOBILE POLISH (M-wave) — touch tactility + padding tightening
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 720px) {
+  /* Tighter section padding on phones — desktop --space-30 is too much. */
+  body { font-size: 15.5px; }
+
+  /* Edge thread thinner near the viewport edge */
+  .vault-edge-thread { left: 4px; opacity: 0.5; }
+
+  /* DeadlineCounter pill scales down with the rest */
+  /* (sized inline in component) */
+}
+
+/* Touch press states — any element opting in via [data-touch="press"] */
+[data-touch="press"] {
+  transition: transform 120ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 120ms ease,
+              box-shadow 120ms ease;
+}
+[data-touch="press"]:active {
+  transform: scale(0.97);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 1px rgb(var(--gold-rgb) / 0.2);
+}
+
+/* Coarse-pointer (touch) overrides:
+   - disable hover-only :hover styles that "stick" on touch
+   - kill 3D card tilt + magnetic translate (component-side bails too) */
+@media (hover: none) and (pointer: coarse) {
+  .vault-card-tilt { transform: none !important; box-shadow: none !important; }
+  .magnetic-button { transform: none !important; }
+  /* Use :active for press feedback instead of :hover for stickiness */
+  a:active, button:active { opacity: 0.9; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    PRINT (W4 Pillar 7 #10) — Titanos letterhead memo
    When a buyer prints any page, it renders as a single-page memo
    with brand chrome. Compliance buyers print things.

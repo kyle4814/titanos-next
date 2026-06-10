@@ -25,7 +25,11 @@ import { useEffect, useRef } from "react";
 const TOTAL_MS = 4000;
 const BURST_MS = 1400;
 const DRIFT_MS = 1000;
-const N = 140;
+// Particle count scales with viewport: ~140 on desktop, ~60 on phones.
+// Burst still feels dense at the smaller count because the dispersion
+// area shrinks too — same per-pixel density, half the GPU work.
+const N_DESKTOP = 140;
+const N_MOBILE = 60;
 
 type Particle = {
   x: number;
@@ -66,6 +70,7 @@ export default function HeroDustBurst() {
     const cx = () => canvas.clientWidth / 2;
     const cy = () => canvas.clientHeight * 0.45;
 
+    const N = window.innerWidth < 600 ? N_MOBILE : N_DESKTOP;
     const particles: Particle[] = Array.from({ length: N }, () => {
       const angle = Math.random() * Math.PI * 2;
       const speed = 1.4 + Math.random() * 3.6;

@@ -25,6 +25,7 @@ export default function DeadlineCounter() {
 
   return (
     <span
+      className="deadline-pill"
       style={{
         display: "inline-block",
         marginLeft: 10,
@@ -37,10 +38,17 @@ export default function DeadlineCounter() {
         letterSpacing: "0.06em",
         borderRadius: "var(--radius-lg)",
         verticalAlign: "middle",
+        whiteSpace: "nowrap",
       }}
       aria-live="polite"
     >
-      {days === null ? "—" : `${days} days remaining`}
+      {days === null ? "—" : `${days} days`}
+      <span style={{ marginLeft: 4 }}>remaining</span>
+      <style>{`
+        @media (max-width: 480px) {
+          .deadline-pill { font-size: var(--fs-xs); padding: 2px 8px; margin-left: 6px; }
+        }
+      `}</style>
     </span>
   );
 }

@@ -255,12 +255,15 @@ function PrimaryCTA({
     </>
   );
 
+  const combinedClassName = ["magnetic-button", className].filter(Boolean).join(" ");
+
   if (href) {
     return (
       <a
         ref={ref as React.RefObject<HTMLAnchorElement>}
         href={href}
-        className={className}
+        className={combinedClassName}
+        data-touch="press"
         style={sharedStyle}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -279,7 +282,8 @@ function PrimaryCTA({
   return (
     <button
       ref={ref as React.RefObject<HTMLButtonElement>}
-      className={className}
+      className={combinedClassName}
+      data-touch="press"
       style={sharedStyle}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
