@@ -163,8 +163,9 @@ body {
    per-page via the <VaultDustField /> component.
    ═══════════════════════════════════════════════════════════════ */
 
-/* Layer 1 — Film grain. Always on. Mobile gets stronger opacity because
-   smaller-screen rendering swallows the subtler 0.55 desktop value. */
+/* Layer 1 — Film grain. Same on every device. The previous mobile
+   override bumped opacity 0.55 → 0.75 + switched to screen blend, which
+   turned the whole page into additive grey static. Reverted. */
 body::before {
   content: "";
   position: fixed;
@@ -174,21 +175,12 @@ body::before {
   background-image: url("/noise.png");
   background-size: 256px 256px;
   background-repeat: repeat;
-  opacity: 0.55;
+  opacity: 0.5;
   mix-blend-mode: overlay;
 }
-@media (max-width: 720px) {
-  body::before {
-    opacity: 0.75;
-    /* Some mobile Safari builds silently bail on overlay blend; fall
-       back to normal blend with screen-style additive intent. */
-    mix-blend-mode: screen;
-  }
-}
 
-/* Layer 2 — Blueprint lattice. Desktop 3% gold opacity reads as a barely-
-   there structural grid. Mobile bumps to 5-6% with a tighter 36px cell
-   so the same "ledger" feeling reads on a 393px-wide screen. */
+/* Layer 2 — Blueprint lattice. 48px cells, ~4% gold opacity.
+   Same across viewports — the desktop value reads fine on mobile too. */
 body::after {
   content: "";
   position: fixed;
@@ -196,18 +188,10 @@ body::after {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgb(var(--gold-rgb) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--gold-rgb) / 0.04) 1px, transparent 1px);
+    linear-gradient(rgb(var(--gold-rgb) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--gold-rgb) / 0.045) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: -1px -1px;
-}
-@media (max-width: 720px) {
-  body::after {
-    background-image:
-      linear-gradient(rgb(var(--gold-rgb) / 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--gold-rgb) / 0.07) 1px, transparent 1px);
-    background-size: 36px 36px;
-  }
 }
 
 /* Layer 3 + 4 live in <VaultBackground />.
