@@ -89,6 +89,34 @@ export default function VaultBackground() {
           opacity: 0.05;
           animation: vault-drift-3 72s linear infinite;
         }
+
+        /* Mobile tunings —
+           1. filter: blur(120px) over-taxes mobile GPUs; iOS Safari often
+              silently rasterises the element at very low quality. Drop to
+              60px so it actually renders.
+           2. Bump opacity ~2× because brighter mobile screens + smaller
+              blob area = the subtler desktop values disappear in glare.
+           3. Tighten blob positions so they land WITHIN the viewport at
+              375-430px widths — desktop's -20vmax offsets push them off-
+              screen on phones. */
+        @media (max-width: 720px) {
+          .vault-blob { filter: blur(60px); }
+          .vault-blob-1 {
+            top: -15vmax; left: -15vmax;
+            width: 55vmax; height: 55vmax;
+            opacity: 0.32;
+          }
+          .vault-blob-2 {
+            bottom: -18vmax; right: -15vmax;
+            width: 55vmax; height: 55vmax;
+            opacity: 0.26;
+          }
+          .vault-blob-3 {
+            top: 30vh; left: 20vw;
+            width: 40vmax; height: 40vmax;
+            opacity: 0.1;
+          }
+        }
         @keyframes vault-drift-1 {
           0%   { transform: translate(0, 0) rotate(0deg); }
           50%  { transform: translate(20vw, 15vh) rotate(180deg); }

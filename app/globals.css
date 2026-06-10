@@ -163,7 +163,8 @@ body {
    per-page via the <VaultDustField /> component.
    ═══════════════════════════════════════════════════════════════ */
 
-/* Layer 1 — Film grain. Always on. 7% opacity, blend overlay. */
+/* Layer 1 — Film grain. Always on. Mobile gets stronger opacity because
+   smaller-screen rendering swallows the subtler 0.55 desktop value. */
 body::before {
   content: "";
   position: fixed;
@@ -176,8 +177,18 @@ body::before {
   opacity: 0.55;
   mix-blend-mode: overlay;
 }
+@media (max-width: 720px) {
+  body::before {
+    opacity: 0.75;
+    /* Some mobile Safari builds silently bail on overlay blend; fall
+       back to normal blend with screen-style additive intent. */
+    mix-blend-mode: screen;
+  }
+}
 
-/* Layer 2 — Blueprint lattice. 48px grid, 3% gold opacity. */
+/* Layer 2 — Blueprint lattice. Desktop 3% gold opacity reads as a barely-
+   there structural grid. Mobile bumps to 5-6% with a tighter 36px cell
+   so the same "ledger" feeling reads on a 393px-wide screen. */
 body::after {
   content: "";
   position: fixed;
@@ -185,10 +196,18 @@ body::after {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgb(var(--gold-rgb) / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--gold-rgb) / 0.03) 1px, transparent 1px);
+    linear-gradient(rgb(var(--gold-rgb) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--gold-rgb) / 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: -1px -1px;
+}
+@media (max-width: 720px) {
+  body::after {
+    background-image:
+      linear-gradient(rgb(var(--gold-rgb) / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--gold-rgb) / 0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
 }
 
 /* Layer 3 + 4 live in <VaultBackground />.
@@ -280,6 +299,19 @@ a {
   height: 200vh;
   animation: vault-specular-sweep 8s linear infinite;
   mix-blend-mode: screen;
+}
+/* Mobile: brighter ray + tighter sweep band so the every-8s sweep
+   actually registers on a 393px screen. */
+@media (max-width: 720px) {
+  .vault-specular {
+    background: linear-gradient(
+      90deg,
+      transparent 42%,
+      rgb(var(--gold-rgb) / 0.95) 50%,
+      transparent 58%
+    );
+    width: 80vw;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
