@@ -4,23 +4,35 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
+import Testimonials from "@/components/Testimonials";
+import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
 
-const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+// Fix 5c — until a 30-min cal.com event exists, scoping CTA derives
+// label + URL from config and quietly relabels to 15-MIN. The 30-min
+// length stays the spec'd default; config provides the swap point.
+const SCOPING_LENGTH_MINUTES = SITE.CAL_30MIN_URL ? 30 : 15;
+
+const META_TITLE = "AI Implementation for Business — TITANOS";
+const META_DESC =
+  "Custom AI implementation shipped to your repo. From AU$4,997, project-quoted after a scoping call. 99% Claude Code, 1% expert review.";
 
 export const metadata: Metadata = {
-  title: "AI Implementation for Business — TITANOS",
-  description:
-    "Custom AI implementation shipped to your repo. From AU$4,997, project-quoted after a 30-minute scoping call. 99% Claude Code, 1% expert review.",
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: "https://titanos.tech/ai-delivery" },
   openGraph: {
-    title: "Titanos AI Implementation for Business — problem solved, built, shipped",
-    description:
-      "Full-cycle AI implementation: diagnose, plan, build, ship. From AU$4,997. Scoping call first. Project-quoted by scope. Powered by Claude Code.",
+    title: META_TITLE,
+    description: META_DESC,
     type: "website",
     url: "https://titanos.tech/ai-delivery",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: META_TITLE,
+    description: META_DESC,
+    images: ["/og-image.png"],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -42,27 +54,27 @@ const PROBLEMS = [
 const DELIVERABLES = [
   {
     title: "Custom AI workflow",
-    body: "When the answer is \u201chave your team use AI better\u201d \u2014 a Claude Project, custom GPT, or Make.com / n8n flow your team actually opens every day. Lives in your tooling, not ours. Trained on your context, your voice, your data.",
+    body: "When the answer is \u201chave your team use AI better\u201d \u2014 a Claude Project, custom GPT, or Make.com / n8n flow your team actually opens every day. Lives in your tooling, not mine. Trained on your context, your voice, your data.",
   },
   {
     title: "AI in your codebase",
-    body: "When there's a repo, we commit working code to your GitHub or GitLab \u2014 reviewed by your engineers before merge, deployed in your staging then production environment. You own it from day one.",
+    body: "When there's a repo, I commit working code to your GitHub or GitLab \u2014 reviewed by your engineers before merge, deployed in your staging then production environment. You own it from day one.",
   },
   {
     title: "AI-run process",
-    body: "When the right answer is \u201chave AI do this work continuously\u201d \u2014 doc generation, email triage, research, lead enrichment \u2014 we set it up and hand it over. Or operate it as a service if you'd rather. Either way, fully documented.",
+    body: "When the right answer is \u201chave AI do this work continuously\u201d \u2014 doc generation, email triage, research, lead enrichment \u2014 I set it up and hand it over. Or run it as a service if you'd rather. Either way, fully documented.",
   },
   {
     title: "Strategy, scoped sharply",
-    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 we run a 2-week diagnostic ending in a prioritised, costed build list. No slide-deck consulting; the output is what to build next, by whom, in what order.",
+    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 a 2-week diagnostic ending in a prioritised, costed build list. No slide-deck consulting; the output is what to build next, by whom, in what order.",
   },
 ];
 
 const STEPS = [
   {
     num: "I",
-    title: "SCOPING CALL · 30 MIN",
-    body: "You tell us what you’d build if delivery wasn’t the bottleneck. We tell you whether it’s a 4-week thing, a 12-week thing, or a “this needs to be three engagements” thing. No pitch. No slides.",
+    title: `SCOPING CALL · ${SCOPING_LENGTH_MINUTES} MIN`,
+    body: "You tell me what you’d build if delivery wasn’t the bottleneck. I tell you whether it’s a 4-week thing, a 12-week thing, or a “this needs to be three engagements” thing. No pitch. No slides.",
   },
   {
     num: "II",
@@ -72,7 +84,7 @@ const STEPS = [
   {
     num: "III",
     title: "SHIP IN YOUR ENVIRONMENT",
-    body: "Kyle launches a Claude Code instance scoped to your engagement. Daily commits to a branch in your repo. Mid-engagement demo. Final delivery against SOW acceptance criteria. Done.",
+    body: "I launch a Claude Code instance scoped to your engagement. Daily commits to a branch in your repo. Mid-engagement demo. Final delivery against SOW acceptance criteria. Done.",
   },
 ];
 
@@ -109,11 +121,16 @@ export default function AiDeliveryPage() {
         badge="TITANOS · AI IMPLEMENTATION FOR BUSINESS"
         title="AI Implementation, Delivered"
         tagline="Not consulted. Not slide-ware. Shipped."
-        sub="You don’t need another deck telling you AI matters. You need the capability built, integrated, and live in production. We diagnose the problem, plan the solution, build it in your repo, and implement it in your environment — 99% Claude Code, 1% expert human review."
+        sub="You don’t need another deck telling you AI matters. You need the capability built, integrated, and live in production. I diagnose the problem, plan the solution, build it in your repo, and implement it in your environment — 99% Claude Code, 1% expert human review."
         trustLine="Scoping → SOW → ship. Projects priced by scope. No retainer trap."
       >
-        <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 30-minute scoping call">
-          BOOK A 30-MIN SCOPING CALL
+        <AnimatedButton
+          href={SCOPING_CALL_URL}
+          external
+          variant="primary"
+          ariaLabel={`Book a ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
+        >
+          {SCOPING_CALL_LABEL}
         </AnimatedButton>
       </PageHero>
 
@@ -215,6 +232,24 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="HOW IT WORKS" lead="Three steps, no surprises." />
+          {/* Fix 6 — promote "1% human review is load-bearing" out of the FAQ into a visible callout */}
+          <p
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto 24px",
+              padding: "16px 22px",
+              background: "rgb(var(--gold-rgb) / 0.06)",
+              borderLeft: "3px solid var(--gold)",
+              color: "var(--ice)",
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontStyle: "italic",
+              fontSize: "var(--fs-lg)",
+              lineHeight: 1.5,
+              textAlign: "center",
+            }}
+          >
+            The 1% human review is the load-bearing 1%.
+          </p>
           <div
             className="grid-auto-cards"
             style={{
@@ -345,9 +380,9 @@ export default function AiDeliveryPage() {
                   maxWidth: "var(--maxw-prose)",
                 }}
               >
-                The arc: we diagnose the problem, plan the solution, build it in your repo, and
+                The arc: I diagnose the problem, plan the solution, build it in your repo, and
                 implement it in your environment. One model or many; one workflow or a full
-                system. Quoted after a 30-minute scoping call.
+                system. Quoted after a {SCOPING_LENGTH_MINUTES}-minute scoping call.
               </p>
               <div
                 style={{
@@ -357,8 +392,13 @@ export default function AiDeliveryPage() {
                   gap: 12,
                 }}
               >
-                <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 30-minute scoping call">
-                  BOOK A 30-MIN SCOPING CALL
+                <AnimatedButton
+                  href={SCOPING_CALL_URL}
+                  external
+                  variant="primary"
+                  ariaLabel={`Book a ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
+                >
+                  {SCOPING_CALL_LABEL}
                 </AnimatedButton>
               </div>
             </article>
@@ -377,6 +417,42 @@ export default function AiDeliveryPage() {
                 You see the full SOW with the fixed price before you pay a deposit.
               </strong>
             </p>
+
+            {/* Fix 6 — promote delivered-state-on-pause clause out of FAQ into a named trust box */}
+            <div
+              style={{
+                maxWidth: "var(--maxw-prose)",
+                margin: "32px auto 0",
+                padding: "22px 24px",
+                background: "var(--card)",
+                border: "1px solid var(--gold-dim)",
+                borderLeft: "3px solid var(--gold)",
+                borderRadius: "var(--radius-md)",
+              }}
+            >
+              <h4
+                style={{
+                  fontFamily: "var(--font-display), Georgia, serif",
+                  color: "var(--gold)",
+                  fontSize: "var(--fs-body)",
+                  letterSpacing: "0.06em",
+                  marginBottom: 10,
+                }}
+              >
+                IF I DISAPPEAR MID-ENGAGEMENT
+              </h4>
+              <p
+                style={{
+                  color: "var(--text)",
+                  fontSize: "var(--fs-body)",
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                You keep the branch, the docs, and a refund of unearned milestones.
+                It’s in the SOW.
+              </p>
+            </div>
           </div>
         </div>
       </SectionReveal>
@@ -416,17 +492,15 @@ export default function AiDeliveryPage() {
             </strong>{" "}
             — Anthropic’s flagship reasoning model, AI-native delivery end-to-end
           </div>
+          {/* Fix 5d — kill "Titanos Security" sister-brand split. One operator, one brand, three doors. */}
           <div>
-            Sister capability{" "}
+            The same practice runs{" "}
             <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
-              Titanos Security
+              1,700+ external security scans this month
             </strong>{" "}
-            runs 1,700+ external scans this month
-          </div>
-          <div>
-            Methodology:{" "}
+            — see{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
-              titanos.tech/methodology
+              /methodology
             </a>
           </div>
         </div>
@@ -437,21 +511,21 @@ export default function AiDeliveryPage() {
           <SectionHeading title="THE QUESTIONS EVERY CTO ASKS FIRST" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Are you a real consulting firm or a one-person shop running an AI agent?">
-              Single-operator practice. Kyle Deligny runs every engagement. The leverage comes
+              Single-operator practice. I run every engagement. The leverage comes
               from Claude Code doing the implementation work under continuous human review — the
               same pattern senior engineers use to ship faster, applied as a delivery business
               model. You get one accountable contact, no subcontractor chain, no project manager
               between you and the code.
             </FaqItem>
-            <FaqItem question="How do you handle our IP and source code?">
+            <FaqItem question="How do you handle my IP and source code?">
               Mutual NDA before scoping call if you want one. Engagement work happens in a branch
-              on your own repository — we never hold your source. All Claude Code runs are scoped
+              on your own repository — I never hold your source. All Claude Code runs are scoped
               to the engagement; no training, no cross-client reuse, no retained context after
               handover.
             </FaqItem>
             <FaqItem question="What about model outputs that are wrong?">
-              Every line of code, every prompt, every model invocation is reviewed by Kyle before
-              commit. The 1% human review is the load-bearing 1%. We also write test coverage and
+              Every line of code, every prompt, every model invocation is reviewed by me before
+              commit. The 1% human review is the load-bearing 1%. I also write test coverage and
               (where applicable) evals — so wrongness is caught by the test suite, not by your
               users.
             </FaqItem>
@@ -461,8 +535,9 @@ export default function AiDeliveryPage() {
               refund of unearned milestone billing. No retainer trap.
             </FaqItem>
             <FaqItem question="Can our procurement do a vendor security review?">
-              Yes. We have completed external attack-surface DD on ourselves. We will fill in any
-              vendor risk assessment your procurement requires.
+              Yes. I’ve completed external attack-surface DD on myself —{" "}
+              <a href="/our-scan" style={{ color: "var(--ice)" }}>see the findings</a>. I’ll fill
+              in any vendor risk assessment your procurement requires.
             </FaqItem>
             <FaqItem question="How fast can we start?">
               Scoping call usually within 3 business days of your enquiry. SOW within 72 hours of
@@ -505,13 +580,17 @@ export default function AiDeliveryPage() {
             lineHeight: 1.7,
           }}
         >
-          Tell us what you’d build if delivery wasn’t the bottleneck. 30-minute scoping call. No
-          deck. No salespeople. One operator.
+          Tell me what you’d build if delivery wasn’t the bottleneck.{" "}
+          {SCOPING_LENGTH_MINUTES}-minute scoping call. No deck. No salespeople.
+          One operator.
         </p>
-        <AnimatedButton href={CAL_15} external variant="primary">
+        <AnimatedButton href={SCOPING_CALL_URL} external variant="primary">
           BOOK THE SCOPING CALL
         </AnimatedButton>
       </SectionReveal>
+
+      {/* Render-only-if-non-empty testimonials block — Fix 2c */}
+      <Testimonials offer="ai-delivery" heading="WHAT AI-IMPLEMENTATION CUSTOMERS SAID" />
     </>
   );
 }

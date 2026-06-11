@@ -30,7 +30,11 @@ const CSP =
   "style-src 'self' 'unsafe-inline'; " +
   "img-src 'self' data:; " +
   "font-src 'self'; " +
-  "connect-src 'self'; " +
+  // connect-src includes api.titanos.tech so the /scan-request form
+  // can POST cross-origin. fetch() is governed by connect-src; the
+  // legacy form-action 'mailto:' directive below covers the noscript
+  // mailto fallback only.
+  "connect-src 'self' https://api.titanos.tech; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 
@@ -67,14 +71,15 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// SEO-03: description trimmed to 151 chars (≤155 limit)
+// SEO-03: description trimmed to 152 chars (≤155 limit)
 const META_DESCRIPTION =
-  "Free external security scan + AU Privacy Act compliance (AU$5,997 + $199/mo) + project-quoted AI implementation. Built for AU/NZ/SG operators.";
+  "Free external security scan, AU Privacy Act compliance (AU$5,997 + $199/mo), and project-quoted AI implementation — one operator, three doors in.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
+  // SEO-3 / Fix 5g: title aligned with homepage H1 "One operator. Three doors in."
   title:
-    "TITANOS — Three ways we help: Free Scan, Compliance, AI Implementation",
+    "TITANOS — One operator. Three doors in. Scan · Compliance · AI Implementation",
   description: META_DESCRIPTION,
   icons: {
     icon: [
@@ -84,7 +89,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "192x192" }],
   },
   openGraph: {
-    title: "TITANOS — Free Scan · Compliance · AI Implementation",
+    title: "TITANOS — One operator. Three doors in.",
     description: META_DESCRIPTION,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",

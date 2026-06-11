@@ -5,11 +5,15 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import TerminalSnippet from "@/components/TerminalSnippet";
+import ScanRequestForm from "@/components/ScanRequestForm";
+import Testimonials from "@/components/Testimonials";
 import ProcessSteps from "./ProcessSteps";
+import { SITE } from "@/lib/config";
 
-const MAILTO_SCAN =
-  "mailto:kyle@titanos.tech?subject=Scan%20request&body=Domain%3A%20%0AYour%20name%3A%20%0ANotes%20%28optional%29%3A%20%0A%0A--%0AI%20consent%20to%20receive%20my%20scan%20report%20and%20occasional%20related%20follow-up.%20Reply%20STOP%20to%20opt%20out.";
-const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+const CAL_15 = SITE.CAL_15MIN_URL;
+// Internal anchor — the on-page form section. No mailto in the primary
+// flow; the form's error state carries the only fallback link.
+const REQUEST_ANCHOR = "#request";
 
 export const metadata: Metadata = {
   title: "Free External Security Scan — TITANOS",
@@ -19,13 +23,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free External Security Scan — Titanos",
     description:
-      "See what an attacker sees. No login. We email the report within 1 business day. Expert-reviewed, Australian-owned, ABN-verified.",
+      "See what an attacker sees. No login. Report in your inbox within 1 business day. Expert-reviewed, Australian-owned, ABN-verified.",
     type: "website",
     url: "https://titanos.tech/scan",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Free External Security Scan — Titanos",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -34,13 +39,13 @@ export const metadata: Metadata = {
 const PROCESS = [
   {
     num: "I",
-    title: "EMAIL US YOUR DOMAIN",
-    body: "Your domain, your name, anything we should know. Under a minute.",
+    title: "TELL ME YOUR DOMAIN",
+    body: "Your domain, your name, anything I should know. Under a minute.",
   },
   {
     num: "II",
-    title: "WE QUEUE YOUR SCAN",
-    body: "You\u2019re placed in the daily scan queue. No payment, no waiting list game.",
+    title: "I QUEUE YOUR SCAN",
+    body: "You\u2019re placed in the daily scan queue. No payment, no waiting-list game.",
   },
   {
     num: "III",
@@ -55,7 +60,7 @@ const PROCESS = [
   {
     num: "V",
     title: "YOU DECIDE WHAT\u2019S NEXT",
-    body: "Fix it yourself, escalate to your host, or ask us for help. No pressure, no auto-renewal.",
+    body: "Fix it yourself, escalate to your host, or ask me for help. No pressure, no auto-renewal.",
   },
 ];
 
@@ -75,12 +80,12 @@ const WHAT_IT_IS = [
   "90-day responsible-disclosure window on every finding",
   "No exploitation, no credential attempts, no DoS — ever",
   "Independently reproducible: every finding ships with the exact nmap command",
-  "Expert-reviewed before delivery; no auto-generated noise",
+  "Personally reviewed before delivery; no auto-generated noise",
 ];
 
 const WHO_ITS_FOR = [
   "AU/NZ/SG operators who own a domain and want their actual exposure",
-  "CTOs & founders staring down a compliance push or audit",
+  "CTOs and founders staring down a compliance push or audit",
   "IT leads about to greenlight an AI rollout in production",
   "MSP-buyers about to renew — verify before you sign",
   "Anyone who wants a sober second opinion, not a sales pitch",
@@ -109,20 +114,20 @@ export default function ScanPage() {
       <PageHero
         badge="FREE · NO LOGIN · NO CARD"
         title="Free External Attack-Surface Scan"
-        tagline="See what an attacker sees. No login. We email the report within 1 business day."
+        tagline="See what an attacker sees. No login. Report in your inbox within 1 business day."
         sub="A real report on what an attacker can see about your business from the public internet. No login. No card. No follow-up sequence."
         trustLine={
           <>
-            Expert-reviewed · Australian-owned ·{" "}
+            Personally reviewed · Australian-owned ·{" "}
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong>
           </>
         }
       >
-        <AnimatedButton href={MAILTO_SCAN} variant="primary" ariaLabel="Request your free scan">
+        <AnimatedButton href={REQUEST_ANCHOR} variant="primary" ariaLabel="Request your free scan">
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute call">
-          BOOK A 15-MIN
+        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
+          BOOK A 15-MIN FIT CALL
         </AnimatedButton>
       </PageHero>
 
@@ -223,7 +228,7 @@ export default function ScanPage() {
         <div className="container-vault">
           <SectionHeading
             title="METHODOLOGY · THE SHORT VERSION"
-            lead="If a tool would require permission, we don’t use it. Period."
+            lead="If a tool would require permission, I don’t use it. Period. I only read what your server already announces to the public internet — nothing invasive."
           />
           <div
             style={{
@@ -234,13 +239,13 @@ export default function ScanPage() {
               margin: "0 auto",
             }}
           >
-            <MiniCard title="WHAT WE DO">
-              <p><Tick /> Banner-grade <code>nmap -sV</code></p>
+            <MiniCard title="WHAT I DO">
+              <p><Tick /> External <code>nmap -sV</code></p>
               <p><Tick /> TLS / SSL validation</p>
               <p><Tick /> Public DNS + cert transparency</p>
               <p><Tick /> NVD CVE matching by version</p>
             </MiniCard>
-            <MiniCard title="WHAT WE NEVER DO">
+            <MiniCard title="WHAT I NEVER DO">
               <p><Cross /> Auth / credential attempts</p>
               <p><Cross /> Exploit attempts</p>
               <p><Cross /> DoS / brute force</p>
@@ -257,72 +262,29 @@ export default function ScanPage() {
 
       <div className="divider-gold" />
 
-      {/* REQUEST YOUR FREE SCAN */}
+      {/* REQUEST YOUR FREE SCAN — Fix 1: real form replaces mailto card */}
       <SectionReveal id="request" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="REQUEST YOUR FREE SCAN"
-            lead="Two ways to start — both land in Kyle’s inbox and we email your report within 1 business day. No card, no login."
+            lead="Fill the form. Report lands in your inbox within 1 business day, sent personally. Prefer a call? Book a 15-min instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <div
+            <ScanRequestForm />
+            <p
               style={{
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "36px 32px",
+                fontSize: "var(--fs-sm)",
+                color: "var(--dim)",
+                marginTop: 18,
                 textAlign: "center",
+                lineHeight: 1.6,
               }}
             >
-              <p
-                style={{
-                  fontSize: "var(--fs-lg)",
-                  color: "var(--text)",
-                  marginBottom: 22,
-                  lineHeight: 1.7,
-                }}
-              >
-                Email{" "}
-                <a
-                  href={MAILTO_SCAN}
-                  style={{ color: "var(--gold)", fontWeight: 600 }}
-                >
-                  kyle@titanos.tech
-                </a>{" "}
-                with your domain, your name, and anything we should know about scope.
-              </p>
-              <p style={{ fontSize: "var(--fs-body)", color: "var(--dim)", marginBottom: 28 }}>
-                Or book a 15-minute call — we’ll capture the same details and get the scan moving
-                on the call.
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 14,
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <AnimatedButton href={MAILTO_SCAN} variant="primary" ariaLabel="Email your scan request">
-                  EMAIL YOUR SCAN REQUEST →
-                </AnimatedButton>
-                <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute call">
-                  BOOK A 15-MIN
-                </AnimatedButton>
-              </div>
-              <p
-                style={{
-                  fontSize: "var(--fs-sm)",
-                  color: "var(--dim)",
-                  marginTop: 26,
-                  lineHeight: 1.6,
-                }}
-              >
-                By emailing or booking, you're requesting your scan report.
-                <br />
-                We'll also send up to 3 related follow-ups over 6 months — reply STOP at any point and you're suppressed forever. We never sell your data.
-              </p>
-            </div>
+              Prefer a call?{" "}
+              <a href={CAL_15} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ice)" }}>
+                Book a 15-min fit call →
+              </a>
+            </p>
           </div>
         </div>
       </SectionReveal>
@@ -352,7 +314,7 @@ export default function ScanPage() {
             />
             <BridgeCard
               title="AI IMPLEMENTATION FOR BUSINESS"
-              body="If the scan shows you’re solid on basics and your real bottleneck is an AI capability you can’t free up engineering hours to ship, scope a build with us. Quoted by scope, fixed-price SOW."
+              body="If the scan shows you’re solid on basics and your real bottleneck is an AI capability you can’t free up engineering hours to ship, scope a build with me. Quoted by scope, fixed-price SOW."
               href="/ai-delivery"
               cta="See AI Implementation"
             />
@@ -360,12 +322,15 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
+      {/* Render-only-if-non-empty testimonials block — Fix 2c */}
+      <Testimonials offer="scan" heading="WHAT SCAN CUSTOMERS SAID" />
+
       <div className="divider-gold" />
 
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="QUESTIONS WE GET" />
+          <SectionHeading title="QUESTIONS I GET" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
@@ -373,21 +338,21 @@ export default function ScanPage() {
               promise.
             </FaqItem>
             <FaqItem question="What if my domain is hosted on Squarespace / Webflow / GitHub Pages?">
-              The scan still works. We split findings into what you control vs what your hosting
+              The scan still works. I split findings into what you control vs what your hosting
               provider controls, so you don’t walk away with a list of things you can’t fix.
               Host-controlled findings come with the exact escalation language to send the
               provider.
             </FaqItem>
             <FaqItem question="Is this exploitation?">
-              No. External-only — no exploitation, no credential attempts. We probe what the public internet can already see — service
+              No. External-only — no exploitation, no credential attempts. I probe what the public internet can already see — service
               banners, TLS posture, DNS records, certificate transparency. No authentication
               attempts. No exploit attempts. No DoS. No data exfiltration. Full methodology at{" "}
               <a href="/methodology" style={{ color: "var(--ice)" }}>/methodology</a>.
             </FaqItem>
             <FaqItem question="Do you store my data?">
-              Scan results are kept for our scan corpus so we can show longitudinal exposure
-              trends. Your email goes only into our lead store — never sold, never shared with
-              third parties, suppressed forever if you reply <code>remove</code>.
+              Scan results are kept in my scan corpus so longitudinal exposure trends are
+              visible across customers. Your email goes only into my lead store — never sold,
+              never shared with third parties, suppressed forever if you reply <code>remove</code>.
             </FaqItem>
           </div>
         </div>
@@ -430,13 +395,25 @@ export default function ScanPage() {
           sequence.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={MAILTO_SCAN} variant="primary">
+          <AnimatedButton href={REQUEST_ANCHOR} variant="primary">
             REQUEST YOUR FREE SCAN
           </AnimatedButton>
           <AnimatedButton href={CAL_15} external variant="primary">
-            BOOK A 15-MIN
+            BOOK A 15-MIN FIT CALL
           </AnimatedButton>
         </div>
+        <p
+          style={{
+            fontSize: "var(--fs-sm)",
+            color: "var(--dim)",
+            marginTop: 26,
+            maxWidth: "var(--maxw-prose)",
+            lineHeight: 1.65,
+          }}
+        >
+          Powered by <strong style={{ color: "var(--gold)" }}>Claude Code</strong> —
+          drafted by AI, reviewed and signed off by Kyle on every scan.
+        </p>
       </SectionReveal>
     </>
   );

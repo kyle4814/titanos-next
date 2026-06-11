@@ -3,9 +3,10 @@ import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
-import DeadlineCounter from "@/components/DeadlineCounter";
+import SlotScarcity from "@/components/SlotScarcity";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import { STATS, STAT_LABELS } from "@/lib/stats";
+import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
 
 import type { Offer } from "@/components/OfferCard";
 
@@ -16,15 +17,16 @@ const offers: Offer[] = [
     price: "$0",
     priceUnit: "no card · delivered within 1 business day",
     body:
-      "External attack-surface scan on any AU/NZ/SG domain. Banner-grade evidence, expert-reviewed, with a 90-day responsible-disclosure window. The report you'd want about your own infrastructure.",
+      "External attack-surface scan on any AU/NZ/SG domain. Reproducible evidence, personally reviewed, with a 90-day responsible-disclosure window. The report you'd want about your own infrastructure.",
     bullets: [
-      "Domain-or-ABN intake, any AU/NZ/SG host",
-      "Banner-grade evidence, fully reproducible",
-      "Expert-reviewed before delivery",
+      "Just your website address — any AU/NZ/SG host",
+      "Reproducible evidence, every finding tied to an nmap command",
+      "Personally reviewed before delivery",
     ],
+    // Fix 1 — mailto killed. Scan CTAs route to the on-page form at /scan#request.
     primary: {
       label: "REQUEST YOUR FREE SCAN ›",
-      href: "mailto:kyle@titanos.tech?subject=Scan%20request&body=Domain%3A%20%0AYour%20name%3A%20%0ANotes%20(optional)%3A",
+      href: "/scan#request",
       external: false,
     },
     secondary: { label: "See the free scan", href: "/scan" },
@@ -37,16 +39,16 @@ const offers: Offer[] = [
     price: "AU$5,997",
     priceUnit: "one-time + AU$199/mo monitoring",
     body:
-      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. We translate everything into plain English on the call.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, and 12 months of regulatory update briefings.",
+      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. Plain English on the call, every term translated.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, and 12 months of regulatory update briefings.",
     bullets: [
       "13-section evidence pack (~17pp)",
       "90-minute implementation working call",
-      "Signed compliance attestation letter",
+      "Signed attestation letter you can hand to a regulator or insurer",
       "Quarterly re-scan + delta report",
     ],
     primary: {
-      label: "BOOK A 15-MIN ›",
-      href: "https://cal.com/kyle-deligny-msvz6s/15min",
+      label: "BOOK A 15-MIN FIT CALL ›",
+      href: SITE.CAL_15MIN_URL,
       external: true,
     },
     secondary: { label: "See the compliance pack", href: "/compliance" },
@@ -59,16 +61,17 @@ const offers: Offer[] = [
     price: "From AU$4,997",
     priceUnit: "scoping call first · quoted by scope",
     body:
-      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. We diagnose, plan, build, and implement — quoted by scope after a 30-minute call.",
+      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. I diagnose, plan, build, and implement — quoted by scope after a scoping call.",
     bullets: [
       "Working code in your repo",
       "Deployed, not \"deployable\"",
       "Documented for handover",
       "99% Claude Code · 1% expert human review",
     ],
+    // Fix 5c — scoping CTA label/URL derived from config (auto-relabels until 30-min event exists).
     primary: {
-      label: "BOOK A SCOPING CALL ›",
-      href: "https://cal.com/kyle-deligny-msvz6s/15min",
+      label: `${SCOPING_CALL_LABEL} ›`,
+      href: SCOPING_CALL_URL,
       external: true,
     },
     secondary: { label: "See AI Implementation", href: "/ai-delivery" },
@@ -81,12 +84,13 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO with entrance choreography ═══ */}
+      {/* Fix 6 — single-spine H1 + sub. The three offer cards below carry routing. */}
       <HeroEntrance
         wordmark="TITANOS"
-        tagline="Get Privacy Act + Essential Eight compliant before 11 December 2026 — or start with a free scan."
+        tagline="One operator. Three doors in."
         trust={
           <>
-            Expert-reviewed · Australian-owned · ABN-verified ·{" "}
+            Personally reviewed · Australian-owned · ABN-verified ·{" "}
             <NumberCounter value={STATS.scansThisMonth} suffix="+" /> {STAT_LABELS.scansShort} ·{" "}
             <NumberCounter value={STATS.uniqueBusinesses} suffix="+" /> {STAT_LABELS.businessesShort}
           </>
@@ -110,7 +114,28 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Free security scan for AU/NZ/SG businesses. Privacy Act compliance done together on a 90-minute call. AI builds shipped to your environment. One operator, three doors in.
+          A free security scan that shows you what an attacker sees. A fixed-price
+          Privacy Act compliance engagement done with you before the 11 December
+          2026 deadline. AI builds shipped into your environment, quoted by scope.
+        </p>
+      </section>
+
+      {/* Fix 3d — middle-rung routing line: free scan as the start-here door */}
+      <section style={{ padding: "0 20px 24px", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <p
+          style={{
+            color: "var(--ice)",
+            fontSize: "var(--fs-sm)",
+            maxWidth: "var(--maxw-prose)",
+            margin: "0 auto",
+            lineHeight: 1.6,
+          }}
+        >
+          Not sure which door?{" "}
+          <a href="/scan#request" style={{ color: "var(--gold)" }}>
+            Start with the free scan
+          </a>{" "}
+          — it tells you which one you need.
         </p>
       </section>
 
@@ -170,9 +195,10 @@ export default function Home() {
             {offers.map((o, i) => (
               <div key={o.tag} style={{ position: "relative" }}>
                 <OfferCard {...o} />
+                {/* Fix 4 — Offer 02 sub-line now slot-based scarcity (capacity), not day countdown */}
                 {i === 1 && (
                   <div style={{ textAlign: "center", marginTop: 8 }}>
-                    <DeadlineCounter />
+                    <SlotScarcity variant="pill" />
                   </div>
                 )}
               </div>
@@ -203,6 +229,9 @@ export default function Home() {
             margin: "0 auto",
           }}
         >
+          {/* Fix 5e — strip cleanup: drop the methodology-as-traction-metric cells.
+              Methodology block already carries 90-day disclosure window + zero-exploit claim.
+              Replaced with a real activity metric: scan-report SLA. */}
           <TrustItem
             big={<NumberCounter value={STATS.scansThisMonth} suffix="+" />}
             small={STAT_LABELS.scansShort}
@@ -211,8 +240,7 @@ export default function Home() {
             big={<NumberCounter value={STATS.uniqueBusinesses} suffix="+" />}
             small={STAT_LABELS.businessesShort}
           />
-          <TrustItem big="90 day" small="responsible disclosure window" />
-          <TrustItem big="0%" small="auth attempts · 0% exploits" />
+          <TrustItem big="1 business day" small="scan report SLA" />
         </div>
       </SectionReveal>
 
@@ -250,7 +278,7 @@ export default function Home() {
             letterSpacing: "0.05em",
           }}
         >
-          ONE OPERATOR. THREE WAYS IN.
+          ONE OPERATOR. THREE DOORS IN.
         </h2>
         <p
           style={{
@@ -263,20 +291,20 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Start with a free scan, ship the compliance pack before December, or scope an AI build.
-          Whichever maps to your problem, the path is the same: tell us what you'd build if
-          delivery wasn't the bottleneck.
+          Start with a free scan, ship the compliance pack before December, or scope
+          an AI build. Whichever maps to your problem, the path is the same:
+          one accountable contact, work shipped not consulted.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/scan" variant="primary">
+          <AnimatedButton href="/scan#request" variant="primary">
             REQUEST YOUR FREE SCAN
           </AnimatedButton>
           <AnimatedButton
-            href="https://cal.com/kyle-deligny-msvz6s/15min"
+            href={SITE.CAL_15MIN_URL}
             external
             variant="secondary"
           >
-            BOOK A 15-MIN CALL
+            BOOK A 15-MIN FIT CALL
           </AnimatedButton>
         </div>
       </SectionReveal>
@@ -300,7 +328,7 @@ export default function Home() {
                 marginBottom: 32,
               }}
             >
-              How we work technically (click to expand)
+              How I work technically (click to expand)
             </summary>
             <div>
               <div style={{ textAlign: "center", marginBottom: 36 }}>
@@ -335,13 +363,13 @@ export default function Home() {
                   margin: "0 auto",
                 }}
               >
-                <MethodCard title="What we do">
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Banner-grade nmap (-sV)</p>
+                <MethodCard title="What I do">
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>External nmap (-sV)</p>
                   <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
                   <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
                   <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
                 </MethodCard>
-                <MethodCard title="What we never do">
+                <MethodCard title="What I never do">
                   <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
                   <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Exploit attempts</p>
                   <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>DoS / brute force</p>
