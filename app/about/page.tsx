@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { SITE } from "@/lib/config";
 
-const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+const CAL_15 = SITE.CAL_15MIN_URL;
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
 export const metadata: Metadata = {
@@ -45,8 +46,24 @@ export default function AboutPage() {
           </>
         }
       >
+        {/* Fix 2b — photo slot. Renders only when SITE.PHOTO_PATH is set. */}
+        {SITE.PHOTO_PATH && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={SITE.PHOTO_PATH}
+            alt="Kyle Deligny, Titanos, Brisbane"
+            width={120}
+            height={120}
+            style={{
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "1px solid var(--gold-dim)",
+              marginBottom: 18,
+            }}
+          />
+        )}
         <AnimatedButton href={CAL_15} external variant="primary">
-          BOOK A 15-MIN
+          BOOK A 15-MIN FIT CALL
         </AnimatedButton>
         <AnimatedButton href="/methodology" variant="secondary">
           SEE THE METHODOLOGY
@@ -141,7 +158,7 @@ export default function AboutPage() {
               <a href="/methodology" style={{ color: "var(--ice)" }}>
                 titanos.tech/methodology
               </a>{" "}
-              — exactly what we do, what we never do, and how to reproduce any finding.
+              — exactly what I do, what I never do, and how to reproduce any finding.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Email:</strong>{" "}
@@ -162,15 +179,29 @@ export default function AboutPage() {
               </a>{" "}
               — 15 minutes is enough to know if I&apos;m useful to you.
             </li>
+            {/* Fix 2b — LinkedIn row, placeholder-gated. Renders only when SITE.LINKEDIN_URL set. */}
+            {SITE.LINKEDIN_URL && (
+              <li style={{ marginBottom: 10 }}>
+                <strong style={{ color: "var(--gold)" }}>LinkedIn:</strong>{" "}
+                <a
+                  href={SITE.LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--ice)" }}
+                >
+                  {SITE.LINKEDIN_URL.replace(/^https?:\/\//, "")}
+                </a>{" "}
+                — work history, recommendations, mutual connections.
+              </li>
+            )}
           </ul>
 
           {/*
-            TODO when Kyle supplies:
-            - Headshot (square, 400×400+, professional-not-corporate). Slot above
-              the bio paragraph.
-            - LinkedIn URL. Add as another row in "How you verify me".
-            - Certifications held (IRAP / ISO 27001 / CySA+ / Essential Eight assessor).
-              Add a fourth section if any.
+            OPERATOR_INPUT (Fix 2b — see lib/config.ts):
+            - PHOTO_PATH → headshot file in /public, e.g. "/kyle.jpg".
+            - LINKEDIN_URL → profile URL. Renders the row above.
+            - Certifications held (IRAP / ISO 27001 / CySA+ / Essential Eight assessor)
+              still TODO — add a fourth section if any get held.
           */}
         </div>
       </SectionReveal>

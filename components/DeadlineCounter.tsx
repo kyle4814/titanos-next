@@ -34,8 +34,13 @@ function msToNextRollover(now: number): number {
   return Math.max(500, remaining - nextDropAt + 50);
 }
 
+// Evaluated at build time for static export. The client effect below
+// reconciles on mount, but the initial render already shows a real
+// integer — no "— remaining" bare state, no broken-looking widget.
+const INITIAL_DAYS = calc();
+
 export default function DeadlineCounter() {
-  const [days, setDays] = useState<number | null>(null);
+  const [days, setDays] = useState<number>(INITIAL_DAYS);
 
   useEffect(() => {
     const update = () => setDays(calc());
@@ -93,8 +98,8 @@ export default function DeadlineCounter() {
       }}
       aria-live="polite"
     >
-      {days === null ? "—" : `${days} days`}
-      <span style={{ marginLeft: 4 }}>remaining</span>
+      {days > 0 ? `${days} days` : "Deadline 11 Dec 2026"}
+      {days > 0 && <span style={{ marginLeft: 4 }}>remaining</span>}
       <style>{`
         @media (max-width: 480px) {
           .deadline-pill { font-size: var(--fs-xs); padding: 2px 8px; margin-left: 6px; }

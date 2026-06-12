@@ -41,11 +41,12 @@ export default function TermsPage() {
 
           <H2>Free scans</H2>
           <p>
-            The free scan is a banner-grade external view of publicly-accessible attack-surface
-            signals on a domain you submit. It is not a penetration test, not an audit, not a
-            legal compliance assessment, and not a substitute for one. We deliver the report on
-            a reasonable-effort basis, typically within one business day. We may decline
-            requests we deem out of scope (government, military, infrastructure operators, or
+            The free scan is an external view of publicly-accessible attack-surface
+            signals on a domain you submit — limited to information your server already
+            announces to the public internet. It is not a penetration test, not an audit, not a
+            legal compliance assessment, and not a substitute for one. The report is delivered on
+            a reasonable-effort basis, typically within one business day. I may decline
+            requests I deem out of scope (government, military, infrastructure operators, or
             domains where you cannot demonstrate operational authority).
           </p>
 
@@ -61,8 +62,8 @@ export default function TermsPage() {
 
           <H2>Responsible disclosure</H2>
           <p>
-            We operate a 90-day responsible-disclosure window for any third-party findings
-            surfaced in our scans. We will not publish, exploit, or sell finding data, and we
+            I operate a 90-day responsible-disclosure window for any third-party findings
+            surfaced in my scans. I will not publish, exploit, or sell finding data, and I
             will not contact regulators on your behalf without your written instruction.
           </p>
 
@@ -82,7 +83,7 @@ export default function TermsPage() {
 
           <H2>Changes</H2>
           <p>
-            We may update these terms. The effective date at the top will reflect the most
+            I may update these terms. The effective date at the top will reflect the most
             recent revision.
           </p>
 
