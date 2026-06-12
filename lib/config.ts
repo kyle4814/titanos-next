@@ -22,6 +22,7 @@ type SiteConfig = {
   CAL_30MIN_URL: string;
   LINKEDIN_URL: string;
   PHOTO_PATH: string;
+  API_BASE_URL: string;
   STRIPE_COMPLIANCE_LINK: string;
   KYLE_EMAIL: string;
 };
@@ -54,6 +55,11 @@ export const SITE: SiteConfig = {
   // "/kyle.jpg". When empty, the photo slot and the operator byline
   // adjacent to /compliance pricing both render nothing.
   PHOTO_PATH: "",
+
+  // API base — the Flask server at api.titanos.tech. Used by the
+  // /scan-request form (existing) and the Monitor checkout flow (new).
+  // CSP connect-src must allow this origin (already does — layout.tsx).
+  API_BASE_URL: "https://api.titanos.tech",
 
   // Stripe Payment Link for the compliance offer.
   STRIPE_COMPLIANCE_LINK: "https://buy.stripe.com/3cIfZh017cGd80QgGa1RC43",

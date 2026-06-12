@@ -26,6 +26,7 @@ import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
   { label: "Free Scan", href: "/scan", external: false },
+  { label: "Monitor", href: "/monitor", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Methodology", href: "/methodology", external: false },

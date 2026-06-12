@@ -7,6 +7,7 @@ import SlotScarcity from "@/components/SlotScarcity";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import { STATS, STAT_LABELS } from "@/lib/stats";
 import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
+import { PRICING, DISPLAY } from "@/lib/pricing";
 
 import type { Offer } from "@/components/OfferCard";
 
@@ -36,10 +37,10 @@ const offers: Offer[] = [
   {
     tag: "OFFER 02 · done with you",
     title: "Privacy Act + Essential Eight Compliance",
-    price: "AU$5,997",
-    priceUnit: "one-time + AU$199/mo monitoring",
+    price: DISPLAY.PACK_PRICE,
+    priceUnit: `one-time · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free`,
     body:
-      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. Plain English on the call, every term translated.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, and 12 months of regulatory update briefings.",
+      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. Plain English on the call, every term translated.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, plus 3 months of Titanos Monitor free.",
     bullets: [
       "13-section evidence pack (~17pp)",
       "90-minute implementation working call",
@@ -58,8 +59,8 @@ const offers: Offer[] = [
   {
     tag: "OFFER 03 · PROJECT-QUOTED",
     title: "AI Implementation for Business",
-    price: "From AU$4,997",
-    priceUnit: "scoping call first · quoted by scope",
+    price: `Diagnostic ${DISPLAY.AI_DIAGNOSTIC}`,
+    priceUnit: `then build ${DISPLAY.AI_BUILD_FLOOR.toLowerCase()} · diagnostic credits in full`,
     body:
       "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. I diagnose, plan, build, and implement — quoted by scope after a scoping call.",
     bullets: [
@@ -121,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* Fix 3d — middle-rung routing line: free scan as the start-here door */}
-      <section style={{ padding: "0 20px 24px", position: "relative", zIndex: 2, textAlign: "center" }}>
+      <section style={{ padding: "0 20px 12px", position: "relative", zIndex: 2, textAlign: "center" }}>
         <p
           style={{
             color: "var(--ice)",
@@ -136,6 +137,25 @@ export default function Home() {
             Start with the free scan
           </a>{" "}
           — it tells you which one you need.
+        </p>
+      </section>
+
+      {/* Site Fix 5 — recurring bridge line (Monitor surfaced from the three-door spine, not promoted to a 4th card) */}
+      <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <p
+          style={{
+            color: "var(--dim)",
+            fontSize: "var(--fs-sm)",
+            maxWidth: "var(--maxw-prose)",
+            margin: "0 auto",
+            lineHeight: 1.6,
+          }}
+        >
+          Already know your exposure and just want to stay ahead of it?{" "}
+          <a href="/monitor" style={{ color: "var(--gold)" }}>
+            Titanos Monitor
+          </a>{" "}
+          watches your attack surface for {DISPLAY.MONITOR_MONTHLY} — cancel in one click. →
         </p>
       </section>
 

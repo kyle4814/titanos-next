@@ -9,16 +9,23 @@ import SlotScarcity from "@/components/SlotScarcity";
 import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
 import { SITE } from "@/lib/config";
+import { PRICING, DISPLAY } from "@/lib/pricing";
 
 const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 const CAL_15 = SITE.CAL_15MIN_URL;
 
+// Site Fix 3 — Monitor decoupled from the pack. The pack is a one-time
+// charge; Monitor is included free for PACK_INCLUDED_MONITOR_MONTHS, then
+// continues only on explicit opt-in. PRICING.MONITOR_CONTINUATION_MODE
+// governs the server's behaviour at free_until expiry. DEFAULT = "opt_in"
+// (no auto-charge; reminder + manual subscribe). Flip to "auto_continue"
+// only if attach rate justifies and copy is updated to disclose it.
+
 // Fix 5g — title/og/twitter aligned. Description rewritten to reflect
-// the new plain-English hero ("ADM = disclose AI in your privacy policy").
+// the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
   "Privacy Act Compliance Before 11 December 2026 — Done With You | TITANOS";
-const META_DESC =
-  "From 11 Dec 2026, AU privacy policies must disclose automated decision-making (including AI). I fix that with you in one working call. AU$5,997 + AU$199/mo.";
+const META_DESC = `From 11 Dec 2026, AU privacy policies must disclose automated decision-making (including AI). I fix that with you in one working call. ${DISPLAY.PACK_PRICE} one-time, ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -68,8 +75,8 @@ const THREAD_STEPS: ThreadStep[] = [
   },
   {
     num: "VI",
-    title: "MONTHS 4-12 · $199/MO MONITORING",
-    body: "Quarterly re-scan (months 4, 7, 10) with delta report. Monthly regulatory-update briefing tailored to your industry. Ad-hoc questions answered within 1 business day. Cancellable any time.",
+    title: `MONTHS 1-${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · TITANOS MONITOR FREE`,
+    body: `Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing — same product as Titanos Monitor, included free for ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months covering your 30-day review and beyond. After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} it continues at ${DISPLAY.MONITOR_MONTHLY} only if you opt in — no silent continuity. I'll email you the exact date before any meter would start.`,
   },
 ];
 
@@ -140,8 +147,7 @@ const INCLUDED = [
   "NDB runbook integrated",
   "30-day review call",
   "Signed compliance attestation letter",
-  "Quarterly re-scan + delta report",
-  "12 months of industry-specific regulatory update briefings",
+  `${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (then optional at ${DISPLAY.MONITOR_MONTHLY} — opt-in, no auto-charge)`,
 ];
 
 export default function CompliancePage() {
@@ -155,7 +161,7 @@ export default function CompliancePage() {
     offers: {
       "@type": "Offer",
       name: "Done With You",
-      price: "5997",
+      price: String(PRICING.PACK_PRICE),
       priceCurrency: "AUD",
       availability: "https://schema.org/InStock",
       url: STRIPE_LINK,
@@ -179,7 +185,7 @@ export default function CompliancePage() {
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
         title="From 11 December 2026, your privacy policy has to disclose any automated decision-making your business uses — including AI tools. Most don’t. I fix that, with you, in one working call."
-        tagline="One fixed-price engagement: I diagnose your gaps, write your documents, and we apply every change together on a 90-minute screen-share. AU$5,997 one-time + AU$199/mo monitoring — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one."
+        tagline={`One fixed-price engagement: I diagnose your gaps, write your documents, and we apply every change together on a 90-minute screen-share. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
         sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off."
         trustLine={
           <>
@@ -199,8 +205,8 @@ export default function CompliancePage() {
         <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
           BOOK A 15-MIN FIT CALL
         </AnimatedButton>
-        <AnimatedButton href={STRIPE_LINK} external variant="secondary" ariaLabel="Buy Compliance for AU$5,997">
-          BUY COMPLIANCE · AU$5,997
+        <AnimatedButton href={STRIPE_LINK} external variant="secondary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
+          BUY COMPLIANCE · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
@@ -399,7 +405,7 @@ export default function CompliancePage() {
                   textAlign: "center",
                 }}
               >
-                AU$5,997
+                {DISPLAY.PACK_PRICE}
                 <span
                   style={{
                     color: "var(--dim)",
@@ -410,7 +416,8 @@ export default function CompliancePage() {
                     letterSpacing: "0.02em",
                   }}
                 >
-                  one-time + AU$199/mo monitoring
+                  one-time · {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
+                  <a href="/monitor" style={{ color: "var(--ice)" }}>Monitor</a> included free
                 </span>
               </div>
               <p
@@ -479,7 +486,7 @@ export default function CompliancePage() {
                   BOOK A 15-MIN FIT CALL
                 </AnimatedButton>
                 <AnimatedButton href={STRIPE_LINK} external variant="secondary">
-                  Buy directly · AU$5,997
+                  Buy directly · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -492,6 +499,42 @@ export default function CompliancePage() {
                 Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
               </p>
             </article>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* Site Fix 3 — how monitoring works after the pack (explicit opt-in) */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="HOW THE MONITORING WORKS AFTER THE PACK"
+            lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack — automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
+          />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto",
+              display: "grid",
+              gap: 14,
+            }}
+          >
+            <MonitorTimelineRow
+              when={`Months 1–${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
+              title="Free + automatic"
+              body={`Monthly external scan, delta report, CVE alerts matched to your stack, and a regulatory briefing land in your inbox. Same product as Titanos Monitor — included with the pack.`}
+            />
+            <MonitorTimelineRow
+              when={`7 days before month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS + 1}`}
+              title="I email you the exact date the meter would start"
+              body={`Plain-English email: "Your ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} included months end on {date}. If you want it to continue at ${DISPLAY.MONITOR_MONTHLY}, subscribe here. If you do nothing, it simply stops — no charge, no action needed."`}
+            />
+            <MonitorTimelineRow
+              when={`After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
+              title="Opt-in continues, silence stops it"
+              body={`Default mode: ${PRICING.MONITOR_CONTINUATION_MODE === "opt_in" ? "no charge unless you affirmatively subscribe" : `auto-continue at ${DISPLAY.MONITOR_MONTHLY} with one-click cancel in the portal`}. No auto-charge unless you choose to keep it. No retention sequence. No coupon games.`}
+            />
           </div>
         </div>
       </SectionReveal>
@@ -548,9 +591,22 @@ export default function CompliancePage() {
               together on the 90-minute working call — typically a 15-minute admin sequence
               covering MFA, conditional access, and audit logging.
             </FaqItem>
+            <FaqItem question="Is the monthly fee mandatory?">
+              {/* Site Fix 3 — explicit opt-in framing, no silent continuity */}
+              No. The pack is a one-time {DISPLAY.PACK_PRICE}. The first{" "}
+              {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
+              <a href="/monitor" style={{ color: "var(--ice)" }}>Titanos Monitor</a> are
+              included free. After that it’s entirely optional —{" "}
+              {DISPLAY.MONITOR_MONTHLY} if you want ongoing scans and briefings, nothing if
+              you don’t. I’ll email you the exact date before any meter would start, and
+              it’s one click to decline or cancel. No auto-charge unless you affirmatively
+              subscribe.
+            </FaqItem>
             <FaqItem question="What’s the difference between this and Vanta or Drata?">
               Vanta and Drata are US$10–15K/yr enterprise compliance tools shaped for SOC 2.
-              This is an AU$5,997 one-time + AU$199/mo engagement shaped for AU SMBs facing
+              This is a {DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at{" "}
+              {DISPLAY.MONITOR_MONTHLY} after the included{" "}
+              {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing
               Privacy Act + Essential Eight. Different buyer, different price, different
               geography, different framework.
             </FaqItem>
@@ -639,7 +695,7 @@ export default function CompliancePage() {
             BOOK A 15-MIN FIT CALL
           </AnimatedButton>
           <AnimatedButton href={STRIPE_LINK} external variant="secondary">
-            BUY DIRECTLY · AU$5,997
+            BUY DIRECTLY · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>
@@ -724,6 +780,45 @@ function TimelineRow({
       </h4>
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
     </div>
+  );
+}
+
+function MonitorTimelineRow({ when, title, body }: { when: string; title: string; body: string }) {
+  return (
+    <article
+      style={{
+        background: "var(--card)",
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-md)",
+        padding: "20px 22px",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-display), Georgia, serif",
+          color: "var(--gold-dim)",
+          fontSize: "var(--fs-xs)",
+          letterSpacing: "0.16em",
+          marginBottom: 6,
+          textTransform: "uppercase",
+        }}
+      >
+        {when}
+      </div>
+      <h4
+        style={{
+          color: "var(--ice)",
+          fontSize: "var(--fs-body)",
+          fontWeight: 600,
+          marginBottom: 6,
+          fontFamily: "var(--font-body), system-ui, sans-serif",
+          letterSpacing: 0,
+        }}
+      >
+        {title}
+      </h4>
+      <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{body}</p>
+    </article>
   );
 }
 

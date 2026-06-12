@@ -71,9 +71,9 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// SEO-03: description trimmed to 152 chars (≤155 limit)
+// SEO-03: description trimmed under 155 chars
 const META_DESCRIPTION =
-  "Free external security scan, AU Privacy Act compliance (AU$5,997 + $199/mo), and project-quoted AI implementation — one operator, three doors in.";
+  "Free external scan, AU Privacy Act compliance (AU$5,997, 3mo Monitor free), AU$149/mo Titanos Monitor, AI implementation. One operator, three doors in.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
