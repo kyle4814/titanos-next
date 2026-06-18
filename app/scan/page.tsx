@@ -9,6 +9,7 @@ import ScanRequestForm from "@/components/ScanRequestForm";
 import Testimonials from "@/components/Testimonials";
 import ProcessSteps from "./ProcessSteps";
 import { SITE } from "@/lib/config";
+import { DISPLAY } from "@/lib/pricing";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
 // Internal anchor — the on-page form section. No mailto in the primary
@@ -306,6 +307,12 @@ export default function ScanPage() {
               margin: "0 auto",
             }}
           >
+            <BridgeCard
+              title="TITANOS MONITOR"
+              body={`If the scan is clean today but you want to know when it isn't, Monitor watches your attack surface every month — delta report, CVE alerts on your stack, regulatory briefing. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
+              href="/monitor"
+              cta="See Monitor"
+            />
             <BridgeCard
               title="PRIVACY ACT + ESSENTIAL EIGHT COMPLIANCE"
               body="If the scan surfaces gaps and the 11 December 2026 Privacy Act deadline matters to you, the compliance engagement is the next step. One done-with-you call where we apply the changes together."

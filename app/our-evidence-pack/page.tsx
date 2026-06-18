@@ -3,6 +3,7 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { SITE } from "@/lib/config";
+import { PRICING, DISPLAY } from "@/lib/pricing";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_HREF = "/scan#request";
@@ -254,7 +255,7 @@ export default function OurEvidencePackPage() {
             lineHeight: 1.7,
           }}
         >
-          AU$5,997 one-time + AU$199/mo monitoring. One done-with-you engagement —
+          {DISPLAY.PACK_PRICE} one-time, with {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (optional after at {DISPLAY.MONITOR_MONTHLY}). One done-with-you engagement —
           the same 13 sections, written for your business, applied together on a
           90-minute working call.
         </p>
