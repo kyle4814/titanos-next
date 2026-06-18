@@ -34,7 +34,7 @@ export const SITE: SiteConfig = {
   // Form backend toggle. "flask" = POST to FLASK_FORM_ENDPOINT.
   // "formspree" = POST to https://formspree.io/f/<FORMSPREE_ID>.
   FORM_BACKEND: "flask",
-  FLASK_FORM_ENDPOINT: "https://api.titanos.tech/scan-request",
+  FLASK_FORM_ENDPOINT: "https://api.titanos.tech/scan/request",
   FORMSPREE_ID: "",
 
   // Compliance capacity — drives slot-based scarcity copy.
