@@ -17,6 +17,11 @@
 /.next/
 /out/
 
+# editor / scratch
+.claude/
+__pycache__/
+*.pyc
+
 # production
 /build
 
