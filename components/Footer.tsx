@@ -4,10 +4,12 @@ import Link from "next/link";
 
 const LINKS = [
   { label: "Free Scan", href: "/scan", external: false },
+  { label: "Monitor", href: "/monitor", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Methodology", href: "/methodology", external: false },
   { label: "Our scan", href: "/our-scan", external: false },
+  { label: "Evidence pack", href: "/our-evidence-pack", external: false },
   { label: "About", href: "/about", external: false },
   {
     label: "Book a call",
@@ -32,7 +34,16 @@ export default function Footer() {
       }}
     >
       <div className="container-vault">
-        <div style={{ marginBottom: 14 }}>
+        {/* MOB-03 — flex-wrap clean instead of 7 inline links wrapping ragged */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "10px 18px",
+            marginBottom: 18,
+          }}
+        >
           {LINKS.map((l) =>
             l.external ? (
               <a
@@ -40,7 +51,7 @@ export default function Footer() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ margin: "0 12px", color: "var(--dim)" }}
+                style={{ color: "var(--dim)", padding: "4px 2px" }}
               >
                 {l.label}
               </a>
@@ -48,7 +59,7 @@ export default function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                style={{ margin: "0 12px", color: "var(--dim)" }}
+                style={{ color: "var(--dim)", padding: "4px 2px" }}
               >
                 {l.label}
               </Link>
@@ -57,7 +68,7 @@ export default function Footer() {
         </div>
         <div>
           {/* AES-15 — wordmark in Cinzel to match Nav + Hero */}
-          <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
+          <span style={{ fontFamily: "var(--font-display), Georgia, serif", letterSpacing: "0.1em" }}>
             TITANOS
           </span>
           {" · Kyle Deligny · Brisbane, Australia"}

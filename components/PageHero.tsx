@@ -44,7 +44,7 @@ export default function PageHero({
               border: "1px solid var(--gold-dim)",
               padding: "6px 16px",
               borderRadius: "var(--radius-lg)",
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               fontSize: "var(--fs-xs)",
               color: "var(--ice)",
               letterSpacing: "0.1em",
@@ -61,7 +61,7 @@ export default function PageHero({
           variants={fadeUp}
           transition={{ delay: 0.05 }}
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             fontWeight: 700,
             fontSize: "var(--fs-h1)",
             color: "var(--gold)",

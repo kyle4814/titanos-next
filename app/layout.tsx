@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Cinzel, Inter } from "next/font/google";
+import { IBM_Plex_Serif, IBM_Plex_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";
-import GoldDust from "@/components/GoldDust";
+import VaultBackground from "@/components/VaultBackground";
 import CursorTrail from "@/components/CursorTrail";
+import PageMood from "@/components/PageMood";
+import EasterEgg from "@/components/EasterEgg";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -28,37 +30,56 @@ const CSP =
   "style-src 'self' 'unsafe-inline'; " +
   "img-src 'self' data:; " +
   "font-src 'self'; " +
-  "connect-src 'self'; " +
+  // connect-src includes api.titanos.tech so the /scan-request form
+  // can POST cross-origin. fetch() is governed by connect-src; the
+  // legacy form-action 'mailto:' directive below covers the noscript
+  // mailto fallback only.
+  "connect-src 'self' https://api.titanos.tech; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 
-// AES-11 — Cinzel 400 dropped (unused after AES-09 bumped sub-spec labels
-// to --fs-sm where Cinzel 700 carries the eyebrow weight). Inter 300
-// KEPT because per AES-10 the home sub-tagline + HeroEntrance trust line
-// + PageHero sub deliberately use fontWeight: 300 for the airy lead-in.
-// Default body weight is now 400 (globals.css); 300 is a local override.
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
+// W4 PILLAR 1 — typography swap.
+//
+// Cinzel was the AI-default "luxury display" font of 2024-2026. Buyers'
+// pattern-match for "AI site" was triggered by it. Replaced with:
+//
+//   Display (wordmark, hero, H1/H2): IBM Plex Serif at weight 300 italic
+//     + 400 + 700. Editorial-luxury, distinctive, free.
+//   Body (paragraphs, UI): Inter Tight. Subtly tighter than Inter; reads
+//     "considered modern" without being the safe default.
+//   Mono (eyebrow labels, terminal, technical microcopy): IBM Plex Mono.
+//     Operator vocabulary. Used in small doses across every page.
+const plexSerif = IBM_Plex_Serif({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const interTight = Inter_Tight({
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
-// SEO-03: description trimmed to 151 chars (≤155 limit)
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+});
+
+// SEO-03: description trimmed under 155 chars
 const META_DESCRIPTION =
-  "Free external security scan + AU Privacy Act compliance (AU$5,997 + $199/mo) + project-quoted AI implementation. Built for AU/NZ/SG operators.";
+  "Free external scan, AU Privacy Act compliance (AU$5,997, 3mo Monitor free), AU$149/mo Titanos Monitor, AI implementation. One operator, three doors in.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
+  // SEO-3 / Fix 5g: title aligned with homepage H1 "One operator. Three doors in."
   title:
-    "TITANOS — Three ways we help: Free Scan, Compliance, AI Implementation",
+    "TITANOS — One operator. Three doors in. Scan · Compliance · AI Implementation",
   description: META_DESCRIPTION,
   icons: {
     icon: [
@@ -68,7 +89,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "192x192" }],
   },
   openGraph: {
-    title: "TITANOS — Free Scan · Compliance · AI Implementation",
+    title: "TITANOS — One operator. Three doors in.",
     description: META_DESCRIPTION,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",
@@ -89,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${cinzel.variable} ${inter.variable}`}
+      className={`${plexSerif.variable} ${interTight.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -102,6 +123,17 @@ export default function RootLayout({
         <meta name="referrer" content="strict-origin-when-cross-origin" />
       </head>
       <body>
+        {/*
+          ▄▄▄█████▓ ██▓▄▄▄█████▓ ▄▄▄       ███▄    █  ▒█████    ██████
+          ▓  ██▒ ▓▒▓██▒▓  ██▒ ▓▒▒████▄     ██ ▀█   █ ▒██▒  ██▒▒██    ▒
+          ▒ ▓██░ ▒░▒██▒▒ ▓██░ ▒░▒██  ▀█▄  ▓██  ▀█ ██▒▒██░  ██▒░ ▓██▄
+          ░ ▓██▓ ░ ░██░░ ▓██▓ ░ ░██▄▄▄▄██ ▓██▒  ▐▌██▒▒██   ██░  ▒   ██▒
+            ▒██▒ ░ ░██░  ▒██▒ ░  ▓█   ▓██▒▒██░   ▓██░░ ████▓▒░▒██████▒▒
+
+          Kyle Deligny · kyle@titanos.tech · ABN 34 318 502 254
+          Built with Claude Code. Reading this means you're already curious.
+          Email if you want to talk.
+        */}
         {/* SEO-06: Organisation JSON-LD on every page — page.tsx should drop its duplicate copy */}
         <script
           type="application/ld+json"
@@ -131,9 +163,18 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <GoldDust />
+        {/* W4 Pillar 3 — layered background system (warm canvas + grain +
+            lattice via globals.css ::before/::after; mesh + specular sweep
+            via VaultBackground). VaultBackground also handles tab-hidden
+            pause for battery / politeness. */}
+        <VaultBackground />
         <VaultFrame playEntrance={true} />
         <CursorTrail />
+        {/* W4 Pillar 5 — gold edge thread (always-visible left edge) */}
+        <span aria-hidden="true" className="vault-edge-thread" />
+        {/* W4 per-page mood swap */}
+        <PageMood />
+        <EasterEgg />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
           {children}

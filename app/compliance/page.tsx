@@ -4,28 +4,46 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import DeadlineCounter from "@/components/DeadlineCounter";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
+import SlotScarcity from "@/components/SlotScarcity";
+import OperatorByline from "@/components/OperatorByline";
+import Testimonials from "@/components/Testimonials";
+import { SITE } from "@/lib/config";
+import { PRICING, DISPLAY } from "@/lib/pricing";
 
-const STRIPE_LINK = "https://buy.stripe.com/3cIfZh017cGd80QgGa1RC43";
-const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
+const CAL_15 = SITE.CAL_15MIN_URL;
+
+// Site Fix 3 — Monitor decoupled from the pack. The pack is a one-time
+// charge; Monitor is included free for PACK_INCLUDED_MONITOR_MONTHS, then
+// continues only on explicit opt-in. PRICING.MONITOR_CONTINUATION_MODE
+// governs the server's behaviour at free_until expiry. DEFAULT = "opt_in"
+// (no auto-charge; reminder + manual subscribe). Flip to "auto_continue"
+// only if attach rate justifies and copy is updated to disclose it.
+
+// Fix 5g — title/og/twitter aligned. Description rewritten to reflect
+// the new plain-English hero and the decoupled monitor framing.
+const META_TITLE =
+  "Privacy Act Compliance Before 11 December 2026 — Done With You | TITANOS";
+const META_DESC = `From 11 Dec 2026, AU privacy policies must disclose automated decision-making (including AI). I fix that with you in one working call. ${DISPLAY.PACK_PRICE} one-time, ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free.`;
 
 export const metadata: Metadata = {
-  title:
-    "Privacy Act Compliance for AU SMBs · Dec 2026 | TITANOS",
-  description:
-    "Australian Privacy Act + Essential Eight compliance done with you. AU$5,997 one-time + AU$199/mo monitoring. Built for the 11 December 2026 ADM disclosure deadline. ABN 34 318 502 254.",
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: "https://titanos.tech/compliance" },
   openGraph: {
-    title:
-      "AU Privacy Act + Essential Eight Compliance — Done With You | Titanos",
-    description:
-      "Get compliant before 11 December 2026. AU$5,997 one-time + AU$199/mo monitoring. One done-with-you engagement, no tiers. Built for Australian SMBs.",
+    title: META_TITLE,
+    description: META_DESC,
     type: "website",
     url: "https://titanos.tech/compliance",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: META_TITLE,
+    description: META_DESC,
+    images: ["/og-image.png"],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -33,76 +51,81 @@ const THREAD_STEPS: ThreadStep[] = [
   {
     num: "I",
     title: "INTAKE + EXTERNAL SCAN",
-    body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA + backup state, what's driving compliance). We run an external attack-surface scan on your domain — nmap banner, TLS posture, public DNS, CVE matching. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
+    body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA + backup state, what’s driving compliance). I run an external scan on your domain — a look at what an attacker can see about your business from the outside, with version-by-version CVE matching against the public NVD database. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
   },
   {
     num: "II",
     title: "EVIDENCE PACK",
-    body: "Within 3 business days we send your evidence pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, NDB breach-response runbook, vendor risk register, scan findings split by what we directly verified vs what you affirmed. Regulator-ready as a single PDF.",
+    body: "Within 3 business days I send your evidence pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified vs what you affirmed. Regulator-ready as a single PDF.",
   },
   {
     num: "III",
     title: "90-MIN IMPLEMENTATION CALL",
-    body: "Screen-shared working session. We apply changes live: SPF / DKIM / DMARC / CAA records, M365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
+    body: "Screen-shared working session. We apply changes live: SPF / DKIM / DMARC / CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
   },
   {
     num: "IV",
     title: "WHAT YOU CONTROL VS YOUR HOST",
-    body: "Some controls live on Squarespace / Shopify / Xero / Cliniko — not in your hands. We give you a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
+    body: "Some controls live on Squarespace / Shopify / Xero / Cliniko — not in your hands. You get a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
   },
   {
     num: "V",
     title: "30-DAY REVIEW CALL + ATTESTATION",
-    body: "We audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed Essential Eight ML1 self-attestation letter plus a Privacy Act compliance posture letter — both regulator-ready.",
+    body: "We audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed letter you can hand to a regulator, insurer, or enterprise client stating exactly what was checked and fixed against the Australian government’s baseline security checklist (Essential Eight, Maturity Level 1), plus a Privacy Act compliance posture letter.",
   },
   {
     num: "VI",
-    title: "MONTHS 4-12 · $199/MO MONITORING",
-    body: "Quarterly re-scan (months 4, 7, 10) with delta report. Monthly regulatory-update briefing tailored to your industry. Ad-hoc questions answered within 1 business day. Cancellable any time.",
+    title: `MONTHS 1-${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · TITANOS MONITOR FREE`,
+    body: `Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing — same product as Titanos Monitor, included free for ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months covering your 30-day review and beyond. After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} it continues at ${DISPLAY.MONITOR_MONTHLY} only if you opt in — no silent continuity. I'll email you the exact date before any meter would start.`,
   },
 ];
 
+// Fix 3c — reordered by believability-to-an-SMB, not chronologically.
+// (1) live tort = anyone can sue you today; (2) insurance denial; (3)
+// ADM disclosure 11 Dec; (4) Tranche 2 small-business exemption removal.
+// IoT + EU AI Act items demoted to the compact "also on the calendar"
+// row rendered after TIMELINE.
 const TIMELINE = [
   {
-    when: "10 JUNE 2025 · LIVE",
-    title: "Statutory tort for serious privacy invasions",
-    body: "Already in effect. Individuals can sue directly for serious invasions of privacy — no need to wait for the OAIC.",
+    when: "LIVE NOW",
+    title: "Anyone can sue you directly",
+    body: "The statutory tort for serious invasions of privacy is in effect. A customer or ex-employee can take you to court for a serious privacy breach today — no regulator needed, no OAIC queue.",
     state: "live",
   },
   {
-    when: "4 MARCH 2026 · LIVE",
-    title: "Mandatory IoT security standards take effect",
-    body: "Connected-device makers and importers face baseline security requirements. Cascades to any business reselling or operating IoT.",
+    when: "LIVE NOW",
+    title: "Your insurer can refuse the claim",
+    body: "Cyber insurers increasingly deny breach claims when baseline controls (MFA, patching — the Essential Eight basics) weren’t in place. Policies commonly condition cover on documented security hygiene. Without an attestation, you’re relying on goodwill at the worst possible moment.",
     state: "live",
   },
   {
-    when: "2 AUGUST 2026",
-    title: "EU AI Act enforcement begins",
-    body: "Applies to AU companies with EU customers. Transparency, risk-classification, and conformity obligations.",
-    state: "future",
-  },
-  {
-    when: "11 DECEMBER 2026 · THE ONE",
-    title: "ADM disclosure required in all privacy policies",
-    body: "Automated Decision-Making used in any business process must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M.",
+    when: "11 DECEMBER 2026",
+    title: "ADM disclosure required in your privacy policy",
+    body: "Automated decision-making — including AI tools your business uses — must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M for serious or repeated interference.",
     state: "future",
   },
   {
     when: "TRANCHE 2 · COMING",
-    title: "Small-business exemption removal",
-    body: "Pulls ~2.3M additional AU SMBs into Privacy Act scope. The current AU$3M turnover exemption is expected to be repealed in the second reform tranche.",
+    title: "Small-business exemption disappears",
+    body: "The second reform tranche is positioned to remove the AU$3M turnover exemption, pulling roughly 2.3M additional AU SMBs into Privacy Act scope. If you’re currently exempt, that protection has a sunset on it.",
     state: "coming",
   },
 ];
 
+// Compact "also on the calendar" row — non-headline deadlines.
+const ALSO_ON_CALENDAR = [
+  "4 March 2026 — Mandatory IoT security standards live. Cascades to any business reselling or operating connected devices.",
+  "2 August 2026 — EU AI Act enforcement begins. Applies to AU companies with EU customers.",
+];
+
 const YOU_CONTROL = [
-  "Privacy policy content + ADM disclosure",
+  "Privacy policy content + ADM disclosure (the new AI-tools disclosure)",
   "DNS hygiene (SPF, DKIM, DMARC, CAA records)",
   "Microsoft 365 / Google Workspace security defaults",
-  "MFA enablement across team",
-  "Breach response process documentation",
-  "Vendor risk register",
-  "Essential Eight ML1 self-attestation",
+  "MFA (multi-factor authentication) enabled across your team",
+  "Breach response process documentation (NDB runbook)",
+  "Vendor risk register (one-page record of every third-party touching your customer data)",
+  "Essential Eight Maturity Level 1 self-attestation",
   "Staff access management",
 ];
 
@@ -115,6 +138,7 @@ const HOST_CONTROLS = [
 ];
 
 const INCLUDED = [
+  "Same evidence pack shape as my own — see /our-evidence-pack",
   "13-section evidence pack (~17pp)",
   "External scan with you-vs-host split",
   "90-minute implementation working call where we apply the changes together",
@@ -123,8 +147,7 @@ const INCLUDED = [
   "NDB runbook integrated",
   "30-day review call",
   "Signed compliance attestation letter",
-  "Quarterly re-scan + delta report",
-  "12 months of industry-specific regulatory update briefings",
+  `${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (then optional at ${DISPLAY.MONITOR_MONTHLY} — opt-in, no auto-charge)`,
 ];
 
 export default function CompliancePage() {
@@ -138,7 +161,7 @@ export default function CompliancePage() {
     offers: {
       "@type": "Offer",
       name: "Done With You",
-      price: "5997",
+      price: String(PRICING.PACK_PRICE),
       priceCurrency: "AUD",
       availability: "https://schema.org/InStock",
       url: STRIPE_LINK,
@@ -155,27 +178,35 @@ export default function CompliancePage() {
       <PageHero
         badge={
           <>
-            DEADLINE · 11 DECEMBER 2026 <DeadlineCounter />
+            DEADLINE · 11 DECEMBER 2026 <SlotScarcity variant="pill" />
           </>
         }
-        title="Privacy Act compliant by 11 December 2026 — or face up to AU$50M in penalties."
-        tagline="One done-with-you engagement. Evidence pack, scan, 90-minute working call, 12 months of monitoring. AU$5,997."
-        sub="We do the diagnostic, give you the evidence pack, and apply the changes together on a 90-minute working call. Built for Australian SMBs on Squarespace, WordPress, Microsoft 365, and Google Workspace."
+        // Fix 3a — plain-English SMB-owner hero. The audit moved the
+        // Vanta price anchor INTO the hero so anchoring lands before the
+        // price does (it’s repeated in the pricing card below).
+        title="From 11 December 2026, your privacy policy has to disclose any automated decision-making your business uses — including AI tools. Most don’t. I fix that, with you, in one working call."
+        tagline={`One fixed-price engagement: I diagnose your gaps, write your documents, and we apply every change together on a 90-minute screen-share. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
+        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
-            3,600+ unique AU/NZ/SG businesses in our scan corpus ·{" "}
+            3,600+ unique AU/NZ/SG businesses in the scan corpus ·{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
               Methodology
             </a>
           </>
         }
       >
-        <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel="Buy Compliance for AU$5,997">
-          BUY COMPLIANCE · AU$5,997
+        {/*
+          Fix 2d — CTA prominence FLIPPED while testimonials.ts is empty.
+          Cal first (primary, filled), Stripe second (secondary, outline).
+          FLIP back to buy-primary once testimonials.ts has 3+ entries.
+        */}
+        <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
+          BOOK A 15-MIN FIT CALL
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="secondary">
-          BOOK A 15-MIN
+        <AnimatedButton href={STRIPE_LINK} external variant="secondary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
+          BUY COMPLIANCE · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
@@ -184,18 +215,40 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)" }}>
-          Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
         </p>
       </PageHero>
 
+      {/* Fix 2a + 3d — evidence-pack link + middle-rung scan routing line */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto 10px" }}>
+          See the actual deliverable —{" "}
+          <a href="/our-evidence-pack" style={{ color: "var(--gold)", fontWeight: 600 }}>
+            my own evidence pack, published in full →
+          </a>
+        </p>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6, maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          Not sure you have a problem? The free scan doubles as a compliance gap
+          snapshot — start there, no card, no commitment.{" "}
+          <a href="/scan" style={{ color: "var(--ice)" }}>
+            Free scan →
+          </a>
+        </p>
+      </SectionReveal>
+
+      {/* Fix 4 — slot-based scarcity block under the hero */}
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <SlotScarcity variant="block" />
+      </SectionReveal>
+
       <div className="divider-gold" />
 
-      {/* DEADLINE TIMELINE */}
+      {/* FOUR PRESSURE POINTS — Fix 3c reorder by believability, not date */}
       <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="FOUR DEADLINES TO KNOW"
-            lead="Four legal pressure points stack between now and 11 December 2026. The compliance pack covers them all in one pass."
+            title="FOUR LEGAL PRESSURE POINTS"
+            lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all four in one pass."
           />
           <div
             style={{
@@ -206,7 +259,30 @@ export default function CompliancePage() {
             }}
           >
             {TIMELINE.map((t) => (
-              <TimelineRow key={t.when} {...t} />
+              <TimelineRow key={t.title} {...t} />
+            ))}
+          </div>
+          {/* Compact "also on the calendar" row — Fix 3c demotion of IoT + EU AI Act */}
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "28px auto 0",
+              padding: "16px 18px",
+              background: "var(--card)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-sm)",
+              color: "var(--dim)",
+              fontSize: "var(--fs-sm)",
+              lineHeight: 1.65,
+            }}
+          >
+            <strong style={{ color: "var(--ice)", letterSpacing: "0.04em", display: "block", marginBottom: 6 }}>
+              Also on the calendar
+            </strong>
+            {ALSO_ON_CALENDAR.map((line) => (
+              <div key={line} style={{ padding: "2px 0" }}>
+                · {line}
+              </div>
             ))}
           </div>
         </div>
@@ -232,7 +308,7 @@ export default function CompliancePage() {
         <div className="container-vault">
           <SectionHeading
             title="YOU CONTROL SOME · YOUR HOST CONTROLS THE REST"
-            lead="Your hosting service controls some things. We tell you what to ask them to fix, and document the rest as “reasonable steps taken.”"
+            lead="Your hosting service controls some things. I give you exactly what to ask them to fix, and document the rest as “reasonable steps taken.”"
           />
           <div
             className="grid-auto-cards"
@@ -251,7 +327,7 @@ export default function CompliancePage() {
             />
             <SplitCol
               title="YOUR HOSTING PROVIDER CONTROLS"
-              sub="We tell you exactly how to escalate."
+              sub="I give you exactly how to escalate."
               items={HOST_CONTROLS}
               accent="ice"
               prefix="→"
@@ -267,8 +343,12 @@ export default function CompliancePage() {
         <div className="container-vault">
           <SectionHeading
             title="ONE ENGAGEMENT · DONE WITH YOU"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and stay with you for 12 months of regulatory briefings and quarterly re-scans."
+            lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and I stay with you for 12 months of regulatory briefings and quarterly re-scans."
           />
+          {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
+          <div style={{ textAlign: "center", marginBottom: 18 }}>
+            <OperatorByline />
+          </div>
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
@@ -281,7 +361,7 @@ export default function CompliancePage() {
             >
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--ice)",
                   fontSize: "var(--fs-xs)",
                   letterSpacing: "0.18em",
@@ -293,7 +373,7 @@ export default function CompliancePage() {
               </div>
               <h3
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h3)",
                   letterSpacing: "0.04em",
@@ -317,7 +397,7 @@ export default function CompliancePage() {
               </p>
               <div
                 style={{
-                  fontFamily: "'Cinzel', serif",
+                  fontFamily: "var(--font-display), Georgia, serif",
                   color: "var(--gold)",
                   fontSize: "var(--fs-h2)",
                   fontWeight: 700,
@@ -325,7 +405,7 @@ export default function CompliancePage() {
                   textAlign: "center",
                 }}
               >
-                AU$5,997
+                {DISPLAY.PACK_PRICE}
                 <span
                   style={{
                     color: "var(--dim)",
@@ -336,7 +416,8 @@ export default function CompliancePage() {
                     letterSpacing: "0.02em",
                   }}
                 >
-                  one-time + AU$199/mo monitoring
+                  one-time · {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
+                  <a href="/monitor" style={{ color: "var(--ice)" }}>Monitor</a> included free
                 </span>
               </div>
               <p
@@ -349,9 +430,10 @@ export default function CompliancePage() {
                   maxWidth: "var(--maxw-prose)",
                 }}
               >
-                Everything you need to demonstrate “reasonable steps” under the Privacy Act and
-                Essential Eight Maturity Level 1 (ML1), applied together with you in a single working call — then
-                maintained for 12 months.
+                Everything you need to demonstrate “reasonable steps” under the
+                Privacy Act and the Australian government’s baseline security
+                checklist (Essential Eight, Maturity Level 1), applied together
+                with you in a single working call — then maintained for 12 months.
               </p>
               <ul
                 style={{
@@ -387,6 +469,11 @@ export default function CompliancePage() {
                   </li>
                 ))}
               </ul>
+              {/*
+                Fix 2d — pricing-card CTAs FLIPPED (cal=primary, buy=secondary)
+                while testimonials.ts is empty. FLIP back to buy-primary once
+                testimonials.ts has 3+ entries.
+              */}
               <div
                 style={{
                   display: "flex",
@@ -395,11 +482,11 @@ export default function CompliancePage() {
                   gap: 12,
                 }}
               >
-                <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel="Buy Compliance for AU$5,997">
-                  BUY COMPLIANCE · AU$5,997
+                <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
+                  BOOK A 15-MIN FIT CALL
                 </AnimatedButton>
-                <AnimatedButton href={CAL_15} external variant="secondary">
-                  Book a 15-min first
+                <AnimatedButton href={STRIPE_LINK} external variant="secondary">
+                  Buy directly · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -409,9 +496,45 @@ export default function CompliancePage() {
                 </a>
               </p>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "6px auto 0" }}>
-                Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+                Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
               </p>
             </article>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* Site Fix 3 — how monitoring works after the pack (explicit opt-in) */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="HOW THE MONITORING WORKS AFTER THE PACK"
+            lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack — automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
+          />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto",
+              display: "grid",
+              gap: 14,
+            }}
+          >
+            <MonitorTimelineRow
+              when={`Months 1–${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
+              title="Free + automatic"
+              body={`Monthly external scan, delta report, CVE alerts matched to your stack, and a regulatory briefing land in your inbox. Same product as Titanos Monitor — included with the pack.`}
+            />
+            <MonitorTimelineRow
+              when={`7 days before month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS + 1}`}
+              title="I email you the exact date the meter would start"
+              body={`Plain-English email: "Your ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} included months end on {date}. If you want it to continue at ${DISPLAY.MONITOR_MONTHLY}, subscribe here. If you do nothing, it simply stops — no charge, no action needed."`}
+            />
+            <MonitorTimelineRow
+              when={`After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
+              title="Opt-in continues, silence stops it"
+              body={`Default mode: ${PRICING.MONITOR_CONTINUATION_MODE === "opt_in" ? "no charge unless you affirmatively subscribe" : `auto-continue at ${DISPLAY.MONITOR_MONTHLY} with one-click cancel in the portal`}. No auto-charge unless you choose to keep it. No retention sequence. No coupon games.`}
+            />
           </div>
         </div>
       </SectionReveal>
@@ -421,62 +544,80 @@ export default function CompliancePage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="QUESTIONS WE GET" />
+          <SectionHeading title="QUESTIONS I GET" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How the working call works">
               A single 90-minute video call where we apply the changes together. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
-              CMS. We walk you through each change as you make it — no opaque hand-offs, no
-              “we’ll send you instructions and check back next week.” By the end of the call, the
+              CMS. I walk you through each change as you make it — no opaque hand-offs, no
+              “I’ll send you instructions and check back next week.” By the end of the call, the
               privacy policy is deployed, the ADM disclosure is live, the M365/Workspace
               hardening is applied, the DNS records are corrected, and the NDB runbook is
               integrated.
             </FaqItem>
             <FaqItem question="What access you need to grant">
-              For the working call, you remain logged into your own admin consoles — we never
+              For the working call, you remain logged into your own admin consoles — I never
               receive credentials. You’ll need owner or admin access to: your DNS provider, your
               Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy
               deployment, and (optionally) your customer-record systems for the vendor risk
               register.
             </FaqItem>
-            <FaqItem question="What we do vs what you do on the call">
-              We do: the diagnostic, the policy drafting, the specific Essential Eight setting
+            <FaqItem question="What I do vs what you do on the call">
+              I do: the diagnostic, the policy drafting, the specific Essential Eight setting
               list, the DNS record values, the M365/Workspace hardening checklist, the NDB
               runbook, the attestation letter, and the explanation of why each change is needed.
               You do: the actual clicks inside your own admin consoles, the privacy policy
               publish, and the staff communication once changes are live.
             </FaqItem>
             <FaqItem question="I’m too small for this to matter">
-              Tranche 2 reforms are positioned to remove the AU$3M small-business turnover
-              exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope. Penalties
-              already reach AU$50M for serious or repeated interference with privacy.
+              {/* Fix 3c — answer reordered to match the new fear hierarchy:
+                  live tort, then insurance, then ADM penalties, then Tranche 2. */}
+              The statutory tort is live now — a customer or ex-employee can take you to court
+              for a serious privacy breach today, no regulator needed. Cyber insurers
+              increasingly deny breach claims when baseline controls weren’t in place. Penalties
+              already reach AU$50M for serious or repeated interference. And Tranche 2 reforms
+              are positioned to remove the AU$3M small-business turnover exemption, pulling
+              roughly 2.3M additional SMBs into Privacy Act scope.
             </FaqItem>
-            <FaqItem question="Our website is on Squarespace — can you even help?">
-              Yes. The audit works on any hosting provider. We document what you control (privacy
+            <FaqItem question="My website is on Squarespace — can you even help?">
+              Yes. The audit works on any hosting provider. I document what you control (privacy
               policy, DNS records, account-level MFA, vendor register) versus what Squarespace
-              controls (TLS, HSTS, server config), and give you the exact escalation language for
+              controls (TLS, HSTS, server config), and you get the exact escalation language for
               the bits they own.
             </FaqItem>
-            <FaqItem question="We use Microsoft 365 — do you cover that?">
+            <FaqItem question="I use Microsoft 365 — do you cover that?">
               Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes
-              that satisfy most Essential Eight ML1 requirements. We apply these together with
-              you on the 90-minute working call — typically a 15-minute admin sequence covering
-              MFA, conditional access, and audit logging.
+              that satisfy most Essential Eight Maturity Level 1 requirements. We apply these
+              together on the 90-minute working call — typically a 15-minute admin sequence
+              covering MFA, conditional access, and audit logging.
+            </FaqItem>
+            <FaqItem question="Is the monthly fee mandatory?">
+              {/* Site Fix 3 — explicit opt-in framing, no silent continuity */}
+              No. The pack is a one-time {DISPLAY.PACK_PRICE}. The first{" "}
+              {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
+              <a href="/monitor" style={{ color: "var(--ice)" }}>Titanos Monitor</a> are
+              included free. After that it’s entirely optional —{" "}
+              {DISPLAY.MONITOR_MONTHLY} if you want ongoing scans and briefings, nothing if
+              you don’t. I’ll email you the exact date before any meter would start, and
+              it’s one click to decline or cancel. No auto-charge unless you affirmatively
+              subscribe.
             </FaqItem>
             <FaqItem question="What’s the difference between this and Vanta or Drata?">
               Vanta and Drata are US$10–15K/yr enterprise compliance tools shaped for SOC 2.
-              We’re an AU$5,997 one-time + AU$199/mo engagement shaped for AU SMBs facing
+              This is a {DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at{" "}
+              {DISPLAY.MONITOR_MONTHLY} after the included{" "}
+              {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing
               Privacy Act + Essential Eight. Different buyer, different price, different
               geography, different framework.
             </FaqItem>
             <FaqItem question="What if my hosting provider won’t fix what you find?">
-              We give you the exact escalation language. If they refuse, you have documented
+              You get the exact escalation language. If they refuse, you have documented
               evidence of having taken “reasonable steps” — the standard the OAIC actually
               assesses against.
             </FaqItem>
             <FaqItem question="Can you guarantee I’ll be compliant?">
               No vendor honestly can — compliance is determined by the regulator on the facts of
-              a specific incident. What we give you is the evidence pack regulators expect to see
+              a specific incident. What you get is the evidence pack regulators expect to see
               when assessing whether you took “reasonable steps.”
             </FaqItem>
             <FaqItem question="How fast can we get this done?">
@@ -508,6 +649,9 @@ export default function CompliancePage() {
         </p>
       </SectionReveal>
 
+      {/* Render-only-if-non-empty testimonials block — Fix 2c */}
+      <Testimonials offer="compliance" heading="WHAT COMPLIANCE CUSTOMERS SAID" />
+
       {/* FINAL CTA */}
       <SectionReveal
         style={{
@@ -519,7 +663,7 @@ export default function CompliancePage() {
       >
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             fontWeight: 700,
@@ -542,12 +686,16 @@ export default function CompliancePage() {
           One engagement, one outcome: an evidence pack a regulator accepts as “reasonable
           steps,” with the changes already applied together on the working call.
         </p>
+        {/*
+          Fix 2d — final-CTA cluster FLIPPED while testimonials.ts is empty.
+          FLIP back to buy-primary once testimonials.ts has 3+ entries.
+        */}
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={STRIPE_LINK} external variant="primary">
-            BUY COMPLIANCE · AU$5,997
+          <AnimatedButton href={CAL_15} external variant="primary">
+            BOOK A 15-MIN FIT CALL
           </AnimatedButton>
-          <AnimatedButton href={CAL_15} external variant="secondary">
-            BOOK A 15-MIN FIRST
+          <AnimatedButton href={STRIPE_LINK} external variant="secondary">
+            BUY DIRECTLY · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>
@@ -557,18 +705,22 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", margin: "6px auto 0" }}>
-          Stripe checkout · 14-day refund if no work delivered · Kyle responds personally within 1 business day
+          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+        </p>
+        <p
+          style={{
+            fontSize: "var(--fs-sm)",
+            color: "var(--dim)",
+            marginTop: 22,
+            maxWidth: "var(--maxw-prose)",
+            margin: "22px auto 0",
+            lineHeight: 1.65,
+          }}
+        >
+          Powered by <strong style={{ color: "var(--gold)" }}>Claude Code</strong> —
+          drafted by AI, reviewed and signed off by Kyle on every engagement.
         </p>
       </SectionReveal>
-
-      {/* Social proof placeholder — hidden until real testimonials land */}
-      <section
-        className="social-proof-placeholder"
-        style={{ display: "none" }}
-        aria-hidden="true"
-      >
-        {/* INSERT REAL testimonials, client names, logos, outcomes here. DO NOT FABRICATE. */}
-      </section>
     </>
   );
 }
@@ -605,7 +757,7 @@ function TimelineRow({
       <span aria-hidden="true" style={dotStyle} />
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: state === "coming" ? "var(--dim)" : "var(--gold)",
           fontSize: "var(--fs-sm)",
           letterSpacing: "0.06em",
@@ -620,7 +772,7 @@ function TimelineRow({
           fontSize: "var(--fs-body)",
           fontWeight: 600,
           marginBottom: 6,
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           letterSpacing: 0,
         }}
       >
@@ -628,6 +780,45 @@ function TimelineRow({
       </h4>
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
     </div>
+  );
+}
+
+function MonitorTimelineRow({ when, title, body }: { when: string; title: string; body: string }) {
+  return (
+    <article
+      style={{
+        background: "var(--card)",
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-md)",
+        padding: "20px 22px",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-display), Georgia, serif",
+          color: "var(--gold-dim)",
+          fontSize: "var(--fs-xs)",
+          letterSpacing: "0.16em",
+          marginBottom: 6,
+          textTransform: "uppercase",
+        }}
+      >
+        {when}
+      </div>
+      <h4
+        style={{
+          color: "var(--ice)",
+          fontSize: "var(--fs-body)",
+          fontWeight: 600,
+          marginBottom: 6,
+          fontFamily: "var(--font-body), system-ui, sans-serif",
+          letterSpacing: 0,
+        }}
+      >
+        {title}
+      </h4>
+      <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{body}</p>
+    </article>
   );
 }
 
@@ -655,7 +846,7 @@ function SplitCol({
     >
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: accent === "gold" ? "var(--gold)" : "var(--ice)",
           fontSize: "var(--fs-lg)",
           letterSpacing: "0.06em",

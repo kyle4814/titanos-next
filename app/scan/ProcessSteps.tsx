@@ -65,7 +65,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
           delay: reduce ? 0 : delay + 0.2,
         }}
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h3)",
           letterSpacing: "0.05em",
@@ -79,7 +79,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
       </motion.div>
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-sm)",
           letterSpacing: "0.08em",

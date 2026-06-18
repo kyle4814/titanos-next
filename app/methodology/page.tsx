@@ -5,20 +5,29 @@ import PageHero from "@/components/PageHero";
 import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 
+// Fix 5g — title/og/twitter aligned. "banner-grade" framing dropped
+// site-wide; the long-form description here is the canonical voice.
+const META_TITLE = "Methodology — TITANOS";
+const META_DESC =
+  "How I scan external attack surfaces. External-only nmap, no exploits, 90-day responsible disclosure window. ABN 34 318 502 254.";
+
 export const metadata: Metadata = {
-  title: "Methodology — TITANOS",
-  description:
-    "How Titanos Security scans external attack surfaces. Banner-grade nmap, no exploits, 90-day responsible disclosure window. ABN 34 318 502 254.",
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: "https://titanos.tech/methodology" },
   openGraph: {
-    title: "Methodology — Titanos Security",
-    description:
-      "How Titanos scans external attack surfaces. Banner-grade nmap, no exploits, 90-day responsible disclosure window.",
+    title: META_TITLE,
+    description: META_DESC,
     type: "website",
     url: "https://titanos.tech/methodology",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: META_TITLE,
+    description: META_DESC,
+    images: ["/og-image.png"],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -33,10 +42,10 @@ const WHAT_WE_SCAN = [
 
 const WHAT_WE_DONT = [
   "Authentication attempts (no password guessing, no credential stuffing)",
-  "Exploit attempts (we never try to use a vulnerability we find)",
+  "Exploit attempts (I never try to use a vulnerability I find)",
   "DoS / DDoS / brute force / aggressive scans",
-  "Data exfiltration (we never read DB contents, file contents, email contents)",
-  "Phishing of staff (we don’t email or call your team to test them)",
+  "Data exfiltration (I never read DB contents, file contents, email contents)",
+  "Phishing of staff (I don’t email or call your team to test them)",
   "Physical / social engineering tests",
 ];
 
@@ -78,7 +87,9 @@ const VERIFY: VerifyKey[] = [
         <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
           kyle@titanos.tech
         </a>{" "}
-        directly to confirm any communication is genuine.
+        directly to confirm any communication is genuine. (This is the footer/about
+        contact mention — not a scan request route. Use the form on{" "}
+        <a href="/scan#request" style={{ color: "var(--ice)" }}>/scan</a> for that.)
       </>
     ),
   },
@@ -89,7 +100,7 @@ export default function MethodologyPage() {
     <>
       <PageHero
         title="Methodology"
-        tagline="How Titanos Security scans external attack surfaces. No exploits. No auth attempts. Banner-grade evidence only."
+        tagline="How I scan external attack surfaces. No exploits. No auth attempts. I only read what your server already announces to the public internet — nothing invasive."
       />
 
       <div className="divider-gold" />
@@ -97,13 +108,13 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
-            title="WHAT WE SCAN · WHAT WE DON’T DO"
-            lead="External, publicly-reachable network surfaces only. We probe what the open internet can already see — nothing private, nothing authenticated."
+            title="WHAT I SCAN · WHAT I DON’T DO"
+            lead="External, publicly-reachable network surfaces only. I probe what the open internet can already see — nothing private, nothing authenticated."
           />
           <MirrorLists
-            doTitle="WHAT WE SCAN"
+            doTitle="WHAT I SCAN"
             doItems={WHAT_WE_SCAN}
-            dontTitle="WHAT WE DON’T DO"
+            dontTitle="WHAT I DON’T DO"
             dontItems={WHAT_WE_DONT}
           />
         </div>
@@ -116,7 +127,7 @@ export default function MethodologyPage() {
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
             title="TOOLS USED"
-            lead="We use industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
+            lead="Industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
           />
           <ul
             style={{
@@ -166,7 +177,7 @@ export default function MethodologyPage() {
               <strong style={{ color: "var(--gold)" }}>
                 Every Titanos finding ships with a 90-day responsible disclosure window.
               </strong>{" "}
-              If a recipient needs more time to remediate, we extend it. We do not publish, sell,
+              If a recipient needs more time to remediate, I extend it. I do not publish, sell,
               or share findings with third parties during that window.
             </p>
           </div>
@@ -192,7 +203,7 @@ export default function MethodologyPage() {
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
             title="SCOPE"
-            lead="We scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. We do not scan:"
+            lead="I scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
           />
           <SimpleList
             items={[
@@ -210,7 +221,7 @@ export default function MethodologyPage() {
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="WHAT YOU GET" lead="Our standard external scan output:" />
+          <SectionHeading title="WHAT YOU GET" lead="The standard external scan output:" />
           <SimpleList
             items={[
               "Findings ranked by severity (Critical, High, Medium, Low, Info)",
@@ -224,10 +235,10 @@ export default function MethodologyPage() {
 
       <div className="divider-gold" />
 
-      {/* HOW WE DELIVER */}
+      {/* HOW I DELIVER */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="HOW WE DELIVER" />
+          <SectionHeading title="HOW I DELIVER" />
           <p
             style={{
               color: "var(--text)",
@@ -242,7 +253,7 @@ export default function MethodologyPage() {
             auditor.
           </p>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
-            Beyond the free scan, Titanos offers two paid engagements:{" "}
+            Beyond the free scan, two paid engagements:{" "}
             <a href="/compliance" style={{ color: "var(--ice)" }}>
               AU Privacy Act + Essential Eight Compliance
             </a>{" "}
@@ -261,12 +272,12 @@ export default function MethodologyPage() {
 
       <div className="divider-gold" />
 
-      {/* HOW TO VERIFY US — three-key vault interlock */}
+      {/* HOW TO VERIFY ME — three-key vault interlock */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="HOW TO VERIFY US"
-            lead="Three independent ways. Every claim we make is one of these checks away from a third-party audit."
+            title="HOW TO VERIFY ME"
+            lead="Three independent ways. Every claim I make is one of these checks away from a third-party audit."
           />
           <VerifyKeys keys={VERIFY} />
         </div>
@@ -279,8 +290,8 @@ export default function MethodologyPage() {
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading title="REMOVAL" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
-            Reply <code>remove</code> to any email from us and your domain is suppressed
-            permanently. We honour the request immediately.
+            Reply <code>remove</code> to any email from me and your domain is suppressed
+            permanently. I honour the request immediately.
           </p>
         </div>
       </SectionReveal>
@@ -305,7 +316,7 @@ function ToolItem({ children }: { children: React.ReactNode }) {
           position: "absolute",
           left: 0,
           color: "var(--gold)",
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
         }}
       >
         ›
@@ -344,7 +355,7 @@ function SimpleList({ items }: { items: string[] }) {
               position: "absolute",
               left: 0,
               color: "var(--gold)",
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
             }}
           >
             ›

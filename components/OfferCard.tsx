@@ -43,6 +43,8 @@ export default function OfferCard(props: Offer) {
   const reduce = useReducedMotion();
   const cardRef = useRef<HTMLElement | null>(null);
   const [onScreen, setOnScreen] = useState(false);
+  // W4 Pillar 6 — 3D tilt based on cursor position relative to card centre.
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
 
   // MOT-03 — IntersectionObserver pauses idle loops when off-screen.
   useEffect(() => {
@@ -62,26 +64,57 @@ export default function OfferCard(props: Offer) {
     return () => io.disconnect();
   }, [reduce]);
 
+  // W4 Pillar 6 — 3D tilt handler. Cursor X/Y inside the card maps to
+  // rotateY/rotateX ±4deg / ±2deg.
+  // MOB-10: bail on coarse pointer (mousemove fires unreliably on touch
+  // and the tilt looks broken when the card is being scrolled).
+  const onCardMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reduce) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      return;
+    }
+    const r = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+    const ny = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ ry: nx * 8, rx: -ny * 4 });
+  };
+  const onCardLeave = () => setTilt({ rx: 0, ry: 0 });
+
   return (
     <motion.article
       ref={cardRef as never}
+      className="vault-card-tilt"
+      data-touch="press"
       custom={props.index}
       variants={cardReveal}
       initial={reduce ? false : "hidden"}
       animate={reduce ? "visible" : undefined}
       whileInView={reduce ? undefined : "visible"}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      whileHover={reduce ? undefined : { y: -2, borderColor: "var(--gold)" }}
+      onMouseMove={onCardMove}
+      onMouseLeave={onCardLeave}
       style={{
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
         borderRadius: "var(--radius-md)",
-        padding: "32px 28px",
+        padding: "clamp(22px, 5vw, 32px) clamp(20px, 4vw, 28px)",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         zIndex: 1,
-        transition: "border-color 0.2s, transform 0.2s",
+        // 3D tilt + soft shadow that tilts with the card.
+        transform: reduce
+          ? undefined
+          : `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+        transformStyle: "preserve-3d",
+        transition: "border-color 0.2s, transform 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: reduce
+          ? "none"
+          : `${-tilt.ry * 2}px ${tilt.rx * 2}px 28px rgb(var(--gold-rgb) / 0.08)`,
       }}
     >
       <CornerBrackets />
@@ -98,7 +131,7 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--ice)",
           fontSize: "var(--fs-sm)",
           letterSpacing: "0.16em",
@@ -111,7 +144,7 @@ export default function OfferCard(props: Offer) {
 
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h4)",
           letterSpacing: "0.04em",
@@ -124,7 +157,7 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
           fontSize: "var(--fs-h3)",
           fontWeight: 700,
@@ -182,7 +215,7 @@ export default function OfferCard(props: Offer) {
                 position: "absolute",
                 left: 0,
                 color: "var(--gold)",
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
               }}
             >
               ›

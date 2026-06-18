@@ -41,28 +41,31 @@ export default function TermsPage() {
 
           <H2>Free scans</H2>
           <p>
-            The free scan is a banner-grade external view of publicly-accessible attack-surface
-            signals on a domain you submit. It is not a penetration test, not an audit, not a
-            legal compliance assessment, and not a substitute for one. We deliver the report on
-            a reasonable-effort basis, typically within one business day. We may decline
-            requests we deem out of scope (government, military, infrastructure operators, or
+            The free scan is an external view of publicly-accessible attack-surface
+            signals on a domain you submit — limited to information your server already
+            announces to the public internet. It is not a penetration test, not an audit, not a
+            legal compliance assessment, and not a substitute for one. The report is delivered on
+            a reasonable-effort basis, typically within one business day. I may decline
+            requests I deem out of scope (government, military, infrastructure operators, or
             domains where you cannot demonstrate operational authority).
           </p>
 
           <H2>Paid engagements</H2>
           <p>
-            Privacy Act + Essential Eight Compliance (AU$5,997 one-time + AU$199/mo monitoring):
-            a single done-with-you engagement that includes the deliverables described on the
-            compliance page at the time of purchase. AI Implementation engagements are scoped,
-            quoted in a signed Statement of Work, and billed per that SOW. Refunds for one-time
-            engagements are available for 14 days after purchase if no deliverable has been
-            issued; monitoring is cancellable any time.
+            Privacy Act + Essential Eight Compliance (AU$5,997 one-time, with 3 months of
+            Titanos Monitor included; Monitor continues at AU$149/mo only on explicit
+            opt-in — no auto-charge): a single done-with-you engagement that includes the
+            deliverables described on the compliance page at the time of purchase. AI
+            Implementation engagements are scoped, quoted in a signed Statement of Work, and
+            billed per that SOW. Refunds for one-time engagements are available for 14 days
+            after purchase if no deliverable has been issued; Monitor is cancellable any
+            time from the Stripe billing portal.
           </p>
 
           <H2>Responsible disclosure</H2>
           <p>
-            We operate a 90-day responsible-disclosure window for any third-party findings
-            surfaced in our scans. We will not publish, exploit, or sell finding data, and we
+            I operate a 90-day responsible-disclosure window for any third-party findings
+            surfaced in my scans. I will not publish, exploit, or sell finding data, and I
             will not contact regulators on your behalf without your written instruction.
           </p>
 
@@ -82,7 +85,7 @@ export default function TermsPage() {
 
           <H2>Changes</H2>
           <p>
-            We may update these terms. The effective date at the top will reflect the most
+            I may update these terms. The effective date at the top will reflect the most
             recent revision.
           </p>
 
@@ -104,7 +107,7 @@ function H2({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontFamily: "'Cinzel', serif",
+        fontFamily: "var(--font-display), Georgia, serif",
         color: "var(--gold)",
         fontSize: "var(--fs-h3)",
         fontWeight: 700,

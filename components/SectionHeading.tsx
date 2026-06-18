@@ -1,25 +1,33 @@
 "use client";
 
 import { type ReactNode } from "react";
+import VaultKeyhole from "./VaultKeyhole";
 
 export default function SectionHeading({
   title,
   lead,
+  showKeyhole = true,
 }: {
   title: ReactNode;
   lead?: ReactNode;
+  showKeyhole?: boolean;
 }) {
   return (
     <div style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
       <h2
         style={{
-          fontFamily: "'Cinzel', serif",
-          fontWeight: 700,
+          fontFamily: "var(--font-display), Georgia, serif",
+          fontWeight: 400,
+          fontStyle: "italic",
           fontSize: "var(--fs-h2)",
           color: "var(--gold)",
-          letterSpacing: "0.08em",
+          letterSpacing: "0.02em",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
+        {showKeyhole && <VaultKeyhole />}
         {title}
       </h2>
       <div

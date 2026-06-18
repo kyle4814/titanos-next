@@ -2,19 +2,30 @@
  * TerminalSnippet — AES-19 product-evidence visual.
  *
  * Renders a small gold-on-black monospace block that LOOKS like a CLI
- * scan output. Used on /scan to show prospects what we actually ship
+ * scan output. Used on /scan to show prospects what I actually ship
  * before they ask for one. Content is redacted (target domain blanked)
- * and entries trace to real fingerprints we routinely surface — not a
+ * and entries trace to real fingerprints routinely surfaced — not a
  * fabricated finding.
+ *
+ * EOL framing is intentional. The earlier draft paired MySQL 5.7.23
+ * with CVE-2023-22094 (which is an Oracle Database Server CVE — not a
+ * MySQL CVE) and tacked "KEX" (SSH terminology) onto the MySQL line.
+ * Pairing a specific CVE to a specific version without a checked NVD
+ * match is fabrication. Stating "EOL, unsupported, public CVEs apply"
+ * is verifiable from version + vendor support calendars alone.
+ *
+ * Port scope matches the documented "standard 15-port external sweep"
+ * referenced on /scan ("WHAT'S INSIDE THE REPORT"). Do not change one
+ * without changing the other.
  */
 
 const LINES: Array<{ kind: "cmd" | "out" | "ok" | "warn"; text: string }> = [
-  { kind: "cmd",  text: "$ nmap -sV -p- -T4 [redacted].com.au" },
+  { kind: "cmd",  text: "$ nmap -sV --top-ports 15 [redacted].com.au" },
   { kind: "out",  text: "  PORT      STATE  SERVICE   VERSION" },
-  { kind: "warn", text: "  3306/tcp  open   mysql     MySQL 5.7.23  (CVE-2023-22094 KEX)" },
-  { kind: "out",  text: "  443/tcp   open   ssl/http  nginx 1.18.0 (TLSv1.3 OK)" },
-  { kind: "warn", text: "  21/tcp    open   ftp       cleartext auth — exposed" },
-  { kind: "ok",   text: "  → 90-day responsible-disclosure window opened" },
+  { kind: "out",  text: "  443/tcp   open   ssl/http  nginx 1.18.0  (TLSv1.3 OK · cert 41d to expiry)" },
+  { kind: "warn", text: "  3306/tcp  open   mysql     MySQL 5.7.42  -> EOL Oct 2023, unsupported, public CVEs apply" },
+  { kind: "warn", text: "  21/tcp    open   ftp       vsftpd        -> cleartext auth, exposed to public internet" },
+  { kind: "ok",   text: "  -> 90-day responsible-disclosure window opened" },
 ];
 
 export default function TerminalSnippet() {
@@ -37,7 +48,7 @@ export default function TerminalSnippet() {
       <div
         aria-hidden="true"
         style={{
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold-dim)",
           fontSize: "var(--fs-xs)",
           letterSpacing: "0.16em",
@@ -70,12 +81,12 @@ export default function TerminalSnippet() {
         style={{
           marginTop: 12,
           color: "var(--dim)",
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body), system-ui, sans-serif",
           fontSize: "var(--fs-xs)",
           lineHeight: 1.6,
         }}
       >
-        Every line is a real fingerprint pattern we surface. Findings on your scan
+        Every line is a real fingerprint pattern I surface. Findings on your scan
         are anchored to a reproducible nmap command and matched to NVD.
       </p>
     </div>

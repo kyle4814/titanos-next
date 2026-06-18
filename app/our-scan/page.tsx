@@ -2,25 +2,32 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { SITE } from "@/lib/config";
 
-const MAILTO_SCAN =
-  "mailto:kyle@titanos.tech?subject=Scan%20request&body=Domain%3A%20%0AYour%20name%3A%20%0ANotes%20(optional)%3A";
-const CAL_15 = "https://cal.com/kyle-deligny-msvz6s/15min";
+const REQUEST_HREF = "/scan#request";
+const CAL_15 = SITE.CAL_15MIN_URL;
+
+const META_TITLE = "My Own External Scan — TITANOS";
+const META_DESC =
+  "I scanned titanos.tech and published every finding. AU Privacy Act + Essential Eight compliance vendor walking its own talk. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
-  title: "Our Own External Scan — TITANOS",
-  description:
-    "We scanned titanos.tech and published every finding. AU Privacy Act + Essential Eight compliance vendor walking its own talk. ABN 34 318 502 254.",
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: "https://titanos.tech/our-scan" },
   openGraph: {
-    title: "Our Own External Scan — Titanos",
-    description:
-      "We scanned ourselves and published every finding — before and after fix.",
+    title: META_TITLE,
+    description: META_DESC,
     type: "website",
     url: "https://titanos.tech/our-scan",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+  twitter: {
+    card: "summary_large_image",
+    title: META_TITLE,
+    description: META_DESC,
+    images: ["/og-image.png"],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -45,7 +52,7 @@ const FINDINGS: Row[] = [
     remediation: "Add Content-Security-Policy header to all responses.",
     status: "RESOLVED",
     resolution:
-      "CSP shipped via <meta http-equiv> in app/layout.tsx (2026-06-06). default-src 'self' + script/style 'unsafe-inline' for Next.js inline blocks + /cdn-cgi/scripts/ for Cloudflare.",
+      "CSP shipped via <meta http-equiv> in app/layout.tsx (2026-06-06). default-src 'self' + script/style 'unsafe-inline' for Next.js inline blocks + /cdn-cgi/scripts/ for Cloudflare. connect-src extended to https://api.titanos.tech (2026-06-11) so the /scan-request form can POST cross-origin.",
   },
   {
     title: "Missing X-Frame-Options",
@@ -111,8 +118,8 @@ export default function OurScanPage() {
     <>
       <PageHero
         badge="SELF-ATTESTATION · NOTHING HIDDEN"
-        title="We scanned ourselves and published every finding."
-        tagline="If our own external attack surface had been clean before audit, we'd have been the only AU compliance vendor with no story to tell. It wasn't. So here's the story."
+        title="I scanned myself and published every finding."
+        tagline="If my own external attack surface had been clean before audit, I'd have been the only AU compliance vendor with no story to tell. It wasn't. So here's the story."
         sub="Scan run 2026-06-01 against titanos.tech. Six findings, all published verbatim. Four have been resolved or accepted with reasoning since; two remain open (one trivially blocked on a dashboard click, one a deliberate trade-off)."
         trustLine={
           <>
@@ -124,11 +131,11 @@ export default function OurScanPage() {
           </>
         }
       >
-        <AnimatedButton href={MAILTO_SCAN} variant="primary" ariaLabel="Request your free scan">
+        <AnimatedButton href={REQUEST_HREF} variant="primary" ariaLabel="Request your free scan">
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
         <AnimatedButton href={CAL_15} external variant="secondary">
-          BOOK A 15-MIN
+          BOOK A 15-MIN FIT CALL
         </AnimatedButton>
       </PageHero>
 
@@ -139,7 +146,7 @@ export default function OurScanPage() {
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)" }}>
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display), Georgia, serif",
               color: "var(--gold)",
               fontSize: "var(--fs-h2)",
               letterSpacing: "0.06em",
@@ -171,7 +178,7 @@ export default function OurScanPage() {
               >
                 <span
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: SEV_COLOR[f.severity],
                     fontSize: "var(--fs-xs)",
                     letterSpacing: "0.12em",
@@ -184,7 +191,7 @@ export default function OurScanPage() {
                 </span>
                 <span
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: STATUS_COLOR[f.status],
                     fontSize: "var(--fs-xs)",
                     letterSpacing: "0.12em",
@@ -197,7 +204,7 @@ export default function OurScanPage() {
                 </span>
                 <h3
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--ice)",
                     fontSize: "var(--fs-lg)",
                     letterSpacing: "0.04em",
@@ -214,7 +221,7 @@ export default function OurScanPage() {
               </p>
               {f.resolution && (
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
-                  <strong>What we did: </strong>
+                  <strong>What I did: </strong>
                   {f.resolution}
                 </p>
               )}
@@ -232,6 +239,20 @@ export default function OurScanPage() {
             TLS 1.3 · cert valid through 2 July 2026 · 0 open ports
             (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
           </p>
+          <p
+            style={{
+              color: "var(--ice)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.7,
+              marginTop: 18,
+              textAlign: "center",
+            }}
+          >
+            Want to see what a full evidence pack looks like?{" "}
+            <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>
+              See my own evidence pack, published in full →
+            </a>
+          </p>
         </div>
       </SectionReveal>
 
@@ -240,7 +261,7 @@ export default function OurScanPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", textAlign: "center" }}>
         <h2
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
             letterSpacing: "0.06em",
@@ -258,15 +279,16 @@ export default function OurScanPage() {
             lineHeight: 1.7,
           }}
         >
-          Email us your domain. We run the scan. Report lands in your inbox within
-          1 business day. No card. No login. No follow-up sequence unless you reply.
+          Tell me your domain on the form. I run the scan. Report lands in your
+          inbox within 1 business day. No card. No login. No follow-up sequence
+          unless you reply.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={MAILTO_SCAN} variant="primary">
+          <AnimatedButton href={REQUEST_HREF} variant="primary">
             REQUEST YOUR FREE SCAN
           </AnimatedButton>
           <AnimatedButton href={CAL_15} external variant="secondary">
-            BOOK A 15-MIN
+            BOOK A 15-MIN FIT CALL
           </AnimatedButton>
         </div>
       </SectionReveal>

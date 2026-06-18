@@ -87,7 +87,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             )}
             <div
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
                 color: "var(--gold)",
                 fontSize: "var(--fs-h3)",
                 letterSpacing: "0.05em",
@@ -100,7 +100,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             </div>
             <h4
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display), Georgia, serif",
                 color: "var(--ice)",
                 fontSize: "var(--fs-body)",
                 letterSpacing: "0.06em",
@@ -162,7 +162,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             x="120"
             y="58"
             textAnchor="middle"
-            fontFamily="'Cinzel', serif"
+            fontFamily="var(--font-display), Georgia, serif"
             fontWeight="700"
             fontSize="22"
             letterSpacing="3"
