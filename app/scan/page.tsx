@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free External Security Scan — Titanos",
     description:
-      "See what an attacker sees. No login. Report in your inbox within 1 business day. Expert-reviewed, Australian-owned, ABN-verified.",
+      "See what an attacker sees. No login. Report in your inbox within 1 business day. Personally reviewed, Australian-owned, ABN-verified.",
     type: "website",
     url: "https://titanos.tech/scan",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
