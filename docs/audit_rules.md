@@ -97,6 +97,15 @@ correctly returns 0. Always audit live.
 |---|---|
 | HTTP 200 | MUST |
 | Monitor referenced in homepage nav | MUST |
+| Real `mailto:` links (outside `<noscript>` blocks, outside CSP allowlist) | MUST be 0 — subscribe buttons POST to `/checkout/monitor`, noscript-fallback mailto stays inside `<noscript>` per spec |
+
+When counting mailto on /monitor, always strip `<noscript>...</noscript>` blocks first:
+
+```bash
+python3 -c "import re,sys; html=sys.stdin.read(); print(len(re.findall(r'mailto:', re.sub(r'<noscript>.*?</noscript>', '', html, flags=re.S))))" < /tmp/audit__monitor.html
+```
+
+5 noscript-wrapped mailto strings (one per render site of `MonitorCheckoutButton`) are expected and correct.
 
 ### /our-evidence-pack
 
