@@ -37,19 +37,35 @@ export const PRICING = {
   AI_OPS_RETAINER_HIGH: 1990,
 } as const;
 
+// --- Leads & Intelligence (fourth door) ---
+// One-off verified contact lists + an ongoing intelligence feed retainer.
+// Delivery channel: DataForSEO pipeline + manual verification step.
+// Deploy of /leads is HELD until fulfilment confirmed end-to-end.
+export const LEADS = {
+  STARTER:   { price: 497,  contacts: 250,  industries: 1,        turnaround: "5 business days" },
+  GROWTH:    { price: 1497, contacts: 1000, industries: 3,        turnaround: "5–7 business days" },
+  CAMPAIGN:  { price: 3497, contacts: 3000, industries: "custom", turnaround: "7–10 business days" },
+  RETAINER:  { price: 990,  contactsPerMonth: 500, billing: "monthly" as const },
+} as const;
+
 // --- Display helpers ---
 // Use these everywhere copy needs a price. Never inline a dollar sign in JSX.
+//
+// Why not Intl.NumberFormat? Node 20 + Termux/Android ship with truncated
+// ICU data — `Intl.NumberFormat("en-AU", { currency: "AUD" })` returns
+// "A$497" for 3-digit amounts but bare "$1,497" for 4-digit amounts on
+// build hosts that lack full locale data. That breaks the wordmark voice
+// "AU$" inconsistently across the site. Use grouped digits + literal
+// "AU$" prefix to guarantee the same output everywhere.
 
-const AUD_FMT = new Intl.NumberFormat("en-AU", {
-  style: "currency",
-  currency: "AUD",
+const GROUPED = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 0,
+  useGrouping: true,
 });
 
 export function formatAUD(amount: number): string {
-  // "AU$149" not "A$149" — the wordmark voice everywhere on the site.
-  return AUD_FMT.format(amount).replace(/^A\$/, "AU$");
+  return `AU$${GROUPED.format(amount)}`;
 }
 
 export function formatMonthly(amount: number): string {
@@ -73,4 +89,9 @@ export const DISPLAY = {
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
   AI_BUILD_FLOOR: `From ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
   AI_OPS_RETAINER: `${formatRange(PRICING.AI_OPS_RETAINER_LOW, PRICING.AI_OPS_RETAINER_HIGH)}/mo`,
+  LEADS_STARTER: formatAUD(LEADS.STARTER.price),
+  LEADS_GROWTH: formatAUD(LEADS.GROWTH.price),
+  LEADS_CAMPAIGN: formatAUD(LEADS.CAMPAIGN.price),
+  LEADS_RETAINER: formatMonthly(LEADS.RETAINER.price),
+  LEADS_STARTER_FROM: `From ${formatAUD(LEADS.STARTER.price)}`,
 };

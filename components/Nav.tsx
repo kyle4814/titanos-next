@@ -29,6 +29,10 @@ const LINKS = [
   { label: "Monitor", href: "/monitor", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "AI Implementation", href: "/ai-delivery", external: false },
+  { label: "Leads", href: "/leads", external: false },
+  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors. Methodology /
+  // Our Scan / About remain in the mobile drawer + footer to keep desktop tight
+  // when the Leads door joins.
   { label: "Methodology", href: "/methodology", external: false },
   { label: "Our Scan", href: "/our-scan", external: false },
   { label: "About", href: "/about", external: false },

@@ -13,7 +13,7 @@
  */
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Radar, ShieldCheck, Sparkles } from "lucide-react";
+import { Radar, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import AnimatedButton from "./AnimatedButton";
 import CornerBrackets from "./CornerBrackets";
@@ -28,7 +28,7 @@ export type Offer = {
   bullets: string[];
   primary: { label: string; href: string; external?: boolean };
   secondary: { label: string; href: string };
-  icon: "radar" | "shield" | "sparkles";
+  icon: "radar" | "shield" | "sparkles" | "users";
   index: number;
 };
 
@@ -36,6 +36,7 @@ const iconMap = {
   radar: Radar,
   shield: ShieldCheck,
   sparkles: Sparkles,
+  users: Users,
 };
 
 export default function OfferCard(props: Offer) {

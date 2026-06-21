@@ -73,13 +73,13 @@ const plexMono = IBM_Plex_Mono({
 
 // SEO-03: description trimmed under 155 chars
 const META_DESCRIPTION =
-  "Free external scan, AU Privacy Act compliance (AU$5,997, 3mo Monitor free), AU$149/mo Titanos Monitor, AI implementation. One operator, three doors in.";
+  "Free external scan, AU$149/mo Monitor, fixed-price Privacy Act compliance, AI implementation, and verified AU lead lists. One operator, four doors in.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
-  // SEO-3 / Fix 5g: title aligned with homepage H1 "One operator. Three doors in."
+  // Title aligned with homepage H1 "One operator. Four doors in."
   title:
-    "TITANOS — One operator. Three doors in. Scan · Compliance · AI Implementation",
+    "TITANOS — One operator. Four doors in. Scan · Compliance · AI · Leads",
   description: META_DESCRIPTION,
   icons: {
     icon: [
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "192x192" }],
   },
   openGraph: {
-    title: "TITANOS — One operator. Three doors in.",
+    title: "TITANOS — One operator. Four doors in.",
     description: META_DESCRIPTION,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",
