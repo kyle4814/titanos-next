@@ -59,10 +59,10 @@ const offers: Offer[] = [
   {
     tag: "OFFER 03 · PROJECT-QUOTED",
     title: "AI Implementation for Business",
-    price: `Diagnostic ${DISPLAY.AI_DIAGNOSTIC}`,
-    priceUnit: `then build ${DISPLAY.AI_BUILD_FLOOR.toLowerCase()} · diagnostic credits in full`,
+    price: DISPLAY.AI_BUILD_FLOOR,
+    priceUnit: "quoted by scope · free 30-min scoping call",
     body:
-      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. I diagnose, plan, build, and implement — quoted by scope after a scoping call.",
+      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. I diagnose, plan, build, and implement — quoted by scope after a free scoping call.",
     bullets: [
       "Working code in your repo",
       "Deployed, not \"deployable\"",

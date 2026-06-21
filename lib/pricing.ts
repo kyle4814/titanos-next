@@ -30,7 +30,8 @@ export const PRICING = {
   MONITOR_CONTINUATION_MODE: "opt_in" as "opt_in" | "auto_continue",
 
   // --- AI delivery ladder ---
-  AI_DIAGNOSTIC: 4997,
+  // Diagnostic dropped 2026-06-21 — replaced with a free 30-min scoping call.
+  // Build is the only paid AI rung; Ops Retainer is post-build only.
   AI_BUILD_FLOOR: 9997,
   AI_OPS_RETAINER_LOW: 990,
   AI_OPS_RETAINER_HIGH: 1990,
@@ -70,7 +71,6 @@ export const DISPLAY = {
   MONITOR_MONTHLY: formatMonthly(PRICING.MONITOR_MONTHLY),
   MONITOR_ANNUAL: formatAnnual(PRICING.MONITOR_ANNUAL),
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
-  AI_DIAGNOSTIC: formatAUD(PRICING.AI_DIAGNOSTIC),
   AI_BUILD_FLOOR: `From ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
   AI_OPS_RETAINER: `${formatRange(PRICING.AI_OPS_RETAINER_LOW, PRICING.AI_OPS_RETAINER_HIGH)}/mo`,
 };

@@ -14,7 +14,7 @@ import { PRICING, DISPLAY } from "@/lib/pricing";
 const SCOPING_LENGTH_MINUTES = SITE.CAL_30MIN_URL ? 30 : 15;
 
 const META_TITLE = "AI Implementation for Business — TITANOS";
-const META_DESC = `AI Diagnostic ${DISPLAY.AI_DIAGNOSTIC} (2 weeks, credits to a build). AI Build ${DISPLAY.AI_BUILD_FLOOR} quoted by scope. AI Ops Retainer ${DISPLAY.AI_OPS_RETAINER} post-build.`;
+const META_DESC = `Free 30-minute scoping call. AI Build ${DISPLAY.AI_BUILD_FLOOR} quoted by scope. AI Ops Retainer ${DISPLAY.AI_OPS_RETAINER} post-build.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -66,7 +66,7 @@ const DELIVERABLES = [
   },
   {
     title: "Strategy, scoped sharply",
-    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 a 2-week diagnostic ending in a prioritised, costed build list. No slide-deck consulting; the output is what to build next, by whom, in what order.",
+    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 a free 30-minute scoping call ending in a fixed-scope SOW within 72 hours. No slide-deck consulting; the output is what to build next, by whom, in what order.",
   },
 ];
 
@@ -96,16 +96,9 @@ export default function AiDeliveryPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "AI System Implementation",
     description:
-      "AI Diagnostic (2 weeks, fixed price, credits to a build), AI Build (quoted by scope after diagnostic), AI Ops Retainer (post-build only).",
+      "Free 30-min scoping call → fixed-scope SOW within 72 hours. AI Build quoted by scope. AI Ops Retainer post-build only.",
     areaServed: ["AU", "NZ", "SG"],
     offers: [
-      {
-        "@type": "Offer",
-        name: "AI Diagnostic",
-        price: String(PRICING.AI_DIAGNOSTIC),
-        priceCurrency: "AUD",
-        description: "2-week prioritised, costed build list. Credits 100% toward a subsequent build.",
-      },
       {
         "@type": "Offer",
         name: "AI Build",
@@ -114,7 +107,7 @@ export default function AiDeliveryPage() {
         priceSpecification: {
           "@type": "PriceSpecification",
           valueAddedTaxIncluded: false,
-          description: `From ${DISPLAY.AI_BUILD_FLOOR} — quoted by scope after diagnostic or scoping call`,
+          description: `From ${DISPLAY.AI_BUILD_FLOOR} — quoted by scope after a free scoping call`,
         },
       },
       {
@@ -326,24 +319,24 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      {/* Site Fix 4 — Restructured offer ladder: Diagnostic (fixed) + Build (floor) + Ops Retainer (post-build) */}
+      {/* Offer ladder — Free scoping call → AI Build (quoted by scope) → Ops Retainer (post-build). Diagnostic dropped 2026-06-21. */}
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="TWO WAYS IN. ONE WAY TO STAY."
-            lead="A fixed-price diagnostic to figure out what to build, a built thing in your repo, and a retainer to keep it alive after I ship — if you want one."
+            title="ONE WAY IN. ONE WAY TO STAY."
+            lead="A free scoping call to figure out what to build, a built thing in your repo, and a retainer to keep it alive after I ship — if you want one."
           />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
           >
-            {/* DIAGNOSTIC — fixed price */}
+            {/* SCOPING CALL — free */}
             <OfferTile
-              tag="ENTRY · FIXED PRICE"
-              title="AI Diagnostic"
-              price={DISPLAY.AI_DIAGNOSTIC}
-              priceUnit="2 weeks · fixed · credits 100% toward a build"
-              body="I spend two weeks inside your stack. Output: a prioritised, costed build list — what to build next, in what order, by whom, with named tools and time estimates. No slide-deck consulting. If you commission a build off the back of it, the diagnostic credits in full against the build SOW."
+              tag="START HERE · FREE"
+              title="Scoping Call"
+              price="Free"
+              priceUnit="30 min · written SOW within 72 hours · no obligation"
+              body="Tell me what you'd build if delivery wasn't the bottleneck. I tell you whether it's a 4-week thing, a 12-week thing, or a 'this needs three engagements' thing. Within 72 hours you receive a fixed-scope SOW — scope, milestones, fixed price, delivery date. No deck. No subcontractor chain. No pressure."
               ctaLabel={SCOPING_CALL_LABEL}
               ctaHref={SCOPING_CALL_URL}
             />
