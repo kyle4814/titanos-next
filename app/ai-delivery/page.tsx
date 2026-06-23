@@ -8,13 +8,11 @@ import Testimonials from "@/components/Testimonials";
 import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 
-// Fix 5c — until a 30-min cal.com event exists, scoping CTA derives
-// label + URL from config and quietly relabels to 15-MIN. The 30-min
-// length stays the spec'd default; config provides the swap point.
 const SCOPING_LENGTH_MINUTES = SITE.CAL_30MIN_URL ? 30 : 15;
 
-const META_TITLE = "AI Implementation for Business — TITANOS";
-const META_DESC = `Free 30-minute scoping call. AI Build ${DISPLAY.AI_BUILD_FLOOR} quoted by scope. AI Ops Retainer ${DISPLAY.AI_OPS_RETAINER} post-build.`;
+const META_TITLE =
+  "Titanos AI Implementation — Automate the Manual Work in Your Business";
+const META_DESC = `I find the highest-leverage task to automate in your AU business and build the AI system that does it. Diagnostic ${DISPLAY.AI_DIAGNOSTIC}, builds from ${DISPLAY.AI_BUILD_FLOOR}.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -36,55 +34,53 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const PROBLEMS = [
+// Outcomes, not engineer-shop framing. Each card is a "what could land in your
+// business" — broad enough that the Diagnostic decides the exact build, narrow
+// enough that an SMB owner reads one and thinks "that's my Tuesday."
+const BUILDS = [
   {
-    title: "The deck is done. The thing isn’t built.",
-    body: "Strategy consultants delivered the AI roadmap eight months ago. The engineering team still hasn’t found a free quarter to ship the first prototype. Momentum dies.",
+    title: "Kill the manual busywork",
+    body:
+      "The repetitive task someone on your team does every day — sorting enquiries, copying data between systems, chasing forms, formatting reports. I automate it so it just happens.",
   },
   {
-    title: "The big-four quote is 12 months and $2M.",
-    body: "Procurement-grade SOWs scale to procurement-grade pricing. Most of what you actually want built doesn’t justify either the calendar or the budget.",
+    title: "Custom internal tools",
+    body:
+      "A dashboard that pulls your numbers into one place. A search tool over your documents. A quote generator. A lead-scoring system. Small, sharp tools built for exactly how your business works.",
   },
   {
-    title: "Internal teams are at capacity.",
-    body: "Your AI/ML engineers exist. They are fully booked on the current roadmap. New capabilities have to wait or get outsourced to whoever shows up first.",
-  },
-];
-
-const DELIVERABLES = [
-  {
-    title: "Custom AI workflow",
-    body: "When the answer is \u201chave your team use AI better\u201d \u2014 a Claude Project, custom GPT, or Make.com / n8n flow your team actually opens every day. Lives in your tooling, not mine. Trained on your context, your voice, your data.",
+    title: "Customer-facing AI",
+    body:
+      "An assistant that answers your customers' questions from your own information. AI that handles first-touch enquiries. Drafted responses your team just approves and sends. The visible stuff that makes you look five years ahead.",
   },
   {
-    title: "AI in your codebase",
-    body: "When there's a repo, I commit working code to your GitHub or GitLab \u2014 reviewed by your engineers before merge, deployed in your staging then production environment. You own it from day one.",
-  },
-  {
-    title: "AI-run process",
-    body: "When the right answer is \u201chave AI do this work continuously\u201d \u2014 doc generation, email triage, research, lead enrichment \u2014 I set it up and hand it over. Or run it as a service if you'd rather. Either way, fully documented.",
-  },
-  {
-    title: "Strategy, scoped sharply",
-    body: "When the real question is \u201cwhere does AI actually fit here\u201d \u2014 a free 30-minute scoping call ending in a fixed-scope SOW within 72 hours. No slide-deck consulting; the output is what to build next, by whom, in what order.",
+    title: "Document & data processing",
+    body:
+      "Bulk-process your PDFs, contracts, records, applications — extract, sort, summarise, flag. The paperwork mountain, handled. (And because compliance is my other practice, it's built to handle your data properly.)",
   },
 ];
 
 const STEPS = [
   {
     num: "I",
-    title: `SCOPING CALL · ${SCOPING_LENGTH_MINUTES} MIN`,
-    body: "You tell me what you’d build if delivery wasn’t the bottleneck. I tell you whether it’s a 4-week thing, a 12-week thing, or a “this needs to be three engagements” thing. No pitch. No slides.",
+    tag: `DIAGNOSE · ${DISPLAY.AI_DIAGNOSTIC} · 2 WEEKS`,
+    title: "Diagnose",
+    body:
+      "I dig into how your business actually runs and come back with a prioritised, costed list of what's worth automating — biggest time-saver first. You get a real plan even if you never build a thing. And the full fee credits 100% toward your build.",
   },
   {
     num: "II",
-    title: "FIXED-SCOPE SOW + DEPOSIT",
-    body: "Within 72 hours of the call you receive a written SOW: scope, milestones, fixed price, delivery date. Approve, sign, pay 30% deposit. The remaining 70% is milestone-billed.",
+    tag: `BUILD · FROM ${DISPLAY.AI_BUILD_FLOOR.toUpperCase()} · QUOTED BY SCOPE`,
+    title: "Build",
+    body:
+      "I build the thing we picked, ship it working into your business, and document it so your team can actually use it. Working system, not a slide deck. Scoped from the diagnostic so there are no surprises.",
   },
   {
     num: "III",
-    title: "SHIP IN YOUR ENVIRONMENT",
-    body: "I launch a Claude Code instance scoped to your engagement. Daily commits to a branch in your repo. Mid-engagement demo. Final delivery against SOW acceptance criteria. Done.",
+    tag: `MAINTAIN (OPTIONAL) · ${DISPLAY.AI_OPS_RETAINER.toUpperCase()}`,
+    title: "Maintain",
+    body:
+      "Once it's live, I can keep it alive — fix it when your tools change, extend it as you grow, improve it monthly. Sold only after a build, because I won't maintain something I didn't build and don't understand.",
   },
 ];
 
@@ -92,13 +88,24 @@ export default function AiDeliveryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "AI Implementation for Business",
+    name: "AI Implementation for Australian Businesses",
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "AI System Implementation",
     description:
-      "Free 30-min scoping call → fixed-scope SOW within 72 hours. AI Build quoted by scope. AI Ops Retainer post-build only.",
+      "Diagnostic → Build → Maintain. I find the highest-leverage manual task in your business and ship the AI system that does it.",
     areaServed: ["AU", "NZ", "SG"],
     offers: [
+      {
+        "@type": "Offer",
+        name: "AI Diagnostic",
+        price: String(PRICING.AI_DIAGNOSTIC),
+        priceCurrency: "AUD",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          valueAddedTaxIncluded: false,
+          description: `${DISPLAY.AI_DIAGNOSTIC} — 2-week prioritised plan; fee credits 100% toward the Build`,
+        },
+      },
       {
         "@type": "Offer",
         name: "AI Build",
@@ -107,7 +114,7 @@ export default function AiDeliveryPage() {
         priceSpecification: {
           "@type": "PriceSpecification",
           valueAddedTaxIncluded: false,
-          description: `From ${DISPLAY.AI_BUILD_FLOOR} — quoted by scope after a free scoping call`,
+          description: `${DISPLAY.AI_BUILD_FLOOR} — fixed-scope SOW, deposit + milestones, shipped working into your business`,
         },
       },
       {
@@ -119,7 +126,7 @@ export default function AiDeliveryPage() {
           "@type": "UnitPriceSpecification",
           valueAddedTaxIncluded: false,
           referenceQuantity: { "@type": "QuantitativeValue", value: "1", unitCode: "MON" },
-          description: `${DISPLAY.AI_OPS_RETAINER} — post-build only, maintains the dependency I shipped`,
+          description: `${DISPLAY.AI_OPS_RETAINER} — post-build only, maintains and extends what I shipped`,
         },
       },
     ],
@@ -133,11 +140,17 @@ export default function AiDeliveryPage() {
       />
 
       <PageHero
-        badge="TITANOS · AI IMPLEMENTATION FOR BUSINESS"
-        title="AI Implementation, Delivered"
-        tagline="Not consulted. Not slide-ware. Shipped."
-        sub="You don’t need another deck telling you AI matters. You need the capability built, integrated, and live in production. I diagnose the problem, plan the solution, build it in your repo, and implement it in your environment — 99% Claude Code, 1% expert human review."
-        trustLine="Scoping → SOW → ship. Projects priced by scope. No retainer trap."
+        badge="TITANOS · AI IMPLEMENTATION"
+        title="Tell me the manual task eating your week. I'll build an AI system that does it — shipped, working, in your business."
+        tagline="Most AU businesses know AI could save them hours but have no idea where to start or who to trust. I find the highest-leverage thing to automate in your business, build it, and hand it over working. No jargon, no offshore dev team, no half-finished prototype. One operator who ships."
+        sub="Built for Australian small and mid-sized businesses — accountants, clinics, agencies, trades, professional services. Plain English on the call. You don't need to know what a repo is."
+        trustLine={
+          <>
+            Australian-owned ·{" "}
+            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> ·{" "}
+            you own everything I build
+          </>
+        }
       >
         <AnimatedButton
           href={SCOPING_CALL_URL}
@@ -145,61 +158,22 @@ export default function AiDeliveryPage() {
           variant="primary"
           ariaLabel={`Book a ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
         >
-          {SCOPING_CALL_LABEL}
+          {SCOPING_CALL_LABEL} →
+        </AnimatedButton>
+        <AnimatedButton href="#how-it-works" variant="secondary">
+          SEE HOW IT WORKS ↓
         </AnimatedButton>
       </PageHero>
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SectionHeading title="WHY ENTERPRISE AI PROJECTS STALL" />
-          <div
-            className="grid-auto-cards"
-            style={{
-              gap: 22,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
-            {PROBLEMS.map((p) => (
-              <article
-                key={p.title}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: 28,
-                }}
-              >
-                <h4
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--gold)",
-                    fontSize: "var(--fs-body)",
-                    letterSpacing: "0.06em",
-                    marginBottom: 12,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {p.title}
-                </h4>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
-                  {p.body}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </SectionReveal>
-
-      <div className="divider-gold" />
-
+      {/* WHAT I ACTUALLY BUILD — outcome-framed, broad. The exact build is
+          decided in the Diagnostic; these are the most common shapes. */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT SHIPS"
-            lead="An outcome that solves the problem we scoped — built, integrated, live in your business. The shape depends on the problem."
+            title="WHAT I ACTUALLY BUILD"
+            lead="Every business is different, so I don't sell a product off a shelf — I find what's worth automating in YOURS. Common builds:"
           />
           <div
             className="grid-auto-cards"
@@ -209,9 +183,9 @@ export default function AiDeliveryPage() {
               margin: "0 auto",
             }}
           >
-            {DELIVERABLES.map((d) => (
+            {BUILDS.map((b) => (
               <article
-                key={d.title}
+                key={b.title}
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--border)",
@@ -231,23 +205,48 @@ export default function AiDeliveryPage() {
                   }}
                 >
                   <span style={{ color: "var(--ok)", marginRight: 8, fontWeight: 400 }}>✓</span>
-                  {d.title}
+                  {b.title}
                 </h3>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
-                  {d.body}
+                  {b.body}
                 </p>
               </article>
             ))}
           </div>
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--ice)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.7,
+              maxWidth: "var(--maxw-prose)",
+              margin: "32px auto 0",
+            }}
+          >
+            Not sure which applies to you?{" "}
+            <strong style={{ color: "var(--gold)" }}>
+              That's exactly what the Diagnostic is for
+            </strong>{" "}
+            — I figure out the highest-leverage build for your business before you commit to
+            building anything.
+          </p>
         </div>
       </SectionReveal>
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      {/* HOW IT WORKS — three-step ladder. Diagnostic leads (the de-risker),
+          Build is the workhorse, Maintain is post-build only. */}
+      <SectionReveal
+        id="how-it-works"
+        style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
+      >
         <div className="container-vault">
-          <SectionHeading title="HOW IT WORKS" lead="Three steps, no surprises." />
-          {/* Fix 6 — promote "1% human review is load-bearing" out of the FAQ into a visible callout */}
+          <SectionHeading
+            title="HOW IT WORKS"
+            lead="A paid plan first, so we both know what's worth building. Then I build it. Then I keep it alive — only if you want."
+          />
+          {/* "1% human review is the load-bearing 1%" callout — preserved from prior PR */}
           <p
             style={{
               maxWidth: "var(--maxw-prose)",
@@ -263,7 +262,9 @@ export default function AiDeliveryPage() {
               textAlign: "center",
             }}
           >
-            The 1% human review is the load-bearing 1%.
+            I use AI to build fast, but a human (me) reviews everything that ships. The
+            automation does 99% of the work; the 1% I check by hand is the part that keeps
+            it from embarrassing you.
           </p>
           <div
             className="grid-auto-cards"
@@ -296,6 +297,18 @@ export default function AiDeliveryPage() {
                 >
                   {s.num}
                 </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-display), Georgia, serif",
+                    color: "var(--ice)",
+                    fontSize: "var(--fs-xs)",
+                    letterSpacing: "0.14em",
+                    marginBottom: 10,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {s.tag}
+                </div>
                 <h3
                   style={{
                     fontFamily: "var(--font-display), Georgia, serif",
@@ -304,6 +317,7 @@ export default function AiDeliveryPage() {
                     letterSpacing: "0.08em",
                     marginBottom: 14,
                     lineHeight: 1.4,
+                    textTransform: "uppercase",
                   }}
                 >
                   {s.title}
@@ -319,35 +333,44 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      {/* Offer ladder — Free scoping call → AI Build (quoted by scope) → Ops Retainer (post-build). Diagnostic dropped 2026-06-21. */}
+      {/* PRICING LADDER — three tiers from lib/pricing.ts. Diagnostic is the
+          only one with self-serve checkout language; Build + Retainer are
+          relationship-priced (book the call). */}
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="ONE WAY IN. ONE WAY TO STAY."
-            lead="A free scoping call to figure out what to build, a built thing in your repo, and a retainer to keep it alive after I ship — if you want one."
+            title="THE LADDER"
+            lead="One paid step at a time. The Diagnostic credits 100% toward the Build. The Retainer is post-build only — sold once, after I've shipped something."
           />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
           >
-            {/* SCOPING CALL — free */}
             <OfferTile
-              tag="START HERE · FREE"
-              title="Scoping Call"
-              price="Free"
-              priceUnit="30 min · written SOW within 72 hours · no obligation"
-              body="Tell me what you'd build if delivery wasn't the bottleneck. I tell you whether it's a 4-week thing, a 12-week thing, or a 'this needs three engagements' thing. Within 72 hours you receive a fixed-scope SOW — scope, milestones, fixed price, delivery date. No deck. No subcontractor chain. No pressure."
+              tag="DIAGNOSE · 2 WEEKS"
+              title="AI Diagnostic"
+              price={DISPLAY.AI_DIAGNOSTIC}
+              priceUnit="one-time · 2-week prioritised, costed plan · credits 100% toward the Build"
+              body="I dig into how your business actually runs and come back with a prioritised, costed list of what's worth automating — biggest time-saver first. You get a real plan even if you never build a thing. The full fee credits toward your Build if you proceed."
               ctaLabel={SCOPING_CALL_LABEL}
               ctaHref={SCOPING_CALL_URL}
             />
-            {/* BUILD — floor */}
             <OfferTile
               tag="BUILD · QUOTED BY SCOPE"
               title="AI Build"
               price={DISPLAY.AI_BUILD_FLOOR}
-              priceUnit="quoted by scope · fixed-price SOW · deposit + milestones"
-              body="I diagnose the problem, plan the solution, build it in your repo, and implement it in your environment. Daily commits to a branch you own. Mid-engagement demo. Final delivery against SOW acceptance criteria. One operator, no subcontractor chain."
+              priceUnit="fixed-scope SOW from the Diagnostic · deposit + milestones · delivery date in writing"
+              body="I build the thing we picked, ship it working into your business, and document it so your team can use it. Working system, not a slide deck. One accountable contact. No subcontractor chain."
               ctaLabel={SCOPING_CALL_LABEL}
+              ctaHref={SCOPING_CALL_URL}
+            />
+            <OfferTile
+              tag="MAINTAIN · OPTIONAL · POST-BUILD ONLY"
+              title="AI Ops Retainer"
+              price={DISPLAY.AI_OPS_RETAINER}
+              priceUnit="monthly · sold only after a Build · band reflects depth of dependency"
+              body="Once it's live, I can keep it alive — fix it when your tools change, extend it as you grow, improve it monthly. Same accountable contact as the Build. Sold only after a Build, because I won't maintain something I didn't build and don't understand."
+              ctaLabel="Discuss after your build"
               ctaHref={SCOPING_CALL_URL}
             />
           </div>
@@ -361,13 +384,13 @@ export default function AiDeliveryPage() {
               margin: "32px auto 0",
             }}
           >
-            Project-quoted within range.{" "}
+            Build is project-quoted within range.{" "}
             <strong style={{ color: "var(--gold)" }}>
               You see the full SOW with the fixed price before you pay a deposit.
             </strong>
           </p>
 
-          {/* Fix 6 — delivered-state-on-pause clause (retained from prior PR) */}
+          {/* delivered-state-on-pause trust box — preserved from prior PR */}
           <div
             style={{
               maxWidth: "var(--maxw-prose)",
@@ -388,83 +411,12 @@ export default function AiDeliveryPage() {
                 marginBottom: 10,
               }}
             >
-              IF I DISAPPEAR MID-ENGAGEMENT
+              IF I HAVE TO PAUSE OR STEP AWAY MID-ENGAGEMENT
             </h4>
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>
-              You keep the branch, the docs, and a refund of unearned milestones. It&apos;s in the SOW.
+              You keep everything I built to that point, the documentation, and a refund of any
+              unearned milestone. It&apos;s written into the agreement.
             </p>
-          </div>
-        </div>
-      </SectionReveal>
-
-      <div className="divider-gold" />
-
-      {/* Site Fix 4 — AI Ops Retainer (post-build only) */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SectionHeading
-            title="AFTER I SHIP, I CAN KEEP IT ALIVE"
-            lead="The post-build problem nobody warns you about: AI stacks shift fast. Models deprecate. Tools break. The thing I built becomes the thing you depend on."
-          />
-          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <article
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "32px 30px",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--ice)",
-                  fontSize: "var(--fs-xs)",
-                  letterSpacing: "0.18em",
-                  marginBottom: 10,
-                }}
-              >
-                AI OPS RETAINER · POST-BUILD ONLY
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-h3)",
-                  fontWeight: 700,
-                  lineHeight: 1.2,
-                  marginBottom: 14,
-                }}
-              >
-                {DISPLAY.AI_OPS_RETAINER}
-              </div>
-              <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75, marginBottom: 14 }}>
-                I maintain it, extend it, fix it when your stack shifts, and commit improvements
-                monthly. Same accountable contact as the build. Same branch, same docs. The
-                retainer band reflects depth of dependency — single-workflow at the floor, full
-                AI-run pipeline at the ceiling. Quoted at the end of the build.
-              </p>
-              <p
-                style={{
-                  color: "var(--ice)",
-                  fontSize: "var(--fs-body)",
-                  lineHeight: 1.7,
-                  fontStyle: "italic",
-                  background: "rgb(var(--gold-rgb) / 0.06)",
-                  borderLeft: "3px solid var(--gold)",
-                  padding: "12px 16px",
-                  margin: "18px 0",
-                }}
-              >
-                Sold only after a build — because I won&apos;t retainer something I didn&apos;t build
-                and don&apos;t understand.
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                <AnimatedButton href={SITE.CAL_15MIN_URL} external variant="secondary">
-                  Discuss after your build
-                </AnimatedButton>
-              </div>
-            </article>
           </div>
         </div>
       </SectionReveal>
@@ -495,22 +447,21 @@ export default function AiDeliveryPage() {
             <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
               ABN 34 318 502 254
             </strong>{" "}
-            · AU jurisdiction · single-operator practice
+            · Australian-owned · single-operator practice · you own everything I build
           </div>
           <div>
             Powered by{" "}
             <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
               Claude Code
             </strong>{" "}
-            — Anthropic’s flagship reasoning model, AI-native delivery end-to-end
+            — drafted by AI, reviewed and signed off by me on every engagement
           </div>
-          {/* Fix 5d — kill "Titanos Security" sister-brand split. One operator, one brand, three doors. */}
           <div>
-            The same practice runs{" "}
-            <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>
-              1,700+ external security scans this month
-            </strong>{" "}
-            — see{" "}
+            Compliance is my other practice — see{" "}
+            <a href="/compliance" style={{ color: "var(--ice)" }}>
+              /compliance
+            </a>{" "}
+            and{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
               /methodology
             </a>
@@ -520,41 +471,52 @@ export default function AiDeliveryPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="THE QUESTIONS EVERY CTO ASKS FIRST" />
+          <SectionHeading title="THE QUESTIONS I GET FIRST" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-            <FaqItem question="Are you a real consulting firm or a one-person shop running an AI agent?">
-              Single-operator practice. I run every engagement. The leverage comes
-              from Claude Code doing the implementation work under continuous human review — the
-              same pattern senior engineers use to ship faster, applied as a delivery business
-              model. You get one accountable contact, no subcontractor chain, no project manager
-              between you and the code.
+            <FaqItem question="I don't know what to automate. Is that a problem?">
+              No — that&apos;s exactly what the {DISPLAY.AI_DIAGNOSTIC} Diagnostic is for. Most
+              owners I work with come in saying &ldquo;something with AI, I think?&rdquo; and
+              leave the Diagnostic with a costed shortlist of three to five things worth doing,
+              ranked by hours-saved-per-dollar. You pick. If you never build a thing, you still
+              walk away with the plan.
             </FaqItem>
-            <FaqItem question="How do you handle my IP and source code?">
-              Mutual NDA before scoping call if you want one. Engagement work happens in a branch
-              on your own repository — I never hold your source. All Claude Code runs are scoped
-              to the engagement; no training, no cross-client reuse, no retained context after
-              handover.
+            <FaqItem question="Are you a real consulting firm or a one-person shop?">
+              Single-operator practice. I run every engagement personally. The leverage comes
+              from using AI to build faster under continuous human review — same pattern good
+              engineers use to ship more, applied as a delivery business. One accountable
+              contact, no project manager between you and the work, no offshore team you
+              never meet.
             </FaqItem>
             <FaqItem question="What about model outputs that are wrong?">
-              Every line of code, every prompt, every model invocation is reviewed by me before
-              commit. The 1% human review is the load-bearing 1%. I also write test coverage and
-              (where applicable) evals — so wrongness is caught by the test suite, not by your
-              users.
+              Every line of code, every prompt, every AI output is reviewed by me before it
+              ships. The 1% human review is the load-bearing 1%. I also write test coverage
+              (where it makes sense) so wrong outputs get caught before your customers see them.
             </FaqItem>
             <FaqItem question="What if you disappear mid-engagement?">
-              SOW includes a “delivered-state-on-pause” clause. If the engagement halts for any
-              reason, you get the current branch state, the documentation written to date, and a
-              refund of unearned milestone billing. No retainer trap.
+              The agreement includes a delivered-state-on-pause clause. If I have to step away
+              for any reason, you keep everything built to that point, the documentation, and a
+              refund of any unearned milestone. No retainer trap.
             </FaqItem>
-            <FaqItem question="Can our procurement do a vendor security review?">
-              Yes. I’ve completed external attack-surface DD on myself —{" "}
-              <a href="/our-scan" style={{ color: "var(--ice)" }}>see the findings</a>. I’ll fill
-              in any vendor risk assessment your procurement requires.
+            <FaqItem question="How is this different from hiring an AI consultancy?">
+              Consultancies sell you a deck. I ship a working system. Their model is hours
+              billed; mine is fixed scope with a delivery date in writing. They subcontract
+              implementation; I do it. The Diagnostic at {DISPLAY.AI_DIAGNOSTIC} is more
+              than most consultancies charge for a discovery workshop — and you walk out with
+              an actual costed plan, not a slide deck.
+            </FaqItem>
+            <FaqItem question="Do you sign NDAs?">
+              Yes, mutual NDA before the Diagnostic if you want one. Engagement work lives in
+              your own systems — I never retain your data after handover.
             </FaqItem>
             <FaqItem question="How fast can we start?">
-              Scoping call usually within 3 business days of your enquiry. SOW within 72 hours of
-              the scoping call. Engagement starts on deposit clearance — typically inside 10
-              business days from first email.
+              Scoping call usually within 3 business days of your enquiry. Diagnostic starts on
+              deposit clearance — typically inside 7 business days from first email. The
+              2-week Diagnostic clock starts then.
+            </FaqItem>
+            <FaqItem question="Can our procurement do a vendor security review?">
+              Yes. I&apos;ve completed external attack-surface DD on myself —{" "}
+              <a href="/our-scan" style={{ color: "var(--ice)" }}>see the findings</a>. I&apos;ll
+              fill in any vendor risk assessment your procurement requires.
             </FaqItem>
           </div>
         </div>
@@ -580,7 +542,7 @@ export default function AiDeliveryPage() {
             letterSpacing: "0.05em",
           }}
         >
-          READY TO SCOPE A BUILD?
+          TELL ME WHAT'S EATING YOUR WEEK
         </h2>
         <p
           style={{
@@ -592,16 +554,15 @@ export default function AiDeliveryPage() {
             lineHeight: 1.7,
           }}
         >
-          Tell me what you’d build if delivery wasn’t the bottleneck.{" "}
-          {SCOPING_LENGTH_MINUTES}-minute scoping call. No deck. No salespeople.
-          One operator.
+          {SCOPING_LENGTH_MINUTES}-minute scoping call. Plain English. If there&apos;s
+          nothing worth automating I&apos;ll tell you on the call — no Diagnostic, no
+          invoice, no follow-up sequence.
         </p>
         <AnimatedButton href={SCOPING_CALL_URL} external variant="primary">
-          BOOK THE SCOPING CALL
+          {SCOPING_CALL_LABEL} →
         </AnimatedButton>
       </SectionReveal>
 
-      {/* Render-only-if-non-empty testimonials block — Fix 2c */}
       <Testimonials offer="ai-delivery" heading="WHAT AI-IMPLEMENTATION CUSTOMERS SAID" />
     </>
   );
@@ -694,7 +655,7 @@ function OfferTile({
       >
         {body}
       </p>
-      <AnimatedButton href={ctaHref} external variant="primary">
+      <AnimatedButton href={ctaHref} external={/^https?:\/\//.test(ctaHref)} variant="primary">
         {ctaLabel}
       </AnimatedButton>
     </article>

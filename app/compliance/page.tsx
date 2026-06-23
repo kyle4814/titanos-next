@@ -205,7 +205,7 @@ export default function CompliancePage() {
         <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
           BOOK A 15-MIN FIT CALL
         </AnimatedButton>
-        <AnimatedButton href={STRIPE_LINK} external variant="secondary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
+        <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
           BUY COMPLIANCE · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
@@ -485,8 +485,8 @@ export default function CompliancePage() {
                 <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
                   BOOK A 15-MIN FIT CALL
                 </AnimatedButton>
-                <AnimatedButton href={STRIPE_LINK} external variant="secondary">
-                  Buy directly · {DISPLAY.PACK_PRICE}
+                <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
+                  BUY DIRECTLY · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -694,7 +694,7 @@ export default function CompliancePage() {
           <AnimatedButton href={CAL_15} external variant="primary">
             BOOK A 15-MIN FIT CALL
           </AnimatedButton>
-          <AnimatedButton href={STRIPE_LINK} external variant="secondary">
+          <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
             BUY DIRECTLY · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
         </div>
