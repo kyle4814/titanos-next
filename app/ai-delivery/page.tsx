@@ -12,7 +12,7 @@ const SCOPING_LENGTH_MINUTES = SITE.CAL_30MIN_URL ? 30 : 15;
 
 const META_TITLE =
   "Titanos AI Implementation — Automate the Manual Work in Your Business";
-const META_DESC = `I find the highest-leverage task to automate in your AU business and build the AI system that does it. Diagnostic ${DISPLAY.AI_DIAGNOSTIC}, builds from ${DISPLAY.AI_BUILD_FLOOR}.`;
+const META_DESC = `Free scoping call (no charge, no obligation). I find the highest-leverage task to automate in your AU business and build the AI system that does it. Builds from ${DISPLAY.AI_BUILD_FLOOR}.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 };
 
 // Outcomes, not engineer-shop framing. Each card is a "what could land in your
-// business" — broad enough that the Diagnostic decides the exact build, narrow
-// enough that an SMB owner reads one and thinks "that's my Tuesday."
+// business" — broad enough that the scoping call decides the exact build,
+// narrow enough that an SMB owner reads one and thinks "that's my Tuesday."
 const BUILDS = [
   {
     title: "Kill the manual busywork",
@@ -63,17 +63,17 @@ const BUILDS = [
 const STEPS = [
   {
     num: "I",
-    tag: `DIAGNOSE · ${DISPLAY.AI_DIAGNOSTIC} · 2 WEEKS`,
-    title: "Diagnose",
+    tag: "SCOPING CALL · FREE · 15–30 MIN",
+    title: "Scoping call",
     body:
-      "I dig into how your business actually runs and come back with a prioritised, costed list of what's worth automating — biggest time-saver first. You get a real plan even if you never build a thing. And the full fee credits 100% toward your build.",
+      "We get on a call, I dig into how your business runs, and I tell you honestly the highest-leverage thing worth automating and what it'd cost to build. No charge, no obligation. If there's nothing worth doing, I'll say so on the call.",
   },
   {
     num: "II",
     tag: `BUILD · FROM ${DISPLAY.AI_BUILD_FLOOR.toUpperCase()} · QUOTED BY SCOPE`,
     title: "Build",
     body:
-      "I build the thing we picked, ship it working into your business, and document it so your team can actually use it. Working system, not a slide deck. Scoped from the diagnostic so there are no surprises.",
+      "I build the thing we picked, ship it working into your business, and document it so your team can actually use it. Working system, not a slide deck. Fixed-scope SOW from the call so there are no surprises.",
   },
   {
     num: "III",
@@ -92,20 +92,9 @@ export default function AiDeliveryPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "AI System Implementation",
     description:
-      "Diagnostic → Build → Maintain. I find the highest-leverage manual task in your business and ship the AI system that does it.",
+      "Free scoping call → Build → Maintain. I find the highest-leverage manual task in your business and ship the AI system that does it.",
     areaServed: ["AU", "NZ", "SG"],
     offers: [
-      {
-        "@type": "Offer",
-        name: "AI Diagnostic",
-        price: String(PRICING.AI_DIAGNOSTIC),
-        priceCurrency: "AUD",
-        priceSpecification: {
-          "@type": "PriceSpecification",
-          valueAddedTaxIncluded: false,
-          description: `${DISPLAY.AI_DIAGNOSTIC} — 2-week prioritised plan; fee credits 100% toward the Build`,
-        },
-      },
       {
         "@type": "Offer",
         name: "AI Build",
@@ -156,19 +145,32 @@ export default function AiDeliveryPage() {
           href={SCOPING_CALL_URL}
           external
           variant="primary"
-          ariaLabel={`Book a ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
+          ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
         >
           {SCOPING_CALL_LABEL} →
         </AnimatedButton>
         <AnimatedButton href="#how-it-works" variant="secondary">
           SEE HOW IT WORKS ↓
         </AnimatedButton>
+        <p
+          style={{
+            width: "100%",
+            textAlign: "center",
+            color: "var(--ice)",
+            fontSize: "var(--fs-sm)",
+            letterSpacing: "0.04em",
+            marginTop: 10,
+            opacity: 0.85,
+          }}
+        >
+          Free, no obligation. If there&apos;s nothing worth automating, I&apos;ll tell you on the call.
+        </p>
       </PageHero>
 
       <div className="divider-gold" />
 
       {/* WHAT I ACTUALLY BUILD — outcome-framed, broad. The exact build is
-          decided in the Diagnostic; these are the most common shapes. */}
+          decided on the free scoping call; these are the most common shapes. */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
@@ -225,7 +227,7 @@ export default function AiDeliveryPage() {
           >
             Not sure which applies to you?{" "}
             <strong style={{ color: "var(--gold)" }}>
-              That's exactly what the Diagnostic is for
+              That&apos;s exactly what the free scoping call is for
             </strong>{" "}
             — I figure out the highest-leverage build for your business before you commit to
             building anything.
@@ -235,8 +237,8 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      {/* HOW IT WORKS — three-step ladder. Diagnostic leads (the de-risker),
-          Build is the workhorse, Maintain is post-build only. */}
+      {/* HOW IT WORKS — three-step ladder. Free scoping call → Build →
+          optional post-build Retainer. Build is the only paid entry point. */}
       <SectionReveal
         id="how-it-works"
         style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
@@ -244,7 +246,7 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading
             title="HOW IT WORKS"
-            lead="A paid plan first, so we both know what's worth building. Then I build it. Then I keep it alive — only if you want."
+            lead="A free call first, so we both know what's worth building. Then I build it. Then I keep it alive — only if you want."
           />
           {/* "1% human review is the load-bearing 1%" callout — preserved from prior PR */}
           <p
@@ -333,33 +335,84 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
-      {/* PRICING LADDER — three tiers from lib/pricing.ts. Diagnostic is the
-          only one with self-serve checkout language; Build + Retainer are
-          relationship-priced (book the call). */}
+      {/* PRICING — free scoping call leads in (no checkout, no card),
+          Build is the only paid entry, Retainer is post-build only. */}
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
             title="THE LADDER"
-            lead="One paid step at a time. The Diagnostic credits 100% toward the Build. The Retainer is post-build only — sold once, after I've shipped something."
+            lead="Start with the free call. If there's something worth building, you get a fixed-scope SOW. The Retainer is post-build only — sold once, after I've shipped something."
           />
+          {/* Lead with the free scoping call — no price card, just the CTA */}
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto 28px",
+              padding: "26px 26px 22px",
+              background: "rgb(var(--gold-rgb) / 0.06)",
+              border: "1px solid var(--gold-dim)",
+              borderLeft: "3px solid var(--gold)",
+              borderRadius: "var(--radius-md)",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "var(--font-display), Georgia, serif",
+                color: "var(--ice)",
+                fontSize: "var(--fs-xs)",
+                letterSpacing: "0.18em",
+                marginBottom: 10,
+                textTransform: "uppercase",
+              }}
+            >
+              START HERE · FREE
+            </div>
+            <h3
+              style={{
+                fontFamily: "var(--font-display), Georgia, serif",
+                color: "var(--gold)",
+                fontSize: "var(--fs-h3)",
+                fontWeight: 700,
+                letterSpacing: "0.04em",
+                lineHeight: 1.25,
+                marginBottom: 10,
+              }}
+            >
+              Scoping Call — Free
+            </h3>
+            <p
+              style={{
+                color: "var(--text)",
+                fontSize: "var(--fs-body)",
+                lineHeight: 1.7,
+                margin: "0 auto 18px",
+                maxWidth: "var(--maxw-micro)",
+              }}
+            >
+              {SCOPING_LENGTH_MINUTES}-minute call. I tell you honestly the highest-leverage
+              thing worth automating and what it&apos;d cost to build. No charge, no obligation.
+            </p>
+            <div style={{ display: "inline-flex", justifyContent: "center" }}>
+              <AnimatedButton
+                href={SCOPING_CALL_URL}
+                external
+                variant="primary"
+                ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
+              >
+                {SCOPING_CALL_LABEL} →
+              </AnimatedButton>
+            </div>
+          </div>
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
           >
             <OfferTile
-              tag="DIAGNOSE · 2 WEEKS"
-              title="AI Diagnostic"
-              price={DISPLAY.AI_DIAGNOSTIC}
-              priceUnit="one-time · 2-week prioritised, costed plan · credits 100% toward the Build"
-              body="I dig into how your business actually runs and come back with a prioritised, costed list of what's worth automating — biggest time-saver first. You get a real plan even if you never build a thing. The full fee credits toward your Build if you proceed."
-              ctaLabel={SCOPING_CALL_LABEL}
-              ctaHref={SCOPING_CALL_URL}
-            />
-            <OfferTile
               tag="BUILD · QUOTED BY SCOPE"
               title="AI Build"
               price={DISPLAY.AI_BUILD_FLOOR}
-              priceUnit="fixed-scope SOW from the Diagnostic · deposit + milestones · delivery date in writing"
+              priceUnit="fixed-scope SOW from the call · deposit + milestones · delivery date in writing"
               body="I build the thing we picked, ship it working into your business, and document it so your team can use it. Working system, not a slide deck. One accountable contact. No subcontractor chain."
               ctaLabel={SCOPING_CALL_LABEL}
               ctaHref={SCOPING_CALL_URL}
@@ -474,11 +527,11 @@ export default function AiDeliveryPage() {
           <SectionHeading title="THE QUESTIONS I GET FIRST" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="I don't know what to automate. Is that a problem?">
-              No — that&apos;s exactly what the {DISPLAY.AI_DIAGNOSTIC} Diagnostic is for. Most
-              owners I work with come in saying &ldquo;something with AI, I think?&rdquo; and
-              leave the Diagnostic with a costed shortlist of three to five things worth doing,
-              ranked by hours-saved-per-dollar. You pick. If you never build a thing, you still
-              walk away with the plan.
+              No — that&apos;s exactly what the free scoping call is for. Most owners I work
+              with come in saying &ldquo;something with AI, I think?&rdquo; and leave the call
+              with a shortlist of the things worth doing, ranked by hours-saved-per-dollar, and
+              a rough cost for each. You pick. If nothing&apos;s worth building, I&apos;ll tell
+              you on the call.
             </FaqItem>
             <FaqItem question="Are you a real consulting firm or a one-person shop?">
               Single-operator practice. I run every engagement personally. The leverage comes
@@ -500,18 +553,17 @@ export default function AiDeliveryPage() {
             <FaqItem question="How is this different from hiring an AI consultancy?">
               Consultancies sell you a deck. I ship a working system. Their model is hours
               billed; mine is fixed scope with a delivery date in writing. They subcontract
-              implementation; I do it. The Diagnostic at {DISPLAY.AI_DIAGNOSTIC} is more
-              than most consultancies charge for a discovery workshop — and you walk out with
-              an actual costed plan, not a slide deck.
+              implementation; I do it. And the scoping call is free — most consultancies charge
+              for a discovery workshop and hand you a slide deck. I hand you a quote and a plan.
             </FaqItem>
             <FaqItem question="Do you sign NDAs?">
-              Yes, mutual NDA before the Diagnostic if you want one. Engagement work lives in
+              Yes, mutual NDA before the scoping call if you want one. Engagement work lives in
               your own systems — I never retain your data after handover.
             </FaqItem>
             <FaqItem question="How fast can we start?">
-              Scoping call usually within 3 business days of your enquiry. Diagnostic starts on
-              deposit clearance — typically inside 7 business days from first email. The
-              2-week Diagnostic clock starts then.
+              Scoping call usually within 3 business days of your enquiry. Fixed-scope SOW
+              within 72 hours of the call. Build starts on deposit clearance — typically inside
+              10 business days from first email.
             </FaqItem>
             <FaqItem question="Can our procurement do a vendor security review?">
               Yes. I&apos;ve completed external attack-surface DD on myself —{" "}
@@ -554,13 +606,29 @@ export default function AiDeliveryPage() {
             lineHeight: 1.7,
           }}
         >
-          {SCOPING_LENGTH_MINUTES}-minute scoping call. Plain English. If there&apos;s
-          nothing worth automating I&apos;ll tell you on the call — no Diagnostic, no
-          invoice, no follow-up sequence.
+          Free {SCOPING_LENGTH_MINUTES}-minute scoping call. Plain English. If there&apos;s
+          nothing worth automating I&apos;ll tell you on the call — no invoice, no follow-up
+          sequence.
         </p>
-        <AnimatedButton href={SCOPING_CALL_URL} external variant="primary">
+        <AnimatedButton
+          href={SCOPING_CALL_URL}
+          external
+          variant="primary"
+          ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
+        >
           {SCOPING_CALL_LABEL} →
         </AnimatedButton>
+        <p
+          style={{
+            color: "var(--ice)",
+            fontSize: "var(--fs-sm)",
+            letterSpacing: "0.04em",
+            marginTop: 12,
+            opacity: 0.85,
+          }}
+        >
+          Free, no obligation.
+        </p>
       </SectionReveal>
 
       <Testimonials offer="ai-delivery" heading="WHAT AI-IMPLEMENTATION CUSTOMERS SAID" />

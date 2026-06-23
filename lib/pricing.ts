@@ -30,10 +30,10 @@ export const PRICING = {
   MONITOR_CONTINUATION_MODE: "opt_in" as "opt_in" | "auto_continue",
 
   // --- AI delivery ladder ---
-  // Three rungs: paid Diagnostic de-risks the Build; Build is the workhorse;
-  // Ops Retainer is post-build only (I won't maintain what I didn't build).
-  // Diagnostic fee credits 100% toward the Build if you proceed.
-  AI_DIAGNOSTIC: 4997,
+  // Free scoping call (no charge, no obligation) → AI Build (the only paid
+  // entry point; quoted by scope from the call) → Ops Retainer (post-build
+  // only — I won't maintain what I didn't build).
+  // Decided 2026-06-21; re-confirmed 2026-06-23.
   AI_BUILD_FLOOR: 9997,
   AI_OPS_RETAINER_LOW: 990,
   AI_OPS_RETAINER_HIGH: 1990,
@@ -89,7 +89,6 @@ export const DISPLAY = {
   MONITOR_MONTHLY: formatMonthly(PRICING.MONITOR_MONTHLY),
   MONITOR_ANNUAL: formatAnnual(PRICING.MONITOR_ANNUAL),
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
-  AI_DIAGNOSTIC: formatAUD(PRICING.AI_DIAGNOSTIC),
   AI_BUILD_FLOOR: `From ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
   AI_OPS_RETAINER: `${formatRange(PRICING.AI_OPS_RETAINER_LOW, PRICING.AI_OPS_RETAINER_HIGH)}/mo`,
   LEADS_STARTER: formatAUD(LEADS.STARTER.price),
