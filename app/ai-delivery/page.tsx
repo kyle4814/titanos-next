@@ -12,7 +12,7 @@ const SCOPING_LENGTH_MINUTES = SITE.CAL_30MIN_URL ? 30 : 15;
 
 const META_TITLE =
   "Titanos AI Implementation — Automate the Manual Work in Your Business";
-const META_DESC = `Free scoping call (no charge, no obligation). I find the highest-leverage task to automate in your AU business and build the AI system that does it. Builds from ${DISPLAY.AI_BUILD_FLOOR}.`;
+const META_DESC = `Free scoping call (no charge, no obligation). I find the highest-leverage task to automate in your AU business and build the AI system that does it. Builds ${DISPLAY.AI_BUILD_FLOOR.toLowerCase()}, quoted by scope.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
