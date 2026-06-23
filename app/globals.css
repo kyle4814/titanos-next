@@ -360,6 +360,22 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+/* Homepage four-doors offers — 1 col mobile, 2x2 desktop. Avoids the
+   3+1 orphan that an auto-fit grid produces at narrow desktop widths
+   (e.g. 1024px) when there are exactly 4 cards. Capping at 2 columns
+   also keeps each card readable rather than crushing to 4 narrow tiles
+   on ultra-wide. */
+.grid-doors {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+@media (min-width: 720px) {
+  .grid-doors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* W4 Pillar 5 — vault-edge gold filament, the connecting tissue.
    1px gold line down the left edge of every page, 30% opacity.
    Shimmer travels down its length every 12 seconds. */

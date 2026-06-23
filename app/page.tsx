@@ -79,6 +79,27 @@ const offers: Offer[] = [
     icon: "sparkles",
     index: 2,
   },
+  {
+    tag: "OFFER 04 · LISTS & INTELLIGENCE",
+    title: "Leads & Intelligence",
+    price: DISPLAY.LEADS_STARTER_FROM,
+    priceUnit: `per list · or ${DISPLAY.LEADS_RETAINER} intelligence feed`,
+    body:
+      "Verified Australian business contacts, decision-maker level, sourced from public data and checked deliverable before you get them. Built compliant, because compliance is the other thing I do.",
+    bullets: [
+      "Verified deliverable · 30-day bounce replacement",
+      "Decision-maker contacts, not generic inboxes",
+      "You own the data — no platform lock-in",
+    ],
+    primary: {
+      label: "BOOK A 15-MIN FIT CALL ›",
+      href: SITE.CAL_15MIN_URL,
+      external: true,
+    },
+    secondary: { label: "See Leads & Intelligence", href: "/leads" },
+    icon: "users",
+    index: 3,
+  },
 ];
 
 export default function Home() {
@@ -88,7 +109,7 @@ export default function Home() {
       {/* Fix 6 — single-spine H1 + sub. The three offer cards below carry routing. */}
       <HeroEntrance
         wordmark="TITANOS"
-        tagline="One operator. Three doors in."
+        tagline="One operator. Four doors in."
         trust={
           <>
             Personally reviewed · Australian-owned · ABN-verified ·{" "}
@@ -118,6 +139,8 @@ export default function Home() {
           A free security scan that shows you what an attacker sees. A fixed-price
           Privacy Act compliance engagement done with you before the 11 December
           2026 deadline. AI builds shipped into your environment, quoted by scope.
+          And verified Australian lead lists, built by the compliance practice — so
+          the data you buy doesn&apos;t become a compliance problem.
         </p>
       </section>
 
@@ -200,14 +223,14 @@ export default function Home() {
               }}
             >
               One free starting point. One fixed compliance engagement. One quoted AI
-              implementation. No catalogue, no menus, no upsell maze.
+              implementation. One verified-leads channel. No catalogue, no menus,
+              no upsell maze.
             </p>
           </div>
 
           <div
-            className="grid-auto-cards"
+            className="grid-doors"
             style={{
-              gap: 22,
               maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
             }}
@@ -298,7 +321,7 @@ export default function Home() {
             letterSpacing: "0.05em",
           }}
         >
-          ONE OPERATOR. THREE DOORS IN.
+          ONE OPERATOR. FOUR DOORS IN.
         </h2>
         <p
           style={{
@@ -311,9 +334,10 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Start with a free scan, ship the compliance pack before December, or scope
-          an AI build. Whichever maps to your problem, the path is the same:
-          one accountable contact, work shipped not consulted.
+          Start with a free scan, ship the compliance pack before December, scope
+          an AI build, or order a verified leads list. Whichever maps to your
+          problem, the path is the same: one accountable contact, work shipped
+          not consulted.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/scan#request" variant="primary">
