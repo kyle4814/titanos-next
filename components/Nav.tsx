@@ -21,6 +21,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 import VaultKeyhole from "./VaultKeyhole";
 
@@ -52,6 +53,13 @@ export default function Nav() {
   const [revealed, setRevealed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // The drawer is portalled into document.body — the <motion.nav> parent
+  // has both a framer-motion transform AND backdrop-filter, each of which
+  // makes the nav a containing block for position:fixed descendants per
+  // CSS spec. Without the portal, the drawer's "fixed" rect resolves
+  // against the ~80px nav header and items overflow into the hero.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (reduce) {
@@ -171,57 +179,65 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {drawerOpen && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              key="overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduce ? 0 : 0.2 }}
-              onClick={() => setDrawerOpen(false)}
-              style={{
-                position: "fixed",
-                inset: 0,
-                background: "rgb(5 3 3 / 0.7)",
-                backdropFilter: "blur(4px)",
-                zIndex: 40,
-                pointerEvents: "auto",
-              }}
-              aria-hidden="true"
-            />
+      {/* Mobile drawer — portalled into document.body so it escapes the
+          containing-block trap created by the parent's transform +
+          backdrop-filter. Without the portal, "position: fixed" resolves
+          against the sticky nav box, not the viewport, and the menu items
+          spill into the hero. */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {drawerOpen && (
+            <>
+              {/* Overlay */}
+              <motion.div
+                key="overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduce ? 0 : 0.2 }}
+                onClick={() => setDrawerOpen(false)}
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  background: "rgb(5 3 3 / 0.7)",
+                  backdropFilter: "blur(4px)",
+                  WebkitBackdropFilter: "blur(4px)",
+                  zIndex: 1040,
+                  pointerEvents: "auto",
+                }}
+                aria-hidden="true"
+              />
 
-            {/* Drawer panel */}
-            <motion.div
-              key="drawer"
-              id="nav-drawer"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Site navigation"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: reduce ? 0 : 0.32, ease: [0.4, 0, 0.2, 1] }}
-              style={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: "min(86vw, 360px)",
-                background:
-                  "linear-gradient(180deg, var(--vault-warm), var(--vault-black))",
-                borderLeft: "1px solid var(--gold)",
-                boxShadow: "-20px 0 60px rgb(0 0 0 / 0.6)",
-                zIndex: 50,
-                display: "flex",
-                flexDirection: "column",
-                padding: "32px 28px",
-                overflowY: "auto",
-              }}
-            >
+              {/* Drawer panel */}
+              <motion.div
+                key="drawer"
+                id="nav-drawer"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Site navigation"
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: reduce ? 0 : 0.32, ease: [0.4, 0, 0.2, 1] }}
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: "min(86vw, 360px)",
+                  maxWidth: "100vw",
+                  background:
+                    "linear-gradient(180deg, var(--vault-warm), var(--vault-black))",
+                  borderLeft: "1px solid var(--gold)",
+                  boxShadow: "-20px 0 60px rgb(0 0 0 / 0.6)",
+                  zIndex: 1050,
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "32px 28px",
+                  overflowY: "auto",
+                  WebkitOverflowScrolling: "touch",
+                }}
+              >
               {/* Edge thread inside the drawer */}
               <span
                 aria-hidden="true"
@@ -321,9 +337,11 @@ export default function Nav() {
                 kyle@titanos.tech
               </div>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
 
       <style>{`
         .nav-desktop-links {
