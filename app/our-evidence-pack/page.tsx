@@ -8,13 +8,14 @@ import { PRICING, DISPLAY } from "@/lib/pricing";
 const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_HREF = "/scan#request";
 
-// Fix 2a — Self-evidence-pack page. Mirrors /our-scan: published
-// self-attestation, every section listed, linked PDF placeholder gated
-// on OPERATOR_INPUT. Closing CTA into /compliance.
+// Self-evidence-pack page. The redacted sample PDF (external-scan
+// excerpt) is generated from a real scan of titanos.tech and ships
+// in /public; the 13-section index below frames the full deliverable.
 
 const META_TITLE = "My Own Evidence Pack — TITANOS";
 const META_DESC =
-  "I sell a 13-section compliance evidence pack. Here is the one I produced for my own business, published in full. ABN 34 318 502 254.";
+  "I sell a 13-section compliance evidence pack. Here is the real, redacted sample run against my own infrastructure — see exactly what you'd get before you pay. ABN 34 318 502 254.";
+const SAMPLE_PDF = "/sample-evidence-pack-excerpt.pdf";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -37,8 +38,12 @@ export const metadata: Metadata = {
 };
 
 // The 13-section shape mirrored from the actual evidence pack template.
-// Section copy is summary-only here; the full content lives in the PDF
-// linked below once Kyle publishes the redacted self-pack.
+// The externally-verifiable sections (01, 02, 04, 05, 06, 11, 12, 13)
+// ship in the redacted sample PDF linked at the top of this page —
+// generated from a real scan of titanos.tech. The operational sections
+// (privacy policy, NDB runbook, vendor risk register, M365 / MFA
+// evidence, attestations) are regenerated per engagement from the
+// client's own operational data and are not in the sample.
 const SECTIONS: Array<{ num: string; title: string; body: string }> = [
   {
     num: "01",
@@ -138,7 +143,8 @@ export default function OurEvidencePackPage() {
 
       <div className="divider-gold" />
 
-      {/* PDF placeholder — OPERATOR_INPUT gated */}
+      {/* Real, redacted sample PDF — external-scan excerpt generated from
+          a live scan of titanos.tech's own infrastructure. */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div
           style={{
@@ -146,23 +152,80 @@ export default function OurEvidencePackPage() {
             margin: "0 auto",
             padding: "26px 28px",
             background: "var(--card)",
-            border: "1px dashed var(--gold-dim)",
+            border: "1px solid var(--gold-dim)",
+            borderLeft: "3px solid var(--gold)",
             borderRadius: "var(--radius-md)",
-            color: "var(--dim)",
             fontFamily: "var(--font-body), system-ui, sans-serif",
             fontSize: "var(--fs-sm)",
             lineHeight: 1.7,
+            color: "var(--text)",
           }}
         >
-          {/* OPERATOR_INPUT: drop the redacted self evidence pack PDF into
-              /public/our-evidence-pack.pdf and replace this placeholder with
-              an <embed> or download link. */}
-          <strong style={{ color: "var(--ice)", display: "block", marginBottom: 6 }}>
-            PDF placeholder
-          </strong>
-          The redacted self evidence pack PDF will appear here once Kyle uploads it.
-          Until then, the section index below describes the shape and substance of
-          every section. Same template ships on every compliance engagement.
+          <div
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              color: "var(--ice)",
+              fontSize: "var(--fs-xs)",
+              letterSpacing: "0.18em",
+              marginBottom: 10,
+              textTransform: "uppercase",
+            }}
+          >
+            SAMPLE · REDACTED · REAL SCAN OF TITANOS.TECH
+          </div>
+          <p style={{ margin: "0 0 14px" }}>
+            This is a real, lightly-redacted external evidence pack run against my
+            own infrastructure — the same shape, format, and reproducibility
+            discipline every compliance engagement ships. See exactly what
+            you&apos;d get before you pay.
+          </p>
+          <p style={{ margin: "0 0 18px", color: "var(--dim)", fontSize: "var(--fs-xs)" }}>
+            Externally-verifiable sections (01, 02, 04, 05, 06, 11, 12, 13)
+            included. Operational sections (privacy policy, NDB runbook, vendor
+            risk register, M365 hardening, MFA evidence, signed attestations)
+            are regenerated per engagement from your own operational data — they
+            do not appear in this sample because fabricating those would defeat
+            the purpose.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <AnimatedButton href={SAMPLE_PDF} variant="primary" external>
+              VIEW THE SAMPLE PDF →
+            </AnimatedButton>
+            <AnimatedButton
+              href={SAMPLE_PDF}
+              variant="secondary"
+              external
+              ariaLabel="Download the sample external evidence pack PDF"
+            >
+              Download
+            </AnimatedButton>
+          </div>
+        </div>
+        <div
+          style={{
+            maxWidth: "var(--maxw-prose)",
+            margin: "18px auto 0",
+            border: "1px solid var(--gold-dim)",
+            borderRadius: "var(--radius-md)",
+            overflow: "hidden",
+            background: "var(--card)",
+          }}
+        >
+          <object
+            data={SAMPLE_PDF}
+            type="application/pdf"
+            width="100%"
+            height="720"
+            aria-label="Sample external evidence pack PDF preview"
+            style={{ display: "block" }}
+          >
+            <p style={{ padding: 16, color: "var(--dim)", fontSize: "var(--fs-sm)" }}>
+              Your browser can&apos;t inline-preview PDFs.{" "}
+              <a href={SAMPLE_PDF} style={{ color: "var(--gold)" }} target="_blank" rel="noopener noreferrer">
+                Open the sample evidence pack in a new tab →
+              </a>
+            </p>
+          </object>
         </div>
       </SectionReveal>
 
