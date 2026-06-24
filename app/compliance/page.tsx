@@ -137,16 +137,20 @@ const HOST_CONTROLS = [
   "Database security on SaaS like Xero, Cliniko, Vend",
 ];
 
+// Ordered engagement-first: what I DO on the call, then the thing
+// you can hand a regulator/insurer, then the document changes I push
+// live with you, then the evidence pack as proof-of-work documenting
+// all of the above.
 const INCLUDED = [
-  "Same evidence pack shape as my own — see /our-evidence-pack",
-  "13-section evidence pack (~17pp)",
-  "External scan with you-vs-host split",
-  "90-minute implementation working call where we apply the changes together",
-  "DNS hygiene + M365/Google Workspace hardening done with you",
-  "Privacy policy + ADM disclosure deployed",
-  "NDB runbook integrated",
-  "30-day review call",
-  "Signed compliance attestation letter",
+  "90-minute implementation working call — we apply every change together on a screen-share, no PDF-only hand-off",
+  "Signed Essential Eight ML1 + Privacy Act attestation letter you can hand to a regulator, insurer, or enterprise client",
+  "Privacy policy + ADM disclosure deployed live to your site on the call",
+  "NDB breach-response runbook integrated into your shared drive",
+  "DNS hygiene (SPF/DKIM/DMARC) + M365 / Google Workspace hardening applied with you",
+  "30-day review call to re-audit anything that drifted, then sign the attestation",
+  "13-section evidence pack documenting all of the above (~17pp) — proof of work for your insurer or regulator",
+  "External scan with you-vs-host responsibility split (same engine as the free scan)",
+  "Sample of the pack shape — my own, published in full at /our-evidence-pack",
   `${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (then optional at ${DISPLAY.MONITOR_MONTHLY} — opt-in, no auto-charge)`,
 ];
 
@@ -222,7 +226,7 @@ export default function CompliancePage() {
       {/* Fix 2a + 3d — evidence-pack link + middle-rung scan routing line */}
       <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto 10px" }}>
-          See the actual deliverable —{" "}
+          See the kind of documentation this engagement produces —{" "}
           <a href="/our-evidence-pack" style={{ color: "var(--gold)", fontWeight: 600 }}>
             my own evidence pack, published in full →
           </a>
@@ -683,8 +687,10 @@ export default function CompliancePage() {
             lineHeight: 1.7,
           }}
         >
-          One engagement, one outcome: an evidence pack a regulator accepts as “reasonable
-          steps,” with the changes already applied together on the working call.
+          One engagement, one outcome: a signed Essential Eight ML1 + Privacy Act
+          attestation you can hand to a regulator, insurer, or enterprise client — with
+          every change already applied together on the 90-minute working call, and the
+          13-section evidence pack as proof of work.
         </p>
         {/*
           Fix 2d — final-CTA cluster FLIPPED while testimonials.ts is empty.

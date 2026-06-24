@@ -169,7 +169,7 @@ export default function LeadsPage() {
       <PageHero
         badge="TITANOS · LEADS & INTELLIGENCE"
         title="Verified Australian business contacts, built by the compliance practice that knows which data is legal to hold."
-        sub="Verified deliverable contact lists for AU/NZ/SG — with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research deliverable I stand behind with a bounce guarantee."
+        sub="Reach real Australian businesses without bouncing — with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research outcome I stand behind with a 30-day bounce guarantee."
         trustLine="Public business information · Privacy Act-aware · every email verified before delivery · reply STOP and you're suppressed forever."
       >
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
@@ -285,7 +285,7 @@ export default function LeadsPage() {
         <div className="container-vault">
           <SectionHeading
             title="PRICING"
-            lead="One-off lists or an ongoing intelligence feed. Every tier verified, every tier guaranteed."
+            lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed — every tier verified at delivery, every tier covered by the 30-day bounce replacement."
           />
           <div
             className="grid-auto-cards"
