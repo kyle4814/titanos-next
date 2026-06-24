@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 const PROBLEMS = [
   {
     title: "Scraped lists bounce.",
-    body: "Most cheap AU contact lists are scraped once, never verified, and 30–50% bounce on first send — torching your sender reputation before you've made a single pitch.",
+    body: "Most cheap AU contact lists are scraped once, never verified, and commonly bounce on first send — often 30–50% — torching your sender reputation before you've made a single pitch.",
   },
   {
     title: "Agencies charge $5–10K and lock you in.",

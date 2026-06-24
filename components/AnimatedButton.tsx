@@ -314,6 +314,12 @@ function SecondaryLink({
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
 
+  // If the label already ends with a directional arrow the caller intended
+  // (→ ↑ ↓ ← ↗ ↘), don't append the auto-→ — otherwise we render double
+  // arrows or a wrong-direction pair like "↓→".
+  const labelEndsWithArrow =
+    typeof children === "string" && /[→↑↓←↗↘]\s*$/.test(children);
+
   const body = (
     <span
       style={{
@@ -342,13 +348,15 @@ function SecondaryLink({
           }}
         />
       </span>
-      <motion.span
-        aria-hidden="true"
-        animate={{ x: hovered && !reduce ? 4 : 0 }}
-        transition={{ duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] }}
-      >
-        →
-      </motion.span>
+      {!labelEndsWithArrow && (
+        <motion.span
+          aria-hidden="true"
+          animate={{ x: hovered && !reduce ? 4 : 0 }}
+          transition={{ duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] }}
+        >
+          →
+        </motion.span>
+      )}
     </span>
   );
 
