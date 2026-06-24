@@ -58,8 +58,8 @@ const DIFFERENTIATORS = [
     body: "Every email is checked deliverable before it reaches you. Anything that bounces in the first 30 days, I replace free.",
   },
   {
-    title: "Decision-maker level, not info@.",
-    body: "Where the website exposes it, you get the owner or manager's name and direct contact — not a generic inbox.",
+    title: "Named where I can find them.",
+    body: "Where a business publicly lists an owner or manager's contact, you get it. Where it doesn't, you get the verified main business contact — every row reachable, none invented. I'd rather give you a real info@ that works than a 'decision maker' address I made up.",
   },
   {
     title: "Legal by design.",
@@ -80,7 +80,7 @@ const STEPS = [
   {
     num: "II",
     title: "BUILD + VERIFY",
-    body: "I source from public AU business listings, extract decision-maker contacts, and verify every email as deliverable before it goes anywhere near your CSV.",
+    body: "I source from public AU business listings, extract the named owner or manager wherever they're publicly listed, and use the verified main business contact otherwise. Every email is checked deliverable before it goes anywhere near your CSV.",
   },
   {
     num: "III",
@@ -120,7 +120,7 @@ export default function LeadsPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "Verified business contact lists",
     description:
-      "Verified Australian business contact lists, decision-maker level, sourced from public business information and verified deliverable before delivery. Built by a Privacy Act compliance practice.",
+      "Verified Australian business contact lists — sourced from public business information, with named owner or decision-maker where publicly available and the verified main business contact otherwise. Every email checked deliverable before delivery. Built by a Privacy Act compliance practice.",
     areaServed: ["AU", "NZ", "SG"],
     offers: [
       {
@@ -169,7 +169,7 @@ export default function LeadsPage() {
       <PageHero
         badge="TITANOS · LEADS & INTELLIGENCE"
         title="Verified Australian business contacts, built by the compliance practice that knows which data is legal to hold."
-        sub="Targeted, decision-maker-level contact lists for AU/NZ/SG — verified deliverable, sourced from public business information, suppression honoured on request. Not a scraper dump. A research deliverable I stand behind with a bounce guarantee."
+        sub="Verified deliverable contact lists for AU/NZ/SG — with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research deliverable I stand behind with a bounce guarantee."
         trustLine="Public business information · Privacy Act-aware · every email verified before delivery · reply STOP and you're suppressed forever."
       >
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
@@ -313,7 +313,7 @@ export default function LeadsPage() {
               priceUnit={`${LEADS.GROWTH.contacts} verified contacts · ${LEADS.GROWTH.turnaround}`}
               bullets={[
                 `Up to ${LEADS.GROWTH.industries} industries or regions`,
-                `Everything in Starter, plus decision-maker name where extractable`,
+                `Everything in Starter, plus named owner or decision-maker contact where publicly available, and the verified business email otherwise`,
                 `LinkedIn URL where found, plus a quality score per row`,
                 `30-day bounce replacement`,
               ]}
@@ -529,6 +529,13 @@ export default function LeadsPage() {
               Every email is verified deliverable before delivery. If anything bounces
               within 30 days of delivery, I replace it free. I&apos;d rather
               under-promise volume than pad a list with addresses that don&apos;t work.
+            </FaqItem>
+            <FaqItem question="Are these decision-maker contacts?">
+              Where a business publicly lists the owner or a manager&apos;s direct contact,
+              yes — you get it. Where they don&apos;t, you get the verified main business
+              email. I never invent a &ldquo;decision maker&rdquo; address to pad the list.
+              Every contact is real, verified deliverable, and reachable — that&apos;s the
+              part I guarantee.
             </FaqItem>
             <FaqItem question="Do I own the data?">
               Yes. It&apos;s delivered to you as a file you keep. No platform lock-in,

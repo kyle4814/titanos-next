@@ -60,12 +60,12 @@ const offers: Offer[] = [
     tag: "OFFER 03 · PROJECT-QUOTED",
     title: "AI Implementation for Business",
     price: DISPLAY.AI_BUILD_FLOOR,
-    priceUnit: "quoted by scope · free 30-min scoping call",
+    priceUnit: "quoted by scope · free 15-min scoping call",
     body:
-      "AI capabilities shipped into your environment. Working code in your repo, deployed and documented. I diagnose, plan, build, and implement — quoted by scope after a free scoping call.",
+      "Tell me the manual task eating your week — I build the AI system that does it, shipped working into your business and documented for your team. Quoted by scope after a free scoping call.",
     bullets: [
-      "Working code in your repo",
-      "Deployed, not \"deployable\"",
+      "The painful manual job, automated",
+      "Shipped working, not \"deployable\"",
       "Documented for handover",
       "99% Claude Code · 1% expert human review",
     ],
@@ -85,10 +85,10 @@ const offers: Offer[] = [
     price: DISPLAY.LEADS_STARTER_FROM,
     priceUnit: `per list · or ${DISPLAY.LEADS_RETAINER} intelligence feed`,
     body:
-      "Verified Australian business contacts, decision-maker level, sourced from public data and checked deliverable before you get them. Built compliant, because compliance is the other thing I do.",
+      "Verified Australian business contacts — sourced from public data and checked deliverable before you get them, with the named owner or decision-maker wherever it's publicly listed. Built compliant, because compliance is the other thing I do.",
     bullets: [
       "Verified deliverable · 30-day bounce replacement",
-      "Decision-maker contacts, not generic inboxes",
+      "Named decision-maker where publicly available · every contact verified",
       "You own the data — no platform lock-in",
     ],
     primary: {
