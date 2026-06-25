@@ -418,8 +418,9 @@ export default function ScanPage() {
             lineHeight: 1.65,
           }}
         >
-          Powered by <strong style={{ color: "var(--gold)" }}>Claude Code</strong> —
-          drafted by AI, reviewed and signed off by Kyle on every scan.
+          Built with AI assistance. Every scan finding is reviewed and signed off
+          by <strong style={{ color: "var(--gold)" }}>Kyle Deligny (ABN 34 318 502 254)</strong>{" "}
+          before delivery. My ABN is on every page — the accountability is mine.
         </p>
       </SectionReveal>
     </>

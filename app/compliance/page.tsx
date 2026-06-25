@@ -143,8 +143,8 @@ const HOST_CONTROLS = [
 // all of the above.
 const INCLUDED = [
   "90-minute implementation working call — we apply every change together on a screen-share, no PDF-only hand-off",
-  "Signed Essential Eight ML1 + Privacy Act attestation letter you can hand to a regulator, insurer, or enterprise client",
-  "Privacy policy + ADM disclosure deployed live to your site on the call",
+  "Signed self-attestation documenting the Essential Eight ML1 + Privacy Act reasonable steps you've taken — the evidence trail a regulator, insurer, or enterprise client looks for when assessing posture (not a guarantee against complaints — those are decided on the facts of an incident)",
+  "Privacy policy + ADM disclosure starter draft deployed live to your site on the call — written from your intake, ready to update as your AI use evolves (the disclosure has to keep pace with what your business actually does)",
   "NDB breach-response runbook integrated into your shared drive",
   "DNS hygiene (SPF/DKIM/DMARC) + M365 / Google Workspace hardening applied with you",
   "30-day review call to re-audit anything that drifted, then sign the attestation",
@@ -423,6 +423,24 @@ export default function CompliancePage() {
                   one-time · {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
                   <a href="/monitor" style={{ color: "var(--ice)" }}>Monitor</a> included free
                 </span>
+                <span
+                  style={{
+                    color: "var(--ice)",
+                    fontSize: "var(--fs-sm)",
+                    display: "block",
+                    marginTop: 14,
+                    fontWeight: 400,
+                    letterSpacing: "0.02em",
+                    lineHeight: 1.55,
+                    fontStyle: "italic",
+                    fontFamily: "var(--font-body), system-ui, sans-serif",
+                  }}
+                >
+                  Drafting before the call · 90-min implementation working call ·
+                  30-day review + attestation signed · 12 months of regulatory
+                  briefings + quarterly re-scans. Not 90 minutes total — 90 minutes
+                  is the central session.
+                </span>
               </div>
               <p
                 style={{
@@ -624,6 +642,17 @@ export default function CompliancePage() {
               a specific incident. What you get is the evidence pack regulators expect to see
               when assessing whether you took “reasonable steps.”
             </FaqItem>
+            <FaqItem question="What happens if you’re unavailable later?">
+              You keep everything I produce — the signed self-attestation, the 13-section evidence
+              pack, your privacy policy + ADM disclosure as deployed, your NDB runbook, the
+              vendor risk register, and your DNS/M365 hardening notes. The attestation remains
+              valid as a dated record of the reasonable steps taken at that point in time
+              (compliance is always a snapshot — refresh annually). I also hand over a one-page
+              continuity sheet so another consultant can pick up the file without re-doing the
+              diagnostic. The delivered-state-on-pause clause covers mid-engagement: you keep
+              everything built to that point plus a refund of any unearned milestone. You are
+              never left holding a half-finished pack.
+            </FaqItem>
             <FaqItem question="How fast can we get this done?">
               External scan within 48 hours of purchase. Working call scheduled inside 7 days.
               30-day review call scheduled at the working call. Quarterly re-scans recur for the
@@ -723,8 +752,10 @@ export default function CompliancePage() {
             lineHeight: 1.65,
           }}
         >
-          Powered by <strong style={{ color: "var(--gold)" }}>Claude Code</strong> —
-          drafted by AI, reviewed and signed off by Kyle on every engagement.
+          Built with AI assistance. Every document, every scan finding, and every
+          attestation is reviewed and signed off by{" "}
+          <strong style={{ color: "var(--gold)" }}>Kyle Deligny (ABN 34 318 502 254)</strong>{" "}
+          before it reaches you. My ABN is on every page — the accountability is mine.
         </p>
       </SectionReveal>
     </>

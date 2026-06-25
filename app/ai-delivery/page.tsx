@@ -265,8 +265,8 @@ export default function AiDeliveryPage() {
             }}
           >
             I use AI to build fast, but a human (me) reviews everything that ships. The
-            automation does 99% of the work; the 1% I check by hand is the part that keeps
-            it from embarrassing you.
+            automation does the volume; the part I check by hand is the part that keeps
+            it from embarrassing you — and the part where the legal accountability sits.
           </p>
           <div
             className="grid-auto-cards"
@@ -542,8 +542,9 @@ export default function AiDeliveryPage() {
             </FaqItem>
             <FaqItem question="What about model outputs that are wrong?">
               Every line of code, every prompt, every AI output is reviewed by me before it
-              ships. The 1% human review is the load-bearing 1%. I also write test coverage
-              (where it makes sense) so wrong outputs get caught before your customers see them.
+              ships. The human review is the part that takes the legal accountability — my ABN
+              is on the work. I also write test coverage (where it makes sense) so wrong outputs
+              get caught before your customers see them.
             </FaqItem>
             <FaqItem question="What if you disappear mid-engagement?">
               The agreement includes a delivered-state-on-pause clause. If I have to step away

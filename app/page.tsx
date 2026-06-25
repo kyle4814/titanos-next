@@ -67,7 +67,7 @@ const offers: Offer[] = [
       "The painful manual job, automated",
       "Shipped working, not \"deployable\"",
       "Documented for handover",
-      "99% Claude Code · 1% expert human review",
+      "AI-assisted build · every output reviewed and signed off by me",
     ],
     // Fix 5c — scoping CTA label/URL derived from config (auto-relabels until 30-min event exists).
     primary: {
