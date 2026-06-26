@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import PdfViewer from "@/components/PdfViewer";
 import { SITE } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 
@@ -12,9 +13,9 @@ const REQUEST_HREF = "/scan#request";
 // excerpt) is generated from a real scan of titanos.tech and ships
 // in /public; the 13-section index below frames the full deliverable.
 
-const META_TITLE = "My Own Evidence Pack — TITANOS";
+const META_TITLE = "What's in the Compliance Pack — TITANOS";
 const META_DESC =
-  "I sell a 13-section compliance evidence pack. Here is the real, redacted sample run against my own infrastructure — see exactly what you'd get before you pay. ABN 34 318 502 254.";
+  "Before you pay for anything, see exactly what you get. This is our own 13-section security and compliance report — run on our own business, published in full, lightly redacted. ABN 34 318 502 254.";
 const SAMPLE_PDF = "/sample-evidence-pack-excerpt.pdf";
 
 export const metadata: Metadata = {
@@ -47,68 +48,68 @@ export const metadata: Metadata = {
 const SECTIONS: Array<{ num: string; title: string; body: string }> = [
   {
     num: "01",
-    title: "Executive summary",
-    body: "What was checked, what was found, what was fixed, what was deferred and why. Suitable for an insurer or regulator to read in 90 seconds.",
+    title: "Plain-English summary",
+    body: "A one-page overview of what we checked, what we found, what we fixed, and what's still on the list. Written so a bank, insurer, or government contact can understand the whole picture in under two minutes — no technical knowledge needed.",
   },
   {
     num: "02",
-    title: "Privacy policy + ADM disclosure draft",
-    body: "Policy text aligned to 11 December 2026 obligations, including the automated-decision-making (ADM) disclosure clause — covering which AI tools touch customer data, what they decide, and how to opt out where applicable.",
+    title: "Privacy policy + AI disclosure",
+    body: "A ready-to-publish privacy policy updated for Australia's new privacy laws (December 2026), plus a plain-English section explaining which AI tools the business uses, what decisions they make about customers, and how a customer can ask for those decisions to be reviewed.",
   },
   {
     num: "03",
-    title: "NDB breach-response runbook",
-    body: "Step-by-step plan for the day you get breached, so you hit the mandatory notification deadline (NDB scheme) instead of panicking. Roles, deadlines, statement templates.",
+    title: "What to do if you get hacked",
+    body: "A step-by-step action plan for a data breach — who to call, what to do in the first 24 hours, what to say to affected customers, and how to meet Australia's legal notification deadline (30 days under the Notifiable Data Breaches law). Built so you're not making decisions under pressure.",
   },
   {
     num: "04",
-    title: "Vendor risk register",
-    body: "One-page record of every third-party service that touches my customer data — what they hold, the contract terms that govern it, the last security check I did on them.",
+    title: "Third-party services that touch your data",
+    body: "A one-page list of every external tool or platform that handles your customer data — what data they hold, what your agreement with them covers, and when you last reviewed their security. The kind of list a large client or insurer will ask for.",
   },
   {
     num: "05",
-    title: "External scan findings",
-    body: "Six findings from the 2026-06-01 external scan against titanos.tech — every finding republished verbatim, with status (resolved / partial / open) and remediation evidence. Mirror of /our-scan.",
+    title: "Security scan results — every finding, published",
+    body: "The full results of an independent external security scan — every issue found, how serious it is, whether it's been fixed, and the evidence that the fix worked. Nothing hidden, nothing cherry-picked.",
   },
   {
     num: "06",
-    title: "DNS hygiene record",
-    body: "SPF, DKIM, DMARC, CAA records as deployed. DKIM-aligned, SPF strict, DMARC p=reject — enterprise-grade email auth on a single-operator practice.",
+    title: "Email fraud protection setup",
+    body: "Proof that your email domain is locked down so nobody can send fake emails pretending to be your business — a technique used in most phishing and invoice fraud attacks. Shows the three records (SPF, DKIM, DMARC) that block this, all verified and active.",
   },
   {
     num: "07",
-    title: "Microsoft 365 / Google Workspace hardening checklist",
-    body: "Applied changes for the workspace (MFA, conditional access, audit logging, mailbox controls). Maps to Essential Eight Maturity Level 1 (ML1) controls one-by-one.",
+    title: "Email and cloud account security checklist",
+    body: "A documented checklist of the security settings applied to your Microsoft 365 or Google Workspace — things like who can access what, whether logins are logged, and whether two-factor authentication is required. Mapped to the Australian government's recommended security baseline.",
   },
   {
     num: "08",
-    title: "MFA enforcement evidence",
-    body: "Screenshots of MFA enforcement state across the workspace, plus the policy text that requires it. Shows the control is configured, not just claimed.",
+    title: "Two-factor login — proof it's actually on",
+    body: "Screenshots and written policy showing that two-factor authentication (the 'enter a code from your phone' login step) is switched on and enforced for everyone in the organisation — not just switched on for some people, not just a policy on paper.",
   },
   {
     num: "09",
-    title: "Backup and recovery posture",
-    body: "What is backed up, how often, where to, last restore-test date, recovery time objective. The Essential Eight backup mitigation in one page.",
+    title: "Backup and recovery plan",
+    body: "Documentation of what gets backed up, how often, where it's stored, and how quickly data can be restored if something is deleted, corrupted, or locked by ransomware. Answers the question every insurer eventually asks.",
   },
   {
     num: "10",
-    title: "Patching cadence",
-    body: "Operating system, browser, application patching cadence with evidence. Ties to the Essential Eight patching mitigation.",
+    title: "Software update schedule",
+    body: "Proof that the operating systems, browsers, and applications in your business are kept up to date — with evidence of the update schedule, not just a claim. Outdated software is the most common entry point for attackers.",
   },
   {
     num: "11",
-    title: "Staff access management",
-    body: "Who has access to what, the joiner-mover-leaver process, last access review date.",
+    title: "Who has access to what",
+    body: "A record of which staff can access which systems, how access is given to new staff, and how access is removed when someone leaves — plus when this was last reviewed. Stops ex-employees and over-privileged accounts from becoming a problem.",
   },
   {
     num: "12",
-    title: "Essential Eight Maturity Level 1 self-attestation",
-    body: "Signed attestation letter that I can hand to a regulator, insurer, or enterprise client stating exactly what was checked and what was fixed against the Australian government’s baseline security checklist.",
+    title: "Government security checklist — signed",
+    body: "A signed letter confirming which items from the Australian government's Essential Eight security checklist your business has completed — the document an enterprise client, government agency, or insurer typically asks for before doing business with you.",
   },
   {
     num: "13",
-    title: "Privacy Act posture letter",
-    body: "Signed statement of the “reasonable steps” taken under the Privacy Act, with appendix mapping each step to the relevant Australian Privacy Principle.",
+    title: "Privacy law compliance letter — signed",
+    body: "A signed letter documenting the specific steps taken to comply with the Australian Privacy Act, with each step mapped to the relevant legal requirement. The document a lawyer, regulator, or large client asks to see.",
   },
 ];
 
@@ -116,10 +117,10 @@ export default function OurEvidencePackPage() {
   return (
     <>
       <PageHero
-        badge="SELF-EVIDENCE PACK · PUBLISHED IN FULL"
-        title="I sell a 13-section evidence pack. Here is the one I produced for my own business."
-        tagline="Same 13 sections. Same shape. Nothing redacted except customer names. Published so you can inspect the deliverable before you buy."
-        sub="A 17-page redacted version of the compliance evidence pack — including the privacy policy, the ADM disclosure, the breach runbook, the vendor risk register, and the signed Essential Eight ML1 self-attestation. Same template you receive on your engagement."
+        badge="SEE WHAT YOU GET — OUR OWN REPORT, PUBLISHED IN FULL"
+        title="Before you pay for anything, see exactly what you get."
+        tagline="This is our own security and compliance report — run on our own business, published in full, with only customer names removed. Nothing glossy. Nothing hidden."
+        sub="17 pages covering our privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. The same report template every client receives — applied to us first."
         trustLine={
           <>
             Source:{" "}
@@ -174,18 +175,18 @@ export default function OurEvidencePackPage() {
             SAMPLE · REDACTED · REAL SCAN OF TITANOS.TECH
           </div>
           <p style={{ margin: "0 0 14px" }}>
-            This is a real, lightly-redacted external evidence pack run against my
-            own infrastructure — the same shape, format, and reproducibility
-            discipline every compliance engagement ships. See exactly what
-            you&apos;d get before you pay.
+            This is a real security and compliance report run against our own
+            website and business. It&apos;s the same format every client
+            receives — so you can see exactly what you&apos;re paying for before
+            committing to anything.
           </p>
           <p style={{ margin: "0 0 18px", color: "var(--dim)", fontSize: "var(--fs-xs)" }}>
-            Externally-verifiable sections (01, 02, 04, 05, 06, 11, 12, 13)
-            included. Operational sections (privacy policy, NDB runbook, vendor
-            risk register, M365 hardening, MFA evidence, signed attestations)
-            are regenerated per engagement from your own operational data — they
-            do not appear in this sample because fabricating those would defeat
-            the purpose.
+            The scan results, privacy policy, email security records, and signed
+            checklists are all included. The sections that are built from your
+            own data — like your staff access list, your specific software
+            screenshots, or your signed attestation — aren&apos;t in this
+            sample, because those can only be written using your information.
+            They are produced during the engagement.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
             <AnimatedButton href={SAMPLE_PDF} variant="primary" external>
@@ -208,24 +209,13 @@ export default function OurEvidencePackPage() {
             border: "1px solid var(--gold-dim)",
             borderRadius: "var(--radius-md)",
             overflow: "hidden",
-            background: "var(--card)",
           }}
         >
-          <object
-            data={SAMPLE_PDF}
-            type="application/pdf"
-            width="100%"
-            height="720"
-            aria-label="Sample external evidence pack PDF preview"
-            style={{ display: "block" }}
-          >
-            <p style={{ padding: 16, color: "var(--dim)", fontSize: "var(--fs-sm)" }}>
-              Your browser can&apos;t inline-preview PDFs.{" "}
-              <a href={SAMPLE_PDF} style={{ color: "var(--gold)" }} target="_blank" rel="noopener noreferrer">
-                Open the sample evidence pack in a new tab →
-              </a>
-            </p>
-          </object>
+          <PdfViewer
+            src={SAMPLE_PDF}
+            label="Sample external evidence pack PDF preview"
+            fallbackHref={SAMPLE_PDF}
+          />
         </div>
       </SectionReveal>
 
@@ -244,7 +234,7 @@ export default function OurEvidencePackPage() {
               marginBottom: 32,
             }}
           >
-            THE 13 SECTIONS
+            WHAT'S INSIDE — ALL 13 SECTIONS
           </h2>
           {SECTIONS.map((s) => (
             <article
@@ -307,7 +297,7 @@ export default function OurEvidencePackPage() {
             marginBottom: 18,
           }}
         >
-          YOUR PACK. SAME SHAPE. APPLIED TO YOUR BUSINESS.
+          READY TO BUILD YOURS?
         </h2>
         <p
           style={{
@@ -318,9 +308,10 @@ export default function OurEvidencePackPage() {
             lineHeight: 1.7,
           }}
         >
-          {DISPLAY.PACK_PRICE} one-time, with {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (optional after at {DISPLAY.MONITOR_MONTHLY}). One done-with-you engagement —
-          the same 13 sections, written for your business, applied together on a
-          90-minute working call.
+          {DISPLAY.PACK_PRICE} one-time. Includes {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor at no extra charge
+          (optional to continue at {DISPLAY.MONITOR_MONTHLY} after that — no automatic billing).
+          One working session together — all 13 sections completed, written for
+          your specific business, ready to hand to a client, insurer, or regulator.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/compliance" variant="primary">
