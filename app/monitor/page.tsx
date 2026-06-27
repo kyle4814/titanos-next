@@ -113,6 +113,9 @@ export default function MonitorPage() {
           ariaLabel={`Subscribe annually at ${DISPLAY.MONITOR_ANNUAL}`}
           variant="secondary"
         />
+        <AnimatedButton href="/order/monitor" variant="secondary" ariaLabel="Enquire about Monitor">
+          ENQUIRE FIRST →
+        </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           Cancel any time from the billing portal — one click, no email, no retention call.
         </p>
@@ -292,6 +295,9 @@ export default function MonitorPage() {
                   label={`SUBSCRIBE ANNUAL · ${DISPLAY.MONITOR_ANNUAL}`}
                   variant="secondary"
                 />
+                <AnimatedButton href="/order/monitor" variant="secondary" ariaLabel="Enquire about Monitor">
+                  ENQUIRE FIRST →
+                </AnimatedButton>
               </div>
             </article>
           </div>
@@ -412,6 +418,9 @@ export default function MonitorPage() {
             label={`SUBSCRIBE · ${DISPLAY.MONITOR_MONTHLY}`}
             variant="primary"
           />
+          <AnimatedButton href="/order/monitor" variant="secondary" ariaLabel="Enquire about Monitor">
+            ENQUIRE FIRST →
+          </AnimatedButton>
           <AnimatedButton href="/scan#request" variant="secondary">
             FREE SCAN FIRST
           </AnimatedButton>

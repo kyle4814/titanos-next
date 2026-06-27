@@ -303,7 +303,7 @@ export default function LeadsPage() {
                 `30-day bounce replacement`,
               ]}
               ctaLabel="START WITH 250 →"
-              ctaHref={BOOK_CALL}
+              ctaHref="/order/leads?tier=starter"
             />
             <LeadsTier
               tag="MOST POPULAR"
@@ -318,7 +318,7 @@ export default function LeadsPage() {
                 `30-day bounce replacement`,
               ]}
               ctaLabel="GET 1,000 →"
-              ctaHref={BOOK_CALL}
+              ctaHref="/order/leads?tier=growth"
             />
             <LeadsTier
               tag="CAMPAIGN"
@@ -332,7 +332,7 @@ export default function LeadsPage() {
                 `30-day bounce replacement`,
               ]}
               ctaLabel="SCOPE A CAMPAIGN →"
-              ctaHref={BOOK_CALL}
+              ctaHref="/order/leads?tier=campaign"
             />
             <LeadsTier
               tag="RECURRING · THE INTELLIGENCE FEED"
@@ -346,7 +346,7 @@ export default function LeadsPage() {
                 `Cancel any time — one email, no retention dance`,
               ]}
               ctaLabel="START THE RETAINER →"
-              ctaHref={BOOK_CALL}
+              ctaHref="/order/leads?tier=retainer"
             />
           </div>
 
@@ -719,7 +719,7 @@ function LeadsTier({
           </li>
         ))}
       </ul>
-      <AnimatedButton href={ctaHref} external variant={highlight ? "primary" : "secondary"}>
+      <AnimatedButton href={ctaHref} variant={highlight ? "primary" : "secondary"}>
         {ctaLabel}
       </AnimatedButton>
     </article>

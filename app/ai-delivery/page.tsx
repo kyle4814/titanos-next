@@ -141,13 +141,11 @@ export default function AiDeliveryPage() {
           </>
         }
       >
-        <AnimatedButton
-          href={SCOPING_CALL_URL}
-          external
-          variant="primary"
-          ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
-        >
-          {SCOPING_CALL_LABEL} →
+        <AnimatedButton href="/order/ai" variant="primary" ariaLabel="Start AI implementation enquiry">
+          START AI ENQUIRY →
+        </AnimatedButton>
+        <AnimatedButton href={SCOPING_CALL_URL} external variant="secondary" ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}>
+          {SCOPING_CALL_LABEL}
         </AnimatedButton>
         <AnimatedButton href="#how-it-works" variant="secondary">
           SEE HOW IT WORKS ↓
@@ -393,14 +391,12 @@ export default function AiDeliveryPage() {
               {SCOPING_LENGTH_MINUTES}-minute call. I tell you honestly the highest-leverage
               thing worth automating and what it&apos;d cost to build. No charge, no obligation.
             </p>
-            <div style={{ display: "inline-flex", justifyContent: "center" }}>
-              <AnimatedButton
-                href={SCOPING_CALL_URL}
-                external
-                variant="primary"
-                ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
-              >
-                {SCOPING_CALL_LABEL} →
+            <div style={{ display: "inline-flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+              <AnimatedButton href="/order/ai" variant="primary" ariaLabel="Start AI implementation enquiry">
+                START AI ENQUIRY →
+              </AnimatedButton>
+              <AnimatedButton href={SCOPING_CALL_URL} external variant="secondary" ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}>
+                {SCOPING_CALL_LABEL}
               </AnimatedButton>
             </div>
           </div>
@@ -414,8 +410,8 @@ export default function AiDeliveryPage() {
               price={DISPLAY.AI_BUILD_FLOOR}
               priceUnit="fixed-scope SOW from the call · deposit + milestones · delivery date in writing"
               body="I build the thing we picked, ship it working into your business, and document it so your team can use it. Working system, not a slide deck. One accountable contact. No subcontractor chain."
-              ctaLabel={SCOPING_CALL_LABEL}
-              ctaHref={SCOPING_CALL_URL}
+              ctaLabel="START AI ENQUIRY →"
+              ctaHref="/order/ai"
             />
             <OfferTile
               tag="MAINTAIN · OPTIONAL · POST-BUILD ONLY"
@@ -611,13 +607,11 @@ export default function AiDeliveryPage() {
           nothing worth automating I&apos;ll tell you on the call — no invoice, no follow-up
           sequence.
         </p>
-        <AnimatedButton
-          href={SCOPING_CALL_URL}
-          external
-          variant="primary"
-          ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}
-        >
-          {SCOPING_CALL_LABEL} →
+        <AnimatedButton href="/order/ai" variant="primary" ariaLabel="Start AI implementation enquiry">
+          START AI ENQUIRY →
+        </AnimatedButton>
+        <AnimatedButton href={SCOPING_CALL_URL} external variant="secondary" ariaLabel={`Book a free ${SCOPING_LENGTH_MINUTES}-minute scoping call`}>
+          {SCOPING_CALL_LABEL}
         </AnimatedButton>
         <p
           style={{

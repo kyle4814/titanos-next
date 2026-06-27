@@ -25,6 +25,7 @@ type SiteConfig = {
   API_BASE_URL: string;
   STRIPE_COMPLIANCE_LINK: string;
   KYLE_EMAIL: string;
+  ORDER_SUBMIT_URL: string;
 };
 
 // Typed as SiteConfig so empty-string placeholders stay `string`, not
@@ -67,6 +68,9 @@ export const SITE: SiteConfig = {
   // Single-source mailto for the error-fallback inside the scan form
   // and the footer/about contact mention.
   KYLE_EMAIL: "kyle@titanos.tech",
+
+  // Order intake endpoint — the unified POST /order/submit Worker route.
+  ORDER_SUBMIT_URL: "https://api.titanos.tech/order/submit",
 };
 
 // Derived helpers.

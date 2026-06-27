@@ -55,6 +55,8 @@ const plexSerif = IBM_Plex_Serif({
   weight: ["300", "400", "700"],
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
+  fallback: ["Georgia", "serif"],
 });
 
 const interTight = Inter_Tight({
@@ -62,6 +64,8 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   display: "swap",
+  preload: false,
+  fallback: ["system-ui", "sans-serif"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -69,6 +73,8 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "600"],
   display: "swap",
+  preload: false,
+  fallback: ["monospace"],
 });
 
 // SEO-03: description trimmed under 155 chars

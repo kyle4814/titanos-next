@@ -206,11 +206,11 @@ export default function CompliancePage() {
           Cal first (primary, filled), Stripe second (secondary, outline).
           FLIP back to buy-primary once testimonials.ts has 3+ entries.
         */}
-        <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
-          BOOK A 15-MIN FIT CALL
+        <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
+          GET COMPLIANT · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
-        <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
-          BUY COMPLIANCE · {DISPLAY.PACK_PRICE}
+        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
+          BOOK A FIT CALL FIRST
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
@@ -504,11 +504,11 @@ export default function CompliancePage() {
                   gap: 12,
                 }}
               >
-                <AnimatedButton href={CAL_15} external variant="primary" ariaLabel="Book a 15-minute fit call">
-                  BOOK A 15-MIN FIT CALL
+                <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
+                  GET COMPLIANT · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
-                <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
-                  BUY DIRECTLY · {DISPLAY.PACK_PRICE}
+                <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
+                  BOOK A FIT CALL FIRST
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -726,11 +726,11 @@ export default function CompliancePage() {
           FLIP back to buy-primary once testimonials.ts has 3+ entries.
         */}
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={CAL_15} external variant="primary">
-            BOOK A 15-MIN FIT CALL
+          <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
+            GET COMPLIANT · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
-          <AnimatedButton href={STRIPE_LINK} external variant="primary" ariaLabel={`Buy Compliance for ${DISPLAY.PACK_PRICE}`}>
-            BUY DIRECTLY · {DISPLAY.PACK_PRICE}
+          <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
+            BOOK A FIT CALL FIRST
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>
