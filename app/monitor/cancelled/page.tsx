@@ -9,7 +9,7 @@ import { DISPLAY } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Checkout cancelled — Titanos Monitor",
   description:
-    "Checkout cancelled. No subscription was created. The free scan is still on the table if you'd like to see your current exposure first.",
+    "Checkout cancelled. No subscription was created. The free security check is still available if you'd like to see your business's gaps first.",
   alternates: { canonical: "https://titanos.tech/monitor/cancelled" },
   robots: { index: false, follow: false },
 };
@@ -67,8 +67,8 @@ export default function MonitorCancelledPage() {
           }}
         >
           You were not charged. If something went wrong in checkout, try again or email
-          me. If you want to see your current exposure before committing to {DISPLAY.MONITOR_MONTHLY},
-          the free scan is the lower-friction route.
+          me. If you want to see your business&apos;s security gaps before committing to {DISPLAY.MONITOR_MONTHLY},
+          the free check is the easier way to start.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/monitor" variant="primary">

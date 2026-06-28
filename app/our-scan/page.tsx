@@ -9,7 +9,7 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 
 const META_TITLE = "My Own External Scan — TITANOS";
 const META_DESC =
-  "I scanned titanos.tech and published every finding. AU Privacy Act + Essential Eight compliance vendor walking its own talk. ABN 34 318 502 254.";
+  "I ran the security check on my own business and published every finding. A compliance practice that holds itself to its own standard. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -119,7 +119,7 @@ export default function OurScanPage() {
       <PageHero
         badge="SELF-ATTESTATION · NOTHING HIDDEN"
         title="I scanned myself and published every finding."
-        tagline="If my own external attack surface had been clean before audit, I'd have been the only AU compliance vendor with no story to tell. It wasn't. So here's the story."
+        tagline="If my own business's security check had come back clean before I published it, I'd have been the only compliance operator with no story to tell. It didn't. So here's the story."
         sub="Scan run 2026-06-01 against titanos.tech. Six findings, all published verbatim. Four have been resolved or accepted with reasoning since; two remain open (one trivially blocked on a dashboard click, one a deliberate trade-off)."
         trustLine={
           <>
@@ -131,8 +131,8 @@ export default function OurScanPage() {
           </>
         }
       >
-        <AnimatedButton href={REQUEST_HREF} variant="primary" ariaLabel="Request your free scan">
-          REQUEST YOUR FREE SCAN
+        <AnimatedButton href={REQUEST_HREF} variant="primary" ariaLabel="Request your free security check">
+          SEE WHAT&apos;S EXPOSED — FREE
         </AnimatedButton>
         <AnimatedButton href={CAL_15} external variant="secondary">
           BOOK A 15-MIN FIT CALL
@@ -268,7 +268,7 @@ export default function OurScanPage() {
             marginBottom: 18,
           }}
         >
-          THE SAME SCAN. FREE. FOR YOU.
+          THE SAME CHECK. FREE. FOR YOUR BUSINESS.
         </h2>
         <p
           style={{

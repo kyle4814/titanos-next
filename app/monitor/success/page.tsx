@@ -10,7 +10,7 @@ import MonitorPortalLink from "./MonitorPortalLink";
 export const metadata: Metadata = {
   title: "Subscribed — Titanos Monitor",
   description:
-    "Your Titanos Monitor subscription is active. First scan runs within 1 business day; monthly delta lands on the same date every month.",
+    "Your Titanos Monitor subscription is active. First check runs within 1 business day; monthly security summary lands on the same date every month.",
   alternates: { canonical: "https://titanos.tech/monitor/success" },
   robots: { index: false, follow: false },
 };
@@ -67,9 +67,9 @@ export default function MonitorSuccessPage() {
             marginBottom: 18,
           }}
         >
-          Your first scan runs within 1 business day. Your monthly delta lands on the
-          same calendar date every month after that. The receipt is already in your
-          inbox.
+          Your first check runs within 1 business day. Your monthly summary lands on
+          the same calendar date every month after that. The receipt is already in
+          your inbox.
         </p>
         <p
           style={{

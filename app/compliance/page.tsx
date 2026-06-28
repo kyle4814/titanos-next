@@ -95,7 +95,7 @@ const TIMELINE = [
   {
     when: "LIVE NOW",
     title: "Your insurer can refuse the claim",
-    body: "Cyber insurers increasingly deny breach claims when baseline controls (MFA, patching — the Essential Eight basics) weren’t in place. Policies commonly condition cover on documented security hygiene. Without an attestation, you’re relying on goodwill at the worst possible moment.",
+    body: "Cyber insurers increasingly deny breach claims when baseline controls weren’t in place — things like two-factor login and keeping software up to date (the Australian government’s Essential Eight checklist). Policies commonly condition cover on documented security hygiene. Without a signed record, you’re relying on goodwill at the worst possible moment.",
     state: "live",
   },
   {
@@ -125,7 +125,7 @@ const YOU_CONTROL = [
   "MFA (multi-factor authentication) enabled across your team",
   "Breach response process documentation (NDB runbook)",
   "Vendor risk register (one-page record of every third-party touching your customer data)",
-  "Essential Eight Maturity Level 1 self-attestation",
+  "Signed government security checklist (Essential Eight, Maturity Level 1)",
   "Staff access management",
 ];
 
@@ -143,7 +143,7 @@ const HOST_CONTROLS = [
 // all of the above.
 const INCLUDED = [
   "90-minute implementation working call — we apply every change together on a screen-share, no PDF-only hand-off",
-  "Signed self-attestation documenting the Essential Eight ML1 + Privacy Act reasonable steps you've taken — the evidence trail a regulator, insurer, or enterprise client looks for when assessing posture (not a guarantee against complaints — those are decided on the facts of an incident)",
+  "Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1) — the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints — those are decided on the facts of an incident)",
   "Privacy policy + ADM disclosure starter draft deployed live to your site on the call — written from your intake, ready to update as your AI use evolves (the disclosure has to keep pace with what your business actually does)",
   "NDB breach-response runbook integrated into your shared drive",
   "DNS hygiene (SPF/DKIM/DMARC) + M365 / Google Workspace hardening applied with you",
@@ -386,7 +386,7 @@ export default function CompliancePage() {
                   marginBottom: 18,
                 }}
               >
-                Privacy Act + Essential Eight Compliance — Done With You
+                Privacy Act + Government Security Checklist — Done With You
               </h3>
               <p
                 style={{
@@ -716,10 +716,10 @@ export default function CompliancePage() {
             lineHeight: 1.7,
           }}
         >
-          One engagement, one outcome: a signed Essential Eight ML1 + Privacy Act
-          attestation you can hand to a regulator, insurer, or enterprise client — with
-          every change already applied together on the 90-minute working call, and the
-          13-section evidence pack as proof of work.
+          One engagement, one outcome: a signed Privacy Act + government security checklist
+          (Essential Eight ML1) letter you can hand to a regulator, insurer, or enterprise
+          client — with every change already applied together on the 90-minute working call,
+          and the 13-section evidence pack as proof of work.
         </p>
         {/*
           Fix 2d — final-CTA cluster FLIPPED while testimonials.ts is empty.

@@ -34,10 +34,10 @@ export default function OrderLeadsClient() {
     >
       <OrderForm
         orderType="leads"
-        heading="Lead Generation — Intake"
-        subheading="Tell Kyle your ICP. He builds the verified list and runs the outreach — you do the work, not the prospecting."
-        submitLabel="SUBMIT LEAD ORDER →"
-        successMessage="Received. Kyle will review your ICP and come back with a scoped list proposal within 1 business day."
+        heading="Verified AU Leads — Enquiry"
+        subheading="Tell Kyle what type of business you're trying to reach. He builds the verified list — you focus on the work, not the prospecting."
+        submitLabel="SUBMIT LEADS ENQUIRY →"
+        successMessage="Received. Kyle will review your target profile and come back with a scoped list proposal within 1 business day."
       >
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 

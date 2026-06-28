@@ -77,8 +77,8 @@ export default function OrderAiClient() {
     >
       <OrderForm
         orderType="ai"
-        heading="AI Implementation — Intake"
-        subheading="Tell Kyle what you do manually. He scopes the build, sends an invoice, and eliminates the work. From $4,997."
+        heading="AI Implementation — Enquiry"
+        subheading="Tell Kyle what manual task is eating your team's week. He scopes the build, sends an invoice, and ships a system that does it instead. From $4,997."
         submitLabel="SUBMIT AI ORDER →"
         successMessage="Received. Kyle will review your scope and respond with a proposal or invoice within 1 business day."
       >

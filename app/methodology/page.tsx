@@ -9,7 +9,7 @@ import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 // site-wide; the long-form description here is the canonical voice.
 const META_TITLE = "Methodology — TITANOS";
 const META_DESC =
-  "How I scan external attack surfaces. External-only nmap, no exploits, 90-day responsible disclosure window. ABN 34 318 502 254.";
+  "How the Titanos security check works. External-only scan of what a hacker can see — no break-in attempts, no credential guessing. Every finding verifiable. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -32,12 +32,12 @@ export const metadata: Metadata = {
 };
 
 const WHAT_WE_SCAN = [
-  "Open ports on the customer’s domain (standard 15-port sweep)",
-  "Service banners (returned voluntarily by your services on connect)",
-  "TLS / SSL certificate validity, expiry, signature",
-  "HTTP security headers (HSTS, CSP, X-Frame-Options)",
-  "DNS records (publicly resolvable subdomains via standard zone walks)",
-  "Known CVEs matching reported service versions",
+  "Open ports on your domain (standard 15-port sweep — what services are publicly listening)",
+  "Service banners (the version information your software announces when a connection is made)",
+  "TLS/SSL certificate validity, expiry, and protocol versions (encrypted connection check)",
+  "HTTP security headers (HSTS, CSP, X-Frame-Options — browser protection controls)",
+  "DNS records (publicly resolvable subdomains and email security records)",
+  "Known software vulnerabilities matching the reported service versions (CVE database)",
 ];
 
 const WHAT_WE_DONT = [
@@ -70,11 +70,12 @@ const VERIFY: VerifyKey[] = [
   },
   {
     num: "II",
-    title: "Reproduce with nmap",
+    title: "Verify with the same tool I used",
     body: (
       <>
         Every finding ships with the exact{" "}
-        <code>nmap -sV {"{target}"} -p {"{port}"}</code> command. Verify any claim in 30 seconds.
+        <code>nmap -sV {"{target}"} -p {"{port}"}</code> command I ran. Copy it, run it yourself,
+        and you will get the same result. Independently verifiable in 30 seconds.
       </>
     ),
   },
@@ -99,8 +100,8 @@ export default function MethodologyPage() {
   return (
     <>
       <PageHero
-        title="Methodology"
-        tagline="How I scan external attack surfaces. No exploits. No auth attempts. I only read what your server already announces to the public internet — nothing invasive."
+        title="How the Security Check Works"
+        tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet — the same information a hacker can see from their desk."
       />
 
       <div className="divider-gold" />
@@ -108,8 +109,8 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
-            title="WHAT I SCAN · WHAT I DON’T DO"
-            lead="External, publicly-reachable network surfaces only. I probe what the open internet can already see — nothing private, nothing authenticated."
+            title="WHAT I CHECK · WHAT I NEVER DO"
+            lead="Public-facing information only. I read what the open internet can already see — nothing private, nothing that requires a login."
           />
           <MirrorLists
             doTitle="WHAT I SCAN"
@@ -164,7 +165,7 @@ export default function MethodologyPage() {
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="RESPONSIBLE DISCLOSURE" />
+          <SectionHeading title="YOUR 90-DAY WINDOW TO FIX BEFORE ANYTHING IS PUBLISHED" />
           <div
             style={{
               background: "var(--card)",
@@ -189,9 +190,9 @@ export default function MethodologyPage() {
               marginTop: 18,
             }}
           >
-            This is the same practice followed by national CERTs (AustCERT, CERT NZ, CSA
-            Singapore) and by responsible security researchers. The window exists so the affected
-            business has time to act.
+            This is the same 90-day window followed by national security agencies (AustCERT,
+            CERT NZ, CSA Singapore) and security researchers worldwide. It gives your business
+            time to fix the issue before anyone else knows it exists.
           </p>
         </div>
       </SectionReveal>
@@ -253,9 +254,9 @@ export default function MethodologyPage() {
             auditor.
           </p>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
-            Beyond the free scan, two paid engagements:{" "}
+            Beyond the free check, two paid engagements:{" "}
             <a href="/compliance" style={{ color: "var(--ice)" }}>
-              AU Privacy Act + Essential Eight Compliance
+              Privacy Act Compliance (done with you)
             </a>{" "}
             (done with you) and{" "}
             <a href="/ai-delivery" style={{ color: "var(--ice)" }}>

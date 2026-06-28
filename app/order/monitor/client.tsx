@@ -18,8 +18,8 @@ export default function OrderMonitorClient() {
     >
       <OrderForm
         orderType="monitor"
-        heading="Continuous Monitor — Intake"
-        subheading="Monthly external security scan. Delta alerts when something changes. Kyle reviews and sends your Stripe invoice."
+        heading="Monthly Security Monitor — Enquiry"
+        subheading="Monthly security check for your business. You get an email when something changes. Kyle reviews this and sends your invoice within 1 business day."
         submitLabel="SUBMIT MONITOR ORDER →"
         successMessage="Received. Kyle will send your Stripe invoice within 1 business day — pay when you're ready, monitoring starts same day."
       >

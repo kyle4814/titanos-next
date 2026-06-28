@@ -117,8 +117,8 @@ export default function OrderComplianceClient() {
     >
       <OrderForm
         orderType="compliance"
-        heading="Compliance AU — Intake"
-        subheading="Privacy Act compliance done-with-you in one working call. $5,997 one-time. Kyle reviews this form and sends your invoice within 1 business day."
+        heading="Privacy Act Compliance — Enquiry"
+        subheading="Privacy Act compliance done with you in one working call. $5,997 one-time. Kyle reviews this and sends your invoice within 1 business day."
         submitLabel="SUBMIT COMPLIANCE ORDER →"
         successMessage="Received. Kyle will review your scope and send a Stripe invoice within 1 business day. Pay when you're ready."
       >
