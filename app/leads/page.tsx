@@ -142,7 +142,7 @@ export default function LeadsPage() {
         name: "Leads Campaign",
         price: String(LEADS.CAMPAIGN.price),
         priceCurrency: "AUD",
-        description: `${LEADS.CAMPAIGN.contacts} verified contacts on a custom ICP, with company-size signals and a segmentation breakdown. Delivered within ${LEADS.CAMPAIGN.turnaround}.`,
+        description: `${LEADS.CAMPAIGN.contacts} verified contacts matching your exact target business profile, with company-size signals and a segmentation breakdown. Delivered within ${LEADS.CAMPAIGN.turnaround}.`,
       },
       {
         "@type": "Offer",
@@ -326,7 +326,7 @@ export default function LeadsPage() {
               price={DISPLAY.LEADS_CAMPAIGN}
               priceUnit={`${LEADS.CAMPAIGN.contacts} verified contacts · ${LEADS.CAMPAIGN.turnaround}`}
               bullets={[
-                `Custom ICP — we scope it together on a call`,
+                `Custom target profile — we scope it together on a call`,
                 `Everything in Growth, plus company-size signals + segmentation breakdown`,
                 `30-minute targeting strategy call included`,
                 `30-day bounce replacement`,
@@ -340,7 +340,7 @@ export default function LeadsPage() {
               price={DISPLAY.LEADS_RETAINER}
               priceUnit={`${LEADS.RETAINER.contactsPerMonth} fresh verified contacts every month`}
               bullets={[
-                `Ongoing feed in your defined ICP, delivered monthly`,
+                `Ongoing feed of contacts matching your target profile, delivered monthly`,
                 `Market-movement notes: new businesses entering your category, signals that changed`,
                 `Everything verified, every month · 30-day bounce replacement applies`,
                 `Cancel any time — one email, no retention dance`,

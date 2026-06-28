@@ -12,8 +12,8 @@ import { PRICING, DISPLAY } from "@/lib/pricing";
 // already seen their exposure and wants ongoing visibility into changes.
 // Register: mid (plainer than /scan, less owner-hand-holdy than /compliance).
 
-const META_TITLE = `Titanos Monitor — Watch Your Attack Surface Monthly | ${DISPLAY.MONITOR_MONTHLY}`;
-const META_DESC = `Monthly external scan + delta of what changed + CVE alerts matched to your stack + regulatory briefing. ${DISPLAY.MONITOR_MONTHLY}, cancel any time.`;
+const META_TITLE = `Titanos Monitor — Monthly Security Check for Your Business | ${DISPLAY.MONITOR_MONTHLY}`;
+const META_DESC = `Monthly security check + what changed since last month + alerts for new vulnerabilities in your software + privacy law briefing. ${DISPLAY.MONITOR_MONTHLY}, cancel any time.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -36,10 +36,10 @@ export const metadata: Metadata = {
 };
 
 const WHAT_YOU_GET = [
-  "A fresh external scan of your domain every month — same engine as the free scan, run on the same calendar date each month",
-  "A plain-English delta: what changed, what's new, what's been resolved",
-  "CVE alerts when a new vulnerability publishes that matches a service version you have running — alert lands in your inbox the day the match is detected",
-  "A monthly regulatory-update briefing tailored to your industry (AU/NZ/SG)",
+  "A fresh security check of your domain every month — same engine as the free check, run on the same calendar date each month",
+  "A plain-English summary: what changed, what's new, what's been resolved",
+  "An alert when a newly published software vulnerability matches something you're running — lands in your inbox the day it's detected",
+  "A monthly briefing on privacy law updates relevant to your industry (AU/NZ/SG)",
   "Everything to your inbox — no dashboard, no portal, no login",
 ];
 
@@ -88,9 +88,9 @@ export default function MonitorPage() {
 
       <PageHero
         badge="TITANOS MONITOR · RECURRING"
-        title="Your attack surface changes every month. Most businesses find out when something breaks."
-        tagline={`Titanos Monitor finds out first — a fresh external scan every month, a plain delta of what changed, and an alert the moment a new vulnerability matches your stack. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, any time.`}
-        sub="Same engine as the free scan, run on a schedule, with a month-over-month delta and CVE alerts matched to your services. Plain-English email to your inbox. No dashboard. No contract. No retention dance."
+        title="Your business's security gaps change every month. Most owners find out when something breaks."
+        tagline={`Titanos Monitor finds out first — a fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, any time.`}
+        sub="Same engine as the free check, run on a schedule, with a month-over-month summary and vulnerability alerts matched to your software versions. Plain-English email to your inbox. No dashboard. No contract. No retention call."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -127,7 +127,7 @@ export default function MonitorPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT LANDS IN YOUR INBOX"
+            title="WHAT LANDS IN YOUR INBOX EACH MONTH"
             lead="One email a month. Same date each month. Worth reading or you stop it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -319,9 +319,9 @@ export default function MonitorPage() {
             lineHeight: 1.7,
           }}
         >
-          Haven&apos;t seen your current exposure yet?{" "}
+          Haven&apos;t had the free check yet?{" "}
           <a href="/scan#request" style={{ color: "var(--gold)" }}>
-            Start with the free scan
+            Start with the free security check
           </a>{" "}
           — then decide if monthly monitoring is worth {DISPLAY.MONITOR_MONTHLY} to you. →
         </p>
@@ -335,11 +335,12 @@ export default function MonitorPage() {
           <SectionHeading title="QUESTIONS I GET" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="What's actually in the monthly email?">
-              A delta. Three sections: what&apos;s new since last month (newly exposed
-              services, new CVE matches against your detected versions, certificate changes),
-              what&apos;s resolved (anything you fixed), and a one-paragraph regulatory
-              briefing relevant to your industry. If nothing has changed, the email says so
-              honestly — I&apos;d rather you stop subscribing than pad findings.
+              A plain-English summary with three sections: what&apos;s new since last month
+              (newly visible services, new software vulnerabilities matched to your versions,
+              certificate changes), what&apos;s resolved (anything you fixed), and a
+              one-paragraph update on any privacy law changes relevant to your industry. If
+              nothing has changed, the email says so honestly — I&apos;d rather you stop
+              subscribing than pad findings.
             </FaqItem>
             <FaqItem question="How does the first month work?">
               The first scan runs within 1 business day of you subscribing. That scan is your
@@ -397,7 +398,7 @@ export default function MonitorPage() {
             letterSpacing: "0.05em",
           }}
         >
-          A MONTHLY EMAIL WORTH READING
+          A MONTHLY SECURITY UPDATE WORTH READING
         </h2>
         <p
           style={{

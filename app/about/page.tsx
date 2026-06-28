@@ -10,12 +10,12 @@ const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 export const metadata: Metadata = {
   title: "About — Kyle Deligny · TITANOS",
   description:
-    "Solo operator. ABN 34 318 502 254 (verifiable). AU Privacy Act + Essential Eight compliance done with you. 1,700+ external scans this month.",
+    "Solo operator. ABN 34 318 502 254 (verifiable). AU privacy law compliance done with you. Free business security checks. 1,700+ checks run this month.",
   alternates: { canonical: "https://titanos.tech/about" },
   openGraph: {
     title: "About — Kyle Deligny · Titanos",
     description:
-      "Solo operator. ABN-verifiable. AU Privacy Act + Essential Eight compliance done with you.",
+      "Solo operator. ABN-verifiable. AU privacy law compliance done with you. One person, one fixed price.",
     type: "profile",
     url: "https://titanos.tech/about",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -93,10 +93,11 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            Three things. A free external scan you don&apos;t pay for and you don&apos;t enter a sales
-            funnel for. A fixed AU$5,997 Privacy Act + Essential Eight compliance engagement
-            for AU SMBs preparing for the 11 December 2026 ADM disclosure deadline. AI
-            implementation projects quoted by scope after a 30-minute call.
+            Three things. A free security check that shows what a hacker can see about your
+            business — no payment, no sales funnel. A fixed-price Privacy Act compliance
+            engagement for AU small businesses preparing for the 11 December 2026 deadline.
+            And AI implementation projects — I find the manual task eating your team&apos;s
+            week and build the system that does it instead, quoted by scope after a free call.
           </p>
           <p
             style={{
@@ -165,7 +166,7 @@ export default function AboutPage() {
               <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
                 kyle@titanos.tech
               </a>{" "}
-              — DKIM-aligned, SPF strict, DMARC p=reject.
+              — email security verified (DKIM, SPF, DMARC all in place).
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Calendar:</strong>{" "}

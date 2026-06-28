@@ -14,38 +14,37 @@ import type { Offer } from "@/components/OfferCard";
 const offers: Offer[] = [
   {
     tag: "OFFER 01 · FREE",
-    title: "Free Scan",
+    title: "Free Security Check",
     price: "$0",
     priceUnit: "no card · delivered within 1 business day",
     body:
-      "External attack-surface scan on any AU/NZ/SG domain. Reproducible evidence, personally reviewed, with a 90-day responsible-disclosure window. The report you'd want about your own infrastructure.",
+      "A check of what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Report in your inbox within 1 business day. Personally reviewed.",
     bullets: [
       "Just your website address — any AU/NZ/SG host",
-      "Reproducible evidence, every finding tied to an nmap command",
+      "Every finding verifiable — I show you the exact check I ran so you can confirm it yourself",
       "Personally reviewed before delivery",
     ],
-    // Fix 1 — mailto killed. Scan CTAs route to the on-page form at /scan#request.
     primary: {
-      label: "REQUEST YOUR FREE SCAN ›",
+      label: "SEE WHAT'S EXPOSED — FREE →",
       href: "/scan#request",
       external: false,
     },
-    secondary: { label: "See the free scan", href: "/scan" },
+    secondary: { label: "See the free check", href: "/scan" },
     icon: "radar",
     index: 0,
   },
   {
     tag: "OFFER 02 · done with you",
-    title: "Privacy Act + Essential Eight Compliance",
+    title: "Privacy Act Compliance",
     price: DISPLAY.PACK_PRICE,
-    priceUnit: `one-time · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free`,
+    priceUnit: `one-time · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
     body:
-      "For AU SMBs (5-50 staff) on Squarespace / WordPress / Microsoft 365 / Google Workspace. Plain English on the call, every term translated.\n\nOne done-with-you engagement for the 11 December 2026 ADM disclosure deadline. Evidence pack, external scan with you-vs-host split, 90-minute working call where we apply the changes together, plus 3 months of Titanos Monitor free.",
+      "For AU small businesses (5–50 staff) on any common platform — Squarespace, WordPress, Microsoft 365, Google Workspace. We sort your privacy policy, email security, login security, and AI-disclosure requirements together on one 90-minute working call. Everything applied live with you, nothing left to figure out on your own.\n\nDeadline: 11 December 2026.",
     bullets: [
-      "13-section evidence pack (~17pp)",
-      "90-minute implementation working call",
-      "Signed attestation letter you can hand to a regulator or insurer",
-      "Quarterly re-scan + delta report",
+      "17-page evidence document your insurer or regulator can read",
+      "90-minute working call — we apply every change together, on screen",
+      "Signed letter you can show a regulator, insurer, or enterprise client",
+      "Quarterly re-check and report on what's changed",
     ],
     primary: {
       label: "BOOK A 15-MIN FIT CALL ›",
@@ -58,18 +57,17 @@ const offers: Offer[] = [
   },
   {
     tag: "OFFER 03 · PROJECT-QUOTED",
-    title: "AI Implementation for Business",
+    title: "AI That Does Your Manual Work",
     price: DISPLAY.AI_BUILD_FLOOR,
     priceUnit: "quoted by scope · free 15-min scoping call",
     body:
-      "Tell me the manual task eating your week — I build the AI system that does it, shipped working into your business and documented for your team. Quoted by scope after a free scoping call.",
+      "Tell me the task someone on your team does manually every day. I build the AI system that does it instead — shipped working into your business and documented for your team. Quoted by scope after a free call.",
     bullets: [
       "The painful manual job, automated",
-      "Shipped working, not \"deployable\"",
-      "Documented for handover",
-      "AI-assisted build · every output reviewed and signed off by me",
+      "Shipped working, not a slide deck",
+      "Documented so your team can use it",
+      "Built by AI, reviewed and signed off by me on every engagement",
     ],
-    // Fix 5c — scoping CTA label/URL derived from config (auto-relabels until 30-min event exists).
     primary: {
       label: `${SCOPING_CALL_LABEL} ›`,
       href: SCOPING_CALL_URL,
@@ -81,7 +79,7 @@ const offers: Offer[] = [
   },
   {
     tag: "OFFER 04 · LISTS & INTELLIGENCE",
-    title: "Leads & Intelligence",
+    title: "Verified AU Contact Lists",
     price: DISPLAY.LEADS_STARTER_FROM,
     priceUnit: `per list · or ${DISPLAY.LEADS_RETAINER} intelligence feed`,
     body:
@@ -105,11 +103,10 @@ const offers: Offer[] = [
 export default function Home() {
   return (
     <>
-      {/* ═══ HERO with entrance choreography ═══ */}
-      {/* Fix 6 — single-spine H1 + sub. The three offer cards below carry routing. */}
+      {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        tagline="One operator. Four doors in."
+        tagline="New privacy rules. Real fines. Anyone can sue you today. Does your business know where it stands?"
         trust={
           <>
             Personally reviewed · Australian-owned · ABN-verified ·{" "}
@@ -119,11 +116,27 @@ export default function Home() {
         }
       />
 
-      {/* MOT-06 — gold chevron scroll cue, suppresses on scroll>50 + reduce */}
       <HeroScrollCue />
 
-      {/* Sub-tagline copy from the static site */}
-      <section style={{ padding: "0 20px 60px", position: "relative", zIndex: 2 }}>
+      {/* Fear-first plain-English sub-copy */}
+      <section style={{ padding: "0 20px 32px", position: "relative", zIndex: 2 }}>
+        <p
+          style={{
+            fontFamily: "var(--font-body), system-ui, sans-serif",
+            fontWeight: 400,
+            fontSize: "var(--fs-body)",
+            color: "var(--ice)",
+            maxWidth: "var(--maxw-prose)",
+            margin: "0 auto 18px",
+            textAlign: "center",
+            lineHeight: 1.75,
+          }}
+        >
+          From 11 December 2026, every Australian business must update its privacy
+          policy to say if it uses AI or automated tools on customer data. Those that
+          don&apos;t face fines up to AU$50M. And anyone can already take you to
+          court for a serious privacy breach today — no regulator queue needed.
+        </p>
         <p
           style={{
             fontFamily: "var(--font-body), system-ui, sans-serif",
@@ -136,34 +149,30 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          A free security scan that shows you what an attacker sees. A fixed-price
-          Privacy Act compliance engagement done with you before the 11 December
-          2026 deadline. AI builds shipped into your environment, quoted by scope.
-          And verified Australian lead lists, built by the compliance practice — so
-          the data you buy doesn&apos;t become a compliance problem.
+          I check your digital exposure for free and show you in plain English what
+          a hacker can see. If you have gaps, I fix them with you — privacy policy,
+          security basics, the works. I also build AI tools that cut your manual
+          workload, and supply verified Australian contact lists that won&apos;t
+          create a compliance problem.
         </p>
       </section>
 
-      {/* Fix 3d — middle-rung routing line: free scan as the start-here door */}
-      <section style={{ padding: "0 20px 12px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <p
-          style={{
-            color: "var(--ice)",
-            fontSize: "var(--fs-sm)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto",
-            lineHeight: 1.6,
-          }}
-        >
-          Not sure which door?{" "}
-          <a href="/scan#request" style={{ color: "var(--gold)" }}>
-            Start with the free scan
-          </a>{" "}
-          — it tells you which one you need.
+      {/* Hero CTAs */}
+      <section style={{ padding: "0 20px 16px", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+          <AnimatedButton href="/scan#request" variant="primary">
+            SEE WHAT&apos;S EXPOSED — IT&apos;S FREE
+          </AnimatedButton>
+          <AnimatedButton href="#offers" variant="secondary">
+            SEE HOW IT WORKS ↓
+          </AnimatedButton>
+        </div>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 10 }}>
+          No card · No login · Report in your inbox within 1 business day
         </p>
       </section>
 
-      {/* Site Fix 5 — recurring bridge line (Monitor surfaced from the three-door spine, not promoted to a 4th card) */}
+      {/* Monitor bridge */}
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
         <p
           style={{
@@ -174,17 +183,17 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Already know your exposure and just want to stay ahead of it?{" "}
+          Already had the free check and just want to know when things change?{" "}
           <a href="/monitor" style={{ color: "var(--gold)" }}>
             Titanos Monitor
           </a>{" "}
-          watches your attack surface for {DISPLAY.MONITOR_MONTHLY} — cancel in one click. →
+          re-checks your business every month and emails you what&apos;s new — {DISPLAY.MONITOR_MONTHLY}, cancel in one click. →
         </p>
       </section>
 
       <div className="divider-gold" />
 
-      {/* ═══ THREE OFFERS ═══ */}
+      {/* ═══ FOUR OFFERS ═══ */}
       <SectionReveal
         id="offers"
         style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
@@ -200,7 +209,7 @@ export default function Home() {
                 letterSpacing: "0.06em",
               }}
             >
-              PICK YOUR FRONT DOOR
+              FOUR WAYS IN
             </h2>
             <div
               aria-hidden="true"
@@ -222,9 +231,8 @@ export default function Home() {
                 lineHeight: 1.7,
               }}
             >
-              One free starting point. One fixed compliance engagement. One quoted AI
-              implementation. One verified-leads channel. No catalogue, no menus,
-              no upsell maze.
+              Start free. Pay only if you need the fix. One operator — no contractor
+              chain, no upsell maze.
             </p>
           </div>
 
@@ -238,7 +246,6 @@ export default function Home() {
             {offers.map((o, i) => (
               <div key={o.tag} style={{ position: "relative" }}>
                 <OfferCard {...o} />
-                {/* Fix 4 — Offer 02 sub-line now slot-based scarcity (capacity), not day countdown */}
                 {i === 1 && (
                   <div style={{ textAlign: "center", marginTop: 8 }}>
                     <SlotScarcity variant="pill" />
@@ -272,9 +279,6 @@ export default function Home() {
             margin: "0 auto",
           }}
         >
-          {/* Fix 5e — strip cleanup: drop the methodology-as-traction-metric cells.
-              Methodology block already carries 90-day disclosure window + zero-exploit claim.
-              Replaced with a real activity metric: scan-report SLA. */}
           <TrustItem
             big={<NumberCounter value={STATS.scansThisMonth} suffix="+" />}
             small={STAT_LABELS.scansShort}
@@ -289,7 +293,6 @@ export default function Home() {
 
       {/*
         SOCIAL PROOF PLACEHOLDER — Kyle to fill.
-        INSERT REAL testimonials, client names, logos, outcomes here.
         DO NOT FABRICATE. Leave hidden until real content available.
       */}
       <section
@@ -321,7 +324,7 @@ export default function Home() {
             letterSpacing: "0.05em",
           }}
         >
-          ONE OPERATOR. FOUR DOORS IN.
+          START WITH A FREE CHECK — NO CARD NEEDED
         </h2>
         <p
           style={{
@@ -334,14 +337,12 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Start with a free scan, ship the compliance pack before December, scope
-          an AI build, or order a verified leads list. Whichever maps to your
-          problem, the path is the same: one accountable contact, work shipped
-          not consulted.
+          See what a hacker can see about your business. Takes 1 minute to request.
+          Report lands in your inbox within a business day. Then decide what comes next.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/scan#request" variant="primary">
-            REQUEST YOUR FREE SCAN
+            SEE WHAT&apos;S EXPOSED — IT&apos;S FREE
           </AnimatedButton>
           <AnimatedButton
             href={SITE.CAL_15MIN_URL}
@@ -355,7 +356,7 @@ export default function Home() {
 
       <div className="divider-gold" />
 
-      {/* ═══ Methodology summary ═══ */}
+      {/* ═══ How I work (expandable for the curious) ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <details>
@@ -372,7 +373,7 @@ export default function Home() {
                 marginBottom: 32,
               }}
             >
-              How I work technically (click to expand)
+              How the security check works technically (click to expand)
             </summary>
             <div>
               <div style={{ textAlign: "center", marginBottom: 36 }}>
@@ -407,28 +408,28 @@ export default function Home() {
                   margin: "0 auto",
                 }}
               >
-                <MethodCard title="What I do">
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>External nmap (-sV)</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>TLS / SSL validation</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Public DNS + cert transparency</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>NVD CVE matching by version</p>
+                <MethodCard title="What I check">
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Open ports and services (standard port scan)</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Encrypted connection check (TLS/SSL)</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Email security records (SPF, DKIM, DMARC)</p>
+                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Known software vulnerabilities, by version</p>
                 </MethodCard>
                 <MethodCard title="What I never do">
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Auth / credential attempts</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Exploit attempts</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>DoS / brute force</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Data exfiltration</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Log in or try passwords</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Attempt to break in</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Overload your site</p>
+                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Access or extract your data</p>
                 </MethodCard>
                 <MethodCard title="Verifiable">
                   <p>
-                    Every finding ships with the exact <code>nmap</code> command to reproduce it.
-                    Independently confirm any claim before acting on it.
+                    Every finding comes with the exact command used to find it.
+                    You can run the same check yourself and get the same result.
                   </p>
                 </MethodCard>
-                <MethodCard title="Removal">
+                <MethodCard title="Opt-out">
                   <p>
-                    Reply <code>remove</code> to any email and your domain is suppressed forever.
-                    Honoured immediately.
+                    Reply <code>remove</code> to any email and your domain is suppressed
+                    forever. Honoured immediately.
                   </p>
                 </MethodCard>
               </div>

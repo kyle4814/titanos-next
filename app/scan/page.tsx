@@ -17,14 +17,14 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_ANCHOR = "#request";
 
 export const metadata: Metadata = {
-  title: "Free External Security Scan — TITANOS",
+  title: "Free Business Security Check — TITANOS",
   description:
-    "Free external attack-surface scan for AU/NZ/SG operators. nmap, TLS posture, CVE matches, DNS hygiene. Report emailed within 1 business day. ABN 34 318 502 254.",
+    "Free check of what a hacker can see about your AU/NZ/SG business. Open ports, email security, certificates, known software vulnerabilities. Report in your inbox within 1 business day. ABN 34 318 502 254.",
   alternates: { canonical: "https://titanos.tech/scan" },
   openGraph: {
-    title: "Free External Security Scan — Titanos",
+    title: "Free Business Security Check — Titanos",
     description:
-      "See what an attacker sees. No login. Report in your inbox within 1 business day. Personally reviewed, Australian-owned, ABN-verified.",
+      "See what a hacker can see about your business. No login. Report in your inbox within 1 business day. Personally reviewed, Australian-owned, ABN-verified.",
     type: "website",
     url: "https://titanos.tech/scan",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -51,7 +51,7 @@ const PROCESS = [
   {
     num: "III",
     title: "SCAN RUNS",
-    body: "nmap -sV, TLS/SSL validation, public DNS + certificate-transparency lookups, NVD CVE matching by version.",
+    body: "Standard port scan, encrypted-connection check (TLS/SSL), email security records (SPF/DKIM/DMARC), certificate lookups, and known software vulnerability matching by version.",
   },
   {
     num: "IV",
@@ -66,41 +66,41 @@ const PROCESS = [
 ];
 
 const REPORT_ITEMS = [
-  "Public-facing services + open ports (the standard 15-port external sweep)",
-  "Database exposure flags (any DB port reachable from the public internet)",
-  "TLS posture — certificate validity, expiry, signature algorithm, protocol versions",
-  "Known CVE matches against reported service versions (NVD-sourced)",
-  "DNS hygiene — SPF, DKIM, DMARC, CAA, MX, plus cert-transparency findings",
-  "Host classification — what you control vs what your hosting provider controls",
-  "Severity ranking (Critical / High / Medium / Low / Info) + remediation step per finding",
-  "Reproduction command for every finding — verify it independently in 30 seconds",
+  "Services visible from the internet — what ports are open and what software is running on them",
+  "Database exposure flags — any database port reachable from the public internet (a serious risk)",
+  "Encrypted connection check — certificate validity, expiry, and protocol versions (TLS/SSL)",
+  "Known software vulnerability matches — any published weakness in the software versions you're running",
+  "Email security records — SPF, DKIM, DMARC, CAA (the records that stop hackers spoofing your domain)",
+  "Host split — what you control vs what your hosting provider controls (so you know who needs to fix what)",
+  "Severity ranking (Critical / High / Medium / Low / Info) with a plain-English remediation step per finding",
+  "Verification command for every finding — run the same check yourself in 30 seconds",
 ];
 
 const WHAT_IT_IS = [
-  "External scan of your public attack surface — every finding reproducible with a single nmap command",
-  "90-day responsible-disclosure window on every finding",
-  "No exploitation, no credential attempts, no DoS — ever",
-  "Independently reproducible: every finding ships with the exact nmap command",
-  "Personally reviewed before delivery; no auto-generated noise",
+  "A check of what a hacker can see about your business from the public internet — every finding reproducible with one command",
+  "90-day window before any finding is published — your time to fix it first",
+  "No break-in attempts, no password guessing, no overloading your site — ever",
+  "Every finding verifiable: I show you the exact check I ran so you can confirm it yourself",
+  "Personally reviewed before delivery — no auto-generated noise",
 ];
 
 const WHO_ITS_FOR = [
-  "AU/NZ/SG operators who own a domain and want their actual exposure",
-  "CTOs and founders staring down a compliance push or audit",
-  "IT leads about to greenlight an AI rollout in production",
-  "MSP-buyers about to renew — verify before you sign",
-  "Anyone who wants a sober second opinion, not a sales pitch",
+  "Any AU/NZ/SG business with a website that wants to know what a hacker can see",
+  "Business owners who have heard about the December 2026 privacy deadline and want to understand their gaps",
+  "IT leads or founders about to roll out new software and want an outside check first",
+  "Businesses about to renew a managed IT contract — verify what you're actually getting",
+  "Anyone who wants a plain-English report, not a sales pitch",
 ];
 
 export default function ScanPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Free External Security Scan",
+    name: "Free Business Security Check",
     provider: { "@type": "Organization", name: "Titanos" },
-    serviceType: "Vulnerability Scanning",
+    serviceType: "Security Assessment",
     description:
-      "Free external attack-surface scan with 90-day responsible-disclosure window. Report emailed within 1 business day.",
+      "Free check of what a hacker can see about your business from the public internet. Report emailed within 1 business day.",
     areaServed: ["AU", "NZ", "SG"],
     offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
   };
@@ -114,9 +114,9 @@ export default function ScanPage() {
 
       <PageHero
         badge="FREE · NO LOGIN · NO CARD"
-        title="Free External Attack-Surface Scan"
-        tagline="See what an attacker sees. No login. Report in your inbox within 1 business day."
-        sub="A real report on what an attacker can see about your business from the public internet. No login. No card. No follow-up sequence."
+        title="Free Security Check for Your Business"
+        tagline="See what a hacker can see about your business. No login. Report in your inbox within 1 business day."
+        sub="A plain-English report on every security gap visible from the public internet — open ports, expired certificates, email spoofing risks, known software weaknesses. No card. No follow-up sequence."
         trustLine={
           <>
             Personally reviewed · Australian-owned ·{" "}
@@ -144,7 +144,7 @@ export default function ScanPage() {
       {/* WHAT IT IS / WHO IT'S FOR */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="WHAT IT IS · WHO IT’S FOR" />
+          <SectionHeading title="WHAT IT IS · WHO IT&apos;S FOR" />
           <div
             className="grid-auto-cards"
             style={{
@@ -228,8 +228,8 @@ export default function ScanPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="METHODOLOGY · THE SHORT VERSION"
-            lead="If a tool would require permission, I don’t use it. Period. I only read what your server already announces to the public internet — nothing invasive."
+            title="HOW THE CHECK WORKS"
+            lead="I only read what your server already broadcasts to the public internet — the same information a hacker sees. Nothing invasive."
           />
           <div
             style={{
@@ -240,17 +240,17 @@ export default function ScanPage() {
               margin: "0 auto",
             }}
           >
-            <MiniCard title="WHAT I DO">
-              <p><Tick /> External <code>nmap -sV</code></p>
-              <p><Tick /> TLS / SSL validation</p>
-              <p><Tick /> Public DNS + cert transparency</p>
-              <p><Tick /> NVD CVE matching by version</p>
+            <MiniCard title="WHAT I CHECK">
+              <p><Tick /> Open ports and services (standard port scan)</p>
+              <p><Tick /> Encrypted connection check (TLS/SSL)</p>
+              <p><Tick /> Email security records + certificate lookups</p>
+              <p><Tick /> Known software vulnerabilities, by version</p>
             </MiniCard>
             <MiniCard title="WHAT I NEVER DO">
-              <p><Cross /> Auth / credential attempts</p>
-              <p><Cross /> Exploit attempts</p>
-              <p><Cross /> DoS / brute force</p>
-              <p><Cross /> Data exfiltration</p>
+              <p><Cross /> Log in or try passwords</p>
+              <p><Cross /> Attempt to break in</p>
+              <p><Cross /> Overload your site</p>
+              <p><Cross /> Access or extract your data</p>
             </MiniCard>
           </div>
           <p style={{ textAlign: "center", marginTop: 32 }}>
@@ -309,19 +309,19 @@ export default function ScanPage() {
           >
             <BridgeCard
               title="TITANOS MONITOR"
-              body={`If the scan is clean today but you want to know when it isn't, Monitor watches your attack surface every month — delta report, CVE alerts on your stack, regulatory briefing. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
+              body={`If the check is clean today but you want to know when something changes, Monitor re-checks your business every month and emails you what’s new — plus a briefing on any privacy law updates relevant to your industry. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
               href="/monitor"
               cta="See Monitor"
             />
             <BridgeCard
-              title="PRIVACY ACT + ESSENTIAL EIGHT COMPLIANCE"
-              body="If the scan surfaces gaps and the 11 December 2026 Privacy Act deadline matters to you, the compliance engagement is the next step. One done-with-you call where we apply the changes together."
+              title="PRIVACY ACT COMPLIANCE"
+              body="If the check finds gaps and the 11 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where we apply every change together — privacy policy, email security, login security, the works."
               href="/compliance"
               cta="See the compliance pack"
             />
             <BridgeCard
-              title="AI IMPLEMENTATION FOR BUSINESS"
-              body="If the scan shows you’re solid on basics and your real bottleneck is an AI capability you can’t free up engineering hours to ship, scope a build with me. Quoted by scope, fixed-price SOW."
+              title="AI THAT DOES YOUR MANUAL WORK"
+              body="If the security check is clean and your real bottleneck is a manual task eating your team’s week, scope an AI build with me. Free call first, fixed-price quote, shipped working."
               href="/ai-delivery"
               cta="See AI Implementation"
             />
@@ -350,16 +350,17 @@ export default function ScanPage() {
               Host-controlled findings come with the exact escalation language to send the
               provider.
             </FaqItem>
-            <FaqItem question="Is this exploitation?">
-              No. External-only — no exploitation, no credential attempts. I probe what the public internet can already see — service
-              banners, TLS posture, DNS records, certificate transparency. No authentication
-              attempts. No exploit attempts. No DoS. No data exfiltration. Full methodology at{" "}
+            <FaqItem question="Is this a hacking attempt?">
+              No. I only read what the public internet can already see — service names and
+              versions, certificate details, email security records. No login attempts. No
+              break-in attempts. No overloading your site. No data access. Full methodology at{" "}
               <a href="/methodology" style={{ color: "var(--ice)" }}>/methodology</a>.
             </FaqItem>
             <FaqItem question="Do you store my data?">
-              Scan results are kept in my scan corpus so longitudinal exposure trends are
-              visible across customers. Your email goes only into my lead store — never sold,
-              never shared with third parties, suppressed forever if you reply <code>remove</code>.
+              Scan results are kept in my database so I can track how exposure patterns
+              change across AU businesses over time. Your email goes only into my contact list —
+              never sold, never shared with third parties, suppressed forever if you reply{" "}
+              <code>remove</code>.
             </FaqItem>
           </div>
         </div>
@@ -386,7 +387,7 @@ export default function ScanPage() {
             letterSpacing: "0.05em",
           }}
         >
-          READY TO SEE WHAT AN ATTACKER SEES?
+          SEE WHAT A HACKER CAN SEE — FOR FREE
         </h2>
         <p
           style={{
@@ -398,7 +399,7 @@ export default function ScanPage() {
             lineHeight: 1.7,
           }}
         >
-          Free, expert-reviewed, delivered within 1 business day. No card, no login, no follow-up
+          Personally reviewed, delivered within 1 business day. No card, no login, no follow-up
           sequence.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
