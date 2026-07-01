@@ -191,7 +191,7 @@ function PrimaryCTA({
     filter: proximityActive
       ? "drop-shadow(0 0 12px rgb(var(--gold-rgb) / 0.45))"
       : "none",
-    textTransform: "uppercase",
+    textTransform: "none",
     textDecoration: "none",
   };
 

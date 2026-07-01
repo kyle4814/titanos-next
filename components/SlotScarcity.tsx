@@ -20,6 +20,11 @@ import { SITE } from "@/lib/config";
 type Props = { variant?: "pill" | "block" };
 
 export default function SlotScarcity({ variant = "pill" }: Props) {
+  // 2026-06-30 — scarcity chip retired. The "Booking July · 4/month" pill
+  // read as pressure copy from a stale month. Reassurance beats scarcity
+  // for the deadline audience; the deadline itself is the urgency.
+  if (variant === "pill") return null;
+  return null;
   if (variant === "pill") {
     return (
       <span

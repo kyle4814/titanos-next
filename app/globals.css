@@ -8,7 +8,7 @@
      5% red+brown undertone reads "leather + ink" instead of OLED
      default. Imperceptible side-by-side with #000 but cumulatively
      distinguishes the site from every Lovable / v0 build. */
-  --vault-black: #0A0707;
+  --vault-black: #0b0908;
   --vault-deep:  #050303;
   --vault-warm:  #1A1310;   /* card surfaces, warm undertone */
   --vault-cool:  #0F1418;   /* steel undertone for /scan + /ai-delivery */
@@ -42,7 +42,7 @@
   --card:   var(--vault-warm);
   --border: #1A1A1A;
   --text:   #E0E0E0;
-  --dim:    #888888;
+  --dim:    #a3a09b; /* was #888 — bump for WCAG AA on body microcopy */
 
   /* Status — A11Y palette retained */
   --ok:   #4ade80;
@@ -60,15 +60,15 @@
   --space-20: 80px;
   --space-30: 120px;
 
-  /* ── TYPE SCALE (AES-02) ─────────────────────────────────────── */
-  --fs-xs: 0.78rem;
-  --fs-sm: 0.86rem;
-  --fs-body: 0.95rem;
-  --fs-lg: 1.1rem;
-  --fs-h4: 1.25rem;
-  --fs-h3: 1.5rem;
-  --fs-h2: clamp(1.6rem, 4vw, 2.4rem);
-  --fs-h1: clamp(2.2rem, 5.5vw, 3.6rem);
+  /* ── TYPE SCALE (2026-06-30 upgrade — body min 16px, real hierarchy) */
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.9rem;
+  --fs-body: 1.02rem;   /* ~16.3px min */
+  --fs-lg: 1.18rem;
+  --fs-h4: 1.35rem;
+  --fs-h3: 1.65rem;
+  --fs-h2: clamp(1.85rem, 4.5vw, 2.75rem);
+  --fs-h1: clamp(2.5rem, 6vw, 4rem);
   --fs-display: clamp(2.8rem, 9vw, 5.5rem);
 
   /* ── RADIUS ─────────────────────────────────────────────────── */
@@ -489,7 +489,10 @@ button:focus-visible,
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
   /* Tighter section padding on phones — desktop --space-30 is too much. */
-  body { font-size: 15.5px; }
+  body { font-size: 16px; }
+  /* Trust bar: hide vertical dividers when items stack */
+  .trust-bar > * { border-right: none !important; border-bottom: 1px solid rgb(var(--gold-rgb) / 0.10); }
+  .trust-bar > *:last-child { border-bottom: none; }
 
   /* Edge thread thinner near the viewport edge */
   .vault-edge-thread { left: 4px; opacity: 0.5; }

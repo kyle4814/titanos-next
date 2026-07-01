@@ -5,97 +5,127 @@ import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import { STATS, STAT_LABELS } from "@/lib/stats";
-import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
-import { PRICING, DISPLAY } from "@/lib/pricing";
+import { SITE } from "@/lib/config";
+import { DISPLAY, PRICING } from "@/lib/pricing";
 
 import type { Offer } from "@/components/OfferCard";
 
 const offers: Offer[] = [
   {
-    tag: "OFFER 01 · FREE",
+    tag: "Door 01 · Free",
     title: "Free Security Check",
-    price: "$0",
-    priceUnit: "no card · delivered within 1 business day",
+    price: "AU$0",
+    priceUnit: "no card · report in your inbox within 1 business day",
     body:
-      "A check of what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Report in your inbox within 1 business day. Personally reviewed.",
+      "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it.",
     bullets: [
       "Just your website address — any AU/NZ/SG host",
-      "Every finding verifiable — I show you the exact check I ran so you can confirm it yourself",
+      "Every finding verifiable — I show you the exact check I ran",
       "Personally reviewed before delivery",
     ],
     primary: {
-      label: "SEE WHAT'S EXPOSED — FREE →",
+      label: "Get your free scan →",
       href: "/scan#request",
       external: false,
     },
-    secondary: { label: "See the free check", href: "/scan" },
+    secondary: { label: "See what's in the free check", href: "/scan" },
     icon: "radar",
     index: 0,
   },
   {
-    tag: "OFFER 02 · done with you",
+    tag: "Door 02 · Done with you",
     title: "Privacy Act Compliance",
     price: DISPLAY.PACK_PRICE,
-    priceUnit: `one-time · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
+    priceUnit: `one-time · all six obligations sorted · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
     body:
-      "For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Six obligations — privacy policy, breach plan, email security, login security, data mapping, and AI disclosure — sorted together on one 90-minute working call. Nothing left to figure out on your own. Deadline: 11 December 2026.",
+      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share we apply every change together — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 11 December 2026.",
     bullets: [
-      "17-page evidence document your insurer or regulator can read",
+      "All six obligations — privacy policy, breach plan, email security, login security, data mapping, AI disclosure",
       "90-minute working call — we apply every change together, on screen",
-      "Signed letter you can show a regulator, insurer, or enterprise client",
-      "Quarterly re-check and report on what's changed",
+      "A plain-English report you can hand straight to your insurer or a big client as proof",
+      "Signed compliance letter for a regulator, insurer, or enterprise client",
     ],
     primary: {
-      label: "BOOK A 15-MIN FIT CALL ›",
-      href: SITE.CAL_15MIN_URL,
-      external: true,
+      label: `Order compliance · ${DISPLAY.PACK_PRICE} →`,
+      href: "/order/compliance",
+      external: false,
     },
-    secondary: { label: "See the compliance pack", href: "/compliance" },
+    secondary: { label: "See what's included", href: "/compliance" },
     icon: "shield",
     index: 1,
   },
   {
-    tag: "OFFER 03 · PROJECT-QUOTED",
+    tag: "Door 03 · Project-quoted",
     title: "AI That Does Your Manual Work",
     price: DISPLAY.AI_BUILD_FLOOR,
     priceUnit: "quoted by scope · free 15-min scoping call",
     body:
-      "Tell me the task someone on your team does manually every day. I build the AI system that does it instead — shipped working into your business and documented for your team. Quoted by scope after a free call.",
+      "Tell me the task someone on your team does manually every day. I build the AI system that does it instead — shipped working into your business and documented for your team.",
     bullets: [
       "The painful manual job, automated",
       "Shipped working, not a slide deck",
       "Documented so your team can use it",
-      "Built by AI, reviewed and signed off by me on every engagement",
+      "Reviewed and signed off by me on every engagement",
     ],
     primary: {
-      label: `${SCOPING_CALL_LABEL} ›`,
-      href: SCOPING_CALL_URL,
-      external: true,
+      label: "Order AI implementation →",
+      href: "/order/ai",
+      external: false,
     },
     secondary: { label: "See AI Implementation", href: "/ai-delivery" },
     icon: "sparkles",
     index: 2,
   },
   {
-    tag: "OFFER 04 · LISTS & INTELLIGENCE",
+    tag: "Door 04 · Lists & intelligence",
     title: "Verified AU Contact Lists",
     price: DISPLAY.LEADS_STARTER_FROM,
     priceUnit: `per list · or ${DISPLAY.LEADS_RETAINER} intelligence feed`,
     body:
-      "Verified Australian business contacts — sourced from public data and checked deliverable before you get them, with the named owner or decision-maker wherever it's publicly listed. Built compliant, because compliance is the other thing I do.",
+      "Verified Australian business contacts — sourced from public data and checked deliverable before you get them, named where the owner or decision-maker is publicly listed. Built compliant, because compliance is the other thing I do.",
     bullets: [
       "Verified deliverable · 30-day bounce replacement",
-      "Named decision-maker where publicly available · every contact verified",
+      "Named decision-maker where publicly available",
       "You own the data — no platform lock-in",
     ],
     primary: {
-      label: "BOOK A 15-MIN FIT CALL ›",
-      href: SITE.CAL_15MIN_URL,
-      external: true,
+      label: "Order a list →",
+      href: "/order/leads",
+      external: false,
     },
     secondary: { label: "See Leads & Intelligence", href: "/leads" },
     icon: "users",
     index: 3,
+  },
+];
+
+// Six obligations — stripped of the manual "1." that collided with the
+// browser's default <ol> counter and produced "1. 1." on the live site.
+// Rendered as a grid of numbered cards with a gold pill number.
+const SIX_OBLIGATIONS: { title: string; body: string }[] = [
+  {
+    title: "A proper privacy policy",
+    body: "Not a copy-paste from 2015 — one that actually covers what customer info you hold and what you do with it.",
+  },
+  {
+    title: "A plan for if you get hacked",
+    body: "You're now legally expected to have a written breach-response plan you can act on the day it happens.",
+  },
+  {
+    title: "Email set up so scammers can't impersonate you",
+    body: "SPF, DKIM and DMARC records applied so nobody can send email pretending to be your business.",
+  },
+  {
+    title: "Basic login security",
+    body: "Two-factor login across your team so your accounts can't be walked into with a leaked password.",
+  },
+  {
+    title: "Knowing what customer data you hold",
+    body: "A one-page record of every third-party tool that touches your customer data, and where it lives.",
+  },
+  {
+    title: "AI + automated tools disclosure",
+    body: "If you use AI on customer info, you have to say so in your privacy policy. New rule, 11 December 2026.",
   },
 ];
 
@@ -105,169 +135,255 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        eyebrow="AUSTRALIAN PRIVACY LAW CHANGES · DEADLINE 11 DECEMBER 2026"
+        eyebrow="Australian Privacy Law · Deadline 11 December 2026"
         tagline="New privacy rules. Real fines. Anyone can sue you today. Does your business know where it stands?"
         trust={
           <>
-            Personally reviewed · Australian-owned · ABN-verified ·{" "}
-            <NumberCounter value={STATS.scansThisMonth} suffix="+" /> {STAT_LABELS.scansShort} ·{" "}
-            <NumberCounter value={STATS.uniqueBusinesses} suffix="+" /> {STAT_LABELS.businessesShort}
+            Personally reviewed · Australian-owned · ABN 34 318 502 254
           </>
         }
       />
 
-      <HeroScrollCue />
-
-      {/* Fear-first plain-English sub-copy + six obligations */}
-      <section style={{ padding: "0 20px 32px", position: "relative", zIndex: 2 }}>
+      {/* Sub-copy under hero */}
+      <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2 }}>
         <p
           style={{
             fontFamily: "var(--font-body), system-ui, sans-serif",
             fontWeight: 400,
-            fontSize: "var(--fs-body)",
+            fontSize: "var(--fs-lg)",
             color: "var(--ice)",
             maxWidth: "var(--maxw-prose)",
-            margin: "0 auto 18px",
+            margin: "0 auto 26px",
             textAlign: "center",
-            lineHeight: 1.75,
+            lineHeight: 1.65,
           }}
         >
           From December 2026, Australian privacy law puts real obligations on small
-          businesses for the first time. Fines up to AU$50M. And anyone can already
-          take you to court for a serious privacy breach today — no regulator queue needed.
+          businesses — six of them, not one. Fines up to AU$50M. I&apos;ll sort the lot
+          in one call, before the deadline.
         </p>
 
-        {/* ═══ What's actually changing ═══ */}
+        {/* ONE primary CTA + one ghost link */}
+        <div style={{ textAlign: "center" }}>
+          <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+            <AnimatedButton href="/scan#request" variant="primary">
+              Get your free scan →
+            </AnimatedButton>
+            <AnimatedButton href="#offers" variant="secondary">
+              See how it works
+            </AnimatedButton>
+          </div>
+          <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12 }}>
+            No card · No login · Report in your inbox within 1 business day
+          </p>
+        </div>
+      </section>
+
+      {/* Trust bar — horizontal scannable units with faint dividers */}
+      <SectionReveal
+        as="div"
+        style={{
+          padding: "24px 20px 40px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         <div
+          className="trust-bar"
           style={{
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto 28px",
-            background: "var(--card)",
-            border: "1px solid var(--gold-dim)",
+            maxWidth: "var(--maxw-wide)",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: 0,
+            border: "1px solid rgb(var(--gold-rgb) / 0.15)",
             borderRadius: "var(--radius-md)",
-            padding: "28px 30px",
+            background: "rgb(var(--gold-rgb) / 0.02)",
           }}
         >
-          <h2
+          <TrustUnit
+            big={<><NumberCounter value={STATS.scansThisMonth} suffix="+" /></>}
+            small="scans this month"
+          />
+          <TrustUnit
+            big={<><NumberCounter value={STATS.uniqueBusinesses} suffix="+" /></>}
+            small="AU/NZ/SG businesses in corpus"
+          />
+          <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
+          <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
+        </div>
+      </SectionReveal>
+
+      <HeroScrollCue />
+
+      {/* ═══ Six obligations — the reality check ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <div style={{ textAlign: "center", marginBottom: 32 }}>
+            <p
+              className="font-mono"
+              style={{
+                fontSize: "var(--fs-xs)",
+                letterSpacing: "0.18em",
+                color: "var(--gold-warm)",
+                textTransform: "uppercase",
+                marginBottom: 14,
+              }}
+            >
+              What&apos;s actually changing
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontWeight: 400,
+                fontStyle: "italic",
+                fontSize: "var(--fs-h2)",
+                color: "var(--gold)",
+                letterSpacing: "0.01em",
+                lineHeight: 1.2,
+                maxWidth: "var(--maxw-content)",
+                margin: "0 auto 14px",
+              }}
+            >
+              Six obligations, not one. Most owners only know about one of them.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+                fontSize: "var(--fs-body)",
+                color: "var(--text)",
+                lineHeight: 1.7,
+                maxWidth: "var(--maxw-prose)",
+                margin: "0 auto",
+              }}
+            >
+              From 11 December 2026, Australian privacy law puts real obligations on
+              small businesses for the first time. Here&apos;s what you&apos;re now
+              expected to have in place:
+            </p>
+          </div>
+
+          <div
+            className="six-grid"
             style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              fontWeight: 700,
-              fontSize: "var(--fs-h3)",
-              color: "var(--gold)",
-              letterSpacing: "0.04em",
-              marginBottom: 10,
-              textAlign: "center",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 18,
+              maxWidth: "var(--maxw-wide)",
+              margin: "0 auto",
             }}
           >
-            What&apos;s actually changing (and why it&apos;s more than you think)
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-body), system-ui, sans-serif",
-              fontSize: "var(--fs-body)",
-              color: "var(--text)",
-              lineHeight: 1.7,
-              marginBottom: 18,
-              textAlign: "center",
-            }}
-          >
-            From December 2026, Australian privacy law puts real obligations on small
-            businesses for the first time. Most owners think it&apos;s just one thing.
-            It&apos;s not &mdash; here&apos;s what you&apos;re now expected to have:
-          </p>
-          <ol
-            style={{
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-            }}
-          >
-            {[
-              "A proper privacy policy — not a copy-paste from 2015, but one that actually covers what customer info you hold and what you do with it",
-              "A plan for what to do if you get hacked — you're now legally expected to have one",
-              "Your email set up so scammers can't impersonate your business",
-              "Basic login security so your accounts can't be walked into",
-              "Knowing exactly what customer data you hold and where it lives",
-              "If you use AI or automated tools on customer info — you have to say so",
-            ].map((item, i) => (
-              <li
-                key={i}
+            {SIX_OBLIGATIONS.map((o, i) => (
+              <div
+                key={o.title}
                 style={{
-                  fontFamily: "var(--font-body), system-ui, sans-serif",
-                  fontSize: "var(--fs-body)",
-                  color: "var(--text)",
-                  lineHeight: 1.65,
-                  padding: "7px 0 7px 30px",
+                  background: "var(--card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "22px 24px",
                   position: "relative",
                 }}
               >
                 <span
                   aria-hidden="true"
                   style={{
-                    position: "absolute",
-                    left: 0,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minWidth: 34,
+                    height: 24,
+                    padding: "0 8px",
+                    background: "rgb(var(--gold-rgb) / 0.12)",
+                    border: "1px solid var(--gold-dim)",
                     color: "var(--gold)",
-                    fontWeight: 700,
                     fontFamily: "var(--font-display), Georgia, serif",
+                    fontSize: "var(--fs-xs)",
+                    letterSpacing: "0.08em",
+                    borderRadius: 999,
+                    marginBottom: 12,
+                    fontWeight: 700,
                   }}
                 >
-                  {i + 1}.
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                {item}
-              </li>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-body), system-ui, sans-serif",
+                    color: "var(--ice)",
+                    fontSize: "var(--fs-lg)",
+                    fontWeight: 600,
+                    letterSpacing: 0,
+                    marginBottom: 6,
+                    lineHeight: 1.35,
+                  }}
+                >
+                  {o.title}
+                </h3>
+                <p
+                  style={{
+                    color: "var(--text)",
+                    fontSize: "var(--fs-body)",
+                    lineHeight: 1.65,
+                  }}
+                >
+                  {o.body}
+                </p>
+              </div>
             ))}
-          </ol>
-          <p
+          </div>
+
+          {/* Ember stakes callout */}
+          <div
             style={{
-              fontFamily: "var(--font-body), system-ui, sans-serif",
-              fontSize: "var(--fs-body)",
-              color: "var(--ice)",
-              lineHeight: 1.7,
-              marginTop: 20,
-              paddingTop: 16,
-              borderTop: "1px solid var(--border)",
+              maxWidth: "var(--maxw-prose)",
+              margin: "36px auto 0",
+              borderLeft: "3px solid var(--ember)",
+              background: "rgba(255, 90, 58, 0.05)",
+              padding: "18px 22px",
+              borderRadius: "0 var(--radius-md) var(--radius-md) 0",
             }}
           >
-            Miss any of it and you could be fined, sued directly, or find your insurer
-            won&apos;t cover you after a breach. Most owners have no idea this is coming,
-            no time to become an expert, and no clue where to start. That&apos;s exactly
-            what I&apos;m for &mdash; I sort all of it with you, plain English, before the deadline.
-          </p>
-        </div>
+            <p
+              style={{
+                fontSize: "var(--fs-body)",
+                color: "var(--text)",
+                lineHeight: 1.7,
+                margin: 0,
+              }}
+            >
+              Miss any of it and you could be <strong style={{ color: "#ff8f78" }}>fined,
+              sued directly, or find your insurer won&apos;t cover you</strong> after a breach.
+              Since June 2025, anyone can already take you to court for a serious privacy
+              breach — no regulator queue needed.
+            </p>
+          </div>
 
-        <p
-          style={{
-            fontFamily: "var(--font-body), system-ui, sans-serif",
-            fontWeight: 300,
-            fontSize: "var(--fs-body)",
-            color: "var(--dim)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto",
-            textAlign: "center",
-            lineHeight: 1.65,
-          }}
-        >
-          I check your digital exposure for free and show you in plain English what
-          a hacker can see. If you have gaps, I fix them with you &mdash; all six obligations,
-          one working call. I also build AI tools that cut your manual workload, and
-          supply verified Australian contact lists that won&apos;t create a compliance problem.
-        </p>
-      </section>
-
-      {/* Hero CTAs */}
-      <section style={{ padding: "0 20px 16px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/scan#request" variant="primary">
-            SEE WHAT&apos;S EXPOSED — IT&apos;S FREE
-          </AnimatedButton>
-          <AnimatedButton href="#offers" variant="secondary">
-            SEE HOW IT WORKS ↓
-          </AnimatedButton>
+          {/* Reassurance line */}
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "18px auto 0",
+              background: "rgb(var(--gold-rgb) / 0.06)",
+              border: "1px solid var(--gold-dim)",
+              padding: "18px 22px",
+              borderRadius: "var(--radius-md)",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "var(--fs-body)",
+                color: "var(--ice)",
+                lineHeight: 1.7,
+                margin: 0,
+              }}
+            >
+              Most owners have no time to become an expert and no clue where to start.
+              That&apos;s exactly what I&apos;m for — one operator, one call, all six
+              sorted with you in plain English, before the deadline.
+            </p>
+          </div>
         </div>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 10 }}>
-          No card · No login · Report in your inbox within 1 business day
-        </p>
-      </section>
+      </SectionReveal>
 
       {/* Monitor bridge */}
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
@@ -297,16 +413,29 @@ export default function Home() {
       >
         <div className="container-vault">
           <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p
+              className="font-mono"
+              style={{
+                fontSize: "var(--fs-xs)",
+                letterSpacing: "0.18em",
+                color: "var(--gold-warm)",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              Four doors in
+            </p>
             <h2
               style={{
                 fontFamily: "var(--font-display), Georgia, serif",
-                fontWeight: 700,
+                fontWeight: 400,
+                fontStyle: "italic",
                 fontSize: "var(--fs-h2)",
                 color: "var(--gold)",
-                letterSpacing: "0.06em",
+                letterSpacing: "0.01em",
               }}
             >
-              FOUR WAYS IN
+              Pick the door that fits where you are today
             </h2>
             <div
               aria-hidden="true"
@@ -340,11 +469,47 @@ export default function Home() {
               margin: "0 auto",
             }}
           >
-            {offers.map((o) => (
-              <div key={o.tag} style={{ position: "relative" }}>
-                <OfferCard {...o} />
-              </div>
-            ))}
+            {offers.map((o) => {
+              const isFlagship = o.icon === "shield";
+              return (
+                <div
+                  key={o.tag}
+                  style={{
+                    position: "relative",
+                    boxShadow: isFlagship
+                      ? "0 0 0 1px var(--gold-dim), 0 20px 60px -20px rgb(var(--gold-rgb) / 0.25)"
+                      : undefined,
+                    borderRadius: "var(--radius-md)",
+                  }}
+                >
+                  {isFlagship && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: -12,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        zIndex: 3,
+                        background: "linear-gradient(90deg, var(--gold-warm), var(--gold))",
+                        color: "var(--vault-black)",
+                        fontFamily: "var(--font-body), system-ui, sans-serif",
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        padding: "5px 14px",
+                        borderRadius: 999,
+                        whiteSpace: "nowrap",
+                        boxShadow: "0 4px 14px rgb(0 0 0 / 0.4)",
+                      }}
+                    >
+                      Most popular · Dec 2026 deadline
+                    </span>
+                  )}
+                  <OfferCard {...o} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </SectionReveal>
@@ -411,12 +576,13 @@ export default function Home() {
             fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
-            fontWeight: 700,
+            fontWeight: 400,
+            fontStyle: "italic",
             marginBottom: 14,
-            letterSpacing: "0.05em",
+            letterSpacing: "0.01em",
           }}
         >
-          START WITH A FREE CHECK — NO CARD NEEDED
+          Start with a free scan — no card needed
         </h2>
         <p
           style={{
@@ -434,14 +600,14 @@ export default function Home() {
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/scan#request" variant="primary">
-            SEE WHAT&apos;S EXPOSED — IT&apos;S FREE
+            Get your free scan →
           </AnimatedButton>
           <AnimatedButton
             href={SITE.CAL_15MIN_URL}
             external
             variant="secondary"
           >
-            BOOK A 15-MIN FIT CALL
+            Book a 15-min fit call
           </AnimatedButton>
         </div>
       </SectionReveal>
@@ -472,13 +638,14 @@ export default function Home() {
                 <h2
                   style={{
                     fontFamily: "var(--font-display), Georgia, serif",
-                    fontWeight: 700,
+                    fontWeight: 400,
+                    fontStyle: "italic",
                     fontSize: "var(--fs-h2)",
                     color: "var(--gold)",
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.01em",
                   }}
                 >
-                  METHODOLOGY
+                  Methodology
                 </h2>
                 <div
                   aria-hidden="true"
@@ -535,6 +702,52 @@ export default function Home() {
         </div>
       </SectionReveal>
     </>
+  );
+}
+
+function TrustUnit({
+  big,
+  small,
+  tone = "gold",
+  last,
+}: {
+  big: React.ReactNode;
+  small: string;
+  tone?: "gold" | "text";
+  last?: boolean;
+}) {
+  return (
+    <div
+      style={{
+        padding: "18px 20px",
+        textAlign: "center",
+        borderRight: last ? "none" : "1px solid rgb(var(--gold-rgb) / 0.10)",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-display), Georgia, serif",
+          color: tone === "gold" ? "var(--gold)" : "var(--ice)",
+          fontSize: tone === "gold" ? "clamp(1.4rem, 3vw, 1.75rem)" : "var(--fs-lg)",
+          fontWeight: 700,
+          letterSpacing: "0.02em",
+          lineHeight: 1.15,
+          marginBottom: 4,
+        }}
+      >
+        {big}
+      </div>
+      <div
+        style={{
+          fontSize: "var(--fs-xs)",
+          color: "var(--dim)",
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
+        }}
+      >
+        {small}
+      </div>
+    </div>
   );
 }
 
