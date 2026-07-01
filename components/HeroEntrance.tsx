@@ -68,10 +68,12 @@ export default function HeroEntrance({
   wordmark,
   tagline,
   trust,
+  eyebrow,
 }: {
   wordmark: ReactNode;
   tagline: string;
   trust: ReactNode;
+  eyebrow?: ReactNode;
 }) {
   const reduce = useReducedMotion();
   const [phase, setPhase] = useState<"init" | "playing" | "done">("init");
@@ -197,6 +199,24 @@ export default function HeroEntrance({
             }}
           />
         </motion.div>
+
+        {eyebrow && (
+          <p
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontSize: "var(--fs-xs)",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--gold-warm)",
+              opacity: 0.85,
+              margin: "0 auto 14px",
+              maxWidth: "var(--maxw-prose)",
+            }}
+          >
+            {eyebrow}
+          </p>
+        )}
 
         <h1
           style={{

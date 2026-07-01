@@ -3,7 +3,6 @@ import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
-import SlotScarcity from "@/components/SlotScarcity";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import { STATS, STAT_LABELS } from "@/lib/stats";
 import { SCOPING_CALL_URL, SCOPING_CALL_LABEL, SITE } from "@/lib/config";
@@ -106,6 +105,7 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
+        eyebrow="AUSTRALIAN PRIVACY LAW CHANGES · DEADLINE 11 DECEMBER 2026"
         tagline="New privacy rules. Real fines. Anyone can sue you today. Does your business know where it stands?"
         trust={
           <>
@@ -340,14 +340,9 @@ export default function Home() {
               margin: "0 auto",
             }}
           >
-            {offers.map((o, i) => (
+            {offers.map((o) => (
               <div key={o.tag} style={{ position: "relative" }}>
                 <OfferCard {...o} />
-                {i === 1 && (
-                  <div style={{ textAlign: "center", marginTop: 8 }}>
-                    <SlotScarcity variant="pill" />
-                  </div>
-                )}
               </div>
             ))}
           </div>
