@@ -39,7 +39,7 @@ const offers: Offer[] = [
     price: DISPLAY.PACK_PRICE,
     priceUnit: `one-time · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
     body:
-      "For AU small businesses (5–50 staff) on any common platform — Squarespace, WordPress, Microsoft 365, Google Workspace. We sort your privacy policy, email security, login security, and AI-disclosure requirements together on one 90-minute working call. Everything applied live with you, nothing left to figure out on your own.\n\nDeadline: 11 December 2026.",
+      "For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Six obligations — privacy policy, breach plan, email security, login security, data mapping, and AI disclosure — sorted together on one 90-minute working call. Nothing left to figure out on your own. Deadline: 11 December 2026.",
     bullets: [
       "17-page evidence document your insurer or regulator can read",
       "90-minute working call — we apply every change together, on screen",
@@ -118,7 +118,7 @@ export default function Home() {
 
       <HeroScrollCue />
 
-      {/* Fear-first plain-English sub-copy */}
+      {/* Fear-first plain-English sub-copy + six obligations */}
       <section style={{ padding: "0 20px 32px", position: "relative", zIndex: 2 }}>
         <p
           style={{
@@ -132,11 +132,109 @@ export default function Home() {
             lineHeight: 1.75,
           }}
         >
-          From 11 December 2026, every Australian business must update its privacy
-          policy to say if it uses AI or automated tools on customer data. Those that
-          don&apos;t face fines up to AU$50M. And anyone can already take you to
-          court for a serious privacy breach today — no regulator queue needed.
+          From December 2026, Australian privacy law puts real obligations on small
+          businesses for the first time. Fines up to AU$50M. And anyone can already
+          take you to court for a serious privacy breach today — no regulator queue needed.
         </p>
+
+        {/* ═══ What's actually changing ═══ */}
+        <div
+          style={{
+            maxWidth: "var(--maxw-prose)",
+            margin: "0 auto 28px",
+            background: "var(--card)",
+            border: "1px solid var(--gold-dim)",
+            borderRadius: "var(--radius-md)",
+            padding: "28px 30px",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontWeight: 700,
+              fontSize: "var(--fs-h3)",
+              color: "var(--gold)",
+              letterSpacing: "0.04em",
+              marginBottom: 10,
+              textAlign: "center",
+            }}
+          >
+            What&apos;s actually changing (and why it&apos;s more than you think)
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-body), system-ui, sans-serif",
+              fontSize: "var(--fs-body)",
+              color: "var(--text)",
+              lineHeight: 1.7,
+              marginBottom: 18,
+              textAlign: "center",
+            }}
+          >
+            From December 2026, Australian privacy law puts real obligations on small
+            businesses for the first time. Most owners think it&apos;s just one thing.
+            It&apos;s not &mdash; here&apos;s what you&apos;re now expected to have:
+          </p>
+          <ol
+            style={{
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {[
+              "A proper privacy policy — not a copy-paste from 2015, but one that actually covers what customer info you hold and what you do with it",
+              "A plan for what to do if you get hacked — you're now legally expected to have one",
+              "Your email set up so scammers can't impersonate your business",
+              "Basic login security so your accounts can't be walked into",
+              "Knowing exactly what customer data you hold and where it lives",
+              "If you use AI or automated tools on customer info — you have to say so",
+            ].map((item, i) => (
+              <li
+                key={i}
+                style={{
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                  fontSize: "var(--fs-body)",
+                  color: "var(--text)",
+                  lineHeight: 1.65,
+                  padding: "7px 0 7px 30px",
+                  position: "relative",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    color: "var(--gold)",
+                    fontWeight: 700,
+                    fontFamily: "var(--font-display), Georgia, serif",
+                  }}
+                >
+                  {i + 1}.
+                </span>
+                {item}
+              </li>
+            ))}
+          </ol>
+          <p
+            style={{
+              fontFamily: "var(--font-body), system-ui, sans-serif",
+              fontSize: "var(--fs-body)",
+              color: "var(--ice)",
+              lineHeight: 1.7,
+              marginTop: 20,
+              paddingTop: 16,
+              borderTop: "1px solid var(--border)",
+            }}
+          >
+            Miss any of it and you could be fined, sued directly, or find your insurer
+            won&apos;t cover you after a breach. Most owners have no idea this is coming,
+            no time to become an expert, and no clue where to start. That&apos;s exactly
+            what I&apos;m for &mdash; I sort all of it with you, plain English, before the deadline.
+          </p>
+        </div>
+
         <p
           style={{
             fontFamily: "var(--font-body), system-ui, sans-serif",
@@ -150,10 +248,9 @@ export default function Home() {
           }}
         >
           I check your digital exposure for free and show you in plain English what
-          a hacker can see. If you have gaps, I fix them with you — privacy policy,
-          security basics, the works. I also build AI tools that cut your manual
-          workload, and supply verified Australian contact lists that won&apos;t
-          create a compliance problem.
+          a hacker can see. If you have gaps, I fix them with you &mdash; all six obligations,
+          one working call. I also build AI tools that cut your manual workload, and
+          supply verified Australian contact lists that won&apos;t create a compliance problem.
         </p>
       </section>
 

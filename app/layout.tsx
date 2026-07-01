@@ -79,7 +79,7 @@ const plexMono = IBM_Plex_Mono({
 
 // SEO-03: description trimmed under 155 chars
 const META_DESCRIPTION =
-  "Free external scan, AU$149/mo Monitor, fixed-price Privacy Act compliance, AI implementation, and verified AU lead lists. One operator, four doors in.";
+  "AU privacy rules hit Dec 2026 — six obligations, not one. Free security check, fixed-price compliance (all six sorted in one call), and AI that cuts your manual work.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),

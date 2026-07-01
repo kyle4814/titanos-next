@@ -25,7 +25,7 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 // the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
   "Privacy Act Compliance Before 11 December 2026 — Done With You | TITANOS";
-const META_DESC = `From 11 Dec 2026, AU privacy policies must disclose automated decision-making (including AI). I fix that with you in one working call. ${DISPLAY.PACK_PRICE} one-time, ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free.`;
+const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations — privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -119,12 +119,11 @@ const ALSO_ON_CALENDAR = [
 ];
 
 const YOU_CONTROL = [
-  "Privacy policy content + ADM disclosure (the new AI-tools disclosure)",
-  "DNS hygiene (SPF, DKIM, DMARC, CAA records)",
-  "Microsoft 365 / Google Workspace security defaults",
-  "MFA (multi-factor authentication) enabled across your team",
-  "Breach response process documentation (NDB runbook)",
-  "Vendor risk register (one-page record of every third-party touching your customer data)",
+  "Privacy policy — written plain English, covering what you hold, why, who sees it, plus the AI/automated tools disclosure",
+  "Breach-response runbook — a step-by-step plan for the day you get hacked (legally required under NDB)",
+  "DNS hygiene (SPF, DKIM, DMARC, CAA records) — so scammers can't impersonate your domain",
+  "Microsoft 365 / Google Workspace security defaults + MFA enabled across your team",
+  "Vendor risk register — one page mapping every third-party service that touches customer data",
   "Signed government security checklist (Essential Eight, Maturity Level 1)",
   "Staff access management",
 ];
@@ -137,16 +136,17 @@ const HOST_CONTROLS = [
   "Database security on SaaS like Xero, Cliniko, Vend",
 ];
 
-// Ordered engagement-first: what I DO on the call, then the thing
-// you can hand a regulator/insurer, then the document changes I push
-// live with you, then the evidence pack as proof-of-work documenting
-// all of the above.
+// Six obligations first (matches the six-part framing on homepage),
+// then engagement mechanics, then evidence deliverables.
 const INCLUDED = [
-  "90-minute implementation working call — we apply every change together on a screen-share, no PDF-only hand-off",
+  "A proper privacy policy written and deployed live — covers what customer data you hold, why, how it's stored, who it's shared with (not a copy-paste from 2015)",
+  "A breach-response runbook integrated into your shared drive — the step-by-step plan for the day you get hacked, so you hit the mandatory NDB notification deadline instead of panicking",
+  "Email security records applied on the call (SPF, DKIM, DMARC) — so scammers can't impersonate your business domain",
+  "Login security hardening applied with you (Microsoft 365 / Google Workspace security defaults + MFA across your team)",
+  "Vendor risk register — a one-page record of every third-party service touching your customer data, so you know exactly what you hold and where it lives",
+  "AI + automated tools disclosure added to your privacy policy — the new rule: if you use AI on customer info, you have to say so",
+  "90-minute implementation working call — we apply all six together on a screen-share, no PDF-only hand-off",
   "Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1) — the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints — those are decided on the facts of an incident)",
-  "Privacy policy + ADM disclosure starter draft deployed live to your site on the call — written from your intake, ready to update as your AI use evolves (the disclosure has to keep pace with what your business actually does)",
-  "NDB breach-response runbook integrated into your shared drive",
-  "DNS hygiene (SPF/DKIM/DMARC) + M365 / Google Workspace hardening applied with you",
   "30-day review call to re-audit anything that drifted, then sign the attestation",
   "13-section evidence pack documenting all of the above (~17pp) — proof of work for your insurer or regulator",
   "External scan with you-vs-host responsibility split (same engine as the free scan)",
@@ -188,7 +188,7 @@ export default function CompliancePage() {
         // Fix 3a — plain-English SMB-owner hero. The audit moved the
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
-        title="From 11 December 2026, your privacy policy has to disclose any automated decision-making your business uses — including AI tools. Most don’t. I fix that, with you, in one working call."
+        title="From December 2026, Australian privacy law puts six obligations on your business — and most owners only know about one of them. I sort all six with you in one working call, before the deadline."
         tagline={`One fixed-price engagement: I diagnose your gaps, write your documents, and we apply every change together on a 90-minute screen-share. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
         sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off."
         trustLine={
@@ -452,8 +452,10 @@ export default function CompliancePage() {
                   maxWidth: "var(--maxw-prose)",
                 }}
               >
-                Everything you need to demonstrate “reasonable steps” under the
-                Privacy Act and the Australian government’s baseline security
+                Six obligations sorted in one pass: privacy policy, breach plan,
+                email security, login security, data mapping, and AI disclosure.
+                Everything you need to demonstrate &ldquo;reasonable steps&rdquo; under the
+                Privacy Act and the Australian government&apos;s baseline security
                 checklist (Essential Eight, Maturity Level 1), applied together
                 with you in a single working call — then maintained for 12 months.
               </p>
@@ -716,10 +718,10 @@ export default function CompliancePage() {
             lineHeight: 1.7,
           }}
         >
-          One engagement, one outcome: a signed Privacy Act + government security checklist
-          (Essential Eight ML1) letter you can hand to a regulator, insurer, or enterprise
-          client — with every change already applied together on the 90-minute working call,
-          and the 13-section evidence pack as proof of work.
+          One engagement, one outcome: all six obligations sorted together — privacy policy,
+          breach plan, email security, login security, data mapping, and AI disclosure —
+          with every change applied on the 90-minute working call, a signed Privacy Act +
+          Essential Eight ML1 attestation letter, and the 13-section evidence pack as proof of work.
         </p>
         {/*
           Fix 2d — final-CTA cluster FLIPPED while testimonials.ts is empty.
