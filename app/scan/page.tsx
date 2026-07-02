@@ -40,27 +40,27 @@ export const metadata: Metadata = {
 const PROCESS = [
   {
     num: "I",
-    title: "TELL ME YOUR DOMAIN",
+    title: "Tell me your domain",
     body: "Your domain, your name, anything I should know. Under a minute.",
   },
   {
     num: "II",
-    title: "I QUEUE YOUR SCAN",
+    title: "I queue your scan",
     body: "You\u2019re placed in the daily scan queue. No payment, no waiting-list game.",
   },
   {
     num: "III",
-    title: "SCAN RUNS",
+    title: "Scan runs",
     body: "Standard port scan, encrypted-connection check (TLS/SSL), email security records (SPF/DKIM/DMARC), certificate lookups, and known software vulnerability matching by version.",
   },
   {
     num: "IV",
-    title: "REPORT DELIVERED",
+    title: "Report delivered",
     body: "Hosted HTML report linked from an email to your inbox — within 1 business day.",
   },
   {
     num: "V",
-    title: "YOU DECIDE WHAT\u2019S NEXT",
+    title: "You decide what\u2019s next",
     body: "Fix it yourself, escalate to your host, or ask me for help. No pressure, no auto-renewal.",
   },
 ];
@@ -144,7 +144,7 @@ export default function ScanPage() {
       {/* WHAT IT IS / WHO IT'S FOR */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="WHAT IT IS · WHO IT&apos;S FOR" />
+          <SectionHeading title="What It Is · Who It&apos;s For" />
           <div
             className="grid-auto-cards"
             style={{
@@ -153,8 +153,8 @@ export default function ScanPage() {
               margin: "0 auto",
             }}
           >
-            <CardCol title="WHAT IT IS" items={WHAT_IT_IS} />
-            <CardCol title="WHO IT’S FOR" items={WHO_ITS_FOR} />
+            <CardCol title="What It Is" items={WHAT_IT_IS} />
+            <CardCol title="Who It&apos;s For" items={WHO_ITS_FOR} />
           </div>
         </div>
       </SectionReveal>
@@ -165,7 +165,7 @@ export default function ScanPage() {
       <SectionReveal id="process" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="THE FULL PROCESS"
+            title="The Full Process"
             lead="Five steps from form-submit to report-in-inbox. No mystery, no opaque hand-offs."
           />
           <ProcessSteps steps={PROCESS} />
@@ -178,7 +178,7 @@ export default function ScanPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT’S INSIDE THE REPORT"
+            title="What&apos;s Inside the Report"
             lead="One report, every finding ranked, every finding reproducible."
           />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -228,7 +228,7 @@ export default function ScanPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="HOW THE CHECK WORKS"
+            title="How the Check Works"
             lead="I only read what your server already broadcasts to the public internet — the same information a hacker sees. Nothing invasive."
           />
           <div
@@ -240,13 +240,13 @@ export default function ScanPage() {
               margin: "0 auto",
             }}
           >
-            <MiniCard title="WHAT I CHECK">
+            <MiniCard title="What I Check">
               <p><Tick /> Open ports and services (standard port scan)</p>
               <p><Tick /> Encrypted connection check (TLS/SSL)</p>
               <p><Tick /> Email security records + certificate lookups</p>
               <p><Tick /> Known software vulnerabilities, by version</p>
             </MiniCard>
-            <MiniCard title="WHAT I NEVER DO">
+            <MiniCard title="What I Never Do">
               <p><Cross /> Log in or try passwords</p>
               <p><Cross /> Attempt to break in</p>
               <p><Cross /> Overload your site</p>
@@ -267,7 +267,7 @@ export default function ScanPage() {
       <SectionReveal id="request" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="REQUEST YOUR FREE SCAN"
+            title="Request Your Free Scan"
             lead="Fill the form. Report lands in your inbox within 1 business day, sent personally. Prefer a call? Book a 15-min instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -296,7 +296,7 @@ export default function ScanPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT COMES AFTER THE SCAN"
+            title="What Comes After the Scan"
             lead="Most teams use the free scan to decide whether they need the Compliance engagement or an AI build. Here’s where each fits."
           />
           <div
@@ -308,19 +308,19 @@ export default function ScanPage() {
             }}
           >
             <BridgeCard
-              title="TITANOS MONITOR"
+              title="Titanos Monitor"
               body={`If the check is clean today but you want to know when something changes, Monitor re-checks your business every month and emails you what’s new — plus a briefing on any privacy law updates relevant to your industry. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
               href="/monitor"
               cta="See Monitor"
             />
             <BridgeCard
-              title="PRIVACY ACT COMPLIANCE"
+              title="Privacy Act Compliance"
               body="If the check finds gaps and the 11 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where we apply every change together — privacy policy, email security, login security, the works."
               href="/compliance"
               cta="See the compliance pack"
             />
             <BridgeCard
-              title="AI THAT DOES YOUR MANUAL WORK"
+              title="AI That Does Your Manual Work"
               body="If the security check is clean and your real bottleneck is a manual task eating your team’s week, scope an AI build with me. Free call first, fixed-price quote, shipped working."
               href="/ai-delivery"
               cta="See AI Implementation"
@@ -330,14 +330,14 @@ export default function ScanPage() {
       </SectionReveal>
 
       {/* Render-only-if-non-empty testimonials block — Fix 2c */}
-      <Testimonials offer="scan" heading="WHAT SCAN CUSTOMERS SAID" />
+      <Testimonials offer="scan" heading="What Scan Customers Said" />
 
       <div className="divider-gold" />
 
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="QUESTIONS I GET" />
+          <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
@@ -387,7 +387,7 @@ export default function ScanPage() {
             letterSpacing: "0.05em",
           }}
         >
-          SEE WHAT A HACKER CAN SEE — FOR FREE
+          See What a Hacker Can See — for Free
         </h2>
         <p
           style={{

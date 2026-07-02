@@ -50,32 +50,32 @@ export const metadata: Metadata = {
 const THREAD_STEPS: ThreadStep[] = [
   {
     num: "I",
-    title: "INTAKE + EXTERNAL SCAN",
+    title: "Intake + External Scan",
     body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA + backup state, what’s driving compliance). I run an external scan on your domain — a look at what an attacker can see about your business from the outside, with version-by-version CVE matching against the public NVD database. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
   },
   {
     num: "II",
-    title: "EVIDENCE PACK",
+    title: "Evidence Pack",
     body: "Within 3 business days I send your evidence pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified vs what you affirmed. Regulator-ready as a single PDF.",
   },
   {
     num: "III",
-    title: "90-MIN IMPLEMENTATION CALL",
+    title: "90-Minute Implementation Call",
     body: "Screen-shared working session. We apply changes live: SPF / DKIM / DMARC / CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
   },
   {
     num: "IV",
-    title: "WHAT YOU CONTROL VS YOUR HOST",
+    title: "What You Control vs Your Host",
     body: "Some controls live on Squarespace / Shopify / Xero / Cliniko — not in your hands. You get a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
   },
   {
     num: "V",
-    title: "30-DAY REVIEW CALL + ATTESTATION",
+    title: "30-Day Review Call + Attestation",
     body: "We audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed letter you can hand to a regulator, insurer, or enterprise client stating exactly what was checked and fixed against the Australian government’s baseline security checklist (Essential Eight, Maturity Level 1), plus a Privacy Act compliance posture letter.",
   },
   {
     num: "VI",
-    title: `MONTHS 1-${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · TITANOS MONITOR FREE`,
+    title: `Months 1–${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · Titanos Monitor Free`,
     body: `Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing — same product as Titanos Monitor, included free for ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months covering your 30-day review and beyond. After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} it continues at ${DISPLAY.MONITOR_MONTHLY} only if you opt in — no silent continuity. I'll email you the exact date before any meter would start.`,
   },
 ];
@@ -251,7 +251,7 @@ export default function CompliancePage() {
       <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="FOUR LEGAL PRESSURE POINTS"
+            title="Four Legal Pressure Points"
             lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all four in one pass."
           />
           <div
@@ -298,7 +298,7 @@ export default function CompliancePage() {
       <SectionReveal id="walkthrough" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT THE ENGAGEMENT LOOKS LIKE"
+            title="What the Engagement Looks Like"
             lead="Six steps from scan to signed attestation. No PDF-only deliverable, no opaque hand-offs."
           />
           <GoldThread steps={THREAD_STEPS} />
@@ -311,8 +311,8 @@ export default function CompliancePage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="YOU CONTROL SOME · YOUR HOST CONTROLS THE REST"
-            lead="Your hosting service controls some things. I give you exactly what to ask them to fix, and document the rest as “reasonable steps taken.”"
+            title="You Control Some · Your Host Controls the Rest"
+            lead={`Your hosting service controls some things. I give you exactly what to ask them to fix, and document the rest as "reasonable steps taken."`}
           />
           <div
             className="grid-auto-cards"
@@ -323,14 +323,14 @@ export default function CompliancePage() {
             }}
           >
             <SplitCol
-              title="YOU CONTROL"
+              title="You Control"
               sub="We apply these together on the working call."
               items={YOU_CONTROL}
               accent="gold"
               prefix="✓"
             />
             <SplitCol
-              title="YOUR HOSTING PROVIDER CONTROLS"
+              title="Your Hosting Provider Controls"
               sub="I give you exactly how to escalate."
               items={HOST_CONTROLS}
               accent="ice"
@@ -346,7 +346,7 @@ export default function CompliancePage() {
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="ONE ENGAGEMENT · DONE WITH YOU"
+            title="One Engagement · Done With You"
             lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and I stay with you for 12 months of regulatory briefings and quarterly re-scans."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
@@ -533,7 +533,7 @@ export default function CompliancePage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="HOW THE MONITORING WORKS AFTER THE PACK"
+            title="How the Monitoring Works After the Pack"
             lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack — automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
           />
           <div
@@ -568,13 +568,13 @@ export default function CompliancePage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="QUESTIONS I GET" />
+          <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How the working call works">
               A single 90-minute video call where we apply the changes together. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
               CMS. I walk you through each change as you make it — no opaque hand-offs, no
-              “I’ll send you instructions and check back next week.” By the end of the call, the
+              "I’ll send you instructions and check back next week." By the end of the call, the
               privacy policy is deployed, the ADM disclosure is live, the M365/Workspace
               hardening is applied, the DNS records are corrected, and the NDB runbook is
               integrated.
@@ -636,13 +636,13 @@ export default function CompliancePage() {
             </FaqItem>
             <FaqItem question="What if my hosting provider won’t fix what you find?">
               You get the exact escalation language. If they refuse, you have documented
-              evidence of having taken “reasonable steps” — the standard the OAIC actually
+              evidence of having taken "reasonable steps" — the standard the OAIC actually
               assesses against.
             </FaqItem>
             <FaqItem question="Can you guarantee I’ll be compliant?">
               No vendor honestly can — compliance is determined by the regulator on the facts of
               a specific incident. What you get is the evidence pack regulators expect to see
-              when assessing whether you took “reasonable steps.”
+              when assessing whether you took "reasonable steps."
             </FaqItem>
             <FaqItem question="What happens if you’re unavailable later?">
               You keep everything I produce — the signed self-attestation, the 13-section evidence
@@ -685,7 +685,7 @@ export default function CompliancePage() {
       </SectionReveal>
 
       {/* Render-only-if-non-empty testimonials block — Fix 2c */}
-      <Testimonials offer="compliance" heading="WHAT COMPLIANCE CUSTOMERS SAID" />
+      <Testimonials offer="compliance" heading="What Compliance Customers Said" />
 
       {/* FINAL CTA */}
       <SectionReveal
@@ -706,7 +706,7 @@ export default function CompliancePage() {
             letterSpacing: "0.05em",
           }}
         >
-          SHIP COMPLIANCE BEFORE THE DEADLINE
+          Ship Compliance Before the Deadline
         </h2>
         <p
           style={{

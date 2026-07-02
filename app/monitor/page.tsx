@@ -127,7 +127,7 @@ export default function MonitorPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT LANDS IN YOUR INBOX EACH MONTH"
+            title="What Lands in Your Inbox Each Month"
             lead="One email a month. Same date each month. Worth reading or you stop it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -172,7 +172,7 @@ export default function MonitorPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT IT IS NOT"
+            title="What It Is Not"
             lead="The opt-out is built in. The product is the email — not a sales funnel wrapped around it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -217,7 +217,7 @@ export default function MonitorPage() {
       <SectionReveal id="pricing" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="ONE PRICE. CANCEL IN ONE CLICK."
+            title="One Price. Cancel in One Click."
             lead="Monthly or annual — annual saves about two months. No contract either way."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -332,7 +332,7 @@ export default function MonitorPage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="QUESTIONS I GET" />
+          <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="What's actually in the monthly email?">
               A plain-English summary with three sections: what&apos;s new since last month
@@ -375,7 +375,7 @@ export default function MonitorPage() {
       </SectionReveal>
 
       {/* Render-only-if-non-empty testimonials block */}
-      <Testimonials offer="scan" heading="WHAT CUSTOMERS SAID" />
+      <Testimonials offer="scan" heading="What Customers Said" />
 
       <div className="divider-gold" />
 
@@ -398,7 +398,7 @@ export default function MonitorPage() {
             letterSpacing: "0.05em",
           }}
         >
-          A MONTHLY SECURITY UPDATE WORTH READING
+          A Monthly Security Update Worth Reading
         </h2>
         <p
           style={{

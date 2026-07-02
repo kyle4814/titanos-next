@@ -172,8 +172,8 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="WHAT I ACTUALLY BUILD"
-            lead="Every business is different, so I don't sell a product off a shelf — I find what's worth automating in YOURS. Common builds:"
+            title="What I Actually Build"
+            lead="Every business is different, so I don't sell a product off a shelf — I find what's worth automating in yours. Common builds:"
           />
           <div
             className="grid-auto-cards"
@@ -243,7 +243,7 @@ export default function AiDeliveryPage() {
       >
         <div className="container-vault">
           <SectionHeading
-            title="HOW IT WORKS"
+            title="How It Works"
             lead="A free call first, so we both know what's worth building. Then I build it. Then I keep it alive — only if you want."
           />
           {/* "1% human review is the load-bearing 1%" callout — preserved from prior PR */}
@@ -314,10 +314,9 @@ export default function AiDeliveryPage() {
                     fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--gold)",
                     fontSize: "var(--fs-body)",
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.04em",
                     marginBottom: 14,
                     lineHeight: 1.4,
-                    textTransform: "uppercase",
                   }}
                 >
                   {s.title}
@@ -338,7 +337,7 @@ export default function AiDeliveryPage() {
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="THE LADDER"
+            title="The Ladder"
             lead="Start with the free call. If there's something worth building, you get a fixed-scope SOW. The Retainer is post-build only — sold once, after I've shipped something."
           />
           {/* Lead with the free scoping call — no price card, just the CTA */}
@@ -460,7 +459,7 @@ export default function AiDeliveryPage() {
                 marginBottom: 10,
               }}
             >
-              IF I HAVE TO PAUSE OR STEP AWAY MID-ENGAGEMENT
+              If I Have to Pause or Step Away Mid-Engagement
             </h4>
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>
               You keep everything I built to that point, the documentation, and a refund of any
@@ -520,7 +519,7 @@ export default function AiDeliveryPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="THE QUESTIONS I GET FIRST" />
+          <SectionHeading title="The Questions I Get First" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="I don't know what to automate. Is that a problem?">
               No — that&apos;s exactly what the free scoping call is for. Most owners I work
@@ -591,7 +590,7 @@ export default function AiDeliveryPage() {
             letterSpacing: "0.05em",
           }}
         >
-          TELL ME WHAT'S EATING YOUR WEEK
+          Tell Me What&apos;s Eating Your Week
         </h2>
         <p
           style={{
@@ -626,7 +625,7 @@ export default function AiDeliveryPage() {
         </p>
       </SectionReveal>
 
-      <Testimonials offer="ai-delivery" heading="WHAT AI-IMPLEMENTATION CUSTOMERS SAID" />
+      <Testimonials offer="ai-delivery" heading="What AI-Implementation Customers Said" />
     </>
   );
 }

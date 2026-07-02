@@ -163,6 +163,15 @@ export default function OurEvidencePackPage() {
 
       <div className="divider-gold" />
 
+      {/* Framing line — plain-English benefit before technical detail */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto", fontFamily: "var(--font-display), Georgia, serif", fontStyle: "italic" }}>
+          A plain-English report you can hand straight to your insurer or a big client as proof — here&apos;s exactly what it looks like.
+        </p>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
       {/* WHY WE PUBLISHED IT */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div
@@ -303,8 +312,8 @@ export default function OurEvidencePackPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-wide)" }}>
           <SectionHeading
-            title="WHAT IS INSIDE -- ALL 13 SECTIONS"
-            lead="Grouped into three categories so you can see at a glance what the report covers. Every section is plain English -- no assumed technical knowledge."
+            title="What&apos;s Inside — All 13 Sections"
+            lead="Grouped into three categories so you can see at a glance what the report covers. Every section is plain English — no assumed technical knowledge."
           />
 
           {GROUPS.map((group) => (
@@ -401,7 +410,7 @@ export default function OurEvidencePackPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="QUESTIONS PEOPLE USUALLY HAVE"
+            title="Questions People Usually Have"
             lead="If you have never seen a compliance report before, these are the things most people want to know first."
           />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -461,7 +470,7 @@ export default function OurEvidencePackPage() {
             marginBottom: 18,
           }}
         >
-          READY TO BUILD YOURS?
+          Ready to Build Yours?
         </h2>
         <p
           style={{

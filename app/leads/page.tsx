@@ -74,17 +74,17 @@ const DIFFERENTIATORS = [
 const STEPS = [
   {
     num: "I",
-    title: "SCOPE",
+    title: "Scope",
     body: "A short call (or intake form) where you tell me the industry, region, and what a good contact looks like for you. I tell you honestly whether I can hit the volume at the quality you need.",
   },
   {
     num: "II",
-    title: "BUILD + VERIFY",
+    title: "Build + Verify",
     body: "I source from public AU business listings, extract the named owner or manager wherever they're publicly listed, and use the verified main business contact otherwise. Every email is checked deliverable before it goes anywhere near your CSV.",
   },
   {
     num: "III",
-    title: "DELIVER",
+    title: "Deliver",
     body: "You get a clean CSV (or your format of choice), every field labelled, every email verified. Anything that bounces in 30 days, I replace free.",
   },
 ];
@@ -197,7 +197,7 @@ export default function LeadsPage() {
       {/* ═══ 1.2 — The problem ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="THE LIST YOU BUY IS USUALLY GARBAGE" />
+          <SectionHeading title="The List You Buy Is Usually Garbage" />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
@@ -238,7 +238,7 @@ export default function LeadsPage() {
       {/* ═══ 1.3 — Differentiators ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="WHAT MAKES THIS DIFFERENT" />
+          <SectionHeading title="What Makes This Different" />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
@@ -284,7 +284,7 @@ export default function LeadsPage() {
       >
         <div className="container-vault">
           <SectionHeading
-            title="PRICING"
+            title="Pricing"
             lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed — every tier verified at delivery, every tier covered by the 30-day bounce replacement."
           />
           <div
@@ -386,7 +386,7 @@ export default function LeadsPage() {
       {/* ═══ 1.5 — How it works ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="HOW IT WORKS" lead="Three steps, no surprises." />
+          <SectionHeading title="How It Works" lead="Three steps, no surprises." />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
@@ -440,7 +440,7 @@ export default function LeadsPage() {
       {/* ═══ 1.6 — Legal-by-design (load-bearing) ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="BUILT BY A COMPLIANCE PRACTICE — ON PURPOSE" />
+          <SectionHeading title="Built by a Compliance Practice — on Purpose" />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <p
               style={{
@@ -511,7 +511,7 @@ export default function LeadsPage() {
       {/* ═══ 1.7 — FAQ ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="THE QUESTIONS EVERY BUYER ASKS FIRST" />
+          <SectionHeading title="The Questions Every Buyer Asks First" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Where does the data come from?">
               Public Australian business listings and the businesses&apos; own public
@@ -582,7 +582,7 @@ export default function LeadsPage() {
             letterSpacing: "0.05em",
           }}
         >
-          TELL ME WHO YOU&apos;RE TRYING TO REACH
+          Tell Me Who You&apos;re Trying to Reach
         </h2>
         <p
           style={{

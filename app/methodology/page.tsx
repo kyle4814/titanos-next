@@ -109,13 +109,13 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
-            title="WHAT I CHECK · WHAT I NEVER DO"
+            title="What I Check · What I Never Do"
             lead="Public-facing information only. I read what the open internet can already see — nothing private, nothing that requires a login."
           />
           <MirrorLists
-            doTitle="WHAT I SCAN"
+            doTitle="What I Scan"
             doItems={WHAT_WE_SCAN}
-            dontTitle="WHAT I DON’T DO"
+            dontTitle="What I Don&apos;t Do"
             dontItems={WHAT_WE_DONT}
           />
         </div>
@@ -127,7 +127,7 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
-            title="TOOLS USED"
+            title="Tools Used"
             lead="Industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
           />
           <ul
@@ -165,7 +165,7 @@ export default function MethodologyPage() {
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="YOUR 90-DAY WINDOW TO FIX BEFORE ANYTHING IS PUBLISHED" />
+          <SectionHeading title="Your 90-Day Window to Fix Before Anything Is Published" />
           <div
             style={{
               background: "var(--card)",
@@ -203,7 +203,7 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <SectionHeading
-            title="SCOPE"
+            title="Scope"
             lead="I scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
           />
           <SimpleList
@@ -222,7 +222,7 @@ export default function MethodologyPage() {
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="WHAT YOU GET" lead="The standard external scan output:" />
+          <SectionHeading title="What You Get" lead="The standard external scan output:" />
           <SimpleList
             items={[
               "Findings ranked by severity (Critical, High, Medium, Low, Info)",
@@ -239,7 +239,7 @@ export default function MethodologyPage() {
       {/* HOW I DELIVER */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="HOW I DELIVER" />
+          <SectionHeading title="How I Deliver" />
           <p
             style={{
               color: "var(--text)",
@@ -277,7 +277,7 @@ export default function MethodologyPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="HOW TO VERIFY ME"
+            title="How to Verify Me"
             lead="Three independent ways. Every claim I make is one of these checks away from a third-party audit."
           />
           <VerifyKeys keys={VERIFY} />
@@ -289,7 +289,7 @@ export default function MethodologyPage() {
       {/* REMOVAL */}
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <SectionHeading title="REMOVAL" />
+          <SectionHeading title="Removal" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from me and your domain is suppressed
             permanently. I honour the request immediately.

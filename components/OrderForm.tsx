@@ -177,6 +177,9 @@ export default function OrderForm({
         Reply STOP to anything and you&apos;re suppressed forever. I never sell your data.
       </p>
 
+      <p style={{ color: "var(--ok)", fontSize: "var(--fs-xs)", lineHeight: 1.55, margin: "0 0 4px" }}>
+        No charge until you approve the scope and receive an invoice from Kyle.
+      </p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
         <button
           type="submit"

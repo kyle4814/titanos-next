@@ -190,10 +190,9 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
             fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
             fontSize: "var(--fs-body)",
-            letterSpacing: "0.08em",
+            letterSpacing: "0.05em",
             marginBottom: 10,
             lineHeight: 1.4,
-            textTransform: "uppercase",
           }}
         >
           {step.title}
