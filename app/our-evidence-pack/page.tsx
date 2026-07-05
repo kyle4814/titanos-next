@@ -139,7 +139,7 @@ export default function OurEvidencePackPage() {
         badge="SEE WHAT YOU GET -- OUR OWN REPORT, PUBLISHED IN FULL"
         title="Before you pay for anything, see exactly what you get."
         tagline="This is our own security and compliance report -- run on our own business, published in full, with only customer names removed. Nothing glossy. Nothing hidden."
-        sub="17 pages covering our privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. The same report template every client receives -- applied to us first."
+        sub="The single PDF an insurer, regulator, or enterprise procurement team asks for as proof of reasonable steps -- privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. 17 pages. Same template every client receives -- applied to my own business first."
         trustLine={
           <>
             Source:{" "}

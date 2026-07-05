@@ -160,7 +160,7 @@ export default function CompliancePage() {
     "@type": "Product",
     name: "Titanos AU Privacy Act + Essential Eight Compliance — Done With You",
     description:
-      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 12 months of regulatory update briefings.",
+      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 3 months of Titanos Monitor included free.",
     brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
     offers: {
       "@type": "Offer",
@@ -219,7 +219,7 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)" }}>
-          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+          Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
       </PageHero>
 
@@ -243,6 +243,79 @@ export default function CompliancePage() {
       {/* Fix 4 — slot-based scarcity block under the hero */}
       <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
         <SlotScarcity variant="block" />
+      </SectionReveal>
+
+      {/* WHAT HAPPENS ON THE CALL — day-1 snapshot before pressure points */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="What Happens on the Call"
+            lead="90 minutes. Screen-share. We apply every change together, live — not a PDF you have to figure out later."
+          />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: 14,
+            }}
+          >
+            {[
+              { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business — in plain English, no jargon. You'll know exactly what's missing and why it matters before we touch a single setting." },
+              { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations — done by the end of the call, not homework for later." },
+              { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified — a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
+              { n: "4", title: "3 months of Titanos Monitor, free", body: "Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then AU$149/mo only if you choose to continue — and I'll flag anything new that needs attention." },
+            ].map((r) => (
+              <div
+                key={r.n}
+                style={{
+                  border: "1px solid var(--gold-dim)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "18px 22px",
+                  background: "var(--card)",
+                  display: "flex",
+                  gap: 16,
+                  alignItems: "flex-start",
+                }}
+              >
+                <span
+                  style={{
+                    flexShrink: 0,
+                    width: 34,
+                    height: 34,
+                    borderRadius: 999,
+                    background: "linear-gradient(90deg, var(--gold-warm), var(--gold))",
+                    color: "var(--vault-black)",
+                    fontFamily: "var(--font-display), Georgia, serif",
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {r.n}
+                </span>
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display), Georgia, serif",
+                      color: "var(--gold)",
+                      fontSize: "var(--fs-body)",
+                      letterSpacing: "0.02em",
+                      marginBottom: 6,
+                    }}
+                  >
+                    {r.title}
+                  </div>
+                  <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.65, margin: 0 }}>
+                    {r.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </SectionReveal>
 
       <div className="divider-gold" />
@@ -347,7 +420,7 @@ export default function CompliancePage() {
         <div className="container-vault">
           <SectionHeading
             title="One Engagement · Done With You"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and I stay with you for 12 months of regulatory briefings and quarterly re-scans."
+            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — and I stay with you for 3 months of monitoring and re-scans, with a plain-English briefing whenever the rules move during that window."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
           <div style={{ textAlign: "center", marginBottom: 18 }}>
@@ -437,8 +510,8 @@ export default function CompliancePage() {
                   }}
                 >
                   Drafting before the call · 90-min implementation working call ·
-                  30-day review + attestation signed · 12 months of regulatory
-                  briefings + quarterly re-scans. Not 90 minutes total — 90 minutes
+                  30-day review + attestation signed · 3 months of monitoring
+                  + quarterly re-scans. Not 90 minutes total — 90 minutes
                   is the central session.
                 </span>
               </div>
@@ -457,7 +530,7 @@ export default function CompliancePage() {
                 Everything you need to demonstrate &ldquo;reasonable steps&rdquo; under the
                 Privacy Act and the Australian government&apos;s baseline security
                 checklist (Essential Eight, Maturity Level 1), applied together
-                with you in a single working call — then maintained for 12 months.
+                with you in a single working call — then maintained for the 3-month monitoring window.
               </p>
               <ul
                 style={{
@@ -520,7 +593,7 @@ export default function CompliancePage() {
                 </a>
               </p>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "6px auto 0" }}>
-                Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+                Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
               </p>
             </article>
           </div>
@@ -742,7 +815,7 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", margin: "6px auto 0" }}>
-          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+          Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
         <p
           style={{

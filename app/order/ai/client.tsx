@@ -1,9 +1,18 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import OrderForm, { Field } from "@/components/OrderForm";
 
+const TIERS = [
+  { value: "pilot", label: "Automation Pilot — from AU$1,500 (one task, fixed scope)" },
+  { value: "build", label: "Full Build — from AU$9,997 (full custom AI system)" },
+  { value: "retainer", label: "Ops Retainer — AU$990–1,990/mo (post-build only)" },
+  { value: "not_sure", label: "Not sure yet — start with the free scoping call" },
+];
+
 const BUDGETS = [
-  "Under $5,000",
+  "Under $2,000 (pilot range)",
+  "$2,000 – $5,000",
   "$5,000 – $10,000",
   "$10,000 – $20,000",
   "$20,000 – $50,000",
@@ -12,6 +21,7 @@ const BUDGETS = [
 ];
 
 const TIMELINES = [
+  "Within 2 weeks",
   "Within 4 weeks",
   "Within 2 months",
   "Within 6 months",
@@ -22,11 +32,16 @@ function SelectField({
   label,
   name,
   options,
+  defaultValue,
 }: {
   label: string;
   name: string;
-  options: string[];
+  options: { value: string; label: string }[] | string[];
+  defaultValue?: string;
 }) {
+  const opts = options.map((o) =>
+    typeof o === "string" ? { value: o, label: o } : o,
+  );
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <label
@@ -44,6 +59,7 @@ function SelectField({
       <select
         id={`order-${name}`}
         name={name}
+        defaultValue={defaultValue ?? ""}
         style={{
           width: "100%",
           background: "var(--vault-bg, #0a0a0a)",
@@ -55,10 +71,10 @@ function SelectField({
           boxSizing: "border-box",
         }}
       >
-        <option value="">— Select —</option>
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {o}
+        {!defaultValue && <option value="">— Select —</option>}
+        {opts.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
           </option>
         ))}
       </select>
@@ -67,6 +83,20 @@ function SelectField({
 }
 
 export default function OrderAiClient() {
+  const params = useSearchParams();
+  const rawTier = params.get("tier") ?? "";
+  const validTiers = new Set(TIERS.map((t) => t.value));
+  const defaultTier = validTiers.has(rawTier) ? rawTier : "not_sure";
+  const isPilot = defaultTier === "pilot";
+
+  const heading = isPilot
+    ? "AI Automation Pilot — Enquiry"
+    : "AI Implementation — Enquiry";
+
+  const subheading = isPilot
+    ? "Tell Kyle the single manual task you want automated as a fixed-scope pilot (from AU$1,500). He confirms scope and sends an invoice; you see it working before committing to anything bigger."
+    : "Tell Kyle what manual task is eating your team's week. He scopes the rung that fits — pilot from AU$1,500, full build from AU$9,997 — and sends an invoice.";
+
   return (
     <main
       style={{
@@ -77,20 +107,39 @@ export default function OrderAiClient() {
     >
       <OrderForm
         orderType="ai"
-        heading="AI Implementation — Enquiry"
-        subheading="Tell Kyle what manual task is eating your team's week. He scopes the build, sends an invoice, and ships a system that does it instead. From $4,997."
-        submitLabel="SUBMIT AI ORDER →"
+        heading={heading}
+        subheading={subheading}
+        submitLabel={isPilot ? "SUBMIT PILOT ENQUIRY →" : "SUBMIT AI ORDER →"}
         successMessage="Received. Kyle will review your scope and respond with a proposal or invoice within 1 business day."
       >
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 
+        <SelectField
+          label="Which rung fits?"
+          name="scope_tier"
+          options={TIERS}
+          defaultValue={defaultTier}
+        />
+
         <Field
-          label="What do you do manually that takes the most time?"
+          label={
+            isPilot
+              ? "Which single manual task do you want automated?"
+              : "What do you do manually that takes the most time?"
+          }
           name="scope_manual_tasks"
           as="textarea"
           rows={4}
-          placeholder="e.g. We manually triage 200 support emails a day, copy data between three systems every morning, and write weekly reports from spreadsheets…"
-          hint="Be specific. The more detail, the sharper the scope."
+          placeholder={
+            isPilot
+              ? "e.g. Every morning I copy new Xero invoices into our CRM by hand and email a summary to the team…"
+              : "e.g. We manually triage 200 support emails a day, copy data between three systems every morning, and write weekly reports from spreadsheets…"
+          }
+          hint={
+            isPilot
+              ? "One specific task. The tighter the scope, the faster the pilot ships."
+              : "Be specific. The more detail, the sharper the scope."
+          }
         />
 
         <Field

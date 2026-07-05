@@ -107,8 +107,8 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            The work is done by me with Claude Code, Anthropic&apos;s coding model, doing
-            the keystroke-level execution. I diagnose, plan, scope, sign off. The model
+            The work is done by me with Claude Code, Anthropic&apos;s agentic coding tool, doing
+            the keystroke-level execution. I diagnose, plan, scope, sign off. The tool
             ships. If the math is wrong, that&apos;s on me — and I&apos;m the one you talk
             to when it is.
           </p>

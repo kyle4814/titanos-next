@@ -82,7 +82,7 @@ export default function Footer() {
             color: "var(--dim)",
           }}
         >
-          ABN 34 318 502 254 · titanos.tech · powered by Claude Code
+          ABN 34 318 502 254 · I personally review every deliverable before it reaches you · titanos.tech
         </div>
       </div>
     </footer>

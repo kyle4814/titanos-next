@@ -62,25 +62,32 @@ const BUILDS = [
 
 const STEPS = [
   {
-    num: "I",
+    num: "0",
     tag: "SCOPING CALL · FREE · 15–30 MIN",
-    title: "Scoping call",
+    title: "Free scoping call",
     body:
-      "We get on a call, I dig into how your business runs, and I tell you honestly the highest-leverage thing worth automating and what it'd cost to build. No charge, no obligation. If there's nothing worth doing, I'll say so on the call.",
+      "Tell me the manual task eating your week. I'll tell you honestly what's worth automating and what it'd cost. Free, no obligation. If there's nothing worth doing, I'll say so on the call.",
+  },
+  {
+    num: "I",
+    tag: `PILOT · ${DISPLAY.AI_PILOT_FLOOR.toUpperCase()} · FIXED SCOPE`,
+    title: "Automation pilot",
+    body:
+      "Not ready for a big build? Pick the single most annoying manual task in your business and I'll automate just that — fixed scope, fixed price, fast. You see it working before you commit to anything bigger. Best way to find out if this is worth it.",
   },
   {
     num: "II",
-    tag: `BUILD · FROM ${DISPLAY.AI_BUILD_FLOOR.toUpperCase()} · QUOTED BY SCOPE`,
-    title: "Build",
+    tag: `FULL BUILD · ${DISPLAY.AI_BUILD_FLOOR.toUpperCase()} · QUOTED BY SCOPE`,
+    title: "Full build",
     body:
-      "I build the thing we picked, ship it working into your business, and document it so your team can actually use it. Working system, not a slide deck. Fixed-scope SOW from the call so there are no surprises.",
+      "Once you've seen what automation does for one task — or if you already know the bigger thing you want built — I build the full system. Shipped working into your business, documented for your team. Fixed-scope SOW, no surprises.",
   },
   {
     num: "III",
-    tag: `MAINTAIN (OPTIONAL) · ${DISPLAY.AI_OPS_RETAINER.toUpperCase()}`,
-    title: "Maintain",
+    tag: `OPS RETAINER (OPTIONAL) · ${DISPLAY.AI_OPS_RETAINER.toUpperCase()}`,
+    title: "Ops retainer",
     body:
-      "Once it's live, I can keep it alive — fix it when your tools change, extend it as you grow, improve it monthly. Sold only after a build, because I won't maintain something I didn't build and don't understand.",
+      "Once it's live, I keep it running and improving — monthly. Fix it when your tools change, extend it as you grow. Sold only after a build, because I won't maintain something I didn't build and don't understand.",
   },
 ];
 
@@ -338,7 +345,7 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading
             title="The Ladder"
-            lead="Start with the free call. If there's something worth building, you get a fixed-scope SOW. The Retainer is post-build only — sold once, after I've shipped something."
+            lead="Free call → Pilot from AU$1,500 → Full build from AU$9,997 → Ops retainer. Each rung is a smaller commitment than the next. Start where the risk fits your gut."
           />
           {/* Lead with the free scoping call — no price card, just the CTA */}
           <div
@@ -404,22 +411,31 @@ export default function AiDeliveryPage() {
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
           >
             <OfferTile
-              tag="BUILD · QUOTED BY SCOPE"
+              tag="PILOT · FIXED SCOPE · TOE-IN-THE-WATER"
+              title="Automation Pilot"
+              price={DISPLAY.AI_PILOT_FLOOR}
+              priceUnit="one specific automation · fixed price, no surprises · shipped working, documented"
+              body="Pick the single most annoying manual task in your business and I'll automate just that. Fast proof of value before you commit to a full build. Credits toward a full build if you go further."
+              ctaLabel="Start with a pilot →"
+              ctaHref="/order/ai?tier=pilot"
+            />
+            <OfferTile
+              tag="FULL BUILD · STEP UP FROM PILOT · QUOTED BY SCOPE"
               title="AI Build"
               price={DISPLAY.AI_BUILD_FLOOR}
               priceUnit="fixed-scope SOW from the call · deposit + milestones · delivery date in writing"
-              body="I build the thing we picked, ship it working into your business, and document it so your team can use it. Working system, not a slide deck. One accountable contact. No subcontractor chain."
-              ctaLabel="START AI ENQUIRY →"
-              ctaHref="/order/ai"
+              body="Once you've seen what automation does for one task — or if you already know the bigger thing you want built — I build the full system. Shipped working into your business, documented for your team. One accountable contact. No subcontractor chain."
+              ctaLabel="Start a full build →"
+              ctaHref="/order/ai?tier=build"
             />
             <OfferTile
-              tag="MAINTAIN · OPTIONAL · POST-BUILD ONLY"
+              tag="OPS RETAINER · OPTIONAL · POST-BUILD ONLY"
               title="AI Ops Retainer"
               price={DISPLAY.AI_OPS_RETAINER}
               priceUnit="monthly · sold only after a Build · band reflects depth of dependency"
-              body="Once it's live, I can keep it alive — fix it when your tools change, extend it as you grow, improve it monthly. Same accountable contact as the Build. Sold only after a Build, because I won't maintain something I didn't build and don't understand."
+              body="Once it's live, I keep it running and improving — monthly. Fix it when your tools change, extend it as you grow. Same accountable contact as the Build. Sold only after a Build, because I won't maintain something I didn't build and don't understand."
               ctaLabel="Discuss after your build"
-              ctaHref={SCOPING_CALL_URL}
+              ctaHref="/order/ai?tier=retainer"
             />
           </div>
           <p
