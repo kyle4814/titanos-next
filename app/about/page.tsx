@@ -149,8 +149,8 @@ export default function AboutPage() {
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>My own scan:</strong>{" "}
-              <a href="/our-scan" style={{ color: "var(--ice)" }}>
-                titanos.tech/our-scan
+              <a href="/scan#self-scan" style={{ color: "var(--ice)" }}>
+                titanos.tech/scan
               </a>{" "}
               — every finding from my self-scan, published in full.
             </li>

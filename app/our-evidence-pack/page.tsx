@@ -143,8 +143,8 @@ export default function OurEvidencePackPage() {
         trustLine={
           <>
             Source:{" "}
-            <a href="/our-scan" style={{ color: "var(--ice)" }}>
-              titanos.tech/our-scan
+            <a href="/scan#self-scan" style={{ color: "var(--ice)" }}>
+              titanos.tech/scan
             </a>{" "}
             &middot;{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>

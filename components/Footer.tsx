@@ -9,7 +9,7 @@ const LINKS = [
   { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Leads & Intelligence", href: "/leads", external: false },
   { label: "Methodology", href: "/methodology", external: false },
-  { label: "Our scan", href: "/our-scan", external: false },
+  { label: "Our scan", href: "/scan#self-scan", external: false },
   { label: "Evidence pack", href: "/our-evidence-pack", external: false },
   { label: "About", href: "/about", external: false },
   {

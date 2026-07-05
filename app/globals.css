@@ -122,9 +122,6 @@ body[data-page="ai-delivery"] {
 body[data-page="compliance"] {
   --accent: var(--oxblood);
 }
-body[data-page="our-scan"] {
-  --accent: var(--ember);
-}
 
 /* ═══════════════════════════════════════════════════════════════
    Base
