@@ -10,7 +10,7 @@ const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 export const metadata: Metadata = {
   title: "About — Kyle Deligny · TITANOS",
   description:
-    "Solo operator. ABN 34 318 502 254 (verifiable). AU privacy law compliance done with you. Free business security checks. 1,700+ checks run this month.",
+    "Solo operator. ABN 34 318 502 254 (verifiable). AU privacy law compliance done with you. Free business security checks. 1,700+ automated corpus scans this month.",
   alternates: { canonical: "https://titanos.tech/about" },
   openGraph: {
     title: "About — Kyle Deligny · Titanos",
@@ -148,11 +148,11 @@ export default function AboutPage() {
               — government source of truth for ABN 34 318 502 254.
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "var(--gold)" }}>Our own scan:</strong>{" "}
+              <strong style={{ color: "var(--gold)" }}>My own scan:</strong>{" "}
               <a href="/our-scan" style={{ color: "var(--ice)" }}>
                 titanos.tech/our-scan
               </a>{" "}
-              — every finding from our self-scan, published in full.
+              — every finding from my self-scan, published in full.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Methodology:</strong>{" "}

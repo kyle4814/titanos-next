@@ -280,8 +280,8 @@ export default function OurScanPage() {
           }}
         >
           Tell me your domain on the form. I run the scan. Report lands in your
-          inbox within 1 business day. No card. No login. No follow-up sequence
-          unless you reply.
+          inbox within 1 business day. No card. No login. No drip campaign —
+          at most 3 relevant emails over 6 months, and STOP kills it forever.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={REQUEST_HREF} variant="primary">

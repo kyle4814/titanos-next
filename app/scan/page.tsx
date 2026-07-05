@@ -116,7 +116,7 @@ export default function ScanPage() {
         badge="FREE · NO LOGIN · NO CARD"
         title="Free Security Check for Your Business"
         tagline="See what a hacker can see about your business. No login. Report in your inbox within 1 business day."
-        sub="A plain-English report on every security gap visible from the public internet — open ports, expired certificates, email spoofing risks, known software weaknesses. No card. No follow-up sequence."
+        sub="A plain-English report on every security gap visible from the public internet — open ports, expired certificates, email spoofing risks, known software weaknesses. No card. No drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever."
         trustLine={
           <>
             Personally reviewed · Australian-owned ·{" "}
@@ -315,7 +315,7 @@ export default function ScanPage() {
             />
             <BridgeCard
               title="Privacy Act Compliance"
-              body="If the check finds gaps and the 11 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where we apply every change together — privacy policy, email security, login security, the works."
+              body="If the check finds gaps and the 11 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you — privacy policy, email security, login security, the works."
               href="/compliance"
               cta="See the compliance pack"
             />
@@ -399,8 +399,8 @@ export default function ScanPage() {
             lineHeight: 1.7,
           }}
         >
-          Personally reviewed, delivered within 1 business day. No card, no login, no follow-up
-          sequence.
+          Personally reviewed, delivered within 1 business day. No card, no login, no drip
+          campaign — at most 3 relevant emails over 6 months, and STOP kills it forever.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={REQUEST_ANCHOR} variant="primary">

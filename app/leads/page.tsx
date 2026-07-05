@@ -43,7 +43,7 @@ const PROBLEMS = [
     body: "Most cheap AU contact lists are scraped once, never verified, and commonly bounce on first send — often 30–50% — torching your sender reputation before you've made a single pitch.",
   },
   {
-    title: "Agencies charge $5–10K and lock you in.",
+    title: "Agencies charge AU$5–10K and lock you in.",
     body: "Lead-gen agencies bundle the list into a retainer you can't leave, and you never actually own the data.",
   },
   {
@@ -67,7 +67,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: "AU-native coverage.",
-    body: "Built specifically for Australian SMBs across every metro — including the regional businesses the big tools miss.",
+    body: "Built for Australian SMBs, with NZ and Singapore coverage on request — including the regional businesses the big tools miss.",
   },
 ];
 
@@ -326,7 +326,7 @@ export default function LeadsPage() {
               price={DISPLAY.LEADS_CAMPAIGN}
               priceUnit={`${LEADS.CAMPAIGN.contacts} verified contacts · ${LEADS.CAMPAIGN.turnaround}`}
               bullets={[
-                `Custom target profile — we scope it together on a call`,
+                `Custom target profile — I scope it with you on a call`,
                 `Everything in Growth, plus company-size signals + segmentation breakdown`,
                 `30-minute targeting strategy call included`,
                 `30-day bounce replacement`,
@@ -501,6 +501,28 @@ export default function LeadsPage() {
                 Privacy Act compliance
               </a>
               .
+            </p>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* ═══ 1.6b — SPAM ACT ═══ */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+            <SectionHeading title="Using This List Without Getting Fined" />
+            <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
+              The Privacy Act covers how I built the list. The Spam Act 2003 covers how
+              you use it. Three rules keep you clean: B2B outreach to published business
+              addresses relies on inferred consent — which is exactly why I verify roles
+              and sources instead of scraping personal inboxes. Every send needs your
+              real business name and contact details. Every send needs a working
+              unsubscribe, honoured within 5 business days. Follow those and cold B2B
+              email is legal in Australia. I build the list to make the first rule true;
+              the other two are on your sender — and if you&apos;d rather not think about
+              any of it, that&apos;s what the managed retainer is for.
             </p>
           </div>
         </div>

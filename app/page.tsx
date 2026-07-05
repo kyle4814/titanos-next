@@ -17,7 +17,7 @@ const offers: Offer[] = [
     price: "AU$0",
     priceUnit: "no card · report in your inbox within 1 business day",
     body:
-      "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it. No login, no credit card, no sales sequence hounding you afterwards. Just a clear picture of where your business actually stands — the same check I'd run on a paying client, so you can see the quality before you spend a cent.",
+      "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it. No login, no credit card, no drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever. Just a clear picture of where your business actually stands — the same check I'd run on a paying client, so you can see the quality before you spend a cent.",
     bullets: [
       "Just your website address — any AU/NZ/SG host",
       "Every finding verifiable — I show you the exact check I ran",
@@ -41,10 +41,10 @@ const offers: Offer[] = [
     price: DISPLAY.PACK_PRICE,
     priceUnit: `one-time · all six obligations sorted · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
     body:
-      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share we apply every change together — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 11 December 2026.",
+      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share I apply every change with you — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 11 December 2026.",
     bullets: [
       "All six obligations — privacy policy, breach plan, email security, login security, data mapping, AI disclosure",
-      "90-minute working call — we apply every change together, on screen",
+      "90-minute working call — I apply every change with you, on screen",
       "A plain-English report you can hand straight to your insurer or a big client as proof",
       "Signed compliance letter for a regulator, insurer, or enterprise client",
     ],

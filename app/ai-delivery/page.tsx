@@ -63,7 +63,7 @@ const BUILDS = [
 const STEPS = [
   {
     num: "0",
-    tag: "SCOPING CALL · FREE · 15–30 MIN",
+    tag: "SCOPING CALL · FREE · 15 MIN",
     title: "Free scoping call",
     body:
       "Tell me the manual task eating your week. I'll tell you honestly what's worth automating and what it'd cost. Free, no obligation. If there's nothing worth doing, I'll say so on the call.",
@@ -251,7 +251,7 @@ export default function AiDeliveryPage() {
         <div className="container-vault">
           <SectionHeading
             title="How It Works"
-            lead="A free call first, so we both know what's worth building. Then I build it. Then I keep it alive — only if you want."
+            lead="A free call first, so you know exactly what's worth building. Then I build it. Then I keep it alive — only if you want."
           />
           {/* "1% human review is the load-bearing 1%" callout — preserved from prior PR */}
           <p
@@ -572,12 +572,12 @@ export default function AiDeliveryPage() {
               Yes, mutual NDA before the scoping call if you want one. Engagement work lives in
               your own systems — I never retain your data after handover.
             </FaqItem>
-            <FaqItem question="How fast can we start?">
+            <FaqItem question="How fast can this start?">
               Scoping call usually within 3 business days of your enquiry. Fixed-scope SOW
               within 72 hours of the call. Build starts on deposit clearance — typically inside
               10 business days from first email.
             </FaqItem>
-            <FaqItem question="Can our procurement do a vendor security review?">
+            <FaqItem question="Can procurement run a vendor security review on this?">
               Yes. I&apos;ve completed external attack-surface DD on myself —{" "}
               <a href="/our-scan" style={{ color: "var(--ice)" }}>see the findings</a>. I&apos;ll
               fill in any vendor risk assessment your procurement requires.
