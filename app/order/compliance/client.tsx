@@ -37,7 +37,7 @@ const PLATFORMS = [
 ];
 
 const DRIVERS = [
-  "11 December 2026 deadline",
+  "10 December 2026 deadline",
   "Tender / government contract requirement",
   "Client / partner asked for it",
   "Data breach or near-miss",

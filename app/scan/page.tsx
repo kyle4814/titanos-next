@@ -426,7 +426,7 @@ export default function ScanPage() {
             />
             <BridgeCard
               title="Privacy Act Compliance"
-              body="If the check finds gaps and the 11 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you — privacy policy, email security, login security, the works."
+              body="If the check finds gaps and the 10 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you — privacy policy, email security, login security, the works."
               href="/compliance"
               cta="See the compliance pack"
             />

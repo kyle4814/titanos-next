@@ -95,7 +95,7 @@ export default function AboutPage() {
           >
             Three things. A free security check that shows what a hacker can see about your
             business — no payment, no sales funnel. A fixed-price Privacy Act compliance
-            engagement for AU small businesses preparing for the 11 December 2026 deadline.
+            engagement for AU small businesses preparing for the 10 December 2026 deadline.
             And AI implementation projects — I find the manual task eating your team&apos;s
             week and build the system that does it instead, quoted by scope after a free call.
           </p>

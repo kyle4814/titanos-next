@@ -24,7 +24,7 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 // Fix 5g — title/og/twitter aligned. Description rewritten to reflect
 // the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
-  "Privacy Act Compliance Before 11 December 2026 — Done With You | TITANOS";
+  "Privacy Act Compliance Before 10 December 2026 — Done With You | TITANOS";
 const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations — privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
 
 export const metadata: Metadata = {
@@ -81,15 +81,16 @@ const THREAD_STEPS: ThreadStep[] = [
 ];
 
 // Fix 3c — reordered by believability-to-an-SMB, not chronologically.
-// (1) live tort = anyone can sue you today; (2) insurance denial; (3)
-// ADM disclosure 11 Dec; (4) Tranche 2 small-business exemption removal.
+// (1) live tort = an affected person can sue you today; (2) insurance
+// denial; (3) ADM disclosure 10 Dec; (4) Tranche 2 small-business
+// exemption removal; (5) OAIC proactive sweeps live since Jan 2026.
 // IoT + EU AI Act items demoted to the compact "also on the calendar"
 // row rendered after TIMELINE.
 const TIMELINE = [
   {
     when: "LIVE NOW",
-    title: "Anyone can sue you directly",
-    body: "The statutory tort for serious invasions of privacy is in effect. A customer or ex-employee can take you to court for a serious privacy breach today — no regulator needed, no OAIC queue.",
+    title: "An affected person can take you to court directly",
+    body: "Since 10 June 2025, an individual whose data you seriously mishandle can sue you under the new privacy tort — no regulator, no OAIC queue. It applies even if your turnover currently exempts you from the rest of the Act.",
     state: "live",
   },
   {
@@ -99,7 +100,7 @@ const TIMELINE = [
     state: "live",
   },
   {
-    when: "11 DECEMBER 2026",
+    when: "10 DECEMBER 2026",
     title: "ADM disclosure required in your privacy policy",
     body: "Automated decision-making — including AI tools your business uses — must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M for serious or repeated interference.",
     state: "future",
@@ -109,6 +110,12 @@ const TIMELINE = [
     title: "Small-business exemption disappears",
     body: "The second reform tranche is positioned to remove the AU$3M turnover exemption, pulling roughly 2.3M additional AU SMBs into Privacy Act scope. If you’re currently exempt, that protection has a sunset on it.",
     state: "coming",
+  },
+  {
+    when: "LIVE NOW",
+    title: "The regulator is now checking proactively",
+    body: "Since January 2026 the OAIC has run compliance sweeps across sectors including real estate, pharmacies, and licensed venues — examining businesses before any complaint is made. “We’ve had no problems” is no longer the same as “we won’t be looked at.”",
+    state: "live",
   },
 ];
 
@@ -160,7 +167,7 @@ export default function CompliancePage() {
     "@type": "Product",
     name: "Titanos AU Privacy Act + Essential Eight Compliance — Done With You",
     description:
-      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 3 months of Titanos Monitor included free.",
+      "Done-with-you compliance engagement for Australian SMBs facing the 10 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 3 months of Titanos Monitor included free.",
     brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
     offers: {
       "@type": "Offer",
@@ -182,15 +189,15 @@ export default function CompliancePage() {
       <PageHero
         badge={
           <>
-            DEADLINE · 11 DECEMBER 2026 <SlotScarcity variant="pill" />
+            DEADLINE · 10 DECEMBER 2026 <SlotScarcity variant="pill" />
           </>
         }
         // Fix 3a — plain-English SMB-owner hero. The audit moved the
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
-        title="Six Privacy Act obligations. One working call. Sorted before 11 December 2026."
+        title="Six Privacy Act obligations. One working call. Sorted before 10 December 2026."
         tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
-        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. If you handle health information — clinic, allied health, practice of any size — the Privacy Act already covers you. There is no small-business exemption for health providers."
+        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. Health providers — clinic, allied health, pharmacy, any size — are already covered by the Privacy Act. There is no small-business exemption for health."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -320,12 +327,12 @@ export default function CompliancePage() {
 
       <div className="divider-gold" />
 
-      {/* FOUR PRESSURE POINTS — Fix 3c reorder by believability, not date */}
+      {/* FIVE PRESSURE POINTS — Fix 3c reorder by believability, not date */}
       <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Four Legal Pressure Points"
-            lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all four in one pass."
+            title="Five Legal Pressure Points"
+            lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all five in one pass."
           />
           <div
             style={{
@@ -420,7 +427,7 @@ export default function CompliancePage() {
         <div className="container-vault">
           <SectionHeading
             title="One Engagement · Done With You"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — and I stay with you for 3 months of monitoring and re-scans, with a plain-English briefing whenever the rules move during that window."
+            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — 3 months of monitoring included, plus regulatory briefings through the engagement whenever the rules move."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
           <div style={{ textAlign: "center", marginBottom: 18 }}>
@@ -669,8 +676,9 @@ export default function CompliancePage() {
             <FaqItem question="I’m too small for this to matter">
               {/* Fix 3c — answer reordered to match the new fear hierarchy:
                   live tort, then insurance, then ADM penalties, then Tranche 2. */}
-              The statutory tort is live now — a customer or ex-employee can take you to court
-              for a serious privacy breach today, no regulator needed. Cyber insurers
+              The statutory tort is live now — since 10 June 2025, a customer or ex-employee can
+              take you to court for a serious, intentional or reckless privacy breach, no
+              regulator needed. Cyber insurers
               increasingly deny breach claims when baseline controls weren’t in place. Penalties
               already reach AU$50M for serious or repeated interference. And Tranche 2 reforms
               are positioned to remove the AU$3M small-business turnover exemption, pulling

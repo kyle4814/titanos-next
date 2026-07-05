@@ -41,7 +41,7 @@ const offers: Offer[] = [
     price: DISPLAY.PACK_PRICE,
     priceUnit: `one-time · all six obligations sorted · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
     body:
-      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share I apply every change with you — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 11 December 2026.",
+      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share I apply every change with you — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 10 December 2026.",
     bullets: [
       "All six obligations — privacy policy, breach plan, email security, login security, data mapping, AI disclosure",
       "90-minute working call — I apply every change with you, on screen",
@@ -128,7 +128,7 @@ const SIX_OBLIGATIONS: { title: string; body: string }[] = [
   },
   {
     title: "AI + automated tools disclosure",
-    body: "If you use AI on customer info, you have to say so in your privacy policy. New rule, 11 December 2026.",
+    body: "If you use AI on customer info, you have to say so in your privacy policy. New rule, 10 December 2026.",
   },
 ];
 
@@ -138,8 +138,8 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        eyebrow="Australian Privacy Law · Deadline 11 December 2026"
-        tagline="New privacy rules. Real fines. Anyone can sue you today. Does your business know where it stands?"
+        eyebrow="Australian Privacy Law · Deadline 10 December 2026"
+        tagline="New privacy rules. Real fines. An affected person can sue you today. Does your business know where it stands?"
         trust={
           <>
             Personally reviewed · Australian-owned · ABN 34 318 502 254 · Own scan &amp; evidence pack published
@@ -161,9 +161,9 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Since June 2025, anyone affected can sue your business directly for a serious
-          privacy breach — no regulator queue, and your insurer may refuse to cover it.
-          From 11 December 2026, six new obligations land on top (with fines up to AU$50M
+          Since 10 June 2025, an individual whose data you seriously mishandle can sue your
+          business directly — no regulator queue, and your insurer may refuse to cover it.
+          From 10 December 2026, six new obligations land on top (with fines up to AU$50M
           for the worst cases). I&apos;ll sort the lot in one call, before the deadline.
         </p>
 
@@ -261,9 +261,22 @@ export default function Home() {
                 margin: "0 auto",
               }}
             >
-              From 11 December 2026, Australian privacy law puts real obligations on
-              small businesses for the first time. Here&apos;s what you&apos;re now
-              expected to have in place:
+              Six things regulators, insurers and courts now expect every Australian
+              business to have in place. Here&apos;s what that looks like:
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+                fontSize: "var(--fs-sm)",
+                color: "var(--dim)",
+                lineHeight: 1.7,
+                maxWidth: "var(--maxw-prose)",
+                margin: "14px auto 0",
+              }}
+            >
+              Health providers — clinic, allied health, pharmacy, any size — are
+              already covered by the Privacy Act. There is no small-business
+              exemption for health.
             </p>
           </div>
 
@@ -357,8 +370,8 @@ export default function Home() {
             >
               Miss any of it and you could be <strong style={{ color: "#ff8f78" }}>fined,
               sued directly, or find your insurer won&apos;t cover you</strong> after a breach.
-              Since June 2025, anyone can already take you to court for a serious privacy
-              breach — no regulator queue needed.
+              Since 10 June 2025, an individual affected can already take you to court for a
+              serious privacy breach — no regulator queue needed.
             </p>
           </div>
 
@@ -384,6 +397,32 @@ export default function Home() {
               Most owners have no time to become an expert and no clue where to start.
               That&apos;s exactly what I&apos;m for — one operator, one call, all six
               sorted with you in plain English, before the deadline.
+            </p>
+          </div>
+
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "18px auto 0",
+              background: "rgb(var(--gold-rgb) / 0.06)",
+              border: "1px solid var(--gold-dim)",
+              padding: "18px 22px",
+              borderRadius: "var(--radius-md)",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "var(--fs-body)",
+                color: "var(--ice)",
+                lineHeight: 1.7,
+                margin: 0,
+              }}
+            >
+              <strong style={{ color: "var(--gold)" }}>LIVE NOW — the regulator is now checking
+              proactively.</strong> Since January 2026 the OAIC has run compliance sweeps across
+              sectors including real estate, pharmacies, and licensed venues — examining
+              businesses before any complaint is made. &ldquo;We&apos;ve had no problems&rdquo;
+              is no longer the same as &ldquo;we won&apos;t be looked at.&rdquo;
             </p>
           </div>
         </div>
@@ -568,7 +607,7 @@ export default function Home() {
             {[
               {
                 q: "Is my small business even affected?",
-                a: "If you hold any customer information — names, emails, phone numbers, health data, payment records — yes. The old $3M turnover exemption is being removed. And the direct-lawsuit right is already live for everyone, regardless of size.",
+                a: "If you hold any customer information — names, emails, phone numbers, health data, payment records — yes. The $3M turnover exemption is positioned to be removed in the second reform tranche. And the direct-lawsuit tort already applies to businesses of any size, regardless of that exemption.",
               },
               {
                 q: "I&apos;m not technical — can I actually do this?",
