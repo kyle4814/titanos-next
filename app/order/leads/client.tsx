@@ -161,11 +161,51 @@ export default function OrderLeadsClient() {
         />
 
         <Field
+          label="Approximate volume you're after"
+          name="scope_volume"
+          placeholder="e.g. 250 contacts, or 1,000/month ongoing"
+        />
+
+        <div>
+          <label
+            htmlFor="order-scope_intended_use"
+            style={{
+              color: "var(--ice)",
+              fontSize: "var(--fs-sm)",
+              fontWeight: 500,
+              display: "block",
+              marginBottom: 6,
+            }}
+          >
+            Intended use
+          </label>
+          <select
+            id="order-scope_intended_use"
+            name="scope_intended_use"
+            defaultValue="email"
+            style={{
+              width: "100%",
+              background: "var(--vault-bg, #0a0a0a)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-sm)",
+              padding: "11px 13px",
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              boxSizing: "border-box",
+            }}
+          >
+            <option value="email">Email outreach</option>
+            <option value="calling">Calling</option>
+            <option value="both">Both email and calling</option>
+          </select>
+        </div>
+
+        <Field
           label="What should they do? (Your ideal use case in 1–2 sentences)"
           name="scope_use_case"
           as="textarea"
           rows={3}
-          placeholder="e.g. Book a discovery call with our compliance team. We work with Allied Health businesses…"
+          placeholder="e.g. Book a discovery call with the compliance team. Targeting Allied Health businesses…"
         />
 
         <Field
