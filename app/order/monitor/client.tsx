@@ -1,10 +1,16 @@
 "use client";
 
 import OrderForm, { Field } from "@/components/OrderForm";
+import { DISPLAY, PRICING } from "@/lib/pricing";
 
 const PLANS = [
-  { value: "monthly", label: "Monthly — $299/mo" },
-  { value: "annual", label: "Annual — $199/mo (save $1,200/yr)" },
+  { value: "monthly", label: `Monthly — ${DISPLAY.MONITOR_MONTHLY}` },
+  {
+    value: "annual",
+    label: `Annual — ${DISPLAY.MONITOR_ANNUAL} (save AU$${
+      PRICING.MONITOR_MONTHLY * 12 - PRICING.MONITOR_ANNUAL
+    }/yr)`,
+  },
 ];
 
 export default function OrderMonitorClient() {

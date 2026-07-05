@@ -19,6 +19,9 @@
  */
 
 export const PRICING = {
+  // --- free scan ---
+  FREE_SCAN: 0,
+
   // --- recurring engines ---
   MONITOR_MONTHLY: 149,
   MONITOR_ANNUAL: 1490,
@@ -34,6 +37,7 @@ export const PRICING = {
   // entry point; quoted by scope from the call) → Ops Retainer (post-build
   // only — I won't maintain what I didn't build).
   // Decided 2026-06-21; re-confirmed 2026-06-23.
+  AI_PILOT_FLOOR: 1500,
   AI_BUILD_FLOOR: 9997,
   AI_OPS_RETAINER_LOW: 990,
   AI_OPS_RETAINER_HIGH: 1990,
@@ -86,10 +90,13 @@ export function formatRange(low: number, high: number): string {
 // Keep these centralised so a price bump flows everywhere on next build.
 
 export const DISPLAY = {
+  FREE_SCAN_PRICE: formatAUD(PRICING.FREE_SCAN),
   MONITOR_MONTHLY: formatMonthly(PRICING.MONITOR_MONTHLY),
   MONITOR_ANNUAL: formatAnnual(PRICING.MONITOR_ANNUAL),
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
+  AI_PILOT_FLOOR: `From ${formatAUD(PRICING.AI_PILOT_FLOOR)}`,
   AI_BUILD_FLOOR: `From ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
+  AI_LADDER_ENTRY: `Pilots from ${formatAUD(PRICING.AI_PILOT_FLOOR)} · full builds from ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
   AI_OPS_RETAINER: `${formatRange(PRICING.AI_OPS_RETAINER_LOW, PRICING.AI_OPS_RETAINER_HIGH)}/mo`,
   LEADS_STARTER: formatAUD(LEADS.STARTER.price),
   LEADS_GROWTH: formatAUD(LEADS.GROWTH.price),

@@ -30,6 +30,7 @@ export type Offer = {
   secondary: { label: string; href: string };
   icon: "radar" | "shield" | "sparkles" | "users";
   index: number;
+  footnote?: string;
 };
 
 const iconMap = {
@@ -105,6 +106,7 @@ export default function OfferCard(props: Offer) {
         padding: "clamp(22px, 5vw, 32px) clamp(20px, 4vw, 28px)",
         display: "flex",
         flexDirection: "column",
+        height: "100%",
         position: "relative",
         zIndex: 1,
         // 3D tilt + soft shadow that tilts with the card.
@@ -187,7 +189,6 @@ export default function OfferCard(props: Offer) {
           fontSize: "var(--fs-body)",
           lineHeight: 1.7,
           margin: "14px 0 18px",
-          flexGrow: 1,
         }}
       >
         {props.body}
@@ -196,7 +197,7 @@ export default function OfferCard(props: Offer) {
       <ul
         style={{
           listStyle: "none",
-          margin: "0 0 22px 0",
+          margin: "0 0 14px 0",
         }}
       >
         {props.bullets.map((b) => (
@@ -226,7 +227,22 @@ export default function OfferCard(props: Offer) {
         ))}
       </ul>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
+      {props.footnote && (
+        <p
+          style={{
+            color: "var(--text)",
+            fontSize: "var(--fs-xs)",
+            lineHeight: 1.6,
+            fontStyle: "italic",
+            margin: "0 0 18px 0",
+            opacity: 0.85,
+          }}
+        >
+          {props.footnote}
+        </p>
+      )}
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start", marginTop: "auto" }}>
         <AnimatedButton
           href={props.primary.href}
           external={props.primary.external}

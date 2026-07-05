@@ -35,7 +35,7 @@ const LINKS = [
   // Our Scan / About remain in the mobile drawer + footer to keep desktop tight
   // when the Leads door joins.
   { label: "Methodology", href: "/methodology", external: false },
-  { label: "Our Scan", href: "/our-scan", external: false },
+  { label: "Our Scan", href: "/scan#self-scan", external: false },
   { label: "About", href: "/about", external: false },
   {
     label: "Book a call",

@@ -89,7 +89,7 @@ export default function MonitorPage() {
       <PageHero
         badge="TITANOS MONITOR · RECURRING"
         title="Your business's security gaps change every month. Most owners find out when something breaks."
-        tagline={`Titanos Monitor finds out first — a fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, any time.`}
+        tagline={`Titanos Monitor finds out first — a fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, guilt-free, any time.`}
         sub="Same engine as the free check, run on a schedule, with a month-over-month summary and vulnerability alerts matched to your software versions. Plain-English email to your inbox. No dashboard. No contract. No retention call."
         trustLine={
           <>
@@ -117,7 +117,7 @@ export default function MonitorPage() {
           ENQUIRE FIRST →
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
-          Cancel any time from the billing portal — one click, no email, no retention call.
+          Cancel any time from the billing portal — one click, guilt-free. No email, no retention call.
         </p>
       </PageHero>
 

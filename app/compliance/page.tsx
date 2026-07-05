@@ -61,7 +61,7 @@ const THREAD_STEPS: ThreadStep[] = [
   {
     num: "III",
     title: "90-Minute Implementation Call",
-    body: "Screen-shared working session. We apply changes live: SPF / DKIM / DMARC / CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
+    body: "Screen-shared working session. I apply changes live: SPF / DKIM / DMARC / CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
   },
   {
     num: "IV",
@@ -71,7 +71,7 @@ const THREAD_STEPS: ThreadStep[] = [
   {
     num: "V",
     title: "30-Day Review Call + Attestation",
-    body: "We audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed letter you can hand to a regulator, insurer, or enterprise client stating exactly what was checked and fixed against the Australian government’s baseline security checklist (Essential Eight, Maturity Level 1), plus a Privacy Act compliance posture letter.",
+    body: "I audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed letter you can hand to a regulator, insurer, or enterprise client stating exactly what was checked and fixed against the Australian government’s baseline security checklist (Essential Eight, Maturity Level 1), plus a Privacy Act compliance posture letter.",
   },
   {
     num: "VI",
@@ -145,7 +145,7 @@ const INCLUDED = [
   "Login security hardening applied with you (Microsoft 365 / Google Workspace security defaults + MFA across your team)",
   "Vendor risk register — a one-page record of every third-party service touching your customer data, so you know exactly what you hold and where it lives",
   "AI + automated tools disclosure added to your privacy policy — the new rule: if you use AI on customer info, you have to say so",
-  "90-minute implementation working call — we apply all six together on a screen-share, no PDF-only hand-off",
+  "90-minute implementation working call — I apply all six with you on a screen-share, no PDF-only hand-off",
   "Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1) — the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints — those are decided on the facts of an incident)",
   "30-day review call to re-audit anything that drifted, then sign the attestation",
   "13-section evidence pack documenting all of the above (~17pp) — proof of work for your insurer or regulator",
@@ -160,7 +160,7 @@ export default function CompliancePage() {
     "@type": "Product",
     name: "Titanos AU Privacy Act + Essential Eight Compliance — Done With You",
     description:
-      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 12 months of regulatory update briefings.",
+      "Done-with-you compliance engagement for Australian SMBs facing the 11 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 3 months of Titanos Monitor included free.",
     brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
     offers: {
       "@type": "Offer",
@@ -188,9 +188,9 @@ export default function CompliancePage() {
         // Fix 3a — plain-English SMB-owner hero. The audit moved the
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
-        title="From December 2026, Australian privacy law puts six obligations on your business — and most owners only know about one of them. I sort all six with you in one working call, before the deadline."
-        tagline={`One fixed-price engagement: I diagnose your gaps, write your documents, and we apply every change together on a 90-minute screen-share. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
-        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off."
+        title="Six Privacy Act obligations. One working call. Sorted before 11 December 2026."
+        tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
+        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. If you handle health information — clinic, allied health, practice of any size — the Privacy Act already covers you. There is no small-business exemption for health providers."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -219,7 +219,7 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)" }}>
-          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+          Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
       </PageHero>
 
@@ -243,6 +243,79 @@ export default function CompliancePage() {
       {/* Fix 4 — slot-based scarcity block under the hero */}
       <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
         <SlotScarcity variant="block" />
+      </SectionReveal>
+
+      {/* WHAT HAPPENS ON THE CALL — day-1 snapshot before pressure points */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="What Happens on the Call"
+            lead="90 minutes. Screen-share. I apply every change with you, live — not a PDF you have to figure out later."
+          />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: 14,
+            }}
+          >
+            {[
+              { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business — in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting." },
+              { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations — done by the end of the call, not homework for later." },
+              { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified — a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
+              { n: "4", title: "3 months of Titanos Monitor, free", body: `Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then ${DISPLAY.MONITOR_MONTHLY} only if you choose to continue — and I'll flag anything new that needs attention.` },
+            ].map((r) => (
+              <div
+                key={r.n}
+                style={{
+                  border: "1px solid var(--gold-dim)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "18px 22px",
+                  background: "var(--card)",
+                  display: "flex",
+                  gap: 16,
+                  alignItems: "flex-start",
+                }}
+              >
+                <span
+                  style={{
+                    flexShrink: 0,
+                    width: 34,
+                    height: 34,
+                    borderRadius: 999,
+                    background: "linear-gradient(90deg, var(--gold-warm), var(--gold))",
+                    color: "var(--vault-black)",
+                    fontFamily: "var(--font-display), Georgia, serif",
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {r.n}
+                </span>
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display), Georgia, serif",
+                      color: "var(--gold)",
+                      fontSize: "var(--fs-body)",
+                      letterSpacing: "0.02em",
+                      marginBottom: 6,
+                    }}
+                  >
+                    {r.title}
+                  </div>
+                  <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.65, margin: 0 }}>
+                    {r.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </SectionReveal>
 
       <div className="divider-gold" />
@@ -324,7 +397,7 @@ export default function CompliancePage() {
           >
             <SplitCol
               title="You Control"
-              sub="We apply these together on the working call."
+              sub="I apply these with you on the working call."
               items={YOU_CONTROL}
               accent="gold"
               prefix="✓"
@@ -347,7 +420,7 @@ export default function CompliancePage() {
         <div className="container-vault">
           <SectionHeading
             title="One Engagement · Done With You"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where we apply the changes together on a 90-minute working call — and I stay with you for 12 months of regulatory briefings and quarterly re-scans."
+            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — and I stay with you for 3 months of monitoring and re-scans, with a plain-English briefing whenever the rules move during that window."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
           <div style={{ textAlign: "center", marginBottom: 18 }}>
@@ -437,8 +510,8 @@ export default function CompliancePage() {
                   }}
                 >
                   Drafting before the call · 90-min implementation working call ·
-                  30-day review + attestation signed · 12 months of regulatory
-                  briefings + quarterly re-scans. Not 90 minutes total — 90 minutes
+                  30-day review + attestation signed · 3 months of monitoring
+                  + quarterly re-scans. Not 90 minutes total — 90 minutes
                   is the central session.
                 </span>
               </div>
@@ -457,7 +530,7 @@ export default function CompliancePage() {
                 Everything you need to demonstrate &ldquo;reasonable steps&rdquo; under the
                 Privacy Act and the Australian government&apos;s baseline security
                 checklist (Essential Eight, Maturity Level 1), applied together
-                with you in a single working call — then maintained for 12 months.
+                with you in a single working call — then maintained for the 3-month monitoring window.
               </p>
               <ul
                 style={{
@@ -520,7 +593,7 @@ export default function CompliancePage() {
                 </a>
               </p>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "6px auto 0" }}>
-                Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+                Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
               </p>
             </article>
           </div>
@@ -571,7 +644,7 @@ export default function CompliancePage() {
           <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How the working call works">
-              A single 90-minute video call where we apply the changes together. You share screen
+              A single 90-minute video call where I apply the changes with you. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
               CMS. I walk you through each change as you make it — no opaque hand-offs, no
               "I’ll send you instructions and check back next week." By the end of the call, the
@@ -611,8 +684,8 @@ export default function CompliancePage() {
             </FaqItem>
             <FaqItem question="I use Microsoft 365 — do you cover that?">
               Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes
-              that satisfy most Essential Eight Maturity Level 1 requirements. We apply these
-              together on the 90-minute working call — typically a 15-minute admin sequence
+              that satisfy most Essential Eight Maturity Level 1 requirements. I apply these
+              with you on the 90-minute working call — typically a 15-minute admin sequence
               covering MFA, conditional access, and audit logging.
             </FaqItem>
             <FaqItem question="Is the monthly fee mandatory?">
@@ -655,7 +728,7 @@ export default function CompliancePage() {
               everything built to that point plus a refund of any unearned milestone. You are
               never left holding a half-finished pack.
             </FaqItem>
-            <FaqItem question="How fast can we get this done?">
+            <FaqItem question="How fast can this get done?">
               External scan within 48 hours of purchase. Working call scheduled inside 7 days.
               30-day review call scheduled at the working call. Quarterly re-scans recur for the
               life of the monitoring subscription.
@@ -742,7 +815,7 @@ export default function CompliancePage() {
           </a>
         </p>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", margin: "6px auto 0" }}>
-          Stripe checkout · 14-day refund if no work delivered · I respond personally within 1 business day
+          Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
         <p
           style={{

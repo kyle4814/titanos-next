@@ -25,7 +25,6 @@ const LINES: Array<{ kind: "cmd" | "out" | "ok" | "warn"; text: string }> = [
   { kind: "out",  text: "  443/tcp   open   ssl/http  nginx 1.18.0  (TLSv1.3 OK · cert 41d to expiry)" },
   { kind: "warn", text: "  3306/tcp  open   mysql     MySQL 5.7.42  -> EOL Oct 2023, unsupported, public CVEs apply" },
   { kind: "warn", text: "  21/tcp    open   ftp       vsftpd        -> cleartext auth, exposed to public internet" },
-  { kind: "ok",   text: "  -> 90-day responsible-disclosure window opened" },
 ];
 
 export default function TerminalSnippet() {
