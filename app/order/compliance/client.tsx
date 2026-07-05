@@ -1,6 +1,7 @@
 "use client";
 
 import OrderForm, { Field } from "@/components/OrderForm";
+import { DISPLAY } from "@/lib/pricing";
 
 const SIZES = [
   "1–5 people",
@@ -118,7 +119,7 @@ export default function OrderComplianceClient() {
       <OrderForm
         orderType="compliance"
         heading="Privacy Act Compliance — Enquiry"
-        subheading="Privacy Act compliance done with you in one working call. AU$5,997 one-time. Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued."
+        subheading={`Privacy Act compliance done with you in one working call. ${DISPLAY.PACK_PRICE} one-time. Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued.`}
         submitLabel="SUBMIT COMPLIANCE ORDER →"
         successMessage="Received. I'll review your scope and send an invoice within 1 business day. Pay by card via Stripe when you're ready."
       >

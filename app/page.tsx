@@ -14,7 +14,7 @@ const offers: Offer[] = [
   {
     tag: "Door 01 · Free",
     title: "Free Security Check",
-    price: "AU$0",
+    price: DISPLAY.FREE_SCAN_PRICE,
     priceUnit: "no card · report in your inbox within 1 business day",
     body:
       "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it. No login, no credit card, no drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever. Just a clear picture of where your business actually stands — the same check I'd run on a paying client, so you can see the quality before you spend a cent.",
@@ -576,14 +576,14 @@ export default function Home() {
               },
               {
                 q: "Why you and not a lawyer or a big firm?",
-                a: "A privacy lawyer will write you a policy for AU$3–5k and won&apos;t touch your DNS, MFA or email records. A big firm like Vanta runs AU$18k+ a year and is shaped for US SOC 2, not the AU Privacy Act. I sort all six obligations, live, for one fixed AU$5,997 — and I personally review every deliverable before it reaches you.",
+                a: `A privacy lawyer will write you a policy for AU$3–5k and won&apos;t touch your DNS, MFA or email records. A big firm like Vanta runs AU$18k+ a year and is shaped for US SOC 2, not the AU Privacy Act. I sort all six obligations, live, for one fixed ${DISPLAY.PACK_PRICE} — and I personally review every deliverable before it reaches you.`,
               },
               {
                 q: "What if I do nothing?",
                 a: "You&apos;re betting that no customer, ex-employee or contractor ever sues you, and no breach ever forces you to notify. If either happens without documented reasonable steps, your insurer can walk away and the regulator has a clear paper trail against you.",
               },
               {
-                q: "Is AU$5,997 worth it versus DIY?",
+                q: `Is ${DISPLAY.PACK_PRICE} worth it versus DIY?`,
                 a: "DIY is possible if you have the weekends and the stomach for reading the OAIC guidance. Most owners don&apos;t. The pack collapses the reading, drafting, DNS work, admin-console changes and evidence pack into one working call. If you&apos;d rather DIY, my free scan and methodology page give you the map for free — no upsell.",
               },
             ].map((f) => (

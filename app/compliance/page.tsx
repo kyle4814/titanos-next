@@ -265,7 +265,7 @@ export default function CompliancePage() {
               { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business — in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting." },
               { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations — done by the end of the call, not homework for later." },
               { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified — a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
-              { n: "4", title: "3 months of Titanos Monitor, free", body: "Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then AU$149/mo only if you choose to continue — and I'll flag anything new that needs attention." },
+              { n: "4", title: "3 months of Titanos Monitor, free", body: `Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then ${DISPLAY.MONITOR_MONTHLY} only if you choose to continue — and I'll flag anything new that needs attention.` },
             ].map((r) => (
               <div
                 key={r.n}

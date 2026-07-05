@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import { DISPLAY, PRICING } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Terms of Service — TITANOS",
@@ -52,12 +53,12 @@ export default function TermsPage() {
 
           <H2>Paid engagements</H2>
           <p>
-            Privacy Act + Essential Eight Compliance (AU$5,997 one-time, with 3 months of
-            Titanos Monitor included; Monitor continues at AU$149/mo only on explicit
-            opt-in — no auto-charge): a single done-with-you engagement that includes the
-            deliverables described on the compliance page at the time of purchase. AI
-            Implementation and Leads engagements are scoped, quoted in a signed Statement of
-            Work, and billed per that SOW.
+            Privacy Act + Essential Eight Compliance ({DISPLAY.PACK_PRICE} one-time, with{" "}
+            {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included; Monitor
+            continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in — no auto-charge): a
+            single done-with-you engagement that includes the deliverables described on the
+            compliance page at the time of purchase. AI Implementation and Leads engagements are
+            scoped, quoted in a signed Statement of Work, and billed per that SOW.
           </p>
 
           <H2>Refunds</H2>

@@ -2,11 +2,12 @@
 
 import { useSearchParams } from "next/navigation";
 import OrderForm, { Field } from "@/components/OrderForm";
+import { DISPLAY } from "@/lib/pricing";
 
 const TIERS = [
-  { value: "pilot", label: "Automation Pilot — from AU$1,500 (one task, fixed scope)" },
-  { value: "build", label: "Full Build — from AU$9,997 (full custom AI system)" },
-  { value: "retainer", label: "Ops Retainer — AU$990–1,990/mo (post-build only)" },
+  { value: "pilot", label: `Automation Pilot — ${DISPLAY.AI_PILOT_FLOOR} (one task, fixed scope)` },
+  { value: "build", label: `Full Build — ${DISPLAY.AI_BUILD_FLOOR} (full custom AI system)` },
+  { value: "retainer", label: `Ops Retainer — ${DISPLAY.AI_OPS_RETAINER} (post-build only)` },
   { value: "not_sure", label: "Not sure yet — start with the free scoping call" },
 ];
 
@@ -94,8 +95,8 @@ export default function OrderAiClient() {
     : "AI Implementation — Enquiry";
 
   const subheading = isPilot
-    ? "Tell Kyle the single manual task you want automated as a fixed-scope pilot (from AU$1,500). He confirms scope and sends an invoice; you see it working before committing to anything bigger."
-    : "Tell Kyle what manual task is eating your team's week. He scopes the rung that fits — pilot from AU$1,500, full build from AU$9,997 — and sends an invoice.";
+    ? `Tell Kyle the single manual task you want automated as a fixed-scope pilot (${DISPLAY.AI_PILOT_FLOOR}). He confirms scope and sends an invoice; you see it working before committing to anything bigger.`
+    : `Tell Kyle what manual task is eating your team's week. He scopes the rung that fits — pilot ${DISPLAY.AI_PILOT_FLOOR.toLowerCase()}, full build ${DISPLAY.AI_BUILD_FLOOR.toLowerCase()} — and sends an invoice.`;
 
   return (
     <main

@@ -19,6 +19,9 @@
  */
 
 export const PRICING = {
+  // --- free scan ---
+  FREE_SCAN: 0,
+
   // --- recurring engines ---
   MONITOR_MONTHLY: 149,
   MONITOR_ANNUAL: 1490,
@@ -87,6 +90,7 @@ export function formatRange(low: number, high: number): string {
 // Keep these centralised so a price bump flows everywhere on next build.
 
 export const DISPLAY = {
+  FREE_SCAN_PRICE: formatAUD(PRICING.FREE_SCAN),
   MONITOR_MONTHLY: formatMonthly(PRICING.MONITOR_MONTHLY),
   MONITOR_ANNUAL: formatAnnual(PRICING.MONITOR_ANNUAL),
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
