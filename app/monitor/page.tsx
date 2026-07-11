@@ -226,7 +226,7 @@ export default function MonitorPage() {
                 background: "var(--card)",
                 border: "1px solid var(--gold-dim)",
                 borderRadius: "var(--radius-md)",
-                padding: "44px 38px",
+                padding: "clamp(26px, 14px + 3.5vw, 44px) clamp(20px, 10px + 3vw, 38px)",
                 textAlign: "center",
               }}
             >

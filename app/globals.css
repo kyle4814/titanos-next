@@ -565,6 +565,17 @@ button:focus-visible,
   .term-cursor { animation: none; opacity: 0.7; }
 }
 
+/* Long scan lines pan horizontally; the right-edge fade signals "more
+   this way" instead of looking cut off. Momentum scrolling on iOS. */
+.term-scroll {
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(90deg, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+}
+@media (max-width: 720px) {
+  .term-scroll { font-size: 12px; }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    SectionReveal — compositor-side reveal (see SectionReveal.tsx).
    Same 24px rise + fade the framer version had; CSS transition so a
@@ -625,6 +636,13 @@ button:focus-visible,
   }
 
   body { font-size: 16px; }
+
+  /* iOS zooms the page on focusing any input under 16px — pin the
+     floor. max() keeps larger inline sizes intact. */
+  input, textarea, select {
+    font-size: max(16px, 1em) !important;
+  }
+
   /* Trust bar: hide vertical dividers when items stack */
   .trust-bar > * { border-right: none !important; border-bottom: 1px solid rgb(var(--gold-rgb) / 0.10); }
   .trust-bar > *:last-child { border-bottom: none; }

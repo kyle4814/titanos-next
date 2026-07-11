@@ -97,7 +97,7 @@ export default function OrderForm({
           background: "var(--card)",
           border: "1px solid var(--ok)",
           borderRadius: "var(--radius-md)",
-          padding: "40px 32px",
+          padding: "var(--pad-card)",
           textAlign: "center",
         }}
       >
@@ -128,7 +128,7 @@ export default function OrderForm({
         background: "var(--card)",
         border: "1px solid var(--gold-dim)",
         borderRadius: "var(--radius-md)",
-        padding: "36px 32px",
+        padding: "var(--pad-card)",
         display: "flex",
         flexDirection: "column",
         gap: 18,
