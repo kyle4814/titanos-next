@@ -69,7 +69,7 @@ export default function SlotScarcity({ variant = "pill" }: Props) {
       </strong>
       , and that doesn&apos;t scale. Currently booking{" "}
       <strong style={{ color: "var(--gold)" }}>{SITE.CURRENT_BOOKING_MONTH}</strong>
-      . The closer 11 December gets, the more compressed the queue — and DNS
+      . The closer 10 December gets, the more compressed the queue — and DNS
       propagation, host escalations, and the 30-day review call don&apos;t
       compress.
     </div>

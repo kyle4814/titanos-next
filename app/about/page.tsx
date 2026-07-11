@@ -10,7 +10,7 @@ const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 export const metadata: Metadata = {
   title: "About — Kyle Deligny · TITANOS",
   description:
-    "Solo operator. ABN 34 318 502 254 (verifiable). AU privacy law compliance done with you. Free business security checks. 1,700+ checks run this month.",
+    "Solo operator. ABN 34 318 502 254 (verifiable). AU privacy law compliance done with you. Free business security checks. 1,700+ automated corpus scans this month.",
   alternates: { canonical: "https://titanos.tech/about" },
   openGraph: {
     title: "About — Kyle Deligny · Titanos",
@@ -95,7 +95,7 @@ export default function AboutPage() {
           >
             Three things. A free security check that shows what a hacker can see about your
             business — no payment, no sales funnel. A fixed-price Privacy Act compliance
-            engagement for AU small businesses preparing for the 11 December 2026 deadline.
+            engagement for AU small businesses preparing for the 10 December 2026 deadline.
             And AI implementation projects — I find the manual task eating your team&apos;s
             week and build the system that does it instead, quoted by scope after a free call.
           </p>
@@ -107,8 +107,8 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            The work is done by me with Claude Code, Anthropic&apos;s coding model, doing
-            the keystroke-level execution. I diagnose, plan, scope, sign off. The model
+            The work is done by me with Claude Code, Anthropic&apos;s agentic coding tool, doing
+            the keystroke-level execution. I diagnose, plan, scope, sign off. The tool
             ships. If the math is wrong, that&apos;s on me — and I&apos;m the one you talk
             to when it is.
           </p>
@@ -148,11 +148,11 @@ export default function AboutPage() {
               — government source of truth for ABN 34 318 502 254.
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "var(--gold)" }}>Our own scan:</strong>{" "}
-              <a href="/our-scan" style={{ color: "var(--ice)" }}>
-                titanos.tech/our-scan
+              <strong style={{ color: "var(--gold)" }}>My own scan:</strong>{" "}
+              <a href="/scan#self-scan" style={{ color: "var(--ice)" }}>
+                titanos.tech/scan
               </a>{" "}
-              — every finding from our self-scan, published in full.
+              — every finding from my self-scan, published in full.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Methodology:</strong>{" "}

@@ -32,7 +32,7 @@ export default function EasterEgg() {
       "color:#888;font-family:ui-monospace, monospace;font-size:11px"
     );
     console.log(
-      "%cBuilt by Kyle Deligny with Claude Code. 1,700+ external scans run this month.",
+      "%cBuilt by Kyle Deligny with Claude Code, Anthropic's agentic coding tool. 1,700+ automated corpus scans this month.",
       "color:#888;font-family:ui-monospace, monospace;font-size:11px"
     );
     /* eslint-enable no-console */

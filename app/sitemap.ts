@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${base}/leads`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${base}/ai-delivery`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -42,12 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${base}/methodology`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/our-scan`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,

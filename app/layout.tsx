@@ -8,6 +8,7 @@ import VaultBackground from "@/components/VaultBackground";
 import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
+import { DISPLAY } from "@/lib/pricing";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -78,8 +79,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 // SEO-03: description trimmed under 155 chars
-const META_DESCRIPTION =
-  "New Australian privacy law hits 11 December 2026 — six obligations, not one, and fines up to AU$50M. I sort all six with your business in one working call. AU$5,997.";
+const META_DESCRIPTION = `New Australian privacy law hits 10 December 2026 — six obligations, not one, and fines up to AU$50M. I sort all six with your business in one working call. ${DISPLAY.PACK_PRICE}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import { DISPLAY, PRICING } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Terms of Service — TITANOS",
@@ -52,14 +53,22 @@ export default function TermsPage() {
 
           <H2>Paid engagements</H2>
           <p>
-            Privacy Act + Essential Eight Compliance (AU$5,997 one-time, with 3 months of
-            Titanos Monitor included; Monitor continues at AU$149/mo only on explicit
-            opt-in — no auto-charge): a single done-with-you engagement that includes the
-            deliverables described on the compliance page at the time of purchase. AI
-            Implementation engagements are scoped, quoted in a signed Statement of Work, and
-            billed per that SOW. Refunds for one-time engagements are available for 14 days
-            after purchase if no deliverable has been issued; Monitor is cancellable any
-            time from the Stripe billing portal.
+            Privacy Act + Essential Eight Compliance ({DISPLAY.PACK_PRICE} one-time, with{" "}
+            {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included; Monitor
+            continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in — no auto-charge): a
+            single done-with-you engagement that includes the deliverables described on the
+            compliance page at the time of purchase. AI Implementation and Leads engagements are
+            scoped, quoted in a signed Statement of Work, and billed per that SOW.
+          </p>
+
+          <H2>Refunds</H2>
+          <p>
+            Compliance engagements: a full refund is available within 14 days of payment,
+            provided no deliverable has been issued. Once any deliverable has been issued,
+            the engagement is underway and these standard terms apply. Titanos Monitor:
+            cancel any time; no refunds are issued for the current billing period, and no
+            further charges are made after cancellation. AI implementation and Leads
+            engagements: refund terms are stated in the written scope issued before payment.
           </p>
 
           <H2>Responsible disclosure</H2>
@@ -71,7 +80,7 @@ export default function TermsPage() {
 
           <H2>Liability</H2>
           <p>
-            Titanos provides services on a reasonable-skill-and-care basis. Our maximum
+            Titanos provides services on a reasonable-skill-and-care basis. My maximum
             aggregate liability for any single engagement is limited to the fees paid by you
             under that engagement. Nothing in these terms excludes liability where it cannot
             legally be excluded under Australian Consumer Law.

@@ -9,7 +9,7 @@ const LINKS = [
   { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Leads & Intelligence", href: "/leads", external: false },
   { label: "Methodology", href: "/methodology", external: false },
-  { label: "Our scan", href: "/our-scan", external: false },
+  { label: "Our scan", href: "/scan#self-scan", external: false },
   { label: "Evidence pack", href: "/our-evidence-pack", external: false },
   { label: "About", href: "/about", external: false },
   {
@@ -82,7 +82,7 @@ export default function Footer() {
             color: "var(--dim)",
           }}
         >
-          ABN 34 318 502 254 · titanos.tech · powered by Claude Code
+          ABN 34 318 502 254 · I personally review every deliverable before it reaches you · titanos.tech
         </div>
       </div>
     </footer>

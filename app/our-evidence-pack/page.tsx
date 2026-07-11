@@ -14,7 +14,7 @@ const REQUEST_HREF = "/scan#request";
 
 const META_TITLE = "What's in the Compliance Pack — TITANOS";
 const META_DESC =
-  "Before you pay for anything, see exactly what you get. This is our own 13-section security and compliance report -- run on our own business, published in full, lightly redacted. ABN 34 318 502 254.";
+  "Before you pay for anything, see exactly what you get. This is my own 13-section security and compliance report -- run on my own business, published in full, lightly redacted. ABN 34 318 502 254.";
 const SAMPLE_PDF = "/sample-evidence-pack-excerpt.pdf";
 
 export const metadata: Metadata = {
@@ -136,15 +136,15 @@ export default function OurEvidencePackPage() {
   return (
     <>
       <PageHero
-        badge="SEE WHAT YOU GET -- OUR OWN REPORT, PUBLISHED IN FULL"
+        badge="SEE WHAT YOU GET -- MY OWN REPORT, PUBLISHED IN FULL"
         title="Before you pay for anything, see exactly what you get."
-        tagline="This is our own security and compliance report -- run on our own business, published in full, with only customer names removed. Nothing glossy. Nothing hidden."
-        sub="17 pages covering our privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. The same report template every client receives -- applied to us first."
+        tagline="This is my own security and compliance report -- run on my own business, published in full, with only customer names removed. Nothing glossy. Nothing hidden."
+        sub="The single PDF an insurer, regulator, or enterprise procurement team asks for as proof of reasonable steps -- privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. 17 pages. Same template every client receives -- applied to my own business first."
         trustLine={
           <>
             Source:{" "}
-            <a href="/our-scan" style={{ color: "var(--ice)" }}>
-              titanos.tech/our-scan
+            <a href="/scan#self-scan" style={{ color: "var(--ice)" }}>
+              titanos.tech/scan
             </a>{" "}
             &middot;{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
@@ -192,12 +192,12 @@ export default function OurEvidencePackPage() {
             {
               icon: "02",
               heading: "You know what you are buying",
-              body: "Most security consultants describe the deliverable in bullet points. We publish the actual document so there is no gap between what you expect and what you receive.",
+              body: "Most security consultants describe the deliverable in bullet points. I publish the actual document so there is no gap between what you expect and what you receive.",
             },
             {
               icon: "03",
-              heading: "We hold ourselves to the same standard",
-              body: "If we ask clients to get their privacy policy right, their email fraud protection set up, and their breach plan documented -- we should be able to show ours first.",
+              heading: "I hold myself to the same standard",
+              body: "If I ask clients to get their privacy policy right, their email fraud protection set up, and their breach plan documented -- I should be able to show mine first.",
             },
           ].map((card) => (
             <article
@@ -262,7 +262,7 @@ export default function OurEvidencePackPage() {
             SAMPLE &middot; REDACTED &middot; REAL SCAN OF TITANOS.TECH
           </div>
           <p style={{ margin: "0 0 14px" }}>
-            This is a real security and compliance report run against our own
+            This is a real security and compliance report run against my own
             website and business. It is the same format every client receives --
             so you can see exactly what you are paying for before committing to
             anything.
@@ -444,14 +444,14 @@ export default function OurEvidencePackPage() {
             <FaqItem question="Why show your own report instead of a past client's?">
               Two reasons. First, client confidentiality -- publishing a client's security findings
               without their consent would be a privacy problem in itself. Second, credibility -- if
-              we ask clients to get their security and privacy right, showing that we have done it
-              for ourselves first is more honest than just claiming it.
+              I ask clients to get their security and privacy right, showing that I have done it
+              for myself first is more honest than just claiming it.
             </FaqItem>
             <FaqItem question="What happens after I see this and decide I want one for my business?">
               You book a 15-minute call to confirm the engagement is a fit, or you go straight to
               the compliance page and buy directly. After purchase: your domain gets scanned within
-              48 hours, the evidence pack is delivered within 3 business days, and we schedule the
-              90-minute working call where we apply every change together.
+              48 hours, the evidence pack is delivered within 3 business days, and I schedule the
+              90-minute working call where I apply every change with you.
             </FaqItem>
           </div>
         </div>

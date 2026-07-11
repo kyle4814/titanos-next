@@ -141,7 +141,7 @@ export default function ScanRequestForm() {
         >
           QUEUED.
         </div>
-        Your report lands in your inbox within 1 business day — sent personally,
+        Your report lands in your inbox within 2 business days — sent personally,
         not from a sequence.
       </div>
     );
@@ -230,7 +230,7 @@ export default function ScanRequestForm() {
           {status === "submitting" ? "Sending…" : "Request your free scan"}
         </button>
         <span style={{ color: "var(--dim)", fontSize: "var(--fs-xs)" }}>
-          Delivered within 1 business day.
+          Delivered within 2 business days.
         </span>
       </div>
 

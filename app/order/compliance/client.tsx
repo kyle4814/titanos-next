@@ -1,6 +1,7 @@
 "use client";
 
 import OrderForm, { Field } from "@/components/OrderForm";
+import { DISPLAY } from "@/lib/pricing";
 
 const SIZES = [
   "1–5 people",
@@ -36,7 +37,7 @@ const PLATFORMS = [
 ];
 
 const DRIVERS = [
-  "11 December 2026 deadline",
+  "10 December 2026 deadline",
   "Tender / government contract requirement",
   "Client / partner asked for it",
   "Data breach or near-miss",
@@ -118,9 +119,9 @@ export default function OrderComplianceClient() {
       <OrderForm
         orderType="compliance"
         heading="Privacy Act Compliance — Enquiry"
-        subheading="Privacy Act compliance done with you in one working call. $5,997 one-time. Kyle reviews this and sends your invoice within 1 business day."
+        subheading={`Privacy Act compliance done with you in one working call. ${DISPLAY.PACK_PRICE} one-time. Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued.`}
         submitLabel="SUBMIT COMPLIANCE ORDER →"
-        successMessage="Received. Kyle will review your scope and send a Stripe invoice within 1 business day. Pay when you're ready."
+        successMessage="Received. I'll review your scope and send an invoice within 1 business day. Pay by card via Stripe when you're ready."
       >
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * DeadlineCounter — live "X days remaining" pill until 11 Dec 2026
+ * DeadlineCounter — live "X days remaining" pill until 10 Dec 2026
  * Brisbane midnight.
  *
  * Refresh strategy:
@@ -17,7 +17,7 @@
 
 import { useEffect, useState } from "react";
 
-const TARGET = new Date("2026-12-11T00:00:00+10:00").getTime();
+const TARGET = new Date("2026-12-10T00:00:00+10:00").getTime();
 const DAY_MS = 86_400_000;
 
 function calc(): number {
@@ -98,7 +98,7 @@ export default function DeadlineCounter() {
       }}
       aria-live="polite"
     >
-      {days > 0 ? `${days} days` : "Deadline 11 Dec 2026"}
+      {days > 0 ? `${days} days` : "Deadline 10 Dec 2026"}
       {days > 0 && <span style={{ marginLeft: 4 }}>remaining</span>}
       <style>{`
         @media (max-width: 480px) {
