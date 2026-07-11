@@ -206,11 +206,14 @@ body::after {
   background-position: -1px -1px;
 }
 @media (max-width: 720px) {
+  /* Phones expose almost no background (content column ≈ 90% of the
+     viewport vs ~75% desktop) — the few slivers that DO show must
+     carry the whole "golden grid" impression, so they run ~3.5x
+     desktop alpha. Geometry stays 48px to match desktop exactly. */
   body::after {
     background-image:
-      linear-gradient(rgb(var(--gold-rgb) / 0.11) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--gold-rgb) / 0.11) 1px, transparent 1px);
-    background-size: 42px 42px;
+      linear-gradient(rgb(var(--gold-rgb) / 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--gold-rgb) / 0.16) 1px, transparent 1px);
   }
   /* Grain reads weaker on small screens too — nudge, don't blast
      (0.75 + screen blend was tried once and turned the page grey). */
