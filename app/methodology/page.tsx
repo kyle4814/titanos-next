@@ -249,7 +249,7 @@ export default function MethodologyPage() {
             }}
           >
             Free protective disclosure: a plain-text report emailed direct to your inbox from{" "}
-            <code>kyle@titanos.tech</code> within one business day. No signup. No portal to log
+            <code>kyle@titanos.tech</code> within 2 business days. No signup. No portal to log
             into. Reply to the email if you need the findings in a different format for your
             auditor.
           </p>

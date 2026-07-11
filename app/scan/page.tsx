@@ -19,12 +19,12 @@ const REQUEST_ANCHOR = "#request";
 export const metadata: Metadata = {
   title: "Free Business Security Check — TITANOS",
   description:
-    "Free check of what a hacker can see about your AU/NZ/SG business. Open ports, email security, certificates, known software vulnerabilities. Report in your inbox within 1 business day. ABN 34 318 502 254.",
+    "Free check of what a hacker can see about your AU/NZ/SG business. Open ports, email security, certificates, known software vulnerabilities. Report in your inbox within 2 business days. ABN 34 318 502 254.",
   alternates: { canonical: "https://titanos.tech/scan" },
   openGraph: {
     title: "Free Business Security Check — Titanos",
     description:
-      "See what a hacker can see about your business. No login. Report in your inbox within 1 business day. Personally reviewed, Australian-owned, ABN-verified.",
+      "See what a hacker can see about your business. No login. Report in your inbox within 2 business days. Personally reviewed, Australian-owned, ABN-verified.",
     type: "website",
     url: "https://titanos.tech/scan",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -56,7 +56,7 @@ const PROCESS = [
   {
     num: "IV",
     title: "Report delivered",
-    body: "Hosted HTML report linked from an email to your inbox — within 1 business day.",
+    body: "Hosted HTML report linked from an email to your inbox — within 2 business days.",
   },
   {
     num: "V",
@@ -147,7 +147,7 @@ export default function ScanPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "Security Assessment",
     description:
-      "Free check of what a hacker can see about your business from the public internet. Report emailed within 1 business day.",
+      "Free check of what a hacker can see about your business from the public internet. Report emailed within 2 business days.",
     areaServed: ["AU", "NZ", "SG"],
     offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
   };
@@ -162,7 +162,7 @@ export default function ScanPage() {
       <PageHero
         badge="FREE · NO LOGIN · NO CARD"
         title="Free Security Check for Your Business"
-        tagline="See what a hacker can see about your business. No login. Report in your inbox within 1 business day."
+        tagline="See what a hacker can see about your business. No login. Report in your inbox within 2 business days."
         sub="A plain-English report on every security gap visible from the public internet — open ports, expired certificates, email spoofing risks, known software weaknesses. No card. No drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever."
         trustLine={
           <>
@@ -379,7 +379,7 @@ export default function ScanPage() {
         <div className="container-vault">
           <SectionHeading
             title="Request Your Free Scan"
-            lead="Fill the form. Report lands in your inbox within 1 business day, sent personally. Prefer a call? Book a 15-min instead."
+            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer a call? Book a 15-min instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ScanRequestForm />
@@ -452,7 +452,7 @@ export default function ScanPage() {
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
-              within 1 business day. Most run faster than that — the SLA is just the worst-case
+              within 2 business days. Most run faster than that — the SLA is just the worst-case
               promise.
             </FaqItem>
             <FaqItem question="What if my domain is hosted on Squarespace / Webflow / GitHub Pages?">
@@ -510,7 +510,7 @@ export default function ScanPage() {
             lineHeight: 1.7,
           }}
         >
-          Personally reviewed, delivered within 1 business day. No card, no login required.
+          Personally reviewed, delivered within 2 business days. No card, no login required.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={REQUEST_ANCHOR} variant="primary">

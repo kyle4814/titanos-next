@@ -273,7 +273,7 @@ export default function MonitorPage() {
                   maxWidth: "var(--maxw-prose)",
                 }}
               >
-                Recurring AUD subscription via Stripe. First scan within 1 business day of
+                Recurring AUD subscription via Stripe. First scan within 2 business days of
                 subscribing. Same calendar date every month after that. Cancel any time
                 from the Stripe-hosted billing portal — one click, no retention call.
               </p>
@@ -343,7 +343,7 @@ export default function MonitorPage() {
               subscribing than pad findings.
             </FaqItem>
             <FaqItem question="How does the first month work?">
-              The first scan runs within 1 business day of you subscribing. That scan is your
+              The first scan runs within 2 business days of you subscribing. That scan is your
               baseline — the email tells you what you have exposed today, not a delta yet.
               From month two onward, every email is the delta.
             </FaqItem>
@@ -411,7 +411,7 @@ export default function MonitorPage() {
           }}
         >
           {DISPLAY.MONITOR_MONTHLY} or {DISPLAY.MONITOR_ANNUAL} annual. First scan within
-          one business day. Cancel any time — one click.
+          2 business days. Cancel any time — one click.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <MonitorCheckoutButton

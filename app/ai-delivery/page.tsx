@@ -13,7 +13,7 @@ const AI_BUILD_PRICE = DISPLAY.AI_BUILD_FLOOR.replace(/^From /, "");
 const AI_BUILD_FROM_LOWER = `from ${AI_BUILD_PRICE}`;
 
 const META_TITLE = `AI Implementation for Australian Small Business — From ${AI_BUILD_PRICE} | Titanos`;
-const META_DESC = `A working AI system built for your business, not a chatbot demo. Free 15-minute scoping call, fixed-price build ${AI_BUILD_FROM_LOWER}, personally reviewed and shipped by one operator.`;
+const META_DESC = `A working AI system built for your business, not a chatbot demo. Free 15-minute scoping call, pilot ${DISPLAY.AI_PILOT_FLOOR.toLowerCase()}, fixed-price build ${AI_BUILD_FROM_LOWER}, personally reviewed and shipped by one operator.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -67,11 +67,16 @@ const HOW_IT_WORKS: ThreadStep[] = [
   },
   {
     num: "III",
+    title: "Pilot",
+    body: `${DISPLAY.AI_PILOT_FLOOR}: one task, automated, running on your real work within two weeks. If it doesn't earn its keep, stop there — the full build only happens after the pilot proves itself.`,
+  },
+  {
+    num: "IV",
     title: "I build it",
     body: "Typically 2–4 weeks, depending on scope. Built with Claude Code, Anthropic's agentic coding tool, every system personally reviewed and tested by me before handover.",
   },
   {
-    num: "IV",
+    num: "V",
     title: "Handover, in plain English",
     body: "Documentation you can actually read, not a wiki nobody opens. You own what I build, no platform lock-in.",
   },
@@ -186,8 +191,12 @@ export default function AiDeliveryPage() {
             }}
           >
             <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", lineHeight: 1.7, marginBottom: 14 }}>
-              Build {AI_BUILD_FROM_LOWER}, fixed price, scoped on the call. No hourly rates,
-              no surprise invoices.
+              Pilot {DISPLAY.AI_PILOT_FLOOR.toLowerCase()}: one task, automated, running on your
+              real work within two weeks. If it doesn&apos;t earn its keep, stop there.
+            </p>
+            <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", lineHeight: 1.7, marginBottom: 14 }}>
+              Full build {AI_BUILD_FROM_LOWER}, fixed price, scoped on the call — only happens
+              after the pilot proves itself. No hourly rates, no surprise invoices.
             </p>
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
               Optional Ops Retainer, {DISPLAY.AI_OPS_RETAINER}: monitoring, iteration, and support after

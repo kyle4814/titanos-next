@@ -15,7 +15,7 @@ const offers: Offer[] = [
     tag: "Door 01 · Free",
     title: "Free Security Check",
     price: DISPLAY.FREE_SCAN_PRICE,
-    priceUnit: "no card · report in your inbox within 1 business day",
+    priceUnit: "no card · report in your inbox within 2 business days",
     body:
       "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it. No login, no credit card, no drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever. Just a clear picture of where your business actually stands — the same check I'd run on a paying client, so you can see the quality before you spend a cent.",
     bullets: [
@@ -112,7 +112,7 @@ const SIX_OBLIGATIONS: { title: string; body: string }[] = [
   },
   {
     title: "A plan for if you get hacked",
-    body: "You're now legally expected to have a written breach-response plan you can act on the day it happens.",
+    body: "You're now expected to have a written breach-response plan you can act on the day it happens.",
   },
   {
     title: "Email set up so scammers can't impersonate you",
@@ -178,7 +178,7 @@ export default function Home() {
             </AnimatedButton>
           </div>
           <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12 }}>
-            No card · No login · Report in your inbox within 1 business day
+            No card · No login · Report in your inbox within 2 business days
           </p>
         </div>
       </section>
@@ -696,7 +696,7 @@ export default function Home() {
           }}
         >
           See what a hacker can see about your business. Takes 1 minute to request.
-          Report lands in your inbox within a business day. Then decide what comes next.
+          Report lands in your inbox within 2 business days. Then decide what comes next.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/scan#request" variant="primary">
