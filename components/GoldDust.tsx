@@ -39,6 +39,18 @@ export default function GoldDust() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Canvas cannot parse CSS var() — the old fillStyle silently stayed
+    // black on the black canvas, so this layer has been an invisible
+    // rAF drain since the Vault rebuild. Resolve the token once.
+    const goldRgb = (
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--gold-rgb")
+        .trim() || "212 175 55"
+    )
+      .split(/\s+/)
+      .join(",");
+    const gold = (a: number) => `rgba(${goldRgb},${a})`;
+
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -87,7 +99,7 @@ export default function GoldDust() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgb(var(--gold-rgb) / ${p.o})`;
+        ctx.fillStyle = gold(p.o);
         ctx.fill();
       }
       raf = requestAnimationFrame(tick);

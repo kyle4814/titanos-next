@@ -48,28 +48,41 @@
   --ok:   #4ade80;
   --warn: #f87171;
 
-  /* ── SPACING ─────────────────────────────────────────────────── */
+  /* ── SPACING (fluid, 2026-07-11 mobile pass) ────────────────────
+     Every inline style consumes these vars, so fluidising the scale
+     here re-tunes the whole site's rhythm on phones without touching
+     a component. Small steps stay fixed (they're paddings/gaps that
+     read fine at any width); section-rhythm steps compress ~40% at
+     360px and hit the old desktop values at the ceiling. */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
   --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-30: 120px;
+  --space-8: clamp(24px, 2px + 3vw, 32px);
+  --space-12: clamp(32px, 8px + 4vw, 48px);
+  --space-16: clamp(40px, 16px + 4.5vw, 64px);
+  --space-20: clamp(48px, 16px + 6vw, 80px);
+  --space-30: clamp(64px, 40px + 5vw, 120px);
 
-  /* ── TYPE SCALE (2026-06-30 upgrade — body min 16px, real hierarchy) */
+  /* ── TYPE SCALE (fluid, 2026-07-11 mobile pass)
+     Desktop ceilings unchanged from the 2026-06-30 scale; floors let
+     the serif display breathe at 360px instead of towering over fixed
+     body text. Body never drops below 0.95rem (~15.2px) for
+     readability; form inputs pin 16px separately (iOS zoom). */
   --fs-xs: 0.8rem;
-  --fs-sm: 0.9rem;
-  --fs-body: 1.02rem;   /* ~16.3px min */
-  --fs-lg: 1.18rem;
-  --fs-h4: 1.35rem;
-  --fs-h3: 1.65rem;
+  --fs-sm: clamp(0.85rem, 0.82rem + 0.25vw, 0.9rem);
+  --fs-body: clamp(0.95rem, 0.9rem + 0.4vw, 1.02rem);
+  --fs-lg: clamp(1.05rem, 0.98rem + 0.55vw, 1.18rem);
+  --fs-h4: clamp(1.2rem, 1.1rem + 0.7vw, 1.35rem);
+  --fs-h3: clamp(1.4rem, 1.25rem + 1vw, 1.65rem);
   --fs-h2: clamp(1.85rem, 4.5vw, 2.75rem);
-  --fs-h1: clamp(2.5rem, 6vw, 4rem);
-  --fs-display: clamp(2.8rem, 9vw, 5.5rem);
+  --fs-h1: clamp(2rem, 6vw, 4rem);
+  --fs-display: clamp(2.2rem, 9vw, 5.5rem);
+
+  /* Card internal padding — swap-in var so the phone override below
+     can compress every card that adopts it. */
+  --pad-card: clamp(20px, 12px + 2.5vw, 32px) clamp(18px, 10px + 2vw, 28px);
 
   /* ── RADIUS ─────────────────────────────────────────────────── */
   --radius-sm: 3px;
@@ -552,6 +565,31 @@ button:focus-visible,
   .term-cursor { animation: none; opacity: 0.7; }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   SectionReveal — compositor-side reveal (see SectionReveal.tsx).
+   Same 24px rise + fade the framer version had; CSS transition so a
+   stalled main thread can't strand a section at opacity 0.
+   ═══════════════════════════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0, 0, 0.2, 1);
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+/* Reduced motion: settled from first paint, even before hydration. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* FAQ collapse */
 .faq-collapse {
   display: grid;
@@ -576,7 +614,16 @@ button:focus-visible,
    MOBILE POLISH (M-wave) — touch tactility + padding tightening
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
-  /* Tighter section padding on phones — desktop --space-30 is too much. */
+  /* Var-level overrides — the only lever that pierces inline styles. */
+  :root {
+    --radius-lg: 16px;
+  }
+  /* Display type: tighter tracking at small sizes — wide letter-spacing
+     tuned for 5rem reads gappy at 2.2rem. */
+  h1, .font-wordmark {
+    letter-spacing: 0.02em;
+  }
+
   body { font-size: 16px; }
   /* Trust bar: hide vertical dividers when items stack */
   .trust-bar > * { border-right: none !important; border-bottom: 1px solid rgb(var(--gold-rgb) / 0.10); }

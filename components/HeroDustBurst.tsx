@@ -55,6 +55,18 @@ export default function HeroDustBurst() {
     const parent = canvas.parentElement;
     if (!parent) return;
 
+    // Canvas cannot parse CSS var() — fillStyle silently stays black and
+    // addColorStop THROWS, which killed this whole burst one frame in
+    // (invisible since the Vault rebuild). Resolve the token once.
+    const goldRgb = (
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--gold-rgb")
+        .trim() || "212 175 55"
+    )
+      .split(/\s+/)
+      .join(",");
+    const gold = (a: number) => `rgba(${goldRgb},${a})`;
+
     const resize = () => {
       const rect = parent.getBoundingClientRect();
       canvas.width = rect.width * dpr;
@@ -114,7 +126,7 @@ export default function HeroDustBurst() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgb(var(--gold-rgb) / ${p.o * p.life * phaseAlpha})`;
+        ctx.fillStyle = gold(p.o * p.life * phaseAlpha);
         ctx.fill();
       }
 
@@ -122,8 +134,8 @@ export default function HeroDustBurst() {
       if (elapsed < 600) {
         const fade = 1 - elapsed / 600;
         const grad = ctx.createRadialGradient(cx(), cy(), 0, cx(), cy(), 120);
-        grad.addColorStop(0, `rgb(var(--gold-rgb) / ${0.55 * fade})`);
-        grad.addColorStop(1, "rgb(var(--gold-rgb) / 0)");
+        grad.addColorStop(0, gold(0.55 * fade));
+        grad.addColorStop(1, gold(0));
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
       }

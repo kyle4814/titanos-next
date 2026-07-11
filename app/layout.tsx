@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";
 import VaultBackground from "@/components/VaultBackground";
+import GoldDust from "@/components/GoldDust";
 import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
@@ -173,6 +174,10 @@ export default function RootLayout({
             via VaultBackground). VaultBackground also handles tab-hidden
             pause for battery / politeness. */}
         <VaultBackground />
+        {/* Ambient gold dust — built in the Vault rebuild but never
+            mounted; wired in 2026-07-11 (canvas colour bug fixed same
+            day). 30 particles, fixed layer, reduced-motion bails. */}
+        <GoldDust />
         <VaultFrame playEntrance={true} />
         <CursorTrail />
         {/* W4 Pillar 5 — gold edge thread (always-visible left edge) */}
