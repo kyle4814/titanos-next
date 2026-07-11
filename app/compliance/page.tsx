@@ -56,7 +56,7 @@ const THREAD_STEPS: ThreadStep[] = [
   {
     num: "II",
     title: "Evidence Pack",
-    body: "Within 3 business days I send your evidence pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified vs what you affirmed. Regulator-ready as a single PDF.",
+    body: "Within 3 business days I send your draft pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified vs what you affirmed. The final evidence pack — with everything we applied together — lands within 24 hours of the working call, regulator-ready as a single PDF.",
   },
   {
     num: "III",
@@ -89,7 +89,7 @@ const THREAD_STEPS: ThreadStep[] = [
 const TIMELINE = [
   {
     when: "LIVE NOW",
-    title: "An affected person can take you to court directly",
+    title: "Your customers can sue you directly",
     body: "Since 10 June 2025, an individual whose data you seriously mishandle can sue you under the new privacy tort — no regulator, no OAIC queue. It applies even if your turnover currently exempts you from the rest of the Act.",
     state: "live",
   },

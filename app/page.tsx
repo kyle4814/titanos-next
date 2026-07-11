@@ -139,7 +139,7 @@ export default function Home() {
       <HeroEntrance
         wordmark="TITANOS"
         eyebrow="Australian Privacy Law · Deadline 10 December 2026"
-        tagline="New privacy rules. Real fines. An affected person can sue you today. Does your business know where it stands?"
+        tagline="New privacy rules. Real fines. Your customers can now sue you directly. Does your business know where it stands?"
         trust={
           <>
             Personally reviewed · Australian-owned · ABN 34 318 502 254 · Own scan &amp; evidence pack published
@@ -161,10 +161,11 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Since 10 June 2025, an individual whose data you seriously mishandle can sue your
-          business directly — no regulator queue, and your insurer may refuse to cover it.
-          From 10 December 2026, six new obligations land on top (with fines up to AU$50M
-          for the worst cases). I&apos;ll sort the lot in one call, before the deadline.
+          Since 10 June 2025, a customer or ex-employee whose data is seriously mishandled
+          can take you to court directly — no regulator queue, and your insurer may refuse
+          to cover it. From 10 December 2026, regulators, insurers and courts expect six
+          things from small businesses — not one — with fines up to AU$50M for serious or
+          repeated breaches (top tier). I&apos;ll sort the lot in one call, before the deadline.
         </p>
 
         {/* ONE primary CTA + one ghost link */}

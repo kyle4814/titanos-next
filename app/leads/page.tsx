@@ -360,6 +360,19 @@ export default function LeadsPage() {
               margin: "32px auto 8px",
             }}
           >
+            Not sure? Tell me your target market in one sentence and I&apos;ll send you a free
+            10–20 row sample before you pay anything.
+          </p>
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--ice)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.7,
+              maxWidth: "var(--maxw-prose)",
+              margin: "8px auto",
+            }}
+          >
             Bigger volume or a vertical I haven&apos;t listed?{" "}
             <a href={BOOK_CALL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--gold)" }}>
               Tell me what you need →

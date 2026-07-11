@@ -241,7 +241,8 @@ export default function ScanPage() {
             </article>
           ))}
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.7, marginTop: 20, textAlign: "center" }}>
-            Scan run 2026-06-01. TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
+            Full scan run 2026-06-01 · TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
+            Last re-verified 11 July 2026 — TLS 1.3 confirmed, certificate valid through 30 August 2026.
           </p>
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
             Want to see what a full evidence pack looks like?{" "}

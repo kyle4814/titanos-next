@@ -450,8 +450,9 @@ export default function OurEvidencePackPage() {
             <FaqItem question="What happens after I see this and decide I want one for my business?">
               You book a 15-minute call to confirm the engagement is a fit, or you go straight to
               the compliance page and buy directly. After purchase: your domain gets scanned within
-              48 hours, the evidence pack is delivered within 3 business days, and I schedule the
-              90-minute working call where I apply every change with you.
+              48 hours, your draft pack is delivered within 3 business days, and I schedule the
+              90-minute working call where I apply every change with you. The final evidence pack
+              — with everything we applied together — lands within 24 hours of that call.
             </FaqItem>
           </div>
         </div>
