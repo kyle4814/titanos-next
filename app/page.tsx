@@ -56,6 +56,7 @@ const offers: Offer[] = [
     secondary: { label: "See what's included", href: "/compliance" },
     icon: "shield",
     index: 1,
+    popular: true,
   },
   {
     tag: "Door 03 · Project-quoted",
@@ -529,13 +530,13 @@ export default function Home() {
                 >
                   {isFlagship && (
                     <span
+                      className="offer-popular-badge"
                       style={{
                         position: "absolute",
                         top: -12,
                         left: "50%",
                         transform: "translateX(-50%)",
                         zIndex: 3,
-                        background: "linear-gradient(90deg, var(--gold-warm), var(--gold))",
                         color: "var(--vault-black)",
                         fontFamily: "var(--font-body), system-ui, sans-serif",
                         fontSize: "0.72rem",

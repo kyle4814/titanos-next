@@ -31,6 +31,8 @@ export type Offer = {
   icon: "radar" | "shield" | "sparkles" | "users";
   index: number;
   footnote?: string;
+  /** Elevates the card: gold gradient border + corner badge with a slow shimmer. */
+  popular?: boolean;
 };
 
 const iconMap = {
@@ -101,7 +103,15 @@ export default function OfferCard(props: Offer) {
       onMouseLeave={onCardLeave}
       style={{
         background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
+        border: props.popular ? "1px solid transparent" : "1px solid var(--gold-dim)",
+        // Gradient border via double background — the elevated door reads
+        // brighter at the top edge, like light catching the frame.
+        ...(props.popular && {
+          backgroundImage:
+            "linear-gradient(var(--card), var(--card)), linear-gradient(160deg, var(--gold-bright), var(--gold-dim) 45%, var(--gold-dim) 70%, var(--gold))",
+          backgroundOrigin: "border-box",
+          backgroundClip: "padding-box, border-box",
+        }),
         borderRadius: "var(--radius-md)",
         padding: "clamp(22px, 5vw, 32px) clamp(20px, 4vw, 28px)",
         display: "flex",
