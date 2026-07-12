@@ -50,7 +50,7 @@ const WHAT_I_BUILD = [
   },
   {
     title: "Intake forms that fill your job management software",
-    body: "A customer request lands in ServiceM8, Tradify or Cliniko the moment they hit submit — contact, job details, photos, all in the right fields. Not in your inbox, waiting for someone to retype it on Thursday.",
+    body: "A customer request lands in ServiceM8, simPRO or Cliniko the moment they hit submit — contact, job details, photos, all in the right fields. Not in your inbox, waiting for someone to retype it on Thursday.",
   },
 ];
 
