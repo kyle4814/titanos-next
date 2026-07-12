@@ -38,19 +38,19 @@ export const metadata: Metadata = {
 const WHAT_I_BUILD = [
   {
     title: "Quote follow-up that chases every unanswered quote",
-    body: "For 30 days, every quote you send that goes quiet gets a plain-English follow-up in your voice. No more revenue sitting in a sent-items folder.",
+    body: "You quoted, they went quiet, and the job went to whoever followed up first. This follows up in your voice — day 3, day 7, day 14 — until they answer or opt out. Jobs are rarely lost on price; they're lost on silence.",
   },
   {
     title: "Inbox triage that drafts the replies you'd write anyway",
-    body: "The same 10 questions make up 80% of your inbox. This drafts the reply so you approve and send, instead of typing it from scratch every time.",
+    body: "The same ten questions are 80% of your inbox — pricing, availability, \"can you do X by Friday\". Each one arrives with the reply pre-drafted in your tone: read it, tweak one line, send. You stay the sender; it kills the blank page.",
   },
   {
     title: "A weekly numbers report that writes itself",
-    body: "Pulled straight from the systems you already use, no new dashboard to check, no spreadsheet to maintain. It lands in your inbox before Monday's meeting.",
+    body: "Quoted vs won, invoiced vs paid, jobs sitting in limbo — pulled from Xero and the job software you already run, in your inbox before Monday's meeting. No dashboard to log into, no spreadsheet for someone to forget to update.",
   },
   {
     title: "Intake forms that fill your job management software",
-    body: "A customer request goes straight into the system your team already works from, instead of into your inbox where it waits for someone to retype it.",
+    body: "A customer request lands in ServiceM8, Tradify or Cliniko the moment they hit submit — contact, job details, photos, all in the right fields. Not in your inbox, waiting for someone to retype it on Thursday.",
   },
 ];
 
