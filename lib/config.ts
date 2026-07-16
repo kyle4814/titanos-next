@@ -50,11 +50,9 @@ export const SITE: SiteConfig = {
   // CALL · 15 MIN" and route to CAL_15MIN_URL.
   CAL_30MIN_URL: "",
 
-  // Free AI Audit Call booking link. The audit is a live call, explicitly
-  // NOT capped at 15 minutes — Kyle needs a dedicated cal.com event for it
-  // (longer or uncapped). Placeholder below is the 15-min event so the
-  // button works today; swap this one constant when Kyle supplies the URL.
-  AUDIT_CALL_URL: "https://cal.com/kyle-deligny-msvz6s/15min",
+  // Free AI Audit Call booking link — dedicated 45-min cal.com event
+  // (id 6330616), created 2026-07-16 so the audit call isn't capped at 15min.
+  AUDIT_CALL_URL: "https://cal.com/kyle-deligny-msvz6s/ai-audit",
 
   // Operator identity slots (Fix 2b).
   // OPERATOR_INPUT: paste LinkedIn profile URL.
