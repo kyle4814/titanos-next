@@ -54,10 +54,10 @@ const offers: Offer[] = [
     price: DISPLAY.AI_EMBEDDED_PARTNER,
     priceUnit: DISPLAY.AI_RETAINER_MIN,
     body:
-      "A full-stack AI partnership — end-to-end automation strategy, custom development, and team enablement. For businesses ready for full transformation across the whole operation.",
+      "A full automation strategy across your whole operation, custom systems built for how you actually work, and your team trained to run them. For businesses ready to rebuild how they operate.",
     bullets: [
-      "End-to-end automation strategy",
-      "Custom development + team enablement",
+      "Automation strategy across the whole operation",
+      "Custom systems + team trained to run them",
       "Privacy by Design · Data Security · Compliance Alignment",
     ],
     primary: { label: "Start with Embedded →", href: "/order/ai?tier=embedded", external: false },
@@ -75,13 +75,13 @@ const AUDIT_STEPS: ThreadStep[] = [
 ];
 
 const WHAT_WE_BUILD = [
-  { title: "AI Lead Gen & Outreach Systems", body: "Finds and follows up with the customers you're currently missing." },
-  { title: "AI Customer Service & Support Bots", body: "Answers the same ten questions your inbox gets every day, instantly." },
-  { title: "AI Appointment & Booking Systems", body: "Books, reminds, and reschedules without anyone touching a calendar." },
-  { title: "AI Content & Social Media Machines", body: "Keeps your channels active without you writing a single post." },
-  { title: "AI Sales & Follow-Up Automations", body: "Chases every quote and lead until someone answers." },
-  { title: "AI Data & Insights Dashboards", body: "Your numbers, pulled from the systems you already run, before Monday's meeting." },
-  { title: "AI Admin Automations", body: "Data entry, invoicing, onboarding, documents — the repetitive work, gone." },
+  { title: "Lead gen & outreach", body: "Finds and follows up with the customers you're currently missing." },
+  { title: "Customer service & support", body: "Answers the same ten questions your inbox gets every day, instantly." },
+  { title: "Appointments & booking", body: "Books, reminds, and reschedules without anyone touching a calendar." },
+  { title: "Content & social media", body: "Keeps your channels active without you writing a single post." },
+  { title: "Sales & follow-up", body: "Chases every quote and lead until someone answers." },
+  { title: "Data & reporting", body: "Your numbers, pulled from the systems you already run, before Monday's meeting." },
+  { title: "Admin & data entry", body: "Invoicing, onboarding, documents. The repetitive work, gone." },
 ];
 
 export default function Home() {
@@ -90,8 +90,8 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        eyebrow="TITANOS · AI Growth Partner"
-        tagline="We build AI systems that grow your business — and protect your data by design."
+        eyebrow="TITANOS · AI Systems for Australian Businesses"
+        tagline="Every week, your business is losing money."
         trust={
           <>
             Personally reviewed · Australian-owned · ABN 34 318 502 254 ·{" "}
@@ -113,9 +113,10 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Every business is bleeding time and money on manual work. I find exactly where, build
-          the AI systems that fix it, and keep improving them month after month —
-          privacy-compliant by design, because compliance is my other practice.
+          Manual admin. Missed enquiries. Quotes nobody follows up on. Compliance risk you can&apos;t
+          see until it costs you. <strong style={{ color: "var(--gold)" }}>AI fixes all four.</strong> I
+          build the systems, and every one of them is privacy-compliant by design, because
+          compliance is my other practice.
         </p>
 
         <div style={{ textAlign: "center" }}>
@@ -163,8 +164,8 @@ export default function Home() {
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Every business is bleeding time and money right now."
-            lead="Chasing leads. Answering the same questions. Booking. Data entry. Follow-ups. Reporting. You know AI could help — you just don't know where to start, or who to trust with it."
+            title="Four ways it's happening right now"
+            lead="Leads that never get followed up. The same questions answered by hand, every day. Data copied between systems by a person instead of a computer. A privacy problem nobody's checked in a year. Most owners know AI could help. Fewer know where to start."
           />
         </div>
       </SectionReveal>
@@ -299,9 +300,9 @@ export default function Home() {
             <ul style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.9, paddingLeft: 20, margin: 0 }}>
               <li>Every AI system we build is privacy-compliant by design</li>
               <li>Privacy policy + automated-decision disclosure handled as part of onboarding</li>
-              <li>We de-risk your business — implementing AI without this creates legal exposure, with us it doesn&apos;t</li>
+              <li>Building AI without this creates legal exposure. With us, it doesn&apos;t</li>
               <li>We monitor regulation changes and update your systems</li>
-              <li>One-stop shop: AI + compliance = growth + protection</li>
+              <li>One person handles both, so nothing falls through the gap between them</li>
             </ul>
           </div>
           <p style={{ textAlign: "center", marginTop: 24 }}>
@@ -318,12 +319,11 @@ export default function Home() {
           <SectionHeading title="Why owners pick Titanos" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto", display: "grid", gap: 14 }}>
             {[
-              "You get value before you buy — the free AI audit, no strings",
-              "We lead with opportunity, not fear",
-              "One partner from day one — no second sale, no build-then-maybe-retainer",
-              "Privacy by design = trust nobody else in this market can claim",
-              "AI systems compound — they get more valuable the longer we run them",
-              "Speed — I respond in minutes and build in days, not months",
+              "You see value before you pay a cent — the free audit call, no strings",
+              "One partner from day one. No separate build fee, no second sale later",
+              "Privacy by design. Almost nobody else in this market can say that honestly",
+              "The systems keep improving the longer we run them, not just at handover",
+              "I respond in minutes and build in days, not months",
             ].map((line) => (
               <div key={line} style={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "16px 22px" }}>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>{line}</p>
