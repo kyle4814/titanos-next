@@ -78,8 +78,8 @@ const WHAT_I_BUILD = [
 const HOW_IT_WORKS: ThreadStep[] = [
   {
     num: "I",
-    title: "Free AI audit",
-    body: "Tell me the most repetitive job in your business. I run the audit and send you a plain-English report with your top 3 opportunities.",
+    title: "Free AI audit call",
+    body: "We get on a call, you tell me the most repetitive job in your business, and we work out together what's automatable and what it's worth.",
   },
   {
     num: "II",
@@ -266,13 +266,13 @@ export default function AiDeliveryPage() {
       {/* FINAL CTA */}
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <h2 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-h2)", fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em" }}>
-          Start with the free AI audit.
+          Start with the free AI audit call.
         </h2>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "0 auto 32px", lineHeight: 1.7 }}>
-          No cost, no obligation. I'll personally review it and send your top 3 opportunities within 1 business day.
+          No cost, no obligation, no pitch deck. Just a straight conversation about your business.
         </p>
         <AnimatedButton href="/audit" variant="primary">
-          Get your free AI audit →
+          Book your free AI audit call →
         </AnimatedButton>
       </SectionReveal>
     </>

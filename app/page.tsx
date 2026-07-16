@@ -54,7 +54,7 @@ const offers: Offer[] = [
     price: DISPLAY.AI_EMBEDDED_PARTNER,
     priceUnit: DISPLAY.AI_RETAINER_MIN,
     body:
-      "A full-stack AI partnership — end-to-end automation strategy, custom development, and team enablement. For businesses over AU$3M needing full transformation.",
+      "A full-stack AI partnership — end-to-end automation strategy, custom development, and team enablement. For businesses ready for full transformation across the whole operation.",
     bullets: [
       "End-to-end automation strategy",
       "Custom development + team enablement",
@@ -68,10 +68,10 @@ const offers: Offer[] = [
 ];
 
 const AUDIT_STEPS: ThreadStep[] = [
-  { num: "I", title: "Input", body: "Your website, your industry, and public data about your business." },
-  { num: "II", title: "AI Analysis", body: "A deep automation-opportunity scan — the same pipeline I run for paying clients." },
-  { num: "III", title: "Human Review", body: "I personally check it for accuracy before anything reaches you." },
-  { num: "IV", title: "Your Report", body: "A two-layer report: plain English on top, technical appendix underneath." },
+  { num: "I", title: "You tell me how your business runs", body: "How your day-to-day actually works, in your own words." },
+  { num: "II", title: "We find the repetitive work", body: "Together we find what's costing you the most time and money." },
+  { num: "III", title: "I tell you straight", body: "What's automatable, what it'd take, and what it's worth. If it's not worth it, I'll say so." },
+  { num: "IV", title: "We start in month 1", body: "If it makes sense, we build your first system inside month 1 of a retainer." },
 ];
 
 const WHAT_WE_BUILD = [
@@ -120,15 +120,15 @@ export default function Home() {
 
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <AnimatedButton href="/audit#request" variant="primary">
-              Get your free AI audit →
+            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+              Book your free AI audit call →
             </AnimatedButton>
             <AnimatedButton href="#tiers" variant="secondary">
               See how it works ↓
             </AnimatedButton>
           </div>
           <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12 }}>
-            No card · No obligation · Report in 1 business day
+            No cost · No obligation · No pitch deck
           </p>
         </div>
       </section>
@@ -174,14 +174,13 @@ export default function Home() {
       {/* ═══ THE FREE AI AUDIT ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="Start with a free AI audit" lead="Four steps. One business day. No cost, no obligation." />
+          <SectionHeading title="Start with a free AI audit call" lead="A call with Kyle. No cost, no obligation, no pitch deck." />
           <GoldThread steps={AUDIT_STEPS} />
           <p style={{ textAlign: "center", color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "24px auto 0", lineHeight: 1.7 }}>
-            Every audit ends with your <strong style={{ color: "var(--gold)" }}>top 3 opportunities</strong> —
-            and we can build the first one in month 1.
+            If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href="/audit#request" variant="primary">Get your free AI audit →</AnimatedButton>
+            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">Book your free AI audit call →</AnimatedButton>
           </p>
         </div>
       </SectionReveal>
@@ -366,12 +365,12 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Get the free AI audit. You&apos;ll see exactly what&apos;s automatable in your business
-          and what it&apos;s worth — no cost, no obligation.
+          Book the free AI audit call. You&apos;ll see exactly what&apos;s automatable in your
+          business and what it&apos;s worth — no cost, no obligation.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/audit#request" variant="primary">Get your free AI audit →</AnimatedButton>
-          <AnimatedButton href={SITE.CAL_15MIN_URL} external variant="secondary">Book a 15-min fit call</AnimatedButton>
+          <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">Book your free AI audit call →</AnimatedButton>
+          <AnimatedButton href="#tiers" variant="secondary">See the partnership tiers ↓</AnimatedButton>
         </div>
       </SectionReveal>
     </>

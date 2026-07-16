@@ -15,7 +15,7 @@ import { LEADS, DISPLAY, formatAUD } from "@/lib/pricing";
 const BOOK_CALL = SITE.CAL_15MIN_URL;
 
 const META_TITLE = "Titanos Leads & Intelligence — Verified AU Business Contacts";
-const META_DESC = `Verified Australian business contact lists, built by a Privacy Act compliance practice. ${DISPLAY.LEADS_STARTER_FROM}. Bounce guarantee. You own the data.`;
+const META_DESC = `Verified Australian business contact lists, built compliant by design. ${DISPLAY.LEADS_STARTER_FROM}. Bounce guarantee. You own the data.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,

@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import OrderAiClient from "./client";
 
+const META_TITLE = "AI Partnership Enquiry | TITANOS";
+const META_DESC =
+  "Structured intake for a Titanos AI partnership retainer. Describe the manual work you want automated — Kyle confirms your tier and scopes month 1.";
+
 export const metadata: Metadata = {
-  title: "AI Implementation Enquiry | TITANOS",
-  description: "Structured intake for Titanos AI Implementation. Describe the manual work you want eliminated — Kyle scopes and builds.",
+  title: META_TITLE,
+  description: META_DESC,
+  openGraph: { title: META_TITLE, description: META_DESC },
   robots: { index: false, follow: false },
 };
 

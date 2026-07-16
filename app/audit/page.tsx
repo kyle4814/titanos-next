@@ -3,11 +3,13 @@ import { Suspense } from "react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
-import GoldThread, { type ThreadStep } from "@/components/GoldThread";
+import AnimatedButton from "@/components/AnimatedButton";
+import { SITE } from "@/lib/config";
 import AuditRequestClient from "./client";
 
-const META_TITLE = "Free AI Audit for Australian Businesses | Titanos";
-const META_DESC = "A free AI audit of your business — a plain-English report on where AI can save you time and money, plus a technical appendix, delivered in 1 business day.";
+const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
+const META_DESC =
+  "A free call with Kyle — tell him what's eating your week, and work out together what's automatable in your business and what it's worth. No cost, no obligation.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -29,87 +31,93 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const STEPS: ThreadStep[] = [
-  {
-    num: "I",
-    title: "Input",
-    body: "Tell me about your business and the most repetitive job eating your team's time.",
-  },
-  {
-    num: "II",
-    title: "AI Analysis",
-    body: "I run it through the same analysis pipeline I use for paying clients — mapping where automation fits your actual workflow.",
-  },
-  {
-    num: "III",
-    title: "Human Review",
-    body: "I personally review every finding before it goes out. No auto-generated report ever reaches you unchecked.",
-  },
-  {
-    num: "IV",
-    title: "Your Report",
-    body: "A two-layer report: a plain-English summary anyone can read, plus a technical appendix for whoever runs your systems.",
-  },
+const STEPS = [
+  { num: "01", title: "You tell me how your business actually runs day to day" },
+  { num: "02", title: "We find the repetitive work that's costing you time and money" },
+  { num: "03", title: "I tell you straight what's automatable, what it'd take, and what it's worth" },
+  { num: "04", title: "If it makes sense, we start with your first system in month 1 — if it doesn't, I'll say so" },
 ];
 
 export default function AuditPage() {
   return (
     <>
       <PageHero
-        badge="FREE · NO CARD · REPORT IN 1 BUSINESS DAY"
-        title="Get your free AI audit."
-        sub="A plain-English report on where AI can save your business time and money — plus a technical appendix, plus your top 3 opportunities. No cost, no obligation."
+        badge="FREE · NO OBLIGATION · NO PITCH DECK"
+        title="Get your free AI audit call."
+        sub="We get on a call, you tell me what's eating your week, and we work out together exactly what's automatable in your business and what it's worth. No cost, no pitch deck, no obligation — just a straight conversation about your business."
         trustLine={
           <>
-            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · personally
-            reviewed by Kyle before it reaches you
+            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Kyle takes the call personally
           </>
         }
       />
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SectionHeading title="How It Works" lead="Four steps. One business day." />
-          <GoldThread steps={STEPS} />
-        </div>
-      </SectionReveal>
+      <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+          Book your free AI audit call →
+        </AnimatedButton>
+      </section>
 
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="What You Get" />
+          <SectionHeading title="What happens on the call" />
           <div
             style={{
-              maxWidth: "var(--maxw-prose)",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 18,
+              maxWidth: "var(--maxw-wide)",
               margin: "0 auto",
-              background: "var(--card)",
-              border: "1px solid var(--gold-dim)",
-              borderRadius: "var(--radius-md)",
-              padding: "28px 26px",
             }}
           >
-            <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", lineHeight: 1.7, marginBottom: 14 }}>
-              <strong style={{ color: "var(--gold)" }}>Layer 1 — Executive summary:</strong> the
-              opportunities I found, the likely impact, roughly how much time and money each one
-              could save, and my recommendations — written so a non-technical owner understands it
-              in seconds.
-            </p>
-            <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", lineHeight: 1.7, marginBottom: 14 }}>
-              <strong style={{ color: "var(--gold)" }}>Layer 2 — Technical appendix:</strong> the
-              analysis behind it, an automation map, and the technical approach — for whoever runs
-              your systems.
-            </p>
-            <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
-              Every audit ends with your <strong style={{ color: "var(--gold)" }}>top 3
-              opportunities</strong> — and an offer to build the first one in month 1, if you want
-              to go ahead.
-            </p>
+            {STEPS.map((s) => (
+              <div
+                key={s.num}
+                style={{
+                  background: "var(--card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "22px 24px",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minWidth: 34,
+                    height: 24,
+                    padding: "0 8px",
+                    background: "rgb(var(--gold-rgb) / 0.12)",
+                    border: "1px solid var(--gold-dim)",
+                    color: "var(--gold)",
+                    fontFamily: "var(--font-display), Georgia, serif",
+                    fontSize: "var(--fs-xs)",
+                    letterSpacing: "0.08em",
+                    borderRadius: 999,
+                    marginBottom: 12,
+                    fontWeight: 700,
+                  }}
+                >
+                  {s.num}
+                </span>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.65, margin: 0 }}>
+                  {s.title}
+                </p>
+              </div>
+            ))}
           </div>
-          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 20 }}>
-            No catch — if there's nothing worth automating yet, I'll tell you that too.
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 28, maxWidth: "var(--maxw-prose)", marginLeft: "auto", marginRight: "auto", lineHeight: 1.7 }}>
+            No cost. No obligation. No pitch deck. If there&apos;s nothing worth automating yet,
+            I&apos;ll tell you that too.
+          </p>
+          <p style={{ textAlign: "center", marginTop: 24 }}>
+            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+              Book your free AI audit call →
+            </AnimatedButton>
           </p>
         </div>
       </SectionReveal>
@@ -118,9 +126,25 @@ export default function AuditPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="request">
         <div className="container-vault">
-          <Suspense>
-            <AuditRequestClient />
-          </Suspense>
+          <details>
+            <summary
+              style={{
+                cursor: "pointer",
+                textAlign: "center",
+                fontFamily: "var(--font-body), system-ui, sans-serif",
+                fontWeight: 500,
+                fontSize: "var(--fs-body)",
+                color: "var(--ice)",
+                listStyle: "none",
+                marginBottom: 24,
+              }}
+            >
+              Prefer to write first instead of booking a call?
+            </summary>
+            <Suspense>
+              <AuditRequestClient />
+            </Suspense>
+          </details>
         </div>
       </SectionReveal>
     </>

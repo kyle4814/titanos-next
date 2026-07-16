@@ -20,6 +20,7 @@ type SiteConfig = {
   CURRENT_BOOKING_MONTH: string;
   CAL_15MIN_URL: string;
   CAL_30MIN_URL: string;
+  AUDIT_CALL_URL: string;
   LINKEDIN_URL: string;
   PHOTO_PATH: string;
   API_BASE_URL: string;
@@ -48,6 +49,12 @@ export const SITE: SiteConfig = {
   // Until provided, AI-page scoping CTAs are relabelled "BOOK A SCOPING
   // CALL · 15 MIN" and route to CAL_15MIN_URL.
   CAL_30MIN_URL: "",
+
+  // Free AI Audit Call booking link. The audit is a live call, explicitly
+  // NOT capped at 15 minutes — Kyle needs a dedicated cal.com event for it
+  // (longer or uncapped). Placeholder below is the 15-min event so the
+  // button works today; swap this one constant when Kyle supplies the URL.
+  AUDIT_CALL_URL: "https://cal.com/kyle-deligny-msvz6s/15min",
 
   // Operator identity slots (Fix 2b).
   // OPERATOR_INPUT: paste LinkedIn profile URL.

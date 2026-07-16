@@ -9,7 +9,6 @@ import GoldDust from "@/components/GoldDust";
 import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
-import { DISPLAY } from "@/lib/pricing";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -80,12 +79,13 @@ const plexMono = IBM_Plex_Mono({
 });
 
 // SEO-03: description trimmed under 155 chars
-const META_DESCRIPTION = `New Australian privacy law hits 10 December 2026 — six obligations, not one, and fines up to AU$50M. I sort all six with your business in one working call. ${DISPLAY.PACK_PRICE}.`;
+const META_TITLE = "Titanos — AI systems that grow your business, privacy-compliant by design";
+const META_DESCRIPTION =
+  "I build AI systems that automate the manual work eating your week — privacy-compliant by design. Free AI audit call. Brisbane, Australia.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),
-  title:
-    "Titanos — Get your AU business privacy-compliant before December 2026",
+  title: META_TITLE,
   description: META_DESCRIPTION,
   icons: {
     icon: [
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "192x192" }],
   },
   openGraph: {
-    title: "Titanos — Get your AU business privacy-compliant before December 2026",
+    title: META_TITLE,
     description: META_DESCRIPTION,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",

@@ -68,10 +68,10 @@ export default function AuditRequestClient() {
   return (
     <OrderForm
       orderType="audit"
-      heading="Request Your Free AI Audit"
-      subheading="Takes 2 minutes. I'll personally review it and send your report within 1 business day."
-      submitLabel="GET MY FREE AI AUDIT →"
-      successMessage="Received. I'll personally review it and send your report within 1 business day."
+      heading="Tell Me About Your Business First"
+      subheading="Takes 2 minutes. Kyle will read it before you talk, then reach out to book your free AI audit call."
+      submitLabel="SEND IT TO KYLE →"
+      successMessage="Received. Kyle will read it and reach out to book your free AI audit call."
     >
       <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 
