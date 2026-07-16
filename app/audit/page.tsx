@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import FaqItem from "@/components/FaqItem";
 import { SITE } from "@/lib/config";
 import AuditRequestClient from "./client";
 
@@ -119,6 +120,26 @@ export default function AuditPage() {
               Book your free AI audit call →
             </AnimatedButton>
           </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
+          <SectionHeading title="Questions before you book" />
+          <FaqItem question="Is this actually free?">
+            Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in your business yet, I'll tell you that too.
+          </FaqItem>
+          <FaqItem question="How long is the call?">
+            Long enough to actually understand your business — I don't cap it at a fixed slot the way a sales call usually is.
+          </FaqItem>
+          <FaqItem question="What happens after the call?">
+            If it makes sense, we start with your first system inside month 1 of a retainer. If it doesn't, you walk away with an honest answer and nothing owed.
+          </FaqItem>
+          <FaqItem question="Do I need to prepare anything?">
+            No. Just be ready to talk about the most repetitive, time-consuming part of running your business.
+          </FaqItem>
         </div>
       </SectionReveal>
 

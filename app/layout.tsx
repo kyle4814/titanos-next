@@ -9,6 +9,7 @@ import GoldDust from "@/components/GoldDust";
 import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
+import StickyMobileCta from "@/components/StickyMobileCta";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -190,6 +191,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <StickyMobileCta />
       </body>
     </html>
   );

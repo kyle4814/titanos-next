@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
+import FaqItem from "@/components/FaqItem";
 
 // Fix 5g — title/og/twitter aligned. "banner-grade" framing dropped
 // site-wide; the long-form description here is the canonical voice.
@@ -281,6 +282,24 @@ export default function MethodologyPage() {
             lead="Three independent ways. Every claim I make is one of these checks away from a third-party audit."
           />
           <VerifyKeys keys={VERIFY} />
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* FAQ */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <SectionHeading title="Questions I get" />
+          <FaqItem question="Is this a hacking attempt?">
+            No. I only read what your server already broadcasts to the public internet — no login attempts, no password guessing, nothing invasive. See "What I Never Do" above.
+          </FaqItem>
+          <FaqItem question="Do you store my data?">
+            Scan results are kept to track exposure trends over time. Your email is only used for the contact list, never sold, and suppressed immediately if you reply "remove".
+          </FaqItem>
+          <FaqItem question="Who are you, and why should I trust you?">
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254 — verifiable on the Australian Business Register. Every finding ships with the exact command used to find it.
+          </FaqItem>
         </div>
       </SectionReveal>
 

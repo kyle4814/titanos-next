@@ -6,6 +6,9 @@ import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
+import JourneySteps from "@/components/JourneySteps";
+import RoiEstimator from "@/components/RoiEstimator";
+import FaqItem from "@/components/FaqItem";
 import { STATS } from "@/lib/stats";
 import { SITE } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
@@ -21,9 +24,9 @@ const offers: Offer[] = [
     body:
       "One system built and running in month 1, optimised through months 2-3, then ongoing support and iterations. Built for SMBs, solo operators and early adopters.",
     bullets: [
-      "One AI system, shipped working in month 1",
-      "Privacy by Design · Data Security · Compliance Alignment",
-      "Ongoing support included",
+      "Month 1: your highest-impact system built and live",
+      "Month 2: optimised against how you actually use it",
+      "Month 3+: ongoing support, new systems as you grow",
     ],
     primary: { label: "Start with Growth →", href: "/order/ai?tier=growth", external: false },
     secondary: { label: "See AI Partnership", href: "/ai-delivery" },
@@ -38,9 +41,9 @@ const offers: Offer[] = [
     body:
       "Multiple systems, automations across your core ops, reporting and dashboards, continuous improvement month over month. For growing businesses ready to scale ops.",
     bullets: [
-      "Multiple AI systems across core ops",
-      "Reporting + dashboards",
-      "Privacy by Design · Data Security · Compliance Alignment",
+      "Month 1: first system(s) built + a reporting dashboard",
+      "Month 2: automations added across your core ops",
+      "Month 3+: continuous improvement, new systems as ops grow",
     ],
     primary: { label: "Start with Ops →", href: "/order/ai?tier=ops", external: false },
     secondary: { label: "See AI Partnership", href: "/ai-delivery" },
@@ -56,9 +59,9 @@ const offers: Offer[] = [
     body:
       "A full automation strategy across your whole operation, custom systems built for how you actually work, and your team trained to run them. For businesses ready to rebuild how they operate.",
     bullets: [
-      "Automation strategy across the whole operation",
-      "Custom systems + team trained to run them",
-      "Privacy by Design · Data Security · Compliance Alignment",
+      "Month 1: automation strategy + first systems built",
+      "Month 2: full-stack rollout + your team trained to run it",
+      "Month 3+: ongoing transformation partnership",
     ],
     primary: { label: "Start with Embedded →", href: "/order/ai?tier=embedded", external: false },
     secondary: { label: "See AI Partnership", href: "/ai-delivery" },
@@ -156,6 +159,15 @@ export default function Home() {
           <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
         </div>
+        <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 16 }}>
+          Every finding verifiable —{" "}
+          <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>
+            see the actual quality of work you&apos;d get, before you pay a cent →
+          </a>
+        </p>
+        {/* Testimonials / case studies go here once client 1-3 are delivered.
+            Do not fabricate proof before then — the honest trust units above
+            are the only proof that exists right now. */}
       </SectionReveal>
 
       <HeroScrollCue />
@@ -183,6 +195,16 @@ export default function Home() {
           <p style={{ textAlign: "center", marginTop: 24 }}>
             <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">Book your free AI audit call →</AnimatedButton>
           </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* ═══ THE JOURNEY ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="How this actually works" lead="One path, start to finish." />
+          <JourneySteps />
         </div>
       </SectionReveal>
 
@@ -279,6 +301,16 @@ export default function Home() {
 
       <div className="divider-gold" />
 
+      {/* ═══ ROI ESTIMATOR ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="What is manual work actually costing you?" lead="Move the sliders — this uses your numbers, not a claim about past results." />
+          <RoiEstimator />
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
       {/* ═══ PRIVACY BY DESIGN — the foundation ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
@@ -334,6 +366,39 @@ export default function Home() {
             Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254. Personally accountable for
             every system shipped.
           </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* ═══ FAQ ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
+          <SectionHeading title="Straight answers" />
+          <FaqItem question="How much does it cost?">
+            Retainers start at {DISPLAY.AI_GROWTH_PARTNER}, {DISPLAY.AI_RETAINER_MIN}. Ops is {DISPLAY.AI_OPS_PARTNER}, Embedded is {DISPLAY.AI_EMBEDDED_PARTNER}. The audit call itself is free.
+          </FaqItem>
+          <FaqItem question="Why monthly and not a one-off build?">
+            A system you build once and never touch again decays — usage changes, tools change, edge cases show up. The retainer is one sale that includes the build, the tuning, and the support, instead of a build fee followed by a second sale later.
+          </FaqItem>
+          <FaqItem question="What's the 3-month minimum for?">
+            Month 1 is the build. Month 2-3 is where it gets optimised against how you actually use it — that's when it starts paying for itself. After that, it's month-to-month.
+          </FaqItem>
+          <FaqItem question="We're not a tech business — does this even apply to us?">
+            That's most of who I work with. You don't need to understand how it works, the same way you don't need to understand accounting software to use it. That's what the audit call is for.
+          </FaqItem>
+          <FaqItem question="What if it breaks?">
+            Ongoing support is part of the retainer, not an add-on you have to remember to buy.
+          </FaqItem>
+          <FaqItem question="Who are you, and why should I trust you?">
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254 — verifiable on the Australian Business Register. The evidence pack at /our-evidence-pack is my own real report, published in full, not a mock-up.
+          </FaqItem>
+          <FaqItem question="Is my data safe?">
+            Every system is built privacy-compliant by design — that's the other half of my practice, not a bolt-on.
+          </FaqItem>
+          <FaqItem question="What if it doesn't work?">
+            Real results or it doesn't continue — month-to-month after the 3-month minimum, no lock-in beyond that.
+          </FaqItem>
         </div>
       </SectionReveal>
 

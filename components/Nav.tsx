@@ -23,26 +23,25 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
+import { SITE } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
   { label: "Free AI Audit", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
-  { label: "Monitor", href: "/monitor", external: false },
   { label: "Compliance", href: "/compliance", external: false },
+  { label: "Monitor", href: "/monitor", external: false },
   { label: "Leads", href: "/leads", external: false },
-  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors, now led by
-  // the free AI audit + AI partnership. Free Scan / Methodology / About
-  // remain in the mobile drawer + footer to keep desktop tight.
+  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors, led by
+  // the free AI audit + AI partnership. Free Scan / Evidence Pack /
+  // Methodology / About / Contact remain in the mobile drawer + footer to
+  // keep desktop tight. The desktop CTA button (below, outside LINKS) is
+  // the single sitewide primary action.
   { label: "Free Scan", href: "/scan", external: false },
+  { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Methodology", href: "/methodology", external: false },
-  { label: "Our Scan", href: "/scan#self-scan", external: false },
   { label: "About", href: "/about", external: false },
-  {
-    label: "Book a call",
-    href: "https://cal.com/kyle-deligny-msvz6s/15min",
-    external: true,
-  },
+  { label: "Contact", href: "/contact", external: false },
 ];
 
 const SESSION_KEY = "titanos.vault.entranceShown";
@@ -147,10 +146,29 @@ export default function Nav() {
         </Link>
 
         {/* Desktop link strip — hidden on mobile via media query */}
-        <div className="nav-desktop-links">
+        <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center" }}>
           {LINKS.slice(0, 5).map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
+          <a
+            href={SITE.AUDIT_CALL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginLeft: 20,
+              padding: "8px 16px",
+              background: "var(--gold)",
+              color: "var(--vault-black, #0a0a0a)",
+              fontFamily: "var(--font-body), system-ui, sans-serif",
+              fontWeight: 700,
+              fontSize: "var(--fs-sm)",
+              borderRadius: 999,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Book your free AI audit call
+          </a>
         </div>
 
         {/* Mobile hamburger button — hidden on desktop via media query */}
@@ -289,6 +307,29 @@ export default function Nav() {
                   ✕
                 </button>
               </div>
+
+              <a
+                href={SITE.AUDIT_CALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setDrawerOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minHeight: 44,
+                  background: "var(--gold)",
+                  color: "var(--vault-black, #0a0a0a)",
+                  fontFamily: "var(--font-body), system-ui, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "var(--fs-sm)",
+                  borderRadius: 999,
+                  textDecoration: "none",
+                  marginBottom: 24,
+                }}
+              >
+                Book your free AI audit call
+              </a>
 
               <nav>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>

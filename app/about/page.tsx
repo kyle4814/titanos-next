@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import FaqItem from "@/components/FaqItem";
 import { SITE } from "@/lib/config";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
@@ -62,8 +63,8 @@ export default function AboutPage() {
             }}
           />
         )}
-        <AnimatedButton href={CAL_15} external variant="primary">
-          BOOK A 15-MIN FIT CALL
+        <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+          BOOK YOUR FREE AI AUDIT CALL
         </AnimatedButton>
         <AnimatedButton href="/methodology" variant="secondary">
           SEE THE METHODOLOGY
@@ -209,6 +210,33 @@ export default function AboutPage() {
 
       <div className="divider-gold" />
 
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              color: "var(--gold)",
+              fontSize: "var(--fs-h3)",
+              letterSpacing: "0.06em",
+              marginBottom: 16,
+            }}
+          >
+            QUESTIONS ABOUT WORKING WITH ME
+          </h2>
+          <FaqItem question="Why should I trust a solo operator over an agency?">
+            No account manager, no junior team you'll never meet. The person who takes the audit call is the person who builds and signs off the work — and everything above is how you check that's true before you pay a cent.
+          </FaqItem>
+          <FaqItem question="What if you're unavailable later?">
+            You keep everything delivered — no platform lock-in, no dependency on me staying reachable for what's already built.
+          </FaqItem>
+          <FaqItem question="Is my data safe with an AI-assisted operator?">
+            Privacy-compliant by design is the other half of my practice, not an afterthought — see /compliance for exactly what that covers.
+          </FaqItem>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
       <SectionReveal
         style={{
           textAlign: "center",
@@ -240,14 +268,14 @@ export default function AboutPage() {
           Same operator behind each one.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/scan" variant="primary">
-            FREE SCAN
+          <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+            FREE AI AUDIT CALL
           </AnimatedButton>
           <AnimatedButton href="/compliance" variant="secondary">
             COMPLIANCE PACK
           </AnimatedButton>
-          <AnimatedButton href="/ai-delivery" variant="secondary">
-            AI IMPLEMENTATION
+          <AnimatedButton href="/scan" variant="secondary">
+            FREE SCAN
           </AnimatedButton>
         </div>
       </SectionReveal>

@@ -167,6 +167,10 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 720px) {
+  body { padding-bottom: 66px; }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    W4 Pillar 3 — BACKGROUND LAYERS 0-4
    Layered behind everything. Layer 5 (WebGL gold dust) is opt-in

@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import SlotScarcity from "@/components/SlotScarcity";
+import DeadlineCountdown from "@/components/DeadlineCountdown";
 import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
 import { SITE } from "@/lib/config";
@@ -208,6 +209,9 @@ export default function CompliancePage() {
           </>
         }
       >
+        <div style={{ margin: "0 0 22px" }}>
+          <DeadlineCountdown />
+        </div>
         {/*
           Fix 2d — CTA prominence FLIPPED while testimonials.ts is empty.
           Cal first (primary, filled), Stripe second (secondary, outline).
