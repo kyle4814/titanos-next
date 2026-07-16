@@ -5,10 +5,10 @@ import OrderForm, { Field } from "@/components/OrderForm";
 import { DISPLAY } from "@/lib/pricing";
 
 const TIERS = [
-  { value: "pilot", label: `Automation Pilot — ${DISPLAY.AI_PILOT_FLOOR} (one task, fixed scope)` },
-  { value: "build", label: `Full Build — ${DISPLAY.AI_BUILD_FLOOR} (full custom AI system)` },
-  { value: "retainer", label: `Ops Retainer — ${DISPLAY.AI_OPS_RETAINER} (post-build only)` },
-  { value: "not_sure", label: "Not sure yet — start with the free scoping call" },
+  { value: "growth", label: `AI Growth Partner — ${DISPLAY.AI_GROWTH_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "ops", label: `AI Ops Partner — ${DISPLAY.AI_OPS_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "embedded", label: `Embedded AI Partner — ${DISPLAY.AI_EMBEDDED_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "not_sure", label: "Not sure yet — start with the free AI audit" },
 ];
 
 const BUDGETS = [
@@ -88,15 +88,10 @@ export default function OrderAiClient() {
   const rawTier = params.get("tier") ?? "";
   const validTiers = new Set(TIERS.map((t) => t.value));
   const defaultTier = validTiers.has(rawTier) ? rawTier : "not_sure";
-  const isPilot = defaultTier === "pilot";
 
-  const heading = isPilot
-    ? "AI Automation Pilot — Enquiry"
-    : "AI Implementation — Enquiry";
+  const heading = "AI Partnership — Enquiry";
 
-  const subheading = isPilot
-    ? `Tell Kyle the single manual task you want automated as a fixed-scope pilot (${DISPLAY.AI_PILOT_FLOOR}). He confirms scope and sends an invoice; you see it working before committing to anything bigger.`
-    : `Tell Kyle what manual task is eating your team's week. He scopes the rung that fits — pilot ${DISPLAY.AI_PILOT_FLOOR.toLowerCase()}, full build ${DISPLAY.AI_BUILD_FLOOR.toLowerCase()} — and sends an invoice.`;
+  const subheading = `Tell Kyle what's most repetitive in your business. He'll confirm the tier that fits — Growth ${DISPLAY.AI_GROWTH_PARTNER}, Ops ${DISPLAY.AI_OPS_PARTNER}, Embedded ${DISPLAY.AI_EMBEDDED_PARTNER} — all ${DISPLAY.AI_RETAINER_MIN}. Month 1 is the build, months 2-3 optimise, then it's month-to-month.`;
 
   return (
     <main
@@ -110,37 +105,25 @@ export default function OrderAiClient() {
         orderType="ai"
         heading={heading}
         subheading={subheading}
-        submitLabel={isPilot ? "SUBMIT PILOT ENQUIRY →" : "SUBMIT AI ORDER →"}
-        successMessage="Received. Kyle will review your scope and respond with a proposal or invoice within 1 business day."
+        submitLabel="SUBMIT AI PARTNERSHIP ENQUIRY →"
+        successMessage="Received. Kyle will review your scope and respond with a proposal within 1 business day."
       >
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 
         <SelectField
-          label="Which rung fits?"
+          label="Which tier fits?"
           name="scope_tier"
           options={TIERS}
           defaultValue={defaultTier}
         />
 
         <Field
-          label={
-            isPilot
-              ? "Which single manual task do you want automated?"
-              : "What do you do manually that takes the most time?"
-          }
+          label="What do you do manually that takes the most time?"
           name="scope_manual_tasks"
           as="textarea"
           rows={4}
-          placeholder={
-            isPilot
-              ? "e.g. Every morning I copy new Xero invoices into our CRM by hand and email a summary to the team…"
-              : "e.g. We manually triage 200 support emails a day, copy data between three systems every morning, and write weekly reports from spreadsheets…"
-          }
-          hint={
-            isPilot
-              ? "One specific task. The tighter the scope, the faster the pilot ships."
-              : "Be specific. The more detail, the sharper the scope."
-          }
+          placeholder="e.g. We manually triage 200 support emails a day, copy data between three systems every morning, and write weekly reports from spreadsheets…"
+          hint="Be specific. The more detail, the sharper the first system I build in month 1."
         />
 
         <Field

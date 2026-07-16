@@ -1,136 +1,87 @@
 import HeroEntrance from "@/components/HeroEntrance";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
+import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import HeroScrollCue from "@/components/HeroScrollCue";
+import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import { STATS } from "@/lib/stats";
 import { SITE } from "@/lib/config";
-import { DISPLAY, PRICING } from "@/lib/pricing";
+import { DISPLAY } from "@/lib/pricing";
 
 import type { Offer } from "@/components/OfferCard";
 
 const offers: Offer[] = [
   {
-    tag: "Door 01 · Free",
-    title: "Free Security Check",
-    price: DISPLAY.FREE_SCAN_PRICE,
-    priceUnit: "no card · report in your inbox within 2 business days",
+    tag: "AI Growth Partner",
+    title: "AI Growth Partner",
+    price: DISPLAY.AI_GROWTH_PARTNER,
+    priceUnit: DISPLAY.AI_RETAINER_MIN,
     body:
-      "See what a hacker can see about your business from the internet — open ports, email security gaps, expired certificates, known software weaknesses. Personally reviewed before I send it. No login, no credit card, no drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever. Just a clear picture of where your business actually stands — the same check I'd run on a paying client, so you can see the quality before you spend a cent.",
+      "One system built and running in month 1, optimised through months 2-3, then ongoing support and iterations. Built for SMBs, solo operators and early adopters.",
     bullets: [
-      "Just your website address — any AU/NZ/SG host",
-      "Every finding verifiable — I show you the exact check I ran",
-      "A plain-English summary — what's exposed, what it means, what to do (no tech degree needed)",
-      "No obligation — if everything's fine, I'll tell you that too",
+      "One AI system, shipped working in month 1",
+      "Privacy by Design · Data Security · Compliance Alignment",
+      "Ongoing support included",
     ],
-    footnote:
-      "Most businesses are surprised by at least one thing. Better you see it than a hacker does.",
-    primary: {
-      label: "Get your free scan →",
-      href: "/scan#request",
-      external: false,
-    },
-    secondary: { label: "See what's in the free check", href: "/scan" },
-    icon: "radar",
+    primary: { label: "Start with Growth →", href: "/order/ai?tier=growth", external: false },
+    secondary: { label: "See AI Partnership", href: "/ai-delivery" },
+    icon: "sparkles",
     index: 0,
   },
   {
-    tag: "Door 02 · Done with you",
-    title: "Privacy Act Compliance",
-    price: DISPLAY.PACK_PRICE,
-    priceUnit: `one-time · all six obligations sorted · ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of monitoring included free`,
+    tag: "Most popular",
+    title: "AI Ops Partner",
+    price: DISPLAY.AI_OPS_PARTNER,
+    priceUnit: DISPLAY.AI_RETAINER_MIN,
     body:
-      "One fixed-price engagement covering all six new Privacy Act obligations. On a 90-minute screen-share I apply every change with you — no PDF-only hand-off, no jargon. For AU small businesses on Squarespace, WordPress, Microsoft 365, or Google Workspace. Deadline: 10 December 2026.",
+      "Multiple systems, automations across your core ops, reporting and dashboards, continuous improvement month over month. For growing businesses ready to scale ops.",
     bullets: [
-      "All six obligations — privacy policy, breach plan, email security, login security, data mapping, AI disclosure",
-      "90-minute working call — I apply every change with you, on screen",
-      "A plain-English report you can hand straight to your insurer or a big client as proof",
-      "Signed compliance letter for a regulator, insurer, or enterprise client",
+      "Multiple AI systems across core ops",
+      "Reporting + dashboards",
+      "Privacy by Design · Data Security · Compliance Alignment",
     ],
-    primary: {
-      label: `Order compliance · ${DISPLAY.PACK_PRICE} →`,
-      href: "/order/compliance",
-      external: false,
-    },
-    secondary: { label: "See what's included", href: "/compliance" },
+    primary: { label: "Start with Ops →", href: "/order/ai?tier=ops", external: false },
+    secondary: { label: "See AI Partnership", href: "/ai-delivery" },
     icon: "shield",
     index: 1,
     popular: true,
   },
   {
-    tag: "Door 03 · Project-quoted",
-    title: "AI That Does Your Manual Work",
-    price: DISPLAY.AI_PILOT_FLOOR,
-    priceUnit: `${DISPLAY.AI_LADDER_ENTRY} · free 15-min scoping call`,
+    tag: "Embedded AI Partner",
+    title: "Embedded AI Partner",
+    price: DISPLAY.AI_EMBEDDED_PARTNER,
+    priceUnit: DISPLAY.AI_RETAINER_MIN,
     body:
-      "Tell me the task someone on your team does manually every day. I build the AI system that does it instead — shipped working into your business and documented for your team.",
+      "A full-stack AI partnership — end-to-end automation strategy, custom development, and team enablement. For businesses over AU$3M needing full transformation.",
     bullets: [
-      "The painful manual job, automated",
-      "Shipped working, not a slide deck",
-      "Documented so your team can use it",
-      "Reviewed and signed off by me on every engagement",
+      "End-to-end automation strategy",
+      "Custom development + team enablement",
+      "Privacy by Design · Data Security · Compliance Alignment",
     ],
-    primary: {
-      label: "Order AI implementation →",
-      href: "/order/ai",
-      external: false,
-    },
-    secondary: { label: "See AI Implementation", href: "/ai-delivery" },
-    icon: "sparkles",
-    index: 2,
-  },
-  {
-    tag: "Door 04 · Lists & intelligence",
-    title: "Verified AU Contact Lists",
-    price: DISPLAY.LEADS_STARTER_FROM,
-    priceUnit: `per list · or ${DISPLAY.LEADS_RETAINER} intelligence feed`,
-    body:
-      "Verified Australian business contacts — sourced from public data and checked deliverable before you get them, named where the owner or decision-maker is publicly listed. Built compliant, because compliance is the other thing I do.",
-    bullets: [
-      "Verified deliverable · 30-day bounce replacement",
-      "Named decision-maker where publicly available",
-      "You own the data — no platform lock-in",
-    ],
-    primary: {
-      label: "Order a list →",
-      href: "/order/leads",
-      external: false,
-    },
-    secondary: { label: "See Leads & Intelligence", href: "/leads" },
+    primary: { label: "Start with Embedded →", href: "/order/ai?tier=embedded", external: false },
+    secondary: { label: "See AI Partnership", href: "/ai-delivery" },
     icon: "users",
-    index: 3,
+    index: 2,
   },
 ];
 
-// Six obligations — stripped of the manual "1." that collided with the
-// browser's default <ol> counter and produced "1. 1." on the live site.
-// Rendered as a grid of numbered cards with a gold pill number.
-const SIX_OBLIGATIONS: { title: string; body: string }[] = [
-  {
-    title: "A proper privacy policy",
-    body: "Not a copy-paste from 2015 — one that actually covers what customer info you hold and what you do with it.",
-  },
-  {
-    title: "A plan for if you get hacked",
-    body: "You're now expected to have a written breach-response plan you can act on the day it happens.",
-  },
-  {
-    title: "Email set up so scammers can't impersonate you",
-    body: "SPF, DKIM and DMARC records applied so nobody can send email pretending to be your business.",
-  },
-  {
-    title: "Basic login security",
-    body: "Two-factor login across your team so your accounts can't be walked into with a leaked password.",
-  },
-  {
-    title: "Knowing what customer data you hold",
-    body: "A one-page record of every third-party tool that touches your customer data, and where it lives.",
-  },
-  {
-    title: "AI + automated tools disclosure",
-    body: "If you use AI on customer info, you have to say so in your privacy policy. New rule, 10 December 2026.",
-  },
+const AUDIT_STEPS: ThreadStep[] = [
+  { num: "I", title: "Input", body: "Your website, your industry, and public data about your business." },
+  { num: "II", title: "AI Analysis", body: "A deep automation-opportunity scan — the same pipeline I run for paying clients." },
+  { num: "III", title: "Human Review", body: "I personally check it for accuracy before anything reaches you." },
+  { num: "IV", title: "Your Report", body: "A two-layer report: plain English on top, technical appendix underneath." },
+];
+
+const WHAT_WE_BUILD = [
+  { title: "AI Lead Gen & Outreach Systems", body: "Finds and follows up with the customers you're currently missing." },
+  { title: "AI Customer Service & Support Bots", body: "Answers the same ten questions your inbox gets every day, instantly." },
+  { title: "AI Appointment & Booking Systems", body: "Books, reminds, and reschedules without anyone touching a calendar." },
+  { title: "AI Content & Social Media Machines", body: "Keeps your channels active without you writing a single post." },
+  { title: "AI Sales & Follow-Up Automations", body: "Chases every quote and lead until someone answers." },
+  { title: "AI Data & Insights Dashboards", body: "Your numbers, pulled from the systems you already run, before Monday's meeting." },
+  { title: "AI Admin Automations", body: "Data entry, invoicing, onboarding, documents — the repetitive work, gone." },
 ];
 
 export default function Home() {
@@ -139,16 +90,16 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        eyebrow="Australian Privacy Law · Deadline 10 December 2026"
-        tagline="New privacy rules. Real fines. Your customers can now sue you directly. Does your business know where it stands?"
+        eyebrow="TITANOS · AI Growth Partner"
+        tagline="We build AI systems that grow your business — and protect your data by design."
         trust={
           <>
-            Personally reviewed · Australian-owned · ABN 34 318 502 254 · Own scan &amp; evidence pack published
+            Personally reviewed · Australian-owned · ABN 34 318 502 254 ·{" "}
+            {STATS.scansThisMonth}+ external scans run this month
           </>
         }
       />
 
-      {/* Sub-copy under hero */}
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2 }}>
         <p
           style={{
@@ -162,37 +113,29 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Since 10 June 2025, a customer or ex-employee whose data is seriously mishandled
-          can take you to court directly — no regulator queue, and your insurer may refuse
-          to cover it. From 10 December 2026, regulators, insurers and courts expect six
-          things from small businesses — not one — with fines up to AU$50M for serious or
-          repeated breaches (top tier). I&apos;ll sort the lot in one call, before the deadline.
+          Every business is bleeding time and money on manual work. I find exactly where, build
+          the AI systems that fix it, and keep improving them month after month —
+          privacy-compliant by design, because compliance is my other practice.
         </p>
 
-        {/* ONE primary CTA + one ghost link */}
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <AnimatedButton href="/scan#request" variant="primary">
-              Show me what a hacker sees →
+            <AnimatedButton href="/audit#request" variant="primary">
+              Get your free AI audit →
             </AnimatedButton>
-            <AnimatedButton href="#offers" variant="secondary">
-              See how it works
+            <AnimatedButton href="#tiers" variant="secondary">
+              See how it works ↓
             </AnimatedButton>
           </div>
           <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12 }}>
-            No card · No login · Report in your inbox within 2 business days
+            No card · No obligation · Report in 1 business day
           </p>
         </div>
       </section>
 
-      {/* Trust bar — horizontal scannable units with faint dividers */}
       <SectionReveal
         as="div"
-        style={{
-          padding: "24px 20px 40px",
-          position: "relative",
-          zIndex: 2,
-        }}
+        style={{ padding: "24px 20px 40px", position: "relative", zIndex: 2 }}
       >
         <div
           className="trust-bar"
@@ -207,14 +150,8 @@ export default function Home() {
             background: "rgb(var(--gold-rgb) / 0.02)",
           }}
         >
-          <TrustUnit
-            big={<><NumberCounter value={STATS.scansThisMonth} suffix="+" /></>}
-            small="scans this month"
-          />
-          <TrustUnit
-            big={<><NumberCounter value={STATS.uniqueBusinesses} suffix="+" /></>}
-            small="AU/NZ/SG businesses in corpus"
-          />
+          <TrustUnit big={<><NumberCounter value={STATS.scansThisMonth} suffix="+" /></>} small="scans this month" />
+          <TrustUnit big={<><NumberCounter value={STATS.uniqueBusinesses} suffix="+" /></>} small="AU/NZ/SG businesses in corpus" />
           <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
         </div>
@@ -222,300 +159,45 @@ export default function Home() {
 
       <HeroScrollCue />
 
-      {/* ═══ Six obligations — the reality check ═══ */}
+      {/* ═══ THE PROBLEM ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <p
-              className="font-mono"
-              style={{
-                fontSize: "var(--fs-xs)",
-                letterSpacing: "0.18em",
-                color: "var(--gold-warm)",
-                textTransform: "uppercase",
-                marginBottom: 14,
-              }}
-            >
-              What&apos;s actually changing
-            </p>
-            <h2
-              style={{
-                fontFamily: "var(--font-display), Georgia, serif",
-                fontWeight: 400,
-                fontStyle: "italic",
-                fontSize: "var(--fs-h2)",
-                color: "var(--gold)",
-                letterSpacing: "0.01em",
-                lineHeight: 1.2,
-                maxWidth: "var(--maxw-content)",
-                margin: "0 auto 14px",
-              }}
-            >
-              Six obligations, not one. Most owners only know about one of them.
-            </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-body), system-ui, sans-serif",
-                fontSize: "var(--fs-body)",
-                color: "var(--text)",
-                lineHeight: 1.7,
-                maxWidth: "var(--maxw-prose)",
-                margin: "0 auto",
-              }}
-            >
-              Six things regulators, insurers and courts now expect every Australian
-              business to have in place. Here&apos;s what that looks like:
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-body), system-ui, sans-serif",
-                fontSize: "var(--fs-sm)",
-                color: "var(--dim)",
-                lineHeight: 1.7,
-                maxWidth: "var(--maxw-prose)",
-                margin: "14px auto 0",
-              }}
-            >
-              Health providers — clinic, allied health, pharmacy, any size — are
-              already covered by the Privacy Act. There is no small-business
-              exemption for health.
-            </p>
-          </div>
-
-          <div
-            className="six-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 18,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
-            {SIX_OBLIGATIONS.map((o, i) => (
-              <div
-                key={o.title}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "22px 24px",
-                  position: "relative",
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minWidth: 34,
-                    height: 24,
-                    padding: "0 8px",
-                    background: "rgb(var(--gold-rgb) / 0.12)",
-                    border: "1px solid var(--gold-dim)",
-                    color: "var(--gold)",
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    fontSize: "var(--fs-xs)",
-                    letterSpacing: "0.08em",
-                    borderRadius: 999,
-                    marginBottom: 12,
-                    fontWeight: 700,
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-body), system-ui, sans-serif",
-                    color: "var(--ice)",
-                    fontSize: "var(--fs-lg)",
-                    fontWeight: 600,
-                    letterSpacing: 0,
-                    marginBottom: 6,
-                    lineHeight: 1.35,
-                  }}
-                >
-                  {o.title}
-                </h3>
-                <p
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {o.body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Ember stakes callout */}
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "36px auto 0",
-              borderLeft: "3px solid var(--ember)",
-              background: "rgba(255, 90, 58, 0.05)",
-              padding: "18px 22px",
-              borderRadius: "0 var(--radius-md) var(--radius-md) 0",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "var(--fs-body)",
-                color: "var(--text)",
-                lineHeight: 1.7,
-                margin: 0,
-              }}
-            >
-              Miss any of it and you could be <strong style={{ color: "#ff8f78" }}>fined,
-              sued directly, or find your insurer won&apos;t cover you</strong> after a breach.
-              Since 10 June 2025, an individual affected can already take you to court for a
-              serious privacy breach — no regulator queue needed.
-            </p>
-          </div>
-
-          {/* Reassurance line */}
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "18px auto 0",
-              background: "rgb(var(--gold-rgb) / 0.06)",
-              border: "1px solid var(--gold-dim)",
-              padding: "18px 22px",
-              borderRadius: "var(--radius-md)",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "var(--fs-body)",
-                color: "var(--ice)",
-                lineHeight: 1.7,
-                margin: 0,
-              }}
-            >
-              Most owners have no time to become an expert and no clue where to start.
-              That&apos;s exactly what I&apos;m for — one operator, one call, all six
-              sorted with you in plain English, before the deadline.
-            </p>
-          </div>
-
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "18px auto 0",
-              background: "rgb(var(--gold-rgb) / 0.06)",
-              border: "1px solid var(--gold-dim)",
-              padding: "18px 22px",
-              borderRadius: "var(--radius-md)",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "var(--fs-body)",
-                color: "var(--ice)",
-                lineHeight: 1.7,
-                margin: 0,
-              }}
-            >
-              <strong style={{ color: "var(--gold)" }}>LIVE NOW — the regulator is now checking
-              proactively.</strong> Since January 2026 the OAIC has run compliance sweeps across
-              sectors including real estate, pharmacies, and licensed venues — examining
-              businesses before any complaint is made. &ldquo;We&apos;ve had no problems&rdquo;
-              is no longer the same as &ldquo;we won&apos;t be looked at.&rdquo;
-            </p>
-          </div>
+          <SectionHeading
+            title="Every business is bleeding time and money right now."
+            lead="Chasing leads. Answering the same questions. Booking. Data entry. Follow-ups. Reporting. You know AI could help — you just don't know where to start, or who to trust with it."
+          />
         </div>
       </SectionReveal>
 
-      {/* Monitor bridge */}
-      <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <p
-          style={{
-            color: "var(--dim)",
-            fontSize: "var(--fs-sm)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto",
-            lineHeight: 1.6,
-          }}
-        >
-          Already had the free check and just want to know when things change?{" "}
-          <a href="/monitor" style={{ color: "var(--gold)" }}>
-            Titanos Monitor
-          </a>{" "}
-          re-checks your business every month and emails you what&apos;s new — {DISPLAY.MONITOR_MONTHLY}, cancel in one click. →
-        </p>
-      </section>
+      <div className="divider-gold" />
+
+      {/* ═══ THE FREE AI AUDIT ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="Start with a free AI audit" lead="Four steps. One business day. No cost, no obligation." />
+          <GoldThread steps={AUDIT_STEPS} />
+          <p style={{ textAlign: "center", color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "24px auto 0", lineHeight: 1.7 }}>
+            Every audit ends with your <strong style={{ color: "var(--gold)" }}>top 3 opportunities</strong> —
+            and we can build the first one in month 1.
+          </p>
+          <p style={{ textAlign: "center", marginTop: 24 }}>
+            <AnimatedButton href="/audit#request" variant="primary">Get your free AI audit →</AnimatedButton>
+          </p>
+        </div>
+      </SectionReveal>
 
       <div className="divider-gold" />
 
-      {/* ═══ FOUR OFFERS ═══ */}
-      <SectionReveal
-        id="offers"
-        style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
-      >
+      {/* ═══ THE OFFER STACK ═══ */}
+      <SectionReveal id="tiers" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <p
-              className="font-mono"
-              style={{
-                fontSize: "var(--fs-xs)",
-                letterSpacing: "0.18em",
-                color: "var(--gold-warm)",
-                textTransform: "uppercase",
-                marginBottom: 12,
-              }}
-            >
-              Four doors in
-            </p>
-            <h2
-              style={{
-                fontFamily: "var(--font-display), Georgia, serif",
-                fontWeight: 400,
-                fontStyle: "italic",
-                fontSize: "var(--fs-h2)",
-                color: "var(--gold)",
-                letterSpacing: "0.01em",
-              }}
-            >
-              Pick the door that fits where you are today
-            </h2>
-            <div
-              aria-hidden="true"
-              style={{
-                width: 60,
-                height: 2,
-                background:
-                  "linear-gradient(90deg, transparent, var(--ice), transparent)",
-                margin: "18px auto 0",
-              }}
-            />
-            <p
-              style={{
-                color: "var(--text)",
-                fontWeight: 400,
-                fontSize: "var(--fs-body)",
-                maxWidth: "var(--maxw-prose)",
-                margin: "18px auto 0",
-                lineHeight: 1.7,
-              }}
-            >
-              Start free. Pay only if you need the fix. One operator — no contractor
-              chain, no upsell maze.
-            </p>
-          </div>
-
-          <div
-            className="grid-doors"
-            style={{
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
+          <SectionHeading
+            title="Pick the partnership that fits where you are today"
+            lead="We don't sell projects. We sell partnerships that build, optimise and scale. Every plan includes Privacy by Design, Data Security, Compliance Alignment and Ongoing Support."
+          />
+          <div className="grid-doors" style={{ maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
             {offers.map((o) => {
-              const isFlagship = o.icon === "shield";
+              const isFlagship = o.popular;
               return (
                 <div
                   key={o.tag}
@@ -549,7 +231,7 @@ export default function Home() {
                         boxShadow: "0 4px 14px rgb(0 0 0 / 0.4)",
                       }}
                     >
-                      Most popular · Dec 2026 deadline
+                      Most popular
                     </span>
                   )}
                   <OfferCard {...o} />
@@ -560,103 +242,36 @@ export default function Home() {
         </div>
       </SectionReveal>
 
-      {/* Trust stats strip removed 2026-07-03 — duplicated the hero trust-bar. */}
-
-      {/*
-        SOCIAL PROOF PLACEHOLDER — Kyle to fill.
-        DO NOT FABRICATE. Leave hidden until real content available.
-      */}
-      <section
-        className="social-proof-placeholder"
-        style={{ display: "none" }}
-        aria-hidden="true"
-      >
-        {/* testimonial cards go here when real content lands */}
-      </section>
-
       <div className="divider-gold" />
 
-      {/* ═══ Objection FAQ ═══ */}
+      {/* ═══ WHAT WE BUILD ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <p
-              className="font-mono"
-              style={{
-                fontSize: "var(--fs-xs)",
-                letterSpacing: "0.18em",
-                color: "var(--gold-warm)",
-                textTransform: "uppercase",
-                marginBottom: 12,
-              }}
-            >
-              Straight answers
-            </p>
-            <h2
-              style={{
-                fontFamily: "var(--font-display), Georgia, serif",
-                fontWeight: 400,
-                fontStyle: "italic",
-                fontSize: "var(--fs-h2)",
-                color: "var(--gold)",
-                letterSpacing: "0.01em",
-              }}
-            >
-              What owners actually ask me
-            </h2>
-          </div>
-          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto", display: "grid", gap: 14 }}>
-            {[
-              {
-                q: "Is my small business even affected?",
-                a: "If you hold any customer information — names, emails, phone numbers, health data, payment records — yes. The $3M turnover exemption is positioned to be removed in the second reform tranche. And the direct-lawsuit tort already applies to businesses of any size, regardless of that exemption.",
-              },
-              {
-                q: "I&apos;m not technical — can I actually do this?",
-                a: "That&apos;s exactly who I built this for. On the 90-minute call I do the driving in plain English. You click along inside your own admin consoles. If your mum could send an email, you can do this call.",
-              },
-              {
-                q: "Why you and not a lawyer or a big firm?",
-                a: `A privacy lawyer will write you a policy for AU$3–5k and won&apos;t touch your DNS, MFA or email records. A big firm like Vanta runs AU$18k+ a year and is shaped for US SOC 2, not the AU Privacy Act. I sort all six obligations, live, for one fixed ${DISPLAY.PACK_PRICE} — and I personally review every deliverable before it reaches you.`,
-              },
-              {
-                q: "What if I do nothing?",
-                a: "You&apos;re betting that no customer, ex-employee or contractor ever sues you, and no breach ever forces you to notify. If either happens without documented reasonable steps, your insurer can walk away and the regulator has a clear paper trail against you.",
-              },
-              {
-                q: `Is ${DISPLAY.PACK_PRICE} worth it versus DIY?`,
-                a: "DIY is possible if you have the weekends and the stomach for reading the OAIC guidance. Most owners don&apos;t. The pack collapses the reading, drafting, DNS work, admin-console changes and evidence pack into one working call. If you&apos;d rather DIY, my free scan and methodology page give you the map for free — no upsell.",
-              },
-            ].map((f) => (
-              <details
-                key={f.q}
+          <SectionHeading title="If it's repetitive, we automate it." />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 18,
+              maxWidth: "var(--maxw-wide)",
+              margin: "0 auto",
+            }}
+          >
+            {WHAT_WE_BUILD.map((w) => (
+              <div
+                key={w.title}
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--border)",
                   borderRadius: "var(--radius-md)",
-                  padding: "16px 22px",
+                  padding: "22px 24px",
                 }}
               >
-                <summary
-                  style={{
-                    cursor: "pointer",
-                    color: "var(--ice)",
-                    fontSize: "var(--fs-body)",
-                    fontWeight: 600,
-                    listStyle: "revert",
-                  }}
-                  dangerouslySetInnerHTML={{ __html: f.q }}
-                />
-                <p
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    marginTop: 10,
-                  }}
-                  dangerouslySetInnerHTML={{ __html: f.a }}
-                />
-              </details>
+                <h3 style={{ fontFamily: "var(--font-body), system-ui, sans-serif", color: "var(--ice)", fontSize: "var(--fs-lg)", fontWeight: 600, marginBottom: 6, lineHeight: 1.35 }}>
+                  {w.title}
+                </h3>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.65 }}>{w.body}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -664,15 +279,69 @@ export default function Home() {
 
       <div className="divider-gold" />
 
+      {/* ═══ PRIVACY BY DESIGN — the foundation ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="Privacy by Design" />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto",
+              background: "var(--card)",
+              border: "1px solid var(--gold-dim)",
+              borderRadius: "var(--radius-md)",
+              padding: "28px 26px",
+            }}
+          >
+            <p style={{ color: "var(--gold)", fontSize: "var(--fs-lg)", fontStyle: "italic", lineHeight: 1.6, marginBottom: 18 }}>
+              &ldquo;Every AI shop can build you a chatbot. None of them can tell you it&apos;s
+              privacy-compliant by design — because compliance is my other practice.&rdquo;
+            </p>
+            <ul style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.9, paddingLeft: 20, margin: 0 }}>
+              <li>Every AI system we build is privacy-compliant by design</li>
+              <li>Privacy policy + automated-decision disclosure handled as part of onboarding</li>
+              <li>We de-risk your business — implementing AI without this creates legal exposure, with us it doesn&apos;t</li>
+              <li>We monitor regulation changes and update your systems</li>
+              <li>One-stop shop: AI + compliance = growth + protection</li>
+            </ul>
+          </div>
+          <p style={{ textAlign: "center", marginTop: 24 }}>
+            <AnimatedButton href="/compliance" variant="secondary">See the standalone privacy deep-dive →</AnimatedButton>
+          </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* ═══ WHY THIS WINS ═══ */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="Why owners pick Titanos" />
+          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto", display: "grid", gap: 14 }}>
+            {[
+              "You get value before you buy — the free AI audit, no strings",
+              "We lead with opportunity, not fear",
+              "One partner from day one — no second sale, no build-then-maybe-retainer",
+              "Privacy by design = trust nobody else in this market can claim",
+              "AI systems compound — they get more valuable the longer we run them",
+              "Speed — I respond in minutes and build in days, not months",
+            ].map((line) => (
+              <div key={line} style={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "16px 22px" }}>
+                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>{line}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", maxWidth: "var(--maxw-prose)", margin: "28px auto 0", lineHeight: 1.7 }}>
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254. Personally accountable for
+            every system shipped.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
       {/* ═══ Final CTA ═══ */}
-      <SectionReveal
-        style={{
-          textAlign: "center",
-          padding: "var(--space-30) 20px",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+      <SectionReveal style={{ textAlign: "center", padding: "var(--space-30) 20px", position: "relative", zIndex: 2 }}>
         <h2
           style={{
             fontFamily: "var(--font-display), Georgia, serif",
@@ -684,7 +353,7 @@ export default function Home() {
             letterSpacing: "0.01em",
           }}
         >
-          Start with a free scan — no card needed
+          Not sure where to start?
         </h2>
         <p
           style={{
@@ -697,110 +366,12 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          See what a hacker can see about your business. Takes 1 minute to request.
-          Report lands in your inbox within 2 business days. Then decide what comes next.
+          Get the free AI audit. You&apos;ll see exactly what&apos;s automatable in your business
+          and what it&apos;s worth — no cost, no obligation.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/scan#request" variant="primary">
-            Show me what a hacker sees →
-          </AnimatedButton>
-          <AnimatedButton
-            href={SITE.CAL_15MIN_URL}
-            external
-            variant="secondary"
-          >
-            Book a 15-min fit call
-          </AnimatedButton>
-        </div>
-      </SectionReveal>
-
-      <div className="divider-gold" />
-
-      {/* ═══ How I work (expandable for the curious) ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <details>
-            <summary
-              style={{
-                cursor: "pointer",
-                textAlign: "center",
-                fontFamily: "var(--font-body), system-ui, sans-serif",
-                fontWeight: 500,
-                fontSize: "var(--fs-body)",
-                color: "var(--ice)",
-                letterSpacing: "0.02em",
-                listStyle: "none",
-                marginBottom: 32,
-              }}
-            >
-              How the security check works technically (click to expand)
-            </summary>
-            <div>
-              <div style={{ textAlign: "center", marginBottom: 36 }}>
-                <h2
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    fontWeight: 400,
-                    fontStyle: "italic",
-                    fontSize: "var(--fs-h2)",
-                    color: "var(--gold)",
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  Methodology
-                </h2>
-                <div
-                  aria-hidden="true"
-                  style={{
-                    width: 60,
-                    height: 2,
-                    background:
-                      "linear-gradient(90deg, transparent, var(--ice), transparent)",
-                    margin: "18px auto 0",
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                  gap: 14,
-                  maxWidth: "var(--maxw-content)",
-                  margin: "0 auto",
-                }}
-              >
-                <MethodCard title="What I check">
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Open ports and services (standard port scan)</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Encrypted connection check (TLS/SSL)</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Email security records (SPF, DKIM, DMARC)</p>
-                  <p><span style={{ color: "var(--ok)", marginRight: 6 }}>✓</span>Known software vulnerabilities, by version</p>
-                </MethodCard>
-                <MethodCard title="What I never do">
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Log in or try passwords</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Attempt to break in</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Overload your site</p>
-                  <p><span style={{ color: "var(--warn)", marginRight: 6 }}>✗</span>Access or extract your data</p>
-                </MethodCard>
-                <MethodCard title="Verifiable">
-                  <p>
-                    Every finding comes with the exact command used to find it.
-                    You can run the same check yourself and get the same result.
-                  </p>
-                </MethodCard>
-                <MethodCard title="Opt-out">
-                  <p>
-                    Reply <code>remove</code> to any email and your domain is suppressed
-                    forever. Honoured immediately.
-                  </p>
-                </MethodCard>
-              </div>
-              <p style={{ textAlign: "center", marginTop: 32 }}>
-                <AnimatedButton href="/methodology" variant="secondary">
-                  See full methodology
-                </AnimatedButton>
-              </p>
-            </div>
-          </details>
+          <AnimatedButton href="/audit#request" variant="primary">Get your free AI audit →</AnimatedButton>
+          <AnimatedButton href={SITE.CAL_15MIN_URL} external variant="secondary">Book a 15-min fit call</AnimatedButton>
         </div>
       </SectionReveal>
     </>
@@ -839,56 +410,8 @@ function TrustUnit({
       >
         {big}
       </div>
-      <div
-        style={{
-          fontSize: "var(--fs-xs)",
-          color: "var(--dim)",
-          letterSpacing: "0.06em",
-          textTransform: "uppercase",
-        }}
-      >
+      <div style={{ fontSize: "var(--fs-xs)", color: "var(--dim)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
         {small}
-      </div>
-    </div>
-  );
-}
-
-function MethodCard({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-sm)",
-        padding: 18,
-      }}
-    >
-      <h4
-        style={{
-          color: "var(--ice)",
-          fontSize: "var(--fs-body)",
-          fontWeight: 600,
-          marginBottom: 8,
-          fontFamily: "var(--font-body), system-ui, sans-serif",
-          letterSpacing: 0,
-        }}
-      >
-        {title}
-      </h4>
-      <div
-        style={{
-          color: "var(--dim)",
-          fontSize: "var(--fs-sm)",
-          lineHeight: 1.6,
-        }}
-      >
-        {children}
       </div>
     </div>
   );

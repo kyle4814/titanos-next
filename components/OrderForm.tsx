@@ -7,7 +7,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export type OrderType = "leads" | "compliance" | "ai" | "monitor";
+export type OrderType = "leads" | "compliance" | "ai" | "monitor" | "audit";
 
 type Props = {
   orderType: OrderType;

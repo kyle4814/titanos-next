@@ -26,14 +26,15 @@ import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
-  { label: "Free Scan", href: "/scan", external: false },
+  { label: "Free AI Audit", href: "/audit", external: false },
+  { label: "AI Partnership", href: "/ai-delivery", external: false },
   { label: "Monitor", href: "/monitor", external: false },
   { label: "Compliance", href: "/compliance", external: false },
-  { label: "AI Implementation", href: "/ai-delivery", external: false },
   { label: "Leads", href: "/leads", external: false },
-  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors. Methodology /
-  // Our Scan / About remain in the mobile drawer + footer to keep desktop tight
-  // when the Leads door joins.
+  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors, now led by
+  // the free AI audit + AI partnership. Free Scan / Methodology / About
+  // remain in the mobile drawer + footer to keep desktop tight.
+  { label: "Free Scan", href: "/scan", external: false },
   { label: "Methodology", href: "/methodology", external: false },
   { label: "Our Scan", href: "/scan#self-scan", external: false },
   { label: "About", href: "/about", external: false },

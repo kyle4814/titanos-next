@@ -15,11 +15,12 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
   {
     heading: "Services",
     links: [
-      { label: "Free Scan", href: "/scan" },
+      { label: "Free AI Audit", href: "/audit" },
+      { label: "AI Partnership", href: "/ai-delivery" },
       { label: "Monitor", href: "/monitor" },
       { label: "Compliance", href: "/compliance" },
-      { label: "AI Implementation", href: "/ai-delivery" },
       { label: "Leads & Intelligence", href: "/leads" },
+      { label: "Free Scan", href: "/scan" },
     ],
   },
   {

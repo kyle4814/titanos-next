@@ -32,15 +32,15 @@ export const PRICING = {
   PACK_INCLUDED_MONITOR_MONTHS: 3,
   MONITOR_CONTINUATION_MODE: "opt_in" as "opt_in" | "auto_continue",
 
-  // --- AI delivery ladder ---
-  // Free scoping call (no charge, no obligation) → AI Build (the only paid
-  // entry point; quoted by scope from the call) → Ops Retainer (post-build
-  // only — I won't maintain what I didn't build).
-  // Decided 2026-06-21; re-confirmed 2026-06-23.
-  AI_PILOT_FLOOR: 1500,
-  AI_BUILD_FLOOR: 9997,
-  AI_OPS_RETAINER_LOW: 990,
-  AI_OPS_RETAINER_HIGH: 1990,
+  // --- AI partnership retainers ---
+  // Retainer-only model: the build happens INSIDE month 1 of the retainer,
+  // months 2-3 optimise, then it continues month-to-month. No separate
+  // one-time build price — one sale, recurring from day one.
+  // All three tiers: 3-month minimum. Repositioned 2026-07-16.
+  AI_GROWTH_PARTNER: 1500,
+  AI_OPS_PARTNER: 2500,
+  AI_EMBEDDED_PARTNER: 5000,
+  AI_RETAINER_MIN_MONTHS: 3,
 } as const;
 
 // --- Leads & Intelligence (fourth door) ---
@@ -94,10 +94,11 @@ export const DISPLAY = {
   MONITOR_MONTHLY: formatMonthly(PRICING.MONITOR_MONTHLY),
   MONITOR_ANNUAL: formatAnnual(PRICING.MONITOR_ANNUAL),
   PACK_PRICE: formatAUD(PRICING.PACK_PRICE),
-  AI_PILOT_FLOOR: `From ${formatAUD(PRICING.AI_PILOT_FLOOR)}`,
-  AI_BUILD_FLOOR: `From ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
-  AI_LADDER_ENTRY: `Pilots from ${formatAUD(PRICING.AI_PILOT_FLOOR)} · full builds from ${formatAUD(PRICING.AI_BUILD_FLOOR)}`,
-  AI_OPS_RETAINER: `${formatRange(PRICING.AI_OPS_RETAINER_LOW, PRICING.AI_OPS_RETAINER_HIGH)}/mo`,
+  AI_GROWTH_PARTNER: `${formatMonthly(PRICING.AI_GROWTH_PARTNER)}`,
+  AI_OPS_PARTNER: `${formatMonthly(PRICING.AI_OPS_PARTNER)}`,
+  AI_EMBEDDED_PARTNER: `${formatMonthly(PRICING.AI_EMBEDDED_PARTNER)}+`,
+  AI_RETAINER_MIN: `${PRICING.AI_RETAINER_MIN_MONTHS}-month minimum`,
+  AI_LADDER_ENTRY: `Retainers from ${formatMonthly(PRICING.AI_GROWTH_PARTNER)} · ${PRICING.AI_RETAINER_MIN_MONTHS}-month minimum`,
   LEADS_STARTER: formatAUD(LEADS.STARTER.price),
   LEADS_GROWTH: formatAUD(LEADS.GROWTH.price),
   LEADS_CAMPAIGN: formatAUD(LEADS.CAMPAIGN.price),
