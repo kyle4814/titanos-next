@@ -23,7 +23,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
-import { SITE } from "@/lib/config";
+import { AUDIT_BOOK_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
@@ -150,10 +150,8 @@ export default function Nav() {
           {LINKS.slice(0, 5).map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
-          <a
-            href={SITE.AUDIT_CALL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={AUDIT_BOOK_HREF}
             style={{
               marginLeft: 20,
               padding: "8px 16px",
@@ -168,7 +166,7 @@ export default function Nav() {
             }}
           >
             Book your free AI audit call
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger button — hidden on desktop via media query */}
@@ -308,10 +306,8 @@ export default function Nav() {
                 </button>
               </div>
 
-              <a
-                href={SITE.AUDIT_CALL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={AUDIT_BOOK_HREF}
                 onClick={() => setDrawerOpen(false)}
                 style={{
                   display: "flex",
@@ -329,7 +325,7 @@ export default function Nav() {
                 }}
               >
                 Book your free AI audit call
-              </a>
+              </Link>
 
               <nav>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>

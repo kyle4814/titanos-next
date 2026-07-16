@@ -5,7 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import { SITE } from "@/lib/config";
+import CalEmbed from "@/components/CalEmbed";
 import AuditRequestClient from "./client";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
@@ -54,7 +54,7 @@ export default function AuditPage() {
       />
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+        <AnimatedButton href="#book" variant="primary">
           Book your free AI audit call →
         </AnimatedButton>
       </section>
@@ -116,10 +116,19 @@ export default function AuditPage() {
             I&apos;ll tell you that too.
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+            <AnimatedButton href="#book" variant="primary">
               Book your free AI audit call →
             </AnimatedButton>
           </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="book">
+        <div className="container-vault">
+          <SectionHeading title="Book it now" lead="Pick a time below — no new tab, no separate calendar app." />
+          <CalEmbed />
         </div>
       </SectionReveal>
 

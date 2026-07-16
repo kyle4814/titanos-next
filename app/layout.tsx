@@ -37,6 +37,9 @@ const CSP =
   // legacy form-action 'mailto:' directive below covers the noscript
   // mailto fallback only.
   "connect-src 'self' https://api.titanos.tech; " +
+  // frame-src allows the inline cal.com booking embed on /audit — the
+  // audit call is booked on-page instead of forcing an external tab.
+  "frame-src https://cal.com; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 

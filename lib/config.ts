@@ -79,6 +79,11 @@ export const SITE: SiteConfig = {
 };
 
 // Derived helpers.
+// Sitewide primary CTAs route here (internal anchor) instead of the raw
+// external cal.com URL, so the audit call is booked inline via CalEmbed
+// on /audit without an external-tab hop. /audit itself still offers the
+// external link as a fallback if the embed doesn't load.
+export const AUDIT_BOOK_HREF = "/audit#book";
 export const SCOPING_CALL_URL = SITE.CAL_30MIN_URL || SITE.CAL_15MIN_URL;
 export const SCOPING_CALL_LABEL = SITE.CAL_30MIN_URL
   ? "BOOK A 30-MIN SCOPING CALL"

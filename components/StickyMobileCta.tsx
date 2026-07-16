@@ -4,14 +4,13 @@
 // conversion surface on a phone. Desktop already has the nav + in-page
 // CTAs, so this stays hidden above the mobile breakpoint via CSS.
 
-import { SITE } from "@/lib/config";
+import Link from "next/link";
+import { AUDIT_BOOK_HREF } from "@/lib/config";
 
 export default function StickyMobileCta() {
   return (
     <div className="sticky-mobile-cta">
-      <a href={SITE.AUDIT_CALL_URL} target="_blank" rel="noopener noreferrer">
-        Book Free AI Audit Call
-      </a>
+      <Link href={AUDIT_BOOK_HREF}>Book Free AI Audit Call</Link>
       <style>{`
         .sticky-mobile-cta {
           display: none;

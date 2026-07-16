@@ -7,10 +7,12 @@ import AnimatedButton from "@/components/AnimatedButton";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import JourneySteps from "@/components/JourneySteps";
+import TierQuiz from "@/components/TierQuiz";
 import RoiEstimator from "@/components/RoiEstimator";
+import StatsTicker from "@/components/StatsTicker";
 import FaqItem from "@/components/FaqItem";
 import { STATS } from "@/lib/stats";
-import { SITE } from "@/lib/config";
+import { AUDIT_BOOK_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 
 import type { Offer } from "@/components/OfferCard";
@@ -103,6 +105,8 @@ export default function Home() {
         }
       />
 
+      <StatsTicker />
+
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2 }}>
         <p
           style={{
@@ -124,7 +128,7 @@ export default function Home() {
 
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+            <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
               Book your free AI audit call →
             </AnimatedButton>
             <AnimatedButton href="#tiers" variant="secondary">
@@ -193,7 +197,7 @@ export default function Home() {
             If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">Book your free AI audit call →</AnimatedButton>
+            <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">Book your free AI audit call →</AnimatedButton>
           </p>
         </div>
       </SectionReveal>
@@ -217,12 +221,15 @@ export default function Home() {
             title="Pick the partnership that fits where you are today"
             lead="We don't sell projects. We sell partnerships that build, optimise and scale. Every plan includes Privacy by Design, Data Security, Compliance Alignment and Ongoing Support."
           />
-          <div className="grid-doors" style={{ maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
+          <TierQuiz />
+          <div className="grid-doors" style={{ maxWidth: "var(--maxw-wide)", margin: "24px auto 0" }}>
             {offers.map((o) => {
               const isFlagship = o.popular;
+              const tierSlug = new URL(o.primary.href, "https://titanos.tech").searchParams.get("tier") ?? "";
               return (
                 <div
                   key={o.tag}
+                  id={`tier-${tierSlug}`}
                   style={{
                     position: "relative",
                     height: "100%",
@@ -434,7 +441,7 @@ export default function Home() {
           business and what it&apos;s worth — no cost, no obligation.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">Book your free AI audit call →</AnimatedButton>
+          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">Book your free AI audit call →</AnimatedButton>
           <AnimatedButton href="#tiers" variant="secondary">See the partnership tiers ↓</AnimatedButton>
         </div>
       </SectionReveal>

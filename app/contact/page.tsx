@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
-import { SITE } from "@/lib/config";
+import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
 
 const META_TITLE = "Contact — Kyle Deligny · TITANOS";
 const META_DESC =
@@ -61,7 +61,7 @@ export default function ContactPage() {
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", marginBottom: 24 }}>
             Prefer to talk it through? Book the free AI audit call — no obligation, no pitch deck.
           </p>
-          <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
             Book your free AI audit call →
           </AnimatedButton>
         </div>

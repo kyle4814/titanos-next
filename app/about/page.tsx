@@ -3,7 +3,7 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import { SITE } from "@/lib/config";
+import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
@@ -63,7 +63,7 @@ export default function AboutPage() {
             }}
           />
         )}
-        <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+        <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
           BOOK YOUR FREE AI AUDIT CALL
         </AnimatedButton>
         <AnimatedButton href="/methodology" variant="secondary">
@@ -268,7 +268,7 @@ export default function AboutPage() {
           Same operator behind each one.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={SITE.AUDIT_CALL_URL} external variant="primary">
+          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
             FREE AI AUDIT CALL
           </AnimatedButton>
           <AnimatedButton href="/compliance" variant="secondary">
