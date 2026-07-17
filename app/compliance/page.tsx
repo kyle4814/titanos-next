@@ -7,6 +7,7 @@ import FaqItem from "@/components/FaqItem";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import SlotScarcity from "@/components/SlotScarcity";
 import DeadlineCountdown from "@/components/DeadlineCountdown";
+import ScopeChecker from "@/components/ScopeChecker";
 import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
 import { SITE } from "@/lib/config";
@@ -373,6 +374,16 @@ export default function CompliancePage() {
               </div>
             ))}
           </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* SCOPE CHECKER — answers "does this even apply to me" honestly, per-visitor */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading title="Does the ADM rule apply to you?" lead="Two questions. No data collected, nothing submitted." />
+          <ScopeChecker />
         </div>
       </SectionReveal>
 

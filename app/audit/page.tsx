@@ -6,6 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import CalEmbed from "@/components/CalEmbed";
+import BrisbaneClock from "@/components/BrisbaneClock";
 import AuditRequestClient from "./client";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
@@ -128,6 +129,7 @@ export default function AuditPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="book">
         <div className="container-vault">
           <SectionHeading title="Book it now" lead="Pick a time below — no new tab, no separate calendar app." />
+          <BrisbaneClock />
           <CalEmbed />
         </div>
       </SectionReveal>
