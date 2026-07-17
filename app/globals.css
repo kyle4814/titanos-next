@@ -168,7 +168,11 @@ body {
 }
 
 @media (max-width: 720px) {
-  body { padding-bottom: 66px; }
+  /* Must match/exceed StickyMobileCta's real height (44px button + 20px
+     padding + safe-area inset) or the bar physically overlaps the last
+     row of footer content on notched phones, eating taps meant for the
+     links underneath it instead of just sitting below them. */
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
