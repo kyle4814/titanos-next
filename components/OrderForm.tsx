@@ -27,6 +27,14 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 export type OrderType = "leads" | "compliance" | "ai" | "monitor" | "audit";
 
+const ORDER_LABEL: Record<OrderType, string> = {
+  leads: "Leads & Intelligence",
+  compliance: "Privacy Act Compliance",
+  ai: "AI Partnership",
+  monitor: "Monitor",
+  audit: "Free AI Audit",
+};
+
 type Props = {
   orderType: OrderType;
   tier?: string;
@@ -52,6 +60,7 @@ export default function OrderForm({
   const [scopeValues, setScopeValues] = useState<Record<string, string>>({});
   const [submittedName, setSubmittedName] = useState("");
   const [replyByDate, setReplyByDate] = useState("");
+  const [submittedHighlight, setSubmittedHighlight] = useState("");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -101,6 +110,13 @@ export default function OrderForm({
       if (!res.ok) throw new Error(`POST ${res.status}`);
       setSubmittedName(name.split(" ")[0]);
       setReplyByDate(nextBusinessDayBrisbane());
+      // Mirror back whatever they actually wrote — the longest scope
+      // value is reliably the freeform answer (what's repetitive, what
+      // they need, etc), not a short dropdown pick like "Under $2K".
+      const longestScopeValue = Object.values(scope)
+        .filter((v) => v.length > 15)
+        .sort((a, b) => b.length - a.length)[0];
+      setSubmittedHighlight(longestScopeValue ?? "");
       setStatus("success");
       form.reset();
       setScopeValues({});
@@ -111,10 +127,15 @@ export default function OrderForm({
   };
 
   if (status === "success") {
+    const label = ORDER_LABEL[orderType];
+    const followUpHref = `mailto:kyle@titanos.tech?subject=${encodeURIComponent(
+      `Following up on my ${label} enquiry${submittedName ? ` — ${submittedName}` : ""}`,
+    )}`;
     return (
       <div
         role="status"
         aria-live="polite"
+        className="order-success-in"
         style={{
           background: "var(--card)",
           border: "1px solid var(--ok)",
@@ -138,6 +159,24 @@ export default function OrderForm({
           {successMessage ??
             "Kyle reviews every order personally and will respond within 1 business day."}
         </p>
+        {submittedHighlight && (
+          <p
+            style={{
+              color: "var(--ice)",
+              fontSize: "var(--fs-sm)",
+              lineHeight: 1.7,
+              fontStyle: "italic",
+              background: "var(--vault-bg, rgba(0,0,0,0.15))",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-sm)",
+              padding: "12px 16px",
+              margin: "0 0 20px",
+            }}
+          >
+            You told me: &ldquo;{submittedHighlight}&rdquo; — that&apos;s exactly what I&apos;ll be
+            thinking about.
+          </p>
+        )}
         <div
           style={{
             display: "inline-flex",
@@ -155,6 +194,22 @@ export default function OrderForm({
           <Arrow />
           <Step label={replyByDate ? `You hear back by ${replyByDate}` : "You hear back within 1 business day"} />
         </div>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 20 }}>
+          Forgot to mention something?{" "}
+          <a href={followUpHref} style={{ color: "var(--gold)" }}>
+            Reply here →
+          </a>
+        </p>
+        <style>{`
+          @keyframes order-success-glow {
+            0% { box-shadow: 0 0 0 0 rgb(var(--gold-rgb) / 0.35); }
+            100% { box-shadow: 0 0 0 22px rgb(var(--gold-rgb) / 0); }
+          }
+          .order-success-in { animation: order-success-glow 0.9s ease-out; }
+          @media (prefers-reduced-motion: reduce) {
+            .order-success-in { animation: none; }
+          }
+        `}</style>
       </div>
     );
   }

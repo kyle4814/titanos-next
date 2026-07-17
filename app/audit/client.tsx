@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import OrderForm, { Field } from "@/components/OrderForm";
 
 const INDUSTRIES = [
@@ -16,14 +17,32 @@ const INDUSTRIES = [
   "Other",
 ];
 
+// General patterns, never framed as specific-client results — keeps this
+// inside the honesty guardrails while making the form feel like it's
+// already thinking about their situation, not just collecting a dropdown.
+const INDUSTRY_HINTS: Record<string, string> = {
+  "Healthcare / Allied health": "Appointment reminders and intake forms are usually the first thing worth automating here.",
+  "Finance & accounting": "Client onboarding and document chasing eat the most hours in this industry, typically.",
+  "Legal": "Intake triage and document assembly are the common first wins for legal practices.",
+  "Technology / SaaS": "Support ticket triage and lead qualification are usually the biggest time sinks.",
+  "Professional services": "Proposal generation and follow-up sequencing tend to be the first thing worth fixing.",
+  "Real estate": "Enquiry response speed and listing follow-up are usually where the time goes.",
+  "Education": "Enrolment enquiries and parent/student comms are the common starting point.",
+  "Retail / eCommerce": "Order status enquiries and inventory reporting are usually the first automatable job.",
+  "Trades / field services": "Quote follow-up and job scheduling are usually the biggest wins in this industry.",
+  "Government / NFP": "Application triage and reporting are the common starting points here.",
+};
+
 function SelectField({
   label,
   name,
   options,
+  onChange,
 }: {
   label: string;
   name: string;
   options: string[];
+  onChange?: (value: string) => void;
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -42,6 +61,7 @@ function SelectField({
       <select
         id={`order-${name}`}
         name={name}
+        onChange={(e) => onChange?.(e.target.value)}
         style={{
           width: "100%",
           background: "var(--vault-bg, #0a0a0a)",
@@ -65,6 +85,9 @@ function SelectField({
 }
 
 export default function AuditRequestClient() {
+  const [industry, setIndustry] = useState("");
+  const hint = INDUSTRY_HINTS[industry];
+
   return (
     <OrderForm
       orderType="audit"
@@ -75,7 +98,12 @@ export default function AuditRequestClient() {
     >
       <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 
-      <SelectField label="Industry" name="scope_industry" options={INDUSTRIES} />
+      <SelectField label="Industry" name="scope_industry" options={INDUSTRIES} onChange={setIndustry} />
+      {hint && (
+        <p style={{ color: "var(--gold)", fontSize: "var(--fs-xs)", lineHeight: 1.6, margin: "-8px 0 0" }}>
+          {hint}
+        </p>
+      )}
 
       <Field
         label="What's the most repetitive job in your business?"
