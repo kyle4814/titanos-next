@@ -5,6 +5,24 @@ import { SITE } from "@/lib/config";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Turns the "1 business day" promise into an actual date instead of a
+// vague duration — same commitment, just concrete. Brisbane time, skips
+// weekends only (no public-holiday calendar to keep this honest and simple).
+function nextBusinessDayBrisbane(): string {
+  const now = new Date();
+  const brisbaneNow = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Brisbane" }));
+  const day = brisbaneNow.getDay(); // 0 Sun .. 6 Sat
+  const addDays = day === 5 ? 3 : day === 6 ? 2 : 1;
+  const target = new Date(brisbaneNow);
+  target.setDate(target.getDate() + addDays);
+  return new Intl.DateTimeFormat("en-AU", {
+    timeZone: "Australia/Brisbane",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(target);
+}
+
 type Status = "idle" | "submitting" | "success" | "error";
 
 export type OrderType = "leads" | "compliance" | "ai" | "monitor" | "audit";
@@ -32,6 +50,8 @@ export default function OrderForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [errorMsg, setErrorMsg] = useState("");
   const [scopeValues, setScopeValues] = useState<Record<string, string>>({});
+  const [submittedName, setSubmittedName] = useState("");
+  const [replyByDate, setReplyByDate] = useState("");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,6 +99,8 @@ export default function OrderForm({
         }),
       });
       if (!res.ok) throw new Error(`POST ${res.status}`);
+      setSubmittedName(name.split(" ")[0]);
+      setReplyByDate(nextBusinessDayBrisbane());
       setStatus("success");
       form.reset();
       setScopeValues({});
@@ -110,12 +132,29 @@ export default function OrderForm({
             marginBottom: 12,
           }}
         >
-          RECEIVED.
+          {submittedName ? `Thanks, ${submittedName}.` : "RECEIVED."}
         </div>
-        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>
+        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: "0 0 16px" }}>
           {successMessage ??
             "Kyle reviews every order personally and will respond within 1 business day."}
         </p>
+        <div
+          style={{
+            display: "inline-flex",
+            gap: 14,
+            alignItems: "center",
+            fontSize: "var(--fs-sm)",
+            color: "var(--dim)",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <Step done label="Received" />
+          <Arrow />
+          <Step label="Kyle reads it personally" />
+          <Arrow />
+          <Step label={replyByDate ? `You hear back by ${replyByDate}` : "You hear back within 1 business day"} />
+        </div>
       </div>
     );
   }
@@ -303,5 +342,31 @@ export function Field({
         </p>
       )}
     </div>
+  );
+}
+
+function Step({ label, done }: { label: string; done?: boolean }) {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+      <span
+        aria-hidden="true"
+        style={{
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          background: done ? "var(--ok)" : "var(--gold-dim, var(--border))",
+          display: "inline-block",
+        }}
+      />
+      {label}
+    </span>
+  );
+}
+
+function Arrow() {
+  return (
+    <span aria-hidden="true" style={{ color: "var(--gold-dim, var(--border))" }}>
+      →
+    </span>
   );
 }
