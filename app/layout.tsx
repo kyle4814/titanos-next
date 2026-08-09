@@ -10,6 +10,7 @@ import CursorTrail from "@/components/CursorTrail";
 import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
 import StickyMobileCta from "@/components/StickyMobileCta";
+import SiteAnalytics from "@/components/SiteAnalytics";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -33,10 +34,11 @@ const CSP =
   "img-src 'self' data:; " +
   "font-src 'self'; " +
   // connect-src includes api.titanos.tech so the /scan-request form
-  // can POST cross-origin. fetch() is governed by connect-src; the
-  // legacy form-action 'mailto:' directive below covers the noscript
-  // mailto fallback only.
-  "connect-src 'self' https://api.titanos.tech; " +
+  // can POST cross-origin, and vault.titanos.tech for the site-event
+  // analytics beacon (SiteAnalytics.tsx — write-only, no cookies).
+  // fetch() is governed by connect-src; the legacy form-action
+  // 'mailto:' directive below covers the noscript mailto fallback only.
+  "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech; " +
   // frame-src allows the inline cal.com booking embed on /audit — the
   // audit call is booked on-page instead of forcing an external tab.
   "frame-src https://cal.com; " +
@@ -189,6 +191,7 @@ export default function RootLayout({
         {/* W4 per-page mood swap */}
         <PageMood />
         <EasterEgg />
+        <SiteAnalytics />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
           {children}
