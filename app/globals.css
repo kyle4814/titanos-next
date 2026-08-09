@@ -743,3 +743,93 @@ button:focus-visible,
     letter-spacing: 0.04em;
   }
 }
+
+/* ═══ EVERY DOOR — the full ladder (added 2026-08-10) ═══
+   Five bands, cheapest first. Single column on mobile so the ladder reads
+   as a ladder; 2-up from 720px, 3-up on wide. Enterprise band is visually
+   heavier but not louder — it should feel like a door, not a wall. */
+.ladder-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: var(--maxw-wide);
+  margin: 28px auto 0;
+}
+@media (min-width: 720px) {
+  .ladder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .ladder-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.ladder-band {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line, rgb(255 255 255 / 0.10));
+  border-radius: var(--radius-md, 12px);
+  padding: 22px;
+  background: rgb(255 255 255 / 0.015);
+}
+.ladder-band:last-child {
+  border-color: var(--gold-dim, rgb(212 175 55 / 0.35));
+}
+.ladder-band-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+.ladder-band-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.ladder-band-who {
+  font-size: 0.82rem;
+  opacity: 0.62;
+  margin-top: 4px;
+  line-height: 1.45;
+}
+.ladder-band-price {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+.ladder-band-list {
+  list-style: none;
+  margin: 14px 0 18px;
+  padding: 0;
+  flex: 1;
+}
+.ladder-band-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 7px 0;
+  font-size: 0.86rem;
+  border-bottom: 1px dashed rgb(255 255 255 / 0.06);
+}
+.ladder-band-list li:last-child { border-bottom: none; }
+.ladder-item-label { opacity: 0.85; }
+.ladder-item-price { opacity: 0.6; white-space: nowrap; }
+.ladder-band-cta {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 16px;
+  border: 1px solid var(--line, rgb(255 255 255 / 0.14));
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.86rem;
+  text-decoration: none;
+  min-height: 44px;
+  line-height: 20px;
+}
+.ladder-note {
+  max-width: 62ch;
+  margin: 26px auto 0;
+  text-align: center;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  opacity: 0.66;
+}

@@ -41,6 +41,17 @@ export const PRICING = {
   AI_OPS_PARTNER: 2500,
   AI_EMBEDDED_PARTNER: 5000,
   AI_RETAINER_MIN_MONTHS: 3,
+  // --- Enterprise band (added 2026-08-10) ---
+  // Anchors, not market-tested prices. These exist so a large deal has a
+  // number to land on instead of stalling at "we'll quote you". Every one
+  // is scoped on a call before anything is signed.
+  ENTERPRISE_GOVERNANCE: 49997,
+  ENTERPRISE_MULTI_ENTITY: 74997,
+  ENTERPRISE_AI_ACT: 99997,
+  ENTERPRISE_SOC_MONTHLY: 24997,
+  ENTERPRISE_MONITORING_MONTHLY: 14997,
+  BOARD_ADVISORY_MONTHLY: 7997,
+  OEM_LICENCE_ANNUAL: 149997,
 } as const;
 
 // --- Leads & Intelligence (fourth door) ---
@@ -104,4 +115,14 @@ export const DISPLAY = {
   LEADS_CAMPAIGN: formatAUD(LEADS.CAMPAIGN.price),
   LEADS_RETAINER: formatMonthly(LEADS.RETAINER.price),
   LEADS_STARTER_FROM: `From ${formatAUD(LEADS.STARTER.price)}`,
+
+  // --- enterprise band ---
+  ENTERPRISE_GOVERNANCE: formatAUD(PRICING.ENTERPRISE_GOVERNANCE),
+  ENTERPRISE_MULTI_ENTITY: formatAUD(PRICING.ENTERPRISE_MULTI_ENTITY),
+  ENTERPRISE_AI_ACT: formatAUD(PRICING.ENTERPRISE_AI_ACT),
+  ENTERPRISE_SOC_MONTHLY: formatMonthly(PRICING.ENTERPRISE_SOC_MONTHLY),
+  ENTERPRISE_MONITORING_MONTHLY: formatMonthly(PRICING.ENTERPRISE_MONITORING_MONTHLY),
+  BOARD_ADVISORY_MONTHLY: formatMonthly(PRICING.BOARD_ADVISORY_MONTHLY),
+  OEM_LICENCE_ANNUAL: formatAnnual(PRICING.OEM_LICENCE_ANNUAL),
+  ENTERPRISE_FROM: `From ${formatAUD(PRICING.ENTERPRISE_GOVERNANCE)}`,
 };
