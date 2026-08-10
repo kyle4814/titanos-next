@@ -26,8 +26,34 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Why should I trust a solo operator over an agency?",
+        acceptedAnswer: { "@type": "Answer", text: "No account manager, no junior team you'll never meet. The person who takes the audit call is the person who builds and signs off the work." },
+      },
+      {
+        "@type": "Question",
+        name: "What if you're unavailable later?",
+        acceptedAnswer: { "@type": "Answer", text: "Everything delivered stays kept — no platform lock-in, no dependency on the operator staying reachable for what's already built." },
+      },
+      {
+        "@type": "Question",
+        name: "Is my data safe with an AI-assisted operator?",
+        acceptedAnswer: { "@type": "Answer", text: "Privacy-compliant by design is the other half of the practice, not an afterthought — see the compliance page for exactly what that covers." },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <PageHero
         badge="ABOUT THE OPERATOR"
         title="One operator. ABN-verifiable. AU-based."

@@ -133,8 +133,49 @@ const GROUPS: Array<{
 ];
 
 export default function OurEvidencePackPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is this a real report or a made-up example?",
+        acceptedAnswer: { "@type": "Answer", text: "A real report, run on a real domain (titanos.tech) on the date shown in the document. Every finding is genuine — the only thing changed is that customer names have been removed." },
+      },
+      {
+        "@type": "Question",
+        name: "What does 'redacted' mean — what has been removed?",
+        acceptedAnswer: { "@type": "Answer", text: "Only customer names and contact details have been removed from this sample. Scan results, technical findings, policy text, and security records are all shown exactly as they appear in the delivered document." },
+      },
+      {
+        "@type": "Question",
+        name: "Will I understand it without a security background?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes — every section is written in plain English, explained in terms of what it means for the business, not technical jargon left unexplained." },
+      },
+      {
+        "@type": "Question",
+        name: "Will my report look exactly like this?",
+        acceptedAnswer: { "@type": "Answer", text: "Same structure, same 13 sections, same format — but all content specific to the business it's run for: its own privacy policy, its own scan findings, its own vendor list, its own signed letters." },
+      },
+      {
+        "@type": "Question",
+        name: "Why show your own report instead of a past client's?",
+        acceptedAnswer: { "@type": "Answer", text: "Client confidentiality — publishing a client's findings without consent would be a privacy problem in itself — and credibility: doing it for the business's own systems first, not just claiming it." },
+      },
+      {
+        "@type": "Question",
+        name: "What happens after I see this and decide I want one for my business?",
+        acceptedAnswer: { "@type": "Answer", text: "Book a 15-minute call to confirm fit, or go straight to the compliance page and buy directly. After purchase: domain scanned within 48 hours, draft pack delivered within 3 business days, 90-minute working call scheduled, final evidence pack lands within 24 hours of that call." },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <PageHero
         badge="SEE WHAT YOU GET -- MY OWN REPORT, PUBLISHED IN FULL"
         title="Before you pay for anything, see exactly what you get."
