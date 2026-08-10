@@ -4,38 +4,45 @@
 <meta charset="UTF-8">
 <title>The AI Readiness Guide — Titanos</title>
 <style>
-  @page { size: A4; margin: 22mm 18mm 24mm; }
+  @page { size: A4; margin: 0; }
   :root {
     --gold: #D4AF37; --gold-dim: #8B7225; --ice: #B9F2FF;
     --bg: #0F1418; --card: #1A1310; --border: #2a2620; --text: #E0E0E0; --dim: #a3a09b;
   }
   * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
   body {
-    background: var(--bg); color: var(--text);
+    color: var(--text);
     font-family: "Georgia", "Times New Roman", serif;
-    font-size: 11.5pt; line-height: 1.6; margin: 0;
+    font-size: 11.5pt; line-height: 1.75; margin: 0;
   }
+  /* Margins done as inner padding, not @page/Playwright margin — more
+     reliable across renderers than relying on print-margin plumbing. */
+  .page-pad { padding: 20mm 22mm; }
   .cover {
-    height: 100vh; display: flex; flex-direction: column; justify-content: center;
-    page-break-after: always;
+    min-height: 277mm; display: flex; flex-direction: column; justify-content: flex-start;
+    page-break-after: always; position: relative; padding: 60mm 22mm 20mm;
   }
   .cover .kicker { color: var(--gold); letter-spacing: 4px; font-size: 11pt; text-transform: uppercase; margin-bottom: 18px; }
-  .cover h1 { font-size: 34pt; line-height: 1.15; margin: 0 0 20px; color: #fff; font-weight: 400; }
-  .cover .sub { color: var(--dim); font-size: 13pt; max-width: 420px; }
-  .cover .footer { position: absolute; bottom: 24mm; left: 18mm; color: var(--dim); font-size: 9.5pt; }
+  .cover h1 { font-size: 32pt; line-height: 1.2; margin: 0 0 22px; color: #fff; font-weight: 400; }
+  .cover .sub { color: var(--dim); font-size: 13pt; line-height: 1.7; max-width: 400px; margin-bottom: 30px; }
+  .cover .contents { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 10px; max-width: 400px; }
+  .cover .contents div { color: var(--text); font-size: 11pt; padding: 7px 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .cover .contents span:last-child { color: var(--gold-dim); }
+  .cover .footer { position: absolute; bottom: 20mm; left: 22mm; color: var(--dim); font-size: 9.5pt; }
   h2 {
-    color: var(--gold); font-size: 18pt; font-weight: 400; margin: 0 0 6px;
-    border-bottom: 1px solid var(--border); padding-bottom: 10px;
+    color: var(--gold); font-size: 18pt; font-weight: 400; margin: 0 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 12px;
   }
   h2 .num { color: var(--gold-dim); font-size: 12pt; margin-right: 10px; }
-  h3 { color: var(--ice); font-size: 13pt; font-weight: 600; margin: 22px 0 10px; }
-  p { margin: 0 0 12px; }
-  .section { page-break-inside: avoid; margin-bottom: 26px; }
-  .checklist { list-style: none; margin: 0; padding: 0; }
+  h3 { color: var(--ice); font-size: 13pt; font-weight: 600; margin: 26px 0 12px; }
+  p { margin: 0 0 16px; max-width: 150mm; }
+  .section { page-break-inside: avoid; margin-bottom: 30px; }
+  .checklist { list-style: none; margin: 0 0 8px; padding: 0; }
   .checklist li {
-    display: flex; gap: 10px; margin-bottom: 10px; padding: 10px 12px;
+    display: flex; gap: 12px; margin-bottom: 12px; padding: 13px 15px;
     background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-    font-size: 10.8pt;
+    font-size: 10.8pt; line-height: 1.6;
   }
   .checklist .box {
     flex-shrink: 0; width: 14px; height: 14px; border: 1.5px solid var(--gold);
@@ -53,7 +60,7 @@
     background: var(--card); border: 1px solid var(--border);
   }
   .score-band .n { display: block; color: var(--gold); font-size: 14pt; font-weight: 600; }
-  footer.page-footer { color: var(--dim); font-size: 8.5pt; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 10px; }
+  footer.page-footer { color: var(--dim); font-size: 8pt; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.4; }
   .page-break { page-break-before: always; }
   a { color: var(--ice); }
 </style>
@@ -64,8 +71,17 @@
   <div class="kicker">Titanos · Free Guide</div>
   <h1>The AI Readiness Guide</h1>
   <p class="sub">A working self-audit for finding out — honestly, before you spend anything — whether AI actually saves your business time, and what governance you need in place before you deploy it.</p>
+  <div class="contents">
+    <div><span>01 · Why this exists</span><span>p.2</span></div>
+    <div><span>02 · Will AI actually save you time?</span><span>p.2</span></div>
+    <div><span>03 · Governance and risk, before you deploy</span><span>p.3</span></div>
+    <div><span>04 · How Titanos actually works</span><span>p.4</span></div>
+    <div><span>05 · The vision</span><span>p.5</span></div>
+  </div>
   <div class="footer">Titanos · Kyle Deligny · ABN 34 318 502 254 · Brisbane, QLD · titanos.tech</div>
 </div>
+
+<div class="page-pad">
 
 <div class="section">
   <h2><span class="num">01</span>Why this exists</h2>
@@ -131,17 +147,18 @@
   </div>
 </div>
 
-<div class="section">
+<div class="section section-final">
   <h2><span class="num">05</span>The vision</h2>
   <p>Most businesses adopting AI right now are choosing between "move fast and hope nothing breaks" and "wait until someone else figures it out safely." We think that's a false choice.</p>
   <p>Titanos exists to make the second option as fast as the first — real governance and real speed in the same system, not traded off against each other. That's the whole bet: businesses that get both will out-compete the ones that only got one.</p>
   <div class="callout">If this checklist told you AI could genuinely save real time <em>and</em> you scored well on governance readiness — you're further along than most. If it told you there's a gap, that's exactly where we start: <a href="https://titanos.tech/scan">a free security &amp; AI-readiness scan</a>, no cost, no obligation.</div>
+  <footer class="page-footer">
+    Titanos · Kyle Deligny · ABN 34 318 502 254 · Brisbane, QLD, Australia · titanos.tech · kyle@titanos.tech<br>
+    This guide is general information, not tailored advice. Your situation may differ — talk to us before acting on anything specific to your business.
+  </footer>
 </div>
 
-<footer class="page-footer">
-  Titanos · Kyle Deligny · ABN 34 318 502 254 · Brisbane, QLD, Australia · titanos.tech · kyle@titanos.tech<br>
-  This guide is general information, not tailored advice. Your situation may differ — talk to us before acting on anything specific to your business.
-</footer>
+</div>
 
 </body>
 </html>
