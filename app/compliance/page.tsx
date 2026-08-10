@@ -181,11 +181,70 @@ export default function CompliancePage() {
     },
   };
 
+  // Mirrors the FaqItem content further down verbatim — same pattern as
+  // the Product schema above: hand-maintained alongside the visible copy
+  // since FaqItem answers are JSX and can't be safely auto-extracted.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How the working call works",
+        acceptedAnswer: { "@type": "Answer", text: "A single 90-minute video call where changes are applied together. You share screen for your DNS, your Microsoft 365 or Google Workspace admin console, and your website CMS. Each change is walked through as you make it — no opaque hand-offs. By the end of the call, the privacy policy is deployed, the ADM disclosure is live, the M365/Workspace hardening is applied, the DNS records are corrected, and the NDB runbook is integrated." },
+      },
+      {
+        "@type": "Question",
+        name: "What access you need to grant",
+        acceptedAnswer: { "@type": "Answer", text: "For the working call, you remain logged into your own admin consoles — credentials are never received. You'll need owner or admin access to: your DNS provider, your Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy deployment, and optionally your customer-record systems for the vendor risk register." },
+      },
+      {
+        "@type": "Question",
+        name: "I'm too small for this to matter",
+        acceptedAnswer: { "@type": "Answer", text: "The statutory tort is live now — since 10 June 2025, a customer or ex-employee can take a business to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope." },
+      },
+      {
+        "@type": "Question",
+        name: "My website is on Squarespace — can you even help?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes. The audit works on any hosting provider. What you control (privacy policy, DNS records, account-level MFA, vendor register) is documented versus what Squarespace controls (TLS, HSTS, server config), with exact escalation language for the parts they own." },
+      },
+      {
+        "@type": "Question",
+        name: "I use Microsoft 365 — do you cover that?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes that satisfy most Essential Eight Maturity Level 1 requirements, applied together on the 90-minute working call — typically a 15-minute admin sequence covering MFA, conditional access, and audit logging." },
+      },
+      {
+        "@type": "Question",
+        name: "Is the monthly fee mandatory?",
+        acceptedAnswer: { "@type": "Answer", text: `No. The pack is a one-time ${DISPLAY.PACK_PRICE}. The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor are included free. After that it's entirely optional — ${DISPLAY.MONITOR_MONTHLY} for ongoing scans and briefings, nothing if not wanted. No auto-charge unless affirmatively subscribed.` },
+      },
+      {
+        "@type": "Question",
+        name: "What's the difference between this and Vanta or Drata?",
+        acceptedAnswer: { "@type": "Answer", text: `Vanta and Drata are US$10-15K/yr enterprise compliance tools shaped for SOC 2. This is a ${DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at ${DISPLAY.MONITOR_MONTHLY} after the included ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing Privacy Act + Essential Eight. Different buyer, different price, different geography, different framework.` },
+      },
+      {
+        "@type": "Question",
+        name: "Can you guarantee I'll be compliant?",
+        acceptedAnswer: { "@type": "Answer", text: "No vendor honestly can — compliance is determined by the regulator on the facts of a specific incident. What's delivered is the evidence pack regulators expect to see when assessing whether reasonable steps were taken." },
+      },
+      {
+        "@type": "Question",
+        name: "How fast can this get done?",
+        acceptedAnswer: { "@type": "Answer", text: "External scan within 48 hours of purchase. Working call scheduled inside 7 days. 30-day review call scheduled at the working call. Quarterly re-scans recur for the life of the monitoring subscription." },
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <PageHero

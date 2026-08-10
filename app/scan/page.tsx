@@ -152,11 +152,58 @@ export default function ScanPage() {
     offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
   };
 
+  // Mirrors the FaqItem content below verbatim — FaqItem answers are JSX
+  // (can contain links), so this is authored alongside rather than
+  // extracted from it. Same pattern as the Service schema above: one
+  // hand-maintained JSON-LD block per page, matching the visible copy.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How long does the scan take?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Your scan is queued the moment you submit. The report is delivered to your inbox within 2 business days. Most run faster than that — the SLA is just the worst-case promise.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What if my domain is hosted on Squarespace / Webflow / GitHub Pages?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The scan still works. Findings are split into what you control vs what your hosting provider controls, so you don't walk away with a list of things you can't fix. Host-controlled findings come with the exact escalation language to send the provider.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is this a hacking attempt?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. Only what the public internet can already see is read — service names and versions, certificate details, email security records. No login attempts, no break-in attempts, no overloading the site, no data access.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you store my data?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Scan results are kept in the database to track how exposure patterns change across AU businesses over time. Your email goes only into the contact list — never sold, never shared with third parties, suppressed forever if you reply remove.",
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <PageHero
