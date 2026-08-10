@@ -98,8 +98,34 @@ const VERIFY: VerifyKey[] = [
 ];
 
 export default function MethodologyPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is this a hacking attempt?",
+        acceptedAnswer: { "@type": "Answer", text: "No. Only what a server already broadcasts to the public internet is read — no login attempts, no password guessing, nothing invasive." },
+      },
+      {
+        "@type": "Question",
+        name: "Do you store my data?",
+        acceptedAnswer: { "@type": "Answer", text: "Scan results are kept to track exposure trends over time. Email addresses are only used for the contact list, never sold, and suppressed immediately on reply of \"remove\"." },
+      },
+      {
+        "@type": "Question",
+        name: "Who are you, and why should I trust you?",
+        acceptedAnswer: { "@type": "Answer", text: "Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254, verifiable on the Australian Business Register. Every finding ships with the exact command used to find it." },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <PageHero
         title="How the Security Check Works"
         tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet — the same information a hacker can see from their desk."

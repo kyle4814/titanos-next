@@ -159,11 +159,52 @@ export default function LeadsPage() {
     ],
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Where does the data come from?",
+        acceptedAnswer: { "@type": "Answer", text: "Public Australian business listings and the businesses' own public websites — the same information available to anyone searching for that business, structured and verified rather than pulled from anything non-public." },
+      },
+      {
+        "@type": "Question",
+        name: "Is this legal under the Privacy Act?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes — Privacy Act compliance is the main practice here. Business contact details that are publicly listed are handled the way the Act expects: no sensitive data, suppression on request, transparent sourcing." },
+      },
+      {
+        "@type": "Question",
+        name: "What's the bounce guarantee?",
+        acceptedAnswer: { "@type": "Answer", text: "Every email is verified deliverable before delivery. Anything that bounces within 30 days of delivery gets replaced free." },
+      },
+      {
+        "@type": "Question",
+        name: "Are these decision-maker contacts?",
+        acceptedAnswer: { "@type": "Answer", text: "Where a business publicly lists the owner or a manager's direct contact, that's what's provided. Otherwise the verified main business email is provided — no invented \"decision maker\" addresses to pad the list." },
+      },
+      {
+        "@type": "Question",
+        name: "Do I own the data?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes. Delivered as a file that's kept permanently — no platform lock-in, no access that expires." },
+      },
+      {
+        "@type": "Question",
+        name: "How is this different from Apollo or ZoomInfo?",
+        acceptedAnswer: { "@type": "Answer", text: "Those are US-built subscription tools with thin AU coverage, especially regionally. This is AU-native, verified per-list, and delivered as a research product that's owned outright — not a seat that's rented." },
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <PageHero
