@@ -41,8 +41,54 @@ const STEPS = [
 ];
 
 export default function AuditPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Free AI Audit Call",
+    provider: { "@type": "Organization", name: "Titanos" },
+    serviceType: "AI Consulting",
+    description: "Free, no-obligation call to work out what's automatable in a business and what it's worth.",
+    areaServed: ["AU", "NZ", "SG"],
+    offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is this actually free?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in the business yet, that gets said too." },
+      },
+      {
+        "@type": "Question",
+        name: "How long is the call?",
+        acceptedAnswer: { "@type": "Answer", text: "Long enough to actually understand the business — not capped at a fixed slot the way a sales call usually is." },
+      },
+      {
+        "@type": "Question",
+        name: "What happens after the call?",
+        acceptedAnswer: { "@type": "Answer", text: "If it makes sense, the first system starts inside month 1 of a retainer. If it doesn't, an honest answer and nothing owed." },
+      },
+      {
+        "@type": "Question",
+        name: "Do I need to prepare anything?",
+        acceptedAnswer: { "@type": "Answer", text: "No. Just be ready to talk about the most repetitive, time-consuming part of running the business." },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <PageHero
         badge="FREE · NO OBLIGATION · NO PITCH DECK"
         title="Get your free AI audit call."

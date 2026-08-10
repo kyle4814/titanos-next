@@ -79,11 +79,47 @@ export default function MonitorPage() {
     ],
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What's actually in the monthly email?",
+        acceptedAnswer: { "@type": "Answer", text: "A plain-English summary with three sections: what's new since last month (newly visible services, new software vulnerabilities matched to your versions, certificate changes), what's resolved (anything fixed), and a one-paragraph update on any privacy law changes relevant to your industry. If nothing has changed, the email says so honestly." },
+      },
+      {
+        "@type": "Question",
+        name: "How does the first month work?",
+        acceptedAnswer: { "@type": "Answer", text: "The first scan runs within 1 business day of subscribing. That scan is the baseline — the email reports what's exposed today, not a delta yet. From month two onward, every email is the delta." },
+      },
+      {
+        "@type": "Question",
+        name: "How do I cancel?",
+        acceptedAnswer: { "@type": "Answer", text: "One click from the Stripe-hosted billing portal, linked in every monthly email and on the post-checkout success page. No retention coupons, no phone transfer, no email loops — the subscription ends immediately, no further charges." },
+      },
+      {
+        "@type": "Question",
+        name: "Does this replace a real audit or pen-test?",
+        acceptedAnswer: { "@type": "Answer", text: "No. Monitor is external-only — what an attacker can see from the public internet. It catches drift, new exposure, and freshly-published CVEs matching the stack. For internal posture, controls, and policy compliance, the compliance pack or a separate engagement is the right fit." },
+      },
+      {
+        "@type": "Question",
+        name: "Can I add more domains?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes — subscribe once per domain. For multiple domains, a single combined invoice can be set up instead of separate subscriptions." },
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <PageHero
