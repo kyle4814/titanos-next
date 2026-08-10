@@ -430,6 +430,27 @@ export default function Home() {
         <div className="container-vault">
           <SectionHeading title="What is manual work actually costing you?" lead="Move the sliders — this uses your numbers, not a claim about past results." />
           <RoiEstimator />
+          <div
+            style={{
+              maxWidth: "var(--maxw-prose)",
+              margin: "22px auto 0",
+              background: "var(--card)",
+              border: "1px solid var(--gold-dim)",
+              borderRadius: "var(--radius-md)",
+              padding: "22px 24px",
+              textAlign: "center",
+            }}
+          >
+            <p style={{ color: "var(--gold)", fontSize: "var(--fs-body)", fontWeight: 600, margin: "0 0 8px" }}>
+              Not ready to talk yet? Take the self-audit.
+            </p>
+            <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", margin: "0 0 16px" }}>
+              The AI Readiness Guide — a real checklist for whether AI will save your business time, and what governance you need before deploying it. Free, no form, no catch.
+            </p>
+            <AnimatedButton href="/ai-readiness-guide.pdf" variant="secondary" external>
+              Download the free guide (PDF) →
+            </AnimatedButton>
+          </div>
         </div>
       </SectionReveal>
 
