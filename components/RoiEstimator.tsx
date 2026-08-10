@@ -4,11 +4,32 @@
 // results, since there are no past clients to claim results from yet.
 // React state only. No localStorage/sessionStorage (unreliable in this
 // deploy environment) and nothing is submitted or stored anywhere.
+//
+// 2026-08-10: range extended from solo-operator scale (max 40hrs/wk,
+// $150/hr, ~AU$26k/mo ceiling) to team/enterprise scale (max 400hrs/wk,
+// $500/hr) — the old ceiling couldn't produce a number anywhere near what
+// justifies the AU$50k-150k enterprise tier, so a real enterprise buyer
+// dragging both sliders to max still saw a small-business-shaped answer.
+// Recommendation now also picks the matching tier instead of always
+// pointing at the cheapest retainer.
 
-import { useState } from "react";
-import { PRICING, formatAUD } from "@/lib/pricing";
+import { useMemo, useState } from "react";
+import { DISPLAY } from "@/lib/pricing";
 
 const GROUPED = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+function recommend(monthlyCost: number) {
+  if (monthlyCost >= 40000) {
+    return { label: "Enterprise AI Governance Program", price: DISPLAY.ENTERPRISE_FROM };
+  }
+  if (monthlyCost >= 12000) {
+    return { label: "Embedded AI Partner", price: DISPLAY.AI_EMBEDDED_PARTNER };
+  }
+  if (monthlyCost >= 5000) {
+    return { label: "AI Ops Partner", price: DISPLAY.AI_OPS_PARTNER };
+  }
+  return { label: "AI Growth Partner", price: DISPLAY.AI_GROWTH_PARTNER };
+}
 
 export default function RoiEstimator() {
   const [hours, setHours] = useState(10);
@@ -16,7 +37,8 @@ export default function RoiEstimator() {
 
   const monthlyHours = hours * 4.33;
   const monthlyCost = Math.round(monthlyHours * rate);
-  const retainerEntry = PRICING.AI_GROWTH_PARTNER;
+  const tier = useMemo(() => recommend(monthlyCost), [monthlyCost]);
+  const isTeamScale = hours > 40 || rate > 150;
 
   return (
     <div
@@ -32,32 +54,38 @@ export default function RoiEstimator() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
         <label style={{ display: "block" }}>
           <span style={{ display: "block", color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 8 }}>
-            Hours/week on repetitive manual work: <strong style={{ color: "var(--gold)" }}>{hours}</strong>
+            Hours/week your team spends on repetitive manual work: <strong style={{ color: "var(--gold)" }}>{GROUPED.format(hours)}</strong>
           </span>
           <input
             type="range"
             min={1}
-            max={40}
+            max={400}
             value={hours}
             onChange={(e) => setHours(Number(e.target.value))}
             style={{ width: "100%", accentColor: "var(--gold, #c9a25a)" }}
-            aria-label="Hours per week on repetitive manual work"
+            aria-label="Hours per week the team spends on repetitive manual work"
           />
+          <span style={{ display: "block", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 4 }}>
+            1 (one person, part-time) to 400 (a full department)
+          </span>
         </label>
         <label style={{ display: "block" }}>
           <span style={{ display: "block", color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 8 }}>
-            Rough hourly cost of that person: <strong style={{ color: "var(--gold)" }}>AU${rate}/hr</strong>
+            Rough hourly cost of that work: <strong style={{ color: "var(--gold)" }}>AU${GROUPED.format(rate)}/hr</strong>
           </span>
           <input
             type="range"
             min={20}
-            max={150}
+            max={500}
             step={5}
             value={rate}
             onChange={(e) => setRate(Number(e.target.value))}
             style={{ width: "100%", accentColor: "var(--gold, #c9a25a)" }}
-            aria-label="Hourly cost of the person doing that work"
+            aria-label="Hourly cost of the work"
           />
+          <span style={{ display: "block", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 4 }}>
+            AU$20 (junior/admin) to AU$500 (specialist, exec, or blended enterprise rate)
+          </span>
         </label>
       </div>
 
@@ -70,15 +98,15 @@ export default function RoiEstimator() {
         }}
       >
         <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: "0 0 6px" }}>
-          {hours} hrs/week at AU${rate}/hr ≈{" "}
+          {GROUPED.format(hours)} hrs/week at AU${GROUPED.format(rate)}/hr ≈{" "}
           <strong style={{ color: "var(--gold)", fontVariantNumeric: "tabular-nums" }}>
             AU${GROUPED.format(monthlyCost)}/month
           </strong>{" "}
-          going to manual work.
+          going to manual work{isTeamScale ? ", team-wide" : ""}.
         </p>
         <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: "0 0 14px" }}>
-          That&apos;s the kind of work an AI Growth Partnership takes off your plate — from{" "}
-          <strong style={{ color: "var(--gold)" }}>{formatAUD(retainerEntry)}/mo</strong>.
+          At that scale, the right fit is a <strong style={{ color: "var(--gold)" }}>{tier.label}</strong> — from{" "}
+          <strong style={{ color: "var(--gold)" }}>{tier.price}</strong>.
         </p>
         <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", margin: 0 }}>
           An estimate to help you think it through — your real numbers will differ.
