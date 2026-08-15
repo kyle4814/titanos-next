@@ -41,7 +41,7 @@ const CSP =
   "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech; " +
   // frame-src allows the inline cal.com booking embed on /audit — the
   // audit call is booked on-page instead of forcing an external tab.
-  "frame-src https://cal.com; " +
+  "frame-src https://cal.com https://vault.titanos.tech; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 
