@@ -27,6 +27,7 @@ type SiteConfig = {
   STRIPE_COMPLIANCE_LINK: string;
   KYLE_EMAIL: string;
   ORDER_SUBMIT_URL: string;
+  PARTNER_SIGNUP_URL: string;
 };
 
 // Typed as SiteConfig so empty-string placeholders stay `string`, not
@@ -76,6 +77,11 @@ export const SITE: SiteConfig = {
 
   // Order intake endpoint — the unified POST /order/submit Worker route.
   ORDER_SUBMIT_URL: "https://api.titanos.tech/order/submit",
+
+  // OUTPOST partner-network signup endpoint — lives on the vault Worker,
+  // not api.titanos.tech (separate app, separate D1). CSP connect-src in
+  // layout.tsx must allow this origin.
+  PARTNER_SIGNUP_URL: "https://vault.titanos.tech/partner/signup",
 };
 
 // Derived helpers.
