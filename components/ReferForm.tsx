@@ -8,10 +8,24 @@
 // /api/site-event too, not new to this page) never comes into play.
 // Falls back to a plain link for anyone whose browser blocks third-party
 // iframes.
+//
+// ?ref=<code> forwards through to the iframe unchanged — that's how an
+// existing partner's invite link (titanos.tech/refer?ref=xxx) attributes a
+// new signup back to them. Attribution only, never commission for it (see
+// partner_terms.md — no paying for recruiting partners).
+
+import { useEffect, useState } from "react";
 
 const PARTNER_PORTAL_URL = "https://vault.titanos.tech/partner";
 
 export default function ReferForm() {
+  const [src, setSrc] = useState(PARTNER_PORTAL_URL);
+
+  useEffect(() => {
+    const ref = new URLSearchParams(window.location.search).get("ref");
+    if (ref) setSrc(`${PARTNER_PORTAL_URL}?ref=${encodeURIComponent(ref)}`);
+  }, []);
+
   return (
     <div style={{ maxWidth: 480, margin: "0 auto" }}>
       <div
@@ -23,7 +37,7 @@ export default function ReferForm() {
         }}
       >
         <iframe
-          src={PARTNER_PORTAL_URL}
+          src={src}
           title="Apply to the Titanos partner network"
           loading="lazy"
           style={{ width: "100%", height: 420, border: "none", display: "block" }}
@@ -31,7 +45,7 @@ export default function ReferForm() {
       </div>
       <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 10 }}>
         Form not loading?{" "}
-        <a href={PARTNER_PORTAL_URL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--gold)" }}>
+        <a href={src} target="_blank" rel="noopener noreferrer" style={{ color: "var(--gold)" }}>
           Open it in a new tab →
         </a>
       </p>
