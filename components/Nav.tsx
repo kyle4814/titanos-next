@@ -32,13 +32,13 @@ const LINKS = [
   { label: "Compliance", href: "/compliance", external: false },
   { label: "Monitor", href: "/monitor", external: false },
   { label: "Leads", href: "/leads", external: false },
-  // Desktop nav shows LINKS.slice(0, 5) — the five revenue doors, led by
-  // the free AI audit + AI partnership. Free Scan / Evidence Pack /
-  // Methodology / About / Contact remain in the mobile drawer + footer to
-  // keep desktop tight. The desktop CTA button (below, outside LINKS) is
-  // the single sitewide primary action.
-  { label: "Free Scan", href: "/scan", external: false },
   { label: "Blog", href: "/blog", external: false },
+  // Desktop nav shows LINKS.slice(0, 6) — the five revenue doors plus the
+  // blog (content/SEO discovery matters enough to earn the sixth slot).
+  // Free Scan / Evidence Pack / Methodology / About / Contact remain in
+  // the mobile drawer + footer to keep desktop tight. The desktop CTA
+  // button (below, outside LINKS) is the single sitewide primary action.
+  { label: "Free Scan", href: "/scan", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
   { label: "Methodology", href: "/methodology", external: false },
@@ -149,7 +149,7 @@ export default function Nav() {
 
         {/* Desktop link strip — hidden on mobile via media query */}
         <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center" }}>
-          {LINKS.slice(0, 5).map((l) => (
+          {LINKS.slice(0, 6).map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
           <Link
