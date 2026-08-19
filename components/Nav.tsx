@@ -38,6 +38,7 @@ const LINKS = [
   // keep desktop tight. The desktop CTA button (below, outside LINKS) is
   // the single sitewide primary action.
   { label: "Free Scan", href: "/scan", external: false },
+  { label: "Blog", href: "/blog", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
   { label: "Methodology", href: "/methodology", external: false },
