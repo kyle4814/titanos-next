@@ -166,6 +166,49 @@ export default function HeroEntrance({
         className="container-vault"
         style={{ position: "relative", zIndex: 3 }}
       >
+        {/* The seal. Ω is the constitutional mark — it says the system has an
+            edge and knows where it ends. Exactly one per page, above the
+            wordmark, framed like something stamped rather than drawn. */}
+        <motion.div
+          aria-hidden="true"
+          animate={wordmarkCtl}
+          initial={false}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 14,
+            marginBottom: 26,
+          }}
+        >
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 54,
+              height: 54,
+              border: "1px solid rgb(var(--gold-rgb) / 0.45)",
+              color: "var(--gold)",
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontSize: "1.6rem",
+              lineHeight: 1,
+              letterSpacing: 0,
+              background: "rgb(var(--gold-rgb) / 0.04)",
+            }}
+          >
+            Ω
+          </span>
+          <span
+            style={{
+              width: 1,
+              height: 34,
+              background:
+                "linear-gradient(180deg, rgb(var(--gold-rgb) / 0.5), transparent)",
+            }}
+          />
+        </motion.div>
+
         <motion.div
           role="img"
           aria-label="TITANOS"

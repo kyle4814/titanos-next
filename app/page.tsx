@@ -180,38 +180,67 @@ export default function Home() {
         }
       />
 
-      {/* ═══ THE OPENING — a genuine "entering a system" moment ═══ */}
+      {/* ═══ THE OPENING — the threshold. Framed like an inscription: two
+          rules top and bottom, a stone-tinted recess between them, so the
+          statement reads as something set into the page rather than
+          another paragraph on it. ═══ */}
       <section
         aria-label="What TITANOS is"
-        style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2, textAlign: "center" }}
+        style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
       >
-        <p
-          className="font-mono"
+        <div
           style={{
-            color: "var(--gold-dim)",
-            fontSize: "var(--fs-xs)",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            marginBottom: 10,
-          }}
-        >
-          Built from a phone. No funding. No permission asked.
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            fontStyle: "italic",
-            fontWeight: 400,
-            color: "var(--ice)",
-            fontSize: "var(--fs-h4)",
             maxWidth: "var(--maxw-content)",
             margin: "0 auto",
-            lineHeight: 1.5,
+            borderTop: "1px solid rgb(var(--gold-rgb) / 0.30)",
+            borderBottom: "1px solid rgb(var(--gold-rgb) / 0.30)",
+            background:
+              "linear-gradient(180deg, rgb(var(--gold-rgb) / 0.05), transparent 60%)",
+            padding: "var(--space-8) var(--space-6)",
+            textAlign: "center",
           }}
         >
-          TITANOS is one operator&apos;s autonomous systems, built to remove friction, not add
-          headcount. <span style={{ color: "var(--gold)" }}>The machine carries the complexity. You keep the judgement.</span>
-        </p>
+          <p
+            className="font-mono"
+            style={{
+              color: "var(--gold)",
+              fontSize: "var(--fs-xs)",
+              letterSpacing: "0.24em",
+              textTransform: "uppercase",
+              marginBottom: 18,
+            }}
+          >
+            Built from a phone · No funding · No permission asked
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontStyle: "italic",
+              fontWeight: 400,
+              color: "var(--ice)",
+              fontSize: "var(--fs-h3)",
+              margin: "0 auto",
+              lineHeight: 1.45,
+              maxWidth: "22ch",
+            }}
+          >
+            The machine carries the complexity.
+            <br />
+            <span style={{ color: "var(--gold)" }}>You keep the judgement.</span>
+          </p>
+          <p
+            style={{
+              color: "var(--dim)",
+              fontSize: "var(--fs-sm)",
+              lineHeight: 1.7,
+              maxWidth: "var(--maxw-prose)",
+              margin: "20px auto 0",
+            }}
+          >
+            TITANOS is one operator&apos;s autonomous systems, built to remove friction rather
+            than add headcount.
+          </p>
+        </div>
       </section>
 
       <StatsTicker />
