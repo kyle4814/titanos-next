@@ -36,6 +36,8 @@ export type BlogPost = {
   readMinutes: number;
   body: ContentBlock[];
   relatedSlugs?: string[];
+  /** Optional — renders as FaqItem list + emits FAQPage JSON-LD. */
+  faq?: { q: string; a: string }[];
 };
 
 export const POSTS: BlogPost[] = [
@@ -189,7 +191,7 @@ export const POSTS: BlogPost[] = [
         href: "/compliance",
       },
     ],
-    relatedSlugs: ["free-scan-legitimacy-check", "ai-audit-what-we-actually-find"],
+    relatedSlugs: ["sole-trader-privacy-policy-threshold", "notifiable-data-breach-scheme-small-business"],
   },
   {
     slug: "ai-audit-what-we-actually-find",
@@ -322,6 +324,331 @@ export const POSTS: BlogPost[] = [
       },
     ],
     relatedSlugs: ["privacy-act-small-business-deadline", "ai-audit-what-we-actually-find"],
+  },
+  {
+    slug: "ai-receptionist-compliance",
+    title: "Is an AI receptionist for your trade business actually Privacy Act compliant?",
+    description:
+      "AI phone-answering tools for tradies are booming. Before installing one, here's what to check about call recording consent and where the data actually goes.",
+    excerpt:
+      "The pitch is always missed calls. Nobody selling these tools mentions where the recording of your customer's voice actually ends up.",
+    date: "2026-08-19",
+    tag: "AI implementation",
+    readMinutes: 5,
+    body: [
+      {
+        type: "p",
+        text: "Short answer: usually yes, but only if you check three specific things first — call recording consent, where the transcript is stored, and whether the vendor is contractually accountable to you for it. Most AI-receptionist products for tradies don't mention any of the three on their pricing page.",
+      },
+      {
+        type: "p",
+        text: "The pitch for these tools is consistent and genuinely true: tradies on tools all day can't answer calls, and a missed call is often a missed job. What's missing from almost every pitch is that the moment the tool starts recording and transcribing a customer's voice, you've created a new category of personal information you're responsible for under the Privacy Act — separate from the job data already sitting in ServiceM8 or Tradify.",
+      },
+      { type: "h2", text: "Does the tool need consent to record the call?" },
+      {
+        type: "p",
+        text: "Yes, in most cases — Australian call-recording law generally requires at least one party's consent, and reasonable practice is to disclose it up front (\"this call may be recorded for quality and follow-up\"). If the AI receptionist doesn't play a disclosure before it starts capturing audio, that's the first thing to raise with the vendor, not something to assume they've handled.",
+      },
+      { type: "h2", text: "Where does the recording and transcript actually live?" },
+      {
+        type: "p",
+        text: "A lot of these tools are US-built SaaS products, which means customer voice data and transcripts may be stored offshore, sometimes fed into a third-party AI model provider on top of that. Neither is automatically a problem, but it means your customer's phone number, name, and job details are now sitting in at least two more systems than they were before — and it's worth asking, in writing, whether the vendor uses your customers' calls to train their own model.",
+      },
+      { type: "h2", text: "Who's accountable if the vendor is breached?" },
+      {
+        type: "p",
+        text: "Disclosing customer information to a third-party tool doesn't transfer your responsibility for it — under Australian Privacy Principle 11, you remain accountable for taking reasonable steps to protect information even once it's sitting with a supplier. A one-line data processing clause in the vendor's terms (or the lack of one) is worth reading before signing up, not after something goes wrong.",
+      },
+      {
+        type: "p",
+        text: "None of this means don't use an AI receptionist — missed-call revenue loss is real and these tools solve a genuine problem. It means asking the vendor these three questions before rollout costs you nothing and closes the actual gap.",
+      },
+      {
+        type: "cta",
+        text: "If you're weighing up an AI receptionist or any other automation tool, the free audit call covers the compliance side, not just whether it'll save you time.",
+        label: "BOOK A FREE AI AUDIT CALL →",
+        href: "/audit#book",
+      },
+    ],
+    relatedSlugs: ["ai-audit-what-we-actually-find", "privacy-act-small-business-deadline"],
+    faq: [
+      {
+        q: "Do I need to tell customers an AI is answering the phone?",
+        a: "Best practice, yes — a short disclosure at the start of the call (that it's an automated assistant, and that the call may be recorded) covers both the recording-consent question and sets honest expectations.",
+      },
+      {
+        q: "Is it illegal to use an AI receptionist in Australia?",
+        a: "No — there's no law against it. The obligations are the same ones that already apply to any tool handling customer personal information: consent to record, reasonable security, and accountability for what a vendor does with the data.",
+      },
+    ],
+  },
+  {
+    slug: "invoice-scam-tradies",
+    title: "Business email compromise: the invoice scam actually hitting Australian trade businesses",
+    description:
+      "Fake supplier bank-detail-change emails are the most-reported cybercrime against Australian small businesses. Here's how the scam works and what stops it.",
+    excerpt:
+      "It doesn't look like a scam. It looks like your supplier, in a normal email, saying their bank details changed.",
+    date: "2026-08-19",
+    tag: "Security",
+    readMinutes: 5,
+    body: [
+      {
+        type: "p",
+        text: "Business email compromise (BEC) — an attacker impersonating a supplier or client to redirect a payment — is the most-reported cybercrime category against Australian small businesses, and trade businesses are a specific target because of high-value supplier invoices and client progress payments moving through email with little friction.",
+      },
+      { type: "h2", text: "What the scam actually looks like" },
+      {
+        type: "p",
+        text: "It rarely looks like a scam. The two common patterns: a supplier's email account is compromised and sends a genuine-looking invoice with new bank details attached, or an attacker registers a lookalike domain (one character different from your supplier's real one) and emails you directly saying their account changed. Both arrive as ordinary business correspondence, often mid-conversation on a real, existing job.",
+      },
+      { type: "h2", text: "Why trade businesses specifically get targeted" },
+      {
+        type: "ul",
+        items: [
+          "Supplier invoices are large and irregular enough that a changed amount or new account doesn't immediately look wrong.",
+          "Client progress payments on bigger jobs move real money on a schedule an attacker can predict from a compromised inbox.",
+          "Small teams often have one person handling payments, with no second check before a bank transfer goes out.",
+        ],
+      },
+      { type: "h2", text: "What actually stops it" },
+      {
+        type: "ol",
+        items: [
+          "Any bank-detail change, from anyone, gets confirmed by phone on a number you already have on file — never a number in the email.",
+          "Multi-factor authentication on every email account that can send or receive invoices, not just the owner's.",
+          "A second person (even informally) glances at any transfer over a set amount before it goes out.",
+          "Check the sender's actual email address, not just the display name, on anything asking to change payment details.",
+        ],
+      },
+      {
+        type: "p",
+        text: "None of this requires new software — it's a habit change that costs nothing, and it's the single highest-value five minutes most trade businesses could spend on cybersecurity this month.",
+      },
+      {
+        type: "cta",
+        text: "Our free scan checks the parts of this attack surface you can verify externally — DKIM/SPF/DMARC on your own domain, and what's publicly exposed.",
+        label: "RUN THE FREE SCAN →",
+        href: "/scan",
+      },
+    ],
+    relatedSlugs: ["essential-eight-small-trade-business", "free-scan-legitimacy-check"],
+  },
+  {
+    slug: "essential-eight-small-trade-business",
+    title: "The ACSC Essential Eight, translated for a one-van trade business",
+    description:
+      "The Australian Cyber Security Centre's Essential Eight is written for IT departments. Here's what each control actually means for a 1-3 person trade business.",
+    excerpt:
+      "\"Application whitelisting\" means nothing to a solo electrician. \"Only install apps from the app store\" does.",
+    date: "2026-08-19",
+    tag: "Security",
+    readMinutes: 6,
+    body: [
+      {
+        type: "p",
+        text: "The Essential Eight is the Australian Cyber Security Centre's baseline set of controls for reducing cyber risk — written primarily for organisations with an IT department, which means most of it doesn't obviously translate to a business run out of a ute. Here's what each control actually means at that scale.",
+      },
+      { type: "h2", text: "What does \"application control\" mean for a solo tradie?" },
+      {
+        type: "p",
+        text: "Only install apps from your phone's official app store (Google Play / Apple App Store), not sideloaded APKs or links texted to you. That single habit covers most of what this control is trying to achieve at a 1-3 person scale.",
+      },
+      { type: "h2", text: "What does \"patch applications\" mean day to day?" },
+      {
+        type: "p",
+        text: "Turn on automatic updates for your phone, laptop, and job-management app, and don't put off the update prompts. Most real-world breaches exploit a vulnerability that was already patched months earlier — the gap is people delaying the update, not a lack of a patch existing.",
+      },
+      { type: "h2", text: "What does \"multi-factor authentication\" actually protect?" },
+      {
+        type: "p",
+        text: "Your Xero login, your email, your job-management system, and your bank login are the four that matter most. If someone else could send an invoice, read a client's details, or move money by getting into one of those four accounts, MFA on that account is worth the ten seconds it adds to logging in.",
+      },
+      { type: "h2", text: "What does \"regular backups\" mean if you don't run a server?" },
+      {
+        type: "p",
+        text: "Whether your job photos, quotes, and client details actually survive your phone being lost, stolen, or dropped in a puddle on site. If the honest answer is \"they're only on my phone,\" that's the gap — most job-management apps already back up to the cloud automatically; check the setting is actually on.",
+      },
+      { type: "h2", text: "What does \"restrict admin privileges\" mean with one or two staff?" },
+      {
+        type: "p",
+        text: "Not every staff member needs the login that can change bank details, delete client records, or add new users. If your job-management system supports staff-level permissions, a new apprentice's login shouldn't have the same access as yours.",
+      },
+      {
+        type: "p",
+        text: "The remaining three controls (configuring Microsoft Office macro settings, user application hardening, and restricting admin OS environments) are genuinely IT-department-scale and rarely apply to a business with no server infrastructure — worth knowing they exist, not worth chasing at this size.",
+      },
+      {
+        type: "cta",
+        text: "The free scan checks what's externally visible about your setup — no login access needed, no cost, full results either way.",
+        label: "RUN THE FREE SCAN →",
+        href: "/scan",
+      },
+    ],
+    relatedSlugs: ["invoice-scam-tradies", "free-scan-legitimacy-check"],
+    faq: [
+      {
+        q: "Does the Essential Eight apply to small businesses?",
+        a: "It's not legally mandated for small business (it's mandatory for certain Australian government entities), but it's the ACSC's own baseline recommendation and translates down to a handful of habit-level changes even at a 1-3 person scale.",
+      },
+      {
+        q: "What's the single highest-value control for a solo tradie?",
+        a: "Multi-factor authentication on email and Xero/accounting logins — those two accounts are the ones an attacker can turn directly into stolen money via a fake invoice or bank-detail change.",
+      },
+    ],
+  },
+  {
+    slug: "ai-automation-cost-small-business",
+    title: "What should AI automation actually cost a small trade business?",
+    description:
+      "Published pricing for AI automation ranges from $2k to $12k+ setup and $50-$600/month. Here's how to tell whether a quote is scoped to your business or just a package price.",
+    excerpt:
+      "The number on the quote matters less than whether anyone looked at your business before writing it.",
+    date: "2026-08-19",
+    tag: "AI implementation",
+    readMinutes: 5,
+    body: [
+      {
+        type: "p",
+        text: "Published pricing for AI automation aimed at small trade businesses ranges roughly $2,000-$12,000 for setup and $50-$600 a month ongoing — a wide enough range that the number alone doesn't tell you whether it's a fair price for what you need, or a package price for what the vendor sells everyone.",
+      },
+      { type: "h2", text: "Why the range is so wide" },
+      {
+        type: "p",
+        text: "Two businesses paying wildly different amounts can both be paying a fair price, because they bought different things. A pre-built chatbot template costs less because it's the same product sold to hundreds of businesses. A system built around your actual quote process, your actual job-management software, and the one task genuinely eating your week costs more because someone had to look at your business specifically before building anything.",
+      },
+      { type: "h2", text: "What a quote before a proper scoping conversation is worth" },
+      {
+        type: "p",
+        text: "Not much. A price quoted before anyone's asked what's actually manual in your business is a guess dressed up as a number — usually a package price for a generic build, regardless of whether it fits what you need. The honest sequence is: understand the actual task first, then price the actual build.",
+      },
+      { type: "h2", text: "Questions worth asking before signing anything" },
+      {
+        type: "ul",
+        items: [
+          "Has anyone actually looked at how my business currently handles this task, or is this price for a template?",
+          "What happens to the system if I stop paying the monthly fee — do I keep anything, or does it stop working entirely?",
+          "Is the monthly cost a real running cost (hosting, API usage) or mostly margin on a tool I could use directly?",
+          "What's the honest answer if the task isn't actually worth automating — will they tell me that, or just build it anyway?",
+        ],
+      },
+      {
+        type: "p",
+        text: "That last question is the real test. A vendor who's willing to say \"this isn't worth automating\" on a free call is pricing against your actual problem. One who isn't is pricing against their own product line.",
+      },
+      {
+        type: "cta",
+        text: "One hour of your time in month one, quoted only after we've found the actual task worth automating — not a package price.",
+        label: "BOOK A FREE AI AUDIT CALL →",
+        href: "/audit#book",
+      },
+    ],
+    relatedSlugs: ["ai-audit-what-we-actually-find", "outreach-that-actually-works"],
+  },
+  {
+    slug: "notifiable-data-breach-scheme-small-business",
+    title: "The Notifiable Data Breach scheme: the 30-day rule small businesses miss",
+    description:
+      "If your business emails the wrong attachment to the wrong client, that can trigger the Notifiable Data Breach scheme. Here's the actual trigger and the 30-day assessment clock.",
+    excerpt:
+      "It doesn't have to be a hack. An email sent to the wrong address can trigger the same 30-day clock.",
+    date: "2026-08-19",
+    tag: "Compliance",
+    readMinutes: 4,
+    body: [
+      {
+        type: "p",
+        text: "The Notifiable Data Breach (NDB) scheme is triggered by any unauthorised access to or disclosure of personal information that's likely to cause serious harm — not just a hack. Accidentally emailing a client's quote and contact details to the wrong recipient, or a lost phone with unencrypted client photos, can trigger the same 30-day obligation as an actual cyberattack.",
+      },
+      { type: "h2", text: "What actually starts the clock" },
+      {
+        type: "p",
+        text: "Once a business is aware of a suspected breach, it has 30 days to assess whether it's likely to cause serious harm to the people affected. Small operators often assume the scheme only applies to businesses that get \"properly hacked\" — the trigger is broader than that, and it applies regardless of business size if the harm test is met (this is one of the areas where the small-business exemption doesn't fully shield you, since it's tied to the nature of the incident, not turnover).",
+      },
+      { type: "h2", text: "What counts as \"serious harm\"" },
+      {
+        type: "p",
+        text: "Financial loss, identity theft risk, and reputational or physical harm all count. A quote export with names, phone numbers and job addresses sent to the wrong person is a real example that can meet the threshold — it's not limited to financial or health information.",
+      },
+      { type: "h2", text: "What to do if it happens" },
+      {
+        type: "ol",
+        items: [
+          "Contain it immediately — recall the email if possible, revoke access, stop the spread.",
+          "Assess within 30 days whether serious harm is likely, documenting the reasoning either way.",
+          "If serious harm is likely, notify the OAIC and the individuals affected, with what happened and what you're doing about it.",
+          "Fix the process gap that caused it, not just the individual incident.",
+        ],
+      },
+      {
+        type: "p",
+        text: "This is exactly the kind of thing worth having a plain-English answer ready for before it happens, not scrambling to work out during the 30-day clock.",
+      },
+      {
+        type: "cta",
+        text: "Fixed-price Privacy Act compliance for AU small business — including a breach-response plan you can actually follow.",
+        label: "SEE THE COMPLIANCE PACK →",
+        href: "/compliance",
+      },
+    ],
+    relatedSlugs: ["privacy-act-small-business-deadline", "sole-trader-privacy-policy-threshold"],
+  },
+  {
+    slug: "sole-trader-privacy-policy-threshold",
+    title: "Do sole traders need a privacy policy in Australia?",
+    description:
+      "Most sole traders assume the Privacy Act's small-business exemption covers them completely. It's narrower than that, and narrowing further for some businesses from mid-2026.",
+    excerpt:
+      "\"I'm under $3 million turnover\" is true for almost every sole trader. It's not the whole answer anymore.",
+    date: "2026-08-19",
+    tag: "Compliance",
+    readMinutes: 4,
+    body: [
+      {
+        type: "p",
+        text: "Short answer: most sole traders are still covered by the Privacy Act's small-business exemption (annual turnover under $3 million) today, but the exemption already has exceptions that catch some trade businesses, and it narrows further for specific business types from 1 July 2026 — so \"I'm too small\" is worth double-checking rather than assuming.",
+      },
+      { type: "h2", text: "Who's already excluded from the exemption, regardless of size" },
+      {
+        type: "ul",
+        items: [
+          "Health service providers — including anyone holding health-related records, which can catch businesses that don't think of themselves as health providers.",
+          "Businesses that trade in personal information — buying or selling contact lists or data as part of the business.",
+          "Businesses that collect or hold tax file numbers.",
+        ],
+      },
+      { type: "h2", text: "What changes from 1 July 2026" },
+      {
+        type: "p",
+        text: "Businesses that become \"reporting entities\" under AML/CTF tranche-two reforms — a group that includes many accountants, lawyers, real estate agents, and some trust or company service providers — lose the small-business exemption from that date, regardless of turnover. If that doesn't describe your trade, this specific change doesn't catch you, but it's a sign the exemption is narrowing rather than staying fixed.",
+      },
+      { type: "h2", text: "Should you have a privacy policy anyway, even if exempt?" },
+      {
+        type: "p",
+        text: "Practically, yes, for reasons beyond strict legal obligation. If you're storing customer names, addresses, phone numbers, and job photos in ServiceM8 or a spreadsheet, having a plain-English one-pager on what you do with that information is the kind of thing that costs an afternoon and heads off an awkward conversation later — with a client, a platform you're selling through, or an insurer asking about your data practices.",
+      },
+      {
+        type: "p",
+        text: "It's also simply good practice regardless of the legal threshold — the businesses that treat customer data carelessly before they're legally required to are usually the same ones scrambling when the requirement does eventually catch them.",
+      },
+      {
+        type: "cta",
+        text: "A straight answer on whether the reforms apply to your specific business, and what minimum-viable compliance actually looks like.",
+        label: "SEE THE COMPLIANCE PACK →",
+        href: "/compliance",
+      },
+    ],
+    relatedSlugs: ["privacy-act-small-business-deadline", "notifiable-data-breach-scheme-small-business"],
+    faq: [
+      {
+        q: "Is the Privacy Act small business exemption being removed completely?",
+        a: "Not as a blanket change — as of now it's narrowed for specific categories (health providers, data traders, TFN holders always; AML/CTF reporting entities from 1 July 2026). A full removal for all small business has been proposed in reform discussions but isn't confirmed or dated — treat claims that it's already gone for everyone with scepticism.",
+      },
+      {
+        q: "What's the cheapest way to become compliant as a sole trader?",
+        a: "A short, honest privacy policy covering what you collect, why, and how someone can ask you to delete it — plus basic habits like MFA on your accounts — covers most of the practical gap for a business below the exemption threshold with no unusual data handling.",
+      },
+    ],
   },
 ];
 

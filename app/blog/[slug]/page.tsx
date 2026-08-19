@@ -6,6 +6,7 @@ import SectionReveal from "@/components/SectionReveal";
 import BlogBody from "@/components/BlogBody";
 import BlogPostCard from "@/components/BlogPostCard";
 import AnimatedButton from "@/components/AnimatedButton";
+import FaqItem from "@/components/FaqItem";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
 import { POSTS, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 
@@ -87,6 +88,18 @@ export default async function BlogPostPage({
     ],
   };
 
+  const faqJsonLd = post.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      }
+    : null;
+
   return (
     <>
       <script
@@ -97,6 +110,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <PageHero
         badge={post.tag.toUpperCase()}
@@ -123,6 +142,32 @@ export default async function BlogPostPage({
           <BlogBody blocks={post.body} />
         </div>
       </SectionReveal>
+
+      {post.faq && post.faq.length > 0 && (
+        <>
+          <div className="divider-gold" />
+          <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+            <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display), Georgia, serif",
+                  color: "var(--gold)",
+                  fontSize: "var(--fs-h3)",
+                  letterSpacing: "0.06em",
+                  marginBottom: 20,
+                }}
+              >
+                QUICK ANSWERS
+              </h2>
+              {post.faq.map((item) => (
+                <FaqItem key={item.q} question={item.q}>
+                  {item.a}
+                </FaqItem>
+              ))}
+            </div>
+          </SectionReveal>
+        </>
+      )}
 
       {related.length > 0 && (
         <>

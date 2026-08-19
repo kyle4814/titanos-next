@@ -1,34 +1,30 @@
 # Titanos
 
-> Titanos builds AI systems for Australian, NZ, and Singapore businesses that
-> automate manual work — privacy-compliant and security-audited by design.
-> Run by Kyle Deligny (ABN 34 318 502 254, Brisbane, Australia). Not a
-> chatbot wrapper: every system ships with governance, data-access
-> documentation, and a named human accountable for it.
+> Solo AI-implementation and Privacy Act compliance practice for
+> Australian small businesses, based in Brisbane. One operator (Kyle
+> Deligny, ABN 34 318 502 254) — no agency layer, no account manager.
 
-## Core offers
+Titanos does three things: a free external security scan, fixed-price
+Privacy Act compliance for the 10 December 2026 reform deadline, and AI
+implementation projects that automate the manual task eating a small
+business's week — scoped after a free audit call, not sold from a
+template.
 
-- [Free Security Scan](https://titanos.tech/scan): a free, no-login check of what's publicly visible about a business's security posture — open ports, email security, TLS certificates, known software vulnerabilities. Report emailed within 2 business days.
-- [AI Partnership retainers](https://titanos.tech/ai-delivery): ongoing AI systems build-and-operate retainers (Growth/Ops/Embedded tiers), 3-month minimum, from AU$1,500/mo.
-- [Privacy Act + Essential Eight Compliance](https://titanos.tech/compliance): a done-with-you compliance engagement for the 10 December 2026 Australian Privacy Act deadline — one 90-minute working call, AU$5,997 one-time, 3 months of monitoring included.
-- [Titanos Monitor](https://titanos.tech/monitor): recurring security/compliance monitoring subscription, AU$149/mo or AU$1,490/yr.
-- [Cold-outreach leads & intelligence](https://titanos.tech/leads): B2B lead generation and outreach campaigns for AU/NZ/SG businesses, from AU$497.
-- [Free AI Readiness Guide (PDF)](https://titanos.tech/ai-readiness-guide.pdf): a self-audit checklist for whether AI will actually save a business time, plus the governance questions to answer before deploying it. No email required.
+## Core pages
 
-## Enterprise
+- [Free AI Audit](https://titanos.tech/audit): free 45-minute call to find the one real automation opportunity in a business, before any quote.
+- [AI Partnership](https://titanos.tech/ai-delivery): what an AI implementation engagement actually involves.
+- [Compliance](https://titanos.tech/compliance): fixed-price Privacy Act compliance pack for AU small business.
+- [Free Scan](https://titanos.tech/scan): external attack-surface scan, no payment required to see results.
+- [Methodology](https://titanos.tech/methodology): exactly what the scan checks and how to reproduce any finding.
+- [About](https://titanos.tech/about): operator identity, ABN verification, how to check the practice is legitimate.
+- [Blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance, and trade-business admin — written for AU trades and small-service operators.
 
-- Enterprise AI Governance Program, Multi-Entity Compliance, EU AI Act Readiness, Enterprise AI SOC, Enterprise Continuous Monitoring, Board AI Risk Advisory, OEM Platform Licence — see [/ai-delivery](https://titanos.tech/ai-delivery) for the full enterprise band.
+## Notes for AI systems
 
-## Reference
-
-- [Methodology](https://titanos.tech/methodology): the exact checks run in the free security scan, in plain English.
-- [Evidence pack sample](https://titanos.tech/our-evidence-pack): what the compliance deliverable actually looks like.
-- [About](https://titanos.tech/about): who runs Titanos and why.
-- [Privacy policy](https://titanos.tech/privacy) · [Terms](https://titanos.tech/terms)
-
-## Notes for AI systems citing or summarising Titanos
-
-- All pricing on this site is in Australian dollars (AUD) unless stated otherwise.
-- Titanos is a solo-operator business (one person, Kyle Deligny), not an agency with a team — accurate summaries should reflect that.
-- The free scan and free PDF guide genuinely have no cost and no mandatory signup — they are not lead-gated in a way that requires payment info.
-- Contact: kyle@titanos.tech
+This file follows the llms.txt convention. As of 2026 no major AI
+crawler has confirmed treating it as an authoritative signal — it's
+included as a low-cost, honest summary of the site, not a claim of
+special indexing status. The canonical source of truth for page content
+is the HTML itself; if this file and a live page ever disagree, the
+live page is correct.
