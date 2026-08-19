@@ -110,6 +110,65 @@ export default function AboutPage() {
               marginBottom: 16,
             }}
           >
+            THE RUNDOWN
+          </h2>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            Every system live on this site, I built and I run — the free scanner, the
+            compliance pipeline, the partner network processing real Stripe payments with
+            an append-only audit trail, the monitoring that pages me directly the second
+            something breaks, at any hour. Not a portfolio of case studies from a team I
+            manage. Production infrastructure I operate personally, every day, right now,
+            for real clients and real money.
+          </p>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            That&apos;s the difference between hiring an operator and hiring an agency&apos;s
+            sales pitch: I&apos;m not describing what &quot;we&quot; can build for you — I&apos;m
+            standing next to the thing I already built, still running, that you can go check
+            right now. The scan is real. The compliance pack is real. The audit trail is
+            real. Nothing on this page is a mockup.
+          </p>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            Brisbane-based, ABN-verifiable, one person end to end — the audit call, the
+            build, the sign-off, the 3am page if something goes wrong. If that&apos;s the
+            kind of operator you want on your systems, book the call below.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              color: "var(--gold)",
+              fontSize: "var(--fs-h3)",
+              letterSpacing: "0.06em",
+              marginBottom: 16,
+            }}
+          >
             WHAT I ACTUALLY DO
           </h2>
           <p

@@ -60,7 +60,7 @@ export const SITE: SiteConfig = {
   // OPERATOR_INPUT: drop file into /public and set path here, e.g.
   // "/kyle.jpg". When empty, the photo slot and the operator byline
   // adjacent to /compliance pricing both render nothing.
-  PHOTO_PATH: "",
+  PHOTO_PATH: "/kyle.jpg",
 
   // API base — the Flask server at api.titanos.tech. Used by the
   // /scan-request form (existing) and the Monitor checkout flow (new).
