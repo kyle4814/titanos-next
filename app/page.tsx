@@ -170,7 +170,7 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
-        eyebrow="TITANOS · AI Systems for Australian Businesses"
+        eyebrow="BUILT FROM A PHONE · NO FUNDING · NO PERMISSION ASKED"
         tagline="I find the manual task eating your week, and build the system that does it instead."
         trust={
           <>
