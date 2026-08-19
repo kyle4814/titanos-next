@@ -171,7 +171,7 @@ export default function Home() {
       <HeroEntrance
         wordmark="TITANOS"
         eyebrow="TITANOS · AI Systems for Australian Businesses"
-        tagline="Every week, your business is losing money."
+        tagline="I find the manual task eating your week, and build the system that does it instead."
         trust={
           <>
             Personally reviewed · Australian-owned · ABN 34 318 502 254 ·{" "}
@@ -531,6 +531,15 @@ export default function Home() {
           </FaqItem>
           <FaqItem question="We're not a tech business — does this even apply to us?">
             That's most of who I work with. You don't need to understand how it works, the same way you don't need to understand accounting software to use it. That's what the audit call is for.
+          </FaqItem>
+          <FaqItem question="I'm flat out — I don't have time for a project right now.">
+            Fair. Month 1 needs about an hour of your time in total: one call to work out which task is worth automating, one to check I built the right thing. If I need more from you than that, I've scoped it wrong.
+          </FaqItem>
+          <FaqItem question="We've already got software for this.">
+            Then you might not need me, and I'll tell you that. A lot of what gets sold as automation just books appointments or shuffles data between two tools you already pay for. Tell me what you're running on the call and I'll give you a straight answer on whether there's a real gap.
+          </FaqItem>
+          <FaqItem question="Couldn't I just do this myself with ChatGPT?">
+            Sometimes, genuinely — and I'll say so on the call if that's the honest answer. The part that eats weeks isn't the prompt, it's the plumbing: getting it running against your actual data, handling the cases where it gets things wrong, and keeping it working when the tools change underneath it.
           </FaqItem>
           <FaqItem question="What if it breaks?">
             Ongoing support is part of the retainer, not an add-on you have to remember to buy.
