@@ -556,6 +556,21 @@ export default function Home() {
         </div>
       </SectionReveal>
 
+      <SectionReveal style={{ textAlign: "center", padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
+        <a
+          href="/black-ice"
+          data-analytics="black_ice_view"
+          style={{
+            color: "var(--dim)",
+            fontSize: "var(--fs-sm)",
+            textDecoration: "none",
+            letterSpacing: "0.02em",
+          }}
+        >
+          Everything on this site runs on one operating doctrine — <span style={{ color: "var(--ice)" }}>Black Ice →</span>
+        </a>
+      </SectionReveal>
+
       <div className="divider-gold" />
 
       {/* ═══ Final CTA ═══ */}

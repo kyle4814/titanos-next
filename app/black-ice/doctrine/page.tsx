@@ -62,7 +62,7 @@ const TOC = [
   ["sub-zero", "The Sub-Zero Murmur"],
   ["child-operator", "Child + Operator"],
   ["web-slider", "The Web Slider"],
-  ["demon-blade", "Demon Blade — Red-Team for Preservation"],
+  ["demon-blade", "Red-Team, Not Demolition"],
   ["99-1", "The 99/1 Principle"],
   ["zero-dependency", "Zero-Dependency Thinking"],
   ["pareto", "The Pareto Frontier"],
@@ -70,7 +70,24 @@ const TOC = [
   ["compression", "Compression"],
   ["governed-autonomy", "Governed Autonomy"],
   ["core-loop", "The Core Loop"],
+  ["doctrine-x", "The Doctrine"],
   ["integrity", "Metaphor vs. Mechanism"],
+] as const;
+
+// Canonical ten — must match BLACK_ICE_BRAND_BIBLE.md §3 exactly (condensed
+// for on-page length, not reworded). Two independently-written versions of
+// "the ten principles" existed before this fix; keeping one source of truth.
+const DOCTRINE_X = [
+  ["I", "Observe before acting. Most bad decisions are made against a situation that no longer exists."],
+  ["II", "Automate the known. Preserve judgement for exactly where the pattern breaks down."],
+  ["III", "Protect the downside before chasing the upside. Ask what happens if this fails first."],
+  ["IV", "Make actions reversible wherever the stakes allow it. Spend irreversibility deliberately."],
+  ["V", "Red-team your own conclusions, not other people's. Find the weak point before someone else does."],
+  ["VI", "Measure reality, not confidence. Confidence is a hypothesis, not a result."],
+  ["VII", "Move at the speed the consequence deserves. Speed is a variable, not a virtue."],
+  ["VIII", "Compress what worked into something reusable before moving to the next problem."],
+  ["IX", "Stay accountable to the outcome, not the effort. Busy isn't the same as useful."],
+  ["X", "Leave room for what you haven't figured out yet. Hold the hunch lightly, test it properly."],
 ] as const;
 
 const faqJsonLd = {
@@ -180,6 +197,10 @@ export default function BlackIceDoctrinePage() {
           generated dies early; a decision made with the Child still in the room never
           actually ships.
         </P>
+        <P>
+          Neither mode is worth more than the other. The work is knowing, at any given
+          moment, which one is holding the pen.
+        </P>
       </Section>
 
       <Section id="web-slider" title="THE WEB SLIDER">
@@ -199,7 +220,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="demon-blade" title="DEMON BLADE — RED-TEAM FOR PRESERVATION">
+      <Section id="demon-blade" title="RED-TEAM, NOT DEMOLITION">
         <P>
           Nothing is sacred — assumptions, dependencies, abstractions, claims all get
           inspected. But the goal is never to win an argument against your own idea. It&apos;s
@@ -275,9 +296,9 @@ export default function BlackIceDoctrinePage() {
         </P>
         <P>
           One clear rule beats ten paragraphs of explanation. One reusable function beats
-          the same logic written five times. This field guide is itself an attempt at that —
-          22 sections of source doctrine compressed to what actually earns a reader&apos;s
-          time.
+          the same logic written five times. This field guide is itself an attempt at
+          that — compressed to what actually earns a reader&apos;s time, nothing kept
+          because it sounded good.
         </P>
       </Section>
 
@@ -317,6 +338,42 @@ export default function BlackIceDoctrinePage() {
           fast when the path is clear, slow down when uncertainty or consequence rises, and
           rest when continuing would make the work worse, not better.
         </P>
+      </Section>
+
+      <Section id="doctrine-x" title="THE DOCTRINE">
+        <P>
+          Everything above, distilled to ten lines. Not a summary to skim instead of reading
+          the rest — a reference to return to once the rest is already understood.
+        </P>
+        <ol
+          style={{
+            listStyle: "none",
+            margin: "28px 0 8px",
+            padding: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: 22,
+          }}
+        >
+          {DOCTRINE_X.map(([numeral, text]) => (
+            <li key={numeral} style={{ display: "flex", gap: 18, alignItems: "baseline" }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-display), Georgia, serif",
+                  color: "var(--gold)",
+                  fontSize: "var(--fs-lg)",
+                  minWidth: 34,
+                  flexShrink: 0,
+                }}
+              >
+                {numeral}.
+              </span>
+              <span style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
+                {text}
+              </span>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section id="integrity" title="METAPHOR VS. MECHANISM">
