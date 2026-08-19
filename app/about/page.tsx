@@ -56,8 +56,8 @@ export default function AboutPage() {
       />
       <PageHero
         badge="ABOUT THE OPERATOR"
-        title="One operator. ABN-verifiable. AU-based."
-        tagline="Kyle Deligny — Brisbane, Australia. Solo practice. The same person who scans your domain runs your 90-minute compliance call and writes the email that comes back."
+        title="Built from a phone. Run by one operator."
+        tagline="Kyle Deligny — Brisbane, Australia. No funding, no team, no permission asked. Just a decision to start, and a standard for what's allowed to ship."
         sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you book the call, you book me."
         trustLine={
           <>
@@ -73,22 +73,6 @@ export default function AboutPage() {
           </>
         }
       >
-        {/* Fix 2b — photo slot. Renders only when SITE.PHOTO_PATH is set. */}
-        {SITE.PHOTO_PATH && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={SITE.PHOTO_PATH}
-            alt="Kyle Deligny, Titanos, Brisbane"
-            width={120}
-            height={120}
-            style={{
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "1px solid var(--gold-dim)",
-              marginBottom: 18,
-            }}
-          />
-        )}
         <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
           BOOK YOUR FREE AI AUDIT CALL
         </AnimatedButton>
@@ -99,6 +83,128 @@ export default function AboutPage() {
 
       <div className="divider-gold" />
 
+      {/* THE ORIGIN — the myth, load-bearing, not decorative. Photo + pull-quote
+          give the operator a face and a stance before any service copy runs. */}
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              color: "var(--gold)",
+              fontSize: "var(--fs-h3)",
+              letterSpacing: "0.06em",
+              marginBottom: 24,
+            }}
+          >
+            THE ORIGIN
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "var(--space-8)",
+              alignItems: "flex-start",
+              marginBottom: 28,
+            }}
+          >
+            {SITE.PHOTO_PATH && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={SITE.PHOTO_PATH}
+                alt="Kyle Deligny, founder of Titanos, Brisbane"
+                width={220}
+                height={270}
+                style={{
+                  width: 220,
+                  height: 270,
+                  objectFit: "cover",
+                  border: "1px solid var(--gold-dim)",
+                  borderRadius: "var(--radius-sm)",
+                  flexShrink: 0,
+                }}
+              />
+            )}
+            <blockquote
+              style={{
+                margin: 0,
+                flex: "1 1 320px",
+                borderLeft: "2px solid var(--gold)",
+                paddingLeft: "var(--space-6)",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 300,
+                color: "var(--gold-bright)",
+                fontSize: "var(--fs-h4)",
+                lineHeight: 1.5,
+              }}
+            >
+              &quot;You don&apos;t need permission to begin.&quot;
+            </blockquote>
+          </div>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            TITANOS didn&apos;t start with a pitch deck, a round of funding, or a co-founder
+            to argue the plan with. It started on a phone, with an idea and the decision to
+            stop waiting for someone else&apos;s approval to act on it. No investors to brief
+            before a decision. No hiring plan to justify before shipping something. No
+            committee standing between a judgement call and the thing going live.
+          </p>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            That&apos;s not a sympathy story — it&apos;s a resourcefulness one. Fewer
+            resources meant every decision had to earn its place: build systems instead of
+            headcount, let the machine carry the repeatable work, and keep human judgement
+            concentrated exactly where it&apos;s worth the most. The constraint became the
+            method.
+          </p>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginBottom: 14,
+            }}
+          >
+            Every system live on this site, I built and I run — the free scanner, the
+            compliance pipeline, the partner network processing real Stripe payments with an
+            append-only audit trail, the monitoring that pages me directly the second
+            something breaks, at any hour. Not a portfolio of case studies from a team I
+            manage. Production infrastructure I operate personally, every day, right now, for
+            real clients and real money — the scan is real, the compliance pack is real, the
+            audit trail is real. Nothing on this page is a mockup.
+          </p>
+          <p
+            style={{
+              color: "var(--text)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+            }}
+          >
+            Brisbane-based, ABN-verifiable, one person end to end — the audit call, the
+            build, the sign-off, the 3am page if something goes wrong. If that&apos;s the
+            kind of operator you want on your systems, keep reading — or skip straight to
+            how you check any of it.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
+      {/* THE CHILD AND THE OPERATOR — how the work actually gets done: the
+          division of labour between the AI doing the building and the human
+          deciding what's allowed to ship. */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <h2
@@ -110,7 +216,7 @@ export default function AboutPage() {
               marginBottom: 16,
             }}
           >
-            THE RUNDOWN
+            THE CHILD AND THE OPERATOR
           </h2>
           <p
             style={{
@@ -120,12 +226,10 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            Every system live on this site, I built and I run — the free scanner, the
-            compliance pipeline, the partner network processing real Stripe payments with
-            an append-only audit trail, the monitoring that pages me directly the second
-            something breaks, at any hour. Not a portfolio of case studies from a team I
-            manage. Production infrastructure I operate personally, every day, right now,
-            for real clients and real money.
+            Claude Code does the keystroke-level building — fast, tireless, willing to try
+            the thing that hasn&apos;t been tried yet. Left to itself, that instinct just
+            keeps asking &quot;what if?&quot; That&apos;s exactly what you want from a system
+            that builds. It is not what you want deciding whether the build ships.
           </p>
           <p
             style={{
@@ -135,23 +239,37 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            That&apos;s the difference between hiring an operator and hiring an agency&apos;s
-            sales pitch: I&apos;m not describing what &quot;we&quot; can build for you — I&apos;m
-            standing next to the thing I already built, still running, that you can go check
-            right now. The scan is real. The compliance pack is real. The audit trail is
-            real. Nothing on this page is a mockup.
+            That&apos;s where I sit. Before anything goes live, it answers four questions:
+            Does it work? Is it safe? Can it be repeated? Can I reverse it if I&apos;m wrong?
+            The machine proposes. The human decides. That&apos;s not a slogan for this page —
+            it&apos;s the actual workflow, every day, on every system this site claims to
+            run.
           </p>
+          <blockquote
+            style={{
+              margin: "24px 0",
+              borderLeft: "2px solid var(--gold)",
+              paddingLeft: "var(--space-6)",
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontStyle: "italic",
+              fontWeight: 300,
+              color: "var(--gold-bright)",
+              fontSize: "var(--fs-h4)",
+              lineHeight: 1.5,
+            }}
+          >
+            &quot;The machine handles the complexity. The human decides what
+            matters.&quot;
+          </blockquote>
           <p
             style={{
               color: "var(--text)",
               fontSize: "var(--fs-body)",
               lineHeight: 1.8,
-              marginBottom: 14,
             }}
           >
-            Brisbane-based, ABN-verifiable, one person end to end — the audit call, the
-            build, the sign-off, the 3am page if something goes wrong. If that&apos;s the
-            kind of operator you want on your systems, book the call below.
+            Nothing here requires you to trust that division blindly. It&apos;s the same
+            standard the rest of this page is built to survive — check it below.
           </p>
         </div>
       </SectionReveal>
@@ -290,6 +408,22 @@ export default function AboutPage() {
             - Certifications held (IRAP / ISO 27001 / CySA+ / Essential Eight assessor)
               still TODO — add a fourth section if any get held.
           */}
+
+          <p
+            style={{
+              color: "var(--dim)",
+              fontSize: "var(--fs-body)",
+              lineHeight: 1.8,
+              marginTop: 28,
+              paddingTop: 24,
+              borderTop: "1px solid var(--border)",
+            }}
+          >
+            None of this is a template. It&apos;s one person starting without asking
+            permission, keeping the receipts, and letting you check every one of them
+            before you pay a cent. If there&apos;s a version of that you could run yourself,
+            good — that&apos;s the point.
+          </p>
         </div>
       </SectionReveal>
 

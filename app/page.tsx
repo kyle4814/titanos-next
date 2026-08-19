@@ -180,6 +180,40 @@ export default function Home() {
         }
       />
 
+      {/* ═══ THE OPENING — a genuine "entering a system" moment ═══ */}
+      <section
+        aria-label="What TITANOS is"
+        style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2, textAlign: "center" }}
+      >
+        <p
+          className="font-mono"
+          style={{
+            color: "var(--gold-dim)",
+            fontSize: "var(--fs-xs)",
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            marginBottom: 10,
+          }}
+        >
+          Built from a phone. No funding. No permission asked.
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--font-display), Georgia, serif",
+            fontStyle: "italic",
+            fontWeight: 400,
+            color: "var(--ice)",
+            fontSize: "var(--fs-h4)",
+            maxWidth: "var(--maxw-content)",
+            margin: "0 auto",
+            lineHeight: 1.5,
+          }}
+        >
+          TITANOS is one operator&apos;s autonomous systems, built to remove friction, not add
+          headcount. <span style={{ color: "var(--gold)" }}>The machine carries the complexity. You keep the judgement.</span>
+        </p>
+      </section>
+
       <StatsTicker />
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2 }}>
@@ -516,6 +550,132 @@ export default function Home() {
 
       <div className="divider-gold" />
 
+      {/* ═══ THE OPERATOR — myth section, deliberately a different layer of the site ═══ */}
+      <SectionReveal style={{ padding: "var(--space-30) 20px", position: "relative", zIndex: 2 }}>
+        <div
+          style={{
+            maxWidth: "var(--maxw-wide)",
+            margin: "0 auto",
+            border: "1px solid rgb(var(--gold-rgb) / 0.2)",
+            borderRadius: "var(--radius-md)",
+            background: "rgb(var(--gold-rgb) / 0.02)",
+            padding: "clamp(28px, 4vw, 56px) clamp(20px, 4vw, 48px)",
+          }}
+        >
+          <p
+            className="font-mono"
+            style={{
+              textAlign: "center",
+              color: "var(--gold-dim)",
+              fontSize: "var(--fs-xs)",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              marginBottom: 18,
+            }}
+          >
+            The doctrine behind the delivery
+          </p>
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontWeight: 400,
+              fontStyle: "italic",
+              color: "var(--gold)",
+              fontSize: "var(--fs-h2)",
+              textAlign: "center",
+              maxWidth: "var(--maxw-content)",
+              margin: "0 auto 28px",
+              lineHeight: 1.35,
+            }}
+          >
+            Built from a phone. No funding. No team. No permission asked.
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 24,
+              maxWidth: "var(--maxw-wide)",
+              margin: "0 auto 30px",
+            }}
+          >
+            <div>
+              <p className="font-mono" style={{ color: "var(--gold-dim)", fontSize: "var(--fs-xs)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
+                The operator
+              </p>
+              <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
+                One person built TITANOS from a phone — no office, no round of funding, no
+                one&apos;s permission required. Capability was never supposed to be something
+                you have to be given. It&apos;s something you build.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono" style={{ color: "var(--gold-dim)", fontSize: "var(--fs-xs)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
+                The division of labour
+              </p>
+              <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
+                The machine carries the complexity — the repetition, the plumbing, the noise.
+                The human decides what matters and stays accountable for it. AI is
+                infrastructure here, never a character standing in for you.
+              </p>
+            </div>
+            <div>
+              <p className="font-mono" style={{ color: "var(--gold-dim)", fontSize: "var(--fs-xs)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
+                The enemy
+              </p>
+              <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
+                Friction. Noise. Needless dependency. Systems too fragile to trust. And the
+                idea, still common, that this kind of capability belongs only to people with
+                money, teams, or someone&apos;s permission. It doesn&apos;t.
+              </p>
+            </div>
+          </div>
+
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--ice)",
+              fontSize: "var(--fs-lg)",
+              maxWidth: "var(--maxw-prose)",
+              margin: "0 auto 30px",
+              lineHeight: 1.7,
+            }}
+          >
+            Automate the known. Preserve human judgement for the unknown.{" "}
+            <span style={{ color: "var(--gold)" }}>That&apos;s the whole method — everything
+            we build for you runs on it too.</span>
+          </p>
+
+          <div style={{ textAlign: "center" }}>
+            <a
+              href="/black-ice"
+              data-analytics="black_ice_view"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                color: "var(--gold)",
+                fontSize: "var(--fs-body)",
+                fontWeight: 600,
+                textDecoration: "none",
+                border: "1px solid var(--gold-dim)",
+                borderRadius: "var(--radius-sm)",
+                padding: "12px 22px",
+              }}
+            >
+              Read the doctrine — Black Ice →
+            </a>
+            <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 12 }}>
+              Free field guide. The actual operating system behind every build, not a lead
+              magnet.
+            </p>
+          </div>
+        </div>
+      </SectionReveal>
+
+      <div className="divider-gold" />
+
       {/* ═══ FAQ ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -555,23 +715,6 @@ export default function Home() {
           </FaqItem>
         </div>
       </SectionReveal>
-
-      <SectionReveal style={{ textAlign: "center", padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
-        <a
-          href="/black-ice"
-          data-analytics="black_ice_view"
-          style={{
-            color: "var(--dim)",
-            fontSize: "var(--fs-sm)",
-            textDecoration: "none",
-            letterSpacing: "0.02em",
-          }}
-        >
-          Everything on this site runs on one operating doctrine — <span style={{ color: "var(--ice)" }}>Black Ice →</span>
-        </a>
-      </SectionReveal>
-
-      <div className="divider-gold" />
 
       {/* ═══ Final CTA ═══ */}
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-30) 20px", position: "relative", zIndex: 2 }}>

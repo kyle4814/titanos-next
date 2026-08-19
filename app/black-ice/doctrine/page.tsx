@@ -26,12 +26,50 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+const SECTION_TOTAL = 13;
+
+function Section({
+  id,
+  title,
+  index,
+  wide = false,
+  children,
+}: {
+  id: string;
+  title: string;
+  index: number;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
+  // Depth cue: alternating undertone so scrolling reads as descending
+  // through layers rather than a flat wall of identical sections.
+  const layerBg = index % 2 === 0 ? "var(--vault-warm)" : "transparent";
   return (
     <>
       <div className="divider-gold" />
-      <SectionReveal id={id} style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2, scrollMarginTop: 90 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal
+        id={id}
+        style={{
+          padding: wide ? "var(--space-20) 20px" : "var(--space-16) 20px",
+          position: "relative",
+          zIndex: 2,
+          scrollMarginTop: 90,
+          background: layerBg,
+        }}
+      >
+        <div style={{ maxWidth: wide ? "var(--maxw-content)" : "var(--maxw-prose)", margin: "0 auto" }}>
+          <div
+            aria-hidden="true"
+            style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "var(--fs-xs)",
+              letterSpacing: "0.2em",
+              color: "var(--gold-dim)",
+              marginBottom: 10,
+            }}
+          >
+            {String(index).padStart(2, "0")} / {String(SECTION_TOTAL).padStart(2, "0")}
+          </div>
           <h2
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
@@ -148,10 +186,22 @@ export default function BlackIceDoctrinePage() {
                 gap: 8,
               }}
             >
-              {TOC.map(([id, label]) => (
-                <li key={id}>
+              {TOC.map(([id, label], i) => (
+                <li key={id} style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      fontFamily: "var(--font-mono), monospace",
+                      fontSize: "var(--fs-xs)",
+                      color: "var(--gold-dim)",
+                      letterSpacing: "0.05em",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <a href={`#${id}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "none" }}>
-                    → {label}
+                    {label}
                   </a>
                 </li>
               ))}
@@ -160,7 +210,7 @@ export default function BlackIceDoctrinePage() {
         </div>
       </SectionReveal>
 
-      <Section id="sub-zero" title="THE SUB-ZERO MURMUR">
+      <Section id="sub-zero" index={1} title="THE SUB-ZERO MURMUR">
         <P>
           A minimum-friction course-correction loop you can run silently, mid-task, without
           stopping to journal. Ask, in order, and move on:
@@ -180,7 +230,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="child-operator" title="CHILD + OPERATOR">
+      <Section id="child-operator" index={2} title="CHILD + OPERATOR">
         <P>
           Two modes, deliberately kept separate so neither one contaminates the other.
         </P>
@@ -203,7 +253,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="web-slider" title="THE WEB SLIDER">
+      <Section id="web-slider" index={3} title="THE WEB SLIDER">
         <P>
           Move deliberately between four levels when you&apos;re stuck at one of them:
         </P>
@@ -220,7 +270,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="demon-blade" title="RED-TEAM, NOT DEMOLITION">
+      <Section id="demon-blade" index={4} title="RED-TEAM, NOT DEMOLITION">
         <P>
           Nothing is sacred — assumptions, dependencies, abstractions, claims all get
           inspected. But the goal is never to win an argument against your own idea. It&apos;s
@@ -233,7 +283,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="99-1" title="THE 99/1 PRINCIPLE">
+      <Section id="99-1" index={5} title="THE 99/1 PRINCIPLE">
         <P>
           Target roughly 99% automated, 1% human judgement — a design heuristic, not a
           religious law. It tells you which direction to lean, not a ratio to hit on every
@@ -248,7 +298,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="zero-dependency" title="ZERO-DEPENDENCY THINKING">
+      <Section id="zero-dependency" index={6} title="ZERO-DEPENDENCY THINKING">
         <P>
           Not &quot;never use external services&quot; — that&apos;s not realistic and isn&apos;t
           the point. The actual rule: never depend on something without understanding its
@@ -262,7 +312,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="pareto" title="THE PARETO FRONTIER">
+      <Section id="pareto" index={7} title="THE PARETO FRONTIER">
         <P>
           You cannot optimise every variable at once. Find the highest-value configuration
           available right now under real constraints — leverage, reliability, speed,
@@ -275,7 +325,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="scientific-loop" title="THE SCIENTIFIC LOOP">
+      <Section id="scientific-loop" index={8} title="THE SCIENTIFIC LOOP">
         <P>
           Treat implementation as an experiment: hypothesis → build → measure → observe →
           compare → update → repeat. Be as imaginative as you want generating the hypothesis.
@@ -287,7 +337,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="compression" title="COMPRESSION">
+      <Section id="compression" index={9} title="COMPRESSION">
         <P>
           After a problem is solved, compress the solution: explanation becomes a principle,
           the principle becomes a reusable pattern, the pattern becomes an implementation
@@ -302,7 +352,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="governed-autonomy" title="GOVERNED AUTONOMY">
+      <Section id="governed-autonomy" index={10} title="GOVERNED AUTONOMY">
         <P>
           Autonomous doesn&apos;t mean uncontrolled. Every autonomous system — human-built or
           AI-run — should have an explicit objective, defined permissions, resource limits,
@@ -316,7 +366,7 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="core-loop" title="THE CORE LOOP">
+      <Section id="core-loop" index={11} title="THE CORE LOOP">
         <P>
           Everything above compresses to one loop, run continuously rather than restarted
           from scratch each time:
@@ -340,35 +390,56 @@ export default function BlackIceDoctrinePage() {
         </P>
       </Section>
 
-      <Section id="doctrine-x" title="THE DOCTRINE">
-        <P>
-          Everything above, distilled to ten lines. Not a summary to skim instead of reading
-          the rest — a reference to return to once the rest is already understood.
-        </P>
+      <Section id="doctrine-x" index={12} title="THE DOCTRINE" wide>
+        <div style={{ maxWidth: "var(--maxw-prose)" }}>
+          <P>
+            Everything above, distilled to ten lines. Not a summary to skim instead of
+            reading the rest — a reference to return to once the rest is already
+            understood.
+          </P>
+        </div>
         <ol
           style={{
             listStyle: "none",
-            margin: "28px 0 8px",
+            margin: "var(--space-16) 0 8px",
             padding: 0,
             display: "flex",
             flexDirection: "column",
-            gap: 22,
           }}
         >
-          {DOCTRINE_X.map(([numeral, text]) => (
-            <li key={numeral} style={{ display: "flex", gap: 18, alignItems: "baseline" }}>
+          {DOCTRINE_X.map(([numeral, text], i) => (
+            <li
+              key={numeral}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "clamp(56px, 8vw, 96px) 1fr",
+                gap: "clamp(16px, 3vw, 32px)",
+                alignItems: "start",
+                padding: "var(--space-8) 0",
+                borderTop:
+                  i === 0 ? "none" : "1px solid rgb(var(--gold-rgb) / 0.14)",
+              }}
+            >
               <span
+                aria-hidden="true"
                 style={{
                   fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-lg)",
-                  minWidth: 34,
-                  flexShrink: 0,
+                  color: i === 0 || i === DOCTRINE_X.length - 1 ? "var(--gold-bright)" : "var(--gold)",
+                  fontSize: "clamp(2rem, 3.5vw + 1rem, 3.6rem)",
+                  lineHeight: 1,
+                  letterSpacing: "0.02em",
                 }}
               >
-                {numeral}.
+                {numeral}
               </span>
-              <span style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
+              <span
+                style={{
+                  color: "var(--text)",
+                  fontSize: "var(--fs-lg)",
+                  lineHeight: 1.65,
+                  paddingTop: "clamp(6px, 1.2vw, 14px)",
+                }}
+              >
                 {text}
               </span>
             </li>
@@ -376,7 +447,7 @@ export default function BlackIceDoctrinePage() {
         </ol>
       </Section>
 
-      <Section id="integrity" title="METAPHOR VS. MECHANISM">
+      <Section id="integrity" index={13} title="METAPHOR VS. MECHANISM">
         <P>
           Black Ice borrows physical and mythological language — ice, depth, stillness,
           &quot;quiet power.&quot; That language is a discovery tool, not a scientific claim.
@@ -453,6 +524,47 @@ export default function BlackIceDoctrinePage() {
             Parts are engineering practice with a real track record. Parts are deliberate metaphor, marked as such above, not disguised as mechanism.
           </FaqItem>
         </div>
+      </SectionReveal>
+
+      <SectionReveal
+        style={{
+          textAlign: "center",
+          padding: "var(--space-16) 20px var(--space-16)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            width: 40,
+            height: 1,
+            background: "rgb(var(--gold-rgb) / 0.25)",
+            margin: "0 auto var(--space-8)",
+          }}
+        />
+        <div
+          style={{
+            fontFamily: "var(--font-display), Georgia, serif",
+            color: "var(--gold-spec)",
+            fontSize: "clamp(2.2rem, 3vw + 1.4rem, 3.4rem)",
+            lineHeight: 1,
+          }}
+        >
+          Ω
+        </div>
+        <p
+          style={{
+            fontFamily: "var(--font-mono), monospace",
+            color: "var(--dim)",
+            fontSize: "var(--fs-xs)",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            marginTop: 14,
+          }}
+        >
+          The system has an edge. It knows where it ends.
+        </p>
       </SectionReveal>
     </>
   );

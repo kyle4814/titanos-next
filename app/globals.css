@@ -101,6 +101,28 @@
      into <html> by next/font (see app/layout.tsx). Consumers always
      pair them with a fallback stack: var(--font-display), Georgia,
      serif — never just var(--font-display) alone.                  */
+
+  /* ── SURFACE DEPTH (additive, 2026-08-20)
+     A small elevation ladder on top of --vault-black / --vault-warm /
+     --vault-cool / --card. Nobody has to use these — existing surfaces
+     keep resolving exactly as before. Use them when a page needs to
+     say "this panel sits behind/above the canvas" without reaching
+     for a drop-shadowed SaaS card.
+       --surface-recessed  — sits BELOW the canvas (inset panel, quote
+                              block, code block, a "sunk" instrument
+                              read-out). Slightly darker than --vault-black.
+       --surface-raised    — sits ABOVE the canvas (a panel that wants
+                              to read as physically closer, not glowing —
+                              a touch lighter than --vault-warm, no shadow).
+       --hairline-etched    — a border colour for rules that should read
+                              as CUT INTO the surface (dark, almost-there)
+                              rather than drawn ON it. Pair with
+                              --hairline-etched-hi below on the opposite
+                              edge to fake a bevel with zero box-shadow. */
+  --surface-recessed: #060504;
+  --surface-raised: #221A15;
+  --hairline-etched: rgb(0 0 0 / 0.55);
+  --hairline-etched-hi: rgb(255 255 255 / 0.04);
 }
 
 @theme inline {
@@ -294,6 +316,35 @@ a {
   transition: color 0.2s ease;
 }
 
+/* .label-system — quiet system-label / instrumentation register
+   (additive, 2026-08-20). For eyebrows, field labels, timestamps,
+   status readouts — anything that should feel like it came off an
+   instrument panel rather than editorial copy. Sits on top of
+   .font-mono (same family) but pins the quiet, dim, small-caps voice
+   so callers don't have to hand-assemble it per page. */
+.label-system {
+  font-family: var(--font-mono), "SF Mono", Menlo, monospace;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+}
+
+/* Bare <code> base rule (additive, site-wide fix, 2026-08-20).
+   Previously unstyled — fell back to the browser default monospace
+   and background on /methodology and /scan pages. Wires it to the
+   same mono stack + a recessed surface instead. Does not touch <pre>
+   (component-owned code blocks already style themselves). */
+code {
+  font-family: var(--font-mono), "SF Mono", Menlo, monospace;
+  font-size: 0.9em;
+  color: var(--gold);
+  background: var(--surface-recessed);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
 /* ═══════════════════════════════════════════════════════════════
    W4 Pillar 3 Layer 4 — Specular gold sweep (8s loop)
    A single diagonal light-ray sweeps top-left → bottom-right every
@@ -425,6 +476,31 @@ a {
   margin: 0 20px;
 }
 
+/* ── INSCRIPTION RULES (additive, 2026-08-20) ───────────────────────
+   Siblings to .divider-gold for pages that need rhythm beyond one
+   weight of divider. Opt-in only; .divider-gold is untouched. */
+
+/* .divider-hairline — near-invisible, for separating dense list rows
+   or stat blocks where a full gold divider would be too loud. Reads
+   as a seam, not a line. */
+.divider-hairline {
+  height: 1px;
+  background: var(--border);
+  opacity: 0.4;
+  margin: 0;
+}
+
+/* .divider-seal — a short, centred rule that closes a section like a
+   wax seal under a heading. Deliberately narrow and fixed-width so it
+   never stretches full-bleed like .divider-gold does. */
+.divider-seal {
+  height: 1px;
+  width: 64px;
+  margin: var(--space-6) auto;
+  background: var(--gold-dim);
+  opacity: 0.7;
+}
+
 .grid-auto-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -513,6 +589,20 @@ button:focus-visible,
   [role="button"]:focus-visible {
     outline: 2px solid var(--gold);
   }
+}
+
+/* Focus-visible coverage extension (additive, 2026-08-20) — the rule
+   above only names a/button/[role=button]. Form controls and generic
+   focusable elements fell through to no outline at all. Same gold
+   ring, --ice as the alternate on inputs so it reads distinct from a
+   link/button focus in dense forms. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+  border-radius: inherit;
 }
 
 /* Skip-link */
@@ -832,4 +922,38 @@ button:focus-visible,
   font-size: 0.88rem;
   line-height: 1.65;
   opacity: 0.66;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   .ambient-depth (additive, opt-in, 2026-08-20)
+   A very low-opacity radial behind a hero section — reads as depth
+   (deep water, an iceberg's shadow under the surface), not glow.
+   No page picks this up automatically; apply the class to a
+   position:relative wrapper. The drift only runs when the visitor
+   hasn't asked for reduced motion; otherwise it's a static gradient.
+   ═══════════════════════════════════════════════════════════════ */
+.ambient-depth {
+  position: relative;
+  isolation: isolate;
+}
+.ambient-depth::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 50% at 50% 30%,
+    rgb(var(--gold-rgb) / 0.05),
+    transparent 70%
+  );
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ambient-depth::before {
+    animation: ambient-depth-drift 22s ease-in-out infinite;
+  }
+  @keyframes ambient-depth-drift {
+    0%, 100% { opacity: 0.7; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-2%); }
+  }
 }

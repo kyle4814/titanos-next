@@ -31,17 +31,22 @@ const LINKS = [
   { label: "AI Partnership", href: "/ai-delivery", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "Monitor", href: "/monitor", external: false },
-  { label: "Leads", href: "/leads", external: false },
+  { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Blog", href: "/blog", external: false },
-  // Desktop nav shows LINKS.slice(0, 6) — the five revenue doors plus the
-  // blog (content/SEO discovery matters enough to earn the sixth slot).
-  // Free Scan / Evidence Pack / Methodology / About / Contact remain in
-  // the mobile drawer + footer to keep desktop tight. The desktop CTA
-  // button (below, outside LINKS) is the single sitewide primary action.
+  // Desktop nav shows LINKS.slice(0, 6) — the four revenue doors, Black
+  // Ice, and the blog. Black Ice earned the desktop slot (was mobile
+  // drawer + footer only) because the operating doctrine is part of what
+  // makes the operator visible, not a secondary page — this site's whole
+  // premise leans on the person behind it, and Black Ice is where that
+  // shows up in full. "Leads" moved out of the six to make room; it stays
+  // one tap away in the mobile drawer and footer. Free Scan / Evidence
+  // Pack / Methodology / About / Contact remain in the mobile drawer +
+  // footer to keep desktop tight. The desktop CTA button (below, outside
+  // LINKS) is the single sitewide primary action.
+  { label: "Leads", href: "/leads", external: false },
   { label: "Free Scan", href: "/scan", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
-  { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Methodology", href: "/methodology", external: false },
   { label: "About", href: "/about", external: false },
   { label: "Contact", href: "/contact", external: false },

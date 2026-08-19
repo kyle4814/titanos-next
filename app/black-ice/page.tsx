@@ -58,6 +58,25 @@ export default function BlackIcePage() {
 
       <div className="divider-gold" />
 
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <p
+          aria-hidden="true"
+          style={{
+            fontFamily: "var(--font-display), Georgia, serif",
+            fontStyle: "italic",
+            fontWeight: 400,
+            color: "var(--gold-bright)",
+            fontSize: "clamp(1.4rem, 1.4vw + 1.1rem, 2.1rem)",
+            textAlign: "center",
+            maxWidth: "var(--maxw-content)",
+            margin: "0 auto",
+            lineHeight: 1.5,
+          }}
+        >
+          A polished black surface. Enormous depth underneath.
+        </p>
+      </SectionReveal>
+
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <h2
@@ -91,40 +110,66 @@ export default function BlackIcePage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <SectionHeading title="THE TWELVE PRIMITIVES" lead="The full loop, compressed to one line each. Detail on the field guide page." />
-        <div
+        <ol
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 18,
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
             maxWidth: "var(--maxw-content)",
-            margin: "0 auto",
+            marginLeft: "auto",
+            marginRight: "auto",
+            borderLeft: "1px solid rgb(var(--gold-rgb) / 0.18)",
           }}
         >
-          {PRIMITIVES.map((p) => (
-            <div
-              key={p.name}
-              style={{
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-sm)",
-                padding: "20px 18px",
-                background: "var(--card)",
-              }}
-            >
-              <div
+          {PRIMITIVES.map((p, i) => {
+            // Depth cue: darker undertone and dimmer gold the further
+            // into the loop you read, mimicking a descent.
+            const depth = i / (PRIMITIVES.length - 1);
+            return (
+              <li
+                key={p.name}
                 style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-lg)",
-                  letterSpacing: "0.1em",
-                  marginBottom: 8,
+                  display: "grid",
+                  gridTemplateColumns: "clamp(40px, 6vw, 56px) 1fr",
+                  gap: "clamp(14px, 2.5vw, 24px)",
+                  alignItems: "baseline",
+                  padding: "var(--space-4) clamp(16px, 3vw, 28px)",
+                  background: i % 2 === 1 ? "rgb(var(--gold-rgb) / 0.03)" : "transparent",
+                  borderBottom:
+                    i === PRIMITIVES.length - 1 ? "none" : "1px solid var(--border)",
                 }}
               >
-                {p.name}
-              </div>
-              <div style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{p.line}</div>
-            </div>
-          ))}
-        </div>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    fontFamily: "var(--font-mono), monospace",
+                    fontSize: "var(--fs-sm)",
+                    color: `rgb(var(--gold-rgb) / ${(0.85 - depth * 0.45).toFixed(2)})`,
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display), Georgia, serif",
+                      color: "var(--gold)",
+                      fontSize: "var(--fs-lg)",
+                      letterSpacing: "0.1em",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {p.name}
+                  </div>
+                  <div style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>
+                    {p.line}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </SectionReveal>
 
       <div className="divider-gold" />

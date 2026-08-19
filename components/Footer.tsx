@@ -100,6 +100,20 @@ export default function Footer() {
               <br />
               ABN 34 318 502 254
             </div>
+            <div
+              style={{
+                marginTop: 14,
+                paddingTop: 14,
+                borderTop: "1px solid var(--border)",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontStyle: "italic",
+                color: "var(--gold-dim)",
+                fontSize: "var(--fs-sm)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Built without asking. Kept honest by what you can check.
+            </div>
           </div>
 
           {COLUMNS.map((col) => (
