@@ -41,6 +41,7 @@ const LINKS = [
   { label: "Free Scan", href: "/scan", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
+  { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Methodology", href: "/methodology", external: false },
   { label: "About", href: "/about", external: false },
   { label: "Contact", href: "/contact", external: false },

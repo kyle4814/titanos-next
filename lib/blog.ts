@@ -650,6 +650,59 @@ export const POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "black-ice-operating-doctrine",
+    title: "Black Ice: the operating doctrine TITANOS is actually built on",
+    description:
+      "A free field guide to the operating framework behind TITANOS — Sub-Zero Murmur, Child/Operator, the 99/1 principle, and where metaphor stops and mechanism starts.",
+    excerpt:
+      "Every system on this site was built using this. Publishing it because it's useful on its own, not because it's bait.",
+    date: "2026-08-20",
+    tag: "Doctrine",
+    readMinutes: 4,
+    body: [
+      {
+        type: "p",
+        text: "Most \"AI operating system\" content online is either empty branding or a prompt-hack thread with no substance underneath. Black Ice is the actual framework used to build and run every live system on this site — the free scanner, the compliance pipeline, the OUTPOST partner network, the monitoring that pages the operator directly when something breaks. It's published as a free field guide because it holds up on its own, not as lead-gen bait.",
+      },
+      { type: "h2", text: "The shape of it" },
+      {
+        type: "p",
+        text: "A small set of reusable primitives for observing a situation, cutting the noise out of it, and acting on what's left — with AI doing the keystroke-level execution and a human staying at the one point that actually needs judgement. The core loop it compresses to: observe, orient, compress, decide, act, measure, correct, repeat.",
+      },
+      {
+        type: "ul",
+        items: [
+          "The Sub-Zero Murmur — a 15-second course-correction loop you run silently mid-task, not a journaling ritual.",
+          "Child + Operator — generation and selection kept deliberately separate, so judging an idea doesn't kill it before it's fully formed.",
+          "The 99/1 principle — automate hard, but treat it as a heuristic, not a ratio to force on every decision regardless of stakes.",
+          "Demon Blade — red-team an idea to make it stronger, never just to win an argument against yourself.",
+        ],
+      },
+      { type: "h2", text: "Where it draws the line" },
+      {
+        type: "p",
+        text: "The doctrine borrows physical and mythological language — ice, depth, stillness. That's a discovery tool, not a scientific claim, and the field guide says so explicitly rather than letting a good metaphor quietly pass as a mechanism. If a claim isn't verified, it's labelled a hypothesis, not dressed up as fact.",
+      },
+      {
+        type: "cta",
+        text: "Read the full field guide — free, no signup, twelve sections compressed from the source doctrine.",
+        label: "READ BLACK ICE →",
+        href: "/black-ice/doctrine",
+      },
+    ],
+    relatedSlugs: [],
+    faq: [
+      {
+        q: "Is Black Ice a TITANOS product or a general framework?",
+        a: "Both — it's the internal operating doctrine TITANOS is actually built and run on, published as a free public field guide because the framework itself is useful independent of hiring TITANOS.",
+      },
+      {
+        q: "Do I need AI to use the Black Ice primitives?",
+        a: "No. Every primitive works solo. It gets more leverage with an AI collaborator handling execution, which is why an AI systems business is the one publishing it — but nothing in the doctrine requires one.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

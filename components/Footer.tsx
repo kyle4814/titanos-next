@@ -27,6 +27,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     heading: "Proof",
     links: [
       { label: "Methodology", href: "/methodology" },
+      { label: "Black Ice doctrine", href: "/black-ice" },
       { label: "Our scan", href: "/scan#self-scan" },
       { label: "Evidence pack", href: "/our-evidence-pack" },
       { label: "Free AI Readiness Guide (PDF)", href: "/ai-readiness-guide.pdf", external: true },
