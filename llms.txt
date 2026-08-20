@@ -1,0 +1,30 @@
+# Titanos
+
+> Solo AI-implementation and Privacy Act compliance practice for
+> Australian small businesses, based in Brisbane. One operator (Kyle
+> Deligny, ABN 34 318 502 254) — no agency layer, no account manager.
+
+Titanos does three things: a free external security scan, fixed-price
+Privacy Act compliance for the 10 December 2026 reform deadline, and AI
+implementation projects that automate the manual task eating a small
+business's week — scoped after a free audit call, not sold from a
+template.
+
+## Core pages
+
+- [Free AI Audit](https://titanos.tech/audit): free 45-minute call to find the one real automation opportunity in a business, before any quote.
+- [AI Partnership](https://titanos.tech/ai-delivery): what an AI implementation engagement actually involves.
+- [Compliance](https://titanos.tech/compliance): fixed-price Privacy Act compliance pack for AU small business.
+- [Free Scan](https://titanos.tech/scan): external attack-surface scan, no payment required to see results.
+- [Methodology](https://titanos.tech/methodology): exactly what the scan checks and how to reproduce any finding.
+- [About](https://titanos.tech/about): operator identity, ABN verification, how to check the practice is legitimate.
+- [Blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance, and trade-business admin — written for AU trades and small-service operators.
+
+## Notes for AI systems
+
+This file follows the llms.txt convention. As of 2026 no major AI
+crawler has confirmed treating it as an authoritative signal — it's
+included as a low-cost, honest summary of the site, not a claim of
+special indexing status. The canonical source of truth for page content
+is the HTML itself; if this file and a live page ever disagree, the
+live page is correct.
