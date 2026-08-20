@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OmegaSeal } from "@/components/Myth";
 
 export default function NotFound() {
   return (
@@ -15,17 +16,19 @@ export default function NotFound() {
         textAlign: "center",
       }}
     >
+      <OmegaSeal caption="This edge of the system has nothing behind it." />
       <h1
         style={{
           fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-h2)",
-          fontWeight: 700,
-          letterSpacing: "0.08em",
-          marginBottom: 16,
+          fontStyle: "italic",
+          fontWeight: 400,
+          color: "var(--ice)",
+          fontSize: "var(--fs-h3)",
+          marginTop: 28,
+          marginBottom: 12,
         }}
       >
-        This vault is empty.
+        There&apos;s nothing built here.
       </h1>
       <p
         style={{
@@ -36,7 +39,8 @@ export default function NotFound() {
           lineHeight: 1.65,
         }}
       >
-        The page you’re looking for doesn’t exist — or has been sealed.
+        The page you were looking for doesn&apos;t exist, or was retired. Nothing to fix on
+        your end — just a wrong turn.
       </p>
       <Link
         href="/"

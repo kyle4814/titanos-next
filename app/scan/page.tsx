@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import ProcessSteps from "./ProcessSteps";
 import { SITE } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
 // Internal anchor — the on-page form section. No mailto in the primary
@@ -242,10 +243,14 @@ export default function ScanPage() {
           Scan ID 40e4f6c4db8b · timestamp 2026-06-01T02:46:25Z */}
       <SectionReveal id="self-scan" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)" }}>
-          <SectionHeading
-            title="I Ran This Check on Myself First"
-            lead="If my own business's check had come back clean before I published it, I'd have been the only compliance operator with no story to tell. It didn't. Six findings, all published verbatim. Four resolved or accepted with reasoning since; two remain open."
-          />
+          <DepthIndex index={1} total={8} />
+          <Inscription
+            label="Self-scan · findings published verbatim"
+            sub="Six findings, all published as found. Four resolved or accepted with reasoning since; two remain open."
+            style={{ marginBottom: "var(--space-8)" }}
+          >
+            I ran this check on myself first.
+          </Inscription>
           {SELF_SCAN_FINDINGS.map((f) => (
             <article
               key={f.title}
@@ -258,19 +263,16 @@ export default function ScanPage() {
               }}
             >
               <header style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                <span
+                <SystemLabel
                   style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
                     color: SELF_SCAN_STATUS_COLOR[f.status],
-                    fontSize: "var(--fs-xs)",
-                    letterSpacing: "0.12em",
                     border: `1px solid ${SELF_SCAN_STATUS_COLOR[f.status]}`,
                     borderRadius: "var(--radius-sm)",
                     padding: "2px 8px",
                   }}
                 >
                   {f.status}
-                </span>
+                </SystemLabel>
                 <h3
                   style={{
                     fontFamily: "var(--font-display), Georgia, serif",
@@ -287,10 +289,16 @@ export default function ScanPage() {
               <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>{f.resolution}</p>
             </article>
           ))}
-          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.7, marginTop: 20, textAlign: "center" }}>
+          <SystemLabel style={{ textAlign: "center", marginTop: 20 }}>
             Full scan run 2026-06-01 · TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
             Last re-verified 11 July 2026 — TLS 1.3 confirmed, certificate valid through 30 August 2026.
-          </p>
+          </SystemLabel>
+
+          <OperatorNote>
+            Publishing my own findings, warts included, was never optional. I ask clients to
+            trust a report on their business — the least I can do is show mine first, unedited.
+          </OperatorNote>
+
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
             Want to see what a full evidence pack looks like?{" "}
             <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>
@@ -303,6 +311,7 @@ export default function ScanPage() {
       {/* WHAT IT IS / WHO IT'S FOR */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={2} total={8} />
           <SectionHeading title="What It Is · Who It&apos;s For" />
           <div
             className="grid-auto-cards"
@@ -323,6 +332,7 @@ export default function ScanPage() {
       {/* THE FULL PROCESS */}
       <SectionReveal id="process" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={3} total={8} />
           <SectionHeading
             title="The Full Process"
             lead="Five steps from form-submit to report-in-inbox. No mystery, no opaque hand-offs."
@@ -336,6 +346,7 @@ export default function ScanPage() {
       {/* WHAT'S INSIDE THE REPORT */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={8} />
           <SectionHeading
             title="What&apos;s Inside the Report"
             lead="One report, every finding ranked, every finding reproducible."
@@ -386,6 +397,7 @@ export default function ScanPage() {
       {/* METHODOLOGY MINI */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={5} total={8} />
           <SectionHeading
             title="How the Check Works"
             lead="I only read what your server already broadcasts to the public internet — the same information a hacker sees. Nothing invasive."
@@ -425,6 +437,7 @@ export default function ScanPage() {
       {/* REQUEST YOUR FREE SCAN — Fix 1: real form replaces mailto card */}
       <SectionReveal id="request" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={6} total={8} />
           <SectionHeading
             title="Request Your Free Scan"
             lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer a call? Book a 15-min instead."
@@ -454,6 +467,7 @@ export default function ScanPage() {
       {/* WHAT COMES AFTER THE SCAN */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={7} total={8} />
           <SectionHeading
             title="What Comes After the Scan"
             lead="Most teams use the free scan to decide whether they need the Compliance engagement or an AI build. Here’s where each fits."
@@ -496,6 +510,7 @@ export default function ScanPage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={8} total={8} />
           <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
@@ -581,6 +596,11 @@ export default function ScanPage() {
           by <strong style={{ color: "var(--gold)" }}>Kyle Deligny (ABN 34 318 502 254)</strong>{" "}
           before delivery. My ABN is on every page — the accountability is mine.
         </p>
+        <OmegaSeal
+          size={48}
+          style={{ marginTop: 40 }}
+          caption="Signed off, not automated away"
+        />
       </SectionReveal>
     </>
   );

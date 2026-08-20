@@ -12,6 +12,7 @@ import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
 import { SITE } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 const CAL_15 = SITE.CAL_15MIN_URL;
@@ -294,6 +295,22 @@ export default function CompliancePage() {
         </p>
       </PageHero>
 
+      {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
+          See components/Myth.tsx for the vocabulary. */}
+      <section
+        aria-label="What the engagement is"
+        style={{ padding: "var(--space-6) 20px var(--space-8)", position: "relative", zIndex: 2 }}
+      >
+        <Inscription
+          label="Six obligations · one working call · nothing left to interpret afterwards"
+          sub="The scan finds what's exposed. The call fixes it while you're on it. The letter says so, signed."
+        >
+          The obligations exist whether you look at them or not.
+          <br />
+          <span style={{ color: "var(--gold)" }}>We look at them together, once.</span>
+        </Inscription>
+      </section>
+
       {/* Fix 2a + 3d — evidence-pack link + middle-rung scan routing line */}
       <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto 10px" }}>
@@ -319,6 +336,8 @@ export default function CompliancePage() {
       {/* WHAT HAPPENS ON THE CALL — day-1 snapshot before pressure points */}
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={1} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The working session</SystemLabel>
           <SectionHeading
             title="What Happens on the Call"
             lead="90 minutes. Screen-share. I apply every change with you, live — not a PDF you have to figure out later."
@@ -394,6 +413,8 @@ export default function CompliancePage() {
       {/* FIVE PRESSURE POINTS — Fix 3c reorder by believability, not date */}
       <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={2} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>What's already live</SystemLabel>
           <SectionHeading
             title="Five Legal Pressure Points"
             lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all five in one pass."
@@ -441,6 +462,8 @@ export default function CompliancePage() {
       {/* SCOPE CHECKER — answers "does this even apply to me" honestly, per-visitor */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={3} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Self-check</SystemLabel>
           <SectionHeading title="Does the ADM rule apply to you?" lead="Two questions. No data collected, nothing submitted." />
           <ScopeChecker />
         </div>
@@ -451,6 +474,8 @@ export default function CompliancePage() {
       {/* WHAT THE ENGAGEMENT LOOKS LIKE — gold thread */}
       <SectionReveal id="walkthrough" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The sequence</SystemLabel>
           <SectionHeading
             title="What the Engagement Looks Like"
             lead="Six steps from scan to signed attestation. No PDF-only deliverable, no opaque hand-offs."
@@ -464,33 +489,35 @@ export default function CompliancePage() {
       {/* YOU CONTROL vs HOST CONTROLS */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={5} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The division of ownership</SystemLabel>
           <SectionHeading
             title="You Control Some · Your Host Controls the Rest"
             lead={`Your hosting service controls some things. I give you exactly what to ask them to fix, and document the rest as "reasonable steps taken."`}
           />
-          <div
-            className="grid-auto-cards"
-            style={{
-              gap: 22,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
-            <SplitCol
-              title="You Control"
-              sub="I apply these with you on the working call."
-              items={YOU_CONTROL}
-              accent="gold"
-              prefix="✓"
-            />
-            <SplitCol
-              title="Your Hosting Provider Controls"
-              sub="I give you exactly how to escalate."
-              items={HOST_CONTROLS}
-              accent="ice"
-              prefix="→"
-            />
-          </div>
+          <TempleFrame style={{ maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
+            <div
+              className="grid-auto-cards"
+              style={{
+                gap: 22,
+              }}
+            >
+              <SplitCol
+                title="You Control"
+                sub="I apply these with you on the working call."
+                items={YOU_CONTROL}
+                accent="gold"
+                prefix="✓"
+              />
+              <SplitCol
+                title="Your Hosting Provider Controls"
+                sub="I give you exactly how to escalate."
+                items={HOST_CONTROLS}
+                accent="ice"
+                prefix="→"
+              />
+            </div>
+          </TempleFrame>
         </div>
       </SectionReveal>
 
@@ -499,6 +526,8 @@ export default function CompliancePage() {
       {/* SINGLE OFFER */}
       <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={6} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The single door</SystemLabel>
           <SectionHeading
             title="One Engagement · Done With You"
             lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — 3 months of monitoring included, plus regulatory briefings through the engagement whenever the rules move."
@@ -507,6 +536,10 @@ export default function CompliancePage() {
           <div style={{ textAlign: "center", marginBottom: 18 }}>
             <OperatorByline />
           </div>
+          <OperatorNote style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto var(--space-8)" }}>
+            I sign the attestation myself, after I&apos;ve checked the fixes actually shipped —
+            not before. My ABN is on it because the accountability is mine, not a vendor&apos;s.
+          </OperatorNote>
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
@@ -686,6 +719,8 @@ export default function CompliancePage() {
       {/* Site Fix 3 — how monitoring works after the pack (explicit opt-in) */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={7} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>After the call</SystemLabel>
           <SectionHeading
             title="How the Monitoring Works After the Pack"
             lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack — automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
@@ -722,6 +757,8 @@ export default function CompliancePage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={8} total={8} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
           <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How the working call works">
@@ -899,21 +936,10 @@ export default function CompliancePage() {
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 6, maxWidth: "var(--maxw-micro)", margin: "6px auto 0" }}>
           Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
-        <p
-          style={{
-            fontSize: "var(--fs-sm)",
-            color: "var(--dim)",
-            marginTop: 22,
-            maxWidth: "var(--maxw-prose)",
-            margin: "22px auto 0",
-            lineHeight: 1.65,
-          }}
-        >
-          Built with AI assistance. Every document, every scan finding, and every
-          attestation is reviewed and signed off by{" "}
-          <strong style={{ color: "var(--gold)" }}>Kyle Deligny (ABN 34 318 502 254)</strong>{" "}
-          before it reaches you. My ABN is on every page — the accountability is mine.
-        </p>
+        <OmegaSeal
+          style={{ marginTop: 40 }}
+          caption="Built with AI assistance. Every document, every scan finding, and every attestation is reviewed and signed off by Kyle Deligny (ABN 34 318 502 254) before it reaches you — the accountability is mine, not the machine's."
+        />
       </SectionReveal>
     </>
   );

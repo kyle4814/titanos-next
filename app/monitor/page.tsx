@@ -7,6 +7,7 @@ import FaqItem from "@/components/FaqItem";
 import MonitorCheckoutButton from "@/components/MonitorCheckoutButton";
 import Testimonials from "@/components/Testimonials";
 import { PRICING, DISPLAY } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 // Site Fix 2 — recurring product page. Persona: owner OR IT lead who has
 // already seen their exposure and wants ongoing visibility into changes.
@@ -157,11 +158,29 @@ export default function MonitorPage() {
         </p>
       </PageHero>
 
+      {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
+          See components/Myth.tsx for the vocabulary. */}
+      <section
+        aria-label="What Monitor is"
+        style={{ padding: "var(--space-6) 20px var(--space-8)", position: "relative", zIndex: 2 }}
+      >
+        <Inscription
+          label="Same engine as the free check · run on a schedule · nothing dressed up"
+          sub="Exposure doesn't wait for your next audit. Neither does the scan."
+        >
+          What changed last month, said plainly.
+          <br />
+          <span style={{ color: "var(--gold)" }}>Nothing added to make it feel bigger.</span>
+        </Inscription>
+      </section>
+
       <div className="divider-gold" />
 
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={1} total={4} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The monthly email</SystemLabel>
           <SectionHeading
             title="What Lands in Your Inbox Each Month"
             lead="One email a month. Same date each month. Worth reading or you stop it."
@@ -207,6 +226,8 @@ export default function MonitorPage() {
       {/* WHAT IT IS NOT */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={2} total={4} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The refusal list</SystemLabel>
           <SectionHeading
             title="What It Is Not"
             lead="The opt-out is built in. The product is the email — not a sales funnel wrapped around it."
@@ -243,6 +264,10 @@ export default function MonitorPage() {
                 </li>
               ))}
             </ul>
+            <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>
+              If nothing changed on your domain that month, the email says so. I&apos;d rather
+              you cancel than keep paying for a report with nothing in it.
+            </OperatorNote>
           </div>
         </div>
       </SectionReveal>
@@ -252,17 +277,15 @@ export default function MonitorPage() {
       {/* PRICING CARD */}
       <SectionReveal id="pricing" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={3} total={4} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The commitment</SystemLabel>
           <SectionHeading
             title="One Price. Cancel in One Click."
             lead="Monthly or annual — annual saves about two months. No contract either way."
           />
-          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "clamp(26px, 14px + 3.5vw, 44px) clamp(20px, 10px + 3vw, 38px)",
                 textAlign: "center",
               }}
             >
@@ -336,7 +359,7 @@ export default function MonitorPage() {
                 </AnimatedButton>
               </div>
             </article>
-          </div>
+          </TempleFrame>
         </div>
       </SectionReveal>
 
@@ -368,6 +391,8 @@ export default function MonitorPage() {
       {/* FAQ */}
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={4} />
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
           <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="What's actually in the monthly email?">
@@ -462,6 +487,10 @@ export default function MonitorPage() {
             FREE SCAN FIRST
           </AnimatedButton>
         </div>
+        <OmegaSeal
+          style={{ marginTop: 40 }}
+          caption="One click to start, one click to stop — the subscription doesn't outlast your interest in it."
+        />
       </SectionReveal>
     </>
   );

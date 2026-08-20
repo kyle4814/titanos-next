@@ -15,10 +15,24 @@ const ENDPOINT = "https://vault.titanos.tech/api/site-event";
 
 function send(event: string, path: string) {
   const body = JSON.stringify({ event, path });
+  // text/plain, NOT application/json — deliberate, and load-bearing.
+  //
+  // application/json is not a CORS-safelisted content type, so it forces a
+  // preflight OPTIONS. A Cloudflare transform rule on this zone strips
+  // Access-Control-Allow-Origin from responses (see the SEC-02 residual
+  // noted in next.config.ts), so that preflight failed and EVERY event
+  // from titanos.tech was silently dropped — found 2026-08-20 by opening
+  // the live site in a real browser and reading the console, which is the
+  // only reason anyone noticed analytics had never worked.
+  //
+  // text/plain IS safelisted, so this is a "simple request": no preflight,
+  // no ACAO needed, nothing for the transform rule to strip. The Worker
+  // parses the body with request.json() regardless of the declared type,
+  // so the payload contract is unchanged.
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(ENDPOINT, new Blob([body], { type: "application/json" }));
+    navigator.sendBeacon(ENDPOINT, new Blob([body], { type: "text/plain" }));
   } else {
-    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain" }, body, keepalive: true }).catch(() => {});
   }
 }
 

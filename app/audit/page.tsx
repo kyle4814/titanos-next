@@ -8,6 +8,7 @@ import FaqItem from "@/components/FaqItem";
 import CalEmbed from "@/components/CalEmbed";
 import BrisbaneClock from "@/components/BrisbaneClock";
 import AuditRequestClient from "./client";
+import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
@@ -106,6 +107,20 @@ export default function AuditPage() {
         </AnimatedButton>
       </section>
 
+      {/* THE DOOR — this page is where an observer becomes a participant.
+          The inscription states the trade plainly before anything is asked
+          of them. */}
+      <section style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="No cost · No pitch deck · No obligation"
+          sub="Thirty minutes. You describe how the work actually gets done; I tell you which parts a machine can carry and which parts shouldn't leave your hands."
+        >
+          You bring the problem.
+          <br />
+          <span style={{ color: "var(--gold)" }}>I bring the machine.</span>
+        </Inscription>
+      </section>
+
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
@@ -174,7 +189,15 @@ export default function AuditPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="book">
         <div className="container-vault">
+          <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
+            Direct line — no gatekeeper
+          </SystemLabel>
           <SectionHeading title="Book it now" lead="Pick a time below — no new tab, no separate calendar app." />
+          <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
+            I take every one of these myself. If automation isn&apos;t worth it for your
+            business, I&apos;ll tell you on the call rather than sell you something that
+            won&apos;t pay for itself.
+          </OperatorNote>
           <BrisbaneClock />
           <CalEmbed />
         </div>
@@ -224,6 +247,15 @@ export default function AuditPage() {
             </Suspense>
           </details>
         </div>
+      </SectionReveal>
+
+      {/* The seal closes the door page — the one Omega on this route. */}
+      <SectionReveal style={{ padding: "0 20px var(--space-20)", position: "relative", zIndex: 2 }}>
+        <OmegaSeal
+          withStem={false}
+          caption="One operator. One call. No sales team behind this door."
+          style={{ marginTop: "var(--space-8)" }}
+        />
       </SectionReveal>
     </>
   );

@@ -5,6 +5,9 @@ import PageHero from "@/components/PageHero";
 import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 import FaqItem from "@/components/FaqItem";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+
+const SECTION_COUNT = 9;
 
 // Fix 5g — title/og/twitter aligned. "banner-grade" framing dropped
 // site-wide; the long-form description here is the canonical voice.
@@ -131,10 +134,22 @@ export default function MethodologyPage() {
         tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet — the same information a hacker can see from their desk."
       />
 
+      <section aria-label="The commitment" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="The rule this whole practice runs on"
+          sub="Everything below is the same rule written out in detail — what gets read, what gets left alone, and how you check I kept my word."
+        >
+          I read what the internet already broadcasts.
+          <br />
+          <span style={{ color: "var(--gold)" }}>I never try a single door.</span>
+        </Inscription>
+      </section>
+
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={1} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="What I Check · What I Never Do"
             lead="Public-facing information only. I read what the open internet can already see — nothing private, nothing that requires a login."
@@ -153,6 +168,7 @@ export default function MethodologyPage() {
       {/* TOOLS USED */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={2} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Tools Used"
             lead="Industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
@@ -184,6 +200,9 @@ export default function MethodologyPage() {
               NVD CVE database (publicly licensed) for version → known-vuln mapping
             </ToolItem>
           </ul>
+          <SystemLabel style={{ textAlign: "center", marginTop: 14 }}>
+            No proprietary black box · every tool here is public and inspectable
+          </SystemLabel>
         </div>
       </SectionReveal>
 
@@ -192,6 +211,7 @@ export default function MethodologyPage() {
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={3} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Your 90-Day Window to Fix Before Anything Is Published" />
           <div
             style={{
@@ -229,6 +249,7 @@ export default function MethodologyPage() {
       {/* SCOPE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={4} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Scope"
             lead="I scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
@@ -249,6 +270,7 @@ export default function MethodologyPage() {
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={5} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="What You Get" lead="The standard external scan output:" />
           <SimpleList
             items={[
@@ -266,6 +288,7 @@ export default function MethodologyPage() {
       {/* HOW I DELIVER */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={6} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="How I Deliver" />
           <p
             style={{
@@ -295,6 +318,10 @@ export default function MethodologyPage() {
             </a>
             .
           </p>
+          <OperatorNote>
+            I read every report before it goes out. If there&apos;s nothing worth flagging, the
+            email says that too.
+          </OperatorNote>
         </div>
       </SectionReveal>
 
@@ -303,6 +330,7 @@ export default function MethodologyPage() {
       {/* HOW TO VERIFY ME — three-key vault interlock */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={7} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="How to Verify Me"
             lead="Three independent ways. Every claim I make is one of these checks away from a third-party audit."
@@ -316,6 +344,7 @@ export default function MethodologyPage() {
       {/* FAQ */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={8} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Questions I get" />
           <FaqItem question="Is this a hacking attempt?">
             No. I only read what your server already broadcasts to the public internet — no login attempts, no password guessing, nothing invasive. See "What I Never Do" above.
@@ -334,6 +363,7 @@ export default function MethodologyPage() {
       {/* REMOVAL */}
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={9} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Removal" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from me and your domain is suppressed
@@ -341,6 +371,13 @@ export default function MethodologyPage() {
           </p>
         </div>
       </SectionReveal>
+
+      <section aria-label="The seal" style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
+        <OmegaSeal
+          caption="Nine sections. Every commitment reproducible. Nothing here moves for a sale."
+          style={{ margin: "0 auto" }}
+        />
+      </section>
     </>
   );
 }

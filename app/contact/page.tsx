@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
 import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
+import { Inscription, SystemLabel } from "@/components/Myth";
 
 const META_TITLE = "Contact — Kyle Deligny · TITANOS";
 const META_DESC =
@@ -28,7 +29,15 @@ export default function ContactPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2, textAlign: "center" }}>
+      <section aria-label="Direct line" style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
+        <Inscription label="One inbox. One person.">
+          There is no queue and no ticket number.
+          <br />
+          <span style={{ color: "var(--gold)" }}>Write to Kyle and Kyle writes back.</span>
+        </Inscription>
+      </section>
+
+      <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <div
             style={{
@@ -39,6 +48,7 @@ export default function ContactPage() {
               marginBottom: 24,
             }}
           >
+            <SystemLabel style={{ marginBottom: 16 }}>Direct contact · no form, no gatekeeper</SystemLabel>
             <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
               <strong>Email:</strong>{" "}
               <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>

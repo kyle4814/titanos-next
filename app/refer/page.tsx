@@ -3,6 +3,7 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import ReferForm from "@/components/ReferForm";
 import FaqItem from "@/components/FaqItem";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components/Myth";
 
 export const metadata: Metadata = {
   title: "Refer & Earn — Partner Network · TITANOS",
@@ -74,8 +75,18 @@ export default function ReferPage() {
         sub="You already know businesses drowning in manual work. Introduce them to Titanos, and when the deal closes, you're paid."
       />
 
+      <section aria-label="The invitation" style={{ padding: "var(--space-8) 20px var(--space-4)", position: "relative", zIndex: 2 }}>
+        <Inscription label="The final stage" sub="Everyone before you was reading. This is where you stop observing and become part of how the system grows.">
+          You already know who&apos;s drowning in manual work.
+          <br />
+          <span style={{ color: "var(--gold)" }}>Point us at them. Get paid when it closes.</span>
+        </Inscription>
+      </section>
+
       <SectionReveal>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 40px", textAlign: "center" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "40px auto 40px", textAlign: "center" }}>
+          <DepthIndex index={1} total={3} style={{ textAlign: "center" }} />
+          <SystemLabel style={{ marginBottom: 8 }}>Attribution log · timestamped, not judged</SystemLabel>
           <h2
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
@@ -85,7 +96,7 @@ export default function ReferPage() {
               marginBottom: 18,
             }}
           >
-            HOW IT WORKS
+            How it works
           </h2>
           <ol
             style={{
@@ -104,15 +115,23 @@ export default function ReferPage() {
             <li>Deal closes and gets paid → commission accrues automatically.</li>
             <li>Payouts are validated (ABN checked, RCTI agreement in place) before they run.</li>
           </ol>
+          <OperatorNote style={{ margin: "var(--space-8) auto 0", textAlign: "left" }}>
+            I review every application myself. Nobody else decides who&apos;s in the network,
+            and nobody else signs off on a payout.
+          </OperatorNote>
         </div>
       </SectionReveal>
 
       <SectionReveal>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 12px", textAlign: "center" }}>
+          <DepthIndex index={2} total={3} style={{ textAlign: "center" }} />
+        </div>
         <ReferForm />
       </SectionReveal>
 
       <SectionReveal>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "50px auto 0" }}>
+          <DepthIndex index={3} total={3} style={{ textAlign: "center" }} />
           <h2
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
@@ -123,7 +142,7 @@ export default function ReferPage() {
               textAlign: "center",
             }}
           >
-            QUESTIONS
+            Questions
           </h2>
           <FaqItem question="How much can I earn?">
             Commission is a percentage of real revenue Titanos actually collects from a client

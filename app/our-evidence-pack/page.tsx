@@ -8,6 +8,7 @@ import OperatorByline from "@/components/OperatorByline";
 import PdfViewer from "@/components/PdfViewer";
 import { SITE } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_HREF = "/scan#request";
@@ -204,17 +205,20 @@ export default function OurEvidencePackPage() {
 
       <div className="divider-gold" />
 
-      {/* Framing line — plain-English benefit before technical detail */}
-      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto", fontFamily: "var(--font-display), Georgia, serif", fontStyle: "italic" }}>
-          A plain-English report you can hand straight to your insurer or a big client as proof — here&apos;s exactly what it looks like.
-        </p>
+      {/* Framing line — plain-English benefit before technical detail.
+          Inscription primitive: carved claim, not printed copy. */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <Inscription label="Verified, not claimed">
+          A plain-English report you can hand straight to your insurer or a big
+          client as proof — here&apos;s exactly what it looks like.
+        </Inscription>
       </SectionReveal>
 
       <div className="divider-gold" />
 
       {/* WHY WE PUBLISHED IT */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <DepthIndex index={1} total={5} style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 12px" }} />
         <div
           style={{
             maxWidth: "var(--maxw-prose)",
@@ -269,12 +273,17 @@ export default function OurEvidencePackPage() {
             </article>
           ))}
         </div>
+        <OperatorNote style={{ maxWidth: "var(--maxw-prose)", margin: "var(--space-8) auto 0" }}>
+          I ask clients to hand their insurer a report with nothing hidden. I don&apos;t get to
+          ask that and keep mine private — so this is mine, unedited, first.
+        </OperatorNote>
       </SectionReveal>
 
       <div className="divider-gold" />
 
       {/* SAMPLE PDF */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <DepthIndex index={2} total={5} style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 12px" }} />
         <div
           style={{
             maxWidth: "var(--maxw-prose)",
@@ -290,18 +299,9 @@ export default function OurEvidencePackPage() {
             color: "var(--text)",
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--ice)",
-              fontSize: "var(--fs-xs)",
-              letterSpacing: "0.18em",
-              marginBottom: 10,
-              textTransform: "uppercase",
-            }}
-          >
-            SAMPLE &middot; REDACTED &middot; REAL SCAN OF TITANOS.TECH
-          </div>
+          <SystemLabel tone="ice" style={{ marginBottom: 10 }}>
+            Sample · redacted · real scan of titanos.tech
+          </SystemLabel>
           <p style={{ margin: "0 0 14px" }}>
             This is a real security and compliance report run against my own
             website and business. It is the same format every client receives --
@@ -352,6 +352,7 @@ export default function OurEvidencePackPage() {
       {/* 13 SECTIONS -- grouped */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-wide)" }}>
+          <DepthIndex index={3} total={5} />
           <SectionHeading
             title="What&apos;s Inside — All 13 Sections"
             lead="Grouped into three categories so you can see at a glance what the report covers. Every section is plain English — no assumed technical knowledge."
@@ -370,17 +371,12 @@ export default function OurEvidencePackPage() {
                   borderBottom: `1px solid ${group.accent === "gold" ? "var(--gold-dim)" : "var(--border)"}`,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: group.accent === "gold" ? "var(--gold)" : group.accent === "ice" ? "var(--ice)" : "var(--dim)",
-                    fontSize: "var(--fs-sm)",
-                    letterSpacing: "0.14em",
-                    fontWeight: 600,
-                  }}
+                <SystemLabel
+                  tone={group.accent === "dim" ? "dim" : group.accent}
+                  style={{ fontSize: "var(--fs-sm)", fontWeight: 600 }}
                 >
                   {group.label}
-                </span>
+                </SystemLabel>
                 <span style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", lineHeight: 1.5, flex: 1 }}>
                   {group.sub}
                 </span>
@@ -450,6 +446,7 @@ export default function OurEvidencePackPage() {
       {/* FAQ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={5} />
           <SectionHeading
             title="Questions People Usually Have"
             lead="If you have never seen a compliance report before, these are the things most people want to know first."
@@ -503,6 +500,7 @@ export default function OurEvidencePackPage() {
 
       {/* CLOSING CTA */}
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", textAlign: "center" }}>
+        <DepthIndex index={5} total={5} style={{ textAlign: "center" }} />
         <h2
           style={{
             fontFamily: "var(--font-display), Georgia, serif",
@@ -546,6 +544,7 @@ export default function OurEvidencePackPage() {
             Terms
           </a>
         </p>
+        <OmegaSeal size={48} style={{ marginTop: 32 }} caption="13 sections. Nothing hidden, nothing cherry-picked." />
       </SectionReveal>
     </>
   );

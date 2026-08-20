@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { SystemLabel } from "@/components/Myth";
 
 // /our-scan merged into /scan#self-scan (consolidated 2026-07-05). Static
 // export (output: "export" in next.config.ts) has no server at request
@@ -19,9 +20,12 @@ export default function OurScanRedirect() {
   return (
     <>
       <meta httpEquiv="refresh" content={`0; url=${DEST}`} />
-      <p style={{ padding: 40, textAlign: "center" }}>
-        This page has moved. <a href={DEST}>Continue to the self-scan section →</a>
-      </p>
+      <div style={{ padding: "80px 20px", textAlign: "center" }}>
+        <SystemLabel style={{ marginBottom: 12 }}>Route consolidated · 2026-07-05</SystemLabel>
+        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)" }}>
+          This page has moved. <a href={DEST} style={{ color: "var(--gold)" }}>Continue to the self-scan section →</a>
+        </p>
+      </div>
     </>
   );
 }

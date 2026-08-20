@@ -25,11 +25,18 @@ import SiteAnalytics from "@/components/SiteAnalytics";
 //     SAMEORIGIN header (CF Managed Transform "Add security headers").
 //   - 'unsafe-inline' on script-src / style-src is required because
 //     Next 16 static export injects inline <script> + <style> blocks.
-//   - /cdn-cgi/scripts/ allows Cloudflare's own injected scripts
-//     (Bot Management, email-decode until SEC-07 disables it).
+//   - Cloudflare's own injected scripts (Bot Management, email-decode,
+//     Insights beacon) are served from the site's own origin under
+//     /cdn-cgi/, so 'self' already covers them.
+//     A bare path like "/cdn-cgi/scripts/" is NOT a valid CSP source
+//     expression — browsers reject the whole token and log
+//     "contains an invalid source". It was doing nothing except emitting
+//     a console error on every page load (confirmed 2026-08-20 in a real
+//     browser), so it's removed rather than "fixed": 'self' is the
+//     correct and sufficient source here.
 const CSP =
   "default-src 'self'; " +
-  "script-src 'self' 'unsafe-inline' /cdn-cgi/scripts/; " +
+  "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; " +
   "style-src 'self' 'unsafe-inline'; " +
   "img-src 'self' data:; " +
   "font-src 'self'; " +
@@ -38,7 +45,7 @@ const CSP =
   // analytics beacon (SiteAnalytics.tsx — write-only, no cookies).
   // fetch() is governed by connect-src; the legacy form-action
   // 'mailto:' directive below covers the noscript mailto fallback only.
-  "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech; " +
+  "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
   // frame-src allows the inline cal.com booking embed on /audit — the
   // audit call is booked on-page instead of forcing an external tab.
   "frame-src https://cal.com https://vault.titanos.tech; " +

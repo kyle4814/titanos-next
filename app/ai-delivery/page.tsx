@@ -7,6 +7,7 @@ import FaqItem from "@/components/FaqItem";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import Testimonials from "@/components/Testimonials";
 import { DISPLAY } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business — from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
@@ -143,9 +144,22 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
+      <section aria-label="What partnership means here" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="No separate build fee. No second sale later."
+          sub="The machine carries the repetition — the plumbing, the follow-up, the reporting. You keep the calls that need judgement."
+        >
+          One system live in month 1.
+          <br />
+          <span style={{ color: "var(--gold)" }}>Everything after that is tuning.</span>
+        </Inscription>
+      </section>
+
       {/* TIERS */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={1} total={5} />
+          <SystemLabel style={{ marginBottom: 10 }}>Partnership tiers · scoped on the audit call</SystemLabel>
           <SectionHeading title="Choose Your Partnership" lead={`Three retainer tiers. ${DISPLAY.AI_RETAINER_MIN} on all of them.`} />
           <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
             {TIERS.map((t) => (
@@ -202,6 +216,7 @@ export default function AiDeliveryPage() {
       {/* WHAT I BUILD */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={2} total={5} />
           <SectionHeading title="What We Build" lead="If it's repetitive, we automate it." />
           <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
             {WHAT_I_BUILD.map((item) => (
@@ -224,6 +239,7 @@ export default function AiDeliveryPage() {
       {/* HOW IT WORKS */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={3} total={5} />
           <SectionHeading title="How It Works" />
           <GoldThread steps={HOW_IT_WORKS} />
         </div>
@@ -234,12 +250,18 @@ export default function AiDeliveryPage() {
       {/* PRIVACY */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={5} />
           <SectionHeading title="Privacy Built In, Not Bolted On" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.7, textAlign: "center" }}>
             Every AI shop can build you a chatbot. None of them can tell you it&apos;s privacy-compliant
             by design — because compliance is my other practice. See{" "}
             <a href="/compliance" style={{ color: "var(--gold)" }}>what that covers</a>.
           </p>
+          <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>
+            I won&apos;t build you an automation that creates a compliance problem I&apos;d then
+            have to fix for someone else. That&apos;s the whole reason both practices sit
+            with the one person.
+          </OperatorNote>
         </div>
       </SectionReveal>
 
@@ -250,6 +272,7 @@ export default function AiDeliveryPage() {
       {/* FAQ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={5} total={5} />
           <SectionHeading title="Questions I Get" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             {FAQS.map((f) => (
@@ -265,6 +288,7 @@ export default function AiDeliveryPage() {
 
       {/* FINAL CTA */}
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+        <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />
         <h2 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-h2)", fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em" }}>
           Start with the free AI audit call.
         </h2>

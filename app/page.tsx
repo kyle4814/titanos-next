@@ -14,6 +14,7 @@ import FaqItem from "@/components/FaqItem";
 import { STATS } from "@/lib/stats";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
+import { Inscription } from "@/components/Myth";
 
 import type { Offer } from "@/components/OfferCard";
 
@@ -180,67 +181,21 @@ export default function Home() {
         }
       />
 
-      {/* ═══ THE OPENING — the threshold. Framed like an inscription: two
-          rules top and bottom, a stone-tinted recess between them, so the
-          statement reads as something set into the page rather than
-          another paragraph on it. ═══ */}
+      {/* ═══ THE OPENING — the threshold. Inscription primitive: the
+          claim is set INTO the page (lintel rules + stone recess), not
+          printed on it. See components/Myth.tsx for the vocabulary. ═══ */}
       <section
         aria-label="What TITANOS is"
         style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
       >
-        <div
-          style={{
-            maxWidth: "var(--maxw-content)",
-            margin: "0 auto",
-            borderTop: "1px solid rgb(var(--gold-rgb) / 0.30)",
-            borderBottom: "1px solid rgb(var(--gold-rgb) / 0.30)",
-            background:
-              "linear-gradient(180deg, rgb(var(--gold-rgb) / 0.05), transparent 60%)",
-            padding: "var(--space-8) var(--space-6)",
-            textAlign: "center",
-          }}
+        <Inscription
+          label="Built from a phone · No funding · No permission asked"
+          sub="TITANOS is one operator's autonomous systems, built to remove friction rather than add headcount."
         >
-          <p
-            className="font-mono"
-            style={{
-              color: "var(--gold)",
-              fontSize: "var(--fs-xs)",
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              marginBottom: 18,
-            }}
-          >
-            Built from a phone · No funding · No permission asked
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              fontStyle: "italic",
-              fontWeight: 400,
-              color: "var(--ice)",
-              fontSize: "var(--fs-h3)",
-              margin: "0 auto",
-              lineHeight: 1.45,
-              maxWidth: "22ch",
-            }}
-          >
-            The machine carries the complexity.
-            <br />
-            <span style={{ color: "var(--gold)" }}>You keep the judgement.</span>
-          </p>
-          <p
-            style={{
-              color: "var(--dim)",
-              fontSize: "var(--fs-sm)",
-              lineHeight: 1.7,
-              maxWidth: "var(--maxw-prose)",
-              margin: "20px auto 0",
-            }}
-          >
-            TITANOS is one operator&apos;s autonomous systems, built to remove friction rather
-            than add headcount.
-          </p>
-        </div>
+          The machine carries the complexity.
+          <br />
+          <span style={{ color: "var(--gold)" }}>You keep the judgement.</span>
+        </Inscription>
       </section>
 
       <StatsTicker />

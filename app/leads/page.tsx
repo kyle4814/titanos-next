@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SITE } from "@/lib/config";
 import { LEADS, DISPLAY, formatAUD } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 // Fourth door — verified AU lead lists, sold by the compliance practice.
 // Deploy of this page is HELD until the DataForSEO fulfilment pipeline
@@ -235,9 +236,22 @@ export default function LeadsPage() {
 
       <div className="divider-gold" />
 
+      <section aria-label="What this list is" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="Sourced from public record · verified before delivery"
+          sub="Not a scraper dump. A research outcome, checked deliverable one row at a time, backed by a 30-day bounce replacement."
+        >
+          Every contact reachable.
+          <br />
+          <span style={{ color: "var(--gold)" }}>None invented.</span>
+        </Inscription>
+      </section>
+
       {/* ═══ 1.2 — The problem ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={1} total={7} />
+          <SystemLabel style={{ marginBottom: 10 }}>Why most contact lists fail on first send</SystemLabel>
           <SectionHeading title="The List You Buy Is Usually Garbage" />
           <div
             className="grid-auto-cards"
@@ -279,6 +293,7 @@ export default function LeadsPage() {
       {/* ═══ 1.3 — Differentiators ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={2} total={7} />
           <SectionHeading title="What Makes This Different" />
           <div
             className="grid-auto-cards"
@@ -324,6 +339,7 @@ export default function LeadsPage() {
         style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
       >
         <div className="container-vault">
+          <DepthIndex index={3} total={7} />
           <SectionHeading
             title="Pricing"
             lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed — every tier verified at delivery, every tier covered by the 30-day bounce replacement."
@@ -440,6 +456,7 @@ export default function LeadsPage() {
       {/* ═══ 1.5 — How it works ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={4} total={7} />
           <SectionHeading title="How It Works" lead="Three steps, no surprises." />
           <div
             className="grid-auto-cards"
@@ -494,6 +511,7 @@ export default function LeadsPage() {
       {/* ═══ 1.6 — Legal-by-design (load-bearing) ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={5} total={7} />
           <SectionHeading title="Built by a Compliance Practice — on Purpose" />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <p
@@ -556,6 +574,12 @@ export default function LeadsPage() {
               </a>
               .
             </p>
+
+            <OperatorNote>
+              I&apos;m not going to build a lead list I&apos;d be embarrassed to hand my
+              compliance clients. Same rules, same person, same accountability either
+              way.
+            </OperatorNote>
           </div>
         </div>
       </SectionReveal>
@@ -566,6 +590,7 @@ export default function LeadsPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+            <DepthIndex index={6} total={7} />
             <SectionHeading title="Using This List Without Getting Fined" />
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
               The Privacy Act covers how I built the list. The Spam Act 2003 covers how
@@ -587,6 +612,7 @@ export default function LeadsPage() {
       {/* ═══ 1.7 — FAQ ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <DepthIndex index={7} total={7} />
           <SectionHeading title="The Questions Every Buyer Asks First" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Where does the data come from?">
@@ -648,6 +674,7 @@ export default function LeadsPage() {
           zIndex: 2,
         }}
       >
+        <OmegaSeal caption="Public record only. Suppression honoured. You own the file." style={{ marginBottom: "var(--space-8)" }} />
         <h2
           style={{
             fontFamily: "var(--font-display), Georgia, serif",
