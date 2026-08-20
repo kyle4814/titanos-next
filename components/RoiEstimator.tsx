@@ -12,9 +12,15 @@
 // dragging both sliders to max still saw a small-business-shaped answer.
 // Recommendation now also picks the matching tier instead of always
 // pointing at the cheapest retainer.
+//
+// 2026-08-20: restyled as an instrument the visitor operates, not a
+// persuasion widget. Inputs are labelled INPUT, the result is labelled
+// COMPUTED — the distinction between "what you told it" and "what it
+// worked out" stays visible at all times. No calculation changed.
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { DISPLAY } from "@/lib/pricing";
+import { SystemLabel } from "@/components/Myth";
 
 const GROUPED = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -30,6 +36,12 @@ function recommend(monthlyCost: number) {
   }
   return { label: "AI Growth Partner", price: DISPLAY.AI_GROWTH_PARTNER };
 }
+
+const readoutFigure: CSSProperties = {
+  fontFamily: "var(--font-mono), ui-monospace, monospace",
+  fontVariantNumeric: "tabular-nums",
+  color: "var(--gold)",
+};
 
 export default function RoiEstimator() {
   const [hours, setHours] = useState(10);
@@ -51,10 +63,13 @@ export default function RoiEstimator() {
         padding: "26px 24px",
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
+      <SystemLabel style={{ marginBottom: 18 }}>Input — set your own numbers</SystemLabel>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24 }}>
         <label style={{ display: "block" }}>
-          <span style={{ display: "block", color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 8 }}>
-            Hours/week your team spends on repetitive manual work: <strong style={{ color: "var(--gold)" }}>{GROUPED.format(hours)}</strong>
+          <span style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8, color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 10 }}>
+            <span>Hours/week your team spends on repetitive manual work</span>
+            <strong style={{ ...readoutFigure, fontSize: "var(--fs-lg)", whiteSpace: "nowrap" }}>{GROUPED.format(hours)}</strong>
           </span>
           <input
             type="range"
@@ -62,16 +77,17 @@ export default function RoiEstimator() {
             max={400}
             value={hours}
             onChange={(e) => setHours(Number(e.target.value))}
-            style={{ width: "100%", accentColor: "var(--gold, #c9a25a)" }}
+            style={{ width: "100%", height: 32, accentColor: "var(--gold, #c9a25a)" }}
             aria-label="Hours per week the team spends on repetitive manual work"
           />
-          <span style={{ display: "block", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 4 }}>
-            1 (one person, part-time) to 400 (a full department)
+          <span className="label-system" style={{ display: "block", marginTop: 4 }}>
+            1 (one person, part-time) — 400 (a full department)
           </span>
         </label>
         <label style={{ display: "block" }}>
-          <span style={{ display: "block", color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 8 }}>
-            Rough hourly cost of that work: <strong style={{ color: "var(--gold)" }}>AU${GROUPED.format(rate)}/hr</strong>
+          <span style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8, color: "var(--ice)", fontSize: "var(--fs-sm)", fontWeight: 500, marginBottom: 10 }}>
+            <span>Rough hourly cost of that work</span>
+            <strong style={{ ...readoutFigure, fontSize: "var(--fs-lg)", whiteSpace: "nowrap" }}>AU${GROUPED.format(rate)}/hr</strong>
           </span>
           <input
             type="range"
@@ -80,38 +96,53 @@ export default function RoiEstimator() {
             step={5}
             value={rate}
             onChange={(e) => setRate(Number(e.target.value))}
-            style={{ width: "100%", accentColor: "var(--gold, #c9a25a)" }}
+            style={{ width: "100%", height: 32, accentColor: "var(--gold, #c9a25a)" }}
             aria-label="Hourly cost of the work"
           />
-          <span style={{ display: "block", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 4 }}>
-            AU$20 (junior/admin) to AU$500 (specialist, exec, or blended enterprise rate)
+          <span className="label-system" style={{ display: "block", marginTop: 4 }}>
+            AU$20 (junior/admin) — AU$500 (specialist, exec, or blended enterprise rate)
           </span>
         </label>
       </div>
 
-      <div
-        style={{
-          marginTop: 22,
-          paddingTop: 20,
-          borderTop: "1px solid var(--border)",
-          textAlign: "center",
-        }}
-      >
-        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: "0 0 6px" }}>
-          {GROUPED.format(hours)} hrs/week at AU${GROUPED.format(rate)}/hr ≈{" "}
-          <strong style={{ color: "var(--gold)", fontVariantNumeric: "tabular-nums" }}>
-            AU${GROUPED.format(monthlyCost)}/month
-          </strong>{" "}
-          going to manual work{isTeamScale ? ", team-wide" : ""}.
+      <div className="divider-hairline" style={{ margin: "24px 0" }} />
+
+      <div style={{ textAlign: "center" }}>
+        <SystemLabel style={{ marginBottom: 10 }}>Computed — from the numbers above</SystemLabel>
+        <div
+          style={{
+            ...readoutFigure,
+            fontSize: "clamp(1.5rem, 4.5vw + 0.9rem, 2.4rem)",
+            fontWeight: 600,
+            lineHeight: 1.15,
+            wordBreak: "keep-all",
+          }}
+        >
+          AU${GROUPED.format(monthlyCost)}
+        </div>
+        <div className="label-system" style={{ marginTop: 6 }}>
+          per month{isTeamScale ? " · team-wide" : ""}
+        </div>
+
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", margin: "14px 0 18px" }}>
+          {GROUPED.format(hours)} hrs/week × AU${GROUPED.format(rate)}/hr × 4.33 weeks
         </p>
-        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: "0 0 14px" }}>
-          At that scale, the right fit is a <strong style={{ color: "var(--gold)" }}>{tier.label}</strong> — from{" "}
-          <strong style={{ color: "var(--gold)" }}>{tier.price}</strong>.
-        </p>
-        <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", margin: 0 }}>
-          An estimate to help you think it through — your real numbers will differ.
+
+        <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
+          At that scale, the closer fit is a <strong style={{ color: "var(--gold)" }}>{tier.label}</strong> —{" "}
+          <strong style={{ ...readoutFigure, fontWeight: 600 }}>
+            {tier.price.startsWith("From") ? tier.price : `from ${tier.price}`}
+          </strong>
+          .
         </p>
       </div>
+
+      <div className="divider-hairline" style={{ margin: "20px 0 14px" }} />
+
+      <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", textAlign: "center", margin: 0, lineHeight: 1.6 }}>
+        This is your own arithmetic, not a claim about past results — there are no past clients
+        to draw one from yet. Move the sliders; the number moves with them, nothing else.
+      </p>
     </div>
   );
 }

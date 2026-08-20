@@ -3,6 +3,17 @@
 // Persistent mobile-only bottom CTA bar — the single highest-leverage
 // conversion surface on a phone. Desktop already has the nav + in-page
 // CTAs, so this stays hidden above the mobile breakpoint via CSS.
+//
+// RED-TEAM NOTE (see brief): this is a real, load-bearing conversion
+// element, not a dark pattern — but it's the shape (fixed, persistent,
+// bottom-of-screen) dark patterns love, so it's held to a specific
+// bar: no pulsing/attention animation, no countdown, no fake urgency
+// copy, nothing that grows/shrinks/flashes on its own. It just sits
+// there, quietly tappable, every time. The only motion is a 0.15s
+// press-feedback scale on tap, gated on prefers-reduced-motion.
+// Keyboard focus relies on the sitewide a:focus-visible rule in
+// globals.css (gold outline) — not restyled here, so it stays
+// consistent with every other link on the site.
 
 import Link from "next/link";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
@@ -38,10 +49,11 @@ export default function StickyMobileCta() {
             background: var(--gold);
             color: var(--vault-black, #0a0a0a);
             font-family: var(--font-body), system-ui, sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.95rem;
+            letter-spacing: 0.01em;
             text-decoration: none;
-            border-radius: 999px;
+            border-radius: var(--radius-lg);
           }
         }
         @media (max-width: 720px) and (prefers-reduced-motion: no-preference) {

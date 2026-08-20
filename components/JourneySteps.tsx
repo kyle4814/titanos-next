@@ -1,6 +1,12 @@
 // The visitor's path through the business, in order — audit call first,
 // a working system in month 1, then the retainer that keeps compounding.
 // This is a real sequence (not a decorative device), so numbering it is correct.
+//
+// Rendered as ordered descent: each stage is a threshold, marked in the
+// machine's register (STAGE 01 / 04), joined by a hairline rule rather
+// than a "how it works" chevron.
+
+import { SystemLabel } from "@/components/Myth";
 
 const STEPS = [
   { num: "1", title: "Audit call", body: "Free, no obligation. We work out what's worth automating." },
@@ -25,32 +31,42 @@ export default function JourneySteps() {
           key={s.num}
           style={{
             position: "relative",
-            padding: "20px 22px",
+            padding: "22px 24px",
             borderTop: "1px solid var(--border)",
             borderRight: i < STEPS.length - 1 ? "1px solid var(--border)" : "none",
           }}
           className="journey-step"
         >
-          <span
-            aria-hidden="true"
+          <div
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              width: 30,
-              height: 30,
-              borderRadius: "50%",
-              border: "1px solid var(--gold-dim)",
-              background: "rgb(var(--gold-rgb) / 0.10)",
-              color: "var(--gold)",
-              fontFamily: "var(--font-display), Georgia, serif",
-              fontWeight: 700,
-              fontSize: "var(--fs-sm)",
-              marginBottom: 12,
+              gap: 10,
+              marginBottom: 14,
             }}
           >
-            {s.num}
-          </span>
+            <span
+              aria-hidden="true"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minWidth: 34,
+                height: 30,
+                padding: "0 6px",
+                border: "1px solid var(--gold-dim)",
+                background: "rgb(var(--gold-rgb) / 0.06)",
+                color: "var(--gold)",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontWeight: 700,
+                fontSize: "var(--fs-sm)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <SystemLabel>{`STAGE ${String(i + 1).padStart(2, "0")} / ${String(STEPS.length).padStart(2, "0")}`}</SystemLabel>
+          </div>
           <h3
             style={{
               fontFamily: "var(--font-body), system-ui, sans-serif",
@@ -68,24 +84,24 @@ export default function JourneySteps() {
           {i < STEPS.length - 1 && (
             <span
               aria-hidden="true"
-              className="journey-arrow"
+              className="journey-thread"
               style={{
                 position: "absolute",
-                right: -10,
-                top: 30,
-                color: "var(--gold-dim)",
-                fontSize: "1.1rem",
+                right: -1,
+                top: 22,
+                bottom: 22,
+                width: 1,
+                background:
+                  "linear-gradient(180deg, transparent, rgb(var(--gold-rgb) / 0.4) 20%, rgb(var(--gold-rgb) / 0.4) 80%, transparent)",
               }}
-            >
-              →
-            </span>
+            />
           )}
         </div>
       ))}
       <style>{`
         @media (max-width: 720px) {
           .journey-step { border-right: none !important; }
-          .journey-arrow { display: none; }
+          .journey-thread { display: none; }
         }
       `}</style>
     </div>

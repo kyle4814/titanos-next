@@ -66,7 +66,7 @@ export default function NumberCounter({
   }, [value, durationMs]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} style={{ fontVariantNumeric: "tabular-nums" }}>
       {prefix}
       {display.toLocaleString("en-AU")}
       {suffix}

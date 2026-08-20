@@ -16,62 +16,55 @@
  */
 
 import { SITE } from "@/lib/config";
+import { SystemLabel } from "@/components/Myth";
 
 type Props = { variant?: "pill" | "block" };
 
+// RED-TEAM NOTE (see brief).
+//
+// variant="pill" — retired 2026-06-30 and stays retired here. It showed
+// "Booking {CURRENT_BOOKING_MONTH} · {MONTHLY_COMPLIANCE_SLOTS}/month",
+// a value only Kyle updates by hand (lib/config.ts). It is currently
+// "July" while the real date is past that — a false, checkable claim
+// sitting on the page. A number that goes stale the moment nobody
+// remembers to bump it is a manufactured-pressure device by
+// construction, not a fact. Renders nothing.
+//
+// variant="block" — the underlying fact (one operator, a real monthly
+// capacity ceiling) is true and doesn't need a calendar to stay true,
+// so it's kept — but rewritten to drop the same stale "currently
+// booking {month}" claim, and to drop the "queue compresses as the
+// deadline nears" framing, which reads as urgency even though the
+// deadline itself is real (see DeadlineCountdown.tsx). What's left is
+// the plain, evergreen fact: a solo operator has a fixed number of
+// hours, stated once, quietly.
 export default function SlotScarcity({ variant = "pill" }: Props) {
-  // 2026-06-30 — scarcity chip retired. The "Booking July · 4/month" pill
-  // read as pressure copy from a stale month. Reassurance beats scarcity
-  // for the deadline audience; the deadline itself is the urgency.
   if (variant === "pill") return null;
-  return null;
-  if (variant === "pill") {
-    return (
-      <span
-        style={{
-          display: "inline-block",
-          marginLeft: 10,
-          padding: "3px 10px",
-          background: "rgb(var(--gold-rgb) / 0.08)",
-          border: "1px solid var(--gold-dim)",
-          color: "var(--gold)",
-          fontFamily: "var(--font-display), Georgia, serif",
-          fontSize: "var(--fs-sm)",
-          letterSpacing: "0.06em",
-          borderRadius: "var(--radius-lg)",
-          verticalAlign: "middle",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Booking {SITE.CURRENT_BOOKING_MONTH} · {SITE.MONTHLY_COMPLIANCE_SLOTS}/month
-      </span>
-    );
-  }
 
   return (
     <div
       data-analytics="slot-scarcity"
       style={{
         background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
+        border: "1px solid var(--border)",
         borderRadius: "var(--radius-md)",
         padding: "22px 26px",
-        color: "var(--text)",
-        fontSize: "var(--fs-body)",
-        lineHeight: 1.75,
         margin: "32px auto",
         maxWidth: "var(--maxw-prose)",
       }}
     >
-      I&apos;m one operator. I run{" "}
-      <strong style={{ color: "var(--gold)" }}>
-        {SITE.MONTHLY_COMPLIANCE_SLOTS} compliance engagements per month
-      </strong>
-      , and that doesn&apos;t scale. Currently booking{" "}
-      <strong style={{ color: "var(--gold)" }}>{SITE.CURRENT_BOOKING_MONTH}</strong>
-      . The closer 10 December gets, the more compressed the queue — and DNS
-      propagation, host escalations, and the 30-day review call don&apos;t
-      compress.
+      <SystemLabel tone="gold" style={{ marginBottom: 10 }}>
+        Capacity, not a countdown
+      </SystemLabel>
+      <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: 0 }}>
+        I&apos;m one operator. I run{" "}
+        <strong style={{ color: "var(--gold)" }}>
+          {SITE.MONTHLY_COMPLIANCE_SLOTS} compliance engagements a month
+        </strong>{" "}
+        — DNS propagation, host escalations, and the 30-day review call each
+        take the time they take, and one person can only run so many at
+        once. That&apos;s a real constraint, not a sales device.
+      </p>
     </div>
   );
 }

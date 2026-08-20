@@ -17,6 +17,7 @@ import { Radar, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import AnimatedButton from "./AnimatedButton";
 import CornerBrackets from "./CornerBrackets";
+import { SystemLabel } from "@/components/Myth";
 import { cardReveal } from "@/lib/motion";
 
 export type Offer = {
@@ -31,7 +32,7 @@ export type Offer = {
   icon: "radar" | "shield" | "sparkles" | "users";
   index: number;
   footnote?: string;
-  /** Elevates the card: gold gradient border + corner badge with a slow shimmer. */
+  /** Elevates the card: gold gradient border + a quiet "Selected terms" mark. No badge. */
   popular?: boolean;
 };
 
@@ -144,15 +145,19 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--ice)",
-          fontSize: "var(--fs-sm)",
-          letterSpacing: "0.16em",
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          gap: 10,
           marginBottom: 12,
-          textTransform: "uppercase",
         }}
       >
-        {props.tag}
+        <SystemLabel tone="ice">{props.tag}</SystemLabel>
+        {props.popular && (
+          <SystemLabel tone="gold" style={{ whiteSpace: "nowrap" }}>
+            Selected terms
+          </SystemLabel>
+        )}
       </div>
 
       <h3
@@ -161,7 +166,7 @@ export default function OfferCard(props: Offer) {
           color: "var(--gold)",
           fontSize: "var(--fs-h4)",
           letterSpacing: "0.04em",
-          marginBottom: 10,
+          marginBottom: 14,
           lineHeight: 1.3,
         }}
       >
@@ -170,27 +175,29 @@ export default function OfferCard(props: Offer) {
 
       <div
         style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-h3)",
-          fontWeight: 700,
-          marginBottom: 4,
-          lineHeight: 1.2,
+          borderTop: "1px solid rgb(var(--gold-rgb) / 0.25)",
+          borderBottom: "1px solid rgb(var(--gold-rgb) / 0.25)",
+          padding: "14px 0",
+          marginBottom: 18,
         }}
       >
-        {props.price}
-        <span
+        <div
           style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-xs)",
-            fontWeight: 400,
-            display: "block",
-            marginTop: 4,
-            letterSpacing: "0.02em",
+            fontFamily: "var(--font-display), Georgia, serif",
+            color: "var(--gold)",
+            fontSize: "var(--fs-h3)",
+            fontWeight: 700,
+            lineHeight: 1.2,
           }}
         >
+          {props.price}
+        </div>
+        <div
+          className="label-system"
+          style={{ color: "var(--dim)", marginTop: 6 }}
+        >
           {props.priceUnit}
-        </span>
+        </div>
       </div>
 
       <p
@@ -198,12 +205,13 @@ export default function OfferCard(props: Offer) {
           color: "var(--text)",
           fontSize: "var(--fs-body)",
           lineHeight: 1.7,
-          margin: "14px 0 18px",
+          margin: "0 0 18px",
         }}
       >
         {props.body}
       </p>
 
+      <SystemLabel style={{ marginBottom: 8 }}>Terms</SystemLabel>
       <ul
         style={{
           listStyle: "none",
@@ -219,6 +227,7 @@ export default function OfferCard(props: Offer) {
               lineHeight: 1.6,
               padding: "5px 0 5px 18px",
               position: "relative",
+              borderTop: "1px solid var(--border)",
             }}
           >
             <span
@@ -226,6 +235,7 @@ export default function OfferCard(props: Offer) {
               style={{
                 position: "absolute",
                 left: 0,
+                top: 5,
                 color: "var(--gold)",
                 fontFamily: "var(--font-display), Georgia, serif",
               }}

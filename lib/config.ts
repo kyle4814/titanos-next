@@ -40,8 +40,27 @@ export const SITE: SiteConfig = {
   FORMSPREE_ID: "",
 
   // Compliance capacity — drives slot-based scarcity copy.
+  //
+  // MONTHLY_COMPLIANCE_SLOTS is a real constraint: a solo operator can
+  // genuinely only run so many of these a month. Stating it is
+  // information, not manufactured scarcity — but it has to stay TRUE.
   MONTHLY_COMPLIANCE_SLOTS: 4,
-  CURRENT_BOOKING_MONTH: "July",
+  // Derived, never hand-typed. This was hardcoded to "July" and was still
+  // saying "Booking July" on 20 August 2026 — a small, corrosive lie of
+  // exactly the kind the doctrine says to cut rather than soften, and the
+  // sort of thing that makes a careful visitor stop trusting every other
+  // number on the page. Computed in Australia/Brisbane (the operator's
+  // actual timezone, so it flips on HIS month boundary, not UTC's).
+  //
+  // Caveat, stated rather than hidden: this is a static export, so the
+  // value is baked at BUILD time. It is correct as of every deploy and
+  // can only drift if the site goes a full month without one — strictly
+  // better than a literal that was already wrong the day after it was
+  // typed. If deploys ever become rare, move this to a client component.
+  CURRENT_BOOKING_MONTH: new Date().toLocaleString("en-AU", {
+    month: "long",
+    timeZone: "Australia/Brisbane",
+  }),
 
   // Call URLs.
   CAL_15MIN_URL: "https://cal.com/kyle-deligny-msvz6s/15min",

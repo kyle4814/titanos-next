@@ -5,8 +5,12 @@
 // right card instead of making the visitor cross-reference three cards
 // themselves. Recommendation drives a real scroll + pulse on the actual
 // card, plus a direct order link as a fallback if scroll ever misses.
+//
+// Styled as instrumentation, not a marketing quiz: the component reads
+// one input and returns one reading. No progress bars, no gamification.
 
 import { useState } from "react";
+import { SystemLabel } from "@/components/Myth";
 
 type Tier = "growth" | "ops" | "embedded";
 
@@ -49,39 +53,75 @@ export default function TierQuiz() {
     >
       {!scope ? (
         <>
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", fontWeight: 500, textAlign: "center", marginBottom: 16 }}>
-            What do you want automated first?
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>
+            Routing · input required
+          </SystemLabel>
+          <p
+            style={{
+              color: "var(--ice)",
+              fontSize: "var(--fs-body)",
+              fontWeight: 500,
+              textAlign: "center",
+              marginBottom: 18,
+            }}
+          >
+            What should the system take on first?
           </p>
-          <div style={{ display: "grid", gap: 10 }}>
-            {SCOPE_OPTIONS.map((o) => (
+          <div style={{ display: "grid" }}>
+            {SCOPE_OPTIONS.map((o, i) => (
               <button
                 key={o.tier}
                 type="button"
                 onClick={() => goToTier(o.tier)}
+                className="tier-quiz-option"
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 16,
                   width: "100%",
                   textAlign: "left",
-                  padding: "14px 18px",
-                  background: "var(--bg-alt, rgba(255,255,255,0.03))",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-sm)",
+                  padding: "16px 6px",
+                  background: "transparent",
+                  border: "none",
+                  borderTop: i === 0 ? "1px solid var(--border)" : "none",
+                  borderBottom: "1px solid var(--border)",
                   color: "var(--text)",
                   fontSize: "var(--fs-body)",
                   cursor: "pointer",
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                 }}
               >
-                {o.label}
+                <span>{o.label}</span>
+                <span
+                  aria-hidden="true"
+                  className="label-system"
+                  style={{ color: "var(--gold-dim)", flexShrink: 0 }}
+                >
+                  0{i + 1}
+                </span>
               </button>
             ))}
           </div>
         </>
       ) : (
-        <div style={{ textAlign: "center" }}>
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: "0 0 6px" }}>
-            That sounds like
+        <div style={{ textAlign: "center" }} role="status" aria-live="polite">
+          <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
+            Reading
+          </SystemLabel>
+          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", margin: "0 0 6px" }}>
+            Closest fit —
           </p>
-          <p style={{ color: "var(--gold)", fontSize: "var(--fs-lg)", fontWeight: 700, margin: "0 0 14px" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontStyle: "italic",
+              color: "var(--gold)",
+              fontSize: "var(--fs-lg)",
+              fontWeight: 400,
+              margin: "0 0 16px",
+            }}
+          >
             {TIER_LABEL[scope]}
           </p>
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)" }}>
@@ -94,7 +134,7 @@ export default function TierQuiz() {
             type="button"
             onClick={() => setScope(null)}
             style={{
-              marginTop: 14,
+              marginTop: 16,
               background: "transparent",
               border: "none",
               color: "var(--dim)",
@@ -103,7 +143,7 @@ export default function TierQuiz() {
               cursor: "pointer",
             }}
           >
-            Start over
+            Reset
           </button>
         </div>
       )}
@@ -114,6 +154,14 @@ export default function TierQuiz() {
         }
         .tier-quiz-highlight {
           animation: tier-quiz-pulse 0.8s ease-in-out 2;
+        }
+        .tier-quiz-option {
+          transition: background-color 0.15s ease, padding-left 0.15s ease;
+        }
+        .tier-quiz-option:hover,
+        .tier-quiz-option:focus-visible {
+          background-color: rgb(var(--gold-rgb) / 0.05);
+          padding-left: 14px;
         }
       `}</style>
       {pulsing && scope && <HighlightInjector tier={scope} />}

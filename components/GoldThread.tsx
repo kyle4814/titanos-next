@@ -17,6 +17,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "framer-motion";
+import { SystemLabel } from "@/components/Myth";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -108,7 +109,7 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
     >
       {steps.map((s, i) => (
         <div key={s.num} style={{ position: "relative" }}>
-          <ThreadStepCard step={s} index={i} />
+          <ThreadStepCard step={s} index={i} total={steps.length} />
 
           {i < steps.length - 1 && (
             <div
@@ -146,7 +147,15 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
   );
 }
 
-function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
+function ThreadStepCard({
+  step,
+  index,
+  total,
+}: {
+  step: ThreadStep;
+  index: number;
+  total: number;
+}) {
   return (
     <article
       data-thread-step={index}
@@ -185,6 +194,9 @@ function ThreadStepCard({ step, index }: { step: ThreadStep; index: number }) {
         {step.num}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
+        <SystemLabel style={{ marginBottom: 8 }}>
+          {`STAGE ${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}
+        </SystemLabel>
         <h4
           style={{
             fontFamily: "var(--font-display), Georgia, serif",

@@ -4,6 +4,7 @@
 // else. Not a scarcity device; the date is legislated, not manufactured.
 
 import { useEffect, useState } from "react";
+import { SystemLabel } from "@/components/Myth";
 
 const DEADLINE = new Date("2026-12-10T00:00:00+11:00").getTime();
 
@@ -26,23 +27,33 @@ export default function DeadlineCountdown() {
 
   if (!t) return null;
 
+  // aria-live="polite" — this is real, external information (a legislated
+  // date, not a manufactured one), so a screen reader should be able to
+  // hear it update; "polite" means it waits for a pause rather than
+  // interrupting, and it only changes once a minute at most.
   return (
-    <div
-      style={{
-        display: "inline-flex",
-        gap: 18,
-        alignItems: "baseline",
-        justifyContent: "center",
-        fontFamily: "var(--font-mono), ui-monospace, monospace",
-        color: "var(--gold)",
-        flexWrap: "wrap",
-      }}
-      aria-label={`${t.days} days until the 10 December 2026 Privacy Act deadline`}
-    >
-      <Unit value={t.days} label="days" />
-      <Unit value={t.hours} label="hrs" />
-      <Unit value={t.minutes} label="min" />
-      <span style={{ color: "var(--dim)", fontSize: "var(--fs-xs)" }}>until 10 Dec 2026</span>
+    <div>
+      <SystemLabel tone="dim" style={{ textAlign: "center", marginBottom: 6 }}>
+        Privacy Act deadline · statutory, not promotional
+      </SystemLabel>
+      <div
+        style={{
+          display: "inline-flex",
+          gap: 18,
+          alignItems: "baseline",
+          justifyContent: "center",
+          fontFamily: "var(--font-mono), ui-monospace, monospace",
+          color: "var(--gold)",
+          flexWrap: "wrap",
+        }}
+        aria-live="polite"
+        aria-label={`${t.days} days until the 10 December 2026 Privacy Act deadline`}
+      >
+        <Unit value={t.days} label="days" />
+        <Unit value={t.hours} label="hrs" />
+        <Unit value={t.minutes} label="min" />
+        <span style={{ color: "var(--dim)", fontSize: "var(--fs-xs)" }}>until 10 Dec 2026</span>
+      </div>
     </div>
   );
 }

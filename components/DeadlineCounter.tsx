@@ -4,6 +4,15 @@
  * DeadlineCounter — live "X days remaining" pill until 10 Dec 2026
  * Brisbane midnight.
  *
+ * RED-TEAM NOTE: not imported anywhere under app/ as of this pass — the
+ * DeadlineCountdown.tsx days/hrs/min widget is what's actually wired
+ * into /compliance. Kept here (not deleted — signature/behaviour must
+ * stay stable for whoever wires it) and restyled to match the same
+ * "statutory, not promotional" register so the two don't drift if this
+ * one is used later. The date itself is real and external (Privacy
+ * Act), so a plain day-count is information, not manufactured urgency.
+ *
+
  * Refresh strategy:
  *   - Recalculate on mount
  *   - Recalculate every 60s (catches midnight rollover within 1 minute)
@@ -98,8 +107,8 @@ export default function DeadlineCounter() {
       }}
       aria-live="polite"
     >
-      {days > 0 ? `${days} days` : "Deadline 10 Dec 2026"}
-      {days > 0 && <span style={{ marginLeft: 4 }}>remaining</span>}
+      {days > 0 ? `${days} days` : "10 Dec 2026"}
+      {days > 0 && <span style={{ marginLeft: 4, color: "var(--dim)" }}>to 10 Dec 2026</span>}
       <style>{`
         @media (max-width: 480px) {
           .deadline-pill { font-size: var(--fs-xs); padding: 2px 8px; margin-left: 6px; }

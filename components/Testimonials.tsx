@@ -11,13 +11,22 @@
  */
 
 import { TESTIMONIALS, type Testimonial } from "@/lib/testimonials";
+import { SystemLabel } from "@/components/Myth";
 
 type Props = {
   offer?: Testimonial["offer"];
   heading?: string;
 };
 
-export default function Testimonials({ offer, heading = "WHAT CUSTOMERS SAID" }: Props) {
+// RED-TEAM NOTE (see brief): lib/testimonials.ts is empty by design and
+// every entry that ever lands there must carry consentToPublish. That
+// means this component can never render invented names, logos, or
+// quotes — the empty-array guard below is the actual mechanism that
+// keeps that promise, not just a loading state. Restyled in the quiet
+// instrumentation register rather than a marketing "WHAT CUSTOMERS
+// SAID" banner, because a real attributed account doesn't need to
+// shout to be credible.
+export default function Testimonials({ offer, heading = "What customers said" }: Props) {
   const items = offer ? TESTIMONIALS.filter((t) => t.offer === offer) : TESTIMONIALS;
   if (items.length === 0) return null;
 
@@ -31,12 +40,15 @@ export default function Testimonials({ offer, heading = "WHAT CUSTOMERS SAID" }:
       }}
     >
       <div className="container-vault">
+        <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 10 }}>
+          Published with the customer&apos;s consent
+        </SystemLabel>
         <h2
           style={{
             fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            letterSpacing: "0.06em",
+            color: "var(--ice)",
+            fontWeight: 400,
+            fontSize: "var(--fs-h3)",
             textAlign: "center",
             marginBottom: 32,
           }}
@@ -52,7 +64,7 @@ export default function Testimonials({ offer, heading = "WHAT CUSTOMERS SAID" }:
               key={`${t.company}-${t.name}`}
               style={{
                 background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
+                border: "1px solid var(--border)",
                 borderRadius: "var(--radius-md)",
                 padding: "28px 26px",
               }}
@@ -68,17 +80,12 @@ export default function Testimonials({ offer, heading = "WHAT CUSTOMERS SAID" }:
               >
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <footer
-                style={{
-                  marginTop: 14,
-                  color: "var(--ice)",
-                  fontSize: "var(--fs-sm)",
-                  fontFamily: "var(--font-body), system-ui, sans-serif",
-                }}
-              >
-                <strong style={{ color: "var(--gold)" }}>{t.name}</strong>
-                {t.role && <> · {t.role}</>}
-                {t.company && <> · {t.company}</>}
+              <footer style={{ marginTop: 16 }}>
+                <SystemLabel tone="dim">
+                  {t.name}
+                  {t.role && ` · ${t.role}`}
+                  {t.company && ` · ${t.company}`}
+                </SystemLabel>
               </footer>
             </article>
           ))}
