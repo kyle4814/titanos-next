@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+
+const SECTION_COUNT = 7;
 
 export const metadata: Metadata = {
   title: "Privacy Policy — TITANOS",
@@ -24,7 +27,26 @@ export default function PrivacyPage() {
     <>
       <PageHero title="Privacy Policy" tagline="Last updated 2026-06-04 · effective from this date" />
 
-      <SectionReveal style={{ padding: "40px 20px 100px", position: "relative", zIndex: 2 }}>
+      <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="Where the edges are written down"
+          sub="Everything below is that rule, spelled out section by section — what we collect, why, how long we keep it, and how you get it corrected or removed."
+        >
+          You can ask what we hold on you, and get a straight answer.
+        </Inscription>
+      </section>
+
+      <div className="divider-gold" />
+
+      <SectionReveal style={{ padding: "40px 20px 40px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <SystemLabel style={{ textAlign: "center", marginBottom: 6 }}>
+            Privacy Act 1988 (Cth) · Spam Act 2003 (Cth)
+          </SystemLabel>
+        </div>
+      </SectionReveal>
+
+      <SectionReveal style={{ padding: "0 20px 100px", position: "relative", zIndex: 2 }}>
         <article
           style={{
             maxWidth: "var(--maxw-prose)",
@@ -42,6 +64,7 @@ export default function PrivacyPage() {
             through titanos.tech.
           </p>
 
+          <DepthIndex index={1} total={SECTION_COUNT} />
           <H2>What we collect</H2>
           <ul style={ulStyle}>
             <Li>
@@ -62,6 +85,7 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
+          <DepthIndex index={2} total={SECTION_COUNT} />
           <H2>How we use it</H2>
           <ul style={ulStyle}>
             <Li>To deliver the scan or engagement you requested.</Li>
@@ -75,6 +99,7 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
+          <DepthIndex index={3} total={SECTION_COUNT} />
           <H2>How we store it</H2>
           <ul style={ulStyle}>
             <Li>Email and lead data is held in our own infrastructure on encrypted disks.</Li>
@@ -104,6 +129,7 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
+          <DepthIndex index={4} total={SECTION_COUNT} />
           <H2>Your rights</H2>
           <ul style={ulStyle}>
             <Li>
@@ -125,12 +151,14 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
+          <DepthIndex index={5} total={SECTION_COUNT} />
           <H2>How long we keep it</H2>
           <p>
             Lead data is retained for 24 months after your last engagement with us, then deleted.
             Stripe and Cal.com retain their portions per their own privacy frameworks.
           </p>
 
+          <DepthIndex index={6} total={SECTION_COUNT} />
           <H2>Cookies + analytics</H2>
           <p>
             We do not use cookies for analytics, advertising, or tracking. The site uses
@@ -138,6 +166,13 @@ export default function PrivacyPage() {
             plays once per session). No third-party trackers are loaded.
           </p>
 
+          <OperatorNote>
+            In plain terms: no ad trackers, no data broker deals, no fine print that undoes the
+            list above. If you ask what we hold on you, you get an answer — not a form to fill
+            out first.
+          </OperatorNote>
+
+          <DepthIndex index={7} total={SECTION_COUNT} />
           <H2>Contact</H2>
           <p>
             Email{" "}
@@ -158,6 +193,13 @@ export default function PrivacyPage() {
           </p>
         </article>
       </SectionReveal>
+
+      <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
+        <OmegaSeal
+          caption="Seven sections. Every right above is checkable — write to kyle@titanos.tech."
+          style={{ margin: "0 auto" }}
+        />
+      </section>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
+import { OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
 
 // Site Fix 6 — Stripe Checkout cancel redirect target. No subscription
@@ -17,68 +18,63 @@ export const metadata: Metadata = {
 export default function MonitorCancelledPage() {
   return (
     <SectionReveal
-      style={{
-        textAlign: "center",
-        padding: "var(--space-30) 20px",
-        position: "relative",
-        zIndex: 2,
-      }}
+      style={{ padding: "var(--space-30) 20px", position: "relative", zIndex: 2, textAlign: "center" }}
     >
-      <div
+      <OmegaSeal caption="Nothing happened. Nothing was charged." />
+
+      <h1
         style={{
-          maxWidth: "var(--maxw-prose)",
-          margin: "0 auto",
-          padding: "36px 32px",
-          background: "var(--card)",
-          border: "1px solid var(--border)",
-          borderRadius: "var(--radius-md)",
+          fontFamily: "var(--font-display), Georgia, serif",
+          fontStyle: "italic",
+          fontWeight: 400,
+          color: "var(--ice)",
+          fontSize: "var(--fs-h3)",
+          marginTop: 28,
+          marginBottom: 12,
         }}
       >
-        <div
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--ice)",
-            fontSize: "var(--fs-xs)",
-            letterSpacing: "0.18em",
-            marginBottom: 12,
-          }}
-        >
-          CHECKOUT CANCELLED
-        </div>
-        <h1
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            fontWeight: 700,
-            letterSpacing: "0.04em",
-            marginBottom: 18,
-            lineHeight: 1.3,
-          }}
-        >
-          No subscription was created.
-        </h1>
-        <p
-          style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-body)",
-            lineHeight: 1.75,
-            marginBottom: 28,
-          }}
-        >
-          You were not charged. If something went wrong in checkout, try again or email
-          me. If you want to see your business&apos;s security gaps before committing to {DISPLAY.MONITOR_MONTHLY},
-          the free check is the easier way to start.
-        </p>
-        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="/monitor" variant="primary">
-            BACK TO MONITOR
-          </AnimatedButton>
-          <AnimatedButton href="/scan#request" variant="secondary">
-            FREE SCAN FIRST
-          </AnimatedButton>
-        </div>
+        The checkout closed. That&apos;s a fine place to stop.
+      </h1>
+      <p
+        style={{
+          color: "var(--dim)",
+          fontSize: "var(--fs-body)",
+          maxWidth: "var(--maxw-prose)",
+          margin: "0 auto var(--space-8)",
+          lineHeight: 1.7,
+        }}
+      >
+        No subscription was created and no charge was made. If you&apos;d like to see your
+        business&apos;s security gaps before deciding on {DISPLAY.MONITOR_MONTHLY}, the free
+        check is the easier place to start.
+      </p>
+
+      <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+        <AnimatedButton href="/monitor" variant="primary">
+          BACK TO MONITOR
+        </AnimatedButton>
+        <AnimatedButton href="/scan#request" variant="secondary">
+          FREE SCAN FIRST
+        </AnimatedButton>
       </div>
+
+      <p
+        style={{
+          color: "var(--dim)",
+          fontSize: "var(--fs-sm)",
+          marginTop: "var(--space-8)",
+          maxWidth: "var(--maxw-prose)",
+          marginLeft: "auto",
+          marginRight: "auto",
+          lineHeight: 1.7,
+        }}
+      >
+        Questions? Email{" "}
+        <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>
+          kyle@titanos.tech
+        </a>{" "}
+        — a person reads it.
+      </p>
     </SectionReveal>
   );
 }

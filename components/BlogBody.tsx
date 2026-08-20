@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AnimatedButton from "./AnimatedButton";
+import { SystemLabel } from "@/components/Myth";
 import type { ContentBlock } from "@/lib/blog";
 
 const pStyle = {
@@ -90,9 +91,12 @@ export default function BlogBody({ blocks }: { blocks: ContentBlock[] }) {
               <blockquote
                 key={i}
                 style={{
-                  borderLeft: "2px solid var(--gold-dim)",
-                  paddingLeft: 20,
-                  margin: "24px 0",
+                  borderTop: "1px solid rgb(var(--gold-rgb) / 0.30)",
+                  borderBottom: "1px solid rgb(var(--gold-rgb) / 0.30)",
+                  background:
+                    "linear-gradient(180deg, rgb(var(--gold-rgb) / 0.05), transparent 60%)",
+                  padding: "24px clamp(18px, 4vw, 28px)",
+                  margin: "32px 0",
                   color: "var(--ice)",
                   fontFamily: "var(--font-display), Georgia, serif",
                   fontStyle: "italic",
@@ -102,17 +106,7 @@ export default function BlogBody({ blocks }: { blocks: ContentBlock[] }) {
               >
                 {block.text}
                 {block.attribution && (
-                  <div
-                    style={{
-                      marginTop: 8,
-                      fontFamily: "var(--font-mono), monospace",
-                      fontStyle: "normal",
-                      fontSize: "var(--fs-xs)",
-                      color: "var(--dim)",
-                      letterSpacing: "0.06em",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                  <div className="label-system" style={{ marginTop: 12, fontStyle: "normal" }}>
                     — {block.attribution}
                   </div>
                 )}

@@ -21,6 +21,7 @@ export default function BlogPostCard({ post }: { post: BlogPost }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         display: "block",
+        position: "relative",
         background: "var(--card)",
         border: `1px solid ${hovered ? "var(--gold-dim)" : "var(--border)"}`,
         borderRadius: "var(--radius-sm)",
@@ -31,22 +32,32 @@ export default function BlogPostCard({ post }: { post: BlogPost }) {
         height: "100%",
       }}
     >
+      <span
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 10,
+          right: 12,
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "rgb(var(--gold-rgb) / 0.5)",
+        }}
+      />
       <div
+        className="label-system"
         style={{
           display: "flex",
           gap: 10,
           alignItems: "center",
+          flexWrap: "wrap",
           marginBottom: 14,
-          fontFamily: "var(--font-mono), monospace",
-          fontSize: "var(--fs-xs)",
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
           color: "var(--dim)",
         }}
       >
         <span style={{ color: "var(--gold-dim)" }}>{post.tag}</span>
         <span aria-hidden="true">·</span>
-        <span>{formatDate(post.date)}</span>
+        <span>logged {formatDate(post.date)}</span>
         <span aria-hidden="true">·</span>
         <span>{post.readMinutes} min read</span>
       </div>
@@ -82,7 +93,7 @@ export default function BlogPostCard({ post }: { post: BlogPost }) {
           fontSize: "var(--fs-sm)",
         }}
       >
-        Read
+        Open the record
         <span
           aria-hidden="true"
           style={{

@@ -7,6 +7,7 @@ import BlogBody from "@/components/BlogBody";
 import BlogPostCard from "@/components/BlogPostCard";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
+import { SystemLabel, OmegaSeal } from "@/components/Myth";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
 import { POSTS, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 
@@ -120,26 +121,43 @@ export default async function BlogPostPage({
       <PageHero
         badge={post.tag.toUpperCase()}
         title={post.title}
-        sub={`${formatDate(post.date)} · ${post.readMinutes} min read`}
       />
 
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <Link
-            href="/blog"
+          <div
             style={{
-              display: "inline-block",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 12,
               marginBottom: 32,
-              color: "var(--dim)",
-              fontSize: "var(--fs-sm)",
+              paddingBottom: 16,
+              borderBottom: "1px solid var(--border)",
             }}
           >
-            ← Back to the blog
-          </Link>
+            <Link
+              href="/blog"
+              style={{
+                color: "var(--dim)",
+                fontSize: "var(--fs-sm)",
+              }}
+            >
+              ← Back to the archive
+            </Link>
+            <SystemLabel>
+              logged {formatDate(post.date)} · {post.readMinutes} min read
+            </SystemLabel>
+          </div>
 
           <BlogBody blocks={post.body} />
+
+          <div style={{ marginTop: "var(--space-16)", textAlign: "center" }}>
+            <OmegaSeal caption="Recovered document, end of record." style={{ margin: "0 auto" }} />
+          </div>
         </div>
       </SectionReveal>
 
@@ -157,7 +175,7 @@ export default async function BlogPostPage({
                   marginBottom: 20,
                 }}
               >
-                QUICK ANSWERS
+                QUESTIONS ON RECORD
               </h2>
               {post.faq.map((item) => (
                 <FaqItem key={item.q} question={item.q}>
@@ -183,7 +201,7 @@ export default async function BlogPostPage({
                   marginBottom: 20,
                 }}
               >
-                RELATED
+                RELATED RECORDS
               </h2>
               <div
                 style={{
@@ -220,7 +238,7 @@ export default async function BlogPostPage({
             marginBottom: 18,
           }}
         >
-          WANT THIS APPLIED TO YOUR BUSINESS?
+          APPLY THIS TO YOUR OWN OPERATION
         </h2>
         <p
           style={{

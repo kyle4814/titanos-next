@@ -3,6 +3,9 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { Inscription, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+
+const SECTION_COUNT = 7;
 
 export const metadata: Metadata = {
   title: "What happens to your data — quote audit · TITANOS",
@@ -44,8 +47,20 @@ export default function YourDataPage() {
 
       <div className="divider-gold" />
 
+      <section aria-label="The commitment" style={{ padding: "var(--space-10) 20px 0", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="The actual promise"
+          sub="Everything below is that promise written out in full — what I need, what I never do, and how you get it deleted."
+        >
+          30 days, then it&apos;s gone. Email me and it&apos;s the same day.
+        </Inscription>
+      </section>
+
+      <div className="divider-gold" />
+
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <DepthIndex index={1} total={SECTION_COUNT} />
           <h2 style={{ ...headingStyle, marginTop: 0 }}>WHAT I ACTUALLY NEED</h2>
           <p style={bodyStyle}>
             Less than you&apos;d think. To tell you which old quotes are worth chasing, I need the
@@ -58,6 +73,7 @@ export default function YourDataPage() {
             easier to send the raw export, and that&apos;s fine.
           </p>
 
+          <DepthIndex index={2} total={SECTION_COUNT} />
           <h2 style={headingStyle}>WHAT I DO WITH IT</h2>
           <p style={bodyStyle}>
             I load it, count what went quiet, group it by value and age, and work out roughly what&apos;s
@@ -65,6 +81,7 @@ export default function YourDataPage() {
             it&apos;s worth doing anything about. That&apos;s the whole job.
           </p>
 
+          <DepthIndex index={3} total={SECTION_COUNT} />
           <h2 style={headingStyle}>WHAT I NEVER DO</h2>
           <ul style={{ ...bodyStyle, paddingLeft: 22 }}>
             <li style={{ marginBottom: 8 }}>
@@ -82,6 +99,7 @@ export default function YourDataPage() {
             </li>
           </ul>
 
+          <DepthIndex index={4} total={SECTION_COUNT} />
           <h2 style={headingStyle}>HOW LONG I KEEP IT</h2>
           <p style={bodyStyle}>
             30 days from when you send it, then it&apos;s deleted — the file and any working copies.
@@ -89,20 +107,23 @@ export default function YourDataPage() {
             &quot;are you sure?&quot; sequence.
           </p>
 
+          <DepthIndex index={5} total={SECTION_COUNT} />
           <h2 style={headingStyle}>WHERE IT LIVES</h2>
           <p style={bodyStyle}>
             On my own machine, in Australia. Not in a shared drive, not in a CRM, not in a tool
             some other company runs. One person has access, and it&apos;s me.
           </p>
 
+          <DepthIndex index={6} total={SECTION_COUNT} />
           <h2 style={headingStyle}>IF YOU&apos;D RATHER NOT SEND IT AT ALL</h2>
-          <p style={bodyStyle}>
+          <OperatorNote>
             Completely reasonable. Tell me roughly how many quotes you send a month and what your
             average job is worth, and I can give you a rough answer on a call without touching your
             data at all. It&apos;s less precise, but it&apos;s free and it costs you nothing but the
             15 minutes.
-          </p>
+          </OperatorNote>
 
+          <DepthIndex index={7} total={SECTION_COUNT} />
           <h2 style={headingStyle}>WHY I BOTHER WRITING THIS DOWN</h2>
           <p style={bodyStyle}>
             Privacy compliance is half of what I do for a living. It would be a poor look to ask for
@@ -118,6 +139,13 @@ export default function YourDataPage() {
           </p>
         </div>
       </SectionReveal>
+
+      <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
+        <OmegaSeal
+          caption="Seven sections. One promise: ask, and it's gone the same day."
+          style={{ margin: "0 auto" }}
+        />
+      </section>
     </>
   );
 }

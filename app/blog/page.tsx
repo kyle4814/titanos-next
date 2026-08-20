@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import BlogPostCard from "@/components/BlogPostCard";
+import { SystemLabel } from "@/components/Myth";
 import { postsSortedByDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -50,15 +51,18 @@ export default function BlogIndexPage() {
       />
       <PageHero
         badge="FIELD NOTES"
-        title="The blog"
-        tagline="What an AI audit actually finds, what the Privacy Act reforms mean in plain English, and where the money already in your business is hiding."
-        sub="Written for AU trades and small-service operators — no filler, no growth-hacker language."
+        title="The archive"
+        tagline="Notes recovered from the build — what an AI audit actually finds, what the Privacy Act reforms mean in plain English, and where the money already in your business is hiding."
+        sub="Written for AU trades and small-service operators. No filler, no growth-hacker language."
       />
 
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
+          <SystemLabel style={{ textAlign: "center", marginBottom: 32 }}>
+            {String(posts.length).padStart(2, "0")} documents recovered · sorted by date logged
+          </SystemLabel>
           <div
             style={{
               display: "grid",

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { DISPLAY, PRICING } from "@/lib/pricing";
+import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+
+const SECTION_COUNT = 8;
 
 export const metadata: Metadata = {
   title: "Terms of Service — TITANOS",
@@ -25,7 +28,26 @@ export default function TermsPage() {
     <>
       <PageHero title="Terms of Service" tagline="Last updated 2026-06-04 · effective from this date" />
 
-      <SectionReveal style={{ padding: "40px 20px 100px", position: "relative", zIndex: 2 }}>
+      <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
+        <Inscription
+          label="The agreement, in one place"
+          sub="Seven sections, no fine print hidden past the end of the page. What the free scan is, what a paid engagement covers, and what happens if it goes wrong."
+        >
+          Nothing here changes without the date at the top changing with it.
+        </Inscription>
+      </section>
+
+      <div className="divider-gold" />
+
+      <SectionReveal style={{ padding: "40px 20px 40px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <SystemLabel style={{ textAlign: "center", marginBottom: 6 }}>
+            Governed by Queensland law · Australian Consumer Law applies
+          </SystemLabel>
+        </div>
+      </SectionReveal>
+
+      <SectionReveal style={{ padding: "0 20px 100px", position: "relative", zIndex: 2 }}>
         <article
           style={{
             maxWidth: "var(--maxw-prose)",
@@ -40,6 +62,7 @@ export default function TermsPage() {
             Deligny, ABN 34 318 502 254).
           </p>
 
+          <DepthIndex index={1} total={SECTION_COUNT} />
           <H2>Free scans</H2>
           <p>
             The free scan is an external view of publicly-accessible attack-surface
@@ -51,6 +74,7 @@ export default function TermsPage() {
             domains where you cannot demonstrate operational authority).
           </p>
 
+          <DepthIndex index={2} total={SECTION_COUNT} />
           <H2>Paid engagements</H2>
           <p>
             Privacy Act + Essential Eight Compliance ({DISPLAY.PACK_PRICE} one-time, with{" "}
@@ -61,6 +85,7 @@ export default function TermsPage() {
             scoped, quoted in a signed Statement of Work, and billed per that SOW.
           </p>
 
+          <DepthIndex index={3} total={SECTION_COUNT} />
           <H2>Refunds</H2>
           <p>
             Compliance engagements: a full refund is available within 14 days of payment,
@@ -71,6 +96,7 @@ export default function TermsPage() {
             engagements: refund terms are stated in the written scope issued before payment.
           </p>
 
+          <DepthIndex index={4} total={SECTION_COUNT} />
           <H2>Responsible disclosure</H2>
           <p>
             I operate a 90-day responsible-disclosure window for any third-party findings
@@ -78,6 +104,13 @@ export default function TermsPage() {
             will not contact regulators on your behalf without your written instruction.
           </p>
 
+          <OperatorNote>
+            In plain terms: if a scan turns something up, you get first and only crack at fixing
+            it before anyone else finds out. That is not a courtesy I extend selectively — it is
+            how every finding is handled, every time.
+          </OperatorNote>
+
+          <DepthIndex index={5} total={SECTION_COUNT} />
           <H2>Liability</H2>
           <p>
             Titanos provides services on a reasonable-skill-and-care basis. My maximum
@@ -86,18 +119,21 @@ export default function TermsPage() {
             legally be excluded under Australian Consumer Law.
           </p>
 
+          <DepthIndex index={6} total={SECTION_COUNT} />
           <H2>Governing law</H2>
           <p>
             Governed by the laws of Queensland, Australia. Disputes are subject to the
             non-exclusive jurisdiction of the Queensland courts.
           </p>
 
+          <DepthIndex index={7} total={SECTION_COUNT} />
           <H2>Changes</H2>
           <p>
             I may update these terms. The effective date at the top will reflect the most
             recent revision.
           </p>
 
+          <DepthIndex index={8} total={SECTION_COUNT} />
           <H2>Contact</H2>
           <p>
             Email{" "}
@@ -108,6 +144,13 @@ export default function TermsPage() {
           </p>
         </article>
       </SectionReveal>
+
+      <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
+        <OmegaSeal
+          caption="Eight sections. Every liability limit and disclosure window stated plainly above."
+          style={{ margin: "0 auto" }}
+        />
+      </section>
     </>
   );
 }
