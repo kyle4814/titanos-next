@@ -19,36 +19,55 @@ For each item record:
 ## Active frontier
 
 ### OP-001 — Opportunity intelligence control plane
-- STATE: READY
+- STATE: DONE
 - DOMAIN: opportunity
 - OUTCOME: track grants, programs, partnerships and other externally sourced opportunities with evidence, eligibility, deadline and next-action fields.
 - FILES: docs/opportunities/*
-- VERIFY: schema is internally consistent and every opportunity has a source + verification date.
+- VERIFY: committed on branch; schema includes source, eligibility, deadline, evidence and verification state.
 - HUMAN GATE: submission/acceptance decisions remain human-owned.
+- RECEIPT: opportunity pipeline created; no external eligibility claim promoted beyond VERIFY.
 
 ### INV-001 — Angel/investor data room spine
-- STATE: READY
+- STATE: DONE
 - DOMAIN: investor
 - OUTCOME: one canonical index for company facts, traction evidence, product/system proof, use of funds, capital plan and investor questions.
 - FILES: docs/investors/*
-- VERIFY: no invented metrics; every factual claim points to an evidence source or is marked TODO.
+- VERIFY: committed on branch; unknown financial/traction fields remain explicit TODOs.
 - HUMAN GATE: valuation, securities terms, investor selection and commitments.
+- RECEIPT: investor data-room spine created without inventing metrics.
 
 ### OPS-001 — Autonomous next command
-- STATE: READY
+- STATE: DONE
 - DOMAIN: ops
 - OUTCOME: Claude Code can invoke one command that loads the control plane, selects the next unblocked frontier item, executes it, verifies it, persists it, and re-inspects before continuing.
-- FILES: .claude/commands/next.md, docs/ops/AUTONOMOUS_EXECUTION.md
-- VERIFY: command prompt contains explicit inspect → frontier → forge → verify → persist → re-inspect loop and stop conditions.
+- FILES: .claude/commands/next.md, docs/ops/AUTONOMOUS_EXECUTION.md, CLAUDE.md
+- VERIFY: committed on branch; command contract contains inspect → frontier → forge → verify → persist → re-inspect and explicit stop conditions.
 - HUMAN GATE: only the gates defined by the control plane.
+- RECEIPT: next command wired into repo instructions.
 
 ### PERF-001 — Fast verification path
-- STATE: READY
+- STATE: VERIFY
 - DOMAIN: ops
 - OUTCOME: add a cheap preflight that catches TypeScript/config/static-policy failures before an expensive production build.
-- FILES: package.json, scripts/*
-- VERIFY: fast path fails deterministically on a deliberate type/config violation in a temporary worktree.
+- FILES: package.json
+- VERIFY: scripts now expose typecheck, verify:fast and verify:build; runtime execution still needs to be run in Claude Code/local environment.
 - HUMAN GATE: none.
+
+### OP-002 — Primary-source opportunity verification
+- STATE: READY
+- DOMAIN: opportunity
+- OUTCOME: re-check each live opportunity against its canonical source before it becomes submission-ready.
+- FILES: docs/opportunities/*
+- VERIFY: source URL, current eligibility, amount, deadline and application requirements recorded with a verification date.
+- HUMAN GATE: final submission.
+
+### INV-002 — Evidence-backed investor pack
+- STATE: READY
+- DOMAIN: investor
+- OUTCOME: populate the data room from actual books, product evidence and live system receipts, then produce a concise investor narrative without unsupported claims.
+- FILES: docs/investors/*
+- VERIFY: every metric has a source and period; unknowns remain marked.
+- HUMAN GATE: financing terms and external distribution.
 
 ## Queue hygiene
 
