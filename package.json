@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack -H 127.0.0.1",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "verify:fast": "npm run typecheck",
+    "verify:build": "npm run build"
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.1",
