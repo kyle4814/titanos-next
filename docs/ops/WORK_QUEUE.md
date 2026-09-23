@@ -69,6 +69,22 @@ For each item record:
 - VERIFY: every metric has a source and period; unknowns remain marked.
 - HUMAN GATE: financing terms and external distribution.
 
+### TRUTH-001 — Truth Portal foundation
+- STATE: READY
+- DOMAIN: product
+- OUTCOME: build the first portal where pasted claims can be decomposed, evidence-linked and returned as VERIFIED / SUPPORTED / CONTRADICTED / UNKNOWN / UNVERIFIABLE / CONTEXT-DEPENDENT without collapsing model output into reality.
+- FILES: docs/product/TRUTH_PORTAL_SPEC.md, docs/product/CLAIM_EVIDENCE_MODEL.md, app/truth/*
+- VERIFY: claim/evidence schema tests; MVP UI renders atomic claims, evidence and unresolved questions.
+- HUMAN GATE: none for prototype; privacy, legal and high-impact deployment gates remain explicit.
+
+### INVEST-003 — Truth Portal investment case
+- STATE: READY
+- DOMAIN: investor
+- OUTCOME: validate target users, high-value verification jobs, alternatives, willingness to pay, technical feasibility, privacy/security requirements and unit economics before making investor-facing claims.
+- FILES: docs/investors/INVESTMENT_AGENDA.md, docs/investors/*
+- VERIFY: each claim has source/date/evidence state; hypotheses are separated from facts.
+- HUMAN GATE: financing terms, investor outreach and representations.
+
 ## Queue hygiene
 
 When an item reaches DONE, append a one-line receipt with commit SHA and verification result, then add the next highest-value unblocked item. Do not delete history; completed work is part of the system's memory.
