@@ -39,11 +39,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     links: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
-      {
-        label: "Book a call",
-        href: "https://cal.com/kyle-deligny-msvz6s/15min",
-        external: true,
-      },
+      { label: "Message or call Kyle", href: "/contact" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],

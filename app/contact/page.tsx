@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
-import AnimatedButton from "@/components/AnimatedButton";
-import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
+import ContactButtons from "@/components/ContactButtons";
+import { SITE, CONTACT } from "@/lib/config";
 import { Inscription, SystemLabel } from "@/components/Myth";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
-  "Email kyle@titanos.tech or book a free AI audit call. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
+  "Message Kyle on WhatsApp or Telegram, call 0414 244 544, or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -23,17 +23,21 @@ export default function ContactPage() {
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
-        sub="No contact form maze, no support ticket queue. Email or book a call. You'll hear back from the same person who does the work."
+        sub="No contact form maze, no booking system, no support ticket queue. Message or call Kyle directly. You'll hear back from the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
+
+      <section aria-label="Message or call Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <ContactButtons heading="Say hi on whichever is easiest. Free audit, a quick question, or just a chat." />
+      </section>
 
       <div className="divider-gold" />
 
       <section aria-label="Direct line" style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
-        <Inscription label="One inbox. One person.">
+        <Inscription label="One phone. One person.">
           There is no queue and no ticket number.
           <br />
-          <span style={{ color: "var(--gold)" }}>Write to Kyle and Kyle writes back.</span>
+          <span style={{ color: "var(--gold)" }}>Message Kyle and Kyle messages back.</span>
         </Inscription>
       </section>
 
@@ -49,6 +53,13 @@ export default function ContactPage() {
             }}
           >
             <SystemLabel style={{ marginBottom: 16 }}>Direct contact · no form, no gatekeeper</SystemLabel>
+            <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
+              <strong>Phone:</strong>{" "}
+              <a href={CONTACT.TEL_HREF} style={{ color: "var(--gold)" }}>
+                {CONTACT.PHONE_DISPLAY}
+              </a>{" "}
+              ({CONTACT.PHONE_INTL})
+            </p>
             <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
               <strong>Email:</strong>{" "}
               <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>
@@ -68,12 +79,9 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", marginBottom: 24 }}>
-            Prefer to talk it through? Book the free AI audit call. No obligation, no pitch deck.
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
+            Want a free AI audit? Just message Kyle. No obligation, no pitch deck.
           </p>
-          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-            Book your free AI audit call →
-          </AnimatedButton>
         </div>
       </SectionReveal>
     </>

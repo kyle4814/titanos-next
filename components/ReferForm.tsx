@@ -1,6 +1,6 @@
 "use client";
 
-// Inline partner-signup embed, same pattern as CalEmbed: the actual form
+// Inline partner-signup embed, same idea as an inline embed: the actual form
 // (and its POST to /partner/signup) lives on vault.titanos.tech, loaded in
 // an iframe — the fetch happens same-origin from inside the iframe, so a
 // pre-existing zone-wide Cloudflare rule that strips

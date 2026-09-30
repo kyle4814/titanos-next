@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero title="Privacy Policy" tagline="Last updated 2026-06-04 · effective from this date" />
+      <PageHero title="Privacy Policy" tagline="Last updated 2026-10-01 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
         <Inscription
@@ -69,7 +69,8 @@ export default function PrivacyPage() {
           <ul style={ulStyle}>
             <Li>
               Email address, name, and the domain you submit when you request a free scan via
-              mailto or Cal.com.
+              the form or email. If you message or call Kyle, your phone number or messaging
+              username and whatever you choose to tell us.
             </Li>
             <Li>
               Email address, billing details, and ABN (if applicable) when you purchase a
@@ -116,16 +117,27 @@ export default function PrivacyPage() {
               ).
             </Li>
             <Li>
-              Cal.com holds booking data under their privacy framework (
+              If you message or call Kyle through WhatsApp, Telegram or a normal phone call, those
+              services handle your message under their own privacy policies. WhatsApp is operated
+              by Meta (
               <a
-                href="https://cal.com/privacy"
+                href="https://www.whatsapp.com/legal/privacy-policy"
                 style={{ color: "var(--ice)" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                cal.com/privacy
+                whatsapp.com/legal/privacy-policy
               </a>
-              ).
+              ) and Telegram has its own (
+              <a
+                href="https://telegram.org/privacy"
+                style={{ color: "var(--ice)" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                telegram.org/privacy
+              </a>
+              ). Your phone carrier handles calls. We only see what you choose to send us.
             </Li>
           </ul>
 
@@ -155,7 +167,7 @@ export default function PrivacyPage() {
           <H2>How long we keep it</H2>
           <p>
             Lead data is retained for 24 months after your last engagement with us, then deleted.
-            Stripe and Cal.com retain their portions per their own privacy frameworks.
+            Stripe, WhatsApp, Telegram and your phone carrier retain their portions per their own privacy frameworks.
           </p>
 
           <DepthIndex index={6} total={SECTION_COUNT} />

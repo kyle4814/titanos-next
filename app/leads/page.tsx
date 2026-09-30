@@ -4,7 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import { SITE } from "@/lib/config";
+import { CONTACT_HREF } from "@/lib/config";
 import { LEADS, DISPLAY, formatAUD } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
@@ -13,7 +13,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 // has produced one end-to-end test list. A pricing page for a service
 // that can't be delivered yet is a credibility hole the brand can't take.
 
-const BOOK_CALL = SITE.CAL_15MIN_URL;
+const BOOK_CALL = CONTACT_HREF;
 
 const META_TITLE = "Titanos Leads & Intelligence: Verified AU Business Contacts";
 const META_DESC = `Verified Australian business contact lists, built compliant by design. ${DISPLAY.LEADS_STARTER_FROM}. Bounce guarantee. You own the data.`;
@@ -218,8 +218,8 @@ export default function LeadsPage() {
           <AnimatedButton href="#pricing" variant="primary">
             SEE PRICING ↓
           </AnimatedButton>
-          <AnimatedButton href={BOOK_CALL} external variant="secondary">
-            BOOK A 15-MIN FIT CALL →
+          <AnimatedButton href={BOOK_CALL} variant="secondary">
+            MESSAGE OR CALL KYLE →
           </AnimatedButton>
         </div>
         <p
@@ -431,7 +431,7 @@ export default function LeadsPage() {
             }}
           >
             Bigger volume or a vertical I haven&apos;t listed?{" "}
-            <a href={BOOK_CALL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--gold)" }}>
+            <a href={BOOK_CALL} style={{ color: "var(--gold)" }}>
               Tell me what you need →
             </a>
           </p>
@@ -697,12 +697,12 @@ export default function LeadsPage() {
             lineHeight: 1.7,
           }}
         >
-          A 15-minute fit call. I&apos;ll tell you honestly whether I can deliver the
+          Message or call me. I&apos;ll tell you honestly whether I can deliver the
           volume and quality you need, before you pay anything.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={BOOK_CALL} external variant="primary">
-            BOOK A 15-MIN FIT CALL →
+          <AnimatedButton href={BOOK_CALL} variant="primary">
+            MESSAGE OR CALL KYLE →
           </AnimatedButton>
           <AnimatedButton href="#pricing" variant="secondary">
             SEE PRICING ↑

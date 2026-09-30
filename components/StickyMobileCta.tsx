@@ -16,12 +16,12 @@
 // consistent with every other link on the site.
 
 import Link from "next/link";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 
 export default function StickyMobileCta() {
   return (
     <div className="sticky-mobile-cta">
-      <Link href={AUDIT_BOOK_HREF}>Book Free AI Audit Call</Link>
+      <Link href={AUDIT_MESSAGE_HREF}>Message Kyle: Free AI Audit</Link>
       <style>{`
         .sticky-mobile-cta {
           display: none;

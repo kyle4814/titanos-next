@@ -13,7 +13,8 @@ import RoiEstimator from "@/components/RoiEstimator";
 import StatsTicker from "@/components/StatsTicker";
 import FaqItem from "@/components/FaqItem";
 import { STATS } from "@/lib/stats";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import ContactButtons from "@/components/ContactButtons";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription } from "@/components/Myth";
 
@@ -171,7 +172,7 @@ const LADDER: LadderBand[] = [
       { label: "EU AI Act readiness program", price: DISPLAY.ENTERPRISE_AI_ACT },
       { label: "OEM platform licence", price: DISPLAY.OEM_LICENCE_ANNUAL },
     ],
-    cta: "Book an enterprise call →",
+    cta: "Message Kyle about enterprise →",
     href: "/contact",
   },
 ];
@@ -253,8 +254,8 @@ export default function Home() {
 
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-              Book your free AI audit call →
+            <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+              Get your free AI audit: message Kyle →
             </AnimatedButton>
             <AnimatedButton href="#tiers" variant="secondary">
               See how it works ↓
@@ -316,14 +317,14 @@ export default function Home() {
       {/* ═══ THE FREE AI AUDIT ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="Start with a free AI audit call" lead="A call with Kyle. No cost, no obligation, no pitch deck." />
+          <SectionHeading title="Start with a free AI audit" lead="A chat with Kyle. No cost, no obligation, no pitch deck." />
           <GoldThread steps={AUDIT_STEPS} />
           <p style={{ textAlign: "center", color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "24px auto 0", lineHeight: 1.7 }}>
             If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
           </p>
-          <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">Book your free AI audit call →</AnimatedButton>
-          </p>
+          <div style={{ marginTop: 24 }}>
+            <ContactButtons heading="Message or call Kyle. No booking, no forms." />
+          </div>
         </div>
       </SectionReveal>
 
@@ -719,11 +720,13 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          Book the free AI audit call. You&apos;ll see exactly what&apos;s automatable in your
+          Message Kyle for a free AI audit. You&apos;ll see exactly what&apos;s automatable in your
           business and what it&apos;s worth. No cost, no obligation.
         </p>
+        <div style={{ marginBottom: 24 }}>
+          <ContactButtons />
+        </div>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">Book your free AI audit call →</AnimatedButton>
           <AnimatedButton href="#tiers" variant="secondary">See the partnership tiers ↓</AnimatedButton>
         </div>
       </SectionReveal>

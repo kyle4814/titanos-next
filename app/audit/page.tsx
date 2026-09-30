@@ -4,8 +4,8 @@ import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import ContactButtons from "@/components/ContactButtons";
 import FaqItem from "@/components/FaqItem";
-import CalEmbed from "@/components/CalEmbed";
 import BrisbaneClock from "@/components/BrisbaneClock";
 import AuditRequestClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
@@ -102,8 +102,8 @@ export default function AuditPage() {
       />
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <AnimatedButton href="#book" variant="primary">
-          Book your free AI audit call →
+        <AnimatedButton href="#message" variant="primary">
+          Get your free AI audit: message Kyle →
         </AnimatedButton>
       </section>
 
@@ -178,8 +178,8 @@ export default function AuditPage() {
             I&apos;ll tell you that too.
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href="#book" variant="primary">
-              Book your free AI audit call →
+            <AnimatedButton href="#message" variant="primary">
+              Get your free AI audit: message Kyle →
             </AnimatedButton>
           </p>
         </div>
@@ -187,19 +187,19 @@ export default function AuditPage() {
 
       <div className="divider-gold" />
 
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="book">
+      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="message">
         <div className="container-vault">
           <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
             Direct line. No gatekeeper
           </SystemLabel>
-          <SectionHeading title="Book it now" lead="Pick a time below. No new tab, no separate calendar app." />
+          <SectionHeading title="Message Kyle now" lead="Send a message on WhatsApp or Telegram, or just call. No booking, no forms, no waiting for a slot." />
           <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
             I take every one of these myself. If automation isn&apos;t worth it for your
             business, I&apos;ll tell you on the call rather than sell you something that
             won&apos;t pay for itself.
           </OperatorNote>
           <BrisbaneClock />
-          <CalEmbed />
+          <ContactButtons />
         </div>
       </SectionReveal>
 
@@ -207,12 +207,12 @@ export default function AuditPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-          <SectionHeading title="Questions before you book" />
+          <SectionHeading title="Questions before you message" />
           <FaqItem question="Is this actually free?">
             Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in your business yet, I'll tell you that too.
           </FaqItem>
           <FaqItem question="How long is the call?">
-            Long enough to actually understand your business. I don't cap it at a fixed slot like a normal sales call.
+            As long as it takes to understand your business. There's no booking and no fixed slot, so we talk until it's clear.
           </FaqItem>
           <FaqItem question="What happens after the call?">
             If it makes sense, we start with your first system inside month 1 of a retainer. If it doesn't, you walk away with an honest answer and nothing owed.
@@ -240,7 +240,7 @@ export default function AuditPage() {
                 marginBottom: 24,
               }}
             >
-              Prefer to write first instead of booking a call?
+              Prefer to write it all down first?
             </summary>
             <Suspense>
               <AuditRequestClient />

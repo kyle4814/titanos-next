@@ -37,8 +37,8 @@ export default function EnterprisePage() {
         tagline="For groups, regulated entities and boards. Indicative starting points. Every engagement is scoped on a call."
         sub="These figures are starting points, not a fixed price list, and they have not been market-tested. Nothing is signed until we have talked through what you actually need."
       >
-        <AnimatedButton href="/contact" variant="primary" ariaLabel="Book an enterprise call">
-          BOOK AN ENTERPRISE CALL →
+        <AnimatedButton href="/contact" variant="primary" ariaLabel="Message Kyle about an enterprise engagement">
+          MESSAGE KYLE ABOUT ENTERPRISE →
         </AnimatedButton>
       </PageHero>
 

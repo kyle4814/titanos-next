@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Inscription, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const SECTION_COUNT = 7;
@@ -40,8 +40,8 @@ export default function YourDataPage() {
         tagline="If you send me your old quotes so I can tell you what's still worth chasing, you're handing over your customers' details. Here's exactly what I do with them."
         sub="Written in plain English because you should be able to read it in two minutes and decide. No legal padding."
       >
-        <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-          BOOK 15 MINUTES
+        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+          MESSAGE KYLE
         </AnimatedButton>
       </PageHero>
 

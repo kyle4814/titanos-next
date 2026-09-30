@@ -3,9 +3,8 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
+import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
 
-const CAL_15 = SITE.CAL_15MIN_URL;
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
 export const metadata: Metadata = {
@@ -58,7 +57,7 @@ export default function AboutPage() {
         badge="ABOUT THE OPERATOR"
         title="Built from a phone. Run by one operator."
         tagline="Kyle Deligny, Brisbane, Australia. No funding, no team, no permission asked. Just a decision to start, and a standard for what's allowed to ship."
-        sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you book the call, you book me."
+        sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you message or call, you get me."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> ·{" "}
@@ -73,8 +72,8 @@ export default function AboutPage() {
           </>
         }
       >
-        <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-          BOOK YOUR FREE AI AUDIT CALL
+        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+          GET YOUR FREE AI AUDIT: MESSAGE KYLE
         </AnimatedButton>
         <AnimatedButton href="/methodology" variant="secondary">
           SEE THE METHODOLOGY
@@ -281,16 +280,11 @@ export default function AboutPage() {
               . Email security verified (DKIM, SPF, DMARC all in place).
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "var(--gold)" }}>Calendar:</strong>{" "}
-              <a
-                href={CAL_15}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--ice)" }}
-              >
-                cal.com/kyle-deligny-msvz6s/15min
+              <strong style={{ color: "var(--gold)" }}>Phone, WhatsApp, Telegram:</strong>{" "}
+              <a href={CONTACT.TEL_HREF} style={{ color: "var(--ice)" }}>
+                {CONTACT.PHONE_DISPLAY}
               </a>
-              . 15 minutes is enough to know if I&apos;m useful to you.
+              . {CONTACT.HOURS} A few minutes is enough to know if I&apos;m useful to you.
             </li>
             {/* Fix 2b: LinkedIn row, placeholder-gated. Renders only when SITE.LINKEDIN_URL set. */}
             {SITE.LINKEDIN_URL && (
@@ -395,8 +389,8 @@ export default function AboutPage() {
           Same operator behind each one.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-            FREE AI AUDIT CALL
+          <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+            FREE AI AUDIT: MESSAGE KYLE
           </AnimatedButton>
           <AnimatedButton href="/compliance" variant="secondary">
             COMPLIANCE PACK
