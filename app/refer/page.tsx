@@ -6,12 +6,12 @@ import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components/Myth";
 
 export const metadata: Metadata = {
-  title: "Refer & Earn — Partner Network · TITANOS",
+  title: "Refer & Earn: Partner Network · TITANOS",
   description:
     "Commission-only referral partner network. Introduce a business to Titanos, earn commission on real closed revenue. No joining fee, no exclusivity, your own ABN.",
   alternates: { canonical: "https://titanos.tech/refer" },
   openGraph: {
-    title: "Refer & Earn — Titanos Partner Network",
+    title: "Refer & Earn: Titanos Partner Network",
     description:
       "Commission-only referrals. Introduce a business, earn on real closed revenue. No joining fee, ever.",
     type: "website",
@@ -32,7 +32,7 @@ export default function ReferPage() {
         name: "How much can I earn?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Commission is a percentage of real revenue Titanos actually collects from a client you introduce — paid on closed, collected revenue, never on a quote or a maybe.",
+          text: "Commission is a percentage of real revenue Titanos actually collects from a client you introduce, paid on closed, collected revenue, never on a quote or a maybe.",
         },
       },
       {
@@ -56,7 +56,7 @@ export default function ReferPage() {
         name: "What if two partners introduce the same prospect?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "First genuine introduction wins, tracked by timestamp in Titanos's own attribution log — not a manual judgement call.",
+          text: "First genuine introduction wins, tracked by timestamp in Titanos's own attribution log, not a manual judgement call.",
         },
       },
     ],
@@ -71,8 +71,8 @@ export default function ReferPage() {
       <PageHero
         badge="PARTNER NETWORK"
         title="Refer a business. Earn commission. That's the whole model."
-        tagline="Commission-only referral network — no joining fee, no exclusivity, no minimum activity."
-        sub="You already know businesses drowning in manual work. Introduce them to Titanos, and when the deal closes, you're paid."
+        tagline="Commission-only referral network. No joining fee, no exclusivity, no minimum activity."
+        sub="Know a business drowning in manual work? Introduce them to Titanos, and when the deal closes, you're paid."
       />
 
       <section aria-label="The invitation" style={{ padding: "var(--space-8) 20px var(--space-4)", position: "relative", zIndex: 2 }}>
@@ -109,7 +109,7 @@ export default function ReferPage() {
               paddingLeft: 20,
             }}
           >
-            <li>Apply below — takes under a minute, no fee.</li>
+            <li>Apply below, takes under a minute, no fee.</li>
             <li>Kyle reviews and approves your application personally.</li>
             <li>You get a private portal link. Submit warm introductions from there.</li>
             <li>Deal closes and gets paid → commission accrues automatically.</li>
@@ -146,7 +146,7 @@ export default function ReferPage() {
           </h2>
           <FaqItem question="How much can I earn?">
             Commission is a percentage of real revenue Titanos actually collects from a client
-            you introduce — paid on closed, collected revenue, never on a quote or a maybe.
+            you introduce, paid on closed, collected revenue, never on a quote or a maybe.
           </FaqItem>
           <FaqItem question="Is there a joining fee?">
             No. No joining fee, no paid starter pack, no cost to apply or to stay in the
@@ -158,7 +158,7 @@ export default function ReferPage() {
           </FaqItem>
           <FaqItem question="What if two partners introduce the same prospect?">
             First genuine introduction wins, tracked by timestamp in Titanos&apos;s own
-            attribution log — not a manual judgement call.
+            attribution log, not a manual judgement call.
           </FaqItem>
         </div>
       </SectionReveal>

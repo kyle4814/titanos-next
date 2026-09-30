@@ -40,7 +40,7 @@ export default function NotFound() {
         }}
       >
         The page you were looking for doesn&apos;t exist, or was retired. Nothing to fix on
-        your end — just a wrong turn.
+        your end, just a wrong turn.
       </p>
       <Link
         href="/"

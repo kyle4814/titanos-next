@@ -7,12 +7,12 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 const SECTION_COUNT = 8;
 
 export const metadata: Metadata = {
-  title: "Terms of Service — TITANOS",
+  title: "Terms of Service · TITANOS",
   description:
     "Terms governing use of titanos.tech and engagements with Titanos (Kyle Deligny, ABN 34 318 502 254). Free scans, paid engagements, responsible disclosure, liability, governing law.",
   alternates: { canonical: "https://titanos.tech/terms" },
   openGraph: {
-    title: "Terms of Service — Titanos",
+    title: "Terms of Service · Titanos",
     description:
       "Terms governing use of titanos.tech and engagements with Titanos. ABN 34 318 502 254.",
     type: "website",
@@ -66,7 +66,7 @@ export default function TermsPage() {
           <H2>Free scans</H2>
           <p>
             The free scan is an external view of publicly-accessible attack-surface
-            signals on a domain you submit — limited to information your server already
+            signals on a domain you submit, limited to information your server already
             announces to the public internet. It is not a penetration test, not an audit, not a
             legal compliance assessment, and not a substitute for one. The report is delivered on
             a reasonable-effort basis, typically within one business day. I may decline
@@ -79,7 +79,7 @@ export default function TermsPage() {
           <p>
             Privacy Act + Essential Eight Compliance ({DISPLAY.PACK_PRICE} one-time, with{" "}
             {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included; Monitor
-            continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in — no auto-charge): a
+            continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in; no auto-charge): a
             single done-with-you engagement that includes the deliverables described on the
             compliance page at the time of purchase. AI Implementation and Leads engagements are
             scoped, quoted in a signed Statement of Work, and billed per that SOW.
@@ -106,7 +106,7 @@ export default function TermsPage() {
 
           <OperatorNote>
             In plain terms: if a scan turns something up, you get first and only crack at fixing
-            it before anyone else finds out. That is not a courtesy I extend selectively — it is
+            it before anyone else finds out. That is not a courtesy I extend selectively. It is
             how every finding is handled, every time.
           </OperatorNote>
 

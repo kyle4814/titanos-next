@@ -1,6 +1,6 @@
 "use client";
 
-// Two-question tier recommender. Doesn't replace the pricing cards —
+// Two-question tier recommender. Doesn't replace the pricing cards,
 // it just answers "which one is for me" and scrolls/highlights the
 // right card instead of making the visitor cross-reference three cards
 // themselves. Recommendation drives a real scroll + pulse on the actual
@@ -110,7 +110,7 @@ export default function TierQuiz() {
             Reading
           </SystemLabel>
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", margin: "0 0 6px" }}>
-            Closest fit —
+            Closest fit:
           </p>
           <p
             style={{
@@ -125,7 +125,7 @@ export default function TierQuiz() {
             {TIER_LABEL[scope]}
           </p>
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)" }}>
-            Scrolled to it below — or{" "}
+            Scrolled to it below, or{" "}
             <a href={`/order/ai?tier=${scope}`} style={{ color: "var(--gold)" }}>
               go straight to the order form →
             </a>
@@ -169,7 +169,7 @@ export default function TierQuiz() {
   );
 }
 
-// Adds/removes the pulse class on the live DOM node — kept outside React's
+// Adds/removes the pulse class on the live DOM node, kept outside React's
 // render tree for the target card since the card lives in a sibling section.
 function HighlightInjector({ tier }: { tier: Tier }) {
   if (typeof document !== "undefined") {

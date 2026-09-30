@@ -6,7 +6,7 @@ import { DISPLAY } from "@/lib/pricing";
 
 const META_TITLE = "AI Partnership Enquiry | TITANOS";
 const META_DESC =
-  "Structured intake for a Titanos AI partnership retainer. Describe the manual work you want automated — Kyle confirms your tier and scopes month 1.";
+  "Structured intake for a Titanos AI partnership retainer. Describe the manual work you want automated, and Kyle confirms your tier and scopes month 1.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -21,7 +21,7 @@ export default function OrderAiPage() {
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
           label="What this enquiry actually starts"
-          sub={`${DISPLAY.AI_LADDER_ENTRY}. Month 1 is the build, months 2–3 optimise, then it runs month-to-month — cancel any time.`}
+          sub={`${DISPLAY.AI_LADDER_ENTRY}. Month 1 is the build, months 2 to 3 optimise, then it runs month-to-month. Cancel any time.`}
         >
           One system, built around the work you already do manually.
         </Inscription>
@@ -36,7 +36,7 @@ export default function OrderAiPage() {
 
       <section aria-label="After you submit" style={{ padding: "0 20px var(--space-16)" }}>
         <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
-          I read every enquiry myself — no sales team, no queue. If your tier isn&apos;t obvious
+          I read every enquiry myself. No sales team, no queue. If your tier isn&apos;t obvious
           from what you write, I&apos;ll ask before I quote, not after.
         </OperatorNote>
         <OmegaSeal

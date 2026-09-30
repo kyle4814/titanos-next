@@ -4,11 +4,11 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
 
-// Site Fix 6 — Stripe Checkout cancel redirect target. No subscription
+// Site Fix 6, Stripe Checkout cancel redirect target. No subscription
 // was created. Graceful exit, route back to /monitor or /scan.
 
 export const metadata: Metadata = {
-  title: "Checkout cancelled — Titanos Monitor",
+  title: "Checkout cancelled: Titanos Monitor",
   description:
     "Checkout cancelled. No subscription was created. The free security check is still available if you'd like to see your business's gaps first.",
   alternates: { canonical: "https://titanos.tech/monitor/cancelled" },
@@ -73,7 +73,7 @@ export default function MonitorCancelledPage() {
         <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>
           kyle@titanos.tech
         </a>{" "}
-        — a person reads it.
+        and a person reads it.
       </p>
     </SectionReveal>
   );

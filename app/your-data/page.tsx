@@ -8,7 +8,7 @@ import { Inscription, DepthIndex, OperatorNote, OmegaSeal } from "@/components/M
 const SECTION_COUNT = 7;
 
 export const metadata: Metadata = {
-  title: "What happens to your data — quote audit · TITANOS",
+  title: "What happens to your data: quote audit · TITANOS",
   description:
     "If you send me your old quotes for a free audit: exactly what I receive, where it's stored, how long I keep it, and what I never do with it. Plain English, no legal padding.",
   alternates: { canonical: "https://titanos.tech/your-data" },
@@ -50,7 +50,7 @@ export default function YourDataPage() {
       <section aria-label="The commitment" style={{ padding: "var(--space-10) 20px 0", position: "relative", zIndex: 2 }}>
         <Inscription
           label="The actual promise"
-          sub="Everything below is that promise written out in full — what I need, what I never do, and how you get it deleted."
+          sub="Everything below is that promise written out in full: what I need, what I never do, and how you get it deleted."
         >
           30 days, then it&apos;s gone. Email me and it&apos;s the same day.
         </Inscription>
@@ -69,7 +69,7 @@ export default function YourDataPage() {
           </p>
           <p style={bodyStyle}>
             So the best version of this: strip those columns out before you send it, or just send me
-            the export as-is and I&apos;ll delete them on receipt. Your call — most people find it
+            the export as-is and I&apos;ll delete them on receipt. Your call. Most people find it
             easier to send the raw export, and that&apos;s fine.
           </p>
 
@@ -102,7 +102,7 @@ export default function YourDataPage() {
           <DepthIndex index={4} total={SECTION_COUNT} />
           <h2 style={headingStyle}>HOW LONG I KEEP IT</h2>
           <p style={bodyStyle}>
-            30 days from when you send it, then it&apos;s deleted — the file and any working copies.
+            30 days from when you send it, then it&apos;s deleted (the file and any working copies).
             If you want it gone sooner, email me and it&apos;s done same day, no questions and no
             &quot;are you sure?&quot; sequence.
           </p>
@@ -127,8 +127,8 @@ export default function YourDataPage() {
           <h2 style={headingStyle}>WHY I BOTHER WRITING THIS DOWN</h2>
           <p style={bodyStyle}>
             Privacy compliance is half of what I do for a living. It would be a poor look to ask for
-            a few hundred of your customers&apos; details and say nothing about how I handle them —
-            and if I&apos;m sloppy with your data at the free stage, you&apos;d be right not to trust
+            a few hundred of your customers&apos; details and say nothing about how I handle them.
+            And if I&apos;m sloppy with your data at the free stage, you&apos;d be right not to trust
             me with anything after it.
           </p>
           <p style={{ ...bodyStyle, color: "var(--dim)" }}>

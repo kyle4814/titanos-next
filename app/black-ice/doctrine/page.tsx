@@ -7,9 +7,9 @@ import FaqItem from "@/components/FaqItem";
 import MirrorLists from "@/components/MirrorLists";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
 
-const META_TITLE = "The Black Ice Field Guide — Human × AI Operating Doctrine · TITANOS";
+const META_TITLE = "The Black Ice Field Guide: Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
-  "The full Black Ice field guide: Sub-Zero Murmur, Child/Operator, Web Slider, Demon Blade, the 99/1 principle, Pareto Frontier, Scientific Loop, and governed autonomy — free, no signup.";
+  "The full Black Ice field guide: Sub-Zero Murmur, Child/Operator, Web Slider, Demon Blade, the 99/1 principle, Pareto Frontier, Scientific Loop, and governed autonomy. Free, no signup.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -112,7 +112,7 @@ const TOC = [
   ["integrity", "Metaphor vs. Mechanism"],
 ] as const;
 
-// Canonical ten — must match BLACK_ICE_BRAND_BIBLE.md §3 exactly (condensed
+// Canonical ten, must match BLACK_ICE_BRAND_BIBLE.md §3 exactly (condensed
 // for on-page length, not reworded). Two independently-written versions of
 // "the ten principles" existed before this fix; keeping one source of truth.
 const DOCTRINE_X = [
@@ -137,7 +137,7 @@ const faqJsonLd = {
       name: "Is Black Ice a productivity system, a prompt, or a philosophy?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "All three, in that order of usefulness: a small set of reusable primitives (productivity system), applied through AI collaboration (the prompt/framework), resting on a stated worldview about where human judgement has the most leverage (the philosophy).",
+        text: "All three, in that order of usefulness: a small set of reusable primitives (productivity system), applied through AI collaboration (the prompt/framework), resting on a stated worldview about where human judgement counts for the most (the philosophy).",
       },
     },
     {
@@ -145,7 +145,7 @@ const faqJsonLd = {
       name: "Do I need to use AI to use this?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. Every primitive works as a solo thinking tool. It gets more leverage with an AI collaborator doing execution, which is why it's published by an AI systems business — but the doctrine doesn't require one.",
+        text: "No. Every primitive works as a solo thinking tool. It works better with an AI collaborator doing the execution, which is why an AI systems business is publishing it, but the doctrine doesn't require one.",
       },
     },
     {
@@ -153,7 +153,7 @@ const faqJsonLd = {
       name: "Is any of this scientifically proven?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Parts of it are engineering practice with a long track record (OODA-style loops, red-teaming, Pareto prioritisation). Parts of it are metaphor used deliberately as a discovery tool, not a proven mechanism — see the Metaphor vs. Mechanism section, which draws that line explicitly rather than blurring it.",
+        text: "Parts of it are engineering practice with a long track record (OODA-style loops, red-teaming, Pareto prioritisation). Parts of it are metaphor used deliberately as a discovery tool, not a proven mechanism. See the Metaphor vs. Mechanism section, which draws that line explicitly rather than blurring it.",
       },
     },
   ],
@@ -216,17 +216,17 @@ export default function BlackIceDoctrinePage() {
           stopping to journal. Ask, in order, and move on:
         </P>
         <ol style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.9, paddingLeft: 20 }}>
-          <li><strong style={{ color: "var(--gold)" }}>STATE</strong> — what is actually happening right now?</li>
-          <li><strong style={{ color: "var(--gold)" }}>OBJECTIVE</strong> — what am I actually trying to achieve?</li>
-          <li><strong style={{ color: "var(--gold)" }}>SIGNAL</strong> — what information actually matters here?</li>
-          <li><strong style={{ color: "var(--gold)" }}>FRICTION</strong> — what&apos;s unnecessarily slowing this down?</li>
-          <li><strong style={{ color: "var(--gold)" }}>LEVER</strong> — what single action moves this the most?</li>
-          <li><strong style={{ color: "var(--gold)" }}>NEXT</strong> — what happens immediately after that?</li>
+          <li><strong style={{ color: "var(--gold)" }}>STATE</strong>: what is actually happening right now?</li>
+          <li><strong style={{ color: "var(--gold)" }}>OBJECTIVE</strong>: what am I actually trying to achieve?</li>
+          <li><strong style={{ color: "var(--gold)" }}>SIGNAL</strong>: what information actually matters here?</li>
+          <li><strong style={{ color: "var(--gold)" }}>FRICTION</strong>: what&apos;s unnecessarily slowing this down?</li>
+          <li><strong style={{ color: "var(--gold)" }}>LEVER</strong>: what single action moves this the most?</li>
+          <li><strong style={{ color: "var(--gold)" }}>NEXT</strong>: what happens immediately after that?</li>
         </ol>
         <P>
-          The point isn&apos;t depth — it&apos;s speed. A 15-second pass beats a 20-minute
-          reflection you never actually do. Failure mode: turning it into a ritual you perform
-          instead of a correction you make.
+          The point isn&apos;t depth. It&apos;s speed. A 15-second pass beats a 20-minute
+          reflection you never actually do. Ask yourself: is this a genuine correction, or a
+          ritual you perform instead of one?
         </P>
       </Section>
 
@@ -258,49 +258,49 @@ export default function BlackIceDoctrinePage() {
           Move deliberately between four levels when you&apos;re stuck at one of them:
         </P>
         <ul style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.9, paddingLeft: 20 }}>
-          <li><strong style={{ color: "var(--gold)" }}>Micro</strong> — the function, the bug, the variable.</li>
-          <li><strong style={{ color: "var(--gold)" }}>Meso</strong> — the component, the workflow, the service.</li>
-          <li><strong style={{ color: "var(--gold)" }}>Macro</strong> — the system, the business, the architecture.</li>
-          <li><strong style={{ color: "var(--gold)" }}>Meta</strong> — the principle, the pattern, the reusable doctrine.</li>
+          <li><strong style={{ color: "var(--gold)" }}>Micro</strong>: the function, the bug, the variable.</li>
+          <li><strong style={{ color: "var(--gold)" }}>Meso</strong>: the component, the workflow, the service.</li>
+          <li><strong style={{ color: "var(--gold)" }}>Macro</strong>: the system, the business, the architecture.</li>
+          <li><strong style={{ color: "var(--gold)" }}>Meta</strong>: the principle, the pattern, the reusable doctrine.</li>
         </ul>
         <P>
           Trapped in implementation? Go up a level and check the architecture is even right.
-          Overwhelmed by the macro? Drop down and ship one real function. The level you&apos;re
-          stuck at is rarely the level the fix lives on.
+          Overwhelmed by the macro? Drop down and ship one real function. Ask yourself which
+          level you&apos;re actually stuck at, it&apos;s rarely the one the fix lives on.
         </P>
       </Section>
 
       <Section id="demon-blade" index={4} title="RED-TEAM, NOT DEMOLITION">
         <P>
-          Nothing is sacred — assumptions, dependencies, abstractions, claims all get
+          Nothing is sacred. Assumptions, dependencies, abstractions, claims, all of it gets
           inspected. But the goal is never to win an argument against your own idea. It&apos;s
           to find the version of it that survives contact.
         </P>
         <P>
           The question that keeps it constructive: <em>&quot;what can be changed without
           destroying the core function?&quot;</em> Cut the unnecessary material, keep the
-          load-bearing structure, reforge — don&apos;t demolish and call it rigour.
+          load-bearing structure, reforge. Don&apos;t demolish and call it rigour.
         </P>
       </Section>
 
       <Section id="99-1" index={5} title="THE 99/1 PRINCIPLE">
         <P>
-          Target roughly 99% automated, 1% human judgement — a design heuristic, not a
+          Target roughly 99% automated, 1% human judgement. A design heuristic, not a
           religious law. It tells you which direction to lean, not a ratio to hit on every
           project regardless of context.
         </P>
         <P>
           Push automation up when behaviour is predictable, rules are stable, outcomes are
           measurable, and failure is recoverable. Pull human judgement in when uncertainty is
-          high, consequences are irreversible, or the decision is genuinely strategic — not
+          high, consequences are irreversible, or the decision is genuinely strategic. Not
           because automating it would be hard, but because that&apos;s where a human&apos;s
-          attention is actually worth the most.
+          attention is worth the most.
         </P>
       </Section>
 
       <Section id="zero-dependency" index={6} title="ZERO-DEPENDENCY THINKING">
         <P>
-          Not &quot;never use external services&quot; — that&apos;s not realistic and isn&apos;t
+          Not &quot;never use external services.&quot; That&apos;s not realistic and isn&apos;t
           the point. The actual rule: never depend on something without understanding its
           role, its failure mode, and your replacement path if it disappears.
         </P>
@@ -308,20 +308,20 @@ export default function BlackIceDoctrinePage() {
           Before adding a dependency, ask what happens if it vanishes tomorrow, whether a
           free or local alternative exists, and whether the interface can be isolated so
           swapping it later doesn&apos;t mean a rewrite. Use external infrastructure when it
-          gives you real leverage — just go in with eyes open.
+          genuinely earns its place, just go in with your eyes open.
         </P>
       </Section>
 
       <Section id="pareto" index={7} title="THE PARETO FRONTIER">
         <P>
           You cannot optimise every variable at once. Find the highest-value configuration
-          available right now under real constraints — leverage, reliability, speed,
-          maintainability, cost, reversibility — instead of chasing a theoretically perfect
+          available right now under real constraints (impact, reliability, speed,
+          maintainability, cost, reversibility) instead of chasing a theoretically perfect
           version of all of them simultaneously.
         </P>
         <P>
-          A robust 80–95% solution shipped today, then improved with real feedback, beats a
-          hypothetically perfect one that never ships.
+          A solid solution, shipped today at 80 to 95%, then improved with real feedback,
+          beats a hypothetically perfect one that never ships.
         </P>
       </Section>
 
@@ -346,16 +346,16 @@ export default function BlackIceDoctrinePage() {
         </P>
         <P>
           One clear rule beats ten paragraphs of explanation. One reusable function beats
-          the same logic written five times. This field guide is itself an attempt at
-          that — compressed to what actually earns a reader&apos;s time, nothing kept
-          because it sounded good.
+          the same logic written five times. This field guide is itself an attempt at that:
+          compressed to what actually earns a reader&apos;s time, nothing kept because it
+          sounded good.
         </P>
       </Section>
 
       <Section id="governed-autonomy" index={10} title="GOVERNED AUTONOMY">
         <P>
-          Autonomous doesn&apos;t mean uncontrolled. Every autonomous system — human-built or
-          AI-run — should have an explicit objective, defined permissions, resource limits,
+          Autonomous doesn&apos;t mean uncontrolled. Every autonomous system, human-built or
+          AI-run, should have an explicit objective, defined permissions, resource limits,
           observable output, a known failure state, and a way to escalate to a human or shut
           down.
         </P>
@@ -384,7 +384,7 @@ export default function BlackIceDoctrinePage() {
           OBSERVE → ORIENT → COMPRESS → DECIDE → ACT → MEASURE → CORRECT → REPEAT
         </p>
         <P>
-          The purpose isn&apos;t maximum activity. It&apos;s maximum useful trajectory — move
+          The purpose isn&apos;t maximum activity. It&apos;s maximum useful trajectory: move
           fast when the path is clear, slow down when uncertainty or consequence rises, and
           rest when continuing would make the work worse, not better.
         </P>
@@ -394,7 +394,7 @@ export default function BlackIceDoctrinePage() {
         <div style={{ maxWidth: "var(--maxw-prose)" }}>
           <P>
             Everything above, distilled to ten lines. Not a summary to skim instead of
-            reading the rest — a reference to return to once the rest is already
+            reading the rest, but a reference to return to once the rest is already
             understood.
           </P>
         </div>
@@ -449,7 +449,7 @@ export default function BlackIceDoctrinePage() {
 
       <Section id="integrity" index={13} title="METAPHOR VS. MECHANISM">
         <P>
-          Black Ice borrows physical and mythological language — ice, depth, stillness,
+          Black Ice borrows physical and mythological language: ice, depth, stillness,
           &quot;quiet power.&quot; That language is a discovery tool, not a scientific claim.
           Here&apos;s the line, held deliberately:
         </P>
@@ -459,7 +459,7 @@ export default function BlackIceDoctrinePage() {
             "A metaphor for thinking about possibility and depth",
             "An engineering principle with a real track record (OODA loops, red-teaming, Pareto prioritisation)",
             "A hypothesis worth testing against your own work",
-            "A framing that may feel calming or energising — genuinely, for you, subjectively",
+            "A framing that may feel calming or energising, genuinely, for you, subjectively",
           ]}
           dontTitle="WHAT THIS ISN'T"
           dontItems={[
@@ -501,7 +501,7 @@ export default function BlackIceDoctrinePage() {
             lineHeight: 1.7,
           }}
         >
-          This isn&apos;t theory published by a marketing team — it&apos;s the doctrine
+          This isn&apos;t theory published by a marketing team. It&apos;s the doctrine
           TITANOS itself runs on. See it applied on a real audit, or bring it to your own
           systems.
         </p>
@@ -515,10 +515,10 @@ export default function BlackIceDoctrinePage() {
         </div>
         <div style={{ marginTop: 40 }}>
           <FaqItem question="Is Black Ice a productivity system, a prompt, or a philosophy?">
-            All three, in that order of usefulness: a small set of reusable primitives, applied through AI collaboration, resting on a stated worldview about where human judgement has the most leverage.
+            All three, in that order of usefulness: a small set of reusable primitives, applied through AI collaboration, resting on a stated worldview about where human judgement counts for the most.
           </FaqItem>
           <FaqItem question="Do I need to use AI to use this?">
-            No. Every primitive works as a solo thinking tool — it gets more leverage with an AI collaborator doing execution, which is why an AI systems business is publishing it, but nothing here requires one.
+            No. Every primitive works as a solo thinking tool. It works better with an AI collaborator doing the execution, which is why an AI systems business is publishing it, but nothing here requires one.
           </FaqItem>
           <FaqItem question="Is any of this scientifically proven?">
             Parts are engineering practice with a real track record. Parts are deliberate metaphor, marked as such above, not disguised as mechanism.

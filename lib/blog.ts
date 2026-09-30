@@ -1,5 +1,5 @@
 /**
- * Blog content — single source of truth.
+ * Blog content: single source of truth.
  *
  * Deliberately data-driven instead of MDX: this repo is a static export
  * (output:'export', see next.config.ts) with zero markdown tooling
@@ -9,7 +9,7 @@
  * array renders through the exact same component set (PageHero,
  * SectionReveal, tokens) with no new dependency and no parser to trust.
  *
- * To add a post: append to POSTS. Slugs are permanent — Google indexes
+ * To add a post: append to POSTS. Slugs are permanent, Google indexes
  * them, don't rename after publishing (redirect if you must).
  */
 
@@ -26,17 +26,17 @@ export type ContentBlock =
 export type BlogPost = {
   slug: string;
   title: string;
-  /** SEO meta description — keep under 155 chars. */
+  /** SEO meta description, keep under 155 chars. */
   description: string;
   /** One-line hook shown on the index card. */
   excerpt: string;
-  date: string; // ISO — YYYY-MM-DD
+  date: string; // ISO: YYYY-MM-DD
   updated?: string;
   tag: string;
   readMinutes: number;
   body: ContentBlock[];
   relatedSlugs?: string[];
-  /** Optional — renders as FaqItem list + emits FAQPage JSON-LD. */
+  /** Optional, renders as FaqItem list + emits FAQPage JSON-LD. */
   faq?: { q: string; a: string }[];
 };
 
@@ -47,29 +47,29 @@ export const POSTS: BlogPost[] = [
     description:
       "Most trade businesses have a few hundred quotes that never got a yes or a no. Here's how to work out what they're actually worth.",
     excerpt:
-      "You didn't lose these jobs. Nobody said no. They just went quiet — and quiet isn't the same as gone.",
+      "You didn't lose these jobs. Nobody said no. They just went quiet, and quiet isn't the same as gone.",
     date: "2026-08-04",
     tag: "Revenue",
     readMinutes: 5,
     body: [
       {
         type: "p",
-        text: "If you run quotes through any job-management system — ServiceM8, Tradify, simPRO, or just a spreadsheet — you've got a pile of jobs sitting in a status that isn't \"won\" and isn't \"lost\" either. They're just there. Quoted, sent, and never followed up because you got busy and the next job came in.",
+        text: "If you run quotes through any job-management system (ServiceM8, Tradify, simPRO, or just a spreadsheet) you've got a pile of jobs sitting in a status that isn't \"won\" and isn't \"lost\" either. They're just there. Quoted, sent, and never followed up because you got busy and the next job came in.",
       },
       {
         type: "p",
-        text: "That pile is usually bigger than people expect, and it's rarely worth zero. Some of those jobs are genuinely dead — the client went with someone else, or the work isn't happening. But a meaningful share are just waiting on a follow-up that never happened, because chasing quotes competes with actually doing the work, and the work always wins.",
+        text: "That pile is usually bigger than people expect, and it's rarely worth zero. Some of those jobs are genuinely dead: the client went with someone else, or the work isn't happening. But a meaningful share are just waiting on a follow-up that never happened, because chasing quotes competes with actually doing the work, and the work always wins.",
       },
       { type: "h2", text: "Why \"went quiet\" isn't the same as \"said no\"" },
       {
         type: "p",
-        text: "A client who explicitly declines tells you something. A client who never replies tells you nothing — and most people who ask for a quote and then go silent aren't rejecting you, they're just slow, distracted, comparing options, or waiting for their own funding to line up. Treating silence as a no means you're leaving a call or a follow-up email on the table for every one of those jobs.",
+        text: "A client who explicitly declines tells you something. A client who never replies tells you nothing, and most people who ask for a quote and then go silent aren't rejecting you, they're just slow, distracted, comparing options, or waiting for their own funding to line up. Treating silence as a no means you're leaving a call or a follow-up email on the table for every one of those jobs.",
       },
       { type: "h2", text: "A rough way to size the pile yourself" },
       {
         type: "ol",
         items: [
-          "Pull every quote from the last 6-12 months that's still sitting at \"quoted\" status — not won, not marked unsuccessful.",
+          "Pull every quote from the last 6-12 months that's still sitting at \"quoted\" status, not won, not marked unsuccessful.",
           "Drop anything you already know is genuinely dead (job cancelled, client told you no, scope changed).",
           "Add up what's left. That number is your dead-quote pile.",
           "Multiply by your historical quote-to-win rate for jobs you do follow up on. That's a rough floor on what re-chasing is worth.",
@@ -77,7 +77,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "That last step matters — the honest answer for some businesses is \"not much,\" and that's a useful answer too. It tells you the gap isn't in old quotes, it's somewhere else in the pipeline.",
+        text: "That last step matters: the honest answer for some businesses is \"not much,\" and that's a useful answer too. It tells you the gap isn't in old quotes, it's somewhere else in the pipeline.",
       },
       { type: "h2", text: "Where this gets harder than a spreadsheet formula" },
       {
@@ -86,7 +86,7 @@ export const POSTS: BlogPost[] = [
           "Different job-management platforms model \"quoted but not converted\" differently, and the field that looks like a decision date isn't always one. There's a field-by-field breakdown of what ServiceM8, Tradify and simPRO exports actually contain in the ",
         linkText: "companion post on trade-software exports",
         href: "/blog/trade-software-quote-exports",
-        after: " if you want to do this analysis yourself. If you'd rather someone just do it: that's the free audit offer below — send the export, get the number, no obligation either way.",
+        after: " if you want to do this analysis yourself. If you'd rather someone just do it: that's the free audit offer below: send the export, get the number, no obligation either way.",
       },
       {
         type: "cta",
@@ -110,12 +110,12 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "If you're trying to work out which of your old quotes are still worth a follow-up call, the honest first step isn't analysis — it's checking whether your export actually says what you think it says. Every job-management platform models \"still open\" differently, and the wrong assumption here means chasing jobs that were already lost, or ignoring ones that weren't.",
+        text: "If you're trying to work out which of your old quotes are still worth a follow-up call, the honest first step isn't analysis, it's checking whether your export actually says what you think it says. Every job-management platform models \"still open\" differently, and the wrong assumption here means chasing jobs that were already lost, or ignoring ones that weren't.",
       },
       { type: "h2", text: "ServiceM8" },
       {
         type: "p",
-        text: "ServiceM8 uses four job statuses: Quote, Work Order, Completed, Unsuccessful. There's no separate \"declined\" reason code — a quote that gets accepted moves to Work Order, one that gets rejected (or the job is cancelled) moves to Unsuccessful. A quote still worth chasing is one still sitting at status Quote, with a quote_sent date already in the past and no work_order_date or unsuccessful_date to show it ever moved. That combination — sent, and nothing since — is the signal, not the raw quote count.",
+        text: "ServiceM8 uses four job statuses: Quote, Work Order, Completed, Unsuccessful. There's no separate \"declined\" reason code: a quote that gets accepted moves to Work Order, one that gets rejected (or the job is cancelled) moves to Unsuccessful. A quote still worth chasing is one still sitting at status Quote, with a quote_sent date already in the past and no work_order_date or unsuccessful_date to show it ever moved. That combination (sent, and nothing since) is the signal, not the raw quote count.",
       },
       {
         type: "p",
@@ -124,12 +124,12 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "Tradify and simPRO" },
       {
         type: "p",
-        text: "Both platforms give you an explicit quote status field (accepted / declined / sent, or similar), which is more direct than ServiceM8's job-status model — but the same rule applies: a quote that's \"sent\" with no accepted or declined outcome, and no activity since the send date, is your candidate list. Anything with an explicit decline should come out before you do anything else, whichever platform you're on.",
+        text: "Both platforms give you an explicit quote status field (accepted / declined / sent, or similar), which is more direct than ServiceM8's job-status model, but the same rule applies: a quote that's \"sent\" with no accepted or declined outcome, and no activity since the send date, is your candidate list. Anything with an explicit decline should come out before you do anything else, whichever platform you're on.",
       },
       { type: "h2", text: "The mistake that skews the numbers" },
       {
         type: "p",
-        text: "The most common error isn't a wrong platform assumption, it's date confusion — using \"job created\" instead of \"quote sent\" as the reference point, or mixing GST-inclusive and exclusive totals when adding up value. Both of those will make a dead-quote audit look bigger or smaller than it actually is. If a number surprises you, check the date field and the tax treatment before the conclusion.",
+        text: "The most common error isn't a wrong platform assumption, it's date confusion: using \"job created\" instead of \"quote sent\" as the reference point, or mixing GST-inclusive and exclusive totals when adding up value. Both of those will make a dead-quote audit look bigger or smaller than it actually is. If a number surprises you, check the date field and the tax treatment before the conclusion.",
       },
       {
         type: "p",
@@ -157,12 +157,12 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Most small businesses have operated for years under the assumption that the Privacy Act doesn't really apply to them — the small-business exemption (annual turnover under $3 million) has covered a lot of ground since 2001. The 2026 reforms narrow that safety margin, and the deadline that matters for anyone touching customer data is 10 December 2026.",
+        text: "Most small businesses have operated for years under the assumption that the Privacy Act doesn't really apply to them: the small-business exemption (annual turnover under $3 million) has covered a lot of ground since 2001. The 2026 reforms narrow that safety margin, and the deadline that matters for anyone touching customer data is 10 December 2026.",
       },
       { type: "h2", text: "What's actually changing" },
       {
         type: "p",
-        text: "The exemption itself isn't gone outright, but new obligations — around notifiable data breaches, transparency about automated decision-making, and stronger consent standards — increasingly apply regardless of business size when certain triggers are met (health information, data trading, certain contracted government work, and businesses using automated tools to make decisions about people). If any of those apply to you, the size exemption stops being a reliable shield.",
+        text: "The exemption itself isn't gone outright, but new obligations (around notifiable data breaches, transparency about automated decision-making, and stronger consent standards) increasingly apply regardless of business size when certain triggers are met (health information, data trading, certain contracted government work, and businesses using automated tools to make decisions about people). If any of those apply to you, the size exemption stops being a reliable shield.",
       },
       { type: "h2", text: "Who this actually catches" },
       {
@@ -171,7 +171,7 @@ export const POSTS: BlogPost[] = [
           "Anyone using AI tools that make or influence decisions about customers (credit, eligibility, pricing, risk scoring).",
           "Anyone handling health, biometric, or other sensitive information, regardless of turnover.",
           "Businesses that received a third party's customer data as part of a partnership, referral, or acquisition.",
-          "Any business that's had — or could plausibly have — a data breach involving personal information.",
+          "Any business that's had, or could plausibly have, a data breach involving personal information.",
         ],
       },
       { type: "h2", text: "What it doesn't mean" },
@@ -182,7 +182,7 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "A useful gut check" },
       {
         type: "p",
-        text: "If you can't currently answer \"what personal data do we hold, where does it live, and who can see it\" in under two minutes without checking with someone else, that's the gap worth closing first — before the deadline, not after someone asks the question for you.",
+        text: "If you can't currently answer \"what personal data do we hold, where does it live, and who can see it\" in under two minutes without checking with someone else, that's the gap worth closing first, before the deadline, not after someone asks the question for you.",
       },
       {
         type: "cta",
@@ -197,7 +197,7 @@ export const POSTS: BlogPost[] = [
     slug: "ai-audit-what-we-actually-find",
     title: "What an AI audit actually finds in a trades or small-service business (real patterns, not hype)",
     description:
-      "The recurring manual-work patterns a free AI audit surfaces in trades and small-service businesses — and which ones are actually worth automating.",
+      "The recurring manual-work patterns a free AI audit surfaces in trades and small-service businesses, and which ones are actually worth automating.",
     excerpt:
       "The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.",
     date: "2026-07-29",
@@ -222,12 +222,12 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "What's usually NOT worth automating" },
       {
         type: "p",
-        text: "Anything that happens rarely, anything where the judgment call matters more than the data entry, and anything you're already using a decent tool for. A lot of what gets sold as automation just books appointments or shuffles data between two tools you already pay for — that's not a real gap, and the honest answer on a call is to say so.",
+        text: "Anything that happens rarely, anything where the judgment call matters more than the data entry, and anything you're already using a decent tool for. A lot of what gets sold as automation just books appointments or shuffles data between two tools you already pay for. That's not a real gap, and the honest answer on a call is to say so.",
       },
       { type: "h2", text: "Why the free-audit-first model" },
       {
         type: "p",
-        text: "Because the alternative — quoting a project before anyone's looked at what's actually manual in your business — is a guess dressed up as a number. The audit call exists so the quote that follows it is based on a real task, not a template.",
+        text: "Because the alternative (quoting a project before anyone's looked at what's actually manual in your business) is a guess dressed up as a number. The audit call exists so the quote that follows it is based on a real task, not a template.",
       },
       {
         type: "cta",
@@ -242,7 +242,7 @@ export const POSTS: BlogPost[] = [
     slug: "outreach-that-actually-works",
     title: "Why \"book a call\" gets ignored and \"send me a spreadsheet\" doesn't",
     description:
-      "A note on why smaller, more specific asks get better replies than generic call-booking outreach — and what that means for how offers should be built.",
+      "A note on why smaller, more specific asks get better replies than generic call-booking outreach, and what that means for how offers should be built.",
     excerpt:
       "Asking a stranger for 20 minutes is a big ask. Asking them to export something they already have costs them nothing.",
     date: "2026-08-10",
@@ -251,26 +251,26 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Most cold outreach — call, email, doesn't matter — asks for the same thing first: book a call, get on a demo, see the pitch. That's a reasonable ask from someone who already knows and trusts you. It's a big ask from a stranger, and most strangers correctly decline it.",
+        text: "Most cold outreach (call, email, doesn't matter) asks for the same thing first: book a call, get on a demo, see the pitch. That's a reasonable ask from someone who already knows and trusts you. It's a big ask from a stranger, and most strangers correctly decline it.",
       },
       { type: "h2", text: "The smaller ask" },
       {
         type: "p",
-        text: "\"Send me a spreadsheet you already have\" costs the other person almost nothing — no time carved out, no commitment, no sales conversation to sit through. It also does something \"book a call\" doesn't: it self-selects. Someone who exports their quotes and sends them over has told you, without a word of copy, that they actually have the problem you solve. A call booking tells you someone's curious. A data export tells you someone's ready.",
+        text: "\"Send me a spreadsheet you already have\" costs the other person almost nothing: no time carved out, no commitment, no sales conversation to sit through. It also does something \"book a call\" doesn't: it self-selects. Someone who exports their quotes and sends them over has told you, without a word of copy, that they actually have the problem you solve. A call booking tells you someone's curious. A data export tells you someone's ready.",
       },
       { type: "h2", text: "It also produces the number you'd otherwise be guessing at" },
       {
         type: "p",
-        text: "The free work — actually going through the export — hands back a real figure specific to that business, instead of a generic pitch about what automation could theoretically be worth. Quoting against a real number a client can check against their own data is a different conversation than quoting against an assumption.",
+        text: "The free work (actually going through the export) hands back a real figure specific to that business, instead of a generic pitch about what automation could theoretically be worth. Quoting against a real number a client can check against their own data is a different conversation than quoting against an assumption.",
       },
       { type: "h2", text: "Where this doesn't apply" },
       {
         type: "p",
-        text: "Not every offer reduces to a spreadsheet. This works because the free-audit model produces something concrete and checkable. If the free step is vague — \"let's chat about your goals\" — it's really just a call booking with extra steps, and it inherits the same problem it was meant to solve.",
+        text: "Not every offer reduces to a spreadsheet. This works because the free-audit model produces something concrete and checkable. If the free step is vague, something like \"let's chat about your goals,\" it's really just a call booking with extra steps, and it inherits the same problem it was meant to solve.",
       },
       {
         type: "cta",
-        text: "This is the exact model behind the free quote audit — see what it actually asks for.",
+        text: "This is the exact model behind the free quote audit. See what it actually asks for.",
         label: "READ THE DEAD-QUOTE POST →",
         href: "/blog/dead-quotes-hidden-revenue",
       },
@@ -281,7 +281,7 @@ export const POSTS: BlogPost[] = [
     slug: "free-scan-legitimacy-check",
     title: "How to tell if a \"free scan\" offer is legitimate (and how to verify mine in five minutes)",
     description:
-      "Free security scans are an easy vehicle for a scam. Here's how to check whether one is legitimate before handing anything over — including this one.",
+      "Free security scans are an easy vehicle for a scam. Here's how to check whether one is legitimate before handing anything over, including this one.",
     excerpt:
       "A free scan that asks for payment details before showing results isn't a free scan. Here's what a legitimate one looks like.",
     date: "2026-08-18",
@@ -290,14 +290,14 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "\"Free scan\" is a phrase scammers use too, which makes it a reasonable thing to be suspicious of — including from us. If someone offers to scan your business for free, here's what to check before you give them anything.",
+        text: "\"Free scan\" is a phrase scammers use too, which makes it a reasonable thing to be suspicious of, including from us. If someone offers to scan your business for free, here's what to check before you give them anything.",
       },
       { type: "h2", text: "What a legitimate free scan should never ask for" },
       {
         type: "ul",
         items: [
           "Payment details or a card number before showing you any result.",
-          "Login credentials to your own systems — a real external scan only needs your public domain, nothing you'd log into.",
+          "Login credentials to your own systems. A real external scan only needs your public domain, nothing you'd log into.",
           "Pressure to act immediately on a finding without being able to verify it yourself.",
         ],
       },
@@ -305,16 +305,16 @@ export const POSTS: BlogPost[] = [
       {
         type: "ul",
         items: [
-          "ABN 34 318 502 254 — verifiable directly on the Australian Business Register, not just quoted on the site.",
+          "ABN 34 318 502 254, verifiable directly on the Australian Business Register, not just quoted on the site.",
           "The methodology page lists exactly what the scan checks and how to reproduce any finding yourself.",
           "We publish our own self-scan results in full, on the same page real client scans run from.",
-          "Email from kyle@titanos.tech carries verified DKIM, SPF and DMARC — checkable in any email client's message headers.",
+          "Email from kyle@titanos.tech carries verified DKIM, SPF and DMARC, checkable in any email client's message headers.",
         ],
       },
       { type: "h2", text: "The general rule, beyond us" },
       {
         type: "p",
-        text: "A legitimate free offer can tell you, in plain language, exactly what it checks, exactly what it does with the result, and exactly how you'd verify the operator is who they say they are — before you've committed to anything. If any of those three answers is vague or missing, that's the signal to walk away, regardless of who's making the offer.",
+        text: "A legitimate free offer can tell you, in plain language, exactly what it checks, exactly what it does with the result, and exactly how you'd verify the operator is who they say they are, before you've committed to anything. If any of those three answers is vague or missing, that's the signal to walk away, regardless of who's making the offer.",
       },
       {
         type: "cta",
@@ -338,30 +338,30 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Short answer: usually yes, but only if you check three specific things first — call recording consent, where the transcript is stored, and whether the vendor is contractually accountable to you for it. Most AI-receptionist products for tradies don't mention any of the three on their pricing page.",
+        text: "Short answer: usually yes, but only if you check three specific things first: call recording consent, where the transcript is stored, and whether the vendor is contractually accountable to you for it. Most AI-receptionist products for tradies don't mention any of the three on their pricing page.",
       },
       {
         type: "p",
-        text: "The pitch for these tools is consistent and genuinely true: tradies on tools all day can't answer calls, and a missed call is often a missed job. What's missing from almost every pitch is that the moment the tool starts recording and transcribing a customer's voice, you've created a new category of personal information you're responsible for under the Privacy Act — separate from the job data already sitting in ServiceM8 or Tradify.",
+        text: "The pitch for these tools is consistent and genuinely true: tradies on tools all day can't answer calls, and a missed call is often a missed job. What's missing from almost every pitch is that the moment the tool starts recording and transcribing a customer's voice, you've created a new category of personal information you're responsible for under the Privacy Act, separate from the job data already sitting in ServiceM8 or Tradify.",
       },
       { type: "h2", text: "Does the tool need consent to record the call?" },
       {
         type: "p",
-        text: "Yes, in most cases — Australian call-recording law generally requires at least one party's consent, and reasonable practice is to disclose it up front (\"this call may be recorded for quality and follow-up\"). If the AI receptionist doesn't play a disclosure before it starts capturing audio, that's the first thing to raise with the vendor, not something to assume they've handled.",
+        text: "Yes, in most cases. Australian call-recording law generally requires at least one party's consent, and reasonable practice is to disclose it up front (\"this call may be recorded for quality and follow-up\"). If the AI receptionist doesn't play a disclosure before it starts capturing audio, that's the first thing to raise with the vendor, not something to assume they've handled.",
       },
       { type: "h2", text: "Where does the recording and transcript actually live?" },
       {
         type: "p",
-        text: "A lot of these tools are US-built SaaS products, which means customer voice data and transcripts may be stored offshore, sometimes fed into a third-party AI model provider on top of that. Neither is automatically a problem, but it means your customer's phone number, name, and job details are now sitting in at least two more systems than they were before — and it's worth asking, in writing, whether the vendor uses your customers' calls to train their own model.",
+        text: "A lot of these tools are US-built SaaS products, which means customer voice data and transcripts may be stored offshore, sometimes fed into a third-party AI model provider on top of that. Neither is automatically a problem, but it means your customer's phone number, name, and job details are now sitting in at least two more systems than they were before, and it's worth asking, in writing, whether the vendor uses your customers' calls to train their own model.",
       },
       { type: "h2", text: "Who's accountable if the vendor is breached?" },
       {
         type: "p",
-        text: "Disclosing customer information to a third-party tool doesn't transfer your responsibility for it — under Australian Privacy Principle 11, you remain accountable for taking reasonable steps to protect information even once it's sitting with a supplier. A one-line data processing clause in the vendor's terms (or the lack of one) is worth reading before signing up, not after something goes wrong.",
+        text: "Disclosing customer information to a third-party tool doesn't transfer your responsibility for it. Under Australian Privacy Principle 11, you remain accountable for taking reasonable steps to protect information even once it's sitting with a supplier. A one-line data processing clause in the vendor's terms (or the lack of one) is worth reading before signing up, not after something goes wrong.",
       },
       {
         type: "p",
-        text: "None of this means don't use an AI receptionist — missed-call revenue loss is real and these tools solve a genuine problem. It means asking the vendor these three questions before rollout costs you nothing and closes the actual gap.",
+        text: "None of this means don't use an AI receptionist. Missed-call revenue loss is real and these tools solve a genuine problem. It means asking the vendor these three questions before rollout costs you nothing and closes the actual gap.",
       },
       {
         type: "cta",
@@ -374,11 +374,11 @@ export const POSTS: BlogPost[] = [
     faq: [
       {
         q: "Do I need to tell customers an AI is answering the phone?",
-        a: "Best practice, yes — a short disclosure at the start of the call (that it's an automated assistant, and that the call may be recorded) covers both the recording-consent question and sets honest expectations.",
+        a: "Best practice, yes. A short disclosure at the start of the call (that it's an automated assistant, and that the call may be recorded) covers both the recording-consent question and sets honest expectations.",
       },
       {
         q: "Is it illegal to use an AI receptionist in Australia?",
-        a: "No — there's no law against it. The obligations are the same ones that already apply to any tool handling customer personal information: consent to record, reasonable security, and accountability for what a vendor does with the data.",
+        a: "No. There's no law against it. The obligations are the same ones that already apply to any tool handling customer personal information: consent to record, reasonable security, and accountability for what a vendor does with the data.",
       },
     ],
   },
@@ -395,7 +395,7 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Business email compromise (BEC) — an attacker impersonating a supplier or client to redirect a payment — is the most-reported cybercrime category against Australian small businesses, and trade businesses are a specific target because of high-value supplier invoices and client progress payments moving through email with little friction.",
+        text: "Business email compromise (BEC), an attacker impersonating a supplier or client to redirect a payment, is the most-reported cybercrime category against Australian small businesses, and trade businesses are a specific target because of high-value supplier invoices and client progress payments moving through email with little friction.",
       },
       { type: "h2", text: "What the scam actually looks like" },
       {
@@ -415,7 +415,7 @@ export const POSTS: BlogPost[] = [
       {
         type: "ol",
         items: [
-          "Any bank-detail change, from anyone, gets confirmed by phone on a number you already have on file — never a number in the email.",
+          "Any bank-detail change, from anyone, gets confirmed by phone on a number you already have on file, never a number in the email.",
           "Multi-factor authentication on every email account that can send or receive invoices, not just the owner's.",
           "A second person (even informally) glances at any transfer over a set amount before it goes out.",
           "Check the sender's actual email address, not just the display name, on anything asking to change payment details.",
@@ -423,11 +423,11 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "None of this requires new software — it's a habit change that costs nothing, and it's the single highest-value five minutes most trade businesses could spend on cybersecurity this month.",
+        text: "None of this requires new software. It's a habit change that costs nothing, and it's the single highest-value five minutes most trade businesses could spend on cybersecurity this month.",
       },
       {
         type: "cta",
-        text: "Our free scan checks the parts of this attack surface you can verify externally — DKIM/SPF/DMARC on your own domain, and what's publicly exposed.",
+        text: "Our free scan checks the parts of this attack surface you can verify externally: DKIM/SPF/DMARC on your own domain, and what's publicly exposed.",
         label: "RUN THE FREE SCAN →",
         href: "/scan",
       },
@@ -447,7 +447,7 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "The Essential Eight is the Australian Cyber Security Centre's baseline set of controls for reducing cyber risk — written primarily for organisations with an IT department, which means most of it doesn't obviously translate to a business run out of a ute. Here's what each control actually means at that scale.",
+        text: "The Essential Eight is the Australian Cyber Security Centre's baseline set of controls for reducing cyber risk, written primarily for organisations with an IT department, which means most of it doesn't obviously translate to a business run out of a ute. Here's what each control actually means at that scale.",
       },
       { type: "h2", text: "What does \"application control\" mean for a solo tradie?" },
       {
@@ -457,7 +457,7 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "What does \"patch applications\" mean day to day?" },
       {
         type: "p",
-        text: "Turn on automatic updates for your phone, laptop, and job-management app, and don't put off the update prompts. Most real-world breaches exploit a vulnerability that was already patched months earlier — the gap is people delaying the update, not a lack of a patch existing.",
+        text: "Turn on automatic updates for your phone, laptop, and job-management app, and don't put off the update prompts. Most real-world breaches exploit a vulnerability that was already patched months earlier. The gap is people delaying the update, not a lack of a patch existing.",
       },
       { type: "h2", text: "What does \"multi-factor authentication\" actually protect?" },
       {
@@ -467,7 +467,7 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "What does \"regular backups\" mean if you don't run a server?" },
       {
         type: "p",
-        text: "Whether your job photos, quotes, and client details actually survive your phone being lost, stolen, or dropped in a puddle on site. If the honest answer is \"they're only on my phone,\" that's the gap — most job-management apps already back up to the cloud automatically; check the setting is actually on.",
+        text: "Whether your job photos, quotes, and client details actually survive your phone being lost, stolen, or dropped in a puddle on site. If the honest answer is \"they're only on my phone,\" that's the gap. Most job-management apps already back up to the cloud automatically; check the setting is actually on.",
       },
       { type: "h2", text: "What does \"restrict admin privileges\" mean with one or two staff?" },
       {
@@ -476,11 +476,11 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The remaining three controls (configuring Microsoft Office macro settings, user application hardening, and restricting admin OS environments) are genuinely IT-department-scale and rarely apply to a business with no server infrastructure — worth knowing they exist, not worth chasing at this size.",
+        text: "The remaining three controls (configuring Microsoft Office macro settings, user application hardening, and restricting admin OS environments) are genuinely IT-department-scale and rarely apply to a business with no server infrastructure. Worth knowing they exist, not worth chasing at this size.",
       },
       {
         type: "cta",
-        text: "The free scan checks what's externally visible about your setup — no login access needed, no cost, full results either way.",
+        text: "The free scan checks what's externally visible about your setup: no login access needed, no cost, full results either way.",
         label: "RUN THE FREE SCAN →",
         href: "/scan",
       },
@@ -493,7 +493,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         q: "What's the single highest-value control for a solo tradie?",
-        a: "Multi-factor authentication on email and Xero/accounting logins — those two accounts are the ones an attacker can turn directly into stolen money via a fake invoice or bank-detail change.",
+        a: "Multi-factor authentication on email and Xero/accounting logins. Those two accounts are the ones an attacker can turn directly into stolen money via a fake invoice or bank-detail change.",
       },
     ],
   },
@@ -510,7 +510,7 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Published pricing for AI automation aimed at small trade businesses ranges roughly $2,000-$12,000 for setup and $50-$600 a month ongoing — a wide enough range that the number alone doesn't tell you whether it's a fair price for what you need, or a package price for what the vendor sells everyone.",
+        text: "Published pricing for AI automation aimed at small trade businesses ranges roughly $2,000-$12,000 for setup and $50-$600 a month ongoing, a wide enough range that the number alone doesn't tell you whether it's a fair price for what you need, or a package price for what the vendor sells everyone.",
       },
       { type: "h2", text: "Why the range is so wide" },
       {
@@ -520,16 +520,16 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "What a quote before a proper scoping conversation is worth" },
       {
         type: "p",
-        text: "Not much. A price quoted before anyone's asked what's actually manual in your business is a guess dressed up as a number — usually a package price for a generic build, regardless of whether it fits what you need. The honest sequence is: understand the actual task first, then price the actual build.",
+        text: "Not much. A price quoted before anyone's asked what's actually manual in your business is a guess dressed up as a number, usually a package price for a generic build, regardless of whether it fits what you need. The honest sequence is: understand the actual task first, then price the actual build.",
       },
       { type: "h2", text: "Questions worth asking before signing anything" },
       {
         type: "ul",
         items: [
           "Has anyone actually looked at how my business currently handles this task, or is this price for a template?",
-          "What happens to the system if I stop paying the monthly fee — do I keep anything, or does it stop working entirely?",
+          "What happens to the system if I stop paying the monthly fee? Do I keep anything, or does it stop working entirely?",
           "Is the monthly cost a real running cost (hosting, API usage) or mostly margin on a tool I could use directly?",
-          "What's the honest answer if the task isn't actually worth automating — will they tell me that, or just build it anyway?",
+          "What's the honest answer if the task isn't actually worth automating? Will they tell me that, or just build it anyway?",
         ],
       },
       {
@@ -538,7 +538,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "cta",
-        text: "One hour of your time in month one, quoted only after we've found the actual task worth automating — not a package price.",
+        text: "One hour of your time in month one, quoted only after we've found the actual task worth automating, not a package price.",
         label: "BOOK A FREE AI AUDIT CALL →",
         href: "/audit#book",
       },
@@ -558,23 +558,23 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "The Notifiable Data Breach (NDB) scheme is triggered by any unauthorised access to or disclosure of personal information that's likely to cause serious harm — not just a hack. Accidentally emailing a client's quote and contact details to the wrong recipient, or a lost phone with unencrypted client photos, can trigger the same 30-day obligation as an actual cyberattack.",
+        text: "The Notifiable Data Breach (NDB) scheme is triggered by any unauthorised access to or disclosure of personal information that's likely to cause serious harm, not just a hack. Accidentally emailing a client's quote and contact details to the wrong recipient, or a lost phone with unencrypted client photos, can trigger the same 30-day obligation as an actual cyberattack.",
       },
       { type: "h2", text: "What actually starts the clock" },
       {
         type: "p",
-        text: "Once a business is aware of a suspected breach, it has 30 days to assess whether it's likely to cause serious harm to the people affected. Small operators often assume the scheme only applies to businesses that get \"properly hacked\" — the trigger is broader than that, and it applies regardless of business size if the harm test is met (this is one of the areas where the small-business exemption doesn't fully shield you, since it's tied to the nature of the incident, not turnover).",
+        text: "Once a business is aware of a suspected breach, it has 30 days to assess whether it's likely to cause serious harm to the people affected. Small operators often assume the scheme only applies to businesses that get \"properly hacked.\" The trigger is broader than that, and it applies regardless of business size if the harm test is met (this is one of the areas where the small-business exemption doesn't fully shield you, since it's tied to the nature of the incident, not turnover).",
       },
       { type: "h2", text: "What counts as \"serious harm\"" },
       {
         type: "p",
-        text: "Financial loss, identity theft risk, and reputational or physical harm all count. A quote export with names, phone numbers and job addresses sent to the wrong person is a real example that can meet the threshold — it's not limited to financial or health information.",
+        text: "Financial loss, identity theft risk, and reputational or physical harm all count. A quote export with names, phone numbers and job addresses sent to the wrong person is a real example that can meet the threshold. It's not limited to financial or health information.",
       },
       { type: "h2", text: "What to do if it happens" },
       {
         type: "ol",
         items: [
-          "Contain it immediately — recall the email if possible, revoke access, stop the spread.",
+          "Contain it immediately: recall the email if possible, revoke access, stop the spread.",
           "Assess within 30 days whether serious harm is likely, documenting the reasoning either way.",
           "If serious harm is likely, notify the OAIC and the individuals affected, with what happened and what you're doing about it.",
           "Fix the process gap that caused it, not just the individual incident.",
@@ -586,7 +586,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "cta",
-        text: "Fixed-price Privacy Act compliance for AU small business — including a breach-response plan you can actually follow.",
+        text: "Fixed-price Privacy Act compliance for AU small business, including a breach-response plan you can actually follow.",
         label: "SEE THE COMPLIANCE PACK →",
         href: "/compliance",
       },
@@ -606,30 +606,30 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Short answer: most sole traders are still covered by the Privacy Act's small-business exemption (annual turnover under $3 million) today, but the exemption already has exceptions that catch some trade businesses, and it narrows further for specific business types from 1 July 2026 — so \"I'm too small\" is worth double-checking rather than assuming.",
+        text: "Short answer: most sole traders are still covered by the Privacy Act's small-business exemption (annual turnover under $3 million) today, but the exemption already has exceptions that catch some trade businesses, and it narrows further for specific business types from 1 July 2026, so \"I'm too small\" is worth double-checking rather than assuming.",
       },
       { type: "h2", text: "Who's already excluded from the exemption, regardless of size" },
       {
         type: "ul",
         items: [
-          "Health service providers — including anyone holding health-related records, which can catch businesses that don't think of themselves as health providers.",
-          "Businesses that trade in personal information — buying or selling contact lists or data as part of the business.",
+          "Health service providers, including anyone holding health-related records, which can catch businesses that don't think of themselves as health providers.",
+          "Businesses that trade in personal information, buying or selling contact lists or data as part of the business.",
           "Businesses that collect or hold tax file numbers.",
         ],
       },
       { type: "h2", text: "What changes from 1 July 2026" },
       {
         type: "p",
-        text: "Businesses that become \"reporting entities\" under AML/CTF tranche-two reforms — a group that includes many accountants, lawyers, real estate agents, and some trust or company service providers — lose the small-business exemption from that date, regardless of turnover. If that doesn't describe your trade, this specific change doesn't catch you, but it's a sign the exemption is narrowing rather than staying fixed.",
+        text: "Businesses that become \"reporting entities\" under AML/CTF tranche-two reforms (a group that includes many accountants, lawyers, real estate agents, and some trust or company service providers) lose the small-business exemption from that date, regardless of turnover. If that doesn't describe your trade, this specific change doesn't catch you, but it's a sign the exemption is narrowing rather than staying fixed.",
       },
       { type: "h2", text: "Should you have a privacy policy anyway, even if exempt?" },
       {
         type: "p",
-        text: "Practically, yes, for reasons beyond strict legal obligation. If you're storing customer names, addresses, phone numbers, and job photos in ServiceM8 or a spreadsheet, having a plain-English one-pager on what you do with that information is the kind of thing that costs an afternoon and heads off an awkward conversation later — with a client, a platform you're selling through, or an insurer asking about your data practices.",
+        text: "Practically, yes, for reasons beyond strict legal obligation. If you're storing customer names, addresses, phone numbers, and job photos in ServiceM8 or a spreadsheet, having a plain-English one-pager on what you do with that information is the kind of thing that costs an afternoon and heads off an awkward conversation later, with a client, a platform you're selling through, or an insurer asking about your data practices.",
       },
       {
         type: "p",
-        text: "It's also simply good practice regardless of the legal threshold — the businesses that treat customer data carelessly before they're legally required to are usually the same ones scrambling when the requirement does eventually catch them.",
+        text: "It's also simply good practice regardless of the legal threshold. The businesses that treat customer data carelessly before they're legally required to are usually the same ones scrambling when the requirement does eventually catch them.",
       },
       {
         type: "cta",
@@ -642,11 +642,11 @@ export const POSTS: BlogPost[] = [
     faq: [
       {
         q: "Is the Privacy Act small business exemption being removed completely?",
-        a: "Not as a blanket change — as of now it's narrowed for specific categories (health providers, data traders, TFN holders always; AML/CTF reporting entities from 1 July 2026). A full removal for all small business has been proposed in reform discussions but isn't confirmed or dated — treat claims that it's already gone for everyone with scepticism.",
+        a: "Not as a blanket change. As of now it's narrowed for specific categories (health providers, data traders, TFN holders always; AML/CTF reporting entities from 1 July 2026). A full removal for all small business has been proposed in reform discussions but isn't confirmed or dated. Treat claims that it's already gone for everyone with scepticism.",
       },
       {
         q: "What's the cheapest way to become compliant as a sole trader?",
-        a: "A short, honest privacy policy covering what you collect, why, and how someone can ask you to delete it — plus basic habits like MFA on your accounts — covers most of the practical gap for a business below the exemption threshold with no unusual data handling.",
+        a: "A short, honest privacy policy covering what you collect, why, and how someone can ask you to delete it, plus basic habits like MFA on your accounts, covers most of the practical gap for a business below the exemption threshold with no unusual data handling.",
       },
     ],
   },
@@ -654,7 +654,7 @@ export const POSTS: BlogPost[] = [
     slug: "black-ice-operating-doctrine",
     title: "Black Ice: the operating doctrine TITANOS is actually built on",
     description:
-      "A free field guide to the operating framework behind TITANOS — Sub-Zero Murmur, Child/Operator, the 99/1 principle, and where metaphor stops and mechanism starts.",
+      "A free field guide to the operating framework behind TITANOS: Sub-Zero Murmur, Child/Operator, the 99/1 principle, and where metaphor stops and mechanism starts.",
     excerpt:
       "Every system on this site was built using this. Publishing it because it's useful on its own, not because it's bait.",
     date: "2026-08-20",
@@ -663,30 +663,30 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "Most \"AI operating system\" content online is either empty branding or a prompt-hack thread with no substance underneath. Black Ice is the actual framework used to build and run every live system on this site — the free scanner, the compliance pipeline, the OUTPOST partner network, the monitoring that pages the operator directly when something breaks. It's published as a free field guide because it holds up on its own, not as lead-gen bait.",
+        text: "Most \"AI operating system\" content online is either empty branding or a prompt-hack thread with no substance underneath. Black Ice is the actual framework used to build and run every live system on this site: the free scanner, the compliance pipeline, the OUTPOST partner network, the monitoring that pages the operator directly when something breaks. It's published as a free field guide because it holds up on its own, not as lead-gen bait.",
       },
       { type: "h2", text: "The shape of it" },
       {
         type: "p",
-        text: "A small set of reusable primitives for observing a situation, cutting the noise out of it, and acting on what's left — with AI doing the keystroke-level execution and a human staying at the one point that actually needs judgement. The core loop it compresses to: observe, orient, compress, decide, act, measure, correct, repeat.",
+        text: "A small set of reusable primitives for observing a situation, cutting the noise out of it, and acting on what's left, with AI doing the keystroke-level execution and a human staying at the one point that actually needs judgement. The core loop it compresses to: observe, orient, compress, decide, act, measure, correct, repeat.",
       },
       {
         type: "ul",
         items: [
-          "The Sub-Zero Murmur — a 15-second course-correction loop you run silently mid-task, not a journaling ritual.",
-          "Child + Operator — generation and selection kept deliberately separate, so judging an idea doesn't kill it before it's fully formed.",
-          "The 99/1 principle — automate hard, but treat it as a heuristic, not a ratio to force on every decision regardless of stakes.",
-          "Demon Blade — red-team an idea to make it stronger, never just to win an argument against yourself.",
+          "The Sub-Zero Murmur: a 15-second course-correction loop you run silently mid-task, not a journaling ritual.",
+          "Child + Operator: generation and selection kept deliberately separate, so judging an idea doesn't kill it before it's fully formed.",
+          "The 99/1 principle: automate hard, but treat it as a heuristic, not a ratio to force on every decision regardless of stakes.",
+          "Demon Blade: red-team an idea to make it stronger, never just to win an argument against yourself.",
         ],
       },
       { type: "h2", text: "Where it draws the line" },
       {
         type: "p",
-        text: "The doctrine borrows physical and mythological language — ice, depth, stillness. That's a discovery tool, not a scientific claim, and the field guide says so explicitly rather than letting a good metaphor quietly pass as a mechanism. If a claim isn't verified, it's labelled a hypothesis, not dressed up as fact.",
+        text: "The doctrine borrows physical and mythological language: ice, depth, stillness. That's a discovery tool, not a scientific claim, and the field guide says so explicitly rather than letting a good metaphor quietly pass as a mechanism. If a claim isn't verified, it's labelled a hypothesis, not dressed up as fact.",
       },
       {
         type: "cta",
-        text: "Read the full field guide — free, no signup, twelve sections compressed from the source doctrine.",
+        text: "Read the full field guide: free, no signup, twelve sections compressed from the source doctrine.",
         label: "READ BLACK ICE →",
         href: "/black-ice/doctrine",
       },
@@ -695,11 +695,465 @@ export const POSTS: BlogPost[] = [
     faq: [
       {
         q: "Is Black Ice a TITANOS product or a general framework?",
-        a: "Both — it's the internal operating doctrine TITANOS is actually built and run on, published as a free public field guide because the framework itself is useful independent of hiring TITANOS.",
+        a: "Both. It's the internal operating doctrine TITANOS is actually built and run on, published as a free public field guide because the framework itself is useful independent of hiring TITANOS.",
       },
       {
         q: "Do I need AI to use the Black Ice primitives?",
-        a: "No. Every primitive works solo. It gets more leverage with an AI collaborator handling execution, which is why an AI systems business is the one publishing it — but nothing in the doctrine requires one.",
+        a: "No. Every primitive works solo. It works better with an AI collaborator handling execution, which is why an AI systems business is the one publishing it, but nothing in the doctrine requires one.",
+      },
+    ],
+  },
+  {
+    slug: "rm-rf-home-recovery-case-study",
+    title: "How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds",
+    description:
+      "A test run deleted a home directory when mktemp silently failed. The root cause, the fail-closed fix, and the 8-minute recovery drill that proved it.",
+    excerpt:
+      "Eight minutes and twelve seconds. That's how long it took to go from a wiped home directory to a fully working system, once the rebuild was done properly.",
+    date: "2026-10-01",
+    tag: "Build log",
+    readMinutes: 6,
+    body: [
+      {
+        type: "p",
+        text: "On 30 September 2026 at 12:32, a test run on this system's own automation deleted its operator's entire home directory. The cause was one unchecked command: mktemp was missing from PATH, it silently returned an empty string, and a cleanup step that meant to delete a temporary folder deleted the real home directory instead. The same day, the system was rebuilt end to end by one script, and a follow-up drill measured the recovery at 8 minutes 12 seconds, zero step failures. This is what broke, why, and what now makes that specific failure impossible.",
+      },
+      { type: "h2", text: "What actually happened" },
+      {
+        type: "p",
+        text: "Every test suite built a disposable working directory for each run, then deleted it afterward. The pattern looked like a normal shell idiom: create a temp folder with mktemp, point HOME at a subfolder of it, then remove that subfolder when done. That pattern carries one unstated assumption, that mktemp actually exists on PATH. During a resilience test that deliberately strips commands from PATH to see how the system degrades, mktemp was absent. The command substitution returned nothing, the target path collapsed to plain \"home\", and the cleanup step ran its delete command against the real filesystem instead of a scratch folder. No suite checked whether mktemp had actually returned a path before trusting it.",
+      },
+      { type: "h2", text: "The fix: make the class of bug impossible, not just this instance" },
+      {
+        type: "p",
+        text: "The repair was not a patch to one line. Every suite's temporary-directory handling now runs through a shared guard that refuses to even load unless every command it depends on (mktemp, rm, mkdir, realpath, stat, id) resolves on PATH. If one is missing, the suite dies immediately with a distinct exit code before touching anything. The one function suites are allowed to use for cleanup will only ever delete a path that resolves strictly inside a root it has already validated, and it carries an explicit denylist of real filesystem locations regardless, the actual home directory included. A missing dependency now fails loudly and safely instead of silently degrading into something dangerous.",
+      },
+      { type: "h2", text: "The rebuild: one script, no rm, safe to run twice" },
+      {
+        type: "p",
+        text: "Recovering after the wipe surfaced a second problem: manually following the setup docs brought back code but not a working machine. A single recovery script closed that gap. It contains no delete command and no privileged command anywhere, it prints the two steps that need elevated access instead of running them itself. Every copy step is non-destructive, it fills in what is missing and prints a skip notice for anything already present, which makes it safe to run against a half-restored or even a fully live machine. It never writes a credential, since none live in the recovery path to copy, it prints exactly which ones only the operator can re-supply.",
+      },
+      {
+        type: "p",
+        text: "A separate, independent backup mirror runs on its own schedule, add-only, never deleting a prior version of anything it copies. Between the system's own git remote, that mirror, and the local disk itself, there are now three real, independent copies, so one local mistake can no longer take out the only record.",
+      },
+      { type: "h2", text: "The drill: 8 minutes 12 seconds, zero failures, idempotent" },
+      {
+        type: "quote",
+        text: "Restore drill number two PASSED. Blank home to a working system in 8 minutes 12 seconds, zero step failures, and a clean idempotent re-run: 109 items already present, correctly skipped, with a canary file planted before the drill still intact afterward.",
+      },
+      {
+        type: "p",
+        text: "That idempotent re-run detail matters as much as the timing. Running the recovery script a second time against the now-restored system did nothing destructive and changed nothing. It found 109 items already present and correctly skipped every one of them.",
+      },
+      { type: "h2", text: "What's permanently different now" },
+      {
+        type: "ul",
+        items: [
+          "Destructive tests now run only inside a disposable root that has to pass an explicit validation check before anything is allowed to touch it.",
+          "A missing dependency fails the test loudly and safely instead of silently degrading into something dangerous.",
+          "Recovery order is now fixed and written down: authoritative remote, then durable local artifact, then verified backup, then reconstruction from evidence, then explicit operator input, and only then a clearly marked irrecoverable gap. A reconstruction is never passed off as authoritative history.",
+        ],
+      },
+      { type: "h2", text: "Why this matters if you're the client, not the operator" },
+      {
+        type: "p",
+        text: "This was not a lucky recovery. It was a system built to fail closed: when something unexpected happens, the default is refuse and report, not guess and proceed. That is the same discipline applied to every client engagement, not just to internal tooling. No revenue, client, or business detail was involved anywhere in this incident, it concerned internal tooling only.",
+      },
+      {
+        type: "p",
+        text: "AI-assistance disclosure: this post was drafted by Claude (Anthropic) directly from the operator's own commit history and internal logs, as part of the standard build-and-document workflow. It was reviewed and signed off before publication.",
+      },
+      {
+        type: "cta",
+        text: "Want the same standard applied to your own setup? Book a free audit call and I'll tell you straight what I find.",
+        label: "BOOK YOUR FREE AI AUDIT CALL →",
+        href: "/audit",
+      },
+    ],
+    relatedSlugs: ["headless-ai-research-loop-cant-rm-rf-your-home"],
+    faq: [
+      {
+        q: "What actually caused the deletion?",
+        a: "A test suite trusted the output of a directory-creation command without checking it had succeeded. When that command was missing from PATH during a deliberate resilience test, it returned nothing, which turned a delete-the-temp-folder command into a delete-the-real-home-directory command.",
+      },
+      {
+        q: "Was any data permanently lost?",
+        a: "Some in-flight edits made after the last snapshot before the incident were lost. Draft files and raw captures from an in-progress research pass were recovered from a preserved working copy rather than being refetched from scratch. Nothing load-bearing had to be rebuilt from memory.",
+      },
+      {
+        q: "How is this specific failure prevented now?",
+        a: "A shared guard is sourced by every test suite. It refuses to run at all if a required command is missing, and its delete function will only ever remove a path that resolves inside a root it has already validated as safe, with an explicit denylist of real filesystem locations regardless.",
+      },
+      {
+        q: "How long did full recovery actually take?",
+        a: "The measured, repeatable figure is 8 minutes 12 seconds to bring a blank home directory to a working system, with zero step failures and a clean idempotent re-run.",
+      },
+    ],
+  },
+  {
+    slug: "anz-smb-email-security-double-gap-measured",
+    title: "Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file",
+    description:
+      "Independent DNS sampling across AU, NZ, Singapore and Canada finds roughly half of small-business domains have no DMARC enforcement and no security.txt.",
+    excerpt:
+      "Across 8 independently sampled bands of the Australian domain namespace, between 37.5% and 55.0% of small-business domains have no enforced email security and no published way to report a problem.",
+    date: "2026-10-01",
+    tag: "Security",
+    readMinutes: 7,
+    body: [
+      {
+        type: "p",
+        text: "Across 8 independently sampled bands of the Australian .com.au namespace, ranks 200,000 to 1,000,000 by traffic, between 37.5% and 55.0% of domains sampled have both no enforced DMARC policy and no published security.txt file. This report calls that combination the double gap. The pooled rate across all 8 Australian bands is 47.5%, 172 double-gap domains out of 362 sampled with both checks confirmed. The same method run on New Zealand and Singapore's namespaces lands in the same rough range, roughly one in three to three in five domains, depending on the band. Canada's namespace shows a similar or higher DMARC gap rate. This is a methodology report, not a sales pitch and not a list of targets. No domain, business or person is named anywhere in it.",
+      },
+      { type: "h2", text: "What this actually means for a business" },
+      {
+        type: "p",
+        text: "If a domain has no enforced DMARC policy, anyone can send an email that looks like it came from that business, and there is no rule telling the receiving mail server to reject or quarantine it. No guessing and no insider access needed, it is a check anyone can run against public DNS right now. If a security.txt file is also missing, there is no published channel for a researcher who finds a real problem to report it before it becomes a public problem. On these numbers, roughly half of small businesses across Australia, New Zealand, Singapore and Canada are carrying both gaps at once.",
+      },
+      { type: "h2", text: "What was measured, and how" },
+      {
+        type: "p",
+        text: "Two checks ran independently on each sampled domain. DMARC: a DNS lookup on the domain's DMARC record, cross-checked against two independent public resolvers to catch a resolver-specific false negative before concluding a record is genuinely absent. A domain counts as DMARC-gapped if the record is absent entirely or present but set to monitor-only, meaning it is not actually enforcing anything. Security.txt: a direct, honestly-identified request for the standard security.txt path. A domain counts as confirmed absent only on an actual not-found response or a confirmed catch-all redirect, never on a timeout or an ambiguous response, those are recorded as unknown and excluded from the count rather than guessed at. Nothing was called, emailed, registered, or otherwise contacted at any point in this research. Every data point is a passive DNS lookup or a public request for a file the relevant standard says is meant to be published.",
+      },
+      { type: "h3", text: "How domains were chosen" },
+      {
+        type: "p",
+        text: "The seed population is a research-grade, de-biased top one million domain ranking, filtered to the relevant country code. The rank band itself is the small-business filter: the bottom of that ranking sits well below where national brands, government, banks and major media operate, and well above total obscurity. Within each band, a cumulative denylist strips out brand names, franchises, government bodies, media outlets and hosting companies, since a hosting company having no DMARC record is not the finding, an independent trades or retail business having one is. Domains are sampled evenly spaced through the surviving pool, not randomly, which keeps the sample spread across the whole band. Before any domain is used, it is checked by eye, and anything that turns out to be a duplicate, a hijacked domain, or otherwise not a genuine independent business is swapped out before sampling.",
+      },
+      { type: "h2", text: "The findings" },
+      {
+        type: "ul",
+        items: [
+          "Australia, pooled across all 8 bands: 47.5% double-gap rate, 172 of 362 domains sampled.",
+          "The top four Australian bands sit in a tight cluster, 51.2% to 55.0%.",
+          "New Zealand: 32.5% of the full first-batch sample, rising to 54.2% once unresolved checks are excluded.",
+          "Singapore, three batches: 44.0%, 37.9% and 41.7% of full sample respectively.",
+          "Canada: 75.0% DMARC-gap rate as the headline figure, 26.9% confirmed double-gap as the conservative floor.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Two Australian bands came in lower than the rest, and both drops have a recorded, checked explanation rather than being left as unexplained noise. One band had a materially higher concentration of a storefront platform whose shared hosting produced timeouts on the security.txt check rather than a clean answer, those domains correctly landed in the unknown bucket, not the double-gap count. In another band, a bug was found mid-run in the brand-name filter, a short fragment was matching against any domain containing that string anywhere rather than as its own word. The tool was corrected and the cumulative filter list was cleaned within the same research session, every later band ran on the corrected tool end to end.",
+      },
+      { type: "h2", text: "Limitations, stated plainly" },
+      {
+        type: "ul",
+        items: [
+          "Popularity is not a business census. The rank-band filter is a reasonable, cheap proxy for an independent small business, not a guarantee, which is why every sample still gets a manual check by eye.",
+          "This is a single snapshot in time, not a trend. DMARC policies and security.txt files change, and nothing here is monitored longitudinally.",
+          "Unknown is excluded on purpose, never counted as a confirmed double gap. This makes every double-gap number in this report a conservative floor, not an upper bound.",
+          "Known instrument artefacts (the storefront-timeout effect and the filter bug) are disclosed because they measurably affected a batch's headline rate, not smoothed over.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The United Kingdom and Ireland were legally cleared for this method but have not been scanned yet, no rate is claimed for either. The United States, India and South Africa were checked only for whether live outbound contact based on findings like these would be lawful, not for the DMARC or security.txt rate itself, and that legal question came back mixed across those three markets. No domain, business, or person is named in this report, the finding is a rate, not a target list.",
+      },
+      {
+        type: "p",
+        text: "AI-assistance disclosure: this report was drafted by Claude (Anthropic) from raw scan data the same automated research pipeline collected. A human operator directed the scans, set the methodology, and reviewed this draft before publication. No underlying data was invented, every aggregate above traces to a dated source file.",
+      },
+      {
+        type: "cta",
+        text: "Want to know if your own domain has the double gap? Get your free scan, it checks your DMARC record and your security.txt in minutes, no login required.",
+        label: "GET YOUR FREE SCAN →",
+        href: "/scan",
+      },
+    ],
+    relatedSlugs: ["capture-recapture-opportunity-mapping"],
+    faq: [
+      {
+        q: "Is this a list of vulnerable businesses?",
+        a: "No. No domain, business, or person is named in this report or in any published version of it. The finding is a rate, not a target list.",
+      },
+      {
+        q: "What does 'no DMARC' actually mean for a business?",
+        a: "DMARC with no policy, or a policy set to monitor-only, means a domain's mail can be spoofed by a third party, sent so it appears to come from that business, with no enforcement mechanism telling receiving mail servers to reject or quarantine the fake. It is a real, externally checkable gap that does not require guessing or insider access.",
+      },
+      {
+        q: "Why check security.txt at all? Isn't DMARC the real issue?",
+        a: "Security.txt is the standard place a security researcher looks first to report a vulnerability responsibly. A domain missing both signals at once, no enforced mail authentication and no published way to report a security issue, is a reasonable proxy for a business that has not engaged with basic security hygiene at all.",
+      },
+      {
+        q: "Was any of this sold or used to contact anyone?",
+        a: "No. This is a passive measurement exercise. Whether contacting businesses found this way would be lawful was checked separately for several markets and came back mixed, that legal question is independent of the measurement itself.",
+      },
+    ],
+  },
+  {
+    slug: "capture-recapture-opportunity-mapping",
+    title: "How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories",
+    description:
+      "A repeatable method for sizing a public opportunity space: parallel research passes, a gap score, and capture-recapture population estimates.",
+    excerpt:
+      "Two independent lists that both try to count the same thing will always miss some of it. Count how much they overlap, and you can work out how much neither list found.",
+    date: "2026-10-01",
+    tag: "Research",
+    readMinutes: 6,
+    body: [
+      {
+        type: "p",
+        text: "Two independent lists that both try to count the same thing will always miss some of it. Count how much they overlap, and the overlap tells you how much neither list found. That is the ninety-year-old Lincoln-Petersen estimator from wildlife biology: catch a sample, mark it, catch a second sample, count the overlap. It works just as well on directories as it does on fish. Run against two real bug bounty datasets, it puts the true population of paying bug bounty programmes at approximately 1,678, with the two source lists already having found 97.5% of that estimate between them. Run against two public API directories the same day, it estimates approximately 3,146 APIs, but with a weak confidence flag, because the two lists turn out to share a common ancestor. Knowing the difference between those two results, and saying so out loud, is the actual point of this piece.",
+      },
+      { type: "h2", text: "The problem this solves" },
+      {
+        type: "p",
+        text: "Cataloguing a public opportunity space, grant programmes, bug bounties, free APIs, hackathons, whatever it may be, usually produces a directory count, not a population count. A directory count answers how many a list has. It never answers how many actually exist, because every directory has blind spots: programmes never submitted to it, ones it delisted, ones a different maintainer catalogued under a different name.",
+      },
+      { type: "h2", text: "The method, step by step" },
+      {
+        type: "ol",
+        items: [
+          "Parallel research passes, one topic region each. Each pass finds and catalogues meta-sources, the directories and registries that themselves list many individual opportunities, rather than re-verifying every individual listing by hand.",
+          "A source registry, one line per meta-source: region, name, URL, type, and whether it is machine-readable.",
+          "A gap score per region, weighing the sourced dollar value of the region, how open it actually is to enter, fit against real skills, how much prior research has already covered it, and a confidence weight that downgrades the score when the dollar figure is a guess rather than a sourced number.",
+          "Capture-recapture, computed only where it is honestly possible: two independently maintained lists that both try to enumerate the same population, matched by name to find the overlap, then run through the formula.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The formula: an estimated true population equals the size of list one multiplied by the size of list two, divided by how many entries appear on both. From that, the two lists combined have found their total distinct count minus the overlap, and dividing that by the estimated true population gives the share of the true population already found. The method only works when the two lists were built independently. If they share a common source, or one is a fork of the other, the overlap count is inflated and the estimate skews upward, which is the important part to say out loud instead of quietly reporting a clean-looking number.",
+      },
+      { type: "h2", text: "Worked example one: bug bounty programmes, high confidence" },
+      {
+        type: "p",
+        text: "Two open-source datasets both try to catalogue every public bug bounty and vulnerability disclosure programme. Restricting both to entries flagged as actually paying a bounty: list one has 439 entries, list two has 1,621, and 424 overlap by name. That gives an estimated true population of approximately 1,678, with the two lists having already found 97.5% of it between them. The confidence note attached to this result: two separately maintained open-source aggregators, plausibly independent methodology, a reasonable assumption.",
+      },
+      { type: "h2", text: "Worked example two: free APIs, same formula, much weaker confidence" },
+      {
+        type: "p",
+        text: "Two more lists both try to catalogue free and public APIs, one with 1,934 entries and one with 836, with 514 overlapping by name. That produces an estimated population of approximately 3,146 and a found-share of roughly 71.7%. On its face this looks like a clean, usable estimate. It is not, and the source record says so directly: one of the two lists is a post-hiatus continuation of the same original dataset as the other, not a methodologically independent census, so the estimate is likely an overestimate, treated as an upper-bound sanity check rather than a tight estimate. Two lists that share ancestry will always overlap more than two lists built from scratch, which inflates the overlap, which inflates the denominator, which pushes the population estimate up. The formula does not know the difference between real independence and shared lineage, only checking the provenance of each source tells you that.",
+      },
+      { type: "h2", text: "Where the method deliberately stops" },
+      {
+        type: "p",
+        text: "Most regions in this pass had two or more meta-sources but no computed estimate at all, because computing the overlap honestly requires fetching full name lists from both sources and matching them, not a quick or free job. Grants, hackathons, open-source sponsorship, and developer-tool registries are all flagged the same honest way: population unknown, a candidate pair identified, overlap uncounted, a candidate for the next pass. Regions with only a single meta-source are flagged population unknown and never guessed at. Inventing an overlap count to produce a tidier-looking number would be fabrication. The method's actual discipline is knowing which regions it can speak to, and saying nothing about the rest.",
+      },
+      {
+        type: "p",
+        text: "This method exists to answer one question honestly: how much of a space has actually been measured, and how much is being guessed. That is the same question asked about a business before saying what is exposed. Not a scan that produces a scary number, a measurement with a stated confidence level attached, so the result can be trusted exactly as much as it has earned.",
+      },
+      {
+        type: "p",
+        text: "AI-assistance disclosure: this explainer was drafted by Claude (Anthropic) from the operator's own dated research files. Every number above is cited to the source file it came from, nothing here was generated independently of those files.",
+      },
+      {
+        type: "cta",
+        text: "Want the same discipline run against your own exposure instead of someone's guess? Book a free audit call and see exactly what is measured and what is still unknown.",
+        label: "BOOK YOUR FREE AI AUDIT CALL →",
+        href: "/audit",
+      },
+    ],
+    relatedSlugs: ["anz-smb-email-security-double-gap-measured"],
+    faq: [
+      {
+        q: "Why not just add the two list sizes together?",
+        a: "Because some items appear on both lists. Simply summing double-counts every overlapping entry, which overstates the true population. Subtracting the counted overlap gives the distinct items seen, and the Lincoln-Petersen ratio then uses how much the two samples overlapped each other to infer how many more distinct items probably exist unseen by either.",
+      },
+      {
+        q: "What breaks the method?",
+        a: "Non-independence. If the two lists were built the same way, from the same root source, or by copying each other, the overlap is artificially high, which biases the population estimate upward. The method is only as good as the independence check that comes with it.",
+      },
+      {
+        q: "Is this the final word on these spaces?",
+        a: "No. These are dated estimates from a single pass, and most regions are still explicitly flagged as unmeasured by this technique. Every number is treated as provisional, tagged with how it was obtained.",
+      },
+    ],
+  },
+  {
+    slug: "headless-ai-research-loop-cant-rm-rf-your-home",
+    title: "A headless AI research loop that can't rm -rf your home directory",
+    description:
+      "How an unattended AI research loop runs on a schedule with a command-inspection hook that blocked a real destructive command in testing.",
+    excerpt:
+      "An unattended AI agent that can run shell commands without a human watching is dangerous by default. Here is the guard that sits in front of it, and the day it actually caught a bad one.",
+    date: "2026-10-01",
+    tag: "Build log",
+    readMinutes: 6,
+    body: [
+      {
+        type: "p",
+        text: "An unattended AI agent that can run shell commands without a human watching is dangerous by default. One bad variable expansion and it can delete things for real. This describes a runner that fires an AI research pass on a schedule with no chat window open, and a second, independent guard in front of it that inspects every shell command before it runs and blocks the destructive or outward-facing ones. The guard was tested live: it blocked a real delete-everything command during a smoke test of the new runner. Sixteen out of sixteen automated tests pass for the combined runner and guard.",
+      },
+      {
+        type: "p",
+        text: "This is a second, independent layer. A separate incident, covered elsewhere, involved an empty shell variable turning into a destructive delete inside a test. That was fixed at the filesystem-fixture level. This guard sits one level up, on the command boundary itself, and it exists specifically because unattended runs, with no human present to notice something has gone wrong, need a harder backstop than attended ones.",
+      },
+      { type: "h2", text: "The problem this closes" },
+      {
+        type: "p",
+        text: "A system that only does useful work while someone has a terminal open is not actually autonomous, it is a tool that waits for a human to press play. Getting a research loop to run on its own schedule, with nobody watching, means accepting that the system will sometimes issue a shell command with nobody there to catch a bad one before it runs.",
+      },
+      { type: "h2", text: "The architecture: four stop checks before anything runs" },
+      {
+        type: "p",
+        text: "The runner fires on a fixed schedule. Before it launches a single AI call, it runs through four independent stop conditions in order, and any one of them ends the run cleanly, logged, no error state.",
+      },
+      {
+        type: "ol",
+        items: [
+          "Kill switches. A stop file or a disable file halts it immediately. Either can be set by touching a file, no code change and no redeploy needed.",
+          "Single-instance lock. If another instance is already running, this one stands aside rather than running two passes in parallel.",
+          "Ownership check. If a human is actively driving a live session right now, the headless runner defers to it and does nothing.",
+          "A daily cap. It counts how many passes have already started today and refuses to start another once a fixed limit is reached, a budget guard since the hosting plan exposes no usage figure to check against directly.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Only after all four checks clear does it actually run, with a hard timeout, no session persistence, its output routed to a dated log file, and a settings file that wires in the guard described below. If the run exits with a failure code, including a timeout, the operator is pinged with the failure reason and the log location, so a failed unattended pass does not just go quiet.",
+      },
+      { type: "h2", text: "The guard: what it actually blocks" },
+      {
+        type: "p",
+        text: "A dedicated hook runs before every shell command the model tries to execute, reads the proposed command, and can refuse it outright, in every permission mode, so it cannot be bypassed by the run's own settings. It checks the command text against a fixed list of dangerous patterns, and the comment at the top of the file states the reason plainly: an unsandboxed run once turned an empty temp-directory variable into a home-directory wipe, so an unattended loop gets a hard guard on top of the fixture guard.",
+      },
+      {
+        type: "ul",
+        items: [
+          "A recursive force-delete targeting an absolute path, a home shorthand, or any shell variable, is blocked outright, unless the target is a literal scratch-space path.",
+          "Any privilege-escalation command is blocked.",
+          "A forced git push, and other destructive git operations, are blocked.",
+          "Disk-destructive tools are blocked.",
+          "Piping a download straight into a shell interpreter is blocked.",
+          "Sending on the operator-facing channels stays interactive-only by design, an unattended pass can never trigger it.",
+          "Reads of credential files are blocked.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Anything that does not match one of those patterns is allowed through unmodified. This is a denylist of specific dangerous shapes, not a full sandbox, and the guard is explicit that its role is the unattended-run backstop on top of the separate fixture-guard fix, not a replacement for it.",
+      },
+      {
+        type: "quote",
+        text: "Headless loop runner live. Live smoke test: headless run OK in a cron-like environment, guard blocked a recursive delete against a home-rooted path. First scheduled fire correctly skipped, because a live session still owned the loop at that moment.",
+      },
+      { type: "h2", text: "Test coverage" },
+      {
+        type: "p",
+        text: "A dedicated test suite runs fully offline against a disposable fixture root with a stub command in place of a real model call, and covers both halves of the system: the four stop-check gates on the runner side, and nine separate command shapes against the guard directly, five that must be blocked and three that must be allowed through. Re-run directly: sixteen passed, zero failed.",
+      },
+      { type: "h2", text: "Why this is the part worth paying for" },
+      {
+        type: "p",
+        text: "Anyone can wire up a scheduled job. The part that actually protects a business is the part nobody sees: the stop checks, the denylist, the live test that proves the guard catches the exact command that caused real damage a day earlier. Fail closed by default, tested against the real failure and not a hypothetical one, is what gets built into every engagement. If your business runs anything unattended right now, a script, an integration, an automation nobody has watched run in months, it is worth finding out whether it would have caught this.",
+      },
+      {
+        type: "p",
+        text: "AI-assistance disclosure: this post was drafted by Claude (Anthropic) as part of the operator's own build log. The code and commits described above are real, verified against the repository at the time of writing.",
+      },
+      {
+        type: "cta",
+        text: "Want this standard applied to what's running unattended in your business?",
+        label: "BOOK YOUR FREE AI AUDIT CALL →",
+        href: "/audit",
+      },
+    ],
+    relatedSlugs: ["rm-rf-home-recovery-case-study", "tap-to-approve-telegram-no-second-bot"],
+    faq: [
+      {
+        q: "Is this a sandbox?",
+        a: "No. It is a denylist hook that inspects the literal text of a proposed command against a fixed set of dangerous patterns before it executes. It blocks known-dangerous shapes, it does not isolate the process.",
+      },
+      {
+        q: "Does this replace the earlier fixture-guard fix?",
+        a: "No. It sits on top of the fixture guard, a second independent layer for unattended runs specifically, not a replacement.",
+      },
+      {
+        q: "Can the unattended loop send messages or make outward contact on its own?",
+        a: "No. The operator-facing send commands are explicitly on the blocklist. Those stay interactive-only, gated to a human-present session.",
+      },
+      {
+        q: "How often does the loop run, and what stops it running forever?",
+        a: "On a fixed schedule, capped at a default of 12 passes per calendar day, each pass bounded by a hard timeout, and either of two kill-switch files stops it immediately with no code change.",
+      },
+    ],
+  },
+  {
+    slug: "tap-to-approve-telegram-no-second-bot",
+    title: "Tap-to-approve on Telegram without a second bot",
+    description:
+      "How a one-person AI ops system built a fail-closed Telegram approve and deny button in one session, including the conflict that killed the first two designs.",
+    excerpt:
+      "The final design sends one message with an approve and a deny button. A decision only counts if it carries the exact reference for that card, arrives before it expires, and nobody has already answered it.",
+    date: "2026-10-01",
+    tag: "Build log",
+    readMinutes: 5,
+    body: [
+      {
+        type: "p",
+        text: "The short answer: the final design sends one Telegram message with an approve and a deny button. Tapping either opens a tiny confirmation page against a private relay. A background job reads that relay every two minutes and records the decision, and the operator gets a confirmation message back in the same chat. No second bot, no conflicting connection type. A decision only counts if it carries the exact one-time reference for that specific card, arrives before it expires, and nobody has already answered it. Anything else, the system fails closed and nothing happens. Getting there took three attempts in one session. The first two both failed for the same underlying reason: a single messaging bot can only have one place its updates get delivered to.",
+      },
+      { type: "h2", text: "Why this needed building at all" },
+      {
+        type: "p",
+        text: "The system already had a module that could build an approval request and describe it. It just had nothing on the other end to read the operator's answer. It failed closed for want of a way to check for a response at all. The operator wanted a way to authorise things from his phone without typing, a tap, not a command. This is the story of what it took to give it one.",
+      },
+      { type: "h2", text: "Attempt one: a dedicated approvals bot" },
+      {
+        type: "p",
+        text: "The first attempt built a poller that repeatedly checks for a callback tap whose data matches the exact request it issued. It shipped with a full passing test suite and a real fail-closed design, a tap on the wrong card gets acknowledged and ignored, a tap from the wrong account gets rejected, and a tap that never arrives times out. It did not work in production. The main bot's taps already went to a live webhook, and a messaging platform will not let a bot both receive a webhook and be polled for updates at the same time, every polling call came back as a conflict. The fix attempted here was a second, dedicated bot used only for approval cards. That solved the conflict, but it meant a second bot token to create, store and keep alive just for this one feature, more moving parts than the job justified, a real dead end worth naming honestly.",
+      },
+      { type: "h2", text: "Attempt two: zero setup, reply in the session" },
+      {
+        type: "p",
+        text: "The second attempt skipped the platform's button mechanism altogether. Send the card on the existing main bot, give it a short reference code, and let the operator type the reference back in his own working session instead of tapping anything. A confirmation message was added so every decision, approve or deny, gets acknowledged back in the chat rather than silently recorded. A ledger underneath this recorded every decision with one deliberate guard, a decision can be logged under a real identity or under a self-test identity, and the check that gates a real action only ever returns approved for the real identity, so a self-test can rehearse the whole flow without ever being mistaken for a genuine authorisation. This worked, but it traded the tap that was actually wanted for typing a reference into a terminal session, workable, but not what was asked for.",
+      },
+      { type: "h2", text: "The final design: URL buttons and a private relay" },
+      {
+        type: "p",
+        text: "The design that actually delivers a tap-only flow on the main bot, with no second bot and no conflict, uses a plain URL button instead of a callback button. A URL button does not need to be polled at all, it just opens a link. Each card ships with an approve and a deny button that are URL buttons, both pointing at a private topic on a public relay service, with the decision and the card's one-time reference encoded in the link. Tapping either button opens a small confirmation page on the relay's side. Nothing more is needed on the operator's end.",
+      },
+      {
+        type: "p",
+        text: "A job reads that relay topic every two minutes, matches any message against the list of cards still pending, and checks three things before accepting a tap as a real decision: the reference has to match the exact card issued, the tap has to land before that card's expiry, and if two taps somehow arrive for the same card, the first one wins, later ones are ignored. A match writes the decision to the ledger and immediately sends a confirmation message in the same chat, quoting back what was just approved or denied. Cards nobody taps in time expire rather than default to approved. The default outcome of doing nothing is always no.",
+      },
+      { type: "h2", text: "Why fail closed is the actual point" },
+      {
+        type: "ul",
+        items: [
+          "A tap on a stale or wrong card is acknowledged and discarded, not silently accepted.",
+          "A relay outage or a read error produces nothing recorded, never a default approval.",
+          "The self-test decision path exists specifically so the whole flow can be exercised end to end without ever being able to pass the real check.",
+          "An expired card defaults to not approved, not approved by timeout.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The interesting failure mode a system like this has to guard against is not that the button does not work, it is that something that looks like a tap gets treated as a real one. Three attempts and one honestly-named dead end later, the design that shipped treats every ambiguous case the same way: closed.",
+      },
+      {
+        type: "p",
+        text: "No bot token, chat identifier, relay topic name or webhook address appears anywhere in this post, or in anything published from this system. Those stay out of anything public.",
+      },
+      {
+        type: "p",
+        text: "AI-assistance disclosure: this post was drafted by Claude (Anthropic) directly from the operator's own commit history and source files, as part of documenting a real automation system he is building solo. The technical narrative above is reconstructed from commits and code, not from memory or invention.",
+      },
+      {
+        type: "cta",
+        text: "If you want that same fail-closed discipline applied to your own business systems, book a free audit call.",
+        label: "BOOK YOUR FREE AI AUDIT CALL →",
+        href: "/audit",
+      },
+    ],
+    relatedSlugs: ["headless-ai-research-loop-cant-rm-rf-your-home"],
+    faq: [
+      {
+        q: "Why not just keep the dedicated approvals bot?",
+        a: "It worked, but it meant a second bot token to provision and protect for a single feature. The final design reuses the bot that already existed.",
+      },
+      {
+        q: "What actually stopped the first attempt?",
+        a: "A platform constraint, not a bug: a bot cannot have both a webhook and a polling connection active at the same time, and the platform returns a conflict error if you try. The production bot already needed its webhook for other things.",
+      },
+      {
+        q: "Can a tap be replayed or reused later?",
+        a: "No. Each card's one-time reference is single-use and tied to that specific card. A tap that does not match a still-pending card's exact reference is ignored, and an expired card cannot be approved at all, even with a valid tap.",
+      },
+      {
+        q: "Does a self-test ever count as a real approval?",
+        a: "No. Decisions are tagged by who made them, and the check that gates real actions only ever accepts the real operator identity.",
       },
     ],
   },

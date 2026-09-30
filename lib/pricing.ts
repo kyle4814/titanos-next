@@ -60,8 +60,8 @@ export const PRICING = {
 // Deploy of /leads is HELD until fulfilment confirmed end-to-end.
 export const LEADS = {
   STARTER:   { price: 497,  contacts: 250,  industries: 1,        turnaround: "5 business days" },
-  GROWTH:    { price: 1497, contacts: 1000, industries: 3,        turnaround: "5–7 business days" },
-  CAMPAIGN:  { price: 3497, contacts: 3000, industries: "custom", turnaround: "7–10 business days" },
+  GROWTH:    { price: 1497, contacts: 1000, industries: 3,        turnaround: "5 to 7 business days" },
+  CAMPAIGN:  { price: 3497, contacts: 3000, industries: "custom", turnaround: "7 to 10 business days" },
   RETAINER:  { price: 990,  contactsPerMonth: 500, billing: "monthly" as const },
 } as const;
 
@@ -94,7 +94,7 @@ export function formatAnnual(amount: number): string {
 }
 
 export function formatRange(low: number, high: number): string {
-  return `${formatAUD(low)}–${formatAUD(high)}`;
+  return `${formatAUD(low)} to ${formatAUD(high)}`;
 }
 
 // --- Common prebuilt display strings ---

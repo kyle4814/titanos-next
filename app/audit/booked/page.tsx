@@ -3,7 +3,7 @@ import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 import { SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 
-const META_TITLE = "You're Booked — Free AI Audit Call | Titanos";
+const META_TITLE = "You're Booked: Free AI Audit Call | Titanos";
 const META_DESC = "Your free AI audit call is booked. Here's exactly what happens before we talk.";
 
 export const metadata: Metadata = {
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { label: "Confirmation", detail: "Sent from cal.com — time and video link" },
+  { label: "Confirmation", detail: "Sent from cal.com, with the time and video link" },
   { label: "Before the call", detail: "I look at your website and industry, if you gave one, and come with 2-3 starting ideas for what's worth automating" },
-  { label: "On the call", detail: "Nothing scripted or generic — it adjusts to whatever you actually tell me" },
+  { label: "On the call", detail: "Nothing scripted or generic, it adjusts to whatever you actually tell me" },
 ];
 
 export default function AuditBookedPage() {
@@ -84,7 +84,7 @@ export default function AuditBookedPage() {
           lineHeight: 1.7,
         }}
       >
-        Need to reschedule or cancel? Use the links in your confirmation email — or just email{" "}
+        Need to reschedule or cancel? Use the links in your confirmation email, or just email{" "}
         <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>
           kyle@titanos.tech
         </a>{" "}

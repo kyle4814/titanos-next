@@ -6,12 +6,12 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 const SECTION_COUNT = 7;
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — TITANOS",
+  title: "Privacy Policy · TITANOS",
   description:
     "How Titanos (Kyle Deligny, ABN 34 318 502 254) handles personal information collected via titanos.tech. AU Privacy Act 1988 + Spam Act 2003 compliant.",
   alternates: { canonical: "https://titanos.tech/privacy" },
   openGraph: {
-    title: "Privacy Policy — Titanos",
+    title: "Privacy Policy · Titanos",
     description:
       "How Titanos handles personal information collected via titanos.tech. ABN 34 318 502 254.",
     type: "website",
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="Where the edges are written down"
-          sub="Everything below is that rule, spelled out section by section — what we collect, why, how long we keep it, and how you get it corrected or removed."
+          sub="Everything below is that rule, spelled out section by section: what we collect, why, how long we keep it, and how you get it corrected or removed."
         >
           You can ask what we hold on you, and get a straight answer.
         </Inscription>
@@ -162,13 +162,13 @@ export default function PrivacyPage() {
           <H2>Cookies + analytics</H2>
           <p>
             We do not use cookies for analytics, advertising, or tracking. The site uses
-            first-party session storage only (for UI continuity — e.g. so the hero animation only
+            first-party session storage only (for UI continuity, e.g. so the hero animation only
             plays once per session). No third-party trackers are loaded.
           </p>
 
           <OperatorNote>
             In plain terms: no ad trackers, no data broker deals, no fine print that undoes the
-            list above. If you ask what we hold on you, you get an answer — not a form to fill
+            list above. If you ask what we hold on you, you get an answer, not a form to fill
             out first.
           </OperatorNote>
 
@@ -196,7 +196,7 @@ export default function PrivacyPage() {
 
       <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
         <OmegaSeal
-          caption="Seven sections. Every right above is checkable — write to kyle@titanos.tech."
+          caption="Seven sections. Every right above is checkable: write to kyle@titanos.tech."
           style={{ margin: "0 auto" }}
         />
       </section>

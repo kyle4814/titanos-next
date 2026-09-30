@@ -5,7 +5,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { SITE, AUDIT_BOOK_HREF } from "@/lib/config";
 import { Inscription, SystemLabel } from "@/components/Myth";
 
-const META_TITLE = "Contact — Kyle Deligny · TITANOS";
+const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
   "Email kyle@titanos.tech or book a free AI audit call. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
 
@@ -23,7 +23,7 @@ export default function ContactPage() {
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
-        sub="No contact form maze, no support ticket queue. Email or book a call — you'll hear back from the same person who does the work."
+        sub="No contact form maze, no support ticket queue. Email or book a call. You'll hear back from the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
           </div>
 
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", marginBottom: 24 }}>
-            Prefer to talk it through? Book the free AI audit call — no obligation, no pitch deck.
+            Prefer to talk it through? Book the free AI audit call. No obligation, no pitch deck.
           </p>
           <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
             Book your free AI audit call →

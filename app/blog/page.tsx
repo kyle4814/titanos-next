@@ -6,12 +6,12 @@ import { SystemLabel } from "@/components/Myth";
 import { postsSortedByDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — Titanos",
+  title: "Blog: Titanos",
   description:
-    "Notes on AI implementation, Privacy Act compliance, and revenue that's already sitting in your business — written for AU trades and small-service operators.",
+    "Notes on AI implementation, Privacy Act compliance, and revenue that's already sitting in your business. Written for AU trades and small-service operators.",
   alternates: { canonical: "https://titanos.tech/blog" },
   openGraph: {
-    title: "Blog — Titanos",
+    title: "Blog: Titanos",
     description:
       "Notes on AI implementation, Privacy Act compliance, and revenue that's already sitting in your business.",
     type: "website",
@@ -52,7 +52,7 @@ export default function BlogIndexPage() {
       <PageHero
         badge="FIELD NOTES"
         title="The archive"
-        tagline="Notes recovered from the build — what an AI audit actually finds, what the Privacy Act reforms mean in plain English, and where the money already in your business is hiding."
+        tagline="What an AI audit actually finds, what the Privacy Act reforms mean in plain English, and where the money already in your business is hiding."
         sub="Written for AU trades and small-service operators. No filler, no growth-hacker language."
       />
 

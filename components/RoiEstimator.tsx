@@ -1,13 +1,13 @@
 "use client";
 
-// Estimates value from the visitor's own numbers — never from claimed past
+// Estimates value from the visitor's own numbers, never from claimed past
 // results, since there are no past clients to claim results from yet.
 // React state only. No localStorage/sessionStorage (unreliable in this
 // deploy environment) and nothing is submitted or stored anywhere.
 //
 // 2026-08-10: range extended from solo-operator scale (max 40hrs/wk,
 // $150/hr, ~AU$26k/mo ceiling) to team/enterprise scale (max 400hrs/wk,
-// $500/hr) — the old ceiling couldn't produce a number anywhere near what
+// $500/hr). The old ceiling couldn't produce a number anywhere near what
 // justifies the AU$50k-150k enterprise tier, so a real enterprise buyer
 // dragging both sliders to max still saw a small-business-shaped answer.
 // Recommendation now also picks the matching tier instead of always
@@ -15,7 +15,7 @@
 //
 // 2026-08-20: restyled as an instrument the visitor operates, not a
 // persuasion widget. Inputs are labelled INPUT, the result is labelled
-// COMPUTED — the distinction between "what you told it" and "what it
+// COMPUTED, the distinction between "what you told it" and "what it
 // worked out" stays visible at all times. No calculation changed.
 
 import { useMemo, useState, type CSSProperties } from "react";
@@ -63,7 +63,7 @@ export default function RoiEstimator() {
         padding: "26px 24px",
       }}
     >
-      <SystemLabel style={{ marginBottom: 18 }}>Input — set your own numbers</SystemLabel>
+      <SystemLabel style={{ marginBottom: 18 }}>Input: set your own numbers</SystemLabel>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24 }}>
         <label style={{ display: "block" }}>
@@ -81,7 +81,7 @@ export default function RoiEstimator() {
             aria-label="Hours per week the team spends on repetitive manual work"
           />
           <span className="label-system" style={{ display: "block", marginTop: 4 }}>
-            1 (one person, part-time) — 400 (a full department)
+            1 (one person, part-time) to 400 (a full department)
           </span>
         </label>
         <label style={{ display: "block" }}>
@@ -100,7 +100,7 @@ export default function RoiEstimator() {
             aria-label="Hourly cost of the work"
           />
           <span className="label-system" style={{ display: "block", marginTop: 4 }}>
-            AU$20 (junior/admin) — AU$500 (specialist, exec, or blended enterprise rate)
+            AU$20 (junior/admin) to AU$500 (specialist, exec, or blended enterprise rate)
           </span>
         </label>
       </div>
@@ -108,7 +108,7 @@ export default function RoiEstimator() {
       <div className="divider-hairline" style={{ margin: "24px 0" }} />
 
       <div style={{ textAlign: "center" }}>
-        <SystemLabel style={{ marginBottom: 10 }}>Computed — from the numbers above</SystemLabel>
+        <SystemLabel style={{ marginBottom: 10 }}>Computed: from the numbers above</SystemLabel>
         <div
           style={{
             ...readoutFigure,
@@ -129,7 +129,7 @@ export default function RoiEstimator() {
         </p>
 
         <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
-          At that scale, the closer fit is a <strong style={{ color: "var(--gold)" }}>{tier.label}</strong> —{" "}
+          At that scale, the closer fit is a <strong style={{ color: "var(--gold)" }}>{tier.label}</strong>,{" "}
           <strong style={{ ...readoutFigure, fontWeight: 600 }}>
             {tier.price.startsWith("From") ? tier.price : `from ${tier.price}`}
           </strong>
@@ -140,7 +140,7 @@ export default function RoiEstimator() {
       <div className="divider-hairline" style={{ margin: "20px 0 14px" }} />
 
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", textAlign: "center", margin: 0, lineHeight: 1.6 }}>
-        This is your own arithmetic, not a claim about past results — there are no past clients
+        This is your own arithmetic, not a claim about past results. There are no past clients
         to draw one from yet. Move the sliders; the number moves with them, nothing else.
       </p>
     </div>

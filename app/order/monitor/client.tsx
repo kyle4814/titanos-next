@@ -4,10 +4,10 @@ import OrderForm, { Field } from "@/components/OrderForm";
 import { DISPLAY, PRICING } from "@/lib/pricing";
 
 const PLANS = [
-  { value: "monthly", label: `Monthly — ${DISPLAY.MONITOR_MONTHLY}` },
+  { value: "monthly", label: `Monthly (${DISPLAY.MONITOR_MONTHLY})` },
   {
     value: "annual",
-    label: `Annual — ${DISPLAY.MONITOR_ANNUAL} (save AU$${
+    label: `Annual (${DISPLAY.MONITOR_ANNUAL}, save AU$${
       PRICING.MONITOR_MONTHLY * 12 - PRICING.MONITOR_ANNUAL
     }/yr)`,
   },
@@ -24,10 +24,10 @@ export default function OrderMonitorClient() {
     >
       <OrderForm
         orderType="monitor"
-        heading="Monthly Security Monitor — Enquiry"
+        heading="Monthly Security Monitor Enquiry"
         subheading="Monthly security check for your business. You get an email when something changes. Kyle reviews this and sends your invoice within 1 business day."
         submitLabel="SUBMIT MONITOR ORDER →"
-        successMessage="Received. Kyle will send your Stripe invoice within 1 business day — pay when you're ready, monitoring starts same day."
+        successMessage="Received. Kyle will send your Stripe invoice within 1 business day. Pay when you're ready, monitoring starts same day."
       >
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 

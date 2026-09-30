@@ -9,14 +9,14 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
 export const metadata: Metadata = {
-  title: "About — Kyle Deligny · TITANOS",
+  title: "About · Kyle Deligny · TITANOS",
   description:
     "Solo operator, Brisbane. ABN 34 318 502 254 (verifiable). AI systems built for your business, privacy-compliant by design. 1,700+ automated scans run this month.",
   alternates: { canonical: "https://titanos.tech/about" },
   openGraph: {
-    title: "About — Kyle Deligny · Titanos",
+    title: "About · Kyle Deligny · Titanos",
     description:
-      "Solo operator, Brisbane. ABN-verifiable. AI Growth Partner — privacy-compliant by design. One person, one fixed price.",
+      "Solo operator, Brisbane. ABN-verifiable. AI Growth Partner, privacy-compliant by design. One person, one fixed price.",
     type: "profile",
     url: "https://titanos.tech/about",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -38,12 +38,12 @@ export default function AboutPage() {
       {
         "@type": "Question",
         name: "What if you're unavailable later?",
-        acceptedAnswer: { "@type": "Answer", text: "Everything delivered stays kept — no platform lock-in, no dependency on the operator staying reachable for what's already built." },
+        acceptedAnswer: { "@type": "Answer", text: "Everything delivered stays kept. No platform lock-in, no dependency on the operator staying reachable for what's already built." },
       },
       {
         "@type": "Question",
         name: "Is my data safe with an AI-assisted operator?",
-        acceptedAnswer: { "@type": "Answer", text: "Privacy-compliant by design is the other half of the practice, not an afterthought — see the compliance page for exactly what that covers." },
+        acceptedAnswer: { "@type": "Answer", text: "Privacy-compliant by design is the other half of the practice, not an afterthought. See the compliance page for exactly what that covers." },
       },
     ],
   };
@@ -57,7 +57,7 @@ export default function AboutPage() {
       <PageHero
         badge="ABOUT THE OPERATOR"
         title="Built from a phone. Run by one operator."
-        tagline="Kyle Deligny — Brisbane, Australia. No funding, no team, no permission asked. Just a decision to start, and a standard for what's allowed to ship."
+        tagline="Kyle Deligny, Brisbane, Australia. No funding, no team, no permission asked. Just a decision to start, and a standard for what's allowed to ship."
         sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you book the call, you book me."
         trustLine={
           <>
@@ -83,7 +83,7 @@ export default function AboutPage() {
 
       <div className="divider-gold" />
 
-      {/* THE ORIGIN — the myth, load-bearing, not decorative. Photo + pull-quote
+      {/* THE ORIGIN: the myth, load-bearing, not decorative. Photo + pull-quote
           give the operator a face and a stance before any service copy runs. */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -149,11 +149,9 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            TITANOS didn&apos;t start with a pitch deck, a round of funding, or a co-founder
-            to argue the plan with. It started on a phone, with an idea and the decision to
-            stop waiting for someone else&apos;s approval to act on it. No investors to brief
-            before a decision. No hiring plan to justify before shipping something. No
-            committee standing between a judgement call and the thing going live.
+            No pitch deck. No funding round. No co-founder to argue the plan with. TITANOS
+            started on a phone, with an idea and a decision to stop waiting for someone
+            else&apos;s approval to act on it.
           </p>
           <p
             style={{
@@ -163,27 +161,10 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            That&apos;s not a sympathy story — it&apos;s a resourcefulness one. Fewer
-            resources meant every decision had to earn its place: build systems instead of
-            headcount, let the machine carry the repeatable work, and keep human judgement
-            concentrated exactly where it&apos;s worth the most. The constraint became the
-            method.
-          </p>
-          <p
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.8,
-              marginBottom: 14,
-            }}
-          >
-            Every system live on this site, I built and I run — the free scanner, the
+            Every system live on this site, I built and I run: the free scanner, the
             compliance pipeline, the partner network processing real Stripe payments with an
-            append-only audit trail, the monitoring that pages me directly the second
-            something breaks, at any hour. Not a portfolio of case studies from a team I
-            manage. Production infrastructure I operate personally, every day, right now, for
-            real clients and real money — the scan is real, the compliance pack is real, the
-            audit trail is real. Nothing on this page is a mockup.
+            append-only audit trail, and the monitoring that pages me directly the second
+            something breaks. Real clients, real money. Nothing on this page is a mockup.
           </p>
           <p
             style={{
@@ -192,84 +173,9 @@ export default function AboutPage() {
               lineHeight: 1.8,
             }}
           >
-            Brisbane-based, ABN-verifiable, one person end to end — the audit call, the
-            build, the sign-off, the 3am page if something goes wrong. If that&apos;s the
-            kind of operator you want on your systems, keep reading — or skip straight to
-            how you check any of it.
-          </p>
-        </div>
-      </SectionReveal>
-
-      <div className="divider-gold" />
-
-      {/* THE CHILD AND THE OPERATOR — how the work actually gets done: the
-          division of labour between the AI doing the building and the human
-          deciding what's allowed to ship. */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h3)",
-              letterSpacing: "0.06em",
-              marginBottom: 16,
-            }}
-          >
-            THE CHILD AND THE OPERATOR
-          </h2>
-          <p
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.8,
-              marginBottom: 14,
-            }}
-          >
-            Claude Code does the keystroke-level building — fast, tireless, willing to try
-            the thing that hasn&apos;t been tried yet. Left to itself, that instinct just
-            keeps asking &quot;what if?&quot; That&apos;s exactly what you want from a system
-            that builds. It is not what you want deciding whether the build ships.
-          </p>
-          <p
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.8,
-              marginBottom: 14,
-            }}
-          >
-            That&apos;s where I sit. Before anything goes live, it answers four questions:
-            Does it work? Is it safe? Can it be repeated? Can I reverse it if I&apos;m wrong?
-            The machine proposes. The human decides. That&apos;s not a slogan for this page —
-            it&apos;s the actual workflow, every day, on every system this site claims to
-            run.
-          </p>
-          <blockquote
-            style={{
-              margin: "24px 0",
-              borderLeft: "2px solid var(--gold)",
-              paddingLeft: "var(--space-6)",
-              fontFamily: "var(--font-display), Georgia, serif",
-              fontStyle: "italic",
-              fontWeight: 300,
-              color: "var(--gold-bright)",
-              fontSize: "var(--fs-h4)",
-              lineHeight: 1.5,
-            }}
-          >
-            &quot;The machine handles the complexity. The human decides what
-            matters.&quot;
-          </blockquote>
-          <p
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.8,
-            }}
-          >
-            Nothing here requires you to trust that division blindly. It&apos;s the same
-            standard the rest of this page is built to survive — check it below.
+            Brisbane-based, ABN-verifiable, one person end to end: the audit call, the
+            build, the sign-off, the 3am page if something goes wrong. Want to check any of
+            that before reading on? Skip straight to how you verify me, below.
           </p>
         </div>
       </SectionReveal>
@@ -297,11 +203,13 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            Three things. A free security check that shows what a hacker can see about your
-            business — no payment, no sales funnel. A fixed-price Privacy Act compliance
-            engagement for AU small businesses preparing for the 10 December 2026 deadline.
-            And AI implementation projects — I find the manual task eating your team&apos;s
-            week and build the system that does it instead, quoted by scope after a free call.
+            Three things, no pressure to pick one now. A free security check: what a hacker
+            can see about your business, no payment, no sales funnel. A fixed-price Privacy
+            Act compliance engagement for AU small businesses preparing for the 10 December
+            2026 deadline. And AI implementation: I find the manual task eating your
+            team&apos;s week and build the system that replaces it, quoted by scope after a
+            free call. Which of these three matches what&apos;s actually slowing you down
+            right now?
           </p>
           <p
             style={{
@@ -311,10 +219,10 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            The work is done by me with Claude Code, Anthropic&apos;s agentic coding tool, doing
-            the keystroke-level execution. I diagnose, plan, scope, sign off. The tool
-            ships. If the math is wrong, that&apos;s on me — and I&apos;m the one you talk
-            to when it is.
+            I diagnose, plan, and scope every job myself. Claude Code, Anthropic&apos;s
+            agentic coding tool, does the keystroke-level build. I decide what&apos;s
+            allowed to ship, and I sign off before anything goes live. If the math is wrong,
+            that&apos;s on me, and I&apos;m the one you talk to when it is.
           </p>
 
           <h2
@@ -348,29 +256,29 @@ export default function AboutPage() {
                 style={{ color: "var(--ice)" }}
               >
                 abr.business.gov.au/ABN/View?id=34318502254
-              </a>{" "}
-              — government source of truth for ABN 34 318 502 254.
+              </a>
+              . Government source of truth for ABN 34 318 502 254.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>My own scan:</strong>{" "}
               <a href="/scan#self-scan" style={{ color: "var(--ice)" }}>
                 titanos.tech/scan
-              </a>{" "}
-              — every finding from my self-scan, published in full.
+              </a>
+              . Every finding from my self-scan, published in full.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Methodology:</strong>{" "}
               <a href="/methodology" style={{ color: "var(--ice)" }}>
                 titanos.tech/methodology
-              </a>{" "}
-              — exactly what I do, what I never do, and how to reproduce any finding.
+              </a>
+              . Exactly what I do, what I never do, and how to reproduce any finding.
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Email:</strong>{" "}
               <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
                 kyle@titanos.tech
-              </a>{" "}
-              — email security verified (DKIM, SPF, DMARC all in place).
+              </a>
+              . Email security verified (DKIM, SPF, DMARC all in place).
             </li>
             <li style={{ marginBottom: 10 }}>
               <strong style={{ color: "var(--gold)" }}>Calendar:</strong>{" "}
@@ -381,10 +289,10 @@ export default function AboutPage() {
                 style={{ color: "var(--ice)" }}
               >
                 cal.com/kyle-deligny-msvz6s/15min
-              </a>{" "}
-              — 15 minutes is enough to know if I&apos;m useful to you.
+              </a>
+              . 15 minutes is enough to know if I&apos;m useful to you.
             </li>
-            {/* Fix 2b — LinkedIn row, placeholder-gated. Renders only when SITE.LINKEDIN_URL set. */}
+            {/* Fix 2b: LinkedIn row, placeholder-gated. Renders only when SITE.LINKEDIN_URL set. */}
             {SITE.LINKEDIN_URL && (
               <li style={{ marginBottom: 10 }}>
                 <strong style={{ color: "var(--gold)" }}>LinkedIn:</strong>{" "}
@@ -395,18 +303,18 @@ export default function AboutPage() {
                   style={{ color: "var(--ice)" }}
                 >
                   {SITE.LINKEDIN_URL.replace(/^https?:\/\//, "")}
-                </a>{" "}
-                — work history, recommendations, mutual connections.
+                </a>
+                . Work history, recommendations, mutual connections.
               </li>
             )}
           </ul>
 
           {/*
-            OPERATOR_INPUT (Fix 2b — see lib/config.ts):
+            OPERATOR_INPUT (Fix 2b, see lib/config.ts):
             - PHOTO_PATH → headshot file in /public, e.g. "/kyle.jpg".
             - LINKEDIN_URL → profile URL. Renders the row above.
             - Certifications held (IRAP / ISO 27001 / CySA+ / Essential Eight assessor)
-              still TODO — add a fourth section if any get held.
+              still TODO, add a fourth section if any get held.
           */}
 
           <p
@@ -422,7 +330,7 @@ export default function AboutPage() {
             None of this is a template. It&apos;s one person starting without asking
             permission, keeping the receipts, and letting you check every one of them
             before you pay a cent. If there&apos;s a version of that you could run yourself,
-            good — that&apos;s the point.
+            good. That&apos;s the point.
           </p>
         </div>
       </SectionReveal>
@@ -443,13 +351,13 @@ export default function AboutPage() {
             QUESTIONS ABOUT WORKING WITH ME
           </h2>
           <FaqItem question="Why should I trust a solo operator over an agency?">
-            No account manager, no junior team you'll never meet. The person who takes the audit call is the person who builds and signs off the work — and everything above is how you check that's true before you pay a cent.
+            No account manager, no junior team you'll never meet. The person who takes the audit call is the person who builds and signs off the work. Everything above is how you check that's true before you pay a cent.
           </FaqItem>
           <FaqItem question="What if you're unavailable later?">
-            You keep everything delivered — no platform lock-in, no dependency on me staying reachable for what's already built.
+            You keep everything delivered. No platform lock-in, no dependency on me staying reachable for what's already built.
           </FaqItem>
           <FaqItem question="Is my data safe with an AI-assisted operator?">
-            Privacy-compliant by design is the other half of my practice, not an afterthought — see /compliance for exactly what that covers.
+            Privacy-compliant by design is the other half of my practice, not an afterthought. See /compliance for exactly what that covers.
           </FaqItem>
         </div>
       </SectionReveal>

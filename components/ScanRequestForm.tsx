@@ -73,7 +73,7 @@ export default function ScanRequestForm() {
     const domain = normaliseDomain(domainRaw);
     const next: Record<string, string> = {};
     if (!domain || !HOSTNAME_RE.test(domain)) {
-      next.domain = "Looks like that isn't a domain — try yourbusiness.com.au.";
+      next.domain = "Looks like that isn't a domain. Try yourbusiness.com.au.";
     }
     if (!name) next.name = "Tell me what to call you.";
     if (!email || !EMAIL_RE.test(email)) {
@@ -107,7 +107,7 @@ export default function ScanRequestForm() {
       setStatus("error");
       setErrorMsg(
         err instanceof Error && err.message
-          ? "Submission failed — the endpoint may be offline."
+          ? "Submission failed. The endpoint may be offline."
           : "Submission failed.",
       );
     }
@@ -141,7 +141,7 @@ export default function ScanRequestForm() {
         >
           QUEUED.
         </div>
-        Your report lands in your inbox within 2 business days — sent personally,
+        Your report lands in your inbox within 2 business days, sent personally,
         not from a sequence.
       </div>
     );

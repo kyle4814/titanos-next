@@ -10,7 +10,7 @@ import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
-const META_DESC = `Monthly AI partnerships that build, optimise and scale your business — from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
+const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -53,8 +53,8 @@ const TIERS = [
     tier: "embedded",
     name: "Embedded AI Partner",
     price: DISPLAY.AI_EMBEDDED_PARTNER,
-    who: "For businesses over AU$3M needing full transformation",
-    body: "A full-stack AI partnership — end-to-end automation strategy, custom development, and team enablement.",
+    who: "For established businesses needing full transformation",
+    body: "A full-stack AI partnership: end-to-end automation strategy, custom development, and team enablement.",
     popular: false,
   },
 ];
@@ -67,13 +67,13 @@ const INCLUDED = [
 ];
 
 const WHAT_I_BUILD = [
-  { title: "AI Lead Gen & Outreach Systems", body: "Finds and follows up with the customers you're currently missing — in your voice, on autopilot." },
+  { title: "AI Lead Gen & Outreach Systems", body: "Finds and follows up with the customers you're currently missing, in your voice, on autopilot." },
   { title: "AI Customer Service & Support Bots", body: "Answers the same ten questions your inbox gets every day, instantly, correctly, in your tone." },
   { title: "AI Appointment & Booking Systems", body: "Books, reminds, and reschedules without anyone touching a calendar." },
   { title: "AI Content & Social Media Machines", body: "Keeps your channels active without you writing a single post." },
   { title: "AI Sales & Follow-Up Automations", body: "Chases every quote, every lead, every unanswered message until someone answers." },
   { title: "AI Data & Insights Dashboards", body: "Your numbers, pulled from the systems you already run, in your inbox before Monday's meeting." },
-  { title: "AI Admin Automations", body: "Data entry, invoicing, onboarding, documents — the repetitive work, gone." },
+  { title: "AI Admin Automations", body: "Data entry, invoicing, onboarding, documents. The repetitive work, gone." },
 ];
 
 const HOW_IT_WORKS: ThreadStep[] = [
@@ -85,12 +85,12 @@ const HOW_IT_WORKS: ThreadStep[] = [
   {
     num: "II",
     title: "Pick your tier",
-    body: "Growth, Ops, or Embedded — sized to your business. Every tier has a 3-month minimum, no fine print.",
+    body: "Growth, Ops, or Embedded, sized to your business. Every tier has a 3-month minimum, no fine print.",
   },
   {
     num: "III",
     title: "Month 1: I build",
-    body: "The first system goes live in month 1 — inside the retainer, not billed separately. One sale, recurring from day one.",
+    body: "The first system goes live in month 1, inside the retainer, not billed separately. One sale, recurring from day one.",
   },
   {
     num: "IV",
@@ -107,15 +107,15 @@ const HOW_IT_WORKS: ThreadStep[] = [
 const FAQS = [
   {
     q: "Why a retainer instead of a one-off project?",
-    a: "Because AI systems need tuning after they go live, and because I don't sell projects — I sell partnerships that build, optimise and scale. The build is inside month 1 of the retainer; there's no separate build fee.",
+    a: "Because AI systems need tuning after they go live, and because I don't sell projects. I sell partnerships that build, optimise and scale. The build is inside month 1 of the retainer. There's no separate build fee.",
   },
   {
     q: "What's the minimum commitment?",
-    a: `${DISPLAY.AI_RETAINER_MIN} on every tier, stated plainly. After that, it's month-to-month — real results or it doesn't continue.`,
+    a: `${DISPLAY.AI_RETAINER_MIN} on every tier, stated plainly. After that, it's month-to-month. Real results or it doesn't continue.`,
   },
   {
     q: "Is this compliant with the new privacy rules?",
-    a: "Every system I build is privacy-compliant by design — that's the other half of my practice. See the foundation page for what that actually covers.",
+    a: "Every system I build is privacy-compliant by design. That's the other half of my practice. See the foundation page for what that actually covers.",
   },
   {
     q: "Do I need new software?",
@@ -127,9 +127,9 @@ export default function AiDeliveryPage() {
   return (
     <>
       <PageHero
-        badge="AI GROWTH PARTNER · RETAINER FROM AU$1,500/MO"
+        badge={`AI GROWTH PARTNER · RETAINER FROM ${DISPLAY.AI_GROWTH_PARTNER.toUpperCase()}`}
         title="We don't sell AI projects. We sell partnerships that build, optimise and scale."
-        sub="Pick your tier. The first system goes live in month 1 — inside the retainer, not a separate build fee. Every plan is privacy-compliant by design."
+        sub="Pick your tier. The first system goes live in month 1, inside the retainer, not as a separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned
@@ -147,7 +147,7 @@ export default function AiDeliveryPage() {
       <section aria-label="What partnership means here" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="No separate build fee. No second sale later."
-          sub="The machine carries the repetition — the plumbing, the follow-up, the reporting. You keep the calls that need judgement."
+          sub="The machine carries the repetition: the plumbing, the follow-up, the reporting. You keep the calls that need judgement. Quick check: how many hours a week does your team spend on work like that?"
         >
           One system live in month 1.
           <br />
@@ -217,7 +217,7 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={2} total={5} />
-          <SectionHeading title="What We Build" lead="If it's repetitive, we automate it." />
+          <SectionHeading title="What We Build" lead="If it's repetitive, we automate it. Which of these already costs you hours every week?" />
           <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
             {WHAT_I_BUILD.map((item) => (
               <article
@@ -254,7 +254,7 @@ export default function AiDeliveryPage() {
           <SectionHeading title="Privacy Built In, Not Bolted On" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.7, textAlign: "center" }}>
             Every AI shop can build you a chatbot. None of them can tell you it&apos;s privacy-compliant
-            by design — because compliance is my other practice. See{" "}
+            by design. That&apos;s because compliance is my other practice. See{" "}
             <a href="/compliance" style={{ color: "var(--gold)" }}>what that covers</a>.
           </p>
           <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>

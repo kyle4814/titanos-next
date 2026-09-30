@@ -25,7 +25,7 @@ export async function generateMetadata({
   if (!post) return {};
   const url = `https://titanos.tech/blog/${post.slug}`;
   return {
-    title: `${post.title} — Titanos`,
+    title: `${post.title} | Titanos`,
     description: post.description,
     alternates: { canonical: url },
     openGraph: {

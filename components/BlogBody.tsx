@@ -107,7 +107,7 @@ export default function BlogBody({ blocks }: { blocks: ContentBlock[] }) {
                 {block.text}
                 {block.attribution && (
                   <div className="label-system" style={{ marginTop: 12, fontStyle: "normal" }}>
-                    — {block.attribution}
+                    {block.attribution}
                   </div>
                 )}
               </blockquote>

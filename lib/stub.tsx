@@ -29,7 +29,7 @@ export function stubPage(name: string) {
           marginBottom: 18,
         }}
       >
-        {name} — coming soon
+        {name}: coming soon
       </h1>
       <p
         style={{

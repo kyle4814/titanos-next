@@ -73,7 +73,7 @@ function SelectField({
           boxSizing: "border-box",
         }}
       >
-        <option value="">— Select —</option>
+        <option value="">Select</option>
         {options.map((o) => (
           <option key={o} value={o}>
             {o}
@@ -111,7 +111,7 @@ export default function AuditRequestClient() {
         as="textarea"
         rows={4}
         placeholder="e.g. Every day someone manually copies leads from our website form into the CRM and emails them to the sales team…"
-        hint="Be specific — this is what your audit is built around."
+        hint="Be specific. This is what your audit is built around."
       />
 
       <Field

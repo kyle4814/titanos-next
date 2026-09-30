@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HeroEntrance from "@/components/HeroEntrance";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
@@ -17,6 +18,33 @@ import { DISPLAY } from "@/lib/pricing";
 import { Inscription } from "@/components/Myth";
 
 import type { Offer } from "@/components/OfferCard";
+
+export const metadata: Metadata = {
+  title: "Titanos | AI automation and Privacy Act compliance, Brisbane",
+  description:
+    "One operator finds the manual task eating your week and builds the system that does it instead. Free AI audit call, free security scan, fixed-price Privacy Act compliance for Australian small business.",
+  alternates: { canonical: "https://titanos.tech/" },
+  openGraph: {
+    title: "Titanos | AI automation and Privacy Act compliance",
+    description:
+      "Free AI audit call, free security scan, fixed-price Privacy Act compliance. One operator, Brisbane, ABN 34 318 502 254.",
+    url: "https://titanos.tech/",
+    siteName: "Titanos",
+    type: "website",
+  },
+};
+
+const ORG_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Titanos",
+  url: "https://titanos.tech",
+  founder: { "@type": "Person", name: "Kyle Deligny" },
+  identifier: "ABN 34 318 502 254",
+  areaServed: "AU",
+  description:
+    "Solo AI implementation and Privacy Act compliance practice for Australian small business.",
+};
 
 const offers: Offer[] = [
   {
@@ -79,7 +107,7 @@ type LadderBand = {
   items: LadderItem[]; cta: string; href: string;
 };
 
-// The full ladder — every entry point, cheapest first. Prices come from
+// The full ladder: every entry point, cheapest first. Prices come from
 // lib/pricing.ts only; never inline a figure here (QA greps for it).
 const LADDER: LadderBand[] = [
   {
@@ -98,9 +126,9 @@ const LADDER: LadderBand[] = [
     who: "Solo operators and small teams testing the water.",
     price: `From ${DISPLAY.MONITOR_MONTHLY}`,
     items: [
-      { label: "Compliance Monitor — monthly", price: DISPLAY.MONITOR_MONTHLY },
-      { label: "Compliance Monitor — annual", price: DISPLAY.MONITOR_ANNUAL },
-      { label: "Leads — Starter", price: DISPLAY.LEADS_STARTER },
+      { label: "Compliance Monitor (monthly)", price: DISPLAY.MONITOR_MONTHLY },
+      { label: "Compliance Monitor (annual)", price: DISPLAY.MONITOR_ANNUAL },
+      { label: "Leads Starter", price: DISPLAY.LEADS_STARTER },
     ],
     cta: "See monitoring →",
     href: "/monitor",
@@ -110,9 +138,9 @@ const LADDER: LadderBand[] = [
     who: "SMBs getting compliant and buying pipeline.",
     price: `From ${DISPLAY.LEADS_GROWTH}`,
     items: [
-      { label: "Leads — Growth", price: DISPLAY.LEADS_GROWTH },
-      { label: "Leads — Campaign", price: DISPLAY.LEADS_CAMPAIGN },
-      { label: "Leads — monthly retainer", price: DISPLAY.LEADS_RETAINER },
+      { label: "Leads Growth", price: DISPLAY.LEADS_GROWTH },
+      { label: "Leads Campaign", price: DISPLAY.LEADS_CAMPAIGN },
+      { label: "Leads monthly retainer", price: DISPLAY.LEADS_RETAINER },
       { label: "Privacy Act + Essential Eight pack", price: DISPLAY.PACK_PRICE },
     ],
     cta: "See compliance →",
@@ -168,6 +196,10 @@ const WHAT_WE_BUILD = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
+      />
       {/* ═══ HERO ═══ */}
       <HeroEntrance
         wordmark="TITANOS"
@@ -181,9 +213,9 @@ export default function Home() {
         }
       />
 
-      {/* ═══ THE OPENING — the threshold. Inscription primitive: the
+      {/* THE OPENING: the threshold. Inscription primitive, the
           claim is set INTO the page (lintel rules + stone recess), not
-          printed on it. See components/Myth.tsx for the vocabulary. ═══ */}
+          printed on it. See components/Myth.tsx for the vocabulary. */}
       <section
         aria-label="What TITANOS is"
         style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
@@ -213,9 +245,9 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          Manual admin. Missed enquiries. Quotes nobody follows up on. Compliance risk you can&apos;t
-          see until it costs you. <strong style={{ color: "var(--gold)" }}>AI fixes all four.</strong> I
-          build the systems, and every one of them is privacy-compliant by design, because
+          <strong style={{ color: "var(--gold)" }}>AI fixes the manual work eating your week.</strong>{" "}
+          Missed enquiries. Quotes nobody follows up on. Compliance risk you cannot see until it
+          costs you. I build the system, and every one is privacy-compliant by design, because
           compliance is my other practice.
         </p>
 
@@ -257,13 +289,13 @@ export default function Home() {
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
         </div>
         <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 16 }}>
-          Every finding verifiable —{" "}
+          Every finding is verifiable.{" "}
           <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>
-            see the actual quality of work you&apos;d get, before you pay a cent →
+            See the actual quality of work you would get, before you pay a cent →
           </a>
         </p>
-        {/* Testimonials / case studies go here once client 1-3 are delivered.
-            Do not fabricate proof before then — the honest trust units above
+        {/* Testimonials / case studies go here once client 1 to 3 are delivered.
+            Do not fabricate proof before then. The honest trust units above
             are the only proof that exists right now. */}
       </SectionReveal>
 
@@ -366,12 +398,12 @@ export default function Home() {
 
       <div className="divider-gold" />
 
-      {/* ═══ EVERY DOOR — the full ladder ═══ */}
+      {/* EVERY DOOR: the full ladder */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Every door is open"
-            lead="From a free scan with no card, to enterprise programs across a whole group. Wherever you are on this ladder, there is a way in — and if none of it fits your budget yet, the free scan and the audit call are still yours."
+            title="Pick your door. There is one at every budget."
+            lead="From a free scan with no card, to enterprise programs across a whole group. If none of it fits yet, the free scan and the audit call are still yours."
           />
 
           <div className="ladder-grid">
@@ -401,7 +433,7 @@ export default function Home() {
 
           <p className="ladder-note">
             Nobody gets turned away for budget. If the ladder does not reach you yet, take the free
-            scan and the audit call — you keep the findings and the plan either way, and you are
+            scan and the audit call. You keep the findings and the plan either way, and you are
             welcome back whenever the timing is right.
           </p>
         </div>
@@ -446,7 +478,7 @@ export default function Home() {
       {/* ═══ ROI ESTIMATOR ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="What is manual work actually costing you?" lead="Move the sliders — this uses your numbers, not a claim about past results." />
+          <SectionHeading title="What is manual work actually costing you?" lead="Move the sliders. This uses your numbers, not a claim about past results." />
           <RoiEstimator />
           <div
             style={{
@@ -463,7 +495,7 @@ export default function Home() {
               Not ready to talk yet? Take the self-audit.
             </p>
             <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", margin: "0 0 16px" }}>
-              The AI Readiness Guide — a real checklist for whether AI will save your business time, and what governance you need before deploying it. Free, no form, no catch.
+              The AI Readiness Guide: a real checklist for whether AI will save your business time, and what governance you need before deploying it. Free, no form, no catch.
             </p>
             <AnimatedButton href="/ai-readiness-guide.pdf" variant="secondary" external>
               Download the free guide (PDF) →
@@ -474,7 +506,7 @@ export default function Home() {
 
       <div className="divider-gold" />
 
-      {/* ═══ PRIVACY BY DESIGN — the foundation ═══ */}
+      {/* PRIVACY BY DESIGN: the foundation */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="Privacy by Design" />
@@ -490,16 +522,19 @@ export default function Home() {
           >
             <p style={{ color: "var(--gold)", fontSize: "var(--fs-lg)", fontStyle: "italic", lineHeight: 1.6, marginBottom: 18 }}>
               &ldquo;Every AI shop can build you a chatbot. None of them can tell you it&apos;s
-              privacy-compliant by design — because compliance is my other practice.&rdquo;
+              privacy-compliant by design, because compliance is my other practice.&rdquo;
             </p>
             <ul style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.9, paddingLeft: 20, margin: 0 }}>
               <li>Every AI system we build is privacy-compliant by design</li>
-              <li>Privacy policy + automated-decision disclosure handled as part of onboarding</li>
-              <li>Building AI without this creates legal exposure. With us, it doesn&apos;t</li>
-              <li>We monitor regulation changes and update your systems</li>
-              <li>One person handles both, so nothing falls through the gap between them</li>
+              <li>Privacy policy and automated-decision disclosure handled as part of onboarding</li>
+              <li>One person handles both AI and compliance, so nothing falls through the gap between them</li>
+              <li>I respond in minutes and build in days, not months</li>
             </ul>
           </div>
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", maxWidth: "var(--maxw-prose)", margin: "18px auto 0", lineHeight: 1.7 }}>
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254. Personally accountable for
+            every system shipped.
+          </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
             <AnimatedButton href="/compliance" variant="secondary">See the standalone privacy deep-dive →</AnimatedButton>
           </p>
@@ -508,33 +543,7 @@ export default function Home() {
 
       <div className="divider-gold" />
 
-      {/* ═══ WHY THIS WINS ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SectionHeading title="Why owners pick Titanos" />
-          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto", display: "grid", gap: 14 }}>
-            {[
-              "You see value before you pay a cent — the free audit call, no strings",
-              "One partner from day one. No separate build fee, no second sale later",
-              "Privacy by design. Almost nobody else in this market can say that honestly",
-              "The systems keep improving the longer we run them, not just at handover",
-              "I respond in minutes and build in days, not months",
-            ].map((line) => (
-              <div key={line} style={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "16px 22px" }}>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>{line}</p>
-              </div>
-            ))}
-          </div>
-          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", maxWidth: "var(--maxw-prose)", margin: "28px auto 0", lineHeight: 1.7 }}>
-            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254. Personally accountable for
-            every system shipped.
-          </p>
-        </div>
-      </SectionReveal>
-
-      <div className="divider-gold" />
-
-      {/* ═══ THE OPERATOR — myth section, deliberately a different layer of the site ═══ */}
+      {/* THE OPERATOR: myth section, deliberately a different layer of the site */}
       <SectionReveal style={{ padding: "var(--space-30) 20px", position: "relative", zIndex: 2 }}>
         <div
           style={{
@@ -589,9 +598,9 @@ export default function Home() {
                 The operator
               </p>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-                One person built TITANOS from a phone — no office, no round of funding, no
+                One person built TITANOS from a phone. No office, no round of funding, no
                 one&apos;s permission required. Capability was never supposed to be something
-                you have to be given. It&apos;s something you build.
+                you have to be given. It is something you build.
               </p>
             </div>
             <div>
@@ -599,19 +608,9 @@ export default function Home() {
                 The division of labour
               </p>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-                The machine carries the complexity — the repetition, the plumbing, the noise.
+                The machine carries the repetition, the plumbing, the noise.
                 The human decides what matters and stays accountable for it. AI is
                 infrastructure here, never a character standing in for you.
-              </p>
-            </div>
-            <div>
-              <p className="font-mono" style={{ color: "var(--gold-dim)", fontSize: "var(--fs-xs)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
-                The enemy
-              </p>
-              <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-                Friction. Noise. Needless dependency. Systems too fragile to trust. And the
-                idea, still common, that this kind of capability belongs only to people with
-                money, teams, or someone&apos;s permission. It doesn&apos;t.
               </p>
             </div>
           </div>
@@ -627,7 +626,7 @@ export default function Home() {
             }}
           >
             Automate the known. Preserve human judgement for the unknown.{" "}
-            <span style={{ color: "var(--gold)" }}>That&apos;s the whole method — everything
+            <span style={{ color: "var(--gold)" }}>That is the whole method, and everything
             we build for you runs on it too.</span>
           </p>
 
@@ -648,7 +647,7 @@ export default function Home() {
                 padding: "12px 22px",
               }}
             >
-              Read the doctrine — Black Ice →
+              Read the doctrine: Black Ice →
             </a>
             <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 12 }}>
               Free field guide. The actual operating system behind every build, not a lead
@@ -668,34 +667,28 @@ export default function Home() {
             Retainers start at {DISPLAY.AI_GROWTH_PARTNER}, {DISPLAY.AI_RETAINER_MIN}. Ops is {DISPLAY.AI_OPS_PARTNER}, Embedded is {DISPLAY.AI_EMBEDDED_PARTNER}. The audit call itself is free.
           </FaqItem>
           <FaqItem question="Why monthly and not a one-off build?">
-            A system you build once and never touch again decays — usage changes, tools change, edge cases show up. The retainer is one sale that includes the build, the tuning, and the support, instead of a build fee followed by a second sale later.
+            A system you build once and never touch again decays as usage and tools change. The retainer is one sale that includes the build, the tuning, and the support, instead of a build fee followed by a second sale later.
           </FaqItem>
           <FaqItem question="What's the 3-month minimum for?">
-            Month 1 is the build. Month 2-3 is where it gets optimised against how you actually use it — that's when it starts paying for itself. After that, it's month-to-month.
+            Month 1 is the build. Months 2 to 3 are where it gets optimised against how you actually use it, which is when it starts paying for itself. After that, it's month-to-month, no lock-in.
           </FaqItem>
-          <FaqItem question="We're not a tech business — does this even apply to us?">
+          <FaqItem question="We're not a tech business. Does this even apply to us?">
             That's most of who I work with. You don't need to understand how it works, the same way you don't need to understand accounting software to use it. That's what the audit call is for.
           </FaqItem>
-          <FaqItem question="I'm flat out — I don't have time for a project right now.">
+          <FaqItem question="I'm flat out. I don't have time for a project right now.">
             Fair. Month 1 needs about an hour of your time in total: one call to work out which task is worth automating, one to check I built the right thing. If I need more from you than that, I've scoped it wrong.
           </FaqItem>
-          <FaqItem question="We've already got software for this.">
-            Then you might not need me, and I'll tell you that. A lot of what gets sold as automation just books appointments or shuffles data between two tools you already pay for. Tell me what you're running on the call and I'll give you a straight answer on whether there's a real gap.
-          </FaqItem>
           <FaqItem question="Couldn't I just do this myself with ChatGPT?">
-            Sometimes, genuinely — and I'll say so on the call if that's the honest answer. The part that eats weeks isn't the prompt, it's the plumbing: getting it running against your actual data, handling the cases where it gets things wrong, and keeping it working when the tools change underneath it.
+            Sometimes, genuinely, and I'll say so on the call if that's the honest answer. The part that eats weeks isn't the prompt. It's the plumbing: getting it running against your actual data, and keeping it working when the tools change underneath it.
           </FaqItem>
           <FaqItem question="What if it breaks?">
             Ongoing support is part of the retainer, not an add-on you have to remember to buy.
           </FaqItem>
           <FaqItem question="Who are you, and why should I trust you?">
-            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254 — verifiable on the Australian Business Register. The evidence pack at /our-evidence-pack is my own real report, published in full, not a mock-up.
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254, verifiable on the Australian Business Register. The evidence pack at /our-evidence-pack is my own real report, published in full, not a mock-up.
           </FaqItem>
           <FaqItem question="Is my data safe?">
-            Every system is built privacy-compliant by design — that's the other half of my practice, not a bolt-on.
-          </FaqItem>
-          <FaqItem question="What if it doesn't work?">
-            Real results or it doesn't continue — month-to-month after the 3-month minimum, no lock-in beyond that.
+            Every system is built privacy-compliant by design. That's the other half of my practice, not a bolt-on.
           </FaqItem>
         </div>
       </SectionReveal>
@@ -727,7 +720,7 @@ export default function Home() {
           }}
         >
           Book the free AI audit call. You&apos;ll see exactly what&apos;s automatable in your
-          business and what it&apos;s worth — no cost, no obligation.
+          business and what it&apos;s worth. No cost, no obligation.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">Book your free AI audit call →</AnimatedButton>

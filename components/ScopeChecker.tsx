@@ -67,14 +67,14 @@ export default function ScopeChecker() {
               </p>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
                 {health === "yes"
-                  ? "Health providers are covered by the Privacy Act at any size — there's no small-business exemption for health."
+                  ? "Health providers are covered by the Privacy Act at any size. There's no small-business exemption for health."
                   : "Businesses over AU$3M turnover are APP entities, covered by the automated-decision-making disclosure rule taking effect 10 December 2026."}
               </p>
             </>
           ) : (
             <>
               <p style={{ color: "var(--gold)", fontWeight: 700, fontSize: "var(--fs-lg)", marginBottom: 10 }}>
-                Not in ADM scope — yet.
+                Not in ADM scope. Yet.
               </p>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginBottom: 10 }}>
                 Under AU$3M turnover and non-health, you&apos;re currently outside the automated-decision-making
@@ -84,8 +84,8 @@ export default function ScopeChecker() {
                 One thing still applies regardless of size:{" "}
                 <strong style={{ color: "var(--ice)" }}>
                   since 10 June 2025, any individual can sue any business directly for a serious privacy breach
-                </strong>{" "}
-                — that statutory tort isn&apos;t size-gated.
+                </strong>
+                , and that statutory tort isn&apos;t size-gated.
               </p>
             </>
           )}

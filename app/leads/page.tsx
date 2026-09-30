@@ -15,7 +15,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 
 const BOOK_CALL = SITE.CAL_15MIN_URL;
 
-const META_TITLE = "Titanos Leads & Intelligence — Verified AU Business Contacts";
+const META_TITLE = "Titanos Leads & Intelligence: Verified AU Business Contacts";
 const META_DESC = `Verified Australian business contact lists, built compliant by design. ${DISPLAY.LEADS_STARTER_FROM}. Bounce guarantee. You own the data.`;
 
 export const metadata: Metadata = {
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
 const PROBLEMS = [
   {
     title: "Scraped lists bounce.",
-    body: "Most cheap AU contact lists are scraped once, never verified, and commonly bounce on first send — often 30–50% — torching your sender reputation before you've made a single pitch.",
+    body: "Most cheap AU contact lists are scraped once, never verified, and commonly bounce on first send, often 30 to 50%, torching your sender reputation before you've made a single pitch.",
   },
   {
-    title: "Agencies charge AU$5–10K and lock you in.",
+    title: "Agencies charge thousands and lock you in.",
     body: "Lead-gen agencies bundle the list into a retainer you can't leave, and you never actually own the data.",
   },
   {
@@ -60,7 +60,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: "Named where I can find them.",
-    body: "Where a business publicly lists an owner or manager's contact, you get it. Where it doesn't, you get the verified main business contact — every row reachable, none invented. I'd rather give you a real info@ that works than a 'decision maker' address I made up.",
+    body: "Where a business publicly lists an owner or manager's contact, you get it. Where it doesn't, you get the verified main business contact. Every row reachable, none invented. I'd rather give you a real info@ that works than a 'decision maker' address I made up.",
   },
   {
     title: "Legal by design.",
@@ -68,7 +68,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: "AU-native coverage.",
-    body: "Built for Australian SMBs, with NZ and Singapore coverage on request — including the regional businesses the big tools miss.",
+    body: "Built for Australian SMBs, with NZ and Singapore coverage on request, including the regional businesses the big tools miss.",
   },
 ];
 
@@ -93,7 +93,7 @@ const STEPS = [
 const LEGAL_PILLARS = [
   {
     title: "Public business information only.",
-    body: "Sourced from publicly listed business data — the same information any customer sees searching for that business.",
+    body: "Sourced from publicly listed business data: the same information any customer sees searching for that business.",
   },
   {
     title: "No sensitive personal data.",
@@ -121,7 +121,7 @@ export default function LeadsPage() {
     provider: { "@type": "Organization", name: "Titanos" },
     serviceType: "Verified business contact lists",
     description:
-      "Verified Australian business contact lists — sourced from public business information, with named owner or decision-maker where publicly available and the verified main business contact otherwise. Every email checked deliverable before delivery. Built by a Privacy Act compliance practice.",
+      "Verified Australian business contact lists: sourced from public business information, with named owner or decision-maker where publicly available and the verified main business contact otherwise. Every email checked deliverable before delivery. Built by a Privacy Act compliance practice.",
     areaServed: ["AU", "NZ", "SG"],
     offers: [
       {
@@ -167,12 +167,12 @@ export default function LeadsPage() {
       {
         "@type": "Question",
         name: "Where does the data come from?",
-        acceptedAnswer: { "@type": "Answer", text: "Public Australian business listings and the businesses' own public websites — the same information available to anyone searching for that business, structured and verified rather than pulled from anything non-public." },
+        acceptedAnswer: { "@type": "Answer", text: "Public Australian business listings and the businesses' own public websites: the same information available to anyone searching for that business, structured and verified rather than pulled from anything non-public." },
       },
       {
         "@type": "Question",
         name: "Is this legal under the Privacy Act?",
-        acceptedAnswer: { "@type": "Answer", text: "Yes — Privacy Act compliance is the main practice here. Business contact details that are publicly listed are handled the way the Act expects: no sensitive data, suppression on request, transparent sourcing." },
+        acceptedAnswer: { "@type": "Answer", text: "Yes. Privacy Act compliance is the main practice here. Business contact details that are publicly listed are handled the way the Act expects: no sensitive data, suppression on request, transparent sourcing." },
       },
       {
         "@type": "Question",
@@ -182,17 +182,17 @@ export default function LeadsPage() {
       {
         "@type": "Question",
         name: "Are these decision-maker contacts?",
-        acceptedAnswer: { "@type": "Answer", text: "Where a business publicly lists the owner or a manager's direct contact, that's what's provided. Otherwise the verified main business email is provided — no invented \"decision maker\" addresses to pad the list." },
+        acceptedAnswer: { "@type": "Answer", text: "Where a business publicly lists the owner or a manager's direct contact, that's what's provided. Otherwise the verified main business email is provided. No invented \"decision maker\" addresses to pad the list." },
       },
       {
         "@type": "Question",
         name: "Do I own the data?",
-        acceptedAnswer: { "@type": "Answer", text: "Yes. Delivered as a file that's kept permanently — no platform lock-in, no access that expires." },
+        acceptedAnswer: { "@type": "Answer", text: "Yes. Delivered as a file that's kept permanently. No platform lock-in, no access that expires." },
       },
       {
         "@type": "Question",
         name: "How is this different from Apollo or ZoomInfo?",
-        acceptedAnswer: { "@type": "Answer", text: "Those are US-built subscription tools with thin AU coverage, especially regionally. This is AU-native, verified per-list, and delivered as a research product that's owned outright — not a seat that's rented." },
+        acceptedAnswer: { "@type": "Answer", text: "Those are US-built subscription tools with thin AU coverage, especially regionally. This is AU-native, verified per-list, and delivered as a research product that's owned outright, not a seat that's rented." },
       },
     ],
   };
@@ -211,7 +211,7 @@ export default function LeadsPage() {
       <PageHero
         badge="TITANOS · LEADS & INTELLIGENCE"
         title="Verified Australian business contacts, built by the compliance practice that knows which data is legal to hold."
-        sub="Reach real Australian businesses without bouncing — with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research outcome I stand behind with a 30-day bounce guarantee."
+        sub="Reach real Australian businesses without bouncing, with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research outcome I stand behind with a 30-day bounce guarantee."
         trustLine="Public business information · Privacy Act-aware · every email verified before delivery · reply STOP and you're suppressed forever."
       >
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
@@ -342,7 +342,7 @@ export default function LeadsPage() {
           <DepthIndex index={3} total={7} />
           <SectionHeading
             title="Pricing"
-            lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed — every tier verified at delivery, every tier covered by the 30-day bounce replacement."
+            lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed, every tier verified at delivery, every tier covered by the 30-day bounce replacement."
           />
           <div
             className="grid-auto-cards"
@@ -383,7 +383,7 @@ export default function LeadsPage() {
               price={DISPLAY.LEADS_CAMPAIGN}
               priceUnit={`${LEADS.CAMPAIGN.contacts} verified contacts · ${LEADS.CAMPAIGN.turnaround}`}
               bullets={[
-                `Custom target profile — I scope it with you on a call`,
+                `Custom target profile, scoped with you on a call`,
                 `Everything in Growth, plus company-size signals + segmentation breakdown`,
                 `30-minute targeting strategy call included`,
                 `30-day bounce replacement`,
@@ -400,7 +400,7 @@ export default function LeadsPage() {
                 `Ongoing feed of contacts matching your target profile, delivered monthly`,
                 `Market-movement notes: new businesses entering your category, signals that changed`,
                 `Everything verified, every month · 30-day bounce replacement applies`,
-                `Cancel any time — one email, no retention dance`,
+                `Cancel any time, one email, no retention dance`,
               ]}
               ctaLabel="START THE RETAINER →"
               ctaHref="/order/leads?tier=retainer"
@@ -418,7 +418,7 @@ export default function LeadsPage() {
             }}
           >
             Not sure? Tell me your target market in one sentence and I&apos;ll send you a free
-            10–20 row sample before you pay anything.
+            10 to 20 row sample before you pay anything.
           </p>
           <p
             style={{
@@ -445,7 +445,7 @@ export default function LeadsPage() {
               margin: "0 auto",
             }}
           >
-            Not sure which? Start with a 15-minute fit call — I&apos;ll tell you honestly
+            Not sure which? Start with a 15-minute fit call. I&apos;ll tell you honestly
             whether I can deliver what you need before you pay a cent.
           </p>
         </div>
@@ -512,7 +512,7 @@ export default function LeadsPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={5} total={7} />
-          <SectionHeading title="Built by a Compliance Practice — on Purpose" />
+          <SectionHeading title="Built by a Compliance Practice, on Purpose" />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <p
               style={{
@@ -595,12 +595,12 @@ export default function LeadsPage() {
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
               The Privacy Act covers how I built the list. The Spam Act 2003 covers how
               you use it. Three rules keep you clean: B2B outreach to published business
-              addresses relies on inferred consent — which is exactly why I verify roles
+              addresses relies on inferred consent, which is exactly why I verify roles
               and sources instead of scraping personal inboxes. Every send needs your
               real business name and contact details. Every send needs a working
               unsubscribe, honoured within 5 business days. Follow those and cold B2B
-              email is legal in Australia. I build the list to make the first rule true;
-              the other two are on your sender — and if you&apos;d rather not think about
+              email is legal in Australia. I build the list to make the first rule true.
+              The other two are on your sender. If you&apos;d rather not think about
               any of it, that&apos;s what the managed retainer is for.
             </p>
           </div>
@@ -617,12 +617,12 @@ export default function LeadsPage() {
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Where does the data come from?">
               Public Australian business listings and the businesses&apos; own public
-              websites — the same information available to anyone searching for that
+              websites: the same information available to anyone searching for that
               business. I structure it, verify it, and deliver it; I don&apos;t pull
               anything that isn&apos;t already public.
             </FaqItem>
             <FaqItem question="Is this legal under the Privacy Act?">
-              Yes — and I&apos;d know, since Privacy Act compliance is my main
+              Yes. And I&apos;d know, since Privacy Act compliance is my main
               practice. Business contact details that are publicly listed are handled
               here the way the Act expects: no sensitive data, suppression on request,
               transparent sourcing.
@@ -634,9 +634,9 @@ export default function LeadsPage() {
             </FaqItem>
             <FaqItem question="Are these decision-maker contacts?">
               Where a business publicly lists the owner or a manager&apos;s direct contact,
-              yes — you get it. Where they don&apos;t, you get the verified main business
+              yes, you get it. Where they don&apos;t, you get the verified main business
               email. I never invent a &ldquo;decision maker&rdquo; address to pad the list.
-              Every contact is real, verified deliverable, and reachable — that&apos;s the
+              Every contact is real, verified deliverable, and reachable. That&apos;s the
               part I guarantee.
             </FaqItem>
             <FaqItem question="Do I own the data?">
@@ -644,13 +644,13 @@ export default function LeadsPage() {
               no access that expires.
             </FaqItem>
             <FaqItem question="Can you do industries / regions not listed?">
-              Almost certainly — ask. The pricing tiers are about volume; the targeting
+              Almost certainly. Ask. The pricing tiers are about volume; the targeting
               is yours to define.
             </FaqItem>
             <FaqItem question="How is this different from Apollo or ZoomInfo?">
               Those are US-built subscription tools with thin AU coverage, especially
               regionally. This is AU-native, verified per-list, and delivered as a
-              research product you own — not a seat you rent.
+              research product you own, not a seat you rent.
             </FaqItem>
             <FaqItem question="How fast?">
               Starter in {LEADS.STARTER.turnaround}, larger tiers {LEADS.CAMPAIGN.turnaround}.
@@ -698,7 +698,7 @@ export default function LeadsPage() {
           }}
         >
           A 15-minute fit call. I&apos;ll tell you honestly whether I can deliver the
-          volume and quality you need — before you pay anything.
+          volume and quality you need, before you pay anything.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={BOOK_CALL} external variant="primary">

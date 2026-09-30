@@ -18,12 +18,12 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_ANCHOR = "#request";
 
 export const metadata: Metadata = {
-  title: "Free Business Security Check — TITANOS",
+  title: "Free Business Security Check | TITANOS",
   description:
     "Free check of what a hacker can see about your AU/NZ/SG business. Open ports, email security, certificates, known software vulnerabilities. Report in your inbox within 2 business days. ABN 34 318 502 254.",
   alternates: { canonical: "https://titanos.tech/scan" },
   openGraph: {
-    title: "Free Business Security Check — Titanos",
+    title: "Free Business Security Check | Titanos",
     description:
       "See what a hacker can see about your business. No login. Report in your inbox within 2 business days. Personally reviewed, Australian-owned, ABN-verified.",
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free External Security Scan — Titanos",
+    title: "Free External Security Scan | Titanos",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -57,7 +57,7 @@ const PROCESS = [
   {
     num: "IV",
     title: "Report delivered",
-    body: "Hosted HTML report linked from an email to your inbox — within 2 business days.",
+    body: "Hosted HTML report linked from an email to your inbox, within 2 business days.",
   },
   {
     num: "V",
@@ -67,14 +67,14 @@ const PROCESS = [
 ];
 
 const REPORT_ITEMS = [
-  "Services visible from the internet — what ports are open and what software is running on them",
-  "Database exposure flags — any database port reachable from the public internet (a serious risk)",
-  "Encrypted connection check — certificate validity, expiry, and protocol versions (TLS/SSL)",
-  "Known software vulnerability matches — any published weakness in the software versions you're running",
-  "Email security records — SPF, DKIM, DMARC, CAA (the records that stop hackers spoofing your domain)",
-  "Host split — what you control vs what your hosting provider controls (so you know who needs to fix what)",
+  "Services visible from the internet: what ports are open and what software is running on them",
+  "Database exposure flags: any database port reachable from the public internet (a serious risk)",
+  "Encrypted connection check: certificate validity, expiry, and protocol versions (TLS/SSL)",
+  "Known software vulnerability matches: any published weakness in the software versions you're running",
+  "Email security records: SPF, DKIM, DMARC, CAA (the records that stop hackers spoofing your domain)",
+  "Host split: what you control vs what your hosting provider controls (so you know who needs to fix what)",
   "Severity ranking (Critical / High / Medium / Low / Info) with a plain-English remediation step per finding",
-  "Verification command for every finding — run the same check yourself in 30 seconds",
+  "Verification command for every finding: run the same check yourself in 30 seconds",
 ];
 
 type SelfScanStatus = "RESOLVED" | "OPEN" | "PARTIAL";
@@ -111,7 +111,7 @@ const SELF_SCAN_FINDINGS: SelfScanRow[] = [
       "Site uses none of those APIs. Cloudflare Transform Rule to deny them is queued. No functional risk in the interim.",
   },
   {
-    title: "Information disclosure — Server header",
+    title: "Information disclosure: Server header",
     status: "OPEN",
     resolution:
       "Trade-off: keeping Server: cloudflare lets clients debug DNS/CDN issues. The disclosure is harmless because Cloudflare's role here is verifiable from any whois / DNS lookup anyway.",
@@ -125,18 +125,18 @@ const SELF_SCAN_STATUS_COLOR: Record<SelfScanStatus, string> = {
 };
 
 const WHAT_IT_IS = [
-  "A check of what a hacker can see about your business from the public internet — every finding reproducible with one command",
-  "90-day window before any finding is published — your time to fix it first",
-  "No break-in attempts, no password guessing, no overloading your site — ever",
+  "A check of what a hacker can see about your business from the public internet. Every finding reproducible with one command",
+  "90-day window before any finding is published. Your time to fix it first",
+  "No break-in attempts, no password guessing, no overloading your site. Ever",
   "Every finding verifiable: I show you the exact check I ran so you can confirm it yourself",
-  "Personally reviewed before delivery — no auto-generated noise",
+  "Personally reviewed before delivery. No auto-generated noise",
 ];
 
 const WHO_ITS_FOR = [
   "Any AU/NZ/SG business with a website that wants to know what a hacker can see",
   "Business owners who have heard about the December 2026 privacy deadline and want to understand their gaps",
   "IT leads or founders about to roll out new software and want an outside check first",
-  "Businesses about to renew a managed IT contract — verify what you're actually getting",
+  "Businesses about to renew a managed IT contract, checking what they're actually getting",
   "Anyone who wants a plain-English report, not a sales pitch",
 ];
 
@@ -166,7 +166,7 @@ export default function ScanPage() {
         name: "How long does the scan take?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Your scan is queued the moment you submit. The report is delivered to your inbox within 2 business days. Most run faster than that — the SLA is just the worst-case promise.",
+          text: "Your scan is queued the moment you submit. The report is delivered to your inbox within 2 business days. Most run faster than that. The SLA is just the worst-case promise.",
         },
       },
       {
@@ -182,7 +182,7 @@ export default function ScanPage() {
         name: "Is this a hacking attempt?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Only what the public internet can already see is read — service names and versions, certificate details, email security records. No login attempts, no break-in attempts, no overloading the site, no data access.",
+          text: "No. Only what the public internet can already see is read: service names and versions, certificate details, email security records. No login attempts. No break-in attempts. No overloading the site. No data access.",
         },
       },
       {
@@ -190,7 +190,7 @@ export default function ScanPage() {
         name: "Do you store my data?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Scan results are kept in the database to track how exposure patterns change across AU businesses over time. Your email goes only into the contact list — never sold, never shared with third parties, suppressed forever if you reply remove.",
+          text: "Scan results are kept in the database to track how exposure patterns change across AU businesses over time. Your email goes only into the contact list. Never sold, never shared with third parties. Suppressed forever if you reply remove.",
         },
       },
     ],
@@ -211,7 +211,7 @@ export default function ScanPage() {
         badge="FREE · NO LOGIN · NO CARD"
         title="Free Security Check for Your Business"
         tagline="See what a hacker can see about your business. No login. Report in your inbox within 2 business days."
-        sub="A plain-English report on every security gap visible from the public internet — open ports, expired certificates, email spoofing risks, known software weaknesses. No card. No drip campaign — at most 3 relevant emails over 6 months, and STOP kills it forever."
+        sub="A plain-English report on every security gap visible from the public internet: open ports, expired certificates, email spoofing risks, known software weaknesses. Passive only, public records only. I only scan a domain you submit, never one you haven't asked me to look at. No card. No drip campaign: at most 3 relevant emails over 6 months, and STOP kills it forever."
         trustLine={
           <>
             Personally reviewed · Australian-owned ·{" "}
@@ -246,7 +246,7 @@ export default function ScanPage() {
           <DepthIndex index={1} total={8} />
           <Inscription
             label="Self-scan · findings published verbatim"
-            sub="Six findings, all published as found. Four resolved or accepted with reasoning since; two remain open."
+            sub="Six findings, all published as found. Four resolved or accepted with reasoning since; two remain open. Worth asking yourself: would your own site survive the same six checks?"
             style={{ marginBottom: "var(--space-8)" }}
           >
             I ran this check on myself first.
@@ -291,12 +291,14 @@ export default function ScanPage() {
           ))}
           <SystemLabel style={{ textAlign: "center", marginTop: 20 }}>
             Full scan run 2026-06-01 · TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
-            Last re-verified 11 July 2026 — TLS 1.3 confirmed, certificate valid through 30 August 2026.
+            Last re-verified 11 July 2026. TLS 1.3 confirmed, certificate valid through 30 August 2026.
           </SystemLabel>
 
           <OperatorNote>
             Publishing my own findings, warts included, was never optional. I ask clients to
-            trust a report on their business — the least I can do is show mine first, unedited.
+            trust a report on their business. The least I can do is show mine first, unedited.
+            This same scan is passive and public-record only: it reads what's already public,
+            and it only ever runs against a domain someone has asked me to check.
           </OperatorNote>
 
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
@@ -400,7 +402,7 @@ export default function ScanPage() {
           <DepthIndex index={5} total={8} />
           <SectionHeading
             title="How the Check Works"
-            lead="I only read what your server already broadcasts to the public internet — the same information a hacker sees. Nothing invasive."
+            lead="I only read what your server already broadcasts to the public internet: the same information a hacker sees. Nothing invasive."
           />
           <div
             style={{
@@ -482,13 +484,13 @@ export default function ScanPage() {
           >
             <BridgeCard
               title="Titanos Monitor"
-              body={`If the check is clean today but you want to know when something changes, Monitor re-checks your business every month and emails you what’s new — plus a briefing on any privacy law updates relevant to your industry. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
+              body={`If the check is clean today but you want to know when something changes, Monitor re-checks your business every month and emails you what’s new, plus a briefing on any privacy law updates relevant to your industry. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click.`}
               href="/monitor"
               cta="See Monitor"
             />
             <BridgeCard
               title="Privacy Act Compliance"
-              body="If the check finds gaps and the 10 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you — privacy policy, email security, login security, the works."
+              body="If the check finds gaps and the 10 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you: privacy policy, email security, login security, the works."
               href="/compliance"
               cta="See the compliance pack"
             />
@@ -515,7 +517,7 @@ export default function ScanPage() {
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
-              within 2 business days. Most run faster than that — the SLA is just the worst-case
+              within 2 business days. Most run faster than that. The SLA is just the worst-case
               promise.
             </FaqItem>
             <FaqItem question="What if my domain is hosted on Squarespace / Webflow / GitHub Pages?">
@@ -525,15 +527,17 @@ export default function ScanPage() {
               provider.
             </FaqItem>
             <FaqItem question="Is this a hacking attempt?">
-              No. I only read what the public internet can already see — service names and
+              No. I only read what the public internet can already see: service names and
               versions, certificate details, email security records. No login attempts. No
-              break-in attempts. No overloading your site. No data access. Full methodology at{" "}
+              break-in attempts. No overloading your site. No data access. It's passive and
+              public-record only, and it only ever runs against a domain you've asked me to
+              check. Full methodology at{" "}
               <a href="/methodology" style={{ color: "var(--ice)" }}>/methodology</a>.
             </FaqItem>
             <FaqItem question="Do you store my data?">
               Scan results are kept in my database so I can track how exposure patterns
-              change across AU businesses over time. Your email goes only into my contact list —
-              never sold, never shared with third parties, suppressed forever if you reply{" "}
+              change across AU businesses over time. Your email goes only into my contact list.
+              Never sold, never shared with third parties. Suppressed forever if you reply{" "}
               <code>remove</code>.
             </FaqItem>
           </div>
@@ -561,7 +565,7 @@ export default function ScanPage() {
             letterSpacing: "0.05em",
           }}
         >
-          See What a Hacker Can See — for Free
+          See What a Hacker Can See, for Free
         </h2>
         <p
           style={{
@@ -594,7 +598,7 @@ export default function ScanPage() {
         >
           Built with AI assistance. Every scan finding is reviewed and signed off
           by <strong style={{ color: "var(--gold)" }}>Kyle Deligny (ABN 34 318 502 254)</strong>{" "}
-          before delivery. My ABN is on every page — the accountability is mine.
+          before delivery. My ABN is on every page. The accountability is mine.
         </p>
         <OmegaSeal
           size={48}

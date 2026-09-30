@@ -5,18 +5,18 @@ import OrderForm, { Field } from "@/components/OrderForm";
 import { DISPLAY } from "@/lib/pricing";
 
 const TIERS = [
-  { value: "growth", label: `AI Growth Partner — ${DISPLAY.AI_GROWTH_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
-  { value: "ops", label: `AI Ops Partner — ${DISPLAY.AI_OPS_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
-  { value: "embedded", label: `Embedded AI Partner — ${DISPLAY.AI_EMBEDDED_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
-  { value: "not_sure", label: "Not sure yet — start with the free AI audit" },
+  { value: "growth", label: `AI Growth Partner, ${DISPLAY.AI_GROWTH_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "ops", label: `AI Ops Partner, ${DISPLAY.AI_OPS_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "embedded", label: `Embedded AI Partner, ${DISPLAY.AI_EMBEDDED_PARTNER} (${DISPLAY.AI_RETAINER_MIN})` },
+  { value: "not_sure", label: "Not sure yet, start with the free AI audit" },
 ];
 
 const BUDGETS = [
   "Under AU$2,000 (pilot range)",
-  "AU$2,000 – AU$5,000",
-  "AU$5,000 – AU$10,000",
-  "AU$10,000 – AU$20,000",
-  "AU$20,000 – AU$50,000",
+  "AU$2,000 to AU$5,000",
+  "AU$5,000 to AU$10,000",
+  "AU$10,000 to AU$20,000",
+  "AU$20,000 to AU$50,000",
   "AU$50,000+",
   "Not sure yet",
 ];
@@ -72,7 +72,7 @@ function SelectField({
           boxSizing: "border-box",
         }}
       >
-        {!defaultValue && <option value="">— Select —</option>}
+        {!defaultValue && <option value="">Select</option>}
         {opts.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
@@ -89,9 +89,9 @@ export default function OrderAiClient() {
   const validTiers = new Set(TIERS.map((t) => t.value));
   const defaultTier = validTiers.has(rawTier) ? rawTier : "not_sure";
 
-  const heading = "AI Partnership — Enquiry";
+  const heading = "AI Partnership Enquiry";
 
-  const subheading = `Tell Kyle what's most repetitive in your business. He'll confirm the tier that fits — Growth ${DISPLAY.AI_GROWTH_PARTNER}, Ops ${DISPLAY.AI_OPS_PARTNER}, Embedded ${DISPLAY.AI_EMBEDDED_PARTNER} — all ${DISPLAY.AI_RETAINER_MIN}. Month 1 is the build, months 2-3 optimise, then it's month-to-month.`;
+  const subheading = `Tell Kyle what's most repetitive in your business. He'll confirm the tier that fits: Growth ${DISPLAY.AI_GROWTH_PARTNER}, Ops ${DISPLAY.AI_OPS_PARTNER}, Embedded ${DISPLAY.AI_EMBEDDED_PARTNER}, all ${DISPLAY.AI_RETAINER_MIN}. Month 1 is the build, months 2 to 3 optimise, then it's month-to-month.`;
 
   return (
     <main

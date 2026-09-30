@@ -5,9 +5,9 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { AUDIT_BOOK_HREF } from "@/lib/config";
 
-const META_TITLE = "Black Ice — The Human × AI Operating Doctrine · TITANOS";
+const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
-  "A free field guide to frictionless thinking, compressed knowledge, and governed AI autonomy — the same operating doctrine TITANOS is built and run on.";
+  "A free field guide to frictionless thinking, compressed knowledge, and governed AI autonomy. The same operating doctrine TITANOS is built and run on.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
 const PRIMITIVES: { name: string; line: string }[] = [
   { name: "OBSERVE", line: "See what's actually happening before reacting to it." },
   { name: "ORIENT", line: "Place it against the objective that actually matters right now." },
-  { name: "SUBZERO", line: "One quiet pass — state, signal, friction, lever — before acting." },
+  { name: "SUBZERO", line: "One quiet pass, state, signal, friction, lever, before acting." },
   { name: "EXPAND", line: "Let the idea get bigger before you judge it." },
   { name: "COMPRESS", line: "Turn what worked into one reusable rule." },
   { name: "QUESTION", line: "Nothing is sacred. Inspect the assumption load-bearing the plan." },
   { name: "RED-TEAM", line: "Attack it to make it stronger, not to win an argument." },
-  { name: "CHOOSE", line: "Pick the highest-leverage move under real constraints." },
+  { name: "CHOOSE", line: "Pick the one move that matters most under real constraints." },
   { name: "EXECUTE", line: "Ship the decision. Discussion has a deadline." },
   { name: "MEASURE", line: "Confidence isn't evidence. Check what actually happened." },
   { name: "RELEASE", line: "Let go of what didn't survive contact with reality." },
@@ -43,10 +43,10 @@ export default function BlackIcePage() {
   return (
     <>
       <PageHero
-        badge="TITANOS OPERATING DOCTRINE — FREE"
+        badge="TITANOS OPERATING DOCTRINE · FREE"
         title="BLACK ICE"
         tagline="A human × AI operating doctrine for frictionless thinking, compressed knowledge, and governed autonomy."
-        sub="Not a productivity gimmick. The actual framework TITANOS is built and operated on — publishing it because it's useful on its own, not because it's bait."
+        sub="Not a productivity gimmick. It's the actual framework TITANOS runs on, shared here because it's genuinely useful on its own."
       >
         <AnimatedButton href="/black-ice/doctrine" variant="primary">
           READ THE FIELD GUIDE
@@ -57,25 +57,6 @@ export default function BlackIcePage() {
       </PageHero>
 
       <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
-        <p
-          aria-hidden="true"
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            fontStyle: "italic",
-            fontWeight: 400,
-            color: "var(--gold-bright)",
-            fontSize: "clamp(1.4rem, 1.4vw + 1.1rem, 2.1rem)",
-            textAlign: "center",
-            maxWidth: "var(--maxw-content)",
-            margin: "0 auto",
-            lineHeight: 1.5,
-          }}
-        >
-          A polished black surface. Enormous depth underneath.
-        </p>
-      </SectionReveal>
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -91,17 +72,19 @@ export default function BlackIcePage() {
             WHAT BLACK ICE ACTUALLY IS
           </h2>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, marginBottom: 14 }}>
-            A polished black surface with enormous depth underneath — that&apos;s the whole
-            metaphor. Most &quot;AI productivity&quot; content is either empty branding or a
-            prompt-hack thread. Black Ice is neither: it&apos;s a small set of reusable
-            primitives for observing a situation, cutting the noise out of it, and acting on
-            what&apos;s left — with AI doing the keystroke-level work and a human staying at
-            the one point that actually needs judgement.
+            A polished black surface, enormous depth underneath. That&apos;s the whole idea.
+            Most &quot;AI productivity&quot; content is either empty branding or a
+            prompt-hack thread. Black Ice is neither. It&apos;s a small set of reusable
+            habits for seeing a situation clearly, cutting the noise out of it, and acting on
+            what&apos;s left, with AI doing the keystroke work and a human holding the one
+            decision that actually needs judgement.
           </p>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-            It&apos;s deliberately not mystical. Where the language borrows metaphor —
-            ice, depth, stillness — the field guide says so explicitly and never dresses a
-            metaphor up as a scientific claim. See the full distinction on the doctrine page.
+            Worth checking on your own week: how much of it is spent on work an AI could
+            already do, versus the one call only you should be making? The language here
+            borrows metaphor on purpose, ice, depth, stillness. The doctrine page says
+            exactly where that&apos;s a metaphor and where it&apos;s a mechanism, and never
+            dresses one up as the other.
           </p>
         </div>
       </SectionReveal>

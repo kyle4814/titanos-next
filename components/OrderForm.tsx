@@ -129,7 +129,7 @@ export default function OrderForm({
   if (status === "success") {
     const label = ORDER_LABEL[orderType];
     const followUpHref = `mailto:kyle@titanos.tech?subject=${encodeURIComponent(
-      `Following up on my ${label} enquiry${submittedName ? ` — ${submittedName}` : ""}`,
+      `Following up on my ${label} enquiry${submittedName ? ` (${submittedName})` : ""}`,
     )}`;
     return (
       <div
@@ -173,7 +173,7 @@ export default function OrderForm({
               margin: "0 0 20px",
             }}
           >
-            You told me: &ldquo;{submittedHighlight}&rdquo; — that&apos;s exactly what I&apos;ll be
+            You told me: &ldquo;{submittedHighlight}&rdquo;. That&apos;s exactly what I&apos;ll be
             thinking about.
           </p>
         )}

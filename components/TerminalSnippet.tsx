@@ -107,7 +107,7 @@ export default function TerminalSnippet() {
   return (
     <div
       ref={rootRef}
-      aria-label="Example external scan output — redacted"
+      aria-label="Example external scan output, redacted"
       role="figure"
       style={{
         background: "var(--vault-bg)",

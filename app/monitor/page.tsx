@@ -13,7 +13,7 @@ import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaS
 // already seen their exposure and wants ongoing visibility into changes.
 // Register: mid (plainer than /scan, less owner-hand-holdy than /compliance).
 
-const META_TITLE = `Titanos Monitor — Monthly Security Check for Your Business | ${DISPLAY.MONITOR_MONTHLY}`;
+const META_TITLE = `Titanos Monitor: Monthly Security Check for Your Business | ${DISPLAY.MONITOR_MONTHLY}`;
 const META_DESC = `Monthly security check + what changed since last month + alerts for new vulnerabilities in your software + privacy law briefing. ${DISPLAY.MONITOR_MONTHLY}, cancel any time.`;
 
 export const metadata: Metadata = {
@@ -37,11 +37,11 @@ export const metadata: Metadata = {
 };
 
 const WHAT_YOU_GET = [
-  "A fresh security check of your domain every month — same engine as the free check, run on the same calendar date each month",
+  "A fresh security check of your domain every month, same engine as the free check, run on the same calendar date each month",
   "A plain-English summary: what changed, what's new, what's been resolved",
-  "An alert when a newly published software vulnerability matches something you're running — lands in your inbox the day it's detected",
+  "An alert when a newly published software vulnerability matches something you're running. Lands in your inbox the day it's detected",
   "A monthly briefing on privacy law updates relevant to your industry (AU/NZ/SG)",
-  "Everything to your inbox — no dashboard, no portal, no login",
+  "Everything to your inbox. No dashboard, no portal, no login",
 ];
 
 const WHAT_IT_IS_NOT = [
@@ -49,7 +49,7 @@ const WHAT_IT_IS_NOT = [
   "Not an annual contract",
   "Not a 6-touch sales sequence dressed up as a product",
   "Not a coupon-pleading retention call when you want to cancel",
-  "Just a monthly email worth reading — and one click to stop it forever",
+  "Just a monthly email worth reading, and one click to stop it forever",
 ];
 
 export default function MonitorPage() {
@@ -92,22 +92,22 @@ export default function MonitorPage() {
       {
         "@type": "Question",
         name: "How does the first month work?",
-        acceptedAnswer: { "@type": "Answer", text: "The first scan runs within 1 business day of subscribing. That scan is the baseline — the email reports what's exposed today, not a delta yet. From month two onward, every email is the delta." },
+        acceptedAnswer: { "@type": "Answer", text: "The first scan runs within 1 business day of subscribing. That scan is the baseline. The email reports what's exposed today, not a delta yet. From month two onward, every email is the delta." },
       },
       {
         "@type": "Question",
         name: "How do I cancel?",
-        acceptedAnswer: { "@type": "Answer", text: "One click from the Stripe-hosted billing portal, linked in every monthly email and on the post-checkout success page. No retention coupons, no phone transfer, no email loops — the subscription ends immediately, no further charges." },
+        acceptedAnswer: { "@type": "Answer", text: "One click from the Stripe-hosted billing portal, linked in every monthly email and on the post-checkout success page. No retention coupons, no phone transfer, no email loops. The subscription ends immediately, no further charges." },
       },
       {
         "@type": "Question",
         name: "Does this replace a real audit or pen-test?",
-        acceptedAnswer: { "@type": "Answer", text: "No. Monitor is external-only — what an attacker can see from the public internet. It catches drift, new exposure, and freshly-published CVEs matching the stack. For internal posture, controls, and policy compliance, the compliance pack or a separate engagement is the right fit." },
+        acceptedAnswer: { "@type": "Answer", text: "No. Monitor is external-only: what an attacker can see from the public internet. It catches drift, new exposure, and freshly-published CVEs matching the stack. For internal posture, controls, and policy compliance, the compliance pack or a separate engagement is the right fit." },
       },
       {
         "@type": "Question",
         name: "Can I add more domains?",
-        acceptedAnswer: { "@type": "Answer", text: "Yes — subscribe once per domain. For multiple domains, a single combined invoice can be set up instead of separate subscriptions." },
+        acceptedAnswer: { "@type": "Answer", text: "Yes. Subscribe once per domain. For multiple domains, a single combined invoice can be set up instead of separate subscriptions." },
       },
     ],
   };
@@ -126,7 +126,7 @@ export default function MonitorPage() {
       <PageHero
         badge="TITANOS MONITOR · RECURRING"
         title="Your business's security gaps change every month. Most owners find out when something breaks."
-        tagline={`Titanos Monitor finds out first — a fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, guilt-free, any time.`}
+        tagline={`Titanos Monitor finds out first. A fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, guilt-free, any time.`}
         sub="Same engine as the free check, run on a schedule, with a month-over-month summary and vulnerability alerts matched to your software versions. Plain-English email to your inbox. No dashboard. No contract. No retention call."
         trustLine={
           <>
@@ -154,7 +154,7 @@ export default function MonitorPage() {
           ENQUIRE FIRST →
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
-          Cancel any time from the billing portal — one click, guilt-free. No email, no retention call.
+          Cancel any time from the billing portal. One click, guilt-free. No email, no retention call.
         </p>
       </PageHero>
 
@@ -166,7 +166,7 @@ export default function MonitorPage() {
       >
         <Inscription
           label="Same engine as the free check · run on a schedule · nothing dressed up"
-          sub="Exposure doesn't wait for your next audit. Neither does the scan."
+          sub="Exposure doesn't wait for your next audit. Neither does the scan. Ask yourself: when did you last actually check what changed on your site since last month?"
         >
           What changed last month, said plainly.
           <br />
@@ -230,7 +230,7 @@ export default function MonitorPage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The refusal list</SystemLabel>
           <SectionHeading
             title="What It Is Not"
-            lead="The opt-out is built in. The product is the email — not a sales funnel wrapped around it."
+            lead="The opt-out is built in. The product is the email, not a sales funnel wrapped around it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ul
@@ -281,7 +281,7 @@ export default function MonitorPage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The commitment</SystemLabel>
           <SectionHeading
             title="One Price. Cancel in One Click."
-            lead="Monthly or annual — annual saves about two months. No contract either way."
+            lead="Monthly or annual. Annual saves about two months. No contract either way."
           />
           <TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
@@ -334,7 +334,7 @@ export default function MonitorPage() {
               >
                 Recurring AUD subscription via Stripe. First scan within 1 business day of
                 subscribing. Same calendar date every month after that. Cancel any time
-                from the Stripe-hosted billing portal — one click, no retention call.
+                from the Stripe-hosted billing portal. One click, no retention call.
               </p>
               <div
                 style={{
@@ -381,8 +381,8 @@ export default function MonitorPage() {
           Haven&apos;t had the free check yet?{" "}
           <a href="/scan#request" style={{ color: "var(--gold)" }}>
             Start with the free security check
-          </a>{" "}
-          — then decide if monthly monitoring is worth {DISPLAY.MONITOR_MONTHLY} to you. →
+          </a>
+          , then decide if monthly monitoring is worth {DISPLAY.MONITOR_MONTHLY} to you. →
         </p>
       </SectionReveal>
 
@@ -400,35 +400,35 @@ export default function MonitorPage() {
               (newly visible services, new software vulnerabilities matched to your versions,
               certificate changes), what&apos;s resolved (anything you fixed), and a
               one-paragraph update on any privacy law changes relevant to your industry. If
-              nothing has changed, the email says so honestly — I&apos;d rather you stop
+              nothing has changed, the email says so honestly. I&apos;d rather you stop
               subscribing than pad findings.
             </FaqItem>
             <FaqItem question="How does the first month work?">
               The first scan runs within 1 business day of you subscribing. That scan is your
-              baseline — the email tells you what you have exposed today, not a delta yet.
+              baseline. The email tells you what you have exposed today, not a delta yet.
               From month two onward, every email is the delta.
             </FaqItem>
             <FaqItem question="How do I cancel?">
-              One click from the billing portal — link is in every monthly email and on your
+              One click from the billing portal. The link is in every monthly email and on your
               success page after checkout. The portal is Stripe-hosted; no retention coupons,
               no &ldquo;wait, let me transfer you,&rdquo; no email loops. The subscription
               ends immediately, no further charges.
             </FaqItem>
-            <FaqItem question="What if I bought the compliance pack — do I need this on top?">
+            <FaqItem question="Already bought the compliance pack? Do I need this too?">
               No. The {DISPLAY.PACK_PRICE} pack includes the first{" "}
               {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor free, covering your
               30-day review and beyond. After month {PRICING.PACK_INCLUDED_MONITOR_MONTHS}{" "}
-              it continues at {DISPLAY.MONITOR_MONTHLY} only if you opt in — no silent
+              it continues at {DISPLAY.MONITOR_MONTHLY} only if you opt in. No silent
               charge. I&apos;ll email you the exact date before any meter would start.
             </FaqItem>
             <FaqItem question="Does this replace a real audit or pen-test?">
-              No. Monitor is external-only — what an attacker can see from the public
+              No. Monitor is external-only: what an attacker can see from the public
               internet. It catches drift, new exposure, and freshly-published CVEs that match
               your stack. For internal posture, controls, and policy compliance, you want the
               compliance pack at {DISPLAY.PACK_PRICE} or a separate engagement.
             </FaqItem>
             <FaqItem question="Can I add more domains?">
-              Yes — subscribe once per domain. If you operate multiple, email me and I&apos;ll
+              Yes. Subscribe once per domain. If you operate multiple, email me and I&apos;ll
               set up a single invoice instead of separate subscriptions.
             </FaqItem>
           </div>
@@ -472,7 +472,7 @@ export default function MonitorPage() {
           }}
         >
           {DISPLAY.MONITOR_MONTHLY} or {DISPLAY.MONITOR_ANNUAL} annual. First scan within
-          1 business day. Cancel any time — one click.
+          1 business day. Cancel any time. One click.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <MonitorCheckoutButton
@@ -489,7 +489,7 @@ export default function MonitorPage() {
         </div>
         <OmegaSeal
           style={{ marginTop: 40 }}
-          caption="One click to start, one click to stop — the subscription doesn't outlast your interest in it."
+          caption="One click to start, one click to stop. The subscription doesn't outlast your interest in it."
         />
       </SectionReveal>
     </>

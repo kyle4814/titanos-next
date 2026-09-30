@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Myth.tsx — the visual vocabulary of TITANOS.
+ * Myth.tsx, the visual vocabulary of TITANOS.
  *
  * WHY THIS FILE EXISTS
  * Every previous pass at "make the myth visible" changed copy while the
@@ -11,18 +11,18 @@
  * myth, reused across every page so the whole site reads as one
  * civilisation rather than a set of similarly-coloured pages.
  *
- * THE MAPPING — every primitive answers "what part of the myth is this?"
+ * THE MAPPING: every primitive answers "what part of the myth is this?"
  *
  *   OmegaSeal      THE Ω. A constitutional mark: the system has an edge,
  *                  it has rules, it knows where it ends. ONE per page,
  *                  never repeated, never decorative.
  *
- *   Inscription    THE TEMPLE. A statement set INTO the page — lintel
+ *   Inscription    THE TEMPLE. A statement set INTO the page, lintel
  *                  rules above and below, stone recess between. Used for
  *                  claims that should read as carved, not printed.
  *
  *   SystemLabel    THE MACHINE. Quiet instrumentation. Monospace, small,
- *                  letterspaced, dim — the register of something being
+ *                  letterspaced, dim, the register of something being
  *                  observed and reported by infrastructure rather than
  *                  announced by marketing.
  *
@@ -51,7 +51,7 @@
 import { type ReactNode, type CSSProperties } from "react";
 
 /* ─────────────────────────────────────────────────────────────
-   THE Ω — the seal. One per page.
+   THE Ω: the seal. One per page.
    ───────────────────────────────────────────────────────────── */
 export function OmegaSeal({
   size = 54,
@@ -60,7 +60,7 @@ export function OmegaSeal({
   style,
 }: {
   size?: number;
-  /** The rule descending from the seal — reads as the mark being set into what follows. */
+  /** The rule descending from the seal, reads as the mark being set into what follows. */
   withStem?: boolean;
   /** Optional line beneath, in the machine's voice. */
   caption?: string;
@@ -117,7 +117,7 @@ export function OmegaSeal({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   THE TEMPLE — an inscription. Carved, not printed.
+   THE TEMPLE: an inscription. Carved, not printed.
    ───────────────────────────────────────────────────────────── */
 export function Inscription({
   label,
@@ -128,7 +128,7 @@ export function Inscription({
 }: {
   /** Machine-voice line above the statement. */
   label?: string;
-  /** The statement itself — keep it short. This is a lintel, not a paragraph. */
+  /** The statement itself, keep it short. This is a lintel, not a paragraph. */
   children: ReactNode;
   /** Optional quieter line beneath. */
   sub?: ReactNode;
@@ -185,7 +185,7 @@ export function Inscription({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   THE MACHINE — instrumentation label.
+   THE MACHINE: instrumentation label.
    ───────────────────────────────────────────────────────────── */
 export function SystemLabel({
   children,
@@ -205,7 +205,7 @@ export function SystemLabel({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   THE JOURNEY — a section that knows its own depth.
+   THE JOURNEY: a section that knows its own depth.
    ───────────────────────────────────────────────────────────── */
 export function DepthIndex({
   index,
@@ -228,7 +228,7 @@ export function DepthIndex({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   ANCIENT × COMPUTATION — column ticks holding a recessed field.
+   ANCIENT × COMPUTATION: column ticks holding a recessed field.
    Corner marks read as the top of columns; the field between them
    is where modern content sits.
    ───────────────────────────────────────────────────────────── */
@@ -266,7 +266,7 @@ export function TempleFrame({
 }
 
 /* ─────────────────────────────────────────────────────────────
-   THE HUMAN — the operator's own voice, typographically distinct
+   THE HUMAN: the operator's own voice, typographically distinct
    from every other element on the site.
    ───────────────────────────────────────────────────────────── */
 export function OperatorNote({

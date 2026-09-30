@@ -27,8 +27,8 @@ const CAL_15 = SITE.CAL_15MIN_URL;
 // Fix 5g — title/og/twitter aligned. Description rewritten to reflect
 // the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
-  "Privacy Act Compliance Before 10 December 2026 — Done With You | TITANOS";
-const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations — privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
+  "Privacy Act Compliance Before 10 December 2026, Done With You | TITANOS";
+const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations: privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -54,22 +54,22 @@ const THREAD_STEPS: ThreadStep[] = [
   {
     num: "I",
     title: "Intake + External Scan",
-    body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA + backup state, what’s driving compliance). I run an external scan on your domain — a look at what an attacker can see about your business from the outside, with version-by-version CVE matching against the public NVD database. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
+    body: "You complete a 10-minute intake form (company, hosting, identity provider, MFA and backup state, what's driving compliance). I run an external scan on your domain: a look at what an attacker can see about your business from the outside, with version-by-version CVE matching against the public NVD database. Output: scan JSON plus a documented record of what you affirmed about internal posture.",
   },
   {
     num: "II",
     title: "Evidence Pack",
-    body: "Within 3 business days I send your draft pack (~17pp, 13 sections) — your privacy policy + ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified vs what you affirmed. The final evidence pack — with everything we applied together — lands within 24 hours of the working call, regulator-ready as a single PDF.",
+    body: "Within 3 business days I send your draft pack (about 17 pages, 13 sections): your privacy policy and ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified versus what you affirmed. The final evidence pack, with everything we applied together, lands within 24 hours of the working call, regulator-ready as a single PDF.",
   },
   {
     num: "III",
     title: "90-Minute Implementation Call",
-    body: "Screen-shared working session. I apply changes live: SPF / DKIM / DMARC / CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy + ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout — every change is yours.",
+    body: "Screen-shared working session. I apply changes live: SPF, DKIM, DMARC and CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy and ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout. Every change is yours.",
   },
   {
     num: "IV",
     title: "What You Control vs Your Host",
-    body: "Some controls live on Squarespace / Shopify / Xero / Cliniko — not in your hands. You get a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
+    body: "Some controls live on Squarespace, Shopify, Xero or Cliniko, not in your hands. You get a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.",
   },
   {
     num: "V",
@@ -78,8 +78,8 @@ const THREAD_STEPS: ThreadStep[] = [
   },
   {
     num: "VI",
-    title: `Months 1–${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · Titanos Monitor Free`,
-    body: `Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing — same product as Titanos Monitor, included free for ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months covering your 30-day review and beyond. After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} it continues at ${DISPLAY.MONITOR_MONTHLY} only if you opt in — no silent continuity. I'll email you the exact date before any meter would start.`,
+    title: `Months 1 to ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} · Titanos Monitor Free`,
+    body: `Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing: same product as Titanos Monitor, included free for ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months covering your 30-day review and beyond. After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} it continues at ${DISPLAY.MONITOR_MONTHLY} only if you opt in. No silent continuity. I'll email you the exact date before any meter would start.`,
   },
 ];
 
@@ -93,19 +93,19 @@ const TIMELINE = [
   {
     when: "LIVE NOW",
     title: "Your customers can sue you directly",
-    body: "Since 10 June 2025, an individual whose data you seriously mishandle can sue you under the new privacy tort — no regulator, no OAIC queue. It applies even if your turnover currently exempts you from the rest of the Act.",
+    body: "Since 10 June 2025, an individual whose data you seriously mishandle can sue you under the new privacy tort. No regulator, no OAIC queue. It applies even if your turnover currently exempts you from the rest of the Act.",
     state: "live",
   },
   {
     when: "LIVE NOW",
     title: "Your insurer can refuse the claim",
-    body: "Cyber insurers increasingly deny breach claims when baseline controls weren’t in place — things like two-factor login and keeping software up to date (the Australian government’s Essential Eight checklist). Policies commonly condition cover on documented security hygiene. Without a signed record, you’re relying on goodwill at the worst possible moment.",
+    body: "Cyber insurers increasingly deny breach claims when baseline controls weren't in place, things like two-factor login and keeping software up to date (the Australian government's Essential Eight checklist). Policies commonly condition cover on documented security hygiene. Without a signed record, you're relying on goodwill at the worst possible moment.",
     state: "live",
   },
   {
     when: "10 DECEMBER 2026",
     title: "ADM disclosure required in your privacy policy",
-    body: "Automated decision-making — including AI tools your business uses — must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M for serious or repeated interference.",
+    body: "Automated decision-making, including AI tools your business uses, must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M for serious or repeated interference.",
     state: "future",
   },
   {
@@ -117,23 +117,23 @@ const TIMELINE = [
   {
     when: "LIVE NOW",
     title: "The regulator is now checking proactively",
-    body: "Since January 2026 the OAIC has run compliance sweeps across sectors including real estate, pharmacies, and licensed venues — examining businesses before any complaint is made. “We’ve had no problems” is no longer the same as “we won’t be looked at.”",
+    body: "Since January 2026 the OAIC has run compliance sweeps across sectors including real estate, pharmacies, and licensed venues, examining businesses before any complaint is made. “We've had no problems” is no longer the same as “we won't be looked at.”",
     state: "live",
   },
 ];
 
-// Compact "also on the calendar" row — non-headline deadlines.
+// Compact "also on the calendar" row: non-headline deadlines.
 const ALSO_ON_CALENDAR = [
-  "4 March 2026 — Mandatory IoT security standards live. Cascades to any business reselling or operating connected devices.",
-  "2 August 2026 — EU AI Act enforcement begins. Applies to AU companies with EU customers.",
+  "4 March 2026: mandatory IoT security standards live. Cascades to any business reselling or operating connected devices.",
+  "2 August 2026: EU AI Act enforcement begins. Applies to AU companies with EU customers.",
 ];
 
 const YOU_CONTROL = [
-  "Privacy policy — written plain English, covering what you hold, why, who sees it, plus the AI/automated tools disclosure",
-  "Breach-response runbook — a step-by-step plan for the day you get hacked (legally required under NDB)",
-  "DNS hygiene (SPF, DKIM, DMARC, CAA records) — so scammers can't impersonate your domain",
-  "Microsoft 365 / Google Workspace security defaults + MFA enabled across your team",
-  "Vendor risk register — one page mapping every third-party service that touches customer data",
+  "Privacy policy, written in plain English, covering what you hold, why, who sees it, plus the AI/automated tools disclosure",
+  "Breach-response runbook: a step-by-step plan for the day you get hacked (legally required under NDB)",
+  "DNS hygiene (SPF, DKIM, DMARC, CAA records) so scammers can't impersonate your domain",
+  "Microsoft 365 / Google Workspace security defaults plus MFA enabled across your team",
+  "Vendor risk register: one page mapping every third-party service that touches customer data",
   "Signed government security checklist (Essential Eight, Maturity Level 1)",
   "Staff access management",
 ];
@@ -149,28 +149,28 @@ const HOST_CONTROLS = [
 // Six obligations first (matches the six-part framing on homepage),
 // then engagement mechanics, then evidence deliverables.
 const INCLUDED = [
-  "A proper privacy policy written and deployed live — covers what customer data you hold, why, how it's stored, who it's shared with (not a copy-paste from 2015)",
-  "A breach-response runbook integrated into your shared drive — the step-by-step plan for the day you get hacked, so you hit the mandatory NDB notification deadline instead of panicking",
-  "Email security records applied on the call (SPF, DKIM, DMARC) — so scammers can't impersonate your business domain",
-  "Login security hardening applied with you (Microsoft 365 / Google Workspace security defaults + MFA across your team)",
-  "Vendor risk register — a one-page record of every third-party service touching your customer data, so you know exactly what you hold and where it lives",
-  "AI + automated tools disclosure added to your privacy policy — the new rule: if you use AI on customer info, you have to say so",
-  "90-minute implementation working call — I apply all six with you on a screen-share, no PDF-only hand-off",
-  "Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1) — the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints — those are decided on the facts of an incident)",
+  "A proper privacy policy written and deployed live: covers what customer data you hold, why, how it's stored, who it's shared with (not a copy-paste from 2015)",
+  "A breach-response runbook integrated into your shared drive: the step-by-step plan for the day you get hacked, so you hit the mandatory NDB notification deadline instead of panicking",
+  "Email security records applied on the call (SPF, DKIM, DMARC), so scammers can't impersonate your business domain",
+  "Login security hardening applied with you (Microsoft 365 / Google Workspace security defaults plus MFA across your team)",
+  "Vendor risk register: a one-page record of every third-party service touching your customer data, so you know exactly what you hold and where it lives",
+  "AI and automated tools disclosure added to your privacy policy: the new rule is that if you use AI on customer info, you have to say so",
+  "90-minute implementation working call. I apply all six with you on a screen-share, no PDF-only hand-off",
+  "Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1), the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints, those are decided on the facts of an incident)",
   "30-day review call to re-audit anything that drifted, then sign the attestation",
-  "13-section evidence pack documenting all of the above (~17pp) — proof of work for your insurer or regulator",
-  "External scan with you-vs-host responsibility split (same engine as the free scan)",
-  "Sample of the pack shape — my own, published in full at /our-evidence-pack",
-  `${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (then optional at ${DISPLAY.MONITOR_MONTHLY} — opt-in, no auto-charge)`,
+  "13-section evidence pack documenting all of the above (about 17 pages), proof of work for your insurer or regulator",
+  "External scan with a you-versus-host responsibility split (same engine as the free scan)",
+  "Sample of the pack shape: my own, published in full at /our-evidence-pack",
+  `${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free (then optional at ${DISPLAY.MONITOR_MONTHLY}, opt-in, no auto-charge)`,
 ];
 
 export default function CompliancePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Titanos AU Privacy Act + Essential Eight Compliance — Done With You",
+    name: "Titanos AU Privacy Act and Essential Eight Compliance, Done With You",
     description:
-      "Done-with-you compliance engagement for Australian SMBs facing the 10 December 2026 Privacy Act ADM disclosure deadline. Includes 13-section evidence pack, external scan with you-vs-host split, 90-minute implementation working call, DNS hygiene + M365/Google Workspace hardening done with you, privacy policy + ADM disclosure deployed, NDB runbook integrated, 30-day review call, signed compliance attestation letter, quarterly re-scan + delta report, and 3 months of Titanos Monitor included free.",
+      "Done-with-you compliance engagement for Australian SMBs facing the 10 December 2026 Privacy Act ADM disclosure deadline. Includes a 13-section evidence pack, an external scan with a you-versus-host split, a 90-minute implementation working call, DNS hygiene and M365/Google Workspace hardening done with you, privacy policy and ADM disclosure deployed, NDB runbook integrated, a 30-day review call, a signed compliance attestation letter, quarterly re-scan and delta report, and 3 months of Titanos Monitor included free.",
     brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
     offers: {
       "@type": "Offer",
@@ -192,42 +192,47 @@ export default function CompliancePage() {
       {
         "@type": "Question",
         name: "How the working call works",
-        acceptedAnswer: { "@type": "Answer", text: "A single 90-minute video call where changes are applied together. You share screen for your DNS, your Microsoft 365 or Google Workspace admin console, and your website CMS. Each change is walked through as you make it — no opaque hand-offs. By the end of the call, the privacy policy is deployed, the ADM disclosure is live, the M365/Workspace hardening is applied, the DNS records are corrected, and the NDB runbook is integrated." },
+        acceptedAnswer: { "@type": "Answer", text: "A single 90-minute video call where changes are applied together. You share screen for your DNS, your Microsoft 365 or Google Workspace admin console, and your website CMS. Each change is walked through as you make it, no opaque hand-offs. By the end of the call, the privacy policy is deployed, the ADM disclosure is live, the M365/Workspace hardening is applied, the DNS records are corrected, and the NDB runbook is integrated." },
       },
       {
         "@type": "Question",
         name: "What access you need to grant",
-        acceptedAnswer: { "@type": "Answer", text: "For the working call, you remain logged into your own admin consoles — credentials are never received. You'll need owner or admin access to: your DNS provider, your Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy deployment, and optionally your customer-record systems for the vendor risk register." },
+        acceptedAnswer: { "@type": "Answer", text: "For the working call, you remain logged into your own admin consoles: credentials are never received. You'll need owner or admin access to your DNS provider, your Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy deployment, and optionally your customer-record systems for the vendor risk register." },
       },
       {
         "@type": "Question",
         name: "I'm too small for this to matter",
-        acceptedAnswer: { "@type": "Answer", text: "The statutory tort is live now — since 10 June 2025, a customer or ex-employee can take a business to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope." },
+        acceptedAnswer: { "@type": "Answer", text: "The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can take a business to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope." },
       },
       {
         "@type": "Question",
-        name: "My website is on Squarespace — can you even help?",
+        name: "My website is on Squarespace. Can you even help?",
         acceptedAnswer: { "@type": "Answer", text: "Yes. The audit works on any hosting provider. What you control (privacy policy, DNS records, account-level MFA, vendor register) is documented versus what Squarespace controls (TLS, HSTS, server config), with exact escalation language for the parts they own." },
       },
       {
         "@type": "Question",
-        name: "I use Microsoft 365 — do you cover that?",
-        acceptedAnswer: { "@type": "Answer", text: "Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes that satisfy most Essential Eight Maturity Level 1 requirements, applied together on the 90-minute working call — typically a 15-minute admin sequence covering MFA, conditional access, and audit logging." },
+        name: "I use Microsoft 365. Do you cover that?",
+        acceptedAnswer: { "@type": "Answer", text: "Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes that satisfy most Essential Eight Maturity Level 1 requirements, applied together on the 90-minute working call, typically a 15-minute admin sequence covering MFA, conditional access, and audit logging." },
       },
       {
         "@type": "Question",
         name: "Is the monthly fee mandatory?",
-        acceptedAnswer: { "@type": "Answer", text: `No. The pack is a one-time ${DISPLAY.PACK_PRICE}. The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor are included free. After that it's entirely optional — ${DISPLAY.MONITOR_MONTHLY} for ongoing scans and briefings, nothing if not wanted. No auto-charge unless affirmatively subscribed.` },
+        acceptedAnswer: { "@type": "Answer", text: `No. The pack is a one-time ${DISPLAY.PACK_PRICE}. The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor are included free. After that it's entirely optional: ${DISPLAY.MONITOR_MONTHLY} for ongoing scans and briefings, nothing if not wanted. No auto-charge unless affirmatively subscribed.` },
       },
       {
         "@type": "Question",
         name: "What's the difference between this and Vanta or Drata?",
-        acceptedAnswer: { "@type": "Answer", text: `Vanta and Drata are US$10-15K/yr enterprise compliance tools shaped for SOC 2. This is a ${DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at ${DISPLAY.MONITOR_MONTHLY} after the included ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing Privacy Act + Essential Eight. Different buyer, different price, different geography, different framework.` },
+        acceptedAnswer: { "@type": "Answer", text: `Vanta and Drata are US$10 to 15K a year enterprise compliance tools shaped for SOC 2. This is a ${DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at ${DISPLAY.MONITOR_MONTHLY} after the included ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing Privacy Act and Essential Eight. Different buyer, different price, different geography, different framework.` },
       },
       {
         "@type": "Question",
         name: "Can you guarantee I'll be compliant?",
-        acceptedAnswer: { "@type": "Answer", text: "No vendor honestly can — compliance is determined by the regulator on the facts of a specific incident. What's delivered is the evidence pack regulators expect to see when assessing whether reasonable steps were taken." },
+        acceptedAnswer: { "@type": "Answer", text: "No vendor honestly can. Compliance is determined by the regulator on the facts of a specific incident. What's delivered is the evidence pack regulators expect to see when assessing whether reasonable steps were taken." },
+      },
+      {
+        "@type": "Question",
+        name: "What happens if you're unavailable later?",
+        acceptedAnswer: { "@type": "Answer", text: "You keep everything produced: the signed self-attestation, the 13-section evidence pack, your privacy policy and ADM disclosure as deployed, your NDB runbook, the vendor risk register, and your DNS/M365 hardening notes. The attestation remains valid as a dated record of the reasonable steps taken at that point in time (compliance is always a snapshot, refresh annually). You are never left holding a half-finished pack." },
       },
       {
         "@type": "Question",
@@ -258,8 +263,8 @@ export default function CompliancePage() {
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
         title="Six Privacy Act obligations. One working call. Sorted before 10 December 2026."
-        tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free — versus ~AU$18,000+ for a comparable Vanta-plus-consultant setup in year one.`}
-        sub="Built for Australian SMBs (5–50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. Health providers — clinic, allied health, pharmacy, any size — are already covered by the Privacy Act. There is no small-business exemption for health."
+        tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free. Compare that to roughly AU$18,000 or more for a comparable Vanta-plus-consultant setup in year one.`}
+        sub="Built for Australian SMBs (5 to 50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. Health providers (clinic, allied health, pharmacy, any size) are already covered by the Privacy Act. There is no small-business exemption for health."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -314,14 +319,14 @@ export default function CompliancePage() {
       {/* Fix 2a + 3d — evidence-pack link + middle-rung scan routing line */}
       <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2, textAlign: "center" }}>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, maxWidth: "var(--maxw-prose)", margin: "0 auto 10px" }}>
-          See the kind of documentation this engagement produces —{" "}
+          See the kind of documentation this engagement produces.{" "}
           <a href="/our-evidence-pack" style={{ color: "var(--gold)", fontWeight: 600 }}>
             my own evidence pack, published in full →
           </a>
         </p>
         <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6, maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           Not sure you have a problem? The free scan doubles as a compliance gap
-          snapshot — start there, no card, no commitment.{" "}
+          snapshot. Start there, no card, no commitment.{" "}
           <a href="/scan" style={{ color: "var(--ice)" }}>
             Free scan →
           </a>
@@ -340,7 +345,7 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The working session</SystemLabel>
           <SectionHeading
             title="What Happens on the Call"
-            lead="90 minutes. Screen-share. I apply every change with you, live — not a PDF you have to figure out later."
+            lead="90 minutes. Screen-share. I apply every change with you, live. Not a PDF you have to figure out later."
           />
           <div
             style={{
@@ -352,10 +357,10 @@ export default function CompliancePage() {
             }}
           >
             {[
-              { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business — in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting." },
-              { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations — done by the end of the call, not homework for later." },
-              { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified — a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
-              { n: "4", title: "3 months of Titanos Monitor, free", body: `Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then ${DISPLAY.MONITOR_MONTHLY} only if you choose to continue — and I'll flag anything new that needs attention.` },
+              { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business, in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting." },
+              { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations done by the end of the call, not homework for later." },
+              { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified: a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
+              { n: "4", title: "3 months of Titanos Monitor, free", body: `Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then ${DISPLAY.MONITOR_MONTHLY} only if you choose to continue, and I'll flag anything new that needs attention.` },
             ].map((r) => (
               <div
                 key={r.n}
@@ -530,14 +535,14 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The single door</SystemLabel>
           <SectionHeading
             title="One Engagement · Done With You"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call — 3 months of monitoring included, plus regulatory briefings through the engagement whenever the rules move."
+            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call. 3 months of monitoring included, plus regulatory briefings through the engagement whenever the rules move."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
           <div style={{ textAlign: "center", marginBottom: 18 }}>
             <OperatorByline />
           </div>
           <OperatorNote style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto var(--space-8)" }}>
-            I sign the attestation myself, after I&apos;ve checked the fixes actually shipped —
+            I sign the attestation myself, after I&apos;ve checked the fixes actually shipped,
             not before. My ABN is on it because the accountability is mine, not a vendor&apos;s.
           </OperatorNote>
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -573,7 +578,7 @@ export default function CompliancePage() {
                   marginBottom: 18,
                 }}
               >
-                Privacy Act + Government Security Checklist — Done With You
+                Privacy Act and Government Security Checklist, Done With You
               </h3>
               <p
                 style={{
@@ -623,10 +628,10 @@ export default function CompliancePage() {
                     fontFamily: "var(--font-body), system-ui, sans-serif",
                   }}
                 >
-                  Drafting before the call · 90-min implementation working call ·
-                  30-day review + attestation signed · 3 months of monitoring
-                  + quarterly re-scans. Not 90 minutes total — 90 minutes
-                  is the central session.
+                  Drafting before the call, the 90-minute implementation working call,
+                  30-day review and signed attestation, 3 months of monitoring
+                  and quarterly re-scans. The 90 minutes is the central session,
+                  not the whole engagement.
                 </span>
               </div>
               <p
@@ -644,7 +649,7 @@ export default function CompliancePage() {
                 Everything you need to demonstrate &ldquo;reasonable steps&rdquo; under the
                 Privacy Act and the Australian government&apos;s baseline security
                 checklist (Essential Eight, Maturity Level 1), applied together
-                with you in a single working call — then maintained for the 3-month monitoring window.
+                with you in a single working call, then maintained for the 3-month monitoring window.
               </p>
               <ul
                 style={{
@@ -723,7 +728,7 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>After the call</SystemLabel>
           <SectionHeading
             title="How the Monitoring Works After the Pack"
-            lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack — automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
+            lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack, automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
           />
           <div
             style={{
@@ -734,19 +739,19 @@ export default function CompliancePage() {
             }}
           >
             <MonitorTimelineRow
-              when={`Months 1–${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
-              title="Free + automatic"
-              body={`Monthly external scan, delta report, CVE alerts matched to your stack, and a regulatory briefing land in your inbox. Same product as Titanos Monitor — included with the pack.`}
+              when={`Months 1 to ${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
+              title="Free and automatic"
+              body={`Monthly external scan, delta report, CVE alerts matched to your stack, and a regulatory briefing land in your inbox. Same product as Titanos Monitor, included with the pack.`}
             />
             <MonitorTimelineRow
               when={`7 days before month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS + 1}`}
               title="I email you the exact date the meter would start"
-              body={`Plain-English email: "Your ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} included months end on {date}. If you want it to continue at ${DISPLAY.MONITOR_MONTHLY}, subscribe here. If you do nothing, it simply stops — no charge, no action needed."`}
+              body={`Plain-English email: "Your ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} included months end on {date}. If you want it to continue at ${DISPLAY.MONITOR_MONTHLY}, subscribe here. If you do nothing, it simply stops. No charge, no action needed."`}
             />
             <MonitorTimelineRow
               when={`After month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
               title="Opt-in continues, silence stops it"
-              body={`Default mode: ${PRICING.MONITOR_CONTINUATION_MODE === "opt_in" ? "no charge unless you affirmatively subscribe" : `auto-continue at ${DISPLAY.MONITOR_MONTHLY} with one-click cancel in the portal`}. No auto-charge unless you choose to keep it. No retention sequence. No coupon games.`}
+              body={`Default mode: ${PRICING.MONITOR_CONTINUATION_MODE === "opt_in" ? "no charge unless you affirmatively subscribe" : `auto-continue at ${DISPLAY.MONITOR_MONTHLY} with one-click cancel in the portal`}. No auto-charge unless you choose to keep it. No retention sequence, no coupon games.`}
             />
           </div>
         </div>
@@ -764,88 +769,75 @@ export default function CompliancePage() {
             <FaqItem question="How the working call works">
               A single 90-minute video call where I apply the changes with you. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
-              CMS. I walk you through each change as you make it — no opaque hand-offs, no
-              "I’ll send you instructions and check back next week." By the end of the call, the
+              CMS. I walk you through each change as you make it, no opaque hand-offs, no
+              "I'll send you instructions and check back next week." By the end of the call, the
               privacy policy is deployed, the ADM disclosure is live, the M365/Workspace
               hardening is applied, the DNS records are corrected, and the NDB runbook is
               integrated.
             </FaqItem>
             <FaqItem question="What access you need to grant">
-              For the working call, you remain logged into your own admin consoles — I never
-              receive credentials. You’ll need owner or admin access to: your DNS provider, your
+              For the working call, you remain logged into your own admin consoles. I never
+              receive credentials. You'll need owner or admin access to your DNS provider, your
               Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy
               deployment, and (optionally) your customer-record systems for the vendor risk
               register.
             </FaqItem>
-            <FaqItem question="What I do vs what you do on the call">
-              I do: the diagnostic, the policy drafting, the specific Essential Eight setting
-              list, the DNS record values, the M365/Workspace hardening checklist, the NDB
-              runbook, the attestation letter, and the explanation of why each change is needed.
-              You do: the actual clicks inside your own admin consoles, the privacy policy
-              publish, and the staff communication once changes are live.
-            </FaqItem>
-            <FaqItem question="I’m too small for this to matter">
-              {/* Fix 3c — answer reordered to match the new fear hierarchy:
+            <FaqItem question="I'm too small for this to matter">
+              {/* Fix 3c: answer ordered to match the fear hierarchy,
                   live tort, then insurance, then ADM penalties, then Tranche 2. */}
-              The statutory tort is live now — since 10 June 2025, a customer or ex-employee can
+              The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can
               take you to court for a serious, intentional or reckless privacy breach, no
               regulator needed. Cyber insurers
-              increasingly deny breach claims when baseline controls weren’t in place. Penalties
+              increasingly deny breach claims when baseline controls weren't in place. Penalties
               already reach AU$50M for serious or repeated interference. And Tranche 2 reforms
               are positioned to remove the AU$3M small-business turnover exemption, pulling
               roughly 2.3M additional SMBs into Privacy Act scope.
             </FaqItem>
-            <FaqItem question="My website is on Squarespace — can you even help?">
+            <FaqItem question="My website is on Squarespace. Can you even help?">
               Yes. The audit works on any hosting provider. I document what you control (privacy
               policy, DNS records, account-level MFA, vendor register) versus what Squarespace
               controls (TLS, HSTS, server config), and you get the exact escalation language for
               the bits they own.
             </FaqItem>
-            <FaqItem question="I use Microsoft 365 — do you cover that?">
+            <FaqItem question="I use Microsoft 365. Do you cover that?">
               Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes
               that satisfy most Essential Eight Maturity Level 1 requirements. I apply these
-              with you on the 90-minute working call — typically a 15-minute admin sequence
+              with you on the 90-minute working call, typically a 15-minute admin sequence
               covering MFA, conditional access, and audit logging.
             </FaqItem>
             <FaqItem question="Is the monthly fee mandatory?">
-              {/* Site Fix 3 — explicit opt-in framing, no silent continuity */}
+              {/* Site Fix 3: explicit opt-in framing, no silent continuity */}
               No. The pack is a one-time {DISPLAY.PACK_PRICE}. The first{" "}
               {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
               <a href="/monitor" style={{ color: "var(--ice)" }}>Titanos Monitor</a> are
-              included free. After that it’s entirely optional —{" "}
+              included free. After that it's entirely optional:{" "}
               {DISPLAY.MONITOR_MONTHLY} if you want ongoing scans and briefings, nothing if
-              you don’t. I’ll email you the exact date before any meter would start, and
-              it’s one click to decline or cancel. No auto-charge unless you affirmatively
+              you don't. I'll email you the exact date before any meter would start, and
+              it's one click to decline or cancel. No auto-charge unless you affirmatively
               subscribe.
             </FaqItem>
-            <FaqItem question="What’s the difference between this and Vanta or Drata?">
-              Vanta and Drata are US$10–15K/yr enterprise compliance tools shaped for SOC 2.
+            <FaqItem question="What's the difference between this and Vanta or Drata?">
+              Vanta and Drata are US$10 to 15K a year enterprise compliance tools shaped for SOC 2.
               This is a {DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at{" "}
               {DISPLAY.MONITOR_MONTHLY} after the included{" "}
               {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing
-              Privacy Act + Essential Eight. Different buyer, different price, different
+              Privacy Act and Essential Eight. Different buyer, different price, different
               geography, different framework.
             </FaqItem>
-            <FaqItem question="What if my hosting provider won’t fix what you find?">
-              You get the exact escalation language. If they refuse, you have documented
-              evidence of having taken "reasonable steps" — the standard the OAIC actually
-              assesses against.
-            </FaqItem>
-            <FaqItem question="Can you guarantee I’ll be compliant?">
-              No vendor honestly can — compliance is determined by the regulator on the facts of
+            <FaqItem question="Can you guarantee I'll be compliant?">
+              No vendor honestly can. Compliance is determined by the regulator on the facts of
               a specific incident. What you get is the evidence pack regulators expect to see
               when assessing whether you took "reasonable steps."
             </FaqItem>
-            <FaqItem question="What happens if you’re unavailable later?">
-              You keep everything I produce — the signed self-attestation, the 13-section evidence
-              pack, your privacy policy + ADM disclosure as deployed, your NDB runbook, the
+            <FaqItem question="What happens if you're unavailable later?">
+              You keep everything I produce: the signed self-attestation, the 13-section evidence
+              pack, your privacy policy and ADM disclosure as deployed, your NDB runbook, the
               vendor risk register, and your DNS/M365 hardening notes. The attestation remains
               valid as a dated record of the reasonable steps taken at that point in time
-              (compliance is always a snapshot — refresh annually). I also hand over a one-page
+              (compliance is always a snapshot, refresh annually), and I hand over a one-page
               continuity sheet so another consultant can pick up the file without re-doing the
-              diagnostic. The delivered-state-on-pause clause covers mid-engagement: you keep
-              everything built to that point plus a refund of any unearned milestone. You are
-              never left holding a half-finished pack.
+              diagnostic. You keep everything built to that point plus a refund of any unearned
+              milestone. You are never left holding a half-finished pack.
             </FaqItem>
             <FaqItem question="How fast can this get done?">
               External scan within 48 hours of purchase. Working call scheduled inside 7 days.
@@ -910,9 +902,9 @@ export default function CompliancePage() {
             lineHeight: 1.7,
           }}
         >
-          One engagement, one outcome: all six obligations sorted together — privacy policy,
-          breach plan, email security, login security, data mapping, and AI disclosure —
-          with every change applied on the 90-minute working call, a signed Privacy Act +
+          One engagement, one outcome: all six obligations sorted together (privacy policy,
+          breach plan, email security, login security, data mapping, and AI disclosure),
+          with every change applied on the 90-minute working call, a signed Privacy Act and
           Essential Eight ML1 attestation letter, and the 13-section evidence pack as proof of work.
         </p>
         {/*
@@ -938,7 +930,7 @@ export default function CompliancePage() {
         </p>
         <OmegaSeal
           style={{ marginTop: 40 }}
-          caption="Built with AI assistance. Every document, every scan finding, and every attestation is reviewed and signed off by Kyle Deligny (ABN 34 318 502 254) before it reaches you — the accountability is mine, not the machine's."
+          caption="Built with AI assistance. Every document, every scan finding, and every attestation is reviewed and signed off by Kyle Deligny (ABN 34 318 502 254) before it reaches you. The accountability is mine, not the machine's."
         />
       </SectionReveal>
     </>

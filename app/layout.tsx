@@ -92,9 +92,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 // SEO-03: description trimmed under 155 chars
-const META_TITLE = "Titanos — AI systems that grow your business, privacy-compliant by design";
+const META_TITLE = "Titanos: AI systems that grow your business, privacy-compliant by design";
 const META_DESCRIPTION =
-  "I build AI systems that automate the manual work eating your week — privacy-compliant by design. Free AI audit call. Brisbane, Australia.";
+  "I build AI systems that automate the manual work eating your week, privacy-compliant by design. Free AI audit call. Brisbane, Australia.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://titanos.tech"),

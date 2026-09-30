@@ -4,8 +4,8 @@ import { useSearchParams } from "next/navigation";
 import OrderForm, { Field } from "@/components/OrderForm";
 
 const TIERS = [
-  { value: "starter", label: "Starter — 250 leads" },
-  { value: "growth", label: "Growth — 1,000 leads" },
+  { value: "starter", label: "Starter (250 leads)" },
+  { value: "growth", label: "Growth (1,000 leads)" },
   { value: "campaign", label: "Full Campaign" },
   { value: "retainer", label: "Ongoing Retainer" },
 ];
@@ -34,8 +34,8 @@ export default function OrderLeadsClient() {
     >
       <OrderForm
         orderType="leads"
-        heading="Verified AU Leads — Enquiry"
-        subheading="Tell Kyle what type of business you're trying to reach. He builds the verified list — you focus on the work, not the prospecting."
+        heading="Verified AU Leads Enquiry"
+        subheading="Tell Kyle what type of business you're trying to reach. He builds the verified list, you focus on the work, not the prospecting."
         submitLabel="SUBMIT LEADS ENQUIRY →"
         successMessage="Received. Kyle will review your target profile and come back with a scoped list proposal within 1 business day."
       >
@@ -201,7 +201,7 @@ export default function OrderLeadsClient() {
         </div>
 
         <Field
-          label="What should they do? (Your ideal use case in 1–2 sentences)"
+          label="What should they do? (Your ideal use case in 1 to 2 sentences)"
           name="scope_use_case"
           as="textarea"
           rows={3}

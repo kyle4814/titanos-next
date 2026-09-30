@@ -5,7 +5,7 @@ import { SystemLabel } from "@/components/Myth";
 
 // /our-scan merged into /scan#self-scan (consolidated 2026-07-05). Static
 // export (output: "export" in next.config.ts) has no server at request
-// time, so next.config redirects() would be silently ignored here — same
+// time, so next.config redirects() would be silently ignored here, the same
 // limitation already documented for headers() at the top of
 // next.config.ts. A client-side replace is the static-export equivalent
 // of a 301 for a fully static host (GitHub Pages).

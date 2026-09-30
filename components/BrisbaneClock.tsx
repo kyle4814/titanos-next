@@ -64,7 +64,7 @@ export default function BrisbaneClock() {
         margin: "0 0 14px",
       }}
     >
-      It&apos;s {brisbaneTime} for Kyle in Brisbane{visitorLine ? ` · ${visitorLine}` : ""} — real
+      It&apos;s {brisbaneTime} for Kyle in Brisbane{visitorLine ? ` · ${visitorLine}` : ""}. Real
       person, real timezone.
     </p>
   );

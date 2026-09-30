@@ -4,10 +4,10 @@ import OrderForm, { Field } from "@/components/OrderForm";
 import { DISPLAY } from "@/lib/pricing";
 
 const SIZES = [
-  "1–5 people",
-  "6–20 people",
-  "21–50 people",
-  "51–200 people",
+  "1 to 5 people",
+  "6 to 20 people",
+  "21 to 50 people",
+  "51 to 200 people",
   "200+ people",
 ];
 
@@ -47,7 +47,7 @@ const DRIVERS = [
 ];
 
 const TIMINGS = [
-  "ASAP — I need this within 2 weeks",
+  "ASAP, I need this within 2 weeks",
   "Within 1 month",
   "Within 3 months",
   "Before December 2026",
@@ -93,7 +93,7 @@ function SelectField({
           boxSizing: "border-box",
         }}
       >
-        <option value="">— Select —</option>
+        <option value="">Select</option>
         {options.map((o) => (
           <option key={o} value={o}>
             {o}
@@ -118,7 +118,7 @@ export default function OrderComplianceClient() {
     >
       <OrderForm
         orderType="compliance"
-        heading="Privacy Act Compliance — Enquiry"
+        heading="Privacy Act Compliance Enquiry"
         subheading={`Privacy Act compliance done with you in one working call. ${DISPLAY.PACK_PRICE} one-time. Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued.`}
         submitLabel="SUBMIT COMPLIANCE ORDER →"
         successMessage="Received. I'll review your scope and send an invoice within 1 business day. Pay by card via Stripe when you're ready."

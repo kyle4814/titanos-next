@@ -11,8 +11,8 @@ import { STATS } from "@/lib/stats";
 const LINES = [
   `${STATS.scansThisMonth}+ automated scans run this month`,
   `${STATS.uniqueBusinesses}+ AU/NZ/SG businesses in the scan corpus`,
-  "ABN 34 318 502 254 — Australian-owned, verifiable",
-  "Every finding verifiable — see the real evidence pack",
+  "ABN 34 318 502 254, Australian-owned, verifiable",
+  "Every finding verifiable: see the real evidence pack",
   "Privacy-compliant by design on every system built",
 ];
 

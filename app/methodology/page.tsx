@@ -11,9 +11,9 @@ const SECTION_COUNT = 9;
 
 // Fix 5g — title/og/twitter aligned. "banner-grade" framing dropped
 // site-wide; the long-form description here is the canonical voice.
-const META_TITLE = "Methodology — TITANOS";
+const META_TITLE = "Methodology | TITANOS";
 const META_DESC =
-  "How the Titanos security check works. External-only scan of what a hacker can see — no break-in attempts, no credential guessing. Every finding verifiable. ABN 34 318 502 254.";
+  "How the Titanos security check works. External-only scan of what a hacker can see: no break-in attempts, no credential guessing. Every finding verifiable. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -36,10 +36,10 @@ export const metadata: Metadata = {
 };
 
 const WHAT_WE_SCAN = [
-  "Open ports on your domain (standard 15-port sweep — what services are publicly listening)",
+  "Open ports on your domain (standard 15-port sweep: what services are publicly listening)",
   "Service banners (the version information your software announces when a connection is made)",
   "TLS/SSL certificate validity, expiry, and protocol versions (encrypted connection check)",
-  "HTTP security headers (HSTS, CSP, X-Frame-Options — browser protection controls)",
+  "HTTP security headers (HSTS, CSP, X-Frame-Options: browser protection controls)",
   "DNS records (publicly resolvable subdomains and email security records)",
   "Known software vulnerabilities matching the reported service versions (CVE database)",
 ];
@@ -93,7 +93,7 @@ const VERIFY: VerifyKey[] = [
           kyle@titanos.tech
         </a>{" "}
         directly to confirm any communication is genuine. (This is the footer/about
-        contact mention — not a scan request route. Use the form on{" "}
+        contact mention. Not a scan request route. Use the form on{" "}
         <a href="/scan#request" style={{ color: "var(--ice)" }}>/scan</a> for that.)
       </>
     ),
@@ -108,7 +108,7 @@ export default function MethodologyPage() {
       {
         "@type": "Question",
         name: "Is this a hacking attempt?",
-        acceptedAnswer: { "@type": "Answer", text: "No. Only what a server already broadcasts to the public internet is read — no login attempts, no password guessing, nothing invasive." },
+        acceptedAnswer: { "@type": "Answer", text: "No. Only what a server already broadcasts to the public internet is read: no login attempts, no password guessing, nothing invasive." },
       },
       {
         "@type": "Question",
@@ -131,13 +131,13 @@ export default function MethodologyPage() {
       />
       <PageHero
         title="How the Security Check Works"
-        tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet — the same information a hacker can see from their desk."
+        tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet: the same information a hacker can see from their desk."
       />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="The rule this whole practice runs on"
-          sub="Everything below is the same rule written out in detail — what gets read, what gets left alone, and how you check I kept my word."
+          sub="Everything below is the same rule written out in detail: what gets read, what gets left alone, and how you check I kept my word. Worth asking: could a stranger run the same checks on your own site right now?"
         >
           I read what the internet already broadcasts.
           <br />
@@ -152,7 +152,7 @@ export default function MethodologyPage() {
           <DepthIndex index={1} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="What I Check · What I Never Do"
-            lead="Public-facing information only. I read what the open internet can already see — nothing private, nothing that requires a login."
+            lead="Public-facing information only. I read what the open internet can already see: nothing private, nothing that requires a login."
           />
           <MirrorLists
             doTitle="What I Scan"
@@ -171,7 +171,7 @@ export default function MethodologyPage() {
           <DepthIndex index={2} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Tools Used"
-            lead="Industry-standard open-source security tooling — the same tools your auditors and threat-modellers use."
+            lead="Industry-standard open-source security tooling: the same tools your auditors and threat-modellers use."
           />
           <ul
             style={{
@@ -184,17 +184,17 @@ export default function MethodologyPage() {
             }}
           >
             <ToolItem>
-              <code>nmap</code> with banner detection (<code>-sV</code>) — port + service
+              <code>nmap</code> with banner detection (<code>-sV</code>): port + service
               identification
             </ToolItem>
             <ToolItem>
-              <code>openssl s_client</code> — TLS validation
+              <code>openssl s_client</code>: TLS validation
             </ToolItem>
             <ToolItem>
-              <code>curl</code> with custom headers — HTTP response inspection
+              <code>curl</code> with custom headers: HTTP response inspection
             </ToolItem>
             <ToolItem>
-              <code>dig</code> + <code>crt.sh</code> — DNS + certificate-transparency lookups
+              <code>dig</code> + <code>crt.sh</code>: DNS + certificate-transparency lookups
             </ToolItem>
             <ToolItem>
               NVD CVE database (publicly licensed) for version → known-vuln mapping
@@ -252,7 +252,7 @@ export default function MethodologyPage() {
           <DepthIndex index={4} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Scope"
-            lead="I scan organisations across Australia, New Zealand, and Singapore — typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
+            lead="I scan organisations across Australia, New Zealand, and Singapore, typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
           />
           <SimpleList
             items={[
@@ -347,13 +347,13 @@ export default function MethodologyPage() {
           <DepthIndex index={8} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Questions I get" />
           <FaqItem question="Is this a hacking attempt?">
-            No. I only read what your server already broadcasts to the public internet — no login attempts, no password guessing, nothing invasive. See "What I Never Do" above.
+            No. I only read what your server already broadcasts to the public internet: no login attempts, no password guessing, nothing invasive. See "What I Never Do" above.
           </FaqItem>
           <FaqItem question="Do you store my data?">
             Scan results are kept to track exposure trends over time. Your email is only used for the contact list, never sold, and suppressed immediately if you reply "remove".
           </FaqItem>
           <FaqItem question="Who are you, and why should I trust you?">
-            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254 — verifiable on the Australian Business Register. Every finding ships with the exact command used to find it.
+            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254, verifiable on the Australian Business Register. Every finding ships with the exact command used to find it.
           </FaqItem>
         </div>
       </SectionReveal>
