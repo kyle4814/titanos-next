@@ -10,12 +10,11 @@ import DeadlineCountdown from "@/components/DeadlineCountdown";
 import ScopeChecker from "@/components/ScopeChecker";
 import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
-import { SITE } from "@/lib/config";
+import { SITE, CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
-const CAL_15 = SITE.CAL_15MIN_URL;
 
 // Site Fix 3 — Monitor decoupled from the pack. The pack is a one-time
 // charge; Monitor is included free for PACK_INCLUDED_MONITOR_MONTHS, then
@@ -286,8 +285,8 @@ export default function CompliancePage() {
         <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
           GET COMPLIANT · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
-          BOOK A FIT CALL FIRST
+        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+          MESSAGE KYLE FIRST
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
@@ -701,8 +700,8 @@ export default function CompliancePage() {
                 <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
                   GET COMPLIANT · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
-                <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
-                  BOOK A FIT CALL FIRST
+                <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+                  MESSAGE KYLE FIRST
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -915,8 +914,8 @@ export default function CompliancePage() {
           <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
             GET COMPLIANT · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
-          <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
-            BOOK A FIT CALL FIRST
+          <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+            MESSAGE KYLE FIRST
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>

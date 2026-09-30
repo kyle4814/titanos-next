@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
+import ContactButtons from "@/components/ContactButtons";
 import { SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { SITE } from "@/lib/config";
 
-const META_TITLE = "You're Booked: Free AI Audit Call | Titanos";
-const META_DESC = "Your free AI audit call is booked. Here's exactly what happens before we talk.";
+const META_TITLE = "Message Kyle: Free AI Audit | Titanos";
+const META_DESC = "Message or call Kyle directly for your free AI audit. Here's what happens next.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -13,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { label: "Confirmation", detail: "Sent from cal.com, with the time and video link" },
-  { label: "Before the call", detail: "I look at your website and industry, if you gave one, and come with 2-3 starting ideas for what's worth automating" },
-  { label: "On the call", detail: "Nothing scripted or generic, it adjusts to whatever you actually tell me" },
+  { label: "Your message", detail: "Send Kyle a line on WhatsApp or Telegram, or call. Tell him what your business does and what eats your week" },
+  { label: "Before we talk", detail: "I look at your website and industry and come with 2 or 3 starting ideas for what's worth automating" },
+  { label: "The conversation", detail: "Nothing scripted or generic, it adjusts to whatever you actually tell me" },
 ];
 
 export default function AuditBookedPage() {
@@ -23,7 +25,7 @@ export default function AuditBookedPage() {
     <SectionReveal
       style={{ padding: "var(--space-30) 20px", position: "relative", zIndex: 2, textAlign: "center" }}
     >
-      <OmegaSeal caption="A commitment recorded. A human will show up." />
+      <OmegaSeal caption="A human will answer." />
 
       <h1
         style={{
@@ -36,7 +38,7 @@ export default function AuditBookedPage() {
           marginBottom: 12,
         }}
       >
-        You&apos;re in the calendar.
+        Message Kyle directly.
       </h1>
       <p
         style={{
@@ -47,12 +49,16 @@ export default function AuditBookedPage() {
           lineHeight: 1.7,
         }}
       >
-        A confirmation email is on its way from cal.com with the time and the video link.
+        No booking, no forms. Pick whichever is easiest for you and Kyle replies himself.
       </p>
+
+      <div style={{ margin: "0 auto var(--space-10)" }}>
+        <ContactButtons />
+      </div>
 
       <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", textAlign: "left" }}>
         <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 16 }}>
-          Before we talk, I will have
+          What happens next
         </SystemLabel>
         <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
           {STEPS.map((s) => (
@@ -70,7 +76,7 @@ export default function AuditBookedPage() {
 
       <OperatorNote style={{ margin: "var(--space-8) auto 0", textAlign: "left" }}>
         The one thing to bring: the most repetitive, time-consuming part of running your
-        business right now. That&apos;s the whole call.
+        business right now. That&apos;s the whole conversation.
       </OperatorNote>
 
       <p
@@ -84,11 +90,11 @@ export default function AuditBookedPage() {
           lineHeight: 1.7,
         }}
       >
-        Need to reschedule or cancel? Use the links in your confirmation email, or just email{" "}
-        <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>
-          kyle@titanos.tech
+        Prefer email? Write to{" "}
+        <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>
+          {SITE.KYLE_EMAIL}
         </a>{" "}
-        directly.
+        instead.
       </p>
 
       <p style={{ marginTop: "var(--space-10)" }}>

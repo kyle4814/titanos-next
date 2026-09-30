@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import MirrorLists from "@/components/MirrorLists";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 
 const META_TITLE = "The Black Ice Field Guide: Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -506,8 +506,8 @@ export default function BlackIceDoctrinePage() {
           systems.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-            <span data-analytics="titanos_visit">BUILD WITH TITANOS</span>
+          <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+            <span data-analytics="titanos_visit">MESSAGE KYLE</span>
           </AnimatedButton>
           <AnimatedButton href="/black-ice" variant="secondary">
             BACK TO BLACK ICE

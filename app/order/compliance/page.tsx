@@ -20,7 +20,7 @@ export default function OrderCompliancePage() {
           A scoped fix, not a generic checklist.
         </Inscription>
         <SystemLabel style={{ textAlign: "center", marginTop: 18 }}>
-          Enquiry → Kyle scopes your risk → invoice → working call booked
+          Enquiry → Kyle scopes your risk → invoice → working call arranged
         </SystemLabel>
       </section>
 

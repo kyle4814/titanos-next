@@ -8,11 +8,10 @@ import TerminalSnippet from "@/components/TerminalSnippet";
 import ScanRequestForm from "@/components/ScanRequestForm";
 import Testimonials from "@/components/Testimonials";
 import ProcessSteps from "./ProcessSteps";
-import { SITE } from "@/lib/config";
+import { CONTACT_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
-const CAL_15 = SITE.CAL_15MIN_URL;
 // Internal anchor — the on-page form section. No mailto in the primary
 // flow; the form's error state carries the only fallback link.
 const REQUEST_ANCHOR = "#request";
@@ -222,8 +221,8 @@ export default function ScanPage() {
         <AnimatedButton href={REQUEST_ANCHOR} variant="primary" ariaLabel="Request your free scan">
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
-        <AnimatedButton href={CAL_15} external variant="secondary" ariaLabel="Book a 15-minute fit call">
-          BOOK A 15-MIN FIT CALL
+        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle">
+          MESSAGE OR CALL KYLE
         </AnimatedButton>
       </PageHero>
 
@@ -442,7 +441,7 @@ export default function ScanPage() {
           <DepthIndex index={6} total={8} />
           <SectionHeading
             title="Request Your Free Scan"
-            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer a call? Book a 15-min instead."
+            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer to talk? Message or call Kyle instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ScanRequestForm />
@@ -455,9 +454,9 @@ export default function ScanPage() {
                 lineHeight: 1.6,
               }}
             >
-              Prefer a call?{" "}
-              <a href={CAL_15} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ice)" }}>
-                Book a 15-min fit call →
+              Prefer to talk?{" "}
+              <a href={CONTACT_HREF} style={{ color: "var(--ice)" }}>
+                Message or call Kyle →
               </a>
             </p>
           </div>
@@ -583,8 +582,8 @@ export default function ScanPage() {
           <AnimatedButton href={REQUEST_ANCHOR} variant="primary">
             REQUEST YOUR FREE SCAN
           </AnimatedButton>
-          <AnimatedButton href={CAL_15} external variant="primary">
-            BOOK A 15-MIN FIT CALL
+          <AnimatedButton href={CONTACT_HREF} variant="primary">
+            MESSAGE OR CALL KYLE
           </AnimatedButton>
         </div>
         <p

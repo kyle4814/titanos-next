@@ -3,7 +3,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 
 const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -51,8 +51,8 @@ export default function BlackIcePage() {
         <AnimatedButton href="/black-ice/doctrine" variant="primary">
           READ THE FIELD GUIDE
         </AnimatedButton>
-        <AnimatedButton href={AUDIT_BOOK_HREF} variant="secondary">
-          BUILD WITH TITANOS
+        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="secondary">
+          MESSAGE KYLE
         </AnimatedButton>
       </PageHero>
 
@@ -191,8 +191,8 @@ export default function BlackIcePage() {
           <AnimatedButton href="/black-ice/doctrine" variant="primary">
             <span data-analytics="field_guide_open">OPEN THE FIELD GUIDE</span>
           </AnimatedButton>
-          <AnimatedButton href={AUDIT_BOOK_HREF} variant="secondary">
-            <span data-analytics="cta_click">EXPLORE TITANOS</span>
+          <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="secondary">
+            <span data-analytics="cta_click">MESSAGE KYLE</span>
           </AnimatedButton>
         </div>
       </SectionReveal>

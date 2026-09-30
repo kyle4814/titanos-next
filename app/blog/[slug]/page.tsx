@@ -8,7 +8,7 @@ import BlogPostCard from "@/components/BlogPostCard";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SystemLabel, OmegaSeal } from "@/components/Myth";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { POSTS, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 
 export function generateStaticParams() {
@@ -251,8 +251,8 @@ export default async function BlogPostPage({
         >
           15 minutes is enough to know if there's a real gap worth closing.
         </p>
-        <AnimatedButton href={AUDIT_BOOK_HREF} variant="primary">
-          BOOK YOUR FREE AI AUDIT CALL
+        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
+          GET YOUR FREE AI AUDIT: MESSAGE KYLE
         </AnimatedButton>
       </SectionReveal>
     </>

@@ -46,9 +46,8 @@ const CSP =
   // fetch() is governed by connect-src; the legacy form-action
   // 'mailto:' directive below covers the noscript mailto fallback only.
   "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
-  // frame-src allows the inline cal.com booking embed on /audit — the
-  // audit call is booked on-page instead of forcing an external tab.
-  "frame-src https://cal.com https://vault.titanos.tech; " +
+  // frame-src allows the vault.titanos.tech partner-signup embed only.
+  "frame-src https://vault.titanos.tech; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 
@@ -171,7 +170,6 @@ export default function RootLayout({
                 name: "ABN",
                 value: "34318502254",
               },
-              sameAs: ["https://cal.com/kyle-deligny-msvz6s/15min"],
             }),
           }}
         />

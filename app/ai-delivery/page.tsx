@@ -296,7 +296,7 @@ export default function AiDeliveryPage() {
           No cost, no obligation, no pitch deck. Just a straight conversation about your business.
         </p>
         <AnimatedButton href="/audit" variant="primary">
-          Book your free AI audit call →
+          Get your free AI audit: message Kyle →
         </AnimatedButton>
       </SectionReveal>
     </>

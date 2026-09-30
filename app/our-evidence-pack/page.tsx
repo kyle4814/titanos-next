@@ -6,11 +6,10 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import OperatorByline from "@/components/OperatorByline";
 import PdfViewer from "@/components/PdfViewer";
-import { SITE } from "@/lib/config";
+import { CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
-const CAL_15 = SITE.CAL_15MIN_URL;
 const REQUEST_HREF = "/scan#request";
 
 const META_TITLE = "What's in the Compliance Pack | TITANOS";
@@ -166,7 +165,7 @@ export default function OurEvidencePackPage() {
       {
         "@type": "Question",
         name: "What happens after I see this and decide I want one for my business?",
-        acceptedAnswer: { "@type": "Answer", text: "Book a 15-minute call to confirm fit, or go straight to the compliance page and buy directly. After purchase: domain scanned within 48 hours, draft pack delivered within 3 business days, 90-minute working call scheduled, final evidence pack lands within 24 hours of that call." },
+        acceptedAnswer: { "@type": "Answer", text: "Message or call Kyle to confirm fit, or go straight to the compliance page and buy directly. After purchase: domain scanned within 48 hours, draft pack delivered within 3 business days, 90-minute working call scheduled, final evidence pack lands within 24 hours of that call." },
       },
     ],
   };
@@ -486,7 +485,7 @@ export default function OurEvidencePackPage() {
               for myself first is more honest than just claiming it.
             </FaqItem>
             <FaqItem question="What happens after I see this and decide I want one for my business?">
-              You book a 15-minute call to confirm the engagement is a fit, or you go straight to
+              You message or call me to confirm the engagement is a fit, or you go straight to
               the compliance page and buy directly. After purchase: your domain gets scanned within
               48 hours, your draft pack is delivered within 3 business days, and I schedule the
               90-minute working call where I apply every change with you. The final evidence pack,
@@ -533,8 +532,8 @@ export default function OurEvidencePackPage() {
           <AnimatedButton href="/compliance" variant="primary">
             SEE THE COMPLIANCE PACK
           </AnimatedButton>
-          <AnimatedButton href={CAL_15} external variant="secondary">
-            BOOK A 15-MIN FIT CALL
+          <AnimatedButton href={CONTACT_HREF} variant="secondary">
+            MESSAGE OR CALL KYLE
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 16 }}>

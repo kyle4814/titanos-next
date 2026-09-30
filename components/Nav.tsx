@@ -23,7 +23,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
-import { AUDIT_BOOK_HREF } from "@/lib/config";
+import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
@@ -159,7 +159,7 @@ export default function Nav() {
             <NavLink key={l.href} {...l} />
           ))}
           <Link
-            href={AUDIT_BOOK_HREF}
+            href={AUDIT_MESSAGE_HREF}
             style={{
               marginLeft: 20,
               padding: "8px 16px",
@@ -173,7 +173,7 @@ export default function Nav() {
               whiteSpace: "nowrap",
             }}
           >
-            Book your free AI audit call
+            Message Kyle for a free AI audit
           </Link>
         </div>
 
@@ -315,7 +315,7 @@ export default function Nav() {
               </div>
 
               <Link
-                href={AUDIT_BOOK_HREF}
+                href={AUDIT_MESSAGE_HREF}
                 onClick={() => setDrawerOpen(false)}
                 style={{
                   display: "flex",
@@ -332,7 +332,7 @@ export default function Nav() {
                   marginBottom: 24,
                 }}
               >
-                Book your free AI audit call
+                Message Kyle for a free AI audit
               </Link>
 
               <nav>

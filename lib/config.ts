@@ -18,9 +18,6 @@ type SiteConfig = {
   FORMSPREE_ID: string;
   MONTHLY_COMPLIANCE_SLOTS: number;
   CURRENT_BOOKING_MONTH: string;
-  CAL_15MIN_URL: string;
-  CAL_30MIN_URL: string;
-  AUDIT_CALL_URL: string;
   LINKEDIN_URL: string;
   PHOTO_PATH: string;
   API_BASE_URL: string;
@@ -62,17 +59,6 @@ export const SITE: SiteConfig = {
     timeZone: "Australia/Brisbane",
   }),
 
-  // Call URLs.
-  CAL_15MIN_URL: "https://cal.com/kyle-deligny-msvz6s/15min",
-  // OPERATOR_INPUT: create a real 30-min cal.com event, paste URL here.
-  // Until provided, AI-page scoping CTAs are relabelled "BOOK A SCOPING
-  // CALL · 15 MIN" and route to CAL_15MIN_URL.
-  CAL_30MIN_URL: "",
-
-  // Free AI Audit Call booking link — dedicated 45-min cal.com event
-  // (id 6330616), created 2026-07-16 so the audit call isn't capped at 15min.
-  AUDIT_CALL_URL: "https://cal.com/kyle-deligny-msvz6s/ai-audit",
-
   // Operator identity slots (Fix 2b).
   // OPERATOR_INPUT: paste LinkedIn profile URL.
   LINKEDIN_URL: "",
@@ -97,13 +83,21 @@ export const SITE: SiteConfig = {
   ORDER_SUBMIT_URL: "https://api.titanos.tech/order/submit",
 };
 
+// Direct contact. Kyle takes messages and calls directly: no booking
+// system, no calendar. Change a number here and every page follows.
+export const CONTACT = {
+  PHONE_DISPLAY: "0414 244 544",
+  PHONE_INTL: "+61 414 244 544",
+  TEL_HREF: "tel:+61414244544",
+  WHATSAPP_HREF:
+    "https://wa.me/61414244544?text=" +
+    encodeURIComponent("Hi Kyle, I found you on titanos.tech"),
+  TELEGRAM_HREF: "https://t.me/+61414244544",
+  HOURS: "Kyle answers 6am to 8pm Brisbane time (AEST).",
+} as const;
+
 // Derived helpers.
-// Sitewide primary CTAs route here (internal anchor) instead of the raw
-// external cal.com URL, so the audit call is booked inline via CalEmbed
-// on /audit without an external-tab hop. /audit itself still offers the
-// external link as a fallback if the embed doesn't load.
-export const AUDIT_BOOK_HREF = "/audit#book";
-export const SCOPING_CALL_URL = SITE.CAL_30MIN_URL || SITE.CAL_15MIN_URL;
-export const SCOPING_CALL_LABEL = SITE.CAL_30MIN_URL
-  ? "BOOK A 30-MIN SCOPING CALL"
-  : "BOOK A SCOPING CALL · 15 MIN";
+// Sitewide primary CTAs route to the on-page message/call block on /audit
+// (free AI audit) or to /contact. Nothing books a calendar slot.
+export const AUDIT_MESSAGE_HREF = "/audit#message";
+export const CONTACT_HREF = "/contact";
