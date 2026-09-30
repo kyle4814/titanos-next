@@ -44,12 +44,12 @@ export default function ContactButtons({ heading = null, align = "center", showH
           Message on WhatsApp
         </AnimatedButton>
         <AnimatedButton
-          href={CONTACT.TELEGRAM_HREF}
+          href={CONTACT.TELEGRAM_URL}
           external
           variant="primary"
           ariaLabel="Message Kyle on Telegram"
         >
-          Message on Telegram
+          Telegram {CONTACT.TELEGRAM_HANDLE}
         </AnimatedButton>
         <AnimatedButton
           href={CONTACT.TEL_HREF}

@@ -92,7 +92,8 @@ export const CONTACT = {
   WHATSAPP_HREF:
     "https://wa.me/61414244544?text=" +
     encodeURIComponent("Hi Kyle, I found you on titanos.tech"),
-  TELEGRAM_HREF: "https://t.me/+61414244544",
+  TELEGRAM_URL: "https://t.me/TitanOSofficial",
+  TELEGRAM_HANDLE: "@TitanOSofficial",
   HOURS: "Kyle answers 6am to 8pm Brisbane time (AEST).",
 } as const;
 
