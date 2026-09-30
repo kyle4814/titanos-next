@@ -75,6 +75,14 @@ export default function MonitorSuccessPage() {
       <div style={{ marginTop: "var(--space-8)" }}>
         <MonitorPortalLink />
       </div>
+
+      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: "var(--space-8)" }}>
+        Know someone who&apos;d want this? You can{" "}
+        <a href="/refer" style={{ color: "var(--gold)" }}>
+          refer them here
+        </a>
+        , no pressure.
+      </p>
     </SectionReveal>
   );
 }

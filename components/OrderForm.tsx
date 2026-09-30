@@ -200,6 +200,13 @@ export default function OrderForm({
             Reply here →
           </a>
         </p>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 12 }}>
+          Know someone who&apos;d want this? You can{" "}
+          <a href="/refer" style={{ color: "var(--gold)" }}>
+            refer them here
+          </a>
+          , no pressure.
+        </p>
         <style>{`
           @keyframes order-success-glow {
             0% { box-shadow: 0 0 0 0 rgb(var(--gold-rgb) / 0.35); }
