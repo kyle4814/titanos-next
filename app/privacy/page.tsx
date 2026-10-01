@@ -117,18 +117,8 @@ export default function PrivacyPage() {
               ).
             </Li>
             <Li>
-              If you message or call Kyle through WhatsApp, Telegram or a normal phone call, those
-              services handle your message under their own privacy policies. WhatsApp is operated
-              by Meta (
-              <a
-                href="https://www.whatsapp.com/legal/privacy-policy"
-                style={{ color: "var(--ice)" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                whatsapp.com/legal/privacy-policy
-              </a>
-              ) and Telegram has its own (
+              If you message or call Kyle through Telegram or a normal phone call, those services
+              handle your message under their own privacy policies. Telegram has its own (
               <a
                 href="https://telegram.org/privacy"
                 style={{ color: "var(--ice)" }}
@@ -167,7 +157,7 @@ export default function PrivacyPage() {
           <H2>How long we keep it</H2>
           <p>
             Lead data is retained for 24 months after your last engagement with us, then deleted.
-            Stripe, WhatsApp, Telegram and your phone carrier retain their portions per their own privacy frameworks.
+            Stripe, Telegram and your phone carrier retain their portions per their own privacy frameworks.
           </p>
 
           <DepthIndex index={6} total={SECTION_COUNT} />

@@ -7,7 +7,7 @@ import { Inscription, SystemLabel } from "@/components/Myth";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
-  "Message Kyle on WhatsApp or Telegram, call 0414 244 544, or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
+  "Message Kyle on Telegram, call 0414 244 544, or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,

@@ -280,7 +280,7 @@ export default function AboutPage() {
               . Email security verified (DKIM, SPF, DMARC all in place).
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "var(--gold)" }}>Phone, WhatsApp, Telegram:</strong>{" "}
+              <strong style={{ color: "var(--gold)" }}>Phone, Telegram:</strong>{" "}
               <a href={CONTACT.TEL_HREF} style={{ color: "var(--ice)" }}>
                 {CONTACT.PHONE_DISPLAY}
               </a>

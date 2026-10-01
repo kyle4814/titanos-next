@@ -89,9 +89,6 @@ export const CONTACT = {
   PHONE_DISPLAY: "0414 244 544",
   PHONE_INTL: "+61 414 244 544",
   TEL_HREF: "tel:+61414244544",
-  WHATSAPP_HREF:
-    "https://wa.me/61414244544?text=" +
-    encodeURIComponent("Hi Kyle, I found you on titanos.tech"),
   TELEGRAM_URL: "https://t.me/TitanOSofficial",
   TELEGRAM_HANDLE: "@TitanOSofficial",
   HOURS: "Kyle answers 6am to 8pm Brisbane time (AEST).",

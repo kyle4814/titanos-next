@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { label: "Your message", detail: "Send Kyle a line on WhatsApp or Telegram, or call. Tell him what your business does and what eats your week" },
+  { label: "Your message", detail: "Send Kyle a line on Telegram, or call. Tell him what your business does and what eats your week" },
   { label: "Before we talk", detail: "I look at your website and industry and come with 2 or 3 starting ideas for what's worth automating" },
   { label: "The conversation", detail: "Nothing scripted or generic, it adjusts to whatever you actually tell me" },
 ];

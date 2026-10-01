@@ -192,7 +192,7 @@ export default function AuditPage() {
           <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
             Direct line. No gatekeeper
           </SystemLabel>
-          <SectionHeading title="Message Kyle now" lead="Send a message on WhatsApp or Telegram, or just call. No booking, no forms, no waiting for a slot." />
+          <SectionHeading title="Message Kyle now" lead="Send a message on Telegram, or just call. No booking, no forms, no waiting for a slot." />
           <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
             I take every one of these myself. If automation isn&apos;t worth it for your
             business, I&apos;ll tell you on the call rather than sell you something that

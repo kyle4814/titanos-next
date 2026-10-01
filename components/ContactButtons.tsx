@@ -3,7 +3,7 @@ import { CONTACT } from "@/lib/config";
 
 /**
  * ContactButtons: the one place people reach Kyle directly.
- * WhatsApp, Telegram or a phone call. No booking, no forms.
+ * Telegram or a phone call. No booking, no forms. (Kyle, 2026-10-01: Telegram is the main base.)
  * Numbers and links live in lib/config.ts (CONTACT).
  */
 type Props = {
@@ -35,14 +35,6 @@ export default function ContactButtons({ heading = null, align = "center", showH
           alignItems: "stretch",
         }}
       >
-        <AnimatedButton
-          href={CONTACT.WHATSAPP_HREF}
-          external
-          variant="primary"
-          ariaLabel="Message Kyle on WhatsApp"
-        >
-          Message on WhatsApp
-        </AnimatedButton>
         <AnimatedButton
           href={CONTACT.TELEGRAM_URL}
           external
