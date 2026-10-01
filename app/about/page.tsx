@@ -161,9 +161,10 @@ export default function AboutPage() {
             }}
           >
             Every system live on this site, I built and I run: the free scanner, the
-            compliance pipeline, the partner network processing real Stripe payments with an
+            compliance pipeline, the partner network on live Stripe checkout with an
             append-only audit trail, and the monitoring that pages me directly the second
-            something breaks. Real clients, real money. Nothing on this page is a mockup.
+            something breaks. Nothing on this page is a mockup. No paying clients yet, which
+            is exactly why I show you my own systems first.
           </p>
           <p
             style={{

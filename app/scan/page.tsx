@@ -210,7 +210,7 @@ export default function ScanPage() {
         badge="FREE · NO LOGIN · NO CARD"
         title="Free Security Check for Your Business"
         tagline="See what a hacker can see about your business. No login. Report in your inbox within 2 business days."
-        sub="A plain-English report on every security gap visible from the public internet: open ports, expired certificates, email spoofing risks, known software weaknesses. Passive only, public records only. I only scan a domain you submit, never one you haven't asked me to look at. No card. No drip campaign: at most 3 relevant emails over 6 months, and STOP kills it forever."
+        sub="A plain-English report on every security gap visible from the public internet: open ports, expired certificates, email spoofing risks, known software weaknesses. A light, standard check of what your domain already shows the internet: a port and service scan plus public records. Only for a domain you own or are allowed to have checked, and I only ever scan a domain someone has asked me to look at. No card. No drip campaign: at most 3 relevant emails over 6 months, and STOP kills it forever."
         trustLine={
           <>
             Personally reviewed · Australian-owned ·{" "}
@@ -296,8 +296,8 @@ export default function ScanPage() {
           <OperatorNote>
             Publishing my own findings, warts included, was never optional. I ask clients to
             trust a report on their business. The least I can do is show mine first, unedited.
-            This same scan is passive and public-record only: it reads what's already public,
-            and it only ever runs against a domain someone has asked me to check.
+            This same scan is a light, standard check of what a domain already shows the
+            internet, and it only ever runs against a domain someone has asked me to check.
           </OperatorNote>
 
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
