@@ -63,8 +63,8 @@ refused(){ [ "$1" -eq 1 ] && ! built && grep -q "REFUSED: $2" "$T/out"; }
 # --- the approval half --------------------------------------------------------------------------------------
 run; refused $? "no DEPLOY_APPROVAL_REF"; ok $? "no approval ref: refused before the build"
 run DEPLOY_APPROVAL_REF=morning-7bb2; rc=$?
-refused $rc "card morning-7bb2 is not APPROVED" && grep -qx "approval check morning-7bb2" "$T/stub.log"
-ok $? "a ref approval.py does not APPROVE: refused before the build (the check was asked)"
+refused $rc "card morning-7bb2 is not APPROVED" && grep -qx "approval check morning-7bb2 --strict" "$T/stub.log"
+ok $? "a ref approval.py does not APPROVE: refused before the build (the --strict check was asked)"
 run DEPLOY_APPROVAL_REF="x;touch $T/pwned"; rc=$?
 refused $rc "DEPLOY_APPROVAL_REF is not a card ref" && [ ! -e "$T/pwned" ] && ! grep -q '^approval' "$T/stub.log"
 ok $? "a ref with shell characters: refused, never passed to the check"

@@ -46,7 +46,9 @@ if [ -n "${DEPLOY_APPROVAL_REF:-}" ]; then
   else   # the real ledger, whatever HOME / KLINGE_STATE / PYTHON* the caller exported
     CHECK=(env -u KLINGE_STATE -u KLINGE_RESEARCH_LOG HOME="$REAL_HOME" python3 -I "$REAL_HOME/klinge-kernel/bin/approval.py")
   fi
-  "${CHECK[@]}" check "$DEPLOY_APPROVAL_REF" || refuse "card $DEPLOY_APPROVAL_REF is not APPROVED by kyle (approval.py check)"
+  # --strict (2026-10-01, CS-2 audit): a production deploy requires method="tap" -- an actual tap on Kyle's phone
+  # via the ntfy relay, never a manually-recorded or forged `approval.py record ... --by kyle`.
+  "${CHECK[@]}" check "$DEPLOY_APPROVAL_REF" --strict || refuse "card $DEPLOY_APPROVAL_REF is not APPROVED by kyle via a tap (approval.py check --strict)"
   APPROVED_BY="approval $DEPLOY_APPROVAL_REF"
 elif [ "${DEPLOY_INTERACTIVE:-}" = 1 ]; then
   { [ -t 0 ] && [ -t 1 ]; } || refuse "DEPLOY_INTERACTIVE=1 needs a real terminal (Kyle running it by hand); none attached"
