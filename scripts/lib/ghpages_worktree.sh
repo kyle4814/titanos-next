@@ -8,7 +8,9 @@ ensure_ghpages_worktree() {
   local repo="$1" wt="$2" common want stale
   git -C "$repo" worktree prune
   want="$(cd "$repo" && cd "$(git rev-parse --git-common-dir)" && pwd -P)"
-  common="$(cd "$wt" 2>/dev/null && cd "$(git rev-parse --git-common-dir 2>/dev/null)" 2>/dev/null && pwd -P)"
+  # `|| common=""`: deploy.sh runs under set -e, and an assignment from a failed $(...) exits the shell. Without it a
+  # MISSING folder (first deploy after /tmp is wiped) killed the deploy silently right here (found 2026-10-01, S1 test).
+  common="$(cd "$wt" 2>/dev/null && cd "$(git rev-parse --git-common-dir 2>/dev/null)" 2>/dev/null && pwd -P)" || common=""
   if [ -n "$common" ] && [ "$common" = "$want" ]; then
     return 0
   fi

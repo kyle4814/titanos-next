@@ -41,4 +41,9 @@ before=$(ls -d "$T"/wt1* | wc -l); ensure_ghpages_worktree "$T/repo" "$T/wt1" >/
 G init -q "$T/wt4"; ensure_ghpages_worktree "$T/repo" "$T/wt4" >/dev/null 2>&1
 valid "$T/wt4" && ls -d "$T"/wt4.stale-* >/dev/null 2>&1; ok $? "a foreign repo at the path is moved aside, not deployed into"
 
+# 5 under deploy.sh's own shell options: a MISSING folder must be built, not kill the deploy (2026-10-01: an
+# assignment from a failed $(...) exits a set -e shell, and the cases above never ran with set -e)
+( set -euo pipefail; ensure_ghpages_worktree "$T/repo" "$T/wt6" >/dev/null 2>&1; echo SURVIVED ) > "$T/se.out" 2>&1
+grep -q SURVIVED "$T/se.out" && valid "$T/wt6"; ok $? "set -euo pipefail, missing folder: worktree created and the caller carries on"
+
 echo "== test_ghpages_worktree: $pass passed, $fail failed"; [ "$fail" -eq 0 ]
