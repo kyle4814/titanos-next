@@ -21,6 +21,8 @@ rm -rf .next out node_modules/.cache
 if [ ! -d node_modules ]; then
   npm ci
 fi
+echo "▸ Tests (a red test never ships)"
+npm test
 npm run build
 
 echo "▸ Verify out/ artefacts"
@@ -43,9 +45,8 @@ git push origin "gh-pages-backup-$BACKUP" 2>&1 | tail -3 || true
 echo "  backup branch: gh-pages-backup-$BACKUP"
 
 echo "▸ Deploy via worktree at $WORKTREE"
-if [ ! -d "$WORKTREE/.git" ] && [ ! -f "$WORKTREE/.git" ]; then
-  git worktree add "$WORKTREE" gh-pages
-fi
+. "$REPO_ROOT/scripts/lib/ghpages_worktree.sh"
+ensure_ghpages_worktree "$REPO_ROOT" "$WORKTREE"
 git -C "$WORKTREE" fetch origin gh-pages
 git -C "$WORKTREE" reset --hard origin/gh-pages
 find "$WORKTREE" -mindepth 1 -not -path '*/.git*' -delete

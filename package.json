@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack -H 127.0.0.1",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "node scripts/test_monitor_domain.mjs && bash scripts/test_ghpages_worktree.sh"
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.1",
