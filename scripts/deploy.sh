@@ -65,28 +65,21 @@ git -C "$WORKTREE" commit -m "Deploy $(date -u +%Y-%m-%dT%H:%MZ)"
 git -C "$WORKTREE" push origin HEAD:gh-pages --force
 
 echo "▸ Verify live (cache-busted, waits for propagation)"
-# Bounded retries — the unbounded loop hung three deploys on 2026-07-11
-# (push succeeded, but curl inside the script kept missing while
-# foreground curls passed). 24 × 5s = 2 min, then warn and exit 0:
-# the push already landed, so verification failure is not deploy failure.
-CB=$(date +%s%N)
+# Bounded retries (the unbounded loop hung three deploys on 2026-07-11): 24 x 5s = 2 min, then warn and exit 0,
+# because the push already landed. The check proves THIS build is live: the page must carry its BUILD_ID.
+. "$REPO_ROOT/scripts/lib/verify_live.sh"
+BUILD_ID=$(cat .next/BUILD_ID 2>/dev/null || true)
 sleep 6
-VERIFY_OK=0
-for _ in $(seq 1 24); do
-  if curl -s --max-time 15 "https://titanos.tech/?cb=$(date +%s%N)" | grep -q "titanos"; then
-    VERIFY_OK=1
-    break
-  fi
-  sleep 5
-done
-if [ "$VERIFY_OK" -ne 1 ]; then
-  echo "  WARN: live verification did not confirm within 2 min — check https://titanos.tech manually"
-  echo "▸ Done (push succeeded; verification inconclusive). Backup branch: gh-pages-backup-$BACKUP"
+if ! verify_live_build "https://titanos.tech/" "$BUILD_ID" 24 5; then
+  echo "  WARN: titanos.tech does not show build ${BUILD_ID:-?} after 2 min. The push landed; check the site by hand."
+  echo "▸ PUSHED, NOT VERIFIED. Backup branch: gh-pages-backup-$BACKUP"
   exit 0
 fi
+echo "  live site serves build $BUILD_ID"
 CB=$(date +%s%N)
 echo -n "  .nojekyll: "; curl -s -o /dev/null -w "%{http_code}\n" "https://titanos.tech/.nojekyll?cb=$CB"
-CSS=$(curl -s "https://titanos.tech/?cb=$CB" | grep -oE '/_next/[^"]*\.css' | head -1)
+HOME_HTML=$(curl -s "https://titanos.tech/?cb=$CB" || true)
+CSS=$(grep -oE '/_next/[^"]*\.css' <<<"$HOME_HTML" | head -1 || true)
 if [ -n "$CSS" ]; then
   echo -n "  CSS ($CSS): "; curl -s -o /dev/null -w "%{http_code}\n" "https://titanos.tech$CSS?cb=$CB"
 else
