@@ -1157,6 +1157,123 @@ export const POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "can-someone-send-email-pretending-to-be-my-business",
+    title: "Can someone send email pretending to be my business?",
+    description:
+      "Short answer: yes, and it needs no hacking. No insider access either.",
+    excerpt:
+      "Short answer: yes, and it needs no hacking.",
+    date: "2026-10-02",
+    tag: "Email security",
+    readMinutes: 4,
+    body: [
+      {
+        type: "p",
+        text: "Short answer: yes, and it needs no hacking. 📧",
+      },
+      {
+        type: "p",
+        text: "No insider access either. If your domain has no rule telling other mail servers to reject fakes, a stranger can send an email that says it is from you@yourbusiness.com.au, and some inboxes will let it through.",
+      },
+      {
+        type: "p",
+        text: "Hi, I'm Kyle. I run TITANOS, a one-person business in Brisbane. We check the public side of a small business's email and web security, and build AI automation for small teams. You're welcome to read on without buying anything.",
+      },
+      {
+        type: "h2",
+        text: "🔍 What stops a fake",
+      },
+      {
+        type: "p",
+        text: "Three small settings in your domain do the work. Your IT person or website host can check all three.",
+      },
+      {
+        type: "ul",
+        items: [
+          "SPF lists which computers may send email as your business.",
+          "DKIM signs your real email, so a receiver can tell it was not changed on the way.",
+          "DMARC tells receivers what to do when an email fails those checks: reject it, quarantine it, or let it through.",
+        ],
+      },
+      {
+        type: "p",
+        text: "DMARC is the one that matters most. It is also the one most often set to \"p=none\", which means \"watch, but do nothing\". Watching is useful. It just does not stop the fake from landing.",
+      },
+      {
+        type: "h2",
+        text: "📊 How common is the gap?",
+      },
+      {
+        type: "p",
+        text: "Roughly half of small Australian businesses we sampled had two gaps at once.",
+      },
+      {
+        type: "p",
+        text: "We checked 362 small-business domains across 8 sampled bands of the Australian .com.au space. 172 of them (47.5%) had no enforced DMARC policy and no security.txt file. The bands ranged from 37.5% to 55.0%.",
+      },
+      {
+        type: "p",
+        text: "That is our own measurement, using passive public lookups only. We did not contact anyone. It is a sample, not a census, and domains we could not check cleanly were left out rather than counted as gaps. So treat it as a fair rough guide, not a precise rate.",
+      },
+      {
+        type: "h2",
+        text: "💸 Why it matters",
+      },
+      {
+        type: "p",
+        text: "The usual fake is boring: \"our bank details have changed\".",
+      },
+      {
+        type: "p",
+        text: "The Australian Cyber Security Centre's small business guide describes a real case. A construction business got an email from a \"supplier\" with new bank details. Nobody rang to confirm. They paid an invoice of over $70,000, and a second staff member then paid the same invoice again. The total loss was over $150,000, and none of it was recovered.",
+      },
+      {
+        type: "p",
+        text: "Across Australia, the ACSC's Annual Cyber Threat Report 2024 to 2025 put business email compromise losses above $98 million, with an average of $64,000 per report.",
+      },
+      {
+        type: "h2",
+        text: "✅ What you can do today",
+      },
+      {
+        type: "p",
+        text: "Five minutes, no tools to buy:",
+      },
+      {
+        type: "ol",
+        items: [
+          "Look up your domain on a free DMARC checker (MXToolbox has one). Note the policy: none, quarantine or reject.",
+          "If it says \"none\" or there is no record, send your IT provider or website host one line: \"Can we move our DMARC policy to quarantine, then reject, safely?\"",
+          "Make one rule for everyone who touches payments: any bank detail change gets a phone call to a number you already had on file. Never the number in the email.",
+        ],
+      },
+      {
+        type: "p",
+        text: "That last one is free and stops the most common version of this scam on its own.",
+      },
+      {
+        type: "p",
+        text: "One honest limit: DMARC protects your exact domain. It does not stop someone registering a lookalike with one letter changed. The phone call rule covers that gap.",
+      },
+      {
+        type: "h2",
+        text: "👋 A calm next step",
+      },
+      {
+        type: "p",
+        text: "If you would like to know where your own domain sits, the free check takes a couple of minutes: titanos.tech/scan (https://titanos.tech/scan). If you would rather talk it through, you can book a free audit call at titanos.tech/audit (https://titanos.tech/audit). Either way, no pressure, and the free part stays free.",
+      },
+      {
+        type: "p",
+        text: "Sources - Our own measurement, Australian small-business domains, 8 bands, 362 domains (TITANOS research, 02_anz-smb-email-security-stat-report.md) - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025",
+      },
+      {
+        type: "p",
+        text: "Drafted with AI help (Claude) from sourced material, and approved by Kyle Deligny, TITANOS, ABN 34 318 502 254, before publishing.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
