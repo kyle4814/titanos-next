@@ -1274,6 +1274,110 @@ export const POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "the-bank-details-email-accountants-and-bookkeepers",
+    title: "The \"we've changed banks\" email that finds accountants and bookkeepers",
+    description:
+      "You move other people's money. That is why someone wants to pretend to be you.",
+    excerpt:
+      "You move other people's money.",
+    date: "2026-10-03",
+    tag: "Email security",
+    readMinutes: 4,
+    body: [
+      {
+        type: "p",
+        text: "You move other people's money. That is why someone wants to pretend to be you. 🧾",
+      },
+      {
+        type: "p",
+        text: "Hi, I'm Kyle, a one-person Brisbane business (TITANOS) that checks the public side of small-business email security. This one is for practice owners and bookkeepers. Nothing to buy, just a plain read.",
+      },
+      {
+        type: "h2",
+        text: "🎯 Why accounting practices get picked",
+      },
+      {
+        type: "p",
+        text: "Your inbox is full of bank details. A bookkeeper or practice manager handles supplier payments, BAS and tax lodgements, and regular requests to update someone's account number.",
+      },
+      {
+        type: "p",
+        text: "A scammer needs one convincing email. It pretends to be a partner, a client or a supplier and says \"please use our new account for this invoice\". Clients trust an email from their accountant more than one from almost anyone else. That trust is the thing being copied.",
+      },
+      {
+        type: "h2",
+        text: "📉 What the national numbers say",
+      },
+      {
+        type: "p",
+        text: "These are whole-of-economy figures, not accountant-only ones. No official source splits them out by profession, so we will not pretend otherwise.",
+      },
+      {
+        type: "ul",
+        items: [
+          "The ACSC's Annual Cyber Threat Report 2024 to 2025 says business email compromise (BEC) with a financial loss made up 15% of business cybercrime reports. Losses passed $98 million, at an average of $64,000 per report.",
+          "A further 19% of business reports were email compromise attempts with no loss. Someone caught it in time. 🙌",
+          "The Office of the Australian Information Commissioner counted 1,205 data breach notifications in 2025, up 8% on 2024. Financial services was second by volume with 157, behind health service providers on 225. Accounting is not its own category, so that is the nearest honest neighbour.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "🔧 A real case, with real money",
+      },
+      {
+        type: "p",
+        text: "The ACSC small business guide tells this one. A business received an email from a \"supplier\" with new bank details. Nobody phoned to confirm. They paid an invoice over $70,000. A second staff member then paid the same invoice again. Total loss: over $150,000, none recovered.",
+      },
+      {
+        type: "p",
+        text: "The missing step was one phone call to a number already on file.",
+      },
+      {
+        type: "h2",
+        text: "🛡️ What good looks like",
+      },
+      {
+        type: "p",
+        text: "Two layers. One is technical, one is a habit.",
+      },
+      {
+        type: "ul",
+        items: [
+          "The technical layer: ask your IT provider whether your domain has SPF, DKIM and DMARC set up, and whether DMARC is on \"quarantine\" or \"reject\" rather than \"none\". Also ask whether multi-factor authentication (a code on your phone as well as a password) is on for email and your practice software.",
+          "The habit layer: any request to change bank details gets a phone call to a number already on file. Not a number in the email. Write it down as a rule, name one person who approves changes, and tell staff nobody will ever be annoyed at them for checking.",
+        ],
+      },
+      {
+        type: "p",
+        text: "That written rule takes the pressure off the person at the front desk. The attack depends on someone feeling rushed and not wanting to bother a partner. \"Firm policy, two-minute call\" removes the awkwardness.",
+      },
+      {
+        type: "h2",
+        text: "📊 Our own number, labelled properly",
+      },
+      {
+        type: "p",
+        text: "This one is not about accountants. Across 8 sampled bands of Australian small-business domains, 47.5% (172 of 362) had neither an enforced DMARC policy nor a security.txt file. We have not measured accounting firms as a group. It just suggests roughly half of small businesses are carrying both gaps, so checking beats assuming.",
+      },
+      {
+        type: "h2",
+        text: "👋 A calm next step",
+      },
+      {
+        type: "p",
+        text: "Want to see where your own practice's domain sits? The free check takes a couple of minutes: titanos.tech/scan (https://titanos.tech/scan). Prefer a chat? Book a free audit call at titanos.tech/audit (https://titanos.tech/audit) and I will tell you plainly what I find. No pressure either way.",
+      },
+      {
+        type: "p",
+        text: "Sources - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - OAIC, data breach notifications 2025: https://www.oaic.gov.au/news/media-centre/data-breach-notifications-increase-to-all-time-high-in-2025,-new-ndb-stats-show - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)",
+      },
+      {
+        type: "p",
+        text: "Drafted with AI help (Claude) from sourced material, and approved by Kyle Deligny, TITANOS, ABN 34 318 502 254, before publishing.",
+      },
+    ],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
