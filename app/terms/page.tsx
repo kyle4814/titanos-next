@@ -81,7 +81,10 @@ export default function TermsPage() {
             {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included; Monitor
             continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in; no auto-charge): a
             single done-with-you engagement that includes the deliverables described on the
-            compliance page at the time of purchase. AI Implementation and Leads engagements are
+            compliance page at the time of purchase. Job Flow ({DISPLAY.JOB_FLOW_MONTHLY}): a
+            monthly done-for-you service for tradies and small service businesses, billed monthly,
+            cancel any time by email, no refund for the current month, and no further charges after
+            you cancel. AI Implementation and Leads engagements are
             scoped, quoted in a signed Statement of Work, and billed per that SOW.
           </p>
 

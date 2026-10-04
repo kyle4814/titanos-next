@@ -130,6 +130,7 @@ const LADDER: LadderBand[] = [
       { label: "Compliance Monitor (monthly)", price: DISPLAY.MONITOR_MONTHLY },
       { label: "Compliance Monitor (annual)", price: DISPLAY.MONITOR_ANNUAL },
       { label: "Leads Starter", price: DISPLAY.LEADS_STARTER },
+      { label: "Job Flow for tradies (monthly)", price: DISPLAY.JOB_FLOW_MONTHLY },
     ],
     cta: "See monitoring →",
     href: "/monitor",
