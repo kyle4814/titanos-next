@@ -52,7 +52,7 @@ const AUTOMATES = [
   "Approval-gated email sending: nothing goes out until a person taps approve.",
   "Daily blog publishing: drafted, checked against a copy-rules linter, then shipped on its date after one approval.",
   "Document and dossier production: sourced research packs built and delivered as a set.",
-  "Test-gated self-updating code: changes land only when the automated tests pass.",
+  "Test-gated engineering: every change must pass the automated test gate before it lands.",
 ];
 
 function Tile({ label, value, note, strong }: { label: string; value: string; note: string; strong?: boolean }) {
@@ -166,9 +166,10 @@ export default function EngineeringPage() {
 
       <Block title="What a dollar of compute buys">
         <p style={BODY}>
-          The four months of building cost about AU$120 of compute at AU$30 a month, against AU$7.8 million of
-          modelled engineering. That is about AU$65,000 of engineering per AU$1 of compute on the original
-          AU$30 a month. At today&apos;s AU$300 a month it is about AU$650 per AU$1.
+          Counted at 10%, that is AU$2.3 million a year of engineering on AU$360 a year of compute: about
+          AU$6,500 of engineering per AU$1 on the original AU$30 a month, and about AU$650 per AU$1 at
+          today&apos;s AU$300 a month. On the full model (AU$7.8 million built on about AU$120 of compute over
+          the four months), it is about AU$65,000 per AU$1.
         </p>
       </Block>
 
