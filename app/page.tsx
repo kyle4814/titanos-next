@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HeroEntrance from "@/components/HeroEntrance";
+import PageHero from "@/components/PageHero";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -202,17 +202,25 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
       />
       {/* ═══ HERO ═══ */}
-      <HeroEntrance
-        wordmark="TITANOS"
-        eyebrow="BUILT FROM A PHONE · NO FUNDING · NO PERMISSION ASKED"
-        tagline="I find the manual task eating your week, and build the system that does it instead."
-        trust={
+      <PageHero
+        badge="Parallax Industries · TITANOS"
+        title="44 engineer-years of output in 4 months."
+        tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on AU$30 a month."
+        sub="Kyle Deligny, founder of Parallax Industries. TITANOS, the Titan Operating System."
+        trustLine={
           <>
-            Personally reviewed · Australian-owned · ABN 34 318 502 254 ·{" "}
-            {STATS.scansThisMonth}+ external scans run this month
+            Australian-owned · ABN 34 318 502 254 · {STATS.scansThisMonth}+ external scans run this
+            month · Every figure has its method one click away.
           </>
         }
-      />
+      >
+        <AnimatedButton href="/engineering" variant="primary">
+          See the maths →
+        </AnimatedButton>
+        <AnimatedButton href="/scan" variant="secondary">
+          Get your free security scan
+        </AnimatedButton>
+      </PageHero>
 
       {/* THE OPENING: the threshold. Inscription primitive, the
           claim is set INTO the page (lintel rules + stone recess), not
