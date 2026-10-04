@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import { OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const META_TITLE = "44 engineer-years in 4 months | TITANOS";
 const META_DESC =
@@ -117,6 +118,8 @@ export default function EngineeringPage() {
         </p>
       </Block>
 
+      <Analogy k="department" />
+
       <Block title="The normal way vs the TITANOS way">
         <div style={{ ...CARD, padding: 0, overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "var(--fs-body)" }}>
@@ -172,6 +175,8 @@ export default function EngineeringPage() {
           the four months), it is about AU$65,000 per AU$1.
         </p>
       </Block>
+
+      <Analogy k="preflight" />
 
       <Block title="Built properly">
         <ul style={{ ...PROSE, listStyle: "none", padding: 0, display: "grid", gap: 12 }}>

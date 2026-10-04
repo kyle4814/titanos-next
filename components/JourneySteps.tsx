@@ -9,7 +9,7 @@
 import { SystemLabel } from "@/components/Myth";
 
 const STEPS = [
-  { num: "1", title: "Audit call", body: "Free, no obligation. We work out what's worth automating." },
+  { num: "1", title: "Free consultation", body: "Free half-hour, plus a free report on your business. We work out what is worth automating. A no is welcome." },
   { num: "2", title: "First system, live", body: "Built inside month 1 of the retainer. Not a separate build fee." },
   { num: "3", title: "Partnership", body: "Months 2-3: optimised against how you actually use it." },
   { num: "4", title: "Compounding growth", body: "Month-to-month after that. The systems keep improving." },

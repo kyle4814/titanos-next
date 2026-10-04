@@ -9,6 +9,7 @@ import PdfViewer from "@/components/PdfViewer";
 import { CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const REQUEST_HREF = "/scan#request";
 
@@ -201,6 +202,10 @@ export default function OurEvidencePackPage() {
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
       </PageHero>
+      <Bluf>
+        This is our own security report, published in full, so you can see the quality of the work before you pay anything.
+      </Bluf>
+      <Analogy k="flightrecorder" />
 
       <div className="divider-gold" />
 
@@ -545,6 +550,8 @@ export default function OurEvidencePackPage() {
         </p>
         <OmegaSeal size={48} style={{ marginTop: 32 }} caption="13 sections. Nothing hidden, nothing cherry-picked." />
       </SectionReveal>
+      <FrontLoad/>
+      <FreeStart />
     </>
   );
 }

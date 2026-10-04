@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
@@ -56,7 +57,7 @@ export default function AboutPage() {
       <PageHero
         badge="ABOUT THE OPERATOR"
         title="Built from a phone. Run by one operator."
-        tagline="Kyle Deligny, Brisbane, Australia. No funding, no team, no permission asked. Just a decision to start, and a standard for what's allowed to ship."
+        tagline="I am Kyle Deligny, founder of TITANOS, the Titan Operating System. Hypersonic Industries and Parallax Industries are its divisions. No funding, no team, no permission asked: just a decision to start, and a standard for what is allowed to ship."
         sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you message or call, you get me."
         trustLine={
           <>
@@ -73,12 +74,16 @@ export default function AboutPage() {
         }
       >
         <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
-          GET YOUR FREE AI AUDIT: MESSAGE KYLE
+          BOOK YOUR FREE CONSULTATION AND REPORT
         </AnimatedButton>
         <AnimatedButton href="/methodology" variant="secondary">
           SEE THE METHODOLOGY
         </AnimatedButton>
       </PageHero>
+      <Bluf replaced>
+        TITANOS is one engineer, Kyle Deligny, giving your business the output of a 20-person team, safely, and without replacing anyone.
+      </Bluf>
+      <Analogy k="department" />
 
       <div className="divider-gold" />
 
@@ -401,6 +406,12 @@ export default function AboutPage() {
           </AnimatedButton>
         </div>
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Who will I actually deal with?", a: "Me. There is no agency layer and no junior team you will never meet. If you message or call, you get Kyle." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

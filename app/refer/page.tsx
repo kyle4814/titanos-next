@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import ReferForm from "@/components/ReferForm";
 import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 export const metadata: Metadata = {
   title: "Refer & Earn: Partner Network · TITANOS",
@@ -74,6 +75,10 @@ export default function ReferPage() {
         tagline="Commission-only referral network. No joining fee, no exclusivity, no minimum activity."
         sub="Know a business drowning in manual work? Introduce them to Titanos, and when the deal closes, you're paid."
       />
+      <Bluf replaced>
+        Know a business drowning in manual work? Introduce them, and when the deal closes you are paid. No joining fee. For your own business, you can book a free consultation with Kyle on the audit page.
+      </Bluf>
+      <Analogy k="healthcheck" />
 
       <section aria-label="The invitation" style={{ padding: "var(--space-8) 20px var(--space-4)", position: "relative", zIndex: 2 }}>
         <Inscription label="The final stage" sub="Everyone before you was reading. This is where you stop observing and become part of how the system grows.">
@@ -162,6 +167,7 @@ export default function ReferPage() {
           </FaqItem>
         </div>
       </SectionReveal>
+      <FrontLoad/>
     </>
   );
 }

@@ -9,6 +9,7 @@ import FaqItem from "@/components/FaqItem";
 import BrisbaneClock from "@/components/BrisbaneClock";
 import AuditRequestClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
@@ -92,7 +93,7 @@ export default function AuditPage() {
       />
       <PageHero
         badge="FREE · NO OBLIGATION · NO PITCH DECK"
-        title="Get your free AI audit call."
+        title="Get your free AI consultation and report."
         sub="You tell me what's eating your week. We work out together what's automatable in your business, and what it's worth. No cost, no pitch deck, no obligation. Just a straight conversation."
         trustLine={
           <>
@@ -100,10 +101,14 @@ export default function AuditPage() {
           </>
         }
       />
+      <Bluf replaced>
+        A free half-hour with Kyle, then a free report on your business. You leave knowing what a machine can carry for you, and what that is worth.
+      </Bluf>
+      <Analogy k="healthcheck" />
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
         <AnimatedButton href="#message" variant="primary">
-          Get your free AI audit: message Kyle →
+          Book your free consultation and report →
         </AnimatedButton>
       </section>
 
@@ -179,7 +184,7 @@ export default function AuditPage() {
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
             <AnimatedButton href="#message" variant="primary">
-              Get your free AI audit: message Kyle →
+              Book your free consultation and report →
             </AnimatedButton>
           </p>
         </div>
@@ -257,6 +262,7 @@ export default function AuditPage() {
           style={{ marginTop: "var(--space-8)" }}
         />
       </SectionReveal>
+      <FrontLoad/>
     </>
   );
 }

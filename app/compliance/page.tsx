@@ -5,14 +5,13 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
-import SlotScarcity from "@/components/SlotScarcity";
-import DeadlineCountdown from "@/components/DeadlineCountdown";
 import ScopeChecker from "@/components/ScopeChecker";
 import OperatorByline from "@/components/OperatorByline";
 import Testimonials from "@/components/Testimonials";
 import { SITE, CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 
@@ -255,13 +254,13 @@ export default function CompliancePage() {
       <PageHero
         badge={
           <>
-            DEADLINE · 10 DECEMBER 2026 <SlotScarcity variant="pill" />
+            PRIVACY ACT COMPLIANCE · DONE WITH YOU
           </>
         }
         // Fix 3a — plain-English SMB-owner hero. The audit moved the
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
-        title="Six Privacy Act obligations. One working call. Sorted before 10 December 2026."
+        title="Six Privacy Act obligations. One working call. Nothing left to interpret afterwards."
         tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free. Compare that to roughly AU$18,000 or more for a comparable Vanta-plus-consultant setup in year one.`}
         sub="Built for Australian SMBs (5 to 50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. Health providers (clinic, allied health, pharmacy, any size) are already covered by the Privacy Act. There is no small-business exemption for health."
         trustLine={
@@ -274,9 +273,6 @@ export default function CompliancePage() {
           </>
         }
       >
-        <div style={{ margin: "0 0 22px" }}>
-          <DeadlineCountdown />
-        </div>
         {/*
           Fix 2d — CTA prominence FLIPPED while testimonials.ts is empty.
           Cal first (primary, filled), Stripe second (secondary, outline).
@@ -286,7 +282,7 @@ export default function CompliancePage() {
           GET COMPLIANT · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
         <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
-          MESSAGE KYLE FIRST
+          BOOK A FREE CONSULTATION FIRST
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
           14-day refund if no deliverable has been issued. Monitoring cancellable any time.{" "}
@@ -298,6 +294,11 @@ export default function CompliancePage() {
           Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
       </PageHero>
+      <Bluf replaced>
+        Six Privacy Act obligations, sorted with you on one working call, for {DISPLAY.PACK_PRICE} with {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of
+        Titanos Monitor included. The first conversation and your report are free.
+      </Bluf>
+      <Analogy k="preflight" />
 
       {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
           See components/Myth.tsx for the vocabulary. */}
@@ -330,11 +331,6 @@ export default function CompliancePage() {
             Free scan →
           </a>
         </p>
-      </SectionReveal>
-
-      {/* Fix 4 — slot-based scarcity block under the hero */}
-      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
-        <SlotScarcity variant="block" />
       </SectionReveal>
 
       {/* WHAT HAPPENS ON THE CALL — day-1 snapshot before pressure points */}
@@ -701,7 +697,7 @@ export default function CompliancePage() {
                   GET COMPLIANT · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
                 <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
-                  MESSAGE KYLE FIRST
+                  BOOK A FREE CONSULTATION FIRST
                 </AnimatedButton>
               </div>
               <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", textAlign: "center", margin: "12px auto 0" }}>
@@ -889,7 +885,7 @@ export default function CompliancePage() {
             letterSpacing: "0.05em",
           }}
         >
-          Ship Compliance Before the Deadline
+          Get Your Privacy Act Obligations Sorted
         </h2>
         <p
           style={{
@@ -915,7 +911,7 @@ export default function CompliancePage() {
             GET COMPLIANT · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
           <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
-            MESSAGE KYLE FIRST
+            BOOK A FREE CONSULTATION FIRST
           </AnimatedButton>
         </div>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)", margin: "12px auto 0" }}>
@@ -932,6 +928,12 @@ export default function CompliancePage() {
           caption="Built with AI assistance. Every document, every scan finding, and every attestation is reviewed and signed off by Kyle Deligny (ABN 34 318 502 254) before it reaches you. The accountability is mine, not the machine's."
         />
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Do I have to book the pack to get started?", a: "No. Start with the free consultation and free report. You see where you stand first, and you know the price before anything is booked. A no is completely fine." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

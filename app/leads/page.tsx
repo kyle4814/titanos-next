@@ -7,6 +7,7 @@ import FaqItem from "@/components/FaqItem";
 import { CONTACT_HREF } from "@/lib/config";
 import { LEADS, DISPLAY, formatAUD } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 // Fourth door — verified AU lead lists, sold by the compliance practice.
 // Deploy of this page is HELD until the DataForSEO fulfilment pipeline
@@ -233,6 +234,10 @@ export default function LeadsPage() {
           ABN 34 318 502 254 · Australian-owned · built by the Titanos compliance practice
         </p>
       </PageHero>
+      <Bluf>
+        Verified Australian business contacts, every email checked before delivery, at the published prices below.
+      </Bluf>
+      <Analogy k="scouts" />
 
       <div className="divider-gold" />
 
@@ -709,6 +714,12 @@ export default function LeadsPage() {
           </AnimatedButton>
         </div>
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Is it legal to hold this data?", a: "The lists are sourced from public business information, they are Privacy Act-aware, and suppression is honoured on request. Reply STOP and you are suppressed for good." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

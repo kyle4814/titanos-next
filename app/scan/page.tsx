@@ -11,6 +11,7 @@ import ProcessSteps from "./ProcessSteps";
 import { CONTACT_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 // Internal anchor — the on-page form section. No mailto in the primary
 // flow; the form's error state carries the only fallback link.
@@ -225,6 +226,10 @@ export default function ScanPage() {
           MESSAGE OR CALL KYLE
         </AnimatedButton>
       </PageHero>
+      <Bluf>
+        A free security check of your business, based on what the public internet can already see. Your report lands in your inbox within 2 business days.
+      </Bluf>
+      <Analogy k="healthcheck" />
 
       <div className="divider-gold" />
 
@@ -605,6 +610,12 @@ export default function ScanPage() {
           caption="Signed off, not automated away"
         />
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Do you try to break in?", a: "No. It only reads what your domain already shows the public internet. No logins, no password guessing, nothing private. The method is published on the Methodology page." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

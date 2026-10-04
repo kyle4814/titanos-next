@@ -6,6 +6,7 @@ import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const SECTION_COUNT = 9;
 
@@ -133,6 +134,10 @@ export default function MethodologyPage() {
         title="How the Security Check Works"
         tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet: the same information a hacker can see from their desk."
       />
+      <Bluf>
+        The free security check only reads what your business already shows the public internet. It never tries a single door.
+      </Bluf>
+      <Analogy k="scouts" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
@@ -378,6 +383,8 @@ export default function MethodologyPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
+      <FrontLoad/>
+      <FreeStart />
     </>
   );
 }

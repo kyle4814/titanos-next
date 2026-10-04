@@ -8,6 +8,7 @@ import MonitorCheckoutButton from "@/components/MonitorCheckoutButton";
 import Testimonials from "@/components/Testimonials";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 // Site Fix 2 — recurring product page. Persona: owner OR IT lead who has
 // already seen their exposure and wants ongoing visibility into changes.
@@ -157,6 +158,10 @@ export default function MonitorPage() {
           Cancel any time from the billing portal. One click, guilt-free. No email, no retention call.
         </p>
       </PageHero>
+      <Bluf>
+        Titanos Monitor checks your business&apos;s security every month and emails you in plain English what changed. {DISPLAY.MONITOR_MONTHLY}, cancel in one click.
+      </Bluf>
+      <Analogy k="smokealarm" />
 
       {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
           See components/Myth.tsx for the vocabulary. */}
@@ -492,6 +497,12 @@ export default function MonitorPage() {
           caption="One click to start, one click to stop. The subscription doesn't outlast your interest in it."
         />
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Is there a contract?", a: "No contract and no retention call. You can cancel in one click." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

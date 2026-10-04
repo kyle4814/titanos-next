@@ -21,7 +21,7 @@ import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 export default function StickyMobileCta() {
   return (
     <div className="sticky-mobile-cta">
-      <Link href={AUDIT_MESSAGE_HREF}>Message Kyle: Free AI Audit</Link>
+      <Link href={AUDIT_MESSAGE_HREF}>Free consultation + report</Link>
       <style>{`
         .sticky-mobile-cta {
           display: none;

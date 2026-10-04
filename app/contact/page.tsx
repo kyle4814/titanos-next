@@ -4,6 +4,7 @@ import SectionReveal from "@/components/SectionReveal";
 import ContactButtons from "@/components/ContactButtons";
 import { SITE, CONTACT } from "@/lib/config";
 import { Inscription, SystemLabel } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
@@ -26,9 +27,13 @@ export default function ContactPage() {
         sub="No contact form maze, no booking system, no support ticket queue. Message or call Kyle directly. You'll hear back from the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
+      <Bluf>
+        Message or call Kyle. You hear back from the person who does the work, and the first conversation and your report are free.
+      </Bluf>
+      <Analogy k="healthcheck" />
 
       <section aria-label="Message or call Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <ContactButtons heading="Say hi on whichever is easiest. Free audit, a quick question, or just a chat." />
+        <ContactButtons heading="Book your free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
       </section>
 
       <div className="divider-gold" />
@@ -80,10 +85,11 @@ export default function ContactPage() {
           </div>
 
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
-            Want a free AI audit? Just message Kyle. No obligation, no pitch deck.
+            Want a free consultation and a free report on your business? Just message Kyle. No obligation, no pitch deck, and a no is welcome.
           </p>
         </div>
       </SectionReveal>
+      <FrontLoad/>
     </>
   );
 }

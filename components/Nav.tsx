@@ -27,7 +27,7 @@ import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 
 const LINKS = [
-  { label: "Free AI Audit", href: "/audit", external: false },
+  { label: "Free consultation", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "Monitor", href: "/monitor", external: false },
@@ -173,7 +173,7 @@ export default function Nav() {
               whiteSpace: "nowrap",
             }}
           >
-            Message Kyle for a free AI audit
+            Book a free consultation and report
           </Link>
         </div>
 
@@ -332,7 +332,7 @@ export default function Nav() {
                   marginBottom: 24,
                 }}
               >
-                Message Kyle for a free AI audit
+                Book a free consultation and report
               </Link>
 
               <nav>

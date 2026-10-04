@@ -8,6 +8,7 @@ import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import Testimonials from "@/components/Testimonials";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
@@ -128,7 +129,7 @@ export default function AiDeliveryPage() {
     <>
       <PageHero
         badge={`AI GROWTH PARTNER · RETAINER FROM ${DISPLAY.AI_GROWTH_PARTNER.toUpperCase()}`}
-        title="We don't sell AI projects. We sell partnerships that build, optimise and scale."
+        title="The output of a 20-person engineering team, for one monthly price."
         sub="Pick your tier. The first system goes live in month 1, inside the retainer, not as a separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>
@@ -138,9 +139,13 @@ export default function AiDeliveryPage() {
         }
       >
         <AnimatedButton href="/audit" variant="primary" ariaLabel="Get your free AI audit">
-          Get your free AI audit →
+          Get your free consultation and report →
         </AnimatedButton>
       </PageHero>
+      <Bluf replaced>
+        Three monthly partnerships that build the AI system taking repetitive work off your team, with the first one live in month 1.
+      </Bluf>
+      <Analogy k="powersteering" />
 
       <div className="divider-gold" />
 
@@ -290,15 +295,21 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />
         <h2 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-h2)", fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em" }}>
-          Start with the free AI audit call.
+          Start with the free consultation and report.
         </h2>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "0 auto 32px", lineHeight: 1.7 }}>
           No cost, no obligation, no pitch deck. Just a straight conversation about your business.
         </p>
         <AnimatedButton href="/audit" variant="primary">
-          Get your free AI audit: message Kyle →
+          Book your free consultation and report →
         </AnimatedButton>
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "What do I get in month 1?", a: "Your highest-impact system, built and live, inside the retainer. Months 2 and 3 tune it against how you actually use it, then it runs month-to-month." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

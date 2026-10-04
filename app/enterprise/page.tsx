@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { DISPLAY } from "@/lib/pricing";
 import { SystemLabel, DepthIndex } from "@/components/Myth";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 // Unlinked on purpose: no nav, footer, sitemap or homepage link, and noindex,
 // until Kyle confirms the enterprise prices. The figures come from lib/pricing.ts
@@ -38,9 +39,13 @@ export default function EnterprisePage() {
         sub="These figures are starting points, not a fixed price list, and they have not been market-tested. Nothing is signed until we have talked through what you actually need."
       >
         <AnimatedButton href="/contact" variant="primary" ariaLabel="Message Kyle about an enterprise engagement">
-          MESSAGE KYLE ABOUT ENTERPRISE →
+          BOOK A FREE ENTERPRISE CONSULTATION →
         </AnimatedButton>
       </PageHero>
+      <Bluf replaced>
+        Larger engagements are scoped on a call and priced before anything starts, with the output of a 20-person engineering team and nobody replaced.
+      </Bluf>
+      <Analogy k="department" />
 
       <div className="divider-gold" />
 
@@ -89,6 +94,12 @@ export default function EnterprisePage() {
           </div>
         </div>
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "I run IT. Where does this sit?", a: "Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }

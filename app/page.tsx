@@ -11,7 +11,6 @@ import JourneySteps from "@/components/JourneySteps";
 import TierQuiz from "@/components/TierQuiz";
 import RoiEstimator from "@/components/RoiEstimator";
 import StatsTicker from "@/components/StatsTicker";
-import FaqItem from "@/components/FaqItem";
 import { STATS } from "@/lib/stats";
 import ContactButtons from "@/components/ContactButtons";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
@@ -19,16 +18,17 @@ import { DISPLAY } from "@/lib/pricing";
 import { Inscription } from "@/components/Myth";
 
 import type { Offer } from "@/components/OfferCard";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 export const metadata: Metadata = {
   title: "Titanos | AI automation and Privacy Act compliance, Brisbane",
   description:
-    "One operator finds the manual task eating your week and builds the system that does it instead. Free AI audit call, free security scan, fixed-price Privacy Act compliance for Australian small business.",
+    "One operator finds the manual task eating your week and builds the system that does it instead. Free consultation and report, free security scan, fixed-price Privacy Act compliance for Australian small business.",
   alternates: { canonical: "https://titanos.tech/" },
   openGraph: {
     title: "Titanos | AI automation and Privacy Act compliance",
     description:
-      "Free AI audit call, free security scan, fixed-price Privacy Act compliance. One operator, Brisbane, ABN 34 318 502 254.",
+      "Free consultation and report, free security scan, fixed-price Privacy Act compliance. One operator, Brisbane, ABN 34 318 502 254.",
     url: "https://titanos.tech/",
     siteName: "Titanos",
     type: "website",
@@ -263,7 +263,7 @@ export default function Home() {
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
             <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
-              Get your free AI audit: message Kyle →
+              Book your free consultation and report →
             </AnimatedButton>
             <AnimatedButton href="#tiers" variant="secondary">
               See how it works ↓
@@ -310,11 +310,20 @@ export default function Home() {
 
       <HeroScrollCue />
 
+      {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
+      <Bluf replaced>
+        TITANOS gives your business the output of a 20-person engineering team for the price of one, safely, and without
+        replacing anyone.
+      </Bluf>
+      <Analogy k="department" />
+      <Pillars />
+      <Analogy k="preflight" />
+
       {/* ═══ THE PROBLEM ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Four ways it's happening right now"
+            title="Four ways the manual work is costing you right now"
             lead="Leads that never get followed up. The same questions answered by hand, every day. Data copied between systems by a person instead of a computer. A privacy problem nobody's checked in a year. Most owners know AI could help. Fewer know where to start."
           />
         </div>
@@ -325,7 +334,7 @@ export default function Home() {
       {/* ═══ THE FREE AI AUDIT ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="Start with a free AI audit" lead="A chat with Kyle. No cost, no obligation, no pitch deck." />
+          <SectionHeading title="Start with a free consultation and a free report" lead="A half-hour with Kyle, then a report on your business. No cost, no obligation, and a no is welcome." />
           <GoldThread steps={AUDIT_STEPS} />
           <p style={{ textAlign: "center", color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "24px auto 0", lineHeight: 1.7 }}>
             If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
@@ -668,76 +677,23 @@ export default function Home() {
 
       <div className="divider-gold" />
 
-      {/* ═══ FAQ ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-          <SectionHeading title="Straight answers" />
-          <FaqItem question="How much does it cost?">
-            Retainers start at {DISPLAY.AI_GROWTH_PARTNER}, {DISPLAY.AI_RETAINER_MIN}. Ops is {DISPLAY.AI_OPS_PARTNER}, Embedded is {DISPLAY.AI_EMBEDDED_PARTNER}. The audit call itself is free.
-          </FaqItem>
-          <FaqItem question="Why monthly and not a one-off build?">
-            A system you build once and never touch again decays as usage and tools change. The retainer is one sale that includes the build, the tuning, and the support, instead of a build fee followed by a second sale later.
-          </FaqItem>
-          <FaqItem question="What's the 3-month minimum for?">
-            Month 1 is the build. Months 2 to 3 are where it gets optimised against how you actually use it, which is when it starts paying for itself. After that, it's month-to-month, no lock-in.
-          </FaqItem>
-          <FaqItem question="We're not a tech business. Does this even apply to us?">
-            That's most of who I work with. You don't need to understand how it works, the same way you don't need to understand accounting software to use it. That's what the audit call is for.
-          </FaqItem>
-          <FaqItem question="I'm flat out. I don't have time for a project right now.">
-            Fair. Month 1 needs about an hour of your time in total: one call to work out which task is worth automating, one to check I built the right thing. If I need more from you than that, I've scoped it wrong.
-          </FaqItem>
-          <FaqItem question="Couldn't I just do this myself with ChatGPT?">
-            Sometimes, genuinely, and I'll say so on the call if that's the honest answer. The part that eats weeks isn't the prompt. It's the plumbing: getting it running against your actual data, and keeping it working when the tools change underneath it.
-          </FaqItem>
-          <FaqItem question="What if it breaks?">
-            Ongoing support is part of the retainer, not an add-on you have to remember to buy.
-          </FaqItem>
-          <FaqItem question="Who are you, and why should I trust you?">
-            Kyle Deligny, one operator, Brisbane. ABN 34 318 502 254, verifiable on the Australian Business Register. The evidence pack at /our-evidence-pack is my own real report, published in full, not a mock-up.
-          </FaqItem>
-          <FaqItem question="Is my data safe?">
-            Every system is built privacy-compliant by design. That's the other half of my practice, not a bolt-on.
-          </FaqItem>
-        </div>
-      </SectionReveal>
+      {/* ═══ FRONT-LOAD: concerns answered before they are raised ═══ */}
+      <FrontLoad
+        extra={[
+          { q: "Why monthly and not a one-off build?", a: "A system you build once and never touch again decays as usage and tools change. The retainer is one price that includes the build, the tuning and the support, instead of a build fee followed by a second sale later." },
+          { q: "What is the 3-month minimum for?", a: "Month 1 is the build. Months 2 and 3 are where it gets tuned against how you actually use it, which is when it starts paying for itself. After that it is month-to-month, no lock-in." },
+          { q: "We are not a tech business. Does this even apply to us?", a: "That is most of who I work with. You do not need to understand how it works, the same way you do not need to understand accounting software to use it. The free half-hour is for exactly that." },
+          { q: "I am flat out. I do not have time for a project.", a: "Fair. Month 1 needs about an hour of your time in total: one call to work out which task is worth automating, one to check I built the right thing. If I need more than that, I have scoped it wrong." },
+          { q: "Could I just do this myself with ChatGPT?", a: "Sometimes, genuinely, and I will say so if that is the honest answer. The part that eats weeks is not the prompt. It is the plumbing: getting it running against your real data and keeping it working when the tools change." },
+          { q: "What if it breaks?", a: "Ongoing support is part of the retainer, not an add-on. Like a spare tyre and a full service history, anything that breaks can be rolled back to yesterday in one command." },
+          { q: "Who are you, and why should I trust you?", a: <>Kyle Deligny, founder of TITANOS, Brisbane. ABN 34 318 502 254, verifiable on the Australian Business Register. My own security report is published in full at <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>/our-evidence-pack</a>, not a mock-up.</> },
+          { q: "Is my data safe?", a: "Every system is built privacy-compliant by design. That is the other half of my practice, not a bolt-on." },
+        ]}
+      />
 
       {/* ═══ Final CTA ═══ */}
-      <SectionReveal style={{ textAlign: "center", padding: "var(--space-30) 20px", position: "relative", zIndex: 2 }}>
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            fontWeight: 400,
-            fontStyle: "italic",
-            marginBottom: 14,
-            letterSpacing: "0.01em",
-          }}
-        >
-          Not sure where to start?
-        </h2>
-        <p
-          style={{
-            color: "var(--ice)",
-            fontSize: "var(--fs-lg)",
-            marginBottom: 32,
-            maxWidth: "var(--maxw-prose)",
-            marginLeft: "auto",
-            marginRight: "auto",
-            lineHeight: 1.6,
-          }}
-        >
-          Message Kyle for a free AI audit. You&apos;ll see exactly what&apos;s automatable in your
-          business and what it&apos;s worth. No cost, no obligation.
-        </p>
-        <div style={{ marginBottom: 24 }}>
-          <ContactButtons />
-        </div>
-        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <AnimatedButton href="#tiers" variant="secondary">See the partnership tiers ↓</AnimatedButton>
-        </div>
-      </SectionReveal>
+      <Analogy k="healthcheck" />
+      <FreeStart />
     </>
   );
 }

@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
+import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
 const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -52,9 +53,13 @@ export default function BlackIcePage() {
           READ THE FIELD GUIDE
         </AnimatedButton>
         <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="secondary">
-          MESSAGE KYLE
+          BOOK A FREE CONSULTATION
         </AnimatedButton>
       </PageHero>
+      <Bluf replaced>
+        Black Ice is the free thinking guide TITANOS runs on: automate the known, keep human judgement for the unknown.
+      </Bluf>
+      <Analogy k="twokeys" />
 
       <div className="divider-gold" />
 
@@ -196,6 +201,12 @@ export default function BlackIcePage() {
           </AnimatedButton>
         </div>
       </SectionReveal>
+      <FrontLoad
+        extra={[
+          { q: "Is this a sales pitch?", a: "No. It is the real operating framework behind every build, shared because it is useful on its own. Read it, use it, and take nothing from us." },
+        ]}
+      />
+      <FreeStart />
     </>
   );
 }
