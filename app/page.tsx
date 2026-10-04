@@ -203,10 +203,10 @@ export default function Home() {
       />
       {/* ═══ HERO ═══ */}
       <PageHero
-        badge="Parallax Industries · TITANOS"
+        badge="TITANOS · Titan Operating System"
         title="44 engineer-years of output in 4 months."
         tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on AU$30 a month."
-        sub="Kyle Deligny, founder of Parallax Industries. TITANOS, the Titan Operating System."
+        sub="Kyle Deligny, founder of TITANOS, the Titan Operating System. Home of Hypersonic Industries and Parallax Industries."
         trustLine={
           <>
             Australian-owned · ABN 34 318 502 254 · {STATS.scansThisMonth}+ external scans run this
