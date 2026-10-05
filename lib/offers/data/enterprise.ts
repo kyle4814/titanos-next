@@ -17,9 +17,6 @@ const NO_TACTICS: Faq = {
   a: "No. The free first step is yours to keep whether or not you go further. If it is not useful, a plain no is welcome and nothing follows.",
 };
 
-const SOON =
-  "This offer is launching soon. You can register interest now and nothing is charged. We will email you when it opens.";
-
 export const OFFERS_ENTERPRISE: Offer[] = [
   {
     slug: "dd-pre-read",
@@ -34,7 +31,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     ],
     youGet: [
       "Email-security grade (SPF, DKIM and DMARC, the three records that stop others spoofing a company's email), read passively from public DNS",
-      "A privacy-policy gap reading, including missing automated-decision wording ahead of 10 December 2026",
+      "A privacy-policy gap reading, including missing automated-decision wording ahead of 10 December 2026 (as we read the Privacy Act amendments; confirm with your adviser)",
       "Technology-stack exposure drawn from our company database",
       "A snapshot of filed accounts where they are public",
       "A red, amber and green summary plus questions to ask management",
@@ -47,7 +44,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "Passive checks that say UNKNOWN when a record cannot be read, instead of guessing. Nothing is scanned actively, so there is no consent issue with the target.",
     priceAud: 297,
     cadence: "one-off",
-    priceNote: "Per target domain. A 10-target pack is AU$1,997. Proposed pricing.",
+    priceNote: "Per target domain. A 10-target pack is AU$1,997.",
     status: "CHECK",
     freeHook: "One free pre-read on a target of your choice, delivered with the method page.",
     faq: [
@@ -69,7 +66,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "No. It is general information only, not legal advice. Your lawyers make the call on anything that matters.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "portfolio-watch",
     kyleMinutes: 10,
@@ -99,7 +95,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "SpoofGuard, our passive email-security grader, keeps a dated history and grades in batches. You get change over time, not a one-off scan.",
     priceAud: 499,
     cadence: "month",
-    priceNote: "Up to 10 holdings. AU$1,499 a month for up to 50 holdings. Proposed pricing.",
+    priceNote: "Up to 10 holdings. AU$1,499 a month for up to 50 holdings.",
     status: "READY",
     freeHook: "A free baseline snapshot of 3 of your holdings.",
     faq: [
@@ -149,10 +145,10 @@ export const OFFERS_ENTERPRISE: Offer[] = [
       "We read the published government contract awards and sort them for you.",
       "You get a sourced report each month.",
     ],
-    edge: "We read live government contract awards straight from AusTender's open data feed, plus 135 open contracting feeds across 72 countries, and turn them into bid packs.",
+    edge: "We read live government contract awards straight from AusTender's open data feed, plus open government contract feeds from dozens of countries, and turn them into bid packs.",
     priceAud: 499,
     cadence: "month",
-    priceNote: "Radar subscription. A per-bid pack is AU$497. A sole-trader tier is AU$249 a month. Proposed pricing.",
+    priceNote: "Radar subscription. A per-bid pack is AU$497. A sole-trader tier is AU$249 a month.",
     status: "READY",
     freeHook: "A free competitor win map for your top 3 rivals over the last 12 months.",
     faq: [
@@ -202,10 +198,10 @@ export const OFFERS_ENTERPRISE: Offer[] = [
       "We search open public-procurement feeds and sort them by fit.",
       "You get one sourced map and the shortlist.",
     ],
-    edge: "135 open contracting feeds across 72 countries read through one pipeline, using only fetchers that identify themselves honestly.",
+    edge: "Open government contract feeds from dozens of countries read through one pipeline, using only fetchers that identify themselves honestly.",
     priceAud: 1497,
     cadence: "one-off",
-    priceNote: "A refresh is AU$299 a month if you want it kept current. Proposed pricing.",
+    priceNote: "A refresh is AU$299 a month if you want it kept current.",
     status: "CHECK",
     freeHook: "A free 1-page snapshot for one country of your choice.",
     faq: [
@@ -227,7 +223,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "No. It gives them sourced material to work from.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "tender-intelligence-radar",
     kyleMinutes: 8,
@@ -258,7 +253,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "A reader for filed accounts, and a library of finished dossiers to match the format against.",
     priceAud: 497,
     cadence: "one-off",
-    priceNote: "Published concept price. A larger first job for bigger organisations is proposed at AU$5,997 up to AU$20,000, scoped with you first.",
+    priceNote: "A larger first job for bigger organisations is AU$5,997 up to AU$20,000, scoped with you first.",
     status: "READY",
     freeHook: "A free executive summary page.",
     faq: [
@@ -311,7 +306,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "It is the buyer's side of what we already provide to suppliers. Passive only, UNKNOWN when something cannot be read, sourced and dated, in one consistent format across suppliers.",
     priceAud: 149,
     cadence: "one-off",
-    priceNote: "Per supplier. AU$690 a month for 6 suppliers. Proposed pricing.",
+    priceNote: "Per supplier. AU$690 a month for 6 suppliers.",
     status: "CHECK",
     freeHook: "One free supplier check on the next vendor you onboard.",
     faq: [
@@ -333,7 +328,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "No. It adds an outside view to your existing process. Your team and your policies stay in charge.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     kyleMinutes: 6,
   },
@@ -350,7 +344,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     ],
     youGet: [
       "Email-security grading across every domain you list",
-      "A read of privacy wording on each site, including the automated-decision rule starting 10 December 2026",
+      "A read of privacy wording on each site, including the automated-decision rule starting 10 December 2026 (as we read the Privacy Act amendments; confirm with your adviser)",
       "A supplier-risk and tender-win map drawn from AusTender",
       "A board-ready exposure map PDF plus a short hook summary",
       "A 90-day monitor with two refreshes and a 10-minute handover call",
@@ -363,7 +357,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "Our passive email-security grader, privacy-policy reader, AusTender win maps and 7.6 million-company database are joined into one deliverable, using only public data.",
     priceAud: 12000,
     cadence: "one-off",
-    priceNote: "Up to 25 domains. AU$24,000 for up to 100 domains. AU$40,000 for up to 300 domains. 90-day monitor included, then AU$1,500 a month to renew. No GST is charged. Each tier sits under the NSW SCM0020 low-risk ceiling of AU$150,000. Proposed pricing.",
+    priceNote: "Up to 25 domains. AU$24,000 for up to 100 domains. AU$40,000 for up to 300 domains. 90-day monitor included, then AU$1,500 a month to renew. No GST is charged. Each tier sits under the NSW SCM0020 low-risk ceiling of AU$150,000.",
     status: "BUILD",
     freeHook: "A free 2-page public-posture reading of your top 5 domains, with no ask attached.",
     faq: [
@@ -385,7 +379,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "The scope is fixed by the number of domains. We agree it in writing before any work starts, so there are no surprises.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "/compliance",
     kyleMinutes: 10,
@@ -416,7 +409,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "AusTender contract data is joined to our email-security and privacy readings by supplier, using our company database. No consultancy has that join prebuilt.",
     priceAud: 9500,
     cadence: "one-off",
-    priceNote: "Up to 100 suppliers. AU$19,000 for up to 300 suppliers. 60-day refresh included. Proposed pricing.",
+    priceNote: "Up to 100 suppliers. AU$19,000 for up to 300 suppliers. 60-day refresh included.",
     status: "CHECK",
     freeHook: "A free map of your agency's top 10 suppliers by contract value, from public AusTender data.",
     faq: [
@@ -438,7 +431,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "The map marks it UNKNOWN. A gap is never turned into a clean result.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "sub-threshold-intelligence-contract",
     kyleMinutes: 10,
@@ -466,10 +458,10 @@ export const OFFERS_ENTERPRISE: Offer[] = [
       "We grade every site from public records.",
       "You get the league table, the fix kits and the monitor.",
     ],
-    edge: "Passive grading at network scale, plus our 7.6 million-company database to find franchisee sites the franchisor does not list.",
+    edge: "Passive grading at network scale, plus our own database of millions of Australian businesses to find franchisee sites the franchisor does not list.",
     priceAud: 14000,
     cadence: "one-off",
-    priceNote: "Up to 150 sites. AU$28,000 for up to 400 sites. Then AU$2,500 a month for the monitor. Proposed pricing.",
+    priceNote: "Up to 150 sites. AU$28,000 for up to 400 sites. Then AU$2,500 a month for the monitor.",
     status: "BUILD",
     freeHook: "A free grade of your franchisor's own 10 busiest sites.",
     faq: [
@@ -491,7 +483,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "Yes. The monitor is month to month after the first 90 days.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "/compliance",
     kyleMinutes: 10,
@@ -522,7 +513,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "Public data only, with no active scanning. The privacy reader flags missing automated-decision wording, and the format follows our finished health-sector dossiers.",
     priceAud: 15000,
     cadence: "one-off",
-    priceNote: "Up to 40 sites. AU$35,000 for up to 150 sites. Proposed pricing.",
+    priceNote: "Up to 40 sites. AU$35,000 for up to 150 sites.",
     status: "CHECK",
     freeHook: "A free 3-page trust reading of your flagship hospital or facility domain.",
     faq: [
@@ -544,7 +535,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "Not yet. TITANOS is a sole trader. We would raise this with you before any contract so you can decide with the full picture.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "profit-mirror-care",
     kyleMinutes: 10,
@@ -572,10 +562,10 @@ export const OFFERS_ENTERPRISE: Offer[] = [
       "We read the public award record and their filed accounts where public.",
       "You get one brief, and 30 days of follow-up questions.",
     ],
-    edge: "AusTender and 135 open contracting feeds joined with our 7.6 million-company database and a filed-accounts reading of the incumbent.",
+    edge: "AusTender and 135 open contracting feeds joined with our own database of millions of Australian businesses and a filed-accounts reading of the incumbent.",
     priceAud: 7500,
     cadence: "one-off",
-    priceNote: "Per rebid. AU$18,000 for a 3-rebid pipeline bundle. Proposed pricing.",
+    priceNote: "Per rebid. AU$18,000 for a 3-rebid pipeline bundle.",
     status: "BUILD",
     freeHook: "A free one-page incumbent award history for a rebid you name.",
     faq: [
@@ -597,7 +587,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "No. It gives them, or your own team, a head start.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "tender-intelligence-radar",
     kyleMinutes: 10,
@@ -625,10 +614,10 @@ export const OFFERS_ENTERPRISE: Offer[] = [
       "We grade each one from public DNS records.",
       "You get the graded book, the heat map and a refresh at 90 days.",
     ],
-    edge: "Passive grading at batch scale that says UNKNOWN when a record cannot be read, plus our 7.6 million-company database for industry and technology segmentation.",
+    edge: "Passive grading at batch scale that says UNKNOWN when a record cannot be read, plus our own database of millions of Australian businesses for industry and technology segmentation.",
     priceAud: 18000,
     cadence: "one-off",
-    priceNote: "Up to 2,000 domains. AU$35,000 for up to 10,000 domains. Refresh is AU$4,000 a quarter. Proposed pricing.",
+    priceNote: "Up to 2,000 domains. AU$35,000 for up to 10,000 domains. Refresh is AU$4,000 a quarter.",
     status: "BUILD",
     freeHook: "A free grade of 50 domains taken from your own public client-logo list.",
     faq: [
@@ -650,7 +639,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "They are marked UNKNOWN and are never counted as good or bad.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     kyleMinutes: 10,
   },
@@ -680,7 +668,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "A time series across the whole company database, so you see trend and not a point count. It gets more useful with every quarter of history.",
     priceAud: 199,
     cadence: "one-off",
-    priceNote: "Per report, per region. AU$599 a year for four quarters. A true trend needs at least two snapshots, so a first report shows counts only. Proposed pricing.",
+    priceNote: "Per report, per region. AU$599 a year for four quarters. A true trend needs at least two snapshots, so a first report shows counts only.",
     status: "BUILD",
     freeHook: "A free one-suburb sample report.",
     faq: [
@@ -702,7 +690,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "No. It is general information to support your own judgement.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     kyleMinutes: 3,
   },
@@ -714,7 +701,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     bluf: "Your shared inbox sorted into four piles each morning, with replies drafted for the ones that matter, so you get your evenings back.",
     forWho: [
       "Owner-operators in hospitality, retail, e-commerce and health admin",
-      "Anyone spending 5 to 10 hours a week in email",
+      "Owners who spend their evenings in email",
       "Owners whose money emails get buried under junk",
     ],
     youGet: [
@@ -731,7 +718,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "The inbox watcher and reply drafter already run daily for Kyle's own inbox, alongside the approval-card sender. It is a proven routine, not a new build.",
     priceAud: 99,
     cadence: "month",
-    priceNote: "AU$199 a month with a second mailbox and custom rules. Proposed pricing.",
+    priceNote: "AU$199 a month with a second mailbox and custom rules.",
     status: "BUILD",
     freeHook: "A free 7-day inbox count: emails a week, how many land in each pile, and the estimated hours. It starts after you sign a short consent page (Privacy Act).",
     faq: [
@@ -757,7 +744,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "Yes. It is month to month.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "/ai-delivery",
     kyleMinutes: 8,
@@ -787,7 +773,7 @@ export const OFFERS_ENTERPRISE: Offer[] = [
     edge: "A drafting routine and approval-card rail that already exist. Targeting starts from public review counts and ratings on your Maps page.",
     priceAud: 59,
     cadence: "month",
-    priceNote: "Month to month. Proposed pricing.",
+    priceNote: "Month to month.",
     status: "CHECK",
     freeHook: "A free one-line Review Gap Snapshot: your rating, your review count, and how many of your latest 20 reviews show no owner reply, from your public Maps page only.",
     faq: [
@@ -813,7 +799,6 @@ export const OFFERS_ENTERPRISE: Offer[] = [
         a: "Yes. It is month to month.",
       },
       GST,
-      { q: "When can I buy it?", a: SOON },
     ],
     ladderUp: "/ai-delivery",
     kyleMinutes: 6,

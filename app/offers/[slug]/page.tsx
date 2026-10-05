@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
-import { ALL_OFFERS, getOffer, buyHref } from "@/lib/offers";
+import { ALL_OFFERS, getOffer, buyHref, availability, AVAILABILITY_TEXT, LADDER_ROUTES } from "@/lib/offers";
 import { formatOfferPrice, type Offer } from "@/lib/offers/types";
 
 export const dynamicParams = false;
@@ -57,21 +57,23 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
 
 function Cta({ o }: { o: Offer }) {
   const href = buyHref(o);
+  const av = availability(o);
   const interest = `mailto:kyle@titanos.tech?subject=${encodeURIComponent(`Interest: ${o.name}`)}`;
-  if (href) {
+  const hook = o.freeHook.replace(/[.]+$/, "");
+  if (av === "BUYABLE" && href) {
     return (
       <>
         <AnimatedButton href={href}>BUY NOW →</AnimatedButton>
-        <AnimatedButton href="/scan#request" variant="secondary">{o.freeHook.toUpperCase()}</AnimatedButton>
+        <AnimatedButton href="/scan#request" variant="secondary">START WITH THE FREE STEP</AnimatedButton>
       </>
     );
   }
-  if (o.status === "READY") {
+  if (av === "OPENING") {
     return (
       <>
         <AnimatedButton href="/scan#request">START WITH THE FREE STEP →</AnimatedButton>
         <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
-          Free step: {o.freeHook.replace(/[.]+$/, "")}. Online checkout opens shortly.
+          Free first step open now: {hook}. Online checkout opening soon.
         </p>
       </>
     );
@@ -80,27 +82,39 @@ function Cta({ o }: { o: Offer }) {
     <>
       <AnimatedButton href={interest} external>REGISTER INTEREST →</AnimatedButton>
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
-        Launching soon. Registering is free and commits you to nothing. Free step in the meantime: {o.freeHook.replace(/[.]+$/, "")}.
+        Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): {hook}.
       </p>
     </>
   );
 }
+
+function refundLine(o: Offer): string {
+  if (o.cadence === "month" || o.cadence === "per-seat-month") return "Cancel any time by email. No refund for the current month.";
+  if (o.cadence === "quote") return "Scope, price and terms are confirmed in writing before you start.";
+  return "Refund terms are in our terms and confirmed in writing before you pay.";
+}
+
+const PRIVACY_RE = /privacy/i;
 
 export default async function OfferPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const o = getOffer(slug);
   if (!o) notFound();
   const ladder = o.ladderUp
-    ? o.ladderUp.startsWith("/") ? { href: o.ladderUp, label: o.ladderUp } : { href: `/offers/${o.ladderUp}`, label: getOffer(o.ladderUp)?.name ?? o.ladderUp }
+    ? o.ladderUp.startsWith("/")
+      ? { href: o.ladderUp, label: LADDER_ROUTES[o.ladderUp] ?? "See the next step" }
+      : { href: `/offers/${o.ladderUp}`, label: getOffer(o.ladderUp)?.name ?? "See the next step" }
     : null;
-  const available = o.status === "READY";
+  const av = availability(o);
+  const privacyRelated = PRIVACY_RE.test([o.name, o.bluf, ...o.youGet].join(" "));
+  const buyer = o.buyer.charAt(0).toLowerCase() + o.buyer.slice(1);
   return (
     <>
       <PageHero
-        badge={`TITANOS · ${available ? "AVAILABLE NOW" : "LAUNCHING SOON"}`}
+        badge={`TITANOS · ${AVAILABILITY_TEXT[av].badge}`}
         title={o.name}
         tagline={o.bluf}
-        sub={`For ${o.buyer}. ${formatOfferPrice(o)}. No GST is charged.`}
+        sub={`Built for ${buyer}. ${formatOfferPrice(o)}. No GST is charged. ${AVAILABILITY_TEXT[av].line}`}
       >
         <Cta o={o} />
       </PageHero>
@@ -126,13 +140,17 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
           </div>
           {o.priceNote && <p style={{ color: "var(--ice)", margin: "10px 0 0" }}>{o.priceNote}</p>}
           <p style={{ color: "var(--text)", lineHeight: 1.7, margin: "14px 0 0" }}>
-            No GST is charged. Cancel any time, or ask for a refund if it is not what we said it would be.
+            No GST is charged. {refundLine(o)} Full terms: <Link href="/terms" style={{ color: "var(--gold)" }}>/terms</Link>
           </p>
         </div>
       </Block>
       <div className="divider-gold" />
       <Block title="Straight answers">
+        <FaqItem question="Can I buy this today?">{AVAILABILITY_TEXT[av].line}</FaqItem>
         {o.faq.map((f) => <FaqItem key={f.q} question={f.q}>{f.a}</FaqItem>)}
+        {privacyRelated && (
+          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 14 }}>General information, not legal advice.</p>
+        )}
       </Block>
 
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>

@@ -1,9 +1,5 @@
 import type { Offer } from "../types";
 
-const soon = (what: string) => ({
-  q: "Can I buy this today?",
-  a: `Not yet. ${what} is launching soon. You can register interest for free, and nothing is charged or sent until it opens.`,
-});
 const noReplace = {
   q: "Does this replace anyone on my team?",
   a: "No. It gives your people their hours back and gives them a better starting point. You stay the decision maker.",
@@ -53,7 +49,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "We read live government contract awards (AusTender and open contracting data) and join them to our dossier format. It is a per-employer sourced dossier with talking points, not just a list of winners.",
     priceAud: 79,
     cadence: "one-off",
-    priceNote: "Per employer dossier. A pack of 6 is AU$390 a month. Proposed pricing.",
+    priceNote: "Per employer dossier. A pack of 6 is AU$390 a month.",
     status: "CHECK",
     freeHook: "One free dossier on an employer you name.",
     faq: [
@@ -64,7 +60,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Not necessarily. A win often means delivery work and people, but that link is a modelled idea, and the dossier says so. It is a reason to call, not a promise of a vacancy.",
       },
       noReplace,
-      soon("The Hiring-Trigger Dossier"),
       gst,
       cancel,
     ],
@@ -97,7 +92,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "One open-contracting feed per country, rebranded by a simple settings row. Most tender portals sell generic search, not a feed an association can put its own name on.",
     priceAud: 299,
     cadence: "month",
-    priceNote: "Up to 500 members. AU$699 a month for up to 5,000 members. Proposed pricing.",
+    priceNote: "Up to 500 members. AU$699 a month for up to 5,000 members.",
     status: "CHECK",
     freeHook: "A free 30-day pilot digest for one chamber, with no data about your members shared with TITANOS.",
     faq: [
@@ -112,7 +107,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         q: "Can I grow this later?",
         a: "Yes. It can sit alongside a member benefit kit, and members can later be offered a bid pack. Only if you want that.",
       },
-      soon("The white-label feed"),
       gst,
       cancel,
     ],
@@ -145,7 +139,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "The same open government tender feeds, served as a cached widget from a settings row. No manual curation on your side.",
     priceAud: 39,
     cadence: "month",
-    priceNote: "Per site. AU$99 a month for a network of ten sites. Proposed pricing.",
+    priceNote: "Per site. AU$99 a month for a network of ten sites.",
     status: "BUILD",
     freeHook: "A free embed on a trial page for 30 days.",
     faq: [
@@ -156,7 +150,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
       },
       publicOnly,
       noReplace,
-      soon("The tender embed"),
       gst,
       cancel,
     ],
@@ -189,7 +182,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "Contract award values and new company registrations in one feed. The trigger is evidenced by a public record, not guessed.",
     priceAud: 149,
     cadence: "month",
-    priceNote: "AU$149 to AU$299 a month depending on region and volume. Proposed pricing.",
+    priceNote: "AU$149 to AU$299 a month depending on region and volume.",
     status: "BUILD",
     freeHook: "A free list of the last 30 days of tender winners in your region. Whether a win means a finance need is modelled, and the page says so.",
     faq: [
@@ -204,7 +197,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Contact business addresses only, say who you are, make the message relevant and always include an unsubscribe. You are the sender, under your own name.",
       },
       noReplace,
-      soon("The finance broker feed"),
       gst,
       cancel,
     ],
@@ -236,7 +228,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "New-registration events come from our own database, not a purchased list. It pairs with our email check so you can open with a verified note.",
     priceAud: 149,
     cadence: "month",
-    priceNote: "Proposed pricing.",
     status: "BUILD",
     freeHook: "A free sample of new trading businesses in your patch this week.",
     faq: [
@@ -251,7 +242,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Contact business addresses only, be relevant, identify yourself and include an unsubscribe. You send under your own name.",
       },
       noReplace,
-      soon("The insurance feed"),
       gst,
       cancel,
     ],
@@ -283,7 +273,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "A change over time is a fact a single scan cannot show. We compare dated records, so you see movement, not a snapshot.",
     priceAud: 149,
     cadence: "month",
-    priceNote: "AU$149 to AU$299 a month depending on platforms and region. Proposed pricing.",
+    priceNote: "AU$149 to AU$299 a month depending on platforms and region.",
     status: "CHECK",
     freeHook: "A free 10-row sample. Change history starts from the first re-scan where earlier dated records are missing.",
     faq: [
@@ -298,7 +288,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Contact business addresses only, be relevant, say who you are and include an unsubscribe. You send under your own name.",
       },
       noReplace,
-      soon("The stack-change feed"),
       gst,
       cancel,
     ],
@@ -378,7 +367,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "Fresh registrations from our own database history, filtered to entities, with a welcome kit that includes a passive email-setup check.",
     priceAud: 99,
     cadence: "month",
-    priceNote: "AU$99 to AU$149 a month depending on area and volume. Proposed pricing.",
+    priceNote: "AU$99 to AU$149 a month depending on area and volume.",
     status: "BUILD",
     freeHook: "A free first-month sample.",
     faq: [
@@ -393,7 +382,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "No. Individuals are excluded. It lists companies and trusts only.",
       },
       noReplace,
-      soon("The new-client feed"),
       gst,
       cancel,
     ],
@@ -425,7 +413,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "A change layer on top of our passive email-protection grader. You see movement over time, not just a single score.",
     priceAud: 99,
     cadence: "month",
-    priceNote: "Up to 200 members. AU$199 a month for up to 1,000 members. Proposed pricing.",
+    priceNote: "Up to 200 members. AU$199 a month for up to 1,000 members.",
     status: "CHECK",
     freeHook: "A free baseline scan of 20 member domains.",
     faq: [
@@ -440,7 +428,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "No. It only reads public DNS records. Nothing on a member's own systems is touched.",
       },
       noReplace,
-      soon("The drift alert"),
       gst,
       cancel,
     ],
@@ -472,7 +459,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "The same approval-based rail, cloned for each client from a settings row. Your practice never touches a client's send authority.",
     priceAud: 39,
     cadence: "per-seat-month",
-    priceNote: "Per client, minimum 5 clients. Proposed pricing.",
+    priceNote: "Per client, minimum 5 clients.",
     status: "BUILD",
     freeHook: "A free 30-day pilot for 3 of your clients.",
     faq: [
@@ -486,7 +473,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Only what is needed to draft the nudges for that client, with their consent. We will list it before you start.",
       },
       noReplace,
-      soon("The chaser pack"),
       gst,
       cancel,
     ],
@@ -502,7 +488,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     forWho: [
       "Bookkeepers and small accounting practices serving owner-operators",
       "Practices with roughly 15 to 60 small clients",
-      "Anyone tired of unpaid hours spent checking each client by hand",
+      "Anyone tired of unpaid time spent checking each client by hand",
     ],
     youGet: [
       "One board for you and one card per client",
@@ -519,7 +505,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "One setup row per client on the same proven code, so 30 clients means 30 rows, not 30 projects.",
     priceAud: 15,
     cadence: "per-seat-month",
-    priceNote: "Per client per month, minimum 10 clients, plus a AU$300 one-off setup. You resell at your own price. Proposed pricing.",
+    priceNote: "Per client per month, minimum 10 clients, plus a AU$300 one-off setup. You resell at your own price.",
     status: "KEY",
     freeHook: "A free board for 3 of your clients for 2 weeks.",
     faq: [
@@ -533,7 +519,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "Only if you choose to forward a card, under your name.",
       },
       noReplace,
-      soon("The morning board"),
       gst,
       cancel,
     ],
@@ -566,7 +551,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "This pattern is taken from the live approval rails TITANOS runs itself. The build is modelled at about 39 engineer-years on a standard estimate (COCOMO, a MODELLED figure) and was made for about US$30 a month. Most agencies have no tested gate-and-receipt design to copy.",
     priceAud: 497,
     cadence: "one-off",
-    priceNote: "AU$99 a month for updates is optional. Proposed pricing.",
+    priceNote: "AU$99 a month for updates is optional.",
     status: "CHECK",
     freeHook: "A free five-gate checklist one-pager and a sample approval card, published with the public write-up.",
     faq: [
@@ -584,7 +569,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "It is built around a plain settings file and a Telegram or email approval card. We will tell you honestly before you buy if your stack is a poor fit.",
       },
       noReplace,
-      soon("The Approval-Rail Kit"),
       gst,
       cancel,
     ],
@@ -618,7 +602,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "It uses TITANOS's real retainer ladder and receipt practice as the sales model. The governance claims are backed by actual working code, not slides.",
     priceAud: 197,
     cadence: "one-off",
-    priceNote: "AU$97 when bought together with the Approval-Rail Kit. Proposed pricing.",
+    priceNote: "AU$97 when bought together with the Approval-Rail Kit.",
     status: "BUILD",
     freeHook: "A free one-page client explainer: what an approval gate is and why your agent has five.",
     faq: [
@@ -632,7 +616,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "No. The clauses are editable templates. Have your own adviser review them before use.",
       },
       noReplace,
-      soon("The proposal pack"),
       gst,
       cancel,
     ],
@@ -665,14 +648,13 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
     edge: "TITANOS already runs an approval-card email sender, an outreach gate, an inbox watcher and a reply drafter. A freelancer would have to build or buy each of them.",
     priceAud: 797,
     cadence: "month",
-    priceNote: "Proposed pricing.",
     status: "CHECK",
     freeHook: "A free dry run of one batch showing the draft emails and the gate's pass or fail report, with nothing sent.",
     faq: [
       whoAreYou,
       {
         q: "Is this legal under the Spam Act?",
-        a: "We send to business role-based addresses only, with relevance and an unsubscribe on every message. You send under your own identity. This is general information, not legal advice.",
+        a: "We send to business role-based addresses only, with relevance and an unsubscribe on every message. You send under your own identity. This is general information, not legal advice. The sender is responsible for complying with the Spam Act.",
       },
       {
         q: "Does anything send without me?",
@@ -683,7 +665,6 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
         a: "From you. We do not sell or supply a list for this offer.",
       },
       noReplace,
-      soon("The Solar Outreach Rail"),
       gst,
       cancel,
     ],

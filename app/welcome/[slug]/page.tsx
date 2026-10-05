@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
@@ -28,14 +29,18 @@ export default async function WelcomePage({ params }: { params: Promise<{ slug: 
     <>
       <PageHero
         badge="TITANOS · WELCOME"
-        title="Thanks, you're in."
-        tagline={`${o.name} is set up on your side. Fill in the details below and Kyle will take it from there.`}
-        sub="Kyle reviews and confirms within one business day."
+        title="Welcome. Tell us about your business."
+        tagline="Once you send this, Kyle confirms the setup within one business day."
+        sub={`Service: ${o.name}.`}
       />
       <SectionReveal style={{ padding: "var(--space-12) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="Tell us about your business" lead="It opens an email to Kyle with your answers. Nothing is stored on this site." />
           <WelcomeForm offerName={o.name} />
+          <p style={{ maxWidth: "var(--maxw-prose)", margin: "18px auto 0", color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>
+            We use these details only to set up this service. They arrive in Kyle&apos;s email inbox; this site stores nothing. See our{" "}
+            <Link href="/privacy" style={{ color: "var(--gold)" }}>privacy policy</Link>.
+          </p>
         </div>
       </SectionReveal>
       <SectionReveal style={{ padding: "var(--space-8) 20px var(--space-20)", position: "relative", zIndex: 2 }}>

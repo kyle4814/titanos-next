@@ -5,7 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Bluf } from "@/components/SalesKit";
-import { ALL_OFFERS, offersByGroup } from "@/lib/offers";
+import { ALL_OFFERS, offersByGroup, availability, AVAILABILITY_TEXT } from "@/lib/offers";
 import { formatAUD } from "@/lib/pricing";
 import { GROUP_LABELS, formatOfferPrice, type Offer, type OfferGroup } from "@/lib/offers/types";
 
@@ -55,7 +55,8 @@ const BUDGETS: { id: string; label: string; test: (o: Offer) => boolean }[] = [
 ];
 
 function Card({ o }: { o: Offer }) {
-  const ready = o.status === "READY";
+  const av = availability(o);
+  const open = av !== "SOON";
   return (
     <Link
       href={`/offers/${o.slug}`}
@@ -73,14 +74,14 @@ function Card({ o }: { o: Offer }) {
         <span
           style={{
             fontSize: "var(--fs-xs)",
-            color: ready ? "var(--ok)" : "var(--dim)",
-            border: `1px solid ${ready ? "var(--ok)" : "var(--border)"}`,
+            color: open ? "var(--ok)" : "var(--dim)",
+            border: `1px solid ${open ? "var(--ok)" : "var(--border)"}`,
             borderRadius: 999,
             padding: "2px 10px",
             whiteSpace: "nowrap",
           }}
         >
-          {ready ? "Available now" : "Launching soon"}
+          {AVAILABILITY_TEXT[av].pill}
         </span>
       </div>
       <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.6, margin: "10px 0" }}>{o.bluf}</p>
@@ -100,6 +101,19 @@ function Grid({ offers }: { offers: Offer[] }) {
   );
 }
 
+function LinkList({ offers }: { offers: Offer[] }) {
+  if (offers.length === 0) return <p style={{ color: "var(--dim)" }}>Nothing in this list yet.</p>;
+  return (
+    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "6px 18px" }}>
+      {offers.map((o) => (
+        <li key={o.slug}>
+          <Link href={`/offers/${o.slug}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "underline" }}>{o.name}</Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function Chips({ items }: { items: { id: string; label: string }[] }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 28 }}>
@@ -107,7 +121,7 @@ function Chips({ items }: { items: { id: string; label: string }[] }) {
         <a
           key={i.id}
           href={`#${i.id}`}
-          style={{ border: "1px solid var(--gold-dim)", borderRadius: 999, padding: "8px 16px", color: "var(--ice)", textDecoration: "none", fontSize: "var(--fs-sm)" }}
+          className="offer-chip"
         >
           {i.label}
         </a>
@@ -154,9 +168,9 @@ export default function OffersHub() {
           <SectionHeading title="By what you need" />
           <Chips items={NEEDS} />
           {NEEDS.map((n) => (
-            <div key={n.id} id={n.id} style={{ marginBottom: 40 }}>
-              <h3 style={{ color: "var(--ice)", marginBottom: 14 }}>{n.label}</h3>
-              <Grid offers={ALL_OFFERS.filter((o) => n.groups.includes(o.group))} />
+            <div key={n.id} id={n.id} style={{ marginBottom: 28 }}>
+              <h3 style={{ color: "var(--ice)", marginBottom: 10 }}>{n.label}</h3>
+              <LinkList offers={ALL_OFFERS.filter((o) => n.groups.includes(o.group))} />
             </div>
           ))}
         </div>
@@ -169,9 +183,9 @@ export default function OffersHub() {
           <SectionHeading title="By budget" />
           <Chips items={BUDGETS} />
           {BUDGETS.map((b) => (
-            <div key={b.id} id={b.id} style={{ marginBottom: 40 }}>
-              <h3 style={{ color: "var(--ice)", marginBottom: 14 }}>{b.label}</h3>
-              <Grid offers={ALL_OFFERS.filter(b.test)} />
+            <div key={b.id} id={b.id} style={{ marginBottom: 28 }}>
+              <h3 style={{ color: "var(--ice)", marginBottom: 10 }}>{b.label}</h3>
+              <LinkList offers={ALL_OFFERS.filter(b.test)} />
             </div>
           ))}
         </div>

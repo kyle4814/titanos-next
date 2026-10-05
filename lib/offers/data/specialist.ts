@@ -6,7 +6,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
     name: "Privacy ADM Fix",
     group: "specialist",
     buyer: "Principal or practice manager at an accounting, law, financial planning, medical, allied health, NDIS or aged care firm",
-    bluf: "We read your live privacy policy and show you the exact wording it is missing for the 10 December 2026 automated-decision rule, with wording you can adapt.",
+    bluf: "We read your live privacy policy and show you the exact wording it is missing for the 10 December 2026 automated-decision rule (as we read the Privacy Act amendments; confirm with your adviser), with wording you can adapt.",
     forWho: [
       "Accounting, law and financial planning practices",
       "Medical, allied health, NDIS and aged care providers",
@@ -144,7 +144,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "We combine business emails sourced from public maps listings with technology data, and we check that the contacts can actually receive mail.",
     priceAud: 297,
     cadence: "one-off",
-    priceNote: "AU$297 one-off. No GST is charged. Launching soon.",
+    priceNote: "AU$297 one-off. No GST is charged.",
     status: "CHECK",
     freeHook: "A free 5-partner sample for your suburb.",
     faq: [
@@ -154,11 +154,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       },
       {
         q: "Will you email these people for me?",
-        a: "No. You get the list and a draft. Any introduction email is shown to you on an approval card first, and the Spam Act applies to what you send.",
-      },
-      {
-        q: "Is this available now?",
-        a: "Launching soon. You can register interest and we will tell you when it opens.",
+        a: "No. You get the list and a draft. Any introduction email is shown to you on an approval card first, and the Spam Act applies to what you send. The sender is responsible for complying with the Spam Act.",
       },
       {
         q: "Does this replace my referral relationships?",
@@ -166,7 +162,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       },
       {
         q: "What does it cost?",
-        a: "The proposed price is AU$297 once. No GST is charged.",
+        a: "The price is AU$297 once. No GST is charged.",
       },
       {
         q: "What if it is not for me?",
@@ -202,7 +198,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "We keep a dated, passive history of your own public posture across quarters, built on our dossier template.",
     priceAud: 1997,
     cadence: "quote",
-    priceNote: "Proposed AU$1,997 per quarter. No GST is charged. Launching soon.",
+    priceNote: "AU$1,997 per quarter. No GST is charged.",
     status: "CHECK",
     freeHook: "A free first-page posture reading, the same page that opens a full briefing.",
     faq: [
@@ -219,12 +215,8 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "No. Your IT provider and committee stay. The briefing gives them and the board one shared page.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. You can register interest and we will tell you when it opens.",
-      },
-      {
         q: "What does it cost, and can we cancel?",
-        a: "The proposed price is AU$1,997 per quarter, with no GST charged. We will confirm the terms, including how to stop, before anything starts.",
+        a: "The price is AU$1,997 per quarter, with no GST charged. We will confirm the terms, including how to stop, before anything starts.",
       },
       {
         q: "What if the board wants time first?",
@@ -259,7 +251,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "One setup feeds five regional kits, so you get all five from a single request at one low price.",
     priceAud: 49,
     cadence: "one-off",
-    priceNote: "AU$49 one-off. No GST is charged. Launching soon.",
+    priceNote: "AU$49 one-off. No GST is charged.",
     status: "CHECK",
     freeHook: "A free which-regions-apply-to-me picker.",
     faq: [
@@ -276,12 +268,8 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "Only the public page you point us to. Nothing in your systems is touched.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. Register interest and we will tell you when it opens.",
-      },
-      {
         q: "What does it cost?",
-        a: "The proposed price is AU$49 once. No GST is charged and there is no subscription.",
+        a: "The price is AU$49 once. No GST is charged and there is no subscription.",
       },
       {
         q: "What if I only sell in one or two regions?",
@@ -318,7 +306,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "We read live Australian Government contract awards (AusTender) down to supplier, suburb and value, and combine them with public business listings. An ordinary lead agency does not have the contract-winner data.",
     priceAud: 249,
     cadence: "month",
-    priceNote: "AU$249 a month. No GST is charged. Launching soon.",
+    priceNote: "AU$249 a month. No GST is charged.",
     status: "CHECK",
     freeHook:
       "A free sample: five contract winners within 25 km of your postcode this month, sourced and dated. Federal data is ready now. State and council data is being checked area by area.",
@@ -338,10 +326,6 @@ export const OFFERS_SPECIALIST: Offer[] = [
       {
         q: "Does this replace anyone?",
         a: "No. It gives you your time back by doing the research. You still do the quoting and the work.",
-      },
-      {
-        q: "Is it available now?",
-        a: "Launching soon. Register interest and we will tell you when it opens. The free sample is the best first step.",
       },
       {
         q: "What does it cost, and can I cancel?",
@@ -377,10 +361,10 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "The feed and digest arrive by your preferred channel.",
     ],
     edge:
-      "We hold address-change history across 7.6 million Australian companies, which only exists as a time series. Contract awards add a growth signal, since winners often need more space.",
+      "We hold address-change history across millions of Australian companies, which only exists as a time series. Contract awards add a growth signal, since winners often need more space.",
     priceAud: 149,
     cadence: "month",
-    priceNote: "Proposed AU$149 to AU$299 a month, depending on area and volume. No GST is charged. Launching soon.",
+    priceNote: "AU$149 to AU$299 a month, depending on area and volume. No GST is charged.",
     status: "BUILD",
     freeHook:
       "A free sample: who moved or opened in your top suburb last quarter. How often our address data refreshes is still being checked, so we will not promise a weekly cadence until it is confirmed.",
@@ -394,10 +378,6 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "No. You receive the feed. What you do with it is up to you.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. This is still being built. Register interest and we will tell you when it opens.",
-      },
-      {
         q: "How fresh is the data?",
         a: "We are still checking how often the address records refresh. The free sample will show what is realistic before we commit to a cadence.",
       },
@@ -407,7 +387,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       },
       {
         q: "What does it cost?",
-        a: "The proposed range is AU$149 to AU$299 a month. No GST is charged. A no is welcome.",
+        a: "The range is AU$149 to AU$299 a month. No GST is charged. A no is welcome.",
       },
     ],
     ladderUp: "/leads",
@@ -439,7 +419,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "A ready-made trigger feed with history behind it. Each consultant becomes a channel to dozens of clients without building the data themselves.",
     priceAud: 199,
     cadence: "month",
-    priceNote: "Proposed AU$199 a month plus AU$20 a month for each additional end client. No GST is charged. Launching soon.",
+    priceNote: "AU$199 a month plus AU$20 a month for each additional end client. No GST is charged.",
     status: "BUILD",
     freeHook: "A free sandbox endpoint with sample events, so you can test your workflow first.",
     faq: [
@@ -452,16 +432,12 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "Public company registers and published government contract awards.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. This is still being built. Register interest and we will tell you when it opens.",
-      },
-      {
         q: "Do I keep my client relationships?",
         a: "Yes, entirely. The white-label option means your clients deal with you.",
       },
       {
         q: "What does it cost?",
-        a: "The proposed price is AU$199 a month plus AU$20 for each additional end client. No GST is charged.",
+        a: "The price is AU$199 a month plus AU$20 for each additional end client. No GST is charged.",
       },
       {
         q: "Can I test it first?",
@@ -498,7 +474,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "This is the same outreach gate and content checker TITANOS runs on its own outbound email. It includes the lessons from an earlier scanner of ours that we retired.",
     priceAud: 197,
     cadence: "one-off",
-    priceNote: "AU$197 one-off, with updates bundled in the Core Kit. No GST is charged. Launching soon.",
+    priceNote: "AU$197 one-off, with updates bundled in the Core Kit. No GST is charged.",
     status: "CHECK",
     freeHook:
       "A free banned-phrase list and a plain-English Spam Act sending checklist. This is general information, not legal advice.",
@@ -516,12 +492,8 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "No. It enforces human approval. Nothing sends without a person saying yes.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. Register interest and we will tell you when it opens.",
-      },
-      {
         q: "What does it cost?",
-        a: "The proposed price is AU$197 once, with no GST charged.",
+        a: "The price is AU$197 once, with no GST charged.",
       },
       {
         q: "Can I try the idea first?",
@@ -556,7 +528,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "It comes from how TITANOS tests its own work: we deliberately try to break passing tests and record the false greens we catch. Ordinary agencies ship without adversarial test cases.",
     priceAud: 297,
     cadence: "one-off",
-    priceNote: "AU$297 one-off, or AU$199 with the Core Kit. No GST is charged. Launching soon.",
+    priceNote: "AU$297 one-off, or AU$199 with the Core Kit. No GST is charged.",
     status: "BUILD",
     freeHook: "A free ten-case starter set (injection and empty-input cases) in our public write-up.",
     faq: [
@@ -573,12 +545,8 @@ export const OFFERS_SPECIALIST: Offer[] = [
         a: "No. The harness runs on your side with your own agent.",
       },
       {
-        q: "Is it available now?",
-        a: "Launching soon. This is still being built. Register interest and we will tell you when it opens.",
-      },
-      {
         q: "What does it cost?",
-        a: "The proposed price is AU$297 once, or AU$199 with the Core Kit. No GST is charged.",
+        a: "The price is AU$297 once, or AU$199 with the Core Kit. No GST is charged.",
       },
       {
         q: "Can I look before buying?",
@@ -610,10 +578,10 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "You receive the sheet and summary and decide who to approach.",
     ],
     edge:
-      "We combine our database of 7.6 million Australian companies (industry, size, website) with verified business emails from public map listings, filtered by distance from your club.",
+      "We combine our own database of millions of Australian businesses (industry, size, website) with verified business emails from public map listings, filtered by distance from your club.",
     priceAud: 49,
     cadence: "one-off",
-    priceNote: "AU$49 one-off per season for a list of 60. AU$99 for 150 with full contact fields. No GST is charged. Launching soon.",
+    priceNote: "AU$49 one-off per season for a list of 60. AU$99 for 150 with full contact fields. No GST is charged.",
     status: "CHECK",
     freeHook: "A free top-10 local sponsor shortlist for any club that sends a postcode and distance. No signup needed.",
     faq: [
@@ -628,10 +596,6 @@ export const OFFERS_SPECIALIST: Offer[] = [
       {
         q: "Do you contact the businesses?",
         a: "No. You get the list. The asking is yours.",
-      },
-      {
-        q: "Is it available now?",
-        a: "Launching soon. Register interest and we will tell you when it opens. The free top-10 is the best first step.",
       },
       {
         q: "What does it cost?",
@@ -672,7 +636,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "We already run an approval-card email sender, an outreach checker, an inbox watcher and a reply drafter for our own work. An ordinary freelancer does not have that governance layer.",
     priceAud: 149,
     cadence: "one-off",
-    priceNote: "AU$149 per season, including up to 100 sends. AU$19 a month refresh while active. No GST is charged. Launching soon.",
+    priceNote: "AU$149 per season, including up to 100 sends. AU$19 a month refresh while active. No GST is charged.",
     status: "CHECK",
     freeHook: "A free dry run: see the first three cards with sample text before you connect any inbox.",
     faq: [
@@ -682,7 +646,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       },
       {
         q: "Is this allowed under the Spam Act?",
-        a: "We send to business addresses only, with a clear sender identity and an unsubscribe line. This is general information, not legal advice, and you remain responsible for what your club sends.",
+        a: "We send to business addresses only, with a clear sender identity and an unsubscribe line. This is general information, not legal advice, and you remain responsible for what your club sends. The sender is responsible for complying with the Spam Act.",
       },
       {
         q: "Can something go out without me?",
@@ -691,10 +655,6 @@ export const OFFERS_SPECIALIST: Offer[] = [
       {
         q: "What if someone says no?",
         a: "A no is welcome. Our wording says so, and anyone who unsubscribes is not contacted again.",
-      },
-      {
-        q: "Is it available now?",
-        a: "Launching soon. Register interest and we will tell you when it opens.",
       },
       {
         q: "What does it cost?",

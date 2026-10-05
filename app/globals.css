@@ -957,3 +957,18 @@ select:focus-visible,
     50% { opacity: 1; transform: translateY(-2%); }
   }
 }
+
+/* Offer hub: anchored sections clear the fixed header; chips are touch-sized. */
+[id^="group-"], [id^="need-"], [id^="budget-"] { scroll-margin-top: 96px; }
+.offer-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  color: var(--ice);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+}
+.offer-chip:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }

@@ -2,7 +2,6 @@ import type { Offer } from "../types";
 
 const NO_GST = "No GST is charged. TITANOS is a sole trader that is not registered for GST, so the price you see is the price you pay.";
 const WHO = "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with Kyle, not a call centre.";
-const SOON = "This is launching soon. You can register interest now, it is free, and we will only email you about this offer.";
 
 export const OFFERS_SALES_SELFSERVE: Offer[] = [
   {
@@ -29,7 +28,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You receive the CSV and the compliance checklist, then do the outreach in your own name.",
     ],
     edge:
-      "Contacts come from Google Maps listings and public records, with 8.6k email addresses deliverability-verified, plus DNS and website-stack signals drawn from a database of 7.6M companies. Every domain is re-checked before sale because only 65% of sampled websites answered in our latest test.",
+      "Contacts come from Google Maps listings and public records, with our verified business email lists, plus DNS and website-stack signals drawn from our own database of millions of Australian businesses. Every domain is re-checked before sale because only 65% of sampled websites answered in our latest test.",
     priceAud: 497,
     cadence: "one-off",
     priceNote: "One-off lists at AU$497, AU$1,497 and AU$3,497 by size, or a AU$990 per month retainer for a regular refresh.",
@@ -38,11 +37,10 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
     faq: [
       { q: "Who are you?", a: WHO },
       { q: "Where does the data come from?", a: "Public sources: Google Maps listings, public registers and public DNS records. Nothing is hacked, scanned intrusively or bought from a breached list." },
-      { q: "Is it legal to email these people?", a: "Under the Spam Act you can send to business addresses when your message is relevant to their role, you say who you are and you include an unsubscribe. We include a checklist. Emails belonging to sole traders also fall under the Privacy Act, so we flag those. This is general information, not legal advice." },
+      { q: "Is it legal to email these people?", a: "Under the Spam Act you can send to business addresses when your message is relevant to their role, you say who you are and you include an unsubscribe. We include a checklist. Emails belonging to sole traders also fall under the Privacy Act, so we flag those. This is general information, not legal advice. The sender is responsible for complying with the Spam Act." },
       { q: "What if some websites are dead?", a: "We re-check each domain before sale and remove or relabel dead ones. We tell you plainly what share answered." },
       { q: "What does it cost?", a: `AU$497, AU$1,497 or AU$3,497 one-off by list size, or AU$990 per month. ${NO_GST}` },
       { q: "Can I cancel?", a: "One-off lists have nothing to cancel. The monthly retainer can be stopped any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     kyleMinutes: 10,
   },
@@ -55,7 +53,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
     forWho: [
       "Account executives at cyber resellers, IT providers and software vendors",
       "Consultancies chasing a named large client",
-      "Reps who lose 4 to 8 hours researching one target before a first call",
+      "Reps who research each target by hand before a first call",
     ],
     youGet: [
       "A short HOOK: the known facts and simple next steps",
@@ -71,7 +69,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You receive the hook and the full artifact within 2 business days.",
     ],
     edge:
-      "We already have 956 built dossier sets, a dossier template with quality checks, and our own readers for email security and privacy policies. A generic research freelancer has none of these. Australian private companies do not file accounts publicly for free, so where there is no filing we mark the profit figures unknown rather than guess.",
+      "We already have a library of built dossier sets, a dossier template with quality checks, and our own readers for email security and privacy policies. A generic research freelancer has none of these. Australian private companies do not file accounts publicly for free, so where there is no filing we mark the profit figures unknown rather than guess.",
     priceAud: 99,
     cadence: "one-off",
     priceNote: "AU$99 per single dossier. AU$490 per month for 8 dossiers. AU$1,500 per month for a named-account programme with a quarterly refresh.",
@@ -84,7 +82,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "What if the target is a private Australian company?", a: "Their accounts are not public for free, so we say unknown for profit figures and use the other sources we do have." },
       { q: "What does it cost?", a: `AU$99 for one dossier, AU$490 per month for 8, or AU$1,500 per month for a named-account programme. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes. Single dossiers are one-off, and the monthly options can be stopped any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "/ai-delivery",
     kyleMinutes: 8,
@@ -113,7 +110,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You get access to read and download the hooks and artifacts.",
     ],
     edge:
-      "We hold 956 already-built dossier sets, so a sector bundle costs us little extra to assemble. In our latest sample only 65% of domains had a live website, so each set is re-verified before it ships.",
+      "We hold a library of already-built dossier sets, so a sector bundle costs us little extra to assemble. In our latest sample only 65% of domains had a live website, so each set is re-verified before it ships.",
     priceAud: 290,
     cadence: "one-off",
     priceNote: "AU$290 per sector bundle one-off, or AU$149 per month for library access.",
@@ -126,7 +123,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "What if my sector is not listed?", a: "Tell us. We can tell you plainly whether a bundle exists or whether a single dossier on request suits you better." },
       { q: "What does it cost?", a: `AU$290 per bundle one-off or AU$149 per month for library access. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes. The monthly access can be stopped any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "account-dossier-on-demand",
     kyleMinutes: 5,
@@ -168,7 +164,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Does it replace my own judgement?", a: "No. It points you to a reason to call. You make the call." },
       { q: "What does it cost?", a: `AU$29 per account per month (minimum 5 accounts), or AU$390 per month for 15. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes, any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "account-dossier-on-demand",
     kyleMinutes: 4,
@@ -209,7 +204,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Will it replace the partner or the BD team?", a: "No. It saves them research time. They still own the relationship." },
       { q: "What does it cost?", a: `AU$199 per target or AU$890 per month for 6. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes. Single pages are one-off and the monthly option can be stopped any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "/ai-delivery",
     kyleMinutes: 8,
@@ -251,7 +245,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Will I get spammed with alerts?", a: "No. You only hear when something actually changes." },
       { q: "What does it cost?", a: `AU$49 per month for 5 rivals or AU$99 per month for 20. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes, any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     kyleMinutes: 0,
   },
@@ -291,7 +284,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "What if you cannot tell?", a: "Then the report says unknown. We never guess a grade." },
       { q: "What does it cost?", a: `AU$19 once. ${NO_GST}` },
       { q: "What if it is not useful?", a: "Contact us and we will sort it out fairly." },
-      { q: "Is it available now?", a: "Yes, available now." },
     ],
     ladderUp: "/monitor",
     kyleMinutes: 0,
@@ -332,7 +324,6 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Will it replace my lawyer?", a: "No. It helps you walk in prepared and keeps your lawyer's time focused." },
       { q: "What does it cost?", a: `AU$29 once. ${NO_GST}` },
       { q: "Can I get a refund?", a: "Contact us and we will sort it out fairly." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "/compliance",
     kyleMinutes: 0,
@@ -346,7 +337,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
     forWho: [
       "Sole traders and small suppliers eyeing one specific tender",
       "Businesses that cannot tell if they meet the requirements",
-      "Anyone who has lost hours on a tender they could not win",
+      "Anyone who has spent time on a tender they could not win",
     ],
     youGet: [
       "A 1-page score after you answer 6 short questions",
@@ -361,7 +352,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You receive the one-page score by email.",
     ],
     edge:
-      "We read AusTender contract award history (supplier, value, description) with no key needed, plus 135 open contracting feeds from other countries. Our bid pack work also tells us what tenders tend to demand.",
+      "We read AusTender contract award history (supplier, value, description) with no key needed, plus open government contract feeds from dozens of countries. Our bid pack work also tells us what tenders tend to demand.",
     priceAud: 39,
     cadence: "one-off",
     priceNote: "AU$39 per tender.",
@@ -374,9 +365,8 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Do you submit anything for me?", a: "No. You stay in control of any bid." },
       { q: "What does it cost?", a: `AU$39 per tender. ${NO_GST}` },
       { q: "Can I get a refund?", a: "Contact us and we will sort it out fairly." },
-      { q: "Is it available now?", a: SOON },
     ],
-    ladderUp: "/government",
+    ladderUp: "/services",
     kyleMinutes: 0,
   },
   {
@@ -402,7 +392,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You receive a CSV and the compliance sheet.",
     ],
     edge:
-      "Our lists come from Google Maps listings, with 8.6k deliverability-verified emails out of 46k raw and a call database of 166,770 rows. We re-check for live websites before sale.",
+      "Our lists come from Google Maps listings, with our verified business email lists and our call database. We re-check for live websites before sale.",
     priceAud: 49,
     cadence: "one-off",
     priceNote: "AU$49 once per list of 50.",
@@ -411,11 +401,10 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
     faq: [
       { q: "Who are you?", a: WHO },
       { q: "Where does the data come from?", a: "Public business listings, such as Google Maps. These are businesses that publish their own details." },
-      { q: "Is it legal to email them?", a: "Under the Spam Act you can send to business addresses when the message is relevant, you say who you are and you include an unsubscribe. Emails of sole traders also fall under the Privacy Act. This is general information, not legal advice." },
+      { q: "Is it legal to email them?", a: "Under the Spam Act you can send to business addresses when the message is relevant, you say who you are and you include an unsubscribe. Emails of sole traders also fall under the Privacy Act. This is general information, not legal advice. The sender is responsible for complying with the Spam Act." },
       { q: "Will some contacts be out of date?", a: "Some may be. We drop websites that no longer answer, but no list is perfect." },
       { q: "What does it cost?", a: `AU$49 once for 50 businesses. ${NO_GST}` },
       { q: "Can I get a refund?", a: "Contact us and we will sort it out fairly." },
-      { q: "Is it available now?", a: SOON },
     ],
     kyleMinutes: 0,
   },
@@ -452,10 +441,9 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       { q: "Who are you?", a: WHO },
       { q: "Why is it free?", a: "It shows what we can do. If a paid tool helps you later, such as the Tender Fit Score, that is your choice." },
       { q: "Will you sell my email?", a: "No. We only send you the digest you signed up for." },
-      { q: "How do I stop it?", a: "Every email has an unsubscribe link, as the Spam Act requires." },
+      { q: "How do I stop it?", a: "Every email has an unsubscribe link, as the Spam Act requires. The sender is responsible for complying with the Spam Act." },
       { q: "Where do the notices come from?", a: "Public government tender and award records." },
       { q: "Does it cost anything?", a: `No. It is free. ${NO_GST}` },
-      { q: "Is it available now?", a: "Yes, available now." },
     ],
     ladderUp: "tender-fit-score",
     kyleMinutes: 0,
@@ -484,7 +472,7 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
       "You receive the changes by CSV, email or Telegram.",
     ],
     edge:
-      "We hold a database of 7.6M companies together with government contract awards and public email-security records as one time series. The feed improves as weekly history builds up.",
+      "We hold our own database of millions of Australian businesses together with government contract awards and public email-security records as one time series. The feed improves as weekly history builds up.",
     priceAud: 49,
     cadence: "month",
     priceNote: "AU$49 per month for a digest with 1 event type, AU$149 per month for all events as a CSV, AU$299 per month for webhook delivery with 5 saved filters.",
@@ -493,11 +481,10 @@ export const OFFERS_SALES_SELFSERVE: Offer[] = [
     faq: [
       { q: "Who are you?", a: WHO },
       { q: "Where does the data come from?", a: "Public registers, government contract awards and public domain records. Nothing is accessed or scanned intrusively." },
-      { q: "Is it legal to contact these businesses?", a: "Under the Spam Act you send to business addresses only, relevant to the business, saying who you are with an unsubscribe. You are the sender. We exclude individuals and sole traders, and do not include director personal data. This is general information, not legal advice." },
+      { q: "Is it legal to contact these businesses?", a: "Under the Spam Act you send to business addresses only, relevant to the business, saying who you are with an unsubscribe. You are the sender. We exclude individuals and sole traders, and do not include director personal data. This is general information, not legal advice. The sender is responsible for complying with the Spam Act." },
       { q: "Will every website be live?", a: "Not all. We re-check liveness before delivery. In our sample 96% of domains resolved but only 65% of websites answered." },
       { q: "What does it cost?", a: `AU$49, AU$149 or AU$299 per month depending on the tier. ${NO_GST}` },
       { q: "Can I cancel?", a: "Yes, any time." },
-      { q: "Is it available now?", a: SOON },
     ],
     ladderUp: "/monitor",
     kyleMinutes: 0,
