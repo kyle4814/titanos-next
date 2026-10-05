@@ -1,45 +1,59 @@
 User-agent: *
 Allow: /
+Disallow: /d/
 
 # Explicit allow for AI crawlers/answer engines — Titanos wants to be
 # indexed and cited by these, not just tolerated under the wildcard.
 User-agent: GPTBot
 Allow: /
+Disallow: /d/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /d/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /d/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /d/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /d/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /d/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /d/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /d/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /d/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /d/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /d/
 
 User-agent: CCBot
 Allow: /
+Disallow: /d/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /d/
 
 Sitemap: https://titanos.tech/sitemap.xml
