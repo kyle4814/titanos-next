@@ -26,24 +26,16 @@ import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 
+// Drawer (mobile) shows every door. Offers and the finder lead.
 const LINKS = [
+  { label: "Find your offer", href: "/find", external: false },
+  { label: "All offers", href: "/offers", external: false },
   { label: "Free consultation", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
   { label: "Compliance", href: "/compliance", external: false },
   { label: "Monitor", href: "/monitor", external: false },
-  { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Blog", href: "/blog", external: false },
-  { label: "Offers", href: "/offers", external: false },
-  // Desktop nav shows LINKS.slice(0, 7) — the four revenue doors, Black
-  // Ice, and the blog. Black Ice earned the desktop slot (was mobile
-  // drawer + footer only) because the operating doctrine is part of what
-  // makes the operator visible, not a secondary page — this site's whole
-  // premise leans on the person behind it, and Black Ice is where that
-  // shows up in full. "Leads" moved out of the six to make room; it stays
-  // one tap away in the mobile drawer and footer. Free Scan / Evidence
-  // Pack / Methodology / About / Contact remain in the mobile drawer +
-  // footer to keep desktop tight. The desktop CTA button (below, outside
-  // LINKS) is the single sitewide primary action.
+  { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Leads", href: "/leads", external: false },
   { label: "Free Scan", href: "/scan", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
@@ -51,6 +43,18 @@ const LINKS = [
   { label: "Methodology", href: "/methodology", external: false },
   { label: "About", href: "/about", external: false },
   { label: "Contact", href: "/contact", external: false },
+];
+
+// Desktop strip: short labels, one line. Black Ice, Leads, Scan and the
+// rest stay in the drawer and the footer.
+const DESKTOP_LINKS = [
+  { label: "Find offer", href: "/find", external: false },
+  { label: "Offers", href: "/offers", external: false },
+  { label: "AI", href: "/ai-delivery", external: false },
+  { label: "Compliance", href: "/compliance", external: false },
+  { label: "Monitor", href: "/monitor", external: false },
+  { label: "Blog", href: "/blog", external: false },
+  { label: "About", href: "/about", external: false },
 ];
 
 const SESSION_KEY = "titanos.vault.entranceShown";
@@ -156,13 +160,13 @@ export default function Nav() {
 
         {/* Desktop link strip — hidden on mobile via media query */}
         <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center" }}>
-          {LINKS.slice(0, 7).map((l) => (
+          {DESKTOP_LINKS.map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
           <Link
             href={AUDIT_MESSAGE_HREF}
             style={{
-              marginLeft: 20,
+              marginLeft: 18,
               padding: "8px 16px",
               background: "var(--gold)",
               color: "var(--vault-black, #0a0a0a)",
@@ -174,7 +178,8 @@ export default function Nav() {
               whiteSpace: "nowrap",
             }}
           >
-            Book a free consultation and report
+            <span className="nav-cta-long">Book a free consultation and report</span>
+            <span className="nav-cta-short">Free consultation</span>
           </Link>
         </div>
 
@@ -394,6 +399,17 @@ export default function Nav() {
         .nav-desktop-links {
           display: flex;
           gap: 0;
+          white-space: nowrap;
+          flex-wrap: nowrap;
+        }
+        .nav-desktop-links a { white-space: nowrap; }
+        .nav-cta-short { display: none; }
+        @media (max-width: 1180px) {
+          .nav-cta-long { display: none; }
+          .nav-cta-short { display: inline; }
+        }
+        @media (max-width: 900px) {
+          .nav-desktop-links a[href="/blog"] { display: none; }
         }
         .nav-burger {
           display: none !important;
@@ -538,7 +554,7 @@ function NavLink({
     onMouseLeave: () => setHovered(false),
     onClick,
     style: {
-      marginLeft: 24,
+      marginLeft: 20,
       padding: "8px 4px",
       display: "inline-block" as const,
       textDecoration: "none",

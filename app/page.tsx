@@ -223,6 +223,47 @@ export default function Home() {
         </AnimatedButton>
       </PageHero>
 
+      {/* FIND YOUR OFFER: early door to the finder and the full list. */}
+      <section
+        aria-label="Find the right offer"
+        style={{ padding: "var(--space-6) 20px 0", position: "relative", zIndex: 2 }}
+      >
+        <div
+          style={{
+            maxWidth: "var(--maxw-prose)",
+            margin: "0 auto",
+            textAlign: "center",
+            border: "1px solid rgb(var(--gold-rgb) / 0.25)",
+            borderRadius: "var(--radius-md)",
+            background: "rgb(var(--gold-rgb) / 0.03)",
+            padding: "28px 20px",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--font-display), Georgia, serif",
+              color: "var(--gold)",
+              fontSize: "var(--fs-h3, 1.5rem)",
+              margin: "0 0 10px",
+            }}
+          >
+            Find the right offer in 30 seconds
+          </h2>
+          <p style={{ color: "var(--ice)", lineHeight: 1.65, margin: "0 0 18px" }}>
+            Answer a few plain questions and get pointed to the page that fits your business. It runs
+            in your browser, nothing is sent anywhere, and a no is fine.
+          </p>
+          <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+            <AnimatedButton href="/find" variant="primary">
+              Find the right offer →
+            </AnimatedButton>
+            <AnimatedButton href="/offers" variant="secondary">
+              See every offer
+            </AnimatedButton>
+          </div>
+        </div>
+      </section>
+
       {/* THE OPENING: the threshold. Inscription primitive, the
           claim is set INTO the page (lintel rules + stone recess), not
           printed on it. See components/Myth.tsx for the vocabulary. */}

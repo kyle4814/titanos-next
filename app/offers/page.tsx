@@ -143,6 +143,7 @@ export default function OffersHub() {
         sub="Prices are in AUD. No GST is charged. Nothing is touched without your say, and your IT provider stays."
       >
         <AnimatedButton href="/scan#request">START WITH THE FREE CHECK →</AnimatedButton>
+        <AnimatedButton href="/find" variant="secondary" ariaLabel="Find my offer in 30 seconds">FIND MY OFFER IN 30 SECONDS →</AnimatedButton>
       </PageHero>
       <Bluf>
         Every TITANOS offer has a plain price, a free first step and a way to say no. {ALL_OFFERS.length} listed.

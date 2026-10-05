@@ -21,6 +21,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "Compliance", href: "/compliance" },
       { label: "Leads & Intelligence", href: "/leads" },
       { label: "Free Scan", href: "/scan" },
+      { label: "Find your offer", href: "/find" },
       { label: "All offers", href: "/offers" },
     ],
   },

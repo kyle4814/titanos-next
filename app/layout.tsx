@@ -11,6 +11,7 @@ import PageMood from "@/components/PageMood";
 import EasterEgg from "@/components/EasterEgg";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import FinderLauncher from "@/components/FinderLauncher";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -203,6 +204,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyMobileCta />
+        <FinderLauncher />
       </body>
     </html>
   );
