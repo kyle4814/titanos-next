@@ -264,8 +264,8 @@ export function recommend(answers: Answers, ctx: Ctx): Recommendation {
   const reason: Record<string, string> = {};
   for (const r of [...top, ...also]) {
     const bits = r.why.length ? r.why : ["a safe first step if you are not sure"];
-    const avTxt = r.av === "BUYABLE" ? "you can buy it online today" : r.av === "OPENING" ? "the free first step is open" : "it is launching soon, you can register interest";
-    reason[r.o.slug] = `${bits[0][0].toUpperCase()}${bits[0].slice(1)}${bits.length > 1 ? ", " + bits.slice(1).join(", ") : ""}. Right now ${avTxt}.`;
+    const avTxt = r.av === "BUYABLE" ? "You can buy it online today" : r.av === "OPENING" ? "The free first step is open now" : "It is launching soon, so you can register interest";
+    reason[r.o.slug] = `${bits[0][0].toUpperCase()}${bits[0].slice(1)}${bits.length > 1 ? ", " + bits.slice(1).join(", ") : ""}. ${avTxt}.`;
   }
   return { top: top.map((r) => r.o), also: also.map((r) => r.o), reason };
 }

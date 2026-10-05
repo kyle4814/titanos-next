@@ -22,7 +22,7 @@ export default function FindPage() {
         badge="TITANOS · OFFER FINDER"
         title="Find the right offer."
         tagline="Three questions, about 30 seconds."
-        sub="Nothing you tap or type leaves your device. Every offer has a free first step, and your IT provider stays."
+        sub="Nothing you tap or type leaves your device. Most offers start with a free step, and your IT provider stays."
       />
       <SectionReveal style={{ padding: "var(--space-12) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
