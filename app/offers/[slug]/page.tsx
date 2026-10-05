@@ -138,7 +138,9 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
           <div style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif", fontSize: "var(--fs-h2)", fontWeight: 700 }}>
             {formatOfferPrice(o)}
           </div>
-          {o.priceNote && <p style={{ color: "var(--ice)", margin: "10px 0 0" }}>{o.priceNote}</p>}
+          {o.priceNote && o.priceNote.replace(/\s*No GST is charged\.?/gi, "").trim() && (
+            <p style={{ color: "var(--ice)", margin: "10px 0 0" }}>{o.priceNote.replace(/\s*No GST is charged\.?/gi, "").trim()}</p>
+          )}
           <p style={{ color: "var(--text)", lineHeight: 1.7, margin: "14px 0 0" }}>
             No GST is charged. {refundLine(o)} Full terms: <Link href="/terms" style={{ color: "var(--gold)" }}>/terms</Link>
           </p>
