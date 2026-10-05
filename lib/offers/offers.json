@@ -1,0 +1,723 @@
+[
+  {
+    "slug": "dd-pre-read",
+    "name": "Due Diligence Pre-Read: Cyber, Privacy and Email Posture",
+    "priceAud": 297,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "portfolio-watch",
+    "name": "Portfolio Watch: Monthly Posture Monitor for a Fund's Holdings",
+    "priceAud": 499,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "tender-intelligence-radar",
+    "name": "Tender Intelligence Radar: Competitor Win Maps",
+    "priceAud": 499,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "export-market-tender-map",
+    "name": "Export Market Tender Map: Global Public Buyers",
+    "priceAud": 1497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "profit-mirror-care",
+    "name": "Profit Mirror for Charities, NDIS and Care Providers",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "supplier-check-dossier",
+    "name": "Supplier Check Dossier for Procurement Teams",
+    "priceAud": 149,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "sub-threshold-intelligence-contract",
+    "name": "Fixed-Scope Intelligence Contract for Councils, Universities and Health Groups",
+    "priceAud": 12000,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "panel-risk-map",
+    "name": "Supplier-Risk and Win Map for Procurement Units",
+    "priceAud": 9500,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "franchise-site-audit",
+    "name": "Franchise Network Local Presence and Exposure Audit",
+    "priceAud": 14000,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "health-trust-map",
+    "name": "Hospital and Aged-Care Group Privacy and Email Trust Map",
+    "priceAud": 15000,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "rebid-tender-brief",
+    "name": "Incumbent-Displacement Tender Brief",
+    "priceAud": 7500,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "insurer-book-scan",
+    "name": "Cyber Insurer and Broker Portfolio Posture Scan",
+    "priceAud": 18000,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "postcode-churn-index",
+    "name": "Postcode Business Churn Index",
+    "priceAud": 199,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "owner-inbox-desk",
+    "name": "Owner Inbox Desk",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "review-reply-desk",
+    "name": "Review Reply Desk",
+    "priceAud": 59,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "council-resilience-report",
+    "name": "Council and Chamber Local Resilience Report",
+    "priceAud": 2990,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "pack-factory-channel-partners",
+    "name": "Pack Factory for Channel Partners",
+    "priceAud": 149,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "bid-pack",
+    "name": "Bid Pack",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "panel-door-map",
+    "name": "Panel Door Map",
+    "priceAud": 197,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "grant-radar-nfp",
+    "name": "Grant Radar for Not-for-Profits",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "charity-profit-mirror",
+    "name": "Charity Profit Mirror",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "supplier-cyber-readiness-pass",
+    "name": "Supplier Cyber Readiness Pass",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "global-tender-desk",
+    "name": "Global Tender Desk (UK, NZ, US, EU)",
+    "priceAud": 349,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "public-posture-briefing",
+    "name": "Public Posture Briefing for Councils and Universities",
+    "priceAud": 1997,
+    "cadence": "quote",
+    "status": "CHECK"
+  },
+  {
+    "slug": "incumbent-brief",
+    "name": "Incumbent Brief for Bid Consultants",
+    "priceAud": 149,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "funder-fit-dossier",
+    "name": "Funder-Fit Dossier for Grant Writers",
+    "priceAud": 129,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "latam-exporter-radar",
+    "name": "LatAm Exporter Radar (Colombia, Chile, Peru, Paraguay)",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "foreign-tender-anti-fraud-check",
+    "name": "Anti-Fraud Check for Foreign Tenders",
+    "priceAud": 19,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "award-price-benchmark",
+    "name": "Award Price Benchmark Sheet by Category",
+    "priceAud": 79,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "eu-ted-small-lot-radar",
+    "name": "EU TED Small-Lot Radar",
+    "priceAud": 79,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "spoofguard-global-monitor",
+    "name": "SpoofGuard Global Monitor",
+    "priceAud": 19,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "wordpress-email-posture-widget",
+    "name": "WordPress Email Posture Widget",
+    "priceAud": 0,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "story-leads-weekly",
+    "name": "Story Leads Weekly (Open-Contracts Desk)",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "investigation-cut",
+    "name": "Investigation Cut (One-Off Deep Dive)",
+    "priceAud": 990,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "electorate-dollar-map",
+    "name": "Electorate Dollar Map",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "contract-variation-watch",
+    "name": "Contract Variation Watch",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "au-market-entry-reseller-shortlist",
+    "name": "AU Market-Entry Reseller Shortlist",
+    "priceAud": 1500,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "msp-prospect-feed",
+    "name": "MSP Prospect Feed with White-Label SpoofGuard",
+    "priceAud": 299,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "monitor-wholesale",
+    "name": "Monitor Wholesale for MSPs",
+    "priceAud": 49,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "broker-renewal-scan",
+    "name": "Broker Renewal Trigger Scan",
+    "priceAud": 1497,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "accountant-privacy-check",
+    "name": "Accountant Channel: Client Privacy Check",
+    "priceAud": 790,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "franchise-posture-board",
+    "name": "Franchise Network Posture Board",
+    "priceAud": 1500,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "association-member-kit",
+    "name": "Association Member Benefit Kit",
+    "priceAud": 490,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "agency-signal-leads",
+    "name": "Web and Marketing Agency Signal Leads",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "agency-white-label-audit",
+    "name": "Agency White-Label Audit Rail",
+    "priceAud": 29,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "recruiter-contract-winner-feed",
+    "name": "Recruiter and Labour-Hire Contract-Winner Feed",
+    "priceAud": 390,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "subbie-finder-channel",
+    "name": "Head-Contractor Subbie Finder for Chambers and Trade Bodies",
+    "priceAud": 590,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "msp-panel-white-label-feed",
+    "name": "MSP White-Label Feed for Public-Sector and Charity Clients",
+    "priceAud": 299,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "au-email-security-report",
+    "name": "State of AU Email Security Report: Custom Cuts and Sponsorship",
+    "priceAud": 1497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "subbie-finder-lite",
+    "name": "Job Flow Lite: Subbie Finder",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "multi-domain-dmarc-lockdown",
+    "name": "Multi-Domain Email Lockdown",
+    "priceAud": 10000,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "dossier-reseller-licence",
+    "name": "Dossier Reseller Licence (White Label)",
+    "priceAud": 990,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "hiring-trigger-dossier",
+    "name": "Hiring-Trigger Dossier for Recruiters",
+    "priceAud": 79,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "procurement-training-feed",
+    "name": "Procurement-Training Body White-Label Feed",
+    "priceAud": 299,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "tender-alerts-widget",
+    "name": "Tender Alerts Embed for Business Directories",
+    "priceAud": 39,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "finance-broker-trigger-feed",
+    "name": "Finance Broker New-Entity Trigger Feed",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "new-business-insurance-feed",
+    "name": "New-Entity Insurance Cover Feed",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "software-partner-stack-feed",
+    "name": "Software Partner Stack-Change Feed",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "payee-domain-change-watch",
+    "name": "Payee Domain Change Watch",
+    "priceAud": 49,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "accountant-new-client-feed",
+    "name": "Accountant New-Client Trigger Feed",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "member-posture-drift-alert",
+    "name": "Posture Drift Alert for Industry Body Member Lists",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "accountant-chaser-pack",
+    "name": "Chaser Pack for Accountants' Tradie Clients",
+    "priceAud": 39,
+    "cadence": "per-seat-month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "bookkeeper-morning-board",
+    "name": "Bookkeeper Morning Board",
+    "priceAud": 15,
+    "cadence": "per-seat-month",
+    "status": "KEY"
+  },
+  {
+    "slug": "approval-rail-kit",
+    "name": "Approval-Rail Kit (Core)",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "governed-agent-proposal-pack",
+    "name": "Governed Agent Proposal Pack",
+    "priceAud": 197,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "solar-outreach-rail",
+    "name": "Solar Outreach Rail",
+    "priceAud": 797,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "signal-leads-data",
+    "name": "Signal Leads Data Subscription",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "account-dossier-on-demand",
+    "name": "Account Dossier on Demand",
+    "priceAud": 99,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "sector-dossier-library",
+    "name": "Sector Dossier Library",
+    "priceAud": 290,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "account-change-alert",
+    "name": "Account Change Alert",
+    "priceAud": 29,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "pitch-hooks-page",
+    "name": "Pitch Hooks Page for Professional Services",
+    "priceAud": 199,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "rival-watch",
+    "name": "Rival Watch",
+    "priceAud": 49,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "instant-email-domain-check",
+    "name": "Instant Email Domain Check",
+    "priceAud": 19,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "privacy-adm-wording-check",
+    "name": "Privacy ADM Wording Check",
+    "priceAud": 29,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "tender-fit-score",
+    "name": "Tender Fit Score",
+    "priceAud": 39,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "tradie-starter-list",
+    "name": "Tradie Starter List",
+    "priceAud": 49,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "free-tender-digest",
+    "name": "Free Tender Digest",
+    "priceAud": 0,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "business-change-feed",
+    "name": "Business Change Feed",
+    "priceAud": 49,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "privacy-adm-fix",
+    "name": "Privacy ADM Fix",
+    "priceAud": 197,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "privacy-essential-eight-pack",
+    "name": "Privacy Act and Essential Eight Pack",
+    "priceAud": 5997,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "referrer-map-property-finance",
+    "name": "Referrer Map for Property and Finance",
+    "priceAud": 297,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "quarterly-board-cyber-privacy-briefing",
+    "name": "Quarterly Board Cyber and Privacy Briefing",
+    "priceAud": 1997,
+    "cadence": "quote",
+    "status": "CHECK"
+  },
+  {
+    "slug": "five-jurisdiction-privacy-bundle",
+    "name": "Five-Jurisdiction Privacy Bundle",
+    "priceAud": 49,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "job-flow",
+    "name": "Job Flow",
+    "priceAud": 249,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "commercial-property-tenant-trigger-feed",
+    "name": "Commercial Property Tenant Trigger Feed",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "change-feed-connector-automation-agencies",
+    "name": "Change Feed Connector for Automation Agencies",
+    "priceAud": 199,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "outbound-gate-outreach-lint",
+    "name": "Outbound Gate and Outreach Lint for Agent Builders",
+    "priceAud": 197,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "agent-preflight-test-harness",
+    "name": "Agent Pre-Flight Test Harness",
+    "priceAud": 297,
+    "cadence": "one-off",
+    "status": "BUILD"
+  },
+  {
+    "slug": "club-sponsor-prospect-list",
+    "name": "Club Sponsor Prospect List",
+    "priceAud": 49,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "sponsor-send-rail",
+    "name": "Sponsor Send Rail (Volunteer Tap-to-Send)",
+    "priceAud": 149,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "subbie-finder",
+    "name": "Subbie Finder",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "neighbour-alerts",
+    "name": "Neighbour Alerts (new businesses near you)",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "commercial-customer-list",
+    "name": "Commercial Customer List",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "trade-panel-pack",
+    "name": "Trade Panel Pack",
+    "priceAud": 497,
+    "cadence": "one-off",
+    "status": "READY"
+  },
+  {
+    "slug": "tender-radar-for-trades",
+    "name": "Tender Radar for Trades",
+    "priceAud": 249,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "scam-shield-for-tradies",
+    "name": "Scam Shield for Tradies",
+    "priceAud": 149,
+    "cadence": "month",
+    "status": "READY"
+  },
+  {
+    "slug": "counterparty-check",
+    "name": "Counterparty Check for Subbies and Small Suppliers",
+    "priceAud": 39,
+    "cadence": "one-off",
+    "status": "CHECK"
+  },
+  {
+    "slug": "quote-chaser",
+    "name": "Quote Chaser",
+    "priceAud": 99,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "quote-writer-from-job-notes",
+    "name": "Quote Writer from Job Notes",
+    "priceAud": 129,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "invoice-nudge-rail",
+    "name": "Invoice Nudge Rail",
+    "priceAud": 79,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "owner-morning-cash-card",
+    "name": "Owner Morning Cash Card (Core)",
+    "priceAud": 49,
+    "cadence": "month",
+    "status": "BUILD"
+  },
+  {
+    "slug": "solar-site-shortlist",
+    "name": "Solar Site Shortlist (Monthly Batch)",
+    "priceAud": 497,
+    "cadence": "month",
+    "status": "CHECK"
+  },
+  {
+    "slug": "solar-pipeline-desk",
+    "name": "Solar Pipeline Desk (Retainer)",
+    "priceAud": 997,
+    "cadence": "month",
+    "status": "CHECK"
+  }
+]

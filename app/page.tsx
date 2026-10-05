@@ -455,6 +455,9 @@ export default function Home() {
             scan and the audit call. You keep the findings and the plan either way, and you are
             welcome back whenever the timing is right.
           </p>
+          <p className="ladder-note">
+            <a className="ladder-band-cta" href="/offers">See every offer</a>
+          </p>
         </div>
       </SectionReveal>
 

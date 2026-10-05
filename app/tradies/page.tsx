@@ -313,6 +313,14 @@ export default function TradiesPage() {
         </div>
       </SectionReveal>
 
+      <SectionReveal style={{ textAlign: "center", padding: "var(--space-8) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <AnimatedButton href="/offers" variant="secondary" ariaLabel="See every offer">
+            SEE EVERY OFFER →
+          </AnimatedButton>
+        </div>
+      </SectionReveal>
+
       <FrontLoad />
 
       {/* PERMISSION CLOSE */}

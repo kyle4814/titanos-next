@@ -33,7 +33,8 @@ const LINKS = [
   { label: "Monitor", href: "/monitor", external: false },
   { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Blog", href: "/blog", external: false },
-  // Desktop nav shows LINKS.slice(0, 6) — the four revenue doors, Black
+  { label: "Offers", href: "/offers", external: false },
+  // Desktop nav shows LINKS.slice(0, 7) — the four revenue doors, Black
   // Ice, and the blog. Black Ice earned the desktop slot (was mobile
   // drawer + footer only) because the operating doctrine is part of what
   // makes the operator visible, not a secondary page — this site's whole
@@ -155,7 +156,7 @@ export default function Nav() {
 
         {/* Desktop link strip — hidden on mobile via media query */}
         <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center" }}>
-          {LINKS.slice(0, 6).map((l) => (
+          {LINKS.slice(0, 7).map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
           <Link
