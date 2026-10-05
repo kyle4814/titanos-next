@@ -972,3 +972,6 @@ select:focus-visible,
   font-size: var(--fs-sm);
 }
 .offer-chip:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* Long unbroken URLs in blog sources must wrap, never scroll the page. */
+main p, main li { overflow-wrap: anywhere; }

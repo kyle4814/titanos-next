@@ -47,7 +47,7 @@ const ANALOGIES: Record<AnalogyKey, { line: string; anchor: string }> = {
   preflight: {
     line: "Like a pilot's pre-flight checklist: thousands of checks before every take-off, not just the first one.",
     anchor:
-      "More than 8,000 automated checks run on every change, and a full run takes under 2.5 minutes. Nothing goes live until they pass.",
+      "5,760 automated tests across 13 suites run before anything is committed. Nothing goes live until they pass.",
   },
   powersteering: {
     line: "Power steering, not a self-driving car. You still drive. It just takes the strain off your arms.",
@@ -61,7 +61,7 @@ const ANALOGIES: Record<AnalogyKey, { line: string; anchor: string }> = {
   },
   smokealarm: {
     line: "Smoke alarms in every room: an alarm goes off before a problem becomes a fire.",
-    anchor: "50 problems were stopped before shipping in 4.5 days of building.",
+    anchor: "Every change meets the same test gate before it goes live.",
   },
   flightrecorder: {
     line: "A black-box flight recorder: every action is recorded, so you can always see what happened and when.",
@@ -179,11 +179,11 @@ export function Analogy({ k }: { k: AnalogyKey }) {
 const PILLARS: { head: string; body: string }[] = [
   {
     head: "The team you would never afford",
-    body: "You get the output of a 20-person engineering team, for the price of one.",
+    body: "TITANOS was built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and that is the standard you get.",
   },
   {
     head: "Speed you can feel",
-    body: "Tell me on Monday what is slowing you down. The aim is to have the first fix working by the end of the week.",
+    body: "Tell me on Monday what is slowing you down. I aim to have a first fix running by the end of week one.",
   },
   {
     head: "Safe the way pilots are safe",
@@ -284,7 +284,7 @@ export function FrontLoad({
       a: (
         <>
           The industry-standard COCOMO model sizes the TITANOS build at about 20 engineers for about 27 months. One
-          person built it in about 4 months, with more than 8,000 automated checks guarding it. The method is shown in
+          person built it in about 4 months, with 5,760 automated tests guarding it. The method is shown in
           full on the <a href="/engineering" style={{ color: "var(--gold)" }}>Engineering page</a>, so you can check it
           yourself.
         </>
@@ -314,7 +314,7 @@ export function FrontLoad({
       q: "What happens next?",
       a: (
         <>
-          1. You message or call me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send
+          1. You message me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send
           you a free report on your business, so you can see what I see. 4. If you like it, you get a price before
           anything starts. If it is not for you, that is completely fine and the report is still yours.
         </>

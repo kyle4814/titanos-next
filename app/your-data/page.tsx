@@ -95,7 +95,7 @@ export default function YourDataPage() {
               I never sell, share, or pass the file to a third party.
             </li>
             <li style={{ marginBottom: 8 }}>
-              I never use it to train anything, or feed it into a public AI tool.
+              I never use it to train any model.
             </li>
           </ul>
 

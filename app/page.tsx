@@ -117,7 +117,7 @@ const LADDER: LadderBand[] = [
     price: DISPLAY.FREE_SCAN_PRICE,
     items: [
       { label: "Free security + AI exposure scan", price: DISPLAY.FREE_SCAN_PRICE },
-      { label: "Free 15-minute audit call", price: DISPLAY.FREE_SCAN_PRICE },
+      { label: "Free half-hour audit call", price: DISPLAY.FREE_SCAN_PRICE },
     ],
     cta: "Start free →",
     href: "/scan",
@@ -127,10 +127,10 @@ const LADDER: LadderBand[] = [
     who: "Solo operators and small teams testing the water.",
     price: `From ${DISPLAY.MONITOR_MONTHLY}`,
     items: [
-      { label: "Compliance Monitor (monthly)", price: DISPLAY.MONITOR_MONTHLY },
-      { label: "Compliance Monitor (annual)", price: DISPLAY.MONITOR_ANNUAL },
+      { label: "TITANOS Monitor (monthly)", price: DISPLAY.MONITOR_MONTHLY },
+      { label: "TITANOS Monitor (annual)", price: DISPLAY.MONITOR_ANNUAL },
       { label: "Leads Starter", price: DISPLAY.LEADS_STARTER },
-      { label: "Job Flow for tradies (monthly)", price: DISPLAY.JOB_FLOW_MONTHLY },
+      { label: "Job Flow for tradies (launching soon)", price: DISPLAY.JOB_FLOW_MONTHLY },
     ],
     cta: "See monitoring →",
     href: "/monitor",
@@ -206,7 +206,7 @@ export default function Home() {
       <PageHero
         badge="TITANOS · Titan Operating System"
         title="44 engineer-years of output in 4 months."
-        tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on AU$30 a month."
+        tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on about US$30 (roughly AU$46) a month."
         sub="Kyle Deligny, founder of TITANOS, the Titan Operating System. Home of Hypersonic Industries and Parallax Industries."
         trustLine={
           <>
@@ -271,7 +271,7 @@ export default function Home() {
         style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
       >
         <Inscription
-          label="Built from a phone · No funding · No permission asked"
+          label="Built from a phone · Solo · Pre-revenue"
           sub="TITANOS is one operator's autonomous systems, built to remove friction rather than add headcount."
         >
           The machine carries the complexity.
@@ -304,14 +304,14 @@ export default function Home() {
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
             <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
-              Book your free consultation and report →
+              Message Kyle for a free consultation and report →
             </AnimatedButton>
             <AnimatedButton href="#tiers" variant="secondary">
               See how it works ↓
             </AnimatedButton>
           </div>
           <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12 }}>
-            No cost · No obligation · No pitch deck
+            No cost · No obligation
           </p>
         </div>
       </section>
@@ -353,7 +353,7 @@ export default function Home() {
 
       {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
       <Bluf replaced>
-        TITANOS gives your business the output of a 20-person engineering team for the price of one, safely, and without
+        TITANOS is built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and it is there to give your business that output safely, without
         replacing anyone.
       </Bluf>
       <Analogy k="department" />
@@ -381,7 +381,7 @@ export default function Home() {
             If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
           </p>
           <div style={{ marginTop: 24 }}>
-            <ContactButtons heading="Message or call Kyle. No booking, no forms." />
+            <ContactButtons heading="Message Kyle. No booking, no forms." />
           </div>
         </div>
       </SectionReveal>
@@ -643,7 +643,7 @@ export default function Home() {
               lineHeight: 1.35,
             }}
           >
-            Built from a phone. No funding. No team. No permission asked.
+            Built from a phone. Solo. Pre-revenue. No permission asked.
           </h2>
 
           <div
@@ -660,7 +660,7 @@ export default function Home() {
                 The operator
               </p>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-                One person built TITANOS from a phone. No office, no round of funding, no
+                One person built TITANOS from a phone. No office, no team, no
                 one&apos;s permission required. Capability was never supposed to be something
                 you have to be given. It is something you build.
               </p>

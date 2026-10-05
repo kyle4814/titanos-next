@@ -83,15 +83,12 @@ export const SITE: SiteConfig = {
   ORDER_SUBMIT_URL: "https://api.titanos.tech/order/submit",
 };
 
-// Direct contact. Kyle takes messages and calls directly: no booking
-// system, no calendar. Change a number here and every page follows.
+// Direct contact. Kyle takes messages by email and Telegram: no booking
+// system, no calendar. The mobile number is never published. Change a number here and every page follows.
 export const CONTACT = {
-  PHONE_DISPLAY: "0414 244 544",
-  PHONE_INTL: "+61 414 244 544",
-  TEL_HREF: "tel:+61414244544",
   TELEGRAM_URL: "https://t.me/TitanOSofficial",
   TELEGRAM_HANDLE: "@TitanOSofficial",
-  HOURS: "Kyle answers 6am to 8pm Brisbane time (AEST).",
+  HOURS: "Kyle replies by email and Telegram within one business day.",
 } as const;
 
 // Derived helpers.

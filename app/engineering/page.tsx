@@ -9,7 +9,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 
 const META_TITLE = "44 engineer-years in 4 months | TITANOS";
 const META_DESC =
-  "170,651 lines of production code in four months, priced by the industry-standard COCOMO model at 44 engineer-years. The maths, the method and how to re-run it yourself.";
+  "170,651 lines of production code across four repositories since June 2026, priced by the industry-standard COCOMO model at 44 engineer-years. The maths, the method and how to re-run it yourself.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -100,8 +100,8 @@ export default function EngineeringPage() {
       <PageHero
         badge="The proof"
         title="44 engineer-years of output in 4 months."
-        tagline="On AU$30 a month."
-        sub="One engineer, working around a day job. Every figure below has its method at the bottom of the page."
+        tagline="On about US$30 (roughly AU$46) a month."
+        sub="One engineer, working around a day job, from the first commit on 4 June 2026 to 4 October 2026. Every figure below has its method at the bottom of the page."
       >
         <AnimatedButton href="#method" variant="secondary">
           Jump to the method ↓
@@ -112,7 +112,7 @@ export default function EngineeringPage() {
 
       <Block title="The maths, in one line">
         <p style={BODY}>
-          170,651 lines of production code in four months. The industry-standard COCOMO model prices that at
+          170,651 lines of production code across four repositories in the four months from 4 June 2026. The industry-standard COCOMO model prices that at
           44 engineer-years, about AU$7.8 million at Australia&apos;s AU$800-a-day contractor rate, which is up
           to AU$23 million a year at this pace.
         </p>
@@ -139,7 +139,7 @@ export default function EngineeringPage() {
               <tr>
                 <td style={td}>Time</td>
                 <td style={td}>About 27 months</td>
-                <td style={td}>About 4 months, around a day job</td>
+                <td style={td}>About 4 months (4 June to 4 October 2026), around a day job</td>
               </tr>
               <tr>
                 <td style={{ ...td, borderBottom: "none" }}>Result</td>
@@ -169,10 +169,10 @@ export default function EngineeringPage() {
 
       <Block title="What a dollar of compute buys">
         <p style={BODY}>
-          Counted at 10%, that is AU$2.3 million a year of engineering on AU$360 a year of compute: about
-          AU$6,500 of engineering per AU$1 on the original AU$30 a month, and about AU$650 per AU$1 at
-          today&apos;s AU$300 a month. On the full model (AU$7.8 million built on about AU$120 of compute over
-          the four months), it is about AU$65,000 per AU$1.
+          Counted at 10%, that is AU$2.3 million a year of engineering on about AU$550 a year of compute (about US$30, roughly AU$46, a month): about
+          AU$4,200 of engineering per AU$1 on the original build spend, and about AU$650 per AU$1 at
+          today&apos;s AU$300 a month. On the full model (AU$7.8 million built on about AU$185 of compute over
+          the four months), it is about AU$42,000 per AU$1.
         </p>
       </Block>
 
@@ -181,9 +181,8 @@ export default function EngineeringPage() {
       <Block title="Built properly">
         <ul style={{ ...PROSE, listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
           {[
-            "5,760 automated tests and 105 safety suites. Nothing ships unless the test gate is green.",
-            "1,480+ engineered commits, each one reviewed against the gate before it lands.",
-            "A research system that has run 161+ passes on its own.",
+            "5,760 automated tests. Nothing ships unless the test gate is green.",
+            "1,078 commits in the main repository since 24 August 2026.",
           ].map((t) => (
             <li key={t} style={{ ...CARD, color: "var(--ice)", lineHeight: 1.6 }}>
               {t}
@@ -236,7 +235,12 @@ export default function EngineeringPage() {
           </li>
           <li>
             Size: KSLOC = 170.651, the non-blank, non-comment lines of .py, .sh, .ts, .tsx and .js across four
-            repositories, measured on 4 October 2026.
+            repositories, measured on 4 October 2026. The window is about four months because the first commit
+            in the earliest of those repositories (the website) is 4 June 2026.
+          </li>
+          <li>
+            Basic COCOMO on the main repository only (152,293 lines, 1,078 commits since 24 August 2026): about
+            39 engineer-years. The 44 and the 39 are the same model on two line counts.
           </li>
           <li>
             Result: 529.6 person-months (44.1 engineer-years) over a 27.1-month schedule, which is about 19.5
@@ -251,7 +255,7 @@ export default function EngineeringPage() {
             over, about AU$23 million. The 10% and 2% lines are 10% and 2% of that.
           </li>
           <li>
-            Compute: AU$30 a month is the compute cost of the build stage. It is AU$300 a month today.
+            Compute: about US$30 (roughly AU$46) a month is the cost of the AI tools during the build stage. It is AU$300 a month today.
           </li>
           <li>
             Re-run it yourself: count the non-blank, non-comment lines in your own repositories, put the

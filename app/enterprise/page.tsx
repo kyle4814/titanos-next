@@ -43,7 +43,7 @@ export default function EnterprisePage() {
         </AnimatedButton>
       </PageHero>
       <Bluf replaced>
-        Larger engagements are scoped on a call and priced before anything starts, with the output of a 20-person engineering team and nobody replaced.
+        Larger engagements are scoped on a call and priced before anything starts, built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and nobody replaced.
       </Bluf>
       <Analogy k="department" />
 

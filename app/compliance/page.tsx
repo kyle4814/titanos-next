@@ -104,13 +104,13 @@ const TIMELINE = [
   {
     when: "10 DECEMBER 2026",
     title: "ADM disclosure required in your privacy policy",
-    body: "Automated decision-making, including AI tools your business uses, must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Penalties up to AU$50M for serious or repeated interference.",
+    body: "Automated decision-making, including AI tools your business uses, must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Disclosure is required from 10 December 2026. Separately, serious or repeated privacy interference can attract penalties up to AU$50M.",
     state: "future",
   },
   {
     when: "TRANCHE 2 · COMING",
     title: "Small-business exemption disappears",
-    body: "The second reform tranche is positioned to remove the AU$3M turnover exemption, pulling roughly 2.3M additional AU SMBs into Privacy Act scope. If you’re currently exempt, that protection has a sunset on it.",
+    body: "The second reform tranche is positioned to remove the AU$3M turnover exemption, pulling a large number of additional small businesses into Privacy Act scope. If you’re currently exempt, that protection has a sunset on it.",
     state: "coming",
   },
   {
@@ -201,7 +201,7 @@ export default function CompliancePage() {
       {
         "@type": "Question",
         name: "I'm too small for this to matter",
-        acceptedAnswer: { "@type": "Answer", text: "The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can take a business to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling roughly 2.3M additional SMBs into Privacy Act scope." },
+        acceptedAnswer: { "@type": "Answer", text: "The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can take a business to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling many additional small businesses into Privacy Act scope." },
       },
       {
         "@type": "Question",
@@ -282,7 +282,7 @@ export default function CompliancePage() {
         <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
           GET COMPLIANT · {DISPLAY.PACK_PRICE}
         </AnimatedButton>
-        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message Kyle before you decide">
           BOOK A FREE CONSULTATION FIRST
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
@@ -585,7 +585,7 @@ export default function CompliancePage() {
                   textAlign: "center",
                 }}
               >
-                Comparable Vanta + DPO contractor: ~AU$18,000+ in year 1
+                Illustrative estimate: a comparable Vanta subscription plus a DPO contractor, ~AU$18,000+ in year 1
               </p>
               <div
                 style={{
@@ -697,7 +697,7 @@ export default function CompliancePage() {
                 <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
                   GET COMPLIANT · {DISPLAY.PACK_PRICE}
                 </AnimatedButton>
-                <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+                <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message Kyle before you decide">
                   BOOK A FREE CONSULTATION FIRST
                 </AnimatedButton>
               </div>
@@ -787,7 +787,7 @@ export default function CompliancePage() {
               increasingly deny breach claims when baseline controls weren't in place. Penalties
               already reach AU$50M for serious or repeated interference. And Tranche 2 reforms
               are positioned to remove the AU$3M small-business turnover exemption, pulling
-              roughly 2.3M additional SMBs into Privacy Act scope.
+              many additional small businesses into Privacy Act scope.
             </FaqItem>
             <FaqItem question="My website is on Squarespace. Can you even help?">
               Yes. The audit works on any hosting provider. I document what you control (privacy
@@ -911,7 +911,7 @@ export default function CompliancePage() {
           <AnimatedButton href="/order/compliance" variant="primary" ariaLabel="Start compliance order">
             GET COMPLIANT · {DISPLAY.PACK_PRICE}
           </AnimatedButton>
-          <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle before you decide">
+          <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message Kyle before you decide">
             BOOK A FREE CONSULTATION FIRST
           </AnimatedButton>
         </div>

@@ -3,7 +3,7 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
-const SECTION_COUNT = 7;
+const SECTION_COUNT = 8;
 
 export const metadata: Metadata = {
   title: "Privacy Policy · TITANOS",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero title="Privacy Policy" tagline="Last updated 2026-10-01 · effective from this date" />
+      <PageHero title="Privacy Policy" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
         <Inscription
@@ -59,8 +59,9 @@ export default function PrivacyPage() {
           <p style={{ marginBottom: 18 }}>
             Titanos (“we”, “us”) is operated by Kyle Deligny, ABN 34 318 502 254, an Australian
             operator providing external attack-surface scanning, Privacy Act + Essential Eight
-            Compliance, and AI Implementation services to businesses in Australia, New Zealand,
-            and Singapore. This policy explains how we handle the personal information we collect
+            Compliance and AI Implementation services, an online catalogue of productised offers,
+            public-record research dossiers and business lead lists, to businesses in Australia,
+            New Zealand and Singapore. This policy explains how we handle the personal information we collect
             through titanos.tech.
           </p>
 
@@ -69,12 +70,16 @@ export default function PrivacyPage() {
           <ul style={ulStyle}>
             <Li>
               Email address, name, and the domain you submit when you request a free scan via
-              the form or email. If you message or call Kyle, your phone number or messaging
+              the form or email. If you message Kyle, your phone number or messaging
               username and whatever you choose to tell us.
             </Li>
             <Li>
               Email address, billing details, and ABN (if applicable) when you purchase a
               Compliance engagement through Stripe.
+            </Li>
+            <Li>
+              Details you enter in the offer enquiry, order and welcome forms, and the details of
+              any offer you buy through a Stripe Payment Link.
             </Li>
             <Li>
               Stripe processes your card data directly; we never see or store payment card
@@ -87,6 +92,22 @@ export default function PrivacyPage() {
           </ul>
 
           <DepthIndex index={2} total={SECTION_COUNT} />
+          <H2>Where we get contact details</H2>
+          <p>
+            Beyond what you give us directly, business contact details come from public sources:
+            public registers, government contract award notices and public DNS records. Our
+            research dossiers (957 organisations so far) are built from those same public sources.
+            Cold email goes only to publicly listed business addresses, every email can be stopped
+            with a one-word STOP reply, and a stopped address is suppressed and never emailed again.
+            In October 2026 we sent 28 outreach emails, through two sending inboxes.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            We use an AI model, Anthropic&apos;s Claude, to help draft reports and emails. Kyle
+            reviews the output before it goes out. Material you send us is never used to train any
+            model.
+          </p>
+
+          <DepthIndex index={3} total={SECTION_COUNT} />
           <H2>How we use it</H2>
           <ul style={ulStyle}>
             <Li>To deliver the scan or engagement you requested.</Li>
@@ -100,7 +121,7 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
-          <DepthIndex index={3} total={SECTION_COUNT} />
+          <DepthIndex index={4} total={SECTION_COUNT} />
           <H2>How we store it</H2>
           <ul style={ulStyle}>
             <Li>Email and lead data is held in our own infrastructure on encrypted disks.</Li>
@@ -117,7 +138,7 @@ export default function PrivacyPage() {
               ).
             </Li>
             <Li>
-              If you message or call Kyle through Telegram or a normal phone call, those services
+              If you message Kyle through Telegram or a normal phone call, those services
               handle your message under their own privacy policies. Telegram has its own (
               <a
                 href="https://telegram.org/privacy"
@@ -131,7 +152,7 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
-          <DepthIndex index={4} total={SECTION_COUNT} />
+          <DepthIndex index={5} total={SECTION_COUNT} />
           <H2>Your rights</H2>
           <ul style={ulStyle}>
             <Li>
@@ -153,14 +174,14 @@ export default function PrivacyPage() {
             </Li>
           </ul>
 
-          <DepthIndex index={5} total={SECTION_COUNT} />
+          <DepthIndex index={6} total={SECTION_COUNT} />
           <H2>How long we keep it</H2>
           <p>
-            Lead data is retained for 24 months after your last engagement with us, then deleted.
+            Lead data is retained for 24 months after your last engagement with us, then deleted. Quote files you send for a free audit are deleted after 30 days.
             Stripe, Telegram and your phone carrier retain their portions per their own privacy frameworks.
           </p>
 
-          <DepthIndex index={6} total={SECTION_COUNT} />
+          <DepthIndex index={7} total={SECTION_COUNT} />
           <H2>Cookies + analytics</H2>
           <p>
             We do not use cookies for analytics, advertising, or tracking. The site uses
@@ -174,7 +195,7 @@ export default function PrivacyPage() {
             out first.
           </OperatorNote>
 
-          <DepthIndex index={7} total={SECTION_COUNT} />
+          <DepthIndex index={8} total={SECTION_COUNT} />
           <H2>Contact</H2>
           <p>
             Email{" "}
@@ -198,7 +219,7 @@ export default function PrivacyPage() {
 
       <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
         <OmegaSeal
-          caption="Seven sections. Every right above is checkable: write to kyle@titanos.tech."
+          caption="Eight sections. Every right above is checkable: write to kyle@titanos.tech."
           style={{ margin: "0 auto" }}
         />
       </section>

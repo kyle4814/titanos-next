@@ -6,6 +6,7 @@ import { DISPLAY, PRICING } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Privacy Act Compliance Enquiry | TITANOS",
   description: "Structured intake for Titanos Privacy Act compliance engagement. Done-with-you in one working call.",
+  alternates: { canonical: "https://titanos.tech/order/compliance" },
   robots: { index: false, follow: false },
 };
 
@@ -14,6 +15,7 @@ export default function OrderCompliancePage() {
     <>
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
+          as="h1"
           label="What this enquiry actually starts"
           sub={`${DISPLAY.PACK_PRICE} one-time, done with you in one working call, plus ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of ongoing monitor included.`}
         >

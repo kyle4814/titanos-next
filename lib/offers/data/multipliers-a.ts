@@ -465,7 +465,7 @@ export const OFFERS_MULTIPLIERS_A: Offer[] = [
       "We run the checks on public records and write up the findings with the method.",
       "You receive the cut and can publish it with your brand.",
     ],
-    edge: "We hold scan history across thousands of Australian domains, taken from public DNS, and we show our method so every figure can be checked.",
+    edge: "We check business domains from public DNS every day (the latest count is on the home page) and we show our method so every figure can be checked.",
     priceAud: 1497,
     cadence: "one-off",
     priceNote: "The monthly report is free. A custom cut is AU$1,497 one-off, and sponsor placement is AU$499 a month. " + NO_GST,

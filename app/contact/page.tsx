@@ -8,7 +8,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
-  "Message Kyle on Telegram, call 0414 244 544, or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
+  "Message Kyle on Telegram or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -24,22 +24,22 @@ export default function ContactPage() {
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
-        sub="No contact form maze, no booking system, no support ticket queue. Message or call Kyle directly. You'll hear back from the same person who does the work."
+        sub="No contact form maze, no booking system, no support ticket queue. Message Kyle directly. You'll hear back from the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
       <Bluf>
-        Message or call Kyle. You hear back from the person who does the work, and the first conversation and your report are free.
+        Message Kyle. You hear back from the person who does the work, and the first conversation and your report are free.
       </Bluf>
       <Analogy k="healthcheck" />
 
-      <section aria-label="Message or call Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <ContactButtons heading="Book your free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
+      <section aria-label="Message Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
+        <ContactButtons heading="Message Kyle for a free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
       </section>
 
       <div className="divider-gold" />
 
       <section aria-label="Direct line" style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
-        <Inscription label="One phone. One person.">
+        <Inscription label="One person.">
           There is no queue and no ticket number.
           <br />
           <span style={{ color: "var(--gold)" }}>Message Kyle and Kyle messages back.</span>
@@ -58,13 +58,6 @@ export default function ContactPage() {
             }}
           >
             <SystemLabel style={{ marginBottom: 16 }}>Direct contact · no form, no gatekeeper</SystemLabel>
-            <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
-              <strong>Phone:</strong>{" "}
-              <a href={CONTACT.TEL_HREF} style={{ color: "var(--gold)" }}>
-                {CONTACT.PHONE_DISPLAY}
-              </a>{" "}
-              ({CONTACT.PHONE_INTL})
-            </p>
             <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
               <strong>Email:</strong>{" "}
               <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>

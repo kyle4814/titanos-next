@@ -166,7 +166,7 @@ export default function OurEvidencePackPage() {
       {
         "@type": "Question",
         name: "What happens after I see this and decide I want one for my business?",
-        acceptedAnswer: { "@type": "Answer", text: "Message or call Kyle to confirm fit, or go straight to the compliance page and buy directly. After purchase: domain scanned within 48 hours, draft pack delivered within 3 business days, 90-minute working call scheduled, final evidence pack lands within 24 hours of that call." },
+        acceptedAnswer: { "@type": "Answer", text: "Message Kyle to confirm fit, or go straight to the compliance page and buy directly. After purchase: domain scanned within 48 hours, draft pack delivered within 3 business days, 90-minute working call scheduled, final evidence pack lands within 24 hours of that call." },
       },
     ],
   };
@@ -490,7 +490,7 @@ export default function OurEvidencePackPage() {
               for myself first is more honest than just claiming it.
             </FaqItem>
             <FaqItem question="What happens after I see this and decide I want one for my business?">
-              You message or call me to confirm the engagement is a fit, or you go straight to
+              You message me to confirm the engagement is a fit, or you go straight to
               the compliance page and buy directly. After purchase: your domain gets scanned within
               48 hours, your draft pack is delivered within 3 business days, and I schedule the
               90-minute working call where I apply every change with you. The final evidence pack,

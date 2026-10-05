@@ -108,7 +108,7 @@ export default function AuditPage() {
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
         <AnimatedButton href="#message" variant="primary">
-          Book your free consultation and report →
+          Message Kyle for a free consultation and report →
         </AnimatedButton>
       </section>
 
@@ -184,7 +184,7 @@ export default function AuditPage() {
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
             <AnimatedButton href="#message" variant="primary">
-              Book your free consultation and report →
+              Message Kyle for a free consultation and report →
             </AnimatedButton>
           </p>
         </div>

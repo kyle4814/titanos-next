@@ -160,7 +160,10 @@ function budgetScore(o: Offer, b: Budget): number {
     case "under100": return p !== null ? 2 : 0;
     case "100to499": return p !== null && p >= 100 && p < 500 ? 4 : p !== null && p < 100 ? 1 : -2;
     case "500plus": return p !== null && p >= 500 ? 4 : -1;
-    case "enterprise": return o.group === "enterprise" || p === null || p >= 1500 ? 5 : -1;
+    case "enterprise":
+      if (p !== null && p >= 5000) return 10;
+      if (o.group === "enterprise" || p === null || p >= 1500) return 6;
+      return p !== null && p < 500 ? -3 : -1;
   }
 }
 

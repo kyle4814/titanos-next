@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   openGraph: { title: META_TITLE, description: META_DESC },
+  alternates: { canonical: "https://titanos.tech/order/ai" },
   robots: { index: false, follow: false },
 };
 
@@ -20,6 +21,7 @@ export default function OrderAiPage() {
     <>
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
+          as="h1"
           label="What this enquiry actually starts"
           sub={`${DISPLAY.AI_LADDER_ENTRY}. Month 1 is the build, months 2 to 3 optimise, then it runs month-to-month. Cancel any time.`}
         >

@@ -57,8 +57,8 @@ export default function AboutPage() {
       <PageHero
         badge="ABOUT THE OPERATOR"
         title="Built from a phone. Run by one operator."
-        tagline="I am Kyle Deligny, founder of TITANOS, the Titan Operating System. Hypersonic Industries and Parallax Industries are its divisions. No funding, no team, no permission asked: just a decision to start, and a standard for what is allowed to ship."
-        sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you message or call, you get me."
+        tagline="I am Kyle Deligny, founder of TITANOS, the Titan Operating System. Hypersonic Industries and Parallax Industries are its divisions. Solo, pre-revenue and no permission asked: just a decision to start, and a standard for what is allowed to ship."
+        sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you message me, you get me."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> ·{" "}
@@ -81,7 +81,7 @@ export default function AboutPage() {
         </AnimatedButton>
       </PageHero>
       <Bluf replaced>
-        TITANOS is one engineer, Kyle Deligny, giving your business the output of a 20-person team, safely, and without replacing anyone.
+        TITANOS is one engineer, Kyle Deligny, built to give your business the output of a roughly 20-person team (by the COCOMO estimate), safely, and without replacing anyone.
       </Bluf>
       <Analogy k="department" />
 
@@ -153,9 +153,9 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            No pitch deck. No funding round. No co-founder to argue the plan with. TITANOS
-            started on a phone, with an idea and a decision to stop waiting for someone
-            else&apos;s approval to act on it.
+            TITANOS started on a phone, with an idea and a decision to stop waiting for someone
+            else&apos;s approval to act on it. I am pre-revenue and raising a small pre-seed
+            round so I can work on it full-time.
           </p>
           <p
             style={{
@@ -286,9 +286,9 @@ export default function AboutPage() {
               . Email security verified (DKIM, SPF, DMARC all in place).
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "var(--gold)" }}>Phone, Telegram:</strong>{" "}
-              <a href={CONTACT.TEL_HREF} style={{ color: "var(--ice)" }}>
-                {CONTACT.PHONE_DISPLAY}
+              <strong style={{ color: "var(--gold)" }}>Telegram:</strong>{" "}
+              <a href={CONTACT.TELEGRAM_URL} style={{ color: "var(--ice)" }}>
+                {CONTACT.TELEGRAM_HANDLE}
               </a>
               . {CONTACT.HOURS} A few minutes is enough to know if I&apos;m useful to you.
             </li>

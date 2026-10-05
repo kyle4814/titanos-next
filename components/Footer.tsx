@@ -42,7 +42,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     links: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
-      { label: "Message or call Kyle", href: "/contact" },
+      { label: "Message Kyle", href: "/contact" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],

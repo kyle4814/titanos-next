@@ -222,7 +222,7 @@ export default function ScanPage() {
         <AnimatedButton href={REQUEST_ANCHOR} variant="primary" ariaLabel="Request your free scan">
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
-        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message or call Kyle">
+        <AnimatedButton href={CONTACT_HREF} variant="secondary" ariaLabel="Message Kyle">
           MESSAGE OR CALL KYLE
         </AnimatedButton>
       </PageHero>
@@ -295,7 +295,7 @@ export default function ScanPage() {
           ))}
           <SystemLabel style={{ textAlign: "center", marginTop: 20 }}>
             Full scan run 2026-06-01 · TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
-            Last re-verified 11 July 2026. TLS 1.3 confirmed, certificate valid through 30 August 2026.
+            TLS 1.3 re-confirmed 5 October 2026, certificate valid through 26 December 2026.
           </SystemLabel>
 
           <OperatorNote>
@@ -446,7 +446,7 @@ export default function ScanPage() {
           <DepthIndex index={6} total={8} />
           <SectionHeading
             title="Request Your Free Scan"
-            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer to talk? Message or call Kyle instead."
+            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer to talk? Message Kyle instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ScanRequestForm />
@@ -461,7 +461,7 @@ export default function ScanPage() {
             >
               Prefer to talk?{" "}
               <a href={CONTACT_HREF} style={{ color: "var(--ice)" }}>
-                Message or call Kyle →
+                Message Kyle →
               </a>
             </p>
           </div>

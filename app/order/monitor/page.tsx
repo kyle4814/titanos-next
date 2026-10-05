@@ -6,6 +6,7 @@ import { DISPLAY } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Monthly Security Monitor Enquiry | TITANOS",
   description: "Structured intake for Titanos Continuous Monitor. Monthly external security scan with delta alerts.",
+  alternates: { canonical: "https://titanos.tech/order/monitor" },
   robots: { index: false, follow: false },
 };
 
@@ -14,13 +15,14 @@ export default function OrderMonitorPage() {
     <>
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
+          as="h1"
           label="What this enquiry actually starts"
           sub={`${DISPLAY.MONITOR_MONTHLY}, or ${DISPLAY.MONITOR_ANNUAL} paid annually. Cancel any time from the billing portal.`}
         >
           A monthly check that tells you what changed, not a one-off scan you forget about.
         </Inscription>
         <SystemLabel style={{ textAlign: "center", marginTop: 18 }}>
-          Enquiry → Kyle confirms scope → invoice → monitoring starts same day
+          Subscribe online on the Monitor page (Stripe). Prefer an invoice? Use this enquiry: Kyle confirms scope → invoice → monitoring starts same day
         </SystemLabel>
       </section>
 

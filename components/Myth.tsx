@@ -125,7 +125,9 @@ export function Inscription({
   sub,
   align = "center",
   style,
+  as: Tag = "p",
 }: {
+  as?: "p" | "h1";
   /** Machine-voice line above the statement. */
   label?: string;
   /** The statement itself, keep it short. This is a lintel, not a paragraph. */
@@ -153,7 +155,7 @@ export function Inscription({
           {label}
         </div>
       )}
-      <p
+      <Tag
         style={{
           fontFamily: "var(--font-display), Georgia, serif",
           fontStyle: "italic",
@@ -166,7 +168,7 @@ export function Inscription({
         }}
       >
         {children}
-      </p>
+      </Tag>
       {sub && (
         <p
           style={{

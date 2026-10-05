@@ -178,7 +178,7 @@ export default function Nav() {
               whiteSpace: "nowrap",
             }}
           >
-            <span className="nav-cta-long">Book a free consultation and report</span>
+            <span className="nav-cta-long">Message Kyle for a free consultation and report</span>
             <span className="nav-cta-short">Free consultation</span>
           </Link>
         </div>
@@ -338,7 +338,7 @@ export default function Nav() {
                   marginBottom: 24,
                 }}
               >
-                Book a free consultation and report
+                Message Kyle for a free consultation and report
               </Link>
 
               <nav>

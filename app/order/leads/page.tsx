@@ -7,6 +7,7 @@ import { DISPLAY } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Verified AU Leads Enquiry | TITANOS",
   description: "Enquiry form for Titanos verified AU contact lists. Tell Kyle what type of business you want to reach, and he builds the verified list.",
+  alternates: { canonical: "https://titanos.tech/order/leads" },
   robots: { index: false, follow: false },
 };
 
@@ -15,6 +16,7 @@ export default function OrderLeadsPage() {
     <>
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
+          as="h1"
           label="What this enquiry actually starts"
           sub={`${DISPLAY.LEADS_STARTER_FROM}, hand-verified, not scraped and sold as-is.`}
         >

@@ -450,7 +450,7 @@ export default function LeadsPage() {
               margin: "0 auto",
             }}
           >
-            Not sure which? Start with a 15-minute fit call. I&apos;ll tell you honestly
+            Not sure which? Start with a free half-hour fit call. I&apos;ll tell you honestly
             whether I can deliver what you need before you pay a cent.
           </p>
         </div>
@@ -702,7 +702,7 @@ export default function LeadsPage() {
             lineHeight: 1.7,
           }}
         >
-          Message or call me. I&apos;ll tell you honestly whether I can deliver the
+          Message me. I&apos;ll tell you honestly whether I can deliver the
           volume and quality you need, before you pay anything.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>

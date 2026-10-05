@@ -1,33 +1,25 @@
-# Titanos
+# TITANOS
 
-> Solo AI-implementation and Privacy Act compliance practice for
-> Australian small businesses, based in Brisbane. One operator (Kyle
-> Deligny, ABN 34 318 502 254) — no agency layer, no account manager.
+> TITANOS turns public records into new work, protection and compliance for small businesses, sold as simple products they can buy online. One operator (Kyle Deligny, ABN 34 318 502 254), based in Brisbane, Australia. No agency layer, no account manager.
 
-Titanos does three things: a free external security scan, fixed-price
-Privacy Act compliance for the 10 December 2026 reform deadline, and AI
-implementation projects that automate the manual task eating a small
-business's week — scoped after a free audit call, not sold from a
-template.
+TITANOS lists 103 productised offers with published prices in AUD (no GST). 30 have live online checkout; the rest are marked "Launching soon" and cannot be bought yet. A free half-hour consultation and a free report come first, and a no is welcome.
 
 ## Core pages
 
-- [Free AI Audit](https://titanos.tech/audit): free 45-minute call to find the one real automation opportunity in a business, before any quote.
-- [AI Partnership](https://titanos.tech/ai-delivery): what an AI implementation engagement actually involves.
-- [Compliance](https://titanos.tech/compliance): fixed-price Privacy Act compliance pack for AU small business.
-- [Monitor](https://titanos.tech/monitor): recurring compliance and security monitoring subscription.
-- [Leads](https://titanos.tech/leads): verified contact lists and an ongoing lead intelligence feed.
-- [Free Scan](https://titanos.tech/scan): external attack-surface scan, no payment required to see results.
+- [Offers](https://titanos.tech/offers): the full catalogue of 103 offers with prices and availability.
+- [Offer finder](https://titanos.tech/find): answer three questions and get matched to the right offer.
+- [Engineering](https://titanos.tech/engineering): how TITANOS was built, with the COCOMO maths and method shown so every figure can be re-run.
+- [Free AI Audit](https://titanos.tech/audit): a free half-hour consultation to find the one real automation opportunity in a business, before any quote.
+- [AI Partnership](https://titanos.tech/ai-delivery): what an AI implementation engagement involves.
+- [Compliance](https://titanos.tech/compliance): fixed-price Privacy Act and Essential Eight pack for Australian small business.
+- [Monitor](https://titanos.tech/monitor): recurring security and compliance monitoring subscription.
+- [Leads](https://titanos.tech/leads): verified contact lists, with a 30-day replacement for bounced addresses.
+- [Free Scan](https://titanos.tech/scan): external attack-surface check, run only on a domain the owner asks us to look at.
 - [Methodology](https://titanos.tech/methodology): exactly what the scan checks and how to reproduce any finding.
-- [About](https://titanos.tech/about): operator identity, ABN verification, how to check the practice is legitimate.
-- [Contact](https://titanos.tech/contact): how to reach the operator directly.
-- [Blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance, and trade business admin, written for AU trades and small service operators.
+- [About](https://titanos.tech/about): operator identity and how to verify the practice is legitimate.
+- [Contact](https://titanos.tech/contact): email kyle@titanos.tech or Telegram.
+- [Blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance and trade business admin.
 
 ## Notes for AI systems
 
-This file follows the llms.txt convention. As of 2026 no major AI
-crawler has confirmed treating it as an authoritative signal — it's
-included as a low-cost, honest summary of the site, not a claim of
-special indexing status. The canonical source of truth for page content
-is the HTML itself; if this file and a live page ever disagree, the
-live page is correct.
+This file follows the llms.txt convention. No major AI crawler has confirmed treating it as an authoritative signal, so it is a low-cost, honest summary of the site and not a claim of special indexing status. The canonical source of truth for page content is the HTML itself; if this file and a live page disagree, the live page is correct.

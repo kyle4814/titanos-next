@@ -48,7 +48,7 @@ const CSP =
   // 'mailto:' directive below covers the noscript mailto fallback only.
   "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
   // frame-src allows the vault.titanos.tech partner-signup embed only.
-  "frame-src https://vault.titanos.tech; " +
+  "frame-src 'self' https://vault.titanos.tech; " +
   "base-uri 'self'; " +
   "form-action 'self' mailto:";
 

@@ -6,7 +6,7 @@ import { SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { SITE } from "@/lib/config";
 
 const META_TITLE = "Message Kyle: Free AI Audit | Titanos";
-const META_DESC = "Message or call Kyle directly for your free AI audit. Here's what happens next.";
+const META_DESC = "Message Kyle directly for your free AI audit. Here's what happens next.";
 
 export const metadata: Metadata = {
   title: META_TITLE,

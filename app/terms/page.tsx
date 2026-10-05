@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import { DISPLAY, PRICING } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
-const SECTION_COUNT = 8;
+const SECTION_COUNT = 9;
 
 export const metadata: Metadata = {
   title: "Terms of Service · TITANOS",
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <PageHero title="Terms of Service" tagline="Last updated 2026-06-04 · effective from this date" />
+      <PageHero title="Terms of Service" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="The agreement, in one place"
-          sub="Seven sections, no fine print hidden past the end of the page. What the free scan is, what a paid engagement covers, and what happens if it goes wrong."
+          sub="Nine sections, no fine print hidden past the end of the page. What the free scan is, what a paid engagement covers, and what happens if it goes wrong."
         >
           Nothing here changes without the date at the top changing with it.
         </Inscription>
@@ -69,7 +69,7 @@ export default function TermsPage() {
             signals on a domain you submit, limited to information your server already
             announces to the public internet. It is not a penetration test, not an audit, not a
             legal compliance assessment, and not a substitute for one. The report is delivered on
-            a reasonable-effort basis, typically within one business day. I may decline
+            a reasonable-effort basis, typically within 2 business days. I may decline
             requests I deem out of scope (government, military, infrastructure operators, or
             domains where you cannot demonstrate operational authority).
           </p>
@@ -81,7 +81,7 @@ export default function TermsPage() {
             {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included; Monitor
             continues at {DISPLAY.MONITOR_MONTHLY} only on explicit opt-in; no auto-charge): a
             single done-with-you engagement that includes the deliverables described on the
-            compliance page at the time of purchase. Job Flow ({DISPLAY.JOB_FLOW_MONTHLY}): a
+            compliance page at the time of purchase. Job Flow ({DISPLAY.JOB_FLOW_MONTHLY}, when it launches): a
             monthly done-for-you service for tradies and small service businesses, billed monthly,
             cancel any time by email, no refund for the current month, and no further charges after
             you cancel. AI Implementation and Leads engagements are
@@ -89,6 +89,25 @@ export default function TermsPage() {
           </p>
 
           <DepthIndex index={3} total={SECTION_COUNT} />
+          <H2>Online offers and checkout</H2>
+          <p>
+            The offers catalogue on titanos.tech lists 103 offers. 30 are sold through Stripe
+            Payment Links and show &quot;Available now&quot;. Offers marked &quot;Launching soon&quot; cannot be
+            bought yet. Prices are in Australian dollars. I am not registered for GST, so no GST is
+            charged. Stripe processes your card, and I never see or store your card number.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            One-off products are delivered by email within the time stated on the offer page.
+            Monthly offers cancel any time by email, with no refund for the current month, subject to
+            your rights under the Australian Consumer Law. Lead lists carry a 30-day replacement for
+            addresses that bounce. Reseller, white-label and partner offers are licensed for the
+            stated use only.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            Deliverables are drafted with AI assistance and reviewed by Kyle before they reach you.
+          </p>
+
+          <DepthIndex index={4} total={SECTION_COUNT} />
           <H2>Refunds</H2>
           <p>
             Compliance engagements: a full refund is available within 14 days of payment,
@@ -99,7 +118,7 @@ export default function TermsPage() {
             engagements: refund terms are stated in the written scope issued before payment.
           </p>
 
-          <DepthIndex index={4} total={SECTION_COUNT} />
+          <DepthIndex index={5} total={SECTION_COUNT} />
           <H2>Responsible disclosure</H2>
           <p>
             I operate a 90-day responsible-disclosure window for any third-party findings
@@ -113,7 +132,7 @@ export default function TermsPage() {
             how every finding is handled, every time.
           </OperatorNote>
 
-          <DepthIndex index={5} total={SECTION_COUNT} />
+          <DepthIndex index={6} total={SECTION_COUNT} />
           <H2>Liability</H2>
           <p>
             Titanos provides services on a reasonable-skill-and-care basis. My maximum
@@ -122,21 +141,21 @@ export default function TermsPage() {
             legally be excluded under Australian Consumer Law.
           </p>
 
-          <DepthIndex index={6} total={SECTION_COUNT} />
+          <DepthIndex index={7} total={SECTION_COUNT} />
           <H2>Governing law</H2>
           <p>
             Governed by the laws of Queensland, Australia. Disputes are subject to the
             non-exclusive jurisdiction of the Queensland courts.
           </p>
 
-          <DepthIndex index={7} total={SECTION_COUNT} />
+          <DepthIndex index={8} total={SECTION_COUNT} />
           <H2>Changes</H2>
           <p>
             I may update these terms. The effective date at the top will reflect the most
             recent revision.
           </p>
 
-          <DepthIndex index={8} total={SECTION_COUNT} />
+          <DepthIndex index={9} total={SECTION_COUNT} />
           <H2>Contact</H2>
           <p>
             Email{" "}
@@ -150,7 +169,7 @@ export default function TermsPage() {
 
       <section aria-label="The seal" style={{ padding: "0 20px var(--space-16)", position: "relative", zIndex: 2 }}>
         <OmegaSeal
-          caption="Eight sections. Every liability limit and disclosure window stated plainly above."
+          caption="Nine sections. Every liability limit and disclosure window stated plainly above."
           style={{ margin: "0 auto" }}
         />
       </section>

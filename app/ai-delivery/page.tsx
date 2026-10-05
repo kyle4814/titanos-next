@@ -129,7 +129,7 @@ export default function AiDeliveryPage() {
     <>
       <PageHero
         badge={`AI GROWTH PARTNER · RETAINER FROM ${DISPLAY.AI_GROWTH_PARTNER.toUpperCase()}`}
-        title="The output of a 20-person engineering team, for one monthly price."
+        title="Built at the output of a roughly 20-person team, for one monthly price."
         sub="Pick your tier. The first system goes live in month 1, inside the retainer, not as a separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>
@@ -301,7 +301,7 @@ export default function AiDeliveryPage() {
           No cost, no obligation, no pitch deck. Just a straight conversation about your business.
         </p>
         <AnimatedButton href="/audit" variant="primary">
-          Book your free consultation and report →
+          Message Kyle for a free consultation and report →
         </AnimatedButton>
       </SectionReveal>
       <FrontLoad

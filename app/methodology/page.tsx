@@ -257,7 +257,7 @@ export default function MethodologyPage() {
           <DepthIndex index={4} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Scope"
-            lead="I scan organisations across Australia, New Zealand, and Singapore, typically B2B SaaS, mid-market commercial, and listed companies. I do not scan:"
+            lead="I only scan a domain you or your authorised representative asks me to check. Outside that, I read public DNS records only. I do not scan:"
           />
           <SimpleList
             items={[

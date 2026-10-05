@@ -1,9 +1,9 @@
 import AnimatedButton from "@/components/AnimatedButton";
-import { CONTACT } from "@/lib/config";
+import { CONTACT, SITE } from "@/lib/config";
 
 /**
  * ContactButtons: the one place people reach Kyle directly.
- * Telegram or a phone call. No booking, no forms. (Kyle, 2026-10-01: Telegram is the main base.)
+ * Telegram or email. No booking, no forms. (Kyle, 2026-10-01: Telegram is the main base.)
  * Numbers and links live in lib/config.ts (CONTACT).
  */
 type Props = {
@@ -44,11 +44,11 @@ export default function ContactButtons({ heading = null, align = "center", showH
           Telegram {CONTACT.TELEGRAM_HANDLE}
         </AnimatedButton>
         <AnimatedButton
-          href={CONTACT.TEL_HREF}
+          href={`mailto:${SITE.KYLE_EMAIL}`}
           variant="primary"
-          ariaLabel={`Call Kyle on ${CONTACT.PHONE_DISPLAY}`}
+          ariaLabel="Email Kyle"
         >
-          Call {CONTACT.PHONE_DISPLAY}
+          Email {SITE.KYLE_EMAIL}
         </AnimatedButton>
       </div>
       {showHours && (

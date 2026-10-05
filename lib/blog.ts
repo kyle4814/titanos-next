@@ -206,7 +206,7 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "\"AI audit\" gets used to mean a lot of things, so here's what it actually is on a 45-minute call: going through how the business actually runs day-to-day and finding the one manual task that's eating real hours, not the task that sounds most impressive to automate.",
+        text: "\"AI audit\" gets used to mean a lot of things, so here's what it actually is on a free half-hour call: going through how the business actually runs day-to-day and finding the one manual task that's eating real hours, not the task that sounds most impressive to automate.",
       },
       { type: "h2", text: "The patterns that come up most" },
       {
@@ -1266,7 +1266,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Sources - Our own measurement, Australian small-business domains, 8 bands, 362 domains (TITANOS research, 02_anz-smb-email-security-stat-report.md) - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025",
+        text: "Sources: Our own measurement, Australian small-business domains, 8 bands, 362 domains (TITANOS research, 02_anz-smb-email-security-stat-report.md) - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025",
       },
       {
         type: "p",
@@ -1366,11 +1366,11 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Want to see where your own practice's domain sits? The free check takes a couple of minutes: titanos.tech/scan (https://titanos.tech/scan). Prefer a chat? Book a free audit call at titanos.tech/audit (https://titanos.tech/audit) and I will tell you plainly what I find. No pressure either way.",
+        text: "Want to see where your own practice's domain sits? The free check takes a couple of minutes: titanos.tech/scan (https://titanos.tech/scan). Prefer a chat? Message Kyle for a free audit at titanos.tech/audit (https://titanos.tech/audit) and I will tell you plainly what I find. No pressure either way.",
       },
       {
         type: "p",
-        text: "Sources - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - OAIC, data breach notifications 2025: https://www.oaic.gov.au/news/media-centre/data-breach-notifications-increase-to-all-time-high-in-2025,-new-ndb-stats-show - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)",
+        text: "Sources: ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ACSC, Small Business Cyber Security Guide: https://www.cyber.gov.au/sites/default/files/2023-07/acsc_small_business_cyber_security_guide.pdf - OAIC, data breach notifications 2025: https://www.oaic.gov.au/news/media-centre/data-breach-notifications-increase-to-all-time-high-in-2025,-new-ndb-stats-show - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)",
       },
       {
         type: "p",
@@ -1391,7 +1391,7 @@ export const POSTS: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "One email, sent at exactly the right moment, can redirect a house deposit. 🏠",
+        text: "One email, sent at exactly the right moment, can redirect a house deposit.",
       },
       {
         type: "p",
@@ -1506,7 +1506,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Sources - ASD ACSC, property-related BEC alert: https://www.cyber.gov.au/about-us/alerts/property-related-business-email-compromise-scams-rising-australia - PEXA, \"97% Of Aussies Miss Property Scam Warning Signs\": https://www.pexa-group.com/content-hub/news/aussies-miss-property-scam-warning-signs/ - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ASD ACSC, 2024 to 25 factsheet for businesses: https://www.cyber.gov.au/sites/default/files/2025-10/Annual%20Cyber%20Threat%20Report%202024-25%20factsheet%20for%20businesses%20and%20organisations.pdf - Queensland Law Society, Trust Account Alert: https://www.qls.com.au/news-media-advocacy/trust-account-alert - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)",
+        text: "Sources: ASD ACSC, property-related BEC alert: https://www.cyber.gov.au/about-us/alerts/property-related-business-email-compromise-scams-rising-australia - PEXA, \"97% Of Aussies Miss Property Scam Warning Signs\": https://www.pexa-group.com/content-hub/news/aussies-miss-property-scam-warning-signs/ - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ASD ACSC, 2024 to 25 factsheet for businesses: https://www.cyber.gov.au/sites/default/files/2025-10/Annual%20Cyber%20Threat%20Report%202024-25%20factsheet%20for%20businesses%20and%20organisations.pdf - Queensland Law Society, Trust Account Alert: https://www.qls.com.au/news-media-advocacy/trust-account-alert - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)",
       },
       {
         type: "p",
