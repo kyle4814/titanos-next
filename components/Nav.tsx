@@ -5,7 +5,9 @@
  * vault-drawer hamburger (MOB-02).
  *
  * Behaviour:
- *   >720px: horizontal links across the top, hover underline, click pulse.
+ *   >720px: horizontal links across the top, hover underline, click pulse,
+ *     plus a "More" dropdown holding every door the strip leaves out
+ *     (derived in lib/navLinks.ts so desktop and mobile cannot drift).
  *   ≤720px: hamburger button replaces the link strip. Tap opens a
  *     full-height drawer sliding from the right with vault-styled
  *     stacked links + VaultKeyhole markers. Tap × / overlay / ESC
@@ -19,43 +21,14 @@
  */
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
-
-// Drawer (mobile) shows every door. Offers and the finder lead.
-const LINKS = [
-  { label: "Find your offer", href: "/find", external: false },
-  { label: "All offers", href: "/offers", external: false },
-  { label: "Free consultation", href: "/audit", external: false },
-  { label: "AI Partnership", href: "/ai-delivery", external: false },
-  { label: "Compliance", href: "/compliance", external: false },
-  { label: "Monitor", href: "/monitor", external: false },
-  { label: "Blog", href: "/blog", external: false },
-  { label: "Black Ice", href: "/black-ice", external: false },
-  { label: "Leads", href: "/leads", external: false },
-  { label: "Free Scan", href: "/scan", external: false },
-  { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
-  { label: "Refer & Earn", href: "/refer", external: false },
-  { label: "Methodology", href: "/methodology", external: false },
-  { label: "About", href: "/about", external: false },
-  { label: "Contact", href: "/contact", external: false },
-];
-
-// Desktop strip: short labels, one line. Black Ice, Leads, Scan and the
-// rest stay in the drawer and the footer.
-const DESKTOP_LINKS = [
-  { label: "Find offer", href: "/find", external: false },
-  { label: "Offers", href: "/offers", external: false },
-  { label: "AI", href: "/ai-delivery", external: false },
-  { label: "Compliance", href: "/compliance", external: false },
-  { label: "Monitor", href: "/monitor", external: false },
-  { label: "Blog", href: "/blog", external: false },
-  { label: "About", href: "/about", external: false },
-];
+import { LINKS, DESKTOP_LINKS, groupMore } from "@/lib/navLinks";
 
 const SESSION_KEY = "titanos.vault.entranceShown";
 const REVEAL_DELAY_MS = 800;
@@ -163,6 +136,7 @@ export default function Nav() {
           {DESKTOP_LINKS.map((l) => (
             <NavLink key={l.href} {...l} />
           ))}
+          <MoreMenu />
           <Link
             href={AUDIT_MESSAGE_HREF}
             style={{
@@ -411,6 +385,59 @@ export default function Nav() {
         @media (max-width: 900px) {
           .nav-desktop-links a[href="/blog"] { display: none; }
         }
+        .nav-more { position: relative; margin-left: 20px; }
+        .nav-more-btn {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 8px 4px; background: transparent; border: 0; cursor: pointer; line-height: inherit;
+          color: var(--dim); font-size: var(--fs-sm);
+          font-family: var(--font-body), system-ui, sans-serif;
+          transition: color 180ms ease;
+        }
+        .nav-more-btn:hover, .nav-more-btn[aria-expanded="true"] { color: var(--ice); }
+        .nav-more-btn:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+        .nav-more-chev { transition: transform 180ms ease; }
+        .nav-more-btn[aria-expanded="true"] .nav-more-chev { transform: rotate(180deg); }
+        .nav-more-panel {
+          position: absolute; top: calc(100% + 14px); right: -40px; z-index: 40;
+          display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 1fr);
+          gap: 32px; min-width: 560px; padding: 22px 30px 18px;
+          background: linear-gradient(180deg, var(--vault-warm), var(--vault-black));
+          border: 1px solid var(--gold-dim);
+          border-top: 1px solid var(--gold);
+          border-radius: var(--radius-md);
+          box-shadow: 0 24px 60px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(0 0 0 / 0.4);
+        }
+        .nav-more-panel::before {
+          content: ""; position: absolute; top: -1px; left: 12%; right: 12%; height: 1px;
+          background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .nav-more-panel { animation: navMoreFade 160ms ease-out; }
+        }
+        @keyframes navMoreFade { from { opacity: 0; } to { opacity: 1; } }
+        .nav-more-title {
+          margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+          font-family: var(--font-mono), ui-monospace, monospace; font-size: var(--fs-xs);
+          letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dim);
+        }
+        .nav-more-item {
+          display: flex; align-items: flex-start; gap: 10px; padding: 9px 8px;
+          border-radius: var(--radius-sm); text-decoration: none; color: var(--ice);
+          transition: background 160ms ease, color 160ms ease;
+        }
+        .nav-more-item:hover, .nav-more-item:focus-visible {
+          background: rgb(var(--gold-rgb) / 0.08); outline: none;
+        }
+        .nav-more-item:focus-visible { box-shadow: inset 0 0 0 1px var(--gold-dim); }
+        .nav-more-item:hover .nav-more-label, .nav-more-item:focus-visible .nav-more-label { color: var(--gold); }
+        .nav-more-label {
+          display: block; font-family: var(--font-display), Georgia, serif;
+          font-style: italic; font-size: var(--fs-lg); line-height: 1.2; transition: color 160ms ease;
+        }
+        .nav-more-blurb {
+          display: block; margin-top: 2px; font-size: var(--fs-xs); color: var(--dim);
+          font-family: var(--font-body), system-ui, sans-serif;
+        }
         .nav-burger {
           display: none !important;
         }
@@ -572,5 +599,105 @@ function NavLink({
     <Link href={href} {...sharedProps}>
       {inner}
     </Link>
+  );
+}
+
+/* ─── Desktop "More" dropdown ────────────────────────────── */
+function MoreMenu() {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const panelId = useId();
+  const pathname = usePathname();
+  const groups = groupMore();
+
+  // Close on route change
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        btnRef.current?.focus();
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onDown);
+    };
+  }, [open]);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="nav-more"
+      onBlur={(e) => {
+        // Tabbing out of the whole menu closes it
+        if (open && !wrapRef.current?.contains(e.relatedTarget as Node | null)) {
+          setOpen(false);
+        }
+      }}
+    >
+      <button
+        ref={btnRef}
+        type="button"
+        className="nav-more-btn"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={(e) => {
+          const opening = !open;
+          setOpen(opening);
+          // Keyboard activation (detail 0): move focus into the panel
+          if (opening && e.detail === 0) {
+            window.setTimeout(
+              () => wrapRef.current?.querySelector<HTMLElement>(".nav-more-item")?.focus(),
+              0,
+            );
+          }
+        }}
+      >
+        More
+        <svg
+          className="nav-more-chev"
+          width="10"
+          height="6"
+          viewBox="0 0 10 6"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div id={panelId} className="nav-more-panel">
+          {groups.map((g) => (
+            <div key={g.title}>
+              <p className="nav-more-title">{g.title}</p>
+              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+                {g.items.map((it) => (
+                  <li key={it.href}>
+                    <Link href={it.href} className="nav-more-item" onClick={() => setOpen(false)}>
+                      <span style={{ paddingTop: 6 }}>
+                        <VaultKeyhole size={10} pulse={false} />
+                      </span>
+                      <span>
+                        <span className="nav-more-label">{it.label}</span>
+                        {it.blurb && <span className="nav-more-blurb">{it.blurb}</span>}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
