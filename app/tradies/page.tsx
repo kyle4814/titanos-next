@@ -14,8 +14,8 @@ import { Bluf, FrontLoad } from "@/components/SalesKit";
 // owner-operator, no pressure. The free first step reuses the site's
 // existing free consultation route (AUDIT_MESSAGE_HREF); no new form backend.
 
-const META_TITLE = `Job Flow for Tradies: Quotes Chased, Local Leads, More Reviews | ${DISPLAY.JOB_FLOW_MONTHLY}`;
-const META_DESC = `Job Flow chases your old quotes, finds you fresh local work and gets you more reviews. ${DISPLAY.JOB_FLOW_MONTHLY}, cancel any time, no lock-in, no setup fee.`;
+const META_TITLE = `Job Flow for Tradies: New Work Found Before It's Advertised | ${DISPLAY.JOB_FLOW_MONTHLY}`;
+const META_DESC = `Job Flow finds you new work before it is advertised: who just won the contract near you, fresh local leads and more reviews. ${DISPLAY.JOB_FLOW_MONTHLY}, launching soon. Subbie Finder is available now.`;
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 const WHAT_YOU_GET = [
-  "Quote chaser: send us your open quotes (an export from your quoting software, or just forward them) and we hand back a ready-to-send follow-up message, text and email, for every quote that has not been chased. Written in your voice.",
+  "Winners near you: contract awards in your postcode and radius each month, with value, scope, suburb and how to reach the head contractor who now needs subbies.",
   "Fresh local leads: 50 commercial leads near you that match your trade (for example property managers, builders, strata managers and facilities managers), each with business name, phone and website.",
   "Review booster: review-request messages for last month's finished jobs, and replies drafted for any new Google reviews.",
   `Scam shield: TITANOS Monitor included. A monthly check of your business email settings, with alerts. On its own that is ${DISPLAY.MONITOR_MONTHLY}.`,
@@ -46,9 +46,9 @@ const WHAT_YOU_GET = [
 ];
 
 const STEPS = [
-  { n: "1", t: "You send your quotes", d: "Forward them, or send an export from your quoting software. Nothing else to set up." },
-  { n: "2", t: "We write and find", d: "We write the follow-ups and review messages in your voice, and build your list of local leads." },
-  { n: "3", t: "You send and get paid", d: "You read each message and send the ones you like. You stay in control of every word that reaches a customer." },
+  { n: "1", t: "Tell us your trade and area", d: "Your trade, postcode, radius and the smallest job worth your time. Nothing else to set up." },
+  { n: "2", t: "We find the work", d: "We match fresh contract awards and local leads to your settings, and write review requests in your voice." },
+  { n: "3", t: "You call and win", d: "You ring the winners and leads that fit. You stay in control of every word that reaches anyone." },
 ];
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
@@ -61,12 +61,12 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
     a: "No. Nothing is sent to your customers unless you send it. We hand you the messages and you decide what goes out.",
   },
   {
-    q: "What happens to my quotes and customer details?",
-    a: "They are only used to write your messages. They are never sold and never shared.",
+    q: "What do you need from me?",
+    a: "Your trade, your postcode and how far you travel. Any customer details you share for review requests are only used to write your messages, never sold and never shared.",
   },
   {
     q: "Does this replace anyone?",
-    a: "No. Nobody is replaced. It gives you hours back from chasing, searching and writing, so more of your week goes to the actual work.",
+    a: "No. Nobody is replaced. It gives you hours back from searching and writing, so more of your week goes to the actual work.",
   },
   {
     q: "How do I cancel?",
@@ -78,11 +78,11 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Is there any pressure or catch?",
-    a: "No tactics and no pressure. The price is on this page, and the free dead-quote check comes first so you can see what it finds before paying anything.",
+    a: "No tactics and no pressure. The price is on this page, and the free sample comes first so you can see what it finds before paying anything.",
   },
   {
     q: "What does it cost?",
-    a: `${DISPLAY.JOB_FLOW_MONTHLY}, billed monthly. No setup fee.`,
+    a: `${DISPLAY.JOB_FLOW_MONTHLY}, billed monthly, no setup fee, once Job Flow launches. Subbie Finder (the contract-winners list on its own) is available now for AU$99 a month.`,
   },
 ];
 
@@ -92,7 +92,7 @@ export default function TradiesPage() {
     "@type": "Product",
     name: "Job Flow",
     description:
-      "A monthly done-for-you service for tradies and small service businesses: follow-up messages for open quotes, 50 local commercial leads, review requests and drafted review replies, email security monitoring, and a one-page monthly report.",
+      "A monthly done-for-you service for tradies and small service businesses: contract winners near you, local commercial leads, review requests and drafted review replies, email security monitoring, and a one-page monthly report.",
     brand: { "@type": "Organization", name: "Titanos", url: "https://titanos.tech" },
     offers: {
       "@type": "Offer",
@@ -119,26 +119,26 @@ export default function TradiesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <PageHero
-        badge="JOB FLOW · FOR TRADIES"
-        title="Old quotes chased. Fresh local work found. More reviews."
-        tagline={`Job Flow does the follow-up and the searching for you every month. ${DISPLAY.JOB_FLOW_MONTHLY}. Cancel any time, no lock-in, no setup fee.`}
-        sub="For sparkies, plumbers, builders, cleaners, landscapers and other small service businesses. We write the messages and build the lists. You send what you like."
+        badge="JOB FLOW · FOR TRADIES · LAUNCHING SOON"
+        title="New work found before it's advertised."
+        tagline={`Every month: who just won the contract near you, fresh local leads and more reviews. ${DISPLAY.JOB_FLOW_MONTHLY} when it launches. Cancel any time, no lock-in, no setup fee.`}
+        sub="For sparkies, plumbers, builders, cleaners, landscapers and other small service businesses. Want it today? Subbie Finder, the contract-winners list on its own, is available now at /offers/subbie-finder."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned · Run by Kyle Deligny
           </>
         }
       >
-        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with the free dead-quote check">
-          FREE DEAD-QUOTE CHECK →
+        <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
+          FREE SAMPLE: WINNERS NEAR YOU →
         </AnimatedButton>
         <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
-          No card, no obligation. Send your open quotes and we show you how many are sitting unchased.
+          No card, no obligation. We send you five contract winners near your postcode, sourced and dated.
         </p>
       </PageHero>
 
       <Bluf>
-        Job Flow chases your old quotes, finds you fresh local work and gets you more reviews, for {DISPLAY.JOB_FLOW_MONTHLY}.
+        Job Flow finds you new work before it is advertised, for {DISPLAY.JOB_FLOW_MONTHLY} when it launches. Subbie Finder is available now.
       </Bluf>
 
       <div className="divider-gold" />
@@ -270,9 +270,9 @@ export default function TradiesPage() {
                   maxWidth: "var(--maxw-prose)",
                 }}
               >
-                Billed monthly. Cancel any time with one email. Nothing more is charged after you cancel.
+                Launching soon. Billed monthly once live. Cancel any time with one email. Nothing more is charged after you cancel.
               </p>
-              <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with the free dead-quote check">
+              <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
                 START WITH THE FREE CHECK →
               </AnimatedButton>
             </article>
@@ -336,14 +336,14 @@ export default function TradiesPage() {
               marginBottom: 14,
             }}
           >
-            Start with the free dead-quote check
+            Start with a free sample
           </h2>
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 22px" }}>
-            If it looks useful and you are comfortable with all of that, the free dead-quote check is the easy first
-            step. Send your open quotes and we show you how many are sitting unchased. A no is completely fine. Prefer to talk first? You can also book a free audit call.
+            If it looks useful and you are comfortable with all of that, the free sample is the easy first
+            step: five contract winners near your postcode, sourced and dated. A no is completely fine. Prefer to talk first? You can also book a free audit call.
           </p>
-          <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with the free dead-quote check">
-            FREE DEAD-QUOTE CHECK →
+          <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
+            FREE SAMPLE: WINNERS NEAR YOU →
           </AnimatedButton>
         </div>
       </SectionReveal>
