@@ -11,7 +11,7 @@ const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 export const metadata: Metadata = {
   title: "About · Kyle Deligny · TITANOS",
   description:
-    "Solo operator, Brisbane. ABN 34 318 502 254 (verifiable). AI systems built for your business, privacy-compliant by design. 1,700+ automated scans run this month.",
+    "Solo operator, Brisbane. ABN 34 318 502 254 (verifiable). AI systems built for your business, privacy-compliant by design.",
   alternates: { canonical: "https://titanos.tech/about" },
   openGraph: {
     title: "About · Kyle Deligny · Titanos",

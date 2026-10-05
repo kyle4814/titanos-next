@@ -9,8 +9,8 @@ import { useReducedMotion } from "framer-motion";
 import { STATS } from "@/lib/stats";
 
 const LINES = [
-  `${STATS.scansThisMonth}+ automated scans run this month`,
-  `${STATS.uniqueBusinesses}+ AU/NZ/SG businesses in the scan corpus`,
+  `${STATS.scansLast30Days.toLocaleString("en-AU")} domains checked in the last 30 days`,
+  `${STATS.organisationsResearched.toLocaleString("en-AU")} organisations researched in full dossiers`,
   "ABN 34 318 502 254, Australian-owned, verifiable",
   "Every finding verifiable: see the real evidence pack",
   "Privacy-compliant by design on every system built",

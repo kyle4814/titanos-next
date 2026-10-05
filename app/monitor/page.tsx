@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { STATS } from "@/lib/stats";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -132,7 +133,7 @@ export default function MonitorPage() {
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
-            3,600+ unique AU/NZ/SG businesses in the scan corpus ·{" "}
+            {STATS.organisationsResearched.toLocaleString("en-AU")} organisations researched in full dossiers ·{" "}
             <a href="/methodology" style={{ color: "var(--ice)" }}>
               Methodology
             </a>

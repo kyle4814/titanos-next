@@ -210,8 +210,7 @@ export default function Home() {
         sub="Kyle Deligny, founder of TITANOS, the Titan Operating System. Home of Hypersonic Industries and Parallax Industries."
         trustLine={
           <>
-            Australian-owned · ABN 34 318 502 254 · {STATS.scansThisMonth}+ external scans run this
-            month · Every figure has its method one click away.
+            Australian-owned · ABN 34 318 502 254 · {STATS.scansLast30Days.toLocaleString("en-AU")} domains checked in the last 30 days · Every figure has its method one click away.
           </>
         }
       >
@@ -334,8 +333,8 @@ export default function Home() {
             background: "rgb(var(--gold-rgb) / 0.02)",
           }}
         >
-          <TrustUnit big={<><NumberCounter value={STATS.scansThisMonth} suffix="+" /></>} small="scans this month" />
-          <TrustUnit big={<><NumberCounter value={STATS.uniqueBusinesses} suffix="+" /></>} small="AU/NZ/SG businesses in corpus" />
+          <TrustUnit big={<><NumberCounter value={STATS.scansLast30Days} /></>} small="domains checked in the last 30 days" />
+          <TrustUnit big={<><NumberCounter value={STATS.organisationsResearched} /></>} small="organisations researched in full dossiers" />
           <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
         </div>
