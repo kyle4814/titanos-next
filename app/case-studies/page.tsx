@@ -23,7 +23,7 @@ export default function CaseStudies() {
       <PageHero
         badge="Case studies"
         title="The receipts library."
-        sub="Each case study is a real build, with its speed, its cost and how it was tested. Client names stay private."
+        sub="Each case study is a real build, with its speed, its cost and how it was tested. Names stay private."
       />
       <section style={SECTION}>
         <div

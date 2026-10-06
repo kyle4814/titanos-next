@@ -33,7 +33,7 @@ export const CASES: CaseStudy[] = [
       ["About 6%", "of one week of a flat-rate AI subscription"],
     ],
     brief:
-      "A phone-first app to learn trading safely, with practice money only: a course, live charts, an AI tutor and a Telegram bot, simple enough to use on a lunch break.",
+      "A personal build, made as a gift: a phone-first app to learn trading safely, with practice money only: a course, live charts, an AI tutor and a Telegram bot, simple enough to use on a lunch break.",
     built: [
       "A 200-lesson trading course with server-scored quizzes, progress and badges. Each lesson was checked by a second, separate fact-checking agent.",
       "An AI tutor on every screen, from a floating chat bubble that knows what you are looking at (a lesson, a chart or a practice round).",
@@ -46,7 +46,7 @@ export const CASES: CaseStudy[] = [
     cost:
       "No extra spend. The build ran inside a flat-rate AI subscription that was already paid for (about US$200 a month), and it used about 6% of one week's allowance, going by the usage meter readings before and after. Pro rata, that is roughly US$3 of the subscription. Hosting runs on Cloudflare's free tier, so the running cost is $0.",
     tested:
-      "Every change had to pass the test gate before it landed. Then a headless phone browser tapped through every tab at two screen sizes, opened the AI tutor and checked for a real answer. That pass caught two layout bugs (overlapping chat buttons and an overlapping price label), and both were fixed before the client saw them.",
+      "Every change had to pass the test gate before it landed. Then a headless phone browser tapped through every tab at two screen sizes, opened the AI tutor and checked for a real answer. That pass caught two layout bugs (overlapping chat buttons and an overlapping price label), and both were fixed before it was handed over.",
     shots: [
       { src: "/case-studies/trading-app-petal.png", alt: "The AI tutor answering a question about the chart on screen" },
       { src: "/case-studies/trading-app-chart.png", alt: "Live coin chart: price, liquidity, buys and sells, candles" },
