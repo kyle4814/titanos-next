@@ -27,6 +27,7 @@ export const LINKS: NavItem[] = [
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
   { label: "Methodology", href: "/methodology", external: false },
+  { label: "Costs", href: "/costs", external: false },
   { label: "About", href: "/about", external: false },
   { label: "Contact", href: "/contact", external: false },
 ];
@@ -59,6 +60,7 @@ const META: Record<string, { group: string; blurb: string }> = {
   "/leads": { group: "Tools", blurb: "Verified local leads" },
   "/black-ice": { group: "Company", blurb: "How we work, calm and exact" },
   "/methodology": { group: "Company", blurb: "How every figure is sourced" },
+  "/costs": { group: "Company", blurb: "99% code, 1% AI: what it costs to run" },
   "/refer": { group: "Company", blurb: "Introduce a business, get rewarded" },
   "/contact": { group: "Company", blurb: "Talk to Kyle directly" },
 };
