@@ -46,7 +46,7 @@ export const CASES: CaseStudy[] = [
     cost:
       "No extra spend. The build ran inside a flat-rate AI subscription that was already paid for (about US$200 a month), and it used about 6% of one week's allowance, going by the usage meter readings before and after. Pro rata, that is roughly US$3 of the subscription. Hosting runs on Cloudflare's free tier, so the running cost is $0.",
     tested:
-      "Every change had to pass the test gate before it landed. Then a headless phone browser tapped through every tab at two screen sizes, opened the AI tutor and checked for a real answer. That pass caught two layout bugs (overlapping chat buttons and an overlapping price label), and both were fixed before it was handed over.",
+      "Every change had to pass the test gate before it landed. Then a headless phone browser tapped through every tab at two screen sizes, opened the AI tutor and checked for a real answer. That pass caught two layout bugs (overlapping chat buttons and an overlapping price label), and both were fixed in the code the same morning.",
     shots: [
       { src: "/case-studies/trading-app-petal.png", alt: "The AI tutor answering a question about the chart on screen" },
       { src: "/case-studies/trading-app-chart.png", alt: "Live coin chart: price, liquidity, buys and sells, candles" },
