@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 
 // Every input is editable and every line of the maths is shown, so a reader can check it.
@@ -57,6 +57,25 @@ export default function SavingsCalculator() {
   const [fee, setFee] = useState(1500);
   const [run, setRun] = useState(50);
 
+  const [org, setOrg] = useState("");
+
+  // Pre-fill from a link, e.g. /costs?staff=850&hours=2&org=Example%20Health, so a reader opens on their own numbers.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const num = (k: string, set: (n: number) => void, max: number) => {
+      const v = Number(q.get(k));
+      if (q.has(k) && Number.isFinite(v) && v >= 0 && v <= max) set(v);
+    };
+    num("staff", setStaff, 1_000_000);
+    num("hours", setHours, 38);
+    num("rate", setRate, 10_000);
+    num("weeks", setWeeks, 52);
+    num("fee", setFee, 1_000_000);
+    num("run", setRun, 100_000);
+    const o = (q.get("org") || "").replace(/[^\p{L}\p{N} &.,'()-]/gu, "").slice(0, 80);
+    if (o) setOrg(o);
+  }, []);
+
   const hoursYear = staff * hours * weeks;
   const value = hoursYear * rate;
   const cost = (fee + run) * 12;
@@ -74,6 +93,11 @@ export default function SavingsCalculator() {
         padding: "18px 18px 8px",
       }}
     >
+      {org ? (
+        <p style={{ color: "var(--gold)", margin: "0 0 12px", fontSize: 16 }}>
+          Pre-filled for {org}. Change any number to see your own.
+        </p>
+      ) : null}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12 }}>
         <Num label="People on your team" value={staff} set={setStaff} />
         <Num label="Hours given back, per person per week" value={hours} set={setHours} step={0.5} />
