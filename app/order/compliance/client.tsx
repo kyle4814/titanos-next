@@ -126,7 +126,7 @@ export default function OrderComplianceClient() {
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
 
         <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}
+          style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))", gap: 14 }}
         >
           <SelectField
             label="Business size"

@@ -34,6 +34,11 @@ type Props = {
 
 const OPENING_MS = 600;
 
+// Keep a trailing arrow glued to the last word so it never wraps onto its own line on narrow screens.
+function glueArrow(label: ReactNode): ReactNode {
+  return typeof label === "string" ? label.replace(/\s+([→↑↓←↗↘])\s*$/, "\u00A0$1") : label;
+}
+
 export default function AnimatedButton({
   href,
   children,
@@ -234,7 +239,7 @@ function PrimaryCTA({
         animate={scaleCtl}
         style={{ position: "relative", zIndex: 2, display: "inline-block" }}
       >
-        {opening ? "Opening…" : children}
+        {opening ? "Opening…" : glueArrow(children)}
       </motion.span>
       {opening && !reduce && (
         <motion.span
@@ -334,7 +339,7 @@ function SecondaryLink({
       }}
     >
       <span style={{ position: "relative", display: "inline-block" }}>
-        {children}
+        {glueArrow(children)}
         <motion.span
           aria-hidden="true"
           animate={{ width: hovered && !reduce ? "100%" : "0%" }}
