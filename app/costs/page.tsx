@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import SavingsCalculator from "@/components/SavingsCalculator";
+import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
+import { offersByGroup } from "@/lib/offers";
+import { GROUP_LABELS, formatOfferPrice, type OfferGroup } from "@/lib/offers/types";
 
-const META_TITLE = "What it costs to run | TITANOS";
+const META_TITLE = "Prices, costs and savings | TITANOS";
 const META_DESC =
   "99% code, 1% AI, and a person only where it matters. How we keep running costs to about AU$20 to AU$50 a month, with the published prices and our own measured numbers.";
 
@@ -40,13 +44,44 @@ const LEVERS: [string, string, string][] = [
   ["Batching", "Non-urgent jobs run in batches", "Half price for anything that can wait a few hours"],
 ];
 
+
+const HOURLY = 54.83; // ABS AWOTE AU$2,083.70 (May 2026) / 38 hours
+const WEEKS = 46;
+const TEAM_SIZES = [5, 20, 50, 200];
+const HOURS_OPTS = [1, 2, 4];
+const yearValue = (staff: number, h: number) => staff * h * WEEKS * HOURLY;
+
+const CORE: [string, string, string][] = [
+  ["Free email security scan", "Free", "/scan"],
+  ["Free consultation and report", "Free", "/audit"],
+  ["TITANOS Monitor", `${formatAUD(PRICING.MONITOR_MONTHLY)} a month, or ${formatAUD(PRICING.MONITOR_ANNUAL)} a year`, "/monitor"],
+  ["Job Flow for tradies", `${formatAUD(PRICING.JOB_FLOW_MONTHLY)} a month`, "/tradies"],
+  ["Lead lists", `${formatAUD(LEADS.STARTER.price)}, ${formatAUD(LEADS.GROWTH.price)} or ${formatAUD(LEADS.CAMPAIGN.price)} one-off; ${formatAUD(LEADS.RETAINER.price)} a month ongoing`, "/leads"],
+  ["Privacy Act and Essential Eight pack", `${formatAUD(PRICING.PACK_PRICE)} one-off, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Monitor included`, "/compliance"],
+  ["AI Growth Partner", `${formatAUD(PRICING.AI_GROWTH_PARTNER)} a month`, "/ai-delivery"],
+  ["AI Ops Partner", `${formatAUD(PRICING.AI_OPS_PARTNER)} a month`, "/ai-delivery"],
+  ["Embedded AI Partner", `From ${formatAUD(PRICING.AI_EMBEDDED_PARTNER)} a month`, "/ai-delivery"],
+  ["Board advisory", `${formatAUD(PRICING.BOARD_ADVISORY_MONTHLY)} a month`, "/enterprise"],
+  ["Enterprise governance", `From ${formatAUD(PRICING.ENTERPRISE_GOVERNANCE)} a year`, "/enterprise"],
+];
+
+const TERMS = [
+  "Every price on this page is a starting point. Scope, size and budget are all negotiable, so ask for the version that fits you.",
+  "Start free. The scan and the consultation cost nothing, and what you learn is yours to keep whatever you decide.",
+  "Start small. A first job can be sized to sit under your sign-off or procurement limit, then grow once it has earned it.",
+  "Scale up or down. Move between options as your needs change. AI partner retainers have a 3-month minimum; Monitor cancels any time.",
+  "No lock-in. The AI usage and hosting run on your own accounts, you hold the keys, and we add no markup to them.",
+  "No pressure, and nobody replaced. The work goes to the machine so your people get their hours back.",
+];
+
 export default function Costs() {
+  const groups = offersByGroup();
   return (
     <main>
       <PageHero
         badge="How we operate"
-        title="99% code. 1% AI. You approve what matters."
-        sub="That is how the systems we build typically run for about AU$20 to AU$50 a month, on your own accounts, with nothing marked up."
+        title="Every price, every cost, all the maths."
+        sub="What we offer, how we do business, what it costs to run, and what it can save you, with the working shown. 99% code, 1% AI, and you approve what matters."
       />
       <section style={SECTION}>
         <div style={WRAP}>
@@ -149,8 +184,122 @@ export default function Costs() {
             .
           </p>
 
+
+          <h2 style={H}>How we do business</h2>
+          <ul style={{ ...BODY, paddingLeft: 20 }}>
+            {TERMS.map((t) => (
+              <li key={t} style={{ marginBottom: 8 }}>
+                {t}
+              </li>
+            ))}
+          </ul>
+
+          <h2 style={H}>The main offers</h2>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
+              <tbody>
+                {CORE.map(([n, p, href]) => (
+                  <tr key={n}>
+                    <td style={CELL}>
+                      <a href={href} style={{ color: "var(--gold)" }}>
+                        {n}
+                      </a>
+                    </td>
+                    <td style={CELL}>{p}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2 style={H}>What it can save you: do the maths yourself</h2>
+          <p style={BODY}>
+            The biggest number is not what you pay us. It is the hours your team gets back. Change any box below and every
+            line of the working updates. The hourly cost starts at AU$54.83: the ABS full-time average of AU$2,083.70 a week
+            (May 2026) over a 38-hour week. That is before super and overheads, so the real cost of an hour is higher.
+          </p>
+          <SavingsCalculator />
+
+          <h3 style={{ ...H, fontSize: 18 }}>Value of hours given back, a year</h3>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
+              <thead>
+                <tr>
+                  <th style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>Team size</th>
+                  {HOURS_OPTS.map((h) => (
+                    <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "right" }}>
+                      {h} hr{h > 1 ? "s" : ""} a week each
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {TEAM_SIZES.map((t) => (
+                  <tr key={t}>
+                    <td style={CELL}>{t} people</td>
+                    {HOURS_OPTS.map((h) => (
+                      <td key={h} style={{ ...CELL, textAlign: "right" }}>
+                        {formatAUD(Math.round(yearValue(t, h)))}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ ...BODY, fontSize: 13, opacity: 0.7, marginTop: 8 }}>
+            Working: people × hours a week × {WEEKS} working weeks × AU${HOURLY}. For example, 20 people × 2 hours × {WEEKS}{" "}
+            weeks = 1,840 hours, worth {formatAUD(Math.round(yearValue(20, 2)))} a year: about five and a half times one{" "}
+            {formatAUD(PRICING.AI_GROWTH_PARTNER * 12)} year of the entry AI retainer. These are scenarios you choose, not
+            promises.
+          </p>
+
+          <h3 style={{ ...H, fontSize: 18 }}>What our research says</h3>
+          <p style={BODY}>
+            For the large organisations we research, we model the value of time given back from their own filed accounts. Our
+            top-down model puts it at 2% to 5% of staff costs (5% central, 2% as the floor). When we model the actual processes
+            step by step, the figure comes in lower (in one case about 8% of the top-down number), so we always lead with the
+            step-by-step figure and show the top-down one only as the ceiling. Either way, on a staff bill in the millions,
+            the hours given back are worth many times the fee.
+          </p>
+
+          <h2 style={H}>Every offer, with its price</h2>
+          <p style={BODY}>
+            The full catalogue, so nothing is hidden. Some are open to buy now; others start with a free first step while we
+            finish them. Each one links to its own page.
+          </p>
+          {(Object.keys(GROUP_LABELS) as OfferGroup[]).map((g) =>
+            groups[g].length ? (
+              <details key={g} style={{ ...CARD, marginBottom: 10 }}>
+                <summary style={{ color: "var(--gold)", cursor: "pointer", fontSize: 17 }}>
+                  {GROUP_LABELS[g]} ({groups[g].length})
+                </summary>
+                <div style={{ marginTop: 10 }}>
+                  {groups[g].map((o) => (
+                    <div
+                      key={o.slug}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        padding: "8px 0",
+                        borderBottom: "1px solid var(--border)",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <a href={`/offers/${o.slug}`} style={{ color: "var(--ice)", flex: "1 1 220px" }}>
+                        {o.name}
+                      </a>
+                      <span style={{ color: "var(--gold)", whiteSpace: "nowrap" }}>{formatOfferPrice(o)}</span>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ) : null,
+          )}
+
           <p style={{ ...BODY, textAlign: "center", marginTop: 36 }}>
-            Want to know what your system would cost to run? Ask on a free consultation, with no pressure.
+            Want the numbers for your business, or a version that fits your budget? Ask on a free consultation, with no pressure.
           </p>
           <div style={{ textAlign: "center" }}>
             <AnimatedButton href="/audit">Book a free consultation</AnimatedButton>
