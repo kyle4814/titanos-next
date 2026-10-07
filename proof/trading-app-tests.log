@@ -1,0 +1,259 @@
+2026-10-07T13:32:42+1000 == the user app test run, 2026-10-07T13:32:42+10:00, commit 49dafcf
+2026-10-07T13:32:43+1000 # Subtest: 12 lessons, each under 250 words with a flower emoji and a 3-question quiz
+2026-10-07T13:32:43+1000 # Subtest: public lessons never leak answers
+2026-10-07T13:32:43+1000 # Subtest: quiz scoring is server-side with an explanation per answer
+2026-10-07T13:32:43+1000 # Subtest: progress: pass once logs one lesson call and one flower; failures and repeats do not
+2026-10-07T13:32:43+1000 # Subtest: call-log entry: source lesson, followed, grows the Garden, never touches win rate
+2026-10-07T13:32:43+1000 # Subtest: first-login flag: tour shows once, normProgress is safe on junk
+2026-10-07T13:32:43+1000 # Subtest: academy lesson calls line up with the garden: source lesson, lotus flower, lesson XP
+2026-10-07T13:32:43+1000 # Subtest: RSI matches the published Wilder values
+2026-10-07T13:32:43+1000 # Subtest: RSI edge cases: too short, flat, only up
+2026-10-07T13:32:43+1000 # Subtest: EMA known values: seed is the simple average, then k=2/(n+1)
+2026-10-07T13:32:43+1000 # Subtest: overlays returns tails with notes and nothing before warm-up
+2026-10-07T13:32:43+1000 # Subtest: snapshot keeps the last 40 candles and her levels
+2026-10-07T13:32:43+1000 # Subtest: SVG is deterministic, static and contains the three levels
+2026-10-07T13:32:43+1000 # Subtest: drawings: clean, cap, order and reject junk
+2026-10-07T13:32:43+1000 # Subtest: drawing save and load round-trips through a KV-shaped store, per pair
+2026-10-07T13:32:43+1000 # Subtest: worker routes and index wire chart pro (and the inline script still parses)
+2026-10-07T13:32:43+1000 # Subtest: unlock logic follows prerequisites
+2026-10-07T13:32:43+1000 # Subtest: scoring: 5 questions, pass at 3, xp 50 + 10 per correct
+2026-10-07T13:32:43+1000 # Subtest: public lesson hides answers and explanations
+2026-10-07T13:32:43+1000 # Subtest: submit: locked lesson refused, first pass awards XP once, repeat pays nothing
+2026-10-07T13:32:43+1000 # Subtest: a failed attempt records tries and best, no XP, no call
+2026-10-07T13:32:43+1000 # Subtest: garden: partial XP of 80 counts exactly, quick-start academy lessons keep the flat rule
+2026-10-07T13:32:43+1000 # Subtest: module badge on finishing a module, awarded once; progress and resume
+2026-10-07T13:32:43+1000 # Subtest: continue where I left off prefers the unfinished last-opened lesson
+2026-10-07T13:32:43+1000 # Subtest: missing or malformed lesson file loads as null (coming soon)
+2026-10-07T13:32:43+1000 # Subtest: real course folder: outline parses, prerequisites exist, each present lesson is scoreable
+2026-10-07T13:32:43+1000 # Subtest: course API: outline, locked lesson, lesson without answers, server-side scoring, XP in the call log
+2026-10-07T13:32:43+1000 # Subtest: course static assets are not public: unauthenticated request is refused
+2026-10-07T13:32:43+1000 # Subtest: filter: liquidity floor, chain, dedupe best pair, blocklist, shape
+2026-10-07T13:32:43+1000 # Subtest: board caps at 20
+2026-10-07T13:32:43+1000 # Subtest: blocklist catches leetspeak, spares clean names
+2026-10-07T13:32:43+1000 # Subtest: fetchLiveBoard: two upstream calls, no network
+2026-10-07T13:32:43+1000 # Subtest: no buy links or referral anywhere in output
+2026-10-07T13:32:43+1000 # Subtest: red flags: clean coin has none
+2026-10-07T13:32:43+1000 # Subtest: red flag: very young
+2026-10-07T13:32:43+1000 # Subtest: red flag: thin vs volume
+2026-10-07T13:32:43+1000 # Subtest: red flag: sells outpacing buys
+2026-10-07T13:32:43+1000 # Subtest: red flag: vertical move
+2026-10-07T13:32:43+1000 # Subtest: red flag: liquidity under 20k, with reason text
+2026-10-07T13:32:43+1000 # Subtest: fill: buy has fee and slippage, tokens below spot amount
+2026-10-07T13:32:43+1000 # Subtest: fill: slippage grows with order size
+2026-10-07T13:32:43+1000 # Subtest: fill: round trip loses money (fee plus slippage)
+2026-10-07T13:32:43+1000 # Subtest: fill: rejects bad input
+2026-10-07T13:32:43+1000 # Subtest: mark to market
+2026-10-07T13:32:43+1000 # Subtest: the stub itself rejects a method call (the class of bug is detectable)
+2026-10-07T13:32:43+1000 # Subtest: livecharts: search, trending, candles, pairsById call fetch unbound
+2026-10-07T13:32:43+1000 # Subtest: live board and dex.fetchLiveBoard call fetch unbound
+2026-10-07T13:32:43+1000 # Subtest: telegram api/send call fetch unbound
+2026-10-07T13:32:43+1000 # Subtest: static scan: no src file calls a fetch-like property as a method, and worker deps wrap global fetch
+2026-10-07T13:32:44+1000 # Subtest: SM-2 maths: intervals 1, 6, then interval*ease; ease floor; again resets
+2026-10-07T13:32:44+1000 # Subtest: due selection: only due, most overdue first, capped at 10
+2026-10-07T13:32:44+1000 # Subtest: cards from a lesson, and the public card never carries the answer
+2026-10-07T13:32:44+1000 # Subtest: answers: hidden until answered; quiz scored server-side; wrong forced to again; one answer per card
+2026-10-07T13:32:44+1000 # Subtest: finishing pays once: XP, streak, call logged as source review and counted by the Garden
+2026-10-07T13:32:44+1000 # Subtest: worker: empty until a lesson is passed, then a daily review of at most 10, no answers on the wire, XP in the log
+2026-10-07T13:32:44+1000 # Subtest: telegram: /review links to the review, and the 9:00 nudge carries the due line
+2026-10-07T13:32:44+1000 # Subtest: profit never adds XP
+2026-10-07T13:32:44+1000 # Subtest: XP rules per action
+2026-10-07T13:32:44+1000 # Subtest: levels and seasons
+2026-10-07T13:32:44+1000 # Subtest: streak maths and timezones
+2026-10-07T13:32:44+1000 # Subtest: badge criteria
+2026-10-07T13:32:44+1000 # Subtest: unlock time and banner
+2026-10-07T13:32:45+1000 # Subtest: SVG is deterministic, static and bed-grown
+2026-10-07T13:32:45+1000 # Subtest: hash chain: appends link, verify reports CHAIN_OK, tamper is caught at the right seq
+2026-10-07T13:32:45+1000 # Subtest: chain spans KV chunks
+2026-10-07T13:32:45+1000 # Subtest: an outcome without a prior prediction is rejected, and a prediction takes only one outcome
+2026-10-07T13:32:45+1000 # Subtest: sync writes the prediction BEFORE the outcome and links the outcome by seq
+2026-10-07T13:32:45+1000 # Subtest: trade open and close receipts for a taken trade
+2026-10-07T13:32:45+1000 # Subtest: Beta posterior, interval and shrinkage maths
+2026-10-07T13:32:45+1000 # Subtest: expectancy and status: learning, trusted, muted
+2026-10-07T13:32:45+1000 # Subtest: auto-mute after 30 negative outcomes, each weight change gets a receipt with before and after
+2026-10-07T13:32:45+1000 # Subtest: a muted type is still logged but not pushed to Telegram
+2026-10-07T13:32:45+1000 # Subtest: /learned command answers in plain words with the honest label
+2026-10-07T13:32:45+1000 # Subtest: her own edge: me and replay calls feed her measured edge
+2026-10-07T13:32:45+1000 # Subtest: lessons are not receipted; markets are classified
+2026-10-07T13:32:45+1000 # Subtest: export shape: JSON and CSV carry the whole chain
+2026-10-07T13:32:45+1000 # Subtest: board cache: key, 15 s TTL header, second poll makes no upstream call
+2026-10-07T13:32:45+1000 # Subtest: daily cap stops upstream fetches (and a cached board still serves)
+2026-10-07T13:32:45+1000 # Subtest: public coin hides the pair address (renamed id) and carries plain-reason flags; no links
+2026-10-07T13:32:45+1000 # Subtest: buy then sell: fill at live price, separate $1,000 balance, call log source live-meme
+2026-10-07T13:32:45+1000 # Subtest: partial sell keeps the rest; a loss logs a loss; off-board positions show no fake value
+2026-10-07T13:32:45+1000 # Subtest: top-up validation and slippage preview match the executed fill
+2026-10-07T13:32:45+1000 # Subtest: every live endpoint requires login
+2026-10-07T13:32:45+1000 # Subtest: worker flow: board is cached, buy, positions, sell writes a live-meme call, caps count upstream refreshes only
+2026-10-07T13:32:45+1000 # Subtest: worker: the meme round never sends future candles, and next releases only elapsed steps
+2026-10-07T13:32:45+1000 # Subtest: index.html wires Live Meme with no outside links, no copy buttons, and visibility-gated polling
+2026-10-07T13:32:45+1000 # Subtest: cachedJson: second call inside the TTL never reaches upstream; entry carries max-age
+2026-10-07T13:32:45+1000 # Subtest: TTLs: candles cached 60 s per pool (Gecko is about 30 req/min), search 30 s, trending 60 s
+2026-10-07T13:32:45+1000 # Subtest: rate guard: allows the limit, refuses the next, frees after the window, unknown host refused
+2026-10-07T13:32:45+1000 # Subtest: cachedJson: a refused guard throws a limited error and makes no upstream call; failed upstream is not cached
+2026-10-07T13:32:45+1000 # Subtest: many phone polls inside the TTL make one gecko call per pool and aggregate
+2026-10-07T13:32:45+1000 # Subtest: getCandles: bad pool id and bad aggregate refused before any fetch (no SSRF)
+2026-10-07T13:32:45+1000 # Subtest: parseOhlcv: sorts oldest first, drops bad rows and duplicates
+2026-10-07T13:32:45+1000 # Subtest: chartPayload gives Chart Pro overlays on the same time base
+2026-10-07T13:32:45+1000 # Subtest: search: liquidity floor, blocklist, other chains, and a blocked query never reaches upstream
+2026-10-07T13:32:45+1000 # Subtest: search query is cleaned: no URL characters get through
+2026-10-07T13:32:45+1000 # Subtest: trending: Gecko pools reshape and go through the same filters
+2026-10-07T13:32:45+1000 # Subtest: engine: too few candles reads nothing
+2026-10-07T13:32:45+1000 # Subtest: engine: a quiet flat chart finds nothing
+2026-10-07T13:32:45+1000 # Subtest: volume spike: 8x volume on the last candle; 2x does not
+2026-10-07T13:32:45+1000 # Subtest: breakout and breakdown of the recent range
+2026-10-07T13:32:45+1000 # Subtest: trend: higher highs and higher lows, and the mirror; chop is not a trend
+2026-10-07T13:32:45+1000 # Subtest: pump signature: over 30% in under 15 min on rising volume; 20%, or falling volume, does not
+2026-10-07T13:32:45+1000 # Subtest: distribution: falling price with sells well above buys; needs the sell counts
+2026-10-07T13:32:45+1000 # Subtest: RSI over 80 and under 20
+2026-10-07T13:32:45+1000 # Subtest: every finding has a plain line, a bias and a 5..95 confidence; sorted strongest first; no buy language
+2026-10-07T13:32:45+1000 # Subtest: Petal gets findings, never raw candles
+2026-10-07T13:32:45+1000 # Subtest: readerCall: logs stop and target before the outcome as source frost-reader; neutral and duplicates refused
+2026-10-07T13:32:45+1000 # Subtest: settleReaderCalls: target win, stop loss (stop first inside one candle), expiry, ignores others
+2026-10-07T13:32:45+1000 # Subtest: worker routes every live-chart call through our server cache; page never calls the data hosts or shows links
+2026-10-07T13:32:45+1000 # Subtest: index.html inline scripts still parse with the live-chart feature in
+2026-10-07T13:32:45+1000 # Subtest: worker: new live-chart endpoints need login
+2026-10-07T13:32:45+1000 # Subtest: worker flow: search, chart, read with Petal, log as frost-reader, paper-trade a searched coin that is not on the board
+2026-10-07T13:32:45+1000 # Subtest: worker: live-chart drawings save for LIVE pairs only, forex pairs unchanged
+2026-10-07T13:32:45+1000 # Subtest: lot size and units
+2026-10-07T13:32:45+1000 # Subtest: pip value incl. JPY
+2026-10-07T13:32:45+1000 # Subtest: P&L buy, sell, JPY
+2026-10-07T13:32:45+1000 # Subtest: margin at 50:1, capped
+2026-10-07T13:32:45+1000 # Subtest: spread filter: fx at 3 pips or less, crypto always
+2026-10-07T13:32:45+1000 # Subtest: Kraken ticker parsing with real key names
+2026-10-07T13:32:45+1000 # Subtest: open position at ask/bid, margin check, order validation
+2026-10-07T13:32:45+1000 # Subtest: stop and target auto-close, stop first
+2026-10-07T13:32:45+1000 # Subtest: equity includes floating P&L, top-up
+2026-10-07T13:32:45+1000 # Subtest: expectancy, win rate per setup / session / source
+2026-10-07T13:32:45+1000 # Subtest: call resolution and with/against Frost Line
+2026-10-07T13:32:45+1000 # Subtest: Frost Line components: trend, regime, spread, record, confidence
+2026-10-07T13:32:45+1000 # Subtest: her own record used once 10 trades exist
+2026-10-07T13:32:45+1000 # Subtest: sessions: overlap flag and weekend
+2026-10-07T13:32:45+1000 # Subtest: password hash verify (constant-time compare)
+2026-10-07T13:32:45+1000 # Subtest: session cookie sign and verify, expiry, tamper
+2026-10-07T13:32:45+1000 # Subtest: lockout after 5 wrong tries for 15 minutes
+2026-10-07T13:32:45+1000 # Subtest: daily tutor cap of 150
+2026-10-07T13:32:45+1000 # Subtest: temp login forces the change screen; after change the old temp fails and the new works
+2026-10-07T13:32:45+1000 # Subtest: sparkline and equity SVG are server-made
+2026-10-07T13:32:45+1000 # Subtest: Kraken live key names (ZEURZUSD, ZGBPZUSD, ZUSDZJPY) all parse
+2026-10-07T13:32:45+1000 # Subtest: session label: open closes HH:MM, closed opens Day HH:MM
+2026-10-07T13:32:45+1000 # Subtest: session label adds the day when close is on another local day
+2026-10-07T13:32:45+1000 # Subtest: replay window: 80 shown, 40 hidden, contiguous, blind times
+2026-10-07T13:32:45+1000 # Subtest: replay scoring: target, stop, neither, nofill, same-candle = stop
+2026-10-07T13:32:45+1000 # Subtest: replay marks validated and logged with source replay
+2026-10-07T13:32:45+1000 # Subtest: separate daily caps: deep 5, voice 30, tutor 150
+2026-10-07T13:32:45+1000 # Subtest: weekly summary has aggregates only, no raw journal text
+2026-10-07T13:32:45+1000 # Subtest: extractText handles the three Workers AI shapes
+2026-10-07T13:32:45+1000 # Subtest: bytesToB64 handles large buffers and matches Buffer
+2026-10-07T13:32:45+1000 # Subtest: alert input: direction from live price, caps, validation
+2026-10-07T13:32:45+1000 # Subtest: dueAlerts fires on cross, both directions, ignores unknown pairs
+2026-10-07T13:32:45+1000 # Subtest: push subscription validation requires https endpoint
+2026-10-07T13:32:45+1000 # Subtest: VAPID JWT: ES256 shape, claims, 64-byte signature, verifies against the public key
+2026-10-07T13:32:45+1000 # Subtest: service worker source parses, fetches latest alert text, always shows a notification
+2026-10-07T13:32:45+1000 # Subtest: generator is deterministic and seed-sensitive
+2026-10-07T13:32:45+1000 # Subtest: fictional coins only, SIMULATED badge, no outcome leak in the public payload
+2026-10-07T13:32:45+1000 # Subtest: outcome mix includes real grinders (a minority) and all four types
+2026-10-07T13:32:45+1000 # Subtest: rug rounds: price collapses to ~0 and liquidity is pulled
+2026-10-07T13:32:45+1000 # Subtest: red flags genuinely correlate with the outcome
+2026-10-07T13:32:45+1000 # Subtest: swap fee and slippage, slippage grows as liquidity thins
+2026-10-07T13:32:45+1000 # Subtest: P&L: buy then sell, trade validation, passed-time rule
+2026-10-07T13:32:45+1000 # Subtest: scoring: late buyer into a dump loses; sitting out a flagged rug counts as following the plan
+2026-10-07T13:32:45+1000 # Subtest: a rug leaves a holder with almost nothing after thin-liquidity slippage
+2026-10-07T13:32:45+1000 # Subtest: round to call log: source meme, resolves, followed feeds the Garden
+2026-10-07T13:32:45+1000 # Subtest: Petal summary carries the round facts and nothing hidden
+2026-10-07T13:32:45+1000 # Subtest: every inline <script> in public/index.html parses
+2026-10-07T13:32:46+1000 # Subtest: the syntax check really catches a dropped function declaration
+2026-10-07T13:32:46+1000 # Subtest: publicRound sends only the first part: no future candles in any series
+2026-10-07T13:32:46+1000 # Subtest: releasedSteps follows the server clock and never exceeds the round
+2026-10-07T13:32:46+1000 # Subtest: chunking: the pieces rebuild the path exactly, and each chunk stops at the clock
+2026-10-07T13:32:51+1000 # Subtest: quiz is deterministic and the public payload hides the outcome and the future
+2026-10-07T13:32:51+1000 # Subtest: easy: obvious flags (flagged rugs/dumps, clean grinders)
+2026-10-07T13:32:51+1000 # Subtest: hard: subtle rugs/dumps and grinders with exactly one scary flag
+2026-10-07T13:32:51+1000 # Subtest: all levels produce all four outcomes; flags still correlate (easy more flagged than hard for rugs)
+2026-10-07T13:32:51+1000 # Subtest: scoring: correct, wrong, invalid guess; explanation names the flags
+2026-10-07T13:32:51+1000 # Subtest: quiz call log: source meme, followed = correct, win/loss to match
+2026-10-07T13:32:51+1000 # Subtest: stats: accuracy per level, streak, best streak, best Meme Lab P&L
+2026-10-07T13:32:51+1000 # Subtest: LIVE MEME: coin drops off the board, she closes at the last seen price
+2026-10-07T13:32:51+1000 # Subtest: no links or buy surfaces in the quiz payload
+2026-10-07T13:32:51+1000 # Subtest: defaults: 1% risk, 2R target, ATR stop, clean and clamp
+2026-10-07T13:32:51+1000 # Subtest: ATR stop: buy stop below, sell stop above, target is rr x the stop distance
+2026-10-07T13:32:51+1000 # Subtest: sizing: loss at the stop equals the risk, rounded down, never above
+2026-10-07T13:32:51+1000 # Subtest: planFx: 1% of balance, fits margin, uses ask for buys and bid for sells
+2026-10-07T13:32:51+1000 # Subtest: meme sizing from risk and percentage stop, capped by cash
+2026-10-07T13:32:51+1000 # Subtest: live meme exits: only positions that hit their stop or target are due
+2026-10-07T13:32:51+1000 # Subtest: undo window: inside 2 s (plus grace) yes, after no, none no
+2026-10-07T13:32:51+1000 # Subtest: one-tap FX buy opens a sized position with stop and target and logs a call
+2026-10-07T13:32:51+1000 # Subtest: undo removes a just-opened position; a second undo or a stale one is refused
+2026-10-07T13:32:51+1000 # Subtest: close-all closes every position, books P&L, and can be undone inside the window
+2026-10-07T13:32:51+1000 # Subtest: one-tap close of a single position; unknown id is a 404
+2026-10-07T13:32:51+1000 # Subtest: settings endpoint: defaults, save, reject bad values; settings drive the size
+2026-10-07T13:32:51+1000 # Subtest: live one-tap: buy sized from risk with exits stored, undo restores cash, auto-exit sells at the stop
+2026-10-07T13:32:51+1000 # Subtest: client script and page wiring: parses, loads, and the page keeps the Advanced ticket
+2026-10-07T13:32:51+1000 # Subtest: help lists every command with the disclaimer last
+2026-10-07T13:32:51+1000 # Subtest: garden streak uses a singular day
+2026-10-07T13:32:51+1000 # Subtest: sessions name the timezone; alerts say what they mean
+2026-10-07T13:32:51+1000 # Subtest: lesson text ends cleanly and has no raw url
+2026-10-07T13:32:51+1000 # Subtest: income questions never reach the model and never get a number; greetings are short
+2026-10-07T13:32:51+1000 # Subtest: learned names are friendly and test buckets are hidden
+2026-10-07T13:32:51+1000 # Subtest: page: replay has tap-to-mark, 5dp axis, reveal feedback; review has Show answer; chart has Try again
+2026-10-07T13:32:51+1000 # Subtest: bubble exists, uses the app icon, sits above the tab bar plus safe-area inset
+2026-10-07T13:32:51+1000 # Subtest: bubble is hidden on the Petal tab and while the keyboard is open
+2026-10-07T13:32:51+1000 # Subtest: bubble tucks away from action rows
+2026-10-07T13:32:51+1000 # Subtest: sheet DOM is created lazily on first open and the page script has no markup for it
+2026-10-07T13:32:51+1000 # Subtest: sheet closes by backdrop, X, swipe and Escape; history shared with Petal tab
+2026-10-07T13:32:51+1000 # Subtest: context chips and unread dot
+2026-10-07T13:32:51+1000 # Subtest: no timers or animation loops added by the bubble
+2026-10-07T13:32:51+1000 # Subtest: inline scripts still parse
+2026-10-07T13:32:51+1000 # Subtest: routing: everyday chat is fast, Deep Review keeps the strong model
+2026-10-07T13:32:51+1000 # Subtest: worker wiring: chat streams on the routed model, deep review still uses DEEP_MODEL, no reasoning model in chat
+2026-10-07T13:32:51+1000 # Subtest: cap: the daily limit is unchanged and still gates the AI path after the cache
+2026-10-07T13:32:51+1000 # Subtest: cache: 20 entries, hits are static and miss on anything else
+2026-10-07T13:32:51+1000 # Subtest: cache hit streams in the shape the page reader parses, and never calls AI
+2026-10-07T13:32:51+1000 # Subtest: page: thinking indicator shows at once and an empty reply gets a friendly retry text
+2026-10-07T13:32:51+1000 # Subtest: secret header: wrong, missing or unset secret gets 401 and nothing is sent
+2026-10-07T13:32:51+1000 # Subtest: link code: binds the chat, is single use, and expires after 15 minutes
+2026-10-07T13:32:51+1000 # Subtest: unlinked and other chats get one private line and no content
+2026-10-07T13:32:51+1000 # Subtest: commands from the linked chat
+2026-10-07T13:32:51+1000 # Subtest: petal cap message is sent when capped; course lessons win when present
+2026-10-07T13:32:51+1000 # Subtest: bot token and message text never appear in the logs
+2026-10-07T13:32:51+1000 # Subtest: pushes across timezones: nudge at 9:00 her time, session heads-up, dedupe, quiet hours
+2026-10-07T13:32:51+1000 # Subtest: weekly report waits for quiet hours to end, sends once; nothing sent when unlinked
+2026-10-07T13:32:51+1000 # Subtest: price alerts go to Telegram even in quiet hours, only when linked
+2026-10-07T13:32:51+1000 # Subtest: worker and index wire telegram, add no new cron, and send no secrets
+2026-10-07T13:32:51+1000 # Subtest: unlinked /start, /help, /menu and plain text each get the connect guide with the button, no private data
+2026-10-07T13:32:51+1000 # Subtest: guide is rate limited to once per 10 minutes per chat; other chats are independent
+2026-10-07T13:32:51+1000 # Subtest: invalid or expired code says the link expired and shows the button
+2026-10-07T13:32:51+1000 # Subtest: unlinked callbacks do nothing
+2026-10-07T13:32:51+1000 # Subtest: successful link sends the welcome hub straight away
+2026-10-07T13:32:51+1000 # Subtest: outbox records every outgoing call only when TG_DEBUG_OUTBOX is "1", keeps the last 200
+2026-10-07T13:32:51+1000 # Subtest: debug-outbox endpoint is 404 when TG_DEBUG_OUTBOX is not "1"
+2026-10-07T13:32:51+1000 # Subtest: debug-outbox endpoint requires login even when enabled, then returns the list
+2026-10-07T13:32:51+1000 # Subtest: wrangler: the debug var is set for staging only, never production
+2026-10-07T13:32:51+1000 # Subtest: page: \#connect deep link opens More and starts Connect Telegram
+2026-10-07T13:32:51+1000 # Subtest: signal: pushed with plain line, confidence, Trade it callback and View chart URL; call logged as frost-reader before outcome
+2026-10-07T13:32:51+1000 # Subtest: dedupe: same coin and signal type is not repeated within 30 minutes, and returns after expiry
+2026-10-07T13:32:51+1000 # Subtest: daily cap of 25 stops pushes; quiet hours (22:00 to 08:00) hold signals; nothing pending means nothing sent
+2026-10-07T13:32:51+1000 # Subtest: a bearish live coin signal has no Trade it button (practice buys only); fx keeps it
+2026-10-07T13:32:51+1000 # Subtest: callback auth: an unlinked chat is ignored completely, and so is a bot with no link
+2026-10-07T13:32:51+1000 # Subtest: webhook routes callback_query (secret still required) and always answers it
+2026-10-07T13:32:51+1000 # Subtest: trade it, AUTOMATED: opens via onetap, tracks it, and the cron sends a closed-at-target message with P&L
+2026-10-07T13:32:51+1000 # Subtest: trade it, MANUAL: opens with defaults, replies with View and edit in app, and sends no exit message
+2026-10-07T13:32:51+1000 # Subtest: trade it on fx retags the one-tap call as frost-reader and removes the duplicate signal call; failure and expiry are polite
+2026-10-07T13:32:51+1000 # Subtest: liveExitsFor closes only tracked live positions at stop or target and reports P&L
+2026-10-07T13:32:51+1000 # Subtest: hub: /start, /help and /menu show the hub with all eight buttons; every hub button works
+2026-10-07T13:32:51+1000 # Subtest: /mode and /signals commands; unlinked chats still get the private message with no hub
+2026-10-07T13:32:51+1000 # Subtest: page and worker: \#chart= deep link, cfg routes, no new cron trigger, allowed_updates note present
+2026-10-07T13:32:51+1000 # Subtest: bottom bar has exactly the five tabs
+2026-10-07T13:32:51+1000 # Subtest: every tab resolves to a screen in show()
+2026-10-07T13:32:51+1000 # Subtest: every feature has an entry point in a hub or a tab (2 taps or fewer)
+2026-10-07T13:32:51+1000 # Subtest: future features roadmap is static, five cards, each marked coming soon
+2026-10-07T13:32:51+1000 # Subtest: tap targets and safe area
+2026-10-07T13:32:51+1000 # Subtest: no inline style fixes a width over 360px
+2026-10-07T13:32:51+1000 # Subtest: no timer runs while the page is hidden
+2026-10-07T13:32:51+1000 # Subtest: first load stays small and heavy libs are lazy
+2026-10-07T13:32:51+1000 # tests 250
+2026-10-07T13:32:51+1000 # suites 0
+2026-10-07T13:32:51+1000 # pass 250
+2026-10-07T13:32:51+1000 # fail 0
+2026-10-07T13:32:51+1000 # cancelled 0
+2026-10-07T13:32:51+1000 # skipped 0
+2026-10-07T13:32:51+1000 # todo 0
+2026-10-07T13:32:51+1000 # duration_ms 8387.916315
