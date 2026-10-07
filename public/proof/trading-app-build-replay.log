@@ -1,0 +1,58 @@
+== REPLAY of the the user app build, run 2026-10-07T13:33:11+10:00. Each line: commit time | commit | tests passed/total | subject
+2026-10-07 05:41:21 +1000 | 7df0222 | 20/20 | Quantum Garden V1 (local, not deployed)
+2026-10-07 05:45:54 +1000 | d6f7c1e | 20/20 | deploy: KV id, valid cron, shots
+2026-10-07 06:17:17 +1000 | 2b26eeb | 21/21 | app: fix Kraken FX key names (EURUSD/GBPUSD/USDJPY never parse
+2026-10-07 06:19:01 +1000 | f32b8b7 | 22/23 | app V1.5 #1: session clock wording (Open, closes / Closed, ope
+2026-10-07 06:19:07 +1000 | fa00ac6 | 22/23 | fix test time
+2026-10-07 06:19:14 +1000 | 5987a04 | 23/23 | app V1.5 #1: fix label test
+2026-10-07 06:20:21 +1000 | 2bb5fea | 26/26 | app V1.5 #2: blind replay (Guru Decoder), server-scored, logge
+2026-10-07 06:20:31 +1000 | 15afeb0 | 30/30 | app V1.5 #3: Deep Review (gpt-oss-120b, cap 5/day, weekly summ
+2026-10-07 06:20:50 +1000 | ca47a48 | 30/30 | app V1.5 #4: voice to Petal (whisper-large-v3-turbo, cap 30/da
+2026-10-07 06:21:46 +1000 | a271552 | 35/35 | app V1.5 #5: price alerts, per-minute cron, Web Push with VAPI
+2026-10-07 06:25:50 +1000 | 7867f5a | 35/35 | app: restore dropped 'function lib()' declaration (index.html 
+2026-10-07 06:36:50 +1000 | a0f1e89 | 48/48 | app: MEME LAB (simulated meme coin trainer, server-side maths,
+2026-10-07 06:37:32 +1000 | 86975b3 | 64/64 | LIVE MEME: isolated dex.js paper-trading module with offline tests
+2026-10-07 06:41:10 +1000 | ea86a2c | 77/77 | app: wire LIVE MEME (cached board, practice trades, call log l
+2026-10-07 06:48:09 +1000 | ef07816 | 77/77 | meme: keep revealed-step counter in its own KV key so /api/meme/next c
+2026-10-07 06:50:13 +1000 | 93ff187 | 77/77 | Petal: raise chat max_tokens 600->3000 (gemma-4 reasoning ate the budg
+2026-10-07 06:59:19 +1000 | f8d38d1 | 86/86 | Chart Pro: drawings (levels, trendlines), EMA 20/50 and RSI 14 overlay
+2026-10-07 06:59:27 +1000 | e943cac | 84/84 | Garden 2.0: static SVG garden, process-only XP, levels, seasons, strea
+2026-10-07 06:59:53 +1000 | de916d5 | 83/83 | Academy: 12 Petal-led forex and meme coin lessons, server-scored quizz
+2026-10-07 07:00:20 +1000 | 5e0c7d0 | 86/86 | MEME PRO: Spot the Rug quiz, three levels, server stats, LIVE MEME clo
+2026-10-07 07:00:59 +1000 | 6280eef | 83/83 | Merge feat/academy
+2026-10-07 07:01:06 +1000 | d82e3ed | 90/90 | Merge feat/garden
+2026-10-07 07:01:10 +1000 | 88c4c8f | 99/99 | Merge feat/chart
+2026-10-07 07:01:15 +1000 | f9e5655 | 108/108 | Merge feat/memepro
+2026-10-07 07:02:52 +1000 | 24dbe40 | 109/109 | Test: academy lesson calls line up with garden (source lesson)
+2026-10-07 07:21:38 +1000 | 6c69a02 | 119/119 | Telegram bot brain: webhook, one-time linking, commands, pushes from e
+2026-10-07 07:28:34 +1000 | d167085 | 109/109 | Fix tour never rendering: append overlay before binding its buttons (a
+2026-10-07 07:30:20 +1000 | ad41a6b | 119/119 | merge feat/telegram (Garden bot)
+2026-10-07 07:33:06 +1000 | 4bf27a5 | 125/125 | feat: Petal Fast (fast chat model, FAQ cache, thinking indicator, empt
+2026-10-07 07:35:39 +1000 | b471ad6 | 132/133 | feat(onetap): one-tap trading with saved risk, ATR stop, close-all, 2s
+2026-10-07 07:35:54 +1000 | 6f1f61b | 133/133 | fix(onetap): live exits match boardcoin pairAddress; live test asserts
+2026-10-07 07:36:18 +1000 | 96f7e15 | 131/131 | Course reader: 200-lesson course served as Workers static assets, serv
+2026-10-07 07:37:01 +1000 | 911d9fb | 147/147 | feat(livecharts): search any Solana coin, trending, live candles, Fros
+2026-10-07 07:37:12 +1000 | f435204 | 125/125 | merge feat/petalfast
+2026-10-07 07:37:18 +1000 | 45a2d55 | 139/139 | merge feat/onetap
+2026-10-07 07:38:08 +1000 | d144505 | 167/167 | merge feat/livecharts
+2026-10-07 07:39:54 +1000 | b6d58fd | 179/179 | merge feat/course
+2026-10-07 07:41:41 +1000 | 54c5df4 | 187/187 | feat(uiux): 5-tab bar, Trade/Learn/Garden hubs, Future features, uiux 
+2026-10-07 07:43:59 +1000 | ca74e4d | 191/192 | feat: signals in Telegram, trade-it buttons, bot hub, #chart deep link
+2026-10-07 07:44:12 +1000 | a12b31c | 192/192 | tests: fx trade-it scoreboard replacement asserts the traded signal on
+2026-10-07 07:44:23 +1000 | b052c2b | 192/192 | merge feat/tgsignals
+2026-10-07 07:44:23 +1000 | bdd98b4 | 200/200 | merge feat/uiux
+2026-10-07 07:49:28 +1000 | a224dd1 | 212/213 | feat(learn): hash-chained receipts ledger, Beta calibration with shrin
+2026-10-07 07:50:07 +1000 | cacffd7 | 213/213 | test(learn): fix test fixture saveCalls aliasing
+2026-10-07 07:53:36 +1000 | 5cef206 | 207/207 | feat(flash): daily spaced-repetition review (SM-2), /review, 9:00 nudg
+2026-10-07 07:56:06 +1000 | 36b94d0 | 200/200 | livecharts: call fetchImpl unbound (Workers 'Illegal invocation' made 
+2026-10-07 08:08:58 +1000 | ab76863 | 213/213 | merge feat/learn
+2026-10-07 08:09:00 +1000 | 5982cfe | 220/220 | merge feat/flash
+2026-10-07 08:09:28 +1000 | ad59308 | 225/225 | fetch bug-class sweep: wrap global fetch in worker deps; strict-this r
+2026-10-07 08:09:33 +1000 | f03ed12 | 225/225 | course: sync lessons and outline from accuracy-swept source
+2026-10-07 08:10:05 +1000 | ea291bf | 225/225 | gitignore staging tg secret
+2026-10-07 08:20:26 +1000 | 499acb2 | 235/235 | Telegram first contact: connect guide for unlinked chats, #connect dee
+2026-10-07 08:21:42 +1000 | d611824 | 235/235 | app icon: Garden logo (peony through ice)
+2026-10-07 08:32:47 +1000 | 1b0a018 | 242/242 | the user QA fixes: unlinked chat replies, button taps always acked, income
+2026-10-07 08:34:20 +1000 | 99958c4 | 250/250 | Floating Petal chat bubble: lazy bottom sheet, context chips, unread d
+2026-10-07 08:40:20 +1000 | 2d4f8e3 | 250/250 | Petal bubble: context chips keep their width (no overlapping labels at
+2026-10-07 09:37:40 +1000 | 49dafcf | 250/250 | Live chart: price and % change wrap instead of overlapping on narrow p
