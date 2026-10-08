@@ -37,7 +37,9 @@ export default function PitchPage() {
           playsInline
           preload="metadata"
           poster="/v/titanos-pitch-poster.jpg"
-          style={{ width: "100%", borderRadius: "var(--radius-md)", border: "1px solid var(--gold-dim)", background: "#000" }}
+          width={1280}
+          height={1706}
+          style={{ display: "block", width: "100%", maxWidth: 480, margin: "0 auto", aspectRatio: "1280 / 1706", objectFit: "contain", borderRadius: "var(--radius-md)", border: "1px solid var(--gold-dim)", background: "#000" }}
         >
           <source src="/v/titanos-pitch.mp4" type="video/mp4" />
           Your browser cannot play this video. <a href="/v/titanos-pitch.mp4">Download it here</a>.

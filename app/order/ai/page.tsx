@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import FormFallback from "@/components/FormFallback";
 import OrderAiClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
@@ -32,7 +33,7 @@ export default function OrderAiPage() {
         </SystemLabel>
       </section>
 
-      <Suspense>
+      <Suspense fallback={<FormFallback minHeight={1280} />}>
         <OrderAiClient />
       </Suspense>
 

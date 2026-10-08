@@ -610,7 +610,7 @@
   },
   {
     "slug": "agent-preflight-test-harness",
-    "name": "Agent Pre-Flight Test Harness",
+    "name": "Agent Pre-Flight Test Kit",
     "priceAud": 297,
     "cadence": "one-off",
     "status": "BUILD"

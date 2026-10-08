@@ -26,7 +26,7 @@
   --gold-cool: #C9A03A;    /* deep gold — shadows + dim states */
   --gold-spec: #FFF0BE;    /* specular highlight — used SPARINGLY */
   --gold-rgb: 212 175 55;
-  --gold-dim: #8B7225;
+  --gold-dim: #9A8030; /* was #8B7225 (3.96:1 on --vault-warm, failed AA for text); 4.8:1 */
   --gold-bright: #F5D575;
 
   /* ── ACCENT SHARDS (W4 Pillar 2) ────────────────────────────────
@@ -975,3 +975,21 @@ select:focus-visible,
 
 /* Long unbroken URLs in blog sources must wrap, never scroll the page. */
 main p, main li { overflow-wrap: anywhere; }
+
+/* ═══════════════════════════════════════════════════════════════
+   R3 polish (2026-10-08): dark-only site declares itself dark so native
+   controls/scrollbars match (no white flash, no light scrollbars), body copy
+   avoids one-word last lines, the in-page anchor jumps clear the sticky nav,
+   and anything still animating under reduce is flattened as a last resort.
+   ═══════════════════════════════════════════════════════════════ */
+:root { color-scheme: dark; scrollbar-color: var(--gold-dim) var(--vault-deep); }
+main p, main li { text-wrap: pretty; }
+:target, [id] { scroll-margin-top: 88px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
