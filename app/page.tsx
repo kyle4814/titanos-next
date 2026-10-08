@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import Hero from "@/components/hero/Hero";
+import VoidPortal from "@/components/hero/VoidPortal";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
+import { STATS } from "@/lib/stats";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import JourneySteps from "@/components/JourneySteps";
 import TierQuiz from "@/components/TierQuiz";
 import RoiEstimator from "@/components/RoiEstimator";
 import StatsTicker from "@/components/StatsTicker";
-import { STATS } from "@/lib/stats";
 import ContactButtons from "@/components/ContactButtons";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
@@ -203,24 +204,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
       />
       {/* ═══ HERO ═══ */}
-      <PageHero
-        badge="TITANOS · Titan Operating System"
-        title="44 engineer-years of output in 4 months."
-        tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on about US$30 (roughly AU$46) a month."
-        sub="Kyle Deligny, founder of TITANOS, the Titan Operating System. Home of Hypersonic Industries and Parallax Industries."
-        trustLine={
-          <>
-            Australian-owned · ABN 34 318 502 254 · {STATS.scansLast30Days.toLocaleString("en-AU")} domains checked in the last 30 days · Every figure has its method one click away.
-          </>
-        }
-      >
-        <AnimatedButton href="/engineering" variant="primary">
-          See the maths →
-        </AnimatedButton>
-        <AnimatedButton href="/scan" variant="secondary">
-          Get your free security scan
-        </AnimatedButton>
-      </PageHero>
+      <Hero />
+      <VoidPortal />
 
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
       <section

@@ -1,0 +1,32 @@
+import dynamic from "next/dynamic";
+import PhiWordmark from "./PhiWordmark";
+
+// ssr:false needs a client boundary; HeroStage is itself "use client", loaded as its own chunk after hydration.
+const HeroStage = dynamic(() => import("./HeroStage"));
+
+/** WEBSITE 1000X hero: starfield to braid to knot. Server-rendered poster + copy are the LCP; the WebGL layer
+ *  mounts after idle. One CTA. Sub-line carries the 8 Oct 2026 receipts. */
+export default function Hero() {
+  return (
+    <section className="ds-hero" aria-labelledby="ds-hero-h">
+      <picture className="ds-hero__poster">
+        <source media="(max-width: 800px)" srcSet="/hero/poster-m.webp" />
+        <img src="/hero/poster-d.webp" alt="" width={1440} height={900} fetchPriority="high" decoding="async" />
+      </picture>
+      <HeroStage />
+      <div className="ds-hero__copy">
+        <div className="ds-hero__col">
+          <div className="ds-hero__enter"><PhiWordmark height={26} /></div>
+          <p className="ds-hero__eyebrow ds-hero__enter">8 Oct 2026 · our own system, measured on itself</p>
+          <h1 id="ds-hero-h" className="ds-hero__enter">The birth of a global intelligence system.</h1>
+          <p className="ds-hero__sub ds-hero__enter">
+            In one day the cost of a job fell from US$0.97 to US$0.12, 230 jobs ran in 15 hours, and 5,777 tests passed. We did not buy a bigger machine. We changed the system.
+          </p>
+          <div className="ds-hero__enter">
+            <a className="ds-cta" href="/proof">See the receipts →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -14,14 +14,10 @@
  */
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "framer-motion";
 import { SystemLabel } from "@/components/Myth";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// W1: gsap + ScrollTrigger load lazily inside the effect so they stay out of first-load JS.
 
 export type ThreadStep = {
   num: string;
@@ -49,7 +45,12 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
       return;
     }
 
-    const ctx = gsap.context(() => {
+    let dead = false;
+    let ctx: { revert: () => void } | undefined;
+    void Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([{ gsap }, { ScrollTrigger }]) => {
+    if (dead) return;
+    gsap.registerPlugin(ScrollTrigger);
+    ctx = gsap.context(() => {
       const paths = root.querySelectorAll<SVGPathElement>("[data-thread-line]");
       paths.forEach((p) => {
         const len = p.getTotalLength();
@@ -94,8 +95,9 @@ export default function GoldThread({ steps }: { steps: ThreadStep[] }) {
         });
       });
     }, root);
+    });
 
-    return () => ctx.revert();
+    return () => { dead = true; ctx?.revert(); };
   }, [steps, reduce]);
 
   return (

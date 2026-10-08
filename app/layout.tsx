@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Serif, IBM_Plex_Mono, Inter_Tight } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import "./design-system.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";
 import VaultBackground from "@/components/VaultBackground";
-import GoldDust from "@/components/GoldDust";
-import CursorTrail from "@/components/CursorTrail";
+import DeferredShell from "@/components/DeferredShell";
 import PageMood from "@/components/PageMood";
-import EasterEgg from "@/components/EasterEgg";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
-import FinderLauncher from "@/components/FinderLauncher";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -63,22 +62,27 @@ const CSP =
 //     "considered modern" without being the safe default.
 //   Mono (eyebrow labels, terminal, technical microcopy): IBM Plex Mono.
 //     Operator vocabulary. Used in small doses across every page.
-const plexSerif = IBM_Plex_Serif({
+// W1 (2026-10-08): two self-hosted licensed variable fonts, SIL OFL 1.1 (see public/fonts/OFL-*.txt, docs/W1_LICENCES.md).
+//   Display: Fraunces (variable wght, latin subset), headlines on the phi type scale.
+//   Body: Geist (variable wght, latin subset), a clean grotesk.
+const fraunces = localFont({
   variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-  style: ["normal", "italic"],
+  src: [
+    { path: "../public/fonts/fraunces-wght.woff2", style: "normal", weight: "100 900" },
+    { path: "../public/fonts/fraunces-wght-italic.woff2", style: "italic", weight: "100 900" },
+  ],
   display: "swap",
-  preload: false,
+  preload: true,
+  adjustFontFallback: "Times New Roman",
   fallback: ["Georgia", "serif"],
 });
 
-const interTight = Inter_Tight({
+const geist = localFont({
   variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  src: [{ path: "../public/fonts/geist-wght.woff2", style: "normal", weight: "100 900" }],
   display: "swap",
-  preload: false,
+  preload: true,
+  adjustFontFallback: "Arial",
   fallback: ["system-ui", "sans-serif"],
 });
 
@@ -129,7 +133,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${plexSerif.variable} ${interTight.variable} ${plexMono.variable}`}
+      className={`${fraunces.variable} ${geist.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -189,14 +193,11 @@ export default function RootLayout({
         {/* Ambient gold dust — built in the Vault rebuild but never
             mounted; wired in 2026-07-11 (canvas colour bug fixed same
             day). 30 particles, fixed layer, reduced-motion bails. */}
-        <GoldDust />
         <VaultFrame playEntrance={true} />
-        <CursorTrail />
         {/* W4 Pillar 5 — gold edge thread (always-visible left edge) */}
         <span aria-hidden="true" className="vault-edge-thread" />
         {/* W4 per-page mood swap */}
         <PageMood />
-        <EasterEgg />
         <SiteAnalytics />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
@@ -204,7 +205,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyMobileCta />
-        <FinderLauncher />
+        <DeferredShell />
       </body>
     </html>
   );
