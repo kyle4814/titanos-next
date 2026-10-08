@@ -76,9 +76,12 @@ rm -rf .next out node_modules/.cache
 if [ ! -d node_modules ]; then
   npm ci
 fi
-echo "▸ Tests (a red test never ships)"
-npm test
+# Build BEFORE the tests (2026-10-09): the release's doctrine-leak and numbers tests read the built out/, so with tests
+# first every deploy of the redesign refused with "built output not found". A red test still never ships: the publish
+# step below only runs if npm test passes on this exact build.
 npm run build
+echo "▸ Tests on the built output (a red test never ships)"
+npm test
 
 echo "▸ Verify out/ artefacts"
 for f in out/.nojekyll out/CNAME out/index.html; do
