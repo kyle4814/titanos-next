@@ -39,7 +39,7 @@ ok(/index: false, follow: false/.test(page) && /arianceVisible \? /.test(page), 
 ok(!/[–—]/.test(page), "page source has no em or en dashes");
 ok(/arianceVisible/.test(read("app/case-studies/page.tsx")), "hero card on /case-studies is consent-gated");
 ok(/arianceVisible/.test(read("app/page.tsx")), "homepage link is consent-gated");
-ok(/arianceVisible/.test(read("app/sitemap.ts")), "sitemap entry is consent-gated");
+ok(/arianceVisible/.test(read("lib/routes.ts")) && /routes/.test(read("app/sitemap.ts")), "sitemap entry is consent-gated (sitemap is generated from lib/routes.ts)");
 ok(!/\b\d{2,}\b/.test(page.replace(/"[^"\n]*"|`[^`\n]*`|\/\/.*|\{\/\*.*?\*\/\}/g, "").replace(/\b(fontSize|fontWeight|height|width|gap|padding|margin|minHeight|minWidth|opacity|letterSpacing|borderRadius|lineHeight|marginTop|marginBottom|maxWidth|zIndex|flex|paddingLeft)\b[^,}]*/g, "")), "page logic holds no hard-coded figures");
 for (const g of d.quality.gallery) for (const f of [g.phone, g.desktop]) ok(fs.existsSync(root + "public" + f), `screenshot exists: ${f}`);
 console.log(fail ? `FAIL ${fail}` : "ALL PASS");

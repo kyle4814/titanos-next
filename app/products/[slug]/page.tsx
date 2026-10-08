@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SectionReveal from "@/components/SectionReveal";
@@ -20,13 +21,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProduct(slug);
   if (!p) return {};
   const url = `https://titanos.tech/products/${p.slug}`;
-  return {
-    title: `${p.name} | TITANOS`,
+  return withSeo(`/products/${p.slug}`, {
+    title: `${p.name} (digital product) | TITANOS`,
     description: p.bluf,
     alternates: { canonical: url },
     openGraph: { title: p.name, description: p.bluf, type: "website", url },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 function List({ items, mark }: { items: string[]; mark: string }) {

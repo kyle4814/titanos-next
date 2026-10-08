@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -10,13 +11,13 @@ const TITLE = "Digital Products and Courses | TITANOS";
 const DESC =
   "Guides, checklists, templates and short courses built from the methods we use ourselves. Download, apply, and keep. Prices in AUD, no GST charged.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/products", {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "https://titanos.tech/products" },
   openGraph: { title: TITLE, description: DESC, type: "website", url: "https://titanos.tech/products" },
   robots: { index: true, follow: true },
-};
+});
 
 function Card({ p }: { p: Product }) {
   const live = productBuyHref(p) !== null;

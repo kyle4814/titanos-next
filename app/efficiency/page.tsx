@@ -2,19 +2,20 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { withSeo } from "@/lib/seo";
 import data from "@/lib/efficiency/efficiency.json";
 
 const META_TITLE = "Efficiency, measured | TITANOS";
 const META_DESC =
   "Every efficiency figure from our own machine and AI workers, before and after, each with its method, date and a MEASURED or MODELLED label.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/efficiency", {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/efficiency" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/efficiency" },
   robots: { index: true, follow: true },
-};
+});
 
 type Val = number | string | null;
 type Metric = {

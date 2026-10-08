@@ -24,6 +24,8 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "Free Scan", href: "/scan" },
       { label: "Find your offer", href: "/find" },
       { label: "All offers", href: "/offers" },
+      { label: "Sectors", href: "/sectors" },
+      { label: "Courses", href: "/courses" },
     ],
   },
   {
@@ -37,6 +39,12 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "How fast it was built", href: "/speed" },
       { label: "Free AI Readiness Guide (PDF)", href: "/ai-readiness-guide.pdf", external: true },
       { label: "Blog", href: "/blog" },
+      { label: "Efficiency, measured", href: "/efficiency" },
+      { label: "How it works", href: "/how-it-works" },
+      { label: "The learning loop", href: "/learning-loop" },
+      { label: "Security and privacy", href: "/security" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Image credits", href: "/credits" },
     ],
   },
   {
