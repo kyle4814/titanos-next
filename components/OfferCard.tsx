@@ -13,7 +13,7 @@
  */
 
 import { SigilCorner } from "./Sigil";
-import { motion, useReducedMotion } from "framer-motion";
+import { m as motion, useReducedMotion } from "framer-motion";
 import { Radar, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import AnimatedButton from "./AnimatedButton";

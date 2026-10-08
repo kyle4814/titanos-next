@@ -8,7 +8,7 @@
  *   no badge pulse.
  */
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 
 export type ProcStep = {

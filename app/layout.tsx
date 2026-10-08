@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";
 import VaultBackground from "@/components/VaultBackground";
 import DeferredShell from "@/components/DeferredShell";
+import MotionProvider from "@/components/MotionProvider";
 import PageMood from "@/components/PageMood";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
@@ -175,6 +176,7 @@ export default function RootLayout({
             lattice via globals.css ::before/::after; mesh + specular sweep
             via VaultBackground). VaultBackground also handles tab-hidden
             pause for battery / politeness. */}
+        <MotionProvider>
         <VaultBackground />
         {/* Ambient gold dust — built in the Vault rebuild but never
             mounted; wired in 2026-07-11 (canvas colour bug fixed same
@@ -194,6 +196,7 @@ export default function RootLayout({
         <Footer />
         <StickyMobileCta />
         <DeferredShell />
+        </MotionProvider>
       </body>
     </html>
   );

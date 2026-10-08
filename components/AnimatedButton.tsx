@@ -12,7 +12,7 @@
  *   navigation skips this — the route transition itself is feedback.
  */
 
-import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { m as motion, useAnimationControls, useReducedMotion } from "framer-motion";
 import {
   useEffect,
   useRef,

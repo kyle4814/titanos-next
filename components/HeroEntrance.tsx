@@ -19,7 +19,7 @@
  *   the tagline is the page <h1>.
  */
 
-import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { m as motion, useAnimationControls, useReducedMotion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
 import HeroDustBurst from "./HeroDustBurst";
 
