@@ -9,6 +9,18 @@ import { CONTACT_HREF } from "@/lib/config";
 import { LEADS, DISPLAY, formatAUD } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import type { Flex } from "@/lib/flex";
+import { STATS } from "@/lib/stats";
+
+// The biggest true number for this page: organisations we have researched in full. Read from our own count, not typed.
+const RESEARCH_FLEX: Flex = {
+  big: `${STATS.organisationsResearched.toLocaleString("en-AU")} organisations`,
+  label: "researched in full dossiers so far, from public records",
+  kind: "RECORDED",
+  analogy: "Scouts walk the ground first, so you only send your message to doors that have already been checked.",
+  source: `lib/stats.json, written from our own research records, as of ${STATS.asOf}.`,
+};
 
 // Fourth door — verified AU lead lists, sold by the compliance practice.
 // Deploy of this page is HELD until the DataForSEO fulfilment pipeline
@@ -215,7 +227,7 @@ export default function LeadsPage() {
       <PageHero
         badge="TITANOS · LEADS & INTELLIGENCE"
         title="Verified Australian business contacts, built by the compliance practice that knows which data is legal to hold."
-        sub="Reach real Australian businesses without bouncing, with the named owner or decision-maker where publicly available, and the verified main business contact otherwise. Sourced from public business information, suppression honoured on request. Not a scraper dump. A research outcome I stand behind with a 30-day bounce guarantee."
+        sub="Real Australian businesses, with the named owner or decision-maker where that is public, and the verified main business contact where it is not. Sourced from public business information only, and suppression is honoured the moment someone asks. It is researched, not scraped, and I stand behind it with a 30-day bounce guarantee."
         trustLine="Public business information · Privacy Act-aware · every email verified before delivery · reply STOP and you're suppressed forever."
       >
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
@@ -242,6 +254,18 @@ export default function LeadsPage() {
       </Bluf>
       <Analogy k="scouts" />
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={RESEARCH_FLEX} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254). The sources are public records and
+            businesses&apos; own public websites, nothing is touched or logged into, and nobody is replaced. You own the file,
+            and your own team still decides who gets contacted and how. The prices are below.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>Why do so many bought lists bounce on the first send, and what did we do differently?</OpenLoop>
+
       <div className="divider-gold" />
 
       <section aria-label="What this list is" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
@@ -260,7 +284,7 @@ export default function LeadsPage() {
         <div className="container-vault">
           <DepthIndex index={1} total={7} />
           <SystemLabel style={{ marginBottom: 10 }}>Why most contact lists fail on first send</SystemLabel>
-          <SectionHeading title="The List You Buy Is Usually Garbage" />
+          <SectionHeading title="Why Bought Lists Bounce" lead="Three things go wrong with most lists, and none of them is your fault." />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
@@ -295,6 +319,8 @@ export default function LeadsPage() {
           </div>
         </div>
       </SectionReveal>
+
+      <OpenLoop>So what would a list look like if every row had been checked by a person first?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -339,6 +365,8 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>And what does that cost? There is a 10 to 20 row sample you can look at before you pay anything.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* ═══ 1.4 — Pricing tiers ═══ */}
@@ -350,7 +378,7 @@ export default function LeadsPage() {
           <DepthIndex index={3} total={7} />
           <SectionHeading
             title="Pricing"
-            lead="Reach real Australian businesses without bouncing. One-off lists or an ongoing feed, every tier verified at delivery, every tier covered by the 30-day bounce replacement."
+            lead="One-off lists or an ongoing feed. Every tier is verified at delivery, and every tier is covered by the 30-day bounce replacement."
           />
           <div
             className="grid-auto-cards"
@@ -459,13 +487,15 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Once you have picked a tier, what actually happens next?</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* ═══ 1.5 — How it works ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={4} total={7} />
-          <SectionHeading title="How It Works" lead="Three steps, no surprises." />
+          <SectionHeading title="How It Works" lead="Three steps, and you see the price before any of them." />
           <div
             className="grid-auto-cards"
             style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
@@ -514,13 +544,15 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Is it even legal to hold this data? Fair question, and it is the one I get asked most.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* ═══ 1.6 — Legal-by-design (load-bearing) ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={5} total={7} />
-          <SectionHeading title="Built by a Compliance Practice, on Purpose" />
+          <SectionHeading title="Built by a Compliance Practice, on Purpose" lead="I do Privacy Act work for a living, so the list is built the way I would want mine built." />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <p
               style={{
@@ -599,7 +631,7 @@ export default function LeadsPage() {
         <div className="container-vault">
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <DepthIndex index={6} total={7} />
-            <SectionHeading title="Using This List Without Getting Fined" />
+            <SectionHeading title="Using the List the Right Way" />
             <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
               The Privacy Act covers how I built the list. The Spam Act 2003 covers how
               you use it. Three rules keep you clean: B2B outreach to published business
@@ -621,7 +653,7 @@ export default function LeadsPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={7} total={7} />
-          <SectionHeading title="The Questions Every Buyer Asks First" />
+          <SectionHeading title="The Questions Buyers Ask First" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Where does the data come from?">
               Public Australian business listings and the businesses&apos; own public
@@ -693,7 +725,7 @@ export default function LeadsPage() {
             letterSpacing: "0.05em",
           }}
         >
-          Tell Me Who You&apos;re Trying to Reach
+          Would it be okay if you told me who you are trying to reach?
         </h2>
         <p
           style={{
@@ -705,8 +737,9 @@ export default function LeadsPage() {
             lineHeight: 1.7,
           }}
         >
-          Message me. I&apos;ll tell you honestly whether I can deliver the
-          volume and quality you need, before you pay anything.
+          Send me a message and I will tell you honestly whether I can deliver the
+          volume and quality you need, before you pay anything. If I cannot, I will say so,
+          and a no is completely welcome.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={BOOK_CALL} variant="primary">

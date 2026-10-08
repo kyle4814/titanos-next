@@ -23,6 +23,8 @@ import ContactButtons from "@/components/ContactButtons";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription } from "@/components/Myth";
+import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 import type { Offer } from "@/components/OfferCard";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
@@ -252,8 +254,8 @@ export default function Home() {
         style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
       >
         <Inscription
-          label="Built from a phone · Solo · Pre-revenue"
-          sub="TITANOS is one operator's autonomous systems, built to remove friction rather than add headcount."
+          label="US$0.97 to US$0.12 per job · recorded 8 October 2026"
+          sub="We did not buy a bigger machine. We found the waste, turned each lesson into code, and ran it again. Below is the proof, with the source of every number one tap away."
         >
           The machine carries the complexity.
           <br />
@@ -276,10 +278,10 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          <strong style={{ color: "var(--gold)" }}>AI fixes the manual work eating your week.</strong>{" "}
+          <strong style={{ color: "var(--gold)" }}>You know the work that eats your week.</strong>{" "}
           Missed enquiries. Quotes nobody follows up on. Compliance risk you cannot see until it
-          costs you. I build the system, and every one is privacy-compliant by design, because
-          compliance is my other practice.
+          costs you. I run the same system on my own business first, I show you what it did, and
+          then I build yours, privacy-compliant by design. Your team stays. They get their hours back.
         </p>
 
         <div style={{ textAlign: "center" }}>
@@ -344,10 +346,21 @@ export default function Home() {
       <CostCurve />
       <LoopOrbit />
       <ProofWall />
+      {/* THE PROOF: biggest true numbers first, each with its label and source. */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="The machine, measured on itself first"
+            lead="Every number below was read off our own running system on 8 October 2026. Tap any card to see exactly where it came from."
+          />
+          <FlexGrid items={[FLEX.costPerJob, FLEX.startTokens, FLEX.fleetJobs, FLEX.tests]} />
+        </div>
+      </SectionReveal>
+      <OpenLoop>Cheaper, faster and passing more tests. So what does one person with this system actually build?</OpenLoop>
 
       {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
       <Bluf replaced>
-        TITANOS is built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and it is there to give your business that output safely, without
+        One engineer built TITANOS in about 4 months. The industry COCOMO model says that is about 20 engineers for 27 months (MODELLED, method on the Engineering page). We exist to give your business that output safely, without
         replacing anyone.
       </Bluf>
       <Analogy k="department" />
@@ -358,7 +371,7 @@ export default function Home() {
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Four ways the manual work is costing you right now"
+            title="Four places the manual work is quietly costing you"
             lead="Leads that never get followed up. The same questions answered by hand, every day. Data copied between systems by a person instead of a computer. A privacy problem nobody's checked in a year. Most owners know AI could help. Fewer know where to start."
           />
         </div>
@@ -366,6 +379,7 @@ export default function Home() {
 
       <div className="divider-gold" />
 
+      <OpenLoop>If that is where the cost goes, what does a first conversation with us look like, and what does it cost you?</OpenLoop>
       {/* ═══ THE FREE AI AUDIT ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
@@ -496,6 +510,7 @@ export default function Home() {
       </SectionReveal>
 
 
+      <OpenLoop>Seven kinds of repetitive work come up again and again. Which one is eating your week?</OpenLoop>
       {/* ═══ WHAT WE BUILD ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
@@ -530,6 +545,18 @@ export default function Home() {
       </SectionReveal>
 
       <div className="divider-gold" />
+
+      {/* THE CEILING: market size and the build-cost multiple, labelled. */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="How far this reaches"
+            lead="Hours handed back, nobody replaced. The market is large, and the cost of building for it just fell. Both numbers are labelled and sourced."
+          />
+          <FlexGrid items={[FLEX.market, FLEX.engineers, FLEX.memory]} />
+        </div>
+      </SectionReveal>
+      <OpenLoop>Big numbers are easy to say. Here is a way to test them against your own business, with your own figures.</OpenLoop>
 
       {/* ═══ ROI ESTIMATOR ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
@@ -730,6 +757,7 @@ export default function Home() {
       />
 
       {/* ═══ Final CTA ═══ */}
+      <OpenLoop>You have seen the receipts. Would it be okay if I looked at your business the same way, free, and told you straight what I find? A no is welcome.</OpenLoop>
       <Analogy k="healthcheck" />
       <FreeStart />
     </>

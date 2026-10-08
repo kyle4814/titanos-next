@@ -6,6 +6,8 @@ import ContactButtons from "@/components/ContactButtons";
 import { SITE, CONTACT } from "@/lib/config";
 import { Inscription, SystemLabel } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
@@ -27,13 +29,26 @@ export default function ContactPage() {
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
-        sub="No contact form maze, no booking system, no support ticket queue. Message Kyle directly. You'll hear back from the same person who does the work."
+        sub="No form maze, no booking system, no ticket queue. Message Kyle directly and you hear back from the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
       <Bluf>
         Message Kyle. You hear back from the person who does the work, and the first conversation and your report are free.
       </Bluf>
       <Analogy k="healthcheck" />
+
+      <SectionReveal style={{ padding: "0 20px var(--space-8, 32px)", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.fleetJobs} />
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 14 }}>
+            Method: counted from our own job log over 24 hours. That is the machine. The person who answers your message is Kyle. Before you
+            ask: the first look uses public records only, nothing of yours is touched, nobody is replaced, your IT provider stays in
+            charge, and the first conversation and report cost nothing.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <OpenLoop>So how do you actually reach him?</OpenLoop>
 
       <section aria-label="Message Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
         <ContactButtons heading="Message Kyle for a free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
@@ -81,7 +96,7 @@ export default function ContactPage() {
           </div>
 
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
-            Want a free consultation and a free report on your business? Just message Kyle. No obligation, no pitch deck, and a no is welcome.
+            Would it be okay if you messaged Kyle for a free consultation and a free report on your business? No obligation, no pitch deck, and a no is welcome.
           </p>
         </div>
       </SectionReveal>

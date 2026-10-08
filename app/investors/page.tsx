@@ -3,6 +3,8 @@ import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
@@ -58,11 +60,23 @@ export default function Investors() {
       <PageHero
         badge="Investors"
         title="What your money builds."
-        sub="A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk."
+        sub="A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk, and a no is welcome."
       />
       <section style={SECTION}>
         <div style={WRAP}>
           <h2 style={H}>The measured base</h2>
+          <p style={BODY}>
+            Each card carries its own label. The first is modelled with the COCOMO method, the second is measured off the
+            running system, and the third is a recorded same-25-job comparison. The source is one tap away on each. This is
+            the base, not an offer.
+          </p>
+          <FlexGrid items={[FLEX.engineers, FLEX.fleetJobs, FLEX.costPerJob]} />
+          <p style={{ ...BODY, marginTop: 14 }}>
+            Think of it as a whole engineering department for the price of one person, with the receipts kept. Before you
+            ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Everything here is built from public records and our
+            own logs, nothing of anyone&apos;s is touched, and nobody is replaced.
+          </p>
+          <OpenLoop>What does that look like as a few plain lines you can check yourself?</OpenLoop>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
             {BASE.map(([n, l]) => (
               <div key={l} style={CARD}>
@@ -76,6 +90,7 @@ export default function Investors() {
             the <a href="/engineering" style={A}>engineering maths</a>.
           </p>
 
+          <OpenLoop>So what happens if the compute budget goes up? The next table is where that gets honest.</OpenLoop>
           <h2 style={H}>What compute buys</h2>
           <p style={BODY}>
             Each AU$300 a month buys one AI build account. The first row is measured. The rest are calculations built on it,
@@ -107,6 +122,7 @@ export default function Investors() {
             </table>
           </div>
 
+          <OpenLoop>And if it did scale, where would the money go?</OpenLoop>
           <h2 style={H}>The ladder to AU$1 million a month, and where it goes</h2>
           <p style={BODY}>
             Monthly revenue, split between the founder, the system (compute, people, the next product) and the world
@@ -142,6 +158,7 @@ export default function Investors() {
             <a href="/mission" style={A}>mission page</a>.
           </p>
 
+          <OpenLoop>Why would a big buyer pick this over the other options?</OpenLoop>
           <h2 style={H}>Why it is defensible</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li style={{ marginBottom: 8 }}>
@@ -166,7 +183,7 @@ export default function Investors() {
           </p>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 30 }}>
-            If the numbers interest you, the next step is a conversation, with no pressure. Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>.
+            If the numbers interest you, would it be okay if we had a conversation? There is no pressure, and a no is welcome. Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/contact">Start a conversation</AnimatedButton>

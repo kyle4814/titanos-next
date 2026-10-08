@@ -6,6 +6,8 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
@@ -60,8 +62,8 @@ export default function AboutPage() {
       <PageHero
         badge="ABOUT THE OPERATOR"
         title="Built from a phone. Run by one operator."
-        tagline="I am Kyle Deligny, founder of TITANOS, the Titan Operating System. Hypersonic Industries and Parallax Industries are its divisions. Solo, pre-revenue and no permission asked: just a decision to start, and a standard for what is allowed to ship."
-        sub="No agency layer between you and the work. No junior 'managed services' team you'll never meet. If you message me, you get me."
+        tagline="I am Kyle Deligny, founder of TITANOS, the Titan Operating System. Hypersonic Industries and Parallax Industries are its divisions. I work alone, I have no paying clients yet, and I would rather you check me than trust me."
+        sub="No agency layer between you and the work, and no junior team you will never meet. If you message me, you get me."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> ·{" "}
@@ -87,6 +89,19 @@ export default function AboutPage() {
         TITANOS is one engineer, Kyle Deligny, built to give your business the output of a roughly 20-person team (by the COCOMO estimate), safely, and without replacing anyone.
       </Bluf>
       <Analogy k="department" />
+
+      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.engineers} />
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, margin: "18px 0 0" }}>
+            Method: the industry COCOMO model, run over the code written since 4 June 2026. It is a model, not a timesheet, and the
+            Engineering page shows every step so you can re-run it. Before you ask: it only reads public records, it touches
+            nothing inside your business, nobody gets replaced, your IT provider stays in charge, and the first step costs nothing.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <OpenLoop>So who is the one person behind that number, and how would you check him?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -157,8 +172,8 @@ export default function AboutPage() {
             }}
           >
             TITANOS started on a phone, with an idea and a decision to stop waiting for someone
-            else&apos;s approval to act on it. I am pre-revenue and raising a small pre-seed
-            round so I can work on it full-time.
+            else&apos;s approval. I have no revenue yet and I am raising a small pre-seed
+            round so I can do this full-time.
           </p>
           <p
             style={{
@@ -171,8 +186,8 @@ export default function AboutPage() {
             Every system live on this site, I built and I run: the free scanner, the
             compliance pipeline, the partner network on live Stripe checkout with an
             append-only audit trail, and the monitoring that pages me directly the second
-            something breaks. Nothing on this page is a mockup. No paying clients yet, which
-            is exactly why I show you my own systems first.
+            something breaks. Nothing here is a mockup. With no paying clients yet, the fair
+            thing is to show you my own systems first.
           </p>
           <p
             style={{
@@ -182,8 +197,8 @@ export default function AboutPage() {
             }}
           >
             Brisbane-based, ABN-verifiable, one person end to end: the audit call, the
-            build, the sign-off, the 3am page if something goes wrong. Want to check any of
-            that before reading on? Skip straight to how you verify me, below.
+            build, the sign-off, and the 3am page if something breaks. Curious how you would
+            check any of that? It is all further down, under how you verify me.
           </p>
         </div>
       </SectionReveal>
@@ -211,13 +226,13 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            Three things, no pressure to pick one now. A free security check: what a hacker
-            can see about your business, no payment, no sales funnel. A fixed-price Privacy
-            Act compliance engagement for AU small businesses preparing for the 10 December
-            2026 deadline. And AI implementation: I find the manual task eating your
-            team&apos;s week and build the system that replaces it, quoted by scope after a
-            free call. Which of these three matches what&apos;s actually slowing you down
-            right now?
+            Three things, and no need to pick one now. A free security check: what a hacker
+            can see about your business, from public records only, with no payment and no sales
+            funnel. A fixed-price Privacy Act compliance engagement for AU small businesses
+            preparing for the 10 December 2026 deadline. And AI implementation: I find the manual
+            task eating your team&apos;s week and build the system that takes it off their plate,
+            quoted by scope after a free call, with your people kept and your IT provider still in
+            charge. Which of the three is closest to what is slowing you down right now?
           </p>
           <p
             style={{
@@ -227,10 +242,10 @@ export default function AboutPage() {
               marginBottom: 14,
             }}
           >
-            I diagnose, plan, and scope every job myself. Claude Code, Anthropic&apos;s
-            agentic coding tool, does the keystroke-level build. I decide what&apos;s
-            allowed to ship, and I sign off before anything goes live. If the math is wrong,
-            that&apos;s on me, and I&apos;m the one you talk to when it is.
+            I diagnose, plan and scope every job myself. Claude Code, Anthropic&apos;s
+            coding tool, does the keystroke-level build. I decide what is
+            allowed to ship, and I sign off before anything goes live. If the maths is wrong,
+            that is on me, and I am the one you talk to.
           </p>
 
           <h2
@@ -330,10 +345,10 @@ export default function AboutPage() {
               borderTop: "1px solid var(--border)",
             }}
           >
-            None of this is a template. It&apos;s one person starting without asking
+            None of this is a template. It is one person starting without asking
             permission, keeping the receipts, and letting you check every one of them
-            before you pay a cent. If there&apos;s a version of that you could run yourself,
-            good. That&apos;s the point.
+            before you pay a cent. If you could run a version of this yourself, good. That
+            is rather the point.
           </p>
         </div>
       </SectionReveal>
@@ -354,13 +369,13 @@ export default function AboutPage() {
             QUESTIONS ABOUT WORKING WITH ME
           </h2>
           <FaqItem question="Why should I trust a solo operator over an agency?">
-            No account manager, no junior team you'll never meet. The person who takes the audit call is the person who builds and signs off the work. Everything above is how you check that's true before you pay a cent.
+            No account manager, no junior team you will never meet. The person who takes the audit call is the person who builds and signs off the work. Everything above is how you check that is true before you pay a cent.
           </FaqItem>
           <FaqItem question="What if you're unavailable later?">
             You keep everything delivered. No platform lock-in, no dependency on me staying reachable for what's already built.
           </FaqItem>
           <FaqItem question="Is my data safe with an AI-assisted operator?">
-            Privacy-compliant by design is the other half of my practice, not an afterthought. See /compliance for exactly what that covers.
+            Privacy-compliant by design is the other half of my practice, not an afterthought. See /compliance for exactly what that covers, and note the free check reads public records only and touches nothing of yours.
           </FaqItem>
         </div>
       </SectionReveal>
@@ -395,7 +410,7 @@ export default function AboutPage() {
             lineHeight: 1.7,
           }}
         >
-          Same operator behind each one.
+          Same operator behind each one. Would it be okay if I started you on the free scan? A no is welcome, and you owe me nothing.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">

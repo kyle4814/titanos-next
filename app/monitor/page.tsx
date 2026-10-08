@@ -11,6 +11,17 @@ import Testimonials from "@/components/Testimonials";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import type { Flex } from "@/lib/flex";
+
+// The biggest true number for this page: domains this same engine checked in the last 30 days. Read from our own count, not typed.
+const SCANS_FLEX: Flex = {
+  big: `${STATS.scansLast30Days.toLocaleString("en-AU")} domains`,
+  label: "checked by this same engine in the last 30 days",
+  kind: "RECORDED",
+  analogy: "A smoke alarm in every room: it makes a quiet noise when something changes, long before there is a fire.",
+  source: `lib/stats.json, written from our own scan records, as of ${STATS.asOf}.`,
+};
 
 // Site Fix 2 — recurring product page. Persona: owner OR IT lead who has
 // already seen their exposure and wants ongoing visibility into changes.
@@ -130,9 +141,9 @@ export default function MonitorPage() {
 
       <PageHero
         badge="TITANOS MONITOR · RECURRING"
-        title="Your business's security gaps change every month. Most owners find out when something breaks."
-        tagline={`Titanos Monitor finds out first. A fresh check every month, a plain-English summary of what changed, and an alert the moment a new software vulnerability matches what you're running. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, guilt-free, any time.`}
-        sub="Same engine as the free check, run on a schedule, with a month-over-month summary and vulnerability alerts matched to your software versions. Plain-English email to your inbox. No dashboard. No contract. No retention call."
+        title="Your business's security picture changes every month. Here is a quiet way to keep an eye on it."
+        tagline={`Titanos Monitor looks from the outside, once a month, and emails you in plain English what changed. If a newly published software vulnerability matches what you run, it tells you that day. ${DISPLAY.MONITOR_MONTHLY}. Cancel in one click, any time, no hard feelings.`}
+        sub="It is the same engine as the free check, on a schedule. It reads public information only and touches nothing of yours. One email in your inbox, no dashboard, no contract, no retention call."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -167,6 +178,19 @@ export default function MonitorPage() {
       </Bluf>
       <Analogy k="smokealarm" />
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={SCANS_FLEX} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Monitor looks at public information
+            from the outside, so nothing of yours is touched and I never need a password. Nobody is replaced, and your IT
+            person stays in charge and is welcome to read every email. It costs {DISPLAY.MONITOR_MONTHLY}, and you can
+            stop in one click.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>What would you actually find in that monthly email, and what if the answer is nothing?</OpenLoop>
+
       {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
           See components/Myth.tsx for the vocabulary. */}
       <section
@@ -175,7 +199,7 @@ export default function MonitorPage() {
       >
         <Inscription
           label="Same engine as the free check · run on a schedule · nothing dressed up"
-          sub="Exposure doesn't wait for your next audit. Neither does the scan. Ask yourself: when did you last actually check what changed on your site since last month?"
+          sub="Your next audit is a while off. A monthly look is a small, steady way to notice changes in between."
         >
           What changed last month, said plainly.
           <br />
@@ -192,7 +216,7 @@ export default function MonitorPage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The monthly email</SystemLabel>
           <SectionHeading
             title="What Lands in Your Inbox Each Month"
-            lead="One email a month. Same date each month. Worth reading or you stop it."
+            lead="One email a month, on the same date. If it is not worth reading, you stop it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ul
@@ -230,6 +254,8 @@ export default function MonitorPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>It is just as useful to know what this is not, so here is the short list.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* WHAT IT IS NOT */}
@@ -239,7 +265,7 @@ export default function MonitorPage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The refusal list</SystemLabel>
           <SectionHeading
             title="What It Is Not"
-            lead="The opt-out is built in. The product is the email, not a sales funnel wrapped around it."
+            lead="The opt-out is built in. The product is the email, and there is no sales funnel wrapped around it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ul
@@ -280,6 +306,8 @@ export default function MonitorPage() {
           </div>
         </div>
       </SectionReveal>
+
+      <OpenLoop>So what does it cost, and how hard is it to leave?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -387,7 +415,7 @@ export default function MonitorPage() {
             lineHeight: 1.7,
           }}
         >
-          Haven&apos;t had the free check yet?{" "}
+          Haven&apos;t had the free check yet? Would it be okay to start there?{" "}
           <a href="/scan#request" style={{ color: "var(--gold)" }}>
             Start with the free security check
           </a>
@@ -402,7 +430,7 @@ export default function MonitorPage() {
         <div className="container-vault">
           <DepthIndex index={4} total={4} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
-          <SectionHeading title="Questions I Get" />
+          <SectionHeading title="Questions I Get" lead="The ones people ask before they subscribe, answered here first." />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="What's actually in the monthly email?">
               A plain-English summary with three sections: what&apos;s new since last month
@@ -468,7 +496,7 @@ export default function MonitorPage() {
             letterSpacing: "0.05em",
           }}
         >
-          A Monthly Security Update Worth Reading
+          Would it be okay if I kept an eye on it for you?
         </h2>
         <p
           style={{
@@ -481,7 +509,8 @@ export default function MonitorPage() {
           }}
         >
           {DISPLAY.MONITOR_MONTHLY} or {DISPLAY.MONITOR_ANNUAL} annual. First scan within
-          1 business day. Cancel any time. One click.
+          1 business day, and you can cancel in one click. If you would rather see the free check
+          first, that is a good place to start, and a no is completely fine.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <MonitorCheckoutButton

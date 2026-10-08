@@ -10,6 +10,8 @@ import Testimonials from "@/components/Testimonials";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
@@ -132,8 +134,8 @@ export default function AiDeliveryPage() {
     <>
       <PageHero
         badge={`AI GROWTH PARTNER · RETAINER FROM ${DISPLAY.AI_GROWTH_PARTNER.toUpperCase()}`}
-        title="Built at the output of a roughly 20-person team, for one monthly price."
-        sub="Pick your tier. The first system goes live in month 1, inside the retainer, not as a separate build fee. Every plan is privacy-compliant by design."
+        title="A roughly 20-person team's output behind your build, for one monthly price."
+        sub="That figure is modelled with the COCOMO method, and the method is on the Engineering page. Pick your tier and the first system goes live in month 1, inside the retainer, with no separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned
@@ -150,12 +152,22 @@ export default function AiDeliveryPage() {
       </Bluf>
       <Analogy k="powersteering" />
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <FlexGrid items={[FLEX.engineers, FLEX.costPerJob]} />
+        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px auto 0", textAlign: "center", maxWidth: "var(--maxw-prose)" }}>
+          Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. I build on
+          the tools you already use, and I only touch accounts you have given me access to. Nobody is replaced, your IT
+          person stays in charge and is welcome in every meeting, and the price of each tier is below.
+        </p>
+      </SectionReveal>
+      <OpenLoop>So what do you actually get for the monthly price, and when does the first piece go live?</OpenLoop>
+
       <div className="divider-gold" />
 
       <section aria-label="What partnership means here" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="No separate build fee. No second sale later."
-          sub="The machine carries the repetition: the plumbing, the follow-up, the reporting. You keep the calls that need judgement. Quick check: how many hours a week does your team spend on work like that?"
+          sub="The machine carries the repetition: the plumbing, the follow-up, the reporting. You keep the calls that need judgement."
         >
           One system live in month 1.
           <br />
@@ -219,13 +231,15 @@ export default function AiDeliveryPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>What kinds of jobs do these partnerships take off your plate? Here is the list.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* WHAT I BUILD */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={2} total={5} />
-          <SectionHeading title="What We Build" lead="If it's repetitive, we automate it. Which of these already costs you hours every week?" />
+          <SectionHeading title="What We Build" lead="If it is repetitive, it is a candidate. Which of these already eats your week?" />
           <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
             {WHAT_I_BUILD.map((item) => (
               <article
@@ -242,16 +256,20 @@ export default function AiDeliveryPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>And what does the first month look like, hour by hour?</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* HOW IT WORKS */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={3} total={5} />
-          <SectionHeading title="How It Works" />
+          <SectionHeading title="How It Works" lead="Five steps, and the first one is a free conversation." />
           <GoldThread steps={HOW_IT_WORKS} />
         </div>
       </SectionReveal>
+
+      <OpenLoop>One more thing people ask me early: what happens to your customers&apos; data?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -259,10 +277,10 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={4} total={5} />
-          <SectionHeading title="Privacy Built In, Not Bolted On" />
+          <SectionHeading title="Privacy Built In, Not Bolted On" lead="Compliance is my other practice, so it comes along for free." />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.7, textAlign: "center" }}>
-            Every AI shop can build you a chatbot. None of them can tell you it&apos;s privacy-compliant
-            by design. That&apos;s because compliance is my other practice. See{" "}
+            Building a chatbot is the easy part. Making it privacy-compliant by design is where my other
+            practice comes in, because compliance is what I do all day. See{" "}
             <a href="/compliance" style={{ color: "var(--gold)" }}>what that covers</a>.
           </p>
           <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>
@@ -281,7 +299,7 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={5} total={5} />
-          <SectionHeading title="Questions I Get" />
+          <SectionHeading title="Questions I Get" lead="The ones people ask before they commit to anything." />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             {FAQS.map((f) => (
               <FaqItem key={f.q} question={f.q}>
@@ -298,10 +316,10 @@ export default function AiDeliveryPage() {
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />
         <h2 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-h2)", fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em" }}>
-          Start with the free consultation and report.
+          Would it be okay if we started with a free chat?
         </h2>
         <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "0 auto 32px", lineHeight: 1.7 }}>
-          No cost, no obligation, no pitch deck. Just a straight conversation about your business.
+          No cost, no obligation, no pitch deck. Just a straight conversation about the most repetitive job in your business, and a report of your own to keep. If it is not for you, a no is welcome.
         </p>
         <AnimatedButton href="/audit" variant="primary">
           Message Kyle for a free consultation and report →

@@ -7,6 +7,8 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { DISPLAY } from "@/lib/pricing";
 import { SystemLabel, DepthIndex } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 // Unlinked on purpose: no nav, footer, sitemap or homepage link, and noindex,
 // until Kyle confirms the enterprise prices. The figures come from lib/pricing.ts
@@ -38,8 +40,8 @@ export default function EnterprisePage() {
       <PageHero
         badge="TITANOS ENTERPRISE"
         title="Larger engagements, scoped on a call."
-        tagline="For groups, regulated entities and boards. Indicative starting points. Every engagement is scoped on a call."
-        sub="These figures are starting points, not a fixed price list, and they have not been market-tested. Nothing is signed until we have talked through what you actually need."
+        tagline="For groups, regulated entities and boards. Every engagement is scoped on a call."
+        sub="These figures are starting points, not a price list, and they have not been market-tested. Nothing is signed until we have talked through what you actually need."
       >
         <AnimatedButton href="/contact" variant="primary" ariaLabel="Message Kyle about an enterprise engagement">
           BOOK A FREE ENTERPRISE CONSULTATION →
@@ -49,6 +51,19 @@ export default function EnterprisePage() {
         Larger engagements are scoped on a call and priced before anything starts, built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and nobody replaced.
       </Bluf>
       <Analogy k="department" />
+
+      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.engineers} />
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16 }}>
+            Method: the COCOMO model, explained on the Engineering page. A larger organisation will have questions first, so here they are
+            answered up front. The scan reads public records only. Nothing inside your systems is touched. Nobody on your team is replaced.
+            Your IT provider and your own people stay in charge of every change. And the price is agreed before anything starts.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <OpenLoop>What would an engagement like that actually be called, and what might it cost to scope?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -92,14 +107,14 @@ export default function EnterprisePage() {
               ))}
             </ul>
             <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
-              These are starting points, not quotes. The final scope and price are agreed with you on a call, with no pressure to proceed.
+              These are starting points, not quotes. The final scope and price are agreed with you on a call. Would it be okay if we started there? A no is welcome.
             </p>
           </div>
         </div>
       </SectionReveal>
       <FrontLoad
         extra={[
-          { q: "I run IT. Where does this sit?", a: "Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change." },
+          { q: "I run IT. Where does this sit?", a: "Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change. Your IT team stays in charge." },
         ]}
       />
       <FreeStart />

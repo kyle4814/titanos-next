@@ -13,6 +13,17 @@ import { CONTACT_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import type { Flex } from "@/lib/flex";
+
+// The biggest true number for this page: what the same check found on my own site, published as found.
+const SELF_SCAN_FLEX: Flex = {
+  big: "6 findings on my own site",
+  label: "from running this exact check on titanos.tech first, published as found. Four are resolved or accepted with reasons, two remain open.",
+  kind: "RECORDED",
+  analogy: "A GP who books their own check-up before offering you one, and shows you the results, good and bad.",
+  source: "Self-scan of titanos.tech, scan ID 40e4f6c4db8b, 2026-06-01T02:46:25Z. Full findings are on this page.",
+};
 
 // Internal anchor — the on-page form section. No mailto in the primary
 // flow; the form's error state carries the only fallback link.
@@ -213,8 +224,8 @@ export default function ScanPage() {
       <PageHero
         badge="FREE · NO LOGIN · NO CARD"
         title="Free Security Check for Your Business"
-        tagline="See what a hacker can see about your business. No login. Report in your inbox within 2 business days."
-        sub="A plain-English report on every security gap visible from the public internet: open ports, expired certificates, email spoofing risks, known software weaknesses. A light, standard check of what your domain already shows the internet: a port and service scan plus public records. Only for a domain you own or are allowed to have checked, and I only ever scan a domain someone has asked me to look at. No card. No drip campaign: at most 3 relevant emails over 6 months, and STOP kills it forever."
+        tagline="See what the public internet can already see about your business. No login. Your report lands in your inbox within 2 business days."
+        sub="A plain-English report on what your domain already shows the world: open ports, expired certificates, email spoofing gaps, known software weaknesses. It is a light, standard check using a port and service scan plus public records, and it touches nothing of yours. I only scan a domain someone has asked me to look at, and only one you own or are allowed to have checked. No card, no drip campaign: at most 3 relevant emails over 6 months, and STOP ends it forever."
         trustLine={
           <>
             Personally reviewed · Australian-owned ·{" "}
@@ -233,6 +244,19 @@ export default function ScanPage() {
         A free security check of your business, based on what the public internet can already see. Your report lands in your inbox within 2 business days.
       </Bluf>
       <Analogy k="healthcheck" />
+
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={SELF_SCAN_FLEX} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I read every report before it
+            reaches you. The check uses public records only and touches nothing of yours, with no login and no
+            password guessing. Nobody is replaced, your IT person stays in charge and is welcome to read the whole
+            report, and it costs nothing.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>What does a check like this look like on the page? Here is the kind of output it reads.</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -253,7 +277,7 @@ export default function ScanPage() {
           <DepthIndex index={1} total={8} />
           <Inscription
             label="Self-scan · findings published verbatim"
-            sub="Six findings, all published as found. Four resolved or accepted with reasoning since; two remain open. Worth asking yourself: would your own site survive the same six checks?"
+            sub="Six findings, all published as found. Four are resolved or accepted with reasoning, and two remain open. Publishing them as found is the point."
             style={{ marginBottom: "var(--space-8)" }}
           >
             I ran this check on myself first.
@@ -337,6 +361,8 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Curious how it goes from a form to a finished report in two business days?</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* THE FULL PROCESS */}
@@ -345,11 +371,13 @@ export default function ScanPage() {
           <DepthIndex index={3} total={8} />
           <SectionHeading
             title="The Full Process"
-            lead="Five steps from form-submit to report-in-inbox. No mystery, no opaque hand-offs."
+            lead="Five steps from the form to the report in your inbox, and you can see each one."
           />
           <ProcessSteps steps={PROCESS} />
         </div>
       </SectionReveal>
+
+      <OpenLoop>And once it lands, what will you be looking at?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -359,7 +387,7 @@ export default function ScanPage() {
           <DepthIndex index={4} total={8} />
           <SectionHeading
             title="What&apos;s Inside the Report"
-            lead="One report, every finding ranked, every finding reproducible."
+            lead="One report. Every finding is ranked, and every finding can be checked again."
           />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <ul
@@ -402,6 +430,8 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Is it safe to let someone run this against your domain? Here is exactly what it does, and what it never does.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* METHODOLOGY MINI */}
@@ -410,7 +440,7 @@ export default function ScanPage() {
           <DepthIndex index={5} total={8} />
           <SectionHeading
             title="How the Check Works"
-            lead="I only read what your server already broadcasts to the public internet: the same information a hacker sees. Nothing invasive."
+            lead="I only read what your server already tells the public internet, the same information anyone else can see. Nothing invasive, nothing touched."
           />
           <div
             style={{
@@ -442,6 +472,8 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Ready to see yours? It takes under a minute, and there is no card.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* REQUEST YOUR FREE SCAN — Fix 1: real form replaces mailto card */}
@@ -450,7 +482,7 @@ export default function ScanPage() {
           <DepthIndex index={6} total={8} />
           <SectionHeading
             title="Request Your Free Scan"
-            lead="Fill the form. Report lands in your inbox within 2 business days, sent personally. Prefer to talk? Message Kyle instead."
+            lead="Fill in the form and your report lands in your inbox within 2 business days, sent personally. Prefer to talk first? Message me instead."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <ScanRequestForm />
@@ -472,6 +504,8 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Then what? Nothing, unless you want it to be something.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* WHAT COMES AFTER THE SCAN */}
@@ -480,7 +514,7 @@ export default function ScanPage() {
           <DepthIndex index={7} total={8} />
           <SectionHeading
             title="What Comes After the Scan"
-            lead="Most teams use the free scan to decide whether they need the Compliance engagement or an AI build. Here’s where each fits."
+            lead="Plenty of people use the free check to decide whether they need the Compliance engagement or an AI build, and plenty decide they need neither. Here is where each fits."
           />
           <div
             className="grid-auto-cards"
@@ -521,7 +555,7 @@ export default function ScanPage() {
       <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <DepthIndex index={8} total={8} />
-          <SectionHeading title="Questions I Get" />
+          <SectionHeading title="Questions I Get" lead="The ones people ask before they hit send, answered first." />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="How long does the scan take?">
               Your scan is queued the moment you submit. The report is delivered to your inbox
@@ -573,7 +607,7 @@ export default function ScanPage() {
             letterSpacing: "0.05em",
           }}
         >
-          See What a Hacker Can See, for Free
+          Would it be okay if I had a look at your domain?
         </h2>
         <p
           style={{
@@ -585,7 +619,7 @@ export default function ScanPage() {
             lineHeight: 1.7,
           }}
         >
-          Personally reviewed, delivered within 2 business days. No card, no login required.
+          It is free, personally reviewed, and delivered within 2 business days. No card, no login. If you would rather not, a no is completely welcome.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href={REQUEST_ANCHOR} variant="primary">

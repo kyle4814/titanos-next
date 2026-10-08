@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { CASES, getCase } from "@/lib/caseStudies";
+import { OpenLoop } from "@/components/FlexBlock";
 
 export const dynamicParams = false;
 
@@ -59,8 +60,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ))}
           </div>
 
+          <p style={BODY}>
+            The biggest number comes first, with its method underneath. Every figure is read from the build&apos;s own git log or a dated
+            usage reading, and nothing here touched anyone&apos;s private data.
+          </p>
+
           <h2 style={H}>How fast</h2>
           <p style={BODY}>{c.speed}</p>
+
+          <OpenLoop>Fast is nice. What did it cost?</OpenLoop>
 
           <h2 style={H}>What it cost</h2>
           <p style={BODY}>{c.cost}</p>
@@ -73,6 +81,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </li>
             ))}
           </ul>
+
+          <OpenLoop>Cheap and fast still has to work. How do we know it does?</OpenLoop>
 
           <h2 style={H}>How it was checked</h2>
           <p style={BODY}>{c.tested}</p>
@@ -110,7 +120,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 40 }}>
-            Want something like this for your business? A free consultation is the first step, with no pressure.
+            Would it be okay if we talked about something like this for your business? A free consultation is the first step, and a no is welcome.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/audit">Book a free consultation</AnimatedButton>
