@@ -1,0 +1,134 @@
+{
+  "slug": "ariance",
+  "client_consent": false,
+  "consent_note": "Flip to true only after the Ariance creator has said yes to being named and to this page going public. While false the page is noindex, off the sitemap, off the case-studies hero card and off the homepage.",
+  "last_reviewed": "2026-10-08",
+  "title": "A hard to explain physics framework became a playable, tested web app in a single morning",
+  "teaser": "Ariance is a careful, hard to explain physics framework. We turned it into a game with accounts, saved labs, a Coupling Lab, simulators and four lenses, and every claim in it carries a status label.",
+  "sector": "Research and education",
+  "cover": { "src": "/case-studies/ariance/home-1440.png", "alt": "The Ariance app home page on a desktop screen" },
+  "attribution": "Ariance (c) Jonathan Engle, CC BY-SA 4.0. Source: github.com/freely-given/Ariance",
+  "brief": {
+    "heading": "The brief, in the client's words",
+    "note": "Paraphrased from the owner's message. It is not a quote.",
+    "points": [
+      "He wanted people to play with the ideas, not just read them. In his words, this stuff should be fun.",
+      "He wanted sliders, so a visitor can move a value and watch the picture change.",
+      "He wanted each person to have a profile, with levels and experience points, and several named labs inside it to try different things.",
+      "He wanted the open problem, the missing link between one level of the framework and the next, to be something a visitor can have a go at.",
+      "He wanted the diagrams to agree with the equations, with no picture that contradicts its own maths.",
+      "He wanted it to cost next to nothing to run, and to be ready to show an investor."
+    ]
+  },
+  "challenge": {
+    "heading": "The challenge",
+    "paragraphs": [
+      "Ariance is a framework with careful rules about what it does and does not claim. Some parts are plain mathematics. Some are an exact match to a known result, with the physical meaning left open. Some are proposals, some are the author's interpretation, and some are things that were tried and did not work.",
+      "That makes it hard to explain. A normal app would flatten those differences and make everything look equally settled. For a framework that depends on honest labelling, that would be the worst possible outcome.",
+      "So the job had two halves: make it playable and friendly, and keep every claim exactly as strong as the author says it is."
+    ]
+  },
+  "built": {
+    "heading": "What we built",
+    "items": [
+      { "name": "A game", "detail": "A map of four zones, from the stable zero where nothing moves, up to the unrestricted climb. The first zone is a puzzle that teaches the framework's own rule by letting you try the wrong move first.", "state": "built on its own branch, tested, not yet merged" },
+      { "name": "Labs", "detail": "Every profile can hold any number of named labs. A lab is a saved state that can be forked into a side branch, compared with another lab, and exported as a file or a shareable link.", "state": "merged and tested" },
+      { "name": "A Coupling Lab", "detail": "A sandbox for the open problem. A visitor writes a candidate law in a small, safe expression language, and the app grades it against the framework's own constraints. It checks consistency. It never claims physical truth.", "state": "merged and tested" },
+      { "name": "Simulators", "detail": "Six simulators drawn from the same functions that the tests check: the core curve, the refinement steps, a relativity match, a tunnelling match, a cup of water and a horizon slider.", "state": "built on its own branch, tested, not yet merged" },
+      { "name": "Four lenses", "detail": "One system viewed four ways, so a visitor can see that the same object has several valid descriptions.", "state": "built on its own branch, tested, not yet merged" },
+      { "name": "Accounts, profiles and levels", "detail": "Sign up, log in, experience points, levels and badges. A guest mode works with no account, and a guest profile can be claimed later. Each person can only see their own labs.", "state": "merged and tested" },
+      { "name": "Hosting that costs US$0 a month", "detail": "The plan is a static site on a free hosting tier with a free database tier behind the accounts.", "state": "planned, not deployed" }
+    ]
+  },
+  "speed": {
+    "heading": "How fast",
+    "brief_received_at": null,
+    "timezone_note": "All times are Brisbane time on 8 October 2026 (UTC+10).",
+    "first_build_start": "2026-10-08T11:46:47+10:00",
+    "phases": [
+      { "id": "foundation", "label": "Foundation: maths engine, design system, shell", "started": "2026-10-08T11:46:47+10:00", "finished": "2026-10-08T12:04:01+10:00", "commit": "2d5d035", "committed": "2026-10-08T12:02:57+10:00" },
+      { "id": "accounts", "label": "Accounts, profiles and experience points", "started": "2026-10-08T12:10:01+10:00", "finished": "2026-10-08T12:19:01+10:00", "commit": "9b60e88", "committed": "2026-10-08T12:16:26+10:00" },
+      { "id": "labs", "label": "Labs and the Coupling Lab", "started": "2026-10-08T12:19:01+10:00", "finished": "2026-10-08T12:31:02+10:00", "commit": "b2e8c42", "committed": "2026-10-08T12:28:43+10:00" },
+      { "id": "publishing", "label": "Investor page, case study page, archive and preprint drafts", "started": null, "finished": null, "commit": "7c480b5", "committed": "2026-10-08T12:35:19+10:00" },
+      { "id": "game", "label": "The game: map, first-zone puzzle, lessons", "started": "2026-10-08T12:31:02+10:00", "finished": "2026-10-08T12:37:01+10:00", "commit": "51f295f", "committed": "2026-10-08T12:36:06+10:00" },
+      { "id": "simulators", "label": "Simulators and lenses", "started": null, "finished": null, "commit": "b3d7797", "committed": "2026-10-08T12:38:03+10:00" }
+    ],
+    "commits_total": 8,
+    "commits_note": "Counted with git log --all on the app repository: six feature commits, one screenshot commit and one merge.",
+    "last_commit": "2026-10-08T12:38:03+10:00"
+  },
+  "quality": {
+    "heading": "How it was checked",
+    "tests": {
+      "measured_at": "2026-10-08T12:40:50+10:00",
+      "command": "npx vitest run, on the main branch of the app repository",
+      "files_passed": 7,
+      "tests_passed": 128,
+      "tests_failed": 0,
+      "branch_notes": [
+        { "branch": "game", "tests_reported": 44, "source": "commit message, not re-run for this page" },
+        { "branch": "simulators", "tests_reported": 14, "source": "commit message, not re-run for this page" }
+      ],
+      "total_after_merge": null
+    },
+    "what_is_tested": "Every formula in the maths engine, the exact matches to known results, the frozen region, the evaluation seam at zero, the safe expression parser, the Coupling Lab grader, the account adapters and the experience point rules.",
+    "status_chip_heading": "One label on every claim",
+    "status_chip_intro": "Every concept, chart and sentence in the app carries exactly one of these labels, taken from the author's own standard. A candidate or an interpretation is never shown as established physics.",
+    "status_chips": [
+      { "label": "ESTABLISHED MATH", "meaning": "Follows from the stated definitions. Pure mathematics." },
+      { "label": "EXACT CORRESPONDENCE", "meaning": "An exact reparameterisation of a known result. Whether the identity is physical is open." },
+      { "label": "CANDIDATE", "meaning": "A proposed construction. Not derived." },
+      { "label": "INTERPRETIVE", "meaning": "The framework's reading. Not a physics result." },
+      { "label": "FAILED TEST", "meaning": "Tried, and it did not work. Kept on the record." },
+      { "label": "OPEN", "meaning": "Not settled." }
+    ],
+    "infographic_rule": "The diagrams are drawn from the same functions the simulators use, so a picture cannot disagree with its own equation.",
+    "findings_heading": "Consistency findings, offered first",
+    "findings_intro": "While building, we checked the framework's own material against its own equations. We prepared the findings below for the author, as a gift and in plain terms, before asking anything of him.",
+    "findings_delivered_at": null,
+    "findings": [
+      { "title": "The worked relativity example", "text": "Equation 3 gives a value of 0.7353 at a speed of 0.6c with k equal to 1. The exact match to the Lorentz factor gives 0.64. The mapping dS = gamma squared minus 1 reproduces 0.64 exactly, so we suggested updating the example or labelling it as illustrative." },
+      { "title": "A missing factor in one diagram", "text": "One panel writes the refinement step without its logarithm factor. Without that factor there is no frozen region, which would contradict the same panel's threshold graph and the formal operator." },
+      { "title": "A bound that should allow equality", "text": "A diagram states a strict inequality for the range of A, but also says A equals E squared when dS is zero. The bound should read less than or equal to, and a k of zero gives half of E squared for any dS above zero." },
+      { "title": "Two readings that are interpretive, not results", "text": "Two images show a breakout from the trap as if it were settled. By the author's own status table it is not established, because the current operator cannot leave the interval from zero to one. The app shows it as the open problem." }
+    ],
+    "gallery_heading": "Screens from the working app",
+    "gallery_note": "Taken by a headless browser at 390 pixels wide (phone) and 1440 pixels wide (desktop). Long pages are cropped to the top in this gallery.",
+    "gallery": [
+      { "id": "home", "caption": "Home", "alt_phone": "Ariance home page on a phone", "alt_desktop": "Ariance home page on a desktop", "phone": "/case-studies/ariance/home-390.png", "desktop": "/case-studies/ariance/home-1440.png" },
+      { "id": "play", "caption": "The game map", "alt_phone": "The game map on a phone", "alt_desktop": "The game map on a desktop", "phone": "/case-studies/ariance/play-390.png", "desktop": "/case-studies/ariance/play-1440.png" },
+      { "id": "learn", "caption": "Lessons", "alt_phone": "The lessons page on a phone", "alt_desktop": "The lessons page on a desktop", "phone": "/case-studies/ariance/learn-390.png", "desktop": "/case-studies/ariance/learn-1440.png" },
+      { "id": "coupling", "caption": "Coupling Lab", "alt_phone": "The Coupling Lab on a phone", "alt_desktop": "The Coupling Lab on a desktop", "phone": "/case-studies/ariance/coupling-390.png", "desktop": "/case-studies/ariance/coupling-1440.png" },
+      { "id": "lab", "caption": "A saved lab", "alt_phone": "A saved lab on a phone", "alt_desktop": "A saved lab on a desktop", "phone": "/case-studies/ariance/lab-detail-390.png", "desktop": "/case-studies/ariance/lab-detail-1440.png" },
+      { "id": "ideas", "caption": "Ideas and notes, attributed and labelled", "alt_phone": "The ideas page on a phone", "alt_desktop": "The ideas page on a desktop", "phone": "/case-studies/ariance/ideas-390.png", "desktop": "/case-studies/ariance/ideas-1440.png" },
+      { "id": "profile", "caption": "Profile", "alt_phone": "A profile page on a phone", "alt_desktop": "A profile page on a desktop", "phone": "/case-studies/ariance/profile-390.png", "desktop": "/case-studies/ariance/profile-1440.png" }
+    ]
+  },
+  "cost": {
+    "heading": "What it cost",
+    "build_cost_usd": null,
+    "build_cost_note": "No usage meter reading was taken before and after the build, so no build cost is stated. It ran inside an existing flat monthly AI subscription, with no extra spend.",
+    "hosting_monthly_usd": 0,
+    "hosting_status": "MODELLED",
+    "hosting_basis": "Planned on a free static hosting tier with a free database tier. Nothing is deployed yet, so this is a plan and not a bill.",
+    "hosting_limits": null,
+    "live_url": null
+  },
+  "client_words": {
+    "heading": "In the client's words",
+    "quote": null,
+    "attribution": null
+  },
+  "methodology": {
+    "heading": "Where every figure comes from",
+    "rows": [
+      { "figure": "Build start and phase times", "source": "The TITANOS fleet ledger, start and done events for the Ariance builds, written in local Brisbane time. Cross-checked against the commit times, which carry an explicit UTC+10 offset and fall inside each ledger window." },
+      { "figure": "Commit count and commit times", "source": "git log --all on the Ariance app repository, read on 8 October 2026." },
+      { "figure": "Test counts", "source": "Output of the vitest run named in the Quality section, read on 8 October 2026. Branch counts come from commit messages and have not been re-run." },
+      { "figure": "Brief to build time", "source": "Not stated. The time the brief arrived was not recorded in a source we can cite, so the page measures from the first build start instead." },
+      { "figure": "Cost", "source": "No usage reading was taken, so no build cost is claimed. The hosting figure is a plan and is labelled as one." },
+      { "figure": "Consistency findings", "source": "Worked by hand from the framework's own repository text and checked against the engine: 1 / (1 + 0.36) = 0.7353 and 1 minus 0.36 = 0.64." },
+      { "figure": "Screens", "source": "Screenshots from the app's own quality sweep, taken at 390 and 1440 pixels wide." }
+    ]
+  }
+}

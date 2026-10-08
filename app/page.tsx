@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/components/hero/Hero";
 import VoidPortal from "@/components/hero/VoidPortal";
 import { withSeo } from "@/lib/seo";
+import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -316,6 +317,14 @@ export default function Home() {
             See the actual quality of work you would get, before you pay a cent →
           </a>
         </p>
+        {arianceVisible && (
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+            Latest build:{" "}
+            <a href={ariancePath} style={{ color: "var(--gold)" }}>
+              {ARIANCE.title} →
+            </a>
+          </p>
+        )}
         {/* Testimonials / case studies go here once client 1 to 3 are delivered.
             Do not fabricate proof before then. The honest trust units above
             are the only proof that exists right now. */}
