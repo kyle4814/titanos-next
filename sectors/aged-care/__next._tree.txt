@@ -2,4 +2,4 @@
 :HL["/_next/static/media/fraunces_wght-s.p.1v4l5w6-86t-v.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/fraunces_wght_italic-s.p.0by3gh2t3oa9b.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/geist_wght-s.p.20f3xrkj613ah.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"sectors","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"aged-care","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"bypQaHqe1tV-3ItbwRIsY"}
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"sectors","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"aged-care","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"KLa0sUFYKONM-gTPVWcje"}

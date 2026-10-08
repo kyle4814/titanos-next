@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://titanos.tech/</loc>
-<lastmod>2026-10-08T12:18:27.000Z</lastmod>
+<lastmod>2026-10-08T22:13:52.000Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1</priority>
 </url>
@@ -38,7 +38,7 @@
 </url>
 <url>
 <loc>https://titanos.tech/ai-delivery</loc>
-<lastmod>2026-10-08T10:28:37.000Z</lastmod>
+<lastmod>2026-10-08T22:13:52.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -891,6 +891,12 @@
 <url>
 <loc>https://titanos.tech/how-it-works</loc>
 <lastmod>2026-10-08T03:22:09.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://titanos.tech/hud</loc>
+<lastmod>2026-10-08T12:11:28.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>

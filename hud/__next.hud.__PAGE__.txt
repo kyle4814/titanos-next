@@ -1,0 +1,55 @@
+1:"$Sreact.fragment"
+8:I[51372,["/_next/static/chunks/2e66-9fj-tl12.js","/_next/static/chunks/0sk1-q-11g-es.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/43_3qofq4dn7z.js"],"default"]
+9:I[86809,["/_next/static/chunks/2e66-9fj-tl12.js","/_next/static/chunks/0sk1-q-11g-es.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/43_3qofq4dn7z.js"],"default"]
+a:I[10383,["/_next/static/chunks/2e66-9fj-tl12.js","/_next/static/chunks/0sk1-q-11g-es.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/43_3qofq4dn7z.js"],"default"]
+b:I[26918,["/_next/static/chunks/2e66-9fj-tl12.js","/_next/static/chunks/0sk1-q-11g-es.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/43_3qofq4dn7z.js"],"default"]
+c:I[97367,["/_next/static/chunks/2e66-9fj-tl12.js","/_next/static/chunks/0sk1-q-11g-es.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+d:"$Sreact.suspense"
+2:Tfb0,
+.hud-wrap{max-width:var(--maxw-full);margin:0 auto;padding:0 16px;display:grid;gap:16px;grid-template-columns:1fr;position:relative;z-index:2}
+.hud-panel{position:relative;background:linear-gradient(180deg,rgba(26,19,16,.92),rgba(11,9,8,.92));border:1px solid rgba(212,175,55,.28);border-radius:var(--radius-md);padding:var(--pad-card);box-shadow:inset 0 0 40px rgba(212,175,55,.05),0 0 30px rgba(0,0,0,.5);overflow:hidden;min-width:0}
+.hud-panel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,240,190,.025) 0 1px,transparent 1px 4px);pointer-events:none}
+.hud-panel::after{content:"";position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(212,175,55,.07),transparent);animation:hud-scan 7s linear infinite;pointer-events:none}
+.hud-label{font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.hud-tag{font-size:.68rem;letter-spacing:.14em;border:1px solid var(--gold-dim);color:var(--gold-warm);border-radius:2px;padding:1px 6px}
+.hud-tag-ok{border-color:#2e6b45;color:var(--ok)}
+.hud-hero{border-color:rgba(212,175,55,.5)}
+.hud-bigrow{display:grid;gap:18px;grid-template-columns:1fr}
+.hud-big{font-family:var(--font-mono),ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:clamp(2.1rem,9vw,3.6rem);line-height:1.05;color:var(--gold-spec);text-shadow:0 0 18px rgba(212,175,55,.45);overflow-wrap:anywhere}
+.hud-big-gold{color:var(--gold);}
+.hud-unit{color:var(--dim);font-size:var(--fs-sm);margin-top:4px}
+.hud-note{color:var(--dim);font-size:var(--fs-sm);line-height:1.65;margin:14px 0 0}
+.hud-link{color:var(--gold-warm);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.hud-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hud-tile{border:1px solid rgba(212,175,55,.18);background:rgba(5,3,3,.55);border-radius:var(--radius-sm);padding:12px;display:flex;flex-direction:column;gap:4px}
+.hud-tile-k{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.hud-tile-v{font-family:var(--font-mono),ui-monospace,monospace;font-size:clamp(1.15rem,5vw,1.6rem);color:var(--gold)}
+.hud-tile-s{font-size:.78rem;color:var(--dim);line-height:1.4;flex:1}
+.hud-tile .hud-tag{align-self:flex-start;margin-top:6px}
+.hud-feed{list-style:none;margin:0;padding:0;max-height:440px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;font-family:var(--font-mono),ui-monospace,monospace}
+.hud-feed-row{display:grid;grid-template-columns:auto auto auto 1fr auto;gap:8px 10px;align-items:center;padding:7px 4px;border-bottom:1px solid rgba(212,175,55,.1);font-size:.74rem;opacity:0;animation:hud-in .5s ease forwards}
+.hud-feed-time{color:var(--dim)}
+.hud-feed-acct{border:1px solid var(--gold-dim);color:var(--gold-warm);border-radius:2px;padding:0 5px}
+.hud-feed-acct-b{border-color:var(--steel);color:var(--steel)}
+.hud-feed-cat{color:var(--ice);letter-spacing:.08em}
+.hud-feed-code{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.hud-feed-ok{color:var(--ok);letter-spacing:.1em;font-size:.64rem}
+.hud-stamp{color:var(--dim);font-size:var(--fs-xs);text-align:center;letter-spacing:.06em}
+@keyframes hud-scan{from{transform:translateY(0)}to{transform:translateY(360%)}}
+@keyframes hud-in{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@media (max-width:460px){.hud-feed-row{grid-template-columns:auto auto 1fr auto}.hud-feed-cat{display:none}}
+@media (min-width:900px){
+ .hud-wrap{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:0 24px}
+ .hud-hero,.hud-wide{grid-column:1/-1}
+ .hud-bigrow{grid-template-columns:1fr 1.3fr}
+ .hud-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .hud-feed{max-height:520px}
+}
+@media (prefers-reduced-motion:reduce){.hud-panel::after{animation:none}.hud-feed-row{animation:none;opacity:1}}
+0:{"rsc":["$","$1","c",{"children":[[["$","style",null,{"children":"$2"}],"$L3","$L4","$L5"],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"KLa0sUFYKONM-gTPVWcje"}
+3:["$","$L8",null,{"badge":"Live HUD","title":"The build, as it happens.","tagline":"Engineering counted, compute gauged, every build receipted.","sub":"This is our own build, nothing of yours. Modelled figures are labelled modelled and are never revenue. Measured figures come straight from our own logs."}]
+4:["$","div",null,{"className":"hud-wrap","children":[["$","$L9",null,{}],["$","$La",null,{}],["$","section",null,{"className":"hud-panel","aria-label":"Compute panel","children":[["$","div",null,{"className":"hud-label","children":"Compute panel"}],["$","div",null,{"className":"hud-tiles","children":[["$","div","Compute capacity",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Compute capacity"}],["$","div",null,{"className":"hud-tile-v","children":"40x"}],["$","div",null,{"className":"hud-tile-s","children":"two accounts at 20x usage each"}],["$","span",null,{"className":"hud-tag ","children":"MODELLED"}]]}],["$","div","Cost per job",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Cost per job"}],["$","div",null,{"className":"hud-tile-v","children":"8.4x cheaper"}],["$","div",null,{"className":"hud-tile-s","children":"25 matched jobs, before and after"}],["$","span",null,{"className":"hud-tag hud-tag-ok","children":"MEASURED"}]]}],["$","div","Worker start",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Worker start"}],["$","div",null,{"className":"hud-tile-v","children":"7.4x leaner"}],["$","div",null,{"className":"hud-tile-s","children":"29,000 tokens of context instead of 215,000"}],["$","span",null,{"className":"hud-tag hud-tag-ok","children":"MEASURED"}]]}],["$","div","Fleet jobs, 24 h",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Fleet jobs, 24 h"}],["$","div",null,{"className":"hud-tile-v","children":"1451"}],["$","div",null,{"className":"hud-tile-s","children":"195.7 worker-hours"}],["$","span",null,{"className":"hud-tag hud-tag-ok","children":"MEASURED"}]]}],["$","div","Failure rate, 24 h",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Failure rate, 24 h"}],["$","div",null,{"className":"hud-tile-v","children":"1.1%"}],["$","div",null,{"className":"hud-tile-s","children":"failed or stuck of all finished"}],["$","span",null,{"className":"hud-tag hud-tag-ok","children":"MEASURED"}]]}],["$","div","Safety suites",{"className":"hud-tile","children":[["$","div",null,{"className":"hud-tile-k","children":"Safety suites"}],["$","div",null,{"className":"hud-tile-v","children":"189"}],["$","div",null,{"className":"hud-tile-s","children":"automated suites in the last green gate"}],["$","span",null,{"className":"hud-tag hud-tag-ok","children":"MEASURED"}]]}]]}],["$","p",null,{"className":"hud-note","children":"Capacity is the vendor's published usage multiple, so it is modelled. Cost per job, worker start, fleet jobs, failure rate and suites are measured on our own systems. Fleet figures cover the 24 hours before the snapshot."}]]}],["$","div",null,{"className":"hud-wide","children":["$","$Lb",null,{}]}]]}]
+5:["$","p",null,{"className":"hud-stamp","style":{"padding":"20px 16px 56px","position":"relative","zIndex":2},"children":["Static page, updated at each build. Data snapshot ","2026-10-09 04:07:49"," AEST, feed generated ","2026-10-08 18:09"," UTC. The counter moves in your browser between builds."]}]
+6:["$","script","script-0",{"src":"/_next/static/chunks/43_3qofq4dn7z.js","async":true}]
+7:["$","$Lc",null,{"children":["$","$d",null,{"name":"Next.MetadataOutlet","children":"$@e"}]}]
+e:null
