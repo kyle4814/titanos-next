@@ -52,7 +52,9 @@ if (bi > 0) {
   // proof.json plus lib/ledger.json (the fleet figures are overlaid from the ledger at render, see lib/site-data/proofLive.ts)
   const ledger = JSON.parse(R("lib/ledger.json"));
   const fmts = Object.values(ledger.n).flatMap((e) => [String(e.value), e.value.toLocaleString("en-AU"), e.value.toFixed(1), e.value.toFixed(2)]);
-  const pool = JSON.stringify(data).replace(/\\"/g, '"') + " " + fmts.join(" ");
+  // the whole generated ledger joins the pool (its dates too: the fleet card shows the ledger's own date, 2026-10-09
+  // failed the gate because only the ledger's values were pooled). Still generated, never hand-typed.
+  const pool = JSON.stringify(data).replace(/\\"/g, '"') + " " + JSON.stringify(ledger) + " " + fmts.join(" ");
   const pages = [["index.html", ["cost-curve", "loop", "proof-wall"]], ["proof.html", ["proof-wall"]], ["learning-loop.html", ["loop"]]];
   for (const [file, regions] of pages) {
     const p = `${dir}/${file}`;
