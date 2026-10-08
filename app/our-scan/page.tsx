@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect } from "react";
 import { SystemLabel } from "@/components/Myth";
 
 // /our-scan merged into /scan#self-scan (consolidated 2026-07-05). Static
@@ -12,14 +9,14 @@ import { SystemLabel } from "@/components/Myth";
 
 const DEST = "/scan#self-scan";
 
+// A script-driven replace() races the view transition ("Transition was skipped" page errors, screenshot hangs);
+// the meta refresh below is instant, shift-free and works without JavaScript (same fix as /services).
 export default function OurScanRedirect() {
-  useEffect(() => {
-    window.location.replace(DEST);
-  }, []);
-
   return (
     <>
       <meta httpEquiv="refresh" content={`0; url=${DEST}`} />
+      {/* a redirect page opts out of the cross-document view transition: an instant refresh would skip it and log "Transition was skipped" */}
+      <style>{"@view-transition{navigation:none}"}</style>
       <div style={{ padding: "80px 20px", textAlign: "center" }}>
         <SystemLabel style={{ marginBottom: 12 }}>Route consolidated · 2026-07-05</SystemLabel>
         <p style={{ color: "var(--text)", fontSize: "var(--fs-body)" }}>
