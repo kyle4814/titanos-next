@@ -1,0 +1,110 @@
+{
+ "snapshot_ms": 1791458557000,
+ "snapshot_ts": "2026-10-08T21:22:37",
+ "facts_as_of": "2026-10-08",
+ "rows": {
+  "sloc": {
+   "value": 193924,
+   "unit": "lines",
+   "label": "MEASURED",
+   "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 4 repos, state/ corpus/ vendor/ excluded"
+  },
+  "engineer_years": {
+   "value": 50.5,
+   "unit": "engineer-years",
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12"
+  },
+  "engineer_years_per_day_7d": {
+   "value": 1.67,
+   "unit": "engineer-years/day",
+   "label": "MODELLED",
+   "method": "COCOMO now minus COCOMO 7 day(s) ago, divided by 7"
+  },
+  "replacement_cost_aud": {
+   "value": 26322818,
+   "unit": "AU$",
+   "label": "MODELLED",
+   "method": "engineer-years x the engineering page's rate (44.1 ey ~ AU$23M); what a conventional team would charge, never revenue"
+  },
+  "fleet_jobs_24h": {
+   "value": 548,
+   "unit": "jobs",
+   "label": "MEASURED",
+   "method": "ledger 'done' events in the last 24 h"
+  },
+  "fleet_fail_rate_24h": {
+   "value": 2.5,
+   "unit": "%",
+   "label": "MEASURED",
+   "method": "fail+stuck / (done+fail+stuck), last 24 h"
+  },
+  "fleet_worker_hours_24h": {
+   "value": 93.2,
+   "unit": "worker-hours",
+   "label": "MEASURED",
+   "method": "sum of start->done durations, last 24 h"
+  },
+  "fleet_median_job_min": {
+   "value": 3.0,
+   "unit": "min",
+   "label": "MEASURED",
+   "method": "median start->done, last 24 h"
+  },
+  "gate_suites": {
+   "value": 187,
+   "unit": "suites",
+   "label": "MEASURED",
+   "method": "last full kernel gate (GREEN, 2026-10-08T21:03:06)"
+  }
+ },
+ "needle": {
+  "realised": 3.0,
+  "ceiling": 336.0,
+  "label": "MODELLED",
+  "text": "The needle has barely moved: realised output is 3x so far against a 336x ceiling, under 1% of it.",
+  "method": "measured jobs/day 184 -> 548 (3.0x) / 336x modelled ceiling"
+ },
+ "facts": {
+  "capacity": {
+   "text": "Compute capacity is now 40x the starting plan: two accounts at 20x usage each.",
+   "label": "MODELLED",
+   "method": "vendor: Max 20x = 20x Pro usage; two accounts = 40 Pro allowances"
+  },
+  "ceiling": {
+   "text": "40x the capacity times 8.4x cheaper jobs is a ceiling of up to 336x the work for the same share of budget.",
+   "label": "MODELLED",
+   "method": "capacity multiple x cost-per-job multiple (they stack; parallelism overlaps capacity)"
+  },
+  "cost_job": {
+   "text": "Cost per AI job fell 8.4x, from US$0.97 to US$0.12, while quality rose from 23 of 25 to 25 of 25.",
+   "label": "MEASURED",
+   "method": "25 matched jobs, before and after the compressed kernel"
+  },
+  "tokens": {
+   "text": "Every AI worker now starts 7.4x leaner: 29,000 tokens of context instead of 215,000.",
+   "label": "MEASURED",
+   "method": "median first-call context per worker session"
+  },
+  "tests": {
+   "text": "Test coverage grew from 36 tests to 6,314 test cases in the main engine, and from 39 to 188 automated safety suites on the control layer.",
+   "label": "MEASURED",
+   "method": "def test_ count in titanos; kernel verify suite count"
+  },
+  "estate": {
+   "text": "12 code repositories built since 4 May 2026: 226,892 lines of production code.",
+   "label": "MEASURED",
+   "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded"
+  },
+  "estate_ey": {
+   "text": "Priced by the industry standard COCOMO model, that is 59.5 engineer-years of conventional engineering.",
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 226.9 KSLOC"
+  },
+  "estate_cost": {
+   "text": "A conventional team would charge about AU$31 million to build it.",
+   "label": "MODELLED",
+   "method": "59.5 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)"
+  }
+ }
+}
