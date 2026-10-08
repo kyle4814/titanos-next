@@ -1,86 +1,164 @@
 {
- "generated": 1791460633648,
+ "generated": 1791482941906,
  "shown": 60,
- "dropped_orgs": 143,
+ "dropped_orgs": 157,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791460321000,
+   "t": 1791482821000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-E7BE2D"
+   "code": "HV-DFC50F"
   },
   {
-   "t": 1791460321000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-6F8217"
+   "code": "HV-DCBC30"
   },
   {
-   "t": 1791460321000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-7B97B2"
+   "code": "HV-77BFB1"
   },
   {
-   "t": 1791460321000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-55CFF4"
+   "code": "HV-B8A48D"
   },
   {
-   "t": 1791460141000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-7585E1"
+   "code": "HV-533878"
   },
   {
-   "t": 1791460141000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-285865"
+   "code": "HV-252E62"
   },
   {
-   "t": 1791460141000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-F6BA77"
+   "code": "HV-69305F"
   },
   {
-   "t": 1791460141000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-FC963F"
+   "code": "HV-352B26"
   },
   {
-   "t": 1791459961000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-4D6A96"
+   "code": "HV-5D4474"
   },
   {
-   "t": 1791459961000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-DD36FF"
+   "code": "HV-9AE4F8"
   },
   {
-   "t": 1791459961000,
+   "t": 1791482641000,
    "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-C0D3E4"
+   "code": "HV-6D83F7"
   },
   {
-   "t": 1791459961000,
-   "acct": "A",
+   "t": 1791482641000,
+   "acct": "B",
    "cat": "HARVEST",
-   "code": "HV-8A0A0B"
+   "code": "HV-74EAAD"
   },
   {
-   "t": 1791459242000,
+   "t": 1791480121000,
+   "acct": "A",
+   "cat": "OPS",
+   "code": "heal"
+  },
+  {
+   "t": 1791476341000,
+   "acct": "A",
+   "cat": "OPS",
+   "code": "heal"
+  },
+  {
+   "t": 1791473641000,
+   "acct": "A",
+   "cat": "OPS",
+   "code": "heal"
+  },
+  {
+   "t": 1791473101000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
+  },
+  {
+   "t": 1791472921000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "QUALITY-F2DF50"
+  },
+  {
+   "t": 1791470041000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791469682000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791464462000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "r2-omega-mutation-gates"
+  },
+  {
+   "t": 1791463741000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-ship"
+  },
+  {
+   "t": 1791461581000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-hud"
+  },
+  {
+   "t": 1791461221000,
+   "acct": "A",
+   "cat": "SECURITY",
+   "code": "facts-outbound-guard"
+  },
+  {
+   "t": 1791461041000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-834D5E"
+  },
+  {
+   "t": 1791460861000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-349428"
+  },
+  {
+   "t": 1791460681000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "earnings-model"
   },
   {
    "t": 1791459242000,
@@ -93,24 +171,6 @@
    "acct": "B",
    "cat": "QUALITY",
    "code": "QUALITY-4098E5"
-  },
-  {
-   "t": 1791458161000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791457801000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791456182000,
-   "acct": "A",
-   "cat": "OPS",
-   "code": "heal"
   },
   {
    "t": 1791454561000,
@@ -303,66 +363,6 @@
    "acct": "B",
    "cat": "QUALITY",
    "code": "r2b-omega-cross-review"
-  },
-  {
-   "t": 1791428641000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-C09465"
-  },
-  {
-   "t": 1791428461000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "fl-reply-to-move"
-  },
-  {
-   "t": 1791428281000,
-   "acct": "A",
-   "cat": "RESEARCH",
-   "code": "data-spend-research"
-  },
-  {
-   "t": 1791428281000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-8569AD"
-  },
-  {
-   "t": 1791428101000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "fl-agent-network-spec"
-  },
-  {
-   "t": 1791427922000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-FC9A6D"
-  },
-  {
-   "t": 1791427561000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "fl-standing-scope-mechanism"
-  },
-  {
-   "t": 1791427201000,
-   "acct": "A",
-   "cat": "ENGINE",
-   "code": "fl-reinvestment-engine"
-  },
-  {
-   "t": 1791427201000,
-   "acct": "A",
-   "cat": "OPS",
-   "code": "fl-spec-runway-monitor"
-  },
-  {
-   "t": 1791426841000,
-   "acct": "A",
-   "cat": "ENGINE",
-   "code": "fl-routine-funnel-numbers"
   }
  ]
 }

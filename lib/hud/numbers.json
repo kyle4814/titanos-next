@@ -1,46 +1,46 @@
 {
- "snapshot_ms": 1791458557000,
- "snapshot_ts": "2026-10-08T21:22:37",
- "facts_as_of": "2026-10-08",
+ "snapshot_ms": 1791482869000,
+ "snapshot_ts": "2026-10-09T04:07:49",
+ "facts_as_of": "2026-10-09",
  "rows": {
   "sloc": {
-   "value": 193924,
+   "value": 230797,
    "unit": "lines",
    "label": "MEASURED",
-   "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 4 repos, state/ corpus/ vendor/ excluded"
+   "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded"
   },
   "engineer_years": {
-   "value": 50.5,
+   "value": 60.6,
    "unit": "engineer-years",
    "label": "MODELLED",
    "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12"
   },
   "engineer_years_per_day_7d": {
-   "value": 1.67,
+   "value": 2.34,
    "unit": "engineer-years/day",
    "label": "MODELLED",
    "method": "COCOMO now minus COCOMO 7 day(s) ago, divided by 7"
   },
   "replacement_cost_aud": {
-   "value": 26322818,
+   "value": 31601734,
    "unit": "AU$",
    "label": "MODELLED",
    "method": "engineer-years x the engineering page's rate (44.1 ey ~ AU$23M); what a conventional team would charge, never revenue"
   },
   "fleet_jobs_24h": {
-   "value": 548,
+   "value": 1451,
    "unit": "jobs",
    "label": "MEASURED",
    "method": "ledger 'done' events in the last 24 h"
   },
   "fleet_fail_rate_24h": {
-   "value": 2.5,
+   "value": 1.1,
    "unit": "%",
    "label": "MEASURED",
    "method": "fail+stuck / (done+fail+stuck), last 24 h"
   },
   "fleet_worker_hours_24h": {
-   "value": 93.2,
+   "value": 195.7,
    "unit": "worker-hours",
    "label": "MEASURED",
    "method": "sum of start->done durations, last 24 h"
@@ -52,10 +52,10 @@
    "method": "median start->done, last 24 h"
   },
   "gate_suites": {
-   "value": 187,
+   "value": 189,
    "unit": "suites",
    "label": "MEASURED",
-   "method": "last full kernel gate (GREEN, 2026-10-08T21:03:06)"
+   "method": "last full kernel gate (GREEN, 2026-10-09T03:55:06)"
   }
  },
  "needle": {
@@ -92,19 +92,19 @@
    "method": "def test_ count in titanos; kernel verify suite count"
   },
   "estate": {
-   "text": "12 code repositories built since 4 May 2026: 226,892 lines of production code.",
+   "text": "12 code repositories built since 4 May 2026: 230,797 lines of production code.",
    "label": "MEASURED",
    "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded"
   },
   "estate_ey": {
-   "text": "Priced by the industry standard COCOMO model, that is 59.5 engineer-years of conventional engineering.",
+   "text": "Priced by the industry standard COCOMO model, that is 60.6 engineer-years of conventional engineering.",
    "label": "MODELLED",
-   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 226.9 KSLOC"
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 230.8 KSLOC"
   },
   "estate_cost": {
-   "text": "A conventional team would charge about AU$31 million to build it.",
+   "text": "A conventional team would charge about AU$31.6 million to build it.",
    "label": "MODELLED",
-   "method": "59.5 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)"
+   "method": "60.6 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)"
   }
  }
 }
