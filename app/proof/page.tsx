@@ -3,6 +3,7 @@ import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import ProofWall from "@/components/charts/ProofWall";
 
 const META_TITLE = "Proof: logs, timestamps and a replayable build | TITANOS";
 const META_DESC =
@@ -43,6 +44,7 @@ export default function Proof() {
         title="Check it yourself."
         sub="Every claim on this site rests on a base you can check: public code, timestamped test logs, and a build you can replay commit by commit. Bigger numbers elsewhere are maths on top of this, until weekly results confirm them."
       />
+      <ProofWall />
       <section style={SECTION}>
         <div style={WRAP}>
           <h2 style={H}>1. Public code, every change timestamped</h2>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import LoopOrbit from "@/components/charts/LoopOrbit";
 import { Block, NumberBlock, NextStep } from "@/components/SiteBlocks";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function LearningLoopPage() {
           source: "state/baseline/BASELINE_2026-10-08.json",
         }}
       />
+      <LoopOrbit />
       {STEPS.map(([a, b], i) => (
         <Block key={a} point={`${i + 1}. ${a}`}>{b}</Block>
       ))}

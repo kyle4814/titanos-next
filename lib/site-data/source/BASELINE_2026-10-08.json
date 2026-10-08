@@ -1,0 +1,237 @@
+{
+ "ts": "2026-10-08T12:52:57",
+ "rows": [
+  {
+   "vector": "Linux RAM used / available (GB)",
+   "baseline": "5.4 used (Vmmem 20.2 with Linux 5.4)",
+   "now": "2.65 used / 25.75 available of 28.39",
+   "kind": "MEASURED",
+   "source": "/proc/meminfo",
+   "note": ""
+  },
+  {
+   "vector": "vmmem MB",
+   "baseline": "20.2 GB (13.0 -> 7.4 after cache_trim)",
+   "now": "11760",
+   "kind": "MEASURED",
+   "source": "powershell.exe Get-Process vmmem",
+   "note": ""
+  },
+  {
+   "vector": "Windows available MB",
+   "baseline": "3 GB free of 31 (28/31 used)",
+   "now": "12548",
+   "kind": "MEASURED",
+   "source": "powershell.exe Win32_OperatingSystem",
+   "note": ""
+  },
+  {
+   "vector": "load 1m / 5m",
+   "baseline": "fleet allowed load 24 on 8 cores (84% CPU)",
+   "now": "8.02 / 12.43",
+   "kind": "MEASURED",
+   "source": "/proc/loadavg",
+   "note": "8 cores"
+  },
+  {
+   "vector": "cron job-hours/day (last 24 h)",
+   "baseline": "43.3 h/day of work",
+   "now": "32.84 h",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": "4686 runs"
+  },
+  {
+   "vector": "cron failure rate (last 24 h)",
+   "baseline": "snapshot job 256 of 287 runs failed (89%)",
+   "now": "773 of 4686 (16.5%)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "fleet jobs/hour (last 24 h)",
+   "baseline": "184 worker jobs/day (7.7/h)",
+   "now": "10.46",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": "251 finished"
+  },
+  {
+   "vector": "fleet fail rate (last 24 h)",
+   "baseline": "not recorded",
+   "now": "10 of 251 (4.0%)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "fleet median minutes/job",
+   "baseline": "not recorded",
+   "now": "6.0 min (n=233)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "US$/job and US$ today",
+   "baseline": "US$0.973/job (full doctrine); US$467/day",
+   "now": "US$1.037/job over 243 jobs; US$252.08 today",
+   "kind": "MEASURED",
+   "source": "bin/usage_meter.py today + ledger",
+   "note": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+  },
+  {
+   "vector": "worker start tokens (median)",
+   "baseline": "~215k tokens (doctrine loaded twice, 198 of 198 sessions)",
+   "now": "29,130 (52 sessions, 0 flagged)",
+   "kind": "MEASURED",
+   "source": "bin/context_audit.py",
+   "note": ""
+  },
+  {
+   "vector": "kernel gate wall (latest)",
+   "baseline": "not recorded pre-optimisation",
+   "now": "124 s (GREEN, 166 suites, jobs=8) at 2026-10-08T12:42:00",
+   "kind": "RECORDED",
+   "source": "state/verify_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "titanos suite wall (latest)",
+   "baseline": "timed out at 222 s in the nuke ping (never finished)",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/.titanos/titanos_suite.jsonl or /home/tech2/klinge-kernel/state/titanos_suite_runs.jsonl",
+   "note": "no durable record exists; ./run_all_tests.sh in ~/titanos does not log its wall time"
+  },
+  {
+   "vector": "hook PostToolUse[Write|Edit|MultiEdit]",
+   "baseline": "not recorded",
+   "now": "4 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "bash \"$HOME/klinge-kernel/bin/post_edit_format.sh\"",
+   "note": ""
+  },
+  {
+   "vector": "hook PreToolUse[Edit|Write]",
+   "baseline": "not recorded",
+   "now": "30 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "python3 -c \"import json,sys; d=json.load(sys.stdin); p=d.get",
+   "note": ""
+  },
+  {
+   "vector": "hook PreToolUse[Bash|Monitor]",
+   "baseline": "not recorded",
+   "now": "34 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "python3 \"$HOME/klinge-kernel/bin/payment_guard.py\"",
+   "note": ""
+  },
+  {
+   "vector": "hook SessionStart",
+   "baseline": "not recorded",
+   "now": "43 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "BRANCH=$(git branch --show-current 2>/dev/null || echo none)",
+   "note": ""
+  },
+  {
+   "vector": "hook Stop",
+   "baseline": "not recorded",
+   "now": "not timed (writes state / spawns work)",
+   "kind": "RECORDED",
+   "source": "nohup setsid bash \"$HOME/klinge-kernel/bin/mission_control_c",
+   "note": ""
+  },
+  {
+   "vector": "hook Stop",
+   "baseline": "not recorded",
+   "now": "not timed (writes state / spawns work)",
+   "kind": "RECORDED",
+   "source": "nohup setsid bash \"$HOME/klinge-kernel/bin/rolling_backup.sh",
+   "note": ""
+  },
+  {
+   "vector": "hook Stop",
+   "baseline": "not recorded",
+   "now": "not timed (writes state / spawns work)",
+   "kind": "RECORDED",
+   "source": "python3 \"$HOME/klinge-kernel/bin/reply_contract_hook.py\"",
+   "note": ""
+  },
+  {
+   "vector": "hook Stop",
+   "baseline": "not recorded",
+   "now": "42 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "python3 \"$HOME/klinge-kernel/bin/ask_ledger.py\" stop",
+   "note": ""
+  },
+  {
+   "vector": "hook UserPromptSubmit",
+   "baseline": "not recorded",
+   "now": "not timed (writes state / spawns work)",
+   "kind": "RECORDED",
+   "source": "python3 \"$HOME/klinge-kernel/bin/sacred_capture.py\"",
+   "note": ""
+  },
+  {
+   "vector": "hook UserPromptSubmit",
+   "baseline": "not recorded",
+   "now": "31 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "python3 -c \"import json;print(json.dumps({'hookSpecificOutpu",
+   "note": ""
+  },
+  {
+   "vector": "hook UserPromptSubmit",
+   "baseline": "not recorded",
+   "now": "39 ms (rc=0)",
+   "kind": "MEASURED",
+   "source": "python3 \"$HOME/klinge-kernel/bin/ask_ledger.py\" prompt",
+   "note": ""
+  },
+  {
+   "vector": "newest backup age (archive.log)",
+   "baseline": "not recorded",
+   "now": "40 min old",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/archive.log",
+   "note": ""
+  },
+  {
+   "vector": "newest bundle age",
+   "baseline": "bundle step 51 s/run, 492 files / 204 MB in OneDrive",
+   "now": "165.1 h old",
+   "kind": "MEASURED",
+   "source": "~/.titanos/backups + state/bundles",
+   "note": ""
+  },
+  {
+   "vector": "OneDrive archive status",
+   "baseline": "OneDrive tracking 235,274 files, 19.4 h/day mirror",
+   "now": "last OK 40 min ago",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/archive_onedrive.lastok",
+   "note": ""
+  },
+  {
+   "vector": "disk use /",
+   "baseline": "not recorded",
+   "now": "27.8% (300 of 1081 GB)",
+   "kind": "MEASURED",
+   "source": "statvfs /",
+   "note": ""
+  },
+  {
+   "vector": "disk use /mnt/c",
+   "baseline": "not recorded",
+   "now": "56.0% (559 of 1000 GB)",
+   "kind": "MEASURED",
+   "source": "statvfs /mnt/c",
+   "note": ""
+  }
+ ]
+}

@@ -10,6 +10,9 @@ import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import { STATS } from "@/lib/stats";
 import HeroScrollCue from "@/components/HeroScrollCue";
+import CostCurve from "@/components/charts/CostCurve";
+import LoopOrbit from "@/components/charts/LoopOrbit";
+import ProofWall from "@/components/charts/ProofWall";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import JourneySteps from "@/components/JourneySteps";
 import TierQuiz from "@/components/TierQuiz";
@@ -331,6 +334,11 @@ export default function Home() {
       </SectionReveal>
 
       <HeroScrollCue />
+
+      {/* W4: live charts from lib/site-data/proof.json (generated), the loop orbit, the proof wall */}
+      <CostCurve />
+      <LoopOrbit />
+      <ProofWall />
 
       {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
       <Bluf replaced>
