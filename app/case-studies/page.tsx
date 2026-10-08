@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import { CASES } from "@/lib/caseStudies";
+import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 
 const META_TITLE = "Case studies | TITANOS";
 const META_DESC =
@@ -26,6 +27,37 @@ export default function CaseStudies() {
         sub="Each case study is a real build, with its speed, its cost and how it was tested. Names stay private."
       />
       <section style={SECTION}>
+        {arianceVisible && (
+          <a
+            href={ariancePath}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              maxWidth: 960,
+              margin: "0 auto 18px",
+              textDecoration: "none",
+              background: "var(--card)",
+              border: "1px solid var(--gold-dim)",
+              borderRadius: "var(--radius-md)",
+              overflow: "hidden",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={ARIANCE.cover.src}
+              alt={ARIANCE.cover.alt}
+              style={{ width: "100%", height: "100%", minHeight: 260, objectFit: "cover", objectPosition: "top", display: "block" }}
+            />
+            <div style={{ padding: "22px 24px" }}>
+              <div style={{ color: "var(--gold)", fontSize: 13, letterSpacing: 1, textTransform: "uppercase" }}>
+                Hero case study · {ARIANCE.sector}
+              </div>
+              <h2 style={{ color: "var(--ice)", fontSize: 24, margin: "8px 0 10px" }}>{ARIANCE.title}</h2>
+              <p style={{ color: "var(--ice)", opacity: 0.85, fontSize: 15, lineHeight: 1.6, margin: 0 }}>{ARIANCE.teaser}</p>
+              <div style={{ color: "var(--gold)", marginTop: 14, fontSize: 15 }}>Read the case study →</div>
+            </div>
+          </a>
+        )}
         <div
           style={{
             maxWidth: 960,

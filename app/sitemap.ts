@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { POSTS } from "@/lib/blog";
 import { ALL_OFFERS } from "@/lib/offers";
+import { arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 
 // Next 16 + output: 'export' requires sitemap routes to explicitly opt
 // into static generation. Without this, build fails at page-data
@@ -11,7 +12,12 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://titanos.tech";
 
+  const ariance: MetadataRoute.Sitemap = arianceVisible
+    ? [{ url: `${base}${ariancePath}`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 }]
+    : [];
+
   return [
+    ...ariance,
     {
       url: `${base}/`,
       lastModified: new Date(),
