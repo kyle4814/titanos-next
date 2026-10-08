@@ -38,8 +38,12 @@ export default function FinderLauncher() {
   return (
     <>
       {!open && (
-        <button ref={btnRef} type="button" className="finder-fab" onClick={() => setOpen(true)} aria-haspopup="dialog">
-          Find my offer
+        <button ref={btnRef} type="button" className="finder-fab" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label="Find my offer">
+          <svg className="finder-fab-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="2" />
+            <path d="M13 13l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <span className="finder-fab-label">Find my offer</span>
         </button>
       )}
       {(
@@ -56,13 +60,17 @@ export default function FinderLauncher() {
       <style>{`
         .finder-sheet[hidden] { display: none; }
         .finder-fab { position: fixed; right: 20px; bottom: 20px; z-index: 45; min-height: 44px; padding: 10px 20px; background: var(--gold); color: var(--vault-black, #0a0a0a); border: 1px solid var(--gold); border-radius: 999px; font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 18px rgb(0 0 0 / 0.5); }
+        .finder-fab { display: inline-flex; align-items: center; gap: 8px; }
+        .finder-fab-icon { display: none; }
         .finder-fab:focus-visible, .finder-close:focus-visible { outline: 3px solid var(--gold-bright, #F5D575); outline-offset: 3px; }
         .finder-sheet { position: fixed; right: 20px; bottom: 20px; z-index: 60; width: min(440px, calc(100vw - 24px)); max-height: min(78vh, 720px); display: flex; flex-direction: column; background: var(--vault-black, #0b0908); border: 1px solid var(--gold-dim); border-radius: var(--radius-lg); box-shadow: 0 10px 40px rgb(0 0 0 / 0.7); }
         .finder-sheet-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gold-dim); color: var(--gold); }
         .finder-close { min-height: 44px; padding: 6px 14px; background: transparent; color: var(--ice); border: 1px solid var(--gold-dim); border-radius: 999px; font: inherit; cursor: pointer; }
         .finder-sheet-body { overflow-y: auto; padding: 14px 16px 18px; }
         @media (max-width: 720px) {
-          .finder-fab { right: 12px; bottom: calc(76px + env(safe-area-inset-bottom)); min-height: 44px; padding: 8px 14px; font-size: 0.85rem; }
+          .finder-fab { right: 8px; bottom: calc(76px + env(safe-area-inset-bottom)); width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; opacity: 0.94; }
+          .finder-fab-icon { display: block; }
+          .finder-fab-label { display: none; }
           body { padding-bottom: 72px; }
           .finder-sheet { left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-height: 86vh; }
         }

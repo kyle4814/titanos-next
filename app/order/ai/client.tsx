@@ -134,7 +134,7 @@ export default function OrderAiClient() {
           placeholder="e.g. HubSpot, Xero, Gmail, our internal PostgreSQL database, Slack…"
         />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))", gap: 14 }}>
           <SelectField label="Approximate budget" name="scope_budget" options={BUDGETS} />
           <SelectField label="Timeline" name="scope_timeline" options={TIMELINES} />
         </div>

@@ -179,7 +179,7 @@ export default function OfferFinder({ compact = false }: { compact?: boolean }) 
         .bubble.me { background: rgb(var(--gold-rgb) / 0.14); border: 1px solid var(--gold-dim); color: var(--ice); align-self: flex-end; }
         .bubble:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
         .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-        .chip { min-height: 44px; padding: 8px 16px; background: transparent; color: var(--ice); border: 1px solid var(--gold-dim); border-radius: 999px; font: inherit; font-size: var(--fs-sm); cursor: pointer; text-align: left; }
+        .chip { min-height: 44px; padding: 8px 16px; background: transparent; color: var(--ice); border: 1px solid var(--gold-dim); border-radius: 22px; font: inherit; font-size: var(--fs-sm); cursor: pointer; text-align: left; }
         .chip:hover { border-color: var(--gold); color: var(--gold); }
         .chip:focus-visible, .btn:focus-visible, .finder input:focus-visible, .also summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
         .textrow { display: flex; gap: 8px; }
