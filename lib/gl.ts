@@ -12,7 +12,9 @@ export function lowPower(): boolean {
   );
 }
 
-export function getGL(canvas: HTMLCanvasElement): WebGLRenderingContext | null {
+/** `onLost` fires on webglcontextlost (default prevented so restore is possible); callers fall back to the poster. */
+export function getGL(canvas: HTMLCanvasElement, onLost?: () => void): WebGLRenderingContext | null {
+  if (onLost) canvas.addEventListener("webglcontextlost", (e) => { e.preventDefault(); onLost(); }, { once: true });
   return canvas.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: true, powerPreference: "low-power" }) as WebGLRenderingContext | null;
 }
 
@@ -42,6 +44,16 @@ export function fullscreenTriangle(gl: WebGLRenderingContext, p: WebGLProgram) {
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 }
+
+/** Re-reads the canvas box only when a ResizeObserver says it changed (no layout read every frame). */
+export function sizer(canvas: HTMLCanvasElement, scale: number) {
+  let dirty = true;
+  const ro = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(() => { dirty = true; });
+  ro?.observe(canvas);
+  return { fit() { if (dirty || !ro) { dirty = false; fit(canvas, scale); } }, off() { ro?.disconnect(); } };
+}
+
+export const isSmall = (): boolean => typeof window !== "undefined" && window.innerWidth < 800;
 
 export function fit(canvas: HTMLCanvasElement, scale: number) {
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5) * scale;

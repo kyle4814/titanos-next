@@ -3,20 +3,26 @@ import SectionReveal from "@/components/SectionReveal";
 import InView from "./InView";
 import "./charts.css";
 
+const LINE_H = 40;
 type Chart = (typeof proof.charts)[number];
 
 function Bars({ c, big = false }: { c: Pick<Chart, "beforeText" | "afterText" | "beforePct" | "afterPct">; big?: boolean }) {
   return (
     <div className={big ? "w4-bars w4-bars--big" : "w4-bars"}>
+      {big && (
+        <svg className="w4-line" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+          <polyline className="w4-draw" pathLength={1} points={[[0, LINE_H - c.beforePct * LINE_H / 100], [100, LINE_H - c.afterPct * LINE_H / 100]].map((q) => q.join(",")).join(" ")} />
+        </svg>
+      )}
       <div className="w4-bar-row">
         <span className="w4-bar-name">Before</span>
         <span className="w4-bar-track"><span className="w4-bar w4-bar--before" style={{ ["--w" as string]: `${c.beforePct}%` }} /></span>
-        <span className="w4-bar-val">{c.beforeText}</span>
+        <span className="w4-bar-val" data-count>{c.beforeText}</span>
       </div>
       <div className="w4-bar-row">
         <span className="w4-bar-name">Now</span>
         <span className="w4-bar-track"><span className="w4-bar w4-bar--after" style={{ ["--w" as string]: `${c.afterPct}%` }} /></span>
-        <span className="w4-bar-val">{c.afterText}</span>
+        <span className="w4-bar-val" data-count>{c.afterText}</span>
       </div>
     </div>
   );
@@ -24,7 +30,7 @@ function Bars({ c, big = false }: { c: Pick<Chart, "beforeText" | "afterText" | 
 
 function Card({ c }: { c: Chart }) {
   return (
-    <article className="w4-card" data-w4-chart={c.id}>
+    <article className="w4-card" data-phi-reveal data-w4-chart={c.id}>
       <h3>{c.title}</h3>
       <Bars c={c} />
       <p className="w4-factor" data-better={c.improved ? "yes" : "no"}>{c.factorText}</p>
@@ -48,17 +54,17 @@ export default function CostCurve() {
         <p className="w4-eyebrow">THE COST CURVE</p>
         <h2 className="w4-h2">We did not buy a bigger machine. We changed the system.</h2>
 
-        <div className="w4-hero-chart" data-w4-chart={h.id}>
+        <div className="w4-hero-chart" data-phi-reveal data-w4-chart={h.id}>
           <p className="w4-hero-title">{h.titleText}</p>
           <Bars c={h} big />
-          <p className="w4-factor w4-factor--big">{h.factorText}</p>
+          <p className="w4-factor w4-factor--big" data-count>{h.factorText}</p>
           <p className="w4-note">{h.analogy}</p>
           <p className="w4-meta">
             <span className="w4-chip" data-label={h.label}>{h.label}</span> {h.date} · {h.caption} · {h.source}
           </p>
         </div>
 
-        <aside className="w4-second-look" data-w4-chart="fleet_cost">
+        <aside className="w4-second-look" data-phi-reveal data-w4-chart="fleet_cost">
           <h3>The honest second look</h3>
           <p>
             Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.

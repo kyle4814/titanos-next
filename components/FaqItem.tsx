@@ -21,6 +21,7 @@ export default function FaqItem({
   const [open, setOpen] = useState(false);
   return (
     <div
+      data-phi-reveal
       style={{
         background: "var(--card)",
         border: `1px solid ${open ? "var(--gold-dim)" : "var(--border)"}`,

@@ -8,17 +8,16 @@
  */
 import { useEffect, useRef } from "react";
 import { PHI } from "@/lib/phi";
-import { fit, fullscreenTriangle, getGL, loop, lowPower, program } from "@/lib/gl";
+import { fullscreenTriangle, getGL, isSmall, loop, lowPower, program, sizer } from "@/lib/gl";
 import { FULLSCREEN_VS, JULIA_FS, KNOT_FS, KNOT_VS } from "@/lib/shaders";
 
 const POINTS = 7000;
 
-/** Timeline in seconds (phi steps): hold 0.62, starfield -> braid 1.62, hold 1, braid -> knot 1.62. */
-function progress(t: number): number {
-  const a = Math.min(Math.max((t - 0.62) / 1.62, 0), 1);
-  const b = Math.min(Math.max((t - 0.62 - 1.62 - 1) / 1.62, 0), 1);
-  return a + b;
-}
+const clamp01 = (x: number) => Math.min(Math.max(x, 0), 1);
+
+/** uProg 0..2 = starfield -> braid -> knot. Intro (phi steps: hold 0.62, then 1.62 s) plays starfield -> braid by time; braid -> knot is
+ *  scrubbed by scroll across 90% of the hero height ("scroll = time"). When the page cannot scroll (short document) it falls back to time. */
+function timeHalf(t: number, from: number): number { return clamp01((t - from) / 1.62); }
 
 export default function HeroStage() {
   const julia = useRef<HTMLCanvasElement>(null);
@@ -34,7 +33,8 @@ export default function HeroStage() {
 
     const start = () => {
       if (cancelled) return;
-      const jg = getGL(jc), sg = getGL(sc);
+      const lost = () => { stop?.(); hero.classList.remove("is-live"); };
+      const jg = getGL(jc, lost), sg = getGL(sc, lost);
       if (!jg || !sg) return;
       const jp = program(jg, FULLSCREEN_VS, JULIA_FS);
       const sp = program(sg, KNOT_VS, KNOT_FS);
@@ -63,12 +63,15 @@ export default function HeroStage() {
       sg.enable(sg.BLEND);
       sg.blendFunc(sg.ONE, sg.ONE);
 
-      const small = window.innerWidth < 800;
+      const small = isSmall();
+      const jz = sizer(jc, small ? 0.3 : 0.4), sz = sizer(sc, small ? 0.8 : 1);
+      const canScroll = () => document.documentElement.scrollHeight > window.innerHeight * 1.2;
+      let scrub = 0;
       let live = false;
 
-      stop = loop(hero, (t) => {
-        fit(jc, small ? 0.3 : 0.4);
-        fit(sc, small ? 0.8 : 1);
+      const lp = loop(hero, (t, dt) => {
+        jz.fit();
+        sz.fit();
         jg.viewport(0, 0, jc.width, jc.height);
         jg.uniform2f(jRes, jc.width, jc.height);
         jg.uniform1f(jTime, t);
@@ -78,7 +81,9 @@ export default function HeroStage() {
         sg.clearColor(0, 0, 0, 0);
         sg.clear(sg.COLOR_BUFFER_BIT);
         const aspect = sc.width / sc.height;
-        sg.uniform1f(uProg, progress(t));
+        const goal = canScroll() ? clamp01(window.scrollY / (hero.clientHeight * 0.9)) : timeHalf(t, 0.62 + 1.62 + 1);
+        scrub += (goal - scrub) * (1 - Math.exp(-dt * 6));
+        sg.uniform1f(uProg, timeHalf(t, 0.62) + scrub);
         sg.uniform1f(uTime, t);
         sg.uniform1f(uAspect, aspect);
         // The knot sits in the 38.2% side on wide screens, centred behind the copy on phones.
@@ -88,9 +93,10 @@ export default function HeroStage() {
         sg.drawArrays(sg.POINTS, 0, POINTS);
         if (!live) { live = true; hero.classList.add("is-live"); }
       }, {
-        fps: 60,
+        fps: small ? 30 : 60,
         onSlow: () => hero.classList.remove("is-live"),
       });
+      stop = () => { lp(); jz.off(); sz.off(); };
     };
 
     // Let the poster paint (LCP) first; the shader fades in after.

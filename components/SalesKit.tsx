@@ -144,6 +144,7 @@ export function Analogy({ k }: { k: AnalogyKey }) {
   const a = ANALOGIES[k];
   return (
     <div
+      data-phi-reveal
       style={{
         maxWidth: "var(--maxw-prose)",
         margin: "0 auto",
@@ -217,6 +218,7 @@ export function Pillars({ title = "What changes for you" }: { title?: string }) 
           {PILLARS.map((p, i) => (
             <div
               key={p.head}
+              data-phi-reveal
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--border)",

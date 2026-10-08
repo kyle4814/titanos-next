@@ -29,12 +29,16 @@ export default function MotionLayer() {
       gsap.ticker.lagSmoothing(0);
 
       const ctx = gsap.context(() => {
-        gsap.utils.toArray<HTMLElement>("[data-phi-reveal]").forEach((el) => {
-          gsap.from(el, {
-            y: 26, opacity: 0, duration: DUR.base, ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        // Below-the-fold [data-phi-reveal] elements start hidden and rise in batches (staggered) as they enter; anything already on
+        // screen is left alone so there is no flash. If this never runs (no JS, reduced motion) the content simply stays visible.
+        const items = gsap.utils.toArray<HTMLElement>("[data-phi-reveal]").filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.85);
+        if (items.length) {
+          gsap.set(items, { y: 26, opacity: 0 });
+          ScrollTrigger.batch(items, {
+            start: "top 88%", once: true,
+            onEnter: (b) => gsap.to(b, { y: 0, opacity: 1, duration: DUR.base, ease: "power3.out", stagger: 0.08, overwrite: true, clearProps: "transform,opacity" }),
           });
-        });
+        }
         const copy = document.querySelector<HTMLElement>(".ds-hero__col");
         if (copy) {
           gsap.to(copy, {

@@ -53,7 +53,7 @@ const TIERS = [
     price: DISPLAY.AI_OPS_PARTNER,
     who: "For growing businesses scaling their operations",
     body: "Multiple systems, automations across your core ops, reporting and dashboards, continuous improvement month over month.",
-    popular: true,
+    popular: false,
   },
   {
     tier: "embedded",

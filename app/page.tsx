@@ -66,7 +66,7 @@ const offers: Offer[] = [
     index: 0,
   },
   {
-    tag: "Most popular",
+    tag: "AI Ops Partner",
     title: "AI Ops Partner",
     price: DISPLAY.AI_OPS_PARTNER,
     priceUnit: DISPLAY.AI_RETAINER_MIN,
@@ -81,7 +81,6 @@ const offers: Offer[] = [
     secondary: { label: "See AI Partnership", href: "/ai-delivery" },
     icon: "shield",
     index: 1,
-    popular: true,
   },
   {
     tag: "Embedded AI Partner",
@@ -305,6 +304,7 @@ export default function Home() {
         style={{ padding: "24px 20px 40px", position: "relative", zIndex: 2 }}
       >
         <div
+          data-phi-reveal
           className="trust-bar"
           style={{
             maxWidth: "var(--maxw-wide)",
@@ -417,7 +417,6 @@ export default function Home() {
           <TierQuiz />
           <div className="grid-doors" style={{ maxWidth: "var(--maxw-wide)", margin: "24px auto 0" }}>
             {offers.map((o) => {
-              const isFlagship = o.popular;
               const tierSlug = new URL(o.primary.href, "https://titanos.tech").searchParams.get("tier") ?? "";
               return (
                 <div
@@ -426,36 +425,9 @@ export default function Home() {
                   style={{
                     position: "relative",
                     height: "100%",
-                    boxShadow: isFlagship
-                      ? "0 0 0 1px var(--gold-dim), 0 20px 60px -20px rgb(var(--gold-rgb) / 0.25)"
-                      : undefined,
                     borderRadius: "var(--radius-md)",
                   }}
                 >
-                  {isFlagship && (
-                    <span
-                      className="offer-popular-badge"
-                      style={{
-                        position: "absolute",
-                        top: -12,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        zIndex: 3,
-                        color: "var(--vault-black)",
-                        fontFamily: "var(--font-body), system-ui, sans-serif",
-                        fontSize: "0.72rem",
-                        fontWeight: 700,
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        padding: "5px 14px",
-                        borderRadius: 999,
-                        whiteSpace: "nowrap",
-                        boxShadow: "0 4px 14px rgb(0 0 0 / 0.4)",
-                      }}
-                    >
-                      Most popular
-                    </span>
-                  )}
                   <OfferCard {...o} />
                 </div>
               );
@@ -476,7 +448,7 @@ export default function Home() {
 
           <div className="ladder-grid">
             {LADDER.map((band) => (
-              <div key={band.name} className="ladder-band">
+              <div key={band.name} className="ladder-band" data-phi-reveal>
                 <div className="ladder-band-head">
                   <div>
                     <div className="ladder-band-name">{band.name}</div>
@@ -528,6 +500,7 @@ export default function Home() {
             {WHAT_WE_BUILD.map((w) => (
               <div
                 key={w.title}
+                data-phi-reveal
                 style={{
                   background: "var(--card)",
                   border: "1px solid var(--border)",
@@ -653,6 +626,7 @@ export default function Home() {
             The doctrine behind the delivery
           </p>
           <h2
+            data-phi-reveal
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
               fontWeight: 400,

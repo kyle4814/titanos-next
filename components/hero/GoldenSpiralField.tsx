@@ -2,7 +2,7 @@
 
 /** Fibonacci / golden-angle (137.5 degree) particle field for the loop section. Paused off-screen. */
 import { useEffect, useRef } from "react";
-import { fit, getGL, loop, lowPower, program } from "@/lib/gl";
+import { getGL, isSmall, loop, lowPower, program, sizer } from "@/lib/gl";
 import { SPIRAL_FS, SPIRAL_VS } from "@/lib/shaders";
 
 const N = 1600;
@@ -14,7 +14,8 @@ export default function GoldenSpiralField() {
   useEffect(() => {
     const c = cv.current, b = box.current;
     if (!c || !b || lowPower()) return;
-    const gl = getGL(c);
+    let stop: (() => void) | undefined;
+    const gl = getGL(c, () => { stop?.(); c.style.display = "none"; });
     if (!gl) return;
     const p = program(gl, SPIRAL_VS, SPIRAL_FS);
     if (!p) return;
@@ -29,8 +30,9 @@ export default function GoldenSpiralField() {
     const uTime = gl.getUniformLocation(p, "uTime"), uAspect = gl.getUniformLocation(p, "uAspect"), uN = gl.getUniformLocation(p, "uN");
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE);
-    return loop(b, (t) => {
-      fit(c, 1);
+    const sz = sizer(c, 1);
+    const lp = loop(b, (t) => {
+      sz.fit();
       gl.viewport(0, 0, c.width, c.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -38,7 +40,9 @@ export default function GoldenSpiralField() {
       gl.uniform1f(uAspect, c.width / c.height);
       gl.uniform1f(uN, N);
       gl.drawArrays(gl.POINTS, 0, N);
-    });
+    }, { fps: isSmall() ? 30 : 60 });
+    stop = () => { lp(); sz.off(); };
+    return stop;
   }, []);
 
   return (

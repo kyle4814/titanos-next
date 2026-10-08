@@ -4,7 +4,11 @@ const PHI = "1.6180339887";
 export const FULLSCREEN_VS = `attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*0.5+0.5; gl_Position = vec4(aPos,0.,1.); }`;
 
 /** Slowly orbiting Julia set: the "galactic fractal" behind the hero. c orbits on a small circle near the Julia boundary. */
-export const JULIA_FS = `precision mediump float;
+export const JULIA_FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 varying vec2 vUv; uniform vec2 uRes; uniform float uTime;
 void main(){
   vec2 p = (vUv - 0.5) * vec2(uRes.x/uRes.y, 1.0) * 2.6;
@@ -63,7 +67,11 @@ void main(){
   vHue = mix(aSeed.y, t, a);
 }`;
 
-export const KNOT_FS = `precision mediump float;
+export const KNOT_FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 varying float vGlow; varying float vHue;
 void main(){
   vec2 d = gl_PointCoord - 0.5;
@@ -77,7 +85,11 @@ void main(){
 }`;
 
 /** Void portal: domain-warped log spiral, dark core, gold accretion edge. */
-export const PORTAL_FS = `precision mediump float;
+export const PORTAL_FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 varying vec2 vUv; uniform vec2 uRes; uniform float uTime;
 void main(){
   vec2 p = (vUv - 0.5) * vec2(uRes.x/uRes.y, 1.0) * 2.0;
@@ -113,7 +125,11 @@ void main(){
   vA = (0.25 + 0.75*(1.0-rad)) * tw;
 }`;
 
-export const SPIRAL_FS = `precision mediump float;
+export const SPIRAL_FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 varying float vA;
 void main(){
   vec2 d = gl_PointCoord - 0.5;

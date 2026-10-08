@@ -16,7 +16,7 @@ export default function SectionHeading({
   sigilIndex?: number;
 }) {
   return (
-    <div style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
+    <div data-phi-reveal style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
       <SigilMark index={sigilIndex} />
       <h2
         style={{

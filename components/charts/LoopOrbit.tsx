@@ -1,9 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { proof } from "@/lib/site-data/proofLive";
 import "./charts.css";
 
+const GoldenSpiralField = dynamic(() => import("@/components/hero/GoldenSpiralField"), { ssr: false });
 const STARS = new Map(proof.stars.map((s) => [s.id, s]));
 
 export default function LoopOrbit() {
@@ -13,6 +15,7 @@ export default function LoopOrbit() {
   const rc = STARS.get(node.receipt)!;
   return (
     <section id="loop" className="w4-wrap w4-loop" aria-labelledby="w4-loop-h" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <div className="w4-spiral-bg" aria-hidden="true"><GoldenSpiralField /></div>
       <p className="w4-eyebrow">THE LEARNING LOOP</p>
       <h2 id="w4-loop-h" className="w4-h2">Every turn of the loop leaves a receipt.</h2>
       <div className="w4-loop-grid">

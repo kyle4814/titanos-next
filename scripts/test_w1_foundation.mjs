@@ -15,7 +15,7 @@ for (const [t, v] of [["--phi-t0", "1rem"], ["--phi-dur-1", "0.38s"], ["--phi-du
 ok(/38\.2%/.test(css) && /61\.8%/.test(css), "hero uses the golden split (61.8 / 38.2)");
 ok(/prefers-reduced-motion/.test(css), "design system handles prefers-reduced-motion");
 const hero = r("components/hero/Hero.tsx");
-ok(hero.includes("44 engineer-years of output in 4 months."), "hero headline is the locked 44 engineer-years line, exactly");
+ok(hero.includes('{dec("estate_ey")} engineer-years of output in') && !/>\s*44 engineer-years/.test(hero), "hero headline reads its engineer-years figure from the ledger (one figure site-wide)");
 ok(/HERO_STRIP/.test(hero) && /cost_job_before/.test(hero) && /tests_main/.test(hero) && !/230 jobs/.test(hero), "hero strip and sub-line read from the ledger (no hand-typed receipts, no 230 jobs)");
 ok((hero.match(/className="ds-cta"/g) || []).length === 1, "hero has exactly one CTA");
 ok(!/[–—]/.test(hero), "hero copy has no em/en dashes");

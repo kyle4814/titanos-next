@@ -29,6 +29,7 @@ export default function JourneySteps() {
       {STEPS.map((s, i) => (
         <div
           key={s.num}
+          data-phi-reveal
           style={{
             position: "relative",
             padding: "22px 24px",

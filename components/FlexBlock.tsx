@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 export function FlexNumber({ f }: { f: Flex }) {
   return (
     <figure
+      data-phi-reveal
       style={{
         margin: 0,
         background: "var(--card)",
@@ -43,7 +44,7 @@ export function FlexGrid({ items }: { items: Flex[] }) {
 export function OpenLoop({ children }: { children: React.ReactNode }) {
   return (
     <SectionReveal style={{ padding: "var(--space-8, 40px) 20px 0", position: "relative", zIndex: 2 }}>
-      <p style={{ color: "var(--gold)", fontStyle: "italic", fontFamily: "var(--font-display), Georgia, serif", fontSize: "var(--fs-lg)", textAlign: "center", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.6 }}>
+      <p data-phi-reveal style={{ color: "var(--gold)", fontStyle: "italic", fontFamily: "var(--font-display), Georgia, serif", fontSize: "var(--fs-lg)", textAlign: "center", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.6 }}>
         {children}
       </p>
     </SectionReveal>
