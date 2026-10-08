@@ -1,19 +1,19 @@
 import dynamic from "next/dynamic";
 import PhiWordmark from "./PhiWordmark";
+import SpaceImage from "@/components/SpaceImage";
+import { HERO_IMAGE_ID } from "@/lib/space-images";
 
 // ssr:false needs a client boundary; HeroStage is itself "use client", loaded as its own chunk after hydration.
 const HeroStage = dynamic(() => import("./HeroStage"));
 
-/** WEBSITE 1000X hero: starfield to braid to knot. Server-rendered poster + copy are the LCP; the WebGL layer
+/** WEBSITE 1000X hero: starfield to braid to knot. Server-rendered poster (real NASA/JPL imagery, AVIF/WebP, under 200 KB) + copy are the LCP; the WebGL layer
  *  mounts after idle. One CTA. Sub-line carries the 8 Oct 2026 receipts. */
 export default function Hero() {
   return (
     <section className="ds-hero" aria-labelledby="ds-hero-h">
-      <picture className="ds-hero__poster">
-        <source media="(max-width: 800px)" srcSet="/hero/poster-m.webp" />
-        <img src="/hero/poster-d.webp" alt="" width={1440} height={900} fetchPriority="high" decoding="async" />
-      </picture>
+      <SpaceImage id={HERO_IMAGE_ID} className="ds-hero__poster" sizes="100vw" priority alt="" />
       <HeroStage />
+      <a className="ds-hero__credit" href="/credits#nasa-black-hole-jet">Image: NASA/JPL-Caltech, artist's concept</a>
       <div className="ds-hero__copy">
         <div className="ds-hero__col">
           <div className="ds-hero__enter"><PhiWordmark height={26} /></div>

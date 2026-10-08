@@ -44,6 +44,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "The learning loop", href: "/learning-loop" },
       { label: "Security and privacy", href: "/security" },
       { label: "FAQ", href: "/faq" },
+      { label: "The deep field", href: "/deep-field" },
       { label: "Image credits", href: "/credits" },
     ],
   },

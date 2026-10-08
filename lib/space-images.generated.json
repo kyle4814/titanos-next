@@ -1,0 +1,821 @@
+[
+ {
+  "id": "webb-deep-field",
+  "width": 3920,
+  "height": 4000,
+  "files": [
+   {
+    "w": 480,
+    "h": 490,
+    "fmt": "avif",
+    "bytes": 17556,
+    "name": "webb-deep-field-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 490,
+    "fmt": "webp",
+    "bytes": 20676,
+    "name": "webb-deep-field-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 980,
+    "fmt": "avif",
+    "bytes": 40251,
+    "name": "webb-deep-field-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 980,
+    "fmt": "webp",
+    "bytes": 52330,
+    "name": "webb-deep-field-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1469,
+    "fmt": "avif",
+    "bytes": 66051,
+    "name": "webb-deep-field-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1469,
+    "fmt": "webp",
+    "bytes": 90490,
+    "name": "webb-deep-field-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1959,
+    "fmt": "avif",
+    "bytes": 92572,
+    "name": "webb-deep-field-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1959,
+    "fmt": "webp",
+    "bytes": 134426,
+    "name": "webb-deep-field-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "webb-tarantula",
+  "width": 4000,
+  "height": 2313,
+  "files": [
+   {
+    "w": 480,
+    "h": 278,
+    "fmt": "avif",
+    "bytes": 14354,
+    "name": "webb-tarantula-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 278,
+    "fmt": "webp",
+    "bytes": 18132,
+    "name": "webb-tarantula-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 555,
+    "fmt": "avif",
+    "bytes": 48154,
+    "name": "webb-tarantula-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 555,
+    "fmt": "webp",
+    "bytes": 60766,
+    "name": "webb-tarantula-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 833,
+    "fmt": "avif",
+    "bytes": 95275,
+    "name": "webb-tarantula-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 833,
+    "fmt": "webp",
+    "bytes": 126904,
+    "name": "webb-tarantula-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1110,
+    "fmt": "avif",
+    "bytes": 155013,
+    "name": "webb-tarantula-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1110,
+    "fmt": "webp",
+    "bytes": 204350,
+    "name": "webb-tarantula-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "webb-cosmic-cliffs",
+  "width": 4000,
+  "height": 2317,
+  "files": [
+   {
+    "w": 480,
+    "h": 278,
+    "fmt": "avif",
+    "bytes": 18230,
+    "name": "webb-cosmic-cliffs-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 278,
+    "fmt": "webp",
+    "bytes": 22508,
+    "name": "webb-cosmic-cliffs-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 556,
+    "fmt": "avif",
+    "bytes": 60971,
+    "name": "webb-cosmic-cliffs-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 556,
+    "fmt": "webp",
+    "bytes": 75140,
+    "name": "webb-cosmic-cliffs-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 834,
+    "fmt": "avif",
+    "bytes": 113906,
+    "name": "webb-cosmic-cliffs-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 834,
+    "fmt": "webp",
+    "bytes": 147738,
+    "name": "webb-cosmic-cliffs-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1112,
+    "fmt": "avif",
+    "bytes": 171196,
+    "name": "webb-cosmic-cliffs-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1112,
+    "fmt": "webp",
+    "bytes": 225604,
+    "name": "webb-cosmic-cliffs-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "webb-pillars",
+  "width": 2309,
+  "height": 4000,
+  "files": [
+   {
+    "w": 480,
+    "h": 832,
+    "fmt": "avif",
+    "bytes": 76746,
+    "name": "webb-pillars-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 832,
+    "fmt": "webp",
+    "bytes": 93602,
+    "name": "webb-pillars-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 1663,
+    "fmt": "avif",
+    "bytes": 297497,
+    "name": "webb-pillars-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 1663,
+    "fmt": "webp",
+    "bytes": 362354,
+    "name": "webb-pillars-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 2495,
+    "fmt": "avif",
+    "bytes": 594211,
+    "name": "webb-pillars-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 2495,
+    "fmt": "webp",
+    "bytes": 731260,
+    "name": "webb-pillars-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 3326,
+    "fmt": "avif",
+    "bytes": 937212,
+    "name": "webb-pillars-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 3326,
+    "fmt": "webp",
+    "bytes": 1145212,
+    "name": "webb-pillars-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "hubble-pillars",
+  "width": 3835,
+  "height": 4000,
+  "files": [
+   {
+    "w": 480,
+    "h": 501,
+    "fmt": "avif",
+    "bytes": 12877,
+    "name": "hubble-pillars-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 501,
+    "fmt": "webp",
+    "bytes": 16832,
+    "name": "hubble-pillars-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 1001,
+    "fmt": "avif",
+    "bytes": 32699,
+    "name": "hubble-pillars-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 1001,
+    "fmt": "webp",
+    "bytes": 46402,
+    "name": "hubble-pillars-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1502,
+    "fmt": "avif",
+    "bytes": 55694,
+    "name": "hubble-pillars-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1502,
+    "fmt": "webp",
+    "bytes": 86332,
+    "name": "hubble-pillars-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 2003,
+    "fmt": "avif",
+    "bytes": 86755,
+    "name": "hubble-pillars-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 2003,
+    "fmt": "webp",
+    "bytes": 142868,
+    "name": "hubble-pillars-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "hubble-bubble",
+  "width": 4000,
+  "height": 3799,
+  "files": [
+   {
+    "w": 480,
+    "h": 456,
+    "fmt": "avif",
+    "bytes": 7839,
+    "name": "hubble-bubble-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 456,
+    "fmt": "webp",
+    "bytes": 10794,
+    "name": "hubble-bubble-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 912,
+    "fmt": "avif",
+    "bytes": 21743,
+    "name": "hubble-bubble-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 912,
+    "fmt": "webp",
+    "bytes": 30530,
+    "name": "hubble-bubble-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1368,
+    "fmt": "avif",
+    "bytes": 52071,
+    "name": "hubble-bubble-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1368,
+    "fmt": "webp",
+    "bytes": 62588,
+    "name": "hubble-bubble-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1824,
+    "fmt": "avif",
+    "bytes": 113265,
+    "name": "hubble-bubble-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1824,
+    "fmt": "webp",
+    "bytes": 117564,
+    "name": "hubble-bubble-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "hubble-whirlpool",
+  "width": 4000,
+  "height": 2776,
+  "files": [
+   {
+    "w": 480,
+    "h": 333,
+    "fmt": "avif",
+    "bytes": 8363,
+    "name": "hubble-whirlpool-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 333,
+    "fmt": "webp",
+    "bytes": 10508,
+    "name": "hubble-whirlpool-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 666,
+    "fmt": "avif",
+    "bytes": 28710,
+    "name": "hubble-whirlpool-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 666,
+    "fmt": "webp",
+    "bytes": 37722,
+    "name": "hubble-whirlpool-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 999,
+    "fmt": "avif",
+    "bytes": 63838,
+    "name": "hubble-whirlpool-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 999,
+    "fmt": "webp",
+    "bytes": 89442,
+    "name": "hubble-whirlpool-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1332,
+    "fmt": "avif",
+    "bytes": 116106,
+    "name": "hubble-whirlpool-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1332,
+    "fmt": "webp",
+    "bytes": 163542,
+    "name": "hubble-whirlpool-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "hubble-m77",
+  "width": 2948,
+  "height": 2321,
+  "files": [
+   {
+    "w": 480,
+    "h": 378,
+    "fmt": "avif",
+    "bytes": 5979,
+    "name": "hubble-m77-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 378,
+    "fmt": "webp",
+    "bytes": 8640,
+    "name": "hubble-m77-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 756,
+    "fmt": "avif",
+    "bytes": 19699,
+    "name": "hubble-m77-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 756,
+    "fmt": "webp",
+    "bytes": 31142,
+    "name": "hubble-m77-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1134,
+    "fmt": "avif",
+    "bytes": 44296,
+    "name": "hubble-m77-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1134,
+    "fmt": "webp",
+    "bytes": 73782,
+    "name": "hubble-m77-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1512,
+    "fmt": "avif",
+    "bytes": 83926,
+    "name": "hubble-m77-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1512,
+    "fmt": "webp",
+    "bytes": 139842,
+    "name": "hubble-m77-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "nasa-black-hole-jet",
+  "width": 5120,
+  "height": 2880,
+  "files": [
+   {
+    "w": 480,
+    "h": 270,
+    "fmt": "avif",
+    "bytes": 5526,
+    "name": "nasa-black-hole-jet-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 270,
+    "fmt": "webp",
+    "bytes": 8340,
+    "name": "nasa-black-hole-jet-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 540,
+    "fmt": "avif",
+    "bytes": 18574,
+    "name": "nasa-black-hole-jet-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 540,
+    "fmt": "webp",
+    "bytes": 30482,
+    "name": "nasa-black-hole-jet-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 810,
+    "fmt": "avif",
+    "bytes": 42570,
+    "name": "nasa-black-hole-jet-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 810,
+    "fmt": "webp",
+    "bytes": 69462,
+    "name": "nasa-black-hole-jet-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1080,
+    "fmt": "avif",
+    "bytes": 77209,
+    "name": "nasa-black-hole-jet-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1080,
+    "fmt": "webp",
+    "bytes": 123004,
+    "name": "nasa-black-hole-jet-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "nasa-galactic-center",
+  "width": 16000,
+  "height": 9000,
+  "files": [
+   {
+    "w": 480,
+    "h": 270,
+    "fmt": "avif",
+    "bytes": 4741,
+    "name": "nasa-galactic-center-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 270,
+    "fmt": "webp",
+    "bytes": 6534,
+    "name": "nasa-galactic-center-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 540,
+    "fmt": "avif",
+    "bytes": 27086,
+    "name": "nasa-galactic-center-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 540,
+    "fmt": "webp",
+    "bytes": 35318,
+    "name": "nasa-galactic-center-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 810,
+    "fmt": "avif",
+    "bytes": 92701,
+    "name": "nasa-galactic-center-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 810,
+    "fmt": "webp",
+    "bytes": 99480,
+    "name": "nasa-galactic-center-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1080,
+    "fmt": "avif",
+    "bytes": 238013,
+    "name": "nasa-galactic-center-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1080,
+    "fmt": "webp",
+    "bytes": 225088,
+    "name": "nasa-galactic-center-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "nasa-doradus",
+  "width": 2508,
+  "height": 1790,
+  "files": [
+   {
+    "w": 480,
+    "h": 343,
+    "fmt": "avif",
+    "bytes": 26080,
+    "name": "nasa-doradus-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 343,
+    "fmt": "webp",
+    "bytes": 30762,
+    "name": "nasa-doradus-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 685,
+    "fmt": "avif",
+    "bytes": 80004,
+    "name": "nasa-doradus-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 685,
+    "fmt": "webp",
+    "bytes": 95016,
+    "name": "nasa-doradus-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1028,
+    "fmt": "avif",
+    "bytes": 131541,
+    "name": "nasa-doradus-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1028,
+    "fmt": "webp",
+    "bytes": 167934,
+    "name": "nasa-doradus-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1370,
+    "fmt": "avif",
+    "bytes": 183997,
+    "name": "nasa-doradus-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1370,
+    "fmt": "webp",
+    "bytes": 249484,
+    "name": "nasa-doradus-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "nasa-crab",
+  "width": 3864,
+  "height": 3864,
+  "files": [
+   {
+    "w": 480,
+    "h": 480,
+    "fmt": "avif",
+    "bytes": 29207,
+    "name": "nasa-crab-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 480,
+    "fmt": "webp",
+    "bytes": 33530,
+    "name": "nasa-crab-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 960,
+    "fmt": "avif",
+    "bytes": 89466,
+    "name": "nasa-crab-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 960,
+    "fmt": "webp",
+    "bytes": 106276,
+    "name": "nasa-crab-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1440,
+    "fmt": "avif",
+    "bytes": 167423,
+    "name": "nasa-crab-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1440,
+    "fmt": "webp",
+    "bytes": 213730,
+    "name": "nasa-crab-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1920,
+    "fmt": "avif",
+    "bytes": 266791,
+    "name": "nasa-crab-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1920,
+    "fmt": "webp",
+    "bytes": 349594,
+    "name": "nasa-crab-1920.webp"
+   }
+  ]
+ },
+ {
+  "id": "nasa-andromeda",
+  "width": 6200,
+  "height": 6200,
+  "files": [
+   {
+    "w": 480,
+    "h": 480,
+    "fmt": "avif",
+    "bytes": 11747,
+    "name": "nasa-andromeda-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 480,
+    "fmt": "webp",
+    "bytes": 15866,
+    "name": "nasa-andromeda-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 960,
+    "fmt": "avif",
+    "bytes": 44333,
+    "name": "nasa-andromeda-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 960,
+    "fmt": "webp",
+    "bytes": 61838,
+    "name": "nasa-andromeda-960.webp"
+   },
+   {
+    "w": 1440,
+    "h": 1440,
+    "fmt": "avif",
+    "bytes": 91196,
+    "name": "nasa-andromeda-1440.avif"
+   },
+   {
+    "w": 1440,
+    "h": 1440,
+    "fmt": "webp",
+    "bytes": 132394,
+    "name": "nasa-andromeda-1440.webp"
+   },
+   {
+    "w": 1920,
+    "h": 1920,
+    "fmt": "avif",
+    "bytes": 145563,
+    "name": "nasa-andromeda-1920.avif"
+   },
+   {
+    "w": 1920,
+    "h": 1920,
+    "fmt": "webp",
+    "bytes": 216760,
+    "name": "nasa-andromeda-1920.webp"
+   }
+  ]
+ }
+]
