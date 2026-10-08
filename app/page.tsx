@@ -220,6 +220,9 @@ export default function Home() {
         <AnimatedButton href="/scan" variant="secondary">
           Get your free security scan
         </AnimatedButton>
+        <AnimatedButton href="/efficiency" variant="secondary">
+          Efficiency, measured →
+        </AnimatedButton>
       </PageHero>
 
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
