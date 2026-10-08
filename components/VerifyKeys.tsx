@@ -98,7 +98,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
             >
               {k.num}
             </div>
-            <h4
+            <h3
               style={{
                 fontFamily: "var(--font-display), Georgia, serif",
                 color: "var(--ice)",
@@ -109,7 +109,7 @@ export default function VerifyKeys({ keys }: { keys: VerifyKey[] }) {
               }}
             >
               {k.title}
-            </h4>
+            </h3>
             <div
               style={{
                 color: "var(--text)",

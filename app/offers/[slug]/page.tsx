@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SectionReveal from "@/components/SectionReveal";
@@ -8,6 +11,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { ALL_OFFERS, getOffer, buyHref, availability, AVAILABILITY_TEXT, LADDER_ROUTES } from "@/lib/offers";
 import { formatOfferPrice, type Offer } from "@/lib/offers/types";
+import { OpenLoop } from "@/components/FlexBlock";
 
 export const dynamicParams = false;
 
@@ -22,13 +26,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const o = getOffer(slug);
   if (!o) return {};
   const url = `https://titanos.tech/offers/${o.slug}`;
-  return {
+  return withSeo(`/offers/${o.slug}`, {
     title: `${o.name} | TITANOS`,
     description: o.bluf,
     alternates: { canonical: url },
     openGraph: { title: o.name, description: o.bluf, type: "website", url },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 function List({ items, mark }: { items: string[]; mark: string }) {
@@ -110,6 +114,9 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
   const buyer = o.buyer.charAt(0).toLowerCase() + o.buyer.slice(1);
   return (
     <>
+      <JsonLd data={product({ path: `/offers/${o.slug}`, name: o.name, description: o.bluf, priceAud: o.priceAud, buyable: av === "BUYABLE" })} />
+      <JsonLd data={faqPage(o.faq)} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Offers", path: "/offers" }, { name: o.name, path: `/offers/${o.slug}` }])} />
       <PageHero
         badge={`TITANOS · ${AVAILABILITY_TEXT[av].badge}`}
         title={o.name}
@@ -119,9 +126,18 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
         <Cta o={o} />
       </PageHero>
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <p style={{ color: "var(--ice)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.75, textAlign: "center" }}>
+          The price is {formatOfferPrice(o)}, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader
+          (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT
+          provider stays in charge.
+        </p>
+      </SectionReveal>
+      <OpenLoop>Is this one actually for you? The next bit is a short, honest list.</OpenLoop>
       <Block title="Who it's for"><List items={o.forWho} mark="•" /></Block>
       <div className="divider-gold" />
       <Block title="What you get"><List items={o.youGet} mark="✓" /></Block>
+      <OpenLoop>And how does it go from a yes to a finished job?</OpenLoop>
       <div className="divider-gold" />
       <Block title="How it works">
         <ol style={{ color: "var(--text)", lineHeight: 1.8, paddingLeft: 22, margin: 0 }}>
@@ -129,9 +145,10 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
         </ol>
       </Block>
       <div className="divider-gold" />
-      <Block title="The TITANOS edge">
+      <Block title="Why TITANOS does it differently">
         <p style={{ color: "var(--text)", lineHeight: 1.75, margin: 0 }}>{o.edge}</p>
       </Block>
+      <OpenLoop>Now the part everyone scrolls to first.</OpenLoop>
       <div className="divider-gold" />
       <Block title="Price">
         <div style={{ background: "var(--card)", border: "1px solid var(--gold-dim)", borderRadius: "var(--radius-md)", padding: "26px 28px", textAlign: "center" }}>
@@ -147,7 +164,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
         </div>
       </Block>
       <div className="divider-gold" />
-      <Block title="Straight answers">
+      <Block title="Questions before you decide">
         <FaqItem question="Can I buy this today?">{AVAILABILITY_TEXT[av].line}</FaqItem>
         {o.faq.map((f) => <FaqItem key={f.q} question={f.q}>{f.a}</FaqItem>)}
         {privacyRelated && (
@@ -162,7 +179,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
           </p>
         )}
         <p style={{ color: "var(--ice)", maxWidth: "var(--maxw-prose)", margin: "0 auto 22px", lineHeight: 1.7 }}>
-          If you like what you have read and it fits, would it be okay to go ahead? A no is welcome too.
+          If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}><Cta o={o} /></div>
       </SectionReveal>

@@ -505,7 +505,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
   },
   {
     slug: "agent-preflight-test-harness",
-    name: "Agent Pre-Flight Test Harness",
+    name: "Agent Pre-Flight Test Kit",
     group: "specialist",
     buyer: "Freelancer or agency wanting a repeatable 'safe to ship' gate before go-live",
     bluf: "A test kit that attacks your AI agent before the client sees it, plus a signed-off pre-flight report you can hand over.",
@@ -515,13 +515,13 @@ export const OFFERS_SPECIALIST: Offer[] = [
       "Anyone who wants a repeatable go-live check",
     ],
     youGet: [
-      "A test harness with ready-made cases: prompt-injection strings (text that tries to hijack the agent), empty and malformed inputs, and stale-data cases",
+      "A test kit with ready-made cases: prompt-injection strings (text that tries to hijack the agent), empty and malformed inputs, and stale-data cases",
       "Fail-closed checks on every safety gate (if the gate cannot decide, it blocks)",
       "A pre-flight report template to give your client",
     ],
     howItWorks: [
       "You tell us your agent's entry point and the gates to attack.",
-      "We set up the harness for that agent.",
+      "We set up the test kit for that agent.",
       "You run it, fix what fails, and hand over the report.",
     ],
     edge:
@@ -542,7 +542,7 @@ export const OFFERS_SPECIALIST: Offer[] = [
       },
       {
         q: "Do you see my client's data?",
-        a: "No. The harness runs on your side with your own agent.",
+        a: "No. The test kit runs on your side with your own agent.",
       },
       {
         q: "What does it cost?",

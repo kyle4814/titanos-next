@@ -32,7 +32,7 @@ import { LINKS, DESKTOP_LINKS, groupMore } from "@/lib/navLinks";
 
 const SESSION_KEY = "titanos.vault.entranceShown";
 const REVEAL_DELAY_MS = 800;
-const MOBILE_BREAKPOINT = 720;
+const MOBILE_BREAKPOINT = 1024; // the desktop strip is ~970px wide: 768 overflowed by 204px at the old 720
 
 export default function Nav() {
   const reduce = useReducedMotion();

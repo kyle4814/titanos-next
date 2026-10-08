@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
   "A free field guide to frictionless thinking, compressed knowledge, and governed AI autonomy. The same operating doctrine TITANOS is built and run on.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/black-ice" },
@@ -24,6 +27,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/black-ice", baseMetadata);
 
 const PRIMITIVES: { name: string; line: string }[] = [
   { name: "OBSERVE", line: "See what's actually happening before reacting to it." },
@@ -47,7 +52,7 @@ export default function BlackIcePage() {
         badge="TITANOS OPERATING DOCTRINE · FREE"
         title="BLACK ICE"
         tagline="A human × AI operating doctrine for frictionless thinking, compressed knowledge, and governed autonomy."
-        sub="Not a productivity gimmick. It's the actual framework TITANOS runs on, shared here because it's genuinely useful on its own."
+        sub="Not a productivity gimmick. It is the working framework TITANOS runs on, shared here because it is useful on its own, and free."
       >
         <AnimatedButton href="/black-ice/doctrine" variant="primary">
           READ THE FIELD GUIDE
@@ -60,6 +65,18 @@ export default function BlackIcePage() {
         Black Ice is the free thinking guide TITANOS runs on: automate the known, keep human judgement for the unknown.
       </Bluf>
       <Analogy k="twokeys" />
+
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.startTokens} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            That is what compressing knowledge looks like in practice. Before you ask: I am Kyle Deligny, a sole trader
+            (ABN 34 318 502 254). Reading the guide touches nothing of yours, nobody is replaced by it, and it costs
+            nothing.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>So what is Black Ice, in plain words, and why is a polished black surface a good picture of it?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -74,7 +91,7 @@ export default function BlackIcePage() {
               marginBottom: 16,
             }}
           >
-            WHAT BLACK ICE ACTUALLY IS
+            What Black Ice actually is
           </h2>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, marginBottom: 14 }}>
             A polished black surface, enormous depth underneath. That&apos;s the whole idea.
@@ -85,19 +102,21 @@ export default function BlackIcePage() {
             decision that actually needs judgement.
           </p>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
-            Worth checking on your own week: how much of it is spent on work an AI could
-            already do, versus the one call only you should be making? The language here
-            borrows metaphor on purpose, ice, depth, stillness. The doctrine page says
-            exactly where that&apos;s a metaphor and where it&apos;s a mechanism, and never
-            dresses one up as the other.
+            A fair thing to ask of your own week: how much of it is work an AI could already
+            do, and how much is the one call only you should make? The language here
+            borrows metaphor on purpose, ice, depth, stillness. The field guide is plain about
+            where it is a metaphor and where it is a mechanism, and never dresses one up as
+            the other.
           </p>
         </div>
       </SectionReveal>
 
+      <OpenLoop>What does the loop look like when you shrink it to one line a step?</OpenLoop>
+
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <SectionHeading title="THE TWELVE PRIMITIVES" lead="The full loop, compressed to one line each. Detail on the field guide page." />
+        <SectionHeading title="The twelve primitives" lead="The full loop, compressed to one line each. The detail lives on the field guide page." />
         <ol
           style={{
             listStyle: "none",
@@ -179,7 +198,7 @@ export default function BlackIcePage() {
             marginBottom: 18,
           }}
         >
-          READ THE FULL DOCTRINE
+          Would it be okay if you had a read?
         </h2>
         <p
           style={{
@@ -190,7 +209,7 @@ export default function BlackIcePage() {
             lineHeight: 1.7,
           }}
         >
-          Free. No signup. The same operating framework behind everything else on this site.
+          Free, no signup, and nothing to buy afterwards. It is the same working framework behind everything else on this site. If it is not your cup of tea, a no is welcome.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
           <AnimatedButton href="/black-ice/doctrine" variant="primary">

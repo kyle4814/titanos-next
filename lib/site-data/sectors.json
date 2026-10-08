@@ -1,0 +1,146 @@
+[
+ {
+  "slug": "construction",
+  "name": "Construction",
+  "point": "Builders and trades lose money to fake invoices and payment redirects, and the cause is usually one missing email setting.",
+  "problem": "Builders pay and get paid by email all day, so a forged invoice or a changed bank detail is a real loss, not an IT detail.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We grade the email setup on your domain (SPF, DKIM, DMARC) and write down what to change, in plain words.",
+  "fact": {
+   "value": "AU$152.6M",
+   "label": "MEASURED",
+   "note": "Business email compromise losses in Australia in 2024, up 66 percent on the year, as reported by the Australian Federal Police. A third party's figure, cited, not ours.",
+   "source": "PORTFOLIO_INDEX.md (AFP media release, construction BEC)",
+   "sourceUrl": "https://www.afp.gov.au/news-centre/media-release/criminals-target-construction-sector-business-email-compromise-scams"
+  },
+  "next": "Run the free scan on your domain and read the one page it returns."
+ },
+ {
+  "slug": "councils",
+  "name": "Councils",
+  "point": "Local government buys locally and publishes how, so the first job is finding the door that fits you.",
+  "problem": "Councils buy through shared panels and their own portals, and the rules differ council to council.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We map which panel or portal each council uses, so you apply once to the right door.",
+  "fact": {
+   "value": "91%",
+   "label": "MEASURED",
+   "note": "Share of Cairns Regional Council spend that stayed local in 2025/26, from the council's own State of Procurement report. The council's PDF blocked our fetch, so we read it through a search snippet and mark it as such.",
+   "source": "deep/local_fnq.md",
+   "sourceUrl": null
+  },
+  "next": "Ask for the free panel map for your region."
+ },
+ {
+  "slug": "health",
+  "name": "Health",
+  "point": "A clinic holds the most private data a small business can hold, so a calm review of the basics comes first.",
+  "problem": "Patient records, referrals and billing all travel by email and shared drives.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We check the public face of your email and website against the guidance your sector already publishes.",
+  "fact": {
+   "value": "No single number",
+   "label": "UNKNOWN",
+   "note": "The health regulator guidance is qualitative. We have not measured clinics ourselves, so we show no figure.",
+   "source": "SOURCE_REGISTRY.md (ADHA managing cyber security threats)",
+   "sourceUrl": "https://www.digitalhealth.gov.au/healthcare-providers/cyber-security/managing-cyber-security-threats"
+  },
+  "next": "Run the free scan on your practice domain."
+ },
+ {
+  "slug": "aged-care",
+  "name": "Aged care and disability",
+  "point": "Providers are expected to show they follow a recognised security standard, and many have never been asked how.",
+  "problem": "Participant data, rosters and funding claims sit across several systems run by different people.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We line up your public posture against the Essential Eight, the baseline auditors tend to ask about.",
+  "fact": {
+   "value": "No count yet",
+   "label": "UNKNOWN",
+   "note": "The NDIS guidance says auditors increasingly expect providers to follow a recognised standard, without naming one. That is a quoted statement, not a count, so we show no number.",
+   "source": "deep2/compliance_retainers.md (NDIS cyber security requirements, May 2022)",
+   "sourceUrl": "https://www.ndis.gov.au/media/4524"
+  },
+  "next": "Ask for the free Essential Eight reading of your public posture."
+ },
+ {
+  "slug": "logistics",
+  "name": "Logistics",
+  "point": "Freight runs on bookings, invoices and bank details sent by email, which is where a forged message does the most harm.",
+  "problem": "Many parties, many inboxes, payments moving daily.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We check how well your domain protects the mail you send in your own name.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. To fix that we would scan a sample of freight and transport domains and publish the count with the date.",
+   "source": null
+  },
+  "next": "Run the free scan on your domain."
+ },
+ {
+  "slug": "mining",
+  "name": "Mining and resources",
+  "point": "Suppliers to resource companies are asked to prove their security before they are paid, and the proof can be prepared early.",
+  "problem": "Large buyers send supplier questionnaires and the answers need public evidence behind them.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We assemble the public-record evidence a buyer questionnaire usually asks for.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. A figure we once held for resource spend in one region could not be reproduced, so we dropped it.",
+   "source": null
+  },
+  "next": "Ask for the free supplier readiness reading."
+ },
+ {
+  "slug": "education",
+  "name": "Education",
+  "point": "Schools hold family and child data and are rarely asked how their email is protected.",
+  "problem": "Small IT teams, many staff accounts, and parents who trust the school's email.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We grade the school's domain and list the changes in order of effort.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of school domains and publish the count with the date.",
+   "source": null
+  },
+  "next": "Run the free scan on your school domain."
+ },
+ {
+  "slug": "retail",
+  "name": "Retail",
+  "point": "A shop's brand is its email and web address, so a lookalike or forged message costs trust as well as money.",
+  "problem": "Customers are told to trust messages from your name.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We check whether anyone can send mail that looks like it came from you.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of retail domains and publish the count with the date.",
+   "source": null
+  },
+  "next": "Run the free scan on your shop domain."
+ },
+ {
+  "slug": "hospitality",
+  "name": "Hospitality",
+  "point": "Bookings, supplier invoices and staff rosters all live in email, and one forged message can redirect a payment.",
+  "problem": "Busy venues, thin margins, and no one whose job is email security.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We grade your domain and hand back the three changes that matter most.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of venue domains and publish the count with the date.",
+   "source": null
+  },
+  "next": "Run the free scan on your venue domain."
+ },
+ {
+  "slug": "professional-services",
+  "name": "Professional services",
+  "point": "Advisers hold client money and client secrets, so clients quietly judge them on how safely they handle email.",
+  "problem": "Accountants, lawyers and consultants move sensitive files and payment details every day.",
+  "what": "We read only public records about your business, the way a customer or a supplier would. Nothing is touched, nobody is replaced, and your IT provider stays in charge. We grade your domain and set out what a client could see from outside.",
+  "fact": {
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of practice domains and publish the count with the date.",
+   "source": null
+  },
+  "next": "Run the free scan on your practice domain."
+ }
+]

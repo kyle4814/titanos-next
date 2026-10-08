@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import ReferForm from "@/components/ReferForm";
 import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Refer & Earn: Partner Network · TITANOS",
   description:
     "Commission-only referral partner network. Introduce a business to Titanos, earn commission on real closed revenue. No joining fee, no exclusivity, your own ABN.",
@@ -22,6 +25,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/refer", baseMetadata);
 
 export default function ReferPage() {
   const faqJsonLd = {
@@ -71,17 +76,29 @@ export default function ReferPage() {
       />
       <PageHero
         badge="PARTNER NETWORK"
-        title="Refer a business. Earn commission. That's the whole model."
-        tagline="Commission-only referral network. No joining fee, no exclusivity, no minimum activity."
-        sub="Know a business drowning in manual work? Introduce them to Titanos, and when the deal closes, you're paid."
+        title="Know a business buried in manual work? Introduce us, and get paid when it closes."
+        tagline="A commission-only referral network. No joining fee, no exclusivity, no minimum activity."
+        sub="You make a warm introduction. If a deal closes and the money is collected, you earn commission. That is the whole model, and you are free to say no at any point."
       />
       <Bluf replaced>
         Know a business drowning in manual work? Introduce them, and when the deal closes you are paid. No joining fee. For your own business, you can book a free consultation with Kyle on the audit page.
       </Bluf>
       <Analogy k="healthcheck" />
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0" }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.market} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I review every application myself.
+            Nothing is sent to anyone without your say. Nobody is replaced by what we build, and the business you
+            introduce keeps its own IT person in charge. It costs you nothing to join.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>So how does an introduction turn into a payout, and who decides?</OpenLoop>
+
       <section aria-label="The invitation" style={{ padding: "var(--space-8) 20px var(--space-4)", position: "relative", zIndex: 2 }}>
-        <Inscription label="The final stage" sub="Everyone before you was reading. This is where you stop observing and become part of how the system grows.">
+        <Inscription label="The final stage" sub="You may already know a business that would be glad of an introduction. This is where you can make one.">
           You already know who&apos;s drowning in manual work.
           <br />
           <span style={{ color: "var(--gold)" }}>Point us at them. Get paid when it closes.</span>
@@ -101,7 +118,7 @@ export default function ReferPage() {
               marginBottom: 18,
             }}
           >
-            How it works
+            How it works, step by step
           </h2>
           <ol
             style={{
@@ -127,12 +144,16 @@ export default function ReferPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Ready to look at the form? It takes under a minute, and nothing is committed.</OpenLoop>
+
       <SectionReveal>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 12px", textAlign: "center" }}>
           <DepthIndex index={2} total={3} style={{ textAlign: "center" }} />
         </div>
         <ReferForm />
       </SectionReveal>
+
+      <OpenLoop>A few things people ask before they apply, answered up front.</OpenLoop>
 
       <SectionReveal>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "50px auto 0" }}>
@@ -147,7 +168,7 @@ export default function ReferPage() {
               textAlign: "center",
             }}
           >
-            Questions
+            Questions before you apply
           </h2>
           <FaqItem question="How much can I earn?">
             Commission is a percentage of real revenue Titanos actually collects from a client
@@ -166,6 +187,12 @@ export default function ReferPage() {
             attribution log, not a manual judgement call.
           </FaqItem>
         </div>
+      </SectionReveal>
+      <SectionReveal style={{ textAlign: "center", padding: "var(--space-8) 20px var(--space-4)" }}>
+        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          Would it be okay if you had a look at the form when you have a quiet minute? If it is not for you, a no is
+          completely welcome and we stay friends.
+        </p>
       </SectionReveal>
       <FrontLoad/>
     </>

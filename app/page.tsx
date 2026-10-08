@@ -1,29 +1,39 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import { TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
+import Hero from "@/components/hero/Hero";
+import VoidPortal from "@/components/hero/VoidPortal";
+import { withSeo } from "@/lib/seo";
+import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import SpaceImage from "@/components/SpaceImage";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
+import { STATS } from "@/lib/stats";
 import HeroScrollCue from "@/components/HeroScrollCue";
+import CostCurve from "@/components/charts/CostCurve";
+import LoopOrbit from "@/components/charts/LoopOrbit";
+import ProofWall from "@/components/charts/ProofWall";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import JourneySteps from "@/components/JourneySteps";
 import TierQuiz from "@/components/TierQuiz";
 import RoiEstimator from "@/components/RoiEstimator";
 import StatsTicker from "@/components/StatsTicker";
-import { STATS } from "@/lib/stats";
 import ContactButtons from "@/components/ContactButtons";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
 import { Inscription } from "@/components/Myth";
+import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 import type { Offer } from "@/components/OfferCard";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Titanos | AI automation and Privacy Act compliance, Brisbane",
   description:
-    "One operator finds the manual task eating your week and builds the system that does it instead. Free consultation and report, free security scan, fixed-price Privacy Act compliance for Australian small business.",
+    "One operator finds the manual task eating your week and builds the system that does it. Free consultation, free security scan, fixed-price Privacy Act compliance.",
   alternates: { canonical: "https://titanos.tech/" },
   openGraph: {
     title: "Titanos | AI automation and Privacy Act compliance",
@@ -35,17 +45,7 @@ export const metadata: Metadata = {
   },
 };
 
-const ORG_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Titanos",
-  url: "https://titanos.tech",
-  founder: { "@type": "Person", name: "Kyle Deligny" },
-  identifier: "ABN 34 318 502 254",
-  areaServed: "AU",
-  description:
-    "Solo AI implementation and Privacy Act compliance practice for Australian small business.",
-};
+export const metadata: Metadata = withSeo("/", baseMetadata);
 
 const offers: Offer[] = [
   {
@@ -198,29 +198,13 @@ const WHAT_WE_BUILD = [
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
-      />
       {/* ═══ HERO ═══ */}
-      <PageHero
-        badge="TITANOS · Titan Operating System"
-        title="44 engineer-years of output in 4 months."
-        tagline="The industry-standard model values it at up to AU$23 million a year. Built by one engineer on about US$30 (roughly AU$46) a month."
-        sub="Kyle Deligny, founder of TITANOS, the Titan Operating System. Home of Hypersonic Industries and Parallax Industries."
-        trustLine={
-          <>
-            Australian-owned · ABN 34 318 502 254 · {STATS.scansLast30Days.toLocaleString("en-AU")} domains checked in the last 30 days · Every figure has its method one click away.
-          </>
-        }
-      >
-        <AnimatedButton href="/engineering" variant="primary">
-          See the maths →
-        </AnimatedButton>
-        <AnimatedButton href="/scan" variant="secondary">
-          Get your free security scan
-        </AnimatedButton>
-      </PageHero>
+      <Hero />
+      <VoidPortal />
+      <div className="ds-band">
+        <SpaceImage id="webb-cosmic-cliffs" sizes="100vw" />
+        <a className="ds-band__cap" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
+      </div>
 
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
       <section
@@ -271,8 +255,8 @@ export default function Home() {
         style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}
       >
         <Inscription
-          label="Built from a phone · Solo · Pre-revenue"
-          sub="TITANOS is one operator's autonomous systems, built to remove friction rather than add headcount."
+          label="US$0.97 to US$0.12 per job · recorded 8 October 2026"
+          sub="We did not buy a bigger machine. We found the waste, turned each lesson into code, and ran it again. Below is the proof, with the source of every number one tap away."
         >
           The machine carries the complexity.
           <br />
@@ -295,10 +279,10 @@ export default function Home() {
             lineHeight: 1.65,
           }}
         >
-          <strong style={{ color: "var(--gold)" }}>AI fixes the manual work eating your week.</strong>{" "}
+          <strong style={{ color: "var(--gold)" }}>You know the work that eats your week.</strong>{" "}
           Missed enquiries. Quotes nobody follows up on. Compliance risk you cannot see until it
-          costs you. I build the system, and every one is privacy-compliant by design, because
-          compliance is my other practice.
+          costs you. I run the same system on my own business first, I show you what it did, and
+          then I build yours, privacy-compliant by design. Your team stays. They get their hours back.
         </p>
 
         <div style={{ textAlign: "center" }}>
@@ -344,6 +328,14 @@ export default function Home() {
             See the actual quality of work you would get, before you pay a cent →
           </a>
         </p>
+        {arianceVisible && (
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+            Latest build:{" "}
+            <a href={ariancePath} style={{ color: "var(--gold)" }}>
+              {ARIANCE.title} →
+            </a>
+          </p>
+        )}
         {/* Testimonials / case studies go here once client 1 to 3 are delivered.
             Do not fabricate proof before then. The honest trust units above
             are the only proof that exists right now. */}
@@ -351,9 +343,25 @@ export default function Home() {
 
       <HeroScrollCue />
 
+      {/* W4: live charts from lib/site-data/proof.json (generated), the loop orbit, the proof wall */}
+      <CostCurve />
+      <LoopOrbit />
+      <ProofWall />
+      {/* THE PROOF: biggest true numbers first, each with its label and source. */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="The machine, measured on itself first"
+            lead="Every number below was read off our own running system on 8 October 2026. Tap any card to see exactly where it came from."
+          />
+          <FlexGrid items={[FLEX.costPerJob, FLEX.startTokens, FLEX.fleetJobs, FLEX.tests]} />
+        </div>
+      </SectionReveal>
+      <OpenLoop>Cheaper, faster and passing more tests. So what does one person with this system actually build?</OpenLoop>
+
       {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
       <Bluf replaced>
-        TITANOS is built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and it is there to give your business that output safely, without
+        One engineer built TITANOS in {ELAPSED_LINE}, around a day job. The industry COCOMO model says that is {TEAM_LINE} (MODELLED, method on the Engineering page). We exist to give your business that output safely, without
         replacing anyone.
       </Bluf>
       <Analogy k="department" />
@@ -364,7 +372,7 @@ export default function Home() {
       <SectionReveal style={{ padding: "var(--space-20) 20px 0", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading
-            title="Four ways the manual work is costing you right now"
+            title="Four places the manual work is quietly costing you"
             lead="Leads that never get followed up. The same questions answered by hand, every day. Data copied between systems by a person instead of a computer. A privacy problem nobody's checked in a year. Most owners know AI could help. Fewer know where to start."
           />
         </div>
@@ -372,6 +380,7 @@ export default function Home() {
 
       <div className="divider-gold" />
 
+      <OpenLoop>If that is where the cost goes, what does a first conversation with us look like, and what does it cost you?</OpenLoop>
       {/* ═══ THE FREE AI AUDIT ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
@@ -502,6 +511,7 @@ export default function Home() {
       </SectionReveal>
 
 
+      <OpenLoop>Seven kinds of repetitive work come up again and again. Which one is eating your week?</OpenLoop>
       {/* ═══ WHAT WE BUILD ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
@@ -536,6 +546,18 @@ export default function Home() {
       </SectionReveal>
 
       <div className="divider-gold" />
+
+      {/* THE CEILING: market size and the build-cost multiple, labelled. */}
+      <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="How far this reaches"
+            lead="Hours handed back, nobody replaced. The market is large, and the cost of building for it just fell. Both numbers are labelled and sourced."
+          />
+          <FlexGrid items={[FLEX.market, FLEX.engineers, FLEX.memory]} />
+        </div>
+      </SectionReveal>
+      <OpenLoop>Big numbers are easy to say. Here is a way to test them against your own business, with your own figures.</OpenLoop>
 
       {/* ═══ ROI ESTIMATOR ═══ */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
@@ -736,6 +758,7 @@ export default function Home() {
       />
 
       {/* ═══ Final CTA ═══ */}
+      <OpenLoop>You have seen the receipts. Would it be okay if I looked at your business the same way, free, and told you straight what I find? A no is welcome.</OpenLoop>
       <Analogy k="healthcheck" />
       <FreeStart />
     </>

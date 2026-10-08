@@ -15,7 +15,7 @@ const PLANS = [
 
 export default function OrderMonitorClient() {
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
         background: "var(--vault-bg, #080808)",
@@ -86,6 +86,6 @@ export default function OrderMonitorClient() {
           placeholder="e.g. Previous breach, upcoming PCI audit, client contractual requirement…"
         />
       </OrderForm>
-    </main>
+    </div>
   );
 }

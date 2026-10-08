@@ -3,7 +3,7 @@ import { OmegaSeal } from "@/components/Myth";
 
 export default function NotFound() {
   return (
-    <main
+    <div
       style={{
         position: "relative",
         zIndex: 2,
@@ -59,6 +59,6 @@ export default function NotFound() {
       >
         Return to titanos.tech →
       </Link>
-    </main>
+    </div>
   );
 }

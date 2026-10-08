@@ -1,6 +1,8 @@
 "use client";
 
+import { dec } from "@/lib/ledger";
 import Link from "next/link";
+import { SigilSeals } from "./Sigil";
 
 /**
  * Enterprise footer — three link columns + identity block.
@@ -23,18 +25,28 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "Free Scan", href: "/scan" },
       { label: "Find your offer", href: "/find" },
       { label: "All offers", href: "/offers" },
+      { label: "Sectors", href: "/sectors" },
+      { label: "Courses", href: "/courses" },
     ],
   },
   {
     heading: "Proof",
     links: [
-      { label: "44 engineer-years", href: "/engineering" },
+      { label: `${dec("estate_ey")} engineer-years`, href: "/engineering" },
       { label: "Methodology", href: "/methodology" },
       { label: "Black Ice doctrine", href: "/black-ice" },
       { label: "Our scan", href: "/scan#self-scan" },
       { label: "Evidence pack", href: "/our-evidence-pack" },
+      { label: "How fast it was built", href: "/speed" },
       { label: "Free AI Readiness Guide (PDF)", href: "/ai-readiness-guide.pdf", external: true },
       { label: "Blog", href: "/blog" },
+      { label: "Efficiency, measured", href: "/efficiency" },
+      { label: "How it works", href: "/how-it-works" },
+      { label: "The learning loop", href: "/learning-loop" },
+      { label: "Security and privacy", href: "/security" },
+      { label: "FAQ", href: "/faq" },
+      { label: "The deep field", href: "/deep-field" },
+      { label: "Image credits", href: "/credits" },
     ],
   },
   {
@@ -154,6 +166,8 @@ export default function Footer() {
           I personally review every deliverable before it reaches you · titanos.tech
         </div>
       </div>
+      <SigilSeals />
+      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, opacity: 0.6, margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
     </footer>
   );
 }

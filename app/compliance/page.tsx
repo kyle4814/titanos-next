@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { STATS } from "@/lib/stats";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,6 +14,17 @@ import { SITE, CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import type { Flex } from "@/lib/flex";
+
+// The biggest true number for this page: the shape of the pack you finish with. Mine is published in full.
+const PACK_FLEX: Flex = {
+  big: "13 sections, about 17 pages",
+  label: "the evidence pack you finish with. Mine is published in full, so you can read one before you decide anything.",
+  kind: "EXAMPLE",
+  analogy: "Think of the service history book that comes with a good used car. It cannot promise the car never breaks down, but it shows the car was looked after.",
+  source: "/our-evidence-pack, TITANOS's own pack, published in full. The page count is approximate.",
+};
 
 const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 
@@ -27,9 +39,9 @@ const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 // the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
   "Privacy Act Compliance Before 10 December 2026, Done With You | TITANOS";
-const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations: privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
+const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations. I sort all six with you in one working call: policy, breach plan, email, logins, data map, AI disclosure. ${DISPLAY.PACK_PRICE} one-time.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/compliance" },
@@ -48,6 +60,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/compliance", baseMetadata);
 
 const THREAD_STEPS: ThreadStep[] = [
   {
@@ -262,8 +276,8 @@ export default function CompliancePage() {
         // Vanta price anchor INTO the hero so anchoring lands before the
         // price does (it’s repeated in the pricing card below).
         title="Six Privacy Act obligations. One working call. Nothing left to interpret afterwards."
-        tagline={`Most owners only know about one of the six things regulators, insurers and courts now expect. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free. Compare that to roughly AU$18,000 or more for a comparable Vanta-plus-consultant setup in year one.`}
-        sub="Built for Australian SMBs (5 to 50 staff) on Squarespace, WordPress, Microsoft 365, and Google Workspace. Plain English on the call. No jargon, no PDF-only hand-off. Health providers (clinic, allied health, pharmacy, any size) are already covered by the Privacy Act. There is no small-business exemption for health."
+        tagline={`Most owners have heard of one of the six things regulators, insurers and courts now look for. I sort all six with you, on one working call. ${DISPLAY.PACK_PRICE} one-time, with ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor included free. For comparison, an illustrative estimate for a Vanta subscription plus a consultant is roughly AU$18,000 or more in year one.`}
+        sub="Built for Australian small businesses (5 to 50 staff) on Squarespace, WordPress, Microsoft 365 and Google Workspace. Plain English on the call, no jargon, and no PDF dropped in your inbox with good luck. Health providers (clinic, allied health, pharmacy, any size) are already covered by the Privacy Act. There is no small-business exemption for health."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned ·
@@ -300,6 +314,19 @@ export default function CompliancePage() {
         Titanos Monitor included. The first conversation and your report are free.
       </Bluf>
       <Analogy k="preflight" />
+
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={PACK_FLEX} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The scan reads
+            public records only and touches nothing of yours. On the call you stay logged into your own accounts, and I never
+            receive a password. Nobody is replaced, and your IT person stays in charge and is welcome on the call. The whole price
+            is {DISPLAY.PACK_PRICE}, once.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>So what actually happens in those 90 minutes, and why is it one call instead of a month of emails?</OpenLoop>
 
       {/* THE SEAL OF WEIGHT — the claim carved into the page, not printed on it.
           See components/Myth.tsx for the vocabulary. */}
@@ -341,7 +368,7 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The working session</SystemLabel>
           <SectionHeading
             title="What Happens on the Call"
-            lead="90 minutes. Screen-share. I apply every change with you, live. Not a PDF you have to figure out later."
+            lead="90 minutes on a screen-share. We make every change together, live, so you leave with it done and not with homework."
           />
           <div
             style={{
@@ -409,6 +436,8 @@ export default function CompliancePage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Why now, and not next year? Five rules are already in play, and only one has a date on it.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* FIVE PRESSURE POINTS — Fix 3c reorder by believability, not date */}
@@ -417,8 +446,8 @@ export default function CompliancePage() {
           <DepthIndex index={2} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>What's already live</SystemLabel>
           <SectionHeading
-            title="Five Legal Pressure Points"
-            lead="Ordered by what hits an SMB owner soonest, not chronologically. The compliance pack covers all five in one pass."
+            title="Five Rules Worth Knowing About"
+            lead="Ordered by how soon each one could touch a small business, not by date. The pack covers all five in one pass."
           />
           <div
             style={{
@@ -458,6 +487,8 @@ export default function CompliancePage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Does the AI disclosure rule even apply to you? Two questions will tell you, and nothing you type leaves this page.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* SCOPE CHECKER — answers "does this even apply to me" honestly, per-visitor */}
@@ -479,7 +510,7 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The sequence</SystemLabel>
           <SectionHeading
             title="What the Engagement Looks Like"
-            lead="Six steps from scan to signed attestation. No PDF-only deliverable, no opaque hand-offs."
+            lead="Six steps from scan to signed letter. Nothing happens out of your sight."
           />
           <GoldThread steps={THREAD_STEPS} />
         </div>
@@ -522,6 +553,8 @@ export default function CompliancePage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>So what does all of that cost, and what happens to the free months when they end?</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* SINGLE OFFER */}
@@ -531,7 +564,7 @@ export default function CompliancePage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The single door</SystemLabel>
           <SectionHeading
             title="One Engagement · Done With You"
-            lead="No tiers. No PDF-only option. One done-with-you engagement where I apply the changes together with you on a 90-minute working call. 3 months of monitoring included, plus regulatory briefings through the engagement whenever the rules move."
+            lead="One door, no tiers. I make the changes with you on a 90-minute working call. Three months of monitoring are included, and I send a short briefing whenever the rules move."
           />
           {/* Fix 2b — operator byline (photo + name + tagline) — renders only when SITE.PHOTO_PATH set */}
           <div style={{ textAlign: "center", marginBottom: 18 }}>
@@ -886,7 +919,7 @@ export default function CompliancePage() {
             letterSpacing: "0.05em",
           }}
         >
-          Get Your Privacy Act Obligations Sorted
+          Would it be okay if we started with a free look?
         </h2>
         <p
           style={{
@@ -898,10 +931,10 @@ export default function CompliancePage() {
             lineHeight: 1.7,
           }}
         >
-          One engagement, one outcome: all six obligations sorted together (privacy policy,
-          breach plan, email security, login security, data mapping, and AI disclosure),
-          with every change applied on the 90-minute working call, a signed Privacy Act and
-          Essential Eight ML1 attestation letter, and the 13-section evidence pack as proof of work.
+          If the six obligations (privacy policy, breach plan, email security, login security,
+          data mapping and AI disclosure) are on your mind, would it be okay if we had a free
+          chat first? You would see where you stand, and you would know the price before anything
+          starts. If you would rather sort it yourself, or not at all, a no is completely welcome.
         </p>
         {/*
           Fix 2d — final-CTA cluster FLIPPED while testimonials.ts is empty.
@@ -980,7 +1013,7 @@ function TimelineRow({
       >
         {when}
       </div>
-      <h4
+      <h3
         style={{
           color: "var(--ice)",
           fontSize: "var(--fs-body)",
@@ -991,7 +1024,7 @@ function TimelineRow({
         }}
       >
         {title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
     </div>
   );
@@ -1019,7 +1052,7 @@ function MonitorTimelineRow({ when, title, body }: { when: string; title: string
       >
         {when}
       </div>
-      <h4
+      <h3
         style={{
           color: "var(--ice)",
           fontSize: "var(--fs-body)",
@@ -1030,7 +1063,7 @@ function MonitorTimelineRow({ when, title, body }: { when: string; title: string
         }}
       >
         {title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{body}</p>
     </article>
   );

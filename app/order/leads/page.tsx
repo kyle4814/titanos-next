@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { Suspense } from "react";
+import FormFallback from "@/components/FormFallback";
 import OrderLeadsClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Verified AU Leads Enquiry | TITANOS",
   description: "Enquiry form for Titanos verified AU contact lists. Tell Kyle what type of business you want to reach, and he builds the verified list.",
   alternates: { canonical: "https://titanos.tech/order/leads" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/order/leads", baseMetadata);
 
 export default function OrderLeadsPage() {
   return (
@@ -27,7 +31,7 @@ export default function OrderLeadsPage() {
         </SystemLabel>
       </section>
 
-      <Suspense>
+      <Suspense fallback={<FormFallback minHeight={1600} />}>
         <OrderLeadsClient />
       </Suspense>
 

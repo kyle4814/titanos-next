@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -7,16 +8,18 @@ import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const SECTION_COUNT = 9;
 
-// Fix 5g — title/og/twitter aligned. "banner-grade" framing dropped
+// Fix 5g - title/og/twitter aligned. "banner-grade" framing dropped
 // site-wide; the long-form description here is the canonical voice.
 const META_TITLE = "Methodology | TITANOS";
 const META_DESC =
-  "How the Titanos security check works. External-only scan of what a hacker can see: no break-in attempts, no credential guessing. Every finding verifiable. ABN 34 318 502 254.";
+  "How the Titanos security check works. External-only: no break-in attempts, no credential guessing, every finding verifiable. ABN 34 318 502 254.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/methodology" },
@@ -36,6 +39,8 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+export const metadata: Metadata = withSeo("/methodology", baseMetadata);
+
 const WHAT_WE_SCAN = [
   "Open ports on your domain (standard 15-port sweep: what services are publicly listening)",
   "Service banners (the version information your software announces when a connection is made)",
@@ -50,7 +55,7 @@ const WHAT_WE_DONT = [
   "Exploit attempts (I never try to use a vulnerability I find)",
   "DoS / DDoS / brute force / aggressive scans",
   "Data exfiltration (I never read DB contents, file contents, email contents)",
-  "Phishing of staff (I don’t email or call your team to test them)",
+  "Phishing of staff (I do not email or call your team to test them)",
   "Physical / social engineering tests",
 ];
 
@@ -139,6 +144,19 @@ export default function MethodologyPage() {
       </Bluf>
       <Analogy k="scouts" />
 
+      <SectionReveal style={{ padding: "var(--space-8, 32px) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.tests} />
+          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 14 }}>
+            Method: one full pass of our own test suite, recorded 8 October 2026. The same habit applies to the security check: every
+            finding is checked before it reaches you. Before you ask, it reads public records only, touches nothing of yours, replaces
+            nobody, leaves your IT provider in charge, and costs nothing.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <OpenLoop>If nothing is touched, what exactly gets read?</OpenLoop>
+
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="The rule this whole practice runs on"
@@ -216,6 +234,7 @@ export default function MethodologyPage() {
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <OpenLoop>And if something is found, who hears about it first?</OpenLoop>
           <DepthIndex index={3} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Your 90-Day Window to Fix Before Anything Is Published" />
           <div
@@ -332,9 +351,10 @@ export default function MethodologyPage() {
 
       <div className="divider-gold" />
 
-      {/* HOW TO VERIFY ME — three-key vault interlock */}
+      {/* HOW TO VERIFY ME - three-key vault interlock */}
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
+          <OpenLoop>That is my word. How would you check it without taking it?</OpenLoop>
           <DepthIndex index={7} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="How to Verify Me"
@@ -372,7 +392,7 @@ export default function MethodologyPage() {
           <SectionHeading title="Removal" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from me and your domain is suppressed
-            permanently. I honour the request immediately.
+            permanently. I honour the request immediately. And would it be okay if I ran the free check on your domain? A no is welcome.
           </p>
         </div>
       </SectionReveal>

@@ -2,18 +2,22 @@
 
 import { type ReactNode } from "react";
 import VaultKeyhole from "./VaultKeyhole";
+import { SigilMark } from "./Sigil";
 
 export default function SectionHeading({
   title,
   lead,
   showKeyhole = true,
+  sigilIndex = 0,
 }: {
   title: ReactNode;
   lead?: ReactNode;
   showKeyhole?: boolean;
+  sigilIndex?: number;
 }) {
   return (
     <div style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
+      <SigilMark index={sigilIndex} />
       <h2
         style={{
           fontFamily: "var(--font-display), Georgia, serif",

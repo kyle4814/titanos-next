@@ -15,6 +15,7 @@ export type NavItem = { label: string; href: string; external: boolean };
 export const LINKS: NavItem[] = [
   { label: "Find your offer", href: "/find", external: false },
   { label: "All offers", href: "/offers", external: false },
+  { label: "Products and courses", href: "/products", external: false },
   { label: "Case studies", href: "/case-studies", external: false },
   { label: "Free consultation", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
@@ -29,6 +30,7 @@ export const LINKS: NavItem[] = [
   { label: "Methodology", href: "/methodology", external: false },
   { label: "Costs", href: "/costs", external: false },
   { label: "Speed", href: "/speed", external: false },
+  { label: "Efficiency", href: "/efficiency", external: false },
   { label: "Parallax", href: "/parallax", external: false },
   { label: "Investors", href: "/investors", external: false },
   { label: "Mission", href: "/mission", external: false },
@@ -60,6 +62,7 @@ export const MORE_LINKS: NavItem[] = LINKS.filter(
 // Presentation only: group and one-line description per href. A href not
 // listed here still renders, under "More", so the derivation stays total.
 const META: Record<string, { group: string; blurb: string }> = {
+  "/products": { group: "Tools", blurb: "Guides, templates and short courses to keep" },
   "/scan": { group: "Tools", blurb: "Free email security check" },
   "/our-evidence-pack": { group: "Tools", blurb: "What a TITANOS report looks like" },
   "/leads": { group: "Tools", blurb: "Verified local leads" },
@@ -70,6 +73,7 @@ const META: Record<string, { group: string; blurb: string }> = {
   "/mission": { group: "Company", blurb: "Time back for people, money back to the world" },
   "/parallax": { group: "Company", blurb: "The simplest way to bring AI in" },
   "/proof": { group: "Company", blurb: "Public code, test logs, a replayable build" },
+  "/efficiency": { group: "Company", blurb: "Every efficiency figure, before and after, with its method" },
   "/speed": { group: "Company", blurb: "Fast because it is code, precise because it is checked" },
   "/refer": { group: "Company", blurb: "Introduce a business, get rewarded" },
   "/contact": { group: "Company", blurb: "Talk to Kyle directly" },

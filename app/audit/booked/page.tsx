@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 import ContactButtons from "@/components/ContactButtons";
@@ -8,11 +9,13 @@ import { SITE } from "@/lib/config";
 const META_TITLE = "Message Kyle: Free AI Audit | Titanos";
 const META_DESC = "Message Kyle directly for your free AI audit. Here's what happens next.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/audit/booked", baseMetadata);
 
 const STEPS = [
   { label: "Your message", detail: "Send Kyle a line on Telegram, or call. Tell him what your business does and what eats your week" },

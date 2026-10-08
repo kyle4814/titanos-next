@@ -548,7 +548,7 @@ export const OFFERS_MULTIPLIERS_B: Offer[] = [
       "You wire the kit into the agents you build.",
       "Each risky step now waits for a tap and leaves a receipt.",
     ],
-    edge: "This pattern is taken from the live approval rails TITANOS runs itself. The build is modelled at about 44 engineer-years on a standard estimate (COCOMO, a MODELLED figure) and was made for about US$30 a month. Most agencies have no tested gate-and-receipt design to copy.",
+    edge: "This pattern is taken from the live approval rails TITANOS runs itself. The build is sized by a standard estimate (COCOMO, a MODELLED figure, shown on the Engineering page) and was made for about US$30 a month of AI tools (operator figure). Most agencies have no tested gate-and-receipt design to copy.",
     priceAud: 497,
     cadence: "one-off",
     priceNote: "AU$99 a month for updates is optional.",

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { CASES, getCase } from "@/lib/caseStudies";
+import { OpenLoop } from "@/components/FlexBlock";
 
 export const dynamicParams = false;
 
@@ -15,13 +19,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = getCase((await params).slug);
   if (!c) return {};
   const url = `https://titanos.tech/case-studies/${c.slug}`;
-  return {
+  return withSeo(`/case-studies/${c.slug}`, {
     title: `${c.title} | TITANOS`,
     description: c.teaser,
     alternates: { canonical: url },
     openGraph: { title: c.title, description: c.teaser, type: "article", url },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
@@ -33,7 +37,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const c = getCase((await params).slug);
   if (!c) notFound();
   return (
-    <main>
+    <div>
+      <JsonLd data={article({ path: `/case-studies/${c.slug}`, headline: c.title, description: c.teaser })} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Case studies", path: "/case-studies" }, { name: c.title, path: `/case-studies/${c.slug}` }])} />
       <PageHero badge={c.sector} title={c.title} sub={c.brief} />
       <section style={SECTION}>
         <div style={WRAP}>
@@ -54,8 +60,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ))}
           </div>
 
+          <p style={BODY}>
+            The biggest number comes first, with its method underneath. Every figure is read from the build&apos;s own git log or a dated
+            usage reading, and nothing here touched anyone&apos;s private data.
+          </p>
+
           <h2 style={H}>How fast</h2>
           <p style={BODY}>{c.speed}</p>
+
+          <OpenLoop>Fast is nice. What did it cost?</OpenLoop>
 
           <h2 style={H}>What it cost</h2>
           <p style={BODY}>{c.cost}</p>
@@ -68,6 +81,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </li>
             ))}
           </ul>
+
+          <OpenLoop>Cheap and fast still has to work. How do we know it does?</OpenLoop>
 
           <h2 style={H}>How it was checked</h2>
           <p style={BODY}>{c.tested}</p>
@@ -105,7 +120,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 40 }}>
-            Want something like this for your business? A free consultation is the first step, with no pressure.
+            Would it be okay if we talked about something like this for your business? A free consultation is the first step, and a no is welcome.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/audit">Book a free consultation</AnimatedButton>
@@ -115,6 +130,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

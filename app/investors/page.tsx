@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
+import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
   "The measured base, what each dollar of compute builds, the ladder to AU$1 million a month, and where the profits go. Not an offer of shares; an invitation to talk.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/investors" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/investors" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/investors", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 860, margin: "0 auto" };
@@ -30,16 +36,13 @@ const A: CSSProperties = { color: "var(--gold)" };
 
 const BASE: [string, string][] = [
   ["3.5 hours", "idea to a working, tested app (replay on the proof page)"],
-  ["~132", "engineers' worth of output a year, priced by the COCOMO model"],
-  ["AU$300", "a month in AI tools behind all of it"],
-  ["~6,400x", "engineering value per dollar of compute (AU$23M a year of work on AU$3,600 a year)"],
+  [`~${v("annual_ey")}`, `engineers' worth of output a year, priced by the COCOMO model (MODELLED, ${AS_OF_LONG})`],
+  ["AU$300", "a month in AI tools behind all of it (operator figure, no receipt on file)"],
+  [`~${Math.round(v("per_dollar_full_today_x")).toLocaleString("en-AU")}x`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on AU$3,600 a year)`],
 ];
 
 const COMPUTE: [string, string, string][] = [
-  ["AU$300 a month (today)", "1", "~132 engineers' worth a year (measured)"],
-  ["AU$1,000 a month", "3", "~19,000 engineers' worth a year (modelled)"],
-  ["AU$10,000 a month", "33", "~209,000 engineers' worth a year (modelled)"],
-  ["AU$100,000 a month", "333", "~2.1 million engineers' worth a year (modelled)"],
+  ["AU$300 a month (today)", "1", `~${v("annual_ey")} engineers' worth a year (MODELLED: Basic COCOMO on measured lines)`],
 ];
 
 const LADDER: [string, string, string, string, string][] = [
@@ -51,15 +54,27 @@ const LADDER: [string, string, string, string, string][] = [
 
 export default function Investors() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Investors"
         title="What your money builds."
-        sub="A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk."
+        sub="A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk, and a no is welcome."
       />
       <section style={SECTION}>
         <div style={WRAP}>
           <h2 style={H}>The measured base</h2>
+          <p style={BODY}>
+            Each card carries its own label. The first is modelled with the COCOMO method, the second is measured off the
+            running system, and the third is a recorded same-25-job comparison. The source is one tap away on each. This is
+            the base, not an offer.
+          </p>
+          <FlexGrid items={[FLEX.engineers, FLEX.fleetJobs, FLEX.costPerJob]} />
+          <p style={{ ...BODY, marginTop: 14 }}>
+            Think of it as a whole engineering department for the price of one person, with the receipts kept. Before you
+            ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Everything here is built from public records and our
+            own logs, nothing of anyone&apos;s is touched, and nobody is replaced.
+          </p>
+          <OpenLoop>What does that look like as a few plain lines you can check yourself?</OpenLoop>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
             {BASE.map(([n, l]) => (
               <div key={l} style={CARD}>
@@ -73,13 +88,14 @@ export default function Investors() {
             the <a href="/engineering" style={A}>engineering maths</a>.
           </p>
 
+          <OpenLoop>So what happens if the compute budget goes up? The next table is where that gets honest.</OpenLoop>
           <h2 style={H}>What compute buys</h2>
           <p style={BODY}>
-            Each AU$300 a month buys one AI build account. The first row is measured. The rest are calculations built on it,
-            including the speed-ups from turning repeated work into code; they become facts only as weekly results confirm
-            them, and we publish those results.
+            Each AU$300 a month buys one AI build account. Today that is about {dec("estate_ey")} engineer-years modelled over {v("span_days")} days
+            (Basic COCOMO on {int("estate_sloc")} measured lines). More accounts would run more work in parallel, but the scale-up rows are
+            scenarios with no result behind them, so none is printed here until weekly results confirm one.
           </p>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}>
               <thead>
                 <tr>
@@ -104,13 +120,14 @@ export default function Investors() {
             </table>
           </div>
 
+          <OpenLoop>And if it did scale, where would the money go?</OpenLoop>
           <h2 style={H}>The ladder to AU$1 million a month, and where it goes</h2>
           <p style={BODY}>
             Monthly revenue, split between the founder, the system (compute, people, the next product) and the world
             (charities, education, housing, jobs). The founder&apos;s share is capped at what a good life needs; the
             rest compounds or goes back out.
           </p>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640 }}>
               <thead>
                 <tr>
@@ -139,6 +156,7 @@ export default function Investors() {
             <a href="/mission" style={A}>mission page</a>.
           </p>
 
+          <OpenLoop>Why would a big buyer pick this over the other options?</OpenLoop>
           <h2 style={H}>Why it is defensible</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li style={{ marginBottom: 8 }}>
@@ -163,7 +181,7 @@ export default function Investors() {
           </p>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 30 }}>
-            If the numbers interest you, the next step is a conversation, with no pressure. Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>.
+            If the numbers interest you, would it be okay if we had a conversation? There is no pressure, and a no is welcome. Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/contact">Start a conversation</AnimatedButton>
@@ -173,6 +191,6 @@ export default function Investors() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
