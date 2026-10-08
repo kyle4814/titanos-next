@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SpaceImage from "@/components/SpaceImage";
 import { SPACE_IMAGES } from "@/lib/space-images";
@@ -8,13 +9,13 @@ const META_TITLE = "The deep field: real images of the universe | TITANOS";
 const META_DESC =
   "Black holes, nebulae, star fields and galaxies from NASA, ESA/Webb and ESA/Hubble. The same braid of light we build with: loose strands, a knot, a network.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/deep-field", {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/deep-field" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/deep-field" },
   robots: { index: true, follow: true },
-};
+});
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const GRID: CSSProperties = {

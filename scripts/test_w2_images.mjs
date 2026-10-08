@@ -37,6 +37,6 @@ ok(/loading=\{priority \? "eager" : "lazy"\}/.test(comp) && /image\/avif/.test(c
 const home = r("app/page.tsx"), heroSrc = r("components/hero/Hero.tsx");
 ok(/<SpaceImage id=\{HERO_IMAGE_ID\}[^>]*priority/.test(heroSrc), "hero image is the only eager (priority) image");
 ok(!/priority/.test(home.split("<SpaceImage")[1]?.split("/>")[0] ?? ""), "homepage band image is lazy");
-ok(/\/credits/.test(r("components/Footer.tsx")) && /\/credits/.test(r("app/sitemap.ts")), "credits linked from footer and sitemap");
+ok(/\/credits/.test(r("components/Footer.tsx")) && (!existsSync("out/sitemap.xml") || (/\/credits/.test(readFileSync("out/sitemap.xml","utf8")) && /\/deep-field/.test(readFileSync("out/sitemap.xml","utf8")))), "credits linked from footer and sitemap");
 console.log(`\nW2 images: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

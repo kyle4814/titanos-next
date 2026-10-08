@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import { SPACE_IMAGES } from "@/lib/space-images";
 
@@ -7,13 +8,13 @@ const META_TITLE = "Image credits and licences | TITANOS";
 const META_DESC =
   "Every space image on titanos.tech: title, source page, licence and the credit line required by NASA, ESA/Webb and ESA/Hubble.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/credits", {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/credits" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/credits" },
   robots: { index: true, follow: true },
-};
+});
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 980, margin: "0 auto" };
