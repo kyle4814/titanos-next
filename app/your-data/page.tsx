@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ import { Inscription, DepthIndex, OperatorNote, OmegaSeal } from "@/components/M
 
 const SECTION_COUNT = 7;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "What happens to your data: quote audit · TITANOS",
   description:
-    "If you send me your old quotes for a free audit: exactly what I receive, where it's stored, how long I keep it, and what I never do with it. Plain English, no legal padding.",
+    "If you send me old quotes for a free audit: what I receive, where it's stored, how long I keep it, and what I never do with it. Plain English.",
   alternates: { canonical: "https://titanos.tech/your-data" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/your-data", baseMetadata);
 
 const headingStyle = {
   fontFamily: "var(--font-display), Georgia, serif",

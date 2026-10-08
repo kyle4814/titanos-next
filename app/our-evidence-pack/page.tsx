@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -15,10 +16,10 @@ const REQUEST_HREF = "/scan#request";
 
 const META_TITLE = "What's in the Compliance Pack | TITANOS";
 const META_DESC =
-  "Before you pay for anything, see exactly what you get. This is my own 13-section security and compliance report, run on my own business, published in full, lightly redacted. ABN 34 318 502 254.";
+  "Before you pay for anything, see what you get: my own 13-section security and compliance report, run on my own business and published in full, lightly redacted.";
 const SAMPLE_PDF = "/sample-evidence-pack-excerpt.pdf";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/our-evidence-pack" },
@@ -37,6 +38,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/our-evidence-pack", baseMetadata);
 
 // Three groups make the 13 sections scannable at a glance.
 const GROUPS: Array<{
@@ -223,6 +226,7 @@ export default function OurEvidencePackPage() {
       {/* WHY WE PUBLISHED IT */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <DepthIndex index={1} total={5} style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto 12px" }} />
+        <h2 className="sr-only">Why this report is published</h2>
         <div
           style={{
             maxWidth: "var(--maxw-prose)",

@@ -11,6 +11,8 @@ import DeferredShell from "@/components/DeferredShell";
 import PageMood from "@/components/PageMood";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import JsonLd from "@/components/JsonLd";
+import { organization, website } from "@/lib/jsonld";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
 //
@@ -158,26 +160,8 @@ export default function RootLayout({
           Email if you want to talk.
         */}
         {/* SEO-06: Organisation JSON-LD on every page — page.tsx should drop its duplicate copy */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Titanos",
-              url: "https://titanos.tech",
-              logo: "https://titanos.tech/apple-touch-icon.png",
-              description:
-                "External attack-surface scanning + Privacy Act compliance + AI Implementation for AU/NZ/SG businesses.",
-              areaServed: ["AU", "NZ", "SG"],
-              identifier: {
-                "@type": "PropertyValue",
-                name: "ABN",
-                value: "34318502254",
-              },
-            }),
-          }}
-        />
+        <JsonLd data={organization()} />
+        <JsonLd data={website()} />
         {/* A11Y-04: skip-link — visually hidden until focused, bypasses 6 nav tab stops */}
         <a
           href="#main"

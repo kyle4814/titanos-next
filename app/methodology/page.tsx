@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -14,9 +15,9 @@ const SECTION_COUNT = 9;
 // site-wide; the long-form description here is the canonical voice.
 const META_TITLE = "Methodology | TITANOS";
 const META_DESC =
-  "How the Titanos security check works. External-only scan of what a hacker can see: no break-in attempts, no credential guessing. Every finding verifiable. ABN 34 318 502 254.";
+  "How the Titanos security check works. External-only: no break-in attempts, no credential guessing, every finding verifiable. ABN 34 318 502 254.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/methodology" },
@@ -35,6 +36,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/methodology", baseMetadata);
 
 const WHAT_WE_SCAN = [
   "Open ports on your domain (standard 15-port sweep: what services are publicly listening)",

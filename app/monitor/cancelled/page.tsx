@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
 import { OmegaSeal } from "@/components/Myth";
@@ -7,13 +8,15 @@ import { DISPLAY } from "@/lib/pricing";
 // Site Fix 6, Stripe Checkout cancel redirect target. No subscription
 // was created. Graceful exit, route back to /monitor or /scan.
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Checkout cancelled: Titanos Monitor",
   description:
     "Checkout cancelled. No subscription was created. The free security check is still available if you'd like to see your business's gaps first.",
   alternates: { canonical: "https://titanos.tech/monitor/cancelled" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/monitor/cancelled", baseMetadata);
 
 export default function MonitorCancelledPage() {
   return (

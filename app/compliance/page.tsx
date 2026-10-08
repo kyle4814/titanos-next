@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { STATS } from "@/lib/stats";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -27,9 +28,9 @@ const STRIPE_LINK = SITE.STRIPE_COMPLIANCE_LINK;
 // the new plain-English hero and the decoupled monitor framing.
 const META_TITLE =
   "Privacy Act Compliance Before 10 December 2026, Done With You | TITANOS";
-const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations: privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. I sort all six with you in one working call. ${DISPLAY.PACK_PRICE} one-time.`;
+const META_DESC = `From Dec 2026, AU small businesses face six Privacy Act obligations. I sort all six with you in one working call: policy, breach plan, email, logins, data map, AI disclosure. ${DISPLAY.PACK_PRICE} one-time.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/compliance" },
@@ -48,6 +49,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/compliance", baseMetadata);
 
 const THREAD_STEPS: ThreadStep[] = [
   {
@@ -980,7 +983,7 @@ function TimelineRow({
       >
         {when}
       </div>
-      <h4
+      <h3
         style={{
           color: "var(--ice)",
           fontSize: "var(--fs-body)",
@@ -991,7 +994,7 @@ function TimelineRow({
         }}
       >
         {title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
     </div>
   );
@@ -1019,7 +1022,7 @@ function MonitorTimelineRow({ when, title, body }: { when: string; title: string
       >
         {when}
       </div>
-      <h4
+      <h3
         style={{
           color: "var(--ice)",
           fontSize: "var(--fs-body)",
@@ -1030,7 +1033,7 @@ function MonitorTimelineRow({ when, title, body }: { when: string; title: string
         }}
       >
         {title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{body}</p>
     </article>
   );

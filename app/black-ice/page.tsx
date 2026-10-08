@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -10,7 +11,7 @@ const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
   "A free field guide to frictionless thinking, compressed knowledge, and governed AI autonomy. The same operating doctrine TITANOS is built and run on.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/black-ice" },
@@ -24,6 +25,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/black-ice", baseMetadata);
 
 const PRIMITIVES: { name: string; line: string }[] = [
   { name: "OBSERVE", line: "See what's actually happening before reacting to it." },

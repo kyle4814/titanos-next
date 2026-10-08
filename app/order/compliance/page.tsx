@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import OrderComplianceClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { DISPLAY, PRICING } from "@/lib/pricing";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Privacy Act Compliance Enquiry | TITANOS",
   description: "Structured intake for Titanos Privacy Act compliance engagement. Done-with-you in one working call.",
   alternates: { canonical: "https://titanos.tech/order/compliance" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/order/compliance", baseMetadata);
 
 export default function OrderCompliancePage() {
   return (

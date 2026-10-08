@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SectionReveal from "@/components/SectionReveal";
@@ -22,13 +25,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const o = getOffer(slug);
   if (!o) return {};
   const url = `https://titanos.tech/offers/${o.slug}`;
-  return {
+  return withSeo(`/offers/${o.slug}`, {
     title: `${o.name} | TITANOS`,
     description: o.bluf,
     alternates: { canonical: url },
     openGraph: { title: o.name, description: o.bluf, type: "website", url },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 function List({ items, mark }: { items: string[]; mark: string }) {
@@ -110,6 +113,9 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
   const buyer = o.buyer.charAt(0).toLowerCase() + o.buyer.slice(1);
   return (
     <>
+      <JsonLd data={product({ path: `/offers/${o.slug}`, name: o.name, description: o.bluf, priceAud: o.priceAud, buyable: av === "BUYABLE" })} />
+      <JsonLd data={faqPage(o.faq)} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Offers", path: "/offers" }, { name: o.name, path: `/offers/${o.slug}` }])} />
       <PageHero
         badge={`TITANOS · ${AVAILABILITY_TEXT[av].badge}`}
         title={o.name}

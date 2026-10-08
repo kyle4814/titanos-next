@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ const META_TITLE = "The mission: why TITANOS exists | TITANOS";
 const META_DESC =
   "Give people their time back instead of taking their jobs, and put most of what we earn back into the world: children first, then jobs, housing, health and education.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/mission" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/mission" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/mission", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
@@ -43,7 +46,7 @@ const RULES = [
 
 export default function Mission() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="The mission"
         title="Give people their time back, then give the money back too."
@@ -101,6 +104,6 @@ export default function Mission() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

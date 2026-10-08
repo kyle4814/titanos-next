@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { Suspense } from "react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
@@ -13,9 +14,9 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
-  "A free call with Kyle. Tell him what's eating your week, and work out together what's automatable in your business, and what it's worth. No cost, no obligation.";
+  "A free call with Kyle. Tell him what's eating your week and work out what is automatable in your business, and what it's worth. No cost, no obligation.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/audit" },
@@ -34,6 +35,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/audit", baseMetadata);
 
 const STEPS = [
   { num: "01", title: "You tell me how your business actually runs day to day" },

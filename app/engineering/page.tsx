@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties, ReactNode } from "react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
@@ -9,9 +10,9 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 
 const META_TITLE = "44 engineer-years in 4 months | TITANOS";
 const META_DESC =
-  "170,651 lines of production code across four repositories since June 2026, priced by the industry-standard COCOMO model at 44 engineer-years. The maths, the method and how to re-run it yourself.";
+  "170,651 lines of production code since June 2026, priced by the COCOMO model at 44 engineer-years (MODELLED). The maths, the method and how to re-run it.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/engineering" },
@@ -30,6 +31,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/engineering", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-16) 20px", position: "relative", zIndex: 2 };
 const PROSE: CSSProperties = { maxWidth: "var(--maxw-prose)", margin: "0 auto" };

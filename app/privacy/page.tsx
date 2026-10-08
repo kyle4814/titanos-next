@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 
 const SECTION_COUNT = 8;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Privacy Policy · TITANOS",
   description:
     "How Titanos (Kyle Deligny, ABN 34 318 502 254) handles personal information collected via titanos.tech. AU Privacy Act 1988 + Spam Act 2003 compliant.",
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/privacy", baseMetadata);
 
 export default function PrivacyPage() {
   return (

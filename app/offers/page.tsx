@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,13 +14,15 @@ const TITLE = "Offers: An Offer for Every Business | TITANOS";
 const DESC =
   "Pick who you are, see what TITANOS would do for you, start free or buy online. Prices in AUD, no GST charged.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "https://titanos.tech/offers" },
   openGraph: { title: TITLE, description: DESC, type: "website", url: "https://titanos.tech/offers" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/offers", baseMetadata);
 
 const NEEDS: { id: string; label: string; groups: OfferGroup[] }[] = [
   { id: "need-work", label: "More work", groups: ["tradies", "sales"] },

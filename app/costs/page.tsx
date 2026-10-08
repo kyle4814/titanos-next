@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -11,13 +12,15 @@ const META_TITLE = "Prices, costs and savings | TITANOS";
 const META_DESC =
   "99% code, 1% AI, and a person only where it matters. How we keep running costs to about AU$20 to AU$50 a month, with the published prices and our own measured numbers.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/costs" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/costs" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/costs", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
@@ -77,7 +80,7 @@ const TERMS = [
 export default function Costs() {
   const groups = offersByGroup();
   return (
-    <main>
+    <div>
       <PageHero
         badge="How we operate"
         title="Every price, every cost, all the maths."
@@ -306,6 +309,6 @@ export default function Costs() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
@@ -15,13 +18,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = getCase((await params).slug);
   if (!c) return {};
   const url = `https://titanos.tech/case-studies/${c.slug}`;
-  return {
+  return withSeo(`/case-studies/${c.slug}`, {
     title: `${c.title} | TITANOS`,
     description: c.teaser,
     alternates: { canonical: url },
     openGraph: { title: c.title, description: c.teaser, type: "article", url },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
@@ -33,7 +36,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const c = getCase((await params).slug);
   if (!c) notFound();
   return (
-    <main>
+    <div>
+      <JsonLd data={article({ path: `/case-studies/${c.slug}`, headline: c.title, description: c.teaser })} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Case studies", path: "/case-studies" }, { name: c.title, path: `/case-studies/${c.slug}` }])} />
       <PageHero badge={c.sector} title={c.title} sub={c.brief} />
       <section style={SECTION}>
         <div style={WRAP}>
@@ -115,6 +120,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

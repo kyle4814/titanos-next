@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -11,13 +12,15 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 // until Kyle confirms the enterprise prices. The figures come from lib/pricing.ts
 // (anchors, not market-tested) and are shown as starting points only.
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Titanos Enterprise: Scoped on a Call",
   description:
     "Indicative starting points for larger engagements. Every engagement is scoped on a call.",
   alternates: { canonical: "https://titanos.tech/enterprise" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/enterprise", baseMetadata);
 
 const ENTERPRISE_OFFERS = [
   { label: "Board AI risk advisory", price: DISPLAY.BOARD_ADVISORY_MONTHLY },

@@ -25,7 +25,7 @@ export default function OrderLeadsClient() {
   const defaultTier = params.get("tier") ?? "starter";
 
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
         background: "var(--vault-bg, #080808)",
@@ -215,6 +215,6 @@ export default function OrderLeadsClient() {
           rows={2}
         />
       </OrderForm>
-    </main>
+    </div>
   );
 }

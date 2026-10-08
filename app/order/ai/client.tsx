@@ -94,7 +94,7 @@ export default function OrderAiClient() {
   const subheading = `Tell Kyle what's most repetitive in your business. He'll confirm the tier that fits: Growth ${DISPLAY.AI_GROWTH_PARTNER}, Ops ${DISPLAY.AI_OPS_PARTNER}, Embedded ${DISPLAY.AI_EMBEDDED_PARTNER}, all ${DISPLAY.AI_RETAINER_MIN}. Month 1 is the build, months 2 to 3 optimise, then it's month-to-month.`;
 
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
         background: "var(--vault-bg, #080808)",
@@ -147,6 +147,6 @@ export default function OrderAiClient() {
           placeholder="Previous attempts, constraints, questions…"
         />
       </OrderForm>
-    </main>
+    </div>
   );
 }

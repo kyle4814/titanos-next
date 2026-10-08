@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import OrderMonitorClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Monthly Security Monitor Enquiry | TITANOS",
   description: "Structured intake for Titanos Continuous Monitor. Monthly external security scan with delta alerts.",
   alternates: { canonical: "https://titanos.tech/order/monitor" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/order/monitor", baseMetadata);
 
 export default function OrderMonitorPage() {
   return (

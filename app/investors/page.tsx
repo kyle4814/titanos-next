@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
   "The measured base, what each dollar of compute builds, the ladder to AU$1 million a month, and where the profits go. Not an offer of shares; an invitation to talk.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/investors" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/investors" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/investors", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 860, margin: "0 auto" };
@@ -51,7 +54,7 @@ const LADDER: [string, string, string, string, string][] = [
 
 export default function Investors() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Investors"
         title="What your money builds."
@@ -173,6 +176,6 @@ export default function Investors() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

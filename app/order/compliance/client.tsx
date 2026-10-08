@@ -109,7 +109,7 @@ function SelectField({
 
 export default function OrderComplianceClient() {
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
         background: "var(--vault-bg, #080808)",
@@ -200,6 +200,6 @@ export default function OrderComplianceClient() {
           placeholder="Existing privacy policy URL, specific concerns, questions…"
         />
       </OrderForm>
-    </main>
+    </div>
   );
 }

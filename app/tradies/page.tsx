@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -15,9 +16,9 @@ import { Bluf, FrontLoad } from "@/components/SalesKit";
 // existing free consultation route (AUDIT_MESSAGE_HREF); no new form backend.
 
 const META_TITLE = `Job Flow for Tradies: New Work Found Before It's Advertised | ${DISPLAY.JOB_FLOW_MONTHLY}`;
-const META_DESC = `Job Flow finds you new work before it is advertised: who just won the contract near you, fresh local leads and more reviews. ${DISPLAY.JOB_FLOW_MONTHLY}, launching soon. Subbie Finder is available now.`;
+const META_DESC = `Job Flow finds you new work before it is advertised: who won the contract near you, fresh local leads, more reviews. ${DISPLAY.JOB_FLOW_MONTHLY}, launching soon. Subbie Finder is live.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/tradies" },
@@ -36,6 +37,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/tradies", baseMetadata);
 
 const WHAT_YOU_GET = [
   "Winners near you: contract awards in your postcode and radius each month, with value, scope, suburb and how to reach the head contractor who now needs subbies.",
