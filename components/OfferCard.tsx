@@ -12,6 +12,7 @@
  *   IntersectionObserver. Saves CPU + battery on long pages.
  */
 
+import { SigilCorner } from "./Sigil";
 import { motion, useReducedMotion } from "framer-motion";
 import { Radar, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -42,6 +43,12 @@ const iconMap = {
   sparkles: Sparkles,
   users: Users,
 };
+
+function cornerIndex(t: string) {
+  let h = 0;
+  for (const c of String(t)) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return h;
+}
 
 export default function OfferCard(props: Offer) {
   const Icon = iconMap[props.icon];
@@ -142,6 +149,7 @@ export default function OfferCard(props: Offer) {
           aria-hidden="true"
         />
       </IdleIcon>
+      <SigilCorner index={cornerIndex(props.title)} />
 
       <div
         style={{

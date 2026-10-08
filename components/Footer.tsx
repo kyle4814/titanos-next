@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SigilSeals } from "./Sigil";
 
 /**
  * Enterprise footer — three link columns + identity block.
@@ -154,6 +155,8 @@ export default function Footer() {
           I personally review every deliverable before it reaches you · titanos.tech
         </div>
       </div>
+      <SigilSeals />
+      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, opacity: 0.6, margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
     </footer>
   );
 }

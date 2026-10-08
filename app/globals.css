@@ -975,3 +975,13 @@ select:focus-visible,
 
 /* Long unbroken URLs in blog sources must wrap, never scroll the page. */
 main p, main li { overflow-wrap: anywhere; }
+
+/* SIGILS: easter egg + loader. Durations step by phi (0.62s, 1s, 1.62s). */
+.sigil-egg .sigil-glyph { transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), filter 0.62s; }
+.sigil-egg:hover .sigil-glyph { transform: rotate(137.5deg) scale(1.618); filter: drop-shadow(0 0 8px var(--gold)); }
+.sigil-spin { display: inline-block; animation: sigil-turn 1.62s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@keyframes sigil-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .sigil-spin { animation: none; }
+  .sigil-egg .sigil-glyph { transition: none; }
+}
