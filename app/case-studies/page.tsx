@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import { CASES } from "@/lib/caseStudies";
 import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import { TITANOS, titanosPath } from "@/lib/case-studies/titanos";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 
@@ -42,6 +43,24 @@ export default function CaseStudies() {
       </section>
       <OpenLoop>That is the volume. What does one finished build look like up close?</OpenLoop>
       <section style={SECTION}>
+        <a
+          href={titanosPath}
+          style={{
+            display: "block",
+            maxWidth: 960,
+            margin: "0 auto 18px",
+            textDecoration: "none",
+            background: "var(--card)",
+            border: "1px solid var(--gold-dim)",
+            borderRadius: "var(--radius-md)",
+            padding: "22px 24px",
+          }}
+        >
+          <div style={{ color: "var(--gold)", fontSize: 13, letterSpacing: 1, textTransform: "uppercase" }}>Case study · {TITANOS.sector}</div>
+          <h2 style={{ color: "var(--ice)", fontSize: 24, margin: "8px 0 10px" }}>{TITANOS.title}</h2>
+          <p style={{ color: "var(--ice)", opacity: 0.85, fontSize: 15, lineHeight: 1.6, margin: 0 }}>{TITANOS.teaser}</p>
+          <div style={{ color: "var(--gold)", marginTop: 14, fontSize: 15 }}>Read the case study →</div>
+        </a>
         {arianceVisible && (
           <a
             href={ariancePath}

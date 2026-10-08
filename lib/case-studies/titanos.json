@@ -1,0 +1,178 @@
+{
+  "slug": "titanos",
+  "sector": "TITANOS on itself",
+  "title": "We ran TITANOS on ourselves first. These are the receipts.",
+  "teaser": "Everything we have built, told from our own records: what it cost, how fast it ran, how it was tested, what went wrong and what is still unproven. Every number is labelled MEASURED or MODELLED, with its source and date.",
+  "as_of": "9 October 2026",
+  "world": {
+    "heading": "If you are deciding whether to let AI near real work",
+    "paragraphs": [
+      "You have probably heard two stories. One says AI will do everything. The other says it makes things up. Both are hard to check from the outside, and nobody wants to be the first in their sector to find out the hard way.",
+      "So before we ask anyone to trust our system with their work, we used it on our own. Same tools, same rules, same checks. This page is what the records say, including the parts that did not go well."
+    ]
+  },
+  "concerns": {
+    "heading": "The questions you are probably asking first",
+    "items": [
+      [
+        "Who is this from?",
+        "TITANOS, an Australian business. Everything on this page is about our own build, so there is no client to expose and nothing of anyone else's is on show."
+      ],
+      [
+        "How were the numbers found?",
+        "From our own logs, test runs, usage meters and cost records. Public information only. Nothing of anyone else's was touched to produce them."
+      ],
+      [
+        "Does it replace anyone?",
+        "No. The work described here is drafting, checking and building, and every send, spend and sign-off still waits for a human tap. The aim is hours handed back to people, not people removed."
+      ],
+      [
+        "Who stays in charge?",
+        "Your own team and your own IT. In a client setup the system runs on the client's own keys and infrastructure, and we hold no client data."
+      ],
+      [
+        "What does it cost?",
+        "Plans are on the pricing page. The cost of running the system itself is on this page, in dollars and cents, per job."
+      ],
+      [
+        "Is any of this an invented number?",
+        "Each figure below carries a label. MEASURED means it was counted from a record. MODELLED means it was calculated from a stated method and is an estimate, not a result."
+      ]
+    ]
+  },
+  "big": {
+    "heading": "The size of what exists",
+    "lede_ledger": [
+      "estate"
+    ],
+    "analogy_label": "MODELLED",
+    "analogy_source": "Basic COCOMO organic model applied to the measured line count",
+    "more_ledger": [
+      "estate_ey",
+      "estate_cost"
+    ]
+  },
+  "gold": {
+    "heading": "One finished sales pack: 27 US cents and under two minutes",
+    "paragraphs": [
+      "The clearest single receipt is the pack we write for a large prospect. One was produced end to end for US$0.2661, in 1 minute 49 seconds, which is about the time it takes to boil a kettle and pour a cup of tea (the comparison is ours, the times are the record's).",
+      "Every number inside that pack was traced back to a source: 724 of 724. The cost record splits the spend into the drafting step (US$0.1365) and the independent checking step (US$0.1296), so the check costs about as much as the draft. That is deliberate."
+    ],
+    "figures": [
+      {
+        "id": "gold_cost",
+        "big": "US$0.2661",
+        "text": "total model cost of one gold-standard stage-one pack",
+        "label": "MEASURED",
+        "source": "Factory cost record for one finished pack",
+        "date": "2026-10-09"
+      },
+      {
+        "id": "gold_time",
+        "big": "1 min 49 s",
+        "text": "from start to a finished, checked pack",
+        "label": "MEASURED",
+        "source": "Factory run record for the same pack",
+        "date": "2026-10-09"
+      },
+      {
+        "id": "gold_trace",
+        "big": "724 / 724",
+        "text": "numbers in the pack traced to a source",
+        "label": "MEASURED",
+        "source": "Factory trace check for the same pack",
+        "date": "2026-10-09"
+      }
+    ]
+  },
+  "receipts": {
+    "heading": "Speed and standard, from the records",
+    "ledger": [
+      "pace",
+      "weekly",
+      "tests",
+      "cost_job",
+      "tokens"
+    ],
+    "figures": [
+      {
+        "id": "factory_tests",
+        "big": "1,196 tests",
+        "text": "in the sales-pack factory's own suite, all passing, in 533 seconds",
+        "label": "MEASURED",
+        "source": "Factory operations state record",
+        "date": "2026-10-09"
+      },
+      {
+        "id": "job_cost",
+        "big": "US$0.973 to US$0.196",
+        "text": "average cost per AI worker job across 1,476 jobs, a 4.97 times fall. The separate 25-job matched test above shows the 8.4 times figure.",
+        "label": "MEASURED",
+        "source": "Our cost-per-job board, workers only",
+        "date": "2026-10-09"
+      },
+      {
+        "id": "cron_fail",
+        "big": "89% to 0.2%",
+        "text": "failed runs: one housekeeping job failed 256 of 287 runs on 8 October. Across all 4,595 scheduled runs in the 24 hours to 9 October, 11 failed. Different denominators, so read them as before and after for the same machine, not as one rate.",
+        "label": "MEASURED",
+        "source": "Scheduler run log",
+        "date": "2026-10-09"
+      }
+    ]
+  },
+  "wrong": {
+    "heading": "What went wrong, because you should see that too",
+    "paragraphs": [
+      "We built a loop that kept the AI workers busy whenever there was nothing specified to build. Our own records showed it made noise: 1,236 of 1,451 job starts in 48 hours came from that loop, and none of them were merged into the product. It also filled the disk with working copies, about 738 GB, and one of our machines crashed.",
+      "We found it by measuring, turned the loop off the same day, and added a disk guard with tests so that failure cannot repeat. The point is not that it went wrong. The point is that the record showed it, and the fix is now a permanent check."
+    ],
+    "label": "MEASURED",
+    "source": "Fleet job log and disk reading, 9 October 2026"
+  },
+  "unproven": {
+    "heading": "What is not proven yet",
+    "paragraphs": [
+      "The quality of our sales packs is judged by an automated checking gate, and that gate agrees with a human reader for the right reasons somewhere between 60 and 80 percent of the time. As of 9 October 2026 no whale-sized pack has been sent to a buyer, so no buyer has yet judged the quality for real. Until one does, those quality figures are a proxy.",
+      "The 336 times ceiling on this page's ledger is a MODELLED limit, not an outcome. Measured output is about 3 times so far."
+    ],
+    "label": "MEASURED",
+    "source": "Gate calibration record and outbound log, 9 October 2026"
+  },
+  "free": {
+    "heading": "What you can use today, free",
+    "paragraphs": [
+      "The method behind every figure here is public on our methodology page, and the live numbers are on the efficiency page. If you want to see how we check a business without touching anything of theirs, the free scan reads public DNS records only and tells you in plain English where you stand."
+    ],
+    "links": [
+      [
+        "Methodology",
+        "/methodology"
+      ],
+      [
+        "Efficiency",
+        "/efficiency"
+      ],
+      [
+        "Free scan",
+        "/scan"
+      ]
+    ]
+  },
+  "close": {
+    "heading": "A small next step, if it suits you",
+    "paragraphs": [
+      "We would not ask you to take any of this on trust. Would it be okay if we showed you what the same measuring looks like on one process in your own business? It would use public information only, you would keep everything, and a no is completely fine.",
+      "If now is not the time, the pages above stay open and the numbers get re-measured as we go."
+    ],
+    "cta": [
+      "Book a free consultation",
+      "/audit"
+    ],
+    "cta_secondary": [
+      "See the pricing",
+      "/offers"
+    ]
+  },
+  "cover": null
+}
