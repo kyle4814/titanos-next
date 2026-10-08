@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
-    "test": "bash scripts/test_no_orphan_scripts.sh && node scripts/test_nav_links.mjs && node scripts/test_contrast_tokens.mjs && node scripts/test_css_polish.mjs && node scripts/test_offer_copy.mjs && node scripts/test_monitor_domain.mjs && node scripts/test_finder.mjs && node scripts/test_api_contracts.mjs && bash scripts/test_ghpages_worktree.sh && bash scripts/test_verify_live.sh && bash scripts/test_deploy_gate.sh && node scripts/test_w1_foundation.mjs"
+    "test": "bash scripts/test_no_orphan_scripts.sh && node scripts/test_nav_links.mjs && node scripts/test_contrast_tokens.mjs && node scripts/test_css_polish.mjs && node scripts/test_offer_copy.mjs && node scripts/test_monitor_domain.mjs && node scripts/test_finder.mjs && node scripts/test_api_contracts.mjs && bash scripts/test_ghpages_worktree.sh && bash scripts/test_verify_live.sh && bash scripts/test_deploy_gate.sh && node scripts/test_w1_foundation.mjs && node scripts/test_w2_images.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.1",

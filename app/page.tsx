@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/hero/Hero";
 import VoidPortal from "@/components/hero/VoidPortal";
+import SpaceImage from "@/components/SpaceImage";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -206,6 +207,10 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <Hero />
       <VoidPortal />
+      <div className="ds-band">
+        <SpaceImage id="webb-cosmic-cliffs" sizes="100vw" />
+        <a className="ds-band__cap" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
+      </div>
 
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
       <section

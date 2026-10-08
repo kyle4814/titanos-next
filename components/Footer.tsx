@@ -35,6 +35,8 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "Evidence pack", href: "/our-evidence-pack" },
       { label: "Free AI Readiness Guide (PDF)", href: "/ai-readiness-guide.pdf", external: true },
       { label: "Blog", href: "/blog" },
+      { label: "The deep field", href: "/deep-field" },
+      { label: "Image credits", href: "/credits" },
     ],
   },
   {
