@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ALL_OFFERS, availability } from "@/lib/offers";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
@@ -23,6 +24,8 @@ const baseMetadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+const LIVE_OFFERS = ALL_OFFERS.filter((o) => availability(o) === "BUYABLE").length;
 
 export const metadata: Metadata = withSeo("/terms", baseMetadata);
 
@@ -94,7 +97,7 @@ export default function TermsPage() {
           <DepthIndex index={3} total={SECTION_COUNT} />
           <H2>Online offers and checkout</H2>
           <p>
-            The offers catalogue on titanos.tech lists 103 offers. 30 are sold through Stripe
+            The offers catalogue on titanos.tech lists {ALL_OFFERS.length} offers. {LIVE_OFFERS} are sold through Stripe
             Payment Links and show &quot;Available now&quot;. Offers marked &quot;Launching soon&quot; cannot be
             bought yet. Prices are in Australian dollars. I am not registered for GST, so no GST is
             charged. Stripe processes your card, and I never see or store your card number.

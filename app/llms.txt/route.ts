@@ -1,4 +1,5 @@
 import { ALL_OFFERS, availability } from "@/lib/offers";
+import { int, dec, v, AS_OF_LONG } from "@/lib/ledger";
 import { POSTS } from "@/lib/blog";
 import { CASES } from "@/lib/caseStudies";
 import { staticRoutes } from "@/lib/routes";
@@ -31,10 +32,10 @@ const KEY_PAGES: [string, string][] = [
 // The headline receipts, each with its evidence label. Dates and sources are part of the claim.
 // Labels: MEASURED = read from our own ledgers on that date; they describe TITANOS itself, not a client result.
 const RECEIPTS = [
-  "Cost per automated worker job fell from US$0.97 to US$0.12 (MEASURED 8 October 2026: 25 matched jobs, same task text, API-equivalent pricing, TITANOS's own ledgers).",
-  "Worker start-up context fell from about 215,000 tokens to about 29,000 (MEASURED 8 October 2026: counted at session start across 198 worker sessions).",
+  `Cost per automated worker job fell from US$${v("cost_job_before").toFixed(2)} to US$${v("cost_job_after").toFixed(2)} (MEASURED 8 October 2026: 25 matched jobs, same task text, API-equivalent pricing, TITANOS's own ledgers).`,
+  `Worker start-up context fell from about ${int("tokens_before")} tokens to about ${int("tokens_after")} (MEASURED 8 October 2026: median at session start, 198 worker sessions in the baseline).`,
   "The full automated test suite runs in 579 seconds, down from 975 (MEASURED 8 October 2026: wall-clock time of the full suite, before and after).",
-  "The 44 engineer-years figure on the home page is MODELLED (a COCOMO estimate, method shown on /engineering). It is not revenue and not a client result.",
+  `The 44 engineer-years headline on the home page is MODELLED (a COCOMO estimate, method shown on /engineering). Re-measured ${AS_OF_LONG}: ${dec("estate_ey")} engineer-years on ${int("estate_sloc")} lines. It is not revenue and not a client result.`,
 ];
 
 export function GET() {

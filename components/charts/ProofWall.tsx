@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import proof from "@/lib/site-data/proof.json";
+import { proof } from "@/lib/site-data/proofLive";
 import "./charts.css";
 
 const LABELS = Object.keys(proof.labels) as (keyof typeof proof.labels)[];

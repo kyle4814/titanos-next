@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ALL_OFFERS, availability } from "@/lib/offers";
+import { int, dec, AS_OF_LONG } from "@/lib/ledger";
 import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -17,9 +19,9 @@ export const metadata: Metadata = withSeo("/v/titanos-pitch", baseMetadata);
 
 const FACTS: { k: string; v: string }[] = [
   { k: "What it is", v: "TITANOS turns public records into new work, protection and compliance for small businesses, sold as simple products they can buy online." },
-  { k: "Live today", v: "titanos.tech with published prices, 103 productised offers and online checkout on 30 of them, plus an offline guide that matches each visitor to the right offer." },
+  { k: "Live today", v: `titanos.tech with published prices, ${ALL_OFFERS.length} productised offers and online checkout on ${ALL_OFFERS.filter((o) => availability(o) === "BUYABLE").length} of them, plus an offline guide that matches each visitor to the right offer.` },
   { k: "How it works", v: "It reads live government contract awards, company registers and public DNS every day, writes sourced and dated reports, and runs AI agents with a human approving anything that goes out." },
-  { k: "Built", v: "Built solo since June 2026 (main engine since 24 August): 170,651 lines across four repositories, about 44 engineer-years by Basic COCOMO (the main repository alone is 152,293 lines, about 39), on about US$30 a month of AI tools." },
+  { k: "Built", v: `Built solo since May 2026 (the website began 4 June, the main engine 24 August): ${int("estate_sloc")} lines across ${int("estate_repos")} repositories, about ${dec("estate_ey")} engineer-years by Basic COCOMO (MODELLED, ${AS_OF_LONG}), on about US$30 a month of AI tools while the main engine was built (operator figure).` },
   { k: "Reach so far", v: `${STATS.scansLast30Days.toLocaleString("en-AU")} business domains checked in the last 30 days and ${STATS.organisationsResearched.toLocaleString("en-AU")} organisations researched in full dossiers (counted from our records on ${STATS.asOf}).` },
   { k: "Founder", v: "Kyle Deligny, Brisbane. Sold $77k of solar in three months before teaching himself to build TITANOS." },
   { k: "Status", v: "Pre-revenue, raising a pre-seed round. Sole trader today (ABN 34 318 502 254); a company is incorporated before any investment closes." },

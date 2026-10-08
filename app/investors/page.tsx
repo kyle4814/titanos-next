@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
@@ -35,16 +36,13 @@ const A: CSSProperties = { color: "var(--gold)" };
 
 const BASE: [string, string][] = [
   ["3.5 hours", "idea to a working, tested app (replay on the proof page)"],
-  ["~132", "engineers' worth of output a year, priced by the COCOMO model"],
-  ["AU$300", "a month in AI tools behind all of it"],
-  ["~6,400x", "engineering value per dollar of compute (AU$23M a year of work on AU$3,600 a year)"],
+  [`~${v("annual_ey")}`, `engineers' worth of output a year, priced by the COCOMO model (MODELLED, ${AS_OF_LONG})`],
+  ["AU$300", "a month in AI tools behind all of it (operator figure, no receipt on file)"],
+  [`~${Math.round(v("per_dollar_full_today_x")).toLocaleString("en-AU")}x`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on AU$3,600 a year)`],
 ];
 
 const COMPUTE: [string, string, string][] = [
-  ["AU$300 a month (today)", "1", "~132 engineers' worth a year (measured)"],
-  ["AU$1,000 a month", "3", "~19,000 engineers' worth a year (modelled)"],
-  ["AU$10,000 a month", "33", "~209,000 engineers' worth a year (modelled)"],
-  ["AU$100,000 a month", "333", "~2.1 million engineers' worth a year (modelled)"],
+  ["AU$300 a month (today)", "1", `~${v("annual_ey")} engineers' worth a year (MODELLED: Basic COCOMO on measured lines)`],
 ];
 
 const LADDER: [string, string, string, string, string][] = [
@@ -93,9 +91,9 @@ export default function Investors() {
           <OpenLoop>So what happens if the compute budget goes up? The next table is where that gets honest.</OpenLoop>
           <h2 style={H}>What compute buys</h2>
           <p style={BODY}>
-            Each AU$300 a month buys one AI build account. The first row is measured. The rest are calculations built on it,
-            including the speed-ups from turning repeated work into code; they become facts only as weekly results confirm
-            them, and we publish those results.
+            Each AU$300 a month buys one AI build account. Today that is about {dec("estate_ey")} engineer-years modelled over {v("span_days")} days
+            (Basic COCOMO on {int("estate_sloc")} measured lines). More accounts would run more work in parallel, but the scale-up rows are
+            scenarios with no result behind them, so none is printed here until weekly results confirm one.
           </p>
           <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}>

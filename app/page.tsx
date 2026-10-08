@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
 import Hero from "@/components/hero/Hero";
 import VoidPortal from "@/components/hero/VoidPortal";
 import { withSeo } from "@/lib/seo";
@@ -360,7 +361,7 @@ export default function Home() {
 
       {/* ═══ BLUF + THE FIVE PILLARS ═══ */}
       <Bluf replaced>
-        One engineer built TITANOS in about 4 months. The industry COCOMO model says that is about 20 engineers for 27 months (MODELLED, method on the Engineering page). We exist to give your business that output safely, without
+        One engineer built TITANOS in {ELAPSED_LINE}, around a day job. The industry COCOMO model says that is {TEAM_LINE} (MODELLED, method on the Engineering page). We exist to give your business that output safely, without
         replacing anyone.
       </Bluf>
       <Analogy k="department" />

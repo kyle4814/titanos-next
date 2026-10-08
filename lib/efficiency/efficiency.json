@@ -388,7 +388,7 @@
    "status": "MEASURED",
    "better": "lower",
    "date": "2026-10-08",
-   "method": "Tokens before the first reply after 18 reference files moved to on-demand loading. 5,761 tests stayed green.",
+   "method": "Tokens before the first reply after 18 reference files moved to on-demand loading. The full test suite stayed green.",
    "source": "Sigil ceiling report, 2026-10-08"
   },
   {
@@ -511,10 +511,10 @@
  "hardening": [
   {
    "label": "Tests passing in the main codebase",
-   "value": 5761,
-   "source": "Sigil ceiling report, 2026-10-08",
+   "value": 0,
+   "source": "Site ledger (lib/ledger.json)",
    "date": "2026-10-08",
-   "method": "Full suite count at the time of the session-start change."
+   "method": "Overridden at render from the ledger."
   },
   {
    "label": "Adversary reviews",

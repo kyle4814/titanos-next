@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+import { int, dec, AS_OF_LONG } from "@/lib/ledger";
 const STEPS = [
   ["Work", "A job runs and leaves a record."],
   ["Measure", "We count what it cost and how long it took."],
@@ -26,10 +27,10 @@ export default function LearningLoopPage() {
       <PageHero badge="THE LEARNING LOOP" title="We did not buy a bigger machine, we changed the system" tagline="Seven steps, and every turn leaves a receipt." />
       <NumberBlock
         fact={{
-          value: "251 jobs in 24 hours",
+          value: `${int("fleet_jobs_24h")} jobs in 24 hours`,
           label: "MEASURED",
-          note: "Finished by our own worker fleet, 10 of them failed (4.0 percent). Counted from the job ledger on 8 October 2026. An upper bound on cost per job is published in the same file.",
-          source: "state/baseline/BASELINE_2026-10-08.json",
+          note: `Finished by our own worker fleet, ${dec("fleet_fail_rate_24h")} percent failed or stuck. Counted from the job ledger on ${AS_OF_LONG} (${dec("fleet_worker_hours_24h")} worker-hours, median job ${dec("fleet_median_job_min")} minutes).`,
+          source: "Job ledger, via lib/ledger.json",
         }}
       />
       <LoopOrbit />

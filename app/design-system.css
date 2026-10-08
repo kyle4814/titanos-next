@@ -121,6 +121,15 @@
   max-width: 38ch;
   margin: 0 0 var(--phi-s5);
 }
+.ds-hero__strip {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--phi-t0);
+  line-height: 1.5;
+  color: var(--ds-star);
+  max-width: 52ch;
+  margin: 0 0 var(--phi-s4);
+  opacity: 0.92;
+}
 .ds-cta {
   display: inline-flex;
   align-items: center;

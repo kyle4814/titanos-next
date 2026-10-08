@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import proof from "@/lib/site-data/proof.json";
+import { proof } from "@/lib/site-data/proofLive";
 import "./charts.css";
 
 const STARS = new Map(proof.stars.map((s) => [s.id, s]));

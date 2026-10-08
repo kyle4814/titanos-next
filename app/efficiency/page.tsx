@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { withSeo } from "@/lib/seo";
 import data from "@/lib/efficiency/efficiency.json";
+import { LEDGER, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Efficiency, measured | TITANOS";
 const META_DESC =
@@ -224,7 +225,11 @@ export default function Efficiency() {
           <h2 style={H}>Hardening</h2>
           <p style={BODY}>Speed means nothing if it breaks things. These are the counts of the checks that stand behind the figures above.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
-            {data.hardening.map((h) => (
+            {data.hardening.map((raw) => {
+              const h = raw.label.startsWith("Tests passing")
+                ? { ...raw, label: "Test cases in the main codebase", value: LEDGER.tests_main.value, source: LEDGER.tests_main.source, method: `${LEDGER.tests_main.method}, ${AS_OF_LONG}. ${LEDGER.suites_now.value} automated safety suites guard the control layer.` }
+                : raw;
+              return (
               <div key={h.label} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700, ...(h.value === null ? { opacity: 0.55, fontStyle: "italic", fontSize: 20 } : {}) }}>
                   {h.value === null ? "measuring" : h.value.toLocaleString("en-AU")}
@@ -233,7 +238,8 @@ export default function Efficiency() {
                 <div style={MUTED}>{h.method}</div>
                 <div style={MUTED}>Source: {h.source}</div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 36 }}>

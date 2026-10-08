@@ -1,0 +1,504 @@
+{
+ "facts": {
+  "capacity": {
+   "label": "MODELLED",
+   "method": "vendor: Max 20x = 20x Pro usage; two accounts = 40 Pro allowances",
+   "source": "support.claude.com/en/articles/11049741",
+   "text": "Compute capacity is now 40x the starting plan: two accounts at 20x usage each."
+  },
+  "ceiling": {
+   "label": "MODELLED",
+   "method": "capacity multiple x cost-per-job multiple (they stack; parallelism overlaps capacity)",
+   "source": "state/numbers/MULTIPLIERS_2026-10-08.md",
+   "text": "40x the capacity times 8.4x cheaper jobs is a ceiling of up to 336x the work for the same share of budget."
+  },
+  "cost_job": {
+   "label": "MEASURED",
+   "method": "25 matched jobs, before and after the compressed kernel",
+   "source": "state/kernel_compression/gate.json",
+   "text": "Cost per AI job fell 8.4x, from US$0.97 to US$0.12, while quality rose from 23 of 25 to 25 of 25."
+  },
+  "estate": {
+   "label": "MEASURED",
+   "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded",
+   "source": "state/numbers/estate_builds.json",
+   "text": "12 code repositories built since 4 May 2026: 226,892 lines of production code."
+  },
+  "estate_cost": {
+   "label": "MODELLED",
+   "method": "59.5 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)",
+   "source": "titanos.tech/engineering",
+   "text": "A conventional team would charge about AU$31 million to build it."
+  },
+  "estate_ey": {
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 226.9 KSLOC",
+   "source": "bin/sloc_count.py",
+   "text": "Priced by the industry standard COCOMO model, that is 59.5 engineer-years of conventional engineering."
+  },
+  "fleet_share": {
+   "label": "MEASURED",
+   "method": "usage_meter today per project folder: ~/.claude/projects/-home-tech2-klinge-kernel (fleet) US$237 vs -home-tech2-titanos (interactive) US$190 of US$435; the meter's own 'orchestrator' label counts every top-level session, fleet included, so it is not used",
+   "source": "bin/usage_meter.py with USAGE_PROJECTS_DIR per project, 2026-10-08 22:0x",
+   "text": "Today the parallel worker fleet did 55% of the work by spend, the interactive session 44%, and the fleet is still running well below its ceiling."
+  },
+  "needle": {
+   "label": "MODELLED",
+   "method": "measured jobs/day 184 -> 548 (3.0x) / 336x modelled ceiling",
+   "source": "state/numbers/MULTIPLIERS_2026-10-08.md",
+   "text": "The needle has barely moved: realised output is 3x so far against a 336x ceiling, under 1% of it."
+  },
+  "pace": {
+   "label": "MEASURED",
+   "method": "non-bot commits per operator active day, by era",
+   "source": "state/numbers/estate_builds.json (eras)",
+   "text": "Output per working day rose 33x: from 4.2 commits a day in May and June to 137.9 a day now."
+  },
+  "parttime": {
+   "label": "MEASURED",
+   "method": "union of days with a non-bot commit in any repo, 2026-05-04 to 2026-10-08",
+   "source": "state/numbers/estate_builds.json (operator_active_days)",
+   "text": "Built part time, around a full time job: commits on 66 of 158 days."
+  },
+  "tests": {
+   "label": "MEASURED",
+   "method": "def test_ count in titanos; kernel verify suite count",
+   "source": "state/numbers/estate_builds.json, state/verify_runs.jsonl",
+   "text": "Test coverage grew from 36 tests to 6,314 test cases in the main engine, and from 39 to 188 automated safety suites on the control layer."
+  },
+  "tokens": {
+   "label": "MEASURED",
+   "method": "median first-call context per worker session",
+   "source": "bin/context_audit.py",
+   "text": "Every AI worker now starts 7.4x leaner: 29,000 tokens of context instead of 215,000."
+  },
+  "weekly": {
+   "label": "MEASURED",
+   "method": "non-bot commits per ISO week, 12 repos",
+   "source": "state/numbers/estate_builds.json (weekly)",
+   "text": "From 5 commits a week in May to 1,141 this week."
+  }
+ },
+ "facts_as_of": "2026-10-08",
+ "generated_by": "bin/site_ledger_export.py",
+ "n": {
+  "active_days": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "union of days with a non-bot commit in any repo, 2026-05-04 to 2026-10-08",
+   "source": "state/numbers/estate_builds.json (operator_active_days)",
+   "unit": "days",
+   "value": 66
+  },
+  "annual_cost_10pct_aud": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "10% of annual_cost_aud",
+   "source": "annual_cost_aud",
+   "unit": "AU$ a year",
+   "value": 2420000
+  },
+  "annual_cost_2pct_aud": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "2% of annual_cost_aud",
+   "source": "annual_cost_aud",
+   "unit": "AU$ a year",
+   "value": 484000
+  },
+  "annual_cost_aud": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "137.5 engineer-years a year x AU$176,000",
+   "source": "estate_ey, parttime",
+   "unit": "AU$ a year",
+   "value": 24200000
+  },
+  "annual_ey": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "59.5 engineer-years / 0.433 years elapsed",
+   "source": "estate_ey, parttime",
+   "unit": "engineers' worth a year",
+   "value": 137
+  },
+  "build_cost_aud": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "59.5 engineer-years x AU$800 a day x 220 working days = AU$176,000 per engineer-year",
+   "source": "estate_ey; rate: Hudson Australia Cyber Security Salary Guide",
+   "unit": "AU$",
+   "value": 10470000
+  },
+  "capacity_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "vendor: Max 20x = 20x Pro usage; two accounts = 40 Pro allowances",
+   "source": "support.claude.com/en/articles/11049741",
+   "unit": "x",
+   "value": 40
+  },
+  "ceiling_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "capacity multiple x cost-per-job multiple (they stack; parallelism overlaps capacity)",
+   "source": "state/numbers/MULTIPLIERS_2026-10-08.md",
+   "unit": "x",
+   "value": 336
+  },
+  "commits_day_before": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-bot commits per operator active day, by era",
+   "source": "state/numbers/estate_builds.json (eras)",
+   "unit": "commits/day",
+   "value": 4.2
+  },
+  "commits_day_now": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-bot commits per operator active day, by era",
+   "source": "state/numbers/estate_builds.json (eras)",
+   "unit": "commits/day",
+   "value": 137.9
+  },
+  "commits_week_before": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-bot commits per ISO week, 12 repos",
+   "source": "state/numbers/estate_builds.json (weekly)",
+   "unit": "commits/week",
+   "value": 5
+  },
+  "commits_week_now": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-bot commits per ISO week, 12 repos",
+   "source": "state/numbers/estate_builds.json (weekly)",
+   "unit": "commits/week",
+   "value": 1141
+  },
+  "compute_build_aud_month": {
+   "as_of": "2026-10-08",
+   "label": "OPERATOR_STATED",
+   "method": "about US$30 a month of AI tools while the main engine was built (to 29 September); no receipt on file",
+   "source": "SITE_NUMBERS_AUDIT_2026-10-08 (UNSOURCED row)",
+   "unit": "AU$/month",
+   "value": 46
+  },
+  "compute_build_total_aud": {
+   "as_of": "2026-10-08",
+   "label": "OPERATOR_STATED",
+   "method": "AU$46 x 5.2 months elapsed",
+   "source": "compute_build_aud_month",
+   "unit": "AU$",
+   "value": 240
+  },
+  "compute_today_aud_month": {
+   "as_of": "2026-10-08",
+   "label": "OPERATOR_STATED",
+   "method": "AU$300 a month of AI tools since 29 September; no receipt on file",
+   "source": "SITE_NUMBERS_AUDIT_2026-10-08 (UNSOURCED row)",
+   "unit": "AU$/month",
+   "value": 300
+  },
+  "core_ey": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12",
+   "source": "sloc row",
+   "unit": "engineer-years",
+   "value": 50.5
+  },
+  "core_sloc": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 4 repos, state/ corpus/ vendor/ excluded",
+   "source": "titanos 122,524, klinge-kernel 42,648, titanos-next 27,089, titanos-enterprise 1,663",
+   "unit": "lines",
+   "value": 193924
+  },
+  "cost_job_after": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "25 matched jobs, before and after the compressed kernel",
+   "source": "state/kernel_compression/gate.json",
+   "unit": "US$",
+   "value": 0.12
+  },
+  "cost_job_before": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "25 matched jobs, before and after the compressed kernel",
+   "source": "state/kernel_compression/gate.json",
+   "unit": "US$",
+   "value": 0.97
+  },
+  "cost_job_x": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "25 matched jobs, before and after the compressed kernel",
+   "source": "state/kernel_compression/gate.json",
+   "unit": "x",
+   "value": 8.4
+  },
+  "elapsed_months": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "158 days from the first commit (4 May 2026) / 30.4375",
+   "source": "parttime",
+   "unit": "months",
+   "value": 5.2
+  },
+  "estate_ey": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 226.9 KSLOC",
+   "source": "bin/sloc_count.py",
+   "unit": "engineer-years",
+   "value": 59.5
+  },
+  "estate_repos": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded",
+   "source": "state/numbers/estate_builds.json",
+   "unit": "repositories",
+   "value": 12
+  },
+  "estate_sloc": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded",
+   "source": "state/numbers/estate_builds.json",
+   "unit": "lines",
+   "value": 226892
+  },
+  "fleet_fail_rate_24h": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "fail+stuck / (done+fail+stuck), last 24 h",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "unit": "%",
+   "value": 2.5
+  },
+  "fleet_jobs_24h": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "ledger 'done' events in the last 24 h",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "unit": "jobs",
+   "value": 548
+  },
+  "fleet_median_job_min": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "median start->done, last 24 h",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "unit": "min",
+   "value": 3
+  },
+  "fleet_share_pct": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "usage_meter today per project folder: ~/.claude/projects/-home-tech2-klinge-kernel (fleet) US$237 vs -home-tech2-titanos (interactive) US$190 of US$435; the meter's own 'orchestrator' label counts every top-level session, fleet included, so it is not used",
+   "source": "bin/usage_meter.py with USAGE_PROJECTS_DIR per project, 2026-10-08 22:0x",
+   "unit": "%",
+   "value": 55
+  },
+  "fleet_worker_hours_24h": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "sum of start->done durations, last 24 h",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "unit": "worker-hours",
+   "value": 93.2
+  },
+  "gate_suites": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "last full kernel gate (GREEN, 2026-10-08T21:03:06)",
+   "source": "/home/tech2/klinge-kernel/state/verify_runs.jsonl",
+   "unit": "suites",
+   "value": 187
+  },
+  "model_effort_pm": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "59.5 engineer-years x 12",
+   "source": "estate_ey",
+   "unit": "person-months",
+   "value": 714
+  },
+  "model_schedule_months": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "Basic COCOMO organic: effort = 2.4 x KSLOC^1.05 person-months, schedule = 2.5 x effort^0.38 months",
+   "source": "estate_ey",
+   "unit": "months",
+   "value": 30.4
+  },
+  "model_team": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "effort person-months / schedule months",
+   "source": "estate_ey",
+   "unit": "engineers",
+   "value": 23.5
+  },
+  "pace_ey_per_day_1d": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MODELLED",
+   "method": "COCOMO now minus COCOMO 1 day(s) ago, divided by 1",
+   "source": "git archive at both dates",
+   "unit": "engineer-years/day",
+   "value": 3.33
+  },
+  "pace_ey_per_day_7d": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MODELLED",
+   "method": "COCOMO now minus COCOMO 7 day(s) ago, divided by 7",
+   "source": "git archive at both dates",
+   "unit": "engineer-years/day",
+   "value": 1.67
+  },
+  "pace_x": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "non-bot commits per operator active day, by era",
+   "source": "state/numbers/estate_builds.json (eras)",
+   "unit": "x",
+   "value": 33
+  },
+  "per_dollar_build_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "10% annual value / (AU$46 x 12) on the build spend",
+   "source": "annual_cost_10pct_aud, compute_build_aud_month",
+   "unit": "x",
+   "value": 4400
+  },
+  "per_dollar_full_today_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "full-model annual value / (AU$300 x 12)",
+   "source": "annual_cost_aud, compute_today_aud_month",
+   "unit": "x",
+   "value": 6720
+  },
+  "per_dollar_full_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "full-model build cost / build-stage compute",
+   "source": "build_cost_aud, compute_build_total_aud",
+   "unit": "x",
+   "value": 43900
+  },
+  "per_dollar_today_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "10% annual value / (AU$300 x 12) at today's spend",
+   "source": "annual_cost_10pct_aud, compute_today_aud_month",
+   "unit": "x",
+   "value": 670
+  },
+  "realised_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "measured jobs/day 184 -> 548 (3.0x) / 336x modelled ceiling",
+   "source": "state/numbers/MULTIPLIERS_2026-10-08.md",
+   "unit": "x",
+   "value": 3
+  },
+  "span_days": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "union of days with a non-bot commit in any repo, 2026-05-04 to 2026-10-08",
+   "source": "state/numbers/estate_builds.json (operator_active_days)",
+   "unit": "days",
+   "value": 158
+  },
+  "speed_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "model schedule months / months elapsed",
+   "source": "estate_ey, parttime",
+   "unit": "x",
+   "value": 5.8
+  },
+  "spend_today_usd": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MEASURED",
+   "method": "usage_meter today (API-equivalent, account A)",
+   "source": "bin/usage_meter.py",
+   "unit": "US$",
+   "value": 419.46
+  },
+  "suites_now": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "def test_ count in titanos; kernel verify suite count",
+   "source": "state/numbers/estate_builds.json, state/verify_runs.jsonl",
+   "unit": "suites",
+   "value": 188
+  },
+  "team_smaller_x": {
+   "as_of": "2026-10-08",
+   "label": "MODELLED",
+   "method": "model team / 1 engineer",
+   "source": "estate_ey",
+   "unit": "x",
+   "value": 24
+  },
+  "tests_before": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "def test_ count in titanos; kernel verify suite count",
+   "source": "state/numbers/estate_builds.json, state/verify_runs.jsonl",
+   "unit": "test cases",
+   "value": 36
+  },
+  "tests_main": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "def test_ count in titanos; kernel verify suite count",
+   "source": "state/numbers/estate_builds.json, state/verify_runs.jsonl",
+   "unit": "test cases",
+   "value": 6314
+  },
+  "tokens_after": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "median first-call context per worker session",
+   "source": "bin/context_audit.py",
+   "unit": "tokens",
+   "value": 29000
+  },
+  "tokens_before": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "median first-call context per worker session",
+   "source": "bin/context_audit.py",
+   "unit": "tokens",
+   "value": 215000
+  },
+  "tokens_x": {
+   "as_of": "2026-10-08",
+   "label": "MEASURED",
+   "method": "median first-call context per worker session",
+   "source": "bin/context_audit.py",
+   "unit": "x",
+   "value": 7.4
+  },
+  "usd_per_job_fleet": {
+   "as_of": "2026-10-08T21:22:37",
+   "label": "MODELLED",
+   "method": "today's API-equivalent spend / fleet jobs done in 24 h (an upper bound: includes the interactive session)",
+   "source": "usage_meter + ledger",
+   "unit": "US$/job",
+   "value": 0.765
+  }
+ },
+ "numbers_as_of": "2026-10-08T21:22:37",
+ "rate_note": "AU$800 a day x 220 working days = AU$176,000 per engineer-year"
+}

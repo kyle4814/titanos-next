@@ -49,7 +49,10 @@ ok(!/[–—]/.test(FILES.map(R).join("")) && !/[–—]/.test(JSON.stringify(da
 const bi = process.argv.indexOf("--built");
 if (bi > 0) {
   const dir = process.argv[bi + 1];
-  const pool = JSON.stringify(data).replace(/\\"/g, '"');
+  // proof.json plus lib/ledger.json (the fleet figures are overlaid from the ledger at render, see lib/site-data/proofLive.ts)
+  const ledger = JSON.parse(R("lib/ledger.json"));
+  const fmts = Object.values(ledger.n).flatMap((e) => [String(e.value), e.value.toLocaleString("en-AU"), e.value.toFixed(1), e.value.toFixed(2)]);
+  const pool = JSON.stringify(data).replace(/\\"/g, '"') + " " + fmts.join(" ");
   const pages = [["index.html", ["cost-curve", "loop", "proof-wall"]], ["proof.html", ["proof-wall"]], ["learning-loop.html", ["loop"]]];
   for (const [file, regions] of pages) {
     const p = `${dir}/${file}`;

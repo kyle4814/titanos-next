@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 
+import { int, dec, v, AS_OF_LONG } from "@/lib/ledger";
 const META_TITLE = "Speed and precision | TITANOS";
 const META_DESC =
   "Fast because it is code, precise because it is checked. Our measured build speeds and test gates, set beside published industry timelines.";
@@ -35,8 +36,8 @@ const A: CSSProperties = { color: "var(--gold)" };
 
 const FACTS: [string, string][] = [
   ["3.5 hours", "RECORDED: from idea to a working, tested app with 56 commits (7 October 2026)"],
-  ["44", "MODELLED: engineer-years of output in 4 months, priced by the COCOMO model, not a timesheet"],
-  ["5,777", "RECORDED: tests in one full pass of our suite, run before any change is accepted"],
+  [dec("estate_ey"), `MODELLED: engineer-years of output since 4 May 2026, priced by the COCOMO model on ${int("estate_sloc")} measured lines (${AS_OF_LONG}), not a timesheet`],
+  [int("tests_main"), "MEASURED: test cases in the main engine, run before any change is accepted"],
   ["2", "RECORDED: layout bugs caught by the phone check before release, after the tests had passed"],
 ];
 
@@ -58,7 +59,7 @@ const ANGLES: [string, string, string][] = [
   ["Speed", "Weeks of turnaround cut to hours or days", "/case-studies"],
   ["Precision", "Errors caught by tests and checks before they reach you", "/methodology"],
   ["Cost", "Systems that typically run for about AU$20 to AU$50 a month", "/costs"],
-  ["Engineering", "The 44 engineer-year model figure, with the maths shown and labelled as a model", "/engineering"],
+  ["Engineering", `The ${dec("estate_ey")} engineer-year model figure (MODELLED), with the maths shown`, "/engineering"],
 ];
 
 export default function Speed() {
@@ -143,7 +144,7 @@ export default function Speed() {
           <h2 style={H}>Why it is precise</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li style={{ marginBottom: 8 }}>
-              <b>Tests before claims.</b> Our suite runs 5,777 automated tests in one pass, and a change is accepted only when
+              <b>Tests before claims.</b> The main engine carries {int("tests_main")} test cases and the control layer {int("suites_now")} safety suites, and a change is accepted only when
               every one passes.
             </li>
             <li style={{ marginBottom: 8 }}>

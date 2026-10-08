@@ -1,4 +1,4 @@
-import proof from "@/lib/site-data/proof.json";
+import { proof } from "@/lib/site-data/proofLive";
 import SectionReveal from "@/components/SectionReveal";
 import InView from "./InView";
 import "./charts.css";

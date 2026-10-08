@@ -13,6 +13,7 @@
  * No urgency, no scarcity, no countdowns. A "no" is welcome.
  */
 
+import { int, TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
 import type { ReactNode } from "react";
 import FaqItem from "@/components/FaqItem";
 import SectionReveal from "@/components/SectionReveal";
@@ -42,12 +43,12 @@ const ANALOGIES: Record<AnalogyKey, { line: string; anchor: string }> = {
   department: {
     line: "A whole engineering department, for the price of one person.",
     anchor:
-      "The industry-standard COCOMO model sizes the TITANOS build at about 20 engineers for about 27 months. One person built it in about 4 months. Method on the Engineering page.",
+      `The industry-standard COCOMO model sizes the TITANOS build at ${TEAM_LINE} (MODELLED). One person built it in ${ELAPSED_LINE}. Method on the Engineering page.`,
   },
   preflight: {
     line: "Like a pilot's pre-flight checklist: thousands of checks before every take-off, not just the first one.",
     anchor:
-      "5,777 automated tests run before anything is committed. Nothing goes live until they pass.",
+      `${int("tests_main")} test cases run before anything is committed. Nothing goes live until they pass.`,
   },
   powersteering: {
     line: "Power steering, not a self-driving car. You still drive. It just takes the strain off your arms.",
@@ -283,8 +284,8 @@ export function FrontLoad({
       q: "How do you know it works?",
       a: (
         <>
-          The industry-standard COCOMO model sizes the TITANOS build at about 20 engineers for about 27 months. One
-          person built it in about 4 months, with 5,760 automated tests guarding it. The method is shown in
+          The industry-standard COCOMO model sizes the TITANOS build at {TEAM_LINE} (MODELLED). One
+          person built it in {ELAPSED_LINE}, with {int("tests_main")} test cases guarding it. The method is shown in
           full on the <a href="/engineering" style={{ color: "var(--gold)" }}>Engineering page</a>, so you can check it
           yourself.
         </>

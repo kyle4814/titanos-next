@@ -1,5 +1,6 @@
 "use client";
 
+import { dec } from "@/lib/ledger";
 import Link from "next/link";
 import { SigilSeals } from "./Sigil";
 
@@ -31,7 +32,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
   {
     heading: "Proof",
     links: [
-      { label: "44 engineer-years", href: "/engineering" },
+      { label: `${dec("estate_ey")} engineer-years`, href: "/engineering" },
       { label: "Methodology", href: "/methodology" },
       { label: "Black Ice doctrine", href: "/black-ice" },
       { label: "Our scan", href: "/scan#self-scan" },

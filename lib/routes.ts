@@ -31,15 +31,15 @@ function lastCommit(rel: string): Date | undefined {
   }
 }
 
-function walk(dir: string, rel = ""): { route: string; file: string; noindex: boolean }[] {
+function walk(dir: string, rel = "", inheritedNoindex = false): { route: string; file: string; noindex: boolean }[] {
   const out: { route: string; file: string; noindex: boolean }[] = [];
   const page = path.join(dir, "page.tsx");
-  if (fs.existsSync(page)) {
-    const texts = [page, path.join(dir, "layout.tsx")].filter((f) => fs.existsSync(f)).map((f) => fs.readFileSync(f, "utf8"));
-    out.push({ route: rel || "/", file: path.relative(process.cwd(), page), noindex: texts.some((t) => /index:\s*false/.test(t)) });
-  }
+  const texts = [page, path.join(dir, "layout.tsx")].filter((f) => fs.existsSync(f)).map((f) => fs.readFileSync(f, "utf8"));
+  // a layout's robots metadata covers every page beneath it (the /demo/tix subpages inherit the demo layout's noindex)
+  const noindex = inheritedNoindex || texts.some((t) => /index:\s*false/.test(t));
+  if (fs.existsSync(page)) out.push({ route: rel || "/", file: path.relative(process.cwd(), page), noindex });
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.isDirectory() && !e.name.startsWith("[") && !e.name.startsWith("_") && !e.name.startsWith("(")) out.push(...walk(path.join(dir, e.name), `${rel}/${e.name}`));
+    if (e.isDirectory() && !e.name.startsWith("[") && !e.name.startsWith("_") && !e.name.startsWith("(")) out.push(...walk(path.join(dir, e.name), `${rel}/${e.name}`, noindex));
   }
   return out;
 }
