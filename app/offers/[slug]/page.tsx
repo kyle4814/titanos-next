@@ -11,6 +11,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { ALL_OFFERS, getOffer, buyHref, availability, AVAILABILITY_TEXT, LADDER_ROUTES } from "@/lib/offers";
 import { formatOfferPrice, type Offer } from "@/lib/offers/types";
+import { PREVIEWS } from "@/lib/offers/previews";
 import { OpenLoop } from "@/components/FlexBlock";
 
 export const dynamicParams = false;
@@ -137,6 +138,27 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
       <Block title="Who it's for"><List items={o.forWho} mark="•" /></Block>
       <div className="divider-gold" />
       <Block title="What you get"><List items={o.youGet} mark="✓" /></Block>
+      {PREVIEWS[o.slug] && (
+        <>
+          <Block title="Preview">
+            <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", margin: "0 0 12px" }}>{PREVIEWS[o.slug].caption}</p>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", background: "var(--card)", border: "1px solid var(--border)" }}>
+                <thead>
+                  <tr>{PREVIEWS[o.slug].head.map((h) => <th key={h} scope="col" style={{ textAlign: "left", padding: "10px 12px", color: "var(--gold)", borderBottom: "1px solid var(--border)" }}>{h}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {PREVIEWS[o.slug].rows.map((r) => (
+                    <tr key={r.join("|")}>{r.map((c, i) => <td key={i} style={{ padding: "10px 12px", color: "var(--text)", borderBottom: "1px solid var(--border)" }}>{c}</td>)}</tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p style={{ color: "var(--ice)", lineHeight: 1.7, margin: "12px 0 0" }}>{PREVIEWS[o.slug].foot}</p>
+          </Block>
+          <div className="divider-gold" />
+        </>
+      )}
       <OpenLoop>And how does it go from a yes to a finished job?</OpenLoop>
       <div className="divider-gold" />
       <Block title="How it works">
