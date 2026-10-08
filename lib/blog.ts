@@ -731,7 +731,7 @@ export const POSTS: BlogPost[] = [
       { type: "h2", text: "The rebuild: one script, no rm, safe to run twice" },
       {
         type: "p",
-        text: "Recovering after the wipe surfaced a second problem: manually following the setup docs brought back code but not a working machine. A single recovery script closed that gap. It contains no delete command and no privileged command anywhere, it prints the two steps that need elevated access instead of running them itself. Every copy step is non-destructive, it fills in what is missing and prints a skip notice for anything already present, which makes it safe to run against a half-restored or even a fully live machine. It never writes a credential, since none live in the recovery path to copy, it prints exactly which ones only the operator can re-supply.",
+        text: "Recovering after the wipe surfaced a second problem: manually following the setup docs brought back code but not a working machine. A single recovery script closed that gap. It contains no delete command and no privileged command anywhere, it prints the two steps that need root access instead of running them itself. Every copy step is non-destructive, it fills in what is missing and prints a skip notice for anything already present, which makes it safe to run against a half-restored or even a fully live machine. It never writes a credential, since none live in the recovery path to copy, it prints exactly which ones only the operator can re-supply.",
       },
       {
         type: "p",

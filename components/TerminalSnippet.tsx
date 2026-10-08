@@ -137,7 +137,7 @@ export default function TerminalSnippet() {
       </div>
       {/* One shared scroll container so long lines pan together on
           mobile instead of each line growing its own scrollbar. */}
-      <div className="term-scroll" style={{ overflowX: "auto" }}>
+      <div className="term-scroll" tabIndex={0} style={{ overflowX: "auto" }}>
         <div style={{ minWidth: "max-content" }}>
           {LINES.map((l, i) => {
             const isCmd = i === 0;

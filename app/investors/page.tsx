@@ -97,7 +97,7 @@ export default function Investors() {
             including the speed-ups from turning repeated work into code; they become facts only as weekly results confirm
             them, and we publish those results.
           </p>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}>
               <thead>
                 <tr>
@@ -129,7 +129,7 @@ export default function Investors() {
             (charities, education, housing, jobs). The founder&apos;s share is capped at what a good life needs; the
             rest compounds or goes back out.
           </p>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640 }}>
               <thead>
                 <tr>

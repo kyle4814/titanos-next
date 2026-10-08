@@ -116,7 +116,7 @@ export default function Proof() {
             passes at the final version, 250 of 250.
           </p>
           <p style={BODY}>How the replay was run, so anyone with the repository can repeat it:</p>
-          <code style={CODE}>{`for c in $(git rev-list --reverse HEAD); do
+          <code tabIndex={0} style={CODE}>{`for c in $(git rev-list --reverse HEAD); do
   git checkout -q "$c"
   echo "$(git log -1 --format=%ci) $(node --test tests/*.test.js | grep '^# pass')"
 done`}</code>
