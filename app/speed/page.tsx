@@ -87,7 +87,7 @@ export default function Speed() {
           </p>
 
           <h2 style={H}>How that compares</h2>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 560 }}>
               <thead>
                 <tr>

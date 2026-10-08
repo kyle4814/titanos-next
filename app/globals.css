@@ -170,6 +170,7 @@ body[data-page="compliance"] {
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   background: var(--vault-black);
 }
@@ -992,4 +993,11 @@ main p, main li { text-wrap: pretty; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* W6 a11y: links inside running text must not rely on colour alone (WCAG 1.4.1) */
+p > a:not([class]), li > a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }

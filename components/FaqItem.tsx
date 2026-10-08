@@ -72,7 +72,7 @@ export default function FaqItem({
       <div
         className="faq-collapse"
         data-open={open ? "true" : "false"}
-        aria-hidden={!open}
+        inert={!open}
       >
         <div className="faq-collapse-inner">
           <div

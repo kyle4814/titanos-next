@@ -104,7 +104,7 @@ export default function Costs() {
           </p>
 
           <h2 style={H}>The four levers that keep the AI bill tiny</h2>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}>
               <thead>
                 <tr>
@@ -195,7 +195,7 @@ export default function Costs() {
           </ul>
 
           <h2 style={H}>The main offers</h2>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
               <tbody>
                 {CORE.map(([n, p, href]) => (
@@ -221,7 +221,7 @@ export default function Costs() {
           <SavingsCalculator />
 
           <h3 style={{ ...H, fontSize: 18 }}>Value of hours given back, a year</h3>
-          <div style={{ overflowX: "auto" }}>
+          <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
               <thead>
                 <tr>
