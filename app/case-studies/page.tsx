@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import { CASES } from "@/lib/caseStudies";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Case studies | TITANOS";
 const META_DESC =
@@ -25,6 +27,16 @@ export default function CaseStudies() {
         title="The receipts library."
         sub="Each case study is a real build, with its speed, its cost and how it was tested. Names stay private."
       />
+      <section style={{ ...SECTION, paddingBottom: 0 }}>
+        <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <FlexNumber f={FLEX.fleetJobs} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "14px 0 0" }}>
+            Method: counted from our own job log over 24 hours. Every case below is built the same way, from our own work, on public
+            information. Nothing of anyone&apos;s is touched, nobody is replaced, and the client&apos;s IT stays in charge.
+          </p>
+        </div>
+      </section>
+      <OpenLoop>That is the volume. What does one finished build look like up close?</OpenLoop>
       <section style={SECTION}>
         <div
           style={{
@@ -67,11 +79,11 @@ export default function CaseStudies() {
           ))}
         </div>
         <p style={{ color: "var(--ice)", textAlign: "center", marginTop: 36, fontSize: "var(--fs-body)" }}>
-          Want a build like this for your business?{" "}
+          Would it be okay if we looked at a build like this for your business?{" "}
           <a href="/audit" style={{ color: "var(--gold)" }}>
             Book a free consultation
           </a>
-          , with no pressure.
+          , and a no is welcome.
         </p>
       </section>
     </main>

@@ -10,6 +10,8 @@ import BrisbaneClock from "@/components/BrisbaneClock";
 import AuditRequestClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
@@ -93,8 +95,8 @@ export default function AuditPage() {
       />
       <PageHero
         badge="FREE · NO OBLIGATION · NO PITCH DECK"
-        title="Get your free AI consultation and report."
-        sub="You tell me what's eating your week. We work out together what's automatable in your business, and what it's worth. No cost, no pitch deck, no obligation. Just a straight conversation."
+        title="A free chat about what a machine could carry for you."
+        sub="You tell me what is eating your week. We work out together what is automatable in your business and what it is worth, and you get a free report to keep. No cost, no pitch deck, no obligation. Just a straight conversation."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Kyle takes the call personally
@@ -105,6 +107,17 @@ export default function AuditPage() {
         A free half-hour with Kyle, then a free report on your business. You leave knowing what a machine can carry for you, and what that is worth.
       </Bluf>
       <Analogy k="healthcheck" />
+
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.fleetJobs} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            That is the machine I would be pointing at your repetitive work. Before you ask: I am Kyle Deligny, a sole
+            trader (ABN 34 318 502 254), and I take the call myself. I touch nothing in your business on the call, nobody
+            is replaced, your IT person stays in charge, and it costs nothing.
+          </p>
+        </div>
+      </SectionReveal>
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
         <AnimatedButton href="#message" variant="primary">
@@ -118,7 +131,7 @@ export default function AuditPage() {
       <section style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}>
         <Inscription
           label="No cost · No pitch deck · No obligation"
-          sub="Thirty minutes. You describe how the work actually gets done. I tell you which parts a machine can carry, and which parts shouldn't leave your hands. One question to bring: what's the task you repeat every single week?"
+          sub="Thirty minutes. You describe how the work actually gets done. I tell you which parts a machine can carry, and which parts shouldn't leave your hands. One thing worth bringing: the task you repeat every single week."
         >
           You bring the problem.
           <br />
@@ -126,11 +139,13 @@ export default function AuditPage() {
         </Inscription>
       </section>
 
+      <OpenLoop>So what actually happens in that half-hour, and what do you walk away with?</OpenLoop>
+
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
-          <SectionHeading title="What happens on the call" />
+          <SectionHeading title="What happens on the call" lead="Four steps, and the last one is allowed to be a no." />
           <div
             style={{
               display: "grid",
@@ -190,6 +205,8 @@ export default function AuditPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>How do you get hold of me? Probably more simply than you expect.</OpenLoop>
+
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="message">
@@ -197,7 +214,7 @@ export default function AuditPage() {
           <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
             Direct line. No gatekeeper
           </SystemLabel>
-          <SectionHeading title="Message Kyle now" lead="Send a message on Telegram, or just call. No booking, no forms, no waiting for a slot." />
+          <SectionHeading title="Would it be okay if you messaged me?" lead="Send a message on Telegram, or just call. No booking, no forms, no waiting for a slot. A no is welcome." />
           <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
             I take every one of these myself. If automation isn&apos;t worth it for your
             business, I&apos;ll tell you on the call rather than sell you something that
@@ -212,7 +229,7 @@ export default function AuditPage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-          <SectionHeading title="Questions before you message" />
+          <SectionHeading title="Questions before you message" lead="The ones people ask first, answered here." />
           <FaqItem question="Is this actually free?">
             Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in your business yet, I'll tell you that too.
           </FaqItem>

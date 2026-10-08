@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 import SavingsCalculator from "@/components/SavingsCalculator";
 import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
 import { offersByGroup } from "@/lib/offers";
@@ -83,6 +85,17 @@ export default function Costs() {
         title="Every price, every cost, all the maths."
         sub="What we offer, how we do business, what it costs to run, and what it can save you, with the working shown. 99% code, 1% AI, and you approve what matters."
       />
+      <section style={{ ...SECTION, paddingBottom: 0 }}>
+        <div style={WRAP}>
+          <FlexNumber f={FLEX.costPerJob} />
+          <p style={BODY}>
+            Method: the same 25 jobs run before and after we turned proven steps into plain code, with the cost read from our own usage
+            meter. Before you ask: this is our spend, not a quote for you. Nothing of yours is touched, nobody is replaced, your IT
+            provider stays in charge, and your own running cost is shown further down.
+          </p>
+        </div>
+      </section>
+      <OpenLoop>If the same job got that much cheaper, what else is going into the price?</OpenLoop>
       <section style={SECTION}>
         <div style={WRAP}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
@@ -97,7 +110,7 @@ export default function Costs() {
 
           <h2 style={H}>Myelination: why it gets cheaper every week</h2>
           <p style={BODY}>
-            Your brain gets faster at a skill by insulating the nerve paths it uses most. We do the same with software. The
+            Think of a path through long grass. The first walk is slow, and by the hundredth there is a track you barely notice. Your brain does this by insulating the nerve paths it uses most. We do the same with software. The
             first time a job runs, the AI works it out. Once the steps are proven, we turn them into plain code, so the next
             run costs nothing. Every week, more of the system is code and less of it is AI, so it gets faster and cheaper
             without getting worse.
@@ -131,6 +144,8 @@ export default function Costs() {
           <p style={{ ...BODY, fontSize: 13, opacity: 0.7, marginTop: 8 }}>
             Prices are Anthropic&apos;s published API rates for Claude, in US dollars, checked October 2026.
           </p>
+
+          <OpenLoop>So what does that look like in dollars on a real piece of work?</OpenLoop>
 
           <h2 style={H}>Our own numbers, measured</h2>
           <p style={BODY}>
@@ -184,6 +199,8 @@ export default function Costs() {
             .
           </p>
 
+
+          <OpenLoop>That covers what it costs us. What does it cost you, and what can you walk away from?</OpenLoop>
 
           <h2 style={H}>How we do business</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
@@ -299,7 +316,7 @@ export default function Costs() {
           )}
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 36 }}>
-            Want the numbers for your business, or a version that fits your budget? Ask on a free consultation, with no pressure.
+            Would it be okay if we worked out the numbers for your business on a free consultation, or found a version that fits your budget? A no is welcome.
           </p>
           <div style={{ textAlign: "center" }}>
             <AnimatedButton href="/audit">Book a free consultation</AnimatedButton>

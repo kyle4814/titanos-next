@@ -8,6 +8,8 @@ import { PRICING, DISPLAY } from "@/lib/pricing";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { SystemLabel, DepthIndex, TempleFrame } from "@/components/Myth";
 import { Bluf, FrontLoad } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 // Job Flow: tradie entry offer, approved by Kyle 2026-10-05.
 // Sits on the ladder between Monitor and the AI retainers. Register: plain,
@@ -122,7 +124,7 @@ export default function TradiesPage() {
         badge="JOB FLOW · FOR TRADIES · LAUNCHING SOON"
         title="New work found before it's advertised."
         tagline={`Every month: who just won the contract near you, fresh local leads and more reviews. ${DISPLAY.JOB_FLOW_MONTHLY} when it launches. Cancel any time, no lock-in, no setup fee.`}
-        sub="For sparkies, plumbers, builders, cleaners, landscapers and other small service businesses. Want it today? Subbie Finder, the contract-winners list on its own, is available now at /offers/subbie-finder."
+        sub="For sparkies, plumbers, builders, cleaners, landscapers and other small service businesses. Want a taste today? Subbie Finder, the contract-winners list on its own, is available now at /offers/subbie-finder."
         trustLine={
           <>
             <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned · Run by Kyle Deligny
@@ -140,6 +142,19 @@ export default function TradiesPage() {
       <Bluf>
         Job Flow finds you new work before it is advertised, for {DISPLAY.JOB_FLOW_MONTHLY} when it launches. Subbie Finder is available now.
       </Bluf>
+
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={FLEX.market} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The
+            contract awards and leads come from public records, nothing of yours is touched, and nothing goes to your
+            customers unless you send it. Nobody is replaced, your IT person stays in charge, and the price is on this
+            page.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>So what does a month of Job Flow actually put in your hands?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -181,6 +196,8 @@ export default function TradiesPage() {
           </div>
         </div>
       </SectionReveal>
+
+      <OpenLoop>That is a lot of work found for you. How much of it is on you?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -228,6 +245,8 @@ export default function TradiesPage() {
           </div>
         </div>
       </SectionReveal>
+
+      <OpenLoop>And what does it cost, and how do you stop it if it is not working?</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -295,6 +314,8 @@ export default function TradiesPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>A few things tradies ask before they trust a stranger with this.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* FAQ */}
@@ -336,11 +357,12 @@ export default function TradiesPage() {
               marginBottom: 14,
             }}
           >
-            Start with a free sample
+            Would it be okay if I sent you a free sample?
           </h2>
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 22px" }}>
-            If it looks useful and you are comfortable with all of that, the free sample is the easy first
-            step: five contract winners near your postcode, sourced and dated. A no is completely fine. Prefer to talk first? You can also book a free audit call.
+            If it looks useful and you are comfortable with all of that, would it be okay if I sent you five
+            contract winners near your postcode, sourced and dated? You would see what it finds before you pay
+            anything. A no is completely fine. Prefer to talk first? You can also book a free audit call.
           </p>
           <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
             FREE SAMPLE: WINNERS NEAR YOU →

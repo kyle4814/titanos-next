@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "Speed and precision | TITANOS";
 const META_DESC =
@@ -29,10 +31,10 @@ const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(
 const A: CSSProperties = { color: "var(--gold)" };
 
 const FACTS: [string, string][] = [
-  ["3.5 hours", "from idea to a working, tested app with 56 commits (7 October 2026)"],
-  ["44", "engineer-years of output in 4 months, priced by the COCOMO model"],
-  ["5,760", "automated tests our core system must pass before any change is accepted"],
-  ["2", "layout bugs caught by the phone check before release, after the tests had passed"],
+  ["3.5 hours", "RECORDED: from idea to a working, tested app with 56 commits (7 October 2026)"],
+  ["44", "MODELLED: engineer-years of output in 4 months, priced by the COCOMO model, not a timesheet"],
+  ["5,777", "RECORDED: tests in one full pass of our suite, run before any change is accepted"],
+  ["2", "RECORDED: layout bugs caught by the phone check before release, after the tests had passed"],
 ];
 
 const COMPARE: [string, string, string][] = [
@@ -53,7 +55,7 @@ const ANGLES: [string, string, string][] = [
   ["Speed", "Weeks of turnaround cut to hours or days", "/case-studies"],
   ["Precision", "Errors caught by tests and checks before they reach you", "/methodology"],
   ["Cost", "Systems that typically run for about AU$20 to AU$50 a month", "/costs"],
-  ["Engineering", "44 engineer-years of output in 4 months, with the maths shown", "/engineering"],
+  ["Engineering", "The 44 engineer-year model figure, with the maths shown and labelled as a model", "/engineering"],
 ];
 
 export default function Speed() {
@@ -62,8 +64,19 @@ export default function Speed() {
       <PageHero
         badge="Speed and precision"
         title="Fast because it is code. Precise because it is checked."
-        sub="Every number here is measured from our own work or taken from a published source, and each one links to where it came from."
+        sub="Every number here is measured from our own work or taken from a published source, and each one says which."
       />
+      <section style={{ ...SECTION, paddingBottom: 0 }}>
+        <div style={WRAP}>
+          <FlexNumber f={FLEX.fleetJobs} />
+          <p style={BODY}>
+            Method: counted from the log our own system writes every time it finishes a job, over the last 24 hours. Before you ask:
+            this is our own build machine working on our own code. It touches nothing of yours, it replaces nobody, and your IT
+            provider stays in charge of anything we build for you.
+          </p>
+        </div>
+      </section>
+      <OpenLoop>One finished job every six minutes sounds quick. But is quick any use if it is wrong?</OpenLoop>
       <section style={SECTION}>
         <div style={WRAP}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
@@ -76,6 +89,7 @@ export default function Speed() {
           </div>
 
           <h2 style={H}>Why it is fast</h2>
+          <p style={BODY}>Think of a kitchen where the prep is already chopped. Nobody works faster, there is just less to do at the last minute.</p>
           <p style={BODY}>
             Most of what we build is plain code, and code runs in seconds, every time, at any hour. The AI handles only the
             judgement work, and many builds run side by side instead of one after another. That morning&apos;s app was 14
@@ -126,7 +140,7 @@ export default function Speed() {
           <h2 style={H}>Why it is precise</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li style={{ marginBottom: 8 }}>
-              <b>Tests before claims.</b> Our core system carries 5,760 automated tests, and a change is accepted only when
+              <b>Tests before claims.</b> Our suite runs 5,777 automated tests in one pass, and a change is accepted only when
               every one passes.
             </li>
             <li style={{ marginBottom: 8 }}>
@@ -158,7 +172,7 @@ export default function Speed() {
           </div>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 36 }}>
-            Want to see how fast this could move for your business? Ask on a free consultation, with no pressure.
+            Want to see how fast this could move for your business? Would it be okay if we looked at one of your slow jobs on a free consultation? A no is welcome.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/audit">Book a free consultation</AnimatedButton>

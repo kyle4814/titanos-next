@@ -10,6 +10,17 @@ import { CONTACT_HREF } from "@/lib/config";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import type { Flex } from "@/lib/flex";
+
+// The biggest true number for this page: the size of the report you can read in full before you pay.
+const PACK_FLEX: Flex = {
+  big: "13 sections, 17 pages",
+  label: "my own report on my own business, published in full with only customer names removed",
+  kind: "EXAMPLE",
+  analogy: "A car dealer who hands you the service history of their own car first, before asking you to trust theirs.",
+  source: "The sample PDF on this page: a real scan of titanos.tech, same template every client receives.",
+};
 
 const REQUEST_HREF = "/scan#request";
 
@@ -179,8 +190,8 @@ export default function OurEvidencePackPage() {
       />
       <PageHero
         badge="SEE WHAT YOU GET: MY OWN REPORT, PUBLISHED IN FULL"
-        title="Before you pay for anything, see exactly what you get."
-        tagline="This is my own security and compliance report, run on my own business, published in full, with only customer names removed. Nothing glossy. Nothing hidden."
+        title="Before you pay for anything, read exactly what you would get."
+        tagline="This is my own security and compliance report, run on my own business and published in full, with only customer names removed. Nothing glossy, nothing hidden."
         sub="The single PDF an insurer, regulator, or enterprise procurement team asks for as proof of reasonable steps: privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. 17 pages. Same template every client receives, applied to my own business first."
         trustLine={
           <>
@@ -207,6 +218,18 @@ export default function OurEvidencePackPage() {
       </Bluf>
       <Analogy k="flightrecorder" />
 
+      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <FlexNumber f={PACK_FLEX} />
+          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+            Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254). The scan behind this report used
+            public records only and touched nothing. Nobody is replaced, your IT person stays in charge, and reading
+            this page costs you nothing.
+          </p>
+        </div>
+      </SectionReveal>
+      <OpenLoop>Why would anyone publish their own report in full? Fair question, and the answer is the next section.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* Framing line: plain-English benefit before technical detail.
@@ -214,7 +237,7 @@ export default function OurEvidencePackPage() {
       <SectionReveal style={{ padding: "var(--space-12) 20px 0", position: "relative", zIndex: 2 }}>
         <Inscription label="Verified, not claimed">
           A plain-English report you can hand straight to your insurer or a big
-          client as proof. Here&apos;s exactly what it looks like.
+          client as proof. Here is exactly what it looks like.
         </Inscription>
       </SectionReveal>
 
@@ -282,6 +305,8 @@ export default function OurEvidencePackPage() {
           ask that and keep mine private, so this is mine, unedited, first.
         </OperatorNote>
       </SectionReveal>
+
+      <OpenLoop>Want to read the real thing? It is one tap away.</OpenLoop>
 
       <div className="divider-gold" />
 
@@ -351,6 +376,8 @@ export default function OurEvidencePackPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>And what is actually inside those 17 pages?</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* 13 SECTIONS, grouped */}
@@ -359,7 +386,7 @@ export default function OurEvidencePackPage() {
           <DepthIndex index={3} total={5} />
           <SectionHeading
             title="What&apos;s Inside: All 13 Sections"
-            lead="Grouped into three categories so you can see at a glance what the report covers. Every section is plain English, no assumed technical knowledge."
+            lead="Three groups, so you can see at a glance what the report covers. Every section is plain English, and none of it assumes you are technical."
           />
 
           {GROUPS.map((group) => (
@@ -445,6 +472,8 @@ export default function OurEvidencePackPage() {
         </div>
       </SectionReveal>
 
+      <OpenLoop>Still wondering about something? Most people are, so I wrote the answers down.</OpenLoop>
+
       <div className="divider-gold" />
 
       {/* FAQ */}
@@ -453,7 +482,7 @@ export default function OurEvidencePackPage() {
           <DepthIndex index={4} total={5} />
           <SectionHeading
             title="Questions People Usually Have"
-            lead="If you have never seen a compliance report before, these are the things most people want to know first."
+            lead="If you have never seen a compliance report before, these are the things people usually ask first."
           />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="Is this a real report or a made-up example?">
@@ -514,7 +543,7 @@ export default function OurEvidencePackPage() {
             marginBottom: 18,
           }}
         >
-          Ready to Build Yours?
+          Would it be okay if we built yours?
         </h2>
         <p
           style={{
@@ -529,6 +558,7 @@ export default function OurEvidencePackPage() {
           (optional to continue at {DISPLAY.MONITOR_MONTHLY} after that, no automatic billing).
           One working session together: all 13 sections completed, written for
           your specific business, ready to hand to a client, insurer, or regulator.
+          If you would rather read a bit more first, or this is not for you, a no is completely welcome.
         </p>
         <div style={{ marginBottom: 24 }}>
           <OperatorByline />

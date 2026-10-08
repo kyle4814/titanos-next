@@ -47,7 +47,7 @@ const ANALOGIES: Record<AnalogyKey, { line: string; anchor: string }> = {
   preflight: {
     line: "Like a pilot's pre-flight checklist: thousands of checks before every take-off, not just the first one.",
     anchor:
-      "5,760 automated tests across 13 suites run before anything is committed. Nothing goes live until they pass.",
+      "5,777 automated tests run before anything is committed. Nothing goes live until they pass.",
   },
   powersteering: {
     line: "Power steering, not a self-driving car. You still drive. It just takes the strain off your arms.",

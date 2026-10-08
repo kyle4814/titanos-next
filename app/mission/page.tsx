@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "The mission: why TITANOS exists | TITANOS";
 const META_DESC =
@@ -49,6 +51,17 @@ export default function Mission() {
         title="Give people their time back, then give the money back too."
         sub="TITANOS exists to prove AI can hand people their hours back instead of taking their jobs, and to put most of what it earns back into the world."
       />
+      <section style={{ ...SECTION, paddingBottom: 0 }}>
+        <div style={WRAP}>
+          <FlexNumber f={FLEX.market} />
+          <p style={BODY}>
+            Method: the ABS count of actively trading Australian businesses with 5 to 19 staff, June 2026. Each one is carrying hours of
+            repetitive work, and that is the time we want to hand back. We only use public records, we touch nothing without being asked,
+            nobody is replaced, and your IT provider stays in charge.
+          </p>
+        </div>
+      </section>
+      <OpenLoop>If that much time could come back, where should the money we earn go?</OpenLoop>
       <section style={SECTION}>
         <div style={WRAP}>
           <h2 style={H}>Where the money goes as we grow</h2>
@@ -59,6 +72,7 @@ export default function Mission() {
             The full ladder is on the <a href="/investors" style={A}>investors page</a>.
           </p>
 
+          <OpenLoop>And who is it for, exactly?</OpenLoop>
           <h2 style={H}>Who it goes to</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             {GIVE.map(([t, d]) => (
@@ -91,7 +105,7 @@ export default function Mission() {
           </p>
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 30 }}>
-            Want to help, partner, or point us at a cause that needs it? Start with a conversation. Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>.
+            Would it be okay if we started with a conversation, whether you want to help, partner, or point us at a cause that needs it? Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>. A no is welcome.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/contact">Start a conversation</AnimatedButton>

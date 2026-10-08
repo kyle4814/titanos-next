@@ -6,8 +6,10 @@ import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import { OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
+import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FLEX } from "@/lib/flex";
 
-const META_TITLE = "44 engineer-years in 4 months | TITANOS";
+const META_TITLE = "What one engineer built in 4 months, and the maths | TITANOS";
 const META_DESC =
   "170,651 lines of production code across four repositories since June 2026, priced by the industry-standard COCOMO model at 44 engineer-years. The maths, the method and how to re-run it yourself.";
 
@@ -99,18 +101,31 @@ export default function EngineeringPage() {
     <>
       <PageHero
         badge="The proof"
-        title="44 engineer-years of output in 4 months."
+        title="20 engineers for 27 months, or one person in about 4."
         tagline="On about US$30 (roughly AU$46) a month."
-        sub="One engineer, working around a day job, from the first commit on 4 June 2026 to 4 October 2026. Every figure below has its method at the bottom of the page."
+        sub="That first figure is MODELLED, not a timesheet. One engineer, working around a day job, from the first commit on 4 June 2026 to 4 October 2026. Every figure below has its method at the bottom of the page."
       >
         <AnimatedButton href="#method" variant="secondary">
           Jump to the method ↓
         </AnimatedButton>
       </PageHero>
 
+      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
+        <div style={PROSE}>
+          <FlexNumber f={FLEX.engineers} />
+          <p style={{ ...BODY, marginTop: 18 }}>
+            Method in one line: count the lines of code, put them through the published COCOMO formulas, and compare. Before you ask,
+            this page is about our own build. Nothing of yours is touched, nobody is replaced, and the whole calculation is at the bottom
+            so you can re-run it.
+          </p>
+        </div>
+      </SectionReveal>
+
+      <OpenLoop>How do you get from lines of code to a number of engineers, and is it fair?</OpenLoop>
+
       <div className="divider-gold" />
 
-      <Block title="The maths, in one line">
+      <Block title="The maths, in one line" lead="MODELLED, and labelled as such.">
         <p style={BODY}>
           170,651 lines of production code across four repositories in the four months from 4 June 2026. The industry-standard COCOMO model prices that at
           44 engineer-years, about AU$7.8 million at Australia&apos;s AU$800-a-day contractor rate, which is up
@@ -120,7 +135,7 @@ export default function EngineeringPage() {
 
       <Analogy k="department" />
 
-      <Block title="The normal way vs the TITANOS way">
+      <Block title="The normal way vs the TITANOS way" lead="A department, or one person with a very good toolbox.">
         <div style={{ ...CARD, padding: 0, overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "var(--fs-body)" }}>
             <thead>
@@ -169,19 +184,21 @@ export default function EngineeringPage() {
 
       <Block title="What a dollar of compute buys">
         <p style={BODY}>
-          Counted at 10%, that is AU$2.3 million a year of engineering on about AU$550 a year of compute (about US$30, roughly AU$46, a month): about
+          Counted at 10% (a MODELLED figure), that is AU$2.3 million a year of engineering on about AU$550 a year of compute (about US$30, roughly AU$46, a month): about
           AU$4,200 of engineering per AU$1 on the original build spend, and about AU$650 per AU$1 at
           today&apos;s AU$300 a month. On the full model (AU$7.8 million built on about AU$185 of compute over
           the four months), it is about AU$42,000 per AU$1.
         </p>
       </Block>
 
+      <OpenLoop>A model is only worth something if the work holds up. So does it?</OpenLoop>
+
       <Analogy k="preflight" />
 
       <Block title="Built properly">
         <ul style={{ ...PROSE, listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
           {[
-            "5,760 automated tests. Nothing ships unless the test gate is green.",
+            "5,777 tests in one full pass (RECORDED, 8 October 2026). Nothing ships unless the test gate is green.",
             "1,078 commits in the main repository since 24 August 2026.",
           ].map((t) => (
             <li key={t} style={{ ...CARD, color: "var(--ice)", lineHeight: 1.6 }}>
@@ -210,7 +227,7 @@ export default function EngineeringPage() {
           <Tile label="AU$100k a month" value="~AU$23M" note="a year. Small team and a full agent fleet." />
         </div>
         <p style={{ ...BODY, marginTop: 20 }}>
-          AU$10M+ a year of engineering capacity at the right investment.
+          AU$10M+ a year of engineering capacity at the right investment. That is the same model with bigger inputs, so treat it as a scenario.
         </p>
       </Block>
 
@@ -271,8 +288,8 @@ export default function EngineeringPage() {
       <SectionReveal style={{ ...SECTION, textAlign: "center" }}>
         <div style={PROSE}>
           <p style={BODY}>
-            If any of this is useful to you, the free security scan is the easy first step. If you would
-            rather talk it through, book a call. No pressure either way.
+            Would it be okay if I ran the free security scan on your business as a first step? It reads public records only
+            and touches nothing of yours. If you would rather talk it through, book a call. A no is welcome either way.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
             <AnimatedButton href="/scan" variant="primary">
