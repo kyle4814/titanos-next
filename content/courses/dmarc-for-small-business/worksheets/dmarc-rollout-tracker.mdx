@@ -1,0 +1,102 @@
+## DMARC rollout tracker
+
+Use one block per week. Fill in the plan before you change anything and the result afterwards. If anything breaks, you can set the policy back and note it here.
+
+### Starting point
+
+Start date:
+
+Exact starting DMARC record text:
+
+Exact starting SPF record text (kept for undo):
+
+Where reports are sent:
+
+### Week 0: Publish p=none
+
+Date:
+
+Record published:
+
+- [ ] Only one DMARC record exists at _dmarc
+- [ ] Report address is working
+- [ ] Team told that monitoring has started
+
+### Weeks 1 to 2: Watch and list
+
+Senders seen in reports:
+
+Passing:
+
+Failing but known:
+
+Unknown:
+
+- [ ] Every source classified as known passing, known failing or unknown
+- [ ] First fix chosen, one sender at a time
+
+### Weeks 3 to 4: Fix and confirm
+
+Sender fixed:
+
+What I changed:
+
+Result in the next reports:
+
+- [ ] Quiet monthly senders have been seen at least once
+- [ ] Each known sender passes DMARC
+- [ ] SPF is still under the ten lookup limit
+
+### Week 5: Quarantine at a low pct
+
+Date:
+
+Record published:
+
+Percentage applied:
+
+Problems reported by team or customers:
+
+- [ ] Reports checked twice this week
+- [ ] No known sender is failing
+
+### Weeks 6 to 8: Raise quarantine
+
+Percentage steps and dates:
+
+What the reports showed:
+
+Anything fixed:
+
+- [ ] Reached full quarantine
+- [ ] Held at full quarantine for at least two weeks with no known sender failing
+
+### Week 9 or later: Reject
+
+Date:
+
+Record published:
+
+- [ ] Non-sending domains set to SPF v=spf1 -all and p=reject
+- [ ] Subdomain policy (sp) decided and recorded
+- [ ] Team and IT provider told the date
+
+### Undo note
+
+If anything breaks, set the policy back to p=none, write down what failed, fix that sender, and resume.
+
+Date rolled back (if any):
+
+Reason:
+
+### Monthly check log
+
+Month and date:
+
+DMARC policy still correct:
+
+SPF still one record and under ten lookups:
+
+New or changed senders:
+
+- [ ] Calendar reminder is set for next month

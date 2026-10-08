@@ -1,0 +1,45 @@
+## A five-minute monthly habit
+
+Email security records are not a one-off job. Staff join, tools change, a new invoicing system is bought, and an old record gets forgotten. A short monthly check keeps your work from slowly rotting.
+
+### The monthly five minutes
+
+Put a repeating calendar entry in. Each month:
+
+1. Look up your DMARC record. Is it still there, still at your enforced policy, and with one record only?
+2. Look up your SPF record. Is it still a single line, and is it still under the ten lookup limit?
+3. Scan your latest reports for anything new: an unknown source, or a known sender that has started failing.
+4. Check that the report mailbox or service still works.
+5. Ask yourself whether anyone has bought or signed up to a new tool that sends email.
+
+You can use the free scan at titanos.tech/scan, which covers the same public records, or your own lookup tool. Log the result and date in the rollout tracker.
+
+### Triggers that need a check straight away
+
+- You sign up to any new tool that sends email to customers.
+- You change email provider, web host or DNS host.
+- A staff member who managed any of these leaves.
+- A customer reports an email that looks like it came from you but did not.
+
+### Changing providers safely
+
+Before moving mail, write down every record you rely on. Moving DNS hosts is when SPF, DKIM and DMARC records most often go missing. Ask the new host to publish them before the switch, and recheck afterwards.
+
+### Optional extras
+
+Once DMARC is at enforcement and stable, two optional measures are worth knowing about. You do not need them to pass a basic client or insurer question.
+
+- **MTA-STS** asks other mail servers to use encrypted connections when delivering mail to you. It protects mail coming in, not fakes going out.
+- **BIMI** can display your logo next to your messages in some mail programs. It requires DMARC enforcement and usually extra steps, and is a branding benefit more than a security fix.
+
+Skip both for now if time is short.
+
+### Where this fits in wider security
+
+Email records are one part of the picture. The Australian Essential Eight, maturity level one, covers eight areas of basic cyber hygiene, and an enforced DMARC policy is good supporting evidence of care on the email side. TITANOS also offers Compliance Monitor if you would like help with ongoing checking, but the habit above is enough on its own.
+
+### Your steps
+
+1. Create the calendar reminder now.
+2. Add the four trigger events to your new-supplier checklist.
+3. Share the monthly routine with whoever covers you during leave.

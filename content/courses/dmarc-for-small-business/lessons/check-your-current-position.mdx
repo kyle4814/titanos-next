@@ -1,0 +1,43 @@
+## Look up your domain's public records
+
+Now we measure. Everything in this lesson reads public DNS, the same way any mail server on the internet does. Nothing is logged into, scanned or changed.
+
+### Option one: the free TITANOS scan
+
+SpoofGuard is the TITANOS passive check of public DNS. It looks at your SPF record, DKIM selectors, DMARC record and the strength of the policy, with no logins and nothing touched. You can run the free scan at titanos.tech/scan. This lesson also shows you how to look at the same records by hand, so you understand the results either way.
+
+### Option two: look it up yourself
+
+Any free DNS lookup or DMARC checker will do, such as the lookup tools many DNS hosts and public checker sites offer. Query these names for your domain, using TXT as the record type.
+
+- Your domain itself: look for a record starting with v=spf1.
+- _dmarc.yourdomain: look for a record starting with v=DMARC1.
+- selector._domainkey.yourdomain: DKIM, which needs a selector name (next lesson).
+
+### Reading what you find
+
+For SPF, check there is exactly one record starting v=spf1. Two records is an error. Note how it ends: -all (fail anything not listed), ~all (soft fail) or ?all (neutral).
+
+For DMARC, look at the p= value.
+
+- No record: receivers have no instruction from you, and no reports are coming.
+- p=none: you are watching only. Fakes are still delivered. This is the right place to start, not to stay.
+- p=quarantine: failing mail is usually treated as suspicious, such as being sent to spam.
+- p=reject: failing mail is refused.
+
+Also note whether there is an rua= address, which is where summary reports are sent, and whether sp= is present, which sets a policy for subdomains.
+
+### Record your baseline
+
+Write down today's date and the following in the worksheet:
+
+1. SPF present? One record only? Ending in what?
+2. DKIM selector found? Which one?
+3. DMARC present? What p= value? Any rua=?
+4. Any other domains with no records at all?
+
+If something looks wrong, do not rush to fix it. Many domains look untidy and still deliver mail fine. Fixing in the right order matters more than fixing fast.
+
+### Two small cautions
+
+A lookup showing "no record" can occasionally be a lookup error, so check with a second tool before drawing a conclusion. And remember that these results show your published rules, not whether your real mail is passing. Reports in Module 3 tell you that.

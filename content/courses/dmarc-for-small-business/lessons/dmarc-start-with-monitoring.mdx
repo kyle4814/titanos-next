@@ -1,0 +1,39 @@
+## DMARC: say what should happen to fakes
+
+DMARC ties SPF and DKIM together and adds two things: an instruction to receivers, and a reporting channel back to you. It is a single TXT record published at _dmarc.yourdomain.
+
+### The simplest safe starting record
+
+A first record looks like this in plain text: v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.
+
+- **v=DMARC1** says what this is.
+- **p=none** is the policy. "None" means monitor only. Nothing is blocked, so there is no risk to your real mail.
+- **rua=** is the address that receives aggregate reports.
+
+### How DMARC decides pass or fail
+
+A message passes DMARC if SPF passes and aligns, or DKIM passes and aligns. Only one of the two needs to. Alignment means the domain checked by SPF or DKIM matches the domain in the visible "from" line. That match is what stops a fraudster from passing SPF on their own domain while showing your name.
+
+Alignment can be relaxed (the default, where subdomains of your domain count as matching) or strict (an exact match). Leave it relaxed unless you have a reason.
+
+### Where reports go
+
+Aggregate reports are summary files, usually sent once a day by large mail receivers, listing which sending addresses sent mail claiming to be your domain, how many messages, and whether they passed. They contain no message content. The files are in a technical format, so most small businesses send them to a free report-reading service rather than reading them raw. Choose a reputable one, read its privacy terms, and remember that you are choosing to share these summaries with it. That is your decision, and nothing goes to TITANOS.
+
+If the report mailbox is on a different domain from the one you are protecting, that other domain must publish a small record authorising it to receive your reports. Your report service's setup page explains the exact name to publish.
+
+### Your steps
+
+1. Pick the mailbox or service that will receive reports.
+2. Publish the p=none record at your DNS host. Keep the exact text in the worksheet.
+3. Confirm it with a DMARC lookup. The record should appear under _dmarc.
+4. Log the date in the rollout tracker as Week 0.
+5. Wait. Useful data takes time because reports are daily and some senders only email monthly, such as a quarterly newsletter or an annual renewal notice.
+
+### How long to stay at p=none
+
+Plan for at least two to four weeks, longer if you have many senders or irregular ones. The aim is not a fixed number of days. The aim is to see every legitimate sender, and know it passes.
+
+### One warning
+
+Do not jump straight to p=reject, even if a guide tells you to. A single forgotten sender, such as your payroll provider, would have its emails refused. Monitoring first is what makes the later steps safe.

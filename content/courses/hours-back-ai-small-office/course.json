@@ -1,0 +1,257 @@
+{
+  "slug": "hours-back-ai-small-office",
+  "title": "Hours Back: AI for the Small Office",
+  "tagline": "Use AI to give your team its evenings back, with nobody replaced and you approving everything.",
+  "audience": [
+    "Owners and office managers of businesses with 2 to 20 people",
+    "Bookkeepers and admin staff who chase quotes, invoices and documents",
+    "Anyone who wants a calm, practical start with no jargon"
+  ],
+  "offerSlug": "course-hours-back-ai",
+  "outcomes": [
+    "Measure where your office hours go, using your own numbers",
+    "Choose one repeat job to hand over and score it honestly",
+    "Write an approval rule so a person checks every message",
+    "Draft inbox, chasing, notes, roster and onboarding messages you review before sending",
+    "Know what never to paste into an AI tool and where to ask for professional advice",
+    "Prove a before and after result for your own office"
+  ],
+  "modules": [
+    {
+      "title": "Module 1: Where your hours go",
+      "lessons": [
+        {
+          "slug": "log-one-week-of-admin",
+          "title": "Log one week of admin",
+          "outcome": "You know which jobs take the most time, in your own numbers.",
+          "minutes": 14
+        },
+        {
+          "slug": "pick-the-first-job",
+          "title": "Pick the first job to hand over",
+          "outcome": "One repeat job with a clear finish line and a named approver.",
+          "minutes": 14
+        },
+        {
+          "slug": "the-approval-rule",
+          "title": "The approval rule",
+          "outcome": "A one-page written rule: AI drafts, a person approves.",
+          "minutes": 13
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Inbox and chasing",
+      "lessons": [
+        {
+          "slug": "inbox-triage",
+          "title": "Inbox triage",
+          "outcome": "A safe way to sort your inbox and draft routine replies.",
+          "minutes": 12
+        },
+        {
+          "slug": "quote-and-invoice-chasing",
+          "title": "Quote and invoice chasing",
+          "outcome": "A three-step rhythm and prompts for follow-ups you approve.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Everyday office routines",
+      "lessons": [
+        {
+          "slug": "meeting-notes-rosters-reminders",
+          "title": "Meeting notes, rosters and reminders",
+          "outcome": "Prompts for action lists, roster drafts and reminders.",
+          "minutes": 14
+        },
+        {
+          "slug": "client-onboarding-and-bookkeeping-follow-ups",
+          "title": "Client onboarding and bookkeeping follow-ups",
+          "outcome": "A welcome routine and document requests you check before sending.",
+          "minutes": 14
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Safe, proven, ongoing",
+      "lessons": [
+        {
+          "slug": "privacy-and-safety",
+          "title": "Privacy and safety",
+          "outcome": "A never-paste list and a plain view of Privacy Act basics.",
+          "minutes": 15
+        },
+        {
+          "slug": "measure-before-and-after",
+          "title": "Measure before and after",
+          "outcome": "A fair before and after result from your own numbers.",
+          "minutes": 14
+        },
+        {
+          "slug": "your-next-step",
+          "title": "Your next step",
+          "outcome": "A monthly review habit and your options from here.",
+          "minutes": 10
+        }
+      ]
+    }
+  ],
+  "worksheets": [
+    {
+      "slug": "one-week-time-log",
+      "title": "One-week time log",
+      "blurb": "Record your admin tasks and minutes for five working days."
+    },
+    {
+      "slug": "first-job-scorecard",
+      "title": "First job to hand over scorecard",
+      "blurb": "Score candidate jobs and write your approval rule."
+    },
+    {
+      "slug": "before-and-after-results",
+      "title": "Before and after results sheet",
+      "blurb": "Work out the hours back from your own measured numbers."
+    }
+  ],
+  "quiz": {
+    "passPct": 75,
+    "questions": [
+      {
+        "q": "What is the first thing to do before changing any admin routine?",
+        "options": [
+          "Buy an AI tool",
+          "Log where your hours actually go for a week",
+          "Ask the team to work faster",
+          "Set up automatic sending"
+        ],
+        "answer": 1,
+        "why": "You measure first. Your own log shows which jobs really take the time."
+      },
+      {
+        "q": "Which job is a good first one to hand over?",
+        "options": [
+          "Replying to a formal complaint",
+          "Deciding a staff disciplinary matter",
+          "A repeat job with a clear finish line, such as a quote follow-up",
+          "Giving tax advice to a client"
+        ],
+        "answer": 2,
+        "why": "Repeat, wordy jobs with a clear finish and a low cost of error suit drafting. Sensitive matters need a person."
+      },
+      {
+        "q": "What does the approval rule say?",
+        "options": [
+          "AI drafts, and a named person reads and approves every message",
+          "AI sends routine messages on its own",
+          "Approval is only needed for new clients",
+          "The AI tool checks its own work"
+        ],
+        "answer": 0,
+        "why": "A human approves every message, and the rule works best when a named person is responsible."
+      },
+      {
+        "q": "A draft has an invoice amount in it. What should you do?",
+        "options": [
+          "Trust it, the tool is good with numbers",
+          "Delete the amount",
+          "Send it and fix any complaint later",
+          "Check it against your accounting records"
+        ],
+        "answer": 3,
+        "why": "Drafts can be wrong. Names, dates and amounts are checked against your own records."
+      },
+      {
+        "q": "Which of these should never be pasted into an AI tool?",
+        "options": [
+          "A friendly reminder template with square brackets",
+          "Tax file numbers and bank details",
+          "A made-up example with no real names",
+          "Your own list of questions"
+        ],
+        "answer": 1,
+        "why": "Identity, bank and similar sensitive details do not go into outside tools."
+      },
+      {
+        "q": "What is the best way to use AI on your inbox?",
+        "options": [
+          "Forward everything to it and let it reply",
+          "Let it decide which clients matter",
+          "Stop reading the inbox yourself",
+          "Paste a few messages with private details removed and ask it to sort by urgency"
+        ],
+        "answer": 3,
+        "why": "Use it to help you decide what to look at first, with details removed, and read the originals yourself."
+      },
+      {
+        "q": "What should the AI do when it does not know a fact, according to a good prompt?",
+        "options": [
+          "Make a sensible guess",
+          "Skip the sentence silently",
+          "Leave a clear gap in square brackets",
+          "Copy from an old message"
+        ],
+        "answer": 2,
+        "why": "A blank you must fill is safer than an invented date or amount."
+      },
+      {
+        "q": "What are the Australian Privacy Principles, at a plain level?",
+        "options": [
+          "Rules about how personal information is collected, used, stored and disclosed",
+          "Rules only about advertising",
+          "Rules for AI tools only",
+          "Optional tips for large companies"
+        ],
+        "answer": 0,
+        "why": "They are part of the Privacy Act. Whether and how they apply to you is a question for a lawyer or other professional."
+      },
+      {
+        "q": "When you measure a saving, which time must you count?",
+        "options": [
+          "Only the drafting time",
+          "Only the time the tool took",
+          "Instruction, reading, correcting and approving time as well",
+          "Only the time you remember"
+        ],
+        "answer": 2,
+        "why": "A saving that ignores checking is not a saving."
+      },
+      {
+        "q": "What if your after result is small or negative?",
+        "options": [
+          "Hide it and try another tool",
+          "Claim the saving anyway",
+          "Stop using any measuring",
+          "Record it, change one thing such as the prompt, and measure again"
+        ],
+        "answer": 3,
+        "why": "An honest small or negative result is still a result and tells you what to change."
+      },
+      {
+        "q": "What is the aim of this course for your team?",
+        "options": [
+          "To give people their hours back with nobody replaced",
+          "To replace admin staff",
+          "To let AI run the office",
+          "To collect your data"
+        ],
+        "answer": 0,
+        "why": "The principle is that hours are given back, nobody is replaced, and people stay in charge."
+      },
+      {
+        "q": "Who should answer a question about what is deductible or what your legal duties are?",
+        "options": [
+          "The AI tool",
+          "A registered tax agent, accountant or lawyer",
+          "Whoever replies first online",
+          "The newest staff member"
+        ],
+        "answer": 1,
+        "why": "AI can help you phrase the question, but advice on tax or law comes from a professional."
+      }
+    ]
+  },
+  "disclosure": "This course was written with AI assistance (Claude, by Anthropic) and published by TITANOS. It is text only, with no voice or face.",
+  "certificateTitle": "Certificate of completion: Hours Back, AI for the Small Office"
+}

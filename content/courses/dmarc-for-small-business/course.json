@@ -1,0 +1,257 @@
+{
+  "slug": "dmarc-for-small-business",
+  "title": "Email Security for Small Business: Stop Your Domain Being Faked (SPF, DKIM, DMARC)",
+  "tagline": "Learn to check, fix and prove your email domain protection in plain steps, with your own IT provider alongside you.",
+  "audience": [
+    "Owners and managers of small businesses",
+    "Office managers and part-time IT staff",
+    "Suppliers asked by a client or insurer about email security"
+  ],
+  "offerSlug": "course-dmarc-smb",
+  "outcomes": [
+    "Explain in plain words how email faking works and what SPF, DKIM and DMARC each do",
+    "Build a register of every service that sends email as your domain",
+    "Set up and check SPF and DKIM without breaking real mail",
+    "Roll DMARC out from monitoring to quarantine to reject in a safe order",
+    "Keep the records healthy with a short monthly check",
+    "Produce a one-page evidence summary for a client or insurer"
+  ],
+  "modules": [
+    {
+      "title": "Module 1: See where you stand",
+      "lessons": [
+        {
+          "slug": "how-email-faking-works",
+          "title": "How email faking works, in plain words",
+          "outcome": "You can explain the risk and the three records to your team.",
+          "minutes": 10
+        },
+        {
+          "slug": "list-everything-that-sends-as-you",
+          "title": "List everything that sends as you",
+          "outcome": "A sender register and a list of every domain you own.",
+          "minutes": 14
+        },
+        {
+          "slug": "check-your-current-position",
+          "title": "Look up your domain's public records",
+          "outcome": "A dated baseline of your SPF, DKIM and DMARC.",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Set up SPF and DKIM",
+      "lessons": [
+        {
+          "slug": "spf-without-tears",
+          "title": "SPF without tears",
+          "outcome": "One tidy SPF record under the ten lookup limit.",
+          "minutes": 14
+        },
+        {
+          "slug": "dkim-signing-and-selectors",
+          "title": "DKIM, signing and selectors",
+          "outcome": "Each sending service signing as your domain, with selectors recorded.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Roll out DMARC",
+      "lessons": [
+        {
+          "slug": "dmarc-start-with-monitoring",
+          "title": "DMARC: start with monitoring",
+          "outcome": "A p=none record with reports arriving.",
+          "minutes": 13
+        },
+        {
+          "slug": "read-reports-and-fix-senders",
+          "title": "Read the reports and fix senders",
+          "outcome": "Every known sender passing and unknown ones investigated.",
+          "minutes": 16
+        },
+        {
+          "slug": "move-to-quarantine-then-reject",
+          "title": "Move to quarantine, then reject",
+          "outcome": "A staged enforcement plan with an undo path.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Keep it and show it",
+      "lessons": [
+        {
+          "slug": "keep-it-healthy",
+          "title": "Keep it healthy",
+          "outcome": "A five-minute monthly check in your calendar.",
+          "minutes": 10
+        },
+        {
+          "slug": "build-your-evidence-summary",
+          "title": "Build your evidence summary",
+          "outcome": "A one-page summary you can send a client or insurer.",
+          "minutes": 12
+        }
+      ]
+    }
+  ],
+  "worksheets": [
+    {
+      "slug": "domain-inventory-sender-register",
+      "title": "Domain inventory and sender register",
+      "blurb": "List every domain you own, every service that sends as you, and your baseline lookup results."
+    },
+    {
+      "slug": "dmarc-rollout-tracker",
+      "title": "DMARC rollout tracker",
+      "blurb": "A week by week plan and log from monitoring to reject, with an undo note."
+    },
+    {
+      "slug": "one-page-evidence-summary",
+      "title": "One-page evidence summary",
+      "blurb": "A single page for a client or insurer, built from checks you have made yourself."
+    }
+  ],
+  "quiz": {
+    "passPct": 75,
+    "questions": [
+      {
+        "q": "What does SPF do?",
+        "options": [
+          "Encrypts your email in transit",
+          "Lists which servers may send mail for your domain",
+          "Signs every message with a private key",
+          "Tells receivers to send you reports"
+        ],
+        "answer": 1,
+        "why": "SPF is a published list of approved sending servers. Signing is DKIM and reporting is DMARC."
+      },
+      {
+        "q": "Why is a forgotten sender the main risk when enforcing DMARC?",
+        "options": [
+          "Its mail would be quarantined or refused",
+          "It slows your DNS",
+          "It makes your SPF record shorter",
+          "It deletes your reports"
+        ],
+        "answer": 0,
+        "why": "Once the policy is quarantine or reject, a legitimate service that fails the checks has its messages sent to spam or refused."
+      },
+      {
+        "q": "How many SPF records may a domain have?",
+        "options": [
+          "One for each mail service",
+          "Up to ten",
+          "Exactly one",
+          "None, if DKIM is on"
+        ],
+        "answer": 2,
+        "why": "Two SPF records is an error and both can fail. Merge services into one record."
+      },
+      {
+        "q": "What happens when an SPF record needs more than 10 DNS lookups?",
+        "options": [
+          "Nothing, the limit is only advice",
+          "The record returns an error and may fail",
+          "DMARC is turned off automatically",
+          "Only ip4 entries are checked"
+        ],
+        "answer": 1,
+        "why": "Going past 10 lookups causes an SPF error. Remove unused includes and keep the record tidy."
+      },
+      {
+        "q": "Which mechanisms do NOT count towards the lookup limit?",
+        "options": [
+          "include and redirect",
+          "a and mx",
+          "ip4 and ip6",
+          "exists only"
+        ],
+        "answer": 2,
+        "why": "Plain ip4 and ip6 entries need no DNS lookup, so they do not count."
+      },
+      {
+        "q": "Where is a DKIM public key published?",
+        "options": [
+          "At selector._domainkey under your domain",
+          "At the root of your website",
+          "In your mailbox settings only",
+          "At _spf under your domain"
+        ],
+        "answer": 0,
+        "why": "The selector is a label that forms part of the DNS name, which is why you need it to look a key up."
+      },
+      {
+        "q": "A DMARC pass requires what?",
+        "options": [
+          "SPF and DKIM both aligned",
+          "Either SPF or DKIM passing and aligned",
+          "A reject policy",
+          "Reports turned on"
+        ],
+        "answer": 1,
+        "why": "DMARC needs at least one of SPF or DKIM to pass and align with the visible from domain."
+      },
+      {
+        "q": "Which starting DMARC policy is safe for real mail?",
+        "options": [
+          "p=reject",
+          "p=quarantine; pct=100",
+          "p=none with an rua address",
+          "No record at all"
+        ],
+        "answer": 2,
+        "why": "p=none only monitors, so no mail is blocked, and the rua address sends you the reports you need."
+      },
+      {
+        "q": "What does the rua tag set?",
+        "options": [
+          "The address that receives aggregate reports",
+          "The percentage of mail to block",
+          "The policy for subdomains",
+          "The DKIM key length"
+        ],
+        "answer": 0,
+        "why": "rua is the reporting address. sp sets subdomain policy and pct sets the percentage."
+      },
+      {
+        "q": "Why does forwarding often cause SPF failures?",
+        "options": [
+          "Forwarders remove the DKIM key",
+          "The forwarding server is not in the original sender's SPF list",
+          "DMARC does not allow forwarding",
+          "Forwarded mail is always spam"
+        ],
+        "answer": 1,
+        "why": "The forwarding server sends the message on, but your SPF does not list it. DKIM usually survives, which is why it matters."
+      },
+      {
+        "q": "What is the sp tag for?",
+        "options": [
+          "Setting a separate DMARC policy for subdomains",
+          "Choosing the DKIM selector",
+          "Shortening the SPF record",
+          "Switching reports to spam"
+        ],
+        "answer": 0,
+        "why": "sp= lets subdomains have their own policy, different from the main domain's p= value."
+      },
+      {
+        "q": "What is the best treatment for a domain you own that never sends email?",
+        "options": [
+          "Leave it with no records",
+          "Publish v=spf1 -all and p=reject",
+          "Use p=none to keep watching",
+          "Point it at your main mailbox"
+        ],
+        "answer": 1,
+        "why": "A non-sending domain has nothing to break, so lock it down fully so no one can fake it."
+      }
+    ]
+  },
+  "disclosure": "This course was written with AI assistance (Claude, by Anthropic) and published by TITANOS. It is text only, with no voice or face.",
+  "certificateTitle": "Certificate of completion: Email Security for Small Business"
+}

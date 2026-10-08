@@ -1,0 +1,43 @@
+## What a domain says about an organisation
+
+Every organisation that does business online leaves public technical traces. Reading them is like reading a shopfront from the footpath. You touch nothing, log in to nothing and send nothing to their systems beyond the ordinary lookups any browser or mail server performs.
+
+## Their own website
+
+Start with the site. Look for the legal name and ABN in the footer, a physical address, contact details, privacy policy and terms. Check that these agree with the registers. A mismatch is a question for them, not an accusation.
+
+Notice what is missing, too. A business asking you for sensitive information with no privacy policy is worth a note.
+
+## Domain and DNS basics
+
+DNS is the public directory that turns a domain name into the services behind it. Public lookup tools can show who runs their email and website hosting, and when records were set up. Many domain registrations hide personal details, so do not expect owner names. Treat any registration date as a loose hint only.
+
+## Email posture: SPF, DKIM and DMARC
+
+These three public settings help receiving mail servers decide whether an email really came from the domain it claims.
+
+- **SPF** lists the servers allowed to send mail for the domain.
+- **DKIM** adds a signature to messages so they can be verified.
+- **DMARC** tells receivers what to do with mail that fails those checks: nothing, quarantine it or reject it.
+
+You can look up the SPF and DMARC records with a standard public DNS lookup. DKIM needs a selector name, so you may not be able to confirm it from outside.
+
+## Why it matters when you sign
+
+Fake invoices and payment redirection scams often use look-alike or poorly protected domains. If your supplier has no DMARC policy, someone could more easily send emails pretending to be them, including a message asking you to change bank details. That is useful to know before you start paying invoices by email.
+
+Be fair in how you read it. A missing or relaxed policy is a security gap, not a sign of bad character. Many honest small businesses have never set these up. Record it as an observed fact, and treat it as a reason to confirm bank detail changes by phone using a number you already hold.
+
+## What you must not do
+
+Do not scan their systems, probe for open ports, guess logins or test their forms. That moves from reading public records to touching someone else's systems, and it is not part of this method.
+
+## Do this now
+
+For your chosen organisation:
+
+1. Open the website and write down the legal name, ABN and address shown. Compare with your ABN Lookup result.
+2. Use a public DNS lookup to find the SPF and DMARC records for their email domain.
+3. Write what each says in plain words, and the date.
+4. If DMARC is absent or set to none, add a line to your process: confirm any bank detail change by phone.
+5. Log each result as observed.

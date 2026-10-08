@@ -1,0 +1,37 @@
+## SPF: which servers may send as you
+
+SPF is a single line of text in your DNS that lists who may send mail for your domain. When a message arrives, the receiving server looks at the sending server's address and checks it against your list.
+
+### What an SPF record looks like
+
+A typical record is a text line beginning v=spf1, followed by approved sources, followed by an ending. For example, a business on Google Workspace might have v=spf1 include:_spf.google.com ~all. A Microsoft 365 business would use include:spf.protection.outlook.com instead. Use the exact text your mail provider's help pages give you, because it can change.
+
+The pieces:
+
+- **include:** says "also trust whatever this provider says". 
+- **ip4: and ip6:** list specific addresses, such as an office server.
+- **a and mx** trust your own web or mail servers.
+- **~all** means anything else is a soft fail. **-all** means anything else should fail.
+
+### The rules that catch people out
+
+1. **One record only.** A domain must have exactly one SPF record. If you add a second one for a new service, both break. Merge them into one line instead.
+2. **The ten lookup limit.** Each include, a, mx, exists and redirect makes the receiver do a DNS lookup, and chained includes count too. If the total passes 10, SPF returns an error and your mail may fail checks. The ip4 and ip6 parts do not count. Too many marketing and software tools is the usual cause.
+3. **Remove what you no longer use.** Old services left in the record waste lookups and keep a door open.
+4. **SPF checks a hidden address.** It checks the technical return path, not the visible "from" line. That is why DMARC adds the alignment check (Module 3).
+
+### Your steps
+
+1. Open your register from Lesson 2 and mark which senders need to be in SPF. Some services sign with DKIM only and send from their own return path, and their help pages will say.
+2. Look at your current SPF record. Count the lookups: each include, a, mx and redirect, plus any inside those includes where a checker shows them. Many free SPF checkers count this for you.
+3. If you are above or near 10, remove unused services first. Do not delete anything you cannot match to the register.
+4. Make your change at your DNS host, with your IT provider if you prefer. Keep a copy of the old record in the worksheet so you can undo it.
+5. Allow time for DNS to update, then check again.
+
+### Which ending should I use?
+
+Start with ~all while you are still learning who sends for you. Move to -all once reports show everything legitimate is covered. DMARC does most of the enforcing, so SPF's ending is less critical than the content of the list.
+
+### Domains that never send mail
+
+For a domain that sends nothing, the whole record can be v=spf1 -all. That says no server is allowed, which is exactly what you want.

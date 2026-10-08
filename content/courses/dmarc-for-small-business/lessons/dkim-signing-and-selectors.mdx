@@ -1,0 +1,35 @@
+## DKIM: a signature that survives the journey
+
+SPF checks where a message came from. DKIM checks the message itself. Your sending service adds a digital signature to each email using a private key it keeps secret. You publish the matching public key in your DNS. A receiving server fetches that key and checks that the signature fits. If it does, the message was signed by someone holding your key and was not changed on the way.
+
+### Selectors
+
+The public key is not stored at one fixed name. It lives at a name made from a selector, for example selector1._domainkey.yourdomain. The selector is just a label, so a domain can have many keys at once, one for each sending service.
+
+This is why checking DKIM from outside needs a selector name. Common ones are:
+
+- Microsoft 365 uses selector1 and selector2, usually set up as CNAME records pointing to Microsoft.
+- Google Workspace commonly uses "google" as the default selector, published as a TXT record.
+- Newsletter, invoicing and website tools each give you their own selector names when you set them up.
+
+If you do not know a selector, view the original of a recent email and look for the DKIM-Signature line. The s= value is the selector and the d= value is the domain that signed.
+
+### Your steps
+
+1. For every sender in your register, find its help page on "authenticate your domain" or "set up DKIM". Follow it, and publish the records it gives you at your DNS host.
+2. For your main mailbox provider, switch DKIM signing on in its admin area after the records are published. In Microsoft 365 and Google Workspace this is a clearly labelled setting.
+3. Choose 2048-bit keys where the service offers the choice. Some DNS hosts have trouble with long text entries, so if the key will not fit on one line, follow your host's instructions on splitting it.
+4. Send a test email from each service to a free mailbox you control, view the original, and check for dkim=pass. Note which domain signed it.
+5. Record each selector and its status in the worksheet.
+
+### The detail that matters later
+
+DKIM passing is not enough on its own for DMARC. The signing domain (d=) has to match, or be a subdomain of, your visible "from" domain. This is called alignment. A service that signs with its own domain gives a DKIM pass that does not help you. Most good services let you add your own domain so it signs as you. If one does not, note it in the register as a risk.
+
+### Rotation
+
+Keys should be replaced now and then, and certainly if a staff member who managed them leaves under bad terms. With two selectors you can publish a new key before retiring the old one. Put a yearly reminder in your calendar.
+
+### What if you get stuck?
+
+A missing or half-set-up DKIM record is common, not a failure. Ask your IT provider to look at the one service that is stuck. The rest can carry on.

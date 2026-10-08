@@ -1,0 +1,32 @@
+## The email that looked like it came from you
+
+Picture a customer receiving an invoice with your business name on it, your logo, and new bank details. They pay. The email never came from your systems. Someone typed your domain into the "from" line, and the customer's mail program had no reason to doubt it.
+
+That is the worry behind this whole course, and it is a fair one. It is also fixable, in small steps, without replacing your IT provider and without touching anything you do not choose to touch.
+
+### Why faking is so easy
+
+Email was designed before anyone thought about fraud. The "from" address you see is just a label the sender writes. Nothing in the original design checks that the sender is allowed to use it. Three public records, all stored in your domain's DNS, were added later to close that gap.
+
+- **SPF** lists which servers are allowed to send mail for your domain.
+- **DKIM** adds a digital signature to each message, so a receiver can check it was not altered and really came from a sender you authorised.
+- **DMARC** tells receivers what to do when a message fails those checks (nothing, put it in spam, or refuse it), and asks them to send you reports.
+
+### What this course does and does not do
+
+It teaches you to read your own records, list who legitimately sends for you, and move to enforcement in a careful order so real mail keeps flowing. It does not stop someone registering a lookalike domain with one letter changed. A simple rule covers that: any request to change bank details gets a phone call to a number you already hold.
+
+Everything here uses public information and free tools. You will change records only at your own DNS host, ideally with your IT provider alongside you. Nothing you do in this course is sent to TITANOS.
+
+### Your first steps
+
+1. Write down your main business domain, the part after the @ in your email address.
+2. Write down who hosts your DNS. This is often your registrar, your web host or your IT provider. If you do not know, ask them. You only need the name today.
+3. Write down who looks after your email (for example Microsoft 365 or Google Workspace) and who your IT provider is.
+4. Have a short chat with that IT provider. Tell them you are working through this course and want to do it together. A good provider will be glad you asked.
+
+### A note on the fear
+
+You do not need to be alarmed. A domain without enforcement is common, and the checks are quiet and public. Anyone, including you, can look up these records. That is the good news: you can measure your own position this week, and improve it step by step.
+
+Keep a note of your domain, DNS host and email provider. You will use them in every lesson, and they go straight into the first worksheet.

@@ -1,0 +1,44 @@
+## Find every sender before you change anything
+
+The most common way a DMARC rollout goes wrong is not a technical mistake. It is forgetting a sender. The accounting package that emails invoices, the newsletter tool, the booking system and the website contact form all send mail that says it is from you. Block them by accident and customers stop receiving real invoices.
+
+So we start with a list. It costs nothing and changes nothing.
+
+### Where senders hide
+
+Work through these places and note each one.
+
+- Your main mailboxes (Microsoft 365, Google Workspace or another host).
+- Your accounting or invoicing software.
+- Your customer database, booking or quoting tool.
+- Newsletter and marketing platforms.
+- Your website: contact forms, shop order emails, password resets.
+- Scanners, printers and alarm systems that email you.
+- Support desk or phone system tools.
+- Any agency or contractor who sends on your behalf.
+
+Ask each person on your team a simple question: "What do you use that sends email to customers or suppliers?" You will usually find one or two you did not know about.
+
+### Check the clues you already have
+
+Open a few recent emails you received from your own tools. Find the option called "show original" or "view message source". Look for the lines that mention SPF, DKIM and DMARC and note whether each says pass. Also note the real sending service named in the header lines. This is a quick, free way to confirm a sender exists.
+
+### Build the register
+
+For each sender write down:
+
+1. The name of the service and who owns the account.
+2. Which address it sends from (for example accounts@yourdomain).
+3. Whether it sends from your main domain or a subdomain.
+4. Whether it signs with DKIM for your domain (the service's help pages usually say).
+5. Whether it is still in use.
+
+The first worksheet, the domain inventory and sender register, has space for all of this. Fill it in now, even roughly. You will refine it when the first DMARC reports arrive in Module 3, because those reports list real senders you may have missed.
+
+### Other domains you own
+
+Make a second list of every domain you own, including old ones and ones that only redirect to your website. Mark each as "sends email" or "does not send email". The ones that do not send are the easiest to protect, and attackers often prefer them because nobody is watching. You will lock these down in a later lesson.
+
+### Keep your IT provider involved
+
+Share the register with your IT provider. They may know senders you do not, and they will want the list before any policy change. Nobody is replaced here. The register simply makes everyone's job quicker.

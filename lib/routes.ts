@@ -8,6 +8,7 @@ import { POSTS } from "@/lib/blog";
 import { ALL_OFFERS } from "@/lib/offers";
 import { CASES } from "@/lib/caseStudies";
 import { PRODUCTS } from "@/lib/products";
+import { COURSES, partsFor } from "@/lib/courses";
 import { SECTORS } from "@/lib/site-data";
 import { arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 
@@ -62,6 +63,10 @@ export function indexableRoutes(): SiteRoute[] {
   for (const p of POSTS) out.push(mk(`/blog/${p.slug}`, undefined, { priority: 0.6, lastModified: new Date(p.updated || p.date) }));
   for (const c of CASES) out.push(mk(`/case-studies/${c.slug}`, "lib/caseStudies.ts", { priority: 0.7 }));
   for (const p of PRODUCTS) out.push(mk(`/products/${p.slug}`, "lib/products", { priority: 0.6 }));
+  for (const c of COURSES) {
+    out.push(mk(`/courses/${c.slug}`, "content/courses", { priority: 0.7 }));
+    for (const p of partsFor(c)) if (p.kind === "lesson" || p.kind === "worksheet") out.push(mk(`/courses/${c.slug}/${p.slug}`, "content/courses", { priority: 0.5 }));
+  }
   for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
   // Consent-gated: the page file always reads as noindex (its robots is conditional), so it is added only when Kyle flips the switch.
   if (arianceVisible) out.push(mk(ariancePath, "lib/case-studies", { priority: 0.8 }));

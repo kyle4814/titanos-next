@@ -1,0 +1,47 @@
+## Turn reports into fixes
+
+After a few days of p=none, your reports begin to arrive. This lesson shows you how to read them calmly, one row at a time.
+
+### What a report row tells you
+
+Each row in a report says, in effect: "This sending address sent this many messages claiming to be your domain, and here is what SPF and DKIM said." Look at three things for each source:
+
+1. Who is it? A service name or address range. Look it up using the register from Lesson 2.
+2. Did DMARC pass? Check whether SPF or DKIM passed and aligned.
+3. How many messages? A large volume from an unknown source deserves attention first.
+
+### Sort every source into one of three groups
+
+- **Known and passing.** Nothing to do. Tick it in the register.
+- **Known and failing.** A legitimate sender that is not set up properly. Fix it before enforcement.
+- **Unknown.** Either a forgotten service or a real spoof attempt. Investigate before deciding.
+
+### Fixing a known sender that fails
+
+The cause is nearly always one of these.
+
+- **SPF passes but does not align.** The service uses its own return path. Fix by enabling DKIM with your own domain, so DKIM can align instead.
+- **DKIM is not set up.** Go back to Lesson 5 for that service.
+- **The service is not in your SPF.** Add its include, but watch the ten lookup limit.
+- **Sent from a subdomain.** Check whether the subdomain needs its own records.
+
+### Third-party senders
+
+Many services let you send as your domain on request. Some only support DKIM alignment on certain plans, and some use a subdomain, such as mail.yourdomain, so that your main domain stays clean. Both approaches are fine. Ask each vendor: "Can you sign with my domain, and do you align?" If the answer is no, consider moving that traffic to a subdomain or changing service.
+
+### Forwarding and mailing lists
+
+Forwarding often breaks SPF, because the forwarding server is not in the original sender's list. DKIM usually survives forwarding, which is one reason DKIM alignment is so valuable. Mailing lists that change the subject or add a footer can break DKIM too. Some failures from forwarders will always show up in reports. Do not chase every one. Decide what share is acceptable and focus on your own senders.
+
+### Unknown sources
+
+If the volume is small and the name is unfamiliar, ask your team before assuming anything dangerous. If an unknown source sends a lot and you cannot connect it to anything, that is exactly the situation DMARC enforcement is designed for. Make a note and move on to the plan.
+
+### Your steps this week
+
+1. Open your reports and list each source in the tracker.
+2. Classify each one using the three groups above.
+3. Fix one failing sender at a time, then wait for new reports.
+4. Update the register.
+
+You are ready to move on when every real sender you know about is passing for several weeks, including the quiet monthly ones.

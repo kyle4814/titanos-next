@@ -1,0 +1,257 @@
+{
+  "slug": "public-records-due-diligence",
+  "title": "Public-Records Due Diligence: Check a Supplier, Buyer or Partner Before You Commit",
+  "tagline": "A calm, repeatable way to check who you are about to sign with, using public records only.",
+  "audience": [
+    "Small business owners about to sign with a new supplier, buyer or partner",
+    "Office managers and bookkeepers who approve new suppliers or payment details",
+    "Small procurement and operations teams with no legal department"
+  ],
+  "offerSlug": "course-public-records-dd",
+  "outcomes": [
+    "Write a clear scope for a supplier, buyer or partner check",
+    "Work through a source ladder of free public registers and records",
+    "Record every finding with its source, date and confidence",
+    "Tell red flags from noise and turn flags into polite questions",
+    "Write a defensible one-page pre-read for a decision maker",
+    "Work ethically and know when to stop and call a lawyer or accountant"
+  ],
+  "modules": [
+    {
+      "title": "Module 1: Start with scope",
+      "lessons": [
+        {
+          "slug": "why-check-and-scope",
+          "title": "Why check, and what to decide first",
+          "outcome": "Write a scope that names the entity, the decision and the exposure.",
+          "minutes": 10
+        },
+        {
+          "slug": "the-source-ladder",
+          "title": "The source ladder",
+          "outcome": "Choose which public sources to use and in what order.",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "title": "Module 2: The public registers",
+      "lessons": [
+        {
+          "slug": "abn-and-asic",
+          "title": "ABN Lookup and ASIC registers",
+          "outcome": "Confirm an entity is real and matches what you were told.",
+          "minutes": 12
+        },
+        {
+          "slug": "courts-insolvency-ppsr",
+          "title": "Courts, AFSA and the PPSR",
+          "outcome": "Search for disputes and insolvency and read results fairly.",
+          "minutes": 12
+        },
+        {
+          "slug": "austender-sanctions-news",
+          "title": "AusTender, sanctions and news",
+          "outcome": "Test claims against contracts, sanctions lists and news.",
+          "minutes": 11
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Digital posture",
+      "lessons": [
+        {
+          "slug": "website-dns-email",
+          "title": "Website, DNS and email posture",
+          "outcome": "Read SPF, DKIM and DMARC and a website without touching their systems.",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Record, judge and decide",
+      "lessons": [
+        {
+          "slug": "recording-findings",
+          "title": "Recording findings",
+          "outcome": "Log each finding with source, date and confidence.",
+          "minutes": 10
+        },
+        {
+          "slug": "red-flags-and-noise",
+          "title": "Red flags versus noise",
+          "outcome": "Sort findings and turn flags into polite questions.",
+          "minutes": 10
+        },
+        {
+          "slug": "one-page-pre-read",
+          "title": "Writing the one-page pre-read",
+          "outcome": "Produce a defensible one-page summary for a decision maker.",
+          "minutes": 11
+        },
+        {
+          "slug": "ethics-and-when-to-stop",
+          "title": "Ethics and when to stop",
+          "outcome": "Work fairly and know when to call a lawyer or accountant.",
+          "minutes": 12
+        }
+      ]
+    }
+  ],
+  "worksheets": [
+    {
+      "slug": "scope-and-source-tracker",
+      "title": "Due-diligence scope and source tracker",
+      "blurb": "Set the scope, choose your sources and confirm your ground rules."
+    },
+    {
+      "slug": "finding-log",
+      "title": "Finding log",
+      "blurb": "Record each finding with source, date and observed or inferred confidence."
+    },
+    {
+      "slug": "one-page-pre-read-template",
+      "title": "One-page pre-read template",
+      "blurb": "Turn your findings into a one-page summary for the decision maker."
+    }
+  ],
+  "quiz": {
+    "passPct": 75,
+    "questions": [
+      {
+        "q": "What should you write down before you start searching?",
+        "options": [
+          "The counterparty, the decision, the exposure and the depth",
+          "Only the counterparty's website address",
+          "A list of every registry in Australia",
+          "Nothing until you find something worrying"
+        ],
+        "answer": 0,
+        "why": "A scope keeps the check focused and shows you had a legitimate business purpose."
+      },
+      {
+        "q": "An observed finding is one that...",
+        "options": [
+          "Is your best guess about what a record means",
+          "You saw directly in a public source and can point to",
+          "Someone told you by phone",
+          "Appears in a news headline only"
+        ],
+        "answer": 1,
+        "why": "Observed means directly seen in a source. Your reading of it is inferred."
+      },
+      {
+        "q": "ABN Lookup shows an ABN as cancelled, but the supplier is still trading. What is the best response?",
+        "options": [
+          "Report them as dishonest",
+          "Ignore it because ABNs do not matter",
+          "Record it and ask which entity you are contracting with",
+          "Stop all contact permanently"
+        ],
+        "answer": 2,
+        "why": "A mismatch is a question for them. There may be an ordinary explanation, and their answer is useful information."
+      },
+      {
+        "q": "Which statement is written the safest way?",
+        "options": [
+          "The company is hiding debts",
+          "The ASIC register showed the company status as deregistered on the date searched",
+          "The directors are crooks",
+          "They are clearly going under"
+        ],
+        "answer": 1,
+        "why": "State what the source showed, with the date. Avoid conclusions about character."
+      },
+      {
+        "q": "A court judgment search returns nothing. What does that tell you?",
+        "options": [
+          "The organisation is clean",
+          "The organisation is in trouble",
+          "Only that nothing was found on the sites searched on that day",
+          "The search tool is broken"
+        ],
+        "answer": 2,
+        "why": "Blank results are worth recording, but not every matter is published, so they do not prove a clean record."
+      },
+      {
+        "q": "A PPSR registration from a lender appears against a supplier. Usually this is...",
+        "options": [
+          "Proof of fraud",
+          "Routine business finance, so often noise",
+          "A reason to cancel the order",
+          "A sign the ABN is invalid"
+        ],
+        "answer": 1,
+        "why": "Security interests are common in ordinary trading. Consider them where goods you pay for might be affected."
+      },
+      {
+        "q": "You find a possible match on the DFAT consolidated list. What should you do?",
+        "options": [
+          "Decide yourself whether it is the same party",
+          "Confront the other party",
+          "Stop, record what you saw and get advice from a lawyer",
+          "Delete the notes"
+        ],
+        "answer": 2,
+        "why": "Names can be similar and dealing with a listed party is serious. This is a clear stop point."
+      },
+      {
+        "q": "A supplier's domain has no DMARC policy. How should you treat this?",
+        "options": [
+          "As proof they are dishonest",
+          "As an observed security gap, and confirm bank detail changes by phone",
+          "As a reason to scan their servers",
+          "As irrelevant to payments"
+        ],
+        "answer": 1,
+        "why": "Weak email posture makes impersonation easier. Record it fairly and protect your payment process."
+      },
+      {
+        "q": "Which action stays inside this method?",
+        "options": [
+          "Testing their website login forms",
+          "Calling their staff pretending to be a customer",
+          "Looking up their SPF and DMARC records with a public DNS lookup",
+          "Scanning their servers for open ports"
+        ],
+        "answer": 2,
+        "why": "Public lookups are reading records. The other options touch systems or involve impersonation."
+      },
+      {
+        "q": "Which is most likely a real red flag rather than noise?",
+        "options": [
+          "A new company with no other warning sign",
+          "One old, resolved dispute",
+          "A published liquidator appointment just before you plan to pay a deposit",
+          "Absence from AusTender for a supplier that never claimed government work"
+        ],
+        "answer": 2,
+        "why": "Insolvency notices bear directly on money you are about to pay. The others are usually ordinary."
+      },
+      {
+        "q": "What belongs in section 5 of the one-page pre-read?",
+        "options": [
+          "What you could not check",
+          "Your opinion of the directors",
+          "The registry fees",
+          "A draft contract"
+        ],
+        "answer": 0,
+        "why": "Honest gaps keep the reader from assuming the check covered more than it did."
+      },
+      {
+        "q": "Where should you share a pre-read that names real people?",
+        "options": [
+          "In an industry chat group",
+          "On social media",
+          "Only with people who need it for the decision, stored securely",
+          "With the other organisation's competitors"
+        ],
+        "answer": 2,
+        "why": "Limiting circulation protects privacy and reduces the risk of defaming anyone."
+      }
+    ]
+  },
+  "disclosure": "This course was written with AI assistance (Claude, by Anthropic) and published by TITANOS. It is text only, with no voice or face. It is general information, not legal or financial advice.",
+  "certificateTitle": "Certificate of completion: Public-Records Due Diligence"
+}

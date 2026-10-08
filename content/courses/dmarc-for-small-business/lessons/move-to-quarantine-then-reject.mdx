@@ -1,0 +1,42 @@
+## Turn on enforcement, carefully
+
+You now know your senders and they pass. Enforcement is the step that actually stops fakes landing in inboxes. Do it in small stages, so a mistake is a quick fix and not a lost week of invoices.
+
+### The three stages
+
+1. **p=none** (monitor). Done.
+2. **p=quarantine.** Failing mail is treated as suspicious, usually delivered to spam or junk.
+3. **p=reject.** Failing mail is refused and never reaches the inbox.
+
+Quarantine is your safety net. If a forgotten sender fails, its messages end up in spam, where a customer might find them, and not bounce. You will spot the problem in reports and from a staff member saying "my customer says they did not get it".
+
+### Using pct to go gradually
+
+The pct tag lets you apply the policy to only part of your mail. For example, p=quarantine; pct=25 applies quarantine to about a quarter of failing messages, and the rest are treated as p=none. A common plan is to step up in a few stages while you watch the reports. Receivers handle pct a little differently, so treat it as an approximate dial and not an exact one.
+
+### A sensible schedule
+
+- Quarantine at a low pct for a week or two, then raise it.
+- Hold at full quarantine for two to four weeks.
+- Move to reject only when reports show no legitimate source failing.
+- Tell your team the date. Ask them to tell you at once if a customer says a message did not arrive.
+
+The rollout tracker worksheet lays this out week by week with a row for what you changed and what you saw.
+
+### Subdomains and the sp tag
+
+A policy at your main domain applies to subdomains too, unless you set sp=, which sets a separate subdomain policy. For example, p=reject; sp=reject protects subdomains as well. If a subdomain sends mail for a tool you have not finished fixing, you can publish a dedicated _dmarc record on that subdomain to give it its own policy for a while.
+
+### Domains that never send
+
+This is the quickest win. For each domain or parked name in your list that never sends mail, publish v=spf1 -all and a DMARC record with p=reject. Nobody can use them to impersonate you, and there is nothing to break.
+
+### Your steps
+
+1. Edit your existing _dmarc record. Do not add a second one. Change p=none to p=quarantine, with a pct of your choice.
+2. Record the date and exact text in the tracker.
+3. Check reports twice a week. Look for any known sender that now fails.
+4. If something breaks, set the policy back to p=none, fix the sender, and resume. This is routine, not a failure.
+5. After a clean period, change to p=reject.
+
+Your IT provider stays in charge of the DNS changes if you prefer. This lesson simply gives both of you the same plan.

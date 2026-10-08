@@ -1,0 +1,42 @@
+## Prove it to a client or insurer
+
+Sooner or later a supplier questionnaire, a tender or an insurer will ask something like "Do you protect your domain against spoofing?" A clear one-page answer makes that conversation short and calm.
+
+### What a good summary contains
+
+Keep it to a single page that a non-technical person can read. Use only facts you have checked yourself.
+
+1. **Domain and date.** The domain covered and the date you last checked.
+2. **SPF.** Present, single record, and what it ends with.
+3. **DKIM.** Which of your sending services sign with your domain.
+4. **DMARC.** The policy (none, quarantine or reject), whether a reporting address is set, and the subdomain policy.
+5. **Non-sending domains.** The names you own that never send mail, and that they are locked down.
+6. **Monitoring.** How often you check, and who is responsible.
+7. **Changes.** Dates you moved from monitor to quarantine to reject.
+
+### Evidence worth keeping
+
+Save these in one folder, with dates:
+
+- A screenshot or copy of each lookup result.
+- The text of your records before and after each change.
+- A report summary showing your known senders passing.
+- The register and tracker from the worksheets.
+- A copy of your free scan result, if you ran one.
+
+Evidence that shows a record on a certain date is much stronger than a statement of what you meant to do.
+
+### Be honest about limits
+
+If you are still at p=none, say so, with the date you plan to move. A truthful "monitoring, enforcement planned by this date" is far better than a claim you cannot support. Reviewers generally prefer a clear plan to an overclaim. Do not state any score, certification or percentage you have not measured. The summary supports your answer, but it is not an audit or a certificate.
+
+### Your steps
+
+1. Open the evidence summary worksheet and fill in each line from your records.
+2. Ask your IT provider to read it for accuracy before you send it out.
+3. Save it as a PDF with the date in the file name.
+4. Put a diary note to refresh it each quarter, or after any major change.
+
+### Where to go next
+
+You have now taken your domain from unknown to measured, and from monitored to enforced, with your own hands and your own provider. If you want a second pair of eyes, run the free scan at titanos.tech/scan. It checks your public SPF, DKIM selectors, DMARC record and policy strength, with no logins and nothing touched. And if you would like help turning the results into a plan, you can book an audit call with TITANOS. There is no pressure, and your IT provider is welcome on the call.
