@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
@@ -20,10 +21,10 @@ import { Inscription } from "@/components/Myth";
 import type { Offer } from "@/components/OfferCard";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Titanos | AI automation and Privacy Act compliance, Brisbane",
   description:
-    "One operator finds the manual task eating your week and builds the system that does it instead. Free consultation and report, free security scan, fixed-price Privacy Act compliance for Australian small business.",
+    "One operator finds the manual task eating your week and builds the system that does it. Free consultation, free security scan, fixed-price Privacy Act compliance.",
   alternates: { canonical: "https://titanos.tech/" },
   openGraph: {
     title: "Titanos | AI automation and Privacy Act compliance",
@@ -35,17 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-const ORG_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Titanos",
-  url: "https://titanos.tech",
-  founder: { "@type": "Person", name: "Kyle Deligny" },
-  identifier: "ABN 34 318 502 254",
-  areaServed: "AU",
-  description:
-    "Solo AI implementation and Privacy Act compliance practice for Australian small business.",
-};
+export const metadata: Metadata = withSeo("/", baseMetadata);
 
 const offers: Offer[] = [
   {
@@ -198,10 +189,6 @@ const WHAT_WE_BUILD = [
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
-      />
       {/* ═══ HERO ═══ */}
       <PageHero
         badge="TITANOS · Titan Operating System"

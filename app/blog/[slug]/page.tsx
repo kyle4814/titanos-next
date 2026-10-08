@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
@@ -24,7 +27,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
   const url = `https://titanos.tech/blog/${post.slug}`;
-  return {
+  return withSeo(`/blog/${post.slug}`, {
     title: `${post.title} | Titanos`,
     description: post.description,
     alternates: { canonical: url },
@@ -34,11 +37,9 @@ export async function generateMetadata({
       type: "article",
       url,
       publishedTime: post.date,
-      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
-    twitter: { card: "summary_large_image", images: ["/og-image.png"] },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 function formatDate(iso: string): string {
@@ -61,23 +62,7 @@ export default async function BlogPostPage({
   const related = getRelatedPosts(post);
   const url = `https://titanos.tech/blog/${post.slug}`;
 
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    dateModified: post.updated || post.date,
-    url,
-    author: { "@type": "Person", name: "Kyle Deligny" },
-    publisher: {
-      "@type": "Organization",
-      name: "Titanos",
-      url: "https://titanos.tech",
-      logo: "https://titanos.tech/apple-touch-icon.png",
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-  };
+  const articleJsonLd = article({ path: `/blog/${post.slug}`, headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date });
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -89,34 +74,13 @@ export default async function BlogPostPage({
     ],
   };
 
-  const faqJsonLd = post.faq?.length
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: post.faq.map((item) => ({
-          "@type": "Question",
-          name: item.q,
-          acceptedAnswer: { "@type": "Answer", text: item.a },
-        })),
-      }
-    : null;
+  const faqJsonLd = faqPage(post.faq ?? []);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={faqJsonLd} />
 
       <PageHero
         badge={post.tag.toUpperCase()}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -8,7 +9,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "About · Kyle Deligny · TITANOS",
   description:
     "Solo operator, Brisbane. ABN 34 318 502 254 (verifiable). AI systems built for your business, privacy-compliant by design.",
@@ -24,6 +25,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/about", baseMetadata);
 
 export default function AboutPage() {
   const faqJsonLd = {

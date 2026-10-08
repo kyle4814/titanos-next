@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ const META_TITLE = "Speed and precision | TITANOS";
 const META_DESC =
   "Fast because it is code, precise because it is checked. Our measured build speeds and test gates, set beside published industry timelines.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/speed" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/speed" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/speed", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
@@ -58,7 +61,7 @@ const ANGLES: [string, string, string][] = [
 
 export default function Speed() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Speed and precision"
         title="Fast because it is code. Precise because it is checked."
@@ -168,6 +171,6 @@ export default function Speed() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

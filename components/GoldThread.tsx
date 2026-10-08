@@ -197,7 +197,7 @@ function ThreadStepCard({
         <SystemLabel style={{ marginBottom: 8 }}>
           {`STAGE ${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}
         </SystemLabel>
-        <h4
+        <h3
           style={{
             fontFamily: "var(--font-display), Georgia, serif",
             color: "var(--gold)",
@@ -208,7 +208,7 @@ function ThreadStepCard({
           }}
         >
           {step.title}
-        </h4>
+        </h3>
         <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>
           {step.body}
         </p>

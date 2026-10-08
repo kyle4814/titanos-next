@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import { SystemLabel, OmegaSeal } from "@/components/Myth";
 import MonitorPortalLink from "./MonitorPortalLink";
@@ -8,13 +9,15 @@ import MonitorPortalLink from "./MonitorPortalLink";
 // ?session_id={CHECKOUT_SESSION_ID}. The client component below reads
 // that and renders a portal link that hits ${API_BASE_URL}/billing/portal.
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Subscribed: Titanos Monitor",
   description:
     "Your Titanos Monitor subscription is active. First check runs within 1 business day; monthly security summary lands on the same date every month.",
   alternates: { canonical: "https://titanos.tech/monitor/success" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/monitor/success", baseMetadata);
 
 const CADENCE = [
   { label: "First check", detail: "Runs within 1 business day" },

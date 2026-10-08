@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ const META_TITLE = "Proof: logs, timestamps and a replayable build | TITANOS";
 const META_DESC =
   "Don't take our word for it. Public code, timestamped test logs, and a commit-by-commit replay of a 3.5-hour build.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/proof" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/proof" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/proof", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
@@ -34,7 +37,7 @@ const CODE: CSSProperties = {
 
 export default function Proof() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Proof"
         title="Check it yourself."
@@ -110,6 +113,6 @@ done`}</code>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

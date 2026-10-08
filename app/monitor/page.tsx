@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { STATS } from "@/lib/stats";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -18,7 +19,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 const META_TITLE = `Titanos Monitor: Monthly Security Check for Your Business | ${DISPLAY.MONITOR_MONTHLY}`;
 const META_DESC = `Monthly security check + what changed since last month + alerts for new vulnerabilities in your software + privacy law briefing. ${DISPLAY.MONITOR_MONTHLY}, cancel any time.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/monitor" },
@@ -37,6 +38,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/monitor", baseMetadata);
 
 const WHAT_YOU_GET = [
   "A fresh security check of your domain every month, same engine as the free check, run on the same calendar date each month",

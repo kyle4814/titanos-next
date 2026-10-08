@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -13,7 +14,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/ai-delivery" },
@@ -32,6 +33,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/ai-delivery", baseMetadata);
 
 const TIERS = [
   {

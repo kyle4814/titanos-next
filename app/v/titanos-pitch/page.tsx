@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { STATS } from "@/lib/stats";
 
 // Unlisted founder pitch page (Kyle 2026-10-05): shared by direct link with accelerators and investors.
 // Not in the nav, footer or sitemap; noindex here and Disallow: /v/ in robots.txt.
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "TITANOS: founder pitch, Kyle Deligny",
   description: "A 70-second founder pitch for TITANOS, with the key facts, links and contact details.",
   robots: { index: false, follow: false },
   alternates: { canonical: "https://titanos.tech/v/titanos-pitch" },
 };
+
+export const metadata: Metadata = withSeo("/v/titanos-pitch", baseMetadata);
 
 const FACTS: { k: string; v: string }[] = [
   { k: "What it is", v: "TITANOS turns public records into new work, protection and compliance for small businesses, sold as simple products they can buy online." },

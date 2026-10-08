@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -19,7 +20,7 @@ const BOOK_CALL = CONTACT_HREF;
 const META_TITLE = "Titanos Leads & Intelligence: Verified AU Business Contacts";
 const META_DESC = `Verified Australian business contact lists, built compliant by design. ${DISPLAY.LEADS_STARTER_FROM}. Bounce guarantee. You own the data.`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/leads" },
@@ -38,6 +39,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/leads", baseMetadata);
 
 const PROBLEMS = [
   {
@@ -272,7 +275,7 @@ export default function LeadsPage() {
                   padding: 28,
                 }}
               >
-                <h4
+                <h3
                   style={{
                     fontFamily: "var(--font-display), Georgia, serif",
                     color: "var(--gold)",
@@ -283,7 +286,7 @@ export default function LeadsPage() {
                   }}
                 >
                   {p.title}
-                </h4>
+                </h3>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
                   {p.body}
                 </p>
@@ -545,7 +548,7 @@ export default function LeadsPage() {
                     padding: "18px 22px",
                   }}
                 >
-                  <h4
+                  <h3
                     style={{
                       fontFamily: "var(--font-display), Georgia, serif",
                       color: "var(--gold)",
@@ -556,7 +559,7 @@ export default function LeadsPage() {
                     }}
                   >
                     {l.title}
-                  </h4>
+                  </h3>
                   <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7, margin: 0 }}>
                     {l.body}
                   </p>

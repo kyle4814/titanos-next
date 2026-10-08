@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import { CASES } from "@/lib/caseStudies";
@@ -7,7 +8,7 @@ const META_TITLE = "Case studies | TITANOS";
 const META_DESC =
   "A library of real builds: what was made, how fast, what it cost, and how it was tested. Counts come from the git log, screenshots from the working product.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/case-studies" },
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+export const metadata: Metadata = withSeo("/case-studies", baseMetadata);
+
 const SECTION: CSSProperties = { padding: "var(--space-16) 20px", position: "relative", zIndex: 2 };
 
 export default function CaseStudies() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Case studies"
         title="The receipts library."
@@ -74,6 +77,6 @@ export default function CaseStudies() {
           , with no pressure.
         </p>
       </section>
-    </main>
+    </div>
   );
 }

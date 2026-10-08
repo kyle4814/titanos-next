@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import OfferFinder from "@/components/OfferFinder";
@@ -7,13 +8,15 @@ const TITLE = "Find the right TITANOS offer in 30 seconds";
 const DESC =
   "Answer three quick questions and get the offers that fit you, with a link to each page. It runs on your device, nothing is sent anywhere, and a no is always fine.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: "https://titanos.tech/find" },
   openGraph: { title: TITLE, description: DESC, type: "website", url: "https://titanos.tech/find" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/find", baseMetadata);
 
 export default function FindPage() {
   return (

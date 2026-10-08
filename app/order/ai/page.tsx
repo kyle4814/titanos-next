@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import { Suspense } from "react";
 import FormFallback from "@/components/FormFallback";
 import OrderAiClient from "./client";
@@ -9,13 +10,15 @@ const META_TITLE = "AI Partnership Enquiry | TITANOS";
 const META_DESC =
   "Structured intake for a Titanos AI partnership retainer. Describe the manual work you want automated, and Kyle confirms your tier and scopes month 1.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   openGraph: { title: META_TITLE, description: META_DESC },
   alternates: { canonical: "https://titanos.tech/order/ai" },
   robots: { index: false, follow: false },
 };
+
+export const metadata: Metadata = withSeo("/order/ai", baseMetadata);
 
 export default function OrderAiPage() {
   return (

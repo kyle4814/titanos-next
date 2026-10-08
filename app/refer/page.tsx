@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import ReferForm from "@/components/ReferForm";
@@ -6,7 +7,7 @@ import FaqItem from "@/components/FaqItem";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Refer & Earn: Partner Network · TITANOS",
   description:
     "Commission-only referral partner network. Introduce a business to Titanos, earn commission on real closed revenue. No joining fee, no exclusivity, your own ABN.",
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/refer", baseMetadata);
 
 export default function ReferPage() {
   const faqJsonLd = {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { DISPLAY, PRICING } from "@/lib/pricing";
@@ -6,10 +7,10 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 
 const SECTION_COUNT = 9;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Terms of Service · TITANOS",
   description:
-    "Terms governing use of titanos.tech and engagements with Titanos (Kyle Deligny, ABN 34 318 502 254). Free scans, paid engagements, responsible disclosure, liability, governing law.",
+    "Terms for using titanos.tech and engaging Titanos (Kyle Deligny, ABN 34 318 502 254): free scans, paid engagements, responsible disclosure, liability, governing law.",
   alternates: { canonical: "https://titanos.tech/terms" },
   openGraph: {
     title: "Terms of Service · Titanos",
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/terms", baseMetadata);
 
 export default function TermsPage() {
   return (

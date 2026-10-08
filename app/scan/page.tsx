@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -17,10 +18,10 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 // flow; the form's error state carries the only fallback link.
 const REQUEST_ANCHOR = "#request";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Free Business Security Check | TITANOS",
   description:
-    "Free check of what a hacker can see about your AU/NZ/SG business. Open ports, email security, certificates, known software vulnerabilities. Report in your inbox within 2 business days. ABN 34 318 502 254.",
+    "Free check of what a hacker can see about your AU/NZ/SG business: open ports, email security, certificates, known vulnerabilities. Report within 2 business days.",
   alternates: { canonical: "https://titanos.tech/scan" },
   openGraph: {
     title: "Free Business Security Check | Titanos",
@@ -37,6 +38,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/scan", baseMetadata);
 
 const PROCESS = [
   {
@@ -255,6 +258,7 @@ export default function ScanPage() {
           >
             I ran this check on myself first.
           </Inscription>
+          <h2 className="sr-only">Findings from the scan of our own site</h2>
           {SELF_SCAN_FINDINGS.map((f) => (
             <article
               key={f.title}
@@ -691,7 +695,7 @@ function MiniCard({ title, children }: { title: string; children: React.ReactNod
         padding: "24px 22px",
       }}
     >
-      <h4
+      <h3
         style={{
           fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
@@ -701,7 +705,7 @@ function MiniCard({ title, children }: { title: string; children: React.ReactNod
         }}
       >
         {title}
-      </h4>
+      </h3>
       <div style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>{children}</div>
     </div>
   );
@@ -727,7 +731,7 @@ function BridgeCard({
         padding: "26px 24px",
       }}
     >
-      <h4
+      <h3
         style={{
           fontFamily: "var(--font-display), Georgia, serif",
           color: "var(--gold)",
@@ -737,7 +741,7 @@ function BridgeCard({
         }}
       >
         {title}
-      </h4>
+      </h3>
       <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginBottom: 14 }}>
         {body}
       </p>

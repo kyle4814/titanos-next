@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import ContactButtons from "@/components/ContactButtons";
@@ -10,13 +11,15 @@ const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
   "Message Kyle on Telegram or email kyle@titanos.tech. Solo operator, Brisbane, Australia. ABN 34 318 502 254.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/contact" },
   openGraph: { title: META_TITLE, description: META_DESC },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/contact", baseMetadata);
 
 export default function ContactPage() {
   return (

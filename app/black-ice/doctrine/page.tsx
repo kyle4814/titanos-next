@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -9,9 +10,9 @@ import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 
 const META_TITLE = "The Black Ice Field Guide: Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
-  "The full Black Ice field guide: Sub-Zero Murmur, Child/Operator, Web Slider, Demon Blade, the 99/1 principle, Pareto Frontier, Scientific Loop, and governed autonomy. Free, no signup.";
+  "The full Black Ice field guide: Sub-Zero Murmur, Child/Operator, Web Slider, Demon Blade, the 99/1 principle, Pareto Frontier and governed autonomy. Free, no signup.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/black-ice/doctrine" },
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/black-ice/doctrine", baseMetadata);
 
 const SECTION_TOTAL = 13;
 

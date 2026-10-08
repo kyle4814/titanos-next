@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
@@ -7,13 +8,15 @@ const META_TITLE = "Parallax: the simplest way to bring AI in | TITANOS";
 const META_DESC =
   "Nothing replaced, nothing to learn, nothing to install. One conversation, one approval, one tap per decision. We do the rest beside the systems you already run.";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: META_TITLE,
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/parallax" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/parallax" },
   robots: { index: true, follow: true },
 };
+
+export const metadata: Metadata = withSeo("/parallax", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
@@ -49,7 +52,7 @@ const NEVER = [
 
 export default function Parallax() {
   return (
-    <main>
+    <div>
       <PageHero
         badge="Parallax"
         title="The simplest way to bring AI into a large organisation."
@@ -111,6 +114,6 @@ export default function Parallax() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
