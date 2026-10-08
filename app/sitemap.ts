@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { POSTS } from "@/lib/blog";
 import { ALL_OFFERS } from "@/lib/offers";
+import { PRODUCTS } from "@/lib/products";
 
 // Next 16 + output: 'export' requires sitemap routes to explicitly opt
 // into static generation. Without this, build fails at page-data
@@ -123,6 +124,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...POSTS.map((p) => ({
       url: `${base}/blog/${p.slug}`,
       lastModified: new Date(p.updated || p.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    {
+      url: `${base}/products`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...PRODUCTS.map((p) => ({
+      url: `${base}/products/${p.slug}`,
+      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

@@ -15,6 +15,7 @@ export type NavItem = { label: string; href: string; external: boolean };
 export const LINKS: NavItem[] = [
   { label: "Find your offer", href: "/find", external: false },
   { label: "All offers", href: "/offers", external: false },
+  { label: "Products and courses", href: "/products", external: false },
   { label: "Case studies", href: "/case-studies", external: false },
   { label: "Free consultation", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
@@ -61,6 +62,7 @@ export const MORE_LINKS: NavItem[] = LINKS.filter(
 // Presentation only: group and one-line description per href. A href not
 // listed here still renders, under "More", so the derivation stays total.
 const META: Record<string, { group: string; blurb: string }> = {
+  "/products": { group: "Tools", blurb: "Guides, templates and short courses to keep" },
   "/scan": { group: "Tools", blurb: "Free email security check" },
   "/our-evidence-pack": { group: "Tools", blurb: "What a TITANOS report looks like" },
   "/leads": { group: "Tools", blurb: "Verified local leads" },
