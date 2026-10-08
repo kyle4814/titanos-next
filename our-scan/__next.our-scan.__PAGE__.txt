@@ -1,9 +1,6 @@
 1:"$Sreact.fragment"
-2:I[47257,["/_next/static/chunks/0z05lu4ft4m4l.js","/_next/static/chunks/0nmz5yfw87xj5.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/0lssj3i0v9edl.js"],"ClientPageRoot"]
-3:I[88600,["/_next/static/chunks/0z05lu4ft4m4l.js","/_next/static/chunks/0nmz5yfw87xj5.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/0lssj3i0v9edl.js","/_next/static/chunks/3_6wf303id-95.js"],"default"]
-6:I[97367,["/_next/static/chunks/0z05lu4ft4m4l.js","/_next/static/chunks/0nmz5yfw87xj5.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/0lssj3i0v9edl.js"],"OutletBoundary"]
-7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/3_6wf303id-95.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"GeaTSlJ_lrI8FYWtXLzUR"}
-4:{}
-5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
-8:null
+2:I[25706,["/_next/static/chunks/3fdeb95os0538.js","/_next/static/chunks/0l8r0ep4sk52n.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/193cc3xyjq3li.js","/_next/static/chunks/07_njm3g5e8rf.js"],"SystemLabel"]
+3:I[97367,["/_next/static/chunks/3fdeb95os0538.js","/_next/static/chunks/0l8r0ep4sk52n.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/193cc3xyjq3li.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[[["$","meta",null,{"httpEquiv":"refresh","content":"0; url=/scan#self-scan"}],["$","style",null,{"children":"@view-transition{navigation:none}"}],["$","div",null,{"style":{"padding":"80px 20px","textAlign":"center"},"children":[["$","$L2",null,{"style":{"marginBottom":12},"children":"Route consolidated · 2026-07-05"}],["$","p",null,{"style":{"color":"var(--text)","fontSize":"var(--fs-body)"},"children":["This page has moved. ",["$","a",null,{"href":"/scan#self-scan","style":{"color":"var(--gold)"},"children":"Continue to the self-scan section →"}]]}]]}]],[["$","script","script-0",{"src":"/_next/static/chunks/07_njm3g5e8rf.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"bypQaHqe1tV-3ItbwRIsY"}
+5:null

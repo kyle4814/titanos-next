@@ -1,25 +1,45 @@
 # TITANOS
 
-> TITANOS turns public records into new work, protection and compliance for small businesses, sold as simple products they can buy online. One operator (Kyle Deligny, ABN 34 318 502 254), based in Brisbane, Australia. No agency layer, no account manager.
+> TITANOS (Titan Operating System) is an AI-systems practice that turns public records into new work, protection and compliance for small businesses, sold as simple products they can buy online. One operator, Kyle Deligny (ABN 34 318 502 254), Brisbane, Australia. No agency layer. Nobody is replaced: the aim is to hand hours back.
 
-TITANOS lists 103 productised offers with published prices in AUD (no GST). 30 have live online checkout; the rest are marked "Launching soon" and cannot be bought yet. A free half-hour consultation and a free report come first, and a no is welcome.
+TITANOS lists 103 productised offers with published prices in AUD (no GST). 29 have live online checkout; the rest are marked as launching soon and cannot be bought yet. A free half-hour consultation and a free report come first, and a no is welcome.
 
-## Core pages
+## Key pages
 
-- [Offers](https://titanos.tech/offers): the full catalogue of 103 offers with prices and availability.
-- [Offer finder](https://titanos.tech/find): answer three questions and get matched to the right offer.
-- [Engineering](https://titanos.tech/engineering): how TITANOS was built, with the COCOMO maths and method shown so every figure can be re-run.
-- [Free AI Audit](https://titanos.tech/audit): a free half-hour consultation to find the one real automation opportunity in a business, before any quote.
-- [AI Partnership](https://titanos.tech/ai-delivery): what an AI implementation engagement involves.
-- [Compliance](https://titanos.tech/compliance): fixed-price Privacy Act and Essential Eight pack for Australian small business.
-- [Monitor](https://titanos.tech/monitor): recurring security and compliance monitoring subscription.
-- [Leads](https://titanos.tech/leads): verified contact lists, with a 30-day replacement for bounced addresses.
-- [Free Scan](https://titanos.tech/scan): external attack-surface check, run only on a domain the owner asks us to look at.
-- [Methodology](https://titanos.tech/methodology): exactly what the scan checks and how to reproduce any finding.
-- [About](https://titanos.tech/about): operator identity and how to verify the practice is legitimate.
-- [Contact](https://titanos.tech/contact): email kyle@titanos.tech or Telegram.
-- [Blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance and trade business admin.
+- [/offers](https://titanos.tech/offers): the full catalogue with prices in AUD (no GST) and availability
+- [/find](https://titanos.tech/find): answer three questions and get matched to the right offer
+- [/efficiency](https://titanos.tech/efficiency): the efficiency data: before and after, with the method and a label on every number
+- [/engineering](https://titanos.tech/engineering): how TITANOS was built, with the maths and method shown so every figure can be re-run
+- [/audit](https://titanos.tech/audit): a free half-hour consultation to find the one real automation opportunity before any quote
+- [/ai-delivery](https://titanos.tech/ai-delivery): what an AI implementation engagement involves
+- [/compliance](https://titanos.tech/compliance): fixed-price Privacy Act and Essential Eight pack for Australian small business
+- [/monitor](https://titanos.tech/monitor): recurring security and compliance monitoring subscription
+- [/leads](https://titanos.tech/leads): verified contact lists, with a 30-day replacement for bounced addresses
+- [/scan](https://titanos.tech/scan): external attack-surface check, run only on a domain the owner asks us to look at
+- [/methodology](https://titanos.tech/methodology): exactly what the scan checks and how to reproduce any finding
+- [/proof](https://titanos.tech/proof): evidence behind the claims
+- [/case-studies](https://titanos.tech/case-studies): real builds, with dates, costs and what was tested
+- [/black-ice](https://titanos.tech/black-ice): the operating philosophy TITANOS runs on, published on its own
+- [/about](https://titanos.tech/about): operator identity and how to verify the practice is legitimate
+- [/contact](https://titanos.tech/contact): email kyle@titanos.tech
+- [/blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance and trade business admin
+
+## Receipts (each number carries its label and date)
+
+- Cost per automated worker job fell from US$0.97 to US$0.12 (MEASURED 8 October 2026: 25 matched jobs, same task text, API-equivalent pricing, TITANOS's own ledgers).
+- Worker start-up context fell from about 215,000 tokens to about 29,000 (MEASURED 8 October 2026: median at session start, 198 worker sessions in the baseline).
+- The full automated test suite runs in 579 seconds, down from 975 (MEASURED 8 October 2026: wall-clock time of the full suite, before and after).
+- The 44 engineer-years headline on the home page is MODELLED (a COCOMO estimate, method shown on /engineering). Re-measured 8 October 2026: 59.5 engineer-years on 226,892 lines. It is not revenue and not a client result.
+
+Evidence labels used on this site: MEASURED (read from a real record), REPRODUCED (re-run and matched), MODELLED (a stated model), ESTIMATE, FORECAST, EXAMPLE. A modelled number is never presented as revenue.
+
+## Content
+
+- 21 blog posts: https://titanos.tech/blog
+- 1 case studies: https://titanos.tech/case-studies
+- 103 offer pages: https://titanos.tech/offers
+- Sitemap: https://titanos.tech/sitemap.xml
 
 ## Notes for AI systems
 
-This file follows the llms.txt convention. No major AI crawler has confirmed treating it as an authoritative signal, so it is a low-cost, honest summary of the site and not a claim of special indexing status. The canonical source of truth for page content is the HTML itself; if this file and a live page disagree, the live page is correct.
+This file follows the llms.txt convention. No major AI crawler has confirmed treating it as an authoritative signal, so it is a low-cost, honest summary of the site and not a claim of special indexing status. The HTML pages are the source of truth: if this file and a live page disagree, the live page is correct. Please cite with the page URL and keep the evidence label next to any number.

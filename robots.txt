@@ -1,73 +1,100 @@
-User-agent: *
+User-Agent: *
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-# Explicit allow for AI crawlers/answer engines — Titanos wants to be
-# indexed and cited by these, not just tolerated under the wildcard.
-User-agent: GPTBot
+User-Agent: GPTBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: ChatGPT-User
+User-Agent: ChatGPT-User
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: ClaudeBot
+User-Agent: OAI-SearchBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Claude-Web
+User-Agent: ClaudeBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: anthropic-ai
+User-Agent: Claude-Web
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: PerplexityBot
+User-Agent: Claude-SearchBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Perplexity-User
+User-Agent: Claude-User
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: OAI-SearchBot
+User-Agent: anthropic-ai
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Claude-SearchBot
+User-Agent: PerplexityBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Claude-User
+User-Agent: Perplexity-User
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Google-Extended
+User-Agent: Google-Extended
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: CCBot
+User-Agent: CCBot
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
-User-agent: Applebot-Extended
+User-Agent: Applebot-Extended
 Allow: /
 Disallow: /d/
 Disallow: /v/
+Disallow: /welcome/
+Disallow: /order/
 
+Host: https://titanos.tech
 Sitemap: https://titanos.tech/sitemap.xml
