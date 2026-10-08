@@ -2,7 +2,7 @@
   "slug": "ariance",
   "client_consent": false,
   "consent_note": "Flip to true only after the Ariance creator has said yes to being named and to this page going public. While false the page is noindex, off the sitemap, off the case-studies hero card and off the homepage.",
-  "last_reviewed": "2026-10-08",
+  "last_reviewed": "2026-10-09",
   "title": "A hard to explain physics framework became a playable, tested web app in a single morning",
   "teaser": "Ariance is a careful, hard to explain physics framework. We turned it into a game with accounts, saved labs, a Coupling Lab, simulators and four lenses, and every claim in it carries a status label.",
   "sector": "Research and education",
@@ -31,11 +31,11 @@
   "built": {
     "heading": "What we built",
     "items": [
-      { "name": "A game", "detail": "A map of four zones, from the stable zero where nothing moves, up to the unrestricted climb. The first zone is a puzzle that teaches the framework's own rule by letting you try the wrong move first.", "state": "built on its own branch, tested, not yet merged" },
+      { "name": "A game", "detail": "A map of four zones, from the stable zero where nothing moves, up to the unrestricted climb. The first zone is a puzzle that teaches the framework's own rule by letting you try the wrong move first.", "state": "merged and tested" },
       { "name": "Labs", "detail": "Every profile can hold any number of named labs. A lab is a saved state that can be forked into a side branch, compared with another lab, and exported as a file or a shareable link.", "state": "merged and tested" },
       { "name": "A Coupling Lab", "detail": "A sandbox for the open problem. A visitor writes a candidate law in a small, safe expression language, and the app grades it against the framework's own constraints. It checks consistency. It never claims physical truth.", "state": "merged and tested" },
-      { "name": "Simulators", "detail": "Six simulators drawn from the same functions that the tests check: the core curve, the refinement steps, a relativity match, a tunnelling match, a cup of water and a horizon slider.", "state": "built on its own branch, tested, not yet merged" },
-      { "name": "Four lenses", "detail": "One system viewed four ways, so a visitor can see that the same object has several valid descriptions.", "state": "built on its own branch, tested, not yet merged" },
+      { "name": "Simulators", "detail": "Six simulators drawn from the same functions that the tests check: the core curve, the refinement steps, a relativity match, a tunnelling match, a cup of water and a horizon slider.", "state": "merged and tested" },
+      { "name": "Four lenses", "detail": "One system viewed four ways, so a visitor can see that the same object has several valid descriptions.", "state": "merged and tested" },
       { "name": "Accounts, profiles and levels", "detail": "Sign up, log in, experience points, levels and badges. A guest mode works with no account, and a guest profile can be claimed later. Each person can only see their own labs.", "state": "merged and tested" },
       { "name": "Hosting that costs US$0 a month", "detail": "The plan is a static site on a free hosting tier with a free database tier behind the accounts.", "state": "planned, not deployed" }
     ]
@@ -60,16 +60,16 @@
   "quality": {
     "heading": "How it was checked",
     "tests": {
-      "measured_at": "2026-10-08T12:40:50+10:00",
-      "command": "npx vitest run, on the main branch of the app repository",
-      "files_passed": 7,
-      "tests_passed": 128,
+      "measured_at": "2026-10-09T09:19:50+10:00",
+      "command": "npx vitest run, on the main branch of the app repository, which now contains the game, simulators, labs, publishing and accounts branches",
+      "files_passed": 10,
+      "tests_passed": 167,
       "tests_failed": 0,
       "branch_notes": [
-        { "branch": "game", "tests_reported": 44, "source": "commit message, not re-run for this page" },
-        { "branch": "simulators", "tests_reported": 14, "source": "commit message, not re-run for this page" }
+        { "branch": "game", "tests_reported": 44, "source": "vitest re-run on the branch tip, 9 October 2026" },
+        { "branch": "simulators", "tests_reported": 99, "source": "vitest re-run on the branch tip, 9 October 2026; includes the shared engine tests it was branched from" }
       ],
-      "total_after_merge": null
+      "total_after_merge": 167
     },
     "what_is_tested": "Every formula in the maths engine, the exact matches to known results, the frozen region, the evaluation seam at zero, the safe expression parser, the Coupling Lab grader, the account adapters and the experience point rules.",
     "status_chip_heading": "One label on every claim",
@@ -124,7 +124,7 @@
     "rows": [
       { "figure": "Build start and phase times", "source": "The TITANOS fleet ledger, start and done events for the Ariance builds, written in local Brisbane time. Cross-checked against the commit times, which carry an explicit UTC+10 offset and fall inside each ledger window." },
       { "figure": "Commit count and commit times", "source": "git log --all on the Ariance app repository, read on 8 October 2026." },
-      { "figure": "Test counts", "source": "Output of the vitest run named in the Quality section, read on 8 October 2026. Branch counts come from commit messages and have not been re-run." },
+      { "figure": "Test counts", "source": "Output of the vitest runs named in the Quality section, read on 9 October 2026. The 167 total is the merged main branch. Branch counts were re-run on each branch tip and each branch includes the shared engine tests, so branch counts do not add up to the total." },
       { "figure": "Brief to build time", "source": "Not stated. The time the brief arrived was not recorded in a source we can cite, so the page measures from the first build start instead." },
       { "figure": "Cost", "source": "No usage reading was taken, so no build cost is claimed. The hosting figure is a plan and is labelled as one." },
       { "figure": "Consistency findings", "source": "Worked by hand from the framework's own repository text and checked against the engine: 1 / (1 + 0.36) = 0.7353 and 1 minus 0.36 = 0.64." },
