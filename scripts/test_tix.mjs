@@ -1,6 +1,6 @@
 // TIX-999 demo: QR round trip through jsQR -> verifier. Run via `npm test`.
 import jsQR from "jsqr";
-import { emptyState, createEvent, issueTicket, makeToken, verifyAndRecord, checkResale, setResaleCap, WINDOW_MS } from "../lib/tix.ts";
+import { exportPairing, importPairing, tamper, SENTENCE, emptyState, createEvent, issueTicket, makeToken, verifyAndRecord, checkResale, setResaleCap, WINDOW_MS } from "../lib/tix.ts";
 import { qrRGBA } from "../lib/tixQr.ts";
 
 let fail = 0;
@@ -46,6 +46,19 @@ ok(checkResale(st, tk.id, 12000, T0).ok && !checkResale(st, tk.id, 12001, T0).ok
 setResaleCap(st, ev.id, 5000, T0);
 ok(!checkResale(st, tk.id, 6000, T0).ok, "lowered cap applies");
 ok(st.audit.some((a) => a.kind === "SCAN_DUPLICATE") && st.audit.some((a) => a.kind === "RESALE_BLOCKED"), "audit log records scans and resale blocks");
+
+// Pairing: a phone that only knows the key + event (no ticket list) can verify, dedupe and reject.
+const ph = emptyState();
+ok(importPairing(ph, exportPairing(st, ev.id)) && ph.key === st.key && ph.events[0].id === ev.id && ph.tickets.length === 0, "pairing carries event id + key only");
+const pt = await makeToken(st.key, tk, T0);
+const pq = qrRGBA(pt, 6, 4); const pj = jsQR(pq.data, pq.width, pq.height);
+ok((await verifyAndRecord(ph, pj.data, T0)).result === "ADMIT", "paired phone ADMITs a QR it has never seen");
+const pd = await verifyAndRecord(ph, pj.data, T0 + 1000);
+ok(pd.result === "DUPLICATE" && pd.firstScanAt === T0, "paired phone: second scan DUPLICATE");
+ok((await verifyAndRecord(ph, pt, T0 + 2 * WINDOW_MS)).result === "EXPIRED", "paired phone: replayed code EXPIRED");
+ok((await verifyAndRecord(ph, tamper(pt), T0)).result === "FAKE", "paired phone: tampered code FAKE");
+ok(!importPairing(emptyState(), "not-a-blob") && !importPairing(emptyState(), "e30"), "bad pairing blobs rejected");
+ok(Object.keys(SENTENCE).length === 4 && Object.values(SENTENCE).every((x) => x.length > 20 && !x.includes("\u2014")), "one plain sentence per result");
 
 console.log(fail ? `FAIL ${fail}` : "ALL PASS");
 process.exit(fail ? 1 : 0);

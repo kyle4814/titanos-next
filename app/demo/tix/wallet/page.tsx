@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { WINDOW_MS, checkResale, makeToken, ticketState } from "@/lib/tix";
+import { WINDOW_MS, checkResale, makeToken, tamper, ticketState } from "@/lib/tix";
 import { qrRGBA } from "@/lib/tixQr";
 import { useTix } from "@/components/tix/useTix";
 import { BTN, CARD, H2, INPUT, MUTED } from "@/components/tix/ui";
@@ -15,6 +15,19 @@ function Wallet() {
   const [token, setToken] = useState("");
   const [price, setPrice] = useState("");
   const [resaleMsg, setResaleMsg] = useState("");
+  const [copy, setCopy] = useState<{ tok: string; at: number } | null>(null);
+  const [forged, setForged] = useState("");
+  const copyCanvas = useRef<HTMLCanvasElement>(null);
+  const forgedCanvas = useRef<HTMLCanvasElement>(null);
+  const paint = (c: HTMLCanvasElement | null, text: string) => {
+    if (!c) return;
+    const q = qrRGBA(text, 4, 3);
+    c.width = q.width;
+    c.height = q.height;
+    c.getContext("2d")!.putImageData(new ImageData(q.data as Uint8ClampedArray<ArrayBuffer>, q.width, q.height), 0, 0);
+  };
+  useEffect(() => { if (copy) paint(copyCanvas.current, copy.tok); }, [copy]);
+  useEffect(() => { if (forged) paint(forgedCanvas.current, forged); }, [forged]);
 
   useEffect(() => {
     setNow(Date.now());
@@ -73,6 +86,31 @@ function Wallet() {
         </svg>
         <div style={MUTED}>New code every 15 seconds. A screenshot stops working.</div>
         <div data-testid="token" style={{ ...MUTED, fontSize: 11, wordBreak: "break-all", marginTop: 8 }}>{token}</div>
+      </section>
+
+      <section style={CARD} data-testid="cheat">
+        <h2 style={H2}>Try to cheat it</h2>
+        <p style={MUTED}><b>1. Screenshot.</b> Save a copy of the live code, wait until the countdown has run through two refreshes, then scan the copy: it is refused.</p>
+        <button style={BTN} onClick={() => setCopy({ tok: token, at: Date.now() })}>Save a screenshot copy</button>
+        {copy && (
+          <div style={{ textAlign: "center", marginTop: 10 }}>
+            <div style={{ background: "#fff", padding: 8, borderRadius: 10, width: "fit-content", margin: "0 auto" }}>
+              <canvas ref={copyCanvas} data-testid="copy-qr" aria-label="Screenshot copy of the ticket QR" style={{ width: 180, height: 180, imageRendering: "pixelated", display: "block" }} />
+            </div>
+            <div data-testid="copy-age" style={MUTED}>{now - copy.at >= 2 * WINDOW_MS ? "Stale now. Scan this copy: it should read EXPIRED." : `Wait ${Math.ceil((2 * WINDOW_MS - (now - copy.at)) / 1000)} s until this copy is stale, then scan it.`}</div>
+          </div>
+        )}
+        <p style={{ ...MUTED, marginTop: 14 }}><b>2. Second entry.</b> Scan the live code above twice: the second scan reads DUPLICATE with the time of the first.</p>
+        <p style={MUTED}><b>3. Forgery.</b> Show a code that has been altered by one character.</p>
+        <button style={BTN} onClick={() => setForged(tamper(token))}>Show a forged code</button>
+        {forged && (
+          <div style={{ textAlign: "center", marginTop: 10 }}>
+            <div style={{ background: "#fff", padding: 8, borderRadius: 10, width: "fit-content", margin: "0 auto" }}>
+              <canvas ref={forgedCanvas} data-testid="forged-qr" aria-label="Forged ticket QR" style={{ width: 180, height: 180, imageRendering: "pixelated", display: "block" }} />
+            </div>
+            <div style={MUTED}>Scan this one: it should read FAKE.</div>
+          </div>
+        )}
       </section>
 
       <section style={CARD}>

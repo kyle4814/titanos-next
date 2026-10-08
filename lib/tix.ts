@@ -67,8 +67,14 @@ export async function verifyAndRecord(st: TixState, token: string, now: number):
   }
   const [, id, owner, wStr, m] = p;
   const win = Number(wStr);
-  const ticket = st.tickets.find((t) => t.id === id);
-  if (!ticket || slug(ticket.owner) !== owner) return log(st, now, { result: "FAKE", reason: "unknown ticket" }, token);
+  // A paired phone holds only the key (no ticket list), so a ticket unknown to this device is rebuilt from the token:
+  // it still has to carry a valid MAC, which only the key holder can make.
+  let ticket = st.tickets.find((t) => t.id === id);
+  if (ticket && slug(ticket.owner) !== owner) return log(st, now, { result: "FAKE", reason: "owner does not match ticket" }, token);
+  if (!ticket) {
+    if (!/^[a-z0-9]+$/.test(id) || !/^[a-z0-9-]+$/.test(owner)) return log(st, now, { result: "FAKE", reason: "malformed ticket" }, token);
+    ticket = { id, eventId: st.events[0]?.id || "", owner: owner.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "), issuedAt: 0 };
+  }
   if (!safeEq(await mac(st.key, id, owner, win), m)) return log(st, now, { result: "FAKE", reason: "bad signature", ticket }, token);
   const cur = windowOf(now);
   if (win !== cur && win !== cur - 1) {
@@ -130,13 +136,27 @@ export function ticketState(st: TixState, ticketId: string): "ISSUED" | "USED" {
   return st.scans.some((s) => s.ticket === ticketId) ? "USED" : "ISSUED";
 }
 
+export const SENTENCE: Record<Result, string> = {
+  ADMIT: "Valid ticket, current code, first entry. Let them in.",
+  DUPLICATE: "This ticket was already used to get in, so a second entry is refused.",
+  EXPIRED: "This code is too old. It is a screenshot or a copy, because the real one changes every 15 seconds.",
+  FAKE: "This code was not made by the organiser's key. It is forged or altered.",
+};
+
+export function tamper(token: string): string {
+  const p = token.split(".");
+  p[4] = (p[4][0] === "0" ? "1" : "0") + p[4].slice(1);
+  return p.join(".");
+}
+
 export function money(cents: number): string {
   return `$${(cents / 100).toFixed(2)}`;
 }
 
-// Pairing so a second phone can run the scanner: key + registry in the URL fragment (never sent to a server).
-export function exportPairing(st: TixState): string {
-  const o = { k: st.key, e: st.events, t: st.tickets };
+// Pairing so a second device can run the scanner: event id + demo key in the URL fragment (never sent to a server).
+export function exportPairing(st: TixState, eventId: string): string {
+  const e = st.events.find((x) => x.id === eventId) || st.events[0];
+  const o = { k: st.key, e: e ? { id: e.id, name: e.name, resaleCapCents: e.resaleCapCents } : null };
   return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
@@ -144,11 +164,12 @@ export function importPairing(st: TixState, blob: string): boolean {
   try {
     const b = blob.replace(/-/g, "+").replace(/_/g, "/");
     const o = JSON.parse(decodeURIComponent(escape(atob(b + "=".repeat((4 - (b.length % 4)) % 4)))));
-    if (typeof o.k !== "string" || !/^[0-9a-f]{64}$/.test(o.k) || !Array.isArray(o.e) || !Array.isArray(o.t)) return false;
+    if (typeof o.k !== "string" || !/^[0-9a-f]{64}$/.test(o.k)) return false;
     st.key = o.k;
-    st.events = o.e;
-    st.tickets = o.t;
-    st.audit.push({ at: Date.now(), kind: "PAIRED", detail: `${o.t.length} tickets imported` });
+    st.tickets = [];
+    st.scans = [];
+    st.events = o.e && typeof o.e.id === "string" ? [{ id: String(o.e.id), name: String(o.e.name || "Event").slice(0, 80), resaleCapCents: Number(o.e.resaleCapCents) || 0 }] : [];
+    st.audit.push({ at: Date.now(), kind: "PAIRED", detail: `scanner paired for ${st.events[0]?.name || "event"}` });
     return true;
   } catch {
     return false;

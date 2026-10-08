@@ -17,11 +17,25 @@ export function useTix() {
       if (raw) st = JSON.parse(raw);
     } catch {}
     if (!st || !st.key) st = emptyState();
-    const m = /[#&]p=([A-Za-z0-9_-]+)/.exec(location.hash);
-    if (m && importPairing(st, m[1])) history.replaceState(null, "", location.pathname);
+    // A pairing link (#p=...) works on load and also when pasted into an already-open scanner tab (hashchange).
+    const pairFromHash = (cur: TixState): boolean => {
+      const m = /[#&]p=([A-Za-z0-9_-]+)/.exec(location.hash);
+      if (!m || !importPairing(cur, m[1])) return false;
+      history.replaceState(null, "", location.pathname);
+      return true;
+    };
+    pairFromHash(st);
     ref.current = st;
     localStorage.setItem(KEY, JSON.stringify(st));
     setReady(true);
+    const onHash = () => {
+      if (ref.current && pairFromHash(ref.current)) {
+        localStorage.setItem(KEY, JSON.stringify(ref.current));
+        bump((n) => n + 1);
+      }
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   const commit = useCallback(() => {

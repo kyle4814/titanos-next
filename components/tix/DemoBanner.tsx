@@ -6,7 +6,8 @@ export default function DemoBanner() {
       <strong>DEMO MODE.</strong> The signing key lives in this browser; in production verification runs server-side and the key never reaches a phone.
       No payments, no real fan data, no tracking. Data stays on this device.
       <div style={{ marginTop: 6, display: "flex", gap: 14, flexWrap: "wrap" }}>
-        <Link href="/demo/tix" style={{ color: "var(--ice)" }}>Organiser</Link>
+        <Link href="/demo/tix" style={{ color: "var(--ice)" }}>Start</Link>
+        <Link href="/demo/tix/organiser" style={{ color: "var(--ice)" }}>Organiser</Link>
         <Link href="/demo/tix/wallet" style={{ color: "var(--ice)" }}>Fan wallet</Link>
         <Link href="/demo/tix/scan" style={{ color: "var(--ice)" }}>Gate scanner</Link>
       </div>
