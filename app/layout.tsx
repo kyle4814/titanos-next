@@ -1,3 +1,5 @@
+import { SigilConstellation } from "../components/Sigil";
+import EasterEgg from "@/components/EasterEgg";
 import type { Metadata } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
@@ -182,6 +184,8 @@ export default function RootLayout({
         <span aria-hidden="true" className="vault-edge-thread" />
         {/* W4 per-page mood swap */}
         <PageMood />
+        <SigilConstellation />
+        <EasterEgg />
         <SiteAnalytics />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
