@@ -84,7 +84,7 @@ function Badge({ status }: { status: string }) {
   return (
     <span
       style={{
-        fontSize: 11,
+        fontSize: 12,
         letterSpacing: 1,
         padding: "2px 7px",
         borderRadius: 4,

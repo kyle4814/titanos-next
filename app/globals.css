@@ -1011,3 +1011,6 @@ p > a:not([class]), li > a:not([class]) {
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
+
+/* 2026-10-09 aesthetic polish: no orphaned last word in short instrument labels */
+.label-system, .font-mono { text-wrap: balance; }

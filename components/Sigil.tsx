@@ -48,7 +48,7 @@ export function Sigil({
         }}
       />
       {codename && (
-        <span style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.7 }}>{name}</span>
+        <span style={{ fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.7 }}>{name}</span>
       )}
     </span>
   );
