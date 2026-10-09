@@ -22,7 +22,7 @@
 .w4-hero-chart { margin-bottom: var(--phi-s4, 26px); }
 .w4-hero-title { font-size: var(--phi-t1); margin: 0 0 var(--phi-s4, 26px); color: var(--ice); }
 .w4-bars { display: grid; gap: 10px; }
-.w4-bar-row { display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.w4-bar-row { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 10px; align-items: center; }
 .w4-bar-name { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; }
 .w4-bar-track { height: 12px; border-radius: 99px; background: rgb(255 255 255 / 0.05); overflow: hidden; display: block; }
 .w4-bars--big .w4-bar-track { height: 26px; }
