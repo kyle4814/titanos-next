@@ -28,6 +28,7 @@ export default function ReceiptFeed() {
         if (v) setFeed(v);
       } catch {}
     };
+    pull();   // 2026-10-09: fetch on open too; without it the page showed the build-time rows for the first minute
     const id = setInterval(pull, 60000);
     document.addEventListener("visibilitychange", pull);
     return () => { clearInterval(id); document.removeEventListener("visibilitychange", pull); };

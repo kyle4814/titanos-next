@@ -45,5 +45,11 @@ ok(!/@|https?:|www\.|\.(com|au|org|net|io|gov)\b/i.test(text), "no email, URL or
 ok(good.items.every((x) => /^[A-Za-z0-9-]+$/.test(x.code) && /^[A-Z]+$/.test(x.cat) && /^[AB]$/.test(x.acct)), "codenames are bare tokens, categories and accounts are fixed shapes");
 ok(!/ariance|kyle|titanos|austender|investor|council|client|whale|prospect|abn/i.test(text), "no organisation or person word in feed items");
 
+// 2026-10-09 (Kyle: "the live tracker ... hasn't been updated"): the feed must be fetched on open, not only after 60 s
+{
+  const rf = R("components/hud/ReceiptFeed.tsx");
+  const eff = rf.slice(rf.indexOf("const pull"));
+  ok(/\bpull\(\);/.test(eff) && eff.indexOf("pull();") < eff.indexOf("setInterval(pull"), "ReceiptFeed fetches the live feed on mount, before the 60 s interval");
+}
 console.log(`${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
