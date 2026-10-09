@@ -7,7 +7,7 @@
 .w4-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* claim label chips: colour never carries the meaning alone, the word is always printed */
-.w4-chip { display: inline-block; padding: 1px 8px; border-radius: 99px; border: 1px solid currentColor; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); background: transparent; font-family: inherit; }
+.w4-chip { display: inline-block; padding: 1px 8px; border-radius: 99px; border: 1px solid currentColor; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--gold); background: transparent; font-family: inherit; }
 .w4-chip[data-label="MODELLED"] { color: var(--ice); }
 .w4-chip[data-label="REPRODUCED"] { color: #9be7b0; }
 .w4-chip[data-label="ESTIMATE"], .w4-chip[data-label="FORECAST"] { color: #e8b855; border-style: dashed; }
@@ -61,7 +61,7 @@
 .w4-orbit-core { position: absolute; inset: 38%; display: grid; place-items: center; border-radius: 50%; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--gold); background: radial-gradient(circle, rgb(var(--gold-rgb) / 0.16), transparent 70%); }
 .w4-node { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 2px; width: 86px; min-height: 48px; padding: 6px 4px; border-radius: var(--phi-r3, 16px); border: 1px solid rgb(var(--gold-rgb) / 0.3); background: rgb(10 8 6 / 0.88); color: var(--ice); cursor: pointer; font: inherit; }
 .w4-node b { color: var(--gold-bright); font-size: 0.95rem; }
-.w4-node span { font-size: 0.68rem; line-height: 1.2; text-align: center; }
+.w4-node span { font-size: 0.75rem; line-height: 1.2; text-align: center; }
 .w4-node[aria-pressed="true"] { border-color: var(--gold-bright); box-shadow: 0 0 22px rgb(var(--gold-rgb) / 0.5); }
 .w4-node:focus-visible, .w4-chip--btn:focus-visible, .w4-star button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
 .w4-panel { background: var(--card); border: 1px solid rgb(var(--gold-rgb) / 0.16); border-radius: var(--phi-r3, 16px); padding: var(--phi-s4, 26px); }
@@ -70,7 +70,7 @@
 .w4-receipt { border-top: 1px solid rgb(var(--gold-rgb) / 0.16); margin-top: var(--phi-s3, 16px); padding-top: var(--phi-s3, 16px); }
 .w4-receipt-num { font-size: var(--phi-t2) !important; color: var(--gold-bright) !important; line-height: 1.1; }
 @keyframes w4-spin { to { transform: rotate(360deg); } }
-@media (max-width: 480px) { .w4-node { width: 62px; padding: 6px 2px; } .w4-node span { font-size: 0.62rem; } }
+@media (max-width: 480px) { .w4-node { width: 72px; padding: 6px 2px; } .w4-node span { font-size: 0.75rem; } }
 
 /* proof wall */
 .w4-wall { position: relative; }

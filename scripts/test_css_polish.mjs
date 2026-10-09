@@ -11,5 +11,7 @@ for (const p of ["app/order/ai/page.tsx", "app/order/leads/page.tsx"])
   ok(/<Suspense fallback=\{<FormFallback/.test(page(p)), `${p} reserves form height (no CLS pop-in)`);
 ok(page("app/black-ice/doctrine/page.tsx").split("\n").some((l) => /<a href=\{`#\$\{id\}`\}/.test(l) && /inline-block/.test(l)), "doctrine TOC links have a 24px+ tap target");
 ok(/aspectRatio:\s*"1280 \/ 1706"/.test(page("app/v/titanos-pitch/page.tsx")), "pitch video reserves its box (no CLS from late metadata)");
+const charts = fs.readFileSync(new URL("../components/charts/charts.css", import.meta.url), "utf8");
+ok(!/font-size:\s*0\.(6|7[0-4])\d*rem/.test(charts) && /\.w4-chip \{[^}]*font-size: 0\.75rem/.test(charts), "chart chips and nodes keep labels at 12px or more");
 console.log(fail ? `FAIL ${fail}` : "ALL PASS");
 process.exit(fail ? 1 : 0);
