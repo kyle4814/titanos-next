@@ -1,12 +1,24 @@
 {
- "generated": 1791535321870,
+ "generated": 1791536522152,
  "shown": 60,
  "dropped_orgs": 162,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791535021000,
+   "t": 1791536281000,
    "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791535922000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791535922000,
+   "acct": "B",
    "cat": "QUALITY",
    "code": "review"
   },
@@ -65,12 +77,6 @@
    "code": "CONTENT-6C2B40"
   },
   {
-   "t": 1791532142000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
    "t": 1791530161000,
    "acct": "B",
    "cat": "ENGINE",
@@ -105,12 +111,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-07E0B7"
-  },
-  {
-   "t": 1791528001000,
-   "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791527641000,
