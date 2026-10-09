@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
-import OfferFinder from "@/components/OfferFinder";
+import OfferFinder from "@/components/OfferFinderLazy";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 

@@ -8,7 +8,7 @@
  *   render at settled state immediately (no scale-in, no width draw).
  */
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 
 export default function MirrorLists({

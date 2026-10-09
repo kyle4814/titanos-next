@@ -95,7 +95,8 @@ await browser.close(); srv.close();
 
 // first-load JS gzip: scripts referenced by the home page html
 const html = fs.readFileSync(exists("/"), "utf8");
-const scripts = [...new Set([...html.matchAll(/(?:src|href)="(\/_next\/[^"]+\.js)"/g)].map((m) => m[1]))];
+// noModule polyfills (~39 KB gz) are never fetched by a module-capable browser, so they are excluded; per-route detail: scripts/js_budget.mjs
+const scripts = [...new Set([...html.matchAll(/<(?:script|link)[^>]*?(?:src|href)="(\/_next\/[^"]+\.js)"[^>]*>/g)].filter((m) => !/noModule/i.test(m[0])).map((m) => m[1]))];
 const gz = scripts.reduce((a, s) => a + zlib.gzipSync(fs.readFileSync(path.join(OUT, s))).length, 0);
 const summary = { routes: routes.length, firstLoadJsGzKB: +(gz / 1024).toFixed(1), brokenLinks, results };
 fs.writeFileSync(path.join(REP, "qa.json"), JSON.stringify(summary, null, 1));

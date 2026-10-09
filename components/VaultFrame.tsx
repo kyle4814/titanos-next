@@ -17,7 +17,7 @@
  *   imperceptible 8px shift — net cost > benefit.
  */
 
-import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { m as motion, useAnimationControls, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const SESSION_KEY = "titanos.vault.entranceShown";

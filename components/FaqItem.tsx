@@ -7,7 +7,7 @@
  * The `+` icon rotation uses a lightweight inline motion.span (no AnimatePresence).
  */
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m as motion, useReducedMotion } from "framer-motion";
 import { useState, type ReactNode } from "react";
 
 export default function FaqItem({

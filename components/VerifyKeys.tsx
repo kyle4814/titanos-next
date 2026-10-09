@@ -15,7 +15,7 @@
  *   the same minus the imaginary draw stroke.
  */
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
 export type VerifyKey = {

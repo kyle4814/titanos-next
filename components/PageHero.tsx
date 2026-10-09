@@ -5,7 +5,7 @@
  * Centred badge + h1 + tagline + sub paragraph + optional CTAs row.
  */
 
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { type ReactNode } from "react";
 import { fadeUp } from "@/lib/motion";
 

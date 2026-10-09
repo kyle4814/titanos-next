@@ -11,7 +11,7 @@
  * MOT-01: under prefers-reduced-motion, renders nothing.
  */
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m as motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function HeroScrollCue() {

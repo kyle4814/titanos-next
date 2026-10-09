@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import jsQR from "jsqr";
 import Link from "next/link";
 import { SENTENCE, verifyAndRecord, type Verdict } from "@/lib/tix";
 import { useTix } from "@/components/tix/useTix";
@@ -49,10 +48,13 @@ export default function Scanner() {
 
   useEffect(() => {
     if (cam !== "on") return;
-    let raf = 0;
+    let raf = 0, dead = false;
+    // jsqr (47 KB gz) loads only when the camera starts, so it stays out of first-load JS.
+    let jsQR: typeof import("jsqr").default | null = null;
+    import("jsqr").then((m) => { jsQR = m.default; });
     const tick = () => {
       const v = video.current, c = work.current;
-      if (v && c && v.readyState >= 2 && v.videoWidth) {
+      if (jsQR && v && c && v.readyState >= 2 && v.videoWidth) {
         const w = 480, h = Math.round((480 * v.videoHeight) / v.videoWidth);
         c.width = w; c.height = h;
         const ctx = c.getContext("2d", { willReadFrequently: true })!;
@@ -60,10 +62,10 @@ export default function Scanner() {
         const hit = jsQR(ctx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: "dontInvert" });
         if (hit?.data) check(hit.data);
       }
-      raf = requestAnimationFrame(tick);
+      if (!dead) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => { dead = true; cancelAnimationFrame(raf); };
   }, [cam, check]);
 
   if (!ready || !st) return <p>Loading demo...</p>;

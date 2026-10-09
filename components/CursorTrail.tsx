@@ -19,7 +19,7 @@
  * Hidden on touch / coarse-pointer devices.
  */
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { m as motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const SPRING = { stiffness: 220, damping: 24, mass: 0.45 };
