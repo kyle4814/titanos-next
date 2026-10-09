@@ -8,6 +8,7 @@ const MotionLayer = dynamic(() => import("@/components/MotionLayer"), { ssr: fal
 const GoldDust = dynamic(() => import("@/components/GoldDust"), { ssr: false });
 const CursorTrail = dynamic(() => import("@/components/CursorTrail"), { ssr: false });
 const EasterEgg = dynamic(() => import("@/components/EasterEgg"), { ssr: false });
+const FlowDriver = dynamic(() => import("@/components/flow/FlowDriver"), { ssr: false });
 const FinderLauncher = dynamic(() => import("@/components/FinderLauncher"), { ssr: false });
 
 export default function DeferredShell() {
@@ -18,6 +19,7 @@ export default function DeferredShell() {
       <EasterEgg />
       <FinderLauncher />
       <MotionLayer />
+      <FlowDriver />
     </>
   );
 }

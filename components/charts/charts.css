@@ -106,3 +106,32 @@
 .w4-loop { overflow: hidden; }
 .w4-spiral-bg { position: absolute; inset: 0; z-index: -1; opacity: 0.4; pointer-events: none; }
 .w4-spiral-bg .ds-spiral { height: 100%; aspect-ratio: auto; background: transparent; }
+
+/* ═══ charts: blended into the background, glowing lines, bigger phone labels ═══ */
+.w4-hero-chart, .w4-card, .w4-second-look, .w4-panel, .w4-star { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.w4-hero-chart, .w4-card, .w4-second-look, .w4-panel { position: relative; padding: var(--phi-s4, 26px) 0; }
+.w4-hero-chart::before, .w4-card::before, .w4-second-look::before, .w4-panel::before { content: ""; position: absolute; inset: -8% 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 60% 62% at 50% 50%, rgb(var(--gold-rgb) / 0.075), transparent 72%); animation: fx-breathe 8s ease-in-out infinite; --fx-lo: 0.55; --fx-hi: 1; }
+.w4-second-look { border: 0; }
+.w4-star { transition: none; }
+.w4-star[data-open="1"], .w4-star:hover { border: 0; box-shadow: none; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgb(var(--gold-rgb) / 0.1), transparent 75%); }
+.w4-receipt { border-top: 0; }
+.w4-orbit-ring { border: 0; background: radial-gradient(circle, transparent 60%, rgb(var(--gold-rgb) / 0.12) 68%, transparent 71%); box-shadow: none; animation: fx-breathe 8s ease-in-out infinite; }
+.w4-node { border: 0; background: radial-gradient(circle, rgb(10 8 6 / 0.9) 40%, transparent 72%); }
+.w4-node[aria-pressed="true"] { box-shadow: none; background: radial-gradient(circle, rgb(var(--gold-rgb) / 0.28), transparent 72%); }
+.w4-draw { stroke-width: 2; opacity: 0.95; filter: drop-shadow(0 0 4px rgb(var(--gold-rgb) / 0.9)); }
+.w4-const .w4-draw { filter: none; }
+.w4-bar--before { background: linear-gradient(90deg, #7a7466, #b0a794); }
+.w4-bar-track { background: rgb(255 255 255 / 0.07); }
+.w4-spiral-bg .ds-spiral { -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 35%, transparent 100%); mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 35%, transparent 100%); }
+@media (max-width: 600px) {
+  .w4-bar-name { font-size: 0.9rem; }
+  .w4-bar-val { font-size: 1.05rem; }
+  .w4-bar-row { grid-template-columns: 3.4rem minmax(0, 1fr) auto; }
+  .w4-meta, .w4-method { font-size: 0.92rem; }
+  .w4-eyebrow { font-size: 0.88rem; }
+  .w4-chip { font-size: 0.8rem; }
+  .w4-star-cap { font-size: 0.95rem; }
+  .w4-node span { font-size: 0.72rem; }
+  .w4-node b { font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) { .w4-hero-chart::before, .w4-card::before, .w4-second-look::before, .w4-panel::before, .w4-orbit-ring { animation: none; } }

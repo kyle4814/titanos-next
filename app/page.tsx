@@ -5,6 +5,7 @@ import VoidPortal from "@/components/hero/VoidPortal";
 import { withSeo } from "@/lib/seo";
 import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 import SpaceImage from "@/components/SpaceImage";
+import FlowThread from "@/components/flow/FlowThread";
 import OfferCard from "@/components/OfferCard";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -198,26 +199,26 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO ═══ */}
+      <FlowThread />
       <Hero />
-      <VoidPortal />
-      <div className="ds-band">
-        <SpaceImage id="webb-cosmic-cliffs" sizes="100vw" />
-        <a className="ds-band__cap" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
-      </div>
-
+      {/* FLOW STAGE: portal + space image are full-bleed BACKGROUND layers (slow parallax, feathered masks, breathing), not blocks. */}
+      <div className="fx-bleed">
+        <div className="fx-bg fx-bg--portal" data-flow="0.12"><VoidPortal /></div>
+        <div className="fx-bg fx-bg--img" data-flow="0.22">
+          <div className="fx-pulse fx-pulse--slow"><SpaceImage id="webb-cosmic-cliffs" sizes="100vw" /></div>
+        </div>
+        <a className="fx-bleed__cap" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
       <section
         aria-label="Find the right offer"
         style={{ padding: "var(--space-6) 20px 0", position: "relative", zIndex: 2 }}
       >
         <div
+          className="fx-soft"
           style={{
             maxWidth: "var(--maxw-prose)",
             margin: "0 auto",
             textAlign: "center",
-            border: "1px solid rgb(var(--gold-rgb) / 0.25)",
-            borderRadius: "var(--radius-md)",
-            background: "rgb(var(--gold-rgb) / 0.03)",
             padding: "28px 20px",
           }}
         >
@@ -245,6 +246,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* THE OPENING: the threshold. Inscription primitive, the
           claim is set INTO the page (lintel rules + stone recess), not
