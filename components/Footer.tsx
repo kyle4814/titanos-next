@@ -144,7 +144,7 @@ export default function Footer() {
               </div>
               <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
                 {col.links.map((l) => (
-                  <li key={l.href}>
+                  <li key={l.href + l.label}>
                     <FooterAnchor l={l} />
                   </li>
                 ))}

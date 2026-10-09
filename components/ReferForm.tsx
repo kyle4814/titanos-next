@@ -1,6 +1,6 @@
 "use client";
 
-// Inline partner-signup embed, same idea as an inline embed: the actual form
+// Partner-signup link-out card (was an iframe embed; see the comment above the return).
 // (and its POST to /partner/signup) lives on vault.titanos.tech, loaded in
 // an iframe — the fetch happens same-origin from inside the iframe, so a
 // pre-existing zone-wide Cloudflare rule that strips
@@ -35,29 +35,32 @@ export default function ReferForm() {
     if (q.toString()) setIframeSrc(`${PARTNER_PORTAL_URL}?${q.toString()}`);
   }, []);
 
+  // The vault answers with X-Frame-Options: SAMEORIGIN, so an iframe renders a blocked box and a console error (L6 defect
+  // found 2026-10-09). A direct link-out card carries the same ?ref=/?src= attribution without the dead frame.
   return (
     <div style={{ maxWidth: 480, margin: "0 auto" }}>
       <div
         style={{
           border: "1px solid var(--gold-dim)",
           borderRadius: "var(--radius-md)",
-          overflow: "hidden",
           background: "var(--card)",
+          padding: "28px 24px",
+          textAlign: "center",
         }}
       >
-        <iframe
-          src={iframeSrc}
-          title="Apply to the Titanos partner network"
-          loading="lazy"
-          style={{ width: "100%", height: 420, border: "none", display: "block" }}
-        />
-      </div>
-      <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-xs)", marginTop: 10 }}>
-        Form not loading?{" "}
-        <a href={iframeSrc} target="_blank" rel="noopener noreferrer" style={{ color: "var(--gold)" }}>
-          Open it in a new tab →
+        <p style={{ margin: "0 0 18px", color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.6 }}>
+          The partner application opens in its own secure page. It takes about two minutes.
+        </p>
+        <a
+          href={iframeSrc}
+          target="_blank"
+          rel="noopener noreferrer"
+         
+          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minHeight: 48, padding: "0 28px", borderRadius: "var(--radius-sm)", background: "var(--gold)", color: "#0a0a0a", fontWeight: 600, textDecoration: "none" }}
+        >
+          Apply to the partner network →
         </a>
-      </p>
+      </div>
     </div>
   );
 }
