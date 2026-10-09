@@ -1,332 +1,80 @@
 {
- "generated": 1791505921383,
+ "generated": 1791482941906,
  "shown": 60,
- "dropped_orgs": 160,
+ "dropped_orgs": 157,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791505861000,
+   "t": 1791482821000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-DFC50F"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-DCBC30"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-77BFB1"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-B8A48D"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-533878"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-252E62"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-69305F"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-352B26"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-5D4474"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-9AE4F8"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-6D83F7"
+  },
+  {
+   "t": 1791482641000,
    "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791505682000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791505321000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791503702000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-BC5063"
-  },
-  {
-   "t": 1791503341000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-2D38A6"
-  },
-  {
-   "t": 1791503161000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-A7FA2B"
-  },
-  {
-   "t": 1791502981000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-91B494"
-  },
-  {
-   "t": 1791502981000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-34106B"
-  },
-  {
-   "t": 1791502801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-2A39A3"
-  },
-  {
-   "t": 1791502621000,
-   "acct": "A",
-   "cat": "ENGINE",
-   "code": "ENGINE-DADD47"
-  },
-  {
-   "t": 1791502621000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-5C642C"
-  },
-  {
-   "t": 1791501722000,
-   "acct": "A",
-   "cat": "SITE",
-   "code": "SITE-AA60DA"
-  },
-  {
-   "t": 1791500281000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-367BAF"
-  },
-  {
-   "t": 1791499201000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-EEB3B4"
-  },
-  {
-   "t": 1791499021000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-2BE2BA"
-  },
-  {
-   "t": 1791499021000,
-   "acct": "A",
-   "cat": "CONTENT",
-   "code": "CONTENT-4D23A0"
-  },
-  {
-   "t": 1791499021000,
-   "acct": "B",
-   "cat": "SITE",
-   "code": "SITE-FBE5AA"
-  },
-  {
-   "t": 1791498481000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-E2B38B"
-  },
-  {
-   "t": 1791498481000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-8E230A"
-  },
-  {
-   "t": 1791498481000,
-   "acct": "A",
-   "cat": "CONTENT",
-   "code": "CONTENT-3C9826"
-  },
-  {
-   "t": 1791498122000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-ACCD5B"
-  },
-  {
-   "t": 1791497761000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-105667"
-  },
-  {
-   "t": 1791497761000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-FFDE92"
-  },
-  {
-   "t": 1791497761000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-D090B2"
-  },
-  {
-   "t": 1791497761000,
-   "acct": "A",
-   "cat": "SITE",
-   "code": "SITE-3CF54D"
-  },
-  {
-   "t": 1791497401000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-0D6EEE"
-  },
-  {
-   "t": 1791497401000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-0E0905"
-  },
-  {
-   "t": 1791496681000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-AE895A"
-  },
-  {
-   "t": 1791496681000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-C7389B"
-  },
-  {
-   "t": 1791496501000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-F20243"
-  },
-  {
-   "t": 1791496501000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-C6D1D5"
-  },
-  {
-   "t": 1791495961000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-DB45D4"
-  },
-  {
-   "t": 1791495961000,
-   "acct": "A",
-   "cat": "SITE",
-   "code": "SITE-16EC89"
-  },
-  {
-   "t": 1791495961000,
-   "acct": "A",
-   "cat": "RESEARCH",
-   "code": "fl-research-block-engine"
-  },
-  {
-   "t": 1791495421000,
-   "acct": "A",
-   "cat": "ENGINE",
-   "code": "ENGINE-442331"
-  },
-  {
-   "t": 1791495421000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-9053FB"
-  },
-  {
-   "t": 1791495421000,
-   "acct": "A",
-   "cat": "ENGINE",
-   "code": "ENGINE-62F0C2"
-  },
-  {
-   "t": 1791495241000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-94F942"
-  },
-  {
-   "t": 1791495062000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-643EFB"
-  },
-  {
-   "t": 1791494341000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-B6B255"
-  },
-  {
-   "t": 1791494341000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-C0DD0C"
-  },
-  {
-   "t": 1791494341000,
-   "acct": "A",
-   "cat": "BUILD",
-   "code": "BUILD-D95B71"
-  },
-  {
-   "t": 1791494161000,
-   "acct": "A",
    "cat": "HARVEST",
-   "code": "HV-CDF870"
-  },
-  {
-   "t": 1791493801000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-705931"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-E7A261"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-76277E"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-78DF3C"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-6C08C8"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-63D227"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-3F50A5"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-59FDCC"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-99E508"
-  },
-  {
-   "t": 1791493621000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-E8884A"
-  },
-  {
-   "t": 1791493441000,
-   "acct": "A",
-   "cat": "HARVEST",
-   "code": "HV-5763BA"
+   "code": "HV-74EAAD"
   },
   {
    "t": 1791480121000,
@@ -347,10 +95,28 @@
    "code": "heal"
   },
   {
+   "t": 1791473101000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
    "t": 1791472921000,
    "acct": "B",
    "cat": "QUALITY",
    "code": "QUALITY-F2DF50"
+  },
+  {
+   "t": 1791470041000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791469682000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
   },
   {
    "t": 1791464462000,
@@ -363,6 +129,240 @@
    "acct": "A",
    "cat": "SITE",
    "code": "site-ship"
+  },
+  {
+   "t": 1791461581000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-hud"
+  },
+  {
+   "t": 1791461221000,
+   "acct": "A",
+   "cat": "SECURITY",
+   "code": "facts-outbound-guard"
+  },
+  {
+   "t": 1791461041000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-834D5E"
+  },
+  {
+   "t": 1791460861000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-349428"
+  },
+  {
+   "t": 1791460681000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "earnings-model"
+  },
+  {
+   "t": 1791459242000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-final"
+  },
+  {
+   "t": 1791459061000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "QUALITY-4098E5"
+  },
+  {
+   "t": 1791454561000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-35A0FB"
+  },
+  {
+   "t": 1791454382000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-BCC22D"
+  },
+  {
+   "t": 1791453841000,
+   "acct": "B",
+   "cat": "ENGINE",
+   "code": "r2c-alpha-dispatch-stagger"
+  },
+  {
+   "t": 1791453301000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-53E5A0"
+  },
+  {
+   "t": 1791449521000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "SITE-3F928E"
+  },
+  {
+   "t": 1791445202000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "reply-autopilot"
+  },
+  {
+   "t": 1791444661000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "p2-autopilot"
+  },
+  {
+   "t": 1791443941000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "SITE-278F08"
+  },
+  {
+   "t": 1791442321000,
+   "acct": "A",
+   "cat": "OPS",
+   "code": "OPS-347FDB"
+  },
+  {
+   "t": 1791442141000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "w6-site-qa"
+  },
+  {
+   "t": 1791441062000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-9859BE"
+  },
+  {
+   "t": 1791440881000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-17FA02"
+  },
+  {
+   "t": 1791438901000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w2-site-images"
+  },
+  {
+   "t": 1791438361000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w3-site-copy"
+  },
+  {
+   "t": 1791438181000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-3001AC"
+  },
+  {
+   "t": 1791437461000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-539E59"
+  },
+  {
+   "t": 1791436741000,
+   "acct": "B",
+   "cat": "OPS",
+   "code": "factory-phase2-prep"
+  },
+  {
+   "t": 1791435662000,
+   "acct": "B",
+   "cat": "OPS",
+   "code": "OPS-8F0174"
+  },
+  {
+   "t": 1791430801000,
+   "acct": "B",
+   "cat": "CONTENT",
+   "code": "r3-alpha-blog-engine"
+  },
+  {
+   "t": 1791430441000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "fl-alliance-groundwork"
+  },
+  {
+   "t": 1791430441000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "r3-alpha-site-beauty"
+  },
+  {
+   "t": 1791430261000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "w1-site-foundation"
+  },
+  {
+   "t": 1791430081000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-44B732"
+  },
+  {
+   "t": 1791429901000,
+   "acct": "A",
+   "cat": "CONTENT",
+   "code": "fl-incorporation-pack"
+  },
+  {
+   "t": 1791429901000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "w7-site-pages"
+  },
+  {
+   "t": 1791429722000,
+   "acct": "A",
+   "cat": "CONTENT",
+   "code": "fl-routine-budget-brief"
+  },
+  {
+   "t": 1791429541000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w8-site-sigils"
+  },
+  {
+   "t": 1791429541000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w5-site-seo"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "fl-parallax-defensive-stack"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-D00C76"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "B",
+   "cat": "ENGINE",
+   "code": "capability-ledger"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "r2b-omega-cross-review"
   }
  ]
 }
