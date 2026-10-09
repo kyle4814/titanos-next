@@ -1,0 +1,24 @@
+export type Line = { key: string; label: string; cents: number };
+export type Selection = { qty: number; priority: boolean; call: boolean; termMonths: number; prepay: boolean; caseStudy: boolean; counterAud: number; needs: string };
+export type Quote = {
+  ok: true; slug: string; name: string; cadence: string; mode: "payment" | "subscription"; interval: "month" | null;
+  selection: Selection; lines: Line[]; extras: Line[];
+  listedHeadlineCents: number; floorHeadlineCents: number; headlineCents: number; oneTimeCents: number; termMonths: number;
+  payNowCents: number; savingCents: number; status: "listed" | "accepted" | "countered"; message: string; needs: string;
+  needsReadout: NeedsReadout;
+};
+export type QuoteError = { ok: false; error: string; slug: string };
+export type NeedsReadout = { applied: Partial<Selection>; notes: string[]; recognised: boolean };
+export type CatalogOffer = { slug: string; name: string; group: string; priceAud: number | null; cadence: string; status: string; howItWorks: string[]; kyleMinutes: number };
+export const CATALOG: CatalogOffer[];
+export const MAX_QTY: number; export const EXTRA_UNIT_PCT: number; export const CALL_CENTS: number;
+export const PRIORITY_PCT: { oneoff: number; recurring: number };
+export const TERM_PCT: Record<number, number>; export const PREPAY_PCT: number; export const CASE_STUDY_PCT: number; export const MAX_NEEDS_LEN: number;
+export function getOffer(slug: string): CatalogOffer | null;
+export function ineligible(o: CatalogOffer | null): string | null;
+export function isRecurring(o: CatalogOffer): boolean;
+export function normaliseSelection(o: CatalogOffer, raw?: Partial<Selection>): Selection;
+export function readNeeds(text: string): NeedsReadout;
+export function maxConcessionPct(o: CatalogOffer): number;
+export function quote(slug: string, rawSel?: Partial<Selection>): Quote | QuoteError;
+export function formatCents(cents: number): string;

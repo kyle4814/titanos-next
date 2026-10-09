@@ -1,0 +1,1444 @@
+[
+ {
+  "slug": "dd-pre-read",
+  "name": "Due Diligence Pre-Read: Cyber, Privacy and Email Posture",
+  "group": "enterprise",
+  "priceAud": 297,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send the target's domain and where it operates.",
+   "We read public records only and date every finding.",
+   "You get one PDF per target, with the method page attached."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "portfolio-watch",
+  "name": "Portfolio Watch: Monthly Posture Monitor for a Fund's Holdings",
+  "group": "enterprise",
+  "priceAud": 499,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You send the list of holdings and their domains.",
+   "We check public records each month and compare with the last reading.",
+   "You get the heat map by email, with the changes at the top."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "tender-intelligence-radar",
+  "name": "Tender Intelligence Radar: Competitor Win Maps",
+  "group": "enterprise",
+  "priceAud": 499,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your rivals, keywords, agencies and states.",
+   "We read the published government contract awards and sort them for you.",
+   "You get a sourced report each month."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "export-market-tender-map",
+  "name": "Export Market Tender Map: Global Public Buyers",
+  "group": "enterprise",
+  "priceAud": 1497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your category keywords and target countries.",
+   "We search open public-procurement feeds and sort them by fit.",
+   "You get one sourced map and the shortlist."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "profit-mirror-care",
+  "name": "Profit Mirror for Charities, NDIS and Care Providers",
+  "group": "enterprise",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You give us your registered ID and country.",
+   "We read your public filings and build labelled scenarios.",
+   "You get the report and a short walk-through."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "supplier-check-dossier",
+  "name": "Supplier Check Dossier for Procurement Teams",
+  "group": "enterprise",
+  "priceAud": 149,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send the supplier's name, ABN and website.",
+   "We read public records and date every finding.",
+   "You get one dossier per supplier."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "sub-threshold-intelligence-contract",
+  "name": "Fixed-Scope Intelligence Contract for Councils, Universities and Health Groups",
+  "group": "enterprise",
+  "priceAud": 12000,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You send a list of domains and a procurement contact.",
+   "We read public records only and build the engagement report.",
+   "You get the PDF, the monitor and a handover call."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "panel-risk-map",
+  "name": "Supplier-Risk and Win Map for Procurement Units",
+  "group": "enterprise",
+  "priceAud": 9500,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send a supplier list with name, ABN and website.",
+   "We join public contract history with public email and privacy readings.",
+   "You get the map, the exceptions page and a refresh at 60 days."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "franchise-site-audit",
+  "name": "Franchise Network Local Presence and Exposure Audit",
+  "group": "enterprise",
+  "priceAud": 14000,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You send your franchisee domain list, or we help find the sites you do not list.",
+   "We grade every site from public records.",
+   "You get the league table, the fix kits and the monitor."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "health-trust-map",
+  "name": "Hospital and Aged-Care Group Privacy and Email Trust Map",
+  "group": "enterprise",
+  "priceAud": 15000,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send your site domains.",
+   "We read public records only. No active scanning.",
+   "You get the map, the fix text and a board one-pager."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "rebid-tender-brief",
+  "name": "Incumbent-Displacement Tender Brief",
+  "group": "enterprise",
+  "priceAud": 7500,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You name the rebid and the incumbent.",
+   "We read the public award record and their filed accounts where public.",
+   "You get one brief, and 30 days of follow-up questions."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "insurer-book-scan",
+  "name": "Cyber Insurer and Broker Portfolio Posture Scan",
+  "group": "enterprise",
+  "priceAud": 18000,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You send the list of policyholder domains.",
+   "We grade each one from public DNS records.",
+   "You get the graded book, the heat map and a refresh at 90 days."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "postcode-churn-index",
+  "name": "Postcode Business Churn Index",
+  "group": "enterprise",
+  "priceAud": 199,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You choose suburbs and sectors.",
+   "We compare our company database against earlier snapshots.",
+   "You get a PDF and CSV each quarter."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "owner-inbox-desk",
+  "name": "Owner Inbox Desk",
+  "group": "enterprise",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You give mailbox access and a sample of your tone.",
+   "We sort the inbox and draft replies each morning.",
+   "You approve what goes out with one tap."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "review-reply-desk",
+  "name": "Review Reply Desk",
+  "group": "enterprise",
+  "priceAud": 59,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You forward Google's review email, or paste the text, to a TITANOS address.",
+   "We draft a reply in your tone.",
+   "You tap, copy it into Google and post."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "council-resilience-report",
+  "name": "Council and Chamber Local Resilience Report",
+  "group": "government",
+  "priceAud": 2990,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your council or chamber area, postcodes and branding.",
+   "We run passive scans on public information across businesses in that area and check the write-up against our quality template.",
+   "You receive the report, the action list and your landing page."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "pack-factory-channel-partners",
+  "name": "Pack Factory for Channel Partners",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send the form or tender link and your client's organisation facts.",
+   "Our pack factory drafts the pack, checklist and answer blocks.",
+   "You finish, polish and submit under your own name."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "bid-pack",
+  "name": "Bid Pack",
+  "group": "government",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send the tender link and your capability facts.",
+   "We build the pack and flag every gap, never filling one with a guess.",
+   "You review, add what is missing and submit it yourself."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "panel-door-map",
+  "name": "Panel Door Map",
+  "group": "government",
+  "priceAud": 197,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your state, trade, business type, turnover band, insurance and target countries.",
+   "We check each panel's own wording and date it.",
+   "You get the ranked map, and optionally change alerts when rules shift."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "grant-radar-nfp",
+  "name": "Grant Radar for Not-for-Profits",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your ABN, mission tags, state and revenue band.",
+   "We match open grants against your profile and your filed accounts.",
+   "You get the shortlist each month and choose what to pursue."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "charity-profit-mirror",
+  "name": "Charity Profit Mirror",
+  "group": "government",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "We read your public ACNC filed accounts. You send nothing to start.",
+   "We build the scenarios, with every figure sourced or labelled as modelled.",
+   "You get the three documents. Your finance person can reproduce any line in about five minutes."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "supplier-cyber-readiness-pass",
+  "name": "Supplier Cyber Readiness Pass",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You give us your domain and, if you have it, the tender's security questionnaire.",
+   "We read your public email settings and draft the answers from verified facts.",
+   "You get the answers sheet and the ranked fixes."
+  ],
+  "kyleMinutes": 4
+ },
+ {
+  "slug": "global-tender-desk",
+  "name": "Global Tender Desk (UK, NZ, US, EU)",
+  "group": "government",
+  "priceAud": 349,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You give us your service keywords, countries and value band.",
+   "We match live notices and check each portal's eligibility wording.",
+   "You get the monthly feed and checklist, and decide what to chase."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "public-posture-briefing",
+  "name": "Public Posture Briefing for Councils and Universities",
+  "group": "government",
+  "priceAud": 1997,
+  "cadence": "quote",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your domains, policy links and board date.",
+   "We build the briefing from public data only.",
+   "Your board gets the short hook and the full artifact before the meeting."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "incumbent-brief",
+  "name": "Incumbent Brief for Bid Consultants",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send the tender ID or agency and category keywords.",
+   "We pull the award history from public contract data and add the agency's published posture.",
+   "You receive the brief and use it in your response."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "funder-fit-dossier",
+  "name": "Funder-Fit Dossier for Grant Writers",
+  "group": "government",
+  "priceAud": 129,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send the charity's ABN and the funder you are writing to.",
+   "We read the public filed accounts and build the evidence blocks.",
+   "You paste them into the application and finish the narrative."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "latam-exporter-radar",
+  "name": "LatAm Exporter Radar (Colombia, Chile, Peru, Paraguay)",
+  "group": "government",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your country, category keywords, language and value band.",
+   "We pull the public procurement feeds for that country and match them.",
+   "You get the monthly brief and the weekly alerts."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "foreign-tender-anti-fraud-check",
+  "name": "Anti-Fraud Check for Foreign Tenders",
+  "group": "government",
+  "priceAud": 19,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us the country, the feed and the buyer domains you want watched.",
+   "We read public DNS and compare it with the publisher record.",
+   "You get an alert for each notice, with the flag if the domains differ."
+  ],
+  "kyleMinutes": 1
+ },
+ {
+  "slug": "award-price-benchmark",
+  "name": "Award Price Benchmark Sheet by Category",
+  "group": "government",
+  "priceAud": 79,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You pick the country, category codes, currency and period.",
+   "We compute the figures fresh from public award data.",
+   "You get the sheet and use it to set your price."
+  ],
+  "kyleMinutes": 1
+ },
+ {
+  "slug": "eu-ted-small-lot-radar",
+  "name": "EU TED Small-Lot Radar",
+  "group": "government",
+  "priceAud": 79,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You pick countries, industry (CPV) codes, a maximum value and languages.",
+   "We search the TED database for you every week.",
+   "You get the digest by email."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "spoofguard-global-monitor",
+  "name": "SpoofGuard Global Monitor",
+  "group": "government",
+  "priceAud": 19,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your domain and contact email.",
+   "We re-check your public settings every month and compare with last time.",
+   "You only hear from us when something changes."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "wordpress-email-posture-widget",
+  "name": "WordPress Email Posture Widget",
+  "group": "government",
+  "priceAud": 0,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You install the plugin.",
+   "It reads your domain and sends it to our grader.",
+   "You see the grade and fix steps on your dashboard."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "story-leads-weekly",
+  "name": "Story Leads Weekly (Open-Contracts Desk)",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your region or topic and where to send it.",
+   "We run the weekly pipeline over public contract data.",
+   "You get five leads each week to follow up your own way."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "investigation-cut",
+  "name": "Investigation Cut (One-Off Deep Dive)",
+  "group": "government",
+  "priceAud": 990,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your question, date range and comparators.",
+   "We run it through our templated queries on the awards data.",
+   "You get the document and the CSV."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "electorate-dollar-map",
+  "name": "Electorate Dollar Map",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You give us your postcodes or electorate and how often you want it.",
+   "We roll up the federal award data for that area.",
+   "You get the map each quarter, with monthly changes."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "contract-variation-watch",
+  "name": "Contract Variation Watch",
+  "group": "government",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You set an agency or category filter and thresholds.",
+   "We compare each contract's release history over time.",
+   "You get the ranked list every month."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "au-market-entry-reseller-shortlist",
+  "name": "AU Market-Entry Reseller Shortlist",
+  "group": "government",
+  "priceAud": 1500,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your product, the tools it sits next to, target industries, partner types and states.",
+   "We rank candidates from our company database by how well they fit your stack.",
+   "You receive the list and the method note."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "msp-prospect-feed",
+  "name": "MSP Prospect Feed with White-Label SpoofGuard",
+  "group": "multipliers",
+  "priceAud": 299,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your brand, your postcode radius, the industries you want and your weekly cap.",
+   "Each week we check public email-security records for businesses in that area and write up the ones with a gap.",
+   "You get the feed and the branded reports, and you decide who to contact and what to send."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "monitor-wholesale",
+  "name": "Monitor Wholesale for MSPs",
+  "group": "multipliers",
+  "priceAud": 49,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You send the list of client domains, your brand and the alert inbox.",
+   "We check each domain's public email-security records every month and flag any change.",
+   "You send the report and letter to your client and bill them at your own price."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "broker-renewal-scan",
+  "name": "Broker Renewal Trigger Scan",
+  "group": "multipliers",
+  "priceAud": 1497,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send a spreadsheet of client domains with the renewal month and your letterhead.",
+   "We check public email-security records for each domain and write up the results.",
+   "You get the call list and letters, and you decide who to contact."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "accountant-privacy-check",
+  "name": "Accountant Channel: Client Privacy Check",
+  "group": "multipliers",
+  "priceAud": 790,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send the client domains, your brand and your referral terms.",
+   "We read each public privacy page and note where the automated-decision wording is missing.",
+   "You send the advisory to the clients you choose and decide who to follow up."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "franchise-posture-board",
+  "name": "Franchise Network Posture Board",
+  "group": "multipliers",
+  "priceAud": 1500,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You send the list of site domains and the inbox that should receive reports.",
+   "We check public records for every domain and build the board.",
+   "You get a report on your chosen cadence and share the fix sheets with franchisees."
+  ],
+  "kyleMinutes": 9
+ },
+ {
+  "slug": "association-member-kit",
+  "name": "Association Member Benefit Kit",
+  "group": "multipliers",
+  "priceAud": 490,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You give us your brand and, if you want named scans, a member list that members have opted in to.",
+   "We run the scans, write the sector report and prepare each bulletin.",
+   "You publish them to members and decide what to promote."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "agency-signal-leads",
+  "name": "Web and Marketing Agency Signal Leads",
+  "group": "multipliers",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your services, postcode radius, trigger types and weekly cap.",
+   "We check public sources and write the reason for each lead.",
+   "You get the list and decide who to contact and what to say."
+  ],
+  "kyleMinutes": 7
+ },
+ {
+  "slug": "agency-white-label-audit",
+  "name": "Agency White-Label Audit Rail",
+  "group": "multipliers",
+  "priceAud": 29,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send the client domains, your brand and the delivery inbox.",
+   "We check public records and build each report.",
+   "You send the report to your client at the price you choose."
+  ],
+  "kyleMinutes": 5
+ },
+ {
+  "slug": "recruiter-contract-winner-feed",
+  "name": "Recruiter and Labour-Hire Contract-Winner Feed",
+  "group": "multipliers",
+  "priceAud": 390,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your postcode radius, sectors and minimum contract value.",
+   "Each week we read the public award data and match winners to likely staffing needs.",
+   "You get the feed and briefs and decide who to contact."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "subbie-finder-channel",
+  "name": "Head-Contractor Subbie Finder for Chambers and Trade Bodies",
+  "group": "multipliers",
+  "priceAud": 590,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your regions, member inbox list and brand.",
+   "Each week we read the public award data and build a list per region.",
+   "You share it with members, or members subscribe individually."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "msp-panel-white-label-feed",
+  "name": "MSP White-Label Feed for Public-Sector and Charity Clients",
+  "group": "multipliers",
+  "priceAud": 299,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your region, sector filter and brand assets.",
+   "We check public records and write up the gaps.",
+   "You send the reports and decide who to contact."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "au-email-security-report",
+  "name": "State of AU Email Security Report: Custom Cuts and Sponsorship",
+  "group": "multipliers",
+  "priceAud": 1497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us the cut you want: an industry, state or customer list.",
+   "We run the checks on public records and write up the findings with the method.",
+   "You receive the cut and can publish it with your brand."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "subbie-finder-lite",
+  "name": "Job Flow Lite: Subbie Finder",
+  "group": "multipliers",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You tell us your trade keywords, postcode radius and email.",
+   "Each week we read the public contract award data near you.",
+   "You get the list and decide who to contact."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "multi-domain-dmarc-lockdown",
+  "name": "Multi-Domain Email Lockdown",
+  "group": "multipliers",
+  "priceAud": 10000,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You sign a scope and send your list of domains.",
+   "We grade each domain and write the staged change plan.",
+   "Your team, or a provider under your written authority, makes the DNS changes, and we show the before and after."
+  ],
+  "kyleMinutes": 300
+ },
+ {
+  "slug": "dossier-reseller-licence",
+  "name": "Dossier Reseller Licence (White Label)",
+  "group": "multipliers",
+  "priceAud": 990,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send your brand, logo, sign-off name and contact.",
+   "You order dossiers on the form.",
+   "We deliver them under your name and you hand them to your clients."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "hiring-trigger-dossier",
+  "name": "Hiring-Trigger Dossier for Recruiters",
+  "group": "multipliers",
+  "priceAud": 79,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send the employer name or ABN, the region and the role family you recruit for.",
+   "We read the public contract award records and build the dossier with every source shown.",
+   "You get the hook and the full version, ready for your call."
+  ],
+  "kyleMinutes": 5
+ },
+ {
+  "slug": "procurement-training-feed",
+  "name": "Procurement-Training Body White-Label Feed",
+  "group": "multipliers",
+  "priceAud": 299,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your brand, your country, your keywords and your digest day.",
+   "We set up the feed from open public tender data and send you a sample.",
+   "Your members receive the digest from you each week."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "tender-alerts-widget",
+  "name": "Tender Alerts Embed for Business Directories",
+  "group": "multipliers",
+  "priceAud": 39,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You tell us your site, your country, your keywords and how many items to show.",
+   "We give you the embed code and a trial page.",
+   "You paste it in. The feed keeps itself fresh."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "finance-broker-trigger-feed",
+  "name": "Finance Broker New-Entity Trigger Feed",
+  "group": "multipliers",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You choose your postcodes, industries and a minimum contract value.",
+   "We match new registrations and contract wins to your settings each week.",
+   "You get the list and decide who to contact."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "new-business-insurance-feed",
+  "name": "New-Entity Insurance Cover Feed",
+  "group": "multipliers",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You choose your postcodes and industries.",
+   "We send the weekly list of new registrations that match.",
+   "You review the cover sheets, put your own wording on them, and reach out."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "software-partner-stack-feed",
+  "name": "Software Partner Stack-Change Feed",
+  "group": "multipliers",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You choose your platforms, regions and the kinds of change you want.",
+   "We compare public tech details over time and flag the changes.",
+   "You get the monthly feed and choose who to contact."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "payee-domain-change-watch",
+  "name": "Payee Domain Change Watch",
+  "group": "multipliers",
+  "priceAud": 49,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "You send your supplier domains.",
+   "We check public DNS records each week and compare with last time.",
+   "If something changes, you get an alert with the evidence and a suggestion to verify by phone."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "accountant-new-client-feed",
+  "name": "Accountant New-Client Trigger Feed",
+  "group": "multipliers",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You choose your postcodes, entity types and industries.",
+   "We send the weekly list of fresh registrations that match.",
+   "You send your own welcome note using the template if you like."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "member-posture-drift-alert",
+  "name": "Posture Drift Alert for Industry Body Member Lists",
+  "group": "multipliers",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You send your member domains and choose a report day.",
+   "We check public records each month and compare with the last run.",
+   "You get the drift report and the nudge template."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "accountant-chaser-pack",
+  "name": "Chaser Pack for Accountants' Tradie Clients",
+  "group": "multipliers",
+  "priceAud": 39,
+  "cadence": "per-seat-month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You pick your first clients and give us your branding.",
+   "We set up one chaser per client from a simple settings row.",
+   "Clients approve their own nudges. You see the combined results."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "bookkeeper-morning-board",
+  "name": "Bookkeeper Morning Board",
+  "group": "multipliers",
+  "priceAud": 15,
+  "cadence": "per-seat-month",
+  "status": "KEY",
+  "howItWorks": [
+   "Your clients consent to share a read-only export or CSV.",
+   "We set up one card per client from a settings row.",
+   "You review the board each morning and decide who to call."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "approval-rail-kit",
+  "name": "Approval-Rail Kit (Core)",
+  "group": "multipliers",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You fill in a settings file with your gates, card channel and spend ceiling.",
+   "You wire the kit into the agents you build.",
+   "Each risky step now waits for a tap and leaves a receipt."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "governed-agent-proposal-pack",
+  "name": "Governed Agent Proposal Pack",
+  "group": "multipliers",
+  "priceAud": 197,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You fill in a short settings file with your name, prices, scope and gates.",
+   "The pack produces your client documents from it.",
+   "You edit the wording and send the proposal."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "solar-outreach-rail",
+  "name": "Solar Outreach Rail",
+  "group": "multipliers",
+  "priceAud": 797,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your sender identity, domain, daily cap and template.",
+   "Each batch comes to you as an approval card. Nothing sends without your tap.",
+   "Replies are drafted and flagged. You choose what to send."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "signal-leads-data",
+  "name": "Signal Leads Data Subscription",
+  "group": "sales",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your niche, the signal you want and the area you cover.",
+   "We build the list, re-check the websites are still live, and date it.",
+   "You receive the CSV and the compliance checklist, then do the outreach in your own name."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "account-dossier-on-demand",
+  "name": "Account Dossier on Demand",
+  "group": "sales",
+  "priceAud": 99,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You name the target organisation, its website and the role you sell to.",
+   "We build the dossier from public data and check every figure.",
+   "You receive the hook and the full artifact within 2 business days."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "sector-dossier-library",
+  "name": "Sector Dossier Library",
+  "group": "sales",
+  "priceAud": 290,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "Choose your sector.",
+   "We refresh the bundle, spot-check it and remove anything stale.",
+   "You get access to read and download the hooks and artifacts."
+  ],
+  "kyleMinutes": 5
+ },
+ {
+  "slug": "account-change-alert",
+  "name": "Account Change Alert",
+  "group": "sales",
+  "priceAud": 29,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Give us your account list and where to send the digest.",
+   "We take a baseline reading of each account.",
+   "Each month we re-check and send only what changed."
+  ],
+  "kyleMinutes": 4
+ },
+ {
+  "slug": "pitch-hooks-page",
+  "name": "Pitch Hooks Page for Professional Services",
+  "group": "sales",
+  "priceAud": 199,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You name the target client and your service lines.",
+   "We read the public record and rank the hooks that fit your services.",
+   "You receive the page and use it in your own pitch."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "rival-watch",
+  "name": "Rival Watch",
+  "group": "sales",
+  "priceAud": 49,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Tell us the rivals to watch and how you want to be alerted.",
+   "We join their public records and take a starting snapshot.",
+   "You get alerts as things change and a summary each month."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "instant-email-domain-check",
+  "name": "Instant Email Domain Check",
+  "group": "selfserve",
+  "priceAud": 19,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "Type your domain and your email address.",
+   "Pay on the site. We run the check on public records.",
+   "Your report arrives by email in minutes."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "privacy-adm-wording-check",
+  "name": "Privacy ADM Wording Check",
+  "group": "selfserve",
+  "priceAud": 29,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "Paste your privacy policy web address and your email.",
+   "We read the policy and check it for automated-decision wording.",
+   "You receive the 2-page report by email."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "tender-fit-score",
+  "name": "Tender Fit Score",
+  "group": "selfserve",
+  "priceAud": 39,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "Paste the tender link or ID and answer 6 questions.",
+   "We match it against past government contract awards.",
+   "You receive the one-page score by email."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "tradie-starter-list",
+  "name": "Tradie Starter List",
+  "group": "selfserve",
+  "priceAud": 49,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your trade, postcode and how far you will travel.",
+   "We filter the list and drop websites that no longer answer.",
+   "You receive a CSV and the compliance sheet."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "free-tender-digest",
+  "name": "Free Tender Digest",
+  "group": "selfserve",
+  "priceAud": 0,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "Enter your email, your category keywords and your state.",
+   "Confirm your subscription.",
+   "Each week your digest arrives. Unsubscribe any time."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "business-change-feed",
+  "name": "Business Change Feed",
+  "group": "selfserve",
+  "priceAud": 49,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Choose your postcodes, industries and the events you care about.",
+   "We take a baseline and then compare each week.",
+   "You receive the changes by CSV, email or Telegram."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "privacy-adm-fix",
+  "name": "Privacy ADM Fix",
+  "group": "specialist",
+  "priceAud": 197,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "You send your website address, your sector and a contact email.",
+   "We read your live policy and compare it with the new rule.",
+   "You receive the reading, the wording and the checklist."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "privacy-essential-eight-pack",
+  "name": "Privacy Act and Essential Eight Pack",
+  "group": "specialist",
+  "priceAud": 5997,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "We take your website address, sector and headcount.",
+   "We read your public posture to set a dated baseline, then fill the sector template with you.",
+   "You review the finished pack and keep it as your evidence."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "referrer-map-property-finance",
+  "name": "Referrer Map for Property and Finance",
+  "group": "specialist",
+  "priceAud": 297,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your suburb and the partner types you want.",
+   "We build the list from public business sources and check the contact details.",
+   "You receive the map and the draft. You decide who to contact."
+  ],
+  "kyleMinutes": 4
+ },
+ {
+  "slug": "quarterly-board-cyber-privacy-briefing",
+  "name": "Quarterly Board Cyber and Privacy Briefing",
+  "group": "specialist",
+  "priceAud": 1997,
+  "cadence": "quote",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us your organisation's website address and a board contact.",
+   "Each quarter we read your public posture and compare it with the last reading.",
+   "The board receives the briefing and the steps to take."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "five-jurisdiction-privacy-bundle",
+  "name": "Five-Jurisdiction Privacy Bundle",
+  "group": "specialist",
+  "priceAud": 49,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your website address and the countries your customers are in.",
+   "We read your page against each region's rules.",
+   "You receive the combined reading and the one-page wording."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "job-flow",
+  "name": "Job Flow",
+  "group": "specialist",
+  "priceAud": 249,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your trade, postcode, radius and website, and send a sample of how you write.",
+   "Each month we build your lists and templates, and you approve one card.",
+   "You get the report and start calling."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "commercial-property-tenant-trigger-feed",
+  "name": "Commercial Property Tenant Trigger Feed",
+  "group": "specialist",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You choose your suburbs, industries and the event types you care about.",
+   "Each week we filter our company records and contract awards to match.",
+   "The feed and digest arrive by your preferred channel."
+  ],
+  "kyleMinutes": 0
+ },
+ {
+  "slug": "change-feed-connector-automation-agencies",
+  "name": "Change Feed Connector for Automation Agencies",
+  "group": "specialist",
+  "priceAud": 199,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "You give us a web address for your workflow and the filters for each client.",
+   "We send matching events to that address as they happen.",
+   "Your automation takes it from there."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "outbound-gate-outreach-lint",
+  "name": "Outbound Gate and Outreach Lint for Agent Builders",
+  "group": "specialist",
+  "priceAud": 197,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your banned-phrase additions, daily cap and sender identity.",
+   "We set up the module for each client sender.",
+   "Your agent can only send what passes the gate and gets approved."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "agent-preflight-test-harness",
+  "name": "Agent Pre-Flight Test Kit",
+  "group": "specialist",
+  "priceAud": 297,
+  "cadence": "one-off",
+  "status": "BUILD",
+  "howItWorks": [
+   "You tell us your agent's entry point and the gates to attack.",
+   "We set up the test kit for that agent.",
+   "You run it, fix what fails, and hand over the report."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "club-sponsor-prospect-list",
+  "name": "Club Sponsor Prospect List",
+  "group": "specialist",
+  "priceAud": 49,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You tell us your club name, postcode, distance and what you are asking for.",
+   "We build and rank the list from public business sources.",
+   "You receive the sheet and summary and decide who to approach."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "sponsor-send-rail",
+  "name": "Sponsor Send Rail (Volunteer Tap-to-Send)",
+  "group": "specialist",
+  "priceAud": 149,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "You give us the club's sender address, daily cap and target list.",
+   "Each email arrives as a card for you to approve or skip.",
+   "Approved emails go out, and replies are listed for you."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "subbie-finder",
+  "name": "Subbie Finder",
+  "group": "tradies",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "Tell us your trade, postcode, radius and the smallest job worth your time.",
+   "Each week we match fresh government contract awards to those settings.",
+   "You get one email, read it in two minutes and call the winners that fit."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "neighbour-alerts",
+  "name": "Neighbour Alerts (new businesses near you)",
+  "group": "tradies",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your trade, postcode, radius and the kinds of business you want.",
+   "We match our company database against fresh registration data each month.",
+   "You review the list and the intro notes, and approve any you want sent."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "commercial-customer-list",
+  "name": "Commercial Customer List",
+  "group": "tradies",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your trade, postcode, radius and the sectors you want.",
+   "We build the list from our existing business lists and check it for your area.",
+   "You get the file, and you choose whether we send an intro on your behalf."
+  ],
+  "kyleMinutes": 6
+ },
+ {
+  "slug": "trade-panel-pack",
+  "name": "Trade Panel Pack",
+  "group": "tradies",
+  "priceAud": 497,
+  "cadence": "one-off",
+  "status": "READY",
+  "howItWorks": [
+   "Send us your ABN, trade, state and insurance details.",
+   "We check which panels you can join today and draft the pack.",
+   "You read it, correct it and submit it yourself."
+  ],
+  "kyleMinutes": 10
+ },
+ {
+  "slug": "tender-radar-for-trades",
+  "name": "Tender Radar for Trades",
+  "group": "tradies",
+  "priceAud": 249,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your trade, state, and the smallest and largest job you want.",
+   "We match open notices from public feeds to your settings each month.",
+   "You pick the ones worth bidding for and ask for a pack if you want one."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "scam-shield-for-tradies",
+  "name": "Scam Shield for Tradies",
+  "group": "tradies",
+  "priceAud": 149,
+  "cadence": "month",
+  "status": "READY",
+  "howItWorks": [
+   "Give us your business domain. That is all we need.",
+   "We read your public DNS records and grade them.",
+   "You get the dated reading, the fix list and the notice each month."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "counterparty-check",
+  "name": "Counterparty Check for Subbies and Small Suppliers",
+  "group": "tradies",
+  "priceAud": 39,
+  "cadence": "one-off",
+  "status": "CHECK",
+  "howItWorks": [
+   "Send us their name, ABN and website, and the job value band.",
+   "We check public records and combine them on one page.",
+   "You read it before you sign and ask the questions on the list."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "quote-chaser",
+  "name": "Quote Chaser",
+  "group": "tradies",
+  "priceAud": 99,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Give us a sample of your tone, your follow-up days and your inbox.",
+   "We track each quote and draft the follow-up when it is due.",
+   "You tap to send, or skip it. Nothing goes without your tap."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "quote-writer-from-job-notes",
+  "name": "Quote Writer from Job Notes",
+  "group": "tradies",
+  "priceAud": 129,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "Set up once: your price list, business details and quote template.",
+   "Paste or voice-note the job details.",
+   "Read the draft, change anything you like and tap to send."
+  ],
+  "kyleMinutes": 4
+ },
+ {
+  "slug": "invoice-nudge-rail",
+  "name": "Invoice Nudge Rail",
+  "group": "tradies",
+  "priceAud": 79,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Tell us your due-date rule, tone and where your invoices live (or send a CSV).",
+   "We track what is overdue and draft the reminder when it is due.",
+   "You tap to send, or skip."
+  ],
+  "kyleMinutes": 3
+ },
+ {
+  "slug": "owner-morning-cash-card",
+  "name": "Owner Morning Cash Card (Core)",
+  "group": "tradies",
+  "priceAud": 49,
+  "cadence": "month",
+  "status": "BUILD",
+  "howItWorks": [
+   "Start by dropping a bank CSV in. No keys and no login handed over.",
+   "We read the numbers with plain rules, not guesswork.",
+   "The card lands on your phone each morning at the time you choose."
+  ],
+  "kyleMinutes": 2
+ },
+ {
+  "slug": "solar-site-shortlist",
+  "name": "Solar Site Shortlist (Monthly Batch)",
+  "group": "tradies",
+  "priceAud": 497,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "Tell us your service postcodes, target industries and batch size.",
+   "We filter our company database and join it to our business email and call lists.",
+   "You receive the batch on your chosen day each month."
+  ],
+  "kyleMinutes": 8
+ },
+ {
+  "slug": "solar-pipeline-desk",
+  "name": "Solar Pipeline Desk (Retainer)",
+  "group": "tradies",
+  "priceAud": 997,
+  "cadence": "month",
+  "status": "CHECK",
+  "howItWorks": [
+   "We set up your service area, industries and card channel once.",
+   "Each week we prepare the call sheet and draft the outreach.",
+   "You approve, your team follows up, and Monday's card shows where things stand."
+  ],
+  "kyleMinutes": 10
+ }
+]

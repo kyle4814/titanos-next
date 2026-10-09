@@ -67,7 +67,8 @@ function Cta({ o }: { o: Offer }) {
   if (av === "BUYABLE" && href) {
     return (
       <>
-        <AnimatedButton href={href}>BUY NOW →</AnimatedButton>
+        <AnimatedButton href={`/checkout/${o.slug}`}>CUSTOMISE AND BUY →</AnimatedButton>
+        <AnimatedButton href={href} variant="secondary">BUY AT THE LISTED PRICE</AnimatedButton>
         <AnimatedButton href="/scan#request" variant="secondary">START WITH THE FREE STEP</AnimatedButton>
       </>
     );

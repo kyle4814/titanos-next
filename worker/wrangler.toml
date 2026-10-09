@@ -1,0 +1,12 @@
+# titanos-checkout Worker. NOT DEPLOYED by this branch (GATE: deploy is Kyle's card).
+# Deploy steps (Kyle's card): 1) wrangler secret put STRIPE_SECRET_KEY (a TEST key first)  2) wrangler deploy
+# 3) test with a 4242 card  4) only then flip STRIPE_MODE to "live" and put the live key. The Worker refuses a key whose
+# mode does not match STRIPE_MODE.
+name = "titanos-checkout"
+main = "index.mjs"
+compatibility_date = "2026-09-01"
+routes = [{ pattern = "api.titanos.tech/negotiate/*", zone_name = "titanos.tech" }]
+
+[vars]
+SITE_ORIGIN = "https://titanos.tech"
+STRIPE_MODE = "test"
