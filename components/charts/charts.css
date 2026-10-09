@@ -13,7 +13,7 @@
 .w4-chip[data-label="ESTIMATE"], .w4-chip[data-label="FORECAST"] { color: #e8b855; border-style: dashed; }
 .w4-chip[data-label="EXAMPLE"] { color: #c9b6ff; border-style: dashed; }
 .w4-chip[data-label="UNKNOWN"] { color: var(--dim); border-style: dotted; }
-.w4-chip--btn { cursor: pointer; min-height: 32px; }
+.w4-chip--btn { cursor: pointer; min-height: 44px; }
 .w4-chip--btn[aria-pressed="true"] { background: rgb(var(--gold-rgb) / 0.18); }
 .w4-chip--btn:disabled { opacity: 0.45; cursor: default; }
 

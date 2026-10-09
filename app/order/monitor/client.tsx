@@ -54,6 +54,7 @@ export default function OrderMonitorClient() {
                   color: "var(--text)",
                   fontSize: "var(--fs-body)",
                   cursor: "pointer",
+                  minHeight: 44,
                 }}
               >
                 <input

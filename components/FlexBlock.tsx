@@ -24,7 +24,7 @@ export function FlexNumber({ f }: { f: Flex }) {
       <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.65, margin: "0 0 12px" }}>{f.analogy}</p>
       <details>
         <summary style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", cursor: "pointer" }}>Where this number comes from</summary>
-        <figcaption style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6, marginTop: 8 }}>{f.source}</figcaption>
+        <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6, marginTop: 8 }}>{f.source}</p>
       </details>
     </figure>
   );

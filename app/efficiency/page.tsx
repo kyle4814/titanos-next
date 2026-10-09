@@ -51,7 +51,7 @@ const CARD: CSSProperties = {
   padding: "16px 18px",
 };
 const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15, verticalAlign: "top" };
-const MUTED: CSSProperties = { color: "var(--ice)", opacity: 0.7, fontSize: 13, lineHeight: 1.5 };
+const MUTED: CSSProperties = { overflowWrap: "anywhere", color: "var(--ice)", opacity: 0.7, fontSize: 13, lineHeight: 1.5 };
 
 function fmtNum(m: Metric, n: number): string {
   const s = n.toLocaleString("en-AU", { maximumFractionDigits: m.dp ?? 2 });

@@ -126,6 +126,9 @@ export default function Nav() {
             fontSize: "var(--fs-lg)",
             textDecoration: "none",
             letterSpacing: "0.06em",
+            display: "inline-flex",
+            alignItems: "center",
+            minHeight: 44,
           }}
         >
           TITANOS
@@ -177,7 +180,7 @@ export default function Nav() {
             justifyContent: "center",
             position: "relative",
             width: 44,
-            height: 40,
+            height: 44,
           }}
         >
           <Burger open={drawerOpen} reduce={!!reduce} />
@@ -287,6 +290,8 @@ export default function Nav() {
                     fontFamily: "var(--font-display), Georgia, serif",
                     cursor: "pointer",
                     padding: "8px 12px",
+                    minHeight: 44,
+                    minWidth: 44,
                     lineHeight: 1,
                   }}
                 >

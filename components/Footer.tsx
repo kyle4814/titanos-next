@@ -66,8 +66,10 @@ function FooterAnchor({ l }: { l: FooterLink }) {
   const style = {
     color: "var(--dim)",
     padding: "4px 0",
-    display: "inline-block",
-    minHeight: 28,
+    display: "inline-flex",
+    alignItems: "center",
+    minHeight: 44,
+    minWidth: 44,
   } as const;
   return l.external ? (
     <a href={l.href} target="_blank" rel="noopener noreferrer" style={style}>

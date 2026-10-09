@@ -203,7 +203,7 @@ export default function BlackIceDoctrinePage() {
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <a href={`#${id}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "none", display: "inline-block", padding: "4px 0" }}>
+                  <a href={`#${id}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "none", display: "inline-flex", alignItems: "center", minHeight: 44, padding: "4px 0" }}>
                     {label}
                   </a>
                 </li>
