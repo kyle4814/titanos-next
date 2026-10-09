@@ -46,10 +46,9 @@ const COMPUTE: [string, string, string][] = [
 ];
 
 const LADDER: [string, string, string, string, string][] = [
-  ["AU$10,000", "AU$10,000 (living)", "-", "-", "Founder full focus funded"],
-  ["AU$20,000", "AU$10,000", "AU$10,000", "-", "~33 build accounts"],
-  ["AU$100,000", "AU$10,000 (10%)", "AU$15,000 (15%)", "AU$75,000 (75%)", "~50 build accounts; AU$900k a year to the world"],
-  ["AU$1,000,000", "AU$50,000 (5%)", "AU$150,000 (15%)", "AU$800,000 (80%)", "~500 build accounts; AU$9.6M a year to the world"],
+  ["AU$10,000", "AU$1,000 (10%)", "AU$9,000 (90%)", "later", "Every dollar compounding into compute, people and reach"],
+  ["AU$100,000", "AU$10,000 (10%)", "AU$90,000 (90%)", "later", "~300 build accounts; new countries"],
+  ["AU$1,000,000", "AU$100,000 (10%)", "AU$900,000 (90%)", "later", "~3,000 build accounts; a global company"],
 ];
 
 export default function Investors() {
@@ -123,9 +122,9 @@ export default function Investors() {
           <OpenLoop>And if it did scale, where would the money go?</OpenLoop>
           <h2 style={H}>The ladder to AU$1 million a month, and where it goes</h2>
           <p style={BODY}>
-            Monthly revenue, split between the founder, the system (compute, people, the next product) and the world
-            (charities, education, housing, jobs). The founder&apos;s share is capped at what a good life needs; the
-            rest compounds or goes back out.
+            Monthly revenue for the first two years, split between the founder and the system (compute, people, the next
+            product, new countries). About 90% compounds back into TITANOS until it is established globally; the world
+            share (charities, education, housing, jobs) starts after that and grows with the company.
           </p>
           <div tabIndex={0} style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640 }}>

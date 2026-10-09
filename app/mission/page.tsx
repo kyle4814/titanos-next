@@ -8,7 +8,7 @@ import { FLEX } from "@/lib/flex";
 
 const META_TITLE = "The mission: why TITANOS exists | TITANOS";
 const META_DESC =
-  "Give people their time back instead of taking their jobs, and put most of what we earn back into the world: children first, then jobs, housing, health and education.";
+  "Give people their time back instead of taking their jobs, and build the company that proves it worldwide. Early profits go back into TITANOS; giving grows as the company does.";
 
 const baseMetadata: Metadata = {
   title: META_TITLE,
@@ -51,8 +51,8 @@ export default function Mission() {
     <div>
       <PageHero
         badge="The mission"
-        title="Give people their time back, then give the money back too."
-        sub="TITANOS exists to prove AI can hand people their hours back instead of taking their jobs, and to put most of what it earns back into the world."
+        title="Give people their time back, and build the company that proves it."
+        sub="TITANOS exists to prove AI can hand people their hours back instead of taking their jobs, and to grow fast enough to prove it in every country."
       />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
         <div style={WRAP}>
@@ -69,10 +69,10 @@ export default function Mission() {
         <div style={WRAP}>
           <h2 style={H}>Where the money goes as we grow</h2>
           <p style={BODY}>
-            Once the founder&apos;s living is covered, the plan at scale is about <b>80% back to the world</b>,{" "}
-            <b>15% back into the system</b> (compute, people, the next product) and <b>5% to the founder</b>. At AU$1
-            million a month in revenue, that is about <b>AU$800,000 a month, AU$9.6 million a year</b>, going back out.
-            The full ladder is on the <a href="/investors" style={A}>investors page</a>.
+            For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b>: compute,
+            people, products and new countries, so the mission arrives years sooner. The founder lives on the rest. Once
+            TITANOS is established as a global company, a growing share goes to the people below. The full ladder is on
+            the <a href="/investors" style={A}>investors page</a>.
           </p>
 
           <OpenLoop>And who is it for, exactly?</OpenLoop>

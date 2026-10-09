@@ -71,7 +71,7 @@ const META: Record<string, { group: string; blurb: string }> = {
   "/methodology": { group: "Company", blurb: "How every figure is sourced" },
   "/costs": { group: "Company", blurb: "Every price, every cost, all the maths" },
   "/investors": { group: "Company", blurb: "What your money builds" },
-  "/mission": { group: "Company", blurb: "Time back for people, money back to the world" },
+  "/mission": { group: "Company", blurb: "Time back for people, proven worldwide" },
   "/parallax": { group: "Company", blurb: "The simplest way to bring AI in" },
   "/proof": { group: "Company", blurb: "Public code, test logs, a replayable build" },
   "/efficiency": { group: "Company", blurb: "Every efficiency figure, before and after, with its method" },
