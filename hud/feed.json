@@ -1,9 +1,15 @@
 {
- "generated": 1791578522252,
+ "generated": 1791579722462,
  "shown": 60,
- "dropped_orgs": 185,
+ "dropped_orgs": 186,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791579482000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
   {
    "t": 1791578221000,
    "acct": "B",
@@ -129,12 +135,6 @@
    "acct": "B",
    "cat": "OPS",
    "code": "OPS-5B8447"
-  },
-  {
-   "t": 1791572281000,
-   "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791572101000,
