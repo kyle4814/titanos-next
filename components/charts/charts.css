@@ -131,7 +131,7 @@
   .w4-eyebrow { font-size: 0.88rem; }
   .w4-chip { font-size: 0.8rem; }
   .w4-star-cap { font-size: 0.95rem; }
-  .w4-node span { font-size: 0.72rem; }
+  .w4-node span { font-size: 0.75rem; }
   .w4-node b { font-size: 1.05rem; }
 }
 @media (prefers-reduced-motion: reduce) { .w4-hero-chart::before, .w4-card::before, .w4-second-look::before, .w4-panel::before, .w4-orbit-ring { animation: none; } }
