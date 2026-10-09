@@ -332,6 +332,7 @@ function SecondaryLink({
         display: "inline-flex",
         alignItems: "center",
         gap: 6,
+        minHeight: 44,
         color: "var(--ice)",
         fontFamily: "var(--font-body), system-ui, sans-serif",
         fontSize: "var(--fs-sm)",

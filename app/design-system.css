@@ -225,3 +225,13 @@
   .fx-bg, .fx-thread__tiles { transform: none !important; will-change: auto; }
 }
 
+
+/* L10 touch targets (QUALITY_LADDER L6: taps >= 44 px). Measured 2026-10-09 at 390 px: list links 18 px high, wordmark 30,
+   CTA pills 27, drawer links 32, burger 40. Running-text links stay inline (WCAG inline exception). */
+@media (pointer: coarse), (max-width: 820px) {
+  .font-wordmark { display: inline-flex; align-items: center; min-height: 44px; }
+  .nav-burger { min-height: 44px; min-width: 44px; }
+  .drawer-link { min-height: 44px; }
+  main li > a, main td > a, main div > a, main p > a:only-child, nav li > a, footer li > a, footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  .btn-secondary, .btn-primary, .animated-button, main a[role="button"] { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}

@@ -67,7 +67,7 @@ function FooterAnchor({ l }: { l: FooterLink }) {
     color: "var(--dim)",
     padding: "4px 0",
     display: "inline-block",
-    minHeight: 28,
+    minHeight: 44,
   } as const;
   return l.external ? (
     <a href={l.href} target="_blank" rel="noopener noreferrer" style={style}>
@@ -168,7 +168,7 @@ export default function Footer() {
         </div>
       </div>
       <SigilSeals />
-      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, opacity: 0.6, margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
+      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, color: "var(--dim)", margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
     </footer>
   );
 }
