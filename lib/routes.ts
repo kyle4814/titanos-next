@@ -10,6 +10,7 @@ import { CASES } from "@/lib/caseStudies";
 import { PRODUCTS } from "@/lib/products";
 import { SECTORS } from "@/lib/site-data";
 import { arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import { OWN_VISIBLE, ownPath } from "@/lib/case-studies/own";
 
 export type SiteRoute = { path: string; url: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" | "yearly"; lastModified?: Date };
 
@@ -65,5 +66,6 @@ export function indexableRoutes(): SiteRoute[] {
   for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
   // Consent-gated: the page file always reads as noindex (its robots is conditional), so it is added only when Kyle flips the switch.
   if (arianceVisible) out.push(mk(ariancePath, "lib/case-studies", { priority: 0.8 }));
+  for (const o of OWN_VISIBLE) out.push(mk(ownPath(o.slug), "lib/case-studies", { priority: 0.7 }));
   return out.sort((a, b) => b.priority - a.priority || a.path.localeCompare(b.path));
 }

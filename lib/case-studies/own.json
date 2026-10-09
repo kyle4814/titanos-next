@@ -1,0 +1,419 @@
+{
+  "intro": {
+    "heading": "Our own products, as case studies",
+    "text": "These are products we built for ourselves and for people we know. Each page shows real screens from a working copy, and every figure carries the system it came from and the date it was read."
+  },
+  "studies": [
+    {
+      "slug": "felicias-sanctum",
+      "consent": false,
+      "consent_note": "Built for a named learner. Kept hidden from search, the menu and the site map until her consent is confirmed. Her first name is the only personal detail used.",
+      "title": "A 1,900-lesson sales course with an AI coach, built in under an hour and a half",
+      "teaser": "Felicia's Sales Sanctum: a private course that teaches one calm way of selling, with a chat tutor, a role-play partner that scores her and a speech coach, all on a phone.",
+      "sector": "Sales training",
+      "brief": {
+        "heading": "The brief",
+        "points": [
+          "A private place for one learner, Felicia, to learn a calm, honest way of selling from first call to close.",
+          "It had to work on her phone first, with a login only she has.",
+          "It had to teach by doing: read a lesson, answer a quiz, practise on a pretend customer, hear how she sounds."
+        ]
+      },
+      "built": [
+        {
+          "name": "The course",
+          "text": "1,900 lessons in 190 modules. Every lesson has a short read, key points, a worked example, a five question quiz and a practice task."
+        },
+        {
+          "name": "A chat tutor",
+          "text": "Ask a question in plain words and get an answer that points back to the exact lessons that cover it."
+        },
+        {
+          "name": "A role-play partner",
+          "text": "A pretend customer with a personality pushes back. Type score and she gets a mark out of 5 with one thing to fix next time."
+        },
+        {
+          "name": "A speech coach",
+          "text": "She records herself, the recording is turned into text on the server, and the coach comments on pace and wording."
+        },
+        {
+          "name": "Progress that sticks",
+          "text": "Quizzes are marked on the server, so progress and points cannot be faked from the phone. Modules open in order."
+        }
+      ],
+      "how": {
+        "heading": "How it was built",
+        "paragraphs": [
+          "The course was written by a fleet of AI workers from one written specification, then joined into a single course folder. The app around it is a small server with no moving parts to look after.",
+          "The AI replies in the screenshots below are stand-in text. The pictures come from a local run with no AI model attached, so you see the real screens, the real lessons and the real quiz marking, with a fixed sentence where the live coach would speak."
+        ]
+      },
+      "facts": [
+        {
+          "value": "1,900",
+          "label": "lesson files on disk, across 190 modules",
+          "tag": "MEASURED",
+          "source": "count of course/lessons/*/*.json in the Sanctum repository",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "9,500",
+          "label": "quiz questions, five per lesson",
+          "tag": "MEASURED",
+          "source": "sum of quiz arrays across those lesson files",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "2.7 million",
+          "label": "words of lesson text (2,714,123)",
+          "tag": "MEASURED",
+          "source": "whitespace word count of the lesson bodies",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "1 h 23 min",
+          "label": "from the first commit (10:44) to the last lesson commit (12:07), Brisbane time",
+          "tag": "MEASURED",
+          "source": "git log timestamps, Sanctum repository",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "35 / 35",
+          "label": "automated tests passing",
+          "tag": "MEASURED",
+          "source": "node --test over the repository's tests folder",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "409",
+          "label": "commits on the record",
+          "tag": "MEASURED",
+          "source": "git log count, Sanctum repository",
+          "as_of": "2026-10-09"
+        }
+      ],
+      "gallery_heading": "Screens from the working app",
+      "gallery_note": "Taken by a headless browser from a local run, at 390 pixels wide (phone) and 1440 pixels wide (desktop). Progress was seeded through the app's own marking endpoint. The coach replies are stand-in text, as explained above.",
+      "gallery": [
+        {
+          "id": "login",
+          "caption": "The login: one password, hers alone",
+          "phone": "/case-studies/own/felicias-sanctum/login-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/login-1440.png",
+          "alt_phone": "Sanctum login on a phone",
+          "alt_desktop": "Sanctum login on a desktop"
+        },
+        {
+          "id": "path",
+          "caption": "The learning path, with finished lessons ticked and the next ones open",
+          "phone": "/case-studies/own/felicias-sanctum/path-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/path-1440.png",
+          "alt_phone": "Learning path on a phone",
+          "alt_desktop": "Learning path on a desktop"
+        },
+        {
+          "id": "lesson",
+          "caption": "A lesson: the read, with scripts in boxes in exact words",
+          "phone": "/case-studies/own/felicias-sanctum/lesson-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/lesson-1440.png",
+          "alt_phone": "A lesson on a phone",
+          "alt_desktop": "A lesson on a desktop"
+        },
+        {
+          "id": "quiz",
+          "caption": "The quiz, marked by the server with the reason shown for each answer",
+          "phone": "/case-studies/own/felicias-sanctum/quiz-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/quiz-1440.png",
+          "alt_phone": "A marked quiz on a phone",
+          "alt_desktop": "A marked quiz on a desktop"
+        },
+        {
+          "id": "tutor",
+          "caption": "The chat tutor, with a daily allowance shown at the top",
+          "phone": "/case-studies/own/felicias-sanctum/tutor-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/tutor-1440.png",
+          "alt_phone": "Chat tutor on a phone",
+          "alt_desktop": "Chat tutor on a desktop"
+        },
+        {
+          "id": "roleplay",
+          "caption": "Role-play against a pretend customer, ending in a score out of 5",
+          "phone": "/case-studies/own/felicias-sanctum/roleplay-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/roleplay-1440.png",
+          "alt_phone": "Role-play on a phone",
+          "alt_desktop": "Role-play on a desktop"
+        },
+        {
+          "id": "speech",
+          "caption": "The speech coach after a recording",
+          "phone": "/case-studies/own/felicias-sanctum/speech-390.png",
+          "desktop": "/case-studies/own/felicias-sanctum/speech-1440.png",
+          "alt_phone": "Speech coach on a phone",
+          "alt_desktop": "Speech coach on a desktop"
+        }
+      ],
+      "status": "Not yet deployed. The app and course run locally and pass their tests. Going live needs one login to the hosting account and a password set by Kyle.",
+      "limits": [
+        "Nobody has measured whether the course changes anyone's sales results. We measure how it was built, not what it earns.",
+        "The coach's real replies have not been captured here; the screens use stand-in text.",
+        "Lesson quality is checked by structure and tests so far, not yet by a person reading all 1,900."
+      ]
+    },
+    {
+      "slug": "palas-build-with-ai",
+      "consent": false,
+      "consent_note": "Built for a named learner. Kept hidden from search, the menu and the site map until her consent is confirmed. Her first name is the only personal detail used.",
+      "title": "A second course track, 1,800 lessons on building with AI, added to a live learning app in one day",
+      "teaser": "Pala's Build with AI track teaches a complete beginner to build real things with AI from scratch, inside the app she already uses, with her own tutor beside every lesson.",
+      "sector": "Education",
+      "brief": {
+        "heading": "The brief",
+        "points": [
+          "Pala had finished a first track and wanted the next one: how to build with AI, from nothing.",
+          "It had to live inside the app she already knows, with its own progress and its own switcher.",
+          "It had to teach by doing: read, answer, then try it with the tutor."
+        ]
+      },
+      "built": [
+        {
+          "name": "A new track",
+          "text": "1,800 lessons in 180 modules, each with a short read, a worked example, a five question quiz and a try-it task."
+        },
+        {
+          "name": "A track switcher",
+          "text": "The first track and the new one sit side by side, each with its own progress, so nothing she already earned was touched."
+        },
+        {
+          "name": "Petal, her tutor",
+          "text": "A tutor on every screen that answers in plain words and links back to the lessons that cover the question."
+        },
+        {
+          "name": "Help me ask this well",
+          "text": "A button that coaches her on how to write a better question or prompt before she sends it."
+        }
+      ],
+      "how": {
+        "heading": "How it was built",
+        "paragraphs": [
+          "The track was written by a fleet of AI workers from one specification and joined into the app a module at a time. A checker refused any module that failed, so one bad lesson could not stall the rest.",
+          "The screenshots come from a local run with no AI model attached, so the tutor's replies are stand-in text. The lessons, the quiz marking and the screens are the real ones."
+        ]
+      },
+      "facts": [
+        {
+          "value": "1,800",
+          "label": "lesson files on disk in the new track, across 180 modules",
+          "tag": "MEASURED",
+          "source": "count of course/tracks/build/lessons/*/*.json in the Pala repository",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "9,000",
+          "label": "quiz questions, five per lesson",
+          "tag": "MEASURED",
+          "source": "sum of quiz arrays across those lesson files",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "2.6 million",
+          "label": "words of lesson text (2,552,644)",
+          "tag": "MEASURED",
+          "source": "whitespace word count of the lesson bodies",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "5 h 4 min",
+          "label": "from the first track commit (10:43) to the last (15:47), Brisbane time",
+          "tag": "MEASURED",
+          "source": "git log timestamps on the track folder, Pala repository",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "273 / 273",
+          "label": "automated tests passing across 25 test files",
+          "tag": "MEASURED",
+          "source": "node --test over the repository's tests folder",
+          "as_of": "2026-10-09"
+        },
+        {
+          "value": "370",
+          "label": "commits that touched the track",
+          "tag": "MEASURED",
+          "source": "git log count on the track folder, Pala repository",
+          "as_of": "2026-10-09"
+        }
+      ],
+      "gallery_heading": "Screens from the working app",
+      "gallery_note": "Taken by a headless browser from a local run, at 390 pixels wide (phone) and 1440 pixels wide (desktop). Progress was seeded through the app's own marking endpoint. The tutor replies are stand-in text, as explained above.",
+      "gallery": [
+        {
+          "id": "tracks",
+          "caption": "The two tracks side by side",
+          "phone": "/case-studies/own/pala-build-with-ai/tracks-390.png",
+          "desktop": "/case-studies/own/pala-build-with-ai/tracks-1440.png",
+          "alt_phone": "Track switcher on a phone",
+          "alt_desktop": "Track switcher on a desktop"
+        },
+        {
+          "id": "module",
+          "caption": "A module, with finished lessons ticked",
+          "phone": "/case-studies/own/pala-build-with-ai/module-390.png",
+          "desktop": "/case-studies/own/pala-build-with-ai/module-1440.png",
+          "alt_phone": "A module on a phone",
+          "alt_desktop": "A module on a desktop"
+        },
+        {
+          "id": "lesson",
+          "caption": "A lesson, with a try-it task",
+          "phone": "/case-studies/own/pala-build-with-ai/lesson-390.png",
+          "desktop": "/case-studies/own/pala-build-with-ai/lesson-1440.png",
+          "alt_phone": "A lesson on a phone",
+          "alt_desktop": "A lesson on a desktop"
+        },
+        {
+          "id": "quiz",
+          "caption": "The quiz, marked with the reason for each answer",
+          "phone": "/case-studies/own/pala-build-with-ai/quiz-390.png",
+          "desktop": "/case-studies/own/pala-build-with-ai/quiz-1440.png",
+          "alt_phone": "A marked quiz on a phone",
+          "alt_desktop": "A marked quiz on a desktop"
+        },
+        {
+          "id": "coach",
+          "caption": "Petal, the tutor, linking back to the lessons",
+          "phone": "/case-studies/own/pala-build-with-ai/coach-390.png",
+          "desktop": "/case-studies/own/pala-build-with-ai/coach-1440.png",
+          "alt_phone": "The tutor on a phone",
+          "alt_desktop": "The tutor on a desktop"
+        }
+      ],
+      "status": "The learning app has been live since 2026-10-06 (deploy record, 2026-10-08 redeploy). Whether the new track is live is not confirmed in this record, so we do not claim it.",
+      "limits": [
+        "Nobody has measured what a learner can build after the track. We measure how it was built, not what it teaches.",
+        "The tutor's real replies have not been captured here; the screens use stand-in text.",
+        "Lesson quality is checked by structure and tests so far, not yet by a person reading all 1,800."
+      ]
+    },
+    {
+      "slug": "titanos-hud",
+      "consent": true,
+      "consent_note": "Our own page about our own build. No third party is named, so no consent is needed.",
+      "title": "The TITANOS HUD: our own build, counted live in public",
+      "teaser": "A public page where every number about how we build is read from our own logs, labelled measured or modelled, with a feed of finished jobs that names no client.",
+      "sector": "Engineering transparency",
+      "brief": {
+        "heading": "The brief",
+        "points": [
+          "Show how fast and how safely we build, without asking anyone to take our word for it.",
+          "Separate what we measured from what we modelled, on the page, every time.",
+          "Never show a client or a job that names one."
+        ]
+      },
+      "built": [
+        {
+          "name": "An engineering counter",
+          "text": "Lines of code, commits and tests, each with its label and its source."
+        },
+        {
+          "name": "A tachometer",
+          "text": "Work output against the modelled ceiling, so the gap between what we do and what we could do is visible."
+        },
+        {
+          "name": "A compute panel",
+          "text": "Jobs, median job time and failure rate for the worker fleet over the last 24 hours."
+        },
+        {
+          "name": "A receipt feed",
+          "text": "A live list of finished jobs by category word and codename only. Jobs that name an organisation are dropped before the page sees them."
+        }
+      ],
+      "how": {
+        "heading": "How it was built",
+        "paragraphs": [
+          "A script exports the numbers ledger into one file at build time, and the page reads only that file, so the page cannot drift from the ledger. A second file feeds the receipt list, and the browser refreshes it every minute.",
+          "A test fails the build if any organisation or person word appears in the feed."
+        ]
+      },
+      "ledger_facts": [
+        {
+          "key": "tests_main",
+          "label": "test cases in the main engine"
+        },
+        {
+          "key": "gate_suites",
+          "label": "safety suites in the last full gate run"
+        },
+        {
+          "key": "estate_sloc",
+          "label": "lines of production code across 12 repositories"
+        },
+        {
+          "key": "commits_week_now",
+          "label": "commits this week, up from 5 a week in May"
+        },
+        {
+          "key": "fleet_jobs_24h",
+          "label": "jobs finished by the worker fleet in 24 hours"
+        },
+        {
+          "key": "fleet_median_job_min",
+          "label": "minutes: median job time"
+        }
+      ],
+      "gallery_heading": "The page, as it looks",
+      "gallery_note": "Taken by a headless browser from the built site, at 390 pixels wide (phone) and 1440 pixels wide (desktop), with reduced motion on.",
+      "gallery": [
+        {
+          "id": "top",
+          "caption": "The top of the page",
+          "phone": "/case-studies/own/titanos-hud/top-390.png",
+          "desktop": "/case-studies/own/titanos-hud/top-1440.png",
+          "alt_phone": "HUD top of page on a phone",
+          "alt_desktop": "HUD top of page on a desktop"
+        },
+        {
+          "id": "panels",
+          "caption": "The engineering counter, tachometer and compute panel, each figure labelled measured or modelled",
+          "phone": "/case-studies/own/titanos-hud/panels-390.png",
+          "desktop": "/case-studies/own/titanos-hud/panels-1440.png",
+          "alt_phone": "HUD counter and panels on a phone",
+          "alt_desktop": "HUD counter and panels on a desktop"
+        },
+        {
+          "id": "feed",
+          "caption": "The receipt feed: category word and codename only",
+          "phone": "/case-studies/own/titanos-hud/feed-390.png",
+          "desktop": "/case-studies/own/titanos-hud/feed-1440.png",
+          "alt_phone": "HUD receipt feed on a phone",
+          "alt_desktop": "HUD receipt feed on a desktop"
+        }
+      ],
+      "status": "The page is part of the titanos.tech site and was deployed on 2026-10-09 (approval on the record). A live check of the deployed page was not re-run for this write-up. It is regenerated at each site build, and the feed refreshes in the browser every minute.",
+      "limits": [
+        "Modelled figures, such as the cost of a conventional team, are labelled modelled on the page and are never revenue.",
+        "Revenue is not shown because there is none to show yet."
+      ]
+    }
+  ],
+  "methodology": {
+    "heading": "How to read the figures",
+    "rows": [
+      {
+        "figure": "MEASURED",
+        "how": "Counted by a script from files, git history or logs on the date shown. The source is named beside the figure."
+      },
+      {
+        "figure": "MODELLED",
+        "how": "Calculated from a stated model. It is an estimate, never revenue, and the method is shown."
+      },
+      {
+        "figure": "Time of day",
+        "how": "Brisbane time, taken from git commit timestamps."
+      },
+      {
+        "figure": "Screenshots",
+        "how": "Taken by a headless browser from a local or built copy. Where an AI reply appears, the page says whether it is real or stand-in."
+      }
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import { CASES } from "@/lib/caseStudies";
 import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import { OWN_VISIBLE, ownPath } from "@/lib/case-studies/own";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 
@@ -82,6 +83,36 @@ export default function CaseStudies() {
             gap: 18,
           }}
         >
+          {OWN_VISIBLE.map((o) => (
+            <a
+              key={o.slug}
+              href={ownPath(o.slug)}
+              style={{
+                display: "block",
+                textDecoration: "none",
+                background: "var(--card)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-md)",
+                overflow: "hidden",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={o.gallery[0]?.desktop}
+                alt={o.gallery[0]?.alt_desktop}
+                loading="lazy"
+                style={{ width: "100%", height: 260, objectFit: "cover", objectPosition: "top", display: "block" }}
+              />
+              <div style={{ padding: "18px 20px" }}>
+                <div style={{ color: "var(--gold)", fontSize: 13, letterSpacing: 1, textTransform: "uppercase" }}>
+                  Our own product · {o.sector}
+                </div>
+                <h2 style={{ color: "var(--ice)", fontSize: 20, margin: "6px 0 8px" }}>{o.title}</h2>
+                <p style={{ color: "var(--ice)", opacity: 0.8, fontSize: 15, lineHeight: 1.6, margin: 0 }}>{o.teaser}</p>
+                <div style={{ color: "var(--gold)", marginTop: 12, fontSize: 15 }}>Read the case study →</div>
+              </div>
+            </a>
+          ))}
           {CASES.map((c) => (
             <a
               key={c.slug}
