@@ -16,12 +16,13 @@ export const NUM = numbers as unknown as {
 
 /** AU$ per engineer-year, derived from the snapshot itself (replacement cost / engineer-years). */
 export const AUD_PER_EY = NUM.rows.replacement_cost_aud.value / NUM.rows.engineer_years.value;
-/** Extrapolation stops after this many days so a stale deploy cannot run away. */
-export const MAX_EXTRAPOLATE_DAYS = 14;
+/** First-paint fallback only (before /hud/numbers.json answers, or if it never does): the build snapshot extrapolates this many days at most.
+ *  The live counter itself has no cap: it re-anchors to measurement (lib/hud/live.mjs). */
+export const FALLBACK_MAX_DAYS = 14;
 const DAY_MS = 86_400_000;
 
 export function engineerYearsAt(nowMs: number): number {
-  const days = Math.min(Math.max((nowMs - NUM.snapshot_ms) / DAY_MS, 0), MAX_EXTRAPOLATE_DAYS);
+  const days = Math.min(Math.max((nowMs - NUM.snapshot_ms) / DAY_MS, 0), FALLBACK_MAX_DAYS);
   return NUM.rows.engineer_years.value + NUM.rows.engineer_years_per_day_7d.value * days;
 }
 export function audAt(nowMs: number): number {
