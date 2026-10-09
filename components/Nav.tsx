@@ -302,12 +302,15 @@ export default function Nav() {
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: 44,
+                  padding: "12px 22px",
+                  textAlign: "center",
+                  lineHeight: 1.3,
                   background: "var(--gold)",
                   color: "var(--vault-black, #0a0a0a)",
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                   fontWeight: 700,
                   fontSize: "var(--fs-sm)",
-                  borderRadius: 999,
+                  borderRadius: 22,
                   textDecoration: "none",
                   marginBottom: 24,
                 }}
@@ -377,6 +380,7 @@ export default function Nav() {
           flex-wrap: nowrap;
         }
         .nav-desktop-links a { white-space: nowrap; }
+        .nav-desktop-links .nav-more-panel a { white-space: normal; }   /* dropdown items are links inside the strip: let them wrap */
         .nav-cta-short { display: none; }
         @media (max-width: 1180px) {
           .nav-cta-long { display: none; }
@@ -399,7 +403,7 @@ export default function Nav() {
         .nav-more-btn[aria-expanded="true"] .nav-more-chev { transform: rotate(180deg); }
         .nav-more-panel {
           position: absolute; top: calc(100% + 14px); right: -40px; z-index: 40;
-          display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 1fr);
+          display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 280px); white-space: normal; /* the strip's nowrap must not reach the panel: blurbs wrap inside their column */
           gap: 32px; min-width: 560px; padding: 22px 30px 18px;
           background: linear-gradient(180deg, var(--vault-warm), var(--vault-black));
           border: 1px solid var(--gold-dim);
@@ -434,8 +438,10 @@ export default function Nav() {
           display: block; font-family: var(--font-display), Georgia, serif;
           font-style: italic; font-size: var(--fs-lg); line-height: 1.2; transition: color 160ms ease;
         }
+        .nav-more-item > span:first-child { flex: 0 0 12px; }   /* fixed icon column: every label starts on the same line */
+        .nav-more-item > span:last-child { flex: 1 1 auto; min-width: 0; }
         .nav-more-blurb {
-          display: block; margin-top: 2px; font-size: var(--fs-xs); color: var(--dim);
+          display: block; margin-top: 2px; overflow-wrap: anywhere; font-size: var(--fs-xs); color: var(--dim);
           font-family: var(--font-body), system-ui, sans-serif;
         }
         .nav-burger {
