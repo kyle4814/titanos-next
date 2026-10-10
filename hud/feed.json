@@ -1,9 +1,15 @@
 {
- "generated": 1791588722142,
+ "generated": 1791592321524,
  "shown": 60,
  "dropped_orgs": 186,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791592082000,
+   "acct": "A",
+   "cat": "RESEARCH",
+   "code": "RESEARCH-B35479"
+  },
   {
    "t": 1791588301000,
    "acct": "A",
@@ -357,12 +363,6 @@
    "acct": "B",
    "cat": "QUALITY",
    "code": "review-site-case-study"
-  },
-  {
-   "t": 1791533041000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "inbox"
   }
  ]
 }
