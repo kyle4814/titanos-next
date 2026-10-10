@@ -1,0 +1,15 @@
+{
+ "aud_per_ey": 521541.95,
+ "commits_1h": 11,
+ "ey": 65.45196,
+ "ey_per_day_1h": 8.9167,
+ "ey_per_day_24h": 3.4474,
+ "ey_per_day_7d": 2.6143,
+ "generated_ms": 1791663721360,
+ "jobs_1h": 19,
+ "jobs_24h": 1448,
+ "jobs_per_hr_avg": 41.34,
+ "repos": 12,
+ "sloc": 248391,
+ "v": 1
+}
