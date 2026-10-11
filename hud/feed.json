@@ -1,9 +1,15 @@
 {
- "generated": 1791713522220,
+ "generated": 1791714121936,
  "shown": 60,
  "dropped_orgs": 165,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791713762000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
   {
    "t": 1791713041000,
    "acct": "A",
@@ -21,12 +27,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-7BA9B8"
-  },
-  {
-   "t": 1791712321000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791712321000,
