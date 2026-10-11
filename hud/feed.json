@@ -1,9 +1,21 @@
 {
- "generated": 1791685922267,
+ "generated": 1791686522064,
  "shown": 60,
  "dropped_orgs": 162,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791686221000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-64EC5C"
+  },
+  {
+   "t": 1791686221000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
   {
    "t": 1791685142000,
    "acct": "B",
@@ -39,12 +51,6 @@
    "acct": "A",
    "cat": "OPS",
    "code": "OPS-749530"
-  },
-  {
-   "t": 1791683341000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791683341000,
@@ -357,12 +363,6 @@
    "acct": "B",
    "cat": "RESEARCH",
    "code": "RESEARCH-B40136"
-  },
-  {
-   "t": 1791648961000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-BADCF1"
   }
  ]
 }
