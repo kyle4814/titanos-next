@@ -5,10 +5,10 @@
  "ey_per_day_1h": 0.0,
  "ey_per_day_24h": 1.1952,
  "ey_per_day_7d": 2.5286,
- "generated_ms": 1791756122557,
- "jobs_1h": 41,
+ "generated_ms": 1791756722735,
+ "jobs_1h": 37,
  "jobs_24h": 978,
- "jobs_per_hr_avg": 40.76,
+ "jobs_per_hr_avg": 40.72,
  "repos": 12,
  "sloc": 252827,
  "v": 1
