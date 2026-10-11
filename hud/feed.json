@@ -1,9 +1,21 @@
 {
- "generated": 1791693722307,
+ "generated": 1791694321770,
  "shown": 60,
  "dropped_orgs": 162,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791694321000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791693961000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
   {
    "t": 1791693601000,
    "acct": "A",
@@ -75,18 +87,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-C035C9"
-  },
-  {
-   "t": 1791692342000,
-   "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791691441000,
-   "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791690541000,
