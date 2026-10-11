@@ -1,26 +1,74 @@
 {
- "generated": 1791716521943,
+ "generated": 1791717122473,
  "shown": 60,
  "dropped_orgs": 166,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791716281000,
+   "t": 1791717001000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-2AF04E"
+  },
+  {
+   "t": 1791717001000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-66E288"
+  },
+  {
+   "t": 1791717001000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-1BDADD"
+  },
+  {
+   "t": 1791717001000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791717001000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791716821000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
   },
   {
-   "t": 1791716281000,
+   "t": 1791716821000,
    "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
+   "cat": "BUILD",
+   "code": "BUILD-540F88"
   },
   {
-   "t": 1791716100000,
+   "t": 1791716821000,
    "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
+   "cat": "BUILD",
+   "code": "BUILD-39DC59"
+  },
+  {
+   "t": 1791716821000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-ACE4CB"
+  },
+  {
+   "t": 1791716821000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-1E5ED1"
+  },
+  {
+   "t": 1791716642000,
+   "acct": "B",
+   "cat": "OPS",
+   "code": "OPS-68D580"
   },
   {
    "t": 1791716100000,
@@ -315,54 +363,6 @@
    "acct": "B",
    "cat": "OPS",
    "code": "OPS-35D22E"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "RESEARCH",
-   "code": "fix-case-study-hunt"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-5A0053"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "RESEARCH",
-   "code": "RESEARCH-1CC26E"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-F6477A"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-40545F"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-DEDCCD"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-D294AE"
-  },
-  {
-   "t": 1791702780000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-44337C"
   }
  ]
 }
