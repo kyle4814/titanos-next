@@ -1,20 +1,74 @@
 {
- "generated": 1791808922501,
+ "generated": 1791809521629,
  "shown": 60,
  "dropped_orgs": 167,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791808621000,
+   "t": 1791809341000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
   },
   {
-   "t": 1791808621000,
+   "t": 1791809341000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-975A04"
+  },
+  {
+   "t": 1791809341000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
+  },
+  {
+   "t": 1791809341000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791809341000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-BAFEF7"
+  },
+  {
+   "t": 1791809341000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-B80653"
+  },
+  {
+   "t": 1791809341000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-BEF6B3"
+  },
+  {
+   "t": 1791808982000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-691AE6"
+  },
+  {
+   "t": 1791808982000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-943CE2"
+  },
+  {
+   "t": 1791808982000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-E0B990"
+  },
+  {
+   "t": 1791808982000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "QUALITY-09C205"
   },
   {
    "t": 1791808621000,
@@ -51,12 +105,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-B23BF4"
-  },
-  {
-   "t": 1791808621000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791808621000,
@@ -315,54 +363,6 @@
    "acct": "B",
    "cat": "OPS",
    "code": "OPS-0AA75B"
-  },
-  {
-   "t": 1791805742000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-9D0980"
-  },
-  {
-   "t": 1791805742000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-216A00"
-  },
-  {
-   "t": 1791805742000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-F2C906"
-  },
-  {
-   "t": 1791805742000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-6ADB37"
-  },
-  {
-   "t": 1791805742000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-B8F50D"
-  },
-  {
-   "t": 1791805381000,
-   "acct": "A",
-   "cat": "OPS",
-   "code": "OPS-97F1AA"
-  },
-  {
-   "t": 1791805381000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-69BE37"
-  },
-  {
-   "t": 1791805381000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-C5B77A"
   }
  ]
 }
