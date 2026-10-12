@@ -1,26 +1,68 @@
 {
- "generated": 1791837122212,
+ "generated": 1791837722157,
  "shown": 60,
  "dropped_orgs": 167,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791836881000,
+   "t": 1791837601000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
   },
   {
-   "t": 1791836881000,
+   "t": 1791837601000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
   },
   {
-   "t": 1791836881000,
+   "t": 1791837601000,
    "acct": "A",
    "cat": "QUALITY",
    "code": "review"
+  },
+  {
+   "t": 1791837601000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-39B34E"
+  },
+  {
+   "t": 1791837601000,
+   "acct": "B",
+   "cat": "OPS",
+   "code": "OPS-4336D6"
+  },
+  {
+   "t": 1791837601000,
+   "acct": "B",
+   "cat": "OPS",
+   "code": "OPS-C474D6"
+  },
+  {
+   "t": 1791837241000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-68D530"
+  },
+  {
+   "t": 1791837241000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-D1AE92"
+  },
+  {
+   "t": 1791837241000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-ECB287"
+  },
+  {
+   "t": 1791837241000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "QUALITY-01D49D"
   },
   {
    "t": 1791836881000,
@@ -321,48 +363,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-8F68F5"
-  },
-  {
-   "t": 1791832561000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-D3CDCE"
-  },
-  {
-   "t": 1791832346000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-69132A"
-  },
-  {
-   "t": 1791832021000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-7DB470"
-  },
-  {
-   "t": 1791832021000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-46986D"
-  },
-  {
-   "t": 1791832021000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-58120D"
-  },
-  {
-   "t": 1791831661000,
-   "acct": "A",
-   "cat": "OPS",
-   "code": "heal"
-  },
-  {
-   "t": 1791831661000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-2F3DB2"
   }
  ]
 }
