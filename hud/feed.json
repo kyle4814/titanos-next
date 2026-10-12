@@ -1,9 +1,27 @@
 {
- "generated": 1791841322232,
+ "generated": 1791841922033,
  "shown": 60,
  "dropped_orgs": 167,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
+  {
+   "t": 1791841741000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-36EC47"
+  },
+  {
+   "t": 1791841741000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-DA6CC0"
+  },
+  {
+   "t": 1791841741000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
   {
    "t": 1791841201000,
    "acct": "B",
@@ -69,12 +87,6 @@
    "acct": "B",
    "cat": "OPS",
    "code": "OPS-8768D5"
-  },
-  {
-   "t": 1791839941000,
-   "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
   },
   {
    "t": 1791839941000,
@@ -351,18 +363,6 @@
    "acct": "B",
    "cat": "BUILD",
    "code": "BUILD-11B845"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-28D00C"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-FE2B53"
   }
  ]
 }
