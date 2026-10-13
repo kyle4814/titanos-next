@@ -37,6 +37,7 @@ for (let i = 0; i < RUNS; i++) {
   await pg.addInitScript(() => {
     window.__long = []; new PerformanceObserver(l => { for (const e of l.getEntries()) window.__long.push(e.duration); }).observe({type:"longtask",buffered:true});
   });
+  if (process.env.HELIX) await pg.addInitScript(v => document.addEventListener("DOMContentLoaded", () => { const t = document.querySelector(".fx-thread"); if (t) t.dataset.helix = v; }), process.env.HELIX); // helix design variant (A|B|C) on one build
   if (ablCss) await pg.addInitScript(css => document.addEventListener("DOMContentLoaded", () => { const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st); }), ablCss);
   await pg.goto(`http://127.0.0.1:${port}${pagePath}`, { waitUntil: "load" });
   await pg.waitForTimeout(3500);

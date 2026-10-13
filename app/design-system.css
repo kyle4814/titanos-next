@@ -183,16 +183,56 @@
 
 /* ═══ FLOW PASS (Kyle 2026-10-09): one continuous journey, no blocks, no borders ═══
    Scroll motion = FlowDriver (transform only). Breathing = opacity/scale keyframes on an INNER wrapper so it never fights the parallax transform. */
-@keyframes fx-breathe { 0%, 100% { opacity: var(--fx-lo, 0.62); transform: scale(1); } 50% { opacity: var(--fx-hi, 0.95); transform: scale(1.045); } }
+@keyframes fx-breathe { 0%, 100% { opacity: var(--fx-lo, 0.62); transform: scale(1); } 50% { opacity: var(--fx-hi, 0.95); transform: scale(var(--fx-scale, 1.045)); } }
 
 /* the weaving strands, fixed behind all content */
 .fx-thread { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
   mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); }
-.fx-thread__pulse { position: absolute; top: 0; bottom: 0; right: -64px; width: 260px; opacity: 0.5; animation: fx-breathe 8s ease-in-out infinite; --fx-lo: 0.26; --fx-hi: 0.46; }
+.fx-thread__pulse { position: absolute; top: 0; bottom: 0; right: -64px; width: 260px; opacity: 1; animation: fx-breathe 14s ease-in-out infinite; --fx-lo: var(--hx-lo, 0.5); --fx-hi: var(--hx-hi, 0.72); }
 .fx-thread__tiles { position: absolute; top: 0; left: 0; width: 100%; will-change: transform; }
 .fx-thread__tiles svg { display: block; width: 100%; height: auto; }
 @media (min-width: 900px) { .fx-thread__pulse { right: 3vw; width: 340px; } }
+
+/* PREMIUM HELIX (2026-10-13). The strands are lit ribbons (geometry in components/flow/FlowThread.tsx); this block is the
+   light rig. Every width is baked into the geometry; every opacity, colour weight and filter is a variable keyed off
+   [data-helix="A|B|C"] so the three design variants share one build. Layers, bottom to top:
+   .hx-halo (wide + mid pre-blurred halos) > .hx-far (far faces) > .hx-near (near faces) > .hx-hi (specular highlight).
+   Phones (max-width 768px or coarse pointer) never get the SVG filter: the layered halos are the blur. */
+.fx-thread {
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  --hx-s1: 0.72; --hx-s2: 0.72;             /* blue, violet weight against gold */
+  --hx-halo-w: 0.05; --hx-halo-m: 0.1;      /* wide and mid halo opacity */
+  --hx-thick: 0.42; --hx-thin: 0.92;        /* core ribbon opacities (thick glass body, thin bright filament) */
+  --hx-far: 0.62;                           /* far faces: depth fog */
+  --hx-spec: 0.55;                          /* specular highlight */
+  --hx-b-lo: 0.5; --hx-b-hi: 0.72;          /* breathing range (slow, 14 s) */
+  --hx-b-scale: 1.015;
+}
+.fx-thread .fx-thread__pulse { --fx-lo: var(--hx-b-lo); --fx-hi: var(--hx-b-hi); --fx-scale: var(--hx-b-scale); }
+.hx-s1 { opacity: var(--hx-s1); }
+.hx-s2 { opacity: var(--hx-s2); }
+.hx-halo-w { fill-opacity: var(--hx-halo-w); }
+.hx-halo-m { fill-opacity: var(--hx-halo-m); }
+.hx-core-thick { fill-opacity: var(--hx-thick); display: none; }
+.hx-core-thin { fill-opacity: var(--hx-thin); }
+.hx-far { opacity: var(--hx-far); }
+.hx-hi { opacity: var(--hx-spec); }
+
+/* A. GOLD FILAMENT: thin, bright, precise strands with a soft halo. */
+.fx-thread[data-helix="A"] { --hx-thin: 1; --hx-halo-w: 0.05; --hx-halo-m: 0.16; --hx-far: 0.6; --hx-spec: 0.7; --hx-s1: 0.7; --hx-s2: 0.7; --hx-b-lo: 0.52; --hx-b-hi: 0.74; --hx-b-scale: 1.02; }
+/* B. DEEP GLASS: thicker strands with an inner glow and depth fog, dimmer far strand. */
+.fx-thread[data-helix="B"] { --hx-thick: 0.6; --hx-thin: 0.9; --hx-halo-w: 0.11; --hx-halo-m: 0.2; --hx-far: 0.38; --hx-spec: 0.6; --hx-s1: 0.72; --hx-s2: 0.72; --hx-b-lo: 0.5; --hx-b-hi: 0.72; --hx-b-scale: 1.015; }
+.fx-thread[data-helix="B"] .hx-core-thick { display: block; }
+/* C. OBSIDIAN MINIMAL: one gold strand dominant, blue and violet as faint ghosts, maximum calm. */
+.fx-thread[data-helix="C"] { --hx-thin: 1; --hx-halo-w: 0.04; --hx-halo-m: 0.1; --hx-far: 0.55; --hx-spec: 0.75; --hx-s1: 0.2; --hx-s2: 0.2; --hx-b-lo: 0.5; --hx-b-hi: 0.66; --hx-b-scale: 1.01; }
+.fx-thread[data-helix="C"] .hx-hi .hx-s1, .fx-thread[data-helix="C"] .hx-hi .hx-s2 { opacity: 0; }
+
+/* desktop only: one true blur on the halo group (one filter, one group, rasterised once into the composited tile layer) */
+@media (min-width: 769px) and (pointer: fine) {
+  .hx-halo { filter: url(#hx-blur); }
+}
 
 /* full-bleed background stage: portal + space image sit BEHIND the content, feathered into the page colour */
 .fx-bleed { position: relative; isolation: isolate; overflow: clip; padding: clamp(9rem, 28vh, 16rem) 0 clamp(3rem, 8vh, 6rem); }
