@@ -242,6 +242,15 @@
 .fx-thread[data-helix="C"] { --hx-thin: 1; --hx-halo-w: 0.04; --hx-halo-m: 0.1; --hx-far: 0.55; --hx-spec: 0.75; --hx-s1: 0.2; --hx-s2: 0.2; --hx-b-lo: 0.5; --hx-b-hi: 0.66; --hx-b-scale: 1.01; }
 .fx-thread[data-helix="C"] .hx-hi .hx-s1, .fx-thread[data-helix="C"] .hx-hi .hx-s2 { opacity: 0; }
 
+/* PHONES (Kyle 2026-10-13 19:42: the live phone helix read as one thin gold thread; "supposed to look like" the B phone shot
+   he was sent at 19:06). Under 768px every variant takes the Deep Glass values: all three strands visible, thick glass body,
+   fuller halos (no desktop blur filter, so the layered halos carry the glow). Desktop keeps the chosen variant untouched. */
+@media (max-width: 768px) {
+  .fx-thread, .fx-thread[data-helix="A"], .fx-thread[data-helix="C"] { --hx-thick: 0.6; --hx-thin: 0.9; --hx-halo-w: 0.11; --hx-halo-m: 0.2; --hx-far: 0.38; --hx-spec: 0.6; --hx-s1: 0.72; --hx-s2: 0.72; --hx-b-lo: 0.5; --hx-b-hi: 0.72; --hx-b-scale: 1.015; }
+  .fx-thread .hx-core-thick { display: block; }
+  .fx-thread[data-helix="C"] .hx-hi .hx-s1, .fx-thread[data-helix="C"] .hx-hi .hx-s2 { opacity: 1; }
+}
+
 /* desktop only: one true blur on the halo group (one filter, one group, rasterised once into the composited tile layer) */
 @media (min-width: 769px) and (pointer: fine) {
   .hx-halo { filter: url(#hx-blur); }
