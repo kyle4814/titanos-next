@@ -1,23 +1,18 @@
-import dynamic from "next/dynamic";
 import PhiWordmark from "./PhiWordmark";
 import SpaceImage from "@/components/SpaceImage";
 import { HERO_IMAGE_ID, HERO_PORTRAIT_MEDIA } from "@/lib/space-images";
 import { HERO_STRIP, dec, int, v } from "@/lib/ledger";
 
-// ssr:false needs a client boundary; HeroStage is itself "use client", loaded as its own chunk after hydration.
-const HeroStage = dynamic(() => import("./HeroStage"));
-
 /** MOBILE LIKE-FOR-LIKE (Kyle 2026-10-13): phones get the same composition as desktop, stacked: the same NASA poster (art-directed
  *  portrait crop, jet across the top third behind the headline), wordmark, strapline, headline, ledger line, paragraph, CTA. The still
- *  poster IS the phone hero (HeroStage skips small screens, so the poster never fades out). Rules in design-system.css (max-width: 800px).
+ *  poster IS the hero on every screen. Rules in design-system.css (max-width: 800px).
  *
- *  WEBSITE 1000X hero: starfield to braid to knot. Server-rendered poster (real NASA/JPL imagery, AVIF/WebP, under 200 KB) + copy are the LCP; the WebGL layer
- *  mounts after idle. One CTA. HERO LOCK (Kyle): the h1 is the engineer-years line; its figure comes from lib/ledger.json (estate_ey) and the strip under it states the basis (MODELLED, COCOMO). */
+ *  DESKTOP = THE BLACK HOLE (Kyle 2026-10-13): the WebGL Julia fractal + point-knot layer (HeroStage) is gone; it faded the NASA poster
+ *  out on desktop. The server-rendered poster (real NASA/JPL imagery, AVIF/WebP, under 200 KB) + copy are the hero and the LCP. One CTA. HERO LOCK (Kyle): the h1 is the engineer-years line; its figure comes from lib/ledger.json (estate_ey) and the strip under it states the basis (MODELLED, COCOMO). */
 export default function Hero() {
   return (
     <section className="ds-hero" aria-labelledby="ds-hero-h">
       <SpaceImage id={HERO_IMAGE_ID} className="ds-hero__poster" sizes="100vw" priority alt="" portrait={HERO_PORTRAIT_MEDIA} />
-      <HeroStage />
       <a className="ds-hero__credit" href="/credits#nasa-black-hole-jet">Image: NASA/JPL-Caltech, artist's concept</a>
       <div className="ds-hero__copy">
         <div className="ds-hero__col">

@@ -62,22 +62,13 @@
   color: var(--ds-star);
 }
 .ds-hero__poster,
-.ds-hero__poster img,
-.ds-hero__julia,
-.ds-hero__stars {
+.ds-hero__poster img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 .ds-hero__poster img { object-fit: cover; display: block; }
-.ds-hero__julia, .ds-hero__stars {
-  opacity: 0;
-  transition: opacity var(--phi-dur-4) var(--phi-ease);
-}
-.ds-hero.is-live .ds-hero__julia { opacity: 0.55; }
-.ds-hero.is-live .ds-hero__stars { opacity: 1; }
-.ds-hero.is-live .ds-hero__poster { opacity: 0; transition: opacity var(--phi-dur-4) var(--phi-ease) 0.4s; }
 .ds-hero::after { /* legibility scrim, lighter on the 38.2% side */
   content: "";
   position: absolute;
@@ -159,8 +150,6 @@
 @media (max-width: 800px) {
   .ds-hero__col { max-width: 100%; }
   .ds-hero { align-items: flex-start; }
-  .ds-hero__julia, .ds-hero__stars { display: none; }
-  .ds-hero.is-live .ds-hero__poster { opacity: 1; transition: none; }
   .ds-hero__poster img { object-position: 50% 50%; }
   .ds-hero::after {
     background: linear-gradient(180deg, rgba(2, 3, 10, 0.58) 0%, rgba(2, 3, 10, 0.18) 20%, rgba(2, 3, 10, 0.24) 40%, rgba(2, 3, 10, 0.62) 60%, rgba(2, 3, 10, 0.86) 100%);
@@ -173,7 +162,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ds-hero__enter { animation: none; }
-  .ds-hero__julia, .ds-hero__stars { display: none; }
 }
 
 /* Void portal and golden spiral blocks */
@@ -247,8 +235,13 @@
    Under 768px every variant takes the Deep Glass look, lit harder than desktop so it survives an OLED panel: all three strands,
    thick glass body, halos at twice the desktop weight and the true blur on the halo group (one filter, one group). Desktop keeps
    the chosen variant untouched. */
+/* PHONE LIKE-FOR-LIKE (Kyle 2026-10-13 21:1x: "the mobile helix still doesn't do the website helix justice"). The phone column
+   was 260px hung 64px off the right edge, so the braid was cropped and only loose arcs showed; desktop shows the whole double
+   helix. Now the whole braid sits on screen (column 236px, flush right: strands span ~x 196 to 347 of 390) with the desktop
+   hierarchy (gold leads, blue and violet behind it), keeping the OLED lift (glass body, doubled halos, true blur). */
 @media (max-width: 768px) {
-  .fx-thread, .fx-thread[data-helix="A"], .fx-thread[data-helix="C"] { --hx-thick: 0.78; --hx-thin: 1; --hx-halo-w: 0.2; --hx-halo-m: 0.34; --hx-far: 0.42; --hx-spec: 0.8; --hx-s1: 0.78; --hx-s2: 0.78; --hx-b-lo: 0.62; --hx-b-hi: 0.86; --hx-b-scale: 1.015; }
+  .fx-thread__pulse { right: 0; width: 236px; }
+  .fx-thread, .fx-thread[data-helix="A"], .fx-thread[data-helix="C"] { --hx-thick: 0.78; --hx-thin: 1; --hx-halo-w: 0.2; --hx-halo-m: 0.34; --hx-far: 0.5; --hx-spec: 0.85; --hx-s1: 0.5; --hx-s2: 0.5; --hx-b-lo: 0.66; --hx-b-hi: 0.88; --hx-b-scale: 1.015; }
   .fx-thread .hx-core-thick { display: block; }
   .fx-thread[data-helix="C"] .hx-hi .hx-s1, .fx-thread[data-helix="C"] .hx-hi .hx-s2 { opacity: 1; }
   .hx-halo { filter: url(#hx-blur); }
@@ -279,7 +272,7 @@
 .fx-bleed__cap:hover { text-decoration: underline; }
 /* hero floor melts into the page: the hero's own layers fade out at the bottom, no seam against what follows */
 .ds-hero { background: linear-gradient(180deg, var(--ds-void) 84%, transparent); }
-.ds-hero__poster, .ds-hero__julia, .ds-hero__stars, .ds-hero::after { -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent); mask-image: linear-gradient(180deg, #000 78%, transparent); }
+.ds-hero__poster, .ds-hero::after { -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent); mask-image: linear-gradient(180deg, #000 78%, transparent); }
 /* a borderless "card": soft glow instead of a box edge */
 .fx-soft { background: radial-gradient(ellipse 70% 90% at 50% 50%, rgb(var(--gold-rgb) / 0.09), transparent 72%) !important; border: 0 !important; border-radius: 0 !important; }
 /* deep-field gallery pictures lose their hard rectangle */
