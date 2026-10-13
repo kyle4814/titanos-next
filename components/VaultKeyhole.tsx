@@ -19,6 +19,7 @@ export default function VaultKeyhole({
   return (
     <span
       aria-hidden="true"
+      className="vault-keyhole"
       style={{
         display: "inline-block",
         width: size,

@@ -1019,13 +1019,22 @@ p > a:not([class]), li > a:not([class]) {
 .stats-ticker { min-height: 1.4em; }
 @media (max-width: 640px) { .stats-ticker { min-height: 2.8em; } }
 
-/* MOBILE SMOOTHNESS (2026-10-13). On phones the ambient layers below were measured as ~0.9 s of main-thread work per
-   2.4 s scroll at 4x CPU throttle (style recalc 417 ms -> 96 ms with all animation off). They are decorative and
-   near-invisible there, so they hold still; desktop and the static look are untouched. */
+/* MOBILE SMOOTHNESS (2026-10-13, scroll pass). Decorative infinite animations restyle/re-layer on the main thread every
+   frame while the user scrolls. Measured with synthesised touch swipes at 4x CPU throttle: all animation off took the
+   median frame from ~67 ms to ~17 ms. The first hold rules (non-important, in globals.css) LOST the cascade to
+   design-system.css / charts.css / VaultBackground's inline <style>, so most of these kept running (document.getAnimations()
+   showed 1,350 running w4-twinkle samples). Hence !important. Held layers sit at the midpoint of their breathe;
+   desktop and the reduced-motion look are untouched. */
 @media (max-width: 768px) {
-  .vault-edge-thread { animation: none; opacity: 0.35; }   /* animates background-position (main-thread paint) on a fixed layer */
-  .offer-popular-badge { animation: none; }                /* background-position shimmer */
-  .fx-pulse, .fx-thread__pulse { animation: none; }        /* 9 s scale+opacity breathe on full-bleed images */
-  .vault-blob { animation: none; }                         /* three blurred drifting blobs: held at their start position */
-  .w4-star-dot { animation: none; }
+  .vault-edge-thread,
+  .offer-popular-badge,
+  .fx-pulse, .fx-thread__pulse, .ds-deepfield__img,
+  .vault-blob, .vault-keyhole,
+  .w4-star-dot, .w4-orbit-spin, .w4-orbit-ring,
+  .w4-hero-chart, .w4-card, .w4-second-look, .w4-panel,
+  .ambient-depth::before, .hud-panel::after { animation: none !important; }
+  .vault-edge-thread { opacity: 0.35; }
+  .fx-pulse, .fx-thread__pulse, .ds-deepfield__img,
+  .w4-orbit-ring, .w4-hero-chart, .w4-card, .w4-second-look, .w4-panel { opacity: calc((var(--fx-lo, 0.62) + var(--fx-hi, 0.95)) / 2); }
+  .vault-specular { display: none; }  /* full-viewport screen-blended sweep over everything, every 8 s */
 }
