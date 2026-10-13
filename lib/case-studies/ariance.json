@@ -6,7 +6,7 @@
   "title": "A hard to explain physics framework became a playable, tested web app in a single morning",
   "teaser": "Ariance is a careful, hard to explain physics framework. We turned it into a game with accounts, saved labs, a Coupling Lab, simulators and four lenses, and every claim in it carries a status label.",
   "sector": "Research and education",
-  "cover": { "src": "/case-studies/ariance/home-1440.png", "alt": "The Ariance app home page on a desktop screen" },
+  "cover": { "src": "/case-studies/ariance/home-1440.webp", "alt": "The Ariance app home page on a desktop screen" },
   "attribution": "Ariance (c) Jonathan Engle, CC BY-SA 4.0. Source: github.com/freely-given/Ariance",
   "brief": {
     "heading": "The brief, in the client's words",
@@ -95,13 +95,13 @@
     "gallery_heading": "Screens from the working app",
     "gallery_note": "Taken by a headless browser at 390 pixels wide (phone) and 1440 pixels wide (desktop). Long pages are cropped to the top in this gallery.",
     "gallery": [
-      { "id": "home", "caption": "Home", "alt_phone": "Ariance home page on a phone", "alt_desktop": "Ariance home page on a desktop", "phone": "/case-studies/ariance/home-390.png", "desktop": "/case-studies/ariance/home-1440.png" },
-      { "id": "play", "caption": "The game map", "alt_phone": "The game map on a phone", "alt_desktop": "The game map on a desktop", "phone": "/case-studies/ariance/play-390.png", "desktop": "/case-studies/ariance/play-1440.png" },
-      { "id": "learn", "caption": "Lessons", "alt_phone": "The lessons page on a phone", "alt_desktop": "The lessons page on a desktop", "phone": "/case-studies/ariance/learn-390.png", "desktop": "/case-studies/ariance/learn-1440.png" },
-      { "id": "coupling", "caption": "Coupling Lab", "alt_phone": "The Coupling Lab on a phone", "alt_desktop": "The Coupling Lab on a desktop", "phone": "/case-studies/ariance/coupling-390.png", "desktop": "/case-studies/ariance/coupling-1440.png" },
-      { "id": "lab", "caption": "A saved lab", "alt_phone": "A saved lab on a phone", "alt_desktop": "A saved lab on a desktop", "phone": "/case-studies/ariance/lab-detail-390.png", "desktop": "/case-studies/ariance/lab-detail-1440.png" },
-      { "id": "ideas", "caption": "Ideas and notes, attributed and labelled", "alt_phone": "The ideas page on a phone", "alt_desktop": "The ideas page on a desktop", "phone": "/case-studies/ariance/ideas-390.png", "desktop": "/case-studies/ariance/ideas-1440.png" },
-      { "id": "profile", "caption": "Profile", "alt_phone": "A profile page on a phone", "alt_desktop": "A profile page on a desktop", "phone": "/case-studies/ariance/profile-390.png", "desktop": "/case-studies/ariance/profile-1440.png" }
+      { "id": "home", "caption": "Home", "alt_phone": "Ariance home page on a phone", "alt_desktop": "Ariance home page on a desktop", "phone": "/case-studies/ariance/home-390.webp", "desktop": "/case-studies/ariance/home-1440.webp" },
+      { "id": "play", "caption": "The game map", "alt_phone": "The game map on a phone", "alt_desktop": "The game map on a desktop", "phone": "/case-studies/ariance/play-390.webp", "desktop": "/case-studies/ariance/play-1440.webp" },
+      { "id": "learn", "caption": "Lessons", "alt_phone": "The lessons page on a phone", "alt_desktop": "The lessons page on a desktop", "phone": "/case-studies/ariance/learn-390.webp", "desktop": "/case-studies/ariance/learn-1440.webp" },
+      { "id": "coupling", "caption": "Coupling Lab", "alt_phone": "The Coupling Lab on a phone", "alt_desktop": "The Coupling Lab on a desktop", "phone": "/case-studies/ariance/coupling-390.webp", "desktop": "/case-studies/ariance/coupling-1440.webp" },
+      { "id": "lab", "caption": "A saved lab", "alt_phone": "A saved lab on a phone", "alt_desktop": "A saved lab on a desktop", "phone": "/case-studies/ariance/lab-detail-390.webp", "desktop": "/case-studies/ariance/lab-detail-1440.webp" },
+      { "id": "ideas", "caption": "Ideas and notes, attributed and labelled", "alt_phone": "The ideas page on a phone", "alt_desktop": "The ideas page on a desktop", "phone": "/case-studies/ariance/ideas-390.webp", "desktop": "/case-studies/ariance/ideas-1440.webp" },
+      { "id": "profile", "caption": "Profile", "alt_phone": "A profile page on a phone", "alt_desktop": "A profile page on a desktop", "phone": "/case-studies/ariance/profile-390.webp", "desktop": "/case-studies/ariance/profile-1440.webp" }
     ]
   },
   "cost": {

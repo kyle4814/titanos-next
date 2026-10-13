@@ -24,7 +24,7 @@ export const CASES: CaseStudy[] = [
     title: "A full trading-education app, idea to working product in one morning",
     teaser:
       "A 200-lesson course, live charts, an AI tutor on every screen and a Telegram bot. Built and tested in about three and a half hours, inside a flat monthly AI subscription.",
-    cover: "/case-studies/trading-app-chart.png",
+    cover: "/case-studies/trading-app-chart.webp",
     coverAlt: "Live coin chart with price, liquidity and candles",
     facts: [
       ["3.5 hours", "from first idea (05:10) to the finished app (08:40), 7 October 2026"],
@@ -48,9 +48,9 @@ export const CASES: CaseStudy[] = [
     tested:
       "Every change had to pass the test gate before it landed. Then a headless phone browser tapped through every tab at two screen sizes, opened the AI tutor and checked for a real answer. That pass caught two layout bugs (overlapping chat buttons and an overlapping price label), and both were fixed in the code the same morning.",
     shots: [
-      { src: "/case-studies/trading-app-petal.png", alt: "The AI tutor answering a question about the chart on screen" },
-      { src: "/case-studies/trading-app-chart.png", alt: "Live coin chart: price, liquidity, buys and sells, candles" },
-      { src: "/case-studies/trading-app-lesson.png", alt: "A course lesson on brokers and US regulation" },
+      { src: "/case-studies/trading-app-petal.webp", alt: "The AI tutor answering a question about the chart on screen" },
+      { src: "/case-studies/trading-app-chart.webp", alt: "Live coin chart: price, liquidity, buys and sells, candles" },
+      { src: "/case-studies/trading-app-lesson.webp", alt: "A course lesson on brokers and US regulation" },
     ],
   },
 ];

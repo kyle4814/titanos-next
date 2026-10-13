@@ -382,7 +382,7 @@ code {
   width: 60vw;
   height: 200vh;
   animation: vault-specular-sweep 8s linear infinite;
-  mix-blend-mode: screen;
+  /* no mix-blend-mode: screen: on the #0b0908 canvas it is within 4% of normal alpha and forced a full-viewport blend per frame */
 }
 /* Mobile: brighter ray + tighter sweep band so the every-8s sweep
    actually registers on a 393px screen. */
@@ -698,12 +698,16 @@ select:focus-visible,
    Same 24px rise + fade the framer version had; CSS transition so a
    stalled main thread can't strand a section at opacity 0.
    ═══════════════════════════════════════════════════════════════ */
+/* Visible by default (no JS gate on first paint / LCP). SectionReveal arms only the sections that
+   start below the fold on mount ([data-reveal="armed"]); in-viewport ones are never hidden. */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
   transition:
     opacity 0.6s cubic-bezier(0, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0, 0, 0.2, 1);
+}
+[data-reveal="armed"] {
+  opacity: 0;
+  transform: translateY(24px);
 }
 [data-reveal="in"] {
   opacity: 1;
@@ -1038,3 +1042,8 @@ p > a:not([class]), li > a:not([class]) {
   .w4-orbit-ring, .w4-hero-chart, .w4-card, .w4-second-look, .w4-panel { opacity: calc((var(--fx-lo, 0.62) + var(--fx-hi, 0.95)) / 2); }
   .vault-specular { display: none; }  /* full-viewport screen-blended sweep over everything, every 8 s */
 }
+
+/* PageHero entrance: CSS only so hero text is visible at first paint (no JS gate). */
+@keyframes ph-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.ph-in { animation: ph-in 0.5s cubic-bezier(0, 0, 0.2, 1) backwards; }
+@media (prefers-reduced-motion: reduce) { .ph-in { animation: none; } }
