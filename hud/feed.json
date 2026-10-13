@@ -1,368 +1,368 @@
 {
- "generated": 1791841922033,
+ "generated": 1791482941906,
  "shown": 60,
- "dropped_orgs": 167,
+ "dropped_orgs": 157,
  "note": "category word and codename only; jobs naming an organisation are dropped",
  "items": [
   {
-   "t": 1791841741000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-36EC47"
-  },
-  {
-   "t": 1791841741000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-DA6CC0"
-  },
-  {
-   "t": 1791841741000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791841201000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-1278B0"
-  },
-  {
-   "t": 1791841201000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-761D22"
-  },
-  {
-   "t": 1791841201000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "review"
-  },
-  {
-   "t": 1791840841000,
+   "t": 1791482821000,
    "acct": "A",
-   "cat": "QUALITY",
-   "code": "review"
+   "cat": "HARVEST",
+   "code": "HV-DFC50F"
   },
   {
-   "t": 1791840482000,
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-DCBC30"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-77BFB1"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-B8A48D"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-533878"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-252E62"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-69305F"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-352B26"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-5D4474"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-9AE4F8"
+  },
+  {
+   "t": 1791482641000,
+   "acct": "A",
+   "cat": "HARVEST",
+   "code": "HV-6D83F7"
+  },
+  {
+   "t": 1791482641000,
    "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-9FCB15"
+   "cat": "HARVEST",
+   "code": "HV-74EAAD"
   },
   {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-1F4BFE"
-  },
-  {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-671A59"
-  },
-  {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-728F87"
-  },
-  {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-05B306"
-  },
-  {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-96E660"
-  },
-  {
-   "t": 1791840482000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-8768D5"
-  },
-  {
-   "t": 1791839941000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-6540CB"
-  },
-  {
-   "t": 1791839941000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-45D620"
-  },
-  {
-   "t": 1791839941000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-1D0C86"
-  },
-  {
-   "t": 1791839581000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-FDF2B2"
-  },
-  {
-   "t": 1791839221000,
+   "t": 1791480121000,
    "acct": "A",
    "cat": "OPS",
    "code": "heal"
   },
   {
-   "t": 1791839221000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-5A0EED"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-B6683C"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-619C37"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-6B3BED"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-2078F7"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-FC37E5"
-  },
-  {
-   "t": 1791838681000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-EBB7DE"
-  },
-  {
-   "t": 1791838321000,
+   "t": 1791476341000,
    "acct": "A",
    "cat": "OPS",
    "code": "heal"
   },
   {
-   "t": 1791837961000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-16B732"
-  },
-  {
-   "t": 1791837961000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-5D1F98"
-  },
-  {
-   "t": 1791837961000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-EF6D61"
-  },
-  {
-   "t": 1791837961000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-4983F5"
-  },
-  {
-   "t": 1791837601000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-39B34E"
-  },
-  {
-   "t": 1791837601000,
-   "acct": "B",
+   "t": 1791473641000,
+   "acct": "A",
    "cat": "OPS",
-   "code": "OPS-4336D6"
+   "code": "heal"
   },
   {
-   "t": 1791837601000,
+   "t": 1791473101000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791472921000,
    "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-C474D6"
+   "cat": "QUALITY",
+   "code": "QUALITY-F2DF50"
   },
   {
-   "t": 1791837241000,
+   "t": 1791470041000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791469682000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "review"
+  },
+  {
+   "t": 1791464462000,
+   "acct": "B",
+   "cat": "QUALITY",
+   "code": "r2-omega-mutation-gates"
+  },
+  {
+   "t": 1791463741000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-ship"
+  },
+  {
+   "t": 1791461581000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-hud"
+  },
+  {
+   "t": 1791461221000,
+   "acct": "A",
+   "cat": "SECURITY",
+   "code": "facts-outbound-guard"
+  },
+  {
+   "t": 1791461041000,
    "acct": "A",
    "cat": "BUILD",
-   "code": "BUILD-68D530"
+   "code": "BUILD-834D5E"
   },
   {
-   "t": 1791837241000,
-   "acct": "B",
+   "t": 1791460861000,
+   "acct": "A",
    "cat": "BUILD",
-   "code": "BUILD-D1AE92"
+   "code": "BUILD-349428"
   },
   {
-   "t": 1791837241000,
-   "acct": "B",
+   "t": 1791460681000,
+   "acct": "A",
    "cat": "BUILD",
-   "code": "BUILD-ECB287"
+   "code": "earnings-model"
   },
   {
-   "t": 1791837241000,
+   "t": 1791459242000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "site-final"
+  },
+  {
+   "t": 1791459061000,
    "acct": "B",
    "cat": "QUALITY",
-   "code": "QUALITY-01D49D"
+   "code": "QUALITY-4098E5"
   },
   {
-   "t": 1791836881000,
+   "t": 1791454561000,
    "acct": "B",
    "cat": "BUILD",
-   "code": "BUILD-6D2386"
+   "code": "BUILD-35A0FB"
   },
   {
-   "t": 1791836881000,
+   "t": 1791454382000,
    "acct": "B",
    "cat": "BUILD",
-   "code": "BUILD-34C197"
+   "code": "BUILD-BCC22D"
   },
   {
-   "t": 1791836881000,
+   "t": 1791453841000,
+   "acct": "B",
+   "cat": "ENGINE",
+   "code": "r2c-alpha-dispatch-stagger"
+  },
+  {
+   "t": 1791453301000,
    "acct": "B",
    "cat": "BUILD",
-   "code": "BUILD-17F001"
+   "code": "BUILD-53E5A0"
   },
   {
-   "t": 1791836881000,
+   "t": 1791449521000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "SITE-3F928E"
+  },
+  {
+   "t": 1791445202000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "reply-autopilot"
+  },
+  {
+   "t": 1791444661000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "p2-autopilot"
+  },
+  {
+   "t": 1791443941000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "SITE-278F08"
+  },
+  {
+   "t": 1791442321000,
+   "acct": "A",
+   "cat": "OPS",
+   "code": "OPS-347FDB"
+  },
+  {
+   "t": 1791442141000,
+   "acct": "A",
+   "cat": "QUALITY",
+   "code": "w6-site-qa"
+  },
+  {
+   "t": 1791441062000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-9859BE"
+  },
+  {
+   "t": 1791440881000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-17FA02"
+  },
+  {
+   "t": 1791438901000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w2-site-images"
+  },
+  {
+   "t": 1791438361000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w3-site-copy"
+  },
+  {
+   "t": 1791438181000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-3001AC"
+  },
+  {
+   "t": 1791437461000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "BUILD-539E59"
+  },
+  {
+   "t": 1791436741000,
    "acct": "B",
    "cat": "OPS",
-   "code": "OPS-E667F8"
+   "code": "factory-phase2-prep"
   },
   {
-   "t": 1791836881000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-0A4D7A"
-  },
-  {
-   "t": 1791836521000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-A7C4F1"
-  },
-  {
-   "t": 1791836521000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-586821"
-  },
-  {
-   "t": 1791836521000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-10FDE6"
-  },
-  {
-   "t": 1791836521000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-7CDF18"
-  },
-  {
-   "t": 1791836521000,
+   "t": 1791435662000,
    "acct": "B",
    "cat": "OPS",
-   "code": "OPS-662F5A"
+   "code": "OPS-8F0174"
   },
   {
-   "t": 1791836161000,
+   "t": 1791430801000,
+   "acct": "B",
+   "cat": "CONTENT",
+   "code": "r3-alpha-blog-engine"
+  },
+  {
+   "t": 1791430441000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "fl-alliance-groundwork"
+  },
+  {
+   "t": 1791430441000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "r3-alpha-site-beauty"
+  },
+  {
+   "t": 1791430261000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "w1-site-foundation"
+  },
+  {
+   "t": 1791430081000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-44B732"
+  },
+  {
+   "t": 1791429901000,
+   "acct": "A",
+   "cat": "CONTENT",
+   "code": "fl-incorporation-pack"
+  },
+  {
+   "t": 1791429901000,
+   "acct": "B",
+   "cat": "SITE",
+   "code": "w7-site-pages"
+  },
+  {
+   "t": 1791429722000,
+   "acct": "A",
+   "cat": "CONTENT",
+   "code": "fl-routine-budget-brief"
+  },
+  {
+   "t": 1791429541000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w8-site-sigils"
+  },
+  {
+   "t": 1791429541000,
+   "acct": "A",
+   "cat": "SITE",
+   "code": "w5-site-seo"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "A",
+   "cat": "BUILD",
+   "code": "fl-parallax-defensive-stack"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "B",
+   "cat": "BUILD",
+   "code": "BUILD-D00C76"
+  },
+  {
+   "t": 1791428821000,
+   "acct": "B",
+   "cat": "ENGINE",
+   "code": "capability-ledger"
+  },
+  {
+   "t": 1791428821000,
    "acct": "B",
    "cat": "QUALITY",
-   "code": "QUALITY-7C3BA9"
-  },
-  {
-   "t": 1791836161000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-EAA9AA"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-26478B"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-DFE039"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-DF392F"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-25F025"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-EFBF27"
-  },
-  {
-   "t": 1791835801000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-AF7505"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "QUALITY",
-   "code": "QUALITY-89CC1F"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "OPS",
-   "code": "OPS-14CF97"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-A62ACB"
-  },
-  {
-   "t": 1791835441000,
-   "acct": "B",
-   "cat": "BUILD",
-   "code": "BUILD-11B845"
+   "code": "r2b-omega-cross-review"
   }
  ]
 }
