@@ -16,7 +16,7 @@
  *  data-helix attribute on the root, and app/design-system.css keys every width, opacity and colour off it. Switch the
  *  default with HELIX_VARIANT below (one const). For a screenshot of another variant on the same build, set
  *  document.querySelector('.fx-thread').dataset.helix at runtime. */
-export const HELIX_VARIANT: "A" | "B" | "C" = "B";
+export const HELIX_VARIANT: "A" | "B" | "C" = "C"; // C Obsidian Minimal: Kyle 2026-10-13, "Helix C wins hands down". A and B stay switchable here.
 
 const TILE = 800;
 const PERIOD = TILE / 2; // one full twist
