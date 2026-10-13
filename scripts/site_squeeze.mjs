@@ -70,7 +70,7 @@ async function measure(browser, p, pagePath) {
     await pg.waitForTimeout(300);
     const H = await pg.evaluate(() => document.documentElement.scrollHeight - innerHeight);
     await pg.evaluate(() => { window.__frames = []; window.__run = true; let last = performance.now();
-      const t = ts => { window.__frames.push(ts - last); last = ts; if (window.__run) requestAnimationFrame(t); }; requestAnimationFrame(t); });
+      window.__ys = []; const t = ts => { window.__frames.push(ts - last); window.__ys.push(scrollY); last = ts; if (window.__run) requestAnimationFrame(t); }; requestAnimationFrame(t); });
     let y = 0, n = 0; const cap = p === "mobile" ? 70 : 90;
     const t0 = Date.now();
     while (y < H - 5 && n++ < cap && Date.now() - t0 < 60000) {
@@ -78,13 +78,14 @@ async function measure(browser, p, pagePath) {
       y = await pg.evaluate(() => scrollY);
     }
     await pg.waitForTimeout(500);
-    const m = await pg.evaluate(() => { window.__run = false; return { m: window.__m, frames: window.__frames.slice(1), dom: document.getElementsByTagName("*").length }; });
+    const m = await pg.evaluate(() => { window.__run = false; return { m: window.__m, frames: window.__frames.slice(1), ys: window.__ys.slice(1), dom: document.getElementsByTagName("*").length }; });
     const fcp = m.m.fcp; const tbt = m.m.long.filter(l => l[0] >= fcp).reduce((a, l) => a + Math.max(0, l[1] - 50), 0);
     const fr = m.frames.slice().sort((a, c) => a - c); const jank = fr.filter(f => f > 25).length;
+    const below = m.frames.filter((f, i) => m.ys[i] > 1500); const jankBelow = below.length ? +(100 * below.filter(f => f > 25).length / below.length).toFixed(1) : 0;
     const ev = m.m.ev.slice().sort((a, c) => a - c);
     Object.assign(res, { H, dom: m.dom, lcp: +m.m.lcp.toFixed(0), lcpEl: m.m.lcpEl, lcpHtml: m.m.lcpHtml, cls: +m.m.cls.toFixed(3), fcp: +fcp.toFixed(0), tbt: +tbt.toFixed(0),
       inp: ev.length ? +ev[ev.length - 1].toFixed(0) : 0, frames: fr.length, p50: fr.length ? +fr[Math.floor(fr.length / 2)].toFixed(1) : 0,
-      p95: fr.length ? +fr[Math.floor(fr.length * 0.95)].toFixed(1) : 0, jankPct: fr.length ? +(100 * jank / fr.length).toFixed(1) : 0,
+      p95: fr.length ? +fr[Math.floor(fr.length * 0.95)].toFixed(1) : 0, jankBelow, jankPct: fr.length ? +(100 * jank / fr.length).toFixed(1) : 0,
       jsKB: +(bytes.js / 1024).toFixed(0), cssKB: +(bytes.css / 1024).toFixed(0), imgKB: +(bytes.img / 1024).toFixed(0), fontKB: +(bytes.font / 1024).toFixed(0),
       mediaKB: +(bytes.media / 1024).toFixed(0), totalKB: +(bytes.total / 1024).toFixed(0), reqs: bytes.reqs });
   } catch (e) { res.error = String(e).slice(0, 200); }
