@@ -567,6 +567,55 @@
   ]
  },
  {
+  "id": "nasa-black-hole-jet-portrait",
+  "width": 1200,
+  "height": 2400,
+  "files": [
+   {
+    "w": 480,
+    "h": 960,
+    "fmt": "avif",
+    "bytes": 14955,
+    "name": "nasa-black-hole-jet-portrait-480.avif"
+   },
+   {
+    "w": 480,
+    "h": 960,
+    "fmt": "webp",
+    "bytes": 24048,
+    "name": "nasa-black-hole-jet-portrait-480.webp"
+   },
+   {
+    "w": 960,
+    "h": 1920,
+    "fmt": "avif",
+    "bytes": 47114,
+    "name": "nasa-black-hole-jet-portrait-960.avif"
+   },
+   {
+    "w": 960,
+    "h": 1920,
+    "fmt": "webp",
+    "bytes": 73276,
+    "name": "nasa-black-hole-jet-portrait-960.webp"
+   },
+   {
+    "w": 1200,
+    "h": 2400,
+    "fmt": "avif",
+    "bytes": 68421,
+    "name": "nasa-black-hole-jet-portrait-1200.avif"
+   },
+   {
+    "w": 1200,
+    "h": 2400,
+    "fmt": "webp",
+    "bytes": 104692,
+    "name": "nasa-black-hole-jet-portrait-1200.webp"
+   }
+  ]
+ },
+ {
   "id": "nasa-galactic-center",
   "width": 16000,
   "height": 9000,

@@ -25,7 +25,9 @@ export default function HeroStage() {
 
   useEffect(() => {
     const jc = julia.current, sc = stars.current;
-    if (!jc || !sc || lowPower()) return;
+    // Phones keep the still poster as the hero (mobile like-for-like, 2026-10-13): no WebGL below the 800 px hero breakpoint,
+    // so the poster never fades to the low-res Julia layer and the main thread stays free for scrolling.
+    if (!jc || !sc || lowPower() || isSmall()) return;
     const hero = sc.closest(".ds-hero");
     if (!hero) return;
     let stop: (() => void) | undefined;

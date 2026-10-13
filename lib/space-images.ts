@@ -15,6 +15,21 @@ export const SPACE_IMAGES: SpaceImageMeta[] = manifest.map((m) => {
 });
 
 export const HERO_IMAGE_ID = "nasa-black-hole-jet";
+/** Phones (the design-system hero breakpoint) in portrait get the art-directed crop; landscape phones keep the wide master. */
+export const HERO_PORTRAIT_MEDIA = "(max-width: 800px) and (orientation: portrait)";
+
+export type PortraitFiles = { width: number; height: number; files: SpaceFile[] };
+
+/** Art-directed portrait crop of an image (<id>-portrait in the generated metadata, built by build_images.mjs PORTRAIT).
+ *  Same photograph and credit as the landscape master, so it has no manifest row of its own. Null when none exists. */
+export function portraitFiles(id: string): PortraitFiles | null {
+  const g = byId.get(id + "-portrait");
+  return g ? { width: g.width, height: g.height, files: g.files } : null;
+}
+
+export function srcSetOf(files: SpaceFile[], fmt: "avif" | "webp"): string {
+  return files.filter((f) => f.fmt === fmt).map((f) => `/space/${f.name} ${f.w}w`).join(", ");
+}
 
 export function spaceImage(id: string): SpaceImageMeta {
   const m = SPACE_IMAGES.find((x) => x.id === id);
@@ -23,7 +38,7 @@ export function spaceImage(id: string): SpaceImageMeta {
 }
 
 export function srcSet(m: SpaceImageMeta, fmt: "avif" | "webp"): string {
-  return m.files.filter((f) => f.fmt === fmt).map((f) => `/space/${f.name} ${f.w}w`).join(", ");
+  return srcSetOf(m.files, fmt);
 }
 
 /** Largest file of a format, for the fallback <img src>. */

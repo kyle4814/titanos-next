@@ -151,12 +151,25 @@
 .ds-hero__enter:nth-child(2) { animation-delay: 0.38s; }
 .ds-hero__enter:nth-child(3) { animation-delay: 0.62s; }
 @keyframes ds-rise { from { opacity: 0.001; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+/* MOBILE LIKE-FOR-LIKE (Kyle 2026-10-13: "a like for like on this on phone would be insane"). Same composition as desktop,
+   stacked: the poster stays (no WebGL fade on phones, the art-directed portrait crop puts the jet across the top third behind
+   the headline), then wordmark, strapline, headline, ledger line, paragraph, CTA. Phi type scale from a 44 px headline at 390
+   (44 / phi = 27 wordmark, 44 / phi^2 = 17 paragraph, 44 / phi^3 = 10.4 ~ 11 px strapline). Scrim runs top to bottom: light
+   over the jet (the headline carries a text shadow instead), dark over the orange cloud where the small copy sits. */
 @media (max-width: 800px) {
   .ds-hero__col { max-width: 100%; }
-  .ds-hero::after { background: linear-gradient(180deg, rgba(2, 3, 10, 0.72) 0%, rgba(2, 3, 10, 0.55) 100%); }
   .ds-hero { align-items: flex-start; }
-  .ds-hero__copy { padding-top: var(--phi-s5); padding-bottom: var(--phi-s6); }
-  .ds-hero__sub { font-size: var(--phi-t0); line-height: 1.5; max-width: none; }
+  .ds-hero__julia, .ds-hero__stars { display: none; }
+  .ds-hero.is-live .ds-hero__poster { opacity: 1; transition: none; }
+  .ds-hero__poster img { object-position: 50% 50%; }
+  .ds-hero::after {
+    background: linear-gradient(180deg, rgba(2, 3, 10, 0.58) 0%, rgba(2, 3, 10, 0.18) 20%, rgba(2, 3, 10, 0.24) 40%, rgba(2, 3, 10, 0.62) 60%, rgba(2, 3, 10, 0.86) 100%);
+  }
+  .ds-hero__copy { padding: var(--phi-s4) var(--phi-s4) var(--phi-s6); }
+  .ds-hero__eyebrow { font-size: 0.6875rem; letter-spacing: 0.14em; line-height: 1.5; margin: var(--phi-s3) 0 var(--phi-s3); text-shadow: 0 1px 8px rgba(2, 3, 10, 0.9); }
+  .ds-hero h1 { font-size: clamp(2.625rem, 1.5rem + 5.1vw, 3rem); margin: 0 0 var(--phi-s3); text-shadow: 0 2px 6px rgba(2, 3, 10, 0.55), 0 6px 28px rgba(2, 3, 10, 0.85); }
+  .ds-hero__strip { font-size: 0.875rem; line-height: 1.45; max-width: none; margin: 0 0 var(--phi-s3); text-shadow: 0 1px 10px rgba(2, 3, 10, 0.9); }
+  .ds-hero__sub { font-size: 1.0625rem; line-height: 1.5; max-width: none; margin: 0 0 var(--phi-s4); text-shadow: 0 1px 10px rgba(2, 3, 10, 0.9); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ds-hero__enter { animation: none; }
