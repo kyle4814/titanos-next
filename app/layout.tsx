@@ -14,6 +14,7 @@ import MotionProvider from "@/components/MotionProvider";
 import PageMood from "@/components/PageMood";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import MusicToggle from "@/components/MusicToggle";
 import JsonLd from "@/components/JsonLd";
 import { organization, website } from "@/lib/jsonld";
 
@@ -195,6 +196,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyMobileCta />
+        <MusicToggle />
         <DeferredShell />
         </MotionProvider>
       </body>
