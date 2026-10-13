@@ -17,7 +17,8 @@ export default function FlowDriver() {
     const seen = new Set<Element>();
     const io = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target))), { rootMargin: "20% 0px" });
     layers.forEach((l) => l.parentElement && io.observe(l.parentElement));
-    const tile = Number(thread?.dataset.tile) || 800;
+    const tile0 = Number(thread?.dataset.tile) || 800;
+    const phone = window.matchMedia("(max-width: 768px)");
     let queued = false;
     const tick = () => {
       queued = false;
@@ -26,6 +27,8 @@ export default function FlowDriver() {
         const r = rects[i];
         if (r) l.style.transform = `translate3d(0, ${((r.top + r.height / 2 - vh / 2) * Number(l.dataset.flow)).toFixed(1)}px, 0)`;
       });
+      // phones paint the helix as a raster tile of the same 200x800 viewBox: its CSS height is 800 x (column width / 200), not 800
+      const tile = phone.matches && thread ? tile0 * (thread.clientWidth / 200) : tile0;
       if (thread) thread.style.transform = `translate3d(0, ${(-((window.scrollY * 0.42) % tile)).toFixed(1)}px, 0)`;
     };
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(tick); } };

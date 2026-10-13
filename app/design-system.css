@@ -239,12 +239,17 @@
    was 260px hung 64px off the right edge, so the braid was cropped and only loose arcs showed; desktop shows the whole double
    helix. Now the whole braid sits on screen (column 236px, flush right: strands span ~x 196 to 347 of 390) with the desktop
    hierarchy (gold leads, blue and violet behind it), keeping the OLED lift (glass body, doubled halos, true blur). */
+/* PHONE RASTER (Kyle 2026-10-13: CSS tuning failed three times; the phone showed thin crisp hairlines with no glow because the
+   236px column at 3x DPR renders the SVG strands sharp, while desktop is 340px at 1x with a true blur). Under 768px the SVG is
+   hidden and the helix is the desktop render itself: ONE seamless tile rasterised from the desktop look (variant C, true blur,
+   breathing not baked) by scripts/make_helix_tile.mjs, painted as a vertically repeating background. The tile is 708x2832 px
+   (236 x 944 CSS px at 3x); FlowDriver wraps the scroll on that same 944px on phones. The breathing runs over the image with
+   the desktop variant C range. */
 @media (max-width: 768px) {
   .fx-thread__pulse { right: 0; width: 236px; }
-  .fx-thread, .fx-thread[data-helix="A"], .fx-thread[data-helix="C"] { --hx-thick: 0.78; --hx-thin: 1; --hx-halo-w: 0.2; --hx-halo-m: 0.34; --hx-far: 0.5; --hx-spec: 0.85; --hx-s1: 0.5; --hx-s2: 0.5; --hx-b-lo: 0.66; --hx-b-hi: 0.88; --hx-b-scale: 1.015; }
-  .fx-thread .hx-core-thick { display: block; }
-  .fx-thread[data-helix="C"] .hx-hi .hx-s1, .fx-thread[data-helix="C"] .hx-hi .hx-s2 { opacity: 1; }
-  .hx-halo { filter: url(#hx-blur); }
+  .fx-thread .fx-thread__pulse { --fx-lo: 0.5; --fx-hi: 0.66; --fx-scale: 1.01; }
+  .fx-thread__tiles { aspect-ratio: 200 / 2400; background: url(/helix/helix_tile_c.webp) 0 0 / 100% auto repeat-y; }
+  .fx-thread__tiles svg { display: none; }
 }
 
 /* desktop only: one true blur on the halo group (one filter, one group, rasterised once into the composited tile layer) */
