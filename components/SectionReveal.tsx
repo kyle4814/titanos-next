@@ -51,6 +51,12 @@ export default function SectionReveal({
       el.dataset.reveal = "in";
       return;
     }
+    // Already at or above the 85% line on mount: it is on screen (or scrolled past), never hide it.
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+      el.dataset.reveal = "in";
+      return;
+    }
+    el.dataset.reveal = "armed";
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {

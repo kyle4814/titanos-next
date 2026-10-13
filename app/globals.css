@@ -698,12 +698,16 @@ select:focus-visible,
    Same 24px rise + fade the framer version had; CSS transition so a
    stalled main thread can't strand a section at opacity 0.
    ═══════════════════════════════════════════════════════════════ */
+/* Visible by default (no JS gate on first paint / LCP). SectionReveal arms only the sections that
+   start below the fold on mount ([data-reveal="armed"]); in-viewport ones are never hidden. */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
   transition:
     opacity 0.6s cubic-bezier(0, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0, 0, 0.2, 1);
+}
+[data-reveal="armed"] {
+  opacity: 0;
+  transform: translateY(24px);
 }
 [data-reveal="in"] {
   opacity: 1;
