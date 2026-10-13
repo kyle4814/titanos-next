@@ -57,31 +57,32 @@ export default function VaultBackground() {
       <span aria-hidden="true" className="vault-specular" />
 
       <style>{`
+        /* No filter: blur() here (was 120px on a 60vmax layer): it forced a ~350 ms/frame
+           raster on desktop (measured 383 -> 33 ms median frame). The gradient carries the soft edge itself. */
         .vault-blob {
           position: absolute;
           width: 60vmax;
           height: 60vmax;
           border-radius: 50%;
-          filter: blur(120px);
           opacity: 0.18;
           will-change: transform;
           mix-blend-mode: screen;
         }
         .vault-blob-1 {
-          background: radial-gradient(circle, var(--gold-warm), transparent 65%);
+          background: radial-gradient(circle, var(--gold-warm) 0%, color-mix(in srgb, var(--gold-warm) 55%, transparent) 25%, color-mix(in srgb, var(--gold-warm) 18%, transparent) 45%, transparent 70%);
           top: -20vmax;
           left: -20vmax;
           animation: vault-drift-1 40s linear infinite;
         }
         .vault-blob-2 {
-          background: radial-gradient(circle, var(--gold-cool), transparent 65%);
+          background: radial-gradient(circle, var(--gold-cool) 0%, color-mix(in srgb, var(--gold-cool) 55%, transparent) 25%, color-mix(in srgb, var(--gold-cool) 18%, transparent) 45%, transparent 70%);
           bottom: -25vmax;
           right: -20vmax;
           animation: vault-drift-2 56s linear infinite;
           opacity: 0.14;
         }
         .vault-blob-3 {
-          background: radial-gradient(circle, var(--ember), transparent 60%);
+          background: radial-gradient(circle, var(--ember) 0%, color-mix(in srgb, var(--ember) 55%, transparent) 25%, color-mix(in srgb, var(--ember) 18%, transparent) 42%, transparent 66%);
           top: 40vh;
           left: 40vw;
           width: 30vmax;
@@ -100,7 +101,6 @@ export default function VaultBackground() {
               375-430px widths — desktop's -20vmax offsets push them off-
               screen on phones. */
         @media (max-width: 720px) {
-          .vault-blob { filter: blur(60px); }
           .vault-blob-1 {
             top: -15vmax; left: -15vmax;
             width: 55vmax; height: 55vmax;
