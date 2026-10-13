@@ -5,11 +5,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import OfferFinder from "@/components/OfferFinder";
+import OfferFinderLazy from "@/components/OfferFinderLazy";
+
+// The finder carries the whole offer catalogue (62 KB gz, 225 KB parsed). Mount it on first open only, and warm the chunk
+// on pointer/focus so the open still feels instant. Once opened it stays mounted (state kept, sheet just hidden).
+const warm = () => { void import("@/components/OfferFinder"); };
 
 export default function FinderLauncher() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  const [everOpen, setEverOpen] = useState(false);
+  useEffect(() => { if (open) setEverOpen(true); }, [open]);
   const closeRef = useRef<HTMLButtonElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -38,7 +44,7 @@ export default function FinderLauncher() {
   return (
     <>
       {!open && (
-        <button ref={btnRef} type="button" className="finder-fab" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label="Find my offer">
+        <button ref={btnRef} type="button" className="finder-fab" onClick={() => setOpen(true)} onPointerEnter={warm} onFocus={warm} onTouchStart={warm} aria-haspopup="dialog" aria-label="Find my offer">
           <svg className="finder-fab-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="2" />
             <path d="M13 13l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -54,7 +60,7 @@ export default function FinderLauncher() {
               Close
             </button>
           </div>
-          <div className="finder-sheet-body"><OfferFinder compact /></div>
+          <div className="finder-sheet-body">{everOpen || open ? <OfferFinderLazy compact /> : null}</div>
         </div>
       )}
       <style>{`
