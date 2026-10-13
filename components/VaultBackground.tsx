@@ -66,7 +66,6 @@ export default function VaultBackground() {
           border-radius: 50%;
           opacity: 0.18;
           will-change: transform;
-          mix-blend-mode: screen;
         }
         .vault-blob-1 {
           background: radial-gradient(circle, var(--gold-warm) 0%, color-mix(in srgb, var(--gold-warm) 55%, transparent) 25%, color-mix(in srgb, var(--gold-warm) 18%, transparent) 45%, transparent 70%);

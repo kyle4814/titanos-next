@@ -382,7 +382,7 @@ code {
   width: 60vw;
   height: 200vh;
   animation: vault-specular-sweep 8s linear infinite;
-  mix-blend-mode: screen;
+  /* no mix-blend-mode: screen: on the #0b0908 canvas it is within 4% of normal alpha and forced a full-viewport blend per frame */
 }
 /* Mobile: brighter ray + tighter sweep band so the every-8s sweep
    actually registers on a 393px screen. */
