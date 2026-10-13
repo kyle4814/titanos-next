@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
 import Hero from "@/components/hero/Hero";
-import VoidPortal from "@/components/hero/VoidPortal";
 import { withSeo } from "@/lib/seo";
 import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 import SpaceImage from "@/components/SpaceImage";
@@ -201,9 +200,8 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <FlowThread />
       <Hero />
-      {/* FLOW STAGE: portal + space image are full-bleed BACKGROUND layers (slow parallax, feathered masks, breathing), not blocks. */}
+      {/* FLOW STAGE: space image is a full-bleed BACKGROUND layers (slow parallax, feathered masks, breathing), not blocks. */}
       <div className="fx-bleed">
-        <div className="fx-bg fx-bg--portal" data-flow="0.12"><VoidPortal /></div>
         <div className="fx-bg fx-bg--img" data-flow="0.22">
           <div className="fx-pulse fx-pulse--slow"><SpaceImage id="webb-cosmic-cliffs" sizes="100vw" /></div>
         </div>

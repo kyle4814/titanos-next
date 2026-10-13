@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PhiWordmark from "@/components/hero/PhiWordmark";
-import VoidPortal from "@/components/hero/VoidPortal";
 import GoldenSpiralField from "@/components/hero/GoldenSpiralField";
 import { SPACE_PX, TYPE_PX, DUR } from "@/lib/phi";
 
@@ -23,7 +22,6 @@ export default function SystemPage() {
         </h1>
         <p style={{ color: "var(--ds-mist)" }}>Spacing {SPACE_PX.join(", ")} px. Motion {Object.values(DUR).join(", ")} s.</p>
       </div>
-      <VoidPortal />
       <GoldenSpiralField />
     </div>
   );
