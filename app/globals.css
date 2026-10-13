@@ -1014,3 +1014,18 @@ p > a:not([class]), li > a:not([class]) {
 
 /* 2026-10-09 aesthetic polish: no orphaned last word in short instrument labels */
 .label-system, .font-mono { text-wrap: balance; }
+
+/* StatsTicker: reserve two lines on phones so the longer rotating lines wrapping never shifts the page below (measured CLS 0.5 on /). */
+.stats-ticker { min-height: 1.4em; }
+@media (max-width: 640px) { .stats-ticker { min-height: 2.8em; } }
+
+/* MOBILE SMOOTHNESS (2026-10-13). On phones the ambient layers below were measured as ~0.9 s of main-thread work per
+   2.4 s scroll at 4x CPU throttle (style recalc 417 ms -> 96 ms with all animation off). They are decorative and
+   near-invisible there, so they hold still; desktop and the static look are untouched. */
+@media (max-width: 768px) {
+  .vault-edge-thread { animation: none; opacity: 0.35; }   /* animates background-position (main-thread paint) on a fixed layer */
+  .offer-popular-badge { animation: none; }                /* background-position shimmer */
+  .fx-pulse, .fx-thread__pulse { animation: none; }        /* 9 s scale+opacity breathe on full-bleed images */
+  .vault-blob { animation: none; }                         /* three blurred drifting blobs: held at their start position */
+  .w4-star-dot { animation: none; }
+}

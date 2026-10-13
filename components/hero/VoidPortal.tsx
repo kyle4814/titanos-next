@@ -3,7 +3,7 @@
 /** Section-transition effect: a domain-warped spiral with a dark core and a gold accretion edge. Static CSS
  *  fallback (also the SSR HTML) for reduced motion, low power and no-WebGL; the shader pauses off-screen. */
 import { useEffect, useRef, useState } from "react";
-import { fit, fullscreenTriangle, getGL, loop, lowPower, program } from "@/lib/gl";
+import { fit, fullscreenTriangle, getGL, isSmall, loop, lowPower, program } from "@/lib/gl";
 import { FULLSCREEN_VS, PORTAL_FS } from "@/lib/shaders";
 
 export default function VoidPortal() {
@@ -21,8 +21,9 @@ export default function VoidPortal() {
     gl.useProgram(p);
     fullscreenTriangle(gl, p);
     const uRes = gl.getUniformLocation(p, "uRes"), uTime = gl.getUniformLocation(p, "uTime");
+    const small = isSmall();
     const stop = loop(b, (t) => {
-      fit(c, 0.5);
+      fit(c, small ? 0.4 : 0.5);
       gl.viewport(0, 0, c.width, c.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -30,7 +31,7 @@ export default function VoidPortal() {
       gl.uniform1f(uTime, t);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
       setLive(true);
-    }, { fps: 60, onSlow: () => setLive(false) });
+    }, { fps: small ? 30 : 60, onSlow: () => setLive(false) });
     return stop;
   }, []);
 

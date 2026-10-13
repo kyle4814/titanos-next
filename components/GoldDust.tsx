@@ -34,6 +34,16 @@ export default function GoldDust() {
       return;
     }
 
+    // Phones and touch devices: a full-screen fixed canvas repainted every frame is the dearest decorative layer
+    // (measured ~0.5 s of main-thread per 2.4 s scroll at 4x CPU throttle) and the specks are 5-15% alpha. Desktop keeps it.
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768)
+    ) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -105,8 +115,14 @@ export default function GoldDust() {
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+    const onVis = () => {
+      if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
+      else if (!raf) raf = requestAnimationFrame(tick);
+    };
+    document.addEventListener("visibilitychange", onVis);
 
     return () => {
+      document.removeEventListener("visibilitychange", onVis);
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);

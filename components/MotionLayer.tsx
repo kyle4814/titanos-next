@@ -15,18 +15,25 @@ export default function MotionLayer() {
     let dead = false;
     let cleanup: (() => void) | undefined;
     const go = async () => {
-      const [{ default: Lenis }, { gsap }, { ScrollTrigger }] = await Promise.all([
-        import("lenis"),
+      // Touch devices scroll natively with momentum; Lenis would only add a permanent rAF loop and wheel listeners.
+      const touch = window.matchMedia("(pointer: coarse)").matches;
+      const [lenisMod, { gsap }, { ScrollTrigger }] = await Promise.all([
+        touch ? Promise.resolve(null) : import("lenis"),
         import("gsap"),
         import("gsap/ScrollTrigger"),
       ]);
       if (dead) return;
       gsap.registerPlugin(ScrollTrigger);
-      const lenis = new Lenis({ duration: DUR.epic, smoothWheel: true });
-      lenis.on("scroll", ScrollTrigger.update);
-      const tick = (t: number) => lenis.raf(t * 1000);
-      gsap.ticker.add(tick);
-      gsap.ticker.lagSmoothing(0);
+      let lenis: InstanceType<NonNullable<typeof lenisMod>["default"]> | null = null;
+      let tick: ((t: number) => void) | null = null;
+      if (lenisMod) {
+        const l = new lenisMod.default({ duration: DUR.epic, smoothWheel: true });
+        lenis = l;
+        l.on("scroll", ScrollTrigger.update);
+        tick = (t: number) => l.raf(t * 1000);
+        gsap.ticker.add(tick);
+        gsap.ticker.lagSmoothing(0);
+      }
 
       const ctx = gsap.context(() => {
         // Below-the-fold [data-phi-reveal] elements start hidden and rise in batches (staggered) as they enter; anything already on
@@ -47,7 +54,7 @@ export default function MotionLayer() {
           });
         }
       });
-      cleanup = () => { ctx.revert(); gsap.ticker.remove(tick); lenis.destroy(); };
+      cleanup = () => { ctx.revert(); if (tick) gsap.ticker.remove(tick); lenis?.destroy(); };
     };
     const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
     const id = ric ? ric(go, { timeout: 3000 }) : window.setTimeout(go, 1500);

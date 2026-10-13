@@ -36,12 +36,11 @@ export default function StatsTicker() {
   return (
     <p
       aria-live="polite"
-      className="label-system"
+      className="label-system stats-ticker"
       style={{
         textAlign: "center",
         fontVariantNumeric: "tabular-nums",
         margin: "0 0 20px",
-        minHeight: "1.4em",
         opacity: reduce ? 1 : visible ? 1 : 0,
         transition: reduce ? undefined : "opacity 0.25s ease",
       }}
