@@ -1,13 +1,14 @@
-"use client";
-
 /**
  * PageHero — standardised hero shell for non-home pages.
  * Centred badge + h1 + tagline + sub paragraph + optional CTAs row.
+ *
+ * Entrance is a CSS keyframe (.ph-in in globals.css), not framer-motion: the old
+ * initial="hidden" state shipped opacity:0 in the HTML, so the LCP text stayed invisible
+ * until the JS bundle hydrated (mobile slow-4G LCP 4.4 s vs FCP 1.0 s). Same 20px rise,
+ * 0.5 s, ease [0,0,0.2,1], same delays.
  */
 
-import { m as motion } from "framer-motion";
 import { type ReactNode } from "react";
-import { fadeUp } from "@/lib/motion";
 
 export default function PageHero({
   badge,
@@ -35,11 +36,10 @@ export default function PageHero({
     >
       <div className="container-vault">
         {badge && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
+          <div
+            className="ph-in"
             style={{
+              animationDelay: "0s",
               display: "inline-block",
               border: "1px solid var(--gold-dim)",
               padding: "6px 16px",
@@ -53,14 +53,12 @@ export default function PageHero({
             }}
           >
             {badge}
-          </motion.div>
+          </div>
         )}
-        <motion.h1
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ delay: 0.05 }}
+        <h1
+          className="ph-in"
           style={{
+            animationDelay: "0.05s",
             fontFamily: "var(--font-display), Georgia, serif",
             fontWeight: 700,
             fontSize: "var(--fs-h1)",
@@ -71,14 +69,12 @@ export default function PageHero({
           }}
         >
           {title}
-        </motion.h1>
+        </h1>
         {tagline && (
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            transition={{ delay: 0.1 }}
+          <p
+            className="ph-in"
             style={{
+              animationDelay: "0.1s",
               fontSize: "var(--fs-lg)",
               color: "var(--ice)",
               maxWidth: "var(--maxw-prose)",
@@ -88,15 +84,13 @@ export default function PageHero({
             }}
           >
             {tagline}
-          </motion.p>
+          </p>
         )}
         {sub && (
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            transition={{ delay: 0.15 }}
+          <p
+            className="ph-in"
             style={{
+              animationDelay: "0.15s",
               fontSize: "var(--fs-body)",
               color: "var(--dim)",
               maxWidth: "var(--maxw-prose)",
@@ -105,7 +99,7 @@ export default function PageHero({
             }}
           >
             {sub}
-          </motion.p>
+          </p>
         )}
         {children && (
           <div
@@ -121,12 +115,10 @@ export default function PageHero({
           </div>
         )}
         {trustLine && (
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            transition={{ delay: 0.25 }}
+          <p
+            className="ph-in"
             style={{
+              animationDelay: "0.25s",
               fontSize: "var(--fs-sm)",
               color: "var(--dim)",
               maxWidth: "var(--maxw-prose)",
@@ -135,7 +127,7 @@ export default function PageHero({
             }}
           >
             {trustLine}
-          </motion.p>
+          </p>
         )}
         <div
           aria-hidden="true"

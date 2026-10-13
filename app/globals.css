@@ -1038,3 +1038,8 @@ p > a:not([class]), li > a:not([class]) {
   .w4-orbit-ring, .w4-hero-chart, .w4-card, .w4-second-look, .w4-panel { opacity: calc((var(--fx-lo, 0.62) + var(--fx-hi, 0.95)) / 2); }
   .vault-specular { display: none; }  /* full-viewport screen-blended sweep over everything, every 8 s */
 }
+
+/* PageHero entrance: CSS only so hero text is visible at first paint (no JS gate). */
+@keyframes ph-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.ph-in { animation: ph-in 0.5s cubic-bezier(0, 0, 0.2, 1) backwards; }
+@media (prefers-reduced-motion: reduce) { .ph-in { animation: none; } }
