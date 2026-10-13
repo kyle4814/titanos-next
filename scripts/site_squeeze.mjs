@@ -49,7 +49,7 @@ async function measure(browser, p, pagePath) {
   if (P.net) await cdp.send("Network.emulateNetworkConditions", P.net);
   await pg.addInitScript(() => {
     window.__m = { lcp: 0, lcpEl: "", cls: 0, fcp: 0, long: [], ev: [] };
-    new PerformanceObserver(l => { for (const e of l.getEntries()) { window.__m.lcp = e.startTime; window.__m.lcpEl = (e.element && (e.element.tagName + "." + String(e.element.className).slice(0, 40))) || e.url || ""; } }).observe({ type: "largest-contentful-paint", buffered: true });
+    new PerformanceObserver(l => { for (const e of l.getEntries()) { window.__m.lcp = e.startTime; window.__m.lcpEl = (e.element && (e.element.tagName + "." + String(e.element.className).slice(0, 40))) || e.url || ""; window.__m.lcpHtml = e.element ? e.element.outerHTML.slice(0, 160) : ""; } }).observe({ type: "largest-contentful-paint", buffered: true });
     new PerformanceObserver(l => { for (const e of l.getEntries()) if (!e.hadRecentInput) window.__m.cls += e.value; }).observe({ type: "layout-shift", buffered: true });
     new PerformanceObserver(l => { for (const e of l.getEntries()) if (e.name === "first-contentful-paint") window.__m.fcp = e.startTime; }).observe({ type: "paint", buffered: true });
     new PerformanceObserver(l => { for (const e of l.getEntries()) window.__m.long.push([e.startTime, e.duration]); }).observe({ type: "longtask", buffered: true });
@@ -82,7 +82,7 @@ async function measure(browser, p, pagePath) {
     const fcp = m.m.fcp; const tbt = m.m.long.filter(l => l[0] >= fcp).reduce((a, l) => a + Math.max(0, l[1] - 50), 0);
     const fr = m.frames.slice().sort((a, c) => a - c); const jank = fr.filter(f => f > 25).length;
     const ev = m.m.ev.slice().sort((a, c) => a - c);
-    Object.assign(res, { H, dom: m.dom, lcp: +m.m.lcp.toFixed(0), lcpEl: m.m.lcpEl, cls: +m.m.cls.toFixed(3), fcp: +fcp.toFixed(0), tbt: +tbt.toFixed(0),
+    Object.assign(res, { H, dom: m.dom, lcp: +m.m.lcp.toFixed(0), lcpEl: m.m.lcpEl, lcpHtml: m.m.lcpHtml, cls: +m.m.cls.toFixed(3), fcp: +fcp.toFixed(0), tbt: +tbt.toFixed(0),
       inp: ev.length ? +ev[ev.length - 1].toFixed(0) : 0, frames: fr.length, p50: fr.length ? +fr[Math.floor(fr.length / 2)].toFixed(1) : 0,
       p95: fr.length ? +fr[Math.floor(fr.length * 0.95)].toFixed(1) : 0, jankPct: fr.length ? +(100 * jank / fr.length).toFixed(1) : 0,
       jsKB: +(bytes.js / 1024).toFixed(0), cssKB: +(bytes.css / 1024).toFixed(0), imgKB: +(bytes.img / 1024).toFixed(0), fontKB: +(bytes.font / 1024).toFixed(0),
