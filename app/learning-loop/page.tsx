@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import LoopOrbit from "@/components/charts/LoopOrbit";
-import { Block, NumberBlock, NextStep } from "@/components/SiteBlocks";
+import StepCards from "@/components/w2a/StepCards";
+import { NumberBlock, NextStep } from "@/components/SiteBlocks";
 
 export const metadata: Metadata = {
   title: "The learning loop · TITANOS",
@@ -34,9 +35,7 @@ export default function LearningLoopPage() {
         }}
       />
       <LoopOrbit />
-      {STEPS.map(([a, b], i) => (
-        <Block key={a} point={`${i + 1}. ${a}`}>{b}</Block>
-      ))}
+      <StepCards label="The seven steps" span={4} steps={STEPS.map(([a, b], i) => ({ title: `${i + 1}. ${a}`, body: b }))} />
       <NextStep text="The same loop can run on your own repeat work." href="/ai-delivery" label="See how it applies to you" />
     </>
   );

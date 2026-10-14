@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { Block, NumberBlock, NextStep } from "@/components/SiteBlocks";
+import StepCards from "@/components/w2a/StepCards";
+import { NumberBlock, NextStep } from "@/components/SiteBlocks";
 import stats from "@/lib/stats.json";
 
 export const metadata: Metadata = {
@@ -22,15 +23,15 @@ export default function HowItWorksPage() {
           source: "lib/stats.json",
         }}
       />
-      <Block point="Step one: we read public records about your business.">
-        The same records a customer, a supplier or a stranger can reach: your domain, your public website, official registers.
-      </Block>
-      <Block point="Step two: we grade what we found.">
-        You get a plain reading, in order of effort, with the evidence beside each line.
-      </Block>
-      <Block point="Step three: we hand back a short list of changes.">
-        Your IT provider stays in charge, nobody is replaced, and you decide what happens next.
-      </Block>
+      <StepCards
+        label="The three steps"
+        span={4}
+        steps={[
+          { title: "Step one: we read public records about your business.", body: "The same records a customer, a supplier or a stranger can reach: your domain, your public website, official registers." },
+          { title: "Step two: we grade what we found.", body: "You get a plain reading, in order of effort, with the evidence beside each line." },
+          { title: "Step three: we hand back a short list of changes.", body: "Your IT provider stays in charge, nobody is replaced, and you decide what happens next." },
+        ]}
+      />
       <NextStep text="See step one on your own domain, free." href="/scan" label="Run the free scan" />
     </>
   );

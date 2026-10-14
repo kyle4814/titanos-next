@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
+import { GlowCard } from "@/components/house";
+import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
@@ -55,7 +57,7 @@ export default function Mission() {
         sub="TITANOS exists to prove AI can hand people their hours back instead of taking their jobs, and to grow fast enough to prove it in every country."
       />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div style={WRAP}>
+        <div className="w2a-measure" style={WRAP}>
           <FlexNumber f={FLEX.market} />
           <p style={BODY}>
             Method: the ABS count of actively trading Australian businesses with 5 to 19 staff, June 2026. Each one is carrying hours of
@@ -66,7 +68,7 @@ export default function Mission() {
       </section>
       <OpenLoop>If that much time could come back, where should the money we earn go?</OpenLoop>
       <section style={SECTION}>
-        <div style={WRAP}>
+        <div className="w2a-measure" style={WRAP}>
           <h2 style={H}>Where the money goes as we grow</h2>
           <p style={BODY}>
             For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b>: compute,
@@ -79,10 +81,10 @@ export default function Mission() {
           <h2 style={H}>Who it goes to</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             {GIVE.map(([t, d]) => (
-              <div key={t} style={CARD}>
+              <GlowCard key={t} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 18, fontWeight: 600 }}>{t}</div>
                 <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.6, marginTop: 4 }}>{d}</div>
-              </div>
+              </GlowCard>
             ))}
           </div>
 

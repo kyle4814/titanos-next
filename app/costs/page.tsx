@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
+import { GlowCard } from "@/components/house";
+import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
@@ -89,7 +91,7 @@ export default function Costs() {
         sub="What we offer, how we do business, what it costs to run, and what it can save you, with the working shown. 99% code, 1% AI, and you approve what matters."
       />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div style={WRAP}>
+        <div className="w2a-measure" style={WRAP}>
           <FlexNumber f={FLEX.costPerJob} />
           <p style={BODY}>
             Method: the same 25 jobs run before and after we turned proven steps into plain code, with the cost read from our own usage
@@ -100,14 +102,14 @@ export default function Costs() {
       </section>
       <OpenLoop>If the same job got that much cheaper, what else is going into the price?</OpenLoop>
       <section style={SECTION}>
-        <div style={WRAP}>
+        <div className="w2a-measure" style={WRAP}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             {SPLIT.map(([n, l, d]) => (
-              <div key={l} style={CARD}>
+              <GlowCard key={l} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700 }}>{n}</div>
                 <div style={{ color: "var(--ice)", fontWeight: 600, marginBottom: 6 }}>{l}</div>
                 <div style={{ color: "var(--ice)", opacity: 0.8, fontSize: 14, lineHeight: 1.6 }}>{d}</div>
-              </div>
+              </GlowCard>
             ))}
           </div>
 

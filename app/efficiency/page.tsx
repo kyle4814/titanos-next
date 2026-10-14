@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
+import { GlowCard } from "@/components/house";
+import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { withSeo } from "@/lib/seo";
 import data from "@/lib/efficiency/efficiency.json";
@@ -120,7 +122,7 @@ export default function Efficiency() {
         sub={`${data.headline.caption} Updated ${data.updated}.`}
       />
       <section style={SECTION}>
-        <div style={WRAP}>
+        <div className="w2a-measure" style={WRAP}>
           <p style={BODY}>{data.intro}</p>
           <p style={MUTED}>
             {complete} figures have both a before and an after, {inCount} have at least one side filed, {METRICS.length} are tracked. Round {data.round}.
@@ -132,7 +134,7 @@ export default function Efficiency() {
               if (!m) return null;
               const c = change(m);
               return (
-                <div key={id} style={CARD}>
+                <GlowCard key={id} style={CARD}>
                   <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700 }}>
                     {c.factor ? `${factorText(c.factor)}x` : (c.pct ?? "measuring")}
                   </div>
@@ -141,7 +143,7 @@ export default function Efficiency() {
                     {fmt(m, m.before)} to {fmt(m, m.after)}
                     {c.pct && c.factor ? ` (${c.pct})` : ""}
                   </div>
-                </div>
+                </GlowCard>
               );
             })}
           </div>
@@ -199,7 +201,7 @@ export default function Efficiency() {
           </p>
           <div style={{ display: "grid", gap: 10 }}>
             {METRICS.map((m) => (
-              <div key={m.id} style={CARD}>
+              <GlowCard key={m.id} style={CARD}>
                 <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
                   <strong style={{ color: "var(--ice)", fontSize: 15 }}>{m.label}</strong>
                   <Badge status={m.status} />
@@ -207,7 +209,7 @@ export default function Efficiency() {
                 </div>
                 <p style={{ ...MUTED, margin: "6px 0 2px" }}>How: {m.method}</p>
                 <p style={{ ...MUTED, margin: 0 }}>Source: {m.source}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
 
@@ -230,14 +232,14 @@ export default function Efficiency() {
                 ? { ...raw, label: "Test cases in the main codebase", value: LEDGER.tests_main.value, source: LEDGER.tests_main.source, method: `${LEDGER.tests_main.method}, ${AS_OF_LONG}. ${LEDGER.suites_now.value} automated safety suites guard the control layer.` }
                 : raw;
               return (
-              <div key={h.label} style={CARD}>
+              <GlowCard key={h.label} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700, ...(h.value === null ? { opacity: 0.55, fontStyle: "italic", fontSize: 20 } : {}) }}>
                   {h.value === null ? "measuring" : h.value.toLocaleString("en-AU")}
                 </div>
                 <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{h.label}</div>
                 <div style={MUTED}>{h.method}</div>
                 <div style={MUTED}>Source: {h.source}</div>
-              </div>
+              </GlowCard>
               );
             })}
           </div>

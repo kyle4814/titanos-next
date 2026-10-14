@@ -3,6 +3,7 @@ import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
+import "@/components/w2a/w2a.css";
 import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 import FaqItem from "@/components/FaqItem";
@@ -145,7 +146,7 @@ export default function MethodologyPage() {
       <Analogy k="scouts" />
 
       <SectionReveal style={{ padding: "var(--space-8, 32px) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={FLEX.tests} />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 14 }}>
             Method: one full pass of our own test suite, recorded 8 October 2026. The same habit applies to the security check: every
@@ -171,7 +172,7 @@ export default function MethodologyPage() {
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={1} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="What I Check · What I Never Do"
@@ -190,7 +191,7 @@ export default function MethodologyPage() {
 
       {/* TOOLS USED */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={2} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Tools Used"
@@ -233,7 +234,7 @@ export default function MethodologyPage() {
 
       {/* RESPONSIBLE DISCLOSURE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <OpenLoop>And if something is found, who hears about it first?</OpenLoop>
           <DepthIndex index={3} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Your 90-Day Window to Fix Before Anything Is Published" />
@@ -272,7 +273,7 @@ export default function MethodologyPage() {
 
       {/* SCOPE */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={4} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Scope"
@@ -293,7 +294,7 @@ export default function MethodologyPage() {
 
       {/* WHAT YOU GET */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={5} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="What You Get" lead="The standard external scan output:" />
           <SimpleList
@@ -311,7 +312,7 @@ export default function MethodologyPage() {
 
       {/* HOW I DELIVER */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={6} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="How I Deliver" />
           <p
@@ -368,7 +369,7 @@ export default function MethodologyPage() {
 
       {/* FAQ */}
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={8} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Questions I get" />
           <FaqItem question="Is this a hacking attempt?">
@@ -387,7 +388,7 @@ export default function MethodologyPage() {
 
       {/* REMOVAL */}
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <DepthIndex index={9} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Removal" />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>

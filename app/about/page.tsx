@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
@@ -91,7 +92,7 @@ export default function AboutPage() {
       <Analogy k="department" />
 
       <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={FLEX.engineers} />
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, margin: "18px 0 0" }}>
             Method: the industry COCOMO model, run over the code written since 4 June 2026. It is a model, not a timesheet, and the
@@ -206,7 +207,7 @@ export default function AboutPage() {
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <h2
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
@@ -356,7 +357,7 @@ export default function AboutPage() {
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <h2
             style={{
               fontFamily: "var(--font-display), Georgia, serif",
