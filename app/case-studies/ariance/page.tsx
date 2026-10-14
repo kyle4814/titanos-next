@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import FactBand from "@/components/cases/FactBand";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { ARIANCE as A, arianceVisible, between, clock } from "@/lib/case-studies/ariance";
@@ -51,14 +52,7 @@ export default function ArianceCaseStudy() {
             </p>
           )}
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12 }}>
-            {facts.map(([n, l]) => (
-              <div key={l} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 26, fontWeight: 700 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{l}</div>
-              </div>
-            ))}
-          </div>
+          <FactBand facts={facts} />
 
           <h2 style={H}>{A.brief.heading}</h2>
           <p style={SMALL}>{A.brief.note}</p>

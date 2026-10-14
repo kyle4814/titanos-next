@@ -8,6 +8,8 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { CASES, getCase } from "@/lib/caseStudies";
 import { OpenLoop } from "@/components/FlexBlock";
+import FactBand from "@/components/cases/FactBand";
+import PhoneGallery from "@/components/cases/PhoneGallery";
 
 export const dynamicParams = false;
 
@@ -29,7 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
+const WRAP: CSSProperties = { maxWidth: 1020, margin: "0 auto" };
+const PROSE: CSSProperties = { maxWidth: "54ch", margin: "0 auto" };
 const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
 const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
 
@@ -43,23 +46,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <PageHero badge={c.sector} title={c.title} sub={c.brief} />
       <section style={SECTION}>
         <div style={WRAP}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12 }}>
-            {c.facts.map(([n, l]) => (
-              <div
-                key={l}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "16px 18px",
-                }}
-              >
-                <div style={{ color: "var(--gold)", fontSize: 26, fontWeight: 700 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{l}</div>
-              </div>
-            ))}
-          </div>
+          <FactBand facts={c.facts} />
 
+          <div style={{ ...PROSE, marginTop: 28 }}>
           <p style={BODY}>
             The biggest number comes first, with its method underneath. Every figure is read from the build&apos;s own git log or a dated
             usage reading, and nothing here touched anyone&apos;s private data.
@@ -86,38 +75,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
           <h2 style={H}>How it was checked</h2>
           <p style={BODY}>{c.tested}</p>
-
-          <h2 style={H}>Screens from the working app</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-              gap: 20,
-              justifyItems: "center",
-            }}
-          >
-            {c.shots.map((s) => (
-              <figure key={s.src} style={{ margin: 0, maxWidth: 300 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={s.src}
-                  alt={s.alt}
-                  loading="lazy"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    display: "block",
-                    borderRadius: 28,
-                    border: "6px solid #1c2730",
-                    boxShadow: "0 12px 40px rgba(0,0,0,.5)",
-                  }}
-                />
-                <figcaption style={{ color: "var(--ice)", opacity: 0.75, fontSize: 13, marginTop: 10, textAlign: "center" }}>
-                  {s.alt}
-                </figcaption>
-              </figure>
-            ))}
           </div>
+
+          <h2 style={{ ...H, textAlign: "center", marginTop: 56 }}>Screens from the working app</h2>
+          <PhoneGallery shots={c.shots} />
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 40 }}>
             Would it be okay if we talked about something like this for your business? A free consultation is the first step, and a no is welcome.
