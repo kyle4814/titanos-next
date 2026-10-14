@@ -1,0 +1,39 @@
+/* Homepage-only styles (polish pass 2026-10-15). */
+/* hero h1: tame the 102px oversized headline at 1440 (same words, same figure) */
+.h1.h1 { font-size: clamp(2.625rem, 1rem + 4.2vw, 4.25rem); line-height: 1.04; max-width: 20ch; }
+.sub { max-width: 62ch; }
+
+/* BENTO: asymmetric grid, glass tiles, cursor spotlight, scroll-driven reveal behind @supports */
+.bento {
+  display: grid; gap: 14px; max-width: var(--maxw-wide); margin: 0 auto;
+  grid-template-columns: repeat(6, 1fr);
+}
+.tile {
+  position: relative; overflow: hidden; isolation: isolate;
+  grid-column: span 2; padding: 24px 26px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.01));
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.tile::before { /* cursor spotlight */
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity 0.25s ease;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgb(212 175 55 / 0.14), transparent 70%);
+}
+.tile:hover { border-color: rgb(212 175 55 / 0.45); transform: translateY(-2px); }
+.tile:hover::before { opacity: 1; }
+.tile h3 { margin: 0 0 6px; }
+.tile p { margin: 0; }
+.wide { grid-column: span 4; }
+.tall { grid-column: span 3; }
+.idx { display: block; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) { .bento { grid-template-columns: repeat(2, 1fr); } .tile, .tall { grid-column: span 1; } .wide { grid-column: span 2; } }
+@media (max-width: 560px) { .bento { grid-template-columns: 1fr; } .tile, .tall, .wide { grid-column: span 1; } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tile { animation: tileIn linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    @keyframes tileIn { from { opacity: 0; transform: translateY(26px) scale(0.98); } to { opacity: 1; transform: none; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .tile, .tile:hover { transition: none; transform: none; } }
