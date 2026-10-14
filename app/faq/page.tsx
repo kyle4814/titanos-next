@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { Block, NextStep, jsonLd } from "@/components/SiteBlocks";
+import SectionReveal from "@/components/SectionReveal";
+import s from "@/components/w2b/w2b.module.css";
+import { NextStep, jsonLd } from "@/components/SiteBlocks";
 
 export const metadata: Metadata = {
   title: "FAQ · TITANOS",
@@ -27,9 +29,18 @@ export default function FaqPage() {
         mainEntity: QA.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
       })}
       <PageHero badge="FAQ" title="Straight answers before you ask" />
-      {QA.map(([q, a]) => (
-        <Block key={q} point={q}>{a}</Block>
-      ))}
+      <SectionReveal>
+        <div className={s.wrap}>
+          <div className={s.faq}>
+            {QA.map(([q, a]) => (
+              <details key={q} className={s.item}>
+                <summary className={s.q}>{q}</summary>
+                <p className={s.a}>{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </SectionReveal>
       <NextStep text="Anything we missed? Ask and we will answer." href="/contact" label="Ask a question" />
     </>
   );

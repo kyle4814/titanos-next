@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { CardGrid, Block, NextStep } from "@/components/SiteBlocks";
+import { Block, NextStep } from "@/components/SiteBlocks";
+import SectionReveal from "@/components/SectionReveal";
+import { GlowCard } from "@/components/house";
+import s from "@/components/w2b/w2b.module.css";
 import { SECTORS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -17,7 +20,18 @@ export default function SectorsPage() {
       <Block point="Every sector page shows one number with its label, or says plainly that we have none yet.">
         Where a number is not measured, we write UNKNOWN and say what would measure it.
       </Block>
-      <CardGrid items={SECTORS.map((s) => ({ href: `/sectors/${s.slug}`, title: s.name, text: s.point }))} />
+      <SectionReveal>
+        <ul className={s.sectors}>
+          {SECTORS.map((x) => (
+            <li key={x.slug}>
+              <GlowCard as="a" href={`/sectors/${x.slug}`} className={s.sector}>
+                <h3>{x.name}</h3>
+                <p>{x.point}</p>
+              </GlowCard>
+            </li>
+          ))}
+        </ul>
+      </SectionReveal>
       <NextStep text="Start with the free scan on your own domain." href="/scan" label="Run the free scan" />
     </>
   );

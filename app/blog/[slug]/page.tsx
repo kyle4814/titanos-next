@@ -12,6 +12,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import { SystemLabel, OmegaSeal } from "@/components/Myth";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
+import s from "@/components/w2b/blog.module.css";
 import { POSTS, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 
 export function generateStaticParams() {
@@ -82,6 +83,7 @@ export default async function BlogPostPage({
       <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={faqJsonLd} />
 
+      <div className={s.progress} aria-hidden="true" />
       <PageHero
         badge={post.tag.toUpperCase()}
         title={post.title}
@@ -91,25 +93,8 @@ export default async function BlogPostPage({
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: 12,
-              marginBottom: 32,
-              paddingBottom: 16,
-              borderBottom: "1px solid var(--border)",
-            }}
-          >
-            <Link
-              href="/blog"
-              style={{
-                color: "var(--dim)",
-                fontSize: "var(--fs-sm)",
-              }}
-            >
+          <div className={s.meta}>
+            <Link href="/blog" className={s.back}>
               ← Back to the archive
             </Link>
             <SystemLabel>
@@ -119,7 +104,7 @@ export default async function BlogPostPage({
 
           <BlogBody blocks={post.body} />
 
-          <div style={{ marginTop: "var(--space-16)", textAlign: "center" }}>
+          <div className={s.end}>
             <OmegaSeal caption="Recovered document, end of record." style={{ margin: "0 auto" }} />
           </div>
         </div>
@@ -167,13 +152,7 @@ export default async function BlogPostPage({
               >
                 RELATED RECORDS
               </h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                  gap: 20,
-                }}
-              >
+              <div className={s.grid}>
                 {related.map((r) => (
                   <BlogPostCard key={r.slug} post={r} />
                 ))}

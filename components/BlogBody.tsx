@@ -1,143 +1,51 @@
 import Link from "next/link";
 import AnimatedButton from "./AnimatedButton";
-import { SystemLabel } from "@/components/Myth";
 import type { ContentBlock } from "@/lib/blog";
-
-const pStyle = {
-  color: "var(--text)",
-  fontSize: "var(--fs-body)",
-  lineHeight: 1.85,
-  marginBottom: 20,
-} as const;
-
-const h2Style = {
-  fontFamily: "var(--font-display), Georgia, serif",
-  color: "var(--gold)",
-  fontSize: "var(--fs-h3)",
-  letterSpacing: "0.04em",
-  marginTop: 40,
-  marginBottom: 16,
-} as const;
-
-const h3Style = {
-  fontFamily: "var(--font-display), Georgia, serif",
-  color: "var(--ice)",
-  fontSize: "var(--fs-h4)",
-  letterSpacing: "0.02em",
-  marginTop: 28,
-  marginBottom: 12,
-} as const;
-
-const listStyle = {
-  ...pStyle,
-  paddingLeft: 22,
-} as const;
+import s from "./w2b/blog.module.css";
 
 export default function BlogBody({ blocks }: { blocks: ContentBlock[] }) {
   return (
-    <div>
+    <div className={s.prose}>
       {blocks.map((block, i) => {
         switch (block.type) {
           case "h2":
-            return (
-              <h2 key={i} style={h2Style}>
-                {block.text}
-              </h2>
-            );
+            return <h2 key={i} className={s.h2}>{block.text}</h2>;
           case "h3":
-            return (
-              <h3 key={i} style={h3Style}>
-                {block.text}
-              </h3>
-            );
+            return <h3 key={i} className={s.h3}>{block.text}</h3>;
           case "p":
-            return (
-              <p key={i} style={pStyle}>
-                {block.text}
-              </p>
-            );
+            return <p key={i} className={s.p}>{block.text}</p>;
           case "p-link":
             return (
-              <p key={i} style={pStyle}>
+              <p key={i} className={s.p}>
                 {block.before}
-                <Link href={block.href} style={{ color: "var(--ice)" }}>
-                  {block.linkText}
-                </Link>
+                <Link href={block.href} className={s.link}>{block.linkText}</Link>
                 {block.after}
               </p>
             );
           case "ul":
             return (
-              <ul key={i} style={listStyle}>
-                {block.items.map((item, j) => (
-                  <li key={j} style={{ marginBottom: 10 }}>
-                    {item}
-                  </li>
-                ))}
+              <ul key={i} className={s.list}>
+                {block.items.map((item, j) => <li key={j}>{item}</li>)}
               </ul>
             );
           case "ol":
             return (
-              <ol key={i} style={listStyle}>
-                {block.items.map((item, j) => (
-                  <li key={j} style={{ marginBottom: 10 }}>
-                    {item}
-                  </li>
-                ))}
+              <ol key={i} className={s.list}>
+                {block.items.map((item, j) => <li key={j}>{item}</li>)}
               </ol>
             );
           case "quote":
             return (
-              <blockquote
-                key={i}
-                style={{
-                  borderTop: "1px solid rgb(var(--gold-rgb) / 0.30)",
-                  borderBottom: "1px solid rgb(var(--gold-rgb) / 0.30)",
-                  background:
-                    "linear-gradient(180deg, rgb(var(--gold-rgb) / 0.05), transparent 60%)",
-                  padding: "24px clamp(18px, 4vw, 28px)",
-                  margin: "32px 0",
-                  color: "var(--ice)",
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  fontStyle: "italic",
-                  fontSize: "var(--fs-lg)",
-                  lineHeight: 1.6,
-                }}
-              >
+              <blockquote key={i} className={s.quote}>
                 {block.text}
-                {block.attribution && (
-                  <div className="label-system" style={{ marginTop: 12, fontStyle: "normal" }}>
-                    {block.attribution}
-                  </div>
-                )}
+                {block.attribution && <div className={`label-system ${s.attr}`}>{block.attribution}</div>}
               </blockquote>
             );
           case "cta":
             return (
-              <div
-                key={i}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--gold-dim)",
-                  borderRadius: "var(--radius-sm)",
-                  padding: "24px clamp(18px, 4vw, 28px)",
-                  margin: "32px 0",
-                  textAlign: "center",
-                }}
-              >
-                <p
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    marginBottom: 18,
-                  }}
-                >
-                  {block.text}
-                </p>
-                <AnimatedButton href={block.href} variant="primary">
-                  {block.label}
-                </AnimatedButton>
+              <div key={i} className={s.cta}>
+                <p className={s.ctaText}>{block.text}</p>
+                <AnimatedButton href={block.href} variant="primary">{block.label}</AnimatedButton>
               </div>
             );
           default:
