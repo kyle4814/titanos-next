@@ -7,6 +7,7 @@ import { SystemLabel } from "@/components/Myth";
 import { postsSortedByDate } from "@/lib/blog";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import s from "@/components/w2b/blog.module.css";
 
 const baseMetadata: Metadata = {
   title: "Blog: Titanos",
@@ -81,15 +82,9 @@ export default function BlogIndexPage() {
           <SystemLabel style={{ textAlign: "center", marginBottom: 32 }}>
             {String(posts.length).padStart(2, "0")} documents recovered · sorted by date logged
           </SystemLabel>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 20,
-            }}
-          >
-            {posts.map((post) => (
-              <BlogPostCard key={post.slug} post={post} />
+          <div className={s.grid}>
+            {posts.map((post, i) => (
+              <BlogPostCard key={post.slug} post={post} featured={i === 0} />
             ))}
           </div>
           <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "32px auto 0", textAlign: "center", maxWidth: "var(--maxw-prose)" }}>
