@@ -11,6 +11,7 @@ import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
 import { STATS } from "@/lib/stats";
+import BentoGrid from "@/components/home/BentoGrid";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import CostCurve from "@/components/charts/CostCurve";
 import LoopOrbit from "@/components/charts/LoopOrbit";
@@ -493,33 +494,7 @@ export default function Home() {
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SectionHeading title="If it's repetitive, we automate it." />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 18,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
-            {WHAT_WE_BUILD.map((w) => (
-              <div
-                key={w.title}
-                data-phi-reveal
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "22px 24px",
-                }}
-              >
-                <h3 style={{ fontFamily: "var(--font-body), system-ui, sans-serif", color: "var(--ice)", fontSize: "var(--fs-lg)", fontWeight: 600, marginBottom: 6, lineHeight: 1.35 }}>
-                  {w.title}
-                </h3>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.65 }}>{w.body}</p>
-              </div>
-            ))}
-          </div>
+          <BentoGrid items={WHAT_WE_BUILD} />
         </div>
       </SectionReveal>
 
