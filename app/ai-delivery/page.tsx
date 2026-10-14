@@ -4,7 +4,9 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import FaqItem from "@/components/FaqItem";
+import Faq from "@/components/w2e/Faq";
+import s from "@/components/w2e/w2e.module.css";
+import { GlowCard, BentoGrid, BentoItem } from "@/components/house";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import Testimonials from "@/components/Testimonials";
 import { DISPLAY } from "@/lib/pricing";
@@ -147,6 +149,7 @@ export default function AiDeliveryPage() {
           Get your free consultation and report →
         </AnimatedButton>
       </PageHero>
+      <div className={s.scope}>
       <Bluf replaced>
         Three monthly partnerships that build the AI system taking repetitive work off your team, with the first one live in month 1.
       </Bluf>
@@ -154,7 +157,7 @@ export default function AiDeliveryPage() {
 
       <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
         <FlexGrid items={[FLEX.engineers, FLEX.costPerJob]} />
-        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px auto 0", textAlign: "center", maxWidth: "var(--maxw-prose)" }}>
+        <p className={s.intro}>
           Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. I build on
           the tools you already use, and I only touch accounts you have given me access to. Nobody is replaced, your IT
           person stays in charge and is welcome in every meeting, and the price of each tier is below.
@@ -176,56 +179,27 @@ export default function AiDeliveryPage() {
       </section>
 
       {/* TIERS */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={1} total={5} />
           <SystemLabel style={{ marginBottom: 10 }}>Partnership tiers · scoped on the audit call</SystemLabel>
           <SectionHeading title="Choose Your Partnership" lead={`Three retainer tiers. ${DISPLAY.AI_RETAINER_MIN} on all of them.`} />
-          <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
+          <div className={s.tiers}>
             {TIERS.map((t) => (
-              <article
-                key={t.tier}
-                style={{
-                  background: "var(--card)",
-                  border: t.popular ? "1px solid var(--gold)" : "1px solid var(--gold-dim)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "26px 24px",
-                  position: "relative",
-                }}
-              >
-                {t.popular && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: -12,
-                      left: 24,
-                      background: "var(--gold)",
-                      color: "#0a0a0a",
-                      fontSize: "var(--fs-xs)",
-                      fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      padding: "3px 10px",
-                      borderRadius: 999,
-                    }}
-                  >
-                    Most Popular
-                  </span>
-                )}
-                <h3 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-lg)", marginBottom: 6 }}>
-                  {t.name}
-                </h3>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-h3)", fontWeight: 700, marginBottom: 4 }}>{t.price}</p>
-                <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", marginBottom: 14 }}>{DISPLAY.AI_RETAINER_MIN}</p>
-                <p style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", marginBottom: 10 }}>{t.who}</p>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginBottom: 18 }}>{t.body}</p>
+              <GlowCard key={t.tier} as="article" className={`${s.tier}${t.popular ? ` ${s.tierPop}` : ""}`}>
+                {t.popular && <span className={s.badge}>Most Popular</span>}
+                <h3 className={s.tierName}>{t.name}</h3>
+                <p className={s.price}>{t.price}</p>
+                <p className={s.min}>{DISPLAY.AI_RETAINER_MIN}</p>
+                <p className={s.who}>{t.who}</p>
+                <p className={s.tierBody}>{t.body}</p>
                 <AnimatedButton href={`/order/ai?tier=${t.tier}`} variant={t.popular ? "primary" : "secondary"}>
                   Order {t.name} →
                 </AnimatedButton>
-              </article>
+              </GlowCard>
             ))}
           </div>
-          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 24 }}>
+          <p className={s.small}>
             Every plan includes: {INCLUDED.join(" · ")}
           </p>
         </div>
@@ -236,23 +210,20 @@ export default function AiDeliveryPage() {
       <div className="divider-gold" />
 
       {/* WHAT I BUILD */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={2} total={5} />
           <SectionHeading title="What We Build" lead="If it is repetitive, it is a candidate. Which of these already eats your week?" />
-          <div className="grid-auto-cards" style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
-            {WHAT_I_BUILD.map((item) => (
-              <article
-                key={item.title}
-                style={{ background: "var(--card)", border: "1px solid var(--gold-dim)", borderRadius: "var(--radius-md)", padding: "26px 24px" }}
-              >
-                <h3 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-lg)", marginBottom: 10, lineHeight: 1.3 }}>
-                  {item.title}
-                </h3>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{item.body}</p>
-              </article>
+          <BentoGrid className={s.wide}>
+            {WHAT_I_BUILD.map((item, i) => (
+              <BentoItem key={item.title} span={i < 3 ? 4 : 6} style={{ padding: 0 }}>
+                <GlowCard as="article" className={s.card}>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </GlowCard>
+              </BentoItem>
             ))}
-          </div>
+          </BentoGrid>
         </div>
       </SectionReveal>
 
@@ -261,7 +232,7 @@ export default function AiDeliveryPage() {
       <div className="divider-gold" />
 
       {/* HOW IT WORKS */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={3} total={5} />
           <SectionHeading title="How It Works" lead="Five steps, and the first one is a free conversation." />
@@ -274,14 +245,14 @@ export default function AiDeliveryPage() {
       <div className="divider-gold" />
 
       {/* PRIVACY */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={4} total={5} />
           <SectionHeading title="Privacy Built In, Not Bolted On" lead="Compliance is my other practice, so it comes along for free." />
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-lg)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.7, textAlign: "center" }}>
+          <p className={s.proseLg}>
             Building a chatbot is the easy part. Making it privacy-compliant by design is where my other
             practice comes in, because compliance is what I do all day. See{" "}
-            <a href="/compliance" style={{ color: "var(--gold)" }}>what that covers</a>.
+            <a href="/compliance" className={s.link}>what that covers</a>.
           </p>
           <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>
             I won&apos;t build you an automation that creates a compliance problem I&apos;d then
@@ -296,17 +267,11 @@ export default function AiDeliveryPage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={5} total={5} />
           <SectionHeading title="Questions I Get" lead="The ones people ask before they commit to anything." />
-          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-            {FAQS.map((f) => (
-              <FaqItem key={f.q} question={f.q}>
-                {f.a}
-              </FaqItem>
-            ))}
-          </div>
+          <Faq items={FAQS} />
         </div>
       </SectionReveal>
 
@@ -315,10 +280,10 @@ export default function AiDeliveryPage() {
       {/* FINAL CTA */}
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />
-        <h2 style={{ fontFamily: "var(--font-display), Georgia, serif", color: "var(--gold)", fontSize: "var(--fs-h2)", fontWeight: 700, marginBottom: 14, letterSpacing: "0.05em" }}>
+        <h2 className={s.ctaH}>
           Would it be okay if we started with a free chat?
         </h2>
-        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", maxWidth: "var(--maxw-prose)", margin: "0 auto 32px", lineHeight: 1.7 }}>
+        <p className={s.ctaP}>
           No cost, no obligation, no pitch deck. Just a straight conversation about the most repetitive job in your business, and a report of your own to keep. If it is not for you, a no is welcome.
         </p>
         <AnimatedButton href="/audit" variant="primary">
@@ -331,6 +296,7 @@ export default function AiDeliveryPage() {
         ]}
       />
       <FreeStart />
+      </div>
     </>
   );
 }
