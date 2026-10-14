@@ -3,6 +3,7 @@ import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import W2d from "@/components/w2d/W2d";
 
 const META_TITLE = "Parallax: the simplest way to bring AI in | TITANOS";
 const META_DESC =
@@ -52,7 +53,7 @@ const NEVER = [
 
 export default function Parallax() {
   return (
-    <div>
+    <W2d>
       <PageHero
         badge="Parallax"
         title="The simplest way to bring AI into a large organisation."
@@ -114,6 +115,6 @@ export default function Parallax() {
           </div>
         </div>
       </section>
-    </div>
+    </W2d>
   );
 }

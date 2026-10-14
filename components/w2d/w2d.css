@@ -1,0 +1,21 @@
+/* components/w2d/w2d.css: wave 2d extras on top of w2c (legal, form and long-read pages).
+   Presentation only. Tokens only. No initial opacity, no JS. Scoped under .w2c. */
+
+/* Long-read rhythm: comfortable list spacing and heading separation. */
+.w2c main li + li, .w2c ul li + li, .w2c ol li + li { margin-top: 0.35em; }
+.w2c h2 + p, .w2c h3 + p { margin-top: 0.6em; }
+
+/* Form fields inside wrapped pages: visible keyboard ring, tap-size floor, no iOS zoom. Styling only. */
+.w2c input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.w2c select,
+.w2c textarea { min-block-size: 44px; font-size: max(16px, 1rem); }
+.w2c input:focus-visible,
+.w2c select:focus-visible,
+.w2c textarea:focus-visible,
+.w2c button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.w2c button:not(:disabled), .w2c [type="submit"] { min-block-size: 44px; }
+
+/* Code-like and long tokens never force sideways scroll on a phone. */
+.w2c code, .w2c pre { overflow-wrap: anywhere; }
+.w2c pre { max-inline-size: 100%; overflow-x: auto; }
+.w2c img, .w2c video { max-inline-size: 100%; block-size: auto; }

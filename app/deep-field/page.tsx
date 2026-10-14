@@ -4,6 +4,7 @@ import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SpaceImage from "@/components/SpaceImage";
 import { SPACE_IMAGES } from "@/lib/space-images";
+import W2d from "@/components/w2d/W2d";
 
 const META_TITLE = "The deep field: real images of the universe | TITANOS";
 const META_DESC =
@@ -27,6 +28,7 @@ const CAP: CSSProperties = { padding: "10px 14px 14px", color: "var(--ice)", fon
 
 export default function DeepField() {
   return (
+    <W2d>
     <main>
       <PageHero
         badge="The deep field"
@@ -49,5 +51,6 @@ export default function DeepField() {
         </div>
       </section>
     </main>
+    </W2d>
   );
 }

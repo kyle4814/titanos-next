@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import DemoBanner from "@/components/tix/DemoBanner";
+import W2d from "@/components/w2d/W2d";
 
 export const metadata: Metadata = {
   title: "TIX-999 demo | TITANOS",
@@ -12,9 +13,11 @@ const WRAP: CSSProperties = { maxWidth: 560, margin: "0 auto", padding: "110px 1
 
 export default function TixLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main style={WRAP}>
-      <DemoBanner />
-      {children}
-    </main>
+    <W2d>
+      <main style={WRAP}>
+        <DemoBanner />
+        {children}
+      </main>
+    </W2d>
   );
 }

@@ -13,6 +13,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
+import W2d from "@/components/w2d/W2d";
 
 // The biggest true number for this page: the size of the report you can read in full before you pay.
 const PACK_FLEX: Flex = {
@@ -186,7 +187,7 @@ export default function OurEvidencePackPage() {
   };
 
   return (
-    <>
+    <W2d>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -586,6 +587,6 @@ export default function OurEvidencePackPage() {
       </SectionReveal>
       <FrontLoad/>
       <FreeStart />
-    </>
+    </W2d>
   );
 }

@@ -6,6 +6,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import WelcomeForm from "@/components/WelcomeForm";
 import { ALL_OFFERS, getOffer } from "@/lib/offers";
+import W2d from "@/components/w2d/W2d";
 
 export const dynamicParams = false;
 
@@ -26,7 +27,7 @@ export default async function WelcomePage({ params }: { params: Promise<{ slug: 
   const o = getOffer(slug);
   if (!o || o.status !== "READY") notFound();
   return (
-    <>
+    <W2d>
       <PageHero
         badge="TITANOS · WELCOME"
         title="Welcome. Tell us about your business."
@@ -54,6 +55,6 @@ export default async function WelcomePage({ params }: { params: Promise<{ slug: 
           <p>Questions first? Email kyle@titanos.tech. No GST is charged.</p>
         </div>
       </SectionReveal>
-    </>
+    </W2d>
   );
 }
