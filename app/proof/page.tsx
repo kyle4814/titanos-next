@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import ProofWall from "@/components/charts/ProofWall";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX, type Flex } from "@/lib/flex";
+import Tiles, { type TileItem } from "@/components/proof/Tiles";
 
 const REPLAY: Flex = {
   big: "250 of 250 tests, 57 saved versions",
@@ -14,6 +15,13 @@ const REPLAY: Flex = {
   analogy: "Like watching a builder's time-lapse where the inspector signs off every single frame, not just the finished house.",
   source: "/proof/trading-app-build-replay.log. Tests grew from 20 at 05:41 to 250 at 09:37 on 7 October 2026, Brisbane time.",
 };
+
+const RECEIPTS: TileItem[] = [
+  { n: "250 of 250", l: "trading app tests passed", tag: "RECORDED", pct: 100 },
+  { n: "83 of 83", l: "SpoofGuard tests passed", tag: "RECORDED", pct: 100 },
+  { n: "57", l: "saved versions replayed, one by one", tag: "RECORDED" },
+  { n: "3.5 hours", l: "idea to a working, tested app", tag: "RECORDED" },
+];
 
 const META_TITLE = "Proof: logs, timestamps and a replayable build | TITANOS";
 const META_DESC =
@@ -57,6 +65,7 @@ export default function Proof() {
       <ProofWall />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
         <div style={WRAP}>
+          <Tiles label="Recorded build figures" items={RECEIPTS} />
           <FlexNumber f={REPLAY} />
           <p style={BODY}>
             Method: we checked out each saved version in order and ran its tests, and the command is shown below so you can repeat it.
