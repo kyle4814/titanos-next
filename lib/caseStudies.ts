@@ -59,6 +59,45 @@ export const CASES: CaseStudy[] = [
     ],
   },
   {
+    slug: "sales-coaching-course",
+    sector: "Sales coaching",
+    title: "A 1,900-lesson sales course with its own coach, built in about 27 hours",
+    teaser:
+      "A private, phone-first training course for a sales coach: 190 modules, 1,900 lessons, quizzes, spaced review and an AI coach for questions, role-play and speaking practice. 412 commits and 35 automated tests passing.",
+    cover: "/case-studies/sales-course-overview.webp",
+    coverAlt: "The course home screen on a phone: level, progress and the first module",
+    facts: [
+      ["About 27 hours", "from the first commit (10:44, 9 October 2026) to the last (13:48, 10 October 2026)"],
+      ["1,900", "lessons in 190 modules, about 2.7 million words, each lesson with a five-question quiz"],
+      ["412", "commits in the project history"],
+      ["35 / 35", "automated tests passing"],
+    ],
+    brief:
+      "A sales coach wanted her whole method available as a course her student could carry on a phone: lessons to read, quizzes to prove it landed, and someone to practise on at any hour.",
+    built: [
+      "A course reader built for a phone: 190 modules, each with a boss quiz at the end, and each lesson opens only once the one before it is passed.",
+      "Levels, XP and badges, so progress is visible without any nagging.",
+      "Spaced review: a passed lesson comes back after 1, 3, 7 and 21 days, and a missed question resets the clock.",
+      "A tutor that answers from the lessons themselves and links to the lesson it used. If nothing in the course matches, it says so instead of guessing.",
+      "A role-play mode with different prospects to practise on, and a scorecard against the coach's own method.",
+      "A speaking mode that measures pace and filler words from a recording and gives one tip.",
+      "A single private passphrase login with a lockout after five wrong tries, a forced change from any temporary passphrase and a daily cap on the AI coach so it can never run up a bill.",
+    ],
+    speed:
+      "The first commit landed at 10:44 on 9 October and the last at 13:48 the next day, about 27 hours later. The working app, with a placeholder course, was committed within 4 minutes of the start. The first real module was integrated at 12:07 on day one, and the other 189 followed one module at a time, each one checked and added to the index before the next.",
+    cost:
+      "No extra spend. The build ran inside flat-rate AI subscriptions that were already paid for. Usage was not metered separately for this build, so no per-build dollar figure is claimed. The live coach is designed to run inside a free daily allowance, with a hard cap built in.",
+    tested:
+      "35 automated tests pass. They cover the login and lockout, server-side quiz marking, the review schedule, the boss quizzes, the tutor, role-play and speech analysis, and the daily cap. A separate check confirms all 1,900 lessons match the course format and the index. At the time of writing the app has not been deployed, and the AI coach was tested with stand-in replies rather than a live model, so live coach quality is still to be checked once it is online.",
+    shots: [
+      { src: "/case-studies/sales-course-overview.webp", alt: "Home: level, progress and the first module's lessons" },
+      { src: "/case-studies/sales-course-lesson.webp", alt: "A lesson: short sections written to be read on a phone" },
+      { src: "/case-studies/sales-course-roleplay.webp", alt: "Role-play: a practice prospect, with score and new-prospect buttons" },
+      { src: "/case-studies/sales-course-speech.webp", alt: "Speaking practice: record 30 to 60 seconds and get pace and filler-word feedback" },
+      { src: "/case-studies/sales-course-progress.webp", alt: "Progress: level, XP, lessons passed and the daily coach allowance" },
+    ],
+  },
+  {
     slug: "trading-app",
     sector: "Education and practice trading",
     title: "A full trading-education app, idea to working product in one morning",
