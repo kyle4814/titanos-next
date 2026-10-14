@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import Tiles from "@/components/proof/Tiles";
 
 import { int, dec, v, AS_OF_LONG } from "@/lib/ledger";
 const META_TITLE = "Speed and precision | TITANOS";
@@ -83,14 +84,7 @@ export default function Speed() {
       <OpenLoop>One finished job every six minutes sounds quick. But is quick any use if it is wrong?</OpenLoop>
       <section style={SECTION}>
         <div style={WRAP}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
-            {FACTS.map(([n, l]) => (
-              <div key={l} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{l}</div>
-              </div>
-            ))}
-          </div>
+          <Tiles label="Measured speed figures" items={FACTS.map(([n, l]) => ({ n, l: l.replace(/^[A-Z]+: /, ""), tag: l.split(": ")[0] }))} />
 
           <h2 style={H}>Why it is fast</h2>
           <p style={BODY}>Think of a kitchen where the prep is already chopped. Nobody works faster, there is just less to do at the last minute.</p>

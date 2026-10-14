@@ -9,6 +9,7 @@ import { OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import Tiles from "@/components/proof/Tiles";
 import { int, dec, aud, audShort, v, times, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
 
 const META_TITLE = "What one engineer built, and the maths | TITANOS";
@@ -62,27 +63,6 @@ const AUTOMATES = [
   "Test-gated engineering: every change must pass the automated test gate before it lands.",
 ];
 
-function Tile({ label, value, note, strong }: { label: string; value: string; note: string; strong?: boolean }) {
-  return (
-    <div style={{ ...CARD, textAlign: "center", borderColor: strong ? "var(--gold)" : "var(--border)" }}>
-      <div style={{ fontSize: "var(--fs-xs)", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--dim)" }}>
-        {label}
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          fontSize: "var(--fs-h2)",
-          color: "var(--gold)",
-          margin: "8px 0",
-        }}
-      >
-        {value}
-      </div>
-      <div style={{ fontSize: "var(--fs-sm)", color: "var(--dim)" }}>{note}</div>
-    </div>
-  );
-}
-
 function Block({ id, title, lead, children }: { id?: string; title: string; lead?: ReactNode; children?: ReactNode }) {
   return (
     <>
@@ -116,6 +96,15 @@ export default function EngineeringPage() {
 
       <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
         <div style={PROSE}>
+          <Tiles
+            label="Measured build figures"
+            items={[
+              { n: int("estate_sloc"), l: "lines of production code", tag: "MEASURED" },
+              { n: int("estate_repos"), l: "repositories", tag: "MEASURED" },
+              { n: dec("estate_ey"), l: "engineer-years (COCOMO)", tag: "MODELLED" },
+              { n: int("tests_main"), l: "test cases in the main engine", tag: "MEASURED" },
+            ]}
+          />
           <FlexNumber f={FLEX.engineers} />
           <p style={{ ...BODY, marginTop: 18 }}>
             Method in one line: count the lines of code, put them through the published COCOMO formulas, and compare. Before you ask,
@@ -179,11 +168,14 @@ export default function EngineeringPage() {
           Even counting only 10% of the model, that is {aud("annual_cost_10pct_aud")} a year of engineering. Even at 2%,
           {aud("annual_cost_2pct_aud")} a year. The full model says {aud("annual_cost_aud")} a year.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 14 }}>
-          <Tile label="Floor (2%)" value={audShort("annual_cost_2pct_aud")} note="per year, MODELLED" />
-          <Tile label="Counted (10%)" value={audShort("annual_cost_10pct_aud")} note="per year, MODELLED" strong />
-          <Tile label="Full model" value={audShort("annual_cost_aud")} note="per year, MODELLED" />
-        </div>
+        <Tiles
+          label="Annual cost, three counting rules"
+          items={[
+            { n: audShort("annual_cost_2pct_aud"), l: "Floor (2%), per year", tag: "MODELLED" },
+            { n: audShort("annual_cost_10pct_aud"), l: "Counted (10%), per year", tag: "MODELLED" },
+            { n: audShort("annual_cost_aud"), l: "Full model, per year", tag: "MODELLED" },
+          ]}
+        />
       </Block>
 
       <Block title="What a dollar of compute buys">
