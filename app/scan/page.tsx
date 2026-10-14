@@ -14,6 +14,7 @@ import { DISPLAY } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import W2c from "@/components/w2c/W2c";
 import type { Flex } from "@/lib/flex";
 
 // The biggest true number for this page: what the same check found on my own site, published as found.
@@ -211,7 +212,7 @@ export default function ScanPage() {
   };
 
   return (
-    <>
+    <W2c>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -654,7 +655,7 @@ export default function ScanPage() {
         ]}
       />
       <FreeStart />
-    </>
+    </W2c>
   );
 }
 

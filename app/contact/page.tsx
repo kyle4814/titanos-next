@@ -8,6 +8,7 @@ import { Inscription, SystemLabel } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2c from "@/components/w2c/W2c";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
@@ -25,7 +26,7 @@ export const metadata: Metadata = withSeo("/contact", baseMetadata);
 
 export default function ContactPage() {
   return (
-    <>
+    <W2c>
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
@@ -51,7 +52,9 @@ export default function ContactPage() {
       <OpenLoop>So how do you actually reach him?</OpenLoop>
 
       <section aria-label="Message Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <ContactButtons heading="Message Kyle for a free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
+        <div className="w2c-contact">
+          <ContactButtons heading="Message Kyle for a free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
+        </div>
       </section>
 
       <div className="divider-gold" />
@@ -67,6 +70,7 @@ export default function ContactPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="container-vault" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <div
+            className="w2c-card"
             style={{
               background: "var(--card)",
               border: "1px solid var(--border)",
@@ -101,6 +105,6 @@ export default function ContactPage() {
         </div>
       </SectionReveal>
       <FrontLoad/>
-    </>
+    </W2c>
   );
 }

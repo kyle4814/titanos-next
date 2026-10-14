@@ -13,6 +13,7 @@ import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2c from "@/components/w2c/W2c";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
@@ -87,7 +88,7 @@ export default function AuditPage() {
   };
 
   return (
-    <>
+    <W2c>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -283,6 +284,6 @@ export default function AuditPage() {
         />
       </SectionReveal>
       <FrontLoad/>
-    </>
+    </W2c>
   );
 }
