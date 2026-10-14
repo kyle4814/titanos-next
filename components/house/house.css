@@ -1,0 +1,84 @@
+/* House look building blocks (components/house). Imported once from app/layout.tsx. */
+
+/* GlowCard: glass surface + cursor spotlight */
+.h-glow {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--border, rgb(255 255 255 / 0.1));
+  border-radius: var(--radius-lg, 12px);
+  background: rgb(18 14 12 / 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  transition: border-color 0.3s ease, transform 0.3s var(--phi-ease, ease);
+  text-decoration: none;
+  color: inherit;
+}
+.h-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--mx) var(--my), rgb(var(--gold-rgb, 232 184 85) / 0.16), transparent 60%);
+  transition: opacity 0.3s ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .h-glow:hover { border-color: var(--gold-dim, rgb(232 184 85 / 0.5)); transform: translateY(-2px); }
+  .h-glow:hover::before { opacity: 1; }
+}
+.h-glow:focus-visible { outline: 2px solid var(--gold, #e8b855); outline-offset: 3px; }
+
+/* BentoGrid: 12 columns on desktop, stacked on phones */
+.h-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--phi-s3, 1rem);
+}
+.h-bento__item { min-width: 0; padding: var(--phi-s4, 1.625rem); }
+@media (min-width: 768px) {
+  .h-bento { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: dense; }
+  .h-span-3 { grid-column: span 3; }
+  .h-span-4 { grid-column: span 4; }
+  .h-span-5 { grid-column: span 5; }
+  .h-span-6 { grid-column: span 6; }
+  .h-span-7 { grid-column: span 7; }
+  .h-span-8 { grid-column: span 8; }
+  .h-span-12 { grid-column: 1 / -1; }
+  .h-rows-2 { grid-row: span 2; }
+  .h-rows-3 { grid-row: span 3; }
+}
+
+/* Ticker */
+.h-ticker {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.h-ticker__track { display: flex; width: max-content; animation: h-ticker var(--h-ticker-s, 40s) linear infinite; }
+.h-ticker__row { display: flex; gap: var(--phi-s4, 1.625rem); padding-right: var(--phi-s4, 1.625rem); list-style: none; margin: 0; }
+.h-ticker__item { white-space: nowrap; }
+.h-ticker:hover .h-ticker__track, .h-ticker:focus-within .h-ticker__track { animation-play-state: paused; }
+@keyframes h-ticker { to { transform: translate3d(-50%, 0, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .h-ticker { -webkit-mask-image: none; mask-image: none; }
+  .h-ticker__track { animation: none; width: auto; flex-wrap: wrap; }
+  .h-ticker__row[aria-hidden="true"] { display: none; }
+  .h-ticker__row { flex-wrap: wrap; }
+}
+
+/* ShaderBackdrop: the CSS gradient is the floor; the shader paints over it when live */
+.h-shader {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0b0908 0%, #17110b 55%, #231a0c 100%);
+}
+.h-shader > * { animation: h-fade 1.2s ease both; }
+@keyframes h-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .h-shader > * { animation: none; } }

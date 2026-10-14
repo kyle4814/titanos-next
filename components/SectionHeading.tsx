@@ -52,6 +52,7 @@ export default function SectionHeading({
             maxWidth: "var(--maxw-prose)",
             margin: "18px auto 0",
             lineHeight: 1.7,
+            textWrap: "pretty",
           }}
         >
           {lead}

@@ -81,6 +81,7 @@ export default function PageHero({
               margin: "0 auto 16px",
               fontWeight: 300,
               lineHeight: 1.6,
+              textWrap: "pretty",
             }}
           >
             {tagline}

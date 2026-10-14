@@ -170,7 +170,7 @@ export default function Footer() {
         </div>
       </div>
       <SigilSeals />
-      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, opacity: 0.6, margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
+      <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, color: "var(--dim)", margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
     </footer>
   );
 }

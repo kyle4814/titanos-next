@@ -186,7 +186,7 @@ function PrimaryCTA({
     fontWeight: 400,
     fontStyle: "italic",
     fontSize: "var(--fs-sm)",
-    letterSpacing: "0.08em",
+    letterSpacing: "0.04em",
     background: "transparent",
     cursor: "pointer",
     // Magnetic translate + colour/border/filter transitions.

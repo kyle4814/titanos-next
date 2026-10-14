@@ -97,15 +97,12 @@ export default function Nav() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : -8 }}
       transition={{ duration: reduce ? 0 : 0.5, ease: [0, 0, 0.2, 1] }}
+      className="site-nav"
       style={{
         position: "sticky",
         top: 0,
         zIndex: 30,
-        padding: "20px",
         borderBottom: "1px solid var(--border)",
-        background: "rgb(10 7 7 / 0.85)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
       }}
     >
       <div

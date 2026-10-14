@@ -5,6 +5,7 @@ import { IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import "./design-system.css";
+import "../components/house/house.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";

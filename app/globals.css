@@ -185,7 +185,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip, not hidden: hidden turns body into a scroll container and breaks the sticky nav */
   position: relative;
   min-height: 100vh;
 }
@@ -1047,3 +1047,72 @@ p > a:not([class]), li > a:not([class]) {
 @keyframes ph-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 .ph-in { animation: ph-in 0.5s cubic-bezier(0, 0, 0.2, 1) backwards; }
 @media (prefers-reduced-motion: reduce) { .ph-in { animation: none; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOUNDATION POLISH (2026-10-15): glass nav, scroll-driven reveals,
+   type + spacing finish. All motion behind @supports and
+   prefers-reduced-motion: no-preference; every fallback is the
+   existing behaviour.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Anchored sections clear the sticky nav. */
+html { scroll-padding-top: 88px; }
+
+/* Body copy: no one-word last lines, no ragged orphans. */
+p, li, blockquote { text-wrap: pretty; }
+
+/* Glass sticky nav. Padding is a variable so the scroll-driven condense can shrink it. */
+.site-nav {
+  --nav-py: 20px;
+  padding: var(--nav-py) 20px;
+  background: linear-gradient(180deg, rgb(10 7 7 / 0.82), rgb(10 7 7 / 0.62));
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  view-transition-name: site-nav;
+  box-shadow: 0 1px 0 rgb(var(--gold-rgb) / 0.06);
+}
+.site-nav::after { /* reading-progress hairline */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav {
+      animation: nav-condense linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 140px;
+    }
+    .site-nav::after {
+      animation: nav-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes nav-condense { to { --nav-py: 11px; } }
+@property --nav-py { syntax: "<length>"; inherits: true; initial-value: 20px; }
+@keyframes nav-progress { to { transform: scaleX(1); } }
+
+/* Scroll-driven reveal: replaces the IntersectionObserver path wherever the browser supports it.
+   SectionReveal still sets data-reveal for Firefox and older Safari, where this block is skipped. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      transition: none;
+      animation: sd-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+@keyframes sd-reveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
