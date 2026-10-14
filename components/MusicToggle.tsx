@@ -249,6 +249,14 @@ export default function MusicToggle() {
           border-color: var(--gold);
           box-shadow: 0 0 12px rgb(var(--gold-rgb) / 0.35);
         }
+        .music-toggle button { border-color: var(--gold); }
+        @supports (animation-timeline: scroll()) {
+          @media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+            @keyframes music-reveal { from { opacity: 0; pointer-events: none; } to { opacity: 1; pointer-events: auto; } }
+            .music-toggle { opacity: 0; pointer-events: none; animation: music-reveal linear both; animation-timeline: scroll(root block); animation-range: 40vh 70vh; }
+            .music-toggle:focus-within { opacity: 1; pointer-events: auto; }
+          }
+        }
         @media (max-width: 720px) {
           .music-toggle { bottom: calc(76px + env(safe-area-inset-bottom)); }
         }

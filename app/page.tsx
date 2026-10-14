@@ -336,6 +336,11 @@ export default function Home() {
             </a>
           </p>
         )}
+        <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+          <a href="/case-studies" style={{ color: "var(--dim)", textDecoration: "underline", textUnderlineOffset: 3 }}>
+            See the case studies
+          </a>
+        </p>
         {/* Testimonials / case studies go here once client 1 to 3 are delivered.
             Do not fabricate proof before then. The honest trust units above
             are the only proof that exists right now. */}

@@ -73,6 +73,18 @@ export default function FinderLauncher() {
         .finder-sheet-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gold-dim); color: var(--gold); }
         .finder-close { min-height: 44px; padding: 6px 14px; background: transparent; color: var(--ice); border: 1px solid var(--gold-dim); border-radius: 999px; font: inherit; cursor: pointer; }
         .finder-sheet-body { overflow-y: auto; padding: 14px 16px 18px; }
+        /* Round III variant B: one gold primary per fold. The fab is a gold-outlined dark pill except at exactly 1024, where it is the lone primary (nav goes desktop at 1025). */
+        @media (max-width: 1023px), (min-width: 1025px) {
+          .finder-fab { background: rgb(10 7 7 / 0.82); color: var(--gold); border-color: rgb(var(--gold-rgb) / 0.9); box-shadow: none; }
+        }
+        /* Phones: held out of the first screen, revealed on scroll (CSS scroll-driven, no JS). Still focusable, shown on focus. Unsupported browsers and reduced motion see it at once. */
+        @supports (animation-timeline: scroll()) {
+          @media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+            @keyframes finder-reveal { from { opacity: 0; pointer-events: none; } to { opacity: 1; pointer-events: auto; } }
+            .finder-fab { opacity: 0; pointer-events: none; animation: finder-reveal linear both; animation-timeline: scroll(root block); animation-range: 40vh 70vh; }
+            .finder-fab:focus-visible { opacity: 1; pointer-events: auto; }
+          }
+        }
         @media (max-width: 720px) {
           .finder-fab { right: 8px; bottom: calc(76px + env(safe-area-inset-bottom)); width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; opacity: 0.94; }
           .finder-fab-icon { display: block; }

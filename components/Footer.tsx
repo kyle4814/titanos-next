@@ -33,6 +33,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     heading: "Proof",
     links: [
       { label: `${dec("estate_ey")} engineer-years`, href: "/engineering" },
+      { label: "Case studies", href: "/case-studies" },
       { label: "Methodology", href: "/methodology" },
       { label: "Black Ice doctrine", href: "/black-ice" },
       { label: "Our scan", href: "/scan#self-scan" },
@@ -65,9 +66,10 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
 function FooterAnchor({ l }: { l: FooterLink }) {
   const style = {
     color: "var(--dim)",
-    padding: "4px 0",
-    display: "inline-block",
-    minHeight: 28,
+    padding: 0,
+    display: "inline-flex",
+    alignItems: "center",
+    minHeight: 44,
   } as const;
   return l.external ? (
     <a href={l.href} target="_blank" rel="noopener noreferrer" style={style}>

@@ -288,3 +288,22 @@
   .fx-bg, .fx-thread__tiles { transform: none !important; will-change: auto; }
 }
 
+
+/* Round III patch (Kyle GO 2026-10-14): D1 one gold primary per fold, D2 hero copy contrast. Source: art-academy r3/proto FINAL_combined.css, narrowed v2. */
+@media (max-width: 720px) {
+  .ds-hero a.ds-cta { background: transparent; color: #eef2ff; border: 1.5px solid rgba(238, 242, 255, 0.75); box-shadow: none; }
+  .ds-hero a.ds-cta:hover { background: rgba(238, 242, 255, 0.08); }
+  .ds-hero__credit { bottom: 122px; }
+  html { scroll-padding-bottom: 76px; }
+}
+.ds-hero__copy { isolation: isolate; }
+.ds-hero__copy::before {
+  content: ""; position: absolute; z-index: -1; inset: -12px 0 -48px 0; pointer-events: none;
+  background: linear-gradient(to right, rgba(7, 5, 10, 0.74) 0%, rgba(7, 5, 10, 0.6) 62%, rgba(7, 5, 10, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 72%, transparent 100%);
+}
+@media (min-width: 1000px) {
+  .ds-hero__copy::before { right: 30%; background: linear-gradient(to right, rgba(7, 5, 10, 0.74) 0%, rgba(7, 5, 10, 0.62) 70%, rgba(7, 5, 10, 0) 100%); }
+}
+.ds-hero__sub, .ds-hero__eyebrow { color: #cfd5ec; }
