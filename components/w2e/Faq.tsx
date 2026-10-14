@@ -13,3 +13,13 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
     </div>
   );
 }
+
+/** Same as one Faq entry, for answers that carry links or computed text. */
+export function FaqRow({ question, children }: { question: string; children: React.ReactNode }) {
+  return (
+    <details className={s.fItem}>
+      <summary className={s.fQ}>{question}</summary>
+      <p className={s.fA}>{children}</p>
+    </details>
+  );
+}
