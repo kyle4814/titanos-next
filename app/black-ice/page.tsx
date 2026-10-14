@@ -8,6 +8,7 @@ import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2d from "@/components/w2d/W2d";
 
 const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -47,7 +48,7 @@ const PRIMITIVES: { name: string; line: string }[] = [
 
 export default function BlackIcePage() {
   return (
-    <>
+    <W2d>
       <PageHero
         badge="TITANOS OPERATING DOCTRINE · FREE"
         title="BLACK ICE"
@@ -226,6 +227,6 @@ export default function BlackIcePage() {
         ]}
       />
       <FreeStart />
-    </>
+    </W2d>
   );
 }

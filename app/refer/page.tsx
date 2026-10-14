@@ -8,6 +8,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2d from "@/components/w2d/W2d";
 
 const baseMetadata: Metadata = {
   title: "Refer & Earn: Partner Network · TITANOS",
@@ -69,7 +70,7 @@ export default function ReferPage() {
   };
 
   return (
-    <>
+    <W2d>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -195,6 +196,6 @@ export default function ReferPage() {
         </p>
       </SectionReveal>
       <FrontLoad/>
-    </>
+    </W2d>
   );
 }

@@ -3,6 +3,7 @@ import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import W2d from "@/components/w2d/W2d";
 
 const SECTION_COUNT = 8;
 
@@ -27,7 +28,7 @@ export const metadata: Metadata = withSeo("/privacy", baseMetadata);
 
 export default function PrivacyPage() {
   return (
-    <>
+    <W2d>
       <PageHero title="Privacy Policy" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
@@ -226,7 +227,7 @@ export default function PrivacyPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
-    </>
+    </W2d>
   );
 }
 

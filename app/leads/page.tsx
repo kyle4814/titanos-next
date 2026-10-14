@@ -12,6 +12,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
 import { STATS } from "@/lib/stats";
+import W2d from "@/components/w2d/W2d";
 
 // The biggest true number for this page: organisations we have researched in full. Read from our own count, not typed.
 const RESEARCH_FLEX: Flex = {
@@ -214,7 +215,7 @@ export default function LeadsPage() {
   };
 
   return (
-    <>
+    <W2d>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -756,7 +757,7 @@ export default function LeadsPage() {
         ]}
       />
       <FreeStart />
-    </>
+    </W2d>
   );
 }
 

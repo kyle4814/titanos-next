@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
 import { DISPLAY, PRICING } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import W2d from "@/components/w2d/W2d";
 
 const SECTION_COUNT = 9;
 
@@ -31,7 +32,7 @@ export const metadata: Metadata = withSeo("/terms", baseMetadata);
 
 export default function TermsPage() {
   return (
-    <>
+    <W2d>
       <PageHero title="Terms of Service" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
@@ -179,7 +180,7 @@ export default function TermsPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
-    </>
+    </W2d>
   );
 }
 

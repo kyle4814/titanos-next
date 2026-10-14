@@ -5,6 +5,8 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2c from "@/components/w2c/W2c";
+import GlowCard from "@/components/house/GlowCard";
 import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
@@ -23,14 +25,8 @@ export const metadata: Metadata = withSeo("/investors", baseMetadata);
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 860, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
+const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "40px 0 12px" };
 const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "16px 18px",
-};
 const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15 };
 const A: CSSProperties = { color: "var(--gold)" };
 
@@ -53,7 +49,7 @@ const LADDER: [string, string, string, string, string][] = [
 
 export default function Investors() {
   return (
-    <div>
+    <W2c>
       <PageHero
         badge="Investors"
         title="What your money builds."
@@ -61,7 +57,7 @@ export default function Investors() {
       />
       <section style={SECTION}>
         <div style={WRAP}>
-          <h2 style={H}>The measured base</h2>
+          <h2 className="w2c-h" style={H}>The measured base</h2>
           <p style={BODY}>
             Each card carries its own label. The first is modelled with the COCOMO method, the second is measured off the
             running system, and the third is a recorded same-25-job comparison. The source is one tap away on each. This is
@@ -76,10 +72,10 @@ export default function Investors() {
           <OpenLoop>What does that look like as a few plain lines you can check yourself?</OpenLoop>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
             {BASE.map(([n, l]) => (
-              <div key={l} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 26, fontWeight: 700 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{l}</div>
-              </div>
+              <GlowCard key={l} className="w2c-stat">
+                <div className="w2c-stat__n">{n}</div>
+                <div className="w2c-stat__l">{l}</div>
+              </GlowCard>
             ))}
           </div>
           <p style={{ ...BODY, marginTop: 12 }}>
@@ -88,7 +84,7 @@ export default function Investors() {
           </p>
 
           <OpenLoop>So what happens if the compute budget goes up? The next table is where that gets honest.</OpenLoop>
-          <h2 style={H}>What compute buys</h2>
+          <h2 className="w2c-h" style={H}>What compute buys</h2>
           <p style={BODY}>
             Each AU$300 a month buys one AI build account. Today that is about {dec("estate_ey")} engineer-years modelled over {v("span_days")} days
             (Basic COCOMO on {int("estate_sloc")} measured lines). More accounts would run more work in parallel, but the scale-up rows are
@@ -120,7 +116,7 @@ export default function Investors() {
           </div>
 
           <OpenLoop>And if it did scale, where would the money go?</OpenLoop>
-          <h2 style={H}>The ladder to AU$1 million a month, and where it goes</h2>
+          <h2 className="w2c-h" style={H}>The ladder to AU$1 million a month, and where it goes</h2>
           <p style={BODY}>
             Monthly revenue for the first two years, split between the founder and the system (compute, people, the next
             product, new countries). About 90% compounds back into TITANOS until it is established globally; the world
@@ -156,7 +152,7 @@ export default function Investors() {
           </p>
 
           <OpenLoop>Why would a big buyer pick this over the other options?</OpenLoop>
-          <h2 style={H}>Why it is defensible</h2>
+          <h2 className="w2c-h" style={H}>Why it is defensible</h2>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li style={{ marginBottom: 8 }}>
               We build one enterprise platform, once. Each client gets a configured copy on their own account, so delivery
@@ -171,7 +167,7 @@ export default function Investors() {
             </li>
           </ul>
 
-          <h2 style={H}>How investing works here</h2>
+          <h2 className="w2c-h" style={H}>How investing works here</h2>
           <p style={BODY}>
             TITANOS is run by Kyle Deligny as a sole trader (ABN 34 318 502 254), so there are no shares to offer today.
             Any investment would follow incorporation, proper legal and accounting advice, and documents that meet the
@@ -190,6 +186,6 @@ export default function Investors() {
           </div>
         </div>
       </section>
-    </div>
+    </W2c>
   );
 }

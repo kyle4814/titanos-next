@@ -1,0 +1,82 @@
+/* components/w2c/w2c.css: wave 2c polish for the conversion and info pages.
+   Presentation only. Tokens only. No initial opacity, no JS. Scoped under .w2c so nothing leaks. */
+
+/* Reading measure: body copy never runs past ~66 characters, centred copy stays centred. */
+.w2c p:not(.ph-in),
+.w2c li {
+  max-inline-size: 58ch !important;
+  text-wrap: pretty;
+}
+.w2c p:not(.ph-in)[style*="text-align: center"],
+.w2c p:not(.ph-in)[style*="text-align:center"] {
+  margin-inline: auto !important;
+}
+.w2c [style*="text-align: center"] > p:not(.ph-in) { margin-inline: auto; }
+.w2c h2, .w2c h3 { text-wrap: balance; }
+
+/* Anchored sections land below the sticky nav. */
+.w2c [id] { scroll-margin-top: 96px; }
+
+/* Links: clear affordance and a visible keyboard ring. */
+.w2c main a:not([class]), .w2c a:not([class]) {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.w2c a:not([class]):hover { text-decoration-thickness: 2px; }
+.w2c a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+
+/* Tables: quiet header, tabular numbers, row hover. */
+.w2c table { font-variant-numeric: tabular-nums; }
+.w2c table th {
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--gold-dim) !important;
+}
+.w2c table td { line-height: 1.55; vertical-align: top; }
+@media (hover: hover) {
+  .w2c table tbody tr { transition: background-color 160ms ease; }
+  .w2c table tbody tr:hover { background: color-mix(in srgb, var(--gold) 6%, transparent); }
+}
+.w2c [tabindex="0"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: var(--radius-md); }
+
+/* Stat tile (investors base grid): a GlowCard with room to breathe. */
+.w2c-stat { padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.w2c-stat__n {
+  color: var(--gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.w2c-stat__l { color: var(--ice); font-size: var(--fs-sm); line-height: 1.55; }
+
+/* Section heading with a gold lead-in rule. */
+.w2c-h { position: relative; padding-top: 14px; }
+.w2c-h::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  inline-size: 40px;
+  block-size: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* Contact detail card: glass, gold edge. */
+.w2c-card {
+  border-color: var(--gold-dim) !important;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 7%, var(--card)) 0%, var(--card) 60%) !important;
+  box-shadow: 0 14px 36px -22px rgb(0 0 0 / 0.8);
+  text-align: left;
+}
+.w2c-card p { max-inline-size: none; }
+
+@media (max-width: 480px) {
+  .w2c-card { padding: 22px 18px !important; }
+  .w2c table th, .w2c table td { padding-inline: 6px !important; }
+}
+
+/* ContactButtons wrapper: keeps its lead-in paragraph off the viewport edge. */
+.w2c-contact { max-inline-size: 640px; margin-inline: auto; padding-inline: 12px; }
+.w2c-contact p { margin-inline: auto !important; }

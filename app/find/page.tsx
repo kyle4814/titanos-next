@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import OfferFinder from "@/components/OfferFinderLazy";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import W2d from "@/components/w2d/W2d";
 
 const TITLE = "Find the right TITANOS offer in 30 seconds";
 const DESC =
@@ -22,7 +23,7 @@ export const metadata: Metadata = withSeo("/find", baseMetadata);
 
 export default function FindPage() {
   return (
-    <>
+    <W2d>
       <PageHero
         badge="TITANOS · OFFER FINDER"
         title="Find the right offer."
@@ -44,6 +45,6 @@ export default function FindPage() {
           <OfferFinder />
         </div>
       </SectionReveal>
-    </>
+    </W2d>
   );
 }
