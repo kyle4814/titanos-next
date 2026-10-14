@@ -36,7 +36,7 @@ Evidence labels used on this site: MEASURED (read from a real record), REPRODUCE
 ## Content
 
 - 21 blog posts: https://titanos.tech/blog
-- 1 case studies: https://titanos.tech/case-studies
+- 2 case studies: https://titanos.tech/case-studies
 - 103 offer pages: https://titanos.tech/offers
 - Sitemap: https://titanos.tech/sitemap.xml
 
