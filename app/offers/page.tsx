@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import OfferTile from "@/components/offers/OfferTile";
 import { Bluf } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
@@ -61,37 +62,16 @@ const BUDGETS: { id: string; label: string; test: (o: Offer) => boolean }[] = [
 
 function Card({ o }: { o: Offer }) {
   const av = availability(o);
-  const open = av !== "SOON";
   return (
-    <Link
+    <OfferTile
       href={`/offers/${o.slug}`}
-      style={{
-        display: "block",
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-md)",
-        padding: "20px 22px",
-        textDecoration: "none",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "baseline" }}>
-        <strong style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif" }}>{o.name}</strong>
-        <span
-          style={{
-            fontSize: "var(--fs-xs)",
-            color: open ? "var(--ok)" : "var(--dim)",
-            border: `1px solid ${open ? "var(--ok)" : "var(--border)"}`,
-            borderRadius: 999,
-            padding: "2px 10px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {AVAILABILITY_TEXT[av].pill}
-        </span>
-      </div>
-      <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.6, margin: "10px 0" }}>{o.bluf}</p>
-      <div style={{ color: "var(--ice)", fontSize: "var(--fs-sm)" }}>{formatOfferPrice(o)}</div>
-    </Link>
+      name={o.name}
+      pill={AVAILABILITY_TEXT[av].pill}
+      body={o.bluf}
+      price={formatOfferPrice(o)}
+      open={av !== "SOON"}
+      feature={av === "BUYABLE"}
+    />
   );
 }
 
@@ -100,7 +80,7 @@ function Grid({ offers }: { offers: Offer[] }) {
     return <p style={{ color: "var(--dim)", textAlign: "center" }}>Offers in this section are being added.</p>;
   }
   return (
-    <div style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+    <div className="ox-grid">
       {offers.map((o) => <Card key={o.slug} o={o} />)}
     </div>
   );

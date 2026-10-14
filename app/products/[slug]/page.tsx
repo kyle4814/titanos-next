@@ -6,6 +6,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
 import { PRODUCTS, getProduct, formatProductPrice, productBuyHref } from "@/lib/products";
 import type { Product } from "@/lib/products/types";
@@ -31,16 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 function List({ items, mark }: { items: string[]; mark: string }) {
-  return (
-    <ul style={{ listStyle: "none", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "22px 26px", margin: 0 }}>
-      {items.map((it) => (
-        <li key={it} style={{ color: "var(--text)", lineHeight: 1.7, padding: "8px 0 8px 26px", position: "relative" }}>
-          <span aria-hidden="true" style={{ position: "absolute", left: 0, color: "var(--ok)", fontWeight: 700 }}>{mark}</span>
-          {it}
-        </li>
-      ))}
-    </ul>
-  );
+  return <Bento items={items} mark={mark} tone={mark === "✓" ? "ok" : "plain"} />;
 }
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {

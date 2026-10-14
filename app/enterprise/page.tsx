@@ -4,6 +4,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { PriceTiles } from "@/components/offers/Bento";
 import { DISPLAY } from "@/lib/pricing";
 import { SystemLabel, DepthIndex } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
@@ -76,36 +77,7 @@ export default function EnterprisePage() {
             lead="Indicative starting points. Every engagement is scoped on a call."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <ul
-              style={{
-                listStyle: "none",
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "26px 28px",
-                margin: 0,
-              }}
-            >
-              {ENTERPRISE_OFFERS.map((o) => (
-                <li
-                  key={o.label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 16,
-                    flexWrap: "wrap",
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    padding: "10px 0",
-                    borderTop: "1px solid var(--border)",
-                  }}
-                >
-                  <span>{o.label}</span>
-                  <span style={{ color: "var(--gold)" }}>{o.price}</span>
-                </li>
-              ))}
-            </ul>
+            <PriceTiles rows={ENTERPRISE_OFFERS} />
             <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
               These are starting points, not quotes. The final scope and price are agreed with you on a call. Would it be okay if we started there? A no is welcome.
             </p>

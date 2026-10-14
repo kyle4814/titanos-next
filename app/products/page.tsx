@@ -4,6 +4,7 @@ import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
+import OfferTile from "@/components/offers/OfferTile";
 import { PRODUCTS, formatProductPrice, productBuyHref } from "@/lib/products";
 import type { Product } from "@/lib/products/types";
 
@@ -22,23 +23,22 @@ export const metadata: Metadata = withSeo("/products", {
 function Card({ p }: { p: Product }) {
   const live = productBuyHref(p) !== null;
   return (
-    <Link
+    <OfferTile
       href={`/products/${p.slug}`}
-      style={{ display: "block", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "22px 24px", textDecoration: "none" }}
-    >
-      <div style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", textTransform: "uppercase", letterSpacing: 1 }}>
-        {p.kind} · {live ? "Available now" : "Opening soon"}
-      </div>
-      <h3 style={{ color: "var(--gold)", margin: "8px 0" }}>{p.name}</h3>
-      <p style={{ color: "var(--text)", lineHeight: 1.6, margin: "0 0 10px" }}>{p.bluf}</p>
-      <div style={{ color: "var(--ice)" }}>{formatProductPrice(p)} · {p.delivery.file}</div>
-    </Link>
+      kicker={<>{p.kind} · {live ? "Available now" : "Opening soon"}</>}
+      name={p.name}
+      headingLevel="h3"
+      body={p.bluf}
+      price={<>{formatProductPrice(p)} · {p.delivery.file}</>}
+      open={live}
+      feature={live}
+    />
   );
 }
 
 function Grid({ items }: { items: Product[] }) {
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
+    <div className="ox-grid ox-grid--wide">
       {items.map((p) => <Card key={p.slug} p={p} />)}
     </div>
   );

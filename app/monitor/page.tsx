@@ -5,6 +5,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
+import { Bento, GlowFrame } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
 import MonitorCheckoutButton from "@/components/MonitorCheckoutButton";
 import Testimonials from "@/components/Testimonials";
@@ -219,37 +220,7 @@ export default function MonitorPage() {
             lead="One email a month, on the same date. If it is not worth reading, you stop it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <ul
-              style={{
-                listStyle: "none",
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "26px 28px",
-                margin: 0,
-              }}
-            >
-              {WHAT_YOU_GET.map((it) => (
-                <li
-                  key={it}
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    padding: "10px 0 10px 26px",
-                    position: "relative",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{ position: "absolute", left: 0, color: "var(--ok)", fontWeight: 700 }}
-                  >
-                    ✓
-                  </span>
-                  {it}
-                </li>
-              ))}
-            </ul>
+            <Bento items={WHAT_YOU_GET} mark="✓" tone="ok" lead />
           </div>
         </div>
       </SectionReveal>
@@ -268,37 +239,7 @@ export default function MonitorPage() {
             lead="The opt-out is built in. The product is the email, and there is no sales funnel wrapped around it."
           />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <ul
-              style={{
-                listStyle: "none",
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-md)",
-                padding: "26px 28px",
-                margin: 0,
-              }}
-            >
-              {WHAT_IT_IS_NOT.map((it) => (
-                <li
-                  key={it}
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    padding: "10px 0 10px 26px",
-                    position: "relative",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{ position: "absolute", left: 0, color: "var(--warn)", fontWeight: 700 }}
-                  >
-                    ✗
-                  </span>
-                  {it}
-                </li>
-              ))}
-            </ul>
+            <Bento items={WHAT_IT_IS_NOT} mark="✗" tone="no" />
             <OperatorNote style={{ margin: "var(--space-8) auto 0" }}>
               If nothing changed on your domain that month, the email says so. I&apos;d rather
               you cancel than keep paying for a report with nothing in it.
@@ -320,7 +261,7 @@ export default function MonitorPage() {
             title="One Price. Cancel in One Click."
             lead="Monthly or annual. Annual saves about two months. No contract either way."
           />
-          <TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+          <GlowFrame><TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <article
               style={{
                 textAlign: "center",
@@ -396,7 +337,7 @@ export default function MonitorPage() {
                 </AnimatedButton>
               </div>
             </article>
-          </TempleFrame>
+          </TempleFrame></GlowFrame>
         </div>
       </SectionReveal>
 

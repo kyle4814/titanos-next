@@ -1,0 +1,146 @@
+/* components/offers/offers.css: the glow-tile / bento house look for the selling pages.
+   Presentation only. Scroll-driven motion sits behind @supports and is off under reduced motion.
+   Tokens only (var(--gold) etc.), so the brand stays in one place. */
+
+.ox-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  isolation: isolate;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--gold) 7%, var(--card)) 0%, var(--card) 55%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+/* glowing edge: a gradient ring drawn with a mask, only visible on open/featured tiles and on hover */
+.ox-tile::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--gold), transparent 38%, transparent 62%, var(--ice));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+.ox-tile[data-open="true"]::before { opacity: 0.55; }
+.ox-tile[data-feature="true"] {
+  border-color: var(--gold-dim);
+  box-shadow: 0 14px 36px -20px rgb(0 0 0 / 0.8);
+}
+.ox-tile[data-feature="true"]::before { opacity: 1; }
+.ox-tile[data-open="false"] { background: var(--card); }
+@media (hover: hover) {
+  a.ox-tile:hover { transform: translateY(-3px); box-shadow: 0 14px 36px -18px rgb(0 0 0 / 0.8); }
+  a.ox-tile:hover::before { opacity: 1; }
+}
+a.ox-tile:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.ox-tile__top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.ox-tile__name { color: var(--gold); font-family: var(--font-display), Georgia, serif; font-size: var(--fs-body); }
+.ox-tile__kicker { color: var(--dim); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 1px; }
+.ox-tile__body { color: var(--text); font-size: var(--fs-sm); line-height: 1.6; margin: 0; }
+.ox-tile__price {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--ice);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+.ox-pill {
+  font-size: var(--fs-xs);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  color: var(--dim);
+}
+.ox-pill[data-open="true"] { color: var(--ok); border-color: var(--ok); }
+
+.ox-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.ox-grid--wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+
+/* bento: list items become tiles. The first tile spans two columns on wide screens for hierarchy. */
+.ox-bento { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+.ox-bento > li {
+  position: relative;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 6%, var(--card)) 0%, var(--card) 60%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px 18px 52px;
+  color: var(--text);
+  line-height: 1.65;
+  transition: border-color 220ms ease, transform 220ms ease;
+}
+.ox-bento > li::before {
+  content: attr(data-mark);
+  position: absolute;
+  left: 16px;
+  top: 17px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ok) 16%, transparent);
+  color: var(--ok);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+.ox-bento[data-tone="no"] > li::before { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
+.ox-bento[data-tone="plain"] > li::before { background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--gold); }
+@media (hover: hover) { .ox-bento > li:hover { border-color: var(--gold-dim); transform: translateY(-2px); } }
+@media (min-width: 760px) {
+  .ox-bento { grid-template-columns: repeat(2, 1fr); }
+  .ox-bento[data-lead="true"] > li:first-child { grid-column: 1 / -1; border-color: var(--gold-dim); }
+}
+
+/* price rows (enterprise) */
+.ox-prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .ox-prices { grid-template-columns: repeat(2, 1fr); } .ox-prices > li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+.ox-prices > li {
+  display: flex; flex-direction: column; gap: 6px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 6%, var(--card)) 0%, var(--card) 60%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  color: var(--text);
+}
+.ox-prices__price { color: var(--gold); font-family: var(--font-display), Georgia, serif; font-size: var(--fs-h3, 1.25rem); font-variant-numeric: tabular-nums; }
+
+/* glow frame around a hero price card */
+.ox-glow {
+  position: relative;
+  max-width: var(--maxw-prose);
+  margin: 0 auto;
+  border-radius: calc(var(--radius-md) + 4px);
+  border: 1px solid var(--gold-dim);
+  box-shadow: 0 24px 60px -28px rgb(0 0 0 / 0.85);
+}
+
+/* scroll-driven entrance: transform only (no opacity, so contrast and no-JS reading are never affected) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ox-tile, .ox-bento > li, .ox-prices > li {
+      animation: ox-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+@keyframes ox-rise { from { transform: translateY(18px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ox-tile, .ox-bento > li, .ox-tile::before { transition: none; }
+  a.ox-tile:hover, .ox-bento > li:hover { transform: none; }
+}
