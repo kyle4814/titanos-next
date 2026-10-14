@@ -5,7 +5,9 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import FaqItem from "@/components/FaqItem";
+import { FaqRow } from "@/components/w2e/Faq";
+import s from "@/components/w2e/w2e.module.css";
+import { GlowCard } from "@/components/house";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import ScopeChecker from "@/components/ScopeChecker";
 import OperatorByline from "@/components/OperatorByline";
@@ -195,9 +197,9 @@ export default function CompliancePage() {
     },
   };
 
-  // Mirrors the FaqItem content further down verbatim — same pattern as
+  // Mirrors the FaqRow content further down verbatim — same pattern as
   // the Product schema above: hand-maintained alongside the visible copy
-  // since FaqItem answers are JSX and can't be safely auto-extracted.
+  // since FaqRow answers are JSX and can't be safely auto-extracted.
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -309,6 +311,7 @@ export default function CompliancePage() {
           Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
         </p>
       </PageHero>
+      <div className={s.scope}>
       <Bluf replaced>
         Six Privacy Act obligations, sorted with you on one working call, for {DISPLAY.PACK_PRICE} with {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of
         Titanos Monitor included. The first conversation and your report are free.
@@ -318,7 +321,7 @@ export default function CompliancePage() {
       <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={PACK_FLEX} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p className={s.intro}>
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The scan reads
             public records only and touches nothing of yours. On the call you stay logged into your own accounts, and I never
             receive a password. Nobody is replaced, and your IT person stays in charge and is welcome on the call. The whole price
@@ -370,67 +373,20 @@ export default function CompliancePage() {
             title="What Happens on the Call"
             lead="90 minutes on a screen-share. We make every change together, live, so you leave with it done and not with homework."
           />
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 14,
-            }}
-          >
+          <div className={s.rows}>
             {[
               { n: "1", title: "I walk you through your gap report", body: "The findings I prepared for your business, in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting." },
               { n: "2", title: "I apply every change together with you, on screen", body: "Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations done by the end of the call, not homework for later." },
               { n: "3", title: "You leave with your evidence pack scoped", body: "Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified: a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it." },
               { n: "4", title: "3 months of Titanos Monitor, free", body: `Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then ${DISPLAY.MONITOR_MONTHLY} only if you choose to continue, and I'll flag anything new that needs attention.` },
             ].map((r) => (
-              <div
-                key={r.n}
-                style={{
-                  border: "1px solid var(--gold-dim)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "18px 22px",
-                  background: "var(--card)",
-                  display: "flex",
-                  gap: 16,
-                  alignItems: "flex-start",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: 34,
-                    height: 34,
-                    borderRadius: 999,
-                    background: "linear-gradient(90deg, var(--gold-warm), var(--gold))",
-                    color: "var(--vault-black)",
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    fontWeight: 700,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {r.n}
-                </span>
+              <GlowCard key={r.n} className={s.row}>
+                <span className={s.rowN}>{r.n}</span>
                 <div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display), Georgia, serif",
-                      color: "var(--gold)",
-                      fontSize: "var(--fs-body)",
-                      letterSpacing: "0.02em",
-                      marginBottom: 6,
-                    }}
-                  >
-                    {r.title}
-                  </div>
-                  <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.65, margin: 0 }}>
-                    {r.body}
-                  </p>
+                  <div className={s.rowT}>{r.title}</div>
+                  <p className={s.rowP}>{r.body}</p>
                 </div>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -441,7 +397,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* FIVE PRESSURE POINTS — Fix 3c reorder by believability, not date */}
-      <SectionReveal id="timeline" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="timeline" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={2} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>What's already live</SystemLabel>
@@ -449,14 +405,7 @@ export default function CompliancePage() {
             title="Five Rules Worth Knowing About"
             lead="Ordered by how soon each one could touch a small business, not by date. The pack covers all five in one pass."
           />
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "0 auto",
-              borderLeft: "2px solid var(--gold-dim)",
-              padding: "8px 0 8px 30px",
-            }}
-          >
+          <div className={s.tl}>
             {TIMELINE.map((t) => (
               <TimelineRow key={t.title} {...t} />
             ))}
@@ -492,7 +441,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* SCOPE CHECKER — answers "does this even apply to me" honestly, per-visitor */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={3} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Self-check</SystemLabel>
@@ -504,7 +453,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* WHAT THE ENGAGEMENT LOOKS LIKE — gold thread */}
-      <SectionReveal id="walkthrough" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="walkthrough" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={4} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The sequence</SystemLabel>
@@ -519,7 +468,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* YOU CONTROL vs HOST CONTROLS */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={5} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The division of ownership</SystemLabel>
@@ -558,7 +507,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* SINGLE OFFER */}
-      <SectionReveal id="offer" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="offer" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={6} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The single door</SystemLabel>
@@ -751,7 +700,7 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* Site Fix 3 — how monitoring works after the pack (explicit opt-in) */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={7} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>After the call</SystemLabel>
@@ -759,14 +708,7 @@ export default function CompliancePage() {
             title="How the Monitoring Works After the Pack"
             lead={`The first ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of Titanos Monitor ship with the pack, automatic, no extra charge. What happens at the end of month ${PRICING.PACK_INCLUDED_MONITOR_MONTHS} is the part most vendors get wrong.`}
           />
-          <div
-            style={{
-              maxWidth: "var(--maxw-prose)",
-              margin: "0 auto",
-              display: "grid",
-              gap: 14,
-            }}
-          >
+          <div className={s.rows}>
             <MonitorTimelineRow
               when={`Months 1 to ${PRICING.PACK_INCLUDED_MONITOR_MONTHS}`}
               title="Free and automatic"
@@ -789,13 +731,13 @@ export default function CompliancePage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="faq" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={8} total={8} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
           <SectionHeading title="Questions I Get" />
-          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-            <FaqItem question="How the working call works">
+          <div className={s.faq}>
+            <FaqRow question="How the working call works">
               A single 90-minute video call where I apply the changes with you. You share screen
               for your DNS, your Microsoft 365 or Google Workspace admin console, and your website
               CMS. I walk you through each change as you make it, no opaque hand-offs, no
@@ -803,15 +745,15 @@ export default function CompliancePage() {
               privacy policy is deployed, the ADM disclosure is live, the M365/Workspace
               hardening is applied, the DNS records are corrected, and the NDB runbook is
               integrated.
-            </FaqItem>
-            <FaqItem question="What access you need to grant">
+            </FaqRow>
+            <FaqRow question="What access you need to grant">
               For the working call, you remain logged into your own admin consoles. I never
               receive credentials. You'll need owner or admin access to your DNS provider, your
               Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy
               deployment, and (optionally) your customer-record systems for the vendor risk
               register.
-            </FaqItem>
-            <FaqItem question="I'm too small for this to matter">
+            </FaqRow>
+            <FaqRow question="I'm too small for this to matter">
               {/* Fix 3c: answer ordered to match the fear hierarchy,
                   live tort, then insurance, then ADM penalties, then Tranche 2. */}
               The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can
@@ -821,20 +763,20 @@ export default function CompliancePage() {
               already reach AU$50M for serious or repeated interference. And Tranche 2 reforms
               are positioned to remove the AU$3M small-business turnover exemption, pulling
               many additional small businesses into Privacy Act scope.
-            </FaqItem>
-            <FaqItem question="My website is on Squarespace. Can you even help?">
+            </FaqRow>
+            <FaqRow question="My website is on Squarespace. Can you even help?">
               Yes. The audit works on any hosting provider. I document what you control (privacy
               policy, DNS records, account-level MFA, vendor register) versus what Squarespace
               controls (TLS, HSTS, server config), and you get the exact escalation language for
               the bits they own.
-            </FaqItem>
-            <FaqItem question="I use Microsoft 365. Do you cover that?">
+            </FaqRow>
+            <FaqRow question="I use Microsoft 365. Do you cover that?">
               Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes
               that satisfy most Essential Eight Maturity Level 1 requirements. I apply these
               with you on the 90-minute working call, typically a 15-minute admin sequence
               covering MFA, conditional access, and audit logging.
-            </FaqItem>
-            <FaqItem question="Is the monthly fee mandatory?">
+            </FaqRow>
+            <FaqRow question="Is the monthly fee mandatory?">
               {/* Site Fix 3: explicit opt-in framing, no silent continuity */}
               No. The pack is a one-time {DISPLAY.PACK_PRICE}. The first{" "}
               {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
@@ -844,21 +786,21 @@ export default function CompliancePage() {
               you don't. I'll email you the exact date before any meter would start, and
               it's one click to decline or cancel. No auto-charge unless you affirmatively
               subscribe.
-            </FaqItem>
-            <FaqItem question="What's the difference between this and Vanta or Drata?">
+            </FaqRow>
+            <FaqRow question="What's the difference between this and Vanta or Drata?">
               Vanta and Drata are US$10 to 15K a year enterprise compliance tools shaped for SOC 2.
               This is a {DISPLAY.PACK_PRICE} one-time engagement (Monitor optional at{" "}
               {DISPLAY.MONITOR_MONTHLY} after the included{" "}
               {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months) shaped for AU SMBs facing
               Privacy Act and Essential Eight. Different buyer, different price, different
               geography, different framework.
-            </FaqItem>
-            <FaqItem question="Can you guarantee I'll be compliant?">
+            </FaqRow>
+            <FaqRow question="Can you guarantee I'll be compliant?">
               No vendor honestly can. Compliance is determined by the regulator on the facts of
               a specific incident. What you get is the evidence pack regulators expect to see
               when assessing whether you took "reasonable steps."
-            </FaqItem>
-            <FaqItem question="What happens if you're unavailable later?">
+            </FaqRow>
+            <FaqRow question="What happens if you're unavailable later?">
               You keep everything I produce: the signed self-attestation, the 13-section evidence
               pack, your privacy policy and ADM disclosure as deployed, your NDB runbook, the
               vendor risk register, and your DNS/M365 hardening notes. The attestation remains
@@ -867,12 +809,12 @@ export default function CompliancePage() {
               continuity sheet so another consultant can pick up the file without re-doing the
               diagnostic. You keep everything built to that point plus a refund of any unearned
               milestone. You are never left holding a half-finished pack.
-            </FaqItem>
-            <FaqItem question="How fast can this get done?">
+            </FaqRow>
+            <FaqRow question="How fast can this get done?">
               External scan within 48 hours of purchase. Working call scheduled inside 7 days.
               30-day review call scheduled at the working call. Quarterly re-scans recur for the
               life of the monitoring subscription.
-            </FaqItem>
+            </FaqRow>
           </div>
         </div>
       </SectionReveal>
@@ -909,16 +851,7 @@ export default function CompliancePage() {
           zIndex: 2,
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            fontWeight: 700,
-            marginBottom: 14,
-            letterSpacing: "0.05em",
-          }}
-        >
+        <h2 className={s.ctaH}>
           Would it be okay if we started with a free look?
         </h2>
         <p
@@ -968,6 +901,7 @@ export default function CompliancePage() {
         ]}
       />
       <FreeStart />
+      </div>
     </>
   );
 }
@@ -984,88 +918,24 @@ function TimelineRow({
   body: string;
   state: string;
 }) {
-  const dotStyle: React.CSSProperties = {
-    position: "absolute",
-    left: -38,
-    top: 18,
-    width: 12,
-    height: 12,
-    borderRadius: "50%",
-    background: state === "live" ? "var(--gold)" : "var(--card)",
-    border:
-      state === "live"
-        ? "2px solid var(--gold)"
-        : state === "future"
-        ? "2px solid var(--ice)"
-        : "2px dashed var(--dim)",
-  };
+  const dot = state === "live" ? s.dotLive : state === "future" ? s.dotFuture : s.dotComing;
   return (
-    <div style={{ position: "relative", padding: "14px 0 22px" }}>
-      <span aria-hidden="true" style={dotStyle} />
-      <div
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: state === "coming" ? "var(--dim)" : "var(--gold)",
-          fontSize: "var(--fs-sm)",
-          letterSpacing: "0.06em",
-          marginBottom: 4,
-        }}
-      >
-        {when}
-      </div>
-      <h3
-        style={{
-          color: "var(--ice)",
-          fontSize: "var(--fs-body)",
-          fontWeight: 600,
-          marginBottom: 6,
-          fontFamily: "var(--font-body), system-ui, sans-serif",
-          letterSpacing: 0,
-        }}
-      >
-        {title}
-      </h3>
-      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>{body}</p>
+    <div className={s.tlRow}>
+      <span aria-hidden="true" className={`${s.dot} ${dot}`} />
+      <div className={`${s.tlWhen}${state === "coming" ? ` ${s.tlDim}` : ""}`}>{when}</div>
+      <h3 className={s.tlH}>{title}</h3>
+      <p className={s.tlP}>{body}</p>
     </div>
   );
 }
 
 function MonitorTimelineRow({ when, title, body }: { when: string; title: string; body: string }) {
   return (
-    <article
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-md)",
-        padding: "20px 22px",
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold-dim)",
-          fontSize: "var(--fs-xs)",
-          letterSpacing: "0.16em",
-          marginBottom: 6,
-          textTransform: "uppercase",
-        }}
-      >
-        {when}
-      </div>
-      <h3
-        style={{
-          color: "var(--ice)",
-          fontSize: "var(--fs-body)",
-          fontWeight: 600,
-          marginBottom: 6,
-          fontFamily: "var(--font-body), system-ui, sans-serif",
-          letterSpacing: 0,
-        }}
-      >
-        {title}
-      </h3>
-      <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7 }}>{body}</p>
-    </article>
+    <GlowCard as="article" className={s.mon}>
+      <div className={s.monWhen}>{when}</div>
+      <h3 className={s.tlH}>{title}</h3>
+      <p className={s.monP}>{body}</p>
+    </GlowCard>
   );
 }
 
@@ -1083,63 +953,17 @@ function SplitCol({
   prefix: string;
 }) {
   return (
-    <article
-      style={{
-        background: "var(--card)",
-        border: `1px solid ${accent === "gold" ? "var(--gold-dim)" : "var(--border)"}`,
-        borderRadius: "var(--radius-md)",
-        padding: "30px 26px",
-      }}
-    >
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: accent === "gold" ? "var(--gold)" : "var(--ice)",
-          fontSize: "var(--fs-lg)",
-          letterSpacing: "0.06em",
-          marginBottom: 6,
-          lineHeight: 1.3,
-        }}
-      >
-        {title}
-      </h3>
-      <p
-        style={{
-          color: "var(--dim)",
-          fontSize: "var(--fs-sm)",
-          marginBottom: 18,
-          lineHeight: 1.5,
-        }}
-      >
-        {sub}
-      </p>
-      <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+    <GlowCard as="article" className={`${s.split} ${accent === "gold" ? s.splitGold : s.splitIce}`}>
+      <h3>{title}</h3>
+      <p className={s.splitSub}>{sub}</p>
+      <ul>
         {items.map((it) => (
-          <li
-            key={it}
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.7,
-              padding: "6px 0 6px 22px",
-              position: "relative",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: 0,
-                color: accent === "gold" ? "var(--ok)" : "var(--ice)",
-                fontWeight: 700,
-              }}
-            >
-              {prefix}
-            </span>
+          <li key={it}>
+            <span aria-hidden="true">{prefix}</span>
             {it}
           </li>
         ))}
       </ul>
-    </article>
+    </GlowCard>
   );
 }

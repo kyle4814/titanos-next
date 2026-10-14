@@ -4,7 +4,9 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import FaqItem from "@/components/FaqItem";
+import Faq from "@/components/w2e/Faq";
+import s from "@/components/w2e/w2e.module.css";
+import { GlowCard, BentoGrid, BentoItem } from "@/components/house";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { SystemLabel, DepthIndex, TempleFrame } from "@/components/Myth";
@@ -137,11 +139,12 @@ export default function TradiesPage() {
         <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
           FREE SAMPLE: WINNERS NEAR YOU →
         </AnimatedButton>
-        <p style={{ fontSize: "var(--fs-sm)", color: "var(--dim)", marginTop: 12, maxWidth: "var(--maxw-micro)" }}>
+        <p className={s.heroNote}>
           No card, no obligation. We send you five contract winners near your postcode, sourced and dated.
         </p>
       </PageHero>
 
+      <div className={s.scope}>
       <Bluf>
         Job Flow finds you new work before it is advertised, for {DISPLAY.JOB_FLOW_MONTHLY} when it launches. Subbie Finder is available now.
       </Bluf>
@@ -149,7 +152,7 @@ export default function TradiesPage() {
       <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={FLEX.market} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p className={s.intro}>
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The
             contract awards and leads come from public records, nothing of yours is touched, and nothing goes to your
             customers unless you send it. Nobody is replaced, your IT person stays in charge, and the price is on this
@@ -162,41 +165,21 @@ export default function TradiesPage() {
       <div className="divider-gold" />
 
       {/* WHAT YOU GET */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={1} total={4} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Every month, done for you</SystemLabel>
           <SectionHeading title="What You Get" lead="Five things, every month, for one flat price." />
-          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <ul
-              style={{
-                listStyle: "none",
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderRadius: "var(--radius-md)",
-                padding: "26px 28px",
-                margin: 0,
-              }}
-            >
-              {WHAT_YOU_GET.map((it) => (
-                <li
-                  key={it}
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    padding: "10px 0 10px 26px",
-                    position: "relative",
-                  }}
-                >
-                  <span aria-hidden="true" style={{ position: "absolute", left: 0, color: "var(--ok)", fontWeight: 700 }}>
-                    ✓
-                  </span>
-                  {it}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <BentoGrid className={s.wide}>
+            {WHAT_YOU_GET.map((it, i) => (
+              <BentoItem key={it} as="div" span={i < 2 ? 6 : 4} style={{ padding: 0 }}>
+                <GlowCard className={s.tick}>
+                  <span className={s.tickMark} aria-hidden="true" />
+                  <span>{it}</span>
+                </GlowCard>
+              </BentoItem>
+            ))}
+          </BentoGrid>
         </div>
       </SectionReveal>
 
@@ -205,47 +188,22 @@ export default function TradiesPage() {
       <div className="divider-gold" />
 
       {/* HOW IT WORKS */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={2} total={4} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Three steps</SystemLabel>
           <SectionHeading title="How It Works" lead="You stay in control of everything that reaches a customer." />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: 18,
-              maxWidth: "var(--maxw-content)",
-              margin: "0 auto",
-            }}
-          >
-            {STEPS.map((s) => (
-              <article
-                key={s.n}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "24px 22px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--gold)",
-                    fontSize: "var(--fs-h2)",
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    marginBottom: 10,
-                  }}
-                >
-                  {s.n}
-                </div>
-                <h3 style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 8px" }}>{s.t}</h3>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, margin: 0 }}>{s.d}</p>
-              </article>
+          <BentoGrid className={s.wide}>
+            {STEPS.map((st) => (
+              <BentoItem key={st.n} span={4} style={{ padding: 0 }}>
+                <GlowCard as="article" className={s.step}>
+                  <div className={s.stepN} aria-hidden="true">{st.n}</div>
+                  <h3>{st.t}</h3>
+                  <p>{st.d}</p>
+                </GlowCard>
+              </BentoItem>
             ))}
-          </div>
+          </BentoGrid>
         </div>
       </SectionReveal>
 
@@ -254,44 +212,16 @@ export default function TradiesPage() {
       <div className="divider-gold" />
 
       {/* PRICE + LADDER */}
-      <SectionReveal id="pricing" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="pricing" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={3} total={4} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The price</SystemLabel>
           <SectionHeading title="One Price. Cancel Any Time." lead="No lock-in. No setup fee. One email to stop." />
           <TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <article style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--ice)",
-                  fontSize: "var(--fs-xs)",
-                  letterSpacing: "0.18em",
-                  marginBottom: 14,
-                }}
-              >
-                JOB FLOW
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-h2)",
-                  fontWeight: 700,
-                  lineHeight: 1.15,
-                }}
-              >
-                {DISPLAY.JOB_FLOW_MONTHLY}
-              </div>
-              <p
-                style={{
-                  color: "var(--text)",
-                  fontSize: "var(--fs-body)",
-                  lineHeight: 1.75,
-                  margin: "20px auto 24px",
-                  maxWidth: "var(--maxw-prose)",
-                }}
-              >
+            <article className={s.priceBox}>
+              <div className={s.priceTag}>JOB FLOW</div>
+              <div className={s.priceBig}>{DISPLAY.JOB_FLOW_MONTHLY}</div>
+              <p className={s.priceNote}>
                 Launching soon. Billed monthly once live. Cancel any time with one email. Nothing more is charged after you cancel.
               </p>
               <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary" ariaLabel="Start with a free sample">
@@ -299,19 +229,10 @@ export default function TradiesPage() {
               </AnimatedButton>
             </article>
           </TempleFrame>
-          <p
-            style={{
-              color: "var(--ice)",
-              fontSize: "var(--fs-body)",
-              maxWidth: "var(--maxw-prose)",
-              margin: "var(--space-8) auto 0",
-              lineHeight: 1.75,
-              textAlign: "center",
-            }}
-          >
-            Where it sits: <a href="/monitor" style={{ color: "var(--gold)" }}>Titanos Monitor</a> on its own is{" "}
+          <p className={s.proseTop}>
+            Where it sits: <a href="/monitor" className={s.link}>Titanos Monitor</a> on its own is{" "}
             {DISPLAY.MONITOR_MONTHLY}, and Job Flow includes it. Job Flow is {DISPLAY.JOB_FLOW_MONTHLY}. If you later want
-            a bigger build, <a href="/ai-delivery" style={{ color: "var(--gold)" }}>AI partner retainers</a> are
+            a bigger build, <a href="/ai-delivery" className={s.link}>AI partner retainers</a> are
             there: {DISPLAY.AI_LADDER_ENTRY}.
           </p>
         </div>
@@ -322,18 +243,12 @@ export default function TradiesPage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal id="faq" className={s.sec}>
         <div className="container-vault">
           <DepthIndex index={4} total={4} />
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
           <SectionHeading title="Before You Ask" />
-          <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-            {FAQ_ITEMS.map((f) => (
-              <FaqItem key={f.q} question={f.q}>
-                {f.a}
-              </FaqItem>
-            ))}
-          </div>
+          <Faq items={FAQ_ITEMS} />
         </div>
       </SectionReveal>
 
@@ -348,21 +263,10 @@ export default function TradiesPage() {
       <FrontLoad />
 
       {/* PERMISSION CLOSE */}
-      <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h2)",
-              fontWeight: 400,
-              fontStyle: "italic",
-              marginBottom: 14,
-            }}
-          >
-            Would it be okay if I sent you a free sample?
-          </h2>
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 22px" }}>
+      <SectionReveal className={s.sec} style={{ paddingBottom: "var(--space-20)" }}>
+        <div className={s.close}>
+          <h2>Would it be okay if I sent you a free sample?</h2>
+          <p>
             If it looks useful and you are comfortable with all of that, would it be okay if I sent you five
             contract winners near your postcode, sourced and dated? You would see what it finds before you pay
             anything. A no is completely fine. Prefer to talk first? You can also book a free audit call.
@@ -372,6 +276,7 @@ export default function TradiesPage() {
           </AnimatedButton>
         </div>
       </SectionReveal>
+      </div>
     </>
   );
 }

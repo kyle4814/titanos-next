@@ -1,0 +1,18 @@
+/* Wave 2e: courses + security blocks */
+.sec { padding: var(--space-12, 48px) 20px; position: relative; z-index: 2; }
+.wrap { max-width: var(--maxw-wide, 1020px); margin: 0 auto; }
+.point { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 26px 24px; }
+.point h2 { margin: 0; color: var(--ice); font-size: clamp(1.25rem, 1.05rem + 1vw, 1.7rem); line-height: 1.25; text-wrap: balance; }
+.point p { margin: 0; color: var(--text-secondary, #b9b2a8); font-size: var(--fs-body); line-height: 1.7; max-width: 56ch; }
+.point a { color: var(--gold); text-underline-offset: 3px; }
+.point a:focus-visible, .source a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+.stat { padding: clamp(28px, 4vw, 44px); border-color: var(--gold-dim); }
+.kicker { margin: 0; letter-spacing: 0.14em; font-size: var(--fs-xs); color: var(--dim); }
+.statValue { margin: 8px 0; font-family: var(--font-display), Georgia, serif; font-size: clamp(2.4rem, 1.6rem + 4vw, 4.2rem); line-height: 1.05; color: var(--gold); font-variant-numeric: tabular-nums; }
+.label { margin: 0; font-size: var(--fs-sm); letter-spacing: 0.12em; color: var(--ice); }
+.note { margin: 12px 0 0; max-width: 56ch; line-height: 1.7; color: var(--text); text-wrap: pretty; }
+.source { margin: 10px 0 0; font-size: var(--fs-sm); color: var(--dim); }
+.source a { color: var(--gold); }
+.step { max-width: 62ch; margin: 0 auto; text-align: center; }
+.step h2 { margin: 0 0 14px; font-size: clamp(1.3rem, 1.1rem + 1vw, 1.8rem); text-wrap: balance; }
+.step p { margin: 0 auto 20px; color: var(--ice); opacity: 0.85; }
