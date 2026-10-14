@@ -61,13 +61,13 @@ export const CASES: CaseStudy[] = [
   {
     slug: "sales-coaching-course",
     sector: "Sales coaching",
-    title: "A 1,900-lesson sales course with its own coach, built in about 27 hours",
+    title: "A 1,900-lesson sales course with its own coach, built in under 90 minutes",
     teaser:
       "A private, phone-first training course for a sales coach: 190 modules, 1,900 lessons, quizzes, spaced review and an AI coach for questions, role-play and speaking practice. 412 commits and 35 automated tests passing.",
     cover: "/case-studies/sales-course-overview.webp",
     coverAlt: "The course home screen on a phone: level, progress and the first module",
     facts: [
-      ["About 27 hours", "from the first commit (10:44, 9 October 2026) to the last (13:48, 10 October 2026)"],
+      ["83 minutes", "from the first commit (10:44) to the full course (12:07), 9 October 2026; 409 of its 412 commits"],
       ["1,900", "lessons in 190 modules, about 2.7 million words, each lesson with a five-question quiz"],
       ["412", "commits in the project history"],
       ["35 / 35", "automated tests passing"],
@@ -84,7 +84,7 @@ export const CASES: CaseStudy[] = [
       "A single private passphrase login with a lockout after five wrong tries, a forced change from any temporary passphrase and a daily cap on the AI coach so it can never run up a bill.",
     ],
     speed:
-      "The first commit landed at 10:44 on 9 October and the last at 13:48 the next day, about 27 hours later. The working app, with a placeholder course, was committed within 4 minutes of the start. The first real module was integrated at 12:07 on day one, and the other 189 followed one module at a time, each one checked and added to the index before the next.",
+      "The first commit landed at 10:44 on 9 October: the working app with a placeholder course. The first course module followed at 11:13, and by 12:07 all 190 modules were in, 396 course commits in 54 minutes. A five-minute tidy of the course index the next day is the only work after that.",
     cost:
       "No extra spend. The build ran inside flat-rate AI subscriptions that were already paid for. Usage was not metered separately for this build, so no per-build dollar figure is claimed. The live coach is designed to run inside a free daily allowance, with a hard cap built in.",
     tested:
