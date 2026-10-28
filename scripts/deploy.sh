@@ -64,8 +64,21 @@ SRC_SHA=$(git rev-parse HEAD)
 [ "$SRC_SHA" = "$(git rev-parse origin/main)" ] || refuse "HEAD ${SRC_SHA:0:12} is not origin/main $(git rev-parse --short=12 origin/main); push or pull first"
 if [ "$APPROVED_BY" = interactive ]; then
   SHORT=$(git rev-parse --short=7 HEAD)
-  printf '  Deploy %s "%s" to the live site with no approval card? Type %s to confirm: ' "$SHORT" "$(git log -1 --format=%s)" "$SHORT"
-  read -r ANSWER || ANSWER=""
+  # 2026-10-28: the prompt and the answer both go to /dev/tty, never to inherited stdin. Kyle pastes this command
+  # from a Telegram code box; a paste that carries a trailing newline was being consumed by `read` as an EMPTY
+  # answer, so the gate refused before he could type a character (observed: prompt and REFUSED on one line).
+  # A stray newline must never answer a publish gate, in either direction.
+  # An EMPTY line is not a wrong answer, it is no answer: skip it and ask again (up to 3 blanks). Kyle pastes this
+  # command out of a Telegram code box and the paste's trailing newline was being consumed by `read` as an empty
+  # confirmation, so the gate refused before he could type a character (prompt and REFUSED on one line, 2026-10-28).
+  # Nothing is loosened: a blank can never approve, a wrong SHA still refuses immediately, and EOF still refuses.
+  ANSWER=""
+  for _try in 1 2 3 4; do
+    printf '  Deploy %s "%s" to the live site with no approval card? Type %s to confirm: ' "$SHORT" "$(git log -1 --format=%s)" "$SHORT" >/dev/tty
+    read -r ANSWER </dev/tty || { ANSWER=""; break; }
+    ANSWER=$(printf '%s' "$ANSWER" | tr -d '[:space:]')
+    [ -n "$ANSWER" ] && break
+  done
   [ "$ANSWER" = "$SHORT" ] || refuse "confirmation did not match $SHORT"
   APPROVED_BY="interactive, SHA typed at a terminal"   # no username: gh-pages history is public
 fi

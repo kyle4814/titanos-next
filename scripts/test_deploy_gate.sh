@@ -118,6 +118,14 @@ if command -v script >/dev/null 2>&1; then
          script -qec "bash $T/repo/scripts/deploy.sh" /dev/null >"$T/out" 2>&1; }
   pty wrong123; ! built && grep -q "REFUSED: confirmation did not match" "$T/out"; ok $? "interactive, wrong SHA typed: refused before the build"
   pty "$SHORT"; built && grep -q "gate ok: .*interactive, SHA typed at a terminal" "$T/out"; ok $? "interactive, the short SHA typed at a terminal: passes the gate"
+  # REGRESSION 2026-10-28: Kyle pasted the command from a Telegram code box and the paste's trailing newline was
+  # eaten by `read` as an empty answer, so the gate refused before he could type (prompt and REFUSED on one line).
+  # The prompt and the answer now go to /dev/tty, so leading blank lines on inherited stdin cannot answer the gate.
+  pty_prefixed(){ : > "$T/stub.log"; printf '\n\n%s\n' "$1" | env -u DEPLOY_APPROVAL_REF "${STUBENV[@]}" DEPLOY_INTERACTIVE=1 \
+         script -qec "bash $T/repo/scripts/deploy.sh" /dev/null >"$T/out" 2>&1; }
+  pty_prefixed "$SHORT"; built && grep -q "gate ok: .*interactive, SHA typed at a terminal" "$T/out"; ok $? "a stray pasted newline does not answer the publish gate"
+  # and whitespace around a correctly typed SHA is still a match, never a silent refusal
+  pty "  $SHORT  "; built && grep -q "gate ok: .*interactive, SHA typed at a terminal" "$T/out"; ok $? "a SHA typed with stray spaces is accepted"
   G -C "$T/origin.git" log -1 --format=%B gh-pages | grep -q "approval: interactive, SHA typed at a terminal" && ! G -C "$T/origin.git" log -1 --format=%B gh-pages | grep -q "$(id -un)"; ok $? "an interactive deploy is stamped as interactive, with no local username in public history"
 else
   ok 1 "script(1) missing: the interactive path cannot be proven (FAIL, not skip)"
