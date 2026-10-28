@@ -73,6 +73,12 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://titanos.tech/black-ice/dossiers/seven-question-proof-test</loc>
+<lastmod>2026-10-28T08:58:38.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
 <loc>https://titanos.tech/case-studies/dealer-command-centre</loc>
 <lastmod>2026-10-14T08:26:49.000Z</lastmod>
 <changefreq>monthly</changefreq>
@@ -723,6 +729,12 @@
 <url>
 <loc>https://titanos.tech/black-ice/doctrine</loc>
 <lastmod>2026-10-08T03:18:36.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://titanos.tech/black-ice/dossiers</loc>
+<lastmod>2026-10-28T08:58:38.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
