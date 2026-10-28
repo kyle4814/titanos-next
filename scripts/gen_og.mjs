@@ -12,11 +12,14 @@ const esc = (s) => s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x
 
 const cards = [];
 for (const f of walk(OUT)) {
-  const info = inspect(fs.readFileSync(f, "utf8"));
+  const raw = fs.readFileSync(f, "utf8");
+  const info = inspect(raw);
   if (info.noindex) continue;
   const route = routeOf(OUT, f);
   const title = (info.title || "TITANOS").replace(/\s*[|:]\s*Titanos$/i, "").replace(/\s*\|\s*TITANOS$/i, "");
-  cards.push({ slug: slugOf(route), route, title: esc(title), desc: esc(info.description || "") });
+  // Black Ice dossier pages carry data-rung="THESIS" etc: the evidence rung is printed on the card as visible text.
+  const rung = route.startsWith("/black-ice/dossiers/") ? (raw.match(/data-rung="([A-Z]+)"/) || [])[1] : undefined;
+  cards.push({ slug: slugOf(route), route, title: esc(title), desc: esc(info.description || ""), rung });
 }
 
 const dir = path.join(OUT, "og");
@@ -26,6 +29,7 @@ const fallback = path.join(process.cwd(), "public", "og-image.png");
 const html = (c) => `<!doctype html><html><body style="margin:0;width:1200px;height:630px;background:#0a0a0b;color:#E0E0E0;font-family:Georgia,'Times New Roman',serif;position:relative;overflow:hidden">
 <div style="position:absolute;left:0;top:0;bottom:0;width:6px;background:#D4AF37"></div>
 <div style="position:absolute;left:72px;top:64px;font:600 22px 'Courier New',monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</div>
+${c.rung ? `<div style="position:absolute;right:72px;top:60px;padding:6px 18px;border:2px solid #D4AF37;font:600 24px 'Courier New',monospace;letter-spacing:.2em;color:#D4AF37">${c.rung}</div>` : ""}
 <div style="position:absolute;left:72px;top:150px;right:72px;font-size:${c.title.length > 70 ? 54 : c.title.length > 40 ? 64 : 76}px;line-height:1.12;color:#fff;font-weight:400">${c.title}</div>
 <div style="position:absolute;left:72px;bottom:112px;right:96px;font:400 28px/1.4 Helvetica,Arial,sans-serif;color:#B9F2FF;max-height:120px;overflow:hidden">${c.desc.slice(0, 150)}</div>
 <div style="position:absolute;left:72px;bottom:56px;font:400 22px 'Courier New',monospace;color:#8a8a8a">titanos.tech${c.route === "/" ? "" : c.route}</div>
