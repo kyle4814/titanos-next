@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accepted Agent Throughput Scorecard</title>
+<meta name="description" content="Measure accepted output per worker-hour, cost per accepted result, attribution coverage and whether your worker-count instrument can see your workers at all.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-001/scorecard">
+<meta property="og:title" content="Accepted Agent Throughput Scorecard">
+<meta property="og:description" content="Free offline scorecard: accepted results per worker-hour, cost per accepted result, attribution coverage, and whether a worker can hide between your samples.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://titanos.tech/labs/issue-001/scorecard">
+<meta property="og:image" content="https://titanos.tech/labs/issue-001/img/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/labs/issue-001/img/cover.png">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #ffffff;
+    --surface-1: #fcfcfb;
+    --surface-2: #f4f4f1;
+    --line:      #dededa;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #76756f;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --good:    #0a7a4a;
+    --serious: #b45309;
+    --critical:#b42318;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --surface-2: #232322;
+      --line:      #3a3a38;
+      --text-primary:   #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #9a998f;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --good:    #3dbd84;
+      --serious: #e0a73c;
+      --critical:#f08b84;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #232322; --line: #3a3a38;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #9a998f;
+    --series-1: #3987e5; --series-2: #d95926;
+    --good: #3dbd84; --serious: #e0a73c; --critical: #f08b84;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface-0); color: var(--text-primary);
+    font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.0625rem; margin: 32px 0 8px; }
+  h3 { font-size: 0.9375rem; margin: 20px 0 6px; color: var(--text-secondary); }
+  p  { margin: 8px 0; color: var(--text-secondary); }
+  .lede { color: var(--text-secondary); margin-bottom: 20px; }
+  .card {
+    background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; margin: 16px 0;
+  }
+  fieldset { border: 0; margin: 0; padding: 0; }
+  legend { font-weight: 600; font-size: 0.9375rem; padding: 0 0 8px; color: var(--text-primary); }
+  .grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 620px) { .grid { grid-template-columns: 1fr 1fr; } .grid.three { grid-template-columns: 1fr 1fr 1fr; } }
+  label { display: block; font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 4px; }
+  input[type="number"] {
+    width: 100%; padding: 10px 12px; font: inherit; font-variant-numeric: tabular-nums;
+    color: var(--text-primary); background: var(--surface-0);
+    border: 1px solid var(--line); border-radius: 8px; min-height: 44px;
+  }
+  input:focus-visible, button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+  .hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  button {
+    font: inherit; font-weight: 600; min-height: 44px; padding: 10px 16px; cursor: pointer;
+    border-radius: 8px; border: 1px solid var(--line);
+    background: var(--surface-2); color: var(--text-primary);
+  }
+  button.primary { background: var(--series-1); border-color: var(--series-1); color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 0.875rem; }
+  caption { text-align: left; font-size: 0.8125rem; color: var(--text-muted); padding-bottom: 8px; }
+  th, td { text-align: right; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--text-secondary); font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  .metric { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .metric dt { color: var(--text-secondary); font-size: 0.875rem; }
+  .metric dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+  dl { margin: 0; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 650;
+    padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-secondary);
+  }
+  .tag.good     { color: var(--good);     border-color: currentColor; }
+  .tag.serious  { color: var(--serious);  border-color: currentColor; }
+  .tag.critical { color: var(--critical); border-color: currentColor; }
+  .verdict { font-size: 1.125rem; font-weight: 700; margin: 4px 0 2px; }
+  ul { padding-left: 20px; color: var(--text-secondary); }
+  li { margin: 4px 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.875em;
+         background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+  .err { color: var(--critical); font-size: 0.8125rem; margin: 4px 0; }
+  .warn { color: var(--serious); font-size: 0.8125rem; margin: 4px 0; }
+  .muted { color: var(--text-muted); font-size: 0.8125rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  svg { max-width: 100%; height: auto; display: block; }
+  header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  header .head-text { flex: 1 1 260px; min-width: 0; }
+  .toggle { flex: 0 0 auto; min-height: 36px; padding: 6px 12px; font-size: 0.8125rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="head-text">
+    <h1>Accepted Agent Throughput Scorecard</h1>
+    <p class="lede">Running workers are not output. This measures accepted results per worker-hour, cost per accepted result, and whether your instrument can see your workers at all.</p>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center"><a id="backlink" href="/labs/issue-001/" style="font-size:.8125rem;color:var(--series-1);text-decoration:none">&larr; the article</a><button class="toggle" id="theme" type="button" aria-label="Switch colour theme">Theme</button></div>
+</header>
+
+<section class="card">
+  <h2 id="nyq-h">Can a worker slip between two of your samples?</h2>
+  <p>Do this first. If a sampler reads the worker count on a timer, a worker that starts and finishes between two samples is recorded as zero, and every per-worker-hour number downstream becomes a lower bound rather than a measurement. No polling interval is safe for arbitrarily short workers; only per-worker start and end events are.</p>
+  <fieldset class="grid" aria-labelledby="nyq-h">
+    <div>
+      <label for="samplePeriodMin">Polling interval (minutes)</label>
+      <input type="number" id="samplePeriodMin" min="0" step="0.1" value="20" inputmode="decimal">
+      <p class="hint">How often the worker count is recorded.</p>
+    </div>
+    <div>
+      <label for="workerLifetimeMin">Shortest worker you need to observe (minutes)</label>
+      <input type="number" id="workerLifetimeMin" min="0" step="0.1" value="18.3" inputmode="decimal">
+      <p class="hint">Not your timeout. The shortest job whose time you need counted.</p>
+    </div>
+  </fieldset>
+  <div id="nyq-out" aria-live="polite"></div>
+</section>
+
+<section class="card">
+  <h2 id="winA-h">Window A</h2>
+  <p class="muted">One measurement window: a run, a day, a sprint. Leave a field blank if you did not measure it. Blank stays unknown and never becomes zero.</p>
+  <fieldset class="grid" aria-labelledby="winA-h" id="winA"></fieldset>
+  <div class="row">
+    <button type="button" id="loadMeasured">Load the measured Issue 001 window</button>
+    <button type="button" id="loadSynthetic">Load a synthetic example</button>
+    <button type="button" id="clearA">Clear</button>
+  </div>
+  <div id="outA" aria-live="polite"></div>
+</section>
+
+<section class="card">
+  <h2 id="winB-h">Window B, for a before-and-after</h2>
+  <p class="muted">Fill this in to compare two worker counts on the same task family. The verdict is on accepted output per worker-hour, not on activity.</p>
+  <fieldset class="grid" aria-labelledby="winB-h" id="winB"></fieldset>
+  <div class="row"><button type="button" id="loadBuckets">Load the measured 1-lane vs 2-lane windows</button><button type="button" id="clearB">Clear</button></div>
+  <div id="outB" aria-live="polite"></div>
+</section>
+
+<section class="card">
+  <h2>Verdict</h2>
+  <div id="verdict" aria-live="polite"><p class="muted">Fill in both windows to get a verdict.</p></div>
+</section>
+
+<section class="card">
+  <h2>Measured reference: Demonblade Labs Issue 001</h2>
+  <p>One real production system, five days, 340 instrument samples, 89 reviewed tasks. <strong>Measured, not synthetic.</strong> Observational, not a controlled experiment: the governor chose the worker count, task difficulty varied, and 85% of accepted results fell in intervals the sampler recorded as zero workers. The All row (25.2) is therefore a <strong>lower bound</strong>, not the system cost, and the 166.6 figure applies only within observed intervals. The true system-wide figure is unknown.</p>
+  <div id="chart"></div>
+  <div class="scroll">
+    <table id="bucketTable">
+      <caption>Lane-minutes per accepted result by concurrent worker count. Window 2026-10-17 07:47 to 2026-10-22 04:48 (+10:00). Method, dataset and limits: <a href="/labs/issue-001/">the article</a>.</caption>
+      <thead><tr><th scope="col">Concurrent workers</th><th scope="col">Wall hours</th><th scope="col">Worker minutes</th><th scope="col">Accepted</th><th scope="col">Not accepted</th><th scope="col">Worker min / accepted</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Definitions, so nobody argues later</h2>
+  <dl>
+    <div class="metric"><dt>Attempted</dt><dd class="muted">tasks dispatched</dd></div>
+    <div class="metric"><dt>Accepted</dt><dd class="muted">an independent reviewer said ACCEPTED</dd></div>
+    <div class="metric"><dt>Worker hours</dt><dd class="muted">summed active worker time, not wall clock</dd></div>
+    <div class="metric"><dt>Attributable accepted</dt><dd class="muted">accepted results inside intervals where worker time was observed</dd></div>
+    <div class="metric"><dt>Attribution coverage</dt><dd class="muted">attributable / accepted. Below 1, your cost per accepted is a lower bound, and the gap is not a correction factor</dd></div>
+  </dl>
+  <h3>Limitations</h3>
+  <ul>
+    <li>Everything here is arithmetic on numbers you supply. It cannot tell you whether your acceptance standard is any good.</li>
+    <li>When attribution coverage is below 1 the true cost per accepted result is unknown. This tool shows you the bound and the conditional figure; it will not invent the number in between.</li>
+    <li>The comparison is a difference between two windows, not a controlled experiment. Confounders are yours to rule out.</li>
+    <li>No network, no analytics, no storage. Nothing you type leaves the page.</li>
+  </ul>
+  <div class="row">
+    <button type="button" id="copyJson">Copy results as JSON</button>
+    <button type="button" id="downloadCsv">Download CSV</button>
+  </div>
+  <p class="muted" id="exportNote"></p>
+</section>
+</div>
+
+<script src="scorecard.js"></script>
+<script>
+const { score, samplingAdequacy, compare } = Scorecard;
+
+const FIELDS = [
+  ["workers", "Workers (concurrent)", "0", "1"],
+  ["attempted", "Tasks attempted", "0", "1"],
+  ["accepted", "Tasks accepted", "0", "1"],
+  ["rejected", "Tasks reviewed, not accepted", "0", "1"],
+  ["retries", "Retries / reworks", "0", "1"],
+  ["wallHours", "Wall-clock hours", "0", "0.1"],
+  ["workerHours", "Worker hours (active, summed)", "0", "0.1"],
+  ["reviewHours", "Human review + integration hours", "0", "0.1"],
+  ["modelCostUsd", "Model / API cost (USD)", "0", "0.01"],
+  ["reviewRateUsd", "Review cost per hour (USD, optional)", "0", "1"],
+  ["attributableAccepted", "Accepted inside observed worker time", "0", "1"],
+];
+
+const MEASURED_A = {
+  workers: 3, attempted: 89, accepted: 66, rejected: 23, retries: "",
+  wallHours: 113.3, workerHours: 27.77, reviewHours: "", modelCostUsd: "",
+  reviewRateUsd: "", attributableAccepted: 10,
+};
+const SYNTHETIC_A = {
+  workers: 3, attempted: 40, accepted: 24, rejected: 16, retries: 7,
+  wallHours: 8, workerHours: 20, reviewHours: 3.5, modelCostUsd: 42.5,
+  reviewRateUsd: 80, attributableAccepted: 24,
+};
+const BUCKET_1 = { workers: 1, attempted: 13, accepted: 9, rejected: 4, wallHours: 20.2, workerHours: 20.2, attributableAccepted: 9 };
+const BUCKET_2 = { workers: 2, attempted: 1, accepted: 1, rejected: 0, wallHours: 3.3, workerHours: 6.55, attributableAccepted: 1 };
+
+const BUCKETS = [
+  { lanes: "0", wall_h: 89.5, worker_min: 0, accepted: 56, not_accepted: 19, per: null },
+  { lanes: "1", wall_h: 20.2, worker_min: 1212, accepted: 9, not_accepted: 4, per: 134.7 },
+  { lanes: "2", wall_h: 3.3, worker_min: 393, accepted: 1, not_accepted: 0, per: 392.7 },
+  { lanes: "3", wall_h: 0.3, worker_min: 61, accepted: 0, not_accepted: 0, per: null },
+];
+
+const $ = (id) => document.getElementById(id);
+const fmt = (v, unit = "") => (v === null || v === undefined || Number.isNaN(v)) ? "unknown" : `${v}${unit}`;
+
+function buildForm(host, prefix) {
+  host.innerHTML = FIELDS.map(([k, label, min, step]) => `
+    <div>
+      <label for="${prefix}_${k}">${label}</label>
+      <input type="number" id="${prefix}_${k}" min="${min}" step="${step}" inputmode="decimal">
+    </div>`).join("");
+}
+function readForm(prefix) {
+  const out = {};
+  for (const [k] of FIELDS) {
+    const raw = $(`${prefix}_${k}`).value.trim();
+    if (raw !== "") out[k] = Number(raw);
+  }
+  return out;
+}
+function writeForm(prefix, vals) {
+  for (const [k] of FIELDS) $(`${prefix}_${k}`).value = (vals[k] ?? "") === "" ? "" : vals[k];
+}
+
+const ROWS = [
+  ["Acceptance ratio", (s) => fmt(s.acceptanceRatio)],
+  ["Accepted per wall hour", (s) => fmt(s.acceptedPerWallHour)],
+  ["Accepted per worker hour", (s) => fmt(s.acceptedPerWorkerHour)],
+  ["Worker minutes per accepted", (s) => fmt(s.workerMinPerAccepted)],
+  ["Attribution coverage", (s) => fmt(s.attributionCoverage)],
+  ["Worker min per accepted, all accepted (LOWER BOUND)", (s) => fmt(s.naiveWorkerMinPerAccepted)],
+  ["Worker min per accepted, within observed intervals", (s) => fmt(s.correctedWorkerMinPerAccepted)],
+  ["Model cost per accepted (USD)", (s) => fmt(s.modelCostPerAccepted)],
+  ["Total cost per accepted (USD)", (s) => fmt(s.totalCostPerAccepted)],
+  ["Integration ratio (review / worker time)", (s) => fmt(s.integrationRatio)],
+  ["Rework share", (s) => fmt(s.reworkShare)],
+];
+
+function renderScore(host, s) {
+  const problems = [
+    ...s.errors.map((e) => `<p class="err">Error: ${e}</p>`),
+    ...s.warnings.map((w) => `<p class="warn">Warning: ${w}</p>`),
+  ].join("");
+  const coverageTag = s.attributionCoverage === null ? ""
+    : s.attributionCoverage >= 0.95 ? `<span class="tag good">Attribution sound</span>`
+    : s.attributionCoverage >= 0.5 ? `<span class="tag serious">Attribution partial</span>`
+    : `<span class="tag critical">Attribution broken</span>`;
+  host.innerHTML = `${problems}<div class="row">${coverageTag}</div><dl>` +
+    ROWS.map(([label, f]) => `<div class="metric"><dt>${label}</dt><dd>${f(s)}</dd></div>`).join("") +
+    `</dl>`;
+}
+
+function renderIntervalCheck() {
+  const a = samplingAdequacy({
+    samplePeriodMin: Number($("samplePeriodMin").value),
+    shortestWorkerMin: Number($("workerLifetimeMin").value),
+  });
+  const cls = a.verdict === "MISSES BOUNDED AT THIS LENGTH" ? "good"
+    : a.verdict === "MISSES POSSIBLE" ? "serious"
+    : a.verdict === "CAN MISS WORKERS" ? "critical" : "";
+  $("nyq-out").innerHTML =
+    `<p class="verdict"><span class="tag ${cls}">${a.verdict}</span></p>
+     <p>${a.note}</p>
+     <dl><div class="metric"><dt>Interval that bounds misses at this length</dt><dd>${fmt(a.boundedAt, " min")}</dd></div>
+     <div class="metric"><dt>Interval / worker length</dt><dd>${fmt(a.ratio)}</dd></div></dl>`;
+}
+
+let lastA = null, lastB = null;
+
+function recompute() {
+  const a = readForm("A"), b = readForm("B");
+  lastA = Object.keys(a).length ? score(a) : null;
+  lastB = Object.keys(b).length ? score(b) : null;
+  if (lastA) renderScore($("outA"), lastA); else $("outA").innerHTML = `<p class="muted">Enter at least one figure.</p>`;
+  if (lastB) renderScore($("outB"), lastB); else $("outB").innerHTML = `<p class="muted">Optional.</p>`;
+  if (Object.keys(a).length && Object.keys(b).length) {
+    const c = compare(a, b);
+    const cls = c.verdict === "SCALING HELPED" ? "good" : c.verdict === "SCALING HURT" ? "critical" : c.verdict === "UNDECIDABLE" ? "" : "serious";
+    $("verdict").innerHTML = `<p class="verdict"><span class="tag ${cls}">${c.verdict}</span></p>
+      <p>${c.note}</p>
+      <dl><div class="metric"><dt>Change in accepted per worker hour</dt><dd>${c.deltaPct === null ? "unknown" : c.deltaPct + "%"}</dd></div></dl>
+      <p class="muted">A difference between two windows is not a controlled result. Rule out task difficulty, model route and reviewer standard before you believe it.</p>`;
+  } else {
+    $("verdict").innerHTML = `<p class="muted">Fill in both windows to get a verdict.</p>`;
+  }
+  renderIntervalCheck();
+}
+
+/* ---- Measured bucket chart: one series, direct labels, no legend needed ---- */
+function renderChart() {
+  const rows = BUCKETS.filter((b) => b.per !== null);
+  const W = 680, H = 260, padL = 112, padR = 64, padT = 16, padB = 36;
+  const max = Math.max(...rows.map((r) => r.per)) * 1.15;
+  const bandH = (H - padT - padB) / rows.length;
+  const barH = Math.min(34, bandH * 0.56);
+  const x = (v) => padL + (v / max) * (W - padL - padR);
+  const ticks = [0, 100, 200, 300, 400].filter((t) => t <= max);
+  const bars = rows.map((r, i) => {
+    const cy = padT + bandH * i + bandH / 2;
+    const w = Math.max(x(r.per) - padL, 2);
+    const fill = r.lanes === "1" ? "var(--series-1)" : "var(--series-2)";
+    return `
+      <rect x="${padL}" y="${cy - barH / 2}" width="${w}" height="${barH}" rx="4"
+            fill="${fill}" stroke="var(--surface-1)" stroke-width="2"></rect>
+      <text x="${padL + w + 8}" y="${cy + 5}" font-size="14" font-weight="650" fill="var(--text-primary)">${r.per}</text>
+      <text x="${padL - 12}" y="${cy + 5}" font-size="13" text-anchor="end" fill="var(--text-secondary)">${r.lanes} worker${r.lanes === "1" ? "" : "s"}</text>`;
+  }).join("");
+  $("chart").innerHTML = `
+  <figure style="margin:0 0 12px">
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="chartTitle chartDesc" style="width:100%">
+      <title id="chartTitle">Worker minutes per accepted result, by concurrent worker count</title>
+      <desc id="chartDesc">One worker: 134.7 worker minutes per accepted result. Two workers: 392.7. Measured over five days on one production system. The three-worker bucket produced no accepted result in 61 worker minutes and is not plotted.</desc>
+      ${ticks.map((t) => `<line x1="${x(t)}" y1="${padT}" x2="${x(t)}" y2="${H - padB}" stroke="var(--line)" stroke-width="1"></line>
+        <text x="${x(t)}" y="${H - padB + 18}" font-size="12" text-anchor="middle" fill="var(--text-muted)">${t}</text>`).join("")}
+      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${H - padB}" stroke="var(--text-secondary)" stroke-width="1"></line>
+      ${bars}
+      <text x="${padL}" y="${H - 4}" font-size="12" fill="var(--text-muted)">worker minutes spent per accepted result (lower is better)</text>
+    </svg>
+  </figure>`;
+}
+
+function renderTable() {
+  $("bucketTable").querySelector("tbody").innerHTML = BUCKETS.map((b) => `
+    <tr><th scope="row">${b.lanes}</th><td>${b.wall_h}</td><td>${b.worker_min}</td>
+    <td>${b.accepted}</td><td>${b.not_accepted}</td><td>${b.per === null ? "undefined" : b.per}</td></tr>`).join("") +
+    `<tr><th scope="row">All</th><td>113.3</td><td>1666</td><td>66</td><td>23</td><td>25.2</td></tr>`;
+}
+
+/* ---- wiring ---- */
+buildForm($("winA"), "A"); buildForm($("winB"), "B");
+for (const el of document.querySelectorAll("input[type=number]")) el.addEventListener("input", recompute);
+$("loadMeasured").addEventListener("click", () => { writeForm("A", MEASURED_A); recompute(); });
+$("loadSynthetic").addEventListener("click", () => { writeForm("A", SYNTHETIC_A); recompute(); });
+$("loadBuckets").addEventListener("click", () => { writeForm("A", BUCKET_1); writeForm("B", BUCKET_2); recompute(); });
+$("clearA").addEventListener("click", () => { writeForm("A", {}); recompute(); });
+$("clearB").addEventListener("click", () => { writeForm("B", {}); recompute(); });
+$("theme").addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
+  document.documentElement.setAttribute("data-theme", next);
+});
+$("copyJson").addEventListener("click", async () => {
+  const payload = JSON.stringify({ windowA: lastA, windowB: lastB, measuredReference: BUCKETS }, null, 2);
+  try { await navigator.clipboard.writeText(payload); $("exportNote").textContent = "Copied."; }
+  catch { $("exportNote").textContent = "Clipboard unavailable. Use the CSV download."; }
+});
+$("downloadCsv").addEventListener("click", () => {
+  const head = "metric,windowA,windowB";
+  const body = ROWS.map(([label, f]) => `"${label}",${lastA ? f(lastA) : ""},${lastB ? f(lastB) : ""}`).join("\n");
+  const blob = new Blob([head + "\n" + body + "\n"], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "accepted-throughput-scorecard.csv";
+  a.click(); URL.revokeObjectURL(a.href);
+  $("exportNote").textContent = "CSV downloaded.";
+});
+
+renderChart(); renderTable(); recompute();
+</script>
+</body>
+</html>

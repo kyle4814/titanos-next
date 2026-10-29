@@ -16,6 +16,15 @@ export type SiteRoute = { path: string; url: string; priority: number; changeFre
 
 const APP = path.join(process.cwd(), "app");
 
+// Hand-written static pages that live in public/ rather than app/ (Demonblade Labs issues ship as
+// self-contained HTML plus a standalone browser tool, so they are not Next routes). The SEO gate
+// audits every HTML file in out/, so anything added here must also carry title, description,
+// canonical and OG/Twitter images, or `npm test` fails.
+const STATIC_PAGES: { path: string; file: string; priority: number }[] = [
+  { path: "/labs/issue-001", file: "public/labs/issue-001/index.html", priority: 0.8 },
+  { path: "/labs/issue-001/scorecard", file: "public/labs/issue-001/scorecard/index.html", priority: 0.7 },
+];
+
 const PRIORITY: Record<string, number> = {
   "/": 1, "/audit": 0.95, "/offers": 0.9, "/compliance": 0.9, "/monitor": 0.9, "/efficiency": 0.9,
   "/engineering": 0.8, "/scan": 0.8, "/tradies": 0.8, "/leads": 0.8, "/ai-delivery": 0.8, "/find": 0.8,
@@ -59,6 +68,7 @@ export function indexableRoutes(): SiteRoute[] {
     ...extra,
   });
   const out: SiteRoute[] = staticRoutes().filter((r) => !r.noindex).map((r) => mk(r.route, r.file));
+  for (const sp of STATIC_PAGES) out.push(mk(sp.path, sp.file, { priority: sp.priority }));
   for (const o of ALL_OFFERS) out.push(mk(`/offers/${o.slug}`, "lib/offers", { priority: 0.7 }));
   for (const p of POSTS) out.push(mk(`/blog/${p.slug}`, undefined, { priority: 0.6, lastModified: new Date(p.updated || p.date) }));
   for (const c of CASES) out.push(mk(`/case-studies/${c.slug}`, "lib/caseStudies.ts", { priority: 0.7 }));
