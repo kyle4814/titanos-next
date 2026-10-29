@@ -61,10 +61,15 @@
   .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
   footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
   footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
 </style>
 </head>
 <body>
 <main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
   <p class="kicker">Demonblade Labs &middot; Issue 002</p>
 <h1>I Freed 334 Gigabytes And The Disk Got Smaller</h1>
 <p class="deck">Over three days my autonomous engineering system discarded, deleted and reclaimed 334.1 GiB inside a Linux filesystem. Across the same three days the Windows volume underneath it gained nothing. It lost 3.77 GiB. Both numbers are correct, the bug was not in the deleting, and the general form of it is probably in your monitoring right now.</p>
@@ -170,7 +175,7 @@
   <footer>
     <p>Demonblade Labs is the research publication of TitanOS. Issue 002, 30 October 2026.
     Every figure in this article is traceable to an instrument log or stated arithmetic.</p>
-    <p><a href="/">titanos.tech</a></p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
   </footer>
 </main>
 </body>
