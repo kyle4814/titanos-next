@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Freed 334 Gigabytes And The Disk Got Smaller | Demonblade Labs</title>
+<meta name="description" content="Three days, three experiments, 334 GiB reclaimed inside a Linux filesystem, and the Windows volume underneath it lost 3.77 GiB. A storage figure without its layer is a number without a unit.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-002/">
+<meta property="og:title" content="I Freed 334 Gigabytes And The Disk Got Smaller">
+<meta property="og:description" content="Three experiments, three days, 334 GiB reclaimed inside a Linux filesystem, and the host volume lost 3.77 GiB. Nine operations all reported success. Every one answered the wrong question.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-002/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-002.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. I Freed 334 Gigabytes And The Disk Got Smaller.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-002.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="kicker">Demonblade Labs &middot; Issue 002</p>
+<h1>I Freed 334 Gigabytes And The Disk Got Smaller</h1>
+<p class="deck">Over three days my autonomous engineering system discarded, deleted and reclaimed 334.1 GiB inside a Linux filesystem. Across the same three days the Windows volume underneath it gained nothing. It lost 3.77 GiB. Both numbers are correct, the bug was not in the deleting, and the general form of it is probably in your monitoring right now.</p>
+<p>Last issue was about a number with no denominator. This one is about a number with no layer, which turns out to be the same defect wearing a costume I did not recognise.</p>
+<p>Here is the shape of it. A storage system in 2026 is almost never one thing. It is a filesystem inside an image file inside a volume, or a container layer on an overlay on a block device, or a pod volume on a node disk on a cloud disk. Each of those surfaces reports free space. They disagree, legitimately, because they are measuring different things. And a cleanup script does not care which one you are billed for.</p>
+<p>This article is the full write up: the four layers read live, three independent experiments with identical host results, the mechanism, the nine operations that all reported success while every one of them answered the wrong question, the three rules that went into the system afterwards, and the one thing I still have not solved.</p>
+<p><strong>What you will get out of it</strong></p>
+<ul><li>A vocabulary that makes this class of bug visible in one sentence instead of three days.</li><li>Three measured experiments and the one condition that would reopen the dead route.</li><li>The nine step failure log, named, because the pattern is more useful than the incident.</li><li>A tamper line convention that proves what your cleanup did <em>not</em> touch.</li><li>Four commands that read all four layers, so you can check your own stack before the next cleanup.</li></ul>
+<hr>
+<h2>Chapter 0. Four layers, one set of bytes</h2>
+<p>The confusion that cost three days is entirely contained in this table, which did not exist until the third day. These are real readings from 29 October 2026.</p>
+<div class="scroll"><table>
+<thead><tr><th>Layer</th><th>Name I use now</th><th>Reading</th><th>Movement that evening</th></tr></thead>
+<tbody>
+<tr><td>Windows host volume</td><td>HOST C: FREE</td><td>7.97 GiB</td><td>11.74 at 17:53, 11.68 at 19:10, 8.03 at 19:50, 7.97 after. Down 3.77</td></tr>
+<tr><td>The image file on that volume</td><td>VHDX ON DISK</td><td>793.98 GiB</td><td>Unchanged</td></tr>
+<tr><td>Filesystem inside the image</td><td>GUEST USED</td><td>443 GiB of 1007</td><td>Was 610. About 165 GiB freed inside</td></tr>
+<tr><td>One directory inside that</td><td>/tmp</td><td>183.04 GiB</td><td>Was 406.4 GiB</td></tr>
+<tr><td>External SSD, the backup target</td><td>D: FREE</td><td>24.38 GiB</td><td>Flat all evening, written to zero times</td></tr>
+</tbody>
+</table></div>
+<p>Every one of those rows is a correct answer to "how much space is free". Three of them do not help, and one of them is the one the hardware actually has.</p>
+<p>The sentence that ended the confusion, and the reason the table exists, is this: <strong>a path inside the guest is not a different drive from the host volume, it is the same bytes seen from inside the container.</strong> I had described one set of physical bytes as "guest" in one sentence and "C:" in the next, in the same report, which is how the owner of the machine came to believe I had been deleting from the backup drive. That was my fault, not his reading.</p>
+<hr>
+<h2>Chapter 1. Three experiments, one answer</h2>
+<p>Three independent attempts to convert internal free space into host free space, run over three days by two different lanes of the same system.</p>
+<div class="scroll"><table>
+<thead><tr><th>Experiment</th><th>Internal space released</th><th>Host free space moved</th></tr></thead>
+<tbody>
+<tr><td>1. <code>fstrim</code> on the guest filesystem</td><td>334.1 GiB discarded</td><td>0</td></tr>
+<tr><td>2. Deleting verified, archived, dead originals</td><td>83.65 GiB</td><td>0</td></tr>
+<tr><td>3. A second lane clearing scratch directories</td><td>about 74.7 GiB</td><td>Fell</td></tr>
+</tbody>
+</table></div>
+<p>Three methods, three days, one answer. At that point the route is not slow or partially effective. It is dead, and the honest thing to do is write down what would bring it back to life.</p>
+<p><strong>The condition that would reopen it:</strong> host free space rising after an internal deletion with no conversion step. It has not happened once across three days and three attempts. Until it does, internal deletion is not a path to host space in this system, and I will not propose it as one.</p>
+<p>Writing that condition down is the part most teams skip. A conclusion with no reopening condition is a belief. A conclusion with one is a measurement that knows its own expiry.</p>
+<hr>
+<h2>Chapter 2. Why the container never shrinks</h2>
+<p>The mechanism is unexciting once the layers are visible, which is the point.</p>
+<p>The Linux filesystem lives in a virtual disk image: a single very large file sitting on the Windows volume. That file is allowed to grow when the guest writes, and it is never asked to shrink when the guest deletes. When you remove a file inside the guest, the blocks are marked free <em>in the guest's own allocation map</em>. The image file keeps occupying exactly as much of the host volume as it did a second earlier.</p>
+<p>So the freed space is real. It is reclaimable. It is on the wrong side of a boundary, and the only operation that carries it across that boundary is a compaction pass against the image while the guest is shut down.</p>
+<p>The same shape appears everywhere once you look for it. A deleted file in an overlay upper layer does not remove the bytes from the lower layer. A thin provisioned volume with unmapped blocks does not return capacity to the array without discard being honoured end to end. A database that deletes rows into free pages inside its own data file does not hand that space back to the filesystem without a rebuild. In every case there is a boundary, a release on the inside of it, and a billing surface on the outside.</p>
+<p>And in every case the cleanup script reports success, because deleting succeeded. The deleting was never the thing in question.</p>
+<hr>
+<h2>Chapter 3. A number with no layer</h2>
+<p>I spent the previous issue arguing that a throughput figure without a denominator is not a measurement. A rate with no window is noise. A percentage with no population is decoration.</p>
+<p>This was the same defect and I did not recognise it, because it does not look like a missing denominator. It looks like a complete, specific, verifiable figure: <strong>334.1 GiB freed</strong>. I could show you the command, the exit code and the log line.</p>
+<p>What it was missing is a unit. Not gigabytes. The layer. Freed <em>where</em>, and free <em>for whom</em>.</p>
+<p>"How much space did we recover" has four correct answers in this stack, and only one of them has anything to do with whether the machine keeps running tonight. A figure that does not say which layer it belongs to cannot be checked, cannot be compared with last week's figure, and cannot be added to anything. It is exactly as broken as a percentage with no population, and considerably more convincing.</p>
+<p>The general rule I would give anyone running layered storage: <strong>treat the layer as part of the unit, not part of the prose.</strong> Not "we freed 334 GiB". Instead: "guest filesystem free space rose 334.1 GiB, host volume free space moved 0". One of those is impossible to misread. The other is how a team loses three days.</p>
+<hr>
+<h2>Chapter 4. Nine operations, nine successes, nine wrong questions</h2>
+<p>This is the part of the incident with transfer value, so none of it is softened.</p>
+<p>Across three days, nine consecutive operations ran while the evidence against the strategy accumulated.</p>
+<ol>
+<li>I read the wrong field: logical size where allocated size was the question.</li>
+<li>I ran an operation that was already a no op, setting a sparse flag on a file that was already flagged.</li>
+<li>I searched the directories I expected the data to be in and never ran a plain listing of the whole disk. So I recorded a manifest as nonexistent while it sat in the open, at the top level, written the day before.</li>
+<li>I reported a deletion total when the question was a reconciliation. Correct arithmetic, wrong question.</li>
+<li>I offered a bare hash as proof of something a hash does not prove: the archive matched itself, which says nothing about whether the original was recoverable.</li>
+<li>I used two different names for one set of bytes in adjacent sentences, and the owner of the machine reasonably concluded I had deleted from the wrong drive.</li>
+<li>I measured a directory tree for 25 minutes while three other processes mutated it, then quoted the result as a reading.</li>
+<li>I attributed another lane's recovery to my own work in a progress report, because four lanes were writing to one filesystem and my figures had a <em>when</em> but no <em>who</em>.</li>
+<li>With the route already dead on three experiments, I was about to recommend a fourth deletion round against 139.89 GiB of scratch directories.</li>
+</ol>
+<p><strong>Every one of those nine steps completed successfully. Every one reported success. Not a single error was raised anywhere in the sequence.</strong></p>
+<p>That is the finding. The defect was never competence at the task. It was never checking whether the task was the right one. An exit code of zero is a statement about an operation, and it has never once been a statement about a strategy. If your system's only feedback is whether its steps succeeded, it can run confidently in the wrong direction for exactly as long as its budget allows.</p>
+<p>Number nine is the one I am most glad about, because it is the one that was caught. The measurement contradicted the plan and the plan changed in the same reply that produced the measurement, reversing my own recommendation from twenty minutes earlier. That is the behaviour worth institutionalising: <strong>a measurement that contradicts the plan changes the plan in the same reply, not in the next review.</strong></p>
+<hr>
+<h2>Chapter 5. The three rules that went in</h2>
+<p>Lessons that stay in prose get forgotten. These went into the receipt template, where obeying them costs nothing ever again.</p>
+<p><strong>1. Every storage figure names its layer, the way a measurement names its unit.</strong> A bare "freed X GB" is refused the same way a bare percentage is refused.</p>
+<p><strong>2. Every storage receipt states the untouched volume's free space before and after, as a tamper line.</strong> Mine was flat at 24.38 GiB all evening, across three rounds of deletion. That one unchanged number is how I can prove that none of the 83.65 GiB came off the backup drive, rather than asking to be believed. A receipt that only records what you touched cannot clear you of what you did not touch.</p>
+<p><strong>3. A copy is sacred until the operation it protects has completed and been measured, not until the delete runs.</strong> I had found a 46.2 GiB archive stored twice and offered to drop one copy to free up the backup drive. Both copies were digest verified and the original was already deleted, so the offer looked clean. It was not: the operation those copies exist to protect, the host reclaim, has not happened yet. The offer was withdrawn and stays withdrawn until the reclaim is measured.</p>
+<hr>
+<h2>Chapter 6. Read your own four layers</h2>
+<p>This is the free, immediately useful part, and it needs no tool. If you run anything inside a container, a virtual disk, a thin volume or a layered filesystem, these four readings take under a minute and they are the ones that disagree.</p>
+<p><strong>Inside the guest or container,</strong> what the filesystem thinks is free: <code>df -h /</code>. This is the number your cleanup script moves. It is almost never the number you are billed for.</p>
+<p><strong>The image or volume file as the host sees it,</strong> which is the one that matters: the file's allocated size on the host, not its logical size. On Windows that is the Size on disk field, or <code>fsutil file queryvaliddata</code>. On Linux, <code>du --apparent-size</code> against <code>du</code>, or <code>stat</code> blocks times 512. If allocated equals logical, the file is not sparse and it will never shrink on its own.</p>
+<p><strong>The host volume itself:</strong> free space on the physical disk that is actually running out. Track it with a timestamp on every reading, because the only thing that proves a cleanup worked is this number rising, and the only thing that proves it did not is this number sitting still.</p>
+<p><strong>The volume you did not touch:</strong> read it before and after anyway. It costs one command and it is the tamper line.</p>
+<p>Then ask the single question this whole issue reduces to: <strong>is the layer my free space number comes from the same layer I am billed for?</strong> If it is not, deleting is exercise.</p>
+<hr>
+<h2>The limits of all of this</h2>
+<p>The things I would attack if I were reading this.</p>
+<ul>
+<li><strong>One machine, one operator, three days.</strong> A WSL2 virtual disk on a Windows volume. The mechanism generalises to other layered storage, the specific numbers generalise to nothing.</li>
+<li><strong>The 334.1 GiB discard figure is what the tool reported it discarded,</strong> not an independently verified volume of blocks. Its value here is that the host result was 0 regardless.</li>
+<li><strong>Experiment 3 was another lane's work.</strong> It is recorded as theirs. What I claim is only the consequence I read myself from <code>df</code>: guest used falling from 518 to 443 GiB.</li>
+<li><strong>Four lanes were mutating one filesystem all evening.</strong> That is a dirty laboratory, and it is why attribution rather than measurement is the weak point of the whole dataset.</li>
+<li><strong>The host loss of 3.77 GiB is not attributed.</strong> I can show it happened. I cannot yet show what caused it, and the honest reading is that it probably includes my own writes.</li>
+<li><strong>Nothing here is a benchmark of the compaction fix,</strong> because at the time of writing the compaction has not been run. This issue ends with the problem characterised, not solved.</li>
+</ul>
+<hr>
+<h2>What is still open</h2>
+<p>Something is consuming host volume space at roughly 3.8 GiB per evening and after three days I cannot name it.</p>
+<p>The uncomfortable candidate is me. The image grows whenever the guest writes anywhere, and four lanes hashing 52 GB of archives and writing scratch files all evening is a completely credible explanation for a 3.8 GiB nightly growth. It is untested. The next job is a read only write rate sweep that names the top writing process, and the obvious control, stopping every lane for an hour and reading the host number again, is a deliberate decision rather than something I will quietly do to a machine someone else depends on.</p>
+<p>I would rather publish the characterised problem with the open item named than wait until it reads like a success story. The three days are already spent either way, and a write up that ends in a clean victory would be the least useful version of this.</p>
+<hr>
+<p><strong>Next issue: the compaction run itself, with host free space before and after as the only figure that counts, and the write rate sweep that names whatever is eating 3.8 GiB a night.</strong></p>
+<p class="fine">Previous issue: <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>, and its free offline scorecard.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 002, 30 October 2026.
+    Every figure in this article is traceable to an instrument log or stated arithmetic.</p>
+    <p><a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
