@@ -55,6 +55,12 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://titanos.tech/labs/issue-001</loc>
+<lastmod>2026-10-29T08:57:50.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://titanos.tech/leads</loc>
 <lastmod>2026-10-14T22:31:25.000Z</lastmod>
 <changefreq>monthly</changefreq>
@@ -93,6 +99,12 @@
 <url>
 <loc>https://titanos.tech/case-studies/trading-app</loc>
 <lastmod>2026-10-14T08:26:49.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://titanos.tech/labs/issue-001/scorecard</loc>
+<lastmod>2026-10-29T08:57:50.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
