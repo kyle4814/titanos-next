@@ -61,8 +61,10 @@ function renderAnswer(a) {
 }
 
 function add(node) { log.append(node); log.scrollTop = log.scrollHeight; }
+const inflight = new Set(); let lastSend = { text: '', at: 0 }; // one activation = one question: a double click or double tap on a chip, or the same text while it is still being answered, is sent once
 export async function send(text, label) {
-  text = String(text || '').trim(); if (!text) return;
+  text = String(text || '').trim(); if (!text || inflight.has(text) || (text === lastSend.text && Date.now() - lastSend.at < 700)) return;
+  inflight.add(text); lastSend = { text, at: Date.now() };
   add(h('div', { class: 'msg msg--user' }, label || text));
   const wait = h('div', { class: 'msg msg--bot', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
   try {
@@ -86,7 +88,7 @@ export async function send(text, label) {
     if (a.state && a.state.facets && Object.values(a.state.facets).filter((v) => Array.isArray(v) && v.length).length >= 2) insights.combo(Object.values(a.state.facets).flat().join(' / '));
   } catch (e) {
     wait.replaceWith(h('div', { class: 'msg msg--bot' }, h('p', null, 'The advisor could not run in this browser. ' + (e && e.message ? e.message : ''))));
-  }
+  } finally { inflight.delete(text); }
 }
 
 

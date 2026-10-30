@@ -15,6 +15,16 @@ if [ "$1" != "--no-browser" ]; then
     echo "$out" | grep -q 'ACTIONS E2E: .* 0 failed' || rc=1
   else echo "=== e2e_actions SKIPPED (no Windows node)"; fi
 fi
+# command selection (apply/assistant-cmd): the regression tests and the 70-turn simulation, desktop and phone with touch emulation
+if [ "$1" != "--no-browser" ] && [ -x "/mnt/c/Program Files/nodejs/node.exe" ]; then
+  W="/mnt/c/Program Files/nodejs/node.exe"; p=$(pwd | sed 's#/#\\#g')
+  for t in e2e_cmdsel sim_cmdsel; do
+    echo "=== $t (Windows Chrome)"; out=$(cd /tmp && timeout 900 "$W" "\\\\wsl.localhost\\Ubuntu${p}\\$t.mjs" 2>&1); echo "$out" | grep -E '^FAIL|CMDSEL' | tail -12
+    echo "$out" | grep -q 'CMDSEL .*: .* 0 failed' || rc=1
+  done
+  echo "=== sim_cmdsel on the v1 advisor (?brain=0)"; out=$(cd /tmp && SIM_V1=1 WSLENV=SIM_V1 timeout 900 "$W" "\\\\wsl.localhost\\Ubuntu${p}\\sim_cmdsel.mjs" 2>&1); echo "$out" | grep -E '^FAIL|CMDSEL' | tail -12
+  echo "$out" | grep -q 'CMDSEL .*: .* 0 failed' || rc=1
+fi
 # the brain's own gate (node: unit, golden, property) and its browser run with the actions layer off (?actions=off), through a fresh-port server on the WSL disk
 echo "=== sika-brain run_all (node)"; bash ../sika-brain/run_all.sh 2>&1 | grep -E "GREEN|FAIL|passed|GOLDEN" | head -8; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
 if [ "$1" != "--no-browser" ] && [ -x "/mnt/c/Program Files/nodejs/node.exe" ]; then

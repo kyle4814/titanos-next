@@ -217,7 +217,7 @@ export async function exportAction(ctx) {
     { label: 'Download CSV', filename: `${slug}.csv`, mime: 'text/csv;charset=utf-8', text: cardCsv(last) },
     { label: 'Download text', filename: `${slug}.txt`, mime: 'text/plain;charset=utf-8', text: cardText(last) },
   ];
-  c.buttons = [{ label: 'Print this result', printLast: true }];
+  c.buttons = [{ label: 'Print this result', printLast: true }]; c.printOf = last; // print the result this card exported, not whatever came after
   c.summary = last.estimate ? 'The CSV ends with the estimate-only line.' : 'Every row keeps its source sentence and link.';
   return c;
 }
