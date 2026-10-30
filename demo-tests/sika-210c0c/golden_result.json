@@ -1,0 +1,867 @@
+{
+ "generated": "2026-10-30T08:08:04.833Z",
+ "stats": {
+  "products": 512,
+  "documents": 1656,
+  "categories": 165,
+  "pages": 767,
+  "terms": 9196,
+  "postings": 145398,
+  "buildMs": 1093.7,
+  "indexMs": 1085.8
+ },
+ "products": 512,
+ "results": [
+  {
+   "id": "f1",
+   "question": "What adhesive for porcelain tiles on concrete?",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-400-evopro",
+   "pass": true,
+   "errors": [],
+   "ms": 93.18
+  },
+  {
+   "id": "f2",
+   "question": "waterproofing a balcony",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-110-secureproof",
+   "pass": true,
+   "errors": [],
+   "ms": 38.51
+  },
+  {
+   "id": "f3",
+   "question": "Which sealant for a shower?",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaseal-kitchenandbathroom",
+   "pass": true,
+   "errors": [],
+   "ms": 13.63
+  },
+  {
+   "id": "f4",
+   "question": "self-levelling compound for a timber floor",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikafloor-4020-fiberlevel",
+   "pass": true,
+   "errors": [],
+   "ms": 14.97
+  },
+  {
+   "id": "f5",
+   "question": "repair mortar for spalling concrete",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sika-monotop-fc",
+   "pass": true,
+   "errors": [],
+   "ms": 73.58
+  },
+  {
+   "id": "c1",
+   "question": "What is the coverage of Davco Grey One Pot adhesive?",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "davco-grey-one-potadhesive",
+   "pass": true,
+   "errors": [],
+   "ms": 42.64
+  },
+  {
+   "id": "c2",
+   "question": "Sikafloor Level Ultra consumption",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sikafloor-level-ultra",
+   "pass": true,
+   "errors": [],
+   "ms": 14.35
+  },
+  {
+   "id": "c3",
+   "question": "What dosage of Sika ViscoCrete-1250 should I use?",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 13.6
+  },
+  {
+   "id": "c4",
+   "question": "how far does Sika Rugasol C go per litre",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sika-rugasol-c",
+   "pass": true,
+   "errors": [],
+   "ms": 3.82
+  },
+  {
+   "id": "d1",
+   "question": "PDS for Sikaflex 11 FC+",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "1671",
+   "pass": true,
+   "errors": [],
+   "ms": 13.26
+  },
+  {
+   "id": "d2",
+   "question": "SDS for viscocrete 1250",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 3.11
+  },
+  {
+   "id": "d3",
+   "question": "safety data sheet Davco Trojan Mastic",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-trojan-mastic",
+   "pass": true,
+   "errors": [],
+   "ms": 8.64
+  },
+  {
+   "id": "d4",
+   "question": "Sika MonoTop-412 NFG data sheet",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sika-monotop-412nfg",
+   "pass": true,
+   "errors": [],
+   "ms": 2.71
+  },
+  {
+   "id": "m1",
+   "question": "What primer for Sikafloor Level Pro?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "sikafloor-level-pro",
+   "pass": true,
+   "errors": [],
+   "ms": 13.9
+  },
+  {
+   "id": "m2",
+   "question": "What is compatible with Sika ViscoCrete-1250?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 34.63
+  },
+  {
+   "id": "m3",
+   "question": "Can I use Davco Grey One Pot over concrete?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "davco-grey-one-potadhesive",
+   "pass": true,
+   "errors": [],
+   "ms": 13.13
+  },
+  {
+   "id": "q1",
+   "question": "How much Davco Trojan Mastic for 40 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "davco-trojan-mastic",
+   "pass": true,
+   "errors": [],
+   "ms": 28.55
+  },
+  {
+   "id": "q2",
+   "question": "How much Sikafloor Level Ultra for 30 m2 at 5 mm thick?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "sikafloor-level-ultra",
+   "pass": true,
+   "errors": [],
+   "ms": 2.24
+  },
+  {
+   "id": "q3",
+   "question": "How much Sika Film do I need for 100 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "sika-film",
+   "pass": true,
+   "errors": [],
+   "ms": 1.86
+  },
+  {
+   "id": "o1",
+   "question": "Who won the footy grand final last year?",
+   "expectedIntent": "out_of_scope",
+   "intent": "out_of_scope",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 25.51
+  },
+  {
+   "id": "t1",
+   "question": "Tile adhesive for large format porcelain tiles",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-powder-mastic",
+   "pass": true,
+   "errors": [],
+   "ms": 7.87
+  },
+  {
+   "id": "t2",
+   "question": "lightweight tile adhesive",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-405-lite",
+   "pass": true,
+   "errors": [],
+   "ms": 13.27
+  },
+  {
+   "id": "t3",
+   "question": "rapid setting tile adhesive",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-440-opti-cure",
+   "pass": true,
+   "errors": [],
+   "ms": 10.88
+  },
+  {
+   "id": "t4",
+   "question": "epoxy tile grout",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaceram-880-easyepoxy",
+   "pass": true,
+   "errors": [],
+   "ms": 23.36
+  },
+  {
+   "id": "t5",
+   "question": "waterproofing membrane under tiles",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-111-rapidproof",
+   "pass": true,
+   "errors": [],
+   "ms": 31.69
+  },
+  {
+   "id": "t6",
+   "question": "primer for tiling onto concrete",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "lanko-752-bondit",
+   "pass": true,
+   "errors": [],
+   "ms": 13.95
+  },
+  {
+   "id": "t7",
+   "question": "grout for glossy porcelain tiles",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaceram-690-elite",
+   "pass": true,
+   "errors": [],
+   "ms": 8.04
+  },
+  {
+   "id": "t8",
+   "question": "tile and grout cleaner",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaceram-690-elite",
+   "pass": false,
+   "errors": [
+    "none of davco-tile-groutcleaner in top 2 (sikaceram-690-elite,davco-easy-grout)"
+   ],
+   "ms": 8.04
+  },
+  {
+   "id": "t9",
+   "question": "dust reduced tile adhesive",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-440-opti-cure",
+   "pass": true,
+   "errors": [],
+   "ms": 9.93
+  },
+  {
+   "id": "t10",
+   "question": "wall tile adhesive and grout in one tub",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-sanitized-gluegrout",
+   "pass": true,
+   "errors": [],
+   "ms": 5.07
+  },
+  {
+   "id": "t11",
+   "question": "adhesive for natural stone tiles",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-405-lite",
+   "pass": false,
+   "errors": [
+    "none of sikatile-400-evopro|sikatile-410-secureset|davco-ceramacrete|davco-ultraflex in top 4 (sikatile-405-lite,sikatile-374-megapro,sikatile-440-opti-cure,davco-powder-mastic)"
+   ],
+   "ms": 4.42
+  },
+  {
+   "id": "t12",
+   "question": "additive to make tile adhesive more flexible",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-ceramaflex",
+   "pass": false,
+   "errors": [
+    "none of davco-davelastic in top 3 (davco-ceramaflex,sikatile-510-megalite,sikatile-405-lite)"
+   ],
+   "ms": 5.06
+  },
+  {
+   "id": "t13",
+   "question": "grout additive",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-4-in-1-groutadditive",
+   "pass": true,
+   "errors": [],
+   "ms": 6.22
+  },
+  {
+   "id": "t14",
+   "question": "tile and grout sealer",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-easy-grout",
+   "pass": true,
+   "errors": [],
+   "ms": 3.28
+  },
+  {
+   "id": "t15",
+   "question": "rejuvenate old grout",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-sanitized-gluegrout",
+   "pass": true,
+   "errors": [],
+   "ms": 7.56
+  },
+  {
+   "id": "t16",
+   "question": "tile adhesive for a residential pool",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-305-masterlite",
+   "pass": true,
+   "errors": [],
+   "ms": 3.86
+  },
+  {
+   "id": "t17",
+   "question": "waterproofing for a bathroom floor under tiles",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-k10-rapid",
+   "pass": true,
+   "errors": [],
+   "ms": 8.89
+  },
+  {
+   "id": "t18",
+   "question": "SikaTile 405 Lite",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-405-lite",
+   "pass": true,
+   "errors": [],
+   "ms": 9.95
+  },
+  {
+   "id": "t19",
+   "question": "Davco Ultraflex",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "davco-ultraflex",
+   "pass": true,
+   "errors": [],
+   "ms": 12.02
+  },
+  {
+   "id": "t20",
+   "question": "SikaCeram 880 Easy Epoxy",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaceram-880-easyepoxy",
+   "pass": true,
+   "errors": [],
+   "ms": 24.75
+  },
+  {
+   "id": "c5",
+   "question": "SikaTile 410 Secure Set coverage",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sikatile-410-secureset",
+   "pass": true,
+   "errors": [],
+   "ms": 3.69
+  },
+  {
+   "id": "c6",
+   "question": "coverage of Davco Ceramacrete",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "davco-ceramacrete",
+   "pass": true,
+   "errors": [],
+   "ms": 10.59
+  },
+  {
+   "id": "c7",
+   "question": "How much does Davco Ultraprime cover?",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "davco-ultraprime",
+   "pass": true,
+   "errors": [],
+   "ms": 1.52
+  },
+  {
+   "id": "c8",
+   "question": "SikaTile 510 Mega Lite consumption",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sikatile-510-megalite",
+   "pass": true,
+   "errors": [],
+   "ms": 5.52
+  },
+  {
+   "id": "c9",
+   "question": "Davco Ceramaflex coverage",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "davco-ceramaflex",
+   "pass": true,
+   "errors": [],
+   "ms": 1.12
+  },
+  {
+   "id": "c10",
+   "question": "SikaCeram 880 Easy Epoxy consumption",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sikaceram-880-easyepoxy",
+   "pass": true,
+   "errors": [],
+   "ms": 5.8
+  },
+  {
+   "id": "d5",
+   "question": "SikaTile 405 Lite data sheet",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sikatile-405-lite",
+   "pass": true,
+   "errors": [],
+   "ms": 1.3
+  },
+  {
+   "id": "d6",
+   "question": "SDS for Davco Ultraflex",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-ultraflex",
+   "pass": true,
+   "errors": [],
+   "ms": 1.33
+  },
+  {
+   "id": "d7",
+   "question": "Davco K10 Plus product data sheet",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-k10-plus",
+   "pass": true,
+   "errors": [],
+   "ms": 2.52
+  },
+  {
+   "id": "d8",
+   "question": "safety data sheet SikaCeram 880 Easy Epoxy",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sikaceram-880-easyepoxy",
+   "pass": true,
+   "errors": [],
+   "ms": 5.49
+  },
+  {
+   "id": "d9",
+   "question": "PDS for Davco Ceramacrete",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-ceramacrete",
+   "pass": true,
+   "errors": [],
+   "ms": 1.16
+  },
+  {
+   "id": "d10",
+   "question": "SDS Davco Ultraprime",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-ultraprime",
+   "pass": true,
+   "errors": [],
+   "ms": 7.64
+  },
+  {
+   "id": "d11",
+   "question": "data sheet SikaTile 510 Mega Lite",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sikatile-510-megalite",
+   "pass": true,
+   "errors": [],
+   "ms": 1.09
+  },
+  {
+   "id": "m4",
+   "question": "Can I use Davco Grey One Pot over my old tiles?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "davco-grey-one-potadhesive",
+   "pass": false,
+   "errors": [
+    "missing text: not suitable"
+   ],
+   "ms": 2.07
+  },
+  {
+   "id": "m5",
+   "question": "Is Davco Ceramacrete suitable for natural stone?",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "davco-ceramacrete",
+   "pass": true,
+   "errors": [],
+   "ms": 2.15
+  },
+  {
+   "id": "m6",
+   "question": "Can I use SikaTile 400 EVO PRO on moisture sensitive stone?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "sikatile-400-evopro",
+   "pass": true,
+   "errors": [],
+   "ms": 1.45
+  },
+  {
+   "id": "m7",
+   "question": "Can I use Davco Grey One Pot on a waterproofing membrane?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "davco-grey-one-potadhesive",
+   "pass": true,
+   "errors": [],
+   "ms": 1.35
+  },
+  {
+   "id": "q4",
+   "question": "How much Davco Ceramacrete for 40 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "davco-ceramacrete",
+   "pass": true,
+   "errors": [],
+   "ms": 1.76
+  },
+  {
+   "id": "q5",
+   "question": "How much SikaTile 400 EVO PRO for 25 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "sikatile-400-evopro",
+   "pass": true,
+   "errors": [],
+   "ms": 1.83
+  },
+  {
+   "id": "q6",
+   "question": "How much Davco Ceramaflex for 60 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "davco-ceramaflex",
+   "pass": true,
+   "errors": [],
+   "ms": 2.11
+  },
+  {
+   "id": "g1",
+   "question": "Hello",
+   "expectedIntent": "greeting",
+   "intent": "greeting",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 60.07
+  },
+  {
+   "id": "g2",
+   "question": "hi there",
+   "expectedIntent": "greeting",
+   "intent": "greeting",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 3.49
+  },
+  {
+   "id": "h1",
+   "question": "help",
+   "expectedIntent": "help",
+   "intent": "help",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 90.05
+  },
+  {
+   "id": "h2",
+   "question": "What can you do?",
+   "expectedIntent": "help",
+   "intent": "help",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0.69
+  },
+  {
+   "id": "w1",
+   "question": "Where can I buy Davco products?",
+   "expectedIntent": "where_to_buy",
+   "intent": "where_to_buy",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 3.67
+  },
+  {
+   "id": "w2",
+   "question": "who sells SikaTile near me",
+   "expectedIntent": "where_to_buy",
+   "intent": "find_product",
+   "top": "sikatile-010-secureprime",
+   "pass": false,
+   "errors": [
+    "intent find_product != where_to_buy"
+   ],
+   "ms": 11.09
+  },
+  {
+   "id": "k1",
+   "question": "How do I contact Sika technical services?",
+   "expectedIntent": "contact",
+   "intent": "contact",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 2.48
+  },
+  {
+   "id": "k2",
+   "question": "What is the phone number for Sika Australia?",
+   "expectedIntent": "contact",
+   "intent": "contact",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 3.33
+  },
+  {
+   "id": "u1",
+   "question": "What is the price of a bag of Davco Grey One Pot?",
+   "expectedIntent": "(unknown)",
+   "intent": "where_to_buy",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 2.58
+  },
+  {
+   "id": "u2",
+   "question": "Is SikaTile 405 Lite in stock in Brisbane?",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "sikatile-405-lite",
+   "pass": false,
+   "errors": [
+    "neither declined nor handed off"
+   ],
+   "ms": 4.21
+  },
+  {
+   "id": "u3",
+   "question": "What is the warranty period for SikaTile 400 EVO PRO?",
+   "expectedIntent": "(unknown)",
+   "intent": "documents",
+   "top": "sikatile-400-evopro",
+   "pass": false,
+   "errors": [
+    "odd intent documents",
+    "neither declined nor handed off"
+   ],
+   "ms": 7.38
+  },
+  {
+   "id": "u4",
+   "question": "Can I tile over underfloor heating?",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "davco-ultraflex",
+   "pass": false,
+   "errors": [
+    "neither declined nor handed off"
+   ],
+   "ms": 2.28
+  },
+  {
+   "id": "u5",
+   "question": "Can I tile over a heated floor?",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "davco-ultraflex",
+   "pass": false,
+   "errors": [
+    "neither declined nor handed off"
+   ],
+   "ms": 6.99
+  },
+  {
+   "id": "u6",
+   "question": "Can I get a discount on 100 bags?",
+   "expectedIntent": "(unknown)",
+   "intent": "out_of_scope",
+   "top": "sikagrout-ultra",
+   "pass": true,
+   "errors": [],
+   "ms": 9.79
+  },
+  {
+   "id": "u7",
+   "question": "What is the weather in Sydney tomorrow?",
+   "expectedIntent": "(unknown)",
+   "intent": "out_of_scope",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 9.68
+  },
+  {
+   "id": "u8",
+   "question": "Write me a poem about grout",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "davco-rejuvenationgrout",
+   "pass": true,
+   "errors": [],
+   "ms": 3.32
+  },
+  {
+   "id": "u9",
+   "question": "Is Ardex better than Davco?",
+   "expectedIntent": "(unknown)",
+   "intent": "out_of_scope",
+   "top": "sika-block",
+   "pass": true,
+   "errors": [],
+   "ms": 2.83
+  },
+  {
+   "id": "u10",
+   "question": "Who is the prime minister?",
+   "expectedIntent": "(unknown)",
+   "intent": "out_of_scope",
+   "top": "sikafloor-14-prepnprimeimpact",
+   "pass": true,
+   "errors": [],
+   "ms": 11.07
+  },
+  {
+   "id": "u11",
+   "question": "What is the capital of France?",
+   "expectedIntent": "(unknown)",
+   "intent": "out_of_scope",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 2.19
+  },
+  {
+   "id": "u12",
+   "question": "How long will my tiles last in a shower?",
+   "expectedIntent": "(unknown)",
+   "intent": "find_product",
+   "top": "sikaseal-kitchenandbathroom",
+   "pass": false,
+   "errors": [
+    "neither declined nor handed off"
+   ],
+   "ms": 2.7
+  },
+  {
+   "id": "s1",
+   "question": "How much Davco Ultraprime do I need? > 30 m2 > add 10% waste",
+   "expectedIntent": "quote",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  },
+  {
+   "id": "s2",
+   "question": "datasheet for Davco Trojan Mastic > and the SDS > what is the coverage",
+   "expectedIntent": "consumption",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  },
+  {
+   "id": "s3",
+   "question": "how much Sikafloor Level Ultra for 20 m2 > 3 mm",
+   "expectedIntent": "quote",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  }
+ ]
+}
