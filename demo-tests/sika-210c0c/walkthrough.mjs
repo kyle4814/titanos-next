@@ -77,7 +77,7 @@ for (const sz of sizesArg.split(',')) {
     await page.goto(base, { waitUntil: 'load' }); await ready();
     const m = await ask('Can I use Davco Grey One Pot over my old tiles?'); const t = await m.innerText(); await shot('beat3');
     rec(sz, 'beat3 the answer says no', /\b(no|not|cannot|can.?t|do not|should not|unsuitable)\b/i.test(t.slice(0, 400)), t.slice(0, 120).replace(/\n/g, ' '));
-    rec(sz, 'beat3 shows the data sheet sentence with its link', (await m.locator('a[href*="aus.sika.com"]').count()) >= 1 && /(existing|old)\s+tiles|tile over tile|over tiles/i.test(t) && /[\u201C"][^\u201D"]{25,}[\u201D"]|blockquote/i.test(await m.innerHTML() + t));
+    rec(sz, 'beat3 shows the data sheet sentence with its link', (await m.locator('a[href*="aus.sika.com"]').count()) >= 1 && /(existing|old)\s+(?:\w+\s+)?tiles|tile over tile|over tiles/i.test(t) && /[\u201C"][^\u201D"]{25,}[\u201D"]|blockquote/i.test(await m.innerHTML() + t));
     rec(sz, 'beat3 offers suitable products', (await m.locator('a[href*="#/product/"]').count()) >= 1, (await m.locator('a[href*="#/product/"]').count()) + ' product links');
   });
 

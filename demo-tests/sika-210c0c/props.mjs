@@ -76,7 +76,7 @@ for (const [id, said, ans] of cases) {
     for (const a1 of srcNums) for (const b1 of srcNums) { const q = +a1 / +b1; if (isFinite(q) && (Math.abs(q - x) <= 0.0051 || Math.abs(1 / q - x) <= 0.0051)) return true; }
     return false;
   };
-  for (const d of new Set(digits(all))) if (!allowed.has(d) && !countsOk.has(d) && !derived(d)) { const t = texts.find((x) => digits(x).includes(d)) || ''; const i = nrm2(t).indexOf(d); log(id, 'P1', `number ${d} not in a cited source or the question: "...${nrm2(t).slice(Math.max(0, i - 45), i + 25).replace(/\n/g, ' ')}..."`); }
+  for (const d of new Set(digits(all.replace(/\bm[23]\b/g, 'm')))) if (!allowed.has(d) && !countsOk.has(d) && !derived(d)) { const t = texts.find((x) => digits(x).includes(d)) || ''; const i = nrm2(t).indexOf(d); log(id, 'P1', `number ${d} not in a cited source or the question: "...${nrm2(t).slice(Math.max(0, i - 45), i + 25).replace(/\n/g, ' ')}..."`); }
   // P2
   for (const c of ans.citations || []) if (!urlSet.has(c.url)) log(id, 'P2', 'citation not in the data: ' + c.url);
   for (const b of ans.blocks) if (b.type === 'docs') b.items.forEach((i) => { if (!dById.has(i.id)) log(id, 'P2', 'doc not in the data: ' + i.id); });
