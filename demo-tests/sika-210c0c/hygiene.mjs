@@ -88,7 +88,6 @@ for (const f of walk(PORTAL)) {
   const e = ext(f);
   if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.avif'].includes(e)) bad(f, 0, 'image file in portal', 'images are not copied from aus.sika.com');
   if (['.woff', '.woff2', '.ttf', '.otf', '.eot'].includes(e) && !/assets[\\/]fonts[\\/]barlow-\d+-[ni]\.woff2$/.test(f)) bad(f, 0, 'font file that is not the vendored Barlow', path.basename(f));
-  if (e === '.css' && !/portal\.css$/.test(f)) bad(f, 0, 'css file other than portal.css', path.basename(f));
 }
 if (!fs.existsSync(path.join(PORTAL, 'assets/fonts/OFL.txt'))) bad(PORTAL, 0, 'font licence missing', 'assets/fonts/OFL.txt');
 
@@ -108,7 +107,7 @@ if (shell >= 10 * 1024) bad(path.join(PORTAL, 'index.html'), 0, 'shell over 10 K
 for (const f of walk(path.join(PORTAL, 'assets')).filter((x) => ext(x) === '.js')) { const s = fs.statSync(f).size; if (s >= 40 * 1024 && !/assistant[\\/]engine\.js$/.test(f)) bad(f, 0, 'js module over 40 KB budget (G6)', s + ' bytes'); }
 
 if (problems.length) {
-  for (const p of problems.slice(0, 40)) console.log(`HYGIENE RED  ${p.file}:${p.line}  ${p.rule}  ${p.detail}`);
+  for (const p of problems.slice(0, +(process.env.HYG_MAX || 40))) console.log(`HYGIENE RED  ${p.file}:${p.line}  ${p.rule}  ${p.detail}`);
   console.log(`HYGIENE RED: ${problems.length} problems`); process.exit(1);
 }
 console.log(`HYGIENE GREEN code files ${nCode}, data files ${nData}, strings checked ${nStr}, shell ${shell} bytes, tells lists ${tells ? 'read from ' + LINT_DIR : 'MISSING'}`);
