@@ -33,8 +33,13 @@ const ROUTES = [
   ...extraRoutes,
 ];
 
+// one selector only: the retired duplicate routes land on it
+const REDIRECTS = { '/system': '/selector', '/sheet': '/selector' };
+
 async function render(sameAsBefore = false) {
-  const my = ++token; const { path, params } = hashParams();
+  let { path, params } = hashParams();
+  if (REDIRECTS[path]) { history.replaceState(null, '', hashHref(REDIRECTS[path], {})); path = REDIRECTS[path]; params = new URLSearchParams(); }
+  const my = ++token;
   const samePath = path === lastPath; lastPath = path;
   const ae = document.activeElement; const keep = samePath && ae && ae.id && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && main.contains(ae) ? { id: ae.id, s: ae.selectionStart, e: ae.selectionEnd } : null;
   const ctx = { cfg, params, path, go, openAssistant };

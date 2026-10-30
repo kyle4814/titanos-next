@@ -4,6 +4,7 @@ import { derived, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, breadcrumb, pager, emptyState, placeholder, addButton } from './components.js';
 import { notFound } from './views.js';
+import { finderPanels } from './finder/panels.js';
 import { specPanel } from './specs.js';
 
 const TYPE_LABEL = { product_data_sheet: 'Product data sheet', safety_data_sheet: 'Safety data sheet', brochure: 'Brochure', environmental_product_declaration: 'Environmental declaration', system_data_sheet: 'System data sheet', certificate: 'Certificate', guide: 'Guide', technical_information: 'Technical information', colour_chart: 'Colour chart', reference: 'Reference', document: 'Other document', '': 'Other document' };
@@ -87,6 +88,7 @@ export async function productView(ctx) {
     docs.length ? h('button', { class: 'btn btn--text', type: 'button', onclick: () => { const i = tabs.findIndex((t) => t.id === 'documents'); select(i); document.getElementById('tabpanel').scrollIntoView({ block: 'start' }); } }, 'Show all documents') : null);
 
   const related = relatedProducts(p, dv);
+  const finderExtra = await finderPanels(p);
   const el = h('div', { class: 'container' }, breadcrumb(crumbs),
     h('div', { class: 'pdp' },
       h('div', null, h('div', { class: 'pdp-media' }, placeholder(p.category, p.name))),
@@ -99,6 +101,7 @@ export async function productView(ctx) {
         h('div', { class: 'btn-row', style: 'margin-top:1rem' }, addButton(p.id, p.name), h('button', { class: 'btn btn--dark', type: 'button', onclick: () => ctx.openAssistant(`How much ${p.name} do I need for 40 m2?`) }, icon('chat', 'i--sm'), 'Ask the advisor')),
         heroBtns,
         h('p', { class: 'source-line' }, 'Source: ', h('a', { class: 'link link--ext', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, 'this product on the company website'), `, read ${String(p.fetched || '').slice(0, 10)}.`))),
+    finderExtra,
     h('div', { class: 'tabs' }, tablist), panelHost,
     related.length ? h('section', { class: 'section' }, h('div', { class: 'layout-head' }, h('h2', null, 'Related products')), h('div', { class: 'grid grid--4' }, related.map((r) => productCard(r, dv)))) : null);
   select(active);

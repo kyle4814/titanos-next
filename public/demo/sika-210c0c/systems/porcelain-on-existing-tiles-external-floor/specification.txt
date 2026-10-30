@@ -2,7 +2,7 @@ DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data s
 
 PORCELAIN TILES ON EXISTING TILES (TILE OVER TILE): EXTERNAL FLOOR
 
-This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
 
 PRODUCTS IN THIS SYSTEM
 1. Waterproofing membrane: Davco® K10 Plus. Data sheet edition: June 2026, Version 01.07
@@ -508,4 +508,4 @@ SOURCES
 5. https://aus.sika.com/content/dam/dms/au01/4/sikatile-350-promaxset.pdf
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-350-promaxset.html
 
-This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.

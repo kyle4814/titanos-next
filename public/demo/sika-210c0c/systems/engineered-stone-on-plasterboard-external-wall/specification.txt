@@ -2,7 +2,7 @@ DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data s
 
 ENGINEERED OR AGGLOMERATE STONE (NOT MOISTURE SENSITIVE) ON PLASTERBOARD: EXTERNAL WALL
 
-This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
 
 PRODUCTS IN THIS SYSTEM
 1. Prepare and prime: SikaTile®-010 Secure Prime. Data sheet edition: November 2024, Version 01.06
@@ -455,171 +455,157 @@ Data sheet edition: October 2025, Version 01.08
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
-GROUT: SikaCeram®-690 Elite
-Data sheet edition: December 2025, Version 07.01
+MOVEMENT JOINTS AND PERIMETER SEALANT: SikaSeal® Kitchen and Bathroom
+Data sheet edition: April 2023, Version 03.01
 
 1 SCOPE
-1.1 Work included. Provide SikaCeram®-690 Elite where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (December 2025, Version 07.01).
+1.1 Work included. Provide SikaSeal® Kitchen and Bathroom where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (April 2023, Version 03.01).
 1.2 Product description.
-    - SikaCeram®-690 Elite is a high performance cementitious, fast setting, wall / floor tile grout for use in joints from 1 mm to 10 mm in width.
-    - Especially designed for grouting fully porcelain, glass, ceramic and natural stones sensitive to discoloration. SikaCeram®-690 Elite has increased color consistency, very good flank adhesion and increased abrasion resistance.
-    - For indoor and outdoor use including pools.
+    - SikaSeal® Kitchen and Bathroom is a one-component, neutral curing, low odour silicone sealant with excellent adhesion.
+    - SikaSeal® Kitchen and Bathroom cures through the absorption of atmospheric moisture to give a tough but flexible waterproof seal.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer - Grouting the following tile types .
-    - Artificial stone tiles
-    - Fully vitrified tiles
-    - Glass tiles
-    - Glazed ceramic tiles
-    - Marble and other natural stones sensitive to discolouration
-    - Mosaic tiles
-    - Porcelain tiles
-    (Cite: Data sheet page 1: Uses > Grouting the following tile types)
-1.4 Intended uses stated by the manufacturer - Grouting tiles for the following applications.
-    - Balconies
+1.3 Intended uses stated by the manufacturer.
+    - Kitchen
     - Bathrooms
-    - Commercial environments
-    - Facades
-    - Heated floors (Water and electric systems)
-    - Terraces
-    - Pools and spas
-    (Cite: Data sheet page 1: Uses > Grouting tiles for the following applications)
-1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.12.
+    - Showers
+    - Tiled wet areas
+    - Benchtops
+    - Basins
+    - Baths
+    - Toilets
+    - Around Splashbacks
+    - Around plumbing fixtures and penetrations
+    - General interior & exterior sealing around the home
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.7.
 
 2 MATERIALS
-2.1 Product. SikaCeram®-690 Elite
-    - Product type as printed on the data sheet: A high performance cementitious wall / floor tile grout for joints 1 mm to 10 mm.
+2.1 Product. SikaSeal® Kitchen and Bathroom
+    - Product type as printed on the data sheet: 1-component neutral cure wet area silicone sealant
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
     (Cite: Data sheet page 1: Title block and supplier details)
-2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (December 2025, Version 07.01) has no approvals, certificates or standards section.
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (April 2023, Version 03.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
-2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
-    - EN 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.2).
-    (Cite: Data sheet: whole data sheet)
-2.4 Characteristics stated by the manufacturer.
-    - Grout joint range: 1-10 mm
-    - Fast setting, walkable after 3 hours
-    - Floor and wall application
-    - DUST LESS® Technology reducing the airborne during during the mixing phase by up to 80%
-    - Available in many colours
-    - Synthetic resin-modified
-    - Very smooth and fine visual appearance
-    - Water and dirt-repellent
-    - Low shrinkage
-    - Flexible
-    - High abrasion resistance
-    - Frost proof
-    - Exceptional colour consistency
-    - Good durability and hardness
-    - Stain resistant and easy to clean
-    - Low in cromate according to REACH
-    - Very Low VOC EMICODE EC1PLUS
-    (Cite: Data sheet page 1: Features)
-2.5 Composition, appearance and supply.
-    - Composition: Polymer modified, Portland cement based, with selected fine silica/quartz sand, water retainers and other special additives.
-    - Appearance and colour: Fine powder
-    - Product declaration: CG2WA according to EN 13007
+2.3 Characteristics stated by the manufacturer.
+    - Neutral cure
+    - Excellent adhesion to most common construction materials such as: glass, enamel, ceramics, tiles, most metal*, most plastic, rubber, concrete and grouts
+    - Non-sag
+    - Great tooling characteristics
+    - Mould resistance
+    - Interior and exterior usage
+    - Fast curing
+    - Minimum movement capability ±25%
+    - High temperature resistance (-40°c to +150°c)
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.4 Composition, appearance and supply.
+    - Composition: Neutral cure silicone
+    - Colour: White, Translucent, Mid Grey, Off White, Black, Stone, Pewter, Grey, Charcoal, Brown, Beige, Almond Ivory, Alabaster
     (Cite: Data sheet page 1: Product Information)
-2.6 Packaging, shelf life and storage.
-    - Packaging: 5 kg bag
-    - Shelf life: 24 months from date of production.
-    - Storage conditions: Product must be stored in original, unopened and undamaged packaging in dry conditions between +5 °C and +30 °C. Always refer to packaging.
+2.5 Density.
+    (Cite: Data sheet page 1: Product Information > Density)
+2.6 Properties stated by the manufacturer.
+    - Service temperature: -40°c to +150°c
+    (Cite: Data sheet page 2: Technical Information)
+2.7 Shore A hardness.
+    (Cite: Data sheet page 2: Technical Information > Shore A hardness)
+2.8 Secant tensile modulus.
+    (Cite: Data sheet page 2: Technical Information > Secant tensile modulus)
+2.9 Elongation at break.
+    (Cite: Data sheet page 2: Technical Information > Elongation at break)
+2.10 Movement capability.
+    (Cite: Data sheet page 2: Technical Information > Movement capability)
+2.11 Joint design. The joint width must be designed to suit the joint movement required and the movement capability of the sealant. The joint width shall be ≥ 6 mm and ≤ 45 mm. The joint depth shall be ≥ 6 mm and ≤ 15 mm. A width to depth ratio of 2:1 must be maintained (for exceptions, see table below). Typical joint dimensions.
+    (Cite: Data sheet page 2: Technical Information > Joint design)
+2.12 Packaging, shelf life and storage.
+    - Packaging: 300ml cartridges
+    - Shelf life: 12 months from date of production if stored in undamaged and unopened original sealed containers.
+    - Storage conditions: Storage in dry conditions and protected from direct sunlight at temperatures between +5°C and +25°C.
     (Cite: Data sheet page 1: Product Information)
 
 3 SUBSTRATE PREPARATION
-3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (December 2025, Version 07.01) and the requirements below. Inspect the substrate against these requirements before application.
-3.2 Substrate quality / pre-treatment.
-    - Check joints are dry, clean, clear of excess adhesive, contaminants and tile joint spacers. Remove from joint before grout application.
-    - Avoid any ponding / standing water on the surface.
-    - Surface must not be damp to touch.
-    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (April 2023, Version 03.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate preparation.
+    - The substrate must be clean, dry, sound and free from oils, grease, dust, cement laitance and loose or friable particles. For optimum adhesion, joint durability and critical, high performance applications such as joints on multi-storey buildings, highly stressed joints, extreme weather exposure or water immersion/exposure. The following priming and/or pre-treatment procedures must be followed:
+    - Non-porous substrates
+    - Float glass, coated glass, anodised aluminium and stainless steel must be pre-treated using Sika® Aktivator-205 or Sika® Aktivator-100. Powder coated and PVDF coated metals must be pre-treated using Sika® Aktivator-205. For more details such as application and flash-off times, refer to the most recent Product Data Sheet of the respective pre-treatment product. Porous substrates
+    - Concrete, aerated concrete and cement based renders, mortars and bricks must be primed using Sika® Primer-3 N. For more details such as application and flash-off times, refer to the most recent Product Data Sheet of the respective pre-treatment product. Adhesion tests on project specific substrates must be performed and procedures agreed with all parties before full project application. Contact Sika Technical Services for additional information. Note: Primers and activators are adhesion promoters and not an alternative to improve poor preparation/cleaning of the joint surface. Primers also improve the long term adhesion performance of the sealed joint.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
 
 4 APPLICATION
-4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (December 2025, Version 07.01) and the requirements below.
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (April 2023, Version 03.01) and the requirements below.
 4.2 Application data.
-    - Mixing ratio: 1.4-1.45 litres of water per 5 kg of powder
-    - Pot Life: ~30 minutes at +20 °C
+    - Curing rate: Approximately 3-4mm per 24 hours @ 23°C/50% r.h.
     (Cite: Data sheet page 2: Application Information)
-4.3 Consumption. Quanity of grout required per kg/m² per joint width.
-    (Cite: Data sheet page 2: Application Information > Consumption)
-4.4 Applied product ready for use.
-    (Cite: Data sheet page 2: Application Information > Applied product ready for use)
-4.5 Equipment.
-    - Mixing equipment
-    - Electric single paddle mixer (600 rpm) with spiral, helix, hoop, basket, impellor paddle
-    (Cite: Data sheet page 3: Application Instructions > Equipment)
-4.6 Equipment - Application equipment.
-    - Grout spreader
-    - Squeegee
-    - Grouting float/trowel.
-    - Sponge
-    - Soft cloth
-    - Grout finishing tool
-    (Cite: Data sheet page 3: Application Instructions > Equipment > Application equipment)
-4.7 Important. Avoid over-mixing to minimise air entrainment.
-    (Cite: Data sheet page 3: Application Instructions > Important)
-4.8 Important. Do not add additional water into the mixed product during or after mixing.
-    (Cite: Data sheet page 3: Application Instructions > Important)
-4.9 Important.
-    - Do not exceed the recommended amount of water in the mix. The mix must never be fluid 1. Pour the recommended amount of clean cold water into a clean mixing container. 2. Gradually add powder to the water while mixing. 3. Mix thoroughly until a uniformly coloured, smooth mix is achieved. 4. Do not mix for 2-3 minutes to allow mixed product to ‘mature’. 5. Remix for ~30 seconds
-    - Grout may need re-stirring during its potlife. Re-stir only without adding additional water.
-    (Cite: Data sheet page 3: Application Instructions > Important)
-4.10 Application. 1. Apply SikaCeram®-690 Elite using a grout spreader, squeegee or grouting float/trowel. 2. Completely fill and compact the joints uniformly. 3. If required, finish grout with a grout finishing tool while grout is wet. 4. Using the same spreader/ float, remove excess grout from the tile surfaces, moving the tool diagonally across the joints. 5. When the grout is touch dry (15-45 minutes depending on the absorbency of the tile). Use a damp sponge or sponge float to clean the tile surfaces. Clean sponge regularly with clean water. Ensure the sponge is not dripping wet after rinsing. 6. When grout has set hard enough in the joint (finger-nail hard). Polish the tile surfaces by wiping with a clean, soft dry cloth.
-    (Cite: Data sheet page 3: Application Instructions > Application)
-4.11 Cleaning of equipment. Clean all tools and application equipment with water after use. Hardened material can only be mechanically removed.
+4.3 Tack free time.
+    (Cite: Data sheet page 2: Application Information > Tack free time)
+4.4 Application method / tools.
+    - Masking
+    - It is recommended to use masking tape where neat or exact joint lines are required. Remove the tape within the skin time after finishing.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools)
+4.5 Application method / tools - Joint Backing.
+    - After the required substrate preparation, insert a suitable backing rod to the required depth.
+    - Priming
+    - If required, prime the joint surfaces as recommended in substrate preparation. Avoid excessive application of primer to avoid causing puddles at the base of the joint.
+    - Application
+    - SikaSeal® Kitchen and Bathroom is supplied ready to use. Prepare the end of the foil pack or cartridge, insert into the sealant gun and fit the nozzle. Extrude SikaSeal® Kitchen and Bathroom into the joint ensuring that it comes into full contact with the sides of the joint and avoiding any air entrapment.
+    - Finishing
+    - As soon as possible after application, sealant must be firmly tooled against the joint sides to ensure adequate adhesion and a smooth finish. Use a compatible water based non-staining tooling agent (e.g. Sika® Tooling Agent N) to smooth the joint surface. Do not use tooling products containing solvents.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Joint Backing)
+4.6 Cleaning of equipment. Clean all tools and application equipment with Sika® Remover-208 immediately after use. Hardened material can only be removed mechanically. For cleaning skin, use Sika® Cleaning Wipes-100.
     (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
-4.12 Limitations and important considerations.
-    - Prevent contact of freshly applied material with water (including rain), except during cleaning operations. Also prevent exposure with excess atmospheric humidity / condensation or residual moisture in the substrate.
-    - Avoid significant temperature variations during application and setting times, as well as excessive draughts, forced ventilation or winds.
-    - Excess water and ventilation, temperature variations, application on very porous tiles or on substrates leading to rapid water absorption can result in colour shade variations.
-    - When applying coloured grout into joints for aesthetics such as for polished porcelain or natural stone tiles, always carry out cleanability testing on a small area before full application.
-    - On highly absorbent tiles, it is advised to thoroughly pre-dampen the surface before grouting.
-    - Always apply SikaCeram®-690 Elite in a continuous operation and do not interrupt for more than two hours in the same room or area of tiling.
-    - Premature exposure to water or excess water in the mix can result in white efflorescence on the grout surface.
-    - Avoid application in direct hot sunlight to avoid rapid drying.
-    - To avoid grout removal from joint, ensure grout has set sufficiently before carrying out the tile cleaning procedure.
-    - Do not add anything to the product that is not specified in this Product Data Sheet.
-    - Always perform a test on cleanability and staining before grouting any type of cladding with an absorbent or porous surface.
-    - Always perform a preliminary test when requiring a colour contrast between grout and tiles.
-    - The product is not suitable for chemical exposure. Use an epoxy grout from the range of SikaCeram® products.
-    - Refer to the technical bulletin for applications externally in hot and windy environments located on the SIkaAustralia website, "working in hot and windy environments with SikaCeram 690 Elite grout".
+4.7 Limitations and important considerations.
+    - When applying sealant into a previously silicone sealed joint, ensure all residue is removed from joint.
+    - Colour variations may occur due to the exposure in service to chemicals, high temperatures and/or UV-radiation (especially with white colour shade). This effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - The complete absence of UV may cause light coloured silicone (especially white) to discolour, this effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - SikaSeal® Kitchen and Bathroom cannot be overpainted.
+    - Do not use on natural stone.
+    - Do not use on bituminous substrates, natural rubber or any building materials which might leach oils, plasticisers or solvents that could degrade the sealant. EPDM or other gaskets in direct contact with SikaSeal® Kitchen and Bathroom have to be tested for compatibility prior to application. For specific advice contact Sika technical services.
+    - Pre-test should be performed prior to use on prestressed polyacrylate and polycarbonate as it may cause environmental stress cracking (crazing).
+    - Pre-test in an inconspicuous area prior to use in application on porous material such as concrete to ensure the product does not stain the substrate.
+    - Do not use SikaSeal® Kitchen and Bathroom in areas which are exposed to strong oxidising acids (e.g. nitric acid) and bases.
+    - Do not use to seal joints in or around swimming pools.
+    - Do not use for joints under water pressure or permanent water immersion.
+    - Do not use SikaSeal® Kitchen and Bathroom in totally confined spaces as it requires atmospheric moisture to cure.
+    - Do not use for medical or pharmaceutical applications.
     (Cite: Data sheet page 2: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Ambient air temperature. +5 °C to +25 °C
+5.2 Ambient air temperature. +5 °C min./+40 °C max.
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Substrate temperature. +5 °C to +25 °C
+5.3 Substrate temperature. +5 °C min./+40 °C max. Minimum +3 °C above dew point temperature
     (Cite: Data sheet page 2: Application Information > Substrate temperature)
-5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.12):
-    - Prevent contact of freshly applied material with water (including rain), except during cleaning operations. Also prevent exposure with excess atmospheric humidity / condensation or residual moisture in the substrate.
-    - Avoid significant temperature variations during application and setting times, as well as excessive draughts, forced ventilation or winds.
-    - Excess water and ventilation, temperature variations, application on very porous tiles or on substrates leading to rapid water absorption can result in colour shade variations.
+5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
+    - Colour variations may occur due to the exposure in service to chemicals, high temperatures and/or UV-radiation (especially with white colour shade). This effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - Do not use SikaSeal® Kitchen and Bathroom in totally confined spaces as it requires atmospheric moisture to cure.
     (Cite: Data sheet page 2: Limitations)
-5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.5 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Pre-test in an inconspicuous area prior to use in application on porous material such as concrete to ensure the product does not stain the substrate.
+    (Cite: Data sheet page 2: various)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
-    - Product Data Sheet: SikaCeram®-690 Elite, December 2025, Version 07.01, https://aus.sika.com/content/dam/dms/au01/v/sikaceram-690-elite.pdf
-    - Safety Data Sheet: SDS SikaCeram®-690 Elite, version 05/08/2026, https://aus.sika.com/content/dam/dms/au01/c/sds-sikaceram-690elite.pdf
-    - Brochure: SikaCeram®-690 Elite - Successful grouting for hot climates, version 10/03/2024, https://aus.sika.com/content/dam/dms/au01/3/SikaCeram%C2%AE-690%20Elite%20-%20Successful%20grouting%20for%20hot%20climates.pdf
-    - Brochure: SikaCeram 690 Elite Leaflet, version 30/05/2024, https://aus.sika.com/content/dam/dms/au01/v/SIkaCeram%20690%20Elite%20DL%20Leaflet%20trifold%202024%20FIN%20DIGI.pdf
+    - Product Data Sheet: SikaSeal® Kitchen and Bathroom, April 2023, Version 03.01, https://aus.sika.com/content/dam/dms/au01/a/sikaseal_kitchenandbathroom.pdf
+    - Safety Data Sheet: Sikaseal Kitchen and Bathroom, version 22/12/2022, https://aus.sika.com/content/dam/dms/au01/o/SikaSeal%20Kitchen%20&%20Bathroom%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaSeal® KITCHEN AND BATHROOM, version 15/09/2025, https://aus.sika.com/content/dam/dms/au01/q/sds-sikaseal-kitchenandbathroom.pdf
     (Cite: Manufacturer website: Product page documents)
 6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
-    (Cite: Data sheet page 2: Ecology, Health And Safety)
+    (Cite: Data sheet page 3: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
+    (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
-    (Cite: Data sheet page 3: Local Restrictions)
+    (Cite: Data sheet page 4: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
 Davco® K10 Plus: left out to keep this file short. Use its own data sheet.
 SikaTile®-350 Pro Maxset: left out to keep this file short. Use its own data sheet.
-SikaSeal® Kitchen and Bathroom: left out to keep this file short. Use its own data sheet.
+SikaCeram®-690 Elite: left out to keep this file short. Use its own data sheet.
 SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
 Sikasil®-702: left out to keep this file short. Use its own data sheet.
 
@@ -631,7 +617,7 @@ SOURCES
 4. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/sikatile-110-secureproof.html
 5. https://aus.sika.com/content/dam/dms/au01/k/schoenox_ab.pdf
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/schoenox-ab.html
-7. https://aus.sika.com/content/dam/dms/au01/v/sikaceram-690-elite.pdf
-8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-grouts/sikaceram-690-elite.html
+7. https://aus.sika.com/content/dam/dms/au01/a/sikaseal_kitchenandbathroom.pdf
+8. https://aus.sika.com/en/construction/sealants-adhesives/sanitary-sealants/sikaseal-kitchenandbathroom.html
 
-This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
