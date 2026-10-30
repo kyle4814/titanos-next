@@ -14,8 +14,15 @@ function getJSON(name, optional = false) {
   }
   return cache.get(name);
 }
+/** The one switch for who the demo is shown as prepared by: config.json demo.variant picks demo.variants[variant] (by, byUrl, ribbon). Used once, in place. */
+export function applyVariant(cfg) {
+  const d = cfg && cfg.demo; const v = d && d.variants && d.variants[d.variant];
+  if (v) Object.assign(d, v);
+  return cfg;
+}
+let cfgP;
 export const data = {
-  config: () => getJSON('config.json'),
+  config: () => (cfgP ||= getJSON('config.json').then(applyVariant)),
   index: () => getJSON('index.json'),
   categories: () => getJSON('categories.json'),
   products: () => getJSON('products.json'),
