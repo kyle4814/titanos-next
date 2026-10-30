@@ -16,10 +16,5 @@ export function referencesLines(standards) {
   for (const s of standards || []) { const c = plain(s.citation || ''); if (!c) continue; if (!seen.has(c)) seen.set(c, []); if (s.page) seen.get(c).push(s.page); }
   return [...seen.entries()].map(([c, pages]) => `${c} (cited in the data sheet${pages.length ? ', page ' + [...new Set(pages)].sort((a, b) => a - b).join(', ') : ''})`);
 }
-/** The full text placed in the editable box and copied: label, then the lane's clause set, then references. */
-export function draftText(spec) {
-  const refs = referencesLines(spec.standards);
-  return [DRAFT_LABEL, '', plain(spec.paste || ''), refs.length ? '\nREFERENCES CITED IN THE DATA SHEET\n' + refs.map((r) => '- ' + r).join('\n') + '\n' + STANDARDS_NOTE : ''].join('\n').trim() + '\n';
-}
 /** Guard: a clause never claims compliance. */
 export const claimsCompliance = (t) => /\b(complies|compliant|conforms|conformance|meets the requirements of|in compliance with)\b/i.test(t);

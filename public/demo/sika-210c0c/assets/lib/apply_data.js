@@ -1,5 +1,5 @@
 // Data layer UI: provenance chip and "How I know" (T04), page-cited rates and published times (T15, T21), safety quotes (T16),
-// draft specification text (T20) and document link health (T03). Everything is read from same-host files; nothing here calls out.
+// document link health on the product page (T03). The per-product draft specification is the portal builder's Specification tab; the system-level one is in sheet_data.js (T20). Everything is read from same-host files; nothing here calls out.
 import { h, icon } from './util.js';
 import { data, documents } from './data.js';
 
@@ -35,7 +35,6 @@ async function fetchOpt(dir, id, listKey) {
   return cache.get(key);
 }
 export const loadK = (id) => fetchOpt('k', id, 'k');
-export const loadSpec = (id) => fetchOpt('spec', id, 'spec');
 
 let depsP;
 async function deps() {
@@ -113,28 +112,12 @@ async function safetyBody(k) {
     h('p', { class: 'blk-note' }, 'First aid measures are not held in the data behind this page: read section 4 of the safety data sheet.'));
 }
 
-async function specBody(spec, docs) {
-  const { draftText, DRAFT_LABEL, STANDARDS_NOTE, referencesLines } = M;
-  const box = h('textarea', { class: 'spec-box', id: 'spec-text', 'aria-label': 'Draft specification text, editable' }); box.value = draftText(spec);
-  const status = h('span', { role: 'status', 'aria-live': 'polite', class: 'src' });
-  const copy = h('button', { class: 'btn', type: 'button', onclick: async () => { try { await navigator.clipboard.writeText(box.value); status.textContent = 'Copied to the clipboard.'; } catch { box.select(); const done = document.execCommand && document.execCommand('copy'); status.textContent = done ? 'Copied to the clipboard.' : 'Select the text and copy it.'; } } }, 'Copy');
-  const bundle = [];
-  for (const d of [...(spec.documents || []), ...(docs || [])]) { if (!d.url || bundle.some((b) => b.url === d.url)) continue; if (!(await linkOk(d.url))) continue; bundle.push(d); }
-  const refs = referencesLines(spec.standards);
-  return h('div', { class: 'data-tab' }, notice(DRAFT_LABEL + ' Wording is taken from the data sheet; where it is silent the text says "Refer to manufacturer."'),
-    h('div', { class: 'spec-tools' }, copy, status),
-    box,
-    refs.length ? h('div', null, h('h3', null, 'References cited in the data sheet'), h('ul', null, refs.map((r) => h('li', null, r))), h('p', { class: 'blk-note' }, STANDARDS_NOTE)) : null,
-    bundle.length ? h('div', null, h('h3', null, 'Data sheet bundle (links)'), h('ul', null, bundle.map((d) => h('li', null, h('a', { class: 'link link--ext', href: d.url, target: '_blank', rel: 'noopener noreferrer' }, plain(d.title || d.url)), d.version ? ' (' + plain(d.version) + ')' : '')))) : null);
-}
-
 /** Extra tabs for the product page: [{id,label,body()}]. Only tabs with data are returned. */
 export async function extraTabs(p, ctx, docs) {
   await mods();
-  const [k, spec] = await Promise.all([loadK(p.id), loadSpec(p.id)]);
+  const k = await loadK(p.id);
   const tabs = [];
   if (k && k.rates) tabs.push({ id: 'rates', label: 'Rates and times', body: () => ratesTimesBody(k) });
   if (k && k.safety) { const holder = h('div', null, h('p', null, 'Loading the safety data sheet quotes...')); tabs.push({ id: 'safety', label: 'Safety', body: () => { safetyBody(k).then((el) => holder.replaceChildren(el)); return holder; } }); }
-  if (spec && spec.paste) { const holder = h('div', null, h('p', null, 'Loading...')); tabs.push({ id: 'draftspec', label: 'Draft specification', body: () => { specBody(spec, docs).then((el) => holder.replaceChildren(el)); return holder; } }); }
   return tabs;
 }

@@ -26,7 +26,8 @@ export const data = {
   selector: () => opt('selector.json'),
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
-  specs: () => opt('specs.json'),
+  specIndex: () => opt('specs/index.json'),
+  spec: (id) => getJSON(`specs/${encodeURIComponent(id)}.json`),
   knowledge: (name) => opt(`knowledge/${name}.json`),
 };
 
@@ -49,11 +50,10 @@ let _docs;
 export async function documents() {
   if (_docs) return _docs;
   _docs = (async () => {
-    const [docs, status] = await Promise.all([data.documents(), data.status()]);
-    const st = status || {};
-    const byId = new Map();
-    for (const d of docs) { d.http = st[d.id] || null; byId.set(d.id, d); }
-    return { docs, byId, checked: !!status };
+    const docs = await data.documents();
+    // link verdicts are merged into documents.json at build time (d.http = {status, checked, via, url?})
+    const byId = new Map(docs.map((d) => [d.id, d]));
+    return { docs, byId, checked: docs.some((d) => d.http) };
   })();
   return _docs;
 }

@@ -44,7 +44,7 @@ check('a block without a chip is returned unchanged', A.decorateBlock(plainNode,
 // product tabs
 const gp = JSON.parse(fs.readFileSync(fileURLToPath(new URL('../../public/demo/sika-210c0c/data/p/davco-grey-one-potadhesive.json', import.meta.url)), 'utf8'));
 const tabs = await A.extraTabs(gp, {}, gp.docs);
-check('Grey One Pot gets rates, safety and draft-spec tabs as available', tabs.map((t) => t.id).join() === 'rates,safety,draftspec', tabs.map((t) => t.id).join());
+check('Grey One Pot gets the rates and safety tabs (the Specification tab is the portal builder\'s)', tabs.map((t) => t.id).join() === 'rates,safety', tabs.map((t) => t.id).join());
 const rt = tabs.find((t) => t.id === 'rates').body();
 check('Rates and times tab shows the page-cited rate sentence and version', /10 Litres of Davco Grey One Pot adhesive cover approximately 7\.5m2/.test(rt.textContent) && /November 2023, Version 01\.02, page 2/.test(rt.textContent));
 check('Rates and times tab shows every programme time and the not-published steps', /30 minutes at 22/.test(rt.textContent) && /15-25 minutes/.test(rt.textContent) && /Allow a minimum 7 days drying before returning to wet area service/.test(rt.textContent) && /Time not published/.test(rt.textContent));
@@ -56,18 +56,6 @@ const sdsLink = holder.find((e) => e.tagName === 'A' && /sds-davco-grey-onepotad
 check('Safety tab links the SDS PDF', !!sdsLink);
 check('Safety tab says Not stated in this SDS where it is silent', /Not stated in this SDS/.test(sp));
 check('Safety tab quotes the glove sentence exactly', /Butyl rubber\/nitrile rubber gloves\. Contaminated gloves should be removed\./.test(sp));
-
-const smp = JSON.parse(fs.readFileSync(fileURLToPath(new URL('../../public/demo/sika-210c0c/data/p/davco-smp-evo.json', import.meta.url)), 'utf8'));
-const t2 = await A.extraTabs(smp, {}, smp.docs);
-const ds = t2.find((t) => t.id === 'draftspec'); check('SMP EVO has the Draft specification tab', !!ds, t2.map((t) => t.id).join());
-const dh = ds.body(); await new Promise((r) => setTimeout(r, 50));
-const box = dh.find((e) => e.tagName === 'TEXTAREA')[0];
-check('draft box is editable text starting with the draft label', box.value.startsWith('Draft for editing. Not approved by Sika.') && /September 2022, Version 01\.01/.test(box.value));
-check('draft tab has a Copy button', dh.find((e) => e.tagName === 'BUTTON').some((b) => b.textContent === 'Copy'));
-let copied = null; Object.defineProperty(globalThis, 'navigator', { value: { clipboard: { writeText: async (t) => { copied = t; } } }, configurable: true });
-await dh.find((e) => e.tagName === 'BUTTON' && e.textContent === 'Copy')[0].listeners.click[0]();
-check('Copy puts the text on the clipboard', copied === box.value && copied.length > 500);
-check('draft tab lists data sheet links', dh.find((e) => e.tagName === 'A').length >= 1);
 
 // link health merge: a failed document is flagged on the product page copy
 const D = await (await import('../../public/demo/sika-210c0c/assets/lib/data.js')).documents();

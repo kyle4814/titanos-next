@@ -1,7 +1,7 @@
 // Programme (published cure and wait times) and draft specification text for a tiling system sheet (T21 and T20).
 // parseSheet() reads the system sheet HTML that already exists (systems/<slug>/index.html); nothing else is fetched from outside this host.
 import { h, icon } from './util.js';
-import { loadK, loadSpec, linkOk } from './apply_data.js';
+import { loadK, linkOk } from './apply_data.js';
 import { breadcrumb } from './components.js';
 
 /** Pure: sheet HTML -> {title, answers:{label:value}, steps:[{n,label,products:[id]}]}. */
@@ -25,8 +25,8 @@ const srcA = (s) => !s ? null : h('a', { class: 'link link--ext', href: s.u + (s
 export async function sheetPanels(parsed, names) {
   const [{ programmeOf, STEPS, PROGRAMME_CAVEAT }, { supplyClause, referencesLines, DRAFT_LABEL, STANDARDS_NOTE }, { plain }] = await Promise.all([import('../assistant/times.js'), import('../assistant/clause.js'), import('../assistant/answer.js')]);
   const ids = [...new Set(parsed.steps.flatMap((s) => s.products))];
-  const K = new Map(), SP = new Map();
-  await Promise.all(ids.map(async (id) => { K.set(id, await loadK(id)); SP.set(id, await loadSpec(id)); }));
+  const K = new Map();
+  await Promise.all(ids.map(async (id) => { K.set(id, await loadK(id)); }));
   const nm = (id) => plain(names.get(id) || id);
   // Programme
   const rows = [];
@@ -46,11 +46,12 @@ export async function sheetPanels(parsed, names) {
   const bundle = [];
   for (const st of parsed.steps) {
     const id = st.products[0]; if (!id) { lines.push(`${st.n}. ${st.label}: not stated in the published documentation.`); continue; }
-    const sp = SP.get(id); const k = K.get(id);
-    const ds = sp ? { title: sp.datasheet.title, version: sp.datasheet.edition || (sp.datasheet.version ? 'Version ' + sp.datasheet.version : null), date: null } : (k && k.rates && k.rates.ds ? { title: nm(id), version: k.rates.ds.doc_version, date: k.rates.ds.listed_version_date } : null);
+    const k = K.get(id); const sp = k && k.spec;
+    const ds = sp && sp.ds ? { title: sp.ds.title, version: sp.ds.edition || (sp.ds.version ? 'Version ' + sp.ds.version : null), date: null } : (k && k.rates && k.rates.ds ? { title: nm(id), version: k.rates.ds.doc_version, date: k.rates.ds.listed_version_date } : null);
     if (!ds) { lines.push(`${st.n}. ${st.label}: ${nm(id)}. Data sheet version not available in the published data I hold.`); continue; }
     lines.push(`${st.n}. ${st.label}. ` + supplyClause({ product: nm(id), substrate, title: ds.title, version: ds.version, date: ds.date }));
-    if (sp) { stds.push(...(sp.standards || [])); const u = sp.datasheet.url; if (u && !bundle.some((b) => b.url === u)) bundle.push({ title: `${nm(id)} data sheet`, url: u }); for (const d of sp.documents || []) if (d.type === 'safety_data_sheet' && d.url && !bundle.some((b) => b.url === d.url)) bundle.push({ title: d.title, url: d.url }); }
+    if (sp) { stds.push(...(sp.std || [])); const u = sp.ds && sp.ds.url; if (u && !bundle.some((b) => b.url === u)) bundle.push({ title: `${nm(id)} data sheet`, url: u }); }
+    const sds = k && k.safety && (k.safety.sds || []).find((x) => x.latest_for_name && x.name_matches_product); if (sds && sds.url && !bundle.some((b) => b.url === sds.url)) bundle.push({ title: `${nm(id)} safety data sheet`, url: sds.url });
   }
   const refs = referencesLines(stds);
   if (refs.length) { lines.push('', 'References cited in the data sheets', ...refs.map((r) => '- ' + r), STANDARDS_NOTE); }

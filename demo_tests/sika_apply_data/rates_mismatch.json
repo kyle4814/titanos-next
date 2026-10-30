@@ -4,7 +4,7 @@
  "match": 133,
  "mismatch": 21,
  "engine_missing": 66,
- "not_comparable": 159,
+ "not_comparable": 209,
  "by_category": {
   "construction/concrete": {
    "compared": 5,
@@ -18,7 +18,7 @@
    "match": 15,
    "mismatch": 2,
    "engine_missing": 3,
-   "not_comparable": 0
+   "not_comparable": 50
   },
   "construction/flooring": {
    "compared": 120,

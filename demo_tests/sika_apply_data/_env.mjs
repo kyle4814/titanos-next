@@ -12,9 +12,8 @@ export const rd = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f + '.json')
 export const exists = (f) => fs.existsSync(path.join(DATA, f + '.json'));
 export const FIXTURE = JSON.parse(fs.readFileSync(path.join(HERE, 'qa_fixture.json'), 'utf8'));
 
-export function setup({ withStatus = true } = {}) {
-  const products = rd('products'); const documents = rd('documents');
-  if (withStatus) { const st = rd('doc_status'); for (const d of documents) d.http = st[d.id] || null; }
+export function setup() {
+  const products = rd('products'); const documents = rd('documents'); // link verdicts are already merged into documents.json (d.http)
   const engine = createAssistant({ products, documents, categories: rd('categories'), pages: rd('pages'), config: rd('config') });
   const idx = rd('k/_index');
   const deps = { tax: idx.taxonomy, products: new Map(products.map((p) => [p.id, p])), mismatch: new Set(idx.rate_mismatch || []), load: async (id) => (exists('k/' + id) ? rd('k/' + id) : null) };

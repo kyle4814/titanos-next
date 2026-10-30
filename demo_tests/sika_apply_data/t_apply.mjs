@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import { setup, check, summary, textOf, rd, exists, FIXTURE, PORTAL } from './_env.mjs';
 import { timesOf, programmeLines, programmeOf, STEPS } from '../../public/demo/sika-210c0c/assets/assistant/times.js';
-import { supplyClause, draftText, claimsCompliance, DRAFT_LABEL, referencesLines } from '../../public/demo/sika-210c0c/assets/assistant/clause.js';
+import { supplyClause, claimsCompliance, DRAFT_LABEL, STANDARDS_NOTE, referencesLines } from '../../public/demo/sika-210c0c/assets/assistant/clause.js';
 import { CHIPS, pickSds, safetyAnswer, rateFacts, rateBlock, STATUS } from '../../public/demo/sika-210c0c/assets/assistant/apply.js';
 import { plain } from '../../public/demo/sika-210c0c/assets/assistant/answer.js';
 
@@ -144,43 +144,46 @@ const nzs = (s) => plain(String(s)).toLowerCase().replace(/[^a-z0-9]+/g, '');
   check('T21 advisor says time not published for a missing time', a2.blocks.some((b) => b.rows && b.rows.some((r) => r.value === 'Time not published')), textOf(a2).slice(0, 300));
 }
 
-/* ---------------- T20 draft specification */
+/* ---------------- T20 draft specification text and references (the per-product draft is the Specification tab; this block covers the clause wording, references and the system level) */
 {
-  const spec = JSON.parse(fs.readFileSync(PORTAL + '/data/spec/davco-smp-evo.json', 'utf8'));
-  const c = supplyClause({ product: 'Davco SMP EVO', substrate: 'concrete', title: spec.datasheet.title, version: spec.datasheet.version ? 'Version ' + spec.datasheet.version : null, date: spec.datasheet.issued });
-  check('T20 clause embeds the data sheet title, version and date', /Davco SMP EVO, Version 01\.01, September 2022\.$/.test(c) && /^Supply and install Davco SMP EVO to concrete in accordance with the manufacturer's data sheet/.test(c), c);
-  let n = 0, bad = [], noComp = 0, stdBad = 0;
-  const cat = rd('index'); const ds = rd('documents');
+  let n = 0, bad = [], withStd = 0, stdBad = 0;
+  const specIdx = rd('specs/index'); const ids = new Set(specIdx.ids);
   for (const p of S.products) {
-    const f = PORTAL + '/data/spec/' + p.id + '.json'; if (!fs.existsSync(f)) continue; n++;
-    const sp = JSON.parse(fs.readFileSync(f, 'utf8')); const t = draftText(sp);
-    if (!t.startsWith(DRAFT_LABEL)) bad.push(p.id + ' label');
-    const ed = sp.datasheet.edition || ''; if (ed && !t.includes(ed.split(',')[0])) bad.push(p.id + ' edition ' + ed);
-    if (claimsCompliance(t.replace(/Draft for specifier review[^\n]*\n?/, ''))) noComp++;
-    for (const r of referencesLines(sp.standards)) if (!(sp.standards || []).some((s) => r.startsWith(plain(s.citation)))) stdBad++;
+    if (!exists('k/' + p.id)) continue; const k = rd('k/' + p.id); const sp = k.spec; if (!sp || !sp.ds || !sp.ds.title) continue; n++;
+    const ver = sp.ds.edition || (sp.ds.version ? 'Version ' + sp.ds.version : null);
+    const c = supplyClause({ product: p.name, substrate: 'concrete', title: sp.ds.title, version: ver, date: null });
+    if (!c.includes(plain(sp.ds.title)) || (ver && !c.includes(plain(ver)))) bad.push(p.id);
+    if (claimsCompliance(c)) bad.push(p.id + ' compliance');
+    const refs = referencesLines(sp.std); if (refs.length) withStd++;
+    for (const r of refs) if (!(sp.std || []).some((s) => r.startsWith(plain(s.citation)))) stdBad++;
+    if (!ids.has(p.id)) bad.push(p.id + ' has a data sheet identity but no Specification tab data');
   }
-  check(`T20 ${n} draft texts carry the label and the data sheet edition`, bad.length === 0, bad.slice(0, 4).join(' | '));
-  console.log(`  T20 info: ${n} products have a draft specification; ${noComp} contain a compliance word in the data sheet's own quoted wording`);
+  check(`T20 every one of ${n} clauses embeds the data sheet title and version`, bad.length === 0 && n > 300, bad.slice(0, 4).join(' | '));
+  console.log(`  T20 info: ${n} products have a data sheet identity from the specs lane; ${withStd} cite at least one standard`);
   check('T20 references list only standards the data sheet cites', stdBad === 0);
-  check('T20 supply clause never claims compliance', !claimsCompliance(c));
-  const sm = JSON.parse(fs.readFileSync(PORTAL + '/data/spec/davco-smp-evo.json', 'utf8'));
-  check('T20 no standard text reproduced beyond the citation', draftText(sm).includes('These standards are not reproduced here.') || !(sm.standards || []).length);
+  const c0 = supplyClause({ product: 'Davco SMP EVO', substrate: 'concrete', title: 'Davco SMP EVO', version: 'September 2022, Version 01.01', date: null });
+  check('T20 clause shape', c0 === "Supply and install Davco SMP EVO to concrete in accordance with the manufacturer's data sheet Davco SMP EVO, September 2022, Version 01.01.", c0);
+  check('T20 supply clause never claims compliance', !claimsCompliance(c0) && claimsCompliance('This product complies with AS 1234') === true);
+  check('T20 standards note says they are not reproduced', /not reproduced here/.test(STANDARDS_NOTE) && DRAFT_LABEL === 'Draft for editing. Not approved by Sika.');
 }
 
 /* ---------------- T03 link health */
 {
-  const st = rd('stats'); const ds = rd('doc_status'); const docs = rd('documents');
+  const st = rd('stats'); const docs = rd('documents');
   check('T03 stats has docs_link_ok, docs_link_failed, docs_link_unchecked', ['docs_link_ok', 'docs_link_failed', 'docs_link_unchecked'].every((k) => typeof st[k] === 'number'));
-  check('T03 ok + failed + unchecked = documents', st.docs_link_ok + st.docs_link_failed + st.docs_link_unchecked === docs.length, JSON.stringify(st));
-  check('T03 unchecked fell below the full list', st.docs_link_unchecked < docs.length);
-  check('T03 tile and stone documents are all checked', st.docs_link_unchecked_tile_stone === 0, st.docs_link_unchecked_tile_stone);
-  const failed = docs.filter((d) => ds[d.id] && ds[d.id].status !== 200);
-  check('T03 there are known non-200 links', failed.length > 0 && failed.length === st.docs_link_failed, failed.length);
-  // never offered: library list (docOk), assistant documents, and the safety/draft bundles
-  const S2 = setup();
+  const failed = docs.filter((d) => d.http && d.http.status !== 200); const ok = docs.filter((d) => d.http && d.http.status === 200);
+  check('T03 stats equal the verdicts in documents.json', st.docs_link_ok === ok.length && st.docs_link_failed === failed.length && st.docs_link_unchecked === docs.length - ok.length - failed.length, JSON.stringify(st));
+  check('T03 unchecked fell to the non-tile remainder (tile and stone first)', st.docs_link_unchecked < docs.length);
+  const idx = new Map(S.products.map((p) => [p.id, p])); const tile = docs.filter((d) => (d.products || []).some((id) => (idx.get(id) || { category: '' }).category.includes('tile-stone')));
+  check(`T03 all ${tile.length} tile and stone documents have a verdict`, tile.length > 50 && tile.every((d) => d.http), tile.filter((d) => !d.http).length);
+  check('T03 there are known non-200 links', failed.length > 0 && failed.every((d) => d.http.status >= 400));
   const failedIds = new Set(failed.map((d) => d.id)); let offered = 0; const prods = new Set(failed.flatMap((d) => d.products || []));
-  for (const pid of [...prods].slice(0, 12)) { const p = S2.products.find((x) => x.id === pid); if (!p) continue; for (const q of [`datasheet for ${p.name}`, `${p.name} SDS`, `${p.name} documents`]) { const a = await S2.ask(q, null); for (const b of a.blocks) if (b.type === 'docs') for (const it of b.items) if (failedIds.has(it.id)) offered++; } }
+  for (const pid of [...prods].slice(0, 14)) { const p = S.products.find((x) => x.id === pid); if (!p) continue; for (const q of [`datasheet for ${p.name}`, `${p.name} SDS`, `${p.name} documents`, `What PPE for ${p.name}?`]) { const a = await S.ask(q, null); for (const b of a.blocks) if (b.type === 'docs') for (const it of b.items) if (failedIds.has(it.id)) offered++; } }
   check(`T03 a known 404 document is never offered by the advisor (${prods.size} products with a failed document)`, offered === 0, offered);
-  check('T03 the failed ones are real 404 or error codes', failed.every((d) => ds[d.id].status >= 400));
+  // the safety answers and the Safety tab never print a link the verdicts say is dead
+  const dead = new Set(failed.map((d) => d.url)); let deadSds = 0;
+  for (const p of S.products) { if (!exists('k/' + p.id)) continue; const sds = pickSds(rd('k/' + p.id)); if (sds && dead.has(sds.url)) deadSds++; }
+  console.log(`  T03 info: ${deadSds} products whose newest matching SDS URL is in the dead list (the Safety tab shows "Link unavailable" for those)`);
+  check('T03 the failed ones are real 404 or error codes', failed.every((d) => d.http.status >= 400));
 }
 summary('t_apply');

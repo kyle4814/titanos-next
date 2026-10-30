@@ -2,7 +2,7 @@
 """Builds the lazily loaded per-product knowledge files for the Sika demo portal from the knowledge and specs lane output.
   data/k/<id>.json     rates (page-cited facts), times, compat rules, safety (SDS quotes)   T15 T16 T21 T04
   data/k/_index.json   ids with a k file, lane generated stamps, taxonomy patterns for the tail matcher
-  data/spec/<id>.json  draft specification clause set (data sheet wording, page cited)        T20
+  (the draft specification text itself is the portal builder's data/specs/<id>.json; k files carry only the data sheet identity and the standards it cites for T20)
 Usage: build_k.py <portal_data_dir> <lanes_dir>
 Only what the lanes marked as found on a page by two extractors is copied; nothing is added or reworded.
 """
@@ -59,7 +59,7 @@ def main(data_dir, lanes):
     rates = json.load(open(os.path.join(kn, "rates.json")))
     safety = json.load(open(os.path.join(kn, "safety.json")))
     compat = json.load(open(os.path.join(kn, "compatibility.json")))
-    os.makedirs(os.path.join(data_dir, "k"), exist_ok=True); os.makedirs(os.path.join(data_dir, "spec"), exist_ok=True)
+    os.makedirs(os.path.join(data_dir, "k"), exist_ok=True); 
     index = json.load(open(os.path.join(data_dir, "index.json")))
     ids = [p["id"] for p in index]
     n_k = 0; sizes = 0
@@ -74,29 +74,21 @@ def main(data_dir, lanes):
         if s:
             all_sds = s.get("sds") or []
             o["safety"] = {"status": (s.get("summary") or {}).get("status"), "sds": [sds(d) for d in all_sds if d.get("latest_for_name")] or [sds(d) for d in all_sds[:1]]}
+        sf = os.path.join(sp, "by_product", pid + ".json")
+        if os.path.exists(sf):
+            d = json.load(open(sf))
+            std = [{k2: x.get(k2) for k2 in ("citation", "section", "page", "context")} for x in d.get("standards_cited", [])]
+            o["spec"] = {"ds": {k2: (d.get("datasheet") or {}).get(k2) for k2 in ("url", "title", "edition", "version", "issued")}, "std": std}
         if len(o) > 2:
             b = json.dumps(o, separators=(",", ":"), ensure_ascii=False)
             open(os.path.join(data_dir, "k", pid + ".json"), "w", encoding="utf-8").write(b); n_k += 1; sizes += len(b.encode())
-    # specs
-    n_s = 0; sbytes = 0
-    for pid in ids:
-        f = os.path.join(sp, "by_product", pid + ".json")
-        if not os.path.exists(f): continue
-        d = json.load(open(f))
-        docs = [{k: x.get(k) for k in ("type", "title", "version", "url")} for x in d.get("documents", []) if x.get("url")]
-        stds = [{k: x.get(k) for k in ("citation", "context", "section", "page", "role")} for x in d.get("standards_cited", [])]
-        out = {"v": 1, "id": pid, "name": d.get("name_plain") or d.get("name"), "datasheet": {k: d["datasheet"].get(k) for k in ("url", "title", "edition", "version", "issued", "pages")},
-               "paste": d.get("paste_text"), "standards": stds, "gaps": d.get("gaps", []), "documents": docs, "verification": (d.get("verification") or {}).get("method"), "stats": d.get("stats")}
-        b = json.dumps(out, separators=(",", ":"), ensure_ascii=False)
-        open(os.path.join(data_dir, "spec", pid + ".json"), "w", encoding="utf-8").write(b); n_s += 1; sbytes += len(b.encode())
     sys.path.insert(0, os.path.join(kn, "pipeline"))
     import taxonomy
     tax = {"substrate": {k: [x.pattern for x in v] for k, v in taxonomy.COMPILED["substrate"].items()}, "tile_type": {k: [x.pattern for x in v] for k, v in taxonomy.COMPILED["tile_type"].items()}, "environment": {k: [x.pattern for x in v] for k, v in taxonomy.COMPILED["environment"].items()}}
     idx = {"v": 1, "k": sorted(f[:-5] for f in os.listdir(os.path.join(data_dir, "k")) if f.endswith(".json") and not f.startswith("_")),
-           "spec": sorted(f[:-5] for f in os.listdir(os.path.join(data_dir, "spec")) if f.endswith(".json")),
            "lanes": {"rates": rates["generated"], "safety": safety["generated"], "compatibility": compat["generated"]}, "taxonomy": tax}
     json.dump(idx, open(os.path.join(data_dir, "k", "_index.json"), "w"), separators=(",", ":"))
-    print(json.dumps({"k_files": n_k, "k_bytes": sizes, "spec_files": n_s, "spec_bytes": sbytes, "lanes": idx["lanes"]}))
+    print(json.dumps({"k_files": n_k, "k_bytes": sizes, "lanes": idx["lanes"]}))
 
 
 if __name__ == "__main__":
