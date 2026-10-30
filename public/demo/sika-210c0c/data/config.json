@@ -9,12 +9,22 @@
   },
   "demo": {
     "preparedFor": "Sika Australia",
-    "by": "TITANOS",
-    "byUrl": "https://titanos.tech",
     "builtInHours": "__HOURS__",
     "builtOn": "2026-10-30",
-    "ribbon": "prepared for Sika Australia by TITANOS. Public information only. Nothing is submitted.",
-    "notice": "This is a design and function demonstration. It is not an official Sika Australia page. Product names, descriptions and document links come from the public website aus.sika.com (read on 2026-10-30) and link back to it. No images are copied; neutral placeholders are shown instead."
+    "notice": "This is a design and function demonstration. It is not an official Sika Australia page. Product names, descriptions and document links come from the public website aus.sika.com (read on 2026-10-30) and link back to it. No images are copied; neutral placeholders are shown instead.",
+    "variant": "titanos",
+    "variants": {
+      "titanos": {
+        "by": "TITANOS",
+        "byUrl": "https://titanos.tech",
+        "ribbon": "prepared for Sika Australia by TITANOS. Public information only. Nothing is submitted."
+      },
+      "inrole": {
+        "by": "Kyle Deligny",
+        "byUrl": "",
+        "ribbon": "internal prototype prepared by Kyle Deligny. Public information only. Nothing is submitted."
+      }
+    }
   },
   "assets": {
     "allowRemoteImages": false
