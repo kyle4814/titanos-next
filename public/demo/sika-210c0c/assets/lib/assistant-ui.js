@@ -9,6 +9,7 @@ import { outcomeOf } from './insights-core.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
 import { estimateNote } from './terms.js';
+import { brainOn, brainAnswer, renderCard, prefetchBrain } from './brain-ui.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null, formEl, suggEl;
 // Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
@@ -39,6 +40,7 @@ function renderBlock(b) {
     case 'ask': return h('div', null, para(b.question), b.options ? h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))) : null);
     case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
     case 'handoff': return renderHandoff(b);
+    case 'brain': return renderCard(b.card, cfg, send);
     default: return null;
   }
 }
@@ -68,15 +70,18 @@ export async function send(text, label) {
     const handled = act ? await act.handle(text) : null;
     if (handled) { const node = handled.node; insights.question(text, handled.outcome); // T11, this browser only
       await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: text, intent: 'action', ms: 0 }); return; }
-    await ensure();
+    const useBrain = brainOn();
+    const ba = useBrain ? await brainAnswer(text) : null; // v2 brain; null means it could not run, so v1 answers
+    if (!ba) await ensure();
     const t0 = performance.now();
-    const rule = matchRule(rules, text);
-    const a = rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state); state = a.state || null;
-    await new Promise((r) => setTimeout(r, 140));
+    const rule = ba ? null : matchRule(rules, text);
+    const a = ba || (rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state)); if (!ba) state = a.state || null;
+    if (!ba) await new Promise((r) => setTimeout(r, 140));
     wait.replaceWith(renderAnswer(a)); log.scrollTop = log.scrollHeight;
     announce('The advisor has answered.');
     history.push({ q: text, intent: a.intent, ms: Math.round(performance.now() - t0) });
     const oc = outcomeOf(a); if (oc) insights.question(text, oc); // T11, this browser only
+    if (act && ba) act.observeBrain(ba); // actions v2: remember the product and facets a brain answer carried, so "make that a project pack" works after it
     if (act) act.observeV1(text, a, oc); // actions v2: recent questions and the gap list, this browser only
     if (a.state && a.state.facets && Object.values(a.state.facets).filter((v) => Array.isArray(v) && v.length).length >= 2) insights.combo(Object.values(a.state.facets).flat().join(' / '));
   } catch (e) {
@@ -117,7 +122,7 @@ async function ensure() {
 export function setOpen(on, from) {
   panel.classList.toggle('open', on); panel.setAttribute('aria-hidden', String(!on)); fab.hidden = on && window.matchMedia('(max-width: 39.99em)').matches;
   if (from) opener = from;
-  if (on) { document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
+  if (on) { prefetchBrain(); document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
   else { document.body.classList.remove('lock'); const o = opener && document.contains(opener) ? opener : fab; if (o && !o.hidden) focusSoon(o); }
 }
 
@@ -136,6 +141,7 @@ export async function mountAssistant(config) {
   formEl = form; suggEl = sugg;
   document.body.append(fab, panel);
   if (actionsOn()) (window.requestIdleCallback || ((f) => setTimeout(f, 800)))(() => ensureActions());
+  window.__asstClose = () => setOpen(false);
   window.addEventListener('hashchange', () => {});
   return { open: (q, from) => { setOpen(true, from || document.activeElement); if (q) send(q); }, send, history, observeBrain: (ans) => { if (A) A.observeBrain(ans); } };
 }

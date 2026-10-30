@@ -1,0 +1,520 @@
+{
+ "n": 4659,
+ "ok": 4615,
+ "per": {
+  "which": {
+   "n": 1332,
+   "ok": 1291,
+   "kinds": {
+    "name": {
+     "n": 512,
+     "ok": 512
+    },
+    "typo": {
+     "n": 338,
+     "ok": 318
+    },
+    "describe": {
+     "n": 412,
+     "ok": 391
+    },
+    "tree": {
+     "n": 70,
+     "ok": 70
+    }
+   }
+  },
+  "rate": {
+   "n": 512,
+   "ok": 512,
+   "kinds": {
+    "rate": {
+     "n": 276,
+     "ok": 276
+    },
+    "rate-none": {
+     "n": 236,
+     "ok": 236
+    }
+   }
+  },
+  "document": {
+   "n": 1024,
+   "ok": 1024,
+   "kinds": {
+    "pds": {
+     "n": 512,
+     "ok": 512
+    },
+    "sds": {
+     "n": 512,
+     "ok": 512
+    }
+   }
+  },
+  "time": {
+   "n": 678,
+   "ok": 678,
+   "kinds": {
+    "time-none": {
+     "n": 304,
+     "ok": 304
+    },
+    "cure": {
+     "n": 162,
+     "ok": 162
+    },
+    "open": {
+     "n": 24,
+     "ok": 24
+    },
+    "pot": {
+     "n": 111,
+     "ok": 111
+    },
+    "recoat": {
+     "n": 77,
+     "ok": 77
+    }
+   }
+  },
+  "calc": {
+   "n": 512,
+   "ok": 512,
+   "kinds": {
+    "calc": {
+     "n": 512,
+     "ok": 512
+    }
+   }
+  },
+  "out of scope": {
+   "n": 138,
+   "ok": 138,
+   "kinds": {
+    "price": {
+     "n": 128,
+     "ok": 128
+    },
+    "oos": {
+     "n": 10,
+     "ok": 10
+    }
+   }
+  },
+  "compat": {
+   "n": 391,
+   "ok": 388,
+   "kinds": {
+    "compat-yes": {
+     "n": 254,
+     "ok": 251
+    },
+    "compat-unknown": {
+     "n": 127,
+     "ok": 127
+    },
+    "compat-no": {
+     "n": 10,
+     "ok": 10
+    }
+   }
+  },
+  "system": {
+   "n": 72,
+   "ok": 72,
+   "kinds": {
+    "system": {
+     "n": 72,
+     "ok": 72
+    }
+   }
+  }
+ },
+ "fails": [
+  {
+   "kind": "describe",
+   "q": "I need wrac - water reducing and set-accelerator",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need liquid alkali-free set accelerator for shotcrete",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need ac - non chloride set accelerator",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco Grey One Pot adhesive on ceramic tile underlay?",
+   "got": [
+    "compatibility:davco-grey-one-potadhesive",
+    "product:davco-supamastic",
+    "product:davco-powder-mastic",
+    "product:davco-smp-evo"
+   ],
+   "headline": "No. The published sentence is quoted below."
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco Supamastic on fibre cement sheet?",
+   "got": [
+    "compatibility:davco-supamastic"
+   ],
+   "headline": "Yes. The published sentence is quoted below."
+  },
+  {
+   "kind": "describe",
+   "q": "I need high strength multipurpose adhesive",
+   "got": [
+    "product:sikaflex-111-stickseal",
+    "product:sikabond-techgrip",
+    "product:sikabond-instantnailsfast",
+    "product:sikabond-sprayfix"
+   ],
+   "headline": "Flexible adhesive and sealant"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure wet area silicone sealant",
+   "got": [
+    "product:sikasil-702",
+    "product:davco-n-silicone",
+    "product:sikaseal-190-n-silicone",
+    "product:sikasil-industrial"
+   ],
+   "headline": "PREMIUM NEUTRAL CURE MULTI-PURPOSE PURE SILICONE SEALANT"
+  },
+  {
+   "kind": "describe",
+   "q": "I need very high flow, water displacing, cost effective epoxy resin grout",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need 2-component high-strength panel adhesive",
+   "got": [
+    "product:sikatack-panel-10",
+    "product:sikaroof-versiscapepanelreinforced",
+    "product:sikaroof-versiscapepanel",
+    "product:sikamelt-677"
+   ],
+   "headline": "1-component polyurethane for panel bonding in ventilated facades"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaflex-268 powrecure",
+   "got": [
+    "product:sikaflex-268"
+   ],
+   "headline": "Assembly & glazing adhesive and sealant for rail applications with acceleration "
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikasil gs-500",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need high range water reducing admixture",
+   "got": [
+    "product:sika-viscocrete-10",
+    "product:sika-viscocrete-1250",
+    "product:sika-viscocrete-5-500",
+    "product:lanko-311-bricklayersplasticiser"
+   ],
+   "headline": "HWR- High Range Water Reducer"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika floorjoint sp-30 s",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaforce-420 1l05",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need a premixed ready to use wall tile adhesive and grout",
+   "got": [
+    "product:sikatile-410-secureset",
+    "product:sikatile-400-evopro",
+    "product:sikatile-510-megalite",
+    "choose:Which tile adhesive?"
+   ],
+   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high performance joint and crack sealing tape part of the sikadur-combiflex sg system",
+   "got": [
+    "product:sikadur-combiflexsgsystem"
+   ],
+   "headline": "High performance joint sealing system"
+  },
+  {
+   "kind": "describe",
+   "q": "I need sikafloor-400 n elastic is a one-component, uv resistant, highly elastic, moisture curing polyurethane waterproof membrane.",
+   "got": [
+    "time:sikafloor-400-nelastic"
+   ],
+   "headline": "The published times, quoted as written, with the conditions they were measured u"
+  },
+  {
+   "kind": "describe",
+   "q": "I need sodium silicate / water based based transparent surface hardener, dust proofer, densifier and impregnating sealer for concrete",
+   "got": [
+    "product:davco-sanitized-tilegroutsealer",
+    "product:lanko-752-bondit",
+    "product:sikadur-330",
+    "product:sikaproof-bentonite"
+   ],
+   "headline": "A solvent-based sealer that helps protect against stains, soiling, discolouratio"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika carbodur s snm",
+   "got": [
+    "product:sika-carbodur-s"
+   ],
+   "headline": "PULTRUDED CARBON FIBRE PLATES FOR STRUCTURAL STRENGTHENING AS PART OF THE SIKA C"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikafuko tv-2",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaproof ebntonite powder",
+   "got": [
+    "product:davco-powder-mastic"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "describe",
+   "q": "I need natural sodium bentonite powder",
+   "got": [
+    "product:davco-powder-mastic"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco SMP EVO on fibre cement sheet?",
+   "got": [
+    "compatibility:davco-smp-evo"
+   ],
+   "headline": "Yes. The published sentence is quoted below."
+  },
+  {
+   "kind": "describe",
+   "q": "I need polyurethane tack coat for sikalastic-827 ht hot melt pellets",
+   "got": [
+    "product:sikalastic-827-ht"
+   ],
+   "headline": "Modified hot-melt adhesive"
+  },
+  {
+   "kind": "describe",
+   "q": "I need polyurethane hybrid elastic top coat for liquid applied membrane waterproofing systems",
+   "got": [
+    "product:sikalastic-888-hybrid",
+    "product:sikaroof-pur-10-uv",
+    "product:sikaroof-pur-15-uv",
+    "product:sikaroof-pur-20-uv"
+   ],
+   "headline": "Two component solvent free 100% solids Polyurethane/Polyurea Hybrid membrane"
+  },
+  {
+   "kind": "describe",
+   "q": "I need catalyst designed for use with sika injection 111",
+   "got": [
+    "compatibility:sika-injection-111"
+   ],
+   "headline": "It does not mention catalyst or design. I will not guess."
+  },
+  {
+   "kind": "describe",
+   "q": "I need set accelerating admixture for two component injection grout",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a fine white polymer fortified flexible sand and silica free cement-based wall tile adhesive",
+   "got": [
+    "product:sikatile-410-secureset",
+    "product:sikatile-400-evopro",
+    "product:sikatile-510-megalite",
+    "choose:Which tile adhesive?"
+   ],
+   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a flexible cement-based tile adhesive with dust less technology design for large format tile installations",
+   "got": [
+    "product:davco-powder-mastic",
+    "product:sikatile-400-evopro",
+    "product:sikatile-440-opti-cure",
+    "product:davco-smp-evo"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika viscoflow-21 au ipmact",
+   "got": [
+    "product:sika-viscoflow-21au"
+   ],
+   "headline": "WORKABILITY-ENHANCING ADMIXTURE"
+  },
+  {
+   "kind": "describe",
+   "q": "I need flexible waterproofing membrane for wet rooms, swimming pools and balconies below tiling",
+   "got": [
+    "product:schoenox-ab"
+   ],
+   "headline": "WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALL"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika wonder wpies",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack pedetsal shim",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack concealed paver retaienr",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack bearer hloder",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack variable angel spacer tab",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack evrtical paver clips",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack joist daaptor",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need diamond infill block for safety panel system for raised landscape finishes",
+   "got": [
+    "safety:sika-block"
+   ],
+   "headline": "Quoted from the safety data sheet, Revision 23.05.2022, version 2.0. Check the c"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack k spacre tab",
+   "got": [
+    "product:sikaroof-versijackk"
+   ],
+   "headline": "SELF-LEVELLING ADJUSTABLE SCREWJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack spacer atb v",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack kc base slope corrector",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack c top etxender",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versipave chock extedner",
+   "got": [
+    "product:sikaroof-versipave"
+   ],
+   "headline": "ADJUSTABLE STEPJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  }
+ ],
+ "propBad": [],
+ "at": "2026-10-30T09:54:00.897Z"
+}
