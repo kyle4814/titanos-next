@@ -48,5 +48,5 @@ export function bomSection(list, dv) {
     h('p', { class: 'lead', style: 'max-width:50rem' }, 'Quantities worked out from the published consumption figures, with whole packs rounded up. Each row shows its basis and source.'),
     h('div', { class: 'table-wrap' }, table),
     h('p', { class: 'estimate-line' }, ESTIMATE_LINE),
-    h('div', { class: 'btn-row no-print' }, print, csv));
+    h('div', { class: 'btn-row no-print' }, print, csv, h('a', { class: 'btn btn--text', href: '#/system' }, 'Find a system and make a sheet')));
 }

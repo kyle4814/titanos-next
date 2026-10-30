@@ -27,6 +27,7 @@ export async function homeView(ctx) {
         h('p', { class: 'count count--hero' }, `Search ${nf.format(dv.index.length)} products${stats.documents ? ' and ' + nf.format(stats.documents) + ' documents' : ''} from the public website.`)),
       h('div', { class: 'helpbtns' },
         h('a', { class: 'btn btn--dark', href: '#/products' }, icon('search', 'i--sm'), 'Find a product'),
+        h('a', { class: 'btn btn--dark', href: '#/system' }, icon('layers', 'i--sm'), 'System finder'),
         h('a', { class: 'btn btn--dark', href: '#/documents' }, icon('file', 'i--sm'), 'SDS and TDS'),
         h('button', { class: 'btn btn--dark', type: 'button', onclick: () => openAssistant() }, icon('chat', 'i--sm'), 'Advisor')))),
     persona ? persona : null,

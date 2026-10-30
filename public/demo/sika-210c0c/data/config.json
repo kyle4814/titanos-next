@@ -31,6 +31,10 @@
     "left": "Customer product portal (demo)",
     "right": [
       {
+        "label": "System finder",
+        "href": "#/system"
+      },
+      {
         "label": "Product finder",
         "href": "#/products"
       },
