@@ -305,7 +305,7 @@ main{flex:1 0 auto}
 .acc-panel dt{font-weight:600;padding-top:.5rem}
 .acc-panel dd{margin:0;padding:.5rem 0;border-bottom:1px solid var(--grey);white-space:pre-line}
 @media (min-width:40em){.acc-panel dt{padding:.5rem 0;border-bottom:1px solid var(--grey)}}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative} /* positioned, so the visually hidden spans inside a wide table are clipped with it and do not widen the page */
 .table{width:100%;border-collapse:collapse;font-size:1rem}
 .table th{text-align:left;font-weight:600;border-bottom:2px solid #000;padding:.6rem .75rem;white-space:nowrap;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em}
 .table td{padding:.7rem .75rem;border-bottom:1px solid var(--grey);vertical-align:top}

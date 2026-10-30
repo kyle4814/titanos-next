@@ -27,7 +27,7 @@ const bad = (file, line, rule, detail) => problems.push({ file: path.relative(pa
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.name === 'node_modules' || e.name === '.git' ? [] : e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
 // apply/speed: assets/dist holds generated bundles of the source modules below it. It IS scanned (competitor names, external URLs, analytics, AI-tell words,
 // emoji, placeholders); only the dash scan (swc writes escapes as literal characters) and the per-module size budget skip it, because the sources are scanned and budgeted.
-const GENERATED = /[\\/]assets[\\/]dist[\\/]/;
+const GENERATED = /[\\/]dist[\\/]/;
 const files = [...walk(PORTAL), ...(fs.existsSync(ASSIST) ? walk(ASSIST) : [])];
 const ext = (f) => path.extname(f).toLowerCase();
 const CODE = new Set(['.js', '.mjs', '.html', '.css']);

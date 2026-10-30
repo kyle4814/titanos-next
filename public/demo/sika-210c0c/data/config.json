@@ -269,5 +269,9 @@
       "Give me the data sheet for Sikaflex-11 FC+",
       "How much adhesive do I need for 40 m2 of floor tiles?"
     ]
+  },
+  "actions": {
+    "enabled": true,
+    "note": "Actions v2: slash commands, action cards, project memory. Set enabled to false to restore v1 behaviour."
   }
 }

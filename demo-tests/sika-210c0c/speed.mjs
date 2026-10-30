@@ -19,6 +19,9 @@ const ROUTES = [
     await p.locator('#sel-go').click(); }, ready: 'ol.steps > li', targetBytes: 100000, targetMsFast3g: 1500 },
   { id: 'sheet_direct', name: 'system sheet opened directly', go: (p, b) => p.goto(b + 'systems/' + slug + '/', { waitUntil: 'commit' }), ready: 'ol.steps > li', targetBytes: 150000 },
   { id: 'product', name: 'product page (#/product/davco-grey-one-potadhesive)', go: (p, b) => p.goto(b + '#/product/davco-grey-one-potadhesive', { waitUntil: 'commit' }), ready: READY, targetBytes: 150000 },
+  { id: 'advisor_beat3', name: 'advisor: cold load of home, open the advisor, ask "Can I use Davco Grey One Pot over my old tiles?", first answer with a quoted data sheet sentence', go: async (p, b) => {
+    await p.goto(b + '#/', { waitUntil: 'commit' }); await p.waitForSelector('main:not([aria-busy]) h1', { timeout: 120000 }); await p.locator('#tri-advisor:visible, .mbar button:visible').first().click();
+    await p.locator('#asst-q').fill('Can I use Davco Grey One Pot over my old tiles?'); await p.locator('#asst-q').press('Enter'); }, ready: '.asst-log .msg--bot blockquote', targetBytes: 600000 },
   { id: 'finder', name: 'finder (#/products)', go: (p, b) => p.goto(b + '#/products', { waitUntil: 'commit' }), ready: READY, targetBytes: 150000 },
   { id: 'category', name: 'category (#/category/construction/tile-stone-installationsystems)', go: (p, b) => p.goto(b + '#/category/construction/tile-stone-installationsystems', { waitUntil: 'commit' }), ready: READY, targetBytes: 150000 },
   { id: 'documents', name: 'documents (#/documents)', go: (p, b) => p.goto(b + '#/documents', { waitUntil: 'commit' }), ready: READY, targetBytes: 150000 },

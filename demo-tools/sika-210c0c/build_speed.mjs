@@ -1,5 +1,5 @@
 // build_speed.mjs: speed build for the Sika demo portal (apply/speed). Idempotent; sources are never changed by it.
-//   1. JS: bundles the module graph into assets/dist/main.js (everything the first screen needs) and assets/dist/lazy.js (the advisor engine and
+//   1. JS: bundles the module graph into dist/main.js (everything the first screen needs) and dist/lazy.js (the advisor engine and
 //      the data-panel modules, fetched on demand), transpiled with swc (module graph resolved here) and minified. The original files under
 //      assets/ stay in place and keep working on their own (tests import them directly).
 //   2. CSS: portal.css + finder.css minified and inlined into index.html (between the speed:css markers); the six @font-face rules live in
@@ -38,7 +38,7 @@ async function load(id) {
   const deps = new Set(), dyn = new Set();
   code = code.replace(/\brequire\((["'])(\.[^"']+)\1\)/g, (_, q, s) => { const d = resolveId(id, s); deps.add(d); return `__r(${JSON.stringify(d)})`; });
   code = code.replace(/\bimport\((["'])(\.[^"']+)\1\)/g, (_, q, s) => { const d = resolveId(id, s); dyn.add(d); return `__l(${JSON.stringify(d)})`; });
-  code = code.replace(/__IMURL__/g, `new URL(${JSON.stringify('../' + id)},import.meta.url).href`);
+  code = code.replace(/__IMURL__/g, `new URL(${JSON.stringify('../assets/' + id)},import.meta.url).href`);
   if (/import\.meta|\bimport\s*\(/.test(code.replace(/new URL\([^)]*import\.meta\.url\)\.href/g, ''))) throw new Error('unhandled import.meta or import() in ' + id);
   mods.set(id, { code, deps, dyn });
   for (const d of [...deps, ...dyn]) await load(d);
@@ -59,7 +59,11 @@ const minify = async (code) => (await swc.minify(Buffer.from(code), Buffer.from(
 const mainSrc = runtime + `Object.assign(R.m,{\n${wrap(mainSet)}\n});\n__r("app.js");\n`;
 const lazySrc = `const R=globalThis.__sk||(globalThis.__sk={m:{},c:{},p:{}});\nObject.assign(R.m,{\n${wrap(lazySet)}\n});\n`;
 const mainMin = await minify(mainSrc), lazyMin = await minify(lazySrc);
-wr(path.join(A, 'dist', 'main.js'), mainMin); wr(path.join(A, 'dist', 'lazy.js'), lazyMin);
+// dist/ sits OUTSIDE assets/ on purpose: the offline cache lists every file under assets/, and the bundles would add 0.4 MB to it. Offline, the boot loader
+// (assets/boot.js, cached) falls back to the readable modules, which are cached.
+fs.rmSync(path.join(A, 'dist'), { recursive: true, force: true });
+wr(path.join(PORTAL, 'dist', 'main.js'), mainMin); wr(path.join(PORTAL, 'dist', 'lazy.js'), lazyMin);
+wr(path.join(A, 'boot.js'), "// Boot loader: the bundled build when it can be fetched, the readable modules otherwise (offline, or a host without dist/).\nimport('../dist/main.js').catch(() => import('./app.js'));\n");
 console.log(`dist/main.js ${mainMin.length} B (${mainSet.size} modules), dist/lazy.js ${lazyMin.length} B (${lazySet.size} modules)`);
 
 // ---------- 2. CSS ----------
@@ -82,8 +86,8 @@ function put(html, name, body, anchor) {
 {
   const f = path.join(PORTAL, 'index.html'); let html = rd(f);
   html = html.replace(/<link rel="preload" href="assets\/fonts[^>]*>\n?/, '').replace(/<link rel="stylesheet" href="assets\/(portal|finder)\.css">\n?/g, '');
-  html = put(html, 'head', `<link rel="modulepreload" href="assets/dist/main.js"><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/cats.lite.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
-  html = html.replace(/<script type="module" src="[^"]*"><\/script>/, '<script type="module" src="assets/dist/main.js"></script>');
+  html = put(html, 'head', `<link rel="modulepreload" href="dist/main.js"><link rel="modulepreload" href="assets/boot.js"><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/cats.lite.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
+  html = html.replace(/<script type="module" src="[^"]*"><\/script>/, '<script type="module" src="assets/boot.js"></script>');
   wr(f, html);
 }
 // ---------- fonts.css ----------
