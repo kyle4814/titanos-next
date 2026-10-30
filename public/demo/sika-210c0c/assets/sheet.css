@@ -2,13 +2,13 @@
 .sheet main{padding-bottom:1rem}
 .sheet .sheet-head{padding-top:.5rem}
 .sheet h1{margin-bottom:.75rem}
-.sheet .lead{max-width:46rem;font-size:1.1rem}
+.sheet .lead{max-width:46rem;font-size:1.125rem}
 .sheet .answers{display:grid;gap:.5rem;margin:.4rem 0 0;grid-template-columns:1fr}
 .sheet .answers div{display:flex;gap:.6rem;flex-wrap:wrap}
 .sheet .answers dt{font-weight:600;min-width:6rem;margin:0}
 .sheet .answers dd{margin:0}
 @media (min-width:40em){.sheet .answers{grid-template-columns:repeat(3,1fr)}.sheet .answers div{display:block}}
-.sheet .m2box{background:var(--grey-light);border-left:6px solid var(--primary);padding:1rem var(--gutter) 1.25rem;margin-block:1.5rem}
+.sheet .m2box{background:var(--grey-light);box-shadow:inset 3px 0 0 var(--primary);padding:16px;margin-block:24px}
 .sheet .m2-fields{display:grid;gap:16px;grid-template-columns:1fr;align-items:end}
 @media (min-width:40em){.sheet .m2-fields{grid-template-columns:1fr 1fr;max-width:46rem}}
 .sheet .m2-result{margin:.75rem 0 0;font-weight:500}
@@ -17,8 +17,7 @@
 .sheet .steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 .sheet .step.card:hover,.sheet .step.card:focus-within{outline:0;background:#fff;box-shadow:var(--shadow-1)}
 .sheet .step.card:hover .card-body,.sheet .step.card:focus-within .card-body{background:#fff}
-.sheet .step h3{font-size:1.4rem;line-height:1.2;font-weight:600;display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center}
-.sheet .step .badge{font-weight:600}
+.sheet .step h3{font-size:1.5rem;line-height:1.2;font-weight:600;display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center}
 .sheet .opts{list-style:none;margin:0;padding:0;display:grid;gap:18px}
 .sheet .opt{border-top:2px solid var(--grey);padding-top:.9rem;min-width:0}
 .sheet .opt:first-child{border-top:0;padding-top:0}
@@ -28,17 +27,17 @@
 .sheet .ev-list{margin:.4rem 0;padding-left:1.1rem}
 .sheet .ev-list li{margin-bottom:.35rem;overflow-wrap:anywhere}
 .sheet .ev-what{font-weight:600;color:var(--grey-darker)}
-.sheet .caution{border-left:4px solid var(--primary-dark);padding-left:.6rem;overflow-wrap:anywhere}
+.sheet .caution{box-shadow:inset 3px 0 0 var(--primary-dark);padding-left:16px;overflow-wrap:anywhere}
 .sheet .rate{overflow-wrap:anywhere}
 .sheet .calc-line{background:var(--grey-light);border-left:3px solid var(--primary);padding:8px 16px;font-weight:500;font-variant-numeric:tabular-nums}
-.sheet .links{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.95rem}
-.sheet .src-ref{font-size:.85rem;color:var(--grey-dark)}
+.sheet .links{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.875rem}
+.sheet .src-ref{font-size:.75rem;color:var(--grey-dark)}
 .sheet .sources{margin-top:2rem}
-.sheet .sources .url{font-size:.85rem;color:var(--grey-dark);overflow-wrap:anywhere}
+.sheet .sources .url{font-size:.75rem;color:var(--grey-dark);overflow-wrap:anywhere}
 .sheet .plain{list-style:none;padding:0;margin:0}
 .sheet .loclist li{margin:.35rem 0}
 .sheet .grp{margin-bottom:1.5rem}
-.sheet .grp h3{font-size:1.2rem;font-weight:600;margin:1rem 0 .35rem}
+.sheet .grp h3{font-size:1.25rem;font-weight:600;margin:1rem 0 .35rem}
 .sheet .demo-only{margin-top:1.5rem}
 .sheet .site-footer{margin-top:1rem}
 .sheet .site-footer p{margin:.25rem 0}
@@ -59,6 +58,7 @@
   .sheet .ps-table th,.sheet .ps-table td{border:0;border-bottom:.5pt solid var(--grey-3);padding:1.5pt 4pt 1.5pt 0;vertical-align:top;text-align:left;font-weight:400;overflow-wrap:anywhere;white-space:normal;text-transform:none;letter-spacing:0;font-size:8pt}
   .sheet .ps-table thead th{font-weight:700;border-bottom:1pt solid #000;font-size:7pt;text-transform:uppercase;letter-spacing:.04em}
   .sheet .ps-table tbody th{font-weight:700;width:17%}
+  .sheet .ps-table thead th:nth-child(2){width:20%}.sheet .ps-table thead th:nth-child(3){width:28%}.sheet .ps-table thead th:nth-child(4){width:27%}.sheet .ps-table thead th:nth-child(5){width:8%}
   .sheet .ps-st{font-weight:400;color:var(--grey-dark)}
   .sheet .ps-src{margin:4pt 0 0;padding-left:0;list-style:none;font-size:6.5pt;line-height:1.15;overflow-wrap:anywhere;color:var(--grey-dark)}
   .sheet .ps-est{margin:4pt 0 0;font-size:7pt;color:var(--grey-dark)}
@@ -68,14 +68,7 @@
   .sheet .site-footer p{font-size:7pt;margin:0;line-height:1.2}
   .sheet .site-footer .footbar{padding:0;background:#fff;color:#000}
   .sheet .container{max-width:none;padding-inline:0}
-  .sheet .card,.sheet .opt{break-inside:avoid;box-shadow:none;outline:1px solid #999}
-  .sheet .m2box{break-inside:avoid;background:#fff;border:2px solid #000}
-  .sheet .calc-line{background:#fff;border:1px solid #000}
-  .sheet .link{border:0}
-  .sheet a[href^="http"]::after{content:""}
-  .sheet .sources a{word-break:break-all}
 }
 .sheet .estimate-note{margin:.5rem 0}
-.sheet .est{display:block;font-size:.9rem;color:var(--grey-darker);margin-top:.35rem}
-.sheet .btn-row .btn{text-decoration:none}
+.sheet .est{display:block;font-size:.75rem;color:var(--grey-dark);margin-top:4px}
 .sheet .print-sheet{display:none}

@@ -2,7 +2,7 @@
 .slash-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--grey);background:#fff;max-height:min(14rem,40vh);overflow-y:auto}
 .slash-list[hidden]{display:none}
 .slash-list li{margin:0}
-.slash-list button{display:flex;gap:.6rem;align-items:baseline;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--grey-light);padding:.6rem 1rem;min-height:44px;font:inherit;font-size:.92rem;cursor:pointer}
+.slash-list button{display:flex;gap:.6rem;align-items:baseline;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--grey-light);padding:.6rem 1rem;min-height:44px;font:inherit;font-size:.875rem;cursor:pointer}
 .slash-list li.on button,.slash-list button:hover,.slash-list button:focus-visible{background:var(--primary);color:#000}
 .slash-list strong{flex:none;min-width:5.2rem}
 .mic{flex:none;min-width:48px;min-height:48px;padding:0 .6rem}
@@ -10,10 +10,10 @@
 .mic--off{opacity:.55}
 .voice-status:empty{display:none}
 .voice-status{padding:0 1rem .4rem;margin:0}
-.action-card details.how{margin-top:.3rem;font-size:.85rem}
+.action-card details.how{margin-top:.3rem;font-size:.875rem}
 .action-card details.how summary{cursor:pointer;color:var(--grey-dark);min-height:24px}
 .action-card details.how blockquote{margin:.3rem 0 0;padding:.3rem .6rem;border-left:3px solid var(--primary);background:#fff}
-.action-card .kv{display:grid;grid-template-columns:minmax(6.5rem,30%) 1fr;margin:8px 0;border-block:1px solid var(--grey);background:#fff;font-size:.9rem;font-variant-numeric:tabular-nums}
+.action-card .kv{display:grid;grid-template-columns:minmax(6.5rem,30%) 1fr;margin:8px 0;border-block:1px solid var(--grey);background:#fff;font-size:.875rem;font-variant-numeric:tabular-nums}
 .action-card .kv dt,.action-card .kv dd{margin:0;padding:.4rem .55rem;border-top:1px solid var(--grey);min-width:0;overflow-wrap:anywhere}
 .action-card .kv dt:first-of-type,.action-card .kv dt:first-of-type+dd{border-top:0}
 .action-card .kv dt{font-weight:600;background:var(--grey-light)}
@@ -21,16 +21,15 @@
 .action-card dt.v-no{box-shadow:inset 4px 0 0 var(--logo-red)}
 .action-card dt.v-yes{box-shadow:inset 4px 0 0 var(--green-dark)}
 .action-card dt.v-conditional,.action-card dt.v-unknown{box-shadow:inset 4px 0 0 var(--primary-dark)}
-.action-card .cmp{display:grid;border:1px solid var(--grey);background:#fff;font-size:.88rem;margin:.4rem 0}
+.action-card .cmp{display:grid;border:1px solid var(--grey);background:#fff;font-size:.875rem;margin:.4rem 0}
 .action-card .cmp-row{display:grid;grid-template-columns:minmax(5.5rem,22%) 1fr 1fr;border-top:1px solid var(--grey)}
 .action-card .cmp-row:first-child{border-top:0}
 .action-card .cmp-row>div{padding:.4rem .5rem;min-width:0;overflow-wrap:anywhere}
 .action-card .cmp-head{background:var(--grey-light);font-weight:600}
 .action-card .cmp-label{font-weight:600;background:var(--grey-light)}
 .action-card .cmp-head>div:first-child{visibility:hidden}
-.action-card .chip-status--unknown{display:inline-block;margin:.2rem 0;padding:.2rem .5rem;background:#fff;border:1px solid var(--grey-3);font-size:.82rem}
 .action-card .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
-.action-card textarea{width:100%;font:inherit;font-size:.9rem}
+.action-card textarea{width:100%;font:inherit;font-size:.875rem}
 #actions-print{display:none}
 @media print{
   body.printing-actions > *:not(#actions-print){display:none!important}
@@ -47,10 +46,10 @@
 
 .action-card details.more{margin:.3rem 0}
 .action-card details.more>summary,.action-card details.srcs>summary{cursor:pointer;min-height:32px;display:flex;align-items:center}
-.action-card details.more>summary{color:var(--grey-dark);font-size:.88rem}
+.action-card details.more>summary{color:var(--grey-dark);font-size:.875rem}
 .action-card details.srcs>summary{font-weight:600}
 @media (pointer:coarse){.action-card details.more>summary,.action-card details.srcs>summary{min-height:44px}}
-.action-card .sumlist{list-style:none;margin:.3rem 0;padding:0;background:#fff;border:1px solid var(--grey);font-size:.88rem}
+.action-card .sumlist{list-style:none;margin:.3rem 0;padding:0;background:#fff;border:1px solid var(--grey);font-size:.875rem}
 .action-card .sumlist li{padding:4px 8px;border-top:1px solid var(--grey-light);overflow-wrap:anywhere;line-height:1.3}
 .action-card .sumlist li:first-child{border-top:0}
 .action-card .m-title.sec{margin-top:8px}
