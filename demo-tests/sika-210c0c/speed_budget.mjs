@@ -14,7 +14,7 @@ const sum = (rels) => rels.reduce((a, r) => a + (gz(r) ?? 1e9), 0);
 
 // A. static first-screen weight (no web fonts: they are attached after the first render and reported separately as "settled")
 const SHEET = 'systems/porcelain-on-concrete-internal-wet-floor/index.html';
-const FIRST = ['index.html', 'assets/dist/main.js', 'data/config.json', 'data/s/cats.json'];
+const FIRST = ['index.html', 'assets/dist/main.js', 'data/config.json', 'data/cats.lite.json'];
 const A = [
   ['home first screen', FIRST, 80000],
   ['selector page first screen', [...FIRST, 'data/selector.json'], 100000 - (gz(SHEET) ?? 0)],

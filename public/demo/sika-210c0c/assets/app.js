@@ -11,9 +11,10 @@ import { personaBlock } from './lib/persona.js';
 import { extraRoutes } from './lib/extras.js';
 import { initOffline } from './lib/offline.js';
 import { data as dataApi } from './lib/data.js';
+import { warmProduct } from './lib/apply_data.js';
 
 // speed: start the files the opening route needs the moment the script runs, in parallel with config.json, instead of one after another
-{ const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) dataApi.product(decodeURIComponent(pm[1])).catch(() => {}); }
+{ const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) warmProduct(decodeURIComponent(pm[1])); }
 
 const main = $('#main');
 let cfg, assistant, lastPath = null, token = 0, firstRender = true, leaving = false;
@@ -89,4 +90,5 @@ async function boot() {
 boot();
 // speed: the web fonts (fonts/fonts.css) are attached once the page has loaded, so they never compete with the first screen
 const attachFonts = () => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = new URL('fonts/fonts.css', import.meta.url).href; document.head.append(l); };
-let fontsDone = false; function fontsAfterRender() { if (fontsDone) return; fontsDone = true; const go = () => setTimeout(attachFonts, 50); if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true }); }
+// after the first screen is usable; until then the text shows in the system font
+let fontsDone = false; function fontsAfterRender() { if (fontsDone) return; fontsDone = true; const go = () => setTimeout(attachFonts, 2500); if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true }); }

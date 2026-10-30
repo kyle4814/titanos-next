@@ -24,7 +24,7 @@ export const data = {
   status: () => opt('doc_status.json'),
   stats: () => opt('stats.json'),
   selector: () => getJSON('selector.json', true), // always shipped; read directly so it never waits for the manifest
-  catsLite: () => getJSON('s/cats.json', true).then((j) => j || data.categories().then((c) => ({ categories: c, stats: null }))), // speed: slim categories + counts (split build); falls back to the full file
+  catsLite: () => (typeof navigator !== 'undefined' && navigator.onLine === false ? Promise.resolve(null) : getJSON('cats.lite.json', true)).then((j) => j || data.categories().then((c) => ({ categories: c, stats: null }))), // speed: slim categories + counts (split build); falls back to the full file
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
   specIndex: () => opt('specs/index.json').catch(() => null), // offline or missing: no Specification tab, no error
@@ -32,6 +32,13 @@ export const data = {
   knowledge: (name) => opt(`knowledge/${name}.json`),
 };
 
+/** The full categories file (descriptions of every level, source URLs): only the category page needs it. */
+let _dfull;
+export async function derivedFull() {
+  if (_dfull) return _dfull;
+  _dfull = (async () => { const [index, categories] = await Promise.all([data.index(), data.categories()]); const catById = new Map(categories.map((c) => [c.id, c])); const byId = new Map(index.map((p) => [p.id, p])); const brands = new Map(); for (const p of index) brands.set(p.b, (brands.get(p.b) || 0) + 1); return { index, categories, catById, byId, brands }; })();
+  return _dfull;
+}
 let _dl;
 /** The categories alone (menu, home, selector): small, no product index. Same shape as derived() minus index/byId/brands. */
 export async function derivedLite() {
@@ -50,7 +57,7 @@ let _derived;
 export async function derived() {
   if (_derived) return _derived;
   _derived = (async () => {
-    const [index, categories] = await Promise.all([data.index(), data.categories()]);
+    const [index, categories] = await Promise.all([data.index(), data.catsLite().then((j) => j.categories)]); // speed: the slim category list (same ids, names, children, counts) instead of the 91 KB full file
     const catById = new Map(categories.map((c) => [c.id, c]));
     const byId = new Map(index.map((p) => [p.id, p]));
     const brands = new Map();

@@ -29,13 +29,18 @@ export async function linkOk(url) {
 /* ---- lazy per-product data */
 const cache = new Map(); let idxP;
 async function manifestHas(name) { const m = await data.manifest(); return m.files.includes(name); }
-function index() { return (idxP ||= manifestHas('k/_index.json').then((ok) => ok ? fetch(new URL('k/_index.json', base)).then((r) => (r.ok ? r.json() : null)).catch(() => null) : null)); }
+function index() { return (idxP ||= fetch(new URL('k/_index.json', base)).then((r) => (r.ok ? r.json() : null)).catch(() => null)); } // speed: read directly (no manifest round trip first)
 async function fetchOpt(dir, id, listKey) {
   const ix = await index(); if (!ix || !ix[listKey].includes(id)) return null;
   const key = dir + '/' + id; if (!cache.has(key)) cache.set(key, fetch(new URL(`${dir}/${encodeURIComponent(id)}.json`, base)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
   return cache.get(key);
 }
 export const loadK = (id) => fetchOpt('k', id, 'k');
+/** Speed: called by app.js the moment a product route is opened. Starts the files the product page will ask for, in parallel with the product file itself. */
+export function warmProduct(id) {
+  index(); mods().catch(() => {}); data.specIndex().catch(() => {});
+  data.product(id).then((p) => { if (p && p.kk) { const key = 'k/' + id; if (!cache.has(key)) cache.set(key, fetch(new URL(`k/${encodeURIComponent(id)}.json`, base)).then((r) => (r.ok ? r.json() : null)).catch(() => null)); } }).catch(() => {});
+}
 
 let depsP;
 async function deps() {
@@ -115,8 +120,7 @@ async function safetyBody(k) {
 
 /** Extra tabs for the product page: [{id,label,body()}]. Only tabs with data are returned. */
 export async function extraTabs(p, ctx, docs) {
-  await mods();
-  const k = await loadK(p.id);
+  const [, k] = await Promise.all([mods(), loadK(p.id)]);
   const tabs = [];
   if (k && k.rates) tabs.push({ id: 'rates', label: 'Rates and times', body: () => ratesTimesBody(k) });
   if (k && k.safety) { const holder = h('div', null, h('p', null, 'Loading the safety data sheet quotes...')); tabs.push({ id: 'safety', label: 'Safety', body: () => { safetyBody(k).then((el) => holder.replaceChildren(el)); return holder; } }); }

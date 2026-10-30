@@ -1,6 +1,6 @@
 // Page views. Each view(ctx) returns {el, title, nav} (nav = main navigation item to mark current).
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm } from './util.js';
-import { derived, derivedLite, data } from './data.js';
+import { derived, derivedFull, derivedLite, data } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton } from './components.js';
 
@@ -122,7 +122,7 @@ function pill(text, onRemove) { return h('span', { class: 'pill' }, text, h('but
 
 /* ------------------------------------------------------------------ category */
 export async function categoryView(ctx) {
-  const dv = await derived(); const id = ctx.rest; const c = dv.catById.get(id);
+  const dv = await derivedFull(); const id = ctx.rest; const c = dv.catById.get(id);
   if (!c) return notFound(ctx, 'category');
   const kids = (c.children || []).map((k) => dv.catById.get(k)).filter(Boolean).sort((a, b) => a.name.localeCompare(b.name));
   const path = id.split('/'); const crumbs = [{ label: 'Home', href: '#/' }];

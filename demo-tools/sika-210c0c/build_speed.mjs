@@ -82,7 +82,7 @@ function put(html, name, body, anchor) {
 {
   const f = path.join(PORTAL, 'index.html'); let html = rd(f);
   html = html.replace(/<link rel="preload" href="assets\/fonts[^>]*>\n?/, '').replace(/<link rel="stylesheet" href="assets\/(portal|finder)\.css">\n?/g, '');
-  html = put(html, 'head', `<link rel="modulepreload" href="assets/dist/main.js"><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/s/cats.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
+  html = put(html, 'head', `<link rel="modulepreload" href="assets/dist/main.js"><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/cats.lite.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
   html = html.replace(/<script type="module" src="[^"]*"><\/script>/, '<script type="module" src="assets/dist/main.js"></script>');
   wr(f, html);
 }

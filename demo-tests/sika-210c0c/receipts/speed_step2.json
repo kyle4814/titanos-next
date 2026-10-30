@@ -1,0 +1,1770 @@
+{
+ "generated": "2026-10-30T09:26:36.714Z",
+ "tool": "speed.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
+ "profile": {
+  "name": "DevTools Fast 3G",
+  "offline": false,
+  "latency": 562.5,
+  "downloadThroughput": 188744,
+  "uploadThroughput": 86400
+ },
+ "cache": "disabled (cold load)",
+ "runs": 3,
+ "served_with": "local static server, gzip level 6 for html, js, css, json",
+ "routes": [
+  {
+   "id": "home",
+   "route": "home (#/)",
+   "targetBytes": 80000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2042,
+    "median_fcp_ms": 688,
+    "all_ms": [
+     2042,
+     2104,
+     2040
+    ],
+    "all_fcp": [
+     676,
+     696,
+     688
+    ],
+    "bytes_at_answer": 78326,
+    "requests_at_answer": 4,
+    "bytes_settled": 192466,
+    "requests_settled": 11,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 326,
+    "median_fcp_ms": 80,
+    "all_ms": [
+     326,
+     371,
+     300
+    ],
+    "all_fcp": [
+     80,
+     80,
+     80
+    ],
+    "bytes_at_answer": 79741,
+    "requests_at_answer": 6,
+    "bytes_settled": 192466,
+    "requests_settled": 11,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   }
+  },
+  {
+   "id": "selector_flow",
+   "route": "selector flow: cold load of #/selector, three choices, Show my system, first answer on the sheet",
+   "targetBytes": 100000,
+   "targetMsFast3g": 1500,
+   "fast3g": {
+    "median_ms_to_answer": 4288,
+    "median_fcp_ms": 944,
+    "all_ms": [
+     4288,
+     4457,
+     4050
+    ],
+    "all_fcp": [
+     944,
+     1144,
+     748
+    ],
+    "bytes_at_answer": 215067,
+    "requests_at_answer": 14,
+    "bytes_settled": 331169,
+    "requests_settled": 22,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 1106,
+    "median_fcp_ms": 272,
+    "all_ms": [
+     1106,
+     1137,
+     789
+    ],
+    "all_fcp": [
+     500,
+     272,
+     124
+    ],
+    "bytes_at_answer": 218444,
+    "requests_at_answer": 17,
+    "bytes_settled": 331169,
+    "requests_settled": 22,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "sheet_direct",
+   "route": "system sheet opened directly",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 814,
+    "median_fcp_ms": 704,
+    "all_ms": [
+     833,
+     814,
+     806
+    ],
+    "all_fcp": [
+     732,
+     704,
+     704
+    ],
+    "bytes_at_answer": 18820,
+    "requests_at_answer": 2,
+    "bytes_settled": 134922,
+    "requests_settled": 10,
+    "files": [
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 276,
+    "median_fcp_ms": 228,
+    "all_ms": [
+     276,
+     283,
+     260
+    ],
+    "all_fcp": [
+     228,
+     240,
+     220
+    ],
+    "bytes_at_answer": 22197,
+    "requests_at_answer": 5,
+    "bytes_settled": 134922,
+    "requests_settled": 10,
+    "files": [
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "product",
+   "route": "product page (#/product/davco-grey-one-potadhesive)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 6134,
+    "median_fcp_ms": 688,
+    "all_ms": [
+     6160,
+     6108,
+     6134
+    ],
+    "all_fcp": [
+     688,
+     680,
+     704
+    ],
+    "bytes_at_answer": 126283,
+    "requests_at_answer": 13,
+    "bytes_settled": 239561,
+    "requests_settled": 19,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/dist/lazy.js",
+      "bytes": 30745
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/k/_index.json",
+      "bytes": 4821
+     },
+     {
+      "file": "data/p/davco-grey-one-potadhesive.json",
+      "bytes": 3951
+     },
+     {
+      "file": "data/k/davco-grey-one-potadhesive.json",
+      "bytes": 3351
+     },
+     {
+      "file": "data/specs/index.json",
+      "bytes": 3144
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/finder/r/davco-grey-one-potadhesive.json",
+      "bytes": 708
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 410,
+    "median_fcp_ms": 76,
+    "all_ms": [
+     410,
+     410,
+     449
+    ],
+    "all_fcp": [
+     72,
+     76,
+     80
+    ],
+    "bytes_at_answer": 126836,
+    "requests_at_answer": 14,
+    "bytes_settled": 239561,
+    "requests_settled": 19,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/dist/lazy.js",
+      "bytes": 30745
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/k/_index.json",
+      "bytes": 4821
+     },
+     {
+      "file": "data/p/davco-grey-one-potadhesive.json",
+      "bytes": 3951
+     },
+     {
+      "file": "data/k/davco-grey-one-potadhesive.json",
+      "bytes": 3351
+     },
+     {
+      "file": "data/specs/index.json",
+      "bytes": 3144
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/finder/r/davco-grey-one-potadhesive.json",
+      "bytes": 708
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "finder",
+   "route": "finder (#/products)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3062,
+    "median_fcp_ms": 696,
+    "all_ms": [
+     3039,
+     3062,
+     3062
+    ],
+    "all_fcp": [
+     696,
+     692,
+     700
+    ],
+    "bytes_at_answer": 168746,
+    "requests_at_answer": 8,
+    "bytes_settled": 282024,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 391,
+    "median_fcp_ms": 88,
+    "all_ms": [
+     391,
+     356,
+     699
+    ],
+    "all_fcp": [
+     88,
+     76,
+     104
+    ],
+    "bytes_at_answer": 169299,
+    "requests_at_answer": 9,
+    "bytes_settled": 282024,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "category",
+   "route": "category (#/category/construction/tile-stone-installationsystems)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2789,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     2789,
+     2784,
+     3061
+    ],
+    "all_fcp": [
+     692,
+     692,
+     696
+    ],
+    "bytes_at_answer": 168746,
+    "requests_at_answer": 8,
+    "bytes_settled": 282024,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 324,
+    "median_fcp_ms": 80,
+    "all_ms": [
+     346,
+     324,
+     317
+    ],
+    "all_fcp": [
+     80,
+     80,
+     72
+    ],
+    "bytes_at_answer": 168746,
+    "requests_at_answer": 8,
+    "bytes_settled": 282024,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "documents",
+   "route": "documents (#/documents)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 4067,
+    "median_fcp_ms": 696,
+    "all_ms": [
+     4064,
+     4088,
+     4067
+    ],
+    "all_fcp": [
+     696,
+     704,
+     688
+    ],
+    "bytes_at_answer": 292965,
+    "requests_at_answer": 9,
+    "bytes_settled": 406243,
+    "requests_settled": 15,
+    "files": [
+     {
+      "file": "data/documents.json",
+      "bytes": 124219
+     },
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 474,
+    "median_fcp_ms": 92,
+    "all_ms": [
+     489,
+     474,
+     418
+    ],
+    "all_fcp": [
+     84,
+     108,
+     92
+    ],
+    "bytes_at_answer": 292965,
+    "requests_at_answer": 9,
+    "bytes_settled": 406243,
+    "requests_settled": 15,
+    "files": [
+     {
+      "file": "data/documents.json",
+      "bytes": 124219
+     },
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "guides",
+   "route": "guides (#/guides)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3063,
+    "median_fcp_ms": 684,
+    "all_ms": [
+     3063,
+     3043,
+     3064
+    ],
+    "all_fcp": [
+     684,
+     680,
+     688
+    ],
+    "bytes_at_answer": 190316,
+    "requests_at_answer": 6,
+    "bytes_settled": 303594,
+    "requests_settled": 12,
+    "files": [
+     {
+      "file": "data/pages.json",
+      "bytes": 111128
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 302,
+    "median_fcp_ms": 88,
+    "all_ms": [
+     302,
+     301,
+     308
+    ],
+    "all_fcp": [
+     96,
+     80,
+     88
+    ],
+    "bytes_at_answer": 190316,
+    "requests_at_answer": 6,
+    "bytes_settled": 303594,
+    "requests_settled": 12,
+    "files": [
+     {
+      "file": "data/pages.json",
+      "bytes": 111128
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   }
+  },
+  {
+   "id": "projects",
+   "route": "projects (#/projects)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3063,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     3066,
+     3061,
+     3063
+    ],
+    "all_fcp": [
+     692,
+     700,
+     688
+    ],
+    "bytes_at_answer": 168746,
+    "requests_at_answer": 7,
+    "bytes_settled": 282024,
+    "requests_settled": 13,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 324,
+    "median_fcp_ms": 80,
+    "all_ms": [
+     345,
+     324,
+     311
+    ],
+    "all_fcp": [
+     80,
+     80,
+     76
+    ],
+    "bytes_at_answer": 168746,
+    "requests_at_answer": 7,
+    "bytes_settled": 282024,
+    "requests_settled": 13,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   }
+  },
+  {
+   "id": "about",
+   "route": "about (#/about)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3569,
+    "median_fcp_ms": 688,
+    "all_ms": [
+     3574,
+     3553,
+     3569
+    ],
+    "all_fcp": [
+     680,
+     688,
+     696
+    ],
+    "bytes_at_answer": 80322,
+    "requests_at_answer": 8,
+    "bytes_settled": 193600,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/coverage.json",
+      "bytes": 395
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data/stats.json",
+      "bytes": 364
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 428,
+    "median_fcp_ms": 84,
+    "all_ms": [
+     428,
+     473,
+     292
+    ],
+    "all_fcp": [
+     80,
+     96,
+     84
+    ],
+    "bytes_at_answer": 193600,
+    "requests_at_answer": 14,
+    "bytes_settled": 193600,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/coverage.json",
+      "bytes": 395
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data/stats.json",
+      "bytes": 364
+     }
+    ]
+   }
+  },
+  {
+   "id": "selector",
+   "route": "selector page (#/selector)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2531,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     2531,
+     2210,
+     2535
+    ],
+    "all_fcp": [
+     688,
+     704,
+     692
+    ],
+    "bytes_at_answer": 82969,
+    "requests_at_answer": 6,
+    "bytes_settled": 196247,
+    "requests_settled": 12,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 276,
+    "median_fcp_ms": 84,
+    "all_ms": [
+     301,
+     250,
+     276
+    ],
+    "all_fcp": [
+     88,
+     76,
+     84
+    ],
+    "bytes_at_answer": 82969,
+    "requests_at_answer": 6,
+    "bytes_settled": 196247,
+    "requests_settled": 12,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50712
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "data/s/cats.json",
+      "bytes": 13075
+     },
+     {
+      "file": "",
+      "bytes": 12533
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   }
+  }
+ ]
+}
