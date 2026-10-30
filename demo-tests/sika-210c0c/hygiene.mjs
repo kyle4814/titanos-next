@@ -25,9 +25,10 @@ const tells = loadTells();
 const problems = [];
 const bad = (file, line, rule, detail) => problems.push({ file: path.relative(path.dirname(PORTAL), file), line, rule, detail });
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.name === 'node_modules' || e.name === '.git' ? [] : e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
-// apply/speed: assets/dist holds generated bundles of the source modules below it; the sources are what is scanned and budgeted
+// apply/speed: assets/dist holds generated bundles of the source modules below it. It IS scanned (competitor names, external URLs, analytics, AI-tell words,
+// emoji, placeholders); only the dash scan (swc writes escapes as literal characters) and the per-module size budget skip it, because the sources are scanned and budgeted.
 const GENERATED = /[\\/]assets[\\/]dist[\\/]/;
-const files = [...walk(PORTAL), ...(fs.existsSync(ASSIST) ? walk(ASSIST) : [])].filter((f) => !GENERATED.test(f));
+const files = [...walk(PORTAL), ...(fs.existsSync(ASSIST) ? walk(ASSIST) : [])];
 const ext = (f) => path.extname(f).toLowerCase();
 const CODE = new Set(['.js', '.mjs', '.html', '.css']);
 const DATA = new Set(['.json']);
@@ -77,7 +78,7 @@ for (const f of files) {
     const strs = e === '.html' ? htmlText(text) : jsStrings(text);
     for (const [ln, s] of strs) {
       nStr++;
-      if (DASH.test(s)) bad(f, ln, 'em or en dash in a string', s.slice(0, 60));
+      if (DASH.test(s) && !GENERATED.test(f)) bad(f, ln, 'em or en dash in a string', s.slice(0, 60));
       if (EMOJI.test(s)) bad(f, ln, 'emoji in a string', s.slice(0, 60));
       if (tells && !/^[a-z0-9\/_.:#-]+$/.test(s)) for (const k of ['TELLS', 'PHRASES']) { const m = tells[k] && new RegExp(tells[k], 'i').exec(s); if (m) bad(f, ln, 'AI-tell word or phrase', m[0] + ' in: ' + s.slice(0, 70)); }
     }

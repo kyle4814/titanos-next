@@ -127,7 +127,7 @@ function footer() {
     h('div', { class: 'container' }, h('div', { class: 'cols' }, cols)),
     h('div', { class: 'footbar' }, h('div', { class: 'container' }, h('ul', null, f.legal.map((l) => h('li', null, h('a', { href: l.href, target: '_blank', rel: 'noopener' }, l.label)))))),
     h('div', { class: 'footbar', style: 'background:#2f2f2f' }, h('div', { class: 'container demo-line' },
-      h('strong', { id: 'demo-line' }, `Demo prepared for ${d.preparedFor} by `, h('a', { href: d.byUrl, target: '_blank', rel: 'noopener' }, d.by), `, built in ${d.builtInHours} hours`), '. ',
+      h('strong', { id: 'demo-line' }, `Demo prepared for ${d.preparedFor} by `, d.byUrl ? h('a', { href: d.byUrl, target: '_blank', rel: 'noopener' }, d.by) : d.by, `, built in ${d.builtInHours} hours`), '. ',
       d.notice)));
 }
 
