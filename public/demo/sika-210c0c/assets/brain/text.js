@@ -4,7 +4,7 @@ export const STOP = new Set('a an the is are was were be been to of in on at for
 export const GENERIC = new Set('old new existing over onto into under above below near around when where why who whom whose than then also just only still very really more most such other another each every both either neither not no yes can ok okay stick sticks bond bonds work works working apply applied product products item items stuff material materials sika davco australia'.split(/\s+/));
 export function normalise(s) {
   return String(s == null ? '' : s).normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
-    .replace(/[®™©]/g, ' ').replace(/m²|m²/g, 'm2').replace(/\bsq\.? ?m(etres?|eters?)?\b/g, 'm2').replace(/\bsqm\b/g, 'm2').replace(/&/g, ' and ')
+    .replace(/[®™©]/g, ' ').replace(/m²|m²/g, 'm2').replace(/\bsq\.? ?m(etres?|eters?)?\b/g, 'm2').replace(/\bsqm\b/g, 'm2').replace(/&/g, ' and ').replace(/\+/g, ' plus ')
     .replace(/(\d),(\d{3})\b/g, '$1$2').replace(/[^a-z0-9.½]+/g, ' ').replace(/(^|\s)\.+(?=\s|$)/g, ' ').replace(/\.(\s|$)/g, ' ').replace(/\s+/g, ' ').trim();
 }
 export function stem(w) {

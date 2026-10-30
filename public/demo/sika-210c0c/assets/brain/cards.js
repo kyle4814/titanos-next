@@ -18,7 +18,7 @@ export function unknown(question, sh, reason, missing = [], extra = {}) {
 export function productCard(sh, sentence, why) {
   const f = fact({ source_url: sh.u, page: null, sentence: sentence || sh.d.t || sh.n, doc_type: 'WEB' });
   return card({ type: 'product', title: sh.n, product: prod(sh), headline: sh.d.t || sh.d.s || '', lines: [why ? { label: 'Why this one', text: why } : null, sh.d.pk ? { label: 'Packaging', text: sh.d.pk } : null].filter(Boolean),
-    facts: [f], chip: CHIPS.PAGE, links: [{ label: 'Open the product page', url: sh.u }], followups: [`Coverage of ${sh.n}`, `Data sheet for ${sh.n}`, `Safety data sheet for ${sh.n}`] });
+    facts: [f, (sh.d.t || sh.d.s) && (sh.d.t || sh.d.s) !== f.sentence ? fact({ source_url: sh.u, sentence: sh.d.t || sh.d.s, doc_type: 'WEB' }) : null, sh.d.pk ? fact({ source_url: sh.u, page: null, sentence: sh.d.pk, doc_type: 'WEB' }) : null].filter(Boolean), source: f, chip: CHIPS.PAGE, links: [{ label: 'Open the product page', url: sh.u }], followups: [`Coverage of ${sh.n}`, `Data sheet for ${sh.n}`, `Safety data sheet for ${sh.n}`] });
 }
 
 const DOC_LABEL = { product_data_sheet: 'Product data sheet', safety_data_sheet: 'Safety data sheet', brochure: 'Brochure', environmental_product_declaration: 'Environmental product declaration', certificate: 'Certificate', system_data_sheet: 'System data sheet', guide: 'Guide', technical_information: 'Technical information' };
@@ -39,7 +39,7 @@ export function rateCard(sh, question) {
   const shown = facts.slice(0, 4);
   return card({ type: 'rate', title: `Published coverage for ${sh.n}`, product: prod(sh), headline: 'The published consumption, quoted exactly as written. Figures are theoretical and the data sheet does not include wastage.',
     lines: shown.map((f) => ({ label: `${f.label || 'Consumption'} (${where(f)})`, text: f.text, fact: f.id })), facts: shown.map((f) => srcFact(f)), chip: chipOf(shown[0]), links: dsLink(sh),
-    followups: [`How much ${sh.n} for 20 m2`, `How long does ${sh.n} take to cure`] });
+    followups: [`How much ${sh.n} do I need for my area`, `How long does ${sh.n} take to cure`] });
 }
 
 const TIME_TITLE = { open_time: 'Open time', adjustability_time: 'Adjustability time', pot_life: 'Pot life', skin_tack_times: 'Skin or tack time', cure_times: 'Cure, setting or waiting time', recoat_times: 'Recoat time' };

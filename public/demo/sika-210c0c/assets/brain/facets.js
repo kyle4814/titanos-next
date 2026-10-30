@@ -24,7 +24,7 @@ export const SUBSTRATE = mk({
   glass: ['on glass', 'to glass', 'glass substrate'],
 });
 export const ENVIRONMENT = mk({
-  wet_area: ['wet area', 'bathroom', 'shower', 'laundry', 'ensuite', 'bath'],
+  wet_area: ['wet area', 'wet wall', 'wet floor', 'wet', 'bathroom', 'shower', 'laundry', 'ensuite', 'bath'],
   internal: ['internal', 'interior', 'indoor', 'inside'],
   external: ['external', 'exterior', 'outdoor', 'outside'],
   floor: ['floor', 'flooring'],

@@ -82,10 +82,10 @@ export function createBrain({ load, config } = {}) {
   function fuzzyAliases(n) {
     if (!aliasList) aliasList = Object.entries(core.alias).filter(([k]) => k.includes(' ') || /\d/.test(k)).map(([k, v]) => ({ k, toks: k.split(' ').map(stem), pis: v }));
     const q = n.split(' ').filter(Boolean).map(stem); const hits = [];
-    const tokEq = (a, b) => a === b || (a.length >= 5 && b.length >= 5 && dist(a, b, a.length >= 8 ? 2 : 1) <= (a.length >= 8 ? 2 : 1));
+    const tokEq = (a, b) => a === b || (a.length >= 3 && b.length >= 3 && !/\d/.test(a + b) && dist(a, b, a.length >= 8 ? 2 : 1) <= (a.length >= 8 ? 2 : 1));
     for (const a of aliasList) {
       const k = a.toks.length; if (k < 2 && !/\d/.test(a.k)) continue;
-      for (let i = 0; i + k <= q.length; i++) { let ok = true, fuzzy = 0; for (let j = 0; j < k; j++) { if (q[i + j] === a.toks[j]) continue; if (tokEq(q[i + j], a.toks[j])) { fuzzy++; continue; } ok = false; break; } if (ok && fuzzy) { hits.push({ i, k, pis: a.pis, key: a.k, fuzzy }); break; } }
+      for (let i = 0; i + k <= q.length; i++) { let ok = true, fuzzy = 0; for (let j = 0; j < k; j++) { if (q[i + j] === a.toks[j]) continue; if (tokEq(q[i + j], a.toks[j])) { fuzzy++; continue; } ok = false; break; } if (ok && fuzzy && (fuzzy <= 1 || k >= 4)) { hits.push({ i, k, pis: a.pis, key: a.k, fuzzy }); break; } }
     }
     return pickSpans(hits);
   }
@@ -118,9 +118,9 @@ export function createBrain({ load, config } = {}) {
       const idf = Math.log(1 + N / best.size);
       for (const [pi, ws] of best) { score.set(pi, (score.get(pi) || 0) + w * idf * ws); if (w >= 1) hit.set(pi, (hit.get(pi) || 0) + 1); }
     }
-    const nPrimary = Math.max(1, [...qm.values()].filter((w) => w >= 1 && core.post[[...qm.keys()][0]] !== undefined).length);
+    const nPrim = [...qm.values()].filter((w) => w >= 1).length;
     const items = [];
-    for (const [pi, s] of score) { const cov = (hit.get(pi) || 0) / Math.max(1, [...qm.entries()].filter(([t, w]) => w >= 1 && core.post[t]).length); items.push({ pi, score: s * (0.4 + 0.6 * cov), cov }); }
+    for (const [pi, s] of score) { const cov = (hit.get(pi) || 0) / Math.max(1, nPrim); items.push({ pi, score: s * (0.4 + 0.6 * cov), cov }); }
     items.sort((a, b) => b.score - a.score || a.pi - b.pi);
     return { items, qm };
   }
@@ -166,7 +166,8 @@ export function createBrain({ load, config } = {}) {
     const hard = conds.filter((c) => c.hard); const need = hard.length ? hard : conds;
     if (!need.length) return { verdict: 'unknown', rule: null, uncovered: [] };
     const score = (r, list) => list.filter((c) => covers(r, c)).length;
-    const nos = rules.filter((r) => r.pol === 'no' && !r.cond && score(r, need) > 0).sort((a, b) => score(b, need) - score(a, need));
+    const textCovers = (r, c) => { const set = ' ' + tokens(r.text, true).join(' ') + ' '; return c.toks.some((tk) => set.includes(' ' + tk.join(' ') + ' ')); };
+    const nos = rules.filter((r) => r.pol === 'no' && !r.cond && need.some((c) => textCovers(r, c))).sort((a, b) => need.filter((c) => textCovers(b, c)).length - need.filter((c) => textCovers(a, c)).length);
     if (nos.length) return { verdict: 'no', rule: nos[0], uncovered: [] };
     const yes = rules.filter((r) => r.pol === 'yes' && score(r, need) > 0).sort((a, b) => score(b, need) - score(a, need) || (a.cond ? 1 : 0) - (b.cond ? 1 : 0));
     if (!yes.length) return { verdict: 'unknown', rule: null, uncovered: need.map((c) => c.label) };
@@ -174,6 +175,9 @@ export function createBrain({ load, config } = {}) {
     if (unc.length) return { verdict: 'unknown', rule: best, uncovered: unc.map((c) => c.label) };
     return { verdict: best.cond ? 'conditional' : 'yes', rule: best, uncovered: [] };
   }
+
+  const TAG_TERMS = (() => { const m = new Map(); for (const [dim, list] of [['substrate', SUBSTRATE], ['tile_type', TILE], ['environment', ENVIRONMENT]]) for (const f of list) m.set(dim + ':' + f.id, f.terms.map((t) => t.toks)); return m; })();
+  function mentionsTag(text, tag) { const set = ' ' + tokens(text, true).join(' ') + ' '; return (TAG_TERMS.get(tag) || []).some((tk) => set.includes(' ' + tk.join(' ') + ' ')); }
 
   // ---- decision trees
   const TREE_TILE = { ceramic: 'ceramic', porcelain: 'porcelain', mosaic: 'mosaic', glass_tile: 'glass_tile', natural_stone: 'natural_stone', moisture_sensitive_stone: 'moisture_sensitive_stone', large_format: 'large_format', terracotta: 'terracotta', brick_slip: 'brick_slip' };
@@ -209,18 +213,22 @@ export function createBrain({ load, config } = {}) {
     const rule = await matchRule(q);
     trace.push('rules:' + (rule ? 'hit' : 'miss'));
     if (rule) return out('rule', 'rules', [C.ruleCard(rule)]);
-    const n = normalise(q); const facets = parseFacets(q);
-    let intent = classify(n, facets.area != null);
+    const n0 = normalise(q);
     // product mentions: exact, then fuzzy
-    let mentions = findExact(n); let stage = 'exact';
-    if (!mentions.length) { mentions = fuzzyAliases(n); stage = mentions.length ? 'fuzzy' : 'index'; }
+    let mentions = findExact(n0); let stage = 'exact';
+    if (!mentions.length) { mentions = fuzzyAliases(n0); stage = mentions.length ? 'fuzzy' : 'index'; }
     trace.push(`products:${stage}:${mentions.length}`);
+    // the words of a product name are not intent or facet words ("Opti-Cure" is not a cure question, "Concrete Fix" is not concrete)
+    const w0 = n0.split(' ').filter(Boolean), cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
+    const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
+    const facets = parseFacets(n); let intent = classify(n, facets.area != null);
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
     // a follow-up ("and its SDS?") keeps the last product
-    const fromState = !pis.length && state && state.productId && pIndex.has(state.productId) && intent !== 'which';
+    const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
+    const fromState = !pis.length && state && state.productId && pIndex.has(state.productId) && intent !== 'which' && followUp;
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
     const namedAll = pis.length && !ambiguous;
     const st = (pi) => ({ productId: core.P[pi].id, intent });
@@ -233,6 +241,8 @@ export function createBrain({ load, config } = {}) {
       if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: st(pis[0]) }); }
       intent = 'which';
     }
+    if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there)\b/.test(n)) intent = 'which';
+    if (!pis.length && intent === 'compat') intent = 'which';
     const needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
     if (needsProduct && !pis.length) {
       // name the products that fit and let the visitor pick: never guess one
@@ -284,7 +294,7 @@ export function createBrain({ load, config } = {}) {
         return out('system', 'tree', [C.unknown(q, null, 'The published documentation does not support a complete system for this combination. Please contact Sika Australia technical services.', ['system for this combination'])]);
       }
     }
-    if ((hasTile || hasSub || facets.environment.length) && /\b(adhesive|glue|bond|membrane|waterproof|waterproofing|tanking)\b/.test(n)) {
+    if ((hasTile || /\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|grout)\b/.test(n)) && (hasSub || facets.environment.length) && /\b(adhesive|glue|bond|membrane|waterproof|waterproofing|tanking)\b/.test(n)) {
       const t = await treeAnswer(n, facets, q);
       if (t && t.choose) { trace.push('tree:ask'); return out('tree', 'tree', [t.choose]); }
       if (t && t.leaf) {
@@ -292,7 +302,7 @@ export function createBrain({ load, config } = {}) {
         const cards = [];
         for (const f of t.leaf.fit.slice(0, 4)) {
           const sh = await load.product(f.p); if (!sh) continue;
-          const ev = f.ev.map((id) => t.rulesTable[id]).filter(Boolean);
+          const ev = f.ev.map((id) => t.rulesTable[id]).filter(Boolean).sort((a, b) => (/suit|designed|intended|recommend/i.test(b.text) - /suit|designed|intended|recommend/i.test(a.text)) || b.text.length - a.text.length);
           const c = C.productCard(sh, ev[0] ? ev[0].text : sh.d.t, `The data sheet says it suits this job`);
           if (ev[0]) { c.facts = ev.slice(0, 2).map((r) => ({ source_url: r.url, page: r.page, sentence: r.text, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.doc_version })); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: ev[0].text }]; }
           if (f.pr && f.pr.length) { const pn = f.pr.map((id) => (core.P[pIndex.get(id)] || {}).n).filter(Boolean); if (pn.length) c.lines.push({ label: 'Primer it names', text: pn.join(', ') }); }
@@ -305,7 +315,7 @@ export function createBrain({ load, config } = {}) {
     // stage 3 and 4: index, then facet constraints from the compatibility tags
     const { items, qm } = search(n, []);
     trace.push('index:' + items.length);
-    if (!items.length || items[0].score < 3) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
+    if (!items.length || items[0].score < 3 || items[0].cov < 0.5) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
     let list = items.slice(0, 30); const ruled = [];
     if (facets.substrate.length || facets.tile_type.length || facets.environment.some((e) => HARD_ENV.has(e))) {
       trace.push('facets');
@@ -315,7 +325,7 @@ export function createBrain({ load, config } = {}) {
       const top = list[0].score;
       list = list.map((it) => {
         const id = core.P[it.pi].id; let mult = 1, no = null;
-        for (const sd of shards) for (const tag of asks) { const e = sd.tags[tag]; if (!e) continue; const nr = e.no.find((r) => r.p === id && !r.c); if (nr) no = no || nr; else if (e.yes.some((r) => r.p === id && !r.c)) mult *= 1.25; else if (e.yes.some((r) => r.p === id)) mult *= 1.1; }
+        for (const sd of shards) for (const tag of asks) { const e = sd.tags[tag]; if (!e) continue; const nr = e.no.find((r) => r.p === id && !r.c && mentionsTag(r.t, tag)); if (nr) no = no || nr; else if (e.yes.some((r) => r.p === id && !r.c)) mult *= 1.25; else if (e.yes.some((r) => r.p === id)) mult *= 1.1; }
         if (no) { if (it.score >= top * 0.5) ruled.push({ it, rule: no }); return null; }
         return { ...it, score: it.score * mult };
       }).filter(Boolean);
@@ -326,7 +336,7 @@ export function createBrain({ load, config } = {}) {
     const cards = [];
     for (const it of top) { const sh = await shard(it.pi); if (sh) cards.push(C.productCard(sh, await bestSentence(sh, qset))); }
     if (ruled.length) { const r = ruled[0]; const sh = await shard(r.it.pi); if (sh) { const c = C.compatCard(sh, 'no', { id: r.rule.r, text: r.rule.t, s: { u: r.rule.u, p: r.rule.pg, v: r.rule.v, t: 'PDS' } }, q, [], []); c.title = `Ruled out: ${sh.n}`; c.headline = 'No. This product matches your words but its own data sheet rules it out for this job.'; cards.push(c); } }
-    return out(cards.length ? 'which' : intent, 'index', cards, { state: top.length ? { productId: core.P[top[0].pi].id, intent: 'which' } : null });
+    return out(cards.length ? 'which' : intent, 'index', cards, { state: top.length === 1 ? { productId: core.P[top[0].pi].id, intent: 'which' } : null });
   }
   return { ask, boot, search: (n) => search(normalise(n), []), core: () => core };
 }

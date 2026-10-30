@@ -1,0 +1,1935 @@
+{
+ "n": 4659,
+ "ok": 4557,
+ "per": {
+  "which": {
+   "n": 1332,
+   "ok": 1241,
+   "kinds": {
+    "name": {
+     "n": 512,
+     "ok": 512
+    },
+    "typo": {
+     "n": 338,
+     "ok": 322
+    },
+    "describe": {
+     "n": 412,
+     "ok": 337
+    },
+    "tree": {
+     "n": 70,
+     "ok": 70
+    }
+   }
+  },
+  "rate": {
+   "n": 512,
+   "ok": 512,
+   "kinds": {
+    "rate": {
+     "n": 276,
+     "ok": 276
+    },
+    "rate-none": {
+     "n": 236,
+     "ok": 236
+    }
+   }
+  },
+  "document": {
+   "n": 1024,
+   "ok": 1024,
+   "kinds": {
+    "pds": {
+     "n": 512,
+     "ok": 512
+    },
+    "sds": {
+     "n": 512,
+     "ok": 512
+    }
+   }
+  },
+  "time": {
+   "n": 678,
+   "ok": 678,
+   "kinds": {
+    "time-none": {
+     "n": 304,
+     "ok": 304
+    },
+    "cure": {
+     "n": 162,
+     "ok": 162
+    },
+    "open": {
+     "n": 24,
+     "ok": 24
+    },
+    "pot": {
+     "n": 111,
+     "ok": 111
+    },
+    "recoat": {
+     "n": 77,
+     "ok": 77
+    }
+   }
+  },
+  "calc": {
+   "n": 512,
+   "ok": 512,
+   "kinds": {
+    "calc": {
+     "n": 512,
+     "ok": 512
+    }
+   }
+  },
+  "out of scope": {
+   "n": 138,
+   "ok": 132,
+   "kinds": {
+    "price": {
+     "n": 128,
+     "ok": 128
+    },
+    "oos": {
+     "n": 10,
+     "ok": 4
+    }
+   }
+  },
+  "compat": {
+   "n": 391,
+   "ok": 386,
+   "kinds": {
+    "compat-yes": {
+     "n": 254,
+     "ok": 250
+    },
+    "compat-unknown": {
+     "n": 127,
+     "ok": 127
+    },
+    "compat-no": {
+     "n": 10,
+     "ok": 9
+    }
+   }
+  },
+  "system": {
+   "n": 72,
+   "ok": 72,
+   "kinds": {
+    "system": {
+     "n": 72,
+     "ok": 72
+    }
+   }
+  }
+ },
+ "fails": [
+  {
+   "kind": "describe",
+   "q": "I need wrac - water reducing and set-accelerator",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need liquid alkali-free set accelerator for shotcrete",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need ac - non chloride set accelerator",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need shrinkage-reducing admixture",
+   "got": [
+    "product:sika-viscocrete-10",
+    "product:sika-viscocrete-1250",
+    "product:sika-viscocrete-5-500",
+    "product:sikarapid-af"
+   ],
+   "headline": "HWR- High Range Water Reducer"
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco Grey One Pot adhesive on ceramic tile underlay?",
+   "got": [
+    "compatibility:davco-grey-one-potadhesive"
+   ],
+   "headline": "No. The published sentence is quoted below."
+  },
+  {
+   "kind": "compat-no",
+   "q": "Can I use Davco Grey One Pot adhesive on existing tiles?",
+   "got": [
+    "compatibility:davco-grey-one-potadhesive"
+   ],
+   "headline": "It does not mention existing tile. I will not guess."
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco Supamastic on fibre cement sheet?",
+   "got": [
+    "compatibility:davco-supamastic"
+   ],
+   "headline": "Yes. The published sentence is quoted below."
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast drying hybrid self-levelling & smoothing compound",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need rapid-drying hydrostatic moisture barrier",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need novolac epoxy chemical resistant protective coating",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 2-part epoxy protective coating / lining system",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 5 minute flash setting mortar",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need bonding primer and reinforcement corrosion protection",
+   "got": [
+    "product:sikadur-32-lp",
+    "product:sika-ferrogard-510patch",
+    "product:sika-ferrogard-515patch",
+    "product:sika-ferrogard-520patch"
+   ],
+   "headline": "Epoxy bonding agent and Reinforcement Corrosion Protection"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a neutral-curing silicone sealant with a high movement capability and excellent adhesion to a wide range of substrates",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure roof and gutter silicone sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high strength multipurpose adhesive",
+   "got": [
+    "product:sikaflex-111-stickseal",
+    "product:sikabond-techgrip",
+    "product:sikabond-instantnailsfast",
+    "product:sikabond-sprayfix"
+   ],
+   "headline": "Flexible adhesive and sealant"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast cure multipurpose construction adhesive",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure wet area silicone sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast curing styrene free chemical anchoring adhesive",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high yield, gun applied expanding foam",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need multi-position, high yield expanding foam",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need very high flow, water displacing, cost effective epoxy resin grout",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need pultruded carbon fibre plates for structural strengthening as part of the sika carbodur system- type clm(1) compliant to as5100.8",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need pultruded carbon fibre plates for structural strengthening as part of the sika carbodur system, cls(2) laminate according to as 5100.8",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need two component adhesive for sarnafil g 476 and sarnafil g 410 l felt roofing applications",
+   "got": [
+    "product:sarnafil-g-410-15lfelt",
+    "product:sarnafil-g-410-20lfelt",
+    "product:sarnafil-g-476-20",
+    "product:sarnafil-g-476-15"
+   ],
+   "headline": "Polymeric membrane for adhered roof waterproofing"
+  },
+  {
+   "kind": "describe",
+   "q": "I need flexible water-based bitumen waterproofing membrane",
+   "got": [
+    "product:sikaplan-wp-1100-31hl2",
+    "product:sikaplan-wp-1100-30hl",
+    "product:sikatile-111-rapidproof",
+    "product:sikatile-110-secureproof"
+   ],
+   "headline": "Sheet waterproofing membrane for basements and tunnels"
+  },
+  {
+   "kind": "describe",
+   "q": "I need moisture-curing single-pack elastomeric polyurethane waterproofing membrane",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 2-component high-strength panel adhesive",
+   "got": [
+    "product:sikatack-panel-10",
+    "product:sikaroof-versiscapepanelreinforced",
+    "product:sikaroof-versiscapepanel",
+    "product:sikamelt-677"
+   ],
+   "headline": "1-component polyurethane for panel bonding in ventilated facades"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaflex-268 powrecure",
+   "got": [
+    "product:sikaflex-268"
+   ],
+   "headline": "Assembly & glazing adhesive and sealant for rail applications with acceleration "
+  },
+  {
+   "kind": "describe",
+   "q": "I need 2-component silicone structural glazing adhesive, complying astm and gb standards",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need long open-time, fast-curing, 2-component stp assembly adhesive and sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need crack bridging, anti-carbonation protective coating for concrete",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need protective coating for concrete",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high range water reducing admixture",
+   "got": [
+    "product:sika-viscocrete-10",
+    "product:sika-viscocrete-1250",
+    "product:sika-viscocrete-5-500",
+    "product:lanko-311-bricklayersplasticiser"
+   ],
+   "headline": "HWR- High Range Water Reducer"
+  },
+  {
+   "kind": "describe",
+   "q": "I need long open time 2-component adhesive for panel bonding",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need long open time, low viscous 2-component adhesive for panel bonding",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need premium silicone adhesive sealant",
+   "got": [
+    "product:sikaseal-appliancesealant",
+    "product:sikasil-702",
+    "product:sikasil-marine",
+    "product:sikaseal-401-aquarium"
+   ],
+   "headline": "Premium one-component room temperature vulcanising silicone sealant"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast curing, 2-component structural adhesive",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a pre-blended rapid drying screed for internal and external use",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a premixed ready to use wall tile adhesive and grout",
+   "got": [
+    "choose:Which tile adhesive?"
+   ],
+   "headline": "Where is the tiling going?"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high performance joint and crack sealing tape part of the sikadur-combiflex sg system",
+   "got": [
+    "product:sikadur-combiflexsgsystem"
+   ],
+   "headline": "High performance joint sealing system"
+  },
+  {
+   "kind": "describe",
+   "q": "I need sikafloor-400 n elastic is a one-component, uv resistant, highly elastic, moisture curing polyurethane waterproof membrane.",
+   "got": [
+    "time:sikafloor-400-nelastic"
+   ],
+   "headline": "The published times, quoted as written, with the conditions they were measured u"
+  },
+  {
+   "kind": "describe",
+   "q": "I need sodium silicate / water based based transparent surface hardener, dust proofer, densifier and impregnating sealer for concrete",
+   "got": [
+    "product:davco-sanitized-tilegroutsealer",
+    "product:lanko-752-bondit",
+    "product:sikadur-330",
+    "product:sikaproof-bentonite"
+   ],
+   "headline": "A solvent-based sealer that helps protect against stains, soiling, discolouratio"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika carbodur s snm",
+   "got": [
+    "product:sika-carbodur-s"
+   ],
+   "headline": "PULTRUDED CARBON FIBRE PLATES FOR STRUCTURAL STRENGTHENING AS PART OF THE SIKA C"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikafuko tv-2",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need one component gunite dry spray applied repair mortar",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaproof ebntonite powder",
+   "got": [
+    "product:davco-powder-mastic"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "describe",
+   "q": "I need natural sodium bentonite powder",
+   "got": [
+    "product:davco-powder-mastic"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use Davco SMP EVO on fibre cement sheet?",
+   "got": [
+    "compatibility:davco-smp-evo"
+   ],
+   "headline": "Yes. The published sentence is quoted below."
+  },
+  {
+   "kind": "describe",
+   "q": "I need rapid setting, high strenght trafficable repair mortar",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need root-resistant polyurethane waterproofing membrane",
+   "got": [
+    "product:sikaplan-wp-1100-31hl2",
+    "product:sikaplan-wp-1100-30hl",
+    "product:sarnafil-g-476-20",
+    "product:sarnafil-g-476-15"
+   ],
+   "headline": "Sheet waterproofing membrane for basements and tunnels"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high performance, moisture-curing hand applied elastomeric polyurethane membrane",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need polyurethane tack coat for sikalastic-827 ht hot melt pellets",
+   "got": [
+    "product:sikalastic-827-ht"
+   ],
+   "headline": "Modified hot-melt adhesive"
+  },
+  {
+   "kind": "describe",
+   "q": "I need polyurethane hybrid elastic top coat for liquid applied membrane waterproofing systems",
+   "got": [
+    "product:sikalastic-888-hybrid",
+    "product:sikaroof-pur-10-uv",
+    "product:sikaroof-pur-15-uv",
+    "product:sikaroof-pur-20-uv"
+   ],
+   "headline": "Two component solvent free 100% solids Polyurethane/Polyurea Hybrid membrane"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast-drying pre-blended engineered screed",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast curing premium polyurethane construction adhesive",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need premium neutral cure multi-purpose pure silicone sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need catalyst designed for use with sika injection 111",
+   "got": [
+    "compatibility:sika-injection-111"
+   ],
+   "headline": "It does not mention that. I will not guess."
+  },
+  {
+   "kind": "describe",
+   "q": "I need high strength fast setting ramping & patching mortar",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a premium performance, class iii, ready to use, water-based polyurethane waterproofing membrane designed for under tile and stone applications.",
+   "got": [
+    "choose:Which waterproofing membrane?"
+   ],
+   "headline": "Where is it going?"
+  },
+  {
+   "kind": "compat-yes",
+   "q": "Can I use SikaTile-410 Secure Set on fibre cement sheet?",
+   "got": [
+    "compatibility:sikatile-410-secureset"
+   ],
+   "headline": "Yes. The published sentence is quoted below."
+  },
+  {
+   "kind": "describe",
+   "q": "I need setting and hardening accelerator for concrete mortar and grout",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a rapid setting tile and stone adhesive with patented dust less technology",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need set accelerating admixture for two component injection grout",
+   "got": [
+    "product:sika-set-accelerator"
+   ],
+   "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a class iii rapid drying water-based membrane with easy film build for under tile and stone waterproofing",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast curing, pure polyurethane flexible sealant & adhesive",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure sanitary silicone sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high yield thixotropic cable bolt grout",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a premium rubber modified flexible cement-based tile adhesive with extended coverage",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a fine white polymer fortified flexible sand and silica free cement-based wall tile adhesive",
+   "got": [
+    "choose:Which tile adhesive?"
+   ],
+   "headline": "Where is the tiling going?"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a flexible cement-based tile adhesive with dust less technology design for large format tile installations",
+   "got": [
+    "product:davco-powder-mastic",
+    "product:sikatile-400-evopro",
+    "product:sikatile-440-opti-cure",
+    "product:davco-smp-evo"
+   ],
+   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+  },
+  {
+   "kind": "describe",
+   "q": "I need a flexible rapid drying class iii waterproofing membrane design for under tile applications.",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need fast setting, cement based smoothing and finishing skim coat for internal use.",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need cementitious fast setting water plug",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high flexibility neutral cure sanitary silicone sealant",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika viscoflow-21 au ipmact",
+   "got": [
+    "product:sika-viscoflow-21au"
+   ],
+   "headline": "WORKABILITY-ENHANCING ADMIXTURE"
+  },
+  {
+   "kind": "describe",
+   "q": "I need flexible waterproofing membrane for wet rooms, swimming pools and balconies below tiling",
+   "got": [
+    "product:schoenox-ab"
+   ],
+   "headline": "WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALL"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack pedetsal shim",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need spacer tab for pedestal system for raised timber tile flooring",
+   "got": [
+    "product:sikaroof-versijackspacertab",
+    "product:sikaroof-versijackvariableanglespacertab",
+    "product:sikaroof-versijackkspacertab",
+    "product:sikaroof-versijackspacertabv"
+   ],
+   "headline": "SPACER TAB FOR HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack concealed paver retaienr",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack bearer hloder",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack variable angel spacer tab",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack evrtical paver clips",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need height-adjustable pedestal system for raised pavers and decking flooring",
+   "got": [
+    "product:sikaroof-versijackpedestalshim",
+    "product:sikaroof-versijackverticalpaverclips",
+    "product:sikaroof-versijackexposedpaverretainerspacertab",
+    "product:sikaroof-versijackvariableanglespacertab"
+   ],
+   "headline": "SHIM FOR HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVER FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need safety panel for raised paver finishes",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack joist daaptor",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need wall spacer for safety panel system for raised paving flooring",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need diamond infill block for safety panel system for raised landscape finishes",
+   "got": [
+    "safety:sika-block"
+   ],
+   "headline": "Quoted from the safety data sheet, Revision 23.05.2022, version 2.0. Check the c"
+  },
+  {
+   "kind": "describe",
+   "q": "I need spacer tab for safety panel for raised landscape finishes",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "describe",
+   "q": "I need aluminium reinforcement for safety panel",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack k spacre tab",
+   "got": [
+    "product:sikaroof-versijackk"
+   ],
+   "headline": "SELF-LEVELLING ADJUSTABLE SCREWJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack spacer atb v",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack kc base slope corrector",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versijack c top etxender",
+   "got": [
+    "product:sikaroof-versijack"
+   ],
+   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaroof versipave chock extedner",
+   "got": [
+    "product:sikaroof-versipave"
+   ],
+   "headline": "ADJUSTABLE STEPJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  },
+  {
+   "kind": "describe",
+   "q": "I need safety panel for raised landscape finishes",
+   "got": [
+    "choose:Which product do you mean?"
+   ],
+   "headline": "That question needs a product. These are the closest matches in the published ra"
+  },
+  {
+   "kind": "oos",
+   "q": "What is the weather in Brisbane?",
+   "got": [
+    "product:sikaseal-300-glassandweatherseal",
+    "product:sikahyflex-305-ap",
+    "product:sikasil-sg-20",
+    "product:sikasil-sg-500"
+   ],
+   "headline": "A NEUTRAL-CURING SILICONE SEALANT WITH A HIGH MOVEMENT CAPABILITY AND EXCELLENT "
+  },
+  {
+   "kind": "oos",
+   "q": "Can you write me a poem?",
+   "got": [
+    "product:sikatack-pro",
+    "product:sikaflex-295-uv",
+    "product:sikatack-drive-60min",
+    "product:sikaflex-255-ultra"
+   ],
+   "headline": "Premium choice for Auto Glass Professionals"
+  },
+  {
+   "kind": "oos",
+   "q": "What is the capital of France?",
+   "got": [
+    "product:sikawrap-fx-50-c",
+    "product:sika-carbodur-m",
+    "product:sika-carbodur-s",
+    "product:sikawrap-230-c"
+   ],
+   "headline": "Carbon fibre string for structural strengthening and connection, and anchoring o"
+  },
+  {
+   "kind": "oos",
+   "q": "How do I bake bread?",
+   "got": [
+    "product:sikaplan-wp-disc",
+    "product:sikaroof-versipaveextender",
+    "product:sikaroof-versijackckbaseslopecorrector",
+    "product:sikaroof-versipave"
+   ],
+   "headline": "Fixing disc on base of PVC-p"
+  },
+  {
+   "kind": "oos",
+   "q": "What is the best phone?",
+   "got": [
+    "product:sikaproof-bentonite",
+    "product:sika-primer-207",
+    "product:sikaflex-227",
+    "product:sikaflex-527-at"
+   ],
+   "headline": "NATURAL SODIUM BENTONITE BELOW GROUND WATERPROOFING SYSTEM"
+  },
+  {
+   "kind": "oos",
+   "q": "How fast is a cheetah?",
+   "got": [
+    "product:sikafloor-158-wfastbarrier",
+    "product:sikabond-instantnailsfast",
+    "product:sikarapid-c-100",
+    "product:formol-eco"
+   ],
+   "headline": "RAPID-DRYING HYDROSTATIC MOISTURE BARRIER"
+  }
+ ],
+ "propBad": [
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an internal wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Mosaic tiles Primer i\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Cement-based renders \""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an internal wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an internal floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Mosaic tiles Primer i\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Cement-based renders \""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an internal floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in a wet area?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in a wet area?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Mosaic tiles Primer i\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Cement-based renders \""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on brick in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on plasterboard in an external wall?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"Davco Ceramacrete A cement based tile adhesive for ridged substrates equipped with patented DUST LESS technology that re\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for ceramic tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "80 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-410 Secure Set A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESSTECHNOLOG\""
+  },
+  {
+   "q": "Which tile adhesive for porcelain tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on concrete in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Mosaic tiles Primer i\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on a cement screed in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-305 Master Lite A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE The data sheet says Cement-based renders \""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on brick in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-405 Lite A FLEXIBLE, PREMIUM, SAND AND SILICA FREE, TILE AND STONE ADHESIVE WITH LIGHTWEIGHT GLASS TECHNOLOGY F\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on fibre cement sheet in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-400 EVO PRO A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS TECHNOLOGY DESIGNED FOR NATURAL STONE\""
+  },
+  {
+   "q": "Which tile adhesive for mosaic tiles on plasterboard in an external floor?",
+   "rule": "P1",
+   "detail": "10 in \"SikaTile-510 Mega Lite A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANC\""
+  }
+ ],
+ "at": "2026-10-30T09:33:00.186Z"
+}
