@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demonblade Labs | TITANOS</title>
+<meta name="description" content="Demonblade Labs: the TITANOS research issues. Measured write-ups with their maths and receipts, free to read, nothing for sale.">
+<link rel="canonical" href="https://titanos.tech/labs/">
+<meta property="og:title" content="Demonblade Labs">
+<meta property="og:description" content="The TITANOS research issues, with their maths and receipts. Free to read.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. Demonblade Labs.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs</p>
+<h1>Demonblade Labs</h1>
+<p class="deck">The research publication of TitanOS. Each issue is one measured finding from running an autonomous engineering system, with the maths and the receipts. Free to read, nothing for sale.</p>
+<ul>
+<li><a href="/labs/issue-003/">Issue 003: I built a gym that judges its own best strategies as luck</a></li>
+<li><a href="/labs/issue-002/">Issue 002: I freed 334 gigabytes and the disk got smaller</a></li>
+<li><a href="/labs/issue-001/">Issue 001: Why more AI agents don't automatically mean more output</a></li>
+</ul>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
