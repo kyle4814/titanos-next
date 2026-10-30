@@ -104,6 +104,9 @@ r = await ask('what does self levelling mean');
 t('a term the data sheet defines is quoted from the data sheet', /highly fluid/.test(r.txt) && r.a.cards[0].facts.length >= 1);
 r = await ask('wich adhesive fr 900x900 porclain on a wal');
 t('heavy typos still reach the adhesive range', r.a.cards.some((c) => /adhesive|mastic|sikatile|davco/i.test(c.title + ' ' + (c.product ? c.product.id : ''))), r.txt.slice(0, 200));
+r = await ask('need a seal for the window frame and the bath');
+t('two jobs in one request: one clarifying question, one option each', r.a.cards.length === 1 && r.a.cards[0].type === 'choose' && r.a.cards[0].choices.length === 2);
+for (const o of r.a.cards[0].followups) { const x = await ask(o); t('two-job option answers: ' + o, x.a.cards[0].status !== 'UNKNOWN' && x.a.cards[0].type !== 'choose', x.txt.slice(0, 120)); }
 // ---- trade terms Sika does not define in one place
 for (const q of ['what is pot life', 'what is open time', 'what does adjustability time mean']) { r = await ask(q); const c = r.a.cards[0]; t('term "' + q + '": says there is no general definition and offers products that publish the figure', c.type === 'choose' && /no general definition/.test(c.headline) && c.choices.length >= 2); const x = await ask(c.followups[0]); t('term "' + q + '": the first option answers with a published figure', x.a.cards[0].type === 'time' && x.a.cards[0].status === 'PUBLISHED', x.txt.slice(0, 160)); }
 r = await ask('index fidia 4mm');

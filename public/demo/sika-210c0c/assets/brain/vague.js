@@ -24,6 +24,10 @@ export const VAGUE = [
 ];
 const HEAD = /^(?:best |good |the best )?(?:stuff |something |anything |products? |help |need help |what (?:do|should) i (?:use|need|buy|get) |i need (?:some )?help |help me |i need )(?:for |with |on |to fix |to stop |about )?(?:a |an |the |my )?(.+)$/;
 const NOUN = [
+  [/\b(deck|decking)\b/, { title: 'Deck', text: 'What is the deck job?', opts: ['Adhesive for fixing decking', 'Waterproofing for a deck under tiles', 'Sealant for deck joints'], labels: ['Fixing', 'Waterproofing', 'Joints'] }],
+  [/\b(wet area|wet areas|wet room|wetroom)\b/, { title: 'Wet area', text: 'Which part of the wet area?', opts: ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a bathroom wall', 'Silicone sealant for a shower', 'Grout for a shower floor'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant', 'Grout'] }],
+  [/\b(laundry|laundry floor)\b/, { title: 'Laundry', text: 'Which part of the laundry?', opts: ['Waterproofing for a laundry floor under tiles', 'Tile adhesive for laundry floor tiles', 'Silicone sealant for a laundry tub'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant'] }],
+  [/\b(bathroom|bathroom floor|kitchen|kitchen floor)\b/, { title: 'Bathroom or kitchen', text: 'Which part?', opts: ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a bathroom wall', 'Silicone sealant for a shower', 'Grout for a shower floor'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant', 'Grout'] }],
   [/^(roof|roofs|flat roof|roof deck)$/, { title: 'Roof', text: 'What is the roof job?', opts: ['Liquid applied waterproofing membrane for a roof', 'Torch on membrane for a flat roof', 'Sealant for a leaking gutter', 'PVC roofing sheet'], labels: ['Liquid membrane', 'Torch on', 'Gutter', 'PVC sheet'] }],
   [/^(garage|garage floor|shed floor|workshop floor|warehouse floor)$/, { title: 'Garage or workshop floor', text: 'What does the floor need?', opts: ['Epoxy floor coating for a garage', 'Self levelling compound for an uneven garage floor', 'Repair mortar for a damaged concrete floor', 'Joint filler for a slab'], labels: ['Coating', 'Levelling', 'Repair', 'Joints'] }],
   [/^(leak|leaks|a leak|leaking|water leak)$/, { title: 'Leaks', text: 'Where is the leak?', opts: ['Fast setting mortar to plug a leak', 'Waterproofing for a leaking shower', 'Waterproofing for a leaking roof', 'Injection resin for leaking cracks'], labels: ['Concrete wall', 'Shower', 'Roof', 'Cracks'] }],
@@ -44,7 +48,17 @@ export function termCard(n) {
   for (const t of TERMS) if (t.rx.test(n)) { const c = C.chooseCard(`${t.term.charAt(0).toUpperCase()}${t.term.slice(1)}`, `Sika gives the ${t.term} for each product on its own data sheet. I have no general definition from Sika to quote, and I will not make one up. Pick a product to see its published figure.`, t.opts, [], t.labels); c.followups = t.opts; return c; }
   return null;
 }
+const PL = ['window frame', 'door frame', 'window', 'door', 'bathroom', 'bath', 'shower', 'sink', 'basin', 'kitchen', 'roof', 'gutter', 'deck', 'balcony', 'pool', 'laundry', 'wall', 'floor'];
+/** a request that joins two places with "and" ("a seal for the window frame and the bath"): ask which one first, one option each */
+export function splitCard(n) {
+  const kind = /\b(sealant|seal|silicone)\b/.test(n) ? 'Sealant for' : /\b(adhesive|glue)\b/.test(n) ? 'Adhesive for' : /\bwaterproof\w*\b/.test(n) ? 'Waterproofing for' : null;
+  if (!kind || !/\band\b/.test(n) || n.split(' ').length > 14) return null;
+  let found = PL.filter((p) => new RegExp('\\b' + p + '\\b').test(n)); found = found.filter((p) => !found.some((o) => o !== p && o.includes(p)));
+  if (found.length < 2 || found.length > 4) return null;
+  const opts = found.map((p) => `${kind} a ${p}`); const c = C.chooseCard('Which one first?', 'That is more than one job. Pick the one to start with.', opts, [], found.map((p) => p.charAt(0).toUpperCase() + p.slice(1))); c.followups = opts; return c;
+}
 export function vagueCard(n) {
+  { const sc = splitCard(n); if (sc) return sc; }
   const m = HEAD.exec(n);
   if (m && n.split(' ').length <= 8) { const noun = m[1].trim(); for (const [rx, v] of NOUN) if (rx.test(noun)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
     if (/^(some )?(a |the |my )?(job|project|fix|repair|work|reno|renovation|building|house|home)$/.test(noun) || noun.split(' ').length === 1 && noun.length < 4) { const c = C.chooseCard('What are you working on?', 'What is the job?', ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor'], [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = c.followups; return c; } }
