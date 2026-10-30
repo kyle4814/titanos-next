@@ -4,6 +4,8 @@ import { rateFor } from './load.js';
 import { normaliseFact, quantity, packOptions, fmtQty, fmt, packText, ESTIMATE_LINE, NO_RATE_TEXT } from './calc.js';
 import { chipFor } from './model.js';
 import { addCalcToProject } from './bom.js';
+import { CHIPS, canUse } from './canuse.js';
+import { data } from '../data.js';
 
 const plain = (s) => String(s || '').replace(/[–—]/g, '-');
 
@@ -66,8 +68,34 @@ export async function calcPanel(p) {
   return sec;
 }
 
+const VERDICT = { yes: ['check', 'YES'], no: ['close', 'NO'], unstated: ['info', 'NOT STATED'] };
+
+/** T09: "Can I use this on or over...?" Verdicts come from the product's own published text; no inference beyond the sentence. */
+export async function canIPanel(p) {
+  if (!(p.categoryPath || []).includes('tile-stone-installationsystems')) return null;
+  const cfg = await data.config();
+  const contact = (cfg.links && cfg.links.contact) || 'https://aus.sika.com/en/Contact.html';
+  const V = canUse(p);
+  const out = h('div', { class: 'cani-out', id: 'cani-out', role: 'status', 'aria-live': 'polite' }, h('p', { class: 'calc-note' }, 'Pick a surface or condition to see what this product\'s published text says.'));
+  const btns = [];
+  const show = (id, label) => {
+    btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+    const v = V[id]; const [ic, word] = VERDICT[v.verdict];
+    const body = [h('p', { class: 'cani-verdict cani-' + v.verdict }, icon(ic, 'i--sm'), h('strong', null, word), ' ', label)];
+    if (v.quote) body.push(h('p', { class: 'finder-quote' }, h('q', null, plain(v.quote)), ' ', h('a', { class: 'link link--ext', href: v.url, target: '_blank', rel: 'noopener noreferrer' }, 'source'), ' ', h('span', { class: 'chip-status' }, chipFor(v.url)), v.field ? h('span', { class: 'count' }, ' (' + v.field + ')') : null));
+    else body.push(h('p', { class: 'calc-note' }, 'Not stated in the published text for this product. Ask Technical Services: ', h('a', { class: 'link link--ext', href: contact, target: '_blank', rel: 'noopener noreferrer' }, 'contact Sika Australia'), '.'));
+    out.replaceChildren(...body);
+    announce(`${label}: ${word}.` + (v.quote ? ' ' + plain(v.quote) : ' Not stated in the published text.'));
+  };
+  const chips = h('div', { class: 'chips', role: 'group', 'aria-label': 'Surface or condition', style: 'display:flex;gap:8px;flex-wrap:wrap;margin:.75rem 0' },
+    CHIPS.map(([id, label]) => { const b = h('button', { type: 'button', class: 'chip chip--line', 'aria-pressed': 'false', dataset: { id }, onclick: () => show(id, label) }, label); btns.push(b); return b; }));
+  return h('section', { class: 'finder-panel finder-cani', 'aria-labelledby': 'cani-h' },
+    h('h2', { id: 'cani-h' }, 'Can I use this on or over...?'),
+    h('p', null, 'Each answer is the product\'s own published sentence, quoted. Where the text is silent it says so.'), chips, out);
+}
+
 /** All finder panels for a product page, in order. */
 export async function finderPanels(p) {
-  const calc = await calcPanel(p);
-  return h('div', { class: 'container finder-panels' }, calc);
+  const [cani, calc] = await Promise.all([canIPanel(p), calcPanel(p)]);
+  return h('div', { class: 'container finder-panels' }, cani, calc);
 }

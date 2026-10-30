@@ -92,3 +92,10 @@
 .finder-ruled{margin:2rem 0;padding:1rem 1.25rem;border:1px solid var(--grey)}
 .finder-ruled li{margin:.4rem 0}
 .finder-pick{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;cursor:pointer}
+
+/* can I use this on or over */
+.cani-out{min-height:4rem}
+.cani-verdict{display:flex;align-items:center;gap:.5rem;font-size:1.15rem;margin:.3rem 0}
+.cani-no strong{color:var(--alert-ink)}
+.cani-yes strong{color:#2e6f3a}
+.cani-verdict .i{width:1.3rem;height:1.3rem}
