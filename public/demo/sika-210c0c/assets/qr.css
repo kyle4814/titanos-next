@@ -1,0 +1,12 @@
+/* qr.css: on a sheet the code appears twice: in the page head on screen, and in the print summary (the only part that prints). The page head is hidden when printing and the print summary when on screen.
+   the small "ask about this system" QR on every system sheet and the hub (inlined into sheets by build_speed.mjs). */
+.sheet .qr-card{float:right;margin:0 0 .5rem 1rem;width:7.5rem;text-align:center;line-height:1.2}
+.sheet .qr-card .qr-link{display:block;width:6.5rem;margin:0 auto;box-shadow:none;outline-offset:2px}
+.sheet .qr-card svg{display:block;width:100%;height:auto;border:1px solid var(--grey)}
+.sheet .qr-card .qr-cap{margin:.25rem 0 0;font-size:.75rem;color:var(--grey-dark)}
+@media print{
+  .sheet .qr-card{width:36mm;margin:0 0 2mm 4mm}
+  .sheet .qr-card .qr-link{width:22mm}
+  .sheet .qr-card svg{border:0}
+  .sheet .qr-card .qr-cap{font-size:6.5pt;color:#000;white-space:nowrap}
+}

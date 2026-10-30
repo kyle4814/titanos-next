@@ -12,10 +12,12 @@ import { extraRoutes } from './lib/extras.js';
 import { initOffline } from './lib/offline.js';
 import { data as dataApi } from './lib/data.js';
 import { warmProduct } from './lib/apply_data.js';
+import { initOutdoor, mountOutdoorButtons } from './lib/outdoor.js'; // wave 2: outdoor mode (own stylesheet, loaded only when on)
 
 // speed: start the files the opening route needs the moment the script runs, in parallel with config.json, instead of one after another
 { const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) warmProduct(decodeURIComponent(pm[1])); }
 
+initOutdoor();
 const main = $('#main');
 let cfg, assistant, lastPath = null, token = 0, firstRender = true, leaving = false;
 addEventListener('pagehide', () => { leaving = true; }); // a full navigation aborts in-flight fetches: not an error worth reporting
@@ -78,6 +80,8 @@ async function boot() {
     document.body.append(toTop);
     window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 700), { passive: true });
     assistant = mountAssistant(cfg);
+    mountOutdoorButtons();
+    setTimeout(() => import('./lib/pwa.js').then((m) => m.initInstall()).catch(() => {}), 4000); // wave 2: polite add-to-home-screen card, after the first screen
     initOffline(); // T19, no-op where the host cannot serve a service worker
     window.addEventListener('hashchange', () => render());
     await render();

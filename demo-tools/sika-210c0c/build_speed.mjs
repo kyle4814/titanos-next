@@ -84,7 +84,7 @@ const faces = portalRaw.split('\n').filter((l) => l.startsWith('@font-face'));
 if (faces.length) throw new Error('portal.css still holds @font-face rules: they belong in fonts/fonts.css (deferred)');
 const portalCss = css('portal.css');
 const inlineCss = portalCss + css('finder.css');
-const sheetCss = css('sheet.css');
+const sheetCss = css('sheet.css') + css('qr.css'); // qr.css: the QR on every sheet (wave 2)
 const mark = (name, body) => `<!--speed:${name}-->${body}<!--/speed:${name}-->`;
 const reMark = (name) => new RegExp(`<!--speed:${name}-->[\\s\\S]*?<!--/speed:${name}-->`);
 function put(html, name, body, anchor) {

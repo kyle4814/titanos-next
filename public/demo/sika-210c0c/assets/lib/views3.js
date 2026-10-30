@@ -109,6 +109,7 @@ export async function aboutView(ctx) {
       h('h2', { class: 'h4' }, 'The product advisor'),
       h('p', null, `It answers from ${cfg.company.publishedDocsPhrase}: it finds products, quotes published coverage rates, opens data sheets and works out quantities. It is plain code running in your browser. No AI model is called, nothing is sent anywhere and it costs nothing to run. When the documentation does not say, it says so.`),
       h('p', null, h('a', { href: '#/rules' }, 'See the rule ledger'), ': every rule the advisor works from, with its source sentence, filterable and downloadable. See also ', h('a', { href: '#/insights' }, 'the insights and gap list'), ' (this browser only).'),
+      h('p', null, h('a', { href: '#/about/data-quality' }, 'Data quality notes for Sika'), ': things we noticed in the public data that you may want to look at, with a PDF.'),
       offlinePanel(), // T19
       h('h2', { class: 'h4' }, 'What is demo-only'),
       h('p', null, 'The quote request submits nowhere. The projects list lives in this browser only. There are no accounts, no tracking and no cookies.'),

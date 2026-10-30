@@ -1,0 +1,36 @@
+/* outdoor.css (wave 2): outdoor mode, big text and high contrast. Loaded only when the mode is on (assets/lib/outdoor.js). Everything is scoped to html.outdoor.
+   Method: the root size goes up 25 percent (the whole layout is in rem), the greys are darkened so every grey text and border passes AAA on white, dark
+   surfaces get darker (white text stays AAA), links are underlined, focus is thick, and every control is at least 48 px (the brief asks for 44). */
+html.outdoor{font-size:125%;--primary-ink:#000;--grey-dark:#1a1a1a;--grey-darker:#000;--grey-3:#4d4d4d;--grey:#595959;--grey-mid:#595959;--focus:#000;--shadow-1:none;--shadow-2:none}
+html.outdoor body{background:#fff;color:#000}
+html.outdoor main a:not(.btn):not(.tri):not(.chip):not(.logo){text-decoration:underline;text-underline-offset:.15em}
+html.outdoor :focus-visible{outline:3px solid #000;outline-offset:2px;box-shadow:0 0 0 6px var(--primary)}
+/* tap targets: at least 48 px */
+html.outdoor button,html.outdoor .btn,html.outdoor .chip,html.outdoor .tri,html.outdoor input:not([type=checkbox]):not([type=radio]),html.outdoor select,html.outdoor textarea,html.outdoor summary{min-height:48px}
+html.outdoor .mbar a,html.outdoor .mbar button{min-height:64px;font-size:1rem}
+html.outdoor main .btn,html.outdoor main .chip,html.outdoor .assistant .chip,html.outdoor .assistant .btn{border:2px solid #000}
+html.outdoor main .btn:not(.btn--hollow):not(.btn--text),html.outdoor main .btn--dark{background:var(--primary);color:#000}
+html.outdoor input,html.outdoor select,html.outdoor textarea{border:2px solid #000;background:#fff;color:#000}
+html.outdoor .table td{border-bottom:2px solid var(--grey)}
+html.outdoor .msg--bot{background:#fff;border:2px solid #000}
+html.outdoor .msg--user{background:#000;color:#fff}
+/* long words and wide tables never push the page sideways at the bigger size */
+html.outdoor main,html.outdoor .assistant{overflow-wrap:anywhere}
+html.outdoor .table-wrap{overflow-x:auto}
+/* desktop header at the bigger size: let the bars wrap instead of running off the screen */
+@media (min-width:64em){
+  html.outdoor .hdr-meta{height:auto;min-height:60px;flex-wrap:wrap;padding:0 1rem}
+  html.outdoor .hdr-meta ul{flex-wrap:wrap}
+  html.outdoor .hdr-meta a,html.outdoor .hdr-meta button{padding:.75rem 1rem}
+  html.outdoor .mainnav,html.outdoor .mainnav>.container,html.outdoor .mainnav-bar{height:auto}
+  html.outdoor .mainnav{margin-top:-1rem}
+  html.outdoor .mainnav-bar>ul{flex-wrap:wrap}
+  html.outdoor .mainnav-bar>ul>li>a,html.outdoor .mainnav-bar>ul>li>button{min-height:56px;padding:0 .75rem;white-space:normal}
+}
+/* the toggle itself (in the desktop quick-links bar and the mobile menu) */
+.od-toggle{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:.35rem .75rem;border:1px solid currentColor;background:transparent;color:inherit;font:inherit;font-size:.9rem;cursor:pointer}
+.hdr-meta .od-toggle{height:100%;border:0;border-bottom:4px solid transparent}
+.od-toggle[aria-pressed="true"]{background:var(--primary);color:#000}
+.od-toggle--drawer{width:100%;justify-content:space-between;margin-top:.75rem;background:#fff;color:#000;border:2px solid #000}
+html.outdoor .od-toggle{min-height:48px}
+@media print{.od-toggle{display:none!important}}
