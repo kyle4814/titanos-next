@@ -2,10 +2,11 @@
 // draft specification text (T20) and document link health (T03). Everything is read from same-host files; nothing here calls out.
 import { h, icon } from './util.js';
 import { data, documents } from './data.js';
-import { CHIPS, applyAsk, pickSds, evOf, rateFacts } from '../assistant/apply.js';
-import { timesOf, programmeOf, PROGRAMME_CAVEAT } from '../assistant/times.js';
-import { draftText, DRAFT_LABEL, STANDARDS_NOTE, referencesLines } from '../assistant/clause.js';
-import { plain } from '../assistant/answer.js';
+
+// The rule modules are loaded on first use (a product page with data, or the first advisor question), not on every page.
+let M;
+const mods = () => (mods.p ||= Promise.all([import('../assistant/apply.js'), import('../assistant/times.js'), import('../assistant/clause.js'), import('../assistant/answer.js')]).then(([a, t, c, n]) => (M = { ...a, ...t, ...c, plain: n.plain })));
+const plain = (x) => (M ? M.plain(x) : String(x));
 
 const base = new URL('../../data/', import.meta.url);
 let cssDone = false;
@@ -44,7 +45,7 @@ async function deps() {
   })());
 }
 /** Drop-in for engine.ask: the engine's answer plus evidence, page-cited rates, safety quotes and published times. */
-export async function askWithData(engine, text, state) { return applyAsk(engine, text, state, await deps()); }
+export async function askWithData(engine, text, state) { await mods(); return M.applyAsk(engine, text, state, await deps()); }
 
 /* ---- T04: chip and How I know, used by the advisor panel */
 export function chipEl(status, text) { return h('span', { class: 'chip-status', 'data-status': status }, text); }
@@ -72,7 +73,7 @@ const srcLine = (s) => !s ? null : h('span', { class: 'src' }, ' ', h('a', { cla
 const notice = (t) => h('p', { class: 'notice' }, icon('info'), t);
 
 function ratesTimesBody(k) {
-  const facts = rateFacts(k); const times = timesOf(k);
+  const { rateFacts, timesOf, programmeOf, PROGRAMME_CAVEAT } = M; const facts = rateFacts(k); const times = timesOf(k);
   const rate = facts.length ? h('div', null, h('h3', null, 'Published rate'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What it is', 'The data sheet says', 'Source'].map((x) => h('th', null, x)))),
     h('tbody', null, facts.map((f) => h('tr', null, h('td', null, f.label), h('td', null, h('blockquote', null, f.text)), h('td', null, srcLine(f.s))))))))
     : h('div', null, h('h3', null, 'Published rate'), h('p', null, 'Not in the published data. ' + (k.rates && k.rates.status && /^published$/.test(k.rates.status) ? '' : 'Neither the data sheet nor the product page gives a consumption figure. Check the data sheet or ask technical services.')));
@@ -88,7 +89,7 @@ function ratesTimesBody(k) {
 }
 
 async function safetyBody(k) {
-  const sds = pickSds(k);
+  const sds = M.pickSds(k);
   if (!sds) return h('div', { class: 'data-tab' }, notice('Quoted from the safety data sheet. Check the current SDS before use.'), h('p', null, 'No safety data sheet is listed for this product in the published data I hold. Check the company website or ask technical services.'));
   const ok = await linkOk(sds.url);
   const row = (label, it) => h('tr', null, h('th', { scope: 'row' }, label), h('td', null, it && it.text ? h('blockquote', null, plain(it.text)) : 'Not stated in this SDS'), h('td', null, it && it.s ? srcLine(it.s) : null));
@@ -113,6 +114,7 @@ async function safetyBody(k) {
 }
 
 async function specBody(spec, docs) {
+  const { draftText, DRAFT_LABEL, STANDARDS_NOTE, referencesLines } = M;
   const box = h('textarea', { class: 'spec-box', id: 'spec-text', 'aria-label': 'Draft specification text, editable' }); box.value = draftText(spec);
   const status = h('span', { role: 'status', 'aria-live': 'polite', class: 'src' });
   const copy = h('button', { class: 'btn', type: 'button', onclick: async () => { try { await navigator.clipboard.writeText(box.value); status.textContent = 'Copied to the clipboard.'; } catch { box.select(); const done = document.execCommand && document.execCommand('copy'); status.textContent = done ? 'Copied to the clipboard.' : 'Select the text and copy it.'; } } }, 'Copy');
@@ -128,6 +130,7 @@ async function specBody(spec, docs) {
 
 /** Extra tabs for the product page: [{id,label,body()}]. Only tabs with data are returned. */
 export async function extraTabs(p, ctx, docs) {
+  await mods();
   const [k, spec] = await Promise.all([loadK(p.id), loadSpec(p.id)]);
   const tabs = [];
   if (k && k.rates) tabs.push({ id: 'rates', label: 'Rates and times', body: () => ratesTimesBody(k) });
