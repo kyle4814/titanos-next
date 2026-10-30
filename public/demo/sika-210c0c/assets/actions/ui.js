@@ -32,14 +32,16 @@ export function printCard(c, plainNode) {
   setTimeout(() => { if (document.getElementById('actions-print')) done(); }, 4000);
 }
 
+let onNavigate = () => {};
 function valueNode(r) {
-  const kids = [r.value];
+  const kids = [r.productId ? h('a', { href: '#/product/' + encodeURIComponent(r.productId), class: 'link', onclick: () => onNavigate() }, r.value) : r.value];
   if (r.source && r.source.url) kids.push(' ', extLink(r.source.url, `(${r.source.label})`));
   if (r.source && r.source.sentence && r.source.sentence !== r.value && (r.derived || !r.quote)) kids.push(h('details', { class: 'how' }, h('summary', null, 'How I know'), h('blockquote', null, r.source.sentence)));
   if (r.command) kids.push(' ', h('button', { class: 'chip chip--line', type: 'button', 'data-command': r.command }, 'Use'));
   return kids;
 }
-const rowsTable = (rows, cls = '') => h('div', { class: 'table-wrap' }, h('table', { class: 'm-table ' + cls }, h('tbody', null, rows.map((r) => h('tr', { class: r.verdict ? 'v-' + r.verdict : null }, h('th', { scope: 'row' }, r.label), h('td', null, ...valueNode(r)))))));
+// Key and value lists, not <table>: rows are statements with a source each, and a definition list reads well on a phone. (Also keeps the portal's own tables, such as the rule ledger, the only tables on a page.)
+const rowsTable = (rows, cls = '') => h('dl', { class: 'kv ' + cls }, rows.map((r) => [h('dt', { class: r.verdict ? 'v-' + r.verdict : null }, r.label), h('dd', { class: r.verdict ? 'v-' + r.verdict : null }, ...valueNode(r))]));
 
 /** Build the DOM of one card. `act` = { send, memory, session } for buttons. */
 export function renderCard(c, act) {
@@ -54,7 +56,9 @@ export function renderCard(c, act) {
   if (c.summary) root.append(h('p', null, c.summary));
   if (c.assumptions && c.assumptions.length) root.append(h('ul', { class: 'm-assume' }, c.assumptions.map((a) => h('li', null, a))));
   if (c.rows && c.rows.length) root.append(rowsTable(c.rows));
-  if (c.table) root.append(h('div', { class: 'table-wrap' }, h('table', { class: 'm-table compare' }, h('thead', null, h('tr', null, c.table.head.map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, c.table.rows.map((r) => h('tr', null, h('th', { scope: 'row' }, r.label), r.cells.map((cell) => h('td', null, ...valueNode(cell)))))))));
+  if (c.table) root.append(h('div', { class: 'cmp', role: 'table', 'aria-label': c.title },
+    h('div', { class: 'cmp-row cmp-head', role: 'row' }, c.table.head.map((x) => h('div', { role: 'columnheader' }, x))),
+    c.table.rows.map((r) => h('div', { class: 'cmp-row', role: 'row' }, h('div', { role: 'rowheader', class: 'cmp-label' }, r.label), r.cells.map((cell) => h('div', { role: 'cell' }, ...valueNode(cell)))))));
   for (const s of c.sections || []) root.append(h('div', { class: 'm-title sec' }, s.title), rowsTable(s.rows));
   (c.notes || []).forEach((n) => root.append(h('p', { class: 'cite' }, n)));
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
@@ -147,7 +151,8 @@ function attachSpeech(input, form) {
  * Attach the actions to the advisor panel. panel parts: { log, input, form, sugg, add(node), send(text,label) }.
  * Returns { handle(text) -> Node|null, observeV1(text, answer, outcome), observeBrain(answer) }.
  */
-export function attachActions({ log, input, form, sugg, add, send, config }) {
+export function attachActions({ log, input, form, sugg, add, send, config, close }) {
+  if (close) onNavigate = close;
   css();
   const store = fetchStore(new URL('../../data/', import.meta.url));
   const data = createData(store);
@@ -163,7 +168,8 @@ export function attachActions({ log, input, form, sugg, add, send, config }) {
     async handle(text) {
       const r = await actions.run(text, session); session = r.session;
       if (!r.handled) return null;
-      return renderCard(r.card, act);
+      const oc = r.card.kind === 'clarify' ? 'CLARIFY' : r.card.status === 'unknown' ? 'NOT_IN_PUBLISHED_DATA' : 'ANSWERED_WITH_SOURCE';
+      return { node: renderCard(r.card, act), outcome: oc };
     },
     observeV1(text, answer, outcome) { if (outcome === 'NOT_IN_PUBLISHED_DATA' && text && !text.startsWith('/')) memory.addGap(text); memory.rememberQuestion(text, 'ask'); },
     observeBrain(answer) { observeBrainAnswer(session, answer); },

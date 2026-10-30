@@ -14,7 +14,7 @@ let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rul
 // Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
 const actionsOn = () => { try { if (/[?&]actions=off/.test(location.href) || localStorage.getItem('sika-demo-210c0c-actions') === 'off') return false; } catch { /* storage blocked: keep the config value */ } return Boolean(cfg && cfg.actions && cfg.actions.enabled); };
 let A = null, Ap = null;
-const ensureActions = () => (actionsOn() ? (Ap ||= import('../actions/ui.js').then((m) => { A = m.attachActions({ log, input, form: formEl, sugg: suggEl, add, send, config: cfg }); return A; }).catch(() => { A = null; return null; })) : Promise.resolve(null));
+const ensureActions = () => (actionsOn() ? (Ap ||= import('../actions/ui.js').then((m) => { A = m.attachActions({ log, input, form: formEl, sugg: suggEl, add, send, config: cfg, close: closeOnMobile }); return A; }).catch(() => { A = null; return null; })) : Promise.resolve(null));
 const history = [];
 
 function inline(text) { // plain text with **bold** only
@@ -65,8 +65,9 @@ export async function send(text, label) {
   const wait = h('div', { class: 'msg msg--bot', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
   try {
     const act = await ensureActions();
-    const node = act ? await act.handle(text) : null;
-    if (node) { await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: text, intent: 'action', ms: 0 }); return; }
+    const handled = act ? await act.handle(text) : null;
+    if (handled) { const node = handled.node; insights.question(text, handled.outcome); // T11, this browser only
+      await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: text, intent: 'action', ms: 0 }); return; }
     await ensure();
     const t0 = performance.now();
     const rule = matchRule(rules, text);

@@ -80,15 +80,16 @@ export async function findProducts(data, text, max = 3) {
     if (full >= 0) { hits.push({ id: r.id, name: r.name, score: 1000 + r.n.length, at: full }); continue; }
     const core = r.core.filter((t) => t.length > 0);
     if (!core.length) continue;
-    let got = 0, tot = 0, missDigit = false;
+    let got = 0, tot = 0, missDigit = false, nGot = 0;
     for (const t of core) {
       const wt = F.w(t); tot += wt;
-      if (qt.has(stemTok(t))) got += wt; else if (/\d/.test(t)) missDigit = true;
+      if (qt.has(stemTok(t))) { got += wt; nGot++; } else if (/\d/.test(t)) missDigit = true;
     }
     if (missDigit) continue;
     const frac = got / tot;
     // a short generic name ("adhesive") must not match on one common word: demand real weight and most of the name
-    if (frac >= 0.8 && got >= 3.2) {
+    // a long name may lose its last word ("Davco Grey One Pot" for "Davco Grey One Pot adhesive"); a short one may not
+    if ((frac >= 0.8 && got >= 3.2) || (core.length >= 4 && nGot >= core.length - 1 && got >= 15)) {
       const first = core.map((t) => q.indexOf(' ' + t)).filter((i) => i >= 0);
       hits.push({ id: r.id, name: r.name, score: frac * 100 + got, at: first.length ? Math.min(...first) : 0 });
     }

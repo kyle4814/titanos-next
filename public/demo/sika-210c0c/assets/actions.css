@@ -14,13 +14,24 @@
 .action-card details.how{margin-top:.3rem;font-size:.85rem}
 .action-card details.how summary{cursor:pointer;color:var(--grey-dark);min-height:24px}
 .action-card details.how blockquote{margin:.3rem 0 0;padding:.3rem .6rem;border-left:3px solid var(--primary);background:#fff}
-.action-card .v-no th{box-shadow:inset 4px 0 0 #8f1a1f}
-.action-card .v-yes th{box-shadow:inset 4px 0 0 #2e7d32}
-.action-card .v-conditional th,.action-card .v-unknown th{box-shadow:inset 4px 0 0 #b26a00}
+.action-card .kv{display:grid;grid-template-columns:minmax(6.5rem,30%) 1fr;margin:.4rem 0;border:1px solid var(--grey);background:#fff;font-size:.9rem}
+.action-card .kv dt,.action-card .kv dd{margin:0;padding:.4rem .55rem;border-top:1px solid var(--grey);min-width:0;overflow-wrap:anywhere}
+.action-card .kv dt:first-of-type,.action-card .kv dt:first-of-type+dd{border-top:0}
+.action-card .kv dt{font-weight:600;background:var(--grey-light)}
+@media (max-width:30em){.action-card .kv{grid-template-columns:1fr}.action-card .kv dd{border-top:0}}
+.action-card dt.v-no{box-shadow:inset 4px 0 0 #8f1a1f}
+.action-card dt.v-yes{box-shadow:inset 4px 0 0 #2e7d32}
+.action-card dt.v-conditional,.action-card dt.v-unknown{box-shadow:inset 4px 0 0 #b26a00}
+.action-card .cmp{display:grid;border:1px solid var(--grey);background:#fff;font-size:.88rem;margin:.4rem 0}
+.action-card .cmp-row{display:grid;grid-template-columns:minmax(5.5rem,22%) 1fr 1fr;border-top:1px solid var(--grey)}
+.action-card .cmp-row:first-child{border-top:0}
+.action-card .cmp-row>div{padding:.4rem .5rem;min-width:0;overflow-wrap:anywhere}
+.action-card .cmp-head{background:var(--grey-light);font-weight:600}
+.action-card .cmp-label{font-weight:600;background:var(--grey-light)}
+.action-card .cmp-head>div:first-child{visibility:hidden}
 .action-card .chip-status--unknown{display:inline-block;margin:.2rem 0;padding:.2rem .5rem;background:#fff;border:1px solid var(--grey-3);font-size:.82rem}
 .action-card .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
 .action-card textarea{width:100%;font:inherit;font-size:.9rem}
-.action-card .compare th[scope=col]{min-width:7rem}
 #actions-print{display:none}
 @media print{
   body.printing-actions > *:not(#actions-print){display:none!important}
