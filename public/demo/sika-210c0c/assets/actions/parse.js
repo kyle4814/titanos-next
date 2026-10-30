@@ -33,9 +33,15 @@ export function parseNumbers(text) {
   const area = first(new RegExp(N + '\\s*(?:m2|m\\^2|sqm|sq\\.?\\s*m|square\\s*met(?:re|er)s?|sq\\s*metres)\\b'), t);
   const vol = first(new RegExp(N + '\\s*(?:m3|m\\^3|cubic\\s*met(?:re|er)s?|cu\\.?\\s*m)\\b'), t);
   const len = first(new RegExp(N + '\\s*(?:lm|linear\\s*met(?:re|er)s?|lineal\\s*met(?:re|er)s?|met(?:re|er)s?\\s*(?:of|length)|m)(?![a-z0-9^])'), t.replace(new RegExp(N + '\\s*(?:mm|m2|m3)', 'g'), ' '));
-  const th = first(new RegExp(N + '\\s*mm\\b'), t);
+  const th = first(new RegExp(N + '\\s*mm\\b(?!\\s*(?:notch|notched|trowel|comb))'), t);
   const coats = first(new RegExp(N + '\\s*coats?\\b'), t);
   const al = first(new RegExp('(?:' + N + '\\s*(?:%|percent|per cent)\\s*(?:extra|allowance|waste|wastage|spare|overage)?)'), t) ?? first(new RegExp('allowance(?: of)?\\s*' + N), t);
+  const notch = first(new RegExp(N + '\\s*mm\\s*(?:notch|notched|trowel|comb)'), t) ?? first(new RegExp('(?:notch|notched|trowel)(?: size)?\\s*(?:of\\s*)?' + N), t);
+  if (notch != null) out.notch = notch;
+  const csp = first(/\bcsp\s*(\d{1,2})\b/, t); if (csp != null) out.csp = String(csp);
+  const dil = /\b(\d+)\s*:\s*(\d+)\b/.exec(t); if (dil) out.dilution = dil[1] + ':' + dil[2];
+  const ts = new RegExp(N + '\\s*(?:x|by|\\*)\\s*' + N + '(?:\\s*mm)?').exec(t); if (ts && !/m2|sqm/.test(ts[0])) out.tileSize = [num(ts[1]), num(ts[2])];
+  if (/\bmosaic/.test(t)) out.mosaic = true;
   if (area != null && area > 0) out.area = area;
   if (vol != null && vol > 0) out.volume = vol;
   if (len != null && len > 0 && out.area == null) out.length = len;
@@ -45,25 +51,31 @@ export function parseNumbers(text) {
   return out;
 }
 
+// Ids follow the knowledge lane's decision trees (data/actions/trees.json): environment, tile, substrate.
 const TILE = [
-  ['moisture-sensitive-stone', /moisture[ -]sensitive|green marble/],
-  ['engineered-stone', /engineered stone|agglomerate|\bquartz\b/],
-  ['natural-stone', /natural stone|\bmarble\b|granite|limestone|travertine|bluestone|sandstone/],
-  ['quarry-terracotta', /quarry|terracotta|\bslate\b/],
-  ['large-format', /large[ -]format/],
+  ['moisture_sensitive_stone', /moisture[ -]sensitive|green marble/],
+  ['natural_stone', /natural stone|\bmarble\b|granite|limestone|travertine|bluestone|sandstone/],
+  ['terracotta', /quarry|terracotta/],
+  ['large_format', /large[ -]format/],
+  ['brick_slip', /brick slip/],
   ['mosaic', /mosaic/],
-  ['glass', /\bglass\b/],
+  ['glass_tile', /\bglass\b/],
   ['porcelain', /porcelain/],
   ['ceramic', /ceramic/],
 ];
 const SUBSTRATE = [
-  ['existing-tiles', /existing (?:\w+ )?tiles?|old (?:\w+ )?tiles?|tile (?:on|over) tile|over tiles?/],
+  ['existing_tiles', /existing (?:\w+ )?tiles?|old (?:\w+ )?tiles?|tile (?:on|over) tile|over tiles?/],
+  ['underfloor_heating', /under ?floor heating|heated floor|in ?floor heating|radiant|hydronic/],
+  ['self_levelling_underlayment', /self[ -]?levell?ing|\bslu\b|levelling compound/],
+  ['waterproofing_membrane', /waterproofing membrane|\bmembrane\b|waterproofed/],
   ['aac', /autoclaved|\baac\b/],
-  ['cement-board', /fib(?:re|er)[ -]cement|cement (?:sheet|board)|villaboard|hardie/],
+  ['fibre_cement', /fib(?:re|er)[ -]cement|cement (?:sheet|board)|villaboard|hardie/],
   ['plasterboard', /plaster ?board|gyprock|gypsum/],
-  ['timber-floor', /timber|plywood|particle ?board|chip ?board|wooden|\bwood\b/],
-  ['screed-render', /\bscreed|\brender(?:ed|ing)?\b/],
-  ['masonry', /brick|block ?work|masonry|\bblocks?\b/],
+  ['tile_underlay', /tile underlay|underlayment/],
+  ['timber', /timber|plywood|particle ?board|chip ?board|wooden|\bwood\b/],
+  ['cement_screed', /\bscreed/],
+  ['cement_render', /\brender(?:ed|ing)?\b/],
+  ['brick_block', /brick|block ?work|masonry|\bblocks?\b/],
   ['concrete', /\bconcrete\b|slab/],
 ];
 /** Facets named in the text. io: internal | wet | external | pool. surface: floor | wall. Only what the text says. */
@@ -71,9 +83,8 @@ export function parseFacets(text) {
   const t = ' ' + String(text || '').toLowerCase().replace(/[-_]/g, ' ') + ' ';
   const f = {};
   for (const [id, re] of TILE) if (re.test(t)) { f.tile = id; break; }
-  let s = t;
-  for (const [id, re] of SUBSTRATE) if (re.test(s)) { f.substrate = id; break; }
-  if (/\bpool|spa\b|water feature|fountain/.test(t)) f.io = 'pool';
+  for (const [id, re] of SUBSTRATE) if (re.test(t)) { f.substrate = id; break; }
+  if (/\bpool|\bspa\b|water feature|fountain|submerged/.test(t)) f.io = 'pool';
   else if (/balcon|patio|terrace|outdoor|external|exterior|outside|deck|verandah|courtyard|pergola|driveway/.test(t)) f.io = 'external';
   else if (/bathroom|shower|laundry|ensuite|wet area|wet room|wet floor|wet wall|splash|bath\b/.test(t)) f.io = 'wet';
   else if (/internal|interior|indoor|inside|kitchen|living|bedroom|hallway|lounge|dry area|dining/.test(t)) f.io = 'internal';
@@ -81,17 +92,18 @@ export function parseFacets(text) {
   else if (/\bfloors?\b|flooring/.test(t)) f.surface = 'floor';
   return f;
 }
-/** Selector location id from io + surface (surface defaults to floor and is reported as assumed by the caller). */
-export function locationId(io, surface) {
+/** Decision-tree environment id from io + surface (surface defaults to floor and is reported as assumed by the caller). */
+export function envId(io, surface) {
   if (io === 'pool') return 'pool';
-  const s = surface || 'floor';
-  return io === 'external' ? `external-${s}` : io === 'wet' ? `internal-wet-${s}` : `internal-${s}`;
+  if (io === 'wet') return 'wet_area';
+  return `${io === 'external' ? 'external' : 'internal'}_${surface || 'floor'}`;
 }
-export function ioFromLocation(loc) {
-  if (!loc) return {};
-  if (loc === 'pool') return { io: 'pool' };
-  const surface = /wall$/.test(loc) ? 'wall' : 'floor';
-  return { io: /^external/.test(loc) ? 'external' : /^internal-wet/.test(loc) ? 'wet' : 'internal', surface };
+export function ioFromEnv(env) {
+  if (!env) return {};
+  if (env === 'pool') return { io: 'pool' };
+  if (env === 'wet_area') return { io: 'wet', surface: 'floor' };
+  const [io, surface] = env.split('_');
+  return { io, surface };
 }
 
 const SAFETY_RE = /\b(ppe|protective equipment|(?:eye|hand|respiratory|face|skin) protection|gloves?|respirator|dust mask|goggles|safety glasses|first aid|hazards?|hazardous|flammable|toxic|dangerous goods|adg|un number|transport class|signal word|precaution(?:ary)?|safe to (?:use|handle|store)|safety data|sds|msds|storage|store it|stored)\b/i;
