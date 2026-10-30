@@ -1,0 +1,16 @@
+/* Provenance chip, "How I know", and the data tabs (rates and times, safety, draft specification). */
+.chip-status{display:inline-flex;align-items:center;gap:.3rem;font-size:.74rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--green);background:var(--green-light);color:var(--grey-darker);margin-top:.35rem}
+.chip-status[data-status="UNKNOWN"]{background:#fff3cd;border-color:var(--primary-dark)}
+.hik{margin:.35rem 0 .6rem;font-size:.85rem}
+.hik>summary{cursor:pointer;font-weight:600;display:inline-block;padding:2px 0;border-bottom:2px solid var(--primary)}
+.hik ul{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.5rem}
+.hik blockquote{margin:0;padding:.35rem .6rem;border-left:4px solid var(--primary);background:#fafafa;overflow-wrap:anywhere}
+.hik .hik-src{display:block;margin-top:.15rem;color:var(--grey-dark)}
+.hik a{border-bottom:2px solid var(--primary)}
+.blk-note{font-size:.82rem;color:var(--grey-dark);margin:.25rem 0}
+.data-tab h3{margin-top:1.5rem}
+.data-tab .table-wrap{margin-block:.75rem}
+.data-tab .src{font-size:.88rem;color:var(--grey-dark)}
+.data-tab blockquote{margin:.2rem 0;padding:.2rem .6rem;border-left:4px solid var(--primary);overflow-wrap:anywhere}
+.spec-box{width:100%;min-height:22rem;font:inherit;font-family:ui-monospace,Consolas,monospace;font-size:.85rem;line-height:1.45;padding:.75rem;border:1px solid var(--grey);resize:vertical}
+.spec-tools{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-block:.75rem}

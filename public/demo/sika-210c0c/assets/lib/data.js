@@ -4,7 +4,7 @@ const cache = new Map();
 let manifestP;
 /** Optional files are only requested when data/manifest.json lists them, so a missing file never shows up as a 404 in the console. */
 function manifest() { return (manifestP ||= fetch(new URL('manifest.json', base)).then((r) => (r.ok ? r.json() : { files: [] })).catch(() => ({ files: [] }))); }
-async function opt(name) { const m = await manifest(); return m.files.includes(name) ? getJSON(name) : null; }
+async function opt(name) { if (typeof navigator !== 'undefined' && navigator.onLine === false && !name.startsWith('knowledge/') && !/^(config|index|categories|documents|pages|products|selector|stats|rules)\.json$/.test(name)) return null; const m = await manifest(); return m.files.includes(name) ? getJSON(name) : null; }
 function getJSON(name, optional = false) {
   if (!cache.has(name)) {
     cache.set(name, fetch(new URL(name, base), { cache: 'default' }).then((r) => {
@@ -26,7 +26,7 @@ export const data = {
   selector: () => opt('selector.json'),
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
-  specIndex: () => opt('specs/index.json'),
+  specIndex: () => opt('specs/index.json').catch(() => null), // offline or missing: no Specification tab, no error
   spec: (id) => getJSON(`specs/${encodeURIComponent(id)}.json`),
   knowledge: (name) => opt(`knowledge/${name}.json`),
 };
