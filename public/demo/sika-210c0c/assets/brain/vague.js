@@ -23,7 +23,7 @@ export const VAGUE = [
   { id: 'wall', rx: /^what do i use on (a |the |my )?wall$/, title: 'Wall', text: 'What is the wall job?', opts: ['Tile adhesive for walls in a wet area on plasterboard', 'Waterproofing for a wet area wall', 'Repair mortar for a concrete wall', 'Filler for cracks in a wall before painting'], labels: ['Tiling', 'Waterproofing', 'Repair', 'Painting'] },
 ];
 const HEAD = /^(?:best |good |the best )?(?:stuff |something |anything |products? |help |need help |what (?:do|should) i (?:use|need|buy|get) |i need (?:some )?help |help me |i need )(?:for |with |on |to fix |to stop |about )?(?:a |an |the |my )?(.+)$/;
-const NOUN = [
+export const NOUN = [
   [/\b(deck|decking)\b/, { title: 'Deck', text: 'What is the deck job?', opts: ['Adhesive for fixing decking', 'Waterproofing for a deck under tiles', 'Sealant for deck joints'], labels: ['Fixing', 'Waterproofing', 'Joints'] }],
   [/\b(wet area|wet areas|wet room|wetroom)\b/, { title: 'Wet area', text: 'Which part of the wet area?', opts: ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a bathroom wall', 'Silicone sealant for a shower', 'Grout for a shower floor'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant', 'Grout'] }],
   [/\b(laundry|laundry floor)\b/, { title: 'Laundry', text: 'Which part of the laundry?', opts: ['Waterproofing for a laundry floor under tiles', 'Tile adhesive for laundry floor tiles', 'Silicone sealant for a laundry tub'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant'] }],
@@ -69,4 +69,11 @@ export function vagueCard(n) {
 function vagueCard0(n) {
   for (const v of VAGUE) if (v.rx.test(n)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
   return null;
+}
+
+/** "something for <anything we do not know>": ask what the job is rather than guess from the index */
+export function genericVague(n) {
+  if (!HEAD.test(n) || n.split(' ').length > 9) return null;
+  const gen = ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor'];
+  const c = C.chooseCard('What are you working on?', 'I did not catch the job. Pick the nearest one, or tell me the surface and the problem.', gen, [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = gen; return c;
 }

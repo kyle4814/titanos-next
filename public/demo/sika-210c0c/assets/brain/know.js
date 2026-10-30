@@ -134,9 +134,10 @@ export function createKnow({ load }) {
     await boot(); if (!kb) return null;
     const res = search(n, prodToo ? null : (u) => u.kind === 'page'); if (!res || !res.items.length) return null;
     if (typeof process !== 'undefined' && process.env && process.env.KNOW_DEBUG) console.log(res.prim, res.items.slice(0, 3).map((it) => [it.s.toFixed(1), it.hit, it.cov, it.u.kind === 'page' ? kb.pages[it.u.pi].t + ' :: ' + kb.pages[it.u.pi].l[it.u.li].slice(0, 60) : 'prod']));
+    let titleRare = false; { const t0 = res.items[0]; if (t0 && t0.u.kind === 'page' && res.prim.length >= 2 && res.prim.length <= 3) { const rare = [...res.prim].sort((a, b) => idf(b) - idf(a))[0]; const pg0 = kb.pages[t0.u.pi]; if ((df.get(rare) || 99) <= 12 && tokens(pg0.t).includes(rare) && t0.hit >= 1 && pg0.k !== 'range' && !/^(how (do|can|should) (i|we)|how to|can i|could i)\b/.test(n)) titleRare = true; } }
     const top = res.items[0]; const need = res.prim.length <= 1 ? 1 : res.prim.length === 2 ? 2 : Math.ceil(res.prim.length * (strict ? 0.75 : 0.6));
     if (!res.prim.some((t) => /^[a-z]{4,}$/.test(t))) return null;
-    if (top.hit < Math.min(need, res.prim.length <= 4 && top.hit >= 2 && top.s >= 12 ? 2 : need) || top.s < (res.prim.length <= 1 ? 6.5 : res.prim.length === 2 && top.hit >= 2 ? 3.5 : 6)) return null;
+    if (!titleRare && top.hit < Math.min(need, res.prim.length <= 4 && top.hit >= 2 && top.s >= 12 ? 2 : need) || top.s < (res.prim.length <= 1 ? 6.5 : res.prim.length === 2 && top.hit >= 2 ? 3.5 : 6)) return null;
     if (res.prim.length <= 1 && top.u.kind === 'page' && !top.u.tt.has(res.prim[0])) return null;
     const hint = hintOf(n);
     if (top.u.kind === 'prod') { // corpus-wide product lines: certifications, VOC and the like

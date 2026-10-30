@@ -12,7 +12,7 @@ export const SLANG = [
   { rx: /\bgrot\b/g, to: 'grout', cite: 'common trade usage and typo' },
   { rx: /\bbog\b/g, to: 'repair filler', cite: 'common trade usage (bog = filler)' },
   { rx: /\bscreed it out\b/g, to: 'screed', cite: 'common trade usage' },
-  { rx: /\btwo ?pack\b|\btwo ?part\b|\b2 ?part\b/g, to: 'two component', cite: 'common trade usage; Sika data sheets say "two-component" or "2-component"' },
+  { rx: /\btwo ?pack\b|\btwo ?part\b/g, to: 'two component', cite: 'common trade usage; Sika data sheets say "two-component" or "2-component"' },
   { rx: /\bone ?pack\b|\bone ?part\b/g, to: 'one component', cite: 'common trade usage; Sika data sheets say "one-component" or "1-component"' },
   { rx: /\bliquid nails?\b|\bno more nails?\b|\bconstruction glue\b/g, to: 'construction adhesive', cite: 'common trade usage (brand style names for construction adhesive)' },
   { rx: /\bclass (3|iii)\b/g, to: 'class iii', cite: U + 'construction/tile-stone-installationsystems/waterproofing/davco-k10-rapid.html ("CLASS III WATERPROOFING MEMBRANE")' },

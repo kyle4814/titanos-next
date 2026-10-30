@@ -64,7 +64,7 @@ products.forEach((p, pi) => {
   // a visitor drops the tail of a long name: "sikaflex 11 fc" for Sikaflex-11 FC+, "sikadur 31" for Sikadur-31 CF Normal. Prefixes that carry a digit and stay unique are kept below.
   // a fused brand word ("Sikafloor Level PRO") is dropped the same way: "level pro"
   { const w = noBrand.split(' '); if (w.length >= 3 && /^(sika\w+|lanko|davco|sarna\w+)$/.test(w[0])) { const suf = w.slice(1).join(' '); if (suf.length >= 7) prefixTmp.add('\u0001' + suf + '\t' + pi); } }
-  for (const v of [noBrand]) { const w = v.split(' '); for (let k = w.length - 1; k >= (/\d/.test(w[0]) && /[a-z]/.test(w[0]) && w[0].length >= 3 ? 1 : 2); k--) { const pre = w.slice(0, k).join(' '); if (/\d/.test(pre) && !GENERIC_NAME.has(w[k - 1])) { prefixTmp.add(pre + '\t' + pi); } } }
+  for (const v of new Set([noBrand, full])) { const w = v.split(' '); for (let k = w.length - 1; k >= (/\d/.test(w[0]) && /[a-z]/.test(w[0]) && w[0].length >= 3 ? 1 : 2); k--) { const pre = w.slice(0, k).join(' '); if (/\d/.test(pre) && !GENERIC_NAME.has(w[k - 1])) { prefixTmp.add(pre + '\t' + pi); } } }
 });
 { const byPre = new Map(); for (const e of prefixTmp) { const [pre0, pi] = e.split('\t'); const pre = pre0.replace('\u0001', ''); const s = byPre.get(pre) || new Set(); s.add(Number(pi)); byPre.set(pre, s); } for (const [pre, set] of byPre) if (set.size <= 3 && !aliasTmp.has(pre)) for (const pi of set) { addAlias(pre, pi); addAlias(compact(pre), pi); } }
 // old names the Sika pages publish for a product: "(Formerly Index Fidia 4mm)", "Previously known as Sika MaxTack", "also known as Sikadur-33"

@@ -84,7 +84,7 @@ export const CONDS = [
   { id: 'timber', label: 'timber substrates', q: re('\\b(timber|plywood|wood\\w*|chipboard)\\b'), ev: re('timber|plywood|wood|chipboard|particle') },
   { id: 'vinyl', label: 'floor coverings such as vinyl and carpet', q: re('\\b(vinyl|carpet|floor covering|floorcovering|planks)\\b'), ev: re('vinyl|carpet|floor ?covering|resilient|floor covering|lvt|linoleum') },
   { id: 'internal', label: 'internal use', q: re('\\b(internal|interior|indoor|inside)\\b'), ev: re('\\binternal|interior|indoor') },
-  { id: 'food', label: 'food and hygienic areas', q: re('\\b(food|kitchen|abattoir|dairy|brewery|hygienic|hospital)\\b'), ev: re('food|hygien|kitchen|abattoir|dairy|brewer|hospital') },
+  { id: 'food', label: 'food and hygienic areas', q: re('\\b(food|commercial kitchen|abattoir|dairy|brewery|hygienic|hospital)\\b'), ev: re('food|hygien|kitchen|abattoir|dairy|brewer|hospital') },
   { id: 'chemical', label: 'chemical exposure', q: re('\\b(chemical\\w*|acid\\w*|solvent|fuel|oil)\\b'), ev: re('chemical|acid|solvent|fuel|oil') },
   { id: 'hot', label: 'hot weather', q: re('\\b(hot|summer|warm|heat)\\b'), ev: re('hot (weather|climate|conditions)|high temperature|warm|summer|extended (open|working)|long open') },
   { id: 'cold', label: 'cold weather', q: re('\\b(cold|winter|frost|low temperature|too cold)\\b'), ev: re('cold|low temperature|winter|frost|\\b\\+?[0-5] ?°c') },

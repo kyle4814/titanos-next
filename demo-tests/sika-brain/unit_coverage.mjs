@@ -7,6 +7,7 @@ import { makeBrain } from './harness.mjs';
 import { cardText } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 import { checkAnswer } from './props.mjs';
 import { judge, makeSelectors } from './coverage/judge.mjs';
+import { VAGUE, NOUN, TERMS } from '../../public/demo/sika-210c0c/assets/brain/vague.js';
 import { applySlang, SLANG } from '../../public/demo/sika-210c0c/assets/brain/slang.js';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 let pass = 0, fail = 0; const t = (n, ok, d = '') => { if (ok) pass++; else { fail++; console.log('  FAIL: ' + n + (d ? ' :: ' + String(d).slice(0, 240) : '')); } };
@@ -113,13 +114,18 @@ r = await ask('index fidia 4mm');
 t('an old name the Sika page publishes finds the product and says where the name comes from', r.ids[0] === 'sikashield-p44-tfidia4mm' && /Formerly Index Fidia 4mm/i.test(r.txt), r.txt.slice(0, 200));
 r = await ask('what is sikaflex 11 fc used for');
 t('a name shared by two products shows both, never one silently', r.a.cards.filter((c) => c.type === 'product').length >= 2);
+// ---- every clarifying option on every card must itself be answered (no dead taps)
+{ const opts = [...VAGUE.flatMap((v) => v.opts), ...NOUN.flatMap(([, v]) => v.opts), ...TERMS.flatMap((x) => x.opts)]; const dead = []; for (const o of [...new Set(opts)]) { const x = await ask(o); if (x.a.cards[0].type === 'choose' || x.a.cards[0].status === 'UNKNOWN') dead.push(o + ' => ' + x.a.cards[0].type); }
+  t(`all ${new Set(opts).size} clarifying options are answered`, dead.length === 0, dead.join(' | ')); }
+r = await ask('i need something for the thingamajig');
+t('an unknown job gets one clarifying question, not an index guess', r.a.cards.length === 1 && r.a.cards[0].type === 'choose' && r.a.cards[0].choices.length >= 2 && r.a.cards[0].choices.length <= 4);
 // ---- out of scope
 for (const q of ['what is the weather today', 'is mapei better than davco', 'who is the prime minister', 'asdfgh']) { r = await ask(q); t('out of scope declined: ' + q, r.a.cards.every((c) => c.status === 'UNKNOWN') && !/mapei/i.test(r.txt), r.txt); }
 // ---- off-topic and unanswerable questions never get a published answer
 { const oos = JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'oos_set.json'), 'utf8')); const leaks = []; for (const q of oos) { const a = await b.ask(q); if (a.cards.some((c) => c.status === 'PUBLISHED' && c.type !== 'choose')) leaks.push(q + ' => ' + a.cards[0].title); }
   t(`off-topic set (${oos.length} questions): no published answer`, leaks.length === 0, leaks.join(' | ')); }
 // ---- the bank gate
-const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
+const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json', 'wild2.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
 const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
 for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel); if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
 t(`bank (${bank.length} questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));
