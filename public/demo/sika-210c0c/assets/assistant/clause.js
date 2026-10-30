@@ -14,7 +14,7 @@ export function supplyClause({ product, substrate, title, version, date }) {
 export function referencesLines(standards) {
   const seen = new Map();
   for (const s of standards || []) { const c = plain(s.citation || ''); if (!c) continue; if (!seen.has(c)) seen.set(c, []); if (s.page) seen.get(c).push(s.page); }
-  return [...seen.entries()].map(([c, pages]) => `${c} (cited in the data sheet${pages.length ? ', page ' + [...new Set(pages)].join(', ') : ''})`);
+  return [...seen.entries()].map(([c, pages]) => `${c} (cited in the data sheet${pages.length ? ', page ' + [...new Set(pages)].sort((a, b) => a - b).join(', ') : ''})`);
 }
 /** The full text placed in the editable box and copied: label, then the lane's clause set, then references. */
 export function draftText(spec) {

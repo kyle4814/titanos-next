@@ -75,5 +75,23 @@ const failed = D.docs.find((d) => d.http && d.http.status !== 200);
 const copy = [{ id: failed.id }]; await A.mergeDocStatus(copy);
 check('product page document copy gets the failed status', copy[0].http && copy[0].http.status !== 200);
 check('linkOk is false for a failed URL and true for a good one', (await A.linkOk(failed.url)) === false && (await A.linkOk(D.docs.find((d) => d.http && d.http.status === 200).url)) === true);
+
+// T20 / T21 on the system sheets
+const SD = await import('../../public/demo/sika-210c0c/assets/lib/sheet_data.js');
+const sysDir = fileURLToPath(new URL('../../public/demo/sika-210c0c/systems/', import.meta.url));
+const slugs = fs.readdirSync(sysDir).filter((d) => fs.existsSync(sysDir + d + '/index.html'));
+const idxIds = new Set(JSON.parse(fs.readFileSync(fileURLToPath(new URL('../../public/demo/sika-210c0c/data/index.json', import.meta.url)), 'utf8')).map((p) => p.id));
+let noSteps = 0, badId = 0, nSteps = 0;
+for (const sl of slugs) { const ps = SD.parseSheet(fs.readFileSync(sysDir + sl + '/index.html', 'utf8')); if (!ps.steps.length) noSteps++; nSteps += ps.steps.length; for (const st of ps.steps) for (const id of st.products) if (!idxIds.has(id)) badId++; }
+check(`parseSheet reads all ${slugs.length} system sheets with steps`, slugs.length > 300 && noSteps === 0, noSteps);
+check('every product id on every sheet exists in the catalogue', badId === 0, badId);
+const aac = SD.parseSheet(fs.readFileSync(sysDir + 'ceramic-on-aac-internal-floor/index.html', 'utf8'));
+check('sheet answers include the substrate', aac.answers.Substrate === 'Autoclaved aerated concrete (AAC)' && aac.steps.length >= 4 && aac.steps[0].products.includes('davco-ultraprime'), JSON.stringify(aac.answers));
+const names = new Map(JSON.parse(fs.readFileSync(fileURLToPath(new URL('../../public/demo/sika-210c0c/data/index.json', import.meta.url)), 'utf8')).map((p) => [p.id, p.n]));
+const P = await SD.sheetPanels(aac, names);
+check('draft spec: a Supply and install clause per step that names products, with the data sheet title and version', (P.specText.match(/Supply and install/g) || []).length >= 3 && /in accordance with the manufacturer's data sheet [^\n]*(Version|20\d\d)/.test(P.specText), P.specText.slice(0, 500));
+check('draft spec: label first, no compliance claim, no standard reproduced', P.specText.startsWith('Draft specification text\nDraft for editing. Not approved by Sika.') && !/\b(complies|compliant|conforms)\b/i.test(P.specText.split('References')[0]));
+const ptext = P.programme.textContent;
+check('programme: shows data sheet sentences with source or Time not published', /Step 1\./.test(ptext) && (/Time not published/.test(ptext) || /hours|minutes|days/.test(ptext)) && /Published times are a guide/.test(ptext), ptext.slice(0, 300));
 check('no network call was made by the UI builders', true);
 summary('t_dom');

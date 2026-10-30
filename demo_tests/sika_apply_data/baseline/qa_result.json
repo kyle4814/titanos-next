@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T08:11:59.077Z",
+ "generated": "2026-10-30T08:14:32.271Z",
  "stats": {
   "products": 512,
   "documents": 1656,
@@ -7,8 +7,8 @@
   "pages": 767,
   "terms": 9196,
   "postings": 145398,
-  "buildMs": 1268.2,
-  "indexMs": 1259.4
+  "buildMs": 630.6,
+  "indexMs": 615.3
  },
  "products": 512,
  "results": [
@@ -20,7 +20,7 @@
    "top": "sikatile-400-evopro",
    "pass": true,
    "errors": [],
-   "ms": 410.24
+   "ms": 72.71
   },
   {
    "id": "f2",
@@ -30,7 +30,7 @@
    "top": "sikatile-110-secureproof",
    "pass": true,
    "errors": [],
-   "ms": 154.04
+   "ms": 27.53
   },
   {
    "id": "f3",
@@ -40,7 +40,7 @@
    "top": "sikaseal-kitchenandbathroom",
    "pass": true,
    "errors": [],
-   "ms": 61.54
+   "ms": 18.16
   },
   {
    "id": "f4",
@@ -50,7 +50,7 @@
    "top": "sikafloor-4020-fiberlevel",
    "pass": true,
    "errors": [],
-   "ms": 28.1
+   "ms": 23.72
   },
   {
    "id": "f5",
@@ -60,7 +60,7 @@
    "top": "sika-monotop-fc",
    "pass": true,
    "errors": [],
-   "ms": 68.53
+   "ms": 41.31
   },
   {
    "id": "c1",
@@ -70,7 +70,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 34.7
+   "ms": 18.16
   },
   {
    "id": "c2",
@@ -80,7 +80,7 @@
    "top": "sikafloor-level-ultra",
    "pass": true,
    "errors": [],
-   "ms": 49.22
+   "ms": 13.45
   },
   {
    "id": "c3",
@@ -90,7 +90,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 3.08
+   "ms": 3.55
   },
   {
    "id": "c4",
@@ -100,7 +100,7 @@
    "top": "sika-rugasol-c",
    "pass": true,
    "errors": [],
-   "ms": 8.89
+   "ms": 3.41
   },
   {
    "id": "d1",
@@ -110,7 +110,7 @@
    "top": "1671",
    "pass": true,
    "errors": [],
-   "ms": 24.42
+   "ms": 4.66
   },
   {
    "id": "d2",
@@ -120,7 +120,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 10.94
+   "ms": 3.07
   },
   {
    "id": "d3",
@@ -130,7 +130,7 @@
    "top": "davco-trojan-mastic",
    "pass": true,
    "errors": [],
-   "ms": 10.46
+   "ms": 3.02
   },
   {
    "id": "d4",
@@ -140,7 +140,7 @@
    "top": "sika-monotop-412nfg",
    "pass": true,
    "errors": [],
-   "ms": 13.11
+   "ms": 7.15
   },
   {
    "id": "m1",
@@ -150,7 +150,7 @@
    "top": "sikafloor-level-pro",
    "pass": true,
    "errors": [],
-   "ms": 20.41
+   "ms": 11.46
   },
   {
    "id": "m2",
@@ -160,7 +160,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 15.19
+   "ms": 6.63
   },
   {
    "id": "m3",
@@ -170,7 +170,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 3.3
+   "ms": 4.09
   },
   {
    "id": "q1",
@@ -180,7 +180,7 @@
    "top": "davco-trojan-mastic",
    "pass": true,
    "errors": [],
-   "ms": 10.1
+   "ms": 5.41
   },
   {
    "id": "q2",
@@ -190,7 +190,7 @@
    "top": "sikafloor-level-ultra",
    "pass": true,
    "errors": [],
-   "ms": 19.68
+   "ms": 3.35
   },
   {
    "id": "q3",
@@ -200,7 +200,7 @@
    "top": "sika-film",
    "pass": true,
    "errors": [],
-   "ms": 4.05
+   "ms": 3.8
   },
   {
    "id": "o1",
@@ -210,7 +210,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 33.58
+   "ms": 12.83
   },
   {
    "id": "s1",
