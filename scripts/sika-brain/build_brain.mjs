@@ -67,6 +67,15 @@ products.forEach((p, pi) => {
   for (const v of [noBrand]) { const w = v.split(' '); for (let k = w.length - 1; k >= (/\d/.test(w[0]) && w[0].length >= 3 ? 1 : 2); k--) { const pre = w.slice(0, k).join(' '); if (/\d/.test(pre) && !GENERIC_NAME.has(w[k - 1])) { prefixTmp.add(pre + '\t' + pi); } } }
 });
 { const byPre = new Map(); for (const e of prefixTmp) { const [pre0, pi] = e.split('\t'); const pre = pre0.replace('\u0001', ''); const s = byPre.get(pre) || new Set(); s.add(Number(pi)); byPre.set(pre, s); } for (const [pre, set] of byPre) if (set.size <= 3 && !aliasTmp.has(pre)) for (const pi of set) { addAlias(pre, pi); addAlias(compact(pre), pi); } }
+// old names the Sika pages publish for a product: "(Formerly Index Fidia 4mm)", "Previously known as Sika MaxTack", "also known as Sikadur-33"
+const aka = {};
+products.forEach((p, pi) => {
+  const blob = JSON.stringify([p.tagline, p.summary, p.metaDescription, p.attributes, p.usage, p.sections]).replace(/<[^>]+>/g, ' ').replace(/\\u00ae|\\u2122|[®™]/g, '').replace(/\\n|\\"/g, ' ');
+  for (const m of blob.matchAll(/(?:formerly|previously known as|also known as)\s*:?\s*([A-Za-z0-9][A-Za-z0-9 \-+\/.]{2,48}?)\s*(?=[)'",;]|\.\s|$)/gi)) {
+    const old = clean(m[1]).replace(/\s+(Part [AB]|Cleaner)$/i, ''); const key = normalise(old); if (key.length < 5 || key.split(' ').length > 6) continue;
+    const sentence = clean(m[0]).slice(0, 120); if (!aka[key]) { aka[key] = { pi, s: sentence }; addAlias(key, pi); addAlias(compact(key), pi); }
+  }
+});
 // distinctive single-token aliases are dropped unless the token is unique to one product
 const aliasOut = {};
 for (const [a, set] of aliasTmp) {
@@ -78,7 +87,7 @@ for (const [a, set] of aliasTmp) {
 const postOut = {}; for (const [t, s] of post) if (t.length >= 2 && !STOP.has(t)) postOut[t] = [...s].sort((a, b) => a - b);
 const top2 = (c) => c.split('/').slice(0, 2).join('/');
 const cats = categories.map((c) => ({ id: c.id, name: c.name, parent: c.parent, level: c.level }));
-const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut };
+const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut, aka };
 const coreSize = wr(path.join(OUT, 'core.json'), core);
 
 // per product shards: compiled from the FINAL knowledge lane files (rates, safety, compatibility); k/<id>.json is only a fallback

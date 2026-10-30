@@ -12,7 +12,7 @@ const DEFN = /^(what (is|are)\b|what.s (a|an|the)|what (does|do) .* (mean|stand 
 const KG = new Set([...GENERIC].filter((w) => w !== 'davco' && w !== 'tile'));
 const NUMW = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
 const FILLER = new Set('sika sikas australia australian tell know find want like get give show need tell help please best good great right info information details about product products range thing stuff someone anything'.split(' '));
-const SYN = [['company', 'brand', 'family', 'owned', 'part'], ['phone', 'telephone', 'call', 'ring', 'number'], ['address', 'office', 'located', 'location'], ['buy', 'stockist', 'distributor', 'retailer', 'purchase'], ['training', 'course', 'workshop', 'webinar'], ['warranty', 'guarantee'], ['contact', 'enquiry', 'enquir', 'touch'], ['job', 'career', 'employment'], ['sustainable', 'sustainability', 'impact', 'environmental'], ['colour', 'color', 'packaging'], ['library', 'hub', 'documents', 'resources']];
+const SYN = [['trade', 'b2b', 'shop', 'eshop', 'registration', 'portal'], ['company', 'brand', 'family', 'owned', 'part'], ['phone', 'telephone', 'call', 'ring', 'number'], ['address', 'office', 'located', 'location'], ['buy', 'stockist', 'distributor', 'retailer', 'purchase'], ['training', 'course', 'workshop', 'webinar'], ['warranty', 'guarantee'], ['contact', 'enquiry', 'enquir', 'touch'], ['job', 'career', 'employment'], ['sustainable', 'sustainability', 'impact', 'environmental'], ['colour', 'color', 'packaging'], ['library', 'hub', 'documents', 'resources']];
 
 export function createKnow({ load }) {
   let kb = null, idx = null, df = null, N = 0;
@@ -28,14 +28,15 @@ export function createKnow({ load }) {
   }
   const idf = (t) => Math.log(1 + N / (df.get(t) || N));
   const vocabFix = (t) => { if (!idx || idx.has(t) || t.length < 5 || /\d/.test(t)) return t; const max = t.length >= 9 ? 2 : 1; let best = t, bd = 9, bdf = 0; for (const [v, a] of idx) { if (Math.abs(v.length - t.length) > max) continue; const d = dist(t, v, max); if (d > max) continue; if (d > 1 && t.slice(0, 2) !== v.slice(0, 2)) continue; if (d < bd || (d === bd && a.length > bdf)) { best = v; bd = d; bdf = a.length; } } return best; };
+  const origin = new Map(); // synonym token -> the question word it stands for
   const qTokens = (n, noCap) => { if (/\bhow long (has|have|had)\b/.test(n)) n = n.replace(/\bhow long\b/, 'since'); const base = [...new Set(tokens(n.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/g, (m) => NUMW[m])).filter((t) => !KG.has(t) && !FILLER.has(t) && t.length > 0).map(vocabFix))]; const q = new Map(base.map((t) => [t, 1])); if (idx && !noCap && base.length > 5) { const keep = new Set([...base].sort((a, b) => idf(b) - idf(a)).slice(0, 5)); for (const t of [...q.keys()]) if (!keep.has(t)) q.delete(t); }
-    for (const g of SYN) { const gt = g.map((x) => tokens(x)[0]); if (gt.some((t) => q.has(t))) for (const t of gt) if (!q.has(t)) q.set(t, 0.5); } return q; };
+    for (const g of SYN) { const gt = g.map((x) => tokens(x)[0]); const o = gt.find((t) => q.get(t) === 1); if (o) for (const t of gt) if (!q.has(t)) { q.set(t, 0.5); origin.set(t, o); } } return q; };
   function search(n, filter0) {
     const wantProj = /\b(project|projects|case stud\w+|reference|references|built|completed|used (on|at|in)|stadium|tower|bridge)\b/.test(n);
     const filter = (u) => (!filter0 || filter0(u)) && (wantProj || u.kind !== 'page' || kb.pages[u.pi].k !== 'project');
     const q = qTokens(n); const prim = [...q].filter(([, w]) => w >= 1).map(([t]) => t); if (!prim.length) return null;
     const score = new Map();
-    for (const [t, w] of q) { const a = idx.get(t); if (!a) continue; const wi = w * idf(t); for (const ui of a) { if (filter && !filter(kb.units[ui])) continue; const e = score.get(ui) || { s: 0, hit: new Set() }; e.s += wi; if (w >= 1) e.hit.add(t); score.set(ui, e); } }
+    for (const [t, w] of q) { const a = idx.get(t); if (!a) continue; const wi = w * idf(t); for (const ui of a) { if (filter && !filter(kb.units[ui])) continue; const e = score.get(ui) || { s: 0, hit: new Set() }; e.s += wi; if (w >= 1) e.hit.add(t); else if (origin.get(t)) e.hit.add(origin.get(t)); score.set(ui, e); } }
     const items = [];
     for (const [ui, e] of score) { const u = kb.units[ui]; const cov = e.hit.size / prim.length; let s = e.s * (0.3 + 0.7 * cov) * (u.kind === 'page' && (kb.pages[u.pi].k === 'site' || kb.pages[u.pi].k === 'diy') ? 1.15 : 1); if (u.kind === 'page') for (const t of prim) if (u.tt.has(t)) s += 1.2 * idf(t); items.push({ ui, s, cov, hit: e.hit.size, u }); }
     items.sort((a, b) => b.s - a.s || a.ui - b.ui);
@@ -63,7 +64,7 @@ export function createKnow({ load }) {
       const p = pageBy(/warranty-portal/); if (p) { const ls = p.l.slice(0, 12).filter((l) => !/^(Document|Step \d|Register to access)/i.test(l)); if (ls.length) return infoCard({ title: 'Sika Australia warranty portal', headline: "This is what Sika Australia's own warranty page says.", rows: ls.map((l, i) => ({ label: i === 0 ? 'Published' : '', fact: pageFact(p, l, hint) })), links: [linkOf('Open the warranty portal', LINKS.warranty)] }); }
     }
     if (has(/\b(contact|helpline|help ?line|phone|call|support|customer service)\b/) && has(/\b(hours|opening hours|open (on|until|late|today|weekends?|saturday|sunday)|closes?|closed|after hours|what time|weekend|saturday|sunday)\b/) && !has(/open time/)) return unknownInfo(q, 'Opening hours and call times are not in the documentation I work from, and I will not guess them. Sika Australia publishes a contact page.', [linkOf('Sika Australia contact page', LINKS.contact)]);
-    if (has(/\b(contact (sika|us|details|number|info|information|someone|a person)|phone (number|no|numbr|sika|them|you)|telephone|tel (number|no)|ring (sika|them|you)|fax|head office|office address|email|who do i call|call (sika|you|them|someone)|reach sika|speak (to|with) (someone|a person|sika)|talk to (someone|a person)|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|get in touch)\b/) && !has(/contact (adhesive|cement|glue|cleaner)/)) {
+    if (has(/\b(contact (sika|us|details|number|info|information|someone|a person)|phone (number|no|numbr|sika|them|you)|telephone|tel (number|no)|ring (sika|them|you)|fax|head office|office address|email (address|sika|us|for|of)|e-?mail us|who do i call|call (sika|you|them|someone)|reach sika|speak (to|with) (someone|a person|sika)|talk to (someone|a person)|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|get in touch)\b/) && !has(/contact (adhesive|cement|glue|cleaner)/)) {
       const p = pageBy(/\/imprint\.html/); const p2 = pageBy(/concrete-repair-contact/);
       const rows = [];
       for (const l of linesOf(p, [/Head Office/i, /^Wetherill/i, /^Phone/i])) rows.push({ label: /Head Office/i.test(l) ? 'Head office' : /Phone/i.test(l) ? 'Phone' : 'Address', fact: pageFact(p, l, hint) });
@@ -78,7 +79,7 @@ export function createKnow({ load }) {
       const rows = [{ label: 'Published', fact: f1 }]; if (p) rows.push({ label: 'SikaTile', fact: pageFact(p, p.l[0], hint) });
       return infoCard({ title: 'Where to buy Sika Australia products', headline: 'Sika Australia publishes a Where to Buy page. The stockist list itself is not in the documentation I work from, so please open the page.', rows, links: [linkOf('Where to buy', LINKS.whereToBuy), linkOf('SikaTile distributors', LINKS.tileDistributors)] });
     }
-    if (has(/\b(careers?|employment|work (for|at) sika|vacanc\w+|hiring|job (openings?|ads?|vacanc\w+|opportunit\w+)|jobs? (at|with) sika|apply for a job)\b/)) {
+    if (!has(/how many|number of|how big|how large/) && has(/\b(careers?|employment|work (for|at) sika|vacanc\w+|hiring|job (openings?|ads?|vacanc\w+|opportunit\w+)|jobs? (at|with) sika|apply for a job)\b/)) {
       const f1 = fact({ source_url: SITE + 'construction/davco.html', sentence: 'Careers', doc_type: 'WEB' });
       return infoCard({ title: 'Careers at Sika Australia', headline: 'Sika Australia lists Careers in its own site menu. The vacancies themselves are on that page, not in the documentation I work from.', rows: [{ label: 'Site menu', fact: f1 }], links: [linkOf('Sika Australia careers', LINKS.careers)] });
     }
@@ -134,6 +135,7 @@ export function createKnow({ load }) {
     const res = search(n, prodToo ? null : (u) => u.kind === 'page'); if (!res || !res.items.length) return null;
     if (typeof process !== 'undefined' && process.env && process.env.KNOW_DEBUG) console.log(res.prim, res.items.slice(0, 3).map((it) => [it.s.toFixed(1), it.hit, it.cov, it.u.kind === 'page' ? kb.pages[it.u.pi].t + ' :: ' + kb.pages[it.u.pi].l[it.u.li].slice(0, 60) : 'prod']));
     const top = res.items[0]; const need = res.prim.length <= 1 ? 1 : res.prim.length === 2 ? 2 : Math.ceil(res.prim.length * (strict ? 0.75 : 0.6));
+    if (!res.prim.some((t) => /^[a-z]{4,}$/.test(t))) return null;
     if (top.hit < Math.min(need, res.prim.length <= 4 && top.hit >= 2 && top.s >= 12 ? 2 : need) || top.s < (res.prim.length <= 1 ? 6.5 : res.prim.length === 2 && top.hit >= 2 ? 3.5 : 6)) return null;
     if (res.prim.length <= 1 && top.u.kind === 'page' && !top.u.tt.has(res.prim[0])) return null;
     const hint = hintOf(n);

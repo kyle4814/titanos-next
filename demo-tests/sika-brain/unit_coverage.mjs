@@ -106,8 +106,15 @@ r = await ask('wich adhesive fr 900x900 porclain on a wal');
 t('heavy typos still reach the adhesive range', r.a.cards.some((c) => /adhesive|mastic|sikatile|davco/i.test(c.title + ' ' + (c.product ? c.product.id : ''))), r.txt.slice(0, 200));
 // ---- trade terms Sika does not define in one place
 for (const q of ['what is pot life', 'what is open time', 'what does adjustability time mean']) { r = await ask(q); const c = r.a.cards[0]; t('term "' + q + '": says there is no general definition and offers products that publish the figure', c.type === 'choose' && /no general definition/.test(c.headline) && c.choices.length >= 2); const x = await ask(c.followups[0]); t('term "' + q + '": the first option answers with a published figure', x.a.cards[0].type === 'time' && x.a.cards[0].status === 'PUBLISHED', x.txt.slice(0, 160)); }
+r = await ask('index fidia 4mm');
+t('an old name the Sika page publishes finds the product and says where the name comes from', r.ids[0] === 'sikashield-p44-tfidia4mm' && /Formerly Index Fidia 4mm/i.test(r.txt), r.txt.slice(0, 200));
+r = await ask('what is sikaflex 11 fc used for');
+t('a name shared by two products shows both, never one silently', r.a.cards.filter((c) => c.type === 'product').length >= 2);
 // ---- out of scope
 for (const q of ['what is the weather today', 'is mapei better than davco', 'who is the prime minister', 'asdfgh']) { r = await ask(q); t('out of scope declined: ' + q, r.a.cards.every((c) => c.status === 'UNKNOWN') && !/mapei/i.test(r.txt), r.txt); }
+// ---- off-topic and unanswerable questions never get a published answer
+{ const oos = JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'oos_set.json'), 'utf8')); const leaks = []; for (const q of oos) { const a = await b.ask(q); if (a.cards.some((c) => c.status === 'PUBLISHED' && c.type !== 'choose')) leaks.push(q + ' => ' + a.cards[0].title); }
+  t(`off-topic set (${oos.length} questions): no published answer`, leaks.length === 0, leaks.join(' | ')); }
 // ---- the bank gate
 const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
 const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
