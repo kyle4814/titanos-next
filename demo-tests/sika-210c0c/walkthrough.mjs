@@ -32,8 +32,9 @@ for (const sz of sizesArg.split(',')) {
   const lastBot = async () => { const m = page.locator('.asst-log .msg--bot'); await m.last().waitFor({ timeout: 15000 }); await page.waitForTimeout(500); return m.last(); };
   const ask = async (q) => {
     if (!(await page.locator('#assistant[aria-hidden="false"]').count())) { await page.locator('button:visible:has-text("Advisor")').first().click(); }
+    const before = await page.locator('.asst-log .msg--bot').count();
     await page.fill('#asst-q', q); await page.press('#asst-q', 'Enter');
-    await page.waitForFunction(() => !document.querySelector('.asst-log .typing'), null, { timeout: 15000 }); return lastBot();
+    await page.waitForFunction((n) => document.querySelectorAll('.asst-log .msg--bot').length > n && !document.querySelector('.asst-log .typing'), before, { timeout: 15000 }); return lastBot();
   };
   let sheetUrl = null;
 

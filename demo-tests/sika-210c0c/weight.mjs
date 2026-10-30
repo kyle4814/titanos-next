@@ -18,8 +18,8 @@ async function measure(name, drive, readySelector) {
     const reqs = new Map(); let bytes = 0; const files = [];
     cdp.on('Network.requestWillBeSent', (e) => reqs.set(e.requestId, e.request.url));
     cdp.on('Network.loadingFinished', (e) => { bytes += e.encodedDataLength; files.push({ url: reqs.get(e.requestId) || '?', bytes: e.encodedDataLength }); });
-    const t0 = Date.now(); await drive(page, base); await page.waitForSelector(readySelector, { timeout: 120000 }); const ms = Date.now() - t0;
-    await page.waitForTimeout(300); // let in-flight bytes that belong to the first answer finish
+    const t0 = Date.now(); await drive(page, base); await page.waitForSelector(readySelector, { timeout: 120000 }); const ms = Date.now() - t0; // time to first answer: the answer element is visible
+    await page.waitForLoadState('load'); await page.waitForTimeout(300); // bytes: everything the page needed (stylesheets, fonts, scripts) has finished
     runs.push({ ms, bytes, requests: files.length, files: files.sort((a, b) => b.bytes - a.bytes).slice(0, 8).map((f) => ({ file: f.url.replace(base, ''), bytes: f.bytes })) }); await ctx.close();
   }
   runs.sort((a, b) => a.ms - b.ms); const med = runs[Math.floor(runs.length / 2)];

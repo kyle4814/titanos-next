@@ -1,6 +1,6 @@
 # CATEGORY COVERAGE 2026-10-30 (T01 second category kill test, measured)
 
-Input: knowledge lane rates.json generated 2026-10-30T08:18:16Z (verified facts), portal data/products.json, safety.json, evidence/verify_rejects.jsonl (33 rejected fact ids). Raw column = rate_status 'published' in rates_raw.json (512 products, before the verifier). Raw and verified agree per category when the verifier rejects no product-level rate (it rejected 33 facts in total, none of which changed a product's status in this run).
+Input: knowledge lane rates.json generated 2026-10-30T08:22:51Z (verified facts), portal data/products.json, safety.json, evidence/verify_rejects.jsonl (33 rejected fact ids). Raw column = rate_status 'published' in rates_raw.json (512 products, before the verifier). Raw and verified agree per category when the verifier rejects no product-level rate (it rejected 33 facts in total, none of which changed a product's status in this run).
 
 ## Metric (fixed before reading the numbers)
 
@@ -43,8 +43,8 @@ appliance-and-equipment                2      2    0        0     2        0    
 
 ## Caveats (honest)
 
-- "Not published" means the data sheet text and product page text carry no consumption figure that a machine could read; it does not mean Sika holds none. 110 products carry an "other status" (no data sheet PDF found, or text mentions coverage but no readable figure); they count as not complete.
-- The metric counts a record complete when a verified, cited consumption fact exists. It does not judge whether the figure is enough to compute a quantity (that is calc_ready, 429 of 512 per rates.json counts).
+- "Not published" means the data sheet text and product page text carry no consumption figure that a machine could read; it does not mean Sika holds none. 109 products carry an "other status" (no data sheet PDF found, or text mentions coverage but no readable figure); they count as not complete.
+- The metric counts a record complete when a verified, cited consumption fact exists. It does not judge whether the figure is enough to compute a quantity (that is calc_ready, 437 of 512 per rates.json counts).
 - Product categories use the second path segment of the product page category; a product has exactly one.
 - The lane output was still regenerating at 18:09 AEST; re-run the tool to refresh. Nothing here is a Sika-confirmed number.
 
