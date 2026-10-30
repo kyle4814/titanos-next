@@ -1,0 +1,1 @@
+{"v":1,"id":"industry/appliance-and-equipment","name":"Appliance and Equipment","products":["sikaflex-953-l30","sikafast-555-l05"],"tags":{"substrate:glass":{"yes":[{"product":"sikafast-555-l05","rule":"sikafast-555-l05:suitability:d453ca51","conditional":false}],"no":[],"conditional":[]}}}

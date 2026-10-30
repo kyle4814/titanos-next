@@ -1,0 +1,133 @@
+// build_brain.mjs: compile the knowledge graph into typed, lazily loadable shards. Read only on the lanes; writes data/brain/.
+//   node scripts/sika-brain/build_brain.mjs            (portal dir = public/demo/sika-210c0c in this repo)
+// Inputs: portal data (products, documents, categories, k/<id>.json = the knowledge + specs lanes compiled per product),
+//         lanes/knowledge/{decision_trees,compatibility}.json, lanes/corrections/rules.json, systems/out/systems.full.json.
+// Output: data/brain/manifest.json, core.json, p/<id>.json, cat/<slug>.json, tree.json, rules.json
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { normalise, tokens, stem, STOP, compact } from '../../public/demo/sika-210c0c/assets/brain/text.js';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const PORTAL = process.env.SIKA_PORTAL || path.join(HERE, '..', '..', 'public', 'demo', 'sika-210c0c');
+const LANES = process.env.SIKA_LANES || '/home/tech2/klinge-kernel/state/sika/lanes';
+const SYSTEMS = process.env.SIKA_SYSTEMS || '/home/tech2/klinge-kernel/state/sika/systems/out/systems.full.json';
+const OUT = path.join(PORTAL, 'data', 'brain');
+const rd = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
+const wr = (f, o) => { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(o)); return fs.statSync(f).size; };
+const exists = (f) => fs.existsSync(f);
+
+const products = rd(path.join(PORTAL, 'data/products.json'));
+const documents = rd(path.join(PORTAL, 'data/documents.json'));
+const categories = rd(path.join(PORTAL, 'data/categories.json'));
+const catName = new Map(categories.map((c) => [c.id, c.name]));
+const clean = (s) => String(s || '').replace(/[®™©]/g, '').replace(/\s+/g, ' ').trim();
+const docsByProduct = new Map();
+for (const d of documents) for (const id of d.products || []) { if (!docsByProduct.has(id)) docsByProduct.set(id, []); docsByProduct.get(id).push(d); }
+const docOk = (d) => !d.http || d.http.status === 200;
+
+fs.rmSync(OUT, { recursive: true, force: true });
+const sizes = { p: 0, cat: 0 };
+const FIELD = { name: 1, category: 2, application: 3, substrate: 4, text: 5 };
+const post = new Map();
+const addTok = (tok, pi, f) => { let s = post.get(tok); if (!s) post.set(tok, s = new Set()); s.add(pi * 8 + f); };
+const P = [], alias = {};
+const GENERIC_NAME = new Set(['adhesive', 'grout', 'primer', 'sealant', 'mastic', 'membrane', 'mortar', 'pack', 'kit', 'compound', 'coating', 'waterproofing', 'tile', 'screed', 'epoxy', 'concrete', 'additive']);
+const aliasTmp = new Map();
+function addAlias(a, pi) { if (!a || a.length < 3) return; const s = aliasTmp.get(a) || new Set(); s.add(pi); aliasTmp.set(a, s); }
+
+products.forEach((p, pi) => {
+  const name = clean(p.name), brand = clean(p.brand);
+  const catNames = (p.breadcrumb || []).slice(0, -1).map((b) => clean(b.name));
+  P.push({ id: p.id, n: name, b: brand, c: p.category, u: p.url, t: clean(p.tagline || p.summary || '') });
+  for (const t of tokens(name)) addTok(t, pi, 1);
+  for (const t of tokens(p.id.replace(/-/g, ' '))) addTok(t, pi, 1);
+  for (const n of catNames) for (const t of tokens(n)) addTok(t, pi, 2);
+  for (const t of tokens(p.category.replace(/[\/-]/g, ' '))) addTok(t, pi, 2);
+  for (const t of tokens([p.tagline, p.summary, ...(p.attributes || []), ...(p.advantages || [])].join(' '))) addTok(t, pi, 3);
+  for (const t of tokens((p.usage || []).join(' '))) addTok(t, pi, 4);
+  const extra = [];
+  for (const s of p.sections || []) for (const it of s.items || []) extra.push(it.label, it.text);
+  for (const d of docsByProduct.get(p.id) || []) extra.push(d.title, d.typeLabel);
+  extra.push(p.packaging, p.metaDescription);
+  for (const t of tokens(extra.join(' '))) addTok(t, pi, 5);
+  // aliases: full name, without brand, without generic tail words, id, compact forms
+  const nn = normalise(name), nb = brand ? normalise(brand) : '';
+  const full = nn, noBrand = nb && nn.startsWith(nb + ' ') ? nn.slice(nb.length + 1) : nn;
+  const variants = new Set([full, noBrand, normalise(p.id.replace(/-/g, ' '))]);
+  for (const v of [full, noBrand]) { const w = v.split(' '); while (w.length > 1 && GENERIC_NAME.has(w[w.length - 1])) { w.pop(); variants.add(w.join(' ')); } }
+  for (const v of variants) { addAlias(v, pi); addAlias(compact(v), pi); }
+});
+// distinctive single-token aliases are dropped unless the token is unique to one product
+const aliasOut = {};
+for (const [a, set] of aliasTmp) {
+  const toks = a.split(' ');
+  if (toks.length === 1 && !/\d/.test(a) && (a.length < 5 || GENERIC_NAME.has(a) || set.size > 1)) { if (set.size > 1 || a.length < 5 || GENERIC_NAME.has(a)) continue; }
+  aliasOut[a] = [...set];
+}
+const postOut = {}; for (const [t, s] of post) if (t.length >= 2 && !STOP.has(t)) postOut[t] = [...s].sort((a, b) => a - b);
+const top2 = (c) => c.split('/').slice(0, 2).join('/');
+const cats = categories.map((c) => ({ id: c.id, name: c.name, parent: c.parent, level: c.level }));
+const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut };
+const coreSize = wr(path.join(OUT, 'core.json'), core);
+
+// per product shards
+const kdir = path.join(PORTAL, 'data/k');
+let nShard = 0, nNoK = 0;
+for (const p of products) {
+  const kf = path.join(kdir, p.id + '.json');
+  const k = exists(kf) ? rd(kf) : null; if (!k) nNoK++;
+  const shard = {
+    v: 1, id: p.id, n: clean(p.name), b: clean(p.brand), u: p.url, c: p.category,
+    d: { t: clean(p.tagline), s: clean(p.summary), a: (p.attributes || []).map(clean), us: (p.usage || []).map(clean), pk: clean(p.packaging), sec: (p.sections || []).flatMap((s) => (s.items || []).map((it) => ({ l: clean(it.label), t: clean(it.text), g: clean(s.title) }))).filter((x) => x.t).slice(0, 40) },
+    dc: (docsByProduct.get(p.id) || []).map((d) => ({ id: d.id, t: clean(d.title), ty: d.type, tl: d.typeLabel, v: d.version || '', u: d.url, ok: docOk(d), f: d.format })),
+  };
+  if (k) { shard.r = k.rates; shard.tm = k.times; shard.cp = k.compat; shard.sf = k.safety; shard.sp = k.spec; }
+  sizes.p += wr(path.join(OUT, 'p', p.id + '.json'), shard); nShard++;
+}
+
+// per top-category shards: compat tag lists (filtered to the category), rule texts for the trees, trees, systems
+const compat = rd(path.join(LANES, 'knowledge/compatibility.json'));
+const trees = rd(path.join(LANES, 'knowledge/decision_trees.json'));
+const catOf = new Map(products.map((p) => [p.id, top2(p.category)]));
+const slug = (c) => c.replace(/\//g, '__');
+const catIds = [...new Set(products.map((p) => top2(p.category)))];
+const treeOut = { v: 1, trees: [] };
+for (const t of trees.trees) {
+  const q = (t.questions || []).map((x) => ({ id: x.id, text: x.text, options: (x.options || []).map((o) => ({ id: o.id, label: o.label, count: o.count, tags: o.tags })) }));
+  const o = { id: t.id, title: t.title, problem: t.problem, scope: t.scope, order: t.order || q.map((x) => x.id), leaf_key: t.leaf_key || null, questions: q };
+  if (t.leaves && !Array.isArray(t.leaves) && t.leaf_key) {
+    o.leaves = {};
+    for (const [k, v] of Object.entries(t.leaves)) o.leaves[k] = { fit: (v.documented_fit || []).map((x) => ({ p: x.product, ev: (x.evidence || []).slice(0, 2), pr: x.primer_products || [] })), part: (v.partly_documented || []).map((x) => ({ p: x.product, ns: x.not_stated || [] })).slice(0, 6), ex: (v.excluded || []).map((x) => ({ p: x.product, r: x.rule || (x.because && x.because[0]) || null })).slice(0, 12) };
+  } else if (t.leaves) {
+    o.leaves = {}; for (const [k, v] of Object.entries(t.leaves)) o.leaves[k] = v.map((x) => ({ p: x.product, n: x.name, w: x.why }));
+  }
+  treeOut.trees.push(o);
+}
+const ruleTexts = trees.rules;
+const treeSize = wr(path.join(OUT, 'tree.json'), { v: 1, trees: treeOut.trees, rules: ruleTexts });
+
+for (const cid of catIds) {
+  const inCat = new Set(products.filter((p) => top2(p.category) === cid).map((p) => p.id));
+  const o = { v: 1, id: cid, name: catName.get(cid) || cid, products: [...inCat], tags: {} };
+  for (const [tag, v] of Object.entries(compat.by_tag || {})) {
+    const f = (a) => (a || []).filter((x) => inCat.has(x.product));
+    const e = { yes: f(v.yes), no: f(v.no), conditional: f(v.conditional) };
+    if (e.yes.length || e.no.length || e.conditional.length) o.tags[tag] = e;
+  }
+  if (cid === 'construction/tile-stone-installationsystems' && exists(SYSTEMS)) {
+    const sys = rd(SYSTEMS); o.systems = {};
+    for (const [key, s] of Object.entries(sys.systems)) {
+      o.systems[key] = { slug: s.slug, title: s.title, steps: (s.steps || []).map((st) => ({ role: st.role, label: st.label, status: st.status, opt: (st.options || []).slice(0, 2).map((op) => ({ id: op.productId, n: clean(op.name), r: clean(op.reason), s: op.evidence && op.evidence.sentence || '', u: op.evidence && op.evidence.url || op.sourceUrl || '', rate: op.rate && op.rate.text || '' })) })) };
+    }
+    o.tileTypes = sys.tileTypes; o.substrates = sys.substrates; o.locations = sys.locations;
+  }
+  sizes.cat += wr(path.join(OUT, 'cat', slug(cid) + '.json'), o);
+}
+// corrections: the lane's rules.json (empty today) is copied as is
+const rulesSrc = path.join(LANES, 'corrections/rules.json');
+const rules = exists(rulesSrc) ? rd(rulesSrc) : { version: 1, rules: [] };
+wr(path.join(OUT, 'rules.json'), rules);
+const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json' }, bytes: { core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
+wr(path.join(OUT, 'manifest.json'), manifest);
+console.log(JSON.stringify(manifest), 'products without k shard:', nNoK);
