@@ -8,7 +8,7 @@ const plain = (s) => String(s || '').replace(/[–—]/g, '-');
 
 /** Store a worked quantity on the project item (one item per product; the latest calculation replaces the last). */
 export function addCalcToProject(p, snap) {
-  if (!projects.has(p.id)) projects.add(p.id);
+  if (!projects.has(p.id)) projects.add(p.id, { name: p.name, from: 'finder' });
   const first = snap.packs && snap.packs[0];
   projects.set(p.id, { qty: first ? first.count : 1, unit: 'pack', calc: snap });
   announce(`${p.name} added to my projects with its quantity`);
@@ -19,6 +19,7 @@ export function bomRows(list, byId) {
   return list.map((it) => {
     const p = byId.get(it.id); const name = p ? p.n : it.id;
     const c = it.calc;
+    if (!c && (it.need || it.packs)) return [plain(name), it.need || 'Quantity from the advisor', it.packs || it.qty + ' x ' + (it.unit || 'pack'), (it.basis ? it.basis + '. ' : '') + 'Worked out by the advisor from the published rate.', it.url || '', chipFor(it.url)];
     if (!c) return [plain(name), 'No quantity worked out', it.qty + ' x ' + (it.unit || 'pack'), 'Entered by hand', '', ''];
     const qty = c.low === c.high ? fmtQty(c.low, c.unit) : fmtQty(c.low, c.unit) + ' to ' + fmtQty(c.high, c.unit);
     const packs = (c.packs || []).map(packText).join('; ') || (c.packNote || 'No pack size in the same unit');

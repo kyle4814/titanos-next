@@ -324,6 +324,12 @@ main{flex:1 0 auto}
 .proj-line{display:grid;gap:12px;grid-template-columns:1fr;border-bottom:1px solid var(--grey);padding:1rem 0}
 @media (min-width:40em){.proj-line{grid-template-columns:minmax(0,1fr) 164px 140px auto;align-items:center}}
 .proj-line h3{font-size:1.2rem;line-height:1.25;font-weight:600;margin:0}
+.proj-src{margin:.35rem 0 0;font-size:.95rem;line-height:1.4;max-width:46rem}
+.proj-extra{margin-top:2rem}
+.proj-line--text{grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.proj-switch{margin:0 0 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.proj-note-add{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}.proj-note-add .input{flex:1 1 16rem;min-width:0}
+.job-pack textarea{width:100%;max-width:50rem;margin-top:1rem}
 .qty{display:flex;align-items:center;border:1px solid var(--grey);width:max-content}
 .qty button{width:44px;height:44px;border:0;background:var(--grey-light);cursor:pointer;font-size:1.3rem;line-height:1}
 .qty button:hover{background:var(--primary)}

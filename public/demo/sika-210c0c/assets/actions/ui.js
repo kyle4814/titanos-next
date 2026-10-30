@@ -4,6 +4,7 @@ import { h, icon, announce } from '../lib/util.js';
 import { fetchStore, createData, ESTIMATE_LINE, IN_BROWSER_NOTICE } from './core.js';
 import { createActions, newSession } from './flow.js';
 import { createMemory } from './memory.js';
+import { sharedStorage } from '../lib/projectstore.js';
 import { COMMANDS } from './parse.js';
 import { renderHandoff } from '../lib/handoff-ui.js';
 import { observeBrainAnswer } from './brain_adapter.js';
@@ -66,7 +67,7 @@ export function renderCard(c, act) {
   for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), s.compact ? sumList(s.rows) : rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
   (c.notes || []).forEach((n) => root.append(h('p', { class: 'cite' }, n)));
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
-  if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, 'Copy the clause')); }
+  if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': c.copyAria || 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, c.copyLabel || 'Copy the clause')); }
   if (c.handoffBlock) root.append(renderHandoff(c.handoffBlock));
   if (c.kind !== 'clarify' && c.kind !== 'help' && c.kind !== 'memory') {
     const seen = new Set(); const all = [...(c.rows || []), ...((c.sections || []).flatMap((s) => [...(s.rows || []), ...(s.more || [])])), ...((c.table && c.table.rows) || []).flatMap((r) => r.cells)].filter((r) => r.source && r.source.url && !seen.has(r.source.url.split('#')[0]) && seen.add(r.source.url.split('#')[0])).slice(0, 6);
@@ -159,6 +160,16 @@ function attachSpeech(input, form) {
   return btn;
 }
 
+/** After a v2 advisor answer that names products: an "add to my project" chip for each (the ordinary /add command, by name). */
+function brainAddButtons(log, answer, send) {
+  try {
+    const seen = new Map(); for (const c of (answer && answer.cards) || []) if (c && c.product && c.product.id && c.product.name && !seen.has(c.product.id)) seen.set(c.product.id, String(c.product.name).replace(/[®™]/g, ''));
+    const last = log && log.lastElementChild; if (!seen.size || !last || last.querySelector('[data-cart-add]')) return;
+    const chips = [...seen].slice(0, 3).map(([id, name]) => h('button', { class: 'chip', type: 'button', 'data-cart-add': id, onclick: () => send('/add ' + name, 'Add ' + name + ' to my project') }, 'Add ' + name + ' to my project'));
+    last.append(h('div', { class: 'opts', role: 'group', 'aria-label': 'Add to my project' }, chips));
+  } catch { /* a missing button never breaks an answer */ }
+}
+
 /**
  * Attach the actions to the advisor panel. panel parts: { log, input, form, sugg, add(node), send(text,label) }.
  * Returns { handle(text) -> Node|null, observeV1(text, answer, outcome), observeBrain(answer) }.
@@ -168,7 +179,7 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
   css();
   const store = fetchStore(new URL('../../data/', import.meta.url));
   const data = createData(store);
-  const memory = createMemory(safeStorage());
+  const memory = createMemory(sharedStorage()); // the same store the My projects page uses
   const actions = createActions({ data, memory, config });
   let session = newSession();
   const slash = attachSlash(input, form, send);
@@ -181,9 +192,11 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
       const r = await actions.run(text, session); session = r.session;
       if (!r.handled) return null;
       const oc = r.card.kind === 'clarify' ? 'CLARIFY' : r.card.status === 'unknown' ? 'NOT_IN_PUBLISHED_DATA' : 'ANSWERED_WITH_SOURCE';
-      return { node: renderCard(r.card, act), outcome: oc };
+      const node = renderCard(r.card, act);
+      if (r.card.cartLinks) node.append(h('div', { class: 'opts' }, h('a', { class: 'chip chip--line', href: '#/projects', 'data-cart-page': '1', onclick: () => onNavigate() }, 'Open my projects page')));
+      return { node, outcome: oc };
     },
     observeV1(text, answer, outcome) { if (outcome === 'NOT_IN_PUBLISHED_DATA' && text && !text.startsWith('/')) memory.addGap(text); memory.rememberQuestion(text, 'ask'); },
-    observeBrain(answer) { observeBrainAnswer(session, answer); },
+    observeBrain(answer) { observeBrainAnswer(session, answer); brainAddButtons(log, answer, send); },
   };
 }

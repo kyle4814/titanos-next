@@ -4,7 +4,7 @@
 cd "$(dirname "$0")" || exit 2
 rc=0
 filter='MODULE_TYPELESS\|Reparsing\|eliminate\|trace-warnings'
-for t in t_actions t_flow t_memory t_property; do
+for t in t_actions t_flow t_memory t_property t_cart t_cart_regression; do
   echo "=== $t"; node "$t.mjs" 2>&1 | grep -v "$filter" | tail -6; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
 done
 if [ "$1" != "--no-browser" ]; then
@@ -14,6 +14,11 @@ if [ "$1" != "--no-browser" ]; then
     p=$(pwd | sed 's#/#\\#g'); out=$(cd /tmp && timeout 600 "$W" "\\\\wsl.localhost\\Ubuntu${p}\\e2e_actions.mjs" 2>&1); echo "$out" | grep -v '^PASS' | tail -12
     echo "$out" | grep -q 'ACTIONS E2E: .* 0 failed' || rc=1
   else echo "=== e2e_actions SKIPPED (no Windows node)"; fi
+  if [ -x "$W" ]; then
+    echo "=== e2e_cart (Windows Chrome, 1440x900 and 390x844 touch)"
+    p=$(pwd | sed 's#/#\\#g'); out=$(cd /tmp && timeout 600 "$W" "\\\\wsl.localhost\\Ubuntu${p}\\e2e_cart.mjs" 2>&1); echo "$out" | grep -v '^PASS' | tail -12
+    echo "$out" | grep -q 'CART E2E: .* 0 failed' || rc=1
+  fi
 fi
 # the brain's own gate (node: unit, golden, property) and its browser run with the actions layer off (?actions=off), through a fresh-port server on the WSL disk
 echo "=== sika-brain run_all (node)"; bash ../sika-brain/run_all.sh 2>&1 | grep -E "GREEN|FAIL|passed|GOLDEN" | head -8; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
