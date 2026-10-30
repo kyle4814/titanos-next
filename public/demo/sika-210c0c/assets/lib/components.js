@@ -21,6 +21,7 @@ export function placeholder(catId, label = 'Product image') {
 
 /** Product packshot: a fixed-size box (width/height set, so the layout never shifts), loaded on demand, falls back to the placeholder. */
 export function packshot(img, catId, name, big = false) {
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) return placeholder(catId, name); // offline: pictures are never cached, so draw the placeholder instead of a failed request
   const alt = img && img.alt ? img.alt : name;
   const i = h('img', { class: 'packshot', src: big ? img.src2x : img.src, width: String(img.width), height: String(img.height), alt, loading: big ? 'eager' : 'lazy', decoding: 'async' });
   if (!big) i.setAttribute('srcset', img.src + ' 480w, ' + img.src2x + ' 960w'), i.setAttribute('sizes', '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw');
