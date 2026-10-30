@@ -7,7 +7,7 @@ import { classify, parseRequest } from './intents.js';
 import { productRates, parsePacks, parseRates, fmtNum } from './rates.js';
 import { quoteProduct } from './quote.js';
 import { buildTree } from './tree.js';
-import { handoffFor } from './handoff.js';
+import { handoffFor, uncoveredTerms } from './handoff.js';
 import { detectProblem, problemBlocks } from './problem.js';
 import { plain, sanitise, docOk, docLabel, DOC_ORDER, clip, bestLine } from './answer.js';
 
@@ -346,7 +346,14 @@ export function createAssistant({ products, documents, categories, pages = [], c
       const pos = posOf(p).filter(l => Object.entries(l.facets).some(([d, ids]) => (tailF[d] || []).some(id => ids.includes(id))));
       const what = Object.entries(tailF).flatMap(([d, ids]) => ids.map(id => (syn.FACETS[d].find(f => f.id === id) || { label: id }).label.split(' (')[0].toLowerCase())).join(', ');
       if (ex.length) blocks.push({ type: 'text', text: `No. The published text for ${plain(p.name)} says it is not suitable for ${what}: "${clip(ex[0].text, 300)}"` });
-      else if (pos.length) blocks.push({ type: 'text', text: `Yes, according to the published text for ${plain(p.name)} (${what}): "${clip(pos[0].text, 300)}"` });
+      else if (pos.length) {
+        const quote = clip(pos[0].text, 300);
+        // A yes has to cover the visitor's whole condition. A word the quoted sentence never mentions (for example "heated") is not answered by a nearest match:
+        // say what the text does cover, say what it does not, and hand over.
+        const silent = uncoveredTerms(tail, [p.name], [{ type: 'text', text: `${what} ${quote}` }]);
+        if (silent.length) blocks.push({ type: 'text', text: `The published text for ${plain(p.name)} says: "${quote}" It does not mention ${silent.join(', ')}, so it does not answer your question. I will not guess; check the datasheet or ask technical services.`, silent });
+        else blocks.push({ type: 'text', text: `Yes, according to the published text for ${plain(p.name)} (${what}): "${quote}"` });
+      }
       else blocks.push({ type: 'text', text: `The published text for ${plain(p.name)} does not say whether it can be used on or over ${what}. I will not guess; check the datasheet or ask technical services.` });
     }
     if (p2) {
