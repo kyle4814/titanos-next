@@ -274,7 +274,7 @@ export function createBrain({ load, config } = {}) {
     const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
     const facets = parseFacets(n); let intent = classify(n, facets.area != null);
     if (intent === 'calc' && /\bpallets?\b/.test(n)) intent = 'which';
-    if (['which', 'compat', 'time', 'rate'].includes(intent) && /\bor\b.*\bwhich\b|\bwhich (one|is better|should i)\b|\bsame (thing|as|product)\b/.test(n0) && mentions.filter((m) => m.pis.length === 1).length >= 2) intent = 'compare';
+    if (['which', 'compat', 'time', 'rate'].includes(intent) && /\bor\b|\bwhich (one|is better|should i)\b|\bsame (thing|as|product)\b/.test(n0) && mentions.filter((m) => m.pis.length === 1).length >= 2) intent = 'compare';
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }

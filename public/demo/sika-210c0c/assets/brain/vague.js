@@ -60,6 +60,8 @@ export function splitCard(n) {
 export function vagueCard(n) {
   { const sc = splitCard(n); if (sc) return sc; }
   const m = HEAD.exec(n);
+  const m2 = /^i (?:want|need|am going|m going|have|got|plan) to (?:tile|waterproof|seal|fix|repair|level|build|renovate|redo|reno|do)\s+(.+)$/.exec(n);
+  if (m2 && !m && n.split(' ').length <= 9) { const noun = m2[1].replace(/^(a |an |the |my |our )/, '').trim(); for (const [rx, v] of NOUN) if (rx.test(noun)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; } const gen = ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor']; const c = C.chooseCard('What are you working on?', 'What is the job?', gen, [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = gen; return c; }
   if (m && n.split(' ').length <= 8) { const noun = m[1].trim(); for (const [rx, v] of NOUN) if (rx.test(noun)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
     if (/^(some )?(a |the |my )?(job|project|fix|repair|work|reno|renovation|building|house|home)$/.test(noun) || noun.split(' ').length === 1 && noun.length < 4) { const c = C.chooseCard('What are you working on?', 'What is the job?', ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor'], [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = c.followups; return c; } }
   return vagueCard0(n);

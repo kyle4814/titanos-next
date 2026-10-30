@@ -1,0 +1,1009 @@
+[
+ {
+  "persona": "builder",
+  "category": "marine",
+  "q": "need a sealant for between teak planks on a yacht deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:marine/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v001"
+ },
+ {
+  "persona": "builder",
+  "category": "marine",
+  "q": "what bonds a boat window in",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:marine/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v002"
+ },
+ {
+  "persona": "builder",
+  "category": "marine",
+  "q": "adhesive for fitting a hatch on a boat",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:marine/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v003"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "what do we use to glue in a windscreen",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:automotive",
+    "c:industry/transportation",
+    "c:transportation"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v004"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "panel bonding adhesive for a ute canopy",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:automotive",
+    "c:industry/transportation",
+    "c:transportation"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v005"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "primer for windscreen bonding",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:automotive",
+    "c:industry/transportation",
+    "c:transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v006"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "cleaner for activating a surface before bonding",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:automotive",
+    "c:industry/transportation",
+    "c:transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v007"
+ },
+ {
+  "persona": "builder",
+  "category": "transport",
+  "q": "adhesive for a caravan roof panel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:automotive",
+    "c:industry/transportation",
+    "c:transportation"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v008"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "roofing",
+  "q": "what do i use to waterproof a metal deck roof, 400 square metres",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v009"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "roofing",
+  "q": "pvc membrane for a commercial roof, mechanically fixed",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v010"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "roofing",
+  "q": "walkway pads for a pvc roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v011"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "roofing",
+  "q": "pipe flashings for a pvc membrane roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v012"
+ },
+ {
+  "persona": "builder",
+  "category": "landscape",
+  "q": "pedestals to lift pavers on a terrace",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v013"
+ },
+ {
+  "persona": "builder",
+  "category": "landscape",
+  "q": "green wall panels",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v014"
+ },
+ {
+  "persona": "builder",
+  "category": "landscape",
+  "q": "drainage for behind a retaining wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v015"
+ },
+ {
+  "persona": "builder",
+  "category": "landscape",
+  "q": "stabilise a grass car park so it takes cars",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v016"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "resin anchor in hollow brick",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v017"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "grout for wind turbine foundations",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v018"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "epoxy grout under a crane rail",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v019"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthening",
+  "q": "carbon fibre plate to strengthen a slab in bending",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v020"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthening",
+  "q": "wrap a column with carbon fibre fabric",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v021"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthening",
+  "q": "epoxy to bond carbodur plates",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v022"
+ },
+ {
+  "persona": "builder",
+  "category": "resin",
+  "q": "chemical resistant floor coating for a battery room",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v023"
+ },
+ {
+  "persona": "builder",
+  "category": "resin",
+  "q": "conductive floor for an electronics clean room",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v024"
+ },
+ {
+  "persona": "builder",
+  "category": "resin",
+  "q": "decorative flake floor for a showroom",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v025"
+ },
+ {
+  "persona": "builder",
+  "category": "resin",
+  "q": "pu floor with uv stability for outdoors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v026"
+ },
+ {
+  "persona": "builder",
+  "category": "resin",
+  "q": "primer for epoxy floor on damp concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring",
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v027"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what stops a mix bleeding",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v028"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "admixture for self compacting concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v029"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "fibres for shotcrete in a tunnel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v030"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "cement grinding aid",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v031"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "concrete corrosion inhibitor for a marine pier",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v032"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "anodes for repairing a corroding balcony slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v033"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "coating to stop carbonation on a facade",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v034"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "water repellent silane for a bridge deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v035"
+ },
+ {
+  "persona": "builder",
+  "category": "prep",
+  "q": "can i level over a painted concrete floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v036"
+ },
+ {
+  "persona": "builder",
+  "category": "prep",
+  "q": "primer for leveller on old tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v037"
+ },
+ {
+  "persona": "tiler",
+  "category": "prep",
+  "q": "can i tile straight onto fresh render",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v038"
+ },
+ {
+  "persona": "tiler",
+  "category": "prep",
+  "q": "how long before i can tile over a new concrete slab",
+  "type": "oos",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v039"
+ },
+ {
+  "persona": "builder",
+  "category": "weather",
+  "q": "pouring a leveller in winter, any limits",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v040"
+ },
+ {
+  "persona": "tiler",
+  "category": "weather",
+  "q": "tiling outside in 40 degree heat what adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v041"
+ },
+ {
+  "persona": "builder",
+  "category": "weather",
+  "q": "sealant that cures in the cold",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v042"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "docs",
+  "q": "send me the data sheet for the carbodur s",
+  "type": "doc",
+  "exp": {
+   "product": "sika-carbodur-s"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v043"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "docs",
+  "q": "sds sikafloor 264",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-264"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v044"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "docs",
+  "q": "is there a pds for sika anchorfix 3030",
+  "type": "doc",
+  "exp": {
+   "product": "sika-anchorfix-3030"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v045"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "docs",
+  "q": "sikagrout 212 data sheet",
+  "type": "doc",
+  "exp": {
+   "product": "sikagrout-212-hpau"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v046"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "docs",
+  "q": "viscocrete 20 he safety data sheet",
+  "type": "doc",
+  "exp": {
+   "product": "sika-viscocrete-20he"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v047"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "how long until sikafloor 264 can take foot traffic",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-264"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v048"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "recoat window for sikafloor 161",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-161"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v049"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "pot life of sikadur 30",
+  "type": "time",
+  "exp": {
+   "product": "sikadur-30"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v050"
+ },
+ {
+  "persona": "builder",
+  "category": "rate",
+  "q": "how much primer per square metre sikafloor 161",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-161"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v051"
+ },
+ {
+  "persona": "builder",
+  "category": "rate",
+  "q": "coverage of sikalastic 851",
+  "type": "rate",
+  "exp": {
+   "product": "sikalastic-851"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v052"
+ },
+ {
+  "persona": "builder",
+  "category": "rate",
+  "q": "how many litres of sikafloor 264 for 60 m2",
+  "type": "calc",
+  "exp": {
+   "product": "sikafloor-264"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v053"
+ },
+ {
+  "persona": "builder",
+  "category": "rate",
+  "q": "how much sikadur 32 lp for 10 m2",
+  "type": "calc",
+  "exp": {
+   "product": "sikadur-32-lp"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v054"
+ },
+ {
+  "persona": "specifier",
+  "category": "compare",
+  "q": "sikadur 30 or sikadur 31 for bonding plates",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikadur-30",
+    "sikadur-31-cf-normal"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v055"
+ },
+ {
+  "persona": "specifier",
+  "category": "compare",
+  "q": "sikalastic 851 versus sikalastic 8902",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikalastic-851",
+    "sikalastic-8902"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v056"
+ },
+ {
+  "persona": "specifier",
+  "category": "compare",
+  "q": "difference between level top and level ultra",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikafloor-level-top",
+    "sikafloor-level-ultra"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v057"
+ },
+ {
+  "persona": "specifier",
+  "category": "compare",
+  "q": "sikaflex pro 3 vs sikaflex pro",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikaflex-pro-3-purform",
+    "4649"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v058"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "service temperature of sikadur 30",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-30",
+   "label": "temperature"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v059"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "what is the shore hardness of sikaflex pro 3",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-3-purform",
+   "label": "hardness"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v060"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "movement capability of sikaflex pro",
+  "type": "attr",
+  "exp": {
+   "product": "4649",
+   "label": "movement"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v061"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "chemical resistance of sikafloor 264",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-264",
+   "label": "chemical"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v062"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "compressive strength of sikagrout gp",
+  "type": "attr",
+  "exp": {
+   "product": "sikagrout-gp-au",
+   "label": "compressive"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v063"
+ },
+ {
+  "persona": "distributor",
+  "category": "attr",
+  "q": "what does a pail of sikafloor 161 weigh",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-161",
+   "label": "packag"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v064"
+ },
+ {
+  "persona": "distributor",
+  "category": "attr",
+  "q": "shelf life of viscocrete 10",
+  "type": "attr",
+  "exp": {
+   "product": "sika-viscocrete-10",
+   "label": "shelf life"
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v065"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what silicone for the kitchen sink and what for the shower",
+  "type": "vague",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v066"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "i want to tile my outdoor kitchen",
+  "type": "vague",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v067"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "garden path pavers keep moving what can i use to hold them",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts",
+    "c:sealants-adhesives",
+    "c:concrete",
+    "c:grouts-anchoring",
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v068"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "fix a hole in a concrete step",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v069"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what do tradies use on cracked grout lines",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "slang",
+  "split": "wild2",
+  "id": "v070"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "my concrete floor is dusty",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:concrete"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v071"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "hi do you do something to waterproof a small fish pond",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild2",
+  "id": "v072"
+ }
+]
