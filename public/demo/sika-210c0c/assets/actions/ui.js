@@ -41,6 +41,8 @@ function valueNode(r) {
   return kids;
 }
 // Key and value lists, not <table>: rows are statements with a source each, and a definition list reads well on a phone. (Also keeps the portal's own tables, such as the rule ledger, the only tables on a page.)
+// A compact summary list (one line per product): used for the system card steps and quantities so the chat answer stays short.
+const sumList = (rows) => h('ul', { class: 'sumlist' }, rows.map((r) => h('li', null, ...(r.productId ? [h('a', { href: '#/product/' + encodeURIComponent(r.productId), class: 'link', onclick: () => onNavigate() }, r.label), ': '] : [h('strong', null, r.label), ': ']), r.value, r.source && r.source.url ? [' ', extLink(r.source.url, '(source)')] : null)));
 const rowsTable = (rows, cls = '') => h('dl', { class: 'kv ' + cls }, rows.map((r) => [h('dt', { class: r.verdict ? 'v-' + r.verdict : null }, r.label), h('dd', { class: r.verdict ? 'v-' + r.verdict : null }, ...valueNode(r))]));
 
 /** Build the DOM of one card. `act` = { send, memory, session } for buttons. */
@@ -61,14 +63,14 @@ export function renderCard(c, act) {
   if (c.table) root.append(h('div', { class: 'cmp', role: 'table', 'aria-label': c.title },
     h('div', { class: 'cmp-row cmp-head', role: 'row' }, c.table.head.map((x) => h('div', { role: 'columnheader' }, x))),
     c.table.rows.map((r) => h('div', { class: 'cmp-row', role: 'row' }, h('div', { role: 'rowheader', class: 'cmp-label' }, r.label), r.cells.map((cell) => h('div', { role: 'cell' }, ...valueNode(cell)))))));
-  for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
+  for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), s.compact ? sumList(s.rows) : rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
   (c.notes || []).forEach((n) => root.append(h('p', { class: 'cite' }, n)));
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
   if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, 'Copy the clause')); }
   if (c.handoffBlock) root.append(renderHandoff(c.handoffBlock));
   if (c.kind !== 'clarify' && c.kind !== 'help' && c.kind !== 'memory') {
     const seen = new Set(); const all = [...(c.rows || []), ...((c.sections || []).flatMap((s) => [...(s.rows || []), ...(s.more || [])])), ...((c.table && c.table.rows) || []).flatMap((r) => r.cells)].filter((r) => r.source && r.source.url && !seen.has(r.source.url.split('#')[0]) && seen.add(r.source.url.split('#')[0])).slice(0, 6);
-    root.append(h('div', { class: 'cite' }, h('strong', null, 'Sources'), all.length ? h('ol', null, all.map((r) => h('li', null, extLink(r.source.url, r.source.label, 'link')))) : null, h('div', null, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger'))));
+    root.append(h('div', { class: 'cite' }, all.length ? h('details', { class: 'srcs' }, h('summary', null, 'Sources'), h('ol', null, all.map((r) => h('li', null, extLink(r.source.url, r.source.label, 'link'))))) : h('strong', null, 'Sources'), h('div', null, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger'))));
   }
   if (c.notice) root.append(h('p', { class: 'cite notice-local' }, c.notice));
   if (c.importBox) {

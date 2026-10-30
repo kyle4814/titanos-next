@@ -111,10 +111,13 @@ def main():
     print(table(rows))
     total = sum(r['products'] for r in rows)
     fails = []
+    # the lane also holds 'documents-only' records (a data sheet with no product page, id doc-...): the portal lists only products that have a page,
+    # so the totals are compared on the lane's listed_on_site records (changed 2026-10-30 19:1x when the lane's pass 13 added 130 documents-only records)
     lane_total = rates_doc.get('counts', {}).get('products')
-    print(f"\nproducts in portal data {len(products)}; in the knowledge lane's rates {len(rates)} (lane count {lane_total}); table total {total}")
-    if not (total == len(products) == len(rates) == lane_total):
-        fails.append(f'product totals differ: table {total}, portal {len(products)}, rates {len(rates)}, lane {lane_total}')
+    listed = [k for k, v in rates.items() if v.get('listed_on_site')]
+    print(f"\nproducts in portal data {len(products)}; in the knowledge lane's rates {len(rates)} of which listed on the site {len(listed)} (lane count {lane_total}); table total {total}")
+    if not (total == len(products) == len(listed)) or len(rates) != lane_total:
+        fails.append(f'product totals differ: table {total}, portal {len(products)}, rates listed {len(listed)} of {len(rates)}, lane {lane_total}')
     # mutation test: one verified product set to 'not published' in a COPY; exactly one verified count and one complete count fall by one
     if check:
         tmp = tempfile.mkdtemp(prefix='ccmut-')

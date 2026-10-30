@@ -55,6 +55,12 @@ check('route: no false calc without a size', route('how much does it weigh') ===
 check('parse: m2 symbol', parseNumbers('20 m²').area === 20);
 check('parse: litres are not metres', parseNumbers('5 mm thick over 20 m2').area === 20 && parseNumbers('5 mm thick over 20 m2').length === undefined);
 check('parse: facets', JSON.stringify(parseFacets('natural stone onto plasterboard in a shower')) === JSON.stringify({ tile: 'natural_stone', substrate: 'plasterboard', io: 'wet' }));
+// plain English compare must work in every phrasing
+for (const q of ['compare Davco Grey One Pot and Davco Ultraflex', 'Davco Grey One Pot versus Davco Ultraflex', 'Davco Grey One Pot vs Davco Ultraflex', 'what is the difference between Davco Grey One Pot and Davco Ultraflex', 'compare Davco Easy Grout and SikaCeram-690 Elite', '/compare Davco Grey One Pot adhesive vs Davco Ultraflex', 'Davco Easy Grout vs SikaCeram-690 Elite side by side']) {
+  const A = makeAssistant(); const r = await ask(A, q);
+  check(`compare phrasing: ${q}`, r.handled && r.card.kind === 'compare' && r.card.table.head.length === 3, r.handled ? r.card.kind : 'v1');
+  if (r.handled && r.card.kind === 'compare') check(`compare names both: ${q}`, r.card.table.head.slice(1).every((x) => x.length > 3) && r.card.table.head[1] !== r.card.table.head[2]);
+}
 // brain adapter
 {
   const A = makeAssistant();

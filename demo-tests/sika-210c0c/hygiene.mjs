@@ -27,7 +27,7 @@ const bad = (file, line, rule, detail) => problems.push({ file: path.relative(pa
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.name === 'node_modules' || e.name === '.git' ? [] : e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
 // apply/speed: assets/dist holds generated bundles of the source modules below it. It IS scanned (competitor names, external URLs, analytics, AI-tell words,
 // emoji, placeholders); only the dash scan (swc writes escapes as literal characters) and the per-module size budget skip it, because the sources are scanned and budgeted.
-const GENERATED = /[\\/]dist[\\/]/;
+const GENERATED = /[\\/]dist[\\/]/; // dist/ holds the speed build's bundles (it moved out of assets/): scanned for everything except dashes and the per-module size budget
 const files = [...walk(PORTAL), ...(fs.existsSync(ASSIST) ? walk(ASSIST) : [])];
 const ext = (f) => path.extname(f).toLowerCase();
 const CODE = new Set(['.js', '.mjs', '.html', '.css']);
@@ -101,7 +101,11 @@ const need = [['noindex meta', /<meta name="robots" content="[^"]*noindex[^"]*no
   ['referrer no-referrer meta', /<meta name="referrer" content="no-referrer"/i]];
 for (const [n, re] of need) if (!re.test(idx)) bad(path.join(PORTAL, 'index.html'), 0, 'posture missing', n);
 let cfg = {}; try { cfg = JSON.parse(fs.readFileSync(path.join(PORTAL, 'data/config.json'), 'utf8')); } catch { bad(path.join(PORTAL, 'data/config.json'), 0, 'config unreadable', ''); }
-for (const k of ['ribbon', 'notice', 'preparedFor', 'builtInHours']) if (!cfg.demo || !String(cfg.demo[k] || '').trim()) bad(path.join(PORTAL, 'data/config.json'), 0, 'demo config empty', k);
+// the by-line comes from the one switch demo.variant (demo.variants[variant]: by, ribbon), so resolve it the way data.js does; EVERY variant must be complete, not only the active one
+const dv = (cfg.demo && cfg.demo.variants) || {}; const active = dv[cfg.demo && cfg.demo.variant] || {};
+for (const k of ['notice', 'preparedFor', 'builtInHours']) if (!cfg.demo || !String(cfg.demo[k] || '').trim()) bad(path.join(PORTAL, 'data/config.json'), 0, 'demo config empty', k);
+for (const k of ['ribbon', 'by']) if (!String(active[k] || (cfg.demo || {})[k] || '').trim()) bad(path.join(PORTAL, 'data/config.json'), 0, 'demo config empty', 'variant ' + (cfg.demo && cfg.demo.variant) + ' ' + k);
+for (const [vn, v] of Object.entries(dv)) for (const k of ['by', 'ribbon']) if (!String(v[k] || '').trim()) bad(path.join(PORTAL, 'data/config.json'), 0, 'demo variant incomplete', vn + ' ' + k);
 const chrome = fs.readFileSync(path.join(PORTAL, 'assets/lib/chrome.js'), 'utf8');
 if (!/cfg\.demo\.ribbon/.test(chrome) || !/d\.notice/.test(chrome)) bad(path.join(PORTAL, 'assets/lib/chrome.js'), 0, 'posture missing', 'ribbon or notice is not rendered');
 if (/\bset-cookie\b|document\.cookie/i.test(chrome)) bad(path.join(PORTAL, 'assets/lib/chrome.js'), 0, 'cookie', 'chrome');
