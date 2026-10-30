@@ -82,6 +82,18 @@ for (const [W, H, label] of [[1440, 900, 'desktop'], [390, 844, 'touch']]) {
   await ctx.close();
 }
 
+// a plain v2 advisor answer that names a product: an add chip, and "add 3 bags" then applies to that product
+{
+  const { ctx, page, errs } = await open(1440, 900); await openPanel(page);
+  await send(page, 'which primer for concrete'); const chips = lastCard(page).locator('[data-cart-add]');
+  t('advisor answer naming a product carries an add chip', (await chips.count()) >= 1, await lastCard(page).innerText());
+  if (await chips.count()) {
+    const label = await chips.first().innerText(); await chips.first().click(); await page.waitForFunction(() => /Added to my project/i.test(document.querySelector('#assistant')?.textContent || ''), null, { timeout: 15000 });
+    t('the chip adds that product (1 pack, not worked out yet)', /Added/i.test(await lastCard(page).innerText()) && /1 pack/.test(await lastCard(page).innerText()) && label.replace(/^Add | to my project$/g, '').length > 3, await lastCard(page).innerText());
+    await send(page, 'add 3 bags'); t('"add 3 bags" then sets the quantity on that product', /3 bags/.test(await lastCard(page).innerText()) && /Changed/i.test(await lastCard(page).innerText()), await lastCard(page).innerText());
+  }
+  t('add chip: no console errors', errs.length === 0, errs.join(' | ')); await ctx.close();
+}
 // the system: add the whole set from the chat button
 {
   const { ctx, page, errs } = await open(1440, 900); await openPanel(page);

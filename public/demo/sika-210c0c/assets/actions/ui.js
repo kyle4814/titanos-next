@@ -197,6 +197,6 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
       return { node, outcome: oc };
     },
     observeV1(text, answer, outcome) { if (outcome === 'NOT_IN_PUBLISHED_DATA' && text && !text.startsWith('/')) memory.addGap(text); memory.rememberQuestion(text, 'ask'); },
-    observeBrain(answer) { observeBrainAnswer(session, answer); brainAddButtons(log, answer, send); },
+    observeBrain(answer) { const raw = (answer && answer.brain) || answer; /* the panel hands over the adapted answer; the brain's own answer (with its cards) is inside it */ session.cartFocus = null; observeBrainAnswer(session, raw); brainAddButtons(log, raw, send); },
   };
 }

@@ -63,6 +63,7 @@ async function lastProducts(ctx) {
   const { session } = ctx; const last = session.last; const out = [];
   if (last && (last.action === 'system' || last.action === 'pack') && session.system) {
     for (const ids of Object.values(session.system.steps || {})) { const id = (ids || [])[0]; if (id && !out.some((o) => o.id === id)) out.push({ id, name: await nameOf(ctx, id), calc: session.calcs[id] || null, system: session.system }); }
+  } else if (session.cartFocus && ctx.memory && ctx.memory.getItem(session.cartFocus)) { const it = ctx.memory.getItem(session.cartFocus); out.push({ id: it.id, name: it.name || (await nameOf(ctx, it.id)), calc: session.calcs[it.id] || null, system: null }); // the product just added or changed is what "it" and a bare quantity mean
   } else if (session.product) out.push({ id: session.product.id, name: session.product.name, calc: session.calcs[session.product.id] || null, system: null });
   return out;
 }
@@ -226,7 +227,7 @@ export async function cartAfterSave(ctx, c) {
 
 /** An add button on an answer that names products or a quantity (the button fires the ordinary /add command). */
 export function cartButtons(c, session, memory, text) {
-  if (c && c.action !== 'memory' && c.kind !== 'clarify' && text) session.answerQuestion = String(text); // the question the cart line will remember as its source
+  if (c && c.action !== 'memory' && c.kind !== 'clarify' && text) { session.answerQuestion = String(text); session.cartFocus = null; } // a new answer: the question the cart line will remember, and "it" means that answer again
   if (!memory || !c || c.status === 'unknown' || c.kind === 'clarify') return;
   const have = (b) => (c.buttons || []).some((x) => x.command === '/add');
   if (have()) return;
