@@ -6,7 +6,7 @@ import { pickSds, safetyRows } from '../assistant/apply.js';
 import { supplyClause, referencesLines, DRAFT_LABEL, STANDARDS_NOTE } from '../assistant/clause.js';
 import { buildHandoff, uncoveredTerms } from '../assistant/handoff.js';
 import { specText, FLAG as MISPRINT_FLAG } from '../lib/specs.js';
-import { page, srcLabel, srcOf, range, ENV_LABEL, SUBSTRATE_LABEL, TILE_LABEL, handoffBtn, afterBtns, pickProduct, noteProduct, askProduct, jobText, cap } from './shared.js';
+import { selectionLines, silentReason, dedupeWords, page, srcLabel, srcOf, range, ENV_LABEL, SUBSTRATE_LABEL, TILE_LABEL, handoffBtn, afterBtns, pickProduct, noteProduct, askProduct, jobText, cap } from './shared.js';
 /* ---------------------------------------------------------------- COMPAT */
 const TAGMAP = { // our facet -> compatibility tags in that dimension
   substrate: (v) => ['substrate:' + v],
@@ -86,7 +86,7 @@ export async function compat(ctx) {
       }
     }
   }
-  c.silentWords = [...new Set([...(c.silent || []), ...silent])]; delete c.silent;
+  c.silentWords = dedupeWords([...(c.silent || []), ...silent]); delete c.silent;
   return c;
 }
 /* ---------------------------------------------------------------- SAFETY */
@@ -262,9 +262,8 @@ export async function link(ctx) {
 export async function handoff(ctx) {
   const { session } = ctx;
   const products = (session.products || []).slice(0, 3).map((x) => ({ id: x.id, name: x.name }));
-  const sel = Object.entries(session.facets).filter(([, v]) => v != null && v !== '' && !Array.isArray(v)).map(([k, v]) => `${k}: ${v}`);
-  if (session.system) sel.push(`system: ${session.system.title}`);
-  const b = buildHandoff({ query: session.lastQuestion || ctx.text, products, sel, reason: session.last && session.last.silentWords && session.last.silentWords.length ? `The published text I quoted does not mention: ${session.last.silentWords.join(', ')}.` : 'You asked to speak to Technical Services. The context so far is included.', config: ctx.config });
+  const sel = selectionLines(session);
+  const b = buildHandoff({ query: session.lastQuestion || ctx.text, products, sel, reason: (session.last && silentReason(session.last.silentWords)) || 'You asked to speak to Technical Services. The context so far is included.', config: ctx.config });
   const c = card('handoff', 'handoff', 'Ask Technical Services', { estimate: false, handoffBlock: b });
   return c;
 }

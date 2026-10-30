@@ -33,3 +33,20 @@ export const askProduct = (action, what) => clarifyCard(action, `Which product $
 
 export const jobText = (f) => [f.area ? `${fmt(f.area)} m2` : null, f.length ? `${fmt(f.length)} m` : null, f.volume ? `${fmt(f.volume)} m3` : null, f.thickness ? `${fmt(f.thickness)} mm thick` : null, f.coats ? `${fmt(f.coats)} coats` : null, f.cementitious ? `${fmt(f.cementitious)} kg cementitious` : null, f.notch ? `${fmt(f.notch)} mm notch` : null, f.tileSize ? `${fmt(f.tileSize[0])} x ${fmt(f.tileSize[1])} mm tiles` : null, f.csp ? `CSP ${f.csp}` : null, f.dilution || null, f.allowance != null ? `${fmt(f.allowance)}% allowance (yours)` : null].filter(Boolean).join(', ') || 'No size given';
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Plain labels for the facets collected so far (never raw ids such as underfloor_heating). */
+export function selectionLines(session) {
+  const f = session.facets || {}; const out = [];
+  if (f.tile && TILE_LABEL[f.tile]) out.push(`Tiles: ${TILE_LABEL[f.tile]}`);
+  if (f.substrate && SUBSTRATE_LABEL[f.substrate]) out.push(`Surface or condition: ${SUBSTRATE_LABEL[f.substrate]}`);
+  if (f.io) out.push(`Place: ${({ internal: 'internal, dry area', wet: 'wet area', external: 'external', pool: 'pool or submerged' })[f.io] || f.io}${f.surface ? ' ' + f.surface : ''}`);
+  if (f.area) out.push(`Area: ${fmt(f.area)} m2`);
+  if (session.system) out.push(`System: ${session.system.title}`);
+  return out;
+}
+/** One sentence naming what the quoted text does not mention; words already inside a longer one are dropped. */
+export const dedupeWords = (words) => [...new Set(words || [])].filter((x, _, a) => !a.some((y) => y !== x && y.length > x.length && y.toLowerCase().includes(x.toLowerCase().slice(0, Math.max(4, x.length - 3)))));
+export function silentReason(words) {
+  const w = dedupeWords(words);
+  return w.length ? `The published text I quoted does not mention ${w.join(', ')}.` : null;
+}

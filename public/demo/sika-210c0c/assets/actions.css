@@ -48,3 +48,13 @@
 
 .action-card details.more{margin:.3rem 0}
 .action-card details.more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--grey-dark);font-size:.88rem}
+.action-card details.srcs>summary{cursor:pointer;min-height:36px;display:flex;align-items:center;font-weight:600}
+.action-card .m-title.sec{margin-top:.5rem}
+.action-card .sumlist{list-style:none;margin:.3rem 0;padding:0;background:#fff;border:1px solid var(--grey);font-size:.88rem}
+.action-card .sumlist li{padding:.3rem .5rem;border-top:1px solid var(--grey-light);overflow-wrap:anywhere}
+.action-card .sumlist li:first-child{border-top:0}
+.action-card .sumlist li{padding:.2rem .5rem;line-height:1.3}
+.action-card .m-title.sec{margin-top:.3rem}
+.action-card details.more>summary{min-height:32px}
+.action-card details.srcs>summary{min-height:30px}
+.action-card .cite{padding-top:.25rem}

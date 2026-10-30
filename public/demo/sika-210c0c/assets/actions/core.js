@@ -109,14 +109,14 @@ export async function findProducts(data, text, max = 3) {
 /** Products in order of appearance in the text (used for "A vs B"). */
 export async function findProductsInOrder(data, text, max = 4) {
   const hs = await findProducts(data, text, max + 4);
-  const strong = hs.filter((h) => h.score >= 1000 || h.score >= (hs[0] ? hs[0].score * 0.8 : 0));
+  const strong = hs; // every hit already passed the name test; hits that start at the same place are reduced to the best one below
   const picked = [];
   for (const h of strong) {
     // skip a product whose name is a prefix of an already picked longer name at the same position
     if (picked.some((p) => p.at === h.at && p.score >= h.score)) continue;
     picked.push(h);
   }
-  return picked.sort((a, b) => a.at - b.at).slice(0, max);
+  return picked.sort((a, b) => b.score - a.score).slice(0, max).sort((a, b) => a.at - b.at);
 }
 
 /** Card builder helpers. A row is { label, value, source?, input?, derived? }; a source is { url, label, sentence }. */
