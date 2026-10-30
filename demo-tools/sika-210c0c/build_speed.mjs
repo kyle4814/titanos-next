@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { splitData } from './split_data.mjs';
 
@@ -46,25 +47,35 @@ async function load(id) {
 await load('app.js');
 const reach = (roots) => { const seen = new Set(); const st = [...roots]; while (st.length) { const i = st.pop(); if (seen.has(i)) continue; seen.add(i); for (const d of mods.get(i).deps) st.push(d); } return seen; };
 const mainSet = reach(['app.js']);
-const lazyRoots = new Set(); for (const i of mainSet) for (const d of mods.get(i).dyn) if (!mainSet.has(d)) lazyRoots.add(d);
-const lazySet = reach(lazyRoots); for (const i of mainSet) lazySet.delete(i);
-// a module loaded dynamically from the lazy chunk may itself be in main: fine. Anything dynamic from lazy modules must be in main or lazy.
-for (const i of lazySet) for (const d of mods.get(i).dyn) if (!mainSet.has(d) && !lazySet.has(d)) throw new Error('dynamic target outside both chunks: ' + d);
+// Lazy chunks by who needs them: every dynamic import target is a root; a module reachable from a set of roots goes in the chunk for exactly that set,
+// so nothing is fetched for a feature that is not used (the v1 engine is not downloaded when the v2 brain answers, and the reverse).
+const lazyRoots = new Set(); const lazyAll = new Set();
+for (let grew = true; grew;) { grew = false; for (const i of [...mainSet, ...lazyAll]) for (const d of mods.get(i).dyn) if (!mainSet.has(d) && !lazyRoots.has(d)) { lazyRoots.add(d); for (const m of reach([d])) if (!mainSet.has(m)) lazyAll.add(m); grew = true; } }
+// features: the v2 brain, the v1 engine, the actions, and the published-data panels (rates, times, clauses) used by the product and sheet pages
+const FEATURE = (id) => (id.startsWith('brain/') ? 'brain' : id === 'assistant/engine.js' ? 'engine' : id.startsWith('actions/') ? 'actions' : 'panels');
+const sig = new Map(); for (const r of [...lazyRoots].sort()) for (const m of reach([r])) if (!mainSet.has(m)) { const f = FEATURE(r); const cur = sig.get(m) || []; if (!cur.includes(f)) sig.set(m, [...cur, f].sort()); }
+const chunkOf = new Map(); // signature -> { name, ids }
+for (const [m, roots] of sig) { const key = roots.join('|'); if (!chunkOf.has(key)) chunkOf.set(key, { roots, ids: new Set(), name: roots.join('-') }); chunkOf.get(key).ids.add(m); }
 const wrap = (ids) => [...ids].sort().map((id) => `${JSON.stringify(id)}:function(exports,__r,__l){${mods.get(id).code}\n}`).join(',\n');
-const runtime = `const R=globalThis.__sk||(globalThis.__sk={m:{},c:{},p:{}});
+const kmap = {}; for (const r of lazyRoots) kmap[r] = [...chunkOf.values()].filter((c) => c.roots.includes(FEATURE(r))).map((c) => c.name);
+const runtime = `const R=globalThis.__sk||(globalThis.__sk={m:{},c:{},p:{},k:{}});
 const __r=(id)=>{let c=R.c[id];if(c)return c.exports;const f=R.m[id];if(!f)throw new Error('module not loaded: '+id);c=R.c[id]={exports:{}};f(c.exports,__r,__l);return c.exports};
-const __l=(id)=>R.m[id]?Promise.resolve(__r(id)):(R.p.lazy||(R.p.lazy=import(new URL('lazy.js',import.meta.url).href))).then(()=>__r(id));
+const __c=(n)=>R.p[n]||(R.p[n]=import(new URL(n+'.js',import.meta.url).href));
+const __l=(id)=>R.m[id]?Promise.resolve(__r(id)):Promise.all((R.k[id]||[]).map(__c)).then(()=>__r(id));
+Object.assign(R.k,${JSON.stringify(kmap)});
 `;
 const minify = async (code) => (await swc.minify(Buffer.from(code), Buffer.from(JSON.stringify({ compress: true, mangle: true, module: true })))).code;
 const mainSrc = runtime + `Object.assign(R.m,{\n${wrap(mainSet)}\n});\n__r("app.js");\n`;
-const lazySrc = `const R=globalThis.__sk||(globalThis.__sk={m:{},c:{},p:{}});\nObject.assign(R.m,{\n${wrap(lazySet)}\n});\n`;
-const mainMin = await minify(mainSrc), lazyMin = await minify(lazySrc);
-// dist/ sits OUTSIDE assets/ on purpose: the offline cache lists every file under assets/, and the bundles would add 0.4 MB to it. Offline, the boot loader
-// (assets/boot.js, cached) falls back to the readable modules, which are cached.
-fs.rmSync(path.join(A, 'dist'), { recursive: true, force: true });
-wr(path.join(PORTAL, 'dist', 'main.js'), mainMin); wr(path.join(PORTAL, 'dist', 'lazy.js'), lazyMin);
-wr(path.join(A, 'boot.js'), "// Boot loader: the bundled build when it can be fetched, the readable modules otherwise (offline, or a host without dist/).\nimport('../dist/main.js').catch(() => import('./app.js'));\n");
-console.log(`dist/main.js ${mainMin.length} B (${mainSet.size} modules), dist/lazy.js ${lazyMin.length} B (${lazySet.size} modules)`);
+const chunkSrc = (set) => `const R=globalThis.__sk;\nObject.assign(R.m,{\n${wrap(set)}\n});\n`;
+const mainMin = await minify(mainSrc);
+fs.rmSync(path.join(A, 'dist'), { recursive: true, force: true }); fs.rmSync(path.join(PORTAL, 'dist'), { recursive: true, force: true });
+// dist/ sits OUTSIDE assets/ on purpose: the offline cache lists every file under assets/, and the bundles would add 0.4 MB to it. Offline, the inline boot
+// script in index.html (hashed into the CSP) loads the readable modules instead, which are cached.
+wr(path.join(PORTAL, 'dist', 'main.js'), mainMin);
+const sizes = [];
+for (const c of chunkOf.values()) { const code = await minify(`const R=globalThis.__sk;\nObject.assign(R.m,{\n${wrap(c.ids)}\n});\n`); wr(path.join(PORTAL, 'dist', c.name + '.js'), code); sizes.push(`${c.name} ${code.length} B (${c.ids.size} modules; ${c.roots.join(', ')})`); }
+fs.rmSync(path.join(A, 'boot.js'), { force: true });
+console.log(`dist/main.js ${mainMin.length} B (${mainSet.size} modules)`); sizes.forEach((x) => console.log('dist/' + x));
 
 // ---------- 2. CSS ----------
 const css = (f) => lcss.transform({ filename: f, code: Buffer.from(rd(path.join(A, f))), minify: true }).code.toString();
@@ -86,8 +97,12 @@ function put(html, name, body, anchor) {
 {
   const f = path.join(PORTAL, 'index.html'); let html = rd(f);
   html = html.replace(/<link rel="preload" href="assets\/fonts[^>]*>\n?/, '').replace(/<link rel="stylesheet" href="assets\/(portal|finder)\.css">\n?/g, '');
-  html = put(html, 'head', `<link rel="modulepreload" href="dist/main.js"><link rel="modulepreload" href="assets/boot.js"><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/cats.lite.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
-  html = html.replace(/<script type="module" src="[^"]*"><\/script>/, '<script type="module" src="assets/boot.js"></script>');
+  // Inline boot script: the bundle when online, the readable modules when offline or if the bundle cannot be fetched. It is hashed into the CSP.
+  const BOOT = "(function(){var d=document;function f(){var t=d.createElement('script');t.type='module';t.src='assets/app.js';d.head.appendChild(t)}if(navigator.onLine===false){f();return}var s=d.createElement('script');s.type='module';s.src='dist/main.js';s.onerror=f;d.head.appendChild(s)})();";
+  const hash = 'sha256-' + crypto.createHash('sha256').update(BOOT).digest('base64');
+  html = put(html, 'head', `<script>${BOOT}</script><link rel="preload" href="data/config.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="data/cats.lite.json" as="fetch" crossorigin="anonymous"><style>${inlineCss}</style>`, '</head>');
+  html = html.replace(/ ?<script type="module" src="[^"]*"><\/script>\n?/, '\n');
+  html = html.replace(/script-src 'self'(?: 'sha256-[^']*')?/, `script-src 'self' '${hash}'`);
   wr(f, html);
 }
 // ---------- fonts.css ----------

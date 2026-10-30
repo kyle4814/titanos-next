@@ -26,7 +26,7 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
     let txt = await a1.evaluate((e) => e.textContent);
     t(`${sz} calculation answer shows 3 x 10 L, the source sentence and the estimate wording`, /3 x 10 L/i.test(txt) && /cover approximately 7\.5m2/i.test(txt) && /Estimate only, not an offer/i.test(txt), txt.slice(0, 200));
     t(`${sz} status chip present`, (await a1.locator('.chip-status').count()) >= 1);
-    t(`${sz} brain card rendered, v1 engine not requested`, (await a1.locator('[data-card="calculation"]').count()) === 1 && !ctx.reqs.some((u) => /assistant\/engine\.js/.test(u)), ctx.reqs.filter((u) => /brain|engine/.test(u)).map((u) => u.split('/').slice(-2).join('/')).join(' '));
+    t(`${sz} brain card rendered, v1 engine not requested`, (await a1.locator('[data-card="calculation"]').count()) === 1 && !ctx.reqs.some((u) => /assistant\/engine\.js|dist\/engine\.js/.test(u)), ctx.reqs.filter((u) => /brain|engine/.test(u)).map((u) => u.split('/').slice(-2).join('/')).join(' '));
     const a2 = await ask(page, 'Can I use Davco Grey One Pot over my old tiles?'); txt = await a2.innerText();
     t(`${sz} old tiles answer says No with the data sheet sentence`, /^No\./m.test(txt) && /not suitable for tiling over concrete, waterproofing membranes or existing ceramic tiles/.test(txt), txt.slice(0, 160));
     const a3 = await ask(page, 'Can I tile over a heated floor?'); txt = await a3.innerText();
@@ -81,7 +81,7 @@ for (const [W, H] of [[390, 844], [1366, 768]]) await session(W, H, '', async (p
 // v1 stays behind the flag
 await session(1366, 768, '?brain=0', async (page, ctx) => {
   await page.locator('button:visible:has-text("Advisor")').first().click(); const a = await ask(page, 'What is the coverage of Davco Grey One Pot adhesive?');
-  t('flag ?brain=0: v1 engine answers and the brain is not requested', (await a.innerText()).length > 20 && ctx.reqs.some((u) => /assistant\/engine\.js/.test(u)) && !ctx.reqs.some((u) => /data\/brain\/core/.test(u)));
+  t('flag ?brain=0: v1 engine answers and the brain is not requested', (await a.innerText()).length > 20 && ctx.reqs.some((u) => /assistant\/engine\.js|dist\/engine\.js/.test(u)) && !ctx.reqs.some((u) => /data\/brain\/core/.test(u)));
 });
 // a missing shard falls back to v1
 {
