@@ -3,6 +3,9 @@
 import { h, icon, esc, $, announce, hashHref, focusSoon } from './util.js';
 import { data, derived, documents, docOk, docHref } from './data.js';
 import { typeLabel } from './views2.js';
+import { renderHandoff } from './handoff-ui.js';
+import { insights } from './insights.js';
+import { outcomeOf } from './insights-core.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { estimateNote } from './terms.js';
 
@@ -30,6 +33,7 @@ function renderBlock(b) {
       h('p', { class: 'estimate-note' }, estimateNote(cfg)));
     case 'ask': return h('div', null, para(b.question), b.options ? h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))) : null);
     case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
+    case 'handoff': return renderHandoff(b);
     default: return null;
   }
 }
@@ -41,7 +45,7 @@ function renderAnswer(a) {
   a.blocks.forEach((b) => { const n = renderBlock(b); if (n) body.append(n); });
   if (a.citations && a.citations.length) {
     const seen = new Set(); const cites = a.citations.filter((c) => !seen.has(c.url) && seen.add(c.url));
-    body.append(h('div', { class: 'cite' }, h('strong', null, 'Sources'), h('ol', null, cites.map((c) => h('li', null, extLink(c.url, c.label + (c.kind === 'pdf' ? ' (PDF)' : ''), 'link')))), hasFrom ? null : h('div', null, `From ${cfg.company.publishedDocsPhrase}.`)));
+    body.append(h('div', { class: 'cite' }, h('strong', null, 'Sources'), h('ol', null, cites.map((c) => h('li', null, extLink(c.url, c.label + (c.kind === 'pdf' ? ' (PDF)' : ''), 'link')))), hasFrom ? null : h('div', null, `From ${cfg.company.publishedDocsPhrase}.`), h('div', null, h('a', { href: '#/rules', class: 'link', onclick: closeOnMobile }, 'How the rules are kept: the rule ledger'))));
   }
   if (a.correctedBy) body.append(h('p', { class: 'cite' }, `Corrected by ${a.correctedBy.who} on ${String(a.correctedBy.when).slice(0, 10)}. This answer comes from a rule that is checked before the documentation index.`));
   body.append(h('button', { class: 'btn btn--text suggest-btn', type: 'button', onclick: () => { add(suggestPanel(a.query)); } }, 'Suggest a correction'));
@@ -63,6 +67,8 @@ export async function send(text, label) {
     wait.replaceWith(renderAnswer(a)); log.scrollTop = log.scrollHeight;
     announce('The advisor has answered.');
     history.push({ q: text, intent: a.intent, ms: Math.round(performance.now() - t0) });
+    const oc = outcomeOf(a); if (oc) insights.question(text, oc); // T11, this browser only
+    if (a.state && a.state.facets && Object.values(a.state.facets).filter((v) => Array.isArray(v) && v.length).length >= 2) insights.combo(Object.values(a.state.facets).flat().join(' / '));
   } catch (e) {
     wait.replaceWith(h('div', { class: 'msg msg--bot' }, h('p', null, 'The advisor could not run in this browser. ' + (e && e.message ? e.message : ''))));
   }
@@ -90,7 +96,7 @@ async function ensure() {
   ready = (async () => {
     const [{ createAssistant }, products, documents_, categories, pages] = await Promise.all([import('../assistant/engine.js'), data.products(), documents(), data.categories(), data.pages()]);
     D = documents_;
-    const knowledge = {}; for (const k of ['rates', 'compatibility', 'safety', 'decision_trees']) { const v = await data.knowledge(k); if (v) knowledge[k] = v; }
+    const knowledge = {}; for (const k of ['rates', 'compatibility', 'safety', 'decision_trees', 'problems']) { const v = await data.knowledge(k); if (v) knowledge[k] = v; }
     const rj = await data.knowledge('rules'); rules = rj && rj.rules ? rj.rules : null;
     engine = createAssistant({ products, documents: D.docs, categories, pages, config: cfg, knowledge: Object.keys(knowledge).length ? knowledge : undefined });
     return engine;

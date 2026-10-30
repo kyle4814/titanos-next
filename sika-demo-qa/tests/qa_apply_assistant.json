@@ -1,0 +1,21 @@
+{
+ "note": "T22 problem solver QA cases. A case passes when the question gets intent problem, the shown passages are substrings of the cited product page text, and the answer ends with a hand-off. Chips with no published passage must say so and hand off.",
+ "problem": [
+  { "id": "p1", "q": "My tiles sound hollow", "chip": "hollow", "hasItems": true },
+  { "id": "p2", "q": "tiles lifting off the floor", "chip": "lifting", "hasItems": true },
+  { "id": "p3", "q": "the adhesive is not setting", "chip": "not-setting", "hasItems": true },
+  { "id": "p4", "q": "grout cracking in my bathroom", "chip": "grout-cracking", "hasItems": true },
+  { "id": "p5", "q": "my grout colour is uneven", "chip": "colour", "hasItems": true },
+  { "id": "p6", "q": "white marks on the grout", "chip": "white-marks", "hasItems": true },
+  { "id": "p7", "q": "tiles have stains", "chip": "staining", "hasItems": true },
+  { "id": "p8", "q": "grout is dusting and crumbling", "chip": "dusting", "hasItems": false },
+  { "id": "p9", "q": "mouldy silicone in the shower", "chip": "mould", "hasItems": true },
+  { "id": "p10", "q": "water is getting through the tiles", "chip": "water", "hasItems": false }
+ ],
+ "notProblem": [
+  { "id": "n1", "q": "What adhesive for porcelain tiles on concrete?", "intent": "find_product" },
+  { "id": "n2", "q": "How much Davco Trojan Mastic for 40 m2?", "intent": "quote" },
+  { "id": "n3", "q": "safety data sheet Davco Trojan Mastic", "intent": "documents" },
+  { "id": "n4", "q": "waterproofing a balcony", "intent": "find_product" }
+ ]
+}

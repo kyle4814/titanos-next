@@ -9,6 +9,7 @@ import { projectsView, aboutView } from './lib/views3.js';
 import { errorState, skeletonGrid } from './lib/components.js';
 import { personaBlock } from './lib/persona.js';
 import { extraRoutes } from './lib/extras.js';
+import { initOffline } from './lib/offline.js';
 
 const main = $('#main');
 let cfg, assistant, lastPath = null, token = 0, firstRender = true, leaving = false;
@@ -67,6 +68,7 @@ async function boot() {
     document.body.append(toTop);
     window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 700), { passive: true });
     assistant = mountAssistant(cfg);
+    initOffline(); // T19, no-op where the host cannot serve a service worker
     window.addEventListener('hashchange', () => render());
     await render();
   } catch (e) {

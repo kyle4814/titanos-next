@@ -7,6 +7,8 @@ import { classify, parseRequest } from './intents.js';
 import { productRates, parsePacks, parseRates, fmtNum } from './rates.js';
 import { quoteProduct } from './quote.js';
 import { buildTree } from './tree.js';
+import { handoffFor } from './handoff.js';
+import { detectProblem, problemBlocks } from './problem.js';
 import { plain, sanitise, docOk, docLabel, DOC_ORDER, clip, bestLine } from './answer.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
@@ -22,7 +24,8 @@ const DOC_WORDS = [
 ];
 
 /** Create the assistant. Data is injected; nothing here touches the file system, network or DOM. */
-export function createAssistant({ products, documents, categories, pages = [], config }, opts = {}) {
+export function createAssistant({ products, documents, categories, pages = [], config, knowledge }, opts = {}) {
+  const problems = knowledge && knowledge.problems && Array.isArray(knowledge.problems.chips) ? knowledge.problems : null; // T22, optional: absent means the intent is off
   const tStart = now();
   const syn = Object.assign({ SYNONYM_GROUPS: SYN.SYNONYM_GROUPS, FACETS: SYN.FACETS, DOMAIN_HINTS: SYN.DOMAIN_HINTS, GUIDE_SLOTS: SYN.GUIDE_SLOTS }, opts.synonyms || {});
   const company = (config && config.company) || { name: '', short: '', publishedDocsPhrase: 'the published documentation', site: '' };
@@ -146,6 +149,7 @@ export function createAssistant({ products, documents, categories, pages = [], c
   const citeDoc = (d) => cite(docLabel(d), d.url, 'pdf');
 
   function finish(intent, query, blocks, followups, state, dbg, t0) {
+    const ho = handoffFor({ intent, query, blocks, state, byId: pById, config }); if (ho) blocks.push(ho); // T06
     blocks.push({ type: 'text', text: phrase });
     const ans = { intent, query, blocks, citations: cites.slice(), followups: (followups || []).slice(0, 5), state: state || null, debug: { tokens: dbg.tokens || [], matched: dbg.matched || [], ms: Math.round((now() - t0) * 100) / 100 } };
     return sanitise(ans);
@@ -484,6 +488,10 @@ export function createAssistant({ products, documents, categories, pages = [], c
     if (/^\s*$/.test(text)) intent = 'help';
     if (!ctx.names.length && !(st && st.productId) && ctx.req.pack && !ctx.hasArea && !tokenize(text).filter(t => /[a-z]{3,}/.test(t) && !/^(kg|litre|ltr|ml|one)$/.test(t)).length) return finish('clarify', query, [{ type: 'ask', question: 'Which product is that pack size for? Give me the product name, or pick a category.', options: openOptions() }], suggestionsList().slice(0, 3), { intent: 'clarify', lastQuery: text }, {}, t0);
     if (intent === 'greeting' && ctx.names.length) intent = 'find_product';
+    if (problems && !ctx.names.length && !ctx.hasArea && intent !== 'documents') { // T22 problem solver
+      const chip = detectProblem(text, problems);
+      if (chip) { const pb = problemBlocks(chip, { query, config }); chip.items.forEach(i => cite(`${plain(i.name)} (product page)`, i.url, 'page')); return finish('problem', query, pb, ['Show me tile adhesives', 'Which grout for a shower floor?'], { intent: 'problem', chip: chip.id, productIds: chip.products.map(x => x.id) }, { tokens: [] }, t0); }
+    }
     switch (intent) {
       case 'greeting': return simple('greeting', query, t0, [`G'day. I can help you find the right ${company.short || ''} product, check coverage, pull up datasheets and safety data sheets, check compatibility and work out how many packs you need. What are you working on?`.replace('  ', ' ')], suggestionsList().slice(0, 4));
       case 'help': return finish('help', query, [{ type: 'text', text: 'I can: find a product for a job (for example "what adhesive for porcelain tiles on concrete"), give coverage and consumption, find datasheets (PDS) and safety data sheets (SDS), check compatibility and primers, and work out quantities from an area, always from the published documentation.' }, { type: 'steps', title: 'Or start with a guided finder', options: openOptions() }], suggestionsList().slice(0, 4), { intent: 'help' }, {}, t0);

@@ -1,4 +1,5 @@
 // Product detail, documents library, guides.
+import { insights } from './insights.js';
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm, fmtBytes, titleCase } from './util.js';
 import { derived, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
@@ -49,6 +50,7 @@ function docRow(d, dv, withProduct = false) {
 export async function productView(ctx) {
   const id = ctx.rest; const dv = await derived();
   let p; try { p = await data.product(id); } catch { return notFound(ctx, 'product'); }
+  insights.view(id); // T11
   const specIdx = await data.specIndex(); const hasSpec = !!(specIdx && specIdx.ids.includes(id));
   const docs = (p.docs || []); const okDocs = docs.filter(docOk);
   const pds = okDocs.find((d) => d.type === 'product_data_sheet'); const sds = okDocs.find((d) => d.type === 'safety_data_sheet');
