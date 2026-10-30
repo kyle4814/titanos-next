@@ -18,7 +18,8 @@ export function ensureBrain() {
   return (brainP ||= (async () => {
     // the two shards every question needs start downloading while the modules are still loading
     const seed = { 'core.json': fetchJson('data/brain/core.json'), 'rules.json': fetchJson('data/brain/rules.json') };
-    const [{ createBrain }, { createLoader }] = await Promise.all([import('../brain/brain.js'), import('../brain/loader.js')]);
+    // every module is requested at once (brain.js imports the rest, so asking for them together removes one round trip)
+    const [{ createBrain }, { createLoader }] = await Promise.all([import('../brain/brain.js'), import('../brain/loader.js'), import('../brain/text.js'), import('../brain/syn.js'), import('../brain/facets.js'), import('../brain/schema.js'), import('../brain/cards.js')]);
     const brain = createBrain({ load: createLoader({ base: 'data/brain/', fetchJson, seed }) });
     await brain.boot();
     return brain;

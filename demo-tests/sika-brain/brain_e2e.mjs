@@ -30,7 +30,7 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
     const a2 = await ask(page, 'Can I use Davco Grey One Pot over my old tiles?'); txt = await a2.innerText();
     t(`${sz} old tiles answer says No with the data sheet sentence`, /^No\./m.test(txt) && /not suitable for tiling over concrete, waterproofing membranes or existing ceramic tiles/.test(txt), txt.slice(0, 160));
     const a3 = await ask(page, 'Can I tile over a heated floor?'); txt = await a3.innerText();
-    t(`${sz} heated floor says it does not mention heated, not in the published documentation, hand-off present`, /does not mention heated/i.test(txt) && /not in the published documentation/i.test(txt) && (await a3.locator('[data-block="handoff"]').count()) === 1, txt.slice(0, 200));
+    t(`${sz} heated floor says it does not mention heated, not in the published documentation, hand-off present`, /does not mention heated/i.test(txt) && /not in the published (data|documentation)/i.test(txt) && (await a3.locator('[data-block="handoff"]').count()) === 1, txt.slice(0, 200));
     const a4 = await ask(page, 'safety data sheet for sika boom'); txt = await a4.innerText();
     t(`${sz} a data sheet question answers with a link or says it is not published`, /Safety data sheet|published/i.test(txt), txt.slice(0, 120));
     const a5 = await ask(page, 'Which tile adhesive for porcelain tiles on concrete in an internal floor'); t(`${sz} tree answer gives product cards with a quoted sentence`, (await a5.locator('[data-card="product"]').count()) >= 1 && /The data sheet says/.test(await a5.innerText()));
@@ -54,6 +54,21 @@ for (const [name, q] of [['brain', ''], ['v1', '?brain=0']]) {
   console.log(`COLD ${name}: open chat to first answer, 5 runs ms ${JSON.stringify(cold[name])} median ${cold[name][2]}`);
 }
 t(`desktop: first answer under 300 ms from a cold chat open (median of 5 ${cold.brain[2]} ms, worst ${cold.brain[4]} ms; local gzip server, no network latency)`, cold.brain[2] < 300);
+
+// in-browser speed: 300+ golden questions through the real modules; first pass loads shards, second pass is "after shard load"
+await session(1366, 768, '', async (page) => {
+  const Qs = JSON.parse(fs.readFileSync(new URL('./sample_questions.json', import.meta.url), 'utf8'));
+  const r = await page.evaluate(async (Qs) => {
+    const { createBrain } = await import('./assets/brain/brain.js'); const { createLoader } = await import('./assets/brain/loader.js');
+    const fetchJson = (rel) => fetch('./' + rel).then((x) => (x.ok ? x.json() : null)).catch(() => null);
+    const brain = createBrain({ load: createLoader({ base: 'data/brain/', fetchJson }) }); await brain.boot();
+    const pass = async () => { const out = []; for (const q of Qs) { const t = performance.now(); await brain.ask(q, null); out.push(performance.now() - t); } return out; };
+    const first = await pass(), second = await pass(); const st = (a) => { a = [...a].sort((x, y) => x - y); return { n: a.length, p50: a[Math.floor(a.length * 0.5)], p95: a[Math.floor(a.length * 0.95)], max: a[a.length - 1] }; };
+    return { first: st(first), second: st(second) };
+  }, Qs);
+  console.log('SPEED in Chrome:', JSON.stringify(r));
+  t(`speed: p95 under 50 ms per answer after shard load (p95 ${r.second.p95.toFixed(1)} ms, p50 ${r.second.p50.toFixed(1)} ms, max ${r.second.max.toFixed(1)} ms over ${r.second.n} questions; first pass incl. shard fetches p95 ${r.first.p95.toFixed(1)} ms)`, r.second.p95 < 50);
+});
 // v1 stays behind the flag
 await session(1366, 768, '?brain=0', async (page, ctx) => {
   await page.locator('button:visible:has-text("Advisor")').first().click(); const a = await ask(page, 'What is the coverage of Davco Grey One Pot adhesive?');

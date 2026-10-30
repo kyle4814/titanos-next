@@ -29,7 +29,7 @@ export const CHIPS = {
   DATASHEET: 'From a published data sheet',
   PAGE: 'From the published product page',
   DERIVED: 'Worked out from published data',
-  UNKNOWN: 'Not in the published documentation',
+  UNKNOWN: 'Not in the published data',
   RULE: 'Corrected rule, with its source',
 };
 export const NOT_KNOWN = 'I do not know this from the published documentation.';
@@ -69,5 +69,6 @@ export function cardText(c) {
   if (c.table) { out.push(c.table.cols.join(' ')); for (const r of c.table.rows) out.push(r.join(' ')); }
   if (c.source) out.push(c.source.sentence);
   if (c.handoff) out.push(c.handoff.reason);
+  if (c.status === 'UNKNOWN' && c.chip) out.push(c.chip);
   return out.filter(Boolean).join('\n');
 }

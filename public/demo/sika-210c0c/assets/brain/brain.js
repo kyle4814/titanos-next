@@ -8,6 +8,8 @@ import * as C from './cards.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
+const INTENT_WORDS = new Set('suitable compatible compatibility use used tile tiling tiled work apply fix install lay laid good right fit safe stick over onto top go ok okay put new old existing can could would will does do'.split(' ').map((w) => stem(w)));
+const CONDITION_WORDS = new Set('heat sauna freezer coolroom chemical chemicals acid acids steam kiln furnace petrol fuel oil fireplace hot cryogenic abrasion saltwater seawater marine'.split(' ').map((w) => stem(w)));
 const HARD_ENV = new Set(['wet_area', 'submerged', 'external', 'balcony_deck', 'freeze_thaw']);
 
 // ---------------------------------------------------------------- intents
@@ -278,6 +280,9 @@ export function createBrain({ load, config } = {}) {
       }
       if (intent === 'compat') {
         const conds = conditionsOf(facets);
+        // any other content word of the question ("sauna", "garage") must itself appear in the sentence that answers it
+        const known = new Set(facets.hits.flatMap((h) => tokens(h.term))); const nameToks = new Set(tokens(sh.n));
+        for (const w of [...new Set(tokens(n))]) if (!known.has(w) && !nameToks.has(w) && !GENERIC.has(w) && !INTENT_WORDS.has(w) && w.length > 2 && !/\d/.test(w)) conds.push({ id: w, dim: 'word', label: w, hard: true, toks: [[w]] });
         const v = verdictFor(sh, conds);
         return out(intent, stage, [C.compatCard(sh, v.verdict, v.rule, q, conds.map((c) => c.label), v.uncovered)], { state: s });
       }
@@ -326,6 +331,12 @@ export function createBrain({ load, config } = {}) {
     trace.push('index:' + items.length);
     if (!items.length || items[0].score < 3 || items[0].cov < 0.5) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
     let list = items.slice(0, 30); const ruled = [];
+    const condWords = [...new Set(tokens(n))].filter((w) => CONDITION_WORDS.has(w));
+    if (condWords.length) { // a named condition (sauna, freezer room, chemical): only products whose own text mentions it, never a keyword guess
+      const has = (pi, w) => (core.post[w] || []).some((v) => (v >> 3) === pi);
+      list = items.filter((x) => condWords.every((w) => has(x.pi, w))).slice(0, 30); trace.push('condition:' + condWords.join(','));
+      if (!list.length) return out('which', 'unknown', [C.unknown(q, null, `No product in the published documentation mentions ${condWords.join(' or ')} in its own text, so I cannot name one. I will not guess.`, condWords)]);
+    }
     if (facets.substrate.length || facets.tile_type.length || facets.environment.some((e) => HARD_ENV.has(e))) {
       trace.push('facets');
       const cats = [...new Set(list.slice(0, 12).map((x) => core.P[x.pi].c.split('/').slice(0, 2).join('/')))].slice(0, 3);

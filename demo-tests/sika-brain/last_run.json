@@ -1,6 +1,6 @@
 {
  "n": 4659,
- "ok": 4612,
+ "ok": 4613,
  "per": {
   "which": {
    "n": 1332,
@@ -104,11 +104,11 @@
   },
   "compat": {
    "n": 391,
-   "ok": 387,
+   "ok": 388,
    "kinds": {
     "compat-yes": {
      "n": 254,
-     "ok": 250
+     "ok": 251
     },
     "compat-unknown": {
      "n": 127,
@@ -332,7 +332,7 @@
    "got": [
     "compatibility:sika-injection-111"
    ],
-   "headline": "It does not mention that. I will not guess."
+   "headline": "It does not mention catalyst or design. I will not guess."
   },
   {
    "kind": "describe",
@@ -341,14 +341,6 @@
     "choose:Which waterproofing membrane?"
    ],
    "headline": "Where is it going?"
-  },
-  {
-   "kind": "compat-yes",
-   "q": "Can I use SikaTile-410 Secure Set on fibre cement sheet?",
-   "got": [
-    "compatibility:sikatile-410-secureset"
-   ],
-   "headline": "Yes. The published sentence is quoted below."
   },
   {
    "kind": "describe",
@@ -543,5 +535,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-10-30T09:37:32.219Z"
+ "at": "2026-10-30T09:41:23.183Z"
 }
