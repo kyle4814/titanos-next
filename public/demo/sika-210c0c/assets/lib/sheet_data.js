@@ -37,7 +37,7 @@ export async function sheetPanels(parsed, names) {
   }
   const programme = h('section', { class: 'data-tab' }, h('h2', null, 'Programme from published times'),
     h('p', { class: 'notice' }, icon('info'), 'Each time is the data sheet sentence. A step with no published time says so; nothing is added up or estimated.'),
-    h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['System step', 'Product', 'Time for', 'The data sheet says', 'Source'].map((x) => h('th', null, x)))), h('tbody', null, rows))),
+    h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['System step', 'Product', 'Time for', 'The data sheet says', 'Source'].map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, rows))),
     h('p', { class: 'blk-note' }, PROGRAMME_CAVEAT));
   // Draft specification: one clause per step (first listed product; the sheet lists alternatives), references, bundle
   const substrate = parsed.answers.Substrate || null;
