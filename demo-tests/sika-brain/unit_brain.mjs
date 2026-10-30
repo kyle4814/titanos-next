@@ -31,4 +31,8 @@ let threw = false; try { await broken.ask('hello'); } catch { threw = true; } t(
 // a missing product shard degrades to an honest unknown, not a crash
 const noShard = createBrain({ load: { ...createLoader({ base: 'data/brain/', fetchJson: async (u) => (/p\//.test(u) ? null : (await import('./harness.mjs')).fetchJson(u)) }) } });
 a = await noShard.ask('coverage of davco grey one pot'); t('missing product shard gives an unknown card, not a crash', a.cards.length === 1 && a.cards[0].status === 'UNKNOWN');
+// mutation: the property test must catch an invented number
+{ const { checkAnswer } = await import('./props.mjs'); const q = 'What is the coverage of Sikafloor Level Pro Primer?'; const m = await b.ask(q); t('property test: clean answer has no violations', checkAnswer(q, m).length === 0);
+  m.cards[0].handoff.reason += ' It is usually about 1.5 kg per m2.'; t('property test: an invented number is caught (mutation)', checkAnswer(q, m).some((x) => x[0] === 'P1')); 
+  const c2 = await b.ask('How much Davco Grey One Pot adhesive for 20 m2'); c2.cards[0].lines[1].text = '27.5 L'; t('property test: a wrong calculation is caught (mutation)', checkAnswer('How much Davco Grey One Pot adhesive for 20 m2', c2).some((x) => x[0] === 'P1')); }
 console.log(`unit_brain: ${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);
