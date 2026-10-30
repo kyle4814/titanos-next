@@ -23,6 +23,7 @@ export const data = {
   pages: () => getJSON('pages.json'),
   status: () => opt('doc_status.json'),
   stats: () => opt('stats.json'),
+  selector: () => opt('selector.json'),
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
   specs: () => opt('specs.json'),
