@@ -133,7 +133,7 @@ export function compatAnswer(name, k, tail, tax) {
     // A yes has to cover the visitor's whole condition. A word the sentence never mentions (for example "heated") is not answered by a nearest match:
     // quote the sentence, say what it does not mention, show the Not-in-the-published-data status and let the hand-off block take over.
     const silent = uncoveredTerms(tail, [name], [{ type: 'text', text: yes[0].text }]);
-    if (silent.length) return { type: 'text', text: `The ${n} data sheet says: "${clip(yes[0].text, 400)}" It does not mention ${silent.join(', ')}, so it does not answer your question. I will not guess; check the data sheet or ask technical services.`, evidence: yes.slice(0, 2).map(evOfRule).filter(Boolean), status: STATUS.UNKNOWN, chip: CHIPS.unknown, verdict: 'silent', silent };
+    if (silent.length) return { type: 'text', text: `The ${n} data sheet says: "${clip(yes[0].text, 400)}" It does not mention ${silent.join(', ')}, so this is not in the published data. I will not guess; check the data sheet or ask technical services.`, evidence: yes.slice(0, 2).map(evOfRule).filter(Boolean), status: STATUS.UNKNOWN, chip: CHIPS.unknown, verdict: 'silent', silent };
     return { type: 'text', text: `Yes, according to the ${n} data sheet: "${clip(yes[0].text, 400)}"${c}`, evidence: yes.slice(0, 2).map(evOfRule).filter(Boolean), verdict: 'yes' };
   }
   return { type: 'text', text: `The ${n} data sheet has statements that point both ways, so I will not give a single answer. It says: "${clip(no[0].text, 300)}" and also "${clip(yes[0].text, 300)}". Check the data sheet or ask technical services.`, evidence: [no[0], yes[0]].map(evOfRule).filter(Boolean), verdict: 'mixed' };
