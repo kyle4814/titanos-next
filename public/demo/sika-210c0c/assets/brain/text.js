@@ -51,3 +51,23 @@ export function numbersIn(s) {
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) out.push(String(Number(m[0])));
   return out;
 }
+
+/** Clamp a passage to at most max characters, ending on a sentence or row boundary where one exists. hint = Set of stemmed tokens; the segment that matches most of them is kept. */
+export function clampText(text, hint = null, max = 280) {
+  const s = String(text == null ? '' : text).replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const score = (seg) => { if (!hint || !hint.size) return 0; let c = 0; for (const w of new Set(tokens(seg))) if (hint.has(w)) c++; return c; };
+  const segs = s.split(/(?<=[.!?;])\s+|\s+\|\s+/).filter(Boolean);
+  if (segs.length > 1) {
+    let best = segs[0], bs = score(best);
+    for (const g of segs) { const sc = score(g); if (sc > bs || (sc === bs && best.length > max && g.length < best.length)) { best = g; bs = sc; } }
+    if (best.length <= max) return best;
+    return clampText(best, hint, max);
+  }
+  // one long run (a flattened table): a window that starts at a word and ends at a word, around the first hinted word
+  const ws = s.split(' '); let at = 0;
+  if (hint && hint.size) { const i = ws.findIndex((w) => hint.has(stem(normalise(w)))); if (i > 0) at = Math.max(0, i - 4); }
+  let out = '';
+  for (let i = at; i < ws.length && (out + ' ' + ws[i]).length <= max - 4; i++) out = out ? out + ' ' + ws[i] : ws[i];
+  return (at > 0 ? '\u2026 ' : '') + out + (at + out.split(' ').length < ws.length ? ' \u2026' : '');
+}

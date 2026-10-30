@@ -15,9 +15,9 @@ export function unknown(question, sh, reason, missing = [], extra = {}) {
     links: sh ? dsLink(sh).concat([{ label: 'Product page', url: sh.u }]) : [], handoff: { question, product: sh ? sh.n : '', reason, missing }, followups: extra.followups || [] });
 }
 
-export function productCard(sh, sentence, why) {
+export function productCard(sh, sentence, why, withPack = false) {
   const f = fact({ source_url: sh.u, page: null, sentence: sentence || sh.d.t || sh.n, doc_type: 'WEB' });
-  return card({ type: 'product', title: sh.n, product: prod(sh), headline: sh.d.t || sh.d.s || '', lines: [why ? { label: 'Why this one', text: why } : null, sh.d.pk ? { label: 'Packaging', text: sh.d.pk } : null].filter(Boolean),
+  return card({ type: 'product', title: sh.n, product: prod(sh), headline: sh.d.t || sh.d.s || '', lines: [why ? { label: 'Why this one', text: why } : null, withPack && sh.d.pk ? { label: 'Packaging', text: sh.d.pk } : null].filter(Boolean),
     facts: [f, (sh.d.t || sh.d.s) && (sh.d.t || sh.d.s) !== f.sentence ? fact({ source_url: sh.u, sentence: sh.d.t || sh.d.s, doc_type: 'WEB' }) : null, sh.d.pk ? fact({ source_url: sh.u, page: null, sentence: sh.d.pk, doc_type: 'WEB' }) : null].filter(Boolean), source: f, chip: CHIPS.PAGE, links: [{ label: 'Open the product page', url: sh.u }], followups: [`Coverage of ${sh.n}`, `Data sheet for ${sh.n}`, `Safety data sheet for ${sh.n}`] });
 }
 
@@ -160,8 +160,10 @@ export function systemCard(sys, titleExtra) {
     links: [{ label: 'Open the one-page system sheet', url: `systems/${sys.slug}/` }] });
 }
 
-export function chooseCard(title, headline, options, facts = []) {
-  return card({ type: 'choose', title, headline, facts, source: facts.find((f) => f.sentence) || null, status: 'PUBLISHED', chip: CHIPS.PUBLISHED, followups: options });
+export function chooseCard(title, headline, options, facts = [], labels = null) {
+  const c = card({ type: 'choose', title, headline, facts, source: facts.find((f) => f.sentence) || null, status: 'PUBLISHED', chip: CHIPS.PUBLISHED, followups: options });
+  if (labels) c.choices = options.map((value, i) => ({ label: labels[i], value }));
+  return c;
 }
 export function ruleCard(rule) {
   const f = fact({ source_url: rule.source_url, sentence: rule.answer, doc_type: 'RULE' });

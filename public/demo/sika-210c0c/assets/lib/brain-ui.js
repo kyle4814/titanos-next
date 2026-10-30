@@ -55,7 +55,7 @@ export function renderCard(c, cfg, send) {
     const blk = buildHandoff({ query: c.handoff.question, products: c.product ? [{ id: c.product.id, name: c.product.name }] : [], reason: c.handoff.reason, config: cfg });
     kids.push(renderHandoff(blk));
   }
-  if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, c.followups.map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f) }, f))));
+  if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, (c.choices || c.followups.map((f) => ({ label: f, value: f }))).map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
   if (c.chip) kids.push(chipEl(c.status, c.chip));
   const hk = hikEl(c.facts.filter((f) => f.sentence).map((f) => ({ quote: f.sentence, url: f.source_url, label: (f.doc_type === 'PDS' ? 'Data sheet' : f.doc_type === 'SDS' ? 'Safety data sheet' : 'Published page') + (f.doc_version ? ', ' + f.doc_version : '') + (f.page ? ', page ' + f.page : ''), kind: f.doc_type === 'PDS' ? 'pds' : '', page: f.page })));
   if (hk) kids.push(hk);
