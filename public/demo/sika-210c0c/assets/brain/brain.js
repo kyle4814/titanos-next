@@ -91,10 +91,12 @@ export function createBrain({ load, config } = {}) {
   }
 
   // ---- stage 3: weighted token index with synonym and spelling tolerance
+  const spelled = new Set();
   function spell(t) {
-    if (core.post[t] || t.length < 4 || /\d/.test(t)) return t;
-    const max = t.length >= 8 ? 2 : 1; let best = null, bd = 9, bdf = -1;
-    for (const v of vocab) { if (Math.abs(v.length - t.length) > max) continue; const d = dist(t, v, max); if (d > max) continue; const df = core.post[v].length; if (d < bd || (d === bd && df > bdf)) { best = v; bd = d; bdf = df; } }
+    if (core.post[t] || t.length < 5 || /\d/.test(t)) return t;
+    const max = t.length >= 9 ? 2 : 1; let best = null, bd = 9, bdf = -1;
+    for (const v of vocab) { if (Math.abs(v.length - t.length) > max || v.length < 5) continue; const d = dist(t, v, max); if (d > max) continue; const df = core.post[v].length; if (d < bd || (d === bd && df > bdf)) { best = v; bd = d; bdf = df; } }
+    if (best) spelled.add(best);
     return best || t;
   }
   const groups = SYNONYM_GROUPS.map((g) => g.map((t) => ({ n: normalise(t), toks: tokens(t, true).filter((x) => !STOP.has(x)) })));
@@ -109,7 +111,7 @@ export function createBrain({ load, config } = {}) {
     return q;
   }
   function search(n, extraTokens) {
-    const base = tokens(n).filter((t) => !GENERIC.has(t)).map(spell);
+    spelled.clear(); const base = tokens(n).filter((t) => !GENERIC.has(t)).map(spell);
     const qm = expand(n, [...new Set(base.concat(extraTokens || []))]);
     const N = core.P.length, score = new Map(), hit = new Map();
     for (const [t, w] of qm) {
@@ -121,6 +123,8 @@ export function createBrain({ load, config } = {}) {
     const nPrim = [...qm.values()].filter((w) => w >= 1).length;
     const items = [];
     for (const [pi, s] of score) { const cov = (hit.get(pi) || 0) / Math.max(1, nPrim); items.push({ pi, score: s * (0.4 + 0.6 * cov), cov }); }
+    const nq = ' ' + n + ' ';
+    for (const it of items.slice(0, 40)) { const tg = normalise(core.P[it.pi].t); if (tg.length > 20 && nq.includes(' ' + tg + ' ')) it.score *= 1.6; }
     items.sort((a, b) => b.score - a.score || a.pi - b.pi);
     return { items, qm };
   }
@@ -169,9 +173,10 @@ export function createBrain({ load, config } = {}) {
     const textCovers = (r, c) => { const set = ' ' + tokens(r.text, true).join(' ') + ' '; return c.toks.some((tk) => set.includes(' ' + tk.join(' ') + ' ')); };
     const nos = rules.filter((r) => r.pol === 'no' && !r.cond && need.some((c) => textCovers(r, c))).sort((a, b) => need.filter((c) => textCovers(b, c)).length - need.filter((c) => textCovers(a, c)).length);
     if (nos.length) return { verdict: 'no', rule: nos[0], uncovered: [] };
-    const yes = rules.filter((r) => r.pol === 'yes' && score(r, need) > 0).sort((a, b) => score(b, need) - score(a, need) || (a.cond ? 1 : 0) - (b.cond ? 1 : 0));
+    const tcount = (r) => need.filter((c) => textCovers(r, c)).length;
+    const yes = rules.filter((r) => r.pol === 'yes' && tcount(r) > 0).sort((a, b) => tcount(b) - tcount(a) || (a.cond ? 1 : 0) - (b.cond ? 1 : 0));
     if (!yes.length) return { verdict: 'unknown', rule: null, uncovered: need.map((c) => c.label) };
-    const best = yes[0]; const unc = need.filter((c) => !covers(best, c));
+    const best = yes[0]; const unc = need.filter((c) => !textCovers(best, c));
     if (unc.length) return { verdict: 'unknown', rule: best, uncovered: unc.map((c) => c.label) };
     return { verdict: best.cond ? 'conditional' : 'yes', rule: best, uncovered: [] };
   }
@@ -217,6 +222,8 @@ export function createBrain({ load, config } = {}) {
     // product mentions: exact, then fuzzy
     let mentions = findExact(n0); let stage = 'exact';
     if (!mentions.length) { mentions = fuzzyAliases(n0); stage = mentions.length ? 'fuzzy' : 'index'; }
+    { const leftover = (m) => { const used = new Set(); for (const h of m) for (let j = h.i; j < h.i + h.k; j++) used.add(j); return n0.split(' ').filter((w, j) => !used.has(j) && !STOP.has(w) && !GENERIC.has(w) && w.length > 3 && !/^(tell|about|data|sheet|coverage|safety|cure|take|long|much|many)$/.test(w) && !core.post[stem(w)]).length; };
+      if (mentions.length && leftover(mentions) >= 2) { const fz = fuzzyAliases(n0); const kx = (m) => m.reduce((s, h) => s + h.k, 0); if (fz.length && kx(fz) > kx(mentions)) { mentions = fz; stage = 'fuzzy'; } } }
     trace.push(`products:${stage}:${mentions.length}`);
     // the words of a product name are not intent or facet words ("Opti-Cure" is not a cure question, "Concrete Fix" is not concrete)
     const w0 = n0.split(' ').filter(Boolean), cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
@@ -241,7 +248,7 @@ export function createBrain({ load, config } = {}) {
       if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: st(pis[0]) }); }
       intent = 'which';
     }
-    if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there)\b/.test(n)) intent = 'which';
+    if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there|i need|i want|need|looking for|show me|something)\b/.test(n)) intent = 'which';
     if (!pis.length && intent === 'compat') intent = 'which';
     const needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
     if (needsProduct && !pis.length) {
@@ -304,7 +311,7 @@ export function createBrain({ load, config } = {}) {
           const sh = await load.product(f.p); if (!sh) continue;
           const ev = f.ev.map((id) => t.rulesTable[id]).filter(Boolean).sort((a, b) => (/suit|designed|intended|recommend/i.test(b.text) - /suit|designed|intended|recommend/i.test(a.text)) || b.text.length - a.text.length);
           const c = C.productCard(sh, ev[0] ? ev[0].text : sh.d.t, `The data sheet says it suits this job`);
-          if (ev[0]) { c.facts = ev.slice(0, 2).map((r) => ({ source_url: r.url, page: r.page, sentence: r.text, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.doc_version })); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: ev[0].text }]; }
+          if (ev[0]) { c.facts = ev.slice(0, 2).map((r) => ({ source_url: r.url, page: r.page, sentence: r.text, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.doc_version })).concat(c.facts.slice(1)); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: ev[0].text }]; }
           if (f.pr && f.pr.length) { const pn = f.pr.map((id) => (core.P[pIndex.get(id)] || {}).n).filter(Boolean); if (pn.length) c.lines.push({ label: 'Primer it names', text: pn.join(', ') }); }
           cards.push(c);
         }

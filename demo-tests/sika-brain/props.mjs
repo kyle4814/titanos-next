@@ -34,6 +34,7 @@ export function checkAnswer(question, ans) {
     for (const l of c.links || []) for (const n of numbersIn(l.label)) allowed.add(n);
     if (c.table) for (const col of c.table.cols) for (const n of numbersIn(col)) allowed.add(n);
     if (c.type === 'system') { for (const n of numbersIn(c.title)) allowed.add(n); for (const r of c.table.rows) for (const n of numbersIn(r[1])) allowed.add(n); } // product names in a system table are identifiers, like a card's product name
+    for (const l of c.lines || []) if (l.label === 'Primer it names') for (const n of numbersIn(l.text)) allowed.add(n); // names of catalogue products
     if (c.calc) { // recompute from the lane's own parsed facts
       const area = c.calc.inputs.area_m2; allowed.add(r2(area));
       for (const id of c.calc.inputs.facts) {

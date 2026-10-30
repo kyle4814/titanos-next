@@ -11,7 +11,7 @@ export const SUBSTRATE = mk({
   fibre_cement: ['fibre cement', 'fiber cement', 'cement sheet', 'cement board', 'villaboard', 'compressed sheet', 'cfc'],
   tile_underlay: ['tile underlay', 'ceramic tile underlay'],
   plasterboard: ['plasterboard', 'gyprock', 'drywall', 'gypsum board'],
-  existing_tiles: ['existing tile', 'old tile', 'tile over tile', 'tiling over tile', 'over tile', 'on top of tile', 'over existing tile'],
+  existing_tiles: ['existing tile', 'existing ceramic tile', 'old ceramic tile', 'old tile', 'tile over tile', 'tiling over tile', 'over tile', 'on top of tile', 'over existing tile'],
   waterproofing_membrane: ['over membrane', 'over a membrane', 'on membrane', 'onto membrane', 'over waterproofing', 'over a waterproofing membrane', 'waterproofing membrane'],
   timber: ['timber', 'plywood', 'wood', 'chipboard', 'particleboard', 'wooden floor'],
   aac: ['aac', 'autoclaved aerated concrete', 'hebel', 'aerated concrete'],
@@ -62,7 +62,9 @@ export function parseFacets(q) {
   const substrate = find(SUBSTRATE, toks);
   // "floor" next to "heated" is the substrate facet, not a plain floor location
   const environment = find(ENVIRONMENT, toks);
-  const tile_type = find(TILE, toks);
+  let tile_type = find(TILE, toks);
+  // "ceramic tile underlay" names a substrate, not the tile being laid
+  if (substrate.some((s) => /tile/.test(s.term))) tile_type = tile_type.filter((t) => !substrate.some((s) => s.term.split(' ').includes(t.term.split(' ')[0]) && /tile/.test(s.term)));
   const ids = { substrate: substrate.map((x) => x.id), environment: environment.map((x) => x.id), tile_type: tile_type.map((x) => x.id) };
   return { area, ...ids, hits: [...substrate, ...environment, ...tile_type], any: !!(substrate.length || environment.length || tile_type.length) };
 }
