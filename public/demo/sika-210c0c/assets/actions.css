@@ -1,0 +1,36 @@
+/* Actions v2: slash command list, microphone, action cards, print form. Uses the portal's own tokens. */
+.slash-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--grey);background:#fff;max-height:min(14rem,40vh);overflow-y:auto}
+.slash-list[hidden]{display:none}
+.slash-list li{margin:0}
+.slash-list button{display:flex;gap:.6rem;align-items:baseline;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--grey-light);padding:.6rem 1rem;min-height:44px;font:inherit;font-size:.92rem;cursor:pointer}
+.slash-list li.on button,.slash-list button:hover,.slash-list button:focus-visible{background:var(--primary);color:#000}
+.slash-list strong{flex:none;min-width:5.2rem}
+.mic{flex:none;min-width:48px;min-height:48px;padding:0 .6rem}
+.mic[aria-pressed="true"]{background:var(--grey-darker);color:#fff}
+.mic--off{opacity:.55}
+.voice-status:empty{display:none}
+.voice-status{padding:0 1rem .4rem;margin:0}
+.action-card .m-title.sec{margin-top:.75rem}
+.action-card details.how{margin-top:.3rem;font-size:.85rem}
+.action-card details.how summary{cursor:pointer;color:var(--grey-dark);min-height:24px}
+.action-card details.how blockquote{margin:.3rem 0 0;padding:.3rem .6rem;border-left:3px solid var(--primary);background:#fff}
+.action-card .v-no th{box-shadow:inset 4px 0 0 #8f1a1f}
+.action-card .v-yes th{box-shadow:inset 4px 0 0 #2e7d32}
+.action-card .v-conditional th,.action-card .v-unknown th{box-shadow:inset 4px 0 0 #b26a00}
+.action-card .chip-status--unknown{display:inline-block;margin:.2rem 0;padding:.2rem .5rem;background:#fff;border:1px solid var(--grey-3);font-size:.82rem}
+.action-card .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
+.action-card textarea{width:100%;font:inherit;font-size:.9rem}
+.action-card .compare th[scope=col]{min-width:7rem}
+#actions-print{display:none}
+@media print{
+  body.printing-actions > *:not(#actions-print){display:none!important}
+  body.printing-actions #actions-print{display:block!important;position:static;padding:0;color:#000;background:#fff;font-size:11pt}
+  #actions-print h1{font-size:18pt;margin:0 0 6pt}
+  #actions-print h2{font-size:13pt;margin:10pt 0 4pt}
+  #actions-print table{width:100%;border-collapse:collapse;margin-bottom:8pt}
+  #actions-print th,#actions-print td{border:1px solid #888;padding:3pt 5pt;text-align:left;vertical-align:top;font-size:10pt}
+  #actions-print .print-src{font-size:8pt;color:#333;word-break:break-all}
+  #actions-print .print-estimate{font-weight:600;border:1px solid #000;padding:4pt}
+  #actions-print .print-foot{font-size:8pt;margin-top:8pt}
+  #actions-print tr{break-inside:avoid}
+}

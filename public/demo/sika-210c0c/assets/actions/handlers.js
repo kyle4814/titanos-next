@@ -124,11 +124,10 @@ function resultRows(rec, r, job, packFact, f) {
 export async function calc(ctx) {
   const { data, session } = ctx;
   const f = session.facets;
-  const p = await pickProduct(ctx);
-  if (!p) {
-    if (session.system && (f.area || f.length || f.volume)) return system({ ...ctx, rest: '' });
-    return askProduct('calc', 'is this for');
-  }
+  const named = (await findProducts(data, ctx.rest || ctx.text, 1))[0];
+  if (!named && session.system && session.last && session.last.action === 'system') return system({ ...ctx, rest: '' });
+  const p = named || session.product;
+  if (!p) return askProduct('calc', 'is this for');
   const rec = await data.arate(p.id);
   noteProduct(session, p);
   const title = `Quantity for ${p.name}`;
@@ -387,7 +386,7 @@ export async function compat(ctx) {
     const yes = m.find((r) => r.polarity === 'yes' && !r.conditional);
     const cond = m.find((r) => r.conditional || r.polarity === 'conditional');
     const pick = no || yes || cond;
-    if (!pick) { c.rows.push({ label: cap(w.label), value: `${NOT_PUBLISHED}. The published text does not say.`, source: null }); anyUnstated = true; continue; }
+    if (!pick) { c.rows.push({ label: cap(w.label), value: `${NOT_PUBLISHED}. The published text of ${p.name} does not mention ${w.label}. I will not guess.`, source: null }); anyUnstated = true; (c.silent ||= []).push(w.label); continue; }
     quotes.push(pick.text);
     const verdict = no ? 'No.' : yes ? 'Yes.' : 'Only under a condition.';
     if (no) anyNo = true; else if (yes) anyYes = true; else anyCond = true;
@@ -404,7 +403,7 @@ export async function compat(ctx) {
   c.rows.unshift({ label: 'Answer', value: overall, source: null, verdict: anyNo ? 'no' : (silent.length || anyUnstated || !(anyYes || anyCond)) ? 'unknown' : anyYes && !anyCond ? 'yes' : 'conditional' });
   c.status = c.rows[0].verdict === 'unknown' ? 'unknown' : 'published';
   if (c.status === 'unknown') c.handoff = true;
-  c.silentWords = silent;
+  c.silentWords = [...new Set([...(c.silent || []), ...silent])]; delete c.silent;
   return c;
 }
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -477,7 +476,7 @@ export async function spec(ctx) {
   const sp = await data.spec(p.id);
   const c = card('spec', 'spec', `Draft specification clause for ${p.name}`, { estimate: false, buttons: afterBtns() });
   if (!sp || !sp.ds) { c.status = 'unknown'; c.handoff = true; c.notes.push('No data sheet edition is held for this product, so I cannot draft a clause that cites one.'); c.buttons = [handoffBtn]; return c; }
-  const sub = session.system && session.system.substrate ? SUBSTRATE_LABEL[session.system.substrate] : (session.facets.substrate ? SUBSTRATE_LABEL[session.facets.substrate] : '');
+  const sub = session.system && session.system.substrate ? SUBSTRATE_LABEL[session.system.substrate] : '';
   const clause = supplyClause({ product: p.name, substrate: sub, title: `${p.name} Product Data Sheet`, version: sp.ds.edition });
   c.copyText = `${clause}\n\n${DRAFT_LABEL}`;
   c.rows.push({ label: 'Draft clause', value: clause, source: src(sp.ds.url, `Data sheet, ${plain(sp.ds.edition)}`, `Data sheet ${plain(sp.ds.edition)}`), draft: true });
@@ -580,7 +579,7 @@ export async function handoff(ctx) {
   const products = (session.products || []).slice(0, 3).map((x) => ({ id: x.id, name: x.name }));
   const sel = Object.entries(session.facets).filter(([, v]) => v != null && v !== '' && !Array.isArray(v)).map(([k, v]) => `${k}: ${v}`);
   if (session.system) sel.push(`system: ${session.system.title}`);
-  const b = buildHandoff({ query: session.lastQuestion || ctx.text, products, sel, reason: 'You asked to speak to Technical Services. The context so far is included.', config: ctx.config });
+  const b = buildHandoff({ query: session.lastQuestion || ctx.text, products, sel, reason: session.last && session.last.silentWords && session.last.silentWords.length ? `The published text I quoted does not mention: ${session.last.silentWords.join(', ')}.` : 'You asked to speak to Technical Services. The context so far is included.', config: ctx.config });
   const c = card('handoff', 'handoff', 'Ask Technical Services', { estimate: false, handoffBlock: b });
   return c;
 }

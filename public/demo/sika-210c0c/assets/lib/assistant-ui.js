@@ -10,7 +10,11 @@ import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
 import { estimateNote } from './terms.js';
 
-let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null;
+let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null, formEl, suggEl;
+// Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
+const actionsOn = () => { try { if (/[?&]actions=off/.test(location.href) || localStorage.getItem('sika-demo-210c0c-actions') === 'off') return false; } catch { /* storage blocked: keep the config value */ } return Boolean(cfg && cfg.actions && cfg.actions.enabled); };
+let A = null, Ap = null;
+const ensureActions = () => (actionsOn() ? (Ap ||= import('../actions/ui.js').then((m) => { A = m.attachActions({ log, input, form: formEl, sugg: suggEl, add, send, config: cfg }); return A; }).catch(() => { A = null; return null; })) : Promise.resolve(null));
 const history = [];
 
 function inline(text) { // plain text with **bold** only
@@ -60,6 +64,9 @@ export async function send(text, label) {
   add(h('div', { class: 'msg msg--user' }, label || text));
   const wait = h('div', { class: 'msg msg--bot', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
   try {
+    const act = await ensureActions();
+    const node = act ? await act.handle(text) : null;
+    if (node) { await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: text, intent: 'action', ms: 0 }); return; }
     await ensure();
     const t0 = performance.now();
     const rule = matchRule(rules, text);
@@ -69,6 +76,7 @@ export async function send(text, label) {
     announce('The advisor has answered.');
     history.push({ q: text, intent: a.intent, ms: Math.round(performance.now() - t0) });
     const oc = outcomeOf(a); if (oc) insights.question(text, oc); // T11, this browser only
+    if (act) act.observeV1(text, a, oc); // actions v2: recent questions and the gap list, this browser only
     if (a.state && a.state.facets && Object.values(a.state.facets).filter((v) => Array.isArray(v) && v.length).length >= 2) insights.combo(Object.values(a.state.facets).flat().join(' / '));
   } catch (e) {
     wait.replaceWith(h('div', { class: 'msg msg--bot' }, h('p', null, 'The advisor could not run in this browser. ' + (e && e.message ? e.message : ''))));
@@ -124,7 +132,9 @@ export async function mountAssistant(config) {
     h('div', { class: 'asst-note' }, 'Plain code running in your browser: no AI model, no network calls, no tracking, zero running cost. Every answer links its source. Where the documentation does not say, it says so.'),
     log, sugg, form);
   add(h('div', { class: 'msg msg--bot' }, para(`Hi. I can find the right ${cfg.company.short} product for a job, quote published coverage rates, open a data sheet or SDS, check what goes with what, and work out how much you need for an area.`), para('I only answer from the published documentation, and I will say so when it does not cover something.')));
+  formEl = form; suggEl = sugg;
   document.body.append(fab, panel);
+  if (actionsOn()) (window.requestIdleCallback || ((f) => setTimeout(f, 800)))(() => ensureActions());
   window.addEventListener('hashchange', () => {});
-  return { open: (q, from) => { setOpen(true, from || document.activeElement); if (q) send(q); }, send, history };
+  return { open: (q, from) => { setOpen(true, from || document.activeElement); if (q) send(q); }, send, history, observeBrain: (ans) => { if (A) A.observeBrain(ans); } };
 }

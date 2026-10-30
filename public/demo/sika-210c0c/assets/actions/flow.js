@@ -116,6 +116,7 @@ export function createActions(deps) {
         if (bare && NEED_KEY[p.need]) session.facets[NEED_KEY[p.need]] = parseFloat(bare[1].replace(',', '.'));
       } else if (r && r.action !== p.action) { /* a new request: drop the old question */ }
     }
+    if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
     // facets: numbers always, surfaces and places from the text with any product name taken out

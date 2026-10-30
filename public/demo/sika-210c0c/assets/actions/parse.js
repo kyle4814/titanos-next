@@ -108,7 +108,7 @@ export function ioFromEnv(env) {
 
 const SAFETY_RE = /\b(ppe|protective equipment|(?:eye|hand|respiratory|face|skin) protection|gloves?|respirator|dust mask|goggles|safety glasses|first aid|hazards?|hazardous|flammable|toxic|dangerous goods|adg|un number|transport class|signal word|precaution(?:ary)?|safe to (?:use|handle|store)|safety data|sds|msds|storage|store it|stored)\b/i;
 const TIME_RE = /\b(open time|working time|pot ?life|cure|curing|cured|setting time|set time|how long (?:before|until|till|to wait|do i wait|does it take|should i wait)|wait (?:before|until|for)|before (?:i )?grout|grout(?:ing)? after|foot traffic|walk on|return(?:ing)? to service|re-?coat|over-?coat|dry(?:ing)? time|how long (?:to|for) dry|time to dry|adjustab)/i;
-const CALC_RE = /\b(how (?:much|many)|calculate|quantity|quantities|coverage|cover|litres?|liters?|packs?|buckets?|pails?|bags?|need for|do i need|order for|work out)\b/i;
+const CALC_RE = /\b(how (?:much|many)|calc|calculate|quantity|quantities|coverage|cover|litres?|liters?|packs?|buckets?|pails?|bags?|need for|do i need|order for|work out)\b/i;
 const SYSTEM_RE = /\b(system|build me|what do i need to tile|what goes (?:under|on)|order of (?:products|application)|steps? to tile|layers?|prime[rs]? (?:and|then) )\b/i;
 const COMPAT_RE = /\b(can i (?:use|tile|apply|put|lay|go|install|stick|fix|fit|put it)|compatible|compatibility|go over|work (?:over|on|with)|suitable (?:for|over|on)|safe (?:to use )?(?:over|on)|okay (?:over|on)|ok (?:over|on)|(?:use|apply|lay|fix|tile)[a-z ]{0,40}\b(?:over|onto|on top of)\b)/i;
 const SPEC_RE = /\b(specification|spec clause|spec for|write a spec|draft (?:a )?spec|clause for|specify)\b/i;
