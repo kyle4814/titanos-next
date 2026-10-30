@@ -47,6 +47,7 @@
 .sheet a:focus-visible,.sheet button:focus-visible,.sheet input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .sheet .site-footer a:focus-visible{outline-color:#fff}
 @media print{
+  .sheet .estimate-note,.sheet .est{display:block!important;visibility:visible!important}
   @page{size:A4;margin:14mm}
   body{display:block;font-size:11pt}
   .sheet .site-header,.sheet .no-print,.sheet .skip-link,.sheet .breadcrumb,.sheet .link--ext::after{display:none!important}
@@ -60,3 +61,6 @@
   .sheet a[href^="http"]::after{content:""}
   .sheet .sources a{word-break:break-all}
 }
+.sheet .estimate-note{margin:.5rem 0}
+.sheet .est{display:block;font-size:.9rem;color:var(--grey-darker);margin-top:.35rem}
+.sheet .btn-row .btn{text-decoration:none}
