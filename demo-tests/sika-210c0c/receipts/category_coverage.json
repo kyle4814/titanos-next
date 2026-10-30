@@ -1,0 +1,218 @@
+{
+ "generated_by": "category_coverage.py",
+ "date": "2026-10-30",
+ "rates_generated": "2026-10-30T08:09:28Z",
+ "threshold": 0.7,
+ "metric": "T01 second category kill test, measured (a receipt, not a feature). Python standard library only; reads files, never fetches.\n\nMetric (fixed before the numbers were looked at, not tuned): a product has a COMPLETE CITED USAGE RECORD when\n  (a) its product page carries usage statements (products.json usage list not empty), and\n  (b) the knowledge lane's VERIFIED output (rates.json) has rate_status 'published' and at least one consumption fact whose\n      source carries the exact phrase, a document or page URL and, for a data sheet (PDS/SDS), a page number, and\n  (c) that fact was not rejected by the verifier (evidence/verify_rejects.jsonl).\n'not published' means the data sheet and product page text has no figure; it does not mean Sika holds none.\nA category supports the platform claim only if 70 percent or more of its products are complete (PASS), else FAIL.",
+ "rows": [
+  {
+   "category": "concrete",
+   "label": "PASS",
+   "share": 0.9839,
+   "products": 62,
+   "usage": 62,
+   "raw": 61,
+   "verified": 61,
+   "sds": 57,
+   "complete": 61
+  },
+  {
+   "category": "tile-stone-installationsystems",
+   "label": "PASS",
+   "share": 0.9459,
+   "products": 37,
+   "usage": 37,
+   "raw": 35,
+   "verified": 35,
+   "sds": 36,
+   "complete": 35
+  },
+  {
+   "category": "flooring",
+   "label": "PASS",
+   "share": 0.913,
+   "products": 69,
+   "usage": 69,
+   "raw": 63,
+   "verified": 63,
+   "sds": 41,
+   "complete": 63
+  },
+  {
+   "category": "structural-strengthening",
+   "label": "PASS",
+   "share": 0.75,
+   "products": 12,
+   "usage": 12,
+   "raw": 9,
+   "verified": 9,
+   "sds": 5,
+   "complete": 9
+  },
+  {
+   "category": "concrete-repair-protection",
+   "label": "PASS",
+   "share": 0.7381,
+   "products": 42,
+   "usage": 42,
+   "raw": 31,
+   "verified": 31,
+   "sds": 36,
+   "complete": 31
+  },
+  {
+   "category": "grouts-anchoring",
+   "label": "FAIL",
+   "share": 0.6571,
+   "products": 35,
+   "usage": 35,
+   "raw": 23,
+   "verified": 23,
+   "sds": 21,
+   "complete": 23
+  },
+  {
+   "category": "sealants-adhesives",
+   "label": "FAIL",
+   "share": 0.4762,
+   "products": 63,
+   "usage": 63,
+   "raw": 30,
+   "verified": 30,
+   "sds": 53,
+   "complete": 30
+  },
+  {
+   "category": "waterproofing",
+   "label": "FAIL",
+   "share": 0.3478,
+   "products": 46,
+   "usage": 46,
+   "raw": 16,
+   "verified": 16,
+   "sds": 19,
+   "complete": 16
+  },
+  {
+   "category": "roofing",
+   "label": "FAIL",
+   "share": 0.1471,
+   "products": 34,
+   "usage": 34,
+   "raw": 5,
+   "verified": 5,
+   "sds": 4,
+   "complete": 5
+  },
+  {
+   "category": "landscape-buildingproducts",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 58,
+   "usage": 58,
+   "raw": 0,
+   "verified": 0,
+   "sds": 0,
+   "complete": 0
+  },
+  {
+   "category": "transportation",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 15,
+   "usage": 15,
+   "raw": 0,
+   "verified": 0,
+   "sds": 12,
+   "complete": 0
+  },
+  {
+   "category": "marine",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 14,
+   "usage": 14,
+   "raw": 0,
+   "verified": 0,
+   "sds": 9,
+   "complete": 0
+  },
+  {
+   "category": "automotive-aftermarket",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 13,
+   "usage": 13,
+   "raw": 0,
+   "verified": 0,
+   "sds": 11,
+   "complete": 0
+  },
+  {
+   "category": "building-components",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 6,
+   "usage": 6,
+   "raw": 0,
+   "verified": 0,
+   "sds": 4,
+   "complete": 0
+  },
+  {
+   "category": "products",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 4,
+   "usage": 4,
+   "raw": 0,
+   "verified": 0,
+   "sds": 0,
+   "complete": 0
+  },
+  {
+   "category": "appliance-and-equipment",
+   "label": "FAIL",
+   "share": 0.0,
+   "products": 2,
+   "usage": 2,
+   "raw": 0,
+   "verified": 0,
+   "sds": 2,
+   "complete": 0
+  }
+ ],
+ "tile_stone": {
+  "category": "tile-stone-installationsystems",
+  "label": "PASS",
+  "share": 0.9459,
+  "products": 37,
+  "usage": 37,
+  "raw": 35,
+  "verified": 35,
+  "sds": 36,
+  "complete": 35
+ },
+ "second_category": {
+  "category": "concrete",
+  "label": "PASS",
+  "share": 0.9839,
+  "products": 62,
+  "usage": 62,
+  "raw": 61,
+  "verified": 61,
+  "sds": 57,
+  "complete": 61
+ },
+ "waterproofing": {
+  "category": "waterproofing",
+  "label": "FAIL",
+  "share": 0.3478,
+  "products": 46,
+  "usage": 46,
+  "raw": 16,
+  "verified": 16,
+  "sds": 19,
+  "complete": 16
+ }
+}
