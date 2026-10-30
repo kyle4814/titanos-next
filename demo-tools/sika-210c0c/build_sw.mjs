@@ -22,7 +22,7 @@ function walk(dir, rel = '') {
 
 export function listing() {
   const files = ['index.html'];
-  files.push(...walk(PORTAL, 'assets').filter((f) => !/\.(map|md)$/.test(f)));
+  files.push(...walk(PORTAL, 'assets').filter((f) => !/\.(map|md)$/.test(f) && !f.startsWith('assets/img/')));  // product pictures load on demand, never precached
   const data = fs.readdirSync(path.join(PORTAL, 'data'), { withFileTypes: true });
   for (const e of data) if (e.isFile() && e.name.endsWith('.json')) files.push('data/' + e.name);
   for (const d of ['knowledge', 'systems']) if (fs.existsSync(path.join(PORTAL, 'data', d))) files.push(...walk(PORTAL, 'data/' + d).filter((f) => f.endsWith('.json')));

@@ -11,12 +11,21 @@ export function shapeFor(catId = '') {
   if (catId === 'construction') return 'wall';
   return 'pail';
 }
-/** Neutral placeholder: the company's product photos are not embedded (no explicit permission to embed them). */
+/** Neutral placeholder: drawn for categories, and for any product without a published packshot or whose picture fails to load. */
 export function placeholder(catId, label = 'Product image') {
   const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
   const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', '#i-' + shapeFor(catId)); s.append(u);
   return h('div', { class: 'ph', role: 'img', 'aria-label': label + ' (placeholder)' }, s, h('small', null, 'Image placeholder'));
+}
+
+/** Product packshot: a fixed-size box (width/height set, so the layout never shifts), loaded on demand, falls back to the placeholder. */
+export function packshot(img, catId, name, big = false) {
+  const alt = img && img.alt ? img.alt : name;
+  const i = h('img', { class: 'packshot', src: big ? img.src2x : img.src, width: String(img.width), height: String(img.height), alt, loading: big ? 'eager' : 'lazy', decoding: 'async' });
+  if (!big) i.setAttribute('srcset', img.src + ' 480w, ' + img.src2x + ' 960w'), i.setAttribute('sizes', '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw');
+  i.addEventListener('error', () => i.replaceWith(placeholder(catId, name)), { once: true });
+  return i;
 }
 
 export function addButton(id, name) {
@@ -27,6 +36,8 @@ export function addButton(id, name) {
   return b;
 }
 
+const imgOf = (id) => ({ src: `assets/img/p/${id}-480.webp`, src2x: `assets/img/p/${id}-960.webp`, width: 480, height: 480 });
+
 export function productCard(p, dv) {
   const cat = dv.catById.get(p.c);
   const badges = [];
@@ -34,7 +45,7 @@ export function productCard(p, dv) {
   if (p.sds) badges.push(h('span', { class: 'badge badge--ok' }, 'SDS'));
   if (!p.pds && !p.sds && p.d) badges.push(h('span', { class: 'badge' }, `${p.d} doc${p.d === 1 ? '' : 's'}`));
   return h('article', { class: 'card product-card' },
-    h('div', { class: 'card-media' }, placeholder(p.c, p.n)),
+    h('div', { class: 'card-media' + (p.im ? ' card-media--shot' : '') }, p.im ? packshot(imgOf(p.id), p.c, p.n) : placeholder(p.c, p.n)),
     h('div', { class: 'card-body' },
       h('div', { class: 'eyebrow' }, [p.b, cat ? cat.name : ''].filter(Boolean).join(' · ')),
       h('h3', null, h('a', { class: 'card-link', href: '#/product/' + p.id }, p.n)),
