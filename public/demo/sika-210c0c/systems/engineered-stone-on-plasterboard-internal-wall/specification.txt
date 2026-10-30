@@ -1,0 +1,645 @@
+DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data sheet
+
+ENGINEERED OR AGGLOMERATE STONE (NOT MOISTURE SENSITIVE) ON PLASTERBOARD: INTERNAL WALL
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+
+PRODUCTS IN THIS SYSTEM
+1. Prepare and prime: SikaTile®-010 Secure Prime. Data sheet edition: November 2024, Version 01.06
+2. Tile adhesive: SikaTile®-350 Pro Maxset. Data sheet edition: March 2025, Version 01.01
+3. Tile adhesive: SikaTile®-366 Pro Flex. Data sheet edition: March 2025, Version 01.01
+4. Tile adhesive: SikaTile®-374 Mega Pro. Data sheet edition: March 2025, Version 01.01
+5. Grout: SikaCeram®-690 Elite. Data sheet edition: December 2025, Version 07.01
+6. Movement joints and perimeter sealant: SikaSeal® Kitchen and Bathroom. Data sheet edition: April 2023, Version 03.01
+7. Movement joints and perimeter sealant: SikaSeal®-190 N Silicone. Data sheet edition: January 2026, Version 01.01
+8. Movement joints and perimeter sealant: Sikasil®-702. Data sheet edition: September 2025, Version 01.04
+
+============================================================
+PREPARE AND PRIME: SikaTile®-010 Secure Prime
+Data sheet edition: November 2024, Version 01.06
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-010 Secure Prime where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (November 2024, Version 01.06).
+1.2 Product description.
+    - SikaTile®-010 Secure Prime is a high performance, ready to use, primer with efflorescence inhibiting properties suitable for porous and dense substrates.
+    - SikaTile®-010 Secure Prime helps prevent efflorescence by reducing the porosity of concrete, screeds and renders with its unique crystalline technology.
+    - SikaTile®-010 Secure Prime is suitable for use internally and externally on both wall and floor applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. SikaTile®-010 Secure Prime is suitable for the following applications.
+    - General purpose under tile priming of porous substrates
+    - General purpose primer for water-based waterproofing membranes
+    - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
+    - Priming of dense and steel trowelled concrete
+    - Concrete
+    - Cement boards and sheets including ScyonTM
+    - Plasterboard
+    - Glass re-inforced concrete
+    - Cement based screeds and renders
+    - Cement coated light weight construction boards
+    - Autoclaved Aerated Concrete (AAC)
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+
+2 MATERIALS
+2.1 Product. SikaTile®-010 Secure Prime
+    - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Certificates and test reports.
+    - Green Star - VOC Content Test Certificate
+    (Cite: Data sheet page 1: Certificates And Test Reports)
+2.3 Characteristics stated by the manufacturer.
+    - Ready to use, no mixing required
+    - Multiple uses, porous and dense concrete
+    - Inhibiting Efflorescence coming out of substrates
+    - Reduces substrate porosity through crystalline technology
+    - Reduced moisture migration by capillary action
+    - Versatile - suitable for internal, and external use including submerged applications such as tiled pools and spas.
+    - Low VOC
+    (Cite: Data sheet page 1: Features)
+2.4 Composition, appearance and supply.
+    - Appearance and colour: Milky white liquid, dries clear.
+    - Volatile organic compound (VOC) content: 6 grams per Litre
+    (Cite: Data sheet page 1: Product Information)
+2.5 Packaging, shelf life and storage.
+    - Packaging: 5 Litre pails
+    - Shelf life: 9 months from date of manufacture if stored out of direct sunlight unopened in original container.
+    - Storage conditions: Store in dry cool conditions our of direct sunlight. Do not allow product to freeze.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (November 2024, Version 01.06) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality / pre-treatment.
+    - All substrates shall be free from loose friable materials, dust, and debris, release agents, curing compounds, grease, sealers and other contaminating materials. Contaminated substrates must be mechanically prepared to expose at least 80% of the original substrate.
+    - Early aged concrete shall be a minimum of 7 days old at 22°C & 50% relative humidity prior to application.
+    - Early aged cement-based screeds shall be a minimum of 24 hours old at 22°C and 50% relative humidity per 40mm of thickness.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (November 2024, Version 01.06) and the requirements below.
+4.2 Application data.
+    - Yield: Approximately 13 m² per litre dependant on substrate porosity.
+    - Curing time: 25-40 minutes dependant on climate, substrate porosity, and application technique.
+    (Cite: Data sheet page 2: Application Information)
+4.3 Equipment.
+    - Brush, roller or low pressure spray applicator
+    - Protective personal equipment
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.4 Application.
+    - Apply the SikaTile®-010 Secure Prime to substrates as required with a brush, roller or low pressure spray applicator.
+    - Allow the primer to dry prior to subsequent application of waterproofing membrane or tile adhesive.
+    - Application of the waterproofing membrane or tile adhesive should be undertaken after the primer has dried to minimise the chance of contamination.
+    (Cite: Data sheet page 2: Application Instructions > Application)
+4.5 Cleaning of equipment. Tools and equipment can be cleaned with water while the product is still wet.
+    (Cite: Data sheet page 2: Application Instructions > Cleaning Of Equipment)
+4.6 Limitations and important considerations.
+    - Not for use as a vapour barrier or in areas of rising damp.
+    - Do not dilute
+    - Use in temperatures between 5°C and 35°C
+    - SikaTile®-010 Secure Prime is not suitable for use over existing tiles and waterproofing membranes
+    - SikaTile®-010 Secure Prime is not suitable for use on plastics, metal, or glass.
+    - Do not use in high windy conditions to avoid flash setting.
+    - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
+    - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
+    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - For use other than mentioned in this document please contact Sika® Australia.
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
+    - Use in temperatures between 5°C and 35°C
+    - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-010 Secure Prime, November 2024, Version 01.06, https://aus.sika.com/content/dam/dms/au01/h/sikatile-010-secureprime.pdf
+    - Safety Data Sheet: SikaTile®-010 Secure Prime, version 07/09/2022, https://aus.sika.com/content/dam/dms/au01/x/SikaTile%C2%AE-010%20Secure%20Prime
+    - Safety Data Sheet: SDS SikaTile®-010 Secure Prime, version 29/03/2026, https://aus.sika.com/content/dam/dms/au01/t/sds-sikatile-010secureprime.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 2: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 2: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: SikaTile®-350 Pro Maxset
+Data sheet edition: March 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-350 Pro Maxset where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (March 2025, Version 01.01).
+1.2 Product description.
+    - SikaTile®-350 Pro Maxset is an economic polymer fortified cement-based tile and stone adhesive with Dust Less technology which reduces airborne dust in the mixing phase by up to 80%.
+    - SikaTile®-350 Pro Maxset is available in both white or grey.
+    - SikaTile®-350 Pro Maxset white is free from respirable crystalline silica.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors. Suitable Tile Types include;
+    - Ceramic Tiles
+    - Porcelain tiles
+    - Natural Stone* including marble and granite etc
+    - Engineered stone / Man made stone*
+    - Concrete, (concrete greater than 35 MPa shall be mechanically prepared).
+    - Cement boards and sheets*
+    - Cement renders and screeds, including early ageds screeds
+    - Rendered block and brickwork
+    - Light weight construction boards coated with cement coatings
+    - Under tile Sika waterproofing membranes
+    - Gypsum Plasterboard
+    - Tile on Tile applications when used with SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.5.
+
+2 MATERIALS
+2.1 Product. SikaTile®-350 Pro Maxset
+    - Product type as printed on the data sheet: A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH DUST LESS TECHNOLOGY DESIGN FOR LARGE FORMAT TILE INSTALLATIONS
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.2).
+    - AS3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > SUBSTRATE QUALITY (p.3).
+    - AS 3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > APPLICATION (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Equipped with DUST LESS Technology
+    - High bond strength
+    - Economical
+    - SikaTile®-350 Pro Maxset white is free from Respirable Crystalline Silca
+    - Flexible S1 performance
+    - Excellent non slump suitable for large format
+    - Excellent workability
+    - Available in both white and grey finishes
+    - Low VOC
+    (Cite: Data sheet page 1: Features)
+2.5 Composition, appearance and supply.
+    - Colour: Manufactured on both Grey and white cement (Sand source may affect final colour)
+    - Product declaration: C2TES1 as per AS ISO 13007.
+    (Cite: Data sheet page 2: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg bags / 64 bags per pallet
+    - Shelf life: If unopened 12 months from date of manufacture.
+    - Storage conditions: Store off ground in dry cool conditions. (High humidity will reduce shelf life).
+    (Cite: Data sheet page 2: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 Substrate preparation. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) states no substrate preparation requirements.
+    (Cite: Data sheet silent)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Pot Life: 2 hours at 23°C & 50% relative humidity.
+    - Open Time: 30 minutes at 23°C & 50% relative humidity
+    (Cite: Data sheet page 2: Product Information)
+4.3 Consumption.
+    (Cite: Data sheet page 2: Product Information > Consumption)
+4.4 Applied product ready for use.
+    (Cite: Data sheet page 2: Product Information > Applied product ready for use)
+4.5 Limitations and important considerations.
+    - SikaTile®-350 Pro Maxset is not suitable for applications over tongue and grooved timber flooring, plywood, medium density fibre board, or Masonite.
+    - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
+    - For applications externally above 3 meters use in conjunction with mechanical fixing / shelfing systems.
+    - SikaTile®-350 Pro Maxset is not suitable to be applied directly over solvent based waterproof membranes.
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    - Efflorescence is beyond the control of the manufacturer due to external influences beyond our control
+    - SikaTile®-350 Pro Maxset is not suitable for submersed applications.
+    - SikaTile®-350 Pro Maxset is not suitable for direct tile over tile applications. Use SikaTile 015 Prep n Prime prior to tiling.
+    - SikaTile®-350 Pro Maxset is not suitable for heavy duty applications such as vehicular traffic.
+    - During curing ensure protection from extreme heat, extreme sunlight, & water ingress.
+    - Contact Sika Australia for advice if further information is required.
+    (Cite: Data sheet page 2: Limitations Of Use)
+4.6 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+    - Over movement joints in the substrate
+    - At a junction between different substrate materials
+    - At fixtures interrupting the tile surface e.g. columns
+    - At internal vertical corners
+    - Around the perimeter of the tiling system
+    - At a maximum of 4.5m centres, in a grid pattern Movement joints should be kept free from dirt and adhesive
+    - All movement joints can be filled with a suitable Sika sealant and suitable backing rod or backing tape
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.5):
+    - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-350 Pro Maxset, March 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/4/sikatile-350-promaxset.pdf
+    - Safety Data Sheet: SikaTile 350 Pro Maxset - Grey, version 19/03/2024, https://aus.sika.com/content/dam/dms/au01/c/MSDS%20SikaTile-350%20PRO%20Maxset%20Grey%20GHS7.pdf
+    - Safety Data Sheet: SikaTile 350 PRO Maxset - White, version 30/04/2025, https://aus.sika.com/content/dam/dms/au01/t/MSDS%20SikaTile-350%20PRO%20Maxset%20White%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaTile®-350 Pro Maxset, version 24/04/2026, https://aus.sika.com/content/dam/dms/au01/t/sds-sikatile-350promaxset.pdf
+    - Safety Data Sheet: SDS SikaTile®-350 Pro Maxset, version 24/04/2026, https://aus.sika.com/content/dam/dms/au01/p/sds-sikatile-350promaxset.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 3: Ecology, Health And Safety)
+6.3 Ecology, health and safety - Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirring attachment
+    - Clean mixing buckets
+    - Trowels
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Equipment)
+6.4 Ecology, health and safety - Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality)
+6.5 Ecology, health and safety - Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CONCRETE SUBSTRATES)
+6.6 Ecology, health and safety - Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CEMENT BOARD AND SHEETING)
+6.7 Ecology, health and safety - Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > SCREEDS & MORTAR BEDS)
+6.8 Ecology, health and safety - Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > TILE ON TILE APPLICATIONS)
+6.9 Ecology, health and safety - Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment)
+6.10 Ecology, health and safety - Substrate quality / pre-treatment - Porous Substrates can be primed with.
+    - SikaTile 010 Secure Prime
+    - Davco Ultraprime
+    - Davco PrimeX
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
+6.11 Ecology, health and safety - Substrate quality / pre-treatment - Non-porous substrates can be primed with.
+    - SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
+6.12 Ecology, health and safety - Substrate quality / pre-treatment - Note.
+    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
+    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Note)
+6.13 Ecology, health and safety - Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Mixing)
+6.14 Ecology, health and safety - Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
+    - Ensure the back of tiles are clean and from dust and contaminates.
+    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
+    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
+    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
+    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
+    - Expansion joints shall be installed as per relevant Australian Standards.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Application)
+6.15 Ecology, health and safety - Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Cleaning Of Equipment)
+6.16 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 4: Legal notes)
+6.17 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: SikaTile®-366 Pro Flex
+Data sheet edition: March 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-366 Pro Flex where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (March 2025, Version 01.01).
+1.2 Product description. SikaTile®-366 Pro Flex is a premium rubber modified cement-based tile adhesive with extended coverage and flexible performance.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. SikaTile®-366 Pro Flex is suitable for used both internally and externally on wall and floor applications. SikaTile®-366 Pro Flex is suitable for thin bed and medium bed applications up to 10mm thick.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable tile types include.
+    - Ceramic tiles
+    - Porcelain tiles
+    - Mosaic tiles
+    - Natural stone not sentitive to moisture
+    - Engineered stone/Man made stone not sensitive to moisture
+    (Cite: Data sheet page 1: Uses > Suitable tile types include)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
+    - Concrete
+    - Compressed Cement Boards*
+    - Ceramic Tile Underlay / Fibre Cement Boards*
+    - Existing Tiles (used in conjunction with SikaTile 015 PREP N PRIME)
+    - Cement bsaed screeds and renders
+    - Sika approved under tile waterproofing membranes
+    - Gypsum Plaster Board (internal only)
+    - Sika Approved Acoustic underlayment's
+    - Under tile heating systems
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
+
+2 MATERIALS
+2.1 Product. SikaTile®-366 Pro Flex
+    - Product type as printed on the data sheet: A PREMIUM RUBBER MODIFIED FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH EXTENDED COVERAGE
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS3958: referred to in instructions or limitations. Where: Further Documentation (p.2).
+    - AS 3958: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3); Application Instructions > SUBSTRATE QUALITY (p.2).
+    - AS 3958:2023: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Excellent bond strength
+    - Extended coverage
+    - Flexible S1 performance
+    - Suitable over early aged screeds
+    - Internal and external applications
+    - Wall & floor applications
+    - Excellent non-slump performance
+    (Cite: Data sheet page 1: Features)
+2.5 Composition, appearance and supply.
+    - Appearance and colour: Off white with black rubber particles
+    - Product declaration: C2TES1
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg Bags / 64 bags per pallet
+    - Shelf life: If unopened 12 months from date of manufacture
+    - Storage conditions: Store in dry cool conditions, elevated out of direct sunlight.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - Substrate Deflection: All substrates under loads must not exceed L/360 to tiles and L/720 for stone applications.
+    - Substrates must be properly cured, structurally sound, free from loose or friable articles, clean, dry and free from contaminates such as dust, dirt, oil, grease, curing compounds, laitance or efflorescence.
+    - Dependant on the substrate condition and contamination to be removed from the surface, perform adequate preparation techniques, such as water blasting, scarification, or blast cleaning in order to remove all traces of any materials that could reduce the products adhesion to the substrate.
+    - For tiling wet areas, and external applications ensure falls are correct to avoid water ponding.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+3.3 Substrate preparation.
+    - Prime substrates with a suitable Sika primer.
+    - Porous substrates: SikaTile 010 Secure Prime
+    - Non Porous Primer: SikaTile 015 Prep n Prime
+    - Refer to the specific instruction on the primer product data sheet.
+    - Do not apply primers directly over under tile waterproofing membranes
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Mixing ratio: 7 - 8 Litres of clean potable water per 20kg bag
+    - Pot Life: 2.5 hours
+    - Open Time: 30 minutes
+    - Adjustability time: 25 minutes dependant on substrate porosity.
+    (Cite: Data sheet page 2: Application Information)
+4.3 Consumption.
+    (Cite: Data sheet page 2: Application Information > Consumption)
+4.4 Applied product ready for use.
+    (Cite: Data sheet page 2: Application Information > Applied product ready for use)
+4.5 Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirrer attachment
+    - Trowels
+    - Mixing buckets
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.6 Mixing. Pour clean cool water into a mixing container and gradually pour the SikaTile®-366 Pro Flex powder into the bucket and stir with a mixing drill . Mix for 2-3 minutes to a smooth lump free homogeneous consistency. Allow the product to stand (slake) for 5 minutes then restir for an additional minute. Do not add more water. Restirring the mixture may be required during the adhesives pot life.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.7 Application.
+    - Ensure the backs of tiles are clean and free from dust and contaminates.
+    - Apply the adhesive to the substrate with the appropriate sized notched trowel to achieve coverage requirement on both substrate and the back of the tile. Tiles may require back-buttering to achieve minimum coverage requirements.
+    - Apply the adhesive with a notched trowel in a single direction. Apply the tile, while pressing into the wet adhesive, break the adhesive ridges with the tile to fully bed the tile into the adhesive.
+    - It is advisable to periodically check the backs of the tiles for adhesive coverage requirements as per AS 3958
+    - Only apply as must adhesive that can be covered prior to adhesive skinning. If skinning occurs remove and replace.
+    - Remove any excess adhesive from the face of the tile with a damp sponge and ensure grout joint are of uniform depth.
+    - Movement, expansion and control joints must be installed as per AS 3958:2023
+    - For tile over tile applications, existing tiling must be adequately cleaned prior to application. Ensure existing tiling is sound and free from defect. Prime existing tiles with SikaTile 015 Prep n Prime and allow to dry prior to application.
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.8 Cleaning of equipment. Tools and equipment can be cleaned with water while the adhesive is still wet.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
+4.9 Limitations and important considerations.
+    - Test product in an inconspicuous area first
+    - SikaTile®-366 Pro Flex is not suitable over timber and particalboard substrates. Over-sheet with ceramic tile underlay or a reinforce screed.
+    - Not suitable for moisture sensitive stone.
+    - Mechanical fixing is recommended when fixing externally above 3 meters.
+    - Not suitable to be applied directly over solvent based waterproof membranes.
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    - Efflorescence is beyond the control of the manufacturer due to external influences beyond our control.
+    - Ensure correct falls to wastes are present in wet areas and external applications.
+    - SikaTile®-366 Pro Flex is not suitable for submersed applications or in and around pool applications.
+    (Cite: Data sheet page 2: Limitations Of Use)
+4.10 Further documentation. Use product in accordance with Australian Standards AS3958. It is essential to plan the area to be tiled, with inclusion of movement joints, in accordance with the relevant Australian Standard . Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+    - Over movement joints in the substrate
+    - At a junction between different substrate materials
+    - At fixtures interrupting the tile surface e.g. columns
+    - At internal vertical corners
+    - Around the perimeter of the tiling system
+    - At a maximum of 4.5m centres, in a grid pattern
+    - Movement joints should be kept free from dirt and adhesive
+    - All movement joints can be filled with a suitable Sika sealnt and suitable backing rod or backing tape.
+    (Cite: Data sheet page 2: Further Documentation)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
+    - Not suitable for moisture sensitive stone.
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test product in an inconspicuous area first
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-366 Pro Flex, March 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/2/sikatile-366-proflex.pdf
+    - Safety Data Sheet: SikaTile 366 Pro Flex, version 19/03/2024, https://aus.sika.com/content/dam/dms/au01/e/MSDS%20SikaTile-366%20PRO%20Flex%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaTile®-366 Pro Flex, version 06/11/2025, https://aus.sika.com/content/dam/dms/au01/5/sds-sikatile-366proflex.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: SikaTile®-374 Mega Pro
+Data sheet edition: March 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-374 Mega Pro where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (March 2025, Version 01.01).
+1.2 Product description. SikaTile®-374 Mega Pro is a fine white, polymer fortified, flexible, sand and silica free cement-based tile adhesive, suitable for tile and stone internal wall tiling applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - SikaTile®-374 Mega Pro is suitable for fixing tile and stone by thin bed application for internal applications.
+    - SUITABLE TILE TYPES ARE;
+    - • Ceramic Tiles
+    - • Porcelain Tiles
+    - • Natural Stone (non moisture sensitive stone)
+    - • Manufactured Stone (non moisture sensitive stone) • Mosaics
+    - SUITABLE SUBSTRATES INCLUDE;
+    - • Concrete (concrete greater than 35Mpa compressive strength requires mechanical preparation)
+    - • Compressed Cement Boards*
+    - • Ceramic Tile underlay / Fibre Cement boards*
+    - • Cement-baseds renders
+    - • Sika approved under tile waterproof membranes
+    - • Cement renders
+    - • Gypsum Plasterboard
+    - *refer to board manufacturers instructions for further details and load limits.
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
+
+2 MATERIALS
+2.1 Product. SikaTile®-374 Mega Pro
+    - Product type as printed on the data sheet: A FINE WHITE POLYMER FORTIFIED FLEXIBLE SAND AND SILICA FREE CEMENT-BASED WALL TILE ADHESIVE
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.1).
+    - AS 3958:2023: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3); Application Instructions > RENDERS: (p.3); Application Instructions > SUBSTRATE QUALITY (p.2); Further Documentation (p.2).
+    - AS3958:2023: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Sand & Silica free formulation
+    - White colour suitable for light and opaque stone (not sensitive to moisture)
+    - Fine, smooth trowelable consistency
+    - S1 Flexible performance
+    - Internal wall applications only
+    - Suitable over Sika under tile waterproofing membranes
+    (Cite: Data sheet page 1: Features)
+2.5 Composition, appearance and supply.
+    - Appearance and colour: Fine white powder
+    - Product declaration: C1TES1 as per AS ISO 13007
+    - Volatile organic compound (VOC) content: Low VOC - 13g/L
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg bags / 64 bags per pallet
+    - Shelf life: If unopened 12 months from date of manufacture
+    - Storage conditions: Store in dry cool conditions, elevated out of direct sunlight
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - All substrates shall meet minimum deflection standards outlined in the Australian Standards AS 3958:2023
+    - All substrates shall be free from loose friable materials, dust, debris, release agents, curing compounds, grease, sealers and other contaminating materials. Contaminated substrates must be mechanically prepared to expose at least 80% of the original substrate.
+    - For substrates that require a levelling compound use a suitable Sika® faring coat /skim coat.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+3.3 Substrate quality - Concrete substrates. New concrete shall be cured for 28 days and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35Mpa shall be mechanically prepared.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CONCRETE SUBSTRATES)
+3.4 Substrate quality - Cement boards and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CEMENT BOARDS AND SHEETING)
+3.5 Substrate quality - Renders. Cement-based renders must be installed as per AS 3958:2023 and left for a minimum 24 hours prior to tiling. Renders may need longer drying time in cold climtes.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > RENDERS)
+3.6 Substrate preparation. Substrates shall be primed prior to adhesive application.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
+3.7 Substrate preparation - Porous substrates can be primed with.
+    - SikaTile 010 Secure Prime
+    - Davco Ultraprime
+    - Davco PrimeX
+    - SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Porous substrates can be primed with)
+3.8 Substrate preparation - Note.
+    - Refer to the specific product data sheet for the complete user instructions prior to use.
+    - Do not apply primers over waterproofing membranes.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Note)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Mixing ratio: 6.5 - 7 Litres of clean, cool potable water per 20kg bag
+    - Pot Life: 2.5 hours
+    - Open Time: 30 Minutes
+    - Adjustability time: 20 minutes
+    (Cite: Data sheet page 2: Application Information)
+4.3 Consumption.
+    (Cite: Data sheet page 2: Application Information > Consumption)
+4.4 Applied product ready for use.
+    (Cite: Data sheet page 2: Application Information > Applied product ready for use)
+4.5 Equipment.
+    - Personal protective equipment
+    - Mixing Buckets
+    - Mixing drill with stirring attachment
+    - Trowels
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.6 Mixing.
+    - Pour clean cool water into a mixing bucket and gradually pour the the SikaTile®-374 Mega Pro powder into the bucket and stir with a mixing drill).
+    - Mix for 2-3 minutes to a smooth lump free homogeneous consistency.
+    - Allow the product to stand (slake) for 5 minutes then restir for an additional minute.
+    - Do not add more water.
+    - Restirring the mixture may be required during the adhesives pot life.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.7 Application.
+    - Tiles shall be fixed in accordance to with AS 3958:2023
+    - Ensure the backs of tiles are clean and free from dust and contaminates.
+    - Apply the adhesive to the substrate with the appropriate sized notched trowel to achieve coverage requirement on both substrate and the back of the tile.
+    - Tiles may require back-buttering to achieve minimum coverage requirements.
+    - Apply the adhesive with a notched trowel in a single direction.
+    - Apply the tile, while pressing into the wet adhesive, break the ridges with the tile to fully bed the tile into the adhesive.
+    - It is advisable to periodically check the backs of the tiles for adhesive coverage requirements as the AS3958:2023.
+    - Only apply as must adhesive that can be covered prior to adhesive skinning. If skinning occurs remove and replace with fresh adhesive.
+    - Remove any excess adhesive from the face of the tile with a damp sponge and ensure grout joint are of uniform depth.
+    - Movement, expansion and control joints must be installed as per AS 3958:2023.
+    - Allow adhesive to dry prior to grouting.
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.8 Cleaning of equipment. Tools and equipment can be cleaned with water while the adhesive is still wet.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
+4.9 Limitations and important considerations.
+    - Test in an inconspicious area first.
+    - Not suitable for applications over tongue and groved timber flooring, plywood, medium density fibre board, or masonite.
+    - Not suitable for moisture sensitive stone installations
+    - Not suitable to be applied directly over solvent based waterproof membranes.
+    - The performance of cement based adhesives will be comprimised when used above 35°C and under 5°C.
+    - Due to external influences beyond our control Efflorescence is beyond the control of the manufacturer.
+    - Not suitable for external applications
+    - Not suitable in submersed applications such as pools or spas.
+    - Contact Sika Australia for applications not mentioned in this document or if further information is required.
+    (Cite: Data sheet page 2: Limitations Of Use)
+4.10 Further documentation. Use product in accordance with Australian Standards AS 3958:2023 The Installation of Ceramic & Stone Tiles. It is essential to plan the area to be tiled, with inclusion of movement joints, in accordance with the relevant Australian Standard . Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+    - Over movement joints in the substrate
+    - At a junction between different substrate materials
+    - At fixtures interrupting the tile surface e.g. columns
+    - At internal vertical corners
+    - Around the perimeter of the tiling system
+    - At a maximum of 4.5m centres, in a grid pattern
+    - Movement joints should be kept free from dirt and adhesive
+    - All movement joints can be filled with a suitable Sika sealnt and suitable backing rod or backing tape.
+    (Cite: Data sheet page 2: Further Documentation)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
+    - Not suitable for moisture sensitive stone installations
+    - The performance of cement based adhesives will be comprimised when used above 35°C and under 5°C.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-374 Mega Pro, March 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/e/sikatile-374-megapro.pdf
+    - Safety Data Sheet: SikaTile 374 Mega PRO, version 30/04/2025, https://aus.sika.com/content/dam/dms/au01/8/MSDS%20SikaTile-374%20Mega%20PRO%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaTile®-374 Mega Pro, version 13/04/2026, https://aus.sika.com/content/dam/dms/au01/h/sds-sikatile-374megapro.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+PRODUCTS WITHOUT CLAUSES IN THIS FILE
+SikaCeram®-690 Elite: left out to keep this file short. Use its own data sheet.
+SikaSeal® Kitchen and Bathroom: left out to keep this file short. Use its own data sheet.
+SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
+Sikasil®-702: left out to keep this file short. Use its own data sheet.
+
+============================================================
+SOURCES
+1. https://aus.sika.com/content/dam/dms/au01/h/sikatile-010-secureprime.pdf
+2. https://aus.sika.com/en/construction/tile-stone-installationsystems/primers-additives/sikatile-010-secureprime.html
+3. https://aus.sika.com/content/dam/dms/au01/4/sikatile-350-promaxset.pdf
+4. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-350-promaxset.html
+5. https://aus.sika.com/content/dam/dms/au01/2/sikatile-366-proflex.pdf
+6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-366-proflex.html
+7. https://aus.sika.com/content/dam/dms/au01/e/sikatile-374-megapro.pdf
+8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-374-megapro.html
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.

@@ -1,0 +1,540 @@
+DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data sheet
+
+NATURAL STONE (NOT MOISTURE SENSITIVE) ON BRICK OR BLOCKWORK (RENDERED): INTERNAL WALL
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+
+PRODUCTS IN THIS SYSTEM
+1. Tile adhesive: Davco® Powder Mastic. Data sheet edition: May 2025, Version 01.01
+2. Tile adhesive: Davco® Supamastic. Data sheet edition: March 2025, Version 01.03
+3. Tile adhesive: SikaTile®-350 Pro Maxset. Data sheet edition: March 2025, Version 01.01
+4. Grout: Davco® Sanitized Colorgrout. Data sheet edition: April 2025, Version 01.02
+5. Grout: Davco® Superfine White Grout. Data sheet edition: December 2025, Version 01.01
+6. Grout: SikaCeram®-690 Elite. Data sheet edition: December 2025, Version 07.01
+7. Movement joints and perimeter sealant: SikaSeal® Kitchen and Bathroom. Data sheet edition: April 2023, Version 03.01
+8. Movement joints and perimeter sealant: SikaSeal®-190 N Silicone. Data sheet edition: January 2026, Version 01.01
+9. Movement joints and perimeter sealant: Sikasil®-702. Data sheet edition: September 2025, Version 01.04
+
+============================================================
+TILE ADHESIVE: Davco® Powder Mastic
+Data sheet edition: May 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide Davco® Powder Mastic where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
+1.2 Product description. A flexible, cement-based tile adhesive ideal for large format and rectified edge tiles equipped with DUST LESS technology which reduces airborne dust by up to 80% in the mixing phase.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. Davco® Powder Mastic is suitable for interior and exterior applications. Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies and patios. Davco® Powder Mastic is suitable for most common substrates including;
+    - fibre cement sheet / Ceramic Tile Underlay
+    - Fully cured concrete
+    - Screed (cured for 7 days)
+    - Rendered brickwork and blockwork
+    - Suitable Sika under tile waterproofing membranes and acoustic underlays.
+    - Large format and rectified (square) edge tiles
+    - Porcelain
+    - Ceramic
+    - Mosaic
+    - Natural stone (not sensitive to moisture)
+    (Cite: Data sheet page 1: Uses)
+
+2 MATERIALS
+2.1 Product. Davco® Powder Mastic
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007.1: cited with a stated property or value. Where: Product Information > Product Declaration (p.1).
+    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - DUST LESS technology, less mess and airborne dust when mixing
+    - Commercial grade
+    - Dust Less Technology
+    - Non-vertical slump for easy wall tiling
+    - Use for thick or thin bed tiling
+    - Extended open time for tiling large areas
+    - White formulation ideal for light coloured tiles and stone
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Appearance / Colour: White powder
+    - Product Declaration: C1TES1 - AS ISO 13007.1
+    - Volatile organic compound (VOC) content: Low VOC - 7g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg bags
+    - Shelf life: 12 Months from date of manufacture if unopened
+    - Storage conditions: Store in off ground in dry cool conditions out of direct sunlight
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate preparation.
+    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling
+    - Deeply contaminated surfaces must be scabbled / abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces
+    - Surfaces should be prepared and primed as per the following:
+    (Cite: Data sheet page 2: Application Instructions > Substrate Preparation)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Mixing Ratio: 5-6 Litres of clean cool potable water per 20kg
+    - Consumption: 20kg bag of Davco® Powder Mastic covers approximately 7 m² (based on a 10mm notch trowel)
+    - Pot Life: 2 Hours
+    - Open Time: 30 Minutes
+    (Cite: Data sheet page 2: Product Information)
+4.3 Applied Product Ready for Use.
+    (Cite: Data sheet page 2: Product Information > Applied Product Ready for Use)
+4.4 Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirrer attachment
+    - Notched trowel
+    - Mixing buckets
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.5 Mixing. 1. Measure the required amount of clean, potable water into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Always add the powder to the liquid. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
+    - Do not add any additional water during the adhesive's pot life, restir without adding water.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.6 Application. Laying the tiles 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m² at a time. 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90° across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the grout joint and the surface of the tiles with a damp cloth while the adhesive is still wet.
+    - Allow product to gain initial set before grouting
+    - Allow product to set firmly before return to service
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.7 Cleaning of tools. Clean tools and equipment with water before the adhesive dries.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, confirm the site conditions with the manufacturer. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions to be verified. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) lists no application condition limits.
+    (Cite: Data sheet silent)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® Powder Mastic, May 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/h/davco-powder-mastic.pdf
+    - Safety Data Sheet: SDS Various Semi-Finished, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/q/sds-various-semi-finished-1.pdf
+    - Safety Data Sheet: SDS Davco Powder Mastic, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/7/sds-davco-powdermastic.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.1, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: Davco® Supamastic
+Data sheet edition: March 2025, Version 01.03
+
+1 SCOPE
+1.1 Work included. Provide Davco® Supamastic where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (March 2025, Version 01.03).
+1.2 Product description. A ready to use premixed thin bed wall tile adhesives for internal use.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - Davco® Supamastic can be used for residential internal thin bed wall applications with porous tiles (>3% absorption) on porous substrates.
+    - Davco® Supamastic can be used for residential internal dry area floor tiling application with porous backed tiles (>3% absorption) on porous substrates - primed Cement Sheet/Ceramic Tile Underlay.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Please note.
+    - If you are uncertain of the porosity of the tiles you are fixing use Davco SMP Evo adhesive or seek technical advice from Sika Australia.
+    - Refer the the Davco SMP Evo product data sheet for additional information.
+    (Cite: Data sheet page 1: Uses > Please note)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
+    - Fibre cement sheet
+    - Plasterboard
+    - Ceramic tile underlay
+    - Rendered blockwork & brickwork
+    - Davco K10 Plus waterproof membrane (drying times will be greatly extended over waterproof membrane, therefore only of fixing of porous backed tiles ≥3%)
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.6 Intended uses stated by the manufacturer - Suitable Tile Types include.
+    - Ceramic
+    - Mosaic
+    - Natural stone not sensitive to moisture
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types include)
+1.7 Limits of use. Observe the manufacturer's limitations stated in clause 4.7.
+
+2 MATERIALS
+2.1 Product. Davco® Supamastic
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.03) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product Declaration (p.1).
+    - AS3958:2023: referred to in instructions or limitations. Where: Application Instructions > Laying the Tiles (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Zero waste and fast clean up
+    - White formulation ideal for light coloured tiles
+    - Non slump
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Appearance / Colour: White paste.
+    - Product Declaration: D1TE AS ISO 13007 Classification.
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 4Ltr & 15Ltr pails
+    - Shelf life: 12 Months from date of manufacture.
+    - Storage conditions: Store in dry cool conditions out of direct sunshine.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.03) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality / pre-treatment.
+    - All surfaces must be installed according to manufacturer's instructions and relevant standard(s) and be structurally sound, dry, clean, and free from movement, oil, grease, wax, curing compounds, release agents and any other loose material or bond inhibitor. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling.
+    - Deeply contaminated surfaces must be mechanically prepared to a clean sound substrate. Expose at least 80% of the original substrate of painted surfaces.
+    - Substrates shall meet minimum deflection standards L/360 for tiles or L/720 for natural stone
+    - Surfaces shall be primed as per the below
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.03) and the requirements below.
+4.2 Application data.
+    - Consumption: A 4 Litre pail will cover approximately 3m² with a 6mm notch trowel. A 15 Pail will cover approximately 11m² with a 6mm notch trowel.
+    - Layer Thickness: Layer thickness shall be no greater than 4mm.
+    - Open Time: 30 Minutes.
+    - Adjustability Time: 45 Minutes.
+    (Cite: Data sheet page 1: Application Information)
+4.3 Applied Product Ready for Use.
+    - All measurements are taken at 22°C & 50% relative humidity. Specifications vary according to site conditions and should be taken as a guide only.
+    - Cool or cold weather will extend drying times of premixed adhesives.
+    - Non porous tiles will greatly extend drying time of adhesive.
+    - Drying time over membranes will be greatly extended.
+    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
+4.4 Equipment. Select a trowel with a suitable notch size for the tile size and type as per the following:
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.5 Application - Laying the Tiles. 1. Place the adhesive onto the prepared and primed substrate. Do not apply more adhesive than can be tiles within the open time of the product, usually from a single tile to 1m². 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the required area where tile is to be applied, comb the adhesive in a single direction (not swirls). 4. Where "back buttering" the tile is required, use the flat side of the notched trowel to apply a thin adhesive layer to the back of the tile (approx 1-2mm thick). 5. Place the tile into the combed adhesive and press the tile firmly. 6. Move the tile forward and then back at 90° across the direction of the combed adhesive to flatten the adhesive to leave no voids under the tile. Occasionally life a tile to check the adhesive covers 90-100% of the tile. 7. Remove any excess adhesive in the joints, and on the face of the tile with a sponge and water while the adhesive is still wet.
+    - Do not allow the adhesive to skin prior to placement of the tiles. If the adhesive skins, remove and replace.
+    - Application shall be in accordance with AS3958:2023 The Installation of Ceramic and Stone Tiles.
+    - Movement joints shall be installed in accordance with applicable standards.
+    - Back buttering the tiles may be required to achieve minimum coverage requirements.
+    - Allow the adhesive to dry prior to grouting.
+    (Cite: Data sheet page 3: Application Instructions > Application > Laying the Tiles)
+4.6 Cleaning of tools. Clean tools and equipment with water prior to adhesive drying.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+4.7 Limitations and important considerations.
+    - Test product in an inconspicuous area first.
+    - Not suitable for use over concrete substrates, use a suitable Davco cement based adhesive.
+    - Not suitable for moisture sensitive stone.
+    - Davco® Supamastic is suitable for adhering porous (>3% absorption) tiles over Davco Waterproof membranes (k10 Plus, Dampfast, K10 Rapid, & K12) for wall only. However the drying time will be greatly extended, and extra drying time shall be required prior to grouting
+    - For uses not mentions in this document please seek further technical advice from Sika Australia.
+    (Cite: Data sheet page 2: Important Considerations)
+4.8 Environmental information. Low VOC Specification for V2 IEQ-13, V1.1 IEQ-11
+    (Cite: Data sheet page 1: Environmental Information)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Ambient Air Temperature. Min +5°C to Max 35°C
+    (Cite: Data sheet page 2: Application Information > Ambient Air Temperature)
+5.3 Substrate Temperature. Min +5°C to Max 35°C
+    (Cite: Data sheet page 2: Application Information > Substrate Temperature)
+5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
+    - Not suitable for moisture sensitive stone.
+    (Cite: Data sheet page 2: Limitations)
+5.5 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test product in an inconspicuous area first.
+    (Cite: Data sheet page 2: various)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® Supamastic, March 2025, Version 01.03, https://aus.sika.com/content/dam/dms/au01/f/davco-supamastic.pdf
+    - Safety Data Sheet: SDS Davco Supamastic, version 28/01/2026, https://aus.sika.com/content/dam/dms/au01/a/sds-davco-supamastic.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological, and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: SikaTile®-350 Pro Maxset
+Data sheet edition: March 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-350 Pro Maxset where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (March 2025, Version 01.01).
+1.2 Product description.
+    - SikaTile®-350 Pro Maxset is an economic polymer fortified cement-based tile and stone adhesive with Dust Less technology which reduces airborne dust in the mixing phase by up to 80%.
+    - SikaTile®-350 Pro Maxset is available in both white or grey.
+    - SikaTile®-350 Pro Maxset white is free from respirable crystalline silica.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors. Suitable Tile Types include;
+    - Ceramic Tiles
+    - Porcelain tiles
+    - Natural Stone* including marble and granite etc
+    - Engineered stone / Man made stone*
+    - Concrete, (concrete greater than 35 MPa shall be mechanically prepared).
+    - Cement boards and sheets*
+    - Cement renders and screeds, including early ageds screeds
+    - Rendered block and brickwork
+    - Light weight construction boards coated with cement coatings
+    - Under tile Sika waterproofing membranes
+    - Gypsum Plasterboard
+    - Tile on Tile applications when used with SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.5.
+
+2 MATERIALS
+2.1 Product. SikaTile®-350 Pro Maxset
+    - Product type as printed on the data sheet: A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH DUST LESS TECHNOLOGY DESIGN FOR LARGE FORMAT TILE INSTALLATIONS
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.2).
+    - AS3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > SUBSTRATE QUALITY (p.3).
+    - AS 3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > APPLICATION (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Equipped with DUST LESS Technology
+    - High bond strength
+    - Economical
+    - SikaTile®-350 Pro Maxset white is free from Respirable Crystalline Silca
+    - Flexible S1 performance
+    - Excellent non slump suitable for large format
+    - Excellent workability
+    - Available in both white and grey finishes
+    - Low VOC
+    (Cite: Data sheet page 1: Features)
+2.5 Composition, appearance and supply.
+    - Colour: Manufactured on both Grey and white cement (Sand source may affect final colour)
+    - Product declaration: C2TES1 as per AS ISO 13007.
+    (Cite: Data sheet page 2: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg bags / 64 bags per pallet
+    - Shelf life: If unopened 12 months from date of manufacture.
+    - Storage conditions: Store off ground in dry cool conditions. (High humidity will reduce shelf life).
+    (Cite: Data sheet page 2: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 Substrate preparation. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) states no substrate preparation requirements.
+    (Cite: Data sheet silent)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Pot Life: 2 hours at 23°C & 50% relative humidity.
+    - Open Time: 30 minutes at 23°C & 50% relative humidity
+    (Cite: Data sheet page 2: Product Information)
+4.3 Consumption.
+    (Cite: Data sheet page 2: Product Information > Consumption)
+4.4 Applied product ready for use.
+    (Cite: Data sheet page 2: Product Information > Applied product ready for use)
+4.5 Limitations and important considerations.
+    - SikaTile®-350 Pro Maxset is not suitable for applications over tongue and grooved timber flooring, plywood, medium density fibre board, or Masonite.
+    - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
+    - For applications externally above 3 meters use in conjunction with mechanical fixing / shelfing systems.
+    - SikaTile®-350 Pro Maxset is not suitable to be applied directly over solvent based waterproof membranes.
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    - Efflorescence is beyond the control of the manufacturer due to external influences beyond our control
+    - SikaTile®-350 Pro Maxset is not suitable for submersed applications.
+    - SikaTile®-350 Pro Maxset is not suitable for direct tile over tile applications. Use SikaTile 015 Prep n Prime prior to tiling.
+    - SikaTile®-350 Pro Maxset is not suitable for heavy duty applications such as vehicular traffic.
+    - During curing ensure protection from extreme heat, extreme sunlight, & water ingress.
+    - Contact Sika Australia for advice if further information is required.
+    (Cite: Data sheet page 2: Limitations Of Use)
+4.6 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+    - Over movement joints in the substrate
+    - At a junction between different substrate materials
+    - At fixtures interrupting the tile surface e.g. columns
+    - At internal vertical corners
+    - Around the perimeter of the tiling system
+    - At a maximum of 4.5m centres, in a grid pattern Movement joints should be kept free from dirt and adhesive
+    - All movement joints can be filled with a suitable Sika sealant and suitable backing rod or backing tape
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.5):
+    - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
+    - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-350 Pro Maxset, March 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/4/sikatile-350-promaxset.pdf
+    - Safety Data Sheet: SikaTile 350 Pro Maxset - Grey, version 19/03/2024, https://aus.sika.com/content/dam/dms/au01/c/MSDS%20SikaTile-350%20PRO%20Maxset%20Grey%20GHS7.pdf
+    - Safety Data Sheet: SikaTile 350 PRO Maxset - White, version 30/04/2025, https://aus.sika.com/content/dam/dms/au01/t/MSDS%20SikaTile-350%20PRO%20Maxset%20White%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaTile®-350 Pro Maxset, version 24/04/2026, https://aus.sika.com/content/dam/dms/au01/t/sds-sikatile-350promaxset.pdf
+    - Safety Data Sheet: SDS SikaTile®-350 Pro Maxset, version 24/04/2026, https://aus.sika.com/content/dam/dms/au01/p/sds-sikatile-350promaxset.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 3: Ecology, Health And Safety)
+6.3 Ecology, health and safety - Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirring attachment
+    - Clean mixing buckets
+    - Trowels
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Equipment)
+6.4 Ecology, health and safety - Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality)
+6.5 Ecology, health and safety - Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CONCRETE SUBSTRATES)
+6.6 Ecology, health and safety - Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CEMENT BOARD AND SHEETING)
+6.7 Ecology, health and safety - Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > SCREEDS & MORTAR BEDS)
+6.8 Ecology, health and safety - Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > TILE ON TILE APPLICATIONS)
+6.9 Ecology, health and safety - Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment)
+6.10 Ecology, health and safety - Substrate quality / pre-treatment - Porous Substrates can be primed with.
+    - SikaTile 010 Secure Prime
+    - Davco Ultraprime
+    - Davco PrimeX
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
+6.11 Ecology, health and safety - Substrate quality / pre-treatment - Non-porous substrates can be primed with.
+    - SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
+6.12 Ecology, health and safety - Substrate quality / pre-treatment - Note.
+    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
+    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Note)
+6.13 Ecology, health and safety - Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Mixing)
+6.14 Ecology, health and safety - Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
+    - Ensure the back of tiles are clean and from dust and contaminates.
+    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
+    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
+    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
+    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
+    - Expansion joints shall be installed as per relevant Australian Standards.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Application)
+6.15 Ecology, health and safety - Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
+    (Cite: Data sheet page 3: Ecology, Health And Safety > Cleaning Of Equipment)
+6.16 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 4: Legal notes)
+6.17 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+GROUT: Davco® Sanitized Colorgrout
+Data sheet edition: April 2025, Version 01.02
+
+1 SCOPE
+1.1 Work included. Provide Davco® Sanitized Colorgrout where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (April 2025, Version 01.02).
+1.2 Product description.
+    - A premium cementitious grout designed for use with most types of ceramic tiles and natural stone applications.
+    - Davco® Sanitized Colorgrout is design for use in joints from 1-6 mm width.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - Suitable for interior and exterior applications. Commercial and domestic walls and floors including swimming pools and wet areas.
+    - It is not suitable for use in harsh and demanding environments or where there are hygienic requirements i.e. commercial kitchens, public toilets, food processing plants etc. For these types of installations, use a suitable Sika epoxy tile grout.
+    (Cite: Data sheet page 1: Uses)
+
+2 MATERIALS
+2.1 Product. Davco® Sanitized Colorgrout
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (April 2025, Version 01.02) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - AS ISO 13007.3: cited with a stated property or value. Where: Product Information > Product Declaration (p.1).
+    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Mould and bacteria resistant - Sanitized®
+    - Ideal for dry and wet areas including swimming pools and spas
+    - For joints 1-6mm wide
+    - Available in various colours to suit your application
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Product Declaration: CG2 WA Classification - AS ISO 13007.3
+    - Bulk Density: 1.4kg/L
+    - Volatile organic compound (VOC) content: Low VOC - 3g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: Available in a 1.5kg, 5kg or 15kg bag
+    - Shelf life: 15kg paper bags - 12 months from date of manufacture if unopened. 1.5kg & 5kg plastic film bags - 18 months from date of manufacture if unopened
+    - Storage conditions: Store off ground in dry cool conditions out of direct sunlight.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (April 2025, Version 01.02) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality / pre-treatment.
+    - Before commencing grouting, ensure the tile adhesive has set firmly. This usually requires 24 hours with the majority of tile adhesives
+    - Remove any spacer lugs, rake-out any excess adhesive and any loose or foreign material from the grout joints
+    - In general, ensure the grout joints are clean and dry
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (April 2025, Version 01.02) and the requirements below.
+4.2 Application data.
+    - Pot Life: 40 Minutes, Measured at 23°C and 50% relative humidity
+    (Cite: Data sheet page 2: Application Information)
+4.3 Mixing Ratio.
+    (Cite: Data sheet page 2: Application Information > Mixing Ratio)
+4.4 Consumption. The coverage of the grout will vary depending upon the texture, size and thickness of the tile and the width of the grout joint. Use the table below as a general guide: QTY OF GROUT REQUIRED KG/M2 JOINT WIDTH
+    (Cite: Data sheet page 2: Application Information > Consumption)
+4.5 Applied Product Ready for Use.
+    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
+4.6 Equipment.
+    - Grout float or grout applicator
+    - Slow speed mixing drill with stirrer attachment
+    - Mixing buckets
+    - Grouting sponge
+    - Microfibre cloth
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.7 Mixing. 1. Measure the right amount of clean, potable water into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the grout.
+    - The grout may stiffen during the pot life, restir without adding additional water.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.8 Application. 1. Prior to grouting it is advisable to lightly dampen the grout joints, particularly with porous tiles or in warmer conditions. If the tiles are particularly porous it is advisable to prime the joints with Davco 4 in 1 Grout Additive after dampening to seal the edge of the tile. 2. Using a rubber float or squeegee work the grout into the joints in a diagonal motion making sure that the grout does not just sit on top of the joint i.e. the grout does not bridge the joint. 3. Remove excess grout from the surface of the tiles with the rubber float or squeegee using a diagonal motion. 4. Use a damp sponge to clean up the remainder of the grout. Regularly rinsing the sponge out to assist in cleaning. 5. Finally remove any excess moisture from the grout joints, to avoid discolouration or colour variation problems. 6. Allow the grout to cure for 24 hours before cleaning the grout haze with a soft dry cloth. 7. Hard to remove haze can be cleaned with Davco Sanitized® Tile & Grout Cleaner.
+    - Allow product to set firmly before return to service
+    - Setting times of grout is affected by site conditions, climate and could be faster or slower than specified
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.9 Cleaning of tools. Clean tools and equipment with water before the grout dries.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, confirm the site conditions with the manufacturer. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions to be verified. Refer to manufacturer. The data sheet reviewed (April 2025, Version 01.02) lists no application condition limits.
+    (Cite: Data sheet silent)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® Sanitized Colorgrout, April 2025, Version 01.02, https://aus.sika.com/content/dam/dms/au01/0/davco-sanitized-colorgrout.pdf
+    - Safety Data Sheet: Davco Sanitized Colorgrout, version 09/04/2025, https://aus.sika.com/content/dam/dms/au01/l/MSDS%20Davco%20Sanitized%20colourgrout%20GHS7.pdf
+    - Safety Data Sheet: SDS Davco Sanitized Colorgrout, version 07/07/2026, https://aus.sika.com/content/dam/dms/au01/3/sds-davco-sanitizedcolorgrout.pdf
+    - Safety Data Sheet: SDS Davco Sanitized Colorgrout, version 01/10/2026, https://aus.sika.com/content/dam/dms/au01/0/sds-davco-sanitizedcolorgrout.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.1, and include the records in the project documentation.
+
+============================================================
+PRODUCTS WITHOUT CLAUSES IN THIS FILE
+Davco® Superfine White Grout: left out to keep this file short. Use its own data sheet.
+SikaCeram®-690 Elite: left out to keep this file short. Use its own data sheet.
+SikaSeal® Kitchen and Bathroom: left out to keep this file short. Use its own data sheet.
+SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
+Sikasil®-702: left out to keep this file short. Use its own data sheet.
+
+============================================================
+SOURCES
+1. https://aus.sika.com/content/dam/dms/au01/h/davco-powder-mastic.pdf
+2. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-powder-mastic.html
+3. https://aus.sika.com/content/dam/dms/au01/f/davco-supamastic.pdf
+4. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-supamastic.html
+5. https://aus.sika.com/content/dam/dms/au01/4/sikatile-350-promaxset.pdf
+6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-350-promaxset.html
+7. https://aus.sika.com/content/dam/dms/au01/0/davco-sanitized-colorgrout.pdf
+8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-grouts/davco-sanitized-colorgrout.html
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.

@@ -1,0 +1,532 @@
+DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data sheet
+
+ENGINEERED OR AGGLOMERATE STONE (NOT MOISTURE SENSITIVE) ON CONCRETE: INTERNAL WET AREA FLOOR
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+
+PRODUCTS IN THIS SYSTEM
+1. Prepare and prime: Davco® PrimeX. Data sheet edition: November 2025, Version 01.01
+2. Prepare and prime: Davco® Ultraprime. Data sheet edition: June 2023, Version 01.02
+3. Prepare and prime: SikaTile®-010 Secure Prime. Data sheet edition: November 2024, Version 01.06
+4. Waterproofing membrane: Davco® K10 Rapid. Data sheet edition: May 2025, Version 01.01
+5. Waterproofing membrane: SikaTile®-110 Secure Proof. Data sheet edition: September 2026, Version 02.01
+6. Waterproofing membrane: SCHÖNOX® AB. Data sheet edition: October 2025, Version 01.08
+7. Tile adhesive: SikaTile®-400 EVO PRO. Data sheet edition: March 2025, Version 01.02
+8. Tile adhesive: SikaTile®-410 Secure Set. Data sheet edition: September 2023, Version 01.04
+9. Tile adhesive: SikaTile®-350 Pro Maxset. Data sheet edition: March 2025, Version 01.01
+10. Grout: SikaCeram®-690 Elite. Data sheet edition: December 2025, Version 07.01
+11. Movement joints and perimeter sealant: SikaSeal® Kitchen and Bathroom. Data sheet edition: April 2023, Version 03.01
+12. Movement joints and perimeter sealant: SikaSeal®-190 N Silicone. Data sheet edition: January 2026, Version 01.01
+13. Movement joints and perimeter sealant: Sikasil®-702. Data sheet edition: September 2025, Version 01.04
+
+============================================================
+PREPARE AND PRIME: Davco® PrimeX
+Data sheet edition: November 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide Davco® PrimeX where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (November 2025, Version 01.01).
+1.2 Product description. Davco® PrimeX is a technologically advanced acrylic and water based multipurpose wall and floor primer for use prior to the application of Davco tile adhesives, Lanko levellers and Davco waterproofing systems. Davco® PrimeX is premixed and ready to use, do not dilute.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - Davco® PrimeX is suitable as a porous primer and dense surfaces such as steel trowelled concrete and cement-based construction boards prior to applying Davco tile adhesives, lanko levellers, or Davco waterproofing membranes.
+    - Davco® PrimeX is suitable for interior and exterior applications. Commercial and domestic walls and floors.
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.7.
+
+2 MATERIALS
+2.1 Product. Davco® PrimeX
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (November 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Characteristics stated by the manufacturer.
+    - Ideal for steel troweled concrete
+    - Suitable for cement-based construction boards and cement sheets
+    - Wall and floor applications
+    - Internal and external use
+    - Ready ready to be covered in 30 minutes
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.4 Composition, appearance and supply.
+    - Colour: Red liquid
+    - Specific gravity: 1.0 ± 0.05
+    (Cite: Data sheet page 1: Product Information)
+2.5 Properties stated by the manufacturer.
+    - Flash point: Non-flammable
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: Davco® PrimeX is available in 1Ltr, 5Ltr jerry cans and 20Ltr pail
+    - Shelf life: 9 months from date of manufacture if unopened.
+    - Storage conditions: Store in dry cool conditions out of direct sunlight
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (November 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - Ensure the surface is dry, clean and firm, being free from dust, laitance, oil, grease, curing compounds, wax and other contaminants. Varnish, paint and old adhesive must be removed off the substrate prior to application of Davco® PrimeX.
+    - Highly glossy or burnish concrete that do not accept water penetration shall be mechanically prepared prior to priming.
+    - Construction boards and sheeting shall be fixed in accodance with the manufacturer instruction and specifically designed to receive tiling systems.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (November 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Consumption: 8-10m² per litre.
+    - Applied product ready for covering: 30 minutes at 22°C; The primer is dry when all the "milkiness" appearance disappears.
+    (Cite: Data sheet page 2: Application Information)
+4.3 Equipment.
+    - Paint roller with medium nap sleeve or Squeegee.
+    - Paint brush
+    - Personal protective equipment
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.4 Mixing.
+    - Davco® PrimeX is premixed, do not dilute.
+    - Shake Jerry cans prior to use.
+    - 20Ltr Pails can be stirrer with a mixing drill with stirrer attachment prior to use.
+    (Cite: Data sheet page 2: Application Instructions > Mixing)
+4.5 Application. 1. Apply Davco® PrimeX to the substrate using a broom, brush roller or squeegee, then allow the primer to dry. Note: The primer is dry when all milkiness disappears. 2. Under hot, windy conditions (temperature above 30ºC), it is recommended to wet down any concrete slabs with clean water prior to priming, so that the primer does not flash dry. Whilst wetting down the floor, do not allow the water to pool or pond on the surface. The substrate should appear matt, with no signs of glistening water just prior to application of the primer. 3. Extremely porous concrete slabs should be wet down with water, as per instructions above, to prevent flash drying of the primer. 4. Once PrimeX is applied, it is recommended that the substrate be subsequently coated within 24 hours, otherwise, you risk the chance of recontaminating the surface with site dirt and dust. If the area is left uncovered for more than 24 hours, then it must be wiped down with clean water to remove site dirt and dust, and re-priming prior to tiling / waterproofing.
+    (Cite: Data sheet page 2: Application Instructions > Application)
+4.6 Cleaning of tools. Tools and equipment shall be cleaned with water prior to the primer drying.
+    (Cite: Data sheet page 2: Application Instructions > Cleaning Of Tools)
+4.7 Limitations and important considerations.
+    - Test the product in an inconspicuous area first.
+    - Do not use on highly porous concrete or in hot windy conditions without pre-wetting the concrete down with clean cool water.
+    - Do not allow the product to freeze.
+    - Do not use in temperatures below 5°C or above 35°C.
+    - The use of Davco® PrimeX does not preclude good surface preparation practices.
+    - Not suitable for non-porous substrates, use Sike-Floor-14 Prep n Prime for non-porous substrates
+    - For uses not mentioned in this document please contact Sika Australia technical dept.
+    (Cite: Data sheet page 2: Limitations Of Use)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
+    - Do not allow the product to freeze.
+    - Do not use in temperatures below 5°C or above 35°C.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test the product in an inconspicuous area first.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® PrimeX, November 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/i/davco-primex.pdf
+    - Safety Data Sheet: SDS Davco PrimeX, version 16/12/2025, https://aus.sika.com/content/dam/dms/au01/i/sds-davco-primex.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. Please refer to the latest edition of the Material Safety Datasheet (MSDS) for safe handling requirements.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 2: Legal notes)
+6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+PREPARE AND PRIME: Davco® Ultraprime
+Data sheet edition: June 2023, Version 01.02
+
+1 SCOPE
+1.1 Work included. Provide Davco Ultraprime where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (June 2023, Version 01.02).
+1.2 Product description.
+    - Acrylic surface primer designed to increase the bond strength of tile adhesives and waterproofing membranes on porous substrates.
+    - Davco Ultraprime is suitable for both commercial and residential applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - Davco Ultraprime can be applied to concrete and most common building substrates prior to the application of Davco adhesives and waterproofing systems.
+    - Davco Ultraprime can be used prior to the application of adhesives or underlay.
+    - Davco Ultraprime can be used both internally and externally on wall and floor substrates
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable substrates include.
+    - Concrete
+    - Cement based screeds & renders
+    - Fibro cement sheeting / Ceramic tile underlay
+    - Porous Cement boards
+    - Light weight construction board coated with cement
+    - Autoclaved Aerated Concrete - AAC
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+
+2 MATERIALS
+2.1 Product. Davco Ultraprime
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (June 2023, Version 01.02) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.2).
+    - AS1884: referred to in instructions or limitations. Where: Application Instructions > SUBSTRATE QUALITY (p.2).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Fast drying
+    - Excellent coverage
+    - Adhesion promoter of tile adhesives and waterproofing membranes
+    - Primes and seals substrates
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Colour: Grey
+    - Appearance / Colour: Blue Liquid
+    - Volatile organic compound (VOC) content: Low VOC - 1g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Properties stated by the manufacturer.
+    - Flash point: 1.0 ± .05
+    - Consumption: 1 litre of Ultraprime covers approximately 8-10m² (surface texture and site conditions can alter the coverage of any particular installation).
+    - Drying Time: 30 Minutes
+    (Cite: Data sheet page 2: Product Information, Technical Information)
+2.7 Packaging, shelf life and storage.
+    - Packaging: Available in 1Ltr, 5Ltr jerry can and a 20Lt pail.
+    - Shelf life: 12 months from date of manufacture if unopened.
+    - Storage conditions: Store off ground in a cool, dry, location out of direct sunlight.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (June 2023, Version 01.02) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, laitance, oil, grease, wax, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to priming
+    - All concrete floors must be fully cured and dry, in accordance with AS1884. For substrates with a high moisture content or subject to rising damp, apply a Sika moisture / vapour barrier.
+    - Non-porous substrates, such as steel trowel concrete or compressed fibre cement sheet must be primed with Davco PrimeX
+    - Contaminated substrates can be prepared with the use of Davco Ultrabond, the surface must be sound and free of loose material.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (June 2023, Version 01.02) and the requirements below.
+4.2 Equipment.
+    - Personal protective equipment
+    - Paint roller with short nap - 10mm
+    - Paint brush
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.3 Mixing. Shake the primer prior to use.
+    (Cite: Data sheet page 2: Application Instructions > Mixing)
+4.4 Application.
+    - Ultraprime can be applied using a brush or roller
+    - Use a paint brush to apply to the corners and any areas of detail. Use a short (10mm) nap roller to apply to the walls and floor
+    - Take care to ensure that ponding of the primer doesn’t occur
+    - If Ultraprime is being applied to very porous concrete surfaces or in hot / windy conditions, the surface should be wet down prior to the application of the primer. Ensure the water does not pool or pond on the surface, the substrate should appear as a matt finish.
+    (Cite: Data sheet page 2: Application Instructions > Application)
+4.5 Cleaning of tools.
+    - Clean tools and equipment with water before the primer dries.
+    - Product that has dried will require mechanical removal.
+    (Cite: Data sheet page 2: Application Instructions > Cleaning Of Tools)
+4.6 Limitations and important considerations.
+    - Test in an inconspicuous area first.
+    - Do not use Davco Ultraprime below 5°C or above 35°C as this may affect the curing of the product.
+    - Not suitable for steel trowel concrete or compressed fibre cement sheet including ScyonTM - use Davco PrimeX
+    - Not suitable for contaminated substrates - use Ultrabond
+    - Do not prime an area which cannot be overcoated within 24 hours. If the area is left uncovered for more than 24 hours, it must be re-cleaned, and re-primed before overcoating.
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
+    - Do not use Davco Ultraprime below 5°C or above 35°C as this may affect the curing of the product.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test in an inconspicuous area first.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco Ultraprime, June 2023, Version 01.02, https://aus.sika.com/content/dam/dms/au01/6/davco-ultraprime.pdf
+    - Safety Data Sheet: SDS Davco Ultraprime, version 18/06/2025, https://aus.sika.com/content/dam/dms/au01/v/sds-davco-ultraprime.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 2: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 2: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+PREPARE AND PRIME: SikaTile®-010 Secure Prime
+Data sheet edition: November 2024, Version 01.06
+
+1 SCOPE
+1.1 Work included. Provide SikaTile®-010 Secure Prime where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (November 2024, Version 01.06).
+1.2 Product description.
+    - SikaTile®-010 Secure Prime is a high performance, ready to use, primer with efflorescence inhibiting properties suitable for porous and dense substrates.
+    - SikaTile®-010 Secure Prime helps prevent efflorescence by reducing the porosity of concrete, screeds and renders with its unique crystalline technology.
+    - SikaTile®-010 Secure Prime is suitable for use internally and externally on both wall and floor applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. SikaTile®-010 Secure Prime is suitable for the following applications.
+    - General purpose under tile priming of porous substrates
+    - General purpose primer for water-based waterproofing membranes
+    - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
+    - Priming of dense and steel trowelled concrete
+    - Concrete
+    - Cement boards and sheets including ScyonTM
+    - Plasterboard
+    - Glass re-inforced concrete
+    - Cement based screeds and renders
+    - Cement coated light weight construction boards
+    - Autoclaved Aerated Concrete (AAC)
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+
+2 MATERIALS
+2.1 Product. SikaTile®-010 Secure Prime
+    - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Certificates and test reports.
+    - Green Star - VOC Content Test Certificate
+    (Cite: Data sheet page 1: Certificates And Test Reports)
+2.3 Characteristics stated by the manufacturer.
+    - Ready to use, no mixing required
+    - Multiple uses, porous and dense concrete
+    - Inhibiting Efflorescence coming out of substrates
+    - Reduces substrate porosity through crystalline technology
+    - Reduced moisture migration by capillary action
+    - Versatile - suitable for internal, and external use including submerged applications such as tiled pools and spas.
+    - Low VOC
+    (Cite: Data sheet page 1: Features)
+2.4 Composition, appearance and supply.
+    - Appearance and colour: Milky white liquid, dries clear.
+    - Volatile organic compound (VOC) content: 6 grams per Litre
+    (Cite: Data sheet page 1: Product Information)
+2.5 Packaging, shelf life and storage.
+    - Packaging: 5 Litre pails
+    - Shelf life: 9 months from date of manufacture if stored out of direct sunlight unopened in original container.
+    - Storage conditions: Store in dry cool conditions our of direct sunlight. Do not allow product to freeze.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (November 2024, Version 01.06) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality / pre-treatment.
+    - All substrates shall be free from loose friable materials, dust, and debris, release agents, curing compounds, grease, sealers and other contaminating materials. Contaminated substrates must be mechanically prepared to expose at least 80% of the original substrate.
+    - Early aged concrete shall be a minimum of 7 days old at 22°C & 50% relative humidity prior to application.
+    - Early aged cement-based screeds shall be a minimum of 24 hours old at 22°C and 50% relative humidity per 40mm of thickness.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (November 2024, Version 01.06) and the requirements below.
+4.2 Application data.
+    - Yield: Approximately 13 m² per litre dependant on substrate porosity.
+    - Curing time: 25-40 minutes dependant on climate, substrate porosity, and application technique.
+    (Cite: Data sheet page 2: Application Information)
+4.3 Equipment.
+    - Brush, roller or low pressure spray applicator
+    - Protective personal equipment
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.4 Application.
+    - Apply the SikaTile®-010 Secure Prime to substrates as required with a brush, roller or low pressure spray applicator.
+    - Allow the primer to dry prior to subsequent application of waterproofing membrane or tile adhesive.
+    - Application of the waterproofing membrane or tile adhesive should be undertaken after the primer has dried to minimise the chance of contamination.
+    (Cite: Data sheet page 2: Application Instructions > Application)
+4.5 Cleaning of equipment. Tools and equipment can be cleaned with water while the product is still wet.
+    (Cite: Data sheet page 2: Application Instructions > Cleaning Of Equipment)
+4.6 Limitations and important considerations.
+    - Not for use as a vapour barrier or in areas of rising damp.
+    - Do not dilute
+    - Use in temperatures between 5°C and 35°C
+    - SikaTile®-010 Secure Prime is not suitable for use over existing tiles and waterproofing membranes
+    - SikaTile®-010 Secure Prime is not suitable for use on plastics, metal, or glass.
+    - Do not use in high windy conditions to avoid flash setting.
+    - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
+    - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
+    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - For use other than mentioned in this document please contact Sika® Australia.
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
+    - Use in temperatures between 5°C and 35°C
+    - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaTile®-010 Secure Prime, November 2024, Version 01.06, https://aus.sika.com/content/dam/dms/au01/h/sikatile-010-secureprime.pdf
+    - Safety Data Sheet: SikaTile®-010 Secure Prime, version 07/09/2022, https://aus.sika.com/content/dam/dms/au01/x/SikaTile%C2%AE-010%20Secure%20Prime
+    - Safety Data Sheet: SDS SikaTile®-010 Secure Prime, version 29/03/2026, https://aus.sika.com/content/dam/dms/au01/t/sds-sikatile-010secureprime.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 2: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 2: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+WATERPROOFING MEMBRANE: Davco® K10 Rapid
+Data sheet edition: May 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide Davco® K10 Rapid where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
+1.2 Product description. Davco® K10 Rapid is a flexible, rapid drying, Class III waterproofing membrane designed for internal and external applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer - Surfaces.
+    - Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting. Areas
+    - Suitable for interior and exterior applications. Commercial and domestic walls and floors including wet areas such as showers, bathrooms, terraces, balconies, roofs walkways prior to tiling, using Davco cement based adhesives. Also suitable for confined areas, as Davco K10 Rapid is water based and solvent free.
+    - Davco® K10 Rapid can be used in conjunction with Davco K10 Plus as required.
+    (Cite: Data sheet page 1: Uses > Surfaces)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+
+2 MATERIALS
+2.1 Product. Davco® K10 Rapid
+    - Product type as printed on the data sheet: A FLEXIBLE RAPID DRYING CLASS III WATERPROOFING MEMBRANE DESIGN FOR UNDER TILE APPLICATIONS.
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Rapid drying
+    - Class III highly flexible
+    - Ideal for cool and cold climate for faster drying
+    - Water based polyurethane
+    - Non-toxic & low VOC
+    - Suitable as an anti-fracture membrane prior to tiling applications
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Colour: Yellow liquid/paste
+    - Volatile organic compound (VOC) content: Low VOC 40g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 15 Litre pails / 32 pails per pallet
+    - Shelf life: If unopened 12 months from date of manufacture.
+    - Storage conditions: Store in dry cool conditions out of direct sunlight. Do not allow product to freeze.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - All surfaces must be installed according to manufacturer's instructions and relevant Australian Standards and be structurally sound, dry, clean and free from movement, oil, grease, wax, curing compounds, release agents, efflorescence or any other loose or contaminating material. ▪ Prior to application, remove all sharp protrusions, which may pierce the membrane
+    - Avoid voids, potholes and divots in the substrate must be appropriately prepared with a Sika branded patching mortar.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+3.3 Substrate quality - Concrete.
+    - All new concrete slabs must have a wood float finish and be allowed to cure for 6 weeks.
+    - Old concrete must be cleaned with a strong commercial grade detergent or degreaser. Residue must be thoroughly washed off with clean water. Allow the surface to dry for at least 24 hours.
+    - If the concrete has a steel trowel or power float finish, it must be mechanically prepared to expose the aggregate. Signs of Laitance and Efflorescence must be removed.
+    - Cement Render & Screeds Rendered or screeds must have a wood float finish and be allowed to cure for 7 days.
+    - Light Weight Blocks Prime the surface with 2 coats of Davco Ultraprime or Davco PrimeX
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Concrete)
+3.4 Substrate quality - Metal drains and waterstop angles.
+    - All metal surfaces must be free from rust Lightly abrade/ sand the substrate prior to application of the Davco K10 Rapid
+    - PVC Control leak flanges Control leak flanges shall be recessed to avoid water pooling.
+    - Lightly sand control leak flanges prior to waterproofing application.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
+3.5 Substrate quality - Bond Breaker.
+    - Any suitable Sika neutral cure silicone sealant
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Bond Breaker)
+3.6 Substrate quality - Connector Sealants.
+    - Any suitable Sikaflex PU sealant
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Connector Sealants)
+3.7 Substrate quality - Cracks - subject to movement (non structural).
+    - All cracks / joints, irrespective of their width, must be filled with a Sika branded Neutral cure silicone sealant. Then a 50mm wide polyethylene / polypropylene tape should be placed over the crack, ensuring it adheres to the surface.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Cracks - subject to movement (non structural))
+3.8 Substrate quality - Building Boards and Sheeting Standard.
+    - Wall / floor building boards must be primed with a suitable Sika Branded primer and firmly fixed in accordance to manufacturer instructions and applicable Australian Standards. Such boards / sheeting include plasterboard, fibre cement sheeting, marine grade ply and wet area composition board. Check with the board / sheeting manufacturer for their suitability.
+    - Screw or nail heads must be treated with a Sika branded epoxy or a Sika connector sealant
+    - All sheeting joints need to be covered with a 50mm wide Polyethylene / Polypropylene tape.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Building Boards and Sheeting Standard)
+3.9 Substrate quality - Compressed Fibre Cement Boards.
+    - This should be primed using Davco PrimeX. Allow the primer to dry before application of the membrane.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Compressed Fibre Cement Boards)
+3.10 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.11 Substrate quality / pre-treatment - Primer Guide.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
+4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 15Ltr pail will cover approximately 10m2 with 2 coats.
+    (Cite: Data sheet page 2: Application Information > Consumption)
+4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relative humidity. Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only.
+    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
+4.4 Equipment.
+    - Personal protective equipment, safety glass, gloves etc
+    - Paint brush
+    - Medium nap paint roller
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.5 Mixing. Product is supplied premixed, however a light restir is recomended.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.6 Application.
+    - Use a thick brush or a medium nap roller to apply the first coat of Davco K10 Rapid on the area to be waterproofed
+    - Allow the first coat to dry for approximately 1-2 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no pinholes or air bubbles on the membrane surface.
+    - Apply a third coat only if necessary or required to do so
+    - Allow the final coat to dry for at least 6 hours before tiling (according to temperature conditions). This gives an overall drying time of 6-8 hours for the full application.
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm thick.
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.7 Cleaning of tools.
+    - Tools and equipment can be cleaned with water prior to the product drying.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+4.8 Limitations and important considerations.
+    - Test product in an inconsipuous area first
+    - Do not apply in temperatures above 35ºC or below 5ºC
+    - Do not allow the product to freeze
+    - Delay external applications when inclement weather is imminent and protect from the ingress of water while drying
+    - Do not thin the liquid, it is supplied ready for use
+    - K10 Rapid is not recommended for use in areas of permanent water immersion like swimming pools, spas etc.
+    - Do not use where negative hydrostatic pressure is evident (i.e. rising damp), as it affects the bond of K10 Rapid. Contact Sika Australia for product recom-mendation in areas where negative hydrostatic pressure exists.
+    - Drying time can be affected by temperature and environment and drying time to be used as a guide only.
+    - For uses not mention on this product data sheet please contact Sika Australia.
+    (Cite: Data sheet page 2: Limitations Of Use)
+4.9 Limitations and important considerations.
+    - A test area should be undertaken to ensure suitability of product selection.
+    - For other uses not mentioned in these instructions, please contact Sika Australia technical services.
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
+    - Do not apply in temperatures above 35ºC or below 5ºC
+    - Do not allow the product to freeze
+    - Drying time can be affected by temperature and environment and drying time to be used as a guide only.
+    (Cite: Data sheet page 2: Limitations)
+5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+    - A test area should be undertaken to ensure suitability of product selection.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® K10 Rapid, May 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/i/davco-k10-rapid.pdf
+    - Safety Data Sheet: SDS Davco K10 Rapid, version 07/10/2026, https://aus.sika.com/content/dam/dms/au01/p/sds-davco-k10-rapid.pdf
+    - Safety Data Sheet: SDS Various Semi-Finished, version 07/10/2026, https://aus.sika.com/content/dam/dms/au01/1/sds-various-semi-finished.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+PRODUCTS WITHOUT CLAUSES IN THIS FILE
+SikaTile®-110 Secure Proof: left out to keep this file short. Use its own data sheet.
+SCHÖNOX® AB: left out to keep this file short. Use its own data sheet.
+SikaTile®-400 EVO PRO: left out to keep this file short. Use its own data sheet.
+SikaTile®-410 Secure Set: left out to keep this file short. Use its own data sheet.
+SikaTile®-350 Pro Maxset: left out to keep this file short. Use its own data sheet.
+SikaCeram®-690 Elite: left out to keep this file short. Use its own data sheet.
+SikaSeal® Kitchen and Bathroom: left out to keep this file short. Use its own data sheet.
+SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
+Sikasil®-702: left out to keep this file short. Use its own data sheet.
+
+============================================================
+SOURCES
+1. https://aus.sika.com/content/dam/dms/au01/i/davco-primex.pdf
+2. https://aus.sika.com/en/construction/tile-stone-installationsystems/primers-additives/davco-primex.html
+3. https://aus.sika.com/content/dam/dms/au01/6/davco-ultraprime.pdf
+4. https://aus.sika.com/en/construction/tile-stone-installationsystems/primers-additives/davco-ultraprime.html
+5. https://aus.sika.com/content/dam/dms/au01/h/sikatile-010-secureprime.pdf
+6. https://aus.sika.com/en/construction/tile-stone-installationsystems/primers-additives/sikatile-010-secureprime.html
+7. https://aus.sika.com/content/dam/dms/au01/i/davco-k10-rapid.pdf
+8. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/davco-k10-rapid.html
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.

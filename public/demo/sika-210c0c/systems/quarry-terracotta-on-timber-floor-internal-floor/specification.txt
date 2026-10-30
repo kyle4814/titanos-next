@@ -1,0 +1,454 @@
+DRAFT SPECIFICATION FROM PUBLISHED DATA SHEETS, check against the current data sheet
+
+QUARRY, TERRACOTTA OR SLATE TILES ON TIMBER OR PARTICLEBOARD FLOOR (OVER-SHEETED): INTERNAL FLOOR
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
+
+PRODUCTS IN THIS SYSTEM
+1. Tile adhesive: Davco® Ceramaflex. Data sheet edition: May 2025, Version 01.01
+2. Tile adhesive: Davco® Ultraflex. Data sheet edition: no data sheet edition on file
+3. Tile adhesive: Davco® SMP EVO. Data sheet edition: September 2022, Version 01.01
+4. Movement joints and perimeter sealant: SikaSeal® Kitchen and Bathroom. Data sheet edition: April 2023, Version 03.01
+5. Movement joints and perimeter sealant: SikaSeal®-190 N Silicone. Data sheet edition: January 2026, Version 01.01
+6. Movement joints and perimeter sealant: Sikasil®-702. Data sheet edition: September 2025, Version 01.04
+
+============================================================
+TILE ADHESIVE: Davco® Ceramaflex
+Data sheet edition: May 2025, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide Davco® Ceramaflex where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
+1.2 Product description. Davco® Ceramaflex is a flexible, thin or thick bed, off white, rubber modified cement-based tile adhesive. Davco® Ceramaflex is designed for wall & floor applications for both internal and external applications.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally. SUITABLE TILE TYPES ARE;
+    - Ceramic
+    - Porcelain
+    - Mosaic
+    - Terracotta
+    - Slate
+    - Quarry Tiles
+    - Concrete
+    - Cement renders
+    - Rendered brickwork & blockwork
+    - Plasterboard
+    - Fibre cement sheet
+    - Sika / Davco Approve waterproof membranes
+    - Screeds & Mortar beds
+    - Early aged screeds (minimum 24 hours @ 22°C & 50% RH)
+    - Timber floor (with fibre cement sheet underlay)
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+
+2 MATERIALS
+2.1 Product. Davco® Ceramaflex
+    - Product type as printed on the data sheet: A FLEXIBLE, THIN OR THICK BED, OFF WHITE, RUBBER MODIFIED CEMENT-BASED TILE ADHESIVE
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - SCAQMD method 304-91: cited elsewhere in the data sheet. Where: Environmental Information (p.1).
+    - AS ISO 13007.1: test method printed beside a stated value. Where: Product Information > Product Declaration (p.1).
+    - AS3958.1: referred to in instructions or limitations. Where: Application Instructions > Laying the Tiles (p.3).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - Flexible adhesive
+    - Economical
+    - Good bond strength
+    - Off white colour
+    - Suitable for early aged screeds
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Appearance / Colour: Off white powder with rubber crumb particles.
+    - Product Declaration: C1S1E (AS ISO 13007.1)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg Bags / 64 per pallet
+    - Shelf life: 12 Months from date of manufacture.
+    - Storage conditions: Store in dry cool conditions above ground out of direct sunlight. High humidity will reduce shelf life.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality / pre-treatment.
+    - Substrate deflection: all substrates under loads shall not exceed L/360 for tiles and L/720 for natural stone.
+    - All surfaces must be installed according to manufacturers instructions and relevant standards, and be structurally sound, dry clean and free from movement, oil, grease, wax, sealers, curing compounds or other bond inhibiting material. Thoroughly clean old surfaces or new surfaces that have been treated prior to tiling.
+    - Deeply contaminated surfaces require mechanical preparation. Expose at least 80% of the original surface of painted / coated substrates.
+    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Mixing Ratio: 7-8 Litres clean potable water per 20kg bag.
+    - Consumption: A 20kg bags cover approximately 14m² with a 6mm notch trowel.
+    - Layer Thickness: Maximum layer shall be no greater than 10mm.
+    - Pot Life: 1.5 hours
+    - Open Time: 30 minutes
+    - Adjustability Time: 20 minutes
+    (Cite: Data sheet page 2: Application Information)
+4.3 Applied Product Ready for Use.
+    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
+4.4 Equipment. Select a trowel with a suitable notch size for the tile size and type as per the following;
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.5 Mixing.
+    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag). 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand. 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved. 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
+    - *Adhesive may need restirring during the potlife, do not add more water.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.6 Application - Laying the Tiles. 1. Place the adhesive onto the prepared and primed substrate. Do not apply more adhesive than can be tiles within the open time of the product, usually from a single tile to 1m². 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the required area where tile is to be applied, comb the adhesive in a single direction (not swirls). 4. Where "back buttering" the tile is required, use the flat side of the notched trowel to apply a thin adhesive layer to the back of the tile (approx 1-2mm thick). 5. Place the tile into the combed adhesive and press the tile firmly. 6. Move the tile forward and then back at 90° across the direction of the combed adhesive to flatten the adhesive to leave no voids under the tile. Occassionally life a tile to check the adhesive covers 90-100% of the tile. 7. Remove any excess adhesive in the joints, and on the face of the tile with a sponge and water while the adhesive is still wet.
+    - Do not allow the adhesive to skin prior to placement of the tiles. If the adhesive skins, remove and replace.
+    - Application shall be in accordance with AS3958.1
+    - Movement joints shall be installed in accordance with applicable standards.
+    - Back buttering the tiles may be required to achieve minimum coverage requirements.
+    - Allow the adhesive to dry prior to grouting.
+    (Cite: Data sheet page 3: Application Instructions > Application > Laying the Tiles)
+4.7 Cleaning of tools. Clean tools and equipment with water orior to adhesive drying.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+4.8 Limitations and important considerations.
+    - Test product in an inconspicuous area first.
+    - When using Davco® Ceramaflex externally or in wet areas ensure correct drainage and falls exist, so that water does not pond on the tile surface.
+    - Not suitable for submerged applications.
+    - Not suitable for fixing tiles directly onto timber floors
+    - For applications above 3 meter high special fixing techniques are required
+    - Efflorescence is beyond the control of the manufacturer due to site coniditions beyond our control.
+    - For uses not mentioned in this datasheet seek further advice from Sika / Davco Australia.
+    (Cite: Data sheet page 2: Important Considerations)
+4.9 Environmental information. Low VOC - 5g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Environmental Information)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Ambient Air Temperature. Min +5°C to Max 35°C
+    (Cite: Data sheet page 2: Application Information > Ambient Air Temperature)
+5.3 Substrate Temperature. Min +5°C to Max 35°C
+    (Cite: Data sheet page 2: Application Information > Substrate Temperature)
+5.4 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test product in an inconspicuous area first.
+    (Cite: Data sheet page 2: various)
+5.5 Test methods printed beside stated values. Each value is as printed in the data sheet with its test method.
+    - Product Declaration: C1S1E (AS ISO 13007.1)
+    (Cite: Data sheet page 1: Technical information)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco® Ceramaflex, May 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/5/davco-ceramaflex.pdf
+    - Safety Data Sheet: SDS Davco Ceramaflex, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/w/sds-davco-ceramaflex.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage, and disposal of chemical products, users shall refer to the latest Safety Data Sheet (SDS) containing physical, ecological, toxicological, and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 3: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+TILE ADHESIVE: Davco® SMP EVO
+Data sheet edition: September 2022, Version 01.01
+
+1 SCOPE
+1.1 Work included. Provide Davco SMP EVO where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (September 2022, Version 01.01).
+1.2 Product description.
+    - Davco SMP EVO is a flexible, cement-based tile adhesive specifically designed for premium stone, marble and porcelain tiles.
+    - Davco SMP EVO has superior non-slump properties making it suitable for large format tile and stone applications.
+    - Davco SMP EVO is equipped with patented DUSTLESS technology which reduces dust during the mixing phase.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer. Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies, patios, swimming pools and spas. Suitable tile types include;
+    - Ceramic tiles
+    - Porcelain tiles
+    - Quarry tiles
+    - Mosaic tiles
+    - Natural stone including Marble, Granite, etc
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable substrates include.
+    - Concrete
+    - Cement boards and sheets
+    - Cement renders and screeds, including early aged screeds and concrete
+    - Rendered brick and blockwork
+    - Light weight construction boards coated with cement
+    - Sika approved acoustic underlayment's
+    - Under tile Sika waterproofing membranes
+    - Timber flooring with cement sheeting
+    - Under floor heating
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+
+2 MATERIALS
+2.1 Product. Davco SMP EVO
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (September 2022, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
+    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
+    (Cite: Data sheet: whole data sheet)
+2.4 Characteristics stated by the manufacturer.
+    - DUST LESS Technology that reduces airborne dust by up to 80% during the mixing phase.
+    - Commercial grade
+    - Suitable for swimming pools and spas
+    - Suitable over under floor heating
+    - Non Slump suitable for large format tiles
+    - Non vertical slump for easy wall tiling
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.5 Composition, appearance and supply.
+    - Product Declaration: When mixed with water, Class - C2TES1; When mixed with Davco Davelastic, Class - C2TES2
+    - Appearance / Colour: White powder
+    - Volatile organic compound (VOC) content: Low VOC - 7g/L (SCAQMD method 304-91)
+    (Cite: Data sheet page 1: Product Information)
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg Paper bags / 64 bags per pallet; 5kg Plastic film bags / 4 bags per box
+    - Shelf life: Paper bags: if unopened 12 Months from date of manufacture. Plastic film bags: if unopened 18 months from date of manufacture.
+    - Storage conditions: Store in dry cool conditions, elevated out of direct sunlight
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (September 2022, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality.
+    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling
+    - Deeply contaminated surfaces must be scabbled / abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces
+    - Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality)
+3.3 Substrate preparation.
+    - Refer to the specific primer product datasheet for additional information
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (September 2022, Version 01.01) and the requirements below.
+4.2 Application data.
+    - Mixing Ratio: 5 - 6 Litres of clean potable water per 20kg Bag; 1.4 - 1.5 Litres of clean potable water per 5kg bag
+    - Consumption: 20kg Bag of Davco SMP EVO covers approximately 6-7m² with a 10mm notched trowel.
+    - Pot Life: 1.5 hours
+    - Open Time: 30 minutes
+    - Adjustability Time: 20 minutes
+    (Cite: Data sheet page 2: Application Information)
+4.3 Applied Product Ready for Use.
+    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
+4.4 Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirring paddle
+    - Clean mixing buckets
+    - Select a trowel with an appropriate square-notch size for the size and type of tile, as per the following:
+    (Cite: Data sheet page 2: Application Instructions > Equipment)
+4.5 Mixing. 1. Measure the right amount of clean, potable water (or diluted Davelastic solution) into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
+    - Adhesive may need restirring due its pot-life, do not add additional water to the mixture.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.6 Application - Laying the Tiles. 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m2 at a time. 2. Hold the notched trowel at an angle of 60º or greater to the substrate. 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90º across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the surface of the tiles and within the grout joint while the adhesive is still wet.
+    (Cite: Data sheet page 3: Application Instructions > Application > Laying the Tiles)
+4.7 Cleaning of tools.
+    - Clean tools and equipment with water before the adhesive dries.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
+4.8 Limitations and important considerations.
+    - Test product in an inconspicuous area first
+    - Do not apply in temperatures above 35ºC or below 5ºC
+    - In cool and / or humid conditions, allow longer setting times
+    - Do not allow the adhesive to skin prior to laying the tiles. If the adhesive skins remove and dispose of it, then re-apply fresh adhesive
+    - Not suitable for moisture sensitive stone, seek further advice from Sika representative
+    - For tiling over existing ceramic tiles in wet areas, such as a shower recess, mix Davco SMP Evo with a diluted Davco Davelastic solution
+    - Do not use for tiling over existing tiles in submerged areas, such as swimming pools and spas
+    - Due to uncontrollable external factors efflorescence is beyond the control of the manufacturer
+    - Setting times of adhesive is affected by site conditions, climate and could be faster or slower than specified
+    (Cite: Data sheet page 2: Important Considerations)
+4.9 Further information. It is essential to plan the area to be tiled, with inclusion of movement joints, in accordance with the relevant Australian Standard . Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+    - Over movement joints in the substrate
+    - At a junction between different substrate materials
+    - At fixtures interrupting the tile surface e.g. columns
+    - At internal vertical corners
+    - Around the perimeter of the tiling system
+    - At a maximum of 4.5m centres, in a grid pattern
+    - Movement joints should be kept free from dirt and adhesive droppings
+    - All movement joints can be filled with a suitable Sika sealant.
+    (Cite: Data sheet page 2: Further Information)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
+    - Do not apply in temperatures above 35ºC or below 5ºC
+    - Not suitable for moisture sensitive stone, seek further advice from Sika representative
+    (Cite: Data sheet page 2: Limitations)
+5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Test product in an inconspicuous area first
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: Davco SMP EVO, September 2022, Version 01.01, https://aus.sika.com/content/dam/dms/au01/u/davco-smp-evo.pdf
+    - Safety Data Sheet: SDS Davco SMP EVO, version 04/06/2026, https://aus.sika.com/content/dam/dms/au01/5/sds-davco-smp-evo.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
+    (Cite: Data sheet page 2: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 4: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 3: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+MOVEMENT JOINTS AND PERIMETER SEALANT: SikaSeal® Kitchen and Bathroom
+Data sheet edition: April 2023, Version 03.01
+
+1 SCOPE
+1.1 Work included. Provide SikaSeal® Kitchen and Bathroom where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (April 2023, Version 03.01).
+1.2 Product description.
+    - SikaSeal® Kitchen and Bathroom is a one-component, neutral curing, low odour silicone sealant with excellent adhesion.
+    - SikaSeal® Kitchen and Bathroom cures through the absorption of atmospheric moisture to give a tough but flexible waterproof seal.
+    (Cite: Data sheet page 1: Description)
+1.3 Intended uses stated by the manufacturer.
+    - Kitchen
+    - Bathrooms
+    - Showers
+    - Tiled wet areas
+    - Benchtops
+    - Basins
+    - Baths
+    - Toilets
+    - Around Splashbacks
+    - Around plumbing fixtures and penetrations
+    - General interior & exterior sealing around the home
+    (Cite: Data sheet page 1: Uses)
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.7.
+
+2 MATERIALS
+2.1 Product. SikaSeal® Kitchen and Bathroom
+    - Product type as printed on the data sheet: 1-component neutral cure wet area silicone sealant
+    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
+    (Cite: Data sheet page 1: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (April 2023, Version 03.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
+2.3 Characteristics stated by the manufacturer.
+    - Neutral cure
+    - Excellent adhesion to most common construction materials such as: glass, enamel, ceramics, tiles, most metal*, most plastic, rubber, concrete and grouts
+    - Non-sag
+    - Great tooling characteristics
+    - Mould resistance
+    - Interior and exterior usage
+    - Fast curing
+    - Minimum movement capability ±25%
+    - High temperature resistance (-40°c to +150°c)
+    (Cite: Data sheet page 1: Characteristics / Advantages)
+2.4 Composition, appearance and supply.
+    - Composition: Neutral cure silicone
+    - Colour: White, Translucent, Mid Grey, Off White, Black, Stone, Pewter, Grey, Charcoal, Brown, Beige, Almond Ivory, Alabaster
+    (Cite: Data sheet page 1: Product Information)
+2.5 Density.
+    (Cite: Data sheet page 1: Product Information > Density)
+2.6 Properties stated by the manufacturer.
+    - Service temperature: -40°c to +150°c
+    (Cite: Data sheet page 2: Technical Information)
+2.7 Shore A hardness.
+    (Cite: Data sheet page 2: Technical Information > Shore A hardness)
+2.8 Secant tensile modulus.
+    (Cite: Data sheet page 2: Technical Information > Secant tensile modulus)
+2.9 Elongation at break.
+    (Cite: Data sheet page 2: Technical Information > Elongation at break)
+2.10 Movement capability.
+    (Cite: Data sheet page 2: Technical Information > Movement capability)
+2.11 Joint design. The joint width must be designed to suit the joint movement required and the movement capability of the sealant. The joint width shall be ≥ 6 mm and ≤ 45 mm. The joint depth shall be ≥ 6 mm and ≤ 15 mm. A width to depth ratio of 2:1 must be maintained (for exceptions, see table below). Typical joint dimensions.
+    (Cite: Data sheet page 2: Technical Information > Joint design)
+2.12 Packaging, shelf life and storage.
+    - Packaging: 300ml cartridges
+    - Shelf life: 12 months from date of production if stored in undamaged and unopened original sealed containers.
+    - Storage conditions: Storage in dry conditions and protected from direct sunlight at temperatures between +5°C and +25°C.
+    (Cite: Data sheet page 1: Product Information)
+
+3 SUBSTRATE PREPARATION
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (April 2023, Version 03.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate preparation.
+    - The substrate must be clean, dry, sound and free from oils, grease, dust, cement laitance and loose or friable particles. For optimum adhesion, joint durability and critical, high performance applications such as joints on multi-storey buildings, highly stressed joints, extreme weather exposure or water immersion/exposure. The following priming and/or pre-treatment procedures must be followed:
+    - Non-porous substrates
+    - Float glass, coated glass, anodised aluminium and stainless steel must be pre-treated using Sika® Aktivator-205 or Sika® Aktivator-100. Powder coated and PVDF coated metals must be pre-treated using Sika® Aktivator-205. For more details such as application and flash-off times, refer to the most recent Product Data Sheet of the respective pre-treatment product. Porous substrates
+    - Concrete, aerated concrete and cement based renders, mortars and bricks must be primed using Sika® Primer-3 N. For more details such as application and flash-off times, refer to the most recent Product Data Sheet of the respective pre-treatment product. Adhesion tests on project specific substrates must be performed and procedures agreed with all parties before full project application. Contact Sika Technical Services for additional information. Note: Primers and activators are adhesion promoters and not an alternative to improve poor preparation/cleaning of the joint surface. Primers also improve the long term adhesion performance of the sealed joint.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
+
+4 APPLICATION
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (April 2023, Version 03.01) and the requirements below.
+4.2 Application data.
+    - Curing rate: Approximately 3-4mm per 24 hours @ 23°C/50% r.h.
+    (Cite: Data sheet page 2: Application Information)
+4.3 Tack free time.
+    (Cite: Data sheet page 2: Application Information > Tack free time)
+4.4 Application method / tools.
+    - Masking
+    - It is recommended to use masking tape where neat or exact joint lines are required. Remove the tape within the skin time after finishing.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools)
+4.5 Application method / tools - Joint Backing.
+    - After the required substrate preparation, insert a suitable backing rod to the required depth.
+    - Priming
+    - If required, prime the joint surfaces as recommended in substrate preparation. Avoid excessive application of primer to avoid causing puddles at the base of the joint.
+    - Application
+    - SikaSeal® Kitchen and Bathroom is supplied ready to use. Prepare the end of the foil pack or cartridge, insert into the sealant gun and fit the nozzle. Extrude SikaSeal® Kitchen and Bathroom into the joint ensuring that it comes into full contact with the sides of the joint and avoiding any air entrapment.
+    - Finishing
+    - As soon as possible after application, sealant must be firmly tooled against the joint sides to ensure adequate adhesion and a smooth finish. Use a compatible water based non-staining tooling agent (e.g. Sika® Tooling Agent N) to smooth the joint surface. Do not use tooling products containing solvents.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Joint Backing)
+4.6 Cleaning of equipment. Clean all tools and application equipment with Sika® Remover-208 immediately after use. Hardened material can only be removed mechanically. For cleaning skin, use Sika® Cleaning Wipes-100.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
+4.7 Limitations and important considerations.
+    - When applying sealant into a previously silicone sealed joint, ensure all residue is removed from joint.
+    - Colour variations may occur due to the exposure in service to chemicals, high temperatures and/or UV-radiation (especially with white colour shade). This effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - The complete absence of UV may cause light coloured silicone (especially white) to discolour, this effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - SikaSeal® Kitchen and Bathroom cannot be overpainted.
+    - Do not use on natural stone.
+    - Do not use on bituminous substrates, natural rubber or any building materials which might leach oils, plasticisers or solvents that could degrade the sealant. EPDM or other gaskets in direct contact with SikaSeal® Kitchen and Bathroom have to be tested for compatibility prior to application. For specific advice contact Sika technical services.
+    - Pre-test should be performed prior to use on prestressed polyacrylate and polycarbonate as it may cause environmental stress cracking (crazing).
+    - Pre-test in an inconspicuous area prior to use in application on porous material such as concrete to ensure the product does not stain the substrate.
+    - Do not use SikaSeal® Kitchen and Bathroom in areas which are exposed to strong oxidising acids (e.g. nitric acid) and bases.
+    - Do not use to seal joints in or around swimming pools.
+    - Do not use for joints under water pressure or permanent water immersion.
+    - Do not use SikaSeal® Kitchen and Bathroom in totally confined spaces as it requires atmospheric moisture to cure.
+    - Do not use for medical or pharmaceutical applications.
+    (Cite: Data sheet page 2: Important Considerations)
+
+5 QUALITY CONTROL AND TESTING
+5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Ambient air temperature. +5 °C min./+40 °C max.
+    (Cite: Data sheet page 2: Application Information > Ambient air temperature)
+5.3 Substrate temperature. +5 °C min./+40 °C max. Minimum +3 °C above dew point temperature
+    (Cite: Data sheet page 2: Application Information > Substrate temperature)
+5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
+    - Colour variations may occur due to the exposure in service to chemicals, high temperatures and/or UV-radiation (especially with white colour shade). This effect is aesthetic and does not adversely influence the technical performance or durability of the product.
+    - Do not use SikaSeal® Kitchen and Bathroom in totally confined spaces as it requires atmospheric moisture to cure.
+    (Cite: Data sheet page 2: Limitations)
+5.5 Trials, test areas and compatibility checks stated by the manufacturer.
+    - Pre-test in an inconspicuous area prior to use in application on porous material such as concrete to ensure the product does not stain the substrate.
+    (Cite: Data sheet page 2: various)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+    (Cite: Data sheet page 2: Basis Of Product Data)
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+
+6 WARRANTY AND DOCUMENTATION
+6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
+    - Product Data Sheet: SikaSeal® Kitchen and Bathroom, April 2023, Version 03.01, https://aus.sika.com/content/dam/dms/au01/a/sikaseal_kitchenandbathroom.pdf
+    - Safety Data Sheet: Sikaseal Kitchen and Bathroom, version 22/12/2022, https://aus.sika.com/content/dam/dms/au01/o/SikaSeal%20Kitchen%20&%20Bathroom%20GHS7.pdf
+    - Safety Data Sheet: SDS SikaSeal® KITCHEN AND BATHROOM, version 15/09/2025, https://aus.sika.com/content/dam/dms/au01/q/sds-sikaseal-kitchenandbathroom.pdf
+    (Cite: Manufacturer website: Product page documents)
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+    (Cite: Data sheet page 3: Ecology, Health And Safety)
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    (Cite: Data sheet page 4: Legal notes)
+6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
+    (Cite: Data sheet page 4: Local Restrictions)
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+
+============================================================
+PRODUCTS WITHOUT CLAUSES IN THIS FILE
+Davco® Ultraflex: no specification clauses on file. Use its own data sheet.
+SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
+Sikasil®-702: left out to keep this file short. Use its own data sheet.
+
+============================================================
+SOURCES
+1. https://aus.sika.com/content/dam/dms/au01/5/davco-ceramaflex.pdf
+2. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-ceramaflex.html
+3. https://aus.sika.com/content/dam/dms/au01/u/davco-smp-evo.pdf
+4. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-smp-evo.html
+5. https://aus.sika.com/content/dam/dms/au01/a/sikaseal_kitchenandbathroom.pdf
+6. https://aus.sika.com/en/construction/sealants-adhesives/sanitary-sealants/sikaseal-kitchenandbathroom.html
+
+This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.
