@@ -1,0 +1,4 @@
+Barlow typeface, Copyright 2017 The Barlow Project Authors (https://github.com/jpt/barlow).
+Licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org). The font files in this folder are
+unmodified Latin subsets served by Google Fonts. Used here as the closest freely licensed match to the proprietary typeface
+on the company's own website, for a design demonstration.
