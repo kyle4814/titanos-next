@@ -5,6 +5,8 @@ import { tokenize, normalise } from './tokenize.js';
 
 const NOT_IN_DATA = /\b(do not|does not|did not|cannot) (hold|have|list|say|name|state)\b|will not guess|no [a-z ]+ statement that i can quote|not in the published|not published/i;
 const ALWAYS = new Set(['out_of_scope', 'where_to_buy', 'contact']);
+// Stock, price, delivery, discounts and warranty terms are never in the published product documentation: always hand these over.
+const COMMERCIAL = /\b(in stock|stock levels?|out of stock|availab(?:le|ility)|warrant(?:y|ies)|guarantee[sd]?|deliver(?:y|ies)|lead times?|discounts?|trade (?:price|pricing|account)s?|prices?|pricing|costs?|how long (?:will|would|do|does) [^?]{0,40}\blast|life ?span|life expectancy|service life)\b/i;
 // Words that are part of the question's frame, not a condition the visitor is asking about.
 const FRAME = new Set(['tile', 'tiling', 'floor', 'wall', 'over', 'onto', 'adhesive', 'grout', 'sealant', 'product', 'layer', 'apply', 'fix', 'fixing', 'laying', 'lay', 'put', 'make', 'work', 'safe', 'ok', 'okay', 'possible', 'allowed', 'one', 'pot', 'grey', 'davco']);
 
@@ -40,6 +42,8 @@ export function handoffFor({ intent, query, blocks, state, byId, config }) {
   const products = ids.slice(0, 3).map((id) => byId.get(id)).filter(Boolean).map((p) => ({ id: p.id, name: plain(p.name) }));
   let missing = [];
   if (intent === 'compatibility') missing = uncoveredTerms(query, products.map((p) => p.name), blocks);
+  const commercial = COMMERCIAL.test(String(query || ''));
+  if (commercial && !missing.length) missing = ['stock, price, delivery or warranty'];
   if (!(ALWAYS.has(intent) || textual || missing.length)) return null;
   return buildHandoff({ query, products, sel: Object.entries(st.facets || {}).filter(([, v]) => Array.isArray(v) && v.length).map(([k, v]) => `${k}: ${v.join(', ')}`), reason: missing.length ? `The published text I quoted does not mention: ${missing.join(', ')}.` : 'This is not in the published data I hold.', config });
 }

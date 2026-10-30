@@ -1,6 +1,7 @@
 // My projects and the demo-only quote request, plus the About page.
 import { offlinePanel } from './offline-ui.js';
 import { h, icon, nf, plural, announce, fmtBytes } from './util.js';
+import { coveragePanel } from './coverage_panel.js';
 import { derived, data, documents } from './data.js';
 import { breadcrumb, emptyState, placeholder } from './components.js';
 import { projects } from './projects.js';
@@ -83,6 +84,7 @@ function saveText(text) {
 
 /* ------------------------------------------------------------------ about */
 export async function aboutView(ctx) {
+  const cov = await coveragePanel();
   const { cfg } = ctx; const stats = (await data.stats()) || {}; const d = cfg.demo;
   const row = (k, v) => h('tr', null, h('th', { scope: 'row', style: 'text-transform:none;letter-spacing:0;font-size:1rem' }, k), h('td', null, v));
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'About this demo' }]),
@@ -103,6 +105,7 @@ export async function aboutView(ctx) {
         row('Products', nf.format(stats.products || 0)), row('Documents (PDS, SDS, brochures, certificates)', nf.format(stats.documents || 0)),
         row('Categories', nf.format(stats.categories || 0)), row('Guide and section pages indexed', nf.format(stats.pages || 0)),
         stats.docs_link_ok !== undefined ? row('Document links checked on the build date', `${nf.format(stats.docs_link_ok)} responded, ${nf.format(stats.docs_link_failed)} did not (marked in the library)`) : null)),
+      cov,
       h('h2', { class: 'h4' }, 'The product advisor'),
       h('p', null, `It answers from ${cfg.company.publishedDocsPhrase}: it finds products, quotes published coverage rates, opens data sheets and works out quantities. It is plain code running in your browser. No AI model is called, nothing is sent anywhere and it costs nothing to run. When the documentation does not say, it says so.`),
       h('p', null, h('a', { href: '#/rules' }, 'See the rule ledger'), ': every rule the advisor works from, with its source sentence, filterable and downloadable. See also ', h('a', { href: '#/insights' }, 'the insights and gap list'), ' (this browser only).'),

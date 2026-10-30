@@ -18,7 +18,7 @@ const RULES = {
     [/\b(compatible|compatibility|compatib\w*)\b/, 4], [/\b(what|which) primer\b/, 4], [/\bprimer (for|to use|required|needed)\b/, 3.5], [/\bdo i (need|have to) (a |to use a )?primer\b/, 3.5],
     [/\bcan (i|you|we) (use|apply|put|lay|tile|install|bond|stick|fix|paint|coat|seal)\b[^?]*\b(over|on|onto|with|to|under|after)\b/, 4], [/\b(on top of|work with|go with|used with|use with|together with|mix with|combine with|apply over|tile over|bond to|adhere to)\b/, 3],
   ],
-  where_to_buy: [[/\b(where (can|do|to|could) (i |we )?(buy|get|purchase|find)|buy|purchase|stockists?|distributors?|retailers?|suppliers?|price|pricing|how much does (it|\w+) cost|available (at|from)|bunnings|store|stores|order online|shop)\b/, 4.5]],
+  where_to_buy: [[/\b(where (can|do|to|could) (i |we )?(buy|get|purchase|find)|who (sells|stocks|supplies)|near me|nearest|buy|purchase|stockists?|distributors?|retailers?|suppliers?|price|pricing|how much does (it|\w+) cost|available (at|from)|bunnings|store|stores|order online|shop)\b/, 4.5]],
   contact: [[/\b(contact|phone|call (you|someone|them)|email|telephone|speak (to|with)|talk to|technical (support|services?|advice)|customer service|address|head office|opening hours|representative|enquir\w+)\b/, 4.5]],
   help: [[/\b(help|what can you (do|answer)|how (do|does) (this|it|the assistant) work|capabilities|what do you do|who are you|instructions)\b/, 4]],
   greeting: [[/^\s*(hi|hello|hey|g'?day|good (morning|afternoon|evening)|howdy|yo|thanks|thank you|cheers)\b[\s!.,]*(there|mate|team)?[\s!.,]*$/, 6]],
