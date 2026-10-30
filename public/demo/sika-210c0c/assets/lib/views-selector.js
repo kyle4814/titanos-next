@@ -3,6 +3,7 @@
 import { h, icon, nf, announce } from './util.js';
 import { data } from './data.js';
 import { breadcrumb, emptyState } from './components.js';
+import { estimateNote } from './terms.js';
 
 const base = new URL('../../', import.meta.url); // demo root, so links to the static sheets work under any prefix
 
@@ -44,7 +45,7 @@ export async function selectorView(ctx) {
         h('ul', { class: 'checklist' }, ['Ordered steps: prepare and prime, waterproofing membrane where the location needs one, adhesive, grout, movement joints', 'The published coverage for your area, with the source beside every number', 'Data sheets and safety data sheets, printable on one page, with its own link'].map((t) => h('li', null, icon('checkbox'), h('span', null, t)))),
         h('div', { class: 'field', style: 'max-width:18rem' }, h('label', { for: 'sel-m2' }, 'Area to tile (m2)', h('span', { class: 'hint', id: 'sel-m2-h' }, 'Optional. You can change it on the sheet.')), areaIn),
         h('div', { class: 'btn-row', style: 'margin-top:1rem' }, go),
-        h('p', { class: 'source-line' }, 'This is an estimate, not an offer. It gives quantities only. Confirm with the product data sheet and Sika Technical Services.'));
+        h('p', { class: 'source-line' }, estimateNote(ctx.cfg)));
     } else result = h('div', { class: 'notice' }, icon('info'), h('span', null, sel.noSystemMessage));
   }
   const all = Object.keys(sel.slugs).length;

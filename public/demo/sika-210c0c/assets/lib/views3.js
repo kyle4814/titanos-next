@@ -3,6 +3,7 @@ import { h, icon, nf, plural, announce, fmtBytes } from './util.js';
 import { derived, data, documents } from './data.js';
 import { breadcrumb, emptyState, placeholder } from './components.js';
 import { projects } from './projects.js';
+import { bomSection } from './finder/bom.js';
 import { estimateNote } from './terms.js';
 
 const ROLES = ['Distributor or merchant', 'Applicator or tradesperson', 'Builder or contractor', 'Specifier or architect', 'Engineer', 'Home owner', 'Other'];
@@ -30,7 +31,7 @@ export async function projectsView(ctx) {
         h('div', { class: 'qty' }, dec, qty, inc), unit,
         h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove ${p.n} from my projects`, onclick: () => { projects.remove(it.id); render(); announce(`${p.n} removed`); } }, icon('trash', 'i--sm'), 'Remove'));
     }).filter(Boolean);
-    body.append(h('section', { 'aria-label': 'Products in this project' }, lines, h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('a', { class: 'btn btn--hollow', href: '#/products' }, 'Add more products'), h('button', { class: 'btn btn--text', type: 'button', onclick: () => { projects.clear(); render(); } }, 'Clear project'))), quoteForm(ctx, dv));
+    body.append(h('section', { 'aria-label': 'Products in this project' }, lines, h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('a', { class: 'btn btn--hollow', href: '#/products' }, 'Add more products'), h('button', { class: 'btn btn--text', type: 'button', onclick: () => { projects.clear(); render(); } }, 'Clear project'))), bomSection(list, dv), quoteForm(ctx, dv));
   };
   render();
   return { el, title: 'My projects and quotes', nav: null };
