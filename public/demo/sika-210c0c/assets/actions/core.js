@@ -39,6 +39,7 @@ export function createData(store) {
     safety: (id) => g('actions/safety/' + encodeURIComponent(id) + '.json'),
     trees: () => g('actions/trees.json'),
     kindex: () => g('k/_index.json'),
+    problems: () => g('knowledge/problems.json'),
   };
   let idx;
   d.finder = async () => {

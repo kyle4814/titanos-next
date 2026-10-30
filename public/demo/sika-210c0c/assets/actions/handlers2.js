@@ -278,3 +278,18 @@ export function help(ctx) {
   return c;
 }
 
+
+/* ---------------------------------------------------------------- PROBLEM (symptom questions, T22 wording) */
+export async function problem(ctx) {
+  const chip = ctx.chip;
+  const c = card('problem', 'problem', `What the published pages say: ${chip.label}`, { estimate: false });
+  if (chip.items.length) {
+    c.summary = `I cannot diagnose "${chip.label.toLowerCase()}" from here. The published product pages mention it in ${chip.items.length === 1 ? 'one place' : 'a few places'}; here is what they say, word for word.`;
+    for (const i of chip.items) c.rows.push({ label: plain(i.name), value: `"${plain(i.quote)}"`, quote: true, productId: undefined, source: src(i.url, 'product page', plain(i.quote)) });
+  } else {
+    c.status = 'unknown'; c.handoff = true;
+    c.summary = `The published product pages I hold do not say anything about "${chip.label.toLowerCase()}". I will not guess.`;
+  }
+  c.handoffBlock = buildHandoff({ query: ctx.session.lastQuestion || ctx.text, products: chip.products.slice(0, 3), reason: chip.items.length ? 'This is as far as the published text goes. It does not diagnose your job.' : 'This is not in the published data I hold.', config: ctx.config });
+  return c;
+}

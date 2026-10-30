@@ -1,6 +1,7 @@
 // Actions v2, conversation flow: routes a question to an action, remembers facets within the session, asks AT MOST ONE clarifying question
 // per request (a second turn answers with what it has and says what is missing), and chains actions ("now make that a project pack").
 import { route, parseNumbers, parseFacets, COMMANDS } from './parse.js';
+import { buildHandoff } from '../assistant/handoff.js';
 import { findProducts, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
 import * as H from './handlers.js';
 
@@ -118,6 +119,15 @@ export function createActions(deps) {
         answerOf = { p, bare: bare && NEED_KEY[p.need] ? parseFloat(bare[1].replace(',', '.')) : null };
       }
     }
+    if (!action) { // a symptom question ("my tiles sound hollow") is answered from the published passages, never diagnosed
+      const hitsP = await findProducts(data, text, 1);
+      if (!hitsP.length && !parseNumbers(text).area) {
+        const pr = await data.problems();
+        const n = norm(text);
+        const chip = pr && Array.isArray(pr.chips) ? pr.chips.find((x) => { try { return x.askRx && new RegExp(x.askRx, 'i').test(n); } catch { return false; } }) : null;
+        if (chip) { const cp = await H.problem({ data, session, config, text, chip }); session.last = cp; if (memory) { memory.rememberQuestion(text, 'problem'); if (cp.status === 'unknown') memory.addGap(text); } return { handled: true, card: cp, session }; }
+      }
+    }
     if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
@@ -144,6 +154,14 @@ export function createActions(deps) {
       else return { handled: false, session };
     } catch (e) {
       c = unknownCard(action, 'That action hit a problem', `Something went wrong while I worked on that (${plain(e && e.message ? e.message : 'unknown error')}). Nothing was changed. Ask Technical Services if you need it urgently.`);
+    }
+    // every card that says "not in the published data" shows the hand-off block itself, not just a button
+    if (c.status === 'unknown' && c.handoff && !c.handoffBlock && c.kind !== 'clarify') {
+      const prods = (session.products || []).slice(0, 3).map((x) => ({ id: x.id, name: x.name }));
+      const sel = Object.entries(session.facets).filter(([, v]) => v != null && v !== '' && !Array.isArray(v)).map(([k, v]) => `${k}: ${v}`);
+      const miss = c.silentWords && c.silentWords.length ? `The published text I quoted does not mention: ${c.silentWords.join(', ')}.` : (c.notes && c.notes[0]) || 'This is not in the published data I hold.';
+      c.handoffBlock = buildHandoff({ query: session.lastQuestion || text, products: prods, sel, reason: miss, config });
+      c.buttons = (c.buttons || []).filter((b) => b.command !== '/handoff');
     }
     // the one-question rule is enforced here for every action: a second round never asks again, it says what is still missing
     if (noAsk && c.kind === 'clarify') c = unknownCard(c.action, 'I still need one thing', `${c.clarify.question} Include it in your next request and I will work it out.`, { handoff: false });
