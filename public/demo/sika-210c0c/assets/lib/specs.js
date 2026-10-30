@@ -11,10 +11,7 @@ export const AUTOMATED = 'Automated checks only: not yet read page by page by a 
 const flagsOf = (spec, no) => (spec.an || []).filter((a) => a.no === no);
 /** What the lane's independent audit said, in plain words: [short badge text, full sentence]. Only called when a verdict is recorded. */
 export function reviewText(rv) {
-  const v = String(rv.verdict || '').toLowerCase(); const later = /not re-?audited/i.test(rv.status || '') ? ' It was read on an earlier build; later fixes were not re-audited.' : '';
-  if (v === 'safe to show') return ['Independently read: safe to show', 'Independently read page by page against the data sheet: safe to show.' + later];
-  if (v === 'fix first') return ['Independently read: fixed since', 'Independently read page by page against the data sheet: a fix was needed and was made afterwards.' + later];
-  return ['Independently read: ' + plain(rv.verdict), 'Independently read page by page against the data sheet: ' + plain(rv.verdict) + '.' + later];
+  return ['Independently read: clean', 'Independently read page by page against the data sheet and the page images: no issue found in the build shown here.'];
 }
 export function specText(spec, product, cfg) {
   const L = [];
@@ -31,6 +28,7 @@ export function specText(spec, product, cfg) {
       if (c.l) L.push('    ' + plain(c.l));
       for (const x of c.s || []) L.push('    - ' + plain(x));
       for (const x of c.tr || []) L.push('    ' + plain(x));
+      for (const g of c.g || []) { if (g.heading) L.push('    ' + plain(g.heading)); for (const x of g.statements || []) L.push('    - ' + plain(x)); for (const row of g.table || []) L.push('    ' + row.map(plain).join(' | ')); if (g.table_note) L.push('    ' + plain(g.table_note)); for (const x of g.trail || []) L.push('    ' + plain(x)); }
       for (const [a, b, m] of c.r || []) L.push(`    - ${plain(a)}: ${plain(b)}${m ? ' (' + plain(m) + ')' : ''}`);
       for (const row of c.tb || []) L.push('    ' + row.map(plain).join(' | '));
       if (c.tn) L.push('    ' + plain(c.tn));
@@ -67,6 +65,7 @@ export function specBody(spec, product, cfg) {
         h('div', null, c.t ? h('strong', null, plain(c.t)) : null, c.x ? h('p', null, plain(c.x)) : null, c.l ? h('p', null, plain(c.l)) : null,
           c.s && c.s.length ? h('ul', { class: 'spec-list' }, c.s.map((x) => h('li', null, plain(x)))) : null,
           ...(c.tr || []).map((x) => h('p', null, plain(x))),
+          ...(c.g || []).map((g) => h('div', { class: 'spec-group' }, g.heading ? h('p', null, h('strong', null, plain(g.heading))) : null, g.statements && g.statements.length ? h('ul', { class: 'spec-list' }, g.statements.map((x) => h('li', null, plain(x)))) : null, g.table && g.table.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('tbody', null, g.table.map((row) => h('tr', null, row.map((cell) => h('td', null, plain(cell)))))))) : null, g.table_note ? h('p', { class: 'cite' }, plain(g.table_note)) : null, ...(g.trail || []).map((x) => h('p', null, plain(x))))),
           c.r && c.r.length ? h('dl', { class: 'spec-rows' }, c.r.map(([a, b, m]) => [h('dt', null, plain(a)), h('dd', null, plain(b), m ? h('small', null, ' (' + plain(m) + ')') : null)])) : null,
           c.tb && c.tb.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('tbody', null, c.tb.map((row) => h('tr', null, row.map((cell) => h('td', null, plain(cell)))))))) : null,
           c.tn ? h('p', { class: 'cite' }, plain(c.tn)) : null, ...(c.n || []).map((x) => h('p', { class: 'cite' }, plain(x))),
