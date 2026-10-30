@@ -21,9 +21,11 @@ const APP = path.join(process.cwd(), "app");
 // audits every HTML file in out/, so anything added here must also carry title, description,
 // canonical and OG/Twitter images, or `npm test` fails.
 const STATIC_PAGES: { path: string; file: string; priority: number }[] = [
+  { path: "/labs", file: "public/labs/index.html", priority: 0.7 },
   { path: "/labs/issue-001", file: "public/labs/issue-001/index.html", priority: 0.8 },
   { path: "/labs/issue-001/scorecard", file: "public/labs/issue-001/scorecard/index.html", priority: 0.7 },
   { path: "/labs/issue-002", file: "public/labs/issue-002/index.html", priority: 0.8 },
+  { path: "/labs/issue-003", file: "public/labs/issue-003/index.html", priority: 0.8 },
 ];
 
 const PRIORITY: Record<string, number> = {

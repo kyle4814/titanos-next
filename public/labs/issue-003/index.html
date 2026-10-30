@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Built A Gym That Judges Its Own Best Strategies As Luck | Demonblade Labs</title>
+<meta name="description" content="A trading search found brilliant backtests, then a judge called them luck. The maths of 1% a day (37.78x), the deflated Sharpe and the paper-only receipts.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-003/">
+<meta property="og:title" content="I Built A Gym That Judges Its Own Best Strategies As Luck">
+<meta property="og:description" content="On real market data none of the candidates passed the judge, and that is the system working. The expected best of 47.5 million noise strategies is a Sharpe of 5.58.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-003/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-003.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. I Built A Gym That Judges Its Own Best Strategies As Luck.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-003.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 003</p>
+<h1>I Built A Gym That Judges Its Own Best Strategies As Luck</h1>
+<p class="deck">My autonomous system searched thousands of trading strategies and found candidates that looked brilliant on the data they were built on. Then I built a judge whose only job is to treat them as luck until proven otherwise. On real market data, none of them passed. That is the system working, and the maths of why is one line you can run in a spreadsheet.</p>
+<p>If you trade, or you have ever been shown a backtest, this one is for you. It sells nothing and it costs nothing. Everything here runs on paper, on a box that costs me about thirty dollars a month. No market data is published, because the licence on it says I cannot. What you get is the method, the maths and the engineering receipts, so you can check your own numbers against the same bar.</p>
+<p><strong>What you will get out of it</strong></p>
+<ul><li>The one number that explains why a steady 1 percent a day is a fraud band, with the maths.</li><li>The expected best Sharpe of N strategies that have no edge at all, at four values of N.</li><li>A five part judge, described plainly enough to build your own.</li><li>Receipts on synthetic data, where the right answer is known.</li><li>Three questions to ask of your own backtests today.</li></ul>
+<hr>
+<h2>Chapter 0. The number is 37.78</h2>
+<p>A strategy that makes 1 percent a day sounds modest. Compounded for a year it is 1.01 to the power of 365, which is <strong>37.78 times your money</strong>. Ten thousand dollars becomes about three hundred and seventy-eight thousand.</p>
+<p>If you are ever shown a steady daily 1 percent, the right first question is where the audited track record is. That figure is not a strategy. It is the band that backtests land in when enough of them are tried.</p>
+<hr>
+<h2>Chapter 1. Why backtests land there</h2>
+<p>Take a strategy with no edge at all, only noise. Measure its Sharpe ratio over one year of data and the measurement wobbles with a standard error of about 1. Now try many of them and keep the best. The expected best of N noise strategies, in units of that wobble, grows slowly with N.</p>
+<div class="scroll"><table>
+<thead><tr><th>Strategies tried (N)</th><th>Expected best Sharpe from pure noise</th></tr></thead>
+<tbody>
+<tr><td>100</td><td>2.53</td></tr>
+<tr><td>10,000</td><td>3.86</td></tr>
+<tr><td>1,000,000</td><td>4.87</td></tr>
+<tr><td>47,500,000</td><td>5.58</td></tr>
+</tbody>
+</table></div>
+<p>That is the expected maximum of N standard normal draws, using the Bailey and Lopez de Prado approximation: (1 minus g) times the normal quantile at 1 minus 1/N, plus g times the quantile at 1 minus 1/(N times e), with g = 0.5772. Computed on 30 October 2026. Window assumed: one year.</p>
+<p>Now the literature. A practitioner post (a blog, not peer reviewed, so weigh it that way) ran about 100 million bitcoin backtests, reported a raw Sharpe of 5.59 for its winner out of 47.5 million candidates, and showed that after deflating for the number of tries the winner came to about 0.10. I have not re-run their data. What I can offer is my own arithmetic: if their test window was about a year, which I do not know, then 5.58 is what pure noise hands you as the best of 47.5 million, and 5.59 sits right on that line. <strong>A beautiful winner and an expected winner can be the same number.</strong></p>
+<p>That is the trap. The more strategies you search, the better the best one looks, even when none of them works. Search is not the problem. Reporting the winner without the number of tries is.</p>
+<hr>
+<h2>Chapter 2. The judge, in five parts</h2>
+<p>I built the judge before I trusted the search. A candidate has to survive all five.</p>
+<ol>
+<li><strong>Deflated Sharpe.</strong> The Sharpe ratio is corrected for the number of tries and for skew and fat tails in the returns, so a winner has to beat the luck bar for its own search size.</li>
+<li><strong>Probability of backtest overfitting, by combinatorial cross-validation.</strong> The history is cut into 8 blocks, every way of training on 4 and testing on the other 4 is tried (70 combinations), and the question is how often the in-sample winner lands below the median out of sample. Over 0.5 and the candidate is marked OVERFIT.</li>
+<li><strong>A thymus.</strong> In the immune system, cells that react to the body itself are killed before they leave the thymus. Mine scores every candidate three times on shuffled returns, where there is no edge by construction. A strategy that works on shuffled noise is reacting to itself, and it dies there.</li>
+<li><strong>A cross-asset holdout.</strong> A champion is re-scored on every other market's training slice. An edge that exists in one instrument and nowhere else is a coincidence until shown otherwise.</li>
+<li><strong>Forward paper days.</strong> Real days that happen after the search is sealed, so nothing can be tuned to them.</li>
+</ol>
+<p>The verdict has two words: <strong>OVERFIT or PROVISIONAL. Never PASS.</strong> A system that is allowed to say PASS about itself will, eventually.</p>
+<hr>
+<h2>Chapter 3. Receipts on data where the answer is known</h2>
+<p>These are synthetic fixtures, so they prove the instruments and not a market.</p>
+<div class="scroll"><table>
+<thead><tr><th>Instrument</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Immune-style search, first passer on a planted edge (median trials)</td><td>15, against 45 for plain random search</td></tr>
+<tr><td>Hidden-state model recovering planted regimes</td><td>87.4 percent accuracy</td></tr>
+<tr><td>Critical-slowing early warning on a planted crash</td><td>19 of 20 runs, against 2 of 20 with the crash removed</td></tr>
+</tbody>
+</table></div>
+<p>The immune-style search uses mutation, crossover, a memory of past regimes and a thymus that removes self-reactive candidates. The accuracy and detection figures were re-run on 30 October 2026 from the test suite (17 tests, all passing).</p>
+<hr>
+<h2>Chapter 4. The engineering, because speed makes a strict judge affordable</h2>
+<p>The search covers 100 pairs registered as cells. A cached indicator layer and batch evaluation took a real mix of strategy specs from 1.4 trials per second to 72.5 on the same loaded box, about 52 times, with 0 mismatches against the slow reference across 1,939 stress specs. 251 tests were green across the 14 markets modules at that commit, and 22 commits landed between 13:09 and 20:16 on 30 October. All of it is paper. No order has been placed.</p>
+<hr>
+<h2>The limits of all of this</h2>
+<p>The things I would attack if I were reading this.</p>
+<ul>
+<li>The 47.5 million figure and the 0.10 come from a blog post I have not re-run. The one year window in my arithmetic is an assumption.</li>
+<li>Synthetic fixtures prove the code does what I say, not that any market has an edge.</li>
+<li>The 15 versus 45 is a median over a small set of seeds.</li>
+<li>A judge this strict can also throw out a real edge. That is a cost I have chosen on purpose, and it is why forward days exist.</li>
+<li>On real market data, none of the candidates passed. That sentence states an outcome only. The market data is licensed for research, so no figure computed from it is published.</li>
+</ul>
+<hr>
+<h2>Your three questions</h2>
+<p>If you want to apply this to your own backtests today, three questions cost nothing. How many variants did you try before this one, including the ones you quietly dropped? What is the best Sharpe pure noise would have given you at that count? And does your winner still beat it on data it has never touched? If you cannot answer the first, the other two have no meaning.</p>
+<p>What has to be true before a system is allowed to believe itself: it states how many things it tried, it is judged against that number, it is tested on data where the answer is known, it is tested on data it has never touched, and it is allowed to be wrong in public. That is the bar I hold mine to.</p>
+<hr>
+<p><strong>If you run backtests, I would genuinely like to hear how you count your tries.</strong> Reply on X with your method, or tell me where my judge is too soft or too hard. Would it be okay if I asked you to send me the one backtest you trust least?</p>
+<h2>Sources</h2>
+<ul>
+<li>Bailey and Lopez de Prado, <a href="https://papers.ssrn.com/abstract=2460551">The Deflated Sharpe Ratio</a> (SSRN 2460551).</li>
+<li>Bailey, Borwein, Lopez de Prado and Zhu, The Probability of Backtest Overfitting (combinatorial cross-validation), cited in the paper above.</li>
+<li>Practitioner post, a blog and not peer reviewed: <a href="https://dev.to/rulyfi/we-ran-100-million-bitcoin-backtests-only-3130-beat-the-luck-bar-3ma2">We ran 100 million bitcoin backtests, only 3,130 beat the luck bar</a>.</li>
+</ul>
+<p class="fine">Previous issues: <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 003, 30 October 2026.
+    Every figure in this article is a synthetic fixture result, a system metric, a cited source or stated arithmetic. Nothing is derived from licensed market data.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
