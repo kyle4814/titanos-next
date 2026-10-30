@@ -135,7 +135,7 @@ export async function documentsView(ctx) {
   const pages = Math.max(1, Math.ceil(rowsAll.length / DOC_PER)); const pg = Math.min(page, pages);
   const rows = rowsAll.slice((pg - 1) * DOC_PER, pg * DOC_PER);
   const set = (patch, replace = true) => { const u = new URLSearchParams(params); for (const [k, v] of Object.entries(patch)) { if (v) u.set(k, v); else u.delete(k); } if (!('page' in patch)) u.delete('page'); ctx.go('/documents', u, replace); };
-  const input = h('input', { id: 'doc-q', type: 'search', value: q, autocomplete: 'off', placeholder: 'Search by product or document name', 'aria-label': 'Search documents', enterkeyhint: 'search' });
+  const input = h('input', { id: 'doc-q', type: 'search', value: q, autocomplete: 'off', placeholder: 'Search by product or document name', enterkeyhint: 'search' });
   input.addEventListener('input', debounce(() => set({ q: input.value.trim() }), 220));
   const chips = h('div', { class: 'chips', role: 'group', 'aria-label': 'Document type', style: 'display:flex;gap:8px;flex-wrap:wrap;margin:1rem 0' }, TYPE_CHIPS.map(([v, l]) => h('button', { type: 'button', class: 'chip chip--line', 'aria-pressed': String(type === v), onclick: () => set({ type: v }) }, l, v ? h('span', { class: 'count', style: 'margin-left:.25rem' }, `(${nf.format(counts.get(v) || 0)})`) : h('span', { class: 'count', style: 'margin-left:.25rem' }, `(${nf.format(base.length)})`))));
   const unavailable = D.docs.filter((d) => !docOk(d)).length;
@@ -161,7 +161,7 @@ export async function guidesView(ctx) {
   const bySec = new Map(); for (const p of base) bySec.set(p.section, (bySec.get(p.section) || 0) + 1);
   const rows = base.filter((p) => !sec || p.section === sec);
   const set = (patch) => { const u = new URLSearchParams(params); for (const [k, v] of Object.entries(patch)) { if (v) u.set(k, v); else u.delete(k); } ctx.go('/guides', u, true); };
-  const input = h('input', { id: 'guide-q', type: 'search', value: q, autocomplete: 'off', placeholder: 'Search guides, case studies and articles', 'aria-label': 'Search guides', enterkeyhint: 'search' });
+  const input = h('input', { id: 'guide-q', type: 'search', value: q, autocomplete: 'off', placeholder: 'Search guides, case studies and articles', enterkeyhint: 'search' });
   input.addEventListener('input', debounce(() => set({ q: input.value.trim() }), 220));
   const secs = [...new Set(pages.map((p) => p.section))].sort((a, b) => (SECTION_LABEL[a] || a).localeCompare(SECTION_LABEL[b] || b));
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'Guides' }]),

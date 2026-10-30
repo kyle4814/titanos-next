@@ -133,7 +133,7 @@ function footer() {
 
 export async function mountChrome(config, { openAssistant }) {
   cfg = config; dv = await derived(); searcher = await getSearcher();
-  const cnt = h('span', { class: 'count-pill', id: 'proj-count', 'aria-label': 'items in my projects' }, '0');
+  const cnt = h('span', { class: 'count-pill', id: 'proj-count' }, '0');
   const header = h('header', { class: 'site-header' },
     h('div', { class: 'hdr-notice', role: 'note' }, h('strong', null, 'Demo'), ' ', cfg.demo.ribbon),
     h('div', { class: 'hdr-meta' },
