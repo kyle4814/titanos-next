@@ -127,7 +127,10 @@ function relatedProducts(p, dv) {
 const TYPE_CHIPS = [['', 'All documents'], ['product_data_sheet', 'Product data sheets'], ['safety_data_sheet', 'Safety data sheets'], ['system_data_sheet', 'System data sheets'], ['brochure', 'Brochures'], ['environmental_product_declaration', 'Environmental declarations'], ['other', 'Other']];
 const DOC_PER = 30;
 export async function documentsView(ctx) {
-  const { params } = ctx; const dv = await derived(); const D = await documents();
+  const { params } = ctx;
+  // speed: compact rows (data/s/docs.json) with the product names inline; the full files are the fallback
+  let dv, D; const L = await data.docsLite();
+  if (L) { const docs = L.rows.map((r) => ({ title: r[0], file: r[1], type: r[2], format: r[3], bytes: r[4], version: r[5], url: r[6], products: r[7] ? [r[7]] : [], http: r[8] == null ? undefined : (r[9] ? { status: r[8], url: r[9] } : { status: r[8] }) })); D = { docs, checked: docs.some((d) => d.http) }; dv = { byId: new Map(Object.entries(L.pn).map(([id, n]) => [id, { id, n }])) }; } else { dv = await derived(); D = await documents(); }
   const type = params.get('type') || ''; const q = params.get('q') || ''; const page = Math.max(1, parseInt(params.get('page') || '1', 10) || 1);
   const known = new Set(['product_data_sheet', 'safety_data_sheet', 'system_data_sheet', 'brochure', 'environmental_product_declaration']);
   const typeOf = (d) => (known.has(d.type) ? d.type : 'other');
@@ -158,7 +161,7 @@ export async function documentsView(ctx) {
 /* ------------------------------------------------------------------ guides */
 const SECTION_LABEL = { 'knowledge-hub': 'Knowledge hub', 'documents-resources': 'Documents and resources', 'home-owners': 'Home owners', 'local-projects': 'Local projects', 'international-reference-projects': 'Reference projects', 'solutions-for-projects': 'Solutions for projects', industry: 'Industry guides', 'where-to-buy': 'Where to buy', 'Remedial-Solutions': 'Remedial solutions', '3-must-haves': 'Trade guides' };
 export async function guidesView(ctx) {
-  const { params } = ctx; const pages = (await data.pages()).filter((p) => p.kind === 'guide' || p.kind === undefined);
+  const { params } = ctx; const pages = ((await data.guidesLite()) || (await data.pages())).filter((p) => p.kind === 'guide' || p.kind === undefined);
   const q = params.get('q') || ''; const sec = params.get('s') || ''; const qt = tokens(q);
   const hay = (p) => norm(p.title + ' ' + (p.metaDescription || '') + ' ' + (p.excerpt || '') + ' ' + (p.headings || []).join(' '));
   const base = pages.filter((p) => qt.every((w) => hay(p).includes(w)));

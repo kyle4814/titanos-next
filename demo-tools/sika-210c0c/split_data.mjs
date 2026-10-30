@@ -20,6 +20,15 @@ export async function splitData(PORTAL) {
     const pool = same.length >= 4 ? same : [...same, ...index.filter((x) => x.c !== p.category && x.c.split('/').slice(0, 2).join('/') === g)];
     return pool.sort((a, b) => (b.b === p.brand) - (a.b === p.brand) || (b.pds - a.pds) || a.n.localeCompare(b.n)).slice(0, 4);
   };
+  // category group shards: the index entries of every category under one two-segment group (construction/waterproofing -> s/g/construction--waterproofing.json)
+  const groups = new Map(); for (const e of index) { const g = e.c.split('/').slice(0, 2); if (g.length === 2) { const k = g.join('--'); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(e); } }
+  fs.rmSync(path.join(D, 's', 'g'), { recursive: true, force: true }); for (const [k, v] of groups) wr('s/g/' + k + '.json', v);
+  // documents library: compact rows [title, file, type, format, bytes, version, url, firstProductId, httpStatus, httpUrl] + the names of the products they point at
+  const pn = {}; const nameOf = new Map(index.map((x) => [x.id, x.n]));
+  const rows = docs.map((d) => { const pid = d.products && d.products[0] || 0; if (pid && nameOf.has(pid)) pn[pid] = nameOf.get(pid); return [d.title, d.file, d.type, d.format, d.bytes, d.version, d.url, pid && nameOf.has(pid) ? pid : 0, d.http ? d.http.status : null, d.http && d.http.url ? d.http.url : 0]; });
+  wr('s/docs.json', { rows, pn });
+  // guides: only the pages the Guides page lists, only the fields it reads
+  wr('s/guides.json', rd('pages.json').filter((p) => p.kind === 'guide' || p.kind === undefined).map((p) => ({ url: p.url, title: p.title, metaDescription: p.metaDescription, excerpt: p.excerpt, headings: p.headings, section: p.section })));
   let n = 0;
   for (const f of fs.readdirSync(path.join(D, 'p'))) {
     if (!f.endsWith('.json')) continue;

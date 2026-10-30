@@ -29,7 +29,7 @@ check('static: the first screen has no render-blocking stylesheet link (CSS is i
 
 // Routes that still exceed the 150 KB target (honest shortfall, see receipts and the apply/speed RECEIPT): each has a regression ceiling instead,
 // printed as SHORTFALL, so it cannot get worse unseen. Remove an entry when the route meets 150 KB.
-const KNOWN_SHORTFALL = { category: 170000, documents: 280000, guides: 195000 };
+const KNOWN_SHORTFALL = { guides: 160000, advisor_beat3: 720000 };
 // B. receipt
 const rf = path.join(ROOT, 'receipts', 'speed_latest.json');
 if (!fs.existsSync(rf)) check('receipt: receipts/speed_latest.json exists (run speed.mjs)', false);
