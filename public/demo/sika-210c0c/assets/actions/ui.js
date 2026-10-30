@@ -127,6 +127,9 @@ function attachSlash(input, form, send) {
 }
 
 export const speechSupported = () => typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+// Voice input is OFF unless the address carries voice=1 (or localStorage sika-demo-210c0c-voice = on). The browser's own speech service sends the audio to its vendor (Chrome sends it to Google),
+// which would break the portal's promise that nothing leaves the page; typing sends nothing. When it is on, a note beside the button says so.
+export const voiceOn = () => { try { return /[?&]voice=1/.test(location.href) || localStorage.getItem('sika-demo-210c0c-voice') === 'on'; } catch { return false; } };
 function attachSpeech(input, form) {
   const status = h('p', { class: 'cite voice-status', role: 'status', 'aria-live': 'polite' });
   let rec = null; let on = false;
@@ -142,6 +145,7 @@ function attachSpeech(input, form) {
     try { rec.start(); } catch { status.textContent = 'Voice input could not start. Please type your question instead.'; }
   } }, icon('send', 'i--sm'), h('span', { class: 'visually-hidden' }, 'Speak'));
   btn.classList.toggle('mic--off', !speechSupported());
+  status.textContent = "Voice input uses your browser's own speech service, which may send the audio to the browser's vendor. Typing sends nothing.";
   form.insertBefore(btn, form.lastElementChild);
   form.parentNode.insertBefore(status, form);
   return btn;
@@ -160,7 +164,7 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
   const actions = createActions({ data, memory, config });
   let session = newSession();
   const slash = attachSlash(input, form, send);
-  attachSpeech(input, form);
+  if (voiceOn()) attachSpeech(input, form);
   if (sugg) sugg.prepend(h('button', { class: 'chip', type: 'button', onclick: () => slash.show() }, '/ commands'));
   const act = { send, memory, get session() { return session; } };
   return {

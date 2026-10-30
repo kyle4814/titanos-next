@@ -274,7 +274,7 @@ export function help(ctx) {
   const c = card('help', 'help', 'What I can do', { estimate: false });
   c.summary = 'Type a slash command or just ask in plain English. Everything here is plain code running in your browser: no AI model, no tracking.';
   (ctx.commands || []).forEach(([cmd, , desc]) => c.rows.push({ label: cmd, value: desc, command: cmd }));
-  c.notes.push('Voice input appears as a microphone button only if this browser has a built-in speech API. If you do not see one, type instead.');
+  c.notes.push('Voice input is off in this demo: the browser speech service sends the audio to the browser vendor, and nothing else here leaves the page. Add voice=1 to the address to turn it on; type instead.');
   return c;
 }
 
