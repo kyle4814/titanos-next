@@ -30,10 +30,9 @@
 .sheet .ev-what{font-weight:600;color:var(--grey-darker)}
 .sheet .caution{border-left:4px solid var(--primary-dark);padding-left:.6rem;overflow-wrap:anywhere}
 .sheet .rate{overflow-wrap:anywhere}
-.sheet .calc-line{background:#fff3cd;padding:.5rem .6rem;font-weight:500}
+.sheet .calc-line{background:var(--grey-light);border-left:3px solid var(--primary);padding:8px 16px;font-weight:500;font-variant-numeric:tabular-nums}
 .sheet .links{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.95rem}
 .sheet .src-ref{font-size:.85rem;color:var(--grey-dark)}
-.sheet .not-stated{font-weight:500}
 .sheet .sources{margin-top:2rem}
 .sheet .sources .url{font-size:.85rem;color:var(--grey-dark);overflow-wrap:anywhere}
 .sheet .plain{list-style:none;padding:0;margin:0}
@@ -43,30 +42,31 @@
 .sheet .demo-only{margin-top:1.5rem}
 .sheet .site-footer{margin-top:1rem}
 .sheet .site-footer p{margin:.25rem 0}
-.sheet .hdr-main .logo{text-decoration:none}
-.sheet a:focus-visible,.sheet button:focus-visible,.sheet input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-.sheet .site-footer a:focus-visible{outline-color:#fff}
 @media print{
+  @page{size:A4;margin:8mm}
+  body{display:block;font-size:11pt}
   .sheet main>*:not(.print-sheet){display:none!important}
+  .sheet .site-header{display:block!important}
+  .sheet .hdr-notice,.sheet .no-print,.sheet .skip-link,.sheet .breadcrumb,.sheet .link--ext::after{display:none!important}
+  .sheet .hdr-main{height:auto;padding:0;margin:0 0 6pt;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet .hdr-main>.container{padding:3pt 6pt;gap:8pt}
+  .sheet .wordmark{font-size:12pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet .hdr-title{font-size:9pt}
   .sheet .print-sheet{display:block!important;font-size:8.5pt;line-height:1.25}
   .sheet .ps-title{font-size:13pt;font-weight:700;margin:0 0 3pt}
   .sheet .ps-ans{margin:0 0 4pt}
-  .sheet .ps-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt}
-  .sheet .ps-table th,.sheet .ps-table td{border:1px solid #666;padding:1.5pt 3pt;vertical-align:top;text-align:left;font-weight:400;overflow-wrap:anywhere;white-space:normal;text-transform:none;letter-spacing:0;font-size:8pt}
-  .sheet .ps-table thead th{font-weight:700;background:#eee}
+  .sheet .ps-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt;font-variant-numeric:tabular-nums}
+  .sheet .ps-table th,.sheet .ps-table td{border:0;border-bottom:.5pt solid var(--grey-3);padding:1.5pt 4pt 1.5pt 0;vertical-align:top;text-align:left;font-weight:400;overflow-wrap:anywhere;white-space:normal;text-transform:none;letter-spacing:0;font-size:8pt}
+  .sheet .ps-table thead th{font-weight:700;border-bottom:1pt solid #000;font-size:7pt;text-transform:uppercase;letter-spacing:.04em}
   .sheet .ps-table tbody th{font-weight:700;width:17%}
-  .sheet .ps-st{font-weight:400}
-  .sheet .ps-src{margin:4pt 0 0;padding-left:0;list-style:none;font-size:6.5pt;line-height:1.15;overflow-wrap:anywhere}
-  .sheet .ps-est{margin:4pt 0 0;font-size:9pt}
+  .sheet .ps-st{font-weight:400;color:var(--grey-dark)}
+  .sheet .ps-src{margin:4pt 0 0;padding-left:0;list-style:none;font-size:6.5pt;line-height:1.15;overflow-wrap:anywhere;color:var(--grey-dark)}
+  .sheet .ps-est{margin:4pt 0 0;font-size:7pt;color:var(--grey-dark)}
+  .sheet .ps-est strong{font-weight:400}
   .sheet .estimate-note,.sheet .est{visibility:visible!important}
+  .sheet .site-footer{display:block!important;background:#fff;color:#000;margin:2pt 0 0}
   .sheet .site-footer p{font-size:7pt;margin:0;line-height:1.2}
-  .sheet .site-footer{margin:2pt 0 0}
-  .sheet .site-footer .footbar{padding:0}
-  @page{size:A4;margin:8mm}
-  body{display:block;font-size:11pt}
-  .sheet .site-header,.sheet .no-print,.sheet .skip-link,.sheet .breadcrumb,.sheet .link--ext::after{display:none!important}
-  .sheet .site-footer{display:block!important;background:#fff;color:#000;margin:1rem 0 0}
-  .sheet .footbar{background:#fff;color:#000}
+  .sheet .site-footer .footbar{padding:0;background:#fff;color:#000}
   .sheet .container{max-width:none;padding-inline:0}
   .sheet .card,.sheet .opt{break-inside:avoid;box-shadow:none;outline:1px solid #999}
   .sheet .m2box{break-inside:avoid;background:#fff;border:2px solid #000}

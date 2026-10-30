@@ -1,16 +1,19 @@
 /* Provenance chip, "How I know", and the data tabs (rates and times, safety, draft specification). */
-.chip-status{display:inline-flex;align-items:center;gap:.3rem;font-size:.74rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--green);background:var(--green-light);color:var(--grey-darker);margin-top:.35rem}
-.chip-status[data-status="UNKNOWN"]{background:#fff3cd;border-color:var(--primary-dark)}
-.hik{margin:.35rem 0 .6rem;font-size:.85rem}
-.hik>summary{cursor:pointer;font-weight:600;display:inline-block;padding:2px 0;border-bottom:2px solid var(--primary)}
+.chip-status{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;line-height:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--grey-darker);margin-top:8px}
+.chip-status::before{content:"";width:8px;height:8px;flex:none;background:var(--green-dark)}
+.chip-status[data-status="UNKNOWN"]::before{background:var(--primary)}
+.hik{margin:8px 0;font-size:.85rem;border-top:1px solid var(--grey)}
+.hik>summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;min-height:44px;list-style:none}
+.hik>summary::-webkit-details-marker{display:none}
+.hik>summary::after{content:"+";font-weight:400;font-size:1.1rem}
+.hik[open]>summary::after{content:"\2212"}
 .hik ul{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.5rem}
-.hik blockquote{margin:0;padding:.35rem .6rem;border-left:4px solid var(--primary);background:#fafafa;overflow-wrap:anywhere}
+.hik blockquote,.data-tab blockquote{margin:0;padding:4px 8px 4px 16px;border-left:3px solid var(--primary);overflow-wrap:anywhere}
 .hik .hik-src{display:block;margin-top:.15rem;color:var(--grey-dark)}
 .hik a{border-bottom:2px solid var(--primary)}
 .blk-note{font-size:.82rem;color:var(--grey-dark);margin:.25rem 0}
 .data-tab h3{margin-top:1.5rem}
 .data-tab .table-wrap{margin-block:.75rem}
 .data-tab .src{font-size:.88rem;color:var(--grey-dark)}
-.data-tab blockquote{margin:.2rem 0;padding:.2rem .6rem;border-left:4px solid var(--primary);overflow-wrap:anywhere}
 .spec-box{width:100%;min-height:22rem;font:inherit;font-family:ui-monospace,Consolas,monospace;font-size:.85rem;line-height:1.45;padding:.75rem;border:1px solid var(--grey);resize:vertical}
 .spec-tools{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-block:.75rem}
