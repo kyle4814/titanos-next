@@ -20,6 +20,7 @@
 //   followups [string]
 //   handoff { question, product?, reason, missing:[string] } | null   (UNKNOWN cards)
 // ANSWER { schema, query, intent, stage, cards:[CARD], followups:[string], state, ms, trace:[string] }
+import { clampText } from './text.js';
 export const CARD_SCHEMA = 'sika-brain-card@1';
 export const ANSWER_SCHEMA = 'sika-brain-answer@1';
 export const CARD_TYPES = ['product', 'rate', 'document', 'safety', 'time', 'compatibility', 'spec', 'system', 'calculation', 'comparison', 'choose', 'unknown', 'rule'];
@@ -71,4 +72,15 @@ export function cardText(c) {
   if (c.handoff) out.push(c.handoff.reason);
   if (c.status === 'UNKNOWN' && c.chip) out.push(c.chip);
   return out.filter(Boolean).join('\n');
+}
+
+/** Final pass on every card: no passage longer than 280 characters, a clamped fact keeps the same wording as the line that shows it. */
+export function finalize(c) {
+  const cl = (x) => clampText(x);
+  for (const f of c.facts) f.sentence = cl(f.sentence);
+  if (c.source) c.source = c.facts.find((f) => f.source_url === c.source.source_url && (f.page === c.source.page)) || { ...c.source, sentence: cl(c.source.sentence) };
+  c.headline = cl(c.headline); c.title = c.title; for (const l of c.lines) l.text = cl(l.text);
+  if (c.table) c.table.rows = c.table.rows.map((r) => r.map(cl));
+  if (c.handoff && c.handoff.reason) c.handoff.reason = cl(c.handoff.reason);
+  return c;
 }

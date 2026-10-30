@@ -1,10 +1,10 @@
 {
  "n": 4659,
- "ok": 4615,
+ "ok": 4612,
  "per": {
   "which": {
    "n": 1332,
-   "ok": 1291,
+   "ok": 1288,
    "kinds": {
     "name": {
      "n": 512,
@@ -16,7 +16,7 @@
     },
     "describe": {
      "n": 412,
-     "ok": 391
+     "ok": 388
     },
     "tree": {
      "n": 70,
@@ -162,8 +162,7 @@
    "got": [
     "compatibility:davco-grey-one-potadhesive",
     "product:davco-supamastic",
-    "product:davco-powder-mastic",
-    "product:davco-smp-evo"
+    "product:davco-powder-mastic"
    ],
    "headline": "No. The published sentence is quoted below."
   },
@@ -181,8 +180,7 @@
    "got": [
     "product:sikaflex-111-stickseal",
     "product:sikabond-techgrip",
-    "product:sikabond-instantnailsfast",
-    "product:sikabond-sprayfix"
+    "product:sikabond-instantnailsfast"
    ],
    "headline": "Flexible adhesive and sealant"
   },
@@ -193,7 +191,7 @@
     "product:sikasil-702",
     "product:davco-n-silicone",
     "product:sikaseal-190-n-silicone",
-    "product:sikasil-industrial"
+    "compatibility:sikaseal-kitchenandbathroom"
    ],
    "headline": "PREMIUM NEUTRAL CURE MULTI-PURPOSE PURE SILICONE SEALANT"
   },
@@ -207,14 +205,33 @@
   },
   {
    "kind": "describe",
+   "q": "I need high strength, class a structural grout",
+   "got": [
+    "product:schoenox-ab",
+    "product:davco-4-in-1-groutadditive",
+    "product:lanko-701-duragrout"
+   ],
+   "headline": "WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALL"
+  },
+  {
+   "kind": "describe",
    "q": "I need 2-component high-strength panel adhesive",
    "got": [
     "product:sikatack-panel-10",
     "product:sikaroof-versiscapepanelreinforced",
-    "product:sikaroof-versiscapepanel",
-    "product:sikamelt-677"
+    "product:sikaroof-versiscapepanel"
    ],
    "headline": "1-component polyurethane for panel bonding in ventilated facades"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component fast skinning sealant",
+   "got": [
+    "product:sikabond-instantnailsfast",
+    "product:davco-n-silicone",
+    "product:sikaseal-190-n-silicone"
+   ],
+   "headline": "Fast Cure Multipurpose Construction Adhesive"
   },
   {
    "kind": "typo",
@@ -234,12 +251,21 @@
   },
   {
    "kind": "describe",
+   "q": "I need high-performance, 2-component silicone structural glazing adhesive",
+   "got": [
+    "product:davco-n-silicone",
+    "product:sikaseal-190-n-silicone",
+    "product:sikasil-sg-20"
+   ],
+   "headline": "1-component neutral cure sanitary silicone sealant"
+  },
+  {
+   "kind": "describe",
    "q": "I need high range water reducing admixture",
    "got": [
     "product:sika-viscocrete-10",
     "product:sika-viscocrete-1250",
-    "product:sika-viscocrete-5-500",
-    "product:lanko-311-bricklayersplasticiser"
+    "product:sika-viscocrete-5-500"
    ],
    "headline": "HWR- High Range Water Reducer"
   },
@@ -293,7 +319,7 @@
     "product:davco-sanitized-tilegroutsealer",
     "product:lanko-752-bondit",
     "product:sikadur-330",
-    "product:sikaproof-bentonite"
+    "compatibility:sikafloor-curehard-24"
    ],
    "headline": "A solvent-based sealer that helps protect against stains, soiling, discolouratio"
   },
@@ -351,8 +377,7 @@
    "got": [
     "product:sikalastic-888-hybrid",
     "product:sikaroof-pur-10-uv",
-    "product:sikaroof-pur-15-uv",
-    "product:sikaroof-pur-20-uv"
+    "product:sikaroof-pur-15-uv"
    ],
    "headline": "Two component solvent free 100% solids Polyurethane/Polyurea Hybrid membrane"
   },
@@ -389,8 +414,7 @@
    "got": [
     "product:davco-powder-mastic",
     "product:sikatile-400-evopro",
-    "product:sikatile-440-opti-cure",
-    "product:davco-smp-evo"
+    "product:sikatile-440-opti-cure"
    ],
    "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
   },
@@ -516,5 +540,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-10-30T09:54:00.897Z"
+ "at": "2026-10-30T10:10:56.264Z"
 }

@@ -1,7 +1,7 @@
 // props.mjs: property checks run over EVERY generated answer.
 // P1 no number in any answer without a source: every number a visitor can read is in a fact sentence or version, a product name, the question, or a recomputed calculation.
 // P2 a PUBLISHED fact carries a sentence and a URL. P3 a PUBLISHED card carries a source line. P4 cards validate against the schema.
-// P5 no competitor name, no "signed", no dash characters, no compliance claim and no price outside a quoted sentence.
+// P6 no passage in a card is longer than 280 characters. P5 no competitor name, no "signed", no dash characters, no compliance claim and no price outside a quoted sentence.
 import fs from 'node:fs';
 import { cardText, validateCard } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 import { numbersIn } from '../../public/demo/sika-210c0c/assets/brain/text.js';
@@ -27,6 +27,9 @@ export function checkAnswer(question, ans) {
     const v = validateCard(c); if (v.length) bad.push(['P4', v.join(',')]);
     for (const f of c.facts) if (f.status === 'PUBLISHED' && (!f.sentence || !f.source_url)) bad.push(['P2', f.sentence.slice(0, 40)]);
     if (c.type !== 'choose' && c.status === 'PUBLISHED' && !(c.source && c.source.sentence)) bad.push(['P3', c.title]);
+    for (const l of c.lines || []) if (l.text.length > 280) bad.push(['P6', 'line over 280: ' + l.text.length]);
+    for (const f of c.facts) if (f.sentence.length > 280) bad.push(['P6', 'fact over 280: ' + f.sentence.length]);
+    if (c.table) for (const r of c.table.rows) for (const x of r) if (x.length > 280) bad.push(['P6', 'table cell over 280']);
     const text = cardText(c);
     const allowed = new Set(qn);
     for (const f of c.facts) { for (const n of numbersIn(f.sentence)) allowed.add(n); for (const n of numbersIn(f.doc_version)) allowed.add(n); if (f.page != null) allowed.add(String(f.page)); }

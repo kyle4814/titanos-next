@@ -1,9 +1,9 @@
 // brain.js: the deterministic retrieval stack. No model, no network beyond the shard loader, no randomness.
 // Order: corrected rules, exact product and alias, synonym and spelling tolerance, weighted token index, facet constraints, decision trees, honest unknown.
-import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact } from './text.js';
+import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact, clampText } from './text.js';
 import { SYNONYM_GROUPS } from './syn.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
-import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard } from './schema.js';
+import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schema.js';
 import * as C from './cards.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
@@ -151,7 +151,7 @@ export function createBrain({ load, config } = {}) {
     const cands = [...(sh.d.us || []), ...(sh.d.a || []), sh.d.s, sh.d.t].filter(Boolean);
     let best = null, bs = 0;
     for (const s of cands) { const st = new Set(tokens(s)); let c = 0; for (const t of qset) if (st.has(t)) c++; if (c > bs) { bs = c; best = s; } }
-    return best || cands[0] || sh.n;
+    return clampText(best || cands[0] || sh.n, qset);
   }
 
   // ---- compatibility
@@ -209,7 +209,7 @@ export function createBrain({ load, config } = {}) {
       const tally = new Map(); const given = key.map((k) => k || '*');
       for (const [lk, lv] of Object.entries(t.leaves || {})) { const parts = lk.split('|'); if (parts.every((p, i) => given[i] === '*' || given[i] === p)) for (const f of lv.fit) { const e = tally.get(f.p) || { f, n: 0 }; e.n++; tally.set(f.p, e); } }
       const best = [...tally.values()].sort((a, b) => b.n - a.n || (a.f.p < b.f.p ? -1 : 1)).slice(0, 3).map((e) => e.f);
-      return { choose: C.chooseCard(t.title, first.text, opts), best, rulesTable: tree.rules };
+      return { choose: C.chooseCard(t.title, first.text, opts, [], first.options.map((o) => o.label)), best, rulesTable: tree.rules };
     }
     const leaf = t.leaves[key.join('|')];
     if (!leaf || !leaf.fit.length) return { none: true, tree: t, key };
@@ -221,7 +221,7 @@ export function createBrain({ load, config } = {}) {
     const t0 = now(); const trace = [];
     const q = String(question || '').trim();
     const out = (intent, stage, cards, extra = {}) => {
-      for (const c of cards) { const bad = validateCard(c); if (bad.length) c._invalid = bad; }
+      for (const c of cards) { finalize(c); const bad = validateCard(c); if (bad.length) c._invalid = bad; }
       return { schema: ANSWER_SCHEMA, query: q, intent, stage, cards, followups: extra.followups || [...new Set(cards.flatMap((c) => c.followups || []))].slice(0, 4), state: extra.state || null, ms: Math.round((now() - t0) * 100) / 100, trace };
     };
     await boot();
@@ -295,15 +295,16 @@ export function createBrain({ load, config } = {}) {
         const known = new Set(facets.hits.flatMap((h) => tokens(h.term))); const nameToks = new Set(tokens(sh.n));
         for (const w of [...new Set(tokens(n))]) if (!known.has(w) && !nameToks.has(w) && !GENERIC.has(w) && !INTENT_WORDS.has(w) && w.length > 2 && !/\d/.test(w)) conds.push({ id: w, dim: 'word', label: w, hard: true, toks: [[w]] });
         const v = verdictFor(sh, conds);
+        if (v.rule) v.rule = { ...v.rule, text: clampText(v.rule.text, new Set(conds.flatMap((c) => c.toks.flat()))) };
         const cards = [C.compatCard(sh, v.verdict, v.rule, q, conds.map((c) => c.label), v.uncovered)];
         if (v.verdict === 'no') { // a No is followed by what the data sheets do say suits that job
           const cat = await load.category(sh.c.split('/').slice(0, 2).join('/')); const seen = new Set([sh.id]); let shown = 0;
           const tagKeys = conds.filter((c) => c.dim !== 'word').map((c) => `${c.dim === 'tile_type' ? 'tile_type' : c.dim}:${c.id}`);
           for (const tag of tagKeys) for (const r of (cat && cat.tags[tag] && cat.tags[tag].yes) || []) {
-            if (shown >= 3 || seen.has(r.p) || r.c || !mentionsTag(r.t, tag)) continue; seen.add(r.p);
+            if (shown >= 2 || seen.has(r.p) || r.c || !mentionsTag(r.t, tag)) continue; seen.add(r.p);
             const alt = await load.product(r.p); if (!alt) continue;
-            const c = C.productCard(alt, r.t, 'Its own data sheet says it suits this');
-            c.facts = [{ source_url: r.u, page: r.pg, sentence: r.t, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.v }].concat(c.facts.slice(1)); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: r.t }];
+            const rt = clampText(r.t, new Set(tag.split(':')[1].split('_').map((x) => stem(x)))); const c = C.productCard(alt, rt, 'Its own data sheet says it suits this');
+            c.facts = [{ source_url: r.u, page: r.pg, sentence: rt, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.v }]; c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: rt }]; c.headline = '';
             cards.push(c); shown++;
           }
         }
@@ -311,7 +312,7 @@ export function createBrain({ load, config } = {}) {
       }
       // a named product with nothing else asked: its product card with the useful next steps
       const sentence = await bestSentence(sh, new Set(tokens(n)));
-      return out('product', stage, [C.productCard(sh, sentence)], { state: s });
+      return out('product', stage, [C.productCard(sh, sentence, null, true)], { state: s });
     }
     if (ambiguous && !needsProduct) {
       const shs = await Promise.all(pis.map(shard)); return out('product', stage, shs.map((sh) => C.productCard(sh, sh.d.t)), { followups: [] });
@@ -341,7 +342,7 @@ export function createBrain({ load, config } = {}) {
       if (t && t.leaf) {
         trace.push('tree:leaf:' + t.key.join('|'));
         const cards = [];
-        for (const f of t.leaf.fit.slice(0, 4)) {
+        for (const f of t.leaf.fit.slice(0, 3)) {
           const sh = await load.product(f.p); if (!sh) continue;
           const ev = f.ev.map((id) => t.rulesTable[id]).filter(Boolean).sort((a, b) => (/suit|designed|intended|recommend/i.test(b.text) - /suit|designed|intended|recommend/i.test(a.text)) || b.text.length - a.text.length);
           const c = C.productCard(sh, ev[0] ? ev[0].text : sh.d.t, `The data sheet says it suits this job`);
@@ -378,7 +379,7 @@ export function createBrain({ load, config } = {}) {
       }).filter(Boolean);
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
-    const top = list.slice(0, 4);
+    const top = list.slice(0, 3);
     const qset = new Set([...qm.keys()].filter((k) => qm.get(k) >= 1));
     const cards = [];
     for (const it of top) { const sh = await shard(it.pi); if (sh) cards.push(C.productCard(sh, await bestSentence(sh, qset))); }

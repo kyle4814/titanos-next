@@ -8,6 +8,8 @@ const BAR = Number(process.env.GOLDEN_BAR || 0.95);
 const Q = generate().filter((x, i) => !process.env.GOLDEN_LIMIT || i % Math.ceil(Q_N() / Number(process.env.GOLDEN_LIMIT)) === 0);
 function Q_N() { return generate().length; }
 const brain = makeBrain();
+const strip = (x) => norm(x).replace(/^\u2026 /, '').replace(/ \u2026$/, '');
+const shownIn = (c, sentences) => !!c && c.facts.some((f) => f.sentence && sentences.some((s) => norm(s).includes(strip(f.sentence))));
 const prodIds = (a) => a.cards.filter((c) => c.product).map((c) => c.product.id);
 const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
 function judge(x, a) {
@@ -16,14 +18,14 @@ function judge(x, a) {
     case 'name': { const ids = a.cards.filter((c) => c.type === 'product').map((c) => c.product.id); return ids.slice(0, e.top).includes(e.product) || (a.cards.length > 1 && ids.includes(e.product)); }
     case 'typo': case 'describe': return a.cards.filter((c) => c.type === 'product').slice(0, e.top).some((c) => c.product.id === e.product);
     case 'tree': return a.cards.some((c) => c.product && e.products.includes(c.product.id));
-    case 'rate': return !!c0 && c0.type === 'rate' && txt.includes(norm(e.sentences[0]));
+    case 'rate': return !!c0 && c0.type === 'rate' && shownIn(c0, e.sentences);
     case 'rate-none': return !!c0 && c0.type === 'unknown' && c0.status === 'UNKNOWN';
     case 'pds': case 'sds': if (e.none) return !!c0 && c0.type === 'unknown'; return a.cards.some((c) => c.type === 'document' && e.urls.every((u) => c.links.some((l) => l.url === u)));
-    case 'cure': case 'open': case 'pot': case 'recoat': return !!c0 && c0.type === 'time' && txt.includes(norm(e.sentences[0]));
+    case 'cure': case 'open': case 'pot': case 'recoat': return !!c0 && c0.type === 'time' && shownIn(c0, e.sentences);
     case 'time-none': return !!c0 && c0.type === 'unknown';
     case 'calc': { const rate = e.facts.map((f) => ({ f, q: expectedQuantity(f.parsed, f.calc_ready, e.area) })).filter((z) => z.q); if (rate.length) return !!c0 && c0.type === 'calculation' && Math.abs(c0.calc.outputs[0].need_max - rate[0].q.hi) < 1e-6 && c0.product.id === e.product; return !!c0 && c0.type !== 'calculation'; }
-    case 'compat-yes': return !!c0 && c0.type === 'compatibility' && /^(Yes\.|Only under)/.test(c0.headline) && e.sentences.some((s) => norm(c0.facts[0] ? c0.facts[0].sentence : '') === norm(s));
-    case 'compat-no': return !!c0 && c0.type === 'compatibility' && /^No\./.test(c0.headline) && e.sentences.some((s) => norm(c0.facts[0] ? c0.facts[0].sentence : '') === norm(s));
+    case 'compat-yes': return !!c0 && c0.type === 'compatibility' && /^(Yes\.|Only under)/.test(c0.headline) && shownIn(c0, e.sentences);
+    case 'compat-no': return !!c0 && c0.type === 'compatibility' && /^No\./.test(c0.headline) && shownIn(c0, e.sentences);
     case 'compat-unknown': return !!c0 && c0.status === 'UNKNOWN';
     case 'system': return !!c0 && c0.type === 'system' && c0.links.some((l) => l.url.includes(e.slug));
     case 'price': return !!c0 && c0.status === 'UNKNOWN';

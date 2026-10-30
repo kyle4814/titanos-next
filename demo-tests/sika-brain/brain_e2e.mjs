@@ -69,6 +69,15 @@ await session(1366, 768, '', async (page) => {
   console.log('SPEED in Chrome:', JSON.stringify(r));
   t(`speed: p95 under 50 ms per answer after shard load (p95 ${r.second.p95.toFixed(1)} ms, p50 ${r.second.p50.toFixed(1)} ms, max ${r.second.max.toFixed(1)} ms over ${r.second.n} questions; first pass incl. shard fetches p95 ${r.first.p95.toFixed(1)} ms)`, r.second.p95 < 50);
 });
+
+// answer height: no answer taller than about 2.5 screens at 390x844 (2110 px) or 2.5 screens at 1366x768 (1920 px); no passage over 280 characters (plus the 30 characters of the source link label)
+for (const [W, H] of [[390, 844], [1366, 768]]) await session(W, H, '', async (page) => {
+  await page.locator('button:visible:has-text("Advisor")').first().click();
+  for (const q of ['Can I use Davco Grey One Pot over my old tiles?', 'Which adhesive for porcelain tiles on a concrete floor?', 'waterproofing a balcony', 'Which tile adhesive for porcelain tiles on concrete in an internal floor', 'What is the coverage of Davco Ultraflex?', 'sds for davco trojan mastic', 'Compare Davco Grey One Pot and Davco Ultraflex', 'porcelain on plasterboard internal wall system', 'How long before I can grout Davco Grey One Pot?']) {
+    const a = await ask(page, q); const m = await a.evaluate((e) => { let long = 0; e.querySelectorAll('td,th,p,blockquote,li').forEach((n) => { if (n.children.length === 0 || n.tagName === 'TD') long = Math.max(long, n.innerText.length); }); return { h: e.offsetHeight, long, top: e.getBoundingClientRect().top }; });
+    t(`${W}x${H} answer height ${m.h}px (limit ${Math.round(H * 2.5)}) and longest visible passage ${m.long} chars: ${q}`, m.h <= H * 2.5 && m.long <= 320, JSON.stringify(m));
+  }
+});
 // v1 stays behind the flag
 await session(1366, 768, '?brain=0', async (page, ctx) => {
   await page.locator('button:visible:has-text("Advisor")').first().click(); const a = await ask(page, 'What is the coverage of Davco Grey One Pot adhesive?');
