@@ -445,7 +445,7 @@ main:focus{outline:none}
 .search-box>button:hover{background:var(--primary)}
 .section-title{text-align:center}
 
-.table th[scope="row"]{border-bottom:1px solid var(--grey);font-weight:600;text-transform:none;letter-spacing:0;font-size:1rem}
+.table th[scope="row"]{border-bottom:1px solid var(--grey);font-weight:600;text-transform:none;letter-spacing:0;font-size:1rem;white-space:normal}
 .suggest-btn{align-self:flex-start;font-size:.8rem;min-height:36px;padding:.4rem .5rem;text-transform:none;letter-spacing:0;color:var(--grey-dark)}
 .sg-form{display:grid;gap:8px}.sg-form p{font-size:.9rem;margin:0}
 .rule-preview{white-space:pre-wrap;background:#fff;border:1px solid var(--grey);padding:.6rem;font:inherit;font-size:.85rem;margin:0;overflow:auto;max-height:12rem}

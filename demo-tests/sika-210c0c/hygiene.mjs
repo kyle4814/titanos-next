@@ -107,7 +107,8 @@ if (shell >= 10 * 1024) bad(path.join(PORTAL, 'index.html'), 0, 'shell over 10 K
 for (const f of walk(path.join(PORTAL, 'assets')).filter((x) => ext(x) === '.js')) { const s = fs.statSync(f).size; if (s >= 40 * 1024 && !/assistant[\\/]engine\.js$/.test(f)) bad(f, 0, 'js module over 40 KB budget (G6)', s + ' bytes'); }
 
 if (problems.length) {
-  for (const p of problems.slice(0, +(process.env.HYG_MAX || 40))) console.log(`HYGIENE RED  ${p.file}:${p.line}  ${p.rule}  ${p.detail}`);
+  const by = new Map(); for (const p of problems) (by.get(p.rule) || by.set(p.rule, []).get(p.rule)).push(p);
+  for (const [rule, ps] of by) { console.log(`HYGIENE RED  ${rule}: ${ps.length}`); for (const p of ps.slice(0, +(process.env.HYG_MAX || 3))) console.log(`    ${p.file}:${p.line}  ${p.detail}`); }
   console.log(`HYGIENE RED: ${problems.length} problems`); process.exit(1);
 }
 console.log(`HYGIENE GREEN code files ${nCode}, data files ${nData}, strings checked ${nStr}, shell ${shell} bytes, tells lists ${tells ? 'read from ' + LINT_DIR : 'MISSING'}`);

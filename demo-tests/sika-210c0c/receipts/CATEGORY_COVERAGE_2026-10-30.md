@@ -1,6 +1,6 @@
 # CATEGORY COVERAGE 2026-10-30 (T01 second category kill test, measured)
 
-Input: knowledge lane rates.json generated 2026-10-30T08:09:28Z (verified facts), portal data/products.json, safety.json, evidence/verify_rejects.jsonl (24 rejected fact ids). Raw column = rate_status 'published' in rates_raw.json (512 products, before the verifier). Raw and verified agree per category when the verifier rejects no product-level rate (it rejected 24 facts in total, none of which changed a product's status in this run).
+Input: knowledge lane rates.json generated 2026-10-30T08:18:16Z (verified facts), portal data/products.json, safety.json, evidence/verify_rejects.jsonl (33 rejected fact ids). Raw column = rate_status 'published' in rates_raw.json (512 products, before the verifier). Raw and verified agree per category when the verifier rejects no product-level rate (it rejected 33 facts in total, none of which changed a product's status in this run).
 
 ## Metric (fixed before reading the numbers)
 
@@ -17,8 +17,8 @@ A category supports the platform claim only if 70 percent or more of its product
 ```
 category                            prod  usage  raw verified   sds complete   share  label
 concrete                              62     62   61       61    57       61   98.4%  PASS
-tile-stone-installationsystems        37     37   35       35    36       35   94.6%  PASS
 flooring                              69     69   63       63    41       63   91.3%  PASS
+tile-stone-installationsystems        37     37   35       31    36       31   83.8%  PASS
 structural-strengthening              12     12    9        9     5        9   75.0%  PASS
 concrete-repair-protection            42     42   31       31    36       31   73.8%  PASS
 grouts-anchoring                      35     35   23       23    21       23   65.7%  FAIL
@@ -36,15 +36,15 @@ appliance-and-equipment                2      2    0        0     2        0    
 
 ## Result
 
-- Tile and stone (the first category): 35 of 37 complete cited usage records = 94.6% (PASS).
+- Tile and stone (the first category): 31 of 37 complete cited usage records = 83.8% (PASS).
 - Second category (highest share among categories with 20 or more products, tile and stone excluded): concrete, 61 of 62 = 98.4% (PASS).
-- Categories with 20 or more products that pass the 70 percent bar: concrete, tile-stone-installationsystems, flooring, concrete-repair-protection.
+- Categories with 20 or more products that pass the 70 percent bar: concrete, flooring, tile-stone-installationsystems, concrete-repair-protection.
 - Waterproofing: 16 of 46 = 34.8% (FAIL). Under the bar, so the platform claim shrinks to tile only for waterproofing (restate it, see APPLY_KYLE.md K1).
 
 ## Caveats (honest)
 
-- "Not published" means the data sheet text and product page text carry no consumption figure that a machine could read; it does not mean Sika holds none. 130 products carry an "other status" (no data sheet PDF found, or text mentions coverage but no readable figure); they count as not complete.
-- The metric counts a record complete when a verified, cited consumption fact exists. It does not judge whether the figure is enough to compute a quantity (that is calc_ready, 379 of 512 per rates.json counts).
+- "Not published" means the data sheet text and product page text carry no consumption figure that a machine could read; it does not mean Sika holds none. 110 products carry an "other status" (no data sheet PDF found, or text mentions coverage but no readable figure); they count as not complete.
+- The metric counts a record complete when a verified, cited consumption fact exists. It does not judge whether the figure is enough to compute a quantity (that is calc_ready, 429 of 512 per rates.json counts).
 - Product categories use the second path segment of the product page category; a product has exactly one.
 - The lane output was still regenerating at 18:09 AEST; re-run the tool to refresh. Nothing here is a Sika-confirmed number.
 

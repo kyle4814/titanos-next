@@ -1,7 +1,7 @@
 {
  "generated_by": "category_coverage.py",
  "date": "2026-10-30",
- "rates_generated": "2026-10-30T08:09:28Z",
+ "rates_generated": "2026-10-30T08:18:16Z",
  "threshold": 0.7,
  "metric": "T01 second category kill test, measured (a receipt, not a feature). Python standard library only; reads files, never fetches.\n\nMetric (fixed before the numbers were looked at, not tuned): a product has a COMPLETE CITED USAGE RECORD when\n  (a) its product page carries usage statements (products.json usage list not empty), and\n  (b) the knowledge lane's VERIFIED output (rates.json) has rate_status 'published' and at least one consumption fact whose\n      source carries the exact phrase, a document or page URL and, for a data sheet (PDS/SDS), a page number, and\n  (c) that fact was not rejected by the verifier (evidence/verify_rejects.jsonl).\n'not published' means the data sheet and product page text has no figure; it does not mean Sika holds none.\nA category supports the platform claim only if 70 percent or more of its products are complete (PASS), else FAIL.",
  "rows": [
@@ -17,17 +17,6 @@
    "complete": 61
   },
   {
-   "category": "tile-stone-installationsystems",
-   "label": "PASS",
-   "share": 0.9459,
-   "products": 37,
-   "usage": 37,
-   "raw": 35,
-   "verified": 35,
-   "sds": 36,
-   "complete": 35
-  },
-  {
    "category": "flooring",
    "label": "PASS",
    "share": 0.913,
@@ -37,6 +26,17 @@
    "verified": 63,
    "sds": 41,
    "complete": 63
+  },
+  {
+   "category": "tile-stone-installationsystems",
+   "label": "PASS",
+   "share": 0.8378,
+   "products": 37,
+   "usage": 37,
+   "raw": 35,
+   "verified": 31,
+   "sds": 36,
+   "complete": 31
   },
   {
    "category": "structural-strengthening",
@@ -185,13 +185,13 @@
  "tile_stone": {
   "category": "tile-stone-installationsystems",
   "label": "PASS",
-  "share": 0.9459,
+  "share": 0.8378,
   "products": 37,
   "usage": 37,
   "raw": 35,
-  "verified": 35,
+  "verified": 31,
   "sds": 36,
-  "complete": 35
+  "complete": 31
  },
  "second_category": {
   "category": "concrete",
