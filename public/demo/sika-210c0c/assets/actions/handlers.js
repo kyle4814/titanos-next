@@ -23,6 +23,8 @@ const NEED_Q = {
   notch: null, csp: null, dilution: null, application: null, coats: ['How many coats?', []],
   cementitious: ['How many kg of total cementitious material (cement plus any supplementary binder) in the mix? The dosage is published per 100 kg of it.', []],
 };
+/** The calculator's field names in plain words. */
+export const human = (s) => String(s || '').replace(/notch_mm/g, 'trowel notch').replace(/thickness_mm/g, 'thickness (mm)').replace(/area_m2/g, 'area (m2)').replace(/length_m/g, 'length (m)').replace(/volume_m3/g, 'volume (m3)').replace(/cementitious_kg_per_m3/g, 'cementitious kg per m3').replace(/cementitious_kg/g, 'cementitious material (kg)').replace(/\bcsp\b/g, 'surface profile (CSP)');
 function needOf(r) {
   if (r.needs) return r.needs === 'notch_mm' ? 'notch' : r.needs;
   const t = r.reason || '';
@@ -78,7 +80,7 @@ export function quantityRows(rec, job, { tileSize, mosaic, strategy } = {}) {
   for (const r of results.filter((x) => !x.ok)) {
     const n = needOf(r);
     if (n && !out.need) { out.need = n; out.needRes = r; }
-    out.failures.push(r);
+    out.failures.push({ ...r, reason: human(r.reason) });
   }
   out.ok = okRes.length > 0;
   out.results = okRes;
@@ -178,6 +180,21 @@ function entryRows(ent, trees, kind, label, verbPartly) {
   return rows;
 }
 
+const clipAt = (s, n) => { const t = String(s || ''); if (t.length <= n) return t; const cut = t.slice(0, n); return cut.replace(/\s+\S*$/, '') || cut; };
+/** The chat card is a summary: at most two products per step, one why each; everything else goes in a collapsed "more detail" block. */
+function compactSections(c) {
+  for (const sec of c.sections) {
+    const rows = sec.rows; const groups = [];
+    for (const r of rows) { if (r.productId) groups.push([r]); else if (groups.length) groups[groups.length - 1].push(r); }
+    const fit = groups.filter((g) => /^(Documented fit|Primer named|Product)$/.test(g[0].label));
+    const pick = (fit.length ? fit : groups.filter((g) => g[0].label === 'Partly documented')).slice(0, 2);
+    const partlyOnly = !fit.length;
+    sec.more = rows;
+    sec.rows = pick.map((g) => { const why = g.find((x) => x.quote && x !== g[0]) || g[0]; return { label: g[0].value, value: (partlyOnly ? 'Partly documented, not endorsed. ' : '') + clipAt(why === g[0] ? '' : why.value, 150), productId: g[0].productId, quote: !partlyOnly, source: why.source || g[0].source }; });
+    if (!sec.rows.length) sec.rows = rows.slice(0, 2);
+  }
+}
+
 export async function system(ctx) {
   const { data, session } = ctx; const f = session.facets;
   const needSub = !f.substrate, needIo = !f.io;
@@ -259,6 +276,7 @@ export async function system(ctx) {
     }
   }
   if (!st.steps.grout) c.notes.push('Grout and movement joint products are not listed for this exact combination in the system finder. Ask Technical Services.');
+  compactSections(c);
   // quantities when an area is known, for the first documented product of each step
   const f2 = session.facets; const job = jobFrom(f2);
   if (job.area_m2) {
@@ -280,7 +298,7 @@ export async function system(ctx) {
     }
     c.sections.push(qs); c.estimate = true;
   } else c.notes.push('Give me an area (for example 20 m2) and I will work out quantities for each step.');
-  if (slug) c.buttons.push({ label: 'Open the keepable system sheet', href: `systems/${slug}/` });
+  if (slug) c.topButtons = [{ label: 'Open the keepable system sheet', href: `systems/${slug}/` }];
   c.buttons.push({ label: 'Work out quantities', command: job.area_m2 ? '/calc' : '/calc 20 m2' }, { label: 'Make a project pack', command: '/pack' }, ...afterBtns().slice(0, 2));
   c.sources = [];
   session.system = st; st.title = title; st.slug = slug;
@@ -289,6 +307,13 @@ export async function system(ctx) {
 }
 
 /* ---------------------------------------------------------------- COMPARE */
+/** Only the phrase that matched: stop where the next data sheet section heading (a run of capitals) or the first full sentence ends, and at 170 characters. */
+export function clampPhrase(text, n = 170) {
+  let t = plain(text).replace(/\s+/g, ' ');
+  const head = /\s(?=[A-Z]{3,}(?:\s+[A-Z&]{2,})+\b)/.exec(t); if (head) t = t.slice(0, head.index);
+  const sent = /^(.{20,}?[a-z0-9)%][.!?])\s+[A-Z]/.exec(t); if (sent) t = sent[1];
+  return clipAt(t.trim(), n);
+}
 export async function compare(ctx) {
   const { data, session } = ctx;
   let hits = await findProductsInOrder(data, ctx.rest || ctx.text, 2);
@@ -302,7 +327,7 @@ export async function compare(ctx) {
   const c = card('compare', 'compare', `${A.name} compared with ${B.name}`, { estimate: false });
   c.summary = 'Side by side, each cell is the published wording with its source. A blank means the published data does not say.';
   c.table = { head: ['', A.name, B.name], rows: [] };
-  const cell = (value, source) => (value ? { value: plain(value), source: source || null } : { value: NOT_PUBLISHED, source: null });
+  const cell = (value, source) => (value ? { value: clampPhrase(value), source: source || null } : { value: NOT_PUBLISHED, source: null });
   const line = (label, fa, fb) => c.table.rows.push({ label, cells: [fa, fb] });
   const sum = (p) => cell(p && (p.summary || p.tagline), p && src(p.url, 'Product page', p.summary || p.tagline));
   line('What it is', sum(pa), sum(pb));
@@ -316,7 +341,7 @@ export async function compare(ctx) {
   line('Open, cure or pot life time', tm(ra), tm(rb));
   const ex = (k, p) => { const r = k && k.rules.find((x) => x.polarity === 'no' && !x.conditional); return r ? cell(r.text, src(page({ url: r.source.url, page: r.source.page }), srcLabel(r.source), r.text)) : cell(null); };
   line('A stated exclusion', ex(ka, pa), ex(kb, pb));
-  const ds = (r) => (r && r.datasheet ? { value: `Data sheet, ${plain(r.datasheet.doc_version)}`, source: src(r.datasheet.url, `Data sheet, ${plain(r.datasheet.doc_version)}`, `Data sheet, ${plain(r.datasheet.doc_version)}`) } : cell(null));
+  const ds = (r) => { if (!(r && r.datasheet)) return cell(null); const v = r.datasheet.doc_version ? `Data sheet, ${plain(r.datasheet.doc_version)}` : 'Data sheet'; return { value: v, source: src(r.datasheet.url, v, v) }; };
   line('Data sheet', ds(ra), ds(rb));
   [A, B].forEach((x) => noteProduct(session, x));
   session.compare = [A.id, B.id];

@@ -13,7 +13,8 @@ async function session(W, H, query, fn) {
   page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) errs.push(m.text().slice(0, 140)); }); page.on('pageerror', (e) => errs.push(e.message));
   page.on('request', (r) => { reqs.push(r.url()); if (!['GET', 'HEAD'].includes(r.method())) posts.push(r.method() + ' ' + r.url()); });
   await ctx.route('**/*', (route) => { const u = new URL(route.request().url()); if (u.host === new URL(s.base).host || u.protocol === 'data:' || u.protocol === 'blob:') return route.continue(); return route.abort(); });
-  await page.goto(s.base + query + '#/', { waitUntil: 'load' }); await page.waitForSelector('main:not([aria-busy])'); await page.waitForTimeout(300);
+  // the brain is tested on its own: the actions layer (apply/actions) answers first on the merged tree, so it is switched off here and covered by demo-tests/sika-actions
+  await page.goto(s.base + (query ? query + '&' : '?') + 'actions=off#/', { waitUntil: 'load' }); await page.waitForSelector('main:not([aria-busy])'); await page.waitForTimeout(300);
   try { await fn(page, { errs, reqs, posts, ctx }); } finally { await ctx.close(); }
 }
 const ask = async (page, q) => { const before = await page.locator('.asst-log .msg--bot').count(); await page.fill('#asst-q', q); await page.press('#asst-q', 'Enter'); await page.waitForFunction((n) => document.querySelectorAll('.asst-log .msg--bot').length > n && !document.querySelector('.asst-log .typing'), before, { timeout: 20000 }); return page.locator('.asst-log .msg--bot').last(); };

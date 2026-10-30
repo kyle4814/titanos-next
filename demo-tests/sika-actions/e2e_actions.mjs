@@ -52,8 +52,9 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   await send(page, '/exportjson'); const [dl] = await Promise.all([page.waitForEvent('download'), lastCard(page).locator('button:has-text("Download projects")').click()]);
   t(`${sz} json download`, /sika-demo-projects\.json/.test(dl.suggestedFilename()));
   // system + compat + safety render
-  await send(page, '/system porcelain on concrete, inside'); const sy = await lastCard(page).innerText();
+  await send(page, '/system porcelain on concrete, inside'); const sy = await lastCard(page).evaluate((n) => n.textContent);
   t(`${sz} system card sections and not endorsed wording`, /Prepare and prime/i.test(sy) && /Partly documented, not endorsed/i.test(sy));
+  const hgt = await lastCard(page).evaluate((n) => Math.round(n.getBoundingClientRect().height)); t(`${sz} system card is a summary (height ${hgt}px)`, hgt <= (W < 600 ? 2110 : 1900), hgt);
   await send(page, 'Can I tile over a heated floor?'); t(`${sz} heated floor not guessed`, /not mention/i.test(await lastCard(page).innerText()) || /Not in the published data/i.test(await lastCard(page).innerText()));
   await send(page, `Can I use Davco Grey One Pot adhesive over old tiles?`); t(`${sz} compat No with sentence`, /No\./.test(await lastCard(page).innerText()) && /existing ceramic tiles/.test(await lastCard(page).innerText()));
   await send(page, 'which primer for concrete'); t(`${sz} plain question still goes to the advisor`, (await lastCard(page).locator('.action-card').count()) === 0 && (await lastCard(page).innerText()).length > 20);

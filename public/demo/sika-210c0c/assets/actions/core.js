@@ -129,7 +129,7 @@ export function cardCells(c) {
   const cells = [];
   for (const r of c.rows || []) cells.push(r);
   if (c.table) for (const row of c.table.rows) for (const cell of row.cells) cells.push(cell);
-  for (const s of c.sections || []) for (const r of s.rows || []) cells.push(r);
+  for (const s of c.sections || []) for (const r of [...(s.rows || []), ...(s.more || [])]) cells.push(r);
   return cells;
 }
 
@@ -140,7 +140,7 @@ export function cardCsv(c) {
   const push = (label, cell) => out.push([label, cell.value, cell.source ? cell.source.label : '', cell.source ? cell.source.url : '', cell.source ? cell.source.sentence : ''].map(q).join(','));
   for (const r of c.rows || []) push(r.label, r);
   if (c.table) c.table.rows.forEach((row) => row.cells.forEach((cell, i) => push(row.label + ' / ' + (c.table.head[i + 1] || ''), cell)));
-  for (const s of c.sections || []) for (const r of s.rows || []) push(s.title + ' / ' + r.label, r);
+  for (const s of c.sections || []) for (const r of [...(s.rows || []), ...(s.more || [])]) push(s.title + ' / ' + r.label, r);
   if (c.estimate) out.push(q(ESTIMATE_LINE));
   return out.join('\r\n') + '\r\n';
 }
@@ -152,7 +152,7 @@ export function cardText(c) {
   const line = (label, cell) => L.push(`${label}: ${cell.value}${cell.source ? `  [${cell.source.label}${cell.source.url ? ' ' + cell.source.url : ''}]` : ''}`);
   for (const r of c.rows || []) line(r.label, r);
   if (c.table) { L.push(c.table.head.join(' | ')); c.table.rows.forEach((row) => L.push(row.label + ': ' + row.cells.map((x) => x.value).join(' | '))); }
-  for (const s of c.sections || []) { L.push('', s.title); for (const r of s.rows || []) line(r.label, r); }
+  for (const s of c.sections || []) { L.push('', s.title); for (const r of [...(s.rows || []), ...(s.more || [])]) line(r.label, r); }
   for (const n of c.notes || []) L.push('', n);
   if (c.estimate) L.push('', ESTIMATE_LINE);
   return L.join('\n') + '\n';

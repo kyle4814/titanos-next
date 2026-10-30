@@ -105,7 +105,7 @@ export function createActions(deps) {
   async function run(text, session = newSession()) {
     text = String(text || '').trim();
     if (!text) return { handled: false, session };
-    let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text;
+    let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text; let answerOf = null;
     const p = session.pending;
     if (p) {
       session.pending = null;
@@ -115,7 +115,7 @@ export function createActions(deps) {
         // the visitor is answering our question: put the original request and the answer together, once
         action = p.action; noAsk = true; useText = `${p.text} ${text}`; rest = useText;
         const bare = /^\s*(\d+(?:[.,]\d+)?)\s*(?:m2|sqm|mm|m|%|kg|litres?|l)?\s*$/i.exec(text);
-        if (bare && NEED_KEY[p.need]) session.facets[NEED_KEY[p.need]] = parseFloat(bare[1].replace(',', '.'));
+        answerOf = { p, bare: bare && NEED_KEY[p.need] ? parseFloat(bare[1].replace(',', '.')) : null };
       }
     }
     if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
@@ -126,7 +126,14 @@ export function createActions(deps) {
     // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
     if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
-    if (!MEMORY_ACTIONS.has(action)) updateFacets(session, useText, stripped);
+    if (!MEMORY_ACTIONS.has(action)) {
+      if (answerOf) {
+        // the answer to our question is read on its own: "10 mm" to a notch question is a notch, never also a thickness
+        const base = norm(answerOf.p.text); updateFacets(session, answerOf.p.text, base);
+        if (answerOf.bare && NEED_KEY[answerOf.p.need]) session.facets[NEED_KEY[answerOf.p.need]] = answerOf.bare;
+        else updateFacets(session, text, norm(text));
+      } else updateFacets(session, useText, stripped);
+    }
     if (!r || !r.slash) session.lastQuestion = text;
     const ctx = { data, session, memory, config, text: useText, rest, noAsk, now: deps.now ? deps.now() : new Date(), commands: COMMANDS };
     let c;
