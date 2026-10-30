@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T09:47:29.146Z",
+ "generated": "2026-10-30T11:26:12.419Z",
  "tool": "speed.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
  "profile": {
   "name": "DevTools Fast 3G",
@@ -18,30 +18,30 @@
    "targetBytes": 80000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 1788,
-    "median_fcp_ms": 700,
+    "median_ms_to_answer": 2115,
+    "median_fcp_ms": 696,
     "all_ms": [
-     1669,
-     2200,
-     1788
+     2112,
+     2115,
+     2190
     ],
     "all_fcp": [
      688,
-     700,
-     704
+     696,
+     716
     ],
-    "bytes_at_answer": 72639,
+    "bytes_at_answer": 74793,
     "requests_at_answer": 4,
-    "bytes_settled": 74054,
+    "bytes_settled": 76208,
     "requests_settled": 6,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -49,7 +49,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -62,30 +62,30 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 380,
-    "median_fcp_ms": 88,
+    "median_ms_to_answer": 340,
+    "median_fcp_ms": 80,
     "all_ms": [
-     386,
-     380,
-     366
+     340,
+     270,
+     371
     ],
     "all_fcp": [
-     92,
-     84,
-     88
+     80,
+     76,
+     92
     ],
-    "bytes_at_answer": 73501,
+    "bytes_at_answer": 75655,
     "requests_at_answer": 5,
-    "bytes_settled": 73501,
+    "bytes_settled": 75655,
     "requests_settled": 5,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -93,7 +93,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -108,26 +108,26 @@
    "targetBytes": 100000,
    "targetMsFast3g": 1500,
    "fast3g": {
-    "median_ms_to_answer": 4172,
-    "median_fcp_ms": 884,
+    "median_ms_to_answer": 3716,
+    "median_fcp_ms": 676,
     "all_ms": [
-     3929,
-     4172,
-     4706
+     4060,
+     3665,
+     3716
     ],
     "all_fcp": [
-     884,
-     680,
-     1208
+     672,
+     676,
+     684
     ],
-    "bytes_at_answer": 96141,
+    "bytes_at_answer": 98298,
     "requests_at_answer": 8,
-    "bytes_settled": 212243,
+    "bytes_settled": 214400,
     "requests_settled": 16,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "assets/fonts/barlow-700-n.woff2",
@@ -151,11 +151,11 @@
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
-      "bytes": 18859
+      "bytes": 18862
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -171,7 +171,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -192,26 +192,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 1263,
+    "median_ms_to_answer": 1670,
     "median_fcp_ms": 608,
     "all_ms": [
-     863,
-     1263,
-     1275
+     1946,
+     1576,
+     1670
     ],
     "all_fcp": [
-     332,
-     608,
-     612
+     268,
+     620,
+     608
     ],
-    "bytes_at_answer": 212243,
+    "bytes_at_answer": 214400,
     "requests_at_answer": 16,
-    "bytes_settled": 212243,
+    "bytes_settled": 214400,
     "requests_settled": 16,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "assets/fonts/barlow-700-n.woff2",
@@ -235,11 +235,11 @@
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
-      "bytes": 18859
+      "bytes": 18862
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -255,7 +255,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -282,21 +282,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 828,
-    "median_fcp_ms": 720,
+    "median_ms_to_answer": 945,
+    "median_fcp_ms": 760,
     "all_ms": [
-     828,
-     809,
-     832
+     869,
+     945,
+     970
     ],
     "all_fcp": [
-     720,
-     700,
-     720
+     716,
+     768,
+     760
     ],
-    "bytes_at_answer": 18859,
+    "bytes_at_answer": 18862,
     "requests_at_answer": 2,
-    "bytes_settled": 134961,
+    "bytes_settled": 134964,
     "requests_settled": 10,
     "files": [
      {
@@ -321,7 +321,7 @@
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
-      "bytes": 18859
+      "bytes": 18862
      },
      {
       "file": "assets/sheet.js",
@@ -342,21 +342,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 246,
-    "median_fcp_ms": 208,
+    "median_ms_to_answer": 750,
+    "median_fcp_ms": 304,
     "all_ms": [
-     269,
-     232,
-     246
+     660,
+     973,
+     750
     ],
     "all_fcp": [
-     220,
-     192,
-     208
+     300,
+     304,
+     364
     ],
-    "bytes_at_answer": 22236,
-    "requests_at_answer": 5,
-    "bytes_settled": 134961,
+    "bytes_at_answer": 134964,
+    "requests_at_answer": 10,
+    "bytes_settled": 134964,
     "requests_settled": 10,
     "files": [
      {
@@ -381,7 +381,7 @@
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
-      "bytes": 18859
+      "bytes": 18862
      },
      {
       "file": "assets/sheet.js",
@@ -408,34 +408,34 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3697,
-    "median_fcp_ms": 696,
+    "median_ms_to_answer": 3893,
+    "median_fcp_ms": 704,
     "all_ms": [
-     3584,
-     3701,
-     3697
+     3883,
+     3893,
+     4531
     ],
     "all_fcp": [
+     704,
      696,
-     696,
-     676
+     808
     ],
-    "bytes_at_answer": 122471,
+    "bytes_at_answer": 100005,
     "requests_at_answer": 13,
-    "bytes_settled": 123024,
+    "bytes_settled": 100558,
     "requests_settled": 14,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
-     },
-     {
-      "file": "assets/dist/lazy.js",
-      "bytes": 31668
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
+     },
+     {
+      "file": "dist/actions-panels.js",
+      "bytes": 7047
      },
      {
       "file": "data/cats.lite.json",
@@ -451,7 +451,7 @@
      },
      {
       "file": "data/specs/index.json",
-      "bytes": 3566
+      "bytes": 3567
      },
      {
       "file": "data/k/davco-grey-one-potadhesive.json",
@@ -459,7 +459,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -484,34 +484,34 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 356,
-    "median_fcp_ms": 76,
+    "median_ms_to_answer": 3147,
+    "median_fcp_ms": 124,
     "all_ms": [
-     356,
-     326,
-     380
+     1765,
+     3147,
+     3314
     ],
     "all_fcp": [
-     72,
-     76,
-     76
+     124,
+     152,
+     124
     ],
-    "bytes_at_answer": 122471,
+    "bytes_at_answer": 100005,
     "requests_at_answer": 13,
-    "bytes_settled": 122471,
+    "bytes_settled": 100005,
     "requests_settled": 13,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
-     },
-     {
-      "file": "assets/dist/lazy.js",
-      "bytes": 31668
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
+     },
+     {
+      "file": "dist/actions-panels.js",
+      "bytes": 7047
      },
      {
       "file": "data/cats.lite.json",
@@ -527,7 +527,7 @@
      },
      {
       "file": "data/specs/index.json",
-      "bytes": 3566
+      "bytes": 3567
      },
      {
       "file": "data/k/davco-grey-one-potadhesive.json",
@@ -535,7 +535,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -557,39 +557,79 @@
    }
   },
   {
-   "id": "finder",
-   "route": "finder (#/products)",
-   "targetBytes": 150000,
+   "id": "advisor_beat3",
+   "route": "advisor: cold load of home, open the advisor, ask \"Can I use Davco Grey One Pot over my old tiles?\", first answer with a quoted data sheet sentence",
+   "targetBytes": 600000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2641,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 8331,
+    "median_fcp_ms": 724,
     "all_ms": [
-     2589,
-     2641,
-     2649
+     9149,
+     7783,
+     8331
     ],
     "all_fcp": [
-     688,
-     692,
-     676
+     808,
+     724,
+     704
     ],
-    "bytes_at_answer": 144592,
-    "requests_at_answer": 7,
-    "bytes_settled": 145145,
-    "requests_settled": 8,
+    "bytes_at_answer": 705620,
+    "requests_at_answer": 20,
+    "bytes_settled": 705620,
+    "requests_settled": 20,
     "files": [
+     {
+      "file": "data/brain/core.json",
+      "bytes": 253783
+     },
+     {
+      "file": "data/actions/trees.json",
+      "bytes": 128104
+     },
      {
       "file": "data/index.json",
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
+     },
+     {
+      "file": "dist/actions.js",
+      "bytes": 35319
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "dist/brain.js",
+      "bytes": 17996
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
+     },
+     {
+      "file": "dist/actions-panels.js",
+      "bytes": 7047
      },
      {
       "file": "data/cats.lite.json",
@@ -597,7 +637,15 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
+     },
+     {
+      "file": "data/actions/compat/davco-grey-one-potadhesive.json",
+      "bytes": 1582
+     },
+     {
+      "file": "assets/actions.css",
+      "bytes": 1466
      },
      {
       "file": "assets/apply_data.css",
@@ -608,40 +656,60 @@
       "bytes": 553
      },
      {
-      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
-      "bytes": 0
+      "file": "data/brain/rules.json",
+      "bytes": 299
      }
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 309,
-    "median_fcp_ms": 84,
+    "median_ms_to_answer": 2341,
+    "median_fcp_ms": 256,
     "all_ms": [
-     309,
-     299,
-     318
+     2968,
+     2341,
+     2177
     ],
     "all_fcp": [
-     88,
-     76,
-     84
+     132,
+     572,
+     256
     ],
-    "bytes_at_answer": 144592,
-    "requests_at_answer": 7,
-    "bytes_settled": 144592,
-    "requests_settled": 7,
+    "bytes_at_answer": 592342,
+    "requests_at_answer": 14,
+    "bytes_settled": 592342,
+    "requests_settled": 14,
     "files": [
+     {
+      "file": "data/brain/core.json",
+      "bytes": 253783
+     },
+     {
+      "file": "data/actions/trees.json",
+      "bytes": 128104
+     },
      {
       "file": "data/index.json",
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
+     },
+     {
+      "file": "dist/actions.js",
+      "bytes": 35319
+     },
+     {
+      "file": "dist/brain.js",
+      "bytes": 17996
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
+     },
+     {
+      "file": "dist/actions-panels.js",
+      "bytes": 7047
      },
      {
       "file": "data/cats.lite.json",
@@ -649,7 +717,117 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
+     },
+     {
+      "file": "data/actions/compat/davco-grey-one-potadhesive.json",
+      "bytes": 1582
+     },
+     {
+      "file": "assets/actions.css",
+      "bytes": 1466
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/brain/rules.json",
+      "bytes": 299
+     }
+    ]
+   }
+  },
+  {
+   "id": "finder",
+   "route": "finder (#/products)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2960,
+    "median_fcp_ms": 744,
+    "all_ms": [
+     3267,
+     2904,
+     2960
+    ],
+    "all_fcp": [
+     816,
+     744,
+     708
+    ],
+    "bytes_at_answer": 146746,
+    "requests_at_answer": 7,
+    "bytes_settled": 146746,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "dist/main.js",
+      "bytes": 53148
+     },
+     {
+      "file": "",
+      "bytes": 12749
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2150
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 987,
+    "median_fcp_ms": 112,
+    "all_ms": [
+     987,
+     1126,
+     452
+    ],
+    "all_fcp": [
+     128,
+     112,
+     96
+    ],
+    "bytes_at_answer": 146746,
+    "requests_at_answer": 7,
+    "bytes_settled": 146746,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "dist/main.js",
+      "bytes": 53148
+     },
+     {
+      "file": "",
+      "bytes": 12749
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -668,21 +846,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3092,
-    "median_fcp_ms": 692,
+    "median_ms_to_answer": 3004,
+    "median_fcp_ms": 980,
     "all_ms": [
-     3092,
-     2677,
-     3099
+     2897,
+     3156,
+     3004
     ],
     "all_fcp": [
-     688,
-     692,
-     696
+     712,
+     1068,
+     980
     ],
-    "bytes_at_answer": 163059,
+    "bytes_at_answer": 165213,
     "requests_at_answer": 8,
-    "bytes_settled": 163612,
+    "bytes_settled": 165766,
     "requests_settled": 9,
     "files": [
      {
@@ -690,8 +868,8 @@
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "data/categories.json",
@@ -699,7 +877,7 @@
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -707,7 +885,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -724,21 +902,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 278,
-    "median_fcp_ms": 72,
+    "median_ms_to_answer": 443,
+    "median_fcp_ms": 96,
     "all_ms": [
-     278,
-     263,
-     318
+     443,
+     1210,
+     429
     ],
     "all_fcp": [
-     72,
-     64,
+     96,
+     116,
      92
     ],
-    "bytes_at_answer": 163059,
+    "bytes_at_answer": 165213,
     "requests_at_answer": 8,
-    "bytes_settled": 163059,
+    "bytes_settled": 165213,
     "requests_settled": 8,
     "files": [
      {
@@ -746,8 +924,8 @@
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "data/categories.json",
@@ -755,7 +933,7 @@
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -763,7 +941,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -782,21 +960,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 4117,
-    "median_fcp_ms": 672,
+    "median_ms_to_answer": 4581,
+    "median_fcp_ms": 736,
     "all_ms": [
-     4119,
-     4102,
-     4117
+     3979,
+     4780,
+     4581
     ],
     "all_fcp": [
-     688,
-     672,
-     672
+     712,
+     736,
+     816
     ],
-    "bytes_at_answer": 268811,
+    "bytes_at_answer": 270965,
     "requests_at_answer": 8,
-    "bytes_settled": 269364,
+    "bytes_settled": 271518,
     "requests_settled": 9,
     "files": [
      {
@@ -808,12 +986,12 @@
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -821,7 +999,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -838,21 +1016,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 355,
-    "median_fcp_ms": 76,
+    "median_ms_to_answer": 758,
+    "median_fcp_ms": 120,
     "all_ms": [
-     359,
-     355,
-     338
+     758,
+     856,
+     553
     ],
     "all_fcp": [
-     84,
-     76,
-     76
+     224,
+     120,
+     100
     ],
-    "bytes_at_answer": 268811,
+    "bytes_at_answer": 270965,
     "requests_at_answer": 8,
-    "bytes_settled": 268811,
+    "bytes_settled": 270965,
     "requests_settled": 8,
     "files": [
      {
@@ -864,12 +1042,12 @@
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -877,7 +1055,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -896,21 +1074,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3106,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 3355,
+    "median_fcp_ms": 700,
     "all_ms": [
-     3096,
-     3106,
-     3113
+     3355,
+     3773,
+     3091
     ],
     "all_fcp": [
+     728,
      684,
-     692,
-     676
+     700
     ],
-    "bytes_at_answer": 184629,
+    "bytes_at_answer": 186783,
     "requests_at_answer": 6,
-    "bytes_settled": 185182,
+    "bytes_settled": 187336,
     "requests_settled": 7,
     "files": [
      {
@@ -918,12 +1096,12 @@
       "bytes": 111128
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -931,7 +1109,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -944,21 +1122,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 309,
-    "median_fcp_ms": 84,
+    "median_ms_to_answer": 794,
+    "median_fcp_ms": 128,
     "all_ms": [
-     309,
-     316,
-     249
+     1083,
+     546,
+     794
     ],
     "all_fcp": [
-     88,
-     84,
-     68
+     128,
+     100,
+     192
     ],
-    "bytes_at_answer": 184629,
+    "bytes_at_answer": 186783,
     "requests_at_answer": 6,
-    "bytes_settled": 184629,
+    "bytes_settled": 186783,
     "requests_settled": 6,
     "files": [
      {
@@ -966,12 +1144,12 @@
       "bytes": 111128
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -979,7 +1157,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -994,69 +1172,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2618,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 3014,
+    "median_fcp_ms": 700,
     "all_ms": [
-     2618,
-     2601,
-     2659
+     3080,
+     3014,
+     2937
     ],
     "all_fcp": [
-     684,
-     684,
-     692
+     704,
+     696,
+     700
     ],
-    "bytes_at_answer": 144592,
+    "bytes_at_answer": 146746,
     "requests_at_answer": 6,
-    "bytes_settled": 145145,
-    "requests_settled": 7,
-    "files": [
-     {
-      "file": "data/index.json",
-      "bytes": 71091
-     },
-     {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
-     },
-     {
-      "file": "",
-      "bytes": 12576
-     },
-     {
-      "file": "data/cats.lite.json",
-      "bytes": 6746
-     },
-     {
-      "file": "data/config.json",
-      "bytes": 2006
-     },
-     {
-      "file": "assets/apply_data.css",
-      "bytes": 862
-     },
-     {
-      "file": "assets/fonts/fonts.css",
-      "bytes": 553
-     }
-    ]
-   },
-   "desktop": {
-    "median_ms_to_answer": 307,
-    "median_fcp_ms": 92,
-    "all_ms": [
-     294,
-     307,
-     337
-    ],
-    "all_fcp": [
-     80,
-     92,
-     108
-    ],
-    "bytes_at_answer": 144592,
-    "requests_at_answer": 6,
-    "bytes_settled": 144592,
+    "bytes_settled": 146746,
     "requests_settled": 6,
     "files": [
      {
@@ -1064,12 +1194,12 @@
       "bytes": 71091
      },
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -1077,7 +1207,51 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 1022,
+    "median_fcp_ms": 168,
+    "all_ms": [
+     443,
+     1089,
+     1022
+    ],
+    "all_fcp": [
+     120,
+     168,
+     268
+    ],
+    "bytes_at_answer": 146746,
+    "requests_at_answer": 6,
+    "bytes_settled": 146746,
+    "requests_settled": 6,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "dist/main.js",
+      "bytes": 53148
+     },
+     {
+      "file": "",
+      "bytes": 12749
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -1092,30 +1266,30 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3644,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 3766,
+    "median_fcp_ms": 712,
     "all_ms": [
-     3593,
-     3665,
-     3644
+     3766,
+     4425,
+     3764
     ],
     "all_fcp": [
-     700,
-     684,
-     676
+     712,
+     760,
+     700
     ],
-    "bytes_at_answer": 74635,
+    "bytes_at_answer": 76789,
     "requests_at_answer": 8,
-    "bytes_settled": 75188,
+    "bytes_settled": 77342,
     "requests_settled": 9,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -1123,7 +1297,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -1148,30 +1322,30 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 364,
-    "median_fcp_ms": 88,
+    "median_ms_to_answer": 751,
+    "median_fcp_ms": 120,
     "all_ms": [
-     364,
-     293,
-     812
+     465,
+     751,
+     768
     ],
     "all_fcp": [
-     92,
-     80,
-     88
+     104,
+     124,
+     120
     ],
-    "bytes_at_answer": 74635,
+    "bytes_at_answer": 76789,
     "requests_at_answer": 8,
-    "bytes_settled": 74635,
+    "bytes_settled": 76789,
     "requests_settled": 8,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -1179,7 +1353,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -1206,30 +1380,30 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2544,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 2767,
+    "median_fcp_ms": 704,
     "all_ms": [
-     2189,
-     2638,
-     2544
+     2767,
+     2900,
+     2719
     ],
     "all_fcp": [
-     696,
-     688,
-     680
+     700,
+     708,
+     704
     ],
-    "bytes_at_answer": 77282,
+    "bytes_at_answer": 79436,
     "requests_at_answer": 6,
-    "bytes_settled": 77835,
+    "bytes_settled": 79989,
     "requests_settled": 7,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -1241,7 +1415,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
@@ -1254,30 +1428,30 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 302,
-    "median_fcp_ms": 88,
+    "median_ms_to_answer": 1315,
+    "median_fcp_ms": 156,
     "all_ms": [
-     367,
-     295,
-     302
+     459,
+     1315,
+     1495
     ],
     "all_fcp": [
-     92,
-     88,
-     84
+     156,
+     196,
+     92
     ],
-    "bytes_at_answer": 77282,
+    "bytes_at_answer": 79436,
     "requests_at_answer": 6,
-    "bytes_settled": 77282,
+    "bytes_settled": 79436,
     "requests_settled": 6,
     "files": [
      {
-      "file": "assets/dist/main.js",
-      "bytes": 51311
+      "file": "dist/main.js",
+      "bytes": 53148
      },
      {
       "file": "",
-      "bytes": 12576
+      "bytes": 12749
      },
      {
       "file": "data/cats.lite.json",
@@ -1289,7 +1463,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2006
+      "bytes": 2150
      },
      {
       "file": "assets/apply_data.css",
