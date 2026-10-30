@@ -58,8 +58,8 @@ export function validateCard(c) {
     if (f.status === 'PUBLISHED' && (!f.sentence || !f.source_url)) bad.push('PUBLISHED fact without sentence or url');
     if (f.status === 'SIGNED') bad.push('SIGNED is never emitted');
   }
-  if (c.status === 'PUBLISHED' && !c.source) bad.push('PUBLISHED card without source');
-  if (c.status === 'UNKNOWN' && !c.handoff) bad.push('UNKNOWN card without hand-off');
+  if (c.type !== 'choose' && c.status === 'PUBLISHED' && !c.source) bad.push('PUBLISHED card without source');
+  if (c.type !== 'choose' && c.status === 'UNKNOWN' && !c.handoff) bad.push('UNKNOWN card without hand-off');
   return bad;
 }
 /** Plain text of a card: exactly what a visitor can read. Used by the UI fallback and by the property test. */

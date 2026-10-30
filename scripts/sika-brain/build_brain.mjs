@@ -71,26 +71,46 @@ const cats = categories.map((c) => ({ id: c.id, name: c.name, parent: c.parent, 
 const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut };
 const coreSize = wr(path.join(OUT, 'core.json'), core);
 
-// per product shards
+// per product shards: compiled from the FINAL knowledge lane files (rates, safety, compatibility); k/<id>.json is only a fallback
 const kdir = path.join(PORTAL, 'data/k');
-let nShard = 0, nNoK = 0;
+const rates = rd(path.join(LANES, 'knowledge/rates.json')), safety = rd(path.join(LANES, 'knowledge/safety.json')), compat = rd(path.join(LANES, 'knowledge/compatibility.json'));
+const src = (x) => x ? { t: x.doc_type, u: x.url || x.web_url || '', v: x.doc_version || '', p: x.page == null ? null : x.page, pe: x.page_end == null ? null : x.page_end, sec: x.web_section || x.section || '' } : null;
+const nf = (f) => ({ id: f.id, label: f.label || '', text: f.text, s: src(f.source), parsed: f.parsed || null, calc: !!f.calc_ready, at: f.applies_to || null });
+function normSource(o) { // recursively turn {source:{...}} into {s:{...}}
+  if (Array.isArray(o)) return o.map(normSource);
+  if (o && typeof o === 'object') { const r = {}; for (const [k, v] of Object.entries(o)) { if (k === 'source' && v && typeof v === 'object') r.s = src(v); else r[k] = normSource(v); } return r; }
+  return o;
+}
+const RATE_KINDS = ['consumption', 'coats', 'layer_thickness', 'mix_ratio'], TIME_KINDS = ['open_time', 'pot_life', 'adjustability_time', 'skin_tack_times', 'cure_times', 'recoat_times'];
+let nShard = 0, nNoK = 0, nLane = 0;
 for (const p of products) {
-  const kf = path.join(kdir, p.id + '.json');
-  const k = exists(kf) ? rd(kf) : null; if (!k) nNoK++;
+  const rp = rates.products[p.id], sp = safety.products[p.id], cp = compat.products[p.id];
   const shard = {
     v: 1, id: p.id, n: clean(p.name), b: clean(p.brand), u: p.url, c: p.category,
     d: { t: clean(p.tagline), s: clean(p.summary), a: (p.attributes || []).map(clean), us: (p.usage || []).map(clean), pk: clean(p.packaging), sec: (p.sections || []).flatMap((s) => (s.items || []).map((it) => ({ l: clean(it.label), t: clean(it.text), g: clean(s.title) }))).filter((x) => x.t).slice(0, 40) },
     dc: (docsByProduct.get(p.id) || []).map((d) => ({ id: d.id, t: clean(d.title), ty: d.type, tl: d.typeLabel, v: d.version || '', u: d.url, ok: docOk(d), f: d.format })),
   };
-  if (k) { shard.r = k.rates; shard.tm = k.times; shard.cp = k.compat; shard.sf = k.safety; shard.sp = k.spec; }
+  if (rp) {
+    nLane++;
+    shard.r = { status: rp.rate_status, ds: rp.datasheet || null, facts: Object.fromEntries(RATE_KINDS.map((k) => [k, (rp.facts[k] || []).map(nf)])) };
+    shard.tm = Object.fromEntries(TIME_KINDS.map((k) => [k, (rp.facts[k] || []).map(nf)]).filter(([, v]) => v.length));
+    shard.pk = (rp.facts.pack_sizes || []).map(nf);
+  }
+  if (cp) shard.cp = (cp.rules || []).map((r) => ({ id: r.id, type: r.type, pol: r.polarity, cond: !!r.conditional, tags: r.tags || {}, text: r.text, heading: r.heading || '', s: src(r.source), pm: r.products_mentioned || [] }));
+  if (sp) {
+    const sds = (sp.sds || []).filter((x) => x.latest_for_name !== false && x.name_matches_product !== false);
+    shard.sf = { status: sp.summary && sp.summary.status || '', sds: sds.map((x) => normSource({ title: x.title, url: x.url, revision_date: x.revision_date, version: x.version, sds_number: x.sds_number, pages: x.pages, classification: x.classification, hazard_statements: x.hazard_statements, precautionary_statements: x.precautionary_statements, storage: x.storage, handling: x.handling, signal_word: x.signal_word, ppe: x.ppe, transport_adg: x.transport_adg })) };
+  }
+  const kf = path.join(kdir, p.id + '.json');
+  if (exists(kf)) { const k = rd(kf); shard.sp = k.spec; if (!rp) { nNoK++; shard.r = k.rates; shard.tm = k.times; shard.cp = k.compat; shard.sf = k.safety; } }
   sizes.p += wr(path.join(OUT, 'p', p.id + '.json'), shard); nShard++;
 }
 
 // per top-category shards: compat tag lists (filtered to the category), rule texts for the trees, trees, systems
-const compat = rd(path.join(LANES, 'knowledge/compatibility.json'));
 const trees = rd(path.join(LANES, 'knowledge/decision_trees.json'));
 const catOf = new Map(products.map((p) => [p.id, top2(p.category)]));
 const slug = (c) => c.replace(/\//g, '__');
+const ruleById = new Map(); for (const cp of Object.values(compat.products)) for (const r of cp.rules || []) ruleById.set(r.id, r);
 const catIds = [...new Set(products.map((p) => top2(p.category)))];
 const treeOut = { v: 1, trees: [] };
 for (const t of trees.trees) {
@@ -111,7 +131,7 @@ for (const cid of catIds) {
   const inCat = new Set(products.filter((p) => top2(p.category) === cid).map((p) => p.id));
   const o = { v: 1, id: cid, name: catName.get(cid) || cid, products: [...inCat], tags: {} };
   for (const [tag, v] of Object.entries(compat.by_tag || {})) {
-    const f = (a) => (a || []).filter((x) => inCat.has(x.product));
+    const f = (a) => (a || []).filter((x) => inCat.has(x.product)).map((x) => { const r = ruleById.get(x.rule); return { p: x.product, r: x.rule, c: !!x.conditional, t: r ? r.text : '', pg: r && r.source ? r.source.page : null, u: r && r.source ? r.source.url : '', v: r && r.source ? r.source.doc_version : '' }; });
     const e = { yes: f(v.yes), no: f(v.no), conditional: f(v.conditional) };
     if (e.yes.length || e.no.length || e.conditional.length) o.tags[tag] = e;
   }
@@ -130,4 +150,4 @@ const rules = exists(rulesSrc) ? rd(rulesSrc) : { version: 1, rules: [] };
 wr(path.join(OUT, 'rules.json'), rules);
 const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json' }, bytes: { core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
 wr(path.join(OUT, 'manifest.json'), manifest);
-console.log(JSON.stringify(manifest), 'products without k shard:', nNoK);
+console.log(JSON.stringify(manifest), 'products from lane:', nLane, 'fallback to k:', nNoK);

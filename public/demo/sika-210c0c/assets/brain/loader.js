@@ -1,0 +1,13 @@
+// loader.js: lazy shard loader. fetchJson(url) must resolve to the parsed JSON or null (never throw on a 404).
+// A missing shard returns null and the caller falls back (the UI falls back to the v1 advisor).
+export function createLoader({ base = 'data/brain/', fetchJson }) {
+  const cache = new Map();
+  const get = (rel) => { let p = cache.get(rel); if (!p) { p = Promise.resolve().then(() => fetchJson(base + rel)).catch(() => null); cache.set(rel, p); } return p; };
+  return {
+    manifest: () => get('manifest.json'), core: () => get('core.json'), tree: () => get('tree.json'), rules: () => get('rules.json'),
+    product: (id) => get('p/' + encodeURIComponent(id) + '.json'),
+    category: (cid) => get('cat/' + String(cid).replace(/\//g, '__') + '.json'),
+    spec: (id) => fetchJson('data/specs/' + encodeURIComponent(id) + '.json'),
+    loaded: () => [...cache.keys()],
+  };
+}
