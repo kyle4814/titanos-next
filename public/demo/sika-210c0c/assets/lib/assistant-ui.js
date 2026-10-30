@@ -50,7 +50,7 @@ function renderAnswer(a) {
   }
   if (a.correctedBy) body.append(h('p', { class: 'cite' }, `Corrected by ${a.correctedBy.who} on ${String(a.correctedBy.when).slice(0, 10)}. This answer comes from a rule that is checked before the documentation index.`));
   body.append(h('button', { class: 'btn btn--text suggest-btn', type: 'button', onclick: () => { add(suggestPanel(a.query)); } }, 'Suggest a correction'));
-  if (a.followups && a.followups.length) body.append(h('div', { class: 'opts', 'aria-label': 'Suggested follow-up questions' }, a.followups.slice(0, 3).map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f) }, f))));
+  if (a.followups && a.followups.length) body.append(h('div', { class: 'opts', role: 'group', 'aria-label': 'Suggested follow-up questions' }, a.followups.slice(0, 3).map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f) }, f))));
   return body;
 }
 
@@ -118,7 +118,7 @@ export async function mountAssistant(config) {
   log = h('div', { class: 'asst-log', role: 'log', 'aria-live': 'polite', 'aria-label': 'Conversation' });
   input = h('input', { id: 'asst-q', type: 'text', autocomplete: 'off', placeholder: 'Ask about a product, a job or a document', 'aria-label': 'Ask the product advisor', enterkeyhint: 'send' });
   const form = h('form', { class: 'asst-form', onsubmit: (e) => { e.preventDefault(); const v = input.value; input.value = ''; send(v); } }, input, h('button', { class: 'btn', type: 'submit', 'aria-label': 'Send' }, icon('send', 'i--sm'), h('span', { class: 'visually-hidden' }, 'Send')));
-  const sugg = h('div', { class: 'asst-sugg', 'aria-label': 'Example questions' }, cfg.home.assistantQuestions.map((q) => h('button', { class: 'chip', type: 'button', onclick: () => send(q) }, q)));
+  const sugg = h('div', { class: 'asst-sugg', role: 'group', 'aria-label': 'Example questions' }, cfg.home.assistantQuestions.map((q) => h('button', { class: 'chip', type: 'button', onclick: () => send(q) }, q)));
   panel = h('aside', { class: 'assistant', id: 'assistant', role: 'dialog', 'aria-modal': 'false', 'aria-labelledby': 'asst-title', 'aria-hidden': 'true', onkeydown: (e) => { if (e.key === 'Escape') setOpen(false); } },
     h('div', { class: 'asst-head' }, h('h2', { id: 'asst-title' }, 'Product advisor', h('small', null, 'Demo, built from ' + cfg.company.publishedDocsPhrase)), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': 'Close the advisor', onclick: () => setOpen(false) }, icon('close'), h('span', { class: 'visually-hidden' }, 'Close'))),
     h('div', { class: 'asst-note' }, 'Plain code running in your browser: no AI model, no network calls, no tracking, zero running cost. Every answer links its source. Where the documentation does not say, it says so.'),
