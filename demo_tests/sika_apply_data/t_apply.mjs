@@ -103,6 +103,8 @@ const nzs = (s) => plain(String(s)).toLowerCase().replace(/[^a-z0-9]+/g, '');
   check('T16 first aid is not invented', fa.blocks.some((b) => b.safety && b.rows.some((r) => r.label === 'First aid' && /Not stated/.test(r.value))), textOf(fa).slice(0, 300));
   const nm = await S.ask('What PPE for tile adhesive?', null);
   check('T16 a question that names no product does not get a product SDS', nm.intent !== 'safety', nm.intent);
+  for (const q of ['Does Sikafloor-264 give protection against chemicals?', 'Is Davco Grey One Pot safe to use on tiles over concrete?', 'Which Sikaflex is for glass?']) { const r = await S.ask(q, null); check('T16 does not hijack: ' + q, r.intent !== 'safety', r.intent); }
+  for (const q of ['What gloves for Davco Trojan Mastic?', 'Do I need a respirator with Sikafloor-264?', 'How should I store Davco Easy Grout?']) { const r = await S.ask(q, null); check('T16 answers: ' + q, r.intent === 'safety' && r.blocks.some((b) => b.safety), r.intent); }
   const none = S.products.find((p) => exists('k/' + p.id) && !pickSds(rd('k/' + p.id)));
   if (none) { const r = safetyAnswer(none.name, rd('k/' + none.id), 'ppe'); check('T16 product without an SDS says so', r[0].status === STATUS.UNKNOWN && /No safety data sheet/.test(r[0].text)); }
   // no medical advice, no emergency number unless quoted

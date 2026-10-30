@@ -93,5 +93,6 @@ check('draft spec: a Supply and install clause per step that names products, wit
 check('draft spec: label first, no compliance claim, no standard reproduced', P.specText.startsWith('Draft specification text\nDraft for editing. Not approved by Sika.') && !/\b(complies|compliant|conforms)\b/i.test(P.specText.split('References')[0]));
 const ptext = P.programme.textContent;
 check('programme: shows data sheet sentences with source or Time not published', /Step 1\./.test(ptext) && (/Time not published/.test(ptext) || /hours|minutes|days/.test(ptext)) && /Published times are a guide/.test(ptext), ptext.slice(0, 300));
+for (const m of ['views2.js', 'extras.js', 'assistant-ui.js']) { let ok = true, err = ''; try { await import('../../public/demo/sika-210c0c/assets/lib/' + m); } catch (e) { ok = false; err = e.message; } check('module loads without error: ' + m, ok, err); }
 check('no network call was made by the UI builders', true);
 summary('t_dom');

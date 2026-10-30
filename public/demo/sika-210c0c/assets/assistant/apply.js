@@ -135,7 +135,7 @@ export function compatAnswer(name, k, tail, tax) {
 }
 
 /* ------------------------------------------------------------------ safety (T16) */
-export const SAFETY_RE = /\b(ppe|protective equipment|protection|gloves?|respirator|mask|goggles|safety glasses|eye protection|first aid|hazard(?:s|ous)?|flammable|toxic|dangerous goods|adg|un number|transport class|signal word|precaution(?:ary)?|storage|store it|stored|how (?:do i|should i|to) store|safe to (?:use|handle)|safety|h3\d\d|p\d\d\d)\b/i;
+export const SAFETY_RE = /\b(ppe|protective equipment|(?:eye|hand|respiratory|face|skin) protection|gloves?|respirator|dust mask|goggles|safety glasses|first aid|hazards?|hazardous|flammable|toxic|dangerous goods|adg|un number|transport class|signal word|precaution(?:ary)?|storage|how (?:do i|should i|to) store|stored|h3\d\d|p\d\d\d)\b/i;
 const SDS_ASK_ONLY = /\b(sds|msds|safety data sheet|safety data)\b/i;
 const sdsSrc = (sds, s) => s || { t: 'SDS', u: sds.url, v: null };
 const ver = (sds) => `Revision ${plain(sds.revision_date)}, Version ${plain(sds.version)}${sds.sds_number ? ', SDS number ' + plain(sds.sds_number) : ''}`;
@@ -206,6 +206,13 @@ export function rateBlock(name, k) {
 }
 
 /* ------------------------------------------------------------------ orchestration */
+/** Citations for a safety or time answer: the product page, plus every document the evidence points at. */
+function citesFor(prod, blocks) {
+  const out = []; const add = (label, url, kind) => { if (url && !out.some((c) => c.url === url)) out.push({ label: plain(label), url, kind }); };
+  add(`${plain(prod.name)} (product page)`, prod.url, 'page');
+  for (const b of blocks) for (const e of b.evidence || []) if (e.url) add(e.kind === 'sds' ? 'Safety data sheet' : 'Product data sheet', e.url, /\.pdf/i.test(e.url) ? 'pdf' : 'page');
+  return out;
+}
 const nameTokens = (n) => nz(n).split(' ').filter((t) => t.length > 1);
 export function mentions(text, productName, brand) {
   const t = nz(text); const nameN = nz(productName);
@@ -227,7 +234,9 @@ export function productIdOf(ans) {
  */
 export async function applyAsk(engine, text, state, deps) {
   const ans = engine.ask(text, state);
-  const pid = productIdOf(ans);
+  let pid = productIdOf(ans);
+  // The engine reads some safety and time questions as another intent and drops the product ("how should I store X" reads as where to buy). Find the named product with a document probe.
+  if (!pid && (SAFETY_RE.test(text) || TIME_RE.test(text)) && deps.products) { const pr = engine.ask('datasheet for ' + text, null); const c = pr.state && pr.state.productId; const cp = c && deps.products.get(c); if (cp && mentions(text, cp.name, cp.brand)) pid = c; }
   const prod = pid && deps.products ? deps.products.get(pid) : null;
   let k = null; try { k = pid ? await deps.load(pid) : null; } catch { k = null; }
   const named = prod && (mentions(text, prod.name, prod.brand) || (state && state.productId === pid));
@@ -237,13 +246,13 @@ export async function applyAsk(engine, text, state, deps) {
     const blocks = safetyAnswer(prod.name, k, text);
     const { head, phrase } = keepTail();
     ans.blocks = [...blocks, ...head.filter((b) => b.type === 'docs'), phrase];
-    ans.intent = 'safety'; ans.followups = [`What storage conditions for ${plain(prod.name)}?`, `Datasheet for ${plain(prod.name)}`];
+    ans.citations = citesFor(prod, blocks); ans.intent = 'safety'; ans.followups = [`What storage conditions for ${plain(prod.name)}?`, `Datasheet for ${plain(prod.name)}`];
   } else if (named && ans.intent !== 'quote' && TIME_RE.test(text)) {
     const b = timeAnswer(prod.name, k, text);
     const { head, phrase } = keepTail();
     const blk = b || { type: 'text', text: `The published data for ${plain(prod.name)} does not give a time for that. Time not published; check the data sheet.`, evidence: [], status: STATUS.UNKNOWN, chip: CHIPS.unknown };
     ans.blocks = [blk, ...head.filter((x) => x.type === 'docs'), phrase];
-    ans.intent = 'times';
+    ans.citations = citesFor(prod, [blk]); ans.intent = 'times';
   } else if (ans.intent === 'compatibility' && prod && k && (ans.state.productIds || []).length === 1) {
     const tail = (/\b(?:over|onto|on top of|on|with|to|under)\s+(.+)$/.exec(nz(text)) || [])[1] || '';
     const blk = compatAnswer(prod.name, k, tail, deps.tax);
