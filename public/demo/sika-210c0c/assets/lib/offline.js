@@ -25,6 +25,18 @@ function quietPeriod() {
   });
 }
 
+/** The speed build's lazy chunks (dist/) are not in the worker's file list, so a product page or the advisor failed when the network dropped after the first screen.
+ *  The page puts them into the worker's own cache; the cache name carries the hash of every asset, so a rebuilt chunk can never be served stale. */
+const warmed = new Set();
+const DIST = ['dist/main.js', 'dist/actions-panels.js', 'dist/actions.js', 'dist/brain.js', 'dist/engine.js'];
+async function warmDist(cacheName) {
+  if (warmed.has(cacheName)) return; warmed.add(cacheName);
+  try {
+    const c = await caches.open(cacheName);
+    await Promise.all(DIST.map(async (u) => { if (await c.match(u)) return; const r = await fetch(u, { cache: 'reload' }); if (r.ok) await c.put(u, r); }));
+  } catch { /* offline mode still works for everything else */ }
+}
+
 export async function initOffline() {
   if (!('serviceWorker' in navigator)) { state.reason = 'This browser does not support service workers.'; notify(); return state; }
   if (!(location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) { state.reason = 'This address is not https, so the browser will not allow offline mode.'; notify(); return state; }
@@ -32,6 +44,7 @@ export async function initOffline() {
   navigator.serviceWorker.addEventListener('message', (e) => {
     const d = e.data; if (!d || d.type !== 'sika-offline') return;
     Object.assign(state, { ready: d.state === 'ready', files: d.files, bytes: d.bytes, cache: d.cache, reason: '' }); badge(); notify();
+    if (d.state === 'ready' && d.cache) warmDist(d.cache);
   });
   try {
     // Speed: the worker precaches several MB, so it must never compete with the first screen. Wait for the page load, then for quiet

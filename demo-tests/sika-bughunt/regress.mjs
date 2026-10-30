@@ -38,7 +38,7 @@ for (const w of [1024, 1080, 1100, 1180, 1200]) { const { ctx, p } = await open(
 // R6 offline mode: after the worker has control and the network drops, a tile product page (first visit to that page) still renders (P1)
 { const { ctx, p } = await open(1440, 900, { serviceWorkers: 'allow' }); await p.goto(base + '#/about'); await ready(p);
   const ctl = await p.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 25000 }).then(() => true).catch(() => false); t('R6 service worker takes control', ctl);
-  if (ctl) { await ctx.setOffline(true); await p.goto(base + '#/product/davco-ceramacrete'); await p.waitForTimeout(1500); const txt = await p.locator('main').innerText(); t('R6 product page renders offline (no "could not load its data")', /Davco/.test(txt) && !/could not load/i.test(txt), txt.slice(0, 120)); await ctx.setOffline(false); }
+  if (ctl) { await p.waitForFunction(async () => { for (const k of await caches.keys()) if (await (await caches.open(k)).match('dist/actions-panels.js')) return true; return false; }, null, { timeout: 15000 }).catch(() => {}); await ctx.setOffline(true); await p.goto(base + '#/product/davco-ceramacrete'); await p.waitForTimeout(1500); const txt = await p.locator('main').innerText(); t('R6 product page renders offline (no "could not load its data")', /Davco/.test(txt) && !/could not load/i.test(txt), txt.slice(0, 120)); await ctx.setOffline(false); }
   await ctx.close(); }
 
 // R7 the same data sheet sentence is not shown twice in the Rates table (P2: 33 products carried exact repeats from the extractor)
