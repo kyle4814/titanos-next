@@ -13,7 +13,7 @@ import { brainOn, brainAnswer, renderCard, prefetchBrain } from './brain-ui.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null, formEl, suggEl;
 // Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
-const actionsOn = () => { try { if (/[?&]actions=off/.test(location.href) || localStorage.getItem('sika-demo-210c0c-actions') === 'off') return false; } catch { /* storage blocked: keep the config value */ } return Boolean(cfg && cfg.actions && cfg.actions.enabled); };
+const actionsOn = () => { if (typeof navigator !== 'undefined' && navigator.onLine === false) return false; /* offline: the actions shards are not cached, so v1 exactly */ try { if (/[?&]actions=off/.test(location.href) || localStorage.getItem('sika-demo-210c0c-actions') === 'off') return false; } catch { /* storage blocked: keep the config value */ } return Boolean(cfg && cfg.actions && cfg.actions.enabled); };
 let A = null, Ap = null;
 const ensureActions = () => (actionsOn() ? (Ap ||= import('../actions/ui.js').then((m) => { A = m.attachActions({ log, input, form: formEl, sugg: suggEl, add, send, config: cfg, close: closeOnMobile }); return A; }).catch(() => { A = null; return null; })) : Promise.resolve(null));
 const history = [];
