@@ -15,6 +15,16 @@ function badge() {
   b.textContent = 'Available offline (tile and stone)';
 }
 
+function quietPeriod() {
+  const c = navigator.connection || {};
+  const slow = c.saveData === true || /^(slow-2g|2g|3g)$/.test(c.effectiveType || '');
+  const wait = slow ? 45000 : 5000;
+  return new Promise((resolve) => {
+    const go = () => setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(() => resolve(), { timeout: 3000 }) : resolve()), wait);
+    if (typeof document === 'undefined' || document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
+  });
+}
+
 export async function initOffline() {
   if (!('serviceWorker' in navigator)) { state.reason = 'This browser does not support service workers.'; notify(); return state; }
   if (!(location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) { state.reason = 'This address is not https, so the browser will not allow offline mode.'; notify(); return state; }
@@ -24,6 +34,9 @@ export async function initOffline() {
     Object.assign(state, { ready: d.state === 'ready', files: d.files, bytes: d.bytes, cache: d.cache, reason: '' }); badge(); notify();
   });
   try {
+    // Speed: the worker precaches several MB, so it must never compete with the first screen. Wait for the page load, then for quiet
+    // (5 s on a fast link, 45 s on a slow or data-saving one); nothing changes for the visitor except that the badge appears later.
+    await quietPeriod();
     const reg = await navigator.serviceWorker.register('sw.js');
     const ready = await navigator.serviceWorker.ready;
     const target = ready.active || reg.active; if (target) target.postMessage({ type: 'sika-offline-status' });

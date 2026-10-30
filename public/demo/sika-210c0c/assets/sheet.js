@@ -1,5 +1,8 @@
 (function () {
 'use strict';
+// speed: the web fonts load after the page has (fonts.css is not render-blocking)
+var me = document.currentScript; function fonts() { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = new URL('fonts/fonts.css', me.src).href; document.head.appendChild(l); }
+if (me) { if (document.readyState === 'complete') fonts(); else addEventListener('load', function () { setTimeout(fonts, 0); }); }
 function rnd(x) { return Math.floor(x * 1e9 + 0.5) / 1e9; }
 function fmt(n) { return String(Math.round(n * 100) / 100); }
 function pairs(s) {

@@ -1,0 +1,234 @@
+{
+ "generated": "2026-10-30T09:03:05.222Z",
+ "tool": "weight.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
+ "profile": {
+  "name": "DevTools Fast 3G",
+  "offline": false,
+  "latency": 562.5,
+  "downloadThroughput": 188744,
+  "uploadThroughput": 86400
+ },
+ "cache": "disabled (cold load)",
+ "viewport": "390x844 mobile",
+ "served_with": "local static server with gzip level 6 for html, js, css, json (a stand-in for the host; the real host's compression may differ, so re-measure after deploy)",
+ "routes": [
+  {
+   "route": "home (#/)",
+   "runs": 3,
+   "median_ms_to_first_answer": 8674,
+   "bytes_over_wire_median_run": 309195,
+   "requests": 52,
+   "all_runs_ms": [
+    8650,
+    8674,
+    8693
+   ],
+   "all_runs_bytes": [
+    309195,
+    309195,
+    309195
+   ],
+   "biggest_files": [
+    {
+     "file": "data/index.json",
+     "bytes": 71091
+    },
+    {
+     "file": "assets/fonts/barlow-700-n.woff2",
+     "bytes": 22965
+    },
+    {
+     "file": "assets/fonts/barlow-600-n.woff2",
+     "bytes": 22949
+    },
+    {
+     "file": "assets/fonts/barlow-400-n.woff2",
+     "bytes": 22373
+    },
+    {
+     "file": "assets/fonts/barlow-300-n.woff2",
+     "bytes": 22253
+    },
+    {
+     "file": "assets/fonts/barlow-500-n.woff2",
+     "bytes": 22185
+    },
+    {
+     "file": "data/categories.json",
+     "bytes": 18467
+    },
+    {
+     "file": "assets/portal.css",
+     "bytes": 10344
+    }
+   ]
+  },
+  {
+   "route": "system result via the selector (cold load of #/selector, three choices, Show my system)",
+   "runs": 3,
+   "median_ms_to_first_answer": 10372,
+   "bytes_over_wire_median_run": 448976,
+   "requests": 63,
+   "all_runs_ms": [
+    10074,
+    10372,
+    10507
+   ],
+   "all_runs_bytes": [
+    448976,
+    448976,
+    448976
+   ],
+   "biggest_files": [
+    {
+     "file": "data/index.json",
+     "bytes": 71091
+    },
+    {
+     "file": "assets/fonts/barlow-700-n.woff2",
+     "bytes": 22965
+    },
+    {
+     "file": "assets/fonts/barlow-700-n.woff2",
+     "bytes": 22965
+    },
+    {
+     "file": "assets/fonts/barlow-600-n.woff2",
+     "bytes": 22949
+    },
+    {
+     "file": "assets/fonts/barlow-600-n.woff2",
+     "bytes": 22949
+    },
+    {
+     "file": "assets/fonts/barlow-400-n.woff2",
+     "bytes": 22373
+    },
+    {
+     "file": "assets/fonts/barlow-400-n.woff2",
+     "bytes": 22373
+    },
+    {
+     "file": "assets/fonts/barlow-300-n.woff2",
+     "bytes": 22253
+    }
+   ]
+  },
+  {
+   "route": "system sheet opened directly (cold load of systems/porcelain-on-concrete-internal-wet-floor/)",
+   "runs": 3,
+   "median_ms_to_first_answer": 743,
+   "bytes_over_wire_median_run": 136364,
+   "requests": 11,
+   "all_runs_ms": [
+    732,
+    743,
+    745
+   ],
+   "all_runs_bytes": [
+    136364,
+    136364,
+    136364
+   ],
+   "biggest_files": [
+    {
+     "file": "assets/fonts/barlow-700-n.woff2",
+     "bytes": 22965
+    },
+    {
+     "file": "assets/fonts/barlow-600-n.woff2",
+     "bytes": 22949
+    },
+    {
+     "file": "assets/fonts/barlow-400-n.woff2",
+     "bytes": 22373
+    },
+    {
+     "file": "assets/fonts/barlow-300-n.woff2",
+     "bytes": 22253
+    },
+    {
+     "file": "assets/fonts/barlow-500-n.woff2",
+     "bytes": 22185
+    },
+    {
+     "file": "assets/portal.css",
+     "bytes": 10344
+    },
+    {
+     "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+     "bytes": 8925
+    },
+    {
+     "file": "assets/sheet.js",
+     "bytes": 2026
+    }
+   ]
+  },
+  {
+   "route": "product page (#/product/davco-grey-one-potadhesive)",
+   "runs": 3,
+   "median_ms_to_first_answer": 13131,
+   "bytes_over_wire_median_run": 458875,
+   "requests": 61,
+   "all_runs_ms": [
+    12984,
+    13131,
+    13229
+   ],
+   "all_runs_bytes": [
+    458875,
+    458875,
+    458875
+   ],
+   "biggest_files": [
+    {
+     "file": "data/documents.json",
+     "bytes": 124219
+    },
+    {
+     "file": "data/index.json",
+     "bytes": 71091
+    },
+    {
+     "file": "assets/fonts/barlow-700-n.woff2",
+     "bytes": 22965
+    },
+    {
+     "file": "assets/fonts/barlow-600-n.woff2",
+     "bytes": 22949
+    },
+    {
+     "file": "assets/fonts/barlow-400-n.woff2",
+     "bytes": 22373
+    },
+    {
+     "file": "assets/fonts/barlow-300-n.woff2",
+     "bytes": 22253
+    },
+    {
+     "file": "assets/fonts/barlow-500-n.woff2",
+     "bytes": 22185
+    },
+    {
+     "file": "data/categories.json",
+     "bytes": 18467
+    }
+   ]
+  }
+ ],
+ "budget_G6": {
+  "target_bytes": 700000,
+  "bytes_to_first_system_answer_via_selector": 448976,
+  "bytes_to_first_system_answer_direct_sheet": 136364,
+  "one_bar_of_signal_line_allowed": true
+ },
+ "kyle_only": {
+  "note": "Competitor HTML document sizes measured earlier today (bytes of HTML only, server rendered): 952,305; 1,937,580; 476,890. The portal is a single page app, so bytes to the first answer is the fair comparison. Not for the portal UI.",
+  "competitor_html_bytes": [
+   952305,
+   1937580,
+   476890
+  ]
+ }
+}

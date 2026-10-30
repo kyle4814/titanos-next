@@ -82,3 +82,6 @@ async function boot() {
   }
 }
 boot();
+// speed: the web fonts (fonts/fonts.css) are attached once the page has loaded, so they never compete with the first screen
+const attachFonts = () => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = new URL('fonts/fonts.css', import.meta.url).href; document.head.append(l); };
+if (document.readyState === 'complete') attachFonts(); else addEventListener('load', () => setTimeout(attachFonts, 0), { once: true });
