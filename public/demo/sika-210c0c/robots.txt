@@ -1,0 +1,3 @@
+# Demo for Sika Australia: not for indexing.
+User-agent: *
+Disallow: /

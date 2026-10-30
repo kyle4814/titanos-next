@@ -1,0 +1,23 @@
+// T23 ACCEPT, browser part: the static pages work with JavaScript off, and lead into the app with it on.
+import { launch, BASE, newTally, ready } from '../browser.mjs';
+const T = newTally('t23_browser');
+const b = await launch();
+const nojs = await b.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
+const external = [];
+await nojs.route('**/*', (r) => { const u = new URL(r.request().url()); if (u.host === new URL(BASE).host || u.protocol === 'data:') return r.continue(); external.push(u.href); return r.abort(); });
+const p = await nojs.newPage();
+await p.goto(BASE); 
+T.ok('without JavaScript the shell shows the noscript fallback with a link to the hub', (await p.locator('noscript a[href="s/"]').count()) === 1 || /browse the tiling systems/i.test(await p.locator('body').innerText()));
+await p.goto(BASE + 's/');
+T.ok('hub renders without JavaScript', /Tiling systems from the published documentation/.test(await p.locator('h1').innerText()));
+await p.click('a[href="porcelain-on-concrete-internal-floor/"]');
+T.ok('system page renders real text without JavaScript', /Porcelain tiles on concrete: internal floor/.test(await p.locator('h1').innerText()) && (await p.locator('main').innerText()).length > 2000);
+T.ok('system page shows the estimate line', (await p.locator('footer').innerText()).includes('Estimate only, not an offer.'));
+const js = await b.newContext({ viewport: { width: 1280, height: 900 } });
+const q = await js.newPage();
+await q.goto(BASE + 's/porcelain-on-concrete-internal-floor/');
+await q.click('a:has-text("Open this system in the finder")'); await q.waitForSelector('.finder-stepcard', { timeout: 15000 });
+T.ok('the link into the app opens the same system in the finder', /Porcelain tiles on concrete/.test(await q.locator('.finder-title').innerText()));
+T.ok('no external requests', external.length === 0, external.join(' '));
+await b.close();
+T.done();
