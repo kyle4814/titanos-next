@@ -1,0 +1,43 @@
+// speed_budget.mjs (apply/speed): fails if a route exceeds its byte budget. Node only, no browser.
+//  A. STATIC: gzip (level 6, as the measuring server serves it) size of what the first screen of each route loads, computed from the files on disk.
+//  B. RECEIPT: receipts/speed_latest.json (written by speed.mjs in Chrome on Fast 3G) must meet every route's byte target, and its recorded file
+//     sizes must still match the files on disk (within 20%), so a stale receipt cannot hide a regression. Refresh with speed.mjs after any change.
+// Budgets (Kyle 2026-10-30): home 80 KB, selector flow to first answer 100 KB, no route over 150 KB. KB = 1000 bytes.
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import { PORTAL, ROOT } from './_env.mjs';
+let pass = 0, fail = 0;
+const check = (name, ok, detail = '') => { if (ok) { pass++; console.log('PASS ' + name + (detail ? ' :: ' + detail : '')); } else { fail++; console.log('FAIL ' + name + (detail ? ' :: ' + detail : '')); } };
+const gz = (rel) => { const f = path.join(PORTAL, rel); return fs.existsSync(f) ? zlib.gzipSync(fs.readFileSync(f), { level: 6 }).length : null; };
+const sum = (rels) => rels.reduce((a, r) => a + (gz(r) ?? 1e9), 0);
+
+// A. static first-screen weight (no web fonts: they are attached after the first render and reported separately as "settled")
+const SHEET = 'systems/porcelain-on-concrete-internal-wet-floor/index.html';
+const FIRST = ['index.html', 'assets/dist/main.js', 'data/config.json', 'data/s/cats.json'];
+const A = [
+  ['home first screen', FIRST, 80000],
+  ['selector page first screen', [...FIRST, 'data/selector.json'], 100000 - (gz(SHEET) ?? 0)],
+  ['direct system sheet', [SHEET, 'assets/sheet.js'], 150000],
+  ['product page first screen (shell + one product file)', [...FIRST, 'data/p/davco-grey-one-potadhesive.json'], 150000],
+];
+for (const [name, rels, budget] of A) { const n = sum(rels); check(`static: ${name} gzip ${n} B <= ${budget} B`, n <= budget, rels.join(' + ')); }
+check('static: the selector flow (selector first screen + the sheet it opens) is under 100 KB', sum([...FIRST, 'data/selector.json', SHEET, 'assets/sheet.js']) <= 100000, String(sum([...FIRST, 'data/selector.json', SHEET, 'assets/sheet.js'])));
+check('static: no route loads documents.json, index.json or pages.json at boot (they are only fetched by the routes that list them)', !/documents\.json|index\.json|pages\.json/.test(fs.readFileSync(path.join(PORTAL, 'index.html'), 'utf8')));
+check('static: web fonts are not render-blocking (no @font-face in the inlined CSS, fonts.css exists)', !/@font-face/.test(fs.readFileSync(path.join(PORTAL, 'index.html'), 'utf8')) && fs.existsSync(path.join(PORTAL, 'assets/fonts/fonts.css')));
+check('static: the first screen has no render-blocking stylesheet link (CSS is inlined)', !/<link rel="stylesheet"/.test(fs.readFileSync(path.join(PORTAL, 'index.html'), 'utf8')));
+
+// B. receipt
+const rf = path.join(ROOT, 'receipts', 'speed_latest.json');
+if (!fs.existsSync(rf)) check('receipt: receipts/speed_latest.json exists (run speed.mjs)', false);
+else {
+  const R = JSON.parse(fs.readFileSync(rf, 'utf8'));
+  for (const r of R.routes) {
+    const f = r.fast3g;
+    check(`receipt: ${r.id} bytes at answer ${f.bytes_at_answer} <= ${r.targetBytes}`, f.bytes_at_answer <= r.targetBytes);
+    check(`receipt: ${r.id} settled bytes (with deferred fonts) ${f.bytes_settled} <= 150000`, f.bytes_settled <= 150000);
+    for (const x of f.files) { const p = x.file.split('?')[0].split('#')[0]; if (!p || /^(http|data:)/.test(p)) continue; const g = gz(p); if (g == null) continue; check(`receipt: ${r.id} ${p} recorded ${x.bytes} B still matches disk ${g} B`, Math.abs(g - x.bytes) <= Math.max(400, 0.2 * g)); }
+  }
+}
+console.log(`SPEED BUDGET ${fail ? 'RED' : 'GREEN'}: ${pass} passed, ${fail} failed`);
+process.exit(fail ? 1 : 0);

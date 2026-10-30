@@ -1,6 +1,6 @@
 // Page views. Each view(ctx) returns {el, title, nav} (nav = main navigation item to mark current).
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm } from './util.js';
-import { derived, data } from './data.js';
+import { derived, derivedLite, data } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton } from './components.js';
 
@@ -9,8 +9,8 @@ let filtersOpen = false; // the filter panel (phones) stays open while filters a
 
 /* ------------------------------------------------------------------ home */
 export async function homeView(ctx) {
-  const { cfg, openAssistant } = ctx; const dv = await derived();
-  const stats = (await data.stats()) || {};
+  const { cfg, openAssistant } = ctx; const dv = await derivedLite();
+  const stats = dv.stats || (await data.stats()) || {};
   const top = dv.catById.get('construction');
   const groups = (top ? top.children : []).map((id) => dv.catById.get(id)).filter(Boolean);
   const feat = dv.catById.get(cfg.home.featureCategory);
@@ -24,7 +24,7 @@ export async function homeView(ctx) {
         h('h1', null, cfg.home.heroTitle),
         form,
         h('div', { class: 'chips' }, cfg.home.heroChips.map((c) => h('a', { class: 'chip', href: hashHref('/products', { q: c }) }, c))),
-        h('p', { class: 'count count--hero' }, `Search ${nf.format(dv.index.length)} products${stats.documents ? ' and ' + nf.format(stats.documents) + ' documents' : ''} from the public website.`)),
+        h('p', { class: 'count count--hero' }, `Search ${nf.format(stats.products || (dv.index ? dv.index.length : 0))} products${stats.documents ? ' and ' + nf.format(stats.documents) + ' documents' : ''} from the public website.`)),
       h('div', { class: 'helpbtns' },
         h('a', { class: 'btn btn--dark', href: '#/products' }, icon('search', 'i--sm'), 'Find a product'),
         h('a', { class: 'btn btn--dark', href: '#/documents' }, icon('file', 'i--sm'), 'SDS and TDS'),

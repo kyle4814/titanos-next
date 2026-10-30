@@ -3,7 +3,7 @@
 # (walkthrough.mjs, a11y.mjs, weight.mjs need a base URL). Exits non-zero if any step fails.
 cd "$(dirname "$0")" || exit 2
 rc=0
-for t in hygiene.mjs golden_qa.mjs props.mjs props_mutation.mjs coverage.mjs contrast.mjs coverage_panel_test.mjs; do
+for t in hygiene.mjs golden_qa.mjs props.mjs props_mutation.mjs coverage.mjs contrast.mjs coverage_panel_test.mjs speed_budget.mjs; do
   [ -f "$t" ] || continue
   echo "=== $t"
   node "$t" || rc=1

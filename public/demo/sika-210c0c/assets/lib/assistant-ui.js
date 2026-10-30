@@ -96,7 +96,7 @@ async function ensure() {
   if (ready) return ready;
   ready = (async () => {
     const [{ createAssistant }, products, documents_, categories, pages] = await Promise.all([import('../assistant/engine.js'), data.products(), documents(), data.categories(), data.pages()]);
-    D = documents_;
+    D = documents_; dv = await derived();
     const knowledge = {}; for (const k of ['rates', 'compatibility', 'safety', 'decision_trees', 'problems']) { const v = await data.knowledge(k); if (v) knowledge[k] = v; }
     const rj = await data.knowledge('rules'); rules = rj && rj.rules ? rj.rules : null;
     engine = createAssistant({ products, documents: D.docs, categories, pages, config: cfg, knowledge: Object.keys(knowledge).length ? knowledge : undefined });
@@ -113,7 +113,7 @@ export function setOpen(on, from) {
 }
 
 export async function mountAssistant(config) {
-  cfg = config; dv = await derived(); D = { byId: new Map(), docs: [] };
+  cfg = config; D = { byId: new Map(), docs: [] }; // the product index (dv) is loaded with the engine, on first use
   fab = h('button', { class: 'fab', type: 'button', id: 'asst-fab', 'aria-controls': 'assistant', 'aria-expanded': 'false', onclick: (e) => setOpen(!panel.classList.contains('open'), e.currentTarget) }, h('span', { class: 'dot', 'aria-hidden': 'true' }), 'Product advisor');
   log = h('div', { class: 'asst-log', role: 'log', 'aria-live': 'polite', 'aria-label': 'Conversation' });
   input = h('input', { id: 'asst-q', type: 'text', autocomplete: 'off', placeholder: 'Ask about a product, a job or a document', 'aria-label': 'Ask the product advisor', enterkeyhint: 'send' });

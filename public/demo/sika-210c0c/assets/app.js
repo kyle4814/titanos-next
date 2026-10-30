@@ -10,6 +10,10 @@ import { errorState, skeletonGrid } from './lib/components.js';
 import { personaBlock } from './lib/persona.js';
 import { extraRoutes } from './lib/extras.js';
 import { initOffline } from './lib/offline.js';
+import { data as dataApi } from './lib/data.js';
+
+// speed: start the files the opening route needs the moment the script runs, in parallel with config.json, instead of one after another
+{ const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) dataApi.product(decodeURIComponent(pm[1])).catch(() => {}); }
 
 const main = $('#main');
 let cfg, assistant, lastPath = null, token = 0, firstRender = true, leaving = false;
@@ -76,6 +80,7 @@ async function boot() {
     initOffline(); // T19, no-op where the host cannot serve a service worker
     window.addEventListener('hashchange', () => render());
     await render();
+    fontsAfterRender();
   } catch (e) {
     console.error('boot error', e);
     main.replaceChildren(errorState(e, () => location.reload())); main.removeAttribute('aria-busy');
@@ -84,4 +89,4 @@ async function boot() {
 boot();
 // speed: the web fonts (fonts/fonts.css) are attached once the page has loaded, so they never compete with the first screen
 const attachFonts = () => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = new URL('fonts/fonts.css', import.meta.url).href; document.head.append(l); };
-if (document.readyState === 'complete') attachFonts(); else addEventListener('load', () => setTimeout(attachFonts, 0), { once: true });
+let fontsDone = false; function fontsAfterRender() { if (fontsDone) return; fontsDone = true; const go = () => setTimeout(attachFonts, 50); if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true }); }

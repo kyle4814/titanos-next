@@ -23,13 +23,27 @@ export const data = {
   pages: () => getJSON('pages.json'),
   status: () => opt('doc_status.json'),
   stats: () => opt('stats.json'),
-  selector: () => opt('selector.json'),
+  selector: () => getJSON('selector.json', true), // always shipped; read directly so it never waits for the manifest
+  catsLite: () => getJSON('s/cats.json', true).then((j) => j || data.categories().then((c) => ({ categories: c, stats: null }))), // speed: slim categories + counts (split build); falls back to the full file
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
   specIndex: () => opt('specs/index.json').catch(() => null), // offline or missing: no Specification tab, no error
   spec: (id) => getJSON(`specs/${encodeURIComponent(id)}.json`),
   knowledge: (name) => opt(`knowledge/${name}.json`),
 };
+
+let _dl;
+/** The categories alone (menu, home, selector): small, no product index. Same shape as derived() minus index/byId/brands. */
+export async function derivedLite() {
+  if (_dl) return _dl;
+  _dl = (async () => {
+    const j = await data.catsLite(); const categories = j.categories;
+    return { categories, catById: new Map(categories.map((c) => [c.id, c])), stats: j.stats || null, lite: true };
+  })();
+  return _dl;
+}
+/** The product index entries of one group (the first two category segments), for related products; falls back to the whole index. */
+export async function groupIndex() { return data.index(); } // fallback only: a product file without p.rel
 
 let _derived;
 /** Lookups used by several views. Built once from the small files. */

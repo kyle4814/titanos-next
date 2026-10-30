@@ -1,6 +1,6 @@
 // Site chrome: ribbon, meta bar, yellow header, floating white main navigation with mega menus, mobile drawer, footer, header search.
 import { h, $, $$, icon, hashHref, debounce, plural, nf, focusSoon } from './util.js';
-import { derived } from './data.js';
+import { derivedLite } from './data.js';
 import { getSearcher } from './searcher.js';
 import { projects } from './projects.js';
 
@@ -31,7 +31,7 @@ function searchBox(id, opts = {}) {
     list.hidden = !input.value.trim(); input.setAttribute('aria-expanded', String(!list.hidden));
     if (active >= 0) input.setAttribute('aria-activedescendant', active === items.length ? `${id}-opt-all` : `${id}-opt-${active}`); else input.removeAttribute('aria-activedescendant');
   };
-  input.addEventListener('input', debounce(() => { if (!searcher) return; items = input.value.trim().length >= 2 ? searcher.suggest(input.value, 6) : []; active = -1; if (input.value.trim().length >= 2) paint(); else close(); }, 90));
+  input.addEventListener('input', debounce(async () => { if (!searcher) { if (input.value.trim().length < 2) return; searcher = await getSearcher(); } items = input.value.trim().length >= 2 ? searcher.suggest(input.value, 6) : []; active = -1; if (input.value.trim().length >= 2) paint(); else close(); }, 90));
   input.addEventListener('keydown', (e) => {
     const n = items.length + (input.value.trim() ? 1 : 0);
     if (e.key === 'ArrowDown' && !list.hidden) { e.preventDefault(); active = (active + 1) % n; paint(); }
@@ -132,7 +132,7 @@ function footer() {
 }
 
 export async function mountChrome(config, { openAssistant }) {
-  cfg = config; dv = await derived(); searcher = await getSearcher();
+  cfg = config; dv = await derivedLite(); // the product search index is built on first use (see searchBox), not at boot
   const cnt = h('span', { class: 'count-pill', id: 'proj-count' }, '0');
   const header = h('header', { class: 'site-header' },
     h('div', { class: 'hdr-notice', role: 'note' }, h('strong', null, 'Demo'), ' ', cfg.demo.ribbon),

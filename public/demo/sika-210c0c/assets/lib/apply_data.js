@@ -15,6 +15,7 @@ css();
 
 /* ---- T03: link health. The status file is merged into the product page's own document copies. */
 export async function mergeDocStatus(list) {
+  if ((list || []).every((d) => d.http)) return; // speed: the split build already carries the verdicts inside the product file, so documents.json is not fetched
   const D = await documents();
   for (const d of list || []) { const m = D.byId.get(d.id); if (m) d.http = m.http; }
 }

@@ -1,7 +1,7 @@
 // Product detail, documents library, guides.
 import { insights } from './insights.js';
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm, fmtBytes, titleCase } from './util.js';
-import { derived, data, documents, docOk, docHref } from './data.js';
+import { derived, derivedLite, groupIndex, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, breadcrumb, pager, emptyState, placeholder, addButton } from './components.js';
 import { notFound } from './views.js';
@@ -50,8 +50,10 @@ function docRow(d, dv, withProduct = false) {
 
 /* ------------------------------------------------------------------ product detail */
 export async function productView(ctx) {
-  const id = ctx.rest; const dv = await derived();
+  const id = ctx.rest; const dvP = derivedLite();
   let p; try { p = await data.product(id); } catch { return notFound(ctx, 'product'); }
+  let dv = await dvP; // speed: related products are embedded in the product file (p.rel); an older file without them falls back to the group index
+  if (!p.rel) { const index = await groupIndex(p.category); dv = { ...dv, index, byId: new Map(index.map((x) => [x.id, x])) }; }
   insights.view(id); // T11
   const specIdx = await data.specIndex(); const hasSpec = !!(specIdx && specIdx.ids.includes(id));
   const docs = (p.docs || []); await mergeDocStatus(docs); const okDocs = docs.filter(docOk);
@@ -113,6 +115,7 @@ export async function productView(ctx) {
 }
 
 function relatedProducts(p, dv) {
+  if (p.rel) return p.rel;
   const same = dv.index.filter((x) => x.c === p.category && x.id !== p.id);
   const pool = same.length >= 4 ? same : [...same, ...dv.index.filter((x) => x.c !== p.category && x.c.split('/').slice(0, 2).join('/') === p.category.split('/').slice(0, 2).join('/'))];
   // prefer the same brand, then those with data sheets
