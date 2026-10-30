@@ -1,0 +1,8416 @@
+[
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what's the best adhesive for large format tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q001",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "best tile adhesive for porcelain on a concrete floor inside",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q002",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what adhesive do i use for natural stone",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q003",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "which adhesive for tiling over existing tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q004",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "tile adhesive for an outdoor balcony",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q005",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what glue for mosaic tiles in a pool",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q006",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "fast setting tile adhesive so i can grout same day",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q007",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "adhesive for tiles on a heated floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q008",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "dustless tile adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q009",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "whats a good adhesive for glass mosaic",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q010",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "tile adhesive for walls in a wet area on plasterboard",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q011",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "which adhesive for tiling onto timber floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q012",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "best adhesive for tiling a commercial floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q013",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "tile adhesive for brick slips",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q014",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what adhesive for 1200x600 porcelain on a wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q015",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "lightweight adhesive for large tiles on walls that wont slump",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q016",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "tile adhesive with a long open time for hot weather",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q017",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "which tile adhesives does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 5
+  },
+  "id": "q018",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "list all davco adhesives",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:davco-sanitized-gluegrout,davco-grey-one-potadhesive,davco-trojan-mastic,davco-supamastic,davco-powder-mastic,davco-ultraflex,davco-ceramacrete,davco-ceramaflex,davco-smp-evo"
+   ],
+   "min": 4
+  },
+  "id": "q019",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "Can I use Davco Grey One Pot over my old tiles?",
+  "type": "compat",
+  "exp": {
+   "product": "davco-grey-one-potadhesive",
+   "verdict": "no"
+  },
+  "id": "q020",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "is davco ultraflex ok for underfloor heating",
+  "type": "compat",
+  "exp": {
+   "product": "davco-ultraflex",
+   "verdict": "any"
+  },
+  "id": "q021",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "sikatile 400 evo pro vs sikatile 410 secure set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "q022",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "difference between davco trojan mastic and davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "q023",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "compare sikatile 305 masterlite and sikatile 510 megalite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "q024",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "tell me about sikatile 366 proflex",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-366-proflex"
+   ]
+  },
+  "id": "q025",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what is davco supamastic",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-supamastic"
+   ]
+  },
+  "id": "q026",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "whats the davco ceramacrete for",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-ceramacrete"
+   ]
+  },
+  "id": "q027",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "sikatile 374 megapro",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-374-megapro"
+   ]
+  },
+  "id": "q028",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "sika tile 440 opti cure what is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-440-opti-cure"
+   ]
+  },
+  "id": "q029",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "davco smp evo what does it do",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-smp-evo"
+   ]
+  },
+  "id": "q030",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "how many bags of sikatile 400 evo pro for 30 m2",
+  "type": "calc",
+  "exp": {
+   "product": "sikatile-400-evopro"
+  },
+  "id": "q031",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "how much adhesive do i need for 15 square metres of 600x600 tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q032",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive",
+  "q": "what trowel size for large format tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q033",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "what grout for a shower floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "id": "q034",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "epoxy grout for a commercial kitchen",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "id": "q035",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "best grout for wide joints",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "id": "q036",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "white grout that wont stain",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "id": "q037",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "grout for a swimming pool",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "id": "q038",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "what grouts does davco make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ],
+   "min": 4
+  },
+  "id": "q039",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "how do i rejuvenate old grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "id": "q040",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "how do i clean tile grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "id": "q041",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "grout sealer for a bathroom",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "id": "q042",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "sikaceram 880 easy epoxy",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q043",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "what is davco easy grout",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-easy-grout"
+   ]
+  },
+  "id": "q044",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "davco sanitized glue grout what is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-sanitized-gluegrout"
+   ]
+  },
+  "id": "q045",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "additive",
+  "q": "additive to make my tile adhesive more flexible",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-davelastic,davco-4-in-1-groutadditive"
+   ]
+  },
+  "id": "q046",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "additive",
+  "q": "primer for tiling over smooth concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikatile-010-secureprime,davco-ultraprime,davco-primex,sikafloor-01-primer,sikafloor-08-primer,lanko-124-ultraprime"
+   ]
+  },
+  "id": "q047",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "additive",
+  "q": "what does davco 4 in 1 grout additive do",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-4-in-1-groutadditive"
+   ]
+  },
+  "id": "q048",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "additive",
+  "q": "cement accelerator for tile adhesive in cold weather",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:lanko-302-cementaccelerator"
+   ]
+  },
+  "id": "q049",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "best waterproofing for a shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q050",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "what membrane goes under tiles in a bathroom floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q051",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "waterproofing for a balcony under tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q052",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "quick drying waterproofing membrane for a wet area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q053",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "waterproofing for a swimming pool before tiling",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q054",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "what waterproofing for a laundry",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q055",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "waterproofing membrane for a large commercial wet area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q056",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "how many coats of davco k10 plus",
+  "type": "rate",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "id": "q057",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "how long does k10 rapid take to dry before tiling",
+  "type": "time",
+  "exp": {
+   "product": "davco-k10-rapid"
+  },
+  "id": "q058",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "what is sikatile 110 secure proof",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof"
+   ]
+  },
+  "id": "q059",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing",
+  "q": "sika sealtape for corners in a shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sika-sealtape-f,sika-sealtape-b,sikaproof-tape-a-plus,sikadur-combiflexsg-10p"
+   ]
+  },
+  "id": "q060",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "what silicone for a shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "id": "q061",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "best sealant for a kitchen and bathroom",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "id": "q062",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "silicone for a swimming pool",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "id": "q063",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "mould resistant silicone for tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "id": "q064",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "what's the best screed for a big job",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q065",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "best screed for a large area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q066",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "which screed can be pumped",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q067",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "fast drying screed so we can lay flooring in a few days",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q068",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "best self levelling compound for a whole floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q069",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "screed for a thick build up over 30mm",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q070",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "leveller for old uneven concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q071",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "cheapest levelling compound",
+  "type": "nodata",
+  "exp": {},
+  "id": "q072",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "external screed that can go outdoors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q073",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "smoothing compound for timber floors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q074",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "floor leveller under vinyl planks",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q075",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "what screeds does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 4
+  },
+  "id": "q076",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "what is a cement levelling system",
+  "type": "business",
+  "exp": {
+   "url": "cement-levellingsystems",
+   "must": "cement-based underlayment"
+  },
+  "id": "q077",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "how do i prime concrete before a leveller",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-01-primer,sikafloor-08-primer,sikafloor-level-proprimer,sikafloor-14-prepnprimeimpact,lanko-124-ultraprime,sikafloor-158-wfastbarrier"
+   ]
+  },
+  "id": "q078",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "ramp and patch mortar for a loading dock",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-050-rampandpatch,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-136-rapid-patchingmortar"
+   ]
+  },
+  "id": "q079",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "tell me about sikafloor level pro",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-level-pro"
+   ]
+  },
+  "id": "q080",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "sikafloor level ultra",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-level-ultra"
+   ]
+  },
+  "id": "q081",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "what is lanko 189 bulk fill screed",
+  "type": "product",
+  "exp": {
+   "products": [
+    "lanko-189-bulk-fillscreed"
+   ]
+  },
+  "id": "q082",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "sikafloor 215 rapid screed what is it for",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-215-rapidscreed"
+   ]
+  },
+  "id": "q083",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "how many bags of sikafloor level pro for 100 m2 at 5mm",
+  "type": "calc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q084",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "pot life of sikafloor level pro",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q085",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "compare level pro and level top",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikafloor-level-pro",
+    "sikafloor-level-top"
+   ]
+  },
+  "id": "q086",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "can sikafloor level ultra go on external concrete",
+  "type": "compat",
+  "exp": {
+   "product": "sikafloor-level-ultra",
+   "verdict": "any"
+  },
+  "id": "q087",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "what adhesive for fixing timber flooring",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/flooring-adhesivessystems",
+    "c:sealants-adhesives/construction-adhesives"
+   ]
+  },
+  "id": "q088",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "what is the best construction adhesive for fixing skirting boards",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives",
+    "c:sealants-adhesives/foam-sealants-adhesives"
+   ]
+  },
+  "id": "q089",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "glue to stick a shower screen frame",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "id": "q090",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "adhesive that replaces nails",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives"
+   ]
+  },
+  "id": "q091",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "sikabond instant nails",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikabond-142-instantnails",
+    "sikabond-instantnailsfast"
+   ]
+  },
+  "id": "q092",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "spray contact adhesive for laminate",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/contact-adhesives"
+   ]
+  },
+  "id": "q093",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "foam to fill gaps around windows",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/foam-sealants-adhesives",
+    "c:sealants-adhesives/passive-fire-protection"
+   ]
+  },
+  "id": "q094",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "can i paint over sikaflex 11 fc",
+  "type": "compat",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "verdict": "any"
+  },
+  "id": "q095",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "best sealant for expansion joints in a facade",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/expansion-perimeterjoints",
+    "c:sealants-adhesives/facade-sealants",
+    "c:sealants-adhesives/curtain-walling"
+   ]
+  },
+  "id": "q096",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "fire rated sealant for service penetrations",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/passive-fire-protection",
+    "c:sealants-adhesives/facade-sealants",
+    "i:sikaflex-400-fire,sikasil-670-fire"
+   ]
+  },
+  "id": "q097",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "gutter sealant",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikaseal-roof-gutter",
+    "c:sealants-adhesives/roofing-sealantsadhesives"
+   ]
+  },
+  "id": "q098",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "what sealant for filling cracks before painting",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/paint-preparation"
+   ]
+  },
+  "id": "q099",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "sikaflex pro 3 purform what is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-pro-3-purform"
+   ]
+  },
+  "id": "q100",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "how long does sikaflex pro plus take to skin over",
+  "type": "time",
+  "exp": {
+   "product": "sikaflex-pro-plus"
+  },
+  "id": "q101",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "backing rod for a 10mm joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/backing-rod-foamtapes"
+   ]
+  },
+  "id": "q102",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "sealant for a fish tank",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikaseal-401-aquarium"
+   ]
+  },
+  "id": "q103",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "what sealants does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 5
+  },
+  "id": "q104",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "repair mortar for spalling concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures"
+   ]
+  },
+  "id": "q105",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "fast setting mortar to plug a leak",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sika-plug,sikaquick-2500-au,lanko-136-rapid-patchingmortar,sika-monotop-723n,sika-monotop-fc,davco-jetcrete",
+    "c:waterproofing/injections"
+   ]
+  },
+  "id": "q106",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "epoxy for crack injection or bonding old concrete to new",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:structural-strengthening/structural-adhesives",
+    "c:waterproofing/injections"
+   ]
+  },
+  "id": "q107",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "bonding agent for new render to old concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:lanko-752-bondit,lanko-751-lankolatexsbr,sika-monotop-910n,sikadur-32-lp,sika-concrete-fix,sikadur-33",
+    "c:concrete-repair-protection/concrete-repair-mortars/epoxy"
+   ]
+  },
+  "id": "q108",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "what is sika monotop 412 nfg",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-monotop-412nfg",
+    "sika-monotop-412nfg"
+   ]
+  },
+  "id": "q109",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair",
+  "q": "what is sikadur 31",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikadur-31-cf-normal"
+   ]
+  },
+  "id": "q110",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "anchoring",
+  "q": "chemical anchor for fixing into concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring/chemical-anchoring",
+    "c:sealants-adhesives/anchoring-adhesives"
+   ]
+  },
+  "id": "q111",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "anchoring",
+  "q": "grout for under a base plate",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "id": "q112",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "anchoring",
+  "q": "non shrink grout for bolts",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "id": "q113",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "anchoring",
+  "q": "underwater grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "id": "q114",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "liquid applied waterproof membrane for a roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing/liquid-applied-membranes"
+   ]
+  },
+  "id": "q115",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "torch on membrane for a flat roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing/torch-on-sheet-membranes"
+   ]
+  },
+  "id": "q116",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "pvc roofing sheet",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing/pvc-sheet-membranes"
+   ]
+  },
+  "id": "q117",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "what is sarnafil g 410 20l",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sarnafil-g-410-20l"
+   ]
+  },
+  "id": "q118",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "what do you have for green roofs",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts/green-roofs"
+   ]
+  },
+  "id": "q119",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing",
+  "q": "paver pedestals for a roof terrace",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts/paving-decking-support"
+   ]
+  },
+  "id": "q120",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "epoxy floor coating for a garage",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "id": "q121",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "resin floor for a food processing area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "id": "q122",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "anti static floor for an electronics room",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "id": "q123",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "polyurethane floor for a car park deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring",
+    "c:waterproofing"
+   ]
+  },
+  "id": "q124",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "floor joint filler for warehouse floors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/floor-joints"
+   ]
+  },
+  "id": "q125",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "what is sikafloor 264",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-264"
+   ]
+  },
+  "id": "q126",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "what flooring resins does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ],
+   "min": 5
+  },
+  "id": "q127",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what admixture for self compacting concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology",
+    "c:concrete/fibres"
+   ]
+  },
+  "id": "q128",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "superplasticiser for high strength concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology/high-range",
+    "c:concrete/admixture-technology/water-reducers",
+    "c:concrete/admixture-technology/mid-range"
+   ]
+  },
+  "id": "q129",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what to add to concrete to slow the set in hot weather",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology/retarders",
+    "c:concrete/admixture-technology/water-reducers",
+    "c:concrete/admixture-technology/mid-range",
+    "c:concrete/admixture-technology/evaporation-retarders"
+   ]
+  },
+  "id": "q130",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "accelerator for shotcrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology/concrete-accelerators",
+    "c:concrete/tunneling"
+   ]
+  },
+  "id": "q131",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "air entraining agent for concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/pre-cast/air-entraining-admixtures"
+   ]
+  },
+  "id": "q132",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "fibres to stop plastic shrinkage cracking",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/fibres"
+   ]
+  },
+  "id": "q133",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "macro fibre for slab on ground",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/fibres"
+   ]
+  },
+  "id": "q134",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "concrete colour pigment",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikacolor-flo"
+   ]
+  },
+  "id": "q135",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "surface retarder for exposed aggregate",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/specialty-products/surface-retarders"
+   ]
+  },
+  "id": "q136",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "shrinkage reducing admixture",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikacontrol-plus",
+    "c:concrete/specialty-products/shrinkage"
+   ]
+  },
+  "id": "q137",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "release agent for precast moulds",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/pre-cast/release-agents"
+   ]
+  },
+  "id": "q138",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what is sika viscocrete 10",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-viscocrete-10",
+    "sika-viscocrete-10"
+   ]
+  },
+  "id": "q139",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what dosage of sikament eco 3 w",
+  "type": "rate",
+  "exp": {
+   "product": "sikament-eco-3-w"
+  },
+  "id": "q140",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "how much sika viscocrete 1250 per cubic metre",
+  "type": "rate",
+  "exp": {
+   "product": "sika-viscocrete-1250"
+  },
+  "id": "q141",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture",
+  "q": "what admixtures does sika make for concrete",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction/concrete/"
+   ],
+   "min": 5
+  },
+  "id": "q142",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "curing",
+  "q": "curing compound for a new slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sika-film,sika-film,sikafloor-curehard-24",
+    "c:concrete/admixture-technology/evaporation-retarders"
+   ]
+  },
+  "id": "q143",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "curing",
+  "q": "how do i stop a slab drying too fast in wind",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology/evaporation-retarders",
+    "i:sika-film"
+   ]
+  },
+  "id": "q144",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "best waterproofing for a basement",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:landscape-buildingproducts/subsoil"
+   ]
+  },
+  "id": "q145",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "liquid membrane for a roof deck that will be walked on",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:roofing"
+   ]
+  },
+  "id": "q146",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "what do i use to stop a water leak in a concrete wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection",
+    "i:sika-plug"
+   ]
+  },
+  "id": "q147",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "injection resin for leaking cracks",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/injections"
+   ]
+  },
+  "id": "q148",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "hydrophilic waterstop for a construction joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/injections",
+    "c:waterproofing/66807",
+    "c:waterproofing/basement"
+   ]
+  },
+  "id": "q149",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "bentonite waterproofing",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikaproof-bentonite,sikaproof-bentonitepowder,sikaproof-bentonitepaste"
+   ]
+  },
+  "id": "q150",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "bridge deck waterproofing",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/bridge-deck",
+    "i:sikalastic-827-ht"
+   ]
+  },
+  "id": "q151",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "spray applied waterproofing membrane",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/spray-applied"
+   ]
+  },
+  "id": "q152",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "waterproofing for a tunnel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing"
+   ]
+  },
+  "id": "q153",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "one coat cementitious waterproof coating for a water tank",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "id": "q154",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "what is sikalastic 1k",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-1k"
+   ]
+  },
+  "id": "q155",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "what is sikalastic 851",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-851"
+   ]
+  },
+  "id": "q156",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "how long before recoating sikalastic 488",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-488-au"
+  },
+  "id": "q157",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "coverage of sikalastic 8902",
+  "type": "rate",
+  "exp": {
+   "product": "sikalastic-8902"
+  },
+  "id": "q158",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "can sikalastic 1k be used in a pool",
+  "type": "compat",
+  "exp": {
+   "product": "sikalastic-1k",
+   "verdict": "any"
+  },
+  "id": "q159",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing",
+  "q": "what waterproofing membranes does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing"
+   ],
+   "min": 5
+  },
+  "id": "q160",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "specification clause for sikafloor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q161",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "do you have a specification for davco k10 plus",
+  "type": "doc",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "id": "q162",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "does sikaflex pro 3 meet any australian standard",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-3-purform",
+   "label": "standard"
+  },
+  "id": "q163",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "epd for sikafloor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q164",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "bim objects for sika products",
+  "type": "business",
+  "exp": {
+   "url": "sika-bim",
+   "must": "BIM"
+  },
+  "id": "q165",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "what is BIM and why does sika offer it",
+  "type": "business",
+  "exp": {
+   "url": "what-is-bim|benefits-of-bim|sika-bim",
+   "must": "BIM"
+  },
+  "id": "q166",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "anchor calculation software",
+  "type": "business",
+  "exp": {
+   "url": "anchorfix-calculation-software",
+   "must": "software"
+  },
+  "id": "q167",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "carbon fibre design software",
+  "type": "business",
+  "exp": {
+   "url": "carbodur-frp-design-software",
+   "must": "software"
+  },
+  "id": "q168",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "which products are green star certified",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "Green Star"
+  },
+  "id": "q169",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "low voc products",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "VOC"
+  },
+  "id": "q170",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "sika solutions for large projects",
+  "type": "business",
+  "exp": {
+   "url": "solutions-for-projects",
+   "must": "project"
+  },
+  "id": "q171",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "does sika offer a global project management team",
+  "type": "business",
+  "exp": {
+   "url": "solutions-for-projects",
+   "must": "Project Management"
+  },
+  "id": "q172",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "sika remedial solutions for old concrete buildings",
+  "type": "business",
+  "exp": {
+   "url": "Remedial-Solutions",
+   "must": "remedial"
+  },
+  "id": "q173",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "does sika have local project references",
+  "type": "business",
+  "exp": {
+   "url": "local-projects",
+   "must": ""
+  },
+  "id": "q174",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "carbon fibre strengthening for a beam",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "id": "q175",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "structural adhesive for bonding plates",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening",
+    "c:concrete-repair-protection/concrete-repair-mortars/epoxy"
+   ]
+  },
+  "id": "q176",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "what is sikadur 30",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikadur-30"
+   ]
+  },
+  "id": "q177",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification",
+  "q": "sika carbodur s",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-carbodur-s",
+    "sika-carbodur-s"
+   ]
+  },
+  "id": "q178",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "where do i find the safety data sheet for sikaflex 11 fc",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ]
+  },
+  "id": "q179",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "pds for davco grey one pot",
+  "type": "doc",
+  "exp": {
+   "product": "davco-grey-one-potadhesive"
+  },
+  "id": "q180",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "sds for sikafloor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q181",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "what size does sika level pro come in",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-level-pro",
+   "label": "packag"
+  },
+  "id": "q182",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "pallet quantity for davco ultraflex",
+  "type": "attr",
+  "exp": {
+   "product": "davco-ultraflex",
+   "label": "packag"
+  },
+  "id": "q183",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "how many bags on a pallet of sikatile 400 evo pro",
+  "type": "attr",
+  "exp": {
+   "product": "sikatile-400-evopro",
+   "label": "packag"
+  },
+  "id": "q184",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data",
+  "q": "shelf life of sikaflex 11 fc",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "label": "shelf life"
+  },
+  "id": "q185",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "where can i buy sika products",
+  "type": "business",
+  "exp": {
+   "url": "where-to-buy",
+   "must": ""
+  },
+  "id": "q186",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "where do i find a sikatile stockist",
+  "type": "business",
+  "exp": {
+   "url": "where-to-buy|SikaTile-distributors|stockist",
+   "must": ""
+  },
+  "id": "q187",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "how do i become a sika distributor",
+  "type": "business",
+  "exp": {
+   "url": "contact",
+   "must": "",
+   "nodata": true
+  },
+  "id": "q188",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "is there a b2b online shop for trade customers",
+  "type": "business",
+  "exp": {
+   "url": "b2b-e-shop",
+   "must": ""
+  },
+  "id": "q189",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "what is the price of sikaflex 11 fc",
+  "type": "nodata",
+  "exp": {},
+  "id": "q190",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "do you have stock of sikafloor level pro",
+  "type": "nodata",
+  "exp": {},
+  "id": "q191",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "trade discount on davco",
+  "type": "nodata",
+  "exp": {},
+  "id": "q192",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "minimum order quantity",
+  "type": "nodata",
+  "exp": {},
+  "id": "q193",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "delivery time for sika products",
+  "type": "nodata",
+  "exp": {},
+  "id": "q194",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "whats the head office address",
+  "type": "business",
+  "exp": {
+   "url": "imprint",
+   "must": "Wetherill Park"
+  },
+  "id": "q195",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "phone number for sika australia",
+  "type": "business",
+  "exp": {
+   "url": "imprint|contact",
+   "must": "9725"
+  },
+  "id": "q196",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "fax number",
+  "type": "business",
+  "exp": {
+   "url": "imprint",
+   "must": "9725"
+  },
+  "id": "q197",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how do i contact sika technical services",
+  "type": "business",
+  "exp": {
+   "url": "contact|Contact",
+   "must": ""
+  },
+  "id": "q198",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "who do i call for a technical question",
+  "type": "business",
+  "exp": {
+   "url": "contact|Contact|imprint",
+   "must": ""
+  },
+  "id": "q199",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "is there a technical help line",
+  "type": "business",
+  "exp": {
+   "url": "contact|Contact|imprint",
+   "must": ""
+  },
+  "id": "q200",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how do i get a warranty for a tiling job",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "warrant"
+  },
+  "id": "q201",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "warranty for a project bigger than 100 square metres",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "100"
+  },
+  "id": "q202",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "which products are covered by the instant warranty portal",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "Davco K10 Plus"
+  },
+  "id": "q203",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how long is the warranty on sikatile products",
+  "type": "nodata",
+  "exp": {},
+  "id": "q204",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "is davco part of sika",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "Sika"
+  },
+  "id": "q205",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "is davco the same company as sika",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "Sika"
+  },
+  "id": "q206",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how long has davco been around",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "1972"
+  },
+  "id": "q207",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "why did the davco bags change colour",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "yellow"
+  },
+  "id": "q208",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "has the davco formula changed with the new packaging",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "hasn"
+  },
+  "id": "q209",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "what is dust less technology",
+  "type": "business",
+  "exp": {
+   "url": "davco|silica",
+   "must": "dust"
+  },
+  "id": "q210",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "does sika offer training for tilers",
+  "type": "business",
+  "exp": {
+   "url": "training|Undertile",
+   "must": "",
+   "nodata": true
+  },
+  "id": "q211",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "is there undertile waterproofing training",
+  "type": "business",
+  "exp": {
+   "url": "Undertile-Waterproofing-training",
+   "must": "",
+   "nodata": true
+  },
+  "id": "q212",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "does sika have careers",
+  "type": "business",
+  "exp": {
+   "url": "careers",
+   "must": ""
+  },
+  "id": "q213",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "who owns sika",
+  "type": "nodata",
+  "exp": {},
+  "id": "q214",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "does sika have sustainability products",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "Sustainab"
+  },
+  "id": "q215",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "what is sikas sustainable portfolio management",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "Sustainable Portfolio"
+  },
+  "id": "q216",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "environmental product declarations",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "Environmental"
+  },
+  "id": "q217",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "where do i find all the product data sheets",
+  "type": "business",
+  "exp": {
+   "url": "pds|documents",
+   "must": ""
+  },
+  "id": "q218",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "where are the safety data sheets kept",
+  "type": "business",
+  "exp": {
+   "url": "material-safety|documents",
+   "must": ""
+  },
+  "id": "q219",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "sealing and adhesive pre treatment chart",
+  "type": "business",
+  "exp": {
+   "url": "pre-treatment",
+   "must": ""
+  },
+  "id": "q220",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "terms and conditions of sale",
+  "type": "business",
+  "exp": {
+   "url": "terms-and-conditions",
+   "must": ""
+  },
+  "id": "q221",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "legal notice",
+  "type": "business",
+  "exp": {
+   "url": "legal-notice",
+   "must": ""
+  },
+  "id": "q222",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "what does sika do for home owners",
+  "type": "business",
+  "exp": {
+   "url": "home-owners",
+   "must": ""
+  },
+  "id": "q223",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "sika solutions for a bathroom diy",
+  "type": "business",
+  "exp": {
+   "url": "diy-solutions-for-your-bathroom|home-owners",
+   "must": ""
+  },
+  "id": "q224",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "sika solutions for a kitchen",
+  "type": "business",
+  "exp": {
+   "url": "diy-solutions-for-your-kitchen|home-owners",
+   "must": ""
+  },
+  "id": "q225",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "sika three must haves for builders",
+  "type": "business",
+  "exp": {
+   "url": "3-must-haves",
+   "must": ""
+  },
+  "id": "q226",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "does sika sell to the automotive industry",
+  "type": "business",
+  "exp": {
+   "url": "industry/automotive",
+   "must": ""
+  },
+  "id": "q227",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "does sika make marine products",
+  "type": "business",
+  "exp": {
+   "url": "industry/marine",
+   "must": ""
+  },
+  "id": "q228",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "what does sika do for wind farms",
+  "type": "business",
+  "exp": {
+   "url": "wind-energy|windfarm",
+   "must": ""
+  },
+  "id": "q229",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "how do i fix a leaking shower",
+  "type": "business",
+  "exp": {
+   "url": "leaking-shower",
+   "must": "shower"
+  },
+  "id": "q230",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "how do i tile over old tiles in my laundry",
+  "type": "business",
+  "exp": {
+   "url": "tile-over-tile",
+   "must": "tile"
+  },
+  "id": "q231",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "can i update my bathroom without a full renovation",
+  "type": "business",
+  "exp": {
+   "url": "update-your-bathroom",
+   "must": ""
+  },
+  "id": "q232",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what do i use to glue a balustrade",
+  "type": "business",
+  "exp": {
+   "url": "balustrade|3-must-haves|construction-adhesives",
+   "must": ""
+  },
+  "id": "q233",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "how to replace a clothesline",
+  "type": "business",
+  "exp": {
+   "url": "clothesline",
+   "must": ""
+  },
+  "id": "q234",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what sealant for around my bath",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "id": "q235",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what glue for my concrete bird bath",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "id": "q236",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "something to stick tiles to a wall in my kitchen splashback",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q237",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "i have a leaking shower what product fixes it",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:sealants-adhesives",
+    "c:waterproofing"
+   ]
+  },
+  "id": "q238",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what can i use to seal cracks in my concrete driveway",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:sealants-adhesives",
+    "c:flooring",
+    "c:waterproofing/injections"
+   ]
+  },
+  "id": "q239",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "my floor is uneven before i lay vinyl what should i use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q240",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "how do i fill a gap between the bench and the wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "id": "q241",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "grout stained and mouldy how do i fix it",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout,davco-tile-groutcleaner,davco-sanitized-tilegroutsealer",
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "id": "q242",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what is sikaflex 11 fc used for",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-11-fc-purform",
+    "1671"
+   ]
+  },
+  "id": "q243",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "is sikaflex 11 fc waterproof",
+  "type": "compat",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "verdict": "any"
+  },
+  "id": "q244",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "sika showerbond what is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-showerbond",
+    "sika-showerbond"
+   ]
+  },
+  "id": "q245",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "can i buy sika from bunnings",
+  "type": "nodata",
+  "exp": {},
+  "id": "q246",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "how much does a bag of tile adhesive cost",
+  "type": "nodata",
+  "exp": {},
+  "id": "q247",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what temperature is too cold to use tile adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q248",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "what is the weather today",
+  "type": "oos",
+  "exp": {},
+  "id": "q249",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "write me a poem",
+  "type": "oos",
+  "exp": {},
+  "id": "q250",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "is mapei better than davco",
+  "type": "oos",
+  "exp": {},
+  "id": "q251",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "which is cheaper sika or bostik",
+  "type": "oos",
+  "exp": {},
+  "id": "q252",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "can you recommend a good tiler in brisbane",
+  "type": "oos",
+  "exp": {},
+  "id": "q253",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "how do i lay a brick wall",
+  "type": "nodata",
+  "exp": {},
+  "id": "q254",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope",
+  "q": "asdf qwerty",
+  "type": "oos",
+  "exp": {},
+  "id": "q255",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "out of scope",
+  "q": "what is the meaning of life",
+  "type": "oos",
+  "exp": {},
+  "id": "q256",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "out of scope",
+  "q": "who won the footy",
+  "type": "oos",
+  "exp": {},
+  "id": "q257",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "out of scope",
+  "q": "tell me a joke",
+  "type": "oos",
+  "exp": {},
+  "id": "q258",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos",
+  "q": "wats the best screed for a big joob",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q259",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos",
+  "q": "bset adhesive for large format tyles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q260",
+  "split": "blind",
+  "messy": "hand"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos",
+  "q": "waterprofing for shower floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q261",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos",
+  "q": "davco grey one pott adhesive cure time",
+  "type": "time",
+  "exp": {
+   "product": "davco-grey-one-potadhesive"
+  },
+  "id": "q262",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos",
+  "q": "siakflex 11 fc colours",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-11-fc-purform",
+    "1671"
+   ]
+  },
+  "id": "q263",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos",
+  "q": "sika levelling compund for floors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "id": "q264",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "builder",
+  "category": "typos",
+  "q": "sikafloor lvel pro sds",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "id": "q265",
+  "split": "blind",
+  "messy": "hand"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos",
+  "q": "how do i waterproof my shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "id": "q266",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos",
+  "q": "tile glue for floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "id": "q267",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos",
+  "q": "what do i put down before tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:tile-stone-installationsystems/primers-additives",
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "id": "q268",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "builder",
+  "category": "typos",
+  "q": "concerte repair mortar",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "id": "q269",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "builder",
+  "category": "typos",
+  "q": "sealent for windows",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "id": "q270",
+  "split": "tuned",
+  "messy": "hand"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: shelf life",
+  "q": "shelf life of s-drain pvc",
+  "type": "attr",
+  "exp": {
+   "product": "s-drain-pvc",
+   "label": "shelf life",
+   "contains": "5 years from date of production",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q271",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: shelf life",
+  "q": "how long can i store sikagard-706 thixo unopened",
+  "type": "attr",
+  "exp": {
+   "product": "sikagard-706-thixo",
+   "label": "shelf life",
+   "contains": "12 months from date of production if stored in unopened, undamaged and original ",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q272",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life",
+  "q": "how long does sikaroof versijack spacer tab last in the shed",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versijackspacertab",
+   "label": "shelf life",
+   "contains": "No expiration date if the product is stored in accordance to the storage conditi",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q273",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: shelf life",
+  "q": "shelf life of sikament eco wr",
+  "type": "attr",
+  "exp": {
+   "product": "sikament-eco-wr",
+   "label": "shelf life",
+   "contains": "Stored at temperature between 5°C and 35°C in unopened original containers, prot",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q274",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: shelf life",
+  "q": "shelf life of sikalastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "shelf life",
+   "contains": "9 months",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q275",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: shelf life",
+  "q": "how long can i store sikaflex pro unopened",
+  "type": "attr",
+  "exp": {
+   "product": "4649",
+   "label": "shelf life",
+   "contains": "Sikaflex PRO has a shelf life of 12 months from the date of production, if it is",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q276",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: shelf life",
+  "q": "shelf life of sarnafil g 476-15 (cn_gb)",
+  "type": "attr",
+  "exp": {
+   "product": "sarnafil-g-476-15",
+   "label": "shelf life",
+   "contains": "5 years from date of production.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q277",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life",
+  "q": "shelf life of sikaroof versiscape infill block",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versiscapeinfillblock",
+   "label": "shelf life",
+   "contains": "No expiration date if the product is stored in accordance to the storage conditi",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q278",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life",
+  "q": "shelf life of sikaroof versijack k spacer tab",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versijackkspacertab",
+   "label": "shelf life",
+   "contains": "No expiration date if the product is stored in accordance to the storage conditi",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q279",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: shelf life",
+  "q": "how long can i store sika viscocrete-190 sc unoened",
+  "type": "attr",
+  "exp": {
+   "product": "sika-viscocrete-190sc",
+   "label": "shelf life",
+   "contains": "12 months if stored as directed",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q280",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: storage",
+  "q": "how should i store sikaflex fillet",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-fillet",
+   "label": "storage",
+   "contains": "Must be stored in original, undamaged, sealed container in dry conditions protec",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q281",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: storage",
+  "q": "storage conditions for sika filler-101",
+  "type": "attr",
+  "exp": {
+   "product": "sika-filler-101",
+   "label": "storage",
+   "contains": "Store in cool and dry conditions. Protect from frost.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q282",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: storage",
+  "q": "how should i store sika icosit kc 340/65",
+  "type": "attr",
+  "exp": {
+   "product": "sika-icosit-kc-34065",
+   "label": "storage",
+   "contains": "The product must be stored in original, unopened and undamaged sealed packaging ",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q283",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: storage",
+  "q": "storage conditions for lanko 145 floor leveller",
+  "type": "attr",
+  "exp": {
+   "product": "lanko-145-floor-leveller",
+   "label": "storage",
+   "contains": "Bags must be stored off the floor in dry cool conditions out of direct sunlight.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q284",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: density",
+  "q": "what does sikaflex pro-3 purform weigh per litre",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-3-purform",
+   "label": "density",
+   "contains": "1.30 kg/l | (ISO 1183-1)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q285",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: density",
+  "q": "what does sikadur-42 hf weigh per litre",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-42-hf",
+   "label": "density",
+   "contains": "2.0 kg / litre approx.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q286",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: density",
+  "q": "what does sikadur-31 cf normal weigh per litre",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-31-cf-normal",
+   "label": "density",
+   "contains": "1.90 + 0.1 kg/l (components A+B mixed) (at +23°C) (evacuated)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q287",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: density",
+  "q": "what does sikagard-705 l weigh per litre",
+  "type": "attr",
+  "exp": {
+   "product": "sikagard-705-l",
+   "label": "density",
+   "contains": "~ 0.900 kg/l (at +25 °C)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q288",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "what air temperature can i apply sikagrout gp au in",
+  "type": "attr",
+  "exp": {
+   "product": "sikagrout-gp-au",
+   "label": "temperature",
+   "contains": "+10 °C min. / +35 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q289",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "minimum temperature to use sika boom cleaner",
+  "type": "attr",
+  "exp": {
+   "product": "sika-boom-cleaner",
+   "label": "temperature",
+   "contains": "+5 °C min. / +35 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q290",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "is it too cold to apply sikaflex-116 high grab",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-116-highgrab",
+   "label": "temperature",
+   "contains": "+5 °C min. / +40 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q291",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "minimum temperature to use sikafloor-324",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-324",
+   "label": "temperature",
+   "contains": "+10 °C min. / +30 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q292",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: temperature",
+  "q": "substrate temperature limits for sika ferrogard-520 patch",
+  "type": "attr",
+  "exp": {
+   "product": "sika-ferrogard-520patch",
+   "label": "temperature",
+   "contains": "+5 °C min",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q293",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: temperature",
+  "q": "substrate temperature limits for sikadur-combiflex sg system",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-combiflexsgsystem",
+   "label": "temperature",
+   "contains": "+5 °C min. / +30 °C max. Refer to the Product Data Sheet of the appropriate Sika",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q294",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: temperature",
+  "q": "substrate temperature limits for sikadur-32 lp",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-32-lp",
+   "label": "temperature",
+   "contains": "+20 °C min. / +40 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q295",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: temperature",
+  "q": "substrate temperature limits for sika ferrogard-415 patch cc",
+  "type": "attr",
+  "exp": {
+   "product": "sika-ferrogard-415patchcc",
+   "label": "temperature",
+   "contains": "+5 °C min",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q296",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: mixing ratio",
+  "q": "how much water do i add to lanko 173 floor leveller",
+  "type": "attr",
+  "exp": {
+   "product": "lanko-173-floor-leveller",
+   "label": "mixing ratio",
+   "contains": "4 - 4.5 Litres water per 20kg bag",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q297",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: mixing ratio",
+  "q": "mix ratio for sikadur hex-300",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-hex-300",
+   "label": "mixing ratio",
+   "contains": "Mix entire unit, do not batch down",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q298",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: mixing ratio",
+  "q": "how much water do i add to sikafloor-215 rapid screed",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-215-rapidscreed",
+   "label": "mixing ratio",
+   "contains": "1.9 - 2.1 Litres of clean, cool water",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q299",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: mixing ratio",
+  "q": "how much water do i add to sikafloor-24 purcem",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-24-purcem",
+   "label": "mixing ratio",
+   "contains": "Mix full units only.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q300",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: thickness",
+  "q": "minimum and maximum thickness of sika monotop fc",
+  "type": "attr",
+  "exp": {
+   "product": "sika-monotop-fc",
+   "label": "thickness",
+   "contains": "0mm to 3mm.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q301",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: thickness",
+  "q": "how thick can i apply sikadur-42 hp",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-42-hp",
+   "label": "thickness",
+   "contains": "Minimum grout depth: 10 mm Maximum grout depth: 150 mm Temperature | Layer thick",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q302",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "product data: thickness",
+  "q": "how thick can i apply sikaceram-880 easy epoxy",
+  "type": "attr",
+  "exp": {
+   "product": "sikaceram-880-easyepoxy",
+   "label": "thickness",
+   "contains": "Minimum adhesive bed thickness | 1 mm",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q303",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: thickness",
+  "q": "how thick can i apply sikalastic-888",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-888",
+   "label": "thickness",
+   "contains": "> 2 mm (Crucial System) ≥ 1.5 mm (Standard System)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q304",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "service temperature of sikaflex-111 stick & seal",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-111-stickseal",
+   "label": "temperature",
+   "contains": "−50 °C min. / +80 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q305",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "what temperature can sikaseal super take once cured",
+  "type": "attr",
+  "exp": {
+   "product": "sikaseal-super",
+   "label": "temperature",
+   "contains": "Between -30ºC and +80ºC (maximum +40°C in water and temporarily +50°C)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q306",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "what temperature can sikabond instant nails fast take once cured",
+  "type": "attr",
+  "exp": {
+   "product": "sikabond-instantnailsfast",
+   "label": "temperature",
+   "contains": "-5°C to +90°C",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q307",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature",
+  "q": "service temperature of sikaflex-400 fire",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-400-fire",
+   "label": "temperature",
+   "contains": "−40 °C to + 70 °C",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q308",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: compressive",
+  "q": "how strong is sika monotop-436 n in compression",
+  "type": "attr",
+  "exp": {
+   "product": "sika-monotop-436n",
+   "label": "compressive",
+   "contains": "1 day | ~ 15 MPa 7 days | ~ 50 MPa 28 days | ~ 70 MPa Material and curing condit",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q309",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: compressive",
+  "q": "how strong is davco jetcrete in compression",
+  "type": "attr",
+  "exp": {
+   "product": "davco-jetcrete",
+   "label": "compressive",
+   "contains": "Time | Compressive strength 1 hour | ~ 5 MPa 24 hours | ~ 7 MPa 28 days | ~ 15 M",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q310",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: compressive",
+  "q": "compressive strength of sikafloor-215 rapid screed",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-215-rapidscreed",
+   "label": "compressive",
+   "contains": "~22 MPa at 1 day ~40 MPa at 28 days",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q311",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: compressive",
+  "q": "how strong is sikadur-42 hp in compression",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-42-hp",
+   "label": "compressive",
+   "contains": "6 hrs | ~ 20 MPa 1 day | ~ 90 MPa 7 days | ~ 100 MPa Test specimen cured and tes",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q312",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: tensile",
+  "q": "tensile strength of sikagrout-212 hp au",
+  "type": "attr",
+  "exp": {
+   "product": "sikagrout-212-hpau",
+   "label": "tensile",
+   "contains": "28 days | 12 MPa",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q313",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: tensile",
+  "q": "tensile strength of sika waterbar fb-125",
+  "type": "attr",
+  "exp": {
+   "product": "sika-waterbar-fb-125",
+   "label": "tensile",
+   "contains": "≥ 6 N/mm2 | (EN 12311-2)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q314",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: tensile",
+  "q": "tensile strength of sikalastic-851",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-851",
+   "label": "tensile",
+   "contains": "~11 N/mm² | (DIN 53504)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q315",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: tensile",
+  "q": "tensile strength of sikadur-53",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-53",
+   "label": "tensile",
+   "contains": "Cured 14 days at +20 °C | 20 N/mm2 Product cured and tested at temperatures indi",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q316",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: voc",
+  "q": "voc content of sikalastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "voc",
+   "contains": "250g/L",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q317",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "product data: voc",
+  "q": "voc content of sikatile-400 evo pro",
+  "type": "attr",
+  "exp": {
+   "product": "sikatile-400-evopro",
+   "label": "voc",
+   "contains": "Low VOC - 2g/L (SCAQMD method 304-91)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q318",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: voc",
+  "q": "is sikadur-30 low voc",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-30",
+   "label": "voc",
+   "contains": "7 grams/litre | (ASTM D3960-05)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q319",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: voc",
+  "q": "is sarna cleaner low voc",
+  "type": "attr",
+  "exp": {
+   "product": "sarna-cleaner",
+   "label": "voc",
+   "contains": "VOC-CH: 100 % VOC-EU: 100 %",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q320",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: fire",
+  "q": "reaction to fire classification for sarnafil g 476-15 (cn_gb)",
+  "type": "attr",
+  "exp": {
+   "product": "sarnafil-g-476-15",
+   "label": "fire",
+   "contains": "Class E | (EN ISO 11925-2, classification to EN 13501-1) Class E | (GB 8624 / EN",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q321",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: fire",
+  "q": "reaction to fire classification for sikafloor multiflex pb-32 uv",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-multiflexpb-32uv",
+   "label": "fire",
+   "contains": "Bfl-s1 | (EN 13501-1)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q322",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: fire",
+  "q": "fire rating of sikasil-670 fire",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-670-fire",
+   "label": "fire",
+   "contains": "Class B -s2, d0 | (EN 13501-1)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q323",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: fire",
+  "q": "reaction to fire classification for sarnafil g 476-20 (cn_gb)",
+  "type": "attr",
+  "exp": {
+   "product": "sarnafil-g-476-20",
+   "label": "fire",
+   "contains": "Class E | (EN ISO 11925-2, classification to EN 13501-1) Class E | (GB 8624 / EN",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q324",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: composition",
+  "q": "what is sikafloor-01 primer made of",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-01-primer",
+   "label": "composition",
+   "contains": "Synthetic resin",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q325",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: composition",
+  "q": "what is sikagard-705 l made of",
+  "type": "attr",
+  "exp": {
+   "product": "sikagard-705-l",
+   "label": "composition",
+   "contains": "Alkoxy silanes (99 % active ingredient)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q326",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: composition",
+  "q": "what is sikafloor-21 purcem made of",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-21-purcem",
+   "label": "composition",
+   "contains": "Water-based polyurethane cement hybrid",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q327",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: composition",
+  "q": "what is the chemical base of sika floorjoint pb-30 pdrs",
+  "type": "attr",
+  "exp": {
+   "product": "sika-floorjoint-pb-30pdrs",
+   "label": "composition",
+   "contains": "Joint Panel | Carbon fibre reinforced polymer Seal | Rubber",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q328",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: chemical",
+  "q": "chemical resistance of sikafloor purcem hs-24",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-purcemhs-24",
+   "label": "chemical",
+   "contains": "Please refer to Sikafloor PurCem chemical resistance guide. Contact Sika technic",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q329",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: chemical",
+  "q": "chemical resistance of sikaforce-420 l105",
+  "type": "attr",
+  "exp": {
+   "product": "sikaforce-420-l105",
+   "label": "chemical",
+   "contains": "In case of chemical or thermal exposure, conduct project related testing.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q330",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: chemical",
+  "q": "chemical resistance of sika floorjoint ps-30 s",
+  "type": "attr",
+  "exp": {
+   "product": "sika-floorjoint-ps-30s",
+   "label": "chemical",
+   "contains": "Resistant to many chemicals. Contact Sika Technical Services for specific inform",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q331",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: chemical",
+  "q": "chemical resistance of sikalastic-701",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-701",
+   "label": "chemical",
+   "contains": "Resistant to many chemicals. Contact Sika Technical Service for additional infor",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q332",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: movement",
+  "q": "joint movement capability of sikaflex pro-3 purform",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-3-purform",
+   "label": "movement",
+   "contains": "± 25% | (EN ISO 9047) ± 35% | (EN 14188-2) ± 50% | (ASTM C719)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q333",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: movement",
+  "q": "joint movement capability of sikaflex-11 fc+",
+  "type": "attr",
+  "exp": {
+   "product": "1671",
+   "label": "movement",
+   "contains": "±35 % | (ASTM C 719)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q334",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: movement",
+  "q": "joint movement capability of sikahyflex-250 facade",
+  "type": "attr",
+  "exp": {
+   "product": "sikahyflex-250-facade",
+   "label": "movement",
+   "contains": "± 25% | (ISO 9047) +100 / −50% | (ASTM C 719)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q335",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: movement",
+  "q": "joint movement capability of sikaseal-300 glass and weather seal",
+  "type": "attr",
+  "exp": {
+   "product": "sikaseal-300-glassandweatherseal",
+   "label": "movement",
+   "contains": "± 50%",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q336",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: humidity",
+  "q": "max humidity to apply sikafloor-24 purcem",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-24-purcem",
+   "label": "humidity",
+   "contains": "85 % max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q337",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: humidity",
+  "q": "max humidity to apply sikalastic-100 ep primer",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-100-epprimer",
+   "label": "humidity",
+   "contains": "80 % r.h. max.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q338",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: humidity",
+  "q": "max humidity to apply sikashield p44 t fidia 4 mm",
+  "type": "attr",
+  "exp": {
+   "product": "sikashield-p44-tfidia4mm",
+   "label": "humidity",
+   "contains": "Maximum | 80 %",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q339",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: humidity",
+  "q": "max humidity to apply sikashield p58 t testudo 5 mm",
+  "type": "attr",
+  "exp": {
+   "product": "sikashield-p58-ttestudo5mm",
+   "label": "humidity",
+   "contains": "Maximum | 80 %",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q340",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: hardness",
+  "q": "shore hardness of sikaflex pro",
+  "type": "attr",
+  "exp": {
+   "product": "4649",
+   "label": "hardness",
+   "contains": "25 approx. (after 28 days) | (ISO 868)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q341",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: hardness",
+  "q": "shore hardness of sikafuko vt-1",
+  "type": "attr",
+  "exp": {
+   "product": "sikafuko-vt-1",
+   "label": "hardness",
+   "contains": "Yellow inner core | 85 ±3 Yellow profile strips | 20 ±5",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q342",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: hardness",
+  "q": "shore hardness of sikaseal acrylic",
+  "type": "attr",
+  "exp": {
+   "product": "sikaseal-acrylic",
+   "label": "hardness",
+   "contains": "~40 | (Standard)",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q343",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: hardness",
+  "q": "shore hardness of sikalastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "hardness",
+   "contains": "70 Shore A",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q344",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: curing",
+  "q": "curing time for sika boom ap",
+  "type": "attr",
+  "exp": {
+   "product": "sika-boom-ap",
+   "label": "curing",
+   "contains": "Sika Boom AP is fully cured after 24h (Depending on the foam thickness, ambient ",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q345",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: curing",
+  "q": "curing time for sikalastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "curing",
+   "contains": "24 hours for full cure.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q346",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: curing",
+  "q": "curing time for sikabond-142 instant nails",
+  "type": "attr",
+  "exp": {
+   "product": "sikabond-142-instantnails",
+   "label": "curing",
+   "contains": "Full cure in approximately 7 days, depending on weather conditions.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q347",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "product data: curing",
+  "q": "curing time for sikatile-010 secure prime",
+  "type": "attr",
+  "exp": {
+   "product": "sikatile-010-secureprime",
+   "label": "curing",
+   "contains": "25-40 minutes dependant on climate, substrate porosity, and application techniqu",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q348",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: overcoat",
+  "q": "how long to wait before overcoating sikafloor-94",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-94",
+   "label": "overcoat",
+   "contains": "10 degrees C 15 hours 20 degrees C 8 hours Note: Waiting times are approximately",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q349",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: overcoat",
+  "q": "how long to wait before overcoating sika filler-105",
+  "type": "attr",
+  "exp": {
+   "product": "sika-filler-105",
+   "label": "overcoat",
+   "contains": "~ 12 hours (ideally surfaces should be finished with a fine layer filler such as",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q350",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: overcoat",
+  "q": "how long to wait before overcoating sikafloor multidur es-24",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-multidures-24",
+   "label": "overcoat",
+   "contains": "Before applying Sikafloor-263 SL on Sikafloor-156/-161/-160 allow: Substrate Tem",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q351",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: overcoat",
+  "q": "how long to wait before overcoating sikafloor-359 au",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-359-au",
+   "label": "overcoat",
+   "contains": "Approx. 4 hours at ±23oC",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q352",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: pot life (not published)",
+  "q": "pot life of sikaplast-300 e",
+  "type": "attr",
+  "exp": {
+   "product": "sikaplast-300-e",
+   "label": "pot life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q353",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: pot life (not published)",
+  "q": "pot life of sika ferrogard-515 patch",
+  "type": "attr",
+  "exp": {
+   "product": "sika-ferrogard-515patch",
+   "label": "pot life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q354",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: pot life (not published)",
+  "q": "pot life of sikafloor multidur es-24",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-multidures-24",
+   "label": "pot life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q355",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: pot life (not published)",
+  "q": "pot life of sika carbodur m",
+  "type": "attr",
+  "exp": {
+   "product": "sika-carbodur-m",
+   "label": "pot life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q356",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life (not published)",
+  "q": "shelf life of sikaflex-268 powercure",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-268-powercure",
+   "label": "shelf life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q357",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: shelf life (not published)",
+  "q": "shelf life of sikasil sg-20",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-sg-20",
+   "label": "shelf life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q358",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life (not published)",
+  "q": "shelf life of sikasil sg-500 cn",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-sg-500-cn",
+   "label": "shelf life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q359",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: shelf life (not published)",
+  "q": "shelf life of sikafloor multiflex pb-56 uv",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-multiflexpb-56uv",
+   "label": "shelf life",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q360",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: compressive (not published)",
+  "q": "compressive strength of sika sealtape f",
+  "type": "attr",
+  "exp": {
+   "product": "sika-sealtape-f",
+   "label": "compressive",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q361",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: compressive (not published)",
+  "q": "compressive strength of sika primer-207",
+  "type": "attr",
+  "exp": {
+   "product": "sika-primer-207",
+   "label": "compressive",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q362",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: compressive (not published)",
+  "q": "compressive strength of sika carbodur bc",
+  "type": "attr",
+  "exp": {
+   "product": "sika-carbodur-bc",
+   "label": "compressive",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q363",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: compressive (not published)",
+  "q": "compressive strength of sika rugasol c",
+  "type": "attr",
+  "exp": {
+   "product": "sika-rugasol-c",
+   "label": "compressive",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q364",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: mixing ratio (not published)",
+  "q": "mix ratio for sika viscoflow-21 au impact",
+  "type": "attr",
+  "exp": {
+   "product": "sika-viscoflow-21auimpact",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q365",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: mixing ratio (not published)",
+  "q": "mix ratio for sikaforce-420 l105",
+  "type": "attr",
+  "exp": {
+   "product": "sikaforce-420-l105",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q366",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: mixing ratio (not published)",
+  "q": "mix ratio for s-drain pvc",
+  "type": "attr",
+  "exp": {
+   "product": "s-drain-pvc",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q367",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: mixing ratio (not published)",
+  "q": "mix ratio for sikaroof versijack spacer tab v",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versijackspacertabv",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "id": "q368",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "coverage and consumption",
+  "q": "coverage of sikament eco-3 w",
+  "type": "rate",
+  "exp": {
+   "product": "sikament-eco-3-w",
+   "contains": "Typical dosage is 600ml per 100kg of total cementitious mate",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q369",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "coverage of sikafloor-94",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-94",
+   "contains": "CSP 2-3 profile 5-6m2 L approx.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q370",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "what is the spread rate for sikabond-115 max tack",
+  "type": "rate",
+  "exp": {
+   "product": "sikabond-115-maxtack",
+   "contains": "~100 spots | Diameter = 30 mm Thickness = 4 mm",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q371",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "how far does sikaflex pro-3 purform go",
+  "type": "rate",
+  "exp": {
+   "product": "sikaflex-pro-3-purform",
+   "contains": "10 mm | 8 mm | 7.5 lm",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q372",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "coverage and consumption",
+  "q": "consumption of davco smp evo",
+  "type": "rate",
+  "exp": {
+   "product": "davco-smp-evo",
+   "contains": "20kg Bag of Davco® SMP EVO covers approximately 6-7m2 with a",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q373",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "what is the spread rate for sikaflex-112 crystal clear",
+  "type": "rate",
+  "exp": {
+   "product": "sikaflex-112-crystalclear",
+   "contains": "~100 spots | Diameter = 30 mm Thickness = 4 mm",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q374",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "what is the spread rate for sikafloor-2350 esd",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-2350-esd",
+   "contains": "Wearing layer | Sikafloor®-2350 ESD | 1.5 kg/m² to 2.5 kg/m²",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q375",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "coverage and consumption",
+  "q": "coverage of davco easy grout",
+  "type": "rate",
+  "exp": {
+   "product": "davco-easy-grout",
+   "contains": "300x100x10mm | 14m2 | 7m2 | 4m2",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q376",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "coverage and consumption",
+  "q": "coverage of sika block",
+  "type": "rate",
+  "exp": {
+   "product": "sika-block",
+   "contains": "Sika® Block can be used at rates of 150-500mls per 100kg of ",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q377",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "coverage of sikafloor level pro",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-level-pro",
+   "contains": "12 Litres - 4m2 @ 3mm thickness",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q378",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "coverage and consumption",
+  "q": "coverage of sikatile-374 mega pro",
+  "type": "rate",
+  "exp": {
+   "product": "sikatile-374-megapro",
+   "contains": "6mm | 9.5m2",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q379",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "consumption of sikafloor-264",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-264",
+   "contains": "~0,25–0,3 kg/m² applied as a roller coating",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q380",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "coverage and consumption",
+  "q": "consumption of sikaplast-3173 scm",
+  "type": "rate",
+  "exp": {
+   "product": "sikaplast-3173-scm",
+   "contains": "Typical dosage rate is 400 – 1200 ml per 100 kg of total cem",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q381",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption",
+  "q": "how far does sika colma cleaner go",
+  "type": "rate",
+  "exp": {
+   "product": "sika-colma-cleaner",
+   "contains": "50 ml/m2 approx.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q382",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "times",
+  "q": "how long is the pot life of sikadur-55 slv",
+  "type": "time",
+  "exp": {
+   "product": "sikadur-55-slv",
+   "contains": "~20 minutes",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q383",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "working time for sikafloor-33 purcem once mixed",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-33-purcem",
+   "contains": "15-20 minutes at 20 degrees C",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q384",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "working time for sikagrout-9140 once mixed",
+  "type": "time",
+  "exp": {
+   "product": "sikagrout-9140",
+   "contains": "3 hours",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q385",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "times",
+  "q": "how long is the pot life of sika monotop fc",
+  "type": "time",
+  "exp": {
+   "product": "sika-monotop-fc",
+   "contains": "Approx. 20 minutes @ 23oC",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q386",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "working time for sikadur-42+ le warm climate once mixed",
+  "type": "time",
+  "exp": {
+   "product": "sikadur-42-plus-lewarmclimate",
+   "contains": "+15 °C | 180 minutes",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q387",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "working time for sikafloor-220 w conductive once mixed",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-220-wconductive",
+   "contains": "+10 °C | ~120 minutes",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q388",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "times",
+  "q": "how long is the pot life of schönox ab",
+  "type": "time",
+  "exp": {
+   "product": "schoenox-ab",
+   "contains": "1.5 hours (approx) Mixing Instructions: ",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q389",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "working time for lanko 173 floor leveller once mixed",
+  "type": "time",
+  "exp": {
+   "product": "lanko-173-floor-leveller",
+   "contains": "10 minutes",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q390",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "cure time for sikabond-58 wood floor",
+  "type": "time",
+  "exp": {
+   "product": "sikabond-58-woodfloor",
+   "contains": "4.5 mm/24 hours approx. (23 °C / 50% r.h",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q391",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "cure time for sikafloor purcem hs-24",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-purcemhs-24",
+   "contains": "+10 °C | ~ 20 hours | ~ 34 hours | ~ 7 d",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q392",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "how long until sikafloor level ultra is cured",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-level-ultra",
+   "contains": "Allow 7 - 8 hours at 23°C prior to insta",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q393",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times",
+  "q": "when can i walk on sikagrout-9800",
+  "type": "time",
+  "exp": {
+   "product": "sikagrout-9800",
+   "contains": "≤ 10 hours",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q394",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "times",
+  "q": "cure time for sikalastic-851",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-851",
+   "contains": "24 h at +20 °C",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q395",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "times",
+  "q": "when can i walk on sikalastic-487",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-487",
+   "contains": "24 hours for full cure.",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q396",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "times",
+  "q": "how long until sikagard-550 w elastic is cured",
+  "type": "time",
+  "exp": {
+   "product": "sikagard-550-w-elastic",
+   "contains": "Full cure: ~ 7 days at +20°C",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q397",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "times",
+  "q": "how long until sika tite be is cured",
+  "type": "time",
+  "exp": {
+   "product": "sika-tite-be",
+   "contains": "Sika® Tite BE must be cured for at least",
+   "has": true,
+   "source": "data"
+  },
+  "id": "q398",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "msds formol eco",
+  "type": "doc",
+  "exp": {
+   "product": "formol-eco",
+   "source": "data"
+  },
+  "id": "q399",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "where do i find the sds for sikabond-58 wood floor",
+  "type": "doc",
+  "exp": {
+   "product": "sikabond-58-woodfloor",
+   "source": "data"
+  },
+  "id": "q400",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "where do i find the sds for sika viscocrete-1250",
+  "type": "doc",
+  "exp": {
+   "product": "sika-viscocrete-1250",
+   "source": "data"
+  },
+  "id": "q401",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "msds sika firerate",
+  "type": "doc",
+  "exp": {
+   "product": "sika-firerate",
+   "source": "data"
+  },
+  "id": "q402",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "where do i find the sds for sikafloor-160",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-160",
+   "source": "data"
+  },
+  "id": "q403",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "sikaflex-116 high grab safety data sheet",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-116-highgrab",
+   "source": "data"
+  },
+  "id": "q404",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "msds sarnacol-2142 s",
+  "type": "doc",
+  "exp": {
+   "product": "sarnacol-2142-s",
+   "source": "data"
+  },
+  "id": "q405",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents",
+  "q": "msds sikalastic-888",
+  "type": "doc",
+  "exp": {
+   "product": "sikalastic-888",
+   "source": "data"
+  },
+  "id": "q406",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "catalogue lists",
+  "q": "what grouts does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-grouts"
+   ],
+   "min": 3
+  },
+  "id": "q407",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "catalogue lists",
+  "q": "which bathroom silicones does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sanitary-sealants"
+   ],
+   "min": 3
+  },
+  "id": "q408",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "catalogue lists",
+  "q": "what epoxy grouts does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:epoxy-grouts",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 3
+  },
+  "id": "q409",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists",
+  "q": "what chemical anchors does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:chemical-anchoring"
+   ],
+   "min": 3
+  },
+  "id": "q410",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "catalogue lists",
+  "q": "which concrete fibres does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete/fibres"
+   ],
+   "min": 3
+  },
+  "id": "q411",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "catalogue lists",
+  "q": "what torch on membranes does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:torch-on-sheet-membranes"
+   ],
+   "min": 3
+  },
+  "id": "q412",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists",
+  "q": "what structural strengthening products does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ],
+   "min": 3
+  },
+  "id": "q413",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists",
+  "q": "what floor joint sealants does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:floor-joints"
+   ],
+   "min": 3
+  },
+  "id": "q414",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "catalogue lists",
+  "q": "which marine products does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:marine/"
+   ],
+   "min": 3
+  },
+  "id": "q415",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists",
+  "q": "which pvc roof membranes does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:pvc-sheet-membranes"
+   ],
+   "min": 3
+  },
+  "id": "q416",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "flexi glue for big tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "hand",
+  "id": "q417",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "tile on tile what do i use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "hand",
+  "id": "q418",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "whats the go with tiling over old tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "hand",
+  "id": "q419",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "mud for floor tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "messy": "hand",
+  "id": "q420",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "goop for round the bath",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "messy": "hand",
+  "id": "q421",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "silly cone for the shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "messy": "hand",
+  "id": "q422",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "the wet area membrane",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "hand",
+  "id": "q423",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "torch on or paint on membrane for the wet area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:roofing/torch-on-sheet-membranes"
+   ]
+  },
+  "messy": "hand",
+  "id": "q424",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "gunk to seal the shower screen",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/sanitary-sealants",
+    "i:sikasil-pool"
+   ]
+  },
+  "messy": "hand",
+  "id": "q425",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "grot for between the tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "hand",
+  "id": "q426",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "screed it out for a big shed floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "messy": "hand",
+  "id": "q427",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "bog for filling holes in concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:sealants-adhesives/paint-preparation",
+    "i:sikafloor-050-rampandpatch"
+   ]
+  },
+  "messy": "hand",
+  "id": "q428",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "what do i use to fix the slab if its rooted",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:flooring/cement-levelling"
+   ]
+  },
+  "messy": "hand",
+  "id": "q429",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "two part epoxy for the garage floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "hand",
+  "id": "q430",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "two pack glue for steel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:structural-strengthening",
+    "c:industry",
+    "c:transportation"
+   ]
+  },
+  "messy": "hand",
+  "id": "q431",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "liquid nails type stuff",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives"
+   ]
+  },
+  "messy": "hand",
+  "id": "q432",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "no more nails glue",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives"
+   ]
+  },
+  "messy": "hand",
+  "id": "q433",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "gap filler foam in a can",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/foam-sealants-adhesives",
+    "c:sealants-adhesives/passive-fire-protection"
+   ]
+  },
+  "messy": "hand",
+  "id": "q434",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "wall bog for before painting",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/paint-preparation",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "hand",
+  "id": "q435",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "slang",
+  "q": "roof goop for a leaking gutter",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikaseal-roof-gutter",
+    "c:sealants-adhesives/roofing-sealantsadhesives",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "hand",
+  "id": "q436",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "slang",
+  "q": "what do i put in the mix to make it flow better",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology"
+   ]
+  },
+  "messy": "hand",
+  "id": "q437",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "slang",
+  "q": "plasticiser for a slab pour",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology"
+   ]
+  },
+  "messy": "hand",
+  "id": "q438",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "slang",
+  "q": "stuff to slow the pour in summer",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology",
+    "c:concrete/specialty-products"
+   ]
+  },
+  "messy": "hand",
+  "id": "q439",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "slang",
+  "q": "dry shake or hardener for a warehouse slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:concrete"
+   ]
+  },
+  "messy": "hand",
+  "id": "q440",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "slang",
+  "q": "crete patch for a pothole",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:flooring"
+   ]
+  },
+  "messy": "hand",
+  "id": "q441",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "slang",
+  "q": "tanking for a basement",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:landscape-buildingproducts/subsoil"
+   ]
+  },
+  "messy": "hand",
+  "id": "q442",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "slang",
+  "q": "what stops a wet wall in the cellar",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection",
+    "c:landscape-buildingproducts/subsoil"
+   ]
+  },
+  "messy": "hand",
+  "id": "q443",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "slang",
+  "q": "torch on for the flat roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing/torch-on-sheet-membranes"
+   ]
+  },
+  "messy": "hand",
+  "id": "q444",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "slang",
+  "q": "what is class 3 membrane",
+  "type": "business",
+  "exp": {
+   "url": "davco-k10|waterproofing",
+   "must": "class"
+  },
+  "messy": "hand",
+  "id": "q445",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "slang",
+  "q": "damp course paint for a wet garage wall",
+  "type": "nodata",
+  "exp": {},
+  "messy": "hand",
+  "id": "q446",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "sparky needs fire stopper for cable holes",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/passive-fire-protection",
+    "c:sealants-adhesives/facade-sealants",
+    "c:sealants-adhesives/foam"
+   ]
+  },
+  "messy": "hand",
+  "id": "q447",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "what do chippies use to glue skirting",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives",
+    "c:sealants-adhesives/foam-sealants-adhesives"
+   ]
+  },
+  "messy": "hand",
+  "id": "q448",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "tradie glue for decking",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "hand",
+  "id": "q449",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "old davco grey bag whats the new one called",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-grey-one-potadhesive"
+   ]
+  },
+  "messy": "hand",
+  "id": "q450",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "grey pot davco tile glue",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-grey-one-potadhesive"
+   ]
+  },
+  "messy": "hand",
+  "id": "q451",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "trojan davco tile mud",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic"
+   ]
+  },
+  "messy": "hand",
+  "id": "q452",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "slang",
+  "q": "the yellow davco one pot",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-grey-one-potadhesive"
+   ]
+  },
+  "messy": "hand",
+  "id": "q453",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "ultraflex davco flexi",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-ultraflex"
+   ]
+  },
+  "messy": "hand",
+  "id": "q454",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "slang",
+  "q": "k10 davco membrane",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-k10-plus",
+    "davco-k10-rapid"
+   ]
+  },
+  "messy": "hand",
+  "id": "q455",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "c2te s1 adhesive",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "C2"
+  },
+  "messy": "hand",
+  "id": "q456",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "which adhesives are c2 classified",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "C2"
+  },
+  "messy": "hand",
+  "id": "q457",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "as 3740 waterproofing of wet areas",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "3740",
+   "nodata": true
+  },
+  "messy": "hand",
+  "id": "q458",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "as 4654 membrane",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "4654"
+  },
+  "messy": "hand",
+  "id": "q459",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "which products meet as iso 13007",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "13007"
+  },
+  "messy": "hand",
+  "id": "q460",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "en 1504 repair mortar",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "1504"
+  },
+  "messy": "hand",
+  "id": "q461",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "class iii waterproofing membrane for under tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "hand",
+  "id": "q462",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "cementitious tile adhesive cta",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "hand",
+  "id": "q463",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "open time vs pot life whats the difference",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com|documents",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "hand",
+  "id": "q464",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "what is open time on a tile adhesive",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "open time",
+   "nodata": true
+  },
+  "messy": "hand",
+  "id": "q465",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "jargon",
+  "q": "how many calories in a meat pie",
+  "type": "oos",
+  "exp": {},
+  "messy": "hand",
+  "id": "q466",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "sds for davco k10 plus",
+  "type": "doc",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "hand",
+  "id": "q467",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "tds sikafloor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "hand",
+  "id": "q468",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "epd on level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "hand",
+  "id": "q469",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "voc content of sikaflex 11fc",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "label": "voc"
+  },
+  "messy": "hand",
+  "id": "q470",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "jargon",
+  "q": "non slump adhesive for lft",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "hand",
+  "id": "q471",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typo",
+  "q": "sikaflex 11fc",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-11-fc-purform",
+    "1671"
+   ]
+  },
+  "messy": "hand",
+  "id": "q472",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typo",
+  "q": "sikaflex11fc colours",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-11-fc-purform",
+    "1671"
+   ]
+  },
+  "messy": "hand",
+  "id": "q473",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typo",
+  "q": "davco grout fr shwr",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "hand",
+  "id": "q474",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typo",
+  "q": "davco grot for shower floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "hand",
+  "id": "q475",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typo",
+  "q": "sika tile 400 evo",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro"
+   ]
+  },
+  "messy": "hand",
+  "id": "q476",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typo",
+  "q": "sikatile400",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro"
+   ]
+  },
+  "messy": "hand",
+  "id": "q477",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "typo",
+  "q": "levl pro sds",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "hand",
+  "id": "q478",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "typo",
+  "q": "sikafloor levelpro",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-level-pro"
+   ]
+  },
+  "messy": "hand",
+  "id": "q479",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "typo",
+  "q": "sika lvl top",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-level-top"
+   ]
+  },
+  "messy": "hand",
+  "id": "q480",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "typo",
+  "q": "sikalastic1k",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-1k"
+   ]
+  },
+  "messy": "hand",
+  "id": "q481",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "typo",
+  "q": "sikalastc 1k pool",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-1k"
+   ]
+  },
+  "messy": "hand",
+  "id": "q482",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "typo",
+  "q": "monotop 412",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-monotop-412nfg"
+   ]
+  },
+  "messy": "hand",
+  "id": "q483",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "typo",
+  "q": "sikadur32",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikadur-32-lp"
+   ]
+  },
+  "messy": "hand",
+  "id": "q484",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "typo",
+  "q": "viscocrete 1250",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-viscocrete-1250"
+   ]
+  },
+  "messy": "hand",
+  "id": "q485",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "typo",
+  "q": "viscocrete1250 dosage",
+  "type": "rate",
+  "exp": {
+   "product": "sika-viscocrete-1250"
+  },
+  "messy": "hand",
+  "id": "q486",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typo",
+  "q": "cnt find sds for grey one pot",
+  "type": "doc",
+  "exp": {
+   "product": "davco-grey-one-potadhesive"
+  },
+  "messy": "hand",
+  "id": "q487",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "typo",
+  "q": "wher can i by davco",
+  "type": "business",
+  "exp": {
+   "url": "where-to-buy",
+   "must": ""
+  },
+  "messy": "hand",
+  "id": "q488",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "typo",
+  "q": "phne numbr for sika",
+  "type": "business",
+  "exp": {
+   "url": "imprint|contact",
+   "must": "9725"
+  },
+  "messy": "hand",
+  "id": "q489",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "typo",
+  "q": "warrenty on tiling",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "warrant"
+  },
+  "messy": "hand",
+  "id": "q490",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "typo",
+  "q": "tecnical support",
+  "type": "business",
+  "exp": {
+   "url": "contact|Contact|imprint",
+   "must": ""
+  },
+  "messy": "hand",
+  "id": "q491",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what do i need for a bathroom",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q492",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "something for cracks",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q493",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "best stuff for outside",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q494",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what glue do i need",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q495",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "waterproofing",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q496",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "i need to fix my floor",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q497",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "help with tiles",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q498",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what sealant",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q499",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "something to stop leaks",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q500",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what should i use for my deck",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q501",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "vague",
+  "q": "need something for the slab",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q502",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "vague",
+  "q": "best primer",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q503",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what do i use on a wall",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q504",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "kitchen reno what products",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q505",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "laundry reno what do i buy",
+  "type": "vague",
+  "exp": {},
+  "messy": "hand",
+  "id": "q506",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "best tile adhesive for porelain on a concrete floor inside",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q507",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "tile adehsive for an outdoor balcony",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q508",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "adhsv for tiles on a heated floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q509",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "tile sdhesive for walls in a wet area on plasterboard",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q510",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "tile adhsive with a long open time for hot weather",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q511",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile adhesive (mutated)",
+  "q": "what is davco supamastic pls",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-supamastic"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q512",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout (mutated)",
+  "q": "epoxy grout for a comercial kitchen",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q513",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout (mutated)",
+  "q": "grout for a swmiming pool",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q514",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout (mutated)",
+  "q": "how do i clean tyle grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q515",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing (mutated)",
+  "q": "best watrproofing for a shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q516",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing (mutated)",
+  "q": "quick drying waetrproofing membrane for a wet area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q517",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing (mutated)",
+  "q": "waterprofing membrane for a large commercial wet area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q518",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "waterproofing (mutated)",
+  "q": "what is sokatile 110 secure proof",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q519",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "wha's the best screed for a big job",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q520",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "leveller for old uneven conc",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q521",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "smpothing compound for timber floors",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q522",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "wat is a cement levelling system",
+  "type": "business",
+  "exp": {
+   "url": "cement-levellingsystems",
+   "must": "cement-based underlayment"
+  },
+  "messy": "mutated",
+  "id": "q523",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "tell me about sikfloor level pro",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-level-pro"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q524",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "siakfloor 215 rapid screed what is it for",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikafloor-215-rapidscreed"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q525",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "screed (mutated)",
+  "q": "compare level pro and level top pls",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikafloor-level-pro",
+    "sikafloor-level-top"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q526",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive (mutated)",
+  "q": "what is the best cpnstruction adhesive for fixing skirting boards",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives/construction-adhesives",
+    "c:sealants-adhesives/foam-sealants-adhesives"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q527",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant (mutated)",
+  "q": "gutter seaant",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikaseal-roof-gutter",
+    "c:sealants-adhesives/roofing-sealantsadhesives"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q528",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant (mutated)",
+  "q": "how long does siakflex pro plus take to skin over",
+  "type": "time",
+  "exp": {
+   "product": "sikaflex-pro-plus"
+  },
+  "messy": "mutated",
+  "id": "q529",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant (mutated)",
+  "q": "what sealents does sika make",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 5
+  },
+  "messy": "mutated",
+  "id": "q530",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair (mutated)",
+  "q": "epoxy for crack onjection or bonding old concrete to new",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:structural-strengthening/structural-adhesives",
+    "c:waterproofing/injections"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q531",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "concrete repair (mutated)",
+  "q": "wat is sikadur 31",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikadur-31-cf-normal"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q532",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "anchoring (mutated)",
+  "q": "non shrnk grout for bolts",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q533",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing (mutated)",
+  "q": "torch on mebmrane for a flat roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing/torch-on-sheet-membranes"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q534",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "roofing (mutated)",
+  "q": "what do you have for green roofs pls",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts/green-roofs"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q535",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring (mutated)",
+  "q": "resin floor for a food prpcessing area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q536",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture (mutated)",
+  "q": "what admixture for self comacting concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology",
+    "c:concrete/fibres"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q537",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture (mutated)",
+  "q": "aceclerator for shotcrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/admixture-technology/concrete-accelerators",
+    "c:concrete/tunneling"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q538",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture (mutated)",
+  "q": "macro fibre for slab on ground pls",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/fibres"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q539",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture (mutated)",
+  "q": "shronkage reducing admixture",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sikacontrol-plus",
+    "c:concrete/specialty-products/shrinkage"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q540",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "admixture (mutated)",
+  "q": "wat dosage of sikament eco 3 w",
+  "type": "rate",
+  "exp": {
+   "product": "sikament-eco-3-w"
+  },
+  "messy": "mutated",
+  "id": "q541",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "curing (mutated)",
+  "q": "curing comound for a new slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:sika-film,sika-film,sikafloor-curehard-24",
+    "c:concrete/admixture-technology/evaporation-retarders"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q542",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing (mutated)",
+  "q": "liquid mebmrane for a roof deck that will be walked on",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:roofing"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q543",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing (mutated)",
+  "q": "hydrophilic waterstop fr a construction joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/injections",
+    "c:waterproofing/66807",
+    "c:waterproofing/basement"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q544",
+  "split": "blind"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing (mutated)",
+  "q": "spray spplied waterproofing membrane",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing/spray-applied"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q545",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing (mutated)",
+  "q": "wat is sikalastic 1k",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-1k"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q546",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproofing (mutated)",
+  "q": "coverage of siklastic 8902",
+  "type": "rate",
+  "exp": {
+   "product": "sikalastic-8902"
+  },
+  "messy": "mutated",
+  "id": "q547",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification (mutated)",
+  "q": "spceification clause for sikafloor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "mutated",
+  "id": "q548",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification (mutated)",
+  "q": "epd for sikaflor level pro",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "mutated",
+  "id": "q549",
+  "split": "blind"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification (mutated)",
+  "q": "snchor calculation software",
+  "type": "business",
+  "exp": {
+   "url": "anchorfix-calculation-software",
+   "must": "software"
+  },
+  "messy": "mutated",
+  "id": "q550",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification (mutated)",
+  "q": "sika remedial soltions for old concrete buildings",
+  "type": "business",
+  "exp": {
+   "url": "Remedial-Solutions",
+   "must": "remedial"
+  },
+  "messy": "mutated",
+  "id": "q551",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "specification (mutated)",
+  "q": "sturctural adhesive for bonding plates",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening",
+    "c:concrete-repair-protection/concrete-repair-mortars/epoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q552",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data (mutated)",
+  "q": "where do i find da safety data sheet for sikaflex 11 fc",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q553",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data (mutated)",
+  "q": "shelf life of sikaflex 11fc",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "label": "shelf life"
+  },
+  "messy": "mutated",
+  "id": "q554",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business (mutated)",
+  "q": "how do i become a sika disributor",
+  "type": "business",
+  "exp": {
+   "url": "contact",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "mutated",
+  "id": "q555",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business (mutated)",
+  "q": "do you have stock of siakfloor level pro",
+  "type": "nodata",
+  "exp": {},
+  "messy": "mutated",
+  "id": "q556",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "business (mutated)",
+  "q": "delivery time for sika products pls",
+  "type": "nodata",
+  "exp": {},
+  "messy": "mutated",
+  "id": "q557",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "fax nymber",
+  "type": "business",
+  "exp": {
+   "url": "imprint",
+   "must": "9725"
+  },
+  "messy": "mutated",
+  "id": "q558",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "which proucts are covered by the instant warranty portal",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "Davco K10 Plus"
+  },
+  "messy": "mutated",
+  "id": "q559",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "is davco the same copmany as sika",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "Sika"
+  },
+  "messy": "mutated",
+  "id": "q560",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "has da davco formula changed with da new packaging",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "hasn"
+  },
+  "messy": "mutated",
+  "id": "q561",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "is there yndertile waterproofing training",
+  "type": "business",
+  "exp": {
+   "url": "Undertile-Waterproofing-training",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "mutated",
+  "id": "q562",
+  "split": "blind"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "where do i find all the prouct data sheets",
+  "type": "business",
+  "exp": {
+   "url": "pds|documents",
+   "must": ""
+  },
+  "messy": "mutated",
+  "id": "q563",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "terms and codnitions of sale",
+  "type": "business",
+  "exp": {
+   "url": "terms-and-conditions",
+   "must": ""
+  },
+  "messy": "mutated",
+  "id": "q564",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "sika solutions for a bthrm diy",
+  "type": "business",
+  "exp": {
+   "url": "diy-solutions-for-your-bathroom|home-owners",
+   "must": ""
+  },
+  "messy": "mutated",
+  "id": "q565",
+  "split": "tuned"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business (mutated)",
+  "q": "does sika sell to the sutomotive industry",
+  "type": "business",
+  "exp": {
+   "url": "industry/automotive",
+   "must": ""
+  },
+  "messy": "mutated",
+  "id": "q566",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "hw do i fix a leaking shower",
+  "type": "business",
+  "exp": {
+   "url": "leaking-shower",
+   "must": "shower"
+  },
+  "messy": "mutated",
+  "id": "q567",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "what do i use to glue a balstrade",
+  "type": "business",
+  "exp": {
+   "url": "balustrade|3-must-haves|construction-adhesives",
+   "must": ""
+  },
+  "messy": "mutated",
+  "id": "q568",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "what glue for my cocnrete bird bath",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q569",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "what can i use to seal cracks in my conc driveway",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:sealants-adhesives",
+    "c:flooring",
+    "c:waterproofing/injections"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q570",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "grout stsined and mouldy how do i fix it",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "i:davco-rejuvenationgrout,davco-tile-groutcleaner,davco-sanitized-tilegroutsealer",
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q571",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "sika showerbond wat is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-showerbond",
+    "sika-showerbond"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q572",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy (mutated)",
+  "q": "what temerature is too cold to use tile adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q573",
+  "split": "tuned"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "out of scope (mutated)",
+  "q": "how do i lay a brcik wall",
+  "type": "nodata",
+  "exp": {},
+  "messy": "mutated",
+  "id": "q574",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos (mutated)",
+  "q": "bset adhsv for large format tyles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q575",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "typos (mutated)",
+  "q": "soakflex 11 fc colours",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-11-fc-purform",
+    "1671"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q576",
+  "split": "blind"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "typos (mutated)",
+  "q": "hw do i waterproof my shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q577",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "typos (mutated)",
+  "q": "conerte repair mortar",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "mutated",
+  "id": "q578",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: shelf life (mutated)",
+  "q": "how long can i store siakgard-706 thixo unopened",
+  "type": "attr",
+  "exp": {
+   "product": "sikagard-706-thixo",
+   "label": "shelf life",
+   "contains": "12 months from date of production if stored in unopened, undamaged and original ",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q579",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: shelf life (mutated)",
+  "q": "shelf life of sikalastic-777 pls",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "shelf life",
+   "contains": "9 months",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q580",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life (mutated)",
+  "q": "shelf life of sokaroof versiscape infill block",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versiscapeinfillblock",
+   "label": "shelf life",
+   "contains": "No expiration date if the product is stored in accordance to the storage conditi",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q581",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: storage (mutated)",
+  "q": "storage conitions for lanko 145 floor leveller",
+  "type": "attr",
+  "exp": {
+   "product": "lanko-145-floor-leveller",
+   "label": "storage",
+   "contains": "Bags must be stored off the floor in dry cool conditions out of direct sunlight.",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q582",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: density (mutated)",
+  "q": "what does siakdur-31 cf normal weigh per litre",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-31-cf-normal",
+   "label": "density",
+   "contains": "1.90 + 0.1 kg/l (components A+B mixed) (at +23°C) (evacuated)",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q583",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature (mutated)",
+  "q": "minimum temperature to use sika boom cleaner pls",
+  "type": "attr",
+  "exp": {
+   "product": "sika-boom-cleaner",
+   "label": "temperature",
+   "contains": "+5 °C min. / +35 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q584",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: temperature (mutated)",
+  "q": "sybstrate temperature limits for sika ferrogard-520 patch",
+  "type": "attr",
+  "exp": {
+   "product": "sika-ferrogard-520patch",
+   "label": "temperature",
+   "contains": "+5 °C min",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q585",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: mixing ratio (mutated)",
+  "q": "how much water do i add to sikfloor-215 rapid screed",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-215-rapidscreed",
+   "label": "mixing ratio",
+   "contains": "1.9 - 2.1 Litres of clean, cool water",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q586",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: thickness (mutated)",
+  "q": "how thick can i apply siakdur-42 hp",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-42-hp",
+   "label": "thickness",
+   "contains": "Minimum grout depth: 10 mm Maximum grout depth: 150 mm Temperature | Layer thick",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q587",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature (mutated)",
+  "q": "service temperature of sikaflex-111 stick & seal pls",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-111-stickseal",
+   "label": "temperature",
+   "contains": "−50 °C min. / +80 °C max.",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q588",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: temperature (mutated)",
+  "q": "srrvice temperature of sikaflex-400 fire",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-400-fire",
+   "label": "temperature",
+   "contains": "−40 °C to + 70 °C",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q589",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: tensile (mutated)",
+  "q": "tensile strngth of sika waterbar fb-125",
+  "type": "attr",
+  "exp": {
+   "product": "sika-waterbar-fb-125",
+   "label": "tensile",
+   "contains": "≥ 6 N/mm2 | (EN 12311-2)",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q590",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: voc (mutated)",
+  "q": "voc content of siaklastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "voc",
+   "contains": "250g/L",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q591",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: voc (mutated)",
+  "q": "is sarna cleaner low voc pls",
+  "type": "attr",
+  "exp": {
+   "product": "sarna-cleaner",
+   "label": "voc",
+   "contains": "VOC-CH: 100 % VOC-EU: 100 %",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q592",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: fire (mutated)",
+  "q": "fire rsting of sikasil-670 fire",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-670-fire",
+   "label": "fire",
+   "contains": "Class B -s2, d0 | (EN 13501-1)",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q593",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: composition (mutated)",
+  "q": "wat is sikagard-705 l made of",
+  "type": "attr",
+  "exp": {
+   "product": "sikagard-705-l",
+   "label": "composition",
+   "contains": "Alkoxy silanes (99 % active ingredient)",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q594",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: chemical (mutated)",
+  "q": "chemical resstance of sikafloor purcem hs-24",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-purcemhs-24",
+   "label": "chemical",
+   "contains": "Please refer to Sikafloor PurCem chemical resistance guide. Contact Sika technic",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q595",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: chemical (mutated)",
+  "q": "chemical resistance of siaklastic-701",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-701",
+   "label": "chemical",
+   "contains": "Resistant to many chemicals. Contact Sika Technical Service for additional infor",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q596",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: movement (mutated)",
+  "q": "joint movement capability of sikahyflex-250 facade pls",
+  "type": "attr",
+  "exp": {
+   "product": "sikahyflex-250-facade",
+   "label": "movement",
+   "contains": "± 25% | (ISO 9047) +100 / −50% | (ASTM C 719)",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q597",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: humidity (mutated)",
+  "q": "max hymidity to apply sikalastic-100 ep primer",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-100-epprimer",
+   "label": "humidity",
+   "contains": "80 % r.h. max.",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q598",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product data: hardness (mutated)",
+  "q": "shore hardness of siklastic-777",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-777",
+   "label": "hardness",
+   "contains": "70 Shore A",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q599",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: curing (mutated)",
+  "q": "curing time for siakbond-142 instant nails",
+  "type": "attr",
+  "exp": {
+   "product": "sikabond-142-instantnails",
+   "label": "curing",
+   "contains": "Full cure in approximately 7 days, depending on weather conditions.",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q600",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: overcoat (mutated)",
+  "q": "how long to wait before overcoating sika filler-105 pls",
+  "type": "attr",
+  "exp": {
+   "product": "sika-filler-105",
+   "label": "overcoat",
+   "contains": "~ 12 hours (ideally surfaces should be finished with a fine layer filler such as",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q601",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: pot life (not published) (mutated)",
+  "q": "pot life of sokaplast-300 e",
+  "type": "attr",
+  "exp": {
+   "product": "sikaplast-300-e",
+   "label": "pot life",
+   "has": false,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q602",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: shelf life (not published) (mutated)",
+  "q": "shelf life of siksil sg-500 cn",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-sg-500-cn",
+   "label": "shelf life",
+   "has": false,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q603",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "product data: compressive (not published) (mutated)",
+  "q": "copmressive strength of sika primer-207",
+  "type": "attr",
+  "exp": {
+   "product": "sika-primer-207",
+   "label": "compressive",
+   "has": false,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q604",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "product data: mixing ratio (not published) (mutated)",
+  "q": "mix ratio for sika viscoflow-21 au impact pls",
+  "type": "attr",
+  "exp": {
+   "product": "sika-viscoflow-21auimpact",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q605",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "product data: mixing ratio (not published) (mutated)",
+  "q": "mix ratio for sokaroof versijack spacer tab v",
+  "type": "attr",
+  "exp": {
+   "product": "sikaroof-versijackspacertabv",
+   "label": "mixing ratio",
+   "has": false,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q606",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption (mutated)",
+  "q": "wat is the spread rate for sikabond-115 max tack",
+  "type": "rate",
+  "exp": {
+   "product": "sikabond-115-maxtack",
+   "contains": "~100 spots | Diameter = 30 mm Thickness = 4 mm",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q607",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption (mutated)",
+  "q": "what is the spread rate for sikflex-112 crystal clear",
+  "type": "rate",
+  "exp": {
+   "product": "sikaflex-112-crystalclear",
+   "contains": "~100 spots | Diameter = 30 mm Thickness = 4 mm",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q608",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "coverage and consumption (mutated)",
+  "q": "coevrage of sika block",
+  "type": "rate",
+  "exp": {
+   "product": "sika-block",
+   "contains": "Sika® Block can be used at rates of 150-500mls per 100kg of ",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q609",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "coverage and consumption (mutated)",
+  "q": "consumption of sikaflor-264",
+  "type": "rate",
+  "exp": {
+   "product": "sikafloor-264",
+   "contains": "~0,25–0,3 kg/m² applied as a roller coating",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q610",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "times (mutated)",
+  "q": "how long is the pot life of sokadur-55 slv",
+  "type": "time",
+  "exp": {
+   "product": "sikadur-55-slv",
+   "contains": "~20 minutes",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q611",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "times (mutated)",
+  "q": "how long is the pot life of schnox ab",
+  "type": "time",
+  "exp": {
+   "product": "schoenox-ab",
+   "contains": "1.5 hours (approx) Mixing Instructions: ",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q612",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "times (mutated)",
+  "q": "cure time for siakfloor purcem hs-24",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-purcemhs-24",
+   "contains": "+10 °C | ~ 20 hours | ~ 34 hours | ~ 7 d",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q613",
+  "split": "tuned"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "times (mutated)",
+  "q": "cure time for sikalastic-851 pls",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-851",
+   "contains": "24 h at +20 °C",
+   "has": true,
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q614",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "documents (mutated)",
+  "q": "sikflex-116 high grab safety data sheet",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-116-highgrab",
+   "source": "data"
+  },
+  "messy": "mutated",
+  "id": "q615",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "catalogue lists (mutated)",
+  "q": "what grouts does sika autsralia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-grouts"
+   ],
+   "min": 3
+  },
+  "messy": "mutated",
+  "id": "q616",
+  "split": "blind"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists (mutated)",
+  "q": "what chemical anchors does sika australia sell pls",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:chemical-anchoring"
+   ],
+   "min": 3
+  },
+  "messy": "mutated",
+  "id": "q617",
+  "split": "tuned"
+ },
+ {
+  "persona": "distributor",
+  "category": "catalogue lists (mutated)",
+  "q": "what stryctural strengthening products does sika australia sell",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ],
+   "min": 3
+  },
+  "messy": "mutated",
+  "id": "q618",
+  "split": "tuned"
+ }
+]

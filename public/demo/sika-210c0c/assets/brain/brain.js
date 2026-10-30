@@ -5,6 +5,11 @@ import { SYNONYM_GROUPS } from './syn.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
 import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schema.js';
 import * as C from './cards.js';
+import { createKnow } from './know.js';
+import { applySlang } from './slang.js';
+import { vagueCard } from './vague.js';
+import { createAdvisor } from './advisor.js';
+import { attrCard, detectAttr, attrWords } from './attrs.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -14,7 +19,7 @@ const HARD_ENV = new Set(['wet_area', 'submerged', 'external', 'balcony_deck', '
 
 // ---------------------------------------------------------------- intents
 const RX = {
-  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me)\b/,
+  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me|minimum order|moq|order quantity|freight|shipping|trade account|invoice|credit terms)\b/,
   compare: /\b(vs|versus|compare|comparison|difference between|differences between|better than)\b/,
   calcWords: /\b(how much|how many|quantity|quantities|work out|calculate|calculation|estimate|need for|required for|order|buy)\b|\bhow (much|many) .* (for|to cover)\b/,
   time: /\b(how long|dry|dries|drying|cure|cures|curing|cured|setting|sets|set time|open time|pot life|potlife|recoat|re ?coat|overcoat|wait|waiting|skin time|tack free|working time|adjust|adjustability|before (i can |you can )?(grout|walking|walk|traffic|tiling|tile|coat|apply|seal)|when can i)\b/,
@@ -58,6 +63,11 @@ const TIME_KIND = [
 export function createBrain({ load, config } = {}) {
   let core = null, vocab = null, aliasList = null, rulesList = null, ruleTok = null;
   const pIndex = new Map();
+  // phone typos in words the assistant itself understands ("coevrage", "sutomotive"): corrected against its own vocabulary, never against product names
+  let LEXB = null;
+  const lexB = () => LEXB || (LEXB = [...new Set([...advisor.words(), ...know.words(), ...attrWords(), ...Object.values(RX).flatMap((r) => r.source.match(/[a-z]{5,}/g) || [])])].filter((w) => !/^(about|which|their|these)$/.test(w)));
+  const correctWords = (s) => s.split(' ').map((x) => { if (x.length < 5 || /\d/.test(x) || core === null || core.post[stem(x)] || core.alias[x]) return x; const L = lexB(); if (L.includes(x)) return x; const max = x.length >= 9 ? 2 : 1; let best = null, bd = 9; for (const l of L) { if (Math.abs(l.length - x.length) > max) continue; const d = dist(x, l, max); if (d < bd && (d <= 1 || x.slice(0, 2) === l.slice(0, 2)) && !l.startsWith(x) && !x.startsWith(l) && x.slice(0, -1) !== l.slice(0, -1)) { bd = d; best = l; } } return best && bd <= max && !STOP.has(x) && !GENERIC.has(x) ? best : x; }).join(' ');
+  const know = createKnow({ load }), advisor = createAdvisor({ load, isWord: (w) => !!(core && core.post[stem(w)]) });
 
   async function boot() {
     if (core) return core;
@@ -216,6 +226,17 @@ export function createBrain({ load, config } = {}) {
     return { leaf, tree: t, key, rulesTable: tree.rules };
   }
 
+  const adviceCards = (ad) => {
+    const cards = [ad.summary];
+    for (const it of ad.items) {
+      const pseudo = { id: it.e.id, n: it.e.n, u: it.e.u, d: { t: it.e.tg, s: '', pk: it.e.pk } };
+      const c = C.productCard(pseudo, it.sentences[0], 'Published text mentions: ' + it.why);
+      c.facts = it.sentences.map((s) => ({ source_url: it.e.u, page: null, sentence: s, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' })).concat(c.facts.slice(1)); c.source = c.facts[0]; c.headline = it.e.tg || '';
+      c.lines = [{ label: 'The published text says', text: it.sentences[0] }].concat(it.th ? [{ label: 'Layer thickness', text: it.th.t }] : []); if (it.th) c.facts.push({ source_url: it.e.u, page: null, sentence: it.th.t, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' });
+      c.followups = [`Data sheet for ${it.e.n}`, `Coverage of ${it.e.n}`]; cards.push(c);
+    }
+    return cards;
+  };
   // ---- main entry
   async function ask(question, state = null) {
     const t0 = now(); const trace = [];
@@ -228,7 +249,8 @@ export function createBrain({ load, config } = {}) {
     const rule = await matchRule(q);
     trace.push('rules:' + (rule ? 'hit' : 'miss'));
     if (rule) return out('rule', 'rules', [C.ruleCard(rule)]);
-    const n0 = normalise(q);
+    const slang = applySlang(normalise(q)); const n0 = correctWords(slang.text); if (slang.notes.length) trace.push('slang:' + slang.notes.map((x) => x.from + '>' + x.to).join(','));
+    { const vc = vagueCard(n0); if (vc) { trace.push('vague'); return out('vague', 'clarify', [vc], { followups: vc.followups }); } }
     // product mentions: exact, then fuzzy
     let mentions = findExact(n0); let stage = 'exact';
     if (!mentions.length) { mentions = fuzzyAliases(n0); stage = mentions.length ? 'fuzzy' : 'index'; }
@@ -239,6 +261,7 @@ export function createBrain({ load, config } = {}) {
     const w0 = n0.split(' ').filter(Boolean), cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
     const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
     const facets = parseFacets(n); let intent = classify(n, facets.area != null);
+    if (intent === 'calc' && /\bpallets?\b/.test(n)) intent = 'which';
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
@@ -246,6 +269,7 @@ export function createBrain({ load, config } = {}) {
     // a follow-up ("and its SDS?") keeps the last product
     const stateOk = state && state.productId && pIndex.has(state.productId);
     const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
+    if (intent === 'compat' && pis.length === 1 && !ambiguous && /^(what is|what are|what s|whats|tell me about|describe)\b/.test(n0)) intent = 'which';
     const askBack = intent === 'compat' && /^(can|could|is|will|does|would|do)\b/.test(n); // "Can I tile over a heated floor?" right after a product answer
     const fromState = !pis.length && stateOk && intent !== 'which' && (followUp || askBack);
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
@@ -254,7 +278,22 @@ export function createBrain({ load, config } = {}) {
     const namedAll = pis.length && !ambiguous;
     const st = (pi) => ({ productId: core.P[pi].id, intent });
 
+    if (/\b(who (owns|owned|founded|runs)|who is the (ceo|owner|boss|founder)|\bceo\b|shareholders?|share price|stock price|annual revenue|turnover|annual report|parent company)\b/.test(n0) && !pis.length) return out('company', 'unknown', [C.unknown(q, null, 'Facts about who owns or runs the company are not in the product and site documentation I work from, and I will not guess them. Please ask Sika Australia.', ['company facts'])], { state: null });
+    if (/\b(recommend|find|know|suggest)\b.*\b(tiler|plumber|builder|installer|contractor|electrician|tradie|applicator)\b.*\b(in|near|around)\b|\b(tiler|plumber|builder|installer|electrician) (in|near) [a-z]+/.test(n0) && !/\b(sika|davco|lanko)\b/.test(n0)) return out('oos', 'unknown', [C.unknown(q, null, 'I do not recommend tradespeople or installers. I answer about Sika Australia products and business from the published documentation. Please ask Sika Australia.', ['installer recommendation'])], { state: null });
+    if (/\b(meaning of life|(what is|whats|how is) the weather|weather (today|tomorrow|forecast|report)|joke|poem|recipe|horoscope|footy|football|cricket|movie|song lyrics|bitcoin|calories|president|prime minister|capital of|dating|homework|what time is it|news|election)\b/.test(n0) && !pis.length) return out('oos', 'unknown', [C.unknown(q, null, 'That is outside what I can help with. I answer about Sika Australia products and business from the published documentation.', ['topic'])], { state: null });
     if (intent === 'other_brand') return out(intent, 'unknown', [C.unknown(q, null, 'I only answer about Sika Australia products, from their published documentation. I do not compare with other brands or comment on them.', ['a comparison'])]);
+    // company and site questions that have a published home (contact, where to buy, warranty portal, training, careers, document libraries)
+    if (!pis.length || know.signal(n0)) { const tp = await know.topic(q, n0); if (tp) { trace.push('kb:topic'); return out('info', 'kb', [tp], { state: null }); } }
+    if (!pis.length && !/^(i need|i want|looking for)\b/.test(n0)) { const cs = await know.codeSearch(q, n0, { kind: advisor.hasKind(n0) }); if (cs) { trace.push('kb:code'); return out('info', 'kb', [cs], { state: null }); } }
+    // general retrieval over Sika Australia's own pages
+    if (!pis.length && !advisor.wants(n0)) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
+    if (!pis.length && !advisor.wants(n0) && ((know.signal(n0) && !(advisor.hasKind(n0) && know.weakSignal(n0))) || (know.definitional(n0) && tokens(n0).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2)) && !facets.tile_type.length && !facets.environment.length && !/\b(best|better|good|recommend|suitable|right|ideal|should i)\b/.test(n0)))) { const kr = await know.retrieve(q, n0); if (kr) { trace.push('kb:retrieve'); return out('info', 'kb', [kr], { state: null }); } }
+    // a product fact that sits under a label on the product page (shelf life, temperature limits, mixing ratio, thickness, steps, ...)
+    if (pis.length === 1 && !ambiguous && ['which', 'time', 'safety', 'compat'].includes(intent)) {
+      const at = detectAttr(n); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
+      const okId = at && (intent === 'which' || (['time', 'safety'].includes(intent) ? ['shelf', 'storage', 'service_temp', 'overcoat'].includes(at.id) : !(yn && ['property', 'standards'].includes(at.id))));
+      if (okId) { const sh0 = await shard(pis[0]); if (sh0) { const ac = attrCard(sh0, n, q, at.soft); if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
+    }
     if (intent === 'price') {
       const sh = pis.length ? await shard(pis[0]) : null;
       return out(intent, stage, [C.unknown(q, sh, 'Prices, stock, delivery and warranty terms are not in the documentation I work from, and I will not guess them. Please ask Sika Australia or a stockist.', ['price, stock or warranty'])], { state: pis.length ? st(pis[0]) : null });
@@ -354,10 +393,26 @@ export function createBrain({ load, config } = {}) {
       }
       if (t && t.none) trace.push('tree:none');
     }
+    // best X for Y / what X do you make: products whose own published text documents the fit, never a superlative
+    const srch = !pis.length ? search(n, []) : null; // a descriptive question that the index matches almost word for word ("I need <product description>") keeps the index answer
+    const confident = !!srch && srch.items.length > 0 && srch.items[0].cov >= 0.9 && [...srch.qm.values()].filter((w) => w >= 1).length >= 5 && srch.items[0].score >= 8 && /^(i need|i want|looking for|need|want)\b/.test(n) && !/\b(best|better|recommend\w*|which|list|range|all the|what .* (do|does) .*(make|sell|have|offer))\b/.test(n);
+    if (!pis.length && !confident) {
+      const rel = (() => { let m = null; return (id) => { if (!m) { m = new Map(search(n, []).items.map((it) => [core.P[it.pi].id, it.score])); } return m.get(id) || 0; }; })();
+      const ad = await advisor.advise(q, n, rel);
+      if (ad) {
+        trace.push('advisor');
+        return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad), { state: null });
+      }
+    }
     // stage 3 and 4: index, then facet constraints from the compatibility tags
     const { items, qm } = search(n, []);
     trace.push('index:' + items.length);
-    if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
+    const howto = /^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n) && !/\b(sika|davco|lanko|sikatile)\b/.test(n);
+    const domain = tokens(n).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2));
+    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const kr = await know.retrieve(q, n0, { strict: false }); if (kr) { trace.push('kb:fallback'); return out('info', 'kb', [kr], { state: null }); } }
+    if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ad = await advisor.advise(q, n, null, true); if (ad) { trace.push('advisor:fallback'); return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad), { state: null }); } }
+    if (howto && !items.length || howto && !/\b(adhesive|glue|sealant|silicone|grout|waterproof\w*|membrane|tile|tiles|tiling|screed|level\w*|concrete|primer|epoxy|paint|crack\w*|fill|seal|bond|stick)\b/.test(n)) return out(intent, 'unknown', [C.unknown(q, null, 'I do not have step by step trade instructions for that. I answer about Sika Australia products and business from the published documentation. Please ask Sika Technical Services.', ['instructions'])]);
+    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
     let list = items.slice(0, 30); const ruled = [];
     const condWords = [...new Set(tokens(n))].filter((w) => CONDITION_WORDS.has(w));
     if (condWords.length) { // a named condition (sauna, freezer room, chemical): only products whose own text mentions it, never a keyword guess
@@ -379,7 +434,7 @@ export function createBrain({ load, config } = {}) {
       }).filter(Boolean);
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
-    const top = list.slice(0, 3);
+    const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.5);
     const qset = new Set([...qm.keys()].filter((k) => qm.get(k) >= 1));
     const cards = [];
     for (const it of top) { const sh = await shard(it.pi); if (sh) cards.push(C.productCard(sh, await bestSentence(sh, qset))); }

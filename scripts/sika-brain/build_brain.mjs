@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalise, tokens, stem, STOP, compact } from '../../public/demo/sika-210c0c/assets/brain/text.js';
+import { buildKnow } from './build_know.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PORTAL = process.env.SIKA_PORTAL || path.join(HERE, '..', '..', 'public', 'demo', 'sika-210c0c');
@@ -34,6 +35,7 @@ const addTok = (tok, pi, f) => { let s = post.get(tok); if (!s) post.set(tok, s 
 const P = [], alias = {};
 const GENERIC_NAME = new Set(['adhesive', 'grout', 'primer', 'sealant', 'mastic', 'membrane', 'mortar', 'pack', 'kit', 'compound', 'coating', 'waterproofing', 'tile', 'screed', 'epoxy', 'concrete', 'additive']);
 const aliasTmp = new Map();
+const prefixTmp = new Set();
 function addAlias(a, pi) { if (!a || a.length < 3) return; const s = aliasTmp.get(a) || new Set(); s.add(pi); aliasTmp.set(a, s); }
 
 products.forEach((p, pi) => {
@@ -57,7 +59,12 @@ products.forEach((p, pi) => {
   const variants = new Set([full, noBrand, normalise(p.id.replace(/-/g, ' '))]);
   for (const v of [full, noBrand]) { const w = v.split(' '); while (w.length > 1 && GENERIC_NAME.has(w[w.length - 1])) { w.pop(); variants.add(w.join(' ')); } }
   for (const v of variants) { addAlias(v, pi); addAlias(compact(v), pi); }
+  // a visitor drops the tail of a long name: "sikaflex 11 fc" for Sikaflex-11 FC+, "sikadur 31" for Sikadur-31 CF Normal. Prefixes that carry a digit and stay unique are kept below.
+  // a fused brand word ("Sikafloor Level PRO") is dropped the same way: "level pro"
+  { const w = noBrand.split(' '); if (w.length >= 3 && /^(sika\w+|lanko|davco|sarna\w+)$/.test(w[0])) { const suf = w.slice(1).join(' '); if (suf.length >= 7) prefixTmp.add('\u0001' + suf + '\t' + pi); } }
+  for (const v of [noBrand]) { const w = v.split(' '); for (let k = w.length - 1; k >= (/\d/.test(w[0]) && w[0].length >= 3 ? 1 : 2); k--) { const pre = w.slice(0, k).join(' '); if (/\d/.test(pre) && !GENERIC_NAME.has(w[k - 1])) { prefixTmp.add(pre + '\t' + pi); } } }
 });
+{ const byPre = new Map(); for (const e of prefixTmp) { const [pre0, pi] = e.split('\t'); const pre = pre0.replace('\u0001', ''); const s = byPre.get(pre) || new Set(); s.add(Number(pi)); byPre.set(pre, s); } for (const [pre, set] of byPre) if (set.size <= 3 && !aliasTmp.has(pre)) for (const pi of set) { addAlias(pre, pi); addAlias(compact(pre), pi); } }
 // distinctive single-token aliases are dropped unless the token is unique to one product
 const aliasOut = {};
 for (const [a, set] of aliasTmp) {
@@ -148,6 +155,7 @@ for (const cid of catIds) {
 const rulesSrc = path.join(LANES, 'corrections/rules.json');
 const rules = exists(rulesSrc) ? rd(rulesSrc) : { version: 1, rules: [] };
 wr(path.join(OUT, 'rules.json'), rules);
-const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json' }, bytes: { core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
+const know = buildKnow({ PORTAL, OUT, products });
+const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json', kb: 'kb.json', advisor: 'adv/{slug}.json' }, know: { crawl: know.crawl, pages: know.pages, lines: know.lines, prodLines: know.prodLines }, bytes: { kb: know.kb, adv: know.adv, core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
 wr(path.join(OUT, 'manifest.json'), manifest);
 console.log(JSON.stringify(manifest), 'products from lane:', nLane, 'fallback to k:', nNoK);

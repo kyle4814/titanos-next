@@ -50,7 +50,7 @@ export function checkAnswer(question, ans) {
     for (const n of numbersIn(text)) if (!allowed.has(n)) bad.push(['P1', `${n} in "${text.replace(/\s+/g, ' ').slice(0, 120)}"`]);
     // P5 over the words that are ours (everything except the quoted sentences)
     let ours = [c.title, c.headline, c.handoff && c.handoff.reason, ...(c.lines || []).filter((l) => !l.fact).map((l) => l.label + ' ' + l.text)].filter(Boolean).join(' ');
-    for (const f of c.facts) if (f.sentence) ours = ours.split(f.sentence).join(' ');
+    for (const f of [...c.facts].sort((a, b) => b.sentence.length - a.sentence.length)) if (f.sentence) ours = ours.split(f.sentence).join(' '); // longest first: a short quote can sit inside a longer one
     if (c.product) ours = ours.split(c.product.name).join(' ');
     if (COMPETITORS.test(ours)) bad.push(['P5', 'competitor ' + ours.match(COMPETITORS)[0]]);
     if (/\bsigned\b/i.test(text)) bad.push(['P5', 'signed']);

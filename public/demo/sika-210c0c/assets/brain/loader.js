@@ -4,7 +4,7 @@ export function createLoader({ base = 'data/brain/', fetchJson, seed = {} }) {
   const cache = new Map(Object.entries(seed)); // seed: rel path -> promise already in flight (started before the modules finished loading)
   const get = (rel) => { let p = cache.get(rel); if (!p) { p = Promise.resolve().then(() => fetchJson(base + rel)).catch(() => null); cache.set(rel, p); } return p; };
   return {
-    manifest: () => get('manifest.json'), core: () => get('core.json'), tree: () => get('tree.json'), rules: () => get('rules.json'),
+    manifest: () => get('manifest.json'), kb: () => get('kb.json'), advisor: (cid) => get('adv/' + String(cid).replace(/\//g, '__') + '.json'), core: () => get('core.json'), tree: () => get('tree.json'), rules: () => get('rules.json'),
     product: (id) => get('p/' + encodeURIComponent(id) + '.json'),
     category: (cid) => get('cat/' + String(cid).replace(/\//g, '__') + '.json'),
     spec: (id) => fetchJson('data/specs/' + encodeURIComponent(id) + '.json'),
