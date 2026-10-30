@@ -189,8 +189,8 @@ function compactSections(c) {
     const fit = groups.filter((g) => /^(Documented fit|Primer named|Product)$/.test(g[0].label));
     const pick = (fit.length ? fit : groups.filter((g) => g[0].label === 'Partly documented')).slice(0, 2);
     const partlyOnly = !fit.length;
-    sec.more = rows;
-    sec.rows = pick.map((g) => { const why = g.find((x) => x.quote && x !== g[0]) || g[0]; return { label: g[0].value, value: (partlyOnly ? 'Partly documented, not endorsed. ' : '') + clipAt(why === g[0] ? '' : why.value, 150), productId: g[0].productId, quote: !partlyOnly, source: why.source || g[0].source }; });
+    sec.more = rows; sec.compact = true;
+    sec.rows = pick.map((g) => { const why = g.find((x) => x.quote && x !== g[0]) || g[0]; return { label: g[0].value, value: (partlyOnly ? 'Partly documented, not endorsed. ' : '') + clipAt(why === g[0] ? '' : why.value, 100), productId: g[0].productId, quote: !partlyOnly, source: why.source || g[0].source }; });
     if (!sec.rows.length) sec.rows = rows.slice(0, 2);
   }
 }
@@ -296,7 +296,7 @@ export async function system(ctx) {
         qs.rows.push({ label: `${role}: ${nm}`, value: `Not worked out: ${plain(r0.reason || 'rate not published')}`, source: r0.phrase ? srcOf({ text: r0.phrase, source: r0.source || { url: rec.product_url, doc_type: 'WEB' } }) : null });
       }
     }
-    c.sections.push(qs); c.estimate = true;
+    qs.compact = true; c.sections.push(qs); c.estimate = true;
   } else c.notes.push('Give me an area (for example 20 m2) and I will work out quantities for each step.');
   if (slug) c.topButtons = [{ label: 'Open the keepable system sheet', href: `systems/${slug}/` }];
   c.buttons.push({ label: 'Work out quantities', command: job.area_m2 ? '/calc' : '/calc 20 m2' }, { label: 'Make a project pack', command: '/pack' }, ...afterBtns().slice(0, 2));

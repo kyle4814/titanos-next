@@ -4,6 +4,7 @@ import { route, parseNumbers, parseFacets, COMMANDS } from './parse.js';
 import { buildHandoff } from '../assistant/handoff.js';
 import { findProducts, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
 import * as H from './handlers.js';
+import { selectionLines, silentReason } from './shared.js';
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
@@ -158,8 +159,8 @@ export function createActions(deps) {
     // every card that says "not in the published data" shows the hand-off block itself, not just a button
     if (c.status === 'unknown' && c.handoff && !c.handoffBlock && c.kind !== 'clarify') {
       const prods = (session.products || []).slice(0, 3).map((x) => ({ id: x.id, name: x.name }));
-      const sel = Object.entries(session.facets).filter(([, v]) => v != null && v !== '' && !Array.isArray(v)).map(([k, v]) => `${k}: ${v}`);
-      const miss = c.silentWords && c.silentWords.length ? `The published text I quoted does not mention: ${c.silentWords.join(', ')}.` : (c.notes && c.notes[0]) || 'This is not in the published data I hold.';
+      const sel = selectionLines(session);
+      const miss = silentReason(c.silentWords) || (c.notes && c.notes[0]) || 'This is not in the published data I hold.';
       c.handoffBlock = buildHandoff({ query: session.lastQuestion || text, products: prods, sel, reason: miss, config });
       c.buttons = (c.buttons || []).filter((b) => b.command !== '/handoff');
     }
