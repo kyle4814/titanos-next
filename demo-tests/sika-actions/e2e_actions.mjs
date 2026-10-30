@@ -65,12 +65,20 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   await page.screenshot({ path: `./actions_${W}.png` }).catch(() => {});
   await ctx.close();
 }
-// speech: fallback and a stubbed API
+// speech is OFF by default (the browser speech service sends audio to its vendor): no microphone button unless the address has voice=1
 {
-  const { ctx, page, errs } = await open(1366, 768, { init: () => { delete window.SpeechRecognition; delete window.webkitSpeechRecognition; } });
+  const { ctx, page } = await open(1366, 768, { init: () => { window.SpeechRecognition = class { start() {} stop() {} }; } });
+  await openPanel(page); t('voice: off by default, no microphone button even when the browser has a speech API', (await page.locator('.mic').count()) === 0);
+  await page.fill('#asst-q', '/help'); await page.keyboard.press('Enter'); await page.waitForFunction(() => document.querySelector('.action-card[data-kind=help]'), null, { timeout: 15000 });
+  t('voice: the help card says it is off and why', /Voice input is off in this demo/.test(await page.locator('.action-card[data-kind=help]').last().innerText()));
+  await ctx.close();
+}
+// speech: fallback and a stubbed API (turned on with voice=1)
+{
+  const { ctx, page, errs } = await open(1366, 768, { hash: '#/?voice=1', init: () => { delete window.SpeechRecognition; delete window.webkitSpeechRecognition; } });
   await openPanel(page); await page.click('.mic'); t('speech: clear fallback message when the API is missing', /not available in this browser/.test(await page.locator('.voice-status').innerText()));
   await ctx.close();
-  const c2 = await open(1366, 768, { init: () => { window.SpeechRecognition = class { start() { setTimeout(() => { this.onstart && this.onstart(); this.onresult && this.onresult({ results: [[{ transcript: 'what gloves for Davco Grey One Pot adhesive' }]] }); this.onend && this.onend(); }, 10); } stop() {} }; delete window.webkitSpeechRecognition; } });
+  const c2 = await open(1366, 768, { hash: '#/?voice=1', init: () => { window.SpeechRecognition = class { start() { setTimeout(() => { this.onstart && this.onstart(); this.onresult && this.onresult({ results: [[{ transcript: 'what gloves for Davco Grey One Pot adhesive' }]] }); this.onend && this.onend(); }, 10); } stop() {} }; delete window.webkitSpeechRecognition; } });
   await openPanel(c2.page); await c2.page.click('.mic'); await c2.page.waitForTimeout(300);
   t('speech: transcript lands in the box, not auto-sent', (await c2.page.inputValue('#asst-q')).includes('gloves'));
   await c2.page.keyboard.press('Enter'); await c2.page.waitForFunction(() => document.querySelector('.action-card[data-kind=safety]'), null, { timeout: 15000 }); t('speech: sent question is answered', true);
