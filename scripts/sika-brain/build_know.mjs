@@ -48,6 +48,7 @@ export function buildKnow({ PORTAL, OUT, products, CRAWL }) {
     const add = (l, x) => { x = String(x || '').replace(/[®™]/g, '').replace(/\s+/g, ' ').trim(); if (x.length > 3 && x.length <= 400) prod.push({ p: p.id, n: name, u: p.url, l, x }); };
     for (const s of p.sections || []) for (const it of s.items || []) if (KEEP.test(it.label) || (s.title === 'Sustainability / Certifications / Approvals')) add(it.label, it.text);
     for (const a of [...(p.attributes || []), ...(p.advantages || [])]) if (ATTR.test(a)) add('Published feature', a);
+    for (const s of p.sections || []) if (/\?$/.test(s.title || '')) for (const it of s.items || []) add(s.title, it.text);
     for (const s of p.sections || []) for (const it of s.items || []) if (CODE.test(String(it.text))) { const seg = String(it.text).split(/(?<=[.;])\s+|\s+[\u2022\u00b7]\s+/).find((x) => CODE.test(x)); if (seg) add('Published standard', seg); }
   }
   for (const s of spmLines) { const pr = products.find((q) => q.url === s.u); prod.push({ p: pr ? pr.id : 'sika-spm', n: pr ? String(pr.name).replace(/[®™©]/g, '') : 'Sika', u: s.u, l: 'Published', x: s.x }); }

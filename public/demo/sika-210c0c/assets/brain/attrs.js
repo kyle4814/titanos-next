@@ -22,7 +22,7 @@ export const ATTRS = [
   { id: 'fire', what: 'reaction to fire', q: re('fire|flammab|combustib|burn|fire rating'), labels: re('reaction to fire|fire') },
   { id: 'chem', what: 'chemical resistance', q: re('chemical|acid|resistan|resist (to )?'), labels: re('chemical resistance') },
   { id: 'movement', what: 'movement capability', q: re('movement|elongation|stretch|how flexible'), labels: re('^(movement capability|elongation)$') },
-  { id: 'hardness', what: 'hardness', q: re('hardness|shore'), labels: re('shore|hardness') },
+  { id: 'hardness', what: 'hardness', q: re('hardness|shore|how hard'), labels: re('shore|hardness') },
   { id: 'steps', what: 'application steps', q: re('how (do|to|should|can|would) (i|you|we)? ?(apply|use|install|lay|fix|put on|do it)|application (method|steps|instructions)|apply it|instructions|directions|how is .* applied'), labels: re('^(application|application instructions)$') },
   { id: 'prep', what: 'substrate preparation', q: re('prepar|substrate (prep|quality|condition|needs)|how (do|should) i prep|surface (prep|needs)|what surface'), labels: re('^(substrate preparation|substrate quality|surface preparation)$') },
   { id: 'clean', what: 'cleaning of equipment', q: re('clean(ing)? (the |my |off )?(tools|equipment|brush|trowel|roller)|wash (off|up|out)|remove(d)? (uncured|wet)|clean up'), labels: re('^(cleaning of equipment|removal)$') },
@@ -55,6 +55,8 @@ export function attrCard(sh, n, q, soft) {
     if (a.id === 'app_temp' || a.id === 'thickness') for (const it of sh.d.sec || []) if (/^(application)$/i.test(it.l) && a.id === 'thickness' && /thick|layer|mm/i.test(it.t) && !rows.length) add('Application', it.t);
   }
   const hint = new Set(tokens(n));
+  // a long passage keeps the sentence with the figure in it, not just the one that shares most words with the question
+  for (const r of rows) if (r.text.length > 270) { const segs = r.text.split(/(?<=[.!?])\s+|\s+\|\s+/).filter(Boolean); if (segs.length > 1) { const sc = (g) => tokens(g).filter((t) => hint.has(t)).length + (/\d/.test(g) ? 3 : 0); r.text = segs.reduce((b, g) => (sc(g) > sc(b) ? g : b), segs[0]); } }
   if (!rows.length) {
     // a published question and answer on the same page ("Can I paint over 11 FC+?")
     const qa = faq(sh, n); if (qa) return qa;

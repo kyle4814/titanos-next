@@ -14,8 +14,8 @@ export const KINDS = [
   { id: 'tile_primer', label: 'primers for tiling', q: re('\\b(primer|prime|priming)\\b.*\\b(tile|tiling|adhesive|tiles)|\\b(tile|tiling|tiles)\\b.*\\b(primer|prime|priming)'), cats: [T, FL], sub: re('primers-additives'), name: re('prime|primer'), both: true },
   { id: 'tile_waterproofing', label: 'waterproofing membranes for under tiles', q: re('\\b(waterproof\\w*|membrane|tanking|damp ?proof|leak\\w*|water proof)\\b.*\\b(tile|tiles|tiling|shower|bathroom|laundry|wet area|ensuite|balcon\\w*|pool|spa|bath|floor|kitchen|vanity)\\b|\\b(tile|tiles|tiling|shower|bathroom|laundry|wet area|ensuite|balcon\\w*|pool|bath)\\b.*\\b(waterproof\\w*|membrane|tanking|damp ?proof|water proof)|\\b(put down|go down|goes down|lay|apply)\\b.*\\bbefore\\b.*\\btile'), cats: [T, WP, FL], test: (e) => (e.cat === T && /^waterproofing$/.test(e.sub)) || (e.ev.some((x) => /(before|prior to|under|below|beneath|prior to the application of)( the)?( application of)?( ceramic)? ?(tiles?|tiling|ceramic tiles)|under ?tiles|below tiling/i.test(x.t)) && /waterproof|membrane/i.test(e.n + ' ' + e.tg + ' ' + e.id)) },
   { id: 'level_primer', label: 'primers for levelling compounds', q: re('\\b(prime|primer|priming)\\b.*\\b(level\\w*|screed)|\\b(level\\w*|screed)\\b.*\\b(prime|primer|priming)'), cats: [FL], sub: re('cement-levelling'), name: re('prime|primer'), both: true },
-  { id: 'screed', label: 'screeds and levelling compounds', q: re('\\b(screed\\w*|leveller\\w*|leveler\\w*|levelling|leveling|self[- ]?levell?ing|smoothing compound|underlayment|floor leveller|bulk fill|floor levelling)\\b'), cats: [FL], sub: re('cement-levelling'), notName: re('primer|seal ?tape|sealing membrane|barrier|prime\\b|prep n prime') },
-  { id: 'tile_adhesive', label: 'tile adhesives', q: re('\\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|stone|slate|marble|travertine|splashback|brick slips?)\\b.*\\b(adhesive|glue|mastic|bond|thinset|fix|stick)\\w*|\\b(adhesive|glue|mastic|thinset)\\w*\\b.*\\b(tile|tiles|tiling|porcelain|ceramic|mosaic|stone|splashback)\\b|\\bstick tiles?\\b|\\btile glue\\b|\\btrowel\\b'), cats: [T], sub: re('tile-adhesives'), extra: re('sikaceram-880') },
+  { id: 'screed', label: 'screeds and levelling compounds', q: re('\\buneven (concrete )?(floor|slab)|out of level|undulating floor|\\bwhat do i pour\\b|\\b(screed\\w*|leveller\\w*|leveler\\w*|levelling|leveling|self[- ]?levell?ing|smoothing compound|underlayment|floor leveller|bulk fill|floor levelling)\\b'), cats: [FL], sub: re('cement-levelling'), notName: re('primer|seal ?tape|sealing membrane|barrier|prime\\b|prep n prime') },
+  { id: 'tile_adhesive', label: 'tile adhesives', q: re('\\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|natural stone|stone tiles?|splashback|brick slips?)\\b.*\\b(adhesive|glue|mastic|bond|thinset|fix|stick)\\w*|\\b(adhesive|glue)\\b.*\\bpool\\b|\\b(adhesive|glue|mastic|thinset)\\w*\\b.*\\b(tile|tiles|tiling|porcelain|ceramic|mosaic|stone|splashback)\\b|\\bstick tiles?\\b|\\btile glue\\b|\\btrowel\\b'), cats: [T], sub: re('tile-adhesives'), extra: re('sikaceram-880') },
   { id: 'epoxy_grout', label: 'epoxy grouts', q: re('^(?!.*\\b(tile|tiling|shower|bathroom|kitchen|floor)\\b).*\\bepoxy grout'), cats: [GA, T], sub: re('epoxy-grouts|tile-grouts'), name: re('epoxy|easyepoxy'), both: true },
   { id: 'tile_grout', label: 'tile grouts', q: re('^(?!.*\\b(base ?plate|bolts?|anchor\\w*|machinery|underwater|wind|turbine|non[- ]?shrink|rail|precision)\\b).*\\bgrout'), cats: [T], sub: re('tile-grouts'), notName: re('additive') },
   { id: 'sanitary_sealant', label: 'sealants for bathrooms, kitchens and pools', q: re('\\b(silicone|sealant|seal|caulk\\w*|sealer)\\b.*\\b(shower|bath|bathroom|kitchen|basin|sink|pool|wet|mould\\w*|tiles?|vanity|splashback)\\b|\\b(shower|bath|bathroom|kitchen|basin|sink|pool|vanity)\\b.*\\b(silicone|sealant|caulk\\w*)\\b|\\bwhat silicone\\b'), cats: [SA], sub: re('sanitary-sealants|swimming-pools'), notName: re('rod|foam') },
@@ -30,7 +30,7 @@ export const KINDS = [
   { id: 'contact', label: 'contact and spray adhesives', q: re('\\b(contact adhesive|contact glue|spray adhesive|laminate adhesive|spray glue|contact cement)\\b|\\bspray (contact|glue)\\b|\\bglue (for|to) (laminate|veneer)'), cats: [SA], sub: re('contact-adhesives') },
   { id: 'wood_floor_adhesive', label: 'flooring adhesives', q: re('\\b(timber|wood|wooden|parquet|vinyl|carpet)\\b.*\\b(adhesive|glue|fix\\w*|lay\\w*)|\\b(adhesive|glue)\\b.*\\b(timber|wood|parquet|flooring)\\b'), cats: [FL, SA], sub: re('flooring-adhesives|construction-adhesives') },
   { id: 'ramp_patch', label: 'ramping and patching mortars', q: re('\\b(ramp|patching|patch|loading dock|fast patch)\\b'), cats: [FL, CR], name: re('ramp|patching|rapidscreed|bulk-?fill') },
-  { id: 'accelerator', label: 'concrete accelerators', q: re('\\b(accelerat\\w+|shotcrete|sprayed concrete|quick set)\\b'), cats: [CO], sub: re('accelerators|tunnel') },
+  { id: 'accelerator', label: 'concrete accelerators', q: re('\\b(accelerat\\w+|shotcrete|sprayed concrete|quick set)\\b|speed up (the )?(set|setting|cure|curing)|faster set|set faster|early strength'), cats: [CO], sub: re('accelerators|tunnel') },
   { id: 'surface_retarder', label: 'surface retarders', q: re('\\b(exposed aggregate|surface retarder)\\b'), cats: [CO], sub: re('surface-retarders') },
   { id: 'curing', label: 'curing and evaporation control', q: re('\\b(curing compound|curing membrane|evaporation|cure a (new )?slab|drying too fast|stop .* drying|slab drying)\\b'), cats: [CO], sub: re('evaporation') },
   { id: 'retarder', label: 'concrete retarders and set control', q: re('\\b(retard\\w+|slow (down )?(the )?(pour|set|setting|cure)|slow set|hot weather concrete|extend (the )?(set|working))\\b|\\bhot weather\\b.*\\bconcrete|\\bconcrete\\b.*\\bhot weather'), cats: [CO], sub: re('(^|/)retarders$|water-reducers|evaporation') },
@@ -42,14 +42,17 @@ export const KINDS = [
   { id: 'shrinkage', label: 'shrinkage reducing admixtures', q: re('\\b(shrinkage)\\b'), cats: [CO], sub: re('shrinkage') },
   { id: 'release', label: 'release agents', q: re('\\b(release agent|formwork oil|mould oil|precast mould)\\b'), cats: [CO], sub: re('release-agents') },
   { id: 'repair_mortar', label: 'concrete repair mortars', q: re('\\b(fix|patch|mend)\\b.*\\b(slab|concrete)\\b.*\\bdamaged|\\b(repair mortars?|spall\\w*|patch repair|reprofil\\w+|concrete repair|repair (to |of |a )?concrete|render repair|honeycomb\\w*)\\b|\\brepair\\b.*\\bconcrete\\b'), cats: [CR], sub: re('repair-mortars|steel-reinforc|corrosion') },
+  { id: 'marine', label: 'marine sealants and adhesives', q: re('\\b(boat|yacht|marine|teak|hull|deck seam)\\b'), cats: ['industry/marine'], sub: re('.') },
+  { id: 'auto', label: 'automotive and glass bonding', q: re('\\b(windscreen|windshield|auto glass|car body|panel bonding|caravan|motorhome)\\b'), cats: ['industry/automotive-aftermarket', 'industry/transportation'], sub: re('.') },
   { id: 'green_roof', label: 'green roof and green wall systems', q: re('\\b(green roof|green wall|living roof|roof garden|living wall)\\b'), cats: [LB], sub: re('green-roofs') },
   { id: 'plug', label: 'plugging and stopping leaks', q: re('\\b(plug|plugging)\\b|\\bstop (a |the )?(water )?(leak|leaks|ingress)|\\bactive leak|\\bwater leak (in|through)'), cats: [CR, WP], sub: re('repair-mortars|injections'), name: re('plug|quick|rapid|inject|swell'), both: true },
   { id: 'waterstop', label: 'waterstops and injection systems', q: re('\\b(waterstops?|injection|hydrophilic|swellable|cold joint|construction joint)\\b'), cats: [WP], sub: re('injections|66807') },
   { id: 'crack_repair', label: 'crack repair and sealing', q: re('\\bcracks?\\b.*\\b(repair|fill|seal|fix|inject)\\w*|\\b(repair|fill|seal|fix|inject)\\w*\\b.*\\bcracks?\\b'), cats: [CR, SS, WP], sub: re('epoxy-repair|structural-adhesives|injections'), name: re('crack|sikadur|inject') },
-  { id: 'bonding', label: 'bonding agents and bridging epoxies', q: re('\\b(bonding agent|bond coat|bonding (new|old)|bond(ing)? new .* to old|epoxy bond)\\b|\\bnew (concrete|render|mortar) to old\\b|\\bcrack inject\\w*'), cats: [CR, SS, WP], sub: re('epoxy-repair|steel-reinforc|structural-adhesives|concrete-mortarsadmixtures|injections'), name: re('bondit|latex|sbr|fix|sikadur') },
-  { id: 'resin_floor', label: 'resin flooring', q: re('\\b(epoxy|polyurethane|resin|purcem|anti ?static|esd|conductive|floor coating|floor paint|garage floor|industrial floor)\\b|\\bfloor(ing)?\\b.*\\b(food|warehouse|garage|car ?park|commercial kitchen|factory|abattoir|hospital)\\b'), cats: [FL], sub: re('resin-flooring|floor-sealers'), needFloor: true },
-  { id: 'protective', label: 'protective coatings and silane impregnations', q: re('\\b(silane|anti[- ]?carbonation|protective coating|concrete protection|water repellent|impregnat\\w+)\\b'), cats: [CR], sub: re('protective-coatings|silane') },
+  { id: 'bonding', label: 'bonding agents and bridging epoxies', q: re('\\b(bonding agent|bond coat|bonding (new|old)|bond(ing)? new .* to old|epoxy bond)\\b|\\bnew (concrete|render|mortar) to (an |the )?old\\b|\\b(bond|bonding|join|tie)\\b.*\\bnew\\b.*\\b(old|existing)\\b|\\bcrack inject\\w*'), cats: [CR, SS, WP], sub: re('epoxy-repair|steel-reinforc|structural-adhesives|concrete-mortarsadmixtures|injections'), name: re('bondit|latex|sbr|fix|sikadur') },
   { id: 'anchor', label: 'chemical anchors', q: re('\\b(chemical anchors?|anchor(s|ing)?|resin anchor|rebar fixing|dowel\\w*|threaded rod)\\b'), cats: [GA, SA], sub: re('chemical-anchoring|anchoring-adhesives') },
+  { id: 'floor_sealer', label: 'floor sealers and hardeners', q: re('\\b(dusting|dusts|dust ?proof\\w*|harden\\w*|densif\\w*)\\b.*\\b(floor|slab|concrete)\\b|\\b(floor|slab|concrete)\\b.*\\b(dusting|dusts|dust ?proof|harden|densif)\\w*|\\bfloor sealer\\b|\\bseal(er)? (a |the )?(concrete )?floor\\b'), cats: [FL], sub: re('floor-sealers'), name: re('curehard|seal|harden') },
+  { id: 'resin_floor', label: 'resin flooring', q: re('^(?=.*\\b(floor|floors|flooring|coating)\\b).*\\b(epoxy|polyurethane|resin|purcem|anti ?static|esd|conductive|floor coating|floor paint|garage floor|industrial floor)\\b|\\bfloor(ing)?\\b.*\\b(food|warehouse|garage|car ?park|commercial kitchen|factory|abattoir|hospital)\\b|\\b(commercial kitchen|food|abattoir|factory|warehouse|garage|car ?park|hospital)\\b.*\\bfloor|\\bnon ?slip\\b.*\\b(floor|coating)\\b'), cats: [FL], sub: re('resin-flooring|floor-sealers'), needFloor: true },
+  { id: 'protective', label: 'protective coatings and silane impregnations', q: re('\\b(silane|anti[- ]?carbonation|protective coating|concrete protection|water repellent|impregnat\\w+)\\b'), cats: [CR], sub: re('protective-coatings|silane') },
   { id: 'grout_precision', label: 'cementitious and epoxy grouts', q: re('\\bgrout\\w*\\b.*\\b(base ?plate|bolts?|anchor\\w*|machinery|underwater|wind|turbine|non[- ]?shrink|precision|under)|\\b(non[- ]?shrink|base ?plate|underwater)\\b.*\\bgrout'), cats: [GA], sub: re('cementitious-grouts|epoxy-grouts') },
   { id: 'grout_any', label: 'grouts', q: re('\\bgrout\\w*\\b'), cats: [GA, T], sub: re('grouts') },
   { id: 'bentonite', label: 'bentonite waterproofing', q: re('\\bbentonite\\b'), cats: [WP], name: re('bentonite') },
@@ -60,18 +63,16 @@ export const KINDS = [
   { id: 'torch_on', label: 'torch on roofing membranes', q: re('\\btorch ?on\\b'), cats: [RF], sub: re('torch-on') },
   { id: 'pvc_roof', label: 'PVC roofing membranes', q: re('\\bpvc\\b.*\\b(roof\\w*|sheet|membrane)|\\b(roof\\w*|sheet|membrane)\\b.*\\bpvc\\b'), cats: [RF], sub: re('pvc-sheet-membranes/membranes|pvc-sheet-membranes$|^pvc-sheet-membranes/membranes'), name: re('sarnafil-g') },
   { id: 'roof_wp', label: 'roof waterproofing and roofing', q: re('\\b(roof\\w*|flat roof|torch ?on|pvc roof\\w*|green roof)\\b'), cats: [RF, WP, LB], sub: re('roofing|torch|pvc-sheet|liquid-applied|green-roofs|sheet-membranes') },
-  { id: 'marine', label: 'marine sealants and adhesives', q: re('\\b(boat|yacht|marine|teak|hull|deck seam)\\b'), cats: ['industry/marine'], sub: re('.') },
-  { id: 'auto', label: 'automotive and glass bonding', q: re('\\b(windscreen|windshield|auto glass|car body|panel bonding|caravan|motorhome)\\b'), cats: ['industry/automotive-aftermarket', 'industry/transportation'], sub: re('.') },
-  { id: 'construction_adhesive', label: 'construction adhesives', q: re('\\b(adhesive|glue|bond|nails|stick|fix)\\w*\\b'), cats: [SA], sub: re('construction-adhesives|anchoring-adhesives|wood-work|contact-adhesives|foam') },
+  { id: 'construction_adhesive', label: 'construction adhesives', q: re('\\b(adhesive|glue|bond|nails?|stick|fix)\\w*\\b'), cats: [SA], sub: re('construction-adhesives|anchoring-adhesives|wood-work|contact-adhesives|foam') },
   { id: 'sealant', label: 'sealants', q: re('\\b(sealant|silicone|caulk\\w*|sealent|sealer)\\b|\\b(fill|filling|seal)\\b.*\\bgaps?\\b|\\bgaps?\\b.*\\b(fill|seal)'), cats: [SA], sub: re('facade|expansion|sanitary|curtain|specialty|waterproofing-sealants|roofing-sealants|swimming|paint-prep|passive') },
   { id: 'primer', label: 'primers', q: re('\\b(primer|prime)\\b'), cats: [FL, SA, T], sub: re('primer|cement-levelling|cleaners-activators'), name: re('primer|prime|ultraprime') },
-  { id: 'waterproofing', label: 'waterproofing membranes', q: re('\\b(waterproof\\w*|membrane|tanking|damp ?proof|water proof|water tank|leak\\w*|stop a water leak)\\b'), cats: [WP, RF, T], sub: re('liquid-applied|spray|basement|injections|bridge|mortars|66807|pvc-sheet|waterproofing') },
+  { id: 'waterproofing', label: 'waterproofing membranes', q: re('\\b(waterproof\\w*|membrane|tanking|damp ?proof|water proof|water tank|leak\\w*|stop a water leak)\\b'), cats: [WP, T], sub: re('liquid-applied|spray|basement|injections|bridge|mortars|66807|pvc-sheet|waterproofing') },
   { id: 'admixture', label: 'concrete admixtures', q: re('\\b(admixtures?|additive for concrete|add to concrete|concrete additive|what to add to concrete)\\b'), cats: [CO], sub: re('admixture|special|pre-cast|fibres|surface|shrinkage|pigment') },
 ];
 // conditions: what the visitor says about the job, and the wording a product page would use to document a fit
 export const CONDS = [
   { id: 'class3', label: 'Class III membranes', q: re('class iii'), ev: re('class (iii|3)\\b') },
-  { id: 'large', label: 'large areas', q: re('\\b(big|large|huge|massive|whole|entire|vast|warehouse|industrial|commercial)\\b.*\\b(job|jobs|area|areas|floor|floors|project|projects|site|space|slab|surface|scale)\\b|\\blarge[- ]scale\\b|\\bbig job\\b|\\bbulk\\b|\\bmany (square )?m(etres)?\\b|\\b\\d{3,} ?m2\\b'), ev: re('\\blarge (floor |wall |roof |project |commercial |industrial )?(areas?|scale|surfaces?|projects?|floors?|volume)|\\b(big|extensive|wide) areas?|single application|large[- ]scale|bulk|high output|large open|large (and|or) small'), primary: true },
+  { id: 'large', label: 'large areas', q: re('\\b(big|large|huge|massive|whole|entire|vast|warehouse|industrial|commercial)\\b.*\\b(job|jobs|area|areas|floor|floors|project|projects|site|space|slab|surface|scale)\\b|\\blarge[- ]scale\\b|\\bbig job\\b|\\bbulk\\b|\\bmany (square )?m(etres)?\\b|\\b\\d{3,} ?m2\\b'), ev: re('\\blarge (floor |wall |roof |project |commercial |industrial )?(areas?|scale|surfaces?|projects?|floors?|volume)|\\b(big|extensive|wide) areas?|single application|large[- ]scale|bulk|high output|large open|large (and|or) small'), strong: re('large (floor |wall |roof |project |commercial |industrial )?(areas?|floors?|scale|surfaces?|projects?)|large[- ]scale|(big|extensive|wide) areas?'), primary: true },
   { id: 'pump', label: 'pumping', q: re('\\bpump\\w*\\b'), ev: re('\\bpump') , primary: true },
   { id: 'fast', label: 'fast setting or drying', q: re('\\b(fast|quick|rapid|same day|next day|few days|speedy|quickly|fast track)\\b'), ev: re('\\b(rapid|fast|quick)[- ]?(setting|drying|curing|hardening|cure|dry|set|strength|track)|early (strength|loading|traffic|age)|accelerat|ready for (tiling|covering|traffic) (in|after)|dries (quickly|fast)|walkable|within (\\d+|a few) (hours|days)'), primary: true },
   { id: 'thick', label: 'thick layers', q: re('\\b(thick\\w*|deep|build ?up|high build|over \\d+ ?mm|\\d+ ?mm)\\b'), ev: re('high build|thick|layer thickness|up to \\d+ ?mm|build[- ]?up|deep'), primary: true },
@@ -104,6 +105,8 @@ export const CONDS = [
   { id: 'cracks', label: 'crack repair', q: re('\\bcracks?\\b'), ev: re('crack') },
   { id: 'leak', label: 'stopping leaks', q: re('\\b(leak\\w*|stop a water leak|water ingress)\\b'), ev: re('leak|water ingress|seep|infiltrat|watertight|waterproof|sealing|seal ') },
   { id: 'fire', label: 'fire resistance', q: re('\\bfire\\b'), ev: re('fire') },
+  { id: 'pond', label: 'ponds', q: re('\\bpond\\b'), ev: re('pond') },
+  { id: 'toys', label: 'children and toys', q: re('\\b(kids?|child\\w*|toys?|baby|babies)\\b'), ev: re('\\btoys?\\b|baby|babies|safe for child|child[- ]safe') },
   { id: 'mould', label: 'mould resistance', q: re('\\b(mould\\w*|mold\\w*|fungi|fungal)\\b'), ev: re('mould|mold|fung|bacteri') },
 ];
 const LISTQ = /\b(what|which)\b.*\b(do|does|can)\b.*\b(make|sell|have|offer|stock|supply|produce|provide)\b|\b(list|range of|all the|all|every)\b|\bwhat .* (are there|is there)\b|\bwhat .* (does|do) (sika|davco|you)\b/;
@@ -140,7 +143,9 @@ export function createAdvisor({ load, isWord }) {
   const ORDER = { usage: 0, feature: 1, summary: 2 };
   function evidence(e, cond) {
     const hits = e.ev.filter((x) => cond.ev.test(x.t)).sort((a, b) => (ORDER[a.k] ?? 3) - (ORDER[b.k] ?? 3));
-    return hits.length ? { sentence: sentenceOf(hits[0].t, cond.ev), n: hits.length } : null;
+    if (!hits.length) return null;
+    const sh = cond.strong ? hits.filter((x) => cond.strong.test(x.t)) : hits; const use = sh.length ? sh : hits;
+    return { sentence: sentenceOf(use[0].t, sh.length && cond.strong ? cond.strong : cond.ev), n: hits.length, strong: !cond.strong || sh.length > 0 };
   }
   const pageFact = (e, sentence) => fact({ source_url: e.u, page: null, sentence, doc_type: 'WEB' });
   const handoffTo = (q) => ({ question: q, product: '', reason: 'The data sheets cannot see your site, substrate or conditions, so Technical Services should confirm the fit before you order.', missing: [] });
@@ -167,15 +172,15 @@ export function createAdvisor({ load, isWord }) {
     const short = n.split(' ').length <= 8 && !/^(i need|i want|looking for|need|want)\b/.test(n);
     const links = []; const rows = []; const facts = []; let used = [];
     if (!isList && !conds.length && kwTok.length) {
-      const hit = list.map((e) => ({ e, s: kw(e) })).filter((x) => x.s > 0).sort((x, y) => y.s - x.s || (rel ? rel(y.e.id) - rel(x.e.id) : 0) || (x.e.n < y.e.n ? -1 : 1)).slice(0, 4);
+      const hit = list.map((e) => ({ e, s: kw(e) })).filter((x) => x.s > 0).sort((x, y) => y.s - x.s || (rel ? rel(y.e.id) - rel(x.e.id) : 0) || (x.e.n < y.e.n ? -1 : 1)).slice(0, 3);
       if (hit.length && hit.length < list.length) {
         const items = hit.map(({ e }) => { const ev = kwBest(e); return { e, sentences: [ev ? sentenceOf(ev.t, new RegExp(kwTok.map((t) => t.replace(/[^a-z0-9]/g, '')).filter(Boolean).join('|'), 'i')) : (e.tg || e.ev[0].t)], why: 'your words', th: null }; });
-        const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} that match your words`, headline: 'You did not name a condition for the job, so these are the products in that group whose published text uses your words, in the order of how closely it does. This is not a claim that one is the best. Each card quotes the sentence it rests on.',
+        const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} that match your words`, headline: 'No particular condition was named, so these are the products whose published text uses your words, closest first. This is not a claim that one is the best.',
           lines: [], facts: [fact({ source_url: items[0].e.u, sentence: items[0].sentences[0], doc_type: 'WEB' })], chip: CHIPS.ADVICE, links: items.map((x) => ({ label: x.e.n, url: x.e.u })), handoff: handoffTo(q), followups: items.slice(0, 3).map((x) => `Data sheet for ${x.e.n}`) });
         return { summary, items };
       }
     }
-    if (!force && !isList && !conds.length && !short && !/\b(best|top|better|recommend\w*|good|right|which|what should|ideal|suitable)\b/.test(n)) return null;
+    if (!force && !isList && !conds.length && !short && !/\b(best|top|better|recommend\w*|good|right|which|what should|ideal|suitable)\b|\bwhat (do i|should i|can i|would you|holds?|sticks?|fixes|works|goes)\b|\bhow do i (fix|stick|seal|fill|waterproof|bond|glue|repair)\b/.test(n)) return null;
     if (isList || !conds.length) {
       used = list.slice(0, 14);
       for (const e of used) { const s = e.tg || e.ev[0].t; const f = pageFact(e, clampText(s, null, 240)); facts.push(f); rows.push([e.n, f.sentence]); links.push({ label: e.n, url: e.u }); }
@@ -184,7 +189,7 @@ export function createAdvisor({ load, isWord }) {
       return { summary: c, items: [] };
     }
     // score by documented conditions
-    const scored = list.map((e) => { const got = []; const miss = []; for (const c of conds) { const ev = evidence(e, c); if (ev) got.push({ c, ev }); else miss.push(c); } return { e, got, miss, score: got.length + got.filter((g) => g.c.primary).length * 0.5, hits: got.reduce((s, g) => s + g.ev.n, 0) }; });
+    const scored = list.map((e) => { const got = []; const miss = []; for (const c of conds) { const ev = evidence(e, c); if (ev) got.push({ c, ev }); else miss.push(c); } return { e, got, miss, score: got.reduce((s, g) => s + (g.ev.strong ? 1 : 0.5), 0) + got.filter((g) => g.c.primary && g.ev.strong).length * 0.5, hits: got.reduce((s, g) => s + g.ev.n, 0) }; });
     const needAll = conds.length <= 2 ? 1 : Math.ceil(conds.length / 2);
     let fit = scored.filter((s) => s.got.length >= needAll);
     const bigJob = conds.some((c) => c.id === 'large' || c.id === 'pump' || c.id === 'thick');
@@ -196,20 +201,43 @@ export function createAdvisor({ load, isWord }) {
         handoff: { question: q, product: '', reason: `No product in this group has published text that mentions ${names}. The range is linked here. Please ask Technical Services.`, missing: conds.map((x) => x.label) }, followups: [] });
       return { summary: c, items: [] };
     }
-    const top = fit.slice(0, 4); const critNames = conds.map((c) => c.label).join(', ');
+    const top = fit.slice(0, 3); const critNames = conds.map((c) => c.label).join(', ');
     const items = [];
     for (const s of top) {
       const first = s.got[0]; const ex = s.got.slice(1).map((g) => g.ev.sentence).filter((t) => t !== first.ev.sentence).slice(0, 1);
-      items.push({ e: s.e, sentences: [first.ev.sentence, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null });
+      items.push({ e: s.e, sentences: [first.ev.sentence, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong });
     }
     const lines = [{ label: 'Criterion used', text: bigJob ? `Published text that mentions ${critNames}, then the thickest layer the data sheet gives.` : `How many of these conditions the published text mentions: ${critNames}.` }];
     const notCovered = top.filter((s) => s.miss.length).map((s) => `${s.e.n}: ${s.miss.map((m) => m.label).join(', ')}`);
     if (notCovered.length) lines.push({ label: 'Not stated in the published text', text: notCovered.slice(0, 3).join('; ') });
-    const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} whose published text documents a fit`, headline: 'These are products whose own published text documents a fit for your job, in the order of the criterion below. It is not a claim that one is the best: the data sheets do not say that. Each card quotes the sentence it rests on.',
+    const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} whose published text documents a fit`, headline: 'Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence.',
       lines, facts: [fact({ source_url: items[0].e.u, sentence: items[0].sentences[0], doc_type: 'WEB' })], chip: CHIPS.ADVICE, links: top.map((s) => ({ label: s.e.n, url: s.e.u })), handoff: handoffTo(q), followups: top.slice(0, 3).map((s) => `Data sheet for ${s.e.n}`) });
     return { summary, items };
   }
   const NOFIT = 'No product in this group states a fit for what you asked in its published text, so I will not name one. The range is linked below.';
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-  return { advise, kinds: KINDS, words: () => lexicon(), hasKind: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)); }, wants: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)) && (LISTQ.test(n0) || /\b(best|better|recommend\w*|which|what .* (for|to use))\b/.test(n)); } };
+  // "which has the longest open time / fastest cure": a sort over the published figures, each one cited
+  const NUM = [
+    { rx: /\b(longest|longer|most|extended|long)\b.*\bopen time|\bopen time\b.*\b(longest|longer|most)\b/, field: 'open_time', dir: 'max', label: 'the longest published open time' },
+    { rx: /\b(longest|longer|most|long)\b.*\bpot life|\bpot life\b.*\b(longest|longer|most)\b|\b(longest|most) working time/, field: 'pot_life', dir: 'max', label: 'the longest published pot life' },
+    { rx: /\b(longest|longer|most)\b.*\badjust\w*/, field: 'adjustability_time', dir: 'max', label: 'the longest published adjustability time' },
+    { rx: /\b(fastest|quickest|shortest|rapid)\b.*\b(cure|curing|set|setting|dry|drying|hardening)\b|\bfastest\b/, field: 'cure_times', dir: 'min', label: 'the shortest published cure or set time' },
+    { rx: /\b(fastest|quickest|shortest)\b.*\bskin\w*/, field: 'skin_tack_times', dir: 'min', label: 'the shortest published skin time' },
+  ];
+  const MIN = { s: 1 / 60, sec: 1 / 60, min: 1, mins: 1, minute: 1, minutes: 1, h: 60, hr: 60, hrs: 60, hour: 60, hours: 60, d: 1440, day: 1440, days: 1440, week: 10080, weeks: 10080 };
+  const toMin = (f) => { const p = f.parsed; if (!p || p.model !== 'duration' || p.min == null || !MIN[String(p.unit).toLowerCase()]) return null; return { lo: p.min * MIN[String(p.unit).toLowerCase()], hi: (p.max == null ? p.min : p.max) * MIN[String(p.unit).toLowerCase()] }; };
+  async function rank(q, n0, kindId) {
+    const n = singular(correct(n0)); const spec = NUM.find((x) => x.rx.test(n)); if (!spec) return null;
+    const kind = KINDS.find((k) => k.q.test(n)); if (!kind) return null;
+    const list = await entries(kind); const got = [];
+    for (const e of list) { const sh = await load.product(e.id); const f = sh && sh.tm && (sh.tm[spec.field] || [])[0]; const m = f && toMin(f); if (m) got.push({ e, f, m }); }
+    if (got.length < 2) return null;
+    got.sort((a, b) => (spec.dir === 'max' ? b.m.hi - a.m.hi : a.m.lo - b.m.lo) || (a.e.n < b.e.n ? -1 : 1));
+    const top = got.slice(0, 4);
+    const items = top.map(({ e, f }) => ({ e, sentences: [f.text], facts: [{ source_url: f.s && f.s.u ? f.s.u : e.u, page: f.s ? f.s.p : null, sentence: f.text, status: 'PUBLISHED', doc_type: f.s ? f.s.t : 'WEB', doc_version: f.s ? f.s.v : '' }], why: spec.label, th: null }));
+    const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} ordered by ${spec.label}`, headline: 'These are ordered by the published figure, each quoted from its data sheet. The figures depend on temperature and mix, so check the sheet. It is not a claim that one is the best.', lines: [{ label: 'Criterion used', text: `Ordered by ${spec.label}, taken from each product's own data sheet.` }], facts: [items[0].facts[0]], chip: CHIPS.ADVICE, links: top.map(({ e }) => ({ label: e.n, url: e.u })), handoff: handoffTo(q), followups: top.slice(0, 3).map(({ e }) => `Data sheet for ${e.n}`) });
+    return { summary, items };
+  }
+  const ENVKIND = new Set(['tile_adhesive', 'tile_waterproofing', 'tile_grout', 'screed', 'tile_primer']);
+  return { advise, rank, envAsk: (n0, kindId) => ENVKIND.has(kindId) && !/\b(inside|internal|interior|indoor|outside|outdoor|external|exterior|balcon\w*|terrace|pool|wet|shower|bathroom|laundry|kitchen)\b/.test(n0), kindOf: (n0) => { const n = singular(correct(n0)); const k = KINDS.find((x) => x.q.test(n)); return k ? k.id : null; }, kinds: KINDS, words: () => lexicon(), hasKind: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)); }, wants: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)) && (LISTQ.test(n0) || /\b(best|better|recommend\w*|which|what .* (for|to use))\b/.test(n)); } };
 }

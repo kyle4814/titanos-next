@@ -75,16 +75,41 @@ for (const [q, rx] of [['waterprofing for shower floor', /membrane|waterproof/i]
 r = await ask('srrvice temperature of sikaflex-400 fire');
 t('typo in an attribute word still finds the label or says it is not published', r.a.cards[0].product && r.a.cards[0].product.id === 'sikaflex-400-fire');
 // ---- vague asks: one short question, two to four options, each option answers
-for (const q of ['what do i need for a bathroom', 'something for cracks', 'best stuff for outside', 'waterproofing', 'help with a leak', 'something for the roof']) {
+for (const q of ['what do i need for a bathroom', 'something for cracks', 'best stuff for outside', 'waterproofing', 'help with a leak', 'something for the roof', 'tile adhesive', 'grout', 'screed', 'need help with concrete', 'best stuff for the garage floor']) {
   r = await ask(q); const c = r.a.cards[0]; const n = (c.choices || []).length;
   t('vague "' + q + '": one choose card with 2 to 4 options', r.a.cards.length === 1 && c.type === 'choose' && n >= 2 && n <= 4, JSON.stringify(c.followups));
   let allAnswer = true; for (const o of c.followups || []) { const x = await ask(o); if (x.a.cards[0].type === 'choose' || x.a.cards[0].status === 'UNKNOWN') allAnswer = false; }
   t('vague "' + q + '": every option is answered with products or a page', allAnswer);
 }
+r = await ask('how much adhesive do i need for 15 square metres of 600x600 tiles');
+t('a quantity with no product named gets the documented-fit products, each with a worked quantity that carries its source', r.a.cards[0].type === 'advice' && r.a.cards.filter((c) => c.type === 'calculation').length >= 2 && r.a.cards.filter((c) => c.type === 'calculation').every((c) => c.facts.length && /m2|bag|kg/i.test(cardText(c))), r.txt.slice(0, 200));
+r = await ask('which tile adhesive has the longest open time');
+t('a numeric criterion is a sort over cited published figures', r.a.cards[0].type === 'advice' && /ordered by the longest published open time/.test(r.a.cards[0].title) && r.a.cards.slice(1).every((c) => c.facts[0].sentence && /minute|hour/i.test(c.facts[0].sentence) && /\.pdf/.test(c.facts[0].source_url)), r.txt.slice(0, 200));
+// ---- multi-turn: follow-ups to a best-X answer, ordinals, assumptions named
+{ let st = null; const turn = async (q) => { const a = await b.ask(q, st); st = a.state || st; return { a, txt: a.cards.map(cardText).join('\n') }; };
+  let x = await turn('best adhesive for large format tiles');
+  t('follow-up: first answer names an assumption about inside or outside with a one-tap switch', x.a.cards[0].lines.some((l) => l.label === 'Assumption') && x.a.cards[0].followups.some((f) => /external/.test(f)), JSON.stringify(x.a.cards[0].lines));
+  x = await turn('and for outside?');
+  t('follow-up: "and for outside?" re-asks the same job for outside', x.a.cards[0].type === 'advice' && /exterior|external|outdoor/i.test(x.txt), x.txt.slice(0, 200));
+  x = await turn('tell me more about the first one');
+  t('follow-up: "the first one" is the first product of the last answer', x.a.cards[0].type === 'product');
+  const first = x.a.cards[0].product.id; x = await turn('what about the second one');
+  t('follow-up: "the second one" is a different product from the first', x.a.cards[0].type === 'product' && x.a.cards[0].product.id !== first); }
+// ---- ambiguity on a range name, and failures needing a site look
+r = await ask('can i put sikaflex over old silicone');
+t('a range name alone gets one clarifying question with 2 to 4 products', r.a.cards.length === 1 && r.a.cards[0].type === 'choose' && r.a.cards[0].choices.length >= 2 && r.a.cards[0].choices.length <= 4);
+r = await ask('my tiles are lifting in the kitchen what could have caused it');
+t('a fault diagnosis is declined with the Technical Services hand-off', r.a.cards[0].status === 'UNKNOWN' && !!r.a.cards[0].handoff);
+r = await ask('what does self levelling mean');
+t('a term the data sheet defines is quoted from the data sheet', /highly fluid/.test(r.txt) && r.a.cards[0].facts.length >= 1);
+r = await ask('wich adhesive fr 900x900 porclain on a wal');
+t('heavy typos still reach the adhesive range', r.a.cards.some((c) => /adhesive|mastic|sikatile|davco/i.test(c.title + ' ' + (c.product ? c.product.id : ''))), r.txt.slice(0, 200));
+// ---- trade terms Sika does not define in one place
+for (const q of ['what is pot life', 'what is open time', 'what does adjustability time mean']) { r = await ask(q); const c = r.a.cards[0]; t('term "' + q + '": says there is no general definition and offers products that publish the figure', c.type === 'choose' && /no general definition/.test(c.headline) && c.choices.length >= 2); const x = await ask(c.followups[0]); t('term "' + q + '": the first option answers with a published figure', x.a.cards[0].type === 'time' && x.a.cards[0].status === 'PUBLISHED', x.txt.slice(0, 160)); }
 // ---- out of scope
 for (const q of ['what is the weather today', 'is mapei better than davco', 'who is the prime minister', 'asdfgh']) { r = await ask(q); t('out of scope declined: ' + q, r.a.cards.every((c) => c.status === 'UNKNOWN') && !/mapei/i.test(r.txt), r.txt); }
 // ---- the bank gate
-const bank = JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'bank.json'), 'utf8')).concat(JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'blind2.json'), 'utf8')));
+const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
 const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
 for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel); if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
 t(`bank (${bank.length} questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));

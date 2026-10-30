@@ -7,7 +7,7 @@ import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schem
 import * as C from './cards.js';
 import { createKnow } from './know.js';
 import { applySlang } from './slang.js';
-import { vagueCard } from './vague.js';
+import { vagueCard, termCard } from './vague.js';
 import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
 
@@ -55,7 +55,7 @@ const DOC_TYPES = [
   ['system_data_sheet', /\bsystem data\b/, 'System data sheet'],
 ];
 const TIME_KIND = [
-  ['open_time', /\b(open time|open|working time)\b/], ['adjustability_time', /\b(adjust|adjustability|reposition)\b/], ['pot_life', /\b(pot life|potlife|pot)\b/], ['skin_tack_times', /\b(skin|tack)\b/],
+  ['open_time', /\b(open time|open|working time)\b/], ['adjustability_time', /\b(adjust|adjustability|reposition)\b/], ['pot_life', /\b(pot life|potlife|pot)\b/], ['skin_tack_times', /\b(skins?|skinning|skin over|tack)\b/],
   ['recoat_times', /\b(recoat|re coat|overcoat|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
 ];
 
@@ -226,13 +226,21 @@ export function createBrain({ load, config } = {}) {
     return { leaf, tree: t, key, rulesTable: tree.rules };
   }
 
-  const adviceCards = (ad) => {
+  const adviceCards = (ad, q0, n0, notes) => {
     const cards = [ad.summary];
+    if (ad.summary.status === 'PUBLISHED') {
+      for (const nt of notes || []) ad.summary.lines.push({ label: /^assumed/.test(nt.cite) ? 'Assumption' : 'I read your words as', text: /^assumed/.test(nt.cite) ? nt.to : `"${nt.from}" as ${nt.to}` });
+      const kid = advisor.kindOf(n0);
+      if (advisor.envAsk(n0, kid) && !/ordered by/.test(ad.summary.title)) { ad.summary.lines.push({ label: 'Assumption', text: 'You did not say if the job is inside or outside, so I have not narrowed by that. Tap to switch.' }); ad.summary.followups = [`${q0} for an internal job`, `${q0} for an external job`].concat(ad.summary.followups).slice(0, 4); }
+    }
     for (const it of ad.items) {
-      const pseudo = { id: it.e.id, n: it.e.n, u: it.e.u, d: { t: it.e.tg, s: '', pk: it.e.pk } };
-      const c = C.productCard(pseudo, it.sentences[0], 'Published text mentions: ' + it.why);
-      c.facts = it.sentences.map((s) => ({ source_url: it.e.u, page: null, sentence: s, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' })).concat(c.facts.slice(1)); c.source = c.facts[0]; c.headline = it.e.tg || '';
-      c.lines = [{ label: 'The published text says', text: it.sentences[0] }].concat(it.th ? [{ label: 'Layer thickness', text: it.th.t }] : []); if (it.th) c.facts.push({ source_url: it.e.u, page: null, sentence: it.th.t, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' });
+      const pseudo = { id: it.e.id, n: it.e.n, u: it.e.u, d: { t: it.e.tg, s: '', pk: '' } };
+      const c = C.productCard(pseudo, it.sentences[0], null);
+      const mk = (sentence, url, page, dt, dv) => ({ source_url: url, page: page == null ? null : page, sentence, status: 'PUBLISHED', doc_type: dt || 'WEB', doc_version: dv || '' });
+      c.facts = it.facts ? it.facts.map((f) => mk(f.sentence, f.source_url, f.page, f.doc_type, f.doc_version)) : it.sentences.map((x) => mk(x, it.e.u));
+      if (it.th) c.facts.push(mk(it.th.t, it.e.u));
+      c.source = c.facts[0]; c.headline = ''; c.lines = it.weak ? [{ label: 'Partly relevant', text: 'Only part of your question is covered by this published text.' }] : [];
+      c.chip = c.facts[0].doc_type === 'PDS' ? CHIPS.DATASHEET : CHIPS.PAGE;
       c.followups = [`Data sheet for ${it.e.n}`, `Coverage of ${it.e.n}`]; cards.push(c);
     }
     return cards;
@@ -250,7 +258,7 @@ export function createBrain({ load, config } = {}) {
     trace.push('rules:' + (rule ? 'hit' : 'miss'));
     if (rule) return out('rule', 'rules', [C.ruleCard(rule)]);
     const slang = applySlang(normalise(q)); const n0 = correctWords(slang.text); if (slang.notes.length) trace.push('slang:' + slang.notes.map((x) => x.from + '>' + x.to).join(','));
-    { const vc = vagueCard(n0); if (vc) { trace.push('vague'); return out('vague', 'clarify', [vc], { followups: vc.followups }); } }
+    { const vc = vagueCard(n0) || termCard(n0); if (vc) { trace.push('vague'); return out('vague', 'clarify', [vc], { followups: vc.followups }); } }
     // product mentions: exact, then fuzzy
     let mentions = findExact(n0); let stage = 'exact';
     if (!mentions.length) { mentions = fuzzyAliases(n0); stage = mentions.length ? 'fuzzy' : 'index'; }
@@ -262,11 +270,21 @@ export function createBrain({ load, config } = {}) {
     const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
     const facets = parseFacets(n); let intent = classify(n, facets.area != null);
     if (intent === 'calc' && /\bpallets?\b/.test(n)) intent = 'which';
+    if (['which', 'compat', 'time', 'rate'].includes(intent) && /\bor\b.*\bwhich\b|\bwhich (one|is better|should i)\b|\bsame (thing|as|product)\b/.test(n0) && mentions.filter((m) => m.pis.length === 1).length >= 2) intent = 'compare';
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
     // a follow-up ("and its SDS?") keeps the last product
+    // a follow-up to a "best X for Y" answer: "and for outside?", "what about the second one?", "tell me more about the first"
+    if (state && state.advice && !pis.length && !advisor.hasKind(n0) && (/^(and |also |what about |how about |but |or |ok |okay |now )/.test(n0) || tokens(n0).length <= 5)) {
+      const ord = /\b(first|1st|top|number one|that one|the first one)\b/.test(n0) ? 0 : /\b(second|2nd|number two)\b/.test(n0) ? 1 : /\b(third|3rd)\b/.test(n0) ? 2 : /\b(last|fourth|4th)\b/.test(n0) ? 3 : -1;
+      if (ord >= 0 && state.advice.ids[ord] && pIndex.has(state.advice.ids[ord])) { const sh = await shard(pIndex.get(state.advice.ids[ord])); trace.push('followup:ordinal'); return out('product', 'followup', [C.productCard(sh, sh.d.t, null, true)], { state: { productId: sh.id, intent: 'which', advice: state.advice } }); }
+      const merged = state.advice.n + ' ' + n0.replace(/^(and |also |what about |how about |but |or |ok |okay |now )/, '');
+      const rel2 = (() => { let m = null; return (id) => { if (!m) m = new Map(search(merged, []).items.map((it) => [core.P[it.pi].id, it.score])); return m.get(id) || 0; }; })();
+      const ad2 = await advisor.advise(q, merged, rel2, true);
+      if (ad2) { trace.push('followup:advice'); return out(ad2.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad2, q, merged, []), { state: { advice: { n: merged, ids: ad2.items.map((x) => x.e.id) } } }); }
+    }
     const stateOk = state && state.productId && pIndex.has(state.productId);
     const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
     if (intent === 'compat' && pis.length === 1 && !ambiguous && /^(what is|what are|what s|whats|tell me about|describe)\b/.test(n0)) intent = 'which';
@@ -275,23 +293,29 @@ export function createBrain({ load, config } = {}) {
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
     if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there|i need|i want|need|looking for|show me|something)\b/.test(n)) intent = 'which';
     if (!pis.length && intent === 'compat') intent = 'which';
+    if (!pis.length && !know.signal(n0) && (['compat', 'time', 'rate', 'calc', 'safety', 'document', 'spec'].includes(intent) || /^(can|could|is|will|does|would|do|how long|how much)\b/.test(n0))) {
+      const fam = /\b(sikaflex|sikafloor|sikadur|sikagard|sikalastic|sikatile|sikabond|sikaseal|sikagrout|sikaproof|sikaswell|sikasil)\b/.exec(n0);
+      if (fam) { const list = core.P.filter((p) => normalise(p.n).startsWith(fam[1])).slice(0, 4); if (list.length >= 2) { const opts = list.map((p) => q.replace(new RegExp(fam[1], 'i'), p.n)); trace.push('family:' + fam[1]); return out(intent, 'family', [C.chooseCard(`Which ${fam[1]} product?`, `${fam[1]} is a range, and the answer depends on the product. Pick one.`, opts, [], list.map((p) => p.n))], { state: null }); } }
+    }
     const namedAll = pis.length && !ambiguous;
     const st = (pi) => ({ productId: core.P[pi].id, intent });
 
     if (/\b(who (owns|owned|founded|runs)|who is the (ceo|owner|boss|founder)|\bceo\b|shareholders?|share price|stock price|annual revenue|turnover|annual report|parent company)\b/.test(n0) && !pis.length) return out('company', 'unknown', [C.unknown(q, null, 'Facts about who owns or runs the company are not in the product and site documentation I work from, and I will not guess them. Please ask Sika Australia.', ['company facts'])], { state: null });
     if (/\b(recommend|find|know|suggest)\b.*\b(tiler|plumber|builder|installer|contractor|electrician|tradie|applicator)\b.*\b(in|near|around)\b|\b(tiler|plumber|builder|installer|electrician) (in|near) [a-z]+/.test(n0) && !/\b(sika|davco|lanko)\b/.test(n0)) return out('oos', 'unknown', [C.unknown(q, null, 'I do not recommend tradespeople or installers. I answer about Sika Australia products and business from the published documentation. Please ask Sika Australia.', ['installer recommendation'])], { state: null });
     if (/\b(meaning of life|(what is|whats|how is) the weather|weather (today|tomorrow|forecast|report)|joke|poem|recipe|horoscope|footy|football|cricket|movie|song lyrics|bitcoin|calories|president|prime minister|capital of|dating|homework|what time is it|news|election)\b/.test(n0) && !pis.length) return out('oos', 'unknown', [C.unknown(q, null, 'That is outside what I can help with. I answer about Sika Australia products and business from the published documentation.', ['topic'])], { state: null });
+    if (/\b(what (could|might|would) (have )?(caused?|be causing)|what caused|why (is|are|do|does|did) (my|the))\b/.test(n0) && /\b(lifting|lift|cracking|cracks|peeling|failing|hollow|drummy|popping|bubbling|stain\w*|mould|leaking|efflorescence|debonding|coming off|loose)\b/.test(n0) && !pis.length) return out('diagnosis', 'unknown', [C.unknown(q, null, 'Working out why something failed needs a look at the job, which I cannot do. I answer from the published documentation. Please ask Sika Technical Services with photos and the products used.', ['diagnosis'])], { state: null });
+    if (/\b(what|which) order\b|\border do i do\b|\bsequence of\b/.test(n0) && !pis.length) return out('process', 'unknown', [C.unknown(q, null, 'The order of work for a full job is in the system data sheets and needs the exact substrate and use. Tell me the tile, the surface and the room and I will give the published system, or ask Technical Services.', ['order of work'])], { state: null });
     if (intent === 'other_brand') return out(intent, 'unknown', [C.unknown(q, null, 'I only answer about Sika Australia products, from their published documentation. I do not compare with other brands or comment on them.', ['a comparison'])]);
     // company and site questions that have a published home (contact, where to buy, warranty portal, training, careers, document libraries)
     if (!pis.length || know.signal(n0)) { const tp = await know.topic(q, n0); if (tp) { trace.push('kb:topic'); return out('info', 'kb', [tp], { state: null }); } }
     if (!pis.length && !/^(i need|i want|looking for)\b/.test(n0)) { const cs = await know.codeSearch(q, n0, { kind: advisor.hasKind(n0) }); if (cs) { trace.push('kb:code'); return out('info', 'kb', [cs], { state: null }); } }
     // general retrieval over Sika Australia's own pages
-    if (!pis.length && !advisor.wants(n0)) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
+    if (!pis.length) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0), advisor.wants(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
     if (!pis.length && !advisor.wants(n0) && ((know.signal(n0) && !(advisor.hasKind(n0) && know.weakSignal(n0))) || (know.definitional(n0) && tokens(n0).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2)) && !facets.tile_type.length && !facets.environment.length && !/\b(best|better|good|recommend|suitable|right|ideal|should i)\b/.test(n0)))) { const kr = await know.retrieve(q, n0); if (kr) { trace.push('kb:retrieve'); return out('info', 'kb', [kr], { state: null }); } }
     // a product fact that sits under a label on the product page (shelf life, temperature limits, mixing ratio, thickness, steps, ...)
     if (pis.length === 1 && !ambiguous && ['which', 'time', 'safety', 'compat'].includes(intent)) {
       const at = detectAttr(n); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
-      const okId = at && (intent === 'which' || (['time', 'safety'].includes(intent) ? ['shelf', 'storage', 'service_temp', 'overcoat'].includes(at.id) : !(yn && ['property', 'standards'].includes(at.id))));
+      const okId = at && (intent === 'which' || (['time', 'safety'].includes(intent) ? ['shelf', 'storage', 'service_temp', 'overcoat', 'hardness'].includes(at.id) : !(yn && ['property', 'standards'].includes(at.id))));
       if (okId) { const sh0 = await shard(pis[0]); if (sh0) { const ac = attrCard(sh0, n, q, at.soft); if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
     }
     if (intent === 'price') {
@@ -305,6 +329,11 @@ export function createBrain({ load, config } = {}) {
     let needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
     const explicitAsk = /^(how long|how much|how many|what is the (coverage|consumption|cure|curing|open|pot|recoat)|coverage|consumption|sds|msds|pds|data ?sheet|safety data|datasheet|can i use|is it suitable)/.test(n);
     if (needsProduct && !pis.length && !explicitAsk) { intent = 'which'; needsProduct = false; }
+    if (intent === 'calc' && !pis.length && facets.area != null) { // "how much adhesive for 15 m2 of 600x600 tiles": the products whose own text documents the fit, each with its worked quantity
+      const rel3 = (() => { let m = null; return (id) => { if (!m) m = new Map(search(n, []).items.map((it) => [core.P[it.pi].id, it.score])); return m.get(id) || 0; }; })();
+      const ad3 = await advisor.advise(q, n, rel3, true);
+      if (ad3 && ad3.items.length) { ad3.summary.lines = []; ad3.summary.handoff = null; ad3.summary.followups = []; ad3.summary.headline = 'No product was named, so these are the products whose own published text documents a fit, with the quantity worked out from each one\'s published rate. Not a claim that one is the best.'; const cards = [ad3.summary]; for (const it of ad3.items.slice(0, 2)) { const sh = await load.product(it.e.id); if (sh) cards.push(C.calcCard(sh, facets.area, q)); } trace.push('calc:advisor'); return out('calc', 'advisor', cards, { state: { advice: { n, ids: ad3.items.map((x) => x.e.id) } } }); }
+    }
     if (needsProduct && !pis.length && explicitAsk) {
       // name the products that fit and let the visitor pick: never guess one
       const { items } = search(n, []);
@@ -320,7 +349,7 @@ export function createBrain({ load, config } = {}) {
       const s = st(pis[0]);
       if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q)], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
-      if (intent === 'time') { const kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q); if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
+      if (intent === 'time') { let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q); if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
       if (intent === 'safety') return out(intent, stage, [C.safetyCard(sh, n, q)], { state: s });
       if (intent === 'document') { const want = DOC_TYPES.filter(([, rx]) => rx.test(n)); const types = want.length ? want : [DOC_TYPES[1], DOC_TYPES[0]]; const cards = []; for (const [ty, , label] of types) { const docs = (sh.dc || []).filter((d) => d.ok && (d.ty === ty)); if (docs.length) cards.push(C.documentCard(sh, docs, label)); } if (!cards.length) cards.push(C.unknown(q, sh, `No ${types.map((t) => t[2].toLowerCase()).join(' or ')} is published for this product.`, types.map((t) => t[2]))); return out(intent, stage, cards, { state: s }); }
       if (intent === 'spec') {
@@ -398,10 +427,10 @@ export function createBrain({ load, config } = {}) {
     const confident = !!srch && srch.items.length > 0 && srch.items[0].cov >= 0.9 && [...srch.qm.values()].filter((w) => w >= 1).length >= 5 && srch.items[0].score >= 8 && /^(i need|i want|looking for|need|want)\b/.test(n) && !/\b(best|better|recommend\w*|which|list|range|all the|what .* (do|does) .*(make|sell|have|offer))\b/.test(n);
     if (!pis.length && !confident) {
       const rel = (() => { let m = null; return (id) => { if (!m) { m = new Map(search(n, []).items.map((it) => [core.P[it.pi].id, it.score])); } return m.get(id) || 0; }; })();
-      const ad = await advisor.advise(q, n, rel);
+      const ad = (await advisor.rank(q, n, null)) || (await advisor.advise(q, n, rel));
       if (ad) {
         trace.push('advisor');
-        return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad), { state: null });
+        return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad, q, n0, slang.notes), { state: { advice: { n: n, ids: ad.items.map((x) => x.e.id) } } });
       }
     }
     // stage 3 and 4: index, then facet constraints from the compatibility tags
@@ -410,7 +439,7 @@ export function createBrain({ load, config } = {}) {
     const howto = /^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n) && !/\b(sika|davco|lanko|sikatile)\b/.test(n);
     const domain = tokens(n).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2));
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const kr = await know.retrieve(q, n0, { strict: false }); if (kr) { trace.push('kb:fallback'); return out('info', 'kb', [kr], { state: null }); } }
-    if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ad = await advisor.advise(q, n, null, true); if (ad) { trace.push('advisor:fallback'); return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad), { state: null }); } }
+    if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ad = await advisor.advise(q, n, null, true); if (ad) { trace.push('advisor:fallback'); return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad, q, n0, slang.notes), { state: { advice: { n: n, ids: ad.items.map((x) => x.e.id) } } }); } }
     if (howto && !items.length || howto && !/\b(adhesive|glue|sealant|silicone|grout|waterproof\w*|membrane|tile|tiles|tiling|screed|level\w*|concrete|primer|epoxy|paint|crack\w*|fill|seal|bond|stick)\b/.test(n)) return out(intent, 'unknown', [C.unknown(q, null, 'I do not have step by step trade instructions for that. I answer about Sika Australia products and business from the published documentation. Please ask Sika Technical Services.', ['instructions'])]);
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
     let list = items.slice(0, 30); const ruled = [];

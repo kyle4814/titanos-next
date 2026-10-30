@@ -36,6 +36,7 @@ const P = [], alias = {};
 const GENERIC_NAME = new Set(['adhesive', 'grout', 'primer', 'sealant', 'mastic', 'membrane', 'mortar', 'pack', 'kit', 'compound', 'coating', 'waterproofing', 'tile', 'screed', 'epoxy', 'concrete', 'additive']);
 const aliasTmp = new Map();
 const prefixTmp = new Set();
+const ownerTmp = new Map(); // alias text -> products whose real name (with or without the brand) it is
 function addAlias(a, pi) { if (!a || a.length < 3) return; const s = aliasTmp.get(a) || new Set(); s.add(pi); aliasTmp.set(a, s); }
 
 products.forEach((p, pi) => {
@@ -59,6 +60,7 @@ products.forEach((p, pi) => {
   const variants = new Set([full, noBrand, normalise(p.id.replace(/-/g, ' '))]);
   for (const v of [full, noBrand]) { const w = v.split(' '); while (w.length > 1 && GENERIC_NAME.has(w[w.length - 1])) { w.pop(); variants.add(w.join(' ')); } }
   for (const v of variants) { addAlias(v, pi); addAlias(compact(v), pi); }
+  for (const v of [full, noBrand]) { const s = ownerTmp.get(v) || new Set(); s.add(pi); ownerTmp.set(v, s); }
   // a visitor drops the tail of a long name: "sikaflex 11 fc" for Sikaflex-11 FC+, "sikadur 31" for Sikadur-31 CF Normal. Prefixes that carry a digit and stay unique are kept below.
   // a fused brand word ("Sikafloor Level PRO") is dropped the same way: "level pro"
   { const w = noBrand.split(' '); if (w.length >= 3 && /^(sika\w+|lanko|davco|sarna\w+)$/.test(w[0])) { const suf = w.slice(1).join(' '); if (suf.length >= 7) prefixTmp.add('\u0001' + suf + '\t' + pi); } }
@@ -68,6 +70,7 @@ products.forEach((p, pi) => {
 // distinctive single-token aliases are dropped unless the token is unique to one product
 const aliasOut = {};
 for (const [a, set] of aliasTmp) {
+  { const own = ownerTmp.get(a) || ownerTmp.get(Object.keys(aliasOut).length ? a : a); if (own && own.size === 1 && set.size > 1) { const only = [...own][0]; set.clear(); set.add(only); } } // a real product name beats the same words left over from a longer name ("Level Pro" vs "Level Pro Primer")
   const toks = a.split(' ');
   if (toks.length === 1 && !/\d/.test(a) && (a.length < 5 || GENERIC_NAME.has(a) || set.size > 1)) { if (set.size > 1 || a.length < 5 || GENERIC_NAME.has(a)) continue; }
   aliasOut[a] = [...set];

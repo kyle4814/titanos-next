@@ -1,0 +1,1063 @@
+[
+ {
+  "persona": "diy home owner",
+  "category": "bathroom",
+  "q": "hi mate doing a bathroom reno, 600x1200 porcelain going on a concrete floor, what adhesive should i use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w001"
+ },
+ {
+  "persona": "tiler",
+  "category": "bathroom",
+  "q": "client wants large format tiles on the shower wall, plasterboard behind, what adhesive and do i need a membrane first",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w002"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "bathroom",
+  "q": "my shower leaks at the hob what do i do",
+  "type": "business",
+  "exp": {
+   "url": "leaking-shower|aus.sika.com",
+   "must": ""
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w003"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "bathroom",
+  "q": "need to regrout the shower and the old grout is cactus, what should i use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts",
+    "c:tile-care-and-cleaners"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w004"
+ },
+ {
+  "persona": "tiler",
+  "category": "bathroom",
+  "q": "is there a one tub adhesive and grout for wall tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w005"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "bathroom",
+  "q": "what do i seal around the bath after tiling, and what do i use before tiling",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w006"
+ },
+ {
+  "persona": "tiler",
+  "category": "pool",
+  "q": "pool deck about 300 square metres outside, what waterproofing and adhesive would you use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w007"
+ },
+ {
+  "persona": "tiler",
+  "category": "pool",
+  "q": "what adhesive can go in a pool that is always wet",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w008"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "balcony",
+  "q": "balcony above a bedroom, tiled, keeps leaking at the door threshold, what membrane do i use",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w009"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "planter",
+  "q": "need to waterproof a concrete planter box",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection",
+    "c:tile-stone-installationsystems/waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w010"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "water tank",
+  "q": "which of your products suits a potable water tank",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection",
+    "c:grouts-anchoring",
+    "c:flooring",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w011"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "need a rapid set screed, timber floor has to go down in 48 hours",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w012"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "old concrete floor in a cafe, bumpy, tiles going over it next week, what do i pour",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w013"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "how thick can i pour sikafloor level ultra in one go",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-level-ultra",
+   "label": "thickness"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w014"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "do i need a primer before level pro on concrete",
+  "type": "compat",
+  "exp": {
+   "product": "sikafloor-level-pro",
+   "verdict": "any"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w015"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "can i put a leveller over old vinyl tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems",
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w016"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "is sikaflex 11fc ok for expansion joints in a concrete driveway",
+  "type": "compat",
+  "exp": {
+   "product": "sikaflex-11-fc-purform",
+   "alt": [
+    "1671"
+   ],
+   "verdict": "any"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w017"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "can i put sikaflex over old silicone",
+  "type": "vague",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w018"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "what do i use to seal around a window frame on a brick house, needs to take movement",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w019"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "we need a fire rated seal for cable penetrations in a concrete slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w020"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "gap under the skirting is about 10mm what do i fill it with",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w021"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "bonding a stone benchtop to cabinet, heavy, what adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w022"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "what holds a 2m mirror on a plastered wall without nails",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w023"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "need to glue down a timber floor over concrete, what product and how much per square metre",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:flooring/flooring-adhesivessystems"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w024"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "pouring a 40 m3 slab in summer in qld, what admixture do you recommend to keep it workable",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w025"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "do you have something to speed up the set for a cold morning pour",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w026"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "what should i put in a driveway slab to stop shrinkage cracking",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w027"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "pump mix is stiff, how do i make it flow without adding water",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w028"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "balcony slab has spalled and rebar is showing, what repair mortar and what do i put on the steel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w029"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "need to bond new concrete to an old slab, what do i brush on first",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:grouts-anchoring",
+    "c:structural-strengthening",
+    "c:flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w030"
+ },
+ {
+  "persona": "concreter",
+  "category": "repair",
+  "q": "cracks in a basement wall that weep when it rains",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w031"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "fixing a handrail post into a concrete slab edge what anchor resin",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w032"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "grouting under a steel column base plate, 30mm gap",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w033"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "commercial kitchen floor needs to be non slip and washdown, what coating",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w034"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "warehouse concrete floor is dusting, want to seal and harden it",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:concrete"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w035"
+ },
+ {
+  "persona": "builder",
+  "category": "flooring",
+  "q": "carpark deck coating that handles traffic and is waterproof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w036"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "tin roof is rusty and leaking, want something to paint on",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w037"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "flat roof over a living area, torch on or liquid, what do you have",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w038"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "i need an epd for a membrane for green star credits",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w039"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "what standard does the davco k10 plus meet for waterproofing",
+  "type": "doc",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w040"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "does the sikatile 400 evo pro meet c2 s1",
+  "type": "attr",
+  "exp": {
+   "product": "sikatile-400-evopro",
+   "label": "standard"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w041"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "can you send me the sds for sikaflex pro 3 and the pds",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-pro-3-purform"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w042"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "what is the compressive strength of sikagrout 212 hp",
+  "type": "attr",
+  "exp": {
+   "product": "sikagrout-212-hpau",
+   "label": "compressive"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w043"
+ },
+ {
+  "persona": "distributor",
+  "category": "dist",
+  "q": "customer asking if davco k10 plus and sikatile 110 secure proof are the same thing",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-plus",
+    "sikatile-110-secureproof"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w044"
+ },
+ {
+  "persona": "distributor",
+  "category": "dist",
+  "q": "what size bag does level pro come in and how many on a pallet",
+  "type": "attr",
+  "exp": {
+   "product": "sikafloor-level-pro",
+   "label": "packag"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w045"
+ },
+ {
+  "persona": "distributor",
+  "category": "dist",
+  "q": "do you have a trade price list",
+  "type": "nodata",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w046"
+ },
+ {
+  "persona": "distributor",
+  "category": "dist",
+  "q": "who is my sika rep in queensland",
+  "type": "nodata",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w047"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "customer wants to know how long until they can walk on level top",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-level-top"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w048"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "tiler on the phone asks open time for sikatile 400",
+  "type": "time",
+  "exp": {
+   "product": "sikatile-400-evopro"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w049"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "what do i tell someone who wants to tile over tile on a bathroom floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w050"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "is grey one pot ok for floors or walls only",
+  "type": "compat",
+  "exp": {
+   "product": "davco-grey-one-potadhesive",
+   "verdict": "any"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w051"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "customer says the new yellow davco bag is a different product is it",
+  "type": "business",
+  "exp": {
+   "url": "davco",
+   "must": "hasn"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w052"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "counter",
+  "q": "how many square metres does a 20kg bag of level pro cover at 3mm",
+  "type": "calc",
+  "exp": {
+   "product": "sikafloor-level-pro"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w053"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "my tiles are lifting in the kitchen what could have caused it",
+  "type": "oos",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w054"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "is it safe to use sikaflex in a fish tank",
+  "type": "vague",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w055"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what do you recommend to stick tiles on a kitchen splashback behind the cooktop",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w056"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "old tiles in laundry, want to tile over them, whats the process and products",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:tile-stone-installationsystems/primers-additives"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w057"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "lots of cracks in the garage floor what can i fill them with",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:sealants-adhesives",
+    "c:flooring",
+    "c:waterproofing/injections"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w058"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what silicone for the fish pond",
+  "type": "nodata",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w059"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "which sealant is safe for kids toys",
+  "type": "nodata",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w060"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "marine",
+  "q": "i need to bond teak decking on a boat",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:marine/",
+    "c:industry/marine"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w061"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "auto",
+  "q": "replacing a windscreen on a ute what adhesive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:industry/transportation",
+    "c:automotive",
+    "c:transportation"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w062"
+ },
+ {
+  "persona": "builder",
+  "category": "multi",
+  "q": "tiles then waterproofing then screed, what order do i do it in",
+  "type": "oos",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w063"
+ },
+ {
+  "persona": "builder",
+  "category": "multi",
+  "q": "what is the difference between a screed and a leveller",
+  "type": "business",
+  "exp": {
+   "url": "cement-levellingsystems",
+   "must": "screed"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w064"
+ },
+ {
+  "persona": "tiler",
+  "category": "multi",
+  "q": "what primer goes under k10",
+  "type": "compat",
+  "exp": {
+   "product": "davco-k10-plus",
+   "verdict": "any"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w065"
+ },
+ {
+  "persona": "tiler",
+  "category": "multi",
+  "q": "how long should k10 plus dry before i tile",
+  "type": "time",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w066"
+ },
+ {
+  "persona": "tiler",
+  "category": "multi",
+  "q": "two coats of k10 or three",
+  "type": "rate",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w067"
+ },
+ {
+  "persona": "tiler",
+  "category": "multi",
+  "q": "how long is the pot life on ultraflex",
+  "type": "time",
+  "exp": {
+   "product": "davco-ultraflex"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w068"
+ },
+ {
+  "persona": "tiler",
+  "category": "multi",
+  "q": "does ultraflex need back buttering on large tiles",
+  "type": "compat",
+  "exp": {
+   "product": "davco-ultraflex",
+   "verdict": "any"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w069"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "multi",
+  "q": "sikalastic 1k how many coats and how long between them",
+  "type": "rate",
+  "exp": {
+   "product": "sikalastic-1k"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w070"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "multi",
+  "q": "can i walk on sikalastic 1k the next day",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-1k"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w071"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "multi",
+  "q": "what temperature range can sikalastic 1k be applied in",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-1k",
+   "label": "temperature"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w072"
+ },
+ {
+  "persona": "concreter",
+  "category": "multi",
+  "q": "best admixture for a 50 mpa mix",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w073"
+ },
+ {
+  "persona": "concreter",
+  "category": "multi",
+  "q": "dosage for viscocrete 10 per 100kg cement",
+  "type": "rate",
+  "exp": {
+   "product": "sika-viscocrete-10"
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w074"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "multi",
+  "q": "cheers mate, what is the best waterproofing for a bathroom floor that is also under tile",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w075"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "multi",
+  "q": "sorry for the dumb question but what is a membrane for",
+  "type": "business",
+  "exp": {
+   "url": "aus.sika.com",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "wild",
+  "split": "wild",
+  "id": "w076"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "multi",
+  "q": "urgent: shower flooding downstairs ceiling what do i do now",
+  "type": "oos",
+  "exp": {},
+  "messy": "wild",
+  "split": "wild",
+  "id": "w077"
+ }
+]

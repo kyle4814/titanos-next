@@ -7,7 +7,7 @@ const SITE = 'https://aus.sika.com/en/';
 const LINKS = { contact: SITE + 'Contact.html', whereToBuy: SITE + 'where-to-buy.html', careers: SITE + 'about-us/careers.html', about: SITE + 'about-us.html', dataSheets: SITE + 'documents-resources/pds.html', sds: SITE + 'documents-resources/material-safety-data-sheets.html', warranty: SITE + 'documents-resources/warranty-portal.html', training: SITE + 'Undertile-Waterproofing-training.html', tileDistributors: SITE + 'SikaTile-distributors.html', terms: SITE + 'terms-and-conditions.html', homeOwners: SITE + 'home-owners.html' };
 const RETAILER = /\b(bunnings|mitre ?10|reece|bowens|tradelink|tilers? warehouse|beaumont|hardware store|kmart|amazon|ebay|woolworths|total tools|home hardware)\b/;
 // words that say "this is a question about the company or the site, not about choosing a product"
-const SIGNAL = /\b(contact|phone|telephone|ring|fax|head office|office address|email|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|where (can|do|could|would|to) (i|we) (buy|get|find|purchase|order)|where to buy|stockists?|retailers?|distributors?|dealers?|resellers?|warrant(y|ies)|guarantee|(davco|lanko|schonox|sarnafil)\b.*\b(part of|family|owned|company|history|since|brand|packag\w*|colou?r|bags?|formula|changed|new look|mascot|about)\b|part of sika|company|careers?|training|course|workshop|sustainab\w*|epd|environmental|green star|voc|bim|software|calculat(or|ion) software|terms and conditions|legal|privacy|imprint|diy|home ?owner|blog|reference projects?|case stud(y|ies)|remedial|project support|project support|sika engineers|global project|key project|large projects?|b2b|e-?shop|online shop|trade account|pre[- ]?treatment chart|catalogue|brochure)\b/;
+const SIGNAL = /\b(contact (sika|us|details|number|info)|phone (number|no|numbr|sika)|telephone|tel (number|no)|ring (sika|them|you)|fax|head office|office address|email|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|where (can|do|could|would|to) (i|we) (buy|get|find|purchase|order)|where to buy|stockists?|retailers?|distributors?|dealers?|resellers?|warrant(y|ies)|guarantee|(davco|lanko|schonox|sarnafil)\b.*\b(part of|family|owned|company|history|since|brand|packag\w*|colou?r|bags?|formula|changed|new look|mascot|about)\b|part of sika|company|careers?|training|course|workshop|sustainab\w*|epd|environmental|green star|voc|bim|software|calculat(or|ion) software|terms and conditions|legal|privacy|imprint|diy|home ?owner|blog|reference projects?|case stud(y|ies)|remedial|project support|project support|sika engineers|global project|key project|large projects?|b2b|e-?shop|online shop|trade account|pre[- ]?treatment chart|catalogue|brochure)\b/;
 const DEFN = /^(what (is|are)\b|what.s (a|an|the)|what (does|do) .* (mean|stand for)|why (do|does|is|are)|explain|how (does|do) .* work|who (is|are|owns?|makes?)|how long has|when (did|was)|is .* part of|are .* part of|has .* (changed|been)|did .* change)/;
 const KG = new Set([...GENERIC].filter((w) => w !== 'davco' && w !== 'tile'));
 const NUMW = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
@@ -28,7 +28,8 @@ export function createKnow({ load }) {
   }
   const idf = (t) => Math.log(1 + N / (df.get(t) || N));
   const vocabFix = (t) => { if (!idx || idx.has(t) || t.length < 5 || /\d/.test(t)) return t; const max = t.length >= 9 ? 2 : 1; let best = t, bd = 9, bdf = 0; for (const [v, a] of idx) { if (Math.abs(v.length - t.length) > max) continue; const d = dist(t, v, max); if (d > max) continue; if (d > 1 && t.slice(0, 2) !== v.slice(0, 2)) continue; if (d < bd || (d === bd && a.length > bdf)) { best = v; bd = d; bdf = a.length; } } return best; };
-  const qTokens = (n) => { if (/\bhow long (has|have|had)\b/.test(n)) n = n.replace(/\bhow long\b/, 'since'); const base = [...new Set(tokens(n.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/g, (m) => NUMW[m])).filter((t) => !KG.has(t) && !FILLER.has(t) && t.length > 0).map(vocabFix))]; const q = new Map(base.map((t) => [t, 1])); for (const g of SYN) { const gt = g.map((x) => tokens(x)[0]); if (gt.some((t) => q.has(t))) for (const t of gt) if (!q.has(t)) q.set(t, 0.5); } return q; };
+  const qTokens = (n, noCap) => { if (/\bhow long (has|have|had)\b/.test(n)) n = n.replace(/\bhow long\b/, 'since'); const base = [...new Set(tokens(n.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/g, (m) => NUMW[m])).filter((t) => !KG.has(t) && !FILLER.has(t) && t.length > 0).map(vocabFix))]; const q = new Map(base.map((t) => [t, 1])); if (idx && !noCap && base.length > 5) { const keep = new Set([...base].sort((a, b) => idf(b) - idf(a)).slice(0, 5)); for (const t of [...q.keys()]) if (!keep.has(t)) q.delete(t); }
+    for (const g of SYN) { const gt = g.map((x) => tokens(x)[0]); if (gt.some((t) => q.has(t))) for (const t of gt) if (!q.has(t)) q.set(t, 0.5); } return q; };
   function search(n, filter0) {
     const wantProj = /\b(project|projects|case stud\w+|reference|references|built|completed|used (on|at|in)|stadium|tower|bridge)\b/.test(n);
     const filter = (u) => (!filter0 || filter0(u)) && (wantProj || u.kind !== 'page' || kb.pages[u.pi].k !== 'project');
@@ -40,7 +41,7 @@ export function createKnow({ load }) {
     items.sort((a, b) => b.s - a.s || a.ui - b.ui);
     return { items, prim, q };
   }
-  const pageFact = (p, line, hint) => fact({ source_url: p.u, page: null, sentence: clampText(line, hint), doc_type: 'WEB' });
+  const pageFact = (p, line, hint) => fact({ source_url: p.u, page: null, sentence: clampText(line, hint, 240), doc_type: 'WEB' });
   const hintOf = (n) => new Set(tokens(n));
   function infoCard({ title, headline, rows, links, question, status }) {
     const facts = rows.map((r) => r.fact);
@@ -61,8 +62,8 @@ export function createKnow({ load }) {
       if (/\b(how long|how many years|years|duration|period|expire|expiry|last)\b/.test(n)) return unknownInfo(q, 'The published warranty portal text does not give a warranty period, so I will not guess one. Please ask Sika Australia Technical Services.', [linkOf('Warranty portal', LINKS.warranty)]);
       const p = pageBy(/warranty-portal/); if (p) { const ls = p.l.slice(0, 12).filter((l) => !/^(Document|Step \d|Register to access)/i.test(l)); if (ls.length) return infoCard({ title: 'Sika Australia warranty portal', headline: "This is what Sika Australia's own warranty page says.", rows: ls.map((l, i) => ({ label: i === 0 ? 'Published' : '', fact: pageFact(p, l, hint) })), links: [linkOf('Open the warranty portal', LINKS.warranty)] }); }
     }
-    if (has(/\b(contact|helpline|help ?line|phone|call|support|customer service)\b/) && has(/\b(hours|open|opening|closes?|closed|after hours|what time|weekend|saturday|sunday)\b/)) return unknownInfo(q, 'Opening hours and call times are not in the documentation I work from, and I will not guess them. Sika Australia publishes a contact page.', [linkOf('Sika Australia contact page', LINKS.contact)]);
-    if (has(/\b(contact (sika|us|details|number|info|information|someone|a person)|phone|telephone|ring|fax|head office|office address|email|who do i call|call (sika|you|them|someone)|reach sika|speak (to|with) (someone|a person|sika)|talk to (someone|a person)|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|get in touch)\b/) && !has(/contact (adhesive|cement|glue|cleaner)/)) {
+    if (has(/\b(contact|helpline|help ?line|phone|call|support|customer service)\b/) && has(/\b(hours|opening hours|open (on|until|late|today|weekends?|saturday|sunday)|closes?|closed|after hours|what time|weekend|saturday|sunday)\b/) && !has(/open time/)) return unknownInfo(q, 'Opening hours and call times are not in the documentation I work from, and I will not guess them. Sika Australia publishes a contact page.', [linkOf('Sika Australia contact page', LINKS.contact)]);
+    if (has(/\b(contact (sika|us|details|number|info|information|someone|a person)|phone (number|no|numbr|sika|them|you)|telephone|tel (number|no)|ring (sika|them|you)|fax|head office|office address|email|who do i call|call (sika|you|them|someone)|reach sika|speak (to|with) (someone|a person|sika)|talk to (someone|a person)|technical (services?|support|help|team|advice|enquir\w+|department)|help ?line|customer service|get in touch)\b/) && !has(/contact (adhesive|cement|glue|cleaner)/)) {
       const p = pageBy(/\/imprint\.html/); const p2 = pageBy(/concrete-repair-contact/);
       const rows = [];
       for (const l of linesOf(p, [/Head Office/i, /^Wetherill/i, /^Phone/i])) rows.push({ label: /Head Office/i.test(l) ? 'Head office' : /Phone/i.test(l) ? 'Phone' : 'Address', fact: pageFact(p, l, hint) });
@@ -110,15 +111,15 @@ export function createKnow({ load }) {
     return infoCard({ title: 'Published lines that carry that code', headline: 'These products carry that code in their own published text. Each line is quoted from the product page, and I am claiming nothing beyond what the line says.', rows, links });
   }
   /** A question that is (nearly) the name of a published page: "three must haves for builders", "leaking shower". */
-  async function titleMatch(q, n, hasKind) {
+  async function titleMatch(q, n, hasKind, strictOnly) {
     await boot(); if (!kb) return null;
-    const qs = qTokens(n); const qset = new Set([...qs].filter(([, w]) => w >= 1).map(([t]) => t)); if (qset.size < 2) return null;
+    const qs = qTokens(n, true); const qset = new Set([...qs].filter(([, w]) => w >= 1).map(([t]) => t)); if (qset.size < 2) return null;
     const wantProj = /\b(project|projects|case stud\w+|reference|references)\b/.test(n);
     let best = null;
     for (const p of kb.pages) {
       if (p.k === 'project' ? !wantProj : !(p.k === 'diy' || p.k === 'article' || p.k === 'site')) continue;
       if (!p.tt) p.tt = [...new Set(tokens(p.t).filter((t) => !KG.has(t) && !FILLER.has(t)))];
-      if (p.tt.length < 2) continue; const m = p.tt.filter((t) => qset.has(t)).length; if (m < 2) continue;
+      if (p.tt.length < 2) continue; const m = p.tt.filter((t) => qset.has(t)).length; if (m < 2 || (strictOnly && (m < 3 || m / p.tt.length < 0.9))) continue;
       const tc = m / p.tt.length, qc = m / qset.size; if (!(tc >= 0.8 || (qc >= 0.66 && (!hasKind || p.k === 'diy')))) continue;
       const sc = tc + qc + (p.k === 'diy' ? 0.1 : 0); if (!best || sc > best.sc) best = { p, sc, tc, qc };
     }
