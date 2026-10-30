@@ -144,6 +144,6 @@ export async function categoryView(ctx) {
 }
 
 export function notFound(ctx, what = 'page') {
-  const el = h('div', { class: 'container section' }, emptyState({ title: `We could not find that ${what}`, text: 'It may have been renamed. Try the product finder.', actions: [h('a', { class: 'btn', href: '#/products' }, 'Find a product'), h('a', { class: 'btn btn--hollow', href: '#/' }, 'Home')] }));
+  const el = h('div', { class: 'container section' }, emptyState({ tag: 'h1', title: `We could not find that ${what}`, text: 'It may have been renamed. Try the product finder.', actions: [h('a', { class: 'btn', href: '#/products' }, 'Find a product'), h('a', { class: 'btn btn--hollow', href: '#/' }, 'Home')] }));
   return { el, title: 'Not found', nav: null };
 }

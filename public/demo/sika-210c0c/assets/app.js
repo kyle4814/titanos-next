@@ -79,7 +79,9 @@ async function boot() {
     window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 700), { passive: true });
     assistant = mountAssistant(cfg);
     initOffline(); // T19, no-op where the host cannot serve a service worker
-    window.addEventListener('hashchange', () => render());
+    // "Skip to main content" is a #main anchor: in a hash-routed page it must move focus, never become a route (it used to land on "We could not find that page")
+    document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a.skip-link'); if (!a) return; e.preventDefault(); main.focus(); main.scrollIntoView(); });
+    window.addEventListener('hashchange', () => { if (location.hash && !location.hash.startsWith('#/')) return; render(); }); // a plain in-page anchor is not a route
     await render();
     fontsAfterRender();
   } catch (e) {

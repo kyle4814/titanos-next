@@ -78,7 +78,7 @@ const srcLine = (s) => !s ? null : h('span', { class: 'src' }, ' ', h('a', { cla
 const notice = (t) => h('p', { class: 'notice' }, icon('info'), t);
 
 function ratesTimesBody(k) {
-  const { rateFacts, timesOf, programmeOf, PROGRAMME_CAVEAT } = M; const facts = rateFacts(k); const times = timesOf(k);
+  const { rateFacts, timesOf, programmeOf, PROGRAMME_CAVEAT } = M; const seenFact = new Set(); const facts = rateFacts(k).filter((f) => { const key = [f.label, f.text, f.s && f.s.p, f.s && f.s.v].join('|'); if (seenFact.has(key)) return false; seenFact.add(key); return true; }); const times = timesOf(k); // the same sentence extracted twice from one page is shown once (33 products carried exact repeats)
   const rate = facts.length ? h('div', null, h('h3', null, 'Published rate'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What it is', 'The data sheet says', 'Source'].map((x) => h('th', { scope: 'col' }, x)))),
     h('tbody', null, facts.map((f) => h('tr', null, h('td', null, f.label), h('td', null, h('blockquote', null, f.text)), h('td', null, srcLine(f.s))))))))
     : h('div', null, h('h3', null, 'Published rate'), h('p', null, 'Not in the published data. ' + (k.rates && k.rates.status && /^published$/.test(k.rates.status) ? '' : 'Neither the data sheet nor the product page gives a consumption figure. Check the data sheet or ask technical services.')));
