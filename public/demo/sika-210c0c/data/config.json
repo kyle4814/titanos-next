@@ -1,0 +1,251 @@
+{
+  "company": {
+    "name": "Sika Australia",
+    "short": "Sika",
+    "wordmark": "Sika",
+    "region": "Australia",
+    "site": "https://aus.sika.com",
+    "publishedDocsPhrase": "Sika Australia's published documentation"
+  },
+  "demo": {
+    "preparedFor": "Sika Australia",
+    "by": "TITANOS",
+    "byUrl": "https://titanos.tech",
+    "builtInHours": "__HOURS__",
+    "builtOn": "2026-10-30",
+    "ribbon": "Demo for Sika Australia by TITANOS. Public information only. Nothing is submitted.",
+    "notice": "This is a design and function demonstration. It is not an official Sika Australia page. Product names, descriptions and document links come from the public website aus.sika.com (read on 2026-10-30) and link back to it. No images are copied; neutral placeholders are shown instead."
+  },
+  "assets": {
+    "allowRemoteImages": false
+  },
+  "links": {
+    "whereToBuy": "https://aus.sika.com/en/where-to-buy.html",
+    "contact": "https://aus.sika.com/en/Contact.html",
+    "dataSheets": "https://aus.sika.com/en/documents-resources/pds.html",
+    "homeOwners": "https://aus.sika.com/en/home-owners.html",
+    "about": "https://aus.sika.com/en/about-us.html",
+    "careers": "https://aus.sika.com/en/about-us/careers.html"
+  },
+  "meta": {
+    "left": "Customer product portal (demo)",
+    "right": [
+      {
+        "label": "Product finder",
+        "href": "#/products"
+      },
+      {
+        "label": "Data Sheets",
+        "href": "#/documents?type=product_data_sheet"
+      },
+      {
+        "label": "Where to Buy",
+        "href": "https://aus.sika.com/en/where-to-buy.html",
+        "external": true
+      }
+    ]
+  },
+  "nav": [
+    {
+      "id": "construction",
+      "label": "Residential & Commercial Construction",
+      "mega": "construction"
+    },
+    {
+      "id": "industry",
+      "label": "Manufacturing & Automotive",
+      "mega": "industry"
+    },
+    {
+      "id": "docs",
+      "label": "Documents and Resources",
+      "menu": [
+        {
+          "label": "Product Data Sheets",
+          "href": "#/documents?type=product_data_sheet"
+        },
+        {
+          "label": "Safety Data Sheets",
+          "href": "#/documents?type=safety_data_sheet"
+        },
+        {
+          "label": "System data sheets",
+          "href": "#/documents?type=system_data_sheet"
+        },
+        {
+          "label": "Brochures",
+          "href": "#/documents?type=brochure"
+        },
+        {
+          "label": "Environmental product declarations",
+          "href": "#/documents?type=environmental_product_declaration"
+        },
+        {
+          "label": "All documents",
+          "href": "#/documents"
+        },
+        {
+          "label": "Guides and knowledge hub",
+          "href": "#/guides"
+        }
+      ]
+    },
+    {
+      "id": "home-owners",
+      "label": "Home Owners",
+      "href": "https://aus.sika.com/en/home-owners.html",
+      "external": true
+    },
+    {
+      "id": "where",
+      "label": "Where to Buy",
+      "href": "https://aus.sika.com/en/where-to-buy.html",
+      "external": true
+    },
+    {
+      "id": "about",
+      "label": "About us",
+      "href": "https://aus.sika.com/en/about-us.html",
+      "external": true
+    }
+  ],
+  "footer": {
+    "columns": [
+      {
+        "title": "Contact Us",
+        "underline": true,
+        "links": [
+          {
+            "label": "About Us",
+            "href": "https://aus.sika.com/en/about-us.html",
+            "external": true
+          },
+          {
+            "label": "Careers",
+            "href": "https://aus.sika.com/en/about-us/careers.html",
+            "external": true
+          },
+          {
+            "label": "Contact",
+            "href": "https://aus.sika.com/en/Contact.html",
+            "external": true
+          }
+        ]
+      },
+      {
+        "title": "Solutions",
+        "underline": true,
+        "links": [
+          {
+            "label": "Residential & Commercial Construction",
+            "href": "#/category/construction"
+          },
+          {
+            "label": "Industry and Automotive",
+            "href": "#/category/industry"
+          },
+          {
+            "label": "Remedial Solutions",
+            "href": "https://aus.sika.com/en/Remedial-Solutions.html",
+            "external": true
+          },
+          {
+            "label": "Home Owners",
+            "href": "https://aus.sika.com/en/home-owners.html",
+            "external": true
+          },
+          {
+            "label": "Product Data Sheets",
+            "href": "#/documents?type=product_data_sheet"
+          },
+          {
+            "label": "eShop user guide",
+            "href": "https://aus.sika.com/en/b2b-e-shop.html",
+            "external": true
+          }
+        ]
+      },
+      {
+        "title": "This portal",
+        "underline": true,
+        "links": [
+          {
+            "label": "Product finder",
+            "href": "#/products"
+          },
+          {
+            "label": "Documents library",
+            "href": "#/documents"
+          },
+          {
+            "label": "Guides",
+            "href": "#/guides"
+          },
+          {
+            "label": "My projects and quotes",
+            "href": "#/projects"
+          },
+          {
+            "label": "About this demo",
+            "href": "#/about"
+          }
+        ]
+      }
+    ],
+    "address": {
+      "title": "Sika Australia",
+      "lines": [
+        "Sika Australia Pty Ltd",
+        "55 Elizabeth Street",
+        "Wetherill Park, NSW, 2164",
+        "Phone: +61 2 9725 1145"
+      ],
+      "abn": "ABN 12 001 342 329"
+    },
+    "legal": [
+      {
+        "label": "Privacy Policy",
+        "href": "https://aus.sika.com/en/policies.html"
+      },
+      {
+        "label": "Imprint",
+        "href": "https://aus.sika.com/en/imprint.html"
+      },
+      {
+        "label": "Terms & Conditions",
+        "href": "https://aus.sika.com/en/terms-and-conditions.html"
+      },
+      {
+        "label": "Environment Policy",
+        "href": "https://aus.sika.com/en/Environment-Policy.html"
+      },
+      {
+        "label": "Quality Policy",
+        "href": "https://aus.sika.com/en/Quality-Policy.html"
+      },
+      {
+        "label": "Other Policies",
+        "href": "https://aus.sika.com/en/policies.html"
+      }
+    ]
+  },
+  "home": {
+    "heroTitle": "How can we help you?",
+    "heroPlaceholder": "Find products and documents",
+    "heroChips": [
+      "Tile adhesive for porcelain",
+      "Waterproofing a balcony",
+      "Self-levelling screed",
+      "Safety data sheet",
+      "Concrete repair mortar"
+    ],
+    "featureCategory": "construction/tile-stone-installationsystems",
+    "featureTitle": "Tile and stone installation systems",
+    "assistantQuestions": [
+      "Which adhesive for porcelain tiles on a concrete floor?",
+      "What is the coverage of Davco Grey One Pot adhesive?",
+      "Give me the data sheet for Sikaflex-11 FC+",
+      "How much adhesive do I need for 40 m2 of floor tiles?"
+    ]
+  }
+}
