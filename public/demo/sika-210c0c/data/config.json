@@ -31,6 +31,10 @@
     "left": "Customer product portal (demo)",
     "right": [
       {
+        "label": "System selector",
+        "href": "#/selector"
+      },
+      {
         "label": "System finder",
         "href": "#/system"
       },
@@ -173,6 +177,10 @@
         "title": "This portal",
         "underline": true,
         "links": [
+          {
+            "label": "System selector",
+            "href": "#/selector"
+          },
           {
             "label": "Product finder",
             "href": "#/products"

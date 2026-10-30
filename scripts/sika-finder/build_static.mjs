@@ -96,7 +96,11 @@ hub += '</main>\n' + foot;
 fs.writeFileSync(path.join(sdir, 'index.html'), hub);
 // sitemap and robots
 const urls = [BASE + 's/', ...pages.map((p) => `${BASE}s/${p.slug}/`)];
-fs.writeFileSync(path.join(PORTAL, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls.map((u) => `  <url><loc>${esc(u)}</loc></url>`).join('\n') + '\n</urlset>\n');
+// keep entries other lanes put in the sitemap (for example the selector lane's systems/ pages); only the /s/ entries are ours
+let foreign = [];
+try { foreign = [...fs.readFileSync(path.join(PORTAL, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).filter((u) => !u.startsWith(BASE + 's/')); } catch { /* no sitemap yet */ }
+const allUrls = [...new Set([...foreign, ...urls])];
+fs.writeFileSync(path.join(PORTAL, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + allUrls.map((u) => `  <url><loc>${esc(u)}</loc></url>`).join('\n') + '\n</urlset>\n');
 fs.writeFileSync(path.join(PORTAL, 'robots.txt'), INDEXABLE ? `User-agent: *\nAllow: /\nSitemap: ${BASE}sitemap.xml\n` : '# Demo for Sika Australia: not for indexing.\nUser-agent: *\nDisallow: /\n');
 // noscript fallback on the app shell (one block, idempotent)
 const ix = path.join(PORTAL, 'index.html'); let html = fs.readFileSync(ix, 'utf8');
