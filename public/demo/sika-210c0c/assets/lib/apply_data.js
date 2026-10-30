@@ -73,7 +73,7 @@ const notice = (t) => h('p', { class: 'notice' }, icon('info'), t);
 
 function ratesTimesBody(k) {
   const { rateFacts, timesOf, programmeOf, PROGRAMME_CAVEAT } = M; const facts = rateFacts(k); const times = timesOf(k);
-  const rate = facts.length ? h('div', null, h('h3', null, 'Published rate'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What it is', 'The data sheet says', 'Source'].map((x) => h('th', null, x)))),
+  const rate = facts.length ? h('div', null, h('h3', null, 'Published rate'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What it is', 'The data sheet says', 'Source'].map((x) => h('th', { scope: 'col' }, x)))),
     h('tbody', null, facts.map((f) => h('tr', null, h('td', null, f.label), h('td', null, h('blockquote', null, f.text)), h('td', null, srcLine(f.s))))))))
     : h('div', null, h('h3', null, 'Published rate'), h('p', null, 'Not in the published data. ' + (k.rates && k.rates.status && /^published$/.test(k.rates.status) ? '' : 'Neither the data sheet nor the product page gives a consumption figure. Check the data sheet or ask technical services.')));
   let tm;
@@ -82,7 +82,7 @@ function ratesTimesBody(k) {
     const trow = (label, t) => h('tr', null, h('td', null, label), h('td', null, h('blockquote', null, t.text)), h('td', null, cond(t)), h('td', null, srcLine(t.s)));
     const trs = programmeOf(k).flatMap((st) => (st.notPublished ? [h('tr', null, h('td', null, st.label), h('td', { colspan: '3' }, 'Time not published'))] : st.items.map((t) => trow(st.label, t))));
     for (const t of times.filter((x) => x.step === 'other')) trs.push(trow(t.label, t));
-    tm = h('div', null, h('h3', null, 'Published times'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['Step', 'The data sheet says', 'Conditions', 'Source'].map((x) => h('th', null, x)))), h('tbody', null, trs))), h('p', { class: 'blk-note' }, PROGRAMME_CAVEAT));
+    tm = h('div', null, h('h3', null, 'Published times'), h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['Step', 'The data sheet says', 'Conditions', 'Source'].map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, trs))), h('p', { class: 'blk-note' }, PROGRAMME_CAVEAT));
   } else tm = h('div', null, h('h3', null, 'Published times'), h('p', null, 'Not in the published data. No open, setting, pot life or recoat time was found for this product.'));
   return h('div', { class: 'data-tab' }, notice('Each line is the data sheet sentence, with its version and page. Where the data sheet is silent this page says so.'), rate, tm);
 }
@@ -107,7 +107,7 @@ async function safetyBody(k) {
     notice(`Quoted from the safety data sheet dated ${plain(sds.revision_date)}. Check the current SDS before use.`),
     h('p', null, `SDS revision date ${plain(sds.revision_date)}, version ${plain(sds.version)}${sds.sds_number ? ', SDS number ' + plain(sds.sds_number) : ''}${sds.pages ? ', ' + sds.pages + ' pages' : ''}. `,
       ok ? h('a', { class: 'link link--ext', href: sds.url, target: '_blank', rel: 'noopener noreferrer' }, 'Open the safety data sheet (PDF)') : h('span', { class: 'badge badge--warn' }, 'Link unavailable')),
-    h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What', 'The SDS says', 'Source'].map((x) => h('th', null, x)))), h('tbody', null, rows))),
+    h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['What', 'The SDS says', 'Source'].map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, rows))),
     pre.length ? h('details', { class: 'hik' }, h('summary', null, `Precautionary statements (${pre.length})`), h('ul', null, pre.map((p) => h('li', null, h('blockquote', null, plain(p.text)), srcLine(p.s))))) : null,
     h('p', { class: 'blk-note' }, 'First aid measures are not held in the data behind this page: read section 4 of the safety data sheet.'));
 }
