@@ -48,10 +48,12 @@ const NEED_Q = {
   volume: ['What volume, in m3?', []],
   thickness: ['What thickness, in mm? The published rate is per mm of thickness.', []],
   notch: null, csp: null, dilution: null, application: null, coats: ['How many coats?', []],
+  cementitious: ['How many kg of total cementitious material (cement plus any supplementary binder) in the mix? The dosage is published per 100 kg of it.', []],
 };
 function needOf(r) {
   if (r.needs) return r.needs === 'notch_mm' ? 'notch' : r.needs;
   const t = r.reason || '';
+  if (/cementitious/.test(t)) return 'cementitious';
   if (/area_m2/.test(t)) return 'area';
   if (/length_m/.test(t)) return 'length';
   if (/volume_m3/.test(t)) return 'volume';
@@ -66,6 +68,7 @@ function jobFrom(f) {
   if (f.volume) j.volume_m3 = f.volume;
   if (f.thickness) j.thickness_mm = f.thickness;
   if (f.coats) j.coats = f.coats;
+  if (f.cementitious) j.cementitious_kg = f.cementitious;
   if (f.notch) j.notch_mm = f.notch;
   if (f.csp) j.csp = f.csp;
   if (f.dilution) j.dilution = f.dilution;
@@ -170,7 +173,7 @@ export async function calc(ctx) {
   session.calcs[p.id] = { id: p.id, name: p.name, job: { ...job }, rows: shown.map((r) => ({ low: r.quantity.low, high: r.quantity.high, unit: r.quantity.unit, packs: packLine(r.packs), phrase: plain(r.phrase), url: page(r.source) })) };
   return c;
 }
-const jobText = (f) => [f.area ? `${fmt(f.area)} m2` : null, f.length ? `${fmt(f.length)} m` : null, f.volume ? `${fmt(f.volume)} m3` : null, f.thickness ? `${fmt(f.thickness)} mm thick` : null, f.coats ? `${fmt(f.coats)} coats` : null, f.notch ? `${fmt(f.notch)} mm notch` : null, f.tileSize ? `${fmt(f.tileSize[0])} x ${fmt(f.tileSize[1])} mm tiles` : null, f.csp ? `CSP ${f.csp}` : null, f.dilution || null, f.allowance != null ? `${fmt(f.allowance)}% allowance (yours)` : null].filter(Boolean).join(', ') || 'No size given';
+const jobText = (f) => [f.area ? `${fmt(f.area)} m2` : null, f.length ? `${fmt(f.length)} m` : null, f.volume ? `${fmt(f.volume)} m3` : null, f.thickness ? `${fmt(f.thickness)} mm thick` : null, f.coats ? `${fmt(f.coats)} coats` : null, f.cementitious ? `${fmt(f.cementitious)} kg cementitious` : null, f.notch ? `${fmt(f.notch)} mm notch` : null, f.tileSize ? `${fmt(f.tileSize[0])} x ${fmt(f.tileSize[1])} mm tiles` : null, f.csp ? `CSP ${f.csp}` : null, f.dilution || null, f.allowance != null ? `${fmt(f.allowance)}% allowance (yours)` : null].filter(Boolean).join(', ') || 'No size given';
 
 /* ---------------------------------------------------------------- SYSTEM */
 const T2S_TILE = { ceramic: 'ceramic', porcelain: 'porcelain', mosaic: 'mosaic', glass_tile: 'glass', natural_stone: 'natural-stone', large_format: 'large-format', terracotta: 'quarry-terracotta', moisture_sensitive_stone: 'moisture-sensitive-stone' };

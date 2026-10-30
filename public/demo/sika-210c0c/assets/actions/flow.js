@@ -6,7 +6,7 @@ import * as H from './handlers.js';
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
-const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats' };
+const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious' };
 const MEMORY_ACTIONS = new Set(['save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start']);
 const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
 
@@ -109,18 +109,22 @@ export function createActions(deps) {
     const p = session.pending;
     if (p) {
       session.pending = null;
-      if (!r || (!r.slash && r.action === p.action) || (r.slash && r.action === p.action)) {
+      const namesProduct = r && !r.slash ? (await findProducts(data, text, 1)).length > 0 : false;
+      const isAnswer = !r || (r.action === p.action && !r.slash && !namesProduct);
+      if (isAnswer) {
         // the visitor is answering our question: put the original request and the answer together, once
-        action = p.action; noAsk = true; useText = `${p.text} ${r && r.slash ? r.rest : text}`; rest = useText;
-        const bare = /^\s*(\d+(?:[.,]\d+)?)\s*(?:m2|sqm|mm|m|%|litres?|l)?\s*$/i.exec(text);
+        action = p.action; noAsk = true; useText = `${p.text} ${text}`; rest = useText;
+        const bare = /^\s*(\d+(?:[.,]\d+)?)\s*(?:m2|sqm|mm|m|%|kg|litres?|l)?\s*$/i.exec(text);
         if (bare && NEED_KEY[p.need]) session.facets[NEED_KEY[p.need]] = parseFloat(bare[1].replace(',', '.'));
-      } else if (r && r.action !== p.action) { /* a new request: drop the old question */ }
+      }
     }
     if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
     // facets: numbers always, surfaces and places from the text with any product name taken out
     const hits = await findProducts(data, useText, 3);
+    // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
+    if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
     if (!MEMORY_ACTIONS.has(action)) updateFacets(session, useText, stripped);
     if (!r || !r.slash) session.lastQuestion = text;

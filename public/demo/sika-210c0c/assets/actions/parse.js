@@ -42,6 +42,7 @@ export function parseNumbers(text) {
   const dil = /\b(\d+)\s*:\s*(\d+)\b/.exec(t); if (dil) out.dilution = dil[1] + ':' + dil[2];
   const ts = new RegExp(N + '\\s*(?:x|by|\\*)\\s*' + N + '(?:\\s*mm)?').exec(t); if (ts && !/m2|sqm/.test(ts[0])) out.tileSize = [num(ts[1]), num(ts[2])];
   if (/\bmosaic/.test(t)) out.mosaic = true;
+  const cem = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:total\\s*)?cement(?:itious)?'), t); if (cem != null && cem > 0) out.cementitious = cem;
   if (area != null && area > 0) out.area = area;
   if (vol != null && vol > 0) out.volume = vol;
   if (len != null && len > 0 && out.area == null) out.length = len;
