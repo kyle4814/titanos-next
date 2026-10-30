@@ -1,23 +1,23 @@
 {
  "generated": "2026-10-30",
- "compared": 217,
+ "compared": 220,
  "match": 133,
  "mismatch": 21,
- "engine_missing": 63,
- "not_comparable": 158,
+ "engine_missing": 66,
+ "not_comparable": 159,
  "by_category": {
   "construction/concrete": {
    "compared": 5,
    "match": 5,
    "mismatch": 0,
    "engine_missing": 0,
-   "not_comparable": 56
+   "not_comparable": 57
   },
   "construction/tile-stone-installationsystems": {
-   "compared": 17,
+   "compared": 20,
    "match": 15,
    "mismatch": 2,
-   "engine_missing": 0,
+   "engine_missing": 3,
    "not_comparable": 0
   },
   "construction/flooring": {
@@ -970,6 +970,30 @@
  ],
  "engine_missing_list": [
   {
+   "id": "davco-powder-mastic",
+   "category": "construction/tile-stone-installationsystems/tile-adhesives",
+   "lane": "20kg bag of Davco® Powder Mastic covers approximately 7 m2 (based on a 10mm notch trowel)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/davco-powder-mastic.pdf",
+    "v": "May 2025, Version 01.01",
+    "p": 2,
+    "sec": "PDS Product Information"
+   }
+  },
+  {
+   "id": "davco-primex",
+   "category": "construction/tile-stone-installationsystems/primers-additives",
+   "lane": "8-10m2 per litre",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/i/davco-primex.pdf",
+    "v": "November 2025, Version 01.01",
+    "p": 2,
+    "sec": "PDS Application Information"
+   }
+  },
+  {
    "id": "sika-primer-3-n",
    "category": "construction/sealants-adhesives/cleaners-activatorsprimers",
    "lane": "On porous substrates | 5 m2 | 250 m",
@@ -1013,6 +1037,18 @@
     "v": "April 2023, Version 02.03",
     "p": 3,
     "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "davco-ultraflex",
+   "category": "construction/tile-stone-installationsystems/tile-adhesives",
+   "lane": "20kg bag of Davco Ultraflex covers approximately 12m2 (based on a 6mm notch trowel)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/Davco%20Ultraflex%20Data%20Sheet.pdf",
+    "v": "",
+    "p": 1,
+    "sec": "PDS Product Information"
    }
   },
   {
