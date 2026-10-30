@@ -479,3 +479,34 @@ main:focus{outline:none}
 
 .estimate-note{font-size:.88rem;color:var(--grey-darker);border-left:4px solid var(--primary);padding:.35rem .6rem;margin:.6rem 0 0;background:#fff}
 .m-assume{margin:.25rem 0 0;padding-left:1.1rem;font-size:.9rem}
+
+/* ---- specification tab */
+.spec .btn-row{margin:1rem 0}
+.spec-sec{margin-top:1.75rem}
+.spec-sec h3{font-size:1.2rem;font-weight:700;border-bottom:2px solid #000;padding-bottom:.35rem;margin-bottom:.75rem;display:flex;gap:.75rem;line-height:1.25}
+.spec-sec .no,.spec-clauses .no{font-weight:700;min-width:2.5rem;color:var(--grey-darker)}
+.spec-clauses{list-style:none;margin:0;padding:0}
+.spec-clauses>li{display:flex;gap:.75rem;padding:.7rem 0;border-bottom:1px solid var(--grey)}
+.spec-clauses>li>div{min-width:0;flex:1}
+.spec-clauses .no{flex:none}
+.spec-clauses p{margin:.25rem 0 0;white-space:pre-line;overflow-wrap:anywhere}
+.spec-clauses .cite{font-size:.85rem;color:var(--grey-dark);white-space:normal}
+.spec-refer strong{color:var(--grey-dark)}
+
+.spec-list{margin:.35rem 0 .35rem;padding-left:1.1rem}.spec-list li{margin-bottom:.2rem}
+.spec-rows{display:grid;grid-template-columns:minmax(140px,30%) 1fr;gap:.25rem 1rem;margin:.4rem 0;font-size:.95rem}
+.spec-rows dt{font-weight:600}.spec-rows dd{margin:0}.spec-rows small{color:var(--grey-dark)}
+@media (max-width:39.99em){.spec-rows{grid-template-columns:1fr}.spec-rows dd{margin-bottom:.4rem}}
+
+.spec-clauses td,.spec-clauses th{overflow-wrap:anywhere}
+.spec,.spec li,.spec p,.spec dd{overflow-wrap:anywhere}
+/* compact row cards on phones: more products per screen, same content */
+@media (max-width:39.99em){
+  .cat-card,.product-card{flex-direction:row}
+  .cat-card .card-media,.product-card .card-media{flex:0 0 76px;aspect-ratio:auto;min-height:76px}
+  .cat-card .card-body,.product-card .card-body{padding:14px 14px 12px;min-width:0}
+  .cat-card .ph svg,.product-card .ph svg{width:52%}
+  .cat-card .ph small,.product-card .ph small{display:none}
+  .card h3,.card h4{font-size:1.2rem}
+  .card-actions .btn{min-height:44px}
+}
