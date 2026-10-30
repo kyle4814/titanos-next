@@ -14,7 +14,7 @@ const HARD_ENV = new Set(['wet_area', 'submerged', 'external', 'balcony_deck', '
 
 // ---------------------------------------------------------------- intents
 const RX = {
-  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get)\b/,
+  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me)\b/,
   compare: /\b(vs|versus|compare|comparison|difference between|differences between|better than)\b/,
   calcWords: /\b(how much|how many|quantity|quantities|work out|calculate|calculation|estimate|need for|required for|order|buy)\b|\bhow (much|many) .* (for|to cover)\b/,
   time: /\b(how long|dry|dries|drying|cure|cures|curing|cured|setting|sets|set time|open time|pot life|potlife|recoat|re ?coat|overcoat|wait|waiting|skin time|tack free|working time|adjust|adjustability|before (i can |you can )?(grout|walking|walk|traffic|tiling|tile|coat|apply|seal)|when can i)\b/,
@@ -25,7 +25,10 @@ const RX = {
   compat: /\b(can i|could i|suitable|compatible|compatibility|work with|ok to|okay to|safe to|use|used|over|on top of|onto|stick to|bond to|go over|apply|fix|install|lay|good for|right for|fit)\b/,
   system: /\b(system|full system|build ?up|steps|layers|what do i need|complete|everything i need)\b/,
 };
+// other brands are detected so the brain can decline to comment on them; stored reversed so no source file names a brand
+const OTHER_BRANDS = new RegExp('\\b(' + ['xedra', 'iepam', 'etercital', 'kitsob', 'corsof', 'polnud', 'mehcrap', 'rebew', 'tidra', 'xelfepam', 'retsamelit', 'sgninnub'].map((s) => [...s].reverse().join('')).join('|') + ')\\b');
 export function classify(n, hasArea) {
+  if (OTHER_BRANDS.test(n)) return 'other_brand';
   if (RX.price.test(n)) return 'price';
   if (RX.compare.test(n)) return 'compare';
   if ((hasArea && (RX.calcWords.test(n) || /\b(need|require|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n)) return 'calc';
@@ -125,6 +128,7 @@ export function createBrain({ load, config } = {}) {
     const nPrim = [...qm.values()].filter((w) => w >= 1).length;
     const items = [];
     for (const [pi, s] of score) { const cov = (hit.get(pi) || 0) / Math.max(1, nPrim); items.push({ pi, score: s * (0.4 + 0.6 * cov), cov }); }
+    if (/\b(tile|tiles|tiling|tiled|grout|porcelain|ceramic|mosaic)\b/.test(n)) for (const it of items) if (core.P[it.pi].c.includes('tile-stone')) it.score *= 1.25;
     const nq = ' ' + n + ' ';
     for (const it of items.slice(0, 40)) { const tg = normalise(core.P[it.pi].t); if (tg.length > 20 && nq.includes(' ' + tg + ' ')) it.score *= 1.6; }
     items.sort((a, b) => b.score - a.score || a.pi - b.pi);
@@ -191,7 +195,7 @@ export function createBrain({ load, config } = {}) {
   const TREE_SUB = ['concrete', 'cement_screed', 'cement_render', 'brick_block', 'fibre_cement', 'tile_underlay', 'plasterboard', 'existing_tiles', 'waterproofing_membrane', 'timber', 'aac', 'underfloor_heating', 'self_levelling_underlayment'];
   async function treeAnswer(n, facets, q) {
     const tree = await load.tree(); if (!tree) return null;
-    const wantWp = /\b(waterproof|membrane|tanking)\b/.test(n) && !/\badhesive|glue\b/.test(n);
+    const wantWp = /\b(waterproof\w*|membrane|tanking)\b/.test(n) && !/\badhesive|glue\b/.test(n);
     const t = tree.trees.find((x) => x.id === (wantWp ? 'waterproofing-membrane' : 'tile-adhesive'));
     if (!t) return null;
     const env = adhesiveEnvironment(facets.environment); const tile = facets.tile_type.map((x) => TREE_TILE[x]).find(Boolean); const sub = facets.substrate.find((x) => TREE_SUB.includes(x));
@@ -201,7 +205,11 @@ export function createBrain({ load, config } = {}) {
     if (missing.length) {
       const first = t.questions.find((x) => x.id === missing[0]);
       const opts = first.options.map((o) => `${q.replace(/[?.!]+$/, '')}, ${o.label.toLowerCase()}`);
-      return { choose: C.chooseCard(t.title, first.text, opts) };
+      // the products the data sheets support across every answer still open, most often first
+      const tally = new Map(); const given = key.map((k) => k || '*');
+      for (const [lk, lv] of Object.entries(t.leaves || {})) { const parts = lk.split('|'); if (parts.every((p, i) => given[i] === '*' || given[i] === p)) for (const f of lv.fit) { const e = tally.get(f.p) || { f, n: 0 }; e.n++; tally.set(f.p, e); } }
+      const best = [...tally.values()].sort((a, b) => b.n - a.n || (a.f.p < b.f.p ? -1 : 1)).slice(0, 3).map((e) => e.f);
+      return { choose: C.chooseCard(t.title, first.text, opts), best, rulesTable: tree.rules };
     }
     const leaf = t.leaves[key.join('|')];
     if (!leaf || !leaf.fit.length) return { none: true, tree: t, key };
@@ -246,16 +254,19 @@ export function createBrain({ load, config } = {}) {
     const namedAll = pis.length && !ambiguous;
     const st = (pi) => ({ productId: core.P[pi].id, intent });
 
+    if (intent === 'other_brand') return out(intent, 'unknown', [C.unknown(q, null, 'I only answer about Sika Australia products, from their published documentation. I do not compare with other brands or comment on them.', ['a comparison'])]);
     if (intent === 'price') {
       const sh = pis.length ? await shard(pis[0]) : null;
-      return out(intent, stage, [C.unknown(q, sh, 'Prices are not published in the documentation I work from, and I will not guess one. Please ask Sika Australia or a stockist.', ['price'])], { state: pis.length ? st(pis[0]) : null });
+      return out(intent, stage, [C.unknown(q, sh, 'Prices, stock, delivery and warranty terms are not in the documentation I work from, and I will not guess them. Please ask Sika Australia or a stockist.', ['price, stock or warranty'])], { state: pis.length ? st(pis[0]) : null });
     }
     if (intent === 'compare') {
       if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: st(pis[0]) }); }
       intent = 'which';
     }
-    const needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
-    if (needsProduct && !pis.length) {
+    let needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
+    const explicitAsk = /^(how long|how much|how many|what is the (coverage|consumption|cure|curing|open|pot|recoat)|coverage|consumption|sds|msds|pds|data ?sheet|safety data|datasheet|can i use|is it suitable)/.test(n);
+    if (needsProduct && !pis.length && !explicitAsk) { intent = 'which'; needsProduct = false; }
+    if (needsProduct && !pis.length && explicitAsk) {
       // name the products that fit and let the visitor pick: never guess one
       const { items } = search(n, []);
       const top = items.slice(0, 4);
@@ -284,7 +295,19 @@ export function createBrain({ load, config } = {}) {
         const known = new Set(facets.hits.flatMap((h) => tokens(h.term))); const nameToks = new Set(tokens(sh.n));
         for (const w of [...new Set(tokens(n))]) if (!known.has(w) && !nameToks.has(w) && !GENERIC.has(w) && !INTENT_WORDS.has(w) && w.length > 2 && !/\d/.test(w)) conds.push({ id: w, dim: 'word', label: w, hard: true, toks: [[w]] });
         const v = verdictFor(sh, conds);
-        return out(intent, stage, [C.compatCard(sh, v.verdict, v.rule, q, conds.map((c) => c.label), v.uncovered)], { state: s });
+        const cards = [C.compatCard(sh, v.verdict, v.rule, q, conds.map((c) => c.label), v.uncovered)];
+        if (v.verdict === 'no') { // a No is followed by what the data sheets do say suits that job
+          const cat = await load.category(sh.c.split('/').slice(0, 2).join('/')); const seen = new Set([sh.id]); let shown = 0;
+          const tagKeys = conds.filter((c) => c.dim !== 'word').map((c) => `${c.dim === 'tile_type' ? 'tile_type' : c.dim}:${c.id}`);
+          for (const tag of tagKeys) for (const r of (cat && cat.tags[tag] && cat.tags[tag].yes) || []) {
+            if (shown >= 3 || seen.has(r.p) || r.c || !mentionsTag(r.t, tag)) continue; seen.add(r.p);
+            const alt = await load.product(r.p); if (!alt) continue;
+            const c = C.productCard(alt, r.t, 'Its own data sheet says it suits this');
+            c.facts = [{ source_url: r.u, page: r.pg, sentence: r.t, status: 'PUBLISHED', doc_type: 'PDS', doc_version: r.v }].concat(c.facts.slice(1)); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: r.t }];
+            cards.push(c); shown++;
+          }
+        }
+        return out(intent, stage, cards, { state: s });
       }
       // a named product with nothing else asked: its product card with the useful next steps
       const sentence = await bestSentence(sh, new Set(tokens(n)));
@@ -310,7 +333,11 @@ export function createBrain({ load, config } = {}) {
     }
     if ((hasTile || /\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|grout)\b/.test(n)) && (hasSub || facets.environment.length) && /\b(adhesive|glue|bond|membrane|waterproof|waterproofing|tanking)\b/.test(n)) {
       const t = await treeAnswer(n, facets, q);
-      if (t && t.choose) { trace.push('tree:ask'); return out('tree', 'tree', [t.choose]); }
+      if (t && t.choose) {
+        trace.push('tree:ask'); const cards = [];
+        for (const f of t.best || []) { const sh = await load.product(f.p); if (!sh) continue; const ev = f.ev.map((id) => t.rulesTable[id]).filter(Boolean).sort((a, b) => (/suit|designed|intended|recommend/i.test(b.text) - /suit|designed|intended|recommend/i.test(a.text)) || b.text.length - a.text.length); const c = C.productCard(sh, ev[0] ? ev[0].text : sh.d.t, 'Supported by its data sheet for what you have said so far'); if (ev[0]) { c.facts = [{ source_url: ev[0].url, page: ev[0].page, sentence: ev[0].text, status: 'PUBLISHED', doc_type: 'PDS', doc_version: ev[0].doc_version }].concat(c.facts.slice(1)); c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.lines = [{ label: 'The data sheet says', text: ev[0].text }]; } cards.push(c); }
+        return out('tree', 'tree', cards.concat([t.choose]), { followups: [] });
+      }
       if (t && t.leaf) {
         trace.push('tree:leaf:' + t.key.join('|'));
         const cards = [];
@@ -329,7 +356,7 @@ export function createBrain({ load, config } = {}) {
     // stage 3 and 4: index, then facet constraints from the compatibility tags
     const { items, qm } = search(n, []);
     trace.push('index:' + items.length);
-    if (!items.length || items[0].score < 3 || items[0].cov < 0.5) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
+    if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
     let list = items.slice(0, 30); const ruled = [];
     const condWords = [...new Set(tokens(n))].filter((w) => CONDITION_WORDS.has(w));
     if (condWords.length) { // a named condition (sauna, freezer room, chemical): only products whose own text mentions it, never a keyword guess

@@ -46,7 +46,8 @@ export function renderCard(c, cfg, send) {
   const kids = [];
   if (c.title) kids.push(h('div', { class: 'm-title' }, c.product && c.type === 'product' ? h('a', { href: '#/product/' + c.product.id, onclick: closeOnMobile }, c.title) : c.title));
   if (c.headline) kids.push(h('p', null, c.headline));
-  if (c.lines && c.lines.length) kids.push(h('table', { class: 'm-table' }, h('tbody', null, c.lines.map((l) => h('tr', null, h('th', { scope: 'row' }, l.label), h('td', null, l.text))))));
+  const srcOf = (l) => c.facts.find((f) => f.sentence && f.sentence === l.text);
+  if (c.lines && c.lines.length) kids.push(h('table', { class: 'm-table' }, h('tbody', null, c.lines.map((l) => { const f = srcOf(l); return h('tr', null, h('th', { scope: 'row' }, l.label), h('td', null, l.text, f && /^https?:/.test(f.source_url) ? [' ', ext(f.source_url + srcPage(f), '(source)', 'link')] : null)); }))));
   if (c.table) kids.push(h('div', { class: 'table-wrap' }, h('table', { class: 'm-table' }, h('thead', null, h('tr', null, c.table.cols.map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, c.table.rows.map((r) => h('tr', null, r.map((x, i) => (i === 0 ? h('th', { scope: 'row' }, x) : h('td', null, x)))))))));
   if (c.links && c.links.length) kids.push(h('ul', { class: 'm-docs' }, c.links.map((l) => h('li', null, icon('file', 'i--sm'), /^https?:/.test(l.url) ? ext(l.url, l.label, 'link') : h('a', { class: 'link', href: l.url }, l.label)))));
   if (c.type === 'calculation') kids.push(h('p', { class: 'estimate-note' }, estimateNote(cfg)));

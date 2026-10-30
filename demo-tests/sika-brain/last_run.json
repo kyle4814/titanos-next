@@ -1,10 +1,10 @@
 {
  "n": 4659,
- "ok": 4613,
+ "ok": 4615,
  "per": {
   "which": {
    "n": 1332,
-   "ok": 1293,
+   "ok": 1291,
    "kinds": {
     "name": {
      "n": 512,
@@ -12,11 +12,11 @@
     },
     "typo": {
      "n": 338,
-     "ok": 322
+     "ok": 318
     },
     "describe": {
      "n": 412,
-     "ok": 389
+     "ok": 391
     },
     "tree": {
      "n": 70,
@@ -90,7 +90,7 @@
   },
   "out of scope": {
    "n": 138,
-   "ok": 134,
+   "ok": 138,
    "kinds": {
     "price": {
      "n": 128,
@@ -98,7 +98,7 @@
     },
     "oos": {
      "n": 10,
-     "ok": 6
+     "ok": 10
     }
    }
   },
@@ -160,7 +160,10 @@
    "kind": "compat-yes",
    "q": "Can I use Davco Grey One Pot adhesive on ceramic tile underlay?",
    "got": [
-    "compatibility:davco-grey-one-potadhesive"
+    "compatibility:davco-grey-one-potadhesive",
+    "product:davco-supamastic",
+    "product:davco-powder-mastic",
+    "product:davco-smp-evo"
    ],
    "headline": "No. The published sentence is quoted below."
   },
@@ -222,6 +225,14 @@
    "headline": "Assembly & glazing adhesive and sealant for rail applications with acceleration "
   },
   {
+   "kind": "typo",
+   "q": "tell me about sikasil gs-500",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
    "kind": "describe",
    "q": "I need high range water reducing admixture",
    "got": [
@@ -233,12 +244,31 @@
    "headline": "HWR- High Range Water Reducer"
   },
   {
+   "kind": "typo",
+   "q": "tell me about sika floorjoint sp-30 s",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sikaforce-420 1l05",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
    "kind": "describe",
    "q": "I need a premixed ready to use wall tile adhesive and grout",
    "got": [
+    "product:sikatile-410-secureset",
+    "product:sikatile-400-evopro",
+    "product:sikatile-510-megalite",
     "choose:Which tile adhesive?"
    ],
-   "headline": "Where is the tiling going?"
+   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
   },
   {
    "kind": "describe",
@@ -336,14 +366,6 @@
   },
   {
    "kind": "describe",
-   "q": "I need a premium performance, class iii, ready to use, water-based polyurethane waterproofing membrane designed for under tile and stone applications.",
-   "got": [
-    "choose:Which waterproofing membrane?"
-   ],
-   "headline": "Where is it going?"
-  },
-  {
-   "kind": "describe",
    "q": "I need set accelerating admixture for two component injection grout",
    "got": [
     "product:sika-set-accelerator"
@@ -354,9 +376,12 @@
    "kind": "describe",
    "q": "I need a fine white polymer fortified flexible sand and silica free cement-based wall tile adhesive",
    "got": [
+    "product:sikatile-410-secureset",
+    "product:sikatile-400-evopro",
+    "product:sikatile-510-megalite",
     "choose:Which tile adhesive?"
    ],
-   "headline": "Where is the tiling going?"
+   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
   },
   {
    "kind": "describe",
@@ -368,14 +393,6 @@
     "product:davco-smp-evo"
    ],
    "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
-  },
-  {
-   "kind": "describe",
-   "q": "I need a flexible rapid drying class iii waterproofing membrane design for under tile applications.",
-   "got": [
-    "choose:Which waterproofing membrane?"
-   ],
-   "headline": "Where is it going?"
   },
   {
    "kind": "typo",
@@ -392,6 +409,14 @@
     "product:schoenox-ab"
    ],
    "headline": "WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALL"
+  },
+  {
+   "kind": "typo",
+   "q": "tell me about sika wonder wpies",
+   "got": [
+    "unknown:Not in the published documentation"
+   ],
+   "headline": "I do not know this from the published documentation."
   },
   {
    "kind": "typo",
@@ -488,52 +513,8 @@
     "product:sikaroof-versipave"
    ],
    "headline": "ADJUSTABLE STEPJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
-  },
-  {
-   "kind": "oos",
-   "q": "What is the weather in Brisbane?",
-   "got": [
-    "product:sikaseal-300-glassandweatherseal",
-    "product:sikahyflex-305-ap",
-    "product:sikasil-sg-20",
-    "product:sikasil-sg-500"
-   ],
-   "headline": "A NEUTRAL-CURING SILICONE SEALANT WITH A HIGH MOVEMENT CAPABILITY AND EXCELLENT "
-  },
-  {
-   "kind": "oos",
-   "q": "What is the capital of France?",
-   "got": [
-    "product:sikawrap-fx-50-c",
-    "product:sika-carbodur-m",
-    "product:sika-carbodur-s",
-    "product:sikawrap-230-c"
-   ],
-   "headline": "Carbon fibre string for structural strengthening and connection, and anchoring o"
-  },
-  {
-   "kind": "oos",
-   "q": "How do I bake bread?",
-   "got": [
-    "product:sika-ferrogard-720reba",
-    "product:sika-ferrogard-710reba",
-    "product:sika-ferrogard-510patch",
-    "product:sika-ferrogard-515patch"
-   ],
-   "headline": "DISCRETE ANODE FOR CORROSION MITIGATION OF INCIPIENT ANODE ADJACENT TO CONCRETE "
-  },
-  {
-   "kind": "oos",
-   "q": "How fast is a cheetah?",
-   "got": [
-    "product:sikafloor-158-wfastbarrier",
-    "product:sikabond-instantnailsfast",
-    "product:sikarapid-c-100",
-    "product:formol-eco"
-   ],
-   "headline": "RAPID-DRYING HYDROSTATIC MOISTURE BARRIER"
   }
  ],
  "propBad": [],
- "at": "2026-10-30T09:41:23.183Z"
+ "at": "2026-10-30T09:48:21.825Z"
 }
