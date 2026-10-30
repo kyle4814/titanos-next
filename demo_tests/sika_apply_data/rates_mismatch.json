@@ -1,0 +1,1724 @@
+{
+ "generated": "2026-10-30",
+ "compared": 217,
+ "match": 133,
+ "mismatch": 21,
+ "engine_missing": 63,
+ "not_comparable": 158,
+ "by_category": {
+  "construction/concrete": {
+   "compared": 5,
+   "match": 5,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 56
+  },
+  "construction/tile-stone-installationsystems": {
+   "compared": 17,
+   "match": 15,
+   "mismatch": 2,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "construction/flooring": {
+   "compared": 120,
+   "match": 50,
+   "mismatch": 9,
+   "engine_missing": 61,
+   "not_comparable": 5
+  },
+  "construction/concrete-repair-protection": {
+   "compared": 30,
+   "match": 22,
+   "mismatch": 8,
+   "engine_missing": 0,
+   "not_comparable": 13
+  },
+  "construction/grouts-anchoring": {
+   "compared": 1,
+   "match": 1,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 15
+  },
+  "construction/sealants-adhesives": {
+   "compared": 7,
+   "match": 4,
+   "mismatch": 1,
+   "engine_missing": 2,
+   "not_comparable": 48
+  },
+  "construction/waterproofing": {
+   "compared": 19,
+   "match": 19,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 3
+  },
+  "construction/structural-strengthening": {
+   "compared": 14,
+   "match": 14,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 18
+  },
+  "construction/roofing": {
+   "compared": 4,
+   "match": 3,
+   "mismatch": 1,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "industry/automotive-aftermarket": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "industry/transportation": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "industry/building-components": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "industry/marine": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "industry/appliance-and-equipment": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "products": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  },
+  "construction/landscape-buildingproducts": {
+   "compared": 0,
+   "match": 0,
+   "mismatch": 0,
+   "engine_missing": 0,
+   "not_comparable": 0
+  }
+ },
+ "mismatches": [
+  {
+   "id": "davco-supamastic",
+   "category": "construction/tile-stone-installationsystems/tile-adhesives",
+   "lane": "A 15 Pail will cover approximately 11m2 with a 6mm notch trowel.",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 15,
+    "unit": "L",
+    "area_min": 11,
+    "area_max": 11,
+    "basis_stated": true,
+    "unit_inferred": "the statement says '15 Pail' without a unit; read as L because the product's pack sizes list 15 L"
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1.3333333333333333,
+     "high": 1.3333333333333333,
+     "perMm": false,
+     "text": "A 4 Litre pail will cover approximately 3m2 with a 6mm notch trowel.\nA 15 Pail will cover approximately 11m2 with a 6mm notch trowel."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/f/davco-supamastic.pdf",
+    "v": "March 2025, Version 01.03",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikafloor-4020-fiberlevel",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "12L - 4m2 @ 3mm thickness",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 12,
+    "unit": "L",
+    "area_min": 4,
+    "area_max": 4,
+    "basis_stated": true,
+    "at_thickness_mm": 3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1,
+     "high": 1,
+     "perMm": true,
+     "text": "12L - 4m2 @ 3mm thickness"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_-4020_fiberlevel.pdf",
+    "v": "April 2023, Version 03.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikafloor-level-pro",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "12 Litres - 4m2 @ 3mm thickness",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 12,
+    "unit": "L",
+    "area_min": 4,
+    "area_max": 4,
+    "basis_stated": true,
+    "at_thickness_mm": 3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1,
+     "high": 1,
+     "perMm": true,
+     "text": "12 Litres - 4m2 @ 3mm thickness"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/0/sikafloor_level_pro.pdf",
+    "v": "March 2025, Version 02.07",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikafloor-level-ultra",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "12L - 4m2 @ 3mm thickness",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 12,
+    "unit": "L",
+    "area_min": 4,
+    "area_max": 4,
+    "basis_stated": true,
+    "at_thickness_mm": 3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1,
+     "high": 1,
+     "perMm": true,
+     "text": "12L - 4m2 @ 3mm thickness"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/n/sikafloor_level_ultra.pdf",
+    "v": "March 2025, Version 02.10",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-monotop-352nfg",
+   "category": "construction/concrete-repair-protection/concrete-repair-mortars/cementitious-repairmortars",
+   "lane": "As a guide, ~ 15.6 kg of powder per cm thick per m2",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 15.6,
+    "max": 15.6,
+    "unit": "kg",
+    "area_unit": "m2",
+    "per": "cm",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 15.6,
+    "base_max": 15.6
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.56,
+     "high": 1.56,
+     "perMm": true,
+     "text": "This depends on the substrate roughness and thickness of layer applied. As a guide, ~ 15.6 kg of powder per cm thick per m2"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sika_monotop_-352nfg.pdf",
+    "v": "April 2023, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-monotop-412nfg",
+   "category": "construction/concrete-repair-protection/concrete-repair-mortars/cementitious-repairmortars",
+   "lane": "As a guide, ~ 19 kg of powder per cm thick per m2",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 19,
+    "max": 19,
+    "unit": "kg",
+    "area_unit": "m2",
+    "per": "cm",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 19,
+    "base_max": 19
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.9,
+     "high": 1.9,
+     "perMm": true,
+     "text": "This depends on the substrate roughness and thickness of layer applied. As a guide, ~ 19 kg of powder per cm thick per m2"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/v/sika_monotop_-412nfg.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-monotop-612n",
+   "category": "construction/concrete-repair-protection/concrete-repair-mortars/cementitious-repairmortars",
+   "lane": "As a guide, ~ 19.0 kg of powder per cm thick per m2",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 19,
+    "max": 19,
+    "unit": "kg",
+    "area_unit": "m2",
+    "per": "cm",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 19,
+    "base_max": 19
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.9,
+     "high": 1.9,
+     "perMm": true,
+     "text": "This depends on the substrate roughness and thickness of layer applied. As a guide, ~ 19.0 kg of powder per cm thick per m2"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sika-monotop-612n.pdf",
+    "v": "April 2023, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-ferrogard-903plus",
+   "category": "construction/concrete-repair-protection/corrosion-inhibitorssacrificialanodes",
+   "lane": "Generally ~0.50 kg/m² (~480 ml/m²)",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 480,
+    "max": 480,
+    "unit": "mL",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "L/m2",
+    "base_min": 0.48,
+    "base_max": 0.48
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.5,
+     "high": 0.5,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "ml",
+     "low": 480,
+     "high": 480,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.3,
+     "high": 0.3,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "ml",
+     "low": 290,
+     "high": 290,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/s/sika_ferrogard_-903plus.pdf",
+    "v": "April 2023, Version 03.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-ferrogard-903plus",
+   "category": "construction/concrete-repair-protection/corrosion-inhibitorssacrificialanodes",
+   "lane": "For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²)",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 290,
+    "max": 290,
+    "unit": "mL",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "L/m2",
+    "base_min": 0.29,
+    "base_max": 0.29
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.5,
+     "high": 0.5,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "ml",
+     "low": 480,
+     "high": 480,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.3,
+     "high": 0.3,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    },
+    {
+     "kind": "per_area",
+     "unit": "ml",
+     "low": 290,
+     "high": 290,
+     "perMm": false,
+     "text": "Generally ~0.50 kg/m² (~480 ml/m²). For very dense concrete with low permeability, the rate of application of Sika® FerroGard®-903 Plus can be reduced but must not be lower than 0.300 kg/m² (290 ml/m²). To assess project requirements, consumption and depth of penetration shall be checked on site using the Sika “Qualitative Analysis” – refer to the relevant method statement."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/s/sika_ferrogard_-903plus.pdf",
+    "v": "April 2023, Version 03.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-monotop-910n",
+   "category": "construction/concrete-repair-protection/concrete-repair-mortars/steel-reinforcmentprimers",
+   "lane": "Reinforcement Corrosion Protection: As a guide, ~2.0 kg of powder per m2 for 1mm layer thickness (in total min 2 layers)",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 2,
+    "max": 2,
+    "unit": "kg",
+    "area_unit": "m2",
+    "per": "mm",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 2,
+    "base_max": 2
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.5,
+     "high": 2,
+     "perMm": true,
+     "text": "Bonding Primer:\nThis depends on the substrate roughness and thickness of layer applied. As a guide, ~1.5 – 2.0 kg of powder per m² per mm thick. Reinforcement Corrosion Protection: As a guide, ~2.0 kg of powder per m2 for 1mm layer thickness (in total min 2 layers)"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/n/sika_monotop_-910n.pdf",
+    "v": "May 2025, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikabond-t-55-j",
+   "category": "construction/flooring/flooring-adhesivessystems",
+   "lane": "600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 600,
+    "max": 800,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.6,
+    "base_max": 0.8
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 600,
+     "high": 800,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 700,
+     "high": 900,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 800,
+     "high": 1000,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sikabond_t-55_j.pdf",
+    "v": "October 2024, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikabond-t-55-j",
+   "category": "construction/flooring/flooring-adhesivessystems",
+   "lane": "700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 700,
+    "max": 900,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.7,
+    "base_max": 0.9
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 600,
+     "high": 800,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 700,
+     "high": 900,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 800,
+     "high": 1000,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sikabond_t-55_j.pdf",
+    "v": "October 2024, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikabond-t-55-j",
+   "category": "construction/flooring/flooring-adhesivessystems",
+   "lane": "800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 800,
+    "max": 1000,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.8,
+    "base_max": 1
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 600,
+     "high": 800,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 700,
+     "high": 900,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    },
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 800,
+     "high": 1000,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n600−800 g/m2 with notched trowel B3 (TKB Germany) e.g. for lam parquet, mosaic parquet and industrial parquet.\n700−900 g/m2 with notched trowel B6 (TKB Germany) or SC+ MB (US Standard) e.g. for engineered wood strips and planks, lam and mosaic parquet.\n800−1000 g/m2 with notched trowel B11 (TKB Germany) or P5 (US Standard) e.g. solid wood, engineered long-strips and panels, industrial parquet, other residential wood floors and paving, and chipboard.\nFor bonding long or wide boards and on uneven substrates, it may be necessary to use a larger notched trowel to ensure that a sufficient amount of SikaBond® T-55 J is applied to provide a uniform adhesive bed to prevent hollow sections without full surface bond. For substrates primed with Sika® Primer MB, the consumption of SikaBond® T-55 J may be reduced."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sikabond_t-55_j.pdf",
+    "v": "October 2024, Version 01.05",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikabond-58-woodfloor",
+   "category": "construction/flooring/flooring-adhesivessystems",
+   "lane": "800−1300 g/m2 with notched trowel",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 800,
+    "max": 1300,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.8,
+    "base_max": 1.3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 800,
+     "high": 1300,
+     "perMm": false,
+     "text": "Full Surface Bonding:\n800−1300 g/m2 with notched trowel"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/x/sikabond_-58_woodfloor.pdf",
+    "v": "November 2023, Version 01.04",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-colma-cleaner",
+   "category": "construction/sealants-adhesives/cleaners-activatorsprimers",
+   "lane": "50 ml/m2 approx.",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 50,
+    "max": 50,
+    "unit": "mL",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "L/m2",
+    "base_min": 0.05,
+    "base_max": 0.05
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "ml",
+     "low": 50,
+     "high": 50,
+     "perMm": false,
+     "text": "50 ml/m2 approx."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/4/sika_colma_cleaner.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 1,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sarnacol-2152",
+   "category": "construction/roofing/pvc-sheet-membranes/system-adhesives",
+   "lane": "Consumption depends on the roughness and absorbency of the substrate and is about 500–1 000 g/m².",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 0,
+    "max": 0,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": null,
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0,
+    "base_max": 0
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 500,
+     "high": 1000,
+     "perMm": false,
+     "text": "Consumption depends on the roughness and absorbency of the substrate and is about 500–1 000 g/m²."
+    }
+   ],
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/roofing/pvc-sheet-membranes/system-adhesives/sarnacol-2152.html",
+    "v": null,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikagard-706-thixo",
+   "category": "construction/concrete-repair-protection/silane-impregnations",
+   "lane": "Dependent on substrate profile and porosity as well as the required penetration depth: ~ 200–300 g/m2 per coat",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 200,
+    "max": 300,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": "coat",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.2,
+    "base_max": 0.3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 200,
+     "high": 300,
+     "perMm": false,
+     "text": "Dependent on substrate profile and porosity as well as the required penetration depth: ~ 200–300 g/m2 per coat. Normally, 1 coat is enough – preliminary trial shall be carried out to assess the penetration depth in the substrate."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/p/sikagard_-706_thixo.pdf",
+    "v": "April 2023, Version 02.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikagard-705-l",
+   "category": "construction/concrete-repair-protection/silane-impregnations",
+   "lane": "Dependent on absorbency of the substrate as well as the required penetration depth: ~ 150 g/m2 per coat.",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 150,
+    "max": 150,
+    "unit": "g",
+    "area_unit": "m2",
+    "per": "coat",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 0.15,
+    "base_max": 0.15
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "g",
+     "low": 150,
+     "high": 150,
+     "perMm": false,
+     "text": "Dependent on absorbency of the substrate as well as the required penetration depth: ~ 150 g/m2 per coat."
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/s/sikagard_-705_l.pdf",
+    "v": "April 2023, Version 04.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikafloor-level-eco",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "12L - 4m2 @ 3mm thickness",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 12,
+    "unit": "L",
+    "area_min": 4,
+    "area_max": 4,
+    "basis_stated": true,
+    "at_thickness_mm": 3
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1,
+     "high": 1,
+     "perMm": true,
+     "text": "12L - 4m2 @ 3mm thickness"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/r/sikafloor_level_eco.pdf",
+    "v": "August 2024, Version 02.07",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikafloor-215-rapidscreed",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "10L = 1m2 @ 10mm",
+   "laneParsed": {
+    "model": "pack_covers_area",
+    "amount": 10,
+    "unit": "L",
+    "area_min": 1,
+    "area_max": 1,
+    "basis_stated": true,
+    "at_thickness_mm": 10
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "L",
+     "low": 1,
+     "high": 1,
+     "perMm": true,
+     "text": "10L = 1m2 @ 10mm"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/d/sikafloor-215-rapidscreed.pdf",
+    "v": "May 2023, Version 01.07",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sikaceram-880-easyepoxy",
+   "category": "construction/tile-stone-installationsystems/tile-grouts",
+   "lane": "Approximately 1.6 kg/m² and mm layer thickness",
+   "laneParsed": {
+    "model": "per_area",
+    "min": 1.6,
+    "max": 1.6,
+    "unit": "kg",
+    "area_unit": "m2",
+    "per": "mm",
+    "basis_stated": true,
+    "base_unit": "kg/m2",
+    "base_min": 1.6,
+    "base_max": 1.6
+   },
+   "engine": [
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.6,
+     "high": 1.6,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1.9,
+     "high": 1.9,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 2.3,
+     "high": 2.3,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 3.2,
+     "high": 3.2,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 3.8,
+     "high": 3.8,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 1,
+     "high": 1,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.7,
+     "high": 0.7,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    },
+    {
+     "kind": "per_area",
+     "unit": "kg",
+     "low": 0.3,
+     "high": 0.3,
+     "perMm": false,
+     "text": "Approximately 1.6 kg/m² and mm layer thickness\nTILE LAYING\nNotch size | Consumption\n4 mm | 1.9 kg/m²\n6 mm | 2.3 kg/m²\n8 mm | 3.2 kg/m²\n10 mm | 3.8 kg/m²\nGROUTING\nNotch size | Consumption\nMedium mosaic 5 × 5 cm (3 mm joint width, 5 mm joint depth) | 1.0 kg/m²\nTiles 20 × 20 cm (5 mm joint width, 8 mm joint depth) | 0.7 kg/m²\nFully vitrified tiles 30 × 60 cm (4 mm joint width, 8 mm joint depth) | 0.3 kg/m²"
+    }
+   ],
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/q/sikaceram-880-easyepoxy.pdf",
+    "v": "December 2025, Version 02.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  }
+ ],
+ "engine_missing_list": [
+  {
+   "id": "sika-primer-3-n",
+   "category": "construction/sealants-adhesives/cleaners-activatorsprimers",
+   "lane": "On porous substrates | 5 m2 | 250 m",
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/sealants-adhesives/cleaners-activatorsprimers/sika-primer-3-n.html",
+    "v": null,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-primer-3-n",
+   "category": "construction/sealants-adhesives/cleaners-activatorsprimers",
+   "lane": "On non-porous substrates | 8 m2 | 400 m",
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/sealants-adhesives/cleaners-activatorsprimers/sika-primer-3-n.html",
+    "v": null,
+    "sec": "Consumption"
+   }
+  },
+  {
+   "id": "sika-floorjoint-ps-30s",
+   "category": "construction/flooring/floor-joints",
+   "lane": "Floor coating | Sikafloor®-304 W Sikafloor®-263 SL / -264 | ~1–2 × 0,13 kg/m² ~1–2 × 0,25-0,30 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sika_floorjoint_ps-30s.pdf",
+    "v": "April 2023, Version 02.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sika-floorjoint-ps-30s",
+   "category": "construction/flooring/floor-joints",
+   "lane": "Floor coating | Sikafloor®-304 W Sikafloor®-263 SL / -264 | ~1–2 × 0,13 kg/m² ~1–2 × 0,25-0,30 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/6/sika_floorjoint_ps-30s.pdf",
+    "v": "April 2023, Version 02.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer Scratch Coat (If required) | 1 × Sikafloor®-160/-161 Sikafloor®-161 filled 1:0.5 filler 503 | ~0.25-0.35 kg/m² 1 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer Scratch Coat (If required) | 1 × Sikafloor®-160/-161 Sikafloor®-161 filled 1:0.5 filler 503 | ~0.25-0.35 kg/m² 1 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Broadcast in excess | quartz sand 0.4–0.7 mm | ~3-4 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "First seal coat | 1 × Sikafloor®-264 | ~0.55–0.65 kg/m² (2.2-2.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "First seal coat | 1 × Sikafloor®-264 | ~0.55–0.65 kg/m² (2.2-2.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Second seal coat | 1 × Sikafloor®-264 | ~0.25–0.30 kg/m² (4.7-5.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Second seal coat | 1 × Sikafloor®-264 | ~0.25–0.30 kg/m² (4.7-5.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/3/sikafloor_multidureb-14.pdf",
+    "v": "April 2023, Version 03.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer | 1 x Sikafloor® 160/-161 | ~ 0.25–0.35 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/l/sikafloor_multidureb-24.pdf",
+    "v": "April 2023, Version 04.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Wearing coat | Sikafloor®-263 SL 1 and 2mm Comprising of 1kg of Sikafloor®-264 and 1kg of filler 503 | ~ 1.9kg/m²/mm",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/l/sikafloor_multidureb-24.pdf",
+    "v": "April 2023, Version 04.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Broadcast in excess | quartz sand 0.4 – 0.7 mm | ~ 4 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/l/sikafloor_multidureb-24.pdf",
+    "v": "April 2023, Version 04.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top coats | 1–2 × Sikafloor®-264 | ~ 0.25–0.30 kg/m² (4.7-5.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/l/sikafloor_multidureb-24.pdf",
+    "v": "April 2023, Version 04.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidureb-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top coats | 1–2 × Sikafloor®-264 | ~ 0.25–0.30 kg/m² (4.7-5.5m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/l/sikafloor_multidureb-24.pdf",
+    "v": "April 2023, Version 04.03",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer | 1–2 × Sikafloor®-161/-160 | 1–2 × 0.35–0.55 kg/m² (5-6m2 Per L)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/8/sikafloor_multidures-14.pdf",
+    "v": "April 2023, Version 02.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer | 1–2 × Sikafloor®-161/-160 | 1–2 × 0.35–0.55 kg/m² (5-6m2 Per L)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/8/sikafloor_multidures-14.pdf",
+    "v": "April 2023, Version 02.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top coat | 1–2 × Sikafloor®-264 | 1–2 × 0.25–0.3 kg/m² (4-6m2 Per L)for each layer",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/8/sikafloor_multidures-14.pdf",
+    "v": "April 2023, Version 02.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top coat | 1–2 × Sikafloor®-264 | 1–2 × 0.25–0.3 kg/m² (4-6m2 Per L)for each layer",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/8/sikafloor_multidures-14.pdf",
+    "v": "April 2023, Version 02.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer (optional) | 1 × Sikafloor®-161/-160 | ~ 0.25-0.35 kg/m² (4-6m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer (optional) | 1 × Sikafloor®-161/-160 | ~ 0.25-0.35 kg/m² (4-6m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "1st Coat | 1× Sikafloor®-264/-264T AU | ~ 0.25-0.35 kg/m² (4-6m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "1st Coat | 1× Sikafloor®-264/-264T AU | ~ 0.25-0.35 kg/m² (4-6m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top Coat | 1 x Sikafloor 264/-264T AU | ~ 0.20-0.30 kg/m² (5-7m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiduret-14",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Top Coat | 1 x Sikafloor 264/-264T AU | ~ 0.20-0.30 kg/m² (5-7m²/litre)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiduret-14.pdf",
+    "v": "April 2023, Version 03.05",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-decodures-26flake",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer | 1–2 × Sikafloor®-160/-161 | ~0.25-0.35 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sikafloor_decodures-26flake.pdf",
+    "v": "April 2023, Version 05.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-decodures-26flake",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Wearing coat | Sikafloor®-264 | ~0.3-0.4 kg m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sikafloor_decodures-26flake.pdf",
+    "v": "April 2023, Version 05.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-decodures-26flake",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Broadcast | Broadcast in excess with Sika®-PVA ColorFlakes 3 mm | ~0.45-0.65 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sikafloor_decodures-26flake.pdf",
+    "v": "April 2023, Version 05.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-decodures-26flake",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "First seal coat | 1 × Sikafloor®-169 | ~0.3-0.4 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sikafloor_decodures-26flake.pdf",
+    "v": "April 2023, Version 05.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-decodures-26flake",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Second seal coat | 1 × Sikafloor®-169 | ~0.25 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/o/sikafloor_decodures-26flake.pdf",
+    "v": "April 2023, Version 05.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-44esd",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer | Sikafloor®-160/-161 | 1–2 × ~ 0.3–0.5 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/z/sikafloor_multidures-44esd.pdf",
+    "v": "April 2023, Version 02.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-44esd",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Base coating | Sikafloor®-263 SL filled with quartz sand F34* | ~1.9–2.7 kg/m² Binder + quartz sand F 34: 1:0.6 – 1:1 pbw (Depending on the air temperature the filling grade varies)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/z/sikafloor_multidures-44esd.pdf",
+    "v": "April 2023, Version 02.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-44esd",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Final ESD coating | Sikafloor®-305 W ESD | 1–2 × 0.18–0.2 kg/m²/layer",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/z/sikafloor_multidures-44esd.pdf",
+    "v": "April 2023, Version 02.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer Scratch coat (If required) | 1 × Sikafloor®-160/-161 Sikafloor®-161 filled 1:0.5 filler 503 | ~ 0.25–0.35 kg/m² 1 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/sikafloor_multidures-24.pdf",
+    "v": "April 2023, Version 03.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Primer Scratch coat (If required) | 1 × Sikafloor®-160/-161 Sikafloor®-161 filled 1:0.5 filler 503 | ~ 0.25–0.35 kg/m² 1 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/sikafloor_multidures-24.pdf",
+    "v": "April 2023, Version 03.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Wearing coat | 1 x Sikafloor®-263 SL 2 and 3mm comprising of 1kg of Sikafloor®-264 and 1kg of filler 503 | ~ 1.9kg/m²/mm",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/sikafloor_multidures-24.pdf",
+    "v": "April 2023, Version 03.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "Finish coat - optional | Sikafloor 264/-264T AU | ~ 0.20–0.30 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/sikafloor_multidures-24.pdf",
+    "v": "April 2023, Version 03.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multidures-24",
+   "category": "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems",
+   "lane": "UV stable Topcoat | Sikafloor 359 AU | 6-8 m²/litre",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/h/sikafloor_multidures-24.pdf",
+    "v": "April 2023, Version 03.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhb-22",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "Scratch coat (optional) | Sikafloor®-21/-22/-24 PurCem® | ~3 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/j/sikafloor_purcemhb-22.pdf",
+    "v": "April 2023, Version 04.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhb-22",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "1. Base coat | Sikafloor®-21 PurCem® + Aggregate broadcast 0.9–1.4 mm | ~1.9 kg/m2/mm ~4–5 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/j/sikafloor_purcemhb-22.pdf",
+    "v": "April 2023, Version 04.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhb-22",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "1. Base coat | Sikafloor®-21 PurCem® + Aggregate broadcast 0.9–1.4 mm | ~1.9 kg/m2/mm ~4–5 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/j/sikafloor_purcemhb-22.pdf",
+    "v": "April 2023, Version 04.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhb-22",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "2. Top coat | Sikafloor®-31 PurCem® | ~0.7–0.8 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/j/sikafloor_purcemhb-22.pdf",
+    "v": "April 2023, Version 04.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhs-24",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "1. Scratch coat | Sikafloor® -24 PurCem® | ~ 2.0 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/i/sikafloor_purcemhs-24.pdf",
+    "v": "April 2023, Version 05.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-purcemhs-24",
+   "category": "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems",
+   "lane": "2. Body coat | Sikafloor® -24 PurCem® | ~ 1.9 kg/m2/mm",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/i/sikafloor_purcemhs-24.pdf",
+    "v": "April 2023, Version 05.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-56uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "1. Primer | Sikafloor®-160 / 161 + Aggregate broadcast 0,4–0,8 mm | ~0,4 kg/m2/layer ~1,0 kg/m2 (Broadcast Sand)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiflexpb-56uv.pdf",
+    "v": "April 2023, Version 01.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-56uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "1. Primer | Sikafloor®-160 / 161 + Aggregate broadcast 0,4–0,8 mm | ~0,4 kg/m2/layer ~1,0 kg/m2 (Broadcast Sand)",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiflexpb-56uv.pdf",
+    "v": "April 2023, Version 01.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-56uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "3.Seal / top coat | Sikafloor®-359 N | ~0,7–0,9 kg/m2/ total consumption applied in 2 x coats for best results",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/e/sikafloor_multiflexpb-56uv.pdf",
+    "v": "April 2023, Version 01.02",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "1. Primer | Sikafloor® 160/-161 + Aggregate broadcast 0,4–0,8 mm | ~0,4 kg/m2/layer ~1,0 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "1. Primer | Sikafloor® 160/-161 + Aggregate broadcast 0,4–0,8 mm | ~0,4 kg/m2/layer ~1,0 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "2. Membrane | Sikafloor®-376 | ~1,9 kg/m2/1.5mm: Total consumption",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "3. Wearing layer | Sikafloor®-377 (filled 1:0.4 with Sikafloor Filler) + Aggregate broadcast 0,4–0,8 mm | ~2.2 kg/m2/1.5mm: Sikafloor 377 Mixture (filled 1:0.4 with Sikafloor Filler) ~6,0–8,0 kg/m2 Selected broadcast Material",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "3. Wearing layer | Sikafloor®-377 (filled 1:0.4 with Sikafloor Filler) + Aggregate broadcast 0,4–0,8 mm | ~2.2 kg/m2/1.5mm: Sikafloor 377 Mixture (filled 1:0.4 with Sikafloor Filler) ~6,0–8,0 kg/m2 Selected broadcast Material",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "4. Seal Coat 5. Top Coat | Sikafloor 377 (Tinted) Sikafloor®-359 N | ~0,7-0.9 kg/m2 ~0,2- 0.25 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "4. Seal Coat 5. Top Coat | Sikafloor 377 (Tinted) Sikafloor®-359 N | ~0,7-0.9 kg/m2 ~0,2- 0.25 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "Rz = 0,0: ~1,9 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "Rz = 0,5: ~2,5 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexpb-55uv",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "Rz = 1,0: ~3 kg/m2",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/9/sikafloor_multiflexpb-55uv.pdf",
+    "v": "April 2023, Version 01.04",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexps-32esd",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "1. Primer | Sikafloor®-160/-161 | 1–2 × ~0,3–0,5 kg/m²",
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems/sikafloor-multiflexps-32esd.html",
+    "v": null,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexps-32esd",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "3. Base coat | Sikafloor®-377 Tinted | ~1,8 kg/m2/layer (~1 mm thickness)",
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems/sikafloor-multiflexps-32esd.html",
+    "v": null,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sikafloor-multiflexps-32esd",
+   "category": "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems",
+   "lane": "5. Final conductive coating | Sikafloor®-305 W ESD | 1–2 × 0,18 – 0,2 kg/m²/layer",
+   "s": {
+    "t": "WEB",
+    "u": "https://aus.sika.com/en/construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems/sikafloor-multiflexps-32esd.html",
+    "v": null,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "sika-floorjoint-pb-30pdrs",
+   "category": "construction/flooring/floor-joints",
+   "lane": "Top coat | Sikafloor®-359 N | ~0,9 kg/m²",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/m/sika_floorjoint_pb-30pdrs.pdf",
+    "v": "April 2023, Version 05.01",
+    "p": 3,
+    "sec": "Application consumption"
+   }
+  },
+  {
+   "id": "lanko-145-floor-leveller",
+   "category": "construction/flooring/cement-levellingsystems",
+   "lane": "12 L = 4m2 at 3mm",
+   "s": {
+    "t": "PDS",
+    "u": "https://aus.sika.com/content/dam/dms/au01/y/lanko-145-floor-leveller.pdf",
+    "v": "September 2024, Version 01.01",
+    "p": 2,
+    "sec": "Consumption"
+   }
+  }
+ ]
+}

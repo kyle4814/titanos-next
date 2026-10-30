@@ -4,6 +4,7 @@ import { derived, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, breadcrumb, pager, emptyState, placeholder, addButton } from './components.js';
 import { notFound } from './views.js';
+import { mergeDocStatus, extraTabs } from './apply_data.js';
 
 const TYPE_LABEL = { product_data_sheet: 'Product data sheet', safety_data_sheet: 'Safety data sheet', brochure: 'Brochure', environmental_product_declaration: 'Environmental declaration', system_data_sheet: 'System data sheet', certificate: 'Certificate', guide: 'Guide', technical_information: 'Technical information', colour_chart: 'Colour chart', reference: 'Reference', document: 'Other document', '': 'Other document' };
 export const typeLabel = (t) => TYPE_LABEL[t] || titleCase(t || 'document');
@@ -49,7 +50,7 @@ export async function productView(ctx) {
   const id = ctx.rest; const dv = await derived();
   let p; try { p = await data.product(id); } catch { return notFound(ctx, 'product'); }
   const specs = await data.specs(); const specFor = specs && (specs.products ? specs.products[id] : specs[id]);
-  const docs = (p.docs || []); const okDocs = docs.filter(docOk);
+  const docs = (p.docs || []); await mergeDocStatus(docs); const okDocs = docs.filter(docOk);
   const pds = okDocs.find((d) => d.type === 'product_data_sheet'); const sds = okDocs.find((d) => d.type === 'safety_data_sheet');
   const path = p.categoryPath; const crumbs = [{ label: 'Home', href: '#/' }];
   path.forEach((_, i) => { const c = dv.catById.get(path.slice(0, i + 1).join('/')); if (c) crumbs.push({ label: c.name, href: '#/category/' + c.id }); });
@@ -71,6 +72,7 @@ export async function productView(ctx) {
   if (detail.length || other.length) tabs.push({ id: 'details', label: 'Product details', body: () => accordion([...detail, ...other]) });
   if (applic.length) tabs.push({ id: 'application', label: 'Application', body: () => accordion(applic) });
   if (specFor && (specFor.clauses || specFor).length) tabs.push({ id: 'specification', label: 'Specification', body: () => specPanel(p, specFor) });
+  tabs.push(...await extraTabs(p, ctx, docs));
   if (faq.length) tabs.push({ id: 'faq', label: 'FAQs', body: () => accordion(faq) });
   tabs.push({ id: 'documents', label: `Documents (${docs.length})`, body: () => docs.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['Document', 'Type', 'Format', 'Size', 'Version'].map((x, i) => h('th', { class: i > 2 ? 'num' : '' }, x)))), h('tbody', null, docs.map((d) => docRow(d, dv))))) : h('p', null, 'No documents are listed on the public product page. Check the company website or contact technical services.') });
   const want = ctx.params.get('tab'); let active = Math.max(0, tabs.findIndex((t) => t.id === want));

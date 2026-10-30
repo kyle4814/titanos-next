@@ -4,6 +4,7 @@ import { h, icon, esc, $, announce, hashHref, focusSoon } from './util.js';
 import { data, derived, documents, docOk, docHref } from './data.js';
 import { typeLabel } from './views2.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
+import { askWithData, decorateBlock } from './apply_data.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null;
 const history = [];
@@ -36,7 +37,7 @@ const closeOnMobile = () => { if (window.matchMedia('(max-width: 39.99em)').matc
 function renderAnswer(a) {
   const body = h('div', { class: 'msg msg--bot' });
   const hasFrom = a.blocks.some((b) => b.type === 'text' && /published documentation/i.test(b.text));
-  a.blocks.forEach((b) => { const n = renderBlock(b); if (n) body.append(n); });
+  a.blocks.forEach((b) => { const n = renderBlock(b); if (n) body.append(decorateBlock(n, b)); });
   if (a.citations && a.citations.length) {
     const seen = new Set(); const cites = a.citations.filter((c) => !seen.has(c.url) && seen.add(c.url));
     body.append(h('div', { class: 'cite' }, h('strong', null, 'Sources'), h('ol', null, cites.map((c) => h('li', null, extLink(c.url, c.label + (c.kind === 'pdf' ? ' (PDF)' : ''), 'link')))), hasFrom ? null : h('div', null, `From ${cfg.company.publishedDocsPhrase}.`)));
@@ -56,7 +57,7 @@ export async function send(text, label) {
     await ensure();
     const t0 = performance.now();
     const rule = matchRule(rules, text);
-    const a = rule ? ruleAnswer(rule, text) : engine.ask(text, state); state = a.state || null;
+    const a = rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state); state = a.state || null;
     await new Promise((r) => setTimeout(r, 140));
     wait.replaceWith(renderAnswer(a)); log.scrollTop = log.scrollHeight;
     announce('The advisor has answered.');

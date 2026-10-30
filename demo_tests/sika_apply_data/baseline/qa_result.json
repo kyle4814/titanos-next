@@ -1,0 +1,246 @@
+{
+ "generated": "2026-10-30T08:10:16.010Z",
+ "stats": {
+  "products": 512,
+  "documents": 1656,
+  "categories": 165,
+  "pages": 767,
+  "terms": 9196,
+  "postings": 145398,
+  "buildMs": 856.3,
+  "indexMs": 850.6
+ },
+ "products": 512,
+ "results": [
+  {
+   "id": "f1",
+   "question": "What adhesive for porcelain tiles on concrete?",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-400-evopro",
+   "pass": true,
+   "errors": [],
+   "ms": 79.75
+  },
+  {
+   "id": "f2",
+   "question": "waterproofing a balcony",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikatile-110-secureproof",
+   "pass": true,
+   "errors": [],
+   "ms": 29.26
+  },
+  {
+   "id": "f3",
+   "question": "Which sealant for a shower?",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikaseal-kitchenandbathroom",
+   "pass": true,
+   "errors": [],
+   "ms": 33.38
+  },
+  {
+   "id": "f4",
+   "question": "self-levelling compound for a timber floor",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sikafloor-4020-fiberlevel",
+   "pass": true,
+   "errors": [],
+   "ms": 31.6
+  },
+  {
+   "id": "f5",
+   "question": "repair mortar for spalling concrete",
+   "expectedIntent": "find_product",
+   "intent": "find_product",
+   "top": "sika-monotop-fc",
+   "pass": true,
+   "errors": [],
+   "ms": 58.85
+  },
+  {
+   "id": "c1",
+   "question": "What is the coverage of Davco Grey One Pot adhesive?",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "davco-grey-one-potadhesive",
+   "pass": true,
+   "errors": [],
+   "ms": 38.68
+  },
+  {
+   "id": "c2",
+   "question": "Sikafloor Level Ultra consumption",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sikafloor-level-ultra",
+   "pass": true,
+   "errors": [],
+   "ms": 30.38
+  },
+  {
+   "id": "c3",
+   "question": "What dosage of Sika ViscoCrete-1250 should I use?",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 11.52
+  },
+  {
+   "id": "c4",
+   "question": "how far does Sika Rugasol C go per litre",
+   "expectedIntent": "consumption",
+   "intent": "consumption",
+   "top": "sika-rugasol-c",
+   "pass": true,
+   "errors": [],
+   "ms": 2.35
+  },
+  {
+   "id": "d1",
+   "question": "PDS for Sikaflex 11 FC+",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "1671",
+   "pass": true,
+   "errors": [],
+   "ms": 13.05
+  },
+  {
+   "id": "d2",
+   "question": "SDS for viscocrete 1250",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 7
+  },
+  {
+   "id": "d3",
+   "question": "safety data sheet Davco Trojan Mastic",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "davco-trojan-mastic",
+   "pass": true,
+   "errors": [],
+   "ms": 8.77
+  },
+  {
+   "id": "d4",
+   "question": "Sika MonoTop-412 NFG data sheet",
+   "expectedIntent": "documents",
+   "intent": "documents",
+   "top": "sika-monotop-412nfg",
+   "pass": true,
+   "errors": [],
+   "ms": 11.04
+  },
+  {
+   "id": "m1",
+   "question": "What primer for Sikafloor Level Pro?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "sikafloor-level-pro",
+   "pass": true,
+   "errors": [],
+   "ms": 15.38
+  },
+  {
+   "id": "m2",
+   "question": "What is compatible with Sika ViscoCrete-1250?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "sika-viscocrete-1250",
+   "pass": true,
+   "errors": [],
+   "ms": 38.88
+  },
+  {
+   "id": "m3",
+   "question": "Can I use Davco Grey One Pot over concrete?",
+   "expectedIntent": "compatibility",
+   "intent": "compatibility",
+   "top": "davco-grey-one-potadhesive",
+   "pass": true,
+   "errors": [],
+   "ms": 7.75
+  },
+  {
+   "id": "q1",
+   "question": "How much Davco Trojan Mastic for 40 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "davco-trojan-mastic",
+   "pass": true,
+   "errors": [],
+   "ms": 11.4
+  },
+  {
+   "id": "q2",
+   "question": "How much Sikafloor Level Ultra for 30 m2 at 5 mm thick?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "sikafloor-level-ultra",
+   "pass": true,
+   "errors": [],
+   "ms": 3.72
+  },
+  {
+   "id": "q3",
+   "question": "How much Sika Film do I need for 100 m2?",
+   "expectedIntent": "quote",
+   "intent": "quote",
+   "top": "sika-film",
+   "pass": true,
+   "errors": [],
+   "ms": 8.51
+  },
+  {
+   "id": "o1",
+   "question": "Who won the footy grand final last year?",
+   "expectedIntent": "out_of_scope",
+   "intent": "out_of_scope",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 24.58
+  },
+  {
+   "id": "s1",
+   "question": "How much Davco Ultraprime do I need? > 30 m2 > add 10% waste",
+   "expectedIntent": "quote",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  },
+  {
+   "id": "s2",
+   "question": "datasheet for Davco Trojan Mastic > and the SDS > what is the coverage",
+   "expectedIntent": "consumption",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  },
+  {
+   "id": "s3",
+   "question": "how much Sikafloor Level Ultra for 20 m2 > 3 mm",
+   "expectedIntent": "quote",
+   "intent": "(multi-turn)",
+   "top": "-",
+   "pass": true,
+   "errors": [],
+   "ms": 0
+  }
+ ]
+}
