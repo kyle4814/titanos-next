@@ -11,7 +11,8 @@ import { personaBlock } from './lib/persona.js';
 import { extraRoutes } from './lib/extras.js';
 
 const main = $('#main');
-let cfg, assistant, lastPath = null, token = 0, firstRender = true;
+let cfg, assistant, lastPath = null, token = 0, firstRender = true, leaving = false;
+addEventListener('pagehide', () => { leaving = true; }); // a full navigation aborts in-flight fetches: not an error worth reporting
 
 const openAssistant = (q, from) => { (assistant || Promise.resolve(null)).then((a) => a && a.open(q, from || document.activeElement)); };
 
@@ -50,7 +51,7 @@ async function render(sameAsBefore = false) {
     firstRender = false;
     if (keep) { const el = document.getElementById(keep.id); if (el) { el.focus({ preventScroll: true }); try { el.setSelectionRange(keep.s, keep.e); } catch { /* not a text input */ } } }
   } catch (e) {
-    if (my !== token) return;
+    if (my !== token || leaving) return;
     console.error('view error', e);
     main.replaceChildren(errorState(e, () => render())); main.removeAttribute('aria-busy');
   }

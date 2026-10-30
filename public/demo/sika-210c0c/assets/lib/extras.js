@@ -1,2 +1,5 @@
-// Extra routes registered here (system selector and system sheets are added when their data is ready).
-export const extraRoutes = [];
+// Extra routes registered here, one line each (lanes add their own line).
+import { selectorView } from './views-selector.js';
+export const extraRoutes = [
+  [/^\/selector$/, (c) => selectorView(c)],
+];

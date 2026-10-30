@@ -53,7 +53,7 @@ function megaFor(root) {
       h('h4', null, h('a', { href: '#/category/' + c.id }, c.name)),
       h('ul', null, kids.map((k) => h('li', null, h('a', { href: '#/category/' + k.id }, k.name))), (c.children || []).length > kids.length ? h('li', null, h('a', { href: '#/category/' + c.id, class: 'link' }, `All ${c.name} (${nf.format(c.productCount)})`)) : null)));
   }
-  return h('div', { class: 'mega container' }, wrap, h('div', { class: 'mega-foot' }, h('a', { class: 'btn btn--hollow', href: '#/products?cat=' + encodeURIComponent(root) }, `All ${nf.format(top ? top.productCount : 0)} products in ${top ? top.name : ''}`), h('a', { class: 'btn btn--text', href: '#/documents' }, 'Data sheets and documents')));
+  return h('div', { class: 'mega container' }, wrap, h('div', { class: 'mega-foot' }, h('a', { class: 'btn btn--hollow', href: '#/products?cat=' + encodeURIComponent(root) }, `All ${nf.format(top ? top.productCount : 0)} products in ${top ? top.name : ''}`), h('a', { class: 'btn btn--text', href: '#/documents' }, 'Data sheets and documents'), root === 'construction' ? h('a', { class: 'btn btn--text', href: '#/selector' }, 'Tiling system selector') : null));
 }
 
 function mainNav() {
