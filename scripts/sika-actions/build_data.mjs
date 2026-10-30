@@ -91,4 +91,12 @@ gr.products.forEach((p) => { (p.says_suitable || []).slice(0, 2).forEach((r) => 
 trees.rules = {}; for (const r of used) if (dt.rules[r]) trees.rules[r] = dt.rules[r]; ;
 trees.cards = {}; for (const [id, c] of Object.entries(dt.product_cards)) trees.cards[id] = { name: c.name, product_url: c.product_url, pds: c.pds || null };
 wr('data/actions/trees.json', trees);
+// alternatives for a No: per substrate, the tile adhesives documented for it in the most decision tree leaves (small, so a product question never loads the trees)
+const alts = {};
+for (const sub of ad.questions[2].options.map((o) => o.id)) {
+  const cnt = new Map();
+  for (const [k, leaf] of Object.entries(trees.adhesive.leaves)) if (k.endsWith('|' + sub)) for (const e of leaf.documented_fit) { const x = cnt.get(e.product) || { n: 0, ev: null }; x.n++; if (!x.ev && e.evidence && e.evidence[0]) x.ev = e.evidence[0]; cnt.set(e.product, x); }
+  alts[sub] = [...cnt].sort((a, b) => b[1].n - a[1].n).slice(0, 5).map(([id, x]) => { const r = trees.rules[x.ev] || null; const cd = trees.cards[id] || {}; return { product: id, name: cd.name || id, product_url: cd.product_url || '', rule: r ? { text: r.text, url: r.url, page: r.page, doc_version: r.doc_version || '' } : null }; });
+}
+wr('data/actions/alts.json', alts);
 console.log(`rates ${nr} files, compat ${nc} files, safety ${ns} files, trees ${Object.keys(trees.rules).length} rules`);

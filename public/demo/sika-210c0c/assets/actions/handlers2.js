@@ -75,15 +75,11 @@ export async function compat(ctx) {
   // when the answer is No or silent for a surface, offer the tile adhesives whose own published text documents a fit for it (from the decision trees)
   const subWant = wants.find((w) => w.kind === 'substrate');
   if ((anyNo || anyUnstated) && subWant && pf.substrate) {
-    const trees = await data.trees();
-    if (trees) {
-      const cnt = new Map();
-      for (const [k, leaf] of Object.entries(trees.adhesive.leaves)) if (k.endsWith('|' + pf.substrate)) for (const e of leaf.documented_fit) { const x = cnt.get(e.product) || { n: 0, ev: null }; x.n++; if (!x.ev && e.evidence && e.evidence[0]) x.ev = e.evidence[0]; cnt.set(e.product, x); }
-      const top = [...cnt].filter(([id]) => id !== p.id).sort((a, b) => b[1].n - a[1].n).slice(0, 4);
-      if (top.length) {
-        c.sections = [{ title: `Tile adhesives whose published text documents a fit for ${subWant.label}`, rows: top.map(([id, x]) => { const r = trees.rules[x.ev]; const cd = trees.cards[id]; return { label: 'Documented fit', value: cd ? plain(cd.name) : id, name: true, productId: id, source: r ? src(page({ url: r.url, page: r.page }), `Data sheet, ${plain(r.doc_version || '')}, page ${r.page}`, r.text) : src(cd && cd.product_url, 'Product page', '') }; }) }];
-        c.notes.push('Check the conditions on each product page before choosing.');
-      }
+    const alts = await data.alts();
+    const top = ((alts && alts[pf.substrate]) || []).filter((x) => x.product !== p.id).slice(0, 4);
+    if (top.length) {
+      c.sections = [{ title: `Tile adhesives whose published text documents a fit for ${subWant.label}`, rows: top.map((x) => { const r = x.rule; return { label: 'Documented fit', value: plain(x.name), name: true, productId: x.product, source: r ? src(page({ url: r.url, page: r.page }), `Data sheet, ${plain(r.doc_version || '')}, page ${r.page}`, r.text) : src(x.product_url, 'Product page', '') }; }) }];
+      c.notes.push('Check the conditions on each product page before choosing.');
     }
   }
   c.silentWords = dedupeWords([...(c.silent || []), ...silent]); delete c.silent;

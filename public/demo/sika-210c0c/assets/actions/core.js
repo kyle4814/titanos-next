@@ -13,11 +13,12 @@ export const norm = (s) => plain(s).toLowerCase().normalize('NFD').replace(/[̀-
 /** A store over a base URL (browser) with per-path caching. 404 or a network failure gives null, never a throw. */
 export function fetchStore(base, fetchFn) {
   const f = fetchFn || ((...a) => fetch(...a));
-  const cache = new Map();
+  const cache = typeof globalThis !== 'undefined' ? (globalThis.__sikaJson ||= new Map()) : new Map(); // shared with the brain's loader (keyed by absolute URL)
   return {
     get(path) {
-      if (!cache.has(path)) cache.set(path, f(new URL(path, base)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
-      return cache.get(path);
+      const url = new URL(path, base).href;
+      if (!cache.has(url)) cache.set(url, f(new URL(path, base)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+      return cache.get(url);
     },
   };
 }
@@ -26,7 +27,9 @@ export function fetchStore(base, fetchFn) {
 export function createData(store) {
   const g = (p) => store.get(p);
   const d = {
-    index: () => g('index.json'),
+    // the product list comes from the advisor's own core shard (fetched anyway for the first answer); the portal's index.json is only the fallback
+    index: async () => { const core = await g('brain/core.json'); return core && Array.isArray(core.P) && core.P.length ? core.P : g('index.json'); },
+    alts: () => g('actions/alts.json'),
     documents: () => g('documents.json'),
     selector: () => g('selector.json'),
     systems: () => g('actions/systems.json'),

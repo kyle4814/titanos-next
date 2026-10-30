@@ -15,7 +15,9 @@ export function brainOn() {
 }
 
 let brainP = null, bstate = null;
-const fetchJson = (rel) => fetch(new URL('../../' + rel, import.meta.url)).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+// one in-page memo of fetched JSON, shared with the actions layer (assets/actions/core.js), so a shard is never downloaded twice on a cold load
+const jsonMemo = (globalThis.__sikaJson ||= new Map());
+const fetchJson = (rel) => { const url = new URL('../../' + rel, import.meta.url).href; if (!jsonMemo.has(url)) jsonMemo.set(url, fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null)); return jsonMemo.get(url); };
 export function ensureBrain() {
   return (brainP ||= (async () => {
     // the two shards every question needs start downloading while the modules are still loading
