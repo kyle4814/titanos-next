@@ -5,6 +5,7 @@ import { data, derived, documents, docOk, docHref } from './data.js';
 import { typeLabel } from './views2.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
+import { estimateNote } from './terms.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null;
 const history = [];
@@ -26,7 +27,8 @@ function renderBlock(b) {
     case 'facts': return h('div', null, b.title ? h('div', { class: 'm-title' }, b.title) : null, h('table', { class: 'm-table' }, h('tbody', null, b.rows.map((r) => h('tr', null, h('th', { scope: 'row' }, r.label), h('td', null, r.value, r.source ? [' ', extLink(r.source.url, `(${r.source.label})`, 'link')] : null))))));
     case 'quote': return h('div', null, h('div', { class: 'm-title' }, b.title),
       h('div', { class: 'table-wrap' }, h('table', { class: 'm-table' }, h('thead', null, h('tr', null, ['Product', 'Quantity', 'Basis', 'Source'].map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, b.lines.map((l) => h('tr', null, h('td', null, h('a', { href: '#/product/' + l.productId, onclick: closeOnMobile }, l.product)), h('td', null, l.quantity, l.packs ? h('br') : null, l.packs || ''), h('td', null, l.basis, l.note ? [h('br'), l.note] : null), h('td', null, extLink(l.source.url, l.source.label, 'link'))))))),
-      b.total ? para(b.total) : null, b.assumptions && b.assumptions.length ? h('ul', { style: 'margin:.25rem 0 0;padding-left:1.1rem;font-size:.9rem' }, b.assumptions.map((a) => h('li', null, a))) : null);
+      b.total ? para(b.total) : null, b.assumptions && b.assumptions.length ? h('ul', { class: 'm-assume' }, b.assumptions.map((a) => h('li', null, a))) : null,
+      h('p', { class: 'estimate-note' }, estimateNote(cfg)));
     case 'ask': return h('div', null, para(b.question), b.options ? h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))) : null);
     case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
     default: return null;

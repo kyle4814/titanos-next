@@ -3,6 +3,7 @@ import { h, icon, nf, plural, announce, fmtBytes } from './util.js';
 import { derived, data, documents } from './data.js';
 import { breadcrumb, emptyState, placeholder } from './components.js';
 import { projects } from './projects.js';
+import { estimateNote } from './terms.js';
 
 const ROLES = ['Distributor or merchant', 'Applicator or tradesperson', 'Builder or contractor', 'Specifier or architect', 'Engineer', 'Home owner', 'Other'];
 
@@ -52,7 +53,7 @@ function quoteForm(ctx, dv) {
     mk('postcode', 'Delivery postcode', { inputmode: 'numeric', max: 4, hint: 'Optional, 4 digits' }), mk('needed', 'Needed by', { type: 'date', hint: 'Optional' }),
     mk('notes', 'Notes for the sales team', { textarea: true, full: true, hint: 'Optional: area, substrate, access, anything that helps' }),
     h('div', { class: 'full' }, h('button', { class: 'btn', type: 'submit' }, 'Request a quote (demo)'), h('span', { class: 'count', style: 'margin-left:1rem' }, 'Demo only: this form submits nowhere.')));
-  wrap.append(h('h2', { id: 'quote-h', class: 'h3' }, 'Request a quote'), h('p', null, 'Fill this in to see the confirmation a customer would get. ', h('strong', null, 'Nothing is sent'), ' in this demo.'), form);
+  wrap.append(h('h2', { id: 'quote-h', class: 'h3' }, 'Request a quote'), h('p', null, 'Fill this in to see the confirmation a customer would get. ', h('strong', null, 'Nothing is sent'), ' in this demo.'), h('p', { class: 'estimate-note' }, estimateNote(ctx.cfg)), form);
   function submit() {
     let ok = true; const v = (k) => fields[k].value.trim();
     const set = (k, msg) => { err[k].textContent = msg || ''; fields[k].setAttribute('aria-invalid', msg ? 'true' : 'false'); if (msg) ok = false; };
@@ -66,6 +67,7 @@ function quoteForm(ctx, dv) {
     const done = h('div', { class: 'success', role: 'status', tabindex: '-1', id: 'quote-done' },
       h('span', { class: 'demo-only' }, 'Demo only'), h('h2', null, 'Thanks, your quote request is ready'),
       h('p', null, h('strong', null, 'Nothing was sent.'), ' This is a demonstration with no server behind it, so your request was not submitted, stored or shared with anyone. In a live portal this is the point where the request would reach the sales team and you would get a reference number.'),
+      h('p', { class: 'estimate-note' }, estimateNote(ctx.cfg)),
       h('h3', { class: 'h5', style: 'margin-top:1rem' }, 'What you would have sent'), h('pre', { style: 'white-space:pre-wrap;background:#fff;border:1px solid #ddd;padding:1rem;font:inherit;overflow:auto' }, summary),
       h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('button', { class: 'btn', type: 'button', onclick: () => saveText(summary) }, icon('download', 'i--sm'), 'Save a copy as a text file'), h('button', { class: 'btn btn--hollow', type: 'button', onclick: () => { wrap.replaceChildren(...Array.from(prev)); fields.name.focus(); } }, 'Start another request')));
     const prev = Array.from(wrap.childNodes);
