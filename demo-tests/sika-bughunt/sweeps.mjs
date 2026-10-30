@@ -28,9 +28,10 @@ export async function sweeps(s, ctx, r, sz) {
   }
 
   // 3. products: the top 40 (independently read specs first), then a seeded sample to reach 140 on desktop, 40 on the others
-  const specs = (await get('data/specs/index.json').catch(() => null)); const rv = []; const hasSpec = new Set((specs && specs.ids) || []);
-  for (const pr of D.index) { if (hasSpec.has(pr.id)) { try { const sp = await get('data/specs/' + pr.id + '.json'); if (sp.rv?.verdict) rv.push({ id: pr.id, cl: sp.verification?.clauses || 0, sp }); } catch {} } }
-  const top40 = rv.sort((a, b) => b.cl - a.cl).slice(0, 40);
+  const specs = (await get('data/specs/index.json').catch(() => null)); const hasSpec = new Set((specs && specs.ids) || []);
+  const withSpec = []; for (const pr of D.index) { if (hasSpec.has(pr.id)) { try { const sp = await get('data/specs/' + pr.id + '.json'); withSpec.push({ id: pr.id, cl: sp.verification?.clauses || 0, sp, rvd: !!(sp.rv && sp.rv.verdict) }); } catch {} } }
+  // "top 40" = the independently read products first (the audit set, 29 carry a verdict), then the ones with the most clauses
+  const top40 = withSpec.sort((a, b) => (b.rvd - a.rvd) || b.cl - a.cl).slice(0, 40);
   ctx.top40 = top40.map((t) => t.id);
   const rest = sample(r, D.index.filter((x) => !ctx.top40.includes(x.id)), sz === '1440x900' ? 100 : (sz === '1920x1080' ? 50 : 30));
   const prods = [...(phone || sz === '768x1024' ? sample(r, top40, 14).map((t) => D.index.find((x) => x.id === t.id)) : top40.map((t) => D.index.find((x) => x.id === t.id))), ...rest];
@@ -50,7 +51,7 @@ export async function sweeps(s, ctx, r, sz) {
       if (dm) { const rows = await p.evaluate(() => [...document.querySelectorAll('[role=tabpanel] tbody tr, [role=tabpanel] li')].filter((e) => e.offsetParent).length).catch(() => -1); if (rows >= 0 && Number(dm[1]) !== rows && rows !== 0) s.note('P1', 'documents-tab-count-wrong', `${pr.id}: label ${dm[1]}, rows ${rows}`); }
       if (t === 'Specification') {
         const sp = ctx.top40.includes(pr.id) ? top40.find((x) => x.id === pr.id).sp : null;
-        if (sp) { const m = /(\d+)\s+clauses/.exec(tp); if (m && Number(m[1]) !== sp.verification.clauses) s.note('P1', 'spec-clause-count-wrong', `${pr.id}: page ${m[1]}, data ${sp.verification.clauses}`); if (!/INDEPENDENTLY READ|Reviewed/i.test(tp)) s.note('P2', 'spec-reviewed-badge-missing', pr.id); }
+        if (sp) { const m = /(\d+)\s+clauses/.exec(tp); if (m && Number(m[1]) !== sp.verification.clauses) s.note('P1', 'spec-clause-count-wrong', `${pr.id}: page ${m[1]}, data ${sp.verification.clauses}`); if (sp.rv && sp.rv.verdict && !/INDEPENDENTLY READ|Reviewed/i.test(tp)) s.note('P2', 'spec-reviewed-badge-missing', pr.id); }
       }
     }
     // the calculator: any number in, no NaN out
