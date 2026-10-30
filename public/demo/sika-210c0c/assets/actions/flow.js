@@ -138,6 +138,8 @@ export function createActions(deps) {
     } catch (e) {
       c = unknownCard(action, 'That action hit a problem', `Something went wrong while I worked on that (${plain(e && e.message ? e.message : 'unknown error')}). Nothing was changed. Ask Technical Services if you need it urgently.`);
     }
+    // the one-question rule is enforced here for every action: a second round never asks again, it says what is still missing
+    if (noAsk && c.kind === 'clarify') c = unknownCard(c.action, 'I still need one thing', `${c.clarify.question} Include it in your next request and I will work it out.`, { handoff: false });
     if (c.kind === 'clarify') session.pending = { action: c.action, text: p && noAsk ? p.text : useText, need: c.clarify.need };
     if (!NO_LAST.has(c.kind) && c.action !== 'memory') session.last = c;
     if (memory) {

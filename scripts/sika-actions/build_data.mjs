@@ -43,6 +43,16 @@ for (const [id, rec] of Object.entries(compat.products)) {
   wr(`data/actions/compat/${id}.json`, { id, rules: rec.rules.map((r) => ({ id: r.id, type: r.type, polarity: r.polarity, conditional: !!r.conditional, tags: r.tags || {}, mentions: r.products_mentioned || [], text: r.text, heading: r.heading || null, source: r.source })) });
   nc++;
 }
+// the portal's safety reader (assistant/apply.js safetyRows) reads each item's source as s = { t, u, v, p, pe }; the lane writes it as source = { doc_type, url, doc_version, page, page_end }
+const toS = (o) => {
+  if (Array.isArray(o)) return o.map(toS);
+  if (o && typeof o === 'object') {
+    const r = {}; for (const [k, v] of Object.entries(o)) r[k] = toS(v);
+    if (r.source && typeof r.source === 'object' && r.source.url) { r.s = { t: r.source.doc_type, u: r.source.url, v: r.source.doc_version, p: r.source.page, pe: r.source.page_end }; delete r.source; }
+    return r;
+  }
+  return o;
+};
 // 3b. safety (SDS items with revision dates; only the SDS documents whose name matches the product)
 const safety = rd('safety.json');
 let ns = 0;
@@ -50,7 +60,7 @@ for (const [id, rec] of Object.entries(safety.products)) {
   const all = rec.sds || [];
   if (!all.length) continue;
   const sds = all.filter((x) => x.name_matches_product);
-  wr(`data/actions/safety/${id}.json`, { id, sds: sds.length ? sds : all.slice(0, 1) });
+  wr(`data/actions/safety/${id}.json`, { id, sds: toS(sds.length ? sds : all.slice(0, 1)) });
   ns++;
 }
 // 4. trees
