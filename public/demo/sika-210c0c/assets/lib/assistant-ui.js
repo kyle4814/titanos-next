@@ -9,7 +9,7 @@ import { outcomeOf } from './insights-core.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
 import { estimateNote } from './terms.js';
-import { brainOn, brainAnswer, renderCard } from './brain-ui.js';
+import { brainOn, brainAnswer, renderCard, prefetchBrain } from './brain-ui.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null;
 const history = [];
@@ -112,7 +112,7 @@ async function ensure() {
 export function setOpen(on, from) {
   panel.classList.toggle('open', on); panel.setAttribute('aria-hidden', String(!on)); fab.hidden = on && window.matchMedia('(max-width: 39.99em)').matches;
   if (from) opener = from;
-  if (on) { document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
+  if (on) { prefetchBrain(); document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
   else { document.body.classList.remove('lock'); const o = opener && document.contains(opener) ? opener : fab; if (o && !o.hidden) focusSoon(o); }
 }
 

@@ -234,9 +234,13 @@ export function createBrain({ load, config } = {}) {
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
     // a follow-up ("and its SDS?") keeps the last product
+    const stateOk = state && state.productId && pIndex.has(state.productId);
     const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
-    const fromState = !pis.length && state && state.productId && pIndex.has(state.productId) && intent !== 'which' && followUp;
+    const askBack = intent === 'compat' && /^(can|could|is|will|does|would|do)\b/.test(n); // "Can I tile over a heated floor?" right after a product answer
+    const fromState = !pis.length && stateOk && intent !== 'which' && (followUp || askBack);
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
+    if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there|i need|i want|need|looking for|show me|something)\b/.test(n)) intent = 'which';
+    if (!pis.length && intent === 'compat') intent = 'which';
     const namedAll = pis.length && !ambiguous;
     const st = (pi) => ({ productId: core.P[pi].id, intent });
 
@@ -248,8 +252,6 @@ export function createBrain({ load, config } = {}) {
       if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: st(pis[0]) }); }
       intent = 'which';
     }
-    if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there|i need|i want|need|looking for|show me|something)\b/.test(n)) intent = 'which';
-    if (!pis.length && intent === 'compat') intent = 'which';
     const needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
     if (needsProduct && !pis.length) {
       // name the products that fit and let the visitor pick: never guess one
