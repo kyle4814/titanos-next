@@ -46,6 +46,10 @@
         "label": "Where to Buy",
         "href": "https://aus.sika.com/en/where-to-buy.html",
         "external": true
+      },
+      {
+        "label": "Problem solver",
+        "href": "#/help"
       }
     ]
   },
