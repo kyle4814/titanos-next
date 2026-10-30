@@ -1,0 +1,1302 @@
+{
+ "generated": "2026-10-30T09:38:00.236Z",
+ "tool": "speed.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
+ "profile": {
+  "name": "DevTools Fast 3G",
+  "offline": false,
+  "latency": 562.5,
+  "downloadThroughput": 188744,
+  "uploadThroughput": 86400
+ },
+ "cache": "disabled (cold load)",
+ "runs": 3,
+ "served_with": "local static server, gzip level 6 for html, js, css, json",
+ "routes": [
+  {
+   "id": "home",
+   "route": "home (#/)",
+   "targetBytes": 80000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2149,
+    "median_fcp_ms": 676,
+    "all_ms": [
+     2194,
+     1649,
+     2149
+    ],
+    "all_fcp": [
+     676,
+     700,
+     672
+    ],
+    "bytes_at_answer": 72980,
+    "requests_at_answer": 5,
+    "bytes_settled": 73533,
+    "requests_settled": 6,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 291,
+    "median_fcp_ms": 80,
+    "all_ms": [
+     291,
+     281,
+     302
+    ],
+    "all_fcp": [
+     76,
+     80,
+     84
+    ],
+    "bytes_at_answer": 72980,
+    "requests_at_answer": 5,
+    "bytes_settled": 72980,
+    "requests_settled": 5,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     }
+    ]
+   }
+  },
+  {
+   "id": "selector_flow",
+   "route": "selector flow: cold load of #/selector, three choices, Show my system, first answer on the sheet",
+   "targetBytes": 100000,
+   "targetMsFast3g": 1500,
+   "fast3g": {
+    "median_ms_to_answer": 4140,
+    "median_fcp_ms": 688,
+    "all_ms": [
+     4140,
+     4162,
+     4105
+    ],
+    "all_fcp": [
+     688,
+     684,
+     704
+    ],
+    "bytes_at_answer": 95581,
+    "requests_at_answer": 8,
+    "bytes_settled": 211683,
+    "requests_settled": 16,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 698,
+    "median_fcp_ms": 132,
+    "all_ms": [
+     698,
+     973,
+     693
+    ],
+    "all_fcp": [
+     132,
+     404,
+     132
+    ],
+    "bytes_at_answer": 98958,
+    "requests_at_answer": 11,
+    "bytes_settled": 211683,
+    "requests_settled": 16,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "sheet_direct",
+   "route": "system sheet opened directly",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 826,
+    "median_fcp_ms": 700,
+    "all_ms": [
+     826,
+     828,
+     808
+    ],
+    "all_fcp": [
+     716,
+     700,
+     700
+    ],
+    "bytes_at_answer": 18820,
+    "requests_at_answer": 2,
+    "bytes_settled": 134922,
+    "requests_settled": 10,
+    "files": [
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 243,
+    "median_fcp_ms": 208,
+    "all_ms": [
+     276,
+     230,
+     243
+    ],
+    "all_fcp": [
+     224,
+     192,
+     208
+    ],
+    "bytes_at_answer": 22197,
+    "requests_at_answer": 5,
+    "bytes_settled": 134922,
+    "requests_settled": 10,
+    "files": [
+     {
+      "file": "assets/fonts/barlow-700-n.woff2",
+      "bytes": 22965
+     },
+     {
+      "file": "assets/fonts/barlow-600-n.woff2",
+      "bytes": 22949
+     },
+     {
+      "file": "assets/fonts/barlow-400-n.woff2",
+      "bytes": 22373
+     },
+     {
+      "file": "assets/fonts/barlow-300-n.woff2",
+      "bytes": 22253
+     },
+     {
+      "file": "assets/fonts/barlow-500-n.woff2",
+      "bytes": 22185
+     },
+     {
+      "file": "systems/porcelain-on-concrete-internal-wet-floor/",
+      "bytes": 18820
+     },
+     {
+      "file": "assets/sheet.js",
+      "bytes": 2217
+     },
+     {
+      "file": "assets/spec.js",
+      "bytes": 607
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "product",
+   "route": "product page (#/product/davco-grey-one-potadhesive)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3702,
+    "median_fcp_ms": 684,
+    "all_ms": [
+     3693,
+     3707,
+     3702
+    ],
+    "all_fcp": [
+     684,
+     676,
+     688
+    ],
+    "bytes_at_answer": 120079,
+    "requests_at_answer": 13,
+    "bytes_settled": 120632,
+    "requests_settled": 14,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "assets/dist/lazy.js",
+      "bytes": 30745
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/k/_index.json",
+      "bytes": 4821
+     },
+     {
+      "file": "data/p/davco-grey-one-potadhesive.json",
+      "bytes": 3955
+     },
+     {
+      "file": "data/k/davco-grey-one-potadhesive.json",
+      "bytes": 3351
+     },
+     {
+      "file": "data/specs/index.json",
+      "bytes": 3144
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/finder/r/davco-grey-one-potadhesive.json",
+      "bytes": 708
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 340,
+    "median_fcp_ms": 76,
+    "all_ms": [
+     402,
+     340,
+     340
+    ],
+    "all_fcp": [
+     80,
+     76,
+     72
+    ],
+    "bytes_at_answer": 120079,
+    "requests_at_answer": 13,
+    "bytes_settled": 120079,
+    "requests_settled": 13,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "assets/dist/lazy.js",
+      "bytes": 30745
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/k/_index.json",
+      "bytes": 4821
+     },
+     {
+      "file": "data/p/davco-grey-one-potadhesive.json",
+      "bytes": 3955
+     },
+     {
+      "file": "data/k/davco-grey-one-potadhesive.json",
+      "bytes": 3351
+     },
+     {
+      "file": "data/specs/index.json",
+      "bytes": 3144
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/finder/r/davco-grey-one-potadhesive.json",
+      "bytes": 708
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "finder",
+   "route": "finder (#/products)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2669,
+    "median_fcp_ms": 696,
+    "all_ms": [
+     2605,
+     2669,
+     2669
+    ],
+    "all_fcp": [
+     692,
+     696,
+     696
+    ],
+    "bytes_at_answer": 144071,
+    "requests_at_answer": 7,
+    "bytes_settled": 144624,
+    "requests_settled": 8,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 315,
+    "median_fcp_ms": 76,
+    "all_ms": [
+     315,
+     382,
+     305
+    ],
+    "all_fcp": [
+     76,
+     100,
+     76
+    ],
+    "bytes_at_answer": 144071,
+    "requests_at_answer": 7,
+    "bytes_settled": 144071,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "category",
+   "route": "category (#/category/construction/tile-stone-installationsystems)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2695,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     3076,
+     2687,
+     2695
+    ],
+    "all_fcp": [
+     676,
+     700,
+     692
+    ],
+    "bytes_at_answer": 162538,
+    "requests_at_answer": 8,
+    "bytes_settled": 163091,
+    "requests_settled": 9,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 297,
+    "median_fcp_ms": 72,
+    "all_ms": [
+     299,
+     291,
+     297
+    ],
+    "all_fcp": [
+     72,
+     72,
+     76
+    ],
+    "bytes_at_answer": 162538,
+    "requests_at_answer": 8,
+    "bytes_settled": 162538,
+    "requests_settled": 8,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "data/categories.json",
+      "bytes": 18467
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "documents",
+   "route": "documents (#/documents)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 4118,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     4118,
+     4037,
+     4202
+    ],
+    "all_fcp": [
+     692,
+     672,
+     700
+    ],
+    "bytes_at_answer": 268290,
+    "requests_at_answer": 8,
+    "bytes_settled": 268843,
+    "requests_settled": 9,
+    "files": [
+     {
+      "file": "data/documents.json",
+      "bytes": 124219
+     },
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 380,
+    "median_fcp_ms": 72,
+    "all_ms": [
+     380,
+     456,
+     378
+    ],
+    "all_fcp": [
+     72,
+     108,
+     72
+    ],
+    "bytes_at_answer": 268290,
+    "requests_at_answer": 8,
+    "bytes_settled": 268290,
+    "requests_settled": 8,
+    "files": [
+     {
+      "file": "data/documents.json",
+      "bytes": 124219
+     },
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z'/%3E%3C/svg%3E",
+      "bytes": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "guides",
+   "route": "guides (#/guides)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3110,
+    "median_fcp_ms": 696,
+    "all_ms": [
+     3171,
+     3085,
+     3110
+    ],
+    "all_fcp": [
+     708,
+     684,
+     696
+    ],
+    "bytes_at_answer": 184108,
+    "requests_at_answer": 6,
+    "bytes_settled": 184661,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "data/pages.json",
+      "bytes": 111128
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 326,
+    "median_fcp_ms": 80,
+    "all_ms": [
+     317,
+     326,
+     377
+    ],
+    "all_fcp": [
+     76,
+     80,
+     88
+    ],
+    "bytes_at_answer": 184108,
+    "requests_at_answer": 6,
+    "bytes_settled": 184108,
+    "requests_settled": 6,
+    "files": [
+     {
+      "file": "data/pages.json",
+      "bytes": 111128
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     }
+    ]
+   }
+  },
+  {
+   "id": "projects",
+   "route": "projects (#/projects)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2658,
+    "median_fcp_ms": 692,
+    "all_ms": [
+     2660,
+     2658,
+     2657
+    ],
+    "all_fcp": [
+     692,
+     688,
+     692
+    ],
+    "bytes_at_answer": 144071,
+    "requests_at_answer": 6,
+    "bytes_settled": 144624,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 371,
+    "median_fcp_ms": 100,
+    "all_ms": [
+     371,
+     373,
+     367
+    ],
+    "all_fcp": [
+     84,
+     100,
+     120
+    ],
+    "bytes_at_answer": 144071,
+    "requests_at_answer": 6,
+    "bytes_settled": 144071,
+    "requests_settled": 6,
+    "files": [
+     {
+      "file": "data/index.json",
+      "bytes": 71091
+     },
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     }
+    ]
+   }
+  },
+  {
+   "id": "about",
+   "route": "about (#/about)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 3618,
+    "median_fcp_ms": 700,
+    "all_ms": [
+     3692,
+     3598,
+     3618
+    ],
+    "all_fcp": [
+     700,
+     704,
+     680
+    ],
+    "bytes_at_answer": 74114,
+    "requests_at_answer": 8,
+    "bytes_settled": 74667,
+    "requests_settled": 9,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     },
+     {
+      "file": "data/coverage.json",
+      "bytes": 395
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data/stats.json",
+      "bytes": 364
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 349,
+    "median_fcp_ms": 76,
+    "all_ms": [
+     281,
+     351,
+     349
+    ],
+    "all_fcp": [
+     76,
+     76,
+     76
+    ],
+    "bytes_at_answer": 74114,
+    "requests_at_answer": 8,
+    "bytes_settled": 74114,
+    "requests_settled": 8,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "data/coverage.json",
+      "bytes": 395
+     },
+     {
+      "file": "data/manifest.json",
+      "bytes": 375
+     },
+     {
+      "file": "data/stats.json",
+      "bytes": 364
+     }
+    ]
+   }
+  },
+  {
+   "id": "selector",
+   "route": "selector page (#/selector)",
+   "targetBytes": 150000,
+   "targetMsFast3g": null,
+   "fast3g": {
+    "median_ms_to_answer": 2610,
+    "median_fcp_ms": 684,
+    "all_ms": [
+     2575,
+     2610,
+     2650
+    ],
+    "all_fcp": [
+     680,
+     684,
+     696
+    ],
+    "bytes_at_answer": 76761,
+    "requests_at_answer": 6,
+    "bytes_settled": 77314,
+    "requests_settled": 7,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     },
+     {
+      "file": "assets/fonts/fonts.css",
+      "bytes": 553
+     }
+    ]
+   },
+   "desktop": {
+    "median_ms_to_answer": 335,
+    "median_fcp_ms": 88,
+    "all_ms": [
+     335,
+     597,
+     314
+    ],
+    "all_fcp": [
+     80,
+     112,
+     88
+    ],
+    "bytes_at_answer": 76761,
+    "requests_at_answer": 6,
+    "bytes_settled": 76761,
+    "requests_settled": 6,
+    "files": [
+     {
+      "file": "assets/dist/main.js",
+      "bytes": 50832
+     },
+     {
+      "file": "",
+      "bytes": 12534
+     },
+     {
+      "file": "data/cats.lite.json",
+      "bytes": 6746
+     },
+     {
+      "file": "data/selector.json",
+      "bytes": 3781
+     },
+     {
+      "file": "data/config.json",
+      "bytes": 2006
+     },
+     {
+      "file": "assets/apply_data.css",
+      "bytes": 862
+     }
+    ]
+   }
+  }
+ ]
+}
