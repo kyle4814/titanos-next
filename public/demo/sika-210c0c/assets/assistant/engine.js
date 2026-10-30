@@ -234,6 +234,52 @@ export function createAssistant({ products, documents, categories, pages = [], c
     return !hint && !fac && ratio < 0.3;
   }
 
+  // ---------- use conditions ----------
+  // Conditions that decide whether a product can be used at all. When a question names one and no product is named, the answer is built only from products whose own
+  // published text mentions it (quoted, with polarity checked). If none does, the answer says so and hands over. It never lists the nearest products with the condition dropped
+  // (Monday pack finding: a cold "Can I tile over a heated floor?" returned a plain product list for "floor").
+  const CONDITIONS = [
+    { id: 'heating', label: 'heated floors', q: /\b(heated|heating|under ?floor|under-floor|hydronic|radiant|in-?slab)\b/, t: /under[\s-]?floor heating|heated (?:floor|slab|screed|substrate)|floor heating|hydronic|radiant heating|in-?slab heating|heating system/i },
+    // Only heating for now: it is the condition the Monday script asks about and its wording in the data is direct. Other conditions (freezer, sauna, chemical) matched on single words
+    // (a fridge appliance sealant for a freezer room, membranes for a tile adhesive question), so they stay on the general path until the v2 retrieval handles them with facets.
+  ];
+  // The kind of product the question asks for narrows the hits (an adhesive question is not answered with a membrane).
+  const KINDS = [
+    { q: /\b(adhesives?|glue|fix(?:ing)?)\b/, c: /adhesive/i, label: 'adhesives' }, { q: /\bgrouts?\b/, c: /grout/i, label: 'grouts' }, { q: /\bsealants?\b/, c: /seal/i, label: 'sealants' },
+    { q: /\b(membranes?|waterproof\w*)\b/, c: /waterproof|membrane/i, label: 'waterproofing products' }, { q: /\bprimers?\b/, c: /primer/i, label: 'primers' },
+  ];
+  const NEGATIVE = /\b(not (?:suitable|recommended|intended|designed|for use|to be used|be used)|unsuitable|do not|don't|never|cannot|can ?not|must not|avoid|should not)\b/i;
+  /** First sentence of a product's own published text that matches re: {text, kind}. */
+  function conditionLine(p, re) {
+    const pools = [['description', [p.tagline, p.summary]], ['usage', p.usage || []], ['attribute', p.attributes || []]];
+    for (const s of p.sections || []) pools.push([String(s.title || 'page').toLowerCase().replace(/\s+/g, ' '), (s.items || []).map(it => it.text)]);
+    for (const [kind, list] of pools) for (const t of list) for (const sent of sentences(t || '')) if (re.test(sent)) return { text: sent, kind };
+    return null;
+  }
+  function conditionAnswer(cond, query, text, facets, r, t0, tokens) {
+    const pos = [], neg = [];
+    const kind = KINDS.find(k => k.q.test(normalise(text)));
+    for (const p of products) {
+      if (kind && !kind.c.test(`${p.category} ${p.name} ${p.tagline || ''}`)) continue;
+      const hit = conditionLine(p, cond.t); if (!hit) continue;
+      const ranked = r.items.find(x => x.p.id === p.id);
+      (NEGATIVE.test(hit.text) ? neg : pos).push({ p, hit, score: ranked ? ranked.score : 0 });
+    }
+    pos.sort((a, b) => b.score - a.score || a.p.name.localeCompare(b.p.name)); neg.sort((a, b) => b.score - a.score);
+    const blocks = []; const shown = pos.slice(0, 5);
+    if (shown.length) {
+      blocks.push({ type: 'text', text: `${pos.length === 1 ? 'One' + (kind ? ' of the ' + kind.label : ' product') + ' has' : (kind ? 'These ' + kind.label : 'These products') + ' have'} published text that mentions ${cond.label}. Each reason quotes the product's own text.` });
+      blocks.push({ type: 'products', title: 'Products whose own text mentions it', items: shown.map(x => ({ id: x.p.id, reason: `Its own ${x.hit.kind} text: "${clip(x.hit.text)}"`, score: 1 })) });
+      if (pos.length > shown.length) blocks.push({ type: 'text', text: 'More products mention it. Name a product, brand or place to narrow the list.' });
+      blocks.push({ type: 'text', text: `Products that are not listed do not mention ${cond.label} in their published text. Check the data sheet of the product you plan to use.` });
+      shown.forEach(x => citeProduct(x.p));
+    } else blocks.push({ type: 'text', text: `The published documentation has no ${cond.label}${kind ? ' statement for ' + kind.label : ' statement'} that I can quote. I will not guess; ask technical services.` });
+    if (neg.length) { blocks.push({ type: 'text', text: 'Their own text says they are not suitable: ' + neg.slice(0, 3).map(x => `${plain(x.p.name)} ("${clip(x.hit.text, 170)}")`).join('; ') + '.' }); neg.slice(0, 3).forEach(x => citeProduct(x.p)); }
+    const first = shown[0] ? shown[0].p : null;
+    return finish('find_product', query, blocks, first ? [`Datasheet for ${plain(first.name)}`, `How much ${plain(first.name)} for 20 m2?`] : ['Which adhesive for porcelain tiles on concrete?'],
+      { intent: 'find_product', productId: first ? first.id : null, productIds: shown.map(x => x.p.id), facets, req: {}, lastQuery: text, condition: cond.id }, { tokens, matched: shown.map(x => ({ id: x.p.id, score: Math.round(x.score * 100) / 100 })) }, t0);
+  }
+
   // ---------- intent handlers ----------
   function findProduct(query, text, state, t0, ctx) {
     const facets = Object.assign({}, state && state.facets ? state.facets : {}, detectFacets(compiled, text));
@@ -247,6 +293,8 @@ export function createAssistant({ products, documents, categories, pages = [], c
     }
     // guided tile path when the question is a tiling job
     const nq = normalise(text);
+    const cond = names.length ? null : CONDITIONS.find(c => c.q.test(nq));
+    if (cond) return conditionAnswer(cond, query, text, facets, r, t0, tokens);
     if (facets.tileType && facets.tileType.length && /\badhesive|glue|fix|lay|tile|tiling\b/.test(nq) && !/\b(sealant|waterproof|membrane|grout|primer)\b/.test(nq) && facets.substrate && /\b(system|everything|full)\b/.test(nq)) return guide(facets, t0, query);
     const items = r.items.filter(it => it.score >= r.top * 0.3).slice(0, 4);
     if (!items.length) return outOfScope(query, text, t0, tokens, q);
@@ -351,7 +399,7 @@ export function createAssistant({ products, documents, categories, pages = [], c
         // A yes has to cover the visitor's whole condition. A word the quoted sentence never mentions (for example "heated") is not answered by a nearest match:
         // say what the text does cover, say what it does not, and hand over.
         const silent = uncoveredTerms(tail, [p.name], [{ type: 'text', text: `${what} ${quote}` }]);
-        if (silent.length) blocks.push({ type: 'text', text: `The published text for ${plain(p.name)} says: "${quote}" It does not mention ${silent.join(', ')}, so it does not answer your question. I will not guess; check the datasheet or ask technical services.`, silent });
+        if (silent.length) blocks.push({ type: 'text', text: `The published text for ${plain(p.name)} says: "${quote}" It does not mention ${silent.join(', ')}, so this is not in the published data. I will not guess; check the datasheet or ask technical services.`, silent });
         else blocks.push({ type: 'text', text: `Yes, according to the published text for ${plain(p.name)} (${what}): "${quote}"` });
       }
       else blocks.push({ type: 'text', text: `The published text for ${plain(p.name)} does not say whether it can be used on or over ${what}. I will not guess; check the datasheet or ask technical services.` });

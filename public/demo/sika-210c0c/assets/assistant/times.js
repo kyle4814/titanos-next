@@ -19,6 +19,7 @@ export function stepOf(kind, f) {
   const t = (f.label + ' ' + f.text + ' ' + ((f.parsed || {}).condition || '')).toLowerCase();
   if (kind === 'pot_life') return 'pot';
   if (kind === 'recoat_times') return 'recoat';
+  if (kind === 'adjustability_time') return 'adjust';
   if (kind === 'open_time') return /adjust/.test(t) ? 'adjust' : 'open';
   if (/wet area/.test(t)) return 'wet';
   if (/dry area/.test(t)) return 'dry';
