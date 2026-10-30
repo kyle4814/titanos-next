@@ -9,6 +9,7 @@ import { outcomeOf } from './insights-core.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
 import { estimateNote } from './terms.js';
+import { brainOn, brainAnswer, renderCard } from './brain-ui.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null;
 const history = [];
@@ -35,6 +36,7 @@ function renderBlock(b) {
     case 'ask': return h('div', null, para(b.question), b.options ? h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))) : null);
     case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
     case 'handoff': return renderHandoff(b);
+    case 'brain': return renderCard(b.card, cfg, send);
     default: return null;
   }
 }
@@ -60,11 +62,13 @@ export async function send(text, label) {
   add(h('div', { class: 'msg msg--user' }, label || text));
   const wait = h('div', { class: 'msg msg--bot', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
   try {
-    await ensure();
+    const useBrain = brainOn();
+    const ba = useBrain ? await brainAnswer(text) : null; // v2 brain; null means it could not run, so v1 answers
+    if (!ba) await ensure();
     const t0 = performance.now();
-    const rule = matchRule(rules, text);
-    const a = rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state); state = a.state || null;
-    await new Promise((r) => setTimeout(r, 140));
+    const rule = ba ? null : matchRule(rules, text);
+    const a = ba || (rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state)); if (!ba) state = a.state || null;
+    if (!ba) await new Promise((r) => setTimeout(r, 140));
     wait.replaceWith(renderAnswer(a)); log.scrollTop = log.scrollHeight;
     announce('The advisor has answered.');
     history.push({ q: text, intent: a.intent, ms: Math.round(performance.now() - t0) });
@@ -125,6 +129,7 @@ export async function mountAssistant(config) {
     log, sugg, form);
   add(h('div', { class: 'msg msg--bot' }, para(`Hi. I can find the right ${cfg.company.short} product for a job, quote published coverage rates, open a data sheet or SDS, check what goes with what, and work out how much you need for an area.`), para('I only answer from the published documentation, and I will say so when it does not cover something.')));
   document.body.append(fab, panel);
+  window.__asstClose = () => setOpen(false);
   window.addEventListener('hashchange', () => {});
   return { open: (q, from) => { setOpen(true, from || document.activeElement); if (q) send(q); }, send, history };
 }
