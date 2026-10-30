@@ -430,7 +430,7 @@ export function createAssistant({ products, documents, categories, pages = [], c
     if (noRate.length === 1 && plist.length === 1) {
       const p = noRate[0]; const pds = pdsOf(p);
       blocks.push({ type: 'text', text: `The published pages for ${plain(p.name)} do not give a rate I can use to work out a quantity, so I will not invent one. ${pds ? 'The datasheet may list it: ' + docLabel(pds) + '.' : 'Please check the datasheet or technical services.'}` });
-      blocks.push({ type: 'ask', question: `If you have the rate for ${plain(p.name)} (for example "1.5 kg per m2"), tell me and I will work out the packs. Otherwise the datasheet is the place to confirm it.` });
+      blocks.push({ type: 'ask', question: `If you have the rate for ${plain(p.name)} (write it as an amount per m2 with its unit), tell me and I will work out the packs. Otherwise the datasheet is the place to confirm it.` });
       if (pds) blocks.push({ type: 'docs', title: 'Datasheet', items: [{ id: pds.id, label: docLabel(pds) }] });
     } else if (noRate.length) {
       blocks.push({ type: 'text', text: `No usable published rate for: ${noRate.map(p => plain(p.name)).join(', ')}. I have not invented one; ask me about one of them by name and I will point to its datasheet, or tell me the rate you have.` });
