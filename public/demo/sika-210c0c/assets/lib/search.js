@@ -25,6 +25,8 @@ export function buildSearch(index, catById) {
     let total = 0;
     for (const t of qt) {
       const alts = expand(t); let best = 0;
+      // a one-letter word (the T in "Sikagard-62 T", the S in "SikaSwell S-2") scores when it is a whole word of the name and is otherwise ignored; it used to empty the results
+      if (!alts.length) { if (it.nt.includes(t)) total += 12; continue; }
       for (const a of alts) {
         const w = a === t ? 1 : 0.7;
         let s = 0;

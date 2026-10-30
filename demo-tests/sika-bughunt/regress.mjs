@@ -58,6 +58,12 @@ for (const w of [1024, 1080, 1100, 1180, 1200]) { const { ctx, p } = await open(
 for (const [route, id] of [['#/products', '#finder-q'], ['#/documents', '#doc-q'], ['#/guides', '#guide-q']]) { const { ctx, p } = await open(1440, 900); await p.goto(base + route); await ready(p); await p.locator(id).click(); await p.keyboard.type('tile ', { delay: 40 }); await p.waitForTimeout(900); await p.keyboard.type('adhesive', { delay: 40 }); await p.waitForTimeout(900);
   const v = await p.locator(id).inputValue(); t(`R10 ${route} search keeps the space typed before a pause`, v === 'tile adhesive', JSON.stringify(v)); await ctx.close(); }
 
+// R11 a product searched by its own full name is found even when the name has a one-letter word (P1: "Sikagard 62 T", "SikaSwell S-2", "Sikafloor-158 W Fast Barrier" returned 0 products)
+{ const { ctx, p } = await open(1440, 900); for (const [q, want] of [['Sikagard 62 T', 'Sikagard-62 T'], ['SikaSwell S-2', 'SikaSwell S-2'], ['Sikafloor-158 W Fast Barrier', 'Sikafloor-158 W Fast Barrier'], ['Sika CarboShear L', 'Sika CarboShear L']]) {
+    await p.goto(base + '#/products?q=' + encodeURIComponent(q)); await ready(p); await p.waitForTimeout(500); const top = (await p.locator('.product-card h3').first().innerText().catch(() => '')).replace(/[®™]/g, '');
+    t(`R11 search "${q}" puts ${want} first`, top.toLowerCase() === want.toLowerCase(), top || 'no results'); }
+  await ctx.close(); }
+
 await browser.close();
 console.log(`REGRESSION ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

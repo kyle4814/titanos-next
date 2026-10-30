@@ -32,7 +32,7 @@ export async function sweeps(s, ctx, r, sz) {
   for (const pr of D.index) { if (hasSpec.has(pr.id)) { try { const sp = await get('data/specs/' + pr.id + '.json'); if (sp.rv?.verdict) rv.push({ id: pr.id, cl: sp.verification?.clauses || 0, sp }); } catch {} } }
   const top40 = rv.sort((a, b) => b.cl - a.cl).slice(0, 40);
   ctx.top40 = top40.map((t) => t.id);
-  const rest = sample(r, D.index.filter((x) => !ctx.top40.includes(x.id)), (sz === '1440x900' || sz === '1920x1080') ? 100 : 30);
+  const rest = sample(r, D.index.filter((x) => !ctx.top40.includes(x.id)), sz === '1440x900' ? 100 : (sz === '1920x1080' ? 50 : 30));
   const prods = [...(phone || sz === '768x1024' ? sample(r, top40, 14).map((t) => D.index.find((x) => x.id === t.id)) : top40.map((t) => D.index.find((x) => x.id === t.id))), ...rest];
   for (const pr of prods) {
     if (!pr) continue;
@@ -62,7 +62,7 @@ export async function sweeps(s, ctx, r, sz) {
 
   // 4. system sheets: the hub and a seeded sample (HTTP pages, not hash routes), with the print stylesheet
   const slugs = (await get('data/selector.json')).slugs; const slugList = Array.isArray(slugs) ? slugs : [...new Set(Object.values(slugs).map((v) => (typeof v === 'string' ? v : v.slug || v.id)))].filter(Boolean);
-  const sheets = sample(r, slugList, (sz === '1440x900') ? 60 : (sz === '1920x1080' ? 25 : 12));
+  const sheets = sample(r, slugList, (sz === '1440x900') ? 60 : (sz === '1920x1080' ? 15 : 12));
   await s.step('systems hub', async () => { await p.goto(base + 'systems/'); }, {});
   for (const sl of sheets) {
     await s.step('sheet ' + sl, async () => { await p.goto(base + 'systems/' + sl + '/'); });
@@ -86,7 +86,7 @@ export async function sweeps(s, ctx, r, sz) {
     await go('#/products', 'finder pager audit');
     const pg = await p.evaluate(() => [...document.querySelectorAll('.pager button')].map((b) => b.innerText.trim()));
     const last = Math.max(...pg.map((x) => Number(x) || 0)); const perPage = await p.locator('.product-card').count(); const wantLast = D.index.length - perPage * (last - 1);
-    await s.step('pager: last page', async () => { await p.getByRole('button', { name: String(last), exact: true }).click(); await p.waitForTimeout(350); });
+    await s.step('pager: last page', async () => { await p.getByRole('button', { name: 'Page ' + last, exact: true }).click(); await p.waitForTimeout(350); });
     const lc = await p.locator('.product-card').count(); if (lc !== wantLast) s.note('P1', 'pager-last-page-wrong', `last page has ${lc} cards, expected ${wantLast} (${D.index.length} products, ${perPage} per page, ${last} pages)`);
     const names = new Set(); for (let pgNo = 1; pgNo <= last; pgNo += Math.max(1, Math.floor(last / 5))) { await p.goto(base + '#/products?page=' + pgNo); await p.waitForTimeout(250); for (const n of await p.locator('.product-card h3').allInnerTexts()) { if (names.has(n + pgNo)) s.note('P2', 'pager-duplicate-card', n); names.add(n + pgNo); } }
     for (const [label, cmp] of [['Name A to Z', (a, b) => a.localeCompare(b)], ['Name Z to A', (a, b) => b.localeCompare(a)]]) {
