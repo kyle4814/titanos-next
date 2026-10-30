@@ -3,6 +3,7 @@
 // every number, "not suitable" statement, hazard or time that is shown carries evidence {quote, url, label, kind, page?, version?} or the "Not in the published data" status.
 import { plain, clip } from './answer.js';
 import { timeAnswer, TIME_RE } from './times.js';
+import { uncoveredTerms } from './handoff.js';
 
 export const CHIPS = {
   sheet: 'From a published data sheet',
@@ -129,6 +130,10 @@ export function compatAnswer(name, k, tail, tax) {
   if (no.length && !yes.length) return { type: 'text', text: `No. The ${n} data sheet says: "${clip(no[0].text, 400)}"`, evidence: no.slice(0, 2).map(evOfRule).filter(Boolean), verdict: 'no' };
   if (yes.length && !no.length) {
     const c = yes[0].cond ? ' This statement carries a condition, so read the whole sentence.' : '';
+    // A yes has to cover the visitor's whole condition. A word the sentence never mentions (for example "heated") is not answered by a nearest match:
+    // quote the sentence, say what it does not mention, show the Not-in-the-published-data status and let the hand-off block take over.
+    const silent = uncoveredTerms(tail, [name], [{ type: 'text', text: yes[0].text }]);
+    if (silent.length) return { type: 'text', text: `The ${n} data sheet says: "${clip(yes[0].text, 400)}" It does not mention ${silent.join(', ')}, so it does not answer your question. I will not guess; check the data sheet or ask technical services.`, evidence: yes.slice(0, 2).map(evOfRule).filter(Boolean), status: STATUS.UNKNOWN, chip: CHIPS.unknown, verdict: 'silent', silent };
     return { type: 'text', text: `Yes, according to the ${n} data sheet: "${clip(yes[0].text, 400)}"${c}`, evidence: yes.slice(0, 2).map(evOfRule).filter(Boolean), verdict: 'yes' };
   }
   return { type: 'text', text: `The ${n} data sheet has statements that point both ways, so I will not give a single answer. It says: "${clip(no[0].text, 300)}" and also "${clip(yes[0].text, 300)}". Check the data sheet or ask technical services.`, evidence: [no[0], yes[0]].map(evOfRule).filter(Boolean), verdict: 'mixed' };

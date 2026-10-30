@@ -41,7 +41,11 @@ export function handoffFor({ intent, query, blocks, state, byId, config }) {
   for (const id of st.productIds || []) if (!ids.includes(id)) ids.push(id);
   const products = ids.slice(0, 3).map((id) => byId.get(id)).filter(Boolean).map((p) => ({ id: p.id, name: plain(p.name) }));
   let missing = [];
-  if (intent === 'compatibility') missing = uncoveredTerms(query, products.map((p) => p.name), blocks);
+  if (intent === 'compatibility') {
+    missing = uncoveredTerms(query, products.map((p) => p.name), blocks);
+    // words a block itself reported as not covered by the sentence it quotes (it names them in its own text, so the scan above would call them covered)
+    for (const b of blocks) for (const w of b.silent || []) if (!missing.includes(w)) missing.push(w);
+  }
   const commercial = COMMERCIAL.test(String(query || ''));
   if (commercial && !missing.length) missing = ['stock, price, delivery or warranty'];
   if (!(ALWAYS.has(intent) || textual || missing.length)) return null;
