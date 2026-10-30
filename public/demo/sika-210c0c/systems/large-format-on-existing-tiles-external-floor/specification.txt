@@ -32,7 +32,7 @@ Data sheet edition: June 2026, Version 01.07
 2.1 Product. Davco® K10 Plus
     - Product type as printed on the data sheet: A FLEXIBLE, PREMIXED, READY TO USE WATER BASED POLYURETHANE CLASS III WATERPROOFING MEMBRANE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals / standards.
     - AS/NZ 4858:2004 Branz Test Report (DC13205-001)
     - Branz Appraisal Internal No.1142 (2020)
@@ -105,12 +105,14 @@ Data sheet edition: June 2026, Version 01.07
 3.10 Substrate quality / pre-treatment. Surfaces that are to receive Davco® K10 Plus shall be primed with a suitable Sika primer prior to the waterproofing membrane application.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
 3.11 Substrate quality / pre-treatment - Primer Guide.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
+3.12 Substrate quality / pre-treatment - Primer Guide.
     - Refer to the relevant specific primer product data sheet for complete user instructions prior to use.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (June 2026, Version 01.07) and the requirements below.
-4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
+4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
     (Cite: Data sheet page 2: Application Information > Consumption)
 4.3 Drying Time.
     (Cite: Data sheet page 2: Application Information > Drying Time)
@@ -140,11 +142,17 @@ Data sheet edition: June 2026, Version 01.07
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not apply in temperatures above 35°C or below 5°C
-    - Do not allow the product to freeze
     (Cite: Data sheet page 2: Limitations)
-5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments.
+    - Ready for flood testing | 3 days
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -156,7 +164,10 @@ Data sheet edition: June 2026, Version 01.07
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 3-4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -172,11 +183,15 @@ Data sheet edition: March 2025, Version 01.01
     - SikaTile®-350 Pro Maxset is available in both white or grey.
     - SikaTile®-350 Pro Maxset white is free from respirable crystalline silica.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors. Suitable Tile Types include;
+1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable Tile Types include.
     - Ceramic Tiles
     - Porcelain tiles
     - Natural Stone* including marble and granite etc
     - Engineered stone / Man made stone*
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types include)
+1.5 Intended uses stated by the manufacturer - Suitable Substrates Include.
     - Concrete, (concrete greater than 35 MPa shall be mechanically prepared).
     - Cement boards and sheets*
     - Cement renders and screeds, including early ageds screeds
@@ -185,20 +200,20 @@ Data sheet edition: March 2025, Version 01.01
     - Under tile Sika waterproofing membranes
     - Gypsum Plasterboard
     - Tile on Tile applications when used with SikaTile 015 Prep n Prime
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.5.
+    (Cite: Data sheet page 1: Uses > Suitable Substrates Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
 
 2 MATERIALS
 2.1 Product. SikaTile®-350 Pro Maxset
     - Product type as printed on the data sheet: A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH DUST LESS TECHNOLOGY DESIGN FOR LARGE FORMAT TILE INSTALLATIONS
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
     - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.2).
-    - AS3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > SUBSTRATE QUALITY (p.3).
-    - AS 3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > APPLICATION (p.3).
+    - AS3958:2023: referred to in instructions or limitations. Where: Application Instructions > SUBSTRATE QUALITY (p.3).
+    - AS 3958:2023: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3).
     (Cite: Data sheet: whole data sheet)
 2.4 Characteristics stated by the manufacturer.
     - Equipped with DUST LESS Technology
@@ -222,8 +237,31 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Data sheet page 2: Product Information)
 
 3 SUBSTRATE PREPARATION
-3.1 Substrate preparation. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) states no substrate preparation requirements.
-    (Cite: Data sheet silent)
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality)
+3.3 Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CONCRETE SUBSTRATES)
+3.4 Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CEMENT BOARD AND SHEETING)
+3.5 Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > SCREEDS & MORTAR BEDS)
+3.6 Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > TILE ON TILE APPLICATIONS)
+3.7 Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.8 Substrate quality / pre-treatment - Porous Substrates can be primed with.
+    - SikaTile 010 Secure Prime
+    - Davco Ultraprime
+    - Davco PrimeX
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
+3.9 Substrate quality / pre-treatment - Non-porous substrates can be primed with.
+    - SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
+3.10 Substrate quality / pre-treatment - Note.
+    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
+    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Note)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
@@ -235,7 +273,25 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Data sheet page 2: Product Information > Consumption)
 4.4 Applied product ready for use.
     (Cite: Data sheet page 2: Product Information > Applied product ready for use)
-4.5 Limitations and important considerations.
+4.5 Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirring attachment
+    - Clean mixing buckets
+    - Trowels
+    (Cite: Data sheet page 3: Application Instructions > Equipment)
+4.6 Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.7 Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
+    - Ensure the back of tiles are clean and from dust and contaminates.
+    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
+    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
+    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
+    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
+    - Expansion joints shall be installed as per relevant Australian Standards.
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.8 Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
+4.9 Limitations and important considerations.
     - SikaTile®-350 Pro Maxset is not suitable for applications over tongue and grooved timber flooring, plywood, medium density fibre board, or Masonite.
     - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
     - For applications externally above 3 meters use in conjunction with mechanical fixing / shelfing systems.
@@ -248,7 +304,7 @@ Data sheet edition: March 2025, Version 01.01
     - During curing ensure protection from extreme heat, extreme sunlight, & water ingress.
     - Contact Sika Australia for advice if further information is required.
     (Cite: Data sheet page 2: Limitations Of Use)
-4.6 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+4.10 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
     - Over movement joints in the substrate
     - At a junction between different substrate materials
     - At fixtures interrupting the tile surface e.g. columns
@@ -260,7 +316,7 @@ Data sheet edition: March 2025, Version 01.01
 
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.5):
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
     - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
     - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
     (Cite: Data sheet page 2: Limitations)
@@ -278,52 +334,13 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Manufacturer website: Product page documents)
 6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
     (Cite: Data sheet page 3: Ecology, Health And Safety)
-6.3 Ecology, health and safety - Equipment.
-    - Personal protective equipment
-    - Mixing drill with stirring attachment
-    - Clean mixing buckets
-    - Trowels
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Equipment)
-6.4 Ecology, health and safety - Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality)
-6.5 Ecology, health and safety - Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CONCRETE SUBSTRATES)
-6.6 Ecology, health and safety - Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CEMENT BOARD AND SHEETING)
-6.7 Ecology, health and safety - Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > SCREEDS & MORTAR BEDS)
-6.8 Ecology, health and safety - Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > TILE ON TILE APPLICATIONS)
-6.9 Ecology, health and safety - Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment)
-6.10 Ecology, health and safety - Substrate quality / pre-treatment - Porous Substrates can be primed with.
-    - SikaTile 010 Secure Prime
-    - Davco Ultraprime
-    - Davco PrimeX
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
-6.11 Ecology, health and safety - Substrate quality / pre-treatment - Non-porous substrates can be primed with.
-    - SikaTile 015 Prep n Prime
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
-6.12 Ecology, health and safety - Substrate quality / pre-treatment - Note.
-    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
-    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Note)
-6.13 Ecology, health and safety - Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Mixing)
-6.14 Ecology, health and safety - Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
-    - Ensure the back of tiles are clean and from dust and contaminates.
-    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
-    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
-    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
-    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
-    - Expansion joints shall be installed as per relevant Australian Standards.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Application)
-6.15 Ecology, health and safety - Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Cleaning Of Equipment)
-6.16 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
-6.17 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
 TILE ADHESIVE: SikaTile®-400 EVO PRO
@@ -337,11 +354,17 @@ Data sheet edition: March 2025, Version 01.02
     - SikaTile®-400 EVO PRO is equipped with patented DUST LESS® technology which reduces airborne dust in the mixing phase by up to 80% acheiving improved air quality, better working conditions, less mess and faster clean up.
     - SikaTile®-400 EVO PRO is free from Respirable Crystalline Silica.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. SikaTile®-400 EVO PRO is suitable for internal and external applications. Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies, patios, swimming pools and spas. Suitable tile types include;
+1.3 Intended uses stated by the manufacturer.
+    - SikaTile®-400 EVO PRO is suitable for internal and external applications.
+    - Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies, patios, swimming pools and spas.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable tile types include.
     - Ceramic & Porcelain tiles
     - Mosaic tiles
     - Natural stone* including Marble, Granite, etc
     - Engineered stone/Manmade stone
+    (Cite: Data sheet page 1: Uses > Suitable tile types include)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
     - Concrete
     - Cement boards & sheets
     - Cement renders and screeds, including early aged screeds
@@ -352,14 +375,14 @@ Data sheet edition: March 2025, Version 01.02
     - Under tile heating systems
     - Tile on tile applications when used with SikaTile 015 Prep n Prime
     - Timber and particleboard flooring over-sheeted with ceramic tile underlay or a suitable reinforced screed
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. SikaTile®-400 EVO PRO
     - Product type as printed on the data sheet: A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH PATENTED DUST LESS® TECHNOLOGY DESIGNED FOR NATURAL STONE, PORCELAIN AND MOSAICS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Certificates and test reports.
     - Green Star - VOC Content Test Certificate
     - Green Star Design & As Built V1.1-13.1.1B
@@ -413,6 +436,8 @@ Data sheet edition: March 2025, Version 01.02
 3.6 Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > TILE ON TILE APPLICATIONS)
 3.7 Substrate preparation. Prime substrates with a suitable Sika primer prior to adhesive application.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
+3.8 Substrate preparation.
     - Refer to the specific primer product data sheet for additional information and instructions.
     - Priming is not required directly over suitable Sika waterproofing membranes.
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation)
@@ -433,7 +458,7 @@ Data sheet edition: March 2025, Version 01.02
     - Mixing drill with stirring attachment
     - Clean mixing buckets
     - Trowels
-    (Cite: Data sheet page 2: Application Instructions > Equipment)
+    (Cite: Data sheet pages 2-3: Application Instructions > Equipment)
 4.5 Mixing. Measure the recommended amount of clean potable water in a clean mixing pail, gradually add the SikaTile®-400 EVO PRO powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
     (Cite: Data sheet page 3: Application Instructions > Mixing)
 4.6 Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
@@ -473,9 +498,8 @@ Data sheet edition: March 2025, Version 01.02
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Not suitable for moisture sensitive stone, seek further advice from Sika technical support.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -493,9 +517,12 @@ Data sheet edition: March 2025, Version 01.02
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
-    (Cite: Data sheet page 3: Local Restrictions)
+    (Cite: Data sheet pages 3-4: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
@@ -518,3 +545,4 @@ SOURCES
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-400-evopro.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

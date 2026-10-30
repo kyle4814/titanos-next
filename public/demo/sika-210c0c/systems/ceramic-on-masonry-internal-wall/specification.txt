@@ -33,7 +33,7 @@ Data sheet edition: November 2025, Version 01.01
 2 MATERIALS
 2.1 Product. Davco® PrimeX
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (November 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Characteristics stated by the manufacturer.
@@ -80,7 +80,11 @@ Data sheet edition: November 2025, Version 01.01
     - Shake Jerry cans prior to use.
     - 20Ltr Pails can be stirrer with a mixing drill with stirrer attachment prior to use.
     (Cite: Data sheet page 2: Application Instructions > Mixing)
-4.5 Application. 1. Apply Davco® PrimeX to the substrate using a broom, brush roller or squeegee, then allow the primer to dry. Note: The primer is dry when all milkiness disappears. 2. Under hot, windy conditions (temperature above 30ºC), it is recommended to wet down any concrete slabs with clean water prior to priming, so that the primer does not flash dry. Whilst wetting down the floor, do not allow the water to pool or pond on the surface. The substrate should appear matt, with no signs of glistening water just prior to application of the primer. 3. Extremely porous concrete slabs should be wet down with water, as per instructions above, to prevent flash drying of the primer. 4. Once PrimeX is applied, it is recommended that the substrate be subsequently coated within 24 hours, otherwise, you risk the chance of recontaminating the surface with site dirt and dust. If the area is left uncovered for more than 24 hours, then it must be wiped down with clean water to remove site dirt and dust, and re-priming prior to tiling / waterproofing.
+4.5 Application.
+    - 1. Apply Davco® PrimeX to the substrate using a broom, brush roller or squeegee, then allow the primer to dry. Note: The primer is dry when all milkiness disappears.
+    - 2. Under hot, windy conditions (temperature above 30ºC), it is recommended to wet down any concrete slabs with clean water prior to priming, so that the primer does not flash dry. Whilst wetting down the floor, do not allow the water to pool or pond on the surface. The substrate should appear matt, with no signs of glistening water just prior to application of the primer.
+    - 3. Extremely porous concrete slabs should be wet down with water, as per instructions above, to prevent flash drying of the primer.
+    - 4. Once PrimeX is applied, it is recommended that the substrate be subsequently coated within 24 hours, otherwise, you risk the chance of recontaminating the surface with site dirt and dust. If the area is left uncovered for more than 24 hours, then it must be wiped down with clean water to remove site dirt and dust, and re-priming prior to tiling / waterproofing.
     (Cite: Data sheet page 2: Application Instructions > Application)
 4.6 Cleaning of tools. Tools and equipment shall be cleaned with water prior to the primer drying.
     (Cite: Data sheet page 2: Application Instructions > Cleaning Of Tools)
@@ -97,10 +101,9 @@ Data sheet edition: November 2025, Version 01.01
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
-    - Do not allow the product to freeze.
     - Do not use in temperatures below 5°C or above 35°C.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test the product in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -116,7 +119,10 @@ Data sheet edition: November 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
@@ -137,16 +143,18 @@ Data sheet edition: September 2022, Version 01.01
     - Terracotta,
     - Slate
     - Quarry tiles
+    (Cite: Data sheet page 1: Uses > Suitable tile types include)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
     - Concrete
     - Cement based screeds and renders
     - Rendered block or brickwork.
-    (Cite: Data sheet page 1: Uses > Suitable tile types include)
-1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
+    (Cite: Data sheet page 1: Uses > Suitable substrates include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
 
 2 MATERIALS
 2.1 Product. Davco Ceramacrete
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (September 2022, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -197,10 +205,13 @@ Data sheet edition: September 2022, Version 01.01
     - Select a trowel with an appropriate square-notch size for the size and type of tile, as per the following:
     (Cite: Data sheet page 2: Application Instructions > Equipment)
 4.6 Mixing.
-    - 1. Measure the right amount of clean, potable water into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
+    - 1. Measure the right amount of clean, potable water into a clean bucket.
+    - 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Do not mix by hand.
+    - 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder.
+    - 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
     - Davco Ceramacrete may require to be remixed during its pot life, do not add additional water.
     (Cite: Data sheet page 3: Application Instructions > Mixing)
-4.7 Application - Laying the Tiles. 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m2 at a time. 2. Hold the notched trowel at an angle of 60º or greater to the substrate 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90º across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed, and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the surface of the tiles and within the grout joint while the adhesive is still wet.
+4.7 Application - Laying the Tiles. 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m2 at a time. 2. Hold the notched trowel at an angle of 60º or greater to the substrate; 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90º across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed, and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the surface of the tiles and within the grout joint while the adhesive is still wet.
     - Allow product to set before grouting
     - Allow product to set firmly before return to service
     (Cite: Data sheet page 3: Application Instructions > Application > Laying the Tiles)
@@ -230,7 +241,7 @@ Data sheet edition: September 2022, Version 01.01
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
     - Do not apply in temperatures above 35ºC or below 5ºC
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -248,6 +259,9 @@ Data sheet edition: September 2022, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
@@ -261,13 +275,17 @@ Data sheet edition: May 2025, Version 01.01
 1.1 Work included. Provide Davco® Ceramaflex where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
 1.2 Product description. Davco® Ceramaflex is a flexible, thin or thick bed, off white, rubber modified cement-based tile adhesive. Davco® Ceramaflex is designed for wall & floor applications for both internal and external applications.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally. SUITABLE TILE TYPES ARE;
+1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable tile types are.
     - Ceramic
     - Porcelain
     - Mosaic
     - Terracotta
     - Slate
     - Quarry Tiles
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types Are)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
     - Concrete
     - Cement renders
     - Rendered brickwork & blockwork
@@ -277,14 +295,14 @@ Data sheet edition: May 2025, Version 01.01
     - Screeds & Mortar beds
     - Early aged screeds (minimum 24 hours @ 22°C & 50% RH)
     - Timber floor (with fibre cement sheet underlay)
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Suitable Substrates Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. Davco® Ceramaflex
     - Product type as printed on the data sheet: A FLEXIBLE, THIN OR THICK BED, OFF WHITE, RUBBER MODIFIED CEMENT-BASED TILE ADHESIVE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -315,7 +333,9 @@ Data sheet edition: May 2025, Version 01.01
     - Substrate deflection: all substrates under loads shall not exceed L/360 for tiles and L/720 for natural stone.
     - All surfaces must be installed according to manufacturers instructions and relevant standards, and be structurally sound, dry clean and free from movement, oil, grease, wax, sealers, curing compounds or other bond inhibiting material. Thoroughly clean old surfaces or new surfaces that have been treated prior to tiling.
     - Deeply contaminated surfaces require mechanical preparation. Expose at least 80% of the original surface of painted / coated substrates.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.3 Substrate quality / pre-treatment - Other Tile-able Substrates (metal, old flooring, old tile. adhesive): Remove all contaminates and bond inhibitors. Prime substrates with Davco Ultrabond (refer to Ultrabond pds for additional information).
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Other Tile-able Substrates (metal, old flooring, old tile)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
@@ -332,7 +352,10 @@ Data sheet edition: May 2025, Version 01.01
 4.4 Equipment. Select a trowel with a suitable notch size for the tile size and type as per the following;
     (Cite: Data sheet page 2: Application Instructions > Equipment)
 4.5 Mixing.
-    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag). 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand. 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved. 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
+    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag).
+    - 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand.
+    - 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved.
+    - 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
     - *Adhesive may need restirring during the potlife, do not add more water.
     (Cite: Data sheet page 3: Application Instructions > Mixing)
 4.6 Application - Laying the Tiles. 1. Place the adhesive onto the prepared and primed substrate. Do not apply more adhesive than can be tiles within the open time of the product, usually from a single tile to 1m². 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the required area where tile is to be applied, comb the adhesive in a single direction (not swirls). 4. Where "back buttering" the tile is required, use the flat side of the notched trowel to apply a thin adhesive layer to the back of the tile (approx 1-2mm thick). 5. Place the tile into the combed adhesive and press the tile firmly. 6. Move the tile forward and then back at 90° across the direction of the combed adhesive to flatten the adhesive to leave no voids under the tile. Occassionally life a tile to check the adhesive covers 90-100% of the tile. 7. Remove any excess adhesive in the joints, and on the face of the tile with a sponge and water while the adhesive is still wet.
@@ -357,12 +380,12 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 1: Environmental Information)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.3 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient Air Temperature. Min +5°C to Max 35°C
     (Cite: Data sheet page 2: Application Information > Ambient Air Temperature)
 5.3 Substrate Temperature. Min +5°C to Max 35°C
     (Cite: Data sheet page 2: Application Information > Substrate Temperature)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
+5.4 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.5 Test methods printed beside stated values. Each value is as printed in the data sheet with its test method.
@@ -381,10 +404,13 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.3, and include the records in the project documentation.
 
 ============================================================
 TILE ADHESIVE: SikaTile®-350 Pro Maxset
@@ -397,11 +423,15 @@ Data sheet edition: March 2025, Version 01.01
     - SikaTile®-350 Pro Maxset is available in both white or grey.
     - SikaTile®-350 Pro Maxset white is free from respirable crystalline silica.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors. Suitable Tile Types include;
+1.3 Intended uses stated by the manufacturer. SikaTile®-350 Pro Maxset is suitable for internal and external applications on both walls and floors.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable Tile Types include.
     - Ceramic Tiles
     - Porcelain tiles
     - Natural Stone* including marble and granite etc
     - Engineered stone / Man made stone*
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types include)
+1.5 Intended uses stated by the manufacturer - Suitable Substrates Include.
     - Concrete, (concrete greater than 35 MPa shall be mechanically prepared).
     - Cement boards and sheets*
     - Cement renders and screeds, including early ageds screeds
@@ -410,20 +440,20 @@ Data sheet edition: March 2025, Version 01.01
     - Under tile Sika waterproofing membranes
     - Gypsum Plasterboard
     - Tile on Tile applications when used with SikaTile 015 Prep n Prime
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.5.
+    (Cite: Data sheet page 1: Uses > Suitable Substrates Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
 
 2 MATERIALS
 2.1 Product. SikaTile®-350 Pro Maxset
     - Product type as printed on the data sheet: A FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH DUST LESS TECHNOLOGY DESIGN FOR LARGE FORMAT TILE INSTALLATIONS
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
     - AS ISO 13007: cited with a stated property or value. Where: Product Information > Product declaration (p.2).
-    - AS3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > SUBSTRATE QUALITY (p.3).
-    - AS 3958:2023: cited elsewhere in the data sheet. Where: Ecology, Health And Safety > APPLICATION (p.3).
+    - AS3958:2023: referred to in instructions or limitations. Where: Application Instructions > SUBSTRATE QUALITY (p.3).
+    - AS 3958:2023: referred to in instructions or limitations. Where: Application Instructions > APPLICATION (p.3).
     (Cite: Data sheet: whole data sheet)
 2.4 Characteristics stated by the manufacturer.
     - Equipped with DUST LESS Technology
@@ -447,8 +477,31 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Data sheet page 2: Product Information)
 
 3 SUBSTRATE PREPARATION
-3.1 Substrate preparation. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) states no substrate preparation requirements.
-    (Cite: Data sheet silent)
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality)
+3.3 Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CONCRETE SUBSTRATES)
+3.4 Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > CEMENT BOARD AND SHEETING)
+3.5 Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > SCREEDS & MORTAR BEDS)
+3.6 Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > TILE ON TILE APPLICATIONS)
+3.7 Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.8 Substrate quality / pre-treatment - Porous Substrates can be primed with.
+    - SikaTile 010 Secure Prime
+    - Davco Ultraprime
+    - Davco PrimeX
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
+3.9 Substrate quality / pre-treatment - Non-porous substrates can be primed with.
+    - SikaTile 015 Prep n Prime
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
+3.10 Substrate quality / pre-treatment - Note.
+    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
+    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Note)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (March 2025, Version 01.01) and the requirements below.
@@ -460,7 +513,25 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Data sheet page 2: Product Information > Consumption)
 4.4 Applied product ready for use.
     (Cite: Data sheet page 2: Product Information > Applied product ready for use)
-4.5 Limitations and important considerations.
+4.5 Equipment.
+    - Personal protective equipment
+    - Mixing drill with stirring attachment
+    - Clean mixing buckets
+    - Trowels
+    (Cite: Data sheet page 3: Application Instructions > Equipment)
+4.6 Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.7 Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
+    - Ensure the back of tiles are clean and from dust and contaminates.
+    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
+    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
+    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
+    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
+    - Expansion joints shall be installed as per relevant Australian Standards.
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.8 Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
+4.9 Limitations and important considerations.
     - SikaTile®-350 Pro Maxset is not suitable for applications over tongue and grooved timber flooring, plywood, medium density fibre board, or Masonite.
     - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
     - For applications externally above 3 meters use in conjunction with mechanical fixing / shelfing systems.
@@ -473,7 +544,7 @@ Data sheet edition: March 2025, Version 01.01
     - During curing ensure protection from extreme heat, extreme sunlight, & water ingress.
     - Contact Sika Australia for advice if further information is required.
     (Cite: Data sheet page 2: Limitations Of Use)
-4.6 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
+4.10 Limitations and important considerations. It is essential to plan the area to be tiled, with the inclusionof movement joints, in accordance with the relevant Australian Standards. Failure to do so may result in drummy or lifting tiles. Make sure normal building or surface movement is accommodated by installing movement joints as follows:
     - Over movement joints in the substrate
     - At a junction between different substrate materials
     - At fixtures interrupting the tile surface e.g. columns
@@ -485,7 +556,7 @@ Data sheet edition: March 2025, Version 01.01
 
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.5):
+5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
     - SikaTile®-350 Pro Maxset is not suitable for moisture sensitive stone use SikaTile 440 Opti-Cure
     - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
     (Cite: Data sheet page 2: Limitations)
@@ -503,52 +574,13 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Manufacturer website: Product page documents)
 6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
     (Cite: Data sheet page 3: Ecology, Health And Safety)
-6.3 Ecology, health and safety - Equipment.
-    - Personal protective equipment
-    - Mixing drill with stirring attachment
-    - Clean mixing buckets
-    - Trowels
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Equipment)
-6.4 Ecology, health and safety - Substrate quality. All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling. Deeply contaminated surfaces must be prepared/abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces. Substrates shall meet relevant deflection standards outlined in the relevant Australian Standards (AS3958:2023).
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality)
-6.5 Ecology, health and safety - Substrate quality - Concrete substrates. New concrete shall be 7 days old and be left with a wood float finish. Steel trowel finished concrete is generally acceptable if the concrete allows water penetration. Concrete above 35MPa shall be mechanically prepared.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CONCRETE SUBSTRATES)
-6.6 Ecology, health and safety - Substrate quality - Cement board and sheeting. All boards and sheets must be fixed in accordance with the manufacturer's instructions and specifically designed for tiling.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > CEMENT BOARD AND SHEETING)
-6.7 Ecology, health and safety - Substrate quality - Screeds & mortar beds. Sand cement screeds must be installed as per relevant Australian Standards and left for a minimum 24 hours prior to tiling. Screeds may need longer drying time in cold climates.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > SCREEDS & MORTAR BEDS)
-6.8 Ecology, health and safety - Substrate quality - Tile on tile applications. Ensure all existing tiles are firmly fixed, loose or hollow tiles must be removed and the area repaired using a suitable Sika repair mortar. Existing tiles shall be adequately cleaned prior to the application of the primer. Existing tiles shall be primed with SikaTile 015 Prep n Prime and allowed to dry prior to tiling.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality > TILE ON TILE APPLICATIONS)
-6.9 Ecology, health and safety - Substrate quality / pre-treatment. Prime substrates with a suitable Sika primer prior to adhesive application.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment)
-6.10 Ecology, health and safety - Substrate quality / pre-treatment - Porous Substrates can be primed with.
-    - SikaTile 010 Secure Prime
-    - Davco Ultraprime
-    - Davco PrimeX
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Porous Substrates can be primed with)
-6.11 Ecology, health and safety - Substrate quality / pre-treatment - Non-porous substrates can be primed with.
-    - SikaTile 015 Prep n Prime
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Non-porous substrates can be primed with)
-6.12 Ecology, health and safety - Substrate quality / pre-treatment - Note.
-    - Refer to the spefic primer product data sheet for the complete user instructions prior to use.
-    - Priming is not required directly over suitable Sika under tile waterproofing membranes.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Substrate Quality / Pre-Treatment > Note)
-6.13 Ecology, health and safety - Mixing. Measure the recommended amount of clean, cool potable water in a clean mixing pail, gradually add the SikaTile®-350 Pro Maxset powder while mixing with the drill until it reaches a smooth lump free trowel-able consistency. Allow the mix to stand / slake for 5 minutes then restir for an additional minute. Remix without adding additional water during the adhesives pot life.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Mixing)
-6.14 Ecology, health and safety - Application. Tiles shall be fixed in accordance with the relevant Australian Standards.
-    - Ensure the back of tiles are clean and from dust and contaminates.
-    - Apply the adhesive with a notched trowel to the substrate to achieve minimum coverage requirement outlined in Australian Standards AS 3958:2023.
-    - Apply the adhesive in a single direction and avoid swirls in the adhesive.
-    - Apply tiles into the wet adhesive and break the adhesive notches to fully bed the tile in the adhesive layer. Ensure adequate coverage outlined in the Australian Standards is achieved to both substrate and the back of tiles.
-    - Clean any residual adhesive off the face of the tile and out of the grout joints while the adhesive is still wet.
-    - Expansion joints shall be installed as per relevant Australian Standards.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Application)
-6.15 Ecology, health and safety - Cleaning of equipment. Tools and equipment can be cleaned with water prior to the adhesive setting. Adhesive that has set will require mechanical removal.
-    (Cite: Data sheet page 3: Ecology, Health And Safety > Cleaning Of Equipment)
-6.16 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
+6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
-6.17 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
@@ -571,3 +603,4 @@ SOURCES
 8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-350-promaxset.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

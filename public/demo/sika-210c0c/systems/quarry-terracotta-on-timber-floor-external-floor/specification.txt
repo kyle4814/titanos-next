@@ -35,13 +35,13 @@ Data sheet edition: September 2026, Version 02.01
     - Structural Plywood
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
 
 2 MATERIALS
 2.1 Product. SikaTile®-110 Secure Proof
     - Product type as printed on the data sheet: A PREMIUM PERFORMANCE, CLASS III, READY TO USE, WATER-BASED POLYURETHANE WATERPROOFING MEMBRANE DESIGNED FOR UNDER TILE AND STONE APPLICATIONS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer - Branz as/nzs 4858:2004. Test Certificate DC13205-003
     (Cite: Data sheet page 1: Certificates And Test Reports > Branz As/Nzs 4858:2004)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -101,9 +101,13 @@ Data sheet edition: September 2026, Version 02.01
     - Small hairline cracks, up to 1mm wide, may be filled by the first application of SikaTile®-110 Secure Proof
     - For cracks / joints wider than 1mm, a joint filler should be applied along the length of the crack prior to the application of SikaTile®-110 Secure Proof
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Static Cracks - not subject to movement)
-3.9 Substrate preparation - Bond Breaker. SikaTile®-110 Secure Proof has high extensibility and is designed for use with a 12 mm bond breaker, a bead of Sika® Neutral cure silicone, Sika® Fillet Joint or a suitable Sika® flexible waterproofing bandage. The sealant applied must be tooled off to form a 12 mm wide bond breaker. A bond breaker must be installed at areas subject to movement, wall/wall junction, wall/floor junction, sheet joints and seams, penetrations and where there is a change in the direction or substrate type.
+3.9 Substrate preparation - Non Dymanic Cracks - less than 3mm subject to movement.
+    - All cracks / joints, irrespective of their width, must be filled firstly with the bond breaker sealant. Then
+    - 50mm wide polyethylene / polypropylene tape should be placed over the crack, ensuring it adheres to the surface. Apply the SikaTile®-110 Secure Proof over the tape as per installation instructions.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Non Dymanic Cracks - less than 3mm subject to movement)
+3.10 Substrate preparation - Bond Breaker. SikaTile®-110 Secure Proof has high extensibility and is designed for use with a 12 mm bond breaker, a bead of Sika® Neutral cure silicone, Sika® Fillet Joint or a suitable Sika® flexible waterproofing bandage. The sealant applied must be tooled off to form a 12 mm wide bond breaker. A bond breaker must be installed at areas subject to movement, wall/wall junction, wall/floor junction, sheet joints and seams, penetrations and where there is a change in the direction or substrate type.
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Bond Breaker)
-3.10 Substrate preparation - Falls to Drains. All areas shall have falls in accordance with National Construction Code (NCC) requirements.
+3.11 Substrate preparation - Falls to Drains. All areas shall have falls in accordance with National Construction Code (NCC) requirements.
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Falls to Drains)
 
 4 APPLICATION
@@ -111,26 +115,35 @@ Data sheet edition: September 2026, Version 02.01
 4.2 Application data.
     - Consumption: The minimum dry film thickness required is 1.0mm applied in a minimum 2 coat installation. A 15 Litre pail will cover 10m²
     (Cite: Data sheet page 2: Application Information)
-4.3 Applied product ready for use. Drying Time
+4.3 Applied product ready for use.
     (Cite: Data sheet page 2: Application Information > Applied product ready for use)
 4.4 Equipment.
     - Brush, or short nap roller
     - Protective personal equipment
     (Cite: Data sheet page 2: Application Instructions > Equipment)
 4.5 Application method / tools - Standard Application.
-    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2- 3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm 4. Allow the final coat to dry for at least 8 hours prior to tiling application
-    - Application under Pedestall & Paver application 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coatas (as additional wear layer for pedestall and paver application. 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm 5. Allow the final coat to dry for at least 24 hours prior to pedestall and paver application
-    - Drying times are influence by factors beyond the control of the manufacturer, use drying times as a guide only.
+    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed.
+    - 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane.
+    - 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm
+    - 4. Allow the final coat to dry for at least 8 hours prior to tiling application
     (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Standard Application)
-4.6 Application method / tools - Flood testing (if required).
+4.6 Application method / tools - Application under Pedestall & Paver application.
+    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed.
+    - 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane.
+    - 3. Apply a third coatas (as additional wear layer for pedestall and paver application.
+    - 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm
+    - 5. Allow the final coat to dry for at least 24 hours prior to pedestall and paver application
+    - Drying times are influence by factors beyond the control of the manufacturer, use drying times as a guide only.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Application under Pedestall & Paver application)
+4.7 Application method / tools - Flood testing (if required).
     - Allow SikaTile®-110 Secure Proof to dry and cure for a minimum 72 hours at 23°C and 50% relative humidity for standard applications, and 96 hours at 23°C and 50% relative humidity for paver and pedestall application.
     - Conduct flood test for 24 hours at max 50mm depth with water.
     - Inspect membrane for water loss, release water and allow area to dry prior prior to subsequent coatings
     - Repair membrane if required.
     (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Flood testing (if required))
-4.7 Cleaning of equipment. Clean all tools and application equipment immediately after us with water. Once cured, residual material can only be removed mechanically.
+4.8 Cleaning of equipment. Clean all tools and application equipment immediately after us with water. Once cured, residual material can only be removed mechanically.
     (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
-4.8 Limitations and important considerations.
+4.9 Limitations and important considerations.
     - SikaTile®-110 Secure Proof is not suitable for applications in areas of permanent water immersion.
     - SikaTile®-110 Secure Proof is not suitable for applications in area of negative hydrostatic pressure or rising damp. Seek sika technical advice.
     - Delay applications if rain or inclement weather is imminent.
@@ -143,15 +156,18 @@ Data sheet edition: September 2026, Version 02.01
     (Cite: Data sheet page 2: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.3 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. 5°C to 35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
+5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
     - Delay applications if rain or inclement weather is imminent.
     (Cite: Data sheet page 2: Limitations)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
+5.4 Trials, checks and measurements stated by the manufacturer.
+    - Ready for flood testing | 48 hours
+    - 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm
+    - 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm
     - Conduct flood test for 24 hours at max 50mm depth with water.
-    (Cite: Data sheet page 3: various)
+    (Cite: Data sheet page 2: various)
 5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
 5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
@@ -165,10 +181,13 @@ Data sheet edition: September 2026, Version 02.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.3, and include the records in the project documentation.
 
 ============================================================
 WATERPROOFING MEMBRANE: SikaTile®-111 Rapid Proof
@@ -198,7 +217,7 @@ Data sheet edition: September 2024, Version 01.02
 2.1 Product. SikaTile®-111 Rapid Proof
     - Product type as printed on the data sheet: A CLASS III RAPID DRYING WATER-BASED MEMBRANE WITH EASY FILM BUILD FOR UNDER TILE AND STONE WATERPROOFING
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (September 2024, Version 01.02) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -240,29 +259,33 @@ Data sheet edition: September 2024, Version 01.02
     - New rendered surfaces must have a wood float finish and be allowed to cure for at least 7 days
     - Screeds shall be dry and firm and installed in accordance with relevant Australian Standards.
     - Early aged screed refer to priming section for primer selection.
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality > Cement Based Renders & Screeds)
+3.4 Substrate quality - Light Weight Block / AAC Autoclaved Aerated Concrete & Polystyrene boards coated with cement-based layer..
     - Prime substrates with 2 coats of a suitable porous primer, refer to primer section in this document
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Cement Based Renders & Screeds)
-3.4 Substrate quality - Typical construction boards and sheeting.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Light Weight Block / AAC Autoclaved Aerated Concrete & Polystyrene boards coated with cement-based layer.)
+3.5 Substrate quality - Typical construction boards and sheeting.
     - Board and sheeting shall be specifically designed and suitable for tile and stone applications and installed in accordance with relevant Australian Standards and manufacturer instructions.
     - Boards and sheets unless specified shall have joins filled with a suitable Sika® connector sealant.
     - Prime boards and sheet with a suitable primer
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Typical construction boards and sheeting)
-3.5 Substrate quality - Existing tiles.
+3.6 Substrate quality - Existing tiles.
     - Existing tiles must be free from defects and soundly fixed.
     - Gloss finished tiles shall be mechanically prepared prior to priming with a Sika non porous primer.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Existing tiles)
-3.6 Substrate quality / pre-treatment.
+3.7 Substrate quality / pre-treatment.
     - Substrates shall be true and flat free from voids and divots, repair substrates as necessary prior to waterproofing works.
     - All substrates to be waterproofed must be rigid, dry structurally sound and smooth. All grease, oil, wax, curing compounds, dust loose material must be removed prior to application.
     - Substrates must be continuous and not pond water with adequate falls to waste in accordance with Australian Standards
     - Concrete substrates shall accept water penetration. Should concrete not accept water mechanical preparation should be performed prior to priming and membrane application.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
-3.7 Substrate quality / pre-treatment - Static Cracks - not subject to movement.
+3.8 Substrate quality / pre-treatment - Static Cracks - not subject to movement.
     - Small hairline cracks, up to 1mm wide, may be filled by the first application of SikaTile®-110 Secure Proof
     - For cracks / joints wider than 1mm, a joint filler should be applied along the length of the crack prior to the application of SikaTile®-111 Rapid Proof
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Static Cracks - not subject to movement)
+3.9 Substrate quality / pre-treatment - Static Cracks - not subject to movement. Non Dynamic Cracks - less than 3mm subject to movement
     - All cracks / joints, irrespective of their width, must be filled firstly with the connector sealant. Then 50mm wide polyethylene / polypropylene tape should be placed over the crack, ensuring it adheres to the surface. Apply the SikaTile®-111 Rapid Proof over the tape as per application instructions.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Static Cracks - not subject to movement)
-3.8 Substrate quality / pre-treatment - Substrate Priming.
+3.10 Substrate quality / pre-treatment - Substrate Priming.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Substrate Priming)
 
 4 APPLICATION
@@ -312,7 +335,7 @@ Data sheet edition: September 2024, Version 01.02
     (Cite: Data sheet page 2: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.5 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Material temperature. > 5°C - < 35°C
     (Cite: Data sheet page 2: Application Information > Material temperature)
 5.3 Ambient air temperature. > 5°C - < 35°C
@@ -323,9 +346,17 @@ Data sheet edition: September 2024, Version 01.02
     - Do not apply if rain or bad weather is imminent.
     - Do not allow SikaTile®-111 Rapid Proof to freeze.
     (Cite: Data sheet page 2: Limitations)
-5.6 Trials, test areas and compatibility checks stated by the manufacturer.
+5.6 Trials, checks and measurements stated by the manufacturer.
+    - SikaTile®-111 Rapid Proof has superior film build designed to achieve dry film coverage easier than traditional under tile liquid applied membranes.
+    - Excellent film build assisting in easy dry film thickness in 2 coats
+    - SikaTile®-111 Rapid Proof is designed to be applied in 2 coats to a finished dry film thickness of 1.00mm.
+    - 2 coats applied at 0.75Ltr per m² will achieve a dry film thickness of 1.00mm.
+    - Apply the SikaTile®-111 Rapid Proof at a wet film thickness of 0.75 Litre per M² per coat to reach a dry film thickness on minimum 1.0mm.
+    - Periodical checking of application thickness is recommended to ensure dry film thickness are achieved.
+    - Should flood testing be required refer to the below instructions.
     - Flood test time shall be a maximum of 1 hour.
-    (Cite: Data sheet page 3: various)
+    - Should a longer flood testing be required please contact Sika for instructions.
+    (Cite: Data sheet page 1: various)
 5.7 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
 5.8 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
@@ -341,8 +372,11 @@ Data sheet edition: September 2024, Version 01.02
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
-6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.5, and include the records in the project documentation.
 
 ============================================================
 WATERPROOFING MEMBRANE: Davco® K10 Plus
@@ -360,7 +394,7 @@ Data sheet edition: June 2026, Version 01.07
 2.1 Product. Davco® K10 Plus
     - Product type as printed on the data sheet: A FLEXIBLE, PREMIXED, READY TO USE WATER BASED POLYURETHANE CLASS III WATERPROOFING MEMBRANE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals / standards.
     - AS/NZ 4858:2004 Branz Test Report (DC13205-001)
     - Branz Appraisal Internal No.1142 (2020)
@@ -433,12 +467,14 @@ Data sheet edition: June 2026, Version 01.07
 3.10 Substrate quality / pre-treatment. Surfaces that are to receive Davco® K10 Plus shall be primed with a suitable Sika primer prior to the waterproofing membrane application.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
 3.11 Substrate quality / pre-treatment - Primer Guide.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
+3.12 Substrate quality / pre-treatment - Primer Guide.
     - Refer to the relevant specific primer product data sheet for complete user instructions prior to use.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (June 2026, Version 01.07) and the requirements below.
-4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
+4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
     (Cite: Data sheet page 2: Application Information > Consumption)
 4.3 Drying Time.
     (Cite: Data sheet page 2: Application Information > Drying Time)
@@ -468,11 +504,17 @@ Data sheet edition: June 2026, Version 01.07
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not apply in temperatures above 35°C or below 5°C
-    - Do not allow the product to freeze
     (Cite: Data sheet page 2: Limitations)
-5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments.
+    - Ready for flood testing | 3 days
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -484,7 +526,10 @@ Data sheet edition: June 2026, Version 01.07
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 3-4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -508,3 +553,4 @@ SOURCES
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/davco-k10-plus.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

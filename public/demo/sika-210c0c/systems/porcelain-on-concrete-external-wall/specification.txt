@@ -38,7 +38,7 @@ Data sheet edition: November 2025, Version 01.01
 2 MATERIALS
 2.1 Product. Davco® PrimeX
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (November 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Characteristics stated by the manufacturer.
@@ -85,7 +85,11 @@ Data sheet edition: November 2025, Version 01.01
     - Shake Jerry cans prior to use.
     - 20Ltr Pails can be stirrer with a mixing drill with stirrer attachment prior to use.
     (Cite: Data sheet page 2: Application Instructions > Mixing)
-4.5 Application. 1. Apply Davco® PrimeX to the substrate using a broom, brush roller or squeegee, then allow the primer to dry. Note: The primer is dry when all milkiness disappears. 2. Under hot, windy conditions (temperature above 30ºC), it is recommended to wet down any concrete slabs with clean water prior to priming, so that the primer does not flash dry. Whilst wetting down the floor, do not allow the water to pool or pond on the surface. The substrate should appear matt, with no signs of glistening water just prior to application of the primer. 3. Extremely porous concrete slabs should be wet down with water, as per instructions above, to prevent flash drying of the primer. 4. Once PrimeX is applied, it is recommended that the substrate be subsequently coated within 24 hours, otherwise, you risk the chance of recontaminating the surface with site dirt and dust. If the area is left uncovered for more than 24 hours, then it must be wiped down with clean water to remove site dirt and dust, and re-priming prior to tiling / waterproofing.
+4.5 Application.
+    - 1. Apply Davco® PrimeX to the substrate using a broom, brush roller or squeegee, then allow the primer to dry. Note: The primer is dry when all milkiness disappears.
+    - 2. Under hot, windy conditions (temperature above 30ºC), it is recommended to wet down any concrete slabs with clean water prior to priming, so that the primer does not flash dry. Whilst wetting down the floor, do not allow the water to pool or pond on the surface. The substrate should appear matt, with no signs of glistening water just prior to application of the primer.
+    - 3. Extremely porous concrete slabs should be wet down with water, as per instructions above, to prevent flash drying of the primer.
+    - 4. Once PrimeX is applied, it is recommended that the substrate be subsequently coated within 24 hours, otherwise, you risk the chance of recontaminating the surface with site dirt and dust. If the area is left uncovered for more than 24 hours, then it must be wiped down with clean water to remove site dirt and dust, and re-priming prior to tiling / waterproofing.
     (Cite: Data sheet page 2: Application Instructions > Application)
 4.6 Cleaning of tools. Tools and equipment shall be cleaned with water prior to the primer drying.
     (Cite: Data sheet page 2: Application Instructions > Cleaning Of Tools)
@@ -102,10 +106,9 @@ Data sheet edition: November 2025, Version 01.01
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.7):
-    - Do not allow the product to freeze.
     - Do not use in temperatures below 5°C or above 35°C.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test the product in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -121,7 +124,10 @@ Data sheet edition: November 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
@@ -152,7 +158,7 @@ Data sheet edition: June 2023, Version 01.02
 2 MATERIALS
 2.1 Product. Davco Ultraprime
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (June 2023, Version 01.02) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -222,7 +228,7 @@ Data sheet edition: June 2023, Version 01.02
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not use Davco Ultraprime below 5°C or above 35°C as this may affect the curing of the product.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -238,7 +244,10 @@ Data sheet edition: June 2023, Version 01.02
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -259,6 +268,8 @@ Data sheet edition: November 2024, Version 01.06
     - General purpose primer for water-based waterproofing membranes
     - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
     - Priming of dense and steel trowelled concrete
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer. Suitable substrates include.
     - Concrete
     - Cement boards and sheets including ScyonTM
     - Plasterboard
@@ -267,13 +278,13 @@ Data sheet edition: November 2024, Version 01.06
     - Cement coated light weight construction boards
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
 
 2 MATERIALS
 2.1 Product. SikaTile®-010 Secure Prime
     - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Certificates and test reports.
     - Green Star - VOC Content Test Certificate
     (Cite: Data sheet page 1: Certificates And Test Reports)
@@ -330,7 +341,7 @@ Data sheet edition: November 2024, Version 01.06
     - Do not use in high windy conditions to avoid flash setting.
     - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
     - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
-    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - If the primed area is left exposed for longer than 24-hours, the area should be wiped down with cleaned with water.
     - For use other than mentioned in this document please contact Sika® Australia.
     (Cite: Data sheet page 2: Important Considerations)
 
@@ -354,7 +365,10 @@ Data sheet edition: November 2024, Version 01.06
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -367,18 +381,19 @@ Data sheet edition: May 2025, Version 01.01
 1.1 Work included. Provide Davco® K10 Rapid where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
 1.2 Product description. Davco® K10 Rapid is a flexible, rapid drying, Class III waterproofing membrane designed for internal and external applications.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer - Surfaces.
-    - Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting. Areas
+1.3 Intended uses stated by the manufacturer - Surfaces. Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting.
+    (Cite: Data sheet page 1: Uses > Surfaces)
+1.4 Intended uses stated by the manufacturer - Surfaces - Areas.
     - Suitable for interior and exterior applications. Commercial and domestic walls and floors including wet areas such as showers, bathrooms, terraces, balconies, roofs walkways prior to tiling, using Davco cement based adhesives. Also suitable for confined areas, as Davco K10 Rapid is water based and solvent free.
     - Davco® K10 Rapid can be used in conjunction with Davco K10 Plus as required.
-    (Cite: Data sheet page 1: Uses > Surfaces)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Surfaces > Areas)
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. Davco® K10 Rapid
     - Product type as printed on the data sheet: A FLEXIBLE RAPID DRYING CLASS III WATERPROOFING MEMBRANE DESIGN FOR UNDER TILE APPLICATIONS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -419,7 +434,7 @@ Data sheet edition: May 2025, Version 01.01
     - All metal surfaces must be free from rust Lightly abrade/ sand the substrate prior to application of the Davco K10 Rapid
     - PVC Control leak flanges Control leak flanges shall be recessed to avoid water pooling.
     - Lightly sand control leak flanges prior to waterproofing application.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
 3.5 Substrate quality - Bond Breaker.
     - Any suitable Sika neutral cure silicone sealant
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Bond Breaker)
@@ -437,16 +452,18 @@ Data sheet edition: May 2025, Version 01.01
 3.9 Substrate quality - Compressed Fibre Cement Boards.
     - This should be primed using Davco PrimeX. Allow the primer to dry before application of the membrane.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Compressed Fibre Cement Boards)
-3.10 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
+3.10 Substrate quality - Falls to drains/wastes. In all applications, it is important that falls be provided to the drain outlet. The slope of this fall should conform to the minimum standards outlined in Australian Standards. For wet areas, balconies, and rooftops, if the existing substrate does not provide the required falls, a sand/cement screed will be need to be created. Once the falls are in place and screeds have cured, apply the Davco K10 Rapid as per instructions. Contact Sika Australia for more information on screed mix should this be required.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Falls to drains/wastes)
+3.11 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
-3.11 Substrate quality / pre-treatment - Primer Guide.
+3.12 Substrate quality / pre-treatment - Primer Guide.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
-4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 15Ltr pail will cover approximately 10m2 with 2 coats.
+4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
     (Cite: Data sheet page 2: Application Information > Consumption)
-4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relative humidity. Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only.
+4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relat-Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only. ive humidity.
     (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
 4.4 Equipment.
     - Personal protective equipment, safety glass, gloves etc
@@ -485,11 +502,14 @@ Data sheet edition: May 2025, Version 01.01
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Do not allow the product to freeze
-    - Drying time can be affected by temperature and environment and drying time to be used as a guide only.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
+    - Should flood testing be needed please allow membrane to dry for 24 hours prior to testing.
     - A test area should be undertaken to ensure suitability of product selection.
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm thick.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
@@ -505,6 +525,9 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
@@ -534,3 +557,4 @@ SOURCES
 8. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/davco-k10-rapid.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

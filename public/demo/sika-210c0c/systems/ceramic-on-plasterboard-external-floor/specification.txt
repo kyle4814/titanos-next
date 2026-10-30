@@ -35,6 +35,8 @@ Data sheet edition: November 2024, Version 01.06
     - General purpose primer for water-based waterproofing membranes
     - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
     - Priming of dense and steel trowelled concrete
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer. Suitable substrates include.
     - Concrete
     - Cement boards and sheets including ScyonTM
     - Plasterboard
@@ -43,13 +45,13 @@ Data sheet edition: November 2024, Version 01.06
     - Cement coated light weight construction boards
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
 
 2 MATERIALS
 2.1 Product. SikaTile®-010 Secure Prime
     - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Certificates and test reports.
     - Green Star - VOC Content Test Certificate
     (Cite: Data sheet page 1: Certificates And Test Reports)
@@ -106,7 +108,7 @@ Data sheet edition: November 2024, Version 01.06
     - Do not use in high windy conditions to avoid flash setting.
     - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
     - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
-    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - If the primed area is left exposed for longer than 24-hours, the area should be wiped down with cleaned with water.
     - For use other than mentioned in this document please contact Sika® Australia.
     (Cite: Data sheet page 2: Important Considerations)
 
@@ -130,7 +132,10 @@ Data sheet edition: November 2024, Version 01.06
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -155,13 +160,13 @@ Data sheet edition: September 2026, Version 02.01
     - Structural Plywood
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.9.
 
 2 MATERIALS
 2.1 Product. SikaTile®-110 Secure Proof
     - Product type as printed on the data sheet: A PREMIUM PERFORMANCE, CLASS III, READY TO USE, WATER-BASED POLYURETHANE WATERPROOFING MEMBRANE DESIGNED FOR UNDER TILE AND STONE APPLICATIONS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer - Branz as/nzs 4858:2004. Test Certificate DC13205-003
     (Cite: Data sheet page 1: Certificates And Test Reports > Branz As/Nzs 4858:2004)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -221,9 +226,13 @@ Data sheet edition: September 2026, Version 02.01
     - Small hairline cracks, up to 1mm wide, may be filled by the first application of SikaTile®-110 Secure Proof
     - For cracks / joints wider than 1mm, a joint filler should be applied along the length of the crack prior to the application of SikaTile®-110 Secure Proof
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Static Cracks - not subject to movement)
-3.9 Substrate preparation - Bond Breaker. SikaTile®-110 Secure Proof has high extensibility and is designed for use with a 12 mm bond breaker, a bead of Sika® Neutral cure silicone, Sika® Fillet Joint or a suitable Sika® flexible waterproofing bandage. The sealant applied must be tooled off to form a 12 mm wide bond breaker. A bond breaker must be installed at areas subject to movement, wall/wall junction, wall/floor junction, sheet joints and seams, penetrations and where there is a change in the direction or substrate type.
+3.9 Substrate preparation - Non Dymanic Cracks - less than 3mm subject to movement.
+    - All cracks / joints, irrespective of their width, must be filled firstly with the bond breaker sealant. Then
+    - 50mm wide polyethylene / polypropylene tape should be placed over the crack, ensuring it adheres to the surface. Apply the SikaTile®-110 Secure Proof over the tape as per installation instructions.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Non Dymanic Cracks - less than 3mm subject to movement)
+3.10 Substrate preparation - Bond Breaker. SikaTile®-110 Secure Proof has high extensibility and is designed for use with a 12 mm bond breaker, a bead of Sika® Neutral cure silicone, Sika® Fillet Joint or a suitable Sika® flexible waterproofing bandage. The sealant applied must be tooled off to form a 12 mm wide bond breaker. A bond breaker must be installed at areas subject to movement, wall/wall junction, wall/floor junction, sheet joints and seams, penetrations and where there is a change in the direction or substrate type.
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Bond Breaker)
-3.10 Substrate preparation - Falls to Drains. All areas shall have falls in accordance with National Construction Code (NCC) requirements.
+3.11 Substrate preparation - Falls to Drains. All areas shall have falls in accordance with National Construction Code (NCC) requirements.
     (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Falls to Drains)
 
 4 APPLICATION
@@ -231,26 +240,35 @@ Data sheet edition: September 2026, Version 02.01
 4.2 Application data.
     - Consumption: The minimum dry film thickness required is 1.0mm applied in a minimum 2 coat installation. A 15 Litre pail will cover 10m²
     (Cite: Data sheet page 2: Application Information)
-4.3 Applied product ready for use. Drying Time
+4.3 Applied product ready for use.
     (Cite: Data sheet page 2: Application Information > Applied product ready for use)
 4.4 Equipment.
     - Brush, or short nap roller
     - Protective personal equipment
     (Cite: Data sheet page 2: Application Instructions > Equipment)
 4.5 Application method / tools - Standard Application.
-    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2- 3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm 4. Allow the final coat to dry for at least 8 hours prior to tiling application
-    - Application under Pedestall & Paver application 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coatas (as additional wear layer for pedestall and paver application. 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm 5. Allow the final coat to dry for at least 24 hours prior to pedestall and paver application
-    - Drying times are influence by factors beyond the control of the manufacturer, use drying times as a guide only.
+    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed.
+    - 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane.
+    - 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm
+    - 4. Allow the final coat to dry for at least 8 hours prior to tiling application
     (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Standard Application)
-4.6 Application method / tools - Flood testing (if required).
+4.6 Application method / tools - Application under Pedestall & Paver application.
+    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed.
+    - 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane.
+    - 3. Apply a third coatas (as additional wear layer for pedestall and paver application.
+    - 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm
+    - 5. Allow the final coat to dry for at least 24 hours prior to pedestall and paver application
+    - Drying times are influence by factors beyond the control of the manufacturer, use drying times as a guide only.
+    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Application under Pedestall & Paver application)
+4.7 Application method / tools - Flood testing (if required).
     - Allow SikaTile®-110 Secure Proof to dry and cure for a minimum 72 hours at 23°C and 50% relative humidity for standard applications, and 96 hours at 23°C and 50% relative humidity for paver and pedestall application.
     - Conduct flood test for 24 hours at max 50mm depth with water.
     - Inspect membrane for water loss, release water and allow area to dry prior prior to subsequent coatings
     - Repair membrane if required.
     (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Flood testing (if required))
-4.7 Cleaning of equipment. Clean all tools and application equipment immediately after us with water. Once cured, residual material can only be removed mechanically.
+4.8 Cleaning of equipment. Clean all tools and application equipment immediately after us with water. Once cured, residual material can only be removed mechanically.
     (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
-4.8 Limitations and important considerations.
+4.9 Limitations and important considerations.
     - SikaTile®-110 Secure Proof is not suitable for applications in areas of permanent water immersion.
     - SikaTile®-110 Secure Proof is not suitable for applications in area of negative hydrostatic pressure or rising damp. Seek sika technical advice.
     - Delay applications if rain or inclement weather is imminent.
@@ -263,15 +281,18 @@ Data sheet edition: September 2026, Version 02.01
     (Cite: Data sheet page 2: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.3 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. 5°C to 35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
+5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
     - Delay applications if rain or inclement weather is imminent.
     (Cite: Data sheet page 2: Limitations)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
+5.4 Trials, checks and measurements stated by the manufacturer.
+    - Ready for flood testing | 48 hours
+    - 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm
+    - 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm
     - Conduct flood test for 24 hours at max 50mm depth with water.
-    (Cite: Data sheet page 3: various)
+    (Cite: Data sheet page 2: various)
 5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
 5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
@@ -285,10 +306,13 @@ Data sheet edition: September 2026, Version 02.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.3, and include the records in the project documentation.
 
 ============================================================
 WATERPROOFING MEMBRANE: SCHÖNOX® AB
@@ -299,26 +323,29 @@ Data sheet edition: October 2025, Version 01.08
 1.2 Product description. A crack bridging, waterproof sheet membrane system made of polyethylene covered with a special fleece designed for use in wet areas, balconies and swimming pools.
     (Cite: Data sheet page 1: Description)
 1.3 Intended uses stated by the manufacturer.
-    - • Highly loaded commercial wet areas and kitchens. • Balconies, & terraces prior to tiling.
-    - • Swimming pools, commercial aquatic centre pools, spas and sauna's.
-    - • Residential wet areas and bathrooms
-    - Substrates
-    - Schonox AB is suitable on:
-    - • Concrete
-    - • Masonry brick & blockwork (fully grouted/rendered ) • Cement-based screeds and renders
-    - • Fibre Cement Boards and sheets"
-    - • Gypsum Plaster Boards*
-    - • Sika Approved Acoustic underlays
-    - • Light weight Polystyurene boards coated with mortar*
-    - * Refer manufacturer instructions and load limits. Boards and sheet shall be specifically designed to receive tiles
+    - Highly loaded commercial wet areas and kitchens.
+    - Balconies, & terraces prior to tiling.
+    - Swimming pools, commercial aquatic centre pools,
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.11.
+1.4 Intended uses stated by the manufacturer. spas and sauna's.
+    - Residential wet areas and bathrooms
+    (Cite: Data sheet page 1: Uses)
+1.5 Intended uses stated by the manufacturer - Substrates Schonox AB is suitable on.
+    - Concrete
+    - Masonry brick & blockwork (fully grouted/rendered )
+    - Cement-based screeds and renders
+    - Fibre Cement Boards and sheets"
+    - Gypsum Plaster Boards*
+    - Sika Approved Acoustic underlays
+    - Light weight Polystyurene boards coated with mor-
+    (Cite: Data sheet page 1: Uses > Substrates Schonox AB is suitable on)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.14.
 
 2 MATERIALS
 2.1 Product. SCHÖNOX® AB
     - Product type as printed on the data sheet: WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALLATIONS
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 5: Title block and supplier details)
 2.2 Certificates and test reports.
     - AS 4858:2004
     - AS 4654.1, 2012
@@ -360,7 +387,7 @@ Data sheet edition: October 2025, Version 01.08
     - Water-vapour transmission rate: 0.28g/m²/24hrs (ASTM E96)
     - Service temperature: -20°C to +60°C
     (Cite: Data sheet page 2: Product Information, Technical Information)
-2.7 System structure. Wet Areas, Balconies & Terraces; Priming:
+2.7 System structure. Wet Areas, Balconies & Terraces: Priming:
     - Seek written Sika Specification for submerged applications such as pools or spas.
     (Cite: Data sheet page 3: System Information > System structure)
 2.8 Packaging, shelf life and storage.
@@ -388,8 +415,8 @@ Data sheet edition: October 2025, Version 01.08
 4.2 Application data.
     - Effective thickness: 0.55mm
     (Cite: Data sheet page 2: Product Information)
-4.3 Mixing ratio. The adhesive used to bond the Schonox AB sheet membrane system: SikaTile 440 Opti-Cure mixed neat with Lanko Latex 751 Additive. Mixing Ratio
-    - Additional powder of up to 1kg of SikaTile 440 Opti-Cure may be added to the 5Ltr Lanko Latex 751 to reach your desired consistency.
+4.3 Mixing ratio. The adhesive used to bond the Schonox AB sheet membrane system: SikaTile 440 Opti-Cure mixed neat with Lanko Latex 751 Additive.
+    - Mixing Ratio: Additional powder of up to 1kg of SikaTile 440 Opti-Cure may be added to the 5Ltr Lanko Latex 751 to reach your desired consistency.
     - The adhesive may need restirring during its pot life, do not add any additional additive.
     (Cite: Data sheet page 2: Application Information > Mixing ratio)
 4.4 Applied product ready for covering.
@@ -400,7 +427,7 @@ Data sheet edition: October 2025, Version 01.08
     - Substrates must be properly cured, structurally sound, free from loose or friable particles, clean, dry and free from contaminates such as dust, dirt, oil, grease, curing compounds, crystaline sealers, laitance, or effloresence.
     - Dependant on the substrate condition and contamination to be removed from the surface, perform adequate scarification, or blast cleaning in order to remove all traces of any materials that could reduce the product adhesion to the substrate.
     - Substrates shall be smooth and continuous without pit, divots. Repair pits or divots with a suitable Sika repair mortar prior to application.
-    (Cite: Data sheet page 3: Application Instructions)
+    (Cite: Data sheet pages 3-4: Application Instructions)
 4.6 Equipment.
     - Slow Speed Mixing Drill (Max 500RPM)
     - Plastic trowel / plastic paint scrapers
@@ -411,39 +438,55 @@ Data sheet edition: October 2025, Version 01.08
 4.7 Application method / tools.
     - Refer to Mixing Ratio section in this document for Adhesive details.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools)
-4.8 Application method / tools - Waterstop Angles, and Terminations.
+4.8 Application method / tools - Application of floor wall functions and corners, Schonox ST Sealing Tape and ST corners.
+    - Apply the adhesive to the substrate junctions with a 100mm roller or v notched trowel. While the adhesive is wet embed the Schonox St Sealing Tape and corners in position
+    - Apply addition adhesive to overlap the joins and smooth out with a plastic scraper
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of floor wall functions and corners, Schonox ST Sealing Tape and ST corners)
+4.9 Application method / tools - Application of Pipe Penetrations - Schonox ST D components.
+    - For PVC fittings, apply a single coat of SikaFloor-14 Prep n Prime and allow to dry.
+    - For Metal Fittings, lightly abrade with steel wool and then clean residue with Isopropyl Alcohol and allow to dry. Then apply a single coat of SIkaFloor-14 Prep n Prime and allow to dry.
+    - Apply the adhesive around the pipe penetration with the Schonox 100mm roller or a V notched trowel and embed the Schonox ST pipe penetrations and flatten with a plastic scrapper.
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of Pipe Penetrations - Schonox ST D components)
+4.10 Application method / tools - Application of the Sconox Ab Sheet Membrane..
+    - Measure and cut sheet as required with the Utility Knife or Scissors
+    - Apply a layer of the adhesive with a roller or V notched trowel to an area that can be covered prior to adhesive skinning (approx 1m2) and embed the Shonox AB sheet into the adhesive. Immediately fatten the sheet with a plastic scraper. Repeat process by gradually rolling and apply adhesive as required. All sheet joins are to be overlapped by a minimum 50mm and ensure the adhesive covers all sheet joins for a watertight finish.
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of the Sconox Ab Sheet Membrane.)
+4.11 Application method / tools - Waterstop Angles, and Terminations.
     - Penetration can be terminated onto the pipe penetrations. Prime PVC pipes with SikaFloor-14 Prep n Prime and allow to dry. Apply the adhesive to the primer and install the Schonox ST D pipe penetrations.
     - Control Leak flanges shall be primed with SikaFloor-14 Prep n Prime and allowed to dry prior to bonding sheet terminations or ST Sealing with the adhesive Waterstop Angles shall be primed with SikaFloor-14 Prep n Prime and allowed to dry. Bond the Schonox ST Sealing tape to Waterstop angles with the adhesive as needed.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Waterstop Angles, and Terminations)
-4.9 Application method / tools - Application Notes.
+4.12 Application method / tools - Application Notes.
     - Ensure all sheet joins and tapes etc are overlapped by 50mm.
     - Ensure all sheet joins and over laps are well bonded. If required the adhesive can be skimmed over sheet joins to protect sheet edges.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application Notes)
-4.10 Cleaning of equipment. Tools and equipment can be clears with water prior to the adhesive setting.
+4.13 Cleaning of equipment. Tools and equipment can be clears with water prior to the adhesive setting.
     (Cite: Data sheet page 4: Application Instructions > Cleaning Of Equipment)
-4.11 Limitations and important considerations.
+4.14 Limitations and important considerations.
     - Not suitable for externally application over early aged concrete or screeds.
     - Not suitable for application with rising damp and high moisture related issues.
     (Cite: Data sheet page 3: Limitations Of Use)
-4.12 Limitations and important considerations.
+4.15 Limitations and important considerations.
     - Schonox AB Sheet membrane is designed as a complete system. Non propietory products use to fix the sheet shall be deem non-compliant.
     - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
     - Please consult Sika for installations not mentioned in this document
     (Cite: Data sheet page 3: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.4 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. Not below 5°C & not above 35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Substrate temperature. Not below 5°C & not above 35°C; Avoid application in hot direct sunlight ie >30°C as vapour pockets may occur. For external application in expose sun cover with screed or tile as soon as applicable or cover with a white corflute protection board or similar immediately after installation.
+5.3 Substrate temperature. Not below 5°C & not above 35°C; Avoid application in hot direct sunlight ie >30°C as vapour pockets may ocFor external application in expose sun cover with screed or tile as soon as applicable or cover with a white corflute protection board or similar immediately after installation. cur.
     (Cite: Data sheet page 3: Application Information > Substrate temperature)
-5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.11):
-    - Not suitable for application with rising damp and high moisture related issues.
+5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.14):
     - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
     (Cite: Data sheet page 3: Limitations)
-5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.5 Trials, checks and measurements stated by the manufacturer.
+    - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
+    - Apply a layer of the adhesive with a roller or V notched trowel to an area that can be covered prior to adhesive skinning (approx 1m2) and embed the Shonox AB sheet into the adhesive. Immediately fatten the sheet with a plastic scraper. Repeat process by gradually rolling and apply adhesive as required. All sheet joins are to be overlapped by a minimum 50mm and ensure the adhesive covers all sheet joins for a watertight finish.
+    (Cite: Data sheet page 3: various)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 3: Basis Of Product Data)
-5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -453,147 +496,18 @@ Data sheet edition: October 2025, Version 01.08
     (Cite: Data sheet page 3: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 4: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 4-5: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 4: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
-
-============================================================
-TILE ADHESIVE: Davco® Ceramaflex
-Data sheet edition: May 2025, Version 01.01
-
-1 SCOPE
-1.1 Work included. Provide Davco® Ceramaflex where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
-1.2 Product description. Davco® Ceramaflex is a flexible, thin or thick bed, off white, rubber modified cement-based tile adhesive. Davco® Ceramaflex is designed for wall & floor applications for both internal and external applications.
-    (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally. SUITABLE TILE TYPES ARE;
-    - Ceramic
-    - Porcelain
-    - Mosaic
-    - Terracotta
-    - Slate
-    - Quarry Tiles
-    - Concrete
-    - Cement renders
-    - Rendered brickwork & blockwork
-    - Plasterboard
-    - Fibre cement sheet
-    - Sika / Davco Approve waterproof membranes
-    - Screeds & Mortar beds
-    - Early aged screeds (minimum 24 hours @ 22°C & 50% RH)
-    - Timber floor (with fibre cement sheet underlay)
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
-
-2 MATERIALS
-2.1 Product. Davco® Ceramaflex
-    - Product type as printed on the data sheet: A FLEXIBLE, THIN OR THICK BED, OFF WHITE, RUBBER MODIFIED CEMENT-BASED TILE ADHESIVE
-    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
-2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
-    (Cite: Data sheet silent)
-2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
-    - SCAQMD method 304-91: cited elsewhere in the data sheet. Where: Environmental Information (p.1).
-    - AS ISO 13007.1: test method printed beside a stated value. Where: Product Information > Product Declaration (p.1).
-    - AS3958.1: referred to in instructions or limitations. Where: Application Instructions > Laying the Tiles (p.3).
-    (Cite: Data sheet: whole data sheet)
-2.4 Characteristics stated by the manufacturer.
-    - Flexible adhesive
-    - Economical
-    - Good bond strength
-    - Off white colour
-    - Suitable for early aged screeds
-    (Cite: Data sheet page 1: Characteristics / Advantages)
-2.5 Composition, appearance and supply.
-    - Appearance / Colour: Off white powder with rubber crumb particles.
-    - Product Declaration: C1S1E (AS ISO 13007.1)
-    (Cite: Data sheet page 1: Product Information)
-2.6 Packaging, shelf life and storage.
-    - Packaging: 20kg Bags / 64 per pallet
-    - Shelf life: 12 Months from date of manufacture.
-    - Storage conditions: Store in dry cool conditions above ground out of direct sunlight. High humidity will reduce shelf life.
-    (Cite: Data sheet page 1: Product Information)
-
-3 SUBSTRATE PREPARATION
-3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
-3.2 Substrate quality / pre-treatment.
-    - Substrate deflection: all substrates under loads shall not exceed L/360 for tiles and L/720 for natural stone.
-    - All surfaces must be installed according to manufacturers instructions and relevant standards, and be structurally sound, dry clean and free from movement, oil, grease, wax, sealers, curing compounds or other bond inhibiting material. Thoroughly clean old surfaces or new surfaces that have been treated prior to tiling.
-    - Deeply contaminated surfaces require mechanical preparation. Expose at least 80% of the original surface of painted / coated substrates.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
-
-4 APPLICATION
-4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
-4.2 Application data.
-    - Mixing Ratio: 7-8 Litres clean potable water per 20kg bag.
-    - Consumption: A 20kg bags cover approximately 14m² with a 6mm notch trowel.
-    - Layer Thickness: Maximum layer shall be no greater than 10mm.
-    - Pot Life: 1.5 hours
-    - Open Time: 30 minutes
-    - Adjustability Time: 20 minutes
-    (Cite: Data sheet page 2: Application Information)
-4.3 Applied Product Ready for Use.
-    (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
-4.4 Equipment. Select a trowel with a suitable notch size for the tile size and type as per the following;
-    (Cite: Data sheet page 2: Application Instructions > Equipment)
-4.5 Mixing.
-    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag). 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand. 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved. 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
-    - *Adhesive may need restirring during the potlife, do not add more water.
-    (Cite: Data sheet page 3: Application Instructions > Mixing)
-4.6 Application - Laying the Tiles. 1. Place the adhesive onto the prepared and primed substrate. Do not apply more adhesive than can be tiles within the open time of the product, usually from a single tile to 1m². 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the required area where tile is to be applied, comb the adhesive in a single direction (not swirls). 4. Where "back buttering" the tile is required, use the flat side of the notched trowel to apply a thin adhesive layer to the back of the tile (approx 1-2mm thick). 5. Place the tile into the combed adhesive and press the tile firmly. 6. Move the tile forward and then back at 90° across the direction of the combed adhesive to flatten the adhesive to leave no voids under the tile. Occassionally life a tile to check the adhesive covers 90-100% of the tile. 7. Remove any excess adhesive in the joints, and on the face of the tile with a sponge and water while the adhesive is still wet.
-    - Do not allow the adhesive to skin prior to placement of the tiles. If the adhesive skins, remove and replace.
-    - Application shall be in accordance with AS3958.1
-    - Movement joints shall be installed in accordance with applicable standards.
-    - Back buttering the tiles may be required to achieve minimum coverage requirements.
-    - Allow the adhesive to dry prior to grouting.
-    (Cite: Data sheet page 3: Application Instructions > Application > Laying the Tiles)
-4.7 Cleaning of tools. Clean tools and equipment with water orior to adhesive drying.
-    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
-4.8 Limitations and important considerations.
-    - Test product in an inconspicuous area first.
-    - When using Davco® Ceramaflex externally or in wet areas ensure correct drainage and falls exist, so that water does not pond on the tile surface.
-    - Not suitable for submerged applications.
-    - Not suitable for fixing tiles directly onto timber floors
-    - For applications above 3 meter high special fixing techniques are required
-    - Efflorescence is beyond the control of the manufacturer due to site coniditions beyond our control.
-    - For uses not mentioned in this datasheet seek further advice from Sika / Davco Australia.
-    (Cite: Data sheet page 2: Important Considerations)
-4.9 Environmental information. Low VOC - 5g/L (SCAQMD method 304-91)
-    (Cite: Data sheet page 1: Environmental Information)
-
-5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Ambient Air Temperature. Min +5°C to Max 35°C
-    (Cite: Data sheet page 2: Application Information > Ambient Air Temperature)
-5.3 Substrate Temperature. Min +5°C to Max 35°C
-    (Cite: Data sheet page 2: Application Information > Substrate Temperature)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
-    - Test product in an inconspicuous area first.
-    (Cite: Data sheet page 2: various)
-5.5 Test methods printed beside stated values. Each value is as printed in the data sheet with its test method.
-    - Product Declaration: C1S1E (AS ISO 13007.1)
-    (Cite: Data sheet page 1: Technical information)
-5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
-    (Cite: Data sheet page 2: Basis Of Product Data)
-5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
-
-6 WARRANTY AND DOCUMENTATION
-6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
-    - Product Data Sheet: Davco® Ceramaflex, May 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/5/davco-ceramaflex.pdf
-    - Safety Data Sheet: SDS Davco Ceramaflex, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/w/sds-davco-ceramaflex.pdf
-    (Cite: Manufacturer website: Product page documents)
-6.2 Ecology, health and safety. For information and advice on the safe handling, storage, and disposal of chemical products, users shall refer to the latest Safety Data Sheet (SDS) containing physical, ecological, toxicological, and other safety related data.
-    (Cite: Data sheet page 2: Ecology, Health And Safety)
-6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
-    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
-6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
-    (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.4, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
 Davco® K10 Plus: left out to keep this file short. Use its own data sheet.
+Davco® Ceramaflex: left out to keep this file short. Use its own data sheet.
 Davco® Ultraflex: no specification clauses on file. Use its own data sheet.
 SikaTile®-350 Pro Maxset: left out to keep this file short. Use its own data sheet.
 Davco® Easy Grout: left out to keep this file short. Use its own data sheet.
@@ -611,7 +525,6 @@ SOURCES
 4. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/sikatile-110-secureproof.html
 5. https://aus.sika.com/content/dam/dms/au01/k/schoenox_ab.pdf
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/schoenox-ab.html
-7. https://aus.sika.com/content/dam/dms/au01/5/davco-ceramaflex.pdf
-8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-ceramaflex.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

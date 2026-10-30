@@ -47,8 +47,22 @@
 .sheet a:focus-visible,.sheet button:focus-visible,.sheet input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .sheet .site-footer a:focus-visible{outline-color:#fff}
 @media print{
-  .sheet .estimate-note,.sheet .est{display:block!important;visibility:visible!important}
-  @page{size:A4;margin:14mm}
+  .sheet main>*:not(.print-sheet){display:none!important}
+  .sheet .print-sheet{display:block!important;font-size:8.5pt;line-height:1.25}
+  .sheet .ps-title{font-size:13pt;font-weight:700;margin:0 0 3pt}
+  .sheet .ps-ans{margin:0 0 4pt}
+  .sheet .ps-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt}
+  .sheet .ps-table th,.sheet .ps-table td{border:1px solid #666;padding:1.5pt 3pt;vertical-align:top;text-align:left;font-weight:400;overflow-wrap:anywhere;white-space:normal;text-transform:none;letter-spacing:0;font-size:8pt}
+  .sheet .ps-table thead th{font-weight:700;background:#eee}
+  .sheet .ps-table tbody th{font-weight:700;width:17%}
+  .sheet .ps-st{font-weight:400}
+  .sheet .ps-src{margin:4pt 0 0;padding-left:0;list-style:none;font-size:6.5pt;line-height:1.15;overflow-wrap:anywhere}
+  .sheet .ps-est{margin:4pt 0 0;font-size:9pt}
+  .sheet .estimate-note,.sheet .est{visibility:visible!important}
+  .sheet .site-footer p{font-size:7pt;margin:0;line-height:1.2}
+  .sheet .site-footer{margin:2pt 0 0}
+  .sheet .site-footer .footbar{padding:0}
+  @page{size:A4;margin:8mm}
   body{display:block;font-size:11pt}
   .sheet .site-header,.sheet .no-print,.sheet .skip-link,.sheet .breadcrumb,.sheet .link--ext::after{display:none!important}
   .sheet .site-footer{display:block!important;background:#fff;color:#000;margin:1rem 0 0}
@@ -64,3 +78,4 @@
 .sheet .estimate-note{margin:.5rem 0}
 .sheet .est{display:block;font-size:.9rem;color:var(--grey-darker);margin-top:.35rem}
 .sheet .btn-row .btn{text-decoration:none}
+.sheet .print-sheet{display:none}

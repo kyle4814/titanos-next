@@ -24,18 +24,19 @@ Data sheet edition: May 2025, Version 01.01
 1.1 Work included. Provide Davco® K10 Rapid where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
 1.2 Product description. Davco® K10 Rapid is a flexible, rapid drying, Class III waterproofing membrane designed for internal and external applications.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer - Surfaces.
-    - Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting. Areas
+1.3 Intended uses stated by the manufacturer - Surfaces. Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting.
+    (Cite: Data sheet page 1: Uses > Surfaces)
+1.4 Intended uses stated by the manufacturer - Surfaces - Areas.
     - Suitable for interior and exterior applications. Commercial and domestic walls and floors including wet areas such as showers, bathrooms, terraces, balconies, roofs walkways prior to tiling, using Davco cement based adhesives. Also suitable for confined areas, as Davco K10 Rapid is water based and solvent free.
     - Davco® K10 Rapid can be used in conjunction with Davco K10 Plus as required.
-    (Cite: Data sheet page 1: Uses > Surfaces)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Surfaces > Areas)
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. Davco® K10 Rapid
     - Product type as printed on the data sheet: A FLEXIBLE RAPID DRYING CLASS III WATERPROOFING MEMBRANE DESIGN FOR UNDER TILE APPLICATIONS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -76,7 +77,7 @@ Data sheet edition: May 2025, Version 01.01
     - All metal surfaces must be free from rust Lightly abrade/ sand the substrate prior to application of the Davco K10 Rapid
     - PVC Control leak flanges Control leak flanges shall be recessed to avoid water pooling.
     - Lightly sand control leak flanges prior to waterproofing application.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
 3.5 Substrate quality - Bond Breaker.
     - Any suitable Sika neutral cure silicone sealant
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Bond Breaker)
@@ -94,16 +95,18 @@ Data sheet edition: May 2025, Version 01.01
 3.9 Substrate quality - Compressed Fibre Cement Boards.
     - This should be primed using Davco PrimeX. Allow the primer to dry before application of the membrane.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Compressed Fibre Cement Boards)
-3.10 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
+3.10 Substrate quality - Falls to drains/wastes. In all applications, it is important that falls be provided to the drain outlet. The slope of this fall should conform to the minimum standards outlined in Australian Standards. For wet areas, balconies, and rooftops, if the existing substrate does not provide the required falls, a sand/cement screed will be need to be created. Once the falls are in place and screeds have cured, apply the Davco K10 Rapid as per instructions. Contact Sika Australia for more information on screed mix should this be required.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Falls to drains/wastes)
+3.11 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
-3.11 Substrate quality / pre-treatment - Primer Guide.
+3.12 Substrate quality / pre-treatment - Primer Guide.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
-4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 15Ltr pail will cover approximately 10m2 with 2 coats.
+4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
     (Cite: Data sheet page 2: Application Information > Consumption)
-4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relative humidity. Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only.
+4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relat-Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only. ive humidity.
     (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
 4.4 Equipment.
     - Personal protective equipment, safety glass, gloves etc
@@ -142,11 +145,14 @@ Data sheet edition: May 2025, Version 01.01
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Do not allow the product to freeze
-    - Drying time can be affected by temperature and environment and drying time to be used as a guide only.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
+    - Should flood testing be needed please allow membrane to dry for 24 hours prior to testing.
     - A test area should be undertaken to ensure suitability of product selection.
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm thick.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
@@ -162,6 +168,9 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
@@ -174,26 +183,29 @@ Data sheet edition: October 2025, Version 01.08
 1.2 Product description. A crack bridging, waterproof sheet membrane system made of polyethylene covered with a special fleece designed for use in wet areas, balconies and swimming pools.
     (Cite: Data sheet page 1: Description)
 1.3 Intended uses stated by the manufacturer.
-    - • Highly loaded commercial wet areas and kitchens. • Balconies, & terraces prior to tiling.
-    - • Swimming pools, commercial aquatic centre pools, spas and sauna's.
-    - • Residential wet areas and bathrooms
-    - Substrates
-    - Schonox AB is suitable on:
-    - • Concrete
-    - • Masonry brick & blockwork (fully grouted/rendered ) • Cement-based screeds and renders
-    - • Fibre Cement Boards and sheets"
-    - • Gypsum Plaster Boards*
-    - • Sika Approved Acoustic underlays
-    - • Light weight Polystyurene boards coated with mortar*
-    - * Refer manufacturer instructions and load limits. Boards and sheet shall be specifically designed to receive tiles
+    - Highly loaded commercial wet areas and kitchens.
+    - Balconies, & terraces prior to tiling.
+    - Swimming pools, commercial aquatic centre pools,
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.11.
+1.4 Intended uses stated by the manufacturer. spas and sauna's.
+    - Residential wet areas and bathrooms
+    (Cite: Data sheet page 1: Uses)
+1.5 Intended uses stated by the manufacturer - Substrates Schonox AB is suitable on.
+    - Concrete
+    - Masonry brick & blockwork (fully grouted/rendered )
+    - Cement-based screeds and renders
+    - Fibre Cement Boards and sheets"
+    - Gypsum Plaster Boards*
+    - Sika Approved Acoustic underlays
+    - Light weight Polystyurene boards coated with mor-
+    (Cite: Data sheet page 1: Uses > Substrates Schonox AB is suitable on)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.14.
 
 2 MATERIALS
 2.1 Product. SCHÖNOX® AB
     - Product type as printed on the data sheet: WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALLATIONS
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 5: Title block and supplier details)
 2.2 Certificates and test reports.
     - AS 4858:2004
     - AS 4654.1, 2012
@@ -235,7 +247,7 @@ Data sheet edition: October 2025, Version 01.08
     - Water-vapour transmission rate: 0.28g/m²/24hrs (ASTM E96)
     - Service temperature: -20°C to +60°C
     (Cite: Data sheet page 2: Product Information, Technical Information)
-2.7 System structure. Wet Areas, Balconies & Terraces; Priming:
+2.7 System structure. Wet Areas, Balconies & Terraces: Priming:
     - Seek written Sika Specification for submerged applications such as pools or spas.
     (Cite: Data sheet page 3: System Information > System structure)
 2.8 Packaging, shelf life and storage.
@@ -263,8 +275,8 @@ Data sheet edition: October 2025, Version 01.08
 4.2 Application data.
     - Effective thickness: 0.55mm
     (Cite: Data sheet page 2: Product Information)
-4.3 Mixing ratio. The adhesive used to bond the Schonox AB sheet membrane system: SikaTile 440 Opti-Cure mixed neat with Lanko Latex 751 Additive. Mixing Ratio
-    - Additional powder of up to 1kg of SikaTile 440 Opti-Cure may be added to the 5Ltr Lanko Latex 751 to reach your desired consistency.
+4.3 Mixing ratio. The adhesive used to bond the Schonox AB sheet membrane system: SikaTile 440 Opti-Cure mixed neat with Lanko Latex 751 Additive.
+    - Mixing Ratio: Additional powder of up to 1kg of SikaTile 440 Opti-Cure may be added to the 5Ltr Lanko Latex 751 to reach your desired consistency.
     - The adhesive may need restirring during its pot life, do not add any additional additive.
     (Cite: Data sheet page 2: Application Information > Mixing ratio)
 4.4 Applied product ready for covering.
@@ -275,7 +287,7 @@ Data sheet edition: October 2025, Version 01.08
     - Substrates must be properly cured, structurally sound, free from loose or friable particles, clean, dry and free from contaminates such as dust, dirt, oil, grease, curing compounds, crystaline sealers, laitance, or effloresence.
     - Dependant on the substrate condition and contamination to be removed from the surface, perform adequate scarification, or blast cleaning in order to remove all traces of any materials that could reduce the product adhesion to the substrate.
     - Substrates shall be smooth and continuous without pit, divots. Repair pits or divots with a suitable Sika repair mortar prior to application.
-    (Cite: Data sheet page 3: Application Instructions)
+    (Cite: Data sheet pages 3-4: Application Instructions)
 4.6 Equipment.
     - Slow Speed Mixing Drill (Max 500RPM)
     - Plastic trowel / plastic paint scrapers
@@ -286,39 +298,55 @@ Data sheet edition: October 2025, Version 01.08
 4.7 Application method / tools.
     - Refer to Mixing Ratio section in this document for Adhesive details.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools)
-4.8 Application method / tools - Waterstop Angles, and Terminations.
+4.8 Application method / tools - Application of floor wall functions and corners, Schonox ST Sealing Tape and ST corners.
+    - Apply the adhesive to the substrate junctions with a 100mm roller or v notched trowel. While the adhesive is wet embed the Schonox St Sealing Tape and corners in position
+    - Apply addition adhesive to overlap the joins and smooth out with a plastic scraper
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of floor wall functions and corners, Schonox ST Sealing Tape and ST corners)
+4.9 Application method / tools - Application of Pipe Penetrations - Schonox ST D components.
+    - For PVC fittings, apply a single coat of SikaFloor-14 Prep n Prime and allow to dry.
+    - For Metal Fittings, lightly abrade with steel wool and then clean residue with Isopropyl Alcohol and allow to dry. Then apply a single coat of SIkaFloor-14 Prep n Prime and allow to dry.
+    - Apply the adhesive around the pipe penetration with the Schonox 100mm roller or a V notched trowel and embed the Schonox ST pipe penetrations and flatten with a plastic scrapper.
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of Pipe Penetrations - Schonox ST D components)
+4.10 Application method / tools - Application of the Sconox Ab Sheet Membrane..
+    - Measure and cut sheet as required with the Utility Knife or Scissors
+    - Apply a layer of the adhesive with a roller or V notched trowel to an area that can be covered prior to adhesive skinning (approx 1m2) and embed the Shonox AB sheet into the adhesive. Immediately fatten the sheet with a plastic scraper. Repeat process by gradually rolling and apply adhesive as required. All sheet joins are to be overlapped by a minimum 50mm and ensure the adhesive covers all sheet joins for a watertight finish.
+    (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application of the Sconox Ab Sheet Membrane.)
+4.11 Application method / tools - Waterstop Angles, and Terminations.
     - Penetration can be terminated onto the pipe penetrations. Prime PVC pipes with SikaFloor-14 Prep n Prime and allow to dry. Apply the adhesive to the primer and install the Schonox ST D pipe penetrations.
     - Control Leak flanges shall be primed with SikaFloor-14 Prep n Prime and allowed to dry prior to bonding sheet terminations or ST Sealing with the adhesive Waterstop Angles shall be primed with SikaFloor-14 Prep n Prime and allowed to dry. Bond the Schonox ST Sealing tape to Waterstop angles with the adhesive as needed.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Waterstop Angles, and Terminations)
-4.9 Application method / tools - Application Notes.
+4.12 Application method / tools - Application Notes.
     - Ensure all sheet joins and tapes etc are overlapped by 50mm.
     - Ensure all sheet joins and over laps are well bonded. If required the adhesive can be skimmed over sheet joins to protect sheet edges.
     (Cite: Data sheet page 4: Application Instructions > Application Method / Tools > Application Notes)
-4.10 Cleaning of equipment. Tools and equipment can be clears with water prior to the adhesive setting.
+4.13 Cleaning of equipment. Tools and equipment can be clears with water prior to the adhesive setting.
     (Cite: Data sheet page 4: Application Instructions > Cleaning Of Equipment)
-4.11 Limitations and important considerations.
+4.14 Limitations and important considerations.
     - Not suitable for externally application over early aged concrete or screeds.
     - Not suitable for application with rising damp and high moisture related issues.
     (Cite: Data sheet page 3: Limitations Of Use)
-4.12 Limitations and important considerations.
+4.15 Limitations and important considerations.
     - Schonox AB Sheet membrane is designed as a complete system. Non propietory products use to fix the sheet shall be deem non-compliant.
     - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
     - Please consult Sika for installations not mentioned in this document
     (Cite: Data sheet page 3: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.4 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. Not below 5°C & not above 35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Substrate temperature. Not below 5°C & not above 35°C; Avoid application in hot direct sunlight ie >30°C as vapour pockets may occur. For external application in expose sun cover with screed or tile as soon as applicable or cover with a white corflute protection board or similar immediately after installation.
+5.3 Substrate temperature. Not below 5°C & not above 35°C; Avoid application in hot direct sunlight ie >30°C as vapour pockets may ocFor external application in expose sun cover with screed or tile as soon as applicable or cover with a white corflute protection board or similar immediately after installation. cur.
     (Cite: Data sheet page 3: Application Information > Substrate temperature)
-5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.11):
-    - Not suitable for application with rising damp and high moisture related issues.
+5.4 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.14):
     - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
     (Cite: Data sheet page 3: Limitations)
-5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.5 Trials, checks and measurements stated by the manufacturer.
+    - Flood testing can be conducted at a 50mm maximum height after 24 hours at 23°C and 50% RH on porous substrates. (tested at 23°C and 50% relative humidity).
+    - Apply a layer of the adhesive with a roller or V notched trowel to an area that can be covered prior to adhesive skinning (approx 1m2) and embed the Shonox AB sheet into the adhesive. Immediately fatten the sheet with a plastic scraper. Repeat process by gradually rolling and apply adhesive as required. All sheet joins are to be overlapped by a minimum 50mm and ensure the adhesive covers all sheet joins for a watertight finish.
+    (Cite: Data sheet page 3: various)
+5.6 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 3: Basis Of Product Data)
-5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.7 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -328,10 +356,13 @@ Data sheet edition: October 2025, Version 01.08
     (Cite: Data sheet page 3: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 4: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 4-5: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 4: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.4, and include the records in the project documentation.
 
 ============================================================
 WATERPROOFING MEMBRANE: Davco® K10 Plus
@@ -349,7 +380,7 @@ Data sheet edition: June 2026, Version 01.07
 2.1 Product. Davco® K10 Plus
     - Product type as printed on the data sheet: A FLEXIBLE, PREMIXED, READY TO USE WATER BASED POLYURETHANE CLASS III WATERPROOFING MEMBRANE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals / standards.
     - AS/NZ 4858:2004 Branz Test Report (DC13205-001)
     - Branz Appraisal Internal No.1142 (2020)
@@ -422,12 +453,14 @@ Data sheet edition: June 2026, Version 01.07
 3.10 Substrate quality / pre-treatment. Surfaces that are to receive Davco® K10 Plus shall be primed with a suitable Sika primer prior to the waterproofing membrane application.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
 3.11 Substrate quality / pre-treatment - Primer Guide.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
+3.12 Substrate quality / pre-treatment - Primer Guide.
     - Refer to the relevant specific primer product data sheet for complete user instructions prior to use.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (June 2026, Version 01.07) and the requirements below.
-4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
+4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
     (Cite: Data sheet page 2: Application Information > Consumption)
 4.3 Drying Time.
     (Cite: Data sheet page 2: Application Information > Drying Time)
@@ -457,11 +490,17 @@ Data sheet edition: June 2026, Version 01.07
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not apply in temperatures above 35°C or below 5°C
-    - Do not allow the product to freeze
     (Cite: Data sheet page 2: Limitations)
-5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments.
+    - Ready for flood testing | 3 days
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -473,7 +512,10 @@ Data sheet edition: June 2026, Version 01.07
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 3-4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -498,3 +540,4 @@ SOURCES
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/davco-k10-plus.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

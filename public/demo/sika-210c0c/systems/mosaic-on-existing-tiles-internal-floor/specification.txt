@@ -40,7 +40,7 @@ Data sheet edition: May 2026, Version 01.02
 2.1 Product. Sikafloor®-14 Prep N Prime Impact
     - Product type as printed on the data sheet: A SOLVENT FREE NON-POROUS PRIMER
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer - Product characteristic and benefits. Sikafloor®-14 Prep N Prime Impact is a solvent-free, single-component non-porous primer engineered to deliver superior adhesion on sound, smooth, and non-absorbent substrates. Formulated with post-consumer recycled materials and incorporating patent-pending technology, this environmentally responsible primer boasts exceptionally low VOC emissions, positioning it as a sustainable solution for both interior and exterior applications.
     (Cite: Data sheet page 1: Sustainability > Product characteristic and benefits)
 2.3 Approvals, certificates and standards stated by the manufacturer - Sika customers benefit from.
@@ -97,7 +97,7 @@ Data sheet edition: May 2026, Version 01.02
     - Acrylic membranes*
     - Non-porous construction sheeting and boards*
     (Cite: Data sheet page 2: Application Information > Substrates)
-4.4 Waiting time to overcoating. Before applying subsequent flooring products Sikafloor®-14 Prep N Prime Impact must be completely dry (50min+ @ 23°C). Do not install products over wet or pooling Sikafloor®-14 Prep N Prime Impact, Instead, brush the pooling product out and wait till dry. When priming resin backed stone allow primer to dry for 3 hours (at 23°C & 50% RH). In cool or cold climate drying time will be extended.
+4.4 Waiting time to overcoating. Before applying subsequent flooring products Sikafloor®-14 Prep N Prime Impact must be completely dry (50min+ @ 23°C). Do not install products over wet or pooling Sikafloor®-14 Prep N Prime ImWhen priming resin backed stone allow primer to dry for 3 hours (at 23°C & 50% RH). pact, Instead, brush the pooling product out and wait till dry. In cool or cold climate drying time will be extended.
     (Cite: Data sheet page 2: Application Information > Waiting time to overcoating)
 4.5 Equipment. Paint brush or medium nap roller
     (Cite: Data sheet page 3: Application Instructions > Equipment)
@@ -123,13 +123,13 @@ Data sheet edition: May 2026, Version 01.02
     - When used over existing tile ensure tiles are sound and well bonded.
     - Do not use Sikafloor®-14 Prep N Prime Impact in areas or permanent water exposure. Ensure applications externally are applied over falls to wastes and avoid ponding.
     - For uses not mentioned in this document contact Sika Australia.
-    (Cite: Data sheet page 2: Limitations Of Use)
+    (Cite: Data sheet pages 2-3: Limitations Of Use)
 
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. Apply between +5°C to 35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - *Note: conduct a bond test prior to priming application to verify suitability
     - Test product in an inconspicuous areas first to ensure compatabilty. Bond testing is considered good practice and is recommended by Sika to verify product suitability prior to overcoating
     (Cite: Data sheet page 2: various)
@@ -147,6 +147,9 @@ Data sheet edition: May 2026, Version 01.02
     (Cite: Data sheet page 3: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
@@ -174,18 +177,20 @@ Data sheet edition: May 2026, Version 01.01
     - Existing Ceramic tiles (primed with Sikafloor-14 Prep N Prime Impact)
     - Plasterboard (internal only)
     - other suitable construction boards designed to receive tiles*
+    (Cite: Data sheet page 1: Uses > Suitable Substrate Include)
+1.5 Intended uses stated by the manufacturer - Suitable Tile Types Include.
     - Ceramic & Porcelain tiles
     - Mosaic tiles
     - Quarry and Vitrafied tiles
     - Stone not sensitive to moisture and dimensionally stable
-    (Cite: Data sheet page 1: Uses > Suitable Substrate Include)
-1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. SikaTile®-305 Master Lite
     - Product type as printed on the data sheet: A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2026, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -293,9 +298,8 @@ Data sheet edition: May 2026, Version 01.01
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Not suitable for moisture sensitive stone, seek further advice from Sika technical support.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -311,6 +315,9 @@ Data sheet edition: May 2026, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
@@ -348,7 +355,7 @@ Data sheet edition: March 2025, Version 01.01
 2.1 Product. SikaTile®-366 Pro Flex
     - Product type as printed on the data sheet: A PREMIUM RUBBER MODIFIED FLEXIBLE CEMENT-BASED TILE ADHESIVE WITH EXTENDED COVERAGE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (March 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -382,7 +389,7 @@ Data sheet edition: March 2025, Version 01.01
     - Substrates must be properly cured, structurally sound, free from loose or friable articles, clean, dry and free from contaminates such as dust, dirt, oil, grease, curing compounds, laitance or efflorescence.
     - Dependant on the substrate condition and contamination to be removed from the surface, perform adequate preparation techniques, such as water blasting, scarification, or blast cleaning in order to remove all traces of any materials that could reduce the products adhesion to the substrate.
     - For tiling wet areas, and external applications ensure falls are correct to avoid water ponding.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality)
 3.3 Substrate preparation.
     - Prime substrates with a suitable Sika primer.
     - Porous substrates: SikaTile 010 Secure Prime
@@ -448,10 +455,9 @@ Data sheet edition: March 2025, Version 01.01
 5 QUALITY CONTROL AND TESTING
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.9):
-    - Not suitable for moisture sensitive stone.
     - The performance of cement based adhesives will be compromised when used above 35°C and under 5°C.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -468,130 +474,9 @@ Data sheet edition: March 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
-6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
-    (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
-
-============================================================
-GROUT: Davco® Easy Grout
-Data sheet edition: July 2023, Version 01.01
-
-1 SCOPE
-1.1 Work included. Provide Davco Easy Grout where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (July 2023, Version 01.01).
-1.2 Product description.
-    - Davco Easy Grout is a premium, highly flexible, ready to use wall and floor tile grout suitable for interior and undercover exterior applications for grout joints from 1-5mm
-    - Davco Easy Grout is resistant to stains, mould and bacteria and has superior colour consistency and flexibility.
-    (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer.
-    - Davco Easy Grout is suitable for most common interior and undercover exterior wall and floor tiles.
-    - Davco Easy Grout is suitable for glossy and smooth tiles such as porcelain, ceramic and mosaics. Easy Grout is NOT suitable for highly textured and / or porous / unglazed tiles.
-    - Interior areas such as commercial and domestic walls, floors and splashbacks and in wet areas including bathtub surrounds and shower walls and floors.
-    - Exterior undercover areas such as balconies and alfresco where ponding does not occur.
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
-
-2 MATERIALS
-2.1 Product. Davco Easy Grout
-    - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
-2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (July 2023, Version 01.01) has no approvals, certificates or standards section.
-    (Cite: Data sheet silent)
-2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
-    - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
-    (Cite: Data sheet: whole data sheet)
-2.4 Characteristics stated by the manufacturer.
-    - Easy and fast application
-    - Highly flexible performance
-    - Resistant to stains, mould and bacteria
-    - No efflorescence
-    - Maximum colour consistency
-    - Reusable - zero waste and fast clean up
-    - Suitable for interior and undercover exterior wall and floor applications only
-    - For joints 1-5mm wide
-    (Cite: Data sheet page 1: Features)
-2.5 Composition, appearance and supply.
-    - Bulk density: 1.8kg/L
-    - Volatile organic compound (VOC) content: Low VOC - 20g/L (SCAQMD method 304-91)
-    (Cite: Data sheet page 1: Product Information)
-2.6 Properties stated by the manufacturer.
-    - Shore D Hardness: 28
-    - Water absorption: 0.01ml / 24 hours
-    (Cite: Data sheet page 1: Product Information)
-2.7 Packaging, shelf life and storage.
-    - Packaging: 2 Litre pails - all colours; 4 Litre Pail - Bright white
-    - Shelf life: 12 Months from date of manufacture if unopened
-    - Storage conditions: Store in dry cool conditions, off ground out of direct sunlight
-    (Cite: Data sheet page 1: Product Information)
-
-3 SUBSTRATE PREPARATION
-3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (July 2023, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
-3.2 Substrate preparation.
-    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, sealers, curing compounds, release agents and any other loose or contaminating material
-    - Ensure tile adhesive is completely set and dried
-    - Remove all tile spacers from the joint areas
-    - Ensure joints are clean, dry and free from excess adhesive as well as any other loose or contaminating material
-    (Cite: Data sheet page 2: Application Instructions > Substrate Preparation)
-
-4 APPLICATION
-4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (July 2023, Version 01.01) and the requirements below.
-4.2 Consumption. The coverage of the grout will vary depending upon the texture, size and thickness of the tile and the width of the grout joint. Use the table below as a general guide: Grout coverage based on 2 Litre pail
-    (Cite: Data sheet page 2: Application Information > Consumption)
-4.3 Applied product ready for use.
-    (Cite: Data sheet page 2: Application Information > Applied product ready for use)
-4.4 Equipment.
-    - Personal protective equipment
-    - Grout float / squeegee
-    - Microfibre cloth
-    - Grouting sponge
-    - Bucket with clean water
-    (Cite: Data sheet page 2: Application Instructions > Equipment)
-4.5 Mixing. Stir thoroughly by hand before use. DO NOT ADD ANY WATER.
-    (Cite: Data sheet page 2: Application Instructions > Mixing)
-4.6 Application. 1. Slightly moisten the tile surface with a wet, clean micro-fibre cloth to improve the workability. 2. Apply to the grout joint using a float or squeegee, spread diagonally across the joint. Ensure you fill the joint completely without any voids and gaps. Failure to fully pack joints may result in shallow grout joints. 3. Remove excess grout from the tile surface, holding the float at almost a 90° angle to the surface and moving the float diagonally to the joints while the grout is still fresh. The grout surface should be flush with the tile edge. 4. Cleaning should begin after the surface of the grout develops a dry, skinned-over appearance (5-10 minutes after the application depending on temperature, humidity and nature of the tiles) 5. Clean off excess grout and evenly shape the grout joints by laying a damp sponge on the tile surface and lightly wiping in a circular motion 6. Finish the application with a single diagonal wipe to the tile surface with a well wrung sponge. If the water in the bucket becomes dirty, replace with clean water. Be aware that using too much water (referring to a saturated sponge as opposed to a damp sponge) during clean-up, or allowing water to sit on the surface of the grout can dilute the polymer binder and cause curing issues resulting in grout failure 7. After the grout firms up (approximately 1 hour), some grout haze may still remain on the tiles. With clean water and a very well wrung clean micro-fibre cloth, wipe the tile surface in a circular buffing motion
-    - Wait 7 days before exposing grouted area to household cleaners. Do not use acidic or vinegar solutions for clean up.
-    (Cite: Data sheet page 3: Application Instructions > Application)
-4.7 Cleaning of equipment. Tools and equipment can be clean with water prior to the grout setting.
-    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
-4.8 Limitations and important considerations.
-    - Test product in an inconspicuous area first
-    - It is essential to plan the area to be grouted in accordance with all relevant standard(s)
-    - Davco Easy Grout should NOT be used in steam rooms, submerged applications, such as swimming pools, spas, saunas, water features and fountains • Not suitable for chemical resistant joints, use a Sika Epoxy Grout for these installations
-    - Not recommended for use on highly textured or porous tiles due to its high polymer content
-    - Not suitable for use with Natural stone such as marble, and granite etc
-    - Not suitable for movement joints
-    - Not suitable for uncovered / exposed exterior areas where ponding can occur, ensure adequate falls to wastes are present
-    - Some types of sensitive tiles such as glass mosaic or marble can be permanently stained, scratched, dulled or damaged when grouting. Always test the grout on a separate or inconspicuous sample area before grouting to determine the suitability of the tile with the grout
-    - Do not apply in temperatures above 35ºC or below 5ºC
-    - In cool and / or humid conditions, allow longer setting times
-    - Davco Easy Grout can be used for a period of 12 months from date of manufacture if stored unopened at 22°C. After opening, Davco Easy Grout can be stored for reuse if properly resealed in original container
-    (Cite: Data sheet page 2: Important Considerations)
-
-5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
-    - Do not apply in temperatures above 35ºC or below 5ºC
-    - Davco Easy Grout can be used for a period of 12 months from date of manufacture if stored unopened at 22°C. After opening, Davco Easy Grout can be stored for reuse if properly resealed in original container
-    (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
-    - Test product in an inconspicuous area first
-    - Some types of sensitive tiles such as glass mosaic or marble can be permanently stained, scratched, dulled or damaged when grouting. Always test the grout on a separate or inconspicuous sample area before grouting to determine the suitability of the tile with the grout
-    (Cite: Data sheet page 2: various)
-5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
-    (Cite: Data sheet page 2: Basis Of Product Data)
-5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
-
-6 WARRANTY AND DOCUMENTATION
-6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
-    - Product Data Sheet: Davco Easy Grout, July 2023, Version 01.01, https://aus.sika.com/content/dam/dms/au01/3/davco-easy-grout.pdf
-    - Safety Data Sheet: Davco Easy Grout, version 09/04/2025, https://aus.sika.com/content/dam/dms/au01/q/MSDS%20Davco%20Easy%20Grout%20GHS7.pdf
-    - Safety Data Sheet: SDS Various Semi-Finished, version 07/10/2026, https://aus.sika.com/content/dam/dms/au01/h/sds-various-semi-finished-2.pdf
-    - Safety Data Sheet: SDS Davco Easy Grout, version 07/10/2026, https://aus.sika.com/content/dam/dms/au01/9/sds-davco-easy-grout.pdf
-    (Cite: Manufacturer website: Product page documents)
-6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
-    (Cite: Data sheet page 2: Ecology, Health And Safety)
-6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
-    - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
@@ -600,6 +485,7 @@ Data sheet edition: July 2023, Version 01.01
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
 SikaTile®-400 EVO PRO: left out to keep this file short. Use its own data sheet.
+Davco® Easy Grout: left out to keep this file short. Use its own data sheet.
 SikaCeram®-690 Elite: left out to keep this file short. Use its own data sheet.
 SikaSeal® Kitchen and Bathroom: left out to keep this file short. Use its own data sheet.
 SikaSeal®-190 N Silicone: left out to keep this file short. Use its own data sheet.
@@ -613,7 +499,6 @@ SOURCES
 4. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-305-masterlite.html
 5. https://aus.sika.com/content/dam/dms/au01/2/sikatile-366-proflex.pdf
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-366-proflex.html
-7. https://aus.sika.com/content/dam/dms/au01/3/davco-easy-grout.pdf
-8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-grouts/davco-easy-grout.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

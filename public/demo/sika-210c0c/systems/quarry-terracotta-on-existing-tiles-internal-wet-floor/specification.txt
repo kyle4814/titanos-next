@@ -29,7 +29,7 @@ Data sheet edition: June 2026, Version 01.07
 2.1 Product. Davco® K10 Plus
     - Product type as printed on the data sheet: A FLEXIBLE, PREMIXED, READY TO USE WATER BASED POLYURETHANE CLASS III WATERPROOFING MEMBRANE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals / standards.
     - AS/NZ 4858:2004 Branz Test Report (DC13205-001)
     - Branz Appraisal Internal No.1142 (2020)
@@ -102,12 +102,14 @@ Data sheet edition: June 2026, Version 01.07
 3.10 Substrate quality / pre-treatment. Surfaces that are to receive Davco® K10 Plus shall be primed with a suitable Sika primer prior to the waterproofing membrane application.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
 3.11 Substrate quality / pre-treatment - Primer Guide.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
+3.12 Substrate quality / pre-treatment - Primer Guide.
     - Refer to the relevant specific primer product data sheet for complete user instructions prior to use.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (June 2026, Version 01.07) and the requirements below.
-4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
+4.2 Consumption. Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments. A 4Ltr pail will cover approximately 2.75m2 with 2 coats applied.
     (Cite: Data sheet page 2: Application Information > Consumption)
 4.3 Drying Time.
     (Cite: Data sheet page 2: Application Information > Drying Time)
@@ -137,11 +139,17 @@ Data sheet edition: June 2026, Version 01.07
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not apply in temperatures above 35°C or below 5°C
-    - Do not allow the product to freeze
     (Cite: Data sheet page 2: Limitations)
-5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Plus is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 20Ltr pail will cover approximately 13.3m2 with 2 coats applied. ments.
+    - Ready for flood testing | 3 days
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm.
+    (Cite: Data sheet page 2: various)
+5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.5 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
@@ -153,7 +161,10 @@ Data sheet edition: June 2026, Version 01.07
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 3: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 3-4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -182,18 +193,20 @@ Data sheet edition: May 2026, Version 01.01
     - Existing Ceramic tiles (primed with Sikafloor-14 Prep N Prime Impact)
     - Plasterboard (internal only)
     - other suitable construction boards designed to receive tiles*
+    (Cite: Data sheet page 1: Uses > Suitable Substrate Include)
+1.5 Intended uses stated by the manufacturer - Suitable Tile Types Include.
     - Ceramic & Porcelain tiles
     - Mosaic tiles
     - Quarry and Vitrafied tiles
     - Stone not sensitive to moisture and dimensionally stable
-    (Cite: Data sheet page 1: Uses > Suitable Substrate Include)
-1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. SikaTile®-305 Master Lite
     - Product type as printed on the data sheet: A HYBRID LIGHT WEIGHT POLYMER FORTIFIED TILE ADHESIVE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2026, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -301,9 +314,8 @@ Data sheet edition: May 2026, Version 01.01
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Not suitable for moisture sensitive stone, seek further advice from Sika technical support.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -319,6 +331,9 @@ Data sheet edition: May 2026, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
@@ -334,13 +349,15 @@ Data sheet edition: September 2023, Version 01.04
     - SikaTile®-410 Secure Set is exceptionally smooth and creamy to spread with high performance non slump capabilities for large format tile and stone applications.
     - SikaTile®-410 Secure Set is extremely low in VOC, sand free, and contains no respirable crystalline silica making if safer to use then conventional sanded cement based tile adhesives.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. Suitable tile types include.
+1.3 Intended uses stated by the manufacturer - Suitable tile types include..
     - Large format porcelain, ceramic and stone tiles
     - Natural stone including marble, limestone, granite, sandstone, and slate, not suitable for moisture sensitive stone
     - Terracotta
     - Agglomerates / Terrazzo not sensitive to moisture
     - Glass tile and glass mosaic
     - Thin brick slip's
+    (Cite: Data sheet page 1: Uses > Suitable tile types include.)
+1.4 Intended uses stated by the manufacturer - Suitable substrates include..
     - 7-day old concrete
     - Compressed cement boards
     - Fibre cement sheet / Ceramic Tile Underlay
@@ -352,16 +369,18 @@ Data sheet edition: September 2023, Version 01.04
     - Sika® approved acoustic underlayment's
     - Under tile heating systems
     - Tile over tile, with suitable Sika primer
+    (Cite: Data sheet page 1: Uses > Suitable substrates include.)
+1.5 Intended uses stated by the manufacturer - Suitable areas of use include..
     - Internal and external wall and floors in wet areas and submerged areas such as pools and spas
     - Commercial and domestic internal and external wall and floor applications
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.10.
+    (Cite: Data sheet page 1: Uses > Suitable areas of use include.)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.10.
 
 2 MATERIALS
 2.1 Product. SikaTile®-410 Secure Set
     - Product type as printed on the data sheet: A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED DUSTLESS®TECHNOLOGY THAT REDUCES AIRBOURNE DUST DURING MIXING BY UP TO 80%.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 4: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (September 2023, Version 01.04) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -467,12 +486,11 @@ Data sheet edition: September 2023, Version 01.04
     (Cite: Data sheet page 2: Important Considerations)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.3 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient air temperature. +5°C / +35°C
     (Cite: Data sheet page 2: Application Information > Ambient air temperature)
 5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.10):
     - Do not apply in temperatures below 5°C or above 35°C.
-    - Not suitable for use with moisture sensitive stone.
     (Cite: Data sheet page 2: Limitations)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
@@ -487,10 +505,13 @@ Data sheet edition: September 2023, Version 01.04
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 4: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 4: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.3, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
@@ -509,3 +530,4 @@ SOURCES
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/sikatile-410-secureset.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

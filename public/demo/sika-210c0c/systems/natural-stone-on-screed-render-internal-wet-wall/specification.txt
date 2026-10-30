@@ -48,7 +48,7 @@ Data sheet edition: June 2023, Version 01.02
 2 MATERIALS
 2.1 Product. Davco Ultraprime
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (June 2023, Version 01.02) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -118,7 +118,7 @@ Data sheet edition: June 2023, Version 01.02
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not use Davco Ultraprime below 5°C or above 35°C as this may affect the curing of the product.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -134,7 +134,10 @@ Data sheet edition: June 2023, Version 01.02
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -155,6 +158,8 @@ Data sheet edition: November 2024, Version 01.06
     - General purpose primer for water-based waterproofing membranes
     - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
     - Priming of dense and steel trowelled concrete
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer. Suitable substrates include.
     - Concrete
     - Cement boards and sheets including ScyonTM
     - Plasterboard
@@ -163,13 +168,13 @@ Data sheet edition: November 2024, Version 01.06
     - Cement coated light weight construction boards
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
 
 2 MATERIALS
 2.1 Product. SikaTile®-010 Secure Prime
     - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Certificates and test reports.
     - Green Star - VOC Content Test Certificate
     (Cite: Data sheet page 1: Certificates And Test Reports)
@@ -226,7 +231,7 @@ Data sheet edition: November 2024, Version 01.06
     - Do not use in high windy conditions to avoid flash setting.
     - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
     - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
-    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - If the primed area is left exposed for longer than 24-hours, the area should be wiped down with cleaned with water.
     - For use other than mentioned in this document please contact Sika® Australia.
     (Cite: Data sheet page 2: Important Considerations)
 
@@ -250,7 +255,10 @@ Data sheet edition: November 2024, Version 01.06
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -263,18 +271,19 @@ Data sheet edition: May 2025, Version 01.01
 1.1 Work included. Provide Davco® K10 Rapid where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
 1.2 Product description. Davco® K10 Rapid is a flexible, rapid drying, Class III waterproofing membrane designed for internal and external applications.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer - Surfaces.
-    - Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting. Areas
+1.3 Intended uses stated by the manufacturer - Surfaces. Most common substrates; concrete, cement renders, screed, lightweight blocks, prepared metal and pvc control leak flanges, building boards approved for wet areas, such as compressed fibre cement sheeting.
+    (Cite: Data sheet page 1: Uses > Surfaces)
+1.4 Intended uses stated by the manufacturer - Surfaces - Areas.
     - Suitable for interior and exterior applications. Commercial and domestic walls and floors including wet areas such as showers, bathrooms, terraces, balconies, roofs walkways prior to tiling, using Davco cement based adhesives. Also suitable for confined areas, as Davco K10 Rapid is water based and solvent free.
     - Davco® K10 Rapid can be used in conjunction with Davco K10 Plus as required.
-    (Cite: Data sheet page 1: Uses > Surfaces)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Surfaces > Areas)
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. Davco® K10 Rapid
     - Product type as printed on the data sheet: A FLEXIBLE RAPID DRYING CLASS III WATERPROOFING MEMBRANE DESIGN FOR UNDER TILE APPLICATIONS.
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -315,7 +324,7 @@ Data sheet edition: May 2025, Version 01.01
     - All metal surfaces must be free from rust Lightly abrade/ sand the substrate prior to application of the Davco K10 Rapid
     - PVC Control leak flanges Control leak flanges shall be recessed to avoid water pooling.
     - Lightly sand control leak flanges prior to waterproofing application.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality > Metal drains and waterstop angles)
 3.5 Substrate quality - Bond Breaker.
     - Any suitable Sika neutral cure silicone sealant
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Bond Breaker)
@@ -333,16 +342,18 @@ Data sheet edition: May 2025, Version 01.01
 3.9 Substrate quality - Compressed Fibre Cement Boards.
     - This should be primed using Davco PrimeX. Allow the primer to dry before application of the membrane.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Compressed Fibre Cement Boards)
-3.10 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
+3.10 Substrate quality - Falls to drains/wastes. In all applications, it is important that falls be provided to the drain outlet. The slope of this fall should conform to the minimum standards outlined in Australian Standards. For wet areas, balconies, and rooftops, if the existing substrate does not provide the required falls, a sand/cement screed will be need to be created. Once the falls are in place and screeds have cured, apply the Davco K10 Rapid as per instructions. Contact Sika Australia for more information on screed mix should this be required.
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality > Falls to drains/wastes)
+3.11 Substrate quality / pre-treatment. All substrates shall be primed with a suitable primer prior to installation of Davco® K10 Rapid.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment)
-3.11 Substrate quality / pre-treatment - Primer Guide.
+3.12 Substrate quality / pre-treatment - Primer Guide.
     (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Primer Guide)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
-4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film requirements. A 15Ltr pail will cover approximately 10m2 with 2 coats.
+4.2 Consumption. Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness. Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness. Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
     (Cite: Data sheet page 2: Application Information > Consumption)
-4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relative humidity. Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only.
+4.3 Applied Product Ready for Use. Allow membrane to dry for 3-4 hours at 22°C and 50% relative humidity prior to covering with tile or other suitable covering. Should flood testing be needed please allow membrane to dry for 24 hours prior to testing. Note: Drying times are measured in laboratory condition at 23°C and 50% relat-Drying time is affected by temerature and environment conditions and wait time may be longer due to conditions beyond the manufacturers control. Drying times shall be used as a guide only. ive humidity.
     (Cite: Data sheet page 2: Application Information > Applied Product Ready for Use)
 4.4 Equipment.
     - Personal protective equipment, safety glass, gloves etc
@@ -381,11 +392,14 @@ Data sheet edition: May 2025, Version 01.01
 5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
     - Do not apply in temperatures above 35ºC or below 5ºC
-    - Do not allow the product to freeze
-    - Drying time can be affected by temperature and environment and drying time to be used as a guide only.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
+    - Davco® K10 Rapid is designed to be applied to substrates in a minimum 2 coat application to acheive a 1mm dry film thickness.
+    - Each coat shall be applied at a minimum thickness 0.75mm per coat at wet film thickness.
+    - Apply additional coats to acheive the minimum 1mm dry film require-A 15Ltr pail will cover approximately 10m2 with 2 coats. ments.
+    - Should flood testing be needed please allow membrane to dry for 24 hours prior to testing.
     - A test area should be undertaken to ensure suitability of product selection.
+    - Ensure final dried thicknes of the waterproofing membrane is minimum 1.0mm thick.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
@@ -401,168 +415,129 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
 
 ============================================================
-WATERPROOFING MEMBRANE: SikaTile®-110 Secure Proof
-Data sheet edition: September 2026, Version 02.01
+TILE ADHESIVE: Davco® Powder Mastic
+Data sheet edition: May 2025, Version 01.01
 
 1 SCOPE
-1.1 Work included. Provide SikaTile®-110 Secure Proof where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (September 2026, Version 02.01).
-1.2 Product description.
-    - A premium performance, flexible class III, ready to use, water based polyurethane waterproofing membrane designed for internal and external areas including wet areas, balconies, terraces, and non UV exposed above ground external applications.
-    - SikaTile®-110 Secure Proof is a suitable undertile waterproofing membrane that complies to AS/NZS 4654:2012 and AS 4858:2004.
+1.1 Work included. Provide Davco® Powder Mastic where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
+1.2 Product description. A flexible, cement-based tile adhesive ideal for large format and rectified edge tiles equipped with DUST LESS technology which reduces airborne dust by up to 80% in the mixing phase.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. SikaTile®-110 Secure Proof is suitable for use on walls and floors for both internal and external applications including under pedistall and paver applications. SikaTile®-110 Secure Proof is suitable for most typical construction substrates such as.
-    - Concrete
-    - GRC - Glass reinforced concrete
-    - Cement boards and sheets including Scyon
-    - Renders and screeds
-    - Cement coated light weight construction boards
-    - Plasterboard
-    - Structural Plywood
-    - Autoclaved Aerated Concrete (AAC)
+1.3 Intended uses stated by the manufacturer. Davco® Powder Mastic is suitable for interior and exterior applications. Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies and patios. Davco® Powder Mastic is suitable for most common substrates including;
+    - fibre cement sheet / Ceramic Tile Underlay
+    - Fully cured concrete
+    - Screed (cured for 7 days)
+    - Rendered brickwork and blockwork
+    - Suitable Sika under tile waterproofing membranes and acoustic underlays.
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+1.4 Intended uses stated by the manufacturer. Davco® Powder Mastic is ideal for most types of tiles including
+    - Large format and rectified (square) edge tiles
+    - Porcelain
+    - Ceramic
+    - Mosaic
+    - Natural stone (not sensitive to moisture)
+    (Cite: Data sheet page 1: Uses)
 
 2 MATERIALS
-2.1 Product. SikaTile®-110 Secure Proof
-    - Product type as printed on the data sheet: A PREMIUM PERFORMANCE, CLASS III, READY TO USE, WATER-BASED POLYURETHANE WATERPROOFING MEMBRANE DESIGNED FOR UNDER TILE AND STONE APPLICATIONS.
+2.1 Product. Davco® Powder Mastic
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
-2.2 Approvals, certificates and standards stated by the manufacturer - Branz as/nzs 4858:2004. Test Certificate DC13205-003
-    (Cite: Data sheet page 1: Certificates And Test Reports > Branz As/Nzs 4858:2004)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
+2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
+    (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
-    - AS/NZS 4654:2012: cited elsewhere in the data sheet. Where: Description (p.1).
-    - AS 4858:2004: cited elsewhere in the data sheet. Where: Description (p.1).
+    - AS ISO 13007.1: cited with a stated property or value. Where: Product Information > Product Declaration (p.1).
     - SCAQMD method 304-91: cited with a stated property or value. Where: Product Information > Volatile organic compound (VOC) content (p.1).
     (Cite: Data sheet: whole data sheet)
 2.4 Characteristics stated by the manufacturer.
-    - Premixed, ready to use
-    - High extensibility, Class III
-    - Class III flexible performance
-    - UV Stable - suitable for non trafficable areas.
-    - Solvent free, water-based
-    - Excellent antifracture properties
-    - Excellent cure time
-    - Low VOC
-    (Cite: Data sheet page 1: Features)
+    - DUST LESS technology, less mess and airborne dust when mixing
+    - Commercial grade
+    - Dust Less Technology
+    - Non-vertical slump for easy wall tiling
+    - Use for thick or thin bed tiling
+    - Extended open time for tiling large areas
+    - White formulation ideal for light coloured tiles and stone
+    (Cite: Data sheet page 1: Characteristics / Advantages)
 2.5 Composition, appearance and supply.
-    - Colour: Grey
-    - Volatile organic compound (VOC) content: 62g/L (SCAQMD method 304-91)
+    - Appearance / Colour: White powder
+    - Product Declaration: C1TES1 - AS ISO 13007.1
+    - Volatile organic compound (VOC) content: Low VOC - 7g/L (SCAQMD method 304-91)
     (Cite: Data sheet page 1: Product Information)
-2.6 Properties stated by the manufacturer.
-    - Tensile strength: 2.1MPa
-    - Permeability to water vapour: 1.55g/m² / 24 hours
-    (Cite: Data sheet page 2: Technical Information)
-2.7 Packaging, shelf life and storage.
-    - Packaging: 15 Litre Pail / 32 Pails per pallet
-    - Shelf life: 12 months from date of manufacture when stored unopened in elevated, cool, dry location.
-    - Storage conditions: Store in dry cool conditions out of direct sunlight. Do not allow membrane to freeze.
+2.6 Packaging, shelf life and storage.
+    - Packaging: 20kg bags
+    - Shelf life: 12 Months from date of manufacture if unopened
+    - Storage conditions: Store in off ground in dry cool conditions out of direct sunlight
     (Cite: Data sheet page 1: Product Information)
 
 3 SUBSTRATE PREPARATION
-3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (September 2026, Version 02.01) and the requirements below. Inspect the substrate against these requirements before application.
-3.2 Substrate quality.
-    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, curing compounds, release agents and any other loose or contaminating material.
-    - Prior to application, remove all sharp protrusions, which may pierce the membrane
-    - Any voids, potholes in the substrate must be appropriately filled up with a high strength mortar refer to Sika Monotop® mortars.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality)
-3.3 Substrate quality - Concrete.
-    - All new concrete slabs must have a wood float finish and be allowed to cure for 28 days. (refer to priming details for early aged concrete)
-    - Old concrete must be cleaned with a strong commercial grade detergent or degreaser. Residue must then be thoroughly washed off with clean water. Allow the surface to dry for at least 24 hours
-    - All laitance and efflorescence must be removed prior to application.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Concrete)
-3.4 Substrate quality - Cement based Renders & Screeds.
-    - Renders and screeds should have a wood float finish and be allow to cure for 5-7. (refer priming details for early aged green screeds)
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Cement based Renders & Screeds)
-3.5 Substrate quality - Cement Boards and Sheets.
-    - All boards and sheet shall be installed in accordance with the manufacturer's instructions and be specifically designed for tiling applications.
-    - Screw and nail heads must be treated with a Sika® Neutral cure silicone or Sika® Fillet Joint.
-    - All sheet joints, seams, penetrations, and wall floor junctions shall have a Sika® Neutral cure silicone, Sikaflex® Fillet Joint or Sika SealTape F flexible waterproofing bandage.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality > Cement Boards and Sheets)
-3.6 Substrate preparation - Substrate Priming Chart.
-    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Substrate Priming Chart)
-3.7 Substrate preparation - Early aged (green) screeds Sikalastic® Moisture Seal.
-    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Early aged (green) screeds Sikalastic® Moisture Seal)
-3.8 Substrate preparation - Static Cracks - not subject to movement.
-    - Small hairline cracks, up to 1mm wide, may be filled by the first application of SikaTile®-110 Secure Proof
-    - For cracks / joints wider than 1mm, a joint filler should be applied along the length of the crack prior to the application of SikaTile®-110 Secure Proof
-    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Static Cracks - not subject to movement)
-3.9 Substrate preparation - Bond Breaker. SikaTile®-110 Secure Proof has high extensibility and is designed for use with a 12 mm bond breaker, a bead of Sika® Neutral cure silicone, Sika® Fillet Joint or a suitable Sika® flexible waterproofing bandage. The sealant applied must be tooled off to form a 12 mm wide bond breaker. A bond breaker must be installed at areas subject to movement, wall/wall junction, wall/floor junction, sheet joints and seams, penetrations and where there is a change in the direction or substrate type.
-    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Bond Breaker)
-3.10 Substrate preparation - Falls to Drains. All areas shall have falls in accordance with National Construction Code (NCC) requirements.
-    (Cite: Data sheet page 3: Application Instructions > Substrate Preparation > Falls to Drains)
+3.1 General. Prepare substrates in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below. Inspect the substrate against these requirements before application.
+3.2 Substrate preparation.
+    - All surfaces must be installed according to manufacturer’s instructions and relevant Australian Standard(s) and be structurally sound, dry, clean and free from movement, oil, grease, wax, curing compounds, release agents and any other loose or contaminating material. Thoroughly clean old surfaces, or new surfaces that have been treated, prior to tiling
+    - Deeply contaminated surfaces must be scabbled / abraded to a clean, sound surface. Expose at least 80% of the original substrate of painted surfaces
+    - Surfaces should be prepared and primed as per the following:
+    (Cite: Data sheet page 2: Application Instructions > Substrate Preparation)
 
 4 APPLICATION
-4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (September 2026, Version 02.01) and the requirements below.
+4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
 4.2 Application data.
-    - Consumption: The minimum dry film thickness required is 1.0mm applied in a minimum 2 coat installation. A 15 Litre pail will cover 10m²
-    (Cite: Data sheet page 2: Application Information)
-4.3 Applied product ready for use. Drying Time
-    (Cite: Data sheet page 2: Application Information > Applied product ready for use)
+    - Mixing Ratio: 5-6 Litres of clean cool potable water per 20kg
+    - Consumption: 20kg bag of Davco® Powder Mastic covers approximately 7 m² (based on a 10mm notch trowel)
+    - Pot Life: 2 Hours
+    - Open Time: 30 Minutes
+    (Cite: Data sheet page 2: Product Information)
+4.3 Applied Product Ready for Use.
+    (Cite: Data sheet page 2: Product Information > Applied Product Ready for Use)
 4.4 Equipment.
-    - Brush, or short nap roller
-    - Protective personal equipment
+    - Personal protective equipment
+    - Mixing drill with stirrer attachment
+    - Notched trowel
+    - Mixing buckets
     (Cite: Data sheet page 2: Application Instructions > Equipment)
-4.5 Application method / tools - Standard Application.
-    - 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2- 3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coat if necessary or required to do so. The minimum dry film thinkness shall be 1.00mm 4. Allow the final coat to dry for at least 8 hours prior to tiling application
-    - Application under Pedestall & Paver application 1. SikaTile®-110 Secure Proof requires no mixing. Apply directly from the pail. Use a brush or roller to apply the first coat of SikaTile®-110 Secure Proof on the area to be waterproofed. 2. Allow the first coat to dry for approximately 2-3 hours before applying the 2nd coat at 90° to the first coat. Ensure there are no imperfections on the waterproofing membrane. 3. Apply a third coatas (as additional wear layer for pedestall and paver application. 4. The minimum dry film thickness for under pedestall and paver shall be 1.6mm 5. Allow the final coat to dry for at least 24 hours prior to pedestall and paver application
-    - Drying times are influence by factors beyond the control of the manufacturer, use drying times as a guide only.
-    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Standard Application)
-4.6 Application method / tools - Flood testing (if required).
-    - Allow SikaTile®-110 Secure Proof to dry and cure for a minimum 72 hours at 23°C and 50% relative humidity for standard applications, and 96 hours at 23°C and 50% relative humidity for paver and pedestall application.
-    - Conduct flood test for 24 hours at max 50mm depth with water.
-    - Inspect membrane for water loss, release water and allow area to dry prior prior to subsequent coatings
-    - Repair membrane if required.
-    (Cite: Data sheet page 3: Application Instructions > Application Method / Tools > Flood testing (if required))
-4.7 Cleaning of equipment. Clean all tools and application equipment immediately after us with water. Once cured, residual material can only be removed mechanically.
-    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Equipment)
-4.8 Limitations and important considerations.
-    - SikaTile®-110 Secure Proof is not suitable for applications in areas of permanent water immersion.
-    - SikaTile®-110 Secure Proof is not suitable for applications in area of negative hydrostatic pressure or rising damp. Seek sika technical advice.
-    - Delay applications if rain or inclement weather is imminent.
-    - SikaTile®-110 Secure Proof must be applied at the recommended coverage rates.
-    - Tongue & groove timber flooring must be over sheeted with fibre cement sheeting or ceramic tile underlay.
-    - Partical board flooring shall be adequately prepared with all contaminates removed and over sheeted with a suitable ceramic tile underlay or reinforced screed.
-    - To minimise the chance of damage install finished covering as soon as possible once the membrane has cured.
-    - SikaTile®-110 Secure Proof must not be used as a wearing surface for foot and vehicular traffic.
-    - Contact Sika® for information or applications not mentioned in the document.
-    (Cite: Data sheet page 2: Important Considerations)
+4.5 Mixing. 1. Measure the required amount of clean, potable water into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Always add the powder to the liquid. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
+    - Do not add any additional water during the adhesive's pot life, restir without adding water.
+    (Cite: Data sheet page 3: Application Instructions > Mixing)
+4.6 Application. Laying the tiles; 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m² at a time. 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90° across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the grout joint and the surface of the tiles with a damp cloth while the adhesive is still wet.
+    - Allow product to gain initial set before grouting
+    - Allow product to set firmly before return to service
+    (Cite: Data sheet page 3: Application Instructions > Application)
+4.7 Cleaning of tools. Clean tools and equipment with water before the adhesive dries.
+    (Cite: Data sheet page 3: Application Instructions > Cleaning Of Tools)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
-5.2 Ambient air temperature. 5°C to 35°C
-    (Cite: Data sheet page 2: Application Information > Ambient air temperature)
-5.3 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.8):
-    - Delay applications if rain or inclement weather is imminent.
-    (Cite: Data sheet page 2: Limitations)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
-    - Conduct flood test for 24 hours at max 50mm depth with water.
-    (Cite: Data sheet page 3: various)
-5.5 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
+5.1 Hold point. Before each application, confirm the site conditions with the manufacturer. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.2 Conditions to be verified. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) lists no application condition limits.
+    (Cite: Data sheet silent)
+5.3 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
     (Cite: Data sheet page 2: Basis Of Product Data)
-5.6 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
+5.4 Other tests. For any test method, sampling frequency or acceptance criterion not stated in this clause: refer to manufacturer and the project specification.
 
 6 WARRANTY AND DOCUMENTATION
 6.1 Documents to be obtained and submitted. Obtain the current issue of each document before ordering and submit it with the product submission. Documents are listed as published on the manufacturer's website.
-    - Product Data Sheet: SikaTile®-110 Secure Proof, September 2026, Version 02.01, https://aus.sika.com/content/dam/dms/au01/p/sikatile-110-secureproof.pdf
-    - Safety Data Sheet: SDS SikaTile®-110 Secure Proof, version 07/10/2026, https://aus.sika.com/content/dam/dms/au01/t/sds-sikatile-110secureproof.pdf
+    - Product Data Sheet: Davco® Powder Mastic, May 2025, Version 01.01, https://aus.sika.com/content/dam/dms/au01/h/davco-powder-mastic.pdf
+    - Safety Data Sheet: SDS Various Semi-Finished, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/q/sds-various-semi-finished-1.pdf
+    - Safety Data Sheet: SDS Davco Powder Mastic, version 19/11/2025, https://aus.sika.com/content/dam/dms/au01/7/sds-davco-powdermastic.pdf
     (Cite: Manufacturer website: Product page documents)
-6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety-related data.
+6.2 Ecology, health and safety. For information and advice on the safe handling, storage and disposal of chemical products, users shall refer to the most recent Safety Data Sheet (SDS) containing physical, ecological, toxicological and other safety related data.
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 4: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet page 3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates and areas treated, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
+SikaTile®-110 Secure Proof: left out to keep this file short. Use its own data sheet.
 SCHÖNOX® AB: left out to keep this file short. Use its own data sheet.
-Davco® Powder Mastic: left out to keep this file short. Use its own data sheet.
 Davco® Trojan Mastic: left out to keep this file short. Use its own data sheet.
 SikaTile®-305 Master Lite: left out to keep this file short. Use its own data sheet.
 Davco® Sanitized Colorgrout: left out to keep this file short. Use its own data sheet.
@@ -580,7 +555,8 @@ SOURCES
 4. https://aus.sika.com/en/construction/tile-stone-installationsystems/primers-additives/sikatile-010-secureprime.html
 5. https://aus.sika.com/content/dam/dms/au01/i/davco-k10-rapid.pdf
 6. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/davco-k10-rapid.html
-7. https://aus.sika.com/content/dam/dms/au01/p/sikatile-110-secureproof.pdf
-8. https://aus.sika.com/en/construction/tile-stone-installationsystems/waterproofing/sikatile-110-secureproof.html
+7. https://aus.sika.com/content/dam/dms/au01/h/davco-powder-mastic.pdf
+8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-powder-mastic.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours

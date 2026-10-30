@@ -45,7 +45,7 @@ Data sheet edition: June 2023, Version 01.02
 2 MATERIALS
 2.1 Product. Davco Ultraprime
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (June 2023, Version 01.02) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -115,7 +115,7 @@ Data sheet edition: June 2023, Version 01.02
 5.2 Conditions stated in the limitations. Also stated in the data sheet limitations (clause 4.6):
     - Do not use Davco Ultraprime below 5°C or above 35°C as this may affect the curing of the product.
     (Cite: Data sheet page 2: Limitations)
-5.3 Trials, test areas and compatibility checks stated by the manufacturer.
+5.3 Trials, checks and measurements stated by the manufacturer.
     - Test in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.4 Basis of the stated values. All technical data stated in this Product Data Sheet are based on laboratory tests. Actual measured data may vary due to circumstances beyond our control.
@@ -131,7 +131,10 @@ Data sheet edition: June 2023, Version 01.02
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -152,6 +155,8 @@ Data sheet edition: November 2024, Version 01.06
     - General purpose primer for water-based waterproofing membranes
     - Primer to prevent efflorescence coming out of substrates, ie concrete, screeds and renders
     - Priming of dense and steel trowelled concrete
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer. Suitable substrates include.
     - Concrete
     - Cement boards and sheets including ScyonTM
     - Plasterboard
@@ -160,13 +165,13 @@ Data sheet edition: November 2024, Version 01.06
     - Cement coated light weight construction boards
     - Autoclaved Aerated Concrete (AAC)
     (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
+1.5 Limits of use. Observe the manufacturer's limitations stated in clause 4.6.
 
 2 MATERIALS
 2.1 Product. SikaTile®-010 Secure Prime
     - Product type as printed on the data sheet: A HIGH PERFORMANCE MULTI-PURPOSE PRIMER WITH EFFLORESCENCE INHIBITING PROPERTIES FOR POROUS AND DENSE SUBSTRATES
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Certificates and test reports.
     - Green Star - VOC Content Test Certificate
     (Cite: Data sheet page 1: Certificates And Test Reports)
@@ -223,7 +228,7 @@ Data sheet edition: November 2024, Version 01.06
     - Do not use in high windy conditions to avoid flash setting.
     - All curing compounds, mould release agents must be removed before application of SikaTile®-010 Secure Prime
     - SikaTile®-010 Secure Prime is suitable for use over early aged concrete and screeds, as a primer for tiling applications only. If waterproofing early aged concrete or screeds use an appropriate Sika moisture barrier as a primer.
-    - If the primed area is left exposed for longer than 24- hours, the area should be wiped down with cleaned with water.
+    - If the primed area is left exposed for longer than 24-hours, the area should be wiped down with cleaned with water.
     - For use other than mentioned in this document please contact Sika® Australia.
     (Cite: Data sheet page 2: Important Considerations)
 
@@ -247,7 +252,10 @@ Data sheet edition: November 2024, Version 01.06
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
-    (Cite: Data sheet page 2: Legal notes)
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
+    (Cite: Data sheet pages 2-3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 2: Local Restrictions)
 6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
@@ -260,13 +268,17 @@ Data sheet edition: May 2025, Version 01.01
 1.1 Work included. Provide Davco® Ceramaflex where documented, installed or applied in accordance with this clause and the manufacturer's Product Data Sheet (May 2025, Version 01.01).
 1.2 Product description. Davco® Ceramaflex is a flexible, thin or thick bed, off white, rubber modified cement-based tile adhesive. Davco® Ceramaflex is designed for wall & floor applications for both internal and external applications.
     (Cite: Data sheet page 1: Description)
-1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally. SUITABLE TILE TYPES ARE;
+1.3 Intended uses stated by the manufacturer. Davco® Ceramaflex is suitable for thin or thickbed applications both internally and externally.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer - Suitable tile types are.
     - Ceramic
     - Porcelain
     - Mosaic
     - Terracotta
     - Slate
     - Quarry Tiles
+    (Cite: Data sheet page 1: Uses > Suitable Tile Types Are)
+1.5 Intended uses stated by the manufacturer - Suitable substrates include.
     - Concrete
     - Cement renders
     - Rendered brickwork & blockwork
@@ -276,14 +288,14 @@ Data sheet edition: May 2025, Version 01.01
     - Screeds & Mortar beds
     - Early aged screeds (minimum 24 hours @ 22°C & 50% RH)
     - Timber floor (with fibre cement sheet underlay)
-    (Cite: Data sheet page 1: Uses)
-1.4 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
+    (Cite: Data sheet page 1: Uses > Suitable Substrates Include)
+1.6 Limits of use. Observe the manufacturer's limitations stated in clause 4.8.
 
 2 MATERIALS
 2.1 Product. Davco® Ceramaflex
     - Product type as printed on the data sheet: A FLEXIBLE, THIN OR THICK BED, OFF WHITE, RUBBER MODIFIED CEMENT-BASED TILE ADHESIVE
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -314,7 +326,9 @@ Data sheet edition: May 2025, Version 01.01
     - Substrate deflection: all substrates under loads shall not exceed L/360 for tiles and L/720 for natural stone.
     - All surfaces must be installed according to manufacturers instructions and relevant standards, and be structurally sound, dry clean and free from movement, oil, grease, wax, sealers, curing compounds or other bond inhibiting material. Thoroughly clean old surfaces or new surfaces that have been treated prior to tiling.
     - Deeply contaminated surfaces require mechanical preparation. Expose at least 80% of the original surface of painted / coated substrates.
-    (Cite: Data sheet page 2: Application Instructions > Substrate Quality / Pre-Treatment)
+    (Cite: Data sheet pages 2-3: Application Instructions > Substrate Quality / Pre-Treatment)
+3.3 Substrate quality / pre-treatment - Other Tile-able Substrates (metal, old flooring, old tile. adhesive): Remove all contaminates and bond inhibitors. Prime substrates with Davco Ultrabond (refer to Ultrabond pds for additional information).
+    (Cite: Data sheet page 3: Application Instructions > Substrate Quality / Pre-Treatment > Other Tile-able Substrates (metal, old flooring, old tile)
 
 4 APPLICATION
 4.1 General. Apply in accordance with the manufacturer's Product Data Sheet (May 2025, Version 01.01) and the requirements below.
@@ -331,7 +345,10 @@ Data sheet edition: May 2025, Version 01.01
 4.4 Equipment. Select a trowel with a suitable notch size for the tile size and type as per the following;
     (Cite: Data sheet page 2: Application Instructions > Equipment)
 4.5 Mixing.
-    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag). 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand. 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved. 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
+    - 1. Measure the required amount of clean potable water into a bucket (8 Litres per bag).
+    - 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill (Max 500 RPM). Do not mix by hand.
+    - 3. Continue to mix for 2-3 minutes until a smooth, limp free creamy mixture is achieved.
+    - 4. Allow the mixture to stand for 5 minutes then restir for an additional minute.
     - *Adhesive may need restirring during the potlife, do not add more water.
     (Cite: Data sheet page 3: Application Instructions > Mixing)
 4.6 Application - Laying the Tiles. 1. Place the adhesive onto the prepared and primed substrate. Do not apply more adhesive than can be tiles within the open time of the product, usually from a single tile to 1m². 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the required area where tile is to be applied, comb the adhesive in a single direction (not swirls). 4. Where "back buttering" the tile is required, use the flat side of the notched trowel to apply a thin adhesive layer to the back of the tile (approx 1-2mm thick). 5. Place the tile into the combed adhesive and press the tile firmly. 6. Move the tile forward and then back at 90° across the direction of the combed adhesive to flatten the adhesive to leave no voids under the tile. Occassionally life a tile to check the adhesive covers 90-100% of the tile. 7. Remove any excess adhesive in the joints, and on the face of the tile with a sponge and water while the adhesive is still wet.
@@ -356,12 +373,12 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 1: Environmental Information)
 
 5 QUALITY CONTROL AND TESTING
-5.1 Hold point. Before each application, measure and record the conditions in clause 5.2 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
+5.1 Hold point. Before each application, measure and record the conditions in clauses 5.2 to 5.3 and compare them with the manufacturer's limits. HOLD POINT: do not proceed until the Superintendent has released the hold point.
 5.2 Ambient Air Temperature. Min +5°C to Max 35°C
     (Cite: Data sheet page 2: Application Information > Ambient Air Temperature)
 5.3 Substrate Temperature. Min +5°C to Max 35°C
     (Cite: Data sheet page 2: Application Information > Substrate Temperature)
-5.4 Trials, test areas and compatibility checks stated by the manufacturer.
+5.4 Trials, checks and measurements stated by the manufacturer.
     - Test product in an inconspicuous area first.
     (Cite: Data sheet page 2: various)
 5.5 Test methods printed beside stated values. Each value is as printed in the data sheet with its test method.
@@ -380,10 +397,13 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.2, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clauses 5.2 to 5.3, and include the records in the project documentation.
 
 ============================================================
 TILE ADHESIVE: Davco® Powder Mastic
@@ -399,6 +419,8 @@ Data sheet edition: May 2025, Version 01.01
     - Screed (cured for 7 days)
     - Rendered brickwork and blockwork
     - Suitable Sika under tile waterproofing membranes and acoustic underlays.
+    (Cite: Data sheet page 1: Uses)
+1.4 Intended uses stated by the manufacturer. Davco® Powder Mastic is ideal for most types of tiles including
     - Large format and rectified (square) edge tiles
     - Porcelain
     - Ceramic
@@ -409,7 +431,7 @@ Data sheet edition: May 2025, Version 01.01
 2 MATERIALS
 2.1 Product. Davco® Powder Mastic
     - Supplier as printed on the data sheet: Sika Australia Pty Limited, ABN 12 001 342 329, aus.sika.com, Tel: 1300 22 33 48
-    (Cite: Data sheet page 1: Title block and supplier details)
+    (Cite: Data sheet pages 1 and 3: Title block and supplier details)
 2.2 Approvals, certificates and standards stated by the manufacturer. Refer to manufacturer. The data sheet reviewed (May 2025, Version 01.01) has no approvals, certificates or standards section.
     (Cite: Data sheet silent)
 2.3 Standards and test methods cited in the data sheet. Cited as written in the data sheet. A citation is not a statement that the product complies with it; conformity is stated only where the data sheet says so (see the approvals clause and the statements quoted in the other clauses).
@@ -463,7 +485,7 @@ Data sheet edition: May 2025, Version 01.01
 4.5 Mixing. 1. Measure the required amount of clean, potable water into a clean bucket. 2. Slowly add the powder into the water while mixing with a mixing paddle attached to a drill. Always add the powder to the liquid. Do not mix by hand. 3. Continue to mix for several minutes until a creamy consistency is achieved, free of lumps of powder. 4. Allow mixture to stand for 5 minutes, remix then use the adhesive.
     - Do not add any additional water during the adhesive's pot life, restir without adding water.
     (Cite: Data sheet page 3: Application Instructions > Mixing)
-4.6 Application. Laying the tiles 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m² at a time. 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90° across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the grout joint and the surface of the tiles with a damp cloth while the adhesive is still wet.
+4.6 Application. Laying the tiles; 1. Deposit a quantity of adhesive onto the prepared substrate. Do not apply more adhesive than can be tiled within the open time of the product, usually from a single tile up to around 1m² at a time. 2. Hold the notched trowel at an angle of 60° or greater to the substrate. 3. Spread the adhesive over the area where tile is to be applied, forming straight rows of adhesive “beads”. 4. Where “back buttering” is required, use the straight side of the trowel to apply a thin covering of adhesive to the back of the tile. 5. Position the tile on the beaded adhesive and press firmly. 6. Move the tile forward and then back at 90° across the direction of the beads to ensure all beads are flattened leaving no voids under the tile. Occasionally lift a tile after placing it to check that the beads are fully compressed and that sufficient coverage has been achieved (90-100%). Replace the tile. 7. After laying a section at a time, remove any excess adhesive from the grout joint and the surface of the tiles with a damp cloth while the adhesive is still wet.
     - Allow product to gain initial set before grouting
     - Allow product to set firmly before return to service
     (Cite: Data sheet page 3: Application Instructions > Application)
@@ -488,10 +510,13 @@ Data sheet edition: May 2025, Version 01.01
     (Cite: Data sheet page 2: Ecology, Health And Safety)
 6.3 Warranty. Obtain any product or installation warranty in writing from the manufacturer or its authorised applicator and file it with the project records. Warranty terms: refer to manufacturer.
     - Legal notes: In practice, the differences in materials, substrates and actual site conditions are such that no warranty in respect of merchantability or of fitness for a particular purpose, nor any liability arising out of any legal relationship whatsoever, can be inferred either from this information, or from any written recommendations, or from any other advice offered.
+    - Legal notes: The user of the product must test the product’s suitability for the intended application and purpose.
+    - Legal notes: All orders are accepted subject to our current terms of sale and delivery.
+    - Legal notes: Users must always refer to the most recent issue of the local Product Data Sheet for the product concerned, copies of which will be supplied on request.
     (Cite: Data sheet page 3: Legal notes)
 6.4 Local restrictions. Please note that as a result of specific local regulations the declared data for this product may vary from country to country. Please consult the local Product Data Sheet for the exact product data.
     (Cite: Data sheet page 3: Local Restrictions)
-6.5 Application records. Record the product name, batch numbers, dates, areas treated and the conditions measured under clause 5.1, and include the records in the project documentation.
+6.5 Application records. Record the product name, batch numbers, dates and areas treated, and include the records in the project documentation.
 
 ============================================================
 PRODUCTS WITHOUT CLAUSES IN THIS FILE
@@ -515,3 +540,4 @@ SOURCES
 8. https://aus.sika.com/en/construction/tile-stone-installationsystems/tile-adhesives/davco-powder-mastic.html
 
 Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.
+Demo prepared for Sika Australia by TITANOS, built in __HOURS__ hours
