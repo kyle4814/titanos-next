@@ -48,9 +48,9 @@ await T('system.7 never asks twice', ['/system porcelain tiles', 'banana'], (c, 
 await T('system.8 answer completes', ['/system porcelain tiles', 'concrete, inside'], (c) => { check('system.8 system', c.kind === 'system'); });
 await T('system.9 assumptions stated', '/system porcelain on concrete, inside', (c) => { check('system.9 assumed floor', c.assumptions.some((a) => /floor/.test(a))); });
 await T('system.10 quantities with area', ['/system porcelain on concrete, inside', 'now 25 m2'], (c) => { check('system.10 quantities section', c.sections.some((s) => /Quantities/.test(s.title))); check('system.10 estimate', c.estimate === true); });
-await T('system.11 adhesive notch refused not guessed', ['/system porcelain on concrete, inside', 'now 25 m2'], (c) => { const q = c.sections.find((s) => /Quantities/.test(s.title)); check('system.11 notch refusal', q.rows.some((r) => /notch_mm is required/.test(r.value))); });
+await T('system.11 adhesive notch refused not guessed', ['/system porcelain on concrete, inside', 'now 25 m2'], (c) => { const q = c.sections.find((s) => /Quantities/.test(s.title)); check('system.11 notch refusal', q.rows.some((r) => /trowel notch is required/.test(r.value))); });
 await T('system.12 notch given completes adhesive', ['/system porcelain on concrete, inside', 'now 25 m2 with a 6 mm notch'], (c) => { const q = c.sections.find((s) => /Quantities/.test(s.title)); check('system.12 adhesive worked', q.rows.some((r) => /adhesive/.test(r.label) && /\d+(\.\d+)? (L|kg)/.test(r.value) && r.derived), JSON.stringify(q.rows.map((r) => r.value))); });
-await T('system.13 sheet link', '/system porcelain on concrete, inside', (c) => { check('system.13 sheet', c.buttons.some((b) => /systems\/porcelain-on-concrete-internal-floor\//.test(b.href || ''))); });
+await T('system.13 sheet link', '/system porcelain on concrete, inside', (c) => { check('system.13 sheet', c.topButtons.some((b) => /systems\/porcelain-on-concrete-internal-floor\//.test(b.href || ''))); });
 await T('system.14 pool', '/system ceramic on concrete pool', (c) => { check('system.14 handled', c.kind === 'system' || c.status === 'unknown'); });
 await T('system.15 unsupported combination', '/system moisture sensitive stone on plasterboard, outside wall', (c) => { check('system.15 unknown or system', c.kind === 'system' || c.status === 'unknown'); if (c.status === 'unknown') check('system.15 handoff', c.handoff === true); });
 
@@ -129,6 +129,21 @@ await T('rules.3 supamastic printed oddity flagged in the spec', '/spec Davco Su
 await T('rules.4 full draft specification offered', '/spec Davco Easy Grout', (c) => { check('rules.4 download', c.exports.length === 1 && /DRAFT SPECIFICATION FROM A PUBLISHED DATA SHEET/.test(c.exports[0].text)); });
 await T('rules.5 no data sheet product', '/spec Sika Primer-210', (c) => { check('rules.5 refuses with hand-off', c.status === 'unknown' && c.handoff === true); });
 await T('rules.6 supamastic pail never packed from the oddity', '/calc 10 m2 Davco Supamastic 6 mm notch', (c) => { check('rules.6 handled', ['quantity', 'clarify'].includes(c.kind) || c.status === 'unknown'); if (c.kind === 'quantity') check('rules.6 not 11 m2 per 15 pail', !/15 L pail/.test(text(c.rows))); });
+
+/* ---- POLISH ROUND (routing, summary system card, compare clamp, notch echo) */
+await T('polish.1 product-type question goes to the advisor', 'Which tile adhesive for porcelain tiles on concrete in an internal floor', (c) => { check('polish.1 not the system card', c === null); });
+for (const q of ['which grout for a shower', 'what membrane for a balcony', 'which primer for concrete']) await T('polish.2 ' + q, q, (c) => { check('polish.2 advisor: ' + q, c === null); });
+for (const q of ['what do I need to tile a bathroom floor, ceramic on concrete', 'give me the full system for porcelain on concrete inside', 'everything I need to tile porcelain on concrete inside', '/system porcelain on concrete, inside']) await T('polish.3 ' + q, q, (c) => { check('polish.3 system: ' + q, c && c.kind === 'system'); });
+await T('polish.4 system card is a summary', '/system porcelain on concrete, inside', (c) => {
+  check('polish.4 five steps', c.sections.length === 5);
+  check('polish.4 at most two products per step', c.sections.every((s) => s.rows.length <= 2), c.sections.map((s) => s.rows.length).join());
+  check('polish.4 one why sentence each, clipped', c.sections.every((s) => s.rows.every((r) => r.value.length <= 190)));
+  check('polish.4 detail collapsed not dropped', c.sections.every((s) => s.more && s.more.length >= s.rows.length) && has({ m: c.sections.map((s) => s.more) }, /Partly documented, not endorsed/));
+  check('polish.4 sheet link on top', c.topButtons && /systems\//.test(c.topButtons[0].href));
+});
+await T('polish.5 compare cells hold only the matched phrase', '/compare Davco Ultraflex vs Davco Ceramaflex', (c) => { const cells = c.table.rows.flatMap((r) => r.cells); check('polish.5 no section heading run-on', cells.every((x) => !/WHERE TO USE|APPLICATION|SURFACE PREPARATION/.test(x.value)), cells.map((x) => x.value).join(' | ').slice(0, 200)); check('polish.5 pack cell short', c.table.rows.find((r) => r.label === 'Pack sizes').cells.every((x) => x.value.length <= 170)); });
+await T('polish.6 a notch answer is not a thickness', ['how much Davco Ultraflex for 40 m2', '10 mm'], (c, cs, A) => { check('polish.6 job line', /10 mm notch/.test(rowVal(c, 'Your job')) && !/thick/.test(rowVal(c, 'Your job')), rowVal(c, 'Your job')); check('polish.6 thickness unset', A.session.facets.thickness === undefined); });
+await T('polish.7 plain words in refusals', ['/system porcelain on concrete, inside', 'now 25 m2'], (c) => { check('polish.7 no field names', !/notch_mm|area_m2|thickness_mm|cementitious_kg/.test(text(c))); });
 
 /* ---- ROUTING */
 await T('route.1 plain question falls through', 'which primer for concrete', (c) => { check('route.1 v1', c === null); });

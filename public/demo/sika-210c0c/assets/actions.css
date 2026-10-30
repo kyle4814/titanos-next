@@ -45,3 +45,6 @@
   #actions-print .print-foot{font-size:8pt;margin-top:8pt}
   #actions-print tr{break-inside:avoid}
 }
+
+.action-card details.more{margin:.3rem 0}
+.action-card details.more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--grey-dark);font-size:.88rem}

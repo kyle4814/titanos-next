@@ -1,6 +1,7 @@
 // Actions v2, conversation flow: routes a question to an action, remembers facets within the session, asks AT MOST ONE clarifying question
 // per request (a second turn answers with what it has and says what is missing), and chains actions ("now make that a project pack").
 import { route, parseNumbers, parseFacets, COMMANDS } from './parse.js';
+import { buildHandoff } from '../assistant/handoff.js';
 import { findProducts, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
 import * as H from './handlers.js';
 
@@ -105,7 +106,7 @@ export function createActions(deps) {
   async function run(text, session = newSession()) {
     text = String(text || '').trim();
     if (!text) return { handled: false, session };
-    let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text;
+    let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text; let answerOf = null;
     const p = session.pending;
     if (p) {
       session.pending = null;
@@ -115,7 +116,16 @@ export function createActions(deps) {
         // the visitor is answering our question: put the original request and the answer together, once
         action = p.action; noAsk = true; useText = `${p.text} ${text}`; rest = useText;
         const bare = /^\s*(\d+(?:[.,]\d+)?)\s*(?:m2|sqm|mm|m|%|kg|litres?|l)?\s*$/i.exec(text);
-        if (bare && NEED_KEY[p.need]) session.facets[NEED_KEY[p.need]] = parseFloat(bare[1].replace(',', '.'));
+        answerOf = { p, bare: bare && NEED_KEY[p.need] ? parseFloat(bare[1].replace(',', '.')) : null };
+      }
+    }
+    if (!action) { // a symptom question ("my tiles sound hollow") is answered from the published passages, never diagnosed
+      const hitsP = await findProducts(data, text, 1);
+      if (!hitsP.length && !parseNumbers(text).area) {
+        const pr = await data.problems();
+        const n = norm(text);
+        const chip = pr && Array.isArray(pr.chips) ? pr.chips.find((x) => { try { return x.askRx && new RegExp(x.askRx, 'i').test(n); } catch { return false; } }) : null;
+        if (chip) { const cp = await H.problem({ data, session, config, text, chip }); session.last = cp; if (memory) { memory.rememberQuestion(text, 'problem'); if (cp.status === 'unknown') memory.addGap(text); } return { handled: true, card: cp, session }; }
       }
     }
     if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
@@ -126,7 +136,14 @@ export function createActions(deps) {
     // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
     if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
-    if (!MEMORY_ACTIONS.has(action)) updateFacets(session, useText, stripped);
+    if (!MEMORY_ACTIONS.has(action)) {
+      if (answerOf) {
+        // the answer to our question is read on its own: "10 mm" to a notch question is a notch, never also a thickness
+        const base = norm(answerOf.p.text); updateFacets(session, answerOf.p.text, base);
+        if (answerOf.bare && NEED_KEY[answerOf.p.need]) session.facets[NEED_KEY[answerOf.p.need]] = answerOf.bare;
+        else updateFacets(session, text, norm(text));
+      } else updateFacets(session, useText, stripped);
+    }
     if (!r || !r.slash) session.lastQuestion = text;
     const ctx = { data, session, memory, config, text: useText, rest, noAsk, now: deps.now ? deps.now() : new Date(), commands: COMMANDS };
     let c;
@@ -137,6 +154,14 @@ export function createActions(deps) {
       else return { handled: false, session };
     } catch (e) {
       c = unknownCard(action, 'That action hit a problem', `Something went wrong while I worked on that (${plain(e && e.message ? e.message : 'unknown error')}). Nothing was changed. Ask Technical Services if you need it urgently.`);
+    }
+    // every card that says "not in the published data" shows the hand-off block itself, not just a button
+    if (c.status === 'unknown' && c.handoff && !c.handoffBlock && c.kind !== 'clarify') {
+      const prods = (session.products || []).slice(0, 3).map((x) => ({ id: x.id, name: x.name }));
+      const sel = Object.entries(session.facets).filter(([, v]) => v != null && v !== '' && !Array.isArray(v)).map(([k, v]) => `${k}: ${v}`);
+      const miss = c.silentWords && c.silentWords.length ? `The published text I quoted does not mention: ${c.silentWords.join(', ')}.` : (c.notes && c.notes[0]) || 'This is not in the published data I hold.';
+      c.handoffBlock = buildHandoff({ query: session.lastQuestion || text, products: prods, sel, reason: miss, config });
+      c.buttons = (c.buttons || []).filter((b) => b.command !== '/handoff');
     }
     // the one-question rule is enforced here for every action: a second round never asks again, it says what is still missing
     if (noAsk && c.kind === 'clarify') c = unknownCard(c.action, 'I still need one thing', `${c.clarify.question} Include it in your next request and I will work it out.`, { handoff: false });

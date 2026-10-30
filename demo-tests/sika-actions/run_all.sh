@@ -15,5 +15,14 @@ if [ "$1" != "--no-browser" ]; then
     echo "$out" | grep -q 'ACTIONS E2E: .* 0 failed' || rc=1
   else echo "=== e2e_actions SKIPPED (no Windows node)"; fi
 fi
+# the brain's own gate (node: unit, golden, property) and its browser run with the actions layer off (?actions=off), through a fresh-port server on the WSL disk
+echo "=== sika-brain run_all (node)"; bash ../sika-brain/run_all.sh 2>&1 | grep -E "GREEN|FAIL|passed|GOLDEN" | head -8; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
+if [ "$1" != "--no-browser" ] && [ -x "/mnt/c/Program Files/nodejs/node.exe" ]; then
+  port=$((40000 + RANDOM % 20000)); root=$(cd ../../public/demo/sika-210c0c && pwd)
+  node ../sika-brain/serve_wsl.mjs "$root" "$port" >/dev/null 2>&1 & srv=$!
+  sleep 2; echo "=== brain_e2e (Windows Chrome, actions off)"
+  p2=$(cd ../sika-brain && pwd | sed 's#/#\\#g'); out=$(cd /tmp && BASE="http://127.0.0.1:$port/" WSLENV=BASE timeout 600 "/mnt/c/Program Files/nodejs/node.exe" "\\\\wsl.localhost\\Ubuntu${p2}\\brain_e2e.mjs" x 'C:\Users\Public\brain_out' 2>&1)
+  kill "$srv" 2>/dev/null; echo "$out" | grep -E "FAIL|BRAIN E2E"; echo "$out" | grep -q 'BRAIN E2E GREEN' || rc=1
+fi
 [ $rc -eq 0 ] && echo "ALL GREEN" || echo "FAILURES"
 exit $rc

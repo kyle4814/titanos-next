@@ -8,6 +8,8 @@ import { estimateNote } from './terms.js';
 
 export const BRAIN_DEFAULT = true;
 export function brainOn() {
+  // offline the shards and the brain modules are not in the cache: go straight to v1 (cached) instead of failing four fetches and logging console errors
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) return false;
   try { const p = new URLSearchParams(location.search).get('brain'); if (p === '0') return false; if (p === '1') return true; } catch { /* no location in tests */ }
   return BRAIN_DEFAULT;
 }

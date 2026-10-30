@@ -49,21 +49,27 @@ export function renderCard(c, act) {
   if (c.kind === 'clarify') {
     root.append(h('p', null, c.clarify.question));
     if (c.clarify.options && c.clarify.options.length) root.append(h('div', { class: 'opts' }, c.clarify.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => act.send(o.value, o.label) }, o.label))));
+    root.append(h('div', { class: 'cite' }, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger')));
     return root;
   }
   root.append(h('div', { class: 'm-title' }, c.title));
   if (c.status === 'unknown') root.append(h('p', { class: 'chip-status chip-status--unknown' }, 'Not in the published data'));
   if (c.summary) root.append(h('p', null, c.summary));
+  if (c.topButtons) root.append(h('div', { class: 'opts' }, c.topButtons.map((b) => h('a', { class: 'chip', href: new URL(b.href, baseUrl).href, target: '_blank', rel: 'noopener noreferrer' }, b.label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')))));
   if (c.assumptions && c.assumptions.length) root.append(h('ul', { class: 'm-assume' }, c.assumptions.map((a) => h('li', null, a))));
   if (c.rows && c.rows.length) root.append(rowsTable(c.rows));
   if (c.table) root.append(h('div', { class: 'cmp', role: 'table', 'aria-label': c.title },
     h('div', { class: 'cmp-row cmp-head', role: 'row' }, c.table.head.map((x) => h('div', { role: 'columnheader' }, x))),
     c.table.rows.map((r) => h('div', { class: 'cmp-row', role: 'row' }, h('div', { role: 'rowheader', class: 'cmp-label' }, r.label), r.cells.map((cell) => h('div', { role: 'cell' }, ...valueNode(cell)))))));
-  for (const s of c.sections || []) root.append(h('div', { class: 'm-title sec' }, s.title), rowsTable(s.rows));
+  for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
   (c.notes || []).forEach((n) => root.append(h('p', { class: 'cite' }, n)));
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
   if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, 'Copy the clause')); }
   if (c.handoffBlock) root.append(renderHandoff(c.handoffBlock));
+  if (c.kind !== 'clarify' && c.kind !== 'help' && c.kind !== 'memory') {
+    const seen = new Set(); const all = [...(c.rows || []), ...((c.sections || []).flatMap((s) => [...(s.rows || []), ...(s.more || [])])), ...((c.table && c.table.rows) || []).flatMap((r) => r.cells)].filter((r) => r.source && r.source.url && !seen.has(r.source.url.split('#')[0]) && seen.add(r.source.url.split('#')[0])).slice(0, 6);
+    root.append(h('div', { class: 'cite' }, h('strong', null, 'Sources'), all.length ? h('ol', null, all.map((r) => h('li', null, extLink(r.source.url, r.source.label, 'link')))) : null, h('div', null, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger'))));
+  }
   if (c.notice) root.append(h('p', { class: 'cite notice-local' }, c.notice));
   if (c.importBox) {
     const ta = h('textarea', { class: 'textarea', rows: '5', 'aria-label': 'Projects file contents' }); const st = h('p', { class: 'cite', role: 'status', 'aria-live': 'polite' });
@@ -90,7 +96,7 @@ export function printNode(c) {
   const tbl = (rows) => h('table', { class: 'print-table' }, h('tbody', null, rows.map((r) => h('tr', null, h('th', null, r.label), h('td', null, r.value, r.source && r.source.url ? h('div', { class: 'print-src' }, `${r.source.label}: ${r.source.url}`) : null)))));
   if (c.rows && c.rows.length) wrap.append(tbl(c.rows));
   if (c.table) wrap.append(h('table', { class: 'print-table' }, h('thead', null, h('tr', null, c.table.head.map((x) => h('th', null, x)))), h('tbody', null, c.table.rows.map((r) => h('tr', null, h('th', null, r.label), r.cells.map((cell) => h('td', null, cell.value, cell.source && cell.source.url ? h('div', { class: 'print-src' }, cell.source.url) : null)))))));
-  for (const s of c.sections || []) wrap.append(h('h2', null, s.title), tbl(s.rows));
+  for (const s of c.sections || []) wrap.append(h('h2', null, s.title), tbl([...s.rows, ...(s.more || [])]));
   (c.notes || []).forEach((n) => wrap.append(h('p', null, n)));
   if (c.estimate) wrap.append(h('p', { class: 'print-estimate' }, ESTIMATE_LINE));
   wrap.append(h('p', { class: 'print-foot' }, 'Built from Sika Australia\'s public data sheets. Not an official Sika document. Technical Services decides suitability.'));
