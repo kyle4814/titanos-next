@@ -1,2 +1,3 @@
 // Extra routes registered here (system selector and system sheets are added when their data is ready).
-export const extraRoutes = [];
+import { finderRoutes } from './finder/routes.js';
+export const extraRoutes = [...finderRoutes];
