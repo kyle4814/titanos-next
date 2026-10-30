@@ -9,13 +9,20 @@ export const FLAG = 'As printed in the data sheet; possible misprint, confirm wi
 /** What the checks were. A person has not read these page by page unless the lane records a verdict (spec.rv). */
 export const AUTOMATED = 'Automated checks only: not yet read page by page by a person.';
 const flagsOf = (spec, no) => (spec.an || []).filter((a) => a.no === no);
+/** What the lane's independent audit said, in plain words: [short badge text, full sentence]. Only called when a verdict is recorded. */
+export function reviewText(rv) {
+  const v = String(rv.verdict || '').toLowerCase(); const later = /not re-?audited/i.test(rv.status || '') ? ' It was read on an earlier build; later fixes were not re-audited.' : '';
+  if (v === 'safe to show') return ['Independently read: safe to show', 'Independently read page by page against the data sheet: safe to show.' + later];
+  if (v === 'fix first') return ['Independently read: fixed since', 'Independently read page by page against the data sheet: a fix was needed and was made afterwards.' + later];
+  return ['Independently read: ' + plain(rv.verdict), 'Independently read page by page against the data sheet: ' + plain(rv.verdict) + '.' + later];
+}
 export function specText(spec, product, cfg) {
   const L = [];
   L.push('DRAFT SPECIFICATION FROM A PUBLISHED DATA SHEET. Check against the current data sheet before use.');
   L.push(`Product: ${plain(product.name)}`);
   if (spec.ds && spec.ds.edition) L.push(`Data sheet edition: ${plain(spec.ds.edition)}${spec.ds.pages ? ', ' + spec.ds.pages + ' pages' : ''}`);
   if (spec.ds && spec.ds.url) L.push(`Data sheet: ${spec.ds.url}`);
-  L.push(spec.rv && spec.rv.verdict ? `Independent review: ${plain(spec.rv.verdict)}` : AUTOMATED);
+  L.push(spec.rv && spec.rv.verdict ? reviewText(spec.rv)[1] : AUTOMATED);
   L.push(`Product page: ${product.url}`); L.push('');
   for (const s of spec.sections) {
     L.push(`${s.n} ${plain(s.h)}`);
@@ -53,7 +60,7 @@ export function specBody(spec, product, cfg) {
       h('button', { class: 'btn btn--hollow', type: 'button', onclick: () => download(`${product.id}-draft-specification.txt`, specText(spec, product, cfg)) }, icon('download', 'i--sm'), 'Download as .txt'),
       spec.ds && spec.ds.url ? h('a', { class: 'btn btn--text', href: spec.ds.url, target: '_blank', rel: 'noopener noreferrer' }, 'Open the data sheet (PDF)') : null),
     h('p', { class: 'count' }, `${nf.format(total)} clauses, ${spec.verification && spec.verification.verified === spec.verification.clauses ? 'each checked against the data sheet text' : 'checked against the data sheet text'}. `,
-      reviewed ? h('span', { class: 'badge spec-reviewed' }, 'Reviewed: ' + plain(reviewed.verdict)) : AUTOMATED),
+      reviewed ? [h('span', { class: 'badge spec-reviewed' }, reviewText(reviewed)[0]), ' ' + reviewText(reviewed)[1]] : AUTOMATED),
     ...spec.sections.map((s) => h('section', { class: 'spec-sec' }, h('h3', null, h('span', { class: 'no' }, s.n), plain(s.h)),
       h('ol', { class: 'spec-clauses' }, s.cl.map((c) => h('li', { class: 'spec-' + c.k },
         h('span', { class: 'no' }, c.no),
