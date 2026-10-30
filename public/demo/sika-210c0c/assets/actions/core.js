@@ -38,6 +38,7 @@ export function createData(store) {
     compat: (id) => g('actions/compat/' + encodeURIComponent(id) + '.json'),
     safety: (id) => g('actions/safety/' + encodeURIComponent(id) + '.json'),
     trees: () => g('actions/trees.json'),
+    kindex: () => g('k/_index.json'),
   };
   let idx;
   d.finder = async () => {

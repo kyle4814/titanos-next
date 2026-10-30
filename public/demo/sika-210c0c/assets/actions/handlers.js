@@ -9,6 +9,7 @@ import { resolve as resolveSystem } from '../lib/finder/model.js';
 import { pickSds, safetyRows } from '../assistant/apply.js';
 import { supplyClause, referencesLines, DRAFT_LABEL, STANDARDS_NOTE } from '../assistant/clause.js';
 import { buildHandoff, uncoveredTerms } from '../assistant/handoff.js';
+import { specText, FLAG as MISPRINT_FLAG } from '../lib/specs.js';
 import { evidence as cuEvidence, exclusions as cuExclusions } from '../lib/finder/canuse.js';
 
 const page = (s) => (s && s.url ? s.url + (s.page && /\.pdf/i.test(s.url) ? '#page=' + s.page : '') : '');
@@ -88,6 +89,9 @@ function needQuestion(need, r) {
   return q ? clarifyCard('calc', q[0], q[1], need) : null;
 }
 
+const MISMATCH_NOTE = (n) => `The quantity workings for ${n} do not agree with the data sheet's own wording, so I will not give a pack count. The data sheet sentence is shown; please check it or ask Technical Services.`;
+async function refusals(data) { const k = await data.kindex(); return { mismatch: new Set((k && k.rate_mismatch) || []), notReady: new Set((k && k.rate_not_calc_ready) || []) }; }
+
 /** Quantity rows for one product record + job. Returns { rows, ok, need, failures, quantities } */
 export function quantityRows(rec, job, { tileSize, mosaic, strategy } = {}) {
   const rows = []; const out = { ok: false, need: null, needRes: null, failures: [], results: [] };
@@ -109,15 +113,16 @@ export function quantityRows(rec, job, { tileSize, mosaic, strategy } = {}) {
   return out;
 }
 
-function resultRows(rec, r, job, packFact, f) {
+function resultRows(rec, r, job, packFact, f, noPacks) {
   const s = srcOf({ text: r.phrase, source: r.source });
   const rows = [];
   rows.push({ label: 'Published rate', value: plain(r.phrase), source: s, quote: true });
   rows.push({ label: 'Quantity needed', value: range(r.quantity.low, r.quantity.high, r.quantity.unit), source: s, derived: true });
   if (r.waste_pct) rows.push({ label: `With your ${fmt(r.waste_pct)}% allowance`, value: range(r.with_waste.low, r.with_waste.high, r.with_waste.unit), source: s, derived: true });
-  const pl = packLine(r.packs);
+  const pl = noPacks ? null : packLine(r.packs);
   const ps = packFact ? src(page(packFact.source), srcLabel(packFact.source), packFact.text) : src(rec.product_url, 'Product page', '');
-  if (pl) rows.push({ label: 'Whole packs, rounded up', value: pl, source: ps, derived: true });
+  if (noPacks) rows.push({ label: 'Whole packs', value: MISMATCH_NOTE(rec.name), source: s });
+  else if (pl) rows.push({ label: 'Whole packs, rounded up', value: pl, source: ps, derived: true });
   else rows.push({ label: 'Whole packs', value: r.packs && r.packs.note ? 'No published pack size in the same unit as the rate, so no pack count is given.' : 'Pack sizes not in the published data.', source: null });
   for (const n of r.notes || []) { if (/No waste allowance applied/.test(n)) continue; rows.push({ label: 'Condition', value: plain(n), source: s, quote: false }); }
   for (const w of r.warnings || []) rows.push({ label: 'Check', value: plain(w), source: s });
@@ -142,6 +147,12 @@ export async function calc(ctx) {
     c.buttons = [handoffBtn];
     return c;
   }
+  const R = await refusals(data);
+  if (R.notReady.has(p.id)) {
+    const c0 = unknownCard('calc', title, 'The data sheet statement does not say what the figure is per, or a condition is missing. I will not guess a quantity.', { estimate: false, buttons: [handoffBtn] });
+    const f0 = (rec.facts.consumption || [])[0]; if (f0) c0.rows.push({ label: 'Published statement', value: plain(f0.text), quote: true, source: srcOf(f0) });
+    return c0;
+  }
   const job = jobFrom(f);
   if (!job.area_m2 && !job.length_m && !job.volume_m3) {
     const hasLen = (rec.facts.consumption || []).some((x) => x.parsed && x.parsed.model === 'per_length');
@@ -165,12 +176,12 @@ export async function calc(ctx) {
   if (q.notch) c.rows.push({ label: 'Trowel notch from the tile size table', value: plain(q.notch.phrase), quote: true, source: srcOf({ text: q.notch.phrase, source: q.notch.source }) });
   const shown = q.results.slice(0, 3);
   shown.forEach((r, i) => {
-    const rr = resultRows(rec, r, job, packFact, f);
+    const rr = resultRows(rec, r, job, packFact, f, R.mismatch.has(p.id));
     if (shown.length > 1) rr.forEach((x) => { x.label = `${x.label} (rate ${i + 1})`; });
     c.rows.push(...rr);
   });
   c.sources = [src(rec.product_url, 'Product page', ''), rec.datasheet ? src(rec.datasheet.url, `Data sheet, ${plain(rec.datasheet.doc_version)}`, '') : null].filter(Boolean);
-  session.calcs[p.id] = { id: p.id, name: p.name, job: { ...job }, rows: shown.map((r) => ({ low: r.quantity.low, high: r.quantity.high, unit: r.quantity.unit, packs: packLine(r.packs), phrase: plain(r.phrase), url: page(r.source) })) };
+  session.calcs[p.id] = { id: p.id, name: p.name, job: { ...job }, rows: shown.map((r) => ({ low: r.quantity.low, high: r.quantity.high, unit: r.quantity.unit, packs: R.mismatch.has(p.id) ? null : packLine(r.packs), phrase: plain(r.phrase), url: page(r.source) })) };
   return c;
 }
 const jobText = (f) => [f.area ? `${fmt(f.area)} m2` : null, f.length ? `${fmt(f.length)} m` : null, f.volume ? `${fmt(f.volume)} m3` : null, f.thickness ? `${fmt(f.thickness)} mm thick` : null, f.coats ? `${fmt(f.coats)} coats` : null, f.cementitious ? `${fmt(f.cementitious)} kg cementitious` : null, f.notch ? `${fmt(f.notch)} mm notch` : null, f.tileSize ? `${fmt(f.tileSize[0])} x ${fmt(f.tileSize[1])} mm tiles` : null, f.csp ? `CSP ${f.csp}` : null, f.dilution || null, f.allowance != null ? `${fmt(f.allowance)}% allowance (yours)` : null].filter(Boolean).join(', ') || 'No size given';
@@ -280,6 +291,7 @@ export async function system(ctx) {
   // quantities when an area is known, for the first documented product of each step
   const f2 = session.facets; const job = jobFrom(f2);
   if (job.area_m2) {
+    const R = await refusals(data);
     const qs = { title: 'Quantities (first documented product in each step)', rows: [] };
     for (const [role, ids] of Object.entries(st.steps)) {
       const id = ids[0]; if (!id) continue;
@@ -287,9 +299,9 @@ export async function system(ctx) {
       if (!rec) { qs.rows.push({ label: `${role}: ${nm}`, value: 'Rate not published. Ask Technical Services.', source: null }); continue; }
       const q = quantityRows(rec, job, { tileSize: f2.tileSize, mosaic: f2.mosaic });
       if (q.ok) {
-        const r = q.results[0]; const s = srcOf({ text: r.phrase, source: r.source });
-        qs.rows.push({ label: `${role}: ${nm}`, value: `${range(r.quantity.low, r.quantity.high, r.quantity.unit)}${packLine(r.packs) ? '; ' + packLine(r.packs) : ''}`, derived: true, source: s });
-        session.calcs[id] = { id, name: nm, job: { ...job }, rows: [{ low: r.quantity.low, high: r.quantity.high, unit: r.quantity.unit, packs: packLine(r.packs), phrase: plain(r.phrase), url: page(r.source) }] };
+        const r = q.results[0]; const s = srcOf({ text: r.phrase, source: r.source }); const np = R.mismatch.has(id) || R.notReady.has(id);
+        qs.rows.push({ label: `${role}: ${nm}`, value: `${range(r.quantity.low, r.quantity.high, r.quantity.unit)}${!np && packLine(r.packs) ? '; ' + packLine(r.packs) : '; no pack count (the workings do not agree with the data sheet wording)'}`, derived: true, source: s });
+        session.calcs[id] = { id, name: nm, job: { ...job }, rows: [{ low: r.quantity.low, high: r.quantity.high, unit: r.quantity.unit, packs: np ? null : packLine(r.packs), phrase: plain(r.phrase), url: page(r.source) }] };
       } else {
         const r0 = q.failures.find((x) => x.phrase) || q.failures[0] || {};
         qs.rows.push({ label: `${role}: ${nm}`, value: `Not worked out: ${plain(r0.reason || 'rate not published')}`, source: r0.phrase ? srcOf({ text: r0.phrase, source: r0.source || { url: rec.product_url, doc_type: 'WEB' } }) : null });
@@ -466,7 +478,9 @@ function clauseRows(sp, limit = 6) {
     if (cl.k !== 'datasheet') continue;
     const text = cl.x || (cl.s || []).join(' ');
     if (!text) continue;
-    rows.push({ label: `${cl.no} ${plain(cl.t || sec.h)}`, value: plain(text).slice(0, 420), quote: true, source: src(sp.ds.url + (cl.p ? '#page=' + cl.p : ''), `Data sheet, ${plain(sp.ds.edition)}${cl.p ? ', page ' + cl.p : ''}`, plain(text)) });
+    const s0 = src(sp.ds.url + (cl.p ? '#page=' + cl.p : ''), `Data sheet, ${plain(sp.ds.edition)}${cl.p ? ', page ' + cl.p : ''}`, plain(text));
+    rows.push({ label: `${cl.no} ${plain(cl.t || sec.h)}`, value: plain(text).slice(0, 420), quote: true, source: s0 });
+    for (const a of (sp.an || []).filter((x) => x.no === cl.no)) rows.push({ label: 'Check', value: `${MISPRINT_FLAG}${a.w ? ' ' + plain(a.w) : ''}`, source: s0, flag: true });
     if (rows.length >= limit) return rows;
   }
   return rows;
@@ -482,10 +496,12 @@ export async function spec(ctx) {
   const sub = session.system && session.system.substrate ? SUBSTRATE_LABEL[session.system.substrate] : '';
   const clause = supplyClause({ product: p.name, substrate: sub, title: `${p.name} Product Data Sheet`, version: sp.ds.edition });
   c.copyText = `${clause}\n\n${DRAFT_LABEL}`;
+  try { c.fullText = specText(sp, { id: p.id, name: p.name, url: (await data.product(p.id) || {}).url || '' }, ctx.config || { company: { publishedDocsPhrase: 'the published documentation' } }); } catch { c.fullText = null; }
   c.rows.push({ label: 'Draft clause', value: clause, source: src(sp.ds.url, `Data sheet, ${plain(sp.ds.edition)}`, `Data sheet ${plain(sp.ds.edition)}`), draft: true });
   c.rows.push(...clauseRows(sp));
   const refs = referencesLines(sp.standards);
   refs.slice(0, 4).forEach((r) => c.rows.push({ label: 'Standard cited', value: r, source: src(sp.ds.url, `Data sheet, ${plain(sp.ds.edition)}`, r) }));
+  if (c.fullText) c.exports = [{ label: 'Download the full draft specification (.txt)', filename: `${p.id}-draft-specification.txt`, mime: 'text/plain;charset=utf-8', text: c.fullText }];
   c.notes.push(DRAFT_LABEL, STANDARDS_NOTE);
   c.sources = [src(sp.ds.url, `Data sheet, ${plain(sp.ds.edition)}`, '')];
   return c;

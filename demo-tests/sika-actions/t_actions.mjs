@@ -122,6 +122,14 @@ await T('handoff.1 context', [`/calc 20 m2 ${OLD} 6 mm notch`, 'talk to technica
 await T('handoff.2 never sends', '/handoff', (c) => { check('handoff.2 note', /does not send anything/.test(c.handoffBlock.note)); });
 await T('handoff.3 selections carried', ['/system porcelain on concrete, inside', '/handoff'], (c) => { check('handoff.3 system', /porcelain/.test(c.handoffBlock.text)); });
 
+/* ---- OWNER RULES (db2c881fc): mismatch and not-calc-ready refusals, printed oddities flagged, products without a data sheet */
+await T('rules.1 mismatch product gets no pack count', 'how much Sika MonoTop-352 NFG for 3 m2 5 mm', (c) => { check('rules.1 handled', c.kind === 'quantity' || c.kind === 'clarify' || c.status === 'unknown'); if (c.kind === 'quantity') check('rules.1 no pack count', /will not give a pack count/.test(rowVal(c, 'Whole packs') || ''), rowVal(c, 'Whole packs')); });
+await T('rules.2 not-calc-ready product refuses', 'how much Sikaflex-11 FC+ for 10 m', (c) => { check('rules.2 refuses', c.status === 'unknown' || c.kind === 'clarify' || /I cannot work this out|will not guess/.test(text(c))); check('rules.2 no invented quantity', !/Quantity needed/.test(text(c.rows))); });
+await T('rules.3 supamastic printed oddity flagged in the spec', '/spec Davco Supamastic', (c) => { check('rules.3 spec ok', c.kind === 'spec'); });
+await T('rules.4 full draft specification offered', '/spec Davco Easy Grout', (c) => { check('rules.4 download', c.exports.length === 1 && /DRAFT SPECIFICATION FROM A PUBLISHED DATA SHEET/.test(c.exports[0].text)); });
+await T('rules.5 no data sheet product', '/spec Sika Primer-210', (c) => { check('rules.5 refuses with hand-off', c.status === 'unknown' && c.handoff === true); });
+await T('rules.6 supamastic pail never packed from the oddity', '/calc 10 m2 Davco Supamastic 6 mm notch', (c) => { check('rules.6 handled', ['quantity', 'clarify'].includes(c.kind) || c.status === 'unknown'); if (c.kind === 'quantity') check('rules.6 not 11 m2 per 15 pail', !/15 L pail/.test(text(c.rows))); });
+
 /* ---- ROUTING */
 await T('route.1 plain question falls through', 'which primer for concrete', (c) => { check('route.1 v1', c === null); });
 await T('route.2 /ask falls through', '/ask which primer for concrete', (c) => { check('route.2 v1', c === null); });
