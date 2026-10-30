@@ -4,6 +4,7 @@ import { derived, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
 import { productCard, breadcrumb, pager, emptyState, placeholder, addButton } from './components.js';
 import { notFound } from './views.js';
+import { specPanel } from './specs.js';
 
 const TYPE_LABEL = { product_data_sheet: 'Product data sheet', safety_data_sheet: 'Safety data sheet', brochure: 'Brochure', environmental_product_declaration: 'Environmental declaration', system_data_sheet: 'System data sheet', certificate: 'Certificate', guide: 'Guide', technical_information: 'Technical information', colour_chart: 'Colour chart', reference: 'Reference', document: 'Other document', '': 'Other document' };
 export const typeLabel = (t) => TYPE_LABEL[t] || titleCase(t || 'document');
@@ -48,7 +49,7 @@ function docRow(d, dv, withProduct = false) {
 export async function productView(ctx) {
   const id = ctx.rest; const dv = await derived();
   let p; try { p = await data.product(id); } catch { return notFound(ctx, 'product'); }
-  const specs = await data.specs(); const specFor = specs && (specs.products ? specs.products[id] : specs[id]);
+  const specIdx = await data.specIndex(); const hasSpec = !!(specIdx && specIdx.ids.includes(id));
   const docs = (p.docs || []); const okDocs = docs.filter(docOk);
   const pds = okDocs.find((d) => d.type === 'product_data_sheet'); const sds = okDocs.find((d) => d.type === 'safety_data_sheet');
   const path = p.categoryPath; const crumbs = [{ label: 'Home', href: '#/' }];
@@ -70,7 +71,7 @@ export async function productView(ctx) {
     !p.usage.length && !p.advantages.length && !p.packaging ? h('p', null, p.summary || 'See the product data sheet for details.') : null) });
   if (detail.length || other.length) tabs.push({ id: 'details', label: 'Product details', body: () => accordion([...detail, ...other]) });
   if (applic.length) tabs.push({ id: 'application', label: 'Application', body: () => accordion(applic) });
-  if (specFor && (specFor.clauses || specFor).length) tabs.push({ id: 'specification', label: 'Specification', body: () => specPanel(p, specFor) });
+  if (hasSpec) tabs.push({ id: 'specification', label: 'Specification', body: () => specPanel(p, ctx.cfg) });
   if (faq.length) tabs.push({ id: 'faq', label: 'FAQs', body: () => accordion(faq) });
   tabs.push({ id: 'documents', label: `Documents (${docs.length})`, body: () => docs.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'table' }, h('thead', null, h('tr', null, ['Document', 'Type', 'Format', 'Size', 'Version'].map((x, i) => h('th', { class: i > 2 ? 'num' : '' }, x)))), h('tbody', null, docs.map((d) => docRow(d, dv))))) : h('p', null, 'No documents are listed on the public product page. Check the company website or contact technical services.') });
   const want = ctx.params.get('tab'); let active = Math.max(0, tabs.findIndex((t) => t.id === want));
@@ -109,13 +110,6 @@ function relatedProducts(p, dv) {
   const pool = same.length >= 4 ? same : [...same, ...dv.index.filter((x) => x.c !== p.category && x.c.split('/').slice(0, 2).join('/') === p.category.split('/').slice(0, 2).join('/'))];
   // prefer the same brand, then those with data sheets
   return pool.sort((a, b) => (b.b === p.brand) - (a.b === p.brand) || (b.pds - a.pds) || a.n.localeCompare(b.n)).slice(0, 4);
-}
-
-function specPanel(p, spec) {
-  const clauses = spec.clauses || spec;
-  return h('div', null, h('p', { class: 'notice' }, icon('info'), 'Specification clauses drafted from the published product documentation. Check against the current data sheet before use.'),
-    clauses.map((c) => h('div', { class: 'under', style: 'margin-bottom:1.5rem' }, h('h3', null, c.heading || c.title || 'Clause'), h('p', { style: 'white-space:pre-line' }, c.text || c.body || ''),
-      c.source ? h('p', { class: 'source-line' }, 'Source: ', h('a', { class: 'link link--ext', href: c.source.url || c.source, target: '_blank', rel: 'noopener noreferrer' }, c.source.label || 'published documentation')) : null)));
 }
 
 /* ------------------------------------------------------------------ documents library */
