@@ -32,7 +32,7 @@ export function packshot(img, catId, name, big = false) {
 export function addButton(id, name) {
   const b = h('button', { type: 'button', class: 'btn btn--hollow', 'aria-pressed': String(projects.has(id)) });
   const paint = () => { const on = projects.has(id); b.setAttribute('aria-pressed', String(on)); b.replaceChildren(icon(on ? 'check' : 'plus', 'i--sm'), on ? 'In my projects' : 'Add to project'); b.setAttribute('aria-label', (on ? 'Remove from my projects: ' : 'Add to my projects: ') + name); };
-  b.addEventListener('click', () => { const on = projects.toggle(id); paint(); announce(on ? `${name} added to my projects` : `${name} removed from my projects`); });
+  b.addEventListener('click', () => { const on = projects.toggle(id, name); paint(); announce(on ? `${name} added to my projects` : `${name} removed from my projects`); });
   paint(); projects.onChange(() => { if (b.isConnected) paint(); });
   return b;
 }

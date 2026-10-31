@@ -136,12 +136,14 @@ export function route(text) {
     if (c === '/exportjson') return { action: 'exportjson', rest: m[2], slash: true };
     if (c === '/clear') return { action: 'clearmemory', rest: m[2], slash: true };
     if (c === '/start') return { action: 'start', rest: m[2], slash: true };
+    for (const [sc, sa] of CART_SLASH) if (c === sc) return { action: sa, rest: m[2], slash: true };
     const a = CMD.get(c);
     if (a === 'ask') return null;
     return { action: a || 'help', rest: m[2], slash: true, unknownSlash: !a };
   }
   const t = raw;
   if (/^(?:help|what can you do|commands?|\?)$/i.test(t)) return { action: 'help', rest: '' };
+  const cart = routeCart(t); if (cart) return cart;
   if (/\b(my projects?|show (?:my )?projects?|saved (?:items|systems))\b/i.test(t)) return { action: 'projects', rest: '' };
   if (/\b(my gaps|unanswered questions|questions you could ?n.t answer)\b/i.test(t)) return { action: 'gaps', rest: '' };
   if (/\b(recent questions|what did i ask|my history)\b/i.test(t)) return { action: 'recent', rest: '' };
@@ -160,6 +162,29 @@ export function route(text) {
   if (CALC_RE.test(t) && (n.area || n.length || n.volume)) return { action: 'calc', rest: t };
   if (SYSTEM_RE.test(t) && /tile|tiling|grout|membrane|waterproof|porcelain|ceramic|mosaic|stone/i.test(t)) return { action: 'system', rest: t };
   if (/^\s*(?:now|ok|okay|and)?\s*(?:work out|calculate)\s+(?:the )?(?:quantities|packs|amounts)\b/i.test(t)) return { action: 'calc', rest: t };
+  return null;
+}
+
+
+// ---- project cart (apply/project-cart): add to, show, change and remove from the one project the advisor and the portal share.
+// Its own block, kept apart from the answer intents below. "soft" phrases (no word like project or cart in them) are only taken when the cart
+// handler finds the product in the project; otherwise the question goes on to the advisor as before.
+const CART_SLASH = [['/cart', 'cartshow'], ['/add', 'cartadd'], ['/remove', 'cartremove'], ['/qty', 'cartqty'], ['/jobpack', 'cartpack']];
+const CART_UNITS = 'packs?|pails?|bags?|cartridges?|carts?|rolls?|litres?|liters?|ltrs?|l|kgs?|kilos?|kilograms?|tubes?|drums?|sachets?|boxes|box|buckets?';
+const IN_CART = '(?:to|into|in|on)\\s+(?:my|the|this|our)\\s+(?:current\\s+)?(?:project|cart|basket|job list|shopping list)\\b(?!\\s+(?:pack|page))';
+const FROM_CART = '(?:from|out of|off)\\s+(?:my|the|this|our)\\s+(?:current\\s+)?(?:project|cart|basket|job list|shopping list)\\b';
+function routeCart(t) {
+  if (PACK_RE.test(t)) return null;
+  if (/\b(?:job pack|enquiry (?:form )?(?:text|copy)|copy for the enquiry)\b/i.test(t) || /^(?:please )?(?:export|download|print)\s+(?:my|the|this)\s+(?:project|cart|basket)\s*$/i.test(t) || /^(?:please )?(?:copy|put)\s+(?:my|the|this)\s+(?:project|cart|basket)\s+(?:for|into|in)\s+(?:the )?enquiry\b/i.test(t)) return { action: 'cartpack', rest: t };
+  if (/\bwhat(?:'s|s| is| do i have| have i got| have i added)?\s+(?:in|on)\s+(?:my|the|this|our)\s+(?:current\s+)?(?:project|cart|basket|job list)s?\b/i.test(t) || /^(?:please )?(?:show|list|view|open|summari[sz]e|recap|read (?:out|back))(?:\s+me)?(?:\s+what(?:'s| is) in)?\s+(?:my|the|this|our)\s+(?:current\s+)?(?:project|cart|basket|job list)\s*[?.!]*$/i.test(t) || /^(?:my|the)\s+(?:cart|basket)\s*[?.!]*$/i.test(t) || /^(?:project|cart)\s+summary\s*[?.!]*$/i.test(t) || /^(?:what have i (?:added|got|saved)|summary of (?:my|the) (?:project|cart))\b/i.test(t)) return { action: 'cartshow', rest: t };
+  if (new RegExp(`^(?:please )?(?:remove|delete|drop|take|get rid of)\\b.*${FROM_CART}`, 'i').test(t)) return { action: 'cartremove', rest: t };
+  if (/^(?:please )?(?:remove|delete)\s+(?!all\b)\S/i.test(t)) return { action: 'cartremove', rest: t, soft: true };
+  if (/^(?:please )?(?:change|update|set|edit|adjust)\s+(?:the\s+)?(?:quantity|qty|amount|number)\b/i.test(t) || new RegExp(`\\b(?:change|update|set|edit|adjust)\\b[^.?!]{0,80}\\b(?:to|=)\\s*\\d+\\s*(?:x\\s*)?(?:${CART_UNITS})?\\b`, 'i').test(t) && !/\b(?:area|m2|sqm|thickness|mm)\b/i.test(t)) return { action: 'cartqty', rest: t, soft: !/\b(quantity|qty|project|cart)\b/i.test(t) };
+  if (/^(?:please )?(?:make|set)\s+(?:it|that|this)\s+(?:to\s+|be\s+)?\d+\b/i.test(t) || /^(?:please )?(?:increase|decrease|reduce|raise|lower)\b[^.?!]*\bby\s+\d+\b/i.test(t)) return { action: 'cartqty', rest: t, soft: true };
+  if (new RegExp(`^(?:please )?(?:add|put|pop|include)\\b.*${IN_CART}`, 'i').test(t)) return { action: 'cartadd', rest: t };
+  if (/^(?:please )?(?:add|put|pop|include)\s+(?:this|that|it|these|those|them|everything|the (?:whole|full|entire|complete) set|the lot|all of (?:it|that|this|them))\s*[?.!]*$/i.test(t)) return { action: 'cartadd', rest: t };
+  if (new RegExp(`^(?:please )?(?:add|put|pop|include)\\s+\\d+(?:[.,]\\d+)?\\s*(?:x\\s*)?(?:${CART_UNITS})\\b`, 'i').test(t)) return { action: 'cartadd', rest: t };
+  if (/^(?:please )?add\s+(?:\d+(?:[.,]\d+)?\s*(?:x\s*|of\s+)?)?[a-z]/i.test(t) && !/\b(?:to|into)\s+(?:the\s+)?(?:mix|water|concrete|screed|grout|primer|substrate|slab|floor|wall)\b/i.test(t) && t.split(/\s+/).length <= 14) return { action: 'cartadd', rest: t, soft: true };
   return null;
 }
 

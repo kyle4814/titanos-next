@@ -1,18 +1,21 @@
-// "My projects": a list of products with quantities, kept in this browser only (localStorage), never sent anywhere.
-import { store } from './util.js';
-const KEY = 'sika-demo-210c0c-projects';
-let items = store.get(KEY, []);
-if (!Array.isArray(items)) items = [];
-const subs = new Set();
-const save = () => { store.set(KEY, items); subs.forEach((f) => f()); };
+// "My projects": the products for a job with their quantities, kept in this browser only (localStorage), never sent anywhere.
+// This is the portal's window on the ONE project store the advisor also uses (lib/projectstore.js): products the advisor adds appear here with
+// where they came from, and edits made here are seen by the advisor on its next turn. The old keys are read once by the store and left alone.
+import { createProjectStore, sharedStorage, onProjectChange, announceChange, KEY, DEFAULT_PROJECT } from './projectstore.js';
+export { UNITS } from './projectstore.js';
+
+export const projectStore = createProjectStore(sharedStorage(), null, { origin: 'portal' });
+try { window.addEventListener('storage', (e) => { if (e.key === null || e.key === KEY) { projectStore.list(); announceChange('other'); } }); } catch { /* not in a page */ }
+
 export const projects = {
-  list: () => items.slice(),
-  count: () => items.length,
-  has: (id) => items.some((i) => i.id === id),
-  add(id) { if (!projects.has(id)) { items.push({ id, qty: 1, unit: 'pack', note: '' }); save(); } },
-  remove(id) { items = items.filter((i) => i.id !== id); save(); },
-  set(id, patch) { const it = items.find((i) => i.id === id); if (it) { Object.assign(it, patch); save(); } },
-  clear() { items = []; save(); },
-  toggle(id) { projects.has(id) ? projects.remove(id) : projects.add(id); return projects.has(id); },
-  onChange(fn) { subs.add(fn); return () => subs.delete(fn); },
+  list: () => projectStore.items(),
+  count: () => projectStore.itemCount(),
+  has: (id) => projectStore.hasItem(id),
+  add(id, fields) { if (!projects.has(id)) projectStore.addItem({ id, qty: 1, unit: 'pack', ...fields }); },
+  remove(id) { projectStore.removeItem(id); },
+  set(id, patch) { projectStore.setItem(id, patch); },
+  clear() { projectStore.clearItems(); },
+  toggle(id, name) { projects.has(id) ? projects.remove(id) : projects.add(id, name ? { name } : undefined); return projects.has(id); },
+  onChange(fn) { return onProjectChange(fn); },
 };
+export { DEFAULT_PROJECT };
