@@ -1,0 +1,8 @@
+/* pwa.css (wave 2): the polite "add to home screen" card. */
+.install-card{position:fixed;left:12px;right:12px;bottom:76px;z-index:60;max-width:26rem;background:#fff;color:#000;border:2px solid #3c3c3c;box-shadow:0 3px 10px rgba(0,0,0,.3);padding:12px 14px}
+@media (min-width:64em){.install-card{left:20px;right:auto;bottom:20px}}
+.install-card p{margin:0 0 .6rem;font-size:.95rem}
+.install-card .ic-row{display:flex;gap:8px;flex-wrap:wrap}
+.install-card button{min-height:44px;padding:.4rem .9rem;border:2px solid #3c3c3c;background:#fff;color:#000;font:inherit;cursor:pointer}
+.install-card button.ic-yes{background:#ffc510}
+@media print{.install-card{display:none!important}}
