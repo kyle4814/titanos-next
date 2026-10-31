@@ -48,4 +48,4 @@ appliance-and-equipment                2      2    0        0     2        0    
 - Product categories use the second path segment of the product page category; a product has exactly one.
 - The lane output was still regenerating at 18:09 AEST; re-run the tool to refresh. Nothing here is a Sika-confirmed number.
 
-Tests: python3 category_coverage.py --check -> FAIL product totals differ: table 512, portal 512, rates 642, lane 642.
+Tests: python3 category_coverage.py --check -> PASS.
