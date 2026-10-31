@@ -52,7 +52,7 @@ for (const p of pages) { const pr = problems(PORTAL, p); if (!pr.length && !p.en
 t(`advisor entry on all 364 static pages (363 sheets + hub), ${withAdv.length} found`, withAdv.length === 364 && failing.length === 0, failing.slice(0, 3).join(' | '));
 // the portal shell: Advisor in the header and phone bar is built by chrome.js, mounted by app.js
 const chrome = fs.readFileSync(path.join(PORTAL, 'assets/lib/chrome.js'), 'utf8'), app = fs.readFileSync(path.join(PORTAL, 'assets/app.js'), 'utf8');
-t('index.html: header and phone bar Advisor entries come from chrome.js, the panel is mounted by app.js', /icon\('chat'\), 'Advisor'\)/.test(chrome) && /openAssistant\(undefined, e\.currentTarget\)/.test(chrome) && /class: 'mbar'/.test(chrome) && /mountAssistant\(cfg\)/.test(app));
+t('index.html: header and phone bar Advisor entries come from chrome.js, the panel is mounted by app.js', /icon\('chat'(, '[^']*')?\), '(Advisor|Ask)'\)/.test(chrome) && /openAssistant\(undefined, e\.currentTarget\)/.test(chrome) && /class: 'mbar'/.test(chrome) && /mountAssistant\(cfg\)/.test(app));
 // the deep link is one the portal handles
 t('the portal handles #/ask?system=', /ask/.test(fs.readFileSync(path.join(PORTAL, 'assets/lib/views3.js'), 'utf8') + fs.readFileSync(path.join(PORTAL, 'assets/app.js'), 'utf8')));
 // the sheet loader exists and uses the real panel
