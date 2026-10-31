@@ -1,5 +1,6 @@
 // bank_src.mjs: builds bank.json, the question bank for answer coverage (hand-written questions plus questions derived from the published data).
 // Every question carries a persona, a category and an expected-answer type. Derived questions take their expected text from the data, never from the assistant.
+// After this script, run bank2a_src.mjs: it appends the wave 2 lane A rows (split w2a) and corrects the wave 1 rows whose "not published" expectation the data contradicts.
 //   node demo-tests/sika-brain/coverage/bank_src.mjs     writes bank.json next to this file
 // Types: product, describe, best, list, compare, compat, attr, rate, time, calc, doc, business, nodata, oos
 // exp.allowed / exp.deny are selectors over products: c:<category substring>, n:<regex on id and name>, i:<id>

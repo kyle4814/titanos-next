@@ -7,6 +7,7 @@ import { makeBrain } from './harness.mjs';
 import { cardText } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 import { checkAnswer } from './props.mjs';
 import { judge, makeSelectors } from './coverage/judge.mjs';
+import { triage } from './coverage/triage_w2a.mjs';
 import { VAGUE, NOUN, TERMS } from '../../public/demo/sika-210c0c/assets/brain/vague.js';
 import { applySlang, SLANG } from '../../public/demo/sika-210c0c/assets/brain/slang.js';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -126,9 +127,14 @@ for (const q of ['what is the weather today', 'is mapei better than davco', 'who
   t(`off-topic set (${oos.length} questions): no published answer`, leaks.length === 0, leaks.join(' | ')); }
 // ---- the bank gate
 const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json', 'wild2.json', 'jobcompare.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
-const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
-for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel); if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
-t(`bank (${bank.length} questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));
-t('bank: ANSWERED plus HONEST-NO-DATA at least 95%', (answered + honest) / bank.length >= 0.95, ((answered + honest) / bank.length).toFixed(3));
-t('bank: property checks (no invented number, no price, no dash, no compliance claim) find 0 violations', prop === 0, prop);
+const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0, nBase = 0; const w2a = [];
+for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel);
+  if (it.split === 'w2a') { if (j.cls === 'WRONG') { const tr = triage({ id: it.id, type: it.type, messy: it.messy || '', cls: j.cls, why: j.why, first: a.cards[0] ? a.cards[0].type + ':' + (a.cards[0].product ? a.cards[0].product.id : a.cards[0].title) : '', text: a.cards.map(cardText).join(' | ') }); if (!tr) w2a.push(it.id + ' ' + it.q + ' :: ' + j.why); } }
+  else { nBase++; if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; }
+  { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
+// the original wave 1 questions keep their original bars (unchanged); the wave 2 lane A rows (split w2a, the enlarged bank) are held to: every judged WRONG is triaged (coverage/triage_w2a.mjs) and the property checks hold over all of them
+t(`bank (${nBase} wave 1 questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));
+t('bank: ANSWERED plus HONEST-NO-DATA at least 95% (wave 1 questions)', (answered + honest) / nBase >= 0.95, ((answered + honest) / nBase).toFixed(3));
+t(`enlarged bank (${bank.length - nBase} wave 2 lane A rows): every judged WRONG is triaged (BRAIN-WRONG, MISSING or BANK-FIX with a note)`, w2a.length === 0, w2a.join(' | '));
+t(`bank: property checks (no invented number, no price, no dash, no compliance claim) find 0 violations over all ${bank.length} rows`, prop === 0, prop);
 console.log(`unit_coverage: ${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);

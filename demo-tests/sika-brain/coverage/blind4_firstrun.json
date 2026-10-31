@@ -1,0 +1,12 @@
+{
+ "what": "blind4 first run, before any triage or expectation correction; set of 221 rows (the final file has 223: same questions, messy rewrites reselected, 5 selectors widened with a data citation)",
+ "at": "2026-10-31T22:49:08.343Z",
+ "n": 221,
+ "counts": {
+  "ANSWERED": 166,
+  "WRONG": 26,
+  "UNHANDLED": 17,
+  "HONEST-NO-DATA": 12
+ },
+ "pass_answered_plus_honest": 80.5
+}

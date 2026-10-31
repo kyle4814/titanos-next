@@ -73,8 +73,14 @@ export function judge(item, a, sel) {
     if (!list.length) return allUnknown || cards.some((c) => c.type === 'choose') || !real.length ? GEN('UNHANDLED', 'no products named') : GEN('UNHANDLED', 'no product');
     const bad = list.filter((id) => !sel.allowed(exp, id));
     if (bad.length) return GEN('WRONG', 'outside the documented fit: ' + bad.slice(0, 2).join(','));
-    if (t === 'list') return list.length >= Math.min(exp.min || 3, 4) ? GEN('ANSWERED', list.length + ' listed') : GEN('UNHANDLED', 'only ' + list.length + ' listed');
+    if (t === 'list') { const inCore = exp.core ? list.filter((id) => sel.allowed({ allowed: exp.core }, id)) : list; return inCore.length >= Math.min(exp.min || 3, 4) ? GEN('ANSWERED', inCore.length + ' listed' + (exp.core ? ' from the category' : '')) : GEN('UNHANDLED', 'only ' + inCore.length + ' listed' + (exp.core ? ' from the category' : '')); }
     return real.some(cited) ? GEN('ANSWERED', list.length + ' products with sentences') : GEN('UNHANDLED', 'not cited');
+  }
+  if (t === 'system') { // a published tiling system sheet: the answer must link the right slug; a link to a different system is WRONG
+    const links = cards.flatMap((c) => (c.links || []).map((l) => l.url || '')); const sysLinks = links.filter((u) => /\/systems\/|\b[a-z-]+-on-[a-z-]+-(internal|external)-/.test(u));
+    if (links.some((u) => u.includes(exp.slug))) return GEN('ANSWERED', 'system sheet linked');
+    if (sysLinks.length) return GEN('WRONG', 'other system: ' + sysLinks[0]);
+    return allUnknown ? GEN('UNHANDLED', 'declined but the system sheet exists') : GEN('UNHANDLED', 'no system sheet');
   }
   if (t === 'business') {
     const rx = new RegExp(exp.url, 'i'); const hit = urls(real).some((u) => rx.test(u)) && (!exp.must || text.includes(norm(exp.must)));

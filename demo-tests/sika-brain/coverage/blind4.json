@@ -1,0 +1,3396 @@
+[
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "adhesive for 900x900 porcelain going on a bathroom floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1j6io6k"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "which glue for stone tiles on a feature wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d066dpyg"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "tile adhesive that stays workable longer in summer heat",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1hibe09"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "light weight adehsive for big tiles on a ceiling",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d0n0sykl"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "what do i fix mosaics 2 a curved wall with",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "sms",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:sms",
+  "id": "d108fequ"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "whats the go with tiling over a fibre cement sheet floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0lvpglm"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "white adhesive for glass tiles so the colour doesnt show through",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1siegk1"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "hi glue for porcelain pavers on an outdoor patio",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1tyrje4"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "flexi adhesive fr big stuff on a deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d106zflr"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "adhesve fr 600 x 600 on the laundry floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0yfphe0"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "wat glue fr tilin ova existin tyles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1s10mgj"
+ },
+ {
+  "persona": "tiler",
+  "category": "tile",
+  "q": "im doing a splashback what do i stick it with",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d02bfafm"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "what grout would you use in a shower",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0yy4fkn"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "epoxy grout for a commercial kitchen floor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0nlh1tb"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "grout that wont stain around a bench top",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0meyyfl"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "righto wide joint grout 10mm for floor tiles ta",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d002vp5g"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "grouting fr da pool tyles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d00xy8ju"
+ },
+ {
+  "persona": "tiler",
+  "category": "grout",
+  "q": "snded or unsanded grout for a thin joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d0hr47o5"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "um tanking under tiles in a bathroom",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1oricf7"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "liquid membrane for a shower base",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1o9ocdt"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "what do i put on the shower floor before the tiles go on",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:flooring/cement-levellingsystems",
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0wv6s6y"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "tape for the corners in a wet room",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0xe3l6w"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "wetarea membrain fast drying",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1ppopv4"
+ },
+ {
+  "persona": "tiler",
+  "category": "wet area",
+  "q": "bathroom reno waterproof the floors n walls what do i buy",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0e28nqz"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "silicone for the bath and shower edges",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0ngjl7t"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "mould resistant sealant for the kitchen sink",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d046u204"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "sealnt fr da toilet",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1vj2doq"
+ },
+ {
+  "persona": "tiler",
+  "category": "sealant",
+  "q": "what do i caulk btween the tile and the bath",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1lmfakd"
+ },
+ {
+  "persona": "tiler",
+  "category": "care",
+  "q": "cleaner for dirty grout lines",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1nvxyii"
+ },
+ {
+  "persona": "tiler",
+  "category": "care",
+  "q": "sealer 2 protect new grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems"
+   ]
+  },
+  "messy": "sms",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:sms",
+  "id": "d1mzvopu"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "yeah so smoothing stuff for an old concrete floor before vinyl planks",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d0ysx6jq"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "self levelling over a timber subfloor",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1yg4a5f"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "how do i fill a 30mm low spot in the slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1jm6r6s"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "fast drying screed for a shop that opens monday",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1h646yo"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "levelin compond fr da garage",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems",
+    "c:flooring"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d18ivcic"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "feather edge patch for a doorway ramp",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0og0tuo"
+ },
+ {
+  "persona": "builder",
+  "category": "screed",
+  "q": "primer to go under the leveller",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems",
+    "c:tile-stone-installationsystems/primers-additives",
+    "c:flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0mn4oqr"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "glue to fix a timber floor down",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1155dxa"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "liquid nails type adhsv for pine battens",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d15bqn8p"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "cosntruction adhesive that grabs straight away",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d01z9xqj"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "wood floor adhesive for engineered boards",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1ugce1r"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "gluin skirtins up tonite wat do i grab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1q887m7"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "mirror glue",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1k8sddj"
+ },
+ {
+  "persona": "builder",
+  "category": "adhesive",
+  "q": "contact adhsv for laminate",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d0b5f1yg"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "caulk for expansion joints in a car park",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:flooring"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:slang",
+  "id": "d0l6btx2"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "ok so window frame sealant that can be painted thx",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1y9s93n"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "foam to fill gaps around door frames",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0pfvlge"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "fire rated sealant for a service penetration",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0toxq9v"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "gtter sealant",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1var55g"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "backer rod for a 20mm joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0hh5k2c"
+ },
+ {
+  "persona": "builder",
+  "category": "sealant",
+  "q": "sealent fr cladin joints",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d19sjis5"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "repair mortar for a spalled concrete balcony edge",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0p3mqaq"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "fix the cracked concrete step",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:grouts-anchoring",
+    "c:flooring/cement-levellingsystems",
+    "c:sealants-adhesives",
+    "c:flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0912y8n"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "rust protection for exposed reo",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:corrosion-inhibitors"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0tf8w9r"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "bonding agent for new concrete on old",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:concrete/"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1q60ojd"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "epoxy crack injection for a basement wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:concrete-repair-protection",
+    "c:structural-strengthening",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1fjq3zu"
+ },
+ {
+  "persona": "builder",
+  "category": "repair",
+  "q": "concrete patchin material",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1jmeli0"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "chmical anchor for threaded rod in concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d05geuad"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "yeah so grout under a steel base plate thanks",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d0pd1rt3"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "high strength grout for precast columns",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1hmy1tv"
+ },
+ {
+  "persona": "builder",
+  "category": "anchor",
+  "q": "anchorin resin in a cracked slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d17k7e0n"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "liquid roof coating for a leaking tin roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1vnnsf8"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "membrane for a flat roof over a bedroom",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1xja6fs"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "torch on membrane for a garage roof",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1qu2ysy"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "roof leek fix",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d087xs69"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "green roof drinage layer",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d04qz5t2"
+ },
+ {
+  "persona": "builder",
+  "category": "roof",
+  "q": "um pedestal support fr pavers on a roof deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:landscape-buildingproducts"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d0k3lwj9"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "epoxy floor for a home garage",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0qfr4so"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "non slip floor coating for a loading dock",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1neu4fk"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "floor paint for a workshop",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0o5y82m"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "antistatic floor for an electronics lab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d10spxv1"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "poly urethane flooring with flex for a car deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0ne8yh1"
+ },
+ {
+  "persona": "builder",
+  "category": "floor",
+  "q": "floor jointing for a warehouse slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0juywm8"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "sorry to bug you superplasticiser fr a flowing mix",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d02yh3p9"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "retarder for a hot day pour",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0yjs5o7"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "waterproofing admixture for a basement slab mix",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/",
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0c7yd4o"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "quick one steel fibres fr a slab on ground",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1m6ufsr"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "curing compound fr a new driveway",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:slang",
+  "id": "d0u3ydrl"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "form release agent",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d014x6gf"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "accelerator for a cold weather pour",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1r3r0sw"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "water reducer wat should i dose",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1l8voct"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "additiv fr consrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0fakq81"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "air entraining for a freeze thaw exposure",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1ht1vjy"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "shtcrete additive",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/",
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1wsxxkw"
+ },
+ {
+  "persona": "concreter",
+  "category": "concrete",
+  "q": "colour hardener for a decorative slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete/",
+    "c:concrete-repair-protection",
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1mr2b70"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "below grund waterproofing for a basement wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:subsoil-drainage"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1e2o7dn"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "waterstop for a construction joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0x2agtp"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "bentonite sheet for a retaining wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:subsoil-drainage"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d01v7fwf"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "balcony waterproofing under tiles",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d052wq45"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "tanking a planter box",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0a9uljn"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "pvc sheet membrain for a tunnel",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d11d6qoy"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "spray applied membrane for a bridge deck",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0b72sq6"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "njection resin to stop a leak in a car park wall",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1f3jza4"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "tankin fr da basment",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:subsoil-drainage"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d09to5lv"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "waterproof",
+  "q": "roof terrace waterprofoing with pavers on top",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing",
+    "c:landscape-buildingproducts/paving-decking-support"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d0a84jux"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthen",
+  "q": "carbon fibre plate for strengthening a slab",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0neaxoy"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthen",
+  "q": "wrap a column with fabric",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d17jchgt"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthen",
+  "q": "structural epoxy to bond plates to concrete",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening",
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d10xy82e"
+ },
+ {
+  "persona": "specifier",
+  "category": "strengthen",
+  "q": "shear strngthening of a beam",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d09oc7rd"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "low voc waterproofing membrane",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing",
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d08oihmp"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "protective coating for a concrete wall facing the weather",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:flooring/resin-flooring"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0gpc7av"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "anti carbonation coating",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1592gne"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "silane for a bridge pier",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0zmaj2o"
+ },
+ {
+  "persona": "specifier",
+  "category": "spec",
+  "q": "wind trbine base grout",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1sqa506"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "marine",
+  "q": "bedding compound for a deck hatch on a boat",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0bko47g"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "marine",
+  "q": "ok so sealing teak decking seams mate",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1rf5xjz"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "marine",
+  "q": "bond a window into a hull",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/marine",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0ac0jl9"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "windscreen urethane for a ute",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:industry/transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1bzd5mx"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "body panel adhesive for a repair",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:industry/transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0ar3m1n"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "auto",
+  "q": "seam sealer for a floor pan",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:industry/transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d07fyp9a"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "transport",
+  "q": "salant for a bus roof joint",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:industry/automotive",
+    "c:industry/transportation",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d00tp0lf"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "building",
+  "q": "yeah so structural silicone for a glass facade pls",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives",
+    "c:industry/building-components"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d0u2o0t8"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "my shwer is leaking from the corner what fixes it",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:sealants-adhesives",
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d06wzzya"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "what do i use to seal around the bathtub",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1iv0zj4"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "glue for a loose tile",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0pf6y3u"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "whats good to patch a crack in the cocnrete path",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection",
+    "c:sealants-adhesives",
+    "c:flooring/cement-levellingsystems",
+    "c:flooring"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d0lc3e2x"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "deck waterproofing before tiling the outdoor area",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au",
+    "c:waterproofing",
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea",
+    "c:roofing",
+    "c:waterproofing"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0izjre5"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "sealer 2 stop my tiles from getting grimy",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "sms",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:sms",
+  "id": "d19cu35b"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "cant find the right glue fr da bathroom shelf",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1noqggj"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "diy",
+  "q": "my floor is uneven can i fix it myself",
+  "type": "best",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d04h28tf"
+ },
+ {
+  "persona": "tiler",
+  "category": "product",
+  "q": "hi tell me about sikatile 350 pro maxset",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-350-promaxset"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products.json sikatile-350-promaxset | reworded messy:voice",
+  "id": "d1804kq6"
+ },
+ {
+  "persona": "tiler",
+  "category": "product",
+  "q": "whats davco ceramaflex",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-ceramaflex"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products.json davco-ceramaflex | reworded messy:slang",
+  "id": "d1j6mucs"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "siakflex pro 3 purform what is it for",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-pro-3-purform"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products.json sikaflex-pro-3-purform | reworded messy:typo",
+  "id": "d0bxgs5j"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "hey mate info on sika boom g",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-boom-g"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products.json sika-boom-g | reworded messy:voice",
+  "id": "d0yac5j0"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sikabond techgrip",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikabond-techgrip"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikabond-techgrip",
+  "id": "d1qfs4zk"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product",
+  "q": "sikalastic 1k what does it do",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikalastic-1k"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikalastic-1k",
+  "id": "d0wvlaxm"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "product",
+  "q": "sikaproof bentonite sheet",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaproof-bentonite"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikaproof-bentonite",
+  "id": "d0s74310"
+ },
+ {
+  "persona": "concreter",
+  "category": "product",
+  "q": "what is sikagrout 212 hp",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikagrout-212-hpau"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikagrout-212-hpau",
+  "id": "d0wtb9et"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sikadur 30 use",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikadur-30"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikadur-30",
+  "id": "d0jnuyg0"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sika anchorfix 3030",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-anchorfix-3030"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sika-anchorfix-3030",
+  "id": "d1x5kdln"
+ },
+ {
+  "persona": "tiler",
+  "category": "product",
+  "q": "davco k10 rapid",
+  "type": "product",
+  "exp": {
+   "products": [
+    "davco-k10-rapid"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products.json davco-k10-rapid",
+  "id": "d01g4ybg"
+ },
+ {
+  "persona": "tiler",
+  "category": "product",
+  "q": "sikatile 440 opticure",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikatile-440-opti-cure"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products.json sikatile-440-opti-cure",
+  "id": "d0004ulq"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sikaflex 118 extreme grab",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-118-extremegrab"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sikaflex-118-extremegrab",
+  "id": "d0w3lowe"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sika showerbond",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sika-showerbond"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json sika-showerbond",
+  "id": "d1op4smc"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "lanko 145 floor leveller what is it",
+  "type": "product",
+  "exp": {
+   "products": [
+    "lanko-145-floor-leveller"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json lanko-145-floor-leveller",
+  "id": "d18nk9kg"
+ },
+ {
+  "persona": "builder",
+  "category": "product",
+  "q": "sikaflex pro plus",
+  "type": "product",
+  "exp": {
+   "products": [
+    "sikaflex-pro-plus"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products.json sikaflex-pro-plus",
+  "id": "d05sl1qb"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "whats the shelf life of sikaflex pro plus",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "label": "/^shelf life/i",
+   "contains": "Sikaflex PRO+ has a shelf life of 15 months from the date of",
+   "has": true
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products shard sikaflex-pro-plus d.sec \"Shelf life\" | reworded messy:slang",
+  "id": "d12ua20t"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "how long can i store sika shwerbond",
+  "type": "attr",
+  "exp": {
+   "product": "sika-showerbond",
+   "label": "/^shelf life/i",
+   "contains": "Eighteen (18) months when stored as stated.",
+   "has": true
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products shard sika-showerbond d.sec \"Shelf life\" | reworded messy:typo",
+  "id": "d1n4qz3q"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "what are the storage conditions for lanko 145",
+  "type": "attr",
+  "exp": {
+   "product": "lanko-145-floor-leveller",
+   "label": "/storage/i",
+   "contains": "Bags must be stored off the floor in dry cool conditions out",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard lanko-145-floor-leveller d.sec \"Storage conditions\"",
+  "id": "d1ohk88x"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "movement capability of sikaseal kitchen n bathroom",
+  "type": "attr",
+  "exp": {
+   "product": "sikaseal-kitchenandbathroom",
+   "label": "/movement/i",
+   "contains": "Translucent | ±25% Colours | ±50%",
+   "has": true
+  },
+  "messy": "sms",
+  "split": "blind4",
+  "src": "products shard sikaseal-kitchenandbathroom d.sec \"Movement capability\" | reworded messy:sms",
+  "id": "d1b503mt"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "shore a hardness of sikaflex pro plus",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "label": "/shore a/i",
+   "contains": "28 approx. (after 28 days) | (ISO 868)",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikaflex-pro-plus d.sec \"Shore A hardness\"",
+  "id": "d1ecc5q6"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "what is the compressive strength of sikadur 30",
+  "type": "attr",
+  "exp": {
+   "product": "sikadur-30",
+   "label": "/compressive strength/i",
+   "contains": "Curing Time | Curing Temperature +10 °C | +35 °C 12 hours | ",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikadur-30 d.sec \"Compressive strength\"",
+  "id": "d10v31s8"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "tensile strength sikabond techgrip",
+  "type": "attr",
+  "exp": {
+   "product": "sikabond-techgrip",
+   "label": "/tensile strength/i",
+   "contains": "~3030kpa (Test Substrate - Timber: End grain to end grain)",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikabond-techgrip d.sec \"Tensile strength\"",
+  "id": "d0xlmucb"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "righto voc content of sikatile 110 secure proof",
+  "type": "attr",
+  "exp": {
+   "product": "sikatile-110-secureproof",
+   "label": "/voc|volatile/i",
+   "contains": "62g/L (SCAQMD method 304-91)",
+   "has": true
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products shard sikatile-110-secureproof d.sec \"Volatile organic compound (VOC) content\" | reworded messy:voice",
+  "id": "d1p4m9k2"
+ },
+ {
+  "persona": "builder",
+  "category": "attr",
+  "q": "what thickness can lanko 145 be laid at",
+  "type": "attr",
+  "exp": {
+   "product": "lanko-145-floor-leveller",
+   "label": "/layer thickness/i",
+   "contains": "3 - 75mm lifts",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard lanko-145-floor-leveller d.sec \"Layer Thickness\"",
+  "id": "d18o1230"
+ },
+ {
+  "persona": "builder",
+  "category": "attr",
+  "q": "righto layer thickness sikagrout 212 hp",
+  "type": "attr",
+  "exp": {
+   "product": "sikagrout-212-hpau",
+   "label": "/layer thickness/i",
+   "contains": "10mm - 100mm",
+   "has": true
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products shard sikagrout-212-hpau d.sec \"Layer thickness\" | reworded messy:voice",
+  "id": "d1fsst42"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "density of sikaflex 118 extreme grab",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-118-extremegrab",
+   "label": "/^density/i",
+   "contains": "~1.40 kg/l | (ISO 1183-1)",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikaflex-118-extremegrab d.sec \"Density\"",
+  "id": "d143trm5"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "service temperature sikaseal kitchen and bathroom",
+  "type": "attr",
+  "exp": {
+   "product": "sikaseal-kitchenandbathroom",
+   "label": "/service temperature/i",
+   "contains": "-40°c to +150°c",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikaseal-kitchenandbathroom d.sec \"Service temperature\"",
+  "id": "d1ihbr6w"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "davco k10 plus elongation",
+  "type": "attr",
+  "exp": {
+   "product": "davco-k10-plus",
+   "label": "/elongation/i",
+   "contains": ">500%",
+   "has": true
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products shard davco-k10-plus d.sec \"Elongation\"",
+  "id": "d1baeyhk"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "chemical resistance of sikasil pool",
+  "type": "attr",
+  "exp": {
+   "product": "sikasil-pool",
+   "label": "/chemical resistance/i",
+   "contains": "Good resistance to chlorinated water and common swimming poo",
+   "has": true
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikasil-pool d.sec \"Chemical resistance\"",
+  "id": "d00zn6y3"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "whats the thermal codnuctivity of sika boom g",
+  "type": "attr",
+  "exp": {
+   "product": "sika-boom-g",
+   "label": "/thermal conductivity/i",
+   "contains": "~0.033 W/mK | (KS M 3809 : 2021)",
+   "has": true
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products shard sika-boom-g d.sec \"Thermal conductivity\" | reworded messy:typo",
+  "id": "d19nv6rs"
+ },
+ {
+  "persona": "specifier",
+  "category": "attr",
+  "q": "crack brdging ability of sikalastic 1k",
+  "type": "attr",
+  "exp": {
+   "product": "sikalastic-1k",
+   "label": "/crack bridging/i",
+   "contains": "> 0,50 mm (Class A 3, +23 °C) 1 ≥ 0,75 mm (+23 °C) 2 ≥ 0,75 ",
+   "has": true
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products shard sikalastic-1k d.sec \"Crack bridging ability\" | reworded messy:typo",
+  "id": "d0l8j3ys"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "attr",
+  "q": "shelf lyfe of davco k10 plus",
+  "type": "attr",
+  "exp": {
+   "product": "davco-k10-plus",
+   "label": "/^shelf life/i",
+   "contains": "12 months from date of manufacture",
+   "has": true
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products shard davco-k10-plus d.sec \"Shelf life\"",
+  "id": "d1k0lv4v"
+ },
+ {
+  "persona": "builder",
+  "category": "attr",
+  "q": "quick one sag flow of sika anchorfix 3030",
+  "type": "attr",
+  "exp": {
+   "product": "sika-anchorfix-3030",
+   "label": "/sag flow/i",
+   "contains": "Non-sag, including overhead",
+   "has": true
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products shard sika-anchorfix-3030 d.sec \"Sag flow\" | reworded messy:voice",
+  "id": "d0l116gj"
+ },
+ {
+  "persona": "specifier",
+  "category": "nodata",
+  "q": "what is the fire rating of sikabond techgrip",
+  "type": "attr",
+  "exp": {
+   "product": "sikabond-techgrip",
+   "label": "/fire rat|reaction to fire/i",
+   "has": false
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products shard sikabond-techgrip: no field matching /fire rat|reaction to fire/i in d.sec, d.a, d.us, tm",
+  "id": "d0t1szzf"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "nodata",
+  "q": "cmpressive strength of sikaflex pro plus",
+  "type": "attr",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "label": "/compressive/i",
+   "has": false
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products shard sikaflex-pro-plus: no field matching /compressive/i in d.sec, d.a, d.us, tm | reworded messy:typo",
+  "id": "d07dnar3"
+ },
+ {
+  "persona": "tiler",
+  "category": "time",
+  "q": "pot life of sikatile 366 pro flex",
+  "type": "time",
+  "exp": {
+   "product": "sikatile-366-proflex",
+   "key": "pot_life"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikatile-366-proflex tm.pot_life",
+  "id": "d0581fgm"
+ },
+ {
+  "persona": "tiler",
+  "category": "time",
+  "q": "open time skatile 366",
+  "type": "time",
+  "exp": {
+   "product": "sikatile-366-proflex",
+   "key": "open_time"
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "shard sikatile-366-proflex tm.open_time | reworded messy:typo",
+  "id": "d0h9gywv"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "how long does sikaflex pro plus take to skin",
+  "type": "time",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "key": "skin_tack_times"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikaflex-pro-plus tm.skin_tack_times",
+  "id": "d1pb6l27"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "how long before i can walk on sikafloor 263 sl recoat times",
+  "type": "time",
+  "exp": {
+   "product": "sikafloor-263-sl",
+   "key": "recoat_times"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikafloor-263-sl tm.recoat_times",
+  "id": "d1g4r1vh"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "tack free time sika boom g",
+  "type": "time",
+  "exp": {
+   "product": "sika-boom-g",
+   "key": "skin_tack_times"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sika-boom-g tm.skin_tack_times",
+  "id": "d16f4tud"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "time",
+  "q": "how long between coats of sikalastic 1k",
+  "type": "time",
+  "exp": {
+   "product": "sikalastic-1k",
+   "key": "recoat_times"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikalastic-1k tm.recoat_times",
+  "id": "d0b7qjdy"
+ },
+ {
+  "persona": "builder",
+  "category": "time",
+  "q": "lanko 145 pot life",
+  "type": "time",
+  "exp": {
+   "product": "lanko-145-floor-leveller",
+   "key": "pot_life"
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "shard lanko-145-floor-leveller tm.pot_life",
+  "id": "d0g055up"
+ },
+ {
+  "persona": "tiler",
+  "category": "time",
+  "q": "cure time for davco k10 plus",
+  "type": "time",
+  "exp": {
+   "product": "davco-k10-plus",
+   "key": "cure_times"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard davco-k10-plus tm.cure_times",
+  "id": "d0fh19y1"
+ },
+ {
+  "persona": "tiler",
+  "category": "rate",
+  "q": "how much does sikatile 110 secure proof cover",
+  "type": "rate",
+  "exp": {
+   "product": "sikatile-110-secureproof"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikatile-110-secureproof r.facts.consumption",
+  "id": "d1h491bh"
+ },
+ {
+  "persona": "builder",
+  "category": "rate",
+  "q": "coevrage of sikaflex 118 extreme grab",
+  "type": "rate",
+  "exp": {
+   "product": "sikaflex-118-extremegrab"
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "shard sikaflex-118-extremegrab r.facts.consumption | reworded messy:typo",
+  "id": "d1kistcd"
+ },
+ {
+  "persona": "concreter",
+  "category": "rate",
+  "q": "sikagrout 212 hp consumption per bag",
+  "type": "rate",
+  "exp": {
+   "product": "sikagrout-212-hpau"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikagrout-212-hpau r.facts.consumption",
+  "id": "d1nhid05"
+ },
+ {
+  "persona": "tiler",
+  "category": "rate",
+  "q": "davco k10 plus coverage",
+  "type": "rate",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "shard davco-k10-plus r.facts.consumption",
+  "id": "d0bvbla8"
+ },
+ {
+  "persona": "tiler",
+  "category": "calc",
+  "q": "how much sikatile 110 secure proof for 12 m2",
+  "type": "calc",
+  "exp": {
+   "product": "sikatile-110-secureproof"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikatile-110-secureproof r.facts.consumption calc_ready",
+  "id": "d1pzi10i"
+ },
+ {
+  "persona": "builder",
+  "category": "calc",
+  "q": "sikagrout 212 hp fr 3 square metres",
+  "type": "calc",
+  "exp": {
+   "product": "sikagrout-212-hpau"
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "shard sikagrout-212-hpau r.facts.consumption calc_ready | reworded messy:slang",
+  "id": "d00g3ues"
+ },
+ {
+  "persona": "tiler",
+  "category": "calc",
+  "q": "davco k10 plus for a 6m2 shower",
+  "type": "calc",
+  "exp": {
+   "product": "davco-k10-plus"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard davco-k10-plus r.facts.consumption calc_ready",
+  "id": "d0uf19iv"
+ },
+ {
+  "persona": "specifier",
+  "category": "doc",
+  "q": "data sheet for sikaflex pro plus",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "docType": "product_data_sheet"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikaflex-pro-plus dc type product_data_sheet",
+  "id": "d08lmnqp"
+ },
+ {
+  "persona": "specifier",
+  "category": "doc",
+  "q": "sds for sikabond techgrip",
+  "type": "doc",
+  "exp": {
+   "product": "sikabond-techgrip",
+   "docType": "product_data_sheet"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikabond-techgrip dc type product_data_sheet",
+  "id": "d1hcvu0n"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "doc",
+  "q": "safety data sheet sika showerbond",
+  "type": "doc",
+  "exp": {
+   "product": "sika-showerbond",
+   "docType": "safety_data_sheet"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sika-showerbond dc type safety_data_sheet",
+  "id": "d1iwh80d"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "doc",
+  "q": "msds davco k10 plus",
+  "type": "doc",
+  "exp": {
+   "product": "davco-k10-plus",
+   "docType": "safety_data_sheet"
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "shard davco-k10-plus dc type safety_data_sheet",
+  "id": "d15e6273"
+ },
+ {
+  "persona": "specifier",
+  "category": "doc",
+  "q": "tds fr sikadur 30",
+  "type": "doc",
+  "exp": {
+   "product": "sikadur-30",
+   "docType": "product_data_sheet"
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "shard sikadur-30 dc type product_data_sheet | reworded messy:slang",
+  "id": "d1dy8p19"
+ },
+ {
+  "persona": "specifier",
+  "category": "doc",
+  "q": "brochure for sikafloor 263 sl",
+  "type": "doc",
+  "exp": {
+   "product": "sikafloor-263-sl",
+   "docType": "brochure"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikafloor-263-sl dc type brochure",
+  "id": "d0zvkd7s"
+ },
+ {
+  "persona": "specifier",
+  "category": "doc",
+  "q": "certificate for sikaflex pro plus",
+  "type": "doc",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "docType": "certificate"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikaflex-pro-plus dc type certificate",
+  "id": "d0bdgfsr"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "skatile 366 pro flex vs sikatile 350 pro maxset",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-366-proflex",
+    "sikatile-350-promaxset"
+   ]
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "products.json sikatile-366-proflex,sikatile-350-promaxset | reworded messy:typo",
+  "id": "d0kxvmiu"
+ },
+ {
+  "persona": "builder",
+  "category": "compare",
+  "q": "sorry to bug you sikadur 30 or sikadur 330",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikadur-30",
+    "sikadur-330"
+   ]
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "products.json sikadur-30,sikadur-330 | reworded messy:voice",
+  "id": "d0y3zo59"
+ },
+ {
+  "persona": "builder",
+  "category": "compare",
+  "q": "difference between lanko 145 and lanko 173",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "lanko-145-floor-leveller",
+    "lanko-173-floor-leveller"
+   ]
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "products.json lanko-145-floor-leveller,lanko-173-floor-leveller",
+  "id": "d0qqbjba"
+ },
+ {
+  "persona": "waterproofer",
+  "category": "compare",
+  "q": "sikalastic 1k vs davco k10 plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikalastic-1k",
+    "davco-k10-plus"
+   ]
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "products.json sikalastic-1k,davco-k10-plus",
+  "id": "d1cdtyjt"
+ },
+ {
+  "persona": "tiler",
+  "category": "compat",
+  "q": "can i use skatile 366 pro flex on plasterboard",
+  "type": "compat",
+  "exp": {
+   "product": "sikatile-366-proflex",
+   "verdict": "any"
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "shard sikatile-366-proflex compatibility rules | reworded messy:typo",
+  "id": "d0wqs6dm"
+ },
+ {
+  "persona": "tiler",
+  "category": "compat",
+  "q": "is davco k10 plus ok under tiles on a balcony",
+  "type": "compat",
+  "exp": {
+   "product": "davco-k10-plus",
+   "verdict": "any"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard davco-k10-plus compatibility rules",
+  "id": "d03xn0qh"
+ },
+ {
+  "persona": "builder",
+  "category": "compat",
+  "q": "can sikaflex pro plus be painted over",
+  "type": "compat",
+  "exp": {
+   "product": "sikaflex-pro-plus",
+   "verdict": "any"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "shard sikaflex-pro-plus compatibility rules",
+  "id": "d0aolm0r"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "what waterproofing does sika sell for tiled areas",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ],
+   "min": 3
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0tdrgx2"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "list the sika grouts that go in a wind farm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:grouts-anchoring"
+   ],
+   "min": 3
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0zqaskn"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "what carbon fibre products do you have",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:structural-strengthening"
+   ],
+   "min": 3
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d01x1mok"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "range of foam sealants",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1ag4g9j"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "which torch on membranes are there",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:roofing",
+    "c:waterproofing"
+   ],
+   "min": 3
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1kakz6j"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "all the sikafloor level products",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:flooring/cement-levellingsystems"
+   ],
+   "min": 3
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1287szh"
+ },
+ {
+  "persona": "distributor",
+  "category": "list",
+  "q": "righto what davco tanking is there",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "i:sikaceram-sealingmembranea,sikalastic-1k,sikalastic-1-komponent,sikatile-111-rapidproof,sikalastic-moistureseal,sika-sealtape-b,sika-sealtape-f,sikalastic-488-au"
+   ],
+   "min": 2
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:voice",
+  "id": "d1h22f03"
+ },
+ {
+  "persona": "specifier",
+  "category": "business",
+  "q": "righto does sika have a warranty portal",
+  "type": "business",
+  "exp": {
+   "url": "warranty-portal",
+   "must": "warranty"
+  },
+  "messy": "voice",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/documents-resources/warranty-portal.html | reworded messy:voice",
+  "id": "d03x18c7"
+ },
+ {
+  "persona": "specifier",
+  "category": "business",
+  "q": "where do i get bim files",
+  "type": "business",
+  "exp": {
+   "url": "sika-bim",
+   "must": "BIM"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/documents-resources/sika-bim.html",
+  "id": "d1blsnw9"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "business",
+  "q": "sika tips for plumbers",
+  "type": "business",
+  "exp": {
+   "url": "3-must-haves-for-plumbers",
+   "must": ""
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/3-must-haves/3-must-haves-for-plumbers.html",
+  "id": "d053i32y"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "business",
+  "q": "how do i spot a laking shower",
+  "type": "business",
+  "exp": {
+   "url": "leaking-shower",
+   "must": "shower"
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/home-owners/Blogs/leaking-shower--how-to-identify-and-avoid-it.html | reworded messy:typo",
+  "id": "d12ipr5x"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "business",
+  "q": "can i tile over my old laundry tiles",
+  "type": "business",
+  "exp": {
+   "url": "tile-over-tile",
+   "must": "tile"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/home-owners/Blogs/tile-over-tile-a-laundry-refresh.html",
+  "id": "d0b9qe8n"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how to open a uniapck",
+  "type": "business",
+  "exp": {
+   "url": "how-to-open-a-unipack",
+   "must": ""
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/industry/automotive-aftermarket/tips-tricks/how-to-open-a-unipack-cartridge.html | reworded messy:typo",
+  "id": "d1wks3gq"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "whats the minimum drive away time for a windscreen",
+  "type": "business",
+  "exp": {
+   "url": "safe-drive-away-time",
+   "must": ""
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/industry/automotive-aftermarket/tips-tricks/safe-drive-away-time.html | reworded messy:slang",
+  "id": "d1g2uenx"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "how to bond pc pmma",
+  "type": "business",
+  "exp": {
+   "url": "PC-PMMA-Bonding",
+   "must": ""
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/industry/automotive-aftermarket/tips-tricks/PC-PMMA-Bonding.html",
+  "id": "d11w435h"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "where can i register fr the b2b eshop",
+  "type": "business",
+  "exp": {
+   "url": "b2b-e-shop-registration",
+   "must": ""
+  },
+  "messy": "slang",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/b2b-e-shop/b2b-e-shop-registration.html | reworded messy:slang",
+  "id": "d1khfvor"
+ },
+ {
+  "persona": "distributor",
+  "category": "business",
+  "q": "skatile distributors list",
+  "type": "business",
+  "exp": {
+   "url": "SikaTile-distributors",
+   "must": "",
+   "nodata": true
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/SikaTile-distributors.html | reworded messy:typo",
+  "id": "d0hczbdj"
+ },
+ {
+  "persona": "specifier",
+  "category": "business",
+  "q": "saling and adhesive pre treatment charts",
+  "type": "business",
+  "exp": {
+   "url": "pre-treatment-charts",
+   "must": ""
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/documents-resources/sealing-and-adhesive-pre-treatment-charts.html | reworded messy:typo",
+  "id": "d015ffeu"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "business",
+  "q": "whats on the home applainces page",
+  "type": "business",
+  "exp": {
+   "url": "home-appliances",
+   "must": ""
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "kb.json page https://aus.sika.com/en/industry/appliance-and-equipment/home-appliances.html | reworded messy:typo",
+  "id": "d15s3nnq"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "how much is a 20kg bag of davco ultraflex",
+  "type": "nodata",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1d0mahm"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "is sikaflex pro plus on special this week",
+  "type": "nodata",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1fskui1"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "who has stock of sikatile 366 near me",
+  "type": "nodata",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d00kufsz"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "what are your trade disconuts",
+  "type": "nodata",
+  "exp": {},
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category | reworded messy:typo",
+  "id": "d1a8ok92"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "cheapest tile adhesive you have",
+  "type": "nodata",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0ruutsq"
+ },
+ {
+  "persona": "distributor",
+  "category": "nodata",
+  "q": "wholesale price list pls",
+  "type": "nodata",
+  "exp": {},
+  "messy": "sms",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0qs0lwb"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "oos",
+  "q": "who won the footy last night",
+  "type": "oos",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1n2epbj"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "oos",
+  "q": "what is the capital of france",
+  "type": "oos",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1h2fjku"
+ },
+ {
+  "persona": "sika counter staff",
+  "category": "oos",
+  "q": "can you write my resume",
+  "type": "oos",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1cddyd0"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "need something for the bathroom",
+  "type": "vague",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d141ez75"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "what do i use outside",
+  "type": "vague",
+  "exp": {},
+  "messy": "voice",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0223fm3"
+ },
+ {
+  "persona": "builder",
+  "category": "vague",
+  "q": "got a crack",
+  "type": "vague",
+  "exp": {},
+  "messy": "slang",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d1l31fm0"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "something to fix my deck",
+  "type": "vague",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0qcc794"
+ },
+ {
+  "persona": "diy home owner",
+  "category": "vague",
+  "q": "laundry is leaking",
+  "type": "vague",
+  "exp": {},
+  "messy": "",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0wenbxv"
+ },
+ {
+  "persona": "builder",
+  "category": "vague",
+  "q": "wat do i put on the floor",
+  "type": "vague",
+  "exp": {},
+  "messy": "typo",
+  "split": "blind4",
+  "src": "hand-written; allowed set is the documented category",
+  "id": "d0swsiqq"
+ },
+ {
+  "persona": "tiler",
+  "category": "system",
+  "q": "what tiling system for porcleain on concrete in an internal wet floor",
+  "type": "system",
+  "exp": {
+   "slug": "porcelain-on-concrete-internal-wet-floor"
+  },
+  "messy": "typo",
+  "split": "blind4",
+  "src": "portal systems/porcelain-on-concrete-internal-wet-floor | reworded messy:typo",
+  "id": "d09ayphe"
+ },
+ {
+  "persona": "tiler",
+  "category": "system",
+  "q": "mosaic on cement board external wall full system",
+  "type": "system",
+  "exp": {
+   "slug": "mosaic-on-cement-board-external-wall"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "portal systems/mosaic-on-cement-board-external-wall",
+  "id": "d0o8dzod"
+ },
+ {
+  "persona": "tiler",
+  "category": "system",
+  "q": "system for natural stone on masonry inside on a wall",
+  "type": "system",
+  "exp": {
+   "slug": "natural-stone-on-masonry-internal-wall"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "portal systems/natural-stone-on-masonry-internal-wall",
+  "id": "d1wshndr"
+ },
+ {
+  "persona": "tiler",
+  "category": "system",
+  "q": "ceramic tiles on existing tiles in an external floor what products",
+  "type": "system",
+  "exp": {
+   "slug": "ceramic-on-existing-tiles-external-floor"
+  },
+  "messy": "",
+  "split": "blind4",
+  "src": "portal systems/ceramic-on-existing-tiles-external-floor",
+  "id": "d1rqtjum"
+ }
+]
