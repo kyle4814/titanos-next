@@ -48,5 +48,5 @@ for (const [k, v] of Object.entries(per)) console.log(`  ${k.padEnd(13)} ${v.ok}
 lat.sort((a, b) => a - b); console.log(`  latency in node: p50 ${lat[Math.floor(lat.length * 0.5)]} ms, p95 ${lat[Math.floor(lat.length * 0.95)]} ms, max ${lat[lat.length - 1]} ms`);
 console.log(`PROPERTY TEST: ${propBad.length} violations over ${n} answers`);
 for (const b of propBad.slice(0, 15)) console.log('  ', b.rule, b.q, '::', b.detail);
-fs.writeFileSync(process.env.GOLDEN_OUT || '/dev/shm/apply_brain/demo-tests/sika-brain/last_run.json', JSON.stringify({ n, ok, per, fails: fails.slice(0, 400), propBad: propBad.slice(0, 5000), at: new Date().toISOString() }, null, 1));
+fs.writeFileSync(process.env.GOLDEN_OUT || new URL('./last_run.json', import.meta.url).pathname, JSON.stringify({ n, ok, per, fails: fails.slice(0, 400), propBad: propBad.slice(0, 5000), at: new Date().toISOString() }, null, 1));
 process.exit(ok / n >= BAR && propBad.length === 0 ? 0 : 1);

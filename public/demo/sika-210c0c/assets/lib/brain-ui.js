@@ -1,7 +1,7 @@
 // brain-ui.js: the v2 brain behind the existing chat panel. Plain code, no model. The panel keeps its look: cards are rendered with the panel's own classes.
 // Feature flag: ?brain=0 forces the v1 advisor, ?brain=1 forces v2, otherwise BRAIN_DEFAULT decides. A missing shard falls back to v1.
 import { h, icon } from './util.js';
-import { chipEl, hikEl } from './apply_data.js';
+import { chipEl } from './apply_data.js';
 import { buildHandoff } from '../assistant/handoff.js';
 import { renderHandoff } from './handoff-ui.js';
 import { estimateNote } from './terms.js';
@@ -42,7 +42,26 @@ export async function brainAnswer(text) {
 }
 
 const ext = (href, label, cls = '') => h('a', { href, class: cls, target: '_blank', rel: 'noopener noreferrer' }, label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)'));
-const srcPage = (f) => (f.doc_type === 'PDS' || f.doc_type === 'SDS') && f.page ? `#page=${f.page}` : '';
+/** The document's own title, read from the product shard the answer was built from (already in the page memo, so no new request); null when it is not there. */
+async function docTitle(c, f) {
+  if (!c.product || !c.product.id) return null;
+  const sh = await fetchJson('data/brain/p/' + encodeURIComponent(c.product.id) + '.json'); if (!sh) return null;
+  const base = String(f.source_url || '').replace(/#page=\d+$/, '');
+  const d = (sh.dc || []).find((x) => x.u === base); if (d && d.t) return d.t;
+  return sh.sp && sh.sp.ds && sh.sp.ds.url === base && sh.sp.ds.title ? sh.sp.ds.title : null;
+}
+/** "Show the source" for one fact of a card (see cite.js): [control], or [] when the fact has no link to open. The panel code is fetched the first time the button is pressed, so it is not part of the first screen. */
+function cite(c, f) {
+  if (!(f && /^https?:/.test(f.source_url))) return [];
+  const first = h('button', { class: 'src-btn', type: 'button', 'aria-expanded': 'false' }, 'Show the source');
+  const slot = h('span', { class: 'src-slot' }, first);
+  first.addEventListener('click', async () => {
+    const { citeModel, sourceControl } = await import('./cite.js');
+    const [btn, panel] = sourceControl(citeModel({ quote: f.sentence, url: f.source_url, docType: f.doc_type, version: f.doc_version, page: f.page, productName: c.product ? c.product.name : '' }), { lazyTitle: () => docTitle(c, f) });
+    slot.replaceChildren(btn, panel); btn.click(); btn.focus();
+  }, { once: true });
+  return [slot];
+}
 const closeOnMobile = () => { const m = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 39.99em)').matches; if (m && window.__asstClose) window.__asstClose(); };
 
 /** One card -> DOM. The same fields feed schema.cardText(), which the tests read. */
@@ -51,7 +70,7 @@ export function renderCard(c, cfg, send) {
   if (c.title) kids.push(h('div', { class: 'm-title' }, c.product && c.type === 'product' ? h('a', { href: '#/product/' + c.product.id, onclick: closeOnMobile }, c.title) : c.title));
   if (c.headline) kids.push(h('p', null, c.headline));
   const srcOf = (l) => c.facts.find((f) => f.sentence && f.sentence === l.text);
-  if (c.lines && c.lines.length) kids.push(h('table', { class: 'm-table' }, h('tbody', null, c.lines.map((l) => { const f = srcOf(l); return h('tr', null, h('th', { scope: 'row' }, l.label), h('td', null, l.text, f && /^https?:/.test(f.source_url) ? [' ', ext(f.source_url + srcPage(f), '(source)', 'link')] : null)); }))));
+  if (c.lines && c.lines.length) kids.push(h('table', { class: 'm-table' }, h('tbody', null, c.lines.map((l) => { const f = srcOf(l); return h('tr', null, h('th', { scope: 'row' }, l.label), h('td', null, l.text, f && /^https?:/.test(f.source_url) ? [' ', ...cite(c, f)] : null)); }))));
   if (c.table) kids.push(h('div', { class: 'table-wrap' }, h('table', { class: 'm-table' }, h('thead', null, h('tr', null, c.table.cols.map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, c.table.rows.map((r) => h('tr', null, r.map((x, i) => (i === 0 ? h('th', { scope: 'row' }, x) : h('td', null, x)))))))));
   if (c.links && c.links.length) kids.push(h('ul', { class: 'm-docs' }, c.links.map((l) => h('li', null, icon('file', 'i--sm'), /^https?:/.test(l.url) ? ext(l.url, l.label, 'link') : h('a', { class: 'link', href: l.url }, l.label)))));
   if (c.type === 'calculation') kids.push(h('p', { class: 'estimate-note' }, estimateNote(cfg)));
@@ -61,7 +80,9 @@ export function renderCard(c, cfg, send) {
   }
   if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, (c.choices || c.followups.map((f) => ({ label: f, value: f }))).map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
   if (c.chip) kids.push(chipEl(c.status, c.chip));
-  const hk = hikEl(c.facts.filter((f) => f.sentence).map((f) => ({ quote: f.sentence, url: f.source_url, label: (f.doc_type === 'PDS' ? 'Data sheet' : f.doc_type === 'SDS' ? 'Safety data sheet' : 'Published page') + (f.doc_version ? ', ' + f.doc_version : '') + (f.page ? ', page ' + f.page : ''), kind: f.doc_type === 'PDS' ? 'pds' : '', page: f.page })));
-  if (hk) kids.push(hk);
+  const evid = c.facts.filter((f) => f.sentence);
+  if (evid.length) kids.push(h('details', { class: 'hik' }, h('summary', null, 'How I know'), h('ul', null, evid.map((f) => h('li', null,
+    h('blockquote', null, f.sentence),
+    h('span', { class: 'hik-src' }, (f.doc_type === 'PDS' ? 'Data sheet' : f.doc_type === 'SDS' ? 'Safety data sheet' : 'Published page') + (f.doc_version ? ', ' + f.doc_version : '') + (f.page ? ', page ' + f.page : '')), ' ', ...cite(c, f))))));
   return h('div', { class: 'blk', 'data-card': c.type, 'data-status': c.status }, kids);
 }

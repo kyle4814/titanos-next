@@ -1,0 +1,11 @@
+/* "Show the source": the button under an answer and its quote panel. Uses the portal's own tokens. Loaded the first time a source control is built. */
+.src-btn{display:inline;background:none;border:0;border-bottom:2px solid var(--primary);padding:.2rem .3rem;margin:0 0 0 .25rem;font:inherit;font-size:.875rem;font-weight:600;color:inherit;cursor:pointer;min-height:32px}
+.src-btn:hover,.src-btn[aria-expanded="true"]{background:var(--primary);color:#000}
+.src-panel{display:block;margin:.5rem 0;padding:.6rem .75rem;border:1px solid var(--grey);border-left:4px solid var(--primary);background:#fff;font-size:.875rem;font-weight:400;overflow-wrap:anywhere}
+.src-panel[hidden]{display:none}
+.src-panel p{margin:.15rem 0}
+.src-quote{margin:.4rem 0;padding:0;border:0}
+.src-quote mark{background:var(--primary);color:#000;padding:.1rem .2rem;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.src-type,.src-note{color:var(--grey-dark)}
+.src-open{display:inline-block;margin-top:.25rem;border-bottom:2px solid var(--primary)}
+@media (pointer:coarse){.src-btn{min-height:44px;padding:.4rem .2rem}.src-open{min-height:44px;padding-top:.5rem}}
