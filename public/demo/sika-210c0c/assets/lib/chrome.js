@@ -104,6 +104,7 @@ function drawer(openAssistant) {
   nav.append(ul);
   const foot = h('div', { class: 'drawer-foot' },
     h('a', { href: '#/products', onclick: () => setOpen(false) }, 'Product finder'),
+    h('a', { href: '#/documents', onclick: () => setOpen(false) }, 'SDS & TDS'),
     h('a', { href: '#/projects', onclick: () => setOpen(false) }, 'My projects and quotes'),
     h('a', { href: '#/about', onclick: () => setOpen(false) }, 'About this demo'));
   const panel = h('aside', { class: 'drawer', id: 'drawer', 'aria-label': 'Menu', 'aria-hidden': 'true' }, h('div', { class: 'drawer-head' }, h('span', { class: 'wordmark', 'aria-hidden': 'true' }, cfg.company.wordmark), closeBtn), sb.form, nav, foot);
@@ -152,10 +153,15 @@ export async function mountChrome(config, { openAssistant }) {
   const dr = drawer(openAssistant);
   const projCount = () => { const n = projects.count(); cnt.textContent = String(n); cnt.parentElement.setAttribute('aria-label', `My projects, ${n} items`); };
   projects.onChange(projCount); projCount();
-  const mbar = h('nav', { class: 'mbar', 'aria-label': 'Quick tools' },
-    h('a', { href: '#/products' }, icon('search'), 'Find a Product'),
-    h('a', { href: '#/documents' }, icon('file'), 'SDS & TDS'),
-    h('button', { type: 'button', onclick: (e) => openAssistant(undefined, e.currentTarget) }, icon('chat'), 'Advisor'));
+  const mcnt = h('span', { class: 'count-pill', 'aria-hidden': 'true' }, '0');
+  const mproj = h('a', { href: '#/projects', 'aria-label': 'Project, 0 items' }, h('span', { class: 'mb-ico' }, icon('briefcase'), mcnt), 'Project');
+  const mbCount = () => { const n = projects.count(); mcnt.textContent = String(n); mproj.setAttribute('aria-label', `Project, ${n} item${n === 1 ? '' : 's'}`); };
+  projects.onChange(mbCount); mbCount();
+  const mbar = h('nav', { class: 'mbar', 'aria-label': 'Quick tools' }, // thumb bar: four targets, phones and small tablets only (CSS)
+    h('a', { href: '#/products' }, icon('search'), 'Search'),
+    h('button', { type: 'button', id: 'mbar-ask', onclick: (e) => openAssistant(undefined, e.currentTarget) }, icon('chat'), 'Ask', h('span', { class: 'visually-hidden' }, ' the advisor')),
+    mproj,
+    h('a', { href: '#/selector' }, icon('layers'), 'Sheets'));
   return { header, drawer: dr, footer: footer(), searcher, mbar };
 }
 export function setNavCurrent(id) { $$('.mainnav-bar > ul > li').forEach((l) => l.classList.toggle('current', l.dataset.id === id)); }
