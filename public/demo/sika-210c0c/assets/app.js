@@ -47,7 +47,7 @@ async function render(sameAsBefore = false) {
   if (REDIRECTS[path]) { history.replaceState(null, '', hashHref(REDIRECTS[path], {})); path = REDIRECTS[path]; params = new URLSearchParams(); }
   const my = ++token;
   const samePath = path === lastPath; lastPath = path;
-  const ae = document.activeElement; const keep = samePath && ae && ae.id && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && main.contains(ae) ? { id: ae.id, s: ae.selectionStart, e: ae.selectionEnd } : null;
+  const ae = document.activeElement; const keep = samePath && ae && ae.id && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && main.contains(ae) ? { id: ae.id, el: ae } : null;
   const ctx = { cfg, params, path, go, openAssistant };
   if (path === '/') ctx.persona = personaBlock(cfg, () => render(true), openAssistant);
   let view;
@@ -56,11 +56,13 @@ async function render(sameAsBefore = false) {
   try {
     const r = await (view ? view() : notFound(ctx));
     if (my !== token) return;
+    // read the box at the moment of the swap: what the person has typed since this render started (a trailing space included) is carried over, never reset to the URL's trimmed copy
+    const live = keep ? { v: keep.el.value, s: keep.el.selectionStart, e: keep.el.selectionEnd } : null;
     main.replaceChildren(r.el); main.removeAttribute('aria-busy');
     setTitle(r.title, cfg.company.name + ' product portal'); setNavCurrent(r.nav);
     if (!samePath) { window.scrollTo(0, 0); if (!firstRender) { main.focus({ preventScroll: true }); announce(r.title); } }
     firstRender = false;
-    if (keep) { const el = document.getElementById(keep.id); if (el) { el.focus({ preventScroll: true }); try { el.setSelectionRange(keep.s, keep.e); } catch { /* not a text input */ } } }
+    if (keep) { const el = document.getElementById(keep.id); if (el) { if (/^(INPUT|TEXTAREA)$/.test(el.tagName) && !/^(checkbox|radio)$/.test(el.type) && el.value !== live.v) el.value = live.v; el.focus({ preventScroll: true }); try { el.setSelectionRange(live.s, live.e); } catch { /* not a text input */ } } }
   } catch (e) {
     if (my !== token || leaving) return;
     console.error('view error', e);
@@ -79,7 +81,9 @@ async function boot() {
     window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 700), { passive: true });
     assistant = mountAssistant(cfg);
     initOffline(); // T19, no-op where the host cannot serve a service worker
-    window.addEventListener('hashchange', () => render());
+    // "Skip to main content" is a #main anchor: in a hash-routed page it must move focus, never become a route (it used to land on "We could not find that page")
+    document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a.skip-link'); if (!a) return; e.preventDefault(); main.focus(); main.scrollIntoView(); });
+    window.addEventListener('hashchange', () => { if (location.hash && !location.hash.startsWith('#/')) return; render(); }); // a plain in-page anchor is not a route
     await render();
     fontsAfterRender();
   } catch (e) {

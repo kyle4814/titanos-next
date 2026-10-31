@@ -31,7 +31,7 @@ export function packshot(img, catId, name, big = false) {
 
 export function addButton(id, name) {
   const b = h('button', { type: 'button', class: 'btn btn--hollow', 'aria-pressed': String(projects.has(id)) });
-  const paint = () => { const on = projects.has(id); b.setAttribute('aria-pressed', String(on)); b.replaceChildren(icon(on ? 'check' : 'plus', 'i--sm'), on ? 'In my projects' : 'Add to project'); b.setAttribute('aria-label', (on ? 'Remove from my projects: ' : 'Add to my projects: ') + name); };
+  const paint = () => { const on = projects.has(id); b.setAttribute('aria-pressed', String(on)); b.replaceChildren(icon(on ? 'check' : 'plus', 'i--sm'), on ? 'In my projects' : 'Add to project'); b.setAttribute('aria-label', (on ? 'In my projects: ' : 'Add to project: ') + name); }; // the accessible name starts with the visible text (voice control says what it sees)
   b.addEventListener('click', () => { const on = projects.toggle(id, name); paint(); announce(on ? `${name} added to my projects` : `${name} removed from my projects`); });
   paint(); projects.onChange(() => { if (b.isConnected) paint(); });
   return b;
@@ -78,8 +78,8 @@ export function pager({ page, pages, onPage }) {
   return h('nav', { class: 'pager', 'aria-label': 'Pagination' }, mk('Previous', page - 1, { disabled: page <= 1, aria: 'Previous page' }), ...nums, mk('Next', page + 1, { disabled: page >= pages, aria: 'Next page' }));
 }
 
-export function emptyState({ title, text, actions = [] }) {
-  return h('div', { class: 'empty', role: 'status' }, h('h2', null, title), text ? h('p', null, text) : null, h('div', { class: 'btn-row btn-row--center' }, actions));
+export function emptyState({ title, text, actions = [], tag = 'h2' }) {
+  return h('div', { class: 'empty', role: 'status' }, h(tag, null, title), text ? h('p', null, text) : null, h('div', { class: 'btn-row btn-row--center' }, actions));
 }
 export function skeletonGrid(n = 6) {
   return h('div', { class: 'grid grid--3', 'aria-hidden': 'true' }, Array.from({ length: n }, () => h('div', { class: 'card' }, h('div', { class: 'card-media skeleton' }), h('div', { class: 'card-body' }, h('div', { class: 'sk-line', style: 'width:40%' }), h('div', { class: 'sk-line', style: 'width:80%;height:1.4rem' }), h('div', { class: 'sk-line' }), h('div', { class: 'sk-line', style: 'width:70%' })))));
