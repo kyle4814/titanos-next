@@ -90,7 +90,9 @@ function putIn(ctx, p, { qty, unit, delta } = {}) {
 /* ------------------------------------------------------------------ the actions */
 async function add(ctx) {
   const { memory, session, data } = ctx; const text = ctx.rest || ctx.text; const lower = plain(text).toLowerCase();
-  const hits = await findProducts(data, text, 3);
+  let hits = await findProducts(data, text, 3);
+  // a name that is wholly inside the longer name just typed ("Sikafloor Level PRO" inside "Sikafloor Level PRO Primer") is the same words, not a second product
+  if (hits.length > 1 && hits[0].score >= 1000) { const top = ' ' + norm(hits[0].name) + ' '; hits = hits.filter((h, i) => i === 0 || !top.includes(' ' + norm(h.name) + ' ')); }
   const q = parseQty(text, hits.map((h) => h.name));
   const whole = /\b(whole|entire|full|complete|all)\b[^.?!]{0,20}\b(set|system|lot|list|pack)\b|\b(everything|the lot|all of (?:it|that|this|them))\b/.test(lower);
   const more = /\b(more|another|extra|additional)\b/.test(lower);

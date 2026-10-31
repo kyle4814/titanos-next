@@ -16,18 +16,19 @@ const src = rj(path.join(TOOLS, 'images_source.json')); const md = fs.readFileSy
 
 /** Pure: independent recount of the headline figures from the raw files. */
 export function recount() {
-  const noImg = products.filter((p) => !p.image);
+  const noImg = products.filter((p) => !p.image || p.image.illustrative);
+  const packshot = products.filter((p) => p.image && !p.image.illustrative).length; const nothing = products.filter((p) => !p.image).length;
   const none = Object.values(src).filter((v) => v.none).length;
   const sec = (n) => md.split(/^## /m).find((x) => x.startsWith(n + '.')) || '';
   const body = (s) => s.split('\n').filter((l) => /^\| /.test(l) && !/^\| (Product|---)/.test(l));
   const spec = body(sec('1')); const l404 = body(sec('2'));
   let notPub = 0, noDs = 0, published = 0, other = 0;
   for (const p of products) { const st = (rj(path.join(PORTAL, 'data', 'k', p.id + '.json')).rates || {}).status || ''; if (st === 'published') published++; else if (st === 'not published') notPub++; else if (/no data sheet PDF found/.test(st)) noDs++; else other++; }
-  return { noPhoto: noImg.length, noneInSource: none, specPlaces: spec.length, specProducts: new Set(spec.map((l) => l.split('|')[1].trim())).size, reported404: l404.length, docs404: docs.filter((d) => d.http && d.http.status === 404).length, noRate: notPub + noDs, notPub, noDs, published, other };
+  return { packshot, nothing, noPhoto: noImg.length, noneInSource: none, specPlaces: spec.length, specProducts: new Set(spec.map((l) => l.split('|')[1].trim())).size, reported404: l404.length, docs404: docs.filter((d) => d.http && d.http.status === 404).length, noRate: notPub + noDs, notPub, noDs, published, other };
 }
 const r = recount(); const c = gift.counts;
-t('no photo: products.json, images_source.json and the data file agree (221)', r.noPhoto === c.noPhoto && r.noneInSource === c.noPhoto && gift.noPhoto.items.length === c.noPhoto, JSON.stringify([r.noPhoto, r.noneInSource, c.noPhoto]));
-t('no photo: every product with no picture has a recorded reason', gift.noPhoto.items.every((x) => x.reason !== 'unknown') && gift.noPhoto.items.every((x) => !products.find((p) => p.id === x.id).image));
+t('no photo: 221 products are illustrative (no packshot); products.json, images_source.json and the data file agree; 291 have a packshot, 0 have nothing', r.noPhoto === c.noPhoto && r.noneInSource === c.noPhoto && gift.noPhoto.items.length === c.noPhoto && r.noPhoto === 221 && r.packshot === 291 && r.nothing === 0, JSON.stringify([r.noPhoto, r.noneInSource, c.noPhoto, r.packshot, r.nothing]));
+t('no photo: every product with no packshot has a recorded reason in images_source.json and carries an illustrative category photo', gift.noPhoto.items.every((x) => x.reason !== 'unknown') && gift.noPhoto.items.every((x) => { const p = products.find((q) => q.id === x.id); return p.image && p.image.illustrative === true; }));
 t('spec issues: 12 places in 9 products, as in the report sent on 2026-10-30', r.specPlaces === c.specIssuePlaces && r.specProducts === c.specIssueProducts && c.specIssuePlaces === 12 && c.specIssueProducts === 9, JSON.stringify([r.specPlaces, r.specProducts]));
 t('spec issues: each row carries a link to the data sheet page', gift.specIssues.every((x) => /^https:\/\/aus\.sika\.com\//.test(x.url)));
 t('dead links: the 26 in the report equal the 26 documents recorded as HTTP 404', r.reported404 === c.reported404 && r.docs404 === c.reported404 && c.reported404 === 26, JSON.stringify([r.reported404, r.docs404]));

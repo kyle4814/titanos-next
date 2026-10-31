@@ -180,4 +180,10 @@ const grey = `/calc 20 m2 ${OLD} 6 mm notch`;
   check('job pack CSV: formula cells are neutralised', /"'@evil"/.test(jp.csv) && /"'=SUM\(A1\)"/.test(jp.csv));
   check('job pack docs: only data sheets and SDS with a working link', jp.docs.filter((d) => d.product !== 'Saved from the advisor').length === 1 && jp.docs[0].kind === 'Data sheet');
 }
+// the advisor's add chip sends "/add <exact name>": a name wholly inside the longer name typed ("Sikafloor Level PRO" in "Sikafloor Level PRO Primer") is not a second product
+{
+  const A = makeAssistant(); const r = await ask(A, '/add Sikafloor Level Pro Primer');
+  const items = A.memory.items();
+  check('/add with an exact product name adds exactly that one product (not its shorter-named sibling)', items.length === 1 && /Primer/i.test(items[0].name || '') && !/Added \d+ products/.test(JSON.stringify(r.card)), JSON.stringify(items.map((i) => i.name)));
+}
 summary('t_cart');
