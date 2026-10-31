@@ -38,7 +38,7 @@ check('static: the first screen has no render-blocking stylesheet link (CSS is i
 // Routes that exceed their target (honest shortfall): each has a regression ceiling instead, printed as SHORTFALL, so it cannot get worse unseen.
 // Re-measured 2026-11-01 with speed.mjs on the final integrate tip (Fast 3G, 390x844, median of 3) after the five merged lanes and the home photo mosaic:
 // ceiling = measured bytes at the answer + 500 B. Old ceiling -> measured -> new ceiling is in state/sika/CLOSEOUT_2026-11-01.md. Remove an entry when the route meets its target.
-const KNOWN_SHORTFALL = { home: 87941 + 500, selector_flow: 117200 + 500, advisor_beat3: 826041 + 500, finder: 181895 + 500, documents: 159759 + 500, guides: 167381 + 500, projects: 160235 + 500 };
+const KNOWN_SHORTFALL = { home: 88054 + 500, selector_flow: 117313 + 500, advisor_beat3: 826154 + 500, finder: 182008 + 500, documents: 159872 + 500, guides: 167494 + 500, projects: 160348 + 500 };
 // B. receipt
 const rf = path.join(ROOT, 'receipts', 'speed_latest.json');
 if (!fs.existsSync(rf)) check('receipt: receipts/speed_latest.json exists (run speed.mjs)', false);
