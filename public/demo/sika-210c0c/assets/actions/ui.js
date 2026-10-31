@@ -37,7 +37,7 @@ function valueNode(r) {
   const kids = [r.productId ? h('a', { href: '#/product/' + encodeURIComponent(r.productId), class: 'link', onclick: () => onNavigate() }, r.value) : r.value];
   if (r.source && r.source.url) kids.push(' ', extLink(r.source.url, `(${r.source.label})`));
   if (r.source && r.source.sentence && r.source.sentence !== r.value && (r.derived || !r.quote)) kids.push(h('details', { class: 'how' }, h('summary', null, 'How I know'), h('blockquote', null, r.source.sentence)));
-  if (r.command) kids.push(' ', h('button', { class: 'chip chip--line', type: 'button', 'data-command': r.command }, 'Use'));
+  if (r.command) kids.push(' ', h('button', { class: 'chip chip--line', type: 'button', 'data-command': r.command, 'aria-label': 'Use ' + String(r.command).slice(0, 80) }, 'Use') /* 17 buttons all named "Use" told a screen reader nothing; now each says which command */);
   return kids;
 }
 // Key and value lists, not <table>: rows are statements with a source each, and a definition list reads well on a phone. (Also keeps the portal's own tables, such as the rule ledger, the only tables on a page.)
@@ -50,7 +50,7 @@ export function renderCard(c, act) {
   const root = h('div', { class: 'msg msg--bot action-card', 'data-action': c.action, 'data-kind': c.kind });
   if (c.kind === 'clarify') {
     root.append(h('p', null, c.clarify.question));
-    if (c.clarify.options && c.clarify.options.length) root.append(h('div', { class: 'opts' }, c.clarify.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => act.send(o.value, o.label) }, o.label))));
+    if (c.clarify.options && c.clarify.options.length) root.append(h('div', { class: 'opts' }, c.clarify.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => { const pend = act.pend; /* a chip under an OLD question carries its own request, so it can never answer the question that is open now (a different product) */ act.send(!pend || (act.session && act.session.pending === pend) ? o.value : `${pend.text} ${o.value}`, o.label); } }, o.label))));
     root.append(h('div', { class: 'cite' }, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger')));
     return root;
   }
@@ -82,8 +82,8 @@ export function renderCard(c, act) {
   for (const b of c.buttons || []) {
     if (b.href) btns.push(h('a', { class: 'chip', href: new URL(b.href, baseUrl).href, target: '_blank', rel: 'noopener noreferrer' }, b.label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')));
     else if (b.print) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => printCard(c, printNode(c)) }, icon('file', 'i--sm'), b.label));
-    else if (b.printLast) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => printCard(c, printNode(act.session.last || c)) }, icon('file', 'i--sm'), b.label));
-    else if (b.command) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => act.send(b.command, b.label) }, b.label));
+    else if (b.printLast) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => printCard(c, printNode(c.printOf || act.session.last || c)) }, icon('file', 'i--sm'), b.label));
+    else if (b.command) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => { if (act.rebind) act.rebind(c); /* save, pack, export and hand-off work on THIS answer, not on the newest one */ act.send(b.command, b.label); } }, b.label));
   }
   for (const ex of c.exports || []) btns.push(h('button', { class: 'chip', type: 'button', onclick: () => download(ex) }, icon('download', 'i--sm'), ex.label));
   if (btns.length) root.append(h('div', { class: 'opts', role: 'group', 'aria-label': 'What next' }, btns));
@@ -113,8 +113,11 @@ function attachSlash(input, form, send) {
   const close = () => { list.hidden = true; input.setAttribute('aria-expanded', 'false'); idx = -1; input.removeAttribute('aria-activedescendant'); };
   const pick = (cmd) => { input.value = cmd + ' '; close(); input.focus(); };
   const render = () => {
+    const keep = list.scrollTop;
     list.replaceChildren(...items.map(([cmd, , desc], i) => h('li', { role: 'option', id: 'slash-' + i, 'aria-selected': String(i === idx), class: i === idx ? 'on' : '' }, h('button', { type: 'button', tabindex: '-1', onmousedown: (e) => e.preventDefault(), onclick: () => pick(cmd) }, h('strong', null, cmd), ' ', h('span', null, desc)))));
     list.hidden = !items.length; input.setAttribute('aria-expanded', String(!!items.length));
+    const on = idx >= 0 && list.children[idx]; // keep the highlighted command inside the scrolled list (the list is rebuilt on every key, which resets its scroll)
+    if (on && !list.hidden) { list.scrollTop = keep; const lr = list.getBoundingClientRect(), er = on.getBoundingClientRect(); if (er.top < lr.top) list.scrollTop -= Math.ceil(lr.top - er.top); else if (er.bottom > lr.bottom) list.scrollTop += Math.ceil(er.bottom - lr.bottom); }
     if (idx >= 0) input.setAttribute('aria-activedescendant', 'slash-' + idx); else input.removeAttribute('aria-activedescendant');
   };
   input.setAttribute('aria-controls', 'slash-list'); input.setAttribute('aria-autocomplete', 'list'); input.setAttribute('aria-expanded', 'false');
@@ -127,10 +130,11 @@ function attachSlash(input, form, send) {
     if (list.hidden) return;
     if (e.key === 'ArrowDown') { e.preventDefault(); idx = (idx + 1) % items.length; render(); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); idx = (idx - 1 + items.length) % items.length; render(); }
-    else if (e.key === 'Tab' || (e.key === 'Enter' && idx >= 0 && input.value.toLowerCase() !== items[idx][0])) { e.preventDefault(); pick(items[idx][0]); }
+    else if ((e.key === 'Tab' && !e.shiftKey) || (e.key === 'Enter' && idx >= 0 && input.value.toLowerCase() !== items[idx][0])) { e.preventDefault(); pick(items[idx][0]); }
     else if (e.key === 'Escape') { e.stopPropagation(); close(); }
   });
-  input.addEventListener('blur', () => setTimeout(close, 120));
+  input.addEventListener('blur', () => setTimeout(() => { if (document.activeElement !== input) close(); }, 120)); // not when focus came straight back (the "/ commands" chip)
+  form.addEventListener('submit', close); // a command sent with Enter or Send leaves no stale list behind
   return { show() { input.value = '/'; input.focus(); input.dispatchEvent(new Event('input')); } };
 }
 
@@ -174,14 +178,23 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
   const slash = attachSlash(input, form, send);
   if (voiceOn()) attachSpeech(input, form);
   if (sugg) sugg.prepend(h('button', { class: 'chip', type: 'button', onclick: () => slash.show() }, '/ commands'));
-  const act = { send, memory, get session() { return session; } };
+  // Each result card remembers the session it was made in, so its buttons (save, pack, export, hand-off) act on it even after newer answers
+  const snaps = new WeakMap(); const NO_SNAP = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
+  const rebind = (c) => {
+    const sn = snaps.get(c); if (!sn || session.last === c) return;
+    session.last = c; session.product = sn.product; session.products = sn.products.slice(); session.system = sn.system; session.compare = sn.compare; session.facets = { ...sn.facets }; session.lastQuestion = sn.lastQuestion;
+    if (sn.calc) session.calcs[sn.calc.id] = sn.calc;
+  };
+  const act = { send, memory, rebind, get session() { return session; } };
   return {
     memory, actions, get session() { return session; },
     async handle(text) {
       const r = await actions.run(text, session); session = r.session;
       if (!r.handled) return null;
       const oc = r.card.kind === 'clarify' ? 'CLARIFY' : r.card.status === 'unknown' ? 'NOT_IN_PUBLISHED_DATA' : 'ANSWERED_WITH_SOURCE';
-      return { node: renderCard(r.card, act), outcome: oc };
+      if (!NO_SNAP.has(r.card.kind) && r.card.action !== 'memory') snaps.set(r.card, { product: session.product, products: (session.products || []).slice(), system: session.system, compare: session.compare, facets: { ...session.facets }, lastQuestion: session.lastQuestion, calc: session.product ? session.calcs[session.product.id] : null });
+      const cardAct = Object.create(act); cardAct.pend = r.card.kind === 'clarify' ? session.pending : null;
+      return { node: renderCard(r.card, cardAct), outcome: oc };
     },
     observeV1(text, answer, outcome) { if (outcome === 'NOT_IN_PUBLISHED_DATA' && text && !text.startsWith('/')) memory.addGap(text); memory.rememberQuestion(text, 'ask'); },
     observeBrain(answer) { observeBrainAnswer(session, answer); },
