@@ -120,7 +120,7 @@ function saveText(text) {
 export async function aboutView(ctx) {
   const cov = await coveragePanel();
   const { cfg } = ctx; const stats = (await data.stats()) || {}; const d = cfg.demo;
-  const prodsAll = await data.products(); const imgStats = { packshots: prodsAll.filter((x) => x.image && !x.image.illustrative).length, illustrated: prodsAll.filter((x) => x.image && x.image.illustrative).length };
+  const imgStats = { packshots: stats.packshots || 0, illustrated: stats.illustrated || 0 }; // counts come from stats.json (add_images.mjs); the 600 KB products file is not fetched for them
   const row = (k, v) => h('tr', null, h('th', { scope: 'row', style: 'text-transform:none;letter-spacing:0;font-size:1rem' }, k), h('td', null, v));
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'About this demo' }]),
     h('div', { class: 'page-head' }, h('h1', null, 'About this demo')),

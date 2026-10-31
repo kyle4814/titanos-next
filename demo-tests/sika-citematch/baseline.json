@@ -1,6 +1,31 @@
 {
   "measured_on": "integrate/2026-10-31 tip 7d632f4b2, before any matcher or citation change (2026-10-31)",
-  "search": { "n": 68, "box": { "top1": 31, "top3": 36, "top6": 37 }, "finder": { "top1": 31, "top3": 36, "top6": 37 } },
-  "golden": { "ok": 4599, "n": 4659 },
-  "speed": { "home_first_screen_gzip": 82779, "main_js_gzip": 61270, "sw_bytes": 8548114 }
+  "search": {
+    "n": 68,
+    "box": {
+      "top1": 31,
+      "top3": 36,
+      "top6": 37
+    },
+    "finder": {
+      "top1": 31,
+      "top3": 36,
+      "top6": 37
+    }
+  },
+  "golden": {
+    "ok": 4599,
+    "n": 4659
+  },
+  "speed": {
+    "home_first_screen_gzip": 87108,
+    "main_js_gzip": 64362,
+    "sw_bytes": 8548114
+  },
+  "speed_before_rebaseline": {
+    "measured_on": "integrate/2026-10-31 tip 7d632f4b2 (2026-10-31)",
+    "home_first_screen_gzip": 82779,
+    "main_js_gzip": 61270
+  },
+  "speed_rebaselined": "2026-11-01 on the final integrate tip after the five lanes (thumb bar, job builder, stock photos, citematch, site) and the home photo mosaic; measured with gzip level 6 over index.html + dist/main.js + data/config.json + data/cats.lite.json. The search and golden baselines above are unchanged."
 }

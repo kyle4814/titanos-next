@@ -49,4 +49,6 @@ for (const p of products) {
 const idx = JSON.parse(fs.readFileSync(path.join(D, 'index.json'), 'utf8'));
 for (const e of idx) { if (ok.has(e.id)) e.im = 1; else if (ill.has(e.id)) e.im = 2; else delete e.im; }
 wr(path.join(D, 'index.json'), idx);
+// the About page quotes these two counts: they ride in stats.json so that page does not have to download the 600 KB products file just to count
+const stf = path.join(D, 'stats.json'); const st = JSON.parse(fs.readFileSync(stf, 'utf8').replace(/^\uFEFF/, '')); st.packshots = n; st.illustrated = ill.size; wr(stf, st);
 console.log('images added to', n, 'of', products.length, 'products;', ill.size, 'illustrative stock photos;', nc, 'of', cats.length, 'categories');

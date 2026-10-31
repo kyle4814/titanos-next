@@ -52,6 +52,11 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   const dec = await page.evaluate(() => { const r = innerHeight; const vis = [...document.querySelectorAll('.mosaic img')].filter((i) => i.getBoundingClientRect().top < r); return { vis: vis.length, decoded: vis.filter((i) => i.complete && i.naturalWidth > 0).length }; });
   t(`${sz} home mosaic: the tiles in view have loaded and decoded`, dec.vis > 0 && dec.decoded === dec.vis, JSON.stringify(dec));
   await page.screenshot({ path: `${outDir}/mosaic_${W}.png` });
+  // About quotes the packshot and illustrative counts without downloading the 600 KB products file (regression: the stock lane made About load it, 77 KB -> 719 KB on Fast 3G)
+  { const ctx2 = await b.newContext({ viewport: { width: W, height: H } }); const p2 = await ctx2.newPage(); const urls = []; p2.on('request', (r) => urls.push(r.url()));
+    await p2.goto(s.base + '#/about', { waitUntil: 'load' }); await p2.waitForSelector('.prose li'); await p2.waitForTimeout(800);
+    const txt = await p2.evaluate(() => document.querySelector('.prose').innerText);
+    t(`${sz} About states 291 packshots and 221 illustrative products and does not fetch products.json`, /291 products show the packshot/.test(txt) && /\(221 products\)/.test(txt) && !urls.some((u) => /\/data\/products\.json/.test(u)), JSON.stringify([/291 products show/.test(txt), /\(221 products\)/.test(txt), urls.filter((u) => /products\.json/.test(u)).length])); await ctx2.close(); }
   // credits page reachable from About
   await page.goto(s.base + '#/about', { waitUntil: 'load' }); await page.waitForSelector('a[href="#/credits"]'); await page.click('a[href="#/credits"]'); await page.waitForSelector('.credits-list li');
   const cr = await page.evaluate(() => ({ n: document.querySelectorAll('.credits-list li').length, ov: document.documentElement.scrollWidth - document.documentElement.clientWidth }));
