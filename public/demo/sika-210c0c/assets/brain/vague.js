@@ -77,3 +77,16 @@ export function genericVague(n) {
   const gen = ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor'];
   const c = C.chooseCard('What are you working on?', 'I did not catch the job. Pick the nearest one, or tell me the surface and the problem.', gen, [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = gen; return c;
 }
+
+/**
+ * The generic clarifier: for ANY short message nothing else matched, offer the three most likely jobs, built from the catalogue's own vocabulary.
+ * kinds: [{ label, n }] the product groups whose published text uses the message's words, most likely first (computed by the caller from the index).
+ * Never an answer: three questions the visitor can tap, each of which the assistant can then answer on its own.
+ */
+export function intentClarifier(msg, kinds) {
+  const top = (kinds || []).slice(0, 3); if (top.length < 2) return null;
+  const m = String(msg || '').replace(/[?.!]+$/, '').trim();
+  const opts = top.map((k) => `Best ${k.label} for ${m}`);
+  const c = C.chooseCard('Which of these do you mean?', 'I could not tell the job from that. These are the three nearest jobs in the Sika Australia range. Pick one, or tell me the surface and the problem.', opts, [], top.map((k) => k.label[0].toUpperCase() + k.label.slice(1)));
+  c.followups = opts; return c;
+}
