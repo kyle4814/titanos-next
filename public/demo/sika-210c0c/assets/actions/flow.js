@@ -5,11 +5,12 @@ import { buildHandoff } from '../assistant/handoff.js';
 import { findProducts, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
 import * as H from './handlers.js';
 import { selectionLines, silentReason } from './shared.js';
+import { CART_ACTIONS, cartAction, cartAfterSave, cartButtons } from './cart.js';
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
 const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious' };
-const MEMORY_ACTIONS = new Set(['save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start']);
+const MEMORY_ACTIONS = new Set(['save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
 const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
 
 function updateFacets(session, text, strippedText) {
@@ -80,8 +81,9 @@ const recentCard = (ctx) => {
 async function memoryAction(ctx, action) {
   const m = ctx.memory; const rest = (ctx.rest || '').trim();
   if (!m && action !== 'start') return card('memory', 'memory', 'Project memory', { status: 'unknown', notes: ['Project memory is not available in this browser.'], notice: IN_BROWSER_NOTICE });
+  if (CART_ACTIONS.has(action)) return cartAction(ctx, action); // the project cart (cart.js); null = a soft phrase that was not about the cart
   switch (action) {
-    case 'save': return saveLast(ctx);
+    case 'save': { const c = saveLast(ctx); await cartAfterSave(ctx, c); return c; }
     case 'projects': return projectsCard(ctx);
     case 'gaps': return gapsCard(ctx);
     case 'recent': return recentCard(ctx);
@@ -146,10 +148,10 @@ export function createActions(deps) {
       } else updateFacets(session, useText, stripped);
     }
     if (!r || !r.slash) session.lastQuestion = text;
-    const ctx = { data, session, memory, config, text: useText, rest, noAsk, now: deps.now ? deps.now() : new Date(), commands: COMMANDS };
+    const ctx = { data, session, memory, config, text: useText, rest, noAsk, soft: !!(r && r.soft), now: deps.now ? deps.now() : new Date(), commands: COMMANDS };
     let c;
     try {
-      if (MEMORY_ACTIONS.has(action)) c = await memoryAction(ctx, action);
+      if (MEMORY_ACTIONS.has(action)) { c = await memoryAction(ctx, action); if (!c) return { handled: false, session }; }
       else if (action === 'help') c = H.help(ctx);
       else if (HANDLERS[action]) c = await HANDLERS[action](ctx);
       else return { handled: false, session };
@@ -168,6 +170,7 @@ export function createActions(deps) {
     if (noAsk && c.kind === 'clarify') c = unknownCard(c.action, 'I still need one thing', `${c.clarify.question} Include it in your next request and I will work it out.`, { handoff: false });
     if (c.kind === 'clarify') session.pending = { action: c.action, text: p && noAsk ? p.text : useText, need: c.clarify.need };
     if (!NO_LAST.has(c.kind) && c.action !== 'memory') session.last = c;
+    cartButtons(c, session, memory, useText);
     if (memory) {
       if (!MEMORY_ACTIONS.has(action) && c.kind !== 'clarify') memory.rememberQuestion(text, action);
       if (c.status === 'unknown' && c.handoff) memory.addGap(session.lastQuestion || text);

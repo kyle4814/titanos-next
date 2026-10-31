@@ -328,6 +328,12 @@ main{flex:1 0 auto}
 .proj-line{display:grid;gap:12px;grid-template-columns:1fr;border-bottom:1px solid var(--grey);padding:1rem 0}
 @media (min-width:40em){.proj-line{grid-template-columns:minmax(0,1fr) 164px 140px auto;align-items:center}}
 .proj-line h3{font-size:1.2rem;line-height:1.25;font-weight:600;margin:0}
+.proj-src{margin:.35rem 0 0;font-size:.95rem;line-height:1.4;max-width:46rem}
+.proj-extra{margin-top:2rem}
+.proj-line--text{grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.proj-switch{margin:0 0 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.proj-note-add{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}.proj-note-add .input{flex:1 1 16rem;min-width:0}
+.job-pack textarea{width:100%;max-width:50rem;margin-top:1rem}
 .qty{display:flex;align-items:center;border:1px solid var(--grey);width:max-content}
 .qty button{width:44px;height:44px;border:0;background:var(--grey-light);cursor:pointer;font-size:1.3rem;line-height:1}
 .qty button:hover{background:var(--primary)}
@@ -501,4 +507,80 @@ main:focus{outline:none;box-shadow:none}
   .cat-card .ph small,.product-card .ph small{display:none}
   .card h3,.card h4{font-size:1.2rem}
   .card-actions .btn{min-height:44px}
+}
+
+/* ---------------------------------------------------------------- phone skin (Sika Australia's own mobile pattern, read 2026-10-31)
+   Phones only (max-width 39.99em): desktop and tablet rules above are untouched. A 60px fixed yellow header with an icon-only
+   burger, a full-screen white menu with 55px rows over a #616161 link block, a 56px #f5f5f5 bottom bar, full-width stacked
+   product cards, their fluid headline scale and 18px light copy, and a native-feeling assistant sheet. */
+@media (max-width:39.99em){
+  :root{--gutter:14px;--hdr-h:60px;--bar-h:56px}
+  /* header: fixed 60px bar, notice scrolls away above it */
+  .site-header{display:contents}
+  .hdr-notice{font-size:.75rem;padding:.3rem var(--gutter);line-height:1.25}
+  .hdr-main{position:sticky;top:0;z-index:40;height:var(--hdr-h);box-shadow:var(--shadow-2)}
+  .hdr-main>.container{padding-inline:16px 0;gap:12px}
+  .wordmark{font-size:1.45rem}
+  .hdr-title{font-size:1.25rem}
+  .hdr-main .burger{font-size:0;gap:0;width:55px;min-height:var(--hdr-h);padding:0;justify-content:center;margin-left:auto}
+  .burger .lines{width:24px;height:18px}
+  /* menu: full-screen white sheet, 55px rows, grey link block */
+  .drawer{inset:0;width:100%;box-shadow:none;transform:translateX(100%)}
+  .drawer-scrim{display:none}
+  .drawer-head{min-height:var(--hdr-h);padding:0 0 0 16px;box-shadow:var(--shadow-2)}
+  .drawer-head .burger{font-size:0;width:55px;min-height:var(--hdr-h);padding:0;justify-content:center}
+  .drawer form{padding:.75rem 16px .5rem}
+  .drawer nav>ul>li{border-bottom:1px solid var(--grey-mid)}
+  .drawer nav a,.drawer nav summary{min-height:55px;padding:.8rem 16px;font-size:1rem}
+  .drawer nav details[open]>summary{background:#fff;font-weight:600}
+  .drawer nav details ul a{padding-left:48px;font-size:1rem;border-top:0;border-bottom:0}
+  .drawer nav a:hover,.drawer nav a:focus-visible{background:var(--grey-light)}
+  .drawer .drawer-foot{background:var(--grey-dark);color:#fff;padding:.5rem 0 calc(var(--bar-h) + env(safe-area-inset-bottom,0px))}
+  .drawer .drawer-foot a{padding:0 16px;min-height:55px;display:flex;align-items:center;font-size:1rem}
+  .drawer .drawer-foot a:hover,.drawer .drawer-foot a:focus-visible{background:var(--grey-darker)}
+  .drawer .drawer-foot :focus-visible{outline-color:#fff}
+  /* bottom bar: 56px, #f5f5f5, black labels */
+  body{padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom,0px))}
+  .mbar{background:var(--grey-light);border-top:0;box-shadow:0 -1px 3px #0003;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mbar a,.mbar button{min-height:var(--bar-h);color:#000;font-size:.875rem;font-weight:400;gap:.1rem}
+  .mbar a:active,.mbar button:active,.mbar a:hover,.mbar button:hover{background:var(--primary)}
+  .mbar :focus-visible{outline-color:#000}
+  .totop{bottom:calc(var(--bar-h) + 16px + env(safe-area-inset-bottom,0px))}
+  /* type: their fluid scale at phone width (h1 46px light, h2 39px, 18px light copy) */
+  h1,.h1{font-size:clamp(2.55rem,11.8vw,3.05rem);line-height:1.09;overflow-wrap:anywhere}
+  h2,.h2{font-size:clamp(2.2rem,9.4vw,2.45rem);line-height:1.15;overflow-wrap:break-word}
+  .helpbox h1{font-size:clamp(2.2rem,9.4vw,2.45rem);line-height:1.15}
+  .pdp h1{font-size:clamp(2.55rem,11.8vw,3.05rem);line-height:1.09}
+  .pdp .tagline{font-size:1.25rem}
+  main p:not([class]),.lead{font-size:1.1313rem;line-height:1.45;font-weight:300}
+  /* pages sit on a 10px grid like theirs: cards run edge to edge inside it */
+  .hero{padding-top:0}
+  .helpbox{margin-inline:calc(var(--gutter)*-1);box-shadow:none}
+  /* cards: full width, picture on top, bold 20px title (their teaser) */
+  .cat-card,.product-card{flex-direction:column}
+  .cat-card .card-media,.product-card .card-media{flex:none;aspect-ratio:4/3;min-height:0}
+  .cat-card .ph svg,.product-card .ph svg{width:34%}
+  .cat-card .ph small,.product-card .ph small{display:block}
+  .cat-card .card-body,.product-card .card-body{padding:15px}
+  .card h3,.card h4{font-size:1.25rem;line-height:1.2;font-weight:700}
+  .grid{gap:20px}
+  /* breadcrumb strip scrolls inside itself, no scrollbar */
+  .breadcrumb{scrollbar-width:none}.breadcrumb::-webkit-scrollbar{display:none}
+  /* footer: 55px link rows, centred stacked legal bar */
+  .site-footer{margin-top:2rem}
+  .site-footer li{margin:0}
+  .site-footer li a{display:flex;align-items:center;min-height:44px;border-bottom:0}
+  .site-footer h2{font-size:1.56rem}
+  .footbar ul{flex-direction:column;align-items:center;gap:0}
+  .footbar li+li::before{display:none}
+  .footbar li a{display:flex;align-items:center;justify-content:center;min-height:44px;padding-inline:.5rem}
+  /* assistant: native full-height sheet, input pinned above the keyboard, safe-area insets */
+  .assistant{height:100vh;height:100dvh;max-height:100dvh;overscroll-behavior:contain;transform:translateY(24px)}
+  .asst-head{padding:calc(.65rem + env(safe-area-inset-top,0px)) calc(1rem + env(safe-area-inset-right,0px)) .65rem calc(1rem + env(safe-area-inset-left,0px));min-height:var(--hdr-h);box-shadow:var(--shadow-2);position:relative;z-index:2}
+  .asst-head button{min-width:48px;min-height:48px}
+  .asst-log{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-inline:calc(14px + env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-right,0px))}
+  .asst-sugg{padding-inline:14px}
+  .asst-form{padding:.6rem calc(14px + env(safe-area-inset-right,0px)) calc(.6rem + env(safe-area-inset-bottom,0px)) calc(14px + env(safe-area-inset-left,0px));box-shadow:0 -1px 3px #0003;border-top:0}
+  .asst-form input{font-size:1rem}
+  .asst-form button{min-width:48px;min-height:48px}
 }

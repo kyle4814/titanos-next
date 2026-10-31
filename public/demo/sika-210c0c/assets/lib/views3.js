@@ -4,38 +4,72 @@ import { h, icon, nf, plural, announce, fmtBytes } from './util.js';
 import { coveragePanel } from './coverage_panel.js';
 import { derived, data, documents } from './data.js';
 import { breadcrumb, emptyState, placeholder } from './components.js';
-import { projects } from './projects.js';
+import { projects, projectStore, UNITS } from './projects.js';
+import { buildJobPack } from './projectstore.js';
 import { bomSection } from './finder/bom.js';
 import { estimateNote } from './terms.js';
 
 const ROLES = ['Distributor or merchant', 'Applicator or tradesperson', 'Builder or contractor', 'Specifier or architect', 'Engineer', 'Home owner', 'Other'];
 
+const SOURCE_TEXT = { bot: 'Added by the advisor', finder: 'Added from the finder with its quantity', portal: 'Added on this page', migrated: 'Carried over from an earlier saved project' };
+const saveBlob = (text, name, type) => { try { const url = URL.createObjectURL(new Blob([text], { type })); const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); announce(`${name} downloaded`); } catch { /* ignore */ } };
+
 export async function projectsView(ctx) {
   const dv = await derived(); const { cfg } = ctx;
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'My projects and quotes' }]));
   const head = h('div', { class: 'page-head' }, h('h1', null, 'My projects and quotes'),
-    h('p', { class: 'lead', style: 'max-width:60rem' }, 'Collect the products for a job, set quantities and prepare a quote request.'),
+    h('p', { class: 'lead', style: 'max-width:60rem' }, 'Collect the products for a job, set quantities and prepare a quote request. Anything the product advisor adds for you appears here, and what you change here the advisor sees on its next answer.'),
     h('p', { class: 'notice' }, icon('info'), h('span', null, h('span', { class: 'demo-only' }, 'Demo only'), ' This list is kept in your browser on this device. The quote request below ', h('strong', null, 'submits nowhere'), ': there is no server behind this demo, so nothing is sent, stored or shared.')));
-  const body = h('div');
-  el.append(head, body);
+  const cartBox = h('div', { id: 'cart-box' });
+  el.append(head, cartBox, quoteForm(ctx, dv));
   const render = () => {
-    body.replaceChildren();
-    const list = projects.list();
-    if (!list.length) { body.append(emptyState({ title: 'Your project is empty', text: 'Add products from the finder or from any product page, then come back here to set quantities and prepare a quote request.', actions: [h('a', { class: 'btn', href: '#/products' }, 'Find a product'), h('button', { class: 'btn btn--dark', type: 'button', onclick: () => ctx.openAssistant('What do I need for 40 m2 of floor tiles?') }, 'Ask the advisor')] })); return; }
+    cartBox.replaceChildren();
+    const list = projects.list(); const proj = projectStore.currentProject();
+    const extra = proj ? proj.systems.length + proj.documents.length + proj.notes.length : 0;
+    if (!list.length && !extra) { cartBox.append(emptyState({ title: 'Your project is empty', text: 'Add products from the finder or from any product page, or ask the advisor and say "add this to my project". Then come back here to set quantities and prepare a quote request.', actions: [h('a', { class: 'btn', href: '#/products' }, 'Find a product'), h('button', { class: 'btn btn--dark', type: 'button', onclick: () => ctx.openAssistant('What do I need for 40 m2 of floor tiles?') }, 'Ask the advisor')] })); return; }
+    const all = projectStore.list();
+    const bar = all.length > 1 ? h('div', { class: 'proj-switch no-print' }, h('label', { for: 'proj-pick' }, 'Project '), h('select', { class: 'select', id: 'proj-pick', onchange: (e) => { projectStore.use(e.target.value); render(); } }, all.map((x) => h('option', { value: x.name, selected: x.name === (proj && proj.name) }, x.name)))) : null;
     const lines = list.map((it) => {
-      const p = dv.byId.get(it.id); if (!p) return null;
-      const qty = h('input', { type: 'number', min: '1', step: '1', inputmode: 'numeric', value: String(it.qty), 'aria-label': `Quantity of ${p.n}`, onchange: (e) => { const v = Math.max(1, parseInt(e.target.value || '1', 10) || 1); e.target.value = String(v); projects.set(it.id, { qty: v }); } });
-      const dec = h('button', { type: 'button', 'aria-label': `Decrease quantity of ${p.n}`, onclick: () => { qty.value = String(Math.max(1, (parseInt(qty.value, 10) || 1) - 1)); qty.dispatchEvent(new Event('change')); } }, '−');
-      const inc = h('button', { type: 'button', 'aria-label': `Increase quantity of ${p.n}`, onclick: () => { qty.value = String((parseInt(qty.value, 10) || 1) + 1); qty.dispatchEvent(new Event('change')); } }, '+');
-      const unit = h('select', { class: 'select', 'aria-label': `Unit for ${p.n}`, onchange: (e) => projects.set(it.id, { unit: e.target.value }) }, ['pack', 'pail', 'bag', 'cartridge', 'roll', 'litre', 'kg'].map((u) => h('option', { value: u, selected: u === it.unit }, u)));
-      return h('div', { class: 'proj-line' },
-        h('div', null, h('h3', null, h('a', { class: 'link', href: '#/product/' + p.id }, p.n)), h('p', { class: 'count', style: 'margin:0' }, [p.b, (dv.catById.get(p.c) || {}).name].filter(Boolean).join(' · ')), (it.estimate ? h('p', { class: 'count', style: 'margin:.25rem 0 0' }, it.estimate) : null)),
+      const p = dv.byId.get(it.id); const name = (p && p.n) || it.name || it.id;
+      const qty = h('input', { type: 'number', min: '1', step: '1', inputmode: 'numeric', value: String(it.qty), 'aria-label': `Quantity of ${name}`, onchange: (e) => { const v = Math.max(1, parseInt(e.target.value || '1', 10) || 1); e.target.value = String(v); projects.set(it.id, { qty: v }); } });
+      const dec = h('button', { type: 'button', 'aria-label': `Decrease quantity of ${name}`, onclick: () => { qty.value = String(Math.max(1, (parseInt(qty.value, 10) || 1) - 1)); qty.dispatchEvent(new Event('change')); } }, '−');
+      const inc = h('button', { type: 'button', 'aria-label': `Increase quantity of ${name}`, onclick: () => { qty.value = String((parseInt(qty.value, 10) || 1) + 1); qty.dispatchEvent(new Event('change')); } }, '+');
+      const unit = h('select', { class: 'select', 'aria-label': `Unit for ${name}`, onchange: (e) => projects.set(it.id, { unit: e.target.value }) }, (UNITS.includes(it.unit) ? UNITS : [...UNITS, it.unit]).map((u) => h('option', { value: u, selected: u === it.unit }, u)));
+      const from = SOURCE_TEXT[it.from] || SOURCE_TEXT.portal;
+      const src = h('p', { class: 'count proj-src', 'data-from': it.from }, from,
+        it.question ? [': "', it.question, '"'] : null,
+        it.need ? ['. Quantity needed: ', it.need, it.packs ? ', packs: ' + it.packs : ''] : null,
+        it.basis ? ['. Basis: ', it.basis] : null,
+        it.systemTitle ? ['. From the system: ', it.systemTitle] : null,
+        it.url ? ['. ', h('a', { class: 'link', href: it.url, target: '_blank', rel: 'noopener noreferrer' }, 'Data sheet line', h('span', { class: 'visually-hidden' }, ' (opens in a new tab)'))] : null);
+      return h('div', { class: 'proj-line', 'data-id': it.id },
+        h('div', null, h('h3', null, p ? h('a', { class: 'link', href: '#/product/' + p.id }, name) : name), h('p', { class: 'count', style: 'margin:0' }, p ? [p.b, (dv.catById.get(p.c) || {}).name].filter(Boolean).join(' · ') : 'Not in the catalogue of this demo'), (it.estimate ? h('p', { class: 'count', style: 'margin:.25rem 0 0' }, it.estimate) : null), src),
         h('div', { class: 'qty' }, dec, qty, inc), unit,
-        h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove ${p.n} from my projects`, onclick: () => { projects.remove(it.id); render(); announce(`${p.n} removed`); } }, icon('trash', 'i--sm'), 'Remove'));
-    }).filter(Boolean);
-    body.append(h('section', { 'aria-label': 'Products in this project' }, lines, h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('a', { class: 'btn btn--hollow', href: '#/products' }, 'Add more products'), h('button', { class: 'btn btn--text', type: 'button', onclick: () => { projects.clear(); render(); } }, 'Clear project'))), bomSection(list, dv), quoteForm(ctx, dv));
+        h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove ${name} from my projects`, onclick: () => { projects.remove(it.id); render(); announce(`${name} removed`); } }, icon('trash', 'i--sm'), 'Remove'));
+    });
+    const extras = [];
+    if (proj && proj.systems.length) extras.push(h('section', { class: 'proj-extra', 'aria-label': 'Systems in this project' }, h('h2', { class: 'h4' }, 'System'), proj.systems.map((x, i) => h('div', { class: 'proj-line proj-line--text' }, h('div', null, h('h3', null, x.title), x.slug ? h('p', { class: 'count', style: 'margin:0' }, h('a', { class: 'link', href: new URL('../../systems/' + encodeURIComponent(x.slug) + '/', import.meta.url).href, target: '_blank', rel: 'noopener noreferrer' }, 'Open the system sheet', h('span', { class: 'visually-hidden' }, ' (opens in a new tab)'))) : null), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove the system ${x.title}`, onclick: () => { projectStore.removeSystem(i); render(); } }, icon('trash', 'i--sm'), 'Remove')))));
+    if (proj && proj.documents.length) extras.push(h('section', { class: 'proj-extra', 'aria-label': 'Documents in this project' }, h('h2', { class: 'h4' }, 'Documents'), proj.documents.map((d) => h('div', { class: 'proj-line proj-line--text' }, h('div', null, h('h3', null, h('a', { class: 'link', href: d.url, target: '_blank', rel: 'noopener noreferrer' }, d.title || d.url, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')))), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove the document ${d.title}`, onclick: () => { projectStore.removeDocument(d.url); render(); } }, icon('trash', 'i--sm'), 'Remove')))));
+    const noteIn = h('input', { class: 'input', id: 'proj-note-in', type: 'text', maxlength: '500', 'aria-label': 'Add a note to this project', placeholder: 'Add a note, for example grout colour to confirm' });
+    const addNote = () => { if (noteIn.value.trim()) { projectStore.addNote(noteIn.value); render(); announce('Note added'); } };
+    extras.push(h('section', { class: 'proj-extra', 'aria-label': 'Notes in this project' }, h('h2', { class: 'h4' }, 'Notes'), (proj ? proj.notes : []).map((n, i) => h('div', { class: 'proj-line proj-line--text' }, h('div', null, h('p', { style: 'margin:0' }, n.text), n.saved ? h('p', { class: 'count', style: 'margin:0' }, n.saved.slice(0, 10)) : null), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': `Remove the note: ${n.text.slice(0, 40)}`, onclick: () => { projectStore.removeNote(i); render(); } }, icon('trash', 'i--sm'), 'Remove'))),
+      h('div', { class: 'proj-note-add no-print' }, noteIn, h('button', { class: 'btn btn--hollow', type: 'button', id: 'proj-note-btn', onclick: addNote }, 'Add note'))));
+    noteIn.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addNote(); } });
+    const packOut = h('textarea', { class: 'textarea', id: 'enquiry-text', rows: '8', readonly: true, hidden: true, 'aria-label': 'Text for the enquiry form' });
+    const jobPack = async () => buildJobPack(projectStore.currentProject(), async (id) => { const rec = await data.product(id); return (rec && rec.docs) || []; }, { nameOf: (id) => { const p = dv.byId.get(id); return p && p.n; } });
+    const pack = h('section', { class: 'section job-pack no-print', id: 'job-pack', 'aria-labelledby': 'job-pack-h' }, h('h2', { id: 'job-pack-h' }, 'Job pack'),
+      h('p', { class: 'lead', style: 'max-width:50rem' }, 'The whole project as one pack: a printable page, the quantities as a CSV, a list of every data sheet and safety data sheet link, and the text for the enquiry form. All made in your browser; nothing is sent.'),
+      h('div', { class: 'btn-row' },
+        h('button', { class: 'btn', type: 'button', id: 'pack-print', onclick: () => window.print() }, icon('file', 'i--sm'), 'Print the job pack'),
+        h('button', { class: 'btn btn--hollow', type: 'button', id: 'pack-csv', onclick: async () => saveBlob((await jobPack()).csv, 'job-pack-quantities.csv', 'text/csv;charset=utf-8') }, icon('download', 'i--sm'), 'Download quantities (CSV)'),
+        h('button', { class: 'btn btn--hollow', type: 'button', id: 'pack-docs', onclick: async () => saveBlob((await jobPack()).docsText, 'job-pack-documents.txt', 'text/plain;charset=utf-8') }, icon('download', 'i--sm'), 'Download data sheet and SDS links'),
+        h('button', { class: 'btn btn--hollow', type: 'button', id: 'pack-copy', onclick: async () => { const t = (await jobPack()).enquiry; packOut.value = t; packOut.hidden = false; packOut.select(); try { await navigator.clipboard.writeText(t); announce('Copied for the enquiry form'); } catch { try { document.execCommand('copy'); } catch { /* the text is shown to copy by hand */ } } } }, 'Copy for the enquiry form')),
+      packOut);
+    cartBox.append(...[bar, list.length ? h('section', { 'aria-label': 'Products in this project' }, h('h2', { class: 'h4 visually-hidden' }, 'Products and quantities'), lines, h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('a', { class: 'btn btn--hollow', href: '#/products' }, 'Add more products'), h('button', { class: 'btn btn--text', type: 'button', onclick: () => { projects.clear(); render(); } }, 'Clear project'))) : null, ...extras, list.length ? bomSection(list, dv) : null, list.length ? pack : null].filter(Boolean));
   };
   render();
+  // the advisor changed the project while this page is open: show it (the page's own edits are already on screen)
+  const off = projects.onChange((info) => { if (!el.isConnected) { off(); return; } if (!info || info.origin !== 'portal') render(); });
   return { el, title: 'My projects and quotes', nav: null };
 }
 
@@ -65,7 +99,7 @@ function quoteForm(ctx, dv) {
     set('project', v('project') ? '' : 'Give the project a name.');
     set('postcode', !v('postcode') || /^\d{4}$/.test(v('postcode')) ? '' : 'A postcode has 4 digits.');
     if (!ok) { const first = Object.keys(fields).find((k) => fields[k].getAttribute('aria-invalid') === 'true'); if (first) fields[first].focus(); announce('The form has errors. Please check the highlighted fields.'); return; }
-    const items = projects.list().map((it) => { const p = dv.byId.get(it.id); return p ? { name: p.n, qty: it.qty, unit: it.unit } : null; }).filter(Boolean);
+    const items = projects.list().map((it) => { const p = dv.byId.get(it.id); return { name: (p && p.n) || it.name || it.id, qty: it.qty, unit: it.unit }; });
     const summary = [`Quote request (DEMO, not sent)`, `Name: ${v('name')}`, `Company: ${v('company')}`, `Email: ${v('email')}`, v('phone') && `Phone: ${v('phone')}`, `Role: ${fields.role.value}`, `Project: ${v('project')}`, v('postcode') && `Postcode: ${v('postcode')}`, v('needed') && `Needed by: ${v('needed')}`, '', 'Items:', ...items.map((i) => `- ${i.qty} x ${i.unit}: ${i.name}`), v('notes') && '', v('notes') && `Notes: ${v('notes')}`].filter((x) => x !== '' || true).filter((x) => x !== false && x !== '').join('\n');
     const done = h('div', { class: 'success', role: 'status', tabindex: '-1', id: 'quote-done' },
       h('span', { class: 'demo-only' }, 'Demo only'), h('h2', null, 'Thanks, your quote request is ready'),
