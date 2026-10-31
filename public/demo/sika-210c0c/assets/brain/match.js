@@ -39,8 +39,14 @@ export function spellToken(t, vocab, has, df = () => 0) {
   if (has(t) || t.length < 5 || /\d/.test(t)) return t;
   const max = t.length >= 9 ? 2 : 1; let best = null, bd = 9, bdf = -1;
   for (const v of vocab) { if (Math.abs(v.length - t.length) > max || v.length < 5) continue; const d = dist(t, v, max); if (d > max) continue; const f = df(v); if (d < bd || (d === bd && f > bdf)) { best = v; bd = d; bdf = f; } }
+  if (best || t.length < 6 || t.length >= 9) return best || t;
+  // two letters wrong in a 6 to 8 letter word: accept only a vocabulary word with the same consonant skeleton and first letter (dropped, doubled or swapped vowels, the usual phone typo), most frequent on a tie
+  const sk = skeleton(t); bd = 9; bdf = -1;
+  for (const v of vocab) { if (Math.abs(v.length - t.length) > 2 || v[0] !== t[0] || skeleton(v) !== sk) continue; const d = dist(t, v, 2); if (d > 2) continue; const f = df(v); if (d < bd || (d === bd && f > bdf)) { best = v; bd = d; bdf = f; } }
   return best || t;
 }
+/** The consonant skeleton of a word (vowels dropped, doubled letters collapsed): typos on phones mostly keep it. */
+export function skeleton(w) { return String(w).replace(/[aeiou]/g, '').replace(/(.)\1+/g, '$1'); }
 /** Correct the words of a normalised phrase against a lexicon of words the assistant understands (never against product names). skip(w) keeps a word as typed. */
 export function correctAgainst(s, lexicon, skip) {
   return s.split(' ').map((x) => {

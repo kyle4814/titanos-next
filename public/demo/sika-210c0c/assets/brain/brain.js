@@ -7,10 +7,12 @@ import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schem
 import * as C from './cards.js';
 import { createKnow } from './know.js';
 // (applySlang comes from the shared matcher below)
-import { vagueCard, termCard, genericVague } from './vague.js';
+import { vagueCard, termCard, genericVague, intentClarifier } from './vague.js';
 import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
 import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
+import { createSession } from './session.js';
+import { applyNames, historyCard } from './names.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -75,6 +77,7 @@ export function createBrain({ load, config } = {}) {
     core = await load.core(); if (!core) throw new Error('brain: core shard missing');
     core.P.forEach((p, i) => pIndex.set(p.id, i));
     vocab = Object.keys(core.post);
+    applyNames(core, pIndex);
     return core;
   }
 
@@ -206,8 +209,17 @@ export function createBrain({ load, config } = {}) {
     }
     return cards;
   };
+  // only a short, non-question message made wholly of catalogue words gets the three-jobs clarifier; anything else keeps its honest no-data
+  const shortAsk = (n0) => { const w = n0.split(' ').filter(Boolean); if (w.length > 4 || /^(what|whats|how|why|is|are|does|do|can|could|will|who|where|when|which|tell)\b/.test(n0)) return false; const c = w.filter((x) => !STOP.has(x) && !GENERIC.has(x) && x.length > 2); return c.length >= 1 && c.every((x) => core.post[spell(stem(x))] || core.post[spell(x)]); };
+  // the product groups whose published text uses the message's words (catalogue vocabulary), most likely first, for the generic clarifier
+  function likelyKinds(n0) {
+    const toks = [...new Set(tokens(n0).map((t) => spell(t)).filter((t) => core.post[t] && t.length > 2 && !GENERIC.has(t)))]; if (!toks.length) return [];
+    const tally = new Map();
+    for (const t of toks) { const seen = new Set(); for (const v of core.post[t]) { const pi = v >> 3; const parts = core.P[pi].c.split('/').slice(1); for (let d = Math.min(parts.length, 3); d >= 1; d--) { const lab = parts[d - 1].replace(/-/g, ' '); if (advisor.hasKind(lab)) { if (!seen.has(lab)) { seen.add(lab); tally.set(lab, (tally.get(lab) || 0) + 1 / Math.sqrt(core.post[t].length)); } break; } } } }
+    return [...tally].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([label]) => ({ label }));
+  }
   // ---- main entry
-  async function ask(question, state = null) {
+  async function askInner(question, state = null) {
     const t0 = now(); const trace = [];
     const q = String(question || '').trim();
     let akaNote = null;
@@ -224,6 +236,7 @@ export function createBrain({ load, config } = {}) {
     const slang0 = applySlang(normalise(q));
     const slang = slang0; const n0 = correctWords(slang.text); if (n0 !== slang.text) trace.push('read:' + n0); if (slang.notes.length) trace.push('slang:' + slang.notes.map((x) => x.from + '>' + x.to).join(','));
     if (core.aka) { const hit = Object.entries(core.aka).find(([k]) => (' ' + n0 + ' ').includes(' ' + k + ' ')); if (hit) akaNote = { id: core.P[hit[1].pi].id, s: hit[1].s }; }
+    { const hc = historyCard(n0); if (hc) { trace.push('names:history'); return out(hc.type === 'unknown' ? 'oos' : 'info', 'names', [hc], { followups: hc.followups }); } }
     { const vc = vagueCard(n0) || termCard(n0); if (vc) { trace.push('vague'); return out('vague', 'clarify', [vc], { followups: vc.followups }); } }
     // product mentions: exact, then fuzzy
     let mentions = findExact(n0); let stage = 'exact';
@@ -297,7 +310,7 @@ export function createBrain({ load, config } = {}) {
     if (!pis.length || know.signal(n0)) { const tp = await know.topic(q, n0); if (tp) { trace.push('kb:topic'); return out('info', 'kb', [tp], { state: null }); } }
     if (!pis.length && !/^(i need|i want|looking for)\b/.test(n0)) { const cs = await know.codeSearch(q, n0, { kind: advisor.hasKind(n0) }); if (cs) { trace.push('kb:code'); return out('info', 'kb', [cs], { state: null }); } }
     // general retrieval over Sika Australia's own pages
-    if (!pis.length) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0), advisor.wants(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
+    if (!pis.length && !(/^(i need|i want|looking for)\b/.test(n0) && /\bcontact (adhesive|adhesives|cement)\b/.test(n0))) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0), advisor.wants(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
     if (!pis.length && !advisor.wants(n0) && ((know.signal(n0) && !(advisor.hasKind(n0) && know.weakSignal(n0))) || (know.definitional(n0) && tokens(n0).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2)) && !facets.tile_type.length && !facets.environment.length && !/\b(best|better|good|recommend|suitable|right|ideal|should i)\b/.test(n0)))) { const kr = await know.retrieve(q, n0); if (kr) { trace.push('kb:retrieve'); return out('info', 'kb', [kr], { state: null }); } }
     // a product fact that sits under a label on the product page (shelf life, temperature limits, mixing ratio, thickness, steps, ...)
     if (pis.length === 1 && !ambiguous && ['which', 'time', 'safety', 'compat'].includes(intent)) {
@@ -310,7 +323,7 @@ export function createBrain({ load, config } = {}) {
       return out(intent, stage, [C.unknown(q, sh, 'Prices, stock, delivery and warranty terms are not in the documentation I work from, and I will not guess them. Please ask Sika Australia or a stockist.', ['price, stock or warranty'])], { state: pis.length ? st(pis[0]) : null });
     }
     if (intent === 'compare') {
-      if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: st(pis[0]) }); }
+      if (pis.length >= 2) { const [a, b] = await Promise.all([shard(pis[0]), shard(pis[1])]); return out(intent, stage, [C.compareCard(a, b)], { state: { ...st(pis[0]), productIds: pis.slice(0, 4).map((x) => core.P[x].id) } }); }
       intent = 'which';
     }
     let needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
@@ -432,8 +445,8 @@ export function createBrain({ load, config } = {}) {
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const kr = await know.retrieve(q, n0, { strict: false }); if (kr) { trace.push('kb:fallback'); return out('info', 'kb', [kr], { state: null }); } }
     if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ad = await advisor.advise(q, n, null, true); if (ad) { trace.push('advisor:fallback'); return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad, q, n0, slang.notes), { state: { advice: { n: n, ids: ad.items.map((x) => x.e.id) } } }); } }
     if (howto && !items.length || howto && !/\b(adhesive|glue|sealant|silicone|grout|waterproof\w*|membrane|tile|tiles|tiling|screed|level\w*|concrete|primer|epoxy|crack\w*|fill|seal|bond|stick)\b/.test(n)) return out(intent, 'unknown', [C.unknown(q, null, 'I do not have step by step trade instructions for that. I answer about Sika Australia products and business from the published documentation. Please ask Sika Technical Services.', ['instructions'])]);
-    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const gv = !pis.length && !advisor.hasKind(n0) ? genericVague(n0) : null; if (gv) { trace.push('vague:generic'); return out('vague', 'clarify', [gv], { followups: gv.followups }); } }
-    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]);
+    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const gv = !pis.length && !advisor.hasKind(n0) ? (genericVague(n0) || (shortAsk(n0) ? intentClarifier(n0, likelyKinds(n0)) : null)) : null; if (gv) { trace.push('vague:generic'); return out('vague', 'clarify', [gv], { followups: gv.followups }); } }
+    if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ic = !pis.length && shortAsk(n0) ? intentClarifier(n0, likelyKinds(n0)) : null; if (ic) { trace.push('vague:intents'); return out('vague', 'clarify', [ic], { followups: ic.followups }); } return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]); }
     let list = items.slice(0, 30); const ruled = [];
     const condWords = [...new Set(tokens(n))].filter((w) => CONDITION_WORDS.has(w));
     if (condWords.length) { // a named condition (sauna, freezer room, chemical): only products whose own text mentions it, never a keyword guess
@@ -462,6 +475,8 @@ export function createBrain({ load, config } = {}) {
     if (ruled.length) { const r = ruled[0]; const sh = await shard(r.it.pi); if (sh) { const c = C.compatCard(sh, 'no', { id: r.rule.r, text: r.rule.t, s: { u: r.rule.u, p: r.rule.pg, v: r.rule.v, t: 'PDS' } }, q, [], []); c.title = `Ruled out: ${sh.n}`; c.headline = 'No. This product matches your words but its own data sheet rules it out for this job.'; cards.push(c); } }
     return out(cards.length ? 'which' : intent, 'index', cards, { state: top.length === 1 ? { productId: core.P[top[0].pi].id, intent: 'which' } : null });
   }
-  return { ask, boot, search: (n) => search(normalise(n), []), core: () => core };
+  const session = createSession({ ask: askInner, advisor, boot, productName: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].n : ''), productCategory: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].c : '') });
+  const ask = (question, state = null) => session.ask(question, state);
+  return { ask, askInner, boot, search: (n) => search(normalise(n), []), core: () => core };
 }
 export { NOT_KNOWN };
