@@ -46,6 +46,33 @@ function valueNode(r) {
 const sumList = (rows) => h('ul', { class: 'sumlist' }, rows.map((r) => h('li', null, ...(r.productId ? [h('a', { href: '#/product/' + encodeURIComponent(r.productId), class: 'link', onclick: () => onNavigate() }, r.label), ': '] : [h('strong', null, r.label), ': ']), r.value, r.source && r.source.url ? [' ', extLink(r.source.url, '(source)')] : null)));
 const rowsTable = (rows, cls = '') => h('dl', { class: 'kv ' + cls }, rows.map((r) => [h('dt', { class: r.verdict ? 'v-' + r.verdict : null }, r.label), h('dd', { class: r.verdict ? 'v-' + r.verdict : null }, ...valueNode(r))]));
 
+// A comparison cell: the published wording, one short source link (the label is its tooltip), the full source sentence under "How I know", and any further source lines in a list.
+function cmpCell(cell) {
+  const kids = [cell.value];
+  if (cell.source && cell.source.url) kids.push(' ', h('a', { href: cell.source.url, class: 'link', target: '_blank', rel: 'noopener noreferrer', title: cell.source.label }, '(source)', h('span', { class: 'visually-hidden' }, ` ${cell.source.label} (opens in a new tab)`)));
+  const more = (cell.also || []).filter((a) => a && a.url);
+  if (cell.source && cell.source.sentence && (cell.source.sentence !== cell.value || more.length)) kids.push(h('details', { class: 'how' }, h('summary', null, more.length ? `How I know (${more.length + 1} source lines)` : 'How I know'), h('blockquote', null, cell.source.sentence), more.length ? h('ul', { class: 'cmp-also' }, more.map((a) => h('li', null, a.sentence + ' ', extLink(a.url, `(${a.label})`)))) : null));
+  return kids;
+}
+// The job card: one block per system (floor, walls), one line per product with its quantity, pack count and the published coverage sentence beside it.
+const short = (t, n = 230) => { const x = String(t || '').replace(/\s+/g, ' ').trim(); return x.length <= n ? x : x.slice(0, n).replace(/\s+\S*$/, '') + '...'; };
+function jobLine(r) {
+  const l = r.line || {};
+  const head = h('div', { class: 'job-head' }, h('span', { class: 'job-role' }, l.label || r.label), ' ', l.productId ? h('a', { href: '#/product/' + encodeURIComponent(l.productId), class: 'link', onclick: () => onNavigate() }, l.name) : null);
+  if (!l.productId) return h('li', { class: 'job-line job-line--ask' }, head, h('div', { class: 'job-qty job-ask' }, r.value), r.source && r.source.url ? h('div', { class: 'job-cov' }, 'Source: ', extLink(r.source.url, '(source)')) : null);
+  const qty = l.status === 'worked'
+    ? h('div', { class: 'job-qty' }, h('strong', null, l.qtyText), l.packs ? ` | ${l.packs}` : l.packNote ? ` | ${l.packNote}` : '')
+    : h('div', { class: 'job-qty job-ask' }, `Ask Technical Services. ${l.reason || ''}`);
+  const cov = l.rate ? h('div', { class: 'job-cov' }, 'Published coverage: ', h('q', null, short(r.source && r.source.sentence ? r.source.sentence : l.rate.text)), ' ', extLink(l.rate.url, '(source)'))
+    : l.why ? h('div', { class: 'job-cov' }, 'Why this product: ', h('q', null, String(l.why.quote).slice(0, 200)), ' ', extLink(l.why.url, '(source)')) : null;
+  return h('li', { class: 'job-line job-line--' + (l.status || 'ask') }, head, qty, cov);
+}
+function jobList(c) {
+  return h('div', { class: 'job' }, (c.sections || []).map((s) => h('section', { class: 'job-sys' }, h('div', { class: 'm-title sec' }, s.title),
+    h('ul', { class: 'job-lines' }, s.rows.map(jobLine)),
+    s.more && s.more.length ? h('details', { class: 'more' }, h('summary', null, 'Why these products, and the other documented choices'), rowsTable(s.more)) : null)));
+}
+
 /** Build the DOM of one card. `act` = { send, memory, session } for buttons. */
 export function renderCard(c, act) {
   const root = h('div', { class: 'msg msg--bot action-card', 'data-action': c.action, 'data-kind': c.kind });
@@ -61,10 +88,14 @@ export function renderCard(c, act) {
   if (c.topButtons) root.append(h('div', { class: 'opts' }, c.topButtons.map((b) => h('a', { class: 'chip', href: new URL(b.href, baseUrl).href, target: '_blank', rel: 'noopener noreferrer' }, b.label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')))));
   if (c.assumptions && c.assumptions.length) root.append(h('ul', { class: 'm-assume' }, c.assumptions.map((a) => h('li', null, a))));
   if (c.rows && c.rows.length) root.append(rowsTable(c.rows));
-  if (c.table) root.append(h('div', { class: 'cmp', role: 'table', 'aria-label': c.title },
-    h('div', { class: 'cmp-row cmp-head', role: 'row' }, c.table.head.map((x) => h('div', { role: 'columnheader' }, x))),
-    c.table.rows.map((r) => h('div', { class: 'cmp-row', role: 'row' }, h('div', { role: 'rowheader', class: 'cmp-label' }, r.label), r.cells.map((cell) => h('div', { role: 'cell' }, ...valueNode(cell)))))));
-  for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), s.compact ? sumList(s.rows) : rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
+  if (c.table) {
+    const n = c.table.head.length - 1; const cols = c.table.cols || [];
+    root.append(h('div', { class: 'cmp cmp--' + n, style: `--n:${n}`, role: 'table', 'aria-label': c.title },
+      h('div', { class: 'cmp-row cmp-head', role: 'row' }, c.table.head.map((x, i) => h('div', { role: 'columnheader' }, i && cols[i - 1] ? [h('a', { href: cols[i - 1].href, class: 'link', onclick: () => onNavigate() }, x), cols[i - 1].url ? [' ', extLink(cols[i - 1].url, '(Sika page)')] : null] : x))),
+      c.table.rows.map((r) => h('div', { class: 'cmp-row', role: 'row', 'data-field': r.id || null }, h('div', { role: 'rowheader', class: 'cmp-label' }, r.label), r.cells.map((cell, i) => h('div', { role: 'cell', 'data-col': c.table.head[i + 1], class: cell.absent ? 'cmp-absent' : null }, ...cmpCell(cell)))))));
+  }
+  if (c.kind === 'job') root.append(jobList(c));
+  else for (const s of c.sections || []) { root.append(h('div', { class: 'm-title sec' }, s.title), s.compact ? sumList(s.rows) : rowsTable(s.rows)); if (s.more && s.more.length) root.append(h('details', { class: 'more' }, h('summary', null, 'More detail, limits and products that are only partly documented'), rowsTable(s.more))); }
   (c.notes || []).forEach((n) => root.append(h('p', { class: 'cite' }, n)));
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
   if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': c.copyAria || 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, c.copyLabel || 'Copy the clause')); }

@@ -43,6 +43,7 @@ export function createData(store) {
     trees: () => g('actions/trees.json'),
     kindex: () => g('k/_index.json'),
     problems: () => g('knowledge/problems.json'),
+    shard: (id) => g('brain/p/' + encodeURIComponent(id) + '.json'), // the advisor's per-product shard: labelled data sheet fields, times, standards, substrates, each with its source
   };
   let idx;
   d.finder = async () => {
@@ -77,7 +78,10 @@ const stemTok = (t) => (t.length > 3 && t.endsWith('s') && !t.endsWith('ss') ? t
 export async function findProducts(data, text, max = 3) {
   const F = await data.finder();
   const q = ' ' + norm(text) + ' ';
-  const qt = new Set(q.trim().split(' ').map(stemTok));
+  const qWords = q.trim().split(' ');
+  const qt = new Set(qWords.map(stemTok));
+  // "secure set" typed for SecureSet and "secureset" typed for Secure Set are the same name: adjacent words are also tried joined
+  for (let i = 0; i + 1 < qWords.length; i++) if (qWords[i].length > 2 && qWords[i + 1].length > 1) qt.add(stemTok(qWords[i] + qWords[i + 1]));
   const hits = [];
   for (const r of F.rows) {
     const full = q.indexOf(' ' + r.n + ' ');
@@ -85,9 +89,14 @@ export async function findProducts(data, text, max = 3) {
     const core = r.core.filter((t) => t.length > 0);
     if (!core.length) continue;
     let got = 0, tot = 0, missDigit = false, nGot = 0;
-    for (const t of core) {
-      const wt = F.w(t); tot += wt;
+    for (let ci = 0; ci < core.length; ci++) {
+      const t = core[ci]; const wt = F.w(t); tot += wt;
       if (qt.has(stemTok(t))) { got += wt; nGot++; } else if (/\d/.test(t)) missDigit = true;
+    }
+    // a name split in two words in the data ("secure" + "set") typed as one word: count both halves
+    if (core.length > 1) for (let ci = 0; ci + 1 < core.length; ci++) {
+      const a = core[ci], b = core[ci + 1];
+      if (!qt.has(stemTok(a)) && !qt.has(stemTok(b)) && qt.has(stemTok(a + b))) { got += F.w(a) + F.w(b); nGot += 2; }
     }
     if (missDigit) continue;
     const frac = got / tot;

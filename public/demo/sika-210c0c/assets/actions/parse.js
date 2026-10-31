@@ -1,11 +1,14 @@
 // Actions v2, parsing: slash commands and plain English into { action, rest }, and facets out of free text.
 // Plain regular expressions. No model. Facet ids match data/selector.json so a parsed answer can feed the system finder directly.
 
+import { looksLikeJob } from './job.js';
+
 export const COMMANDS = [
   ['/calc', 'calc', 'How much and how many packs: /calc 20 m2 Davco Grey One Pot adhesive'],
   ['/system', 'system', 'The ordered system: /system porcelain on concrete, internal wet floor'],
   ['/pack', 'pack', 'One printable project pack from what we have so far'],
-  ['/compare', 'compare', 'Two products side by side: /compare Davco Easy Grout vs SikaCeram-690 Elite'],
+  ['/job', 'job', 'The whole system for a room with quantities: /job bathroom 2.4 x 1.8, walls to 1.8 m, over concrete'],
+  ['/compare', 'compare', 'Two or three products side by side: /compare SikaTile-400 EVO PRO vs SikaTile-410 Secure Set'],
   ['/safety', 'safety', 'Safety data sheet statements: /safety gloves for Davco Grey One Pot adhesive'],
   ['/time', 'time', 'Open, cure and recoat times: /time open time Davco Grey One Pot adhesive'],
   ['/spec', 'spec', 'Draft specification clause for a product'],
@@ -121,6 +124,17 @@ const COMPARE_RE = /\b(compare|comparison|versus|vs\.?|difference between|differ
 const LINK_RE = /\b(link|links|url|pdf)\b[^.?!]{0,40}\b(work|working|broken|dead|ok|okay|alive|live|health|valid|check|404)\b|\b(work|working|broken|dead|alive|live|health|check)\b[^.?!]{0,40}\b(link|links|url|pdf)\b|\bbroken link|\bdead link/i;
 const SAVE_RE = /^(?:please )?(?:save|add|keep|store|remember)\b[^.?!]{0,50}\b(project|that|this|it)\b/i;
 
+// the job builder: a room-sized job ("bathroom 2.4 x 1.8, walls to 1.8 m, over concrete"). A question for how much of ONE product type ("how much primer for a 2.4 x 1.8 bathroom") stays with the single-product answers.
+const JOB_ASKS_ONE = /\bhow (?:much|many)\b[^.?!]*\b(?:primer|adhesive|grout|sealant|membrane|waterproof(?:ing)?|bags?|pails?|litres?)\b/i;
+const JOB_WORDS_RE = /\b(?:job|everything|whole|system|full list|shopping list|what do i need|products? (?:do i|for)|materials?|build|list)\b/i;
+const JOB_PRODUCT_RE = /\b(?:tile|tiles|tiling|tiled|waterproof\w*|walls?|floors?|splashback|over|on top of|screed|concrete|plasterboard|timber|slab|render)\b/i;
+function JOB_RE(t) {
+  if (!looksLikeJob(t)) return false;
+  if (JOB_ASKS_ONE.test(t) && !JOB_WORDS_RE.test(t)) return false;
+  const areaOnly = !/\d\s*(?:m|mm|cm)?\s*(?:x|\*|by|×)\s*\d/i.test(t);
+  return areaOnly ? JOB_WORDS_RE.test(t) && JOB_PRODUCT_RE.test(t) : true; // a room with a length and a width is a job
+}
+
 /** Decide what the visitor wants. Returns { action, rest, slash } or null (hand it to the product advisor). */
 export function route(text) {
   const raw = String(text || '').trim();
@@ -136,6 +150,7 @@ export function route(text) {
     if (c === '/exportjson') return { action: 'exportjson', rest: m[2], slash: true };
     if (c === '/clear') return { action: 'clearmemory', rest: m[2], slash: true };
     if (c === '/start') return { action: 'start', rest: m[2], slash: true };
+    if (c === '/jobadd') return { action: 'jobadd', rest: m[2], slash: true };
     for (const [sc, sa] of CART_SLASH) if (c === sc) return { action: sa, rest: m[2], slash: true };
     const a = CMD.get(c);
     if (a === 'ask') return null;
@@ -150,6 +165,7 @@ export function route(text) {
   if (/^(?:new|start|create) (?:a )?project\b/i.test(t)) return { action: 'newproject', rest: t.replace(/^(?:new|start|create) (?:a )?project\s*(?:called|named)?\s*/i, '') };
   if (SAVE_RE.test(t) && !PACK_RE.test(t)) return { action: 'save', rest: t };
   if (PACK_RE.test(t)) return { action: 'pack', rest: t };
+  if (JOB_RE(t)) return { action: 'job', rest: t };
   if (HANDOFF_RE.test(t) && !SAFETY_RE.test(t)) return { action: 'handoff', rest: t };
   if (EXPORT_RE.test(t) && !/\bsds\b|\bdata sheet|\bsafety data/i.test(t)) return { action: 'export', rest: t };
   if (LINK_RE.test(t)) return { action: 'link', rest: t };

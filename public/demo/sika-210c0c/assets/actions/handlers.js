@@ -2,6 +2,7 @@
 // Rules held by every handler: a figure is shown only beside the sentence it came from (phrase, page, URL); quantities only, never prices;
 // the estimate-only line on every quantity card; where the published data is silent the card says so and offers the hand-off.
 import SikaCalc from './sikacalc.js';
+import { compareTable } from './compare.js';
 import { card, clarifyCard, unknownCard, src, plain, norm, findProducts, findProductsInOrder, ESTIMATE_LINE, NOT_PUBLISHED, cardCsv, cardText } from './core.js';
 import { parseNumbers, parseFacets, envId, ioFromEnv } from './parse.js';
 import { fmt, fmtQty } from '../lib/finder/calc.js';
@@ -316,35 +317,19 @@ export function clampPhrase(text, n = 170) {
 }
 export async function compare(ctx) {
   const { data, session } = ctx;
-  let hits = await findProductsInOrder(data, ctx.rest || ctx.text, 2);
+  let hits = await findProductsInOrder(data, ctx.rest || ctx.text, 3);
   if (hits.length === 1 && session.product && session.product.id !== hits[0].id) hits = [session.product, hits[0]].map((x) => ({ id: x.id, name: x.name }));
   if (hits.length < 2) {
-    if (ctx.noAsk) return unknownCard('compare', 'Compare two products', 'I need two product names to compare, for example Davco Easy Grout versus SikaCeram-690 Elite.');
-    return clarifyCard('compare', 'Which two products? Type both names, for example Davco Easy Grout versus SikaCeram-690 Elite.', [], 'products');
+    if (ctx.noAsk) return unknownCard('compare', 'Compare two products', 'I need two product names to compare, for example SikaTile-400 EVO PRO versus SikaTile-410 Secure Set.');
+    return clarifyCard('compare', 'Which two products? Type both names, for example SikaTile-400 EVO PRO versus SikaTile-410 Secure Set.', [], 'products');
   }
-  const [A, B] = hits;
-  const [pa, pb, ra, rb, ka, kb] = await Promise.all([data.product(A.id), data.product(B.id), data.arate(A.id), data.arate(B.id), data.compat(A.id), data.compat(B.id)]);
-  const c = card('compare', 'compare', `${A.name} compared with ${B.name}`, { estimate: false });
-  c.summary = 'Side by side, each cell is the published wording with its source. A blank means the published data does not say.';
-  c.table = { head: ['', A.name, B.name], rows: [] };
-  const cell = (value, source) => (value ? { value: clampPhrase(value), source: source || null } : { value: NOT_PUBLISHED, source: null });
-  const line = (label, fa, fb) => c.table.rows.push({ label, cells: [fa, fb] });
-  const sum = (p) => cell(p && (p.summary || p.tagline), p && src(p.url, 'Product page', p.summary || p.tagline));
-  line('What it is', sum(pa), sum(pb));
-  const catOf = (p) => cell(p && p.categoryPath && p.categoryPath.slice(-1)[0].replace(/-/g, ' '), p && src(p.url, 'Product page', p.categoryPath && p.categoryPath.slice(-1)[0].replace(/-/g, ' ')));
-  line('Category', catOf(pa), catOf(pb));
-  const pk = (r, p) => { const f = r && (r.facts.pack_sizes || [])[0]; return f ? cell(f.text, srcOf(f)) : cell(p && p.packaging, p && p.packaging && src(p.url, 'Product page', p.packaging)); };
-  line('Pack sizes', pk(ra, pa), pk(rb, pb));
-  const rt = (r) => { const f = r && (r.facts.consumption || [])[0]; return f ? cell(f.text, srcOf(f)) : cell(null); };
-  line('Published consumption', rt(ra), rt(rb));
-  const tm = (r) => { const f = r && ((r.facts.open_time || [])[0] || (r.facts.cure_times || [])[0] || (r.facts.pot_life || [])[0]); return f ? cell(f.text, srcOf(f)) : cell(null); };
-  line('Open, cure or pot life time', tm(ra), tm(rb));
-  const ex = (k, p) => { const r = k && k.rules.find((x) => x.polarity === 'no' && !x.conditional); return r ? cell(r.text, src(page({ url: r.source.url, page: r.source.page }), srcLabel(r.source), r.text)) : cell(null); };
-  line('A stated exclusion', ex(ka, pa), ex(kb, pb));
-  const ds = (r) => { if (!(r && r.datasheet)) return cell(null); const v = r.datasheet.doc_version ? `Data sheet, ${plain(r.datasheet.doc_version)}` : 'Data sheet'; return { value: v, source: src(r.datasheet.url, v, v) }; };
-  line('Data sheet', ds(ra), ds(rb));
-  [A, B].forEach((x) => noteProduct(session, x));
-  session.compare = [A.id, B.id];
+  const items = await Promise.all(hits.map(async (h) => ({ id: h.id, name: plain(h.name), shard: await data.shard(h.id) })));
+  const c = card('compare', 'compare', `${items.map((x) => x.name).join(' vs ')}`, { estimate: false });
+  c.summary = 'Side by side, each cell is the published wording from one source line, with its link. "Not published" means the product page and data sheet do not state it.';
+  c.table = compareTable(items);
+  c.compareProducts = items.map((x) => ({ id: x.id, name: x.name }));
+  hits.forEach((x) => noteProduct(session, x));
+  session.compare = hits.map((x) => x.id);
   c.buttons = afterBtns();
   return c;
 }
