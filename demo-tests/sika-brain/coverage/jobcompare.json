@@ -1,0 +1,882 @@
+[
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "SikaTile-400 EVO PRO vs SikaTile-410 Secure Set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "jc001",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare sikatile-400 evo pro and sikatile-410 secure set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "jc002",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "sikatile-400 evo pro or sikatile-410 secure set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "jc003",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between sikatile-400 evo pro and sikatile-410 secure set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "jc004",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "400 evo pro vs 410 secure set",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "sikatile-410-secureset"
+   ]
+  },
+  "id": "jc005",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "SikaTile-400 EVO PRO vs Davco Powder Mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc006",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare sikatile-400 evo pro and davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc007",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "sikatile-400 evo pro or davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc008",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between sikatile-400 evo pro and davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc009",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "400 evo pro vs powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-400-evopro",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc010",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "Davco K10 Rapid vs Davco K10 Plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-rapid",
+    "davco-k10-plus"
+   ]
+  },
+  "id": "jc011",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare davco k10 rapid and davco k10 plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-rapid",
+    "davco-k10-plus"
+   ]
+  },
+  "id": "jc012",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "davco k10 rapid or davco k10 plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-rapid",
+    "davco-k10-plus"
+   ]
+  },
+  "id": "jc013",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between davco k10 rapid and davco k10 plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-rapid",
+    "davco-k10-plus"
+   ]
+  },
+  "id": "jc014",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "k10 rapid vs k10 plus",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-k10-rapid",
+    "davco-k10-plus"
+   ]
+  },
+  "id": "jc015",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "Davco Easy Grout vs SikaCeram-690 Elite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-easy-grout",
+    "sikaceram-690-elite"
+   ]
+  },
+  "id": "jc016",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare davco easy grout and sikaceram-690 elite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-easy-grout",
+    "sikaceram-690-elite"
+   ]
+  },
+  "id": "jc017",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "davco easy grout or sikaceram-690 elite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-easy-grout",
+    "sikaceram-690-elite"
+   ]
+  },
+  "id": "jc018",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between davco easy grout and sikaceram-690 elite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-easy-grout",
+    "sikaceram-690-elite"
+   ]
+  },
+  "id": "jc019",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "easy grout vs 690 elite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-easy-grout",
+    "sikaceram-690-elite"
+   ]
+  },
+  "id": "jc020",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "SikaTile-305 Master Lite vs SikaTile-510 Mega Lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc021",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare sikatile-305 master lite and sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc022",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "sikatile-305 master lite or sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc023",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between sikatile-305 master lite and sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc024",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "305 master lite vs 510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-305-masterlite",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc025",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "Davco Trojan Mastic vs Davco Powder Mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc026",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare davco trojan mastic and davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc027",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "davco trojan mastic or davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc028",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between davco trojan mastic and davco powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc029",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "trojan mastic vs powder mastic",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-trojan-mastic",
+    "davco-powder-mastic"
+   ]
+  },
+  "id": "jc030",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "SikaTile-110 Secure Proof vs Davco K10 Rapid",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof",
+    "davco-k10-rapid"
+   ]
+  },
+  "id": "jc031",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare sikatile-110 secure proof and davco k10 rapid",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof",
+    "davco-k10-rapid"
+   ]
+  },
+  "id": "jc032",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "sikatile-110 secure proof or davco k10 rapid",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof",
+    "davco-k10-rapid"
+   ]
+  },
+  "id": "jc033",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between sikatile-110 secure proof and davco k10 rapid",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof",
+    "davco-k10-rapid"
+   ]
+  },
+  "id": "jc034",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "110 secure proof vs k10 rapid",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-110-secureproof",
+    "davco-k10-rapid"
+   ]
+  },
+  "id": "jc035",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "Davco Ultraflex vs Davco Ceramaflex",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-ultraflex",
+    "davco-ceramaflex"
+   ]
+  },
+  "id": "jc036",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare davco ultraflex and davco ceramaflex",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-ultraflex",
+    "davco-ceramaflex"
+   ]
+  },
+  "id": "jc037",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "davco ultraflex or davco ceramaflex",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-ultraflex",
+    "davco-ceramaflex"
+   ]
+  },
+  "id": "jc038",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between davco ultraflex and davco ceramaflex",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-ultraflex",
+    "davco-ceramaflex"
+   ]
+  },
+  "id": "jc039",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "ultraflex vs ceramaflex",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-ultraflex",
+    "davco-ceramaflex"
+   ]
+  },
+  "id": "jc040",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "Davco PrimeX vs Davco Ultraprime",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-primex",
+    "davco-ultraprime"
+   ]
+  },
+  "id": "jc041",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare davco primex and davco ultraprime",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-primex",
+    "davco-ultraprime"
+   ]
+  },
+  "id": "jc042",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "davco primex or davco ultraprime",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-primex",
+    "davco-ultraprime"
+   ]
+  },
+  "id": "jc043",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between davco primex and davco ultraprime",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-primex",
+    "davco-ultraprime"
+   ]
+  },
+  "id": "jc044",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "primex vs ultraprime",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "davco-primex",
+    "davco-ultraprime"
+   ]
+  },
+  "id": "jc045",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "SikaTile-410 Secure Set vs SikaTile-510 Mega Lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-410-secureset",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc046",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "compare sikatile-410 secure set and sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-410-secureset",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc047",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "sikatile-410 secure set or sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-410-secureset",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc048",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "difference between sikatile-410 secure set and sikatile-510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-410-secureset",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc049",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "compare",
+  "q": "410 secure set vs 510 mega lite",
+  "type": "compare",
+  "exp": {
+   "products": [
+    "sikatile-410-secureset",
+    "sikatile-510-megalite"
+   ]
+  },
+  "id": "jc050",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2.4 x 1.8, walls to 1.8 m, over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj001",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2400 x 1800 mm, tiled to 2100 mm, over a cement screed",
+  "type": "job",
+  "exp": {},
+  "id": "jj002",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "laundry 3 by 2.5 m, floor only, concrete slab",
+  "type": "job",
+  "exp": {},
+  "id": "jj003",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "shower 900 x 900 walls to 2.1 over fibre cement sheet",
+  "type": "job",
+  "exp": {},
+  "id": "jj004",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "what do I need to tile a 12 m2 bathroom floor over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj005",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "balcony 3m x 2m on screed",
+  "type": "job",
+  "exp": {},
+  "id": "jj006",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "ensuite 2.1 x 1.5, walls to 1.8 m, plasterboard walls and concrete floor, porcelain",
+  "type": "job",
+  "exp": {},
+  "id": "jj007",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "tiling a 4 x 3 m kitchen floor over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj008",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "whole job list for a 2.4 x 1.8 m bathroom with a 10% allowance",
+  "type": "job",
+  "exp": {},
+  "id": "jj009",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "give me everything for a bathroom 3.2 x 2.7 m, walls to 1.8 m, over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj010",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "job list for a 2.4 x 1.8 m wet room over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj011",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2.4 x 1.8 m existing tiles walls to 1.2 m",
+  "type": "job",
+  "exp": {},
+  "id": "jj012",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "pool 8 x 4 m concrete mosaic",
+  "type": "job",
+  "exp": {},
+  "id": "jj013",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "wet room 2 x 2 m timber floor walls to 2.4 m",
+  "type": "job",
+  "exp": {},
+  "id": "jj014",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2.4m x 1.8m",
+  "type": "job",
+  "exp": {},
+  "id": "jj015",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "full system for 2.4 x 1.8 bathroom walls and floor over concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj016",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2.7 by 2.4 metres, walls up to 1.8 metres, concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj017",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "12 m2 laundry floor over concrete, what products and how many packs",
+  "type": "job",
+  "exp": {},
+  "id": "jj018",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "bathroom 2,4 x 1,8 walls to 1,8 m on concrete",
+  "type": "job",
+  "exp": {},
+  "id": "jj019",
+  "split": "blind"
+ },
+ {
+  "persona": "tiler",
+  "category": "job",
+  "q": "tile a 3 x 3 m ensuite from floor to 2.1 m over screed",
+  "type": "job",
+  "exp": {},
+  "id": "jj020",
+  "split": "blind"
+ }
+]

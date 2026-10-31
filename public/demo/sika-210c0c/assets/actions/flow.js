@@ -2,15 +2,16 @@
 // per request (a second turn answers with what it has and says what is missing), and chains actions ("now make that a project pack").
 import { route, parseNumbers, parseFacets, COMMANDS } from './parse.js';
 import { buildHandoff } from '../assistant/handoff.js';
-import { findProducts, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
+import { findProducts, findProductsInOrder, card, unknownCard, norm, plain, IN_BROWSER_NOTICE, cardCsv } from './core.js';
 import * as H from './handlers.js';
+import { job as jobAction, jobAdd } from './job.js';
 import { selectionLines, silentReason } from './shared.js';
 import { CART_ACTIONS, cartAction, cartAfterSave, cartButtons } from './cart.js';
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
 const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious' };
-const MEMORY_ACTIONS = new Set(['save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
+const MEMORY_ACTIONS = new Set(['jobadd', 'save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
 const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
 
 function updateFacets(session, text, strippedText) {
@@ -83,6 +84,7 @@ async function memoryAction(ctx, action) {
   if (!m && action !== 'start') return card('memory', 'memory', 'Project memory', { status: 'unknown', notes: ['Project memory is not available in this browser.'], notice: IN_BROWSER_NOTICE });
   if (CART_ACTIONS.has(action)) return cartAction(ctx, action); // the project cart (cart.js); null = a soft phrase that was not about the cart
   switch (action) {
+    case 'jobadd': return jobAdd(ctx);
     case 'save': { const c = saveLast(ctx); await cartAfterSave(ctx, c); return c; }
     case 'projects': return projectsCard(ctx);
     case 'gaps': return gapsCard(ctx);
@@ -101,7 +103,7 @@ async function memoryAction(ctx, action) {
   }
 }
 
-const HANDLERS = { calc: H.calc, system: H.system, pack: H.pack, compare: H.compare, compat: H.compat, safety: H.safety, time: H.time, spec: H.spec, export: H.exportAction, link: H.link, handoff: H.handoff };
+const HANDLERS = { job: jobAction, calc: H.calc, system: H.system, pack: H.pack, compare: H.compare, compat: H.compat, safety: H.safety, time: H.time, spec: H.spec, export: H.exportAction, link: H.link, handoff: H.handoff };
 
 /** The assistant. deps: { data, memory?, config?, now? }. run(text, session) -> { handled, card?, session }. handled=false means: hand the question to the product advisor. */
 export function createActions(deps) {
@@ -117,9 +119,10 @@ export function createActions(deps) {
       const isAnswer = !r || (r.action === p.action && !r.slash && !namesProduct);
       if (isAnswer) {
         // the visitor is answering our question: put the original request and the answer together, once
-        action = p.action; noAsk = true; useText = `${p.text} ${text}`; rest = useText;
+        action = p.action; noAsk = true; useText = p.action === 'job' ? `${p.text}, ${text}` : `${p.text} ${text}`; rest = useText; // a job answer is a new clause ("over concrete", "walls to 1.8 m"), so a comma keeps "concrete, walls" two things
         const bare = /^\s*(\d+(?:[.,]\d+)?)\s*(?:m2|sqm|mm|m|%|kg|litres?|l)?\s*$/i.exec(text);
         answerOf = { p, bare: bare && NEED_KEY[p.need] ? parseFloat(bare[1].replace(',', '.')) : null };
+        if (p.action === 'job' && /height/.test(p.need || '') && /^\s*\d+(?:[.,]\d+)?\s*(?:mm|m|metres?|meters?)?\s*$/i.test(text)) { useText = `${p.text}, walls to ${text}`; rest = useText; } // a bare "1.8" to the wall height question
       }
     }
     if (!action) { // a symptom question ("my tiles sound hollow") is answered from the published passages, never diagnosed
@@ -131,6 +134,10 @@ export function createActions(deps) {
         if (chip) { const cp = await H.problem({ data, session, config, text, chip }); session.last = cp; if (memory) { memory.rememberQuestion(text, 'problem'); if (cp.status === 'unknown') memory.addGap(text); } return { handled: true, card: cp, session }; }
       }
     }
+    if (!action && /\bor\b/i.test(text) && text.split(/\s+/).length <= 16) { // "SikaTile-400 EVO PRO or SikaTile-410 Secure Set": two products with an "or" between them is a comparison
+      const two = await findProductsInOrder(data, text, 3);
+      if (two.length >= 2) { const q = ' ' + norm(text) + ' '; if (/ or /.test(q.slice(Math.max(0, q.indexOf(norm(two[0].name))), q.indexOf(norm(two[1].name)) + 1) || q)) { action = 'compare'; rest = text; } }
+    }
     if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
@@ -139,7 +146,7 @@ export function createActions(deps) {
     // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
     if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
-    if (!MEMORY_ACTIONS.has(action)) {
+    if (!MEMORY_ACTIONS.has(action) && action !== 'job') { // a job sentence (2.4 x 1.8 m) is a room, not a tile size: the job builder reads it itself
       if (answerOf) {
         // the answer to our question is read on its own: "10 mm" to a notch question is a notch, never also a thickness
         const base = norm(answerOf.p.text); updateFacets(session, answerOf.p.text, base);

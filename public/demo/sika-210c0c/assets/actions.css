@@ -22,7 +22,7 @@
 .action-card dt.v-yes{box-shadow:inset 4px 0 0 var(--green-dark)}
 .action-card dt.v-conditional,.action-card dt.v-unknown{box-shadow:inset 4px 0 0 var(--primary-dark)}
 .action-card .cmp{display:grid;border:1px solid var(--grey);background:#fff;font-size:.875rem;margin:.4rem 0}
-.action-card .cmp-row{display:grid;grid-template-columns:minmax(5.5rem,22%) 1fr 1fr;border-top:1px solid var(--grey)}
+.action-card .cmp-row{display:grid;grid-template-columns:minmax(5.5rem,20%) repeat(var(--n,2),minmax(0,1fr));border-top:1px solid var(--grey)}
 .action-card .cmp-row:first-child{border-top:0}
 .action-card .cmp-row>div{padding:.4rem .5rem;min-width:0;overflow-wrap:anywhere}
 .action-card .cmp-head{background:var(--grey-light);font-weight:600}
@@ -54,3 +54,22 @@
 .action-card .sumlist li:first-child{border-top:0}
 .action-card .m-title.sec{margin-top:8px}
 .action-card .cite{padding-top:.25rem}
+
+/* compare mode on a phone: each row stacks, every cell names its product (the columns are too narrow side by side at 390 wide) */
+@media (max-width:40em){
+  .action-card .cmp-row{grid-template-columns:1fr}
+  .action-card .cmp-head{display:none}
+  .action-card .cmp-row>div[role=cell]::before{content:attr(data-col);display:block;font-weight:600;font-size:.8125rem;color:var(--grey-darker)}
+  .action-card .cmp-row>div[role=cell]{border-top:1px dashed var(--grey)}
+}
+.action-card .cmp-absent{color:var(--grey-darker);font-style:italic}
+.action-card .cmp-head a{overflow-wrap:anywhere}
+/* job card */
+.action-card .job-lines{list-style:none;margin:.3rem 0 .6rem;padding:0;display:grid;gap:.5rem}
+.action-card .job-line{border:1px solid var(--grey);background:#fff;padding:.5rem .6rem;font-size:.875rem;min-width:0;overflow-wrap:anywhere}
+.action-card .job-line--ask{border-left:4px solid var(--primary-dark)}
+.action-card .job-role{font-weight:600}
+.action-card .job-qty{margin-top:.2rem;font-variant-numeric:tabular-nums}
+.action-card .job-cov{margin-top:.2rem;font-size:.8125rem;color:var(--grey-darker)}
+.action-card .job-cov q{quotes:none;font-style:italic}
+.action-card .cmp-also{margin:.3rem 0 0;padding-left:1.1rem;font-size:.8125rem}

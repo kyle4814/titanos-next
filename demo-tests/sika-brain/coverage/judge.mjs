@@ -56,6 +56,10 @@ export function judge(item, a, sel) {
     if (real.some((c) => c.product && c.product.id !== exp.product)) return GEN('WRONG', 'other product');
     return GEN('UNHANDLED', 'no answer');
   }
+  if (t === 'job') { // a whole-room job sentence. The v2 brain alone does not build job lists (the actions layer does), so it must say so honestly or answer with cited published cards; never an invented quantity.
+    if (allUnknown) return GEN('HONEST-NO-DATA', 'declined');
+    return real.length && real.some(cited) ? GEN('ANSWERED', 'cited published card') : cards.some((c) => c.type === 'choose') ? GEN('ANSWERED', 'clarifying question') : GEN('UNHANDLED', 'no cited answer');
+  }
   if (t === 'compare') {
     const comp = real.find((c) => c.type === 'comparison' || (c.table && c.table.cols && c.table.cols.length >= 3));
     if (!comp) return real.length && prodCards.length ? GEN('UNHANDLED', 'no comparison') : GEN('UNHANDLED', 'no comparison');
