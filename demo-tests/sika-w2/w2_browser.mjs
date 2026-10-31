@@ -3,7 +3,8 @@
 //   B. data quality page (counts match the data file, print mode, no sideways scroll, PDF link works)
 //   C. install as an app (manifest, polite prompt rules) and outdoor mode (toggle, persistence, prefers-contrast, tap targets, no sideways scroll)
 //   D. offline after the first visit
-// usage (Windows node): node.exe w2_browser.mjs <portalDir> <outDir> [A|B|C|D ...]
+//   E. bot on every page: Ask the advisor on a sheet and the hub at 1366 and 390 wide opens the real panel; print shows the QR and hides the button
+// usage (Windows node): node.exe w2_browser.mjs <portalDir> <outDir> [A|B|C|D|E ...]
 import fs from 'node:fs';
 import { serve, launch } from '../sika-210c0c/_browser.mjs';
 import { PORTAL } from '../sika-210c0c/_env.mjs';
@@ -187,4 +188,45 @@ if (want('D')) {
   t('offline: no console errors besides refused network calls', errs.filter((e) => !/Failed to load resource|net::ERR|offline|Failed to fetch/i.test(e)).length === 0, errs.join(' | '));
   await ctx.close();
 }
+if (want('E')) for (const [W, H] of [[1366, 768], [390, 844]]) {
+  const ctx = await ctxFor(W, H); const page = await ctx.newPage(); const errs = []; watch(page, errs); const sz = `${W}x${H}`; const phone = W < 600;
+  for (const [label, url, hub] of [['sheet', s.base + 'systems/porcelain-on-concrete-external-floor/', false], ['hub', s.base + 'systems/', true]]) {
+    await page.goto(url, { waitUntil: 'load' });
+    const sel = phone ? 'a.adv-mbar-ask' : 'a.adv-btn';
+    const btn = page.locator(sel); const box = await btn.boundingBox();
+    t(`${sz} ${label}: Ask the advisor is visible (${phone ? 'phone bar' : 'floating, bottom right'}) and the other entry is not`, !!box && (await btn.innerText()).includes('Ask the advisor') && !(await page.locator(phone ? 'a.adv-btn' : 'nav.adv-mbar').isVisible()), JSON.stringify(box));
+    if (phone) t(`${sz} ${label}: phone bar targets are at least 44 px`, (await page.locator('nav.adv-mbar a').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().height))).every((x) => x >= 44));
+    else t(`${sz} ${label}: the button sits bottom right`, box.x + box.width > W - 40 && box.y + box.height > H - 40, JSON.stringify(box));
+    const title = await page.locator('h1').first().innerText();
+    await btn.click(); await page.waitForSelector('#assistant.open', { timeout: 20000 });
+    await page.waitForSelector('#assistant .ask-greet', { timeout: 5000 });
+    const g = await page.evaluate(() => { const e = document.querySelector('#assistant .ask-greet'); return { text: e.textContent, chips: [...e.querySelectorAll('button.chip')].map((c) => c.textContent), url: location.href }; });
+    t(`${sz} ${label}: the real panel opens in the page (no navigation) with a card naming ${hub ? 'the systems' : 'the system'}`, g.url === url && g.text.includes(hub ? 'tiling systems' : title) && g.chips.length === 3, JSON.stringify({ title, text: g.text.slice(0, 100) }));
+    t(`${sz} ${label}: the first suggestion is about this ${hub ? 'topic' : 'system'}`, hub ? /tile/i.test(g.chips[0]) : /porcelain/i.test(g.chips[0]) && /concrete/i.test(g.chips[0]), g.chips[0]);
+    await page.screenshot({ path: `${outDir}/everypage_${label}_${sz}.png` });
+    // ask one question through the panel's own box and get an answer card
+    const before = await page.locator('#assistant .msg--bot').count();
+    await page.fill('#asst-q', 'What is the coverage of ' + (hub ? 'SikaCeram-690 Elite' : 'a flexible tile adhesive') + '?'); await page.press('#asst-q', 'Enter');
+    await page.waitForFunction((n) => !document.querySelector('#assistant .typing') && document.querySelectorAll('#assistant .msg--bot').length > n, before, { timeout: 30000 });
+    const ans = await page.evaluate(() => [...document.querySelectorAll('#assistant .msg--bot')].pop().textContent.trim());
+    t(`${sz} ${label}: a question typed into the panel gets an answer card`, ans.length > 20 && !/could not run/.test(ans), ans.slice(0, 120));
+    // an answer link leaves the sheet for the portal, not a hash on the sheet
+    const hrefs = await page.evaluate(() => [...document.querySelectorAll('#assistant .msg--bot a[href^="#/"]')].length);
+    if (hrefs) { await page.locator('#assistant .msg--bot a[href^="#/"]').first().click(); await page.waitForURL(/\/#\/(product|products|documents|ask)/, { timeout: 10000 }).catch(() => {}); t(`${sz} ${label}: an answer link opens the portal page`, !/\/systems\//.test(page.url()), page.url()); }
+    else t(`${sz} ${label}: (no portal links in that answer; link rewrite checked on the next sheet)`, true);
+  }
+  // print: the QR shows and the button and bar are hidden
+  await page.goto(s.base + 'systems/porcelain-on-concrete-external-floor/', { waitUntil: 'load' }); await page.emulateMedia({ media: 'print' });
+  const pr = await page.evaluate(() => { const v = (e) => !!e && e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden'; return { btn: v(document.querySelector('.adv-btn')), bar: v(document.querySelector('.adv-mbar')), qr: [...document.querySelectorAll('.qr-card')].some((e) => v(e)), qrSvg: [...document.querySelectorAll('.print-sheet .qr-card svg')].some((e) => v(e)) }; });
+  t(`${sz} print: the QR is shown, the Ask the advisor button and bar are hidden`, !pr.btn && !pr.bar && pr.qr && pr.qrSvg, JSON.stringify(pr));
+  // scripts off: the link is still there and goes to the portal deep link
+  const ctx2 = await ctxFor(W, H, { javaScriptEnabled: false }); const p2 = await ctx2.newPage(); await p2.goto(s.base + 'systems/porcelain-on-concrete-external-floor/', { waitUntil: 'load' });
+  const href = await p2.locator(phone ? 'a.adv-mbar-ask' : 'a.adv-btn').getAttribute('href');
+  t(`${sz} scripts off: the entry is a plain link to the deep link`, href === (phone ? '../../#/ask?system=porcelain-on-concrete-external-floor' : '../../#/ask?system=porcelain-on-concrete-external-floor'), href);
+  await ctx2.close();
+  t(`${sz} no sideways scroll on a sheet`, (await noScroll(page)) <= 1);
+  t(`${sz} no console errors`, errs.length === 0, errs.join(' | '));
+  await ctx.close();
+}
+
 await b.close(); s.close(); console.log(fails ? `W2 BROWSER ${fails} failed` : 'W2 BROWSER GREEN'); process.exit(fails ? 1 : 0);

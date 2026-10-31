@@ -5,5 +5,6 @@ set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 node "$here/add_images.mjs" "${1:-$here/../../public/demo/sika-210c0c}"
 node "$here/add_qr.mjs" "${1:-$here/../../public/demo/sika-210c0c}" "${SIKA_QR_BASE:-}"
+node "$here/add_advisor.mjs" "${1:-$here/../../public/demo/sika-210c0c}"
 node "$here/build_speed.mjs" "${1:-$here/../../public/demo/sika-210c0c}"
 node "$here/build_sw.mjs" "${1:-$here/../../public/demo/sika-210c0c}"

@@ -1,0 +1,11 @@
+/* advisor.css (wave 2, bot on every page): the "Ask the advisor" entry on the static system sheets and the selector hub.
+   Desktop: a floating button bottom right, same look as the portal's Product advisor button (.fab). Phone: the portal's bottom bar (.mbar, from portal.css).
+   The real assistant panel and its own button come from portal.css once the page loads assets/lib/sheet-advisor.js; the page's own button is the entry, so the panel's second button is hidden here. */
+.adv-btn{position:fixed;right:16px;bottom:16px;z-index:45;background:var(--grey-darker);color:#fff;border:0;display:flex;align-items:center;gap:.6rem;padding:8px 24px;min-height:56px;box-shadow:var(--shadow-1);cursor:pointer;font-weight:500;font-size:1.05rem;text-decoration:none}
+.adv-btn:hover,.adv-btn:focus-visible{background:#000;color:#fff}
+.adv-btn .dot{width:10px;height:10px;background:var(--primary);display:inline-block}
+body.sheet #asst-fab{display:none!important}
+body.adv-open .adv-btn{display:none}
+.adv-mbar a{text-decoration:none}
+@media (max-width:63.99em){.adv-btn{display:none}.sheet .adv-mbar{display:grid}}
+@media print{.adv-btn,.adv-mbar{display:none!important}}

@@ -27,7 +27,8 @@ export function listing() {
   const files = ['index.html'];
   files.push(...walk(PORTAL, 'assets').filter((f) => !/\.(map|md)$/.test(f) && !f.startsWith('assets/img/') && !NET_ONLY.test(f)));  // product pictures load on demand, never precached
   const data = fs.readdirSync(path.join(PORTAL, 'data'), { withFileTypes: true });
-  for (const e of data) if (e.isFile() && e.name.endsWith('.json')) files.push('data/' + e.name);
+  // wave 2: the 1.1 MB rule ledger (data/rules.json, read only by the Rule ledger page, which shows "not available" when the fetch fails) stays network only so the cache holds the 8 MB budget
+  for (const e of data) if (e.isFile() && e.name.endsWith('.json') && e.name !== 'rules.json') files.push('data/' + e.name);
   for (const d of ['knowledge', 'systems']) if (fs.existsSync(path.join(PORTAL, 'data', d))) files.push(...walk(PORTAL, 'data/' + d).filter((f) => f.endsWith('.json')));
   // tile and stone product pages only (the 37 files); other products need the network
   for (const f of fs.readdirSync(path.join(PORTAL, 'data', 'p'))) {

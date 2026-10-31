@@ -22,6 +22,11 @@ def worker(i):
         pdf = LBASE / 'pdf' / f'{s}.pdf'
         if pdf.exists(): pdf.unlink()
         subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--no-pdf-header-footer', f'--user-data-dir={WBASE}\\w{i}', f'--print-to-pdf={WBASE}\\pdf\\{s}.pdf', f'http://localhost:{PORT}/systems/{s}/?m2=40'], capture_output=True, timeout=120)
+        for _ in range(300):  # chrome.exe can return before the PDF is on disk (Windows to WSL): wait for it to appear and stop growing
+            if pdf.exists() and pdf.stat().st_size > 0:
+                z = pdf.stat().st_size; time.sleep(0.3)
+                if pdf.exists() and pdf.stat().st_size == z: break
+            time.sleep(0.2)
         try:
             d = pymupdf.open(pdf); txt = ''.join(p.get_text() for p in d); res[s] = {'pages': len(d), 'estimate': EST in txt, 'qty': 'You need' in txt or 'Packs:' in txt}
         except Exception as e: res[s] = {'pages': None, 'error': str(e)[:80]}

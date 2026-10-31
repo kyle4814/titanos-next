@@ -3,7 +3,7 @@
 # usage: run_all.sh [--no-browser]     The print check (363 sheets, Chrome printToPDF) is separate: PV=<portal> PRINT_PORT=<free port> python3 print_check.py
 cd "$(dirname "$0")" || exit 2
 rc=0
-for t in qr_check gift_check pwa_check; do node $t.mjs 2>&1 | grep -E 'FAIL|GREEN|failed' ; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1; done
+for t in qr_check every_page gift_check pwa_check; do node $t.mjs 2>&1 | grep -E 'FAIL|GREEN|failed' ; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1; done
 WN="/mnt/c/Program Files/nodejs/node.exe"
 if [ -x "$WN" ] && [ "${1:-}" != "--no-browser" ]; then
   P="$(cd ../../public/demo/sika-210c0c && pwd)"; W='\\wsl.localhost\Ubuntu'$(echo "$P" | sed 's#/#\\#g')
