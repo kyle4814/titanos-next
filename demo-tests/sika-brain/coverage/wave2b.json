@@ -1,0 +1,1750 @@
+[
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "which tile adhesive has the longest open time",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "open_time",
+   "dir": "max"
+  },
+  "id": "w2b001",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "tile adhesive with the longest open time",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "open_time",
+   "dir": "max"
+  },
+  "id": "w2b002",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "whats the tile adhesive with longest open time",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "open_time",
+   "dir": "max"
+  },
+  "id": "w2b003",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "which tile adhesive has the longest pot life",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "pot_life",
+   "dir": "max"
+  },
+  "id": "w2b004",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "longest pot life tile adhesive",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "pot_life",
+   "dir": "max"
+  },
+  "id": "w2b005",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: tile adhesive",
+  "q": "tile adhesive longest pot lyfe",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "pot_life",
+   "dir": "max"
+  },
+  "id": "w2b006",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "which screed has the thickest layer",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "layer",
+   "dir": "max"
+  },
+  "id": "w2b007",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "which levelling compound can go thickest",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "layer",
+   "dir": "max"
+  },
+  "id": "w2b008",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "thickest layer screed",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "layer",
+   "dir": "max"
+  },
+  "id": "w2b009",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "which screed is the fastest setting",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b010",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "fastest curing levelling compound",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b011",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: screed",
+  "q": "quickest set screed",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b012",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "which repair mortar has the highest compressive strength",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b013",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "highest compressive strength concrete repair mortar",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b014",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "strongest repair mortar",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b015",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "which repair mortar sets fastest",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b016",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "fastest curing patching mortar",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b017",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: repair mortar",
+  "q": "quickest setting concrete repair mortar",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:concrete-repair-protection/concrete-repair-mortars",
+    "c:concrete-repair-protection/corrosion",
+    "c:concrete-repair-protection/concrete-mortarsadmixtures",
+    "c:flooring",
+    "c:grouts-anchoring",
+    "c:waterproofing"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_time",
+   "dir": "min"
+  },
+  "id": "w2b018",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: grout",
+  "q": "which grout has the longest shelf life",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts",
+    "c:tile-stone-installationsystems/tile-care-and-cleaners",
+    "c:grouts-anchoring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "shelf_life",
+   "dir": "max"
+  },
+  "id": "w2b019",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: grout",
+  "q": "grout with the longest shelf life",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts",
+    "c:tile-stone-installationsystems/tile-care-and-cleaners",
+    "c:grouts-anchoring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "shelf_life",
+   "dir": "max"
+  },
+  "id": "w2b020",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: grout",
+  "q": "longest shelf life tile grout",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-grouts",
+    "c:tile-stone-installationsystems/tile-care-and-cleaners",
+    "c:grouts-anchoring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "shelf_life",
+   "dir": "max"
+  },
+  "id": "w2b021",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "which sealant has the most movement capability",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "movement",
+   "dir": "max"
+  },
+  "id": "w2b022",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "sealant with the highest movement capability",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "movement",
+   "dir": "max"
+  },
+  "id": "w2b023",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "most flexible sealant movement capability",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "movement",
+   "dir": "max"
+  },
+  "id": "w2b024",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "fastest curing sealant",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_rate",
+   "dir": "max"
+  },
+  "id": "w2b025",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "which sealant cures fastest",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_rate",
+   "dir": "max"
+  },
+  "id": "w2b026",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: sealant",
+  "q": "quickest curing silicone sealant",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:sealants-adhesives"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "cure_rate",
+   "dir": "max"
+  },
+  "id": "w2b027",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: waterproofing",
+  "q": "which waterproofing membrane has the lowest voc",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "c:waterproofing",
+    "c:roofing",
+    "c:tile-stone-installationsystems",
+    "c:concrete-repair-protection",
+    "c:flooring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b028",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: waterproofing",
+  "q": "lowest voc waterproofing",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "c:waterproofing",
+    "c:roofing",
+    "c:tile-stone-installationsystems",
+    "c:concrete-repair-protection",
+    "c:flooring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b029",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: waterproofing",
+  "q": "waterproofing with lowest voc content",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/waterproofing",
+    "c:waterproofing",
+    "c:roofing",
+    "c:tile-stone-installationsystems",
+    "c:concrete-repair-protection",
+    "c:flooring"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b030",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: primer",
+  "q": "which primer has the lowest voc",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:flooring",
+    "c:sealants-adhesives",
+    "c:concrete"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b031",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: primer",
+  "q": "lowest voc primer",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:flooring",
+    "c:sealants-adhesives",
+    "c:concrete"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b032",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: primer",
+  "q": "primer with the lowest voc",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems",
+    "c:flooring",
+    "c:sealants-adhesives",
+    "c:concrete"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b033",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "which product has the highest compressive strength",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b034",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "highest compressive strength of all your products",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b035",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "strongest product compressive strength",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "compressive",
+   "dir": "max"
+  },
+  "id": "w2b036",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "which product has the lowest voc",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b037",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "what has the lowest voc content",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b038",
+  "split": "tuned"
+ },
+ {
+  "persona": "specifier",
+  "category": "numeric ranking: any",
+  "q": "lowest voc in the range",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:construction",
+    "c:industry"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "rank",
+   "field": "voc",
+   "dir": "min"
+  },
+  "id": "w2b039",
+  "split": "tuned",
+  "messy": "typo"
+ },
+ {
+  "persona": "diyer",
+  "category": "price declined",
+  "q": "cheapest tile adhesive",
+  "type": "nodata",
+  "exp": {},
+  "exp2": {
+   "shape": "decline"
+  },
+  "id": "w2b040",
+  "split": "tuned"
+ },
+ {
+  "persona": "diyer",
+  "category": "price declined",
+  "q": "which sealant is the cheapest",
+  "type": "nodata",
+  "exp": {},
+  "exp2": {
+   "shape": "decline"
+  },
+  "id": "w2b041",
+  "split": "tuned"
+ },
+ {
+  "persona": "diyer",
+  "category": "price declined",
+  "q": "what is the lowest price grout",
+  "type": "nodata",
+  "exp": {},
+  "exp2": {
+   "shape": "decline"
+  },
+  "id": "w2b042",
+  "split": "tuned"
+ },
+ {
+  "persona": "diyer",
+  "category": "price declined",
+  "q": "best price screed",
+  "type": "nodata",
+  "exp": {},
+  "exp2": {
+   "shape": "decline"
+  },
+  "id": "w2b043",
+  "split": "tuned"
+ },
+ {
+  "persona": "diyer",
+  "category": "price declined",
+  "q": "cheapest waterproofing membrane",
+  "type": "nodata",
+  "exp": {},
+  "exp2": {
+   "shape": "decline"
+  },
+  "id": "w2b044",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much adhesive for 15 m2 of 600x600 tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 15,
+   "thickness": null
+  },
+  "id": "w2b045",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much tile adhesive do i need for 20 m2",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 20,
+   "thickness": null
+  },
+  "id": "w2b046",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much adhesive for 8 m2 of floor tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 8,
+   "thickness": null
+  },
+  "id": "w2b047",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how many bags of tile adhesive for 30 m2",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 30,
+   "thickness": null
+  },
+  "id": "w2b048",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "quantity of adhesive for 50 square metres of large format porcelain",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 50,
+   "thickness": null
+  },
+  "id": "w2b049",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much adhesive for a 12 m2 bathroom floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 12,
+   "thickness": null
+  },
+  "id": "w2b050",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "adhesive needed for 25 m2 of tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 25,
+   "thickness": null
+  },
+  "id": "w2b051",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much glue for 40 m2 of tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 40,
+   "thickness": null
+  },
+  "id": "w2b052",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "how much tile adhesive for 100 m2 of porcelain tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 100,
+   "thickness": null
+  },
+  "id": "w2b053",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "quantity without a product: tile adhesive",
+  "q": "hw much adhesive for 18 m2 tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 18,
+   "thickness": null
+  },
+  "id": "w2b054",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how many bags of leveller for 100 m2 at 5 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 100,
+   "thickness": 5
+  },
+  "id": "w2b055",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how much screed do i need for 40 m2 at 10 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 40,
+   "thickness": 10
+  },
+  "id": "w2b056",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how many bags of levelling compound for 25 m2 at 3 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 25,
+   "thickness": 3
+  },
+  "id": "w2b057",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how much self levelling compound for 60 m2 at 4 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 60,
+   "thickness": 4
+  },
+  "id": "w2b058",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "floor leveller for 30 m2 at 6 mm how many bags",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 30,
+   "thickness": 6
+  },
+  "id": "w2b059",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how many bags of leveller for 80 m2 at 8 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 80,
+   "thickness": 8
+  },
+  "id": "w2b060",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "how much floor leveller for 15 m2 at 2 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 15,
+   "thickness": 2
+  },
+  "id": "w2b061",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "quantity without a product: thickness-aware screed",
+  "q": "bags of screed for 200 m2 at 5 mm",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 2
+  },
+  "exp2": {
+   "shape": "qty",
+   "area": 200,
+   "thickness": 5
+  },
+  "id": "w2b062",
+  "split": "tuned"
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best adhesive for large format tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 40,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b063",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 40 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what adhesive for porcelain tiles on a concrete floor inside",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 25,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b064",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 25 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best tile adhesive for a bathroom floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 12,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b065",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 12 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "adhesive for natural stone tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 30,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b066",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 30 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what adhesive do i use for outdoor tiles on a balcony",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 18,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b067",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 18 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best adhesive for floor tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 60,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b068",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 60 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "tile adhesive for mosaic tiles",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 6,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b069",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 6 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best adhesive for large format porcelain outside",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 35,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b070",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 35 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what adhesive for wall tiles in a kitchen splashback",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 4,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b071",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 4 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "tiler",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best tile glue for a heated floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "c:tile-stone-installationsystems/tile-adhesives",
+    "i:sikaceram-880-easyepoxy"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 22,
+   "thickness": null,
+   "kind": "tile_adhesive"
+  },
+  "id": "w2b072",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 22 m2",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best screed for a big job",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 150,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b073",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 150 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what do i pour on an uneven concrete floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 45,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b074",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 45 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best levelling compound for thick layers",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 70,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b075",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 70 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what screed for a large floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 120,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b076",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 120 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best floor leveller for a pump job",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 90,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b077",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 90 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best levelling compound for timber floors",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 35,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b078",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 35 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what do i pour to level a slab before vinyl",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 50,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b079",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 50 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best screed for a warehouse floor",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 300,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b080",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 300 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "what leveller for a bathroom floor before tiling",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 10,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b081",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 10 m2 at 5 mm",
+   "add it to my project"
+  ]
+ },
+ {
+  "persona": "builder",
+  "category": "chain: recommend then quantity then cart",
+  "q": "best screed for heated floors",
+  "type": "list",
+  "exp": {
+   "allowed": [
+    "i:sikafloor-4020-fiberlevel,sikafloor-level-pro,sikafloor-level-top,sikafloor-level-ultra,sikafloor-level-eco,lanko-189-bulk-fillscreed,sikafloor-215-rapidscreed,lanko-145-floor-leveller,lanko-173-floor-leveller,sikafloor-050-rampandpatch,sika-level-skimcoat"
+   ],
+   "min": 1
+  },
+  "exp2": {
+   "shape": "chain",
+   "area": 28,
+   "thickness": 5,
+   "kind": "screed"
+  },
+  "id": "w2b082",
+  "split": "tuned",
+  "turns": [
+   "recommend me one",
+   "how much for 28 m2 at 5 mm",
+   "add it to my project"
+  ]
+ }
+]

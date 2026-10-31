@@ -83,7 +83,7 @@ for (const q of ['what do i need for a bathroom', 'something for cracks', 'best 
   t('vague "' + q + '": every option is answered with products or a page', allAnswer);
 }
 r = await ask('how much adhesive do i need for 15 square metres of 600x600 tiles');
-t('a quantity with no product named gets the documented-fit products, each with a worked quantity that carries its source', r.a.cards[0].type === 'advice' && r.a.cards.filter((c) => c.type === 'calculation').length >= 2 && r.a.cards.filter((c) => c.type === 'calculation').every((c) => c.facts.length && /m2|bag|kg/i.test(cardText(c))), r.txt.slice(0, 200));
+t('a quantity with no product named gets ONE calculation card (wave 2b): a ranked table of documented-fit products, each row with its quantity, packs and cited rate, a fact per row, and cart actions', r.a.cards[0].type === 'calculation' && r.a.cards[0].table && r.a.cards[0].table.rows.length >= 2 && r.a.cards[0].facts.length >= 2 && r.a.cards[0].table.rows.every((row) => /m2|bag|kg|pail|litre/i.test(row[3]) && /(data sheet|product page)/.test(row[3])) && r.a.cards[0].followups.some((f) => /to my project/.test(f)), r.txt.slice(0, 200));
 r = await ask('which tile adhesive has the longest open time');
 t('a numeric criterion is a sort over cited published figures', r.a.cards[0].type === 'advice' && /ordered by the longest published open time/.test(r.a.cards[0].title) && r.a.cards.slice(1).every((c) => c.facts[0].sentence && /minute|hour/i.test(c.facts[0].sentence) && /\.pdf/.test(c.facts[0].source_url)), r.txt.slice(0, 200));
 // ---- multi-turn: follow-ups to a best-X answer, ordinals, assumptions named
@@ -125,7 +125,7 @@ for (const q of ['what is the weather today', 'is mapei better than davco', 'who
 { const oos = JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'oos_set.json'), 'utf8')); const leaks = []; for (const q of oos) { const a = await b.ask(q); if (a.cards.some((c) => c.status === 'PUBLISHED' && c.type !== 'choose')) leaks.push(q + ' => ' + a.cards[0].title); }
   t(`off-topic set (${oos.length} questions): no published answer`, leaks.length === 0, leaks.join(' | ')); }
 // ---- the bank gate
-const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json', 'wild2.json', 'jobcompare.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
+const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json', 'wild2.json', 'jobcompare.json', 'wave2b.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
 const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
 for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel); if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
 t(`bank (${bank.length} questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));

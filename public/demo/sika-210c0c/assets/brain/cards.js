@@ -86,23 +86,32 @@ export function parsePacks(sh) {
   for (const f of sh.pk || []) for (const s of (f.parsed && f.parsed.sizes) || []) out.push({ amount: s.amount, unit: s.unit, container: s.container || '' });
   const seen = new Set(); return out.filter((p) => { const k = p.amount + p.unit; if (seen.has(k)) return false; seen.add(k); return true; }).sort((a, b) => a.amount - b.amount);
 }
-export function computeQuantity(f, area) {
+export function computeQuantity(f, area, thickness) {
   const p = f.parsed || {};
   if (!f.calc || !p.basis_stated) return null;
+  // a rate "per mm" or "per cm" of thickness is only a quantity once the thickness is known; it is never read as one millimetre by default
+  if (p.model === 'per_area' && (p.per === 'mm' || p.per === 'cm')) {
+    if (!(thickness > 0) || !/^(L|kg)$/.test(p.unit || '') || p.area_unit !== 'm2') return null;
+    const k = thickness * (p.per === 'cm' ? 0.1 : 1);
+    return { unit: p.unit, need_min: area * p.min * k, need_max: area * p.max * k, basis: 'per_area_thickness', thickness_mm: thickness };
+  }
   if (p.model === 'pack_covers_area' && p.area_min > 0) return { unit: p.unit, need_min: area / p.area_max * p.amount, need_max: area / p.area_min * p.amount, basis: 'pack_covers_area' };
   if (p.model === 'area_per_unit' && p.min > 0 && /^(L|kg)$/.test(p.unit || '')) return { unit: p.unit, need_min: area / p.max, need_max: area / p.min, basis: 'area_per_unit' };
   if (p.model === 'per_area' && /^(kg|L)$/.test(p.unit || '') && p.area_unit === 'm2' && !(p.coats_max > 1)) return { unit: p.unit, need_min: area * p.min, need_max: area * p.max, basis: 'per_area' };
   return null;
 }
-export function calcCard(sh, area, question) {
+export function calcCard(sh, area, question, thickness) {
   const facts = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []);
   if (!facts.length) return unknown(question, sh, 'The published documentation gives no coverage figure for this product, so I cannot work out a quantity.', ['consumption rate']);
-  const usable = facts.map((f) => ({ f, q: computeQuantity(f, area) })).filter((x) => x.q).slice(0, 2);
+  const usable = facts.map((f) => ({ f, q: computeQuantity(f, area, thickness) })).filter((x) => x.q).slice(0, 2);
+  if (!usable.length && !(thickness > 0) && facts.some((f) => f.calc && f.parsed && f.parsed.basis_stated && f.parsed.model === 'per_area' && (f.parsed.per === 'mm' || f.parsed.per === 'cm'))) {
+    return chooseCard(`How much ${sh.n}?`, 'The published rate is per millimetre of thickness, so the quantity depends on how thick you apply it. How thick, in mm?', [3, 5, 10].map((t) => `How much ${sh.n} for ${num(area)} m2 at ${t} mm`));
+  }
   if (!usable.length) { const c = rateCard(sh, question); c.headline = 'I will not turn this into a quantity: the published figure does not say what it is per (or needs a condition). Here is the sentence exactly as written. Please confirm with Technical Services.'; c.type = 'rate'; return c; }
   const packs = parsePacks(sh); const lines = [{ label: 'Area you asked about', text: `${num(area)} m2` }], outFacts = [], planOut = [];
   for (const { f, q } of usable) {
     const range = Math.abs(q.need_max - q.need_min) > 1e-9;
-    lines.push({ label: `Quantity (${where(f)})`, text: range ? `${num(q.need_min)} to ${num(q.need_max)} ${q.unit}` : `${num(q.need_max)} ${q.unit}`, fact: f.id });
+    lines.push({ label: `Quantity (${where(f)}${q.thickness_mm ? ', at ' + num(q.thickness_mm) + ' mm' : ''})`, text: range ? `${num(q.need_min)} to ${num(q.need_max)} ${q.unit}` : `${num(q.need_max)} ${q.unit}`, fact: f.id });
     const same = packs.filter((p) => p.unit === q.unit);
     if (same.length) {
       const plan = same.map((p) => ({ size: p.amount, unit: p.unit, container: p.container, count: Math.ceil(q.need_max / p.amount - 1e-9) }));
@@ -113,7 +122,7 @@ export function calcCard(sh, area, question) {
   }
   lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
   return card({ type: 'calculation', title: `How much ${sh.n} for ${num(area)} m2`, product: prod(sh), headline: 'Worked out from the published rate below. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.',
-    lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { area_m2: area, facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.need_min, need_max: x.q.need_max, basis: x.q.basis })), plan: planOut } });
+    lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { area_m2: area, ...(thickness > 0 ? { thickness_mm: thickness } : {}), facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.need_min, need_max: x.q.need_max, basis: x.q.basis })), plan: planOut } });
 }
 
 export function compareCard(a, b) {
