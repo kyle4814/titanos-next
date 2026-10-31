@@ -1,6 +1,7 @@
 // Shared UI parts: placeholder media, product card, breadcrumb, pager, empty and loading states.
 import { h, icon, nf, hashHref, announce } from './util.js';
 import { projects } from './projects.js';
+import { creditText } from './mosaic.js';
 
 export function shapeFor(catId = '') {
   if (/sheet|torch|membranes-accessories|tapes/.test(catId)) return 'roll';
@@ -82,6 +83,24 @@ export function categoryCard(c, dv) {
       h('h3', null, h('a', { class: 'card-link', href: '#/category/' + c.id }, c.name)),
       c.description ? h('p', { class: 'clamp-3' }, c.description) : null,
       h('p', { class: 'count' }, `${nf.format(c.productCount)} product${c.productCount === 1 ? '' : 's'}`)));
+}
+
+/** One tile of the home photo mosaic (spec from mosaic.js). The credit text is filled in once the full categories file has arrived. */
+export function mosaicTile(sp, catId) {
+  const offline = typeof navigator !== 'undefined' && navigator.onLine === false; const i = sp.img;
+  const media = offline ? placeholder(sp.id, sp.name) : h('img', { class: 'mosaic-img', src: i.src, srcset: `${i.src} 480w, ${i.src2x} 960w`, sizes: '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw', width: String(i.width), height: String(i.height), alt: i.alt, loading: i.loading, decoding: 'async' });
+  if (!offline) media.addEventListener('error', () => media.replaceWith(placeholder(sp.id, sp.name)), { once: true });
+  return h('a', { class: 'mosaic-tile' + (sp.root ? ' mosaic-tile--root' : ''), href: sp.href, title: sp.title, 'data-cat': sp.id },
+    h('span', { class: 'mosaic-media' }, media, h('span', { class: 'mosaic-tag' }, sp.tag)),
+    h('span', { class: 'mosaic-cap' }, h('strong', null, sp.name), h('small', null, sp.count), h('small', { class: 'mosaic-credit' }, sp.credit)));
+}
+/** Put each tile's credit (author, licence) in its text and title. `credits` maps a category id to its credit record. */
+export function mosaicCredits(root, credits) {
+  for (const a of root.querySelectorAll('.mosaic-tile')) {
+    const id = a.getAttribute('data-cat'); const cr = credits.get(id); if (!cr) continue;
+    const c = creditText(cr); if (!c) continue;
+    a.querySelector('.mosaic-credit').textContent = c; a.title = a.title.replace('Photo credit: shown on the category page.', c);
+  }
 }
 
 export function breadcrumb(items) {

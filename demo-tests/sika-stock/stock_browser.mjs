@@ -9,6 +9,7 @@ const t = (n, ok, d = '') => { if (!ok) fails++; console.log((ok ? 'PASS ' : 'FA
 const rd = (f) => JSON.parse(fs.readFileSync(root + '/data/' + f, 'utf8').replace(/^﻿/, ''));
 const prods = rd('products.json'); const cats = rd('categories.json');
 const ill = prods.find((p) => p.image && p.image.illustrative); const pack = prods.find((p) => p.image && !p.image.illustrative);
+const l12 = cats.filter((c) => c.level <= 2).length;
 const cat = cats.find((c) => c.id === ill.category); const l2 = cats.find((c) => c.level === 2 && c.children && c.children.length > 1 && c.image);
 for (const [W, H] of [[1366, 768], [390, 844]]) {
   const ctx = await b.newContext({ viewport: { width: W, height: H }, isMobile: W < 600, hasTouch: W < 600 }); const page = await ctx.newPage(); const errs = [];
@@ -38,6 +39,19 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   await page.goto(s.base + '#/product/' + pack.id, { waitUntil: 'load' }); await page.waitForSelector('main:not([aria-busy]) .pdp-media img.packshot'); await page.waitForTimeout(300);
   const ps = await page.evaluate(() => ({ stock: !!document.querySelector('.pdp-media .stock-tag'), credit: !!document.querySelector('.pdp .credit-line'), shot: !!document.querySelector('.pdp-media--shot') }));
   t(`${sz} a packshot product has no stock caption or credit`, !ps.stock && !ps.credit && ps.shot, JSON.stringify(ps));
+  // home: the photo mosaic below the hero (lazy tiles, alt, size, label, credit, stacked on the phone), shots saved for the receipt
+  await page.goto(s.base + '#/', { waitUntil: 'load' }); await page.waitForSelector('.mosaic .mosaic-tile'); await page.waitForFunction(() => [...document.querySelectorAll('.mosaic-credit')].every((e) => e.textContent.startsWith('Photo:')), null, { timeout: 15000 }).catch(() => {});
+  const mo = await page.evaluate(() => { const m = document.querySelector('.mosaic'); const tiles = [...m.querySelectorAll('.mosaic-tile')]; const hero = document.querySelector('.hero').getBoundingClientRect();
+    const imgs = tiles.map((a) => a.querySelector('img'));
+    return { tiles: tiles.length, noImg: imgs.filter((i) => !i).length, noAlt: imgs.filter((i) => i && !i.alt).length, noSize: imgs.filter((i) => i && (!i.getAttribute('width') || !i.getAttribute('height'))).length, notLazy: imgs.filter((i) => i && i.getAttribute('loading') !== 'lazy').length,
+      noLabel: tiles.filter((a) => !/Illustrative photo/.test(a.querySelector('.mosaic-tag').textContent)).length, noCredit: tiles.filter((a) => !/^Photo: .+, .+/.test(a.querySelector('.mosaic-credit').textContent) || !a.title.includes(a.querySelector('.mosaic-credit').textContent)).length,
+      belowHero: m.getBoundingClientRect().top >= hero.bottom - 1, cols: new Set(tiles.map((a) => Math.round(a.getBoundingClientRect().left))).size, ov: document.documentElement.scrollWidth - document.documentElement.clientWidth }; });
+  t(`${sz} home mosaic: a tile for every root and level 2 category, each with img, alt, width, height, loading=lazy, label and credit`, mo.tiles === l12 && mo.noImg + mo.noAlt + mo.noSize + mo.notLazy + mo.noLabel + mo.noCredit === 0, JSON.stringify(mo));
+  t(`${sz} home mosaic: below the hero, no horizontal scroll, ${W < 600 ? 'stacked in one column' : 'several columns'}`, mo.belowHero && mo.ov <= 1 && (W < 600 ? mo.cols === 1 : mo.cols >= 3), JSON.stringify(mo));
+  await page.evaluate(() => document.querySelector('.mosaic').scrollIntoView({ block: 'start' })); await page.waitForTimeout(1500);
+  const dec = await page.evaluate(() => { const r = innerHeight; const vis = [...document.querySelectorAll('.mosaic img')].filter((i) => i.getBoundingClientRect().top < r); return { vis: vis.length, decoded: vis.filter((i) => i.complete && i.naturalWidth > 0).length }; });
+  t(`${sz} home mosaic: the tiles in view have loaded and decoded`, dec.vis > 0 && dec.decoded === dec.vis, JSON.stringify(dec));
+  await page.screenshot({ path: `${outDir}/mosaic_${W}.png` });
   // credits page reachable from About
   await page.goto(s.base + '#/about', { waitUntil: 'load' }); await page.waitForSelector('a[href="#/credits"]'); await page.click('a[href="#/credits"]'); await page.waitForSelector('.credits-list li');
   const cr = await page.evaluate(() => ({ n: document.querySelectorAll('.credits-list li').length, ov: document.documentElement.scrollWidth - document.documentElement.clientWidth }));

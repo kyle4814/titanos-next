@@ -2,7 +2,8 @@
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm } from './util.js';
 import { derived, derivedFull, derivedLite, groupIndex, data } from './data.js';
 import { getSearcher } from './searcher.js';
-import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton, stockMedia, stockOf, creditLine } from './components.js';
+import { mosaicCats, mosaicSpec } from './mosaic.js';
+import { productCard, categoryCard, mosaicTile, mosaicCredits, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton, stockMedia, stockOf, creditLine } from './components.js';
 
 const PER_PAGE = 24;
 let filtersOpen = false; // the filter panel (phones) stays open while filters are changed
@@ -11,13 +12,12 @@ let filtersOpen = false; // the filter panel (phones) stays open while filters a
 export async function homeView(ctx) {
   const { cfg, openAssistant } = ctx; const dv = await derivedLite();
   const stats = dv.stats || (await data.stats()) || {};
-  const top = dv.catById.get('construction');
-  const groups = (top ? top.children : []).map((id) => dv.catById.get(id)).filter(Boolean);
   const feat = dv.catById.get(cfg.home.featureCategory);
   const featKids = feat ? feat.children.map((id) => dv.catById.get(id)).filter(Boolean) : [];
   const searchInput = h('input', { id: 'hero-q', type: 'search', name: 'q', autocomplete: 'off', placeholder: cfg.home.heroPlaceholder, 'aria-label': 'Search products, systems and documents', enterkeyhint: 'search' });
   const form = h('form', { class: 'bigsearch search-box', role: 'search', onsubmit: (e) => { e.preventDefault(); location.hash = hashHref('/products', { q: searchInput.value.trim() }); } }, searchInput, h('button', { type: 'submit', 'aria-label': 'Search' }, icon('search', 'i--lg')));
   const persona = ctx.persona;
+  const mosaic = h('div', { class: 'mosaic' }, mosaicCats(dv.categories).map((c) => mosaicTile(mosaicSpec(c))));
   const el = h('div', null,
     h('section', { class: 'hero' }, h('div', { class: 'container' },
       h('div', { class: 'helpbox' },
@@ -35,7 +35,7 @@ export async function homeView(ctx) {
       h('div', { class: 'btn-row' }, h('a', { class: 'btn', href: '#/selector' }, icon('arrow-right', 'i--sm'), 'Choose your system'))))),
     h('section', { class: 'section section--grey' }, h('div', { class: 'container' },
       h('div', { class: 'layout-head' }, h('h2', null, 'Explore the range'), h('p', null, 'Every product category on the public website, with its data sheets and safety data sheets.')),
-      h('div', { class: 'grid--center' }, groups.map((c) => categoryCard(c, dv))))),
+      mosaic)),
     feat ? h('section', { class: 'section' }, h('div', { class: 'container' },
       h('div', { class: 'layout-head' }, h('h2', null, cfg.home.featureTitle), h('p', null, feat.description || 'Adhesives, primers, waterproofing and grout for tiling, in one place.')),
       h('div', { class: 'grid--center c3' }, featKids.map((c) => categoryCard(c, dv))),
@@ -49,6 +49,7 @@ export async function homeView(ctx) {
     h('section', { class: 'section' }, h('div', { class: 'container' },
       h('div', { class: 'layout-head' }, h('h2', null, 'Ask the product advisor'), h('p', null, 'Answers come from the published product documentation, with a source link on every answer. No AI model is called and nothing leaves your browser.')),
       h('div', { class: 'btn-row', style: 'justify-content:center' }, cfg.home.assistantQuestions.map((q) => h('button', { class: 'chip chip--line', type: 'button', onclick: () => openAssistant(q) }, q))))));
+  derivedFull().then((f) => mosaicCredits(mosaic, new Map(f.categories.filter((c) => c.image && c.image.credit).map((c) => [c.id, c.image.credit])))).catch(() => {}); // credits arrive after the first paint (the full file is not in the first screen)
   return { el, title: 'Customer product portal', nav: null };
 }
 function docCard(title, text, href) {

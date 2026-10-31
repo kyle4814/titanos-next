@@ -1,7 +1,7 @@
 #!/bin/bash
 # Stock photos suite: node checks always; the browser check when Windows node and Chrome are present.
 cd "$(dirname "$0")" || exit 2
-rc=0; node stock_check.mjs || rc=1
+rc=0; node stock_check.mjs || rc=1; node mosaic_check.mjs | grep -E "FAIL|FIRST|MOSAIC" ; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
 WN="/mnt/c/Program Files/nodejs/node.exe"
 if [ -x "$WN" ] && [ "${1:-}" != "--no-browser" ]; then
   P="$(cd ../../public/demo/sika-210c0c && pwd)"; W='\\wsl.localhost\Ubuntu'$(echo "$P" | sed 's#/#\\#g')

@@ -616,3 +616,19 @@ main:focus{outline:none;box-shadow:none}
 @media (max-width:39.99em){.cat-hero-media{aspect-ratio:3/2}}
 .credits-list{max-width:60rem;padding-left:1.2rem;display:grid;gap:.5rem}
 .credits-list li{overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- home photo mosaic (illustrative Creative Commons photos, tokens only) */
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(200px,auto);grid-auto-flow:dense;gap:16px}
+.mosaic-tile{display:flex;flex-direction:column;min-width:0;background:var(--grey-darker);color:var(--white);box-shadow:var(--shadow-1);overflow:hidden}
+.mosaic-tile--root{grid-column:span 2;grid-row:span 2}
+.mosaic-media{position:relative;flex:1 1 auto;min-height:130px;background:var(--grey-light);overflow:hidden}
+.mosaic-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mosaic-media .ph{position:absolute;inset:0}
+.mosaic-tag{position:absolute;left:0;top:0;padding:.15rem .5rem;font-size:.72rem;line-height:1.2;font-weight:600;background:var(--white);color:var(--grey-darker);border-bottom:3px solid var(--primary)}
+.mosaic-cap{display:flex;flex-direction:column;gap:.1rem;padding:.6rem .8rem .7rem;border-top:3px solid var(--primary)}
+.mosaic-cap strong{font-size:1.1rem;font-weight:600;line-height:1.2}
+.mosaic-cap small{font-size:.8125rem;color:var(--grey-mid)}
+.mosaic-cap .mosaic-credit{font-size:.72rem;color:var(--grey-mid);overflow-wrap:anywhere}
+.mosaic-tile:hover{box-shadow:var(--shadow-2)}.mosaic-tile:hover .mosaic-cap{border-top-color:var(--primary-hover);background:var(--black)}
+@media (max-width:63.99em){.mosaic{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:39.99em){.mosaic{grid-template-columns:1fr}.mosaic-tile--root{grid-column:auto;grid-row:auto}.mosaic-media{min-height:180px}}
