@@ -52,8 +52,9 @@ const mainSet = reach(['app.js']);
 const lazyRoots = new Set(); const lazyAll = new Set();
 for (let grew = true; grew;) { grew = false; for (const i of [...mainSet, ...lazyAll]) for (const d of mods.get(i).dyn) if (!mainSet.has(d) && !lazyRoots.has(d)) { lazyRoots.add(d); for (const m of reach([d])) if (!mainSet.has(m)) lazyAll.add(m); grew = true; } }
 // features: the v2 brain, the v1 engine, the actions, and the published-data panels (rates, times, clauses) used by the product and sheet pages
+// the calculator kinds (gencalc) are shared by the advisor and the project page's re-run button but are not a panels feature, so category pages do not download them
 // the product page's own panels (rate calculator, bill of materials) are their own feature, so category and sheet pages do not download them
-const FEATURE = (id) => (id.startsWith('brain/') ? 'brain' : id === 'assistant/engine.js' ? 'engine' : id.startsWith('actions/') ? 'actions' : id === 'lib/finder/panels.js' ? 'pdppanels' : 'panels');
+const FEATURE = (id) => (id.startsWith('brain/') ? 'brain' : id === 'assistant/engine.js' ? 'engine' : id.startsWith('actions/') ? 'actions' : id === 'lib/finder/panels.js' ? 'pdppanels' : (id === 'lib/finder/gencalc.js' || id === 'lib/calcsection.js') ? 'gencalc' : 'panels');
 const sig = new Map(); for (const r of [...lazyRoots].sort()) for (const m of reach([r])) if (!mainSet.has(m)) { const f = FEATURE(r); const cur = sig.get(m) || []; if (!cur.includes(f)) sig.set(m, [...cur, f].sort()); }
 const chunkOf = new Map(); // signature -> { name, ids }
 for (const [m, roots] of sig) { const key = roots.join('|'); if (!chunkOf.has(key)) chunkOf.set(key, { roots, ids: new Set(), name: roots.join('-') }); chunkOf.get(key).ids.add(m); }

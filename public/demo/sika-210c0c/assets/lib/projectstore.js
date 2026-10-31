@@ -8,7 +8,7 @@ import { ESTIMATE_LINE } from './finder/qty.js';
 export const KEY = 'sika-demo-210c0c-project-v2';
 export const LEGACY_PORTAL_KEY = 'sika-demo-210c0c-projects'; // the old cart: [{ id, qty, unit, note, calc }]; read once, never written again
 export const LEGACY_ACTIONS_KEY = 'sika-demo-210c0c-actions-v1'; // the old advisor memory; read once, never written again
-export const LIMITS = { projects: 30, perList: 100, items: 200, recent: 30, gaps: 50, text: 500, name: 60 };
+export const LIMITS = { projects: 30, perList: 100, items: 200, recent: 30, gaps: 50, text: 500, name: 60, calcs: 80 };
 export const UNITS = ['pack', 'pail', 'bag', 'cartridge', 'roll', 'litre', 'kg', 'tube', 'drum', 'sachet', 'box'];
 export const DEFAULT_PROJECT = 'My project';
 
@@ -18,6 +18,7 @@ export const clip = (s, n) => plain(String(s == null ? '' : s)).replace(/[\u0000
 const nowIso = (clock) => (clock ? clock() : new Date()).toISOString();
 const num = (v, d, lo, hi) => { const n = Number(v); return Number.isFinite(n) ? Math.min(hi, Math.max(lo, n)) : d; };
 const BAD_NAMES = new Set(['__proto__', 'constructor', 'prototype']);
+const hash = (str) => { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return h; };
 const empty = () => ({ v: 1, model: 2, current: '', projects: {}, recent: [], gaps: [] });
 const r2 = (n) => Math.round(n * 100) / 100;
 
@@ -60,6 +61,25 @@ export function cleanItem(i) {
   };
 }
 
+
+/* ------------------------------------------------------------------ calculations (additive field: older saved files simply have none) */
+export const CALC_KINDS = ['arithmetic', 'convert', 'perimeter', 'tiles', 'grout', 'sealant', 'bed', 'mixwater', 'timeline', 'product'];
+const jsonSmall = (v, max) => { if (v == null || typeof v !== 'object') return null; try { const t = JSON.stringify(v); if (t.length > max) return null; return JSON.parse(t); } catch { return null; } };
+/** One stored calculation: id, when, kind, product id or "none", inputs as typed and normalised, the result (quantity, unit, packs, range low and high), the citation, the estimate sentence and where it was used. */
+export function cleanCalc(c) {
+  if (!c || typeof c !== 'object') return null;
+  const id = clip(c.id, 60); if (!id || BAD_NAMES.has(id)) return null;
+  const kind = CALC_KINDS.includes(c.kind) ? c.kind : null; if (!kind) return null;
+  const cit = c.citation && typeof c.citation === 'object' ? { text: clip(c.citation.text, 400), url: clip(c.citation.url, 400), page: c.citation.page == null ? null : clip(String(c.citation.page), 10), kind: clip(c.citation.kind, 20) } : null;
+  const res = jsonSmall(c.result, 4000) || {};
+  return {
+    id, t: clip(c.t, 40), kind, product: clip(c.product, 100) || 'none', productName: clip(c.productName, 160), title: clip(c.title, 200), question: clip(c.question, 300),
+    inputs: jsonSmall(c.inputs, 2000) || {}, normalised: jsonSmall(c.normalised, 2000) || {}, result: res, summary: clip(c.summary, 300), answer: clip(c.answer, 300), formula: clip(c.formula, 400),
+    citation: cit, estimate: clip(c.estimate, 200),
+    usedIn: (Array.isArray(c.usedIn) ? c.usedIn : []).slice(0, 10).map((u) => ({ type: ['cart', 'quote'].includes(u && u.type) ? u.type : 'cart', ref: clip(u && u.ref, 100), t: clip(u && u.t, 40) })),
+  };
+}
+
 function cleanProject(p, name) {
   p = p && typeof p === 'object' ? p : {};
   const arr = (a) => (Array.isArray(a) ? a.slice(0, LIMITS.perList) : []);
@@ -72,6 +92,7 @@ function cleanProject(p, name) {
     quantities: arr(p.quantities).map((q) => ({ productId: clip(q.productId, 100), name: clip(q.name, 160), job: q.job && typeof q.job === 'object' ? Object.fromEntries(Object.entries(q.job).slice(0, 14).filter(([, v]) => typeof v === 'number' || typeof v === 'string').map(([k, v]) => [clip(k, 30), typeof v === 'number' ? v : clip(v, 40)])) : {}, rows: arr(q.rows).slice(0, 6).map((r) => ({ low: Number(r.low) || 0, high: Number(r.high) || 0, unit: clip(r.unit, 6), packs: clip(r.packs, 200), phrase: clip(r.phrase, 400), url: clip(r.url, 400) })), saved: clip(q.saved, 40) })),
     documents: arr(p.documents).map((d) => ({ title: clip(d.title, 200), url: clip(d.url, 400), saved: clip(d.saved, 40) })),
     notes: arr(p.notes).map((n) => ({ text: clip(n.text, LIMITS.text), saved: clip(n.saved, 40) })),
+    calculations: (Array.isArray(p.calculations) ? p.calculations : []).slice(0, LIMITS.calcs).map(cleanCalc).filter(Boolean),
   };
 }
 
@@ -219,6 +240,37 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
     removeDocument: S((url) => { const p = cur(); if (!p) return false; const n = p.documents.length; p.documents = p.documents.filter((d) => d.url !== url); if (p.documents.length !== n) touch(p); return p.documents.length !== n; }),
     removeNote: S((i) => { const p = cur(); if (!p || !p.notes[i]) return false; p.notes.splice(i, 1); touch(p); return true; }),
 
+
+    /* calculations: every worked calculation, kept with the project (the quote pack reads them through calculations()) */
+    calculations: S(() => (cur() ? copy(cur().calculations || []) : [])),
+    allCalculations: S(() => Object.values(state.projects).flatMap((p) => (p.calculations || []).map((c) => ({ ...copy(c), project: p.name })))),
+    lastCalculations: S((n = 3) => (cur() ? copy((cur().calculations || []).slice(0, Math.max(0, n))) : [])),
+    getCalculation: S((id) => { const c = cur() && (cur().calculations || []).find((x) => x.id === id); return c ? copy(c) : null; }),
+    /** Store one. A calculation with the same kind, product, inputs and result is not stored twice (the existing one is returned with duplicate: true). */
+    addCalculation: S((rec) => {
+      const p = ensureProject(); if (!p.calculations) p.calculations = [];
+      const t = nowIso(clock); const seq = (p.calculations.length + 1);
+      const c = cleanCalc({ ...rec, id: rec && rec.id && !BAD_NAMES.has(clip(rec.id, 60)) ? rec.id : 'calc-' + t.replace(/\D/g, '').slice(2, 14) + '-' + seq + '-' + (Math.abs(hash(JSON.stringify(rec && rec.inputs) + (rec && rec.kind))) % 1296).toString(36), t: (rec && rec.t) || t });
+      if (!c) return { ok: false, error: 'There is no calculation to save.' };
+      const dup = p.calculations.find((x) => x.kind === c.kind && x.product === c.product && same(x.inputs, c.inputs) && same(x.result, c.result));
+      if (dup) return { ok: true, duplicate: true, calculation: copy(dup), project: p.name };
+      if (p.calculations.some((x) => x.id === c.id)) c.id += '-' + p.calculations.length;
+      p.calculations.unshift(c); if (p.calculations.length > LIMITS.calcs) p.calculations.length = LIMITS.calcs; touch(p);
+      return { ok: true, added: true, calculation: copy(c), project: p.name };
+    }),
+    /** Re-run or edit: replace inputs, normalised inputs, result and citation of a stored calculation; its id and first time stay. */
+    updateCalculation: S((id, patch) => {
+      const p = cur(); const i = p ? (p.calculations || []).findIndex((x) => x.id === id) : -1; if (i < 0) return { ok: false, error: 'That calculation is not in this project.' };
+      const before = p.calculations[i]; const c = cleanCalc({ ...before, ...patch, id, t: before.t, usedIn: before.usedIn }); if (!c) return { ok: false, error: 'That calculation could not be updated.' };
+      p.calculations[i] = c; touch(p); return { ok: true, calculation: copy(c), before: copy(before), project: p.name };
+    }),
+    removeCalculation: S((id) => { const p = cur(); const i = p ? (p.calculations || []).findIndex((x) => x.id === id) : -1; if (i < 0) return false; p.calculations.splice(i, 1); touch(p); return true; }),
+    /** Record that a cart line or a quote came from this calculation: ref is the product id (cart) or the quote reference. */
+    markCalculationUsed: S((id, use) => {
+      const p = cur(); const c = p && (p.calculations || []).find((x) => x.id === id); if (!c) return false;
+      const u = cleanCalc({ ...c, usedIn: [{ type: use && use.type, ref: use && use.ref, t: nowIso(clock) }] }).usedIn[0];
+      if (!c.usedIn.some((x) => x.type === u.type && x.ref === u.ref)) c.usedIn.push(u); touch(p); return true;
+    }),
     saveSystem: S((s) => { const p = ensureProject(); const item = cleanProject({ systems: [{ ...s, saved: nowIso(clock) }] }, 'x').systems[0]; if (p.systems.some((x) => x.title === item.title && same(x.steps, item.steps))) return { ok: true, duplicate: true, project: p.name }; push(p, 'systems', item); return { ok: true, project: p.name }; }),
     saveQuantity: S((q, question) => {
       const p = ensureProject(); const item = cleanProject({ quantities: [{ ...q, saved: nowIso(clock) }] }, 'x').quantities[0];
@@ -241,7 +293,7 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
       for (const p of Object.values(v.state.projects)) for (const q of p.quantities) { const it = itemFromQuantity(q, 'migrated', clock); if (it) p.items = mergeItem0(p.items, it); }
       if (!merge) state = v.state;
       else {
-        for (const [n, p] of Object.entries(v.state.projects)) { if (!state.projects[n]) { if (Object.keys(state.projects).length >= LIMITS.projects) continue; state.projects[n] = p; continue; } const c = state.projects[n]; for (const l of ['systems', 'quantities', 'documents', 'notes']) for (const it of p[l]) if (!c[l].some((x) => same(x, it))) c[l].push(it); for (const it of p.items) if (!c.items.some((x) => x.id === it.id)) c.items.push(it); c.updated = p.updated || c.updated; }
+        for (const [n, p] of Object.entries(v.state.projects)) { if (!state.projects[n]) { if (Object.keys(state.projects).length >= LIMITS.projects) continue; state.projects[n] = p; continue; } const c = state.projects[n]; for (const l of ['systems', 'quantities', 'documents', 'notes']) for (const it of p[l]) if (!c[l].some((x) => same(x, it))) c[l].push(it); for (const it of p.items) if (!c.items.some((x) => x.id === it.id)) c.items.push(it); for (const it of p.calculations) if (!c.calculations.some((x) => x.id === it.id)) c.calculations.push(it); c.updated = p.updated || c.updated; }
         state.recent = [...v.state.recent, ...state.recent].filter((r, i, a) => a.findIndex((x) => x.q === r.q) === i).slice(0, LIMITS.recent);
         for (const g of v.state.gaps) if (!state.gaps.some((x) => x.q.toLowerCase() === g.q.toLowerCase())) state.gaps.push(g);
         state.gaps = state.gaps.slice(0, LIMITS.gaps);
@@ -262,7 +314,7 @@ export const DOC_KINDS = { product_data_sheet: 'Data sheet', safety_data_sheet: 
 
 /** getDocs(productId) -> Promise<[{ type, title, url, http? }]>; only data sheets and SDS with a working link are listed. */
 export async function buildJobPack(project, getDocs, { nameOf } = {}) {
-  const p = project || { name: DEFAULT_PROJECT, items: [], documents: [], notes: [], systems: [] };
+  const p = project || { name: DEFAULT_PROJECT, items: [], documents: [], notes: [], systems: [], calculations: [] };
   const nm = (it) => clip((nameOf && nameOf(it.id)) || it.name || it.id, 160);
   const docs = [];
   for (const it of p.items) {
@@ -275,6 +327,6 @@ export async function buildJobPack(project, getDocs, { nameOf } = {}) {
   const csv = [head, ...body].map((r) => r.map(csvCell).join(',')).join('\r\n') + '\r\n' + csvCell(ESTIMATE_LINE) + '\r\n';
   const docsText = [`Data sheets and safety data sheets for ${p.name}`, 'Open each link on the Sika Australia website. Nothing is downloaded or sent by this page.', '', ...(docs.length ? docs.map((d) => `${d.product} | ${d.kind} | ${d.title}\n${d.url}`) : ['No documents are listed for the products in this project.'])].join('\n') + '\n';
   const enquiry = [`Project: ${p.name}`, '', 'Products and quantities:', ...(p.items.length ? p.items.map((it) => `- ${nm(it)}: ${itemLine(it)}${it.need ? ', need about ' + it.need : ''}${it.note ? ' (' + it.note + ')' : ''}`) : ['- none yet']),
-    ...(p.systems.length ? ['', 'System:', ...p.systems.map((s) => `- ${s.title}`)] : []), ...(p.notes.length ? ['', 'Notes:', ...p.notes.map((n) => `- ${n.text}`)] : []), '', ESTIMATE_LINE].join('\n');
+    ...(p.systems.length ? ['', 'System:', ...p.systems.map((s) => `- ${s.title}`)] : []), ...(p.notes.length ? ['', 'Notes:', ...p.notes.map((n) => `- ${n.text}`)] : []), ...((p.calculations || []).length ? ['', 'Calculations (estimates, with their working):', ...p.calculations.map((c) => `- ${c.title}: ${c.answer || c.summary}${c.formula ? ' (' + c.formula + ')' : ''}`)] : []), '', ESTIMATE_LINE].join('\n');
   return { name: p.name, rows: body, head, csv, docs, docsText, enquiry };
 }

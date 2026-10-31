@@ -2,6 +2,7 @@
 // Plain regular expressions. No model. Facet ids match data/selector.json so a parsed answer can feed the system finder directly.
 
 import { looksLikeJob } from './job.js';
+import { understand as understandCalc } from '../lib/finder/gencalc.js';
 
 export const COMMANDS = [
   ['/calc', 'calc', 'How much and how many packs: /calc 20 m2 Davco Grey One Pot adhesive'],
@@ -147,6 +148,7 @@ export function route(text) {
     const m = /^\/([a-z]+)\b\s*(.*)$/i.exec(raw);
     if (!m) return { action: 'help', rest: '', slash: true };
     const c = '/' + m[1].toLowerCase();
+    if (c === '/calcsave') return { action: 'calcsave', rest: m[2], slash: true };
     if (c === '/new') return { action: 'newproject', rest: m[2], slash: true };
     if (c === '/note') return { action: 'note', rest: m[2], slash: true };
     if (c === '/use') return { action: 'useproject', rest: m[2], slash: true };
@@ -169,6 +171,7 @@ export function route(text) {
   if (/^(?:new|start|create) (?:a )?project\b/i.test(t)) return { action: 'newproject', rest: t.replace(/^(?:new|start|create) (?:a )?project\s*(?:called|named)?\s*/i, '') };
   if (SAVE_RE.test(t) && !PACK_RE.test(t)) return { action: 'save', rest: t };
   if (PACK_RE.test(t)) return { action: 'pack', rest: t };
+  { const g = understandCalc(t); if (g && (g.kind !== 'timeline' || /\b(then|total|add up|sum)\b/i.test(t))) return { action: 'calc', rest: t }; } // the calculator kinds: sums, conversions, perimeter, tiles, grout, sealant, beds, mixing water
   if (JOB_RE(t)) return { action: 'job', rest: t };
   if (HANDOFF_RE.test(t) && !SAFETY_RE.test(t)) return { action: 'handoff', rest: t };
   if (EXPORT_RE.test(t) && !/\bsds\b|\bdata sheet|\bsafety data/i.test(t)) return { action: 'export', rest: t };

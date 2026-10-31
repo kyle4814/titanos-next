@@ -2,10 +2,11 @@
 // Rules held by every handler: a figure is shown only beside the sentence it came from (phrase, page, URL); quantities only, never prices;
 // the estimate-only line on every quantity card; where the published data is silent the card says so and offers the hand-off.
 import SikaCalc from './sikacalc.js';
+import { genCalc } from './calcbot.js';
 import { compareTable } from './compare.js';
 import { card, clarifyCard, unknownCard, src, plain, norm, findProducts, findProductsInOrder, ESTIMATE_LINE, NOT_PUBLISHED, cardCsv, cardText } from './core.js';
 import { parseNumbers, parseFacets, envId, ioFromEnv } from './parse.js';
-import { fmt, fmtQty, normaliseFact, quantity, packRange, packRangeText, doseBasisText, fmtK, inputFor, DOSE_KINDS } from '../lib/finder/calc.js';
+import { fmt, fmtQty, normaliseFact, quantity, packOptions, packRange, packRangeText, doseBasisText, fmtK, inputFor, DOSE_KINDS } from '../lib/finder/calc.js';
 import { resolve as resolveSystem } from '../lib/finder/model.js';
 import { pickSds, safetyRows } from '../assistant/apply.js';
 import { supplyClause, referencesLines, DRAFT_LABEL, STANDARDS_NOTE } from '../assistant/clause.js';
@@ -150,7 +151,8 @@ async function doseCalc(ctx, p, title) {
       if (pr.options.length) { packText = pr.options.map((o) => packRangeText(o, q.limit)).join('; '); c.rows.push({ label: L('Whole packs, rounded up'), value: packText, source: fr.packText ? src(fr.productUrl, 'Product page', fr.packText) : src(fr.productUrl, 'Product page', ''), derived: true }); }
       else c.rows.push({ label: L('Whole packs'), value: pr.note || 'Pack sizes not in the published data.', source: null });
     }
-    saved.push({ low: q.low, high: q.high, unit: q.unit, packs: packText || null, phrase: plain(x.text), url: page({ url: x.source.url, page: x.source.page }) });
+    let cartPacks = null; if (q.unit !== 'bags') { const sg = packOptions(packsIn, { amount: q.high, unit: q.unit }).suggested; if (sg && sg.mix.length) cartPacks = sg.mix.map((m) => `${m.count} x ${fmt(m.size)} ${m.unit}`).join(' + ') + ` (${fmtQty(sg.total, q.unit)} supplied, to cover the higher figure)`; }
+    saved.push({ low: q.low, high: q.high, unit: q.unit, packs: cartPacks, phrase: plain(x.text), url: page({ url: x.source.url, page: x.source.page }) });
   });
   c.sources = [src(fr.productUrl, 'Product page', ''), sheet].filter(Boolean);
   session.calcs[p.id] = { id: p.id, name: p.name, job: { cementitious_kg: job.cementKg, mix_kg: job.mixKg, water_l: job.waterL, volume_m3: job.volume }, rows: saved };
@@ -162,6 +164,7 @@ export async function calc(ctx) {
   const f = session.facets;
   const named = (await findProducts(data, ctx.rest || ctx.text, 1))[0];
   if (!named && session.system && session.last && session.last.action === 'system') return system({ ...ctx, rest: '' });
+  const gen = await genCalc(ctx, named); if (gen) return gen;
   const p = named || session.product;
   if (!p) return askProduct('calc', 'is this for');
   const rec = await data.arate(p.id);
