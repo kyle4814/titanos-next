@@ -136,7 +136,7 @@ export function specCard(sh, clauses, specDs, question) {
     const stds = (sh.sp && sh.sp.std) || [];
     if (!stds.length) return unknown(question, sh, 'No specification clause or standard citation is published for this product.', ['specification clause']);
     const shown = stds.slice(0, 4);
-    return card({ type: 'spec', title: `Standards cited by the ${sh.n} data sheet`, product: prod(sh), headline: 'These are the data sheet\'s own sentences. A citation is not a statement that the product complies; only the sentence itself says what it says.',
+    return card({ type: 'spec', title: `Standards cited by the ${sh.n} data sheet`, product: prod(sh), headline: 'These are the data sheet\'s own sentences. A citation is not a statement of compliance; only the sentence itself says what it says.',
       lines: shown.map((s) => ({ label: s.citation + (s.page ? `, page ${s.page}` : ''), text: s.context })), facts: shown.map((s) => fact({ source_url: sh.sp.ds.url, page: s.page, sentence: s.context, doc_type: 'PDS', doc_version: sh.sp.ds.edition })), chip: CHIPS.DATASHEET, links: dsLink(sh) });
   }
   const lines = [], facts = [];

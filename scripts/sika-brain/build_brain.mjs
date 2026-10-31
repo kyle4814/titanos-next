@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalise, tokens, stem, STOP, compact } from '../../public/demo/sika-210c0c/assets/brain/text.js';
+import { buildKnow } from './build_know.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PORTAL = process.env.SIKA_PORTAL || path.join(HERE, '..', '..', 'public', 'demo', 'sika-210c0c');
@@ -34,6 +35,8 @@ const addTok = (tok, pi, f) => { let s = post.get(tok); if (!s) post.set(tok, s 
 const P = [], alias = {};
 const GENERIC_NAME = new Set(['adhesive', 'grout', 'primer', 'sealant', 'mastic', 'membrane', 'mortar', 'pack', 'kit', 'compound', 'coating', 'waterproofing', 'tile', 'screed', 'epoxy', 'concrete', 'additive']);
 const aliasTmp = new Map();
+const prefixTmp = new Set();
+const ownerTmp = new Map(); // alias text -> products whose real name (with or without the brand) it is
 function addAlias(a, pi) { if (!a || a.length < 3) return; const s = aliasTmp.get(a) || new Set(); s.add(pi); aliasTmp.set(a, s); }
 
 products.forEach((p, pi) => {
@@ -57,10 +60,26 @@ products.forEach((p, pi) => {
   const variants = new Set([full, noBrand, normalise(p.id.replace(/-/g, ' '))]);
   for (const v of [full, noBrand]) { const w = v.split(' '); while (w.length > 1 && GENERIC_NAME.has(w[w.length - 1])) { w.pop(); variants.add(w.join(' ')); } }
   for (const v of variants) { addAlias(v, pi); addAlias(compact(v), pi); }
+  for (const v of [full, noBrand]) { const s = ownerTmp.get(v) || new Set(); s.add(pi); ownerTmp.set(v, s); }
+  // a visitor drops the tail of a long name: "sikaflex 11 fc" for Sikaflex-11 FC+, "sikadur 31" for Sikadur-31 CF Normal. Prefixes that carry a digit and stay unique are kept below.
+  // a fused brand word ("Sikafloor Level PRO") is dropped the same way: "level pro"
+  { const w = noBrand.split(' '); if (w.length >= 3 && /^(sika\w+|lanko|davco|sarna\w+)$/.test(w[0])) { const suf = w.slice(1).join(' '); if (suf.length >= 7) prefixTmp.add('\u0001' + suf + '\t' + pi); } }
+  for (const v of new Set([noBrand, full])) { const w = v.split(' '); for (let k = w.length - 1; k >= (/\d/.test(w[0]) && /[a-z]/.test(w[0]) && w[0].length >= 3 ? 1 : 2); k--) { const pre = w.slice(0, k).join(' '); if (/\d/.test(pre) && !GENERIC_NAME.has(w[k - 1])) { prefixTmp.add(pre + '\t' + pi); } } }
+});
+{ const byPre = new Map(); for (const e of prefixTmp) { const [pre0, pi] = e.split('\t'); const pre = pre0.replace('\u0001', ''); const s = byPre.get(pre) || new Set(); s.add(Number(pi)); byPre.set(pre, s); } for (const [pre, set] of byPre) if (set.size <= 3 && !aliasTmp.has(pre)) for (const pi of set) { addAlias(pre, pi); addAlias(compact(pre), pi); } }
+// old names the Sika pages publish for a product: "(Formerly Index Fidia 4mm)", "Previously known as Sika MaxTack", "also known as Sikadur-33"
+const aka = {};
+products.forEach((p, pi) => {
+  const blob = JSON.stringify([p.tagline, p.summary, p.metaDescription, p.attributes, p.usage, p.sections]).replace(/<[^>]+>/g, ' ').replace(/\\u00ae|\\u2122|[®™]/g, '').replace(/\\n|\\"/g, ' ');
+  for (const m of blob.matchAll(/(?:formerly|previously known as|also known as)\s*:?\s*([A-Za-z0-9][A-Za-z0-9 \-+\/.]{2,48}?)\s*(?=[)'",;]|\.\s|$)/gi)) {
+    const old = clean(m[1]).replace(/\s+(Part [AB]|Cleaner)$/i, ''); const key = normalise(old); if (key.length < 5 || key.split(' ').length > 6) continue;
+    const sentence = clean(m[0]).slice(0, 120); if (!aka[key]) { aka[key] = { pi, s: sentence }; addAlias(key, pi); addAlias(compact(key), pi); }
+  }
 });
 // distinctive single-token aliases are dropped unless the token is unique to one product
 const aliasOut = {};
 for (const [a, set] of aliasTmp) {
+  { const own = ownerTmp.get(a) || ownerTmp.get(Object.keys(aliasOut).length ? a : a); if (own && own.size === 1 && set.size > 1) { const only = [...own][0]; set.clear(); set.add(only); } } // a real product name beats the same words left over from a longer name ("Level Pro" vs "Level Pro Primer")
   const toks = a.split(' ');
   if (toks.length === 1 && !/\d/.test(a) && (a.length < 5 || GENERIC_NAME.has(a) || set.size > 1)) { if (set.size > 1 || a.length < 5 || GENERIC_NAME.has(a)) continue; }
   aliasOut[a] = [...set];
@@ -68,7 +87,7 @@ for (const [a, set] of aliasTmp) {
 const postOut = {}; for (const [t, s] of post) if (t.length >= 2 && !STOP.has(t)) postOut[t] = [...s].sort((a, b) => a - b);
 const top2 = (c) => c.split('/').slice(0, 2).join('/');
 const cats = categories.map((c) => ({ id: c.id, name: c.name, parent: c.parent, level: c.level }));
-const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut };
+const core = { v: 1, generated: new Date().toISOString().slice(0, 10), P, cats, post: postOut, alias: aliasOut, aka };
 const coreSize = wr(path.join(OUT, 'core.json'), core);
 
 // per product shards: compiled from the FINAL knowledge lane files (rates, safety, compatibility); k/<id>.json is only a fallback
@@ -148,6 +167,7 @@ for (const cid of catIds) {
 const rulesSrc = path.join(LANES, 'corrections/rules.json');
 const rules = exists(rulesSrc) ? rd(rulesSrc) : { version: 1, rules: [] };
 wr(path.join(OUT, 'rules.json'), rules);
-const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json' }, bytes: { core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
+const know = buildKnow({ PORTAL, OUT, products });
+const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json', kb: 'kb.json', advisor: 'adv/{slug}.json' }, know: { crawl: know.crawl, pages: know.pages, lines: know.lines, prodLines: know.prodLines }, bytes: { kb: know.kb, adv: know.adv, core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
 wr(path.join(OUT, 'manifest.json'), manifest);
 console.log(JSON.stringify(manifest), 'products from lane:', nLane, 'fallback to k:', nNoK);

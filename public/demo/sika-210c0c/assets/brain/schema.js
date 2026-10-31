@@ -23,12 +23,14 @@
 import { clampText } from './text.js';
 export const CARD_SCHEMA = 'sika-brain-card@1';
 export const ANSWER_SCHEMA = 'sika-brain-answer@1';
-export const CARD_TYPES = ['product', 'rate', 'document', 'safety', 'time', 'compatibility', 'spec', 'system', 'calculation', 'comparison', 'choose', 'unknown', 'rule'];
+export const CARD_TYPES = ['product', 'rate', 'document', 'safety', 'time', 'compatibility', 'spec', 'system', 'calculation', 'comparison', 'choose', 'unknown', 'rule', 'info', 'advice'];
 export const STATUSES = ['PUBLISHED', 'UNKNOWN', 'SIGNED'];
 export const CHIPS = {
   PUBLISHED: 'From the published documentation',
   DATASHEET: 'From a published data sheet',
   PAGE: 'From the published product page',
+  SITE: 'From a published Sika Australia page',
+  ADVICE: 'Fit documented in published text, not a ranking of quality',
   DERIVED: 'Worked out from published data',
   UNKNOWN: 'Not in the published data',
   RULE: 'Corrected rule, with its source',
