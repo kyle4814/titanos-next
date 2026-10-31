@@ -120,6 +120,7 @@ function saveText(text) {
 export async function aboutView(ctx) {
   const cov = await coveragePanel();
   const { cfg } = ctx; const stats = (await data.stats()) || {}; const d = cfg.demo;
+  const prodsAll = await data.products(); const imgStats = { packshots: prodsAll.filter((x) => x.image && !x.image.illustrative).length, illustrated: prodsAll.filter((x) => x.image && x.image.illustrative).length };
   const row = (k, v) => h('tr', null, h('th', { scope: 'row', style: 'text-transform:none;letter-spacing:0;font-size:1rem' }, k), h('td', null, v));
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'About this demo' }]),
     h('div', { class: 'page-head' }, h('h1', null, 'About this demo')),
@@ -133,7 +134,8 @@ export async function aboutView(ctx) {
         h('li', null, 'Public pages and the public sitemaps of ', h('a', { href: cfg.company.site, target: '_blank', rel: 'noopener noreferrer' }, cfg.company.site.replace('https://', '')), ', read on 2026-10-30, respecting robots.txt and at no more than one request per second.'),
         h('li', null, 'Nothing behind a login, no pricing, no stock, no customer data, nothing from internal systems. Nothing here touches any company system.'),
         h('li', null, 'Every document link opens the original file on the company website. No document was copied.'),
-        h('li', null, 'Product images are not copied. Neutral placeholders are shown; real images can be switched on once permission to embed them is confirmed.')),
+        h('li', null, `Product pictures: ${nf.format(imgStats.packshots)} products show the packshot published on their public product page, loaded from a copy made for this demo. Where the company site publishes no product picture (${nf.format(imgStats.illustrated)} products) an illustrative Creative Commons photograph of the product's category is shown instead, always labelled "Illustrative photo, not the product". Category pictures are the same kind of photograph.`),
+        h('li', null, 'The illustrative photographs come from Wikimedia Commons under Creative Commons licences (CC0, public domain, CC BY, CC BY-SA). Each is credited on the page where it is shown, and every credit is listed on ', h('a', { href: '#/credits' }, 'the photo credits page'), '. Nothing else was copied.')),
       h('h2', { class: 'h4' }, 'What is in it'),
       h('table', { class: 'table' }, h('tbody', null,
         row('Products', nf.format(stats.products || 0)), row('Documents (PDS, SDS, brochures, certificates)', nf.format(stats.documents || 0)),
@@ -148,4 +150,19 @@ export async function aboutView(ctx) {
       h('p', null, 'The quote request submits nowhere. The projects list lives in this browser only. There are no accounts, no tracking and no cookies.'),
       h('p', null, h('a', { class: 'btn', href: '#/' }, 'Back to the portal'))));
   return { el, title: 'About this demo', nav: null };
+}
+
+/** Photo credits: one line per photograph (author, licence, source page), built from the credit data saved with each category. */
+export async function creditsView(ctx) {
+  const cats = await data.categories(); const by = new Map();
+  for (const c of cats) { const im = c.image; if (!im || !im.credit) continue; if (!by.has(im.src)) by.set(im.src, { cr: im.credit, title: im.credit.title || '', cats: [] }); by.get(im.src).cats.push(c.name); }
+  const rows = [...by.values()].sort((a, b) => a.cr.author.localeCompare(b.cr.author));
+  const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'About this demo', href: '#/about' }, { label: 'Photo credits' }]),
+    h('div', { class: 'page-head' }, h('h1', null, 'Photo credits'), h('p', { class: 'lead', style: 'max-width:60rem' }, `${nf.format(rows.length)} photographs from Wikimedia Commons are used as illustrations. They are not product pictures. Each is shown under its Creative Commons licence or as public domain; the links open the original file page.`)),
+    h('ul', { class: 'credits-list' }, rows.map((r) => h('li', null,
+      h('a', { class: 'link link--ext', href: r.cr.page, target: '_blank', rel: 'noopener noreferrer' }, r.title || 'Photograph'), ' by ', r.cr.author, ', ',
+      r.cr.licenseUrl ? h('a', { class: 'link link--ext', href: r.cr.licenseUrl, target: '_blank', rel: 'noopener noreferrer' }, r.cr.license) : r.cr.license,
+      '. Used for: ', r.cats.slice(0, 4).join(', '), r.cats.length > 4 ? ` and ${r.cats.length - 4} more` : '', '.'))),
+    h('p', null, h('a', { class: 'btn', href: '#/about' }, 'Back to About this demo')));
+  return { el, title: 'Photo credits', nav: null };
 }

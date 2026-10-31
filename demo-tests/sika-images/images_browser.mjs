@@ -6,7 +6,7 @@ const [, , t0, outDir = './images_out'] = process.argv; fs.mkdirSync(outDir, { r
 const root = t0 || PORTAL; const s = await serve(root); const b = await launch(); let fails = 0;
 const t = (n, ok, d = '') => { if (!ok) fails++; console.log((ok ? 'PASS ' : 'FAIL ') + n + (d ? ' :: ' + String(d).slice(0, 220) : '')); };
 const prods = JSON.parse(fs.readFileSync(root + '/data/products.json', 'utf8').replace(/^\uFEFF/, ''));
-const withImg = prods.find((p) => p.image); const without = prods.find((p) => !p.image);
+const withImg = prods.find((p) => p.image && !p.image.illustrative); const without = prods.find((p) => !p.image);
 for (const [W, H] of [[1366, 768], [390, 844]]) {
   const ctx = await b.newContext({ viewport: { width: W, height: H }, isMobile: W < 600, hasTouch: W < 600 }); const page = await ctx.newPage(); const errs = [];
   page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 120)); }); page.on('pageerror', (e) => errs.push(e.message));

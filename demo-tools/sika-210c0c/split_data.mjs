@@ -12,7 +12,7 @@ export async function splitData(PORTAL) {
   // descriptions: only the cards the home page draws (the children of the top category and of the feature category); the category page reads the full file
   const cfg = rd('config.json'); const catBy = new Map(cats.map((c) => [c.id, c]));
   const wantDesc = new Set(); for (const root of ['construction', cfg.home.featureCategory]) { const r = catBy.get(root); if (r) { wantDesc.add(r.id); for (const k of r.children || []) wantDesc.add(k); } }
-  wr('cats.lite.json', { categories: cats.map((c) => { const o = { id: c.id, name: c.name, parent: c.parent, level: c.level, children: c.children, productCount: c.productCount }; if (wantDesc.has(c.id) && c.description) o.description = c.description; return o; }), stats: { products: stats.products, documents: stats.documents, categories: stats.categories, pages: stats.pages } });
+  wr('cats.lite.json', { categories: cats.map((c) => { const o = { id: c.id, name: c.name, parent: c.parent, level: c.level, children: c.children, productCount: c.productCount }; if (wantDesc.has(c.id) && c.description) o.description = c.description; const m = c.image && /assets\/img\/s\/(.+)-480\.webp$/.exec(c.image.src); if (m) o.im = m[1]; return o; }), stats: { products: stats.products, documents: stats.documents, categories: stats.categories, pages: stats.pages } });
   const docById = new Map(docs.map((d) => [d.id, d]));
   const related = (p) => { // same rule as relatedProducts() in views2.js
     const same = index.filter((x) => x.c === p.category && x.id !== p.id);

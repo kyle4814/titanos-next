@@ -3,7 +3,7 @@ import { insights } from './insights.js';
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm, fmtBytes, titleCase } from './util.js';
 import { derived, derivedLite, groupIndex, data, documents, docOk, docHref } from './data.js';
 import { getSearcher } from './searcher.js';
-import { productCard, breadcrumb, pager, emptyState, placeholder, packshot, addButton } from './components.js';
+import { productCard, breadcrumb, pager, emptyState, placeholder, packshot, addButton, stockMedia, creditLine } from './components.js';
 import { notFound } from './views.js';
 import { finderPanels } from './finder/panels.js';
 import { mergeDocStatus, extraTabs } from './apply_data.js';
@@ -98,7 +98,10 @@ export async function productView(ctx) {
   const finderExtra = await finderPanels(p);
   const el = h('div', { class: 'container' }, breadcrumb(crumbs),
     h('div', { class: 'pdp' },
-      h('div', null, h('div', { class: 'pdp-media' + (p.image ? ' pdp-media--shot' : '') }, p.image ? packshot(p.image, p.category, p.name, true) : placeholder(p.category, p.name))),
+      h('div', null,
+        h('div', { class: 'pdp-media' + (p.image && !p.image.illustrative ? ' pdp-media--shot' : '') + (p.image && p.image.illustrative ? ' pdp-media--stock' : '') },
+          p.image && p.image.illustrative ? stockMedia({ ...p.image, stock: true }, p.category, p.name, { caption: true, big: true }) : (p.image ? packshot(p.image, p.category, p.name, true) : placeholder(p.category, p.name))),
+        p.image && p.image.illustrative && p.image.credit ? creditLine(p.image.credit) : null),
       h('div', null,
         h('p', { class: 'eyebrow' }, p.brand),
         h('h1', null, p.name),

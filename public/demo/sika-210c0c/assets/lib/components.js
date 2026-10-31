@@ -23,10 +23,29 @@ export function placeholder(catId, label = 'Product image') {
 export function packshot(img, catId, name, big = false) {
   if (typeof navigator !== 'undefined' && navigator.onLine === false) return placeholder(catId, name); // offline: pictures are never cached, so draw the placeholder instead of a failed request
   const alt = img && img.alt ? img.alt : name;
-  const i = h('img', { class: 'packshot', src: big ? img.src2x : img.src, width: String(img.width), height: String(img.height), alt, loading: big ? 'eager' : 'lazy', decoding: 'async' });
+  const i = h('img', { class: 'packshot' + (img.stock ? ' packshot--stock' : ''), src: big ? img.src2x : img.src, width: String(img.width), height: String(img.height), alt, loading: big ? 'eager' : 'lazy', decoding: 'async' });
   if (!big) i.setAttribute('srcset', img.src + ' 480w, ' + img.src2x + ' 960w'), i.setAttribute('sizes', '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw');
-  i.addEventListener('error', () => i.replaceWith(placeholder(catId, name)), { once: true });
+  i.addEventListener('error', () => { const tag = i.parentNode && i.parentNode.querySelector('.stock-tag'); if (tag) tag.remove(); i.replaceWith(placeholder(catId, name)); }, { once: true });
   return i;
+}
+
+/** Stock photo record for a category slug (the owner file of the photo, see data/cats.lite.json im). Illustrative, never a product picture. */
+export const stockOf = (slug, alt) => ({ src: `assets/img/s/${slug}-480.webp`, src2x: `assets/img/s/${slug}-960.webp`, width: 480, height: 320, alt, stock: true });
+/** Slug of a category's photo: the lite file carries it as im, the full categories file as image.src. */
+export const catSlug = (c) => (c && (c.im || (c.image && (/img\/s\/(.+)-480\.webp$/.exec(c.image.src) || [])[1]))) || null;
+export const STOCK_NOTE = 'Illustrative photo, not the product';
+/** The fixed media box for a stock photo: the picture plus (for product photos) the small caption. Falls back to the placeholder. */
+export function stockMedia(img, catId, name, { caption = false, big = false } = {}) {
+  const pic = packshot(img, catId, name, big);
+  const box = [pic];
+  if (caption && pic.tagName === 'IMG') box.push(h('span', { class: 'stock-tag' }, STOCK_NOTE));
+  return box;
+}
+
+/** One visible line: photo credit (author, licence, link to the Commons file page). Text comes from the API response saved in stock_source.json. */
+export function creditLine(cr) {
+  return h('p', { class: 'credit-line' }, h('span', { class: 'cl-k' }, 'Photo:'), h('a', { class: 'au link link--ext', href: cr.page, target: '_blank', rel: 'noopener noreferrer', title: cr.author }, cr.author),
+    cr.licenseUrl ? h('a', { class: 'lic link link--ext', href: cr.licenseUrl, target: '_blank', rel: 'noopener noreferrer' }, cr.license) : h('span', { class: 'lic' }, cr.license), h('span', { class: 'cl-k' }, 'Wikimedia Commons'));
 }
 
 export function addButton(id, name) {
@@ -46,7 +65,8 @@ export function productCard(p, dv) {
   if (p.sds) badges.push(h('span', { class: 'badge badge--ok' }, 'SDS'));
   if (!p.pds && !p.sds && p.d) badges.push(h('span', { class: 'badge' }, `${p.d} doc${p.d === 1 ? '' : 's'}`));
   return h('article', { class: 'card product-card' },
-    h('div', { class: 'card-media' + (p.im ? ' card-media--shot' : '') }, p.im ? packshot(imgOf(p.id), p.c, p.n) : placeholder(p.c, p.n)),
+    h('div', { class: 'card-media' + (p.im === 1 ? ' card-media--shot' : '') + (p.im === 2 && catSlug(cat) ? ' card-media--stock' : '') },
+      p.im === 1 ? packshot(imgOf(p.id), p.c, p.n) : (p.im === 2 && catSlug(cat) ? stockMedia(stockOf(catSlug(cat), `Illustrative photo of ${cat.name}, not the product`), p.c, p.n, { caption: true }) : placeholder(p.c, p.n))),
     h('div', { class: 'card-body' },
       h('div', { class: 'eyebrow' }, [p.b, cat ? cat.name : ''].filter(Boolean).join(' · ')),
       h('h3', null, h('a', { class: 'card-link', href: '#/product/' + p.id }, p.n)),
@@ -57,7 +77,7 @@ export function productCard(p, dv) {
 
 export function categoryCard(c, dv) {
   return h('article', { class: 'card cat-card' },
-    h('div', { class: 'card-media' }, placeholder(c.id, c.name)),
+    h('div', { class: 'card-media' + (catSlug(c) ? ' card-media--stock' : '') }, catSlug(c) ? stockMedia(stockOf(catSlug(c), `Illustrative photo for ${c.name}`), c.id, c.name) : placeholder(c.id, c.name)),
     h('div', { class: 'card-body' },
       h('h3', null, h('a', { class: 'card-link', href: '#/category/' + c.id }, c.name)),
       c.description ? h('p', { class: 'clamp-3' }, c.description) : null,
