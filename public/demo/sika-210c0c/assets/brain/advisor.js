@@ -156,10 +156,10 @@ export function createAdvisor({ load, isWord }) {
   const correct = (s) => s.split(' ').map((x) => { if (x.length < 5 || /\d/.test(x) || (isWord && isWord(x))) return x; const L = lexicon(); if (L.includes(x)) return x; { const pref = x.length >= 7 && L.find((l) => l.startsWith(x) && l.length - x.length <= 2); if (pref) return pref; } if (L.some((l) => l.startsWith(x))) return x; let best = null, bd = 9; const max = x.length >= 9 ? 2 : 1; for (const l of L) { if (Math.abs(l.length - x.length) > max + 4) continue; const d = Math.min(Math.abs(l.length - x.length) <= max ? (dist(x, l, max) <= 1 || x.slice(0, 2) === l.slice(0, 2) ? dist(x, l, max) : 9) : 9, l.length >= 7 && x.length >= 9 ? Math.min(dist(x.slice(0, l.length), l, 2), dist(x.slice(0, l.length + 1), l, 2)) : 9); if (d < bd) { bd = d; best = l; } } return best && bd <= max ? best : x; }).join(' ');
   const singular = (s) => s.split(' ').map((w) => (w.length > 3 && w.endsWith('s') && !/(ss|us|is)$/.test(w) ? w.slice(0, -1) : w)).join(' ');
   const BRANDS = [['davco', /^davco/], ['lanko', /^lanko/], ['sikatile', /^sikatile/], ['sarnafil', /^sarna/], ['schonox', /^schoenox/], ['abelflex', /^abelflex/]];
-  async function advise(q, n0, rel, force) {
+  async function advise(q, n0, rel, force, opts) {
     const n = singular(correct(n0));
-    const kind = KINDS.find((k) => k.q.test(n)); if (!kind) return null;
-    let list = await entries(kind); if (!list.length) return null;
+    const kind = (opts && opts.kindId ? KINDS.find((k) => k.id === opts.kindId) : null) || KINDS.find((k) => k.q.test(n)); if (!kind) return null;
+    let list = await entries(kind); if (opts && opts.exclude && opts.exclude.length) list = list.filter((e) => !opts.exclude.includes(e.id)); if (!list.length) return null;
     const brand = BRANDS.find(([w]) => new RegExp('\\b' + w + '\\b').test(n));
     if (brand) { let b = list.filter((e) => brand[1].test(e.id));
       if (!b.length) { const m = kind.q.exec(n); const kw = m ? new RegExp((m[0].match(/[a-z]{5,}/) || ['xxxxx'])[0].slice(0, 6), 'i') : null; const extra = await entries({ cats: [T, FL, SA, WP, CR], sub: re('.') }); b = extra.filter((e) => brand[1].test(e.id) && kw && (kw.test(e.n) || kw.test(e.tg) || kw.test(e.sub))); }
@@ -206,7 +206,7 @@ export function createAdvisor({ load, isWord }) {
         handoff: { question: q, product: '', reason: `No product in this group has published text that mentions ${names}. The range is linked here. Please ask Technical Services.`, missing: conds.map((x) => x.label) }, followups: [] });
       return { summary: c, items: [] };
     }
-    const top = fit.slice(0, 3); const critNames = conds.map((c) => c.label).join(', ');
+    const top = fit.slice(0, (opts && opts.limit) || 3); const critNames = conds.map((c) => c.label).join(', ');
     const items = [];
     for (const s of top) {
       const first = s.got[0]; const ex = s.got.slice(1).map((g) => g.ev.sentence).filter((t) => t !== first.ev.sentence).slice(0, 1);
@@ -221,28 +221,88 @@ export function createAdvisor({ load, isWord }) {
   }
   const NOFIT = 'No product in this group states a fit for what you asked in its published text, so I will not name one. The range is linked below.';
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-  // "which has the longest open time / fastest cure": a sort over the published figures, each one cited
+  // "which has the longest open time / fastest cure / highest strength / lowest VOC": a sort over the figures read from each data sheet (data/brain/num), each one cited.
+  // Products without the figure are named and left out ("not published"); figures that are not measured at the same age are not compared. Price is never ranked.
   const NUM = [
-    { rx: /\b(longest|longer|most|extended|long)\b.*\bopen time|\bopen time\b.*\b(longest|longer|most)\b/, field: 'open_time', dir: 'max', label: 'the longest published open time' },
-    { rx: /\b(longest|longer|most|long)\b.*\bpot life|\bpot life\b.*\b(longest|longer|most)\b|\b(longest|most) working time/, field: 'pot_life', dir: 'max', label: 'the longest published pot life' },
-    { rx: /\b(longest|longer|most)\b.*\badjust\w*/, field: 'adjustability_time', dir: 'max', label: 'the longest published adjustability time' },
-    { rx: /\b(fastest|quickest|shortest|rapid)\b.*\b(cure|curing|set|setting|dry|drying|hardening)\b|\bfastest\b/, field: 'cure_times', dir: 'min', label: 'the shortest published cure or set time' },
-    { rx: /\b(fastest|quickest|shortest)\b.*\bskin\w*/, field: 'skin_tack_times', dir: 'min', label: 'the shortest published skin time' },
+    { rx: /\b(longest|longer|most|extended|long|greatest)\b.*\bopen time|\bopen time\b.*\b(longest|longer|most)\b/, field: 'open_time', dir: 'max', label: 'the longest published open time', unit: 'min' },
+    { rx: /\b(longest|longer|most|long|greatest)\b.*\bpot ?l[iy]fe|\bpot ?l[iy]fe\b.*\b(longest|longer|most)\b|\b(longest|most) working time/, field: 'pot_life', dir: 'max', label: 'the longest published pot life', unit: 'min' },
+    { rx: /\b(longest|longer|most)\b.*\badjust\w*/, field: 'adjust_time', dir: 'max', label: 'the longest published adjustability time', unit: 'min' },
+    { rx: /\b(fastest|quickest|shortest)\b.*\bskin\w*/, field: 'skin_time', dir: 'min', label: 'the shortest published skin or tack free time', unit: 'min' },
+    { rx: /\b(fastest|quickest|shortest|rapid)\b.*\b(overcoat\w*|recoat\w*)/, field: 'overcoat_wait', dir: 'min', label: 'the shortest published waiting time to overcoating', unit: 'min' },
+    { rx: /\b(fastest|quickest|shortest|rapid)\b.*\b(cure|curing|set|setting|dry|drying|hardening)\b|\bfastest\b|\bquickest\b/, field: 'cure_time', dir: 'min', label: 'the shortest published cure or set time', unit: 'min', alt: { field: 'cure_rate', dir: 'max', label: 'the fastest published curing rate', unit: 'mm per 24 h' } },
+    { rx: /\b(highest|strongest|greatest|most|maximum|max|best|higher)\b.*\bcompressive\b|\bcompressive strength\b.*\b(highest|greatest|most)\b|\b(highest|strongest|greatest) (strength|strong)\b|\bstrongest\b/, field: 'compressive', dir: 'max', label: 'the highest published 28 day compressive strength', unit: 'MPa' },
+    { rx: /\b(highest|strongest|greatest|most|best)\b.*\b(adhesion|bond)\b/, field: 'tensile_adhesion', dir: 'max', label: 'the highest published tensile adhesion strength', unit: 'MPa' },
+    { rx: /\b(highest|strongest|greatest|most)\b.*\bflexural\b/, field: 'flexural', dir: 'max', label: 'the highest published flexural strength', unit: 'MPa' },
+    { rx: /\b(highest|strongest|greatest|most)\b.*\btensile\b/, field: 'tensile', dir: 'max', label: 'the highest published tensile strength', unit: 'MPa' },
+    { rx: /\b(lowest|least|less|minimum|low)\b.*\b(voc|vocs|emissions?|volatile)\b/, field: 'voc', dir: 'min', label: 'the lowest published VOC content', unit: 'g/L' },
+    { rx: /\b(thickest|deepest|biggest|maximum|max)\b.*\b(layer|coat|pour|build|depth)\b|\bthickest\b/, field: 'layer', dir: 'max', label: 'the thickest published layer', unit: 'mm' },
+    { rx: /\b(thinnest|minimum|slimmest|shallowest)\b.*\b(layer|coat|pour|build|depth)\b|\bthinnest\b/, field: 'layer', dir: 'min', label: 'the thinnest published layer', unit: 'mm' },
+    { rx: /\b(longest|longer|greatest|most)\b.*\bshelf life|\bshelf life\b.*\b(longest|longer|most)\b/, field: 'shelf_life', dir: 'max', label: 'the longest published shelf life', unit: 'months' },
+    { rx: /\b(most|highest|greatest|best)\b.*\b(movement|flexib\w*|elastic\w*)\b/, field: 'movement', dir: 'max', label: 'the highest published movement capability', unit: '%' },
   ];
-  const MIN = { s: 1 / 60, sec: 1 / 60, min: 1, mins: 1, minute: 1, minutes: 1, h: 60, hr: 60, hrs: 60, hour: 60, hours: 60, d: 1440, day: 1440, days: 1440, week: 10080, weeks: 10080 };
-  const toMin = (f) => { const p = f.parsed; if (!p || p.model !== 'duration' || p.min == null || !MIN[String(p.unit).toLowerCase()]) return null; return { lo: p.min * MIN[String(p.unit).toLowerCase()], hi: (p.max == null ? p.min : p.max) * MIN[String(p.unit).toLowerCase()] }; };
+  const PRICE_RANK = /\b(cheap\w*|lowest price|best price|least expensive|most affordable|cheapest|price)\b/;
+  const FN = { open_time: 'open time', pot_life: 'pot life', cure_time: 'curing or set time', compressive: 'compressive strength', voc: 'VOC', layer: 'layer thickness', shelf_life: 'shelf life', movement: 'movement capability', tensile_adhesion: 'tensile adhesion strength', flexural: 'flexural strength', tensile: 'tensile strength', skin_time: 'skin time', cure_rate: 'curing rate', adjust_time: 'adjustability time', overcoat_wait: 'overcoating wait' };
+  let NIDX; const numIndex = async () => { if (NIDX === undefined) NIDX = load.numIndex ? await load.numIndex() : null; return NIDX; };
+  const fmtV = (spec, lo, hi) => { const f = (x) => String(Math.round(x * 100) / 100); return `${lo === hi ? f(lo) : f(lo) + ' to ' + f(hi)} ${spec.unit}`; };
+  // the value is shown the way the data sheet prints it ("24 h", "2 years"), so every digit on the card is in the quoted sentence
+  const printed = (rec, spec, c) => { const v = rec.v || {}; const p = (v.items && v.items[0] && v.items[0].print) || v.print; return p || fmtV(spec, c[0], c[1]); };
   async function rank(q, n0, kindId) {
-    const n = singular(correct(n0)); const spec = NUM.find((x) => x.rx.test(n)); if (!spec) return null;
-    const kind = KINDS.find((k) => k.q.test(n)); if (!kind) return null;
-    const list = await entries(kind); const got = [];
-    for (const e of list) { const sh = await load.product(e.id); const f = sh && sh.tm && (sh.tm[spec.field] || [])[0]; const m = f && toMin(f); if (m) got.push({ e, f, m }); }
-    if (got.length < 2) return null;
-    got.sort((a, b) => (spec.dir === 'max' ? b.m.hi - a.m.hi : a.m.lo - b.m.lo) || (a.e.n < b.e.n ? -1 : 1));
-    const top = got.slice(0, 4);
-    const items = top.map(({ e, f }) => ({ e, sentences: [f.text], facts: [{ source_url: f.s && f.s.u ? f.s.u : e.u, page: f.s ? f.s.p : null, sentence: f.text, status: 'PUBLISHED', doc_type: f.s ? f.s.t : 'WEB', doc_version: f.s ? f.s.v : '' }], why: spec.label, th: null }));
-    const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} ordered by ${spec.label}`, headline: 'These are ordered by the published figure, each quoted from its data sheet. The figures depend on temperature and mix, so check the sheet. It is not a claim that one is the best.', lines: [{ label: 'Criterion used', text: `Ordered by ${spec.label}, taken from each product's own data sheet.` }], facts: [items[0].facts[0]], chip: CHIPS.ADVICE, links: top.map(({ e }) => ({ label: e.n, url: e.u })), handoff: handoffTo(q), followups: top.slice(0, 3).map(({ e }) => `Data sheet for ${e.n}`) });
-    return { summary, items };
+    const n = singular(correct(n0)); if (PRICE_RANK.test(n)) return null;
+    let spec = NUM.find((x) => x.rx.test(n)); if (!spec) return null;
+    const idx = await numIndex(); if (!idx || !idx.f) return null;
+    const kind = KINDS.find((k) => k.q.test(n));
+    let pool = null; let list = [];
+    if (kind) { list = await entries(kind); if (!list.length) return null; pool = new Set(list.map((e) => e.id)); }
+    if (spec.alt) { const cnt = (f) => Object.keys(idx.f[f] || {}).filter((id) => !pool || pool.has(id)).length; if (cnt(spec.alt.field) > cnt(spec.field)) spec = { ...spec, ...spec.alt }; } // sealants state a cure RATE (mm per 24 h), not a time
+    const col = idx.f[spec.field]; if (!col) return null;
+    let ids = Object.keys(col).filter((id) => !pool || pool.has(id));
+    if (!kind && !/\b(product|products|sika|davco|lanko|sikafloor|sikadur|sikagrout|sikaflex|sikatile)\b/.test(n) && !/\b(in the range|of all|overall|any)\b/.test(n)) { /* a bare ranking over every product is allowed, but it is said so below */ }
+    if (ids.length < 2) return null;
+    ids.sort((a, b) => (spec.dir === 'max' ? col[b][1] - col[a][1] : col[a][0] - col[b][0]) || (a < b ? -1 : 1));
+    const top = ids.slice(0, 4); const items = []; const names = new Map(list.map((e) => [e.id, e]));
+    for (const id of top) {
+      const sh = await load.num(id); const rec = sh && sh.f && (sh.f[spec.field] || [])[0]; if (!rec) continue;
+      const base = names.get(id); const e = base || { id, n: sh.n, u: (await load.product(id) || {}).u || '' };
+      items.push({ e, sentences: [rec.t], facts: [{ source_url: rec.s.u, page: rec.s.p == null ? null : rec.s.p, sentence: rec.t, status: 'PUBLISHED', doc_type: rec.s.t, doc_version: rec.s.v || '' }], why: `${FN[spec.field]}: ${printed(rec, spec, col[id])}`, th: null, value: col[id] });
+    }
+    if (items.length < 2) return null;
+    const missing = kind ? list.filter((e) => !col[e.id]).map((e) => e.n) : [];
+    const lines = [{ label: 'Criterion used', text: `Ordered by ${spec.label}, read from each product's own data sheet and quoted below.` }, ...items.map((it) => ({ label: it.e.n, text: it.why }))];
+    if (spec.field === 'compressive') lines.push({ label: 'Same age only', text: 'Only 28 day figures are compared, because strength at different ages cannot be ranked against each other.' });
+    if (spec.field === 'tensile_adhesion' || spec.field === 'flexural' || spec.field === 'tensile') lines.push({ label: 'Test conditions', text: 'Each figure keeps the test condition printed in its quoted sentence. Read it before comparing.' });
+    if (missing.length) lines.push({ label: 'Not published, so left out', text: `${missing.slice(0, 6).join(', ')}${missing.length > 6 ? ' and ' + (missing.length - 6) + ' more' : ''}: no ${FN[spec.field]} figure is published for ${missing.length === 1 ? 'it' : 'them'}.` });
+    const title = kind ? `${cap(kind.label)} ordered by ${spec.label}` : `Products ordered by ${spec.label}`;
+    const summary = card({ type: 'advice', status: 'PUBLISHED', title, headline: 'These are ordered by the published figure, each quoted from its data sheet. The figures depend on temperature, age and mix, so check the sheet. It is not a claim that one is the best.', lines, facts: items.map((i) => i.facts[0]), source: items[0].facts[0], chip: CHIPS.ADVICE, links: items.map(({ e }) => ({ label: e.n, url: e.u })), handoff: handoffTo(q), followups: items.slice(0, 3).map(({ e }) => `Data sheet for ${e.n}`) });
+    return { summary, items, ranked: { field: spec.field, dir: spec.dir, ids: items.map((i) => i.e.id) } };
   }
+  /**
+   * recommendForJob({ kind, kindId, substrate, location, tileType, area, thickness, constraints, excludeIds, question })
+   *   -> { picks: [{ id, name, url, why: [cited sentences], fit: n }], honest: string|null, kindId, label, conds: [condition labels], ordered: bool }
+   * The one stable entry point for "the best documented product for the job so far", at any point in a conversation (also right after a quantity
+   * clarifier). kind: a kind id from KINDS ('tile_adhesive', 'screed', ...) or free words that name one. substrate/location/tileType/constraints are plain
+   * words ("concrete", "outside", "large format porcelain", "fast"). fit = how many of the stated conditions the product's own published text mentions
+   * (0 = listed in the group but no condition was named, so it is not a ranking). honest is set when nothing is documented. The quantity flow uses this same function.
+   */
+  async function recommendForJob(job = {}) {
+    const words = [job.substrate, job.location, job.tileType, ...(Array.isArray(job.constraints) ? job.constraints : [job.constraints]), job.question].filter(Boolean).join(' ');
+    const n0 = String(words).toLowerCase().replace(/\s+/g, ' ').trim();
+    let kindId = job.kindId || (KINDS.some((k) => k.id === job.kind) ? job.kind : null) || (job.kind ? kindOfWords(String(job.kind) + ' ' + n0) : null) || kindOfWords(n0);
+    const kind = KINDS.find((k) => k.id === kindId);
+    if (!kind) return { picks: [], honest: 'I could not tell which kind of product the job needs, so I will not name one. Tell me what you are fixing, sealing, sticking or levelling.', kindId: null, label: '', conds: [], ordered: false };
+    const exclude = job.excludeIds || [];
+    const ad = await advise(job.question || n0, singular(correct(n0)) || kind.id, job.rel || null, true, { kindId: kind.id, exclude, limit: job.limit || 3 });
+    const conds = CONDS.filter((c) => c.q.test(singular(correct(n0)))).map((c) => c.label);
+    if (ad && ad.items.length) return { picks: ad.items.map((it) => ({ id: it.e.id, name: it.e.n, url: it.e.u, why: it.sentences, fit: it.why ? it.why.split(', ').length : 1 })), honest: null, kindId: kind.id, label: kind.label, conds, ordered: true, summary: ad.summary };
+    // nothing matched the stated conditions, or none was named: hand back the documented range, unordered, and say so
+    let list = (await entries(kind)).filter((e) => !exclude.includes(e.id));
+    if (!conds.length && list.length) {
+      const rel = job.rel || (() => 0);
+      list = list.sort((a, b) => (rel(b.id) - rel(a.id)) || (b.ev.length - a.ev.length) || (a.n < b.n ? -1 : 1)).slice(0, job.limit || 3);
+      return { picks: list.map((e) => ({ id: e.id, name: e.n, url: e.u, why: [clampText(e.tg || (e.ev[0] && e.ev[0].t) || '', null, 240)].filter(Boolean), fit: 0 })), honest: 'No condition was named, so these three are the first documented products in that group, not a ranking and not a claim that one is the best. Tell me the place, surface or finish and I will order them by what their data sheets state.', kindId: kind.id, label: kind.label, conds, ordered: false };
+    }
+    return { picks: [], honest: NOFIT, kindId: kind.id, label: kind.label, conds, ordered: false };
+  }
+  const kindOfWords = (w) => { const n = singular(correct(w)); const k = KINDS.find((x) => x.q.test(n)); return k ? k.id : null; };
   const ENVKIND = new Set(['tile_adhesive', 'tile_waterproofing', 'tile_grout', 'screed', 'tile_primer']);
-  return { advise, rank, envAsk: (n0, kindId) => ENVKIND.has(kindId) && !/\b(inside|internal|interior|indoor|outside|outdoor|external|exterior|balcon\w*|terrace|pool|wet|shower|bathroom|laundry|kitchen)\b/.test(n0), kindOf: (n0) => { const n = singular(correct(n0)); const k = KINDS.find((x) => x.q.test(n)); return k ? k.id : null; }, kinds: KINDS, words: () => lexicon(), hasKind: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)); }, wants: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)) && (LISTQ.test(n0) || /\b(best|better|recommend\w*|which|what .* (for|to use))\b/.test(n)); } };
+  return { advise, rank, recommendForJob, envAsk: (n0, kindId) => ENVKIND.has(kindId) && !/\b(inside|internal|interior|indoor|outside|outdoor|external|exterior|balcon\w*|terrace|pool|wet|shower|bathroom|laundry|kitchen)\b/.test(n0), kindOf: (n0) => { const n = singular(correct(n0)); const k = KINDS.find((x) => x.q.test(n)); return k ? k.id : null; }, kinds: KINDS, words: () => lexicon(), hasKind: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)); }, wants: (n0) => { const n = singular(correct(n0)); return KINDS.some((k) => k.q.test(n)) && (LISTQ.test(n0) || /\b(best|better|recommend\w*|which|what .* (for|to use))\b/.test(n)); } };
 }

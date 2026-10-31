@@ -10,6 +10,7 @@ import { createKnow } from './know.js';
 import { vagueCard, termCard, genericVague } from './vague.js';
 import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
+import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -36,7 +37,7 @@ export function classify(n, hasArea) {
   if (OTHER_BRANDS.test(n)) return 'other_brand';
   if (RX.price.test(n)) return 'price';
   if (RX.compare.test(n)) return 'compare';
-  if ((hasArea && (RX.calcWords.test(n) || /\b(need|require|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n)) return 'calc';
+  if ((hasArea && (RX.calcWords.test(n) || /\b(need(ed|s)?|require[ds]?|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n)) return 'calc';
   if (RX.time.test(n)) return 'time';
   if (RX.rate.test(n)) return 'rate';
   if (RX.safety.test(n) && !/\b(sds|msds|safety data)\b/.test(n)) return 'safety';
@@ -210,10 +211,11 @@ export function createBrain({ load, config } = {}) {
     const t0 = now(); const trace = [];
     const q = String(question || '').trim();
     let akaNote = null;
+    let jobHint = null; // wave 2b: the kind of job a product-less question described, carried in the state so "recommend me one" and "how much for N m2" can follow it
     const out = (intent, stage, cards, extra = {}) => {
       if (akaNote && cards[0] && cards[0].product && cards[0].product.id === akaNote.id) { const f = { source_url: cards[0].product.url, page: null, sentence: akaNote.s, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' }; cards[0].lines = (cards[0].lines || []).concat([{ label: 'Published name history', text: akaNote.s }]); cards[0].facts = (cards[0].facts || []).concat([f]); }
       for (const c of cards) { finalize(c); const bad = validateCard(c); if (bad.length) c._invalid = bad; }
-      return { schema: ANSWER_SCHEMA, query: q, intent, stage, cards, followups: extra.followups || [...new Set(cards.flatMap((c) => c.followups || []))].slice(0, 4), state: extra.state || null, ms: Math.round((now() - t0) * 100) / 100, trace };
+      return { schema: ANSWER_SCHEMA, query: q, intent, stage, cards, followups: extra.followups || [...new Set(cards.flatMap((c) => c.followups || []))].slice(0, 4), state: (jobHint && !(extra.state && extra.state.job) && cards.some((c) => c.type !== 'unknown' && c.type !== 'choose')) ? { ...(extra.state || {}), job: jobHint } : (extra.state || null), ms: Math.round((now() - t0) * 100) / 100, trace };
     };
     await boot();
     const rule = await matchRule(q);
@@ -239,6 +241,25 @@ export function createBrain({ load, config } = {}) {
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
+    if (!pis.length && advisor.hasKind(n0)) jobHint = { kindId: advisor.kindOf(n0), area: facets.area != null ? facets.area : null, thickness: thicknessOf(n), n: n0 };
+    // wave 2b: at any point after a job was described (an advice answer or a quantity answer), "recommend me one" and "how much for 40 m2" use the SAME entry point (advisor.recommendForJob) without re-asking the kind
+    if (state && !pis.length && !advisor.hasKind(n0) && ((state.job && state.job.kindId) || (state.advice && state.advice.n))) {
+      const kindId = (state.job && state.job.kindId) || advisor.kindOf(state.advice.n); const jn = (state.job && state.job.n) || (state.advice && state.advice.n) || '';
+      const area = facets.area != null ? facets.area : state.job && state.job.area != null ? state.job.area : null;
+      const thick = thicknessOf(n) || (state.job && state.job.thickness) || null;
+      const qtyAsk = intent === 'calc' || /\b(how (much|many)|quantity|how many (bags?|pails?|litres?))\b/.test(n0);
+      const recAsk = /\b(recommend|suggest|which one|best one|pick one|choose one|what should i (use|get|buy))\b/.test(n0) && tokens(n0).length <= 9;
+      if (kindId && (qtyAsk || recAsk)) {
+        const rel4 = (() => { let m = null; return (id) => { if (!m) m = new Map(search(jn, []).items.map((it) => [core.P[it.pi].id, it.score])); return m.get(id) || 0; }; })();
+        const ctx = (jn + ' ' + n).trim();
+        if (area != null) { const nq = await quantityByKind({ q, n: ctx, area, thickness: thick, advisor, load, rel: rel4, kindId, pick: recAsk ? 1 : 3 }); if (nq) { trace.push('calc:job'); return out('calc', 'advisor', nq.cards, { state: nq.state }); } }
+        else if (recAsk) {
+          const rec = await advisor.recommendForJob({ kindId, question: ctx, rel: rel4, excludeIds: (state.job && state.job.exclude) || [] });
+          trace.push('recommend:job');
+          return out('which', 'advisor', [recommendCard(rec, q)], { state: { advice: { n: ctx, ids: rec.picks.map((p) => p.id) }, job: { kindId, area: null, thickness: thick, n: ctx } } });
+        }
+      }
+    }
     // a follow-up ("and its SDS?") keeps the last product
     // a follow-up to a "best X for Y" answer: "and for outside?", "what about the second one?", "tell me more about the first"
     if (state && state.advice && !pis.length && !advisor.hasKind(n0) && (/^(and |also |what about |how about |but |or |ok |okay |now )/.test(n0) || tokens(n0).length <= 5)) {
@@ -294,12 +315,15 @@ export function createBrain({ load, config } = {}) {
     }
     let needsProduct = ['calc', 'time', 'rate', 'safety', 'document', 'spec', 'compat'].includes(intent);
     const explicitAsk = /^(how long|how much|how many|what is the (coverage|consumption|cure|curing|open|pot|recoat)|coverage|consumption|sds|msds|pds|data ?sheet|safety data|datasheet|can i use|is it suitable)/.test(n);
-    if (needsProduct && !pis.length && !explicitAsk) { intent = 'which'; needsProduct = false; }
-    if (intent === 'calc' && !pis.length && facets.area != null) { // "how much adhesive for 15 m2 of 600x600 tiles": the products whose own text documents the fit, each with its worked quantity
+    if (needsProduct && !pis.length && !explicitAsk && !(intent === 'calc' && facets.area != null)) { intent = 'which'; needsProduct = false; }
+    if (intent === 'calc' && !pis.length && facets.area != null) { // "how much adhesive for 15 m2 of 600x600 tiles": the documented products for the job (advisor.recommendForJob), each with its worked quantity (numq.js)
       const rel3 = (() => { let m = null; return (id) => { if (!m) m = new Map(search(n, []).items.map((it) => [core.P[it.pi].id, it.score])); return m.get(id) || 0; }; })();
+      const nq = await quantityByKind({ q, n, area: facets.area, thickness: thicknessOf(n), advisor, load, rel: rel3 });
+      if (nq) { trace.push('calc:advisor'); return out('calc', 'advisor', nq.cards, { state: nq.state }); }
       const ad3 = await advisor.advise(q, n, rel3, true);
-      if (ad3 && ad3.items.length) { ad3.summary.lines = []; ad3.summary.handoff = null; ad3.summary.followups = []; ad3.summary.headline = 'No product was named, so these are the products whose own published text documents a fit, with the quantity worked out from each one\'s published rate. Not a claim that one is the best.'; const cards = [ad3.summary]; for (const it of ad3.items.slice(0, 2)) { const sh = await load.product(it.e.id); if (sh) cards.push(C.calcCard(sh, facets.area, q)); } trace.push('calc:advisor'); return out('calc', 'advisor', cards, { state: { advice: { n, ids: ad3.items.map((x) => x.e.id) } } }); }
+      if (ad3 && ad3.items.length) { ad3.summary.lines = []; ad3.summary.handoff = null; ad3.summary.followups = []; ad3.summary.headline = 'No product was named, so these are the products whose own published text documents a fit. I could not work out a quantity from their published rates, so I am not giving one.'; trace.push('calc:advisor'); return out('calc', 'advisor', [ad3.summary], { state: { advice: { n, ids: ad3.items.map((x) => x.e.id) } } }); }
     }
+    if (intent === 'calc' && !pis.length && !explicitAsk) { intent = 'which'; needsProduct = false; } // a quantity by kind that numq could not serve goes on as an ordinary "which" question
     if (needsProduct && !pis.length && explicitAsk) {
       // name the products that fit and let the visitor pick: never guess one
       const { items } = search(n, []);
@@ -313,7 +337,7 @@ export function createBrain({ load, config } = {}) {
     if (needsProduct || (namedAll && intent === 'which' && pis.length === 1)) {
       const sh = await shard(pis[0]); if (!sh) return out(intent, stage, [C.unknown(q, null, 'The product data could not be loaded.', [])]);
       const s = st(pis[0]);
-      if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q)], { state: s }); }
+      if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
       if (intent === 'time' && /overcoat|re-?coat|recoat|wait.*(before|until).*(coat|paint)/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, n, q, true); if (oc) { trace.push('attr:overcoat'); return out(intent, stage, [oc], { state: s }); } }
       if (intent === 'time') { let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q); if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }

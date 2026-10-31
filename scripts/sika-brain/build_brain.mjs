@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalise, tokens, stem, STOP, compact } from '../../public/demo/sika-210c0c/assets/brain/text.js';
 import { buildKnow } from './build_know.mjs';
+import { buildNum } from './build_num.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PORTAL = process.env.SIKA_PORTAL || path.join(HERE, '..', '..', 'public', 'demo', 'sika-210c0c');
@@ -168,6 +169,7 @@ const rulesSrc = path.join(LANES, 'corrections/rules.json');
 const rules = exists(rulesSrc) ? rd(rulesSrc) : { version: 1, rules: [] };
 wr(path.join(OUT, 'rules.json'), rules);
 const know = buildKnow({ PORTAL, OUT, products });
+const numStats = buildNum({ portal: PORTAL, lanes: LANES, log: console.log }); // data/brain/num: cited numeric data sheet facts (wave 2b); loaded on demand, never precached
 const manifest = { v: 1, schema: 'sika-brain-manifest@1', generated: new Date().toISOString(), products: P.length, shards: nShard, categories: catIds.map((c) => ({ id: c, file: 'cat/' + slug(c) + '.json' })), files: { core: 'core.json', tree: 'tree.json', rules: 'rules.json', product: 'p/{id}.json', category: 'cat/{slug}.json', kb: 'kb.json', advisor: 'adv/{slug}.json' }, know: { crawl: know.crawl, pages: know.pages, lines: know.lines, prodLines: know.prodLines }, bytes: { kb: know.kb, adv: know.adv, core: coreSize, tree: treeSize, products: sizes.p, categories: sizes.cat }, tokens: Object.keys(postOut).length, aliases: Object.keys(aliasOut).length };
 wr(path.join(OUT, 'manifest.json'), manifest);
 console.log(JSON.stringify(manifest), 'products from lane:', nLane, 'fallback to k:', nNoK);
