@@ -513,7 +513,6 @@ main:focus{outline:none;box-shadow:none}
   .card h3,.card h4{font-size:1.2rem}
   .card-actions .btn{min-height:44px}
 }
-<<<<<<< HEAD
 
 /* ---------------------------------------------------------------- phone skin (Sika Australia's own mobile pattern, read 2026-10-31)
    Phones only (max-width 39.99em): desktop and tablet rules above are untouched. A 60px fixed yellow header with an icon-only
@@ -590,6 +589,4 @@ main:focus{outline:none;box-shadow:none}
   .asst-form input{font-size:1rem}
   .asst-form button{min-width:48px;min-height:48px}
 }
-=======
 @media (min-width:64em) and (max-width:79.99em){.mainnav-bar>ul>li>a,.mainnav-bar>ul>li>button{white-space:normal;padding:0 .5rem;font-size:.9rem;line-height:1.15;text-align:left}.hdr-meta{padding:0 1rem}.hdr-meta a,.hdr-meta button{padding-inline:.6rem;font-size:.9rem;white-space:nowrap}.hdr-title{font-size:1.5rem;overflow:visible}.hdr-main>.container{gap:10px}.hdr-search{width:min(200px,20vw)}}
->>>>>>> apply/bughunt
