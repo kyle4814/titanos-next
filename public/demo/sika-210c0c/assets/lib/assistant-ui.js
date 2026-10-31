@@ -15,6 +15,36 @@ let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rul
 // Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
 const actionsOn = () => { if (typeof navigator !== 'undefined' && navigator.onLine === false) return false; /* offline: the actions shards are not cached, so v1 exactly */ try { if (/[?&]actions=off/.test(location.href) || localStorage.getItem('sika-demo-210c0c-actions') === 'off') return false; } catch { /* storage blocked: keep the config value */ } return Boolean(cfg && cfg.actions && cfg.actions.enabled); };
 let A = null, Ap = null;
+// Voice input (sika-voice-phone): the browser's own Web Speech API only. No server, no model, nothing of ours listens. OFF until one tap; absent where the browser has no SpeechRecognition.
+const VKEY = 'sika-demo-210c0c-voice';
+const speechCtor = () => (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition)) || null;
+const voiceStored = () => { try { return localStorage.getItem(VKEY) === 'on'; } catch { return false; } };
+const voiceStore = (on) => { try { if (on) localStorage.setItem(VKEY, 'on'); else localStorage.removeItem(VKEY); } catch { /* storage blocked: stays on for this visit only */ } };
+const VOICE_ERR = { 'not-allowed': 'Microphone permission is blocked for this page. Allow it in your browser settings to use voice input.', 'service-not-allowed': 'Microphone permission is blocked for this page. Allow it in your browser settings to use voice input.', 'no-speech': 'No speech heard. Tap the microphone and try again.', 'audio-capture': 'No microphone was found on this device.', network: 'Your browser\'s speech service could not be reached. Type the question instead.' };
+function voiceControls() {
+  const C = speechCtor(); if (!C) return null; // no engine: no control at all
+  let on = voiceStored(), rec = null, listening = false;
+  const msg = h('p', { class: 'asst-voice-msg', id: 'asst-voice-msg', role: 'status' });
+  const mic = h('button', { class: 'asst-mic', type: 'button', id: 'asst-mic', 'aria-pressed': 'false', 'aria-label': 'Speak your question', title: 'Speak your question' }, icon('mic', 'i--sm'));
+  const tog = h('button', { class: 'chip chip--line', type: 'button', id: 'asst-voice-toggle', 'aria-pressed': String(on) });
+  const paint = () => { tog.setAttribute('aria-pressed', String(on)); tog.textContent = on ? 'Voice input: on' : 'Voice input: off'; mic.hidden = !on; if (!on) msg.textContent = ''; };
+  const stop = () => { try { rec && rec.stop(); } catch { /* already stopped */ } listening = false; mic.setAttribute('aria-pressed', 'false'); };
+  tog.addEventListener('click', () => { on = !on; voiceStore(on); if (!on) stop(); paint(); });
+  mic.addEventListener('click', () => {
+    if (listening) { stop(); return; }
+    msg.textContent = '';
+    try {
+      rec = new C(); rec.lang = 'en-AU'; rec.interimResults = false; rec.continuous = false; rec.maxAlternatives = 1;
+      rec.onresult = (e) => { const r = e.results && e.results[e.results.length - 1]; const txt = r && r[0] ? String(r[0].transcript || '').trim() : ''; if (txt) { input.value = txt; input.focus(); } else msg.textContent = VOICE_ERR['no-speech']; };
+      rec.onerror = (e) => { msg.textContent = VOICE_ERR[e && e.error] || 'Voice input could not run on this device. Type the question instead.'; };
+      rec.onend = () => { listening = false; mic.setAttribute('aria-pressed', 'false'); };
+      listening = true; mic.setAttribute('aria-pressed', 'true'); rec.start();
+    } catch { listening = false; mic.setAttribute('aria-pressed', 'false'); msg.textContent = 'Voice input could not start on this device. Type the question instead.'; }
+  });
+  paint();
+  const bar = h('div', { class: 'asst-voice' }, tog, h('small', null, 'Uses your phone\'s own speech input. Nothing leaves your device except what your browser\'s own speech service does. Off until you turn it on. You press send yourself.'), msg);
+  return { mic, bar };
+}
 const ensureActions = () => (actionsOn() ? (Ap ||= import('../actions/ui.js').then((m) => { A = m.attachActions({ log, input, form: formEl, sugg: suggEl, add, send, config: cfg, close: closeOnMobile }); return A; }).catch(() => { A = null; return null; })) : Promise.resolve(null));
 const history = [];
 
@@ -133,12 +163,13 @@ export async function mountAssistant(config) {
   fab = h('button', { class: 'fab', type: 'button', id: 'asst-fab', 'aria-controls': 'assistant', 'aria-expanded': 'false', onclick: (e) => setOpen(!panel.classList.contains('open'), e.currentTarget) }, h('span', { class: 'dot', 'aria-hidden': 'true' }), 'Product advisor');
   log = h('div', { class: 'asst-log', role: 'log', 'aria-live': 'polite', 'aria-label': 'Conversation' });
   input = h('input', { id: 'asst-q', type: 'text', autocomplete: 'off', placeholder: 'Ask about a product, a job or a document', 'aria-label': 'Ask the product advisor', enterkeyhint: 'send' });
-  const form = h('form', { class: 'asst-form', onsubmit: (e) => { e.preventDefault(); const v = input.value; input.value = ''; send(v); } }, input, h('button', { class: 'btn', type: 'submit', 'aria-label': 'Send' }, icon('send', 'i--sm'), h('span', { class: 'visually-hidden' }, 'Send')));
+  const voice = voiceControls();
+  const form = h('form', { class: 'asst-form', onsubmit: (e) => { e.preventDefault(); const v = input.value; input.value = ''; send(v); } }, input, voice ? voice.mic : null, h('button', { class: 'btn', type: 'submit', 'aria-label': 'Send' }, icon('send', 'i--sm'), h('span', { class: 'visually-hidden' }, 'Send')));
   const sugg = h('div', { class: 'asst-sugg', role: 'group', 'aria-label': 'Example questions' }, cfg.home.assistantQuestions.map((q) => h('button', { class: 'chip', type: 'button', onclick: () => send(q) }, q)));
   panel = h('aside', { class: 'assistant', id: 'assistant', role: 'dialog', 'aria-modal': 'false', 'aria-labelledby': 'asst-title', 'aria-hidden': 'true', onkeydown: (e) => { if (e.key === 'Escape') setOpen(false); } },
     h('div', { class: 'asst-head' }, h('h2', { id: 'asst-title' }, 'Product advisor', h('small', null, 'Demo, built from ' + cfg.company.publishedDocsPhrase)), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': 'Close the advisor', onclick: () => setOpen(false) }, icon('close'), h('span', { class: 'visually-hidden' }, 'Close'))),
     h('div', { class: 'asst-note' }, 'Plain code running in your browser: no AI model, no network calls, no tracking, zero running cost. Every answer links its source. Where the documentation does not say, it says so.'),
-    log, sugg, form);
+    log, sugg, voice ? voice.bar : null, form);
   add(h('div', { class: 'msg msg--bot' }, para(`Hi. I can find the right ${cfg.company.short} product for a job, quote published coverage rates, open a data sheet or SDS, check what goes with what, and work out how much you need for an area.`), para('I only answer from the published documentation, and I will say so when it does not cover something.')));
   formEl = form; suggEl = sugg;
   document.body.append(fab, panel);

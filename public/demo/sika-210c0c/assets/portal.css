@@ -429,7 +429,7 @@ main:focus{outline:none;box-shadow:none}
   .tri:focus-visible{outline-color:#fff;outline-offset:-4px}
   .hdr-search{margin-left:1rem;width:min(300px,22vw)}
 }
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(3,1fr);background:var(--grey-darker);border-top:4px solid var(--primary);box-shadow:0 -2px 8px rgba(0,0,0,.25)}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);background:var(--grey-darker);border-top:4px solid var(--primary);box-shadow:0 -2px 8px rgba(0,0,0,.25)}
 .mbar a,.mbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;min-height:60px;padding:.4rem .25rem;color:#fff;background:transparent;border:0;font-size:.82rem;font-weight:500;cursor:pointer;line-height:1.1;text-align:center}
 .mbar a:active,.mbar button:active,.mbar a:hover,.mbar button:hover{background:#000}
 .mbar :focus-visible{outline-color:#fff;outline-offset:-4px}
@@ -590,3 +590,14 @@ main:focus{outline:none;box-shadow:none}
   .asst-form button{min-width:48px;min-height:48px}
 }
 @media (min-width:64em) and (max-width:79.99em){.mainnav-bar>ul>li>a,.mainnav-bar>ul>li>button{white-space:normal;padding:0 .5rem;font-size:.9rem;line-height:1.15;text-align:left}.hdr-meta{padding:0 1rem}.hdr-meta a,.hdr-meta button{padding-inline:.6rem;font-size:.9rem;white-space:nowrap}.hdr-title{font-size:1.5rem;overflow:visible}.hdr-main>.container{gap:10px}.hdr-search{width:min(200px,20vw)}}
+/* thumb bar (sika-mobile-thumbbar): four targets, count badge on Project; voice input (sika-voice-phone), device speech only */
+.mbar a,.mbar button{min-width:44px}
+.mb-ico{position:relative;display:inline-flex}
+.mb-ico .count-pill{position:absolute;top:-.45rem;left:calc(100% - .5rem);min-width:1.1rem;height:1.1rem;font-size:.7rem;padding:0 .25rem}
+.asst-voice{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;padding:.4rem 1rem 0;background:#fff;font-size:.8125rem;line-height:1.3}
+.asst-voice .chip[aria-pressed=true]{background:var(--primary);border-color:var(--primary-dark);color:var(--primary-ink)}
+.asst-voice small{flex:1 1 100%}
+.asst-voice .asst-voice-msg{flex:1 1 100%;margin:0;font-weight:600}
+.asst-mic{min-width:48px;min-height:48px;background:#fff;color:#000;border:1px solid #000;display:inline-grid;place-items:center;cursor:pointer}
+.asst-mic[hidden]{display:none}
+.asst-mic[aria-pressed=true]{background:var(--primary)}
