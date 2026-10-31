@@ -2,7 +2,7 @@
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm } from './util.js';
 import { derived, derivedFull, derivedLite, groupIndex, data } from './data.js';
 import { getSearcher } from './searcher.js';
-import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton } from './components.js';
+import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton, stockMedia, stockOf, creditLine } from './components.js';
 
 const PER_PAGE = 24;
 let filtersOpen = false; // the filter panel (phones) stays open while filters are changed
@@ -131,10 +131,16 @@ export async function categoryView(ctx) {
   // speed: a category two levels or deeper only needs its group's slice of the index (data/s/g), not the whole 71 KB file
   const searcher = path.length >= 2 ? (await import('./search.js')).buildSearch(await groupIndex(id), dv.catById) : await getSearcher(); const res = searcher.search({ cat: id });
   const prods = res.rows.slice(0, kids.length ? 8 : 48);
+  let catHero = null; // stock photo for this category with its credit line (illustrative; needs the network, so none offline)
+  if (c.image && navigator.onLine !== false) {
+    const cr = c.image.credit; const media = stockMedia({ ...c.image, stock: true }, id, c.name, { big: true });
+    if (media[0].tagName === 'IMG') catHero = h('figure', { class: 'cat-hero' }, h('div', { class: 'cat-hero-media' }, media), cr ? creditLine(cr) : null);
+  }
   const el = h('div', { class: 'container' }, breadcrumb(crumbs),
     h('div', { class: 'page-head' }, h('h1', null, c.name), c.description ? h('p', { class: 'lead', style: 'max-width:60rem' }, c.description) : null,
       h('p', { class: 'count' }, `${plural(c.productCount, 'product')} in this category`),
-      h('div', { class: 'btn-row' }, h('a', { class: 'btn', href: hashHref('/products', { cat: id }) }, 'Filter and search these products'), c.url ? h('a', { class: 'btn btn--hollow link--ext', href: c.url, target: '_blank', rel: 'noopener noreferrer' }, 'View on the company website') : null)),
+      h('div', { class: 'btn-row' }, h('a', { class: 'btn', href: hashHref('/products', { cat: id }) }, 'Filter and search these products'), c.url ? h('a', { class: 'btn btn--hollow link--ext', href: c.url, target: '_blank', rel: 'noopener noreferrer' }, 'View on the company website') : null),
+      catHero),
     kids.length ? h('section', { class: 'section section--tight' }, h('div', { class: 'layout-head' }, h('h2', null, 'Browse by type')), h('div', { class: 'grid grid--3' }, kids.map((k) => categoryCard(k, dv)))) : null,
     h('section', { class: 'section section--tight' }, h('div', { class: 'layout-head' }, h('h2', null, kids.length ? 'Products in this range' : 'Products')),
       prods.length ? h('div', { class: 'grid grid--3' }, prods.map((p) => productCard(p, dv))) : emptyState({ title: 'No products listed here', text: 'This is a grouping page on the public website.' }),

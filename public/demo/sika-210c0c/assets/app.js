@@ -5,7 +5,7 @@ import { mountChrome, setNavCurrent } from './lib/chrome.js';
 import { mountAssistant } from './lib/assistant-ui.js';
 import { homeView, finderView, categoryView, notFound } from './lib/views.js';
 import { productView, documentsView, guidesView } from './lib/views2.js';
-import { projectsView, aboutView } from './lib/views3.js';
+import { projectsView, aboutView, creditsView } from './lib/views3.js';
 import { errorState, skeletonGrid } from './lib/components.js';
 import { personaBlock } from './lib/persona.js';
 import { extraRoutes } from './lib/extras.js';
@@ -38,6 +38,7 @@ const ROUTES = [
   [/^\/guides$/, (c) => guidesView(c)],
   [/^\/projects$/, (c) => projectsView(c)],
   [/^\/about$/, (c) => aboutView(c)],
+  [/^\/credits$/, (c) => creditsView(c)],
   ...extraRoutes,
 ];
 

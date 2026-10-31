@@ -18,6 +18,7 @@ export function check(root) {
   for (const p of prods) {
     const e = idx.get(p.id);
     if (!p.image) { if (e && e.im) errs.push(p.id + ': index says im but no image'); continue; }
+    if (p.image.illustrative) continue; // stock photo of its category (demo-tests/sika-stock checks those); this suite is about the Sika packshots
     withImg++;
     for (const k of ['src', 'src2x']) if (!isWebp(path.join(root, p.image[k]))) errs.push(`${p.id}: ${k} file missing or not WebP (${p.image[k]})`);
     if (p.image.alt !== p.name) errs.push(p.id + ': alt is not the product name');
@@ -45,7 +46,7 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'imgmut-')); if (!tmp || !tmp.
 try {
   fs.mkdirSync(path.join(tmp, 'data/p'), { recursive: true }); fs.mkdirSync(path.join(tmp, 'assets/img/p'), { recursive: true });
   for (const f of ['data/products.json', 'data/index.json']) fs.copyFileSync(path.join(PORTAL, f), path.join(tmp, f));
-  const withImg = rj(PORTAL, 'data/products.json').filter((p) => p.image);
+  const withImg = rj(PORTAL, 'data/products.json').filter((p) => p.image && !p.image.illustrative);
   for (const p of withImg) { fs.copyFileSync(path.join(PORTAL, 'data/p', p.id + '.json'), path.join(tmp, 'data/p', p.id + '.json')); for (const k of ['src', 'src2x']) fs.copyFileSync(path.join(PORTAL, p.image[k]), path.join(tmp, p.image[k])); }
   t('mutation baseline: the untouched copy passes', check(tmp).errs.length === 0);
   const v = withImg[0]; fs.rmSync(path.join(tmp, v.image.src2x));

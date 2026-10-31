@@ -271,7 +271,7 @@ main{flex:1 0 auto}
 .sk-line{height:1rem;margin:.6rem 0;background:#ececec}
 
 /* ---------------------------------------------------------------- product page */
-.pdp{display:grid;gap:24px;grid-template-columns:1fr;padding-block:1rem 2rem}
+.pdp{display:grid;gap:24px;grid-template-columns:minmax(0,1fr);padding-block:1rem 2rem}
 @media (min-width:64em){.pdp{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px}}
 .pdp-media{position:relative;aspect-ratio:1/1;background:var(--grey-light);max-height:560px}
 .pdp-media--shot{background:#fff;box-shadow:var(--shadow-1)}
@@ -601,3 +601,18 @@ main:focus{outline:none;box-shadow:none}
 .asst-mic{min-width:48px;min-height:48px;background:#fff;color:#000;border:1px solid #000;display:inline-grid;place-items:center;cursor:pointer}
 .asst-mic[hidden]{display:none}
 .asst-mic[aria-pressed=true]{background:var(--primary)}
+
+/* ---------------------------------------------------------------- stock photos (illustrative, Creative Commons) */
+.card-media--stock .packshot{position:absolute;inset:0;object-fit:cover;padding:0}
+.stock-tag{position:absolute;left:0;bottom:0;z-index:2;max-width:100%;box-sizing:border-box;padding:.2rem .5rem;font-size:.72rem;line-height:1.2;font-weight:600;letter-spacing:.02em;background:#fff;color:var(--grey-darker);border-top:3px solid var(--primary)}
+.pdp-media--stock{aspect-ratio:3/2;background:var(--grey-light)}
+.pdp-media--stock .packshot{position:absolute;inset:0;object-fit:cover;padding:0}
+.credit-line{display:flex;gap:.4em;align-items:baseline;min-width:0;margin:.4rem 0 0;font-size:.8125rem;line-height:1.4;color:var(--grey-dark)}
+.credit-line .au{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.credit-line .lic,.credit-line .cl-k{flex:none;white-space:nowrap}
+.cat-hero{margin:1.25rem 0 0;max-width:60rem}
+.cat-hero-media{position:relative;aspect-ratio:3/1;max-height:320px;background:var(--grey-light);overflow:hidden}
+.cat-hero-media .packshot{position:absolute;inset:0;object-fit:cover;padding:0}
+@media (max-width:39.99em){.cat-hero-media{aspect-ratio:3/2}}
+.credits-list{max-width:60rem;padding-left:1.2rem;display:grid;gap:.5rem}
+.credits-list li{overflow-wrap:anywhere}

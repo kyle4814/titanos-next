@@ -67,7 +67,7 @@ for (const f of files) {
     if (COMP.test(l) && !(isTest && /COMP\b|competitor/i.test(l) && /RegExp|const COMP/.test(l))) bad(f, i + 1, 'competitor name', l.trim().slice(0, 80));
     if (PLACEHOLDER.test(l)) bad(f, i + 1, 'unreplaced placeholder', (l.match(PLACEHOLDER) || [''])[0]);
     if (!isTest) {
-      for (const m of l.matchAll(/https?:\/\/[^\s"'`)<>\\]+/g)) if (!ALLOW_URL.test(m[0]) && !(DATA.has(e) && /^https?:\/\/([a-z0-9-]+\.)*sika\.com\//i.test(m[0])) && m[0] !== 'https://...') bad(f, i + 1, 'url to a host not allowed', m[0].slice(0, 80));
+      for (const m of l.matchAll(/https?:\/\/[^\s"'`)<>\\]+/g)) if (!ALLOW_URL.test(m[0]) && !(DATA.has(e) && /^https?:\/\/([a-z0-9-]+\.)*sika\.com\//i.test(m[0])) && !(DATA.has(e) && /^https?:\/\/(commons\.wikimedia\.org|(www\.)?creativecommons\.org)\//i.test(m[0])) && m[0] !== 'https://...') bad(f, i + 1, 'url to a host not allowed', m[0].slice(0, 80));
       if (CODE.has(e) && ANALYTICS.test(l)) bad(f, i + 1, 'cookie or analytics code', l.trim().slice(0, 80));
       if (CODE.has(e) && /\bfetch\(\s*['"`]https?:|new\s+(XMLHttpRequest|WebSocket|EventSource)|import\(\s*['"`]https?:|<script[^>]+src=["']https?:|<link[^>]+href=["']https?:/i.test(l)) bad(f, i + 1, 'request to an outside host', l.trim().slice(0, 80));
       if (e === '.css' && /url\(\s*['"]?https?:/i.test(l)) bad(f, i + 1, 'css pulls a remote file', l.trim().slice(0, 80));
@@ -89,7 +89,7 @@ if (!tells) bad(path.join(PORTAL, '..'), 0, 'lint lists unreadable', LINT_DIR);
 // images, fonts and stylesheets: only the vendored Barlow files and the portal's own CSS may exist
 for (const f of walk(PORTAL)) {
   const e = ext(f);
-  if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.avif'].includes(e)) bad(f, 0, 'image file in portal', 'images are not copied from aus.sika.com');
+  if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.avif'].includes(e) && !/assets[\\/]img[\\/]s[\\/][^\\/]+\.webp$/.test(f)) bad(f, 0, 'image file in portal', 'images are not copied from aus.sika.com');
   if (['.woff', '.woff2', '.ttf', '.otf', '.eot'].includes(e) && !/assets[\\/]fonts[\\/]barlow-\d+-[ni]\.woff2$/.test(f)) bad(f, 0, 'font file that is not the vendored Barlow', path.basename(f));
 }
 if (!fs.existsSync(path.join(PORTAL, 'assets/fonts/OFL.txt'))) bad(PORTAL, 0, 'font licence missing', 'assets/fonts/OFL.txt');
