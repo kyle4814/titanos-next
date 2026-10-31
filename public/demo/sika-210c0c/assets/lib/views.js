@@ -1,7 +1,6 @@
 // Page views. Each view(ctx) returns {el, title, nav} (nav = main navigation item to mark current).
 import { h, icon, nf, plural, hashHref, announce, debounce, tokens, norm } from './util.js';
 import { derived, derivedFull, derivedLite, groupIndex, data } from './data.js';
-import { buildSearch } from './search.js';
 import { getSearcher } from './searcher.js';
 import { productCard, categoryCard, breadcrumb, pager, emptyState, skeletonGrid, placeholder, addButton } from './components.js';
 
@@ -130,7 +129,7 @@ export async function categoryView(ctx) {
   path.slice(0, -1).forEach((_, i) => { const a = dv.catById.get(path.slice(0, i + 1).join('/')); if (a) crumbs.push({ label: a.name, href: '#/category/' + a.id }); });
   crumbs.push({ label: c.name });
   // speed: a category two levels or deeper only needs its group's slice of the index (data/s/g), not the whole 71 KB file
-  const searcher = path.length >= 2 ? buildSearch(await groupIndex(id), dv.catById) : await getSearcher(); const res = searcher.search({ cat: id });
+  const searcher = path.length >= 2 ? (await import('./search.js')).buildSearch(await groupIndex(id), dv.catById) : await getSearcher(); const res = searcher.search({ cat: id });
   const prods = res.rows.slice(0, kids.length ? 8 : 48);
   const el = h('div', { class: 'container' }, breadcrumb(crumbs),
     h('div', { class: 'page-head' }, h('h1', null, c.name), c.description ? h('p', { class: 'lead', style: 'max-width:60rem' }, c.description) : null,

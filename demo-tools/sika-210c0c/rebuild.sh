@@ -3,6 +3,7 @@
 # (after the hours placeholder is filled, after merging a sibling branch). Idempotent: a second run changes nothing.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
+node "$here/build_alias.mjs" "${1:-$here/../../public/demo/sika-210c0c}"
 node "$here/add_images.mjs" "${1:-$here/../../public/demo/sika-210c0c}"
 node "$here/add_qr.mjs" "${1:-$here/../../public/demo/sika-210c0c}" "${SIKA_QR_BASE:-}"
 node "$here/add_advisor.mjs" "${1:-$here/../../public/demo/sika-210c0c}"

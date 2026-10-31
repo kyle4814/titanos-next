@@ -1,0 +1,6 @@
+{
+  "measured_on": "integrate/2026-10-31 tip 7d632f4b2, before any matcher or citation change (2026-10-31)",
+  "search": { "n": 68, "box": { "top1": 31, "top3": 36, "top6": 37 }, "finder": { "top1": 31, "top3": 36, "top6": 37 } },
+  "golden": { "ok": 4599, "n": 4659 },
+  "speed": { "home_first_screen_gzip": 82779, "main_js_gzip": 61270, "sw_bytes": 8548114 }
+}

@@ -1,12 +1,12 @@
 // brain.js: the deterministic retrieval stack. No model, no network beyond the shard loader, no randomness.
 // Order: corrected rules, exact product and alias, synonym and spelling tolerance, weighted token index, facet constraints, decision trees, honest unknown.
 import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact, clampText } from './text.js';
-import { SYNONYM_GROUPS } from './syn.js';
+import { expandSynonyms, spellToken, correctAgainst, findAliasSpans, aliasEntries, fuzzyAliasSpans, applySlang } from './match.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
 import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schema.js';
 import * as C from './cards.js';
 import { createKnow } from './know.js';
-import { applySlang } from './slang.js';
+// (applySlang comes from the shared matcher below)
 import { vagueCard, termCard, genericVague } from './vague.js';
 import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
@@ -66,7 +66,7 @@ export function createBrain({ load, config } = {}) {
   // phone typos in words the assistant itself understands ("coevrage", "sutomotive"): corrected against its own vocabulary, never against product names
   let LEXB = null;
   const lexB = () => LEXB || (LEXB = [...new Set([...advisor.words(), ...know.words(), ...attrWords(), ...Object.values(RX).flatMap((r) => r.source.match(/[a-z]{5,}/g) || [])])].filter((w) => !/^(about|which|their|these)$/.test(w)));
-  const correctWords = (s) => s.split(' ').map((x) => { if (x.length < 4 || /\d/.test(x) || core === null || core.post[stem(x)] || core.alias[x] || STOP.has(x) || GENERIC.has(x)) return x; const L = lexB(); if (L.includes(x)) return x; const max = x.length >= 9 ? 2 : 1; let best = null, bd = 9; for (const l of L) { if (Math.abs(l.length - x.length) > max || (x.length < 5 && l.length < 5)) continue; const d = dist(x, l, max); if (d < bd && (d <= 1 || x.slice(0, 2) === l.slice(0, 2)) && !l.startsWith(x) && !x.startsWith(l) && x.slice(0, -1) !== l.slice(0, -1)) { bd = d; best = l; } } return best && bd <= max && !STOP.has(x) && !GENERIC.has(x) ? best : x; }).join(' ');
+  const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x]);
   const know = createKnow({ load }), advisor = createAdvisor({ load, isWord: (w) => !!(core && core.post[stem(w)]) });
 
   async function boot() {
@@ -78,53 +78,13 @@ export function createBrain({ load, config } = {}) {
   }
 
   // ---- stage 1 and 2: exact and fuzzy product match
-  const aliasToks = new Map();
-  function findExact(n) {
-    const w = n.split(' ').filter(Boolean); const hits = [];
-    for (let i = 0; i < w.length; i++) for (let k = Math.min(8, w.length - i); k >= 1; k--) {
-      const phrase = w.slice(i, i + k).join(' '); const a = core.alias[phrase] || (k > 1 ? core.alias[compact(phrase)] : null) || core.alias[stemmedPhrase(phrase)];
-      if (a) { hits.push({ i, k, pis: a, key: phrase }); }
-    }
-    // compact join of adjacent words handles "sikaflex 11 fc" vs "sikaflex-11fc"
-    return pickSpans(hits);
-  }
-  const stemmedPhrase = (p) => p; // alias keys are raw words; stem tolerance is handled by the fuzzy stage
-  function pickSpans(hits) {
-    hits.sort((a, b) => b.k - a.k || a.i - b.i); const used = new Set(), out = [];
-    for (const h of hits) { let clash = false; for (let j = h.i; j < h.i + h.k; j++) if (used.has(j)) clash = true; if (clash) continue; for (let j = h.i; j < h.i + h.k; j++) used.add(j); out.push(h); }
-    return out;
-  }
-  function fuzzyAliases(n) {
-    if (!aliasList) aliasList = Object.entries(core.alias).filter(([k]) => k.includes(' ') || /\d/.test(k)).map(([k, v]) => ({ k, toks: k.split(' ').map(stem), pis: v }));
-    const q = n.split(' ').filter(Boolean).map(stem); const hits = [];
-    const tokEq = (a, b) => a === b || (a.length >= 3 && b.length >= 3 && !/\d/.test(a + b) && dist(a, b, a.length >= 8 ? 2 : 1) <= (a.length >= 8 ? 2 : 1));
-    for (const a of aliasList) {
-      const k = a.toks.length; if (k < 2 && !/\d/.test(a.k)) continue;
-      for (let i = 0; i + k <= q.length; i++) { let ok = true, fuzzy = 0; for (let j = 0; j < k; j++) { if (q[i + j] === a.toks[j]) continue; if (tokEq(q[i + j], a.toks[j])) { fuzzy++; continue; } ok = false; break; } if (ok && fuzzy && (fuzzy <= 1 || k >= 4)) { hits.push({ i, k, pis: a.pis, key: a.k, fuzzy }); break; } }
-    }
-    return pickSpans(hits);
-  }
+  const findExact = (n) => findAliasSpans(n, core.alias);
+  function fuzzyAliases(n) { if (!aliasList) aliasList = aliasEntries(core.alias); return fuzzyAliasSpans(n, aliasList); }
 
   // ---- stage 3: weighted token index with synonym and spelling tolerance
   const spelled = new Set();
-  function spell(t) {
-    if (core.post[t] || t.length < 5 || /\d/.test(t)) return t;
-    const max = t.length >= 9 ? 2 : 1; let best = null, bd = 9, bdf = -1;
-    for (const v of vocab) { if (Math.abs(v.length - t.length) > max || v.length < 5) continue; const d = dist(t, v, max); if (d > max) continue; const df = core.post[v].length; if (d < bd || (d === bd && df > bdf)) { best = v; bd = d; bdf = df; } }
-    if (best) spelled.add(best);
-    return best || t;
-  }
-  const groups = SYNONYM_GROUPS.map((g) => g.map((t) => ({ n: normalise(t), toks: tokens(t, true).filter((x) => !STOP.has(x)) })));
-  function expand(n, qtoks) {
-    const q = new Map(); for (const t of qtoks) q.set(t, 1);
-    const padded = ' ' + n + ' ';
-    for (const g of groups) {
-      const hit = g.filter((x) => padded.includes(' ' + x.n + ' '));
-      if (!hit.length) continue; const hs = new Set(hit.flatMap((x) => x.toks));
-      for (const x of g) for (const s of x.toks) if (!hs.has(s) && !q.has(s)) q.set(s, 0.4);
-    }
-    return q;
-  }
+  function spell(t) { const best = spellToken(t, vocab, (w) => !!core.post[w], (w) => core.post[w].length); if (best !== t) spelled.add(best); return best; }
+  const expand = expandSynonyms;
   function search(n, extraTokens) {
     spelled.clear(); const base = tokens(n).filter((t) => !GENERIC.has(t)).map(spell);
     const qm = expand(n, [...new Set(base.concat(extraTokens || []))]);

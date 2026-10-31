@@ -8,6 +8,7 @@ import { sharedStorage } from '../lib/projectstore.js';
 import { COMMANDS } from './parse.js';
 import { renderHandoff } from '../lib/handoff-ui.js';
 import { observeBrainAnswer } from './brain_adapter.js';
+import { citeModel, sourceControl } from '../lib/cite.js';
 
 const extLink = (href, label, cls = 'link') => h('a', { href, class: cls, target: '_blank', rel: 'noopener noreferrer' }, label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)'));
 const baseUrl = new URL('../../', import.meta.url); // the demo root, for links to the static system sheets
@@ -36,7 +37,11 @@ export function printCard(c, plainNode) {
 let onNavigate = () => {};
 function valueNode(r) {
   const kids = [r.productId ? h('a', { href: '#/product/' + encodeURIComponent(r.productId), class: 'link', onclick: () => onNavigate() }, r.value) : r.value];
-  if (r.source && r.source.url) kids.push(' ', extLink(r.source.url, `(${r.source.label})`));
+  if (r.source && r.source.url) {
+    // "Show the source": the cited sentence, the document and its link in a panel (a page is kept when the link already carries #page=N)
+    const doc = /data sheet|safety data/i.test(r.source.label || '');
+    kids.push(' ', .../^https?:/.test(r.source.url) ? sourceControl(citeModel({ quote: r.source.sentence, url: r.source.url, docType: doc && /safety/i.test(r.source.label) ? 'SDS' : doc ? 'PDS' : 'WEB', title: String(r.source.label || '').replace(/, page \d+$/, '') })) : [extLink(r.source.url, `(${r.source.label})`)]);
+  }
   if (r.source && r.source.sentence && r.source.sentence !== r.value && (r.derived || !r.quote)) kids.push(h('details', { class: 'how' }, h('summary', null, 'How I know'), h('blockquote', null, r.source.sentence)));
   if (r.command) kids.push(' ', h('button', { class: 'chip chip--line', type: 'button', 'data-command': r.command, 'aria-label': 'Use ' + String(r.command).slice(0, 80) }, 'Use') /* 17 buttons all named "Use" told a screen reader nothing; now each says which command */);
   return kids;
