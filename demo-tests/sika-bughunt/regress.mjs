@@ -79,6 +79,14 @@ for (const [w, h] of [[390, 844], [768, 1024]]) { const { ctx, p } = await open(
   const b = p.getByRole('button', { name: /advisor/i }).first(); let ok = false; try { await b.click({ timeout: 5000 }); const q = p.locator('.assistant button:has-text("How much adhesive")').first(); await q.click({ timeout: 5000 }); ok = true; } catch { ok = false; }
   t(`R14 ${w} px: the advisor opens from a button named for the advisor and a suggested question can be pressed`, ok, ''); await ctx.close(); }
 
+// R15 a lazy module shared by two chunks is loaded before use even when a second caller arrives while the first chunk has run and the second is still arriving (P1 at 390 px under load: "module not loaded: brain/match.js", then "Cannot access 'a' before initialization" on category and finder pages)
+for (const [w, h] of [[390, 844], [1440, 900]]) { const { ctx, p } = await open(w, h, { hasTouch: w < 600, isMobile: w < 600 }); const errs = [];
+  p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 100)); }); p.on('pageerror', (e) => errs.push(e.message.slice(0, 100)));
+  await p.route(/dist\/brain-panels\.js/, async (r) => { await new Promise((ok) => setTimeout(ok, 1800)); await r.continue(); }); // the sibling chunk arrives late, as it does on a busy server
+  await p.goto(base + '#/products?q=grout'); await p.waitForTimeout(300); await p.evaluate(() => { location.hash = '#/products?q=grout&sort=name'; }); await p.waitForTimeout(300); await p.evaluate(() => { location.hash = '#/category/construction/concrete'; });
+  await p.waitForTimeout(3500); const txt = await p.locator('main').innerText();
+  t(`R15 ${w} px: finder and category pages load with a late sibling chunk, no module error`, errs.length === 0 && !/could not load/i.test(txt), JSON.stringify([errs, txt.slice(0, 80)])); await ctx.close(); }
+
 await browser.close();
 console.log(`REGRESSION ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

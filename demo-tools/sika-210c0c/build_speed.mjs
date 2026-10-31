@@ -61,7 +61,7 @@ const kmap = {}; for (const r of lazyRoots) kmap[r] = [...chunkOf.values()].filt
 const runtime = `const R=globalThis.__sk||(globalThis.__sk={m:{},c:{},p:{},k:{}});
 const __r=(id)=>{let c=R.c[id];if(c)return c.exports;const f=R.m[id];if(!f)throw new Error('module not loaded: '+id);c=R.c[id]={exports:{}};f(c.exports,__r,__l);return c.exports};
 const __c=(n)=>R.p[n]||(R.p[n]=import(new URL(n+'.js',import.meta.url).href));
-const __l=(id)=>R.m[id]?Promise.resolve(__r(id)):Promise.all((R.k[id]||[]).map(__c)).then(()=>__r(id));
+const __l=(id)=>Promise.all((R.k[id]||[]).map(__c)).then(()=>__r(id)); // every chunk of the root is awaited even when the root module itself is already registered by another chunk (cached promises, so no extra request): otherwise a shared module in a sibling chunk can be missing (module not loaded)
 Object.assign(R.k,${JSON.stringify(kmap)});
 `;
 const minify = async (code) => (await swc.minify(Buffer.from(code), Buffer.from(JSON.stringify({ compress: true, mangle: true, module: true })))).code;

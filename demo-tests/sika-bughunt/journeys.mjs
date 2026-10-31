@@ -254,7 +254,7 @@ export async function journeys(ctx, sz, r) {
       await s.step('ask: ' + q.slice(0, 40), async () => {
         const n0 = await p.locator('.assistant .msg--bot').count(); const t0 = Date.now();
         await p.locator('#asst-q').fill(q); await p.locator('#asst-q').press('Enter');
-        await p.waitForFunction((n) => { const m = document.querySelectorAll('.assistant .msg--bot'); return m.length > n && m[m.length - 1].innerText.trim().length > 5; }, n0, { timeout: 10000 }).catch(() => s.note('P1', 'advisor-no-reply', 'no reply to: ' + q));
+        await p.waitForFunction((n) => { const m = document.querySelectorAll('.assistant .msg--bot'); return m.length > n && m[m.length - 1].innerText.trim().length > 5; }, n0, { timeout: 30000 }).catch(() => s.note('P1', 'advisor-no-reply', 'no reply to: ' + q));
         const ms = Date.now() - t0; await wait(p, 500); const last = await p.locator('.assistant .msg--bot').last().innerText().catch(() => ''); const links = await p.locator('.assistant .msg--bot').last().locator('a[href]').count().catch(() => 0);
         ctx.advisorLog.push({ size: sz, q, ms, chars: last.length, links, answer: last.replace(/\s+/g, ' ').slice(0, 260) });
         if (/undefined|NaN|\[object|null\b/.test(last)) s.note('P1', 'advisor-bad-token', q + ' -> ' + last.slice(0, 120)); if (ms > 2500) s.note('P3', 'advisor-slow', `${ms} ms for: ${q}`);

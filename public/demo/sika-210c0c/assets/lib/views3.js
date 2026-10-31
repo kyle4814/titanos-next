@@ -162,7 +162,7 @@ export async function creditsView(ctx) {
     h('div', { class: 'page-head' }, h('h1', null, 'Photo credits'), h('p', { class: 'lead', style: 'max-width:60rem' }, `${nf.format(rows.length)} photographs from Wikimedia Commons are used as illustrations. They are not product pictures. Each is shown under its Creative Commons licence or as public domain; the links open the original file page.`)),
     h('ul', { class: 'credits-list' }, rows.map((r) => h('li', null,
       h('a', { class: 'link link--ext', href: r.cr.page, target: '_blank', rel: 'noopener noreferrer' }, r.title || 'Photograph'), ' by ', r.cr.author, ', ',
-      r.cr.licenseUrl ? h('a', { class: 'link link--ext', href: r.cr.licenseUrl, target: '_blank', rel: 'noopener noreferrer' }, r.cr.license) : r.cr.license,
+      r.cr.licenseUrl ? h('a', { class: 'link link--ext', href: r.cr.licenseUrl.replace(/^http:/, 'https:'), target: '_blank', rel: 'noopener noreferrer' }, r.cr.license) : r.cr.license,
       '. Used for: ', r.cats.slice(0, 4).join(', '), r.cats.length > 4 ? ` and ${r.cats.length - 4} more` : '', '.'))),
     h('p', null, h('a', { class: 'btn', href: '#/about' }, 'Back to About this demo')));
   return { el, title: 'Photo credits', nav: null };

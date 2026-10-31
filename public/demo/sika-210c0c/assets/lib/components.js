@@ -46,7 +46,7 @@ export function stockMedia(img, catId, name, { caption = false, big = false } = 
 /** One visible line: photo credit (author, licence, link to the Commons file page). Text comes from the API response saved in stock_source.json. */
 export function creditLine(cr) {
   return h('p', { class: 'credit-line' }, h('span', { class: 'cl-k' }, 'Photo:'), h('a', { class: 'au link link--ext', href: cr.page, target: '_blank', rel: 'noopener noreferrer', title: cr.author }, cr.author),
-    cr.licenseUrl ? h('a', { class: 'lic link link--ext', href: cr.licenseUrl, target: '_blank', rel: 'noopener noreferrer' }, cr.license) : h('span', { class: 'lic' }, cr.license), h('span', { class: 'cl-k' }, 'Wikimedia Commons'));
+    cr.licenseUrl ? h('a', { class: 'lic link link--ext', href: cr.licenseUrl.replace(/^http:/, 'https:'), target: '_blank', rel: 'noopener noreferrer' }, cr.license) : h('span', { class: 'lic' }, cr.license), h('span', { class: 'cl-k' }, 'Wikimedia Commons'));
 }
 
 export function addButton(id, name) {
