@@ -5,7 +5,7 @@ import SikaCalc from './sikacalc.js';
 import { compareTable } from './compare.js';
 import { card, clarifyCard, unknownCard, src, plain, norm, findProducts, findProductsInOrder, ESTIMATE_LINE, NOT_PUBLISHED, cardCsv, cardText } from './core.js';
 import { parseNumbers, parseFacets, envId, ioFromEnv } from './parse.js';
-import { fmt, fmtQty } from '../lib/finder/calc.js';
+import { fmt, fmtQty, normaliseFact, quantity, packRange, packRangeText, doseBasisText, fmtK, inputFor, DOSE_KINDS } from '../lib/finder/calc.js';
 import { resolve as resolveSystem } from '../lib/finder/model.js';
 import { pickSds, safetyRows } from '../assistant/apply.js';
 import { supplyClause, referencesLines, DRAFT_LABEL, STANDARDS_NOTE } from '../assistant/clause.js';
@@ -23,6 +23,8 @@ const NEED_Q = {
   thickness: ['What thickness, in mm? The published rate is per mm of thickness.', []],
   notch: null, csp: null, dilution: null, application: null, coats: ['How many coats?', []],
   cementitious: ['How many kg of total cementitious material (cement plus any supplementary binder) in the mix? The dosage is published per 100 kg of it.', []],
+  mix: ['How many kg of mix? The dose is published per kg of the mix.', []],
+  water: ['How many litres of water? The dose is published per litre of water.', []],
 };
 /** The calculator's field names in plain words. */
 export const human = (s) => String(s || '').replace(/notch_mm/g, 'trowel notch').replace(/thickness_mm/g, 'thickness (mm)').replace(/area_m2/g, 'area (m2)').replace(/length_m/g, 'length (m)').replace(/volume_m3/g, 'volume (m3)').replace(/cementitious_kg_per_m3/g, 'cementitious kg per m3').replace(/cementitious_kg/g, 'cementitious material (kg)').replace(/\bcsp\b/g, 'surface profile (CSP)');
@@ -104,6 +106,57 @@ function resultRows(rec, r, job, packFact, f, noPacks) {
   return rows;
 }
 
+/**
+ * Dosage products (admixtures, additives, fibres): the SAME maths as the product page, lib/finder/calc.js, so the advisor and the page cannot disagree.
+ * Returns a card, or null when the product has no dose-shaped figure (then the area flow below runs untouched).
+ */
+const DOSE_NEED = { cement: 'cementitious', mix: 'mix', water: 'water', volume: 'volume' };
+async function doseCalc(ctx, p, title) {
+  const { data, session } = ctx; const f = session.facets;
+  let fr; try { fr = await data.rate(p.id); } catch { fr = null; }
+  const facts = ((fr && fr.consumption) || []).map((x) => ({ x, n: normaliseFact(x) })).filter((y) => y.n.ok);
+  const doses = facts.filter((y) => DOSE_KINDS.includes(y.n.kind));
+  if (!doses.length) return null;
+  // a product with both an area rate and a dose: the dose is worked out only when the visitor gave a dose-shaped size (cement, mix or water) and no area or length
+  if (facts.some((y) => !DOSE_KINDS.includes(y.n.kind)) && (!(f.cementitious || f.mix || f.water) || f.area || f.length)) return null;
+  const job = { cementKg: f.cementitious || null, mixKg: f.mix || null, waterL: f.water || null, volume: f.volume || null, allowancePct: f.allowance != null ? f.allowance : 0 };
+  const have = doses.filter((y) => quantity(y.n, job).ok);
+  if (!have.length) {
+    const need = DOSE_NEED[inputFor(doses[0].n)];
+    const qc = ctx.noAsk ? null : needQuestion(need, {});
+    if (qc) return qc;
+    return askProduct('calc', 'size');
+  }
+  const sheet = fr.datasheet ? src(fr.datasheet.url, `Data sheet, ${plain(fr.datasheet.version || '')}`.replace(/, $/, ''), '') : null;
+  const c = card('calc', 'quantity', title, { estimate: true, buttons: afterBtns({ label: 'Make a project pack', command: '/pack' }) });
+  c.summary = `Worked out from the published dosage for ${p.name}. The range stays a range, with no midpoint picked. Packs are rounded up. No allowance is added unless you type one.`;
+  c.rows.push({ label: 'Your job', value: jobText(f), input: true });
+  const packsIn = (fr.packs || []).map((z) => ({ amount: z.amount, unit: z.unit }));
+  const shown = have.slice(0, 3); const saved = [];
+  shown.forEach(({ x, n }, i) => {
+    const q = quantity(n, job);
+    const s = srcOf({ text: x.text, source: { url: x.source.url, page: x.source.page, doc_type: x.source.docType, doc_version: x.source.version } });
+    const L = (t) => (shown.length > 1 ? `${t} (rate ${i + 1})` : t);
+    c.rows.push({ label: L('Published rate'), value: plain(x.text), source: s, quote: true });
+    c.rows.push({ label: L('Published dose'), value: plain(doseBasisText(n)), source: s, derived: true });
+    const qv = q.limit === 'max' ? 'up to ' + fmtQty(q.high, q.unit) : q.limit === 'min' ? 'at least ' + fmtQty(q.low, q.unit) : range(q.low, q.high, q.unit);
+    c.rows.push({ label: L('Quantity needed'), value: qv, source: s, derived: true });
+    if (q.typical != null) c.rows.push({ label: L('Typical dose in the same statement'), value: fmtQty(q.typical, q.unit), source: s, derived: true });
+    if (q.allowancePct) c.rows.push({ label: L(`With your ${fmt(q.allowancePct)}% allowance`), value: 'Included in the quantity above.', source: s, derived: true });
+    let packText = '';
+    if (q.unit === 'bags') c.rows.push({ label: L('Whole packs'), value: 'The published figure is already a number of bags.', source: null });
+    else {
+      const pr = packRange(packsIn, q);
+      if (pr.options.length) { packText = pr.options.map((o) => packRangeText(o, q.limit)).join('; '); c.rows.push({ label: L('Whole packs, rounded up'), value: packText, source: fr.packText ? src(fr.productUrl, 'Product page', fr.packText) : src(fr.productUrl, 'Product page', ''), derived: true }); }
+      else c.rows.push({ label: L('Whole packs'), value: pr.note || 'Pack sizes not in the published data.', source: null });
+    }
+    saved.push({ low: q.low, high: q.high, unit: q.unit, packs: packText || null, phrase: plain(x.text), url: page({ url: x.source.url, page: x.source.page }) });
+  });
+  c.sources = [src(fr.productUrl, 'Product page', ''), sheet].filter(Boolean);
+  session.calcs[p.id] = { id: p.id, name: p.name, job: { cementitious_kg: job.cementKg, mix_kg: job.mixKg, water_l: job.waterL, volume_m3: job.volume }, rows: saved };
+  return c;
+}
+
 export async function calc(ctx) {
   const { data, session } = ctx;
   const f = session.facets;
@@ -114,6 +167,8 @@ export async function calc(ctx) {
   const rec = await data.arate(p.id);
   noteProduct(session, p);
   const title = `Quantity for ${p.name}`;
+  const dz = await doseCalc(ctx, p, title);
+  if (dz) return dz;
   if (!rec || rec.rate_status !== 'published' || !(rec.facts.consumption || []).some((x) => x.calc_ready)) {
     const why = rec && rec.rate_note ? plain(rec.rate_note) : 'A usable consumption rate is not published for this product.';
     const c = unknownCard('calc', title, `${why} I will not guess a rate.`, { estimate: false });

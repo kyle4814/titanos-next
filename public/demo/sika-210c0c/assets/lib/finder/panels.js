@@ -1,7 +1,7 @@
 // Panels added to the product page: "How much do I need?" (T13) and, once T09 lands, the "Can I use this on or over...?" panel.
 import { h, icon, announce } from '../util.js';
 import { rateFor } from './load.js';
-import { normaliseFact, quantity, packOptions, fmtQty, fmt, packText, ESTIMATE_LINE, NO_RATE_TEXT } from './calc.js';
+import { normaliseFact, quantity, packOptions, packRange, packRangeText, doseBasisText, inputFor, DOSE_KINDS, fmtQty, fmt, fmtK, packText, ESTIMATE_LINE, NO_RATE_TEXT } from './calc.js';
 import { chipFor } from './model.js';
 import { addCalcToProject } from './bom.js';
 import { CHIPS, canUse } from './canuse.js';
@@ -21,23 +21,29 @@ export async function calcPanel(p) {
       h('p', { class: 'estimate-line' }, ESTIMATE_LINE));
     return sec;
   }
-  const kinds = new Set(facts.filter((x) => x.n.ok).map((x) => x.n.kind));
+  const okFacts = facts.filter((x) => x.n.ok);
+  const kinds = new Set(okFacts.map((x) => x.n.kind));
+  const needs = new Set(okFacts.map((x) => inputFor(x.n)));
   const needThick = facts.some((x) => x.n.ok && x.n.perMm), needCoats = facts.some((x) => x.n.ok && x.n.perCoat);
   const field = (id, label, hint, attrs = {}) => { const i = h('input', { id, class: 'input', type: 'number', min: '0', step: 'any', inputmode: 'decimal', ...attrs }); return [h('div', { class: 'field' }, h('label', { for: id }, label, hint ? h('span', { class: 'hint' }, ' ' + hint) : null), i), i]; };
-  const [fArea, iArea] = field('calc-area', 'Area (m2)', '', {});
-  const [fAllow, iAllow] = field('calc-allow', 'Add allowance %', 'optional, your own figure', { placeholder: '0', max: '100' });
-  const extras = [];
-  const inputs = { area: iArea, allow: iAllow };
+  // only the inputs the published figures need: an admixture is dosed by the mass of cement, never by an area
+  const lead = [], extras = [];
+  const inputs = {};
+  if (needs.has('area')) { const [f, i] = field('calc-area', 'Area (m2)', '', {}); lead.push(f); inputs.area = i; }
+  if (needs.has('cement')) { const [f, i] = field('calc-cement', 'Cement or binder (kg)', 'the dose is per kg of it; 1 tonne is 1000 kg'); lead.push(f); inputs.cement = i; }
+  if (needs.has('mix')) { const [f, i] = field('calc-mix', 'Mix (kg)', 'the dose is per kg of the mix'); lead.push(f); inputs.mix = i; }
+  if (needs.has('water')) { const [f, i] = field('calc-water', 'Water (L)', 'the dose is per litre of water'); lead.push(f); inputs.water = i; }
+  if (okFacts.length) { const [f, i] = field('calc-allow', 'Add allowance %', 'optional, your own figure', { placeholder: '0', max: '100' }); inputs.allow = i; lead.push(f); }
   if (needThick) { const [f, i] = field('calc-thick', 'Thickness (mm)', 'the published rate is per mm'); extras.push(f); inputs.thick = i; }
   if (needCoats) { const [f, i] = field('calc-coats', 'Coats', 'only where the rate is per coat'); extras.push(f); inputs.coats = i; }
   if (kinds.has('per-m')) { const [f, i] = field('calc-len', 'Length (m)', 'for rates per metre'); extras.push(f); inputs.len = i; }
-  if (kinds.has('per-m3')) { const [f, i] = field('calc-vol', 'Volume (m3)', 'for rates per m3'); extras.push(f); inputs.vol = i; }
+  if (kinds.has('per-m3')) { const [f, i] = field('calc-vol', 'Volume (m3)', 'for rates per m3 of concrete or mix'); extras.push(f); inputs.vol = i; }
   const out = h('div', { class: 'calc-out', id: 'calc-out', 'aria-live': 'polite' });
   const num = (el) => { const v = parseFloat(el && el.value); return Number.isFinite(v) && v > 0 ? v : null; };
   const packsOf = r.packs.map((x) => ({ amount: x.amount, unit: x.unit }));
   const state = { snaps: {} };
   const paint = () => {
-    const job = { area: num(inputs.area), allowancePct: num(inputs.allow) || 0, thickness: num(inputs.thick), coats: num(inputs.coats), length: num(inputs.len), volume: num(inputs.vol) };
+    const job = { area: num(inputs.area), allowancePct: num(inputs.allow) || 0, thickness: num(inputs.thick), coats: num(inputs.coats), length: num(inputs.len), volume: num(inputs.vol), cementKg: num(inputs.cement), mixKg: num(inputs.mix), waterL: num(inputs.water) };
     out.replaceChildren();
     facts.forEach(({ f, n }, i) => {
       const li = h('div', { class: 'calc-row' });
@@ -45,24 +51,36 @@ export async function calcPanel(p) {
       if (!n.ok) { li.append(h('p', { class: 'calc-note' }, n.reason + ' ', h('a', { class: 'link', href: sheetUrl, target: '_blank', rel: 'noopener noreferrer' }, 'Data sheet'))); out.append(li); return; }
       const q = quantity(n, job);
       if (!q.ok) { li.append(h('p', { class: 'calc-note' }, q.reason)); out.append(li); return; }
-      const qtext = q.low === q.high ? fmtQty(q.low, q.unit) : fmtQty(q.low, q.unit) + ' to ' + fmtQty(q.high, q.unit);
-      li.append(h('p', { class: 'calc-qty' }, h('strong', null, qtext), q.allowancePct ? ` (includes an allowance of ${fmt(q.allowancePct)}%)` : ' (no allowance added)'));
+      const dose = DOSE_KINDS.includes(n.kind);
+      const one = q.limit === 'max' ? 'up to ' + fmtQty(q.high, q.unit) : q.limit === 'min' ? 'at least ' + fmtQty(q.low, q.unit) : null;
+      const qtext = one || (q.low === q.high ? fmtQty(q.low, q.unit) : fmtQty(q.low, q.unit) + ' to ' + fmtQty(q.high, q.unit));
+      if (dose) li.append(h('p', { class: 'calc-basis' }, 'Published as ' + doseBasisText(n) + '.'));
+      const forWhat = n.kind === 'per-m3' ? ` for ${fmtK(job.volume)} m3` : n.kind === 'dose-per-water' ? ` for ${fmtK(job.waterL)} L of water` : n.kind === 'dose-per-mass' || n.kind === 'dose-pct' ? ` for ${fmtK(n.basis === 'mix' ? job.mixKg : job.cementKg)} kg of ${n.basis === 'mix' ? 'mix' : 'cement or binder'}` : '';
+      li.append(h('p', { class: 'calc-qty' }, h('strong', null, qtext), forWhat, q.allowancePct ? ` (includes an allowance of ${fmt(q.allowancePct)}%)` : ' (no allowance added)'));
+      if (q.typical != null) li.append(h('p', { class: 'calc-typical' }, 'Typical dose in the same statement: ', h('strong', null, fmtQty(q.typical, q.unit)), forWhat, ' (the centre of the published statement).'));
       let packs = null;
-      if (q.unit !== 'm') {
+      if (q.unit === 'bags') li.append(h('p', { class: 'calc-note' }, 'The published figure is already a number of bags.'));
+      else if (q.unit !== 'm') {
         packs = packOptions(packsOf, { amount: q.high, unit: q.unit });
-        if (packs.options.length) li.append(h('p', { class: 'calc-packs' }, 'Whole packs, rounded up' + (q.range ? ' (to cover the higher figure)' : '') + ': ', packs.options.map((o, k) => [k ? '; ' : '', packText(o)])));
+        if (dose) {
+          const pr = packRange(packsOf, q);
+          if (pr.options.length) li.append(h('p', { class: 'calc-packs' }, 'Whole packs, rounded up' + (q.range ? ', lowest to highest figure' : '') + ': ', pr.options.map((o, k) => [k ? '; ' : '', packRangeText(o, q.limit)])));
+          else li.append(h('p', { class: 'calc-note' }, pr.note));
+        } else if (packs.options.length) li.append(h('p', { class: 'calc-packs' }, 'Whole packs, rounded up' + (q.range ? ' (to cover the higher figure)' : '') + ': ', packs.options.map((o, k) => [k ? '; ' : '', packText(o)])));
         else li.append(h('p', { class: 'calc-note' }, packs.note));
       }
-      const snap = { factId: f.id, low: q.low, high: q.high, unit: q.unit, area: job.area, length: job.length, volume: job.volume, thickness: n.perMm ? job.thickness : null, allowancePct: q.allowancePct, basis: f.text, sourceUrl: f.source.url, packs: packs ? packs.options : [], packNote: packs && packs.note };
+      const snap = { factId: f.id, low: q.low, high: q.high, unit: q.unit, area: job.area, length: job.length, volume: job.volume, cementKg: n.kind === 'dose-per-mass' && n.basis !== 'mix' || n.kind === 'dose-pct' ? job.cementKg : null, mixKg: n.basis === 'mix' ? job.mixKg : null, waterL: n.kind === 'dose-per-water' ? job.waterL : null, thickness: n.perMm ? job.thickness : null, allowancePct: q.allowancePct, basis: f.text, sourceUrl: f.source.url, packs: packs ? packs.options : [], packNote: packs && packs.note };
       li.append(h('button', { class: 'btn btn--hollow', type: 'button', onclick: () => addCalcToProject(p, snap) }, icon('plus', 'i--sm'), 'Add to project with this quantity'));
       out.append(li);
     });
-    if (!job.area && !job.length && !job.volume) out.prepend(h('p', { class: 'calc-note' }, 'Enter a size to see quantities. Nothing is worked out until you do.'));
+    if (okFacts.length && !job.area && !job.length && !job.volume && !job.cementKg && !job.mixKg && !job.waterL) out.prepend(h('p', { class: 'calc-note' }, 'Enter a size to see quantities. Nothing is worked out until you do.'));
   };
   Object.values(inputs).forEach((i) => i.addEventListener('input', paint));
+  const allDose = kinds.size > 0 && [...kinds].every((k) => DOSE_KINDS.includes(k));
   sec.append(
-    h('p', null, 'From the published consumption figure for ', p.name, '. Rounded up to whole packs. Sika\'s own grout calculator page suggests adding 10 to 15% for wastage; no allowance is added unless you type one.'),
-    h('form', { class: 'calc-form', onsubmit: (e) => e.preventDefault(), 'aria-label': 'Quantity calculator' }, fArea, fAllow, extras),
+    h('p', null, allDose ? ['From the published dosage for ', p.name, '. The range stays a range, no midpoint is picked, and no allowance is added unless you type one.']
+      : ['From the published consumption figure for ', p.name, '. Rounded up to whole packs. Sika\'s own grout calculator page suggests adding 10 to 15% for wastage; no allowance is added unless you type one.']),
+    ...(okFacts.length ? [h('form', { class: 'calc-form', onsubmit: (e) => e.preventDefault(), 'aria-label': 'Quantity calculator' }, lead, extras)] : []),
     out, h('p', { class: 'estimate-line' }, ESTIMATE_LINE));
   paint();
   return sec;

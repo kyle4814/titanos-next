@@ -3,7 +3,7 @@
 // questions and its gap list live beside them. Demo only and this browser only: localStorage, never sent anywhere. Quantities, never prices.
 // The store is read-through: every call re-reads storage when it changed, so an edit made on the cart page is seen by the advisor on its
 // next turn and the other way round. Plain code, no DOM, so Node tests import it directly and the portal and the advisor bundles share it.
-import { ESTIMATE_LINE } from './finder/calc.js';
+import { ESTIMATE_LINE } from './finder/qty.js';
 
 export const KEY = 'sika-demo-210c0c-project-v2';
 export const LEGACY_PORTAL_KEY = 'sika-demo-210c0c-projects'; // the old cart: [{ id, qty, unit, note, calc }]; read once, never written again

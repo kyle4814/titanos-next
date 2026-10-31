@@ -283,7 +283,15 @@ main{flex:1 0 auto}
 .checklist svg{margin-top:.1rem;color:var(--grey-dark)}
 .docbar{display:flex;flex-wrap:wrap;gap:4px 20px;border-top:1px solid var(--grey);padding-top:.75rem;margin-top:1rem}
 .tabs{border-bottom:2px solid var(--grey);margin-top:1rem}
-.tablist{display:flex;gap:0;overflow-x:auto;margin:0;padding:0;list-style:none;scrollbar-width:none}
+.tabs{position:relative}
+.tablist{display:flex;gap:0;overflow-x:auto;margin:0;padding:0;list-style:none;scrollbar-width:none;scroll-snap-type:x proximity;scroll-padding-inline:1.5rem;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;cursor:grab}
+.tablist.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.tablist li{flex:0 0 auto;scroll-snap-align:start}
+.tabs::before,.tabs::after{content:"";position:absolute;top:0;bottom:2px;width:3rem;pointer-events:none;opacity:0;transition:opacity .2s;z-index:1}
+.tabs::before{left:0;background:linear-gradient(to right,var(--white),transparent)}
+.tabs::after{right:0;background:linear-gradient(to left,var(--white),transparent)}
+.tabs[data-more="right"]::after,.tabs[data-more="both"]::after,.tabs[data-more="left"]::before,.tabs[data-more="both"]::before{opacity:1}
+@media (prefers-reduced-motion:reduce){.tabs::before,.tabs::after{transition:none}}
 .tablist::-webkit-scrollbar{display:none}
 .tablist button{background:none;border:0;border-bottom:4px solid transparent;margin-bottom:-2px;padding:.9rem 1.1rem .75rem;font-size:1.3rem;font-weight:300;cursor:pointer;white-space:nowrap;min-height:48px;transition:border-color .3s}
 @media (min-width:40em){.tablist button{font-size:1.75rem;padding-inline:1.6rem}}

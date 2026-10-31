@@ -10,7 +10,7 @@ import { CART_ACTIONS, cartAction, cartAfterSave, cartButtons } from './cart.js'
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
-const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious' };
+const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious', mix: 'mix', water: 'water' };
 const MEMORY_ACTIONS = new Set(['jobadd', 'save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
 const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
 
@@ -138,13 +138,13 @@ export function createActions(deps) {
       const two = await findProductsInOrder(data, text, 3);
       if (two.length >= 2) { const q = ' ' + norm(text) + ' '; if (/ or /.test(q.slice(Math.max(0, q.indexOf(norm(two[0].name))), q.indexOf(norm(two[1].name)) + 1) || q)) { action = 'compare'; rest = text; } }
     }
-    if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
+    if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.cementitious || n.mix || n.water || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
     // facets: numbers always, surfaces and places from the text with any product name taken out
     const hits = await findProducts(data, useText, 3);
     // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
-    if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
+    if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious', 'mix', 'water']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
     if (!MEMORY_ACTIONS.has(action) && action !== 'job') { // a job sentence (2.4 x 1.8 m) is a room, not a tile size: the job builder reads it itself
       if (answerOf) {

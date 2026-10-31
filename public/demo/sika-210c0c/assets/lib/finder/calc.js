@@ -3,20 +3,22 @@
 // a rate that cannot be read safely is refused with the reason, never guessed. Rate shapes come from the data sheet text
 // (data/finder/r/<id>.json and data/finder/systems.json), each with its source phrase.
 
-export const ESTIMATE_LINE = 'Estimate only, not an offer. Quantities, not prices. Confirm with the product data sheet and Sika Technical Services before ordering.';
-export const DEMO_LINE = 'Built from Sika Australia\'s public data sheets on 2026-10-30. Not an official Sika document. Technical Services decides suitability.';
-export const NO_RATE_TEXT = 'Rate not published, ask Technical Services';
+
+import { ESTIMATE_LINE, DEMO_LINE, NO_RATE_TEXT, fmt, fmtQty, packText } from './qty.js';
+export { ESTIMATE_LINE, DEMO_LINE, NO_RATE_TEXT, fmt, fmtQty, packText };
 
 const EPS = 1e-9;
 const MASS = { kg: 1, g: 0.001 };
 const VOL = { L: 1, l: 1, mL: 0.001, ml: 0.001 };
 const LEN = { m: 1 };
+const COUNT = { bags: 1, bag: 1 };
 
 /** Unit to base unit (kg or L). Returns null for anything else. */
 export function toBase(amount, unit) {
   if (unit in MASS) return { amount: amount * MASS[unit], unit: 'kg', dim: 'mass' };
   if (unit in VOL) return { amount: amount * VOL[unit], unit: 'L', dim: 'volume' };
   if (unit in LEN) return { amount, unit: 'm', dim: 'length' };
+  if (unit in COUNT) return { amount, unit: 'bags', dim: 'count' };
   return null;
 }
 const num = (x) => typeof x === 'number' && Number.isFinite(x);
@@ -24,14 +26,135 @@ const rnd = (x, d = 4) => { const p = 10 ** d; return Math.round((x + 1e-12) * p
 const disp = (u) => (u === 'l' ? 'L' : u === 'ml' ? 'mL' : u);
 const ceilEps = (x) => Math.ceil(x - 1e-9);
 
-/** Number as text: up to 2 decimals, no trailing zeros. */
-export function fmt(n) { return String(Math.round(n * 100) / 100); }
-/** Quantity with unit; small amounts shown in the smaller unit. */
-export function fmtQty(amount, unit) {
-  if (unit === 'L' && amount < 1) return fmt(amount * 1000) + ' mL';
-  if (unit === 'kg' && amount < 1) return fmt(amount * 1000) + ' g';
-  return fmt(amount) + ' ' + unit;
+/* ------------------------------------------------------------------ dosage kinds
+ * Admixtures, additives, curing aids and fibres are published as a DOSE, not a coverage. The phrase is read here, in plain code, no model:
+ *   dose-per-mass  { lo, hi, unit, per (kg of the basis), basis: 'cement'|'mix' }   "400 ml - 2000 ml / 100 kg of total cementitious material"
+ *   dose-pct       { lo, hi, unit: '%', basis: 'cement' }                              "0.5 to 2 % by weight of cement"
+ *   per-m3         { lo, hi, unit }                                                    "4-8 kg/m3", "10 to 30 litre per cubic metre of concrete"
+ *   dose-per-water { lo, hi, unit, perL }                                              "300 mL per 200 L of water"
+ * Optional on any of them: limit ('max' for "up to", 'min' for "at least"), typical (the centre of a "350 ml +/- 100 ml" statement).
+ * A threshold ("for doses higher than 400 ml/100kg") or a test condition ("@ 6 kg/m3" in a performance line) is refused, never turned into a dose.
+ * Only the published figure is used: no midpoint is invented, a range stays a range.
+ */
+const DN = '(\\d+(?:\\.\\d+)?)';
+const DU = 'litres?|liters?|ltr|lt|mls|ml|gm|grams?|kgs|kg|bags?|g|l';
+const D_AMT = '(?:' + DN + '\\s*(?:(' + DU + ')(?![a-z]))?\\s*(?:-|to|and)\\s*)?' + DN + '\\s*(' + DU + ')(?![a-z])';
+const D_M3 = '(?:m3|cubic\\s*met(?:re|er)s?|cu\\.?\\s*m)(?![a-z0-9])';
+const D_CONN = '(?:\\s*\\([^)]*\\))?\\s*(?:[^.;|]{0,45}?(?:per|\\/|for each|to each|for every)\\s*|\\s+)';
+const RX_MASS = new RegExp(D_AMT + D_CONN + '(?:' + DN + '\\s*)?(kg|kgs|tonnes?|tons?)(?![a-z])\\s*(?:of\\s+)?(?:total\\s+)?(?:the\\s+)?(sand\\/cement mix|cementitious|cement|binder|dry mix|mix|powder)');
+const RX_PCT = new RegExp('(?:' + DN + '\\s*%?\\s*(?:-|to|and)\\s*)?' + DN + '\\s*%\\s*[^.;|%]{0,40}?(?:by\\s+(?:weight|mass)\\s+of|of\\s+(?:the\\s+)?(?:weight|mass)\\s+of|of)\\s+(?:total\\s+)?(?:the\\s+)?(cementitious|cement|binder)');
+const RX_M3 = new RegExp(D_AMT + '(?:\\s*\\([^)]*\\))?\\s*(?:per|\\/)\\s*(?:1\\s*)?' + D_M3);
+const RX_WATER = new RegExp(D_AMT + '(?:\\s*\\([^)]*\\))?\\s*[^.;|]{0,45}?(?:per|for each|to each|for every)\\s*' + DN + '\\s*(?:litres?|liters?|l)(?![a-z])\\s*(?:of\\s+)?(?:clean\\s+|potable\\s+)?water');
+const RX_PM = new RegExp(DN + '\\s*(' + DU + ')?\\s*(?:\\u00b1|\\+\\/-)\\s*' + DN + '\\s*(?:(' + DU + ')(?![a-z]))?');
+const D_CANON = { ml: 'mL', mls: 'mL', l: 'L', lt: 'L', ltr: 'L', litre: 'L', litres: 'L', liter: 'L', liters: 'L', g: 'g', gm: 'g', gram: 'g', grams: 'g', kg: 'kg', kgs: 'kg', bag: 'bags', bags: 'bags' };
+const D_DIM = { mL: 'volume', L: 'volume', g: 'mass', kg: 'mass', bags: 'count' };
+const D_SCALE = { mL: 1, L: 1000, g: 1, kg: 1000, bags: 1 };
+
+function doseText(text) {
+  return ' ' + String(text || '').toLowerCase()
+    .replace(/[‐-―−]/g, '-').replace(/ /g, ' ').replace(/[®™*~]/g, ' ')
+    .replace(/²/g, '2').replace(/³/g, '3')
+    .replace(/(\d),(\d{3})(?!\d)/g, '$1$2').replace(/(\d),(\d)/g, '$1.$2').replace(/\s+/g, ' ') + ' ';
 }
+/** Amounts to one unit (the smaller of two when they differ). Returns null when the units cannot be one dimension. */
+function doseAmounts(g, i = 1) {
+  const a = g[i] != null ? parseFloat(g[i]) : null, au = g[i + 1] ? D_CANON[g[i + 1]] : null;
+  const b = parseFloat(g[i + 2]), bu = D_CANON[g[i + 3]];
+  if (!bu || !(b >= 0)) return null;
+  if (a == null) return { lo: b, hi: b, unit: bu, single: true };
+  const u0 = au || bu;
+  if (D_DIM[u0] !== D_DIM[bu]) return null;
+  const small = D_SCALE[u0] <= D_SCALE[bu] ? u0 : bu;
+  const conv = (x, u) => Math.round(x * D_SCALE[u] / D_SCALE[small] * 1e6) / 1e6;
+  const lo = conv(a, u0), hi = conv(b, bu);
+  return { lo: Math.min(lo, hi), hi: Math.max(lo, hi), unit: small, single: false };
+}
+function doseLimit(t, at) {
+  const pre = t.slice(Math.max(0, at - 60), at);
+  if (/\bminimum\s+(?:dose|dosage|rate)[^.;|]*$/.test(pre)) return 'min';
+  if (/\bmaximum\s+(?:dose|dosage|rate)[^.;|]*$/.test(pre)) return 'max';
+  if (/(?:higher|greater|more|above|over|exceeding|exceeds?|beyond)\s+(?:than\s+)?$/.test(pre)) return 'refuse';
+  if (/(?:\bup\s*(?:to\s*)?|maximum\s*(?:of\s*)?|max\.?\s*|not\s+(?:more|greater)\s+than\s*|no\s+more\s+than\s*)$/.test(pre)) return 'max';
+  if (/(?:minimum\s*(?:of\s*)?|min\.?\s*|at\s+least\s*|not\s+(?:less|lower)\s+than\s*)$/.test(pre)) return 'min';
+  return null;
+}
+const REFUSE_COND = /\bjoules?\b|energy absorption|@/;
+const REFUSE_TABLE = /^\s*per\s+\d+(?:\.\d+)?\s*(?:l|litres?|kg)\b[^|]*\|/;
+
+/**
+ * Read a dosage statement. Returns null when the text is not a dose, { refuse: reason } when it looks like one but must not be computed,
+ * or a rate { kind, lo, hi, unit, ... }.
+ */
+export function detectDosage(text) {
+  let t = doseText(text);
+  if (REFUSE_TABLE.test(t.trim())) return { refuse: 'The figures sit in unlabelled table columns. Read the phrase.' };
+  let typical = null;
+  const pm = RX_PM.exec(t);
+  if (pm) {
+    const c = parseFloat(pm[1]), d = parseFloat(pm[3]), u = pm[2] || pm[4];
+    if (u && D_CANON[u]) { t = t.slice(0, pm.index) + ' ' + (Math.round((c - d) * 1e6) / 1e6) + '-' + (Math.round((c + d) * 1e6) / 1e6) + ' ' + u + ' ' + t.slice(pm.index + pm[0].length); typical = { amount: c, unit: u }; }
+  }
+  // "1.0 kg/m3 and 2.0 kg/m3" is one range
+  t = t.replace(new RegExp(DN + '\\s*(' + DU + ')\\s*(?:\\/|per)\\s*' + D_M3 + '\\s*(?:and|to|-)\\s*' + DN + '\\s*(?:' + DU + ')\\s*(?:\\/|per)\\s*' + D_M3), ' $1-$3 $2/m3 ');
+  const tryRx = (rx) => { const g = rx.exec(t); return g ? { g, at: g.index } : null; };
+  const finish = (rate, hit, base) => {
+    const lim = doseLimit(t, hit.at);
+    if (lim === 'refuse') return { refuse: 'This is a threshold, not a dose. Read the phrase.' };
+    if (REFUSE_COND.test(t)) return { refuse: 'This is a test condition, not a dose. Read the phrase.' };
+    if (lim) rate.limit = lim;
+    if (typical) { const ut = D_CANON[typical.unit]; const f = D_SCALE[ut] / D_SCALE[rate.unit]; if (ut === rate.unit || D_DIM[ut] === D_DIM[rate.unit]) rate.typical = Math.round(typical.amount * f * 1e6) / 1e6; }
+    return Object.assign(rate, base || {});
+  };
+  let h = tryRx(RX_MASS);
+  if (h) {
+    const a = doseAmounts(h.g); const n = h.g.length;
+    if (a && D_DIM[a.unit] !== 'count') {
+      const cnt = h.g[5] != null ? parseFloat(h.g[5]) : 1; const mu = h.g[6]; const basisW = h.g[7];
+      const per = cnt * (/^ton/.test(mu) ? 1000 : 1);
+      if (per > 0) return finish({ kind: 'dose-per-mass', lo: a.lo, hi: a.hi, unit: a.unit, per, basis: /mix|powder|sand/.test(basisW) ? 'mix' : 'cement' }, h);
+    }
+  }
+  h = tryRx(RX_PCT);
+  if (h) {
+    const g = h.g; const hi = parseFloat(g[2]); const lo = g[1] != null ? parseFloat(g[1]) : hi;
+    if (hi > 0 && hi <= 100) return finish({ kind: 'dose-pct', lo: Math.min(lo, hi), hi: Math.max(lo, hi), unit: '%', basis: 'cement' }, h);
+  }
+  h = tryRx(RX_M3);
+  if (h) { const a = doseAmounts(h.g); if (a) return finish({ kind: 'per-m3', lo: a.lo, hi: a.hi, unit: a.unit }, h); }
+  h = tryRx(RX_WATER);
+  if (h) {
+    const a = doseAmounts(h.g); const perL = parseFloat(h.g[5]);
+    if (a && D_DIM[a.unit] !== 'count' && perL > 0) return finish({ kind: 'dose-per-water', lo: a.lo, hi: a.hi, unit: a.unit, perL }, h);
+  }
+  return REFUSE_TABLE.test(t) ? { refuse: 'The figures sit in table columns. Read the phrase.' } : null;
+}
+
+const NON_DOSE_MODELS = new Set(['per_area', 'area_per_unit', 'pack_covers_area', 'per_length', 'grout_kg_per_m2', 'grout_area_per_pack', 'joint_length_per_pack', 'yield_per_pack', 'coverage_by_condition', 'length_per_pack_by_section', 'published_bags_per_m3']);
+
+/** The normal form for a dosage fact, or null when the fact is not a dose (the area, length and coverage kinds are never touched). */
+function dosageRate(fact) {
+  if (!fact) return null;
+  const m = fact.parsed;
+  if (m && NON_DOSE_MODELS.has(m.model)) return null;
+  const d = detectDosage(fact.text);
+  if (d && d.refuse) return { ok: false, reason: d.refuse };
+  if (d) return { ok: true, ...d };
+  return null;
+}
+
+/** Which input a rate needs: area | length | volume | cement | mix | water. */
+export function inputFor(rate) {
+  if (!rate || !rate.ok) return null;
+  switch (rate.kind) {
+    case 'per-m2': case 'm2-per-unit': case 'pack-covers': return 'area';
+    case 'per-m': return 'length';
+    case 'per-m3': return 'volume';
+    case 'dose-per-mass': case 'dose-pct': return rate.basis === 'mix' ? 'mix' : 'cement';
+    case 'dose-per-water': return 'water';
+    default: return null;
+  }
+}
+export const DOSE_KINDS = ['dose-per-mass', 'dose-pct', 'dose-per-water', 'per-m3'];
 
 /**
  * Turn a stored rate into a normal form.
@@ -43,6 +166,8 @@ export function fmtQty(amount, unit) {
  */
 export function normaliseFact(fact) {
   const m = fact && fact.parsed;
+  const dose = dosageRate(fact);
+  if (dose) return dose;
   if (!m) return { ok: false, reason: 'The statement could not be read as a rate. Read the phrase.' };
   if (fact.calc_ready === false) return { ok: false, reason: 'The statement does not say what the figure is per. Read the phrase.' };
   const perCoat = m.per === 'coat' || m.per === 'layer';
@@ -76,7 +201,7 @@ export function quantity(rate, job) {
   const a = num(job.allowancePct) && job.allowancePct > 0 ? job.allowancePct : 0;
   const k = 1 + a / 100;
   const need = (key, label) => ({ ok: false, need: key, reason: 'Enter ' + label + ' to work this out.' });
-  let lo, hi, u;
+  let lo, hi, u, typical = null;
   switch (rate.kind) {
     case 'per-m2': {
       if (!num(job.area) || job.area <= 0) return need('area', 'an area in m2');
@@ -112,9 +237,23 @@ export function quantity(rate, job) {
       if (!b1 || !b2) return { ok: false, reason: 'Unit not supported. Read the phrase.' };
       lo = b1.amount * job.volume * k; hi = b2.amount * job.volume * k; u = b1.unit; break;
     }
+    case 'dose-per-mass': case 'dose-pct': case 'dose-per-water': {
+      const key = inputFor(rate);
+      const size = key === 'cement' ? job.cementKg : key === 'mix' ? job.mixKg : job.waterL;
+      if (!num(size) || size <= 0) return need(key, key === 'cement' ? 'the mass of cement or binder in kg (1 tonne is 1000 kg)' : key === 'mix' ? 'the mass of the mix in kg' : 'the volume of water in litres');
+      const b1 = rate.kind === 'dose-pct' ? { amount: rate.lo / 100, unit: 'kg' } : toBase(rate.lo, rate.unit), b2 = rate.kind === 'dose-pct' ? { amount: rate.hi / 100, unit: 'kg' } : toBase(rate.hi, rate.unit);
+      if (!b1 || !b2) return { ok: false, reason: 'Unit not supported. Read the phrase.' };
+      const f = rate.kind === 'dose-pct' ? size : size / (rate.kind === 'dose-per-water' ? rate.perL : rate.per);
+      lo = b1.amount * f * k; hi = b2.amount * f * k; u = b1.unit;
+      if (rate.typical != null) { const bt = rate.kind === 'dose-pct' ? { amount: rate.typical / 100, unit: 'kg' } : toBase(rate.typical, rate.unit); if (bt) typical = rnd(bt.amount * f * k); }
+      break;
+    }
     default: return { ok: false, reason: 'Not worked out here. Read the phrase.' };
   }
-  return { ok: true, low: rnd(lo), high: rnd(hi), unit: u, allowancePct: a, range: Math.abs(hi - lo) > 1e-6 };
+  const out = { ok: true, low: rnd(lo), high: rnd(hi), unit: u, allowancePct: a, range: Math.abs(hi - lo) > 1e-6 };
+  if (rate.limit) { out.limit = rate.limit; out.range = false; }
+  if (typical != null) out.typical = typical;
+  return out;
 }
 
 /**
@@ -163,8 +302,42 @@ function suggest(sizes, q) {
   return { mix: r.counts.map((n, i) => n > 0 ? { size: S[i].size, unit: disp(S[i].unit), count: n } : null).filter(Boolean), total: rnd(r.total), over: rnd(r.total - q) };
 }
 
-/** One text line for a pack option, for example "3 x 10 L (30 L)". */
-export function packText(o) { return o.count + ' x ' + fmt(o.size) + ' ' + o.unit + ' (' + fmtQty(o.total, o.unit === 'mL' ? 'L' : o.unit === 'g' ? 'kg' : o.unit) + ')'; }
+
+/**
+ * Whole packs for a LOW to HIGH quantity, rounded up, per published pack size (largest first).
+ * options: [{ size, unit, countLow, countHigh, totalLow, totalHigh }]. A single figure gives countLow = countHigh.
+ * A rate in kg with packs in L (or the reverse) cannot be converted without a density, and none is assumed.
+ */
+export function packRange(packs, qty) {
+  const lowQ = { amount: qty.low, unit: qty.unit }, highQ = { amount: qty.high, unit: qty.unit };
+  const hi = packOptions(packs, highQ);
+  if (!hi.options.length) return { options: [], note: hi.note };
+  const lo = packOptions(packs, lowQ);
+  const options = hi.options.map((o, i) => ({ size: o.size, unit: o.unit, countLow: lo.options[i].count, countHigh: o.count, totalLow: lo.options[i].total, totalHigh: o.total }));
+  return { options };
+}
+/** One text line for a pack range, for example "1 to 2 x 10 L". */
+export function packRangeText(o, limit) {
+  const size = fmt(o.size) + ' ' + o.unit;
+  if (limit === 'max') return 'up to ' + o.countHigh + ' x ' + size;
+  if (limit === 'min') return 'at least ' + o.countLow + ' x ' + size;
+  return (o.countLow === o.countHigh ? o.countHigh : o.countLow + ' to ' + o.countHigh) + ' x ' + size;
+}
+/** The published range as the page prints it: "400 mL to 2,000 mL per 100 kg of cement or binder". */
+export function fmtK(n) { const [i, d] = fmt(n).split('.'); return i.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (d ? '.' + d : ''); }
+export function doseBasisText(rate) {
+  if (!rate || !rate.ok) return '';
+  const u = rate.unit;
+  const sp = u === '%' ? '' : ' ';
+  const one = (x) => fmtK(x) + sp + u;
+  const range = rate.lo === rate.hi ? one(rate.lo) : one(rate.lo) + ' to ' + one(rate.hi);
+  const lead = rate.limit === 'max' ? 'up to ' : rate.limit === 'min' ? 'at least ' : '';
+  const per = rate.kind === 'dose-per-mass' ? ' per ' + fmtK(rate.per) + ' kg of ' + (rate.basis === 'mix' ? 'mix' : 'cement or binder')
+    : rate.kind === 'dose-pct' ? ' by weight of cement or binder'
+    : rate.kind === 'dose-per-water' ? ' per ' + fmtK(rate.perL) + ' L of water'
+    : rate.kind === 'per-m3' ? ' per m3 of concrete or mix' : '';
+  return lead + (rate.limit ? one(rate.hi) : range) + per;
+}
 
 /** Full result for one rate: quantity, pack options, and the basis. Convenience for the sheet and the calculator. */
 export function work(rate, packs, job) {
@@ -172,5 +345,8 @@ export function work(rate, packs, job) {
   if (!q.ok) return q;
   const hiQ = { amount: q.high, unit: q.unit };
   if (q.unit === 'm') return { ...q, packs: { options: [], note: 'Quantity is per metre; see the data sheet for pack coverage.' } };
-  return { ...q, packs: packOptions(packs, hiQ), packsFor: 'high' };
+  if (q.unit === 'bags') return { ...q, packs: { options: [], note: 'The figure is already in bags.' } };
+  const out = { ...q, packs: packOptions(packs, hiQ), packsFor: 'high' };
+  if (DOSE_KINDS.includes(rate.kind)) out.packRange = packRange(packs, q);
+  return out;
 }

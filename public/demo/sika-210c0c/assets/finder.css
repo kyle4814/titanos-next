@@ -19,6 +19,7 @@
 .calc-row{border-top:1px solid var(--grey);padding:.7rem 0}
 .calc-phrase{font-size:.9rem;color:#333;margin:0 0 .3rem}
 .calc-qty{margin:.2rem 0}
+.calc-basis,.calc-typical{margin:.2rem 0;font-size:.95rem}
 .calc-packs{margin:.2rem 0 .5rem}
 .calc-note{font-size:.9rem;color:#333;margin:.2rem 0}
 .bom-table td{vertical-align:top}

@@ -5,7 +5,6 @@ import { derived, derivedLite, groupIndex, data, documents, docOk, docHref } fro
 import { getSearcher } from './searcher.js';
 import { productCard, breadcrumb, pager, emptyState, placeholder, packshot, addButton, stockMedia, creditLine } from './components.js';
 import { notFound } from './views.js';
-import { finderPanels } from './finder/panels.js';
 import { mergeDocStatus, extraTabs } from './apply_data.js';
 import { specPanel, specNone } from './specs.js';
 
@@ -87,7 +86,25 @@ export async function productView(ctx) {
   const tablist = h('ul', { class: 'tablist', role: 'tablist', 'aria-label': 'Product information' });
   const tabBtns = tabs.map((t, i) => h('button', { type: 'button', role: 'tab', id: 'tab-' + t.id, 'aria-selected': 'false', 'aria-controls': 'tabpanel', tabindex: '-1', onclick: () => select(i), onkeydown: (e) => { const k = e.key; let n = null; if (k === 'ArrowRight') n = (i + 1) % tabs.length; else if (k === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length; else if (k === 'Home') n = 0; else if (k === 'End') n = tabs.length - 1; if (n !== null) { e.preventDefault(); select(n, true); } } }, t.label));
   tabBtns.forEach((b) => tablist.append(h('li', { role: 'presentation' }, b)));
-  function select(i, focus) { active = i; tabBtns.forEach((b, j) => { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; }); panelHost.setAttribute('aria-labelledby', 'tab-' + tabs[i].id); panelHost.replaceChildren(tabs[i].body()); if (focus) tabBtns[i].focus(); const u = new URLSearchParams(ctx.params); u.set('tab', tabs[i].id); history.replaceState(null, '', hashHref('/product/' + id, Object.fromEntries(u))); }
+  // the strip scrolls sideways when it overflows: the active tab is brought into view, an edge fade says there is more, a mouse can drag it
+  const tabsBox = h('div', { class: 'tabs' }, tablist);
+  const moreState = () => { const max = tablist.scrollWidth - tablist.clientWidth; const l = tablist.scrollLeft > 2, r = tablist.scrollLeft < max - 2; tabsBox.dataset.more = l && r ? 'both' : l ? 'left' : r ? 'right' : ''; };
+  const showTab = (i, smooth) => {
+    const b = tabBtns[i]; if (!b || !tablist.isConnected) return;
+    const lr = tablist.getBoundingClientRect(), br = b.getBoundingClientRect(), pad = 24;
+    let d = 0; if (br.left < lr.left + pad) d = br.left - lr.left - pad; else if (br.right > lr.right - pad) d = br.right - lr.right + pad;
+    if (d) tablist.scrollTo({ left: Math.max(0, tablist.scrollLeft + d), behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' });
+    moreState();
+  };
+  tablist.addEventListener('scroll', moreState, { passive: true });
+  addEventListener('resize', () => { if (tablist.isConnected) { showTab(active); moreState(); } });
+  let drag = null;
+  tablist.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button === 0) drag = { x: e.clientX, left: tablist.scrollLeft, moved: false }; });
+  tablist.addEventListener('pointermove', (e) => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 4) { drag.moved = true; tablist.classList.add('is-dragging'); } if (drag.moved) tablist.scrollLeft = drag.left - dx; });
+  const endDrag = () => { if (!drag) return; const moved = drag.moved; drag = null; tablist.classList.remove('is-dragging'); if (moved) { tablist.dataset.justDragged = '1'; setTimeout(() => { delete tablist.dataset.justDragged; }, 0); } };
+  tablist.addEventListener('pointerup', endDrag); tablist.addEventListener('pointerleave', endDrag); tablist.addEventListener('pointercancel', endDrag);
+  tablist.addEventListener('click', (e) => { if (tablist.dataset.justDragged) { e.stopPropagation(); e.preventDefault(); } }, true);
+  function select(i, focus) { active = i; tabBtns.forEach((b, j) => { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; }); panelHost.setAttribute('aria-labelledby', 'tab-' + tabs[i].id); panelHost.replaceChildren(tabs[i].body()); if (focus) tabBtns[i].focus({ preventScroll: true }); showTab(i); const u = new URLSearchParams(ctx.params); u.set('tab', tabs[i].id); history.replaceState(null, '', hashHref('/product/' + id, Object.fromEntries(u))); }
 
   const heroBtns = h('div', { class: 'docbar' },
     pds ? h('a', { class: 'btn btn--text', href: docHref(pds), target: '_blank', rel: 'noopener noreferrer' }, icon('download', 'i--sm'), 'Product data sheet') : null,
@@ -95,7 +112,7 @@ export async function productView(ctx) {
     docs.length ? h('button', { class: 'btn btn--text', type: 'button', onclick: () => { const i = tabs.findIndex((t) => t.id === 'documents'); select(i); document.getElementById('tabpanel').scrollIntoView({ block: 'start' }); } }, 'Show all documents') : null);
 
   const related = relatedProducts(p, dv);
-  const finderExtra = await finderPanels(p);
+  const finderExtra = await (await import('./finder/panels.js')).finderPanels(p);
   const el = h('div', { class: 'container' }, breadcrumb(crumbs),
     h('div', { class: 'pdp' },
       h('div', null,
@@ -112,9 +129,10 @@ export async function productView(ctx) {
         heroBtns,
         h('p', { class: 'source-line' }, 'Source: ', h('a', { class: 'link link--ext', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, 'this product on the company website'), `, read ${String(p.fetched || '').slice(0, 10)}.`))),
     finderExtra,
-    h('div', { class: 'tabs' }, tablist), panelHost,
+    tabsBox, panelHost,
     related.length ? h('section', { class: 'section' }, h('div', { class: 'layout-head' }, h('h2', null, 'Related products')), h('div', { class: 'grid grid--4' }, related.map((r) => productCard(r, dv)))) : null);
   select(active);
+  requestAnimationFrame(() => { showTab(active); moreState(); setTimeout(() => { showTab(active); moreState(); }, 250); });
   return { el, title: p.name, nav: path[0] === 'industry' ? 'industry' : 'construction' };
 }
 

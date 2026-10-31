@@ -38,6 +38,14 @@ export function checkAnswer(question, ans) {
     if (c.table) for (const col of c.table.cols) for (const n of numbersIn(col)) allowed.add(n);
     if (c.type === 'system') { for (const n of numbersIn(c.title)) allowed.add(n); for (const r of c.table.rows) for (const n of numbersIn(r[1])) allowed.add(n); } // product names in a system table are identifiers, like a card's product name
     for (const l of c.lines || []) if (l.label === 'Primer it names') for (const n of numbersIn(l.text)) allowed.add(n); // names of catalogue products
+    if (c.calc && c.calc.inputs.area_m2 === undefined && ('cement_kg' in c.calc.inputs)) { // dosage card: every quantity must be a published sentence number x the size you gave / the stated basis, and pack counts the ceiling of that over a published pack
+      const I = c.calc.inputs; const sizes = [I.cement_kg, I.mix_kg, I.water_l, I.volume_m3].filter((x) => x); const sn = [...new Set(c.facts.flatMap((f) => numbersIn(f.sentence)))].map(Number).filter((x) => Number.isFinite(x)); for (const x of [...sn]) for (const y of [...sn]) { if (x !== y) { sn.push(x + y); sn.push(Math.abs(x - y)); } } // "350 ml +/- 100 ml" is 250 to 450
+      const qs = new Set(); for (const s of sn) for (const z of sizes) for (const u of [1, 0.001, 0.01, 1000]) for (const P of [1, 20, 100, 200, 1000]) qs.add(s * z * u / P);
+      for (const q of qs) { allowed.add(r2(q)); allowed.add(String(Math.round(q * 1e4) / 1e4)); for (const id of I.facts) for (const sz of packsOf(id.split(':')[0])) allowed.add(String(Math.ceil(q / Number(sz.amount) - 1e-9))); }
+      for (const z of sizes) { allowed.add(r2(z)); allowed.add(r2(z / 1000)); allowed.add(Number(z).toLocaleString('en-AU').replace(/\s/g, '')); }
+      for (const s of sn) for (const k of [1, 1000]) allowed.add(r2(s * k)); // the published figures, restated with thousands separators or in the next unit
+      for (const p of I.packs || []) allowed.add(String(Number(p.amount)));
+    } else
     if (c.calc) { // recompute from the lane's own parsed facts
       const area = c.calc.inputs.area_m2; allowed.add(r2(area));
       for (const id of c.calc.inputs.facts) {

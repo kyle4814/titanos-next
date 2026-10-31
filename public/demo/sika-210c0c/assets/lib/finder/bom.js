@@ -1,7 +1,7 @@
 // T13: "Add to project" with the worked quantity, and the bill of materials on the projects page (table, print, CSV).
 import { h, icon, announce } from '../util.js';
 import { projects } from '../projects.js';
-import { fmtQty, fmt, packText, ESTIMATE_LINE, NO_RATE_TEXT } from './calc.js';
+import { fmtQty, fmt, packText, ESTIMATE_LINE, NO_RATE_TEXT } from './qty.js';
 import { chipFor } from './model.js';
 
 const plain = (s) => String(s || '').replace(/[–—]/g, '-');
@@ -23,7 +23,7 @@ export function bomRows(list, byId) {
     if (!c) return [plain(name), 'No quantity worked out', it.qty + ' x ' + (it.unit || 'pack'), 'Entered by hand', '', ''];
     const qty = c.low === c.high ? fmtQty(c.low, c.unit) : fmtQty(c.low, c.unit) + ' to ' + fmtQty(c.high, c.unit);
     const packs = (c.packs || []).map(packText).join('; ') || (c.packNote || 'No pack size in the same unit');
-    const basis = (c.area ? `${fmt(c.area)} m2` : c.length ? `${fmt(c.length)} m` : c.volume ? `${fmt(c.volume)} m3` : '') + (c.thickness ? `, ${fmt(c.thickness)} mm` : '') + (c.allowancePct ? `, allowance ${fmt(c.allowancePct)}%` : ', no allowance') + '. ' + plain(c.basis || '');
+    const basis = (c.area ? `${fmt(c.area)} m2` : c.length ? `${fmt(c.length)} m` : c.volume ? `${fmt(c.volume)} m3` : c.cementKg ? `${fmt(c.cementKg)} kg of cement or binder` : c.mixKg ? `${fmt(c.mixKg)} kg of mix` : c.waterL ? `${fmt(c.waterL)} L of water` : '') + (c.thickness ? `, ${fmt(c.thickness)} mm` : '') + (c.allowancePct ? `, allowance ${fmt(c.allowancePct)}%` : ', no allowance') + '. ' + plain(c.basis || '');
     return [plain(name), qty, packs, basis.trim(), c.sourceUrl || '', chipFor(c.sourceUrl)];
   });
 }

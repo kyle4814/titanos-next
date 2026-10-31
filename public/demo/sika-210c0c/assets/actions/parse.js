@@ -46,6 +46,10 @@ export function parseNumbers(text) {
   const ts = new RegExp(N + '\\s*(?:x|by|\\*)\\s*' + N + '(?:\\s*mm)?').exec(t); if (ts && !/m2|sqm/.test(ts[0])) out.tileSize = [num(ts[1]), num(ts[2])];
   if (/\bmosaic/.test(t)) out.mosaic = true;
   const cem = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:total\\s*)?cement(?:itious)?'), t); if (cem != null && cem > 0) out.cementitious = cem;
+  const cemT = first(new RegExp(N + '\\s*(?:tonnes?|tons?|t)\\s*(?:of\\s*)?(?:total\\s*)?(?:cement|cementitious|binder)'), t); if (cemT != null && cemT > 0 && out.cementitious == null) out.cementitious = cemT * 1000;
+  const cemB = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:total\\s*)?binder'), t); if (cemB != null && cemB > 0 && out.cementitious == null) out.cementitious = cemB;
+  const mix = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:sand\\s*\\/?\\s*cement\\s*|dry\\s*)?mix\\b'), t); if (mix != null && mix > 0) out.mix = mix;
+  const wat = first(new RegExp(N + '\\s*(?:litres?|liters?|l)\\s*(?:of\\s*)?water\\b'), t); if (wat != null && wat > 0) out.water = wat;
   if (area != null && area > 0) out.area = area;
   if (vol != null && vol > 0) out.volume = vol;
   if (len != null && len > 0 && out.area == null) out.length = len;
@@ -175,7 +179,7 @@ export function route(text) {
   if (SAFETY_RE.test(t) && !/\b(store|storage|stored)\b/i.test(t) || /\b(sds|msds|ppe|gloves?|respirator|hazard|signal word|first aid)\b/i.test(t) || /\bstor(?:e|age|ed)\b/i.test(t) && /\b(how|where|should|can)\b/i.test(t)) return { action: 'safety', rest: t };
   if (COMPAT_RE.test(t) && !CALC_RE.test(t)) return { action: 'compat', rest: t };
   const n = parseNumbers(t);
-  if (CALC_RE.test(t) && (n.area || n.length || n.volume)) return { action: 'calc', rest: t };
+  if (CALC_RE.test(t) && (n.area || n.length || n.volume || n.cementitious || n.mix || n.water)) return { action: 'calc', rest: t };
   if (SYSTEM_RE.test(t) && /tile|tiling|grout|membrane|waterproof|porcelain|ceramic|mosaic|stone/i.test(t)) return { action: 'system', rest: t };
   if (/^\s*(?:now|ok|okay|and)?\s*(?:work out|calculate)\s+(?:the )?(?:quantities|packs|amounts)\b/i.test(t)) return { action: 'calc', rest: t };
   return null;
