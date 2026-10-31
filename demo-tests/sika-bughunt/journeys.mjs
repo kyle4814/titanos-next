@@ -74,7 +74,7 @@ export async function journeys(ctx, sz, r) {
     await s.step('add first grout to project', async () => { await p.locator('.product-card button:has-text("Add to project")').first().click(); await wait(p); });
     await s.step('open my projects', async () => { await p.goto(base + '#/projects'); await wait(p, 200); }, { expectRoute: /projects/ });
     await s.step('project lists both products', async () => { const n = await p.locator('main li, main tr, main .card').count(); if (n < 2) s.note('P1', 'project-missing-items', `${n} list entries after adding 2`); });
-    await s.step('reload keeps the list (localStorage)', async () => { await p.reload(); await wait(p, 300); const n = await p.locator('main li, main tr, main .card').count(); if (n < 2) s.note('P1', 'project-lost-on-reload', `${n} entries after reload`); });
+    await s.step('reload keeps the list (localStorage)', async () => { await p.reload(); await p.waitForSelector('main:not([aria-busy])', { timeout: 15000 }).catch(() => {}); await wait(p, 300); const n = await p.locator('main li, main tr, main .card').count(); if (n < 2) s.note('P1', 'project-lost-on-reload', `${n} entries after reload`); });
     await s.step('remove an item', async () => { const b = p.locator('main button:has-text("Remove"), main button[aria-label^="Remove"]').first(); if (await b.count()) { await b.click(); await wait(p); } });
     await s.step('ask the advisor for the data sheet', async () => { await p.goto(base + '#/projects'); const ask = p.getByRole('button', { name: /Ask the advisor/ }).first(); if (await ask.count()) await ask.click(); await wait(p, 300); });
     await explore(s, ctx, r, '#/projects', 6);
@@ -187,7 +187,7 @@ export async function journeys(ctx, sz, r) {
     await s.step('open the menu and follow its first link', async () => { await p.goto(base + '#/'); await wait(p, 300); await openMenu(s); await wait(p, 350); const a = p.locator('.drawer a[href^="#/"], .mainnav a[href^="#/category/"]').locator('visible=true').first(); if (await a.count()) { await a.click(); await wait(p, 300); } });
     await s.step('rotate: the layout survives a viewport swap', async () => { await p.setViewportSize({ width: s.H, height: s.W }); await wait(p, 300); });
     await s.step('rotate back', async () => { await p.setViewportSize({ width: s.W, height: s.H }); await wait(p, 300); });
-    await s.step('open advisor and use a suggested question', async () => { await p.goto(base + '#/'); await p.getByRole('button', { name: /Advisor/ }).first().click(); await wait(p, 300); const q = p.locator('.assistant button:has-text("How much adhesive")').first(); if (await q.count()) await q.click(); await wait(p, 1000); });
+    await s.step('open advisor and use a suggested question', async () => { await p.goto(base + '#/'); await p.getByRole('button', { name: /Advisor/i }).first().click(); await wait(p, 300); const q = p.locator('.assistant button:has-text("How much adhesive")').first(); if (await q.count()) await q.click(); await wait(p, 1000); });
     await explore(s, ctx, r, '#/', 10);
     await explore(s, ctx, r, '#/products?q=sealant', 10);
     await s.close();
@@ -220,7 +220,7 @@ export async function journeys(ctx, sz, r) {
   all.push((async () => {
     const s = await mk('offline-user', { noRoute: true }); const p = s.page;
     await s.step('about page', async () => { await p.goto(base + '#/about'); await wait(p, 400); });
-    await s.step('service worker takes control within 15 s', async () => { const ok = await p.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 15000 }).then(() => true).catch(() => false); if (!ok) s.note('P2', 'sw-not-controlling', 'offline mode never took control in 15 s'); });
+    await s.step('service worker takes control within 45 s (it registers after a 5 s quiet period, then precaches 7.7 MB; 5.9 s measured alone)', async () => { const ok = await p.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 45000 }).then(() => true).catch(() => false); if (!ok) s.note('P2', 'sw-not-controlling', 'offline mode never took control in 45 s'); });
     await s.step('visit routes while online to warm', async () => { for (const h of ['#/', '#/products', '#/selector', '#/documents']) { await p.goto(base + h); await wait(p, 150); } });
     await s.step('go offline and open a visited route', async () => { await s.ctx.setOffline(true); await p.goto(base + '#/products?q=grout'); await wait(p, 500); });
     await s.step('offline finder still answers', async () => { const n = await p.locator('.product-card').count(); if (!n) s.note('P2', 'offline-finder-empty', 'no products offline after warm-up'); });

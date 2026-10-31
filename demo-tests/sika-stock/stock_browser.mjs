@@ -56,7 +56,7 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   { const ctx2 = await b.newContext({ viewport: { width: W, height: H } }); const p2 = await ctx2.newPage(); const urls = []; p2.on('request', (r) => urls.push(r.url()));
     await p2.goto(s.base + '#/about', { waitUntil: 'load' }); await p2.waitForSelector('.prose li'); await p2.waitForTimeout(800);
     const txt = await p2.evaluate(() => document.querySelector('.prose').innerText);
-    t(`${sz} About states 291 packshots and 221 illustrative products and does not fetch products.json`, /291 products show the packshot/.test(txt) && /\(221 products\)/.test(txt) && !urls.some((u) => /\/data\/products\.json/.test(u)), JSON.stringify([/291 products show/.test(txt), /\(221 products\)/.test(txt), urls.filter((u) => /products\.json/.test(u)).length])); await ctx2.close(); }
+    t(`${sz} About states 512 products, 291 packshots and 221 illustrative products and does not fetch products.json`, /all 512 products carry a picture\. 291 show the packshot/.test(txt) && /\(221 products\)/.test(txt) && !urls.some((u) => /\/data\/products\.json/.test(u)), JSON.stringify([/all 512 products carry/.test(txt), /\(221 products\)/.test(txt), urls.filter((u) => /products\.json/.test(u)).length])); await ctx2.close(); }
   // credits page reachable from About
   await page.goto(s.base + '#/about', { waitUntil: 'load' }); await page.waitForSelector('a[href="#/credits"]'); await page.click('a[href="#/credits"]'); await page.waitForSelector('.credits-list li');
   const cr = await page.evaluate(() => ({ n: document.querySelectorAll('.credits-list li').length, ov: document.documentElement.scrollWidth - document.documentElement.clientWidth }));

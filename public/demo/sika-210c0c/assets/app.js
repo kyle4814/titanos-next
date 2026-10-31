@@ -15,7 +15,7 @@ import { warmProduct } from './lib/apply_data.js';
 import { initOutdoor, mountOutdoorButtons } from './lib/outdoor.js'; // wave 2: outdoor mode (own stylesheet, loaded only when on)
 
 // speed: start the files the opening route needs the moment the script runs, in parallel with config.json, instead of one after another
-{ const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) warmProduct(decodeURIComponent(pm[1])); }
+{ const h0 = location.hash || '#/'; dataApi.catsLite().catch(() => {}); if (/^#\/selector/.test(h0)) dataApi.selector().catch(() => {}); const pm = /^#\/product\/([^?]+)/.exec(h0); if (pm) { const pid = decodeURIComponent(pm[1]); dataApi.has('p', pid).then((ok) => { if (ok) warmProduct(pid); }).catch(() => {}); } /* the id list (4 KB) is fetched while the modules load; only a real product is warmed, so a mistyped address never requests a missing file */ }
 
 initOutdoor();
 const main = $('#main');

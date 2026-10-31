@@ -67,7 +67,7 @@ export async function sheetPanels(parsed, names) {
 /** Route #/system-data/<slug>: the programme and draft specification for one system sheet. */
 export async function systemDataView(ctx) {
   const slug = ctx.slug; const { data } = await import('./data.js');
-  const r = await fetch(new URL(`../../systems/${encodeURIComponent(slug)}/index.html`, import.meta.url)).catch(() => null);
+  const r = (await data.has('sys', slug)) ? await fetch(new URL(`../../systems/${encodeURIComponent(slug)}/index.html`, import.meta.url)).catch(() => null) : null;
   if (!r || !r.ok) return { el: h('div', { class: 'container section' }, h('h1', null, 'System not found'), h('p', null, 'There is no system sheet with that name.')), title: 'System not found', nav: 'selector' };
   const parsed = parseSheet(await r.text());
   const names = new Map((await data.index()).map((p) => [p.id, p.n]));

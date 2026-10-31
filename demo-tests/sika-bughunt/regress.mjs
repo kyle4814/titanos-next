@@ -64,6 +64,21 @@ for (const [route, id] of [['#/products', '#finder-q'], ['#/documents', '#doc-q'
     t(`R11 search "${q}" puts ${want} first`, top.toLowerCase() === want.toLowerCase(), top || 'no results'); }
   await ctx.close(); }
 
+// R12 a mistyped product or system address says "not found" without requesting a file that does not exist (P1: a console 404 on #/product/does-not-exist and #/system-data/not-a-slug)
+for (const [route, ok200] of [['#/product/does-not-exist', false], ['#/system-data/not-a-slug', false], ['#/product/davco-grey-one-potadhesive', true], ['#/system-data/porcelain-on-concrete-internal-wet-floor', true]]) {
+  const { ctx, p } = await open(1440, 900); const bad = []; p.on('response', (r) => { if (r.status() >= 400) bad.push(r.status() + ' ' + r.url().replace(base, '')); }); p.on('console', (m) => { if (m.type() === 'error') bad.push('console ' + m.text().slice(0, 80)); });
+  await p.goto(base + route); await ready(p); await p.waitForTimeout(600); const txt = await p.locator('main').innerText(); const h1 = await p.locator('h1').first().innerText().catch(() => '');
+  t(`R12 ${route}: ${ok200 ? 'opens' : 'says not found'}, no failed request, no console error`, bad.length === 0 && (ok200 ? !/not find|not found/i.test(h1 + txt.slice(0, 120)) : /not find|not found|no system sheet/i.test(txt)), JSON.stringify([bad, txt.slice(0, 80)])); await ctx.close(); }
+
+// R13 About states the real counts: the first "N products" is all 512, then 291 packshots and 221 illustrative (P1: it said 291 vs 512 because the stock lane changed the sentence)
+{ const { ctx, p } = await open(1440, 900); const urls = []; p.on('request', (r) => urls.push(r.url())); await p.goto(base + '#/about'); await ready(p); await p.waitForTimeout(500); const txt = await p.locator('main').innerText();
+  t('R13 About: first "N products" is 512, with 291 packshots and 221 illustrative; products.json not fetched', (/([\d,]+)\s+products/.exec(txt) || [])[1] === '512' && /291 show the packshot/.test(txt) && /\(221 products\)/.test(txt) && !urls.some((u) => /data\/products\.json/.test(u)), txt.slice(0, 100)); await ctx.close(); }
+
+// R14 on a phone and a tablet the advisor is opened by a button whose accessible name says "advisor" (the thumb bar shows "Ask"; its name is "Ask the advisor") and a suggested question works
+for (const [w, h] of [[390, 844], [768, 1024]]) { const { ctx, p } = await open(w, h, { hasTouch: true, isMobile: w < 600 }); await p.goto(base + '#/'); await ready(p);
+  const b = p.getByRole('button', { name: /advisor/i }).first(); let ok = false; try { await b.click({ timeout: 5000 }); const q = p.locator('.assistant button:has-text("How much adhesive")').first(); await q.click({ timeout: 5000 }); ok = true; } catch { ok = false; }
+  t(`R14 ${w} px: the advisor opens from a button named for the advisor and a suggested question can be pressed`, ok, ''); await ctx.close(); }
+
 await browser.close();
 console.log(`REGRESSION ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

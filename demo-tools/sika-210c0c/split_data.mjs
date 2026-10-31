@@ -29,6 +29,9 @@ export async function splitData(PORTAL) {
   wr('s/docs.json', { rows, pn });
   // guides: only the pages the Guides page lists, only the fields it reads
   wr('s/guides.json', rd('pages.json').filter((p) => p.kind === 'guide' || p.kind === undefined).map((p) => ({ url: p.url, title: p.title, metaDescription: p.metaDescription, excerpt: p.excerpt, headings: p.headings, section: p.section })));
+  // id lists, so a mistyped #/product/<id> or #/system-data/<slug> is answered "not found" before any request (a 404 for a file that does not exist is a console error)
+  wr('s/ids.json', index.map((e) => e.id).sort());
+  wr('s/sys.json', fs.readdirSync(path.join(PORTAL, 'systems'), { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort());
   let n = 0;
   for (const f of fs.readdirSync(path.join(D, 'p'))) {
     if (!f.endsWith('.json')) continue;

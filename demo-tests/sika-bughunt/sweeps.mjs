@@ -41,7 +41,7 @@ export async function sweeps(s, ctx, r, sz) {
     await go('#/product/' + pr.id, 'product ' + pr.id);
     const o = await p.evaluate(() => ({ h1: document.querySelector('h1')?.innerText || '', tabs: [...document.querySelectorAll('[role=tab]')].map((t) => t.innerText.trim()), docLinks: [...document.querySelectorAll('main a[href*=".pdf"]')].map((a) => a.getAttribute('href')), crumbs: [...document.querySelectorAll('.breadcrumb a')].map((a) => a.getAttribute('href')), ext: [...document.querySelectorAll('main a[href^="http"]')].map((a) => ({ h: a.href, t: a.target, rel: a.rel })) })).catch(() => ({}));
     if (norm(o.h1 || '') !== norm(pr.n)) s.note('P1', 'product-heading-wrong', `${pr.id}: "${o.h1}" vs "${pr.n}"`);
-    for (const e of (o.ext || [])) { if (!/^https:\/\/aus\.sika\.com\//.test(e.h)) s.note('P1', 'external-link-wrong-host', `${pr.id}: ${e.h}`); else if (e.t !== '_blank' || !/noopener/.test(e.rel)) s.note('P2', 'external-link-attrs', `${pr.id}: target=${e.t} rel=${e.rel}`); }
+    for (const e of (o.ext || [])) { if (!/^https:\/\/(aus\.sika\.com|commons\.wikimedia\.org|creativecommons\.org)\//.test(e.h)) s.note('P1', 'external-link-wrong-host', `${pr.id}: ${e.h}`); else if (e.t !== '_blank' || !/noopener/.test(e.rel)) s.note('P2', 'external-link-attrs', `${pr.id}: target=${e.t} rel=${e.rel}`); }
     for (const t of (o.tabs || [])) {
       await s.step(`tab ${t} on ${pr.id}`, async () => { await p.getByRole('tab', { name: t, exact: true }).click(); });
       if (t === 'Specification') await p.waitForFunction(() => !document.querySelector('[role=tabpanel] .skeleton'), null, { timeout: 8000 }).catch(() => s.note('P1', 'spec-tab-never-loads', pr.id));

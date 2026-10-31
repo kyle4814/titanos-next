@@ -51,7 +51,7 @@ function docRow(d, dv, withProduct = false) {
 /* ------------------------------------------------------------------ product detail */
 export async function productView(ctx) {
   const id = ctx.rest; const dvP = derivedLite();
-  let p; try { p = await data.product(id); } catch { return notFound(ctx, 'product'); }
+  let p; try { if (!(await data.has('p', id))) return notFound(ctx, 'product'); p = await data.product(id); } catch { return notFound(ctx, 'product'); }
   let dv = await dvP; // speed: related products are embedded in the product file (p.rel); an older file without them falls back to the group index
   if (!p.rel) { const index = await groupIndex(p.category); dv = { ...dv, index, byId: new Map(index.map((x) => [x.id, x])) }; }
   insights.view(id); // T11

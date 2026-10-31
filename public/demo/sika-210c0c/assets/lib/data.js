@@ -37,6 +37,8 @@ export const data = {
   catsLite: () => (typeof navigator !== 'undefined' && navigator.onLine === false ? Promise.resolve(null) : getJSON('cats.lite.json', true)).then((j) => j || data.categories().then((c) => ({ categories: c, stats: null }))), // speed: slim categories + counts (split build); falls back to the full file
   manifest,
   product: (id) => getJSON(`p/${encodeURIComponent(id)}.json`),
+  /** Does this product id / system slug exist? From the small id lists (data/s/ids.json, sys.json); a missing list or offline means "assume yes", so the normal path decides. */
+  has: async (kind, id) => { const j = await getJSON(kind === 'sys' ? 's/sys.json' : 's/ids.json', true); return !Array.isArray(j) || j.includes(id); },
   specIndex: () => opt('specs/index.json').catch(() => null), // offline or missing: no Specification tab, no error
   spec: (id) => getJSON(`specs/${encodeURIComponent(id)}.json`),
   knowledge: (name) => opt(`knowledge/${name}.json`),
