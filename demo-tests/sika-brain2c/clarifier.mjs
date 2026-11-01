@@ -14,7 +14,7 @@ ok(!/\d/.test(pick('Davco Easy Grout', 'tiles 600x600', ['A', 'B'])), 'a job tex
 ok(!/[–—]/.test(pick('X', 'floor tiles') + notPublished('That', 'Y')), 'voice text has no em or en dash');
 const brain = makeBrain(); await brain.boot();
 // the quantity clarifier offers a recommendation chip and the documented-fit picks; every option is answered
-let r = await brain.ask('how long does floor tile adhesive for 40 m2 take to cure', null);
+let r = await brain.ask('how long does tile adhesive take to cure', null);
 const ch = r.cards[0];
 ok(ch.type === 'choose' && ch.followups[0] === RECOMMEND_CHIP, 'the product clarifier opens with the recommend chip');
 ok(ch.followups.length >= 3 && ch.followups.slice(1, 4).every((o) => /^How long does .* take to cure$/.test(o)), 'then the top documented-fit products for the asked intent');

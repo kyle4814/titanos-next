@@ -12,7 +12,7 @@ const add = (id, group, ...turns) => convs.push({ id, group, turns });
 const PHRASES = ['recommend me one', 'reccomend me one', 'pick one for me', 'you choose', "whatever's best", 'just tell me', 'which one would you use?', 'Recommend one for me', 'suggest one', 'surprise me'];
 const STARTERS = [
   // wave 2 merge (B + C): a quantity that names a kind of product ("adhesive") is now ONE calculation card (lane B); the product clarifier remains for a quantity with no kind at all
-  ['clarifier-time', 'how long does floor tile adhesive for 40 m2 take to cure', { type: 'choose' }, { type: 'time' }],
+  ['clarifier-time', 'how long does tile adhesive take to cure', { type: 'choose' }, { type: 'time' }],
   ['quantity-kind', 'How much adhesive do I need for 40 m2 of floor tiles?', { type: 'calculation' }, { type: 'rate' }],
   ['quantity-kind-screed', 'how much leveller for 30 m2', { type: 'choose' }, { rec: true }],
   ['range-list', 'best tile adhesive for porcelain tiles on a concrete floor inside', { type: 'product' }, { rec: true }],

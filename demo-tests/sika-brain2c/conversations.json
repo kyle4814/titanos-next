@@ -4,7 +4,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -23,7 +23,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -42,7 +42,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -61,7 +61,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -80,7 +80,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -99,7 +99,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -118,7 +118,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -137,7 +137,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -156,7 +156,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
@@ -175,7 +175,7 @@
   "group": "recommend",
   "turns": [
    {
-    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "q": "how long does tile adhesive take to cure",
     "expect": {
      "type": "choose"
     }
