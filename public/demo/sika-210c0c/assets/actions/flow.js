@@ -119,7 +119,9 @@ export function createActions(deps) {
     let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text; let answerOf = null;
     // the sales engine (quote.js): "get me a quote", /quote, and every answer while the intake is open. Nothing typed here is remembered as a question (it may be an email address).
     if ((session.quote && session.quote.active) || (r && r.action === 'quote')) {
-      const qc = await (await loadQuote()).quoteTurn({ data, memory, config, session, text, rest, route: r, now: deps.now ? deps.now() : new Date() });
+      let qm = null; try { qm = await loadQuote(); } catch { quoteMod = null; } // offline the sales engine is not cached (8 MB budget): say so plainly
+      if (!qm) return { handled: true, card: card('quote', 'quote', 'Quote requests need a connection', { estimate: false, notice: IN_BROWSER_NOTICE, notes: ['The quote request tool loads on demand and is not kept for offline use. Nothing was sent and nothing is lost: your project and calculations are still saved. Try again when you are online.'], private: true }), session };
+      const qc = await qm.quoteTurn({ data, memory, config, session, text, rest, route: r, now: deps.now ? deps.now() : new Date() });
       if (qc) { qc.private = true; return { handled: true, card: qc, session }; }
     }
     const p = session.pending;

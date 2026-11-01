@@ -21,7 +21,8 @@ function walk(dir, rel = '') {
 }
 
 // wave 2: the data quality page (its JSON is network only, like data/gift/) is not needed offline, so its two files stay out of the 8 MB cache
-const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css)$/;
+// the sales engine (quote request) is fetched on demand and stays out of the cache for the same reason: the 8 MB budget had 903 B left after the three-lane merge; offline, asking for a quote says so
+const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css|actions\/quote\.js|actions\/quote_ui\.js|quote\.css|brain\/rules(_read|_plan)?\.js)$/; // brain/rules*.js (the plan engine) reads data/brain/rules/*.json shards that are never cached, so it cannot run offline: 78 KB out of the cache
 
 export function listing() {
   const files = ['index.html'];
@@ -29,7 +30,7 @@ export function listing() {
   const data = fs.readdirSync(path.join(PORTAL, 'data'), { withFileTypes: true });
   // wave 2: the 1.1 MB rule ledger (data/rules.json, read only by the Rule ledger page, which shows "not available" when the fetch fails) stays network only so the cache holds the 8 MB budget
   for (const e of data) if (e.isFile() && e.name.endsWith('.json') && e.name !== 'rules.json') files.push('data/' + e.name);
-  for (const d of ['knowledge', 'systems', 'sales']) if (fs.existsSync(path.join(PORTAL, 'data', d))) files.push(...walk(PORTAL, 'data/' + d).filter((f) => f.endsWith('.json')));
+  for (const d of ['knowledge', 'systems']) if (fs.existsSync(path.join(PORTAL, 'data', d))) files.push(...walk(PORTAL, 'data/' + d).filter((f) => f.endsWith('.json'))); // data/sales (contact routes) is fetched with the quote engine, network only
   // tile and stone product pages only (the 37 files); other products need the network
   for (const f of fs.readdirSync(path.join(PORTAL, 'data', 'p'))) {
     const p = JSON.parse(fs.readFileSync(path.join(PORTAL, 'data', 'p', f), 'utf8'));
