@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Built A Product Assistant That Is Not Allowed To Guess | Demonblade Labs</title>
+<meta name="description" content="A catalogue assistant with four verdicts and no model at answer time: every answer shows the sentence it came from. 4,659 questions at 98.71%, a blind set at 82.1%, 25 wrong answers named.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-004/">
+<meta property="og:title" content="I Built A Product Assistant That Is Not Allowed To Guess">
+<meta property="og:description" content="Four verdicts, every answer with the sentence it came from, zero model calls at answer time. 4,659 questions at 98.71 percent, a blind set at 82.1 percent, and 25 wrong answers named in public.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-004/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-004.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. I Built A Product Assistant That Is Not Allowed To Guess.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-004.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 004</p>
+<h1>I Built A Product Assistant That Is Not Allowed To Guess</h1>
+<p class="deck">A catalogue assistant for a building materials maker, built from its public pages, that answers a tradie's question in about six milliseconds, shows the exact sentence every answer came from, and has four verdicts it may give. One of them is "not in the published data". It makes no model call at answer time, and the 25 answers it still gets wrong are named here, in public.</p>
+<p>If you buy, sell or build product chatbots, this one is for you. It sells nothing and it costs nothing to read. The prototype was built unsolicited from a manufacturer's public website, so the company is not named here: they have not seen it yet, and they should see it before anyone else does. Nothing of theirs was touched, no account was created, no page was scraped behind a login. What you get is the design, the measurements and the misses.</p>
+<p><strong>What you will get out of it</strong></p>
+<ul><li>The four words an assistant is allowed to say, and why the fourth is the whole product.</li><li>How an answer carries its own receipt: the sentence, the document and the page.</li><li>The tradie test: 68 real phrasings, with typos and slang, before and after.</li><li>A blind set written by someone who had not opened the code, and the 25 wrong answers it exposed.</li><li>The speed and cost figures, and why "no running cost" is the weakest argument for it.</li><li>Three questions to ask of any chatbot you are shown.</li></ul>
+<hr>
+<h2>Chapter 0. The number is 25</h2>
+<p>Across 1,409 questions, 1,186 in the working bank and 223 in a blind set, the assistant gave <strong>25 answers the published data does not support</strong>. Every one is listed by its question in the test suite, quarantined so the pass gate stays honest, and none has been edited away. The bank runs at 86.0 percent pass (947 answered, 73 honest no-data, 12 wrong, 154 missing). The blind set runs at 82.1 percent.</p>
+<p>The reason the number is 25 and not zero is the point of the issue. An assistant that is never allowed to guess still guesses sometimes, and the only honest way to run one is to count the guesses out loud. A chatbot that reports a single satisfaction score has hidden that count.</p>
+<hr>
+<h2>Chapter 1. Four verdicts</h2>
+<p>Every answer the system gives falls into exactly one of four buckets when it is judged.</p>
+<ol>
+<li><strong>ANSWERED.</strong> A product, a quantity, a property or a document, with the sentence it came from.</li>
+<li><strong>HONEST.</strong> "Not in the published data." The catalogue does not say, so neither does the assistant.</li>
+<li><strong>MISSING.</strong> The data holds the answer and the assistant failed to find it. A bug on my side, logged against the question.</li>
+<li><strong>WRONG.</strong> The assistant named something the data does not support. Zero tolerance: each one is named, and the gate does not pass while one is hidden.</li>
+</ol>
+<p>The second verdict is the product. When a tradie asks "recommend me one" with no job described, the assistant says it will not pick blind and asks the one question that unlocks a choice: inside or outside, what surface. Over 122 scripted conversations and 245 turns, 92 of them a request to recommend, that behaviour is now tested at every stage of a conversation.</p>
+<blockquote><p>A system that is allowed to say PASS about itself will, eventually. A system that is allowed to guess will, immediately.</p></blockquote>
+<hr>
+<h2>Chapter 2. Show the source</h2>
+<p>Each statement in an answer carries a citation, and the citation has a button: <strong>Show the source</strong>. It opens the document with the exact sentence highlighted, and where the statement was quoted from a PDF, the page number.</p>
+<div class="scroll"><table>
+<thead><tr><th>Measurement (1 November 2026)</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Golden questions with a known right answer</td><td>4,659</td></tr>
+<tr><td>Answered correctly</td><td>4,599 (98.71 percent)</td></tr>
+<tr><td>Distinct citations across those answers</td><td>4,529</td></tr>
+<tr><td>Statements quoted from a PDF that carry the page number</td><td>1,639 of 1,639</td></tr>
+<tr><td>Property checks across the golden set</td><td>0 violations</td></tr>
+</tbody>
+</table></div>
+<p>The 98.71 percent did not move across the last three rounds of work, and it was not meant to. The golden set is the floor: any change that drops it is refused before it merges.</p>
+<hr>
+<h2>Chapter 3. The tradie test</h2>
+<p>Nobody on a site types the product name the catalogue uses. I wrote 68 phrasings before the matcher changed: 16 typos, 15 slang, 7 old product names, 14 jargon, 16 plain. One matcher now serves the search box, the product finder and the assistant, with spelling corrected against the catalogue's own vocabulary and old names mapped to the current product.</p>
+<div class="scroll"><table>
+<thead><tr><th>Phrasing kind</th><th>Right product in the top 3, before</th><th>After</th></tr></thead>
+<tbody>
+<tr><td>Typos (16)</td><td>3</td><td>15</td></tr>
+<tr><td>Slang (15)</td><td>5</td><td>12</td></tr>
+<tr><td>Old product names (7)</td><td>6</td><td>7</td></tr>
+<tr><td>Jargon (14)</td><td>10</td><td>10</td></tr>
+<tr><td>Plain (16)</td><td>12</td><td>14</td></tr>
+<tr><td><strong>All 68</strong></td><td><strong>36 (52.9 percent)</strong></td><td><strong>58 (85.3 percent)</strong></td></tr>
+</tbody>
+</table></div>
+<p>Top-1 went from 45.6 to 73.5 percent, top-6 from 54.4 to 91.2 percent. The jargon row did not move, and that is where the next work is: the ten misses exposed four generic words the synonym groups did not know.</p>
+<hr>
+<h2>Chapter 4. The blind set, and what it caught</h2>
+<p>A bank you wrote while reading the code tests what you already thought of. So 223 questions were written without opening the assistant's code, 44.8 percent of them deliberately messy: typos, half sentences, the way a question sounds at seven in the morning. First run, before any triage: 80.5 percent. After triage of the tooling, with no change to the assistant: 82.1 percent (183 of 223).</p>
+<p>Three of the wrong answers it caught, because they show the shape of the failure.</p>
+<ul>
+<li>"wall is damp" was answered with a marine acoustic damping page. The stem of "damp" collided with "damping". The data has nothing on damp walls, so the right verdict was HONEST.</li>
+<li>"need glue" returned a specific adhesive grout with no job described. A silent guess. The right move was the clarifying question.</li>
+<li>"how do i fill a 30mm low spot in the slab" named a floor leveller whose published depth range does not reach 30 millimetres. The answer was plausible and unsupported, which is the worst kind.</li>
+</ul>
+<p>Each is now a named row. The judge also reclassified seven rows as faults in the bank itself, where the expectation was tighter than the data, and corrected five earlier rows where the bank said "not published" and the product tables held the value. The test set is held to the same standard as the system.</p>
+<hr>
+<h2>Chapter 5. Speed and cost, and the weakest argument</h2>
+<p>No model is called when a question is answered. The matcher, the rules and the catalogue data ship to the browser and run there, so the assistant works offline on a phone in a basement car park.</p>
+<div class="scroll"><table>
+<thead><tr><th>Measurement</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Answer time, 1,186-question bank, median</td><td>about 6 ms</td></tr>
+<tr><td>Answer time, 95th percentile (box loaded by three other builds)</td><td>about 35 ms</td></tr>
+<tr><td>Golden set, median</td><td>0.28 ms</td></tr>
+<tr><td>First screen, gzip, against a 90,000 byte budget</td><td>87,221 bytes</td></tr>
+<tr><td>Model cost at answer time</td><td>US$0</td></tr>
+<tr><td>Box the whole thing is built on</td><td>about US$30 a month</td></tr>
+</tbody>
+</table></div>
+<p>Here is the honest part. "No running cost" is the weakest reason to want this. A model-run chat at 100,000 sessions a year costs somewhere between US$360 and US$7,200 in model fees on published prices, which is cheap for any company with a catalogue worth a chatbot. The reason to want this design is the receipt on every sentence and the fourth verdict. A model will answer "wall is damp" fluently, every time, and that is the problem.</p>
+<hr>
+<h2>Chapter 6. The battery</h2>
+<p>On the final commit of this round, ten test suites ran with every inner exit code read: catalogue stock checks, image checks, browser checks at desktop and phone widths, the matcher and citation units, voice and thumbnail checks, the job comparison, the brain units and the golden set, the action and cart suites with a 3,794-case property test. <strong>5,005 checks, 0 failed</strong>, plus the 4,599 golden answers. The rebuild script runs twice and leaves the tree clean. Everything here was measured on 31 October and 1 November 2026.</p>
+<hr>
+<h2>The limits of all of this</h2>
+<p>The things I would attack if I were reading this.</p>
+<ul>
+<li>The golden set and the bank were written by the same system that is being judged. The blind set is the only independent number, and it is 223 questions.</li>
+<li>82.1 percent on the blind set means roughly one question in six is still missed or declined. Most of those are MISSING, where the data has the answer and the search did not reach it.</li>
+<li>Timing was measured in a headless runtime on a loaded box, not on a tradie's phone over a site connection. The first screen budget was measured on a simulated fast 3G link.</li>
+<li>It covers one maker's public catalogue, 512 products. It has not been shown to the maker. Whether it changes a single purchase is UNKNOWN until it has.</li>
+<li>Spelling correction is deliberately conservative, so it does not yet lift the messy sets. That is a chosen trade for zero wrong.</li>
+</ul>
+<hr>
+<h2>Your three questions</h2>
+<p>If you are shown a product chatbot this week, three questions cost nothing. Ask it where the sentence is: can it open the document and highlight the line it used? Ask it something the catalogue does not cover, and listen for whether it says so or answers anyway. Then ask the vendor how many questions it was tested on that were written by someone who had not seen the code, and what the wrong count was. If the answer to the last one is a satisfaction score, you have your answer.</p>
+<p>What has to be true before an assistant is allowed in front of a customer: it has a verdict for "I do not know", every answer carries its source, it is tested on questions it has never seen, and its wrong answers are counted in public. That is the bar I hold mine to.</p>
+<hr>
+<p><strong>If you run a catalogue, a counter or a chatbot, I would genuinely like to hear what your customers actually type.</strong> Reply on X with the worst question you have seen a product search get, or tell me where four verdicts are too few. Would it be okay if I asked you for the one question your current search gets wrong?</p>
+<h2>Receipts</h2>
+<ul>
+<li>Every figure above is a test suite result or a byte count from the project, measured on 31 October and 1 November 2026, or stated arithmetic. The model fee range is modelled on published per-token prices at 100,000 sessions a year.</li>
+<li>The catalogue is the maker's public web pages and data sheets. No private data, no login, no account.</li>
+</ul>
+<p class="fine">Previous issues: <a href="/labs/issue-003/">I built a gym that judges its own best strategies as luck</a>, <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 004, 1 November 2026.
+    Every figure in this article is a test suite result, a measured byte count, stated arithmetic or a modelled cost with its assumptions named. The maker is not named because they have not yet seen the prototype.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
