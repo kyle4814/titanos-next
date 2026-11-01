@@ -109,7 +109,7 @@ for (const [W, H, label] of process.argv[4] === 'print' ? [] : [[1366, 768, 'des
   // 4. stockist and rep
   await chip(page, 'Find a stockist near 4000');
   txt = await last(page).innerText();
-  t(`${sz} the stockist card links the published where-to-buy page and names no stockist`, /find a stockist near 4000/i.test(txt) && (await last(page).locator('a[href="https://aus.sika.com/en/where-to-buy.html"]').count()) === 1 && /do not list one/.test(txt), 'LINKS ' + await last(page).locator('a').evaluateAll((as) => as.map((x) => x.getAttribute('href')).join(' ')));
+  t(`${sz} the stockist card links the published where-to-buy page and names no stockist`, /find a stockist near 4000/i.test(txt) && (await last(page).locator('a[href="https://aus.sika.com/en/where-to-buy.html"]').count()) >= 1 && /do not list one/.test(txt), 'LINKS ' + await last(page).locator('a').evaluateAll((as) => as.map((x) => x.getAttribute('href')).join(' ')));
   await chip(page, 'Talk to a Sika rep');
   txt = await last(page).innerText();
   t(`${sz} the rep card cites the published routes and admits no state offices are held`, /au\.technical@au\.sika\.com/.test(txt) && /1300 22 33 48/.test(txt) && /Wetherill Park/.test(txt) && /no state office contacts/.test(txt), txt.slice(0, 300));

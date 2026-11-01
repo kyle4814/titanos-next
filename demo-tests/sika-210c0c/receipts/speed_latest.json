@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-01T01:00:06.840Z",
+ "generated": "2026-11-01T02:02:12.098Z",
  "tool": "speed.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
  "profile": {
   "name": "DevTools Fast 3G",
@@ -18,70 +18,74 @@
    "targetBytes": 80000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2021,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 2012,
+    "median_fcp_ms": 680,
     "all_ms": [
-     2037,
-     1979,
-     2021
+     2012,
+     2030,
+     1982
     ],
     "all_fcp": [
-     688,
+     676,
      680,
-     696
+     680
     ],
-    "bytes_at_answer": 89011,
+    "bytes_at_answer": 88876,
     "requests_at_answer": 4,
-    "bytes_settled": 334916,
-    "requests_settled": 14,
+    "bytes_settled": 312973,
+    "requests_settled": 15,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
-      "file": "assets/img/s/construction--concrete-480.webp",
-      "bytes": 50449
-     },
-     {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
-     },
-     {
-      "file": "assets/img/s/construction--waterproofing-480.webp",
-      "bytes": 43793
+      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
+      "bytes": 47277
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
+     },
+     {
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 35983
+     },
+     {
+      "file": "assets/img/s/construction--concrete-480.webp",
+      "bytes": 29971
+     },
+     {
+      "file": "assets/img/s/construction--waterproofing-480.webp",
+      "bytes": 22915
      },
      {
       "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
-     },
-     {
-      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
-      "bytes": 17993
-     },
-     {
-      "file": "assets/img/s/construction--flooring-480.webp",
-      "bytes": 15221
+      "bytes": 16977
      },
      {
       "file": "",
       "bytes": 14105
      },
      {
-      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
-      "bytes": 9220
+      "file": "assets/img/s/construction--grouts-anchoring-480.webp",
+      "bytes": 12015
+     },
+     {
+      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
+      "bytes": 9550
+     },
+     {
+      "file": "assets/img/s/construction--flooring-480.webp",
+      "bytes": 9226
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -94,86 +98,90 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 297,
+    "median_ms_to_answer": 309,
     "median_fcp_ms": 68,
     "all_ms": [
-     297,
-     288,
-     300
+     309,
+     319,
+     293
     ],
     "all_fcp": [
-     64,
      72,
+     68,
      68
     ],
-    "bytes_at_answer": 470077,
-    "requests_at_answer": 17,
-    "bytes_settled": 470077,
-    "requests_settled": 17,
+    "bytes_at_answer": 396826,
+    "requests_at_answer": 18,
+    "bytes_settled": 396826,
+    "requests_settled": 18,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
-      "file": "assets/img/s/construction--concrete-480.webp",
-      "bytes": 50449
-     },
-     {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
-     },
-     {
-      "file": "assets/img/s/construction--landscape-buildingproducts-480.webp",
-      "bytes": 46523
-     },
-     {
-      "file": "assets/img/s/construction--waterproofing-480.webp",
-      "bytes": 43793
-     },
-     {
-      "file": "assets/img/s/industry-480.webp",
-      "bytes": 39761
+      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
+      "bytes": 47277
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
+     },
+     {
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 35983
+     },
+     {
+      "file": "assets/img/s/construction--concrete-480.webp",
+      "bytes": 29971
+     },
+     {
+      "file": "assets/img/s/construction--landscape-buildingproducts-480.webp",
+      "bytes": 27855
+     },
+     {
+      "file": "assets/img/s/industry-480.webp",
+      "bytes": 24885
+     },
+     {
+      "file": "assets/img/s/construction--waterproofing-480.webp",
+      "bytes": 22915
      },
      {
       "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
-     },
-     {
-      "file": "assets/img/s/construction--roofing-480.webp",
-      "bytes": 27067
+      "bytes": 16977
      },
      {
       "file": "assets/img/s/construction--structural-strengthening-480.webp",
-      "bytes": 22363
+      "bytes": 16677
      },
      {
-      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
-      "bytes": 17993
-     },
-     {
-      "file": "assets/img/s/construction--flooring-480.webp",
-      "bytes": 15221
+      "file": "assets/img/s/construction--roofing-480.webp",
+      "bytes": 14989
      },
      {
       "file": "",
       "bytes": 14105
      },
      {
-      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
-      "bytes": 9220
+      "file": "assets/img/s/construction--grouts-anchoring-480.webp",
+      "bytes": 12015
+     },
+     {
+      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
+      "bytes": 9550
+     },
+     {
+      "file": "assets/img/s/construction--flooring-480.webp",
+      "bytes": 9226
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -188,26 +196,26 @@
    "targetBytes": 100000,
    "targetMsFast3g": 1500,
    "fast3g": {
-    "median_ms_to_answer": 4347,
-    "median_fcp_ms": 1044,
+    "median_ms_to_answer": 3935,
+    "median_fcp_ms": 668,
     "all_ms": [
-     4354,
-     4331,
-     4347
+     4192,
+     3935,
+     3898
     ],
     "all_fcp": [
-     1044,
-     1056,
-     1032
+     844,
+     668,
+     664
     ],
-    "bytes_at_answer": 118509,
+    "bytes_at_answer": 118374,
     "requests_at_answer": 8,
-    "bytes_settled": 153903,
+    "bytes_settled": 154994,
     "requests_settled": 20,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
@@ -219,11 +227,11 @@
      },
      {
       "file": "assets/lib/projectstore.js",
-      "bytes": 10214
+      "bytes": 11360
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "assets/lib/apply_data.js",
@@ -231,7 +239,7 @@
      },
      {
       "file": "assets/lib/components.js",
-      "bytes": 4217
+      "bytes": 4288
      },
      {
       "file": "data/selector.json",
@@ -259,7 +267,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/lib/sheet-advisor.js",
@@ -267,7 +275,7 @@
      },
      {
       "file": "assets/lib/mosaic.js",
-      "bytes": 1142
+      "bytes": 1151
      },
      {
       "file": "assets/apply_data.css",
@@ -288,26 +296,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 711,
-    "median_fcp_ms": 232,
+    "median_ms_to_answer": 731,
+    "median_fcp_ms": 220,
     "all_ms": [
-     941,
-     711,
-     673
+     1188,
+     618,
+     731
     ],
     "all_fcp": [
-     344,
-     232,
-     116
+     572,
+     116,
+     220
     ],
-    "bytes_at_answer": 153903,
-    "requests_at_answer": 20,
-    "bytes_settled": 268979,
+    "bytes_at_answer": 143634,
+    "requests_at_answer": 19,
+    "bytes_settled": 270070,
     "requests_settled": 28,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
@@ -339,11 +347,11 @@
      },
      {
       "file": "assets/lib/projectstore.js",
-      "bytes": 10214
+      "bytes": 11360
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "assets/lib/apply_data.js",
@@ -351,7 +359,7 @@
      },
      {
       "file": "assets/lib/components.js",
-      "bytes": 4217
+      "bytes": 4288
      },
      {
       "file": "data/selector.json",
@@ -379,7 +387,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/lib/sheet-advisor.js",
@@ -387,7 +395,7 @@
      },
      {
       "file": "assets/lib/mosaic.js",
-      "bytes": 1142
+      "bytes": 1151
      },
      {
       "file": "assets/apply_data.css",
@@ -426,21 +434,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 787,
-    "median_fcp_ms": 676,
+    "median_ms_to_answer": 792,
+    "median_fcp_ms": 688,
     "all_ms": [
-     772,
-     797,
-     787
+     786,
+     792,
+     807
     ],
     "all_fcp": [
-     672,
-     692,
-     676
+     688,
+     676,
+     692
     ],
     "bytes_at_answer": 24763,
     "requests_at_answer": 2,
-    "bytes_settled": 60157,
+    "bytes_settled": 61383,
     "requests_settled": 14,
     "files": [
      {
@@ -449,7 +457,7 @@
      },
      {
       "file": "assets/lib/projectstore.js",
-      "bytes": 10214
+      "bytes": 11360
      },
      {
       "file": "assets/lib/apply_data.js",
@@ -457,7 +465,7 @@
      },
      {
       "file": "assets/lib/components.js",
-      "bytes": 4217
+      "bytes": 4288
      },
      {
       "file": "assets/lib/sheet_data.js",
@@ -485,7 +493,7 @@
      },
      {
       "file": "assets/lib/mosaic.js",
-      "bytes": 1142
+      "bytes": 1151
      },
      {
       "file": "assets/lib/projects.js",
@@ -502,21 +510,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 255,
-    "median_fcp_ms": 168,
+    "median_ms_to_answer": 264,
+    "median_fcp_ms": 164,
     "all_ms": [
-     250,
-     255,
-     257
+     253,
+     266,
+     264
     ],
     "all_fcp": [
-     172,
-     168,
-     156
+     164,
+     164,
+     172
     ],
-    "bytes_at_answer": 49943,
+    "bytes_at_answer": 50023,
     "requests_at_answer": 13,
-    "bytes_settled": 175233,
+    "bytes_settled": 176459,
     "requests_settled": 22,
     "files": [
      {
@@ -545,7 +553,7 @@
      },
      {
       "file": "assets/lib/projectstore.js",
-      "bytes": 10214
+      "bytes": 11360
      },
      {
       "file": "assets/lib/apply_data.js",
@@ -553,7 +561,7 @@
      },
      {
       "file": "assets/lib/components.js",
-      "bytes": 4217
+      "bytes": 4288
      },
      {
       "file": "assets/lib/sheet_data.js",
@@ -581,7 +589,7 @@
      },
      {
       "file": "assets/lib/mosaic.js",
-      "bytes": 1142
+      "bytes": 1151
      },
      {
       "file": "assets/apply_data.css",
@@ -616,21 +624,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 5614,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 5586,
+    "median_fcp_ms": 676,
     "all_ms": [
-     5581,
-     5637,
-     5614
+     5609,
+     5586,
+     5579
     ],
     "all_fcp": [
-     680,
-     684,
-     688
+     676,
+     676,
+     692
     ],
-    "bytes_at_answer": 138621,
+    "bytes_at_answer": 138486,
     "requests_at_answer": 19,
-    "bytes_settled": 204809,
+    "bytes_settled": 204674,
     "requests_settled": 21,
     "files": [
      {
@@ -639,7 +647,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -651,7 +659,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -691,7 +699,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -720,21 +728,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 346,
-    "median_fcp_ms": 72,
+    "median_ms_to_answer": 336,
+    "median_fcp_ms": 60,
     "all_ms": [
-     324,
-     369,
-     346
+     338,
+     336,
+     335
     ],
     "all_fcp": [
-     72,
-     92,
+     60,
+     60,
      64
     ],
-    "bytes_at_answer": 204256,
+    "bytes_at_answer": 204121,
     "requests_at_answer": 20,
-    "bytes_settled": 204256,
+    "bytes_settled": 204121,
     "requests_settled": 20,
     "files": [
      {
@@ -743,7 +751,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -755,7 +763,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -795,7 +803,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -826,22 +834,22 @@
    "targetBytes": 600000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 8077,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 7075,
+    "median_fcp_ms": 688,
     "all_ms": [
-     8106,
-     7603,
-     8077
+     7044,
+     7075,
+     7108
     ],
     "all_fcp": [
-     692,
+     700,
      680,
-     684
+     688
     ],
-    "bytes_at_answer": 859401,
-    "requests_at_answer": 33,
-    "bytes_settled": 860133,
-    "requests_settled": 34,
+    "bytes_at_answer": 839027,
+    "requests_at_answer": 35,
+    "bytes_settled": 839759,
+    "requests_settled": 36,
     "files": [
      {
       "file": "data/brain/core.json",
@@ -849,35 +857,31 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "dist/actions.js",
-      "bytes": 55747
-     },
-     {
-      "file": "assets/img/s/construction--concrete-480.webp",
-      "bytes": 50449
+      "bytes": 54600
      },
      {
       "file": "dist/brain.js",
-      "bytes": 50206
+      "bytes": 50232
      },
      {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
-     },
-     {
-      "file": "assets/img/s/construction--waterproofing-480.webp",
-      "bytes": 43793
+      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
+      "bytes": 47277
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
      },
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 35983
+     },
+     {
+      "file": "assets/img/s/construction--concrete-480.webp",
+      "bytes": 29971
      },
      {
       "file": "assets/fonts/barlow-700-n.woff2",
@@ -886,6 +890,10 @@
      {
       "file": "assets/fonts/barlow-600-n.woff2",
       "bytes": 22949
+     },
+     {
+      "file": "assets/img/s/construction--waterproofing-480.webp",
+      "bytes": 22915
      },
      {
       "file": "assets/fonts/barlow-400-n.woff2",
@@ -900,36 +908,40 @@
       "bytes": 22185
      },
      {
-      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
-      "bytes": 17993
-     },
-     {
-      "file": "assets/img/s/construction--flooring-480.webp",
-      "bytes": 15221
+      "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
+      "bytes": 16977
      },
      {
       "file": "",
       "bytes": 14105
      },
      {
+      "file": "assets/img/s/construction--grouts-anchoring-480.webp",
+      "bytes": 12015
+     },
+     {
       "file": "dist/actions-brain.js",
       "bytes": 10032
      },
      {
-      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
-      "bytes": 9220
+      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
+      "bytes": 9550
+     },
+     {
+      "file": "assets/img/s/construction--flooring-480.webp",
+      "bytes": 9226
      },
      {
       "file": "dist/actions-panels.js",
       "bytes": 8304
      },
      {
-      "file": "dist/actions-gencalc.js",
-      "bytes": 7389
+      "file": "data/cats.lite.json",
+      "bytes": 7820
      },
      {
-      "file": "data/cats.lite.json",
-      "bytes": 7379
+      "file": "dist/actions-gencalc.js",
+      "bytes": 7389
      },
      {
       "file": "dist/panels.js",
@@ -940,12 +952,16 @@
       "bytes": 4515
      },
      {
+      "file": "dist/actions-quote.js",
+      "bytes": 2690
+     },
+     {
       "file": "dist/actions-pdppanels.js",
       "bytes": 2608
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "data/actions/alts.json",
@@ -982,22 +998,22 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 663,
-    "median_fcp_ms": 64,
+    "median_ms_to_answer": 682,
+    "median_fcp_ms": 72,
     "all_ms": [
-     665,
-     636,
-     663
+     672,
+     693,
+     682
     ],
     "all_fcp": [
-     64,
-     64,
-     64
+     72,
+     72,
+     72
     ],
-    "bytes_at_answer": 876023,
-    "requests_at_answer": 31,
-    "bytes_settled": 876023,
-    "requests_settled": 31,
+    "bytes_at_answer": 804341,
+    "requests_at_answer": 33,
+    "bytes_settled": 804341,
+    "requests_settled": 33,
     "files": [
      {
       "file": "data/brain/core.json",
@@ -1005,87 +1021,95 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "dist/actions.js",
-      "bytes": 55747
-     },
-     {
-      "file": "assets/img/s/construction--concrete-480.webp",
-      "bytes": 50449
+      "bytes": 54600
      },
      {
       "file": "dist/brain.js",
-      "bytes": 50206
+      "bytes": 50232
      },
      {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
-     },
-     {
-      "file": "assets/img/s/construction--landscape-buildingproducts-480.webp",
-      "bytes": 46523
-     },
-     {
-      "file": "assets/img/s/construction--waterproofing-480.webp",
-      "bytes": 43793
-     },
-     {
-      "file": "assets/img/s/industry-480.webp",
-      "bytes": 39761
+      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
+      "bytes": 47277
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
+     },
+     {
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 35983
+     },
+     {
+      "file": "assets/img/s/construction--concrete-480.webp",
+      "bytes": 29971
+     },
+     {
+      "file": "assets/img/s/construction--landscape-buildingproducts-480.webp",
+      "bytes": 27855
+     },
+     {
+      "file": "assets/img/s/industry-480.webp",
+      "bytes": 24885
+     },
+     {
+      "file": "assets/img/s/construction--waterproofing-480.webp",
+      "bytes": 22915
      },
      {
       "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
-     },
-     {
-      "file": "assets/img/s/construction--roofing-480.webp",
-      "bytes": 27067
+      "bytes": 16977
      },
      {
       "file": "assets/img/s/construction--structural-strengthening-480.webp",
-      "bytes": 22363
+      "bytes": 16677
      },
      {
-      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
-      "bytes": 17993
-     },
-     {
-      "file": "assets/img/s/construction--flooring-480.webp",
-      "bytes": 15221
+      "file": "assets/img/s/construction--roofing-480.webp",
+      "bytes": 14989
      },
      {
       "file": "",
       "bytes": 14105
      },
      {
+      "file": "assets/img/s/construction--grouts-anchoring-480.webp",
+      "bytes": 12015
+     },
+     {
       "file": "dist/actions-brain.js",
       "bytes": 10032
      },
      {
-      "file": "assets/img/s/construction--sealants-adhesives-480.webp",
-      "bytes": 9220
+      "file": "assets/img/s/construction--concrete-repair-protection-480.webp",
+      "bytes": 9550
+     },
+     {
+      "file": "assets/img/s/construction--flooring-480.webp",
+      "bytes": 9226
      },
      {
       "file": "dist/actions-panels.js",
       "bytes": 8304
      },
      {
+      "file": "data/cats.lite.json",
+      "bytes": 7820
+     },
+     {
       "file": "dist/actions-gencalc.js",
       "bytes": 7389
      },
      {
-      "file": "data/cats.lite.json",
-      "bytes": 7379
-     },
-     {
       "file": "dist/brain-panels.js",
       "bytes": 4515
+     },
+     {
+      "file": "dist/actions-quote.js",
+      "bytes": 2690
      },
      {
       "file": "dist/actions-pdppanels.js",
@@ -1093,7 +1117,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "data/actions/alts.json",
@@ -1132,21 +1156,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3535,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 3538,
+    "median_fcp_ms": 676,
     "all_ms": [
-     3535,
-     3562,
-     3523
+     3527,
+     3566,
+     3538
     ],
     "all_fcp": [
-     692,
+     672,
      688,
-     672
+     676
     ],
-    "bytes_at_answer": 183068,
+    "bytes_at_answer": 182933,
     "requests_at_answer": 12,
-    "bytes_settled": 255744,
+    "bytes_settled": 255609,
     "requests_settled": 18,
     "files": [
      {
@@ -1155,7 +1179,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "assets/img/p/davco-jetcrete-480.webp",
@@ -1187,7 +1211,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1199,7 +1223,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1224,21 +1248,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 388,
-    "median_fcp_ms": 60,
+    "median_ms_to_answer": 389,
+    "median_fcp_ms": 68,
     "all_ms": [
-     390,
-     388,
-     377
+     389,
+     393,
+     372
     ],
     "all_fcp": [
-     60,
-     60,
-     68
+     64,
+     68,
+     76
     ],
-    "bytes_at_answer": 317490,
+    "bytes_at_answer": 306889,
     "requests_at_answer": 20,
-    "bytes_settled": 317490,
+    "bytes_settled": 306889,
     "requests_settled": 20,
     "files": [
      {
@@ -1247,11 +1271,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
-     },
-     {
-      "file": "assets/img/s/construction--concrete-repair-protection--concrete-repair-mortars-480.webp",
-      "bytes": 25615
+      "bytes": 64987
      },
      {
       "file": "assets/img/p/sika-monotop-352nfg-480.webp",
@@ -1274,6 +1294,10 @@
       "bytes": 15197
      },
      {
+      "file": "assets/img/s/construction--concrete-repair-protection--concrete-repair-mortars--cementitious-repairmortars-480.webp",
+      "bytes": 15149
+     },
+     {
       "file": "",
       "bytes": 14105
      },
@@ -1291,7 +1315,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1303,7 +1327,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1330,46 +1354,54 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 4050,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 4054,
+    "median_fcp_ms": 688,
     "all_ms": [
-     4046,
-     4076,
-     4050
+     4054,
+     4096,
+     4054
     ],
     "all_fcp": [
-     692,
-     684,
-     684
+     688,
+     672,
+     700
     ],
-    "bytes_at_answer": 146903,
+    "bytes_at_answer": 155592,
     "requests_at_answer": 12,
-    "bytes_settled": 292135,
-    "requests_settled": 16,
+    "bytes_settled": 281504,
+    "requests_settled": 19,
     "files": [
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems-960.webp",
-      "bytes": 93401
+      "file": "dist/main.js",
+      "bytes": 64987
      },
      {
-      "file": "dist/main.js",
-      "bytes": 65382
+      "file": "assets/img/s/construction--tile-stone-installationsystems-960.webp",
+      "bytes": 47019
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
      },
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
+      "file": "assets/img/s/construction--tile-stone-installationsystems--primers-additives-480.webp",
+      "bytes": 26331
      },
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-care-and-cleaners-480.webp",
-      "bytes": 23027
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-grouts-480.webp",
+      "bytes": 16145
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-adhesives-480.webp",
+      "bytes": 15591
      },
      {
       "file": "",
       "bytes": 14105
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-care-and-cleaners-480.webp",
+      "bytes": 13357
      },
      {
       "file": "dist/actions-panels.js",
@@ -1377,7 +1409,11 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--waterproofing-480.webp",
+      "bytes": 6916
      },
      {
       "file": "dist/panels.js",
@@ -1393,7 +1429,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1414,46 +1450,54 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 300,
+    "median_ms_to_answer": 311,
     "median_fcp_ms": 64,
     "all_ms": [
-     300,
-     380,
-     285
+     311,
+     320,
+     306
     ],
     "all_fcp": [
-     64,
-     64,
-     68
+     60,
+     68,
+     64
     ],
-    "bytes_at_answer": 291582,
-    "requests_at_answer": 15,
-    "bytes_settled": 291582,
-    "requests_settled": 15,
+    "bytes_at_answer": 280951,
+    "requests_at_answer": 18,
+    "bytes_settled": 280951,
+    "requests_settled": 18,
     "files": [
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems-960.webp",
-      "bytes": 93401
+      "file": "dist/main.js",
+      "bytes": 64987
      },
      {
-      "file": "dist/main.js",
-      "bytes": 65382
+      "file": "assets/img/s/construction--tile-stone-installationsystems-960.webp",
+      "bytes": 47019
      },
      {
       "file": "data/categories.json",
-      "bytes": 29852
+      "bytes": 38676
      },
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems-480.webp",
-      "bytes": 28251
+      "file": "assets/img/s/construction--tile-stone-installationsystems--primers-additives-480.webp",
+      "bytes": 26331
      },
      {
-      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-care-and-cleaners-480.webp",
-      "bytes": 23027
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-grouts-480.webp",
+      "bytes": 16145
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-adhesives-480.webp",
+      "bytes": 15591
      },
      {
       "file": "",
       "bytes": 14105
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--tile-care-and-cleaners-480.webp",
+      "bytes": 13357
      },
      {
       "file": "dist/actions-panels.js",
@@ -1461,7 +1505,11 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
+     },
+     {
+      "file": "assets/img/s/construction--tile-stone-installationsystems--waterproofing-480.webp",
+      "bytes": 6916
      },
      {
       "file": "dist/panels.js",
@@ -1477,7 +1525,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1500,21 +1548,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3021,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 3037,
+    "median_fcp_ms": 676,
     "all_ms": [
-     3033,
-     3014,
-     3021
+     3040,
+     3037,
+     3022
     ],
     "all_fcp": [
-     676,
+     672,
      688,
-     696
+     676
     ],
-    "bytes_at_answer": 160829,
+    "bytes_at_answer": 160694,
     "requests_at_answer": 7,
-    "bytes_settled": 182646,
+    "bytes_settled": 182511,
     "requests_settled": 12,
     "files": [
      {
@@ -1523,7 +1571,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1535,7 +1583,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1547,7 +1595,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1568,21 +1616,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 262,
-    "median_fcp_ms": 68,
+    "median_ms_to_answer": 247,
+    "median_fcp_ms": 64,
     "all_ms": [
-     370,
-     262,
-     252
+     246,
+     259,
+     247
     ],
     "all_fcp": [
-     76,
-     68,
-     68
+     60,
+     72,
+     64
     ],
-    "bytes_at_answer": 160829,
+    "bytes_at_answer": 160694,
     "requests_at_answer": 7,
-    "bytes_settled": 160829,
+    "bytes_settled": 160694,
     "requests_settled": 7,
     "files": [
      {
@@ -1591,7 +1639,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1599,11 +1647,11 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -1622,21 +1670,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3007,
-    "median_fcp_ms": 676,
+    "median_ms_to_answer": 3012,
+    "median_fcp_ms": 680,
     "all_ms": [
-     3023,
-     2999,
+     3046,
+     3012,
      3007
     ],
     "all_fcp": [
-     676,
-     676,
-     700
+     696,
+     680,
+     680
     ],
-    "bytes_at_answer": 168451,
+    "bytes_at_answer": 168316,
     "requests_at_answer": 6,
-    "bytes_settled": 190268,
+    "bytes_settled": 190133,
     "requests_settled": 11,
     "files": [
      {
@@ -1645,7 +1693,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1657,7 +1705,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1669,7 +1717,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1686,21 +1734,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 251,
+    "median_ms_to_answer": 227,
     "median_fcp_ms": 64,
     "all_ms": [
-     251,
-     254,
-     219
+     229,
+     227,
+     227
     ],
     "all_fcp": [
-     56,
-     68,
+     64,
+     60,
      64
     ],
-    "bytes_at_answer": 168451,
+    "bytes_at_answer": 168316,
     "requests_at_answer": 6,
-    "bytes_settled": 168451,
+    "bytes_settled": 168316,
     "requests_settled": 6,
     "files": [
      {
@@ -1709,7 +1757,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1717,11 +1765,11 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -1736,22 +1784,22 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3042,
+    "median_ms_to_answer": 3547,
     "median_fcp_ms": 680,
     "all_ms": [
-     3042,
-     3041,
-     3054
+     3547,
+     3505,
+     3556
     ],
     "all_fcp": [
      680,
-     680,
-     696
+     672,
+     684
     ],
-    "bytes_at_answer": 161305,
-    "requests_at_answer": 7,
-    "bytes_settled": 183122,
-    "requests_settled": 12,
+    "bytes_at_answer": 178968,
+    "requests_at_answer": 8,
+    "bytes_settled": 202398,
+    "requests_settled": 14,
     "files": [
      {
       "file": "data/index.json",
@@ -1759,7 +1807,11 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
+     },
+     {
+      "file": "dist/quote.js",
+      "bytes": 15108
      },
      {
       "file": "",
@@ -1771,7 +1823,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1782,12 +1834,20 @@
       "bytes": 4515
      },
      {
+      "file": "dist/actions-quote.js",
+      "bytes": 2690
+     },
+     {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
       "bytes": 1899
+     },
+     {
+      "file": "assets/quote.css",
+      "bytes": 1613
      },
      {
       "file": "assets/apply_data.css",
@@ -1796,30 +1856,26 @@
      {
       "file": "assets/fonts/fonts.css",
       "bytes": 553
-     },
-     {
-      "file": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
-      "bytes": 0
      }
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 240,
+    "median_ms_to_answer": 262,
     "median_fcp_ms": 64,
     "all_ms": [
-     245,
-     239,
-     240
+     249,
+     262,
+     284
     ],
     "all_fcp": [
      64,
-     64,
-     60
+     60,
+     68
     ],
-    "bytes_at_answer": 161305,
-    "requests_at_answer": 7,
-    "bytes_settled": 161305,
-    "requests_settled": 7,
+    "bytes_at_answer": 180581,
+    "requests_at_answer": 9,
+    "bytes_settled": 180581,
+    "requests_settled": 9,
     "files": [
      {
       "file": "data/index.json",
@@ -1827,7 +1883,11 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
+     },
+     {
+      "file": "dist/quote.js",
+      "bytes": 15108
      },
      {
       "file": "",
@@ -1835,19 +1895,23 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
+     },
+     {
+      "file": "dist/actions-quote.js",
+      "bytes": 2690
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
+     },
+     {
+      "file": "assets/quote.css",
+      "bytes": 1613
      },
      {
       "file": "assets/apply_data.css",
       "bytes": 954
-     },
-     {
-      "file": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
-      "bytes": 0
      }
     ]
    }
@@ -1858,26 +1922,26 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3539,
-    "median_fcp_ms": 696,
+    "median_ms_to_answer": 3528,
+    "median_fcp_ms": 676,
     "all_ms": [
-     3534,
-     3539,
-     3590
+     3520,
+     3546,
+     3528
     ],
     "all_fcp": [
-     696,
-     692,
-     696
+     676,
+     688,
+     676
     ],
-    "bytes_at_answer": 91118,
+    "bytes_at_answer": 90983,
     "requests_at_answer": 8,
-    "bytes_settled": 112935,
+    "bytes_settled": 112800,
     "requests_settled": 13,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1889,7 +1953,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "dist/panels.js",
@@ -1901,7 +1965,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "dist/actions-brain-panels.js",
@@ -1930,26 +1994,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 255,
+    "median_ms_to_answer": 242,
     "median_fcp_ms": 72,
     "all_ms": [
-     235,
+     242,
      257,
-     255
+     220
     ],
     "all_fcp": [
      72,
-     68,
-     76
+     76,
+     68
     ],
-    "bytes_at_answer": 91118,
+    "bytes_at_answer": 90983,
     "requests_at_answer": 8,
-    "bytes_settled": 91118,
+    "bytes_settled": 90983,
     "requests_settled": 8,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -1957,11 +2021,11 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -1988,26 +2052,26 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2530,
-    "median_fcp_ms": 692,
+    "median_ms_to_answer": 2524,
+    "median_fcp_ms": 680,
     "all_ms": [
-     2530,
-     2530,
-     2486
+     2484,
+     2550,
+     2524
     ],
     "all_fcp": [
+     668,
      688,
-     692,
-     692
+     680
     ],
-    "bytes_at_answer": 93746,
+    "bytes_at_answer": 93611,
     "requests_at_answer": 6,
-    "bytes_settled": 94299,
+    "bytes_settled": 94164,
     "requests_settled": 7,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -2015,7 +2079,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/selector.json",
@@ -2023,7 +2087,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
@@ -2036,26 +2100,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 203,
-    "median_fcp_ms": 68,
+    "median_ms_to_answer": 212,
+    "median_fcp_ms": 64,
     "all_ms": [
-     199,
-     217,
-     203
+     211,
+     212,
+     224
     ],
     "all_fcp": [
      64,
-     72,
-     68
+     64,
+     64
     ],
-    "bytes_at_answer": 93746,
+    "bytes_at_answer": 93611,
     "requests_at_answer": 6,
-    "bytes_settled": 93746,
+    "bytes_settled": 93611,
     "requests_settled": 6,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65382
+      "bytes": 64987
      },
      {
       "file": "",
@@ -2063,7 +2127,7 @@
      },
      {
       "file": "data/cats.lite.json",
-      "bytes": 7379
+      "bytes": 7820
      },
      {
       "file": "data/selector.json",
@@ -2071,7 +2135,7 @@
      },
      {
       "file": "data/config.json",
-      "bytes": 2145
+      "bytes": 1964
      },
      {
       "file": "assets/apply_data.css",
