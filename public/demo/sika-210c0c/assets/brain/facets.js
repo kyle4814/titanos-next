@@ -66,7 +66,16 @@ export function parseFacets(q) {
   // "ceramic tile underlay" names a substrate, not the tile being laid
   if (substrate.some((s) => /tile/.test(s.term))) tile_type = tile_type.filter((t) => !substrate.some((s) => s.term.split(' ').includes(t.term.split(' ')[0]) && /tile/.test(s.term)));
   const ids = { substrate: substrate.map((x) => x.id), environment: environment.map((x) => x.id), tile_type: tile_type.map((x) => x.id) };
-  return { area, ...ids, hits: [...substrate, ...environment, ...tile_type], any: !!(substrate.length || environment.length || tile_type.length) };
+  // a dose is sized by the mass of cement, the mix, the water or the concrete volume, never by an area
+  const dose = (() => {
+    const d = {}; const num = (x) => Number(x);
+    let m = n.match(/(\d+(?:\.\d+)?) ?(tonnes?|tons?|t|kg) (?:of )?(?:total )?(?:cement|cementitious|binder)/); if (m) d.cementKg = num(m[1]) * (m[2] === 'kg' ? 1 : 1000);
+    m = n.match(/(\d+(?:\.\d+)?) ?kg (?:of )?(?:(?:sand )?cement )?(?:dry )?mix\b/); if (m) d.mixKg = num(m[1]);
+    m = n.match(/(\d+(?:\.\d+)?) ?(?:l|litres?|liters?) (?:of )?water\b/); if (m) d.waterL = num(m[1]);
+    m = n.match(/(\d+(?:\.\d+)?) ?(?:m3|cubic met(?:er|re)s?)\b/); if (m) d.volume = num(m[1]);
+    return Object.keys(d).length ? d : null;
+  })();
+  return { area, dose, ...ids, hits: [...substrate, ...environment, ...tile_type], any: !!(substrate.length || environment.length || tile_type.length) };
 }
 /** the location id the system finder uses, from parsed environment tags (null when not decidable) */
 export function systemLocation(env) {

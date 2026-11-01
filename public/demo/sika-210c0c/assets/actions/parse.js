@@ -2,6 +2,7 @@
 // Plain regular expressions. No model. Facet ids match data/selector.json so a parsed answer can feed the system finder directly.
 
 import { looksLikeJob } from './job.js';
+import { understand as understandCalc } from '../lib/finder/gencalc.js';
 
 export const COMMANDS = [
   ['/calc', 'calc', 'How much and how many packs: /calc 20 m2 Davco Grey One Pot adhesive'],
@@ -46,6 +47,10 @@ export function parseNumbers(text) {
   const ts = new RegExp(N + '\\s*(?:x|by|\\*)\\s*' + N + '(?:\\s*mm)?').exec(t); if (ts && !/m2|sqm/.test(ts[0])) out.tileSize = [num(ts[1]), num(ts[2])];
   if (/\bmosaic/.test(t)) out.mosaic = true;
   const cem = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:total\\s*)?cement(?:itious)?'), t); if (cem != null && cem > 0) out.cementitious = cem;
+  const cemT = first(new RegExp(N + '\\s*(?:tonnes?|tons?|t)\\s*(?:of\\s*)?(?:total\\s*)?(?:cement|cementitious|binder)'), t); if (cemT != null && cemT > 0 && out.cementitious == null) out.cementitious = cemT * 1000;
+  const cemB = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:total\\s*)?binder'), t); if (cemB != null && cemB > 0 && out.cementitious == null) out.cementitious = cemB;
+  const mix = first(new RegExp(N + '\\s*kg\\s*(?:of\\s*)?(?:sand\\s*\\/?\\s*cement\\s*|dry\\s*)?mix\\b'), t); if (mix != null && mix > 0) out.mix = mix;
+  const wat = first(new RegExp(N + '\\s*(?:litres?|liters?|l)\\s*(?:of\\s*)?water\\b'), t); if (wat != null && wat > 0) out.water = wat;
   if (area != null && area > 0) out.area = area;
   if (vol != null && vol > 0) out.volume = vol;
   if (len != null && len > 0 && out.area == null) out.length = len;
@@ -143,6 +148,7 @@ export function route(text) {
     const m = /^\/([a-z]+)\b\s*(.*)$/i.exec(raw);
     if (!m) return { action: 'help', rest: '', slash: true };
     const c = '/' + m[1].toLowerCase();
+    if (c === '/calcsave') return { action: 'calcsave', rest: m[2], slash: true };
     if (c === '/new') return { action: 'newproject', rest: m[2], slash: true };
     if (c === '/note') return { action: 'note', rest: m[2], slash: true };
     if (c === '/use') return { action: 'useproject', rest: m[2], slash: true };
@@ -165,6 +171,7 @@ export function route(text) {
   if (/^(?:new|start|create) (?:a )?project\b/i.test(t)) return { action: 'newproject', rest: t.replace(/^(?:new|start|create) (?:a )?project\s*(?:called|named)?\s*/i, '') };
   if (SAVE_RE.test(t) && !PACK_RE.test(t)) return { action: 'save', rest: t };
   if (PACK_RE.test(t)) return { action: 'pack', rest: t };
+  { const g = understandCalc(t); if (g && (g.kind !== 'timeline' || /\b(then|total|add up|sum)\b/i.test(t))) return { action: 'calc', rest: t }; } // the calculator kinds: sums, conversions, perimeter, tiles, grout, sealant, beds, mixing water
   if (JOB_RE(t)) return { action: 'job', rest: t };
   if (HANDOFF_RE.test(t) && !SAFETY_RE.test(t)) return { action: 'handoff', rest: t };
   if (EXPORT_RE.test(t) && !/\bsds\b|\bdata sheet|\bsafety data/i.test(t)) return { action: 'export', rest: t };
@@ -175,7 +182,7 @@ export function route(text) {
   if (SAFETY_RE.test(t) && !/\b(store|storage|stored)\b/i.test(t) || /\b(sds|msds|ppe|gloves?|respirator|hazard|signal word|first aid)\b/i.test(t) || /\bstor(?:e|age|ed)\b/i.test(t) && /\b(how|where|should|can)\b/i.test(t)) return { action: 'safety', rest: t };
   if (COMPAT_RE.test(t) && !CALC_RE.test(t)) return { action: 'compat', rest: t };
   const n = parseNumbers(t);
-  if (CALC_RE.test(t) && (n.area || n.length || n.volume)) return { action: 'calc', rest: t };
+  if (CALC_RE.test(t) && (n.area || n.length || n.volume || n.cementitious || n.mix || n.water)) return { action: 'calc', rest: t };
   if (SYSTEM_RE.test(t) && /tile|tiling|grout|membrane|waterproof|porcelain|ceramic|mosaic|stone/i.test(t)) return { action: 'system', rest: t };
   if (/^\s*(?:now|ok|okay|and)?\s*(?:work out|calculate)\s+(?:the )?(?:quantities|packs|amounts)\b/i.test(t)) return { action: 'calc', rest: t };
   return null;

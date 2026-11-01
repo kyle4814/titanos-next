@@ -7,11 +7,12 @@ import * as H from './handlers.js';
 import { job as jobAction, jobAdd } from './job.js';
 import { selectionLines, silentReason } from './shared.js';
 import { CART_ACTIONS, cartAction, cartAfterSave, cartButtons } from './cart.js';
+import { calcSave, productCalcRecord } from './calcbot.js';
 
 export const newSession = () => ({ facets: {}, product: null, products: [], system: null, calcs: {}, compare: null, last: null, pending: null, lastQuestion: '' });
 
-const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious' };
-const MEMORY_ACTIONS = new Set(['jobadd', 'save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
+const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious', mix: 'mix', water: 'water' };
+const MEMORY_ACTIONS = new Set(['jobadd', 'calcsave', 'save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
 const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
 
 function updateFacets(session, text, strippedText) {
@@ -30,7 +31,8 @@ function saveLast(ctx) {
   if (!last) { c.title = 'Nothing to save yet'; c.notes.push('Ask for a quantity, a system or a pack first, then say save.'); return c; }
   let res;
   if (last.action === 'system' && session.system) res = memory.saveSystem({ title: session.system.title, slug: session.system.slug || '', env: session.system.env, tile: session.system.tile, substrate: session.system.substrate, steps: session.system.steps });
-  else if (last.action === 'calc' && session.product && session.calcs[session.product.id]) { const q = session.calcs[session.product.id]; res = memory.saveQuantity({ productId: q.id, name: q.name, job: q.job, rows: q.rows }); }
+  else if (last.action === 'calc' && last.calcRecord) { res = memory.addCalculation(last.calcRecord); if (res.ok && res.calculation) { c.rows.push({ label: 'Calculation', value: res.calculation.title, meta: true, source: null }); } }
+  else if (last.action === 'calc' && session.product && session.calcs[session.product.id]) { const q = session.calcs[session.product.id]; res = memory.saveQuantity({ productId: q.id, name: q.name, job: q.job, rows: q.rows }); if (memory.addCalculation) memory.addCalculation(productCalcRecord(q, session.lastQuestion)); }
   else {
     const docs = []; for (const r of [...(last.rows || []), ...((last.sections || []).flatMap((s) => s.rows))]) if (r.doc && r.source && r.source.url) docs.push({ title: r.value, url: r.source.url });
     if (docs.length) { docs.forEach((d) => memory.saveDocument(d)); res = { ok: true, project: memory.current() }; }
@@ -57,6 +59,7 @@ function projectsCard(ctx) {
     sec('Saved systems', cur.systems.map((s) => ({ label: s.title, value: s.slug ? `Sheet: ${s.slug}` : 'No sheet link', meta: true, source: null })));
     sec('Saved quantities', cur.quantities.map((q) => ({ label: q.name, value: q.rows.map((r) => `${r.low === r.high ? r.low : r.low + ' to ' + r.high} ${r.unit}${r.packs ? ', ' + r.packs : ''}`).join('; '), derived: true, source: q.rows[0] && q.rows[0].url ? { url: q.rows[0].url, label: 'Published rate', sentence: q.rows[0].phrase } : null })));
     sec('Saved documents', cur.documents.map((d) => ({ label: d.title, value: d.url, source: { url: d.url, label: d.title, sentence: d.title }, doc: true })));
+    sec('Last calculations', (cur.calculations || []).slice(0, 3).map((k) => ({ label: k.title || k.kind, value: k.summary || k.formula || '', derived: true, source: k.citation && k.citation.url ? { url: k.citation.url, label: 'Published source', sentence: k.citation.text } : null, meta: !(k.citation && k.citation.url) })));
     sec('Notes', cur.notes.map((n) => ({ label: n.saved ? n.saved.slice(0, 10) : 'Note', value: n.text, meta: true, source: null })));
   }
   c.projectsView = true;
@@ -85,6 +88,7 @@ async function memoryAction(ctx, action) {
   if (CART_ACTIONS.has(action)) return cartAction(ctx, action); // the project cart (cart.js); null = a soft phrase that was not about the cart
   switch (action) {
     case 'jobadd': return jobAdd(ctx);
+    case 'calcsave': return calcSave(ctx);
     case 'save': { const c = saveLast(ctx); await cartAfterSave(ctx, c); return c; }
     case 'projects': return projectsCard(ctx);
     case 'gaps': return gapsCard(ctx);
@@ -138,13 +142,13 @@ export function createActions(deps) {
       const two = await findProductsInOrder(data, text, 3);
       if (two.length >= 2) { const q = ' ' + norm(text) + ' '; if (/ or /.test(q.slice(Math.max(0, q.indexOf(norm(two[0].name))), q.indexOf(norm(two[1].name)) + 1) || q)) { action = 'compare'; rest = text; } }
     }
-    if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
+    if (!action && (session.system || session.product) && text.split(/\s+/).length <= 8) { const n = parseNumbers(text); if (n.area || n.length || n.volume || n.cementitious || n.mix || n.water || n.notch || n.tileSize || n.thickness || n.coats || n.allowance != null || n.csp) { action = 'calc'; rest = text; } }
     if (!action) return { handled: false, session };
     if (r && r.unknownSlash) return { handled: true, card: H.help({ data, session, commands: COMMANDS }), session };
     // facets: numbers always, surfaces and places from the text with any product name taken out
     const hits = await findProducts(data, useText, 3);
     // a different product starts a fresh job for that product: its own conditions (thickness, coats, notch and so on) do not carry over
-    if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious']) delete session.facets[k];
+    if (hits[0] && session.product && hits[0].id !== session.product.id) for (const k of ['thickness', 'coats', 'notch', 'csp', 'dilution', 'application', 'tileSize', 'mosaic', 'cementitious', 'mix', 'water']) delete session.facets[k];
     let stripped = norm(useText); for (const h of hits) stripped = stripped.replace(norm(h.name), ' ');
     if (!MEMORY_ACTIONS.has(action) && action !== 'job') { // a job sentence (2.4 x 1.8 m) is a room, not a tile size: the job builder reads it itself
       if (answerOf) {

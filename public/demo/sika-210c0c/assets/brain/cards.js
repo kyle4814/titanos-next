@@ -2,6 +2,7 @@
 // the visitor's own question, or a calculation that carries its inputs (calc) so it can be recomputed.
 import { card, fact, CHIPS, NOT_KNOWN } from './schema.js';
 import { numbersIn } from './text.js';
+import { normaliseFact, quantity, packRange, packRangeText, doseBasisText, inputFor, fmtQty, fmtK, DOSE_KINDS } from '../lib/finder/calc.js';
 
 export const prod = (s) => ({ id: s.id, name: s.n, url: s.u });
 const num = (x) => (Math.round((x + 1e-9) * 100) / 100).toString();
@@ -99,6 +100,31 @@ export function computeQuantity(f, area, thickness) {
   if (p.model === 'area_per_unit' && p.min > 0 && /^(L|kg)$/.test(p.unit || '')) return { unit: p.unit, need_min: area / p.max, need_max: area / p.min, basis: 'area_per_unit' };
   if (p.model === 'per_area' && /^(kg|L)$/.test(p.unit || '') && p.area_unit === 'm2' && !(p.coats_max > 1)) return { unit: p.unit, need_min: area * p.min, need_max: area * p.max, basis: 'per_area' };
   return null;
+}
+// ---- dosage products: the same maths as the product page (lib/finder/calc.js), so the advisor and the page cannot disagree
+const doseFacts = (sh) => (((sh.r && sh.r.facts && sh.r.facts.consumption) || []).map((f) => ({ f, n: normaliseFact({ text: f.text, parsed: f.parsed }) })).filter((x) => x.n.ok && DOSE_KINDS.includes(x.n.kind)));
+export const isDoseProduct = (sh) => { const all = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []).map((f) => normaliseFact({ text: f.text, parsed: f.parsed })).filter((n) => n.ok); return all.length > 0 && all.every((n) => DOSE_KINDS.includes(n.kind)); };
+export function doseNeedCard(sh) {
+  const k = inputFor(doseFacts(sh)[0].n);
+  const [ask, opts] = k === 'volume' ? ['How many cubic metres of concrete or mix? The dose is published per cubic metre.', [1, 5, 10].map((v) => `How much ${sh.n} for ${v} m3`)] : k === 'water' ? ['How many litres of water?', [100, 200].map((v) => `How much ${sh.n} for ${v} L of water`)] : k === 'mix' ? ['How many kg of mix?', [20, 100].map((v) => `How much ${sh.n} for ${v} kg of mix`)] : ['How many kilograms of cement or binder are in the mix? The dose is published per set mass of it.', [500, 1000, 2000].map((v) => `How much ${sh.n} for ${v} kg of cement`)];
+  return chooseCard(`How much ${sh.n}?`, ask, opts);
+}
+export function doseCard(sh, dose, question) {
+  const job = { cementKg: dose.cementKg, mixKg: dose.mixKg, waterL: dose.waterL, volume: dose.volume };
+  const usable = doseFacts(sh).map((x) => ({ ...x, q: quantity(x.n, job) })).filter((x) => x.q.ok).slice(0, 3);
+  if (!usable.length) return doseNeedCard(sh);
+  const packs = parsePacks(sh); const lines = [], outFacts = [];
+  lines.push({ label: 'Size you asked about', text: [dose.cementKg && `${fmtK(dose.cementKg)} kg of cement or binder`, dose.mixKg && `${fmtK(dose.mixKg)} kg of mix`, dose.waterL && `${fmtK(dose.waterL)} L of water`, dose.volume && `${fmtK(dose.volume)} m3`].filter(Boolean).join(', ') });
+  for (const { f, n, q } of usable) {
+    lines.push({ label: `Published dose (${where(f)})`, text: doseBasisText(n), fact: f.id });
+    lines.push({ label: 'Quantity', text: q.limit === 'max' ? `up to ${fmtQty(q.high, q.unit)}` : q.limit === 'min' ? `at least ${fmtQty(q.low, q.unit)}` : q.low === q.high ? fmtQty(q.low, q.unit) : `${fmtQty(q.low, q.unit)} to ${fmtQty(q.high, q.unit)}`, fact: f.id });
+    if (q.typical != null) lines.push({ label: 'Typical dose in the same statement', text: fmtQty(q.typical, q.unit), fact: f.id });
+    if (q.unit !== 'bags') { const pr = packRange(packs.map((p) => ({ amount: p.amount, unit: p.unit })), q); lines.push({ label: 'Whole packs, rounded up', text: pr.options.length ? pr.options.map((o) => packRangeText(o, q.limit)).join('; ') : 'The published pack sizes use a different unit, so I will not convert them without a stated density.' }); }
+    outFacts.push(srcFact(f));
+  }
+  lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
+  return card({ type: 'calculation', title: `How much ${sh.n}`, product: prod(sh), headline: 'Worked out from the published dose below. The published range stays a range: no midpoint is picked. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.',
+    lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { cement_kg: dose.cementKg || null, mix_kg: dose.mixKg || null, water_l: dose.waterL || null, volume_m3: dose.volume || null, facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.low, need_max: x.q.high, basis: x.n.kind })), plan: [] } });
 }
 export function calcCard(sh, area, question, thickness) {
   const facts = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []);

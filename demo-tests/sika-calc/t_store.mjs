@@ -1,0 +1,40 @@
+// calculations[] in lib/projectstore.js: record shape, additive migration from older keys and files, delete, re-run (update), duplicates, used-in, import merge and the read API.
+import assert from 'node:assert/strict';
+import { createProjectStore, KEY, LEGACY_ACTIONS_KEY, LEGACY_PORTAL_KEY, buildJobPack } from '../../public/demo/sika-210c0c/assets/lib/projectstore.js';
+let pass = 0, fail = 0;
+const t = (n, f) => { try { f(); pass++; } catch (e) { fail++; console.log('FAIL ' + n + ' :: ' + String(e.message).split('\n')[0]); } };
+const mem = () => { const m = new Map(); return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => { m.set(k, String(v)); }, removeItem: (k) => { m.delete(k); }, _m: m }; };
+let tick = 0; const clock = () => new Date(Date.UTC(2026, 10, 1, 10, 0, tick++));
+const REC = { kind: 'grout', product: 'none', title: 'Grout for 20 m2 of 600 x 600 mm tiles', question: 'how much grout for 20 m2 of 600x600 tiles with 3 mm joints', inputs: { area: 20, tileL: 600, tileW: 600, jointMm: 3, thicknessMm: 10 }, normalised: { area_m2: 20 }, result: { litres: 2 }, answer: '2 L of grout', formula: '20 m2 x ... = 2 L', citation: { text: 'Worked from the numbers you typed; no data sheet figure is involved.', url: '', page: null, kind: 'worked' }, estimate: 'Estimate only, not an offer.' };
+
+t('record shape: id, time, kind, product "none", inputs, result, citation, estimate, usedIn', () => {
+  const s = createProjectStore(mem(), clock); const r = s.addCalculation(REC); assert.equal(r.ok, true); const c = r.calculation;
+  assert(/^calc-/.test(c.id)); assert(/^2026-11-01T/.test(c.t)); assert.equal(c.kind, 'grout'); assert.equal(c.product, 'none'); assert.equal(c.inputs.area, 20); assert.equal(c.result.litres, 2);
+  assert.equal(c.citation.kind, 'worked'); assert(c.estimate.includes('Estimate only')); assert.deepEqual(c.usedIn, []); assert.equal(c.answer, '2 L of grout');
+});
+t('survives a reload from storage', () => { const m = mem(); const a = createProjectStore(m, clock); a.addCalculation(REC); const b = createProjectStore(m, clock); assert.equal(b.calculations().length, 1); assert.equal(b.calculations()[0].inputs.jointMm, 3); });
+t('unknown kinds and junk are refused', () => { const s = createProjectStore(mem(), clock); assert.equal(s.addCalculation({ kind: 'bogus', inputs: {} }).ok, false); assert.equal(s.addCalculation(null).ok, false); assert.equal(s.calculations().length, 0); });
+t('the same calculation is not stored twice', () => { const s = createProjectStore(mem(), clock); s.addCalculation(REC); const r = s.addCalculation(REC); assert.equal(r.duplicate, true); assert.equal(s.calculations().length, 1); });
+t('newest first, last three, limit', () => { const s = createProjectStore(mem(), clock); for (let i = 1; i <= 5; i++) s.addCalculation({ ...REC, inputs: { ...REC.inputs, area: i }, result: { litres: i } }); assert.equal(s.calculations()[0].inputs.area, 5); assert.deepEqual(s.lastCalculations(3).map((c) => c.inputs.area), [5, 4, 3]); });
+t('delete', () => { const s = createProjectStore(mem(), clock); const id = s.addCalculation(REC).calculation.id; assert.equal(s.removeCalculation(id), true); assert.equal(s.calculations().length, 0); assert.equal(s.removeCalculation(id), false); });
+t('re-run keeps id and first time, replaces inputs and result', () => { const s = createProjectStore(mem(), clock); const c = s.addCalculation(REC).calculation; const u = s.updateCalculation(c.id, { inputs: { ...REC.inputs, thicknessMm: 12 }, result: { litres: 2.4 }, answer: '2.4 L of grout' }); assert.equal(u.ok, true); assert.equal(u.calculation.id, c.id); assert.equal(u.calculation.t, c.t); assert.equal(u.calculation.result.litres, 2.4); assert.equal(u.before.result.litres, 2); assert.equal(s.updateCalculation('nope', {}).ok, false); });
+t('used-in link for a cart line', () => { const s = createProjectStore(mem(), clock); const c = s.addCalculation({ ...REC, kind: 'mixwater', product: 'sikatile-510-megalite', productName: 'SikaTile-510 MegaLite', result: { low_l: 12, high_l: 13 } }).calculation; assert.equal(s.markCalculationUsed(c.id, { type: 'cart', ref: 'sikatile-510-megalite' }), true); s.markCalculationUsed(c.id, { type: 'cart', ref: 'sikatile-510-megalite' }); s.markCalculationUsed(c.id, { type: 'quote', ref: 'Q-1' }); const u = s.getCalculation(c.id).usedIn; assert.equal(u.length, 2); assert.deepEqual(u.map((x) => x.type), ['cart', 'quote']); });
+t('older saved file without calculations loads and gains an empty list', () => {
+  const m = mem(); m.setItem(KEY, JSON.stringify({ v: 1, model: 2, current: 'Old', projects: { Old: { name: 'Old', created: 'x', updated: 'x', items: [{ id: 'sikarapid-4', name: 'SikaRapid-4', qty: 2, unit: 'pack' }], systems: [], quantities: [], documents: [], notes: [{ text: 'hello', saved: 'x' }] } }, recent: [], gaps: [] }));
+  const s = createProjectStore(m, clock); assert.equal(s.items().length, 1); assert.deepEqual(s.calculations(), []); assert.equal(s.addCalculation(REC).ok, true); assert.equal(s.currentProject().notes.length, 1);
+});
+t('migration from the two legacy keys still works and leaves calculations empty', () => {
+  const m = mem(); m.setItem(LEGACY_PORTAL_KEY, JSON.stringify([{ id: 'sika-air', qty: 3, unit: 'pack' }])); const s = createProjectStore(m, clock); assert.equal(s.loadedFrom(), 'migrated'); assert(s.items().some((i) => i.id === 'sika-air')); assert.deepEqual(s.calculations(), []);
+  const m2 = mem(); m2.setItem(LEGACY_ACTIONS_KEY, JSON.stringify({ v: 1, current: 'P', projects: { P: { systems: [], quantities: [], documents: [], notes: [{ text: 'n' }] } }, recent: [], gaps: [] })); const s2 = createProjectStore(m2, clock); assert.equal(s2.currentProject().notes.length, 1);
+});
+t('export then import into another browser keeps calculations; merge does not duplicate', () => {
+  const a = createProjectStore(mem(), clock); a.addCalculation(REC); const json = a.exportJSON(); const b = createProjectStore(mem(), clock); const r = b.importJSON(json); assert.equal(r.ok, true); assert.equal(b.calculations().length, 1); b.importJSON(json); assert.equal(b.calculations().length, 1);
+});
+t('import of a file from before this field is accepted', () => { const b = createProjectStore(mem(), clock); const r = b.importJSON(JSON.stringify({ v: 1, current: 'A', projects: { A: { items: [], systems: [], quantities: [], documents: [], notes: [] } }, recent: [], gaps: [] })); assert.equal(r.ok, true); assert.deepEqual(b.calculations(), []); });
+t('oversized or hostile fields are clipped', () => { const s = createProjectStore(mem(), clock); const r = s.addCalculation({ ...REC, title: 'x'.repeat(5000), inputs: { big: 'y'.repeat(5000) }, id: '__proto__' }); assert.equal(r.ok, true); assert(r.calculation.title.length <= 200); assert.deepEqual(r.calculation.inputs, {}); assert.notEqual(r.calculation.id, '__proto__'); });
+t('one project per list: another project has its own calculations', () => { const s = createProjectStore(mem(), clock); s.addCalculation(REC); s.create('Smith bathroom'); assert.equal(s.calculations().length, 0); s.addCalculation({ ...REC, result: { litres: 3 } }); assert.equal(s.allCalculations().length, 2); s.use('My project'); assert.equal(s.calculations().length, 1); });
+t('read API for the quote pack: calculations() returns plain copies', () => { const s = createProjectStore(mem(), clock); s.addCalculation(REC); const a = s.calculations(); a[0].title = 'changed'; assert.notEqual(s.calculations()[0].title, 'changed'); });
+{ const none = await buildJobPack({ name: 'P', items: [], documents: [], notes: [], systems: [] }, async () => []); const s = createProjectStore(mem(), clock); s.addCalculation(REC); const pk = await buildJobPack(s.currentProject(), async () => []);
+  t('job pack text lists calculations only when there are some', () => { assert(!/Calculations/.test(none.enquiry)); assert(/Calculations \(estimates/.test(pk.enquiry) && /2 L of grout/.test(pk.enquiry)); }); }
+console.log(`CALC STORE: ${pass} passed, ${fail} failed`);
+process.exit(fail ? 1 : 0);

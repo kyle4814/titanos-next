@@ -1,0 +1,954 @@
+[
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-1250 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-1250",
+   "has": true,
+   "contains": "Typical dosage for soft concrete production is 350 ml - 1500 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d001",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-10 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-10",
+   "has": true,
+   "contains": "Recommended dosage for concrete: 250 ml to 2000 ml per 100 kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d002",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-5-500 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-5-500",
+   "has": true,
+   "contains": "Typical dosage for soft concrete production is 300mls-600mls per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d003",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-140 SK for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-140sk",
+   "has": true,
+   "contains": "Sika recommends dosage at 500–1000 ml/100 kg of cementitious for general concrete applications"
+  },
+  "messy": "",
+  "id": "d004",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete PC HRF-2 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-pchrf-2",
+   "has": true,
+   "contains": "Typical dosage rates range from 200 – 1000ml per 100kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d005",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-20 HE for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-20he",
+   "has": true,
+   "contains": "Dosage is 200 ml to 1000 ml per 100kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d006",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika ViscoCrete-20 HE do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-20he",
+   "has": true,
+   "contains": "Dosage is 200 ml to 1000 ml per 100kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d007",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sikament ECO WR for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikament-eco-wr",
+   "has": true,
+   "contains": "Typical dosage for general concrete production is between 400-1000 ml per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d008",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sikament ECO-3 W for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikament-eco-3-w",
+   "has": true,
+   "contains": "Typical dosage is 600ml per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d009",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaPlast-70 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikaplast-70",
+   "has": true,
+   "contains": "Typical dosage for general concrete production is between 300-600mls per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d010",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Plastiment-45 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-plastiment-45",
+   "has": true,
+   "contains": "Recommended dosage is 350 ml± 100 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d011",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Sigunit L-5401 AF for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-sigunit-l-5401af",
+   "has": true,
+   "contains": "For layer thicknesses of up to 100 mm applied in one pass, the recommended accelerator dosage is between 5 % and 9 % by weight of binder"
+  },
+  "messy": "",
+  "id": "d012",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika Sigunit L-5401 AF do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-sigunit-l-5401af",
+   "has": true,
+   "contains": "For layer thicknesses of up to 100 mm applied in one pass, the recommended accelerator dosage is between 5 % and 9 % by weight of binder"
+  },
+  "messy": "",
+  "id": "d013",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Sigunit L-530 AF for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-sigunit-l-530af",
+   "has": true,
+   "contains": "For layer thicknesses of up to 100 mm in one pass, dosage is between 4% and 7% of weight of binder."
+  },
+  "messy": "",
+  "id": "d014",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Retarder N for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-retarder-n",
+   "has": true,
+   "contains": "The rate of addition is generally in the range of: 200ml ± 100ml per 100kg of cementitious materials."
+  },
+  "messy": "",
+  "id": "d015",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika UCS Pak for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-ucs-pak",
+   "has": true,
+   "contains": "4-5 bags/m3 in severe environments (flowing water)"
+  },
+  "messy": "",
+  "id": "d016",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Mix for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-mix",
+   "has": true,
+   "contains": "300-1000 ml/m3"
+  },
+  "messy": "",
+  "id": "d017",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika WT-200 P for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-wt-200-p",
+   "has": true,
+   "contains": "1–2 % of Sika® WT-200 P by weight of binder"
+  },
+  "messy": "",
+  "id": "d018",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika WT-200 P do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-wt-200-p",
+   "has": true,
+   "contains": "1–2 % of Sika® WT-200 P by weight of binder"
+  },
+  "messy": "",
+  "id": "d019",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika CNI for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-cni",
+   "has": true,
+   "contains": "The recommended dosage rate will vary between 10 and 30 litre per cubic meter of concrete, depending on the severity of the corrosion environment"
+  },
+  "messy": "",
+  "id": "d020",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber Novomesh-950 for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-novomesh-950",
+   "has": true,
+   "contains": "Standard recommended dosage rate of SikaFiber® Novomesh®-950 is between 1 and 3 bags/m3 of concrete"
+  },
+  "messy": "",
+  "id": "d021",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Confibre 51F for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-confibre-51f",
+   "has": true,
+   "contains": "The recommended minimum dose rate of Sika Confibre 51F is 0.9kg (1 bag) per cubic metre of concrete."
+  },
+  "messy": "",
+  "id": "d022",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber PPM 48/19 for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-ppm-4819",
+   "has": true,
+   "contains": "The typical dose rate for SikaFiber® PPM 48/19 is 2.3 kg per m3"
+  },
+  "messy": "",
+  "id": "d023",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber Force PP-48 / RAD-48s for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-force-pp-48rad-48s",
+   "has": true,
+   "contains": "4-8 kg/m3"
+  },
+  "messy": "",
+  "id": "d024",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of SikaFiber Force PP-48 / RAD-48s do I need for 3 cubic metres",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-force-pp-48rad-48s",
+   "has": true,
+   "contains": "4-8 kg/m3"
+  },
+  "messy": "",
+  "id": "d025",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Confibre 19F for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-confibre-19f",
+   "has": true,
+   "contains": "The recommended minimum dose rate of Sika® Confibre® 19F is 0.9kg (1 bag) per cubic metre of concrete."
+  },
+  "messy": "",
+  "id": "d026",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaGrind-272 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikagrind-272",
+   "has": true,
+   "contains": "Typical dosage rates of SikaGrind®-272 are between 0.3 - 0.6 kg per ton of cement or slag (0.03% - 0.06% of total weight = cement clinker + additions or simply slag)"
+  },
+  "messy": "",
+  "id": "d027",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaRapid AF for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikarapid-af",
+   "has": true,
+   "contains": "Dosage is 400ml - 2000ml/100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d028",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaRapid C-100 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikarapid-c-100",
+   "has": true,
+   "contains": "500–2000 ml/100 kg of cementitious (according to the target accelerating effect)."
+  },
+  "messy": "",
+  "id": "d029",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Set Accelerator for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-set-accelerator",
+   "has": true,
+   "contains": "Typical dosage is between 1000 and 2000 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d030",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika Set Accelerator do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-set-accelerator",
+   "has": true,
+   "contains": "Typical dosage is between 1000 and 2000 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d031",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika AIR for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-air",
+   "has": true,
+   "contains": "Typical dose rate for general concrete production ranges within 50-150 ml per cubic meter of concrete"
+  },
+  "messy": "",
+  "id": "d032",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Block for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-block",
+   "has": true,
+   "contains": "Sika® Block can be used at rates of 150-500mls per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d033",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Masonry AU 1 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-masonry-au-1",
+   "has": true,
+   "contains": "Normally a dosage range of 200 - 500 ml / 100 kg of cementitious material should be sufficient for efflorescence and absorption control"
+  },
+  "messy": "",
+  "id": "d034",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaColor Flo for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikacolor-flo",
+   "has": true,
+   "contains": "Product is available in numerous standard colours as indicated in the Colour Card using 1 % to 8 % loadings by weight of cement."
+  },
+  "messy": "",
+  "id": "d035",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaControl PLUS for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikacontrol-plus",
+   "has": true,
+   "contains": "Typical dosage rate is 1.0 – 3.0% by weight of total cementitious material"
+  },
+  "messy": "",
+  "id": "d036",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of SikaControl PLUS do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikacontrol-plus",
+   "has": true,
+   "contains": "Typical dosage rate is 1.0 – 3.0% by weight of total cementitious material"
+  },
+  "messy": "",
+  "id": "d037",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete PC HRF-1 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-pchrf-1",
+   "has": true,
+   "contains": "Typical dose rates range from 200-1000ml per 100kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d038",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-190 SC for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-190sc",
+   "has": true,
+   "contains": "Sika recommends dosage at 300–1000 ml/100 kg of cementitious for general concrete applications"
+  },
+  "messy": "",
+  "id": "d039",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Plastiment-30 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-plastiment-30",
+   "has": true,
+   "contains": "Recommended dosage is 350 ml ±100 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d040",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Stabilizer-4 R AU for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-stabilizer-4rau",
+   "has": true,
+   "contains": "Sika recommends dosage at 200–1500 ml/100 kg of cementitious materials"
+  },
+  "messy": "",
+  "id": "d041",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Air - LS for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-air--ls",
+   "has": true,
+   "contains": "Typical dosage rates for general concrete production range from 250-750 mls per cubic metre of concrete"
+  },
+  "messy": "",
+  "id": "d042",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika Air - LS do I need for 3 cubic metres",
+  "type": "calc",
+  "exp": {
+   "product": "sika-air--ls",
+   "has": true,
+   "contains": "Typical dosage rates for general concrete production range from 250-750 mls per cubic metre of concrete"
+  },
+  "messy": "",
+  "id": "d043",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaGrout Deep Pour for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikagrout-deep-pour",
+   "has": true,
+   "contains": "Approximately 102 bags per 1m3"
+  },
+  "messy": "",
+  "id": "d044",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika FerroGard-901 S for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-ferrogard-901s",
+   "has": true,
+   "contains": "12 kg/m3"
+  },
+  "messy": "",
+  "id": "d045",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaRapid-4 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikarapid-4",
+   "has": true,
+   "contains": "Dosage is 400ml - 2000ml/100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d046",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Fibermesh-150 for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-fibermesh-150",
+   "has": true,
+   "contains": "Standard recommended dosage ratio of Sika® Fibermesh®-150 is 1.0 kg/m3 of concrete"
+  },
+  "messy": "",
+  "id": "d047",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaTard-960 HC for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikatard-960-hc",
+   "has": true,
+   "contains": "Depending on the required amount of retardation, 150-1000 mls/100 kg of cement"
+  },
+  "messy": "",
+  "id": "d048",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of SikaTard-960 HC do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikatard-960-hc",
+   "has": true,
+   "contains": "Depending on the required amount of retardation, 150-1000 mls/100 kg of cement"
+  },
+  "messy": "",
+  "id": "d049",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaGunite GP for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikagunite-gp",
+   "has": true,
+   "contains": "Approx. 105 bags per m3"
+  },
+  "messy": "",
+  "id": "d050",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaPlast-3173 SCM for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikaplast-3173-scm",
+   "has": true,
+   "contains": "Typical dosage rate is 400 – 1200 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d051",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber Force PP-65/RAD65s for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-force-pp-65rad65s",
+   "has": true,
+   "contains": "4-8 kg/m3"
+  },
+  "messy": "",
+  "id": "d052",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Stabilizer-821 CS for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-stabilizer-821cs",
+   "has": true,
+   "contains": "Sika® Stabilizer-821 CS is formulated for use at a rate of 150-1200 mls/100kg of total cementitious material."
+  },
+  "messy": "",
+  "id": "d053",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoCrete-88 SC for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-88sc",
+   "has": true,
+   "contains": "Recommended dosage for concrete: 400 ml to 1500 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d054",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika ViscoCrete-88 SC do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscocrete-88sc",
+   "has": true,
+   "contains": "Recommended dosage for concrete: 400 ml to 1500 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d055",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaRapid-22 AU for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikarapid-22-au",
+   "has": true,
+   "contains": "Typical dosage range is 500ml - 2000ml/100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d056",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaPlast-300 E for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikaplast-300-e",
+   "has": true,
+   "contains": "Typical dosage for general concrete production is between 300 to 800 ml/100 kg of total binder content"
+  },
+  "messy": "",
+  "id": "d057",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much Sika Intraplast-100 Z for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sika-intraplast-100z",
+   "has": true,
+   "contains": "Typical dosage rates are between 5 - 30 kg per cubic meter of grout depending on specific requirements"
+  },
+  "messy": "",
+  "id": "d058",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoFlow-21 AU for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscoflow-21au",
+   "has": true,
+   "contains": "Sika ViscoFlow®-21 AU recommended dosage is 200 ml to 1000 ml per 100kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d059",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber Novocon CHE-8060 HT for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-novoconche-8060ht",
+   "has": true,
+   "contains": "Standard recommended dosage rate of SikaFiber® Novocon® CHE-8060 HT is between 15–40 kg/m3 of concrete"
+  },
+  "messy": "",
+  "id": "d060",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of SikaFiber Novocon CHE-8060 HT do I need for 3 cubic metres",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-novoconche-8060ht",
+   "has": true,
+   "contains": "Standard recommended dosage rate of SikaFiber® Novocon® CHE-8060 HT is between 15–40 kg/m3 of concrete"
+  },
+  "messy": "",
+  "id": "d061",
+  "split": "blind"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Set-1 GV for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-set-1-gv",
+   "has": true,
+   "contains": "Typical dosage range of Sika® Set-1 GV is 5–25 % by weight of cement"
+  },
+  "messy": "",
+  "id": "d062",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika Plastiment-55 for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-plastiment-55",
+   "has": true,
+   "contains": "Recommended dosage is 400 ml ± 100 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d063",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaPlast-82 SCM Impact for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikaplast-82-scmimpact",
+   "has": true,
+   "contains": "Sika recommends dosage at 400–1000 ml/100 kg of total cementitious for general concrete applications"
+  },
+  "messy": "",
+  "id": "d064",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much SikaControl-3122 WT for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sikacontrol-3122wt",
+   "has": true,
+   "contains": "1–2.5 % by weight of binder"
+  },
+  "messy": "",
+  "id": "d065",
+  "split": "tuned"
+ },
+ {
+  "persona": "builder",
+  "category": "dosage quantity",
+  "q": "how much Sika ViscoFlow-21 AU IMPACT for 2 tonnes of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscoflow-21auimpact",
+   "has": true,
+   "contains": "Sika ViscoFlow®-21 AU IMPACT recommended dosage is 200 ml to 800 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d066",
+  "split": "blind"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how many litres of Sika ViscoFlow-21 AU IMPACT do I need for 1000 kg of cement",
+  "type": "calc",
+  "exp": {
+   "product": "sika-viscoflow-21auimpact",
+   "has": true,
+   "contains": "Sika ViscoFlow®-21 AU IMPACT recommended dosage is 200 ml to 800 ml per 100 kg of total cementitious material"
+  },
+  "messy": "",
+  "id": "d067",
+  "split": "tuned"
+ },
+ {
+  "persona": "concreter",
+  "category": "dosage quantity",
+  "q": "how much SikaFiber-100 Recycled PP48 Impact for 10 m3 of concrete",
+  "type": "calc",
+  "exp": {
+   "product": "sikafiber-100-recycledpp48impact",
+   "has": true,
+   "contains": "4-8 kg/m3"
+  },
+  "messy": "",
+  "id": "d068",
+  "split": "tuned"
+ }
+]

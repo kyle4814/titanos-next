@@ -247,7 +247,7 @@ export function createBrain({ load, config } = {}) {
     // the words of a product name are not intent or facet words ("Opti-Cure" is not a cure question, "Concrete Fix" is not concrete)
     const w0 = n0.split(' ').filter(Boolean), cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
     const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
-    const facets = parseFacets(n); let intent = classify(n, facets.area != null);
+    const facets = parseFacets(n); let intent = classify(n, facets.area != null || !!facets.dose);
     if (intent === 'calc' && /\bpallets?\b/.test(n)) intent = 'which';
     if (['which', 'compat', 'time', 'rate'].includes(intent) && /\bor\b|\bwhich (one|is better|should i)\b|\bsame (thing|as|product)\b/.test(n0) && mentions.filter((m) => m.pis.length === 1).length >= 2) intent = 'compare';
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
@@ -350,6 +350,7 @@ export function createBrain({ load, config } = {}) {
     if (needsProduct || (namedAll && intent === 'which' && pis.length === 1)) {
       const sh = await shard(pis[0]); if (!sh) return out(intent, stage, [C.unknown(q, null, 'The product data could not be loaded.', [])]);
       const s = st(pis[0]);
+      if (intent === 'calc' && C.isDoseProduct(sh)) return out(intent, stage, [facets.dose ? C.doseCard(sh, facets.dose, q) : C.doseNeedCard(sh)], { state: s });
       if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
       if (intent === 'time' && /overcoat|re-?coat|recoat|wait.*(before|until).*(coat|paint)/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, n, q, true); if (oc) { trace.push('attr:overcoat'); return out(intent, stage, [oc], { state: s }); } }
