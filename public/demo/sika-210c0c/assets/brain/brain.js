@@ -495,6 +495,8 @@ export function createBrain({ load, config, loadRules } = {}) {
       }).filter(Boolean);
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
+    // wave 3: a descriptive ask with no product named shows one kind of product: the category that holds most of the matching weight, never a mix of unrelated groups
+    if (!pis.length && list.length > 1) { const w = new Map(); for (const x of list.slice(0, 12)) { const k = core.P[x.pi].c.split('/').slice(0, 2).join('/'); w.set(k, (w.get(k) || 0) + x.score); } const win = [...w].sort((a, b) => b[1] - a[1])[0][0]; const same = list.filter((x) => core.P[x.pi].c.split('/').slice(0, 2).join('/') === win); if (same.length && same[0] !== list[0]) trace.push('category:' + win); if (same.length) list = same; }
     const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.75);
     const qset = new Set([...qm.keys()].filter((k) => qm.get(k) >= 1));
     const cards = [];
