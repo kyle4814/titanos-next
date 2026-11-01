@@ -1,24 +1,49 @@
 {
  "construction": {
   "author": "Fons Heijnsbroek from Amsterdam, Netherlands",
-  "fetched": "2026-10-31",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC0",
   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-  "page": "https://commons.wikimedia.org/wiki/File:2007.06_-_%27A_close-up_view_in_the_excavation%27_-_Amsterdam_photos_and_pictures,_Oosterdok_Docklands_with_pile_plants_-_on_the_background_the_Municipal_Library,_O.B.A.;_Dutch_city_%2B_geotag,_Fons_Heijnsbroek,_The_Netherlands_(11292147744).jpg",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:2006.10_-_%27Building_construction_site_%26_many_scaffold_tubes%27_-_Amsterdam_photos_and_pictures,_ath_the_construction_site,_at_the_Oosterdok_Docklands;_Dutch_city_%2B_geotag,_Fons_Heijnsbroek,_The_Netherlands_(27572224141).jpg",
   "query": "modern building construction site concrete",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/2007.06_-_%27A_close-up_view_in_the_excavation%27_-_Amsterdam_photos_and_pictures%2C_Oosterdok_Docklands_with_pile_plants_-_on_the_background_the_Municipal_Library%2C_O.B.A.%3B_Dutch_city_%2B_geotag%2C_Fons_Heijnsbroek%2C_The_Netherlands_%2811292147744%29.jpg/960px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 3543,
-  "sourceWidth": 4725,
-  "title": "File:2007.06 - 'A close-up view in the excavation' - Amsterdam photos and pictures, Oosterdok Docklands with pile plants - on the background the Municipal Library, O.B.A.; Dutch city + geotag, Fons Heijnsbroek, The Netherlands (11292147744).jpg"
+  "relevance": 5,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "construction",
+   "modern",
+   "site"
+  ],
+  "sharpness": 12055.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/2006.10_-_%27Building_construction_site_%26_many_scaffold_tubes%27_-_Amsterdam_photos_and_pictures%2C_ath_the_construction_site%2C_at_the_Oosterdok_Docklands%3B_Dutch_city_%2B_geotag%2C_Fons_Heijnsbroek%2C_The_Netherlands_%2827572224141%29.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2657,
+  "sourceWidth": 3543,
+  "title": "File:2006.10 - 'Building construction site & many scaffold tubes' - Amsterdam photos and pictures, ath the construction site, at the Oosterdok Docklands; Dutch city + geotag, Fons Heijnsbroek, The Netherlands (27572224141).jpg"
  },
  "construction/concrete": {
   "author": "Steve Pivnick, U.S. Air Force",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Construction_site_with_concrete_pump_truck.JPG",
   "query": "concrete pour construction site",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Construction_site_with_concrete_pump_truck.JPG/960px-Construction_site_with_concrete_pump_truck.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 8,
+  "relevanceWords": [
+   "build",
+   "cement",
+   "concrete",
+   "construction",
+   "mixer",
+   "pour",
+   "pump",
+   "site"
+  ],
+  "sharpness": 3546.5,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Construction_site_with_concrete_pump_truck.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
   "sourceHeight": 1219,
   "sourceWidth": 1800,
   "title": "File:Construction site with concrete pump truck.JPG"
@@ -26,47 +51,157 @@
  "construction/concrete-repair-protection": {
   "author": "OregonDOT",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:St._Johns_Bridge_Repair_Project.jpg",
   "query": "concrete repair bridge",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/St._Johns_Bridge_Repair_Project.jpg/960px-St._Johns_Bridge_Repair_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 6,
+  "relevanceWords": [
+   "bridge",
+   "concrete",
+   "corrosion",
+   "reinforcement",
+   "repair",
+   "steel"
+  ],
+  "sharpness": 745.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/St._Johns_Bridge_Repair_Project.jpg/1920px-St._Johns_Bridge_Repair_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3078,
   "sourceWidth": 5472,
   "title": "File:St. Johns Bridge Repair Project.jpg"
  },
  "construction/concrete-repair-protection/concrete-mortarsadmixtures": {
-  "inherit": "construction/concrete-repair-protection"
- },
- "construction/concrete-repair-protection/concrete-repair-mortars": {
   "author": "Achim Hering",
-  "fetched": "2026-10-31",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Qew_bruecke_nf_beton_kaputt_46_von_46.jpg",
-  "query": "repairing concrete column",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Qew_bruecke_nf_beton_kaputt_46_von_46.jpg/960px-Qew_bruecke_nf_beton_kaputt_46_von_46.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 3072,
-  "sourceWidth": 4608,
-  "title": "File:Qew bruecke nf beton kaputt 46 von 46.jpg"
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Firestop_mortar_mixing.jpg",
+  "query": "concrete mortar mixing",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "mix",
+   "mortar",
+   "steel"
+  ],
+  "sharpness": 828.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Firestop_mortar_mixing.jpg/1920px-Firestop_mortar_mixing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4725,
+  "sourceWidth": 6291,
+  "title": "File:Firestop mortar mixing.jpg"
+ },
+ "construction/concrete-repair-protection/concrete-repair-mortars": {
+  "author": "Chris Morgan",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Spalling_concrete_below_A167(M),_Sandyford_Road_-_geograph.org.uk_-_8090941.jpg",
+  "query": "concrete spalling",
+  "relevance": 2,
+  "relevanceWords": [
+   "concrete",
+   "spall"
+  ],
+  "sharpness": 4487.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Spalling_concrete_below_A167%28M%29%2C_Sandyford_Road_-_geograph.org.uk_-_8090941.jpg/1920px-Spalling_concrete_below_A167%28M%29%2C_Sandyford_Road_-_geograph.org.uk_-_8090941.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2252,
+  "sourceWidth": 4000,
+  "title": "File:Spalling concrete below A167(M), Sandyford Road - geograph.org.uk - 8090941.jpg"
  },
  "construction/concrete-repair-protection/concrete-repair-mortars/cementitious-repairmortars": {
-  "inherit": "construction/concrete-repair-protection/concrete-repair-mortars"
+  "author": "U.S. Navy photo by Petty Officer 1st Class Sean P Rinner",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:NMCB_1_Seabees_S%C3%A3o_Tom%C3%A9_schoolhouse_repair_(8878947).jpg",
+  "query": "repairing concrete patch",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "patch",
+   "repair"
+  ],
+  "sharpness": 780.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/NMCB_1_Seabees_S%C3%A3o_Tom%C3%A9_schoolhouse_repair_%288878947%29.jpg/1920px-NMCB_1_Seabees_S%C3%A3o_Tom%C3%A9_schoolhouse_repair_%288878947%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1563,
+  "sourceWidth": 2344,
+  "title": "File:NMCB 1 Seabees S\u00e3o Tom\u00e9 schoolhouse repair (8878947).jpg"
  },
  "construction/concrete-repair-protection/concrete-repair-mortars/epoxy-repair-mortarsandrigidbonding": {
-  "inherit": "construction/concrete-repair-protection/concrete-repair-mortars"
+  "author": "MTA Capital Construction Mega Projects",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Installation_of_epoxy_and_screen_mesh_to_fix_cracks_on_the_existing_concrete_floor_at_the_southern_end_of_the_future_LIRR_passenger_concourse._(49363293063).jpg",
+  "query": "concrete crack epoxy",
+  "relevance": 5,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "crack",
+   "epoxy",
+   "floor"
+  ],
+  "sharpness": 558.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Installation_of_epoxy_and_screen_mesh_to_fix_cracks_on_the_existing_concrete_floor_at_the_southern_end_of_the_future_LIRR_passenger_concourse._%2849363293063%29.jpg/1920px-Installation_of_epoxy_and_screen_mesh_to_fix_cracks_on_the_existing_concrete_floor_at_the_southern_end_of_the_future_LIRR_passenger_concourse._%2849363293063%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Installation of epoxy and screen mesh to fix cracks on the existing concrete floor at the southern end of the future LIRR passenger concourse. (49363293063).jpg"
  },
  "construction/concrete-repair-protection/concrete-repair-mortars/steel-reinforcmentprimers": {
-  "inherit": "construction/concrete-repair-protection/concrete-repair-mortars"
+  "author": "W.carter",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Rusty_rebar_nets.jpg",
+  "query": "rusty rebar",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "rebar",
+   "rust",
+   "rusty",
+   "site"
+  ],
+  "sharpness": 5800.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Rusty_rebar_nets.jpg/1920px-Rusty_rebar_nets.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3353,
+  "sourceWidth": 4680,
+  "title": "File:Rusty rebar nets.jpg"
  },
  "construction/concrete-repair-protection/corrosion-inhibitorssacrificialanodes": {
   "author": "Springnuts",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:2022-01-18_sacrificial_galvanic_anode.jpg",
   "query": "sacrificial anode corrosion",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/2022-01-18_sacrificial_galvanic_anode.jpg/960px-2022-01-18_sacrificial_galvanic_anode.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "anod",
+   "anode",
+   "corrosion",
+   "sacrificial"
+  ],
+  "sharpness": 1947.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/2022-01-18_sacrificial_galvanic_anode.jpg/1920px-2022-01-18_sacrificial_galvanic_anode.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3024,
   "sourceWidth": 4032,
   "title": "File:2022-01-18 sacrificial galvanic anode.jpg"
@@ -74,242 +209,988 @@
  "construction/concrete-repair-protection/corrosion-management": {
   "author": "TeWeBs",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Funchal_Carbonatation_Rebar.JPG",
   "query": "corroded rebar concrete",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Funchal_Carbonatation_Rebar.JPG/960px-Funchal_Carbonatation_Rebar.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "concrete",
+   "corroded",
+   "rebar"
+  ],
+  "sharpness": 7856.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Funchal_Carbonatation_Rebar.JPG/1920px-Funchal_Carbonatation_Rebar.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2900,
   "sourceWidth": 4352,
   "title": "File:Funchal Carbonatation Rebar.JPG"
  },
  "construction/concrete-repair-protection/corrosion-management/protective-coatingssilaneimpregnations": {
-  "inherit": "construction/concrete-repair-protection/corrosion-management"
+  "author": "Ckwongb",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Concrete_spall_(interior_of_unit).jpg",
+  "query": "concrete spalling",
+  "relevance": 3,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "spall"
+  ],
+  "sharpness": 242.6,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Concrete_spall_%28interior_of_unit%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 842,
+  "sourceWidth": 1872,
+  "title": "File:Concrete spall (interior of unit).jpg"
  },
  "construction/concrete-repair-protection/protective-coatingslinings": {
-  "inherit": "construction/concrete-repair-protection"
+  "author": "YellowstoneNPS",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Northeast_Entrance_Road_bridge_with_spalling_concrete_(52910290724).jpg",
+  "query": "concrete spalling",
+  "relevance": 3,
+  "relevanceWords": [
+   "bridge",
+   "concrete",
+   "spall"
+  ],
+  "sharpness": 6733.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Northeast_Entrance_Road_bridge_with_spalling_concrete_%2852910290724%29.jpg/1920px-Northeast_Entrance_Road_bridge_with_spalling_concrete_%2852910290724%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 5464,
+  "sourceWidth": 8192,
+  "title": "File:Northeast Entrance Road bridge with spalling concrete (52910290724).jpg"
  },
  "construction/concrete-repair-protection/silane-impregnations": {
-  "inherit": "construction/concrete-repair-protection"
+  "author": "Cullen328 (Jim Heaphy)",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Concrete_spalling_caused_by_oxide_jacking_at_the_Herbst_Pavilion,_Fort_Mason_Center,_San_Francisco.jpg",
+  "query": "concrete spalling",
+  "relevance": 3,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "spall"
+  ],
+  "sharpness": 912.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Concrete_spalling_caused_by_oxide_jacking_at_the_Herbst_Pavilion%2C_Fort_Mason_Center%2C_San_Francisco.jpg/1920px-Concrete_spalling_caused_by_oxide_jacking_at_the_Herbst_Pavilion%2C_Fort_Mason_Center%2C_San_Francisco.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1840,
+  "sourceWidth": 3264,
+  "title": "File:Concrete spalling caused by oxide jacking at the Herbst Pavilion, Fort Mason Center, San Francisco.jpg"
  },
  "construction/concrete/admixture-technology": {
   "author": "CEphoto, Uwe Aranas",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Kaohsiung_Taiwan_Cement-mixer-truck-01.jpg",
   "query": "concrete mixer truck",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Kaohsiung_Taiwan_Cement-mixer-truck-01.jpg/960px-Kaohsiung_Taiwan_Cement-mixer-truck-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "cement",
+   "concrete",
+   "mixer",
+   "truck"
+  ],
+  "sharpness": 2538.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Kaohsiung_Taiwan_Cement-mixer-truck-01.jpg/1920px-Kaohsiung_Taiwan_Cement-mixer-truck-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2582,
   "sourceWidth": 4590,
   "title": "File:Kaohsiung Taiwan Cement-mixer-truck-01.jpg"
  },
  "construction/concrete/admixture-technology/concrete-accelerators": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Kecko from Rural area, Eastern Switzerland",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:AB_-_Ruckhalde_Tunnel_(32722376620).jpg",
+  "query": "tunnel shotcrete",
+  "relevance": 3,
+  "relevanceWords": [
+   "construction",
+   "shotcrete",
+   "tunnel"
+  ],
+  "sharpness": 1805.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/AB_-_Ruckhalde_Tunnel_%2832722376620%29.jpg/1920px-AB_-_Ruckhalde_Tunnel_%2832722376620%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3648,
+  "sourceWidth": 5472,
+  "title": "File:AB - Ruckhalde Tunnel (32722376620).jpg"
  },
  "construction/concrete/admixture-technology/corrosion-inhibitors": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Asurnipal",
+  "fallbackFrom": "construction/concrete/admixture-technology",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Dornbirn-mobile_concrete_pump-concrete_mixer_truck-01ASD.jpg",
+  "query": "concrete mixer truck",
+  "relevance": 5,
+  "relevanceWords": [
+   "cement",
+   "concrete",
+   "mixer",
+   "pump",
+   "truck"
+  ],
+  "sharpness": 6114.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Dornbirn-mobile_concrete_pump-concrete_mixer_truck-01ASD.jpg/1920px-Dornbirn-mobile_concrete_pump-concrete_mixer_truck-01ASD.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3468,
+  "sourceWidth": 4624,
+  "title": "File:Dornbirn-mobile concrete pump-concrete mixer truck-01ASD.jpg"
  },
  "construction/concrete/admixture-technology/evaporation-retarders": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "U.S. Navy photo by Mass Communication Specialist 2nd Class Demetrius Kennon",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Navy_080107-N-7367K-008_A_Seabee_assigned_to_Naval_Mobile_Construction_Battalion_(NMCB)_1,_Task_Force_Sierra,_waters_a_freshly_laid_pad_of_concrete_to_aid_the_curing_process.jpg",
+  "query": "concrete curing",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "cur",
+   "water"
+  ],
+  "sharpness": 293.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/US_Navy_080107-N-7367K-008_A_Seabee_assigned_to_Naval_Mobile_Construction_Battalion_%28NMCB%29_1%2C_Task_Force_Sierra%2C_waters_a_freshly_laid_pad_of_concrete_to_aid_the_curing_process.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1396,
+  "sourceWidth": 2100,
+  "title": "File:US Navy 080107-N-7367K-008 A Seabee assigned to Naval Mobile Construction Battalion (NMCB) 1, Task Force Sierra, waters a freshly laid pad of concrete to aid the curing process.jpg"
  },
  "construction/concrete/admixture-technology/high-range-waterreducers": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Kai3952",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Aiyuzi_River_downstream,_showing_clear_water_flowing_towards_a_simple_bridge_with_concrete_pipes,_10_July_2021.jpg",
+  "query": "flowing concrete",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "flow",
+   "self",
+   "water"
+  ],
+  "sharpness": 9973.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Aiyuzi_River_downstream%2C_showing_clear_water_flowing_towards_a_simple_bridge_with_concrete_pipes%2C_10_July_2021.jpg/1920px-Aiyuzi_River_downstream%2C_showing_clear_water_flowing_towards_a_simple_bridge_with_concrete_pipes%2C_10_July_2021.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Aiyuzi River downstream, showing clear water flowing towards a simple bridge with concrete pipes, 10 July 2021.jpg"
  },
  "construction/concrete/admixture-technology/mid-range-water-reducers": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Grendelkhan",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Concrete_mixer_and_pump_truck_with_extended_boom.jpg",
+  "query": "concrete mixer",
+  "relevance": 6,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "mix",
+   "mixer",
+   "pump",
+   "site"
+  ],
+  "sharpness": 7415.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Concrete_mixer_and_pump_truck_with_extended_boom.jpg/1920px-Concrete_mixer_and_pump_truck_with_extended_boom.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Concrete mixer and pump truck with extended boom.jpg"
  },
  "construction/concrete/admixture-technology/retarders": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Massachusetts. Metropolitan District Water Supply Commission, Troland, Edwin Parker, 1914-2004",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Contract_No._80,_High_Level_Distribution_Reservoir,_Weston,_view_of_transit_mixer_(2_yd._truck),_Maffei_Sand_and_Gravel_Company,_Natick,_high_level_distribution_reservoir,_Weston,_M_-_DPLA_-_6e9104479ab0bf7e4216fefc49af062d.jpg",
+  "query": "ready mixed concrete truck",
+  "relevance": 5,
+  "relevanceWords": [
+   "concrete",
+   "mixed",
+   "mixer",
+   "ready",
+   "truck"
+  ],
+  "sharpness": 3018.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Contract_No._80%2C_High_Level_Distribution_Reservoir%2C_Weston%2C_view_of_transit_mixer_%282_yd._truck%29%2C_Maffei_Sand_and_Gravel_Company%2C_Natick%2C_high_level_distribution_reservoir%2C_Weston%2C_M_-_DPLA_-_6e9104479ab0bf7e4216fefc49af062d.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2476,
+  "sourceWidth": 4031,
+  "title": "File:Contract No. 80, High Level Distribution Reservoir, Weston, view of transit mixer (2 yd. truck), Maffei Sand and Gravel Company, Natick, high level distribution reservoir, Weston, M - DPLA - 6e9104479ab0bf7e4216fefc49af062d.jpg"
  },
  "construction/concrete/admixture-technology/special-admixtures": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "Fotokannan",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:15_cm_cubes_used_for_cube_test_to_measure_concrete_strength.jpg",
+  "query": "concrete cube test",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "cube",
+   "test"
+  ],
+  "sharpness": 1426.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/15_cm_cubes_used_for_cube_test_to_measure_concrete_strength.jpg/1920px-15_cm_cubes_used_for_cube_test_to_measure_concrete_strength.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1844,
+  "sourceWidth": 4000,
+  "title": "File:15 cm cubes used for cube test to measure concrete strength.jpg"
  },
  "construction/concrete/admixture-technology/viscosity-modifyingagents": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "NCDOTcommunications",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:DOT_project_technicians_performing_slump_test_on_latex_concrete.jpg",
+  "query": "concrete slump",
+  "relevance": 2,
+  "relevanceWords": [
+   "concrete",
+   "slump"
+  ],
+  "sharpness": 1151.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/DOT_project_technicians_performing_slump_test_on_latex_concrete.jpg/1920px-DOT_project_technicians_performing_slump_test_on_latex_concrete.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2736,
+  "sourceWidth": 3648,
+  "title": "File:DOT project technicians performing slump test on latex concrete.jpg"
  },
  "construction/concrete/admixture-technology/water-reducers": {
-  "inherit": "construction/concrete/admixture-technology"
+  "author": "U.S. Navy photo by Petty Officer 3rd Class thomas flowers",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Concrete_Vib_(9022002).jpg",
+  "query": "concrete vibrator",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "construction",
+   "vibrator"
+  ],
+  "sharpness": 1395.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Concrete_Vib_%289022002%29.jpg/1920px-Concrete_Vib_%289022002%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4000,
+  "sourceWidth": 6000,
+  "title": "File:Concrete Vib (9022002).jpg"
  },
  "construction/concrete/cement-admixtures": {
   "author": "CEphoto, Uwe Aranas",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Hoping_Taiwan-Cement-Corporation-Hoping-Plant-02.jpg",
   "query": "cement plant",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Hoping_Taiwan-Cement-Corporation-Hoping-Plant-02.jpg/960px-Hoping_Taiwan-Cement-Corporation-Hoping-Plant-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 2,
+  "relevanceWords": [
+   "cement",
+   "plant"
+  ],
+  "sharpness": 2284.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Hoping_Taiwan-Cement-Corporation-Hoping-Plant-02.jpg/1920px-Hoping_Taiwan-Cement-Corporation-Hoping-Plant-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3240,
   "sourceWidth": 5760,
   "title": "File:Hoping Taiwan-Cement-Corporation-Hoping-Plant-02.jpg"
  },
  "construction/concrete/cement-admixtures/grinding-aids": {
-  "inherit": "construction/concrete/cement-admixtures"
+  "author": "MTA Capital Construction Mega Projects",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Grinding_cement_to_form_a_smooth_surface_for_finishes_installation_in_the_southern_back_of_house_area_in_the_future_LIRR_Terminal._04-25-2019_(33830502008).jpg",
+  "query": "cement grinding",
+  "relevance": 3,
+  "relevanceWords": [
+   "cement",
+   "construction",
+   "grind"
+  ],
+  "sharpness": 160.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Grinding_cement_to_form_a_smooth_surface_for_finishes_installation_in_the_southern_back_of_house_area_in_the_future_LIRR_Terminal._04-25-2019_%2833830502008%29.jpg/1920px-Grinding_cement_to_form_a_smooth_surface_for_finishes_installation_in_the_southern_back_of_house_area_in_the_future_LIRR_Terminal._04-25-2019_%2833830502008%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2592,
+  "sourceWidth": 4608,
+  "title": "File:Grinding cement to form a smooth surface for finishes installation in the southern back of house area in the future LIRR Terminal. 04-25-2019 (33830502008).jpg"
  },
  "construction/concrete/fibres": {
-  "inherit": "construction/concrete"
+  "author": "U.S. Navy photo by Mass Communication Specialist 1st Class Ryan G. Wilber",
+  "fallbackFrom": "construction/concrete",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Navy_110520-N-AW868-082_Seabees_assigned_to_Naval_Mobile_Construction_Battalion_(NMCB)_74,_Detachment_Senegal,_pour_concrete_at_a_project_site_a.jpg",
+  "query": "concrete pour construction site",
+  "relevance": 6,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "construction",
+   "pour",
+   "site",
+   "steel"
+  ],
+  "sharpness": 1640.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/US_Navy_110520-N-AW868-082_Seabees_assigned_to_Naval_Mobile_Construction_Battalion_%28NMCB%29_74%2C_Detachment_Senegal%2C_pour_concrete_at_a_project_site_a.jpg/1920px-US_Navy_110520-N-AW868-082_Seabees_assigned_to_Naval_Mobile_Construction_Battalion_%28NMCB%29_74%2C_Detachment_Senegal%2C_pour_concrete_at_a_project_site_a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1500,
+  "sourceWidth": 2100,
+  "title": "File:US Navy 110520-N-AW868-082 Seabees assigned to Naval Mobile Construction Battalion (NMCB) 74, Detachment Senegal, pour concrete at a project site a.jpg"
  },
  "construction/concrete/pre-cast": {
   "author": "Achim Hering",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Precast_concrete_facade.jpg",
   "query": "precast concrete panel",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Precast_concrete_facade.jpg/960px-Precast_concrete_facade.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "panel",
+   "pre",
+   "precast"
+  ],
+  "sharpness": 277.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Precast_concrete_facade.jpg/1920px-Precast_concrete_facade.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3146,
   "sourceWidth": 4574,
   "title": "File:Precast concrete facade.jpg"
  },
  "construction/concrete/pre-cast/air-entraining-admixtures": {
-  "inherit": "construction/concrete/pre-cast"
+  "author": "Massachusetts. Metropolitan District Water Supply Commission, Pike, Stuart D., 1910-1978",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Contract_No._85,_Manufacture_and_Delivery_of_Precast_Concrete_Steel_Cylinder_Pipe,_Southborough,_Framingham,_Wayland,_Natick,_Weston,_concrete_mixer_and_cement_storage_hopper,_Natic_-_DPLA_-_a5ad99de4bd11b9c38e7d779e9d92a20.jpg",
+  "query": "precast concrete pipe",
+  "relevance": 6,
+  "relevanceWords": [
+   "cement",
+   "concrete",
+   "mixer",
+   "pipe",
+   "pre",
+   "precast"
+  ],
+  "sharpness": 3696.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Contract_No._85%2C_Manufacture_and_Delivery_of_Precast_Concrete_Steel_Cylinder_Pipe%2C_Southborough%2C_Framingham%2C_Wayland%2C_Natick%2C_Weston%2C_concrete_mixer_and_cement_storage_hopper%2C_Natic_-_DPLA_-_a5ad99de4bd11b9c38e7d779e9d92a20.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2480,
+  "sourceWidth": 3940,
+  "title": "File:Contract No. 85, Manufacture and Delivery of Precast Concrete Steel Cylinder Pipe, Southborough, Framingham, Wayland, Natick, Weston, concrete mixer and cement storage hopper, Natic - DPLA - a5ad99de4bd11b9c38e7d779e9d92a20.jpg"
  },
  "construction/concrete/pre-cast/release-agents": {
   "author": "STALFORM Engineering",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Concrete_Formwork_in_winter_%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5.jpg",
   "query": "concrete formwork",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Concrete_Formwork_in_winter_%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5.jpg/960px-Concrete_Formwork_in_winter_%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "formwork"
+  ],
+  "sharpness": 1226.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Concrete_Formwork_in_winter_%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5.jpg/1920px-Concrete_Formwork_in_winter_%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1536,
   "sourceWidth": 2048,
   "title": "File:Concrete Formwork in winter \u0417\u0438\u043c\u043d\u0435\u0435 \u0431\u0435\u0442\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435.jpg"
  },
  "construction/concrete/specialty-products": {
-  "author": "Forest Service - Northern Region",
-  "fetched": "2026-10-31",
-  "license": "Public domain",
-  "licenseUrl": null,
-  "page": "https://commons.wikimedia.org/wiki/File:Finishing_the_Second_Section_of_Floor_(5038667597).jpg",
+  "author": "William Alden from Louisville, Kentucky, USA",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:88d106_Pouring_top_floor_of_Witherspoon_Street_garage_(29539037876).jpg",
   "query": "concrete finishing floor",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Finishing_the_Second_Section_of_Floor_%285038667597%29.jpg/960px-Finishing_the_Second_Section_of_Floor_%285038667597%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 935,
-  "sourceWidth": 1422,
-  "title": "File:Finishing the Second Section of Floor (5038667597).jpg"
+  "relevance": 6,
+  "relevanceWords": [
+   "concrete",
+   "finish",
+   "floor",
+   "pour",
+   "pump",
+   "slab"
+  ],
+  "sharpness": 4171.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/88d106_Pouring_top_floor_of_Witherspoon_Street_garage_%2829539037876%29.jpg/1920px-88d106_Pouring_top_floor_of_Witherspoon_Street_garage_%2829539037876%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2400,
+  "sourceWidth": 3669,
+  "title": "File:88d106 Pouring top floor of Witherspoon Street garage (29539037876).jpg"
  },
  "construction/concrete/specialty-products/concrete-essentials-pigment": {
   "author": "James Allan",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Coloured_concrete_-_geograph.org.uk_-_2963878.jpg",
   "query": "coloured concrete",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Coloured_concrete_-_geograph.org.uk_-_2963878.jpg/960px-Coloured_concrete_-_geograph.org.uk_-_2963878.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 2,
+  "relevanceWords": [
+   "coloured",
+   "concrete"
+  ],
+  "sharpness": 1528.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Coloured_concrete_-_geograph.org.uk_-_2963878.jpg/1920px-Coloured_concrete_-_geograph.org.uk_-_2963878.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1536,
   "sourceWidth": 2048,
   "title": "File:Coloured concrete - geograph.org.uk - 2963878.jpg"
  },
  "construction/concrete/specialty-products/masonry-block-andpaveradmixtures": {
-  "author": "Salil Kumar Mukherjee",
-  "fetched": "2026-10-31",
+  "author": "Chris Gentrup",
+  "fallbackFrom": "construction/concrete/specialty-products",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:A_building_constructed_with_Concrete_Masonry_blocks.jpg",
-  "query": "concrete masonry block",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/A_building_constructed_with_Concrete_Masonry_blocks.jpg/960px-A_building_constructed_with_Concrete_Masonry_blocks.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 1649,
-  "sourceWidth": 2107,
-  "title": "File:A building constructed with Concrete Masonry blocks.jpg"
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Exposed_Aggregate_-_Gentrup_Concrete.jpg",
+  "query": "exposed aggregate concrete",
+  "relevance": 3,
+  "relevanceWords": [
+   "aggregate",
+   "concrete",
+   "exposed"
+  ],
+  "sharpness": 5420.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Exposed_Aggregate_-_Gentrup_Concrete.jpg/1920px-Exposed_Aggregate_-_Gentrup_Concrete.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Exposed Aggregate - Gentrup Concrete.jpg"
  },
  "construction/concrete/specialty-products/shrinkage-reducingadmixtures": {
-  "inherit": "construction/concrete/specialty-products"
+  "author": "Chris Gentrup",
+  "fallbackFrom": "construction/concrete/specialty-products",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Exposed_Aggregate_Gentrup_Concrete.jpg",
+  "query": "exposed aggregate concrete",
+  "relevance": 3,
+  "relevanceWords": [
+   "aggregate",
+   "concrete",
+   "exposed"
+  ],
+  "sharpness": 3118.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Exposed_Aggregate_Gentrup_Concrete.jpg/1920px-Exposed_Aggregate_Gentrup_Concrete.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Exposed Aggregate Gentrup Concrete.jpg"
  },
  "construction/concrete/specialty-products/surface-retarders": {
-  "inherit": "construction/concrete/specialty-products"
+  "author": "Deccon Concrete Restoration",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Exposed_Aggregate_Sealing_in_Macomb,_MI.jpg",
+  "query": "exposed aggregate",
+  "relevance": 4,
+  "relevanceWords": [
+   "aggregate",
+   "concrete",
+   "exposed",
+   "slab"
+  ],
+  "sharpness": 12232.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Exposed_Aggregate_Sealing_in_Macomb%2C_MI.jpg/1920px-Exposed_Aggregate_Sealing_in_Macomb%2C_MI.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Exposed Aggregate Sealing in Macomb, MI.jpg"
  },
  "construction/flooring": {
   "author": "Intellicents",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Polished_Concrete_Floor.jpg",
   "query": "polished concrete floor",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Polished_Concrete_Floor.jpg/960px-Polished_Concrete_Floor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "concrete",
+   "floor",
+   "polished"
+  ],
+  "sharpness": 1105.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Polished_Concrete_Floor.jpg/1920px-Polished_Concrete_Floor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3024,
   "sourceWidth": 4032,
   "title": "File:Polished Concrete Floor.jpg"
  },
  "construction/flooring/cement-levellingsystems": {
-  "inherit": "construction/flooring"
- },
- "construction/flooring/floor-joints": {
-  "inherit": "construction/flooring"
- },
- "construction/flooring/flooring-adhesivessystems": {
-  "inherit": "construction/flooring"
- },
- "construction/flooring/resin-flooring": {
-  "inherit": "construction/flooring"
- },
- "construction/flooring/resin-flooring/epoxy-flooring-productssystems": {
-  "author": "Fred Romero from Paris, France",
-  "fetched": "2026-10-31",
-  "license": "CC BY 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Rotterdam_-_Schouwburgplein_(3).jpg",
-  "query": "epoxy floor garage",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Rotterdam_-_Schouwburgplein_%283%29.jpg/960px-Rotterdam_-_Schouwburgplein_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "author": "W.carter",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Cracked_concrete_floor_in_Brastad.jpg",
+  "query": "concrete floor",
+  "relevance": 5,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "floor",
+   "self",
+   "warehouse"
+  ],
+  "sharpness": 14971.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Cracked_concrete_floor_in_Brastad.jpg/1920px-Cracked_concrete_floor_in_Brastad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3456,
   "sourceWidth": 5184,
-  "title": "File:Rotterdam - Schouwburgplein (3).jpg"
+  "title": "File:Cracked concrete floor in Brastad.jpg"
+ },
+ "construction/flooring/floor-joints": {
+  "author": "M J Roscoe",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Abingdon_Floor_Coverings,_Pen-y-Fan_Industrial_Estate._-_geograph.org.uk_-_6766084.jpg",
+  "query": "industrial floor",
+  "relevance": 2,
+  "relevanceWords": [
+   "floor",
+   "industrial"
+  ],
+  "sharpness": 997.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Abingdon_Floor_Coverings%2C_Pen-y-Fan_Industrial_Estate._-_geograph.org.uk_-_6766084.jpg/1920px-Abingdon_Floor_Coverings%2C_Pen-y-Fan_Industrial_Estate._-_geograph.org.uk_-_6766084.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3456,
+  "sourceWidth": 5184,
+  "title": "File:Abingdon Floor Coverings, Pen-y-Fan Industrial Estate. - geograph.org.uk - 6766084.jpg"
+ },
+ "construction/flooring/flooring-adhesivessystems": {
+  "author": "Gpkp",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Visvesvaraya_Industrial_and_Technological_Museum_(2025)_03.jpg",
+  "query": "industrial floor",
+  "relevance": 2,
+  "relevanceWords": [
+   "floor",
+   "industrial"
+  ],
+  "sharpness": 3373.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Visvesvaraya_Industrial_and_Technological_Museum_%282025%29_03.jpg/1920px-Visvesvaraya_Industrial_and_Technological_Museum_%282025%29_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Visvesvaraya Industrial and Technological Museum (2025) 03.jpg"
+ },
+ "construction/flooring/resin-flooring": {
+  "author": "MTA Capital Construction Mega Projects",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Floor_installation_for_the_Train_Operation_Center_located_in_the_back_of_house_area_of_the_east_terminal_cavern._(CM007,_02-28-2019)_(47250276731).jpg",
+  "query": "floor installation",
+  "relevance": 3,
+  "relevanceWords": [
+   "construction",
+   "floor",
+   "installation"
+  ],
+  "sharpness": 566.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Floor_installation_for_the_Train_Operation_Center_located_in_the_back_of_house_area_of_the_east_terminal_cavern._%28CM007%2C_02-28-2019%29_%2847250276731%29.jpg/1920px-Floor_installation_for_the_Train_Operation_Center_located_in_the_back_of_house_area_of_the_east_terminal_cavern._%28CM007%2C_02-28-2019%29_%2847250276731%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2592,
+  "sourceWidth": 4608,
+  "title": "File:Floor installation for the Train Operation Center located in the back of house area of the east terminal cavern. (CM007, 02-28-2019) (47250276731).jpg"
+ },
+ "construction/flooring/resin-flooring/epoxy-flooring-productssystems": {
+  "author": "Boudoirphotographyguide",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Construction_Photography_of_Workers_on_Site_by_Construction_Photographer_Daniel_Mekis.jpg",
+  "query": "construction worker",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "construction",
+   "site",
+   "worker"
+  ],
+  "sharpness": 709.7,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Construction_Photography_of_Workers_on_Site_by_Construction_Photographer_Daniel_Mekis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 1152,
+  "sourceWidth": 1728,
+  "title": "File:Construction Photography of Workers on Site by Construction Photographer Daniel Mekis.jpg"
  },
  "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-products": {
-  "inherit": "construction/flooring/resin-flooring/epoxy-flooring-productssystems"
+  "author": "Bernardobenzecry",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Warehouse_Concrete_Floor_preparation_done_by_Platinum_Constru%C3%A7%C3%B5es.jpg",
+  "query": "warehouse floor",
+  "relevance": 4,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "floor",
+   "warehouse"
+  ],
+  "sharpness": 4319.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Warehouse_Concrete_Floor_preparation_done_by_Platinum_Constru%C3%A7%C3%B5es.jpg/1920px-Warehouse_Concrete_Floor_preparation_done_by_Platinum_Constru%C3%A7%C3%B5es.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2592,
+  "sourceWidth": 4608,
+  "title": "File:Warehouse Concrete Floor preparation done by Platinum Constru\u00e7\u00f5es.jpg"
  },
  "construction/flooring/resin-flooring/epoxy-flooring-productssystems/epoxy-flooring-systems": {
-  "inherit": "construction/flooring/resin-flooring/epoxy-flooring-productssystems"
+  "author": "\u7384\u53f2\u751f",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Checkouts_at_1st_Floor,_Costco_Neihu_Warehouse_20161229.jpg",
+  "query": "warehouse floor",
+  "relevance": 2,
+  "relevanceWords": [
+   "floor",
+   "warehouse"
+  ],
+  "sharpness": 1698.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Checkouts_at_1st_Floor%2C_Costco_Neihu_Warehouse_20161229.jpg/1920px-Checkouts_at_1st_Floor%2C_Costco_Neihu_Warehouse_20161229.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3264,
+  "sourceWidth": 4928,
+  "title": "File:Checkouts at 1st Floor, Costco Neihu Warehouse 20161229.jpg"
  },
  "construction/flooring/resin-flooring/floor-sealers-finishings": {
-  "inherit": "construction/flooring"
+  "author": "Retaildesigner at English Wikipedia",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Polished_Concrete_1.JPG",
+  "query": "polished concrete",
+  "relevance": 2,
+  "relevanceWords": [
+   "concrete",
+   "polished"
+  ],
+  "sharpness": 824.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Polished_Concrete_1.JPG/1920px-Polished_Concrete_1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1944,
+  "sourceWidth": 2592,
+  "title": "File:Polished Concrete 1.JPG"
  },
  "construction/flooring/resin-flooring/polyurethane-flooringproductssystems": {
-  "inherit": "construction/flooring"
+  "author": "Jonathan Haeber from Richmond, CA",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Swift_Gold_Leaf_Factory_Floor_(8274434311).jpg",
+  "query": "factory floor",
+  "relevance": 3,
+  "relevanceWords": [
+   "build",
+   "factory",
+   "floor"
+  ],
+  "sharpness": 3437.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Swift_Gold_Leaf_Factory_Floor_%288274434311%29.jpg/1920px-Swift_Gold_Leaf_Factory_Floor_%288274434311%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2848,
+  "sourceWidth": 4272,
+  "title": "File:Swift Gold Leaf Factory Floor (8274434311).jpg"
  },
  "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringproducts": {
-  "inherit": "construction/flooring"
+  "author": "\u7384\u53f2\u751f",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Book_Booth_at_2nd_Floor,_Costco_Neihu_Warehouse_20161229.jpg",
+  "query": "warehouse floor",
+  "relevance": 2,
+  "relevanceWords": [
+   "floor",
+   "warehouse"
+  ],
+  "sharpness": 2121.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Book_Booth_at_2nd_Floor%2C_Costco_Neihu_Warehouse_20161229.jpg/1920px-Book_Booth_at_2nd_Floor%2C_Costco_Neihu_Warehouse_20161229.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3264,
+  "sourceWidth": 4928,
+  "title": "File:Book Booth at 2nd Floor, Costco Neihu Warehouse 20161229.jpg"
  },
  "construction/flooring/resin-flooring/polyurethane-flooringproductssystems/polyurethane-flooringsystems": {
-  "inherit": "construction/flooring"
+  "author": "U.S. Marine Corps photo by Lance Cpl. Hannah Hollerud",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Valiant_Shield_24-_Combat_Logistics_Battalion_13_Establishes_Role_2_Medical_Field_Hospital_(8457514).jpg",
+  "query": "logistics floor",
+  "relevance": 2,
+  "relevanceWords": [
+   "floor",
+   "logistic"
+  ],
+  "sharpness": 187.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Valiant_Shield_24-_Combat_Logistics_Battalion_13_Establishes_Role_2_Medical_Field_Hospital_%288457514%29.jpg/1920px-Valiant_Shield_24-_Combat_Logistics_Battalion_13_Establishes_Role_2_Medical_Field_Hospital_%288457514%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2442,
+  "sourceWidth": 3663,
+  "title": "File:Valiant Shield 24- Combat Logistics Battalion 13 Establishes Role 2 Medical Field Hospital (8457514).jpg"
  },
  "construction/flooring/resin-flooring/purcem-flooring-productssystems": {
-  "inherit": "construction/flooring"
+  "author": "Eric Polk",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Industrial_bakery_kitchen.jpg",
+  "query": "industrial kitchen",
+  "relevance": 2,
+  "relevanceWords": [
+   "industrial",
+   "kitchen"
+  ],
+  "sharpness": 3624.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Industrial_bakery_kitchen.jpg/1920px-Industrial_bakery_kitchen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1848,
+  "sourceWidth": 4000,
+  "title": "File:Industrial bakery kitchen.jpg"
  },
  "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-products": {
-  "inherit": "construction/flooring"
+  "author": "USFWS/Southeast",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Red_spruce_cone_on_the_forest_floor_(22384651510).jpg",
+  "query": "food processing floor",
+  "relevance": 3,
+  "relevanceWords": [
+   "floor",
+   "food",
+   "process"
+  ],
+  "sharpness": 273.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Red_spruce_cone_on_the_forest_floor_%2822384651510%29.jpg/1920px-Red_spruce_cone_on_the_forest_floor_%2822384651510%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4000,
+  "sourceWidth": 6000,
+  "title": "File:Red spruce cone on the forest floor (22384651510).jpg"
  },
  "construction/flooring/resin-flooring/purcem-flooring-productssystems/purcem-flooring-systems": {
-  "inherit": "construction/flooring"
+  "author": "Hirho",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Dai-hakata_Bldg_the_bakery_Boul_ange_on_the_ground_floor_Hakata-ekimae_2-ch%C5%8Dme_Hakata-ku_Fukuoka_20250624.jpg",
+  "query": "bakery floor",
+  "relevance": 3,
+  "relevanceWords": [
+   "bakery",
+   "build",
+   "floor"
+  ],
+  "sharpness": 4148.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Dai-hakata_Bldg_the_bakery_Boul_ange_on_the_ground_floor_Hakata-ekimae_2-ch%C5%8Dme_Hakata-ku_Fukuoka_20250624.jpg/1920px-Dai-hakata_Bldg_the_bakery_Boul_ange_on_the_ground_floor_Hakata-ekimae_2-ch%C5%8Dme_Hakata-ku_Fukuoka_20250624.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Dai-hakata Bldg the bakery Boul ange on the ground floor Hakata-ekimae 2-ch\u014dme Hakata-ku Fukuoka 20250624.jpg"
  },
  "construction/grouts-anchoring": {
-  "inherit": "construction"
+  "author": "U.S. Army Corps of Engineers Sacramento District",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Jet_grouting-_a_surgical_approach_to_levee_work_(11357087973).jpg",
+  "query": "grouting",
+  "relevance": 4,
+  "relevanceWords": [
+   "construction",
+   "drill",
+   "grout",
+   "machine"
+  ],
+  "sharpness": 1434.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Jet_grouting-_a_surgical_approach_to_levee_work_%2811357087973%29.jpg/1920px-Jet_grouting-_a_surgical_approach_to_levee_work_%2811357087973%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3144,
+  "sourceWidth": 4748,
+  "title": "File:Jet grouting- a surgical approach to levee work (11357087973).jpg"
  },
  "construction/grouts-anchoring/cementitious-grouts": {
   "author": "ENERGY.GOV",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Workers_Pour_1_Million_Gallons_of_Grout_into_Massive_Tanks_(7597552338).jpg",
   "query": "grout pump",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Workers_Pour_1_Million_Gallons_of_Grout_into_Massive_Tanks_%287597552338%29.jpg/960px-Workers_Pour_1_Million_Gallons_of_Grout_into_Massive_Tanks_%287597552338%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "cement",
+   "grout",
+   "pour",
+   "pump",
+   "site"
+  ],
+  "sharpness": 7178.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Workers_Pour_1_Million_Gallons_of_Grout_into_Massive_Tanks_%287597552338%29.jpg/1920px-Workers_Pour_1_Million_Gallons_of_Grout_into_Massive_Tanks_%287597552338%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2000,
   "sourceWidth": 3008,
   "title": "File:Workers Pour 1 Million Gallons of Grout into Massive Tanks (7597552338).jpg"
  },
  "construction/grouts-anchoring/chemical-anchoring": {
-  "inherit": "construction"
+  "author": "U.S. Navy photo by Petty Officer 1st Class Austin Ingram",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Palau_concrete_pour_(NMCB_3)_(7981473).jpg",
+  "query": "threaded rod anchor concrete",
+  "relevance": 5,
+  "relevanceWords": [
+   "anchor",
+   "concrete",
+   "construction",
+   "rod",
+   "threaded"
+  ],
+  "sharpness": 2288.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Palau_concrete_pour_%28NMCB_3%29_%287981473%29.jpg/1920px-Palau_concrete_pour_%28NMCB_3%29_%287981473%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Palau concrete pour (NMCB 3) (7981473).jpg"
  },
  "construction/grouts-anchoring/epoxy-grouts": {
-  "inherit": "construction"
+  "author": "\u77f3\u5ddd Shihchuan from \u53f0\u5317\u5e02 (Taipei City), \u53f0\u7063 (Taiwan)",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:After_grouting,_it%27s_necessary_to_flatten_and_smoothen_the_surface.jpg",
+  "query": "grouting",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "construction",
+   "grout",
+   "site"
+  ],
+  "sharpness": 5551.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/After_grouting%2C_it%27s_necessary_to_flatten_and_smoothen_the_surface.jpg/1920px-After_grouting%2C_it%27s_necessary_to_flatten_and_smoothen_the_surface.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2736,
+  "sourceWidth": 3648,
+  "title": "File:After grouting, it's necessary to flatten and smoothen the surface.jpg"
  },
  "construction/grouts-anchoring/rail-fixing": {
   "author": "Kecko",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:SOB_-_Y-steel_sleeper_(29509777783).jpg",
   "query": "railway track fastening sleeper",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/SOB_-_Y-steel_sleeper_%2829509777783%29.jpg/960px-SOB_-_Y-steel_sleeper_%2829509777783%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 6,
+  "relevanceWords": [
+   "construction",
+   "fasten",
+   "rail",
+   "railway",
+   "sleeper",
+   "track"
+  ],
+  "sharpness": 8616.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/SOB_-_Y-steel_sleeper_%2829509777783%29.jpg/1920px-SOB_-_Y-steel_sleeper_%2829509777783%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3466,
   "sourceWidth": 5200,
   "title": "File:SOB - Y-steel sleeper (29509777783).jpg"
@@ -317,11 +1198,21 @@
  "construction/grouts-anchoring/windfarm-grouts": {
   "author": "Lauri Veerde",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_in_full_01.jpg",
   "query": "wind turbine foundation tower",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Wind_turbine_in_full_01.jpg/960px-Wind_turbine_in_full_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "foundation",
+   "tower",
+   "turbine",
+   "wind"
+  ],
+  "sharpness": 2693.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Wind_turbine_in_full_01.jpg/1920px-Wind_turbine_in_full_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 7908,
   "sourceWidth": 15816,
   "title": "File:Wind turbine in full 01.jpg"
@@ -329,11 +1220,22 @@
  "construction/grouts-anchoring/windfarm-grouts/offshore-grouts": {
   "author": "U.S. Department of Energy from United States",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Windfloat_floating_offshore_foundation,_P%C3%B3voa_de_Varzim,_Portugal_431_020_006_(29596325421).jpg",
   "query": "offshore wind turbine foundation",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Windfloat_floating_offshore_foundation%2C_P%C3%B3voa_de_Varzim%2C_Portugal_431_020_006_%2829596325421%29.jpg/960px-Windfloat_floating_offshore_foundation%2C_P%C3%B3voa_de_Varzim%2C_Portugal_431_020_006_%2829596325421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "farm",
+   "foundation",
+   "offshore",
+   "turbine",
+   "wind"
+  ],
+  "sharpness": 365.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Windfloat_floating_offshore_foundation%2C_P%C3%B3voa_de_Varzim%2C_Portugal_431_020_006_%2829596325421%29.jpg/1920px-Windfloat_floating_offshore_foundation%2C_P%C3%B3voa_de_Varzim%2C_Portugal_431_020_006_%2829596325421%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2847,
   "sourceWidth": 4157,
   "title": "File:Windfloat floating offshore foundation, P\u00f3voa de Varzim, Portugal 431 020 006 (29596325421).jpg"
@@ -341,11 +1243,21 @@
  "construction/grouts-anchoring/windfarm-grouts/onshore-grouts": {
   "author": "Cjp24",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Wind_turbine_construction,_Pougny,_2018-10-25,_E8-E11.jpg",
   "query": "wind turbine construction",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Wind_turbine_construction%2C_Pougny%2C_2018-10-25%2C_E8-E11.jpg/960px-Wind_turbine_construction%2C_Pougny%2C_2018-10-25%2C_E8-E11.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "construction",
+   "tower",
+   "turbine",
+   "wind"
+  ],
+  "sharpness": 625.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Wind_turbine_construction%2C_Pougny%2C_2018-10-25%2C_E8-E11.jpg/1920px-Wind_turbine_construction%2C_Pougny%2C_2018-10-25%2C_E8-E11.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3456,
   "sourceWidth": 4608,
   "title": "File:Wind turbine construction, Pougny, 2018-10-25, E8-E11.jpg"
@@ -353,11 +1265,21 @@
  "construction/landscape-buildingproducts": {
   "author": "Lamiot",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:EVA-_Lanxmeer_Green_roof_2009.jpg",
   "query": "green roof building garden",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/EVA-_Lanxmeer_Green_roof_2009.jpg/960px-EVA-_Lanxmeer_Green_roof_2009.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "garden",
+   "green",
+   "roof"
+  ],
+  "sharpness": 6963.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/EVA-_Lanxmeer_Green_roof_2009.jpg/1920px-EVA-_Lanxmeer_Green_roof_2009.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1509,
   "sourceWidth": 2560,
   "title": "File:EVA- Lanxmeer Green roof 2009.jpg"
@@ -365,11 +1287,20 @@
  "construction/landscape-buildingproducts/green-roofs-and-greenwallssystems": {
   "author": "Skasnl - groendakmaterialen.nl",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Green_roof_tray.jpg",
   "query": "green roof sedum",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Green_roof_tray.jpg/960px-Green_roof_tray.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "green",
+   "roof",
+   "sedum"
+  ],
+  "sharpness": 1748.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Green_roof_tray.jpg/1920px-Green_roof_tray.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3648,
   "sourceWidth": 5472,
   "title": "File:Green roof tray.jpg"
@@ -377,11 +1308,19 @@
  "construction/landscape-buildingproducts/green-roofs-and-greenwallssystems/extensive-green-roof": {
   "author": "Dave Croker",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Colourful_sedum_roof_-_geograph.org.uk_-_7812874.jpg",
   "query": "sedum roof",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Colourful_sedum_roof_-_geograph.org.uk_-_7812874.jpg/960px-Colourful_sedum_roof_-_geograph.org.uk_-_7812874.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 2,
+  "relevanceWords": [
+   "roof",
+   "sedum"
+  ],
+  "sharpness": 3586.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Colourful_sedum_roof_-_geograph.org.uk_-_7812874.jpg/1920px-Colourful_sedum_roof_-_geograph.org.uk_-_7812874.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3000,
   "sourceWidth": 4000,
   "title": "File:Colourful sedum roof - geograph.org.uk - 7812874.jpg"
@@ -389,11 +1328,21 @@
  "construction/landscape-buildingproducts/green-roofs-and-greenwallssystems/green-walls": {
   "author": "Wiley Sage",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Green-Wall_building_in_Paris,_France.jpg",
   "query": "green wall building",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Green-Wall_building_in_Paris%2C_France.jpg/960px-Green-Wall_building_in_Paris%2C_France.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "green",
+   "liv",
+   "wall"
+  ],
+  "sharpness": 1071.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Green-Wall_building_in_Paris%2C_France.jpg/1920px-Green-Wall_building_in_Paris%2C_France.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2912,
   "sourceWidth": 4368,
   "title": "File:Green-Wall building in Paris, France.jpg"
@@ -401,11 +1350,20 @@
  "construction/landscape-buildingproducts/green-roofs-and-greenwallssystems/intensive-green-roof": {
   "author": "Jim Osley",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Library_of_Birmingham_roof_terrace_and_garden_-_geograph.org.uk_-_3664156.jpg",
   "query": "roof garden terrace",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Library_of_Birmingham_roof_terrace_and_garden_-_geograph.org.uk_-_3664156.jpg/960px-Library_of_Birmingham_roof_terrace_and_garden_-_geograph.org.uk_-_3664156.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "garden",
+   "roof",
+   "terrace"
+  ],
+  "sharpness": 3520.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Library_of_Birmingham_roof_terrace_and_garden_-_geograph.org.uk_-_3664156.jpg/1920px-Library_of_Birmingham_roof_terrace_and_garden_-_geograph.org.uk_-_3664156.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1384,
   "sourceWidth": 2000,
   "title": "File:Library of Birmingham roof terrace and garden - geograph.org.uk - 3664156.jpg"
@@ -413,26 +1371,63 @@
  "construction/landscape-buildingproducts/paving-decking-support": {
   "author": "Hullian111",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Queen%27s_Gardens_Redevelopment,_Kingston_upon_Hull_Feb24_Paving_Stone_Laying.jpg",
   "query": "paving stones laying",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Queen%27s_Gardens_Redevelopment%2C_Kingston_upon_Hull_Feb24_Paving_Stone_Laying.jpg/960px-Queen%27s_Gardens_Redevelopment%2C_Kingston_upon_Hull_Feb24_Paving_Stone_Laying.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "garden",
+   "lay",
+   "pav",
+   "ston"
+  ],
+  "sharpness": 3531.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Queen%27s_Gardens_Redevelopment%2C_Kingston_upon_Hull_Feb24_Paving_Stone_Laying.jpg/1920px-Queen%27s_Gardens_Redevelopment%2C_Kingston_upon_Hull_Feb24_Paving_Stone_Laying.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2784,
   "sourceWidth": 4176,
   "title": "File:Queen's Gardens Redevelopment, Kingston upon Hull Feb24 Paving Stone Laying.jpg"
  },
  "construction/landscape-buildingproducts/paving-decking-support/accessories": {
-  "inherit": "construction/landscape-buildingproducts/paving-decking-support"
+  "author": "Hirho",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Fukuoka_Daimy%C5%8D_Garden_City_the_pedestrian_deck_Daimy%C5%8D_2-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20240812_154740.jpg",
+  "query": "garden decking",
+  "relevance": 2,
+  "relevanceWords": [
+   "deck",
+   "garden"
+  ],
+  "sharpness": 7708.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Fukuoka_Daimy%C5%8D_Garden_City_the_pedestrian_deck_Daimy%C5%8D_2-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20240812_154740.jpg/1920px-Fukuoka_Daimy%C5%8D_Garden_City_the_pedestrian_deck_Daimy%C5%8D_2-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20240812_154740.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2928,
+  "sourceWidth": 3904,
+  "title": "File:Fukuoka Daimy\u014d Garden City the pedestrian deck Daimy\u014d 2-ch\u014dme Ch\u016b\u014d-ku Fukuoka 20240812 154740.jpg"
  },
  "construction/landscape-buildingproducts/paving-decking-support/paving": {
   "author": "Acabashi",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Patio_paving_Capel_Manor_College_Gardens_Enfield_London_England_02.jpg",
   "query": "paving patio",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Patio_paving_Capel_Manor_College_Gardens_Enfield_London_England_02.jpg/960px-Patio_paving_Capel_Manor_College_Gardens_Enfield_London_England_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "garden",
+   "green",
+   "patio",
+   "pav"
+  ],
+  "sharpness": 13471.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Patio_paving_Capel_Manor_College_Gardens_Enfield_London_England_02.jpg/1920px-Patio_paving_Capel_Manor_College_Gardens_Enfield_London_England_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3456,
   "sourceWidth": 4608,
   "title": "File:Patio paving Capel Manor College Gardens Enfield London England 02.jpg"
@@ -440,317 +1435,1283 @@
  "construction/landscape-buildingproducts/subsoil-drainage": {
   "author": "U.S. Navy photo by Petty Officer 2nd Class Donavan K Patubo",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:NSA_Naples_Public_Works_Department_Installs_Water_Drainage_Line_At_Carney_Park_(5119405).jpg",
   "query": "drainage pipe trench",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/NSA_Naples_Public_Works_Department_Installs_Water_Drainage_Line_At_Carney_Park_%285119405%29.jpg/960px-NSA_Naples_Public_Works_Department_Installs_Water_Drainage_Line_At_Carney_Park_%285119405%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "drain",
+   "drainage",
+   "pipe",
+   "trench"
+  ],
+  "sharpness": 3040.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/NSA_Naples_Public_Works_Department_Installs_Water_Drainage_Line_At_Carney_Park_%285119405%29.jpg/1920px-NSA_Naples_Public_Works_Department_Installs_Water_Drainage_Line_At_Carney_Park_%285119405%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 4429,
   "sourceWidth": 6644,
   "title": "File:NSA Naples Public Works Department Installs Water Drainage Line At Carney Park (5119405).jpg"
  },
  "construction/landscape-buildingproducts/subsoil-drainage/horizontal-drainage": {
-  "inherit": "construction/landscape-buildingproducts/subsoil-drainage"
- },
- "construction/landscape-buildingproducts/subsoil-drainage/vertical-drainage": {
-  "author": "National Institute of Standards and Technology",
-  "fetched": "2026-10-31",
-  "license": "Public domain",
-  "licenseUrl": null,
-  "page": "https://commons.wikimedia.org/wiki/File:NIST_0297_(5857187017).jpg",
-  "query": "basement wall drainage",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/NIST_0297_%285857187017%29.jpg/960px-NIST_0297_%285857187017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 3240,
-  "sourceWidth": 4320,
-  "title": "File:NIST 0297 (5857187017).jpg"
- },
- "construction/landscape-buildingproducts/turf-soil-stabilisation": {
-  "inherit": "construction/landscape-buildingproducts"
- },
- "construction/landscape-buildingproducts/turf-soil-stabilisation/slope-stabilisation": {
-  "author": "N Chadwick",
-  "fetched": "2026-10-31",
+  "author": "Mat Fascione",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Slope_stabilisation,_A21_-_geograph.org.uk_-_5960516.jpg",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Drainage_ditch_at_Oldershaws_Farm_(geograph_3219016).jpg",
+  "query": "drainage mat",
+  "relevance": 3,
+  "relevanceWords": [
+   "drain",
+   "drainage",
+   "mat"
+  ],
+  "sharpness": 8190.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Drainage_ditch_at_Oldershaws_Farm_%28geograph_3219016%29.jpg/1920px-Drainage_ditch_at_Oldershaws_Farm_%28geograph_3219016%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Drainage ditch at Oldershaws Farm (geograph 3219016).jpg"
+ },
+ "construction/landscape-buildingproducts/subsoil-drainage/vertical-drainage": {
+  "author": "Emmanuel Berrod",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Green_Roof_at_the_WIPO_Headquarters_10.jpg",
+  "query": "green roof",
+  "relevance": 7,
+  "relevanceWords": [
+   "build",
+   "drain",
+   "drainage",
+   "gras",
+   "green",
+   "insulation",
+   "roof"
+  ],
+  "sharpness": 5416.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Green_Roof_at_the_WIPO_Headquarters_10.jpg/1920px-Green_Roof_at_the_WIPO_Headquarters_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3531,
+  "sourceWidth": 5296,
+  "title": "File:Green Roof at the WIPO Headquarters 10.jpg"
+ },
+ "construction/landscape-buildingproducts/turf-soil-stabilisation": {
+  "author": "Roger A Smith",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Laying_turf_on_the_roof_of_the_Chemotherapy_Unit_at_North_Devon_District_Hospital_-_geograph.org.uk_-_4180985.jpg",
+  "query": "turf laying",
+  "relevance": 3,
+  "relevanceWords": [
+   "lay",
+   "roof",
+   "turf"
+  ],
+  "sharpness": 3118.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Laying_turf_on_the_roof_of_the_Chemotherapy_Unit_at_North_Devon_District_Hospital_-_geograph.org.uk_-_4180985.jpg/1920px-Laying_turf_on_the_roof_of_the_Chemotherapy_Unit_at_North_Devon_District_Hospital_-_geograph.org.uk_-_4180985.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2736,
+  "sourceWidth": 3648,
+  "title": "File:Laying turf on the roof of the Chemotherapy Unit at North Devon District Hospital - geograph.org.uk - 4180985.jpg"
+ },
+ "construction/landscape-buildingproducts/turf-soil-stabilisation/slope-stabilisation": {
+  "author": "David Hawgood",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Slope_stabilisation_mesh_on_Greenford_Branch_Line_embankment_-_geograph.org.uk_-_2853656.jpg",
   "query": "slope stabilisation",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Slope_stabilisation%2C_A21_-_geograph.org.uk_-_5960516.jpg/960px-Slope_stabilisation%2C_A21_-_geograph.org.uk_-_5960516.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 681,
-  "sourceWidth": 1024,
-  "title": "File:Slope stabilisation, A21 - geograph.org.uk - 5960516.jpg"
+  "relevance": 4,
+  "relevanceWords": [
+   "embankment",
+   "green",
+   "slope",
+   "stabilisation"
+  ],
+  "sharpness": 14725.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Slope_stabilisation_mesh_on_Greenford_Branch_Line_embankment_-_geograph.org.uk_-_2853656.jpg/1920px-Slope_stabilisation_mesh_on_Greenford_Branch_Line_embankment_-_geograph.org.uk_-_2853656.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2736,
+  "sourceWidth": 3648,
+  "title": "File:Slope stabilisation mesh on Greenford Branch Line embankment - geograph.org.uk - 2853656.jpg"
  },
  "construction/landscape-buildingproducts/turf-soil-stabilisation/turf-and-gravel-stabilisation": {
-  "inherit": "construction/landscape-buildingproducts"
+  "author": "dankeck",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Gravel_driveway_(28119646116).jpg",
+  "query": "gravel driveway",
+  "relevance": 2,
+  "relevanceWords": [
+   "driveway",
+   "gravel"
+  ],
+  "sharpness": 3555.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Gravel_driveway_%2828119646116%29.jpg/1920px-Gravel_driveway_%2828119646116%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Gravel driveway (28119646116).jpg"
  },
  "construction/roofing": {
   "author": "Luanr36",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Butynol_roofing.jpg",
   "query": "flat roof membrane installation",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Butynol_roofing.jpg/960px-Butynol_roofing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 6,
+  "relevanceWords": [
+   "build",
+   "construction",
+   "flat",
+   "installation",
+   "membrane",
+   "roof"
+  ],
+  "sharpness": 815.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Butynol_roofing.jpg/1920px-Butynol_roofing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1536,
   "sourceWidth": 2048,
   "title": "File:Butynol roofing.jpg"
  },
  "construction/roofing/liquid-applied-membranes": {
   "author": "GRALISTAIR",
-  "fetched": "2026-10-31",
+  "fetched": "2026-11-01",
+  "hdFallback": true,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Roofing_Membrane_Failure_1.jpg",
   "query": "liquid applied roof coating",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Roofing_Membrane_Failure_1.jpg/960px-Roofing_Membrane_Failure_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 7,
+  "relevanceWords": [
+   "applied",
+   "coat",
+   "flat",
+   "liquid",
+   "membran",
+   "membrane",
+   "roof"
+  ],
+  "sharpness": 2109.1,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/d/da/Roofing_Membrane_Failure_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
   "sourceHeight": 960,
   "sourceWidth": 1280,
   "title": "File:Roofing Membrane Failure 1.jpg"
  },
  "construction/roofing/liquid-applied-membranes/high-performanceroofingsystems": {
-  "inherit": "construction/roofing/liquid-applied-membranes"
+  "author": "Trio3D",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:2020-03-22_Cottbus,_refurbishment_of_Boxberger_Stra%C3%9Fe_14-19.png",
+  "query": "roof refurbishment",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "refurbishment",
+   "roof"
+  ],
+  "sharpness": 3704.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/2020-03-22_Cottbus%2C_refurbishment_of_Boxberger_Stra%C3%9Fe_14-19.png/1920px-2020-03-22_Cottbus%2C_refurbishment_of_Boxberger_Stra%C3%9Fe_14-19.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2006,
+  "sourceWidth": 3031,
+  "title": "File:2020-03-22 Cottbus, refurbishment of Boxberger Stra\u00dfe 14-19.png"
  },
  "construction/roofing/liquid-applied-membranes/solvent-based-membranes": {
-  "inherit": "construction/roofing/liquid-applied-membranes"
+  "author": "DMahalko, Dale Mahalko, Gilman, WI, USA -- Email: dmahalko@gmail.com",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Failure_of_asphalt_shingles_allowing_roof_leakage.JPG",
+  "query": "roof coating",
+  "relevance": 3,
+  "relevanceWords": [
+   "coat",
+   "leak",
+   "roof"
+  ],
+  "sharpness": 5993.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Failure_of_asphalt_shingles_allowing_roof_leakage.JPG/1920px-Failure_of_asphalt_shingles_allowing_roof_leakage.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2736,
+  "sourceWidth": 3648,
+  "title": "File:Failure of asphalt shingles allowing roof leakage.JPG"
  },
  "construction/roofing/pvc-sheet-membranes": {
-  "inherit": "construction/roofing"
+  "author": "Asurnipal",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Bregenz-simple_emergency_flat_roof_drainage_system-01ASD.jpg",
+  "query": "flat roof",
+  "relevance": 2,
+  "relevanceWords": [
+   "flat",
+   "roof"
+  ],
+  "sharpness": 1840.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Bregenz-simple_emergency_flat_roof_drainage_system-01ASD.jpg/1920px-Bregenz-simple_emergency_flat_roof_drainage_system-01ASD.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3468,
+  "sourceWidth": 4624,
+  "title": "File:Bregenz-simple emergency flat roof drainage system-01ASD.jpg"
  },
  "construction/roofing/pvc-sheet-membranes/accessories": {
-  "inherit": "construction/roofing"
+  "author": "Steve Daniels",
+  "fetched": "2026-11-01",
+  "hdFallback": true,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Glass_roof_in_the_Great_Western_Outlet_Village_-_geograph.org.uk_-_4654523.jpg",
+  "query": "roof outlet",
+  "relevance": 2,
+  "relevanceWords": [
+   "outlet",
+   "roof"
+  ],
+  "sharpness": 1145.6,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Glass_roof_in_the_Great_Western_Outlet_Village_-_geograph.org.uk_-_4654523.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 918,
+  "sourceWidth": 1500,
+  "title": "File:Glass roof in the Great Western Outlet Village - geograph.org.uk - 4654523.jpg"
  },
  "construction/roofing/pvc-sheet-membranes/membranes": {
-  "inherit": "construction/roofing"
+  "author": "Zorro2212",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Part_of_membrane_roof_on_tram_station_in_%C5%81%C3%B3d%C5%BA,_May_2015_02.jpg",
+  "query": "roof membrane",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "membran",
+   "membrane",
+   "roof"
+  ],
+  "sharpness": 4536.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Part_of_membrane_roof_on_tram_station_in_%C5%81%C3%B3d%C5%BA%2C_May_2015_02.jpg/1920px-Part_of_membrane_roof_on_tram_station_in_%C5%81%C3%B3d%C5%BA%2C_May_2015_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2592,
+  "sourceWidth": 3872,
+  "title": "File:Part of membrane roof on tram station in \u0141\u00f3d\u017a, May 2015 02.jpg"
  },
  "construction/roofing/pvc-sheet-membranes/system-adhesives": {
-  "inherit": "construction/roofing"
+  "author": "Asurnipal",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Dornbirn--simple_emergency_flat_roof_drainage_system-01ASD.jpg",
+  "query": "flat roof",
+  "relevance": 2,
+  "relevanceWords": [
+   "flat",
+   "roof"
+  ],
+  "sharpness": 3378.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Dornbirn--simple_emergency_flat_roof_drainage_system-01ASD.jpg/1920px-Dornbirn--simple_emergency_flat_roof_drainage_system-01ASD.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3468,
+  "sourceWidth": 4624,
+  "title": "File:Dornbirn--simple emergency flat roof drainage system-01ASD.jpg"
  },
  "construction/roofing/sheet-membranes-accessories": {
-  "inherit": "construction/roofing"
+  "author": "Martin Falbisoner",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Olympic_Roof_Munich,_July_2018_-03.jpg",
+  "query": "roof detail membrane",
+  "relevance": 4,
+  "relevanceWords": [
+   "detail",
+   "membran",
+   "membrane",
+   "roof"
+  ],
+  "sharpness": 2899.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Olympic_Roof_Munich%2C_July_2018_-03.jpg/1920px-Olympic_Roof_Munich%2C_July_2018_-03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3838,
+  "sourceWidth": 5820,
+  "title": "File:Olympic Roof Munich, July 2018 -03.jpg"
  },
  "construction/roofing/torch-on-sheet-membranes": {
-  "inherit": "construction/roofing"
+  "author": "Asurnipal",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Dornbirn-Flat_roof_rainwater_outlet_(flat_roof_drain)-01ASD.jpg",
+  "query": "flat roof",
+  "relevance": 2,
+  "relevanceWords": [
+   "flat",
+   "roof"
+  ],
+  "sharpness": 5664.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Dornbirn-Flat_roof_rainwater_outlet_%28flat_roof_drain%29-01ASD.jpg/1920px-Dornbirn-Flat_roof_rainwater_outlet_%28flat_roof_drain%29-01ASD.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3468,
+  "sourceWidth": 4624,
+  "title": "File:Dornbirn-Flat roof rainwater outlet (flat roof drain)-01ASD.jpg"
  },
  "construction/sealants-adhesives": {
-  "author": "Achim Hering",
-  "fetched": "2026-10-31",
-  "license": "CC BY 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Caulking.jpg",
-  "query": "caulking gun silicone",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Caulking.jpg/960px-Caulking.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 2025,
-  "sourceWidth": 2558,
-  "title": "File:Caulking.jpg"
+  "author": "Daderot",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Sealant_4_-_Arlington,_MA.jpg",
+  "query": "sealant",
+  "relevance": 2,
+  "relevanceWords": [
+   "seal",
+   "sealant"
+  ],
+  "sharpness": 23927.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Sealant_4_-_Arlington%2C_MA.jpg/1920px-Sealant_4_-_Arlington%2C_MA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2268,
+  "sourceWidth": 4032,
+  "title": "File:Sealant 4 - Arlington, MA.jpg"
  },
  "construction/sealants-adhesives/backing-rod-foamtapes": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Bull-Doser",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Adhesive_au_Montecristo_--_1.png",
+  "query": "adhesive",
+  "relevance": 2,
+  "relevanceWords": [
+   "adhesiv",
+   "adhesive"
+  ],
+  "sharpness": 337.1,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Adhesive_au_Montecristo_--_1.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 1080,
+  "sourceWidth": 1920,
+  "title": "File:Adhesive au Montecristo -- 1.png"
  },
  "construction/sealants-adhesives/cleaners-activatorsprimers": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Mr.choppers",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:1951_Volkswagen_1100cc_engine_in_a_Samba_in_Sealing_Wax_Red.jpg",
+  "query": "window sealing",
+  "relevance": 3,
+  "relevanceWords": [
+   "paint",
+   "seal",
+   "window"
+  ],
+  "sharpness": 1212.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/1951_Volkswagen_1100cc_engine_in_a_Samba_in_Sealing_Wax_Red.jpg/1920px-1951_Volkswagen_1100cc_engine_in_a_Samba_in_Sealing_Wax_Red.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3610,
+  "sourceWidth": 5432,
+  "title": "File:1951 Volkswagen 1100cc engine in a Samba in Sealing Wax Red.jpg"
  },
  "construction/sealants-adhesives/construction-adhesives": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Mr.choppers",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:1951_Volkswagen_15-window_Bus_in_Sealing_Wax_Red_and_Chestnut_Brown,_front_right.jpg",
+  "query": "window sealing",
+  "relevance": 3,
+  "relevanceWords": [
+   "paint",
+   "seal",
+   "window"
+  ],
+  "sharpness": 2142.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/1951_Volkswagen_15-window_Bus_in_Sealing_Wax_Red_and_Chestnut_Brown%2C_front_right.jpg/1920px-1951_Volkswagen_15-window_Bus_in_Sealing_Wax_Red_and_Chestnut_Brown%2C_front_right.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3570,
+  "sourceWidth": 5202,
+  "title": "File:1951 Volkswagen 15-window Bus in Sealing Wax Red and Chestnut Brown, front right.jpg"
  },
  "construction/sealants-adhesives/contact-adhesives": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Marius Vassnes",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:I-Port_Advance_adhesive_tape.jpg",
+  "query": "contact adhesive",
+  "relevance": 3,
+  "relevanceWords": [
+   "adhesiv",
+   "adhesive",
+   "tape"
+  ],
+  "sharpness": 207.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/I-Port_Advance_adhesive_tape.jpg/1920px-I-Port_Advance_adhesive_tape.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:I-Port Advance adhesive tape.jpg"
  },
  "construction/sealants-adhesives/curtain-walling-glazingandweathersealants": {
   "author": "Sneha G Gupta",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Glass_facade_building_at_Bamberg.jpg",
   "query": "glass facade building",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Glass_facade_building_at_Bamberg.jpg/960px-Glass_facade_building_at_Bamberg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "build",
+   "facade",
+   "glas"
+  ],
+  "sharpness": 1237.0,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/8/86/Glass_facade_building_at_Bamberg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
   "sourceHeight": 1289,
   "sourceWidth": 1837,
   "title": "File:Glass facade building at Bamberg.jpg"
  },
  "construction/sealants-adhesives/expansion-perimeterjoints": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Pi.1415926535",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Track_gaps_in_expansion_joint_at_Waverley_station,_March_2022.jpg",
+  "query": "expansion joint cover",
+  "relevance": 2,
+  "relevanceWords": [
+   "expansion",
+   "joint"
+  ],
+  "sharpness": 7544.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Track_gaps_in_expansion_joint_at_Waverley_station%2C_March_2022.jpg/1920px-Track_gaps_in_expansion_joint_at_Waverley_station%2C_March_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Track gaps in expansion joint at Waverley station, March 2022.jpg"
  },
  "construction/sealants-adhesives/facade-sealants": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Ildar Sagdejev (Specious)",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:2008-03-15_Men_sealing_shattered_windows_in_the_CNN_Center.jpg",
+  "query": "window sealing",
+  "relevance": 2,
+  "relevanceWords": [
+   "seal",
+   "window"
+  ],
+  "sharpness": 385.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/2008-03-15_Men_sealing_shattered_windows_in_the_CNN_Center.jpg/1920px-2008-03-15_Men_sealing_shattered_windows_in_the_CNN_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1288,
+  "sourceWidth": 1936,
+  "title": "File:2008-03-15 Men sealing shattered windows in the CNN Center.jpg"
  },
  "construction/sealants-adhesives/foam-sealants-adhesives": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "U.S. Navy photo by Mass Communication Specialist 2nd Class Michelle Kapica",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Navy_100318-N-5366K-054_Hospital_Corpsman_3rd_Class_Robert_Word,_assigned_to_the_U.S._Navy_demonstration_parachute_team,_the_Leap_Frogs,_sprays_foam_insulation_into_woodwork.jpg",
+  "query": "spray foam insulation",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "foam",
+   "insulation",
+   "site",
+   "spray"
+  ],
+  "sharpness": 733.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/US_Navy_100318-N-5366K-054_Hospital_Corpsman_3rd_Class_Robert_Word%2C_assigned_to_the_U.S._Navy_demonstration_parachute_team%2C_the_Leap_Frogs%2C_sprays_foam_insulation_into_woodwork.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1994,
+  "sourceWidth": 3000,
+  "title": "File:US Navy 100318-N-5366K-054 Hospital Corpsman 3rd Class Robert Word, assigned to the U.S. Navy demonstration parachute team, the Leap Frogs, sprays foam insulation into woodwork.jpg"
  },
  "construction/sealants-adhesives/paint-preparation": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Jules Verne Times Two",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Outer_wall_painted_with_sand_textured_blue_paint,_Travessa_da_Fonte_Nova,_Idanha-a-Nova,_Portugal_julesvernex2.jpg",
+  "query": "sanding wall paint",
+  "relevance": 3,
+  "relevanceWords": [
+   "paint",
+   "sand",
+   "wall"
+  ],
+  "sharpness": 3959.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Outer_wall_painted_with_sand_textured_blue_paint%2C_Travessa_da_Fonte_Nova%2C_Idanha-a-Nova%2C_Portugal_julesvernex2.jpg/1920px-Outer_wall_painted_with_sand_textured_blue_paint%2C_Travessa_da_Fonte_Nova%2C_Idanha-a-Nova%2C_Portugal_julesvernex2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 6089,
+  "sourceWidth": 8726,
+  "title": "File:Outer wall painted with sand textured blue paint, Travessa da Fonte Nova, Idanha-a-Nova, Portugal julesvernex2.jpg"
  },
  "construction/sealants-adhesives/passive-fire-protection": {
   "author": "Achim Hering",
-  "fetched": "2026-10-31",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Dih_electrical_firestop_bc_superferries.jpg",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Lovely_canadian_paper_mill_mortar_firestop.jpg",
   "query": "firestop cables wall",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Dih_electrical_firestop_bc_superferries.jpg/960px-Dih_electrical_firestop_bc_superferries.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 3102,
-  "sourceWidth": 4660,
-  "title": "File:Dih electrical firestop bc superferries.jpg"
+  "relevance": 6,
+  "relevanceWords": [
+   "cabl",
+   "concrete",
+   "fire",
+   "firestop",
+   "penetration",
+   "wall"
+  ],
+  "sharpness": 337.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Lovely_canadian_paper_mill_mortar_firestop.jpg/1920px-Lovely_canadian_paper_mill_mortar_firestop.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3168,
+  "sourceWidth": 4711,
+  "title": "File:Lovely canadian paper mill mortar firestop.jpg"
  },
  "construction/sealants-adhesives/roofing-sealantsadhesives": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Massachusetts. Metropolitan District Water Supply Commission, Pike, Stuart D., 1910-1978",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Contract_No._56,_Administration_Buildings,_Main_Dam,_Belchertown,_waterproofing_on_hangar_roof,_looking_easterly,_Belchertown,_Mass.,_Jun._10,_1938_-_DPLA_-_c8aa53add0f07fd55d0b13893d11c905.jpg",
+  "query": "roof sealant",
+  "relevance": 3,
+  "relevanceWords": [
+   "build",
+   "roof",
+   "waterproof"
+  ],
+  "sharpness": 3088.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Contract_No._56%2C_Administration_Buildings%2C_Main_Dam%2C_Belchertown%2C_waterproofing_on_hangar_roof%2C_looking_easterly%2C_Belchertown%2C_Mass.%2C_Jun._10%2C_1938_-_DPLA_-_c8aa53add0f07fd55d0b13893d11c905.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2434,
+  "sourceWidth": 3903,
+  "title": "File:Contract No. 56, Administration Buildings, Main Dam, Belchertown, waterproofing on hangar roof, looking easterly, Belchertown, Mass., Jun. 10, 1938 - DPLA - c8aa53add0f07fd55d0b13893d11c905.jpg"
  },
  "construction/sealants-adhesives/sanitary-sealants": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "MassDOT",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": true,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Whittier_Bridge-_Expansion_joint_ready_to_be_set_in_place_(21010169043).jpg",
+  "query": "expansion joint",
+  "relevance": 2,
+  "relevanceWords": [
+   "expansion",
+   "joint"
+  ],
+  "sharpness": 2528.9,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Whittier_Bridge-_Expansion_joint_ready_to_be_set_in_place_%2821010169043%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 980,
+  "sourceWidth": 1306,
+  "title": "File:Whittier Bridge- Expansion joint ready to be set in place (21010169043).jpg"
  },
  "construction/sealants-adhesives/specialty-sealants": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Tdorante10",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Hudson_River_Park_td_(2018-10-22)_031_-_Holland_Tunnel_Pier_34.jpg",
+  "query": "expansion joint",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "expansion",
+   "joint",
+   "tunnel"
+  ],
+  "sharpness": 989.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Hudson_River_Park_td_%282018-10-22%29_031_-_Holland_Tunnel_Pier_34.jpg/1920px-Hudson_River_Park_td_%282018-10-22%29_031_-_Holland_Tunnel_Pier_34.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3648,
+  "sourceWidth": 5472,
+  "title": "File:Hudson River Park td (2018-10-22) 031 - Holland Tunnel Pier 34.jpg"
  },
  "construction/sealants-adhesives/swimming-pools": {
   "author": "Kolforn (Kolforn) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share \u2013 to copy, distribute and transmit the work to remix \u2013 to adapt the work Under the following conditions: attribution \u2013 You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike \u2013 If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original.https://creativecommons.org/licenses/by-sa/4.0CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 truetrue",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:2017-08-01_Swimming_pool_mosaic_tiles,_Albufeira.JPG",
   "query": "swimming pool tiles",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/2017-08-01_Swimming_pool_mosaic_tiles%2C_Albufeira.JPG/960px-2017-08-01_Swimming_pool_mosaic_tiles%2C_Albufeira.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "pool",
+   "swimm",
+   "til"
+  ],
+  "sharpness": 748.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/2017-08-01_Swimming_pool_mosaic_tiles%2C_Albufeira.JPG/1920px-2017-08-01_Swimming_pool_mosaic_tiles%2C_Albufeira.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3456,
   "sourceWidth": 4608,
   "title": "File:2017-08-01 Swimming pool mosaic tiles, Albufeira.JPG"
  },
  "construction/sealants-adhesives/tapes-sealing": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Newone",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:NewOne_-_b%C4%83ng_d%C3%ADnh_h%C3%A0ng_d%E1%BB%85_v%E1%BB%A1_-_printed_fragile_adhesive_tape_03.jpg",
+  "query": "adhesive tape",
+  "relevance": 4,
+  "relevanceWords": [
+   "adhesiv",
+   "adhesive",
+   "tap",
+   "tape"
+  ],
+  "sharpness": 326.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/NewOne_-_b%C4%83ng_d%C3%ADnh_h%C3%A0ng_d%E1%BB%85_v%E1%BB%A1_-_printed_fragile_adhesive_tape_03.jpg/1920px-NewOne_-_b%C4%83ng_d%C3%ADnh_h%C3%A0ng_d%E1%BB%85_v%E1%BB%A1_-_printed_fragile_adhesive_tape_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3456,
+  "sourceWidth": 4608,
+  "title": "File:NewOne - b\u0103ng d\u00ednh h\u00e0ng d\u1ec5 v\u1ee1 - printed fragile adhesive tape 03.jpg"
  },
  "construction/sealants-adhesives/waterproofing-sealants": {
-  "inherit": "construction/sealants-adhesives"
+  "author": "Fons Heijnsbroek",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:A_construction_worker_is_working_underground_during_the_renovation_of_Central_station_Amsterdam;_free_photo_Amsterdam_by_Fons_Heijnsbroek,_2012.jpg",
+  "query": "construction worker",
+  "relevance": 6,
+  "relevanceWords": [
+   "basement",
+   "concrete",
+   "construction",
+   "foundation",
+   "site",
+   "worker"
+  ],
+  "sharpness": 1771.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/A_construction_worker_is_working_underground_during_the_renovation_of_Central_station_Amsterdam%3B_free_photo_Amsterdam_by_Fons_Heijnsbroek%2C_2012.jpg/1920px-A_construction_worker_is_working_underground_during_the_renovation_of_Central_station_Amsterdam%3B_free_photo_Amsterdam_by_Fons_Heijnsbroek%2C_2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3189,
+  "sourceWidth": 4252,
+  "title": "File:A construction worker is working underground during the renovation of Central station Amsterdam; free photo Amsterdam by Fons Heijnsbroek, 2012.jpg"
  },
  "construction/structural-strengthening": {
-  "author": "Flying Stag",
-  "fetched": "2026-10-31",
-  "license": "CC BY-SA 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Lattice_girder_bridge_at_Llandeilo,Powys.JPG",
+  "author": "MassDOT",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Downstream_Span_6_Arch_Rib_Girder_Repairs_(January_31,_2017)_(32529717261).jpg",
   "query": "bridge girder repair",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Lattice_girder_bridge_at_Llandeilo%2CPowys.JPG/960px-Lattice_girder_bridge_at_Llandeilo%2CPowys.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 1120,
-  "sourceWidth": 1552,
-  "title": "File:Lattice girder bridge at Llandeilo,Powys.JPG"
+  "relevance": 5,
+  "relevanceWords": [
+   "bridge",
+   "crane",
+   "girder",
+   "repair",
+   "steel"
+  ],
+  "sharpness": 981.8,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/1/17/Downstream_Span_6_Arch_Rib_Girder_Repairs_%28January_31%2C_2017%29_%2832529717261%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 1200,
+  "sourceWidth": 1600,
+  "title": "File:Downstream Span 6 Arch Rib Girder Repairs (January 31, 2017) (32529717261).jpg"
  },
  "construction/structural-strengthening/flexural-strengthening": {
-  "inherit": "construction/structural-strengthening"
+  "author": "HARTLEPOOLMARINA2014",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:RRS_Discovery_Dundee_Panting_beams_designed_to_strengthen_the_ice_breaking_bow.JPG",
+  "query": "beam strengthening",
+  "relevance": 2,
+  "relevanceWords": [
+   "beam",
+   "strengthen"
+  ],
+  "sharpness": 521.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/RRS_Discovery_Dundee_Panting_beams_designed_to_strengthen_the_ice_breaking_bow.JPG/1920px-RRS_Discovery_Dundee_Panting_beams_designed_to_strengthen_the_ice_breaking_bow.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4508,
+  "sourceWidth": 7112,
+  "title": "File:RRS Discovery Dundee Panting beams designed to strengthen the ice breaking bow.JPG"
  },
  "construction/structural-strengthening/shear-strengthening": {
-  "inherit": "construction/structural-strengthening"
+  "author": "Official U.S. Navy Page",
+  "fallbackFrom": "construction/structural-strengthening",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Seabees_from_Naval_Mobile_Construction_Battalion_(NMCB)_5_and_Republic_of_Philippines_Navy_Seabees_work_together_to_finish_placing_concrete.jpg",
+  "query": "concrete beam strengthening",
+  "relevance": 5,
+  "relevanceWords": [
+   "beam",
+   "build",
+   "concrete",
+   "construction",
+   "strengthen"
+  ],
+  "sharpness": 3137.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Seabees_from_Naval_Mobile_Construction_Battalion_%28NMCB%29_5_and_Republic_of_Philippines_Navy_Seabees_work_together_to_finish_placing_concrete.jpg/1920px-Seabees_from_Naval_Mobile_Construction_Battalion_%28NMCB%29_5_and_Republic_of_Philippines_Navy_Seabees_work_together_to_finish_placing_concrete.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1390,
+  "sourceWidth": 2100,
+  "title": "File:Seabees from Naval Mobile Construction Battalion (NMCB) 5 and Republic of Philippines Navy Seabees work together to finish placing concrete.jpg"
  },
  "construction/structural-strengthening/structural-adhesives": {
-  "inherit": "construction/structural-strengthening"
+  "author": "Cjp24",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:2-part_epoxy_adhesive_in_cartridge.jpg",
+  "query": "epoxy adhesive",
+  "relevance": 7,
+  "relevanceWords": [
+   "adhesiv",
+   "adhesive",
+   "cartridge",
+   "epoxy",
+   "glue",
+   "seal",
+   "sealant"
+  ],
+  "sharpness": 360.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/2-part_epoxy_adhesive_in_cartridge.jpg/1920px-2-part_epoxy_adhesive_in_cartridge.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1452,
+  "sourceWidth": 2340,
+  "title": "File:2-part epoxy adhesive in cartridge.jpg"
  },
  "construction/tile-stone-installationsystems": {
   "author": "MTA Capital Construction Mega Projects",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Floor_tile_installation_in_the_back_of_house_area_of_the_LIRR_passenger_concourse._08-29-2019_(48647691101).jpg",
   "query": "tiling floor installation",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Floor_tile_installation_in_the_back_of_house_area_of_the_LIRR_passenger_concourse._08-29-2019_%2848647691101%29.jpg/960px-Floor_tile_installation_in_the_back_of_house_area_of_the_LIRR_passenger_concourse._08-29-2019_%2848647691101%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "floor",
+   "installation",
+   "til",
+   "tile"
+  ],
+  "sharpness": 1508.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Floor_tile_installation_in_the_back_of_house_area_of_the_LIRR_passenger_concourse._08-29-2019_%2848647691101%29.jpg/1920px-Floor_tile_installation_in_the_back_of_house_area_of_the_LIRR_passenger_concourse._08-29-2019_%2848647691101%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2448,
   "sourceWidth": 3264,
   "title": "File:Floor tile installation in the back of house area of the LIRR passenger concourse. 08-29-2019 (48647691101).jpg"
  },
  "construction/tile-stone-installationsystems/primers-additives": {
-  "inherit": "construction/tile-stone-installationsystems"
+  "author": "Warren LeMay from Chicago, IL, United States",
+  "fallbackFrom": "construction/tile-stone-installationsystems",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Tile_Installation,_Regenstein_Library,_University_of_Chicago,_57th_Street_and_Ellis_Avenue,_Hyde_Park,_Chicago,_IL_(54515411443).jpg",
+  "query": "tiling floor installation",
+  "relevance": 8,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "floor",
+   "installation",
+   "site",
+   "tape",
+   "til",
+   "tile"
+  ],
+  "sharpness": 5259.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Tile_Installation%2C_Regenstein_Library%2C_University_of_Chicago%2C_57th_Street_and_Ellis_Avenue%2C_Hyde_Park%2C_Chicago%2C_IL_%2854515411443%29.jpg/1920px-Tile_Installation%2C_Regenstein_Library%2C_University_of_Chicago%2C_57th_Street_and_Ellis_Avenue%2C_Hyde_Park%2C_Chicago%2C_IL_%2854515411443%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Tile Installation, Regenstein Library, University of Chicago, 57th Street and Ellis Avenue, Hyde Park, Chicago, IL (54515411443).jpg"
  },
  "construction/tile-stone-installationsystems/tile-adhesives": {
-  "inherit": "construction/tile-stone-installationsystems"
- },
- "construction/tile-stone-installationsystems/tile-care-and-cleaners": {
-  "author": "Metropolitan Transportation Authority of the State of New York",
-  "fetched": "2026-10-31",
-  "license": "CC BY 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Cleaning_Platform_Tiles_(6798392068).jpg",
-  "query": "cleaning tiles floor",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Cleaning_Platform_Tiles_%286798392068%29.jpg/960px-Cleaning_Platform_Tiles_%286798392068%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 720,
-  "sourceWidth": 1080,
-  "title": "File:Cleaning Platform Tiles (6798392068).jpg"
- },
- "construction/tile-stone-installationsystems/tile-grouts": {
-  "inherit": "construction/tile-stone-installationsystems"
- },
- "construction/tile-stone-installationsystems/waterproofing": {
-  "inherit": "construction/tile-stone-installationsystems"
- },
- "construction/waterproofing": {
-  "author": "National Institute of Standards and Technology",
-  "fetched": "2026-10-31",
+  "author": "U.S. Department of Defense Current Photos",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
-  "page": "https://commons.wikimedia.org/wiki/File:NIST_0237_(5832370265).jpg",
-  "query": "waterproofing basement wall",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/NIST_0237_%285832370265%29.jpg/960px-NIST_0237_%285832370265%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 3240,
-  "sourceWidth": 4320,
-  "title": "File:NIST 0237 (5832370265).jpg"
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:U.S._Navy_Equipment_Operator_Constructionman_lays_floor_tile.jpg",
+  "query": "laying floor tiles",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "floor",
+   "lay",
+   "til",
+   "tile"
+  ],
+  "sharpness": 1176.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/U.S._Navy_Equipment_Operator_Constructionman_lays_floor_tile.jpg/1920px-U.S._Navy_Equipment_Operator_Constructionman_lays_floor_tile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2848,
+  "sourceWidth": 4288,
+  "title": "File:U.S. Navy Equipment Operator Constructionman lays floor tile.jpg"
+ },
+ "construction/tile-stone-installationsystems/tile-care-and-cleaners": {
+  "author": "PattayaPatrol",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:DZ6_0462_A_clean_marble-tiled_hotel_bathroom_with_a_granite_sink_countertop_large_mirror_and_a_shower_tucked_behind_a_curved_curtain_rod.jpg",
+  "query": "cleaning bathroom tiles",
+  "relevance": 5,
+  "relevanceWords": [
+   "bathroom",
+   "clean",
+   "stone",
+   "til",
+   "tile"
+  ],
+  "sharpness": 979.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/DZ6_0462_A_clean_marble-tiled_hotel_bathroom_with_a_granite_sink_countertop_large_mirror_and_a_shower_tucked_behind_a_curved_curtain_rod.jpg/1920px-DZ6_0462_A_clean_marble-tiled_hotel_bathroom_with_a_granite_sink_countertop_large_mirror_and_a_shower_tucked_behind_a_curved_curtain_rod.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4024,
+  "sourceWidth": 6048,
+  "title": "File:DZ6 0462 A clean marble-tiled hotel bathroom with a granite sink countertop large mirror and a shower tucked behind a curved curtain rod.jpg"
+ },
+ "construction/tile-stone-installationsystems/tile-grouts": {
+  "author": "MTA Capital Construction Mega Projects",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Grouting_tile_finishes_along_the_44th_Street_passenger_corridor_of_the_future_LIRR_concourse._(CM014B,_01-03-2019)_(31660454047).jpg",
+  "query": "tile grouting",
+  "relevance": 4,
+  "relevanceWords": [
+   "construction",
+   "grout",
+   "til",
+   "tile"
+  ],
+  "sharpness": 1171.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Grouting_tile_finishes_along_the_44th_Street_passenger_corridor_of_the_future_LIRR_concourse._%28CM014B%2C_01-03-2019%29_%2831660454047%29.jpg/1920px-Grouting_tile_finishes_along_the_44th_Street_passenger_corridor_of_the_future_LIRR_concourse._%28CM014B%2C_01-03-2019%29_%2831660454047%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Grouting tile finishes along the 44th Street passenger corridor of the future LIRR concourse. (CM014B, 01-03-2019) (31660454047).jpg"
+ },
+ "construction/tile-stone-installationsystems/waterproofing": {
+  "author": "MTA Capital Construction Mega Projects",
+  "fallbackFrom": "construction/tile-stone-installationsystems",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Preparing_the_floors_of_the_traction_power_room_for_the_installation_of_tile._(CM014B,_09-25-2018)_(43161884640).jpg",
+  "query": "tiling floor installation",
+  "relevance": 5,
+  "relevanceWords": [
+   "construction",
+   "floor",
+   "installation",
+   "til",
+   "tile"
+  ],
+  "sharpness": 330.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Preparing_the_floors_of_the_traction_power_room_for_the_installation_of_tile._%28CM014B%2C_09-25-2018%29_%2843161884640%29.jpg/1920px-Preparing_the_floors_of_the_traction_power_room_for_the_installation_of_tile._%28CM014B%2C_09-25-2018%29_%2843161884640%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Preparing the floors of the traction power room for the installation of tile. (CM014B, 09-25-2018) (43161884640).jpg"
+ },
+ "construction/waterproofing": {
+  "author": "Larry D. Moore",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Lower_Shoal_Creek_Bridge_Deck_Austin_2018.jpg",
+  "query": "bridge deck",
+  "relevance": 2,
+  "relevanceWords": [
+   "bridge",
+   "deck"
+  ],
+  "sharpness": 6533.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Lower_Shoal_Creek_Bridge_Deck_Austin_2018.jpg/1920px-Lower_Shoal_Creek_Bridge_Deck_Austin_2018.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1500,
+  "sourceWidth": 2667,
+  "title": "File:Lower Shoal Creek Bridge Deck Austin 2018.jpg"
  },
  "construction/waterproofing/66807": {
-  "inherit": "construction/waterproofing"
+  "author": "MC2 Sean Furey",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:U.S._Navy_Builder_2nd_Class_Justin_Lieder,_with_Construction_Dive_Detachment_Alpha,_Underwater_Construction_Team_2,_chips_concrete_during_a_structural_pile_restoration_at_Joint_Base_Pearl_Harbor-Hickam,_Hawaii_130313-N-WX059-041.jpg",
+  "query": "construction joint concrete",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "concrete",
+   "construction",
+   "joint"
+  ],
+  "sharpness": 2792.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/U.S._Navy_Builder_2nd_Class_Justin_Lieder%2C_with_Construction_Dive_Detachment_Alpha%2C_Underwater_Construction_Team_2%2C_chips_concrete_during_a_structural_pile_restoration_at_Joint_Base_Pearl_Harbor-Hickam%2C_Hawaii_130313-N-WX059-041.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2161,
+  "sourceWidth": 3000,
+  "title": "File:U.S. Navy Builder 2nd Class Justin Lieder, with Construction Dive Detachment Alpha, Underwater Construction Team 2, chips concrete during a structural pile restoration at Joint Base Pearl Harbor-Hickam, Hawaii 130313-N-WX059-041.jpg"
  },
  "construction/waterproofing/66807/chemical-resistantwaterbars": {
-  "inherit": "construction/waterproofing"
+  "author": "Shopstone",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Waterbar_1.jpg",
+  "query": "waterbar",
+  "relevance": 2,
+  "relevanceWords": [
+   "water",
+   "waterbar"
+  ],
+  "sharpness": 9964.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Waterbar_1.jpg/1920px-Waterbar_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Waterbar 1.jpg"
  },
  "construction/waterproofing/basement-sheet-membranes": {
-  "inherit": "construction/waterproofing"
+  "author": "Pi.1415926535",
+  "fallbackFrom": "loose",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Waterproofing_work_at_Aquarium_station_headhouse,_October_2020.jpg",
+  "query": "foundation waterproofing",
+  "relevance": 2,
+  "relevanceWords": [
+   "construction",
+   "waterproof"
+  ],
+  "sharpness": 4432.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Waterproofing_work_at_Aquarium_station_headhouse%2C_October_2020.jpg/1920px-Waterproofing_work_at_Aquarium_station_headhouse%2C_October_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Waterproofing work at Aquarium station headhouse, October 2020.jpg"
  },
  "construction/waterproofing/bridge-deck-waterproofingsystems": {
   "author": "NPS Photo",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Installation_of_waterproof_membrane_on_bridge_deck_(0c8f43bc-9121-4518-9083-51e1cee76a92).jpg",
   "query": "bridge deck waterproofing",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Installation_of_waterproof_membrane_on_bridge_deck_%280c8f43bc-9121-4518-9083-51e1cee76a92%29.jpg/960px-Installation_of_waterproof_membrane_on_bridge_deck_%280c8f43bc-9121-4518-9083-51e1cee76a92%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "bridge",
+   "construction",
+   "deck",
+   "membrane",
+   "waterproof"
+  ],
+  "sharpness": 1125.7,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Installation_of_waterproof_membrane_on_bridge_deck_%280c8f43bc-9121-4518-9083-51e1cee76a92%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
   "sourceHeight": 1350,
   "sourceWidth": 1800,
   "title": "File:Installation of waterproof membrane on bridge deck (0c8f43bc-9121-4518-9083-51e1cee76a92).jpg"
  },
  "construction/waterproofing/injections-and-hydrophilicsystems": {
-  "inherit": "construction/waterproofing"
+  "author": "Olnnu",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Jet_grouting_(2011)_A.jpg",
+  "query": "injection grouting",
+  "relevance": 4,
+  "relevanceWords": [
+   "construction",
+   "grout",
+   "injection",
+   "site"
+  ],
+  "sharpness": 1973.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Jet_grouting_%282011%29_A.jpg/1920px-Jet_grouting_%282011%29_A.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1536,
+  "sourceWidth": 2048,
+  "title": "File:Jet grouting (2011) A.jpg"
  },
  "construction/waterproofing/liquid-applied-membranes": {
-  "inherit": "construction/waterproofing"
+  "author": "Stephencdickson",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Basement_and_sub-basement_levels_Heriot_Row.jpg",
+  "query": "basement",
+  "relevance": 2,
+  "relevanceWords": [
+   "basement",
+   "build"
+  ],
+  "sharpness": 1102.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Basement_and_sub-basement_levels_Heriot_Row.jpg/1920px-Basement_and_sub-basement_levels_Heriot_Row.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2056,
+  "sourceWidth": 3088,
+  "title": "File:Basement and sub-basement levels Heriot Row.jpg"
  },
  "construction/waterproofing/liquid-applied-membranes/high-performancesystems": {
-  "inherit": "construction/waterproofing"
+  "author": "Larry D. Moore",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Bosque_River_Bridge_Deck.jpg",
+  "query": "bridge deck",
+  "relevance": 3,
+  "relevanceWords": [
+   "bridge",
+   "deck",
+   "high"
+  ],
+  "sharpness": 4473.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Bosque_River_Bridge_Deck.jpg/1920px-Bosque_River_Bridge_Deck.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1500,
+  "sourceWidth": 2667,
+  "title": "File:Bosque River Bridge Deck.jpg"
  },
  "construction/waterproofing/liquid-applied-membranes/mortars-coatings": {
-  "inherit": "construction/waterproofing"
+  "author": "Percival Kestreltail",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Echo_Bridge_Deck.jpg",
+  "query": "bridge deck",
+  "relevance": 2,
+  "relevanceWords": [
+   "bridge",
+   "deck"
+  ],
+  "sharpness": 3643.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Echo_Bridge_Deck.jpg/1920px-Echo_Bridge_Deck.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Echo Bridge Deck.jpg"
  },
  "construction/waterproofing/liquid-applied-membranes/primers-accessories": {
-  "inherit": "construction/waterproofing"
+  "author": "Adavido",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Painter_applying_primer_on_wall.jpg",
+  "query": "applying primer",
+  "relevance": 4,
+  "relevanceWords": [
+   "apply",
+   "paint",
+   "prim",
+   "primer"
+  ],
+  "sharpness": 1236.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Painter_applying_primer_on_wall.jpg/1920px-Painter_applying_primer_on_wall.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 1536,
+  "sourceWidth": 2048,
+  "title": "File:Painter applying primer on wall.jpg"
  },
  "construction/waterproofing/liquid-applied-membranes/solvent-based-membranes": {
-  "inherit": "construction/waterproofing"
+  "author": "Nick / from United Kingdom",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:3-Bay_Sangar_-_Damp-Proof_Course_(51070450303).jpg",
+  "query": "damp proofing",
+  "relevance": 5,
+  "relevanceWords": [
+   "concrete",
+   "construction",
+   "damp",
+   "proof",
+   "roof"
+  ],
+  "sharpness": 2149.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/3-Bay_Sangar_-_Damp-Proof_Course_%2851070450303%29.jpg/1920px-3-Bay_Sangar_-_Damp-Proof_Course_%2851070450303%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3376,
+  "sourceWidth": 6000,
+  "title": "File:3-Bay Sangar - Damp-Proof Course (51070450303).jpg"
  },
  "construction/waterproofing/liquid-applied-membranes/water-based-membranes": {
-  "inherit": "construction/waterproofing"
+  "author": "This Photo was taken by Timothy A. Gonsalves. Feel free to use my photos, but please mention me as the author. I would much appreciate if you send me an email tagooty@yahoo.com or write on my talk page, for my information. Please contact me before commercial use. Please do not upload an edited image here without consulting me. I would like to make corrections only at my own source to ensure that the changes improve the image and are preserved.Otherwise you may upload an edited image with a new name. Please use one of the templates derivative or extract.",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Tamraparni_Bridge_Deck_Tirunelveli_Sep22_A7C_02391.jpg",
+  "query": "bridge deck",
+  "relevance": 2,
+  "relevanceWords": [
+   "bridge",
+   "deck"
+  ],
+  "sharpness": 1772.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Tamraparni_Bridge_Deck_Tirunelveli_Sep22_A7C_02391.jpg/1920px-Tamraparni_Bridge_Deck_Tirunelveli_Sep22_A7C_02391.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3917,
+  "sourceWidth": 5222,
+  "title": "File:Tamraparni Bridge Deck Tirunelveli Sep22 A7C 02391.jpg"
  },
  "construction/waterproofing/pvc-sheet-membranesfortunnelsandcrosspassages": {
-  "author": "Unknown authorUnknown author or not provided",
-  "fetched": "2026-10-31",
-  "license": "Public domain",
-  "licenseUrl": null,
-  "page": "https://commons.wikimedia.org/wiki/File:%22Completed_concrete_tunnel_lining_near_inlet_portal_of_diversion_tunnel_No._4._Coating_of_moisture_reserving_paint_is..._-_NARA_-_293692.jpg",
-  "query": "tunnel lining construction",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/%22Completed_concrete_tunnel_lining_near_inlet_portal_of_diversion_tunnel_No._4._Coating_of_moisture_reserving_paint_is..._-_NARA_-_293692.jpg/960px-%22Completed_concrete_tunnel_lining_near_inlet_portal_of_diversion_tunnel_No._4._Coating_of_moisture_reserving_paint_is..._-_NARA_-_293692.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 2102,
-  "sourceWidth": 3000,
-  "title": "File:\"Completed concrete tunnel lining near inlet portal of diversion tunnel No. 4. Coating of moisture reserving paint is... - NARA - 293692.jpg"
+  "author": "Spudgun67",
+  "fallbackFrom": "pool",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Greenwich_Foot_Tunnel_ring_segment_lining_and_plaque.jpg",
+  "query": "tunnel lining",
+  "relevance": 2,
+  "relevanceWords": [
+   "lin",
+   "tunnel"
+  ],
+  "sharpness": 1240.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Greenwich_Foot_Tunnel_ring_segment_lining_and_plaque.jpg/1920px-Greenwich_Foot_Tunnel_ring_segment_lining_and_plaque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3096,
+  "sourceWidth": 5504,
+  "title": "File:Greenwich Foot Tunnel ring segment lining and plaque.jpg"
  },
  "construction/waterproofing/spray-applied-membranes": {
-  "inherit": "construction/waterproofing"
+  "author": "MassDOT",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Waterproofing_on_the_new_Whittier_Bridge_(21543760264).jpg",
+  "query": "spraying waterproofing",
+  "relevance": 2,
+  "relevanceWords": [
+   "spray",
+   "waterproof"
+  ],
+  "sharpness": 1241.9,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Waterproofing_on_the_new_Whittier_Bridge_%2821543760264%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 1224,
+  "sourceWidth": 1632,
+  "title": "File:Waterproofing on the new Whittier Bridge (21543760264).jpg"
  },
  "industry": {
   "author": "Marek \u015alusarczyk (Tupungato) Photo portfolio",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice,_Poland.jpg",
   "query": "factory production line",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg/960px-002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 6,
+  "relevanceWords": [
+   "assembly",
+   "factory",
+   "line",
+   "manufactur",
+   "plant",
+   "production"
+  ],
+  "sharpness": 2807.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg/1920px-002_Production_line_-_car_assembly_line_in_General_Motors_Manufacturing_Poland_-_Gliwice%2C_Poland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2250,
   "sourceWidth": 3375,
   "title": "File:002 Production line - car assembly line in General Motors Manufacturing Poland - Gliwice, Poland.jpg"
@@ -758,11 +2719,22 @@
  "industry/appliance-and-equipment": {
   "author": "MTA Capital Construction Mega Projects",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Installation_of_copper_piping_for_the_air_handling_units_located_on_the_roof_of_the_50th_Street_ventilation_facility._(CM014B,_2-06-2018)_(40173012651).jpg",
   "query": "air conditioning unit installation",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Installation_of_copper_piping_for_the_air_handling_units_located_on_the_roof_of_the_50th_Street_ventilation_facility._%28CM014B%2C_2-06-2018%29_%2840173012651%29.jpg/960px-Installation_of_copper_piping_for_the_air_handling_units_located_on_the_roof_of_the_50th_Street_ventilation_facility._%28CM014B%2C_2-06-2018%29_%2840173012651%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "air",
+   "condition",
+   "installation",
+   "unit",
+   "ventilation"
+  ],
+  "sharpness": 10144.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Installation_of_copper_piping_for_the_air_handling_units_located_on_the_roof_of_the_50th_Street_ventilation_facility._%28CM014B%2C_2-06-2018%29_%2840173012651%29.jpg/1920px-Installation_of_copper_piping_for_the_air_handling_units_located_on_the_roof_of_the_50th_Street_ventilation_facility._%28CM014B%2C_2-06-2018%29_%2840173012651%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2448,
   "sourceWidth": 3264,
   "title": "File:Installation of copper piping for the air handling units located on the roof of the 50th Street ventilation facility. (CM014B, 2-06-2018) (40173012651).jpg"
@@ -770,11 +2742,23 @@
  "industry/appliance-and-equipment/hvac": {
   "author": "Marek \u015alusarczyk (Tupungato) Photo portfolio",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:012_Rooftop_HVAC_systems_and_roof_ventilation_ducts_in_Tokyo,_Japan.jpg",
   "query": "HVAC ducts building",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/012_Rooftop_HVAC_systems_and_roof_ventilation_ducts_in_Tokyo%2C_Japan.jpg/960px-012_Rooftop_HVAC_systems_and_roof_ventilation_ducts_in_Tokyo%2C_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 6,
+  "relevanceWords": [
+   "air",
+   "build",
+   "condition",
+   "duct",
+   "hvac",
+   "ventilation"
+  ],
+  "sharpness": 1377.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/012_Rooftop_HVAC_systems_and_roof_ventilation_ducts_in_Tokyo%2C_Japan.jpg/1920px-012_Rooftop_HVAC_systems_and_roof_ventilation_ducts_in_Tokyo%2C_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1440,
   "sourceWidth": 2160,
   "title": "File:012 Rooftop HVAC systems and roof ventilation ducts in Tokyo, Japan.jpg"
@@ -782,110 +2766,428 @@
  "industry/automotive-aftermarket": {
   "author": "Anthony Parkes",
   "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Second_Hand_Van_Sales_and_Car_Body_Repair_Shop_-_geograph.org.uk_-_3928926.jpg",
   "query": "car body repair shop",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Second_Hand_Van_Sales_and_Car_Body_Repair_Shop_-_geograph.org.uk_-_3928926.jpg/960px-Second_Hand_Van_Sales_and_Car_Body_Repair_Shop_-_geograph.org.uk_-_3928926.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "body",
+   "car",
+   "repair",
+   "shop"
+  ],
+  "sharpness": 1332.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Second_Hand_Van_Sales_and_Car_Body_Repair_Shop_-_geograph.org.uk_-_3928926.jpg/1920px-Second_Hand_Van_Sales_and_Car_Body_Repair_Shop_-_geograph.org.uk_-_3928926.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2371,
   "sourceWidth": 3926,
   "title": "File:Second Hand Van Sales and Car Body Repair Shop - geograph.org.uk - 3928926.jpg"
  },
  "industry/automotive-aftermarket/accessories": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Shixart1985",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Hands_repairing_a_car_door_latch_using_a_screwdriver_in_a_workshop_setting.jpg",
+  "query": "car repair tools",
+  "relevance": 5,
+  "relevanceWords": [
+   "automotive",
+   "car",
+   "repair",
+   "tool",
+   "workshop"
+  ],
+  "sharpness": 152.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Hands_repairing_a_car_door_latch_using_a_screwdriver_in_a_workshop_setting.jpg/1920px-Hands_repairing_a_car_door_latch_using_a_screwdriver_in_a_workshop_setting.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4912,
+  "sourceWidth": 7360,
+  "title": "File:Hands repairing a car door latch using a screwdriver in a workshop setting.jpg"
  },
  "industry/automotive-aftermarket/auto-glass-replacement": {
   "author": "Roger A Smith",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Mobile_windscreen_replacement_in_the_Tesco_Extra_carpark,_Barnstaple_-_geograph.org.uk_-_7765625.jpg",
   "query": "windscreen replacement",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Mobile_windscreen_replacement_in_the_Tesco_Extra_carpark%2C_Barnstaple_-_geograph.org.uk_-_7765625.jpg/960px-Mobile_windscreen_replacement_in_the_Tesco_Extra_carpark%2C_Barnstaple_-_geograph.org.uk_-_7765625.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "car",
+   "replacement",
+   "windscreen"
+  ],
+  "sharpness": 6063.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Mobile_windscreen_replacement_in_the_Tesco_Extra_carpark%2C_Barnstaple_-_geograph.org.uk_-_7765625.jpg/1920px-Mobile_windscreen_replacement_in_the_Tesco_Extra_carpark%2C_Barnstaple_-_geograph.org.uk_-_7765625.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1734,
   "sourceWidth": 3083,
   "title": "File:Mobile windscreen replacement in the Tesco Extra carpark, Barnstaple - geograph.org.uk - 7765625.jpg"
  },
  "industry/automotive-aftermarket/auto-glass-replacement/accessories": {
-  "inherit": "industry/automotive-aftermarket/auto-glass-replacement"
+  "author": "WhisperToMe",
+  "fallbackFrom": "industry/automotive-aftermarket",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Texas_Auto_Repair_Body_Shop_03.jpg",
+  "query": "auto body repair",
+  "relevance": 4,
+  "relevanceWords": [
+   "auto",
+   "body",
+   "repair",
+   "shop"
+  ],
+  "sharpness": 2401.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Texas_Auto_Repair_Body_Shop_03.jpg/1920px-Texas_Auto_Repair_Body_Shop_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3072,
+  "sourceWidth": 4096,
+  "title": "File:Texas Auto Repair Body Shop 03.jpg"
  },
  "industry/automotive-aftermarket/auto-glass-replacement/adhesive": {
-  "inherit": "industry/automotive-aftermarket/auto-glass-replacement"
+  "author": "Lennexkoh",
+  "fallbackFrom": "industry/automotive-aftermarket/auto-glass-replacement",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Rolls_Royce_Ghost_Front_Windscreen_Replacement.jpg",
+  "query": "windscreen replacement",
+  "relevance": 3,
+  "relevanceWords": [
+   "replacement",
+   "windscreen",
+   "windshield"
+  ],
+  "sharpness": 1983.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Rolls_Royce_Ghost_Front_Windscreen_Replacement.jpg/1920px-Rolls_Royce_Ghost_Front_Windscreen_Replacement.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3840,
+  "sourceWidth": 5120,
+  "title": "File:Rolls Royce Ghost Front Windscreen Replacement.jpg"
  },
  "industry/automotive-aftermarket/auto-glass-replacement/adhesives-for-mirrorandbracketbonding": {
-  "inherit": "industry/automotive-aftermarket/auto-glass-replacement"
+  "author": "Bob Adams from Amanzimtoti, South Africa",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Assignment-_Cars,_Rear_view_mirror_(16193953188).jpg",
+  "query": "rear view mirror car",
+  "relevance": 5,
+  "relevanceWords": [
+   "auto",
+   "car",
+   "mirror",
+   "rear",
+   "view"
+  ],
+  "sharpness": 298.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Assignment-_Cars%2C_Rear_view_mirror_%2816193953188%29.jpg/1920px-Assignment-_Cars%2C_Rear_view_mirror_%2816193953188%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2592,
+  "sourceWidth": 3888,
+  "title": "File:Assignment- Cars, Rear view mirror (16193953188).jpg"
  },
  "industry/automotive-aftermarket/panel-bonding": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Cjp24",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Car_body1.jpg",
+  "query": "car body panel",
+  "relevance": 3,
+  "relevanceWords": [
+   "body",
+   "car",
+   "panel"
+  ],
+  "sharpness": 905.2,
+  "sourceFile": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Car_body1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "sourceHeight": 1200,
+  "sourceWidth": 1600,
+  "title": "File:Car body1.jpg"
  },
  "industry/automotive-aftermarket/panel-bonding/adhesives": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Agbalagba",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Panel_beater_mending_a_vehicle_1.jpg",
+  "query": "vehicle panel",
+  "relevance": 4,
+  "relevanceWords": [
+   "factory",
+   "panel",
+   "repair",
+   "vehicle"
+  ],
+  "sharpness": 755.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Panel_beater_mending_a_vehicle_1.jpg/1920px-Panel_beater_mending_a_vehicle_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Panel beater mending a vehicle 1.jpg"
  },
  "industry/automotive-aftermarket/panel-bonding/dampening-protection": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Derek Harper",
+  "fallbackFrom": "industry/automotive-aftermarket/panel-bonding",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Car_body_repair,_Yalberton_-_geograph.org.uk_-_6735484.jpg",
+  "query": "car body repair",
+  "relevance": 3,
+  "relevanceWords": [
+   "body",
+   "car",
+   "repair"
+  ],
+  "sharpness": 3155.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Car_body_repair%2C_Yalberton_-_geograph.org.uk_-_6735484.jpg/1920px-Car_body_repair%2C_Yalberton_-_geograph.org.uk_-_6735484.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2696,
+  "sourceWidth": 4138,
+  "title": "File:Car body repair, Yalberton - geograph.org.uk - 6735484.jpg"
  },
  "industry/automotive-aftermarket/panel-bonding/pre-treatment": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Elliott Brown from Birmingham, United Kingdom",
+  "fallbackFrom": "industry/automotive-aftermarket/panel-bonding",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Cormatin_-_main_entrance_ticket_office_gift_shop_(34924000064).jpg",
+  "query": "body shop panel",
+  "relevance": 12,
+  "relevanceWords": [
+   "body",
+   "build",
+   "car",
+   "facade",
+   "factory",
+   "line",
+   "paint",
+   "panel"
+  ],
+  "sharpness": 2892.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Ch%C3%A2teau_de_Cormatin_-_main_entrance_ticket_office_gift_shop_%2834924000064%29.jpg/1920px-Ch%C3%A2teau_de_Cormatin_-_main_entrance_ticket_office_gift_shop_%2834924000064%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3456,
+  "sourceWidth": 4608,
+  "title": "File:Ch\u00e2teau de Cormatin - main entrance ticket office gift shop (34924000064).jpg"
  },
  "industry/automotive-aftermarket/sealing-and-bonding": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Bahnfrend",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:G-Class_assembly,_2009_(12).JPG",
+  "query": "car assembly line body",
+  "relevance": 5,
+  "relevanceWords": [
+   "assembly",
+   "body",
+   "car",
+   "line",
+   "vehicle"
+  ],
+  "sharpness": 2477.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/G-Class_assembly%2C_2009_%2812%29.JPG/1920px-G-Class_assembly%2C_2009_%2812%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2000,
+  "sourceWidth": 3008,
+  "title": "File:G-Class assembly, 2009 (12).JPG"
  },
  "industry/automotive-aftermarket/sealing-and-bonding/hem-flange-sealslapjoints": {
-  "inherit": "industry/automotive-aftermarket"
+  "author": "Diplomatic Security Service from Washington, D.C., United States of America",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:A_DSS_special_agent_(right)_opens_a_car_door_for_a_dignitary_during_the_UN_General_Assembly._(43632838624).jpg",
+  "query": "car door assembly",
+  "relevance": 3,
+  "relevanceWords": [
+   "assembly",
+   "car",
+   "door"
+  ],
+  "sharpness": 2264.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/A_DSS_special_agent_%28right%29_opens_a_car_door_for_a_dignitary_during_the_UN_General_Assembly._%2843632838624%29.jpg/1920px-A_DSS_special_agent_%28right%29_opens_a_car_door_for_a_dignitary_during_the_UN_General_Assembly._%2843632838624%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2000,
+  "sourceWidth": 3008,
+  "title": "File:A DSS special agent (right) opens a car door for a dignitary during the UN General Assembly. (43632838624).jpg"
  },
  "industry/building-components": {
   "author": "Tim1965",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:1900_M_Street_NW_-_Washington_DC_-_curtain_wall_detail.JPG",
   "query": "curtain wall facade glass building",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/1900_M_Street_NW_-_Washington_DC_-_curtain_wall_detail.JPG/960px-1900_M_Street_NW_-_Washington_DC_-_curtain_wall_detail.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 7,
+  "relevanceWords": [
+   "build",
+   "curtain",
+   "facade",
+   "glas",
+   "panel",
+   "wall",
+   "window"
+  ],
+  "sharpness": 1192.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/1900_M_Street_NW_-_Washington_DC_-_curtain_wall_detail.JPG/1920px-1900_M_Street_NW_-_Washington_DC_-_curtain_wall_detail.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1333,
   "sourceWidth": 2000,
   "title": "File:1900 M Street NW - Washington DC - curtain wall detail.JPG"
  },
  "industry/building-components/building-elements": {
-  "inherit": "industry/building-components"
- },
- "industry/building-components/building-elements/building-panels": {
-  "inherit": "industry/building-components"
- },
- "industry/building-components/facade": {
-  "author": "Peter Balcerzak",
-  "fetched": "2026-10-31",
-  "license": "CC BY-SA 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Glass_Facade_(211945331).jpeg",
-  "query": "glass facade building",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Glass_Facade_%28211945331%29.jpeg/960px-Glass_Facade_%28211945331%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 1365,
-  "sourceWidth": 2048,
-  "title": "File:Glass Facade (211945331).jpeg"
- },
- "industry/building-components/facade/insulating-glass": {
-  "author": "PMJ FREY",
-  "fetched": "2026-10-31",
+  "author": "Acheolg",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:IGU.jpg",
-  "query": "insulating glass unit",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/IGU.jpg/960px-IGU.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 1936,
-  "sourceWidth": 2592,
-  "title": "File:IGU.jpg"
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Composites_sandwich_panel.jpg",
+  "query": "sandwich panel",
+  "relevance": 2,
+  "relevanceWords": [
+   "panel",
+   "sandwich"
+  ],
+  "sharpness": 418.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Composites_sandwich_panel.jpg/1920px-Composites_sandwich_panel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4284,
+  "sourceWidth": 5712,
+  "title": "File:Composites sandwich panel.jpg"
+ },
+ "industry/building-components/building-elements/building-panels": {
+  "author": "Svetlov Artem",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Uyzhno-Sakhalinsk_panel_office_building_2022-08.jpg",
+  "query": "building panels",
+  "relevance": 2,
+  "relevanceWords": [
+   "build",
+   "panel"
+  ],
+  "sharpness": 4512.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Uyzhno-Sakhalinsk_panel_office_building_2022-08.jpg/1920px-Uyzhno-Sakhalinsk_panel_office_building_2022-08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Uyzhno-Sakhalinsk panel office building 2022-08.jpg"
+ },
+ "industry/building-components/facade": {
+  "author": "w_lemay",
+  "fallbackFrom": "industry/building-components",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Curtain_Wall,_Chicago_Cultural_Center_(Former_Chicago_Public_Library_Central_Building),_Michigan_Avenue,_Chicago,_IL.jpg",
+  "query": "curtain wall facade glass building",
+  "relevance": 9,
+  "relevanceWords": [
+   "assembly",
+   "build",
+   "cladd",
+   "curtain",
+   "facade",
+   "frame",
+   "glas",
+   "wall"
+  ],
+  "sharpness": 4215.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Curtain_Wall%2C_Chicago_Cultural_Center_%28Former_Chicago_Public_Library_Central_Building%29%2C_Michigan_Avenue%2C_Chicago%2C_IL.jpg/1920px-Curtain_Wall%2C_Chicago_Cultural_Center_%28Former_Chicago_Public_Library_Central_Building%29%2C_Michigan_Avenue%2C_Chicago%2C_IL.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4124,
+  "sourceWidth": 5499,
+  "title": "File:Curtain Wall, Chicago Cultural Center (Former Chicago Public Library Central Building), Michigan Avenue, Chicago, IL.jpg"
+ },
+ "industry/building-components/facade/insulating-glass": {
+  "author": "NPS Photo",
+  "fallbackFrom": "industry/building-components",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "Public domain",
+  "licenseUrl": null,
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:16._Window_Frame_Installation._(18fb7ca4-ddb2-4ed6-90af-c5d2a624bbed).jpg",
+  "query": "window frame installation",
+  "relevance": 4,
+  "relevanceWords": [
+   "frame",
+   "installation",
+   "wall",
+   "window"
+  ],
+  "sharpness": 1989.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/16._Window_Frame_Installation._%2818fb7ca4-ddb2-4ed6-90af-c5d2a624bbed%29.jpg/1920px-16._Window_Frame_Installation._%2818fb7ca4-ddb2-4ed6-90af-c5d2a624bbed%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3456,
+  "sourceWidth": 4608,
+  "title": "File:16. Window Frame Installation. (18fb7ca4-ddb2-4ed6-90af-c5d2a624bbed).jpg"
  },
  "industry/building-components/facade/panel-cladding": {
-  "inherit": "industry/building-components/facade"
+  "author": "Pittigrilli",
+  "fallbackFrom": "industry/building-components",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Astronaut_dummy_in_store_window_of_Moncler_fashion_shop_in_Prague,_Czech_Republic.jpg",
+  "query": "window frame installation",
+  "relevance": 3,
+  "relevanceWords": [
+   "frame",
+   "installation",
+   "window"
+  ],
+  "sharpness": 1372.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Astronaut_dummy_in_store_window_of_Moncler_fashion_shop_in_Prague%2C_Czech_Republic.jpg/1920px-Astronaut_dummy_in_store_window_of_Moncler_fashion_shop_in_Prague%2C_Czech_Republic.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3024,
+  "sourceWidth": 4032,
+  "title": "File:Astronaut dummy in store window of Moncler fashion shop in Prague, Czech Republic.jpg"
  },
  "industry/building-components/facade/structural-glazing": {
   "author": "Navaneeth Krishnan S",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Glass_curtain_wall_architecture_building.jpg",
   "query": "glass curtain wall",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Glass_curtain_wall_architecture_building.jpg/960px-Glass_curtain_wall_architecture_building.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 4,
+  "relevanceWords": [
+   "build",
+   "curtain",
+   "glas",
+   "wall"
+  ],
+  "sharpness": 1756.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Glass_curtain_wall_architecture_building.jpg/1920px-Glass_curtain_wall_architecture_building.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3000,
   "sourceWidth": 4000,
   "title": "File:Glass curtain wall architecture building.jpg"
@@ -893,11 +3195,22 @@
  "industry/building-components/windows": {
   "author": "Shixart1985",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Worker_carries_a_window_frame_in_a_manufacturing_area.jpg",
   "query": "window manufacturing",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Worker_carries_a_window_frame_in_a_manufacturing_area.jpg/960px-Worker_carries_a_window_frame_in_a_manufacturing_area.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "factory",
+   "industrial",
+   "manufactur",
+   "production",
+   "window"
+  ],
+  "sharpness": 891.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Worker_carries_a_window_frame_in_a_manufacturing_area.jpg/1920px-Worker_carries_a_window_frame_in_a_manufacturing_area.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 4032,
   "sourceWidth": 6048,
   "title": "File:Worker carries a window frame in a manufacturing area.jpg"
@@ -905,86 +3218,297 @@
  "industry/marine": {
   "author": "Steven Haslington",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Boats_and_yachts_at_Falmouth_Marina_-_geograph.org.uk_-_4929126.jpg",
   "query": "yacht marina boats",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Boats_and_yachts_at_Falmouth_Marina_-_geograph.org.uk_-_4929126.jpg/960px-Boats_and_yachts_at_Falmouth_Marina_-_geograph.org.uk_-_4929126.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "boat",
+   "marina",
+   "yacht"
+  ],
+  "sharpness": 1779.5,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Boats_and_yachts_at_Falmouth_Marina_-_geograph.org.uk_-_4929126.jpg/1920px-Boats_and_yachts_at_Falmouth_Marina_-_geograph.org.uk_-_4929126.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1728,
   "sourceWidth": 3072,
   "title": "File:Boats and yachts at Falmouth Marina - geograph.org.uk - 4929126.jpg"
  },
  "industry/marine/leisure-boats-andyachts": {
-  "inherit": "industry/marine"
+  "author": "Zinnmann",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:20190502_Shadow_(2005)_Yacht.jpg",
+  "query": "motor yacht",
+  "relevance": 3,
+  "relevanceWords": [
+   "motor",
+   "ship",
+   "yacht"
+  ],
+  "sharpness": 6735.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/20190502_Shadow_%282005%29_Yacht.jpg/1920px-20190502_Shadow_%282005%29_Yacht.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3398,
+  "sourceWidth": 5807,
+  "title": "File:20190502 Shadow (2005) Yacht.jpg"
  },
  "industry/marine/leisure-boats-andyachts/exterior-sealing": {
-  "inherit": "industry/marine"
+  "author": "Martin Dawes",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Fore_deck_of_the_Royal_Yacht_Britannia_-_geograph.org.uk_-_4587062.jpg",
+  "query": "yacht deck",
+  "relevance": 2,
+  "relevanceWords": [
+   "deck",
+   "yacht"
+  ],
+  "sharpness": 1674.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Fore_deck_of_the_Royal_Yacht_Britannia_-_geograph.org.uk_-_4587062.jpg/1920px-Fore_deck_of_the_Royal_Yacht_Britannia_-_geograph.org.uk_-_4587062.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2878,
+  "sourceWidth": 3912,
+  "title": "File:Fore deck of the Royal Yacht Britannia - geograph.org.uk - 4587062.jpg"
  },
  "industry/marine/leisure-boats-andyachts/glass-bonding": {
   "author": "Peter Trimming",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Yachts_on_the_Ferry_-_geograph.org.uk_-_1702170.jpg",
   "query": "yacht windows",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Yachts_on_the_Ferry_-_geograph.org.uk_-_1702170.jpg/960px-Yachts_on_the_Ferry_-_geograph.org.uk_-_1702170.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 2,
+  "relevanceWords": [
+   "window",
+   "yacht"
+  ],
+  "sharpness": 3113.3,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Yachts_on_the_Ferry_-_geograph.org.uk_-_1702170.jpg/1920px-Yachts_on_the_Ferry_-_geograph.org.uk_-_1702170.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2592,
   "sourceWidth": 3872,
   "title": "File:Yachts on the Ferry - geograph.org.uk - 1702170.jpg"
  },
  "industry/marine/leisure-boats-andyachts/interior-sealing": {
-  "inherit": "industry/marine"
+  "author": "Don Ramey Logan",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Deerfoot_65_foot_yacht_Interior_by_Don_Ramey_Logan.jpg",
+  "query": "yacht interior",
+  "relevance": 3,
+  "relevanceWords": [
+   "boat",
+   "interior",
+   "yacht"
+  ],
+  "sharpness": 1138.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Deerfoot_65_foot_yacht_Interior_by_Don_Ramey_Logan.jpg/1920px-Deerfoot_65_foot_yacht_Interior_by_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3872,
+  "sourceWidth": 7744,
+  "title": "File:Deerfoot 65 foot yacht Interior by Don Ramey Logan.jpg"
  },
  "industry/marine/leisure-boats-andyachts/structural-bonding": {
-  "inherit": "industry/marine"
+  "author": "Rudolph.A.furtado",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Fibreglass_fishing_boat_on_Negombo_Beach.JPG",
+  "query": "fibreglass boat",
+  "relevance": 2,
+  "relevanceWords": [
+   "boat",
+   "fibreglas"
+  ],
+  "sharpness": 530.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Fibreglass_fishing_boat_on_Negombo_Beach.JPG/1920px-Fibreglass_fishing_boat_on_Negombo_Beach.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2448,
+  "sourceWidth": 3264,
+  "title": "File:Fibreglass fishing boat on Negombo Beach.JPG"
  },
  "industry/marine/leisure-boats-andyachts/teak-decking": {
-  "author": "Stefan G\u00f6tte",
-  "fetched": "2026-10-31",
-  "license": "Public domain",
-  "licenseUrl": null,
-  "page": "https://commons.wikimedia.org/wiki/File:Teakdeck.JPG",
+  "author": "Alex Proimos from Sydney, Australia",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Motor_Yacht_Robusto_(5969374401).jpg",
   "query": "teak deck yacht",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Teakdeck.JPG/960px-Teakdeck.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "sourceHeight": 1728,
-  "sourceWidth": 2304,
-  "title": "File:Teakdeck.JPG"
+  "relevance": 6,
+  "relevanceWords": [
+   "cabin",
+   "deck",
+   "hull",
+   "ship",
+   "teak",
+   "yacht"
+  ],
+  "sharpness": 2404.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Motor_Yacht_Robusto_%285969374401%29.jpg/1920px-Motor_Yacht_Robusto_%285969374401%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 2760,
+  "sourceWidth": 4141,
+  "title": "File:Motor Yacht Robusto (5969374401).jpg"
  },
  "industry/marine/shipbuilding-and-offshore": {
   "author": "Bernard Sharp",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Shipbuilding_Yard,_Lime_Street,_Kingston_upon_Hull_-_geograph.org.uk_-_3271357.jpg",
   "query": "shipbuilding hull",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Shipbuilding_Yard%2C_Lime_Street%2C_Kingston_upon_Hull_-_geograph.org.uk_-_3271357.jpg/960px-Shipbuilding_Yard%2C_Lime_Street%2C_Kingston_upon_Hull_-_geograph.org.uk_-_3271357.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "hull",
+   "ship",
+   "shipbuild"
+  ],
+  "sharpness": 801.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Shipbuilding_Yard%2C_Lime_Street%2C_Kingston_upon_Hull_-_geograph.org.uk_-_3271357.jpg/1920px-Shipbuilding_Yard%2C_Lime_Street%2C_Kingston_upon_Hull_-_geograph.org.uk_-_3271357.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2569,
   "sourceWidth": 3865,
   "title": "File:Shipbuilding Yard, Lime Street, Kingston upon Hull - geograph.org.uk - 3271357.jpg"
  },
  "industry/marine/shipbuilding-and-offshore/decorative-floorsinternal": {
-  "inherit": "industry/marine/shipbuilding-and-offshore"
+  "author": "Gregory Varnum",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Bahamas_Cruise_-_ship_interior_-_June_2018_(2230).jpg",
+  "query": "cruise ship interior",
+  "relevance": 3,
+  "relevanceWords": [
+   "cruise",
+   "interior",
+   "ship"
+  ],
+  "sharpness": 1401.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Bahamas_Cruise_-_ship_interior_-_June_2018_%282230%29.jpg/1920px-Bahamas_Cruise_-_ship_interior_-_June_2018_%282230%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4000,
+  "sourceWidth": 6000,
+  "title": "File:Bahamas Cruise - ship interior - June 2018 (2230).jpg"
  },
  "industry/marine/shipbuilding-and-offshore/decorative-floorsinternal/epoxy-smooth": {
-  "inherit": "industry/marine/shipbuilding-and-offshore"
+  "author": "PattayaPatrol",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:DSCF1222_A_glossy_colorful_walkway_stretches_through_a_covered_market_or_arcade_its_bright_yellow_green_and_blue_stripes_reflecting_the_overhead_lights_as_shops_and_signs_line_the_corridor.jpg",
+  "query": "glossy floor",
+  "relevance": 4,
+  "relevanceWords": [
+   "floor",
+   "glossy",
+   "industrial",
+   "wall"
+  ],
+  "sharpness": 1205.4,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/DSCF1222_A_glossy_colorful_walkway_stretches_through_a_covered_market_or_arcade_its_bright_yellow_green_and_blue_stripes_reflecting_the_overhead_lights_as_shops_and_signs_line_the_corridor.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 4160,
+  "sourceWidth": 6240,
+  "title": "File:DSCF1222 A glossy colorful walkway stretches through a covered market or arcade its bright yellow green and blue stripes reflecting the overhead lights as shops and signs line the corridor.jpg"
  },
  "industry/marine/shipbuilding-and-offshore/flooring-acoustics": {
-  "inherit": "industry/marine/shipbuilding-and-offshore"
+  "author": "RoySmith",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
+  "page": "https://commons.wikimedia.org/wiki/File:Liberty_Ship_Model_(engine_room_detail).jpg",
+  "query": "ship engine room",
+  "relevance": 4,
+  "relevanceWords": [
+   "engine",
+   "marine",
+   "room",
+   "ship"
+  ],
+  "sharpness": 635.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Liberty_Ship_Model_%28engine_room_detail%29.jpg/1920px-Liberty_Ship_Model_%28engine_room_detail%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3888,
+  "sourceWidth": 5184,
+  "title": "File:Liberty Ship Model (engine room detail).jpg"
  },
  "industry/marine/shipbuilding-and-offshore/flooring-acoustics/damping-flooring": {
-  "inherit": "industry/marine/shipbuilding-and-offshore"
+  "author": "Yumeto",
+  "fallbackFrom": "industry/marine/shipbuilding-and-offshore/flooring-acoustics",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:20251124_Terminal_Mar%C3%ADtimo_de_Passageiros_do_Porto_Interior_(144303).jpg",
+  "query": "ferry interior",
+  "relevance": 2,
+  "relevanceWords": [
+   "ferry",
+   "interior"
+  ],
+  "sharpness": 1816.0,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/20251124_Terminal_Mar%C3%ADtimo_de_Passageiros_do_Porto_Interior_%28144303%29.jpg/1920px-20251124_Terminal_Mar%C3%ADtimo_de_Passageiros_do_Porto_Interior_%28144303%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3072,
+  "sourceWidth": 4096,
+  "title": "File:20251124 Terminal Mar\u00edtimo de Passageiros do Porto Interior (144303).jpg"
  },
  "industry/marine/shipbuilding-and-offshore/flooring-acoustics/levelling": {
-  "inherit": "industry/marine/shipbuilding-and-offshore"
+  "author": "GuavaTrain",
+  "fallbackFrom": "industry/marine/shipbuilding-and-offshore",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:Oil_Platform_Crew_Transfer.jpg",
+  "query": "offshore platform",
+  "relevance": 4,
+  "relevanceWords": [
+   "boat",
+   "offshore",
+   "platform",
+   "vessel"
+  ],
+  "sharpness": 3076.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Oil_Platform_Crew_Transfer.jpg/1920px-Oil_Platform_Crew_Transfer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3000,
+  "sourceWidth": 4000,
+  "title": "File:Oil Platform Crew Transfer.jpg"
  },
  "industry/transportation": {
   "author": "Senedd Cymru / Welsh Parliament from Wales",
   "fetched": "2026-11-01",
+  "hdFallback": false,
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Neath_Bus_Tour_December_2010_Taith_Fws_Castell_Nedd_Rhagfyr_2010_(5243994846).jpg",
   "query": "bus assembly plant",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Neath_Bus_Tour_December_2010_Taith_Fws_Castell_Nedd_Rhagfyr_2010_%285243994846%29.jpg/960px-Neath_Bus_Tour_December_2010_Taith_Fws_Castell_Nedd_Rhagfyr_2010_%285243994846%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "assembly",
+   "bus",
+   "plant"
+  ],
+  "sharpness": 978.2,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Neath_Bus_Tour_December_2010_Taith_Fws_Castell_Nedd_Rhagfyr_2010_%285243994846%29.jpg/1920px-Neath_Bus_Tour_December_2010_Taith_Fws_Castell_Nedd_Rhagfyr_2010_%285243994846%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1944,
   "sourceWidth": 2592,
   "title": "File:Neath Bus Tour December 2010 Taith Fws Castell Nedd Rhagfyr 2010 (5243994846).jpg"
@@ -992,11 +3516,25 @@
  "industry/transportation/body-panel-adhesive": {
   "author": "Martin Stone (@martinrstone on Flickr)",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Bristol_VR_Series_2_open-top_bus_(BFS_14L)_on_Bront%C3%AB_Tour_service,_Station_Road,_Haworth_(15_August_2019).jpg",
   "query": "bus body panel",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Bristol_VR_Series_2_open-top_bus_%28BFS_14L%29_on_Bront%C3%AB_Tour_service%2C_Station_Road%2C_Haworth_%2815_August_2019%29.jpg/960px-Bristol_VR_Series_2_open-top_bus_%28BFS_14L%29_on_Bront%C3%AB_Tour_service%2C_Station_Road%2C_Haworth_%2815_August_2019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 8,
+  "relevanceWords": [
+   "body",
+   "build",
+   "bus",
+   "manufactur",
+   "panel",
+   "rail",
+   "vehicle",
+   "wall"
+  ],
+  "sharpness": 4687.8,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Bristol_VR_Series_2_open-top_bus_%28BFS_14L%29_on_Bront%C3%AB_Tour_service%2C_Station_Road%2C_Haworth_%2815_August_2019%29.jpg/1920px-Bristol_VR_Series_2_open-top_bus_%28BFS_14L%29_on_Bront%C3%AB_Tour_service%2C_Station_Road%2C_Haworth_%2815_August_2019%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2176,
   "sourceWidth": 3264,
   "title": "File:Bristol VR Series 2 open-top bus (BFS 14L) on Bront\u00eb Tour service, Station Road, Haworth (15 August 2019).jpg"
@@ -1004,11 +3542,20 @@
  "industry/transportation/glass-windshield-adhesive": {
   "author": "calflier001",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:VW_MICRO_BUS_WITH_SPLIT_WINDSCREEN_AT_PATTAYA_THAILAND_FEB_2013_(8510497603).jpg",
   "query": "bus windscreen",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/VW_MICRO_BUS_WITH_SPLIT_WINDSCREEN_AT_PATTAYA_THAILAND_FEB_2013_%288510497603%29.jpg/960px-VW_MICRO_BUS_WITH_SPLIT_WINDSCREEN_AT_PATTAYA_THAILAND_FEB_2013_%288510497603%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "bus",
+   "vehicle",
+   "windscreen"
+  ],
+  "sharpness": 3069.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/VW_MICRO_BUS_WITH_SPLIT_WINDSCREEN_AT_PATTAYA_THAILAND_FEB_2013_%288510497603%29.jpg/1920px-VW_MICRO_BUS_WITH_SPLIT_WINDSCREEN_AT_PATTAYA_THAILAND_FEB_2013_%288510497603%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3336,
   "sourceWidth": 4680,
   "title": "File:VW MICRO BUS WITH SPLIT WINDSCREEN AT PATTAYA THAILAND FEB 2013 (8510497603).jpg"
@@ -1016,26 +3563,69 @@
  "industry/transportation/interior-exteriorsealing": {
   "author": "Simon Pielow",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Historic_train_carriage_in_Italy_-_exterior.jpg",
   "query": "train carriage exterior",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Historic_train_carriage_in_Italy_-_exterior.jpg/960px-Historic_train_carriage_in_Italy_-_exterior.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 5,
+  "relevanceWords": [
+   "carriage",
+   "exterior",
+   "rail",
+   "train",
+   "vehicle"
+  ],
+  "sharpness": 1898.1,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Historic_train_carriage_in_Italy_-_exterior.jpg/1920px-Historic_train_carriage_in_Italy_-_exterior.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 1296,
   "sourceWidth": 1936,
   "title": "File:Historic train carriage in Italy - exterior.jpg"
  },
  "industry/transportation/metal-adhesive": {
-  "inherit": "industry/transportation"
+  "author": "Sicnag",
+  "fallbackFrom": "industry/transportation",
+  "fetched": "2026-11-01",
+  "hdFallback": false,
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "mode": "fallback-unique",
+  "page": "https://commons.wikimedia.org/wiki/File:1925_Model_T_T4_Truck_(29413138091).jpg",
+  "query": "truck assembly line",
+  "relevance": 7,
+  "relevanceWords": [
+   "assembly",
+   "chassi",
+   "factory",
+   "line",
+   "production",
+   "tape",
+   "truck"
+  ],
+  "sharpness": 3442.9,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/1925_Model_T_T4_Truck_%2829413138091%29.jpg/1920px-1925_Model_T_T4_Truck_%2829413138091%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "sourceHeight": 3456,
+  "sourceWidth": 5184,
+  "title": "File:1925 Model T T4 Truck (29413138091).jpg"
  },
  "industry/transportation/sandwich-panel-adhesive": {
   "author": "JOHN DICKINSON from Chorley, Lancashire, United Kingdom",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "Public domain",
   "licenseUrl": null,
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:34-365_Daf_Refrigerated_Truck_(50908071097).jpg",
   "query": "refrigerated truck body",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/34-365_Daf_Refrigerated_Truck_%2850908071097%29.jpg/960px-34-365_Daf_Refrigerated_Truck_%2850908071097%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "body",
+   "refrigerated",
+   "truck"
+  ],
+  "sharpness": 1585.6,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/34-365_Daf_Refrigerated_Truck_%2850908071097%29.jpg/1920px-34-365_Daf_Refrigerated_Truck_%2850908071097%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 3120,
   "sourceWidth": 4680,
   "title": "File:34-365 Daf Refrigerated Truck (50908071097).jpg"
@@ -1043,11 +3633,20 @@
  "products": {
   "author": "Kgbo",
   "fetched": "2026-10-31",
+  "hdFallback": false,
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "mode": "own",
   "page": "https://commons.wikimedia.org/wiki/File:Building_construction_site_in_Indooroopilly,_Queensland,_2020.jpg",
   "query": "construction materials building site",
-  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Building_construction_site_in_Indooroopilly%2C_Queensland%2C_2020.jpg/960px-Building_construction_site_in_Indooroopilly%2C_Queensland%2C_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "relevance": 3,
+  "relevanceWords": [
+   "build",
+   "construction",
+   "site"
+  ],
+  "sharpness": 8960.7,
+  "sourceFile": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Building_construction_site_in_Indooroopilly%2C_Queensland%2C_2020.jpg/1920px-Building_construction_site_in_Indooroopilly%2C_Queensland%2C_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "sourceHeight": 2899,
   "sourceWidth": 3865,
   "title": "File:Building construction site in Indooroopilly, Queensland, 2020.jpg"

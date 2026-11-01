@@ -1,10 +1,10 @@
 {
  "n": 4659,
- "ok": 4612,
+ "ok": 4599,
  "per": {
   "which": {
    "n": 1332,
-   "ok": 1288,
+   "ok": 1276,
    "kinds": {
     "name": {
      "n": 512,
@@ -12,11 +12,11 @@
     },
     "typo": {
      "n": 338,
-     "ok": 318
+     "ok": 320
     },
     "describe": {
      "n": 412,
-     "ok": 388
+     "ok": 374
     },
     "tree": {
      "n": 70,
@@ -90,7 +90,7 @@
   },
   "out of scope": {
    "n": 138,
-   "ok": 138,
+   "ok": 137,
    "kinds": {
     "price": {
      "n": 128,
@@ -98,7 +98,7 @@
     },
     "oos": {
      "n": 10,
-     "ok": 10
+     "ok": 9
     }
    }
   },
@@ -176,6 +176,25 @@
   },
   {
    "kind": "describe",
+   "q": "I need flexible adhesive and sealant",
+   "got": [
+    "advice:Construction adhesives whose published text documents a fit",
+    "product:abelflex",
+    "product:abelflex-handy-pack",
+    "product:sika-foam-backerrodclosedcell"
+   ],
+   "headline": "Products whose own published text documents a fit, in the order of the criterion"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure roof and gutter silicone sealant",
+   "got": [
+    "choose:Which one first?"
+   ],
+   "headline": "That is more than one job. Pick the one to start with."
+  },
+  {
+   "kind": "describe",
    "q": "I need high strength multipurpose adhesive",
    "got": [
     "product:sikaflex-111-stickseal",
@@ -188,12 +207,9 @@
    "kind": "describe",
    "q": "I need 1-component neutral cure wet area silicone sealant",
    "got": [
-    "product:sikasil-702",
-    "product:davco-n-silicone",
-    "product:sikaseal-190-n-silicone",
-    "compatibility:sikaseal-kitchenandbathroom"
+    "time:sikalastic-1-komponent"
    ],
-   "headline": "PREMIUM NEUTRAL CURE MULTI-PURPOSE PURE SILICONE SEALANT"
+   "headline": "The documentation gives no time of exactly that kind. These are the published ti"
   },
   {
    "kind": "describe",
@@ -215,6 +231,15 @@
   },
   {
    "kind": "describe",
+   "q": "I need two component adhesive for sarnafil g 476 and sarnafil g 410 l felt roofing applications",
+   "got": [
+    "product:sarnafil-g-476-20",
+    "product:sarnafil-g-476-15"
+   ],
+   "headline": "Polymeric membrane for ballasted roof waterproofing"
+  },
+  {
+   "kind": "describe",
    "q": "I need 2-component high-strength panel adhesive",
    "got": [
     "product:sikatack-panel-10",
@@ -227,11 +252,20 @@
    "kind": "describe",
    "q": "I need 1-component fast skinning sealant",
    "got": [
-    "product:sikabond-instantnailsfast",
-    "product:davco-n-silicone",
-    "product:sikaseal-190-n-silicone"
+    "product:sikalastic-1-komponent"
    ],
-   "headline": "Fast Cure Multipurpose Construction Adhesive"
+   "headline": "ONE-COMPONENT CEMENTITIOUS MORTAR, FIBRE-REINFORCED FOR FLEXIBLE WATERPROOFING A"
+  },
+  {
+   "kind": "describe",
+   "q": "I need accelerated glazing adhesive",
+   "got": [
+    "advice:Concrete accelerators that match your words",
+    "product:sika-sigunit-l-530af",
+    "product:sika-set-1-gv",
+    "product:sikarapid-c-100"
+   ],
+   "headline": "No particular condition was named, so these are the products whose published tex"
   },
   {
    "kind": "typo",
@@ -242,32 +276,56 @@
    "headline": "Assembly & glazing adhesive and sealant for rail applications with acceleration "
   },
   {
+   "kind": "describe",
+   "q": "I need multi-purpose adhesive sealant with a wide adhesion range",
+   "got": [
+    "advice:Construction adhesives that match your words",
+    "product:sikabond-pva",
+    "product:sikabond-instantnailsfast",
+    "product:sika-boom-ap"
+   ],
+   "headline": "No particular condition was named, so these are the products whose published tex"
+  },
+  {
+   "kind": "describe",
+   "q": "I need the professional deck caulking compound",
+   "got": [
+    "choose:Deck"
+   ],
+   "headline": "What is the deck job?"
+  },
+  {
+   "kind": "describe",
+   "q": "I need high-strength, 1-component silicone structural glazing adhesive, ce-marked",
+   "got": [
+    "info:sikalastic-1-komponent"
+   ],
+   "headline": "The published strength for Sikalastic-1 Komponent, quoted as written."
+  },
+  {
    "kind": "typo",
    "q": "tell me about sikasil gs-500",
    "got": [
-    "unknown:Not in the published documentation"
+    "choose:Which sikasil product?"
    ],
-   "headline": "I do not know this from the published documentation."
+   "headline": "sikasil is a range, and the answer depends on the product. Pick one."
   },
   {
    "kind": "describe",
    "q": "I need high-performance, 2-component silicone structural glazing adhesive",
    "got": [
-    "product:davco-n-silicone",
-    "product:sikaseal-190-n-silicone",
-    "product:sikasil-sg-20"
+    "advice:Construction adhesives whose published text documents a fit",
+    "product:sikabond-sprayfix"
    ],
-   "headline": "1-component neutral cure sanitary silicone sealant"
+   "headline": "Products whose own published text documents a fit, in the order of the criterion"
   },
   {
    "kind": "describe",
-   "q": "I need high range water reducing admixture",
+   "q": "I need sikagard-706 thixo is a one part reactive silane based impregnation cream. it is a solvent free product with ~ 80% content of active substance. sikagard-706 thixo complies with the highest requirements of en 1504-2 for hydrophobic impregnation (penetration depth class ii & resistance to freeze and thaw salt stresses).",
    "got": [
-    "product:sika-viscocrete-10",
-    "product:sika-viscocrete-1250",
-    "product:sika-viscocrete-5-500"
+    "info:sikagard-706-thixo"
    ],
-   "headline": "HWR- High Range Water Reducer"
+   "headline": "The published application temperature limits for Sikagard-706 Thixo, quoted as w"
   },
   {
    "kind": "typo",
@@ -278,12 +336,12 @@
    "headline": "I do not know this from the published documentation."
   },
   {
-   "kind": "typo",
-   "q": "tell me about sikaforce-420 1l05",
+   "kind": "describe",
+   "q": "I need 1-component polyurethane for panel bonding in ventilated facades",
    "got": [
-    "unknown:Not in the published documentation"
+    "product:sikalastic-1-komponent"
    ],
-   "headline": "I do not know this from the published documentation."
+   "headline": "ONE-COMPONENT CEMENTITIOUS MORTAR, FIBRE-REINFORCED FOR FLEXIBLE WATERPROOFING A"
   },
   {
    "kind": "describe",
@@ -298,11 +356,37 @@
   },
   {
    "kind": "describe",
+   "q": "I need micro-synthetic monofilament fiber",
+   "got": [
+    "info:Steel & Synthetic Fibres for Concrete"
+   ],
+   "headline": "From Sika Australia's published page \"Steel & Synthetic Fibres for Concrete\"."
+  },
+  {
+   "kind": "describe",
    "q": "I need high performance joint and crack sealing tape part of the sikadur-combiflex sg system",
    "got": [
     "product:sikadur-combiflexsgsystem"
    ],
    "headline": "High performance joint sealing system"
+  },
+  {
+   "kind": "describe",
+   "q": "I need uv stable polyurethane pigmented finish coat for purcem hb-22 system",
+   "got": [
+    "product:sikafloor-multiflexps-32uv",
+    "product:sikafloor-359-au",
+    "product:sikafloor-550-pa"
+   ],
+   "headline": "SMOOTH, TOUGH-ELASTIC POLYURETHANE FLOOR COVERING WITH UV SEALER"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 2-part pur tough-elastic, low-voc, self smoothing floor",
+   "got": [
+    "info:Polyurethane Flooring Products & Systems"
+   ],
+   "headline": "From Sika Australia's published page \"Polyurethane Flooring Products & Systems\"."
   },
   {
    "kind": "describe",
@@ -335,21 +419,13 @@
    "kind": "typo",
    "q": "tell me about sikafuko tv-2",
    "got": [
-    "unknown:Not in the published documentation"
+    "info:Injection Systems"
    ],
-   "headline": "I do not know this from the published documentation."
+   "headline": "From Sika Australia's published page \"Injection Systems\"."
   },
   {
    "kind": "typo",
    "q": "tell me about sikaproof ebntonite powder",
-   "got": [
-    "product:davco-powder-mastic"
-   ],
-   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
-  },
-  {
-   "kind": "describe",
-   "q": "I need natural sodium bentonite powder",
    "got": [
     "product:davco-powder-mastic"
    ],
@@ -383,6 +459,17 @@
   },
   {
    "kind": "describe",
+   "q": "I need accelerated window bonding adhesive",
+   "got": [
+    "advice:Concrete accelerators that match your words",
+    "product:sika-set-1-gv",
+    "product:sika-sigunit-l-530af",
+    "product:sikarapid-c-100"
+   ],
+   "headline": "No particular condition was named, so these are the products whose published tex"
+  },
+  {
+   "kind": "describe",
    "q": "I need catalyst designed for use with sika injection 111",
    "got": [
     "compatibility:sika-injection-111"
@@ -391,11 +478,36 @@
   },
   {
    "kind": "describe",
+   "q": "I need plastomeric modified bituminous roof membrane separation layer (formerly index rollbase 2kg/m2 )",
+   "got": [
+    "unknown:sikashield-p02-perollbase2kgm"
+   ],
+   "headline": "I do not know this from the published documentation."
+  },
+  {
+   "kind": "describe",
+   "q": "I need setting and hardening accelerator for concrete mortar and grout",
+   "got": [
+    "advice:Additives for tile adhesive and grout whose published text documents a fit",
+    "product:lanko-302-cementaccelerator"
+   ],
+   "headline": "Products whose own published text documents a fit, in the order of the criterion"
+  },
+  {
+   "kind": "describe",
    "q": "I need set accelerating admixture for two component injection grout",
    "got": [
     "product:sika-set-accelerator"
    ],
    "headline": "Ac – Set Accelerator"
+  },
+  {
+   "kind": "describe",
+   "q": "I need 1-component neutral cure sanitary silicone sealant",
+   "got": [
+    "time:sikalastic-1-komponent"
+   ],
+   "headline": "The documentation gives no time of exactly that kind. These are the published ti"
   },
   {
    "kind": "describe",
@@ -441,14 +553,6 @@
     "unknown:Not in the published documentation"
    ],
    "headline": "I do not know this from the published documentation."
-  },
-  {
-   "kind": "typo",
-   "q": "tell me about sikaroof versijack pedetsal shim",
-   "got": [
-    "product:sikaroof-versijack"
-   ],
-   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
   },
   {
    "kind": "typo",
@@ -537,8 +641,16 @@
     "product:sikaroof-versipave"
    ],
    "headline": "ADJUSTABLE STEPJACK PEDESTAL SYSTEM FOR RAISED PAVERS FLOORING"
+  },
+  {
+   "kind": "oos",
+   "q": "Where do I buy a car?",
+   "got": [
+    "info:Where to buy Sika Australia products"
+   ],
+   "headline": "Sika Australia publishes a Where to Buy page. The stockist list itself is not in"
   }
  ],
  "propBad": [],
- "at": "2026-10-30T10:10:56.264Z"
+ "at": "2026-11-01T00:39:57.461Z"
 }

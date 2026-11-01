@@ -3,7 +3,7 @@
 //   products.json and data/p/<id>.json get  image: { src (480), src2x (960), width, height, alt, source (Sika URL) }
 //   data/index.json entries get  im: 1  so a card knows to draw the picture without fetching the product file
 // Stock photos (illustrative, Wikimedia Commons; fetch_stock.py writes stock_source.json and assets/img/s/):
-//   categories.json entries get  image: { src, src2x, width, height, alt, credit: { author, license, licenseUrl, page, title } }  (an inheriting category points at its ancestor's files)
+//   categories.json entries get  image: { src, src2x, src3x (1600 px, HD for retina), width, height, alt, credit: { author, license, licenseUrl, page, title } }  (an inheriting category points at its ancestor's files)
 //   a product with NO packshot gets the same record of its own category plus  illustrative: true  and alt "Illustrative photo of <category>, not the product";
 //   data/index.json marks it  im: 2  (im: 1 stays the real packshot). Products with a Sika packshot are never touched by the stock step.
 // A product is only given an image when BOTH files exist on disk. usage: node add_images.mjs [portalDir]
@@ -22,11 +22,11 @@ const imageFor = (p) => {
 };
 const stock = fs.existsSync(path.join(HERE, 'stock_source.json')) ? JSON.parse(fs.readFileSync(path.join(HERE, 'stock_source.json'), 'utf8')) : {};
 const slug = (id) => id.replace(/\//g, '--');
-const hasStock = (id) => ['480', '960'].every((w) => fs.existsSync(path.join(PORTAL, 'assets/img/s', slug(id) + '-' + w + '.webp')));
+const hasStock = (id) => ['480', '960', '1600'].every((w) => fs.existsSync(path.join(PORTAL, 'assets/img/s', slug(id) + '-' + w + '.webp')));
 const ownerOf = (id) => { let e = stock[id], hop = 0; while (e && e.inherit && hop++ < 8) { id = e.inherit; e = stock[id]; } return e && e.page && hasStock(id) ? id : null; };
 const stockFor = (c) => {
   const o = ownerOf(c.id); if (!o) return null; const e = stock[o];
-  return { src: `assets/img/s/${slug(o)}-480.webp`, src2x: `assets/img/s/${slug(o)}-960.webp`, width: 480, height: 320, alt: `Illustrative photo for ${c.name}`,
+  return { src: `assets/img/s/${slug(o)}-480.webp`, src2x: `assets/img/s/${slug(o)}-960.webp`, src3x: `assets/img/s/${slug(o)}-1600.webp`, width: 480, height: 320, alt: `Illustrative photo for ${c.name}`,
     credit: { author: e.author, license: e.license, licenseUrl: e.licenseUrl, page: e.page, title: e.title } };
 };
 const wr = (f, o) => fs.writeFileSync(f, JSON.stringify(o));

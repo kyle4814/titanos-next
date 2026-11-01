@@ -1,0 +1,48 @@
+{
+ "construction/concrete-repair-protection/concrete-repair-mortars": {
+  "applied": "https://commons.wikimedia.org/wiki/File:Spalling_concrete_below_A167(M),_Sandyford_Road_-_geograph.org.uk_-_8090941.jpg",
+  "note": "2026-11-01 relevance pass: hot-mix asphalt, not concrete",
+  "rejected": [
+   "https://commons.wikimedia.org/wiki/File:0118Hot-mix_asphalt_concrete_manual_pouring-paving_in_the_repair_and_maintenance_02.jpg",
+   "https://commons.wikimedia.org/wiki/File:0118Hot-mix_asphalt_concrete_manual_pouring-paving_in_the_repair_and_maintenance_06.jpg"
+  ],
+  "rejectedTitles": [
+   "File:0118Hot-mix asphalt concrete manual pouring-paving in the repair and maintenance 06.jpg"
+  ]
+ },
+ "construction/flooring/resin-flooring/epoxy-flooring-productssystems": {
+  "applied": "https://commons.wikimedia.org/wiki/File:Construction_Photography_of_Workers_on_Site_by_Construction_Photographer_Daniel_Mekis.jpg",
+  "note": "2026-11-01 relevance pass: gallery art installation, not a floor system",
+  "rejected": [
+   "https://commons.wikimedia.org/wiki/File:Arnaldo_Dr%C3%A9s_Gonz%C3%A1lez,_Installation_view-Linientreu,_Jupiter_First_Floor,_Hamburg,_2023.jpg",
+   "https://commons.wikimedia.org/wiki/File:Raised-floor_warehouse_in_a_fishing_village_hokkaido.jpg",
+   "https://commons.wikimedia.org/wiki/File:Matthew_Chen_grinding_the_nib_Manila_Pen_Show.jpg"
+  ],
+  "rejectedTitles": [
+   "File:Raised-floor warehouse in a fishing village hokkaido.jpg",
+   "File:Matthew Chen grinding the nib Manila Pen Show.jpg"
+  ]
+ },
+ "construction/landscape-buildingproducts/paving-decking-support/accessories": {
+  "applied": "https://commons.wikimedia.org/wiki/File:Fukuoka_Daimy%C5%8D_Garden_City_the_pedestrian_deck_Daimy%C5%8D_2-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20240812_154740.jpg",
+  "note": "2026-11-01 relevance pass: tactile crossing, weak",
+  "rejected": [
+   "https://commons.wikimedia.org/wiki/File:RaisedCrossing-SpringfieldPlace,NewMalden,UnitedKingdom.jpg",
+   "https://commons.wikimedia.org/wiki/File:Brooklyn_Botanic_Garden_New_York_May_2015_003.jpg"
+  ],
+  "rejectedTitles": [
+   "File:Brooklyn Botanic Garden New York May 2015 003.jpg"
+  ]
+ },
+ "construction/waterproofing": {
+  "applied": "https://commons.wikimedia.org/wiki/File:Lower_Shoal_Creek_Bridge_Deck_Austin_2018.jpg",
+  "note": "2026-11-01 relevance pass: painted hall ceiling, not waterproofing",
+  "rejected": [
+   "https://commons.wikimedia.org/wiki/File:Greenwich_-_Old_Royal_Naval_College_1712_Sir_Christopher_Wren_-_Painted_Hall_Basement_01.jpg",
+   "https://commons.wikimedia.org/wiki/File:Greenwich_-_Old_Royal_Naval_College_1712_Sir_Christopher_Wren_-_Painted_Hall_Basement_04.jpg"
+  ],
+  "rejectedTitles": [
+   "File:Greenwich - Old Royal Naval College 1712 Sir Christopher Wren - Painted Hall Basement 04.jpg"
+  ]
+ }
+}

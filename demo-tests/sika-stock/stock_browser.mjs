@@ -9,6 +9,7 @@ const t = (n, ok, d = '') => { if (!ok) fails++; console.log((ok ? 'PASS ' : 'FA
 const rd = (f) => JSON.parse(fs.readFileSync(root + '/data/' + f, 'utf8').replace(/^﻿/, ''));
 const prods = rd('products.json'); const cats = rd('categories.json');
 const ill = prods.find((p) => p.image && p.image.illustrative); const pack = prods.find((p) => p.image && !p.image.illustrative);
+const big3 = cats.filter((c) => (c.children || []).length > 1).sort((a, b) => b.productCount - a.productCount).slice(0, 3);
 const l12 = cats.filter((c) => c.level <= 2).length;
 const cat = cats.find((c) => c.id === ill.category); const l2 = cats.find((c) => c.level === 2 && c.children && c.children.length > 1 && c.image);
 for (const [W, H] of [[1366, 768], [390, 844]]) {
@@ -52,6 +53,17 @@ for (const [W, H] of [[1366, 768], [390, 844]]) {
   const dec = await page.evaluate(() => { const r = innerHeight; const vis = [...document.querySelectorAll('.mosaic img')].filter((i) => i.getBoundingClientRect().top < r); return { vis: vis.length, decoded: vis.filter((i) => i.complete && i.naturalWidth > 0).length }; });
   t(`${sz} home mosaic: the tiles in view have loaded and decoded`, dec.vis > 0 && dec.decoded === dec.vis, JSON.stringify(dec));
   await page.screenshot({ path: `${outDir}/mosaic_${W}.png` });
+  // round 2 uniqueness: every rendered tile photo on the home page (mosaic + feature section) and on the three biggest category pages is distinct (compare src attributes)
+  { const srcs = await page.evaluate(() => [...document.querySelectorAll('.mosaic img, .grid--center img.packshot')].map((i) => i.getAttribute('src')));
+    t(`${sz} home page: ${srcs.length} rendered tile photos (mosaic + feature section), pairwise distinct`, srcs.length > 18 && new Set(srcs).size === srcs.length, JSON.stringify([srcs.length, new Set(srcs).size]));
+    for (const bc of big3) {
+      await page.goto(s.base + '#/category/' + bc.id, { waitUntil: 'load' }); await page.waitForSelector('.cat-card img.packshot'); await page.waitForTimeout(400);
+      const cs = await page.evaluate(() => [...document.querySelectorAll('.cat-hero img, .cat-card img.packshot')].map((i) => i.getAttribute('src')));
+      t(`${sz} category page ${bc.id}: ${cs.length} rendered photos (hero + Browse by type), pairwise distinct`, cs.length > 1 && new Set(cs).size === cs.length, JSON.stringify([cs.length, new Set(cs).size]));
+    }
+    await page.goto(s.base + '#/product/' + ill.id, { waitUntil: 'load' }); await page.waitForSelector('main:not([aria-busy]) .pdp-media img.packshot'); await page.waitForTimeout(300);
+    const ss = await page.evaluate(() => (document.querySelector('.pdp-media img.packshot').getAttribute('srcset') || ''));
+    t(`${sz} product page header srcset includes the 1600 variant`, /-1600\.webp 1600w/.test(ss) && /-960\.webp 960w/.test(ss), ss); }
   // About quotes the packshot and illustrative counts without downloading the 600 KB products file (regression: the stock lane made About load it, 77 KB -> 719 KB on Fast 3G)
   { const ctx2 = await b.newContext({ viewport: { width: W, height: H } }); const p2 = await ctx2.newPage(); const urls = []; p2.on('request', (r) => urls.push(r.url()));
     await p2.goto(s.base + '#/about', { waitUntil: 'load' }); await p2.waitForSelector('.prose li'); await p2.waitForTimeout(800);
