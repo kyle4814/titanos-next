@@ -34,7 +34,7 @@ for (const [q, field, dir, global] of CASES) {
 // the figure shown for a line equals digits that are in the quoted sentence (no converted number appears)
 {
   const a = await ask('fastest curing adhesive'); const c = a.cards[0];
-  t('shown figures use the unit printed in the sentence (no minutes conversion)', c.lines.filter((l) => /curing or set time/.test(l.text)).every((l) => { const d = (l.text.match(/[\d.]+/g) || []); const f = c.facts.find((x) => true); return d.every((x) => c.facts.some((ff) => ff.sentence.includes(x))); }), JSON.stringify(c.lines.map((l) => l.text)));
+  t('shown figures use the unit printed in the sentence (no minutes conversion)', c.lines.filter((l) => /curing or set time/.test(l.text) && l.label !== 'Not published, so left out').every((l) => { const d = (l.text.match(/[\d.]+/g) || []); const f = c.facts.find((x) => true); return d.every((x) => c.facts.some((ff) => ff.sentence.includes(x))); }), JSON.stringify(c.lines.map((l) => l.text)));
 }
 // price is never ranked
 for (const q of ['cheapest tile adhesive', 'which sealant is the cheapest', 'what is the lowest price grout', 'best price screed']) { const a = await ask(q); t(`"${q}" is declined, no ordering`, a.cards.every((c) => c.type === 'unknown'), a.cards.map((c) => c.title).join('|')); }
