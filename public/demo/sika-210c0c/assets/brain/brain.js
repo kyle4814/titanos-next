@@ -214,6 +214,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     return cards;
   };
   // only a short, non-question message made wholly of catalogue words gets the three-jobs clarifier; anything else keeps its honest no-data
+  const CONDITION_WORDS_RX = /\b(sauna|freezer|chemical|acid|pool|swimming)\b/;
   const shortAsk = (n0) => { const w = n0.split(' ').filter(Boolean); if (w.length > 4 || /^(what|whats|how|why|is|are|does|do|can|could|will|who|where|when|which|tell)\b/.test(n0)) return false; const c = w.filter((x) => !STOP.has(x) && !GENERIC.has(x) && x.length > 2); return c.length >= 1 && c.every((x) => core.post[spell(stem(x))] || core.post[spell(x)]); };
   // the product groups whose published text uses the message's words (catalogue vocabulary), most likely first, for the generic clarifier
   function likelyKinds(n0) {
@@ -221,6 +222,16 @@ export function createBrain({ load, config, loadRules } = {}) {
     const tally = new Map();
     for (const t of toks) { const seen = new Set(); for (const v of core.post[t]) { const pi = v >> 3; const parts = core.P[pi].c.split('/').slice(1); for (let d = Math.min(parts.length, 3); d >= 1; d--) { const lab = parts[d - 1].replace(/-/g, ' '); if (advisor.hasKind(lab)) { if (!seen.has(lab)) { seen.add(lab); tally.set(lab, (tally.get(lab) || 0) + 1 / Math.sqrt(core.post[t].length)); } break; } } } }
     return [...tally].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([label]) => ({ label }));
+  }
+  // wave 3: a very thin ask ("tile", "need glue", "floor is cracked", "wall is damp", "something for outside") names no product and no kind of product, and every content word is a broad one:
+  // ask the job, never show a product list or a page picked by a stray word. A specific word (grinding aid, dusty, bleeding, a product code) is never thin.
+  const VAGUE_OK = /^(outside|inside|outdoors?|indoors?|damp|wet|old|new|leak\w*|crack\w*|wall|walls|floor|floors|roof|put|use|fix|top|paint)$/;
+  function thinAsk(n0) {
+    if (n0.split(' ').filter(Boolean).length > 7 || /\b(sika|davco|lanko|sikatile|sikafloor|sikaflex|sikalastic|sikadur|sikagard)\b/.test(n0) || CONDITION_WORDS_RX.test(n0)) return null;
+    if (/^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n0)) return null;
+    const cw = tokens(n0).filter((w) => !STOP.has(w) && !GENERIC.has(w) && w.length > 2);
+    if (cw.length > 3 || !cw.every((w) => VAGUE_OK.test(w) || advisor.hasKind(w) || (core.post[spell(stem(w))] || core.post[spell(w)] || []).length >= 100)) return null;
+    return intentClarifier(n0, likelyKinds(n0)) || genericVague('something for ' + n0);
   }
   // ---- main entry
   async function askInner(question, state = null) {
@@ -456,11 +467,13 @@ export function createBrain({ load, config, loadRules } = {}) {
     trace.push('index:' + items.length);
     const howto = /^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n) && !/\b(sika|davco|lanko|sikatile)\b/.test(n);
     const domain = tokens(n).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2));
+    if (!pis.length && domain && items.length) { const tk = thinAsk(n0); if (tk) { trace.push('vague:thin'); return out('vague', 'clarify', [tk], { followups: tk.followups }); } }
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const kr = await know.retrieve(q, n0, { strict: false }); if (kr) { trace.push('kb:fallback'); return out('info', 'kb', [kr], { state: null }); } }
     if (!items.length || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ad = await advisor.advise(q, n, null, true); if (ad) { trace.push('advisor:fallback'); return out(ad.items.length ? 'which' : 'advice', 'advisor', adviceCards(ad, q, n0, slang.notes), { state: { advice: { n: n, ids: ad.items.map((x) => x.e.id) } } }); } }
     if (howto && !items.length || howto && !/\b(adhesive|glue|sealant|silicone|grout|waterproof\w*|membrane|tile|tiles|tiling|screed|level\w*|concrete|primer|epoxy|crack\w*|fill|seal|bond|stick)\b/.test(n)) return out(intent, 'unknown', [C.unknown(q, null, 'I do not have step by step trade instructions for that. I answer about Sika Australia products and business from the published documentation. Please ask Sika Technical Services.', ['instructions'])]);
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const gv = !pis.length && !advisor.hasKind(n0) ? (genericVague(n0) || (shortAsk(n0) ? intentClarifier(n0, likelyKinds(n0)) : null)) : null; if (gv) { trace.push('vague:generic'); return out('vague', 'clarify', [gv], { followups: gv.followups }); } }
     if (!items.length || !domain || items[0].score < 3 || items[0].cov < (qm.size <= 3 ? 0.99 : 0.6)) { const ic = !pis.length && shortAsk(n0) ? intentClarifier(n0, likelyKinds(n0)) : null; if (ic) { trace.push('vague:intents'); return out('vague', 'clarify', [ic], { followups: ic.followups }); } return out(intent, 'unknown', [C.unknown(q, null, 'Nothing in the published documentation I work from matches that clearly enough to name a product.', [])]); }
+    { const tk = !pis.length ? thinAsk(n0) : null; if (tk) { trace.push('vague:thin'); return out('vague', 'clarify', [tk], { followups: tk.followups }); } }
     let list = items.slice(0, 30); const ruled = [];
     const condWords = [...new Set(tokens(n))].filter((w) => CONDITION_WORDS.has(w));
     if (condWords.length) { // a named condition (sauna, freezer room, chemical): only products whose own text mentions it, never a keyword guess
@@ -482,7 +495,7 @@ export function createBrain({ load, config, loadRules } = {}) {
       }).filter(Boolean);
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
-    const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.5);
+    const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.75);
     const qset = new Set([...qm.keys()].filter((k) => qm.get(k) >= 1));
     const cards = [];
     for (const it of top) { const sh = await shard(it.pi); if (sh) cards.push(C.productCard(sh, await bestSentence(sh, qset))); }
