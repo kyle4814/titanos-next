@@ -640,3 +640,14 @@ main:focus{outline:none;box-shadow:none}
 .mosaic-tile:hover{box-shadow:var(--shadow-2)}.mosaic-tile:hover .mosaic-cap{border-top-color:var(--primary-hover);background:var(--black)}
 @media (max-width:63.99em){.mosaic{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:39.99em){.mosaic{grid-template-columns:1fr}.mosaic-tile--root{grid-column:auto;grid-row:auto}.mosaic-media{min-height:180px}}
+/* Phone: give the conversation the screen (Kyle 2026-11-02 "really bunched up on mobile"). Header subtitle hidden, voice explainer small,
+   the trust note cut to two lines; once a question is asked the note, the starter chips and the voice explainer step aside. */
+@media (max-width:600px){
+  .asst-head small{display:none}
+  .asst-head h2{font-size:1.15rem}
+  .asst-note{font-size:.75rem;padding:.35rem 14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .asst-voice{padding:.25rem 14px 0}
+  .asst-voice small{font-size:.6875rem;line-height:1.25}
+  .asst-sugg{padding-block:6px}
+  .assistant:has(.msg--user) .asst-note,.assistant:has(.msg--user) .asst-sugg,.assistant:has(.msg--user) .asst-voice small{display:none}
+}
