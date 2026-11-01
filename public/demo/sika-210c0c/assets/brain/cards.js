@@ -169,4 +169,5 @@ export function ruleCard(rule) {
   const f = fact({ source_url: rule.source_url, sentence: rule.answer, doc_type: 'RULE' });
   return card({ type: 'rule', title: 'Corrected answer', headline: rule.answer, facts: [f], chip: CHIPS.RULE, links: [{ label: 'Source for this correction', url: rule.source_url }], lines: [{ label: 'Corrected by', text: `${rule.who}, ${String(rule.corrected_at).slice(0, 10)}` }] });
 }
+// Lane D: the 'plan' card type (see schema.js CARD_TYPES) is built by planCard() and rulesCard() in rules.js, so the actions chunk, which shares this file, does not carry it.
 export { numbersIn };

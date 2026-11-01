@@ -1,0 +1,4946 @@
+[
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling porcelain tiles onto a concrete slab in a bathroom floor. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-concrete-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d001"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for ceramic tiles on plasterboard in bathroom walls, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|plasterboard|internal-wet-wall",
+   "slug": "ceramic-on-plasterboard-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-plasterboard-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d002"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through porcelain tiles on poured concrete for a terrace: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|external-floor",
+   "slug": "porcelain-on-concrete-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-concrete-external-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d003"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for a bathroom floor: mosaic tiles over cement render. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|screed-render|internal-wet-floor",
+   "slug": "mosaic-on-screed-render-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system mosaic-on-screed-render-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d004"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for glass mosaic tiles fixed to rendered brick, a shower wall, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|masonry|internal-wet-wall",
+   "slug": "glass-on-masonry-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system glass-on-masonry-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d005"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing a hallway floor in granite tiles on a concrete slab. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|concrete|internal-floor",
+   "slug": "natural-stone-on-concrete-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system natural-stone-on-concrete-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d006"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling large format tiles onto villaboard in a living room floor. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|cement-board|internal-floor",
+   "slug": "large-format-on-cement-board-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system large-format-on-cement-board-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d007"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for ceramic tiles on hebel in an outdoor feature wall, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|aac|external-wall",
+   "slug": "ceramic-on-aac-external-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-405-lite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-aac-external-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d008"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through ceramic tiles on existing tiles for a laundry floor: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|existing-tiles|internal-wet-floor",
+   "slug": "ceramic-on-existing-tiles-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-plus"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-400-evopro"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-existing-tiles-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d009"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for a hallway floor: porcelain over an over-sheeted timber floor. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|timber-floor|internal-floor",
+   "slug": "porcelain-on-timber-floor-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-timber-floor-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d010"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for terracotta tiles fixed to poured concrete, an outdoor patio floor, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "quarry-terracotta|concrete|external-floor",
+   "slug": "quarry-terracotta-on-concrete-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-ultraflex"
+     ]
+    },
+    "grout": {
+     "stated": false,
+     "ids": []
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system quarry-terracotta-on-concrete-external-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d011"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing a laundry floor in engineered stone tiles on villaboard. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "engineered-stone|cement-board|internal-wet-floor",
+   "slug": "engineered-stone-on-cement-board-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-400-evopro",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system engineered-stone-on-cement-board-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d012"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling mosaic tiles onto a concrete slab in an external wall. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|concrete|external-wall",
+   "slug": "mosaic-on-concrete-external-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system mosaic-on-concrete-external-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d013"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for 1200 x 600 porcelain tiles on a concrete slab in a shower floor, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|concrete|internal-wet-floor",
+   "slug": "large-format-on-concrete-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system large-format-on-concrete-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d014"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through glass mosaic tiles on villaboard for a shower wall: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|cement-board|internal-wet-wall",
+   "slug": "glass-on-cement-board-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset",
+      "sikatile-405-lite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system glass-on-cement-board-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d015"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for a spa: ceramic tiles over poured concrete. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|concrete|pool",
+   "slug": "ceramic-on-concrete-pool",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-400-evopro"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikasil-pool"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-concrete-pool (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d016"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for porcelain tiles fixed to a cement screed, an internal feature wall, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|screed-render|internal-wall",
+   "slug": "porcelain-on-screed-render-internal-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system porcelain-on-screed-render-internal-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d017"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing a lounge wall in granite tiles on plasterboard. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|plasterboard|internal-wall",
+   "slug": "natural-stone-on-plasterboard-internal-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-supamastic",
+      "davco-ultraflex"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "davco-superfine-whitegrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system natural-stone-on-plasterboard-internal-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d018"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling ceramic tiles onto blockwork in an external wall. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|masonry|external-wall",
+   "slug": "ceramic-on-masonry-external-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-masonry-external-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d019"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for mosaic tiles on hebel in bathroom walls, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|aac|internal-wet-wall",
+   "slug": "mosaic-on-aac-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-405-lite",
+      "sikatile-510-megalite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system mosaic-on-aac-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d020"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through porcelain tiles on existing tiles for a living room floor: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|existing-tiles|internal-floor",
+   "slug": "porcelain-on-existing-tiles-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikafloor-14-prepnprimeimpact"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-350-promaxset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-existing-tiles-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d021"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for a spa: glass tiles over a concrete slab. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|concrete|pool",
+   "slug": "glass-on-concrete-pool",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset",
+      "sikatile-510-megalite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikasil-pool"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system glass-on-concrete-pool (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d022"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for large format tiles fixed to cement render, an outdoor patio floor, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|screed-render|external-floor",
+   "slug": "large-format-on-screed-render-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system large-format-on-screed-render-external-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d023"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing bathroom walls in ceramic tiles on villaboard. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|cement-board|internal-wet-wall",
+   "slug": "ceramic-on-cement-board-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-cement-board-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d024"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling porcelain tiles onto AAC panels in a bathroom floor. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|aac|internal-wet-floor",
+   "slug": "porcelain-on-aac-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset",
+      "sikatile-405-lite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-aac-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d025"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for quarry tiles on a cement screed in a hallway floor, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "quarry-terracotta|screed-render|internal-floor",
+   "slug": "quarry-terracotta-on-screed-render-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramacrete",
+      "davco-ceramaflex"
+     ]
+    },
+    "grout": {
+     "stated": false,
+     "ids": []
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system quarry-terracotta-on-screed-render-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d026"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through engineered stone tiles on blockwork for an internal feature wall: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "engineered-stone|masonry|internal-wall",
+   "slug": "engineered-stone-on-masonry-internal-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-350-promaxset",
+      "sikatile-400-evopro"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system engineered-stone-on-masonry-internal-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d027"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for a balcony: natural stone tiles over villaboard. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|cement-board|external-floor",
+   "slug": "natural-stone-on-cement-board-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system natural-stone-on-cement-board-external-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d028"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for mosaic tiles fixed to an over-sheeted timber floor, a shower floor, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|timber-floor|internal-wet-floor",
+   "slug": "mosaic-on-timber-floor-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-trojan-mastic",
+      "sikatile-400-evopro"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system mosaic-on-timber-floor-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d029"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing a hallway floor in glass tiles on a cement screed. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|screed-render|internal-floor",
+   "slug": "glass-on-screed-render-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-405-lite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system glass-on-screed-render-internal-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d030"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "I'm tiling ceramic tiles onto gyprock in an internal feature wall. What's the plan, step by step?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|plasterboard|internal-wall",
+   "slug": "ceramic-on-plasterboard-internal-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-grey-one-potadhesive"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system ceramic-on-plasterboard-internal-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d031"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "What order do I do the work in for 1200 x 600 porcelain tiles on blockwork in an outdoor feature wall, and what products go in each step?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|masonry|external-wall",
+   "slug": "large-format-on-masonry-external-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system large-format-on-masonry-external-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d032"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Walk me through porcelain tiles on rendered brick for a laundry floor: prep, waterproofing, adhesive, grout and sealing.",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|masonry|internal-wet-floor",
+   "slug": "porcelain-on-masonry-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system porcelain-on-masonry-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d033"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Need a method for bathroom walls: mosaic tiles over existing tiles. What are the steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|existing-tiles|internal-wet-wall",
+   "slug": "mosaic-on-existing-tiles-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-plus"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-400-evopro"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system mosaic-on-existing-tiles-internal-wet-wall (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d034"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Give me the full build up for ceramic tiles fixed to particleboard flooring that has been over-sheeted, an outdoor patio floor, 18 m2.",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|timber-floor|external-floor",
+   "slug": "ceramic-on-timber-floor-external-floor",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": true
+  },
+  "note": "The published system ceramic-on-timber-floor-external-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d035"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "We are doing a laundry floor in granite tiles on hebel. What do I need to do before I start and in what sequence?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|aac|internal-wet-floor",
+   "slug": "natural-stone-on-aac-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "sikatile-111-rapidproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset",
+      "sikatile-405-lite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   },
+   "calc": false
+  },
+  "note": "The published system natural-stone-on-aac-internal-wet-floor (system finder shard). Each step product must be one the system names; links must open the system sheet and the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d036"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "How long must a new concrete slab cure before I apply Davco K10 Plus in a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ]
+  },
+  "note": "Davco K10 Plus data sheet clause 3.3 (substrate quality, concrete), page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d037"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco K10 Rapid on a new screed in a shower floor: what cure time does the data sheet give?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "allowed to cure for 7 days"
+   ]
+  },
+  "note": "Davco K10 Rapid data sheet clause 3.3, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d038"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Powder Mastic on a wood float concrete slab in a living room floor, what is the minimum cure age?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Cured minimum 6 weeks"
+   ]
+  },
+  "note": "Davco Powder Mastic data sheet clause 3.2 priming table, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d039"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "SikaTile-110 Secure Proof on a new concrete slab in a shower floor: how many days must it cure?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "allowed to cure for 28 days"
+   ]
+  },
+  "note": "SikaTile-110 Secure Proof data sheet clause 3.3, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d040"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What application temperature limits does Davco PrimeX give for priming an external concrete floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Do not use in temperatures below 5°C or above 35°C"
+   ]
+  },
+  "note": "Davco PrimeX data sheet clause 4.7, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d041"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What temperature range can SikaSeal-190 N Silicone be applied in when sealing joints on a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Maximum | +40°C; Minimum | +5°C"
+   ]
+  },
+  "note": "SikaSeal-190 N Silicone data sheet clause 2.9, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d042"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "SikaTile-410 Secure Set with large format 900 x 900 porcelain on a concrete floor: what flatness does the data sheet need?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "even and true to 1.5mm in 600mm"
+   ]
+  },
+  "note": "SikaTile-410 Secure Set data sheet clause 3.2, page 3.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d043"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "How many coats of Davco K10 Plus on a balcony floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "minimum 2 coat application"
+   ]
+  },
+  "note": "Davco K10 Plus data sheet clause 4.2, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d044"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco K10 Rapid on a wet area floor: how long before I can tile over it?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "at least 6 hours before tiling",
+    "3-4 hours"
+   ]
+  },
+  "note": "Davco K10 Rapid clauses 4.3 and 4.6: the sheet gives two figures; both are shown.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d045"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Wet area floor with Davco Ceramaflex: how long before wet area service?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Set time before wet area service"
+   ]
+  },
+  "note": "Davco Ceramaflex data sheet clause 4.3, page 2: 7 days.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d046"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco Ceramaflex mixing ratio for tiling a concrete floor",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Mixing Ratio: 7-8 Litres clean potable water per 20kg bag"
+   ]
+  },
+  "note": "Davco Ceramaflex data sheet clause 4.2, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d047"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "SikaTile-111 Rapid Proof in a shower floor: how long between coats?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "wait time to second coat"
+   ]
+  },
+  "note": "SikaTile-111 Rapid Proof data sheet clause 4.4, page 2: 2-2.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d048"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Is there a thickness limit for Davco Ceramaflex on a concrete floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Maximum layer shall be no greater than 10mm"
+   ]
+  },
+  "note": "Davco Ceramaflex data sheet clause 4.2, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d049"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco Supamastic maximum layer thickness on a tiled wall",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Layer thickness shall be no greater than 4mm"
+   ]
+  },
+  "note": "Davco Supamastic data sheet clause 4.2, page 1.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d050"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What primer does Davco Powder Mastic need on rendered brick walls?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Prime with Davco PrimeX or Ultraprime"
+   ]
+  },
+  "note": "Davco Powder Mastic data sheet clause 3.2 priming table, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d051"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Dew point rule for SikaSeal-190 N Silicone on external wall joints",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "must be +3°C above dew point"
+   ]
+  },
+  "note": "SikaSeal-190 N Silicone data sheet clause 2.10, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d052"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Sikasil Pool temperature limits when sealing a swimming pool",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "+5 °C min. / +40 °C max."
+   ]
+  },
+  "note": "Sikasil Pool data sheet clause 5.2 (ambient air temperature), page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d053"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What do the SikaTile-110 Secure Proof sheets say about bond breakers on a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "bond breaker"
+   ]
+  },
+  "note": "SikaTile-110 Secure Proof data sheet clauses 3.9 and 3.10.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d054"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco Easy Grout waiting time before wet area use on a bathroom floor",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Dry time prior to return to wet area service"
+   ]
+  },
+  "note": "Davco Easy Grout data sheet clause 4.3, page 2: 3 days.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d055"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "SikaCeram-880 Easy Epoxy: how long before grouting a floor after tiling?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Waiting time before grouting on the floor"
+   ]
+  },
+  "note": "SikaCeram-880 Easy Epoxy data sheet clause 4.7, page 3: 16 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d056"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What cure age does a new concrete slab need before waterproofing and tiling porcelain on a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ],
+   "system": "porcelain-on-concrete-internal-wet-floor"
+  },
+  "note": "Published system porcelain on concrete, internal wet area floor: Davco K10 Rapid clause 3.3.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d057"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "What temperature limits apply to the products in a porcelain on concrete external floor system?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Do not use in temperatures below 5°C or above 35°C"
+   ],
+   "system": "porcelain-on-concrete-external-floor"
+  },
+  "note": "Published system porcelain on concrete, external floor: Davco PrimeX clause 4.7.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d058"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Which standard does the Davco Ceramaflex data sheet name for laying tiles on a concrete floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS3958.1"
+   ]
+  },
+  "note": "Davco Ceramaflex data sheet clause 4.6, page 3: \"Application shall be in accordance with AS3958.1\".",
+  "messy": "",
+  "split": "tuned",
+  "id": "d059"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "What standards does the SikaTile-110 Secure Proof data sheet refer to for a bathroom floor membrane?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS/NZS 4654:2012",
+    "AS 4858:2004"
+   ]
+  },
+  "note": "SikaTile-110 Secure Proof data sheet clause 2.3, page 1.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d060"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Davco K10 Plus data sheet: which standard is named for the waterproofing membrane under tiles in a shower floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS/NZ 4654.1:2012"
+   ]
+  },
+  "note": "Davco K10 Plus data sheet (standards list), spelled \"AS/NZ 4654.1:2012\" in the document.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d061"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Which standards are named for Schonox AB when waterproofing a balcony floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS 4858:2004"
+   ]
+  },
+  "note": "Schonox AB data sheet clause 2.3.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d062"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Davco Supamastic tiling a feature wall: which tile installation standard does it cite?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS3958:2023"
+   ]
+  },
+  "note": "Davco Supamastic data sheet clause 4.5, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d063"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "SikaTile-350 Pro Maxset standard for installing tiles on a concrete floor",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS 3958:2023"
+   ]
+  },
+  "note": "SikaTile-350 Pro Maxset data sheet standards list.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d064"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Davco Ultraprime on a concrete floor: which standard does it refer to for curing concrete?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS1884"
+   ]
+  },
+  "note": "Davco Ultraprime data sheet clause 3.2, page 2: \"fully cured and dry, in accordance with AS1884\".",
+  "messy": "",
+  "split": "tuned",
+  "id": "d065"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "SikaTile-305 Master Lite on a concrete floor: which standards are cited?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS ISO 13007"
+   ]
+  },
+  "note": "SikaTile-305 Master Lite data sheet standards list.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d066"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Does the Davco Sanitized Colorgrout data sheet cite a standard for grouting a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS ISO 13007.3"
+   ]
+  },
+  "note": "Davco Sanitized Colorgrout data sheet standards list.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d067"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Which standard does the SikaTile-111 Rapid Proof sheet cite for a balcony membrane?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS4654"
+   ]
+  },
+  "note": "SikaTile-111 Rapid Proof data sheet standards list.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d068"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "What standard does the Davco Powder Mastic data sheet name for tiling a living room floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS ISO 13007.1"
+   ]
+  },
+  "note": "Davco Powder Mastic data sheet standards list.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d069"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Which standard does the Davco PrimeX data sheet cite for priming a concrete floor?",
+  "exp": {
+   "mode": "refuse",
+   "refuseText": "not state|does not state|published specification"
+  },
+  "note": "Davco PrimeX data sheet clause 2.2: \"no approvals, certificates or standards section\". No standard is added that the document does not cite.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d070"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Can I tile porcelain directly onto a timber deck outside?",
+  "exp": {
+   "mode": "blocked",
+   "hasAny": [
+    "Not suitable for fixing tiles directly onto timber floors",
+    "not suitable for applications for direct fixing over timber substrates",
+    "Not suitable for use for direct application over timber substrates"
+   ],
+   "alt": "over-sheeted"
+  },
+  "note": "Davco Ceramaflex data sheet clause 4.8, page 2, and Davco Trojan Mastic: direct fixing over timber is ruled out; the published timber system is for the over-sheeted floor.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d071"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "I want to fix ceramic tiles straight onto plywood flooring in a bathroom",
+  "exp": {
+   "mode": "blocked",
+   "hasAny": [
+    "Not suitable for fixing tiles directly onto timber floors",
+    "not suitable for applications for direct fixing over timber substrates",
+    "Not suitable for use for direct application over timber substrates"
+   ],
+   "alt": "over-sheeted"
+  },
+  "note": "As above: ceramic on timber, internal wet floor.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d072"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Tiling directly on particleboard floor in a laundry with porcelain, is that ok?",
+  "exp": {
+   "mode": "blocked",
+   "hasAny": [
+    "Not suitable for fixing tiles directly onto timber floors",
+    "not suitable for applications for direct fixing over timber substrates",
+    "Not suitable for use for direct application over timber substrates"
+   ],
+   "alt": "over-sheeted"
+  },
+  "note": "Davco Trojan Mastic data sheet, page 2.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d073"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Can I put mosaic tiles onto a timber balcony floor without an overlay?",
+  "exp": {
+   "mode": "blocked",
+   "hasAny": [
+    "Not suitable for fixing tiles directly onto timber floors",
+    "not suitable for applications for direct fixing over timber substrates",
+    "Not suitable for use for direct application over timber substrates"
+   ],
+   "alt": "over-sheeted"
+  },
+  "note": "As above: mosaic on timber, external floor.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d074"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Ceramic tiles on a concrete wall in a shower that has rising damp, can I waterproof and tile it?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "Do not use where negative hydrostatic pressure is evident"
+   ]
+  },
+  "note": "Davco K10 Rapid / K10 Plus data sheets, clause 4.8 / 4.6: rising damp is a no-go.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d075"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Our concrete slab has rising damp. Porcelain tiles on a bathroom floor, what is the plan?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "Do not use where negative hydrostatic pressure is evident"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d076"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Large format tiles onto a brick wall with rising damp in an external wall, plan please",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "negative hydrostatic pressure"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d077"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Rising damp coming through the screed under a laundry floor, glass tiles. How do I do this?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "rising damp"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d078"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Porcelain tiles on a concrete garage floor for cars, what is the plan?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "vehicular traffic"
+   ]
+  },
+  "note": "SikaTile-350 Pro Maxset: not suitable for heavy duty applications such as vehicular traffic; SikaTile-110 Secure Proof: not a wearing surface for vehicular traffic.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d079"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "We want ceramic tiles on a concrete driveway that cars will drive on, steps please",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "vehicular traffic"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d080"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Forklift traffic on porcelain tiles over a concrete slab in a warehouse floor, can I get a plan?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "vehicular traffic"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d081"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Heavy vehicle traffic on ceramic tiles fixed to a screed in an external floor, what system?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "vehicular traffic"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d082"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Green marble tiles on a concrete shower floor, what is the plan?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "moisture sensitive stone"
+   ]
+  },
+  "note": "Adhesive data sheets (SikaTile-410, SikaTile-305, Davco SMP EVO): not suitable for moisture sensitive stone; the published systems do not include it.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d083"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Moisture sensitive stone on cement screed in a bathroom floor",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "moisture sensitive stone"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d084"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Resin backed moisture sensitive stone tiles on a plasterboard wall in a shower",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "moisture sensitive stone"
+   ]
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d085"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Porcelain on a concrete balcony floor, it is -2 degrees, can I start the plan today?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "below the published lower limit"
+  },
+  "note": "Davco PrimeX data sheet clause 4.7: lower limit 5 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d086"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Planning ceramic tiles on a cement screed in an external floor at 3 degrees, steps please",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "below the published lower limit"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d087"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Mosaic tiles on concrete in a balcony in a heatwave at 41 degrees, what is the plan?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "above the published upper limit"
+  },
+  "note": "As above: upper limit 35 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d088"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Quarry tiles on a concrete patio floor at 39 degrees, order of work?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "above the published upper limit"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d089"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Tiling porcelain on a 10 day old concrete slab in a bathroom floor, what is the plan?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ],
+   "textHas": "below the published minimum"
+  },
+  "note": "Davco K10 Rapid clause 3.3: new concrete cures 6 weeks; the slab is 10 days old.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d090"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "The screed was laid 3 days ago, can I do ceramic tiles in a bathroom floor, what is the plan?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "allowed to cure for 7 days"
+   ],
+   "textHas": "below the published minimum"
+  },
+  "note": "Davco K10 Rapid clause 3.3: screed cures 7 days; 3 days is too early.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d091"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Plan for glass tiles on plasterboard on an external floor",
+  "exp": {
+   "mode": "none",
+   "ours": [
+    "no system"
+   ]
+  },
+  "note": "The system finder has no glass on plasterboard external floor (glass-on-plasterboard has internal systems only); the answer is a referral that names the combination.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d092"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Is the concrete slab still damp ok for porcelain on a bathroom floor? it is sweating, plan please",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "dry"
+   ],
+   "textHas": "dry"
+  },
+  "note": "Davco PrimeX data sheet clause 3.2: the surface must be dry.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d093"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Ceramic tiles on a concrete wall with condensation and damp patches, internal wet wall, steps",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "dry"
+   ],
+   "textHas": "dry"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d094"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long until I can use a bathroom floor after tiling porcelain tiles on a concrete slab, adding up every waiting time in the data sheets?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "davco-powder-mastic",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"davco-powder-mastic\",\"grout\":\"davco-easy-grout\"} total 175.5 to 176.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d095"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the earliest finish for ceramic tiles on a concrete slab in a living room floor, start to finish?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|concrete|internal-floor",
+   "slug": "ceramic-on-concrete-internal-floor",
+   "totalMin": 48.5,
+   "totalMax": 48.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": null,
+    "adhesive": "davco-ceramacrete",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":null,\"adhesive\":\"davco-ceramacrete\",\"grout\":\"davco-easy-grout\"} total 48.5 to 48.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d096"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Give me the total timeline for ceramic tiles onto plasterboard in a shower wall: primer, membrane, adhesive, grout.",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|plasterboard|internal-wet-wall",
+   "slug": "ceramic-on-plasterboard-internal-wet-wall",
+   "totalMin": 130.4167,
+   "totalMax": 131.6667,
+   "products": {
+    "prime": "sikatile-010-secureprime",
+    "membrane": "sikatile-110-secureproof",
+    "adhesive": "sikatile-305-masterlite",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"sikatile-010-secureprime\",\"membrane\":\"sikatile-110-secureproof\",\"adhesive\":\"sikatile-305-masterlite\",\"grout\":\"davco-easy-grout\"} total 130.41666666666666 to 131.66666666666666 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d097"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long until I can use a living room floor after tiling large format tiles on fibre cement sheet, adding up every waiting time in the data sheets?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|cement-board|internal-floor",
+   "slug": "large-format-on-cement-board-internal-floor",
+   "totalMin": 48.5,
+   "totalMax": 48.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": null,
+    "adhesive": "davco-powder-mastic",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":null,\"adhesive\":\"davco-powder-mastic\",\"grout\":\"davco-easy-grout\"} total 48.5 to 48.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d098"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the earliest finish for mosaic tiles on a cement screed in a bathroom floor, start to finish?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|screed-render|internal-wet-floor",
+   "slug": "mosaic-on-screed-render-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "products": {
+    "prime": "davco-ultraprime",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "davco-powder-mastic",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-ultraprime\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"davco-powder-mastic\",\"grout\":\"davco-easy-grout\"} total 175.5 to 176.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d099"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Give me the total timeline for glass mosaic tiles onto rendered brick in a shower wall: primer, membrane, adhesive, grout.",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|masonry|internal-wet-wall",
+   "slug": "glass-on-masonry-internal-wet-wall",
+   "totalMin": 103,
+   "totalMax": 200,
+   "products": {
+    "prime": null,
+    "membrane": "davco-k10-rapid",
+    "adhesive": "sikatile-410-secureset",
+    "grout": "sikaceram-880-easyepoxy"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":null,\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"sikatile-410-secureset\",\"grout\":\"sikaceram-880-easyepoxy\"} total 103 to 200 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d100"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long until I can use an external wall after tiling ceramic tiles on AAC panels, adding up every waiting time in the data sheets?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|aac|external-wall",
+   "slug": "ceramic-on-aac-external-wall",
+   "totalMin": 106.5,
+   "totalMax": 107.5,
+   "products": {
+    "prime": "davco-ultraprime",
+    "membrane": "sikatile-110-secureproof",
+    "adhesive": "sikatile-405-lite",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-ultraprime\",\"membrane\":\"sikatile-110-secureproof\",\"adhesive\":\"sikatile-405-lite\",\"grout\":\"davco-easy-grout\"} total 106.5 to 107.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d101"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the earliest finish for ceramic tiles on existing tiles in a bathroom floor, start to finish?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|existing-tiles|internal-wet-floor",
+   "slug": "ceramic-on-existing-tiles-internal-wet-floor",
+   "totalMin": 127,
+   "totalMax": 130,
+   "products": {
+    "prime": null,
+    "membrane": "davco-k10-plus",
+    "adhesive": "sikatile-305-masterlite",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":null,\"membrane\":\"davco-k10-plus\",\"adhesive\":\"sikatile-305-masterlite\",\"grout\":\"davco-easy-grout\"} total 127 to 130 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d102"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Give me the total timeline for porcelain tiles onto an over-sheeted timber floor in a living room floor: primer, membrane, adhesive, grout.",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|timber-floor|internal-floor",
+   "slug": "porcelain-on-timber-floor-internal-floor",
+   "totalMin": 48,
+   "totalMax": 48,
+   "products": {
+    "prime": null,
+    "membrane": null,
+    "adhesive": "davco-ceramaflex",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":null,\"membrane\":null,\"adhesive\":\"davco-ceramaflex\",\"grout\":\"davco-easy-grout\"} total 48 to 48 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d103"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long until I can use an external wall after tiling mosaic tiles on a concrete slab, adding up every waiting time in the data sheets?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|concrete|external-wall",
+   "slug": "mosaic-on-concrete-external-wall",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "davco-ceramaflex",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"davco-ceramaflex\",\"grout\":\"davco-easy-grout\"} total 175.5 to 176.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d104"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the earliest finish for porcelain tiles on a concrete slab in a balcony, start to finish?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|external-floor",
+   "slug": "porcelain-on-concrete-external-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "davco-ceramaflex",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"davco-ceramaflex\",\"grout\":\"davco-easy-grout\"} total 175.5 to 176.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d105"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Give me the total timeline for glass mosaic tiles onto fibre cement sheet in a shower wall: primer, membrane, adhesive, grout.",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|cement-board|internal-wet-wall",
+   "slug": "glass-on-cement-board-internal-wet-wall",
+   "totalMin": 103.5,
+   "totalMax": 200.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "sikatile-410-secureset",
+    "grout": "sikaceram-880-easyepoxy"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"sikatile-410-secureset\",\"grout\":\"sikaceram-880-easyepoxy\"} total 103.5 to 200.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d106"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long until I can use a living room floor after tiling natural stone tiles on a concrete slab, adding up every waiting time in the data sheets?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|concrete|internal-floor",
+   "slug": "natural-stone-on-concrete-internal-floor",
+   "totalMin": 48.5,
+   "totalMax": 48.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": null,
+    "adhesive": "davco-powder-mastic",
+    "grout": "davco-sanitized-colorgrout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":null,\"adhesive\":\"davco-powder-mastic\",\"grout\":\"davco-sanitized-colorgrout\"} total 48.5 to 48.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d107"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the earliest finish for large format tiles on a concrete slab in a bathroom floor, start to finish?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|concrete|internal-wet-floor",
+   "slug": "large-format-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "products": {
+    "prime": "davco-primex",
+    "membrane": "davco-k10-rapid",
+    "adhesive": "davco-powder-mastic",
+    "grout": "davco-easy-grout"
+   }
+  },
+  "note": "Oracle (hand table from the data sheets): {\"prime\":\"davco-primex\",\"membrane\":\"davco-k10-rapid\",\"adhesive\":\"davco-powder-mastic\",\"grout\":\"davco-easy-grout\"} total 175.5 to 176.5 hours.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d108"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the total time from start to finish for terracotta tiles on a concrete slab in a balcony?",
+  "exp": {
+   "mode": "plan",
+   "key": "quarry-terracotta|concrete|external-floor",
+   "slug": "quarry-terracotta-on-concrete-external-floor",
+   "noTotal": true
+  },
+  "note": "A window is not published (grout none, adhesive or grout window): the answer must say so and show no total.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d109"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "What is the total time from start to finish for ceramic tiles on a concrete slab in a swimming pool?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|concrete|pool",
+   "slug": "ceramic-on-concrete-pool",
+   "noTotal": true
+  },
+  "note": "A window is not published (membrane): the answer must say so and show no total.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d110"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "I only have 3 days to tile porcelain on a concrete slab in a bathroom floor, waterproofing included. Does the plan fit?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "budget": "over",
+   "budgetHours": 72
+  },
+  "note": "Total 175.5 to 176.5 hours against 72 hours: over.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d111"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Porcelain on a concrete slab in a bathroom floor: can we finish within 5 days?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "budget": "over",
+   "budgetHours": 120
+  },
+  "note": "Total 175.5 to 176.5 hours against 120 hours: over.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d112"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "We have 10 days. Porcelain tiles on a poured slab in a bathroom floor, what is the plan and does it fit?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "budget": "fits",
+   "budgetHours": 240
+  },
+  "note": "Total 175.5 to 176.5 hours against 240 hours: fits.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d113"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Porcelain on concrete in a shower floor, we can wait 176 hours, how does the plan look?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|internal-wet-floor",
+   "slug": "porcelain-on-concrete-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "budget": "maybe",
+   "budgetHours": 176
+  },
+  "note": "Total 175.5 to 176.5 hours against 176 hours: maybe.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d114"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Ceramic tiles on a cement render in an internal wet wall at 2 degrees, plan?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "below the published lower limit"
+  },
+  "note": "Davco PrimeX / Ultraprime lower limit 5 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d115"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Porcelain on concrete in a bathroom floor, today is 37 degrees, steps please",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "above the published upper limit"
+  },
+  "note": "Upper limit 35 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d116"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Mosaic on plasterboard in a shower wall at -4 degrees",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "below the published lower limit"
+  },
+  "note": "SikaTile-305 Master Lite clause 4.8: lower limit 5 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d117"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Large format porcelain on a concrete slab in an external floor at 36 degrees, plan?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C"
+   ],
+   "textHas": "above the published upper limit"
+  },
+  "note": "Upper limit 35 °C.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d118"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Ceramic tiles on fibre cement sheet in a bathroom wall, 22 degrees and dry, what is the plan?",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "ready for covering: 30 minutes"
+   ]
+  },
+  "note": "In range: no check fails (Davco PrimeX clause 4.2, 22 °C).",
+  "messy": "",
+  "split": "tuned",
+  "id": "d119"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Natural stone on concrete in an internal floor on a 28 degree day, plan",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "Applied product ready for covering"
+   ]
+  },
+  "note": "In range.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d120"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Porcelain on a concrete slab poured 3 weeks ago, bathroom floor: plan?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ],
+   "textHas": "below the published minimum"
+  },
+  "note": "Davco K10 Rapid: 6 weeks; 3 weeks is too early.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d121"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Ceramic tiles on a 2 month old concrete slab in a bathroom floor, plan",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ]
+  },
+  "note": "Davco K10 Rapid: 6 weeks; 2 months (1440 hours) is enough.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d122"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Porcelain on a screed that is 5 days old in a laundry floor, steps?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "allowed to cure for 7 days"
+   ],
+   "textHas": "below the published minimum"
+  },
+  "note": "Davco K10 Rapid: screed 7 days.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d123"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Plan for tiles on a slab that has been poured 8 weeks, ceramic, on an external floor",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ]
+  },
+  "note": "Davco K10 Rapid.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d124"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "What do I need to know about primed concrete before tiling a porcelain external floor, do I have a time limit?",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "within 24 hours"
+   ]
+  },
+  "note": "Davco PrimeX data sheet clause 4.5: coat within 24 hours or re-clean and re-prime.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d125"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Mosaic on concrete floor in a bathroom, what substrate conditions void the plan?",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "Do not use in temperatures below 5°C or above 35°C"
+   ]
+  },
+  "note": "The plan lists the conditions that void it.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d126"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Porcelain on concrete balcony floor, 5 degrees tonight and 80% humidity, what is the plan?",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "Do not use in temperatures below 5°C or above 35°C"
+   ]
+  },
+  "note": "5 °C equals the lower limit, so it is not below it. No humidity limit is published for these products, so none is invented.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d127"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Ceramic tiles on masonry in an external wall, plan, freezing overnight",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "Do not allow the product to freeze"
+   ]
+  },
+  "note": "Davco PrimeX clause 4.7 / K10 data sheets: do not allow the product to freeze.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d128"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Tiling on a damp rendered wall, ceramic, internal wet wall: what is the plan?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "dry"
+   ],
+   "textHas": "dry"
+  },
+  "note": "Davco PrimeX clause 3.2: surface must be dry.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d129"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Glass mosaic on concrete in a bathroom floor, hot windy day, what is the plan?",
+  "exp": {
+   "mode": "plan",
+   "has": [
+    "hot windy"
+   ]
+  },
+  "note": "Davco PrimeX clause 4.7: do not use in hot windy conditions without pre-wetting.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d130"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Will my porcelain on concrete bathroom floor plan pass the council inspection and comply with the NCC?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "Compliance is the certifier's decision, not a data sheet statement.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d131"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Is the SikaTile-110 Secure Proof system for a shower floor compliant with the building code, so I can sign it off?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d132"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Does laying ceramic tiles on a concrete balcony floor with these products meet the code and get certified?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d133"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Can you confirm my waterproofing of a ceramic shower wall on plasterboard is legal and covered by insurance?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "Legal and insurance questions are outside the documentation.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d134"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Are porcelain tiles on a concrete external floor liable to fail an engineer's certificate?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d135"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Is a licensed waterproofer required for ceramic tiles on a concrete bathroom floor, legally?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "Licensing is not in the data sheets.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d136"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Can you guarantee porcelain on a concrete bathroom floor will never leak if I follow your plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "guarantee"
+  },
+  "note": "No guarantee can be given from published data.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d137"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Promise me this ceramic on plasterboard shower wall plan will definitely work for ten years",
+  "exp": {
+   "mode": "refuse",
+   "why": "guarantee"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d138"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Is it 100% certain that mosaic on a concrete pool will last if I follow every step?",
+  "exp": {
+   "mode": "refuse",
+   "why": "guarantee"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d139"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Will a ceramic tile on a cement render external wall plan last for a lifetime?",
+  "exp": {
+   "mode": "refuse",
+   "why": "guarantee"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d140"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "My timber floor has a 40 mm deflection over the joists, is that ok for porcelain tiles in a bathroom floor?",
+  "exp": {
+   "mode": "refuse",
+   "why": "struct"
+  },
+  "note": "Structural adequacy is for an engineer.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d141"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "There is asbestos in the old adhesive under my existing tiles in the bathroom floor, how do I tile over it?",
+  "exp": {
+   "mode": "refuse",
+   "why": "struct"
+  },
+  "note": "Hazardous materials are outside the product documentation.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d142"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "The slab is sagging and the joists are rotten under my timber floor, can I still tile porcelain on the bathroom floor?",
+  "exp": {
+   "mode": "refuse",
+   "why": "struct"
+  },
+  "note": "Structural condition is for an engineer.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d143"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Our concrete slab has settlement cracks 8 mm wide in the garage, what tile plan fixes that structurally?",
+  "exp": {
+   "mode": "refuse",
+   "why": "struct"
+  },
+  "note": "Structural repair is outside the tile system data.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d144"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Porcelain tiles on a concrete sauna floor, what is the plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Saunas are not covered by the published system data.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d145"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ceramic tiles on a concrete commercial kitchen floor, give me the full plan",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Commercial kitchens are not covered by the published system data.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d146"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Tiles on a concrete freezer room floor, what steps do I follow?",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Freezer rooms are not covered.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d147"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Mosaic tiles on a steam room wall, plan for plasterboard?",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Steam rooms are not covered.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d148"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ceramic tiles around a fireplace hearth on a concrete floor, what is the plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Heat exposure is not covered.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d149"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Porcelain tiles in a kiln room on a concrete floor, plan please",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Kilns are not covered.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d150"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ceramic tiles onto vinyl on a concrete floor in a bathroom, what is the plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Vinyl is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d151"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Porcelain tiles onto a steel deck on an external floor, steps?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Steel is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d152"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Can I tile porcelain over old asphalt on an external floor, what are the steps?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Asphalt is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d153"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Tiling ceramic onto laminate flooring in a bathroom floor, plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Laminate is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d154"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Mosaic tiles onto a metal roof sheet outside, what is the plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Metal is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d155"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ceramic tiles over carpet on a floor in a living room, order of work?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Carpet is not a substrate in the published systems.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d156"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "How much will the full porcelain on concrete bathroom floor plan cost me in materials and labour?",
+  "exp": {
+   "mode": "refuse",
+   "why": "price"
+  },
+  "note": "Prices are not in the documentation.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d157"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "What does a tiler charge for porcelain on a concrete balcony floor?",
+  "exp": {
+   "mode": "refuse",
+   "why": "price"
+  },
+  "note": "As above.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d158"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "What warranty do I get on a ceramic on concrete internal wet floor plan?",
+  "exp": {
+   "mode": "refuse",
+   "why": "price"
+  },
+  "note": "Warranty terms are not in the documentation.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d159"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Is Mapei better than Davco for porcelain on concrete in a bathroom floor?",
+  "exp": {
+   "mode": "refuse",
+   "why": "brand"
+  },
+  "note": "Other brands are out of scope.",
+  "messy": "",
+  "split": "tuned",
+  "id": "d160"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Doing a splashback and shower walls in 300x600 ceramic over gyprock, how should I sequence it?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|plasterboard|internal-wet-wall",
+   "slug": "ceramic-on-plasterboard-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system ceramic-on-plasterboard-internal-wet-wall.",
+  "messy": "",
+  "split": "blind",
+  "id": "d161"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Outdoor entertaining area, concrete slab, 600x600 porcelain pavers, what is the method?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|concrete|external-floor",
+   "slug": "porcelain-on-concrete-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system porcelain-on-concrete-external-floor.",
+  "messy": "",
+  "split": "blind",
+  "id": "d162"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Retiling over my old tiles in the kitchen floor with porcelain, what needs to happen first?",
+  "exp": {
+   "mode": "plan",
+   "key": "porcelain|existing-tiles|internal-floor",
+   "slug": "porcelain-on-existing-tiles-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikafloor-14-prepnprimeimpact"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-350-promaxset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system porcelain-on-existing-tiles-internal-floor.",
+  "messy": "",
+  "split": "blind",
+  "id": "d163"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Feature wall inside, hebel panels, glass mosaic. Steps?",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|aac|internal-wall",
+   "slug": "glass-on-aac-internal-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-405-lite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system glass-on-aac-internal-wall.",
+  "messy": "",
+  "split": "blind",
+  "id": "d164"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Pool tiling job: glass mosaic into a concrete pool shell, order of work please",
+  "exp": {
+   "mode": "plan",
+   "key": "glass|concrete|pool",
+   "slug": "glass-on-concrete-pool",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-410-secureset",
+      "sikatile-510-megalite"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite",
+      "sikaceram-880-easyepoxy"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikasil-pool"
+     ]
+    }
+   }
+  },
+  "note": "The published system glass-on-concrete-pool.",
+  "messy": "",
+  "split": "blind",
+  "id": "d165"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Tiling a laundry floor in large format 1200x600 over a screed. Plan?",
+  "exp": {
+   "mode": "plan",
+   "key": "large-format|screed-render|internal-wet-floor",
+   "slug": "large-format-on-screed-render-internal-wet-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-powder-mastic",
+      "davco-trojan-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system large-format-on-screed-render-internal-wet-floor.",
+  "messy": "",
+  "split": "blind",
+  "id": "d166"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Balcony renovation: villaboard base, terracotta tiles, need the build-up",
+  "exp": {
+   "mode": "plan",
+   "key": "quarry-terracotta|cement-board|external-floor",
+   "slug": "quarry-terracotta-on-cement-board-external-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-primex",
+      "davco-ultraprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "sikatile-110-secureproof"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-ultraflex"
+     ]
+    },
+    "grout": {
+     "stated": false,
+     "ids": []
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system quarry-terracotta-on-cement-board-external-floor.",
+  "messy": "",
+  "split": "blind",
+  "id": "d167"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "How do I tile natural stone onto a plasterboard wall in a bathroom?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|plasterboard|internal-wet-wall",
+   "slug": "natural-stone-on-plasterboard-internal-wet-wall",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "sikatile-110-secureproof",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-305-masterlite",
+      "sikatile-410-secureset"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-sanitized-colorgrout",
+      "davco-superfine-whitegrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system natural-stone-on-plasterboard-internal-wet-wall.",
+  "messy": "",
+  "split": "blind",
+  "id": "d168"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Sequence for ceramic wall tiles on blockwork outside",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|masonry|external-wall",
+   "slug": "ceramic-on-masonry-external-wall",
+   "roles": {
+    "prime": {
+     "stated": false,
+     "ids": []
+    },
+    "membrane": {
+     "stated": true,
+     "ids": [
+      "davco-k10-rapid",
+      "schoenox-ab"
+     ]
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "davco-ceramaflex",
+      "davco-powder-mastic"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "davco-easy-grout",
+      "davco-sanitized-colorgrout"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system ceramic-on-masonry-external-wall.",
+  "messy": "",
+  "split": "blind",
+  "id": "d169"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "plan",
+  "q": "Engineered stone on screed in the hallway, step plan?",
+  "exp": {
+   "mode": "plan",
+   "key": "engineered-stone|screed-render|internal-floor",
+   "slug": "engineered-stone-on-screed-render-internal-floor",
+   "roles": {
+    "prime": {
+     "stated": true,
+     "ids": [
+      "davco-ultraprime",
+      "sikatile-010-secureprime"
+     ]
+    },
+    "membrane": {
+     "stated": false,
+     "ids": []
+    },
+    "adhesive": {
+     "stated": true,
+     "ids": [
+      "sikatile-350-promaxset",
+      "sikatile-366-proflex"
+     ]
+    },
+    "grout": {
+     "stated": true,
+     "ids": [
+      "sikaceram-690-elite"
+     ]
+    },
+    "sealant": {
+     "stated": true,
+     "ids": [
+      "sikaseal-kitchenandbathroom",
+      "sikaseal-190-n-silicone"
+     ]
+    }
+   }
+  },
+  "note": "The published system engineered-stone-on-screed-render-internal-floor.",
+  "messy": "",
+  "split": "blind",
+  "id": "d170"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Does Sika say how many coats of SikaTile-111 Rapid Proof on a shower wall?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "minimum 2 coat application"
+   ]
+  },
+  "note": "SikaTile-111 Rapid Proof data sheet clause 4.7, page 3.",
+  "messy": "",
+  "split": "blind",
+  "id": "d171"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Cure time for a new screed before SikaTile-110 membrane on a bathroom floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "allow to cure for 5-7"
+   ]
+  },
+  "note": "SikaTile-110 Secure Proof data sheet clause 3.4, page 2: the sheet gives \"5-7\" with no unit, so no hours are worked out. (First draft assumed 7 days; corrected from the data sheet after the first run.)",
+  "messy": "",
+  "split": "blind",
+  "id": "d172"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "standard",
+  "q": "Which standards does the SikaTile-410 Secure Set sheet reference, for a balcony floor job?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "AS ISO 13007"
+   ]
+  },
+  "note": "SikaTile-410 Secure Set data sheet standards list.",
+  "messy": "",
+  "split": "blind",
+  "id": "d173"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Davco PrimeX: how soon must it be covered once applied to an external concrete floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "within 24 hours"
+   ]
+  },
+  "note": "Davco PrimeX data sheet clause 4.5, page 2.",
+  "messy": "",
+  "split": "blind",
+  "id": "d174"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Allowed temperature window for SikaTile-305 Master Lite on a patio floor?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "Do not apply in temperatures above 35°C or below 5°C"
+   ]
+  },
+  "note": "SikaTile-305 Master Lite data sheet clause 4.8, page 2.",
+  "messy": "",
+  "split": "blind",
+  "id": "d175"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Dew point and substrate temperature for Sikasil Pool around a swimming pool",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "above dew point"
+   ]
+  },
+  "note": "Sikasil Pool data sheet clause 5.3.",
+  "messy": "",
+  "split": "blind",
+  "id": "d176"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "rule",
+  "q": "Large format porcelain on a concrete floor, how flat does the substrate have to be per SikaTile-410?",
+  "exp": {
+   "mode": "rule",
+   "has": [
+    "even and true to 1.5mm in 600mm"
+   ]
+  },
+  "note": "SikaTile-410 Secure Set data sheet clause 3.2.",
+  "messy": "",
+  "split": "blind",
+  "id": "d177"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Is it okay to tile straight onto a timber balcony floor with ceramic tiles?",
+  "exp": {
+   "mode": "blocked",
+   "hasAny": [
+    "Not suitable for fixing tiles directly onto timber floors",
+    "not suitable for applications for direct fixing over timber substrates",
+    "Not suitable for use for direct application over timber substrates"
+   ],
+   "alt": "over-sheeted"
+  },
+  "note": "Direct fixing onto timber is ruled out by the adhesive data sheets.",
+  "messy": "",
+  "split": "blind",
+  "id": "d178"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conflict",
+  "q": "Slab has rising damp coming up, porcelain tiles in the laundry floor, what do you recommend?",
+  "exp": {
+   "mode": "blocked",
+   "has": [
+    "negative hydrostatic pressure"
+   ]
+  },
+  "note": "Davco K10 data sheets: do not use where negative hydrostatic pressure (rising damp) is evident.",
+  "messy": "",
+  "split": "blind",
+  "id": "d179"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Hot day, 43 degrees, retiling a balcony floor in porcelain over concrete, go ahead?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C"
+   ],
+   "textHas": "above the published upper limit"
+  },
+  "note": "Upper limit 35 °C.",
+  "messy": "",
+  "split": "blind",
+  "id": "d180"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Concrete poured 9 days ago, shower floor in ceramic, steps?",
+  "exp": {
+   "mode": "void",
+   "has": [
+    "allowed to cure for 6 weeks"
+   ],
+   "textHas": "below the published minimum"
+  },
+  "note": "Davco K10 Rapid: 6 weeks.",
+  "messy": "",
+  "split": "blind",
+  "id": "d181"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "How long all up for ceramic tiles on gyprock in a bathroom wall?",
+  "exp": {
+   "mode": "plan",
+   "key": "ceramic|plasterboard|internal-wet-wall",
+   "slug": "ceramic-on-plasterboard-internal-wet-wall",
+   "totalMin": 130.4167,
+   "totalMax": 131.6667
+  },
+  "note": "Oracle total.",
+  "messy": "",
+  "split": "blind",
+  "id": "d182"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "We have 4 days. Mosaic on a screed for a shower floor, can it be done?",
+  "exp": {
+   "mode": "plan",
+   "key": "mosaic|screed-render|internal-wet-floor",
+   "slug": "mosaic-on-screed-render-internal-wet-floor",
+   "totalMin": 175.5,
+   "totalMax": 176.5,
+   "budget": "over",
+   "budgetHours": 96
+  },
+  "note": "Oracle total against 96 hours.",
+  "messy": "",
+  "split": "blind",
+  "id": "d183"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "timeline",
+  "q": "Total time for natural stone on concrete in a lounge room floor?",
+  "exp": {
+   "mode": "plan",
+   "key": "natural-stone|concrete|internal-floor",
+   "slug": "natural-stone-on-concrete-internal-floor",
+   "totalMin": 48.5,
+   "totalMax": 48.5
+  },
+  "note": "Oracle total.",
+  "messy": "",
+  "split": "blind",
+  "id": "d184"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "conditions",
+  "q": "Minus 6 degrees overnight, glass tiles on hebel external wall: plan?",
+  "exp": {
+   "mode": "void",
+   "hasAny": [
+    "Do not use in temperatures below 5°C or above 35°C",
+    "Do not apply in temperatures above 35°C or below 5°C",
+    "Do not use Davco Ultraprime below 5°C or above 35°C",
+    "Use in temperatures between 5°C and 35°C",
+    "Maximum | +25 °C; Minimum | +10 °C"
+   ],
+   "textHas": "below the published lower limit"
+  },
+  "note": "Lower limit: the tightest is SikaCeram-880 Easy Epoxy substrate minimum +10 °C (the first draft expected the 5 °C wording; corrected after the first run).",
+  "messy": "",
+  "split": "blind",
+  "id": "d185"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Can I tile a ceramic wall inside a sauna?",
+  "exp": {
+   "mode": "refuse",
+   "why": "offtopic"
+  },
+  "note": "Saunas are not covered.",
+  "messy": "",
+  "split": "blind",
+  "id": "d186"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Will you sign off that my porcelain balcony floor on concrete is up to code?",
+  "exp": {
+   "mode": "refuse",
+   "why": "comply"
+  },
+  "note": "Compliance is not a data sheet statement.",
+  "messy": "",
+  "split": "blind",
+  "id": "d187"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Whats the cost of tiling porcelain on a concrete slab bathroom floor in labour?",
+  "exp": {
+   "mode": "refuse",
+   "why": "price"
+  },
+  "note": "Prices are not published.",
+  "messy": "",
+  "split": "blind",
+  "id": "d188"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ceramic tiles onto a vinyl floor in the laundry: how?",
+  "exp": {
+   "mode": "refuse",
+   "why": "unsupported"
+  },
+  "note": "Vinyl is not a published substrate.",
+  "messy": "",
+  "split": "blind",
+  "id": "d189"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "How strong does the joist need to be for porcelain on a timber bathroom floor?",
+  "exp": {
+   "mode": "refuse",
+   "why": "struct"
+  },
+  "note": "Structural advice is for an engineer.",
+  "messy": "",
+  "split": "blind",
+  "id": "d190"
+ },
+ {
+  "persona": "tiler",
+  "category": "rules",
+  "type": "w2d",
+  "cat": "trap",
+  "q": "Ensure me that porcelain on a concrete balcony floor will never crack",
+  "exp": {
+   "mode": "refuse",
+   "why": "guarantee"
+  },
+  "note": "No guarantee.",
+  "messy": "",
+  "split": "blind",
+  "id": "d191"
+ }
+]

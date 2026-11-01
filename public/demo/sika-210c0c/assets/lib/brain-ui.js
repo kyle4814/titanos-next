@@ -14,6 +14,14 @@ export function brainOn() {
   return BRAIN_DEFAULT;
 }
 
+// Lane D: the plan engine (brain/rules.js) is not in the bundle. The first time a question looks like a job with several constraints it is fetched as a plain module script
+// (script-src 'self' allows it); it hands { createRules } back on globalThis. Offline, or if it cannot load, the answer stack carries on without it.
+function loadRulesModule() {
+  if (globalThis.__sikaRules) return Promise.resolve(globalThis.__sikaRules);
+  return (globalThis.__sikaRulesP ||= new Promise((resolve) => {
+    try { const s = document.createElement('script'); s.type = 'module'; s.src = new URL('../brain/rules.js', import.meta.url).href; s.onload = () => resolve(globalThis.__sikaRules || null); s.onerror = () => resolve(null); document.head.appendChild(s); } catch { resolve(null); }
+  }));
+}
 let brainP = null, bstate = null;
 // one in-page memo of fetched JSON, shared with the actions layer (assets/actions/core.js), so a shard is never downloaded twice on a cold load
 const jsonMemo = (globalThis.__sikaJson ||= new Map());
@@ -24,7 +32,7 @@ export function ensureBrain() {
     const seed = { 'core.json': fetchJson('data/brain/core.json'), 'rules.json': fetchJson('data/brain/rules.json') };
     // every module is requested at once (brain.js imports the rest, so asking for them together removes one round trip)
     const [{ createBrain }, { createLoader }] = await Promise.all([import('../brain/brain.js'), import('../brain/loader.js'), import('../brain/text.js'), import('../brain/syn.js'), import('../brain/facets.js'), import('../brain/schema.js'), import('../brain/cards.js')]);
-    const brain = createBrain({ load: createLoader({ base: 'data/brain/', fetchJson, seed }) });
+    const brain = createBrain({ load: createLoader({ base: 'data/brain/', fetchJson, seed }), loadRules: loadRulesModule });
     await brain.boot();
     return brain;
   })().catch(() => { brainP = null; return null; }));
@@ -64,6 +72,13 @@ function cite(c, f) {
 }
 const closeOnMobile = () => { const m = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 39.99em)').matches; if (m && window.__asstClose) window.__asstClose(); };
 
+/** Lane D: the button under a plan card: saves the system, its documents and the timeline note into the shared project store when pressed. */
+function planSaveButton(commit) {
+  const msg = h('span', { role: 'status' }), btn = h('button', { class: 'chip', type: 'button' }, 'Add the plan to my project');
+  btn.addEventListener('click', async () => { try { const [{ createProjectStore: c, sharedStorage: s }, { commitPlan: p }] = await Promise.all([import('./projectstore.js'), import('../brain/plansave.js')]); msg.textContent = p(c(s(), null, { origin: 'portal' }), commit).ok ? ' Saved to your project.' : ' Could not save the plan.'; } catch { msg.textContent = ' Could not save the plan.'; } });
+  return h('p', null, btn, msg);
+}
+
 /** One card -> DOM. The same fields feed schema.cardText(), which the tests read. */
 export function renderCard(c, cfg, send) {
   const kids = [];
@@ -79,6 +94,7 @@ export function renderCard(c, cfg, send) {
     kids.push(renderHandoff(blk));
   }
   if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, (c.choices || c.followups.map((f) => ({ label: f, value: f }))).map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
+  if (c.type === 'plan' && c.plan && c.plan.commit) kids.push(planSaveButton(c.plan.commit)); // lane D: "Add the plan to my project", through the shared project store
   if (c.chip) kids.push(chipEl(c.status, c.chip));
   const evid = c.facts.filter((f) => f.sentence);
   if (evid.length) kids.push(h('details', { class: 'hik' }, h('summary', null, 'How I know'), h('ul', null, evid.map((f) => h('li', null,

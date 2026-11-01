@@ -4,6 +4,7 @@
 //   WRONG          a confident answer about the wrong product, a product outside the documented fit, an answer to something the data cannot answer, or a wrong verdict
 //   UNHANDLED      an answerable question that got no answer (stock fallback, a clarifying question only, or an overview that does not contain the asked fact)
 import { cardText } from '../../../public/demo/sika-210c0c/assets/brain/schema.js';
+import { judge2d } from './wave2d_judge.mjs'; // lane D
 const norm = (s) => String(s || '').toLowerCase().replace(/[®™©]/g, '').replace(/\s+/g, ' ').trim();
 const GEN = (cls, why) => ({ cls, why });
 export function makeSelectors(P) {
@@ -14,6 +15,7 @@ export function makeSelectors(P) {
 }
 const isUnknown = (c) => c.type === 'unknown' || c.status === 'UNKNOWN';
 export function judge(item, a, sel) {
+  if (item.type === 'w2d') return judge2d(item, a); // lane D: plans, rules, conflicts, timelines, traps
   const cards = a.cards || []; const exp = item.exp || {};
   const real = cards.filter((c) => !isUnknown(c) && c.type !== 'choose');
   const prodCards = real.filter((c) => c.product && !/^ruled out/i.test(c.title));

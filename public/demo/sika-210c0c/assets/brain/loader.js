@@ -8,6 +8,7 @@ export function createLoader({ base = 'data/brain/', fetchJson, seed = {} }) {
     product: (id) => get('p/' + encodeURIComponent(id) + '.json'),
     category: (cid) => get('cat/' + String(cid).replace(/\//g, '__') + '.json'),
     spec: (id) => fetchJson('data/specs/' + encodeURIComponent(id) + '.json'),
+    ruleShard: (name) => get('rules/' + name + '.json'), // lane D: rule shards (sys, tile, idx, o0..o5), fetched when a plan or rule question is asked, never preloaded
     loaded: () => [...cache.keys()],
   };
 }
