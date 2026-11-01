@@ -26,12 +26,13 @@ export function packshot(img, catId, name, big = false) {
   const alt = img && img.alt ? img.alt : name;
   const i = h('img', { class: 'packshot' + (img.stock ? ' packshot--stock' : ''), src: big ? img.src2x : img.src, width: String(img.width), height: String(img.height), alt, loading: big ? 'eager' : 'lazy', decoding: 'async' });
   if (!big) i.setAttribute('srcset', img.src + ' 480w, ' + img.src2x + ' 960w'), i.setAttribute('sizes', '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw');
+  else if (img.src3x) i.setAttribute('srcset', img.src2x + ' 960w, ' + img.src3x + ' 1600w'), i.setAttribute('sizes', '(min-width:64em) 50vw, 100vw'); // HD stock photo on the product page header
   i.addEventListener('error', () => { const tag = i.parentNode && i.parentNode.querySelector('.stock-tag'); if (tag) tag.remove(); i.replaceWith(placeholder(catId, name)); }, { once: true });
   return i;
 }
 
 /** Stock photo record for a category slug (the owner file of the photo, see data/cats.lite.json im). Illustrative, never a product picture. */
-export const stockOf = (slug, alt) => ({ src: `assets/img/s/${slug}-480.webp`, src2x: `assets/img/s/${slug}-960.webp`, width: 480, height: 320, alt, stock: true });
+export const stockOf = (slug, alt) => ({ src: `assets/img/s/${slug}-480.webp`, src2x: `assets/img/s/${slug}-960.webp`, src3x: `assets/img/s/${slug}-1600.webp`, width: 480, height: 320, alt, stock: true });
 /** Slug of a category's photo: the lite file carries it as im, the full categories file as image.src. */
 export const catSlug = (c) => (c && (c.im || (c.image && (/img\/s\/(.+)-480\.webp$/.exec(c.image.src) || [])[1]))) || null;
 export const STOCK_NOTE = 'Illustrative photo, not the product';
@@ -88,7 +89,7 @@ export function categoryCard(c, dv) {
 /** One tile of the home photo mosaic (spec from mosaic.js). The credit text is filled in once the full categories file has arrived. */
 export function mosaicTile(sp, catId) {
   const offline = typeof navigator !== 'undefined' && navigator.onLine === false; const i = sp.img;
-  const media = offline ? placeholder(sp.id, sp.name) : h('img', { class: 'mosaic-img', src: i.src, srcset: `${i.src} 480w, ${i.src2x} 960w`, sizes: '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw', width: String(i.width), height: String(i.height), alt: i.alt, loading: i.loading, decoding: 'async' });
+  const media = offline ? placeholder(sp.id, sp.name) : h('img', { class: 'mosaic-img', src: i.src, srcset: i.src3x ? `${i.src} 480w, ${i.src2x} 960w, ${i.src3x} 1600w` : `${i.src} 480w, ${i.src2x} 960w`, sizes: '(min-width:64em) 25vw, (min-width:40em) 50vw, 100vw', width: String(i.width), height: String(i.height), alt: i.alt, loading: i.loading, decoding: 'async' });
   if (!offline) media.addEventListener('error', () => media.replaceWith(placeholder(sp.id, sp.name)), { once: true });
   return h('a', { class: 'mosaic-tile' + (sp.root ? ' mosaic-tile--root' : ''), href: sp.href, title: sp.title, 'data-cat': sp.id },
     h('span', { class: 'mosaic-media' }, media, h('span', { class: 'mosaic-tag' }, sp.tag)),

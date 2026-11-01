@@ -18,7 +18,7 @@ export function mosaicSpec(c, cr) {
   return {
     id: c.id, href: '#/category/' + c.id, name: c.name, root: c.level === 1,
     count: `${nf.format(c.productCount)} product${c.productCount === 1 ? '' : 's'}`,
-    img: { src: `assets/img/s/${slug}-480.webp`, src2x: `assets/img/s/${slug}-960.webp`, width: 480, height: 320, alt: `Illustrative photo for ${c.name}`, loading: 'lazy' },
+    img: { src: `assets/img/s/${slug}-480.webp`, src2x: `assets/img/s/${slug}-960.webp`, src3x: `assets/img/s/${slug}-1600.webp`, width: 480, height: 320, alt: `Illustrative photo for ${c.name}`, loading: 'lazy' },
     tag: 'Illustrative photo', credit,
     title: `${c.name}. Illustrative photo, not a product. ` + (credit || 'Photo credit: shown on the category page.'),
   };
