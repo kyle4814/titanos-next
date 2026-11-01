@@ -225,7 +225,7 @@ export function createBrain({ load, config, loadRules } = {}) {
   }
   // wave 3: a very thin ask ("tile", "need glue", "floor is cracked", "wall is damp", "something for outside") names no product and no kind of product, and every content word is a broad one:
   // ask the job, never show a product list or a page picked by a stray word. A specific word (grinding aid, dusty, bleeding, a product code) is never thin.
-  const VAGUE_OK = /^(outside|inside|outdoors?|indoors?|damp|wet|old|new|leak\w*|crack\w*|wall|walls|floor|floors|roof|put|use|fix|top|paint)$/;
+  const VAGUE_OK = /^(something|anything|stuff|outside|inside|outdoors?|indoors?|damp|wet|old|new|leak\w*|crack\w*|wall|walls|floor|floors|roof|put|use|fix|top|paint)$/;
   function thinAsk(n0) {
     if (n0.split(' ').filter(Boolean).length > 7 || /\b(sika|davco|lanko|sikatile|sikafloor|sikaflex|sikalastic|sikadur|sikagard)\b/.test(n0) || CONDITION_WORDS_RX.test(n0)) return null;
     if (/^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n0)) return null;
@@ -496,7 +496,8 @@ export function createBrain({ load, config, loadRules } = {}) {
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
     // wave 3: a descriptive ask with no product named shows one kind of product: the category that holds most of the matching weight, never a mix of unrelated groups
-    if (!pis.length && list.length > 1) { const w = new Map(); for (const x of list.slice(0, 12)) { const k = core.P[x.pi].c.split('/').slice(0, 2).join('/'); w.set(k, (w.get(k) || 0) + x.score); } const win = [...w].sort((a, b) => b[1] - a[1])[0][0]; const same = list.filter((x) => core.P[x.pi].c.split('/').slice(0, 2).join('/') === win); if (same.length && same[0] !== list[0]) trace.push('category:' + win); if (same.length) list = same; }
+    if (!pis.length && list.length > 1 && list[0].score < list[1].score * 1.4) { const w = new Map(); for (const x of list.slice(0, 12)) { const k = core.P[x.pi].c.split('/').slice(0, 2).join('/'); w.set(k, (w.get(k) || 0) + x.score); } for (const k of [...w.keys()]) { if (/\banchor\w*/.test(n0) && /grouts-anchoring/.test(k)) w.set(k, w.get(k) * 4); if (/\b(crack\w*|hairline)\b/.test(n0) && !/\b(structural|strengthen\w*|carbon|beam|plate|frp)\b/.test(n0) && /structural-strengthening/.test(k)) w.set(k, w.get(k) * 0.2); }
+ const win = [...w].sort((a, b) => b[1] - a[1])[0][0]; const same = list.filter((x) => core.P[x.pi].c.split('/').slice(0, 2).join('/') === win); if (same.length && same[0] !== list[0]) trace.push('category:' + win); if (same.length) list = same; }
     const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.75);
     const qset = new Set([...qm.keys()].filter((k) => qm.get(k) >= 1));
     const cards = [];
