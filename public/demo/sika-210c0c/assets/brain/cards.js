@@ -16,6 +16,12 @@ export function unknown(question, sh, reason, missing = [], extra = {}) {
     links: sh ? dsLink(sh).concat([{ label: 'Product page', url: sh.u }]) : [], handoff: { question, product: sh ? sh.n : '', reason, missing }, followups: extra.followups || [] });
 }
 
+/** A data sheet (PDF) fact read from the numbers shard, quoted as the sheet prints it, with the sheet link and page. */
+export function numInfoCard(sh, what, recs, facts0) {
+  const facts = facts0.map((f) => fact(f));
+  return card({ type: 'info', title: `${what.charAt(0).toUpperCase() + what.slice(1)}: ${sh.n}`, product: prod(sh), headline: `The ${what} for ${sh.n}, quoted as its data sheet prints it.`, lines: recs.map((r, i) => ({ label: r.l, text: facts[i].sentence.replace(/^[^:]*: /, '') })), facts, source: facts[0], chip: CHIPS.DATASHEET,
+    links: [{ label: 'Open the data sheet', url: facts[0].source_url }, { label: 'Open the product page', url: sh.u }], followups: [`Data sheet for ${sh.n}`, `Coverage of ${sh.n}`] });
+}
 export function productCard(sh, sentence, why, withPack = false) {
   const f = fact({ source_url: sh.u, page: null, sentence: sentence || sh.d.t || sh.n, doc_type: 'WEB' });
   return card({ type: 'product', title: sh.n, product: prod(sh), headline: sh.d.t || sh.d.s || '', lines: [why ? { label: 'Why this one', text: why } : null, withPack && sh.d.pk ? { label: 'Packaging', text: sh.d.pk } : null].filter(Boolean),
