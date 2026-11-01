@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import { cardText, validateCard } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 import { numbersIn } from '../../public/demo/sika-210c0c/assets/brain/text.js';
+import { planCheck } from '../sika-brain2d/plan_props.mjs'; // lane D: plan cards carry recomputable derived numbers
 const LANES = process.env.SIKA_LANES || '/home/tech2/klinge-kernel/state/sika/lanes';
 let LR = null;
 const laneFacts = () => { if (LR) return LR; const r = JSON.parse(fs.readFileSync(`${LANES}/knowledge/rates.json`, 'utf8')).products; LR = new Map(); for (const p of Object.values(r)) for (const fs_ of Object.values(p.facts)) for (const f of fs_) LR.set(f.id, f); return LR; };
@@ -76,6 +77,7 @@ export function checkAnswer(question, ans) {
         for (const s of packsOf(id.split(':')[0])) { allowed.add(String(Number(s.amount))); if (s.unit === q.unit) allowed.add(String(Math.ceil(q.hi / s.amount - 1e-9))); }
       }
     }
+    if (c.type === 'plan') { const pc = planCheck(c, question); for (const n of pc.allowed) allowed.add(n); for (const b of pc.bad) bad.push(b); } // lane D
     for (const n of numbersIn(text)) if (!allowed.has(n)) bad.push(['P1', `${n} in "${text.replace(/\s+/g, ' ').slice(0, 120)}"`]);
     // P5 over the words that are ours (everything except the quoted sentences)
     let ours = [c.title, c.headline, c.handoff && c.handoff.reason, ...(c.lines || []).filter((l) => !l.fact).map((l) => l.label + ' ' + l.text)].filter(Boolean).join(' ');

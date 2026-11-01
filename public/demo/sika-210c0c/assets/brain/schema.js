@@ -6,7 +6,8 @@
 //   sentence is '' and the card says so) or SIGNED (reserved for a rep-approved value; NO code path emits it, the
 //   UI never shows that word).
 // CARD   { schema, type, status, title, product, headline, lines, facts, source, chip, links, table, calc, followups, handoff }
-//   type    one of CARD_TYPES
+//   type    one of CARD_TYPES ('plan' is lane D: an ordered step table with the published waits, the conditions that void the plan, and card.plan, the payload
+//           the tests recompute and "Add the plan to my project" saves; see cards.js planCard)
 //   status  PUBLISHED | UNKNOWN | SIGNED  (UNKNOWN means: not in the published documentation; no number is shown)
 //   product { id, name, url } or null
 //   headline  one plain sentence (the answer itself)
@@ -23,7 +24,7 @@
 import { clampText } from './text.js';
 export const CARD_SCHEMA = 'sika-brain-card@1';
 export const ANSWER_SCHEMA = 'sika-brain-answer@1';
-export const CARD_TYPES = ['product', 'rate', 'document', 'safety', 'time', 'compatibility', 'spec', 'system', 'calculation', 'comparison', 'choose', 'unknown', 'rule', 'info', 'advice'];
+export const CARD_TYPES = ['product', 'rate', 'document', 'safety', 'time', 'compatibility', 'spec', 'system', 'calculation', 'comparison', 'choose', 'unknown', 'rule', 'info', 'advice', 'plan'];
 export const STATUSES = ['PUBLISHED', 'UNKNOWN', 'SIGNED'];
 export const CHIPS = {
   PUBLISHED: 'From the published documentation',

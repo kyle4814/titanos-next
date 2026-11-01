@@ -126,6 +126,7 @@ for (const q of ['what is the weather today', 'is mapei better than davco', 'who
   t(`off-topic set (${oos.length} questions): no published answer`, leaks.length === 0, leaks.join(' | ')); }
 // ---- the bank gate
 const bank = ['bank.json', 'blind2.json', 'extra.json', 'wild.json', 'wild2.json', 'jobcompare.json', 'wave2b.json', 'dosage.json'].flatMap((f) => JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', f), 'utf8')));
+bank.push(...JSON.parse(fs.readFileSync(path.join(HERE, 'coverage', 'wave2d.json'), 'utf8'))); // lane D: plans, rules, conflicts, timelines, standards, traps (judged by coverage/wave2d_judge.mjs)
 const sel = makeSelectors(b.core().P); let wrong = [], prop = 0, answered = 0, honest = 0;
 for (const it of bank) { const a = await b.ask(it.q, null); const j = judge(it, a, sel); if (j.cls === 'WRONG') wrong.push(it.id + ' ' + it.q + ' :: ' + j.why); if (j.cls === 'ANSWERED') answered++; if (j.cls === 'HONEST-NO-DATA') honest++; { const pb = checkAnswer(it.q, a); prop += pb.length; if (pb.length) console.log('   P', it.q, JSON.stringify(pb[0]).slice(0, 200)); } }
 t(`bank (${bank.length} questions): at most 1 judged WRONG`, wrong.length <= 1, wrong.join(' | '));

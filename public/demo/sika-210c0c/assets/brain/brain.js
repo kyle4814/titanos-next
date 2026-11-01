@@ -63,13 +63,17 @@ const TIME_KIND = [
 ];
 
 // ---------------------------------------------------------------- the brain
-export function createBrain({ load, config } = {}) {
+export function createBrain({ load, config, loadRules } = {}) {
   let core = null, vocab = null, aliasList = null, rulesList = null, ruleTok = null;
   const pIndex = new Map();
   // phone typos in words the assistant itself understands ("coevrage", "sutomotive"): corrected against its own vocabulary, never against product names
   let LEXB = null;
   const lexB = () => LEXB || (LEXB = [...new Set([...advisor.words(), ...know.words(), ...attrWords(), ...Object.values(RX).flatMap((r) => r.source.match(/[a-z]{5,}/g) || [])])].filter((w) => !/^(about|which|their|these)$/.test(w)));
   const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x]);
+  // lane D: the plan and rule layer. rules.js is NOT bundled: `loadRules` (browser: a module script injected the first time a question looks like a job with several
+  // constraints; node tests: preloaded by the harness) returns { createRules }. A missing module just means the stack below answers, as before.
+  let rulesP = null;
+  const rulesLayer = () => rulesP || (rulesP = Promise.resolve().then(() => (loadRules ? loadRules() : globalThis.__sikaRules)).then((m) => (m && m.createRules ? m.createRules({ load }) : null)).catch(() => null));
   const know = createKnow({ load }), advisor = createAdvisor({ load, isWord: (w) => !!(core && core.post[stem(w)]) });
 
   async function boot() {
@@ -233,6 +237,15 @@ export function createBrain({ load, config } = {}) {
     const rule = await matchRule(q);
     trace.push('rules:' + (rule ? 'hit' : 'miss'));
     if (rule) return out('rule', 'rules', [C.ruleCard(rule)]);
+    // ---- lane D (rules.js): a job with several constraints gets a cited step plan; a rule question about a named product gets its published rule.
+    // One small section: it returns null for everything else, so the stack below is unchanged.
+    { const qn = normalise(q); const mm = findExact(qn);
+      const fx = parseFacets(qn); // gate: the plan engine is fetched only for a question that names two of: a tile, a surface, a place, a product
+      if ((state && state.plan) || (fx.tile_type.length ? 1 : 0) + (fx.substrate.length ? 1 : 0) + (fx.environment.length ? 1 : 0) + (mm.length ? 1 : 0) + (/\b(tiles?|tiling|engineered|hallway|garage|vinyl|laminate|carpet|sauna|kiln)\b/.test(qn) ? 1 : 0) > 1) {
+        const pid = [...new Set(mm.filter((m) => m.pis.length === 1).map((m) => core.P[m.pis[0]].id))];
+        let text = q; if (mm.length) { const w = qn.split(' '); for (const m of mm) text = text.replace(new RegExp(w.slice(m.i, m.i + m.k).join('[^a-z0-9]+'), 'i'), ' '); } // a product name is not a constraint
+        const rl = await rulesLayer(); const rr = rl && await rl.handle(q, { state, productIds: pid, hasProduct: mm.length > 0, text });
+        if (rr) { trace.push('rules:' + rr.intent); return out(rr.intent, 'rules', rr.cards, { state: rr.state }); } } }
     const slang0 = applySlang(normalise(q));
     const slang = slang0; const n0 = correctWords(slang.text); if (n0 !== slang.text) trace.push('read:' + n0); if (slang.notes.length) trace.push('slang:' + slang.notes.map((x) => x.from + '>' + x.to).join(','));
     if (core.aka) { const hit = Object.entries(core.aka).find(([k]) => (' ' + n0 + ' ').includes(' ' + k + ' ')); if (hit) akaNote = { id: core.P[hit[1].pi].id, s: hit[1].s }; }
