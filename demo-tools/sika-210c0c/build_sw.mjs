@@ -21,7 +21,7 @@ function walk(dir, rel = '') {
 }
 
 // wave 2: the data quality page (its JSON is network only, like data/gift/) is not needed offline, so its two files stay out of the 8 MB cache
-const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css|fonts\/barlow-400-i\.woff2)$/; // wave 3: the italic face is never used by the portal CSS (no italic rule), so it loads on demand and frees 24 KB under the 8 MB precache bar
+const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css)$/;
 
 export function listing() {
   const files = ['index.html'];
