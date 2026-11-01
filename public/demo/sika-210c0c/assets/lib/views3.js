@@ -84,7 +84,7 @@ export async function aboutView(ctx) {
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'About this demo' }]),
     h('div', { class: 'page-head' }, h('h1', null, 'About this demo')),
     h('div', { class: 'prose', style: 'max-width:52rem' },
-      h('p', { class: 'lead' }, `A working preview of a customer product portal for ${d.preparedFor}, built by ${d.by} in ${d.builtInHours} hours on ${d.builtOn}.`),
+      h('p', { class: 'lead' }, `A working preview of a customer product portal for ${d.preparedFor}, built by ${d.by}.`),
       h('div', { class: 'notice' }, icon('info'), h('span', null, d.notice)),
       h('h2', { class: 'h4' }, 'What it is'),
       h('p', null, 'A product finder, product pages, a documents library, a guides index, a my-projects list with a quote request, and a product advisor, all in the look of the public website so you can judge how it would sit inside it.'),
