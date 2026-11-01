@@ -651,3 +651,5 @@ main:focus{outline:none;box-shadow:none}
   .asst-sugg{padding-block:6px}
   .assistant:has(.msg--user) .asst-note,.assistant:has(.msg--user) .asst-sugg,.assistant:has(.msg--user) .asst-voice small{display:none}
 }
+/* Lock the light Sika palette: phone browsers with forced dark mode (Samsung Internet, Chrome auto-dark) otherwise turn the yellow brand bar brown (Kyle 2026-11-02 screenshot). */
+:root{color-scheme:only light}
