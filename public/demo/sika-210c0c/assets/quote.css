@@ -66,14 +66,5 @@
   #qr-print .qr-d-tight{font-size:7pt;line-height:1.15}
   #qr-print .qr-d-tight .qr-table{font-size:6.5pt}
   #qr-print .qr-d-tight .qr-table th,#qr-print .qr-d-tight .qr-table td{padding:1pt 3pt 1pt 0}
-  #qr-print .qr-d-tight .qr-table td>.qr-sub,#qr-print .qr-d-micro .qr-table td>.qr-sub{display:inline;margin-left:3pt}
-  #qr-print .qr-d-micro{font-size:5.5pt;line-height:1.05}
-  #qr-print .qr-d-micro .qr-title{font-size:12pt}
-  #qr-print .qr-d-micro .qr-head{padding:2pt 8pt;margin-bottom:2pt}
-  #qr-print .qr-d-micro .qr-banner,#qr-print .qr-d-micro .qr-est{padding:1pt 4pt;margin:2pt 0}
-  #qr-print .qr-d-micro .qr-h{margin:3pt 0 1pt}
-  #qr-print .qr-d-micro .qr-table{font-size:5.2pt}
-  #qr-print .qr-d-micro .qr-table th,#qr-print .qr-d-micro .qr-table td{padding:.2pt 2pt .2pt 0}
-  #qr-print .qr-d-micro .qr-two{gap:6pt}
-  #qr-print .qr-d-micro .qr-foot{margin:1pt 0 0}
+  #qr-print .qr-d-tight .qr-table td>.qr-sub{display:inline;margin-left:3pt}
 }

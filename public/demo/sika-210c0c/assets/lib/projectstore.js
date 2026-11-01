@@ -95,6 +95,7 @@ export function cleanQuote(q) {
     needed: { iso: /^\d{4}-\d{2}-\d{2}$/.test(clip(nd.iso, 10)) ? clip(nd.iso, 10) : '', text: clip(nd.text, 60) },
     delivery: ['delivery', 'pickup', 'unsure'].includes(q.delivery) ? q.delivery : '', role: clip(q.role, 60), company: clip(q.company, 80),
     contact: { name: clip(c.name, 80), email: clip(c.email, 120), phone: clip(c.phone, 30), best: clip(c.best, 60) }, notes: clip(q.notes, LIMITS.text),
+    calcs: (Array.isArray(q.calcs) ? q.calcs : []).slice(0, 10).map((k) => ({ id: clip(k && k.id, 60), title: clip(k && k.title, 200), answer: clip(k && k.answer, 300), formula: clip(k && k.formula, 400), source: clip(k && k.source, 400), url: clip(k && k.url, 400), estimate: clip(k && k.estimate, 200) })).filter((k) => k.id && k.answer),
     docs: (Array.isArray(q.docs) ? q.docs : []).slice(0, 40).map((d) => ({ product: clip(d && d.product, 160), kind: clip(d && d.kind, 40), title: clip(d && d.title, 160), url: clip(d && d.url, 400) })).filter((d) => d.url),
   };
 }

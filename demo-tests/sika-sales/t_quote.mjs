@@ -137,7 +137,7 @@ const DOCS = [{ product: 'Davco Easy Grout', kind: 'Data sheet', title: 'Easy Gr
   check('sheet: title, banner, estimate sentence', sm.title === 'Quote request' && sm.banner === Q.DEMO_BANNER && sm.estimate === ESTIMATE_LINE);
   check('sheet: every quantity has its cite or none', sm.lines[0].cite && sm.lines[0].cite.url && sm.lines[1].cite === null);
   const mk = (n) => Q.sheetModel(Q.buildRecord({ project: { name: 'x', items: Array.from({ length: n }, (_, i) => ({ id: 'p' + i, name: 'P' + i, qty: 1, unit: 'pack' })) }, answers: ANSWERS, now: NOW, docs: DOCS }));
-  check('sheet: density steps with the number of lines', mk(3).density === 'normal' && mk(5).density === 'normal' && mk(8).density === 'dense' && mk(12).density === 'tight' && mk(25).density === 'micro');
+  check('sheet: density steps with the number of lines', mk(3).density === 'normal' && mk(5).density === 'normal' && mk(8).density === 'dense' && mk(12).density === 'tight' && mk(19).density === 'long' && mk(25).density === 'long' && mk(30).docs.length <= 12);
 }
 
 // ---- the whole conversation through the assistant
@@ -194,5 +194,24 @@ const DOCS = [{ product: 'Davco Easy Grout', kind: 'Data sheet', title: 'Easy Gr
   const { route } = await import('../../public/demo/sika-210c0c/assets/actions/parse.js');
   for (const t of ['how much Davco Grey One Pot adhesive for 20 m2', 'what is the open time of SikaTile-400', 'can I use it over old tiles', 'where can I buy Sikaflex', 'is the quote rate published', 'show my projects', 'add 4 bags of Davco Easy Grout', 'compare SikaTile-400 EVO PRO vs SikaTile-410 Secure Set']) check(`not a quote: "${t}"`, !route(t) || route(t).action !== 'quote', JSON.stringify(route(t)));
   for (const t of ['get me a quote', 'can I get a quote for this', 'I need a quote', 'request a quote', 'send this to Sika', 'send my project to sika', 'please prepare a quote request', '/quote', 'give me a quotation']) check(`a quote: "${t}"`, route(t) && route(t).action === 'quote', JSON.stringify(route(t)));
+}
+
+// ---- calculation -> quote: the pack reads projectStore.calculations() and marks each one used on confirm
+{
+  const A = makeAssistant({ now: () => NOW });
+  await ask(A, 'add 4 bags of Davco Easy Grout');
+  const added = A.memory.addCalculation({ kind: 'arithmetic', product: 'none', title: 'Floor area', question: '2.4 x 1.8', inputs: { expr: '2.4 x 1.8' }, normalised: {}, result: { quantity: 4.32, unit: 'm2' }, answer: '2.4 x 1.8 = 4.32 m2', formula: '2.4 x 1.8', citation: { text: 'worked from the numbers you typed', url: '', kind: 'worked' }, estimate: 'Estimate only.' });
+  check('a calculation is stored first', added.ok === true && A.memory.calculations().length === 1);
+  const id = A.memory.calculations()[0].id;
+  let r = await ask(A, '/quote'); for (const t of ['yes', '4000', 'flexible', 'delivery to site', 'builder', 'Acme Builders', 'Sam Smith', 'sam@acme.com.au', 'skip', 'skip', 'skip', 'yes', 'yes']) r = await ask(A, t);
+  const rec = A.memory.quotes()[0];
+  check('the quote record carries the stored calculation with its working', !!rec && rec.calcs.length === 1 && rec.calcs[0].id === id && rec.calcs[0].answer === '2.4 x 1.8 = 4.32 m2' && rec.calcs[0].source === 'worked from the numbers you typed');
+  check('the copied request text lists the calculation', r.card.copyText.includes('Calculations behind the quantities') && r.card.copyText.includes('2.4 x 1.8 = 4.32 m2'));
+  const used = A.memory.getCalculation(id).usedIn;
+  check('markCalculationUsed was called with the quote reference', used.some((u) => u.type === 'quote' && u.ref === rec.ref), JSON.stringify(used));
+  check('the printable sheet model carries the calculation', Q.sheetModel(rec).calcs.length === 1);
+  const A2 = makeAssistant({ now: () => NOW }); await ask(A2, 'add 4 bags of Davco Easy Grout');
+  let r2 = await ask(A2, '/quote'); for (const t of ['yes', '4000', 'flexible', 'delivery to site', 'builder', 'Acme Builders', 'Sam Smith', 'sam@acme.com.au', 'skip', 'skip', 'skip', 'yes', 'yes']) r2 = await ask(A2, t);
+  check('with no stored calculation the request has none and the text has no calculation block', A2.memory.quotes()[0].calcs.length === 0 && !r2.card.copyText.includes('Calculations behind'));
 }
 summary('t_quote');

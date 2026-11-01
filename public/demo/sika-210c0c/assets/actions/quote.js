@@ -240,8 +240,10 @@ export function makeRef(now, seed, taken = []) {
 }
 
 const lineOf = (it) => `${it.qty} ${unitLabel(it.unit, it.qty)}${it.packs ? ' (' + it.packs + ')' : ''}`;
+/** One stored calculation (projectStore.calculations()) as the short, cited line the request carries. */
+export const calcLine = (c) => ({ id: c.id, title: c.title || c.productName || c.kind, answer: c.answer || c.summary || '', formula: c.formula || '', source: c.citation ? c.citation.text : '', url: c.citation ? c.citation.url : '', estimate: c.estimate || '' });
 /** The saved record from a project, the answers, the time and the document links. */
-export function buildRecord({ project, answers, now = new Date(), taken = [], docs = [], supersedes = '' }) {
+export function buildRecord({ project, answers, now = new Date(), taken = [], docs = [], supersedes = '', calcs = [] }) {
   const items = project.items || []; const a = answers || {};
   const created = now.toISOString(); const sig = sigOf(items);
   const ref = makeRef(now, `${created}|${sig}|${a.email || ''}|${project.name}`, taken);
@@ -249,7 +251,7 @@ export function buildRecord({ project, answers, now = new Date(), taken = [], do
     ref, status: 'prepared', created, project: project.name, sig, supersedes,
     lines: items.map((i) => ({ id: i.id, name: i.name || i.id, qty: i.qty, unit: i.unit, packs: i.packs, need: i.need, basis: i.basis, url: i.url, phrase: i.phrase })),
     site: a.site || {}, needed: a.needed || {}, delivery: a.delivery || '', role: a.role || '', company: a.company || '',
-    contact: { name: a.name, email: a.email, phone: a.phone, best: a.best }, notes: a.notes || '', docs,
+    contact: { name: a.name, email: a.email, phone: a.phone, best: a.best }, notes: a.notes || '', docs, calcs: (calcs || []).map(calcLine),
   });
   return rec;
 }
@@ -274,6 +276,7 @@ export function requestText(rec, { compact = false } = {}) {
   L.push(`- Sender: ${rec.role || 'not given'}${rec.company ? ', ' + rec.company : ''}`);
   L.push('', 'Contact:', `- Name: ${rec.contact.name}`, `- Email: ${rec.contact.email}`, `- Phone: ${rec.contact.phone || 'not given'}`, `- Best time: ${rec.contact.best || 'not given'}`);
   if (rec.notes) L.push('', `Notes: ${rec.notes}`);
+  if (!compact && (rec.calcs || []).length) { L.push('', 'Calculations behind the quantities (estimates, with their working):'); rec.calcs.forEach((k, i) => { L.push(`${i + 1}. ${k.title}: ${k.answer}`); if (k.formula) L.push(`   Working: ${k.formula}`); if (k.source) L.push(`   Source: ${k.source}${k.url ? ' ' + k.url : ''}`); }); }
   if (!compact && rec.docs.length) { L.push('', 'Data sheets and safety data sheets for these products:'); rec.docs.forEach((d) => L.push(`- ${d.product} | ${d.kind} | ${d.title}`, `  ${d.url}`)); }
   L.push('', 'Please reply with a quote. No prices were requested or shown by the advisor.', '', ESTIMATE_LINE);
   return plain(L.join('\n')).replace(/ +\n/g, '\n') + '\n';
@@ -299,13 +302,14 @@ export function buildMailto(routes, rec, { max = MAILTO_MAX } = {}) {
 /* ------------------------------------------------------------------ the printable sheet model, the demand signal */
 export function sheetModel(rec) {
   // the page holds more lines by setting them smaller; the documents list gives way first (every link stays in the copied request text)
-  const n = rec.lines.length; const density = n <= 5 ? 'normal' : n <= 10 ? 'dense' : n <= 18 ? 'tight' : 'micro';
-  const docsShown = rec.docs.slice(0, { normal: 12, dense: 4, tight: 0, micro: 0 }[density]);
+  const n = rec.lines.length; const density = n <= 5 ? 'normal' : n <= 10 ? 'dense' : n <= 18 ? 'tight' : 'long'; // 19 or more lines: normal type, the sheet may run to a second page (no more squeezing to 5 pt)
+  const docsShown = rec.docs.slice(0, { normal: 12, dense: 4, tight: 0, long: 12 }[density]);
   return {
     ref: rec.ref, title: 'Quote request', project: rec.project, prepared: (rec.created || '').slice(0, 10), density, banner: DEMO_BANNER, estimate: ESTIMATE_LINE,
     lines: rec.lines.map((l) => ({ name: l.name, qty: lineOf(l), need: l.need ? `about ${l.need}` : '', basis: l.basis, cite: l.phrase ? { text: l.phrase, url: l.url } : null })),
     job: [['Site', rec.site.text || 'Not given'], ['Needed by', rec.needed.text || 'Not given'], ['Supply', DELIVERY_TEXT[rec.delivery] || 'Not given'], ['Sender', (rec.role || 'Not given') + (rec.company ? ', ' + rec.company : '')]],
     contact: [['Name', rec.contact.name], ['Email', rec.contact.email], ['Phone', rec.contact.phone || 'Not given'], ['Best time', rec.contact.best || 'Not given']],
+    calcs: (rec.calcs || []).map((k) => ({ title: k.title, answer: k.answer, formula: k.formula, source: k.source, url: k.url })),
     notes: rec.notes, docs: docsShown, docsMore: rec.docs.length - docsShown.length,
   };
 }
@@ -451,10 +455,12 @@ async function finish(ctx, project, now) {
   const jp = await buildJobPack(project, async (id) => { const rec = await data.product(id); return (rec && rec.docs) || []; }, { nameOf: nameOfItem });
   const docs = jp.docs.map((d) => ({ product: d.product, kind: d.kind, title: d.title, url: d.url }));
   const prior = memory.quotes(); const sup = prior.find((x) => isStale(x, project.items));
-  const rec = buildRecord({ project, answers: { ...a, name: a.name, email: a.email, phone: a.phone, best: a.best, notes: a.notes }, now, taken: prior.map((x) => x.ref), docs, supersedes: sup ? sup.ref : '' });
+  const calcs = typeof memory.calculations === 'function' ? memory.calculations().slice(0, 10) : []; // the calculator's stored results (projectStore.calculations()), newest first
+  const rec = buildRecord({ project, answers: { ...a, name: a.name, email: a.email, phone: a.phone, best: a.best, notes: a.notes }, now, taken: prior.map((x) => x.ref), docs, calcs, supersedes: sup ? sup.ref : '' });
   if (!rec) return infoCard('Could not prepare the request', ['Something in the answers was not readable, so nothing was prepared. Nothing was sent.']);
   const res = memory.addQuote(rec);
   if (!res.ok) return infoCard('Could not prepare the request', [res.error]);
+  if (typeof memory.markCalculationUsed === 'function') for (const k of calcs) memory.markCalculationUsed(k.id, { type: 'quote', ref: rec.ref });
   session.quote = null;
   const saved = memory.getQuote(rec.ref) || rec;
   const c = doneCard(saved, await loadRoutes(data), memory.currentProject());
