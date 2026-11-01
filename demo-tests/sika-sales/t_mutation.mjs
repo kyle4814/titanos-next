@@ -10,7 +10,7 @@ const SRC = path.join(HERE, '..', '..', 'public', 'demo', 'sika-210c0c', 'assets
 let tmp; try { tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'sales-mut-')); } catch { console.log('FAIL: could not make a temporary folder'); process.exit(1); }
 if (!tmp || !path.basename(tmp).startsWith('sales-mut-')) { console.log('FAIL: temporary folder not valid'); process.exit(1); }
 let passes = 0, fails = 0; const t = (n, ok, d = '') => { if (ok) passes++; else { fails++; console.log('FAIL ' + n + (d ? ' :: ' + d : '')); } };
-const copy = () => { const dst = fs.mkdtempSync(path.join(tmp, 'a-')); for (const f of ['actions', 'lib/projectstore.js', 'lib/finder/calc.js']) { const from = path.join(SRC, f), to = path.join(dst, f); fs.mkdirSync(path.dirname(to), { recursive: true }); fs.cpSync(from, to, { recursive: true }); } return dst; };
+const copy = () => { const dst = fs.mkdtempSync(path.join(tmp, 'a-')); for (const f of ['actions', 'lib/projectstore.js', 'lib/finder/calc.js', 'lib/finder/qty.js']) { const from = path.join(SRC, f), to = path.join(dst, f); fs.mkdirSync(path.dirname(to), { recursive: true }); fs.cpSync(from, to, { recursive: true }); } return dst; };
 const run = (test, dst) => spawnSync('node', ['--no-warnings', path.join(HERE, test)], { env: { ...process.env, QUOTE_ASSETS: dst }, encoding: 'utf8', timeout: 240000 });
 const mutate = (dst, file, from, to) => { const p = path.join(dst, file); const s = fs.readFileSync(p, 'utf8'); if (!s.includes(from)) throw new Error('mutation anchor missing: ' + from.slice(0, 50)); fs.writeFileSync(p, s.replace(from, to)); };
 const MUTS = [

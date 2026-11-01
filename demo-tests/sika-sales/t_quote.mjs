@@ -169,7 +169,7 @@ const DOCS = [{ product: 'Davco Easy Grout', kind: 'Data sheet', title: 'Easy Gr
   await ask(A, 'change quantity of Davco Easy Grout to 9 bags');
   r = await ask(A, '/quote show ' + rec.ref); check('a cart edit after the quote makes it out of date in the card', /out of date/.test(r.card.title) && r.card.quoteView.stale === true);
   r = await ask(A, '/quote log'); check('the log lists it as out of date', r.card.rows[0].label.includes('out of date') && !!r.card.quoteView.signal);
-  r = await ask(A, '/quote stockist 3000'); check('the stockist card links the published where-to-buy page and names no stockist', r.card.quoteView.links[0].url === R.whereToBuy.url && /do not list one/.test(r.card.notes.join(' ')) && r.card.rows.length === 0);
+  r = await ask(A, '/quote stockist 3000'); check('the stockist card links the published where-to-buy page and names no stockist', r.card.quoteView.links[0].url === R.whereToBuy.url && /do not list one/.test(r.card.notes.join(' ')) && r.card.rows.every((x) => x.value === R.whereToBuy.url)); // after the merge the shard holds the where-to-buy page itself as one row (a page, never a named stockist)
   r = await ask(A, 'talk to a Sika rep'); check('the rep card cites every route and admits no state offices are published', r.card.rows.length >= 5 && r.card.rows.every((x) => x.source && /^https:\/\/aus\.sika\.com\//.test(x.source.url)) && /no state office contacts/.test(r.card.notes.join(' ')));
   r = await ask(A, 'find a stockist near 4000'); check('natural stockist phrase routes to the stockist card', r.card.title === 'Find a stockist near 4000');
 }
