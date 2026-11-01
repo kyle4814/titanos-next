@@ -225,13 +225,13 @@ export function createBrain({ load, config, loadRules } = {}) {
   }
   // wave 3: a very thin ask ("tile", "need glue", "floor is cracked", "wall is damp", "something for outside") names no product and no kind of product, and every content word is a broad one:
   // ask the job, never show a product list or a page picked by a stray word. A specific word (grinding aid, dusty, bleeding, a product code) is never thin.
-  const VAGUE_OK = /^(something|anything|stuff|outside|inside|outdoors?|indoors?|damp|wet|old|new|leak\w*|crack\w*|wall|walls|floor|floors|roof|put|use|fix|top|paint)$/;
+  const VAGUE_OK = /^(someth|anyth|stuff|outsid|insid|outdoor|indoor|damp|wet|old|new|leak|crack|wall|floor|roof|put|use|fix|top|paint)\w*$/;
   function thinAsk(n0) {
     if (n0.split(' ').filter(Boolean).length > 7 || /\b(sika|davco|lanko|sikatile|sikafloor|sikaflex|sikalastic|sikadur|sikagard)\b/.test(n0) || CONDITION_WORDS_RX.test(n0)) return null;
     if (/^(how (do|can|should|would|to) (i|we|you)?|how to)\b/.test(n0)) return null;
     const cw = tokens(n0).filter((w) => !STOP.has(w) && !GENERIC.has(w) && w.length > 2);
     if (cw.length > 3 || !cw.every((w) => VAGUE_OK.test(w) || advisor.hasKind(w) || (core.post[spell(stem(w))] || core.post[spell(w)] || []).length >= 100)) return null;
-    return intentClarifier(n0, likelyKinds(n0)) || genericVague('something for ' + n0);
+    return intentClarifier(n0, likelyKinds(n0)) || genericVague(n0) || genericVague('something for ' + n0);
   }
   // ---- main entry
   async function askInner(question, state = null) {
@@ -496,6 +496,8 @@ export function createBrain({ load, config, loadRules } = {}) {
       list.sort((a, b) => b.score - a.score || a.pi - b.pi);
     }
     // wave 3: a descriptive ask with no product named shows one kind of product: the category that holds most of the matching weight, never a mix of unrelated groups
+    // wave 3 priors (published categories): fixing an existing crack is not an admixture job; sealing or priming a board before tiling is a primer or membrane job, never an adhesive
+    if (!pis.length) { const pri = []; if (/\b(crack\w*|hairline)\b/.test(n0) && !/\b(mix|admix\w*|new pour|batch|plant|fresh)\b/.test(n0)) pri.push((x) => !/^construction\/concrete\//.test(core.P[x.pi].c)); if (/\b(seal\w*|prim\w*|prepare|prep)\b.*\bbefore\b.*\btil/.test(n0)) pri.push((x) => /waterproofing|primers/.test(core.P[x.pi].c)); for (const f of pri) { const l2 = list.filter(f); if (l2.length) { list = l2; trace.push('prior'); } } }
     if (!pis.length && list.length > 1 && list[0].score < list[1].score * 1.4) { const w = new Map(); for (const x of list.slice(0, 12)) { const k = core.P[x.pi].c.split('/').slice(0, 2).join('/'); w.set(k, (w.get(k) || 0) + x.score); } for (const k of [...w.keys()]) { if (/\banchor\w*/.test(n0) && /grouts-anchoring/.test(k)) w.set(k, w.get(k) * 4); if (/\b(crack\w*|hairline)\b/.test(n0) && !/\b(structural|strengthen\w*|carbon|beam|plate|frp)\b/.test(n0) && /structural-strengthening/.test(k)) w.set(k, w.get(k) * 0.2); }
  const win = [...w].sort((a, b) => b[1] - a[1])[0][0]; const same = list.filter((x) => core.P[x.pi].c.split('/').slice(0, 2).join('/') === win); if (same.length && same[0] !== list[0]) trace.push('category:' + win); if (same.length) list = same; }
     const top = list.filter((x, i) => i < 3 && x.score >= list[0].score * 0.75);
