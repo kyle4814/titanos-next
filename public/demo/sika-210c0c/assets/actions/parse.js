@@ -17,6 +17,7 @@ export const COMMANDS = [
   ['/ask', 'ask', 'Ask the product advisor anything: /ask which primer for concrete'],
   ['/can', 'compat', 'Can I use it: /can Davco Grey One Pot adhesive go over old tiles'],
   ['/link', 'link', 'Check a document link: /link Davco Grey One Pot adhesive'],
+  ['/quote', 'quote', 'Prepare a quote request from my project: a few questions, one page, no prices, nothing ordered'],
   ['/handoff', 'handoff', 'Ask Technical Services with the context so far'],
   ['/save', 'save', 'Save the last result to the current project'],
   ['/projects', 'projects', 'My projects, notes and saved items (this browser only)'],
@@ -164,6 +165,7 @@ export function route(text) {
   }
   const t = raw;
   if (/^(?:help|what can you do|commands?|\?)$/i.test(t)) return { action: 'help', rest: '' };
+  const qr = routeQuote(t); if (qr) return qr;
   const cart = routeCart(t); if (cart) return cart;
   if (/\b(my projects?|show (?:my )?projects?|saved (?:items|systems))\b/i.test(t)) return { action: 'projects', rest: '' };
   if (/\b(my gaps|unanswered questions|questions you could ?n.t answer)\b/i.test(t)) return { action: 'gaps', rest: '' };
@@ -188,6 +190,14 @@ export function route(text) {
   return null;
 }
 
+
+// ---- sales engine (apply/w2-sales): a quote request from the project cart, the stockist route and the rep route. Explicit phrases only: a plain product question never lands here.
+function routeQuote(t) {
+  if (/\b(?:stockists?|distributors?|where to buy|suppliers?)\b/i.test(t) && /\b(?:find|near|nearest|closest|local|around|close to)\b/i.test(t) && !/\b(?:data sheet|sds|how much|how many)\b/i.test(t)) return { action: 'quote', rest: 'stockist ' + t };
+  if (/\b(?:talk|speak|chat|get in touch|contact)\b[^.?!]{0,30}\b(?:sika rep|a rep|sales rep|sales team|sika sales|a person|a human|someone at sika)\b/i.test(t)) return { action: 'quote', rest: 'rep' };
+  if (/^(?:please )?(?:can|could|may) (?:i|we|you)\b[^.?!]{0,30}\b(?:get|have|request|prepare|put together|raise|send)\b[^.?!]{0,20}\b(?:quote|quotation)\b/i.test(t) || /^(?:please )?(?:get|give|send|prepare|put together|request|raise|start|make|do|i (?:need|want|would like))\b[^.?!]{0,30}\b(?:quote|quotation)s?\b/i.test(t) || /\bquote request\b/i.test(t) || /\b(?:send|email|submit|pass)\s+(?:this|that|it|my project|the project|my list|my cart|the list|the cart)\s+(?:on\s+)?to\s+sika\b/i.test(t)) return { action: 'quote', rest: t };
+  return null;
+}
 
 // ---- project cart (apply/project-cart): add to, show, change and remove from the one project the advisor and the portal share.
 // Its own block, kept apart from the answer intents below. "soft" phrases (no word like project or cart in them) are only taken when the cart

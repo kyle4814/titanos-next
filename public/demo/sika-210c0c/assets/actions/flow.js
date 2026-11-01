@@ -13,7 +13,8 @@ export const newSession = () => ({ facets: {}, product: null, products: [], syst
 
 const NEED_KEY = { area: 'area', length: 'length', volume: 'volume', thickness: 'thickness', notch: 'notch', coats: 'coats', cementitious: 'cementitious', mix: 'mix', water: 'water' };
 const MEMORY_ACTIONS = new Set(['jobadd', 'calcsave', 'save', 'projects', 'gaps', 'recent', 'newproject', 'note', 'useproject', 'import', 'exportjson', 'clearmemory', 'start', ...CART_ACTIONS]);
-const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
+const NO_LAST = new Set(['clarify', 'export', 'memory', 'help', 'handoff', 'quote']);
+let quoteMod = null; const loadQuote = () => (quoteMod ||= import('./quote.js')); // the sales engine loads on demand: only when a quote is asked for or an intake is open
 
 function updateFacets(session, text, strippedText) {
   const n = parseNumbers(text); const f = parseFacets(strippedText);
@@ -116,6 +117,11 @@ export function createActions(deps) {
     text = String(text || '').trim();
     if (!text) return { handled: false, session };
     let r = route(text); let rest = r ? r.rest : text; let action = r ? r.action : null; let noAsk = false; let useText = text; let answerOf = null;
+    // the sales engine (quote.js): "get me a quote", /quote, and every answer while the intake is open. Nothing typed here is remembered as a question (it may be an email address).
+    if ((session.quote && session.quote.active) || (r && r.action === 'quote')) {
+      const qc = await (await loadQuote()).quoteTurn({ data, memory, config, session, text, rest, route: r, now: deps.now ? deps.now() : new Date() });
+      if (qc) { qc.private = true; return { handled: true, card: qc, session }; }
+    }
     const p = session.pending;
     if (p) {
       session.pending = null;
@@ -182,6 +188,7 @@ export function createActions(deps) {
     if (c.kind === 'clarify') session.pending = { action: c.action, text: p && noAsk ? p.text : useText, need: c.clarify.need };
     if (!NO_LAST.has(c.kind) && c.action !== 'memory') session.last = c;
     cartButtons(c, session, memory, useText);
+    if (session.quote && session.quote.active && c.kind !== 'quote' && c.kind !== 'clarify') c.buttons = [...(c.buttons || []), { label: 'Back to my quote request', command: '/quote' }];
     if (memory) {
       if (!MEMORY_ACTIONS.has(action) && c.kind !== 'clarify') memory.rememberQuestion(text, action);
       if (c.status === 'unknown' && c.handoff) memory.addGap(session.lastQuestion || text);

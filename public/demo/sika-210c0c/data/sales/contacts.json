@@ -1,0 +1,75 @@
+{
+ "v": 1,
+ "crawl": "2026-10-30",
+ "note": "Published Sika Australia contact routes only, each looked up in the crawl on disk by demo-tests/sika-sales/make_shard.mjs. Nothing here is typed in from memory.",
+ "email": {
+  "address": "au.technical@au.sika.com",
+  "label": "Sika Technical Services",
+  "kind": "technical",
+  "source": {
+   "url": "https://aus.sika.com/en/construction/sealants-adhesives/construction-adhesives/1671.html",
+   "sentence": "For detailed information please contact our Technical Service Department on au.technical@au.sika.com or 1300 22 33 48"
+  }
+ },
+ "phones": [
+  {
+   "label": "Technical Service Department",
+   "number": "1300 22 33 48",
+   "source": {
+    "url": "https://aus.sika.com/en/construction/sealants-adhesives/construction-adhesives/1671.html",
+    "sentence": "For detailed information please contact our Technical Service Department on au.technical@au.sika.com or 1300 22 33 48"
+   }
+  },
+  {
+   "label": "Head office",
+   "number": "+61 2 9725 1145",
+   "source": {
+    "url": "https://aus.sika.com/en/imprint.html",
+    "sentence": "Head Office Address, Wetherill Park NSW 2164, Phone +61 2 9725 1145"
+   }
+  }
+ ],
+ "forms": [
+  {
+   "label": "Contact us",
+   "url": "https://aus.sika.com/en/industry/about-industry/contact.html",
+   "source": {
+    "url": "https://aus.sika.com/en/industry/about-industry/contact.html",
+    "sentence": "Contact us"
+   }
+  },
+  {
+   "label": "Ask an Expert (industrial users only)",
+   "url": "https://aus.sika.com/en/industry/about-industry/contact-expert.html",
+   "source": {
+    "url": "https://aus.sika.com/en/industry/about-industry/contact-expert.html",
+    "sentence": "Please provide details about your project for specific expertise and follow up. Ask an Expert is for Industrial Users Only"
+   }
+  }
+ ],
+ "offices": [
+  {
+   "label": "Head office",
+   "address": "122 Newton Road, Wetherill Park NSW 2164",
+   "phone": "+61 2 9725 1145",
+   "source": {
+    "url": "https://aus.sika.com/en/legal-notice.html",
+    "sentence": "Sika Australia, 122 Newton Road, Wetherill Park New South Wales 2164, Phone: 1300 223 348"
+   }
+  }
+ ],
+ "stateOffices": [],
+ "stateOfficesNote": "The pages this demo holds publish one head office and no state office contacts, so none are listed. The where-to-buy page is the published way to find a local branch or stockist.",
+ "whereToBuy": {
+  "label": "Where to buy",
+  "url": "https://aus.sika.com/en/where-to-buy.html",
+  "extra": [
+   {
+    "label": "SikaTile distributors",
+    "url": "https://aus.sika.com/en/SikaTile-distributors.html"
+   }
+  ],
+  "note": "The published where-to-buy page searches by location on the Sika website. This demo holds no stockist list of its own."
+ },
+ "stockists": []
+}
