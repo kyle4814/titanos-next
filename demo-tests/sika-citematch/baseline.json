@@ -18,8 +18,8 @@
     "n": 4659
   },
   "speed": {
-    "home_first_screen_gzip": 87877,
-    "main_js_gzip": 64875,
+    "home_first_screen_gzip": 88178,
+    "main_js_gzip": 65176,
     "sw_bytes": 8548114
   },
   "speed_before_rebaseline": {

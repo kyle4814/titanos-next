@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-01T00:36:15.577Z",
+ "generated": "2026-11-01T01:00:06.840Z",
  "tool": "speed.mjs (playwright-core + Windows Chrome, CDP Network.emulateNetworkConditions)",
  "profile": {
   "name": "DevTools Fast 3G",
@@ -18,26 +18,26 @@
    "targetBytes": 80000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2056,
-    "median_fcp_ms": 708,
+    "median_ms_to_answer": 2021,
+    "median_fcp_ms": 688,
     "all_ms": [
-     2013,
-     2056,
-     2064
+     2037,
+     1979,
+     2021
     ],
     "all_fcp": [
-     704,
-     712,
-     708
+     688,
+     680,
+     696
     ],
-    "bytes_at_answer": 88710,
+    "bytes_at_answer": 89011,
     "requests_at_answer": 4,
-    "bytes_settled": 334615,
+    "bytes_settled": 334916,
     "requests_settled": 14,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "assets/img/s/construction--concrete-480.webp",
@@ -94,26 +94,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 385,
-    "median_fcp_ms": 84,
+    "median_ms_to_answer": 297,
+    "median_fcp_ms": 68,
     "all_ms": [
-     344,
-     398,
-     385
+     297,
+     288,
+     300
     ],
     "all_fcp": [
-     76,
-     84,
-     84
+     64,
+     72,
+     68
     ],
-    "bytes_at_answer": 469776,
+    "bytes_at_answer": 470077,
     "requests_at_answer": 17,
-    "bytes_settled": 469776,
+    "bytes_settled": 470077,
     "requests_settled": 17,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "assets/img/s/construction--concrete-480.webp",
@@ -188,26 +188,26 @@
    "targetBytes": 100000,
    "targetMsFast3g": 1500,
    "fast3g": {
-    "median_ms_to_answer": 3998,
-    "median_fcp_ms": 664,
+    "median_ms_to_answer": 4347,
+    "median_fcp_ms": 1044,
     "all_ms": [
-     3993,
-     4036,
-     3998
+     4354,
+     4331,
+     4347
     ],
     "all_fcp": [
-     664,
-     680,
-     664
+     1044,
+     1056,
+     1032
     ],
-    "bytes_at_answer": 118208,
+    "bytes_at_answer": 118509,
     "requests_at_answer": 8,
-    "bytes_settled": 153602,
+    "bytes_settled": 153903,
     "requests_settled": 20,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
@@ -288,26 +288,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 645,
-    "median_fcp_ms": 112,
+    "median_ms_to_answer": 711,
+    "median_fcp_ms": 232,
     "all_ms": [
-     634,
-     748,
-     645
+     941,
+     711,
+     673
     ],
     "all_fcp": [
-     112,
-     112,
-     108
+     344,
+     232,
+     116
     ],
-    "bytes_at_answer": 143388,
-    "requests_at_answer": 19,
-    "bytes_settled": 268678,
+    "bytes_at_answer": 153903,
+    "requests_at_answer": 20,
+    "bytes_settled": 268979,
     "requests_settled": 28,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "systems/porcelain-on-concrete-internal-wet-floor/",
@@ -426,17 +426,17 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 824,
-    "median_fcp_ms": 696,
+    "median_ms_to_answer": 787,
+    "median_fcp_ms": 676,
     "all_ms": [
-     799,
-     824,
-     841
+     772,
+     797,
+     787
     ],
     "all_fcp": [
-     684,
-     696,
-     696
+     672,
+     692,
+     676
     ],
     "bytes_at_answer": 24763,
     "requests_at_answer": 2,
@@ -502,20 +502,20 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 307,
-    "median_fcp_ms": 200,
+    "median_ms_to_answer": 255,
+    "median_fcp_ms": 168,
     "all_ms": [
-     391,
-     307,
-     304
+     250,
+     255,
+     257
     ],
     "all_fcp": [
-     220,
-     196,
-     200
+     172,
+     168,
+     156
     ],
-    "bytes_at_answer": 61001,
-    "requests_at_answer": 15,
+    "bytes_at_answer": 49943,
+    "requests_at_answer": 13,
     "bytes_settled": 175233,
     "requests_settled": 22,
     "files": [
@@ -616,21 +616,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 5582,
+    "median_ms_to_answer": 5614,
     "median_fcp_ms": 684,
     "all_ms": [
-     5582,
-     5614,
-     5559
+     5581,
+     5637,
+     5614
     ],
     "all_fcp": [
      680,
-     692,
-     684
+     684,
+     688
     ],
-    "bytes_at_answer": 138320,
+    "bytes_at_answer": 138621,
     "requests_at_answer": 19,
-    "bytes_settled": 204508,
+    "bytes_settled": 204809,
     "requests_settled": 21,
     "files": [
      {
@@ -639,7 +639,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -720,21 +720,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 343,
-    "median_fcp_ms": 60,
+    "median_ms_to_answer": 346,
+    "median_fcp_ms": 72,
     "all_ms": [
-     343,
-     330,
-     357
+     324,
+     369,
+     346
     ],
     "all_fcp": [
-     60,
-     60,
-     60
+     72,
+     92,
+     64
     ],
-    "bytes_at_answer": 203955,
+    "bytes_at_answer": 204256,
     "requests_at_answer": 20,
-    "bytes_settled": 203955,
+    "bytes_settled": 204256,
     "requests_settled": 20,
     "files": [
      {
@@ -743,7 +743,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -826,21 +826,21 @@
    "targetBytes": 600000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 7586,
+    "median_ms_to_answer": 8077,
     "median_fcp_ms": 684,
     "all_ms": [
-     7586,
-     6178,
-     8009
+     8106,
+     7603,
+     8077
     ],
     "all_fcp": [
-     676,
      692,
+     680,
      684
     ],
-    "bytes_at_answer": 857534,
+    "bytes_at_answer": 859401,
     "requests_at_answer": 33,
-    "bytes_settled": 858266,
+    "bytes_settled": 860133,
     "requests_settled": 34,
     "files": [
      {
@@ -849,7 +849,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "dist/actions.js",
@@ -860,12 +860,12 @@
       "bytes": 50449
      },
      {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
+      "file": "dist/brain.js",
+      "bytes": 50206
      },
      {
-      "file": "dist/brain.js",
-      "bytes": 48750
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 49619
      },
      {
       "file": "assets/img/s/construction--waterproofing-480.webp",
@@ -913,7 +913,7 @@
      },
      {
       "file": "dist/actions-brain.js",
-      "bytes": 9922
+      "bytes": 10032
      },
      {
       "file": "assets/img/s/construction--sealants-adhesives-480.webp",
@@ -982,21 +982,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 702,
-    "median_fcp_ms": 68,
+    "median_ms_to_answer": 663,
+    "median_fcp_ms": 64,
     "all_ms": [
-     707,
-     702,
-     696
+     665,
+     636,
+     663
     ],
     "all_fcp": [
-     68,
      64,
-     76
+     64,
+     64
     ],
-    "bytes_at_answer": 874156,
+    "bytes_at_answer": 876023,
     "requests_at_answer": 31,
-    "bytes_settled": 874156,
+    "bytes_settled": 876023,
     "requests_settled": 31,
     "files": [
      {
@@ -1005,7 +1005,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "dist/actions.js",
@@ -1016,12 +1016,12 @@
       "bytes": 50449
      },
      {
-      "file": "assets/img/s/construction-480.webp",
-      "bytes": 49619
+      "file": "dist/brain.js",
+      "bytes": 50206
      },
      {
-      "file": "dist/brain.js",
-      "bytes": 48750
+      "file": "assets/img/s/construction-480.webp",
+      "bytes": 49619
      },
      {
       "file": "assets/img/s/construction--landscape-buildingproducts-480.webp",
@@ -1065,7 +1065,7 @@
      },
      {
       "file": "dist/actions-brain.js",
-      "bytes": 9922
+      "bytes": 10032
      },
      {
       "file": "assets/img/s/construction--sealants-adhesives-480.webp",
@@ -1132,21 +1132,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3534,
+    "median_ms_to_answer": 3535,
     "median_fcp_ms": 688,
     "all_ms": [
-     3533,
-     3573,
-     3534
+     3535,
+     3562,
+     3523
     ],
     "all_fcp": [
-     668,
-     696,
-     688
+     692,
+     688,
+     672
     ],
-    "bytes_at_answer": 182767,
+    "bytes_at_answer": 183068,
     "requests_at_answer": 12,
-    "bytes_settled": 255443,
+    "bytes_settled": 255744,
     "requests_settled": 18,
     "files": [
      {
@@ -1155,7 +1155,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "assets/img/p/davco-jetcrete-480.webp",
@@ -1224,21 +1224,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 378,
-    "median_fcp_ms": 68,
+    "median_ms_to_answer": 388,
+    "median_fcp_ms": 60,
     "all_ms": [
-     375,
-     378,
-     395
+     390,
+     388,
+     377
     ],
     "all_fcp": [
-     68,
-     72,
+     60,
+     60,
      68
     ],
-    "bytes_at_answer": 317189,
+    "bytes_at_answer": 317490,
     "requests_at_answer": 20,
-    "bytes_settled": 317189,
+    "bytes_settled": 317490,
     "requests_settled": 20,
     "files": [
      {
@@ -1247,7 +1247,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "assets/img/s/construction--concrete-repair-protection--concrete-repair-mortars-480.webp",
@@ -1330,21 +1330,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 4073,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 4050,
+    "median_fcp_ms": 684,
     "all_ms": [
-     4073,
-     4096,
-     4025
+     4046,
+     4076,
+     4050
     ],
     "all_fcp": [
-     676,
-     696,
-     688
+     692,
+     684,
+     684
     ],
-    "bytes_at_answer": 146602,
+    "bytes_at_answer": 146903,
     "requests_at_answer": 12,
-    "bytes_settled": 291834,
+    "bytes_settled": 292135,
     "requests_settled": 16,
     "files": [
      {
@@ -1353,7 +1353,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "data/categories.json",
@@ -1414,21 +1414,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 297,
-    "median_fcp_ms": 56,
+    "median_ms_to_answer": 300,
+    "median_fcp_ms": 64,
     "all_ms": [
-     302,
-     281,
-     297
+     300,
+     380,
+     285
     ],
     "all_fcp": [
-     68,
-     56,
-     56
+     64,
+     64,
+     68
     ],
-    "bytes_at_answer": 291281,
+    "bytes_at_answer": 291582,
     "requests_at_answer": 15,
-    "bytes_settled": 291281,
+    "bytes_settled": 291582,
     "requests_settled": 15,
     "files": [
      {
@@ -1437,7 +1437,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "data/categories.json",
@@ -1500,21 +1500,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3004,
+    "median_ms_to_answer": 3021,
     "median_fcp_ms": 688,
     "all_ms": [
-     3004,
-     3003,
-     3048
+     3033,
+     3014,
+     3021
     ],
     "all_fcp": [
-     680,
-     692,
-     688
+     676,
+     688,
+     696
     ],
-    "bytes_at_answer": 160528,
+    "bytes_at_answer": 160829,
     "requests_at_answer": 7,
-    "bytes_settled": 182345,
+    "bytes_settled": 182646,
     "requests_settled": 12,
     "files": [
      {
@@ -1523,7 +1523,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1568,21 +1568,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 245,
-    "median_fcp_ms": 60,
+    "median_ms_to_answer": 262,
+    "median_fcp_ms": 68,
     "all_ms": [
-     245,
-     240,
-     245
+     370,
+     262,
+     252
     ],
     "all_fcp": [
-     56,
-     60,
-     64
+     76,
+     68,
+     68
     ],
-    "bytes_at_answer": 160528,
+    "bytes_at_answer": 160829,
     "requests_at_answer": 7,
-    "bytes_settled": 160528,
+    "bytes_settled": 160829,
     "requests_settled": 7,
     "files": [
      {
@@ -1591,7 +1591,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1622,21 +1622,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3034,
-    "median_fcp_ms": 684,
+    "median_ms_to_answer": 3007,
+    "median_fcp_ms": 676,
     "all_ms": [
-     3009,
-     3034,
-     3071
+     3023,
+     2999,
+     3007
     ],
     "all_fcp": [
-     684,
-     684,
-     696
+     676,
+     676,
+     700
     ],
-    "bytes_at_answer": 168150,
+    "bytes_at_answer": 168451,
     "requests_at_answer": 6,
-    "bytes_settled": 189967,
+    "bytes_settled": 190268,
     "requests_settled": 11,
     "files": [
      {
@@ -1645,7 +1645,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1686,21 +1686,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 221,
+    "median_ms_to_answer": 251,
     "median_fcp_ms": 64,
     "all_ms": [
-     221,
-     242,
-     212
+     251,
+     254,
+     219
     ],
     "all_fcp": [
-     64,
-     64,
-     60
+     56,
+     68,
+     64
     ],
-    "bytes_at_answer": 168150,
+    "bytes_at_answer": 168451,
     "requests_at_answer": 6,
-    "bytes_settled": 168150,
+    "bytes_settled": 168451,
     "requests_settled": 6,
     "files": [
      {
@@ -1709,7 +1709,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1736,21 +1736,21 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3025,
-    "median_fcp_ms": 688,
+    "median_ms_to_answer": 3042,
+    "median_fcp_ms": 680,
     "all_ms": [
-     2999,
-     3057,
-     3025
+     3042,
+     3041,
+     3054
     ],
     "all_fcp": [
-     688,
-     692,
-     688
+     680,
+     680,
+     696
     ],
-    "bytes_at_answer": 161004,
+    "bytes_at_answer": 161305,
     "requests_at_answer": 7,
-    "bytes_settled": 182821,
+    "bytes_settled": 183122,
     "requests_settled": 12,
     "files": [
      {
@@ -1759,7 +1759,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1804,21 +1804,21 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 234,
+    "median_ms_to_answer": 240,
     "median_fcp_ms": 64,
     "all_ms": [
-     216,
-     234,
-     244
+     245,
+     239,
+     240
     ],
     "all_fcp": [
      64,
-     60,
-     64
+     64,
+     60
     ],
-    "bytes_at_answer": 161004,
+    "bytes_at_answer": 161305,
     "requests_at_answer": 7,
-    "bytes_settled": 161004,
+    "bytes_settled": 161305,
     "requests_settled": 7,
     "files": [
      {
@@ -1827,7 +1827,7 @@
      },
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1858,26 +1858,26 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 3530,
-    "median_fcp_ms": 676,
+    "median_ms_to_answer": 3539,
+    "median_fcp_ms": 696,
     "all_ms": [
-     3530,
-     3568,
-     3517
+     3534,
+     3539,
+     3590
     ],
     "all_fcp": [
-     672,
-     684,
-     676
+     696,
+     692,
+     696
     ],
-    "bytes_at_answer": 90817,
+    "bytes_at_answer": 91118,
     "requests_at_answer": 8,
-    "bytes_settled": 112634,
+    "bytes_settled": 112935,
     "requests_settled": 13,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1930,26 +1930,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 301,
-    "median_fcp_ms": 84,
+    "median_ms_to_answer": 255,
+    "median_fcp_ms": 72,
     "all_ms": [
-     228,
-     332,
-     301
+     235,
+     257,
+     255
     ],
     "all_fcp": [
      72,
-     96,
-     84
+     68,
+     76
     ],
-    "bytes_at_answer": 90817,
+    "bytes_at_answer": 91118,
     "requests_at_answer": 8,
-    "bytes_settled": 90817,
+    "bytes_settled": 91118,
     "requests_settled": 8,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -1988,26 +1988,26 @@
    "targetBytes": 150000,
    "targetMsFast3g": null,
    "fast3g": {
-    "median_ms_to_answer": 2561,
+    "median_ms_to_answer": 2530,
     "median_fcp_ms": 692,
     "all_ms": [
-     2584,
-     2561,
-     2503
+     2530,
+     2530,
+     2486
     ],
     "all_fcp": [
-     708,
+     688,
      692,
-     680
+     692
     ],
-    "bytes_at_answer": 93445,
+    "bytes_at_answer": 93746,
     "requests_at_answer": 6,
-    "bytes_settled": 93998,
+    "bytes_settled": 94299,
     "requests_settled": 7,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
@@ -2036,26 +2036,26 @@
     ]
    },
    "desktop": {
-    "median_ms_to_answer": 320,
-    "median_fcp_ms": 100,
+    "median_ms_to_answer": 203,
+    "median_fcp_ms": 68,
     "all_ms": [
-     292,
-     320,
-     355
+     199,
+     217,
+     203
     ],
     "all_fcp": [
-     88,
-     100,
-     100
+     64,
+     72,
+     68
     ],
-    "bytes_at_answer": 93445,
+    "bytes_at_answer": 93746,
     "requests_at_answer": 6,
-    "bytes_settled": 93445,
+    "bytes_settled": 93746,
     "requests_settled": 6,
     "files": [
      {
       "file": "dist/main.js",
-      "bytes": 65081
+      "bytes": 65382
      },
      {
       "file": "",
