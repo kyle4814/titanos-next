@@ -68,7 +68,13 @@
 </url>
 <url>
 <loc>https://titanos.tech/labs/issue-003</loc>
-<lastmod>2026-10-30T10:22:54.000Z</lastmod>
+<lastmod>2026-11-01T00:30:11.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://titanos.tech/labs/issue-004</loc>
+<lastmod>2026-11-01T00:31:14.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -116,7 +122,7 @@
 </url>
 <url>
 <loc>https://titanos.tech/labs</loc>
-<lastmod>2026-10-30T10:22:54.000Z</lastmod>
+<lastmod>2026-11-01T00:30:11.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
