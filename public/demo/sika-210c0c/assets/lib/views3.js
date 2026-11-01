@@ -1,4 +1,4 @@
-// My projects and the demo-only quote request, plus the About page.
+// My projects and the quote request section (the sales engine, quote_ui.js), plus the About page.
 import { offlinePanel } from './offline-ui.js';
 import { h, icon, nf, plural, announce, fmtBytes } from './util.js';
 import { coveragePanel } from './coverage_panel.js';
@@ -9,8 +9,6 @@ import { buildJobPack } from './projectstore.js';
 import { bomSection } from './finder/bom.js';
 import { estimateNote } from './terms.js';
 
-const ROLES = ['Distributor or merchant', 'Applicator or tradesperson', 'Builder or contractor', 'Specifier or architect', 'Engineer', 'Home owner', 'Other'];
-
 const SOURCE_TEXT = { bot: 'Added by the advisor', finder: 'Added from the finder with its quantity', portal: 'Added on this page', migrated: 'Carried over from an earlier saved project' };
 const saveBlob = (text, name, type) => { try { const url = URL.createObjectURL(new Blob([text], { type })); const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); announce(`${name} downloaded`); } catch { /* ignore */ } };
 
@@ -18,10 +16,12 @@ export async function projectsView(ctx) {
   const dv = await derived(); const { cfg } = ctx;
   const el = h('div', { class: 'container' }, breadcrumb([{ label: 'Home', href: '#/' }, { label: 'My projects and quotes' }]));
   const head = h('div', { class: 'page-head' }, h('h1', null, 'My projects and quotes'),
-    h('p', { class: 'lead', style: 'max-width:60rem' }, 'Collect the products for a job, set quantities and prepare a quote request. Anything the product advisor adds for you appears here, and what you change here the advisor sees on its next answer.'),
-    h('p', { class: 'notice' }, icon('info'), h('span', null, h('span', { class: 'demo-only' }, 'Demo only'), ' This list is kept in your browser on this device. The quote request below ', h('strong', null, 'submits nowhere'), ': there is no server behind this demo, so nothing is sent, stored or shared.')));
+    h('p', { class: 'lead', style: 'max-width:60rem' }, 'Collect the products for a job, set quantities and prepare a quote request with the advisor. Anything the product advisor adds for you appears here, and what you change here the advisor sees on its next answer.'),
+    h('p', { class: 'notice' }, icon('info'), h('span', null, h('span', { class: 'demo-only' }, 'Demo only'), ' This list is kept in your browser on this device. The quote request is prepared in this demo and is ', h('strong', null, "not sent to Sika's systems from here"), ': there is no server behind it, so nothing is stored or shared. You can email it to Sika yourself.')));
   const cartBox = h('div', { id: 'cart-box' });
-  el.append(head, cartBox, quoteForm(ctx, dv));
+  const quoteBox = h('div', { id: 'quote-box' });
+  el.append(head, cartBox, quoteBox);
+  try { const m = await import('../actions/quote_ui.js'); quoteBox.append(m.quotesPanel(ctx, projectStore, estimateNote(ctx.cfg), projects.onChange)); } catch { quoteBox.append(h('section', { class: 'section' }, h('h2', { class: 'h3', id: 'quote-h' }, 'Request a quote'), h('p', null, 'The quote request could not load. Reload the page and try again.'))); }
   const render = () => {
     cartBox.replaceChildren();
     const list = projects.list(); const proj = projectStore.currentProject();
@@ -73,49 +73,6 @@ export async function projectsView(ctx) {
   return { el, title: 'My projects and quotes', nav: null };
 }
 
-function quoteForm(ctx, dv) {
-  const wrap = h('section', { class: 'section', 'aria-labelledby': 'quote-h' });
-  const fields = {};
-  const err = {};
-  const mk = (id, label, opts = {}) => {
-    const input = opts.textarea ? h('textarea', { class: 'textarea', id, name: id, rows: '4', 'aria-describedby': id + '-e' }) : opts.select ? h('select', { class: 'input', id, name: id, 'aria-describedby': id + '-e' }, opts.select.map((o) => h('option', { value: o }, o))) : h('input', { class: 'input', id, name: id, type: opts.type || 'text', autocomplete: opts.autocomplete || 'off', inputmode: opts.inputmode || null, 'aria-describedby': id + '-e', required: opts.required ? true : null, 'aria-required': opts.required ? 'true' : null, maxlength: opts.max || null });
-    const e = h('span', { class: 'err', id: id + '-e', role: 'alert' });
-    fields[id] = input; err[id] = e;
-    return h('div', { class: 'field' + (opts.full ? ' full' : '') }, h('label', { for: id }, label, opts.hint ? h('span', { class: 'hint' }, opts.hint) : null), input, e);
-  };
-  const form = h('form', { class: 'form form--2', novalidate: true, id: 'quote-form', onsubmit: (ev) => { ev.preventDefault(); submit(); } },
-    mk('name', 'Full name', { required: true, autocomplete: 'name' }), mk('company', 'Company', { required: true, autocomplete: 'organization' }),
-    mk('email', 'Email', { required: true, type: 'email', autocomplete: 'email' }), mk('phone', 'Phone', { type: 'tel', autocomplete: 'tel', hint: 'Optional' }),
-    mk('role', 'I am a', { select: ROLES }), mk('project', 'Project name', { required: true }),
-    mk('postcode', 'Delivery postcode', { inputmode: 'numeric', max: 4, hint: 'Optional, 4 digits' }), mk('needed', 'Needed by', { type: 'date', hint: 'Optional' }),
-    mk('notes', 'Notes for the sales team', { textarea: true, full: true, hint: 'Optional: area, substrate, access, anything that helps' }),
-    h('div', { class: 'full' }, h('button', { class: 'btn', type: 'submit' }, 'Request a quote (demo)'), h('span', { class: 'count', style: 'margin-left:1rem' }, 'Demo only: this form submits nowhere.')));
-  wrap.append(h('h2', { id: 'quote-h', class: 'h3' }, 'Request a quote'), h('p', null, 'Fill this in to see the confirmation a customer would get. ', h('strong', null, 'Nothing is sent'), ' in this demo.'), h('p', { class: 'estimate-note' }, estimateNote(ctx.cfg)), form);
-  function submit() {
-    let ok = true; const v = (k) => fields[k].value.trim();
-    const set = (k, msg) => { err[k].textContent = msg || ''; fields[k].setAttribute('aria-invalid', msg ? 'true' : 'false'); if (msg) ok = false; };
-    set('name', v('name') ? '' : 'Enter your name.'); set('company', v('company') ? '' : 'Enter your company.');
-    set('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email')) ? '' : 'Enter a valid email address, for example name@company.com.au.');
-    set('project', v('project') ? '' : 'Give the project a name.');
-    set('postcode', !v('postcode') || /^\d{4}$/.test(v('postcode')) ? '' : 'A postcode has 4 digits.');
-    if (!ok) { const first = Object.keys(fields).find((k) => fields[k].getAttribute('aria-invalid') === 'true'); if (first) fields[first].focus(); announce('The form has errors. Please check the highlighted fields.'); return; }
-    const items = projects.list().map((it) => { const p = dv.byId.get(it.id); return { name: (p && p.n) || it.name || it.id, qty: it.qty, unit: it.unit }; });
-    const summary = [`Quote request (DEMO, not sent)`, `Name: ${v('name')}`, `Company: ${v('company')}`, `Email: ${v('email')}`, v('phone') && `Phone: ${v('phone')}`, `Role: ${fields.role.value}`, `Project: ${v('project')}`, v('postcode') && `Postcode: ${v('postcode')}`, v('needed') && `Needed by: ${v('needed')}`, '', 'Items:', ...items.map((i) => `- ${i.qty} x ${i.unit}: ${i.name}`), v('notes') && '', v('notes') && `Notes: ${v('notes')}`].filter((x) => x !== '' || true).filter((x) => x !== false && x !== '').join('\n');
-    const done = h('div', { class: 'success', role: 'status', tabindex: '-1', id: 'quote-done' },
-      h('span', { class: 'demo-only' }, 'Demo only'), h('h2', null, 'Thanks, your quote request is ready'),
-      h('p', null, h('strong', null, 'Nothing was sent.'), ' This is a demonstration with no server behind it, so your request was not submitted, stored or shared with anyone. In a live portal this is the point where the request would reach the sales team and you would get a reference number.'),
-      h('p', { class: 'estimate-note' }, estimateNote(ctx.cfg)),
-      h('h3', { class: 'h5', style: 'margin-top:1rem' }, 'What you would have sent'), h('pre', { style: 'white-space:pre-wrap;background:#fff;border:1px solid #ddd;padding:1rem;font:inherit;overflow:auto' }, summary),
-      h('div', { class: 'btn-row', style: 'margin-top:1rem' }, h('button', { class: 'btn', type: 'button', onclick: () => saveText(summary) }, icon('download', 'i--sm'), 'Save a copy as a text file'), h('button', { class: 'btn btn--hollow', type: 'button', onclick: () => { wrap.replaceChildren(...Array.from(prev)); fields.name.focus(); } }, 'Start another request')));
-    const prev = Array.from(wrap.childNodes);
-    wrap.replaceChildren(done); done.focus(); announce('Quote request ready. Demo only: nothing was sent.');
-  }
-  return wrap;
-}
-function saveText(text) {
-  try { const url = URL.createObjectURL(new Blob([text], { type: 'text/plain' })); const a = h('a', { href: url, download: 'quote-request-demo.txt' }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); } catch { /* ignore */ }
-}
-
 /* ------------------------------------------------------------------ about */
 export async function aboutView(ctx) {
   const cov = await coveragePanel();
@@ -148,7 +105,7 @@ export async function aboutView(ctx) {
       h('p', null, h('a', { href: '#/about/data-quality' }, 'Data quality notes for Sika'), ': things we noticed in the public data that you may want to look at, with a PDF.'),
       offlinePanel(), // T19
       h('h2', { class: 'h4' }, 'What is demo-only'),
-      h('p', null, 'The quote request submits nowhere. The projects list lives in this browser only. There are no accounts, no tracking and no cookies.'),
+      h('p', null, "The quote request is prepared in this demo and is not sent to Sika's systems from here; you can print it, copy it or open an email to Sika that you send yourself. The projects list and the requests live in this browser only. There are no accounts, no tracking and no cookies."),
       h('p', null, h('a', { class: 'btn', href: '#/' }, 'Back to the portal'))));
   return { el, title: 'About this demo', nav: null };
 }

@@ -8,7 +8,7 @@ import { ESTIMATE_LINE } from './finder/calc.js';
 export const KEY = 'sika-demo-210c0c-project-v2';
 export const LEGACY_PORTAL_KEY = 'sika-demo-210c0c-projects'; // the old cart: [{ id, qty, unit, note, calc }]; read once, never written again
 export const LEGACY_ACTIONS_KEY = 'sika-demo-210c0c-actions-v1'; // the old advisor memory; read once, never written again
-export const LIMITS = { projects: 30, perList: 100, items: 200, recent: 30, gaps: 50, text: 500, name: 60 };
+export const LIMITS = { projects: 30, perList: 100, items: 200, recent: 30, gaps: 50, text: 500, name: 60, quotes: 30 };
 export const UNITS = ['pack', 'pail', 'bag', 'cartridge', 'roll', 'litre', 'kg', 'tube', 'drum', 'sachet', 'box'];
 export const DEFAULT_PROJECT = 'My project';
 
@@ -60,6 +60,25 @@ export function cleanItem(i) {
   };
 }
 
+/** The cart as one comparable string (product, quantity, unit), so a quote request can tell when the cart changed after it was prepared. */
+export const sigOf = (items) => (items || []).map((i) => `${i.id}:${i.qty}:${i.unit}`).sort().join('|');
+const REF_RX = /^SQ-\d{8}-[0-9A-Z]{4}$/;
+/** A quote request record (demo only, this browser only): the lines as they were, the job basics, the contact, the document links. */
+export function cleanQuote(q) {
+  if (!q || typeof q !== 'object') return null;
+  const ref = clip(q.ref, 24); if (!REF_RX.test(ref)) return null;
+  const c = q.contact && typeof q.contact === 'object' ? q.contact : {}; const site = q.site && typeof q.site === 'object' ? q.site : {}; const nd = q.needed && typeof q.needed === 'object' ? q.needed : {};
+  return {
+    ref, status: q.status === 'stale' ? 'stale' : 'prepared', created: clip(q.created, 40), project: clip(q.project, LIMITS.name), sig: clip(q.sig, 6000), supersedes: REF_RX.test(clip(q.supersedes, 24)) ? clip(q.supersedes, 24) : '',
+    lines: (Array.isArray(q.lines) ? q.lines : []).slice(0, LIMITS.items).map((l) => ({ id: clip(l && l.id, 100), name: clip(l && l.name, 160), qty: Math.round(num(l && l.qty, 1, 1, 99999)), unit: clip(l && l.unit, 20) || 'pack', packs: clip(l && l.packs, 200), need: clip(l && l.need, 80), basis: clip(l && l.basis, 300), url: clip(l && l.url, 400), phrase: clip(l && l.phrase, 400) })).filter((l) => l.id),
+    site: { postcode: /^\d{4}$/.test(clip(site.postcode, 4)) ? clip(site.postcode, 4) : '', suburb: clip(site.suburb, 60), text: clip(site.text, 80) },
+    needed: { iso: /^\d{4}-\d{2}-\d{2}$/.test(clip(nd.iso, 10)) ? clip(nd.iso, 10) : '', text: clip(nd.text, 60) },
+    delivery: ['delivery', 'pickup', 'unsure'].includes(q.delivery) ? q.delivery : '', role: clip(q.role, 60), company: clip(q.company, 80),
+    contact: { name: clip(c.name, 80), email: clip(c.email, 120), phone: clip(c.phone, 30), best: clip(c.best, 60) }, notes: clip(q.notes, LIMITS.text),
+    docs: (Array.isArray(q.docs) ? q.docs : []).slice(0, 40).map((d) => ({ product: clip(d && d.product, 160), kind: clip(d && d.kind, 40), title: clip(d && d.title, 160), url: clip(d && d.url, 400) })).filter((d) => d.url),
+  };
+}
+
 function cleanProject(p, name) {
   p = p && typeof p === 'object' ? p : {};
   const arr = (a) => (Array.isArray(a) ? a.slice(0, LIMITS.perList) : []);
@@ -72,6 +91,7 @@ function cleanProject(p, name) {
     quantities: arr(p.quantities).map((q) => ({ productId: clip(q.productId, 100), name: clip(q.name, 160), job: q.job && typeof q.job === 'object' ? Object.fromEntries(Object.entries(q.job).slice(0, 14).filter(([, v]) => typeof v === 'number' || typeof v === 'string').map(([k, v]) => [clip(k, 30), typeof v === 'number' ? v : clip(v, 40)])) : {}, rows: arr(q.rows).slice(0, 6).map((r) => ({ low: Number(r.low) || 0, high: Number(r.high) || 0, unit: clip(r.unit, 6), packs: clip(r.packs, 200), phrase: clip(r.phrase, 400), url: clip(r.url, 400) })), saved: clip(q.saved, 40) })),
     documents: arr(p.documents).map((d) => ({ title: clip(d.title, 200), url: clip(d.url, 400), saved: clip(d.saved, 40) })),
     notes: arr(p.notes).map((n) => ({ text: clip(n.text, LIMITS.text), saved: clip(n.saved, 40) })),
+    quotes: (Array.isArray(p.quotes) ? p.quotes : []).slice(0, LIMITS.quotes).map(cleanQuote).filter(Boolean),
   };
 }
 
@@ -160,7 +180,8 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
     }
     return state.projects[state.current];
   };
-  const touch = (p) => { p.updated = nowIso(clock); write(); };
+  // a cart edit after a quote request was prepared marks that request stale (it no longer matches the cart); it never comes back by itself
+  const touch = (p) => { p.updated = nowIso(clock); const sg = sigOf(p.items); for (const q of p.quotes || []) if (q.status === 'prepared' && q.sig !== sg) q.status = 'stale'; write(); };
   const push = (p, list, item) => { p[list].unshift(item); if (p[list].length > LIMITS.perList) p[list].length = LIMITS.perList; touch(p); };
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const cur = () => (state.current ? state.projects[state.current] || null : null);
@@ -171,7 +192,7 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
   const api = {
     persistent: () => persistent, loadedFrom: () => loadedFrom, origin,
     state: S(() => copy(state)),
-    list: S(() => Object.values(state.projects).map((p) => ({ name: p.name, updated: p.updated, counts: { items: p.items.length, systems: p.systems.length, quantities: p.quantities.length, documents: p.documents.length, notes: p.notes.length } }))),
+    list: S(() => Object.values(state.projects).map((p) => ({ name: p.name, updated: p.updated, counts: { items: p.items.length, systems: p.systems.length, quantities: p.quantities.length, documents: p.documents.length, notes: p.notes.length, quotes: (p.quotes || []).length } }))),
     current: S(() => state.current),
     currentProject: S(() => (cur() ? copy(cur()) : null)),
     productsOf(p) {
@@ -214,10 +235,20 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
       p.items[i] = { ...merged, added: before.added, updated: nowIso(clock) }; touch(p); return { ok: true, item: copy(p.items[i]), before: copy(before), project: p.name };
     }),
     removeItem: S((id) => { const p = cur(); const i = p ? p.items.findIndex((x) => x.id === id) : -1; if (i < 0) return { ok: false, error: 'That product is not in this project.' }; const [gone] = p.items.splice(i, 1); touch(p); return { ok: true, item: copy(gone), project: p.name }; }),
-    clearItems: S(() => { const p = cur(); if (!p || !p.items.length) return { ok: true, removed: 0 }; const n = p.items.length; p.items = []; touch(p); return { ok: true, removed: n, project: p.name }; }),
+    clearItems: S(() => { const p = cur(); if (!p || (!p.items.length && !(p.quotes || []).length)) return { ok: true, removed: 0 }; const n = p.items.length; p.items = []; p.quotes = []; touch(p); return { ok: true, removed: n, project: p.name }; }), // clearing the project clears its quote requests too
     removeSystem: S((i) => { const p = cur(); if (!p || !p.systems[i]) return false; p.systems.splice(i, 1); touch(p); return true; }),
     removeDocument: S((url) => { const p = cur(); if (!p) return false; const n = p.documents.length; p.documents = p.documents.filter((d) => d.url !== url); if (p.documents.length !== n) touch(p); return p.documents.length !== n; }),
     removeNote: S((i) => { const p = cur(); if (!p || !p.notes[i]) return false; p.notes.splice(i, 1); touch(p); return true; }),
+
+    /* quote requests (demo only): the record of what was prepared, kept with the project it came from */
+    quotes: S(() => (cur() ? copy(cur().quotes || []) : [])),
+    getQuote: S((ref) => { const q = cur() && (cur().quotes || []).find((x) => x.ref === ref); return q ? copy(q) : null; }),
+    addQuote: S((rec) => {
+      const q = cleanQuote(rec); if (!q) return { ok: false, error: 'That is not a quote request record.' };
+      const p = ensureProject(); p.quotes ||= []; if (p.quotes.some((x) => x.ref === q.ref)) return { ok: false, error: 'That reference is already used.' };
+      p.quotes.unshift(q); if (p.quotes.length > LIMITS.quotes) p.quotes.length = LIMITS.quotes; p.updated = nowIso(clock); write(); return { ok: true, quote: copy(q), project: p.name };
+    }),
+    removeQuote: S((ref) => { const p = cur(); const n = p && p.quotes ? p.quotes.length : 0; if (!p || !n) return false; p.quotes = p.quotes.filter((x) => x.ref !== ref); if (p.quotes.length === n) return false; p.updated = nowIso(clock); write(); return true; }),
 
     saveSystem: S((s) => { const p = ensureProject(); const item = cleanProject({ systems: [{ ...s, saved: nowIso(clock) }] }, 'x').systems[0]; if (p.systems.some((x) => x.title === item.title && same(x.steps, item.steps))) return { ok: true, duplicate: true, project: p.name }; push(p, 'systems', item); return { ok: true, project: p.name }; }),
     saveQuantity: S((q, question) => {
@@ -241,7 +272,7 @@ export function createProjectStore(storage, clock, { origin = 'bot' } = {}) {
       for (const p of Object.values(v.state.projects)) for (const q of p.quantities) { const it = itemFromQuantity(q, 'migrated', clock); if (it) p.items = mergeItem0(p.items, it); }
       if (!merge) state = v.state;
       else {
-        for (const [n, p] of Object.entries(v.state.projects)) { if (!state.projects[n]) { if (Object.keys(state.projects).length >= LIMITS.projects) continue; state.projects[n] = p; continue; } const c = state.projects[n]; for (const l of ['systems', 'quantities', 'documents', 'notes']) for (const it of p[l]) if (!c[l].some((x) => same(x, it))) c[l].push(it); for (const it of p.items) if (!c.items.some((x) => x.id === it.id)) c.items.push(it); c.updated = p.updated || c.updated; }
+        for (const [n, p] of Object.entries(v.state.projects)) { if (!state.projects[n]) { if (Object.keys(state.projects).length >= LIMITS.projects) continue; state.projects[n] = p; continue; } const c = state.projects[n]; for (const l of ['systems', 'quantities', 'documents', 'notes']) for (const it of p[l]) if (!c[l].some((x) => same(x, it))) c[l].push(it); for (const it of p.items) if (!c.items.some((x) => x.id === it.id)) c.items.push(it); c.quotes ||= []; for (const qq of p.quotes || []) if (!c.quotes.some((x) => x.ref === qq.ref)) c.quotes.push(qq); c.updated = p.updated || c.updated; }
         state.recent = [...v.state.recent, ...state.recent].filter((r, i, a) => a.findIndex((x) => x.q === r.q) === i).slice(0, LIMITS.recent);
         for (const g of v.state.gaps) if (!state.gaps.some((x) => x.q.toLowerCase() === g.q.toLowerCase())) state.gaps.push(g);
         state.gaps = state.gaps.slice(0, LIMITS.gaps);

@@ -43,6 +43,7 @@ export function createData(store) {
     trees: () => g('actions/trees.json'),
     kindex: () => g('k/_index.json'),
     problems: () => g('knowledge/problems.json'),
+    sales: () => g('sales/contacts.json'), // published Sika contact routes for the quote request (sales engine); network first, cached for offline
     shard: (id) => g('brain/p/' + encodeURIComponent(id) + '.json'), // the advisor's per-product shard: labelled data sheet fields, times, standards, substrates, each with its source
   };
   let idx;

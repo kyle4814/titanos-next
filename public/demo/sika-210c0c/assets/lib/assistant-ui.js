@@ -100,8 +100,8 @@ export async function send(text, label) {
   try {
     const act = await ensureActions();
     const handled = act ? await act.handle(text) : null;
-    if (handled) { const node = handled.node; insights.question(text, handled.outcome); // T11, this browser only
-      await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: text, intent: 'action', ms: 0 }); return; }
+    if (handled) { const node = handled.node; if (!handled.private) insights.question(text, handled.outcome); // T11, this browser only; a quote-request answer (it may be an email address) is never logged
+      await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: handled.private ? '' : text, intent: 'action', ms: 0 }); return; }
     const useBrain = brainOn();
     const ba = useBrain ? await brainAnswer(text) : null; // v2 brain; null means it could not run, so v1 answers
     if (!ba) await ensure();

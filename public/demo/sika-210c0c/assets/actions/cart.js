@@ -11,7 +11,8 @@ const NOT_DIM = '(?!\\s*(?:m2|m²|sqm|m3|mm|cm|m\\b|metres?|meters?|%|percent|co
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const NOTICE = IN_BROWSER_NOTICE;
 const mem = (title, o) => card('memory', 'memory', title, { estimate: false, notice: NOTICE, ...o });
-const linkBtns = (...extra) => [...extra, { label: 'What is in my project', command: '/cart' }, { label: 'Job pack: print, CSV, data sheets', command: '/jobpack' }];
+const QUOTE_BTN = { label: 'Request a quote', command: '/quote' };
+const linkBtns = (...extra) => [...extra, { label: 'What is in my project', command: '/cart' }, { label: 'Job pack: print, CSV, data sheets', command: '/jobpack' }, QUOTE_BTN];
 
 /* ------------------------------------------------------------------ small helpers */
 /** A quantity and unit out of free text, ignoring any number that belongs to a product name or a measurement. */
@@ -195,7 +196,7 @@ async function jobPack(ctx) {
   if (p.systems.length) c.sections.push({ title: 'System', rows: p.systems.map((s) => ({ label: s.title, value: s.slug ? `Sheet: ${s.slug}` : 'No sheet link', meta: true, source: null })) });
   if (p.notes.length) c.sections.push({ title: 'Notes', rows: p.notes.map((n) => ({ label: n.saved ? n.saved.slice(0, 10) : 'Note', value: n.text, meta: true, source: null })) });
   c.exports = [{ label: 'Download quantities (CSV)', filename: 'job-pack-quantities.csv', mime: 'text/csv;charset=utf-8', text: jp.csv }, { label: 'Download data sheet and SDS links', filename: 'job-pack-documents.txt', mime: 'text/plain;charset=utf-8', text: jp.docsText }];
-  c.buttons = [{ label: 'Print the job pack', print: true }, { label: 'What is in my project', command: '/cart' }];
+  c.buttons = [{ label: 'Print the job pack', print: true }, { label: 'What is in my project', command: '/cart' }, QUOTE_BTN];
   c.copyText = jp.enquiry; c.copyLabel = 'Copy for the enquiry form'; c.copyAria = 'Text for the enquiry form'; c.cartLinks = true;
   return c;
 }
@@ -235,6 +236,8 @@ export function cartButtons(c, session, memory, text) {
   if (have()) return;
   if (c.action === 'calc' && c.kind === 'quantity' && session.product && session.calcs[session.product.id]) c.buttons = [{ label: 'Add to my project', command: '/add' }, ...(c.buttons || [])];
   else if ((c.action === 'system' || c.action === 'pack') && session.system) c.buttons = [{ label: 'Add the whole set to my project', command: '/add' }, ...(c.buttons || [])];
+  // a quantity, plan or pack answer in a project that already has products offers the quote request beside the other next steps
+  if (['calc', 'system', 'pack', 'job'].includes(c.action) && memory.itemCount() > 0 && !(c.buttons || []).some((b) => b.command === '/quote')) c.buttons = [...(c.buttons || []), QUOTE_BTN];
 }
 
 export { ESTIMATE_LINE };

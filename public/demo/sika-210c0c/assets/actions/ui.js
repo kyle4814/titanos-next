@@ -105,7 +105,7 @@ export function renderCard(c, act) {
   if (c.estimate) root.append(h('p', { class: 'estimate-note' }, ESTIMATE_LINE));
   if (c.copyText) { const area = h('textarea', { class: 'textarea', rows: '5', 'aria-label': c.copyAria || 'Draft clause to copy' }); area.value = c.copyText; root.append(area, h('button', { class: 'btn btn--text', type: 'button', onclick: async () => { area.select(); try { await navigator.clipboard.writeText(area.value); announce('Copied'); } catch { document.execCommand && document.execCommand('copy'); } } }, c.copyLabel || 'Copy the clause')); }
   if (c.handoffBlock) root.append(renderHandoff(c.handoffBlock));
-  if (c.kind !== 'clarify' && c.kind !== 'help' && c.kind !== 'memory') {
+  if (c.kind !== 'clarify' && c.kind !== 'help' && c.kind !== 'memory' && c.kind !== 'quote') {
     const seen = new Set(); const all = [...(c.rows || []), ...((c.sections || []).flatMap((s) => [...(s.rows || []), ...(s.more || [])])), ...((c.table && c.table.rows) || []).flatMap((r) => r.cells)].filter((r) => r.source && r.source.url && !seen.has(r.source.url.split('#')[0]) && seen.add(r.source.url.split('#')[0])).slice(0, 6);
     root.append(h('div', { class: 'cite' }, all.length ? h('details', { class: 'srcs' }, h('summary', null, 'Sources'), h('ol', null, all.map((r) => h('li', null, extLink(r.source.url, r.source.label, 'link'))))) : h('strong', null, 'Sources'), h('div', null, h('a', { href: '#/rules', class: 'link', onclick: () => onNavigate() }, 'How the rules are kept: the rule ledger'))));
   }
@@ -115,6 +115,7 @@ export function renderCard(c, act) {
     const file = h('input', { type: 'file', accept: 'application/json,.json', 'aria-label': 'Choose a projects file', onchange: async (e) => { const f = e.target.files[0]; if (f) ta.value = await f.text(); } });
     root.append(file, ta, h('button', { class: 'btn', type: 'button', onclick: () => { const r = act.memory.importJSON(ta.value); st.textContent = r.ok ? `Imported ${r.projects} project(s) into this browser.` : r.error; } }, 'Import'), st);
   }
+  if (c.quoteView) import('./quote_ui.js').then((m) => m.quoteExtras(root, c)).catch(() => {}); // the sales engine's screens load on demand: step counter, the one-page sheet, print, copy, the email link
   const btns = [];
   for (const b of c.buttons || []) {
     if (b.href) btns.push(h('a', { class: 'chip', href: new URL(b.href, baseUrl).href, target: '_blank', rel: 'noopener noreferrer' }, b.label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')));
@@ -226,7 +227,7 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
   if (voiceOn()) attachSpeech(input, form);
   if (sugg) sugg.prepend(h('button', { class: 'chip', type: 'button', onclick: () => slash.show() }, '/ commands'));
   // Each result card remembers the session it was made in, so its buttons (save, pack, export, hand-off) act on it even after newer answers
-  const snaps = new WeakMap(); const NO_SNAP = new Set(['clarify', 'export', 'memory', 'help', 'handoff']);
+  const snaps = new WeakMap(); const NO_SNAP = new Set(['clarify', 'export', 'memory', 'help', 'handoff', 'quote']);
   const rebind = (c) => {
     const sn = snaps.get(c); if (!sn || session.last === c) return;
     session.last = c; session.product = sn.product; session.products = sn.products.slice(); session.system = sn.system; session.compare = sn.compare; session.facets = { ...sn.facets }; session.lastQuestion = sn.lastQuestion;
@@ -243,7 +244,7 @@ export function attachActions({ log, input, form, sugg, add, send, config, close
       const cardAct = Object.create(act); cardAct.pend = r.card.kind === 'clarify' ? session.pending : null;
       const node = renderCard(r.card, cardAct);
       if (r.card.cartLinks) node.append(h('div', { class: 'opts' }, h('a', { class: 'chip chip--line', href: '#/projects', 'data-cart-page': '1', onclick: () => onNavigate() }, 'Open my projects page')));
-      return { node, outcome: oc };
+      return { node, outcome: oc, private: !!r.card.private };
     },
     observeV1(text, answer, outcome) { if (outcome === 'NOT_IN_PUBLISHED_DATA' && text && !text.startsWith('/')) memory.addGap(text); memory.rememberQuestion(text, 'ask'); },
     observeBrain(answer) { const raw = (answer && answer.brain) || answer; /* the panel hands over the adapted answer; the brain's own answer (with its cards) is inside it */ session.cartFocus = null; observeBrainAnswer(session, raw); brainAddButtons(log, raw, send); },

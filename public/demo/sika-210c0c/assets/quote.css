@@ -1,0 +1,79 @@
+/* Sales engine: the quote request in the advisor, the one-page sheet, the quotes log on My projects. Tokens from portal.css only. */
+.quote-card .qr-step{margin:.1rem 0 .4rem;font-size:.8125rem;color:var(--grey-dark);font-weight:600}
+.quote-card .qr-actions .chip{min-height:44px}
+.quote-card .qr-route{margin:.5rem 0}
+.quote-card .qr-preview{margin:.6rem 0;border:1px solid var(--grey);background:#fff}
+.quote-card .qr-preview summary{cursor:pointer;padding:.6rem .75rem;min-height:44px;font-weight:600}
+.quote-card .qr-preview .qr-sheet{margin:0;border:0;border-top:1px solid var(--grey)}
+.qr-section .table td,.qr-section .table th{overflow-wrap:anywhere}
+/* the sheet: also the printed page */
+.qr-sheet{background:#fff;color:var(--black);font-size:.8125rem;line-height:1.35;padding:.75rem;border:1px solid var(--grey);font-variant-numeric:tabular-nums}
+.qr-head{background:var(--primary);color:var(--primary-ink);padding:.5rem .75rem;margin:-.75rem -.75rem .5rem}
+.qr-title{margin:0;font-size:1.25rem;font-weight:700;line-height:1.2}
+.qr-meta{margin:.15rem 0 0;font-size:.8125rem}
+.qr-banner{margin:.35rem 0;padding:.3rem .5rem;border-left:4px solid var(--primary-dark);background:var(--grey-light);font-weight:600}
+.qr-h{margin:.6rem 0 .2rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.qr-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.qr-table th,.qr-table td{border:0;border-bottom:1px solid var(--grey-3);padding:.25rem .35rem .25rem 0;vertical-align:top;text-align:left;font-weight:400;overflow-wrap:anywhere;text-transform:none;letter-spacing:0;font-size:inherit}
+.qr-table thead th{font-weight:700;border-bottom:2px solid var(--black);font-size:.6875rem;text-transform:uppercase}
+.qr-table tbody th{font-weight:700;width:30%}
+.qr-table q{quotes:"\201C" "\201D"}
+.qr-sub{color:var(--grey-dark);font-size:.75rem}
+.qr-url{font-size:.6875rem;color:var(--grey-darker);overflow-wrap:anywhere;word-break:break-all}
+.qr-two{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.qr-kv{margin:0;display:grid;grid-template-columns:minmax(4.5rem,32%) 1fr}
+.qr-kv dt{font-weight:700;padding:.12rem .3rem .12rem 0}
+.qr-kv dd{margin:0;padding:.12rem 0;overflow-wrap:anywhere}
+.qr-docs{margin:0;padding-left:1rem}
+.qr-notes{margin:0}
+.qr-est{margin:.6rem 0 0;padding:.3rem .5rem;border:1px solid var(--black);font-weight:600}
+.qr-foot{margin:.35rem 0 0;font-size:.6875rem;color:var(--grey-dark)}
+@media (max-width:30em){.qr-two{grid-template-columns:1fr}.qr-table thead{position:absolute;left:-9999px}.qr-table,.qr-table tbody,.qr-table tr,.qr-table th,.qr-table td{display:block;width:auto!important}.qr-table tr{border-bottom:1px solid var(--grey-3);padding:.25rem 0}.qr-table th,.qr-table td{border:0}}
+#qr-print{display:none}
+@media print{
+  @page{size:A4;margin:7mm}
+  body.printing-quote{display:block}
+  body.printing-quote > *:not(#qr-print){display:none!important}
+  body.printing-quote #qr-print{display:block!important;position:static;margin:0;padding:0}
+  #qr-print .qr-sheet{border:0;padding:0;font-size:8.5pt;line-height:1.2;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #qr-print .qr-sub{font-size:.9em}
+  #qr-print .qr-url{font-size:.85em}
+  #qr-print .qr-h{margin:5pt 0 2pt;font-size:.9em}
+  #qr-print .qr-notes{margin:0}
+  #qr-print .qr-docs{padding-left:10pt}
+  #qr-print .qr-banner{margin:3pt 0;padding:2pt 6pt}
+  #qr-print .qr-est{margin:4pt 0 0;padding:2pt 6pt}
+  #qr-print .qr-foot{margin:2pt 0 0}
+  #qr-print .qr-kv dt,#qr-print .qr-kv dd{padding:0}
+  #qr-print .qr-table th,#qr-print .qr-table td{padding:2pt 4pt 2pt 0}
+  #qr-print .qr-head{margin:0 0 4pt;padding:4pt 8pt}
+  #qr-print .qr-title{font-size:16pt}
+  #qr-print .qr-meta{font-size:9pt}
+  #qr-print .qr-table{font-size:8.5pt}
+  #qr-print .qr-table thead{position:static}
+  #qr-print .qr-table,#qr-print .qr-table tr{display:revert}
+  #qr-print .qr-table tbody{display:table-row-group}
+  #qr-print .qr-table tr{display:table-row;break-inside:avoid}
+  #qr-print .qr-table th,#qr-print .qr-table td{display:table-cell;width:auto}
+  #qr-print .qr-table tbody th{width:30%}
+  #qr-print .qr-two{display:grid;grid-template-columns:1fr 1fr}
+  #qr-print .qr-table tbody th{width:26%}
+  #qr-print .qr-table thead th:nth-child(2){width:24%}
+  #qr-print .qr-d-dense{font-size:7.5pt}
+  #qr-print .qr-d-dense .qr-table{font-size:7pt}
+  #qr-print .qr-d-dense .qr-table th,#qr-print .qr-d-dense .qr-table td{padding:1.5pt 3pt 1.5pt 0}
+  #qr-print .qr-d-dense .qr-head{padding:3pt 8pt}
+  #qr-print .qr-d-tight{font-size:7pt;line-height:1.15}
+  #qr-print .qr-d-tight .qr-table{font-size:6.5pt}
+  #qr-print .qr-d-tight .qr-table th,#qr-print .qr-d-tight .qr-table td{padding:1pt 3pt 1pt 0}
+  #qr-print .qr-d-tight .qr-table td>.qr-sub,#qr-print .qr-d-micro .qr-table td>.qr-sub{display:inline;margin-left:3pt}
+  #qr-print .qr-d-micro{font-size:5.5pt;line-height:1.05}
+  #qr-print .qr-d-micro .qr-title{font-size:12pt}
+  #qr-print .qr-d-micro .qr-head{padding:2pt 8pt;margin-bottom:2pt}
+  #qr-print .qr-d-micro .qr-banner,#qr-print .qr-d-micro .qr-est{padding:1pt 4pt;margin:2pt 0}
+  #qr-print .qr-d-micro .qr-h{margin:3pt 0 1pt}
+  #qr-print .qr-d-micro .qr-table{font-size:5.2pt}
+  #qr-print .qr-d-micro .qr-table th,#qr-print .qr-d-micro .qr-table td{padding:.2pt 2pt .2pt 0}
+  #qr-print .qr-d-micro .qr-two{gap:6pt}
+  #qr-print .qr-d-micro .qr-foot{margin:1pt 0 0}
+}
