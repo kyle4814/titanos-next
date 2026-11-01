@@ -1,12 +1,202 @@
 [
  {
-  "id": "rec-clarifier-quantity-1",
+  "id": "rec-clarifier-time-1",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-2",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-3",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-4",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-5",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-6",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-7",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-8",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-9",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-clarifier-time-10",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does floor tile adhesive for 40 m2 take to cure",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "type": "time",
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-11",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -19,13 +209,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-2",
+  "id": "rec-quantity-kind-12",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -38,13 +228,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-3",
+  "id": "rec-quantity-kind-13",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -57,13 +247,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-4",
+  "id": "rec-quantity-kind-14",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -76,13 +266,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-5",
+  "id": "rec-quantity-kind-15",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -95,13 +285,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-6",
+  "id": "rec-quantity-kind-16",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -114,13 +304,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-7",
+  "id": "rec-quantity-kind-17",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -133,13 +323,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-8",
+  "id": "rec-quantity-kind-18",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -152,13 +342,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-9",
+  "id": "rec-quantity-kind-19",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -171,13 +361,13 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-10",
+  "id": "rec-quantity-kind-20",
   "group": "recommend",
   "turns": [
    {
     "q": "How much adhesive do I need for 40 m2 of floor tiles?",
     "expect": {
-     "type": "choose"
+     "type": "calculation"
     }
    },
    {
@@ -190,11 +380,1341 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-screed-11",
+  "id": "rec-quantity-kind-screed-21",
   "group": "recommend",
   "turns": [
    {
     "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-22",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-23",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-24",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-25",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-26",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-27",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-28",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-29",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-quantity-kind-screed-30",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how much leveller for 30 m2",
+    "expect": {
+     "type": "choose"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-31",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-32",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-33",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-34",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-35",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-36",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-37",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-38",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-39",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-range-list-40",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
+    "expect": {
+     "type": "product"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-41",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-42",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-43",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-44",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-45",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-46",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-47",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-48",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-49",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-compare-50",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "compare davco k10 plus and sikalastic 1k",
+    "expect": {
+     "type": "comparison"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-51",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-52",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-53",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-54",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-55",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-56",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-57",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-58",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-59",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-document-60",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "sds for davco k10 plus",
+    "expect": {
+     "type": "document"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-61",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-62",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-63",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-64",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-65",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-66",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-67",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-68",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-69",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-rate-70",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "coverage of sikatile 410 secureset",
+    "expect": {
+     "type": "rate"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-71",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-72",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-73",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-74",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-75",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-76",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-77",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-78",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-79",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-time-80",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "how long does sikafloor level pro take to cure",
+    "expect": {
+     "type": "time"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-81",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "recommend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-82",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "reccomend me one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-83",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "pick one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-84",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "you choose",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-85",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "whatever's best",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-86",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "just tell me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-87",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "which one would you use?",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-88",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "Recommend one for me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-89",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "suggest one",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-attr-90",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "shelf life of davco grey one pot",
+    "expect": {
+     "has": "12 months"
+    }
+   },
+   {
+    "q": "surprise me",
+    "expect": {
+     "rec": true,
+     "noUnknown": true
+    }
+   }
+  ]
+ },
+ {
+  "id": "rec-advice-91",
+  "group": "recommend",
+  "turns": [
+   {
+    "q": "best sealant for a window",
     "expect": {
      "type": "advice"
     }
@@ -209,1337 +1729,7 @@
   ]
  },
  {
-  "id": "rec-clarifier-quantity-screed-12",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-13",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-14",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-15",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-16",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-17",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-18",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-19",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-clarifier-quantity-screed-20",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how much leveller for 30 m2",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-21",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-22",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-23",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-24",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-25",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-26",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-27",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-28",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-29",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-range-list-30",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best tile adhesive for porcelain tiles on a concrete floor inside",
-    "expect": {
-     "type": "product"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-31",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-32",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-33",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-34",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-35",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-36",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-37",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-38",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-39",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-compare-40",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "compare davco k10 plus and sikalastic 1k",
-    "expect": {
-     "type": "comparison"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-41",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-42",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-43",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-44",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-45",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-46",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-47",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-48",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-49",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-document-50",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "sds for davco k10 plus",
-    "expect": {
-     "type": "document"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-51",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-52",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-53",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-54",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-55",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-56",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-57",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-58",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-59",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-rate-60",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "coverage of sikatile 410 secureset",
-    "expect": {
-     "type": "rate"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-61",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-62",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-63",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-64",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-65",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-66",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-67",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-68",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-69",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-time-70",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "how long does sikafloor level pro take to cure",
-    "expect": {
-     "type": "time"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-71",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-72",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "reccomend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-73",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "pick one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-74",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "you choose",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-75",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "whatever's best",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-76",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "just tell me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-77",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "which one would you use?",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-78",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "Recommend one for me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-79",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "suggest one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-attr-80",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "shelf life of davco grey one pot",
-    "expect": {
-     "has": "12 months"
-    }
-   },
-   {
-    "q": "surprise me",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-advice-81",
-  "group": "recommend",
-  "turns": [
-   {
-    "q": "best sealant for a window",
-    "expect": {
-     "type": "advice"
-    }
-   },
-   {
-    "q": "recommend me one",
-    "expect": {
-     "rec": true,
-     "noUnknown": true
-    }
-   }
-  ]
- },
- {
-  "id": "rec-advice-82",
+  "id": "rec-advice-92",
   "group": "recommend",
   "turns": [
    {
@@ -1558,7 +1748,7 @@
   ]
  },
  {
-  "id": "rec-advice-83",
+  "id": "rec-advice-93",
   "group": "recommend",
   "turns": [
    {
@@ -1577,7 +1767,7 @@
   ]
  },
  {
-  "id": "rec-advice-84",
+  "id": "rec-advice-94",
   "group": "recommend",
   "turns": [
    {
@@ -1596,7 +1786,7 @@
   ]
  },
  {
-  "id": "rec-advice-85",
+  "id": "rec-advice-95",
   "group": "recommend",
   "turns": [
    {
@@ -1615,7 +1805,7 @@
   ]
  },
  {
-  "id": "rec-advice-86",
+  "id": "rec-advice-96",
   "group": "recommend",
   "turns": [
    {
@@ -1634,7 +1824,7 @@
   ]
  },
  {
-  "id": "rec-advice-87",
+  "id": "rec-advice-97",
   "group": "recommend",
   "turns": [
    {
@@ -1653,7 +1843,7 @@
   ]
  },
  {
-  "id": "rec-advice-88",
+  "id": "rec-advice-98",
   "group": "recommend",
   "turns": [
    {
@@ -1672,7 +1862,7 @@
   ]
  },
  {
-  "id": "rec-advice-89",
+  "id": "rec-advice-99",
   "group": "recommend",
   "turns": [
    {
@@ -1691,7 +1881,7 @@
   ]
  },
  {
-  "id": "rec-advice-90",
+  "id": "rec-advice-100",
   "group": "recommend",
   "turns": [
    {
@@ -1710,7 +1900,7 @@
   ]
  },
  {
-  "id": "rec-system-91",
+  "id": "rec-system-101",
   "group": "recommend",
   "turns": [
    {
@@ -1729,7 +1919,7 @@
   ]
  },
  {
-  "id": "rec-system-92",
+  "id": "rec-system-102",
   "group": "recommend",
   "turns": [
    {

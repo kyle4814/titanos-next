@@ -14,10 +14,10 @@ ok(!/\d/.test(pick('Davco Easy Grout', 'tiles 600x600', ['A', 'B'])), 'a job tex
 ok(!/[–—]/.test(pick('X', 'floor tiles') + notPublished('That', 'Y')), 'voice text has no em or en dash');
 const brain = makeBrain(); await brain.boot();
 // the quantity clarifier offers a recommendation chip and the documented-fit picks; every option is answered
-let r = await brain.ask('How much adhesive do I need for 40 m2 of floor tiles?', null);
+let r = await brain.ask('how long does floor tile adhesive for 40 m2 take to cure', null);
 const ch = r.cards[0];
 ok(ch.type === 'choose' && ch.followups[0] === RECOMMEND_CHIP, 'the product clarifier opens with the recommend chip');
-ok(ch.followups.length >= 3 && ch.followups.slice(1, 4).every((o) => /^How much .* for 40 m2$/.test(o)), 'then the top documented-fit products with the area already carried');
+ok(ch.followups.length >= 3 && ch.followups.slice(1, 4).every((o) => /^How long does .* take to cure$/.test(o)), 'then the top documented-fit products for the asked intent');
 for (const o of ch.followups) { const a = await brain.ask(o, r.state); ok(a.cards.length && !a.cards.every((c) => c.type === 'unknown'), 'clarifier option answered: ' + o); }
 // the exact failing session from the live preview
 r = await brain.ask('How much adhesive do I need for 40 m2 of floor tiles?', null); let a = await brain.ask('reccomend me one', r.state);

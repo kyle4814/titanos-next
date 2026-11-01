@@ -25,7 +25,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
   const ids = (res) => [...new Set(res.cards.map((c) => c.product && c.product.id).filter(Boolean))];
   const JOBS = [[/level/, 'floor leveller'], [/tile-adhesive/, 'tile adhesive'], [/tile-grout|grouts?$/, 'tile grout'], [/waterproof|membrane/, 'waterproofing membrane'], [/sanitary-sealant/, 'bathroom sealant'], [/sealant/, 'sealant'], [/primer/, 'primer'], [/repair-mortar/, 'repair mortar'], [/admixture|water-?reducer|retarder|accelerator/, 'concrete admixture'], [/anchor/, 'chemical anchor'], [/epoxy/, 'epoxy'], [/adhesive/, 'construction adhesive']];
   const jobFromProduct = (id) => { const cat = String(productCategory(id) || ''); for (const [rx, job] of JOBS) if (rx.test(cat) && advisor.hasKind(job)) return job; const parts = cat.split('/').filter(Boolean).reverse(); for (const p of parts) { const t = leafOf(p); if (advisor.hasKind(t)) return t; } return ''; };
-  const newH = () => ({ job: '', product: '', products: [], kind: '', q: '', area: null, topic: '', hist: [] });
+  const newH = () => ({ jobState: null, job: '', product: '', products: [], kind: '', q: '', area: null, topic: '', hist: [] });
   const merge = (st, h) => ({ ...(st || {}), h });
 
   function update(h0, q, n, res) {
@@ -48,6 +48,8 @@ export function createSession({ ask, advisor, boot, productName, productCategory
   /** The recommendation answer: the pick first, its reason and source, then the original intent carried on for the picked product. */
   async function recommend(h, q) {
     const job = h.job || (h.product ? jobFromProduct(h.product) : '');
+    // the job record the inner brain gave (kind, area, thickness) is the single source: when the session has no job words of its own, the inner brain's recommendForJob answers from it
+    if (!job && h.jobState && h.jobState.kindId) { const b = await ask(q, { job: h.jobState }); if (b && b.trace.includes('recommend:job')) return b; }
     if (!job) {
       const a = V.askJob();
       const c = card({ type: 'choose', title: a.title, headline: a.headline, facts: [], status: 'PUBLISHED', chip: CHIPS.PUBLISHED, followups: CHIP_JOBS });
@@ -68,6 +70,8 @@ export function createSession({ ask, advisor, boot, productName, productCategory
       if (ask2) { const r2 = await ask(ask2, null); const c2 = r2.cards.filter((c) => c.type !== 'choose'); if (c2.length && c2[0].type !== 'unknown') { cards.push(...c2.slice(0, 1)); kindDone = h.kind; } }
     }
     if (kindDone && cards[0]) cards[0].lines = (cards[0].lines || []).concat([{ label: 'Then', text: V.bridge(kindDone) }]);
+    // the ranked, cited recommendation card of the inner brain leads when a job record is held (same advisor, same picks); the pick's product card follows
+    if (h.jobState && h.jobState.kindId && !kindDone) { const b = await ask(q, { job: h.jobState }); const bc = b && b.trace.includes('recommend:job') && b.cards[0]; if (bc && (bc.type === 'advice' || bc.type === 'calculation')) cards.unshift(bc); }
     const nm0 = rec.names[0];
     const followups = [`Data sheet for ${nm0}`, `Coverage of ${nm0}`, ...(rec.names[1] ? [`Tell me about ${rec.names[1]}`] : []), `Safety data sheet for ${nm0}`].slice(0, 4);
     return { schema: 'sika-brain-answer@1', query: q, intent: kindDone || 'which', stage: 'session', cards, followups, state: { productId: rec.ids[0], intent: kindDone || 'which' }, ms: 0, trace: ['session:recommend:' + job] };
@@ -133,11 +137,16 @@ export function createSession({ ask, advisor, boot, productName, productCategory
       const st = inner ? { ...inner } : null;
       const useQ = rewritten || q;
       const st2 = (h.product && !(st && st.productId) && (rewritten === null)) ? { ...(st || {}), productId: h.product, intent: (st && st.intent) || h.kind || 'which' } : st;
-      res = await ask(useQ, st2);
+      // ONE follow-up order: the session holds the job record (h.jobState, set from the inner brain's state.job); it is handed to the inner brain on every turn so its job chain
+      // (recommendForJob, product-less quantity, Add chips) reads the same job and the "which product do you mean" card never fires for a job the session already holds
+      const st3 = h.jobState && !(st2 && st2.job) && rewritten === null ? { ...(st2 || {}), job: h.jobState } : st2;
+      res = await ask(useQ, st3);
       if (rewritten) { res.trace.push('session:rewrite:' + rewritten); res.query = q; }
     }
     if (!res) res = await ask(q, inner);
     const h2 = update(h, q, n, res);
+    h2.jobState = (res.state && res.state.job) || ((res.stage === 'session' || res.cards.some((c) => c.type === 'unknown' || c.type === 'choose')) ? h.jobState : null);
+    if (h2.jobState && res.stage === 'session' && !(res.state && res.state.job)) res.state = { ...(res.state || {}), job: h2.jobState };
     res = await dress(res, h2);
     res.state = merge(res.state, (res.state && res.state.h) ? { ...h2, ...res.state.h } : h2);
     return res;
