@@ -22,7 +22,7 @@ function walk(dir, rel = '') {
 
 // wave 2: the data quality page (its JSON is network only, like data/gift/) is not needed offline, so its two files stay out of the 8 MB cache
 // the sales engine (quote request) is fetched on demand and stays out of the cache for the same reason: the 8 MB budget had 903 B left after the three-lane merge; offline, asking for a quote says so
-const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css|actions\/quote\.js|actions\/quote_ui\.js|quote\.css|brain\/rules(_read|_plan)?\.js)$/; // brain/rules*.js (the plan engine) reads data/brain/rules/*.json shards that are never cached, so it cannot run offline: 78 KB out of the cache
+const NET_ONLY = /^assets\/(lib\/data-quality\.js|dq\.css|actions\/quote\.js|actions\/quote_ui\.js|actions\/quote_out\.js|quote\.css|brain\/rules(_read|_plan)?\.js)$/; // brain/rules*.js (the plan engine) reads data/brain/rules/*.json shards that are never cached, so it cannot run offline: 78 KB out of the cache
 
 export function listing() {
   const files = ['index.html'];

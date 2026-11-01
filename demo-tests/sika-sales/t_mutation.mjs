@@ -14,14 +14,14 @@ const copy = () => { const dst = fs.mkdtempSync(path.join(tmp, 'a-')); for (cons
 const run = (test, dst) => spawnSync('node', ['--no-warnings', path.join(HERE, test)], { env: { ...process.env, QUOTE_ASSETS: dst }, encoding: 'utf8', timeout: 240000 });
 const mutate = (dst, file, from, to) => { const p = path.join(dst, file); const s = fs.readFileSync(p, 'utf8'); if (!s.includes(from)) throw new Error('mutation anchor missing: ' + from.slice(0, 50)); fs.writeFileSync(p, s.replace(from, to)); };
 const MUTS = [
-  ['an email check that only looks for @', 't_intake.mjs', 'actions/quote.js', "if (t.length > 120 || /\\s/.test(t)) return false;", "return /@/.test(t);"],
+  ['an email check that only looks for @', 't_intake.mjs', 'actions/quote_out.js', "if (t.length > 120 || /\\s/.test(t)) return false;", "return /@/.test(t);"],
   ['dates in the past accepted', 't_intake.mjs', 'actions/quote.js', "if (d < today) return { ok: false, error: TEMPLATES.invalid.datePast };", ""],
   ['skip allowed on a required step', 't_intake.mjs', 'actions/quote.js', "const SKIPPABLE = new Set(['site', 'needed', 'delivery', 'company', 'phone', 'besttime', 'notes']);", "const SKIPPABLE = new Set(['site', 'needed', 'delivery', 'company', 'phone', 'besttime', 'notes', 'name', 'email', 'who']);"],
-  ['the mailto goes to an address that is not in the published shard', 't_quote.mjs', 'actions/quote.js', "mailto:${e.address}?subject", "mailto:sales@sika.com.au?subject"],
-  ['the mailto body is cut short', 't_quote.mjs', 'actions/quote.js', "let body = requestText(rec); let level = 'full';", "let body = requestText(rec).slice(0, 300); let level = 'full';"],
-  ['a taken reference is reused', 't_quote.mjs', 'actions/quote.js', "if (!used.has(ref)) return ref;", "return ref;"],
+  ['the mailto goes to an address that is not in the published shard', 't_quote.mjs', 'actions/quote_out.js', "mailto:${e.address}?subject", "mailto:sales@sika.com.au?subject"],
+  ['the mailto body is cut short', 't_quote.mjs', 'actions/quote_out.js', "let body = requestText(rec); let level = 'full';", "let body = requestText(rec).slice(0, 300); let level = 'full';"],
+  ['a taken reference is reused', 't_quote.mjs', 'actions/quote_out.js', "if (!used.has(ref)) return ref;", "return ref;"],
   ['the cart signature ignores quantities, so an edit never marks a quote stale', 't_quote.mjs', 'lib/projectstore.js', "`${i.id}:${i.qty}:${i.unit}`", "`${i.id}`"],
-  ['the demand signal leaks the email', 't_quote.mjs', 'actions/quote.js', "role: q.role, supply: q.delivery,", "role: q.role, supply: q.delivery, email: q.contact.email,"],
+  ['the demand signal leaks the email', 't_quote.mjs', 'actions/quote_out.js', "role: q.role, supply: q.delivery,", "role: q.role, supply: q.delivery, email: q.contact.email,"],
   ['clearing the project keeps the quotes', 't_quote.mjs', 'lib/projectstore.js', "p.items = []; p.quotes = [];", "p.items = [];"],
 ];
 { const dst = copy(); const r = run('t_intake.mjs', dst); t('control: the unmutated copy passes t_intake', r.status === 0, (r.stdout || '').slice(-200)); const r2 = run('t_quote.mjs', dst); t('control: the unmutated copy passes t_quote', r2.status === 0, (r2.stdout || '').slice(-200)); }

@@ -54,7 +54,7 @@ const PLACE = [
 const ROOM_WORD = /bathroom|bath room|ensuite|en-suite|shower|laundry|wet room|wet area|powder room|toilet|\bwc\b|kitchen|living|lounge|bedroom|hallway|\bhall\b|dining|entry|room|study|office|pantry|balcon|patio|terrace|deck|verandah|veranda|courtyard|alfresco|pool|\bspa\b|floor|walls?\b|splashback|\bjob\b|area/;
 
 export function normaliseRoomText(text) {
-  return ' ' + String(text || '').toLowerCase().replace(/[×✕]/g, ' x ').replace(/²/g, '2').replace(/(\d),(\d{3})(?!\d)/g, '$1$2').replace(/(\d),(\d)/g, '$1.$2').replace(/[‘’]/g, "'").replace(/\s+/g, ' ') + ' ';
+  return ' ' + String(text || '').toLowerCase().replace(new RegExp('[×' + String.fromCharCode(0x2715) + ']', 'g'), ' x ').replace(/²/g, '2').replace(/(\d),(\d{3})(?!\d)/g, '$1$2').replace(/(\d),(\d)/g, '$1.$2').replace(/[‘’]/g, "'").replace(/\s+/g, ' ') + ' ';
 }
 
 /**
