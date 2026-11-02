@@ -266,8 +266,11 @@ export function compareCard(a, b) {
   const facts = [], rows = [];
   rows.push(row('What it is', a.d.t || a.d.s || 'Not in the published documentation', b.d.t || b.d.s || 'Not in the published documentation'));
   facts.push(fact({ source_url: a.u, sentence: a.d.t || a.d.s, doc_type: 'WEB' }), fact({ source_url: b.u, sentence: b.d.t || b.d.s, doc_type: 'WEB' }));
-  rows.push(row('Coverage', ca ? ca.text : 'Not in the published documentation', cb ? cb.text : 'Not in the published documentation'));
-  if (ca) facts.push(srcFact(ca)); if (cb) facts.push(srcFact(cb));
+  // a consumption line from a table is meaningless without its table basis and column headings ("14m2" next to "1.1kg"): carry them in the cell, quoted, or say the row has none
+  const covCell = (c) => { if (!c) return { text: 'Not in the published documentation', facts: [] }; const rl = rowLines([{ f: c, label: 'Consumption' }], 1); return { text: rl.lines.map((l) => (l.label === 'Table columns' ? (l.text === NO_HEADER ? 'No column headings are published for this row: ' : 'Columns: ') + (l.text === NO_HEADER ? '' : l.text) : l.label === 'Consumption' ? l.text : l.text)).join('. ').replace(': . ', ': '), facts: rl.facts }; };
+  const va = covCell(ca), vb = covCell(cb);
+  rows.push(row('Coverage', va.text, vb.text));
+  facts.push(...va.facts, ...vb.facts);
   rows.push(row('Packaging', a.d.pk || 'Not in the published documentation', b.d.pk || 'Not in the published documentation'));
   if (a.d.pk) facts.push(fact({ source_url: a.u, sentence: a.d.pk, doc_type: 'WEB' })); if (b.d.pk) facts.push(fact({ source_url: b.u, sentence: b.d.pk, doc_type: 'WEB' }));
   return card({ type: 'comparison', title: `${a.n} and ${b.n} side by side`, product: null, headline: 'Both columns are quoted from the published documentation. Where one is silent, it says so.', table: { cols: ['', a.n, b.n] , rows }, facts: facts.filter((f) => f.sentence), chip: CHIPS.PAGE,

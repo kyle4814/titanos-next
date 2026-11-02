@@ -42,8 +42,10 @@ export function deriveAliases(core, pIndex) {
     const vs = new Set([noNum.join(' ')]);
     for (const v of vs) { if (v.split(' ').length < 2 || v.replace(/ /g, '').length < 9) continue; const cur = seen.get(v); if (cur == null) seen.set(v, pIndex.get(p.id)); else if (cur !== pIndex.get(p.id)) seen.set(v, -1); }
   }
+  // a shortened name that sits inside ANOTHER product's name too ("sikaflex fc" is in 212 FC, 11 FC+ and 11 FC Purform) names a range, not a product: leave it to the "which one?" chooser
+  const nameSets = core.P.map((p) => new Set(normalise(p.n).split(' ').filter(Boolean)));
   let added = 0;
-  for (const [k, pi] of seen) { if (pi < 0 || core.alias[k]) continue; core.alias[k] = [pi]; added++; }
+  for (const [k, pi] of seen) { if (pi < 0 || core.alias[k]) continue; const ws = k.split(' '); if (nameSets.filter((s) => ws.every((w) => s.has(w))).length > 1) continue; core.alias[k] = [pi]; added++; }
   return added;
 }
 const H = [

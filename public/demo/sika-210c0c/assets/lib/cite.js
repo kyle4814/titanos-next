@@ -56,3 +56,16 @@ export function sourceControl(model, { lazyTitle } = {}) {
   panel.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { e.stopPropagation(); set(false); btn.focus(); } }); // Escape closes this panel only, not the chat around it
   return [btn, panel];
 }
+
+/** The button's first press (brain-ui.js cite()): builds the source control for one fact of a card and swaps it in. fetchJson is the page's memoised shard fetch. */
+export function openSource(slot, c, f, fetchJson) {
+  // the document's own title, read from the product shard the answer was built from (already in the page memo, so no new request); null when it is not there
+  const docTitle = async () => {
+    const sh = c.product && c.product.id && await fetchJson('data/brain/p/' + encodeURIComponent(c.product.id) + '.json'); if (!sh) return null;
+    const base = String(f.source_url || '').replace(/#page=\d+$/, ''), d = (sh.dc || []).find((x) => x.u === base);
+    if (d && d.t) return d.t;
+    return sh.sp && sh.sp.ds && sh.sp.ds.url === base && sh.sp.ds.title ? sh.sp.ds.title : null;
+  };
+  const [btn, panel] = sourceControl(citeModel({ quote: f.sentence, url: f.source_url, docType: f.doc_type, version: f.doc_version, page: f.page, productName: c.product ? c.product.name : '' }), { lazyTitle: docTitle });
+  slot.replaceChildren(btn, panel); btn.click(); btn.focus();
+}

@@ -6,7 +6,7 @@ import { normalise } from './text.js';
 import { jobOf, areaOf, leafOf, recommendFor } from './recommend.js';
 import * as V from './voice.js';
 import { card, CHIPS, fact, finalize } from './schema.js';
-import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, defaultPick, joinPlace, isModifier, withPick, PICK_RX, wantsPick, looseSocial, compareSides, isPronounSide } from './chat.js';
+import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, defaultPick, joinPlace, isModifier, withPick, PICK_RX, wantsPick, looseSocial, sellAsk, compareSides, isPronounSide } from './chat.js';
 
 const REC = /\brec+o?m+e?n+d|\b(suggest|pick one|pick for me|you pick|you choose|you decide|your pick|your choice|up to you|just tell me|you tell me|best one|whatever is best|whatever s best|whatever you think|surprise me|any one|no preference|dont mind|don t mind|doesn t matter|which (one )?(should|would) (i|you)|what would you (use|pick|choose|go with)|which is best|which one is best|which one s best|you choose for me)\b/;
 const ORD = /^(?:(?:and|ok|okay|now|so|what about|how about|tell me about|show me|go with|i ll take|ill take|i take) )*(?:the )?(first|1st|top|second|2nd|third|3rd|last|fourth|4th)(?: one| option| product| choice)?(?: please)?$/;
@@ -27,6 +27,9 @@ export function createSession({ ask, advisor, boot, productName, productCategory
   const ids = (res) => [...new Set(res.cards.map((c) => c.product && c.product.id).filter(Boolean))];
   const JOBS = [[/level/, 'floor leveller'], [/tile-adhesive/, 'tile adhesive'], [/tile-grout|grouts?$/, 'tile grout'], [/waterproof|membrane/, 'waterproofing membrane'], [/sanitary-sealant/, 'bathroom sealant'], [/sealant/, 'sealant'], [/primer/, 'primer'], [/repair-mortar/, 'repair mortar'], [/admixture|water-?reducer|retarder|accelerator/, 'concrete admixture'], [/anchor/, 'chemical anchor'], [/epoxy/, 'epoxy'], [/adhesive/, 'construction adhesive']];
   const jobFromProduct = (id) => { const cat = String(productCategory(id) || ''); for (const [rx, job] of JOBS) if (rx.test(cat) && advisor.hasKind(job)) return job; const parts = cat.split('/').filter(Boolean).reverse(); for (const p of parts) { const t = leafOf(p); if (advisor.hasKind(t)) return t; } return ''; };
+  /** The message names a kind of product (tile adhesive, floor leveller, membrane) that is not the kind of the product held: a new topic, so the held product must not be reused for it. */
+  const typeClash = (n, h) => { const k = advisor.kindOf(n); if (!k) return false; const held = h.product && jobFromProduct(h.product); const hk = held && advisor.kindOf(held); return k !== hk; };
+  const qtyShaped = (n) => areaOf(n) != null || /\bhow (?:much|many)\b|\blitres?\b|\bquantity\b/.test(n);
   const newH = () => ({ jobState: null, job: '', product: '', products: [], kind: '', q: '', area: null, topic: '', hist: [] });
   const merge = (st, h) => ({ ...(st || {}), h });
 
@@ -43,7 +46,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     if (KINDS_WITH_PRODUCT.has(res.intent) || res.intent === 'compare' || res.intent === 'system') h.kind = res.intent;
     else if (['which', 'product', 'attr', 'tree', 'advice'].includes(res.intent)) h.kind = '';
     if (res.stage === 'kb' && res.cards[0]) h.topic = res.cards[0].title || '';
-    h.q = q; h.hist.push(q);
+    h.q = q; h.hist.push(q); h.fresh = false;
     return h;
   }
 
@@ -110,26 +113,41 @@ export function createSession({ ask, advisor, boot, productName, productCategory
 
   /** One side of a comparison to ONE product: a pronoun is the last product of the session; a name is asked of the brain and kept only when every word of it is in the product's own name. */
   const sideTokens = (t) => normalise(t).split(' ').filter((w) => w && !/^(the|a|an|sika|and|of)$/.test(w));
+  // variants of ONE line share their first three name words ("Sikadur-Combiflex SG System" and "SG-10 P"): naming the line is naming it. "Sikaflex-212 FC" and "Sikaflex-11 FC+" do not, and that is the which-one case.
+  const sameLine = (ps) => new Set(ps.map((p) => normalise(p.name).split(' ').slice(0, 3).join(' '))).size === 1;
+  // the words ARE one product's whole name with its model number left out, and every other product that fits only continues that name with more words at the end and has no model number of its own ("SikaBond Instant Nails" vs "SikaBond INSTANT NAILS FAST"): the visitor named the base product. A product whose name has words inside the phrase ("SikaTile-510 Mega Lite" for "sikatile lite") or a second product with the same bare name ("Sikaflex-212 FC", "Sikaflex-11 FC+") keeps it a which-one.
+  const nameWords = (nm) => normalise(nm).split(' ').filter((w) => w && !/^(the|a|an|sika|and|of)$/.test(w) && !/^\d+$/.test(w));
+  const baseOf = (ok, want) => { if (ok.length < 2) return null; const wn = want.filter((w) => !/^\d+$/.test(w)); const eq = (a, b) => a.length === b.length && a.every((w, i) => w === b[i] || w === b[i].replace(/s$/, '') || w.replace(/s$/, '') === b[i]); const ex = ok.filter((p) => eq(nameWords(p.name), wn)); if (ex.length !== 1) return null; return ok.every((p) => p === ex[0] || (!/\d/.test(p.name) && nameWords(p.name).length > wn.length && eq(nameWords(p.name).slice(0, wn.length), wn))) ? ex[0] : null; };
   async function resolveSide(text, h, other) {
     const t = String(text || '').trim(); if (!t) return null;
     if (isPronounSide(t)) { const id = h.product || (h.products && h.products[0]); return id && productName(id) ? { id, name: productName(id) } : null; }
     const tries = [t]; const tk = sideTokens(t);
     if (tk.length <= 2 && other && !isPronounSide(other)) { const lead = sideTokens(other)[0]; if (lead && !tk.includes(lead)) tries.push(lead + ' ' + t); } // a bare number on one side takes the other side's product family
+    let amb = null;
     for (const tt of tries) {
       const want = sideTokens(tt);
       // the catalogue's own names first: the words of the side are exactly a product's name, or all in ONE product's name
       if (productList && want.length) { const all = productList().map((p) => ({ ...p, tk: new Set(normalise(p.name).split(' ').filter((w) => w && !/^(the|a|an|sika|and|of)$/.test(w))) })); const ok = all.filter((p) => want.every((w) => p.tk.has(w) || p.tk.has(w.replace(/s$/, ''))));
-        const exact = ok.filter((p) => p.tk.size === want.length); const one = exact.length === 1 ? exact[0] : ok.length === 1 ? ok[0] : null; if (one) return { id: one.id, name: one.name }; }
+        const exact = ok.filter((p) => p.tk.size === want.length); const one = exact.length === 1 ? exact[0] : ok.length === 1 ? ok[0] : null; if (one) return { id: one.id, name: one.name }; const base = baseOf(ok, want); if (base) return { id: base.id, name: base.name }; if (ok.length > 1 && !sameLine(ok)) { amb = amb || ok; continue; } } // a range name that fits several products is not one product: say so, never take the first
       const r = await ask(tt, null);
       const cands = (r.cards || []).map((c) => c.product).filter(Boolean);
       const hit = cands.find((p) => { const nm = new Set(normalise(p.name).split(' ')); return want.length && want.every((w) => nm.has(w) || nm.has(w.replace(/s$/, ''))); });
       if (hit) return { id: hit.id, name: hit.name };
     }
-    return null;
+    return amb ? { amb: amb.slice(0, 5).map((p) => ({ id: p.id, name: p.name })) } : null;
   }
   async function compareAsk(q, h) {
     const sides = compareSides(q); if (!sides) return null;
     const A = await resolveSide(sides.a, h, sides.b); const B = A && await resolveSide(sides.b, h, sides.a);
+    // either side names a range (several products fit): ask which one, with a chip per product, instead of quietly taking the first
+    const amb = A && A.amb ? { side: sides.a, list: A.amb, other: B && !B.amb ? B.name : sides.b } : B && B.amb ? { side: sides.b, list: B.amb, other: A.name, flip: true } : null;
+    if (amb) {
+      const pair = (x, y) => (/&/.test(x) && !/&/.test(y) ? `Compare ${y} and ${x}` : `Compare ${x} and ${y}`); // a name with an ampersand goes last: the sides are split at the first "and"
+      const chips = amb.list.map((p) => (amb.flip ? pair(amb.other, p.name) : pair(p.name, amb.other)));
+      const c = card({ type: 'choose', title: `Which ${amb.side.replace(/^(the|a|an) /i, '')} do you mean?`, headline: `"${amb.side}" fits more than one product in the Sika Australia range. Pick the one you want in the comparison.`, facts: [], status: 'PUBLISHED', chip: CHIPS.PUBLISHED, followups: chips });
+      c.choices = amb.list.map((p, i) => ({ label: p.name, value: chips[i] }));
+      return { choose: c };
+    }
     if (!A || !B || A.id === B.id) return null;
     return `compare ${A.name} and ${B.name}`;
   }
@@ -142,13 +160,14 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     const words = n.split(' ').filter(Boolean).length;
     let res = null; let rewritten = null; let wantPick = wantsPick(q);
     // 0. the talking layer (chat.js): a social turn, a vague place or product group, and the short reply that answers a clarifying question
-    const chatAnswer = (c, kind, convo) => { finalize(c); if (convo && convo.id !== 'generic') { h.place = convo.id; h.pt = 0; } return { schema: 'sika-brain-answer@1', query: q, intent: kind === 'social' ? 'social' : 'vague', stage: 'chat', cards: [c], followups: [], state: merge(inner ? { ...inner } : null, { ...h, convo }), ms: 0, trace: ['chat:' + kind] }; };
+    const chatAnswer = (c, kind, convo) => { finalize(c); if (convo && convo.id !== 'generic') { h.place = convo.id; h.pt = 0; } if (kind === 'ask') h.qa = q; return { schema: 'sika-brain-answer@1', query: q, intent: kind === 'social' ? 'social' : 'vague', stage: 'chat', cards: [c], followups: [], state: merge(inner ? { ...inner } : null, { ...h, convo }), ms: 0, trace: ['chat:' + kind] }; };
     const sk = socialKind(q);
     // a thanks or a goodbye closes the thread: what comes next is a new topic, not an answer to the old clarifier
     if (sk === 'thanks' || sk === 'bye') { h.convo = null; h.place = null; }
-    if (sk) return chatAnswer(socialCard(sk, q), 'social', h.convo || null);
+    if (sk) { h.fresh = true; return chatAnswer(socialCard(sk, q), 'social', h.convo || null); } // a social turn: the product held before it is not carried into a quantity ask after it
     // two products joined by a comparing word ("X vs Y", "difference between X and Y", "how does X measure up to Y"): resolve each side to ONE product, then one side-by-side card
     const cmpAsk = await compareAsk(q, h);
+    if (cmpAsk && cmpAsk.choose) { finalize(cmpAsk.choose); return { schema: 'sika-brain-answer@1', query: q, intent: 'which', stage: 'session', cards: [cmpAsk.choose], followups: cmpAsk.choose.followups, state: merge(inner ? { ...inner } : null, h), ms: 0, trace: ['session:compare:which'] }; }
     if (cmpAsk) { rewritten = cmpAsk; wantPick = false; }
     if (h.place) h.pt = (h.pt || 0) + 1; // turns since the last place we asked about; after 3 it is stale
     const fu = rewritten === null && h.convo ? ((words <= 9 && REC.test(n) && bare(n) ? defaultPick(h.convo) : null) || followUp(q, h.convo)) : null;
@@ -186,13 +205,14 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     // 5. go back
     else if (BACK.test(n) && h.hist.length >= 2) rewritten = h.hist[h.hist.length - 2];
     // 6. and the SDS? what about outdoors? (read against the last product and the last question)
-    else if (h.product && productName(h.product) && areaOf(n) != null && words <= 10 && /\bhow (?:much|many)\b|\blitres?\b|\bquantity\b/.test(n) && !/\b(?:sika\w*|davco|lanko|schonox)\b/.test(n) && !(h.jobState && h.jobState.kindId)) { const th = /\b(\d+(?:\.\d+)?) ?mm\b/.exec(n); rewritten = `how much ${productName(h.product)} for ${areaOf(n)} m2${th ? ` at ${th[1]} mm` : ''}`; } // "6 m2, how many litres" right after a product: that product
+    else if (h.product && productName(h.product) && areaOf(n) != null && words <= 10 && /\bhow (?:much|many)\b|\blitres?\b|\bquantity\b/.test(n) && !/\b(?:sika\w*|davco|lanko|schonox)\b/.test(n) && !(h.jobState && h.jobState.kindId) && !h.fresh && !typeClash(n, h)) { const th = /\b(\d+(?:\.\d+)?) ?mm\b/.exec(n); rewritten = `how much ${productName(h.product)} for ${areaOf(n)} m2${th ? ` at ${th[1]} mm` : ''}`; } // "6 m2, how many litres" right after a product: that product
     else if (ASPECT.test(n) && h.product && productName(h.product)) { const a = ASPECT.exec(n)[1]; rewritten = `${a} ${/^(sds|msds|pds|tds|data ?sheet|safety data sheet|safety sheet)$/.test(a) ? 'for' : 'of'} ${productName(h.product)}`; }
     else if (ENV.test(n) && h.q && !(inner && inner.advice)) { const e = ENV.exec(n)[1]; if (h.product && productName(h.product)) rewritten = `${h.q.replace(/[?.!]+$/, '')} ${e}`; else if (h.job) rewritten = `best ${h.job} ${e}`; }
     if (!res) {
       const st = inner ? { ...inner } : null;
+      if (st && h.fresh && qtyShaped(n)) { delete st.productId; delete st.productIds; } // right after a hi or a thanks, "how much for 10 m2" is a new ask, not about the product held before
       const useQ = rewritten || q;
-      const st2 = (h.product && !(st && st.productId) && (rewritten === null)) ? { ...(st || {}), productId: h.product, intent: (st && st.intent) || h.kind || 'which' } : st;
+      const st2 = (h.product && !(st && st.productId) && (rewritten === null) && !typeClash(n, h) && !(h.fresh && qtyShaped(n))) ? { ...(st || {}), productId: h.product, intent: (st && st.intent) || h.kind || 'which' } : st;
       // ONE follow-up order: the session holds the job record (h.jobState, set from the inner brain's state.job); it is handed to the inner brain on every turn so its job chain
       // (recommendForJob, product-less quantity, Add chips) reads the same job and the "which product do you mean" card never fires for a job the session already holds
       const st3 = h.jobState && !(st2 && st2.job) && rewritten === null ? { ...(st2 || {}), job: h.jobState } : st2;
@@ -203,10 +223,15 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     // a range name with more of the product's own name after it ("SikaBond Instant Nails"): the brain asked "which one?", but the visitor already said which. Resolve the words that follow the family to ONE product and ask again with its full name.
     if (rewritten === null && res.cards[0] && res.cards[0].type === 'choose') {
       const fam = (res.trace || []).find((x) => x.startsWith('family:')); const fw = fam && fam.slice(7);
+      let ambig = null;
       if (fw) { const toks = n.split(' '); const i = toks.indexOf(fw);
-        for (let len = Math.min(4, toks.length - i - 1); len >= 1 && i >= 0; len--) { const win = toks.slice(i + 1, i + 1 + len); if (win.some((w) => /^(is|ok|for|can|the|a|to|on|in|and|or|how|what|does|will|be|it|at|when)$/.test(w))) continue; const r = await resolveSide([fw, ...win].join(' '), h, null); if (r) { const again = q.replace(new RegExp(fw + '[^a-z0-9]*' + win.join('[^a-z0-9]*'), 'i'), r.name); if (again !== q) { rewritten = again; res = await ask(again, inner); res.trace.push('session:family:' + r.name); res.query = q; break; } } } }
+        for (let len = Math.min(4, toks.length - i - 1); len >= 1 && i >= 0; len--) { const win = toks.slice(i + 1, i + 1 + len); if (win.some((w) => /^(is|ok|for|can|the|a|to|on|in|and|or|how|what|does|will|be|it|at|when)$/.test(w))) continue; const r = await resolveSide([fw, ...win].join(' '), h, null); if (r && r.amb && !ambig) { const rx = new RegExp(fw + '[^a-z0-9]*' + win.join('[^a-z0-9]*'), 'i'); if (rx.test(q)) ambig = r.amb.map((p) => ({ name: p.name, value: q.replace(rx, p.name) })); } if (r && !r.amb) { const again = q.replace(new RegExp(fw + '[^a-z0-9]*' + win.join('[^a-z0-9]*'), 'i'), r.name); if (again !== q) { rewritten = again; res = await ask(again, inner); res.trace.push('session:family:' + r.name); res.query = q; break; } } } }
+      // the words after the family fit several products ("sikaflex fc" is 212 FC, 11 FC+ and 11 FC Purform): ask which of THOSE, never take the first
+      if (ambig && rewritten === null) { const c = card({ type: 'choose', title: `Which ${fw} product do you mean?`, headline: `That fits more than one ${fw} product in the Sika Australia range. Pick the one you mean.`, facts: [], status: 'PUBLISHED', chip: CHIPS.PUBLISHED, followups: ambig.map((x) => x.value) }); c.choices = ambig.map((x) => ({ label: x.name, value: x.value })); finalize(c); res = { ...res, cards: [c], followups: c.followups, trace: [...(res.trace || []), 'session:family:which'] }; }
     }
     { const lk = !rewritten && res.cards[0] && looseSocial(q, res.cards[0]); if (lk) return chatAnswer(socialCard(lk, q), 'social', h.convo || null); } // nothing in it is about the range: chat, not a not-found card
+    { const c0 = res.cards[0]; if (c0 && c0.type === 'unknown' && !c0.product && sellAsk(q)) c0.headline = 'That is not in the Sika Australia documentation I work from, so I cannot say Sika sells or does it. I can help with Sika products for a job: tell me the surface and the problem.'; }
+    { const c0 = res.cards[0]; if (c0 && c0.type === 'comparison' && /\b(better|best|worse|worst|recommend\w*|should i (?:use|buy|get|pick)|which (?:one|is|would|should))\b/.test(n) && !/ the data sheets do not rank/.test(c0.headline)) c0.headline += ' The data sheets do not rank products, so I cannot say which is better. The table shows what each one publishes.'; }
     if (wantPick) res = withPick(res, q);
     const h2 = update(h, q, n, res); h2.qa = rewritten || q;
     h2.jobState = (res.state && res.state.job) || ((res.stage === 'session' || res.cards.some((c) => c.type === 'unknown' || c.type === 'choose')) ? h.jobState : null);

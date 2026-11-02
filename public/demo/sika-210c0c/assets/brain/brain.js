@@ -36,9 +36,12 @@ const RX = {
 };
 // other brands are detected so the brain can decline to comment on them; stored reversed so no source file names a brand
 const OTHER_BRANDS = new RegExp('\\b(' + ['xedra', 'iepam', 'etercital', 'kitsob', 'corsof', 'polnud', 'mehcrap', 'rebew', 'tidra', 'xelfepam', 'retsamelit', 'sgninnub', 'syelles', 'xulud', 'lyttaw', 'eneser', 'snambuat', 'semyah', 'itlih', 'tesmar', 'rehcsif', 'slian diuqil'].map((s) => [...s].reverse().join('')).join('|') + ')\\b');
+/** "buy", "purchase" and "available" alone do not make a price question: "what membrane is available for a balcony", "what colours is X available in" and "I want to purchase a membrane for my shower" ask what the range holds, which the documentation answers. Price, stock, delivery and where-to-buy words still go to the honest no. */
+const WEAK_PRICE = /\b(buy|purchase|available|availability)\b/g;
+const rangeNotPrice = (n) => !RX.price.test(n.replace(WEAK_PRICE, ' ')) && (/^(what|which|any|show me|list|are there)\b.*\bavailable\b/.test(n) || /\bavailable (in|as) (what |which )?(colou?rs?|sizes?|packs?|packaging|pails?|cartridges?)\b/.test(n) || /\bto (buy|purchase) (a|an|some)\b.*\b(for|to|on|in|around)\b/.test(n));
 export function classify(n, hasArea) {
   if (OTHER_BRANDS.test(n)) return 'other_brand';
-  if (RX.price.test(n)) return 'price';
+  if (RX.price.test(n) && !rangeNotPrice(n)) return 'price';
   if (RX.compare.test(n)) return 'compare';
   if ((hasArea && (RX.calcWords.test(n) || /\b(need(ed|s)?|require[ds]?|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n)) return 'calc';
   if (RX.time.test(n)) return 'time';

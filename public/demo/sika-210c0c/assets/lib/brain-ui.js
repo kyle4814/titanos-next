@@ -22,10 +22,10 @@ function loadRulesModule() {
     try { const s = document.createElement('script'); s.type = 'module'; s.src = new URL('../brain/rules.js', import.meta.url).href; s.onload = () => resolve(globalThis.__sikaRules || null); s.onerror = () => resolve(null); document.head.appendChild(s); } catch { resolve(null); }
   }));
 }
-let brainP = null, bstate = null, stateLoaded = false, persist = null;
+let brainP = null, bstate = null, stateLoaded = false, persist = null, gen = 0;
 // the conversation context survives a page reload (assets/brain/persist.js: sessionStorage, optional)
 // persist.js is fetched with the brain (first question), not with the first screen
-export const resetBrainState = (store) => { bstate = null; stateLoaded = true; try { (store || globalThis.sessionStorage).removeItem('sika-brain-state-v1'); } catch { /* no storage */ } };
+export const resetBrainState = (store) => { gen++; bstate = null; stateLoaded = true; try { (store || globalThis.sessionStorage).removeItem('sika-brain-state-v1'); } catch { /* no storage */ } };
 // one in-page memo of fetched JSON, shared with the actions layer (assets/actions/core.js), so a shard is never downloaded twice on a cold load
 const jsonMemo = (globalThis.__sikaJson ||= new Map());
 const fetchJson = (rel) => { const url = new URL('../../' + rel, import.meta.url).href; if (!jsonMemo.has(url)) jsonMemo.set(url, fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null)); return jsonMemo.get(url); };
@@ -46,10 +46,12 @@ export function resetBrain(store) { resetBrainState(store); }
 export function prefetchBrain() { if (brainOn()) ensureBrain(); }
 /** Ask the brain and return a panel-shaped answer, or null when the brain cannot run (the caller falls back to v1). */
 export async function brainAnswer(text) {
+  const g = gen;
   const brain = await ensureBrain(); if (!brain) return null;
   try { persist ||= await import('../brain/persist.js'); } catch { persist = { loadBrainState: () => null, saveBrainState() {} }; }
   if (!stateLoaded) { stateLoaded = true; bstate = persist.loadBrainState(); }
   let a; try { a = await brain.ask(text, bstate); } catch { return null; }
+  if (g !== gen) return { stale: true };
   bstate = a.state || bstate; persist.saveBrainState(bstate);
   const sourced = a.cards.filter((c) => c.status === 'PUBLISHED' && c.source);
   const noneKnown = a.cards.length && a.cards.every((c) => c.type === 'unknown');
@@ -57,24 +59,12 @@ export async function brainAnswer(text) {
 }
 
 const ext = (href, label, cls = '') => h('a', { href, class: cls, target: '_blank', rel: 'noopener noreferrer' }, label, h('span', { class: 'visually-hidden' }, ' (opens in a new tab)'));
-/** The document's own title, read from the product shard the answer was built from (already in the page memo, so no new request); null when it is not there. */
-async function docTitle(c, f) {
-  if (!c.product || !c.product.id) return null;
-  const sh = await fetchJson('data/brain/p/' + encodeURIComponent(c.product.id) + '.json'); if (!sh) return null;
-  const base = String(f.source_url || '').replace(/#page=\d+$/, '');
-  const d = (sh.dc || []).find((x) => x.u === base); if (d && d.t) return d.t;
-  return sh.sp && sh.sp.ds && sh.sp.ds.url === base && sh.sp.ds.title ? sh.sp.ds.title : null;
-}
-/** "Show the source" for one fact of a card (see cite.js): [control], or [] when the fact has no link to open. The panel code is fetched the first time the button is pressed, so it is not part of the first screen. */
+/** "Show the source" for one fact of a card (see cite.js): [control], or [] when the fact has no link to open. The panel code (and the document title lookup) is fetched the first time the button is pressed, so none of it is part of the first screen. */
 function cite(c, f) {
   if (!(f && /^https?:/.test(f.source_url))) return [];
   const first = h('button', { class: 'src-btn', type: 'button', 'aria-expanded': 'false' }, 'Show the source');
   const slot = h('span', { class: 'src-slot' }, first);
-  first.addEventListener('click', async () => {
-    const { citeModel, sourceControl } = await import('./cite.js');
-    const [btn, panel] = sourceControl(citeModel({ quote: f.sentence, url: f.source_url, docType: f.doc_type, version: f.doc_version, page: f.page, productName: c.product ? c.product.name : '' }), { lazyTitle: () => docTitle(c, f) });
-    slot.replaceChildren(btn, panel); btn.click(); btn.focus();
-  }, { once: true });
+  first.addEventListener('click', async () => (await import('./cite.js')).openSource(slot, c, f, fetchJson), { once: true });
   return [slot];
 }
 const closeOnMobile = () => { const m = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 39.99em)').matches; if (m && window.__asstClose) window.__asstClose(); };

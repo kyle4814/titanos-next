@@ -105,17 +105,19 @@ export async function send(text, label) {
   text = String(text || '').trim(); const key = text + '\u0001' + (label || ''); // two chips can share a value ('yes' on consent and on confirm): the double-tap guard keys on the chip, not the value
   if (!text || inflight.has(key) || (key === lastSend.text && Date.now() - lastSend.at < 700)) return;
   inflight.add(key); lastSend = { text: key, at: Date.now() };
-  const u = await loadUx(); await u.welcome(); // the welcome bubble is always first in the thread, even when a question arrives with the panel (deep link, example chip)
-  add(h('div', { class: 'msg msg--user' }, label || text));
-  const tStart = performance.now();
-  const wait = h('div', { class: 'msg msg--bot msg--typing', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
+  let u, wait; // wait: the typing bubble, set once the chat code has loaded
   try {
+    u = await loadUx(); await u.welcome(); // the welcome bubble is always first in the thread, even when a question arrives with the panel (deep link, example chip)
+    add(h('div', { class: 'msg msg--user' }, label || text));
+    const tStart = performance.now();
+    wait = h('div', { class: 'msg msg--bot msg--typing', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
     const act = await ensureActions();
     const handled = act ? await act.handle(text) : null;
     if (handled) { const node = handled.node; if (!handled.private) insights.question(text, handled.outcome); // T11, this browser only; a quote-request answer (it may be an email address) is never logged
       await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); u.toNewest(node); announce('The advisor has answered.'); u.keepFocus(); history.push({ q: handled.private ? '' : text, intent: 'action', ms: 0 }); return; }
     const useBrain = brainOn();
     const ba = useBrain ? await brainAnswer(text) : null; // v2 brain; null means it could not run, so v1 answers
+    if (ba && ba.stale) return; // New chat was pressed while this was being answered: drop it
     if (!ba) await ensure();
     const t0 = performance.now();
     const rule = ba ? null : matchRule(rules, text);
@@ -130,7 +132,7 @@ export async function send(text, label) {
     if (act) act.observeV1(text, a, oc); // actions v2: recent questions and the gap list, this browser only
     if (a.state && a.state.facets && Object.values(a.state.facets).filter((v) => Array.isArray(v) && v.length).length >= 2) insights.combo(Object.values(a.state.facets).flat().join(' / '));
   } catch (e) {
-    wait.replaceWith(h('div', { class: 'msg msg--bot' }, h('p', null, 'The advisor could not run in this browser. ' + (e && e.message ? e.message : ''))));
+    const m = h('div', { class: 'msg msg--bot' }, h('p', null, 'The advisor could not run in this browser. ' + (e && e.message || '') + ' Try again.')); wait ? wait.replaceWith(m) : add(m);
   } finally { inflight.delete(key); }
 }
 

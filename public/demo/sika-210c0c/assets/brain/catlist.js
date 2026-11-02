@@ -33,6 +33,7 @@ function lenient(core, subj) {
     const matched = Math.max(mc.length, compJoined); if (subj.length < 3 && !compJoined) continue; if (matched < Math.min(2, toks.length) || matched / toks.length < 0.6) continue;
     const rest = subj.filter((s) => !toks.some((t) => tokEq2(s, t)) && !(comp.length >= 6 && comp.includes(s)));
     if (!rest.every((s) => par.some((t) => tokEq2(s, t)) || toks.some((t) => tokEq2(s, t)))) continue;
+    const anc = ancestors(core, c); if (rest.length && !rest.some((s) => toks.some((t) => tokEq2(s, t))) && !rest.some((s) => anc.some((t) => tokEq2(s, t)))) continue; // the extra words matched only the last piece of the category's address, never a parent the asker named ("sealing and bonding" is not the automotive Sealing section)
     out.push({ c, ratio: matched / toks.length, matched, par: rest.length });
   }
   if (!out.length) return [];
@@ -50,6 +51,11 @@ export function categoryListCard(q, n0, core) {
   const found = hits.length ? hits : lenient(core, subj);
   if (!found.length) return null;
   const ids = new Set(found.map((h) => h.c.id));
+  // a plain word ("adhesives", "membranes") that names a narrow section here and is part of the name of bigger sections elsewhere is the whole range's word, not that section's: the other routes answer it
+  const inFound = (c) => [...ids].some((i) => c.id === i || c.id.startsWith(i + '/'));
+  const size = (id) => core.P.filter((p) => p.c && (p.c === id || p.c.startsWith(id + '/'))).length;
+  const mine = Math.max(...found.map((h) => size(h.c.id)));
+  if (catTokens(core).some(({ c, toks }) => !inFound(c) && subj.every((s) => toks.some((t) => tokEq(s, t))) && size(c.id) > mine)) return null;
   const members = core.P.filter((p) => p.c && [...ids].some((i) => p.c === i || p.c.startsWith(i + '/')));
   if (members.length < 2) return null;
   const used = members.slice(0, 14);

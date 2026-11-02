@@ -318,12 +318,17 @@ function productPick(res, cs) {
 }
 
 // ---- a social turn by shape, when the brain found nothing -------------------------------------------------------------------------------------------------------------
+const SELL_ASK = /\b(?:sell|sells|stock|stocks|supply|supplies|make|makes|carry|carries|offer|offers|provide|provides|do|does|have)\b (?:(?:the|any|some|a|an|more|your|much) )*(?!(?:you|u|ya|i|we|it|this|that|they|guys|mate|me|us|there|here|help|hand|chat|time|idea|ideas|question|questions|minute|min|sec|second|moment|anything|something|a|the|to|with|for|about)\b)[a-z]{3,}/;
+/** True when the message asks whether Sika sells, stocks or does something (a verb with a thing after it). */
+export const sellAsk = (n0) => SELL_ASK.test(chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))));
 /** The social kind of a short message the brain could not place at all (an unknown card with no product and no topic of its own): chat, not a question about the range. '' when it is not chat. */
 export function looseSocial(n0, card) {
   const c = card || {}; if (c.type !== 'unknown' || c.product) return '';
   const miss = (c.handoff && c.handoff.missing) || []; if (miss.length && !(miss.length === 1 && /^(instructions|job)$/.test(miss[0]))) return '';
   const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const w = n.split(' ').filter(Boolean);
   if (!w.length || w.length > 12 || /\d/.test(n)) return '';
+  // "you guys sell timber?", "do you do carpet", "can you do plumbing": a sell / stock / do ask with something to sell is a question about the range, never chat. It gets the honest "not in the documentation", not "yes, happy to help".
+  if (sellAsk(n0)) return '';
   // only a message with a sign that it is addressed to the assistant, or is a greeting, a thanks or a plea for help, is chat; a question with no catalogue words in it ("which is cheaper") keeps the honest no
   if (!/\b(you|your|youre|u|ya|anyone|anybody|someone|team|crew|there|here|hello|hi|hey|yo|morning|arvo|afternoon|evening|help|hand|chat|talk|thanks|thank|cheers|ta|legend|obliged|appreciate|helps|new|first|ok|okay|right|sorry|lol|haha|please|mate|bye|goodbye|later|ciao|ready|free|around|open|this|sure|idea|dunno|unsure|know)\b/.test(n)) return '';
   if (/\b(?:dunno|unsure|no idea|not (?:really )?sure|don t know|do not know|cant say|can t say|cant tell|can t tell)\b/.test(n)) return 'no';

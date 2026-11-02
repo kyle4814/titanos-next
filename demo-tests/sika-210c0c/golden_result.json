@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-02T03:27:22.968Z",
+ "generated": "2026-11-02T04:08:00.574Z",
  "stats": {
   "products": 512,
   "documents": 1656,
@@ -7,8 +7,8 @@
   "pages": 767,
   "terms": 9182,
   "postings": 145378,
-  "buildMs": 413.6,
-  "indexMs": 408.1
+  "buildMs": 250.3,
+  "indexMs": 247.3
  },
  "products": 512,
  "results": [
@@ -20,7 +20,7 @@
    "top": "sikatile-400-evopro",
    "pass": true,
    "errors": [],
-   "ms": 76.23
+   "ms": 34.83
   },
   {
    "id": "f2",
@@ -30,7 +30,7 @@
    "top": "sikatile-110-secureproof",
    "pass": true,
    "errors": [],
-   "ms": 21.58
+   "ms": 13.1
   },
   {
    "id": "f3",
@@ -40,7 +40,7 @@
    "top": "sikaseal-kitchenandbathroom",
    "pass": true,
    "errors": [],
-   "ms": 13.44
+   "ms": 8.66
   },
   {
    "id": "f4",
@@ -50,7 +50,7 @@
    "top": "sikafloor-4020-fiberlevel",
    "pass": true,
    "errors": [],
-   "ms": 11.84
+   "ms": 6.75
   },
   {
    "id": "f5",
@@ -60,7 +60,7 @@
    "top": "sika-monotop-fc",
    "pass": true,
    "errors": [],
-   "ms": 14.24
+   "ms": 7.79
   },
   {
    "id": "c1",
@@ -70,7 +70,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 12.32
+   "ms": 7.68
   },
   {
    "id": "c2",
@@ -80,7 +80,7 @@
    "top": "sikafloor-level-ultra",
    "pass": true,
    "errors": [],
-   "ms": 11.56
+   "ms": 5.9
   },
   {
    "id": "c3",
@@ -90,7 +90,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 2.61
+   "ms": 1.53
   },
   {
    "id": "c4",
@@ -100,7 +100,7 @@
    "top": "sika-rugasol-c",
    "pass": true,
    "errors": [],
-   "ms": 3.11
+   "ms": 1.8
   },
   {
    "id": "d1",
@@ -110,7 +110,7 @@
    "top": "1671",
    "pass": true,
    "errors": [],
-   "ms": 3.99
+   "ms": 2.11
   },
   {
    "id": "d2",
@@ -120,7 +120,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 2.7
+   "ms": 1.35
   },
   {
    "id": "d3",
@@ -130,7 +130,7 @@
    "top": "davco-trojan-mastic",
    "pass": true,
    "errors": [],
-   "ms": 2.78
+   "ms": 1.52
   },
   {
    "id": "d4",
@@ -140,7 +140,7 @@
    "top": "sika-monotop-412nfg",
    "pass": true,
    "errors": [],
-   "ms": 2.41
+   "ms": 1.13
   },
   {
    "id": "m1",
@@ -150,7 +150,7 @@
    "top": "sikafloor-level-pro",
    "pass": true,
    "errors": [],
-   "ms": 6.77
+   "ms": 3.88
   },
   {
    "id": "m2",
@@ -160,7 +160,7 @@
    "top": "sika-viscocrete-1250",
    "pass": true,
    "errors": [],
-   "ms": 9.33
+   "ms": 2.99
   },
   {
    "id": "m3",
@@ -170,7 +170,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 5.18
+   "ms": 1.7
   },
   {
    "id": "q1",
@@ -180,7 +180,7 @@
    "top": "davco-trojan-mastic",
    "pass": true,
    "errors": [],
-   "ms": 7.15
+   "ms": 2.58
   },
   {
    "id": "q2",
@@ -190,7 +190,7 @@
    "top": "sikafloor-level-ultra",
    "pass": true,
    "errors": [],
-   "ms": 4.55
+   "ms": 1.67
   },
   {
    "id": "q3",
@@ -200,7 +200,7 @@
    "top": "sika-film",
    "pass": true,
    "errors": [],
-   "ms": 3.72
+   "ms": 2.12
   },
   {
    "id": "o1",
@@ -210,7 +210,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 14.15
+   "ms": 5.93
   },
   {
    "id": "t1",
@@ -220,7 +220,7 @@
    "top": "davco-powder-mastic",
    "pass": true,
    "errors": [],
-   "ms": 7.35
+   "ms": 3.72
   },
   {
    "id": "t2",
@@ -230,7 +230,7 @@
    "top": "sikatile-405-lite",
    "pass": true,
    "errors": [],
-   "ms": 6.16
+   "ms": 3.06
   },
   {
    "id": "t3",
@@ -240,7 +240,7 @@
    "top": "sikatile-440-opti-cure",
    "pass": true,
    "errors": [],
-   "ms": 8.12
+   "ms": 3.06
   },
   {
    "id": "t4",
@@ -250,7 +250,7 @@
    "top": "sikaceram-880-easyepoxy",
    "pass": true,
    "errors": [],
-   "ms": 10.69
+   "ms": 3.19
   },
   {
    "id": "t5",
@@ -260,7 +260,7 @@
    "top": "sikatile-111-rapidproof",
    "pass": true,
    "errors": [],
-   "ms": 8.64
+   "ms": 4.62
   },
   {
    "id": "t6",
@@ -270,7 +270,7 @@
    "top": "lanko-752-bondit",
    "pass": true,
    "errors": [],
-   "ms": 5.86
+   "ms": 3.48
   },
   {
    "id": "t7",
@@ -280,7 +280,7 @@
    "top": "sikaceram-690-elite",
    "pass": true,
    "errors": [],
-   "ms": 8.95
+   "ms": 2.57
   },
   {
    "id": "t8",
@@ -292,7 +292,7 @@
    "errors": [
     "none of davco-tile-groutcleaner in top 2 (sikaceram-690-elite,davco-easy-grout)"
    ],
-   "ms": 8.91
+   "ms": 2.57
   },
   {
    "id": "t9",
@@ -302,7 +302,7 @@
    "top": "sikatile-440-opti-cure",
    "pass": true,
    "errors": [],
-   "ms": 5.14
+   "ms": 3.18
   },
   {
    "id": "t10",
@@ -312,7 +312,7 @@
    "top": "davco-sanitized-gluegrout",
    "pass": true,
    "errors": [],
-   "ms": 5.26
+   "ms": 2.62
   },
   {
    "id": "t11",
@@ -324,7 +324,7 @@
    "errors": [
     "none of sikatile-400-evopro|sikatile-410-secureset|davco-ceramacrete|davco-ultraflex in top 4 (sikatile-405-lite,sikatile-374-megapro,sikatile-440-opti-cure,davco-powder-mastic)"
    ],
-   "ms": 5.7
+   "ms": 2.52
   },
   {
    "id": "t12",
@@ -336,7 +336,7 @@
    "errors": [
     "none of davco-davelastic in top 3 (davco-ceramaflex,sikatile-510-megalite,sikatile-405-lite)"
    ],
-   "ms": 5.77
+   "ms": 3.94
   },
   {
    "id": "t13",
@@ -346,7 +346,7 @@
    "top": "davco-4-in-1-groutadditive",
    "pass": true,
    "errors": [],
-   "ms": 6.36
+   "ms": 3.29
   },
   {
    "id": "t14",
@@ -356,7 +356,7 @@
    "top": "davco-easy-grout",
    "pass": true,
    "errors": [],
-   "ms": 3.84
+   "ms": 2.06
   },
   {
    "id": "t15",
@@ -366,7 +366,7 @@
    "top": "davco-sanitized-gluegrout",
    "pass": true,
    "errors": [],
-   "ms": 13.71
+   "ms": 2.75
   },
   {
    "id": "t16",
@@ -376,7 +376,7 @@
    "top": "sikatile-305-masterlite",
    "pass": true,
    "errors": [],
-   "ms": 8.94
+   "ms": 2.15
   },
   {
    "id": "t17",
@@ -386,7 +386,7 @@
    "top": "davco-k10-rapid",
    "pass": true,
    "errors": [],
-   "ms": 13.03
+   "ms": 2.24
   },
   {
    "id": "t18",
@@ -396,7 +396,7 @@
    "top": "sikatile-405-lite",
    "pass": true,
    "errors": [],
-   "ms": 8.35
+   "ms": 1.56
   },
   {
    "id": "t19",
@@ -406,7 +406,7 @@
    "top": "davco-ultraflex",
    "pass": true,
    "errors": [],
-   "ms": 6.6
+   "ms": 1.26
   },
   {
    "id": "t20",
@@ -416,7 +416,7 @@
    "top": "sikaceram-880-easyepoxy",
    "pass": true,
    "errors": [],
-   "ms": 7.44
+   "ms": 4.3
   },
   {
    "id": "c5",
@@ -426,7 +426,7 @@
    "top": "sikatile-410-secureset",
    "pass": true,
    "errors": [],
-   "ms": 1.92
+   "ms": 1.15
   },
   {
    "id": "c6",
@@ -436,7 +436,7 @@
    "top": "davco-ceramacrete",
    "pass": true,
    "errors": [],
-   "ms": 1.8
+   "ms": 1.02
   },
   {
    "id": "c7",
@@ -446,7 +446,7 @@
    "top": "davco-ultraprime",
    "pass": true,
    "errors": [],
-   "ms": 1.5
+   "ms": 0.8
   },
   {
    "id": "c8",
@@ -456,7 +456,7 @@
    "top": "sikatile-510-megalite",
    "pass": true,
    "errors": [],
-   "ms": 1.19
+   "ms": 0.65
   },
   {
    "id": "c9",
@@ -466,7 +466,7 @@
    "top": "davco-ceramaflex",
    "pass": true,
    "errors": [],
-   "ms": 1.22
+   "ms": 0.59
   },
   {
    "id": "c10",
@@ -476,7 +476,7 @@
    "top": "sikaceram-880-easyepoxy",
    "pass": true,
    "errors": [],
-   "ms": 3.52
+   "ms": 2.58
   },
   {
    "id": "d5",
@@ -486,7 +486,7 @@
    "top": "sikatile-405-lite",
    "pass": true,
    "errors": [],
-   "ms": 1.4
+   "ms": 0.65
   },
   {
    "id": "d6",
@@ -496,7 +496,7 @@
    "top": "davco-ultraflex",
    "pass": true,
    "errors": [],
-   "ms": 1.07
+   "ms": 0.7
   },
   {
    "id": "d7",
@@ -506,7 +506,7 @@
    "top": "davco-k10-plus",
    "pass": true,
    "errors": [],
-   "ms": 1.42
+   "ms": 0.6
   },
   {
    "id": "d8",
@@ -516,7 +516,7 @@
    "top": "sikaceram-880-easyepoxy",
    "pass": true,
    "errors": [],
-   "ms": 1.45
+   "ms": 0.68
   },
   {
    "id": "d9",
@@ -526,7 +526,7 @@
    "top": "davco-ceramacrete",
    "pass": true,
    "errors": [],
-   "ms": 1.21
+   "ms": 0.67
   },
   {
    "id": "d10",
@@ -536,7 +536,7 @@
    "top": "davco-ultraprime",
    "pass": true,
    "errors": [],
-   "ms": 1.19
+   "ms": 0.49
   },
   {
    "id": "d11",
@@ -546,7 +546,7 @@
    "top": "sikatile-510-megalite",
    "pass": true,
    "errors": [],
-   "ms": 1.27
+   "ms": 0.92
   },
   {
    "id": "m4",
@@ -556,7 +556,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 2.17
+   "ms": 1.14
   },
   {
    "id": "m5",
@@ -566,7 +566,7 @@
    "top": "davco-ceramacrete",
    "pass": true,
    "errors": [],
-   "ms": 2.23
+   "ms": 1.02
   },
   {
    "id": "m6",
@@ -576,7 +576,7 @@
    "top": "sikatile-400-evopro",
    "pass": true,
    "errors": [],
-   "ms": 1.35
+   "ms": 0.62
   },
   {
    "id": "m7",
@@ -586,7 +586,7 @@
    "top": "davco-grey-one-potadhesive",
    "pass": true,
    "errors": [],
-   "ms": 1.15
+   "ms": 0.59
   },
   {
    "id": "q4",
@@ -596,7 +596,7 @@
    "top": "davco-ceramacrete",
    "pass": true,
    "errors": [],
-   "ms": 1.47
+   "ms": 0.74
   },
   {
    "id": "q5",
@@ -606,7 +606,7 @@
    "top": "sikatile-400-evopro",
    "pass": true,
    "errors": [],
-   "ms": 1.52
+   "ms": 0.69
   },
   {
    "id": "q6",
@@ -616,7 +616,7 @@
    "top": "davco-ceramaflex",
    "pass": true,
    "errors": [],
-   "ms": 1.43
+   "ms": 1.25
   },
   {
    "id": "g1",
@@ -626,7 +626,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 15.7
+   "ms": 7.79
   },
   {
    "id": "g2",
@@ -636,7 +636,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 0.77
+   "ms": 0.27
   },
   {
    "id": "h1",
@@ -646,7 +646,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 42.48
+   "ms": 25.17
   },
   {
    "id": "h2",
@@ -656,7 +656,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 0.6
+   "ms": 0.36
   },
   {
    "id": "w1",
@@ -666,7 +666,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 1.38
+   "ms": 0.83
   },
   {
    "id": "w2",
@@ -676,7 +676,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 1.13
+   "ms": 0.47
   },
   {
    "id": "k1",
@@ -686,7 +686,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 1.26
+   "ms": 0.53
   },
   {
    "id": "k2",
@@ -696,7 +696,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 1.06
+   "ms": 0.49
   },
   {
    "id": "u1",
@@ -706,7 +706,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 0.99
+   "ms": 2
   },
   {
    "id": "u2",
@@ -716,7 +716,7 @@
    "top": "sikatile-405-lite",
    "pass": true,
    "errors": [],
-   "ms": 4.71
+   "ms": 2
   },
   {
    "id": "u3",
@@ -726,7 +726,7 @@
    "top": "sikatile-400-evopro",
    "pass": true,
    "errors": [],
-   "ms": 2.47
+   "ms": 1.04
   },
   {
    "id": "u4",
@@ -736,7 +736,7 @@
    "top": "sikabond-t-55-j",
    "pass": true,
    "errors": [],
-   "ms": 40.8
+   "ms": 25.32
   },
   {
    "id": "u5",
@@ -746,7 +746,7 @@
    "top": "davco-smp-evo",
    "pass": true,
    "errors": [],
-   "ms": 44
+   "ms": 22.85
   },
   {
    "id": "u6",
@@ -756,7 +756,7 @@
    "top": "sikagrout-ultra",
    "pass": true,
    "errors": [],
-   "ms": 6.45
+   "ms": 4.12
   },
   {
    "id": "u7",
@@ -766,7 +766,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 4.16
+   "ms": 2.71
   },
   {
    "id": "u8",
@@ -776,7 +776,7 @@
    "top": "davco-rejuvenationgrout",
    "pass": true,
    "errors": [],
-   "ms": 2.6
+   "ms": 1.88
   },
   {
    "id": "u9",
@@ -786,7 +786,7 @@
    "top": "sika-block",
    "pass": true,
    "errors": [],
-   "ms": 2.11
+   "ms": 1.2
   },
   {
    "id": "u10",
@@ -796,7 +796,7 @@
    "top": "sikafloor-14-prepnprimeimpact",
    "pass": true,
    "errors": [],
-   "ms": 5.99
+   "ms": 2.97
   },
   {
    "id": "u11",
@@ -806,7 +806,7 @@
    "top": "-",
    "pass": true,
    "errors": [],
-   "ms": 2.2
+   "ms": 1.01
   },
   {
    "id": "u12",
@@ -816,7 +816,7 @@
    "top": "sikaseal-kitchenandbathroom",
    "pass": true,
    "errors": [],
-   "ms": 2.17
+   "ms": 1.49
   },
   {
    "id": "s1",
