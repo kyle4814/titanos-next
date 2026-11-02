@@ -4,6 +4,7 @@
 const U = 'https://aus.sika.com/en/';
 export const SLANG = [
   // trade slang (common trade usage unless a page is named)
+  { rx: /\bwhat s the go (?:for|with)\b|\bwhats the go (?:for|with)\b/g, to: 'what should i use for', cite: 'common Australian usage ("what\'s the go for" = what do I use for)' },
   { rx: /\bflexi\b/g, to: 'flexible', cite: 'common trade usage; Sika pages say "flexible cement-based tile adhesive"' },
   { rx: /\btile on tile\b|\btiling on tile\b/g, to: 'tiling over existing tiles', cite: U + 'home-owners/Blogs/tile-over-tile-a-laundry-refresh.html' },
   { rx: /\bmud\b/g, to: 'adhesive', cite: 'common trade usage (bedding mud); read as tile adhesive' },

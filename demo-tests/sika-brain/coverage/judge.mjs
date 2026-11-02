@@ -47,14 +47,14 @@ export function judge(item, a, sel) {
       return mine.some(cited) || t === 'doc' ? GEN('ANSWERED', 'published card') : GEN('UNHANDLED', 'not cited');
     }
     if (others.length) return GEN('WRONG', 'other product ' + others[0].product.id);
-    if (allUnknown) { const named = cards.some((c) => c.product && c.product.id === exp.product); return has ? GEN('UNHANDLED', 'said unknown but data exists') : (named || t === 'calc' ? GEN('HONEST-NO-DATA', 'declined for this product') : GEN('UNHANDLED', 'generic fallback')); }
+    if (allUnknown) { const named = cards.some((c) => { const p = c.product || c.about; return p && p.id === exp.product; }); /* the declined card names its product in `about` (Opus round: a not-in-the-data card carries no product) */ return has ? GEN('UNHANDLED', 'said unknown but data exists') : (named || t === 'calc' ? GEN('HONEST-NO-DATA', 'declined for this product') : GEN('UNHANDLED', 'generic fallback')); }
     return GEN('UNHANDLED', 'no answer');
   }
   if (t === 'compat') {
     const mine = real.filter((c) => c.product && [exp.product, ...(exp.alt || [])].includes(c.product.id)); const head = norm(mine.map((c) => c.headline).join(' '));
     if (exp.verdict === 'no') return mine.length && /^no\b/.test(head) ? GEN('ANSWERED', 'no with sentence') : mine.length && /^yes/.test(head) ? GEN('WRONG', 'said yes') : allUnknown ? GEN('UNHANDLED', 'unknown') : GEN('UNHANDLED', 'no verdict');
     if (mine.length && mine.some(cited)) return GEN('ANSWERED', 'verdict with sentence');
-    if (allUnknown && cards.some((c) => c.product && [exp.product, ...(exp.alt || [])].includes(c.product.id))) return GEN('HONEST-NO-DATA', 'declined for this product');
+    if (allUnknown && cards.some((c) => { const p = c.product || c.about; return p && [exp.product, ...(exp.alt || [])].includes(p.id); })) return GEN('HONEST-NO-DATA', 'declined for this product');
     if (real.some((c) => c.product && c.product.id !== exp.product)) return GEN('WRONG', 'other product');
     return GEN('UNHANDLED', 'no answer');
   }

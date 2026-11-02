@@ -471,7 +471,7 @@
    "kind": "describe",
    "q": "I need catalyst designed for use with sika injection 111",
    "got": [
-    "compatibility:sika-injection-111"
+    "compatibility:Sika Injection-111"
    ],
    "headline": "It does not mention catalyst or design. I will not guess."
   },
@@ -479,7 +479,7 @@
    "kind": "describe",
    "q": "I need plastomeric modified bituminous roof membrane separation layer (formerly index rollbase 2kg/m2 )",
    "got": [
-    "unknown:sikashield-p02-perollbase2kgm"
+    "unknown:SikaShield P02 PE Rollbase 2 kg/m²"
    ],
    "headline": "I do not know this from the published documentation."
   },
@@ -643,5 +643,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-11-02T04:10:37.927Z"
+ "at": "2026-11-02T21:58:40.166Z"
 }

@@ -7,7 +7,7 @@ import { prod, unknown } from './cards.js';
 
 const re = (s) => new RegExp(s, 'i');
 export const ATTRS = [
-  { id: 'packaging', what: 'pack sizes', q: re('\\b(pack(s|age|aging|aged|ed|ing)?|sizes?|comes? in|pallets?|bags? (on|per)|pail sizes?|how is .* (sold|supplied)|what size)\\b'), pack: true },
+  { id: 'packaging', what: 'pack sizes', q: re('\\b(pack(s|age|aging|aged|ed|ing)?|sizes?|(available|sold|supplied|comes?) (in|as) (an? )?(\\d+(\\.\\d+)? ?(l|ml|kg|litres?) )?(pails?|tubs?|drums?|cartridges?|sausages?|bags?|tins?|buckets?)|comes? in|pallets?|bags? (on|per)|pail sizes?|how is .* (sold|supplied)|what size)\\b'), pack: true },
   { id: 'shelf', what: 'shelf life', q: re('shelf ?l[iy]fe?|how long (can|could|will|does|do|is)\\b.*\\b(store|keep|last|good for|stored|unopened)|expir|best before|use by|unopened'), labels: re('^shelf life$'), tbl: re('shelf life') },
   { id: 'storage', what: 'storage conditions', q: re('\\b(stor(e|ed|age|ing)|keep it|keeping)\\b'), labels: re('^(storage conditions|shelf life)$') },
   { id: 'density', what: 'density', q: re('density|weigh|weight|kg per (l|litre)|specific gravity'), labels: re('^density$'), tbl: re('density \\(uncured\\)|density') },

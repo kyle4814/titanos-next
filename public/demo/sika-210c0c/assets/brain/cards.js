@@ -12,8 +12,13 @@ const chipOf = (f) => (f.s && (f.s.t === 'PDS' || f.s.t === 'SDS') ? CHIPS.DATAS
 const where = (f) => (f.s && f.s.t === 'WEB' ? 'product page' : 'data sheet') + (f.s && f.s.p ? ', page ' + f.s.p : '');
 const dsLink = (sh) => (sh.r && sh.r.ds && sh.r.ds.url ? [{ label: 'Open the data sheet', url: sh.r.ds.url }] : (sh.dc || []).filter((d) => d.ok && d.ty === 'product_data_sheet').slice(0, 1).map((d) => ({ label: 'Open the data sheet', url: d.u })));
 
+// The not-in-the-data card never carries a product: the product it is about is named in the title and kept in `about` (for the session's held product),
+// so no reply to an honest no reads as a product answer (Opus round 2026-11-03).
 export function unknown(question, sh, reason, missing = [], extra = {}) {
-  return card({ type: 'unknown', status: 'UNKNOWN', title: sh ? sh.n : 'Not in the published documentation', product: sh ? prod(sh) : null, headline: NOT_KNOWN, facts: [], source: null, chip: CHIPS.UNKNOWN,
+  const c = unknownCard(question, sh, reason, missing, extra); if (sh) c.about = prod(sh); return c;
+}
+function unknownCard(question, sh, reason, missing, extra) {
+  return card({ type: 'unknown', status: 'UNKNOWN', title: sh ? sh.n : 'Not in the published documentation', product: null, headline: NOT_KNOWN, facts: [], source: null, chip: CHIPS.UNKNOWN,
     links: sh ? dsLink(sh).concat([{ label: 'Product page', url: sh.u }]) : [], handoff: { question, product: sh ? sh.n : '', reason, missing }, followups: extra.followups || [] });
 }
 

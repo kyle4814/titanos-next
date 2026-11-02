@@ -250,10 +250,10 @@ export function followUp(n0, convo) {
 }
 
 // ---- the recommendation lead ("My pick ...") ------------------------------------------------------------------------------------------------------------------------
-const PICK_BASE = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with|^(?:which|what) (?!is the |s the |are the |does |do you |can you |is a |is an )(?:[a-z0-9]+ ){0,3}(?:for|on|to use|do i use|should i use|would you use))\b/;
+const PICK_BASE = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|(?:a |any |some )?good (?!morning|afternoon|evening|day|one|job|thanks)[a-z]+(?: [a-z]+)? (?:for|to use)|any ideas|top pick|what to use|what do i use|what would you use|go with|^(?:which|what) (?!is the |s the |are the |does |do you |can you |is a |is an )(?:[a-z0-9]+ ){0,3}(?:for|on|to use|do i use|should i use|would you use))\b/;
 // "what water ratio do I use", "what thickness should we use": a property or how-to ask, not a product pick, unless the asker also says best / recommend / which product
 const HOWTO_RX = /\b(ratio|ratios|thickness|temperature|times?|how (much|many|long|thick|deep)|mix(ing)? (ratio|time|amount)|water (ratio|amount|content)|coverage|amount|quantity|dosage|dose|depth|pot life|open time|primer for)\b/;
-const PICK_EXPLICIT = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one|product|products)|top pick|go with|what (is|s) good|whats good|good for)\b/;
+const PICK_EXPLICIT = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one|product|products)|top pick|go with|what (is|s) good|whats good|good for|good (?!morning|afternoon|evening|day|one|job|thanks)[a-z]+(?: [a-z]+)? (?:for|to use))\b/;
 export const PICK_RX = { test: (n) => PICK_BASE.test(n) && !(HOWTO_RX.test(n) && !PICK_EXPLICIT.test(n)) };
 // the shape of a singular ask: one answer wanted ("just one", "your pick", "the go-to", "choose one", "if you had to choose", "single best", "name the one", a trailing "one")
 const SINGLE_RX = /\b(?:pick|picks|choose|choice|favou?rite|go to|goto|single|top (?:pick|choice))\b|\b(?:just|only|name|give me|tell me|want|need|take|go with|a|the|which|what)\s+(?:the\s+|a\s+)?one\b|\bone\s+(?:only|please|thanks|pick|choice|product|will do|is fine)\b|\bone\s*$|\bif you had to\b|^one\s+[a-z]+(?:\s+[a-z]+){0,2}\s+(?:for|to|that|under|on)\b/;
@@ -323,7 +323,7 @@ const SELL_ASK = /\b(?:sell|sells|stock|stocks|supply|supplies|make|makes|carry|
 export const sellAsk = (n0) => SELL_ASK.test(chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))));
 /** The social kind of a short message the brain could not place at all (an unknown card with no product and no topic of its own): chat, not a question about the range. '' when it is not chat. */
 export function looseSocial(n0, card) {
-  const c = card || {}; if (c.type !== 'unknown' || c.product) return '';
+  const c = card || {}; if (c.type !== 'unknown' || c.product || c.about) return '';
   const miss = (c.handoff && c.handoff.missing) || []; if (miss.length && !(miss.length === 1 && /^(instructions|job)$/.test(miss[0]))) return '';
   const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const w = n.split(' ').filter(Boolean);
   if (!w.length || w.length > 12 || /\d/.test(n)) return '';

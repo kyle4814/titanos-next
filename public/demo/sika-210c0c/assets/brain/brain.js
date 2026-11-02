@@ -14,6 +14,8 @@ import { attrCard, detectAttr, attrWords } from './attrs.js';
 import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
 import { createSession } from './session.js';
 import { applyNames, deriveAliases, historyCard } from './names.js';
+import * as CV from './cover.js';
+import { card as mkCard, fact as mkFact } from './schema.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -38,12 +40,12 @@ const RX = {
 const OTHER_BRANDS = new RegExp('\\b(' + ['xedra', 'iepam', 'etercital', 'kitsob', 'corsof', 'polnud', 'mehcrap', 'rebew', 'tidra', 'xelfepam', 'retsamelit', 'sgninnub', 'syelles', 'xulud', 'lyttaw', 'eneser', 'snambuat', 'semyah', 'itlih', 'tesmar', 'rehcsif', 'slian diuqil'].map((s) => [...s].reverse().join('')).join('|') + ')\\b');
 /** "buy", "purchase" and "available" alone do not make a price question: "what membrane is available for a balcony", "what colours is X available in" and "I want to purchase a membrane for my shower" ask what the range holds, which the documentation answers. Price, stock, delivery and where-to-buy words still go to the honest no. */
 const WEAK_PRICE = /\b(buy|purchase|available|availability)\b/g;
-const rangeNotPrice = (n) => !RX.price.test(n.replace(WEAK_PRICE, ' ')) && (/^(what|which|any|show me|list|are there)\b.*\bavailable\b/.test(n) || /\bavailable (in|as) (what |which )?(colou?rs?|sizes?|packs?|packaging|pails?|cartridges?)\b/.test(n) || /\bto (buy|purchase) (a|an|some)\b.*\b(for|to|on|in|around)\b/.test(n));
+const rangeNotPrice = (n) => !RX.price.test(n.replace(WEAK_PRICE, ' ')) && (/^(what|which|any|show me|list|are there)\b.*\bavailable\b/.test(n) || /\bavailable (in|as) (what |which )?(an? )?(\d+(\.\d+)? ?(l|ml|kg|litres?|liters?) )?(colou?rs?|sizes?|packs?|packaging|pails?|cartridges?|bags?|tubs?|drums?|sausages?|tins?|buckets?)\b/.test(n) || /\bto (buy|purchase) (a|an|some)\b.*\b(for|to|on|in|around)\b/.test(n));
 export function classify(n, hasArea) {
   if (OTHER_BRANDS.test(n)) return 'other_brand';
   if (RX.price.test(n) && !rangeNotPrice(n)) return 'price';
   if (RX.compare.test(n)) return 'compare';
-  if ((hasArea && (RX.calcWords.test(n) || /\b(need(ed|s)?|require[ds]?|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n)) return 'calc';
+  if ((hasArea && (RX.calcWords.test(n) || /\b(need(ed|s)?|require[ds]?|cover|packs?|pails?|buckets?|bags?|litres?|liters?)\b/.test(n))) || /\b(how many|how much) (packs?|pails?|buckets?|bags?|litres?|liters?|kg)\b/.test(n) || (/\bhow (much|many) (\w+ ){0,5}(do|will|would|should|shall|must) (i|we|you) (need|use|order|buy|get)\b/.test(n) && !/\b(water|coats?|layers?|time|hours?|days?|primer)\b/.test(n))) return 'calc'; // "how much K10 do I need" with no area: the one missing variable (the area) is asked
   if (RX.time.test(n)) return 'time';
   if (RX.rate.test(n)) return 'rate';
   if (RX.safety.test(n) && !/\b(sds|msds|safety data)\b/.test(n)) return 'safety';
@@ -541,7 +543,86 @@ export function createBrain({ load, config, loadRules } = {}) {
     if (ruled.length) { const r = ruled[0]; const sh = await shard(r.it.pi); if (sh) { const c = C.compatCard(sh, 'no', { id: r.rule.r, text: r.rule.t, s: { u: r.rule.u, p: r.rule.pg, v: r.rule.v, t: 'PDS' } }, q, [], []); c.title = `Ruled out: ${sh.n}`; c.headline = 'No. This product matches your words but its own data sheet rules it out for this job.'; cards.push(c); } }
     return out(cards.length ? 'which' : intent, 'index', cards, { state: top.length === 1 ? { productId: core.P[top[0].pi].id, intent: 'which' } : null });
   }
-  const session = createSession({ ask: askInner, advisor, boot, productName: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].n : ''), productCategory: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].c : ''), productList: () => core.P.map((p) => ({ id: p.id, name: p.n })) });
+  // ---- the coverage decision (cover.js): the asked object and attribute are checked against the data BEFORE routing. Returns a finished answer (the honest no
+  // for exactly that object and attribute, or the colours its own text gives), a check to run on the routed answer ({ post }), or null.
+  let normNames = null;
+  const coverNo = (q, sh, names, headline, missing, extra = {}) => {
+    const covers = sh ? CV.sheetCovers(sh) : [];
+    const c = mkCard({ type: 'unknown', status: 'UNKNOWN', title: 'Not in the published documentation', headline, facts: [], source: null, chip: CHIPS.UNKNOWN,
+      lines: extra.lines || (covers.length ? [{ label: 'What its data sheet does cover', text: covers.join(', ') }] : []),
+      links: sh ? C.unknown(q, sh, '').links : [], handoff: { question: q, product: names ? CV.coverName(names) : '', reason: extra.reason || `Not stated in the published data: ${missing.join(', ')}.`, missing }, followups: extra.followups || (sh ? [`What is ${sh.n} used for`, `Coverage of ${sh.n}`, `Data sheet for ${sh.n}`] : []) });
+    if (sh) c.about = C.prod(sh);
+    return c;
+  };
+  async function coverAsk(question, heldId) {
+    await boot();
+    const t0 = now(); const q = String(question || '').trim(); if (!q) return null;
+    const n0 = correctWords(applySlang(normalise(q)).text);
+    if (!normNames) normNames = core.P.map((p) => normalise(p.n));
+    const done = (cards, tr, state = null, intent = 'which') => { for (const c of cards) finalize(c); return { schema: ANSWER_SCHEMA, query: q, intent, stage: 'cover', cards, followups: [...new Set(cards.flatMap((c) => c.followups || []))].slice(0, 4), state, ms: Math.round(now() - t0), trace: ['cover:' + tr] }; };
+    // 1. a model number no product carries
+    { const um = CV.unknownModel(n0, normNames);
+      if (um) { const Fam = core.P.find((p) => normalise(p.n).startsWith(um.fam + ' ')); const fam = Fam ? Fam.n.replace(/[-\s].*$/, '') : um.fam; const list = core.P.filter((p) => normalise(p.n).startsWith(um.fam + ' ')).slice(0, 4);
+        return done([coverNo(q, null, null, `There is no ${fam}-${um.num} in the Sika Australia range I work from, so I cannot answer about it.${list.length ? ` I can tell you about the ${fam} products that are in the range.` : ''}`, ['product name'], { followups: list.map((p) => `Tell me about ${p.n}`) })], 'model', null, 'oos'); } }
+    // 2. permits, the law, sign-off, insurance: no data sheet answers these
+    if (CV.askedLegal(n0)) return done([coverNo(q, null, null, 'That is not something the Sika data sheets answer. Permits, the law, sign-off and insurance are questions for your certifier, council or insurer. I can tell you what a product\'s published data sheet says about the job.', ['regulation'], { followups: ['Recommend a waterproofing membrane', 'Recommend a tile adhesive'] })], 'legal', null, 'oos');
+    let mentions = findExact(n0); if (!mentions.length) mentions = fuzzyAliases(n0);
+    // 3. a thing the range does not hold (timber, tiles, paint, fixtures, hardware)
+    if (!mentions.length && !OTHER_BRANDS.test(normalise(q))) { const what = CV.notInRange(n0); if (what && !advisor.hasKind(n0)) return done([coverNo(q, null, null, `${what} are not in the Sika Australia documentation I work from, so as far as I can tell they are not in the range, and I cannot sell or recommend them. I can help with the Sika products for the job, like waterproofing, tile adhesive, grout, sealants and concrete repair.`, ['product'], { followups: ['Recommend a tile adhesive', 'Recommend a waterproofing membrane', 'Recommend a sealant'] })], 'range', null, 'oos'); }
+    // 4. the object: the named product(s), else the product held from the last turn when the message points back at it
+    const cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
+    const nCut = n0.split(' ').filter((w, j) => w && !cut.has(j)).join(' ');
+    let pis = []; for (const m of mentions) if (m.pis.length === 1 && !pis.includes(m.pis[0])) pis.push(m.pis[0]);
+    if (!pis.length && mentions.length) pis = mentions[0].pis.slice(0, 3); // one name that fits a few products: the honest no needs all of them to be silent
+    let held = false;
+    if (!mentions.length && heldId && pIndex.has(heldId) && (/\b(it|its|it s|this|that|this one|that one|they|them|the product|the same)\b/.test(n0) || tokens(n0).length <= 6)) { pis = [pIndex.get(heldId)]; held = true; }
+    if (!pis.length || pis.length > 3) return null;
+    const shs = (await Promise.all(pis.map((k) => shard(k)))).filter(Boolean); if (!shs.length) return null;
+    const names = shs.map((s) => s.n); const one = shs.length === 1 ? shs[0] : null; const nm = CV.coverName(names);
+    const text = async (sh) => { let t = JSON.stringify({ ...sh, sf: null }); /* the safety data sheet (fire-fighting, first aid) is not a statement of a product property */ try { const ns = await load.num(sh.id); if (ns) t += JSON.stringify(ns); } catch { /* no data sheet numbers */ } return t; };
+    const st = { productId: shs[0].id, intent: 'which' };
+    if (pis.length > 1 && !held && mentions.filter((m) => m.pis.length === 1).length >= 2) return null; // two products named: a comparison, not a coverage question
+    // 4a. a standard by code
+    const code = CV.askedCode(nCut);
+    if (code) { const txts = await Promise.all(shs.map(text)); if (txts.some((t) => CV.codeIn(t, code))) return null;
+      const cited = [...new Set(shs.flatMap((s) => ((s.sp && s.sp.std) || []).map((x) => x.citation)).filter(Boolean))].slice(0, 6);
+      return done([coverNo(q, one, names, `The ${nm} data sheet and product page do not mention ${code.code}, so I cannot say ${shs.length > 1 ? 'they meet' : 'it meets'} it. I will not guess. Sika Technical Services can confirm.`, [code.code], cited.length ? { lines: [{ label: 'Standards its data sheet does cite', text: cited.join(', ') }] } : {})], 'code', st, 'spec'); }
+    if (CV.askedNcc(nCut)) { const txts = await Promise.all(shs.map(text)); if (txts.some((t) => CV.nccIn(t))) return null;
+      return done([coverNo(q, one, names, `The ${nm} data sheet and product page do not mention the NCC (the Building Code of Australia), so I cannot say it complies. Your certifier decides compliance for the job; Sika Technical Services can say what the product is tested to.`, ['NCC'])], 'ncc', st, 'spec'); }
+    // 4b. price, stock, delivery for a named product
+    if (CV.askedComm(nCut) && CV.areaAsk(nCut) === false) { const w = CV.commWhat(nCut); return done([coverNo(q, one, names, `Prices, stock, delivery and warranty terms for ${nm} are not in the documentation I work from, so I cannot tell you the ${w}, and I will not guess. Please ask Sika Australia or a stockist.`, [w], { reason: 'Prices, stock, delivery and warranty terms are not in the published data.', lines: [] , followups: [`Where can I buy ${shs[0].n}`, `Pack sizes of ${shs[0].n}`, `Data sheet for ${shs[0].n}`] })], 'comm', st, 'price'); }
+    // 4c. a property the sheet may not state
+    const at = CV.askedAttr(nCut); if (!at) return null;
+    if (at.id === 'warranty' && await know.topic(q, n0)) return null; // a published warranty page answers it (a system warranty for a tiling job)
+    if (at.id === 'colour') {
+      if (!one) return null;
+      const lines = CV.colourLines(one);
+      if (!lines.length) { // colours are a near miss: say they are not listed, and show the pack sizes the sheet does publish
+        const pc = attrCard(one, 'what pack sizes', q);
+        if (pc && pc.type === 'info') { pc.title = `Colours and pack sizes: ${one.n}`; pc.headline = `The ${one.n} product page and data sheet do not list its colours, so I will not guess them. These are the pack sizes they do publish, quoted as written. Sika Australia or a stockist can tell you what colours are available.`; return done([pc], 'colour', st, 'attr'); }
+        return done([coverNo(q, one, names, `The ${nm} data sheet and product page do not list its colours, so I will not guess them. Sika Australia or a stockist can tell you what is available.`, ['colours'])], 'colour', st); }
+      const facts = lines.map((s) => mkFact({ source_url: one.u, page: null, sentence: s, doc_type: 'WEB' }));
+      return done([mkCard({ type: 'info', status: 'PUBLISHED', title: `Colours: ${one.n}`, product: C.prod(one), headline: `What the ${one.n} product page says about colour, quoted as written.`, lines: lines.map((s) => ({ label: 'Published', text: s })), facts, source: facts[0], chip: CHIPS.PAGE, links: [{ label: 'Open the product page', url: one.u }], followups: [`Pack sizes of ${one.n}`, `Data sheet for ${one.n}`] })], 'colour', st, 'attr');
+    }
+    const txts = await Promise.all(shs.map(text));
+    if (txts.some((t) => at.has.test(t))) return { post: at.has, sh: shs[txts.findIndex((t) => at.has.test(t))] };
+    return done([coverNo(q, one, names, `The ${nm} data sheet and product page do not state ${at.label}, so I will not guess it, and I will not swap in a different product. Sika Technical Services can confirm.`, [at.label])], 'attr:' + at.id, st);
+  }
+  /** The routed answer to a property question whose words the data DOES hold, but which answered without them: quote the product's own sentences that hold them. */
+  function coverQuote(res, rx, sh) {
+    const t = res.cards.map((c) => [c.title, c.headline, ...(c.lines || []).map((l) => l.text), c.source && c.source.sentence].join(' ')).join(' ');
+    if (rx.test(t)) return res;
+    const pool = [...(sh.d.a || []), ...(sh.d.us || []), sh.d.s, ...(sh.d.sec || []).map((x) => (x.l ? x.l + ': ' : '') + x.t)].filter(Boolean);
+    const lines = []; for (const p0 of pool) for (const s of String(p0).split(/(?<=[.!?])\s+/)) { let c = s.replace(/\s+/g, ' ').trim(); const m = rx.exec(c); if (!m) continue;
+      if (c.length > 280) { const i = m.index; let a0 = Math.max(0, i - 150); let b0 = Math.min(c.length, i + m[0].length + 120); a0 = a0 ? c.indexOf(' ', a0) + 1 : 0; b0 = b0 < c.length ? c.lastIndexOf(' ', b0) : c.length; c = (a0 ? '... ' : '') + c.slice(a0, b0).trim() + (b0 < c.length ? ' ...' : ''); } // a long run-on passage: the words around the match, marked as cut
+      if (!lines.includes(c) && lines.length < 3) lines.push(c); }
+    if (!lines.length) return res;
+    const facts = lines.map((s) => mkFact({ source_url: sh.u, page: null, sentence: s, doc_type: 'WEB' }));
+    const c = mkCard({ type: 'info', status: 'PUBLISHED', title: `From the ${sh.n} product page`, product: C.prod(sh), headline: `What the ${sh.n} product page says on this, quoted as written. I am claiming nothing beyond these lines.`, lines: lines.map((s) => ({ label: 'Published', text: s })), facts, source: facts[0], chip: CHIPS.PAGE, links: [{ label: 'Open the product page', url: sh.u }], followups: [`Data sheet for ${sh.n}`, `What is ${sh.n} used for`] });
+    finalize(c);
+    return { ...res, intent: 'attr', cards: [c], followups: c.followups, state: { productId: sh.id, intent: 'which' }, trace: (res.trace || []).concat(['cover:quote']) };
+  }
+  const session = createSession({ ask: askInner, cover: coverAsk, coverQuote, advisor, boot, productName: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].n : ''), productCategory: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].c : ''), productList: () => core.P.map((p) => ({ id: p.id, name: p.n })) });
   const ask = (question, state = null) => session.ask(question, state);
   return { ask, askInner, boot, search: (n) => search(normalise(n), []), core: () => core };
 }

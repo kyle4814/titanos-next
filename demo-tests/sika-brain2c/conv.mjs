@@ -12,7 +12,7 @@ for (const cv of convs) {
   let st = null; let ok = true; const why = [];
   for (const [i, t] of cv.turns.entries()) {
     const r = await (process.env.BEFORE ? brain.askInner : brain.ask)(t.q, st); st = r.state; turns++;
-    const cards = r.cards; const e = t.expect || {}; const ids = cards.map((c) => c.product && c.product.id).filter(Boolean);
+    const cards = r.cards; const e = t.expect || {}; const ids = cards.map((c) => (c.product || c.about) && (c.product || c.about).id).filter(Boolean); // a not-in-the-data card names its product in `about` (Opus round 2026-11-03)
     const txt = (cards.map(cardText).join(' ') + ' ' + cards.map((c) => c.headline).join(' ')).toLowerCase();
     const f = [];
     if (e.type && !cards.some((c) => c.type === e.type)) f.push('type ' + e.type + ' got ' + cards.map((c) => c.type).join('+'));
