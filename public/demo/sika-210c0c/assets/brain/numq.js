@@ -9,7 +9,9 @@ import { quantity, packOptions, fmt } from '../lib/finder/calc.js';
 import { tableAsk } from './grid.js';
 
 // TODO(w2-dosage): per-100-kg, percent-of-cement and per-m3 dosage kinds plug in here once calc.js exports them (they are another lane's change to calc.js).
-export const thicknessOf = (n) => { const m = String(n).match(/(?:^|[^\d.x])(\d+(?:\.\d+)?)\s*(?:mm|millimet(?:er|re)s?)\b/); return m ? Number(m[1]) : null; };
+export const thicknessOf = (n) => { const s = String(n).replace(/\b\d+(?:\.\d+)? ?(?:mm)? ?(?:x|by|\*) ?\d+(?:\.\d+)? ?(?:mm|millimet(?:er|re)s?)?\b(?: (?:tiles?|format|sheets?|pavers?|slabs?|joints?))?/g, ' ').replace(/\b\d+(?:\.\d+)? ?(?:mm|millimet(?:er|re)s?) (?:tiles?|pavers?|mosaics?|format|joints?|gaps?|wide|deep|joint width)\b/g, ' '); const m = s.match(/(?:^|[^\d.x])(\d+(?:\.\d+)?)\s*(?:mm|millimet(?:er|re)s?)\b/); return m ? Number(m[1]) : null; };
+/** a thickness over 50 mm is almost always a tile size or a joint read as a layer: the quantity path asks instead of computing */
+export const THICK_MAX = 50;
 const THICK_KINDS = new Set(['screed', 'level_primer', 'ramp_patch', 'repair_mortar', 'grout_precision']);
 const LINE = (label, text) => ({ label, text });
 const wherePds = (s) => (s && s.t === 'WEB' ? 'product page' : 'data sheet') + (s && s.p ? ', page ' + s.p : '');

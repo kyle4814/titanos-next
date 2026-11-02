@@ -11,7 +11,7 @@ import { createKnow } from './know.js';
 import { vagueCard, termCard, genericVague, intentClarifier } from './vague.js';
 import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
-import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
+import { quantityByKind, thicknessOf, THICK_MAX, recommendCard } from './numq.js';
 import { createSession } from './session.js';
 import { applyNames, deriveAliases, historyCard } from './names.js';
 import * as CV from './cover.js';
@@ -413,9 +413,10 @@ export function createBrain({ load, config, loadRules } = {}) {
         // a sealant goes by joint length: the sheet publishes metres of joint per pack by joint width x depth (parsed rows), so ask or compute in metres, never m2
         const jr = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []).map((f) => f.parsed).filter((p) => p && p.model === 'joint_length_per_pack' && p.length_m_per_pack > 0);
         const jm = /\b(\d+(?:\.\d+)?) ?(?:m|metres?|meters?|lineal metres?|lm)\b(?! ?2)/.exec(n);
+        if (!jr.length && /sealant|joint/.test(sh.c || '') && facets.area == null && !jm) { const c = C.productCard(sh, sh.d.s || sh.d.t, null); c.headline = `The ${sh.n} data sheet and product page do not give a usage per metre of joint or per square metre, so I cannot work out a quantity, and I will not guess. These are the pack sizes and the published text.`; c.lines = [{ label: 'Packaging', text: String(sh.d.pk || '') }].filter((l) => l.text).concat(c.lines || []); return out(intent, stage, [c], { state: s }); }
         if (!jr.length && jm && /\b(joints?|lineal|linear|long)\b/.test(n)) { const c = C.productCard(sh, sh.d.s || sh.d.t, null); c.headline = `The ${sh.n} data sheet and product page do not give a usage per metre of joint, so I cannot turn ${jm[1]} m into packs, and I will not guess. These are the pack sizes and the published text.`; c.lines = [{ label: 'Packaging', text: String(sh.d.pk || '') }].filter((l) => l.text).concat(c.lines || []); return out(intent, stage, [c], { state: s }); }
         if (jr.length) { const jd = /\b(\d+(?:\.\d+)?) ?(?:x|by) ?(\d+(?:\.\d+)?) ?mm\b/.exec(n);
-          const rows = jr.map((p) => `${p.joint_width_mm} x ${p.joint_depth_mm} mm`); const askJ = (why) => out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `${why}${sh.n} is used by joint length, not area: its data sheet gives metres of joint per pack for the joint sizes below (width x depth, quoted from the sheet). How many metres of joint, and which size?`, jr.map((p) => `How much ${sh.n} for 10 m of ${p.joint_width_mm} x ${p.joint_depth_mm} mm joint`), [], rows)], { state: s });
+          const rows = jr.map((p) => `${p.joint_width_mm} x ${p.joint_depth_mm} mm`); const askJ = (why) => { const mt = jm ? Number(jm[1]) : null; return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `${why}${sh.n} is used by joint length, not area: its data sheet gives metres of joint per pack for the joint sizes below (width x depth, quoted from the sheet). ${mt != null ? `For ${mt} m of joint, which size?` : 'How many metres of joint, and which size?'}`, jr.map((p) => `How much ${sh.n} for ${mt != null ? mt : 10} m of ${p.joint_width_mm} x ${p.joint_depth_mm} mm joint`), [], rows)], { state: s }); };
           if (!jm) return askJ(facets.area != null ? 'I will not turn an area into sealant. ' : '');
           const metres = Number(jm[1]); if (metres > 10000) return askJ('That is more than 10,000 metres of joint, so please check the figure. ');
           const row = jd ? jr.find((p) => p.joint_width_mm === Number(jd[1]) && p.joint_depth_mm === Number(jd[2])) : null;
@@ -427,6 +428,7 @@ export function createBrain({ load, config, loadRules } = {}) {
           c.facts = [{ source_url: src.s.u, page: src.s.p, sentence: `${row.column_order.join(' | ')}: ${src.text}`, status: 'PUBLISHED', doc_type: 'PDS', doc_version: src.s.v || '' }]; c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.followups = [`Pack sizes of ${sh.n}`, `Data sheet for ${sh.n}`];
           return out(intent, stage, [c], { state: s }); }
         if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s });
+        { const th = thicknessOf(n); if (th != null && th > THICK_MAX) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `I read ${th} mm as the layer thickness, which is more than ${THICK_MAX} mm, so please check it: is that a tile size or a joint, not the thickness? Tell me the area in m2 and the thickness in mm.`, [3, 5, 10].map((t) => `How much ${sh.n} for ${facets.area != null ? facets.area : 10} m2 at ${t} mm`))], { state: s }); }
         if (facets.area > 10000) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `That is ${facets.area} m2, which is more than 10,000 m2, so please check the area (a tile size in mm is not the area). How many square metres is the job?`, [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s });
         return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
