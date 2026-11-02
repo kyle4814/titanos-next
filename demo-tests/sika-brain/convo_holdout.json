@@ -1,0 +1,1428 @@
+{
+ "note": "BLIND holdout conversation bank, written without reading convo_bank.json. 120 single-turn + 30 multi-turn. Persona in cat. Props: room/has/not/short as per convo_score.mjs",
+ "rows": [
+  {
+   "id": "H001",
+   "cat": "tiler",
+   "class": "social",
+   "turns": [
+    "g day mate"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H002",
+   "cat": "tiler",
+   "class": "social",
+   "turns": [
+    "yo"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H003",
+   "cat": "tiler",
+   "class": "social",
+   "turns": [
+    "cheers legend that helps heaps"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H004",
+   "cat": "tiler",
+   "class": "social",
+   "turns": [
+    "sweet thanks"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H005",
+   "cat": "diy",
+   "class": "social",
+   "turns": [
+    "hello? is anyone there lol"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H006",
+   "cat": "diy",
+   "class": "social",
+   "turns": [
+    "thank you so much!!"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H007",
+   "cat": "diy",
+   "class": "social",
+   "turns": [
+    "ok sorry dumb question probably, can i just chat to you normally"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H008",
+   "cat": "staff",
+   "class": "social",
+   "turns": [
+    "morning, got a customer here wanting help, you free?"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H009",
+   "cat": "staff",
+   "class": "social",
+   "turns": [
+    "ta mate"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H010",
+   "cat": "staff",
+   "class": "social",
+   "turns": [
+    "legend, cheers"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H011",
+   "cat": "supervisor",
+   "class": "social",
+   "turns": [
+    "hey team"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H012",
+   "cat": "supervisor",
+   "class": "social",
+   "turns": [
+    "right, good to go?"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H013",
+   "cat": "supervisor",
+   "class": "social",
+   "turns": [
+    "are you a real person or a bot"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H014",
+   "cat": "tiler",
+   "class": "social",
+   "turns": [
+    "hows it going"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "H015",
+   "cat": "diy",
+   "class": "social",
+   "turns": [
+    "heya, what sort of stuff do you know about"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H016",
+   "cat": "staff",
+   "class": "social",
+   "turns": [
+    "how do i use this"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H017",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "need something for the floor"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H018",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "whats the go with waterproofing"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H019",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "got a leak what do i use"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H020",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "sealent?"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H021",
+   "cat": "diy",
+   "class": "clarify",
+   "turns": [
+    "theres a crack in the wall, help"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H022",
+   "cat": "diy",
+   "class": "clarify",
+   "turns": [
+    "what glue should i get"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H023",
+   "cat": "diy",
+   "class": "clarify",
+   "turns": [
+    "need to do the shower"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H024",
+   "cat": "staff",
+   "class": "clarify",
+   "turns": [
+    "customer wants something to stop water getting in, no idea what for"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H025",
+   "cat": "staff",
+   "class": "clarify",
+   "turns": [
+    "what do you have for concrete"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H026",
+   "cat": "staff",
+   "class": "clarify",
+   "turns": [
+    "lady asking about grout but cant say what for"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H027",
+   "cat": "supervisor",
+   "class": "clarify",
+   "turns": [
+    "need a product for the slab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H028",
+   "cat": "supervisor",
+   "class": "clarify",
+   "turns": [
+    "something to fix the roof, what are my options"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H029",
+   "cat": "supervisor",
+   "class": "clarify",
+   "turns": [
+    "what primer"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H030",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "job on tomorrow, need to seal something up"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H031",
+   "cat": "diy",
+   "class": "clarify",
+   "turns": [
+    "my deck is stuffed, what do i buy"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H032",
+   "cat": "staff",
+   "class": "clarify",
+   "turns": [
+    "wich silicone"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H033",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "best flexible tile adhesive for big porcelain tiles on a balcony? just tell me which one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H034",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "whats the best grout for a shower wall, which one would you go with"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H035",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "which waterproofing membrane under tiles in a wet area, just pick one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H036",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "need a rapid setting adhesve for wall tilez, one i can grot same day, what one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H037",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "whats the best silicone for around my bathroom sink, pick one for me"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H038",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "which sealant for the kitchen bench to splashback join, just one thanks"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H039",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "best thing to stick a timber skirting to a brick wall without nails?"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H040",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "im tiling the laundry floor and its got a few lumps, wich levling compound should i buy"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H041",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "customer wants one product to waterproof a shower recess before tiling, which do i recommend"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H042",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "what do i recommend for sticking mirrors up, one only"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H043",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "best all round construction adhesive for the trade guys, which one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H044",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "what would you recommend for filling cracks in a driveway slab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H045",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "which concrete repair mortar for a spalled column, vertical, pick one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H046",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "best waterproofing for a podium slab, liquid applied, which one would you spec"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H047",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "need a non shrink grout for baseplates, which would you choose"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H048",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "what is the go to epoxy for anchoring bars into concrete"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H049",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "best adhesive for tiling over underfloor heating, pick one pls"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H050",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "which one is best for sealing a swimming pool tile joint"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H051",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "whats the best self levelling for timber subfloor, one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H052",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "wich sealent for expansion joints in a facade, give me your pick"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H053",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "how long til i can grout after fixing wall tiles with a rapid set adhesive"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H054",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "can i use K10 plus over a waterproofing membrane"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H055",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "is sikatile 400 evo pro ok for outdoor tiling"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H056",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "what is the open time of SikaTile-366 Pro Flex"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H057",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "how many coats of Sikalastic 1K in a shower and whats the recoat time"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H058",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "can i walk on the floor after levelling compound, how long do i have to wait"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H059",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "is Sikaflex 11 FC+ paintable"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H060",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "will sikaseal kitchen and bathrom go mouldy"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H061",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "what temp is too cold to apply sikaflex pro"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H062",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "whats the pack size for Sika Boom G"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H063",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "what colours does the Sikaflex 11 FC+ come in"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H064",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "shelf life of Davco Ultraflex, customer asking"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H065",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "is SikaBond Instant Nails ok for outdoor use"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H066",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "does Sika Showerbond need a primer"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H067",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "what does Sika Wonder Wipes clean off"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H068",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "what is the compressive strength of SikaGrout-212 HP AU at 28 days"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H069",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "can Sika MonoTop-612 N be applied overhead"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H070",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "is Sikafloor Level Pro suitable for areas with forklift traffic"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H071",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "whats the substrate prep needed before Sikalastic-888 on a balcony"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H072",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "max thickness in one lift for SikaGrout Deep Pour"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H073",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "can i apply sikafloor level eco straight onto concrete without primer"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H074",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "is Sika AnchorFix-1 ok for use in wet holes"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H075",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "what substrates will SikaTack Panel 10 bond to"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H076",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "davco ultraprime, can i roll it on or does it need a brush"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H077",
+   "cat": "tiler",
+   "class": "honest-no",
+   "turns": [
+    "how much is a bag of K10 at bunnings today"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H078",
+   "cat": "tiler",
+   "class": "honest-no",
+   "turns": [
+    "do you have stock at the Brisbane branch right now"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H079",
+   "cat": "diy",
+   "class": "honest-no",
+   "turns": [
+    "can you tell me if mapei would be cheaper than this stuff"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H080",
+   "cat": "diy",
+   "class": "honest-no",
+   "turns": [
+    "will my landlord let me do this, is it legal to tile myself"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H081",
+   "cat": "staff",
+   "class": "honest-no",
+   "turns": [
+    "when is the next delivery of Sikaflex coming to our store"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H082",
+   "cat": "supervisor",
+   "class": "honest-no",
+   "turns": [
+    "can you sign off the structural adequacy of this beam repair for me"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H083",
+   "cat": "supervisor",
+   "class": "honest-no",
+   "turns": [
+    "what is the warranty period on our install, put it in writing"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H084",
+   "cat": "supervisor",
+   "class": "honest-no",
+   "turns": [
+    "is there asbestos in the old adhesve under my lino"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H085",
+   "cat": "diy",
+   "class": "honest-no",
+   "turns": [
+    "can you book a tradie to come out and do it"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H086",
+   "cat": "staff",
+   "class": "honest-no",
+   "turns": [
+    "what is the price of Sikaflex Pro per carton"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H087",
+   "cat": "supervisor",
+   "class": "honest-no",
+   "turns": [
+    "give me the full BASIX energy rating for my slab design"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H088",
+   "cat": "diy",
+   "class": "honest-no",
+   "turns": [
+    "what is the best brand of paint for the walls after"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H089",
+   "cat": "tiler",
+   "class": "compare",
+   "turns": [
+    "K10 Plus vs SikaTile 400 EVO PRO, which is better for floor tiles"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H090",
+   "cat": "tiler",
+   "class": "compare",
+   "turns": [
+    "difference between Davco K10 Rapid and K10 Plus"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H091",
+   "cat": "tiler",
+   "class": "compare",
+   "turns": [
+    "sikatile 305 master lite versus sikatile 405 lite"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H092",
+   "cat": "diy",
+   "class": "compare",
+   "turns": [
+    "whats the difference betwen Sikaflex 11 FC+ and SikaSeal Kitchen and bathrom"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H093",
+   "cat": "diy",
+   "class": "compare",
+   "turns": [
+    "sikalastic 1k vs sikalastic 888, can u compare em"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H094",
+   "cat": "staff",
+   "class": "compare",
+   "turns": [
+    "explain Sikaflex Pro vs Sikaflex Construction AP+ to a customer"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H095",
+   "cat": "staff",
+   "class": "compare",
+   "turns": [
+    "Sika Boom G against Sika Boom AP"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H096",
+   "cat": "staff",
+   "class": "compare",
+   "turns": [
+    "SikaBond Instant Nails vs Sikaflex 118 Extreme Grab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H097",
+   "cat": "supervisor",
+   "class": "compare",
+   "turns": [
+    "Sikadur 31 vs Sikadur 33 for crack injection"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H098",
+   "cat": "supervisor",
+   "class": "compare",
+   "turns": [
+    "Sika MonoTop 723 N compared to Sika MonoTop 412 NFG"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H099",
+   "cat": "supervisor",
+   "class": "compare",
+   "turns": [
+    "Sikafloor Level Pro vs Sikafloor Level Ultra"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H100",
+   "cat": "tiler",
+   "class": "compare",
+   "turns": [
+    "SikaCeram 880 Easy Epoxy or SikaCeram 960 Epoxy Finish"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H101",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "how many bags of SikaTile 400 EVO PRO for 25 m2 of floor tiles"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H102",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "Davco K10 Plus, 18 sqm bathroom floor, how much"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H103",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "how much sikalastic 1k for 8 m2 shower floor and walls"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H104",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "grot needed for 30m2 of 600x600 tilez, davco easy grot"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H105",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "how much levelling compound for 12 m2 at 5mm thick, Sikafloor Level Pro"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H106",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "im doing a 3 by 4 metre room, how much SikaTile 366 Pro Flex do i need"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H107",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "how many cartridges of Sikaflex 11 FC+ for 20 metres of joint"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H108",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "Sikalastic 1K for a 2 x 3 m balcony how much"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H109",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "customer has 40 m2 to tile, how many bags of SikaTile 350 Pro Maxset"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H110",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "how many litres of Sikalastic 1K for 10 m2, two coats"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H111",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "how many Sika Boom G cans to fill 10 window frames"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H112",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "50 m2 of floor to level at 3mm, how many bags of Sikafloor Level Pro"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H113",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "SikaGrout 212 HP AU for a 2 m3 pour how many bags"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H114",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "how much Sikadur 33 for 15 m2 of bonding"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H115",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "Sika MonoTop 612 N for 6 m2 at 20 mm, how many bags"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H116",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "Sikalastic 888 for a 120 m2 podium, litres needed"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H117",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "how much adhesive for 60 m2 of wall tiles SikaTile 405 Lite"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H118",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "Sikalastic 1K covers how many m2 per pail"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H119",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "Sikaflex Pro, 100 linear metres of 10 mm joint, how many sausages"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H120",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "how many bags of Davco K10 Rapid for 16 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H121",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "need something for a shower",
+    "tiling over the waterproofing, wall and floor, which adhesive would u pick"
+   ],
+   "props": {
+    "room": "tile|shower"
+   }
+  },
+  {
+   "id": "H122",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "got a bathroom floor to tile",
+    "its 14 m2, how much SikaTile 400 EVO PRO"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H123",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "using K10 Plus on a job",
+    "how long before i can grout it"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H124",
+   "cat": "tiler",
+   "class": "compare",
+   "turns": [
+    "thinking sikatile 400 evo pro",
+    "how does it stack up against K10 Plus"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H125",
+   "cat": "tiler",
+   "class": "answer",
+   "turns": [
+    "I need to waterproof a balcony",
+    "Sikalastic 888, what prep does the slab need first"
+   ],
+   "props": {
+    "room": "888|balcony"
+   }
+  },
+  {
+   "id": "H126",
+   "cat": "tiler",
+   "class": "quantity",
+   "turns": [
+    "Sikalastic 1K for a laundry",
+    "6 m2 floor, how many litres"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H127",
+   "cat": "tiler",
+   "class": "pick",
+   "turns": [
+    "what do I use for the floor",
+    "its a bathroom, tiles going on, concrete slab. just tell me one waterproofer"
+   ],
+   "props": {
+    "room": "bathroom|waterproof"
+   }
+  },
+  {
+   "id": "H128",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "bathroom reno, where to start",
+    "ok so waterproofing first, which product would you pick for a shower floor"
+   ],
+   "props": {
+    "room": "shower|waterproof"
+   }
+  },
+  {
+   "id": "H129",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "doing a levelling job in the hallway",
+    "its 2.5 m x 6 m at 4mm, how much Sikafloor Level Pro"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H130",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "i have sikaflex 11 fc+",
+    "can i paint over it, and how long should i wait"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H131",
+   "cat": "diy",
+   "class": "compare",
+   "turns": [
+    "looking at silicone for bathroom",
+    "Sikasil Pool vs SikaSeal Acrylic, which is for what"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H132",
+   "cat": "diy",
+   "class": "clarify",
+   "turns": [
+    "hi",
+    "i need to fix something",
+    "something is leaking"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H133",
+   "cat": "diy",
+   "class": "answer",
+   "turns": [
+    "sealing around the bath",
+    "how long does SikaSeal Kitchen and Bathroom take to cure"
+   ],
+   "props": {
+    "room": "cure|SikaSeal"
+   }
+  },
+  {
+   "id": "H134",
+   "cat": "diy",
+   "class": "quantity",
+   "turns": [
+    "putting down a deck",
+    "Sikaflex Pro for 12 m of joints how many tubes"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H135",
+   "cat": "diy",
+   "class": "pick",
+   "turns": [
+    "my balcony leaks",
+    "its a tiled balcony, about 5 m2, which waterproofing product, one pick please"
+   ],
+   "props": {
+    "room": "balcony|tile"
+   }
+  },
+  {
+   "id": "H136",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "customer is tiling outdoors",
+    "is SikaTile 400 EVO PRO suitable for exterior floors"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H137",
+   "cat": "staff",
+   "class": "quantity",
+   "turns": [
+    "customer doing a pool surround",
+    "45 m2, how many bags of SikaTile 350 Pro Maxset"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H138",
+   "cat": "staff",
+   "class": "compare",
+   "turns": [
+    "customer unsure on adhesives",
+    "SikaBond Instant Nails against Sikaflex 118 Extreme Grab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H139",
+   "cat": "staff",
+   "class": "pick",
+   "turns": [
+    "bloke wants to fill gaps around windows",
+    "whats the one to recommend for that, expanding foam"
+   ],
+   "props": {
+    "room": "foam|window|gap"
+   }
+  },
+  {
+   "id": "H140",
+   "cat": "staff",
+   "class": "clarify",
+   "turns": [
+    "customer here",
+    "he wants glue",
+    "not sure what its for"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H141",
+   "cat": "staff",
+   "class": "answer",
+   "turns": [
+    "asked about grout earlier",
+    "Davco Easy Grout, can it go on a floor and what joint width"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H142",
+   "cat": "staff",
+   "class": "honest-no",
+   "turns": [
+    "looking at Sikaflex Pro",
+    "how much per carton at your store"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H143",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "patching a column",
+    "SikaMonoTop 612 N, 3 m2 at 25 mm, bags needed"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H144",
+   "cat": "supervisor",
+   "class": "pick",
+   "turns": [
+    "podium slab waterproofing",
+    "liquid applied, trafficable, which would you choose"
+   ],
+   "props": {
+    "room": "podium|waterproof|liquid"
+   }
+  },
+  {
+   "id": "H145",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "grouting baseplates",
+    "SikaGrout 212 HP AU, what flow at 20 degrees and when can we load"
+   ],
+   "props": {
+    "room": "212|grout"
+   }
+  },
+  {
+   "id": "H146",
+   "cat": "supervisor",
+   "class": "compare",
+   "turns": [
+    "crack injection options",
+    "Sikadur 31 versus 33"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H147",
+   "cat": "supervisor",
+   "class": "answer",
+   "turns": [
+    "concrete repair on site",
+    "can Sika MonoTop 412 NFG go on vertical and overhead"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H148",
+   "cat": "supervisor",
+   "class": "honest-no",
+   "turns": [
+    "SikaGrout Ultra",
+    "can you give me the price and lead time to site"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H149",
+   "cat": "supervisor",
+   "class": "quantity",
+   "turns": [
+    "screed repair, warehouse",
+    "Sikafloor Level Pro, 80 m2 at 5 mm, bags"
+   ],
+   "props": {}
+  },
+  {
+   "id": "H150",
+   "cat": "tiler",
+   "class": "clarify",
+   "turns": [
+    "got a job",
+    "tiles going on a wall",
+    "need a bonding thing"
+   ],
+   "props": {}
+  }
+ ]
+}
