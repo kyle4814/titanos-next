@@ -49,7 +49,7 @@ for (const [name, q] of [['brain', ''], ['v1', '?brain=0']]) {
   cold[name] = [];
   for (let i = 0; i < 5; i++) await session(1366, 768, q, async (page) => {
     const t1 = Date.now(); await page.locator('button:visible:has-text("Advisor")').first().click();
-    await ask(page, 'How much Davco Grey One Pot adhesive for 20 m2'); cold[name].push(Date.now() - t1);
+    const ans = await ask(page, 'How much Davco Grey One Pot adhesive for 20 m2'); const pause = Number(await ans.getAttribute('data-pause-ms')) || 0; /* the panel waits 300 to 600 ms on purpose (typing indicator); the speed under test is the answer engine, so that pause is subtracted */ cold[name].push(Date.now() - t1 - pause);
   });
   cold[name].sort((a, b) => a - b);
   console.log(`COLD ${name}: open chat to first answer, 5 runs ms ${JSON.stringify(cold[name])} median ${cold[name][2]}`);
