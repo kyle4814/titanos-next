@@ -11,6 +11,8 @@ const SIGNAL = /\b(contact (sika|us|details|number|info)|phone (number|no|numbr|
 const DEFN = /^(what (is|are)\b|what.s (a|an|the)|what (does|do) .* (mean|stand for)|why (do|does|is|are)|explain|how (does|do) .* work|who (is|are|owns?|makes?)|how long has|when (did|was)|is .* part of|are .* part of|has .* (changed|been)|did .* change)/;
 const KG = new Set([...GENERIC].filter((w) => w !== 'davco' && w !== 'tile'));
 const NUMW = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
+const PAGEWORD = new Set('bond bonding seal sealing sealant adhesive adhesives product solution application page range industry panel faq content file files hub download downloads where find get see show'.split(' ').map((w) => tokens(w)[0]));
+const TTDF = new Map(); // how many page titles carry each word
 const FILLER = new Set('sika sikas australia australian tell know find want like get give show need tell help please best good great right info information details about product products range thing stuff someone anything'.split(' '));
 const SYN = [['trade', 'b2b', 'shop', 'eshop', 'registration', 'portal'], ['company', 'brand', 'family', 'owned', 'part'], ['phone', 'telephone', 'call', 'ring', 'number'], ['address', 'office', 'located', 'location'], ['buy', 'stockist', 'distributor', 'retailer', 'purchase'], ['training', 'course', 'workshop', 'webinar'], ['warranty', 'guarantee'], ['contact', 'enquiry', 'enquir', 'touch'], ['job', 'career', 'employment'], ['sustainable', 'sustainability', 'impact', 'environmental'], ['colour', 'color', 'packaging'], ['library', 'hub', 'documents', 'resources']];
 
@@ -27,7 +29,8 @@ export function createKnow({ load }) {
     return kb;
   }
   const idf = (t) => Math.log(1 + N / (df.get(t) || N));
-  const vocabFix = (t) => { if (!idx || idx.has(t) || t.length < 5 || /\d/.test(t)) return t; const max = t.length >= 9 ? 2 : 1; let best = t, bd = 9, bdf = 0; for (const [v, a] of idx) { if (Math.abs(v.length - t.length) > max) continue; const d = dist(t, v, max); if (d > max) continue; if (d > 1 && t.slice(0, 2) !== v.slice(0, 2)) continue; if (d < bd || (d === bd && a.length > bdf)) { best = v; bd = d; bdf = a.length; } } return best; };
+  const subseq = (a, b) => { let i = 0; for (const c of b) if (c === a[i]) i++; return i === a.length; };
+  const vocabFix = (t) => { if (!idx || idx.has(t) || t.length < 5 || /\d/.test(t)) return t; const max = t.length >= 9 ? 2 : 1; let best = t, bd = 9, bdf = 0; for (const [v, a] of idx) { if (Math.abs(v.length - t.length) > max) continue; const d0 = dist(t, v, max); if (d0 > max) continue; if (d0 > 1 && t.slice(0, 2) !== v.slice(0, 2)) continue; const d = d0 + (subseq(t, v) ? 0 : 0.5); /* a dropped letter (rplace > replace) is a likelier slip than an extra one */ if (d < bd || (d === bd && a.length > bdf)) { best = v; bd = d; bdf = a.length; } } return best; };
   const origin = new Map(); // synonym token -> the question word it stands for
   const qTokens = (n, noCap) => { if (/\bhow long (has|have|had)\b/.test(n)) n = n.replace(/\bhow long\b/, 'since'); const base = [...new Set(tokens(n.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/g, (m) => NUMW[m])).filter((t) => !KG.has(t) && !FILLER.has(t) && t.length > 0).map(vocabFix))]; const q = new Map(base.map((t) => [t, 1])); if (idx && !noCap && base.length > 5) { const keep = new Set([...base].sort((a, b) => idf(b) - idf(a)).slice(0, 5)); for (const t of [...q.keys()]) if (!keep.has(t)) q.delete(t); }
     for (const g of SYN) { const gt = g.map((x) => tokens(x)[0]); const o = gt.find((t) => q.get(t) === 1); if (o) for (const t of gt) if (!q.has(t)) { q.set(t, 0.5); origin.set(t, o); } } return q; };
@@ -137,14 +140,18 @@ export function createKnow({ load }) {
   /** A question that is (nearly) the name of a published page: "three must haves for builders", "leaking shower". */
   async function titleMatch(q, n, hasKind, strictOnly) {
     await boot(); if (!kb) return null;
+    n = n.replace(/^((hi|hey|hello|um|umm|ok|okay|so|righto|quick one|g day|gday|sorry to bug you|mate|yo|thanks|please|pls) )+/, '');
     const qs = qTokens(n, true); const qset = new Set([...qs].filter(([, w]) => w >= 1).map(([t]) => t)); if (qset.size < 2) return null;
     const wantProj = /\b(project|projects|case stud\w+|reference|references)\b/.test(n);
     let best = null;
+    if (!TTDF.size) for (const p of kb.pages) for (const t of new Set(tokens(p.t))) TTDF.set(t, (TTDF.get(t) || 0) + 1);
     for (const p of kb.pages) {
-      if (p.k === 'project' ? !wantProj : !(p.k === 'diy' || p.k === 'article' || p.k === 'site')) continue;
       if (!p.tt) p.tt = [...new Set(tokens(p.t).filter((t) => !KG.has(t) && !FILLER.has(t)))];
+      if ((p.k === 'industry' || p.k === 'site') && p.tt.length >= 1 && p.tt.length <= 2 && p.tt.some((t) => qset.has(t) && (TTDF.get(t) || 0) <= 3) && [...qset].every((t) => p.tt.includes(t) || PAGEWORD.has(t))) { const sc = 2; if (!best || sc > best.sc) best = { p, sc, tc: 1, qc: 1 }; continue; } // "dishwasher sealing", "elevator bonding and sealing": the one-word industry page
+      if (p.k === 'project' ? !(wantProj || (p.tt.length >= 3 && p.tt.filter((t) => qset.has(t)).length >= Math.max(3, Math.ceil(p.tt.length * 0.8)))) : !(p.k === 'diy' || p.k === 'article' || p.k === 'site' || p.k === 'industry')) continue; // a project page is named by all of its title words
       if (p.tt.length < 2) continue; const m = p.tt.filter((t) => qset.has(t)).length; if (m < 2 || (strictOnly && (m < 3 || m / p.tt.length < 0.9))) continue;
-      const tc = m / p.tt.length, qc = m / qset.size; if (!(tc >= 0.8 || (qc >= 0.66 && (!hasKind || p.k === 'diy')))) continue;
+      if (p.k === 'industry' && (m < p.tt.length || m / qset.size < 0.6 || /^(i need|i want|i am looking|looking for|need|want|we need)\b/.test(n))) continue; // an industry page answers only a question that is mostly its own title
+      const tc = m / p.tt.length, qc = m / qset.size; if (!(tc >= 0.8 || (qc >= 0.66 && (!hasKind || p.k === 'diy')) || (qc === 1 && tc >= 0.6 && m >= 2 && qset.size <= 3 && p.k === 'article'))) continue; // a short question made only of title words ("open a unipack")
       const sc = tc + qc + (p.k === 'diy' ? 0.1 : 0); if (!best || sc > best.sc) best = { p, sc, tc, qc };
     }
     if (!best || best.tc + best.qc < 1.1) return null;

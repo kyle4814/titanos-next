@@ -38,7 +38,7 @@ export const ENVIRONMENT = mk({
 export const TILE = mk({
   ceramic: ['ceramic', 'ceramic tile'], porcelain: ['porcelain'], mosaic: ['mosaic'], glass_tile: ['glass tile', 'glass mosaic'],
   moisture_sensitive_stone: ['moisture sensitive stone', 'green marble'], natural_stone: ['natural stone', 'marble', 'granite', 'travertine', 'limestone', 'slate', 'sandstone'],
-  large_format: ['large format', 'large tile'], terracotta: ['terracotta'], brick_slip: ['brick slip'],
+  large_format: ['large format', 'large tile'], engineered_stone: ['engineered stone', 'reconstituted stone', 'quartz stone', 'caesarstone'], terracotta: ['terracotta'], brick_slip: ['brick slip'],
 });
 function find(list, toks, n) {
   const hit = [];

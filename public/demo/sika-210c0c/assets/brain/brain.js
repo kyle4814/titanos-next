@@ -1,5 +1,6 @@
 // brain.js: the deterministic retrieval stack. No model, no network beyond the shard loader, no randomness.
 // Order: corrected rules, exact product and alias, synonym and spelling tolerance, weighted token index, facet constraints, decision trees, honest unknown.
+import { categoryListCard } from './catlist.js';
 import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact, clampText } from './text.js';
 import { expandSynonyms, spellToken, correctAgainst, findAliasSpans, aliasEntries, fuzzyAliasSpans, applySlang } from './match.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
@@ -12,7 +13,7 @@ import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
 import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
 import { createSession } from './session.js';
-import { applyNames, historyCard } from './names.js';
+import { applyNames, deriveAliases, historyCard } from './names.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -59,9 +60,11 @@ const DOC_TYPES = [
 ];
 const TIME_KIND = [
   ['open_time', /\b(open time|open|working time)\b/], ['adjustability_time', /\b(adjust|adjustability|reposition)\b/], ['pot_life', /\b(pot life|potlife|pot)\b/], ['skin_tack_times', /\b(skins?|skinning|skin over|tack)\b/],
-  ['recoat_times', /\b(recoat|re coat|overcoat|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
+  ['recoat_times', /\b(recoat\w*|re coat\w*|overcoat\w*|over coat\w*|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
 ];
 
+// real words the spelling corrector must leave alone ("bim files" was read as "bim tiles")
+const KEEP_WORDS = new Set('files file portal register shop ordering courses course engineers sustainability calibration screen'.split(' '));
 // ---------------------------------------------------------------- the brain
 export function createBrain({ load, config, loadRules } = {}) {
   let core = null, vocab = null, aliasList = null, rulesList = null, ruleTok = null;
@@ -69,7 +72,7 @@ export function createBrain({ load, config, loadRules } = {}) {
   // phone typos in words the assistant itself understands ("coevrage", "sutomotive"): corrected against its own vocabulary, never against product names
   let LEXB = null;
   const lexB = () => LEXB || (LEXB = [...new Set([...advisor.words(), ...know.words(), ...attrWords(), ...Object.values(RX).flatMap((r) => r.source.match(/[a-z]{5,}/g) || [])])].filter((w) => !/^(about|which|their|these)$/.test(w)));
-  const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x]);
+  const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x] || KEEP_WORDS.has(x));
   // lane D: the plan and rule layer. rules.js is NOT bundled: `loadRules` (browser: a module script injected the first time a question looks like a job with several
   // constraints; node tests: preloaded by the harness) returns { createRules }. A missing module just means the stack below answers, as before.
   let rulesP = null;
@@ -81,7 +84,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     core = await load.core(); if (!core) throw new Error('brain: core shard missing');
     core.P.forEach((p, i) => pIndex.set(p.id, i));
     vocab = Object.keys(core.post);
-    applyNames(core, pIndex);
+    applyNames(core, pIndex); deriveAliases(core, pIndex);
     return core;
   }
 
@@ -286,6 +289,9 @@ export function createBrain({ load, config, loadRules } = {}) {
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
+    // "what primer for Sikafloor Level Pro": the product named is the thing being primed; its own primer is a product whose name is that name plus the word
+    { const am = /^(?:what |which |any |need a |need an |whats the |what is the )?(primer|activator|cleaner|hardener|catalyst|topcoat|top coat)\b.*\b(?:for|on|with|to suit)\b/.exec(n0);
+      if (am && pis.length === 1) { const base = normalise(core.P[pis[0]].n); const hit = core.P.findIndex((p, i) => i !== pis[0] && normalise(p.n).startsWith(base + ' ') && normalise(p.n).split(' ').includes(am[1].split(' ').pop())); if (hit >= 0) { pis = [hit]; trace.push('accessory:' + core.P[hit].id); } } }
     if (!pis.length && advisor.hasKind(n0)) jobHint = { kindId: advisor.kindOf(n0), area: facets.area != null ? facets.area : null, thickness: thicknessOf(n), n: n0 };
     // wave 2b: at any point after a job was described (an advice answer or a quantity answer), "recommend me one" and "how much for 40 m2" use the SAME entry point (advisor.recommendForJob) without re-asking the kind
     if (state && !pis.length && !advisor.hasKind(n0) && ((state.job && state.job.kindId) || (state.advice && state.advice.n))) {
@@ -317,7 +323,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     }
     const stateOk = state && state.productId && pIndex.has(state.productId);
     const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
-    if (intent === 'compat' && pis.length >= 1 && /^(what is|what are|what s|whats|tell me about|describe)\b/.test(n0)) intent = 'which';
+    if (intent === 'compat' && pis.length >= 1 && (/^((hi|hey|hello|um|umm|ok|okay|so|righto|quick one|g day|gday|sorry to bug you|mate|yo|thanks) )*(what is|what are|what s|whats|tell me about|describe)\b/.test(n0) || (/\b(uses?|used for)( mate| thx| thanks| pls| please)?$/.test(n0) && !/^(can|could|is|will|does|would|do|ok|okay)\b/.test(n0)))) intent = 'which';
     const askBack = intent === 'compat' && /^(can|could|is|will|does|would|do)\b/.test(n); // "Can I tile over a heated floor?" right after a product answer
     const fromState = !pis.length && stateOk && intent !== 'which' && (followUp || askBack);
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
@@ -342,13 +348,14 @@ export function createBrain({ load, config, loadRules } = {}) {
     if (!pis.length || know.signal(n0)) { const tp = await know.topic(q, n0); if (tp) { trace.push('kb:topic'); return out('info', 'kb', [tp], { state: null }); } }
     if (!pis.length && !/^(i need|i want|looking for)\b/.test(n0)) { const cs = await know.codeSearch(q, n0, { kind: advisor.hasKind(n0) }); if (cs) { trace.push('kb:code'); return out('info', 'kb', [cs], { state: null }); } }
     // general retrieval over Sika Australia's own pages
+    { const cl = categoryListCard(q, n0, core); if (cl) { trace.push('catlist'); return out('which', 'catlist', [cl], { state: null, followups: cl.followups }); } }
     if (!pis.length && !(/^(i need|i want|looking for)\b/.test(n0) && /\bcontact (adhesive|adhesives|cement)\b/.test(n0))) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0), advisor.wants(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
     if (!pis.length && !advisor.wants(n0) && ((know.signal(n0) && !(advisor.hasKind(n0) && know.weakSignal(n0))) || (know.definitional(n0) && tokens(n0).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2)) && !facets.tile_type.length && !facets.environment.length && !/\b(best|better|good|recommend|suitable|right|ideal|should i)\b/.test(n0)))) { const kr = await know.retrieve(q, n0); if (kr) { trace.push('kb:retrieve'); return out('info', 'kb', [kr], { state: null }); } }
     // a product fact that sits under a label on the product page (shelf life, temperature limits, mixing ratio, thickness, steps, ...)
     if (pis.length === 1 && !ambiguous && ['which', 'time', 'safety', 'compat'].includes(intent)) {
-      const at = detectAttr(n); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
+      const nA = n; const at = detectAttr(nA); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
       const okId = at && (intent === 'which' || (['time', 'safety'].includes(intent) ? ['shelf', 'storage', 'service_temp', 'hardness'].includes(at.id) : !(yn && ['property', 'standards'].includes(at.id))));
-      if (okId) { const sh0 = await shard(pis[0]); if (sh0) { let ac = attrCard(sh0, n, q, at.soft); if (ac && ac.type === 'unknown') { const nc = await numAttrCard(sh0, at.id); if (nc) ac = nc; } if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
+      if (okId) { const sh0 = await shard(pis[0]); if (sh0) { let ac = attrCard(sh0, nA, q, at.soft); if (ac && ac.type === 'unknown') { const nc = await numAttrCard(sh0, at.id); if (nc) ac = nc; } if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
     }
     if (intent === 'price') {
       const sh = pis.length ? await shard(pis[0]) : null;
@@ -386,7 +393,10 @@ export function createBrain({ load, config, loadRules } = {}) {
       if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
       if (intent === 'time' && /overcoat|re-?coat|recoat|wait.*(before|until).*(coat|paint)/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, n, q, true) || await numAttrCard(sh, 'overcoat'); if (oc) { trace.push('attr:overcoat'); return out(intent, stage, [oc], { state: s }); } }
-      if (intent === 'time') { let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q); if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
+      if (intent === 'time') { if (/\b(over ?coat\w*|re ?coat\w*)\b/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, 'overcoat', q, true); if (oc && oc.type !== 'unknown') return out('attr', stage, [oc], { state: s }); } let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q);
+        if (card.type === 'unknown' && kinds.includes('recoat_times')) { const oc = attrCard(sh, 'overcoat', q, true); if (oc && oc.type !== 'unknown') return out('attr', stage, [oc], { state: s }); } // the waiting time to overcoating sits under its own label on the page
+        if (card.type === 'unknown' && kinds.length === 1 && kinds[0] === 'pot_life') { const pl = attrCard(sh, 'pot life', q, true); if (pl && pl.type !== 'unknown') return out('attr', stage, [pl], { state: s }); return out(intent, stage, [C.unknown(q, sh, `The published product page and data sheet text I work from do not give a pot life for ${sh.n}. I will not guess it. Please check the data sheet or ask Technical Services.`, ['pot life'])], { state: s }); }
+        if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
       if (intent === 'safety') return out(intent, stage, [C.safetyCard(sh, n, q)], { state: s });
       if (intent === 'document') { const want = DOC_TYPES.filter(([, rx]) => rx.test(n)); const types = want.length ? want : [DOC_TYPES[1], DOC_TYPES[0]]; const cards = []; for (const [ty, , label] of types) { const docs = (sh.dc || []).filter((d) => d.ok && (d.ty === ty)); if (docs.length) cards.push(C.documentCard(sh, docs, label)); } if (!cards.length) cards.push(C.unknown(q, sh, `No ${types.map((t) => t[2].toLowerCase()).join(' or ')} is published for this product.`, types.map((t) => t[2]))); return out(intent, stage, cards, { state: s }); }
       if (intent === 'spec') {
@@ -426,8 +436,8 @@ export function createBrain({ load, config, loadRules } = {}) {
     // ---- which product / system / tree
     const hasTile = facets.tile_type.length, hasSub = facets.substrate.length, loc = systemLocation(facets.environment);
     if ((intent === 'system' || (hasTile && hasSub && loc && !/\b(adhesive|glue|grout|primer|membrane|waterproof)\b/.test(n))) && hasSub) {
-      const sysMap = { porcelain: 'porcelain', ceramic: 'ceramic', mosaic: 'mosaic', glass_tile: 'glass', natural_stone: 'natural-stone', large_format: 'large-format', terracotta: 'quarry-terracotta' };
-      const subMap = { concrete: 'concrete', cement_screed: 'screed-render', cement_render: 'screed-render', brick_block: 'masonry', fibre_cement: 'cement-board', plasterboard: 'plasterboard', existing_tiles: 'existing-tiles', aac: 'aac', timber: 'timber' };
+      const sysMap = { porcelain: 'porcelain', ceramic: 'ceramic', mosaic: 'mosaic', glass_tile: 'glass', natural_stone: 'natural-stone', engineered_stone: 'engineered-stone', large_format: 'large-format', terracotta: 'quarry-terracotta' };
+      const subMap = { concrete: 'concrete', cement_screed: 'screed-render', cement_render: 'screed-render', brick_block: 'masonry', fibre_cement: 'cement-board', plasterboard: 'plasterboard', existing_tiles: 'existing-tiles', aac: 'aac', timber: 'timber-floor' };
       const tile = facets.tile_type.map((x) => sysMap[x]).find(Boolean), sub = facets.substrate.map((x) => subMap[x]).find(Boolean);
       if (tile && sub && loc) {
         const cat = await load.category('construction/tile-stone-installationsystems');
