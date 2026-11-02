@@ -9,7 +9,7 @@ import { outcomeOf } from './insights-core.js';
 import { matchRule, previewRule, validSource } from './corrections.js';
 import { askWithData, decorateBlock } from './apply_data.js';
 import { estimateNote } from './terms.js';
-import { brainOn, brainAnswer, renderCard, prefetchBrain } from './brain-ui.js';
+import { brainOn, brainAnswer, renderCard, prefetchBrain, resetBrain } from './brain-ui.js';
 
 let cfg, engine, ready, state = null, log, input, panel, fab, opener, dv, D, rules = null, formEl, suggEl;
 // Actions v2 (apply/actions): slash commands, action cards, project memory. Feature flag: config.actions.enabled; off with #/...?actions=off or localStorage sika-demo-210c0c-actions = off. Off means v1 behaviour exactly.
@@ -67,8 +67,8 @@ function renderBlock(b) {
       h('div', { class: 'table-wrap' }, h('table', { class: 'm-table' }, h('thead', null, h('tr', null, ['Product', 'Quantity', 'Basis', 'Source'].map((x) => h('th', { scope: 'col' }, x)))), h('tbody', null, b.lines.map((l) => h('tr', null, h('td', null, h('a', { href: '#/product/' + l.productId, onclick: closeOnMobile }, l.product)), h('td', null, l.quantity, l.packs ? h('br') : null, l.packs || ''), h('td', null, l.basis, l.note ? [h('br'), l.note] : null), h('td', null, extLink(l.source.url, l.source.label, 'link'))))))),
       b.total ? para(b.total) : null, b.assumptions && b.assumptions.length ? h('ul', { class: 'm-assume' }, b.assumptions.map((a) => h('li', null, a))) : null,
       h('p', { class: 'estimate-note' }, estimateNote(cfg)));
-    case 'ask': return h('div', null, para(b.question), b.options ? h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))) : null);
-    case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), h('div', { class: 'opts' }, b.options.map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
+    case 'ask': return h('div', null, para(b.question), b.options ? chipRow(b.options, 'Choices') : null);
+    case 'steps': return h('div', null, h('div', { class: 'm-title' }, b.title), chipRow(b.options, 'Choices'));
     case 'handoff': return renderHandoff(b);
     case 'brain': return renderCard(b.card, cfg, send);
     default: return null;
@@ -76,7 +76,45 @@ function renderBlock(b) {
 }
 const closeOnMobile = () => { if (window.matchMedia('(max-width: 39.99em)').matches) setOpen(false); };
 
+// Conversational replies: a social reply or a clarifying question (a brain "choose" card that quotes no document) is a compact left bubble with its chips right under it. Product and evidence answers keep their card, in the same thread.
+const isChat = (a) => Boolean(a && a.brain && a.blocks.length && a.blocks.every((b) => b.type === 'brain' && b.card && b.card.type === 'choose' && !(b.card.facts && b.card.facts.length)));
+function chatBubble(card) {
+  const lead = String(card.title || '').trim(), head = String(card.headline || '').trim();
+  const text = lead && head ? (/[.!?]$/.test(lead) ? lead : lead + '.') + ' ' + head : lead || head;
+  const opts = (card.choices || (card.followups || []).map((f) => ({ label: f, value: f })));
+  return h('div', { class: 'msg msg--bot msg--chat' }, h('p', null, text), opts.length ? chipRow(opts, 'Suggested replies') : null);
+}
+// chips sit under the bubble that asked; once one is tapped the row is marked used (it stays tappable, so a changed mind or a double tap still works)
+function chipRow(opts, label) {
+  const row = h('div', { class: 'opts', role: 'group', 'aria-label': label });
+  opts.forEach((o) => row.append(h('button', { class: 'chip', type: 'button', onclick: (e) => { row.classList.add('opts--used'); row.querySelectorAll('.chip').forEach((c) => c.removeAttribute('aria-pressed')); e.currentTarget.setAttribute('aria-pressed', 'true'); send(o.value, o.label); } }, o.label)));
+  return row;
+}
+// Welcome bubble: the brain's own greeting reply, read from its chat module without asking the brain (so no state moves); a plain copy if that module cannot load.
+let welcomeP = null;
+const WELCOME_FALLBACK = { title: "G'day", headline: 'Good to have you here. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.', choices: [{ label: 'Waterproof a bathroom', value: 'Waterproofing for a shower floor under tiles' }, { label: 'Tile a floor', value: 'Tile adhesive for porcelain tiles on a concrete floor' }, { label: 'Seal around a shower', value: 'Silicone sealant for a shower' }, { label: 'Fix a crack', value: 'I need something to fix a crack' }] };
+function welcome() {
+  return (welcomeP ||= (async () => {
+    let card = WELCOME_FALLBACK;
+    try { if (brainOn()) { const m = await import('../brain/chat.js'); const c = m.socialCard('greet', 'hi'); if (c && c.headline && c.choices && c.choices.length) card = c; } } catch { /* the plain copy stands */ }
+    if (!log.querySelector('.msg')) { const b = chatBubble(card); b.classList.add('msg--welcome'); log.append(b); }
+  })());
+}
+const reduced = () => typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+/** the "typing" pause before a reply: 300 to 600 ms by reply length, so a short hello is quick and a long answer is not instant; 120 ms under reduced motion */
+const typingPause = async (a, since) => { const ms = Math.max(0, (reduced() ? 120 : 300 + Math.min(300, Math.round(JSON.stringify((a && a.blocks) || '').length / 12))) - (performance.now() - since)); await sleep(ms); return Math.round(ms); };
+const desktop = () => typeof window !== 'undefined' && !window.matchMedia('(pointer: coarse)').matches;
+const keepFocus = () => { if (desktop() && input && panel.classList.contains('open')) input.focus({ preventScroll: true }); };
+/** newest message into view: a short one to the bottom; a reply taller than the thread to its own top, so the first line is read first */
+function toNewest(node) { if (!log) return; const tall = node && node.offsetHeight > log.clientHeight * 0.85; if (tall) log.scrollTop = Math.max(0, node.offsetTop - log.offsetTop - 8); else log.scrollTop = log.scrollHeight; }
+export function newChat() {
+  if (!log) return; log.replaceChildren(); state = null; resetBrain(); inflight.clear(); welcomeP = null; input.value = '';
+  welcome().then(() => { log.scrollTop = 0; announce('New chat started.'); keepFocus(); });
+}
+
 function renderAnswer(a) {
+  if (isChat(a)) return chatBubble(a.blocks[0].card);
   const body = h('div', { class: 'msg msg--bot' });
   const hasFrom = a.blocks.some((b) => b.type === 'text' && /published documentation/i.test(b.text));
   a.blocks.forEach((b) => { const n = renderBlock(b); if (n) body.append(decorateBlock(n, b)); });
@@ -86,23 +124,25 @@ function renderAnswer(a) {
   }
   if (a.correctedBy) body.append(h('p', { class: 'cite' }, `Corrected by ${a.correctedBy.who} on ${String(a.correctedBy.when).slice(0, 10)}. This answer comes from a rule that is checked before the documentation index.`));
   body.append(h('button', { class: 'btn btn--text suggest-btn', type: 'button', onclick: () => { add(suggestPanel(a.query)); } }, 'Suggest a correction'));
-  if (a.followups && a.followups.length) body.append(h('div', { class: 'opts', role: 'group', 'aria-label': 'Suggested follow-up questions' }, a.followups.slice(0, 3).map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f) }, f))));
+  if (a.followups && a.followups.length) body.append(chipRow(a.followups.slice(0, 3).map((f) => ({ label: f, value: f })), 'Suggested follow-up questions'));
   return body;
 }
 
-function add(node) { log.append(node); log.scrollTop = log.scrollHeight; }
+function add(node) { log.append(node); toNewest(node); }
 const inflight = new Set(); let lastSend = { text: '', at: 0 }; // one activation = one question: a double click or double tap on a chip, or the same text while it is still being answered, is sent once
 export async function send(text, label) {
   text = String(text || '').trim(); const key = text + '\u0001' + (label || ''); // two chips can share a value ('yes' on consent and on confirm): the double-tap guard keys on the chip, not the value
   if (!text || inflight.has(key) || (key === lastSend.text && Date.now() - lastSend.at < 700)) return;
   inflight.add(key); lastSend = { text: key, at: Date.now() };
+  await welcome(); // the welcome bubble is always first in the thread, even when a question arrives with the panel (deep link, example chip)
   add(h('div', { class: 'msg msg--user' }, label || text));
-  const wait = h('div', { class: 'msg msg--bot', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
+  const tStart = performance.now();
+  const wait = h('div', { class: 'msg msg--bot msg--typing', 'aria-label': 'The advisor is looking' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i'))); add(wait);
   try {
     const act = await ensureActions();
     const handled = act ? await act.handle(text) : null;
     if (handled) { const node = handled.node; if (!handled.private) insights.question(text, handled.outcome); // T11, this browser only; a quote-request answer (it may be an email address) is never logged
-      await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); log.scrollTop = log.scrollHeight; announce('The advisor has answered.'); history.push({ q: handled.private ? '' : text, intent: 'action', ms: 0 }); return; }
+      await new Promise((r) => setTimeout(r, 60)); wait.replaceWith(node); toNewest(node); announce('The advisor has answered.'); keepFocus(); history.push({ q: handled.private ? '' : text, intent: 'action', ms: 0 }); return; }
     const useBrain = brainOn();
     const ba = useBrain ? await brainAnswer(text) : null; // v2 brain; null means it could not run, so v1 answers
     if (!ba) await ensure();
@@ -110,8 +150,9 @@ export async function send(text, label) {
     const rule = ba ? null : matchRule(rules, text);
     const a = ba || (rule ? ruleAnswer(rule, text) : await askWithData(engine, text, state)); if (!ba) state = a.state || null;
     if (!ba) await new Promise((r) => setTimeout(r, 140));
-    wait.replaceWith(renderAnswer(a)); log.scrollTop = log.scrollHeight;
-    announce('The advisor has answered.');
+    const pauseMs = await typingPause(a, tStart);
+    const out = renderAnswer(a); out.dataset.pauseMs = String(pauseMs); /* the deliberate typing pause, so speed tests can subtract it */ wait.replaceWith(out); toNewest(out);
+    announce('The advisor has answered.'); keepFocus();
     history.push({ q: text, intent: a.intent, ms: Math.round(performance.now() - t0) });
     const oc = outcomeOf(a); if (oc) insights.question(text, oc); // T11, this browser only
     if (act && ba) act.observeBrain(ba); // actions v2: remember the product and facets a brain answer carried, so "make that a project pack" works after it
@@ -155,7 +196,7 @@ async function ensure() {
 export function setOpen(on, from) {
   panel.classList.toggle('open', on); panel.setAttribute('aria-hidden', String(!on)); fab.hidden = on && window.matchMedia('(max-width: 39.99em)').matches;
   if (from) opener = from;
-  if (on) { prefetchBrain(); ensureActions(); document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
+  if (on) { prefetchBrain(); ensureActions(); welcome(); document.body.classList.toggle('lock', window.matchMedia('(max-width: 39.99em)').matches); focusSoon(input); }
   else { document.body.classList.remove('lock'); const o = opener && document.contains(opener) ? opener : fab; if (o && !o.hidden) focusSoon(o); }
 }
 
@@ -168,10 +209,9 @@ export async function mountAssistant(config) {
   const form = h('form', { class: 'asst-form', onsubmit: (e) => { e.preventDefault(); const v = input.value; input.value = ''; send(v); } }, input, voice ? voice.mic : null, h('button', { class: 'btn', type: 'submit', 'aria-label': 'Send' }, icon('send', 'i--sm'), h('span', { class: 'visually-hidden' }, 'Send')));
   const sugg = h('div', { class: 'asst-sugg', role: 'group', 'aria-label': 'Example questions' }, cfg.home.assistantQuestions.map((q) => h('button', { class: 'chip', type: 'button', onclick: () => send(q) }, q)));
   panel = h('aside', { class: 'assistant', id: 'assistant', role: 'dialog', 'aria-modal': 'false', 'aria-labelledby': 'asst-title', 'aria-hidden': 'true', onkeydown: (e) => { if (e.key === 'Escape') setOpen(false); } },
-    h('div', { class: 'asst-head' }, h('h2', { id: 'asst-title' }, 'Product advisor', h('small', null, 'Demo, built from ' + cfg.company.publishedDocsPhrase)), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': 'Close the advisor', onclick: () => setOpen(false) }, icon('close'), h('span', { class: 'visually-hidden' }, 'Close'))),
+    h('div', { class: 'asst-head' }, h('h2', { id: 'asst-title' }, 'Product advisor', h('small', null, 'Demo, built from ' + cfg.company.publishedDocsPhrase)), h('div', { class: 'asst-tools' }, h('button', { class: 'btn btn--text asst-new', type: 'button', id: 'asst-new', onclick: () => newChat() }, 'New chat'), h('button', { class: 'btn btn--text', type: 'button', 'aria-label': 'Close the advisor', onclick: () => setOpen(false) }, icon('close'), h('span', { class: 'visually-hidden' }, 'Close')))),
     h('div', { class: 'asst-note' }, 'Plain code running in your browser: no AI model, no network calls, no tracking, zero running cost. Every answer links its source. Where the documentation does not say, it says so.'),
     log, sugg, voice ? voice.bar : null, form);
-  add(h('div', { class: 'msg msg--bot' }, para(`Hi. I can find the right ${cfg.company.short} product for a job, quote published coverage rates, open a data sheet or SDS, check what goes with what, and work out how much you need for an area.`), para('I only answer from the published documentation, and I will say so when it does not cover something.')));
   formEl = form; suggEl = sugg;
   document.body.append(fab, panel);
   if (actionsOn()) setTimeout(() => (window.requestIdleCallback || ((f) => f()))(() => ensureActions()), 15000); // speed: not while the first screen and a first click are being served; opening the panel starts it at once (setOpen)

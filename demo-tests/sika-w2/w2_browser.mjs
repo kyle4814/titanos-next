@@ -33,10 +33,10 @@ if (want('A')) for (const [W, H] of SIZES) {
   t(`${sz} the greeting offers three suggested questions`, g.chips.length === 3, g.chips.join(' | '));
   await page.screenshot({ path: `${outDir}/ask_${sz}.png` });
   // a suggested question goes through the advisor's own form and gets an answer
-  const before = await page.locator('#assistant .msg--user').count();
+  const before = await page.locator('#assistant .msg--user').count(); const botBefore = await page.locator('#assistant .msg--bot').count(); // the system greeting replaces the welcome bubble, so the count is taken here, not hard-coded
   await page.locator('.ask-greet button.chip').first().click();
   await page.waitForFunction((n) => document.querySelectorAll('#assistant .msg--user').length > n, before, { timeout: 5000 });
-  await page.waitForFunction(() => !document.querySelector('#assistant .typing') && document.querySelectorAll('#assistant .msg--bot').length >= 3, null, { timeout: 25000 });
+  await page.waitForFunction((n) => !document.querySelector('#assistant .typing') && document.querySelectorAll('#assistant .msg--bot').length > n, botBefore, { timeout: 25000 });
   const ans = await page.evaluate(() => { const m = [...document.querySelectorAll('#assistant .msg--bot')].pop(); return m.textContent.trim(); });
   t(`${sz} a suggested question is sent and answered`, ans.length > 20 && !/could not run/.test(ans), ans.slice(0, 160));
   await page.screenshot({ path: `${outDir}/ask_answer_${sz}.png` });

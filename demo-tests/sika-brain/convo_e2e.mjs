@@ -15,8 +15,14 @@ for (const [W, H] of [[390, 844], [1366, 768]]) {
   await ctx.route('**/*', (route) => { const u = new URL(route.request().url()); if (u.host === new URL(base).host || u.protocol === 'data:' || u.protocol === 'blob:') return route.continue(); return route.abort(); });
   await page.goto(base + '?actions=off#/', { waitUntil: 'load' }); await page.waitForSelector('main:not([aria-busy])'); await page.waitForTimeout(300);
   await page.locator('button:visible:has-text("Advisor")').first().click();
+  // the panel opens on a welcome bubble with starter chips, and the input has focus on desktop
+  { const wb = page.locator('.asst-log .msg--welcome'); await wb.waitFor({ timeout: 5000 }); const wt = await wb.innerText(); const bx = await wb.boundingBox(), lg = await page.locator('.asst-log').boundingBox();
+    t(`${sz} open: welcome bubble says G'day with 3 to 4 starter chips, 44 px tall, wrapping inside the panel`, /G'day/.test(wt) && (await wb.locator('button.chip').count()) >= 3 && (await wb.locator('button.chip').count()) <= 4 && (await wb.locator('button.chip').first().boundingBox()).height >= 43.5 && bx.x + bx.width <= lg.x + lg.width + 1, wt);
+    if (W > 600) t(`${sz} open: the input has focus on desktop`, await page.evaluate(() => document.activeElement && document.activeElement.id === 'asst-q')); }
   let a = await ask(page, 'hi'); let txt = await a.innerText();
   t(`${sz} hi: a friendly reply that steers to the job, with starter chips`, /G'day/i.test(txt) && /surface and the problem/i.test(txt) && (await a.locator('button.chip').count()) >= 3 && !/not in the published/i.test(txt), txt);
+  { const u = page.locator('.asst-log .msg--user').last(); const ub = await u.boundingBox(), lg = await page.locator('.asst-log').boundingBox(), bb = await a.boundingBox();
+    t(`${sz} hi: the user's bubble is on the right, the greeting is a compact bubble on the left (no evidence frame)`, ub.x + ub.width > lg.x + lg.width - 40 && bb.x < lg.x + 30 && (await a.evaluate((e) => e.classList.contains('msg--chat'))) && (await a.locator('details.hik, .cite, .suggest-btn').count()) === 0); }
   await page.screenshot({ path: `${outDir}/1_hi_${sz}.png` });
   a = await ask(page, 'what do you recommend for my bathroom'); txt = await a.innerText();
   t(`${sz} bathroom: one clarifying question with chips, not "not in the documentation"`, /Which part of the bathroom/i.test(txt) && (await a.locator('button.chip').count()) >= 4 && !/not in the published/i.test(txt), txt);
@@ -30,6 +36,10 @@ for (const [W, H] of [[390, 844], [1366, 768]]) {
   a = await ask(page, 'a sealant'); txt = await a.innerText(); t(`${sz} a sealant: asks what it is for`, /What is the sealant for/i.test(txt), txt);
   a = await ask(page, 'around the bath'); txt = await a.innerText(); t(`${sz} follow-up "around the bath" joins the question`, /silicone|seal/i.test(txt) && !/Which of these|not in the published/i.test(txt), txt);
   await page.screenshot({ path: `${outDir}/4_followup_${sz}.png` });
+  { const ar = await page.locator('.asst-log').evaluate((e) => ({ gap: e.scrollHeight - e.scrollTop - e.clientHeight, top: e.scrollTop })); t(`${sz} thread is scrolled to the newest message`, ar.gap <= 4 || ar.top > 0, JSON.stringify(ar)); }
+  { const kept = await page.evaluate(() => sessionStorage.getItem('sika-brain-state-v1') !== null); t(`${sz} before New chat the brain context is saved for a reload`, kept);
+    await page.locator('#asst-new').click(); await page.waitForTimeout(400); const gone = await page.evaluate(() => sessionStorage.getItem('sika-brain-state-v1') === null); t(`${sz} New chat also clears the saved context (a reload does not bring it back)`, gone); const n = await page.evaluate(() => ({ user: document.querySelectorAll('.asst-log .msg--user').length, bot: document.querySelectorAll('.asst-log .msg--bot').length, welcome: document.querySelectorAll('.asst-log .msg--welcome').length })); t(`${sz} New chat clears the thread back to the welcome bubble`, n.user === 0 && n.bot === 1 && n.welcome === 1, JSON.stringify(n));
+    a = await ask(page, 'a sealant'); txt = await a.innerText(); t(`${sz} after New chat the brain starts fresh (no carried question)`, /What is the sealant for/i.test(txt), txt); }
   const ov = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); t(`${sz} no horizontal scroll`, ov <= 1, ov);
   t(`${sz} no console errors or warnings`, errs.length === 0, errs.join(' | '));
   await ctx.close();

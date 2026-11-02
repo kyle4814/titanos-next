@@ -41,6 +41,8 @@ export function ensureBrain() {
     return brain;
   })().catch(() => { brainP = null; return null; }));
 }
+/** New chat: forget the conversation state the brain carries between turns and its saved copy (persist.js), so a reload does not bring it back (the loaded data stays). */
+export function resetBrain(store) { resetBrainState(store); }
 /** Start loading the brain while the visitor is still typing (called when the panel opens). */
 export function prefetchBrain() { if (brainOn()) ensureBrain(); }
 /** Ask the brain and return a panel-shaped answer, or null when the brain cannot run (the caller falls back to v1). */
