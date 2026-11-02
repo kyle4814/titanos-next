@@ -298,7 +298,9 @@ export function withPick(res, q) {
   if (!tie) { sum.facts = [sum.source]; if (!env) sum.followups = [`Data sheet for ${top.product.name}`, `Coverage of ${top.product.name}`, ...(alts[0] ? [`Tell me about ${alts[0].product.name}`] : [])].slice(0, 3); }
   sum.links = [{ label: top.product.name, url: top.product.url }].concat(alts.map((c) => ({ label: c.product.name, url: c.product.url })));
   const rest = tie && alts.length ? cs.slice(1) : cs.slice(2);
-  res.cards = [sum, ...rest]; res.followups = sum.followups.slice(); res.trace = (res.trace || []).concat(tie ? ['chat:tie'] : ['chat:pick']);
+  res.cards = [sum, ...rest];
+  if (!tie) res.state = { ...(res.state || {}), productIds: [top.product.id, ...alts.map((c) => c.product.id)] }; // the pick lives inside the lead card, so 'the first one' and 'the second one' still count it
+  res.followups = sum.followups.slice(); res.trace = (res.trace || []).concat(tie ? ['chat:tie'] : ['chat:pick']);
   return res;
 }
 

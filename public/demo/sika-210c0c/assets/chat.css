@@ -1,0 +1,17 @@
+/* Chat panel as a conversation (2026-11-02): bubbles for the person and for short replies, the evidence card unchanged, chips under the bubble that asked, a small typing bubble. Light palette only. */
+.asst-tools{display:flex;align-items:center;gap:.25rem}
+.asst-new{white-space:nowrap;min-height:44px;min-width:44px;padding:.4rem .75rem;font-size:.875rem;font-weight:600}
+.asst-log{gap:12px}
+.msg--user{background:var(--primary);border:0;color:var(--primary-ink);border-radius:18px 18px 4px 18px;padding:10px 16px;max-width:82%;width:fit-content;overflow-wrap:anywhere;animation:rise .16s ease-out}
+.msg--chat,.msg--typing{width:fit-content;max-width:88%;background:var(--grey-light);border:0;box-shadow:none;border-radius:18px 18px 18px 4px;padding:12px 16px}
+.msg--chat{gap:10px}
+.msg--chat .opts{gap:8px}
+.msg--chat .opts .chip{min-height:44px;background:#fff;border:1px solid var(--grey-3);border-radius:22px;padding:.35rem .95rem;text-align:left;white-space:normal;max-width:100%}
+.msg--chat .opts .chip[aria-pressed=true]{background:var(--primary);border-color:var(--primary-dark);color:var(--primary-ink)}
+.msg .opts .chip{white-space:normal;text-align:left;max-width:100%}
+.msg .opts--used .chip:not([aria-pressed=true]){opacity:.55}
+.msg--typing{max-width:none}
+.msg--typing .typing{flex-direction:row;gap:6px;width:auto;padding:4px 0;align-items:center}
+.msg--typing .typing i{width:8px;height:8px;border-radius:50%;background:var(--grey-dark)}
+@media (prefers-reduced-motion:reduce){.msg--typing .typing i{animation:none;opacity:.7}.msg--user,.msg--bot{animation:none}}
+@media (max-width:39.99em){.msg--chat{max-width:92%}.asst-head h2{font-size:1.1rem}}

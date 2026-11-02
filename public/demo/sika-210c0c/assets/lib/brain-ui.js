@@ -1,12 +1,10 @@
 // brain-ui.js: the v2 brain behind the existing chat panel. Plain code, no model. The panel keeps its look: cards are rendered with the panel's own classes.
 // Feature flag: ?brain=0 forces the v1 advisor, ?brain=1 forces v2, otherwise BRAIN_DEFAULT decides. A missing shard falls back to v1.
-import { loadBrainState, saveBrainState } from '../brain/persist.js';
 import { h, icon } from './util.js';
 import { chipEl } from './apply_data.js';
 import { buildHandoff } from '../assistant/handoff.js';
 import { renderHandoff } from './handoff-ui.js';
 import { estimateNote } from './terms.js';
-import { cartButtons } from './cartbtn.js';
 
 export const BRAIN_DEFAULT = true;
 export function brainOn() {
@@ -24,10 +22,10 @@ function loadRulesModule() {
     try { const s = document.createElement('script'); s.type = 'module'; s.src = new URL('../brain/rules.js', import.meta.url).href; s.onload = () => resolve(globalThis.__sikaRules || null); s.onerror = () => resolve(null); document.head.appendChild(s); } catch { resolve(null); }
   }));
 }
-let brainP = null, bstate = null;
+let brainP = null, bstate = null, stateLoaded = false, persist = null;
 // the conversation context survives a page reload (assets/brain/persist.js: sessionStorage, optional)
-export const resetBrainState = (store) => { bstate = null; saveBrainState(null, store); };
-bstate = loadBrainState();
+// persist.js is fetched with the brain (first question), not with the first screen
+export const resetBrainState = (store) => { bstate = null; stateLoaded = true; try { (store || globalThis.sessionStorage).removeItem('sika-brain-state-v1'); } catch { /* no storage */ } };
 // one in-page memo of fetched JSON, shared with the actions layer (assets/actions/core.js), so a shard is never downloaded twice on a cold load
 const jsonMemo = (globalThis.__sikaJson ||= new Map());
 const fetchJson = (rel) => { const url = new URL('../../' + rel, import.meta.url).href; if (!jsonMemo.has(url)) jsonMemo.set(url, fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null)); return jsonMemo.get(url); };
@@ -49,8 +47,10 @@ export function prefetchBrain() { if (brainOn()) ensureBrain(); }
 /** Ask the brain and return a panel-shaped answer, or null when the brain cannot run (the caller falls back to v1). */
 export async function brainAnswer(text) {
   const brain = await ensureBrain(); if (!brain) return null;
+  try { persist ||= await import('../brain/persist.js'); } catch { persist = { loadBrainState: () => null, saveBrainState() {} }; }
+  if (!stateLoaded) { stateLoaded = true; bstate = persist.loadBrainState(); }
   let a; try { a = await brain.ask(text, bstate); } catch { return null; }
-  bstate = a.state || bstate; saveBrainState(bstate);
+  bstate = a.state || bstate; persist.saveBrainState(bstate);
   const sourced = a.cards.filter((c) => c.status === 'PUBLISHED' && c.source);
   const noneKnown = a.cards.length && a.cards.every((c) => c.type === 'unknown');
   return { intent: noneKnown && !a.cards.some((c) => c.product) ? 'out_of_scope' : a.intent, query: text, blocks: a.cards.map((card) => ({ type: 'brain', card })), citations: sourced.map((c) => ({ label: c.title, url: c.source.source_url, kind: 'page' })), followups: a.followups, state: null, debug: { tokens: [], matched: [], ms: a.ms }, brain: a };
@@ -102,8 +102,7 @@ export function renderCard(c, cfg, send) {
   }
   if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, (c.choices || c.followups.map((f) => ({ label: f, value: f }))).map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
   if (c.type === 'plan' && c.plan && c.plan.commit) kids.push(planSaveButton(c.plan.commit)); // lane D: "Add the plan to my project", through the shared project store
-  if (c.type === 'calculation' && send) { const ch = (c.followups || []).filter((f) => /^How much /.test(f)); if (ch.length) kids.push(h('div', { class: 'opts' }, ch.map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f, f) }, f.replace(/^How much /, ''))))); } // the product, tile or joint options a quantity answer still needs
-  if (c.type === 'calculation' && c.cart) kids.push(cartButtons(c.cart)); // "Add 3 x 2 L pails to my quote", through the shared project store
+  if (c.type === 'calculation' && ((send && (c.followups || []).some((f) => /^How much /.test(f))) || c.cart)) { const slot = h('span'); kids.push(slot); import('./cartbtn.js').then((m) => slot.replaceWith(...m.calcExtras(c, send))).catch(() => slot.remove()); } // the product, tile or joint options a quantity answer still needs, and "Add 3 x 2 L pails to my quote": fetched only when a quantity answer offers them
   if (c.chip) kids.push(chipEl(c.status, c.chip));
   const evid = c.facts.filter((f) => f.sentence);
   if (evid.length) kids.push(h('details', { class: 'hik' }, h('summary', null, 'How I know'), h('ul', null, evid.map((f) => h('li', null,

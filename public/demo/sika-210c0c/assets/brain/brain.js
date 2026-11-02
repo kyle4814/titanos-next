@@ -23,7 +23,7 @@ const HARD_ENV = new Set(['wet_area', 'submerged', 'external', 'balcony_deck', '
 
 // ---------------------------------------------------------------- intents
 const RX = {
-  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me|minimum order|moq|order quantity|freight cost|shipping (cost|fee|charge|rate)|free shipping|trade account|invoice|credit terms|rrp|specials|on special|on sale|sale price|price list|fast movers?|best sellers?|bestsellers?|top sellers?|best selling|top selling|most popular|selling fast)\b|\bhow much (is|are|does|do)\b.{0,25}\b(pail|pails|bag|bags|tub|tubs|tube|tubes|cartridge|cartridges|sausage|sausages|drum|drums|bucket|buckets|carton|box)\b/,
+  price: /\b(financ\w*|pay later|pay (?:it |them )?off|pay\b[a-z ]*\bover time|instal+ments?|lay ?by|afterpay|payment plans?|price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me|minimum order|moq|order quantity|freight cost|shipping (cost|fee|charge|rate)|free shipping|trade account|invoice|credit terms|rrp|specials|on special|on sale|sale price|price list|fast movers?|best sellers?|bestsellers?|top sellers?|best selling|top selling|most popular|selling fast)\b|\bhow much (is|are|does|do)\b.{0,25}\b(pail|pails|bag|bags|tub|tubs|tube|tubes|cartridge|cartridges|sausage|sausages|drum|drums|bucket|buckets|carton|box)\b/,
   compare: /\b(vs|versus|compare|comparison|difference between|differences between|better than)\b/,
   calcWords: /\b(how much|how many|quantity|quantities|work out|calculate|calculation|estimate|need for|required for|order|buy)\b|\bhow (much|many) .* (for|to cover)\b/,
   time: /\b(how long|dry|dries|drying|cure|cures|curing|cured|setting|sets|set time|open time|pot life|potlife|recoat|re ?coat|overcoat|wait|waiting|skin time|tack free|working time|adjust|adjustability|before (i can |you can )?(grout|walking|walk|traffic|tiling|tile|coat|apply|seal)|when can i)\b/,
@@ -35,7 +35,7 @@ const RX = {
   system: /\b(system|full system|build ?up|steps|layers|what do i need|complete|everything i need)\b/,
 };
 // other brands are detected so the brain can decline to comment on them; stored reversed so no source file names a brand
-const OTHER_BRANDS = new RegExp('\\b(' + ['xedra', 'iepam', 'etercital', 'kitsob', 'corsof', 'polnud', 'mehcrap', 'rebew', 'tidra', 'xelfepam', 'retsamelit', 'sgninnub'].map((s) => [...s].reverse().join('')).join('|') + ')\\b');
+const OTHER_BRANDS = new RegExp('\\b(' + ['xedra', 'iepam', 'etercital', 'kitsob', 'corsof', 'polnud', 'mehcrap', 'rebew', 'tidra', 'xelfepam', 'retsamelit', 'sgninnub', 'syelles', 'xulud', 'lyttaw', 'eneser', 'snambuat', 'semyah', 'itlih', 'tesmar', 'rehcsif', 'slian diuqil'].map((s) => [...s].reverse().join('')).join('|') + ')\\b');
 export function classify(n, hasArea) {
   if (OTHER_BRANDS.test(n)) return 'other_brand';
   if (RX.price.test(n)) return 'price';
@@ -282,7 +282,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     // the words of a product name are not intent or facet words ("Opti-Cure" is not a cure question, "Concrete Fix" is not concrete)
     const w0 = n0.split(' ').filter(Boolean), cut = new Set(); for (const m of mentions) for (let j = m.i; j < m.i + m.k; j++) cut.add(j);
     const n = mentions.length ? w0.filter((_, j) => !cut.has(j)).join(' ') : n0;
-    const facets = parseFacets(n); let intent = classify(n, facets.area != null || !!facets.dose);
+    const facets = parseFacets(n); let intent = classify(n, facets.area != null || !!facets.dose); if (intent !== 'other_brand' && OTHER_BRANDS.test(normalise(q))) intent = 'other_brand'; // read on the words as typed: the spell and slang passes can turn another brand's name into a Sika word
     if (intent === 'calc' && /\bpallets?\b/.test(n)) intent = 'which';
     if (['which', 'compat', 'time', 'rate'].includes(intent) && /\bor\b|\bwhich (one|is better|should i)\b|\bsame (thing|as|product)\b/.test(n0) && mentions.filter((m) => m.pis.length === 1).length >= 2) intent = 'compare';
     const resolve = (m) => m.pis.length === 1 ? m.pis[0] : null;
@@ -329,7 +329,20 @@ export function createBrain({ load, config, loadRules } = {}) {
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
     if (!pis.length && ['compat', 'time', 'rate', 'document', 'safety', 'spec'].includes(intent) && /^(what|which|recommend|suggest|best|any|is there|i need|i want|need|looking for|show me|something)\b/.test(n)) intent = 'which';
     if (!pis.length && intent === 'compat') intent = 'which';
-    if (!pis.length && !know.signal(n0) && (['compat', 'time', 'rate', 'calc', 'safety', 'document', 'spec'].includes(intent) || (intent === 'which' && !advisor.hasKind(n0)) || /^(can|could|is|will|does|would|do|how long|how much)\b/.test(n0))) {
+    if (intent === 'other_brand' && !pis.length) { trace.push('other_brand:early'); return out(intent, 'unknown', [C.unknown(q, null, 'I only answer about Sika Australia products, from their published documentation. I do not compare with other brands or comment on them.', ['a comparison'])]); }
+    // "what is the melting point / dielectric strength / radiation resistance of X": a property phrase that no sheet of the named product (or any product of the named range) carries is not a property the documentation holds
+    { const pm = /^(?:what is|what s|whats|what are|tell me) the ([a-z0-9 ]{4,40}?) (?:of|for|on) /.exec(n0);
+      if (pm && !know.signal(n0) && ![RX.time, RX.rate, RX.safety, RX.doc, RX.spec, RX.price, RX.calcWords].some((r) => r.test(pm[1])) && tokens(pm[1]).some((t) => t.length >= 5)) {
+        const fam = /\b(sikaflex|sikafloor|sikadur|sikagard|sikalastic|sikatile|sikabond|sikaseal|sikagrout|sikaproof|sikaswell|sikasil)\b/.exec(n0);
+        const cand = pis.length === 1 ? pis : fam && (ambiguous || !pis.length) ? core.P.map((p, k) => (normalise(p.n).startsWith(fam[1]) ? k : -1)).filter((k) => k >= 0).slice(0, 12) : [];
+        const head = pm[1].split(' ').find((t) => t.length >= 5); const need = detectAttr(pm[1]) ? head : pm[1]; // a named attribute (strength, resistance...) is checked by its qualifying word, any other property by the whole phrase
+        let seen = false; for (const k of cand) { const sh = await shard(k); if (sh && (' ' + normalise(JSON.stringify(sh)) + ' ').includes(' ' + need + ' ')) { seen = true; break; } }
+        if (cand.length && !seen) { trace.push('property:nodata'); return out('which', 'unknown', [C.unknown(q, pis.length === 1 ? await shard(pis[0]) : null, `The published product pages and data sheets I work from do not give a ${pm[1]}. I will not guess it. Please check the data sheet or ask Technical Services.`, [pm[1]])], { state: pis.length === 1 ? { productId: core.P[pis[0]].id, intent: 'which' } : null }); } } }
+    // hardware and trades Sika does not make, and gas fittings: no product or sheet in the data answers, so the honest no, never a near-miss product that shares a word
+    if (!pis.length && (/^(?:do you|does sika|have you got|can i get|where can i get)\b.*\b(?:sell|have|make|stock|supply|get)\b.*\b(?:screws?|bolts?|nuts and bolts|fasteners?|scaffold\w*|power tools?|hand tools?|ladders?|bricks?|plasterboard|insulation batts?)\b/.test(n0) || /\bgas (?:lines?|pipes?|mains?|fittings?|bottles?|cylinders?)\b/.test(n0))) { trace.push('range:nodata'); return out('which', 'unknown', [C.unknown(q, null, 'That is not something the Sika Australia documentation I work from covers, so I will not suggest a product for it. Please ask Sika Australia Technical Services.', ['that product or use'])], { state: null }); }
+    // a price, stock, delivery, discount or finance ask with no single product named is never a "which product?" clarifier or a page that shares a word: the documentation holds none of it
+    if (intent === 'price' && !pis.length && !know.signal(n0)) { trace.push('price:nodata'); return out(intent, 'unknown', [C.unknown(q, null, 'Prices, stock, delivery, discounts, finance and warranty terms are not in the documentation I work from, and I will not guess them. Please ask Sika Australia or a stockist.', ['price, stock or warranty'])], { state: null }); }
+    if (!pis.length && !know.signal(n0) && !/\b(as|as nzs|nzs|iso|en|astm|bs)\s?\d{3,5}\b/.test(n0) && (['compat', 'time', 'rate', 'calc', 'safety', 'document', 'spec'].includes(intent) || (intent === 'which' && !advisor.hasKind(n0)) || /^(can|could|is|will|does|would|do|how long|how much)\b/.test(n0))) {
       const fam = /\b(sikaflex|sikafloor|sikadur|sikagard|sikalastic|sikatile|sikabond|sikaseal|sikagrout|sikaproof|sikaswell|sikasil)\b/.exec(n0);
       if (fam && intent === 'which') { const sr0 = search(n0, []); const t0 = sr0.items[0]; if (t0 && t0.cov >= 0.99 && normalise(core.P[t0.pi].n).startsWith(fam[1])) fam.skip = true; }
       if (fam && !fam.skip) { const list = core.P.filter((p) => normalise(p.n).startsWith(fam[1])).slice(0, 4); if (list.length >= 2) { const opts = list.map((p) => q.replace(new RegExp(fam[1], 'i'), p.n)); trace.push('family:' + fam[1]); return out(intent, 'family', [C.chooseCard(`Which ${fam[1]} product?`, `${fam[1]} is a range, and the answer depends on the product. Pick one.`, opts, [], list.map((p) => p.n))], { state: null }); } }

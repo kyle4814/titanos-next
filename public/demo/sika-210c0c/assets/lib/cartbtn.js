@@ -17,3 +17,11 @@ export function cartButtons(options) {
   });
   return btns.length ? h('p', { class: 'opts cart-opts' }, ...btns, msg) : null;
 }
+
+/** What a quantity answer still offers under its card: chips for the product, tile or joint options it needs, then the add-to-quote buttons. */
+export function calcExtras(c, send) {
+  const out = []; const ch = send ? (c.followups || []).filter((f) => /^How much /.test(f)) : [];
+  if (ch.length) out.push(h('div', { class: 'opts' }, ch.map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f, f) }, f.replace(/^How much /, '')))));
+  const cb = c.cart ? cartButtons(c.cart) : null; if (cb) out.push(cb);
+  return out.length ? out : [h('span')];
+}

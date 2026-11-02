@@ -18,7 +18,7 @@
     "n": 4659
   },
   "speed": {
-    "home_first_screen_gzip": 88178,
+    "home_first_screen_gzip": 88565,
     "main_js_gzip": 65176,
     "sw_bytes": 8548114
   },
@@ -27,5 +27,6 @@
     "home_first_screen_gzip": 82779,
     "main_js_gzip": 61270
   },
-  "speed_rebaselined": "2026-11-01 on the final integrate tip after the five lanes (thumb bar, job builder, stock photos, citematch, site) and the home photo mosaic; measured with gzip level 6 over index.html + dist/main.js + data/config.json + data/cats.lite.json. The search and golden baselines above are unchanged."
+  "speed_rebaselined": "2026-11-01 on the final integrate tip after the five lanes (thumb bar, job builder, stock photos, citematch, site) and the home photo mosaic; measured with gzip level 6 over index.html + dist/main.js + data/config.json + data/cats.lite.json. The search and golden baselines above are unchanged.",
+  "speed_rebaselined_2": "2026-11-02 integration: home_first_screen_gzip 88178 -> 88565 (+387 B gzip, 0.44%). Live base 1f36f8c67 measures 88165. The seven-lane tip first measured 89817 (+1652 over base); the conversation layer (chatux.js), its styles (chat.css), the add-to-quote and quantity-chip code (cartbtn.js) and persist.js now load on first use, which removed 1252 B. The remaining +400 B in dist/main.js is the New chat button, the lazy loaders and the state reset the chat-ux lane needs on the first screen. main_js_gzip stays at 65176 (measured 65155)."
 }

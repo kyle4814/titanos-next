@@ -1,10 +1,10 @@
 {
  "n": 4659,
- "ok": 4599,
+ "ok": 4600,
  "per": {
   "which": {
    "n": 1332,
-   "ok": 1276,
+   "ok": 1277,
    "kinds": {
     "name": {
      "n": 512,
@@ -12,7 +12,7 @@
     },
     "typo": {
      "n": 338,
-     "ok": 320
+     "ok": 321
     },
     "describe": {
      "n": 412,
@@ -189,9 +189,9 @@
    "kind": "describe",
    "q": "I need 1-component neutral cure roof and gutter silicone sealant",
    "got": [
-    "choose:Which one first?"
+    "time:sikaseal-roof-gutter"
    ],
-   "headline": "That is more than one job. Pick the one to start with."
+   "headline": "The published times, quoted as written, with the conditions they were measured u"
   },
   {
    "kind": "describe",
@@ -351,7 +351,7 @@
     "product:sikatile-510-megalite",
     "choose:Which tile adhesive?"
    ],
-   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
+   "headline": "My pick from the data sheets: SikaTile-410 Secure Set, because its data sheet sa"
   },
   {
    "kind": "describe",
@@ -517,7 +517,7 @@
     "product:sikatile-510-megalite",
     "choose:Which tile adhesive?"
    ],
-   "headline": "A MULTI-PURPOSE SAND AND SILICA FREE WHITE TILE & STONE ADHESIVE WITH PATENTED D"
+   "headline": "My pick from the data sheets: SikaTile-410 Secure Set, because its data sheet sa"
   },
   {
    "kind": "describe",
@@ -527,7 +527,7 @@
     "product:sikatile-400-evopro",
     "product:sikatile-440-opti-cure"
    ],
-   "headline": "A flexible, cement-based tile adhesive ideal for large format and rectified edge"
+   "headline": "My pick from the data sheets: Davco Powder Mastic, because its product page says"
   },
   {
    "kind": "typo",
@@ -543,7 +543,7 @@
    "got": [
     "product:schoenox-ab"
    ],
-   "headline": "WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALL"
+   "headline": "My pick from the data sheets: SCHÖNOX AB, because its data sheet says: \"Seek wri"
   },
   {
    "kind": "typo",
@@ -572,14 +572,6 @@
   {
    "kind": "typo",
    "q": "tell me about sikaroof versijack variable angel spacer tab",
-   "got": [
-    "product:sikaroof-versijack"
-   ],
-   "headline": "HEIGHT-ADJUSTABLE PEDESTAL SYSTEM FOR RAISED PAVERS AND DECKING FLOORING"
-  },
-  {
-   "kind": "typo",
-   "q": "tell me about sikaroof versijack evrtical paver clips",
    "got": [
     "product:sikaroof-versijack"
    ],
@@ -651,5 +643,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-11-02T01:53:52.684Z"
+ "at": "2026-11-02T03:37:23.915Z"
 }

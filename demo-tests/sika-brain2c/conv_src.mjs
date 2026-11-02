@@ -37,7 +37,7 @@ add('fu-second-after-compare', 'followup', T('compare davco k10 plus and sikalas
 add('fu-first-after-compare', 'followup', T('compare davco k10 plus and sikalastic 1k', { type: 'comparison' }), T('the first one', { prod: 'davco-k10-plus' }));
 add('fu-second-then-sds', 'followup', T('compare davco k10 plus and sikalastic 1k', { type: 'comparison' }), T('the second one', { prod: 'sikalastic-1k' }), T('and the sds?', { type: 'document', prod: 'sikalastic-1k' }));
 add('fu-second-after-advice', 'followup', T('best screed for 100 m2 at 5 mm', { type: 'advice' }), T('the second one', { prod: 'sikafloor-level-top' }));
-add('fu-third-after-advice', 'followup', T('best screed for 100 m2 at 5 mm', { type: 'advice' }), T('the third one', { prod: 'sikafloor-level-ultra' }));
+add('fu-third-after-advice', 'followup', T('best screed for 100 m2 at 5 mm', { type: 'advice' }), T('the third one', { prod: 'lanko-189-bulk-fillscreed' }));
 add('fu-pack-after-product', 'followup', T('tell me about sikatile 410 secureset', { prod: 'sikatile-410-secureset' }), T('in a bag?', { prod: 'sikatile-410-secureset' }));
 add('fu-pail-after-product', 'followup', T('tell me about davco grey one pot', { prod: 'davco-grey-one-potadhesive' }), T('in a pail?', { prod: 'davco-grey-one-potadhesive' }));
 add('fu-sds-after-product', 'followup', T('tell me about lanko 173 floor leveller', { prod: 'lanko-173-floor-leveller' }), T('and the SDS?', { type: 'document', prod: 'lanko-173-floor-leveller' }));

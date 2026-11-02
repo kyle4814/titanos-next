@@ -186,7 +186,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     // 5. go back
     else if (BACK.test(n) && h.hist.length >= 2) rewritten = h.hist[h.hist.length - 2];
     // 6. and the SDS? what about outdoors? (read against the last product and the last question)
-    else if (h.product && productName(h.product) && areaOf(n) != null && words <= 10 && /\bhow (?:much|many)\b|\blitres?\b|\bquantity\b/.test(n) && !/\b(?:sika\w*|davco|lanko|schonox)\b/.test(n)) rewritten = `how much ${productName(h.product)} for ${areaOf(n)} m2`; // "6 m2, how many litres" right after a product: that product
+    else if (h.product && productName(h.product) && areaOf(n) != null && words <= 10 && /\bhow (?:much|many)\b|\blitres?\b|\bquantity\b/.test(n) && !/\b(?:sika\w*|davco|lanko|schonox)\b/.test(n) && !(h.jobState && h.jobState.kindId)) { const th = /\b(\d+(?:\.\d+)?) ?mm\b/.exec(n); rewritten = `how much ${productName(h.product)} for ${areaOf(n)} m2${th ? ` at ${th[1]} mm` : ''}`; } // "6 m2, how many litres" right after a product: that product
     else if (ASPECT.test(n) && h.product && productName(h.product)) { const a = ASPECT.exec(n)[1]; rewritten = `${a} ${/^(sds|msds|pds|tds|data ?sheet|safety data sheet|safety sheet)$/.test(a) ? 'for' : 'of'} ${productName(h.product)}`; }
     else if (ENV.test(n) && h.q && !(inner && inner.advice)) { const e = ENV.exec(n)[1]; if (h.product && productName(h.product)) rewritten = `${h.q.replace(/[?.!]+$/, '')} ${e}`; else if (h.job) rewritten = `best ${h.job} ${e}`; }
     if (!res) {
