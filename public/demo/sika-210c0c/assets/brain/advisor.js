@@ -210,13 +210,14 @@ export function createAdvisor({ load, isWord }) {
     const items = [];
     for (const s of top) {
       const first = s.got[0]; const ex = s.got.slice(1).map((g) => g.ev.sentence).filter((t) => t !== first.ev.sentence).slice(0, 1);
-      items.push({ e: s.e, sentences: [first.ev.sentence, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong });
+      items.push({ e: s.e, sentences: [first.ev.sentence, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong, score: s.score });
     }
     const lines = [{ label: 'Criterion used', text: bigJob ? `Published text that mentions ${critNames}, then the thickest layer the data sheet gives.` : `How many of these conditions the published text mentions: ${critNames}.` }];
     const notCovered = top.filter((s) => s.miss.length).map((s) => `${s.e.n}: ${s.miss.map((m) => m.label).join(', ')}`);
     if (notCovered.length) lines.push({ label: 'Not stated in the published text', text: notCovered.slice(0, 3).join('; ') });
     const summary = card({ type: 'advice', status: 'PUBLISHED', title: `${cap(kind.label)} whose published text documents a fit`, headline: 'Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence.',
       lines, facts: [fact({ source_url: items[0].e.u, sentence: items[0].sentences[0], doc_type: 'WEB' })], chip: CHIPS.ADVICE, links: top.map((s) => ({ label: s.e.n, url: s.e.u })), handoff: handoffTo(q), followups: top.slice(0, 3).map((s) => `Data sheet for ${s.e.n}`) });
+    summary.rank = items.map((i) => (i.weak ? null : i.score)); // the criterion score of each item, read by chat.js to say two products tie
     return { summary, items };
   }
   const NOFIT = 'No product in this group states a fit for what you asked in its published text, so I will not name one. The range is linked below.';

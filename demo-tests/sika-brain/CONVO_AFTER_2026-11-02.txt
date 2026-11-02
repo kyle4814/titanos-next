@@ -1,0 +1,179 @@
+CONVO AFTER 2026-11-02: the chat layer (chat.js + session.js step 0) against the baseline on HEAD 26fe70419. Each probe asked cold (no earlier turn). Reproduce: node demo-tests/sika-brain/convo_probe.mjs
+BEFORE = first card on base 26fe70419 (CONVO_BASELINE_2026-11-02.txt). AFTER = first card now.
+
+1. hello
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] G'day Good to have you here. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+2. hi mate how are you
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] All good here, thanks Good of you to ask. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+3. thanks
+   BEFORE: [choose] Which of these do you mean? :: Which of these do you mean? I could not tell the job from that. These are the three nearest jobs in the Sika Australia range. Pick one, or tell me the surface and the problem. || chips: Best adhesive for thanks / Best fl
+   AFTER : [choose] No worries Happy to help. If there is another job or a product you want to check, just tell me the surface and the problem.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+4. what do you recommend for my bathroom
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Bathroom Which part of the bathroom is the job? Tap one, or tell me in your own words.
+   CHIPS : Waterproof under tiles | Tile adhesive | Grout | Sealant around the bath
+
+5. can you recommend a sealant
+   BEFORE: [advice] Sealants that match your words :: Sealants that match your words No particular condition was named, so these are the products whose published text uses your words, closest first. This is not a claim that one is the best. Paintable* (Felxible paint coa
+   AFTER : [choose] Sealant What is the sealant for? Tap one, or tell me in your own words.
+   CHIPS : Shower or bath | Facade joints | Gutter | Fire rated
+
+6. what's good for a balcony leak
+   BEFORE: [advice] Waterproofing membranes whose published text documents a fit :: Waterproofing membranes whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the be
+   AFTER : [advice] Davco K10 Rapid My pick from the data sheets: Davco K10 Rapid, because its product page says: "Areas Suitable for interior and exterior applications." (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: external use, stopping leaks. Also worth a look SikaTile-110 Secure Proof and SikaTile-111 Rapid Proof Before you buy I can only read what Sik || chips: Data sheet for Davco K10 Rapid / Coverage of Davco K10 Rapid / Tell me about SikaTile-110 Secure Proof
+   CHIPS : -
+
+7. I need something to fix a crack
+   BEFORE: [advice] Crack repair and sealing whose published text documents a fit :: Crack repair and sealing whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the 
+   AFTER : [advice] Crack repair and sealing whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: crack repair. Joint filling and crack sealing: The data sheets cannot see your site, substrate or conditions, so Technical S || chips: Data sheet for Sika Concrete Fix / Data sheet for Sikadur-33 / Coverage of Sika Concrete Fix
+   CHIPS : -
+
+8. hey can u help
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Yes, happy to help Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+9. g'day
+   BEFORE: [choose] Which of these do you mean? :: Which of these do you mean? I could not tell the job from that. These are the three nearest jobs in the Sika Australia range. Pick one, or tell me the surface and the problem. || chips: Best adhesives for g day / Best ce
+   AFTER : [choose] G'day Good to have you here. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+10. cheers mate
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] No worries Happy to help. If there is another job or a product you want to check, just tell me the surface and the problem.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+11. who are you
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] I am the Sika product assistant I read the Sika Australia product pages and data sheets and point you to the products that match your job. I quote the sheet for every claim, and for anything it does not say I send you to Sika Technical Services.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+12. what can you do
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Here is what I can do Tell me the job and I will find the Sika products whose data sheets cover it, give the coverage and cure times from the sheets, work out how much you need for an area, and link the safety data sheet. I do not do prices or stock.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+13. you are useless
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Fair enough, let me try again Sorry I missed it. Tell me the surface, what is going wrong, and where it is (inside, outside, wet area), and I will look for the products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+14. ok
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Good Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+15. need sumthing for shower leak
+   BEFORE: [info] Leaking shower: How to identify and avoid it :: Leaking shower: How to identify and avoid it From Sika Australia's published page "Leaking shower: How to identify and avoid it". Published Water leaks and waterproofing issues are common in ensuite bathro
+   AFTER : [advice] SikaCeram Sealing Membrane A My pick from the data sheets: SikaCeram Sealing Membrane A, because its product page says: "Before tiling for waterproofing and / or decoupling for the following applications:" (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: stopping leaks. Also worth a look Sika SealTape B and Davco K10 Rapid Before you buy I  || chips: Data sheet for SikaCeram Sealing Membrane A / Coverage of SikaCeram Sealing Membrane A / Tell me about Sika SealTape B
+   CHIPS : -
+
+16. whats best for gluing timber
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Timber What is the timber job? Tap one, or tell me in your own words.
+   CHIPS : Timber floor | Decking | Skirting and trim | Joints
+
+17. what should i use for my kitchen splashback
+   BEFORE: [choose] Bathroom or kitchen :: Bathroom or kitchen Which part? || chips: Waterproofing for a shower floor under tiles / Tile adhesive for porcelain tiles on a bathroom wall / Silicone sealant for a shower / Grout for a shower floor
+   AFTER : [advice] Davco Powder Mastic My pick from the data sheets: Davco Powder Mastic, because its product page says: "Commercial and domestic walls and floors including high foot traffic locations, bathrooms, showers, kitchens, laundries, living rooms, balconies and patios." (a documented fit, not a claim that one is the best). Also worth a look Davco Trojan Mastic and Davco Grey One Pot adhesive Before you buy I can only read what || chips: Data sheet for Davco Powder Mastic / Coverage of Davco Powder Mastic / Tell me about Davco Trojan Mastic
+   CHIPS : -
+
+18. garage floor
+   BEFORE: [advice] Resin flooring whose published text documents a fit :: Resin flooring whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quot
+   AFTER : [choose] Garage or workshop floor What does the floor need? Tap one, or tell me in your own words.
+   CHIPS : Coating | Levelling | Repair | Joints
+
+19. pool
+   BEFORE: [product] Sikasil Pool :: Sikasil Pool SILICONE SEALANT FOR SWIMMING POOLS AND WET AREAS Sikasil Pool is used for sealing: || chips: Coverage of Sikasil Pool / Data sheet for Sikasil Pool / Safety data sheet for Sikasil Pool
+   AFTER : [choose] Pool Which part of the pool? Tap one, or tell me in your own words.
+   CHIPS : Tile adhesive | Waterproofing | Sealant | Grout
+
+20. i need an adhesive
+   BEFORE: [product] Davco Sanitized Glue Grout :: Davco Sanitized Glue Grout A PREMIXED READY TO USE WALL TILE ADHESIVE AND GROUT Dual use - adhesive and a grout || chips: Coverage of Davco Sanitized Glue Grout / Data sheet for Davco Sanitized Glue Grout / Safety data s
+   AFTER : [choose] Adhesive What are you sticking? Tap one, or tell me in your own words.
+   CHIPS : Tiles | Skirting and trim | Timber floor | Laminate
+
+21. waterproofing
+   BEFORE: [choose] Waterproofing :: Waterproofing Where is the waterproofing going? || chips: Waterproofing for a shower floor under tiles / Waterproofing for a basement / Waterproofing for a roof / Waterproofing for a balcony under tiles / Recommend one for me
+   AFTER : [choose] Waterproofing Where is the waterproofing going? Tap one, or tell me in your own words.
+   CHIPS : Shower, under tiles | Basement | Roof | Balcony
+
+22. whats the best sealent for a bathrm
+   BEFORE: [advice] Sealants: the published range :: Sealants: the published range You did not name a condition for the job, so I am not ordering these. They are the products in that group on the Sika Australia site, each with its published description. Tell me the job (
+   AFTER : [advice] SikaSeal-190 N Silicone My pick from the data sheets: SikaSeal-190 N Silicone, because its product page says: "Kitchens & Bathrooms" (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: wet areas. Also worth a look Davco N Silicone and SikaSeal Kitchen and Bathroom Before you buy I can only read what Sika has published, so Sika Technical Servic || chips: Data sheet for SikaSeal-190 N Silicone / Coverage of SikaSeal-190 N Silicone / Tell me about Davco N Silicone
+   CHIPS : -
+
+23. recommend something for tiles on a balcony
+   BEFORE: [product] SikaCeram-690 Elite :: SikaCeram-690 Elite A high performance cementitious wall / floor tile grout for joints 1 mm to 10 mm. Grouting the following tile types : || chips: Coverage of SikaCeram-690 Elite / Data sheet for SikaCeram-690 Elite / Safety d
+   AFTER : [product] SikaTile-510 Mega Lite My pick from the data sheets: SikaTile-510 Mega Lite, because its data sheet says: "Large format Ceramic, and Porcelain tiles" (a documented fit, not a claim that one is the best). What it is A LIGHT WEIGHT, SILICA FREE CEMENT-BASED FLEXIBLE TILE ADHESIVE THAT PROVIDES ULTIMATE PERFORMANCE FORMUALTED WITH LIGHTWEIGHT GLASS TECHNOLOGY Also worth a look SikaTile-400 EVO PRO and SikaTile-410 Secur
+   CHIPS : -
+
+24. what do you recommend
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Happy to recommend something I need the job first, so I pick from the right data sheets. Tap one, or tell me the surface and the problem.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+25. good morning
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Good morning Good to have you here. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+26. bye
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] See you later Thanks for stopping by. If a job comes up, I am here whenever you want a hand finding the right Sika product.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+27. yes
+   BEFORE: [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+   AFTER : [choose] Good Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+   CHIPS : Waterproof a bathroom | Tile a floor | Seal around a shower | Fix a crack
+
+28. my roof is leaking what do i use
+   BEFORE: [advice] Roof waterproofing and roofing whose published text documents a fit :: Roof waterproofing and roofing whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that
+   AFTER : [advice] S-Pipe Flashing PVC My pick from the data sheets: S-Pipe Flashing PVC, because its product page says: "S-Pipe Flashing PVC is a prefabricated pipe/vent flashing, based on a polyvinyl chloride (PVC) multi-layer, roof waterproofing membrane containing ultraviolet light stabilisers and flame retarders." (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text m || chips: Data sheet for S-Pipe Flashing PVC / Coverage of S-Pipe Flashing PVC / Tell me about SikaShield P44 PE Defend RT 4 mm
+   CHIPS : -
+
+29. got a leaky shower any ideas
+   BEFORE: [info] Leaking shower: How to identify and avoid it :: Leaking shower: How to identify and avoid it From Sika Australia's published page "Leaking shower: How to identify and avoid it". Published Water leaks and waterproofing issues are common in ensuite bathro
+   AFTER : [product] SCHÖNOX AB My pick from the data sheets: SCHÖNOX AB, because its data sheet says: "Residential wet areas and bathrooms Substrates Schonox AB is suitable on:" (a documented fit, not a claim that one is the best). What it is WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALLATIONS Before you buy I can only read what Sika has published, so Sika Technical Services should confirm the fit for 
+   CHIPS : -
+
+30. which grout is best for a shower floor
+   BEFORE: [advice] Tile grouts whose published text documents a fit :: Tile grouts whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its
+   AFTER : [advice] Davco Easy Grout My pick from the data sheets: Davco Easy Grout, because its product page says: "Interior areas such as commercial and domestic walls, floors and splashbacks and in wet areas including bathtub surrounds and shower walls and floors." (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: wet areas. Also worth a look Davco Superfine || chips: Data sheet for Davco Easy Grout / Coverage of Davco Easy Grout / Tell me about Davco Superfine White Grout
+   CHIPS : -
+
+TWO-TURN CONVERSATIONS (state carried by the session)
+
+TURN 1: what do you recommend for my bathroom
+   [choose] Bathroom Which part of the bathroom is the job? Tap one, or tell me in your own words.
+TURN 2: under tiles
+   [product] SCHÖNOX AB My pick from the data sheets: SCHÖNOX AB, because its data sheet says: "Residential wet areas and bathrooms Substrates Schonox AB is suitable on:" (a documented fit, not a claim that one is the best). What it is WATERPROOFING SHEET MEMBRANE & CRACK ISOLATION SYSTEM FOR TILE AND STONE INSTALLATIONS Before you buy I can only read what Sika has published, so Sika Technical Services should confirm the fit for 
+
+TURN 1: can you recommend a sealant
+   [choose] Sealant What is the sealant for? Tap one, or tell me in your own words.
+TURN 2: around the bath
+   [advice] SikaSeal-190 N Silicone My pick from the data sheets: SikaSeal-190 N Silicone, because its product page says: "Kitchens & Bathrooms" (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: wet areas. Also worth a look Davco N Silicone and SikaSeal Kitchen and Bathroom Before you buy I can only read what Sika has published, so Sika Technical Servic
+
+TURN 1: garage floor
+   [choose] Garage or workshop floor What does the floor need? Tap one, or tell me in your own words.
+TURN 2: its cracked and broken
+   [advice] Concrete repair mortars whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: concrete. Corrosion control of zones within sound contaminated concrete. The data sheets cannot see your site, substrate or c
+
+TURN 1: i need an adhesive
+   [choose] Adhesive What are you sticking? Tap one, or tell me in your own words.
+TURN 2: for skirting boards
+   [advice] Construction adhesives that match your words No particular condition was named, so these are the products whose published text uses your words, closest first. This is not a claim that one is the best. Skirting boards, architraves and trims to walls The data sheets cannot see your site, substrate or conditions, so Technical Services should confirm the fit before you order.
+
+TURN 1: hello
+   [choose] G'day Good to have you here. Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.
+TURN 2: my shower is leaking
+   [advice] SikaCeram Sealing Membrane A My pick from the data sheets: SikaCeram Sealing Membrane A, because its product page says: "Before tiling for waterproofing and / or decoupling for the following applications:" (a documented fit, not a claim that one is the best). Criterion used How many of these conditions the published text mentions: stopping leaks. Also worth a look Sika SealTape B and Davco K10 Rapid Before you buy I 

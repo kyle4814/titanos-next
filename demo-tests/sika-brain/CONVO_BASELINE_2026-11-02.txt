@@ -1,0 +1,93 @@
+CONVO BASELINE 2026-11-02 on HEAD 26fe70419 (unchanged brain): first card of each probe. Reproduce: node demo-tests/sika-brain/convo_probe.mjs
+Kyle's seven probes first, then the extra trade-counter probes.
+
+Q: hello
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: hi mate how are you
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: thanks
+   [choose] Which of these do you mean? :: Which of these do you mean? I could not tell the job from that. These are the three nearest jobs in the Sika Australia range. Pick one, or tell me the surface and the problem. || chips: Best adhesive for thanks / Best floor sealers finishings for thanks / Best panel bonding for thanks
+
+Q: what do you recommend for my bathroom
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: can you recommend a sealant
+   [advice] Sealants that match your words :: Sealants that match your words No particular condition was named, so these are the products whose published text uses your words, closest first. This is not a claim that one is the best. Paintable* (Felxible paint coatings recommended) The data sheets cannot see your site, substrate or conditions, so Technical Services should co || chips: Data sheet for SikaSeal Super / Data sheet for Sikasil-670 Fire / Coverage of SikaSeal Super / Coverage of Sikasil-670 Fire
+
+Q: what's good for a balcony leak
+   [advice] Waterproofing membranes whose published text documents a fit :: Waterproofing membranes whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: external use, stopping leaks. Areas || chips: Data sheet for Davco K10 Rapid / Data sheet for SikaTile-110 Secure Proof / Data sheet for SikaTile-111 Rapid Proof / Coverage of Davco K10 Rapid
+
+Q: I need something to fix a crack
+   [advice] Crack repair and sealing whose published text documents a fit :: Crack repair and sealing whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: crack repair. Joint filling and cr || chips: Data sheet for Sika Concrete Fix / Data sheet for Sikadur-33 / Coverage of Sika Concrete Fix / Coverage of Sikadur-33
+
+Q: hey can u help
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: g'day
+   [choose] Which of these do you mean? :: Which of these do you mean? I could not tell the job from that. These are the three nearest jobs in the Sika Australia range. Pick one, or tell me the surface and the problem. || chips: Best adhesives for g day / Best cementitious grouts for g day / Best chemical anchoring for g day
+
+Q: cheers mate
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: who are you
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: what can you do
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: you are useless
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: ok
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: need sumthing for shower leak
+   [info] Leaking shower: How to identify and avoid it :: Leaking shower: How to identify and avoid it From Sika Australia's published page "Leaking shower: How to identify and avoid it". Published Water leaks and waterproofing issues are common in ensuite bathrooms. Regardless if the property is a new build or an older style home, leaks can cause stress for owners as they can be costl
+
+Q: whats best for gluing timber
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: what should i use for my kitchen splashback
+   [choose] Bathroom or kitchen :: Bathroom or kitchen Which part? || chips: Waterproofing for a shower floor under tiles / Tile adhesive for porcelain tiles on a bathroom wall / Silicone sealant for a shower / Grout for a shower floor
+
+Q: garage floor
+   [advice] Resin flooring whose published text documents a fit :: Resin flooring whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: traffic and heavy loads. Crack bridging, tra || chips: Data sheet for Sikafloor-376 / Data sheet for Sikafloor MultiDur ES-14 / Coverage of Sikafloor-376 / Coverage of Sikafloor MultiDur ES-14
+
+Q: pool
+   [product] Sikasil Pool :: Sikasil Pool SILICONE SEALANT FOR SWIMMING POOLS AND WET AREAS Sikasil Pool is used for sealing: || chips: Coverage of Sikasil Pool / Data sheet for Sikasil Pool / Safety data sheet for Sikasil Pool
+
+Q: i need an adhesive
+   [product] Davco Sanitized Glue Grout :: Davco Sanitized Glue Grout A PREMIXED READY TO USE WALL TILE ADHESIVE AND GROUT Dual use - adhesive and a grout || chips: Coverage of Davco Sanitized Glue Grout / Data sheet for Davco Sanitized Glue Grout / Safety data sheet for Davco Sanitized Glue Grout / Coverage of Sikaflex-111 Stick & Seal
+
+Q: waterproofing
+   [choose] Waterproofing :: Waterproofing Where is the waterproofing going? || chips: Waterproofing for a shower floor under tiles / Waterproofing for a basement / Waterproofing for a roof / Waterproofing for a balcony under tiles / Recommend one for me
+
+Q: whats the best sealent for a bathrm
+   [advice] Sealants: the published range :: Sealants: the published range You did not name a condition for the job, so I am not ordering these. They are the products in that group on the Sika Australia site, each with its published description. Tell me the job (area, place, surface) and I will name the ones whose published text documents a fit. Product What the published  || chips: Data sheet for Sika Filler-105 / Data sheet for Sikadur-51 / Data sheet for SikaSeal-300 Glass and Weather Seal
+
+Q: recommend something for tiles on a balcony
+   [product] SikaCeram-690 Elite :: SikaCeram-690 Elite A high performance cementitious wall / floor tile grout for joints 1 mm to 10 mm. Grouting the following tile types : || chips: Coverage of SikaCeram-690 Elite / Data sheet for SikaCeram-690 Elite / Safety data sheet for SikaCeram-690 Elite / Coverage of SikaTile-400 EVO PRO
+
+Q: what do you recommend
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: good morning
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: bye
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: yes
+   [unknown] Not in the published documentation :: Not in the published documentation I do not know this from the published documentation. Nothing in the published documentation I work from matches that clearly enough to name a product. Not in the published data
+
+Q: my roof is leaking what do i use
+   [advice] Roof waterproofing and roofing whose published text documents a fit :: Roof waterproofing and roofing whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: stopping leaks. S-Pipe Flash || chips: Data sheet for S-Pipe Flashing PVC / Data sheet for SikaShield P44 PE Defend RT 4 mm / Data sheet for SikaShield P24 PE Argo 3 mm / Coverage of S-Pipe Flashing PVC
+
+Q: got a leaky shower any ideas
+   [info] Leaking shower: How to identify and avoid it :: Leaking shower: How to identify and avoid it From Sika Australia's published page "Leaking shower: How to identify and avoid it". Published Water leaks and waterproofing issues are common in ensuite bathrooms. Regardless if the property is a new build or an older style home, leaks can cause stress for owners as they can be costl
+
+Q: which grout is best for a shower floor
+   [advice] Tile grouts whose published text documents a fit :: Tile grouts whose published text documents a fit Products whose own published text documents a fit, in the order of the criterion below. This is not a claim that one is the best. Each card quotes its sentence. Criterion used How many of these conditions the published text mentions: wet areas. Interior areas such as commercial an || chips: Data sheet for Davco Easy Grout / Data sheet for Davco Superfine White Grout / Data sheet for Davco Rejuvenation Grout / Coverage of Davco Easy Grout
+

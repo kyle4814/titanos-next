@@ -5,7 +5,8 @@
 import { normalise } from './text.js';
 import { jobOf, areaOf, leafOf, recommendFor } from './recommend.js';
 import * as V from './voice.js';
-import { card, CHIPS, fact } from './schema.js';
+import { card, CHIPS, fact, finalize } from './schema.js';
+import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, withPick, PICK_RX } from './chat.js';
 
 const REC = /\brec+o?m+e?n+d|\b(suggest|pick one|pick for me|you pick|you choose|you decide|your pick|your choice|up to you|just tell me|you tell me|best one|whatever is best|whatever s best|whatever you think|surprise me|any one|no preference|dont mind|don t mind|doesn t matter|which (one )?(should|would) (i|you)|what would you (use|pick|choose|go with)|which is best|which one is best|which one s best|you choose for me)\b/;
 const ORD = /^(?:(?:and|ok|okay|now|so|what about|how about|tell me about|show me|go with|i ll take|ill take|i take) )*(?:the )?(first|1st|top|second|2nd|third|3rd|last|fourth|4th)(?: one| option| product| choice)?(?: please)?$/;
@@ -112,9 +113,23 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     const h = state && state.h ? { ...newH(), ...state.h } : newH();
     const inner = state && state.h ? { ...state } : state; if (inner) delete inner.h;
     const words = n.split(' ').filter(Boolean).length;
-    let res = null; let rewritten = null;
+    let res = null; let rewritten = null; let wantPick = PICK_RX.test(n);
+    // 0. the talking layer (chat.js): a social turn, a vague place or product group, and the short reply that answers a clarifying question
+    const chatAnswer = (c, kind, convo) => { finalize(c); return { schema: 'sika-brain-answer@1', query: q, intent: kind === 'social' ? 'social' : 'vague', stage: 'chat', cards: [c], followups: [], state: merge(inner ? { ...inner } : null, { ...h, convo }), ms: 0, trace: ['chat:' + kind] }; };
+    const sk = socialKind(q);
+    if (sk) return chatAnswer(socialCard(sk, q), 'social', h.convo || null);
+    const fu = h.convo ? followUp(q, h.convo) : null;
+    if (fu) { rewritten = fu.ask; wantPick = wantPick || !!fu.wantPick; h.convo = null; }
+    else {
+      const followShape = /^(and|also|what about|how about|but|or|now|then|same|ditto)\b/.test(n) || ENV.test(n) || ORD.test(n) || AREA_FU.test(n) || PACK.test(n) || BACK.test(n) || ASPECT.test(n);
+      const pl = followShape ? null : placeOf(q);
+      if (pl && !pl.place) { if (pl.rec && (h.job || h.product || h.jobState)) res = (await recommend(h, q)) || noPick(q); else { const g = genericCard(pl.rec); return chatAnswer(g.card, 'ask', g.convo); } }
+      else if (pl && pl.ask) { rewritten = pl.ask; wantPick = true; }
+      else if (pl) { const p = placeCard(pl.place, pl.rec); return chatAnswer(p.card, 'ask', p.convo); }
+    }
+    if (res) { /* answered by the recommend path above */ }
     // 1. recommend one, after any card
-    if (words <= 9 && (REC.test(n) || n === normalise(V.RECOMMEND_CHIP)) && bare(n) && !(advisor.hasKind(n) && !/\b(for me|one)\b/.test(n))) res = (await recommend(h, q)) || noPick(q);
+    else if (words <= 9 && (REC.test(n) || n === normalise(V.RECOMMEND_CHIP)) && bare(n) && !(advisor.hasKind(n) && !/\b(for me|one)\b/.test(n))) res = (await recommend(h, q)) || noPick(q);
     // 2. the first / second / third one
     else if (ORD.test(n) && h.products.length) {
       const m = ORD.exec(n)[1]; const i = /first|1st|top/.test(m) ? 0 : /second|2nd/.test(m) ? 1 : /third|3rd/.test(m) ? 2 : /fourth|4th/.test(m) ? 3 : h.products.length - 1;
@@ -144,6 +159,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
       if (rewritten) { res.trace.push('session:rewrite:' + rewritten); res.query = q; }
     }
     if (!res) res = await ask(q, inner);
+    if (wantPick) res = withPick(res, q);
     const h2 = update(h, q, n, res);
     h2.jobState = (res.state && res.state.job) || ((res.stage === 'session' || res.cards.some((c) => c.type === 'unknown' || c.type === 'choose')) ? h.jobState : null);
     if (h2.jobState && res.stage === 'session' && !(res.state && res.state.job)) res.state = { ...(res.state || {}), job: h2.jobState };
