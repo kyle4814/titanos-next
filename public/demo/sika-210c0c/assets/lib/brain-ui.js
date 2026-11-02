@@ -5,6 +5,7 @@ import { chipEl } from './apply_data.js';
 import { buildHandoff } from '../assistant/handoff.js';
 import { renderHandoff } from './handoff-ui.js';
 import { estimateNote } from './terms.js';
+import { cartButtons } from './cartbtn.js';
 
 export const BRAIN_DEFAULT = true;
 export function brainOn() {
@@ -95,6 +96,8 @@ export function renderCard(c, cfg, send) {
   }
   if (c.type === 'choose' && c.followups.length && send) kids.push(h('div', { class: 'opts' }, (c.choices || c.followups.map((f) => ({ label: f, value: f }))).map((o) => h('button', { class: 'chip', type: 'button', onclick: () => send(o.value, o.label) }, o.label))));
   if (c.type === 'plan' && c.plan && c.plan.commit) kids.push(planSaveButton(c.plan.commit)); // lane D: "Add the plan to my project", through the shared project store
+  if (c.type === 'calculation' && send) { const ch = (c.followups || []).filter((f) => /^How much /.test(f)); if (ch.length) kids.push(h('div', { class: 'opts' }, ch.map((f) => h('button', { class: 'chip', type: 'button', onclick: () => send(f, f) }, f.replace(/^How much /, ''))))); } // the product, tile or joint options a quantity answer still needs
+  if (c.type === 'calculation' && c.cart) kids.push(cartButtons(c.cart)); // "Add 3 x 2 L pails to my quote", through the shared project store
   if (c.chip) kids.push(chipEl(c.status, c.chip));
   const evid = c.facts.filter((f) => f.sentence);
   if (evid.length) kids.push(h('details', { class: 'hik' }, h('summary', null, 'How I know'), h('ul', null, evid.map((f) => h('li', null,
