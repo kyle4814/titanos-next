@@ -63,6 +63,8 @@ const TIME_KIND = [
   ['recoat_times', /\b(recoat|re coat|overcoat|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
 ];
 
+// real words the spelling corrector must leave alone ("bim files" was read as "bim tiles")
+const KEEP_WORDS = new Set('files file portal register shop ordering courses course engineers sustainability calibration screen'.split(' '));
 // ---------------------------------------------------------------- the brain
 export function createBrain({ load, config, loadRules } = {}) {
   let core = null, vocab = null, aliasList = null, rulesList = null, ruleTok = null;
@@ -70,7 +72,7 @@ export function createBrain({ load, config, loadRules } = {}) {
   // phone typos in words the assistant itself understands ("coevrage", "sutomotive"): corrected against its own vocabulary, never against product names
   let LEXB = null;
   const lexB = () => LEXB || (LEXB = [...new Set([...advisor.words(), ...know.words(), ...attrWords(), ...Object.values(RX).flatMap((r) => r.source.match(/[a-z]{5,}/g) || [])])].filter((w) => !/^(about|which|their|these)$/.test(w)));
-  const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x]);
+  const correctWords = (s) => correctAgainst(s, lexB(), (x) => core === null || !!core.post[stem(x)] || !!core.alias[x] || KEEP_WORDS.has(x));
   // lane D: the plan and rule layer. rules.js is NOT bundled: `loadRules` (browser: a module script injected the first time a question looks like a job with several
   // constraints; node tests: preloaded by the harness) returns { createRules }. A missing module just means the stack below answers, as before.
   let rulesP = null;

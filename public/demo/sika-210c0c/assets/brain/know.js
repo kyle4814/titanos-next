@@ -11,7 +11,8 @@ const SIGNAL = /\b(contact (sika|us|details|number|info)|phone (number|no|numbr|
 const DEFN = /^(what (is|are)\b|what.s (a|an|the)|what (does|do) .* (mean|stand for)|why (do|does|is|are)|explain|how (does|do) .* work|who (is|are|owns?|makes?)|how long has|when (did|was)|is .* part of|are .* part of|has .* (changed|been)|did .* change)/;
 const KG = new Set([...GENERIC].filter((w) => w !== 'davco' && w !== 'tile'));
 const NUMW = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
-const PAGEWORD = new Set('bond bonding seal sealing sealant adhesive adhesives product solution application page range industry panel faq'.split(' ').map((w) => tokens(w)[0]));
+const PAGEWORD = new Set('bond bonding seal sealing sealant adhesive adhesives product solution application page range industry panel faq content file files hub download downloads where find get see show'.split(' ').map((w) => tokens(w)[0]));
+const TTDF = new Map(); // how many page titles carry each word
 const FILLER = new Set('sika sikas australia australian tell know find want like get give show need tell help please best good great right info information details about product products range thing stuff someone anything'.split(' '));
 const SYN = [['trade', 'b2b', 'shop', 'eshop', 'registration', 'portal'], ['company', 'brand', 'family', 'owned', 'part'], ['phone', 'telephone', 'call', 'ring', 'number'], ['address', 'office', 'located', 'location'], ['buy', 'stockist', 'distributor', 'retailer', 'purchase'], ['training', 'course', 'workshop', 'webinar'], ['warranty', 'guarantee'], ['contact', 'enquiry', 'enquir', 'touch'], ['job', 'career', 'employment'], ['sustainable', 'sustainability', 'impact', 'environmental'], ['colour', 'color', 'packaging'], ['library', 'hub', 'documents', 'resources']];
 
@@ -133,16 +134,18 @@ export function createKnow({ load }) {
   /** A question that is (nearly) the name of a published page: "three must haves for builders", "leaking shower". */
   async function titleMatch(q, n, hasKind, strictOnly) {
     await boot(); if (!kb) return null;
+    n = n.replace(/^((hi|hey|hello|um|umm|ok|okay|so|righto|quick one|g day|gday|sorry to bug you|mate|yo|thanks|please|pls) )+/, '');
     const qs = qTokens(n, true); const qset = new Set([...qs].filter(([, w]) => w >= 1).map(([t]) => t)); if (qset.size < 2) return null;
     const wantProj = /\b(project|projects|case stud\w+|reference|references)\b/.test(n);
     let best = null;
+    if (!TTDF.size) for (const p of kb.pages) for (const t of new Set(tokens(p.t))) TTDF.set(t, (TTDF.get(t) || 0) + 1);
     for (const p of kb.pages) {
       if (!p.tt) p.tt = [...new Set(tokens(p.t).filter((t) => !KG.has(t) && !FILLER.has(t)))];
-      if (p.k === 'industry' && p.tt.length === 1 && qset.has(p.tt[0]) && [...qset].every((t) => t === p.tt[0] || PAGEWORD.has(t))) { const sc = 2; if (!best || sc > best.sc) best = { p, sc, tc: 1, qc: 1 }; continue; } // "dishwasher sealing", "elevator bonding and sealing": the one-word industry page
+      if ((p.k === 'industry' || p.k === 'site') && p.tt.length >= 1 && p.tt.length <= 2 && p.tt.some((t) => qset.has(t) && (TTDF.get(t) || 0) <= 3) && [...qset].every((t) => p.tt.includes(t) || PAGEWORD.has(t))) { const sc = 2; if (!best || sc > best.sc) best = { p, sc, tc: 1, qc: 1 }; continue; } // "dishwasher sealing", "elevator bonding and sealing": the one-word industry page
       if (p.k === 'project' ? !(wantProj || (p.tt.length >= 3 && p.tt.filter((t) => qset.has(t)).length >= Math.max(3, Math.ceil(p.tt.length * 0.8)))) : !(p.k === 'diy' || p.k === 'article' || p.k === 'site' || p.k === 'industry')) continue; // a project page is named by all of its title words
       if (p.tt.length < 2) continue; const m = p.tt.filter((t) => qset.has(t)).length; if (m < 2 || (strictOnly && (m < 3 || m / p.tt.length < 0.9))) continue;
       if (p.k === 'industry' && (m < p.tt.length || m / qset.size < 0.6 || /^(i need|i want|i am looking|looking for|need|want|we need)\b/.test(n))) continue; // an industry page answers only a question that is mostly its own title
-      const tc = m / p.tt.length, qc = m / qset.size; if (!(tc >= 0.8 || (qc >= 0.66 && (!hasKind || p.k === 'diy')))) continue;
+      const tc = m / p.tt.length, qc = m / qset.size; if (!(tc >= 0.8 || (qc >= 0.66 && (!hasKind || p.k === 'diy')) || (qc === 1 && tc >= 0.6 && m >= 2 && qset.size <= 3 && p.k === 'article'))) continue; // a short question made only of title words ("open a unipack")
       const sc = tc + qc + (p.k === 'diy' ? 0.1 : 0); if (!best || sc > best.sc) best = { p, sc, tc, qc };
     }
     if (!best || best.tc + best.qc < 1.1) return null;
