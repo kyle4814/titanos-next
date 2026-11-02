@@ -2,7 +2,7 @@
 
 Branch sika/integrate-convo-2026-11-02 (worktree /dev/shm/wt-int), started at 25b53b21f. Live base for comparison: 1f36f8c67. Final SHA: see the commit that adds this file (git log -1). Raw outputs: /dev/shm/wt-int-verify/.
 
-VERDICT: NOT READY TO DEPLOY. Stop rule partly met (run_all rc 0, GOLDEN 4600/4659, bank WRONG 0, three exams scored, mutations 4/4), but three NEW reds versus live base remain (sika-brain2b, sika-brain2c, sika-citematch size budgets), and several browser suites did not finish inside the 90 minute cap.
+VERDICT: NOT READY TO DEPLOY. Stop rule partly met (run_all rc 0, GOLDEN 4600/4659, bank WRONG 0, three exams scored, mutations 4/4), but three NEW reds versus live base remain (sika-brain2b, sika-brain2c, sika-citematch size budgets), and sika-calc needs a clean rerun.
 
 ## Merges and conflicts
 1. sika/generalise-2026-11-02: conflicts in run_all.sh (test list unioned), chat.js (the generalise lane's wider PICK regex kept as PICK_BASE, the fix lane's how-to filter kept on top: PICK_RX = PICK_BASE and not a how-to ask unless explicit; wantsPick from generalise kept), dist/brain.js and sw.js (ours, rebuilt later).
@@ -63,8 +63,15 @@ convo_final by class, base -> tip: social 6 -> 10/10, clarify 3 -> 6/14, answer 
 | sika-dosage | GREEN | GREEN | |
 | sika-images | GREEN | GREEN | |
 | sika-stock | FAIL (git show on an archive extract: no git there) | GREEN | base red is environmental |
-| sika-w2 | GIFT, PWA GREEN (rest still running at report time) | same | partial |
-| sika-jobcompare, sika-sales, sika-thumbvoice, sika-bughunt regress, sika-brain brain_e2e / convo_e2e / cart_e2e | not finished inside the cap | not finished inside the cap | NOT DONE |
+| sika-w2 | W2 SITE SUITE GREEN | W2 SITE SUITE GREEN | |
+| sika-jobcompare | ALL GREEN | ALL GREEN | |
+| sika-sales | SALES ALL GREEN | SALES ALL GREEN | |
+| sika-thumbvoice | 49/49 | 49/49 | |
+| sika-bughunt run_regress | 52 passed, 1 failed (R6 product page offline: dynamic import fetch fails) | same 52/1, same R6 | inherited |
+| brain_e2e | 2 failed: "tile adhesive longest open time" height 2203 px (limit 2110) at 390, 2090 px (limit 1920) at 1366 | same 2 failed, shorter: 2162 px and 2042 px | inherited |
+| convo_e2e | GREEN (base version of the test) | GREEN (with the new New chat storage checks) | |
+| cart_e2e | not in base | GREEN | |
+(These ran after both fixes, against the final tip code. sika-bughunt run.sh, the long seeded simulation, was not run.)
 
 /dev/shm filled to 0 MB free once during the runs (my per-commit extracts); removed, 1.2 GB free after. Any suite running at that moment may carry a false red (sika-calc on both sides did).
 
@@ -80,5 +87,5 @@ Both 390 and 1366 px, no console errors or warnings:
 
 ## Not done
 - Fixes for the three NEW reds (sika-brain2b chain quantity and cart routing, sika-brain2c 83/132, citematch size budgets): outside the time cap.
-- The browser suites listed as NOT DONE above; sika-calc and sika-w2 need clean reruns. The tip sika-210c0c and sika-actions runs started before the last two fixes.
+- sika-calc needs a clean rerun (disk-full false red on both sides); sika-bughunt run.sh (long simulation) not run. The tip sika-210c0c and sika-actions runs started before the last two fixes.
 - No deploy, no push, no Telegram.
