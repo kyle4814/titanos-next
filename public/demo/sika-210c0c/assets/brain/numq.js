@@ -6,6 +6,7 @@
 import { card, fact, CHIPS } from './schema.js';
 import { computeQuantity, parsePacks, chooseCard, unknown } from './cards.js';
 import { quantity, packOptions, fmt } from '../lib/finder/calc.js';
+import { tableAsk } from './grid.js';
 
 // TODO(w2-dosage): per-100-kg, percent-of-cement and per-m3 dosage kinds plug in here once calc.js exports them (they are another lane's change to calc.js).
 export const thicknessOf = (n) => { const m = String(n).match(/(?:^|[^\d.x])(\d+(?:\.\d+)?)\s*(?:mm|millimet(?:er|re)s?)\b/); return m ? Number(m[1]) : null; };
@@ -53,9 +54,10 @@ export async function quantityByKind({ q, n, area, thickness, advisor, load, rel
   if (kid === 'construction_adhesive' && /\b(floor|floors|bathroom|shower|kitchen|laundry|wall|walls|splashback|room|balcony)\b/.test(n)) kid = 'tile_adhesive';
   const rec = await advisor.recommendForJob({ kindId: kid, question: n, rel, excludeIds, limit: 30 });
   if (!rec.picks.length) return null;
-  const rows = []; const left = []; let needThick = false;
+  const rows = []; const left = []; const tabular = []; let needThick = false;
   const work = async (pk, flag) => {
     const sh = await load.product(pk.id); if (!sh) return;
+    { const ask = tableAsk((sh.r && sh.r.facts && sh.r.facts.consumption) || []); if (ask && !flag) tabular.push({ pk, ask }); }
     const numShard = load.num ? await load.num(pk.id) : null;
     const cq = candidateQuantity({ sh, numShard, area, thickness });
     if (cq.ok) rows.push({ pk: flag ? { ...pk, name: pk.name, flag: true } : pk, sh, cq }); else { if (cq.needThickness) needThick = true; left.push({ pk, why: cq.why, outside: !!cq.outside }); }
@@ -68,6 +70,12 @@ export async function quantityByKind({ q, n, area, thickness, advisor, load, rel
     for (const pk of rec2.picks) { if (rows.length >= 3) break; await work(pk, true); }
   }
   if (!rows.length && needThick && !(thickness > 0)) return { cards: [chooseCard(`How much ${rec.label}?`, `Those products are rated per millimetre of thickness, so the quantity depends on how thick you pour or apply. How thick, in mm?`, [3, 5, 10].map((t) => `${q.replace(/\s+at\s+\d+\s*mm/i, '')} at ${t} mm`))], state: { advice: { n, ids: rec.picks.map((p) => p.id) }, job: { kindId: kid, area, thickness: null, n } } };
+  // a group with products whose published table needs one more thing from the visitor (grout: tile size and joint width; adhesive: notched trowel): ask WHICH product, with a chip for each product whose table can be worked out
+  const tabChips = (tabular.length && !(thickness > 0)) ? tabular.map((t) => `How much ${cartName(t.pk.name)} for ${fmt(area)} m2`) : [];
+  const tabAsk = [...new Set(tabular.map((t) => t.ask))].join(' or ');
+  if (tabChips.length && !rows.length) {
+    return { cards: [chooseCard(`How much ${rec.label} for ${fmt(area)} m2?`, `Which product? These are the ${rec.label} whose published tables I can work out a quantity from. They depend on your ${tabAsk}, so I will ask for that next. Pick one.`, tabChips)], state: { advice: { n, ids: tabular.map((t) => t.pk.id) }, job: { kindId: kid, area, thickness: null, n, ids: tabular.map((t) => t.pk.id) } } };
+  }
   if (!rows.length) return null;
   const top = rows.slice(0, pick);
   const facts = top.map(({ cq }) => fact({ source_url: cq.s.u, page: cq.s.p == null ? null : cq.s.p, sentence: cq.sentence, doc_type: cq.s.t, doc_version: cq.s.v || '' }));
@@ -75,7 +83,9 @@ export async function quantityByKind({ q, n, area, thickness, advisor, load, rel
   const lines = [LINE('Area you asked about', `${fmt(area)} m2`)];
   if (thickness > 0) lines.push(LINE('Thickness you asked about', `${fmt(thickness)} mm`));
   lines.push(LINE('Order of the list', rec.ordered ? `Products whose own published text documents a fit${rec.conds.length ? ' (' + rec.conds.join(', ') + ')' : ''}, best documented fit first. Not a claim that one is the best.` : 'No condition was named, so this is the documented range, not a ranking. Tell me the place or surface and I will order it.'));
-  if (left.length) lines.push(LINE('Left out', left.slice(0, 4).map((l) => `${l.pk.name} (${l.why})`).join('; ')));
+  if (tabChips.length) lines.push(LINE('Which product', `${tabular.length > 1 ? 'These products each publish' : 'This product publishes'} a table that depends on your ${tabAsk}. Pick ${tabular.length > 1 ? 'one' : 'it'} below and I will ask for that and work it out.`));
+  const leftOut = left.filter((l) => !tabular.some((t) => t.pk.id === l.pk.id));
+  if (leftOut.length) lines.push(LINE('Left out', leftOut.slice(0, 4).map((l) => `${l.pk.name} (${l.why})`).join('; ')));
   lines.push(LINE('Waste', 'Not included. The data sheet figures are theoretical; add your own allowance.'));
   const cartFollow = top.map(({ pk, cq }) => { const o = cq.packs && cq.packs.options && cq.packs.options[0]; return o ? `Add ${o.count} x ${fmt(o.size)} ${o.unit} of ${cartName(pk.name)} to my project` : `Add ${cartName(pk.name)} to my project`; });
   const c = card({
@@ -84,7 +94,7 @@ export async function quantityByKind({ q, n, area, thickness, advisor, load, rel
     lines, facts, source: facts[0], chip: CHIPS.DERIVED,
     links: top.map(({ pk }) => ({ label: pk.name, url: pk.url })), table: { cols: ['Product', 'Quantity (higher figure covers it)', 'Packs, rounded up', 'Published rate (source)'], rows: tableRows },
     calc: { derived: true, inputs: { area_m2: area, ...(thickness > 0 ? { thickness_mm: thickness } : {}), rows: top.map(({ pk, cq }) => ({ id: pk.id, fact: cq.factId, basis: cq.basis, sentence: cq.sentence })) }, outputs: top.map(({ cq }) => ({ unit: cq.qty.unit, need_min: cq.qty.low, need_max: cq.qty.high, basis: cq.basis.k })), plan: top.map(({ cq }) => (cq.packs && cq.packs.options ? cq.packs.options.map((o) => ({ size: o.size, unit: o.unit, count: o.count })) : [])) },
-    followups: [...cartFollow, ...top.slice(0, 1).map(({ pk }) => `Data sheet for ${pk.name}`)],
+    followups: [...tabChips, ...cartFollow, ...top.slice(0, 1).map(({ pk }) => `Data sheet for ${pk.name}`)],
   });
   return { cards: [c], state: { advice: { n, ids: rows.map((r) => r.pk.id) }, job: { kindId: kid, area, thickness: thickness || null, n, ids: top.map((r) => r.pk.id) } } };
 }

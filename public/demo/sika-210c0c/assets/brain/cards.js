@@ -159,6 +159,18 @@ export function doseCard(sh, dose, question) {
     lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { cement_kg: dose.cementKg || null, mix_kg: dose.mixKg || null, water_l: dose.waterL || null, volume_m3: dose.volume || null, facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.low, need_max: x.q.high, basis: x.n.kind })), plan: [] } });
 }
 
+
+// "Add 3 x 2 L pails to my quote": the pack counts of a computed answer as cart options (card.cart), one per published pack size (at most two). The UI (lib/cartbtn.js) puts them in the shared project store.
+const plural = (w, n) => (w && n > 1 ? w.replace(/s$/, '') + 's' : w);
+export function cartOptions(sh, plan, need, f, job) {
+  const opts = (plan || []).filter((x) => x.count > 0 && x.size > 0).slice(0, 2).map((x) => {
+    const one = `${x.count} x ${num(x.size)} ${x.unit}${x.container ? ' ' + x.container.replace(/s$/, '') : ''}`;
+    return { label: `Add ${x.count} x ${num(x.size)} ${x.unit}${x.container ? ' ' + plural(x.container.replace(/s$/, ''), x.count) : x.count > 1 ? ' packs' : ' pack'} to my quote`,
+      id: sh.id, name: sh.n, qty: x.count, unit: 'pack', packs: one, need: need || '', job: job || {}, url: f && f.s && f.s.u ? f.s.u : '', phrase: f && f.text ? String(f.text).slice(0, 300) : '' };
+  });
+  return opts.length ? opts : null;
+}
+
 // ---- a published coverage grid (tile size x joint width) whose table says what the figure is per: compute it, or ask the ONE missing thing
 const GRID_HEAD = 'Worked out from the published table below. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.';
 function gridCard(sh, area, question, facts) {
@@ -195,7 +207,8 @@ function gridCard(sh, area, question, facts) {
   lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
   return card({ type: 'calculation', title, product: prod(sh), headline: GRID_HEAD, lines, table, facts: factsOut, chip: chipOf(sel.cells[0].f), links: dsLink(sh),
     followups: sel.mode === 'exact' ? [] : (sel.mode === 'joints' ? widths.map((j) => q(sel.cells[0].tile, j)) : tileRows(sel.cells).slice(0, 4).map((t) => q(t, sel.joint))),
-    calc: { derived: true, inputs: { area_m2: area, grid: inputs, packs }, outputs: outs, plan: rows.flatMap((x) => x.plan) } });
+    calc: { derived: true, inputs: { area_m2: area, grid: inputs, packs }, outputs: outs, plan: rows.flatMap((x) => x.plan) },
+    cart: sel.mode === 'exact' ? cartOptions(sh, rows[0].n.basisSize ? rows[0].plan.filter((y) => y.size === rows[0].n.basisSize) : rows[0].plan, `${num(rows[0].n.amount)} ${rows[0].n.unit}`, rows[0].c.f, { area_m2: area, tile: rows[0].c.tile, joint_mm: rows[0].c.joint }) : null });
 }
 
 // a notched-trowel table whose header says "per bag" (basis_stated, the pack derived from the only listed pack): one cell per trowel size
@@ -215,7 +228,8 @@ function trowelCard(sh, area, question, facts) {
   else { table = { cols: ['Notched trowel', 'Quantity', 'Packs, rounded up', 'Working'], rows: rows.map((r) => [`${num(r.p.notch_mm)} mm`, `${num(r.kg)} ${r.p.unit}`, `${r.count} x ${num(r.p.amount)} ${r.p.unit} bag`, r.working]) }; lines.push({ label: 'Which trowel', text: 'You did not give a notched trowel size, so the result is shown for each published size. Tell me yours for one answer.' }); }
   lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
   return card({ type: 'calculation', title: `How much ${sh.n} for ${A} m2`, product: prod(sh), headline: GRID_HEAD, lines, table, facts: rl.facts, chip: chipOf(pick[0]), links: dsLink(sh), followups: rows.length === 1 ? [] : sizes.map(q),
-    calc: { derived: true, inputs: { area_m2: area, facts: rows.map((r) => r.f.id), packs: parsePacks(sh) }, outputs: rows.map((r) => ({ unit: r.p.unit, need_min: r.kg, need_max: r.kg, basis: 'pack_covers_area' })), plan: rows.map((r) => ({ size: r.p.amount, unit: r.p.unit, container: 'bags', count: r.count })) } });
+    calc: { derived: true, inputs: { area_m2: area, facts: rows.map((r) => r.f.id), packs: parsePacks(sh) }, outputs: rows.map((r) => ({ unit: r.p.unit, need_min: r.kg, need_max: r.kg, basis: 'pack_covers_area' })), plan: rows.map((r) => ({ size: r.p.amount, unit: r.p.unit, container: 'bags', count: r.count })) },
+    cart: rows.length === 1 ? cartOptions(sh, [{ size: rows[0].p.amount, unit: rows[0].p.unit, container: 'bags', count: rows[0].count }], `${num(rows[0].kg)} ${rows[0].p.unit}`, rows[0].f, { area_m2: area, notch_mm: rows[0].p.notch_mm }) : null });
 }
 export function calcCard(sh, area, question, thickness) {
   const facts = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []);
@@ -241,7 +255,8 @@ export function calcCard(sh, area, question, thickness) {
   }
   lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
   return card({ type: 'calculation', title: `How much ${sh.n} for ${num(area)} m2`, product: prod(sh), headline: 'Worked out from the published rate below. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.',
-    lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { area_m2: area, ...(thickness > 0 ? { thickness_mm: thickness } : {}), facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.need_min, need_max: x.q.need_max, basis: x.q.basis })), plan: planOut } });
+    lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { area_m2: area, ...(thickness > 0 ? { thickness_mm: thickness } : {}), facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.need_min, need_max: x.q.need_max, basis: x.q.basis })), plan: planOut },
+    cart: usable.length === 1 ? cartOptions(sh, planOut, `${num(usable[0].q.need_max)} ${usable[0].q.unit}`, usable[0].f, { area_m2: area, ...(thickness > 0 ? { thickness_mm: thickness } : {}) }) : null });
 }
 
 export function compareCard(a, b) {

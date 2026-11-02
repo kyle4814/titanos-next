@@ -47,7 +47,7 @@ export function card(o) {
   return {
     schema: CARD_SCHEMA, type: o.type, status: o.status || (facts.some((f) => f.status === 'PUBLISHED') ? 'PUBLISHED' : 'UNKNOWN'), title: o.title || '',
     product: o.product || null, headline: o.headline || '', lines: o.lines || [], facts, source: src, chip: o.chip || '', links: o.links || [], table: o.table || null,
-    calc: o.calc || null, followups: o.followups || [], handoff: o.handoff || null,
+    calc: o.calc || null, followups: o.followups || [], handoff: o.handoff || null, cart: o.cart || null,
   };
 }
 /** Structural check used by the tests and by the loader's self-test. Returns a list of problems (empty = valid). */

@@ -71,3 +71,10 @@ export function selectCells(cells, question) {
   if (joint != null) return { mode: 'tiles', cells: cells.filter((c) => c.joint === joint), tile, joint };
   return { mode: 'ask-tile', cells, tile, joint };
 }
+
+/** Does this product's consumption table give a quantity from the area alone plus one more thing the visitor can pick (tile and joint, or notched trowel)? Same tests as cards.js gridCard / trowelCard. */
+export function tableAsk(facts) {
+  if (gridCells(facts).length) return 'tile size and joint width';
+  const cs = (facts || []).filter((f) => f.calc && f.parsed && f.parsed.model === 'pack_covers_area' && f.parsed.condition_kind === 'notched trowel size' && f.parsed.basis_stated && f.parsed.area_min > 0 && f.parsed.notch_mm > 0);
+  return cs.length >= 2 ? 'notched trowel size' : '';
+}
