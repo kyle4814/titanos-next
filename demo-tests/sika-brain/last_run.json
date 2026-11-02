@@ -314,10 +314,9 @@
    "kind": "describe",
    "q": "I need high-performance, 2-component silicone structural glazing adhesive",
    "got": [
-    "advice:Construction adhesives whose published text documents a fit",
-    "product:sikabond-sprayfix"
+    "advice:Construction adhesives: no documented fit found"
    ],
-   "headline": "Products whose own published text documents a fit, in the order of the criterion"
+   "headline": "No product in this group states a fit for what you asked in its published text, "
   },
   {
    "kind": "describe",
@@ -652,5 +651,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-11-02T01:32:00.137Z"
+ "at": "2026-11-02T01:53:52.684Z"
 }

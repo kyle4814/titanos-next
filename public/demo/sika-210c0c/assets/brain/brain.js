@@ -207,7 +207,7 @@ export function createBrain({ load, config, loadRules } = {}) {
       const mk = (sentence, url, page, dt, dv) => ({ source_url: url, page: page == null ? null : page, sentence, status: 'PUBLISHED', doc_type: dt || 'WEB', doc_version: dv || '' });
       c.facts = it.facts ? it.facts.map((f) => mk(f.sentence, f.source_url, f.page, f.doc_type, f.doc_version)) : it.sentences.map((x) => mk(x, it.e.u));
       if (it.th) c.facts.push(mk(it.th.t, it.e.u));
-      c.source = c.facts[0]; c.headline = ''; c.lines = it.weak ? [{ label: 'Partly relevant', text: 'Only part of your question is covered by this published text.' }] : [];
+      if (it.noPick) c.noPick = true; c.source = c.facts[0]; c.headline = ''; c.lines = it.weak ? [{ label: 'Partly relevant', text: 'Only part of your question is covered by this published text.' }] : [];
       c.chip = c.facts[0].doc_type === 'PDS' ? CHIPS.DATASHEET : CHIPS.PAGE;
       c.followups = [`Data sheet for ${it.e.n}`, `Coverage of ${it.e.n}`]; cards.push(c);
     }

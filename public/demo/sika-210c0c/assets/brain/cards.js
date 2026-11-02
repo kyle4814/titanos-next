@@ -110,7 +110,13 @@ export function compatCard(sh, verdict, rule, question, conds, uncovered) {
 // ---- calculation: only from a calc_ready fact; quantity and packs, never prices; waste only if the visitor gives it (never taken from Sika)
 export function parsePacks(sh) {
   const out = [];
-  for (const f of sh.pk || []) for (const s of (f.parsed && f.parsed.sizes) || []) out.push({ amount: s.amount, unit: s.unit, container: s.container || '' });
+  for (const f of sh.pk || []) {
+    // a qualifier in the pack text ("4 Litre Pail - Bright white") belongs to that size only; "all colours" / "all" is no qualifier
+    const segs = []; const rx = /(\d+(?:\.\d+)?)\s*(?:litres?|liters?|l|kg|g)\b/gi; const t = String(f.text || ''); let m, last = null;
+    while ((m = rx.exec(t))) { if (last) last.end = m.index; last = { amount: Number(m[1]), start: m.index + m[0].length, end: t.length }; segs.push(last); }
+    const qualOf = (amount) => { const g = segs.find((x) => x.amount === Number(amount)); if (!g) return ''; const q = t.slice(g.start, g.end).match(/^[^\-\u2013\u2014:(]*?(?:\s[-\u2013\u2014]\s*|:\s*|\(\s*)([^)]*?)\s*\)?\s*$/); const v = q ? q[1].trim() : ''; return /^(all|any)\b/i.test(v) ? '' : v; };
+    for (const s of (f.parsed && f.parsed.sizes) || []) out.push({ amount: s.amount, unit: s.unit, container: s.container || '', qual: qualOf(s.amount) });
+  }
   const seen = new Set(); return out.filter((p) => { const k = p.amount + p.unit; if (seen.has(k)) return false; seen.add(k); return true; }).sort((a, b) => a.amount - b.amount);
 }
 export function computeQuantity(f, area, thickness) {
@@ -162,7 +168,7 @@ function gridCard(sh, area, question, facts) {
   const published = tileRows(cells).slice(0, 8), widths = jointCols(cells);
   if (sel.mode === 'ask-tile') return chooseCard(`How much ${sh.n}?`, 'The published coverage depends on your tile size and joint width. What is your tile size (mm)?', tileRows(sel.cells).slice(0, 8).map((t) => q(t, sel.joint)));
   if (sel.mode === 'bad-tile') return chooseCard(`How much ${sh.n}?`, 'That tile size is not in the published table, and I will not guess a figure for it. These are the published sizes. Pick the nearest.', published.map((t) => q(t, sel.joint)));
-  if (sel.mode === 'bad-joint') return chooseCard(`How much ${sh.n}?`, 'That joint width is not in the published table, and I will not guess a figure for it. These are the published joint widths. Pick one.', widths.map((j) => q(sel.tile ? sel.tile.slice(0, 2).join('x') : tileRows(cells)[0], j)));
+  if (sel.mode === 'bad-joint') { const own = jointCols(sel.cells); return chooseCard(`How much ${sh.n}?`, sel.own ? 'That joint width is not in the published table for that tile size, and I will not guess a figure for it. These are the joint widths published for it. Pick one.' : 'That joint width is not in the published table, and I will not guess a figure for it. These are the published joint widths. Pick one.', own.map((j) => q(sel.tile ? sel.tile.slice(0, 2).join('x') : tileRows(cells)[0], j))); }
   const packs = parsePacks(sh); const pkFact = (sh.pk || [])[0];
   const word = (n) => { const m = packs.find((x) => x.container && x.unit === n.unit && x.amount === n.basisSize); return m ? m.container.replace(/s$/, '') : 'pack'; };
   const rows = sel.cells.map((c) => ({ c, n: cellNeed(c, area, null) })).filter((x) => x.n);

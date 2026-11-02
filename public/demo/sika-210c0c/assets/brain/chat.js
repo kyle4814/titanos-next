@@ -204,7 +204,11 @@ export function followUp(n0, convo) {
 }
 
 // ---- the recommendation lead ("My pick ...") ------------------------------------------------------------------------------------------------------------------------
-export const PICK_RX = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with)\b/;
+const PICK_BASE = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with)\b/;
+// "what water ratio do I use", "what thickness should we use": a property or how-to ask, not a product pick, unless the asker also says best / recommend / which product
+const HOWTO_RX = /\b(ratio|ratios|thickness|temperature|times?|how (much|many|long|thick|deep)|mix(ing)? (ratio|time|amount)|water (ratio|amount|content)|coverage|amount|quantity|dosage|dose|depth|pot life|open time|primer for)\b/;
+const PICK_EXPLICIT = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one|product|products)|top pick|go with|what (is|s) good|whats good|good for)\b/;
+export const PICK_RX = { test: (n) => PICK_BASE.test(n) && !(HOWTO_RX.test(n) && !PICK_EXPLICIT.test(n)) };
 const CHECK = 'I can only read what Sika has published, so Sika Technical Services should confirm the fit for your site before you buy.';
 const docWord = (f) => (f && f.doc_type === 'PDS' ? 'data sheet' : 'product page');
 /** Turn an advisor answer (summary card + product cards, ordered by the published criterion) into: one clear pick with its quoted sentence, up to two alternatives, one honesty line.
@@ -213,6 +217,7 @@ export function withPick(res, q) {
   const cs = res.cards || []; const sum = cs[0];
   if (res.stage !== 'session' && cs.length && ['which', 'tree'].includes(res.intent) && cs[0].type === 'product' && cs[0].product && cs[0].source && cs[0].source.sentence) return productPick(res, cs);
   if (res.stage === 'session' || cs.some((c) => (c.lines || []).some((l) => l.label === 'My pick')) || !sum || sum.type !== 'advice' || sum.status !== 'PUBLISHED' || /ordered by/i.test(sum.title) || cs.length < 2 || cs[1].type !== 'product' || !cs[1].product) return res;
+  if (cs[1].noPick) return res; // the only published sentence is a warning, not a use: keep the plain list
   const top = cs[1]; const f = (top.facts && top.facts[0]) || top.source; if (!f || !f.sentence) return res;
   const alts = cs.slice(2).filter((c) => c.type === 'product' && c.product);
   const rk = sum.rank; const tie = !!(rk && rk.length >= 2 && rk[0] != null && rk[0] === rk[1] && alts.length > 0 && (sum.lines || []).some((l) => l.label === 'Assumption'));

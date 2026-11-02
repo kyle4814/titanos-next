@@ -27,7 +27,7 @@ export function rowStats(a) {
     for (const l of c.lines || []) {
       if (l.label === 'Table columns' || l.label === 'Table basis') continue;
       if (ws(l.text).split(' | ').length < 3) continue;
-      if (c.type !== 'rate' && c.type !== 'time') { other++; continue; } // other cards quote a whole flattened block (heading, header and rows in one paragraph), not one row
+      if (c.type !== 'rate' && c.type !== 'time' && !(c.type === 'calculation' && /^Published row/.test(l.label))) { other++; continue; } // grid and trowel calculation cards quote their table rows too // other cards quote a whole flattened block (heading, header and rows in one paragraph), not one row
       rows++; if (hasCols) headed++; else if (admits) admitted++; else { headerless++; bad.push({ card: c.type, label: l.label, text: l.text }); }
     }
   }

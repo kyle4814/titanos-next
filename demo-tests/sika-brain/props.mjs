@@ -89,6 +89,28 @@ export function checkAnswer(question, ans) {
         for (const sz of packsOf(g.fact.split(':')[0])) { allowed.add(String(Number(sz.amount))); if (sz.unit === unit) allowed.add(String(Math.max(1, Math.ceil(need / sz.amount - 1e-9)))); }
       }
       for (const l of c.lines || []) if (l.fact) for (const n of numbersIn(l.text)) allowed.add(n);
+      // strict, per line: the pack counts and the rounded values are checked on their OWN line against the value recomputed for THAT cell (a number that is merely allowed elsewhere on the card does not pass)
+      const exp = c.calc.inputs.grid.map((g) => { const lf = laneFacts().get(g.fact); const pp = lf && lf.parsed; if (!pp) return null; let need, unit, work;
+        if (pp.model === 'grout_area_per_pack') { const ex = area / pp.area_m2; need = ex * pp.pack.amount; unit = pp.pack.unit; work = { ex: r2(ex), up: String(Math.ceil(ex - 1e-9)), per: [r2(pp.area_m2), r2(pp.pack.amount)] }; }
+        else if (pp.model === 'grout_kg_per_m2') { need = area * pp.kg_per_m2; unit = 'kg'; work = { total: r2(need), rate: r2(pp.kg_per_m2) }; } else return null;
+        const packs = packsOf(g.fact.split(':')[0]).filter((x) => x.unit === unit).map((x) => ({ size: r2(x.amount), count: String(Math.max(1, Math.ceil(need / x.amount - 1e-9))) }));
+        return { need: r2(need), unit, work, packs }; });
+      const checkPacks = (txt, e, where) => { for (const m of String(txt).matchAll(/(\d+) x (\d+(?:\.\d+)?) (L|kg)\b/g)) { const pk = e.packs.find((x) => x.size === m[2]); if (!pk || pk.count !== m[1] || m[3] !== e.unit) bad.push(['P1-grid-pack', `${where}: "${m[0]}" but the recomputed pack count is ${pk ? pk.count + ' x ' + pk.size : 'no such published size'}`]); } };
+      const checkWork = (txt, e, where) => { const w = e.work; const t = String(txt); if (w.ex !== undefined) { const m = t.match(/= (\d+(?:\.\d+)?), rounded up to (\d+)/); const pm = t.match(/\/ (\d+(?:\.\d+)?) m2 per (\d+(?:\.\d+)?) /); if (!m || m[1] !== w.ex || m[2] !== w.up || !pm || pm[1] !== w.per[0] || pm[2] !== w.per[1]) bad.push(['P1-grid-work', `${where}: "${t}" but the recomputed working is ${w.ex}, rounded up to ${w.up}`]); } else { const m = t.match(/x (\d+(?:\.\d+)?) kg per m2 = (\d+(?:\.\d+)?) kg/); if (!m || m[1] !== w.rate || m[2] !== w.total) bad.push(['P1-grid-work', `${where}: "${t}" but the recomputed total is ${w.total} kg`]); } };
+      const tbl = c.table; const ci = (name) => (tbl ? tbl.cols.indexOf(name) : -1);
+      if (tbl && tbl.rows.length === exp.length) tbl.rows.forEach((r, i) => { const e = exp[i]; if (!e) return; if (ci('Packs, rounded up') >= 0) checkPacks(r[ci('Packs, rounded up')], e, 'table row ' + (i + 1)); if (ci('Working') >= 0) checkWork(r[ci('Working')], e, 'table row ' + (i + 1)); if (ci('Quantity') >= 0 && r[ci('Quantity')].split(' ')[0] !== e.need) bad.push(['P1-grid-qty', `table row ${i + 1}: quantity ${r[ci('Quantity')]} but recomputed ${e.need} ${e.unit}`]); });
+      else if (tbl) bad.push(['P1-grid', 'table rows do not match the cells used']);
+      if (!tbl && exp.length === 1 && exp[0]) for (const l of c.lines || []) { if (l.label === 'Packs, rounded up') checkPacks(l.text, exp[0], 'Packs line'); if (l.label === 'Working') checkWork(l.text, exp[0], 'Working line'); }
+      if (!tbl && exp.length === 1 && exp[0] && !(c.lines || []).some((l) => l.label === 'Packs, rounded up' && /\d+ x /.test(l.text)) && !(c.lines || []).some((l) => /different unit/.test(l.text))) bad.push(['P1-grid', 'no pack line to check']);
+    }
+    if (c.calc && c.calc.inputs.facts && c.calc.inputs.area_m2 !== undefined && c.type === 'calculation') { // notched trowel table (per bag): the working and the bag count are checked on their own line or table row
+      const area = c.calc.inputs.area_m2; const tf = c.calc.inputs.facts.map((id) => laneFacts().get(id)).filter((f) => f && f.parsed && f.parsed.model === 'pack_covers_area' && f.parsed.condition_kind === 'notched trowel size');
+      if (tf.length && tf.length === c.calc.inputs.facts.length) {
+        const ex = tf.map((f) => { const e = area / f.parsed.area_max; return { work: `${r2(area)} m2 / ${r2(f.parsed.area_max)} m2 per ${r2(f.parsed.amount)} ${f.parsed.unit} bag = ${r2(e)}, rounded up to ${Math.ceil(e - 1e-9)}`, pack: `${Math.ceil(e - 1e-9)} x ${r2(f.parsed.amount)} ${f.parsed.unit} bag` }; });
+        if (c.table && c.table.rows.length === ex.length) { const iw = c.table.cols.indexOf('Working'), ip = c.table.cols.indexOf('Packs, rounded up'); c.table.rows.forEach((r, i) => { if (iw >= 0 && r[iw] !== ex[i].work) bad.push(['P1-trowel', `row ${i + 1} working "${r[iw]}" but recomputed "${ex[i].work}"`]); if (ip >= 0 && r[ip] !== ex[i].pack) bad.push(['P1-trowel', `row ${i + 1} packs "${r[ip]}" but recomputed "${ex[i].pack}"`]); }); }
+        else if (!c.table && ex.length === 1) for (const l of c.lines || []) { if (l.label === 'Working' && l.text !== ex[0].work) bad.push(['P1-trowel', `working "${l.text}" but recomputed "${ex[0].work}"`]); if (l.label === 'Packs, rounded up' && l.text !== ex[0].pack) bad.push(['P1-trowel', `packs "${l.text}" but recomputed "${ex[0].pack}"`]); }
+        else bad.push(['P1-trowel', 'table rows do not match the facts used']);
+      }
     }
     if (c.type === 'plan') { const pc = planCheck(c, question); for (const n of pc.allowed) allowed.add(n); for (const b of pc.bad) bad.push(b); } // lane D
     for (const n of numbersIn(text)) if (!allowed.has(n)) bad.push(['P1', `${n} in "${text.replace(/\s+/g, ' ').slice(0, 120)}"`]);

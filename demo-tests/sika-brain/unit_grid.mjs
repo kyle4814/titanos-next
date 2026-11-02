@@ -51,4 +51,18 @@ r = await ask('How much SikaTile-405 Lite for 20 m2'); t('trowel table, no trowe
 const cells = (id) => gridCells(rd(`data/brain/p/${id}.json`).r.facts.consumption);
 t('Easy Grout has 9 grid cells', cells('davco-easy-grout').length === 9);
 t('cellNeed refuses an untrusted kg cell', cellNeed(gridCells(rd('data/brain/p/davco-superfine-whitegrout.json').r.facts.consumption).find((c) => c.tile === '10x50x6mm'), 20) === null);
+
+// ---- adversarial review findings (2026-11-02), each fails on 22036a3ee
+{ const Q = 'How much Davco Easy Grout for 20 m2, 300x100 tiles, 3mm joint'; const { x, c } = await ask(Q);
+  t('F1 a pack size whose pack text carries a colour is labelled with it (4 L pail is Bright white only)', /2 x 4 L pail \(Bright white only\)/.test(x) && /3 x 2 L pail(?! \()/.test(x), x);
+  const hits = [['3 x 2 L', '2 x 2 L', 'Packs, rounded up'], ['rounded up to 3', 'rounded up to 4', 'Working'], ['3 x 2 L', '7 x 2 L', 'Packs, rounded up'], ['/ 7 m2', '/ 14 m2', 'Working']];
+  for (const [from, to, lab] of hits) { const a = await b.ask(Q); const l = a.cards[0].lines.find((y) => y.label === lab); l.text = l.text.replace(from, to); t(`F7 mutation "${from}" -> "${to}" on the ${lab} line is caught by the property test`, checkAnswer(Q, a).some((y) => /^P1/.test(y[0])), l.text); }
+  const a2 = await b.ask('How much Davco Easy Grout for 20 m2, 300x100 tiles'); const tb = a2.cards[0].table; const ip = tb.cols.indexOf('Packs, rounded up'); tb.rows[0][ip] = tb.rows[0][ip].replace(/^\d+/, '9'); t('F7 mutation in a result table pack count is caught', checkAnswer('How much Davco Easy Grout for 20 m2, 300x100 tiles', a2).some((y) => /^P1/.test(y[0])));
+  const a3 = await b.ask('How much Davco Easy Grout for 20 m2, 300x100 tiles'); t('F7 the unmutated result table passes the property test', checkAnswer('How much Davco Easy Grout for 20 m2, 300x100 tiles', a3).length === 0, JSON.stringify(checkAnswer('x', a3)));
+}
+{ const Q = 'How much Davco Sanitized Colorgrout for 20 m2, 50x50 tiles, 6mm joint'; const { x, c } = await ask(Q);
+  t('F6 a joint the tile row does not populate asks the joint question with that row\'s own widths, not a data-check refusal', c.type === 'choose' && !REFUSAL.test(x) && !/no column headings/.test(x) && (c.followups || []).length === 2 && (c.followups || []).every((f) => /1\.5 mm|3 mm/.test(f)), x + JSON.stringify(c.followups));
+  const r2 = await ask('How much SikaCeram-690 Elite for 20 m2, 20x20 mosaic, 10mm joint'); t('F6 SikaCeram-690 Elite 20x20 10mm: asks the joint question, no data-check refusal', r2.c.type === 'choose' && !REFUSAL.test(r2.x) && !/no column headings/.test(r2.x), r2.x);
+  const r3 = await ask('How much Davco Sanitized Colorgrout for 20 m2, 100x100 tiles, 6mm joint'); t('F6 a populated joint still computes', r3.c.type === 'calculation' && /32 kg/.test(r3.x), r3.x);
+}
 console.log(`unit_grid: ${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);

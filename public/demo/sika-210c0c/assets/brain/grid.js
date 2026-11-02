@@ -52,9 +52,9 @@ export function cellNeed(cell, area, containerWord) {
 /** Whole packs of every published pack size in the same unit (smallest first), for a needed amount. */
 export function packPlan(need, packs) {
   const same = (packs || []).filter((x) => x.unit === need.unit);
-  return same.map((x) => ({ size: x.amount, unit: x.unit, container: x.container || '', count: Math.max(1, Math.ceil(need.amount / x.amount - 1e-9)) }));
+  return same.map((x) => ({ size: x.amount, unit: x.unit, container: x.container || '', qual: x.qual || '', count: Math.max(1, Math.ceil(need.amount / x.amount - 1e-9)) }));
 }
-export const planText = (plan, limit = 4) => plan.slice(0, limit).map((x) => `${x.count} x ${fmt(x.size)} ${x.unit}${x.container ? ' ' + x.container.replace(/s$/, '') : ''}`).join(' or ');
+export const planText = (plan, limit = 4) => plan.slice(0, limit).map((x) => `${x.count} x ${fmt(x.size)} ${x.unit}${x.container ? ' ' + x.container.replace(/s$/, '') : ''}${x.qual ? ` (${x.qual} only)` : ''}`).join(' or ');
 
 /** Pick the cells for a question. Returns { mode, cells, tile, joint } where mode is:
  *  'exact' (one cell) | 'joints' (tile known, joint not given: one cell per joint) | 'tiles' (joint known, tile not given)
@@ -62,10 +62,10 @@ export const planText = (plan, limit = 4) => plan.slice(0, limit).map((x) => `${
 export function selectCells(cells, question) {
   if (!cells.length) return null;
   const { tile, joint } = parseTileJoint(question);
-  const cols = jointCols(cells);
   let tileCells = cells;
   if (tile) { tileCells = cells.filter((c) => sameTile(tile, c.dims)); if (!tileCells.length) return { mode: 'bad-tile', cells, tile, joint }; if (new Set(tileCells.map((c) => c.tile)).size > 1) return { mode: 'ask-tile', cells: tileCells, tile, joint }; }
-  if (joint != null && !cols.includes(joint)) return { mode: 'bad-joint', cells, tile, joint };
+  // the joint is checked against the widths populated for THIS tile row (a ragged row has fewer cells than the header), not against every column of the table
+  if (joint != null && !jointCols(tileCells).includes(joint)) return { mode: 'bad-joint', cells: tileCells, tile, joint, own: !!tile };
   if (tile && joint != null) return { mode: 'exact', cells: tileCells.filter((c) => c.joint === joint), tile, joint };
   if (tile) return { mode: 'joints', cells: tileCells, tile, joint };
   if (joint != null) return { mode: 'tiles', cells: cells.filter((c) => c.joint === joint), tile, joint };

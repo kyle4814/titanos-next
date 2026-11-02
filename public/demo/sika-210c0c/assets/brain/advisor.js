@@ -70,6 +70,17 @@ export const KINDS = [
   { id: 'waterproofing', label: 'waterproofing membranes', q: re('\\b(waterproof\\w*|membrane|tanking|damp ?proof|water proof|water tank|leak\\w*|stop a water leak)\\b'), cats: [WP, T], sub: re('liquid-applied|spray|basement|injections|bridge|mortars|66807|pvc-sheet|waterproofing') },
   { id: 'admixture', label: 'concrete admixtures', q: re('\\b(admixtures?|additive for concrete|add to concrete|concrete additive|what to add to concrete)\\b'), cats: [CO], sub: re('admixture|special|pre-cast|fibres|surface|shrinkage|pigment') },
 ];
+// a material or chemistry the visitor names; ev is how a product page says it (title, description or the Composition row)
+const MATERIALS = [
+  { label: 'epoxy', q: re('\\bepoxy\\b|\\bepoxies\\b'), ev: re('epoxy|epoxies') },
+  { label: 'polyurethane', q: re('\\bpolyurethane\\b|\\bpu\\b|\\bpur\\b'), ev: re('polyurethane|\\bpu\\b|\\bpur\\b') },
+  { label: 'silicone', q: re('\\bsilicone\\b'), ev: re('silicone') },
+  { label: 'cementitious', q: re('\\bcementitious\\b|\\bcement[- ]based\\b'), ev: re('cementitious|cement[- ]based|cement') },
+  { label: 'acrylic', q: re('\\bacrylic\\b'), ev: re('acrylic') },
+  { label: 'MS polymer', q: re('\\bms[- ]?polymer\\b|\\bsilyl\\b'), ev: re('ms[- ]?polymer|silyl|\\bsmp\\b|hybrid') },
+  { label: 'bitumen', q: re('\\bbitumen\\b|\\bbituminous\\b'), ev: re('bitumen') },
+  { label: 'polyurea', q: re('\\bpolyurea\\b'), ev: re('polyurea') },
+];
 // conditions: what the visitor says about the job, and the wording a product page would use to document a fit
 export const CONDS = [
   { id: 'class3', label: 'Class III membranes', q: re('class iii'), ev: re('class (iii|3)\\b') },
@@ -164,10 +175,14 @@ export function createAdvisor({ load, isWord }) {
   // the one published sentence that covers the most of the asker's conditions (the pick's quoted reason); a label-only product has none
   const PROC = /\b(shall|must|ensure|do not|don't|never|should|avoid|allow(?:ed)? to|wait|before application|prior to)\b/i;
   const nameRx = (e) => new RegExp(String(e.n).replace(/[^a-z0-9 ]/gi, ' ').trim().split(/\s+/).filter(Boolean).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\W+'), 'ig');
+  // a pick reason states a use or suitability; a warning, limitation or failure sentence is never the reason a product is picked
+  const USE_RX = /\b(suitable|suited|used?|uses|designed|ideal|intended|applications?|applied|recommended|provides?|offers?|ensures?|allows?|enables?|bonds?|seals?|fills?|repairs?|protects?|resists?|waterproofs?|levels?|adheres?|for (filling|sealing|bonding|fixing|repair\w*|coating|levelling|waterproofing|use|areas?|floors?|walls?|joints?|tiles?))\b/i;
+  const WARN_RX = /\b(may (present|cause|crack|fail|result|lead|craze|peel|discolou?r|affect)|can cause|will cause|not (suitable|recommended|be used|intended|designed)|unsuitable|do not use|must not|should not|avoid|failures?|fails?|crazing|a?lligatoring|aligatoring|limitations?|not for use|cannot|restrictions?|warning|caution|danger)\b/i;
+  const isUseSentence = (g) => USE_RX.test(g) && !WARN_RX.test(g);
   function oneSentence(e, conds, kws) {
     let best = null; const nrx = nameRx(e);
     for (const x of e.ev) for (const g of segsOf(x.t)) {
-      if (!isSentence(g)) continue; const bare = g.replace(nrx, ' '); let n = 0; for (const c of conds) if (c.ev.test(bare)) n++; else if (c.ev.test(g)) n += 0.4; // a match only through the product's own name counts for less
+      if (!isSentence(g) || !isUseSentence(g)) continue; const bare = g.replace(nrx, ' '); let n = 0; for (const c of conds) if (c.ev.test(bare)) n++; else if (c.ev.test(g)) n += 0.4; // a match only through the product's own name counts for less
       let k = 0; if (kws && kws.length) { const st = new Set(tokens(bare)); for (const t of kws) if (st.has(t)) k++; }
       if (!n) continue;
       const sc = n * 2 + k - (PROC.test(g) ? 1.5 : 0); const o = ORDER[x.k] ?? 3;
@@ -191,6 +206,19 @@ export function createAdvisor({ load, isWord }) {
     if (brand) { let b = list.filter((e) => brand[1].test(e.id));
       if (!b.length) { const m = kind.q.exec(n); const kw = m ? new RegExp((m[0].match(/[a-z]{5,}/) || ['xxxxx'])[0].slice(0, 6), 'i') : null; const extra = await entries({ cats: [T, FL, SA, WP, CR], sub: re('.') }); b = extra.filter((e) => brand[1].test(e.id) && kw && (kw.test(e.n) || kw.test(e.tg) || kw.test(e.sub))); }
       if (b.length) list = b; }
+    // a material the visitor names (epoxy, polyurethane...) is a hard requirement: only products whose title, description or composition say it stay
+    const mats = MATERIALS.filter((m) => m.q.test(n));
+    if (mats.length) {
+      const say = (e, extra) => { const t = [e.n, e.id, e.tg, ...e.ev.filter((v) => v.k === 'summary').map((v) => v.t), extra || ''].join(' '); return mats.every((m) => m.ev.test(t)); };
+      const quick = list.filter((e) => say(e)); const rest = list.filter((e) => !quick.includes(e)); const slow = [];
+      for (const e of rest) { let pj = null; try { pj = load.product ? await load.product(e.id) : null; } catch (_) { pj = null; } const comp = pj && pj.d && pj.d.sec ? pj.d.sec.filter((x) => /composition|chemical base/i.test(x.l || '')).map((x) => x.t).join(' ') : ''; if (comp && say(e, comp)) slow.push(e); }
+      list = list.filter((e) => quick.includes(e) || slow.includes(e));
+      if (!list.length) {
+        const c = card({ type: 'advice', status: 'UNKNOWN', title: `${cap(kind.label)}: no documented fit found`, headline: NOFIT, facts: [], source: null, chip: CHIPS.UNKNOWN, links: [], table: null,
+          handoff: { question: q, product: '', reason: `No product in this group has published text that says ${mats.map((m) => m.label).join(' and ')}. Please ask Technical Services.`, missing: mats.map((m) => m.label) }, followups: [] });
+        return { summary: c, items: [] };
+      }
+    }
     const conds = CONDS.filter((c) => c.q.test(n) && !(c.id === 'wet' && kind.id === 'tile_waterproofing') && !(c.id === 'concrete' && /concrete|screed|grout|anchor|repair/.test(kind.id) && false));
     const condsNT = conds.filter((c) => !['concrete', 'internal'].includes(c.id));
     const isList = LISTQ.test(n0) && !condsNT.length; if (isList) conds.length = 0;
@@ -236,8 +264,10 @@ export function createAdvisor({ load, isWord }) {
     const top = fit.slice(0, (opts && opts.limit) || 3); const critNames = conds.map((c) => c.label).join(', ');
     const items = [];
     for (const s of top) {
-      const first = s.got.find((g) => !g.ev.label) || s.got[0]; const lead = s.one && s.one.sentence ? s.one.sentence : first.ev.sentence; const ex = s.got.map((g) => g.ev.sentence).filter((t) => t !== lead && t !== first.ev.sentence).slice(0, 1);
-      items.push({ e: s.e, sentences: [lead, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong, score: s.score, label: !s.one || !isSentence(lead) });
+      const first = s.got.find((g) => !g.ev.label) || s.got[0]; let lead = s.one && s.one.sentence ? s.one.sentence : first.ev.sentence;
+      // a warning or limitation sentence is never the reason for a pick: take another published sentence, or mark the item so chat.js keeps the plain list
+      let noPick = false; if (!(s.one && s.one.sentence) && WARN_RX.test(lead)) { const alt = s.got.map((g) => g.ev.sentence).find((t) => !WARN_RX.test(t)); if (alt) lead = alt; else noPick = true; } const ex = s.got.map((g) => g.ev.sentence).filter((t) => t !== lead && t !== first.ev.sentence).slice(0, 1);
+      items.push({ e: s.e, sentences: [lead, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong, noPick, score: s.score, label: !s.one || !isSentence(lead) });
     }
     const lines = [{ label: 'Criterion used', text: bigJob ? `Published text that mentions ${critNames}, then the thickest layer the data sheet gives.` : `How many of these conditions the published text mentions: ${critNames}.` }];
     const notCovered = top.filter((s) => s.miss.length).map((s) => `${s.e.n}: ${s.miss.map((m) => m.label).join(', ')}`);
