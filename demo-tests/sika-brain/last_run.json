@@ -179,9 +179,9 @@
    "q": "I need flexible adhesive and sealant",
    "got": [
     "advice:Construction adhesives whose published text documents a fit",
+    "product:sikaflex-11-fc-purform",
     "product:abelflex",
-    "product:abelflex-handy-pack",
-    "product:sikaflex-11-fc-purform"
+    "product:abelflex-handy-pack"
    ],
    "headline": "Products whose own published text documents a fit, in the order of the criterion"
   },
@@ -652,5 +652,5 @@
   }
  ],
  "propBad": [],
- "at": "2026-11-01T01:37:50.601Z"
+ "at": "2026-11-02T01:23:42.408Z"
 }

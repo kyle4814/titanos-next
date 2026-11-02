@@ -59,6 +59,17 @@ export function createKnow({ load }) {
     const hint = hintOf(n);
     const has = (rx) => rx.test(n);
     if (/\b(is|are|was)\b.*\b(davco|lanko|schonox|sarnafil|sikatile)\b.*\b(sika|company|brand|owned|part of|family)\b/.test(n)) { const p = pageBy(/construction\/davco\.html/); const ls = linesOf(p, [/a Sika brand/i, /part of the Sika family/i]); if (p && ls.length) return infoCard({ title: 'Davco and Sika', headline: "Sika Australia's own page about Davco.", rows: ls.slice(0, 2).map((l, i) => ({ label: i === 0 ? 'Published' : '', fact: pageFact(p, l, hint) })), links: [linkOf(p.t, p.u)] }); }
+    // a removal or cut-out ask for a windscreen is answered by Sika's two published removal procedures, never by a cleaner or a sealant that shares the word
+    if (has(/\b(windscreens?|windshields?|front glass|rear glass|backlights?|quarter lights?)\b/) && has(/\b(remov\w*|cut(ting)? (it |them )?out|cut ?outs?|smart ?cut|take (it |them )?out|taking out|pull(ing)? out|rip(ping)? out)\b/) && !has(/\b(remover|contamination|label|residues?|cleaning)\b/)) {
+      const ps = pageBy(/sika-smartcut-cut-out-process/); const pr = pageBy(/complete-removal-procedure/);
+      const rows = []; if (ps && ps.l[1]) rows.push({ label: 'SmartCut tool', fact: pageFact(ps, ps.l[1], hint) }); if (ps && ps.l[2]) rows.push({ label: 'First step', fact: pageFact(ps, ps.l[2], hint) }); if (pr && pr.l[1]) rows.push({ label: 'Complete removal method', fact: pageFact(pr, pr.l[1], hint) });
+      if (rows.length) return infoCard({ title: 'Removing a windscreen', headline: 'I do not hold a Sika product that removes a windscreen, so I will not offer one. Sika Australia publishes two removal procedures instead: the SmartCut cut-out tool and the complete removal method.', rows, links: [ps && linkOf(ps.t, ps.u), pr && linkOf(pr.t, pr.u)].filter(Boolean) });
+    }
+    // honeycomb PANELS (lightweight sandwich panels) are not honeycombed concrete: the panel page names the adhesives
+    if (has(/\bhoneycomb(ed)? (sandwich )?(panels?|boards?|cores?|sandwich)\b/) && !has(/\b(concrete|mortar|defects?|pores?|repair\w*|patch\w*)\b/)) {
+      const p = pageBy(/building-elements\/honeycomb-panels/);
+      if (p && p.l[9]) return infoCard({ title: 'Honeycomb panels', headline: "Sika Australia's own page on bonding honeycomb sandwich panels.", rows: [{ label: 'Published', fact: pageFact(p, p.l[9], hint) }, { label: 'Two component adhesive', fact: pageFact(p, p.l[25], hint) }, { label: 'Hot melt adhesive', fact: pageFact(p, p.l[27], hint) }], links: [linkOf(p.t, p.u)] });
+    }
     if (has(/\b(warrant(y|ies)|guarantee)\b/)) {
       if (/\b(how long|how many years|years|duration|period|expire|expiry|last)\b/.test(n)) return unknownInfo(q, 'The published warranty portal text does not give a warranty period, so I will not guess one. Please ask Sika Australia Technical Services.', [linkOf('Warranty portal', LINKS.warranty)]);
       const p = pageBy(/warranty-portal/); if (p) { const ls = p.l.slice(0, 12).filter((l) => !/^(Document|Step \d|Register to access)/i.test(l)); if (ls.length) return infoCard({ title: 'Sika Australia warranty portal', headline: "This is what Sika Australia's own warranty page says.", rows: ls.map((l, i) => ({ label: i === 0 ? 'Published' : '', fact: pageFact(p, l, hint) })), links: [linkOf('Open the warranty portal', LINKS.warranty)] }); }

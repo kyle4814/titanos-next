@@ -112,6 +112,10 @@ export const CONDS = [
 ];
 const LISTQ = /\b(what|which)\b.*\b(do|does|can)\b.*\b(make|sell|have|offer|stock|supply|produce|provide)\b|\b(list|range of|all the|all|every)\b|\bwhat .* (are there|is there)\b|\bwhat .* (does|do) (sika|davco|you)\b/;
 const KIND_WORDS = new Set(['adhesive', 'glue', 'sealant', 'screed', 'grout', 'waterproof', 'membrane', 'mortar', 'tile', 'product', 'sika', 'make', 'need', 'use', 'best', 'good', 'floor', 'concrete', 'primer', 'additive', 'coating', 'resin', 'epoxy', 'admixture'].map((w) => stem(w)));
+// products whose primary use is a fitting or accessory: not the first answer to a general job unless the asker named that part
+const ACCESSORY = /\b(fire|d[eé]cor|profile|flashing|pipe|vent|outlet|corner|drain(?!age)|gully|tape|primer pad|collar)\b/i;
+// a product built for one particular place (pool, food plant, static control...) is not the first answer to a job that did not name that place
+const SPECIFIC = new Set(['pool', 'static', 'underwater', 'fire', 'pond', 'toys', 'heated', 'brick']);
 const SKIPNAME = /accessor|extender|spacer|clip|tool|holder|retainer|joist|shim|bearer|brace|wall ?joiner/i;
 
 export const EXTRA_WORDS = ['injection', 'waterproofing', 'levelling', 'adhesive', 'sealant', 'membrane', 'concrete', 'coverage', 'strength', 'temperature', 'thickness', 'humidity', 'automotive', 'packaging', 'specification', 'warranty', 'technical', 'stockist', 'distributor', 'pedestal', 'plasterboard', 'bathroom', 'kitchen', 'laundry', 'balcony', 'aggregate', 'flooring', 'porcelain', 'ceramic', 'existing', 'contact', 'conditions', 'company', 'repairs', 'cracks'];
@@ -142,11 +146,34 @@ export function createAdvisor({ load, isWord }) {
     return clampText(hit.replace(/^[•·-]\s*/, ''), null, 260);
   };
   const ORDER = { usage: 0, feature: 1, summary: 2 };
+  // a real sentence is six or more words and not a SHOUTED heading; "Kitchens & Bathrooms" and "Areas Suitable for ..." style labels are not
+  const wordCount = (t) => String(t).split(/\s+/).filter((w) => /[a-z0-9]/i.test(w)).length;
+  const isSentence = (t) => { const x = String(t).trim(); return wordCount(x) >= 6 && x === x.replace(/[:;,]$/, '') && x !== x.toUpperCase() && !/^(areas? suitable|suitable for|application|areas? of use|for )\b/i.test(x) && /[a-z]{3}/.test(x) && (/[.!?]$/.test(x) || /\b(is|are|can|be|was|used|designed|provides?|offers?|ensures?|allows?|recommended|applied|resists?|protects?|bonds?|seals?|repairs?|gives?|forms?|cures?|suited)\b/i.test(x)); };
+  const segsOf = (text) => String(text).split(/(?<=[.!?])\s+|\s+[•·▪]\s+|\s+\|\s+/).map((x) => x.trim().replace(/^[•·-]\s*/, '')).filter(Boolean);
   function evidence(e, cond) {
     const hits = e.ev.filter((x) => cond.ev.test(x.t)).sort((a, b) => (ORDER[a.k] ?? 3) - (ORDER[b.k] ?? 3));
     if (!hits.length) return null;
     const sh = cond.strong ? hits.filter((x) => cond.strong.test(x.t)) : hits; const use = sh.length ? sh : hits;
-    return { sentence: sentenceOf(use[0].t, sh.length && cond.strong ? cond.strong : cond.ev), n: hits.length, strong: !cond.strong || sh.length > 0 };
+    const rx = sh.length && cond.strong ? cond.strong : cond.ev;
+    // the best published segment for this condition: a real sentence beats a category label, whatever order the page lists them in
+    const segs = []; for (const h of use) for (const g of segsOf(h.t)) if (rx.test(g)) segs.push(g);
+    const real = segs.find((g) => isSentence(g));
+    const sentence = real ? clampText(real, null, 260) : sentenceOf(use[0].t, rx);
+    return { sentence, n: hits.length, strong: !cond.strong || sh.length > 0, label: !real };
+  }
+  // the one published sentence that covers the most of the asker's conditions (the pick's quoted reason); a label-only product has none
+  const PROC = /\b(shall|must|ensure|do not|don't|never|should|avoid|allow(?:ed)? to|wait|before application|prior to)\b/i;
+  const nameRx = (e) => new RegExp(String(e.n).replace(/[^a-z0-9 ]/gi, ' ').trim().split(/\s+/).filter(Boolean).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\W+'), 'ig');
+  function oneSentence(e, conds, kws) {
+    let best = null; const nrx = nameRx(e);
+    for (const x of e.ev) for (const g of segsOf(x.t)) {
+      if (!isSentence(g)) continue; const bare = g.replace(nrx, ' '); let n = 0; for (const c of conds) if (c.ev.test(bare)) n++; else if (c.ev.test(g)) n += 0.4; // a match only through the product's own name counts for less
+      let k = 0; if (kws && kws.length) { const st = new Set(tokens(bare)); for (const t of kws) if (st.has(t)) k++; }
+      if (!n) continue;
+      const sc = n * 2 + k - (PROC.test(g) ? 1.5 : 0); const o = ORDER[x.k] ?? 3;
+      if (!best || sc > best.sc || (sc === best.sc && o < best.o)) best = { sentence: clampText(g, null, 260), n: n + k, sc, o };
+    }
+    return best;
   }
   const pageFact = (e, sentence) => fact({ source_url: e.u, page: null, sentence, doc_type: 'WEB' });
   const handoffTo = (q) => ({ question: q, product: '', reason: 'The data sheets cannot see your site, substrate or conditions, so Technical Services should confirm the fit before you order.', missing: [] });
@@ -170,7 +197,7 @@ export function createAdvisor({ load, isWord }) {
     const kwTok = [...new Set(tokens(n).filter((t) => t.length > 2 && !GENERIC.has(t) && !KIND_WORDS.has(t) && !conds.some((c) => c.q.test(t))))];
     const df = new Map(); for (const e of list) { const seen = new Set(); for (const x of [e.n, e.tg, ...e.ev.map((v) => v.t)]) for (const t of tokens(x)) seen.add(t); for (const t of seen) df.set(t, (df.get(t) || 0) + 1); }
     const kw = (e) => { if (!kwTok.length) return 0; const seen = new Set(); for (const x of [e.n, e.tg, ...e.ev.map((v) => v.t)]) for (const t of tokens(x)) seen.add(t); let s = 0; for (const t of kwTok) if (seen.has(t)) s += Math.log(1 + list.length / (df.get(t) || list.length)); return s; };
-    const kwBest = (e) => { let best = null, bs = 0; for (const x of e.ev) { const st = new Set(tokens(x.t)); let c = 0; for (const t of kwTok) if (st.has(t)) c++; if (c > bs) { bs = c; best = x; } } return best; };
+    const kwBest = (e) => { let best = null, bs = 0; for (const x of e.ev) for (const g of segsOf(x.t)) { const st = new Set(tokens(g)); let c = 0; for (const t of kwTok) if (st.has(t)) c++; c += c && isSentence(g) ? 0.5 : 0; if (c > bs) { bs = c; best = { t: g }; } } return best; };
     const short = n.split(' ').length <= 8 && !/^(i need|i want|looking for|need|want)\b/.test(n);
     const links = []; const rows = []; const facts = []; let used = [];
     if (!isList && !conds.length && kwTok.length) {
@@ -191,12 +218,12 @@ export function createAdvisor({ load, isWord }) {
       return { summary: c, items: [] };
     }
     // score by documented conditions
-    const scored = list.map((e) => { const got = []; const miss = []; for (const c of conds) { const ev = evidence(e, c); if (ev) got.push({ c, ev }); else miss.push(c); } return { e, got, miss, score: got.reduce((s, g) => s + (g.ev.strong ? 1 : 0.5), 0) + got.filter((g) => g.c.primary && g.ev.strong).length * 0.5, hits: got.reduce((s, g) => s + g.ev.n, 0) }; });
+    const scored = list.map((e) => { const got = []; const miss = []; for (const c of conds) { const ev = evidence(e, c); if (ev) got.push({ c, ev }); else miss.push(c); } return { e, got, miss, score: got.reduce((s, g) => s + (g.ev.strong && !g.ev.label ? 1 : g.ev.strong && g.ev.label ? Math.min(0.9, 0.5 + 0.15 * g.ev.n) : 0.5), 0) + got.filter((g) => g.c.primary && g.ev.strong).length * 0.5 + (conds.some((c) => c.ev.test(e.n + ' ' + (e.tg || ''))) ? 0.25 : 0) - (CONDS.some((c) => SPECIFIC.has(c.id) && !conds.includes(c) && c.ev.test(e.n + ' ' + (e.tg || ''))) ? 0.5 : 0) - (ACCESSORY.test(e.n + ' ' + e.id) && !ACCESSORY.test(n) ? 0.75 : 0), hits: got.reduce((s, g) => s + g.ev.n, 0), real: got.filter((g) => !g.ev.label).length, one: oneSentence(e, conds, kwTok) }; });
     const needAll = conds.length <= 2 ? 1 : Math.ceil(conds.length / 2);
     let fit = scored.filter((s) => s.got.length >= needAll);
     const bigJob = conds.some((c) => c.id === 'large' || c.id === 'pump' || c.id === 'thick');
     if (kwTok.length && fit.some((f) => kw(f.e) > 0)) { const mx = Math.max(...fit.map((f) => kw(f.e))); fit = fit.filter((f) => kw(f.e) >= mx * 0.6); }
-    fit.sort((a, b) => b.score - a.score || (bigJob ? (b.e.th ? b.e.th.max : 0) - (a.e.th ? a.e.th.max : 0) : 0) || (kw(b.e) - kw(a.e)) || ((rel ? rel(b.e.id) : 0) - (rel ? rel(a.e.id) : 0)) || b.hits - a.hits || (a.e.n < b.e.n ? -1 : 1));
+    fit.sort((a, b) => b.score - a.score || (b.one ? b.one.sc : 0) - (a.one ? a.one.sc : 0) || b.hits - a.hits || (bigJob ? (b.e.th ? b.e.th.max : 0) - (a.e.th ? a.e.th.max : 0) : 0) || (kw(b.e) - kw(a.e)) || ((rel ? rel(b.e.id) : 0) - (rel ? rel(a.e.id) : 0)) || b.hits - a.hits || (a.e.n < b.e.n ? -1 : 1));
     const SOFT = new Set(['large', 'thick', 'fast', 'hot', 'cold', 'internal', 'external', 'concrete', 'strength']);
     let relaxed = [];
     if (!fit.length && conds.some((c) => SOFT.has(c.id)) && conds.some((c) => !SOFT.has(c.id))) { const hard = conds.filter((c) => !SOFT.has(c.id)); relaxed = conds.filter((c) => SOFT.has(c.id)); const sc2 = list.map((e) => { const got = []; const miss = []; for (const c of hard) { const ev = evidence(e, c); if (ev) got.push({ c, ev }); else miss.push(c); } return { e, got, miss: miss.concat(relaxed), score: got.length, hits: got.reduce((s, g) => s + g.ev.n, 0) }; }).filter((s) => s.got.length >= 1); sc2.sort((x, y) => y.score - x.score || ((rel ? rel(y.e.id) : 0) - (rel ? rel(x.e.id) : 0)) || (x.e.n < y.e.n ? -1 : 1)); if (sc2.length) { fit = sc2; conds.length = 0; conds.push(...hard); } }
@@ -209,8 +236,8 @@ export function createAdvisor({ load, isWord }) {
     const top = fit.slice(0, (opts && opts.limit) || 3); const critNames = conds.map((c) => c.label).join(', ');
     const items = [];
     for (const s of top) {
-      const first = s.got[0]; const ex = s.got.slice(1).map((g) => g.ev.sentence).filter((t) => t !== first.ev.sentence).slice(0, 1);
-      items.push({ e: s.e, sentences: [first.ev.sentence, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong, score: s.score });
+      const first = s.got.find((g) => !g.ev.label) || s.got[0]; const lead = s.one && s.one.sentence ? s.one.sentence : first.ev.sentence; const ex = s.got.map((g) => g.ev.sentence).filter((t) => t !== lead && t !== first.ev.sentence).slice(0, 1);
+      items.push({ e: s.e, sentences: [lead, ...ex], why: s.got.map((g) => g.c.label).join(', '), th: bigJob ? s.e.th : null, weak: !first.ev.strong, score: s.score, label: !s.one || !isSentence(lead) });
     }
     const lines = [{ label: 'Criterion used', text: bigJob ? `Published text that mentions ${critNames}, then the thickest layer the data sheet gives.` : `How many of these conditions the published text mentions: ${critNames}.` }];
     const notCovered = top.filter((s) => s.miss.length).map((s) => `${s.e.n}: ${s.miss.map((m) => m.label).join(', ')}`);

@@ -119,7 +119,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     const sk = socialKind(q);
     if (sk) return chatAnswer(socialCard(sk, q), 'social', h.convo || null);
     const fu = h.convo ? followUp(q, h.convo) : null;
-    if (fu) { rewritten = fu.ask; wantPick = wantPick || !!fu.wantPick; h.convo = null; }
+    if (fu) { rewritten = fu.ask; wantPick = true; h.convo = null; }
     else {
       const followShape = /^(and|also|what about|how about|but|or|now|then|same|ditto)\b/.test(n) || ENV.test(n) || ORD.test(n) || AREA_FU.test(n) || PACK.test(n) || BACK.test(n) || ASPECT.test(n);
       const pl = followShape ? null : placeOf(q);

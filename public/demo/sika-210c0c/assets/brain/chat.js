@@ -204,7 +204,7 @@ export function followUp(n0, convo) {
 }
 
 // ---- the recommendation lead ("My pick ...") ------------------------------------------------------------------------------------------------------------------------
-export const PICK_RX = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with)\b/;
+export const PICK_RX = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with)\b/;
 const CHECK = 'I can only read what Sika has published, so Sika Technical Services should confirm the fit for your site before you buy.';
 const docWord = (f) => (f && f.doc_type === 'PDS' ? 'data sheet' : 'product page');
 /** Turn an advisor answer (summary card + product cards, ordered by the published criterion) into: one clear pick with its quoted sentence, up to two alternatives, one honesty line.
