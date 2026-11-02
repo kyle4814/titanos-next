@@ -11,7 +11,7 @@ const STARTERS = [
   { label: 'Waterproof a bathroom', q: 'Waterproofing for a shower floor under tiles' },
   { label: 'Tile a floor', q: 'Tile adhesive for porcelain tiles on a concrete floor' },
   { label: 'Seal around a shower', q: 'Silicone sealant for a shower' },
-  { label: 'Fix a crack', q: 'I need something to fix a crack' },
+  { label: 'Fix a crack', q: 'Repair cracks in a concrete floor' },
 ];
 const JOB_LINE = 'Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.';
 const CHAT_CHIP = 'A chat reply, not a product claim';
@@ -34,11 +34,15 @@ const SOC = [
   ['yes', /^(?:(?:lol|lmao|haha+|hehe+|heh|ha) )?(?:lol|lmao|haha+|hehe+|heh|ha|yes|yep|yeah|yup|ya|yea|sure|alright|all right|ok|okay|k|kk|right|cool|fine|sounds good|go on|please|yes please|why not|of course|definitely|correct|true|mhm|mm|hmm|hm|um|uh|oh|ah|aha|good|go ahead|do it)(?: (?:please|then|mate|thanks))?$/, 4],
   ['no', /^(?:no|nope|nah|no thanks|no thank you|not really|not sure|dunno|i don t know|idk|maybe|nothing|never mind|nevermind|forget it|not yet|na)(?: (?:thanks|mate|really|right now))?$/, 5],
 ];
+const UNSURE_RX = /\b(?:no (?:clue|idea)|(?:i )?(?:have|got) no (?:clue|idea)|not (?:too |really |entirely |that |100 )?(?:sure|certain|clear|positive)|unsure|dunno|(?:don t|do not|dont|cant|can t|couldn t) (?:know|say|tell|decide|work it out)|hard to say|undecided|still deciding|no preference)\b/g;
+const UNSURE_FILL = new Set('i we me my a an the to be at this that it its is for what about of on in so just bit too quite really honestly sorry honest yet atm tbh stage point moment still totally entirely percent 100 mate there and but really actually well um hm yeah nah no'.split(' '));
 /** the kind of social turn a message is ('greet', 'how', 'thanks', 'bye', 'who', 'cando', 'help', 'frustrated', 'yes', 'no'), or '' */
 export function socialKind(n0) {
   const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); if (!n) return '';
   const words = n.split(' ').length;
   for (const [k, rx, max] of SOC) if (words <= max && rx.test(n)) return k;
+  // "I do not know" in any wording, with nothing else of substance in it: the same plain reply as a "not sure"
+  if (words <= 9 && UNSURE_RX.test(n) && n.replace(UNSURE_RX, ' ').split(' ').filter(Boolean).every((w) => UNSURE_FILL.has(w))) return 'no';
   // a greeting or "you there" in front of a help or how-are-you ask ("arvo mate need a hand with a reno", "hey u there need help"): judge the part after it
   const rest = n.replace(new RegExp(`^(?:(?:${GREET}|are you there|you there|anyone there|is anyone there|you around|how are you|how s it going|how s you|you good)${TAIL}(?: |$))+`), '').replace(/^(?:and |so |um |ok |okay )+/, '').trim();
   if (rest && rest !== n && rest.split(' ').length <= 9) for (const [k, rx, max] of SOC) if (['help', 'cando', 'how', 'who', 'thanks', 'frustrated'].includes(k) && rx.test(rest)) return k;
@@ -122,7 +126,7 @@ export const PLACES = [
   { id: 'primer', cat: true, key: 'primer primers priming', title: 'Primer', text: 'What is it priming?',
     opts: [O('Before tiling', 'Primer for tiling over smooth concrete', 'tile tiles tiling smooth concrete'), O('Before levelling', 'Primer for a levelling compound on concrete', 'level levelling leveller screed floor'), O('Before sealant', 'Primer before sealant on porous surfaces', 'sealant seal silicone porous joint')] },
   { id: 'repair', cat: true, key: 'repair repairs repairing patching patch', title: 'Repairs', text: 'What is being repaired?',
-    opts: [O('Concrete damage', 'Repair mortar for spalling concrete', 'concrete spalling damaged broken holes crumbling mortar'), O('Cracks', 'I need something to fix a crack', 'crack cracks cracked'), O('Floor', 'Repair mortar for a damaged concrete floor', 'floor')] },
+    opts: [O('Concrete damage', 'Repair mortar for spalling concrete', 'concrete spalling damaged broken holes crumbling mortar'), O('Cracks', 'Fill cracks in a wall before painting', 'crack cracks cracked'), O('Floor', 'Repair mortar for a damaged concrete floor', 'floor')] },
   { id: 'leveller', cat: true, key: 'screed leveller leveler levelling leveling', title: 'Screed or leveller', text: 'What is the floor job?',
     opts: [O('Uneven concrete', 'Self levelling compound for an uneven concrete floor', 'uneven concrete bumpy dip slab'), O('Under tiles', 'Self levelling compound under tiles', 'tile tiles tiling under'), O('Thick layer', 'Levelling compound for a thick layer', 'thick deep layer')] },
   { id: 'leak', key: 'leak leaks leaking leaky', title: 'Leaks', text: 'Where is the leak?',
@@ -247,12 +251,14 @@ export function followUp(n0, convo) {
 
 // ---- the recommendation lead ("My pick ...") ------------------------------------------------------------------------------------------------------------------------
 export const PICK_RX = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with|^(?:which|what) (?!is the |s the |are the |does |do you |can you |is a |is an )(?:[a-z0-9]+ ){0,3}(?:for|on|to use|do i use|should i use|would you use))\b/;
+// the shape of a singular ask: one answer wanted ("just one", "your pick", "the go-to", "choose one", "if you had to choose", "single best", "name the one", a trailing "one")
+const SINGLE_RX = /\b(?:pick|picks|choose|choice|favou?rite|go to|goto|single|top (?:pick|choice))\b|\b(?:just|only|name|give me|tell me|want|need|take|go with|a|the|which|what)\s+(?:the\s+|a\s+)?one\b|\bone\s+(?:only|please|thanks|pick|choice|product|will do|is fine)\b|\bone\s*$|\bif you had to\b|^one\s+[a-z]+(?:\s+[a-z]+){0,2}\s+(?:for|to|that|under|on)\b/;
 const NEED_RX = /\b(need|needs|want|wanna|help|looking for|something (?:to|for)|hunting for|after a|after some)\b/;
 const JOB_WORD = /\b(tiles?|tiling|shower|showa|bathroom|laundry|kitchen|balcony|deck|floor|slab|leak|leaky|leaking|leaks|cracked|crack|brick|timber|splashback|roof|gutter|basement)\b/;
 /** a recommend ask in any wording: the PICK_RX phrases, plus "need / want / something to" statements after slang and texting shorthand are read ("wat do i use", "sumthin to stick tiles") */
 export function wantsPick(n0) {
   const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const raw = normalise(n0);
-  return PICK_RX.test(raw) || PICK_RX.test(n) || (NEED_RX.test(n) && JOB_WORD.test(n) && !/\b(how (much|many|long)|price|cost|stock|sds|data sheet)\b/.test(n));
+  return PICK_RX.test(raw) || PICK_RX.test(n) || SINGLE_RX.test(n) || (NEED_RX.test(n) && JOB_WORD.test(n) && !/\b(how (much|many|long)|price|cost|stock|sds|data sheet)\b/.test(n));
 }
 const CHECK = 'I can only read what Sika has published, so Sika Technical Services should confirm the fit for your site before you buy.';
 const docWord = (f) => (f && f.doc_type === 'PDS' ? 'data sheet' : 'product page');
@@ -303,3 +309,39 @@ function productPick(res, cs) {
   res.cards = [top, ...alts, ...tail]; res.trace = (res.trace || []).concat(['chat:pick']);
   return res;
 }
+
+// ---- a social turn by shape, when the brain found nothing -------------------------------------------------------------------------------------------------------------
+/** The social kind of a short message the brain could not place at all (an unknown card with no product and no topic of its own): chat, not a question about the range. '' when it is not chat. */
+export function looseSocial(n0, card) {
+  const c = card || {}; if (c.type !== 'unknown' || c.product) return '';
+  const miss = (c.handoff && c.handoff.missing) || []; if (miss.length && !(miss.length === 1 && /^(instructions|job)$/.test(miss[0]))) return '';
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const w = n.split(' ').filter(Boolean);
+  if (!w.length || w.length > 12 || /\d/.test(n)) return '';
+  // only a message with a sign that it is addressed to the assistant, or is a greeting, a thanks or a plea for help, is chat; a question with no catalogue words in it ("which is cheaper") keeps the honest no
+  if (!/\b(you|your|youre|u|ya|anyone|anybody|someone|team|crew|there|here|hello|hi|hey|yo|morning|arvo|afternoon|evening|help|hand|chat|talk|thanks|thank|cheers|ta|legend|obliged|appreciate|helps|new|first|ok|okay|right|sorry|lol|haha|please|mate|bye|goodbye|later|ciao|ready|free|around|open|this|sure|idea|dunno|unsure|know)\b/.test(n)) return '';
+  if (/\b(?:dunno|unsure|no idea|not (?:really )?sure|don t know|do not know|cant say|can t say|cant tell|can t tell)\b/.test(n)) return 'no';
+  if (/\b(thanks|thank|cheers|ta|legend|obliged|appreciate|appreciated|helps|helpful|ripper|beauty|sorted|perfect|nice one|top job|great job|good one)\b/.test(n)) return 'thanks';
+  if (/\b(bye|goodbye|later|ciao|goodnight)\b/.test(n)) return 'bye';
+  if (/\b(bot|robot|human|person|real|machine|chatbot|computer|somebody|anyone|talk to|chat to|who s there)\b/.test(n)) return 'who';
+  if (/\b(how (?:do|does|can|would) (?:i|you|this|it|we)|what (?:do|can|sort|kind|else)|use this|ask you|instructions|know about)\b/.test(n)) return 'cando';
+  return 'help';
+}
+
+// ---- two products side by side -------------------------------------------------------------------------------------------------------------------------------------------
+const CMP_LEAD = '(?:(?:and|also|ok|okay|so|now|but|then|what about|how about|tell me|can you tell me|whats|what s|what is|is|are|does|do|how does|how do|how is|how are|can you|could you)\\s+)*';
+const SEP = '(?:vs|versus|v|against|compared (?:to|with|against)|compare (?:to|with|against)|stack(?:s|ed)? up (?:against|to|with)|measure(?:s)? up (?:against|to)|differ(?:s|ent)? (?:from|to|than|with)|(?:any |that |much )?different (?:from|to|than)|the same as|same as|better than|or|and)';
+/** { a, b } the two sides of a comparing message ("X vs Y", "difference between X and Y", "compare X with Y", "how does X measure up to Y", "X or Y, which is better"), raw text each, or null. A side may be a pronoun. */
+export function compareSides(n0) {
+  let n = clean(applySlang(normalise(n0)).text || normalise(n0)); if (!n || n.split(' ').length > 22) return null;
+  n = n.replace(/\s+(?:which|what) (?:one )?(?:is|s|would be|do you)?\s*(?:the )?(?:better|best|good|safer|stronger|cheaper|easier)?(?: one)?$/, '').replace(/\s+(?:please|thanks)$/, '');
+  let m;
+  const same = /\b(?:vs|versus|against|compar\w*|differ\w*|difference|stack\w* up|measure\w* up|same as|better than|better)\b/.test(n);
+  if ((m = new RegExp(`^${CMP_LEAD}(?:the )?(?:difference|differences|diff) between (.+?) and (.+)$`).exec(n))) return { a: m[1], b: m[2] };
+  if ((m = new RegExp(`^${CMP_LEAD}(?:compare|comparing)\\s+(.+?)\\s+(?:with|to|and|against|vs|versus)\\s+(.+)$`).exec(n))) return { a: m[1], b: m[2] };
+  if (!same && !/\bor\b/.test(n)) return null;
+  const sepRx = new RegExp(`^${CMP_LEAD}(.+?)\\s+${SEP}\\s+(.+)$`);
+  if ((m = sepRx.exec(n))) { const sep = /\b(or|and)\b/.exec(n.slice(m[1].length)); if (sep && sep[1] === 'and' && !same) return null; return { a: m[1], b: m[2] }; }
+  return null;
+}
+const PRONOUN = /^(?:it|this|that|this one|that one|the same|them|its|the first|the last|the other)$/;
+export const isPronounSide = (s) => PRONOUN.test(String(s || '').trim());

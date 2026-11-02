@@ -515,7 +515,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     if (ruled.length) { const r = ruled[0]; const sh = await shard(r.it.pi); if (sh) { const c = C.compatCard(sh, 'no', { id: r.rule.r, text: r.rule.t, s: { u: r.rule.u, p: r.rule.pg, v: r.rule.v, t: 'PDS' } }, q, [], []); c.title = `Ruled out: ${sh.n}`; c.headline = 'No. This product matches your words but its own data sheet rules it out for this job.'; cards.push(c); } }
     return out(cards.length ? 'which' : intent, 'index', cards, { state: top.length === 1 ? { productId: core.P[top[0].pi].id, intent: 'which' } : null });
   }
-  const session = createSession({ ask: askInner, advisor, boot, productName: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].n : ''), productCategory: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].c : '') });
+  const session = createSession({ ask: askInner, advisor, boot, productName: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].n : ''), productCategory: (id) => (pIndex.has(id) ? core.P[pIndex.get(id)].c : ''), productList: () => core.P.map((p) => ({ id: p.id, name: p.n })) });
   const ask = (question, state = null) => session.ask(question, state);
   return { ask, askInner, boot, search: (n) => search(normalise(n), []), core: () => core };
 }
