@@ -5,7 +5,7 @@ export const GENERIC = new Set('old new existing over onto into under above belo
 export function normalise(s) {
   return String(s == null ? '' : s).normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
     .replace(/[®™©]/g, ' ').replace(/m²|m²/g, 'm2').replace(/\bsq\.? ?m(etres?|eters?)?\b/g, 'm2').replace(/\bsqm\b/g, 'm2').replace(/&/g, ' and ').replace(/\+/g, ' plus ')
-    .replace(/(\d),(\d{3})\b/g, '$1$2').replace(/\b(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)? ?(?:x|by|\*) ?(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)\b(?! ?2)/g, (w, a, b) => `${Math.round(Number(a) * Number(b) * 100) / 100} m2`).replace(/[^a-z0-9.½]+/g, ' ').replace(/(^|\s)\.+(?=\s|$)/g, ' ').replace(/\.(\s|$)/g, ' ').replace(/\s+/g, ' ').trim();
+    .replace(/(\d),(\d{3})\b/g, '$1$2').replace(/\b(\d{3,4}) ?(?:mm)? ?(?:x|by|\*) ?(\d{3,4}) ?mm\b/g, (w, a, b) => `${Math.round(Number(a) * Number(b) / 10000) / 100} m2`).replace(/\b(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)? ?(?:x|by|\*) ?(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)\b(?! ?2)(?: (?:long|of|lengths?|runs?))? joints?\b/g, (w, a, b) => `${Math.round(Number(a) * Number(b) * 100) / 100} m of joint`).replace(/\b(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)? ?(?:x|by|\*) ?(\d{1,3}(?:\.\d+)?) ?(?:m|metres?|meters?|mtrs?)\b(?! ?2| ?joints?)/g, (w, a, b) => `${Math.round(Number(a) * Number(b) * 100) / 100} m2`).replace(/\b(\d{1,3}(?:\.\d+)?) ?(?:m|metres?)? ?(?:x|by|\*) ?(\d{1,3}(?:\.\d+)?) ?m ?2\b/g, (w, a, b) => `${Math.round(Number(a) * Number(b) * 100) / 100} m2`).replace(/[^a-z0-9.½]+/g, ' ').replace(/(^|\s)\.+(?=\s|$)/g, ' ').replace(/\.(\s|$)/g, ' ').replace(/\s+/g, ' ').trim();
 }
 export function stem(w) {
   if (w.length > 3 && /^[a-z]+$/.test(w)) {

@@ -7,14 +7,14 @@ import { normalise } from './text.js';
 // ---- attributes a product sheet may or may not state. ask: the words in the question; has: the words in the data that would answer it.
 export const COVER_ATTRS = [
   { id: 'fire', label: 'a fire rating', ask: /\bfire ?(rating|rated|rate|resistance|resistant|resisting|resistance level|proof|retardant|retardent|performance|classification|class|certified|tested)\b|\bfrl\b|\bfire ?rated\b/, has: /fire[ -]?(rating|rated|resist\w*|classif\w*|retard\w*|proof\w*|performance|behaviou?r|stop\w*|barrier)|reaction to fire|\bfrl\b|AS ?1530|AS ?4072|AS ?1668|intumescent|firestop/i },
-  { id: 'slip', label: 'a slip rating', ask: /\bslip\b|\bnon ?slip\b|\banti ?slip\b/, has: /slip|AS ?4586/i },
+  { id: 'slip', label: 'a slip rating', ask: /\b(non|anti) ?slip\b|\bslip (rating|resist\w*|rated|class)\b|\bslippery\b|\bslip\b(?! ?(joints?|sheets?|layers?|planes?|membranes?|form\w*|resistant tape|tape))/, has: /slip|AS ?4586/i },
   { id: 'food', label: 'whether it is food safe', ask: /\bfood\b/, has: /\bfood/i },
   { id: 'potable', label: 'whether it is safe with drinking water', ask: /\bpotable\b|drinking water|drinkable|safe to drink|water tanks? for drinking/, has: /potable|drinking water|AS ?4020/i },
   { id: 'acoustic', label: 'an acoustic rating', ask: /\bacoustic\w*|sound ?proof\w*|sound (rating|insulation|transmission|reduction)|noise (reduction|rating|insulation)|impact noise|decibels?\b/, has: /acoustic|sound (insulat\w*|reduc\w*|transmi\w*|absor\w*|proof\w*|rating)|noise (reduc\w*|insulat\w*)|impact noise|\bdB\b/i },
   { id: 'warranty', label: 'warranty terms', ask: /\bwarrant\w*|\bguarantee\w*/, has: /warrant|guarantee/i },
   { id: 'greenstar', label: 'a Green Star or LEED rating', ask: /\bgreen ?star\b|\bleed\b/, has: /green ?star|\bleed\b/i },
   { id: 'epd', label: 'an environmental product declaration (EPD)', ask: /\bepd\b|environmental product declaration/, has: /\bepd\b|environmental product declaration|environmental_product_declaration/i },
-  { id: 'carbon', label: 'a carbon footprint figure', ask: /carbon footprint|embodied carbon|\bgwp\b|global warming potential|co2 (emissions?|footprint)|carbon neutral/, has: /carbon|\bgwp\b|global warming/i },
+  { id: 'carbon', label: 'a carbon footprint figure', ask: /carbon footprint|embodied carbon|\bgwp\b|global warming potential|co2 (emissions?|footprint)|carbon neutral/, has: /carbon footprint|embodied carbon|carbon neutral|\bgwp\b|global warming|co2[ -]?e|carbon (emission|dioxide)/i },
   { id: 'thermal', label: 'a thermal conductivity or R value', ask: /thermal conductivity|\br ?value\b|insulation value|insulating value|\bu ?value\b/, has: /thermal (conductivity|insulat\w*)|\br[ -]value\b|\bu[ -]value\b|\blambda\b/i },
   { id: 'origin', label: 'where it is made', ask: /\bwhere (is|are) (\w+ ){0,4}(made|manufactured|produced)\b|\bmade in (australia|china|germany|switzerland|the usa|usa|europe)\b|country of origin|\baustralian made\b|\bmanufactured (in|where)\b/, has: /made in|country of origin|manufactured in|australian made|produced in/i },
   { id: 'asbestos', label: 'anything about asbestos', ask: /\basbestos\b/, has: /asbestos/i },
@@ -38,10 +38,10 @@ const LEGAL_RX = /\b(council (approval|permit|permission|sign ?off)|need (a |an 
 export const askedLegal = (n) => LEGAL_RX.test(n);
 
 // ---- price, stock, delivery: the documentation holds none of it for any product
-const COMM_RX = /\b(in stock|out of stock|back in stock|stock levels?|have (any |some )?stock|got (any |some )?stock|stock (at|in|near)|stocked|price|prices|pricing|priced|cost|costs|costing|rrp|cheap|cheaper|cheapest|discount\w*|deliver\w*|freight|shipping|lead time|on sale|on special|specials?|trade price)\b|\bhow much (is|are|does|do|would|will) (a|an|one|it|they|the|this|that|\d)\b(?!.*\b(need|needed|cover|use|for (a |an |the |my )?\d))|\bhow much (is|are) it\b/;
+const COMM_RX = /\b(in stock|out of stock|back in stock|stock levels?|have (any |some )?stock|got (any |some )?stock|stock (at|in|near)|stocked|price|prices|pricing|priced|cost|costs|costing|rrp|cheap|cheaper|cheapest|discount\w*|deliver(y|ies|ed)?|freight|shipping|lead time|on sale|on special|specials|trade price)\b|\bhow much (is|are|does|do|would|will) (a|an|one|it|they|the|this|that|\d)\b(?!.*\b(need|needed|cover|use|for (a |an |the |my )?\d))|\bhow much (is|are) it\b/;
 const WHERE_RX = /\bwhere (can|do|could|to|should) (i |we |you )?(buy|get|find|purchase|pick up)\b|\bstockists?\b|\bwho (sells|stocks)\b|\bretailers?\b/;
 export const askedComm = (n) => COMM_RX.test(n) && !WHERE_RX.test(n);
-export const commWhat = (n) => (/\bstock\w*\b/.test(n) ? 'stock levels' : /\bdeliver\w*|freight|shipping|lead time\b/.test(n) ? 'delivery times and costs' : /\bwarrant\w*|guarantee/.test(n) ? 'warranty terms' : 'prices');
+export const commWhat = (n) => (/\bstock\w*\b/.test(n) ? 'stock levels' : /\bdeliver(y|ies|ed)?\b|freight|shipping|lead time\b/.test(n) ? 'delivery times and costs' : /\bwarrant\w*|guarantee/.test(n) ? 'warranty terms' : 'prices');
 export const areaAsk = (n) => /\b\d+(\.\d+)? ?(m2|m 2|square met\w*|sq m)\b/.test(n);
 
 // ---- things that are not in the range: asked to sell or supply them, with no Sika product kind in the same message
@@ -53,7 +53,7 @@ const NOT_RANGE = [
   [/\b(colorbond|roof sheets?|roofing iron|gutters? (guards?|sections?)|downpipes?|pipes?|fittings?)\b/, 'Roof sheeting and plumbing'], [/\b(glass|windows?|doors?|benchtops?|cabinets?)\b/, 'Building fittings'],
 ];
 const SELL_RX = /\b(sell|sells|selling|stock|stocks|carry|carries|supply|supplies|make|makes|have|got|buy|get|order)\b/;
-const KIND_WORDS = /\b(adhesives?|glue|glues|grout\w*|sealants?|silicones?|membranes?|primers?|level\w*|mortars?|sealer|waterproof\w*|repair\w*|coatings?|epoxy|epoxies|caulk\w*|for|to|on|under|around|between|onto|with|stick|seal|bond|fix|lay|laying)\b/;
+const KIND_WORDS = /\b(anti ?slip|non ?slip|slip resistant|floor paint|epoxy paint|concrete paint|roof paint|membrane paint|paint on|paintable|adhesives?|glue|glues|grout\w*|sealants?|silicones?|membranes?|primers?|level\w*|mortars?|sealer|waterproof\w*|repair\w*|coatings?|epoxy|epoxies|caulk\w*|for|to|on|under|around|between|onto|with|stick|seal|bond|fix|lay|laying)\b/;
 export function notInRange(n) {
   if (!SELL_RX.test(n) || KIND_WORDS.test(n.replace(/^.*?\b(sell|sells|stock|stocks|carry|supply|make|makes|have|got|buy|get|order)\b/, ''))) return null;
   if (!/^(do|does|can|could|have|got|any|where|is|are|will|would|you|u|ya|yous|youse)\b|\bfrom you\b|\byou (guys |lot )?(sell|stock|carry|have|supply|make)\b/.test(n)) return null;
@@ -67,6 +67,8 @@ export function unknownModel(n, names) {
   const m = FAM_NUM.exec(n); if (!m) return null;
   const rx = new RegExp('\\b' + m[1] + ' ?' + m[2] + '(?![0-9])');
   if (names.some((x) => rx.test(x))) return null;
+  const loose = new RegExp('(^|[^0-9])' + m[2] + '(?![0-9])');
+  if (names.some((x) => x.startsWith(m[1]) && loose.test(x))) return null; // the number sits inside a longer name of the same family: a fuzzy match later resolves it
   return { fam: m[1], num: m[2], family: names.filter((x) => x.startsWith(m[1] + ' ')).length };
 }
 
@@ -74,6 +76,10 @@ export function unknownModel(n, names) {
 export function colourLines(sh) {
   const pool = [...(sh.d.a || []), ...(sh.d.us || []), sh.d.s, sh.d.t, sh.d.pk, ...(sh.pk || []).map((f) => f && f.text), ...(sh.d.sec || []).filter((x) => /colou?r|appearance/i.test(x.l || '')).map((x) => x.l + ': ' + x.t)].filter(Boolean);
   const out = [];
+  for (const t of pool) { if (!/\|/.test(String(t))) continue; const cells = String(t).split('|').map((c) => c.replace(/\s+/g, ' ').trim());
+    for (let i = 0; i < cells.length; i++) { const lab = /(?:^|\s)((?:available |standard |stock )?colou?rs?(?: \([^)]*\))?)$/i.exec(cells[i]); if (!lab) continue; let v = ''; for (let j = i + 1; j < cells.length && j <= i + 3; j++) if (cells[j]) { v = cells[j]; break; }
+      if (!v || /colou?r variation|discolou?r/i.test(v) || v.length > 200) continue; const row = lab[1].replace(/^\w/, (ch) => ch.toUpperCase()) + ': ' + v.replace(/\s+(?:[A-Z][a-z]+ ){2,}.*$/, ''); if (!out.includes(row)) out.push(row); } }
+  if (out.length) return out.slice(0, 3);
   for (const t of pool) for (const s of String(t).split(/(?<=[.!?])\s+/)) { if (/\|/.test(s) || !/colou?rs?\b|\b(white|grey|gray|black|translucent|clear|beige|brown|ivory|charcoal)\b/i.test(s) || /colou?r variation|discolou?r/i.test(s)) continue; const c = s.replace(/\s+/g, ' ').trim(); if (c.length > 3 && c.length < 300 && !out.includes(c)) out.push(c); }
   return out.slice(0, 3);
 }

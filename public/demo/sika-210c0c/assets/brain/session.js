@@ -6,16 +6,18 @@ import { normalise } from './text.js';
 import { jobOf, areaOf, leafOf, recommendFor } from './recommend.js';
 import * as V from './voice.js';
 import { card, CHIPS, fact, finalize } from './schema.js';
-import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, defaultPick, joinPlace, isModifier, withPick, PICK_RX, wantsPick, looseSocial, sellAsk, compareSides, isPronounSide } from './chat.js';
+import { twoJobs, twoJobsCard, socialKind, socialCard, placeOf, placeCard, genericCard, followUp, defaultPick, joinPlace, isModifier, withPick, PICK_RX, wantsPick, looseSocial, sellAsk, compareSides, isPronounSide } from './chat.js';
 
 const REC = /\brec+o?m+e?n+d|\b(suggest|pick one|pick for me|you pick|you choose|you decide|your pick|your choice|up to you|just tell me|you tell me|best one|whatever is best|whatever s best|whatever you think|surprise me|any one|no preference|dont mind|don t mind|doesn t matter|which (one )?(should|would) (i|you)|what would you (use|pick|choose|go with)|which is best|which one is best|which one s best|you choose for me)\b/;
 const ORD = /^(?:(?:and|ok|okay|now|so|what about|how about|tell me about|show me|go with|i ll take|ill take|i take) )*(?:the )?(first|1st|top|second|2nd|third|3rd|last|fourth|4th)(?: one| option| product| choice)?(?: please)?$/;
-const AREA_FU = /^(?:(?:same|and|ok|okay|now|so|what about|how about|what if|if|for|ditto) )+(?:it is |its |it s |is |i have |i ve got |i got )?\d+(?:\.\d+)? ?(?:m2|m 2)(?: please)?$|^(?:same|ditto)(?: again)? for \d+(?:\.\d+)? ?(?:m2|m 2)$/;
+const AREA_FU = /^(?:(?:same|and|ok|okay|now|so|what about|how about|what if|if|for|at|ditto) )+(?:it is |its |it s |is |i have |i ve got |i got )?\d+(?:\.\d+)? ?(?:m2|m 2)(?: please)?$|^(?:same|ditto)(?: again)? for \d+(?:\.\d+)? ?(?:m2|m 2)$/;
 const PACK = /^(?:(?:and|what about|how about|is it|does it come|do you (?:have|sell)|can i get (?:it)?|comes?) )*(?:in )?(?:a |an |the )?(pails?|buckets?|bags?|tubes?|cartridges?|sausages?|drums?|tubs?|cartons?|boxes|packs?|unipacks?|jerry cans?|small(?:er)? (?:pack|size|bag)|bigger (?:pack|size)|big(?:ger)? (?:one|bag|pack))(?: size| sizes)?(?: version| option)?$/;
 const BACK = /^(?:go back|back|previous|the previous (?:one|answer)|the one before|before that|undo|back to (?:that|the last one)|what was the last one)$/;
 const ENV = /^(?:(?:and|what about|how about|what if|if it s|if its|if it is|is it ok|does it work|how about for|and for|for) )+(?:the |a )?(outdoors?|outside|exterior|external|indoors?|inside|interior|internal|wet areas?|bathroom|shower|kitchen|laundry|balcony|pool|garage|cold|winter|hot weather|summer|damp|humid)(?: too| as well)?$/;
 const ASPECT = /^(?:(?:and|what about|how about|also|ok|okay|now|then|the) )+(sds|msds|pds|tds|data ?sheet|safety data sheet|safety sheet|coverage|consumption|pot life|open time|cure time|curing time|drying time|recoat time|shelf life|colours?|colors?|packaging|pack size|price|cost|vocs?|mixing ratio|warranty|storage)(?: for it| of it| for that| for that one)?$/;
 const BARE_AREA = /^(?:(?:it s|its|it is|about|around|roughly|approx\w*|maybe|say|um|umm|ok|okay|so|the area is|area is|its about|it s about) )*\d+(?:\.\d+)? ?(?:m2|m 2|square met\w*|sq m)(?: at \d+(?:\.\d+)? ?mm)?(?: (?:please|thanks|mate|roughly|or so|total))?$/;
+const BARE_NUM = /^(?:(?:it s|its|it is|about|around|roughly|approx\w*|maybe|say|um|umm|ok|okay|so|the area is|area is|its about|it s about) )*(\d+(?:\.\d+)?)(?: ?(?:m|metres?))?(?: ?(?:x|by) ?(\d+(?:\.\d+)?)(?: ?(?:m|metres?))?)?(?: (?:please|thanks|mate|roughly|or so|total|square))?$/;
+const SAME_FOR = /^(?:(?:and|ok|okay|now|so) )?(?:same|ditto|the same|same again|same thing)(?: again)? (?:for|with|but) (.+)$/;
 const ENVWORD = /^(?:the |a )?(outdoors?|outside|exterior|external|indoors?|inside|interior|internal)$/;
 const CHIP_JOBS = ['Recommend a tile adhesive', 'Recommend a waterproofing membrane', 'Recommend a floor leveller', 'Recommend a sealant'];
 const KINDS_WITH_PRODUCT = new Set(['calc', 'rate', 'time', 'document', 'safety', 'spec']);
@@ -42,8 +44,8 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
     const a = areaOf(n); if (a != null) h.area = a;
     const jb = jobOf(n); const standalone = !pids.length || res.stage === 'advisor' || ['which', 'tree', 'advice'].includes(res.intent);
     if (res.intent === 'system' && !pids.length) h.job = 'tile adhesive for ' + jb.replace(/\b(tiling |tile )?system\b/, ' ').replace(/\s+/g, ' ').trim();
-    else if (jb && advisor.hasKind(jb) && standalone) h.job = jb;
-    else if (!h.job && h.product) h.job = jobFromProduct(h.product);
+    else if (jb && advisor.hasKind(jb) && standalone) { h.job = jb; h.jobImplied = false; }
+    else if (!h.job && h.product) { h.job = jobFromProduct(h.product); h.jobImplied = true; } // a job read off a product shown, not said by the visitor
     if (KINDS_WITH_PRODUCT.has(res.intent) || res.intent === 'compare' || res.intent === 'system') h.kind = res.intent;
     else if (['which', 'product', 'attr', 'tree', 'advice'].includes(res.intent)) h.kind = '';
     if (res.stage === 'kb' && res.cards[0]) h.topic = res.cards[0].title || '';
@@ -177,15 +179,17 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
     if (h.place) h.pt = (h.pt || 0) + 1; // turns since the last place we asked about; after 3 it is stale
     const fu = !res && rewritten === null && h.convo ? ((words <= 9 && REC.test(n) && bare(n) ? defaultPick(h.convo) : null) || followUp(q, h.convo)) : null;
     if (rewritten !== null) { /* a comparison: nothing below applies */ }
+    else if (!res && !fu && !h.convo && words <= 16) { const tj = twoJobs(q, advisor.kindOf); if (tj) { const t = twoJobsCard(tj, (k) => (advisor.kinds.find((x) => x.id === k) || {}).label); return chatAnswer(t.card, 'ask', t.convo); } }
+    if (rewritten !== null) { /* handled */ }
     else if (fu) { rewritten = fu.ask; wantPick = true; if (h.convo) { h.place = h.convo.id; h.pt = 0; } h.convo = null; }
     else if (!res) {
       const followShape = /^(and|also|what about|how about|but|or|now|then|same|ditto)\b/.test(n) || ENV.test(n) || ORD.test(n) || AREA_FU.test(n) || PACK.test(n) || BACK.test(n) || ASPECT.test(n);
-      let pl = followShape ? null : placeOf(q);
+      let pl = followShape || (h.product && !h.fresh && /\b(it|its|it s|this|that)\b/.test(n) && !/\b(bathroom|kitchen|laundry|shower|balcony|roof|garage|pool|deck|basement)\b/.test(n)) ? null : placeOf(q);
       // a lone narrowing word ("sealant", "which silicone", "outside") a turn or two after a place question joins that place; a room named afresh does not
       if (pl && pl.place && !pl.ask && h.place && (h.pt || 0) <= 3 && isModifier(pl.place) && pl.place.id !== h.place) { const jp = joinPlace(q, h.place); if (jp) { rewritten = jp.ask; wantPick = true; pl = null; h.pt = 0; } }
       if (rewritten === null && !followShape && h.place && (h.pt || 0) <= 3 && h.qa && ENVWORD.test(n)) { rewritten = `${h.qa.replace(/[?.!]+$/, '')} ${ENVWORD.exec(n)[1]}`; wantPick = true; pl = null; }
       if (pl && !pl.place && (pl.rec || wantPick) && h.place && h.qa && (h.pt || 0) <= 3) { rewritten = h.qa; wantPick = true; pl = null; } // "what do I use" a moment after a place question: pick for that question
-      if (pl && !pl.place) { if (pl.rec && (h.job || h.product || h.jobState)) res = (await recommend(h, q)) || noPick(q); else { const g = genericCard(pl.rec); return chatAnswer(g.card, 'ask', g.convo); } }
+      if (pl && !pl.place) { if (pl.rec && ((h.job && (!h.jobImplied || (REC.test(n) && bare(n)))) || h.jobState || h.picked)) res = (await recommend(h, q)) || noPick(q); else { const g = genericCard(pl.rec); return chatAnswer(g.card, 'ask', g.convo); } }
       else if (pl && pl.ask) { rewritten = pl.ask; wantPick = true; }
       else if (pl) { const p = placeCard(pl.place, pl.rec); return chatAnswer(p.card, 'ask', p.convo); }
     }
@@ -194,6 +198,8 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
     // "you pick" / "what do I use" with no job on record but a question asked a moment ago: pick for that question
     else if (rewritten === null && words <= 9 && REC.test(n) && bare(n) && !h.job && !(h.product && jobFromProduct(h.product)) && !h.jobState && h.place && h.qa && (h.pt || 0) <= 3) { rewritten = h.qa; wantPick = true; }
     else if (rewritten === null && words <= 9 && (REC.test(n) || n === normalise(V.RECOMMEND_CHIP)) && bare(n) && !(advisor.hasKind(n) && !/\b(for me|one)\b/.test(n))) res = (await recommend(h, q)) || noPick(q);
+    // 1b. "same for SikaTile-400 EVO PRO": the area just worked out, for the product named
+    else if (h.area != null && h.kind === 'calc' && SAME_FOR.test(n)) { const r = await resolveSide(SAME_FOR.exec(n)[1], h, null); if (r && !r.amb) rewritten = `how much ${r.name} for ${h.area} m2`; }
     // 2. the first / second / third one
     else if (ORD.test(n) && h.products.length) {
       const m = ORD.exec(n)[1]; const i = /first|1st|top/.test(m) ? 0 : /second|2nd/.test(m) ? 1 : /third|3rd/.test(m) ? 2 : /fourth|4th/.test(m) ? 3 : h.products.length - 1;
@@ -208,6 +214,8 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
     // 3a. "and for 30 m2 how much" right after a My pick: the quantity is for the product picked, not the whole kind again
     else if (h.picked && productName(h.picked) && areaOf(n) != null && words <= 12 && qtyShaped(n) && !h.fresh && !/\b(?:sika\w*|davco|lanko|schonox)\b/.test(n) && !typeClash(n, { ...h, product: h.picked })) { const th = /\b(\d+(?:\.\d+)?) ?mm\b/.exec(n); rewritten = `how much ${productName(h.picked)} for ${areaOf(n)} m2${th ? ` at ${th[1]} mm` : ''}`; }
     // 3b. a bare area answering the area question ("10 m2", "about 12 square metres") for the product held
+    // 3b'. a bare number or "3 by 4" answering the area question ("12", "3 x 4", "about 3 by 4 metres") for the product held
+    else if (BARE_NUM.test(n) && h.kind === 'calc' && h.product && productName(h.product) && !h.fresh) { const m = BARE_NUM.exec(n); const a = m[2] ? Math.round(Number(m[1]) * Number(m[2]) * 100) / 100 : Number(m[1]); rewritten = `how much ${productName(h.product)} for ${a} m2`; }
     else if (BARE_AREA.test(n) && h.kind === 'calc' && h.product && productName(h.product) && !h.fresh) { const th = /\b(\d+(?:\.\d+)?) ?mm\b/.exec(n); rewritten = `how much ${productName(h.product)} for ${areaOf(n)} m2${th ? ` at ${th[1]} mm` : ''}`; }
     // 4. in a pail?
     else if (PACK.test(n) && h.product && productName(h.product)) rewritten = `packaging of ${productName(h.product)}`;
@@ -227,6 +235,8 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
       const st3 = h.jobState && !(st2 && st2.job) && rewritten === null ? { ...(st2 || {}), job: h.jobState } : st2;
       res = await ask(useQ, st3);
       if (rewritten) { res.trace.push('session:rewrite:' + rewritten); res.query = q; }
+      // the inner brain found nothing, but the words name a kind of product in the range ("the grout is going mouldy"): pick from that kind rather than say it is unpublished
+      { const c0 = res.cards[0]; if (!rewritten && c0 && c0.type === 'unknown' && !c0.product && !c0.about && !(res.trace || []).some((x) => /^cover:/.test(x)) && advisor.hasKind(n) && !/\b(price|cost|stock|sds|msds|data sheet|warrant\w*)\b/.test(n)) { const r2 = await ask('best ' + jobOf(q), null); if (r2 && r2.cards.some((c) => c.type === 'product' && c.product)) { res = r2; res.query = q; res.trace = (res.trace || []).concat(['session:kind-fallback']); wantPick = true; } } }
     }
     if (!res) res = await ask(q, inner);
     // a range name with more of the product's own name after it ("SikaBond Instant Nails"): the brain asked "which one?", but the visitor already said which. Resolve the words that follow the family to ONE product and ask again with its full name.
@@ -245,7 +255,7 @@ export function createSession({ ask, cover, coverQuote, advisor, boot, productNa
     { const c0 = res.cards[0]; if (c0 && c0.type === 'comparison' && (/\b(better|best|worse|worst|recommend\w*|should i (?:use|buy|get|pick)|which (?:one|is|would|should))\b/.test(n) || /\bor\b.*\b(for|on|in|under)\b/.test(n)) && !/ the data sheets do not rank/.test(c0.headline)) c0.headline += ' The data sheets do not rank products, so I cannot say which is better. The table shows what each one publishes.'; }
     if (wantPick) res = withPick(res, q);
     const h2 = update(h, q, n, res); h2.qa = rewritten || q;
-    { const c0 = res.cards[0]; h2.picked = c0 && c0.product && /^My pick/.test(c0.headline || '') ? c0.product.id : (rewritten && h.picked && rewritten.includes(productName(h.picked) || '\u0000') ? h.picked : null); }
+    { const c0 = res.cards[0]; h2.picked = c0 && /^My pick/.test(c0.headline || '') && (c0.product || (res.state && res.state.productIds && res.state.productIds[0])) ? (c0.product ? c0.product.id : res.state.productIds[0]) : (rewritten && h.picked && rewritten.includes(productName(h.picked) || '\u0000') ? h.picked : null); }
     h2.jobState = (res.state && res.state.job) || ((res.stage === 'session' || res.cards.some((c) => c.type === 'unknown' || c.type === 'choose')) ? h.jobState : null);
     if (h2.jobState && res.stage === 'session' && !(res.state && res.state.job)) res.state = { ...(res.state || {}), job: h2.jobState };
     res = await dress(res, h2);

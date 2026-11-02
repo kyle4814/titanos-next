@@ -465,7 +465,8 @@ export function createBrain({ load, config, loadRules } = {}) {
         return out('system', 'tree', [C.unknown(q, null, 'The published documentation does not support a complete system for this combination. Please contact Sika Australia technical services.', ['system for this combination'])]);
       }
     }
-    if ((hasTile || /\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|grout)\b/.test(n)) && (hasSub || facets.environment.length) && /\b(adhesive|glue|bond|membrane|waterproof|waterproofing|tanking)\b/.test(n)) {
+    // a place the tree has no branch for (a pool, a spa, underwater, fire, a heated floor) is answered by the advisor, which reads the sheets for that place, never by the general tree
+    if ((hasTile || /\b(tile|tiles|tiling|tiled|porcelain|ceramic|mosaic|grout)\b/.test(n)) && (hasSub || facets.environment.length) && /\b(adhesive|glue|bond|membrane|waterproof|waterproofing|tanking)\b/.test(n) && !/\b(pools?|spa|spas|swimming|underwater|submerged|immersed|fire|heated|pond|ponds)\b/.test(n)) {
       const t = await treeAnswer(n, facets, q);
       if (t && t.choose) {
         trace.push('tree:ask'); const cards = [];
@@ -575,7 +576,12 @@ export function createBrain({ load, config, loadRules } = {}) {
     let pis = []; for (const m of mentions) if (m.pis.length === 1 && !pis.includes(m.pis[0])) pis.push(m.pis[0]);
     if (!pis.length && mentions.length) pis = mentions[0].pis.slice(0, 3); // one name that fits a few products: the honest no needs all of them to be silent
     let held = false;
-    if (!mentions.length && heldId && pIndex.has(heldId) && (/\b(it|its|it s|this|that|this one|that one|they|them|the product|the same)\b/.test(n0) || tokens(n0).length <= 6)) { pis = [pIndex.get(heldId)]; held = true; }
+    // a short message that names a kind of product or a category word ('fire rated sealant', 'grout colours', 'cheapest tile adhesive') is a new ask of the range, never the held product
+    const KIND_NOUN = /\b(sealants?|silicones?|adhesives?|glues?|membranes?|coatings?|grouts?|primers?|mortars?|levell?ers?|screeds?|epoxy|epoxies|resins?|anchors?|admixtures?|tapes?|foams?|fillers?|paints?|cleaners?|sealers?|additives?|products?|options?|range)\b/;
+    const pron = /\b(it|its|it s|this|that|this one|that one|they|them|the product|the same)\b/.test(n0);
+    if (!mentions.length && heldId && pIndex.has(heldId) && !KIND_NOUN.test(n0) && (pron || (tokens(n0).length <= 6 && !advisor.hasKind(n0)))) { pis = [pIndex.get(heldId)]; held = true; }
+    // 4'. price, stock or delivery asked of a KIND of product with no product named ("cheapest tile adhesive", "are your grouts in stock"): no sheet holds it, and no held product is the answer
+    if (!pis.length && !mentions.length && CV.askedComm(n0) && !CV.areaAsk(n0) && advisor.hasKind(n0)) { const w = CV.commWhat(n0); const kid = advisor.kindOf(n0); const kind = (advisor.kinds.find((k) => k.id === kid) || {}).label || 'those products'; return done([coverNo(q, null, null, `Prices, stock, delivery and warranty terms for ${kind} are not in the documentation I work from, so I cannot tell you the ${w}, and I will not guess. Please ask Sika Australia or a stockist. I can pick one from the data sheets if you tell me the job.`, [w], { reason: 'Prices, stock, delivery and warranty terms are not in the published data.', followups: [`Recommend a ${kind.replace(/s$/, '')}`, 'Where can I buy Sika products'] })], 'comm:kind', null, 'price'); }
     if (!pis.length || pis.length > 3) return null;
     const shs = (await Promise.all(pis.map((k) => shard(k)))).filter(Boolean); if (!shs.length) return null;
     const names = shs.map((s) => s.n); const one = shs.length === 1 ? shs[0] : null; const nm = CV.coverName(names);

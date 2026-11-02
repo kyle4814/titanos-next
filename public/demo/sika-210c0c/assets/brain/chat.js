@@ -49,7 +49,7 @@ export function socialKind(n0) {
   return '';
 }
 // chat-only slang (kept out of slang.js so product questions are read exactly as before): texting shorthand and Aussie chat words
-const CHAT_SLANG = [[/\bu\b/g, 'you'], [/\bur\b/g, 'your'], [/\bthx\b|\bthnx\b|\bthanx\b|\btks\b|\btnx\b/g, 'thanks'], [/\bsumthin\w*|\bsumthing\b|\bsomthin\w*|\bsomethin\b|\bsomting\b/g, 'something'], [/\bgoin\b|\bgoing\b(?= (?:today|on))/g, 'going'], [/\bhows\b/g, 'how s'], [/\bwat\b|\bwot\b|\bwht\b/g, 'what'],
+const CHAT_SLANG = [[/\bu\b/g, 'you'], [/\bur\b/g, 'your'], [/\bthx\b|\bthnx\b|\bthanx\b|\btks\b|\btnx\b/g, 'thanks'], [/\bsumthin\w*|\bsumthing\b|\bsomthin\w*|\bsomethin\b|\bsomting\b/g, 'something'], [/\bgoin\b|\bgoing\b(?= (?:today|on))/g, 'going'], [/\bhows\b/g, 'how s'], [/\bwat\b|\bwot\b|\bwht\b|\bwut\b/g, 'what'], [/\bshud\b|\bshld\b|\bshoud\b|\bshuld\b|\bshoudl\b/g, 'should'], [/\bwich\b|\bwhich1\b/g, 'which'], [/\bsumfin\w*|\bsomefin\w*/g, 'something'],
   [/\bpls\b|\bplz\b|\bplse\b|\bpleez\b/g, 'please'], [/\bappreciate ya\b|\bta heaps\b|\bta very much\b|\bcheers heaps\b|\bcheers ta\b/g, 'thanks'], [/\breno\b|\brenos\b/g, 'renovation'], [/\bheya+\b|\bhiya+\b|\bheyy+\b|\bhii+\b|\bhellooo+\b/g, 'hi'], [/\bcant\b/g, 'can t'], [/\bdont\b/g, 'don t'], [/\bwont\b/g, 'won t'], [/\bidk\b/g, 'dunno'],
   [/\bany1\b/g, 'anyone'], [/\bsum1\b/g, 'someone'], [/\bnoob\b/g, 'new']];
 const chatNorm = (t) => { let x = ' ' + t + ' '; for (const [rx, to] of CHAT_SLANG) x = x.replace(rx, ` ${to} `); return x.replace(/\s+/g, ' ').trim(); };
@@ -83,8 +83,10 @@ const FL = O('Fix a leak', 'Best waterproofing membrane for a leaking shower', '
 export const PLACES = [
   { id: 'bathroom', key: 'bathroom bathrooms ensuite shower showers bath bathtub toilet wetroom', title: 'Bathroom', text: 'Which part of the bathroom is the job?',
     opts: [O('Waterproof under tiles', WP.q, WP.kw.join(' ') + ' tiles tile floor'), O('Tile adhesive', TA.q, TA.kw.join(' ')), O('Grout', GR.q, GR.kw.join(' ')), O('Sealant around the bath', SE.q, SE.kw.join(' '))] },
-  { id: 'kitchen', key: 'kitchen kitchens splashback splashbacks benchtop', title: 'Kitchen', text: 'Which part of the kitchen?',
+  { id: 'kitchen', key: 'kitchen kitchens splashback splashbacks', title: 'Kitchen', text: 'Which part of the kitchen?',
     opts: [O('Splashback tiles', 'Tile adhesive for a kitchen splashback', 'splashback tile tiles tiling adhesive glue stick wall'), O('Bench sealant', 'Silicone sealant for a kitchen bench', 'seal sealant silicone bench benchtop sink gap gaps around caulk'), O('Grout', 'Grout for a kitchen floor', 'grout grouting floor between'), O('Uneven floor', 'Levelling compound for an uneven kitchen floor', 'level levelling leveller uneven floor screed')] },
+  { id: 'bench', key: 'bench benchtop benchtops countertop countertops counter vanity', title: 'Bench', text: 'What is the job on the bench?',
+    opts: [O('Seal the join', 'Silicone sealant for a kitchen bench', 'seal sealant silicone gap gaps join joins edge sink splashback caulk'), O('Stick laminate', 'Contact adhesive for laminate', 'laminate contact stick glue veneer'), O('Stone or timber top', 'Construction adhesive for fixing a benchtop', 'stone timber fix fixing adhesive glue bond mount')] },
   { id: 'laundry', key: 'laundry laundries', title: 'Laundry', text: 'Which part of the laundry?',
     opts: [O('Waterproofing', 'Waterproofing for a laundry floor under tiles', WP.kw.join(' ')), O('Tile adhesive', 'Tile adhesive for laundry floor tiles', TA.kw.join(' ')), O('Tub sealant', 'Silicone sealant for a laundry tub', SE.kw.join(' ') + ' tub trough')] },
   { id: 'balcony', key: 'balcony balconies terrace patio veranda verandah', title: 'Balcony', text: 'Which part of the balcony?',
@@ -129,6 +131,8 @@ export const PLACES = [
     opts: [O('Concrete damage', 'Repair mortar for spalling concrete', 'concrete spalling damaged broken holes crumbling mortar'), O('Cracks', 'Fill cracks in a wall before painting', 'crack cracks cracked'), O('Floor', 'Repair mortar for a damaged concrete floor', 'floor')] },
   { id: 'leveller', cat: true, key: 'screed leveller leveler levelling leveling', title: 'Screed or leveller', text: 'What is the floor job?',
     opts: [O('Uneven concrete', 'Self levelling compound for an uneven concrete floor', 'uneven concrete bumpy dip slab'), O('Under tiles', 'Self levelling compound under tiles', 'tile tiles tiling under'), O('Thick layer', 'Levelling compound for a thick layer', 'thick deep layer')] },
+  { id: 'problem', key: 'peeling peel peels peeled flaking flaky flakes bubbling bubbles bubbled lifting lifted lifts delaminating delaminated crumbling crumbly powdery dusty dusting chalky chalking loose drummy hollow', title: 'The problem', text: 'What is coming away: a coating, tiles, render or a membrane?',
+    opts: [O('A floor coating', 'Epoxy coating for a concrete floor', 'coating coat paint epoxy floor garage'), O('Tiles', 'Tile adhesive for a floor', 'tile tiles tiling drummy hollow loose'), O('Render', 'Repair mortar for a cracked render', 'render plaster stucco wall'), O('A membrane', 'Liquid applied waterproofing membrane for a roof', 'membrane waterproofing roof balcony')] },
   { id: 'leak', key: 'leak leaks leaking leaky', title: 'Leaks', text: 'Where is the leak?',
     opts: [O('Shower', FL.q, 'shower bathroom bath ensuite'), O('Roof', 'Waterproofing for a leaking roof', 'roof gutter ceiling'), O('Concrete wall', 'Fast setting mortar to plug a leak', 'wall basement concrete plug'), O('Cracks', 'Injection resin for leaking cracks', 'crack cracks')] },
   { id: 'crack', key: 'crack cracks cracked', title: 'Cracks', text: 'What is cracked?',
@@ -162,7 +166,7 @@ const FILLER = new Set(('hi hello hey heya hiya yo g day gday mate bud buddy man
   'can could would will do does did you u ya i me my our we the a an some any something sumthing somthing anything stuff things thing need needs needed want wants wanna looking look lookin for after to on in at with about of is are was it s im i m ive ' +
   'what whats which who how whos where recommend recommended recommendation recommendations suggest suggestions suggestion advice advise reckon think thoughts opinion best better good great right ideal top ' +
   'should shall would use using buy get got have has ideas idea know tell show give pick choose one ones product products item items option options job jobs work project reno renovation renovations renovating renovate redo redoing doing do building build help helping hand ' +
-  'something someting new old little bit quick question dont don t dunno idk').split(' '));
+  'something someting new old little bit quick question dont don t dunno idk down up together onto into back off its all keeps keep getting gets going gone went').split(' '));
 const VAGUEV = new Set('fixing renovating renovate redoing doing building redo repairing work working tiling waterproofing sealing'.split(' '));
 const REC_WORD = /^(?:rec+o?m+e?n+d\w*|rec+o?m+\w*|sug+e?st\w*|reckon|best|better|ideal|advice|advise|ideas?)$/;
 const lev = (a, b) => { const m = a.length, n = b.length; if (Math.abs(m - n) > 2) return 9; let prev = Array.from({ length: n + 1 }, (_, j) => j); for (let i = 1; i <= m; i++) { const cur = [i]; for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = cur; } return prev[n]; };
@@ -181,15 +185,18 @@ export function placeOf(n0) {
   for (const [id, phs] of Object.entries(PHRASES)) for (const ph of phs) if (joined === ph || joined === ph + ' reno') hit = id;
   if (!hit) {
     const known = rest.filter((w) => WORDKEYS.has(w)); const ids = [...new Set(known.map((w) => WORDKEYS.get(w)))]; const others = rest.filter((w) => !WORDKEYS.has(w) && !VAGUEV.has(w) && !/^(floor|wall)$/.test(w));
-    if (ids.length === 1 && !others.length) { const r = known.length >= 2 ? resolveOpt(PLACES.find((x) => x.id === ids[0]), known) : null; if (r) return { place: PLACES.find((x) => x.id === ids[0]), rec, ask: r.q }; hit = ids[0]; }
+    const vv = rest.filter((w) => /^(sealing|tiling|waterproofing|grouting)$/.test(w)).map((w) => w.replace(/ing$/, '')); // a job verb beside one place ("sealing a gutter") picks that place's option; fixing / doing / redoing say nothing
+    if (ids.length === 1 && !others.length) { const r = known.length + vv.length >= 2 ? resolveOpt(PLACES.find((x) => x.id === ids[0]), known.concat(vv), vv.length > 0) : null; if (r) return { place: PLACES.find((x) => x.id === ids[0]), rec, ask: r.q }; hit = ids[0]; }
     else if (ids.length === 1 && others.length) return null;
     else if (ids.length === 2 && !others.length) {
-      const [x, y] = ids; const kitchenish = ['garage', 'kitchen', 'bathroom', 'pool'].find((k) => ids.includes(k));
+      const [x, y] = ids; if (ids.includes('bench')) return { place: PLACES.find((p) => p.id === 'bench'), rec };
+      const kitchenish = ['garage', 'kitchen', 'bathroom', 'pool'].find((k) => ids.includes(k));
       if (kitchenish && ['floor', 'wall', 'concrete'].includes(x === kitchenish ? y : x)) hit = kitchenish;
       else { const px = PLACES.find((p) => p.id === x), py = PLACES.find((p) => p.id === y); const wx = known.filter((w) => WORDKEYS.get(w) === x), wy = known.filter((w) => WORDKEYS.get(w) === y);
-        const order = (px.cat && !py.cat) ? [[py, wx], [px, wy]] : (!px.cat && py.cat) ? [[px, wy], [py, wx]] : [[py, wx], [px, wy]];
+        let tied = false; const order = (px.cat && !py.cat) ? [[py, wx], [px, wy]] : (!px.cat && py.cat) ? [[px, wy], [py, wx]] : [[py, wx], [px, wy]];
         if (ids.includes('tiles') && ['bathroom', 'kitchen', 'laundry'].some((k) => ids.includes(k))) return { place: PLACES.find((p) => p.id === ids.find((k) => k !== 'tiles')), rec };
-        for (const [pl, ws] of order) { if (pl.cat || pl.id === 'tiles' || pl.id === 'crack') continue; const r = resolveOpt(pl, ws); if (r) return { place: pl, rec, ask: r.q }; }
+        for (const [pl, ws] of order) { if (pl.cat || pl.id === 'tiles' || pl.id === 'crack') continue; if (ws.every((w) => SURFACE_WORD.has(w))) continue; const r = resolveOpt(pl, ws, !!(ws === wx ? px : py).cat); if (r) return { place: pl, rec, ask: r.q }; if (resolveOpt(pl, ws, true)) tied = true; } // a product group word beside a place ("sealing a gutter") takes the first option that fits
+        if (!tied && !px.cat && !py.cat && px.id !== 'tiles' && py.id !== 'tiles') { const pick = [px, py].find((p) => !MODIFIER.has(p.id)) || px; return { place: pick, rec }; }
         const base = order.find(([pl]) => !pl.cat && pl.id !== 'tiles' && pl.id !== 'crack'); const cat = order.find(([pl]) => pl.cat || pl.id === 'tiles');
         if (base && cat) return { place: base[0], rec }; return null; }
     }
@@ -197,7 +204,7 @@ export function placeOf(n0) {
   if (!hit) return null;
   return { place: PLACES.find((p) => p.id === hit), rec };
 }
-const resolveOpt = (p, ws) => { const toks = new Set(ws.map((w) => stemw(w))); const sc = p.opts.map((o) => ({ o, s: o.kw.filter((k) => toks.has(stemw(k))).length })).sort((a, b) => b.s - a.s); return sc[0].s >= 1 && (sc.length < 2 || sc[0].s > sc[1].s) ? sc[0].o : null; };
+const resolveOpt = (p, ws, tieFirst) => { const toks = new Set(ws.map((w) => stemw(w))); const sc = p.opts.map((o) => ({ o, s: o.kw.filter((k) => toks.has(stemw(k))).length })).sort((a, b) => b.s - a.s); return sc[0].s >= 1 && (sc.length < 2 || sc[0].s > sc[1].s || tieFirst) ? sc[0].o : null; };
 export function placeCard(pl, rec) {
   const p = pl;
   const c = C.chooseCard(p.title, `${p.text} Tap one, or tell me in your own words.`, p.opts.map((o) => o.q), [], p.opts.map((o) => o.label));
@@ -212,6 +219,7 @@ export function genericCard(rec) {
 // ---- the follow-up that joins a clarifying question ("bathroom" then "under tiles") -------------------------------------------------------------------------------
 // places that describe a surface, position or product group rather than a room: said after a clarifier they narrow the job, they do not change it
 const MODIFIER = new Set(['floor', 'wall', 'outside', 'tiles', 'timber', 'concrete', 'leak', 'crack']);
+const SURFACE_WORD = new Set('floor floors wall walls outside outdoors outdoor exterior external concrete slab slabs timber wood wooden'.split(' '));
 const QWORD = /^(what|whats|how|why|who|where|when|which|can|could|is|are|does|do|will|would|tell|show|give)\b/;
 function stemw(w) { return w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w; }
 const GENERIC_OPTS = STARTERS.map((s, i) => O(s.label, s.q, ['waterproof waterproofing membrane leak leaking bathroom shower wet', 'tile tiles tiling floor adhesive glue', 'seal sealant silicone caulk around bath shower gap', 'crack cracks cracked concrete repair'][i]));
@@ -347,6 +355,9 @@ export function compareSides(n0) {
   let n = clean(applySlang(normalise(n0)).text || normalise(n0)); if (!n || n.split(' ').length > 22) return null;
   n = n.replace(/\s+(?:which|what) (?:one )?(?:is|s|would be|do you)?\s*(?:the )?(?:better|best|good|safer|stronger|cheaper|easier)?(?: one)?$/, '').replace(/\s+(?:please|thanks)$/, '');
   let m;
+  n = n.replace(/^(?:which|what) (?:one )?(?:should|would|do|can|will) (?:i|we|you) (?:buy|use|get|pick|choose|go with|go for)(?: for [a-z ]+?)?\s*/, '');
+  if ((m = /^(?:and |also |ok |so )?(?:vs|versus|v|against|compared (?:to|with)|compare (?:it |that )?(?:to|with)) (.+)$/.exec(n))) return { a: 'it', b: m[1] };
+  if ((m = /^(?:and |also |ok |so )?how does (.+?) (?:compare|stack up|measure up)$/.exec(n)) && !/\b(vs|versus|to|with|against)\b/.test(m[1])) return { a: 'it', b: m[1] };
   const same = /\b(?:vs|versus|against|compar\w*|differ\w*|difference|stack\w* up|measure\w* up|same as|better than|better)\b/.test(n);
   if ((m = new RegExp(`^${CMP_LEAD}(?:the )?(?:difference|differences|diff) between (.+?) and (.+)$`).exec(n))) return { a: m[1], b: m[2] };
   if ((m = new RegExp(`^${CMP_LEAD}(?:compare|comparing)\\s+(.+?)\\s+(?:with|to|and|against|vs|versus)\\s+(.+)$`).exec(n))) return { a: m[1], b: m[2] };
@@ -357,3 +368,31 @@ export function compareSides(n0) {
 }
 const PRONOUN = /^(?:it|this|that|this one|that one|the same|them|its|the first|the last|the other)$/;
 export const isPronounSide = (s) => PRONOUN.test(String(s || '').trim());
+
+// ---- two jobs in one message ("glue for tiles and a sealant for the bath"): one pick at a time, so ask which job first, with the catalogue's kind names as chips ------------
+const JOIN_RX = /\s+(?:and|plus|also|as well as|then)\s+|,\s+|\s+&\s+/;
+const JOB_VERB = [[/\bregrout\w*/g, 'grout'], [/\bre ?seal\w*/g, 'sealant'], [/\bre ?tile\w*/g, 'tile adhesive'], [/\bre ?level\w*/g, 'leveller'], [/\bwaterproof\w*/g, 'waterproofing membrane'], [/\bglue\b/g, 'adhesive']];
+const JOB_TRIM = /^(?:(?:i |we )?(?:need|want|am|m|are|re|also|and|then|got|gotta|have|to|going to|gonna|looking for|after|some|a|an|the|my|our|help with|fix|fixing|do|doing|redo|redoing) )+/;
+/** { a, b } the two halves of a message that names two different kinds of product, else null. kindOf: the advisor's kind reader. */
+export function twoJobs(n0, kindOf) {
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0)));
+  if (/\b(vs|versus|compare\w*|difference|better|or|how much|how many|price|cost|stock)\b|\b(?:sika\w*|davco|lanko|schonox|sarnafil)\b|\d/.test(n)) return null;
+  const halves = n.split(JOIN_RX).map((h) => h.replace(JOB_TRIM, '').trim()).filter((h) => h.split(' ').length >= 2 || /^(grout|sealant|silicone|adhesive|glue|membrane|primer|leveller|mortar|waterproofing)$/.test(h));
+  if (halves.length !== 2) return null;
+  // a product tagline typed as a need ("I need transparent adhesive and sealant") is a product search, not two jobs: a job half says where or what for, or is one bare kind word
+  const CTX = /\b(for|on|in|the|my|our|a|an|some|around|under|between|over|onto)\b/;
+  if (!halves.some((h) => CTX.test(h)) && !halves.every((h) => h.split(' ').length === 1)) return null;
+  if (halves.some((h) => h.split(' ').length > 6)) return null;
+  const kindText = (h) => JOB_VERB.reduce((t, [rx, w]) => t.replace(rx, w), h);
+  const ka = kindOf(kindText(halves[0])), kb = kindOf(kindText(halves[1]));
+  if (!ka || !kb || ka === kb) return null;
+  return { a: halves[0], b: halves[1], ka, kb };
+}
+export function twoJobsCard(tj, labelOf) {
+  const lab = (k, h) => { const l = String(labelOf(k) || h).replace(/\s+(for|and)\b.*$/, '').replace(/,.*$/, '').replace(/s$/, ''); return l.charAt(0).toUpperCase() + l.slice(1); };
+  const la = lab(tj.ka, tj.a), lb = lab(tj.kb, tj.b);
+  const va = 'Best ' + tj.a, vb = 'Best ' + tj.b;
+  const c = C.chooseCard('Two jobs there', `I pick one product at a time from the data sheets. Which job first: the ${la.toLowerCase()} or the ${lb.toLowerCase()}? Tap one, or tell me more about the job.`, [va, vb, va], [], [la + ' first', lb + ' first', 'Both, ' + la.toLowerCase() + ' then ' + lb.toLowerCase()]);
+  c.followups = [va, vb]; c.chip = ASK_CHIP;
+  return { card: c, convo: { id: 'generic', rec: true } };
+}
