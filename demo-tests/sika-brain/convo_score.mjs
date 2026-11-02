@@ -24,6 +24,7 @@ for (const row of bank.rows) {
   if (cls === 'clarify') { if (!notfound && c.type !== 'choose') fails.push('vague-answered-instead-of-clarified'); else if (!notfound && (chipsOf(a) < 3 || chipsOf(a) > 5)) fails.push('clarify-chip-count-off'); }
   if (cls === 'pick') { if (!notfound && c.type === 'choose') fails.push('pick-asked-clarifier-instead'); else if (!notfound && !/^My pick/.test(c.headline || '') && !(a.trace || []).includes('chat:tie')) fails.push(c.type === 'advice' && /whose published text|match your words/.test(c.title) ? 'pick-got-unranked-list' : 'pick-no-My-pick-lead'); else if (!notfound && !a.cards.some((x) => x.source && x.source.sentence)) fails.push('pick-no-quoted-sentence'); }
   if (cls === 'answer' && !notfound && c.type === 'choose') fails.push('answer-got-clarifier-loop');
+  if (p.strict) { if (!notfound) fails.push('honest-no-not-stated-as-unpublished'); if (a.cards.some((x) => x.product)) fails.push('honest-no-named-a-product'); }
   if (cls === 'honest-no') { if (!(c.type === 'unknown' || /Technical Services|not.*stock|price|published/i.test(t))) fails.push('honest-no-missing-handoff'); }
   if (cls === 'compare' && !notfound) { const prods = a.cards.filter((x) => x.product).length; if (a.intent !== 'compare' && prods < 2) fails.push('compare-not-side-by-side'); }
   if (cls === 'quantity' && !notfound) { if (c.type === 'choose') fails.push('quantity-clarifier-no-number'); else if (!['rate', 'calc'].includes(a.intent) && !['rate', 'calc'].includes(c.type) && !UNITS.test(t)) fails.push('quantity-no-number'); }

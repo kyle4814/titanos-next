@@ -1,0 +1,1174 @@
+{
+ "name": "convo_final",
+ "rows": [
+  {
+   "id": "F001",
+   "cat": "painter",
+   "class": "social",
+   "turns": [
+    "g day mate"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F002",
+   "cat": "painter",
+   "class": "social",
+   "turns": [
+    "yo thanks heaps for the help last time"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F003",
+   "cat": "painter",
+   "class": "clarify",
+   "turns": [
+    "i need something for the walls"
+   ]
+  },
+  {
+   "id": "F004",
+   "cat": "painter",
+   "class": "answer",
+   "turns": [
+    "whats the best thing to fill gaps between skirting and wall before i paint, sicker flex or something else"
+   ]
+  },
+  {
+   "id": "F005",
+   "cat": "painter",
+   "class": "pick",
+   "turns": [
+    "what should i use to seal around a window frame before painting, outside, need it paintable"
+   ]
+  },
+  {
+   "id": "F006",
+   "cat": "painter",
+   "class": "answer",
+   "turns": [
+    "can you paint over sikaflex 11 fc+ and how long do i wait"
+   ]
+  },
+  {
+   "id": "F007",
+   "cat": "painter",
+   "class": "quantity",
+   "turns": [
+    "how much sika primer 3 n do i need for 18 m2 of old timber"
+   ]
+  },
+  {
+   "id": "F008",
+   "cat": "painter",
+   "class": "honest-no",
+   "turns": [
+    "how much does a 600ml sausage of sikaflex pro cost at bunnings right now"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F009",
+   "cat": "painter",
+   "class": "compare",
+   "turns": [
+    "sikaflex 11 fc vs sikaflex pro whats the difference"
+   ]
+  },
+  {
+   "id": "F010",
+   "cat": "painter",
+   "class": "clarify",
+   "turns": [
+    "got a crack in the ceiling what do i use"
+   ]
+  },
+  {
+   "id": "F011",
+   "cat": "pool",
+   "class": "pick",
+   "turns": [
+    "best thing to seal around pool tiles and the coping joint"
+   ]
+  },
+  {
+   "id": "F012",
+   "cat": "pool",
+   "class": "answer",
+   "turns": [
+    "is sikasil pool ok for underwater joints"
+   ]
+  },
+  {
+   "id": "F013",
+   "cat": "pool",
+   "class": "quantity",
+   "turns": [
+    "pool is 8 m by 4 m how much waterproofing membrane for the floor and walls say 80 square metres"
+   ]
+  },
+  {
+   "id": "F014",
+   "cat": "pool",
+   "class": "honest-no",
+   "turns": [
+    "what is the exact mix ratio of cement to sand for my pool shell 32 mpa"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F015",
+   "cat": "pool",
+   "class": "compare",
+   "turns": [
+    "sikalastic 1k vs sikalastic 1 komponent for a pool bench"
+   ]
+  },
+  {
+   "id": "F016",
+   "cat": "pool",
+   "class": "answer",
+   "turns": [
+    "what primer do i need before sikalastic 1k on concrete"
+   ]
+  },
+  {
+   "id": "F017",
+   "cat": "pool",
+   "class": "clarify",
+   "turns": [
+    "need something to stop the pool leaking"
+   ]
+  },
+  {
+   "id": "F018",
+   "cat": "pool",
+   "class": "honest-no",
+   "turns": [
+    "will you guarantee my pool wont leak if i use your stuff"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F019",
+   "cat": "pool",
+   "class": "answer",
+   "turns": [
+    "how long before i can fill the pool after membrane goes down"
+   ]
+  },
+  {
+   "id": "F020",
+   "cat": "pool",
+   "class": "pick",
+   "turns": [
+    "grout for pool tiles that handles salt and chlorine"
+   ]
+  },
+  {
+   "id": "F021",
+   "cat": "pool",
+   "class": "social",
+   "turns": [
+    "all good cheers"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F022",
+   "cat": "strata",
+   "class": "clarify",
+   "turns": [
+    "we have water coming in the car park ceiling what product"
+   ]
+  },
+  {
+   "id": "F023",
+   "cat": "strata",
+   "class": "answer",
+   "turns": [
+    "which sika product is for repairing spalling concrete on a balcony soffit"
+   ]
+  },
+  {
+   "id": "F024",
+   "cat": "strata",
+   "class": "honest-no",
+   "turns": [
+    "can you send me a quote for the whole building balcony waterproofing"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F025",
+   "cat": "strata",
+   "class": "honest-no",
+   "turns": [
+    "is it a legal requirement under the strata act to use a registered waterproofer"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F026",
+   "cat": "strata",
+   "class": "pick",
+   "turns": [
+    "best joint sealant for expansion joints in a carpark slab"
+   ]
+  },
+  {
+   "id": "F027",
+   "cat": "strata",
+   "class": "answer",
+   "turns": [
+    "do you have a data sheet for sikadur 31 cf normal i need it for the committee"
+   ]
+  },
+  {
+   "id": "F028",
+   "cat": "strata",
+   "class": "honest-no",
+   "turns": [
+    "who is the sika rep for brisbane north and whats his mobile number"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F029",
+   "cat": "strata",
+   "class": "compare",
+   "turns": [
+    "sikaflex pro vs sikaflex 11 fc+ for expansion joints"
+   ]
+  },
+  {
+   "id": "F030",
+   "cat": "strata",
+   "class": "quantity",
+   "turns": [
+    "150 m2 rooftop deck how much sikalastic 8902 would that be"
+   ]
+  },
+  {
+   "id": "F031",
+   "cat": "strata",
+   "class": "social",
+   "turns": [
+    "hello there"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F032",
+   "cat": "farmer",
+   "class": "pick",
+   "turns": [
+    "fixing a leaking colorbond shed roof what do i use"
+   ]
+  },
+  {
+   "id": "F033",
+   "cat": "farmer",
+   "class": "answer",
+   "turns": [
+    "will sikaflex stick to galvanised steel without a primer"
+   ]
+  },
+  {
+   "id": "F034",
+   "cat": "farmer",
+   "class": "quantity",
+   "turns": [
+    "shed roof 12 by 9 metres how many litres of roof sealant"
+   ]
+  },
+  {
+   "id": "F035",
+   "cat": "farmer",
+   "class": "clarify",
+   "turns": [
+    "need to glue stuff in the shed"
+   ]
+  },
+  {
+   "id": "F036",
+   "cat": "farmer",
+   "class": "honest-no",
+   "turns": [
+    "can i put sikaflex on a roof thats been treated with lead paint"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F037",
+   "cat": "farmer",
+   "class": "pick",
+   "turns": [
+    "best stuff to seal gutter joints that go rusty"
+   ]
+  },
+  {
+   "id": "F038",
+   "cat": "farmer",
+   "class": "answer",
+   "turns": [
+    "what does sikaseal roof and gutter cover and what colours"
+   ]
+  },
+  {
+   "id": "F039",
+   "cat": "farmer",
+   "class": "honest-no",
+   "turns": [
+    "whats the price per litre if i buy a pallet direct from the factory"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F040",
+   "cat": "farmer",
+   "class": "compare",
+   "turns": [
+    "sikaseal roof and gutter vs sikaflex 11 fc for gutters"
+   ]
+  },
+  {
+   "id": "F041",
+   "cat": "farmer",
+   "class": "answer",
+   "turns": [
+    "do you have anything for fixing a cracked concrete water trough"
+   ]
+  },
+  {
+   "id": "F042",
+   "cat": "farmer",
+   "class": "honest-no",
+   "turns": [
+    "will it be safe for my cattle to drink from the trough once its sealed"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F043",
+   "cat": "farmer",
+   "class": "social",
+   "turns": [
+    "ta mate that sorted it"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F044",
+   "cat": "plumber",
+   "class": "pick",
+   "turns": [
+    "what silicone for a shower base to wall joint, bathroom, mould resistant"
+   ]
+  },
+  {
+   "id": "F045",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "is sikasil sanitary ok on natural stone or does it stain"
+   ]
+  },
+  {
+   "id": "F046",
+   "cat": "plumber",
+   "class": "clarify",
+   "turns": [
+    "need a sealant for a tap"
+   ]
+  },
+  {
+   "id": "F047",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "can i use sikaflex 11 fc+ for sealing around a toilet pan base"
+   ]
+  },
+  {
+   "id": "F048",
+   "cat": "plumber",
+   "class": "quantity",
+   "turns": [
+    "how many cartridges for 24 metres of 6mm bead around a bathroom"
+   ]
+  },
+  {
+   "id": "F049",
+   "cat": "plumber",
+   "class": "honest-no",
+   "turns": [
+    "is sika watermark certified for use on potable water pipes"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F050",
+   "cat": "plumber",
+   "class": "compare",
+   "turns": [
+    "sikaseal kitchen and bathroom vs davco n silicone"
+   ]
+  },
+  {
+   "id": "F051",
+   "cat": "plumber",
+   "class": "pick",
+   "turns": [
+    "what should i use under a bath to fill the gap against the tiles"
+   ]
+  },
+  {
+   "id": "F052",
+   "cat": "plumber",
+   "class": "honest-no",
+   "turns": [
+    "what torque do i tighten the flange to before applying the sealant"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F053",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "how long does sikaseal kitchen and bathroom take to skin over"
+   ]
+  },
+  {
+   "id": "F054",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "whats the shelf life of an opened cartridge"
+   ]
+  },
+  {
+   "id": "F055",
+   "cat": "plumber",
+   "class": "social",
+   "turns": [
+    "legend thanks"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F056",
+   "cat": "apprentice",
+   "class": "clarify",
+   "turns": [
+    "boss told me to get the sika stuff for the job what do i get"
+   ]
+  },
+  {
+   "id": "F057",
+   "cat": "apprentice",
+   "class": "social",
+   "turns": [
+    "hi im new here what can you do"
+   ]
+  },
+  {
+   "id": "F058",
+   "cat": "apprentice",
+   "class": "answer",
+   "turns": [
+    "what is a primer and why do i need it"
+   ]
+  },
+  {
+   "id": "F059",
+   "cat": "apprentice",
+   "class": "clarify",
+   "turns": [
+    "which one is the white one in the tube"
+   ]
+  },
+  {
+   "id": "F060",
+   "cat": "apprentice",
+   "class": "answer",
+   "turns": [
+    "what does ppe mean on the data sheet and what do i wear using sikadur 32 lp"
+   ]
+  },
+  {
+   "id": "F061",
+   "cat": "apprentice",
+   "class": "honest-no",
+   "turns": [
+    "my boss said it was fine to skip the primer will it still hold"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F062",
+   "cat": "apprentice",
+   "class": "pick",
+   "turns": [
+    "whats the easiest sealant to use for a beginner for gaps in a kitchen splashback"
+   ]
+  },
+  {
+   "id": "F063",
+   "cat": "apprentice",
+   "class": "answer",
+   "turns": [
+    "how do i clean up wet sikaflex off my hands and tools"
+   ]
+  },
+  {
+   "id": "F064",
+   "cat": "apprentice",
+   "class": "quantity",
+   "turns": [
+    "how many tubes of sikabond instant nails fast for sticking 30 metres of trim"
+   ]
+  },
+  {
+   "id": "F065",
+   "cat": "apprentice",
+   "class": "compare",
+   "turns": [
+    "whats the difference between a sealant and an adhesive"
+   ]
+  },
+  {
+   "id": "F066",
+   "cat": "apprentice",
+   "class": "honest-no",
+   "turns": [
+    "can you tell me if im allowed to use this without a licence"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F067",
+   "cat": "rep",
+   "class": "social",
+   "turns": [
+    "just testing this out in front of a customer say hello"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F068",
+   "cat": "rep",
+   "class": "answer",
+   "turns": [
+    "show me the technical data for sikaflex 118 extreme grab"
+   ]
+  },
+  {
+   "id": "F069",
+   "cat": "rep",
+   "class": "compare",
+   "turns": [
+    "sikaflex 118 extreme grab vs sikabond 145 supergrip"
+   ]
+  },
+  {
+   "id": "F070",
+   "cat": "rep",
+   "class": "pick",
+   "turns": [
+    "customer is a tiler needing an epoxy grout for a commercial kitchen"
+   ]
+  },
+  {
+   "id": "F071",
+   "cat": "rep",
+   "class": "honest-no",
+   "turns": [
+    "what is our margin on sikaflex pro for resellers"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F072",
+   "cat": "rep",
+   "class": "quantity",
+   "turns": [
+    "customer has 45 m2 of floor to level at 5mm how much sikafloor level pro"
+   ]
+  },
+  {
+   "id": "F073",
+   "cat": "rep",
+   "class": "clarify",
+   "turns": [
+    "customer wants a flooring system"
+   ]
+  },
+  {
+   "id": "F074",
+   "cat": "rep",
+   "class": "answer",
+   "turns": [
+    "does sikadur 330 have a published pot life"
+   ]
+  },
+  {
+   "id": "F075",
+   "cat": "rep",
+   "class": "honest-no",
+   "turns": [
+    "which of our competitors products is cheaper than sikaflex"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F076",
+   "cat": "rep",
+   "class": "answer",
+   "turns": [
+    "what pack sizes does sikaflex pro come in"
+   ]
+  },
+  {
+   "id": "F077",
+   "cat": "rep",
+   "class": "honest-no",
+   "turns": [
+    "is the new sikaflex formula coming out next month"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F078",
+   "cat": "rep",
+   "class": "compare",
+   "turns": [
+    "sikafloor 161 vs sikafloor 160 whats the use"
+   ]
+  },
+  {
+   "id": "F079",
+   "cat": "painter",
+   "class": "pick",
+   "turns": [
+    "best sealant for gaps in weatherboards before a full repaint"
+   ]
+  },
+  {
+   "id": "F080",
+   "cat": "pool",
+   "class": "answer",
+   "turns": [
+    "can sikaflex pro be used underwater"
+   ]
+  },
+  {
+   "id": "F081",
+   "cat": "strata",
+   "class": "clarify",
+   "turns": [
+    "something to fix cracks in a wall"
+   ]
+  },
+  {
+   "id": "F082",
+   "cat": "farmer",
+   "class": "quantity",
+   "turns": [
+    "10 square metres of concrete slab in the shed how much sikafloor 161 for sealing"
+   ]
+  },
+  {
+   "id": "F083",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "is sikaflex 11 fc+ ok for stainless steel sinks"
+   ]
+  },
+  {
+   "id": "F084",
+   "cat": "apprentice",
+   "class": "pick",
+   "turns": [
+    "what do i use to stick a timber threshold to concrete"
+   ]
+  },
+  {
+   "id": "F085",
+   "cat": "rep",
+   "class": "answer",
+   "turns": [
+    "what colours does sikaflex pro come in"
+   ]
+  },
+  {
+   "id": "F086",
+   "cat": "painter",
+   "class": "answer",
+   "turns": [
+    "whats the cure time for sikaflex 11 fc+ at 10 degrees"
+   ]
+  },
+  {
+   "id": "F087",
+   "cat": "pool",
+   "class": "honest-no",
+   "turns": [
+    "how many pools have you built with this"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F088",
+   "cat": "strata",
+   "class": "social",
+   "turns": [
+    "thanks that is all"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F089",
+   "cat": "apprentice",
+   "class": "answer",
+   "turns": [
+    "what is the difference between sika boom g and sika boom ap"
+   ]
+  },
+  {
+   "id": "F090",
+   "cat": "plumber",
+   "class": "honest-no",
+   "turns": [
+    "can you tell me how to become a licensed plumber in queensland"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F091",
+   "cat": "painter",
+   "class": "pick",
+   "turns": [
+    "i need a sealant",
+    "for outside windows and it needs to be paintable"
+   ],
+   "props": {
+    "room": "window|outside|exterior|paint"
+   }
+  },
+  {
+   "id": "F092",
+   "cat": "painter",
+   "class": "answer",
+   "turns": [
+    "tell me about sikaflex pro",
+    "can i paint over it",
+    "how long till i can"
+   ],
+   "props": {
+    "has": "paint"
+   }
+  },
+  {
+   "id": "F093",
+   "cat": "painter",
+   "class": "quantity",
+   "turns": [
+    "sealing gaps on a weatherboard house",
+    "about 60 metres of 5 mm gap how many cartridges"
+   ],
+   "props": {}
+  },
+  {
+   "id": "F094",
+   "cat": "painter",
+   "class": "clarify",
+   "turns": [
+    "hey",
+    "got a job on tomorrow",
+    "need something for the bathroom ceiling"
+   ]
+  },
+  {
+   "id": "F095",
+   "cat": "pool",
+   "class": "answer",
+   "turns": [
+    "looking at sikalastic 1k",
+    "is it ok for pools",
+    "what primer for concrete"
+   ],
+   "props": {
+    "has": "prim"
+   }
+  },
+  {
+   "id": "F096",
+   "cat": "pool",
+   "class": "pick",
+   "turns": [
+    "tiling a pool",
+    "what adhesive should i get",
+    "needs to be flexible and white"
+   ],
+   "props": {
+    "room": "pool|tile|tiling"
+   }
+  },
+  {
+   "id": "F097",
+   "cat": "pool",
+   "class": "quantity",
+   "turns": [
+    "waterproofing a pool",
+    "about 70 m2 of surface",
+    "how much of the 1k is that and how many pails"
+   ],
+   "props": {}
+  },
+  {
+   "id": "F098",
+   "cat": "pool",
+   "class": "honest-no",
+   "turns": [
+    "sikasil pool good for expansion joints?",
+    "what is its price at bunnings"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F099",
+   "cat": "strata",
+   "class": "answer",
+   "turns": [
+    "we need to fix a balcony",
+    "spalling concrete underneath",
+    "which mortar do you do for that"
+   ],
+   "props": {
+    "room": "concrete|mortar|repair|balcony"
+   }
+  },
+  {
+   "id": "F100",
+   "cat": "strata",
+   "class": "compare",
+   "turns": [
+    "expansion joint in a carpark",
+    "sikaflex pro",
+    "how does it compare to sikaflex 11 fc+"
+   ],
+   "props": {}
+  },
+  {
+   "id": "F101",
+   "cat": "strata",
+   "class": "honest-no",
+   "turns": [
+    "we want to waterproof a rooftop",
+    "can you tell me how long the job will take for 400 m2 and what it costs"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F102",
+   "cat": "strata",
+   "class": "clarify",
+   "turns": [
+    "water coming through",
+    "in the basement",
+    "what do i do"
+   ]
+  },
+  {
+   "id": "F103",
+   "cat": "farmer",
+   "class": "pick",
+   "turns": [
+    "shed roof leaking",
+    "its colorbond",
+    "what should i use on the screws and the laps"
+   ],
+   "props": {
+    "room": "roof|colorbond|shed|metal"
+   }
+  },
+  {
+   "id": "F104",
+   "cat": "farmer",
+   "class": "quantity",
+   "turns": [
+    "gutter sealing",
+    "40 metres of gutter joints",
+    "how many cartridges of sikaseal roof and gutter"
+   ],
+   "props": {}
+  },
+  {
+   "id": "F105",
+   "cat": "farmer",
+   "class": "honest-no",
+   "turns": [
+    "concrete water trough has a crack",
+    "can you tell me how many years it will last before it cracks again"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F106",
+   "cat": "farmer",
+   "class": "answer",
+   "turns": [
+    "sikaflex 11 fc+",
+    "will it work on galvanised",
+    "and corrugated iron overlaps"
+   ],
+   "props": {
+    "has": "galvanis|steel|metal|substrate"
+   }
+  },
+  {
+   "id": "F107",
+   "cat": "plumber",
+   "class": "pick",
+   "turns": [
+    "shower recess",
+    "need silicone",
+    "that wont go mouldy"
+   ],
+   "props": {
+    "room": "shower|bath|mould|sanitary"
+   }
+  },
+  {
+   "id": "F108",
+   "cat": "plumber",
+   "class": "answer",
+   "turns": [
+    "sikasil sanitary",
+    "can it go on marble",
+    "how long to skin"
+   ],
+   "props": {}
+  },
+  {
+   "id": "F109",
+   "cat": "plumber",
+   "class": "compare",
+   "turns": [
+    "sikaseal kitchen and bathroom",
+    "vs davco n silicone for a vanity",
+    "which one is better for mould"
+   ]
+  },
+  {
+   "id": "F110",
+   "cat": "plumber",
+   "class": "honest-no",
+   "turns": [
+    "is sikaseal kitchen and bathroom watermark rated",
+    "ok and what is the failure rate in the field"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F111",
+   "cat": "apprentice",
+   "class": "clarify",
+   "turns": [
+    "first day",
+    "boss said get the grey one",
+    "what is it called"
+   ]
+  },
+  {
+   "id": "F112",
+   "cat": "apprentice",
+   "class": "answer",
+   "turns": [
+    "what is sikadur 31 cf normal",
+    "is it dangerous",
+    "what gloves"
+   ]
+  },
+  {
+   "id": "F113",
+   "cat": "apprentice",
+   "class": "pick",
+   "turns": [
+    "sticking trim to a wall",
+    "no nails",
+    "something quick grabbing"
+   ],
+   "props": {
+    "room": "trim|wall|nail|grab"
+   }
+  },
+  {
+   "id": "F114",
+   "cat": "apprentice",
+   "class": "quantity",
+   "turns": [
+    "gluing trim",
+    "100 metres",
+    "how many cartridges of sikabond instant nails fast"
+   ]
+  },
+  {
+   "id": "F115",
+   "cat": "rep",
+   "class": "answer",
+   "turns": [
+    "demo time",
+    "sikaflex 118 extreme grab",
+    "pack sizes and colours"
+   ],
+   "props": {
+    "room": "118|grab"
+   }
+  },
+  {
+   "id": "F116",
+   "cat": "rep",
+   "class": "compare",
+   "turns": [
+    "customer is comparing",
+    "sikaflex 118 extreme grab",
+    "against sikabond 145 supergrip"
+   ]
+  },
+  {
+   "id": "F117",
+   "cat": "rep",
+   "class": "pick",
+   "turns": [
+    "customer is a floor layer",
+    "wants a self levelling underlayment",
+    "interior concrete 5 mm"
+   ],
+   "props": {
+    "room": "level|floor"
+   }
+  },
+  {
+   "id": "F118",
+   "cat": "rep",
+   "class": "honest-no",
+   "turns": [
+    "customer wants a discount",
+    "what is the rebate for 100 cartridges of sikaflex pro"
+   ],
+   "props": {
+    "strict": true,
+    "not": "Sikaflex|Sikalastic|Sikadur|Sikafloor|Sikagard|SikaBond|Sikasil|MonoTop|Davco|SikaSeal|SikaTop|SikaCeram|SikaProof|SikaSwell|Sikament|ViscoCrete|SikaGrout|SikaTack|Sika Boom"
+   }
+  },
+  {
+   "id": "F119",
+   "cat": "rep",
+   "class": "social",
+   "turns": [
+    "hello",
+    "are you an ai",
+    "cool thanks"
+   ],
+   "props": {
+    "short": true
+   }
+  },
+  {
+   "id": "F120",
+   "cat": "rep",
+   "class": "clarify",
+   "turns": [
+    "customer wants something for a roof",
+    "not sure what kind"
+   ]
+  }
+ ]
+}
