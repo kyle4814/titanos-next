@@ -1,0 +1,2825 @@
+{
+ "schema": "sika-convo-bank@1",
+ "generated": "2026-11-02",
+ "note": "Product names verified in public/demo/sika-210c0c/data/brain/core.json. No product ids are asserted as truth. See gen_convo_bank.mjs for the property vocabulary.",
+ "counts": {
+  "social": 20,
+  "vague": 40,
+  "recommend": 40,
+  "typo": 30,
+  "compare": 20,
+  "quantity": 20,
+  "followup": 30,
+  "script": 40
+ },
+ "rows": [
+  {
+   "id": "social-001",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "hello"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-002",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "hi mate how are you"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-003",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "g'day"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-004",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "hey"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-005",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "good morning"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-006",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "morning legend"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-007",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "thanks"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-008",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "cheers mate"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-009",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "ta heaps"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-010",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "legend thanks"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-011",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "bye"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-012",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "see ya"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-013",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "who are you"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-014",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "what can you do"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-015",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "are you a robot"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-016",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "what's your name"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-017",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "you are useless"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-018",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "this is rubbish"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-019",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "why cant you just answer me"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "social-020",
+   "cat": "social",
+   "class": "social",
+   "turns": [
+    "lol ok"
+   ],
+   "props": {
+    "short": 1
+   }
+  },
+  {
+   "id": "vague-021",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "bathroom"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-022",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "kitchen"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-023",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "deck"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-024",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "shed"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-025",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "roof"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-026",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "fence"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-027",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "stairs"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-028",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "a wall"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-029",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "floor"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-030",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "window"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-031",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "pool"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-032",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "laundry"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-033",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "garage"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-034",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "balcony"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-035",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "basement"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-036",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "pergola"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-037",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "driveway"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-038",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "footpath"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-039",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "carport"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-040",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "toilet"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-041",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "tiles"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-042",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "concrete"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-043",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "timber"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-044",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "metal roof"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-045",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "glass"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-046",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "brick"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-047",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "render"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-048",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "gutter"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-049",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "skylight"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-050",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "shower"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-051",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "bath"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-052",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "patio"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-053",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "wet area"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-054",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "outdoor area"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-055",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "water tank"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-056",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "retaining wall"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-057",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "cracks"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-058",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "leaks"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-059",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "damp wall"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "vague-060",
+   "cat": "vague",
+   "class": "clarify",
+   "turns": [
+    "mould"
+   ],
+   "props": {
+    "chips": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "id": "recommend-061",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for a balcony leak"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-062",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what's the best sealant for a shower"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-063",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best adhesive for skirting boards"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-064",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which waterproofing membrane is best under tiles"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-065",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "recommend a tile adhesive for large porcelain tiles"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-066",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what should I use to level a concrete floor"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-067",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best primer for a concrete slab before tiling"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-068",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for a leaking flat roof"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-069",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which grout is best for a shower floor"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-070",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best product to fix cracks in a driveway"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-071",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what would you use to glue timber to concrete"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-072",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "recommend a sealant for a window frame"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-073",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best way to waterproof a bathroom floor"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-074",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what is the best adhesive for mirrors"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-075",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which sealant for outdoor joints that move"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-076",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "recommend something to repair spalling concrete"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-077",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best construction adhesive for a workshop bench"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-078",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you suggest for sealing a bath"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-079",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what is best for fixing loose pavers"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-080",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which product for waterproofing a planter box"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-081",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best floor leveller for timber subfloor"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-082",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for a mouldy shower grout"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-083",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best sealant for a kitchen splashback"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-084",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what adhesive for tiles on a plasterboard wall"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-085",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what should I use for under floor heating screed"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-086",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "recommend an adhesive for outdoor tiles"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-087",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which one is best for a water tank repair"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-088",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you reckon for a balcony waterproofing job"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-089",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best membrane for a podium deck"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-090",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for bonding vinyl planks"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-091",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best thing for anchoring bolts in concrete"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-092",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for a pool surround tiles"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-093",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best sealant for a bathroom ceiling"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-094",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which grout for outdoor tiles"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-095",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what would you put on a concrete floor to stop dust"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-096",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "best repair mortar for a concrete step"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-097",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "recommend a flexible adhesive for a car trailer"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-098",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what is best for gluing a handrail"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-099",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "what do you recommend for expansion joints in a driveway"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "recommend-100",
+   "cat": "recommend",
+   "class": "pick",
+   "turns": [
+    "which product for a damp basement wall"
+   ],
+   "props": {
+    "pick": 1,
+    "quote": 1
+   }
+  },
+  {
+   "id": "typo-101",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "need sumthing for shower leak"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-102",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "whats the best sealent for a bathrm"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-103",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "u got anything for a leaky balcny"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-104",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "wat do i use for tiles on a deck"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-105",
+   "cat": "typo",
+   "class": "social",
+   "turns": [
+    "arvo mate need a hand with a reno"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-106",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "doing a bathroom reno wat waterproofing"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-107",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "gluin timber to brick wat do i use"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-108",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "wats the best grout for the kitchn"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-109",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "recomend a adhesive for skirtin boards"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-110",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "crackd driveway need fix"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-111",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "my roof is leakin wat now"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-112",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "sealent for windas"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-113",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "need a primmer for concrete"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-114",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "tile adheseve for outside"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-115",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "pls help leaky showa"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-116",
+   "cat": "typo",
+   "class": "quantity",
+   "turns": [
+    "wat is the coverage of davco gray one pot"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-117",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "sikaflex 11 fc pot life"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-118",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "sika flex 11 fc cure time"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-119",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "sikalastic 1k datasheet"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-120",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "gimme the sds for sikaflex 11 fc"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-121",
+   "cat": "typo",
+   "class": "answer",
+   "turns": [
+    "do u sell silicone"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-122",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "tradie here need fast set adhesive"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-123",
+   "cat": "typo",
+   "class": "clarify",
+   "turns": [
+    "dunno what i need for a wet room"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-124",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "yeah nah need something for a cracked slab"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-125",
+   "cat": "typo",
+   "class": "compare",
+   "turns": [
+    "wats the diff between sikalastic 1k and 1 komponent"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-126",
+   "cat": "typo",
+   "class": "clarify",
+   "turns": [
+    "hows it goin need advice on grout"
+   ],
+   "props": {}
+  },
+  {
+   "id": "typo-127",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "sumthin to stick tiles to old tiles"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-128",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "ur products any good for a shed floor"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-129",
+   "cat": "typo",
+   "class": "pick",
+   "turns": [
+    "wanna waterproof a laundry cheers"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "typo-130",
+   "cat": "typo",
+   "class": "social",
+   "turns": [
+    "hey u there need help with the reno"
+   ],
+   "props": {}
+  },
+  {
+   "id": "compare-131",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Sikaflex-11 FC+ vs SikaBond-142 Instant Nails"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-132",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Sikalastic-1K and Sikalastic-1 Komponent"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-133",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Davco PrimeX vs Davco Ultraprime"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-134",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Sikaflex-111 Stick & Seal and Sikaflex-112 Crystal Clear"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-135",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Sikaflex-118 Extreme Grab vs Sikaflex-116 High Grab"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-136",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between SikaBond-145 SuperGrip and SikaBond-115 Max Tack"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-137",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Davco Easy Grout vs Davco Sanitized Colorgrout"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-138",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Sikalastic-888 and Sikalastic-777"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-139",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Davco Ceramacrete vs Davco Ceramaflex"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-140",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between SikaGrout HES and SikaGrout-300 PT AU"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-141",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "SikaTile-410 Secure Set vs SikaTile-510 Mega Lite"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-142",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Davco Grey One Pot adhesive and SikaTile-410 Secure Set"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-143",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Sikalastic-701 vs Sikalastic-851"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-144",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Davco Ultraflex and Davco Ceramaflex"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-145",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "SikaTile-110 Secure Proof vs Sikalastic-1K"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-146",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Davco K10 Plus and Sikalastic-1K"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-147",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Sikaflex-11 FC+ vs Sikaflex-111 Stick & Seal"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-148",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between Davco Superfine White Grout and Davco Easy Grout"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-149",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "Sikalastic-622 Excel Top PLUS vs Sikalastic-488 (au)"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "compare-150",
+   "cat": "compare",
+   "class": "compare",
+   "turns": [
+    "difference between SikaBond-105 ContactFix and SikaBond-145 SuperGrip"
+   ],
+   "props": {
+    "products": 2
+   }
+  },
+  {
+   "id": "quantity-151",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much Sikalastic-1K for 12 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-152",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much Davco Grey One Pot adhesive do I need for 20 m2 of tiles"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-153",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "coverage of Sikaflex-11 FC+ per cartridge"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-154",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how many cartridges of Sikaflex-11 FC+ for 30 metres of joint"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-155",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much SikaTile-410 Secure Set for 8 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-156",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how many pails of Davco K10 Plus for 15 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-157",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much primer for 40 m2 slab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-158",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much floor leveller for 25 m2 at 5 mm"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-159",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "litres of Sikalastic-1 Komponent for a 6 m2 balcony"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-160",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how many bags of SikaGrout HES for a 1 m2 baseplate"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-161",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much membrane do I need for a 3 by 4 bathroom floor"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-162",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how many tubes of SikaBond-142 Instant Nails for 10 skirting boards"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-163",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "I have 50 m2 of floor, how much adhesive"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-164",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much Davco Easy Grout for 10 m2 of 600x600 tiles"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-165",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "what area does a 20 litre pail of Sikalastic-1K cover"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-166",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how many coats and how much for 18 m2 of Sikalastic-777"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-167",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much Davco PrimeX for 35 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-168",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much would I need for 12 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-169",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "quantity of Davco Ceramacrete for 9 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "quantity-170",
+   "cat": "quantity",
+   "class": "quantity",
+   "turns": [
+    "how much adhesive for 5 sqm of tiles"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-171",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "what do you recommend for my bathroom",
+    "under tiles"
+   ],
+   "props": {
+    "room": "bathroom|shower|wet|tile"
+   }
+  },
+  {
+   "id": "followup-172",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "can you recommend a sealant",
+    "around the bath"
+   ],
+   "props": {
+    "has": "bath|shower|wet"
+   }
+  },
+  {
+   "id": "followup-173",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "garage floor",
+    "its cracked"
+   ],
+   "props": {
+    "has": "crack|repair"
+   }
+  },
+  {
+   "id": "followup-174",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "i need an adhesive",
+    "for skirting boards"
+   ],
+   "props": {
+    "has": "skirting"
+   }
+  },
+  {
+   "id": "followup-175",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "coverage of Davco Grey One Pot adhesive",
+    "what about outside"
+   ],
+   "props": {
+    "has": "Davco Grey One Pot|outdoor|exterior|external"
+   }
+  },
+  {
+   "id": "followup-176",
+   "cat": "followup",
+   "class": "honest-no",
+   "turns": [
+    "best tile adhesive",
+    "cheaper one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-177",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "Sikaflex-11 FC+ cartridge",
+    "how long to dry"
+   ],
+   "props": {
+    "has": "cure|skin|hours|Sikaflex-11"
+   }
+  },
+  {
+   "id": "followup-178",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "Sikalastic-1K",
+    "how long to dry"
+   ],
+   "props": {
+    "has": "dry|cure|hours|Sikalastic-1K"
+   }
+  },
+  {
+   "id": "followup-179",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "Sikalastic-1K",
+    "and the sds"
+   ],
+   "props": {
+    "has": "safety|sds"
+   }
+  },
+  {
+   "id": "followup-180",
+   "cat": "followup",
+   "class": "quantity",
+   "turns": [
+    "Sikalastic-1K",
+    "what about for 12 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-181",
+   "cat": "followup",
+   "class": "quantity",
+   "turns": [
+    "Davco Grey One Pot adhesive",
+    "same for 20 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-182",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "what do you recommend for a balcony leak",
+    "the second one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-183",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "what do you recommend for a balcony leak",
+    "what about the first one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-184",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "recommend a floor leveller",
+    "and in a pail"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-185",
+   "cat": "followup",
+   "class": "pick",
+   "turns": [
+    "recommend a tile adhesive",
+    "can you pick one for me"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "followup-186",
+   "cat": "followup",
+   "class": "pick",
+   "turns": [
+    "bathroom",
+    "you pick"
+   ],
+   "props": {
+    "pick": 1,
+    "room": "bathroom|shower|wet|tile"
+   }
+  },
+  {
+   "id": "followup-187",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "kitchen",
+    "splashback"
+   ],
+   "props": {
+    "room": "kitchen|splashback"
+   }
+  },
+  {
+   "id": "followup-188",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "shower",
+    "its leaking"
+   ],
+   "props": {
+    "room": "shower"
+   }
+  },
+  {
+   "id": "followup-189",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "balcony",
+    "tiles on it"
+   ],
+   "props": {
+    "room": "balcony|tile"
+   }
+  },
+  {
+   "id": "followup-190",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "pool",
+    "tiles around it"
+   ],
+   "props": {
+    "room": "pool|tile"
+   }
+  },
+  {
+   "id": "followup-191",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "roof",
+    "metal roof leaking"
+   ],
+   "props": {
+    "room": "roof"
+   }
+  },
+  {
+   "id": "followup-192",
+   "cat": "followup",
+   "class": "social",
+   "turns": [
+    "best sealant for a shower",
+    "thanks mate"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-193",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "best sealant for a shower",
+    "what about for outside"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-194",
+   "cat": "followup",
+   "class": "honest-no",
+   "turns": [
+    "Sikaflex-11 FC+ vs SikaBond-142 Instant Nails",
+    "which is cheaper"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-195",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "Sikaflex-11 FC+ vs SikaBond-142 Instant Nails",
+    "which one for timber"
+   ],
+   "props": {}
+  },
+  {
+   "id": "followup-196",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "waterproofing membrane for a bathroom",
+    "how many coats"
+   ],
+   "props": {
+    "has": "coat"
+   }
+  },
+  {
+   "id": "followup-197",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "waterproofing membrane for a bathroom",
+    "how long before I can tile"
+   ],
+   "props": {
+    "has": "hour|day|cure|dry|tile"
+   }
+  },
+  {
+   "id": "followup-198",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "tile adhesive for outdoor tiles",
+    "what primer under it"
+   ],
+   "props": {
+    "has": "prim"
+   }
+  },
+  {
+   "id": "followup-199",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "i need sumthing for the deck",
+    "its timber"
+   ],
+   "props": {
+    "room": "deck|timber"
+   }
+  },
+  {
+   "id": "followup-200",
+   "cat": "followup",
+   "class": "answer",
+   "turns": [
+    "concrete floor",
+    "peeling paint on it"
+   ],
+   "props": {
+    "room": "floor|concrete"
+   }
+  },
+  {
+   "id": "script-201",
+   "cat": "script",
+   "class": "social",
+   "turns": [
+    "hello",
+    "i need to waterproof my bathroom",
+    "under the tiles",
+    "thanks"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-202",
+   "cat": "script",
+   "class": "pick",
+   "turns": [
+    "hi",
+    "balcony",
+    "there is a leak at the door",
+    "which product"
+   ],
+   "props": {
+    "pick": 1,
+    "room": "balcony|leak|waterproof|membrane"
+   }
+  },
+  {
+   "id": "script-203",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "kitchen",
+    "splashback tiles",
+    "what adhesive"
+   ],
+   "props": {
+    "room": "tile|adhesive"
+   }
+  },
+  {
+   "id": "script-204",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "garage floor",
+    "its cracked and broken",
+    "how much for 30 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-205",
+   "cat": "script",
+   "class": "pick",
+   "turns": [
+    "bathroom",
+    "waterproofing",
+    "shower floor",
+    "you pick"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "script-206",
+   "cat": "script",
+   "class": "pick",
+   "turns": [
+    "i need a sealant",
+    "shower or bath",
+    "which is best"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "script-207",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "recommend a floor leveller",
+    "for 25 m2",
+    "at 5 mm"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-208",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "Davco Grey One Pot adhesive",
+    "coverage",
+    "for 20 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-209",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "Sikaflex-11 FC+",
+    "pot life",
+    "and cure time",
+    "sds"
+   ],
+   "props": {
+    "has": "safety|sds"
+   }
+  },
+  {
+   "id": "script-210",
+   "cat": "script",
+   "class": "compare",
+   "turns": [
+    "Sikalastic-1K",
+    "Sikalastic-1 Komponent",
+    "which one is better for a balcony"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-211",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "u there",
+    "need sumthing for a leaky shower",
+    "tiled walls"
+   ],
+   "props": {
+    "room": "shower|wall|tile"
+   }
+  },
+  {
+   "id": "script-212",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "deck",
+    "timber",
+    "sealer for it"
+   ],
+   "props": {
+    "room": "deck|timber"
+   }
+  },
+  {
+   "id": "script-213",
+   "cat": "script",
+   "class": "pick",
+   "turns": [
+    "pool",
+    "tile adhesive",
+    "which one is best"
+   ],
+   "props": {
+    "pick": 1
+   }
+  },
+  {
+   "id": "script-214",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "roof",
+    "its leaking",
+    "metal"
+   ],
+   "props": {
+    "room": "roof|leak|metal"
+   }
+  },
+  {
+   "id": "script-215",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "best adhesive for timber",
+    "to concrete",
+    "indoors"
+   ],
+   "props": {
+    "room": "timber|concrete"
+   }
+  },
+  {
+   "id": "script-216",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "laundry",
+    "waterproofing",
+    "how many coats"
+   ],
+   "props": {
+    "has": "coat"
+   }
+  },
+  {
+   "id": "script-217",
+   "cat": "script",
+   "class": "clarify",
+   "turns": [
+    "hey mate",
+    "what can you do",
+    "ok recommend a grout"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-218",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "driveway",
+    "cracks",
+    "repair mortar",
+    "how much for 4 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-219",
+   "cat": "script",
+   "class": "social",
+   "turns": [
+    "wet area",
+    "tiles",
+    "adhesive",
+    "thanks cheers"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-220",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "concrete slab",
+    "primer",
+    "for tiling"
+   ],
+   "props": {
+    "room": "slab|concrete|prim"
+   }
+  },
+  {
+   "id": "script-221",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "stairs",
+    "concrete steps are chipped",
+    "what repair product"
+   ],
+   "props": {
+    "room": "step|stair|concrete|repair"
+   }
+  },
+  {
+   "id": "script-222",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "window",
+    "sealant",
+    "outside"
+   ],
+   "props": {
+    "room": "window|sealant"
+   }
+  },
+  {
+   "id": "script-223",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "fence",
+    "concrete posts",
+    "anchor"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-224",
+   "cat": "script",
+   "class": "compare",
+   "turns": [
+    "Davco PrimeX",
+    "vs Davco Ultraprime",
+    "which one for a slab"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-225",
+   "cat": "script",
+   "class": "pick",
+   "turns": [
+    "what is best for a balcony",
+    "and for a bathroom"
+   ],
+   "props": {
+    "pick": 1,
+    "room": "bathroom|wet|shower|waterproof"
+   }
+  },
+  {
+   "id": "script-226",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "shed",
+    "concrete floor",
+    "dusty",
+    "what fixes it"
+   ],
+   "props": {
+    "room": "floor|concrete|dust"
+   }
+  },
+  {
+   "id": "script-227",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "bathroom",
+    "tiles are lifting",
+    "what adhesive should I use"
+   ],
+   "props": {
+    "room": "tile|adhesive|bathroom"
+   }
+  },
+  {
+   "id": "script-228",
+   "cat": "script",
+   "class": "honest-no",
+   "turns": [
+    "kitchen",
+    "sealant",
+    "cheaper one"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-229",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "I am a tradie, need fast set adhesive",
+    "for floor tiles",
+    "20 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-230",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "bath",
+    "it leaks at the edge",
+    "which silicone"
+   ],
+   "props": {
+    "room": "bath|silicone|sealant"
+   }
+  },
+  {
+   "id": "script-231",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "basement",
+    "damp walls",
+    "what do I use"
+   ],
+   "props": {
+    "room": "basement|damp|wall|waterproof"
+   }
+  },
+  {
+   "id": "script-232",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "you are useless",
+    "bathroom",
+    "shower"
+   ],
+   "props": {
+    "room": "shower|bathroom"
+   }
+  },
+  {
+   "id": "script-233",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "what can you do",
+    "tiles",
+    "floor tiles",
+    "large format"
+   ],
+   "props": {
+    "room": "tile|floor"
+   }
+  },
+  {
+   "id": "script-234",
+   "cat": "script",
+   "class": "quantity",
+   "turns": [
+    "patio",
+    "pavers",
+    "adhesive for pavers",
+    "how much for 15 m2"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-235",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "skylight",
+    "leaks",
+    "sealant"
+   ],
+   "props": {
+    "room": "skylight|leak|sealant"
+   }
+  },
+  {
+   "id": "script-236",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "water tank",
+    "repair",
+    "concrete"
+   ],
+   "props": {
+    "room": "tank|concrete|repair"
+   }
+  },
+  {
+   "id": "script-237",
+   "cat": "script",
+   "class": "honest-no",
+   "turns": [
+    "Sikaflex-11 FC+",
+    "price",
+    "is it in stock near me"
+   ],
+   "props": {}
+  },
+  {
+   "id": "script-238",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "kitchen bench",
+    "glue laminate",
+    "contact adhesive"
+   ],
+   "props": {
+    "room": "laminate|bench|contact|adhesive"
+   }
+  },
+  {
+   "id": "script-239",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "retaining wall",
+    "cracks",
+    "inject"
+   ],
+   "props": {
+    "room": "wall|crack"
+   }
+  },
+  {
+   "id": "script-240",
+   "cat": "script",
+   "class": "answer",
+   "turns": [
+    "balcony",
+    "tiles",
+    "waterproof first",
+    "the second one"
+   ],
+   "props": {
+    "room": "balcony|tile|waterproof"
+   }
+  }
+ ]
+}
