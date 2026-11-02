@@ -249,6 +249,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     return C.numInfoCard ? C.numInfoCard(sh, m[1], recs.slice(0, 2), facts) : null;
   }
   // ---- main entry
+  const num = (x) => (Math.round((x + 1e-9) * 100) / 100).toString();
   async function askInner(question, state = null) {
     const t0 = now(); const trace = [];
     const q = String(question || '').trim();
@@ -408,7 +409,26 @@ export function createBrain({ load, config, loadRules } = {}) {
       const sh = await shard(pis[0]); if (!sh) return out(intent, stage, [C.unknown(q, null, 'The product data could not be loaded.', [])]);
       const s = st(pis[0]);
       if (intent === 'calc' && C.isDoseProduct(sh)) return out(intent, stage, [facets.dose ? C.doseCard(sh, facets.dose, q) : C.doseNeedCard(sh)], { state: s });
-      if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
+      if (intent === 'calc') {
+        // a sealant goes by joint length: the sheet publishes metres of joint per pack by joint width x depth (parsed rows), so ask or compute in metres, never m2
+        const jr = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []).map((f) => f.parsed).filter((p) => p && p.model === 'joint_length_per_pack' && p.length_m_per_pack > 0);
+        const jm = /\b(\d+(?:\.\d+)?) ?(?:m|metres?|meters?|lineal metres?|lm)\b(?! ?2)/.exec(n);
+        if (!jr.length && jm && /\b(joints?|lineal|linear|long)\b/.test(n)) { const c = C.productCard(sh, sh.d.s || sh.d.t, null); c.headline = `The ${sh.n} data sheet and product page do not give a usage per metre of joint, so I cannot turn ${jm[1]} m into packs, and I will not guess. These are the pack sizes and the published text.`; c.lines = [{ label: 'Packaging', text: String(sh.d.pk || '') }].filter((l) => l.text).concat(c.lines || []); return out(intent, stage, [c], { state: s }); }
+        if (jr.length) { const jd = /\b(\d+(?:\.\d+)?) ?(?:x|by) ?(\d+(?:\.\d+)?) ?mm\b/.exec(n);
+          const rows = jr.map((p) => `${p.joint_width_mm} x ${p.joint_depth_mm} mm`); const askJ = (why) => out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `${why}${sh.n} is used by joint length, not area: its data sheet gives metres of joint per pack for the joint sizes below (width x depth, quoted from the sheet). How many metres of joint, and which size?`, jr.map((p) => `How much ${sh.n} for 10 m of ${p.joint_width_mm} x ${p.joint_depth_mm} mm joint`), [], rows)], { state: s });
+          if (!jm) return askJ(facets.area != null ? 'I will not turn an area into sealant. ' : '');
+          const metres = Number(jm[1]); if (metres > 10000) return askJ('That is more than 10,000 metres of joint, so please check the figure. ');
+          const row = jd ? jr.find((p) => p.joint_width_mm === Number(jd[1]) && p.joint_depth_mm === Number(jd[2])) : null;
+          if (!row) return askJ(jd ? `The sheet has no row for a ${jd[1]} x ${jd[2]} mm joint, and I will not guess between rows. ` : '');
+          const packs = Math.ceil(metres / row.length_m_per_pack - 1e-9); const src = sh.r.facts.consumption.find((f) => f.parsed === row);
+          const c = C.productCard(sh, src.text, null); c.type = 'calculation'; c.title = `How much ${sh.n} for ${metres} m of ${row.joint_width_mm} x ${row.joint_depth_mm} mm joint`;
+          c.headline = 'Worked out from the published joint table below. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.';
+          c.lines = [{ label: 'Joint you asked about', text: `${metres} m of ${row.joint_width_mm} mm wide x ${row.joint_depth_mm} mm deep joint` }, { label: 'Published', text: `${row.column_order.join(' | ')}: ${src.text} (data sheet, page ${src.s.p})` }, { label: 'Working', text: `${metres} m / ${row.length_m_per_pack} m per ${row.pack.amount} ${row.pack.unit} pack = ${num(metres / row.length_m_per_pack)}, rounded up to ${packs}` }, { label: 'Packs, rounded up', text: `${packs} x ${row.pack.amount} ${row.pack.unit} pack` }];
+          c.facts = [{ source_url: src.s.u, page: src.s.p, sentence: `${row.column_order.join(' | ')}: ${src.text}`, status: 'PUBLISHED', doc_type: 'PDS', doc_version: src.s.v || '' }]; c.source = c.facts[0]; c.chip = CHIPS.DATASHEET; c.followups = [`Pack sizes of ${sh.n}`, `Data sheet for ${sh.n}`];
+          return out(intent, stage, [c], { state: s }); }
+        if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s });
+        if (facets.area > 10000) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, `That is ${facets.area} m2, which is more than 10,000 m2, so please check the area (a tile size in mm is not the area). How many square metres is the job?`, [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s });
+        return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
       if (intent === 'time' && /overcoat|re-?coat|recoat|wait.*(before|until).*(coat|paint)/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, n, q, true) || await numAttrCard(sh, 'overcoat'); if (oc) { trace.push('attr:overcoat'); return out(intent, stage, [oc], { state: s }); } }
       if (intent === 'time') { if (/\b(over ?coat\w*|re ?coat\w*)\b/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, 'overcoat', q, true); if (oc && oc.type !== 'unknown') return out('attr', stage, [oc], { state: s }); } let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q);

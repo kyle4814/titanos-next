@@ -7,7 +7,7 @@ import { normalise } from './text.js';
 // ---- attributes a product sheet may or may not state. ask: the words in the question; has: the words in the data that would answer it.
 export const COVER_ATTRS = [
   { id: 'fire', label: 'a fire rating', ask: /\bfire ?(rating|rated|rate|resistance|resistant|resisting|resistance level|proof|retardant|retardent|performance|classification|class|certified|tested)\b|\bfrl\b|\bfire ?rated\b/, has: /fire[ -]?(rating|rated|resist\w*|classif\w*|retard\w*|proof\w*|performance|behaviou?r|stop\w*|barrier)|reaction to fire|\bfrl\b|AS ?1530|AS ?4072|AS ?1668|intumescent|firestop/i },
-  { id: 'slip', label: 'a slip rating', ask: /\b(non|anti) ?slip\b|\bslip (rating|resist\w*|rated|class)\b|\bslippery\b|\bslip\b(?! ?(joints?|sheets?|layers?|planes?|membranes?|form\w*|resistant tape|tape))/, has: /slip|AS ?4586/i },
+  { id: 'slip', label: 'a slip rating', ask: /\bslip (rating|resist\w*|rated|class|value|test\w*)\b|\b(r9|r1[0-3]|p[0-5]) ?(rating|rated|class|slip)\b|\b(non|anti) ?slip\b(?! ?(tiles?|tape|mats?|paint|coatings?|finish|surfaces?|flooring|floors?|nosings?|strips?|treads?|pavers?|products?))|\bslippery\b/, has: /slip|AS ?4586/i },
   { id: 'food', label: 'whether it is food safe', ask: /\bfood\b/, has: /\bfood/i },
   { id: 'potable', label: 'whether it is safe with drinking water', ask: /\bpotable\b|drinking water|drinkable|safe to drink|water tanks? for drinking/, has: /potable|drinking water|AS ?4020/i },
   { id: 'acoustic', label: 'an acoustic rating', ask: /\bacoustic\w*|sound ?proof\w*|sound (rating|insulation|transmission|reduction)|noise (reduction|rating|insulation)|impact noise|decibels?\b/, has: /acoustic|sound (insulat\w*|reduc\w*|transmi\w*|absor\w*|proof\w*|rating)|noise (reduc\w*|insulat\w*)|impact noise|\bdB\b/i },
@@ -62,7 +62,7 @@ export function notInRange(n) {
 }
 
 // ---- a product range word with a model number no product carries ("Sikaflex-999", "Sikalastic 152")
-const FAM_NUM = /\b(sikaflex|sikalastic|sikatile|sikafloor|sikadur|sikabond|sikaseal|sikasil|sikagrout|sikaproof|sikagard|sikaceram|monotop|sikatop|sikaswell|sikacryl|sikament|viscocrete|sikaplan|sarnafil|sikaroof|sikacrete|sikarapid|sikawrap|sikacor|sikalatex)\s?(\d{1,4})(?![\d.])(?:[a-z]*)\b(?!\s?(ml|l|lt|litres?|kg|kgs|mm|m2|m|g|x|packs?|tubes?|cartridges?|sausages?|pails?|bags?|boxes|cartons?|units?|of|or|and)\b)/;
+const FAM_NUM = /\b(sikaflex|sikalastic|sikatile|sikafloor|sikadur|sikabond|sikaseal|sikasil|sikagrout|sikaproof|sikagard|sikaceram|monotop|sikatop|sikaswell|sikacryl|sikament|viscocrete|sikaplan|sarnafil|sikaroof|sikacrete|sikarapid|sikawrap|sikacor|sikalatex)\s?(\d{1,4})(?![\d.])(?:[a-z]*)\b(?!\s?(ml|l|lt|litres?|liters?|kg|kgs|mm|cm|m2|m|g|x|metres?|meters?|lineal|lm|coats?|layers?|lots?|pcs|pieces?|packs?|tubes?|cartridges?|sausages?|pails?|bags?|boxes?|cans?|rolls?|sheets?|cartons?|units?|of|or|and|for|on|in|to)\b)/;
 export function unknownModel(n, names) {
   const m = FAM_NUM.exec(n); if (!m) return null;
   const rx = new RegExp('\\b' + m[1] + ' ?' + m[2] + '(?![0-9])');
