@@ -30,6 +30,22 @@ export function applyNames(core, pIndex) {
   for (const a of NAME_ALIASES) { const pi = pIndex.get(a.id); if (pi == null) continue; const cur = core.alias[a.k]; if (cur && (cur.length !== 1 || cur[0] !== pi)) { clash.push(a.k); continue; } core.alias[a.k] = [pi]; }
   return clash;
 }
+/**
+ * People leave the model number out of a name ("secure proof" for SikaTile-110 Secure Proof, "multidur es-24" for Sikafloor MultiDur ES-24 is already whole).
+ * For every product, the name without its number tokens (brand word kept: "sikatile secure proof") becomes an alias, but only when it is at least two
+ * words and 9 letters, no other product's name gives the same phrase, and the key is not already an alias. Nothing is invented: it is the product's own name, shortened.
+ */
+export function deriveAliases(core, pIndex) {
+  const seen = new Map();
+  for (const p of core.P) {
+    const toks = normalise(p.n).split(' ').filter(Boolean); const noNum = toks.filter((t) => !/^\d+$/.test(t)); if (noNum.length === toks.length) continue; // no number to drop
+    const vs = new Set([noNum.join(' ')]);
+    for (const v of vs) { if (v.split(' ').length < 2 || v.replace(/ /g, '').length < 9) continue; const cur = seen.get(v); if (cur == null) seen.set(v, pIndex.get(p.id)); else if (cur !== pIndex.get(p.id)) seen.set(v, -1); }
+  }
+  let added = 0;
+  for (const [k, pi] of seen) { if (pi < 0 || core.alias[k]) continue; core.alias[k] = [pi]; added++; }
+  return added;
+}
 const H = [
   { rx: /\bparex\b|\b(davco|lanko)\b.*\b(owned|owner|acquir\w*|bought|buy|parex|cta|part of sika|belongs?|who (makes|made|owns))\b|\b(who owns|owned by|acquisition of) (davco|lanko)\b/, title: 'Who owns Davco',
     lines: ["Sika Australia entered the building finishing sector in 2015 by acquiring CTA's well-known brand. The acquisition of Parex, with the brand Davco in Australia, expanded the product line from top to mid-range.", 'Sika completed its acquisition of Parex on May 23, 2019. The transaction was announced on January 8, 2019.'], head: 'Davco is a Sika brand.' },

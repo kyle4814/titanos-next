@@ -16,7 +16,7 @@ export const ATTRS = [
   { id: 'humidity', what: 'humidity limits', q: re('humidity|dew point|damp air'), labels: re('^(relative air humidity|dew point)$') },
   { id: 'app_temp', what: 'application temperature limits', q: re('temperature|too (cold|hot)|cold weather|hot weather|frost|freez\\w*|degrees|(cold|hot|winter|summer) (day|conditions)'), labels: re('^(ambient air temperature|substrate temperature|material temperature|application temperature)$') },
   { id: 'mixing', what: 'mixing ratio', q: re('mix(ing|ed)?\\b|water (to|do i)|parts|ratio|how much water|proportion'), labels: re('^(mixing ratio|mixing)$'), tbl: re('mixing ratio') },
-  { id: 'thickness', what: 'layer thickness', q: re('thick|layer|depth|build ?up|how deep|minimum .*mm|maximum .*mm'), labels: re('^(layer thickness|thickness)$') },
+  { id: 'thickness', what: 'layer thickness', q: re('thick|\\blayers?\\b|depth|build ?up|how deep|minimum .*mm|maximum .*mm'), labels: re('^(layer thickness|thickness)$') },
   { id: 'thermal', what: 'thermal conductivity', q: re('thermal (conductivity|insulation|resistance value)|insulation value|insulating value|lambda value|r[- ]?value|\\bk[- ]value'), labels: re('thermal conductivity|thermal insulation|lambda') },
   { id: 'crack', what: 'crack bridging ability', q: re('crack[- ]?bridg\\w*|bridges? (the )?cracks?|bridging cracks?|crack (cover|span)\\w*'), labels: re('crack bridging') },
   { id: 'sag', what: 'sag flow', q: re('sag ?flow|sag resistance|non[- ]?sag|slump resistance|sags?\\b.*(overhead|vertical)'), labels: re('^(sag flow|non-?sag properties)$'), tbl: re('non-sag properties') },

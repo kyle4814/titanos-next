@@ -13,7 +13,7 @@ import { createAdvisor } from './advisor.js';
 import { attrCard, detectAttr, attrWords } from './attrs.js';
 import { quantityByKind, thicknessOf, recommendCard } from './numq.js';
 import { createSession } from './session.js';
-import { applyNames, historyCard } from './names.js';
+import { applyNames, deriveAliases, historyCard } from './names.js';
 
 const now = () => (typeof performance !== 'undefined' ? performance : Date).now();
 const FIELD_W = { 1: 10, 2: 4, 3: 3.5, 4: 2.5, 5: 1.2 };
@@ -82,7 +82,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     core = await load.core(); if (!core) throw new Error('brain: core shard missing');
     core.P.forEach((p, i) => pIndex.set(p.id, i));
     vocab = Object.keys(core.post);
-    applyNames(core, pIndex);
+    applyNames(core, pIndex); deriveAliases(core, pIndex);
     return core;
   }
 
@@ -388,7 +388,10 @@ export function createBrain({ load, config, loadRules } = {}) {
       if (intent === 'calc') { if (facets.area == null) return out(intent, stage, [C.chooseCard(`How much ${sh.n}?`, 'How many square metres is the area?', [10, 20, 50].map((a) => `How much ${sh.n} for ${a} m2`))], { state: s }); return out(intent, stage, [C.calcCard(sh, facets.area, q, thicknessOf(n))], { state: s }); }
       if (intent === 'rate') return out(intent, stage, [C.rateCard(sh, q)], { state: s });
       if (intent === 'time' && /overcoat|re-?coat|recoat|wait.*(before|until).*(coat|paint)/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, n, q, true) || await numAttrCard(sh, 'overcoat'); if (oc) { trace.push('attr:overcoat'); return out(intent, stage, [oc], { state: s }); } }
-      if (intent === 'time') { let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q); if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
+      if (intent === 'time') { if (/\b(over ?coat\w*|re ?coat\w*)\b/.test(n) && !(sh.tm && sh.tm.recoat_times && sh.tm.recoat_times.length)) { const oc = attrCard(sh, 'overcoat', q, true); if (oc && oc.type !== 'unknown') return out('attr', stage, [oc], { state: s }); } let kinds = TIME_KIND.filter(([, rx]) => rx.test(n)).map(([k]) => k); if (kinds.some((k) => k !== 'cure_times')) kinds = kinds.filter((k) => k !== 'cure_times'); const ks = kinds.length ? kinds : ['open_time', 'cure_times', 'pot_life', 'recoat_times']; let card = C.timeCard(sh, ks, q);
+        if (card.type === 'unknown' && kinds.includes('recoat_times')) { const oc = attrCard(sh, 'overcoat', q, true); if (oc && oc.type !== 'unknown') return out('attr', stage, [oc], { state: s }); } // the waiting time to overcoating sits under its own label on the page
+        if (card.type === 'unknown' && kinds.length === 1 && kinds[0] === 'pot_life') { const pl = attrCard(sh, 'pot life', q, true); if (pl && pl.type !== 'unknown') return out('attr', stage, [pl], { state: s }); return out(intent, stage, [C.unknown(q, sh, `The published product page and data sheet text I work from do not give a pot life for ${sh.n}. I will not guess it. Please check the data sheet or ask Technical Services.`, ['pot life'])], { state: s }); }
+        if (card.type === 'unknown' && kinds.length) { const all = C.timeCard(sh, Object.keys(sh.tm || {}), q); if (all.type !== 'unknown') { all.headline = 'The documentation gives no time of exactly that kind. These are the published times it does give, quoted as written.'; card = all; } } return out(intent, stage, [card], { state: s }); }
       if (intent === 'safety') return out(intent, stage, [C.safetyCard(sh, n, q)], { state: s });
       if (intent === 'document') { const want = DOC_TYPES.filter(([, rx]) => rx.test(n)); const types = want.length ? want : [DOC_TYPES[1], DOC_TYPES[0]]; const cards = []; for (const [ty, , label] of types) { const docs = (sh.dc || []).filter((d) => d.ok && (d.ty === ty)); if (docs.length) cards.push(C.documentCard(sh, docs, label)); } if (!cards.length) cards.push(C.unknown(q, sh, `No ${types.map((t) => t[2].toLowerCase()).join(' or ')} is published for this product.`, types.map((t) => t[2]))); return out(intent, stage, cards, { state: s }); }
       if (intent === 'spec') {
