@@ -1,12 +1,13 @@
 // convo_score.mjs: runs convo_bank.json through the brain with session context (state threaded turn to turn), scores the FINAL turn of each row against its class checks + row props.
-// Usage: node convo_score.mjs [--gate] [--json out.json] [--md]     Report-only: exit 0 always. --gate: exit 1 only if a social row hits the not-found card.
+// Usage: node convo_score.mjs [--bank file.json] [--gate] [--json out.json] [--md]     Report-only: exit 0 always. --gate: exit 1 only if a social row hits the not-found card.
 // No network, no model: the brain is the local rule engine (harness.mjs).
 import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath } from 'node:url';
 import { makeBrain } from './harness.mjs';
 import { cardText } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2); const GATE = args.includes('--gate'); const MD = args.includes('--md'); const jsonOut = args.includes('--json') ? args[args.indexOf('--json') + 1] : null;
-const bank = JSON.parse(fs.readFileSync(path.join(HERE, 'convo_bank.json'), 'utf8'));
+const bankFile = args.includes('--bank') ? args[args.indexOf('--bank') + 1] : 'convo_bank.json';
+const bank = JSON.parse(fs.readFileSync(path.resolve(HERE, bankFile), 'utf8'));
 const NOTDOC = /not in the published documentation|I do not know this/i;
 const UNITS = /\d[\d.,]*\s*(m2|m²|sqm|m\b|metres?|litres?|l\b|pails?|cartridges?|bags?|kg|coats?|tubes?|units?|mm)/i;
 const chipsOf = (a) => { const c = a.cards[0] || {}; return Math.max((c.choices || []).length, (c.followups || []).length, (a.followups || []).length); };

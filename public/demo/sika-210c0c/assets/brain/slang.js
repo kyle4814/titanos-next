@@ -28,6 +28,7 @@ export const SLANG = [
   { rx: /\bbumpy\b/g, to: 'uneven', cite: 'common trade usage' },
   { rx: /\blvl\b/g, to: 'level', cite: 'shorthand' },
   { rx: /\b(rooted|stuffed|knackered|munted|cooked)\b/g, to: 'damaged', cite: 'common Australian trade slang' },
+  { rx: /\blevl?ing\b|\blevelin\b|\bleveling\b/g, to: 'levelling', cite: 'typo and US spelling' },
   { rx: /\bcrete\b/g, to: 'concrete', cite: 'common trade usage' },
   { rx: /\btanking\b/g, to: 'waterproofing', cite: 'Sika pages use "tanking" for below-ground waterproofing' },
   // phone and shorthand typos

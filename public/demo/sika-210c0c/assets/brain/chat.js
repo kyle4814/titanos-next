@@ -11,7 +11,7 @@ const STARTERS = [
   { label: 'Waterproof a bathroom', q: 'Waterproofing for a shower floor under tiles' },
   { label: 'Tile a floor', q: 'Tile adhesive for porcelain tiles on a concrete floor' },
   { label: 'Seal around a shower', q: 'Silicone sealant for a shower' },
-  { label: 'Fix a crack', q: 'I need something to fix a crack' },
+  { label: 'Fix a crack', q: 'Repair cracks in a concrete floor' },
 ];
 const JOB_LINE = 'Tell me what you are working on, like the surface and the problem, and I will find the Sika products whose data sheets cover it.';
 const CHAT_CHIP = 'A chat reply, not a product claim';
@@ -23,24 +23,36 @@ const TAIL = '(?: (?:mate|there|team|sika|all|everyone|bud|buddy|man|legend|cham
 const GREET = '(?:hi|hello|hey|heya|hiya|yo|howdy|g day|gday|good (?:morning|afternoon|evening|day)|morning|arvo|evening|hey hey|hi there|hello there)';
 const HOW = '(?:how are (?:you|ya|u)(?: going| doing| today| going today)?|how s it going|hows it going|how you going|how r u|how s your day|hows your day|you good|you ok|you okay|are you well|how have you been)';
 const SOC = [
-  ['frustrated', /\b(useless|rubbish|crap|crappy|garbage|stupid|dumb|hopeless|terrible|awful|shit|shite|bullshit|sucks?|pathetic|worthless|idiot|unhelpful|trash|junk|lame)\b|\b(not|no|isn t|aren t|never) (very |that |at all )?(helpful|help)\b|\bnot what i (asked|meant|wanted|said)\b|\byou (don t|do not|dont|didn t|can t|cant) (understand|get it|listen|help)\b|\b(that s|thats|you re|youre|you are|this is) (wrong|not right|no good|no help)\b|\bwrong answer\b/, 9],
+  ['frustrated', /\b(useless|rubbish|crap|crappy|garbage|stupid|dumb|hopeless|terrible|awful|shit|shite|bullshit|sucks?|pathetic|worthless|idiot|unhelpful|trash|junk|lame)\b|\b(not|no|isn t|aren t|never) (very |that |at all )?(helpful|help)\b|\bnot what i (asked|meant|wanted|said)\b|\byou (don t|do not|dont|didn t|can t|cant) (understand|get it|listen|help)\b|\b(that s|thats|you re|youre|you are|this is) (wrong|not right|no good|no help)\b|\bwrong answer\b|\bwhy (?:can t|won t|don t|wont|cant) you\b|\bwhy (?:are|r) you (?:so |being )?(?:useless|slow|dumb|stupid|unhelpful)\b|\bjust answer(?: me)?\b/, 9],
   ['bye', new RegExp(`^(?:(?:ok|okay|right|all good|no worries|thanks|thank you|cheers|ta|great|perfect|awesome) )*(?:bye|bye bye|goodbye|good bye|see (?:you|ya)(?: later| soon| round| around)?|cya|seeya|later|laters|catch you later|talk later|ttyl|good night|goodnight|night|have a (?:good|great|nice) (?:one|day|weekend|arvo|afternoon|night)|that s all|thats all|that is all|that s it|thats it|nothing else|i m done|im done|all done)(?: (?:mate|for now|thanks|thank you|cheers|then|all|team|buddy|bro|man|ta|now))*$`), 8],
-  ['thanks', new RegExp(`^(?:(?:ok|okay|right|oh|ah|wow|nice|good|great|awesome|perfect|brilliant|excellent|sweet|beaut|beauty|legend|ripper|top|cool|fantastic|lovely|wonderful) )*(?:thanks|thank you|thankyou|thx|thnx|ta|cheers|many thanks|much appreciated|appreciate it|i appreciate it|nice one|good on you|good one|great|awesome|perfect|brilliant|excellent|sweet|beaut|beauty|legend|ripper|top|fantastic|lovely|wonderful|that s great|thats great|that helps|that s helpful|thats helpful|helpful|got it|makes sense|understood|i see)(?: (?:thanks|thank you|cheers|ta|mate|so much|a lot|heaps|very much|for (?:that|your help|the help|the info|the advice)|that s (?:great|helpful)|again|team|buddy|man|bro|legend))*$`), 9],
-  ['who', new RegExp(`^${'(?:' + GREET + ' )?'}(?:who are you|who is this|who am i (?:talking|speaking|chatting) to|what are you|what s your name|whats your name|what is your name|your name|are you (?:a )?(?:real|human|person|bot|robot|ai|chatbot|computer|machine)|are you real|is this a (?:bot|real person|person|robot|chatbot)|is anyone there|are you there|anyone there|who made you|who built you|who s this|whos this|who am i talking to)${TAIL}$`), 12],
+  ['thanks', new RegExp(`^(?:(?:ok|okay|right|oh|ah|wow|nice|good|great|awesome|perfect|brilliant|excellent|sweet|beaut|beauty|legend|ripper|top|cool|fantastic|lovely|wonderful) )*(?:thanks|thank you|thankyou|thx|thnx|ta|cheers|(?:you re|you are|your|youre) (?:a |an )?(?:legend|star|champ|champion|lifesaver|ripper|top bloke|good bot|great|awesome|beauty)|many thanks|much appreciated|appreciate it|i appreciate it|nice one|good on you|good one|great|awesome|perfect|brilliant|excellent|sweet|beaut|beauty|legend|ripper|top|fantastic|lovely|wonderful|that s great|thats great|that helps|that s helpful|thats helpful|helpful|got it|makes sense|understood|i see)(?: (?:thanks|thank you|cheers|ta|mate|so much|a lot|heaps|very much|for (?:that|your help|the help|the info|the advice)|that s (?:great|helpful)|again|team|buddy|man|bro|legend))*$`), 9],
+  ['who', new RegExp(`^${'(?:' + GREET + ' )?'}(?:who are you|who is this|who am i (?:talking|speaking|chatting) to|what are you|what s your name|whats your name|what is your name|your name|are you (?:a )?(?:real|human|person|bot|robot|ai|chatbot|computer|machine)|are you real|is this a (?:bot|real person|person|robot|chatbot)|is anyone there|are you there|anyone there|you there|u there|who made you|who built you|who s this|whos this|who am i talking to)${TAIL}$`), 12],
   ['cando', /^(?:(?:hi|hello|hey|so|ok|okay) )?(?:what can you (?:do|help (?:me )?with)|what do you do|what can i ask(?: you)?|what do you know|how can you help(?: me)?|how do you work|how does (?:this|it) work|what are you for|what is this|what s this|whats this|what is this for|what can u (?:do|help (?:me )?with)|what do u do|what questions can i ask|what are you good for|what are your skills|what is this thing|what is this site|what is this place|can you do|what do you offer)(?: mate| there| exactly)?$/, 10],
-  ['help', new RegExp(`^(?:${GREET}${TAIL} )?(?:(?:can|could|will|would) (?:you|u) (?:please )?help(?: me)?(?: out)?|(?:i )?(?:need|want) (?:some |a bit of )?help|help(?: me| please| mate)?|got a (?:question|minute|sec)|have a question|i have a question|(?:can|could) i ask (?:you )?(?:a |something|a question)?|question|quick question|i ve got a question|ive got a question|got a quick question|can i ask a question|are you able to help|are you able to help me|mind helping|you able to help)${TAIL}$`), 12],
+  ['help', new RegExp(`^(?:${GREET}${TAIL} )?(?:(?:can|could|will|would) (?:you|u) (?:please )?help(?: me)?(?: out)?|(?:i )?(?:need|want) (?:some |a bit of |a )?(?:help|hand|advice)(?: with (?:a |the |my |this |our |some )?(?:renovation|reno|job|project|work|something|stuff|bathroom|kitchen))?|help(?: me| please| mate)?(?: with (?:a |the |my |this |our |some )?(?:renovation|reno|job|project|work|something|stuff))?|got a (?:question|minute|sec)|have a question|i have a question|(?:can|could) i ask (?:you )?(?:a |something|a question)?|question|quick question|i ve got a question|ive got a question|got a quick question|can i ask a question|are you able to help|are you able to help me|mind helping|you able to help)${TAIL}$`), 12],
   ['how', new RegExp(`^(?:${GREET}${TAIL} )?${HOW}${TAIL}$`), 12],
   ['greet', new RegExp(`^${GREET}${TAIL}(?: ${GREET}${TAIL})?$`), 6],
-  ['yes', /^(?:yes|yep|yeah|yup|ya|yea|sure|alright|all right|ok|okay|k|kk|right|cool|fine|sounds good|go on|please|yes please|why not|of course|definitely|correct|true|mhm|mm|hmm|hm|um|uh|oh|ah|aha|good|go ahead|do it)(?: (?:please|then|mate|thanks))?$/, 4],
+  ['yes', /^(?:(?:lol|lmao|haha+|hehe+|heh|ha) )?(?:lol|lmao|haha+|hehe+|heh|ha|yes|yep|yeah|yup|ya|yea|sure|alright|all right|ok|okay|k|kk|right|cool|fine|sounds good|go on|please|yes please|why not|of course|definitely|correct|true|mhm|mm|hmm|hm|um|uh|oh|ah|aha|good|go ahead|do it)(?: (?:please|then|mate|thanks))?$/, 4],
   ['no', /^(?:no|nope|nah|no thanks|no thank you|not really|not sure|dunno|i don t know|idk|maybe|nothing|never mind|nevermind|forget it|not yet|na)(?: (?:thanks|mate|really|right now))?$/, 5],
 ];
+const UNSURE_RX = /\b(?:no (?:clue|idea)|(?:i )?(?:have|got) no (?:clue|idea)|not (?:too |really |entirely |that |100 )?(?:sure|certain|clear|positive)|unsure|dunno|(?:don t|do not|dont|cant|can t|couldn t) (?:know|say|tell|decide|work it out)|hard to say|undecided|still deciding|no preference)\b/g;
+const UNSURE_FILL = new Set('i we me my a an the to be at this that it its is for what about of on in so just bit too quite really honestly sorry honest yet atm tbh stage point moment still totally entirely percent 100 mate there and but really actually well um hm yeah nah no'.split(' '));
 /** the kind of social turn a message is ('greet', 'how', 'thanks', 'bye', 'who', 'cando', 'help', 'frustrated', 'yes', 'no'), or '' */
 export function socialKind(n0) {
-  const n = clean(applySlang(normalise(n0)).text || normalise(n0)); if (!n) return '';
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); if (!n) return '';
   const words = n.split(' ').length;
   for (const [k, rx, max] of SOC) if (words <= max && rx.test(n)) return k;
+  // "I do not know" in any wording, with nothing else of substance in it: the same plain reply as a "not sure"
+  if (words <= 9 && UNSURE_RX.test(n) && n.replace(UNSURE_RX, ' ').split(' ').filter(Boolean).every((w) => UNSURE_FILL.has(w))) return 'no';
+  // a greeting or "you there" in front of a help or how-are-you ask ("arvo mate need a hand with a reno", "hey u there need help"): judge the part after it
+  const rest = n.replace(new RegExp(`^(?:(?:${GREET}|are you there|you there|anyone there|is anyone there|you around|how are you|how s it going|how s you|you good)${TAIL}(?: |$))+`), '').replace(/^(?:and |so |um |ok |okay )+/, '').trim();
+  if (rest && rest !== n && rest.split(' ').length <= 9) for (const [k, rx, max] of SOC) if (['help', 'cando', 'how', 'who', 'thanks', 'frustrated'].includes(k) && rx.test(rest)) return k;
   return '';
 }
+// chat-only slang (kept out of slang.js so product questions are read exactly as before): texting shorthand and Aussie chat words
+const CHAT_SLANG = [[/\bu\b/g, 'you'], [/\bur\b/g, 'your'], [/\bthx\b|\bthnx\b|\bthanx\b|\btks\b|\btnx\b/g, 'thanks'], [/\bsumthin\w*|\bsumthing\b|\bsomthin\w*|\bsomethin\b|\bsomting\b/g, 'something'], [/\bgoin\b|\bgoing\b(?= (?:today|on))/g, 'going'], [/\bhows\b/g, 'how s'], [/\bwat\b|\bwot\b|\bwht\b/g, 'what'],
+  [/\bpls\b|\bplz\b|\bplse\b|\bpleez\b/g, 'please'], [/\bappreciate ya\b|\bta heaps\b|\bta very much\b|\bcheers heaps\b|\bcheers ta\b/g, 'thanks'], [/\breno\b|\brenos\b/g, 'renovation'], [/\bheya+\b|\bhiya+\b|\bheyy+\b|\bhii+\b|\bhellooo+\b/g, 'hi'], [/\bcant\b/g, 'can t'], [/\bdont\b/g, 'don t'], [/\bwont\b/g, 'won t'], [/\bidk\b/g, 'dunno'],
+  [/\bany1\b/g, 'anyone'], [/\bsum1\b/g, 'someone'], [/\bnoob\b/g, 'new']];
+const chatNorm = (t) => { let x = ' ' + t + ' '; for (const [rx, to] of CHAT_SLANG) x = x.replace(rx, ` ${to} `); return x.replace(/\s+/g, ' ').trim(); };
 const hello = (n) => (/\bgood (morning|afternoon|evening)\b/.exec(n) || [])[0];
 /** the reply to a social turn: one or two short sentences and starter chips. Never a "not in the documentation" card. */
 export function socialCard(kind, n0) {
@@ -70,7 +82,7 @@ const SE = O('Sealant', 'Silicone sealant for a shower', 'seal sealing sealant s
 const FL = O('Fix a leak', 'Best waterproofing membrane for a leaking shower', 'leak leaky leaking leaks drip dripping');
 export const PLACES = [
   { id: 'bathroom', key: 'bathroom bathrooms ensuite shower showers bath bathtub toilet wetroom', title: 'Bathroom', text: 'Which part of the bathroom is the job?',
-    opts: [O('Waterproof under tiles', WP.q, WP.kw.join(' ') + ' tiles tile'), O('Tile adhesive', TA.q, TA.kw.join(' ')), O('Grout', GR.q, GR.kw.join(' ')), O('Sealant around the bath', SE.q, SE.kw.join(' '))] },
+    opts: [O('Waterproof under tiles', WP.q, WP.kw.join(' ') + ' tiles tile floor'), O('Tile adhesive', TA.q, TA.kw.join(' ')), O('Grout', GR.q, GR.kw.join(' ')), O('Sealant around the bath', SE.q, SE.kw.join(' '))] },
   { id: 'kitchen', key: 'kitchen kitchens splashback splashbacks benchtop', title: 'Kitchen', text: 'Which part of the kitchen?',
     opts: [O('Splashback tiles', 'Tile adhesive for a kitchen splashback', 'splashback tile tiles tiling adhesive glue stick wall'), O('Bench sealant', 'Silicone sealant for a kitchen bench', 'seal sealant silicone bench benchtop sink gap gaps around caulk'), O('Grout', 'Grout for a kitchen floor', 'grout grouting floor between'), O('Uneven floor', 'Levelling compound for an uneven kitchen floor', 'level levelling leveller uneven floor screed')] },
   { id: 'laundry', key: 'laundry laundries', title: 'Laundry', text: 'Which part of the laundry?',
@@ -84,7 +96,7 @@ export const PLACES = [
   { id: 'pool', key: 'pool pools spa', title: 'Pool', text: 'Which part of the pool?',
     opts: [O('Tile adhesive', 'Tile adhesive for a swimming pool surround', TA.kw.join(' ') + ' surround'), O('Waterproofing', 'Waterproofing for a swimming pool before tiling', WP.kw.join(' ')), O('Sealant', 'Silicone for a swimming pool', SE.kw.join(' ')), O('Grout', 'Grout for a swimming pool', GR.kw.join(' '))] },
   { id: 'deck', key: 'deck decks decking', title: 'Deck', text: 'What is the deck job?',
-    opts: [O('Fixing', 'Adhesive for fixing decking', 'fix fixing adhesive glue stick screw fasten'), O('Waterproofing', 'Waterproofing for a deck under tiles', WP.kw.join(' ')), O('Joints', 'Sealant for deck joints', 'seal sealant joint joints gap gaps')] },
+    opts: [O('Fixing', 'Adhesive for fixing decking', 'fix fixing adhesive glue stick screw fasten'), O('Waterproofing', 'Waterproofing for a deck under tiles', WP.kw.join(' ')), O('Joints', 'Sealant for deck joints', 'seal sealant joint joints gap gaps'), O('Tiling', 'Tile adhesive for an outdoor balcony', 'tile tiles tiling porcelain ceramic')] },
   { id: 'basement', key: 'basement basements cellar', title: 'Basement', text: 'What is the basement job?',
     opts: [O('Waterproofing', 'Waterproofing for a basement', 'waterproof waterproofing membrane damp wet moisture tank tanking'), O('Fix a leak', 'Fast setting mortar to plug a leak', 'leak leaking leaks plug seep seeping water'), O('Cracks', 'Injection resin for leaking cracks', 'crack cracks injection inject resin')] },
   { id: 'floor', key: 'floor floors', title: 'Floor', text: 'What is wrong with the floor?',
@@ -100,7 +112,7 @@ export const PLACES = [
   { id: 'window', key: 'window windows door doors', title: 'Windows and doors', text: 'What is the job around the window or door?',
     opts: [O('Seal the frame', 'Sealant for a window frame', 'seal sealant frame silicone gap gaps around caulk'), O('Fix a leak', 'Sealant for a leaking window', 'leak leaking leaks drip water'), O('Glue', 'Adhesive for fixing a door frame', 'glue adhesive stick fix fixing bond')] },
   { id: 'sealant', cat: true, key: 'sealant sealants sealer silicone silicon caulk caulking', title: 'Sealant', text: 'What is the sealant for?',
-    opts: [O('Shower or bath', 'Silicone sealant for a shower', SE.kw.join(' ') + ' shower wet bathroom'), O('Facade joints', 'Sealant for expansion joints in a facade', 'facade joint joints expansion movement building wall'), O('Gutter', 'Gutter sealant', 'gutter gutters roof downpipe'), O('Fire rated', 'Fire rated sealant for service penetrations', 'fire rated penetration penetrations service pipe')] },
+    opts: [O('Shower or bath', 'Silicone sealant for a shower', SE.kw.join(' ') + ' shower wet bathroom'), O('Facade joints', 'Sealant for expansion joints in a facade', 'facade joint joints expansion movement building wall'), O('Gutter', 'Sealant for a leaking gutter', 'gutter gutters roof downpipe'), O('Fire rated', 'Fire rated sealant for service penetrations', 'fire rated penetration penetrations service pipe')] },
   { id: 'glue', cat: true, key: 'adhesive adhesives glue glues gluing stick sticking', title: 'Adhesive', text: 'What are you sticking?',
     opts: [O('Tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'tile tiles tiling porcelain ceramic floor'), O('Skirting and trim', 'Construction adhesive for fixing skirting boards', 'skirting trim timber wood board boards architrave panel panels'), O('Timber floor', 'Adhesive for timber flooring', 'timber floor flooring wood parquet'), O('Laminate', 'Contact adhesive for laminate', 'laminate bench benchtop contact')] },
   { id: 'waterproofing', cat: true, key: 'waterproofing waterproof waterproofer membrane membranes tanking', title: 'Waterproofing', text: 'Where is the waterproofing going?',
@@ -114,17 +126,31 @@ export const PLACES = [
   { id: 'primer', cat: true, key: 'primer primers priming', title: 'Primer', text: 'What is it priming?',
     opts: [O('Before tiling', 'Primer for tiling over smooth concrete', 'tile tiles tiling smooth concrete'), O('Before levelling', 'Primer for a levelling compound on concrete', 'level levelling leveller screed floor'), O('Before sealant', 'Primer before sealant on porous surfaces', 'sealant seal silicone porous joint')] },
   { id: 'repair', cat: true, key: 'repair repairs repairing patching patch', title: 'Repairs', text: 'What is being repaired?',
-    opts: [O('Concrete damage', 'Repair mortar for spalling concrete', 'concrete spalling damaged broken holes crumbling mortar'), O('Cracks', 'I need something to fix a crack', 'crack cracks cracked'), O('Floor', 'Repair mortar for a damaged concrete floor', 'floor')] },
+    opts: [O('Concrete damage', 'Repair mortar for spalling concrete', 'concrete spalling damaged broken holes crumbling mortar'), O('Cracks', 'Fill cracks in a wall before painting', 'crack cracks cracked'), O('Floor', 'Repair mortar for a damaged concrete floor', 'floor')] },
   { id: 'leveller', cat: true, key: 'screed leveller leveler levelling leveling', title: 'Screed or leveller', text: 'What is the floor job?',
     opts: [O('Uneven concrete', 'Self levelling compound for an uneven concrete floor', 'uneven concrete bumpy dip slab'), O('Under tiles', 'Self levelling compound under tiles', 'tile tiles tiling under'), O('Thick layer', 'Levelling compound for a thick layer', 'thick deep layer')] },
   { id: 'leak', key: 'leak leaks leaking leaky', title: 'Leaks', text: 'Where is the leak?',
     opts: [O('Shower', FL.q, 'shower bathroom bath ensuite'), O('Roof', 'Waterproofing for a leaking roof', 'roof gutter ceiling'), O('Concrete wall', 'Fast setting mortar to plug a leak', 'wall basement concrete plug'), O('Cracks', 'Injection resin for leaking cracks', 'crack cracks')] },
   { id: 'crack', key: 'crack cracks cracked', title: 'Cracks', text: 'What is cracked?',
     opts: [O('Concrete floor', 'Repair cracks in a concrete floor', 'floor slab concrete'), O('Wall', 'Injection resin for leaking cracks', 'wall leaking leak water'), O('Render', 'Repair mortar for a cracked render', 'render plaster stucco')] },
+  { id: 'gutter', key: 'gutter gutters guttering downpipe downpipes', title: 'Gutter', text: 'What is the gutter job?',
+    opts: [O('Fix a leak', 'Sealant for a leaking gutter', 'leak leaking leaks drip dripping seal sealant fix'), O('Seal the joints', 'Sealant for gutter seams and joins', 'joint joints join seam seams gap gaps sealant seal silicone'), O('Line the gutter', 'Liquid applied waterproofing membrane for a roof', 'line lining membrane waterproof waterproofing coat coating liquid')] },
+  { id: 'driveway', key: 'driveway driveways footpath footpaths path paths pavement carpark', title: 'Driveway or path', text: 'What is the job on the driveway or path?',
+    opts: [O('Cracks', 'Repair cracks in a concrete floor', 'crack cracks cracked'), O('Damaged concrete', 'Repair mortar for spalling concrete', 'repair damaged broken holes spalling crumbling pitted patch mortar'), O('Joints', 'Joint filler for a slab', 'joint joints filler gap gaps'), O('Coating', 'Epoxy coating for a concrete floor', 'coating coat paint seal sealed dust epoxy finish')] },
+  { id: 'fence', key: 'fence fences fencing post posts gate gates', title: 'Fence', text: 'What is the fence job?',
+    opts: [O('Set a post', 'Chemical anchor for fixing a fence post into concrete', 'post posts anchor set fix fixing bolt concrete'), O('Glue timber', 'Adhesive for timber posts', 'timber wood glue adhesive stick bond'), O('Seal joints', 'Sealant for outdoor joints', 'seal sealant joint joints gap gaps')] },
+  { id: 'stairs', key: 'stairs stair steps step staircase', title: 'Stairs', text: 'What is the job on the stairs?',
+    opts: [O('Repair chips', 'Repair mortar for spalling concrete', 'repair chipped chip damaged broken crumbling spalling patch mortar crack cracked'), O('Tile the steps', 'Tile adhesive for outdoor steps', 'tile tiles tiling adhesive glue'), O('Non slip', 'Non slip coating for concrete steps', 'slip slippery non coating coat grip anti epoxy')] },
+  { id: 'pergola', key: 'pergola pergolas gazebo gazebos awning', title: 'Pergola', text: 'What is the pergola job?',
+    opts: [O('Fix timber', 'Adhesive for timber posts', 'timber wood glue adhesive stick bond beam beams'), O('Fix a post', 'Anchor fixing for a post', 'post posts anchor bolt concrete footing set'), O('Seal joints', 'Sealant for timber joints', 'seal sealant joint joints gap gaps')] },
+  { id: 'skylight', key: 'skylight skylights', title: 'Skylight', text: 'What is the skylight job?',
+    opts: [O('Fix a leak', 'Sealant for a leaking window', 'leak leaking leaks drip dripping water'), O('Seal the frame', 'Sealant for a window frame', 'seal sealant frame silicone gap gaps around caulk'), O('Roof around it', 'Liquid applied waterproofing membrane for a roof', 'roof flashing membrane waterproof waterproofing coat')] },
+  { id: 'tank', key: 'tank tanks', title: 'Water tank', text: 'What is the water tank job?',
+    opts: [O('Waterproof it', 'Waterproofing for a concrete water tank', 'waterproof waterproofing membrane line lining inside coat'), O('Stop a leak', 'Fast setting mortar to plug a leak', 'leak leaking leaks plug seep seeping'), O('Cracks', 'Injection resin for leaking cracks', 'crack cracks cracked')] },
 ];
 // phrase list: every key (single word or a multi word phrase listed in PHRASES) -> place
 const PHRASES = {
-  bathroom: ['shower recess', 'wet area', 'wet areas', 'wet room', 'en suite'], roof: ['flat roof'], garage: ['garage floor', 'shed floor', 'workshop floor', 'warehouse floor'], pool: ['swimming pool'],
+  bathroom: ['shower recess', 'wet area', 'wet areas', 'wet room', 'en suite'], roof: ['flat roof', 'metal roof', 'tin roof', 'iron roof', 'colorbond roof', 'tile roof', 'roof sheeting', 'roof sheets'], outside: ['outdoor area', 'outdoor areas', 'outside area', 'outside areas', 'backyard', 'back yard', 'yard', 'garden'], tank: ['water tank', 'water tanks', 'rain tank', 'rainwater tank'], driveway: ['concrete driveway', 'concrete path'], garage: ['garage floor', 'shed floor', 'workshop floor', 'warehouse floor'], pool: ['swimming pool'],
   basement: ['retaining wall'], window: ['window frame', 'door frame'], tileadh: ['tile adhesive', 'tile glue', 'tile adhesives', 'tiling adhesive', 'adhesive for tiles'], repair: ['concrete repair', 'repair mortar'],
   leveller: ['levelling compound', 'self levelling', 'self levelling compound'], leak: ['water leak'],
 };
@@ -136,7 +162,7 @@ const FILLER = new Set(('hi hello hey heya hiya yo g day gday mate bud buddy man
   'can could would will do does did you u ya i me my our we the a an some any something sumthing somthing anything stuff things thing need needs needed want wants wanna looking look lookin for after to on in at with about of is are was it s im i m ive ' +
   'what whats which who how whos where recommend recommended recommendation recommendations suggest suggestions suggestion advice advise reckon think thoughts opinion best better good great right ideal top ' +
   'should shall would use using buy get got have has ideas idea know tell show give pick choose one ones product products item items option options job jobs work project reno renovation renovations renovating renovate redo redoing doing do building build help helping hand ' +
-  'something someting new old little bit quick question dont don t').split(' '));
+  'something someting new old little bit quick question dont don t dunno idk').split(' '));
 const VAGUEV = new Set('fixing renovating renovate redoing doing building redo repairing work working tiling waterproofing sealing'.split(' '));
 const REC_WORD = /^(?:rec+o?m+e?n+d\w*|rec+o?m+\w*|sug+e?st\w*|reckon|best|better|ideal|advice|advise|ideas?)$/;
 const lev = (a, b) => { const m = a.length, n = b.length; if (Math.abs(m - n) > 2) return 9; let prev = Array.from({ length: n + 1 }, (_, j) => j); for (let i = 1; i <= m; i++) { const cur = [i]; for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = cur; } return prev[n]; };
@@ -145,7 +171,7 @@ const fixTypo = (w) => { if (WORDKEYS.has(w) || FILLER.has(w) || w.length < 5) r
 const plural = (w) => (w.length > 4 && w.endsWith('s') && WORDKEYS.has(w.slice(0, -1)) ? w.slice(0, -1) : w);
 /** { place, rec } when the message is only a place or a bare product group wrapped in chat ("what do you recommend for my bathroom", "can u recommend a sealent"); place null with rec for "what do you recommend" */
 export function placeOf(n0) {
-  const n = clean(applySlang(normalise(n0)).text || normalise(n0)); const words = n.split(' ').filter(Boolean);
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))).replace(new RegExp(`^(?:(?:${GREET}|${HOW}|are you there|you there)${TAIL}(?: |$))+`), '').trim(); const words = n.split(' ').filter(Boolean);
   if (!words.length || words.length > 12) return null;
   let rec = false; const rest = [];
   for (let w of words) { if (REC_WORD.test(w)) { rec = true; continue; } if (/^(use|pick|choose|good|great)$/.test(w) && words.includes('what')) rec = rec || false; w = fixTypo(w); if (FILLER.has(w) && !WORDKEYS.has(w)) { continue; } rest.push(plural(w)); }
@@ -184,9 +210,26 @@ export function genericCard(rec) {
 }
 
 // ---- the follow-up that joins a clarifying question ("bathroom" then "under tiles") -------------------------------------------------------------------------------
+// places that describe a surface, position or product group rather than a room: said after a clarifier they narrow the job, they do not change it
+const MODIFIER = new Set(['floor', 'wall', 'outside', 'tiles', 'timber', 'concrete', 'leak', 'crack']);
 const QWORD = /^(what|whats|how|why|who|where|when|which|can|could|is|are|does|do|will|would|tell|show|give)\b/;
 function stemw(w) { return w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w; }
 const GENERIC_OPTS = STARTERS.map((s, i) => O(s.label, s.q, ['waterproof waterproofing membrane leak leaking bathroom shower wet', 'tile tiles tiling floor adhesive glue', 'seal sealant silicone caulk around bath shower gap', 'crack cracks cracked concrete repair'][i]));
+/** a place that narrows a job (a surface, position or product group) rather than naming a new room */
+export const isModifier = (pl) => !!pl && (MODIFIER.has(pl.id) || !!pl.cat);
+/** The job we were last asking about (a few turns ago, already answered) plus a lone narrowing word ("sealant", "which silicone", "what adhesive"): the option of that job the words pick, or null when the words pick none. */
+export function joinPlace(n0, placeId) {
+  const pl = PLACES.find((p) => p.id === placeId); if (!pl) return null;
+  const n = clean(applySlang(normalise(n0)).text || normalise(n0)); const toks = new Set(n.split(' ').filter(Boolean).map((w) => stemw(fixTypo(w === 'sealer' ? 'sealant' : w))));
+  const scored = pl.opts.map((o) => ({ o, s: o.kw.filter((k) => toks.has(stemw(k))).length })).sort((a, b) => b.s - a.s);
+  return scored[0].s >= 1 ? { ask: scored[0].o.q, wantPick: true, picked: true } : null;
+}
+/** "you pick" after a clarifying question: the first (most common) option of the job we asked about, so the person gets a pick and not the question again */
+export function defaultPick(convo) {
+  if (!convo) return null;
+  const pl = convo.id === 'generic' ? { opts: GENERIC_OPTS } : PLACES.find((p) => p.id === convo.id);
+  return pl && pl.opts && pl.opts[0] ? { ask: pl.opts[0].q, wantPick: true, defaulted: true } : null;
+}
 /** { ask, wantPick, noun } for a short free-text reply to a clarifying question, or null when the message is a fresh question of its own */
 export function followUp(n0, convo) {
   if (!convo) return null;
@@ -194,21 +237,33 @@ export function followUp(n0, convo) {
   if (!words.length || words.length > 8 || (QWORD.test(n) && !/^(what|how) about\b/.test(n))) return null;
   const pl = convo.id === 'generic' ? { opts: GENERIC_OPTS, id: 'generic' } : PLACES.find((p) => p.id === convo.id); if (!pl) return null;
   const exact = pl.opts.find((o) => normalise(o.q) === n); if (exact) return { ask: exact.q, wantPick: convo.rec, exact: true };
-  const np = placeOf(n0); if (np && np.place && np.place.id !== pl.id) return null; // a different place is a fresh question
   const toks = new Set(words.map((w) => stemw(fixTypo(w))));
   const scored = pl.opts.map((o) => ({ o, s: o.kw.filter((k) => toks.has(stemw(k))).length })).sort((a, b) => b.s - a.s);
+  const np = placeOf(n0);
+  // a different room or site ("kitchen" after "bathroom") is a fresh question; a MODIFIER ("the floor", "outside", "tiles on it", a product group) still belongs to the job we asked about
+  if (np && np.place && np.place.id !== pl.id && !(MODIFIER.has(np.place.id) || np.place.cat) && !(scored[0].s >= 1 && (scored.length < 2 || scored[0].s > scored[1].s))) return null;
   if (scored[0].s >= 1 && (scored.length < 2 || scored[0].s > scored[1].s)) return { ask: scored[0].o.q, wantPick: convo.rec, picked: true };
+  if (scored[0].s >= 1) return { ask: scored[0].o.q, wantPick: convo.rec, picked: true, tie: true }; // two options fit the words equally: the first listed is the common one, so the person gets an answer, not the same question again
   const noun = convo.id === 'generic' ? '' : (pl.noun || pl.key.split(' ')[0] || pl.title.toLowerCase());
   const body = n.replace(/^(and |also |what about |how about |it s |its |it is |just |a |the )+/, '');
   return { ask: clean(`${body} ${noun}`), wantPick: convo.rec, noun };
 }
 
 // ---- the recommendation lead ("My pick ...") ------------------------------------------------------------------------------------------------------------------------
-const PICK_BASE = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with)\b/;
+const PICK_BASE = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one )?(is|s|would|should|do)|what (should|do|would|d) (i|you) (use|buy|get|go with|pick|choose)|what (\w+ ){1,3}(should|do|would|can) (i|you|we) (use|buy|get|go with|pick|choose)|which (\w+ ){1,2}(should|would|do) (i|you) (use|buy|get|pick|choose)|what (is|s) good|whats good|good for|any ideas|top pick|what to use|what do i use|what would you use|go with|^(?:which|what) (?!is the |s the |are the |does |do you |can you |is a |is an )(?:[a-z0-9]+ ){0,3}(?:for|on|to use|do i use|should i use|would you use))\b/;
 // "what water ratio do I use", "what thickness should we use": a property or how-to ask, not a product pick, unless the asker also says best / recommend / which product
 const HOWTO_RX = /\b(ratio|ratios|thickness|temperature|times?|how (much|many|long|thick|deep)|mix(ing)? (ratio|time|amount)|water (ratio|amount|content)|coverage|amount|quantity|dosage|dose|depth|pot life|open time|primer for)\b/;
 const PICK_EXPLICIT = /\b(rec+o?m+e?n+d\w*|sug+e?st\w*|best|better|ideal|which (one|product|products)|top pick|go with|what (is|s) good|whats good|good for)\b/;
 export const PICK_RX = { test: (n) => PICK_BASE.test(n) && !(HOWTO_RX.test(n) && !PICK_EXPLICIT.test(n)) };
+// the shape of a singular ask: one answer wanted ("just one", "your pick", "the go-to", "choose one", "if you had to choose", "single best", "name the one", a trailing "one")
+const SINGLE_RX = /\b(?:pick|picks|choose|choice|favou?rite|go to|goto|single|top (?:pick|choice))\b|\b(?:just|only|name|give me|tell me|want|need|take|go with|a|the|which|what)\s+(?:the\s+|a\s+)?one\b|\bone\s+(?:only|please|thanks|pick|choice|product|will do|is fine)\b|\bone\s*$|\bif you had to\b|^one\s+[a-z]+(?:\s+[a-z]+){0,2}\s+(?:for|to|that|under|on)\b/;
+const NEED_RX = /\b(need|needs|want|wanna|help|looking for|something (?:to|for)|hunting for|after a|after some)\b/;
+const JOB_WORD = /\b(tiles?|tiling|shower|showa|bathroom|laundry|kitchen|balcony|deck|floor|slab|leak|leaky|leaking|leaks|cracked|crack|brick|timber|splashback|roof|gutter|basement)\b/;
+/** a recommend ask in any wording: the PICK_RX phrases, plus "need / want / something to" statements after slang and texting shorthand are read ("wat do i use", "sumthin to stick tiles") */
+export function wantsPick(n0) {
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const raw = normalise(n0);
+  return PICK_RX.test(raw) || PICK_RX.test(n) || SINGLE_RX.test(n) || (NEED_RX.test(n) && JOB_WORD.test(n) && !/\b(how (much|many|long)|price|cost|stock|sds|data sheet)\b/.test(n));
+}
 const CHECK = 'I can only read what Sika has published, so Sika Technical Services should confirm the fit for your site before you buy.';
 const docWord = (f) => (f && f.doc_type === 'PDS' ? 'data sheet' : 'product page');
 /** Turn an advisor answer (summary card + product cards, ordered by the published criterion) into: one clear pick with its quoted sentence, up to two alternatives, one honesty line.
@@ -259,3 +314,39 @@ function productPick(res, cs) {
   res.cards = [top, ...alts, ...tail]; res.trace = (res.trace || []).concat(['chat:pick']);
   return res;
 }
+
+// ---- a social turn by shape, when the brain found nothing -------------------------------------------------------------------------------------------------------------
+/** The social kind of a short message the brain could not place at all (an unknown card with no product and no topic of its own): chat, not a question about the range. '' when it is not chat. */
+export function looseSocial(n0, card) {
+  const c = card || {}; if (c.type !== 'unknown' || c.product) return '';
+  const miss = (c.handoff && c.handoff.missing) || []; if (miss.length && !(miss.length === 1 && /^(instructions|job)$/.test(miss[0]))) return '';
+  const n = chatNorm(clean(applySlang(normalise(n0)).text || normalise(n0))); const w = n.split(' ').filter(Boolean);
+  if (!w.length || w.length > 12 || /\d/.test(n)) return '';
+  // only a message with a sign that it is addressed to the assistant, or is a greeting, a thanks or a plea for help, is chat; a question with no catalogue words in it ("which is cheaper") keeps the honest no
+  if (!/\b(you|your|youre|u|ya|anyone|anybody|someone|team|crew|there|here|hello|hi|hey|yo|morning|arvo|afternoon|evening|help|hand|chat|talk|thanks|thank|cheers|ta|legend|obliged|appreciate|helps|new|first|ok|okay|right|sorry|lol|haha|please|mate|bye|goodbye|later|ciao|ready|free|around|open|this|sure|idea|dunno|unsure|know)\b/.test(n)) return '';
+  if (/\b(?:dunno|unsure|no idea|not (?:really )?sure|don t know|do not know|cant say|can t say|cant tell|can t tell)\b/.test(n)) return 'no';
+  if (/\b(thanks|thank|cheers|ta|legend|obliged|appreciate|appreciated|helps|helpful|ripper|beauty|sorted|perfect|nice one|top job|great job|good one)\b/.test(n)) return 'thanks';
+  if (/\b(bye|goodbye|later|ciao|goodnight)\b/.test(n)) return 'bye';
+  if (/\b(bot|robot|human|person|real|machine|chatbot|computer|somebody|anyone|talk to|chat to|who s there)\b/.test(n)) return 'who';
+  if (/\b(how (?:do|does|can|would) (?:i|you|this|it|we)|what (?:do|can|sort|kind|else)|use this|ask you|instructions|know about)\b/.test(n)) return 'cando';
+  return 'help';
+}
+
+// ---- two products side by side -------------------------------------------------------------------------------------------------------------------------------------------
+const CMP_LEAD = '(?:(?:and|also|ok|okay|so|now|but|then|what about|how about|tell me|can you tell me|whats|what s|what is|is|are|does|do|how does|how do|how is|how are|can you|could you)\\s+)*';
+const SEP = '(?:vs|versus|v|against|compared (?:to|with|against)|compare (?:to|with|against)|stack(?:s|ed)? up (?:against|to|with)|measure(?:s)? up (?:against|to)|differ(?:s|ent)? (?:from|to|than|with)|(?:any |that |much )?different (?:from|to|than)|the same as|same as|better than|or|and)';
+/** { a, b } the two sides of a comparing message ("X vs Y", "difference between X and Y", "compare X with Y", "how does X measure up to Y", "X or Y, which is better"), raw text each, or null. A side may be a pronoun. */
+export function compareSides(n0) {
+  let n = clean(applySlang(normalise(n0)).text || normalise(n0)); if (!n || n.split(' ').length > 22) return null;
+  n = n.replace(/\s+(?:which|what) (?:one )?(?:is|s|would be|do you)?\s*(?:the )?(?:better|best|good|safer|stronger|cheaper|easier)?(?: one)?$/, '').replace(/\s+(?:please|thanks)$/, '');
+  let m;
+  const same = /\b(?:vs|versus|against|compar\w*|differ\w*|difference|stack\w* up|measure\w* up|same as|better than|better)\b/.test(n);
+  if ((m = new RegExp(`^${CMP_LEAD}(?:the )?(?:difference|differences|diff) between (.+?) and (.+)$`).exec(n))) return { a: m[1], b: m[2] };
+  if ((m = new RegExp(`^${CMP_LEAD}(?:compare|comparing)\\s+(.+?)\\s+(?:with|to|and|against|vs|versus)\\s+(.+)$`).exec(n))) return { a: m[1], b: m[2] };
+  if (!same && !/\bor\b/.test(n)) return null;
+  const sepRx = new RegExp(`^${CMP_LEAD}(.+?)\\s+${SEP}\\s+(.+)$`);
+  if ((m = sepRx.exec(n))) { const sep = /\b(or|and)\b/.exec(n.slice(m[1].length)); if (sep && sep[1] === 'and' && !same) return null; return { a: m[1], b: m[2] }; }
+  return null;
+}
+const PRONOUN = /^(?:it|this|that|this one|that one|the same|them|its|the first|the last|the other)$/;
+export const isPronounSide = (s) => PRONOUN.test(String(s || '').trim());

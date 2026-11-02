@@ -264,3 +264,46 @@ Comparisons 20/20 (all category rows), honest-no 4/4 (price and stock declines k
 - Pass/fail rules live in convo_score.mjs and are deliberately mechanical (card type, My pick lead, quoted source sentence, chip count, regex on the final answer). A pass is not proof the answer is right, only that it has the right shape; a fail can be a too-strict expectation (INFERRED, review the examples above before building to them).
 - The not-found check reads the first card only (a comparison card legitimately says "not in the published documentation" for a silent column; the first draft of the scorer counted those 5 rows as failures, corrected before this baseline).
 - Ties ("Two products tie") count as a valid pick answer, per unit_convo.mjs.
+
+---
+
+## AFTER (branch sika/convo-depth-2026-11-02, base 2e8900c64)
+
+Same bank, same scorer, no bank row changed (every failing example was a reasonable counter reply to fix in the brain, none needed the expectation bent). Reproduce: `node demo-tests/sika-brain/convo_score.mjs --md`.
+
+213/240 rows pass (88.8%), up from 172/240 (71.7%).
+
+| class | before | after |
+|---|---|---|
+| social | 21/25 84.0% | 25/25 100.0% |
+| clarify | 31/43 72.1% | 43/43 100.0% |
+| pick | 40/64 62.5% | 56/64 87.5% |
+| answer | 33/52 63.5% | 42/52 80.8% |
+| quantity | 23/29 79.3% | 23/29 79.3% |
+| compare | 20/23 87.0% | 20/23 87.0% |
+| honest-no | 4/4 100% | 4/4 100% |
+
+By category after: social 100%, vague 100%, recommend 95%, typo 80%, compare 100%, quantity 85%, followup 86.7%, script 70%.
+
+### What changed (chat.js, session.js, vague.js, lib/brain-ui.js, new brain/persist.js)
+
+1. Carry the job through a clarifier reply. `followUp` now treats a narrowing word ("tiles on it", "the floor", "outside", a product group) as part of the job already asked about; only a different room ("kitchen" after "bathroom") is a fresh question. Two options that fit equally resolve to the first listed (the common one). "you pick" after a clarifier gives a My pick for the first option. A place is remembered for 3 turns after it was asked (`h.place`), so a lone "sealant", "which silicone", "outside" or "what do I use" a turn or two after an answer joins that job. A thanks or a goodbye closes the thread.
+2. Social and place lexicon. Chat-only slang (u, ur, thx, sumthing, wat, goin, reno, pls, heyyy, texting forms) is applied in `chatNorm`, not in slang.js, so product questions are read exactly as before. A greeting or "u there" in front of a help or how-are-you ask is judged on the rest ("arvo mate need a hand with a reno"). New frustrated and lol forms. New places with 3 to 4 chips each: gutter, driveway or path, fence, stairs, pergola, skylight, water tank; metal roof, tin roof, outdoor area, yard and similar phrases map to existing places. "pavers" was left out on purpose (script-234 regressed on it).
+3. Recommend asks. `wantsPick` widens the My pick trigger to "which/what ... for/to use" forms and to "need / want / help / something to" statements that name a job surface (tile, shower, floor, leak and so on). Without the job-word guard it cost 17 golden rows.
+4. Lone place nouns (metal roof, gutter, driveway, retaining wall, outdoor area, water tank) now return a clarifier with chips.
+5. Reload. `brain/persist.js` keeps the session state in sessionStorage (try/catch around every call; no storage means no memory). `brain-ui.js` loads it on start and saves after each answer; `resetBrainState` exists for a new-chat control, but the chat panel has no reset control today, so nothing calls it yet. The visible message log is not restored, only the context.
+
+### Still failing (27 rows), by cause
+
+- Quantity and "how many coats" with no product in context (quantity-166/168/161, script-204/218/229, followup-196, script-216): quantity/coverage code, owned by the other builder, not touched.
+- A question after a comparison ("which one for timber", "which one for a slab", "which one is better for a balcony", 3 rows): needs the compared products carried into the rewrite; not done.
+- Brain routing and not-found (recommend-077 workshop bench lands on a training page, recommend-098 handrail, typo-107, typo-125, typo-128): product coverage or name matching, left alone.
+- Bank "room" checks that look for a word the pick text does not contain (followup-188, followup-200, script-212, script-235): the reply is an answer for the right job but the quoted sentence does not repeat the room word. Not fixed.
+- typo-114, typo-115, typo-122: no recommend wording and no job word the guard accepts.
+
+### Tests
+
+- New `unit_depth.mjs` (56 checks, 41 fail on 2e8900c64) is wired into run_all.sh.
+- `run_all.sh` rc 0: unit_brain 39/39, unit_convo 92/92, unit_pick 19/19, unit_depth 56/56, convo_opts 118/118, unit_coverage 90/90, GOLDEN 4599/4659 (98.71%, the floor), property test 0 violations, measure gate OK, bank WRONG 0 (the one BRAIN-WRONG in the third measure set and the `t17` miss are the same on 2e8900c64).
+- `convo_score.mjs --gate` OK. Real-browser `convo_e2e.mjs` (Windows node, 390 and 1366 px): CONVO E2E GREEN.
+- Changed twice to keep existing tests true: the sealant place option "Gutter sealant" became "Sealant for a leaking gutter" (the new gutter place would otherwise read "Gutter sealant" as a clarifier), in chat.js and vague.js.

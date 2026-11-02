@@ -1,5 +1,6 @@
 // brain-ui.js: the v2 brain behind the existing chat panel. Plain code, no model. The panel keeps its look: cards are rendered with the panel's own classes.
 // Feature flag: ?brain=0 forces the v1 advisor, ?brain=1 forces v2, otherwise BRAIN_DEFAULT decides. A missing shard falls back to v1.
+import { loadBrainState, saveBrainState } from '../brain/persist.js';
 import { h, icon } from './util.js';
 import { chipEl } from './apply_data.js';
 import { buildHandoff } from '../assistant/handoff.js';
@@ -23,6 +24,9 @@ function loadRulesModule() {
   }));
 }
 let brainP = null, bstate = null;
+// the conversation context survives a page reload (assets/brain/persist.js: sessionStorage, optional)
+export const resetBrainState = (store) => { bstate = null; saveBrainState(null, store); };
+bstate = loadBrainState();
 // one in-page memo of fetched JSON, shared with the actions layer (assets/actions/core.js), so a shard is never downloaded twice on a cold load
 const jsonMemo = (globalThis.__sikaJson ||= new Map());
 const fetchJson = (rel) => { const url = new URL('../../' + rel, import.meta.url).href; if (!jsonMemo.has(url)) jsonMemo.set(url, fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null)); return jsonMemo.get(url); };
@@ -43,7 +47,7 @@ export function prefetchBrain() { if (brainOn()) ensureBrain(); }
 export async function brainAnswer(text) {
   const brain = await ensureBrain(); if (!brain) return null;
   let a; try { a = await brain.ask(text, bstate); } catch { return null; }
-  bstate = a.state || bstate;
+  bstate = a.state || bstate; saveBrainState(bstate);
   const sourced = a.cards.filter((c) => c.status === 'PUBLISHED' && c.source);
   const noneKnown = a.cards.length && a.cards.every((c) => c.type === 'unknown');
   return { intent: noneKnown && !a.cards.some((c) => c.product) ? 'out_of_scope' : a.intent, query: text, blocks: a.cards.map((card) => ({ type: 'brain', card })), citations: sourced.map((c) => ({ label: c.title, url: c.source.source_url, kind: 'page' })), followups: a.followups, state: null, debug: { tokens: [], matched: [], ms: a.ms }, brain: a };

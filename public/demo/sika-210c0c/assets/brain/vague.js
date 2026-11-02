@@ -1,5 +1,6 @@
 // vague.js: ambiguous asks get ONE short clarifying question with 2 to 4 tap options (the existing choose card; each option is a full question the assistant already answers).
 import * as C from './cards.js';
+import { wantsPick } from './chat.js';
 export const VAGUE = [
   { id: 'bathroom', rx: /^(what (do|should) i (need|use|buy|get) for (a |my |the )?(bathroom|ensuite|shower|wet area)|bathroom (reno|renovation|products?)|bathroom\b)$/, title: 'Bathroom', text: 'Which part of the bathroom is it?', opts: ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a bathroom wall', 'Silicone sealant for a shower', 'Grout for a shower floor'], labels: ['Waterproofing', 'Tile adhesive', 'Sealant', 'Grout'] },
   { id: 'kitchen', rx: /^(kitchen (reno|renovation|products?)( what (products|do i buy|do i need))?|what (do|should) i (need|use|buy|get) for (a |my |the )?kitchen)$/, title: 'Kitchen', text: 'Which part of the kitchen?', opts: ['Tile adhesive for a kitchen splashback', 'Silicone sealant for a kitchen bench', 'Grout for a kitchen floor', 'Levelling compound for an uneven kitchen floor'], labels: ['Splashback tiles', 'Bench sealant', 'Grout', 'Uneven floor'] },
@@ -15,10 +16,11 @@ export const VAGUE = [
   { id: 'screed', rx: /^(what |best |good |the best )?(screed|leveller|leveler|levelling compound|self levelling( compound)?)( do i need| should i use)?$/, title: 'Screed or leveller', text: 'What is the floor job?', opts: ["What's the best screed for a big job", 'Quick drying floor leveller', 'Levelling compound for a timber floor', 'External screed that can go outdoors'], labels: ['Big area', 'Fast drying', 'Over timber', 'Outdoors'] },
   { id: 'admixture', rx: /^(what |best |good |the best )?(admixture|concrete admixture|additive for concrete)( do i need| should i use)?$/, title: 'Concrete admixture', text: 'What should the admixture do?', opts: ['Superplasticiser for high strength concrete', 'Accelerator for early strength in winter', 'Retarder for a hot day pour', 'Fibres to stop plastic shrinkage cracking'], labels: ['Flow and strength', 'Faster set', 'Slower set', 'Crack control'] },
   { id: 'repair', rx: /^(what |best |good |the best )?(repair mortar|concrete repair|patching mortar|repair)( do i need| should i use)?$/, title: 'Concrete repair', text: 'What is being repaired?', opts: ['Repair mortar for spalling concrete', 'Fast setting mortar to plug a leak', 'Ramp and patch mortar for a loading dock', 'Bonding agent for new render to old concrete'], labels: ['Spalling', 'Leak', 'Floor patching', 'Bonding'] },
-  { id: 'sealant', rx: /^(what )?(sealant|silicone|sealer|caulk)( do i need| should i use)?$/, title: 'Sealant', text: 'What is the sealant for?', opts: ['Silicone sealant for a shower', 'Sealant for expansion joints in a facade', 'Gutter sealant', 'Fire rated sealant for service penetrations'], labels: ['Shower', 'Facade joints', 'Gutter', 'Fire rated'] },
+  { id: 'sealant', rx: /^(what )?(sealant|silicone|sealer|caulk)( do i need| should i use)?$/, title: 'Sealant', text: 'What is the sealant for?', opts: ['Silicone sealant for a shower', 'Sealant for expansion joints in a facade', 'Sealant for a leaking gutter', 'Fire rated sealant for service penetrations'], labels: ['Shower', 'Facade joints', 'Gutter', 'Fire rated'] },
   { id: 'leaks', rx: /^(something|anything|what|what do i use|what can i use) (to stop|for|to fix) (the |my |a )?(leaks?|leaking|water leaks?)$/, title: 'Leaks', text: 'Where is the leak?', opts: ['Fast setting mortar to plug a leak', 'Waterproofing for a leaking shower', 'Waterproofing for a leaking roof', 'Injection resin for leaking cracks'], labels: ['Concrete wall', 'Shower', 'Roof', 'Cracks'] },
   { id: 'deck', rx: /^(what should i use for (my |the |a )?(deck|decking)|deck (products?|help))$/, title: 'Deck', text: 'What is the deck job?', opts: ['Adhesive for fixing decking', 'Waterproofing for a deck under tiles', 'Sealant for deck joints'], labels: ['Fixing', 'Waterproofing', 'Joints'] },
   { id: 'slab', rx: /^(need something for (the |my |a )?slab|slab (help|products?))$/, title: 'Slab', text: 'What is the slab job?', opts: ['Self levelling compound for an uneven slab', 'Repair mortar for a damaged concrete slab', 'Waterproofing for a slab', 'Curing control for a new slab'], labels: ['Levelling', 'Repair', 'Waterproofing', 'Curing'] },
+  { id: 'epoxy', rx: /^(what |best |good |the best )?(epoxy|epoxy resin|resin)( do i need| should i use)?$/, title: 'Epoxy', text: 'What is the epoxy for?', opts: ['Epoxy adhesive for bonding steel plates to concrete', 'Epoxy floor coating for a garage', 'Epoxy grout for a commercial kitchen', 'Injection resin for leaking cracks'], labels: ['Bonding', 'Floor coating', 'Grout', 'Crack injection'] },
   { id: 'primer', rx: /^(best )?primer$/, title: 'Primer', text: 'What is it priming?', opts: ['Primer for tiling over smooth concrete', 'Primer for a levelling compound on concrete', 'Primer before sealant on porous surfaces'], labels: ['Tiling', 'Levelling', 'Sealant'] },
   { id: 'wall', rx: /^what do i use on (a |the |my )?wall$/, title: 'Wall', text: 'What is the wall job?', opts: ['Tile adhesive for walls in a wet area on plasterboard', 'Waterproofing for a wet area wall', 'Repair mortar for a concrete wall', 'Filler for cracks in a wall before painting'], labels: ['Tiling', 'Waterproofing', 'Repair', 'Painting'] },
 ];
@@ -52,7 +54,7 @@ const PL = ['window frame', 'door frame', 'window', 'door', 'bathroom', 'bath', 
 /** a request that joins two places with "and" ("a seal for the window frame and the bath"): ask which one first, one option each */
 export function splitCard(n) {
   const kind = /\b(sealant|seal|silicone)\b/.test(n) ? 'Sealant for' : /\b(adhesive|glue)\b/.test(n) ? 'Adhesive for' : /\bwaterproof\w*\b/.test(n) ? 'Waterproofing for' : null;
-  if (!kind || !/\band\b/.test(n) || n.split(' ').length > 14) return null;
+  if (!kind || !/\band\b/.test(n) || n.split(' ').length > 14 || (wantsPick(n) && (n.match(/\b(?:what|which|wich)\b/g) || []).length < 2)) return null; // a pick ask wants ONE answer: its "and" joins surfaces of one job, so it is not split
   let found = PL.filter((p) => new RegExp('\\b' + p + '\\b').test(n)); found = found.filter((p) => !found.some((o) => o !== p && o.includes(p)));
   if (found.length < 2 || found.length > 4) return null;
   const opts = found.map((p) => `${kind} a ${p}`); const c = C.chooseCard('Which one first?', 'That is more than one job. Pick the one to start with.', opts, [], found.map((p) => p.charAt(0).toUpperCase() + p.slice(1))); c.followups = opts; return c;
@@ -64,7 +66,54 @@ export function vagueCard(n) {
   if (m2 && !m && n.split(' ').length <= 9) { const noun = m2[1].replace(/^(a |an |the |my |our )/, '').trim(); for (const [rx, v] of NOUN) if (rx.test(noun)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; } const gen = ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor']; const c = C.chooseCard('What are you working on?', 'What is the job?', gen, [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = gen; return c; }
   if (m && n.split(' ').length <= 8) { const noun = m[1].trim(); for (const [rx, v] of NOUN) if (rx.test(noun)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
     if (/^(some )?(a |the |my )?(job|project|fix|repair|work|reno|renovation|building|house|home)$/.test(noun) || noun.split(' ').length === 1 && noun.length < 4) { const c = C.chooseCard('What are you working on?', 'What is the job?', ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor'], [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = c.followups; return c; } }
-  return vagueCard0(n);
+  return vagueCard0(n) || looseVague(n);
+}
+
+// ---- the structural reader: strip the wrapper a person puts round a vague ask, then ask what is left -----------------------------------------------------------------------
+// A message is a vague ask when, once the chat wrapper is gone ("what's the story with", "can you help with", "a customer asking about", ", not sure what for"), it names ONE category or place and no
+// condition, surface or problem beyond it. The wrapper is a pattern of speech, not a list of phrasings: lead-ins, a trailing "help / any ideas / what do I buy", and an "I do not know what it is for" tail.
+const LEAD = /^(?:(?:ok|okay|so|right|um|hey|hi|and|also|now|yeah|look|actually|sorry)\s+)*(?:(?:can|could|would|will) (?:you|u|someone) (?:please )?|(?:i |we )?(?:was |am |m |d |ll )?(?:wondering|hoping|after|looking|thinking) (?:about |at |for |into |of )?|(?:what s|whats|what is) (?:the )?(?:story|go|deal|situation|scoop|lowdown|low down|best)(?: with| on| for| about)?\s*|tell me (?:all )?about |info(?:rmation)? (?:on|about) |thoughts on |(?:what|which) (?:options|products|ones?|stuff|things?)(?: are (?:there|available))? (?:for|in|with|on) |what s available (?:in|for) |whats available (?:in|for) |what is available (?:in|for) |help(?: me)? (?:out )?(?:with|on) |(?:i |we )?(?:need|want) (?:some |a bit of )?(?:help|advice|a hand) (?:with|on|for) |(?:what|which) |)/;
+const WHO_ASKING = /^(?:(?:(?:a|my|the|our|some) )?(?:mate|customer|client|lady|bloke|guy|woman|man|someone|punter|boss|owner|tenant|builder|neighbour|friend) |(?:a |an |the )?)?(?:here )?(?:(?:is|was|has|just) )*(?:asked|asking|wants?|wanting|needs?|needing|after|enquiring|inquiring)(?: me)?(?: about| for| a| an| some| something| to)* ?/;
+const TAILS = /(?:,|\s)\s*(?:(?:but|and|though|however|so|or)\s+)?(?:(?:i|they|he|she|we|you)\s+)?(?:(?:cant|can t|dont|don t|doesn t|doesnt|didn t|didnt|do not|does not)\s+(?:say|know|tell|decide|work out|be sure)|(?:am |is |are |m |s |re )?(?:not|never) (?:really )?(?:sure|certain|clear)|no idea|unsure|dunno|not sure|undecided|help|please|thanks|any (?:ideas|suggestions|advice|tips)|ideas|what (?:are|r) my options|what now|what (?:do|should|can) (?:i|we|you) (?:do|use|buy|get|try|suggest)|what would you (?:suggest|do)|what do you suggest|any good|what next|where (?:do|should) (?:i|we) start|options|got any).*$/;
+const UNSURE = /\b(?:cant|can t|dont|don t|doesn t|doesnt|didn t) (?:say|know|tell|decide|work out)\b|\bno idea\b|\bnot (?:really )?(?:sure|certain)\b|\bunsure\b|\bdunno\b|\bundecided\b|\bcant decide\b/;
+const FN = new Set(('a an the my our your their his her its this that these those it is are was were be been am s m re there here some any one ones thing things stuff something anything i we you they he she me us them to of for on in at with by and or but so if then than too also just really very pretty quite bit little lot ' +
+  'up out over under around about into onto off from as do does did can could would should will have has had got get need needs want wants wanna what whats which wich who where how why when whose please thanks ok okay hey hi yeah job work jobs today tomorrow tonight later soon now ' +
+  'mess broken damaged old bad issue issues problem problems trouble sorted theres heres ive got gotta getting coming going seeping dripping through fix fixed fixing repair repairing stop stopping help helping use using buy buying suggest options option ideas idea somewhere anywhere not no cant dont doesnt dunno sure certain unsure undecided say tell know decide').split(' '));
+const SURFACE = new Set('wall walls floor floors ceiling ceilings roof house home place room rooms outside outdoors inside indoors exterior interior'.split(' '));
+// category keyword -> the single noun the existing tables answer. product categories are only vague when nothing else is said; problem categories stay vague when a surface is named ("a crack by a window").
+const CAT = [
+  [/^(?:grout|grouts|grouting|regrout|regrouting)$/, 'grout', 0], [/^(?:sealant|sealants|sealer|sealers|silicone|silicones|silicon|caulk|caulking|seal|sealing|seals)$/, 'sealant', 0], [/^(?:glue|glues|adhesive|adhesives|gluing)$/, 'glue', 0],
+  [/^(?:waterproofing|waterproof|waterproofer|membrane|membranes|tanking)$/, 'waterproofing', 0], [/^(?:primer|primers|priming)$/, 'primer', 0], [/^(?:screed|screeds|leveller|levellers|levelling|leveler)$/, 'screed', 0],
+  [/^(?:admixture|admixtures|additive|additives)$/, 'admixture', 0], [/^(?:tiles|tile|tiling|tiler)$/, 'tiles', 0],
+  [/^(?:crack|cracks|cracked|cracking)$/, 'cracks', 1], [/^(?:leak|leaks|leaking|leaky|damp|dampness|moisture|water)$/, 'leak', 1],
+  [/^(?:deck|decking)$/, 'deck', 0], [/^(?:roof|roofing)$/, 'roof', 0], [/^(?:patio|balcony|terrace|veranda|verandah)$/, 'balcony', 0], [/^(?:garage|shed|workshop|warehouse)$/, 'garage', 0],
+  [/^(?:epoxy|epoxies|resin|resins)$/, 'epoxy', 0], [/^(?:ceiling|ceilings|wall|walls|fence|stairs|steps|driveway|path|paving|tank|gutter|gutters|window|windows|door|doors|bench|benchtop)$/, '*', 1],
+  [/^(?:pool|pools)$/, 'pool', 0], [/^(?:laundry|bathroom|kitchen|shower|ensuite)$/, null, 0], [/^(?:concrete|slab)$/, 'concrete', 0],
+];
+export function unwrap(n) {
+  let x = String(n || '').trim().replace(/\s+/g, ' '); if (!x) return '';
+  x = x.replace(LEAD, '').replace(WHO_ASKING, '').replace(LEAD, '');
+  x = x.replace(TAILS, '').trim();
+  return x;
+}
+function looseVague(n) {
+  const raw = String(n || '').trim(); if (!raw || raw.split(' ').length > 14 || /\d/.test(raw)) return null;
+  const x = unwrap(raw); const unsure = UNSURE.test(raw);
+  if (/\b(?:it|its|that one|this one|them|those|these|same)\b/.test(x)) return null; // a pronoun left after the wrapper points back at the conversation, so it is not a vague opening
+  const toks = x.split(' ').filter(Boolean); if (!toks.length || toks.length > 9) return null;
+  let cat = null; const rest = [];
+  for (const w of toks) { const hit = CAT.find(([rx]) => rx.test(w)); if (hit && !cat) cat = hit; else if (hit && hit !== cat && cat[2] === 0 && hit[2] === 0 && cat[1] !== hit[1]) rest.push(w); else if (!FN.has(w) && !(cat && cat[2] === 1 && SURFACE.has(w))) rest.push(w); }
+  // the category word can come after a surface word ("the wall has a crack"): the surface only counts as vague next to a problem category
+  if (!cat) return null;
+  const surfaced = toks.some((w) => SURFACE.has(w));
+  if (rest.length) return null;
+  if (surfaced && cat[2] === 0 && !/^(?:roof|floor|garage|concrete)/.test(cat[1] || '')) return null;
+  if (cat[1] === '*') { const gen = ['Waterproofing for a shower floor under tiles', 'Tile adhesive for porcelain tiles on a concrete floor', 'Silicone sealant for a shower', 'Self levelling compound for an uneven concrete floor']; const c = C.chooseCard('What are you working on?', 'What is the job? Tap the nearest one, or tell me the surface and the problem.', gen, [], ['Waterproofing', 'Tiling', 'Sealant', 'Floor levelling']); c.followups = gen; return c; }
+  const probe = cat[1] || toks.find((w) => /^(?:laundry|bathroom|kitchen|shower|ensuite)$/.test(w));
+  const v = VAGUE.find((e) => e.rx.test(probe)) || VAGUE.find((e) => e.rx.test('what ' + probe)) || VAGUE.find((e) => e.rx.test('something for ' + probe));
+  if (v) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
+  for (const [rx, nv] of NOUN) if (rx.test(probe)) { const c = C.chooseCard(nv.title, nv.text, nv.opts, [], nv.labels); c.followups = nv.opts; return c; }
+  return null;
 }
 function vagueCard0(n) {
   for (const v of VAGUE) if (v.rx.test(n)) { const c = C.chooseCard(v.title, v.text, v.opts, [], v.labels); c.followups = v.opts; return c; }
