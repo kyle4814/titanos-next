@@ -38,10 +38,11 @@ a = await noShard.ask('coverage of davco grey one pot'); t('missing product shar
   const c2 = await b.ask('How much Davco Grey One Pot adhesive for 20 m2'); c2.cards[0].lines[1].text = '27.5 L'; t('property test: a wrong calculation is caught (mutation)', checkAnswer('How much Davco Grey One Pot adhesive for 20 m2', c2).some((x) => x[0] === 'P1')); }
 // wave 3 answer quality (audit R2 finding 4): a sentence is shown once, and a quoted table row carries its table's header row and caption
 { const { repeats, rowStats } = await import('./sweep_dupes.mjs'); const { rowLines, NO_HEADER } = await import('../../public/demo/sika-210c0c/assets/brain/cards.js');
-  a = await b.ask('How much Davco Easy Grout for 20 m2'); const eg = cardText(a.cards[0]);
-  t('Easy Grout 20 m2: still an honest refusal, no quantity invented', a.cards[0].type === 'rate' && /will not turn this into a quantity/.test(a.cards[0].headline) && !/litre|pail[s]? needed/i.test(a.cards[0].headline), eg);
-  t('Easy Grout 20 m2: no sentence is shown twice', repeats(a).length === 0 && eg.split('300x100x10mm | 14m2 | 7m2 | 4m2').length === 2, eg);
-  t('Easy Grout 20 m2: the table header row and the 2 Litre pail basis come with the rows', /TILE SIZE \| 1\.5mm Joint \| 3mm Joint \| 5mm Joint/.test(eg) && /Grout coverage based on 2 Litre pail/.test(eg) && rowStats(a).headerless === 0, eg);
+  a = await b.ask('What is the coverage of Davco Easy Grout?'); const eg = cardText(a.cards[0]);
+  t('Easy Grout coverage: the published table is quoted, nothing is turned into a quantity', a.cards[0].type === 'rate' && !/litre|pail[s]? needed/i.test(a.cards[0].headline), eg);
+  t('Easy Grout coverage: no sentence is shown twice', repeats(a).length === 0 && eg.split('300x100x10mm | 14m2 | 7m2 | 4m2').length === 2, eg);
+  t('Easy Grout coverage: the table header row and the 2 Litre pail basis come with the rows', /TILE SIZE \| 1\.5mm Joint \| 3mm Joint \| 5mm Joint/.test(eg) && /Grout coverage based on 2 Litre pail/.test(eg) && rowStats(a).headerless === 0, eg);
+  a = await b.ask('How much Davco Easy Grout for 20 m2'); t('Easy Grout 20 m2 (no tile size): one question with chips, no quantity invented (grid lane: unit_grid.mjs)', a.cards[0].type === 'choose' && !/rounded up/.test(cardText(a.cards[0])), cardText(a.cards[0]));
   t('Easy Grout 20 m2: every number on the card is still inside a quoted fact', checkAnswerClean('How much Davco Easy Grout for 20 m2', a));
   a = await b.ask('What is the coverage of Davco Easy Grout?'); t('Easy Grout coverage: three cells of one row are one line', a.cards[0].lines.filter((l) => l.text === '300x100x10mm | 14m2 | 7m2 | 4m2').length === 1);
   a = await b.ask('how long before I can recoat Sikagard-550 W Elastic'); t('time table rows carry their header too', a.cards[0].type === 'time' && /Previous coating \| Waiting time \| Next coating/.test(cardText(a.cards[0])) && rowStats(a).headerless === 0);

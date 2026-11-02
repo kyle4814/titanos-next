@@ -2,6 +2,7 @@
 // the visitor's own question, or a calculation that carries its inputs (calc) so it can be recomputed.
 import { card, fact, CHIPS, NOT_KNOWN } from './schema.js';
 import { numbersIn } from './text.js';
+import { gridCells, selectCells, cellNeed, packPlan, planText, tileRows, jointCols } from './grid.js';
 import { normaliseFact, quantity, packRange, packRangeText, doseBasisText, inputFor, fmtQty, fmtK, DOSE_KINDS } from '../lib/finder/calc.js';
 
 export const prod = (s) => ({ id: s.id, name: s.n, url: s.u });
@@ -151,13 +152,74 @@ export function doseCard(sh, dose, question) {
   return card({ type: 'calculation', title: `How much ${sh.n}`, product: prod(sh), headline: 'Worked out from the published dose below. The published range stays a range: no midpoint is picked. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.',
     lines, facts: outFacts, chip: CHIPS.DERIVED, links: dsLink(sh), calc: { derived: true, inputs: { cement_kg: dose.cementKg || null, mix_kg: dose.mixKg || null, water_l: dose.waterL || null, volume_m3: dose.volume || null, facts: usable.map((x) => x.f.id), packs }, outputs: usable.map((x) => ({ unit: x.q.unit, need_min: x.q.low, need_max: x.q.high, basis: x.n.kind })), plan: [] } });
 }
+
+// ---- a published coverage grid (tile size x joint width) whose table says what the figure is per: compute it, or ask the ONE missing thing
+const GRID_HEAD = 'Worked out from the published table below. This is a quantity estimate only, not a price and not an offer. Confirm with the data sheet and Sika Technical Services before ordering.';
+function gridCard(sh, area, question, facts) {
+  const cells = gridCells(facts); const sel = selectCells(cells, question); if (!sel) return null;
+  const A = num(area), title = `How much ${sh.n} for ${A} m2`;
+  const q = (t, j) => `How much ${sh.n} for ${A} m2${t ? ', ' + t + ' tiles' : ''}${j != null ? ', ' + num(j) + ' mm joint' : ''}`;
+  const published = tileRows(cells).slice(0, 8), widths = jointCols(cells);
+  if (sel.mode === 'ask-tile') return chooseCard(`How much ${sh.n}?`, 'The published coverage depends on your tile size and joint width. What is your tile size (mm)?', tileRows(sel.cells).slice(0, 8).map((t) => q(t, sel.joint)));
+  if (sel.mode === 'bad-tile') return chooseCard(`How much ${sh.n}?`, 'That tile size is not in the published table, and I will not guess a figure for it. These are the published sizes. Pick the nearest.', published.map((t) => q(t, sel.joint)));
+  if (sel.mode === 'bad-joint') return chooseCard(`How much ${sh.n}?`, 'That joint width is not in the published table, and I will not guess a figure for it. These are the published joint widths. Pick one.', widths.map((j) => q(sel.tile ? sel.tile.slice(0, 2).join('x') : tileRows(cells)[0], j)));
+  const packs = parsePacks(sh); const pkFact = (sh.pk || [])[0];
+  const word = (n) => { const m = packs.find((x) => x.container && x.unit === n.unit && x.amount === n.basisSize); return m ? m.container.replace(/s$/, '') : 'pack'; };
+  const rows = sel.cells.map((c) => ({ c, n: cellNeed(c, area, null) })).filter((x) => x.n);
+  if (!rows.length) { const c = rateCard(sh, question); c.headline = 'I will not turn this into a quantity: that published figure does not pass the data check, so I will not compute from it. The table is quoted exactly as written. Please confirm with Technical Services.'; c.type = 'rate'; return c; }
+  rows.forEach((x) => { x.n = cellNeed(x.c, area, word(x.n)); x.plan = packPlan(x.n, packs); });
+  const rl = rowLines(sel.cells.map((c) => ({ f: c.f, label: `Published row (${where(c.f)})` })), 4);
+  const lines = [{ label: 'Area you asked about', text: `${A} m2` }];
+  const outs = [], inputs = [];
+  const packsText = (x) => (x.plan.length ? planText(x.plan) : 'The published pack sizes use a different unit, so I will not convert them without a stated density.');
+  let table = null;
+  if (sel.mode === 'exact') {
+    const x = rows[0];
+    lines.push({ label: 'Tile and joint', text: `${x.c.tile}, ${num(x.c.joint)} mm joint` }, ...rl.lines, { label: 'Working', text: x.n.working });
+    lines.push({ label: 'Packs, rounded up', text: packsText(x) });
+  } else {
+    const byJoint = sel.mode === 'joints';
+    lines.push({ label: byJoint ? 'Tile you asked about' : 'Joint you asked about', text: byJoint ? sel.cells[0].tile : `${num(sel.joint)} mm joint` }, ...rl.lines);
+    table = { cols: [byJoint ? 'Joint width' : 'Tile size', 'Quantity', 'Packs, rounded up', 'Working'], rows: rows.map((x) => [byJoint ? `${num(x.c.joint)} mm` : x.c.tile, `${num(x.n.amount)} ${x.n.unit}`, packsText(x), x.n.working]) };
+    const skipped = sel.cells.length - rows.length; if (skipped > 0) lines.push({ label: 'Not worked out', text: `${skipped} published figure${skipped > 1 ? 's' : ''} in this table did not pass the data check, so ${skipped > 1 ? 'they are' : 'it is'} left out. Please check the data sheet.` });
+    lines.push({ label: byJoint ? 'Which joint width' : 'Which tile size', text: `You did not give a ${byJoint ? 'joint width' : 'tile size'}, so the result is shown for each published ${byJoint ? 'width' : 'size'}. Tell me yours for one answer.` });
+  }
+  rows.forEach((x) => { outs.push({ unit: x.n.unit, need_min: x.n.amount, need_max: x.n.amount, basis: x.c.p.model }); inputs.push({ fact: x.c.f.id, tile: x.c.tile, joint: x.c.joint }); });
+  const factsOut = rl.facts.slice(); if (pkFact) { lines.push({ label: 'Published pack sizes', text: pkFact.text, fact: pkFact.id }); factsOut.push(srcFact(pkFact)); }
+  lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
+  return card({ type: 'calculation', title, product: prod(sh), headline: GRID_HEAD, lines, table, facts: factsOut, chip: chipOf(sel.cells[0].f), links: dsLink(sh),
+    followups: sel.mode === 'exact' ? [] : (sel.mode === 'joints' ? widths.map((j) => q(sel.cells[0].tile, j)) : tileRows(sel.cells).slice(0, 4).map((t) => q(t, sel.joint))),
+    calc: { derived: true, inputs: { area_m2: area, grid: inputs, packs }, outputs: outs, plan: rows.flatMap((x) => x.plan) } });
+}
+
+// a notched-trowel table whose header says "per bag" (basis_stated, the pack derived from the only listed pack): one cell per trowel size
+function trowelCard(sh, area, question, facts) {
+  const cs = facts.filter((f) => f.calc && f.parsed && f.parsed.model === 'pack_covers_area' && f.parsed.condition_kind === 'notched trowel size' && f.parsed.basis_stated && f.parsed.area_min > 0 && f.parsed.notch_mm > 0);
+  if (cs.length < 2) return null;
+  const want = String(question).match(/(\d+(?:\.\d+)?)\s*mm\s*(?:notch(?:ed)?\s*)?(?:trowel|notch)/i) || String(question).match(/\b(?:trowel|notch(?:ed)? trowel)\s*(?:size\s*)?(?:of|is|at|=)?\s*(\d+(?:\.\d+)?)\s*mm/i);
+  const sizes = cs.map((f) => f.parsed.notch_mm), A = num(area);
+  const q = (n) => `How much ${sh.n} for ${A} m2, ${num(n)} mm notched trowel`;
+  if (want && !sizes.includes(Number(want[1]))) return chooseCard(`How much ${sh.n}?`, 'That trowel size is not in the published table, and I will not guess a figure for it. These are the published trowel sizes. Pick one.', sizes.map(q));
+  const pick = want ? cs.filter((f) => f.parsed.notch_mm === Number(want[1])) : cs;
+  const rows = pick.map((f) => { const p = f.parsed, ex = area / p.area_max, kg = ex * p.amount; return { f, p, ex, kg, working: `${A} m2 / ${num(p.area_max)} m2 per ${num(p.amount)} ${p.unit} bag = ${num(ex)}, rounded up to ${Math.ceil(ex - 1e-9)}`, count: Math.ceil(ex - 1e-9) }; });
+  const rl = rowLines(pick.map((f) => ({ f, label: `Published row (${where(f)})` })), 4);
+  const lines = [{ label: 'Area you asked about', text: `${A} m2` }, ...rl.lines];
+  let table = null;
+  if (rows.length === 1) { const r = rows[0]; lines.push({ label: 'Working', text: r.working }, { label: 'Packs, rounded up', text: `${r.count} x ${num(r.p.amount)} ${r.p.unit} bag` }); }
+  else { table = { cols: ['Notched trowel', 'Quantity', 'Packs, rounded up', 'Working'], rows: rows.map((r) => [`${num(r.p.notch_mm)} mm`, `${num(r.kg)} ${r.p.unit}`, `${r.count} x ${num(r.p.amount)} ${r.p.unit} bag`, r.working]) }; lines.push({ label: 'Which trowel', text: 'You did not give a notched trowel size, so the result is shown for each published size. Tell me yours for one answer.' }); }
+  lines.push({ label: 'Waste', text: 'Not included. The data sheet figures are theoretical; add your own allowance.' });
+  return card({ type: 'calculation', title: `How much ${sh.n} for ${A} m2`, product: prod(sh), headline: GRID_HEAD, lines, table, facts: rl.facts, chip: chipOf(pick[0]), links: dsLink(sh), followups: rows.length === 1 ? [] : sizes.map(q),
+    calc: { derived: true, inputs: { area_m2: area, facts: rows.map((r) => r.f.id), packs: parsePacks(sh) }, outputs: rows.map((r) => ({ unit: r.p.unit, need_min: r.kg, need_max: r.kg, basis: 'pack_covers_area' })), plan: rows.map((r) => ({ size: r.p.amount, unit: r.p.unit, container: 'bags', count: r.count })) } });
+}
 export function calcCard(sh, area, question, thickness) {
   const facts = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []);
   if (!facts.length) return unknown(question, sh, 'The published documentation gives no coverage figure for this product, so I cannot work out a quantity.', ['consumption rate']);
+  { const t = trowelCard(sh, area, question, facts); if (t) return t; }
   const usable = facts.map((f) => ({ f, q: computeQuantity(f, area, thickness) })).filter((x) => x.q).slice(0, 2);
   if (!usable.length && !(thickness > 0) && facts.some((f) => f.calc && f.parsed && f.parsed.basis_stated && f.parsed.model === 'per_area' && (f.parsed.per === 'mm' || f.parsed.per === 'cm'))) {
     return chooseCard(`How much ${sh.n}?`, 'The published rate is per millimetre of thickness, so the quantity depends on how thick you apply it. How thick, in mm?', [3, 5, 10].map((t) => `How much ${sh.n} for ${num(area)} m2 at ${t} mm`));
   }
+  if (!usable.length) { const g = gridCard(sh, area, question, facts); if (g) return g; }
   if (!usable.length) { const c = rateCard(sh, question); c.headline = 'I will not turn this into a quantity: the published figure does not say what it is per (or needs a condition). Here is the sentence exactly as written. Please confirm with Technical Services.'; c.type = 'rate'; return c; }
   const packs = parsePacks(sh); const lines = [{ label: 'Area you asked about', text: `${num(area)} m2` }], outFacts = [], planOut = [];
   for (const { f, q } of usable) {

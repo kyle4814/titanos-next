@@ -73,9 +73,22 @@ export function checkAnswer(question, ans) {
       for (const id of (c.calc.inputs.facts || [])) {
         const lf = laneFacts().get(id); if (!lf) { bad.push(['P1-calc', 'fact not in lane ' + id]); continue; }
         const q = expectedQuantity(lf.parsed, lf.calc_ready, area, c.calc.inputs.thickness_mm); if (!q) { bad.push(['P1-calc', 'calc from a fact that is not calc-ready ' + id]); continue; }
-        allowed.add(r2(q.lo)); allowed.add(r2(q.hi));
+        allowed.add(r2(q.lo)); allowed.add(r2(q.hi)); if (lf.parsed && lf.parsed.model === 'pack_covers_area' && lf.parsed.area_max > 0) { allowed.add(r2(area / lf.parsed.area_max)); allowed.add(String(Math.ceil(area / lf.parsed.area_max - 1e-9))); allowed.add(String(lf.parsed.area_max)); allowed.add(String(lf.parsed.amount)); } // trowel table: the working line shows area / m2 per bag
         for (const s of packsOf(id.split(':')[0])) { allowed.add(String(Number(s.amount))); if (s.unit === q.unit) allowed.add(String(Math.ceil(q.hi / s.amount - 1e-9))); }
       }
+    }
+    if (c.calc && c.calc.inputs.grid) { // published coverage grid (tile x joint): every cell re-derived here from the lane's own parsed fact, independently of grid.js
+      const area = c.calc.inputs.area_m2; allowed.add(r2(area));
+      for (const g of c.calc.inputs.grid) {
+        const lf = laneFacts().get(g.fact); const pp = lf && lf.parsed; if (!pp || !pp.basis_stated || pp.tile_size !== g.tile || pp.joint_width_mm !== g.joint) { bad.push(['P1-grid', 'cell not in lane ' + g.fact]); continue; }
+        let need, unit, extra = [];
+        if (pp.model === 'grout_area_per_pack') { const ex = area / pp.area_m2; need = ex * pp.pack.amount; unit = pp.pack.unit; extra = [r2(ex), String(Math.ceil(ex - 1e-9)), String(pp.pack.amount), String(pp.area_m2)]; }
+        else if (pp.model === 'grout_kg_per_m2' && lf.calc_ready) { need = area * pp.kg_per_m2; unit = 'kg'; extra = [String(pp.kg_per_m2)]; }
+        else { bad.push(['P1-grid', 'cell is not a computable grid model ' + g.fact]); continue; }
+        allowed.add(r2(need)); for (const e of extra) allowed.add(e); allowed.add(String(g.joint));
+        for (const sz of packsOf(g.fact.split(':')[0])) { allowed.add(String(Number(sz.amount))); if (sz.unit === unit) allowed.add(String(Math.max(1, Math.ceil(need / sz.amount - 1e-9)))); }
+      }
+      for (const l of c.lines || []) if (l.fact) for (const n of numbersIn(l.text)) allowed.add(n);
     }
     if (c.type === 'plan') { const pc = planCheck(c, question); for (const n of pc.allowed) allowed.add(n); for (const b of pc.bad) bad.push(b); } // lane D
     for (const n of numbersIn(text)) if (!allowed.has(n)) bad.push(['P1', `${n} in "${text.replace(/\s+/g, ' ').slice(0, 120)}"`]);
