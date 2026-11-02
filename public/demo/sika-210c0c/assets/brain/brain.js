@@ -3,7 +3,7 @@
 import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact, clampText } from './text.js';
 import { expandSynonyms, spellToken, correctAgainst, findAliasSpans, aliasEntries, fuzzyAliasSpans, applySlang } from './match.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
-import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize } from './schema.js';
+import { ANSWER_SCHEMA, CHIPS, NOT_KNOWN, validateCard, finalize, dedupeAcrossCards } from './schema.js';
 import * as C from './cards.js';
 import { createKnow } from './know.js';
 // (applySlang comes from the shared matcher below)
@@ -22,7 +22,7 @@ const HARD_ENV = new Set(['wet_area', 'submerged', 'external', 'balcony_deck', '
 
 // ---------------------------------------------------------------- intents
 const RX = {
-  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me|minimum order|moq|order quantity|freight cost|shipping (cost|fee|charge|rate)|free shipping|trade account|invoice|credit terms)\b/,
+  price: /\b(price|prices|pricing|cost|costs|costing|quote|stockist|stockists|buy|purchase|retailer|discount|cheap|cheapest|afford|where can i get|in stock|stock|availability|available|warranty|guarantee|delivery|deliver|lead time|supplier|distributor|reseller|near me|minimum order|moq|order quantity|freight cost|shipping (cost|fee|charge|rate)|free shipping|trade account|invoice|credit terms|rrp|specials|on special|on sale|sale price|price list|fast movers?|best sellers?|bestsellers?|top sellers?|best selling|top selling|most popular|selling fast)\b|\bhow much (is|are|does|do)\b.{0,25}\b(pail|pails|bag|bags|tub|tubs|tube|tubes|cartridge|cartridges|sausage|sausages|drum|drums|bucket|buckets|carton|box)\b/,
   compare: /\b(vs|versus|compare|comparison|difference between|differences between|better than)\b/,
   calcWords: /\b(how much|how many|quantity|quantities|work out|calculate|calculation|estimate|need for|required for|order|buy)\b|\bhow (much|many) .* (for|to cover)\b/,
   time: /\b(how long|dry|dries|drying|cure|cures|curing|cured|setting|sets|set time|open time|pot life|potlife|recoat|re ?coat|overcoat|wait|waiting|skin time|tack free|working time|adjust|adjustability|before (i can |you can )?(grout|walking|walk|traffic|tiling|tile|coat|apply|seal)|when can i)\b/,
@@ -249,6 +249,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     const out = (intent, stage, cards, extra = {}) => {
       if (akaNote && cards[0] && cards[0].product && cards[0].product.id === akaNote.id) { const f = { source_url: cards[0].product.url, page: null, sentence: akaNote.s, status: 'PUBLISHED', doc_type: 'WEB', doc_version: '' }; cards[0].lines = (cards[0].lines || []).concat([{ label: 'Published name history', text: akaNote.s }]); cards[0].facts = (cards[0].facts || []).concat([f]); }
       for (const c of cards) { finalize(c); const bad = validateCard(c); if (bad.length) c._invalid = bad; }
+      dedupeAcrossCards(cards);
       return { schema: ANSWER_SCHEMA, query: q, intent, stage, cards, followups: extra.followups || [...new Set(cards.flatMap((c) => c.followups || []))].slice(0, 4), state: (jobHint && !(extra.state && extra.state.job) && cards.some((c) => c.type !== 'unknown' && c.type !== 'choose')) ? { ...(extra.state || {}), job: jobHint } : (extra.state || null), ms: Math.round((now() - t0) * 100) / 100, trace };
     };
     await boot();

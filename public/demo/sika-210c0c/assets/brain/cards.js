@@ -36,6 +36,25 @@ export function documentCard(sh, docs, wantLabel) {
     followups: [`Coverage of ${sh.n}`, `How long does ${sh.n} take to cure`] });
 }
 
+/** Table rows quoted from a data sheet. Identical rows collapse to one line (a grout table is stored one fact per cell, so a row used to appear three times);
+ *  a row that comes from a table carries that table's caption and header row (fact.h, see scripts/sika-brain/add_table_heads.mjs), as lines and as a quoted fact,
+ *  so the numbers can be read. A row of three or more cells with no header in the data says so plainly: nothing is guessed. */
+export const NO_HEADER = 'The published table row has no column headings in the data, so I cannot say what each number is per. Please check the data sheet.';
+export function rowLines(items, limit) {
+  const seen = new Set(), lines = [], rowFacts = [], headFacts = []; let cur = null, warned = false;
+  for (const { f, label } of items) {
+    const key = String(f.text).replace(/\s+/g, ' ').trim(); if (seen.has(key)) continue;
+    if (lines.filter((l) => l.fact).length >= limit) break;
+    seen.add(key);
+    if (f.h && f.h.c) {
+      const hk = (f.h.k || '') + '\n' + f.h.c;
+      if (hk !== cur) { cur = hk; if (f.h.k) { lines.push({ label: 'Table basis', text: f.h.k }); headFacts.push(srcFact(f, f.h.k)); } lines.push({ label: 'Table columns', text: f.h.c }); headFacts.push(srcFact(f, f.h.c)); }
+    } else if (String(f.text).split(' | ').length >= 3 && !warned) { warned = true; lines.push({ label: 'Table columns', text: NO_HEADER }); }
+    lines.push({ label, text: f.text, fact: f.id }); rowFacts.push(srcFact(f));
+  }
+  return { lines, facts: rowFacts.concat(headFacts) };
+}
+
 export function rateCard(sh, question) {
   const st = (sh.r && sh.r.status) || '';
   const facts = ((sh.r && sh.r.facts && sh.r.facts.consumption) || []);
@@ -43,9 +62,9 @@ export function rateCard(sh, question) {
     const seeDs = /see data sheet|method statement/i.test(st);
     return unknown(question, sh, seeDs ? 'The data sheet text mentions coverage but no figure could be read from it reliably. Please read the data sheet or ask Technical Services.' : 'Neither the published data sheet nor the product page gives a coverage or consumption figure for this product.', ['consumption rate']);
   }
-  const shown = facts.slice(0, 4);
+  const rl = rowLines(facts.map((f) => ({ f, label: `${f.label || 'Consumption'} (${where(f)})` })), 4), shown = facts;
   return card({ type: 'rate', title: `Published coverage for ${sh.n}`, product: prod(sh), headline: 'The published consumption, quoted exactly as written. Figures are theoretical and the data sheet does not include wastage.',
-    lines: shown.map((f) => ({ label: `${f.label || 'Consumption'} (${where(f)})`, text: f.text, fact: f.id })), facts: shown.map((f) => srcFact(f)), chip: chipOf(shown[0]), links: dsLink(sh),
+    lines: rl.lines, facts: rl.facts, chip: chipOf(shown[0]), links: dsLink(sh),
     followups: [`How much ${sh.n} do I need for my area`, `How long does ${sh.n} take to cure`] });
 }
 
@@ -53,9 +72,9 @@ const TIME_TITLE = { open_time: 'Open time', adjustability_time: 'Adjustability 
 export function timeCard(sh, kinds, question) {
   const rows = []; for (const k of kinds) for (const f of (sh.tm && sh.tm[k]) || []) rows.push({ k, f });
   if (!rows.length) return unknown(question, sh, 'The published documentation gives no time of this kind for this product.', kinds.map((k) => TIME_TITLE[k]));
-  const shown = rows.slice(0, 6);
+  const rl = rowLines(rows.map(({ k, f }) => ({ f, label: `${f.label || TIME_TITLE[k]} (${where(f)})` })), 6);
   return card({ type: 'time', title: `Published times for ${sh.n}`, product: prod(sh), headline: 'The published times, quoted as written, with the conditions they were measured under.',
-    lines: shown.map(({ k, f }) => ({ label: `${f.label || TIME_TITLE[k]} (${where(f)})`, text: f.text, fact: f.id })), facts: shown.map(({ f }) => srcFact(f)), chip: chipOf(shown[0].f), links: dsLink(sh) });
+    lines: rl.lines, facts: rl.facts, chip: chipOf(rows[0].f), links: dsLink(sh) });
 }
 
 export function safetyCard(sh, topic, question) {

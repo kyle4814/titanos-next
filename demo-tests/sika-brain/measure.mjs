@@ -52,11 +52,11 @@ for (const [name, file] of SETS) {
     row.tri = triage(row); res.push(row);
   }
   const cnt = (rs) => { const m = { ANSWERED: 0, HONEST: 0, BRAIN_WRONG: 0, MISSING: 0, UNTRIAGED: 0 }; for (const r of rs) { if (r.cls === 'ANSWERED') m.ANSWERED++; else if (r.cls === 'HONEST-NO-DATA') m.HONEST++; else if (r.cls === 'UNHANDLED') m.MISSING++; else if (r.tri && r.tri.c === 'BANK-FIX') m.ANSWERED++; else if (r.tri && r.tri.c === 'BRAIN-WRONG') m.BRAIN_WRONG++; else if (r.tri && r.tri.c === 'MISSING') m.MISSING++; else m.UNTRIAGED++; } return m; };
-  const line = (m, n) => `ANSWERED ${m.ANSWERED} (${pct(m.ANSWERED, n)}), HONEST-NO-DATA ${m.HONEST} (${pct(m.HONEST, n)}), WRONG ${m.BRAIN_WRONG + m.UNTRIAGED} (${pct(m.BRAIN_WRONG + m.UNTRIAGED, n)}), MISSING ${m.MISSING} (${pct(m.MISSING, n)}); pass (ANSWERED + HONEST) ${pct(m.ANSWERED + m.HONEST, n)}`;
+  const line = (m, n, judged = null) => `ANSWERED ${m.ANSWERED} (${pct(m.ANSWERED, n)}), HONEST-NO-DATA ${m.HONEST} (${pct(m.HONEST, n)}), WRONG ${m.BRAIN_WRONG + m.UNTRIAGED} (${pct(m.BRAIN_WRONG + m.UNTRIAGED, n)}${judged == null ? '' : ', judge flagged ' + judged + ' before triage'}), MISSING ${m.MISSING} (${pct(m.MISSING, n)}); pass (ANSWERED + HONEST) ${pct(m.ANSWERED + m.HONEST, n)}`;
   const m = cnt(res); summary[name] = { n: res.length, m, messy: res.filter((r) => r.messy).length };
   const judgedWrong = res.filter((r) => r.cls === 'WRONG').length;
   say(); say(`## ${name} (${file}): n=${res.length}, messy ${res.filter((r) => r.messy).length} (${pct(res.filter((r) => r.messy).length, res.length)})`);
-  say(line(m, res.length)); say(`Judge WRONG before triage: ${judgedWrong}. After triage: BRAIN-WRONG ${m.BRAIN_WRONG}, reclassified MISSING ${res.filter((r) => r.cls === 'WRONG' && r.tri && r.tri.c === 'MISSING').length}, UNTRIAGED ${m.UNTRIAGED}.`);
+  say(line(m, res.length, judgedWrong)); say(`Judge WRONG before triage: ${judgedWrong}. After triage: BRAIN-WRONG ${m.BRAIN_WRONG}, reclassified MISSING ${res.filter((r) => r.cls === 'WRONG' && r.tri && r.tri.c === 'MISSING').length}, UNTRIAGED ${m.UNTRIAGED}.`);
   say(`Answer time: brain p50 ${q(own, 0.5).toFixed(2)} ms, p95 ${q(own, 0.95).toFixed(2)} ms, max ${Math.max(...own).toFixed(1)} ms; wall p50 ${q(wall, 0.5).toFixed(2)} ms, p95 ${q(wall, 0.95).toFixed(2)} ms (node, no network)`);
   const tab = (key, label) => { const g = {}; for (const r of res) (g[r[key]] = g[r[key]] || []).push(r); say(); say(`| ${label} | n | ANSWERED | HONEST | WRONG | MISSING | pass |`); say('|---|---|---|---|---|---|---|'); for (const [k, rs] of Object.entries(g).sort((a, b) => b[1].length - a[1].length)) { const mm = cnt(rs); say(`| ${k} | ${rs.length} | ${mm.ANSWERED} | ${mm.HONEST} | ${mm.BRAIN_WRONG + mm.UNTRIAGED} | ${mm.MISSING} | ${pct(mm.ANSWERED + mm.HONEST, rs.length)} |`); } };
   if (name === 'bank' || name === 'blind4') { tab('intent', 'brain intent'); tab('type', 'expected type'); if (name === 'bank') tab('persona', 'persona'); }
@@ -76,6 +76,8 @@ say(); say('## MISSING register (requests to Lane B / Lane C: question, expected
 const missBy = { B: [], C: [] };
 for (const [name, rows] of Object.entries(globalThis.__rows || {})) for (const r of rows) { const miss = r.cls === 'UNHANDLED' || (r.cls === 'WRONG' && r.tri && r.tri.c === 'MISSING'); if (miss) missBy[laneOf(r)].push(Object.assign({ name }, r)); }
 for (const lane of ['B', 'C']) { say(); say(`### Lane ${lane}: ${missBy[lane].length} requests`); for (const r of missBy[lane]) say(`- [${r.name} ${r.id}] "${r.q}" | expected ${expOf(r)} | got ${r.first.slice(0, 60)} (${r.why.slice(0, 70)})`); }
+const dumpFile = argv('--dump-wrong'); // every judge WRONG with its bank expectation, for the by-hand review (WRONG_REVIEW_*.md)
+if (dumpFile) fs.writeFileSync(dumpFile, JSON.stringify(Object.entries(globalThis.__rows || {}).flatMap(([name, rows]) => rows.filter((x) => x.cls === 'WRONG').map((r) => ({ set: name, ...r, exp: ((globalThis.__items[name] || {})[r.id] || {}).exp || null }))), null, 1));
 const bank = summary.bank, b4 = summary.blind4;
 if (arg('--gate')) { if (!bank || bank.n < 1000) failures.push('bank under 1,000 questions'); if (!b4 || b4.n < 150) failures.push('blind4 under 150 questions'); if (bank && bank.messy / bank.n < 0.35) failures.push('bank messy share under 35 percent'); if (b4 && b4.messy / b4.n < 0.35) failures.push('blind4 messy share under 35 percent'); }
 say(); say(failures.length ? 'MEASURE GATE FAILURES: ' + failures.join('; ') : 'MEASURE GATE OK');

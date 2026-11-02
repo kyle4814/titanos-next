@@ -2,6 +2,7 @@
 import { makeBrain, rd } from './harness.mjs';
 import { createBrain } from '../../public/demo/sika-210c0c/assets/brain/brain.js';
 import { createLoader } from '../../public/demo/sika-210c0c/assets/brain/loader.js';
+import { checkAnswer as propsCheck } from './props.mjs';
 import { validateCard, cardText, fact, card } from '../../public/demo/sika-210c0c/assets/brain/schema.js';
 let pass = 0, fail = 0; const t = (n, ok, d = '') => { if (ok) pass++; else { fail++; console.log('  FAIL: ' + n + (d ? ' :: ' + String(d).slice(0, 200) : '')); } };
 const b = makeBrain(); const txt = (a) => a.cards.map(cardText).join('\n');
@@ -35,4 +36,30 @@ a = await noShard.ask('coverage of davco grey one pot'); t('missing product shar
 { const { checkAnswer } = await import('./props.mjs'); const q = 'What is the coverage of Sikafloor Level Pro Primer?'; const m = await b.ask(q); t('property test: clean answer has no violations', checkAnswer(q, m).length === 0);
   m.cards[0].handoff.reason += ' It is usually about 1.5 kg per m2.'; t('property test: an invented number is caught (mutation)', checkAnswer(q, m).some((x) => x[0] === 'P1')); 
   const c2 = await b.ask('How much Davco Grey One Pot adhesive for 20 m2'); c2.cards[0].lines[1].text = '27.5 L'; t('property test: a wrong calculation is caught (mutation)', checkAnswer('How much Davco Grey One Pot adhesive for 20 m2', c2).some((x) => x[0] === 'P1')); }
+// wave 3 answer quality (audit R2 finding 4): a sentence is shown once, and a quoted table row carries its table's header row and caption
+{ const { repeats, rowStats } = await import('./sweep_dupes.mjs'); const { rowLines, NO_HEADER } = await import('../../public/demo/sika-210c0c/assets/brain/cards.js');
+  a = await b.ask('How much Davco Easy Grout for 20 m2'); const eg = cardText(a.cards[0]);
+  t('Easy Grout 20 m2: still an honest refusal, no quantity invented', a.cards[0].type === 'rate' && /will not turn this into a quantity/.test(a.cards[0].headline) && !/litre|pail[s]? needed/i.test(a.cards[0].headline), eg);
+  t('Easy Grout 20 m2: no sentence is shown twice', repeats(a).length === 0 && eg.split('300x100x10mm | 14m2 | 7m2 | 4m2').length === 2, eg);
+  t('Easy Grout 20 m2: the table header row and the 2 Litre pail basis come with the rows', /TILE SIZE \| 1\.5mm Joint \| 3mm Joint \| 5mm Joint/.test(eg) && /Grout coverage based on 2 Litre pail/.test(eg) && rowStats(a).headerless === 0, eg);
+  t('Easy Grout 20 m2: every number on the card is still inside a quoted fact', checkAnswerClean('How much Davco Easy Grout for 20 m2', a));
+  a = await b.ask('What is the coverage of Davco Easy Grout?'); t('Easy Grout coverage: three cells of one row are one line', a.cards[0].lines.filter((l) => l.text === '300x100x10mm | 14m2 | 7m2 | 4m2').length === 1);
+  a = await b.ask('how long before I can recoat Sikagard-550 W Elastic'); t('time table rows carry their header too', a.cards[0].type === 'time' && /Previous coating \| Waiting time \| Next coating/.test(cardText(a.cards[0])) && rowStats(a).headerless === 0);
+  // a row of 3+ cells with no header in the data says so; nothing is invented (unit test on the builder)
+  const f0 = { id: 'x:1', text: '6 mm | 8 mm | 10 mm', s: { t: 'PDS', u: 'https://example.invalid/x.pdf', p: 1 } };
+  const r0 = rowLines([{ f: f0, label: 'Consumption (data sheet, page 1)' }], 4);
+  t('no header in the data: the card admits it and invents no column names', r0.lines[0].text === NO_HEADER && r0.lines.length === 2 && r0.facts.length === 1);
+  const r1 = rowLines([{ f: { ...f0, h: { c: 'A | B | C', k: 'basis here' } }, label: 'L' }, { f: { ...f0, id: 'x:2' }, label: 'L' }], 4); t('identical rows collapse to one line; header and caption come first', r1.lines.map((l) => l.label).join() === 'Table basis,Table columns,L');
+  // mutation: the checks must fail on the base behaviour (a repeated line, a headerless row)
+  const bad = { cards: [{ type: 'rate', headline: 'x', lines: [{ label: 'Consumption', text: '300x100x10mm | 14m2 | 7m2 | 4m2' }, { label: 'Consumption', text: '300x100x10mm | 14m2 | 7m2 | 4m2' }] }] };
+  t('mutation: a repeated row and a headerless row are both caught', repeats(bad).length === 1 && rowStats(bad).headerless === 2); }
+function checkAnswerClean(q, ans) { return propsCheck(q, ans).length === 0; }
+// wave 3 WRONG review (WRONG_REVIEW_2026-11-02.md): price, rrp, specials and sales-ranking asks are declined; a "quick one" filler is not a fast-setting requirement
+for (const q of ['how much is a pail of skalastic 1k', 'ok so what is the rrp of sikaflex pro plus thx', 'any spceials on tile adhesive', 'how much is a 20kg bag of davco ultraflex', 'is sikaflex pro plus on special this week', 'which products are the fast movers for tilers']) {
+  a = await b.ask(q); t('declined, no product card as an answer: ' + q, a.cards.length === 1 && a.cards[0].type === 'unknown' && !!a.cards[0].handoff && /Prices, stock/.test(a.cards[0].handoff.reason), txt(a));
+}
+a = await b.ask('how much Davco Grey One Pot adhesive for 20 m2'); t('a quantity ask is not mistaken for a price ask (how much ... m2 still calculates)', a.cards[0].type === 'calculation');
+a = await b.ask('how much is the coverage of sikaflex pro plus'); t('"how much is the coverage" is not a price ask', a.cards[0].type !== 'unknown' || !/Prices, stock/.test(a.cards[0].handoff ? a.cards[0].handoff.reason : ''));
+a = await b.ask('quick one teak decking with sika mate'); t('"quick one" is not a fast-setting criterion; teak decking finds the teak decking sealant', !/fast setting or drying/i.test(txt(a)) && /teak/i.test(txt(a)), txt(a));
+a = await b.ask('fast setting tile adhesive'); t('a real "fast setting" ask still uses the fast-setting criterion', /fast setting or drying/i.test(txt(a)));
 console.log(`unit_brain: ${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);
