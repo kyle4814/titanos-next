@@ -60,7 +60,7 @@ const DOC_TYPES = [
 ];
 const TIME_KIND = [
   ['open_time', /\b(open time|open|working time)\b/], ['adjustability_time', /\b(adjust|adjustability|reposition)\b/], ['pot_life', /\b(pot life|potlife|pot)\b/], ['skin_tack_times', /\b(skins?|skinning|skin over|tack)\b/],
-  ['recoat_times', /\b(recoat|re coat|overcoat|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
+  ['recoat_times', /\b(recoat\w*|re coat\w*|overcoat\w*|over coat\w*|re ?apply|second coat|next coat)\b/], ['cure_times', /\b(cure|cures|curing|cured|dry|dries|drying|set|sets|setting|grout|grouting|walk|walking|traffic|wait|waiting|tiling|service|load|before)\b/],
 ];
 
 // real words the spelling corrector must leave alone ("bim files" was read as "bim tiles")
@@ -289,6 +289,9 @@ export function createBrain({ load, config, loadRules } = {}) {
     let pis = []; let ambiguous = null;
     for (const m of mentions) { const one = resolve(m); if (one != null) { if (!pis.includes(one)) pis.push(one); } else if (!ambiguous) ambiguous = m; }
     if (!pis.length && ambiguous) { pis = ambiguous.pis.slice(0, 4); }
+    // "what primer for Sikafloor Level Pro": the product named is the thing being primed; its own primer is a product whose name is that name plus the word
+    { const am = /^(?:what |which |any |need a |need an |whats the |what is the )?(primer|activator|cleaner|hardener|catalyst|topcoat|top coat)\b.*\b(?:for|on|with|to suit)\b/.exec(n0);
+      if (am && pis.length === 1) { const base = normalise(core.P[pis[0]].n); const hit = core.P.findIndex((p, i) => i !== pis[0] && normalise(p.n).startsWith(base + ' ') && normalise(p.n).split(' ').includes(am[1].split(' ').pop())); if (hit >= 0) { pis = [hit]; trace.push('accessory:' + core.P[hit].id); } } }
     if (!pis.length && advisor.hasKind(n0)) jobHint = { kindId: advisor.kindOf(n0), area: facets.area != null ? facets.area : null, thickness: thicknessOf(n), n: n0 };
     // wave 2b: at any point after a job was described (an advice answer or a quantity answer), "recommend me one" and "how much for 40 m2" use the SAME entry point (advisor.recommendForJob) without re-asking the kind
     if (state && !pis.length && !advisor.hasKind(n0) && ((state.job && state.job.kindId) || (state.advice && state.advice.n))) {
