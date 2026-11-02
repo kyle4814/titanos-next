@@ -6,7 +6,7 @@ import { normalise } from './text.js';
 import { jobOf, areaOf, leafOf, recommendFor } from './recommend.js';
 import * as V from './voice.js';
 import { card, CHIPS, fact, finalize } from './schema.js';
-import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, withPick, PICK_RX } from './chat.js';
+import { socialKind, socialCard, placeOf, placeCard, genericCard, followUp, defaultPick, joinPlace, isModifier, withPick, PICK_RX, wantsPick } from './chat.js';
 
 const REC = /\brec+o?m+e?n+d|\b(suggest|pick one|pick for me|you pick|you choose|you decide|your pick|your choice|up to you|just tell me|you tell me|best one|whatever is best|whatever s best|whatever you think|surprise me|any one|no preference|dont mind|don t mind|doesn t matter|which (one )?(should|would) (i|you)|what would you (use|pick|choose|go with)|which is best|which one is best|which one s best|you choose for me)\b/;
 const ORD = /^(?:(?:and|ok|okay|now|so|what about|how about|tell me about|show me|go with|i ll take|ill take|i take) )*(?:the )?(first|1st|top|second|2nd|third|3rd|last|fourth|4th)(?: one| option| product| choice)?(?: please)?$/;
@@ -15,6 +15,7 @@ const PACK = /^(?:(?:and|what about|how about|is it|does it come|do you (?:have|
 const BACK = /^(?:go back|back|previous|the previous (?:one|answer)|the one before|before that|undo|back to (?:that|the last one)|what was the last one)$/;
 const ENV = /^(?:(?:and|what about|how about|what if|if it s|if its|if it is|is it ok|does it work|how about for|and for|for) )+(?:the |a )?(outdoors?|outside|exterior|external|indoors?|inside|interior|internal|wet areas?|bathroom|shower|kitchen|laundry|balcony|pool|garage|cold|winter|hot weather|summer|damp|humid)(?: too| as well)?$/;
 const ASPECT = /^(?:(?:and|what about|how about|also|ok|okay|now|then|the) )+(sds|msds|pds|tds|data ?sheet|safety data sheet|safety sheet|coverage|consumption|pot life|open time|cure time|curing time|drying time|recoat time|shelf life|colours?|colors?|packaging|pack size|price|cost|vocs?|mixing ratio|warranty|storage)(?: for it| of it| for that| for that one)?$/;
+const ENVWORD = /^(?:the |a )?(outdoors?|outside|exterior|external|indoors?|inside|interior|internal)$/;
 const CHIP_JOBS = ['Recommend a tile adhesive', 'Recommend a waterproofing membrane', 'Recommend a floor leveller', 'Recommend a sealant'];
 const KINDS_WITH_PRODUCT = new Set(['calc', 'rate', 'time', 'document', 'safety', 'spec']);
 const SAFE_OPT = (s) => String(s).replace(/\s+/g, ' ').trim();
@@ -113,23 +114,32 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     const h = state && state.h ? { ...newH(), ...state.h } : newH();
     const inner = state && state.h ? { ...state } : state; if (inner) delete inner.h;
     const words = n.split(' ').filter(Boolean).length;
-    let res = null; let rewritten = null; let wantPick = PICK_RX.test(n);
+    let res = null; let rewritten = null; let wantPick = wantsPick(q);
     // 0. the talking layer (chat.js): a social turn, a vague place or product group, and the short reply that answers a clarifying question
-    const chatAnswer = (c, kind, convo) => { finalize(c); return { schema: 'sika-brain-answer@1', query: q, intent: kind === 'social' ? 'social' : 'vague', stage: 'chat', cards: [c], followups: [], state: merge(inner ? { ...inner } : null, { ...h, convo }), ms: 0, trace: ['chat:' + kind] }; };
+    const chatAnswer = (c, kind, convo) => { finalize(c); if (convo && convo.id !== 'generic') { h.place = convo.id; h.pt = 0; } return { schema: 'sika-brain-answer@1', query: q, intent: kind === 'social' ? 'social' : 'vague', stage: 'chat', cards: [c], followups: [], state: merge(inner ? { ...inner } : null, { ...h, convo }), ms: 0, trace: ['chat:' + kind] }; };
     const sk = socialKind(q);
+    // a thanks or a goodbye closes the thread: what comes next is a new topic, not an answer to the old clarifier
+    if (sk === 'thanks' || sk === 'bye') { h.convo = null; h.place = null; }
     if (sk) return chatAnswer(socialCard(sk, q), 'social', h.convo || null);
-    const fu = h.convo ? followUp(q, h.convo) : null;
-    if (fu) { rewritten = fu.ask; wantPick = true; h.convo = null; }
+    if (h.place) h.pt = (h.pt || 0) + 1; // turns since the last place we asked about; after 3 it is stale
+    const fu = h.convo ? ((words <= 9 && REC.test(n) && bare(n) ? defaultPick(h.convo) : null) || followUp(q, h.convo)) : null;
+    if (fu) { rewritten = fu.ask; wantPick = true; if (h.convo) { h.place = h.convo.id; h.pt = 0; } h.convo = null; }
     else {
       const followShape = /^(and|also|what about|how about|but|or|now|then|same|ditto)\b/.test(n) || ENV.test(n) || ORD.test(n) || AREA_FU.test(n) || PACK.test(n) || BACK.test(n) || ASPECT.test(n);
-      const pl = followShape ? null : placeOf(q);
+      let pl = followShape ? null : placeOf(q);
+      // a lone narrowing word ("sealant", "which silicone", "outside") a turn or two after a place question joins that place; a room named afresh does not
+      if (pl && pl.place && !pl.ask && h.place && (h.pt || 0) <= 3 && isModifier(pl.place) && pl.place.id !== h.place) { const jp = joinPlace(q, h.place); if (jp) { rewritten = jp.ask; wantPick = true; pl = null; h.pt = 0; } }
+      if (rewritten === null && !followShape && h.place && (h.pt || 0) <= 3 && h.qa && ENVWORD.test(n)) { rewritten = `${h.qa.replace(/[?.!]+$/, '')} ${ENVWORD.exec(n)[1]}`; wantPick = true; pl = null; }
+      if (pl && !pl.place && (pl.rec || wantPick) && h.place && h.qa && (h.pt || 0) <= 3) { rewritten = h.qa; wantPick = true; pl = null; } // "what do I use" a moment after a place question: pick for that question
       if (pl && !pl.place) { if (pl.rec && (h.job || h.product || h.jobState)) res = (await recommend(h, q)) || noPick(q); else { const g = genericCard(pl.rec); return chatAnswer(g.card, 'ask', g.convo); } }
       else if (pl && pl.ask) { rewritten = pl.ask; wantPick = true; }
       else if (pl) { const p = placeCard(pl.place, pl.rec); return chatAnswer(p.card, 'ask', p.convo); }
     }
     if (res) { /* answered by the recommend path above */ }
     // 1. recommend one, after any card
-    else if (words <= 9 && (REC.test(n) || n === normalise(V.RECOMMEND_CHIP)) && bare(n) && !(advisor.hasKind(n) && !/\b(for me|one)\b/.test(n))) res = (await recommend(h, q)) || noPick(q);
+    // "you pick" / "what do I use" with no job on record but a question asked a moment ago: pick for that question
+    else if (rewritten === null && words <= 9 && REC.test(n) && bare(n) && !h.job && !(h.product && jobFromProduct(h.product)) && !h.jobState && h.place && h.qa && (h.pt || 0) <= 3) { rewritten = h.qa; wantPick = true; }
+    else if (rewritten === null && words <= 9 && (REC.test(n) || n === normalise(V.RECOMMEND_CHIP)) && bare(n) && !(advisor.hasKind(n) && !/\b(for me|one)\b/.test(n))) res = (await recommend(h, q)) || noPick(q);
     // 2. the first / second / third one
     else if (ORD.test(n) && h.products.length) {
       const m = ORD.exec(n)[1]; const i = /first|1st|top/.test(m) ? 0 : /second|2nd/.test(m) ? 1 : /third|3rd/.test(m) ? 2 : /fourth|4th/.test(m) ? 3 : h.products.length - 1;
@@ -160,7 +170,7 @@ export function createSession({ ask, advisor, boot, productName, productCategory
     }
     if (!res) res = await ask(q, inner);
     if (wantPick) res = withPick(res, q);
-    const h2 = update(h, q, n, res);
+    const h2 = update(h, q, n, res); h2.qa = rewritten || q;
     h2.jobState = (res.state && res.state.job) || ((res.stage === 'session' || res.cards.some((c) => c.type === 'unknown' || c.type === 'choose')) ? h.jobState : null);
     if (h2.jobState && res.stage === 'session' && !(res.state && res.state.job)) res.state = { ...(res.state || {}), job: h2.jobState };
     res = await dress(res, h2);
