@@ -1,5 +1,6 @@
 // brain.js: the deterministic retrieval stack. No model, no network beyond the shard loader, no randomness.
 // Order: corrected rules, exact product and alias, synonym and spelling tolerance, weighted token index, facet constraints, decision trees, honest unknown.
+import { categoryListCard } from './catlist.js';
 import { normalise, tokens, stem, words, STOP, GENERIC, dist, compact, clampText } from './text.js';
 import { expandSynonyms, spellToken, correctAgainst, findAliasSpans, aliasEntries, fuzzyAliasSpans, applySlang } from './match.js';
 import { parseFacets, systemLocation, adhesiveEnvironment, labelOf, SUBSTRATE, ENVIRONMENT, TILE } from './facets.js';
@@ -317,7 +318,7 @@ export function createBrain({ load, config, loadRules } = {}) {
     }
     const stateOk = state && state.productId && pIndex.has(state.productId);
     const followUp = /^(and |also |what about |how about )|\b(it|its|this one|that one|the same|them)\b/.test(n) || tokens(n).length <= 3;
-    if (intent === 'compat' && pis.length >= 1 && /^(what is|what are|what s|whats|tell me about|describe)\b/.test(n0)) intent = 'which';
+    if (intent === 'compat' && pis.length >= 1 && (/^((hi|hey|hello|um|umm|ok|okay|so|righto|quick one|g day|gday|sorry to bug you|mate|yo|thanks) )*(what is|what are|what s|whats|tell me about|describe)\b/.test(n0) || (/\b(uses?|used for)( mate| thx| thanks| pls| please)?$/.test(n0) && !/^(can|could|is|will|does|would|do|ok|okay)\b/.test(n0)))) intent = 'which';
     const askBack = intent === 'compat' && /^(can|could|is|will|does|would|do)\b/.test(n); // "Can I tile over a heated floor?" right after a product answer
     const fromState = !pis.length && stateOk && intent !== 'which' && (followUp || askBack);
     if (fromState) { pis = [pIndex.get(state.productId)]; trace.push('state:product'); }
@@ -342,13 +343,14 @@ export function createBrain({ load, config, loadRules } = {}) {
     if (!pis.length || know.signal(n0)) { const tp = await know.topic(q, n0); if (tp) { trace.push('kb:topic'); return out('info', 'kb', [tp], { state: null }); } }
     if (!pis.length && !/^(i need|i want|looking for)\b/.test(n0)) { const cs = await know.codeSearch(q, n0, { kind: advisor.hasKind(n0) }); if (cs) { trace.push('kb:code'); return out('info', 'kb', [cs], { state: null }); } }
     // general retrieval over Sika Australia's own pages
+    { const cl = categoryListCard(q, n0, core); if (cl) { trace.push('catlist'); return out('which', 'catlist', [cl], { state: null, followups: cl.followups }); } }
     if (!pis.length && !(/^(i need|i want|looking for)\b/.test(n0) && /\bcontact (adhesive|adhesives|cement)\b/.test(n0))) { const tm = await know.titleMatch(q, n0, advisor.hasKind(n0), advisor.wants(n0)); if (tm) { trace.push('kb:title'); return out('info', 'kb', [tm], { state: null }); } }
     if (!pis.length && !advisor.wants(n0) && ((know.signal(n0) && !(advisor.hasKind(n0) && know.weakSignal(n0))) || (know.definitional(n0) && tokens(n0).some((t) => (core.post[spell(t)] || []).some((v) => (v & 7) <= 2)) && !facets.tile_type.length && !facets.environment.length && !/\b(best|better|good|recommend|suitable|right|ideal|should i)\b/.test(n0)))) { const kr = await know.retrieve(q, n0); if (kr) { trace.push('kb:retrieve'); return out('info', 'kb', [kr], { state: null }); } }
     // a product fact that sits under a label on the product page (shelf life, temperature limits, mixing ratio, thickness, steps, ...)
     if (pis.length === 1 && !ambiguous && ['which', 'time', 'safety', 'compat'].includes(intent)) {
-      const at = detectAttr(n); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
+      const nA = n; const at = detectAttr(nA); const yn = /^(can|could|is|will|does|would|do|are)\b/.test(n);
       const okId = at && (intent === 'which' || (['time', 'safety'].includes(intent) ? ['shelf', 'storage', 'service_temp', 'hardness'].includes(at.id) : !(yn && ['property', 'standards'].includes(at.id))));
-      if (okId) { const sh0 = await shard(pis[0]); if (sh0) { let ac = attrCard(sh0, n, q, at.soft); if (ac && ac.type === 'unknown') { const nc = await numAttrCard(sh0, at.id); if (nc) ac = nc; } if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
+      if (okId) { const sh0 = await shard(pis[0]); if (sh0) { let ac = attrCard(sh0, nA, q, at.soft); if (ac && ac.type === 'unknown') { const nc = await numAttrCard(sh0, at.id); if (nc) ac = nc; } if (ac) { trace.push('attr:' + at.id); return out('attr', stage, [ac], { state: st(pis[0]) }); } } }
     }
     if (intent === 'price') {
       const sh = pis.length ? await shard(pis[0]) : null;
@@ -426,8 +428,8 @@ export function createBrain({ load, config, loadRules } = {}) {
     // ---- which product / system / tree
     const hasTile = facets.tile_type.length, hasSub = facets.substrate.length, loc = systemLocation(facets.environment);
     if ((intent === 'system' || (hasTile && hasSub && loc && !/\b(adhesive|glue|grout|primer|membrane|waterproof)\b/.test(n))) && hasSub) {
-      const sysMap = { porcelain: 'porcelain', ceramic: 'ceramic', mosaic: 'mosaic', glass_tile: 'glass', natural_stone: 'natural-stone', large_format: 'large-format', terracotta: 'quarry-terracotta' };
-      const subMap = { concrete: 'concrete', cement_screed: 'screed-render', cement_render: 'screed-render', brick_block: 'masonry', fibre_cement: 'cement-board', plasterboard: 'plasterboard', existing_tiles: 'existing-tiles', aac: 'aac', timber: 'timber' };
+      const sysMap = { porcelain: 'porcelain', ceramic: 'ceramic', mosaic: 'mosaic', glass_tile: 'glass', natural_stone: 'natural-stone', engineered_stone: 'engineered-stone', large_format: 'large-format', terracotta: 'quarry-terracotta' };
+      const subMap = { concrete: 'concrete', cement_screed: 'screed-render', cement_render: 'screed-render', brick_block: 'masonry', fibre_cement: 'cement-board', plasterboard: 'plasterboard', existing_tiles: 'existing-tiles', aac: 'aac', timber: 'timber-floor' };
       const tile = facets.tile_type.map((x) => sysMap[x]).find(Boolean), sub = facets.substrate.map((x) => subMap[x]).find(Boolean);
       if (tile && sub && loc) {
         const cat = await load.category('construction/tile-stone-installationsystems');
