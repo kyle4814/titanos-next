@@ -124,7 +124,7 @@ export const CONDS = [
 const LISTQ = /\b(what|which)\b.*\b(do|does|can)\b.*\b(make|sell|have|offer|stock|supply|produce|provide)\b|\b(list|range of|all the|all|every)\b|\bwhat .* (are there|is there)\b|\bwhat .* (does|do) (sika|davco|you)\b/;
 const KIND_WORDS = new Set(['adhesive', 'glue', 'sealant', 'screed', 'grout', 'waterproof', 'membrane', 'mortar', 'tile', 'product', 'sika', 'make', 'need', 'use', 'best', 'good', 'floor', 'concrete', 'primer', 'additive', 'coating', 'resin', 'epoxy', 'admixture'].map((w) => stem(w)));
 // products whose primary use is a fitting or accessory: not the first answer to a general job unless the asker named that part
-const ACCESSORY = /\b(fire|d[eé]cor|profile|flashing|pipe|vent|outlet|corner|drain(?!age)|gully|tape|primer pad|collar)\b/i;
+const ACCESSORY = /\b(fire|d[eé]cor|profile|flashing|pipe|vent|outlet|corner|drain(?!age)|versi ?drain(?!age)|gully|tape|primer pad|collar)\b/i;
 // a product built for one particular place (pool, food plant, static control...) is not the first answer to a job that did not name that place
 const SPECIFIC = new Set(['pool', 'static', 'underwater', 'fire', 'pond', 'toys', 'heated', 'brick']);
 const SKIPNAME = /accessor|extender|spacer|clip|tool|holder|retainer|joist|shim|bearer|brace|wall ?joiner/i;

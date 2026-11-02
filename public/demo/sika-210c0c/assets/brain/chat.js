@@ -2,7 +2,7 @@
 // the follow-up that joins that question ("bathroom" then "under tiles"), and the "My pick" lead on a recommend ask. Deterministic templates: no model, no network.
 // Every product fact still comes from the advisor and quotes its published sentence; nothing here states a product fact of its own.
 import { normalise } from './text.js';
-import { applySlang } from './slang.js';
+import { applySlang } from './match.js';
 import * as C from './cards.js';
 import { fact } from './schema.js';
 
