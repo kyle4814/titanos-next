@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twelve Blockers Behind A Green Suite | Demonblade Labs</title>
+<meta name="description" content="Four independent review rounds found 12 blocking defects on a suite that was green. The rule that came out of it: keep reviewing until a round comes back clean on a number path.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-007/">
+<meta property="og:title" content="Twelve Blockers Behind A Green Suite">
+<meta property="og:description" content="Four review rounds, 12 blocking defects, every one behind green tests. Keep reviewing until a round comes back with none on a number path.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-007/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-007.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. Twelve Blockers Behind A Green Suite.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-007.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 007</p>
+<h1>Twelve Blockers Behind A Green Suite</h1>
+<p class="deck">Over 2 and 3 November the product assistant went through four independent review rounds. Each round found a defect a buyer would have seen, 12 in total, and the tests were green before every one. The rule that came out of it: keep reviewing until a round comes back clean on a number path.</p>
+<p>If you build, buy or sell anything with a chat assistant in it, this one is for you. It sells nothing and it costs nothing to read. This follows Issues 004, 005 and 006: the same unsolicited prototype, built from a building materials maker's public website, so the company is still not named. Nothing of theirs was touched.</p>
+<p><strong>What you will get out of it</strong></p>
+<ul><li>How many rounds a reviewer needed before a green suite was believable, and what each round found.</li><li>The rule for when to stop reviewing and ship.</li><li>The exam numbers before and after.</li><li>What is still open.</li></ul>
+<hr>
+<h2>Chapter 0. The number is 12</h2>
+<p>A blocking defect here means one a buyer would notice straight away: a wrong quantity, a wrong product, a confident yes where the answer is no. Each reviewer had built none of the code. Each time I re-ran the fixes myself instead of taking the builder's word for it, and each time the next reviewer found more.</p>
+<div class="scroll"><table>
+<thead><tr><th>Round</th><th>Blocking defects</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>3</td></tr>
+<tr><td>2</td><td>5</td></tr>
+<tr><td>3</td><td>2</td></tr>
+<tr><td>4</td><td>2</td></tr>
+<tr><td>Total, all fixed</td><td>12</td></tr>
+</tbody>
+</table></div>
+<hr>
+<h2>Chapter 1. What each round found</h2>
+<ol>
+<li><strong>Round one:</strong> a stale product carried into a quantity answer, range names treated as aliases for single products, and a cheerful "yes, happy to help" for things the company does not sell.</li>
+<li><strong>Round two:</strong> a product held from earlier hijacking a short question about a category, and the word "special" being read as a price question, among others.</li>
+<li><strong>Round three:</strong> a bare "2400 x 1200" was read as an area and came back as 2,880,000 square metres and 480,000 bags. A tile size was also read as the job area.</li>
+<li><strong>Round four:</strong> a tile size typed after a product card became the job area and went into the cart. A tile measurement in millimetres was read as a layer thickness, which turned a 10 square metre job into 285 bags. That one was already live in the version before this round.</li>
+</ol>
+<p>A green suite tells you the problems you thought of are gone. It cannot tell you about the ones you did not.</p>
+<hr>
+<h2>Chapter 2. The rule</h2>
+<blockquote><p>Keep reviewing until a round comes back with no blocking defect on a number path, then ship.</p></blockquote>
+<p>Not after one round, not after two. Numbers are where a wrong answer costs a buyer money, so numbers get the strictest exit test.</p>
+<hr>
+<h2>Chapter 3. The exam numbers</h2>
+<p>Alongside the reviews I ran a fresh exam of 100 questions the builders never saw, 40 of them strict honest-no questions where the right answer is a plain no.</p>
+<div class="scroll"><table>
+<thead><tr><th>Measure</th><th>Start</th><th>First fixes live</th><th>Now</th></tr></thead>
+<tbody>
+<tr><td>Unseen exam, overall (100)</td><td>52</td><td>60</td><td>78</td></tr>
+<tr><td>Unseen exam, honest no incl. multi-turn (48)</td><td>n/a</td><td>17</td><td>32</td></tr>
+<tr><td>Held-back final exam (120)</td><td>64</td><td>71</td><td>73</td></tr>
+</tbody>
+</table></div>
+<p>The final exam moved by 2. That is a small move and I am not dressing it up.</p>
+<hr>
+<h2>The limits of all of this</h2>
+<ul>
+<li>The last fix was checked by my own number probes, which found no wrong quantity. I have no fifth independent review round on record, so by my own rule it has not earned its pass yet.</li>
+<li>It is live on two previews only, not merged to the main branch.</li>
+<li>The exam I used to pick the better of two builds is partly used up, so 78 of 100 is a little flattering.</li>
+<li>On the final exam, the clarifying-question category is still 6 of 14.</li>
+<li>Quantity fallbacks and a fuzz suite for the quantity logic are still on the list, as are the earlier size, accessibility and performance misses from Issues 004 and 005.</li>
+<li>It covers one maker's public catalogue, and whether any of it changes a purchase is UNKNOWN until they have seen it.</li>
+</ul>
+<hr>
+<h2>Your three questions</h2>
+<p>Who tried to break your assistant that did not build it? How many rounds did they need before one came back clean? Did anyone check the number paths separately from the words?</p>
+<hr>
+<p><strong>If you build assistants, I would like to hear how many review rounds your last release needed before one came back clean.</strong> Reply on X. Would it be okay if I asked you what the most expensive wrong number your assistant could give a customer would be?</p>
+<h2>Receipts</h2>
+<ul>
+<li>Every figure above is a test run result or a count from the project, measured on 2 and 3 November 2026.</li>
+<li>The catalogue is the maker's public web pages and data sheets. No private data, no login, no account.</li>
+</ul>
+<p class="fine">Previous issues: <a href="/labs/issue-006/">The exam the builder never saw</a>, <a href="/labs/issue-005/">The button that ignored a fast thumb</a>, <a href="/labs/issue-004/">I built a product assistant that is not allowed to guess</a>, <a href="/labs/issue-003/">I built a gym that judges its own best strategies as luck</a>, <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 007, 3 November 2026.
+    Every figure in this article is a test run result or a measured count. The maker is not named because they have not yet seen the prototype.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
