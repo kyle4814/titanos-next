@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eight Bugs In A Chain That Was Meant To Run Itself | Demonblade Labs</title>
+<meta name="description" content="A cron commander ran 0 useful lanes for about 11 hours. Eight bugs, a 45 second rehearsal under cron's environment, and what is still open.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-008/">
+<meta property="og:title" content="Eight Bugs In A Chain That Was Meant To Run Itself">
+<meta property="og:description" content="0 useful lanes for about 11 hours, eight bugs in the commander, and a 45 second rehearsal that crashes it on purpose.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-008/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-008.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. Eight Bugs In A Chain That Was Meant To Run Itself.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-008.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 008</p>
+<h1>Eight Bugs In A Chain That Was Meant To Run Itself</h1>
+<p class="deck">I asked for one clean unattended run and got 0 useful lanes for about 11 hours. Then I found eight separate bugs in the commander that was meant to prevent exactly that. The fix that mattered was a 45 second rehearsal that crashes it on purpose.</p>
+<p>If you run scheduled jobs, agents or any pipeline you want to leave alone overnight, this one is for you. It sells nothing and it costs nothing to read. It is about my own build at TitanOS in Brisbane, so nobody else is named.</p>
+<p><strong>What you will get out of it</strong></p>
+<ul><li>What a cron environment can hide for 11 hours.</li><li>The eight bugs, in the order they bit.</li><li>The rehearsal that catches them, and how I know it works.</li><li>What is still open.</li></ul>
+<hr>
+<h2>Chapter 0. What I asked for</h2>
+<p>On 5 November I said: chain the whole thing up, 3 agents at a time, one clean run, I do not want to intervene. A cron commander (<code>bin/l10_chain.sh</code>) runs stages with dependencies. If a stage fails it retries 3 times, then holds the stage and sends me one message.</p>
+<h2>Chapter 1. The overnight result</h2>
+<p>From 19:34 to 06:26, about 11 hours, it ran 0 useful lanes. Cron has a bare PATH, and that PATH had no <code>powershell.exe</code>. The SSD guard could not prove the drive was healthy, so it refused every heavy writer with exit 75. Every tick after that stopped at the sign-in probe for the same reason, and the commander reported dead lanes as RUNNING.</p>
+<p>Nothing was wrong with the work. The commander was wrong about itself.</p>
+<hr>
+<h2>Chapter 2. The eight bugs</h2>
+<p>All eight were found and fixed the same day.</p>
+<ol>
+<li><strong>Cron PATH.</strong> No <code>powershell.exe</code>, so the drive could not be proven.</li>
+<li><strong>Wrong blame.</strong> The probe blamed sign-in for a disk guard refusal.</li>
+<li><strong>Inherited lock.</strong> Launched lanes inherited the tick's lock, so every tick skipped while a lane was alive. That was 55 minutes of 1 lane instead of 3.</li>
+<li><strong>Wrong PID.</strong> A <code>setsid</code> launch recorded the wrapper's PID, not the job's. Caught before harm.</li>
+<li><strong>Swallowed check.</strong> An inline comment swallowed the lock check for about a minute. That one was my own edit.</li>
+<li><strong>Cap overshoot.</strong> Counting running lanes in file order let an early stage relaunch past the cap. I saw 4 running. The rehearsal caught it.</li>
+<li><strong>Receipts in the wrong place.</strong> A rule to work in separate worktrees made lanes write receipts where the commander does not look.</li>
+<li><strong>Silent push failure.</strong> An exam passed, 50 of 50 and 24 of 25, but its push to main failed silently on a sparse checkout. The next stage would still have seen the stale gate.</li>
+</ol>
+<hr>
+<h2>Chapter 3. The rehearsal</h2>
+<p>A 45 second end to end rehearsal runs the real commander under cron's environment on a fake chain, then crashes it on purpose.</p>
+<div class="scroll"><table>
+<thead><tr><th>Crash</th><th>What it checks</th></tr></thead>
+<tbody>
+<tr><td>Dead sign-in</td><td>The commander says so, not RUNNING</td></tr>
+<tr><td>STOP</td><td>Everything halts</td></tr>
+<tr><td>A lane that fails once</td><td>It retries and recovers</td></tr>
+<tr><td>A lane that always fails</td><td>3 tries, then hold and one message</td></tr>
+<tr><td>Three lanes at once</td><td>The cap holds</td></tr>
+<tr><td>Fan in</td><td>The next stage waits for all of them</td></tr>
+</tbody>
+</table></div>
+<p>It is 25 checks. It is proven by mutation: I put the lock bug back and it turns red.</p>
+<p>Around it I added a 15 minute heartbeat to Telegram, a watcher that uses no model, and backfill lanes, so 3 agents keep running even when the critical path only allows 1.</p>
+<hr>
+<h2>Two lessons</h2>
+<blockquote><p>A hand run first tick proves nothing about cron.</p></blockquote>
+<blockquote><p>A push inside a script is unverified until you read main back.</p></blockquote>
+<hr>
+<h2>The limits of all of this</h2>
+<ul>
+<li>The rehome and the cert are not finished yet, and the chain is not done.</li>
+<li>The rehearsal covers the failures I thought of, so I expect the real run to find a ninth.</li>
+<li>Until the chain completes one clean run on its own, the claim is only that it now fails loudly instead of quietly.</li>
+</ul>
+<hr>
+<p><strong>If you run unattended jobs, I would like to hear what your cron environment hid from you.</strong> Reply on X. Would it be okay if I asked you what your last overnight job did that you only found out about in the morning?</p>
+<h2>Receipts</h2>
+<ul>
+<li>Every figure above is a log timestamp, a test run result or a count from my own build, measured on 5 and 6 November 2026.</li>
+<li>No client data and no other person or company is involved.</li>
+</ul>
+<p class="fine">Previous issues: <a href="/labs/issue-007/">Twelve blockers behind a green suite</a>, <a href="/labs/issue-006/">The exam the builder never saw</a>, <a href="/labs/issue-005/">The button that ignored a fast thumb</a>, <a href="/labs/issue-004/">I built a product assistant that is not allowed to guess</a>, <a href="/labs/issue-003/">I built a gym that judges its own best strategies as luck</a>, <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 008, 6 November 2026.
+    Every figure in this article is a log timestamp, a test run result or a measured count from my own build. Nobody else is named.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
