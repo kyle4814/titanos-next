@@ -33,8 +33,12 @@ export interface Store {
   purchaseByCheckout(checkoutId: string): Promise<Purchase | undefined>;
   purchaseByPaymentIntent(pi: string): Promise<Purchase | undefined>;
   purchasesFor(accountId: string): Promise<Purchase[]>;
-  putSubscription(s: Subscription): Promise<void>;
+  putSubscription(s: Subscription): Promise<void>; // unconditional upsert: STORE LAYER ONLY (test_subcas source scan); service code uses createSubscription / casSubscription
+  createSubscription(s: Subscription): Promise<boolean>; // insert-if-absent (f183); false = a row already exists and is left untouched
   subscriptionById(id: string): Promise<Subscription | undefined>;
+  // Optimistic concurrency (f175). Read a COPY plus its version; write it back only if the version is unchanged (false = lost the race, re-read and retry).
+  subscriptionVersioned(id: string): Promise<{ sub: Subscription; version: number } | undefined>;
+  casSubscription(s: Subscription, expectedVersion: number): Promise<boolean>;
   subscriptionsFor(accountId: string): Promise<Subscription[]>;
   putInvoice(i: Invoice): Promise<void>;
   invoicesFor(accountId: string): Promise<Invoice[]>;
@@ -87,7 +91,14 @@ export class MemoryStore implements Store {
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
-  async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  subVer = new Map<string, number>();
+  async putSubscription(s: Subscription) { this.subs.set(s.id, s); this.subVer.set(s.id, (this.subVer.get(s.id) ?? 0) + 1); }
+  async subscriptionVersioned(id: string) { const s = this.subs.get(id); return s && { sub: { ...s }, version: this.subVer.get(id) ?? 0 }; }
+  async casSubscription(s: Subscription, expectedVersion: number) {
+    if (!this.subs.has(s.id) || (this.subVer.get(s.id) ?? 0) !== expectedVersion) return false;
+    this.subs.set(s.id, s); this.subVer.set(s.id, expectedVersion + 1); return true;
+  }
+  async createSubscription(s: Subscription) { if (this.subs.has(s.id)) return false; this.subs.set(s.id, s); this.subVer.set(s.id, 1); return true; }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
   // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,
