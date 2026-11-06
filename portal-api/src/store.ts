@@ -35,6 +35,9 @@ export interface Store {
   purchasesFor(accountId: string): Promise<Purchase[]>;
   putSubscription(s: Subscription): Promise<void>;
   subscriptionById(id: string): Promise<Subscription | undefined>;
+  // Optimistic concurrency (f175). Read a COPY plus its version; write it back only if the version is unchanged (false = lost the race, re-read and retry).
+  subscriptionVersioned(id: string): Promise<{ sub: Subscription; version: number } | undefined>;
+  casSubscription(s: Subscription, expectedVersion: number): Promise<boolean>;
   subscriptionsFor(accountId: string): Promise<Subscription[]>;
   putInvoice(i: Invoice): Promise<void>;
   invoicesFor(accountId: string): Promise<Invoice[]>;
@@ -82,7 +85,13 @@ export class MemoryStore implements Store {
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), f]); }
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
-  async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  subVer = new Map<string, number>();
+  async putSubscription(s: Subscription) { this.subs.set(s.id, s); this.subVer.set(s.id, (this.subVer.get(s.id) ?? 0) + 1); }
+  async subscriptionVersioned(id: string) { const s = this.subs.get(id); return s && { sub: { ...s }, version: this.subVer.get(id) ?? 0 }; }
+  async casSubscription(s: Subscription, expectedVersion: number) {
+    if (!this.subs.has(s.id) || (this.subVer.get(s.id) ?? 0) !== expectedVersion) return false;
+    this.subs.set(s.id, s); this.subVer.set(s.id, expectedVersion + 1); return true;
+  }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
   async putInvoice(i: Invoice) { this.invoices.set(i.id, i); }
