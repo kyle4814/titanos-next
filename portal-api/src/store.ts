@@ -8,6 +8,8 @@ export interface Purchase { id: string; accountId: string; productId: string; do
 import type { PlanState } from "./plan_change.ts";
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number; plan?: PlanState }
 export interface Invoice { id: string; accountId: string; purchaseId?: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
+export type InvoiceDraft = Omit<Invoice, "number" | "purchaseId"> & { purchaseId: string };
+export type InvoiceGuard = "purchase" | "purchase_event";
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
 export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
@@ -59,10 +61,12 @@ export interface Store {
   invoicesFor(accountId: string): Promise<Invoice[]>;
   invoiceById(id: string): Promise<Invoice | undefined>;
   nextInvoiceNumber(): Promise<string>;
-  // f203 reconciler. purchaseInvoiced: the purchase has at least one invoice. putInvoiceOnce: write the invoice ONLY IF the purchase has none, atomically (false = lost the race, nothing written).
+  // f209. issueInvoiceNumbered assigns the number INSIDE the guarded write: it writes the invoice (with the next TT-nnnnnn) ONLY IF the guard holds, atomically, and returns it;
+  // undefined = lost the guard, nothing written and NO number consumed. guard "purchase": the purchase has no invoice yet (first invoice); "purchase_event": no invoice for this (purchase, event).
+  // f203 reconciler. purchaseInvoiced: the purchase has at least one invoice.
   // paidPurchasesBefore: purchases paid at or before `cutoff` (status paid or refunded) that carry no invoice, oldest first.
   purchaseInvoiced(purchaseId: string): Promise<boolean>;
-  putInvoiceOnce(i: Invoice): Promise<boolean>;
+  issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard): Promise<Invoice | undefined>;
   paidPurchasesBefore(cutoff: number): Promise<Purchase[]>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
@@ -111,7 +115,8 @@ export class MemoryStore implements Store {
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
   // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,
   // and one purchase carries at most one invoice per Stripe event. A violation throws; nothing is written.
-  async putInvoice(i: Invoice) {
+  // writeInvoice runs synchronously to its end and throws synchronously: the atomic callers below rely on there being no await between their guard, their number and this write.
+  private writeInvoice(i: Invoice) {
     for (const o of this.invoices.values()) {
       if (o.id === i.id) continue;
       if (o.number === i.number) throw new Error(`invoice number ${i.number} already issued`);
@@ -119,13 +124,15 @@ export class MemoryStore implements Store {
     }
     this.invoices.set(i.id, Object.fromEntries(Object.entries(i).filter(([, v]) => v !== undefined)) as unknown as Invoice); // absent optionals stay absent, as on D1
   }
+  async putInvoice(i: Invoice) { this.writeInvoice(i); }
   async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id).map((i) => ({ ...i })); }
   async invoiceById(id: string) { const i = this.invoices.get(id); return i && { ...i }; }
   async purchaseInvoiced(id: string) { return [...this.invoices.values()].some((o) => o.purchaseId === id); }
-  // No await between the check and the write: atomic on one object (putInvoice is async but runs synchronously to its end).
-  async putInvoiceOnce(i: Invoice) {
-    if ([...this.invoices.values()].some((o) => o.purchaseId === i.purchaseId)) return false;
-    await this.putInvoice(i); return true;
+  // No await between the guard, the number and the write: atomic on one object. The counter moves only after the guard passes and is restored if the write throws.
+  async issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard) {
+    if ([...this.invoices.values()].some((o) => o.purchaseId === d.purchaseId && (guard === "purchase" || o.stripeEventId === d.stripeEventId))) return undefined;
+    const inv: Invoice = { ...d, number: `TT-${String(this.inv + 1).padStart(6, "0")}` };
+    this.writeInvoice(inv); this.inv += 1; return inv; // writeInvoice throws before the counter moves; no await anywhere between the guard and the counter
   }
   async paidPurchasesBefore(cutoff: number) {
     return [...this.purchases.values()].filter((p) => p.paidAt !== undefined && p.paidAt <= cutoff && (p.status === "paid" || p.status === "refunded")
