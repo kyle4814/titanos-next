@@ -89,18 +89,18 @@ partner	portal:contact	how do i become a partner
 partner	portal:pricing	what does a partner pay
 partner	portal:quote	can i get a price for a custom build
 guest	none	what is the weather in brisbane tomorrow
-guest	none	who won the footy last night
+guest	none	did the broncos win on the weekend
 guest	none	give me a recipe for banana bread
 owner	none	how do i fix a leaking tap
 owner	none	what is a good name for my cat
 pro	none	write me a poem about the ocean
-pro	none	what is the capital of france
+pro	none	how many people live in canada
 agent	none	translate good morning into japanese
-agent	none	tell me a joke
+agent	none	sing me a lullaby
 enterprise	none	what is the share price of apple
 enterprise	none	how long does it take to fly to london
 partner	none	can you recommend a good restaurant in sydney
-partner	none	how tall is mount everest
+partner	none	how deep is the pacific ocean
 guest	none	how do i lose ten kilos fast
 owner	none	what should i watch on netflix tonight
 owner	ask	i want the subbie thing
