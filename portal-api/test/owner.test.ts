@@ -254,3 +254,34 @@ test("zero model calls: the owner seat source names no model or LLM client", asy
   const fs = await import("node:fs"); const dir = new URL("../src/owner/", import.meta.url);
   for (const f of fs.readdirSync(dir)) assert.doesNotMatch(fs.readFileSync(new URL(f, dir), "utf8"), /anthropic|openai|gemini|claude-|gpt-|\.messages\.create|chat\.completions/i, f);
 });
+
+// R-C3 regressions: auto-fix must refuse (guided, no DNS write) where adding -all would break mail.
+const refuses = async (records: string[], reasonRx: RegExp) => {
+  const R = rig(); const s = await R.open();
+  R.zone.world.txt![R.domain] = records; await R.scan(s);
+  const before = JSON.stringify(R.zone.world.txt![R.domain]); const writes = R.zone.writes.length;
+  const plan = await planFor("SPF", R.domain, R.zone);
+  assert.equal(plan.auto, false); assert.match(plan.reason ?? "", reasonRx); assert.deepEqual(plan.edits, []);
+  const r: any = await autoFix(R.c, s, "SPF");
+  assert.equal(r.ok, false); assert.notEqual(r.result, "proven");
+  assert.equal(JSON.stringify(R.zone.world.txt![R.domain]), before, "DNS untouched");
+  assert.equal(R.zone.writes.length, writes, "no DNS write attempted");
+  assert.notEqual(s.findings.SPF.state, "PROVEN_FIXED");
+};
+test("R-C3: redirect= record without all: auto-fix refuses, no DNS write", async () => { await refuses(["v=spf1 redirect=_spf.bigmail.example.com"], /redirect/); });
+test("R-C3: redirect= record with ~all: auto-fix refuses, no DNS write", async () => { await refuses(["v=spf1 redirect=_spf.bigmail.example.com ~all"], /redirect/); });
+test("R-C3: merged includes over 10 lookups: auto-fix refuses, no DNS write", async () => {
+  const inc = (p: string, n: number) => Array.from({ length: n }, (_, i) => `include:${p}${i}.example.com`).join(" ");
+  await refuses([`v=spf1 ${inc("a", 5)} ~all`, `v=spf1 ${inc("b", 6)} -all`], /lookups/);
+});
+test("R-C3: a single record already over 10 lookups: auto-fix refuses", async () => {
+  await refuses([`v=spf1 ${Array.from({ length: 12 }, (_, i) => `include:i${i}.example.com`).join(" ")} ~all`], /lookups/);
+});
+test("R-C3: ptr / unreadable terms are guided, not rewritten", async () => { await refuses(["v=spf1 ptr ~all"], /ptr|cannot read/); await refuses(["v=spf1 bogus:thing ~all"], /ptr|cannot read/); });
+test("R-C3: the safe case still auto-fixes (10 lookups exactly, merged)", async () => {
+  const R = rig(); const s = await R.open();
+  const inc = (p: string, n: number) => Array.from({ length: n }, (_, i) => `include:${p}${i}.example.com`).join(" ");
+  R.zone.world.txt![R.domain] = [`v=spf1 ${inc("a", 5)} ~all`, `v=spf1 ${inc("b", 5)} -all`]; await R.scan(s);
+  const plan = await planFor("SPF", R.domain, R.zone); assert.equal(plan.auto, true);
+  const r: any = await autoFix(R.c, s, "SPF"); assert.equal(r.result, "proven");
+});

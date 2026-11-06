@@ -4,7 +4,7 @@
 // a guided quest the owner applies, and it is proven the same way: by a re-scan.
 // Every apply stores the exact previous record set, so undo is exact.
 import type { DnsWriter } from "./dnsw.ts";
-import { tag } from "../../../lib/guestscan/scan.ts";
+import { tag, isSpfRecord, spfInfo, SPF_LOOKUP_LIMIT } from "../../../lib/guestscan/scan.ts";
 
 export interface Edit { name: string; kind: "txt" | "mx" | "ds"; before: string[]; after: string[] }
 export interface Plan { check: string; auto: boolean; summary: string; edits: Edit[]; reason?: string }
@@ -18,11 +18,18 @@ function mergeSpf(recs: string[]): string {
 export async function planFor(check: string, domain: string, z: DnsWriter): Promise<Plan> {
   const guided = (summary: string, reason: string): Plan => ({ check, auto: false, summary, edits: [], reason });
   if (check === "SPF") {
-    const all = await z.getTxt(domain); const spf = first(all, "v=spf1");
+    const all = await z.getTxt(domain); const spf = all.filter(isSpfRecord);
     if (!spf.length) return guided("Publish an SPF record listing your senders", "We cannot know which services send your mail; publishing a guess would block real mail.");
+    // Guards (R-C3): appending -all next to redirect= makes receivers ignore the redirect and hard-fail every
+    // sender behind it; merging records can push the total past the 10-lookup limit (permerror). Both are guided, no DNS write.
+    const infos = spf.map(spfInfo);
+    if (infos.some((i) => i.redirect)) return guided("Your SPF uses redirect=; edit it by hand", "A redirect= record must not get an -all added: receivers would ignore the redirect and reject mail from every sender behind it. Change it at the redirect target or list the senders directly.");
+    if (infos.some((i) => i.unknown.length || i.ptr)) return guided("Your SPF has terms we will not rewrite; edit it by hand", "It contains ptr or terms receivers cannot read; we will not guess what you meant.");
     const merged = mergeSpf(spf);
+    const mergedLookups = spfInfo(merged).lookups;
+    if (mergedLookups > SPF_LOOKUP_LIMIT) return guided(`Your SPF would need ${mergedLookups} DNS lookups; trim it by hand`, `SPF allows ${SPF_LOOKUP_LIMIT} lookups. Merging your records would exceed that and receivers would ignore the whole record. Remove unused senders or use ip4/ip6 ranges.`);
     if (merged === "v=spf1 -all") return guided("Your SPF names no senders", "Changing it to -all would block all your mail; add your mail providers first.");
-    return { check, auto: true, summary: `Keep your senders, end SPF with -all (${spf.length > 1 ? "merge " + spf.length + " records into one" : "tighten the ending"})`, edits: [{ name: domain, kind: "txt", before: all, after: [...all.filter((r) => !r.toLowerCase().startsWith("v=spf1")), merged] }] };
+    return { check, auto: true, summary: `Keep your senders, end SPF with -all (${spf.length > 1 ? "merge " + spf.length + " records into one" : "tighten the ending"})`, edits: [{ name: domain, kind: "txt", before: all, after: [...all.filter((r) => !isSpfRecord(r)), merged] }] };
   }
   if (check === "DMARC") {
     const name = `_dmarc.${domain}`; const all = await z.getTxt(name); const d = first(all, "v=dmarc1");
