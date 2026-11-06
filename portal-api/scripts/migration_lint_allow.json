@@ -1,0 +1,79 @@
+{
+ "note": "f178 2026-11-07: justified exceptions to migration lint auto-discovery. Every entry needs a reason; an entry that no longer applies FAILS (stale).",
+ "unions": [
+  {
+   "key": "src/market/attribution.ts::Clawback.status",
+   "reason": "In-memory/ledger-record state, not persisted to a CHECK column today; revisit if a clawbacks table is added."
+  },
+  {
+   "key": "src/market/store.ts::Payout.status",
+   "reason": "Embedded in the market job record (JSON), not a SQL column; payouts.status CHECK belongs to the enterprise payout lifecycle."
+  },
+  {
+   "key": "src/market/store.ts::Job.priorStatus",
+   "reason": "Subset of JobStatus held inside the dispute record; guarded by the JobStatus pair."
+  },
+  {
+   "key": "src/owner/autofix.ts::Edit.kind",
+   "reason": "DNS edit kind inside an in-memory fix record, never a column."
+  },
+  {
+   "key": "src/owner/engine.ts::FixRec.status",
+   "reason": "Owner-engine record state, stored as JSON or memory, no CHECK column exists."
+  },
+  {
+   "key": "src/owner/engine.ts::Quest.kind",
+   "reason": "Owner quest descriptor, generated in code, not persisted."
+  },
+  {
+   "key": "src/owner/engine.ts::Alert.kind",
+   "reason": "Transient alert shape computed per scan, not persisted."
+  },
+  {
+   "key": "src/catalogue.ts::Kind",
+   "reason": "Product catalogue kind is a code constant, not a column."
+  },
+  {
+   "key": "src/enterprise/payout_card.ts::DecisionStatus",
+   "reason": "Derived: PayoutStatus plus card-only approved/denied outcomes, intentionally wider than payouts.status; PayoutStatus is pair-checked."
+  },
+  {
+   "key": "src/enterprise/payout_decision.ts::DecisionKind",
+   "reason": "Request verb on the decision API, not a stored value."
+  },
+  {
+   "key": "src/market/dispute.ts::DState",
+   "reason": "Dispute state machine value, uppercase, kept in the machine record, no CHECK column."
+  },
+  {
+   "key": "src/market/dispute.ts::DKind",
+   "reason": "Dispute event verbs for the state machine, not a column."
+  },
+  {
+   "key": "src/owner/engine.ts::ProofState",
+   "reason": "Owner proof state held in engine records, not a CHECK column."
+  },
+  {
+   "key": "src/owner/engine.ts::EventKind",
+   "reason": "Owner event log kind in the engine store (memory/JSON), no CHECK column."
+  }
+ ],
+ "checks": [
+  {
+   "key": "accounts.seat",
+   "reason": "Seat list has no TS union yet (checked as string at the boundary). WOULD-FLIP: add a Seat type and pair it."
+  },
+  {
+   "key": "jobs.status",
+   "reason": "Legacy 0001 jobs table superseded by market_jobs (0004); no code reads it. Real drift versus JobStatus is deliberate history."
+  },
+  {
+   "key": "credit_ledger.reason",
+   "reason": "Agent-door reason enum has no TS union yet. WOULD-FLIP: add type and pair."
+  },
+  {
+   "key": "agent_receipts.mode",
+   "reason": "Agent-door mode enum has no TS union yet. WOULD-FLIP: add type and pair."
+  }
+ ]
+}
