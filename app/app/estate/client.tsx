@@ -9,7 +9,7 @@ const input = { padding: "10px 12px", background: "var(--bg, #080808)", color: "
 const btn = { padding: "8px 14px", background: "transparent", color: "var(--ice)", border: "1px solid var(--border)", borderRadius: 8, cursor: "pointer" } as const;
 
 // Estate view for an enterprise or client tenant. Every figure here comes from the API; the scan source is shown as the
-// API labels it (SYNTHETIC until the real scanner is wired), never rewritten into something firmer.
+// API labels it (SYNTHETIC for the test adapter, LIVE passive DNS for dnsScan), never rewritten into something firmer.
 export default function EstateClient() {
   const [tenants, setTenants] = useState<ent.Tenant[]>([]);
   const [tid, setTid] = useState("");
@@ -53,13 +53,13 @@ export default function EstateClient() {
       {view && (
         <div style={card}>
           <h2>{view.tenant.name}</h2>
-          <p>{view.totals.verified} of {view.totals.assets} domains verified. Critical {view.totals.critical}, high {view.totals.high}, medium {view.totals.medium}, low {view.totals.low}. Average score {view.totals.averageScore ?? "n/a"}.</p>
+          <p>{view.totals.verified} of {view.totals.assets} domains verified. Critical {view.totals.critical}, high {view.totals.high}, medium {view.totals.medium}, low {view.totals.low}. Average score {view.totals.averageScore ?? "n/a"}{view.totals.unknown ? `. ${view.totals.unknown} could not be read just now (UNKNOWN, not a pass or a fail)` : ""}.</p>
           <p style={{ opacity: 0.8 }}>Data source: {view.dataSource}</p>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead><tr><th align="left">Domain</th><th align="left">Group</th><th>Grade</th><th>Findings</th><th /></tr></thead>
             <tbody>{view.assets.map((a: any) => (
-              <tr key={a.id}><td>{a.label}</td><td>{a.group}</td><td align="center">{a.grade ?? "not verified"}</td>
-                <td align="center">{a.verified ? a.findings.critical + a.findings.high + a.findings.medium + a.findings.low : "-"}</td>
+              <tr key={a.id}><td>{a.label}</td><td>{a.group}</td><td align="center">{a.status === "UNKNOWN" ? "UNKNOWN" : a.grade ?? "not verified"}</td>
+                <td align="center">{a.status === "ASSESSED" ? a.findings.critical + a.findings.high + a.findings.medium + a.findings.low : "-"}</td>
                 <td>{!a.verified && admin && <button style={btn} onClick={() => act(async () => { await ent.verifyAsset(api(), tid, a.id); await load(tid); })}>Verify</button>}</td></tr>
             ))}</tbody>
           </table>

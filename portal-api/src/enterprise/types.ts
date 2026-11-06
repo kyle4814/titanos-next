@@ -36,4 +36,14 @@ export interface PayoutProvider { transfer(p: { partnerId: string; accountRef: s
 export interface IdpClaims { iss: string; aud: string; sub: string; email: string; email_verified: boolean; nonce: string; exp: number; iat: number }
 export interface IdpVerifier { verify(cfg: SsoConfig, idToken: string, nowMs: number): Promise<IdpClaims> }
 export interface ScanFinding { id: string; severity: "critical" | "high" | "medium" | "low"; title: string }
-export interface ScanProvider { source: string; scan(domain: string): Promise<ScanFinding[]> }
+export interface ScanProvider {
+  source: string;
+  scan(domain: string): Promise<ScanFinding[]>;
+  /** Richer path: a real grade, scan time and resolver source, or an honest UNKNOWN. When absent the estate derives the grade from scan(). */
+  assess?(domain: string): Promise<Assessment>;
+  /** Max domains assessed at once within ONE estate view (default 25). */
+  concurrency?: number;
+}
+export type Assessment =
+  | { status: "ASSESSED"; grade: "A" | "B" | "C" | "D" | "F"; score: number; counts: { critical: number; high: number; medium: number; low: number }; scannedAt: number; resolverSource: string; unreadableChecks: number }
+  | { status: "UNKNOWN"; reason: "timeout" | "resolver_failed" | "scan_error"; scannedAt: number; resolverSource: string };
