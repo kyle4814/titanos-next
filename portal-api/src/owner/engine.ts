@@ -250,6 +250,6 @@ export function report(s: DomainState, now: number) {
 }
 export function overview(s: DomainState, now: number) {
   const q = questsOf(s);
-  return { domain: s.domain, level: s.level, levelName: s.levelName, next: computeLevel(s.lastScan ? ({ domain: s.domain, findings: Object.values(s.findings).map((f) => ({ check: f.check, status: f.status, detail: f.detail, fix: f.fix })), grade: s.lastScan.grade as ScanResult["grade"], score: s.lastScan.score, elapsedMs: 0, modelCalls: 0 }) : undefined, ctxOf(s, now)).next,
+  return { domain: s.domain, level: s.level, levelName: s.levelName, next: computeLevel(s.lastScan ? ({ domain: s.domain, findings: Object.values(s.findings).map((f) => ({ check: f.check, status: f.status, detail: f.detail, fix: f.fix })), grade: s.lastScan.grade as ScanResult["grade"], score: s.lastScan.score, elapsedMs: 0, modelCalls: 0, outbound: { total: 0, hosts: [] } /* rebuilt from stored state: no scan runs here, so nothing goes outbound */ }) : undefined, ctxOf(s, now)).next,
     badge: s.badge ?? null, findings: Object.values(s.findings), quests: q, hours: hoursGivenBack(s), xp: s.xp, monitor: s.monitor, lastScan: s.lastScan ?? null, events: s.events.slice(-30).reverse() };
 }
