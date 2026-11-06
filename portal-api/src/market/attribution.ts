@@ -56,7 +56,7 @@ export function washTradeFlags(jobs: WashJob[]): Map<string, string> {
   for (const [k, g] of groups) {
     const kind = k.split("|")[0];
     if (kind === "one_card_many_owners") { if (new Set(g.map((j) => j.ownerAccountId)).size < WASH_MIN_REPEATS) continue; }
-    else if (g.length < WASH_MIN_REPEATS) continue;
+    else if (kind !== "shared_card" && g.length < WASH_MIN_REPEATS) continue;   // the same card on both sides is self-dealing on the FIRST job, no repeat needed (f91)
     for (const j of g) if (!out.has(j.id)) out.set(j.id, kind);
   }
   return out;
