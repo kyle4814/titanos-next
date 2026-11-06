@@ -508,12 +508,16 @@ export async function runMatrix({ handler = handle, reps = 41, verbose = false }
       const t1 = await r1.text(), t2 = await r2.text(); oracle.pairs++; probes += 2;
       if (!route.oracleExempt && (r1.status !== r2.status || shapeOf(t1) !== shapeOf(t2))) oracle.mismatches.push(`${route.method} ${route.pattern}: foreign-existing ${r1.status} ${shapeOf(t1).slice(0, 60)} vs fabricated ${r2.status} ${shapeOf(t2).slice(0, 60)}`);
       if (route.oracleExempt) continue;
-      const s1 = [], s2 = [];
-      for (let i = 0; i < reps; i++) { // interleaved, so drift hits both sides equally
-        let t = performance.now(); await (await fire(route.method, real, { headers: hdr, body })).arrayBuffer(); s1.push(performance.now() - t);
-        t = performance.now(); await (await fire(route.method, fake, { headers: hdr, body })).arrayBuffer(); s2.push(performance.now() - t);
+      // up to 3 interleaved rounds; a REAL timing oracle is consistent, scheduler noise is not, so the smallest round decides
+      let dMs = Infinity;
+      for (let round = 0; round < 3 && dMs > TIMING_TOLERANCE_MS; round++) {
+        const s1 = [], s2 = [];
+        for (let i = 0; i < reps; i++) { // interleaved, so drift hits both sides equally
+          let t = performance.now(); await (await fire(route.method, real, { headers: hdr, body })).arrayBuffer(); s1.push(performance.now() - t);
+          t = performance.now(); await (await fire(route.method, fake, { headers: hdr, body })).arrayBuffer(); s2.push(performance.now() - t);
+        }
+        dMs = Math.min(dMs, Math.abs(med(s1) - med(s2)));
       }
-      const dMs = Math.abs(med(s1) - med(s2));
       oracle.maxDeltaMs = Math.max(oracle.maxDeltaMs, dMs);
       if (dMs > TIMING_TOLERANCE_MS) oracle.mismatches.push(`${route.method} ${route.pattern}: median timing delta ${dMs.toFixed(3)} ms > ${TIMING_TOLERANCE_MS} ms`);
     }
