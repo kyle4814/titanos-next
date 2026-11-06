@@ -38,6 +38,8 @@ export class D1ShadowStore extends MemoryStore {
   async receiptById(id: string, accountId?: string) { return this.agent.receiptById(id, accountId); }
   async receiptByIdem(k: string, i: string, accountId?: string) { return this.agent.receiptByIdem(k, i, accountId); }
   async receiptsForKey(k: string, limit: number, accountId?: string) { return this.agent.receiptsForKey(k, limit, accountId); }
+  async idemReserve(k: string, i: string, rid: string, owner: string, now: number, ttl: number) { return this.agent.idemReserve(k, i, rid, owner, now, ttl); }
+  async idemRelease(k: string, i: string, owner: string) { await this.agent.idemRelease(k, i, owner); }
   async callsSince(k: string, since: number) { return this.agent.callsSince(k, since); }
   async noteCall(k: string, at: number) { await this.agent.noteCall(k, at); await super.noteCall(k, at); }
 }
