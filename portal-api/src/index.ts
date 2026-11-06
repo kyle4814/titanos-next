@@ -13,6 +13,7 @@ import { traceKeyPrefix, isOperator } from "./agent/keytrace.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
 import { workerScheduled } from "./owner/cron.ts";
+import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -187,11 +188,25 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
+// Cron entry. With an env.payouts adapter set it runs ONE payout tick; without one it is a labelled no-op (never a crash, never a 503).
+// Nothing triggers this yet: no [triggers] crons in wrangler.toml (deploy is GATE5). ctx.waitUntil keeps the Worker alive for the tick.
+export type ScheduledOutcome = { ran: false; label: "payout_tick_noop_no_adapter" } | ({ ran: true; label: "payout_tick" } & TickResult);
+export async function scheduledTick(env: Env, now: number = Date.now()): Promise<ScheduledOutcome> {
+  const p = env.payouts;
+  if (!p) return { ran: false, label: "payout_tick_noop_no_adapter" };
+  const r = await runPayoutTick(p.store, p.transfer, now, { lookup: p.lookup, maxRows: p.maxRows, log: (l) => console.log(l) });
+  return { ran: true, label: "payout_tick", ...r };
+}
+
 export default {
   fetch(req: Request, env: Env): Promise<Response> {
     return handle(req, env).catch(() => json({ error: "internal" }, 500));
   },
-  async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
+  // One scheduled() runs both jobs: the payout tick (f57, waitUntil, never throws) and the owner monitor cron (f14).
+  async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env, ctx?: { waitUntil(p: Promise<unknown>): void }): Promise<void> {
+    const now = typeof event?.scheduledTime === "number" ? event.scheduledTime : Date.now();
+    const tick = scheduledTick(env, now).then((o) => console.log(`scheduled ${o.label}`)).catch(() => console.log("scheduled payout_tick_failed"));
+    if (ctx?.waitUntil) ctx.waitUntil(tick); else await tick;
     await workerScheduled(event, env);
   },
 };
