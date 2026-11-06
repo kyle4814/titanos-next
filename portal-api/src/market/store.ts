@@ -1,4 +1,5 @@
 import type { Obs, Clawback } from "./attribution.ts";
+import type { DisputeCase } from "./dispute.ts";
 // C4 marketplace state. MemoryMarketStore is the test/local adapter; a D1 adapter is NOT BUILT (migration 0004 defines
 // the tables, state kept as one JSON row per job/pro like the owner seat). Until then the Worker fails closed.
 export type JobStatus = "awaiting_funds" | "open" | "claimed" | "delivered" | "reproved" | "paid" | "disputed" | "cancelled" | "refunded";
@@ -17,6 +18,7 @@ export interface Job {
   // F-C4 attribution: observations of the check (who saw it fixed, and when), payer/email link keys for wash-trade detection, the clawback ledger, and a denied-card memory.
   observations?: Obs[]; attribution?: { verdict: "withheld"; reason: string; evidenceAt?: number; evidenceSrc?: string; at: number };
   payerFp?: string; proPayerFp?: string; ownerEmailDomain?: string; proEmailDomain?: string;
+  disputeCase?: DisputeCase; disputeArchive?: DisputeCase[];   // f99: the verified machine (dispute.ts) is the record; `dispute` above stays the owner-facing view
   clawbacks?: Clawback[]; payoutDenied?: { at: number; cardId: string; proofKey: string };
   regressedAt?: number; warrantyChecks: number; warrantyOkAt?: number; events: { at: number; kind: string; detail: string }[];
 }

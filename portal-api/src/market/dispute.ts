@@ -53,9 +53,10 @@ function append(c: DisputeCase, e: { eventId: string; kind: AuditEntry["kind"]; 
 }
 
 // A dispute opens on a claimed or delivered job whose funds are held. Opening is itself audited.
-export function openDispute(a: { jobId: string; amountCents: number; at: number; actor: string; eventId: string; reason: string; synthetic?: true }): DisputeCase {
+export function openDispute(a: { jobId: string; amountCents: number; at: number; actor: string; eventId: string; reason: string; proofAt?: number; synthetic?: true }): DisputeCase {
   if (!Number.isInteger(a.amountCents) || a.amountCents < 0) throw new Error("amount_invalid");
-  const c: DisputeCase = { jobId: a.jobId, amountCents: a.amountCents, state: "OPEN", openedAt: a.at, actor: a.actor, evidence: [], audit: [], cards: [], ...(a.synthetic ? { synthetic: true as const } : {}) };
+  if (a.proofAt !== undefined && !Number.isFinite(a.proofAt)) throw new Error("proof_at_invalid");   // the warranty clock starts at the job's proof.at
+  const c: DisputeCase = { jobId: a.jobId, amountCents: a.amountCents, state: "OPEN", openedAt: a.at, actor: a.actor, ...(a.proofAt !== undefined ? { proofAt: a.proofAt } : {}), evidence: [], audit: [], cards: [], ...(a.synthetic ? { synthetic: true as const } : {}) };
   append(c, { eventId: a.eventId, kind: "OPEN", from: null, to: "OPEN", at: a.at, actor: a.actor, detail: a.reason, payloadHash: sha(JSON.stringify(["OPEN", a.at, a.actor, a.reason])) });
   return c;
 }
