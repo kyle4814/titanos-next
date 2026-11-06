@@ -12,10 +12,13 @@ export interface ApiKey { id: string; accountId: string; hash: string; scopes: s
 
 export interface CreditEntry { id: string; accountId: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
 export interface CreditOrder { id: string; accountId: string; checkoutId: string; packId: string; credits: number; paid: boolean }
-export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string }
+export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string; kid?: string }
 
 export interface Store {
   // agent door (C7). creditApply must be atomic: a D1 adapter does it with one conditional UPDATE, never read-then-write.
+  // F48 abuse tracing. prefix = first 8 chars of the key ID (never the secret token, never the hash). A D1 adapter indexes substr(id,1,8) (migration 0005).
+  keysByPrefix(prefix: string): Promise<ApiKey[]>;
+  receiptsForKey(keyId: string, limit: number): Promise<AgentReceipt[]>; // newest first
   keyByHash(hash: string): Promise<ApiKey | undefined>;
   creditBalance(accountId: string): Promise<number>;
   creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number): Promise<number | undefined>; // new balance, or undefined if it would go below 0
@@ -95,6 +98,8 @@ export class MemoryStore implements Store {
   async putCard(c: ReviewCard) { this.cards.set(c.id, c); }
   async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
   ledger: CreditEntry[] = []; creditOrders = new Map<string, CreditOrder>(); receipts = new Map<string, AgentReceipt>(); callLog = new Map<string, number[]>(); private ent = 0;
+  async keysByPrefix(p: string) { return [...this.keys.values()].filter((k) => k.id.startsWith(p)); }
+  async receiptsForKey(keyId: string, limit: number) { return [...this.receipts.values()].filter((r) => r.keyId === keyId).sort((a, b) => b.at - a.at).slice(0, limit); }
   async keyByHash(h: string) { return [...this.keys.values()].find((k) => k.hash === h); }
   async creditBalance(id: string) { return this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0); }
   async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {

@@ -8,7 +8,8 @@ import * as mkt from "./market/service.ts";
 import { authenticateKey, handleMcp } from "./agent/mcp.ts";
 import { startTopup, handleCreditEvent, CREDIT_PACKS } from "./agent/credits.ts";
 import { TOOLS, publicTool } from "./agent/tools.ts";
-import { verifyReceipt } from "./agent/receipt.ts";
+import { verifyWithRing, ringOf } from "./agent/receipt.ts";
+import { traceKeyPrefix, isOperator } from "./agent/keytrace.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
 
@@ -80,7 +81,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (path === "/agent/receipts/verify" && m === "POST") { // stateless: anyone holding a receipt can check it; nothing is looked up or revealed
     const r = (await body(req)).receipt as any;
     const shape = r && typeof r === "object" && ["id", "tool", "keyId", "accountId", "inputSha", "outputSha", "mode", "sig"].every((k) => typeof r[k] === "string") && typeof r.at === "number" && typeof r.credits === "number";
-    return json({ valid: shape ? await verifyReceipt(d.receiptSecret ?? "", r) : false });
+    return json({ valid: shape ? await verifyWithRing(ringOf(d), r) : false });
   }
   if (path === "/mcp") {
     if (m === "GET") return json({ error: "use_post", hint: "MCP over HTTP: POST JSON-RPC 2.0 with Authorization: Bearer tk_..." }, 405);
@@ -121,6 +122,11 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     return json({ result: credit ?? (await svc.handleStripeEvent(d, ev)) });
   }
   if (path === "/market/leaderboard" && m === "GET") return json(await mkt.leaderboard(d));   // public, pseudonymous, proven fixes only
+  if (seg[0] === "internal" && seg[1] === "keys" && seg[2] === "trace" && seg.length === 3 && m === "GET") { // operator abuse tracing: key prefix -> account -> recent calls
+    if (!isOperator(d, req.headers.get("x-operator-secret"))) throw new HttpError(401, "unauthenticated");
+    const u = new URL(req.url);
+    return json(await traceKeyPrefix(d, u.searchParams.get("prefix") ?? "", { accountId: u.searchParams.get("account") ?? undefined }));
+  }
   if (seg[0] === "internal" && seg[1] === "market") {   // Kyle's tap and the cron: guarded by the internal secret, never a session
     if (!mkt.isInternal(d, req.headers.get("x-internal-secret"))) throw new HttpError(401, "unauthenticated");
     if (seg[2] === "cards" && seg.length === 3 && m === "GET") return json({ cards: await d.market!.store.openCards() });
