@@ -1,5 +1,5 @@
 // D1 adapter for the plan-bearing chain (f172): accounts, purchases, subscriptions (with PlanState in subscriptions.plan_json).
-// Invoices are durable too (f192), and so are held webhook facts (f194). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
+// Invoices are durable too (f192), and so are held webhook facts (f194) and the webhook event claim (f197). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
 // events, cards, keys) lives on the web/f13_c2_d1store stack and has not been merged into this base. This class exists
 // so plan, period and minimum term can be proven to survive a restart against the real schema; it is not wired into the Worker.
 import { MemoryStore, type Account, type Invoice, type Purchase, type Subscription } from "./store.ts";
@@ -57,6 +57,16 @@ export class D1PlanStore extends MemoryStore {
   }
   override async invoicesFor(id: string) { return (await this.many("SELECT * FROM invoices WHERE account_id = ? ORDER BY rowid", id)).map(toInvoice); }
   override async invoiceById(id: string) { const r = await this.one("SELECT * FROM invoices WHERE id = ?", id); return r && toInvoice(r); }
+  // f203. putInvoiceOnce is ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (invoice for this purchase); changes === 1 means THIS call wrote the invoice.
+  override async purchaseInvoiced(id: string) { return (await this.one("SELECT 1 AS x FROM invoices WHERE purchase_id = ? LIMIT 1", id)) !== undefined; }
+  override async putInvoiceOnce(i: Invoice) {
+    const r = await this.exec("INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)",
+      i.id, i.accountId, i.purchaseId ?? null, i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId, i.purchaseId ?? null);
+    return r.meta.changes === 1;
+  }
+  override async paidPurchasesBefore(cutoff: number) {
+    return (await this.many("SELECT * FROM purchases p WHERE p.paid_at IS NOT NULL AND p.paid_at <= ? AND p.status IN ('paid', 'refunded') AND NOT EXISTS (SELECT 1 FROM invoices i WHERE i.purchase_id = p.id) ORDER BY p.paid_at, p.id", cutoff)).map(toPurchase);
+  }
   // Gap-free and atomic: one UPSERT...RETURNING on the single-row counter. Survives a restart; two stores over one D1 never repeat a number.
   override async nextInvoiceNumber() {
     const r = await this.one("INSERT INTO invoice_seq (id, n) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET n = n + 1 RETURNING n");
@@ -68,6 +78,13 @@ export class D1PlanStore extends MemoryStore {
   override async takeFacts(key: string) {
     const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
     return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
+  }
+  // Webhook event claim (f197). stripe_events (id PRIMARY KEY) already exists in migration 0002, so no new migration is needed. ONE statement: INSERT OR IGNORE, then
+  // meta.changes === 1 means THIS call inserted the row. Two deliveries of one event id, on any number of store objects over one D1, cannot both see 1 (a SELECT then INSERT could).
+  // The claim is durable the moment it is written: see test/claim_contract.test.ts for the chosen replay-after-crash behaviour (at-most-once, documented).
+  override async claimEvent(id: string) {
+    const r = await this.exec("INSERT OR IGNORE INTO stripe_events (id, at) VALUES (?, ?)", id, Date.now());
+    return r.meta.changes === 1;
   }
   // PII goes, the financial rows stay (same rule as MemoryStore). The in-memory parts (domains, keys, sessions) go through super.
   override async anonymiseAccount(id: string, at: number) {
