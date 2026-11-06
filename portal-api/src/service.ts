@@ -10,7 +10,8 @@ export class MockMailer implements Mailer { outbox: { to: string; subject: strin
 import type { OwnerStore, ZoneProvider } from "./owner/engine.ts";
 import type { DohFetch } from "../../lib/guestscan/scan.ts";
 export interface OwnerDeps { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider }
-export interface Deps { owner?: OwnerDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
+import { marketExport, hasActiveMarketJobs, type MarketDeps } from "./market/service.ts";
+export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
@@ -198,10 +199,12 @@ export async function exportData(d: Deps, a: Account) {
     domains: (await d.store.domainsFor(a.id)).map((x) => ({ domain: x.domain, verified: !!x.verifiedAt })),
     purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), invoices: await d.store.invoicesFor(a.id),
     apiKeys: await listKeys(d, a),
+    ...(await marketExport(d, a)),
   };
 }
 export async function deleteAccount(d: Deps, a: Account, confirm: unknown) {
   if (confirm !== "DELETE") throw new HttpError(400, "confirmation_required");
+  if (await hasActiveMarketJobs(d, a)) throw new HttpError(409, "market_jobs_active");   // funds are held against these: settle, cancel or dispute first
   for (const s of await d.store.subscriptionsFor(a.id)) if (!s.cancelledAt && !s.cancelAt) await cancelSubscription(d, a, s.id);
   await d.store.anonymiseAccount(a.id, d.now());
   return { status: "deleted" as const, retained: "invoices and payment records, kept without your email as required by tax law" };
