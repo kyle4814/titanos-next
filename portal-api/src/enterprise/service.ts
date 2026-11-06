@@ -9,6 +9,7 @@ import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordC
 import { grade, summarise } from "./estate.ts";
 import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
+import { releaseHeldPayout, refundHeldPayout } from "./payout_release.ts";
 import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
@@ -87,6 +88,22 @@ export async function opSweepPayouts(d: Deps, b: Record<string, unknown>) {
   const r = await sweepStuckPayouts({ store: c.store, lookup: c.payoutLookup, now: d.now(), tenantId: tenantParam(b.tenantId) }, boundedInt(b.maxAgeMs, SWEEP_MAX_AGE_MS, 0, 7 * DAY));
   const count = (a: string) => r.items.filter((i) => i.action === a).length;
   return { examined: r.examined, skippedYoung: r.skippedYoung, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
+}
+// C8 f54: release / refund of a HELD payout. Never touches the transfer adapter. tenantId is mandatory in the body.
+export async function opReleaseRefund(d: Deps, payoutId: string, action: "release" | "refund", b: Record<string, unknown>) {
+  const c = ent(d);
+  const tid = tenantParam(b.tenantId);
+  if (!tid || !tenantParam(payoutId)) throw new HttpError(400, "invalid_input");
+  if (b.note !== undefined && typeof b.note !== "string") throw new HttpError(400, "invalid_input");
+  const env = { store: c.store, now: d.now(), newId: () => randomToken("led", 8) };
+  const r = await (action === "release" ? releaseHeldPayout : refundHeldPayout)(env, { payoutId, tenantId: tid, note: b.note as string | undefined });
+  if (!r.ok) {
+    if (r.refused === "not_found") throw nf();
+    throw new HttpError(409, r.refused);
+  }
+  if (r.outcome === "applied") await audit(d, tid, "operator", `payout_${action}`, payoutId);
+  const p = r.payout;
+  return { ok: true, outcome: r.outcome, action, payout: { id: p.id, tenantId: p.partnerId, status: p.status, amountCents: p.amountCents, attempts: p.attempts ?? 0, reason: p.reason, operatorNote: p.operatorNote } };
 }
 export async function provisionTenant(d: Deps, b: Record<string, unknown>) {
   const e = ent(d).store;

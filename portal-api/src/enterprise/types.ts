@@ -28,8 +28,8 @@ export interface LedgerEntry {
   invoiceId?: string; sourceKey?: string; sourceLabel?: string; rateBps?: number; rateVersion?: string; payoutId?: string;
 }
 export interface Referral { accountId: string; partnerId: string; claimedAt: number }
-export type PayoutStatus = "pending_approval" | "sending" | "paid" | "failed" | "rejected" | "approved_retry" | "held";
-export interface Payout { id: string; partnerId: string; amountCents: number; status: PayoutStatus; createdAt: number; providerRef?: string; reason?: string; sendingAt?: number; attempts?: number; heldAt?: number }
+export type PayoutStatus = "pending_approval" | "sending" | "paid" | "failed" | "rejected" | "approved_retry" | "held" | "refunded";
+export interface Payout { id: string; partnerId: string; amountCents: number; status: PayoutStatus; createdAt: number; providerRef?: string; reason?: string; sendingAt?: number; attempts?: number; heldAt?: number; releasedAt?: number; refundedAt?: number; operatorNote?: string }
 
 export interface RateTable { version: string; baseBps: number; tiers: { minActive: number; bps: number }[] }
 export interface PayoutProvider { transfer(p: { partnerId: string; accountRef: string; amountCents: number; idempotencyKey: string }): Promise<{ ref: string }> }
