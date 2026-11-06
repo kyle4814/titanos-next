@@ -1,0 +1,21 @@
+{
+  "asOf": "2026-11-06",
+  "system": "titanos.tech site source (security, privacy, layout) read on the date shown",
+  "securityTxt": {
+    "contact": "mailto:kyle@titanos.tech",
+    "expires": "2027-09-30T00:00:00.000Z",
+    "policy": "https://titanos.tech/security",
+    "preferredLanguages": "en",
+    "canonical": "https://titanos.tech/.well-known/security.txt",
+    "contactSource": "app/layout.tsx",
+    "contactNeedle": "kyle@titanos.tech"
+  },
+  "sections": [
+    { "id": "report", "heading": "Report a security problem", "body": "If you think you have found a weakness in this website or the customer portal on it, email kyle@titanos.tech. Say what you found, the page or address it is on, and the steps to see it. A short note is fine.", "source": "app/layout.tsx", "needle": "kyle@titanos.tech" },
+    { "id": "scope", "heading": "What is in scope", "body": "In scope: titanos.tech and the customer portal on it. Out of scope: other people's systems, services we rely on (for example our payment provider, our hosting and our DNS provider), social engineering of our people, physical access, and anything that degrades the site for other visitors.", "source": "app/security/page.tsx", "needle": "We never scan or probe a system that has not agreed to it." },
+    { "id": "rules", "heading": "How to test", "body": "Use your own account and your own data. Stop as soon as you reach anyone else's data and tell us what you saw. Do not keep, copy or share it. Do not run automated floods or denial of service tests.", "source": "app/security/page.tsx", "needle": "Your private details stay private." },
+    { "id": "harbour", "heading": "Good faith research", "body": "We welcome good faith research that stays inside this scope, and we do not intend to take action against someone who reports a problem this way. This is a statement of intent, not legal advice, and it does not bind any other organisation or authority. We do not run a paid reward programme.", "source": "lib/site-data/disclosure.json", "needle": "we do not intend to take action against someone who reports a problem this way" },
+    { "id": "targets", "heading": "How quickly we aim to reply", "body": "TARGET, not a measurement: we aim to acknowledge a report within 3 business days and to send a first assessment within 10 business days. We have not measured our reply times yet, so these are goals and not a record.", "source": "lib/site-data/disclosure.json", "needle": "We have not measured our reply times yet" },
+    { "id": "claims", "heading": "What this page does not claim", "body": "This page describes how to reach us and how we intend to respond. It makes no claim about outside review, rating or accreditation of our systems.", "source": "lib/site-data/disclosure.json", "needle": "It makes no claim about outside review" }
+  ]
+}
