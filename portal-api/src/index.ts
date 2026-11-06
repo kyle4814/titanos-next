@@ -3,6 +3,7 @@ import * as svc from "./service.ts";
 import { HttpError, type Deps } from "./service.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
+import * as own from "./owner/service.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -79,6 +80,15 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (path === "/domains" && m === "POST") return json(await svc.addDomain(d, a, (await body(req)).domain), 201);
   if (path === "/domains" && m === "GET") return json({ domains: (await d.store.domainsFor(a.id)).map((x) => ({ id: x.id, domain: x.domain, verified: !!x.verifiedAt })) });
   if (seg[0] === "domains" && seg[2] === "verify" && m === "POST") return json(await svc.verifyDomain(d, a, seg[1]));
+  if (seg[0] === "app" && seg[1] === "domains") {
+    if (seg.length === 2 && m === "GET") return json(await own.listDomains(d, a));
+    const id = seg[2];
+    if (seg.length === 3 && m === "GET") return json(await own.getOverview(d, a, id));
+    if (seg[3] === "scan" && m === "POST") return json(await own.scan(d, a, id));
+    if (seg[3] === "fix" && m === "POST") return json(await own.fix(d, a, id, (await body(req)).check));
+    if (seg[3] === "fixes" && seg[5] === "undo" && m === "POST") return json(await own.undo(d, a, id, seg[4]));
+    if (seg[3] === "report" && m === "GET") { const r = await own.getReport(d, a, id); return new URL(req.url).searchParams.get("format") === "md" ? new Response(r.markdown, { headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-store" } }) : json(r.json); }
+  }
   if (path === "/checkout" && m === "POST") { const b = await body(req); return json(await svc.startCheckout(d, a, b.product, b.domain), 201); }
   if (path === "/billing" && m === "GET") return json({ purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), portalUrl: a.stripeCustomerId ? await d.billing.portalUrl(a.stripeCustomerId, d.siteOrigin + "/app/billing") : null });
   if (path === "/invoices" && m === "GET") return json({ invoices: await svc.listInvoices(d, a) });
