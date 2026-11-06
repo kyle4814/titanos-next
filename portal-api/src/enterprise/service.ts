@@ -7,10 +7,12 @@ import { ROLES, ROLE_RANK, type Asset, type Brand, type IdpVerifier, type Payout
 import { SsoError } from "./sso.ts";
 import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement, type SelfDealCheck } from "./share.ts";
 import { grade, summarise } from "./estate.ts";
+import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
 export interface EntContext {
   store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string; selfDeal?: SelfDealCheck;
+  approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
 const DAY = 86_400_000;
 export const SSO_STATE_TTL_MS = 10 * 60_000, INVITE_TTL_MS = 7 * DAY, MAX_ASSETS = 2000, MAX_OPEN_SSO_STATES = 1000, MAX_OPEN_SSO_STATES_PER_CLIENT = 20, MAX_PENDING_INVITES = 100;
@@ -467,20 +469,17 @@ export async function listPayouts(d: Deps, ctx: Ctx, pid: string) {
   await access(d, ctx, pid, "analyst", "partner");
   return { payouts: (await ent(d).store.payoutsOf(pid)).map((p) => ({ id: p.id, amountCents: p.amountCents, status: p.status, createdAt: p.createdAt })) };
 }
+// The internal approve/reject route and the card tap share ONE core (payout_decision.ts). Legacy contract kept: a second tap is 409 not_pending.
 export async function decidePayout(d: Deps, id: string, approve: boolean) {
-  const c = ent(d), p0 = await c.store.payoutById(id);
-  if (!p0) throw new HttpError(409, "not_pending");
-  const t = (await c.store.tenantById(p0.partnerId))!;
-  if (approve && !t.payoutAccount) throw new HttpError(409, "payout_account_missing");
-  // compare-and-set: of two concurrent decisions exactly one wins, the other sees not_pending
-  const won = await c.store.transitionPayout(id, "pending_approval", approve ? "sending" : "rejected");
-  if (!won) throw new HttpError(409, "not_pending");
-  if (!approve) {
-    await c.store.addLedger({ id: randomToken("led", 8), uniq: `payout_reversal:${id}`, partnerId: won.partnerId, kind: "payout_reversal", amountCents: won.amountCents, at: d.now(), availableAt: d.now(), payoutId: id });
-    return { status: "rejected" };
-  }
-  await transfer(d, id, t.payoutAccount!);
-  return { status: (await c.store.payoutById(id))!.status };
+  const r = await decideCard(d, { payoutId: id, decision: approve ? "approve" : "deny", reason: approve ? undefined : "rejected by operator" });
+  if (!r.ok) throw new HttpError(409, r.refused === "payout_account_missing" ? "payout_account_missing" : r.refused === "expired" ? "card_expired" : "not_pending");
+  if (r.outcome === "replayed") throw new HttpError(409, "not_pending");
+  return { status: r.decision === "deny" ? "rejected" : r.state };
+}
+// The card tap (f31 card id, tenant-scoped). Mock transfer adapter only in this tree; idempotent on repeat taps.
+export async function decideCard(d: Deps, req: DecideReq) {
+  const c = ent(d);
+  return decidePayoutRecorded({ store: c.store, approvals: c.approvals, transfer: c.payouts, now: d.now(), newId: () => randomToken("led", 8) }, req);
 }
 
 // ---- hooks the C2 service calls ----
