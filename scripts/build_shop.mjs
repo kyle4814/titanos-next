@@ -6,6 +6,7 @@ import { pathToFileURL, fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
 import { buildShelves } from "../lib/shop/catalogue.ts";
 import { gradeAll, visibleShelves } from "../lib/shop/grader.ts";
+import { loadConfigs } from "../lib/shop/loader.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const offers = [];
@@ -17,7 +18,9 @@ for (const f of readdirSync(dir).filter((x) => x.endsWith(".ts")).sort()) {
 const products = (await import(pathToFileURL(join(root, "lib/products/products.ts")).href)).PRODUCTS;
 const links = JSON.parse(readFileSync(join(root, "lib/offers/links.json"), "utf8"));
 const cfgPath = join(root, "lib/shop/generator_configs.json"); // real configs land here; absent = none yet
-const configs = existsSync(cfgPath) ? JSON.parse(readFileSync(cfgPath, "utf8")) : [];
+const loaded = loadConfigs(existsSync(cfgPath) ? JSON.parse(readFileSync(cfgPath, "utf8")) : []);
+const configs = loaded.accepted;
+if (loaded.rejected.length) { console.error("REJECTED configs:", JSON.stringify(loaded.rejected)); process.exit(1); } // a rejected real config stops the build loudly
 
 const graded = gradeAll(buildShelves({ offers, products, configs, links }));
 const shown = visibleShelves(graded);
