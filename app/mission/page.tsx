@@ -71,7 +71,7 @@ export default function Mission() {
         <div className="w2a-measure" style={WRAP}>
           <h2 style={H}>Where the money goes as we grow</h2>
           <p style={BODY}>
-            For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b>: compute,
+            For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b> (PROPOSED: the founder&apos;s stated plan, not a result and not a guarantee): compute,
             people, products and new countries, so the mission arrives years sooner. The founder lives on the rest. Once
             TITANOS is established as a global company, a growing share goes to the people below.
           </p>
@@ -89,8 +89,8 @@ export default function Mission() {
 
           <h2 style={H}>Why the numbers can get this big</h2>
           <p style={BODY}>
-            The world economy is about US$110 trillion a year. At the usual 3% growth it doubles in about 23 years; at 7%,
-            in about 10. Every extra point of productivity growth, held over time, is worth more than US$1 trillion a year.
+            The world economy is about US$110 trillion a year (ESTIMATE, IMF World Economic Outlook, nominal world GDP). At 3% growth it
+            doubles in about 23 years; at 7%, in about 10 (MODELLED arithmetic). Every extra point of productivity growth, held over time, is worth more than US$1 trillion a year.
             AI that gives people their hours back moves that growth rate, and that is the engine behind the giving.
           </p>
 
