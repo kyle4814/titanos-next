@@ -10,7 +10,10 @@ import type { D1Like, D1Statement } from "../src/env.ts";
 const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
 export const MIGRATIONS = readdirSync(dir).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort();
 
-const tick = async () => { for (let i = Math.floor(Math.random() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
+// Interleaving source: Math.random by default; a suite may swap in a seeded generator (setFakeD1Rand) so a race schedule is replayable.
+let rand: () => number = Math.random;
+export const setFakeD1Rand = (f: (() => number) | undefined) => { rand = f ?? Math.random; };
+const tick = async () => { for (let i = Math.floor(rand() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
 
 export class FakeD1 implements D1Like {
   db = new DatabaseSync(":memory:");
