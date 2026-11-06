@@ -3,7 +3,7 @@ import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard,
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
 import type { Store, Account, Purchase, Invoice, Subscription } from "./store.ts";
-import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
+import { normaliseEmail, randomToken, sha256Hex, HttpError } from "./util.ts";
 import { isTier, periodFromStripe, initPlanFromStripe, observePeriod, type StripePeriod, type Tier } from "./plan_change.ts";
 import { changePlan } from "./plan_change_service.ts";
 
@@ -11,7 +11,8 @@ export interface Mailer { send(to: string, subject: string, text: string): Promi
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
 
 export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; log?: (line: string) => void }
-export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
+// HttpError lives in util.ts (neutral leaf) so service.ts and plan_change_service.ts do not import each other at runtime. Re-exported for existing importers.
+export { HttpError };
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
 

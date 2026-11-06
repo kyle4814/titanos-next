@@ -26,3 +26,6 @@ export function normaliseEmail(s: unknown): string | null {
   const e = s.trim().toLowerCase();
   return e.length <= 254 && EMAIL_RE.test(e) ? e : null;
 }
+
+/** Shared by service.ts and plan_change_service.ts; here so neither imports the other at runtime. */
+export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
