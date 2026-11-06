@@ -1,6 +1,8 @@
 import { make } from "./harness.ts";
 import { MemoryZone } from "../src/owner/dnsw.ts";
-import { MemoryMarketStore } from "../src/market/store.ts";
+import { MemoryMarketStore, type MarketStore } from "../src/market/store.ts";
+import { D1MarketStore } from "../src/market/d1store.ts";
+import { FakeD1 } from "./fake_d1.ts";
 import { MockPayments } from "../src/market/payments.ts";
 import { healthy } from "./owner_harness.ts";
 
@@ -12,7 +14,9 @@ export const FIXED_SPF = "v=spf1 include:_spf.google.com -all";
 export function rig() {
   const h = make();
   const zones = new Map<string, MemoryZone>();
-  const store = new MemoryMarketStore(), payments = new MockPayments();
+  // MARKET_ADAPTER=d1 (set by market_d1_service.test.ts) reruns the whole service suite on the D1 adapter over real SQLite.
+  // FKs are OFF there because accounts live in the C2 MemoryStore in this rig; the contract suite runs with FKs ON.
+  const store: MarketStore = (globalThis as { MARKET_ADAPTER?: string }).MARKET_ADAPTER === "d1" ? new D1MarketStore(new FakeD1({ fk: false })) : new MemoryMarketStore(), payments = new MockPayments();
   h.deps.market = { store, payments, doh: (dom) => { const z = zones.get(dom); if (!z) throw new Error("no zone " + dom); return z.doh; }, internalSecret: INTERNAL };
   const zone = (dom: string, w = faulty(dom)) => { const z = new MemoryZone(w); zones.set(dom, z); return z; };
   const fix = (dom: string) => { zones.get(dom)!.world.txt![dom] = [FIXED_SPF]; };
