@@ -14,7 +14,7 @@ const sectorRows = sectors.map((s) => ({
   slug: s.slug, name: s.name, point: s.point, problem: s.problem,
   value: s.fact.value, label: s.fact.label, note: s.fact.note, source: s.fact.source ?? "", source_url: s.fact.sourceUrl ?? "",
 }));
-const claimRows = proof.stars.map((s) => ({ id: s.id, group: s.group, display: s.display, caption: s.caption, label: s.label, source: s.source, date: s.date, method: s.method }));
+const claimRows = proof.stars.map((s) => ({ id: s.id, group: s.group, display: s.display, caption: s.caption, label: s.label, system: s.system, source: s.source, date: s.date, method: s.method }));
 
 const out = {
   "public/data/sector-index.json": JSON.stringify({ dataset: "Sector Index", compiled: meta.compiled, system: meta.system, licence: meta.licence, rows: sectorRows }, null, 1) + "\n",
