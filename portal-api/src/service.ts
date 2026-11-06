@@ -177,7 +177,8 @@ async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId:
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-  await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+  // f190: exactly one first invoice per purchase. Two paid deliveries can both pass the pending guard; the claim is insert-if-absent (atomic), so only one issues
+  if (await d.store.claimEvent(`first_invoice:${pur.id}`)) await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on

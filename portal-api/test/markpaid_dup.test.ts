@@ -53,6 +53,8 @@ export async function runDup(m: M, kind: "memory" | "d1", seed: number) {
   const left = await raw.takeFacts("sub:sub_dup");
   if (left.length) bad.push(`I4 ${left.length} held fact(s) orphaned`);
   if (created !== 1) bad.push(`I5 ${created} rows created`);
+  const invs = (await raw.invoicesFor(acc.id)).length; // f190: one purchase, one tax invoice, however many paid deliveries race
+  if (invs !== 1) bad.push(`I6 ${invs} invoices issued for one purchase`);
   return { bad, creates, raced: creates > 1 };
 }
 async function all(m: M, kind: "memory" | "d1") { const bad: string[] = []; let raced = 0; for (let s = 1; s <= MD_SCHEDULES; s++) { const r = await runDup(m, kind, s); if (r.raced) raced++; for (const b of r.bad) bad.push(`${kind} seed ${s}: ${b}`); } return { bad, raced }; }
