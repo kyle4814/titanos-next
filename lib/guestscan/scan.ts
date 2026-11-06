@@ -4,6 +4,7 @@
 // nothing on the owner's servers is touched.
 //
 // Rule kept from SpoofGuard: a failed read is UNKNOWN, never "absent".
+import { spfNestedLookups, dohSpfResolver } from "./spfnest.ts";
 
 export type Status = "PASS" | "WARN" | "FAIL" | "UNKNOWN";
 export interface Finding {
@@ -94,7 +95,16 @@ async function spf(domain: string, f: DohFetch): Promise<Finding> {
   const i = spfInfo(s);
   const a = i.allTerm;
   if (i.unknown.length) return F("SPF", "FAIL", `SPF has terms receivers cannot read (${i.unknown.join(" ")}): a permanent error, so SPF is ignored: ${s}`, "Remove or correct the unknown terms so the record uses only valid SPF mechanisms.");
-  if (i.lookups > SPF_LOOKUP_LIMIT) return F("SPF", "FAIL", `SPF needs ${i.lookups} DNS lookups, over the limit of ${SPF_LOOKUP_LIMIT}: receivers treat it as a permanent error and ignore it: ${s}`, "Cut the record to 10 lookups or fewer: remove unused senders or replace includes with ip4/ip6 ranges.");
+  // F38: the count is the NESTED walk (includes of includes), not just this record's own terms. Only walked when
+  // there is something to nest into. UNKNOWN (failed lookup, depth or call cap) falls back to the direct count.
+  let lookups = i.lookups;
+  if (i.terms.some((t) => /^[+\-~?]?(include:|redirect=)/i.test(t))) {
+    const live = dohSpfResolver(f); let rootSeen = false; // the root TXT was already read above: do not fetch it twice
+    const n = await spfNestedLookups(domain, (type, name) => (!rootSeen && type === "TXT" && name === domain ? (rootSeen = true, Promise.resolve({ status: "ok" as const, records: recs })) : live(type, name)));
+    if (n.state === "OVER_LIMIT" && n.cycle) return F("SPF", "FAIL", `SPF includes loop back on themselves (${n.lookups} DNS lookups counted before the loop): receivers never finish evaluating it and treat it as a permanent error: ${s}`, "Remove the circular include so every include chain ends in plain ip4/ip6 ranges, and keep the total at 10 lookups or fewer.");
+    if (n.state === "OVER_LIMIT") lookups = Math.max(lookups, n.lookups);
+  }
+  if (lookups > SPF_LOOKUP_LIMIT) return F("SPF", "FAIL", `SPF needs ${lookups} DNS lookups, over the limit of ${SPF_LOOKUP_LIMIT}: receivers treat it as a permanent error and ignore it: ${s}`, "Cut the record to 10 lookups or fewer: remove unused senders or replace includes with ip4/ip6 ranges.");
   if (i.redirect && a) return F("SPF", "FAIL", `SPF has both redirect= and ${a}: the redirect is ignored, so senders behind it are not authorised: ${s}`, "Remove the all mechanism so the redirect is used, or remove the redirect= and list the senders directly.");
   if (a === "+all" || a === "all") return F("SPF", "FAIL", `SPF authorises ALL senders (${a}): worse than no SPF: ${s}`, "Change the SPF record's ending to -all (hard fail). Never use +all.");
   if (i.ptr) return F("SPF", "WARN", `SPF uses the ptr mechanism, which is slow, unreliable and deprecated (RFC 7208): ${s}`, "Replace ptr with explicit ip4/ip6 ranges or includes.");
