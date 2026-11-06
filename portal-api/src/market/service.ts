@@ -9,6 +9,7 @@ import { fixFor } from "../../../lib/guestscan/fixes.ts";
 import type { JobPayments } from "./payments.ts";
 import { type Job, type MarketCard, type MarketStore, type ProProfile, type Tier } from "./store.ts";
 import { rankFor, boardOrder, WARRANTY_DAYS } from "./rank.ts";
+import { openDispute, importPaid, apply as applyDispute } from "./dispute.ts";
 import { judgeAttribution, clawbackFor, mayRaisePayoutCard, proofKey, emailDomain } from "./attribution.ts";
 import { randomToken, timingSafeEqual } from "../util.ts";
 
@@ -217,11 +218,20 @@ export async function dispute(d: Deps, a: Account, id: string, reason: unknown) 
   if (text.length < 5) throw new HttpError(400, "reason_required");
   const card: MarketCard = { id: randomToken("mc", 8), kind: "dispute", jobId: j.id, reason: text, createdAt: d.now(), resolved: false };
   const prior = j.status as "claimed" | "delivered";
+  j.disputeCase = openDispute({ jobId: j.id, amountCents: j.priceCents, at: d.now(), actor: a.id, eventId: `open_${j.id}_${d.now()}`, reason: text, proofAt: j.proof?.at });
   j.status = "disputed"; j.dispute = { at: d.now(), by: a.id, reason: text, priorStatus: prior, cardId: card.id }; j.updatedAt = d.now(); ev(j, d.now(), "disputed", "funds stay held; payout is frozen");
   if (!(await m.store.transition([prior], j))) throw new HttpError(409, "state_changed");
   await m.store.putCard(card);
   return presentOwner(j);
 }
+// f99: drive the case through the machine. Evidence is the dispute reason (the machine needs EVIDENCE before a resolution); an illegal edge throws and nothing is written.
+function closeCase(d: Deps, j: Job, kind: "RESOLVE_REFUND" | "RESOLVE_PAID") {
+  let c = j.disputeCase; if (!c) return;   // legacy job disputed before f99: no case, old behaviour
+  const at = Math.max(d.now(), c.audit[c.audit.length - 1].at);
+  if (c.state === "OPEN") { const r = applyDispute(c, { eventId: `ev_${j.id}`, kind: "SUBMIT_EVIDENCE", at, actor: "system", detail: j.dispute?.reason ?? "dispute reason" }); if (!r.ok) throw new HttpError(409, r.reason); c = r.case; }
+  const r = applyDispute(c, { eventId: `res_${j.id}`, kind, at, actor: "kyle" }); if (!r.ok) throw new HttpError(409, r.reason); j.disputeCase = r.case;
+}
+function archiveCase(j: Job) { if (j.disputeCase) { (j.disputeArchive ??= []).push(j.disputeCase); j.disputeCase = undefined; } }   // resumed: the job is back in play, the audit is kept
 // Internal (Kyle's tap, GATE1/GATE3). A resolution can refund the owner or put the job back in play. There is NO outcome that pays the pro:
 // money to a pro only ever flows through releasePayout, which needs a re-scan PASS.
 export async function resolveCard(d: Deps, cardId: string, outcome: string) {
@@ -230,8 +240,8 @@ export async function resolveCard(d: Deps, cardId: string, outcome: string) {
   const j = await need(m, c.jobId);
   if (c.kind === "dispute") {
     if (j.status !== "disputed") throw new HttpError(409, "state_changed");
-    if (outcome === "refund_owner") { await refundAndClose(d, j, "refunded", "dispute resolved: owner refunded"); }
-    else if (outcome === "resume") { j.status = j.dispute!.priorStatus; j.dispute!.resolvedAt = d.now(); j.dispute!.outcome = "resume"; await m.store.transition(["disputed"], j); }
+    if (outcome === "refund_owner") { closeCase(d, j, "RESOLVE_REFUND"); await refundAndClose(d, j, "refunded", "dispute resolved: owner refunded"); }
+    else if (outcome === "resume") { archiveCase(j); j.status = j.dispute!.priorStatus; j.dispute!.resolvedAt = d.now(); j.dispute!.outcome = "resume"; await m.store.transition(["disputed"], j); }
     else throw new HttpError(400, "invalid_outcome");
   } else if (c.kind === "clawback_review") {
     // Ledger only: approving marks the entry as awaiting a transfer. The money movement itself is a separate GATE1 act, never made here.
@@ -268,6 +278,12 @@ export async function sweep(d: Deps) {
 // F-C4(c): a regression after pay writes ONE ledger entry and raises ONE GATE1 card. No money moves in this file for a clawback.
 async function recordClawback(m: MarketDeps, j: Job, now: number) {
   const cb = clawbackFor(j, now); if (!cb) return;
+  // f99: the machine must agree (paid job enters RESOLVED_PAID at proof.at, REGRESSION inside the window); it keeps the hash-chained record. Disagreement writes nothing.
+  const paidAt = Math.max(j.payout?.at ?? j.proof!.at, j.proof!.at);
+  const imp = importPaid({ jobId: j.id, amountCents: cb.amountCents, proofAt: j.proof!.at, paidAt, actor: j.proAccountId!, eventId: `paid_${j.id}` });
+  const reg = applyDispute(imp, { eventId: `reg_${j.id}`, kind: "REGRESSION", at: Math.max(now, paidAt, j.regressedAt!), actor: "warranty_sweep", regressedAt: j.regressedAt });
+  if (!reg.ok) return;
+  j.disputeCase = reg.case;
   (j.clawbacks ??= []).push(cb); ev(j, now, "clawback_recorded", `ledger entry ${cb.id} for ${cb.amountCents} cents; transfer needs a GATE1 tap`);
   await m.store.putJob(j);
   await m.store.putCard({ id: randomToken("mc", 8), kind: "clawback_review", jobId: j.id, reason: `warranty regression after pay: ${cb.reason}. Ledger entry ${cb.id}, ${cb.amountCents} cents. Approving marks it awaiting transfer; no money moves.`, createdAt: now, resolved: false });
