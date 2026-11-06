@@ -74,6 +74,11 @@ export class D1PlanStore extends MemoryStore {
     if (ids.length === 0) return [];
     return (await this.many(`SELECT * FROM purchases p WHERE p.status = 'paid' AND p.paid_at IS NOT NULL AND ? >= p.paid_at AND p.product_id IN (${ids.map(() => "?").join(",")}) AND NOT EXISTS (SELECT 1 FROM subscriptions s WHERE s.purchase_id = p.id) ORDER BY p.paid_at, p.id`, cutoff, ...ids)).map(toPurchase);
   }
+  override async createSubscription(s: Subscription) {
+    const r = (await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
+      s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan))) as { meta?: { changes?: number } };
+    return Number(r?.meta?.changes ?? 0) === 1;
+  }
   override async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
   override async subscriptionVersioned(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && { sub: toSub(r), version: Number(r.version) }; }
   // Compare-and-set (f175): ONE statement, so the check and the write cannot be separated by another writer. 0 rows changed = lost the race.

@@ -60,6 +60,7 @@ export interface Store {
   subscriptionByPurchase(purchaseId: string): Promise<Subscription | undefined>;
   // f237: purchases with status exactly 'paid', paid at or before `cutoff`, of a subscription-mode product, that have NO subscription row. Oldest first.
   paidWithoutSubscriptionBefore(cutoff: number, subscriptionProductIds: string[]): Promise<Purchase[]>;
+  createSubscription(s: Subscription): Promise<boolean>; // insert-if-absent by id (f183); false = a row already exists and is left untouched. markPaid itself uses putSubscriptionOnce (keyed on purchase id, f237)
   subscriptionById(id: string): Promise<Subscription | undefined>;
   // Optimistic concurrency (f175). Read a COPY plus its version; write it back only if the version is unchanged (false = lost the race, re-read and retry).
   subscriptionVersioned(id: string): Promise<{ sub: Subscription; version: number } | undefined>;
@@ -150,6 +151,7 @@ export class MemoryStore implements Store {
     if (!this.subs.has(s.id) || (this.subVer.get(s.id) ?? 0) !== expectedVersion) return false;
     this.subs.set(s.id, s); this.subVer.set(s.id, expectedVersion + 1); return true;
   }
+  async createSubscription(s: Subscription) { if (this.subs.has(s.id)) return false; this.subs.set(s.id, s); this.subVer.set(s.id, 1); return true; }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
   // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,

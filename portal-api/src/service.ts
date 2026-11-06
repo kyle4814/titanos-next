@@ -128,14 +128,13 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   if (ev.type === "invoice.paid" && o.subscription && (o.billing_reason === "subscription_cycle" || o.billing_reason === "subscription_create")) {
     const subId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription), cycle = o.billing_reason === "subscription_cycle";
     const period = invoicePeriod(o);
-    const sub = await d.store.subscriptionById(subId);
-    if (!sub) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
+    const sub0 = await d.store.subscriptionById(subId);
+    if (!sub0) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
       if (!period) return "ignored";
       await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
       return "handled";
     }
-    await seedPeriod(d, sub, period, !cycle);
-    await d.store.putSubscription(sub);
+    const sub = await updateSubscription(d, subId, async (x, fx) => { await seedPeriod(d, x, period, !cycle, fx); return true; }) ?? sub0;
     if (!cycle) return "handled"; // the first invoice is issued by markPaid
     const pur = await d.store.purchaseById(sub.purchaseId);
     if (pur) await issueInvoice(d, pur, Number(o.amount_paid ?? PRODUCTS[sub.productId].amountCents), ev.id);
@@ -144,7 +143,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
     if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
-    if (!sub.cancelledAt) { sub.cancelledAt = d.now(); await d.store.putSubscription(sub); }
+    await updateSubscription(d, sub.id, (x) => { if (x.cancelledAt) return false; x.cancelledAt = d.now(); return true; }); // CAS: never overwrites a racing changePlan winner
     return "handled";
   }
   d.log?.(`webhook ignored unknown event type ${ev.type} (${ev.id})`);
@@ -203,17 +202,22 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
   } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
 }
 // f245: the winner lost putSubscriptionOnce to a sweep that seeded after the TTL. The sweep's row stands; a cancel this winner took from the held facts (and the sweep never saw) is carried onto it.
-async function mergeLostSeed(d: Pick<Deps, "store">, mine: Subscription) {
+async function mergeLostSeed(d: Deps, mine: Subscription) {
   const theirs = await d.store.subscriptionByPurchase(mine.purchaseId);
-  if (theirs && mine.cancelledAt && !theirs.cancelledAt) await d.store.putSubscription({ ...theirs, cancelledAt: mine.cancelledAt });
+  if (theirs && mine.cancelledAt) await updateSubscription(d, theirs.id, (x) => { if (x.cancelledAt) return false; x.cancelledAt = mine.cancelledAt; return true; }); // f183: CAS, never a blind put over a racing writer
 }
 // f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
-export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, sub: Subscription): Promise<boolean> {
+export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boolean> {
   const late = await d.store.takeFacts(`sub:${sub.id}`);
   if (late.length === 0) return false;
-  if (late.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now();
-  for (const hp of heldPeriods(late).rest) await seedPeriod(d as Deps, sub, hp, false);
-  await d.store.putSubscription(sub);
+  try { // f183: the replay is a CAS update (holds deferred until the write lands); the facts are taken once, so a lost CAS re-applies the same facts to the winner's row
+    const stored = await updateSubscription(d, sub.id, async (x, fx) => {
+      if (late.some((f) => f.kind === "cancel") && !x.cancelledAt) x.cancelledAt = d.now();
+      for (const hp of heldPeriods(late).rest) await seedPeriod(d, x, hp, false, fx);
+      return true;
+    });
+    if (stored) Object.assign(sub, stored); // the caller's object follows the stored truth
+  } catch (e) { for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; } // nothing written: put the facts back, never lose them
   return true;
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
@@ -246,15 +250,38 @@ function heldPeriods(facts: Record<string, unknown>[]): { first?: StripePeriod; 
   const first = ps.find((x) => x.create)?.p; // only a subscription_create invoice may define the start; a held cycle invoice alone never does
   return { first, rest: ps.map((x) => x.p).filter((p) => p !== first) };
 }
+// Side effects of seedPeriod that must happen ONCE even when a CAS retry re-runs it (f183): facts taken from the store are cached across
+// attempts, holds are deferred until the write lands, and facts taken but not used by the winning attempt are put back.
+type SeedFx = { taken?: Record<string, unknown>[]; used: boolean; holds: Record<string, unknown>[] };
+export const SUB_CAS_RETRIES = 8;
+// Read-modify-write on a subscription guarded by compare-and-set (f175 pattern, extended to every writer in f183). mutate gets a COPY and
+// returns false for "nothing to write". A loser re-reads and re-runs mutate against the winner's state; after SUB_CAS_RETRIES losses
+// it throws 409 subscription_conflict having written nothing. Returns the stored subscription (undefined if the row does not exist).
+export async function updateSubscription(d: Deps, id: string, mutate: (sub: Subscription, fx: SeedFx) => boolean | Promise<boolean>): Promise<Subscription | undefined> {
+  const fx: SeedFx = { used: false, holds: [] };
+  for (let attempt = 0; attempt < SUB_CAS_RETRIES; attempt++) {
+    const v = await d.store.subscriptionVersioned(id);
+    if (!v) return undefined;
+    fx.holds = []; fx.used = false;
+    if (!(await mutate(v.sub, fx))) return v.sub;
+    if (!(await d.store.casSubscription(v.sub, v.version))) continue;
+    for (const h of fx.holds) await d.store.holdFact(`sub:${id}`, h);
+    if (fx.taken && !fx.used) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);
+    return v.sub;
+  }
+  throw new HttpError(409, "subscription_conflict");
+}
 // Retainer tiers only (the three AI tiers own a PlanState). No period = no plan: calendar months apply until Stripe's numbers arrive.
 // Only the FIRST period (checkout's expanded subscription, or the subscription_create invoice) may define the start and the grid;
 // a later cycle period seen while no plan exists is held and replayed in order once the first arrives.
-async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefined, create: boolean) {
+async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefined, create: boolean, fx?: SeedFx) {
   if (!p || !isTier(sub.productId)) return;
   if (!sub.plan) {
-    if (!create) { await d.store.holdFact(`sub:${sub.id}`, { kind: "period", start: p.start, end: p.end, create: false }); return; }
+    if (!create) { const f = { kind: "period", start: p.start, end: p.end, create: false }; if (fx) fx.holds.push(f); else await d.store.holdFact(`sub:${sub.id}`, f); return; }
     sub.startedAt = p.start; sub.plan = initPlanFromStripe(sub.productId as Tier, p);
-    for (const hp of heldPeriods(await d.store.takeFacts(`sub:${sub.id}`)).rest) await seedPeriod(d, sub, hp, false);
+    let facts: Record<string, unknown>[];
+    if (fx) { fx.taken ??= await d.store.takeFacts(`sub:${sub.id}`); fx.used = true; facts = fx.taken; } else facts = await d.store.takeFacts(`sub:${sub.id}`);
+    for (const hp of heldPeriods(facts).rest) await seedPeriod(d, sub, hp, false, fx);
     return;
   }
   const r = observePeriod(sub.plan, p);
@@ -303,7 +330,9 @@ export async function cancelSubscription(d: Deps, a: Account, subId: string) {
     periodEnd = r.outcome.effectiveAt;
   } else periodEnd = nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now());
   await d.billing.cancelSubscription(sub.id, true);
-  const fresh = (await d.store.subscriptionById(sub.id)) ?? sub; fresh.cancelAt = periodEnd; await d.store.putSubscription(fresh);
+  // Retainers: changePlan has ALREADY written cancelAt inside its own CAS with the plan, so a second write here could only re-apply a
+  // stale cancelAt over a later upgrade/keep that cleared it (f183). Only the non-retainer path (no PlanState) still sets it, via CAS.
+  if (!isTier(sub.productId)) await updateSubscription(d, sub.id, (x) => { x.cancelAt = periodEnd; return true; });
   return { status: "cancel_scheduled" as const, effectiveAt: periodEnd };
 }
 function addMonths(ms: number, n: number) { const x = new Date(ms); x.setUTCMonth(x.getUTCMonth() + n); return x.getTime(); }
