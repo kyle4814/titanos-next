@@ -1,4 +1,4 @@
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -8,13 +8,16 @@ import { FakeD1, setFakeD1Rand } from "./fake_d1.ts";
 import { MockBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { T0, SECRET } from "./harness.ts";
+import { MiniflareD1 } from "./miniflare_d1.ts";
+// f213: when CONTRACT_LIB=1 another suite imports load()/violations() from here (miniflare_race.test.ts); the FakeD1 tests below must not register again.
+const test: typeof nodeTest = process.env.CONTRACT_LIB === "1" ? ((() => undefined) as unknown as typeof nodeTest) : nodeTest;
 
 // f203: the reconciler for the claimed-but-unfinished window (paid purchase, no invoice). ONE contract (R1..R10) over MemoryStore and D1PlanStore (FakeD1: real SQLite, real
 // migrations), run on the real source AND on source copies carrying one mutation each (the suite must fail on every mutant). SYNTHETIC ids only.
 const SRC = resolve(import.meta.dirname, "../src");
 const GRACE = 10 * 60_000;
 type Mods = { store: any; d1: any; svc: any; rec: any };
-async function load(edits: [string, string, string][] = []): Promise<Mods> {
+export async function load(edits: [string, string, string][] = []): Promise<Mods> {
   const dir = mkdtempSync(join(tmpdir(), "f203-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
   try {
     for (const f of readdirSync(SRC)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(SRC, f), "utf8"));
@@ -27,11 +30,11 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
   } finally { setTimeout(() => rmSync(dir, { recursive: true, force: true }), 50); }
 }
 
-type Kind = "memory" | "d1";
+type Kind = "memory" | "d1" | "mf";
 // A "process" = a fresh store object over the same durable state (memory: the one shared object; there is no other process).
 function world(m: Mods, kind: Kind) {
-  const db = new FakeD1(), shared = new m.store.MemoryStore();
-  const open = (): any => (kind === "d1" ? new m.d1.D1PlanStore(db) : shared);
+  const db: any = kind === "mf" ? new MiniflareD1() : new FakeD1(), shared = new m.store.MemoryStore();
+  const open = (): any => (kind === "d1" || kind === "mf" ? new m.d1.D1PlanStore(db) : shared);
   return { open, db };
 }
 const deps = (m: Mods, store: any, now = T0) => ({ store, billing: new MockBilling(), dns: fakeResolver({}), mailer: new m.svc.MockMailer(), now: () => now, siteOrigin: "https://titanos.tech", webhookSecret: SECRET });
