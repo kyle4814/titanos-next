@@ -13,7 +13,27 @@ export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
 export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
 
+export interface CreditEntry { id: string; accountId: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
+export interface CreditOrder { id: string; accountId: string; checkoutId: string; packId: string; credits: number; paid: boolean }
+export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string }
+
 export interface Store {
+  // agent door (C7). creditApply must be atomic: a D1 adapter does it with one conditional UPDATE, never read-then-write.
+  keyByHash(hash: string): Promise<ApiKey | undefined>;
+  creditBalance(accountId: string): Promise<number>;
+  creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number): Promise<number | undefined>; // new balance, or undefined if it would go below 0
+  creditEntries(accountId: string): Promise<CreditEntry[]>;
+  putCreditOrder(o: CreditOrder): Promise<void>;
+  creditOrderByCheckout(checkoutId: string): Promise<CreditOrder | undefined>;
+  putReceipt(r: AgentReceipt): Promise<void>;
+  receiptById(id: string): Promise<AgentReceipt | undefined>;
+  receiptByIdem(keyId: string, idem: string): Promise<AgentReceipt | undefined>;
+  // Idempotency reservation (F17). Insert-first, atomic: the FIRST caller for (keyId, idem) wins; a live (unexpired) claim is never
+  // stolen; a claim with expiresAt <= now is taken over and KEEPS its original rid (so a debit made by a crashed owner is found, not repeated).
+  idemReserve(keyId: string, idem: string, rid: string, owner: string, now: number, ttlMs: number): Promise<{ won: boolean; rid: string }>;
+  idemRelease(keyId: string, idem: string, owner: string): Promise<void>; // owner-only; frees the key so a failed call can be retried
+  callsSince(keyId: string, sinceMs: number): Promise<number>;
+  noteCall(keyId: string, at: number): Promise<void>;
   accountByEmail(email: string): Promise<Account | undefined>;
   accountById(id: string): Promise<Account | undefined>;
   putAccount(a: Account): Promise<void>;
@@ -97,6 +117,34 @@ export class MemoryStore implements Store {
   async refundCaseById(id: string) { return this.refundCases.get(id); }
   async refundCasesFor(p: string) { return [...this.refundCases.values()].filter((r) => r.purchaseId === p); }
   async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
+  ledger: CreditEntry[] = []; creditOrders = new Map<string, CreditOrder>(); receipts = new Map<string, AgentReceipt>(); callLog = new Map<string, number[]>(); private ent = 0;
+  async keyByHash(h: string) { return [...this.keys.values()].find((k) => k.hash === h); }
+  async creditBalance(id: string) { return this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0); }
+  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
+    // no await between the check and the push: the check-and-write is one synchronous step, so concurrent debits cannot oversell
+    const bal = this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0);
+    if (bal + delta < 0) return undefined;
+    this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at });
+    return bal + delta;
+  }
+  async creditEntries(id: string) { return this.ledger.filter((e) => e.accountId === id); }
+  async putCreditOrder(o: CreditOrder) { this.creditOrders.set(o.id, o); }
+  async creditOrderByCheckout(c: string) { return [...this.creditOrders.values()].find((o) => o.checkoutId === c); }
+  async putReceipt(r: AgentReceipt) { this.receipts.set(r.id, r); }
+  async receiptById(id: string) { return this.receipts.get(id); }
+  async receiptByIdem(keyId: string, idem: string) { return [...this.receipts.values()].find((r) => r.keyId === keyId && r.idem === idem); }
+  idem = new Map<string, { rid: string; owner: string; expiresAt: number }>();
+  async idemReserve(keyId: string, idem: string, rid: string, owner: string, now: number, ttlMs: number) {
+    // synchronous check-and-set (no await between read and write), the in-memory twin of the D1 upsert
+    const k = `${keyId}\u0000${idem}`, cur = this.idem.get(k);
+    if (cur && cur.expiresAt > now) return { won: false, rid: cur.rid };
+    const keep = cur?.rid ?? rid;
+    this.idem.set(k, { rid: keep, owner, expiresAt: now + ttlMs });
+    return { won: true, rid: keep };
+  }
+  async idemRelease(keyId: string, idem: string, owner: string) { const k = `${keyId}\u0000${idem}`; if (this.idem.get(k)?.owner === owner) this.idem.delete(k); }
+  async callsSince(k: string, since: number) { return (this.callLog.get(k) ?? []).filter((x) => x >= since).length; }
+  async noteCall(k: string, at: number) { this.callLog.set(k, [...(this.callLog.get(k) ?? []), at]); }
   async putKey(k: ApiKey) { this.keys.set(k.id, k); }
   async keysFor(id: string) { return [...this.keys.values()].filter((k) => k.accountId === id); }
   async keyById(id: string) { return this.keys.get(id); }
