@@ -38,26 +38,39 @@ export function mulberry32(seed) {
   };
 }
 
-// ---- bounded latency histogram (1 ms buckets to MAXB ms, then overflow) ----
-const MAXB = 10000;
+// ---- bounded latency histogram: log-spaced buckets, sub-millisecond resolution ----
+// Bucket k covers [MINMS*G^k, MINMS*G^(k+1)); G = 1.01 so the reported value (geometric midpoint)
+// is within 0.5 percent of any sample in the bucket. Range 0.001 ms (1 us) to 10 s; below the floor
+// goes in bucket 0, above the ceiling in the last. Inputs are performance.now() deltas (hrtime based).
+// (f81 used 1 ms buckets, which made S13 quantisation noise at single-digit ms.)
+export const HIST_MIN_MS = 0.001, HIST_MAX_MS = 10000, HIST_G = 1.01;
+const LOGG = Math.log(HIST_G);
+const NB = Math.ceil(Math.log(HIST_MAX_MS / HIST_MIN_MS) / LOGG) + 1;
 export class Hist {
-  constructor() { this.b = new Uint32Array(MAXB + 1); this.n = 0; }
-  add(ms) { this.b[Math.min(MAXB, Math.max(0, Math.round(ms)))]++; this.n++; }
-  merge(o) { for (let i = 0; i <= MAXB; i++) this.b[i] += o.b[i]; this.n += o.n; }
+  constructor() { this.b = new Uint32Array(NB); this.n = 0; }
+  add(ms) {
+    const k = ms <= HIST_MIN_MS ? 0 : Math.min(NB - 1, Math.floor(Math.log(ms / HIST_MIN_MS) / LOGG));
+    this.b[k]++; this.n++;
+  }
+  merge(o) { for (let i = 0; i < NB; i++) this.b[i] += o.b[i]; this.n += o.n; }
   pct(p) {
     if (!this.n) return 0;
     const want = Math.ceil((p / 100) * this.n);
     let c = 0;
-    for (let i = 0; i <= MAXB; i++) { c += this.b[i]; if (c >= want) return i; }
-    return MAXB;
+    for (let i = 0; i < NB; i++) {
+      c += this.b[i];
+      if (c >= want) return HIST_MIN_MS * Math.pow(HIST_G, i + 0.5);
+    }
+    return HIST_MAX_MS;
   }
 }
 
 // ---- fault server: stub upstream (no upstream) or fault-injecting proxy (upstream URL) ----
 export function createFaultServer({ upstream = null, faults = {}, seed = 1 } = {}) {
-  const f = { drop: 0, delayRate: 0, delayMs: 0, err5xx: 0, ...faults };
+  const f = { drop: 0, delayRate: 0, delayMs: 0, err5xx: 0, burst: null, ...faults };
+  const t0 = Date.now();
   const rnd = mulberry32(seed);
-  const stats = { requests: 0, dropped: 0, delayed: 0, injected5xx: 0 };
+  const stats = { requests: 0, dropped: 0, delayed: 0, injected5xx: 0, burst5xx: 0 };
   const up = upstream ? assertLocal(upstream) : null;
   const server = http.createServer((req, res) => {
     stats.requests++;
@@ -65,9 +78,13 @@ export function createFaultServer({ upstream = null, faults = {}, seed = 1 } = {
     if (r < f.drop) { stats.dropped++; req.socket.destroy(); return; }
     const r2 = rnd();
     const go = () => {
-      if (rnd() < f.err5xx) {
+      const el = (Date.now() - t0) / 1000;
+      const inBurst = f.burst && el >= f.burst.startS && el < f.burst.startS + f.burst.lenS;
+      const pErr = inBurst ? Math.max(f.err5xx, f.burst.err5xx) : f.err5xx;
+      if (rnd() < pErr) {
         stats.injected5xx++;
-        res.writeHead(503, { 'content-type': 'text/plain' });
+        if (inBurst) stats.burst5xx++;
+        res.writeHead(503, { 'content-type': 'text/plain', 'x-soak-injected': '5xx' });
         res.end('injected 5xx');
         return;
       }
@@ -93,6 +110,21 @@ export function listen(server) {
   });
 }
 
+// ---- seeded chaos profiles ----
+// clean: no faults. light: the f81 profile. bad_window: ONE seeded burst of 100 percent
+// injected 5xx lasting `windows` sample windows, started at a seeded offset after a clean lead-in, so the
+// S2 and S9 rows are actually exercised. Same seed, same profile.
+export function chaosProfile(name, { seed = 1, intervalS = 1, windows = 4 } = {}) {
+  if (name === 'clean') return {};
+  if (name === 'light') return { drop: 0.002, err5xx: 0.003, delayRate: 0.02, delayMs: 150 };
+  if (name === 'bad_window') {
+    const r = mulberry32(seed + 7)();
+    const startS = intervalS * (2 + Math.floor(r * 3)); // 2..4 windows of clean lead-in
+    return { burst: { startS, lenS: intervalS * windows, err5xx: 1 } };
+  }
+  throw new Error(`soak_harness: unknown chaos profile ${name}`);
+}
+
 // tiny static server over a built export dir (default target when --serve-out is given)
 export function createStaticServer(dir) {
   const root = path.resolve(dir);
@@ -109,7 +141,7 @@ export function createStaticServer(dir) {
 
 // ---- the S-board (PROPOSED) ----
 export const DEFAULT_THRESHOLDS = {
-  S1: 0.99,   // success rate >=
+  S1: 0.99,   // success rate >= (raw: injected faults count against it; see s1_mode)
   S2: 0.05,   // worst window error rate <=
   S3: 200,    // p50 ms <=
   S4: 800,    // p95 ms <=
@@ -143,7 +175,32 @@ const ROWS = [
   ['S15', 'Chaos observed vs configured (1 = injected faults were seen)', '>=', 'the chaos actually ran'],
 ];
 
-export function buildBoard(run, thresholds = {}) {
+// S1 treatment, explicit: 'raw' = every non-2xx/3xx counts against availability, injected or not (f81
+// behaviour, the default, so boards stay comparable). 'organic' = injected faults are removed from both
+// numerator and denominator, so S1 measures the target alone. Both are always reported in the JSON.
+export function s1Value(total, mode = 'raw') {
+  if (!total.n) return 0;
+  if (mode === 'organic') {
+    const d = total.n - (total.injected || 0);
+    return d > 0 ? total.ok / d : 0;
+  }
+  return total.ok / total.n;
+}
+export function s1Report(total, mode) {
+  const injected = total.injected || 0;
+  return {
+    mode, treatment: mode === 'organic'
+      ? 'injected faults removed from numerator and denominator (S1 = ok / (n - injected))'
+      : 'RAW: injected faults count against S1 (S1 = ok / n); organic value reported alongside',
+    requests: total.n, ok: total.ok, errors: total.errors,
+    injected_errors: injected, organic_errors: total.errors - injected,
+    injected_breakdown: { five_xx_by_header: total.injected5xx || 0, transport_attributed_to_drops: total.injectedDrops || 0 },
+    s1_raw: total.n ? total.ok / total.n : 0,
+    s1_organic: total.n - injected > 0 ? total.ok / (total.n - injected) : 0,
+  };
+}
+
+export function buildBoard(run, thresholds = {}, s1Mode = 'raw') {
   const T = { ...DEFAULT_THRESHOLDS, ...thresholds };
   const { total, samples, hist, windows, durationS, intervalS, targets, faultsConfigured, faultsSeen } = run;
   const rate = (k) => (total.n ? total[k] / total.n : 0);
@@ -161,7 +218,7 @@ export function buildBoard(run, thresholds = {}) {
   const dead = targets.filter((t) => !t.ok2xx).length;
   const chaos = faultsConfigured ? (faultsSeen > 0 ? 1 : 0) : 1;
   const values = {
-    S1: total.n ? total.ok / total.n : 0, S2: worst, S3: hist.pct(50), S4: hist.pct(95), S5: hist.pct(99),
+    S1: s1Value(total, s1Mode), S2: worst, S3: hist.pct(50), S4: hist.pct(95), S5: hist.pct(99),
     S6: durationS ? total.n / durationS : 0, S7: expected ? samples / expected : 1, S8: stalled, S9: longest,
     S10: rate('timeouts'), S11: rate('transport'), S12: rate('e5xx'), S13: drift, S14: dead, S15: chaos,
   };
@@ -176,12 +233,12 @@ export function buildBoard(run, thresholds = {}) {
 
 // ---- the runner ----
 export async function runSoak(opts = {}) {
-  const o = { durationS: 20, concurrency: 8, rps: 400, intervalS: 2, timeoutMs: 3000, seed: 1,
+  const o = { s1Mode: 'raw', profile: null, durationS: 20, concurrency: 8, rps: 400, intervalS: 2, timeoutMs: 3000, seed: 1,
     faults: {}, thresholds: {}, targets: [], ...opts };
   const cleanup = [];
   let targets = o.targets.map((u) => assertLocal(u) && u);
-  const fcfg = { drop: 0, delayRate: 0, delayMs: 0, err5xx: 0, ...o.faults };
-  const faultsConfigured = fcfg.drop > 0 || fcfg.err5xx > 0 || (fcfg.delayRate > 0 && fcfg.delayMs > 0);
+  const fcfg = { drop: 0, delayRate: 0, delayMs: 0, err5xx: 0, ...(o.profile ? chaosProfile(o.profile, { seed: o.seed, intervalS: o.intervalS }) : {}), ...o.faults };
+  const faultsConfigured = fcfg.drop > 0 || fcfg.err5xx > 0 || !!fcfg.burst || (fcfg.delayRate > 0 && fcfg.delayMs > 0);
   const fservers = [];
   if (!targets.length) {
     const s = createFaultServer({ faults: fcfg, seed: o.seed }); fservers.push(s);
@@ -195,7 +252,7 @@ export async function runSoak(opts = {}) {
     targets = wrapped;
   }
   const tstate = targets.map((u) => ({ url: u, ok2xx: false }));
-  const mk = () => ({ n: 0, ok: 0, errors: 0, e5xx: 0, transport: 0, timeouts: 0 });
+  const mk = () => ({ n: 0, ok: 0, errors: 0, e5xx: 0, transport: 0, timeouts: 0, injected: 0, injected5xx: 0, injectedDrops: 0 });
   const total = mk();
   const hist = new Hist();
   let win = mk(), whist = new Hist();
@@ -207,7 +264,8 @@ export async function runSoak(opts = {}) {
     const u = new URL(t.url);
     const req = http.get({ host: u.hostname, port: u.port, path: '/', agent, timeout: o.timeoutMs }, (res) => {
       res.resume();
-      res.on('end', () => resolve({ ms: performance.now() - t0, status: res.statusCode }));
+      const injected = res.headers['x-soak-injected'] === '5xx';
+      res.on('end', () => resolve({ ms: performance.now() - t0, status: res.statusCode, injected }));
       res.on('error', () => resolve({ ms: performance.now() - t0, kind: 'transport' }));
     });
     req.on('timeout', () => { req.destroy(); resolve({ ms: performance.now() - t0, kind: 'timeout' }); });
@@ -224,7 +282,7 @@ export async function runSoak(opts = {}) {
         c.n++;
         if (r.kind === 'timeout') { c.timeouts++; c.errors++; }
         else if (r.kind === 'transport') { c.transport++; c.errors++; }
-        else if (r.status >= 500) { c.e5xx++; c.errors++; }
+        else if (r.status >= 500) { c.e5xx++; c.errors++; if (r.injected) { c.injected++; c.injected5xx++; } }
         else if (r.status >= 400) { c.errors++; }
         else c.ok++;
       }
@@ -248,16 +306,23 @@ export async function runSoak(opts = {}) {
   if (win.n) sample();
   agent.destroy();
   const faultsSeen = fservers.reduce((s, x) => s + x.stats.dropped + x.stats.delayed + x.stats.injected5xx, 0);
+  const drops = fservers.reduce((s, x) => s + x.stats.dropped, 0);
+  // a proxy never resets a socket except for an injected drop, so observed transport errors are attributed
+  // to drops up to the server-side drop count (the rest, if any, stay organic)
+  total.injectedDrops = Math.min(total.transport, drops);
+  total.injected += total.injectedDrops;
   for (const s of cleanup) await new Promise((r) => { s.closeAllConnections?.(); s.close(r); });
   const run = { total, samples: Math.min(samples, Math.floor(o.durationS / o.intervalS)), hist, windows,
     durationS: o.durationS, intervalS: o.intervalS, targets: tstate, faultsConfigured, faultsSeen };
-  const board = buildBoard(run, o.thresholds);
+  const board = buildBoard(run, o.thresholds, o.s1Mode);
   return {
     generated: new Date().toISOString(), board_definition: 'PROPOSED (see header of scripts/soak_harness.mjs)',
     synthetic: true, localhost_only: true,
     config: { durationS: o.durationS, concurrency: o.concurrency, rps: o.rps, intervalS: o.intervalS,
-      seed: o.seed, faults: fcfg, targets: tstate.map((t) => t.url) },
-    totals: total, faultsSeen, windows, ...board,
+      seed: o.seed, profile: o.profile, s1Mode: o.s1Mode, faults: fcfg, targets: tstate.map((t) => t.url) },
+    totals: total, faultsSeen, s1: s1Report(total, o.s1Mode),
+    injected_vs_organic: { injected_errors: total.injected, organic_errors: total.errors - total.injected, injected_delays: fservers.reduce((s, x) => s + x.stats.delayed, 0) },
+    windows, ...board,
   };
 }
 
@@ -280,6 +345,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     intervalS: num('interval', 2), seed: num('seed', 1), targets,
     faults: { drop: num('drop', 0), delayRate: num('delay-rate', 0), delayMs: num('delay-ms', 0), err5xx: num('err5xx', 0) },
     thresholds: a.thresholds ? JSON.parse(a.thresholds) : {},
+    profile: a.profile || null, s1Mode: a['s1-mode'] || 'raw',
   });
   for (const s of extra) s.close();
   const out = a.out || 'soak_board.json';

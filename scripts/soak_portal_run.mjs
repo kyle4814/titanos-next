@@ -97,10 +97,10 @@ export async function bootPortal() {
   return { targets, names: Object.keys(ops), stats, keylessProbe, store: h.store, close: () => Promise.all(servers.map((s) => new Promise((r) => { s.closeAllConnections?.(); s.close(r); }))) };
 }
 
-export async function portalSoak({ durationS, rps = 60, concurrency = 8, seed = 1, faults, thresholds } = {}) {
+export async function portalSoak({ durationS, rps = 60, concurrency = 8, seed = 1, faults, thresholds, profile = null, s1Mode = 'raw' } = {}) {
   const portal = await bootPortal();
   const mem0 = process.memoryUsage();
-  const result = await runSoak({ durationS, rps, concurrency, seed, targets: portal.targets, faults, thresholds });
+  const result = await runSoak({ durationS, rps, concurrency, seed, targets: portal.targets, faults, thresholds, profile, s1Mode });
   const mem1 = process.memoryUsage();
   await portal.close();
   const perTarget = portal.names.map((name, i) => {
@@ -118,6 +118,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   for (let i = 0; i < v.length; i++) if (v[i].startsWith('--')) a[v[i].slice(2)] = v[i + 1];
   const num = (k, d) => (a[k] !== undefined ? Number(a[k]) : d);
   const result = await portalSoak({ durationS: num('duration', 600), rps: num('rps', 60), concurrency: num('concurrency', 8), seed: num('seed', 1),
+    profile: a.profile || null, s1Mode: a['s1-mode'] || 'raw',
     faults: { drop: num('drop', 0.002), delayRate: num('delay-rate', 0.02), delayMs: num('delay-ms', 150), err5xx: num('err5xx', 0.003) } });
   const out = a.out || 'soak_portal_board.json';
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
