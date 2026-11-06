@@ -8,17 +8,26 @@ export interface Purchase { id: string; accountId: string; productId: string; do
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
 export interface Invoice { id: string; accountId: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
-export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
+// prefix = "tk_" + first 8 hex of the secret: non-secret, shown in lists and logs for abuse tracing (32 of 192 bits).
+// capDaily / capTotal are in credits; undefined (a key made before F19) means the conservative defaults, never unlimited.
+export interface ApiKey { id: string; accountId: string; hash: string; prefix?: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
+export interface KeySpend { day: number; total: number }
+export type CappedDebit = { ok: true; balance: number; spent: KeySpend } | { ok: false; reason: "insufficient_credits" | "key_cap_daily" | "key_cap_total" }
 
-export interface CreditEntry { id: string; accountId: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
+export interface CreditEntry { id: string; accountId: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number; keyId?: string }
 export interface CreditOrder { id: string; accountId: string; checkoutId: string; packId: string; credits: number; paid: boolean }
-export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string }
+export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string; kid?: string }
 
 export interface Store {
   // agent door (C7). creditApply must be atomic: a D1 adapter does it with one conditional UPDATE, never read-then-write.
   keyByHash(hash: string): Promise<ApiKey | undefined>;
   creditBalance(accountId: string): Promise<number>;
-  creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number): Promise<number | undefined>; // new balance, or undefined if it would go below 0
+  creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string): Promise<number | undefined>; // new balance, or undefined if it would go below 0
+  // F19: the agent debit. Balance check, daily cap, total cap and the ledger write are ONE atomic step (D1: one conditional
+  // UPDATE/transaction). A cap of N allows spend up to and including N. Reversals credited with the same keyId give the spend back.
+  creditDebitCapped(o: { accountId: string; keyId: string; amount: number; ref: string; at: number; dayStart: number; capDaily: number; capTotal: number }): Promise<CappedDebit>;
+  keySpend(keyId: string, dayStart: number): Promise<KeySpend>;
+  keysByPrefix(prefix: string): Promise<ApiKey[]>;
   creditEntries(accountId: string): Promise<CreditEntry[]>;
   putCreditOrder(o: CreditOrder): Promise<void>;
   creditOrderByCheckout(checkoutId: string): Promise<CreditOrder | undefined>;
@@ -96,13 +105,26 @@ export class MemoryStore implements Store {
   async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
   ledger: CreditEntry[] = []; creditOrders = new Map<string, CreditOrder>(); receipts = new Map<string, AgentReceipt>(); callLog = new Map<string, number[]>(); private ent = 0;
   async keyByHash(h: string) { return [...this.keys.values()].find((k) => k.hash === h); }
-  async creditBalance(id: string) { return this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0); }
-  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
-    const bal = await this.creditBalance(id);
+  async creditBalance(id: string) { return this.balNow(id); }
+  // Everything below is synchronous between read and write (no await), so concurrent callers cannot interleave.
+  private balNow(id: string) { let n = 0; for (const e of this.ledger) if (e.accountId === id) n += e.delta; return n; }
+  private spendNow(keyId: string, dayStart: number): KeySpend { let day = 0, total = 0; for (const e of this.ledger) if (e.keyId === keyId) { total -= e.delta; if (e.at >= dayStart) day -= e.delta; } return { day, total }; }
+  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string) {
+    const bal = this.balNow(id);
     if (bal + delta < 0) return undefined;
-    this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at });
+    this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at, ...(keyId ? { keyId } : {}) });
     return bal + delta;
   }
+  async creditDebitCapped(o: { accountId: string; keyId: string; amount: number; ref: string; at: number; dayStart: number; capDaily: number; capTotal: number }): Promise<CappedDebit> {
+    const bal = this.balNow(o.accountId), sp = this.spendNow(o.keyId, o.dayStart);
+    if (sp.day + o.amount > o.capDaily) return { ok: false, reason: "key_cap_daily" };
+    if (sp.total + o.amount > o.capTotal) return { ok: false, reason: "key_cap_total" };
+    if (bal - o.amount < 0) return { ok: false, reason: "insufficient_credits" };
+    this.ledger.push({ id: `ent_${++this.ent}`, accountId: o.accountId, delta: -o.amount, reason: "debit", ref: o.ref, at: o.at, keyId: o.keyId });
+    return { ok: true, balance: bal - o.amount, spent: { day: sp.day + o.amount, total: sp.total + o.amount } };
+  }
+  async keySpend(keyId: string, dayStart: number) { return this.spendNow(keyId, dayStart); }
+  async keysByPrefix(prefix: string) { return [...this.keys.values()].filter((k) => k.prefix === prefix); }
   async creditEntries(id: string) { return this.ledger.filter((e) => e.accountId === id); }
   async putCreditOrder(o: CreditOrder) { this.creditOrders.set(o.id, o); }
   async creditOrderByCheckout(c: string) { return [...this.creditOrders.values()].find((o) => o.checkoutId === c); }
