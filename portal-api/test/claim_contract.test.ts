@@ -1,4 +1,4 @@
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
 import assert from "node:assert/strict";
 import { MemoryStore, type Store } from "../src/store.ts";
 import { D1PlanStore } from "../src/d1_plan_store.ts";
@@ -7,11 +7,13 @@ import { handleStripeEvent, MockMailer, type Deps } from "../src/service.ts";
 import { MockBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { T0, SECRET } from "./harness.ts";
+// f213: when CONTRACT_LIB=1 another suite imports violations()/race() from here (miniflare_race.test.ts); the FakeD1 tests below must not register again.
+const test: typeof nodeTest = process.env.CONTRACT_LIB === "1" ? ((() => undefined) as unknown as typeof nodeTest) : nodeTest;
 
 // Webhook event claim on D1 (f197). ONE contract (C1..C5) over MemoryStore (the reference) and D1PlanStore (FakeD1: real SQLite, real migrations),
 // a seeded two-deliverer race (200 seeds): exactly one claim wins per event id, and a replay-after-crash case. SYNTHETIC ids only.
 // A second deliverer / a restart is a NEW store object over the SAME FakeD1 (memory: the same object, there is no other process).
-type Factory = () => { open: () => Store; db?: FakeD1 };
+export type Factory = () => { open: () => Store; db?: FakeD1 };
 const memory: Factory = () => { const s = new MemoryStore(); return { open: () => s }; };
 const d1: Factory = () => { const db = new FakeD1(); return { open: () => new D1PlanStore(db), db }; };
 
