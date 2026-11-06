@@ -126,3 +126,60 @@ test("source check: no stripe, fetch, timers, cron, em or en dashes", () => {
   for (const bad of [/stripe/i, /\bfetch\(/, /setInterval|setTimeout/, /cron/i]) assert.ok(!bad.test(src), String(bad));
   assert.ok(!/[–—]/.test(readFileSync(new URL("../src/enterprise/payout_retry.ts", import.meta.url), "utf8")));
 });
+
+// ---- f51: permanent errors hold at once ----
+import { PermanentTransferError, classify } from "../src/enterprise/payout_errors.ts";
+const failWith = (w: W, errs: unknown[]) => { let n = 0; w.transfer.transfer = async () => { throw errs[Math.min(n++, errs.length - 1)]; }; return () => n; };
+const coded = (code: string) => Object.assign(new Error("provider says " + code), { code });
+const ledgerJson = (w: W) => JSON.stringify([...w.store.ledger.values()]);
+
+test("permanent on attempt 1: held with ONE adapter call, reason kept, ledger byte-identical", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  const calls = failWith(w, [coded("account_closed")]); const before = ledgerJson(w);
+  const r = await w.run(5);
+  assert.deepEqual([r.items[0].action, r.items[0].reason, r.items[0].attempts], ["held", "permanent_account_closed", 1]);
+  const p = await st(w, "po_synth_1");
+  assert.equal(p.status, "held"); assert.equal(p.reason, "permanent_account_closed"); assert.equal(p.attempts, 1); assert.equal(p.heldAt, T0 + 5000);
+  assert.equal(calls(), 1); assert.equal(ledgerJson(w), before);
+  assert.equal((await listHeldPayouts(w.store, "t_partner_A", T0 + 9000))[0].reason, "permanent_account_closed");
+});
+test("PermanentTransferError thrown directly is held on attempt 1", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  const calls = failWith(w, [new PermanentTransferError("invalid_destination")]);
+  assert.equal((await w.run(3)).items[0].reason, "permanent_invalid_destination"); assert.equal(calls(), 1);
+});
+test("PermanentTransferError with a code outside the known list is still permanent (the class itself decides)", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  const calls = failWith(w, [new PermanentTransferError("bespoke_refusal")]);
+  assert.equal((await w.run(4)).items[0].reason, "permanent_bespoke_refusal"); assert.equal(calls(), 1);
+});
+test("transient x2 then permanent: held at call 3, not at maxAttempts", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  const calls = failWith(w, [new Error("provider_down"), new Error("provider_down"), coded("currency_not_supported")]); const before = ledgerJson(w);
+  assert.equal((await w.run(10)).items[0].action, "approved_retry");
+  assert.equal((await w.run(10)).items[0].action, "approved_retry");
+  const r3 = await w.run(10);
+  assert.deepEqual([r3.items[0].action, r3.items[0].reason, r3.items[0].attempts], ["held", "permanent_currency_not_supported", 3]);
+  assert.equal(calls(), 3); assert.equal(ledgerJson(w), before);
+});
+test("unknown error stays transient (retried, held only by exhaustion)", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  failWith(w, [coded("something_new"), new Error("boom"), "a string", undefined]);
+  assert.equal((await w.run(3)).items[0].action, "approved_retry");
+  assert.equal((await w.run(3)).items[0].action, "approved_retry");
+  assert.equal((await w.run(3)).items[0].reason, "retry_exhausted");
+  assert.deepEqual(classify(undefined), { kind: "transient", code: "unknown" });
+  assert.deepEqual(classify(coded("ACCOUNT_CLOSED")), { kind: "permanent", code: "account_closed" });
+  assert.equal(classify({ message: "account_closed" }).kind, "transient", "the message is never read, only the code");
+});
+test("a permanently held row is never re-sent, on any later run", async () => {
+  const w = await world(); await w.add("po_synth_1");
+  const calls = failWith(w, [coded("invalid_account")]);
+  await w.run(5); await w.run(5); await w.run(5);
+  assert.equal(calls(), 1); assert.equal(w.transfer.sent.length, 0);
+  assert.equal((await st(w, "po_synth_1")).status, "held");
+});
+test("source: payout_errors has no network or timers and no em or en dashes", () => {
+  const s = readFileSync(new URL("../src/enterprise/payout_errors.ts", import.meta.url), "utf8");
+  assert.ok(!/stripe\.com|fetch\(|setTimeout|setInterval/.test(s)); assert.ok(!/[–—]/.test(s));
+});

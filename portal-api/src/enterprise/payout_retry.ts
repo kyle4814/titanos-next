@@ -4,8 +4,10 @@
 // Rules: (1) every attempt reuses the SAME idempotency key (the payout id), so the provider sees one logical transfer;
 // (2) a payout is claimed by a compare-and-set approved_retry -> sending, so two concurrent runs cannot both send;
 // (3) success -> paid; a thrown error is treated as transient -> approved_retry with attempts+1; attempts >= maxAttempts ->
-// held (reason retry_exhausted); (4) the ledger is never touched: money may have moved, a human decides (held = no reversal);
+// held (reason retry_exhausted); a PERMANENT error (payout_errors.classify) goes straight to held on the first attempt
+// (reason permanent_<code>), kept on the row, with no resend and no ledger reversal; (4) the ledger is never touched: money may have moved, a human decides (held = no reversal);
 // (5) a crash mid-attempt leaves the row in sending, which the resume sweep (payout_sweep.ts) resolves by key lookup.
+import { classify } from "./payout_errors.ts";
 import type { EntStore } from "./store.ts";
 import type { Payout, PayoutProvider } from "./types.ts";
 
@@ -41,8 +43,14 @@ async function attempt(env: RetryEnv, p: Payout, maxAttempts: number): Promise<R
     const r = await env.transfer.transfer({ partnerId: won.partnerId, accountRef: t.payoutAccount, amountCents: won.amountCents, idempotencyKey: won.id }); // same key every attempt
     await put(env, { ...won, status: "paid", providerRef: r.ref, sendingAt: env.now });
     return item("paid", prior + 1);
-  } catch {
+  } catch (err) {
     const attempts = prior + 1;
+    const c = classify(err);
+    if (c.kind === "permanent") { // can never succeed: hold now, keep the reason, ledger untouched
+      const reason = `permanent_${c.code}`;
+      await put(env, { ...won, status: "held", reason, attempts, heldAt: env.now });
+      return item("held", attempts, reason);
+    }
     if (attempts >= maxAttempts) {
       await put(env, { ...won, status: "held", reason: "retry_exhausted", attempts, heldAt: env.now }); // no ledger reversal: a human looks
       return item("held", attempts, "retry_exhausted");
