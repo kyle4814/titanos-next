@@ -16,6 +16,7 @@ import { workerScheduled } from "./owner/cron.ts";
 import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drain_tick_worker.ts";
 import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
+import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -214,6 +215,16 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
+// Cron entry. With an env.payouts adapter set it runs ONE payout tick; without one it is a labelled no-op (never a crash, never a 503).
+// Nothing triggers this yet: no [triggers] crons in wrangler.toml (deploy is GATE5). ctx.waitUntil keeps the Worker alive for the tick.
+export type ScheduledOutcome = { ran: false; label: "payout_tick_noop_no_adapter" } | ({ ran: true; label: "payout_tick" } & TickResult);
+export async function scheduledTick(env: Env, now: number = Date.now()): Promise<ScheduledOutcome> {
+  const p = env.payouts;
+  if (!p) return { ran: false, label: "payout_tick_noop_no_adapter" };
+  const r = await runPayoutTick(p.store, p.transfer, now, { lookup: p.lookup, maxRows: p.maxRows, log: (l) => console.log(l) });
+  return { ran: true, label: "payout_tick", ...r };
+}
+
 // Worker entry factory: ONE Throttle (Memory adapter, injectable clock) is built per Worker and injected into Deps for every
 // request, so login verify, DNS-TXT verify and checkout start are always guarded. Memory state is per isolate: a shared
 // adapter (Durable Object / D1) behind ThrottleStore is the WOULD-FLIP. buildDeps is undefined until the D1 store lands
@@ -237,8 +248,12 @@ export function createWorker(opts: WorkerOpts = {}) {
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
       }).catch(() => json({ error: "internal" }, 500));
     },
-    async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
+    async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env, ctx?: { waitUntil(p: Promise<unknown>): void }): Promise<void> {
       if (isDrainTick(event)) { await drainTickScheduled(event, env, { now: opts.now, ...opts.drainTick }); return; }   // f334: the shop drain tick owns ONLY its own cron expression
+      // f57: every other cron runs the payout tick (waitUntil when given, never throws) and then the owner monitor cron (f14).
+      const now = typeof event?.scheduledTime === "number" ? event.scheduledTime : Date.now();
+      const tick = scheduledTick(env, now).then((o) => console.log(`scheduled ${o.label}`)).catch(() => console.log("scheduled payout_tick_failed"));
+      if (ctx?.waitUntil) ctx.waitUntil(tick); else await tick;
       await workerScheduled(event, env);
     },
   };
