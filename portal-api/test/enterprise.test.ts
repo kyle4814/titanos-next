@@ -591,6 +591,7 @@ test("F6: pending invites per tenant are capped", async () => {
 test("attribution does not move when an unrelated role changes (earliest join wins)", async () => {
   const w = await partnerWorld();
   const { h, p } = w;
+  h.clock.t += 1000; // joins are ordered by time; same-instant joins fall back to the tenant id
   const second = await h.post(p.session, `/partners/${p.tenant.id}/portals`, { name: "Second Pty", slug: "second-pty", clientAdminEmail: "owner@client.com.au" });
   const inv = (await h.get(w.c.session, "/invites")).invites[0];
   await h.post(w.c.session, `/invites/${inv.id}/accept`);
