@@ -312,3 +312,14 @@ test("hygiene: secrets never leak in any error body; oversize and malformed bodi
   assert.equal(r.status, 200); assert.ok((await r.json() as any).products.length >= 10);
   assert.ok(!SECRET.length || !(await (await h.req("GET", "/catalogue")).text()).includes(SECRET));
 });
+
+test("F-C2: a C2 purchase paid by a delayed method is fulfilled on async_payment_succeeded, once", async () => {
+  const h = make(); const me = await h.login("late@pay.com.au");
+  assert.equal((await h.req("POST", "/checkout", { token: me.session, body: { product: "ai_growth" } })).status, 201);
+  const pur = [...h.store.purchases.values()].at(-1)!;
+  const obj = { id: pur.checkoutId, payment_intent: "pi_late", customer: "cus_late", subscription: "sub_late" };
+  assert.equal((await h.j(await h.webhook("checkout.session.completed", { ...obj, payment_status: "unpaid" }, { id: "evt_a" }))).result, "ignored");
+  assert.equal([...h.store.purchases.values()].at(-1)!.status, "pending"); assert.equal((await h.store.invoicesFor(me.account.id)).length, 0);
+  assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { ...obj, payment_status: "paid" }, { id: "evt_b" }))).result, "handled");
+  assert.equal([...h.store.purchases.values()].at(-1)!.status, "paid"); assert.equal((await h.store.invoicesFor(me.account.id)).length, 1);
+});
