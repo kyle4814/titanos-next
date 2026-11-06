@@ -1,10 +1,13 @@
 import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
+import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
-import type { Store, Account, Purchase, Invoice } from "./store.ts";
+import type { Store, Account, Purchase, Invoice, Subscription } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
+import { isTier, periodFromStripe, initPlanFromStripe, observePeriod, type StripePeriod, type Tier } from "./plan_change.ts";
+import { changePlan } from "./plan_change_service.ts";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
@@ -13,7 +16,7 @@ import type { OwnerStore, ZoneProvider } from "./owner/engine.ts";
 import type { DohFetch } from "../../lib/guestscan/scan.ts";
 export interface OwnerDeps { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider }
 import { marketExport, hasActiveMarketJobs, type MarketDeps } from "./market/service.ts";
-export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; receiptSecret?: string; model?: import("./agent/tools.ts").ModelClient; ent?: EntContext }
+export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; receiptSecret?: string; model?: import("./agent/tools.ts").ModelClient; ent?: EntContext; log?: (line: string) => void }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
@@ -101,35 +104,101 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
 export async function handleStripeEvent(d: Deps, ev: { id: string; type: string; data: { object: Record<string, any> } }): Promise<"handled" | "duplicate" | "ignored"> {
   if (!(await d.store.claimEvent(ev.id))) return "duplicate";
   const o = ev.data.object;
-  if (ev.type === "checkout.session.completed") {
+  if (ev.type === "checkout.session.completed" || ev.type === "checkout.session.async_payment_succeeded") {
     const pur = await d.store.purchaseByCheckout(String(o.id));
-    if (!pur || o.payment_status === "unpaid") return "ignored";
-    const now = d.now();
-    const p = PRODUCTS[pur.productId];
-    pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
-    if (o.subscription) {
-      pur.subscriptionId = String(o.subscription);
-      await d.store.putSubscription({ id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: now });
-    }
-    await d.store.putPurchase(pur);
-    if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-    await issueInvoice(d, pur, p.amountCents, ev.id);
+    if (!pur || o.payment_status !== "paid") return "ignored"; // unpaid (async method) waits for async_payment_succeeded
+    if (pur.status === "pending") await markPaid(d, pur, o, ev.id); // a second paid signal for the same session never funds or invoices again
     return "handled";
   }
-  if (ev.type === "invoice.paid" && o.subscription && o.billing_reason === "subscription_cycle") {
-    const sub = await d.store.subscriptionById(String(o.subscription));
-    if (!sub) return "ignored";
+  if (ev.type === "charge.refunded") {
+    const pi = String(o.payment_intent ?? ""), pur = pi ? await d.store.purchaseByPaymentIntent(pi) : undefined;
+    if (!pi) return "ignored";
+    if (!pur) { await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) }); return "handled"; } // refund before its payment: held, reconciled by markPaid
+    applyRefund(pur, Number(o.amount_refunded ?? 0)); await d.store.putPurchase(pur);
+    return "handled";
+  }
+  if (ev.type === "invoice.paid" && o.subscription && (o.billing_reason === "subscription_cycle" || o.billing_reason === "subscription_create")) {
+    const subId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription), cycle = o.billing_reason === "subscription_cycle";
+    const period = invoicePeriod(o);
+    const sub = await d.store.subscriptionById(subId);
+    if (!sub) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
+      if (!period) return "ignored";
+      await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
+      return "handled";
+    }
+    await seedPeriod(d, sub, period, !cycle);
+    await d.store.putSubscription(sub);
+    if (!cycle) return "handled"; // the first invoice is issued by markPaid
     const pur = await d.store.purchaseById(sub.purchaseId);
     if (pur) await issueInvoice(d, pur, Number(o.amount_paid ?? PRODUCTS[sub.productId].amountCents), ev.id);
     return "handled";
   }
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
-    if (!sub) return "ignored";
-    sub.cancelledAt = d.now(); await d.store.putSubscription(sub);
+    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
+    if (!sub.cancelledAt) { sub.cancelledAt = d.now(); await d.store.putSubscription(sub); }
     return "handled";
   }
+  d.log?.(`webhook ignored unknown event type ${ev.type} (${ev.id})`);
   return "ignored";
+}
+// Cumulative Stripe amount_refunded: idempotent and monotone, clamped to [0, amount], never negative.
+function applyRefund(pur: Purchase, cents: number) {
+  pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
+  if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
+}
+async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
+  const now = d.now();
+  pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
+  let cancel = false;
+  if (o.subscription) {
+    pur.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
+    const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
+    cancel = facts.some((f) => f.kind === "cancel");
+    const held = heldPeriods(facts), sp = stripePeriodOf(o.subscription) ?? held.first;
+    const sub: Subscription = { id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
+    await seedPeriod(d, sub, sp, true);
+    for (const hp of held.rest) await seedPeriod(d, sub, hp, false); // invoices that beat the checkout, oldest first
+    await d.store.putSubscription(sub);
+  }
+  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
+  await d.store.putPurchase(pur);
+  if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
+  await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+}
+// ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
+// checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
+// its first line (lines.data[0].period), which is the period just paid (the invoice's own period_start/end is the usage window).
+function stripePeriodOf(sub: unknown): StripePeriod | undefined {
+  if (!sub || typeof sub !== "object") return undefined;
+  const x = sub as Record<string, any>;
+  return periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+}
+function invoicePeriod(inv: Record<string, any>): StripePeriod | undefined {
+  const line = inv.lines?.data?.[0]?.period;
+  const anchor = typeof inv.subscription === "object" ? inv.subscription?.billing_cycle_anchor : inv.billing_cycle_anchor;
+  return line ? periodFromStripe(line.start, line.end, anchor) : undefined;
+}
+function heldPeriods(facts: Record<string, unknown>[]): { first?: StripePeriod; rest: StripePeriod[] } {
+  const ps = facts.filter((f) => f.kind === "period").map((f) => ({ create: f.create === true, p: periodFromStripe(Number(f.start) / 1000, Number(f.end) / 1000) })).filter((x): x is { create: boolean; p: StripePeriod } => !!x.p)
+    .sort((a, b) => a.p.start - b.p.start);
+  const first = ps.find((x) => x.create)?.p; // only a subscription_create invoice may define the start; a held cycle invoice alone never does
+  return { first, rest: ps.map((x) => x.p).filter((p) => p !== first) };
+}
+// Retainer tiers only (the three AI tiers own a PlanState). No period = no plan: calendar months apply until Stripe's numbers arrive.
+// Only the FIRST period (checkout's expanded subscription, or the subscription_create invoice) may define the start and the grid;
+// a later cycle period seen while no plan exists is held and replayed in order once the first arrives.
+async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefined, create: boolean) {
+  if (!p || !isTier(sub.productId)) return;
+  if (!sub.plan) {
+    if (!create) { await d.store.holdFact(`sub:${sub.id}`, { kind: "period", start: p.start, end: p.end, create: false }); return; }
+    sub.startedAt = p.start; sub.plan = initPlanFromStripe(sub.productId as Tier, p);
+    for (const hp of heldPeriods(await d.store.takeFacts(`sub:${sub.id}`)).rest) await seedPeriod(d, sub, hp, false);
+    return;
+  }
+  const r = observePeriod(sub.plan, p);
+  if (r.applied === "advanced") sub.plan = r.state;
+  else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${sub.id}: start ${p.start} (state untouched)`);
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
@@ -153,10 +222,18 @@ export async function cancelSubscription(d: Deps, a: Account, subId: string) {
   if (!sub || sub.accountId !== a.id) throw new HttpError(404, "not_found");
   if (sub.cancelledAt) return { status: "already_cancelled" as const, effectiveAt: sub.cancelAt ?? sub.cancelledAt };
   const p = PRODUCTS[sub.productId];
-  const minEnd = p.minMonths ? addMonths(sub.startedAt, p.minMonths) : 0;
-  const periodEnd = Math.max(minEnd, nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now()));
+  let periodEnd: number;
+  if (isTier(sub.productId)) {
+    // Retainers: ONE minimum-term rule, owned by plan_change.planChange (3 calendar months, then the next period boundary). f100.
+    const r = await changePlan(d, a, subId, { eventId: `cancel:${sub.id}`, kind: "cancel" });
+    if (!r.outcome.ok) {
+      if (r.outcome.reason === "subscription_ended") return { status: "already_cancelled" as const, effectiveAt: (await d.store.subscriptionById(subId))?.plan?.endedAt ?? d.now() };
+      throw new HttpError(409, r.outcome.reason);
+    }
+    periodEnd = r.outcome.effectiveAt;
+  } else periodEnd = nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now());
   await d.billing.cancelSubscription(sub.id, true);
-  sub.cancelAt = periodEnd; await d.store.putSubscription(sub);
+  const fresh = (await d.store.subscriptionById(sub.id)) ?? sub; fresh.cancelAt = periodEnd; await d.store.putSubscription(fresh);
   return { status: "cancel_scheduled" as const, effectiveAt: periodEnd };
 }
 function addMonths(ms: number, n: number) { const x = new Date(ms); x.setUTCMonth(x.getUTCMonth() + n); return x.getTime(); }
@@ -173,8 +250,18 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   if (pur.status !== "paid" || !pur.paymentIntent || !pur.paidAt) throw new HttpError(409, "not_refundable_yet");
   const v = refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
   if (!v.auto) {
-    await d.store.putCard({ id: randomToken("card", 8), accountId: a.id, purchaseId: pur.id, kind: "refund_outside_policy", reason: v.reason, createdAt: d.now(), resolved: false });
-    return { status: "needs_review" as const, reason: v.reason };
+    // Out of policy: one pending_review RefundCase per purchase (a repeat request returns the same case, never a second card),
+    // with the legacy ReviewCard kept in step (same id, resolved false). The card payload is returned as DATA ONLY: nothing is sent.
+    const prior = (await d.store.refundCasesFor(pur.id)).filter((r) => r.status !== "denied").sort((x, y) => x.createdAt - y.createdAt)[0];
+    let rc = prior;
+    if (!rc) {
+      const n = (await d.store.refundCasesFor(pur.id)).length;
+      rc = { id: n === 0 ? `rf_${pur.id}` : `rf_${pur.id}_${n + 1}`, accountId: a.id, purchaseId: pur.id, productName: PRODUCTS[pur.productId].name, amountCents: pur.amountCents - pur.refundedCents, reason: v.reason, inPolicy: false, status: "pending_review", createdAt: d.now() };
+      await d.store.putRefundCase(rc);
+      await d.store.putCard({ id: rc.id, accountId: a.id, purchaseId: pur.id, kind: "refund_outside_policy", reason: v.reason, createdAt: rc.createdAt, resolved: false });
+    }
+    const card = rc.status === "pending_review" ? buildRefundCard(rc) : undefined;
+    return { status: "needs_review" as const, reason: v.reason, refundId: rc.id, caseStatus: rc.status, card };
   }
   await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
   pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
@@ -215,4 +302,31 @@ export async function deleteAccount(d: Deps, a: Account, confirm: unknown) {
   await d.store.anonymiseAccount(a.id, d.now());
   await entSvc.onAccountDeleted(d, a.id); // C8: memberships, referral
   return { status: "deleted" as const, retained: "invoices and payment records, kept without your email as required by tax law" };
+}
+
+// 6b REFUND DECISION (GATE1, Kyle's tap). Resolves the RefundCase through applyRefundDecision and keeps ReviewCard.resolved in step.
+// It moves NO money and sends NOTHING: an approve only records the decision; the Stripe refunds.create call is a CARD NEEDED (receipt).
+export async function decideRefund(d: Deps, refundId: string, decision: RefundDecision): Promise<{ changed: boolean; refund: RefundCase }> {
+  const rc = await d.store.refundCaseById(refundId);
+  if (!rc) throw new HttpError(404, "not_found");
+  const r = applyRefundDecision(rc, decision, d.now());
+  if (!r.ok) throw new HttpError(r.error === "bad_decision" ? 400 : 409, r.error);
+  if (r.changed) await d.store.putRefundCase(r.refund);
+  const card = await d.store.cardById(refundId);
+  if (card && !card.resolved) await d.store.putCard({ ...card, resolved: true }); // also heals a case decided before a crash
+  return { changed: r.changed, refund: r.refund };
+}
+
+// 6c MIGRATION of legacy synthetic ReviewCards (no RefundCase) into RefundCases. Idempotent. The old path never moved money for a card,
+// so a legacy resolved=true card maps to "denied" (conservative: no refund was ever issued for it); resolved=false maps to pending_review.
+export async function migrateReviewCards(d: Deps): Promise<{ migrated: number; skipped: number }> {
+  let migrated = 0, skipped = 0;
+  for (const c of await d.store.allCards()) {
+    if (c.kind !== "refund_outside_policy" || (await d.store.refundCaseById(c.id))) { skipped++; continue; }
+    const pur = await d.store.purchaseById(c.purchaseId);
+    if (!pur) { skipped++; continue; }
+    await d.store.putRefundCase({ id: c.id, accountId: c.accountId, purchaseId: c.purchaseId, productName: PRODUCTS[pur.productId]?.name ?? pur.productId, amountCents: pur.amountCents - pur.refundedCents, reason: c.reason, inPolicy: false, status: c.resolved ? "denied" : "pending_review", createdAt: c.createdAt, ...(c.resolved ? { decidedAt: c.createdAt } : {}) });
+    migrated++;
+  }
+  return { migrated, skipped };
 }
