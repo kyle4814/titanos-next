@@ -22,12 +22,25 @@ export interface DomainState {
   findings: Record<string, FindingRec>; level: number; levelName: string; badge?: Badge; badgeHistory: { level: number; from: number; to?: number; lostBecause?: string }[];
   events: OwnerEvent[]; fixes: FixRec[]; allPassSince?: number; monitor: { active: boolean; nextScanAt?: number; intervalMs: number };
   minutesHandedBack: number; xp: number; domainVerified: boolean;
+  rev?: number; // store revision: bumped by every committed write; putCas compares it (F185). Absent = 0 = never stored.
 }
-export interface OwnerStore { get(domainId: string): Promise<DomainState | undefined>; put(s: DomainState): Promise<void>; all(): Promise<DomainState[]> }
+export interface OwnerStore {
+  get(domainId: string): Promise<DomainState | undefined>; put(s: DomainState): Promise<void>; all(): Promise<DomainState[]>;
+  // F185: write s only if the stored revision is still `expectedRev` (0 = no row yet). On success s.rev becomes the new revision and true is
+  // returned; false means another writer got in first and nothing was written. Optional so a bare store (a test double) falls back to put.
+  putCas?(s: DomainState, expectedRev: number): Promise<boolean>;
+}
 export class MemoryOwnerStore implements OwnerStore {
   m = new Map<string, DomainState>();
   async get(id: string) { const s = this.m.get(id); return s ? structuredClone(s) : undefined; }
-  async put(s: DomainState) { const cur = this.m.get(s.domainId); if (cur && cur.accountId !== s.accountId) throw new Error("owner_state_account_mismatch"); this.m.set(s.domainId, structuredClone(s)); }
+  // put is unconditional (last writer wins) but still advances the revision, so any in-flight putCas holding the old one is refused.
+  async put(s: DomainState) { const cur = this.m.get(s.domainId); if (cur && cur.accountId !== s.accountId) throw new Error("owner_state_account_mismatch"); const rev = (cur?.rev ?? 0) + 1; this.m.set(s.domainId, { ...structuredClone(s), rev }); s.rev = rev; }
+  async putCas(s: DomainState, expectedRev: number) {
+    const cur = this.m.get(s.domainId);
+    if (cur && cur.accountId !== s.accountId) throw new Error("owner_state_account_mismatch");
+    if ((cur?.rev ?? 0) !== expectedRev) return false;
+    const rev = expectedRev + 1; this.m.set(s.domainId, { ...structuredClone(s), rev }); s.rev = rev; return true;
+  }
   async all() { return [...this.m.values()].map((s) => structuredClone(s)); }
   // Account-scoped surface (same contract as D1OwnerStore, see src/owner/d1ownerstore.ts).
   async getFor(accountId: string, id: string) { const s = this.m.get(id); return s && s.accountId === accountId ? structuredClone(s) : undefined; }
@@ -45,7 +58,7 @@ export class MemoryOwnerStore implements OwnerStore {
     const cur = this.m.get(id);
     if (!cur || cur.accountId !== accountId) return "missing";
     if (cur.monitor.active === active) return "unchanged";
-    cur.monitor = { active, intervalMs: intervalMs ?? cur.monitor.intervalMs, nextScanAt: active ? now : undefined }; return "changed";
+    cur.monitor = { active, intervalMs: intervalMs ?? cur.monitor.intervalMs, nextScanAt: active ? now : undefined }; cur.rev = (cur.rev ?? 0) + 1; return "changed";
   }
   async anonymise(accountId: string) { let n = 0; for (const [k, s] of this.m) if (s.accountId === accountId) { this.m.delete(k); n++; } return n; }
 }
@@ -122,10 +135,27 @@ export function observe(s: DomainState, r: ScanResult, now: number, cause = "sca
   }
 }
 
-// F174: every owner request is load, mutate, put on its OWN copy of the state, and the mutate step awaits DNS and the store. Two requests on one
-// domain used to interleave at those awaits: both undos could win, and the later put overwrote the other's fix record (lost update). Requests on one
-// domain now run one at a time. Scope: one runtime (one Worker isolate interleaves requests exactly like this); several isolates need a store-level
-// compare-and-set or a Durable Object, see the F174 receipt WOULD-FLIP.
+// F185: state writes are compare-and-set on a per-domain revision, enforced BY THE STORE, so they hold across Worker isolates (F174's in-process
+// lock below only ordered requests inside one isolate). casTx runs body (load, mutate; the state it returns carries the revision it was loaded at)
+// then putCas; if another writer committed first, nothing is written and the whole body re-runs on a fresh load. Bounded; then OwnerConflictError.
+// Zone writes made by a losing attempt are not rolled back: the re-run reloads, rescans and sees the zone as it is (undo is idempotent on the zone,
+// and the engine re-derives a fix's record from the live zone), see the F185 receipt for what the harness shows.
+export class OwnerConflictError extends Error { constructor() { super("owner_state_conflict"); } }
+export const CAS_MAX_TRIES = 8;
+const committed = new WeakSet<DomainState>(); // states whose final write the engine already did itself
+export async function casTx<T>(c: Ctx, body: () => Promise<{ s: DomainState; out: T }>, tries = CAS_MAX_TRIES): Promise<{ s: DomainState; out: T }> {
+  for (let i = 0; i < tries; i++) {
+    let r: { s: DomainState; out: T };
+    try { r = await body(); } catch (e) { if (e instanceof OwnerConflictError && i + 1 < tries) continue; throw e; } // a body may lose the race BEFORE any side effect (autoFix phase 1)
+    if (committed.has(r.s)) { committed.delete(r.s); return r; } // autoFix already committed its own final state (see commitMerged)
+    if (!c.store.putCas) { await c.store.put(r.s); return r; }
+    if (await c.store.putCas(r.s, r.s.rev ?? 0)) return r;
+  }
+  throw new OwnerConflictError();
+}
+
+// F174's in-process per-domain queue. SUPERSEDED by casTx for correctness (it does not cross isolates); no service path calls it any more. Kept
+// exported because the F174 interleaving suite mirrors it.
 const domainTails = new Map<string, Promise<unknown>>();
 export async function withDomainLock<T>(domainId: string, fn: () => Promise<T>): Promise<T> {
   const prev = domainTails.get(domainId) ?? Promise.resolve();
@@ -161,7 +191,36 @@ export function questsOf(s: DomainState): { open: Quest[]; done: Quest[] } {
 
 // ---- reversible auto-fix ----
 export type ApplyResult = { ok: true; fix: FixRec; plan: Plan; result: "proven" | "partial" } | { ok: false; reason: "guided" | "no_zone" | "not_open" | "rolled_back" | "unknown_check"; plan?: Plan; fix?: FixRec; detail: string };
+// F185: the zone write is a side effect a retry cannot take back, so autoFix commits its intent FIRST (phase 1: putCas of the state holding the new
+// fix record, BEFORE applyEdits). A request that lost the race fails there, before touching the zone, and casTx re-runs it safely. After the zone
+// edits and the proof re-scan, phase 2 commits the final state; if another writer slipped in between, commitMerged lays our fix record and events onto
+// the fresh state and re-scans, so neither side's update is lost.
+const marks = new WeakMap<DomainState, number>();
 export async function autoFix(c: Ctx, s: DomainState, check: string): Promise<ApplyResult> {
+  let wrote = false;
+  const r = await autoFixRun(c, s, check, async () => {
+    if (!c.store.putCas) return;
+    if (!(await c.store.putCas(s, s.rev ?? 0))) throw new OwnerConflictError();
+    wrote = true; marks.set(s, s.events.length - 1); // the fix_applied event is already in s; it is "mine" too
+  });
+  if (wrote) { await commitMerged(c, s, r.fix!.id); committed.add(s); }
+  return r;
+}
+async function commitMerged(c: Ctx, s: DomainState, fixId: string) {
+  const mine = s.fixes.find((f) => f.id === fixId)!; const mark = marks.get(s) ?? 0; const myEvents = s.events.slice(mark);
+  for (let i = 0; i < CAS_MAX_TRIES; i++) {
+    if (await c.store.putCas!(s, s.rev ?? 0)) return;
+    const fresh = (await c.store.get(s.domainId))!;
+    const same = fresh.fixes.findIndex((f) => f.check === mine.check && f.appliedAt === mine.appliedAt);
+    if (same >= 0) { mine.id = fresh.fixes[same].id; fresh.fixes[same] = mine; } else { mine.id = `fix_${fresh.fixes.length + 1}`; fresh.fixes.push(mine); }
+    for (const e of myEvents) if (!fresh.events.some((x) => x.at === e.at && x.kind === e.kind && x.detail === e.detail)) push(fresh, e);
+    await scanNow(c, fresh, "merge re-scan");
+    for (const k of Object.keys(s)) delete (s as unknown as Record<string, unknown>)[k];
+    Object.assign(s, fresh);
+  }
+  throw new OwnerConflictError();
+}
+async function autoFixRun(c: Ctx, s: DomainState, check: string, phase1: () => Promise<void>): Promise<ApplyResult> {
   const f = s.findings[check];
   if (!f) return { ok: false, reason: "unknown_check", detail: "no such finding; scan first" };
   if (f.state !== "OPEN" && f.state !== "REGRESSED") return { ok: false, reason: "not_open", detail: `finding is ${f.state}; nothing to fix` };
@@ -172,8 +231,9 @@ export async function autoFix(c: Ctx, s: DomainState, check: string): Promise<Ap
   const before = await runScan(s.domain, c.doh(s.domain), c.now); // fresh baseline, so rollback judges against the truth, not a stale scan
   const fix: FixRec = { id: `fix_${s.fixes.length + 1}`, check, edits: plan.edits, appliedAt: c.now(), status: "applied", note: plan.summary };
   s.fixes.push(fix);
-  await applyEdits(z, plan.edits);
   push(s, { at: c.now(), kind: "fix_applied", check, detail: plan.summary });
+  await phase1();
+  await applyEdits(z, plan.edits);
   const after = await runScan(s.domain, c.doh(s.domain), c.now);
   const b = before.findings.find((x) => x.check === check)!.status, a = after.findings.find((x) => x.check === check)!.status;
   const collateral = before.findings.filter((x) => x.status === "PASS" && after.findings.find((y) => y.check === x.check)?.status !== "PASS").map((x) => x.check);
@@ -195,7 +255,10 @@ export async function undoFix(c: Ctx, s: DomainState, fixId: string): Promise<{ 
   if (fix.status === "undone" || fix.status === "rolled_back") return { ok: false, reason: "already_reverted" };
   const z = c.zones.zoneFor(s.domain); if (!z) return { ok: false, reason: "no_zone" };
   // never clobber later edits: the zone must still hold exactly what we wrote
-  for (const e of fix.edits) if (e.kind === "txt") { const now = await z.getTxt(e.name); if (JSON.stringify([...now].sort()) !== JSON.stringify([...e.after].sort())) return { ok: false, reason: "zone_changed_since" }; }
+  // A txt edit may already be back at its `before` set: that is a lost-CAS attempt of ours (or a request on another isolate) that reverted the zone but
+  // did not get its state written. Reverting is idempotent, so the record is simply completed (F185). Anything else is a later edit: refuse.
+  const norm = (a: string[]) => JSON.stringify([...a].sort());
+  for (const e of fix.edits) if (e.kind === "txt") { const now = norm(await z.getTxt(e.name)); if (now !== norm(e.after) && now !== norm(e.before)) return { ok: false, reason: "zone_changed_since" }; }
   await revertEdits(z, fix.edits); fix.status = "undone";
   push(s, { at: c.now(), kind: "fix_undone", check: fix.check, detail: "owner undid the fix; exact previous records restored" });
   await scanNow(c, s, "owner undo"); return { ok: true };
@@ -213,12 +276,14 @@ export async function monitorTick(c: Ctx): Promise<{ scanned: number; alerts: Al
   const alerts: Alert[] = []; let scanned = 0;
   for (const s0 of await c.store.all()) {
     if (!s0.monitor.active || s0.monitor.nextScanAt === undefined || s0.monitor.nextScanAt > c.now()) continue;
-    await withDomainLock(s0.domainId, async () => {
-      const s = (await c.store.get(s0.domainId))!; const mark = s.events.length;
-      await scanNow(c, s, "monitor"); scanned++;
-      for (const e of s.events.slice(mark)) if (e.kind === "regressed" || e.kind === "badge_lost") alerts.push({ domain: s.domain, accountId: s.accountId, kind: e.kind, detail: e.detail });
-      await c.store.put(s);
+    const mine: Alert[] = [];
+    await casTx(c, async () => {
+      const s = (await c.store.get(s0.domainId))!; const mark = s.events.length; mine.length = 0;
+      await scanNow(c, s, "monitor");
+      for (const e of s.events.slice(mark)) if (e.kind === "regressed" || e.kind === "badge_lost") mine.push({ domain: s.domain, accountId: s.accountId, kind: e.kind, detail: e.detail });
+      return { s, out: null };
     });
+    scanned++; alerts.push(...mine);
   }
   return { scanned, alerts };
 }
