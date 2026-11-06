@@ -41,6 +41,14 @@ async function violations(m: Mods): Promise<string[]> {
   if (!after?.plan) { bad.push("P1 plan lost across restart"); return bad; }
   if (JSON.stringify(after.plan) !== JSON.stringify(before.plan)) bad.push("P1b plan changed across restart");
   if (after.plan.tier !== "ai_embedded" || after.productId !== "ai_embedded") bad.push("P2 tier lost");
+  // f175: changePlan now writes through casSubscription, so the plain upsert path (Stripe seed, webhooks) is checked directly here
+  await store.putSubscription({ ...after, productId: "ai_ops", plan: { ...after.plan, tier: "ai_ops" } });
+  const upd = await store.subscriptionById("sub_syn");
+  if (upd?.plan?.tier !== "ai_ops" || upd.productId !== "ai_ops") bad.push("P2 upsert did not replace the stored plan");
+  await store.putSubscription({ ...after, cancelAt: 123456 });
+  if ((await store.subscriptionById("sub_syn"))?.cancelAt !== 123456) bad.push("P7 upsert did not store cancel_at");
+  await store.putSubscription(after); // cancelAt absent again: the upsert must clear it
+  if ((await store.subscriptionById("sub_syn"))?.cancelAt !== undefined) bad.push("P7 upsert kept the old cancel_at");
   if (after.plan.startedAt !== START * 1000) bad.push("P3 period start lost");
   if (JSON.stringify(after.plan.periodNow) !== JSON.stringify({ start: START * 1000, end: END * 1000 })) bad.push("P3b current period lost");
   if (!after.plan.cycle || boundary(after.plan, 1) !== END * 1000) bad.push("P3c billing grid lost");
@@ -107,7 +115,7 @@ const MUT: { id: string; inv: string; from: string; to: string }[] = [
   { id: "A2 read ignores plan_json", inv: "P1", from: "if (r.plan_json !== null && r.plan_json !== undefined) s.plan", to: "if (false) s.plan" },
   { id: "A3 upsert keeps the old plan_json", inv: "P2", from: "cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json", to: "cancelled_at = excluded.cancelled_at" },
   { id: "A4 upsert keeps the old cancel_at", inv: "P7", from: "cancel_at = excluded.cancel_at, cancelled_at", to: "cancelled_at" },
-  { id: "A5 planless row stores the string null", inv: "P9", from: "s.plan === undefined ? null : JSON.stringify(s.plan)", to: "JSON.stringify(s.plan) ?? 'null'" },
+  { id: "A5 planless row stores the string null", inv: "P9", from: "n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));", to: "n(s.cancelledAt), JSON.stringify(s.plan) ?? 'null');" },
   { id: "A6 started_at not persisted", inv: "P3", from: "n(s.cancelAt), n(s.cancelledAt), s.plan", to: "n(s.cancelAt), n(s.cancelledAt), s.plan" }, // placeholder replaced below
 ];
 MUT[5] = { id: "A6 product_id not updated on upsert", inv: "P2", from: "product_id = excluded.product_id, started_at = excluded.started_at, cancel_at", to: "started_at = excluded.started_at, cancel_at" };
