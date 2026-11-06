@@ -24,7 +24,7 @@ async function world() {
     const inv = (await h.get(v.session, "/invites")).invites[0];
     await h.post(v.session, `/invites/${inv.id}/accept`);
     const assets = (await h.get(o.session, `/enterprise/${o.tenant.id}/assets`)).assets;
-    T[k] = { id: o.tenant.id, admin: { email: o.email ?? `admin-${k}@ent${k}.com.au`, session: o.session }, viewer: { email: `viewer-${k}@ent${k}.com.au`, session: v.session }, assetId: assets[0].id, accountId: (await h.get(o.session, "/me")).id, viewerAccountId: (await h.get(v.session, "/me")).id, cfg: SSO_CFG(cfgView.clientId, `CANARY_SSO_SECRET_${k}_0123456789`), slug: `ent-${k.toLowerCase()}` };
+    T[k] = { id: o.tenant.id, admin: { email: (o as any).email ?? `admin-${k}@ent${k}.com.au`, session: o.session }, viewer: { email: `viewer-${k}@ent${k}.com.au`, session: v.session }, assetId: assets[0].id, accountId: (await h.get(o.session, "/me")).id, viewerAccountId: (await h.get(v.session, "/me")).id, cfg: SSO_CFG(cfgView.clientId, `CANARY_SSO_SECRET_${k}_0123456789`), slug: `ent-${k.toLowerCase()}` };
     // an invite pending to a canary address
     const pend = await h.post(o.session, `/enterprise/${o.tenant.id}/members`, { email: `pending-${k}@ent${k}.com.au`, role: "analyst" });
     T[k].inviteId = pend.id;
