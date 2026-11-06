@@ -90,7 +90,7 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
     email: a.email, mode: p.mode, name: p.name, amountCents: p.amountCents, interval: p.interval, accountId: a.id, productId: p.id,
     successUrl: `${d.siteOrigin}/app/billing?done=${purchaseId}`, cancelUrl: `${d.siteOrigin}/app/billing?cancelled=1`, idempotencyKey: purchaseId,
   });
-  await d.store.putPurchase({ id: purchaseId, accountId: a.id, productId: p.id, domain, checkoutId: cs.id, amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending" });
+  await d.store.putPurchase({ id: purchaseId, accountId: a.id, productId: p.id, domain, checkoutId: cs.id, amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending", createdAt: d.now() });
   return { purchaseId, checkoutUrl: cs.url };
 }
 
@@ -141,7 +141,7 @@ function applyRefund(pur: Purchase, cents: number) {
   pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
   if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
 }
-async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
+export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
   const now = d.now();
   pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
   let cancel = false;

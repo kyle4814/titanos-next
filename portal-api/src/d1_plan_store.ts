@@ -13,7 +13,7 @@ const n = (v: unknown) => (v === undefined ? null : v);
 const clean = <T extends object>(o: T): T => { for (const k of Object.keys(o) as (keyof T)[]) if (o[k] === undefined) delete o[k]; return o; };
 
 const toAccount = (r: Row): Account => clean({ id: String(r.id), email: String(r.email), seat: String(r.seat), stripeCustomerId: str(r.stripe_customer_id), createdAt: Number(r.created_at), deletedAt: num(r.deleted_at) });
-const toPurchase = (r: Row): Purchase => clean({ id: String(r.id), accountId: String(r.account_id), productId: String(r.product_id), domain: str(r.domain), checkoutId: String(r.checkout_id), paymentIntent: str(r.payment_intent), subscriptionId: str(r.subscription_id), paidAt: num(r.paid_at), amountCents: Number(r.amount_cents), deliverableIssued: Number(r.deliverable_issued) === 1, refundedCents: Number(r.refunded_cents), status: String(r.status) as Purchase["status"] });
+const toPurchase = (r: Row): Purchase => clean({ id: String(r.id), accountId: String(r.account_id), productId: String(r.product_id), domain: str(r.domain), checkoutId: String(r.checkout_id), paymentIntent: str(r.payment_intent), subscriptionId: str(r.subscription_id), paidAt: num(r.paid_at), amountCents: Number(r.amount_cents), deliverableIssued: Number(r.deliverable_issued) === 1, refundedCents: Number(r.refunded_cents), status: String(r.status) as Purchase["status"], createdAt: num(r.created_at) });
 const toSub = (r: Row): Subscription => {
   const s: Subscription = clean({ id: String(r.id), accountId: String(r.account_id), purchaseId: String(r.purchase_id), productId: String(r.product_id), startedAt: Number(r.started_at), cancelAt: num(r.cancel_at), cancelledAt: num(r.cancelled_at) });
   if (r.plan_json !== null && r.plan_json !== undefined) s.plan = JSON.parse(String(r.plan_json)) as PlanState;
@@ -36,8 +36,8 @@ export class D1PlanStore extends MemoryStore {
       a.id, a.email, a.seat, n(a.stripeCustomerId), a.createdAt, n(a.deletedAt));
   }
   override async putPurchase(p: Purchase) {
-    await this.exec("INSERT INTO purchases (id, account_id, product_id, domain, checkout_id, payment_intent, subscription_id, paid_at, amount_cents, deliverable_issued, refunded_cents, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, product_id = excluded.product_id, domain = excluded.domain, checkout_id = excluded.checkout_id, payment_intent = excluded.payment_intent, subscription_id = excluded.subscription_id, paid_at = excluded.paid_at, amount_cents = excluded.amount_cents, deliverable_issued = excluded.deliverable_issued, refunded_cents = excluded.refunded_cents, status = excluded.status",
-      p.id, p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status);
+    await this.exec("INSERT INTO purchases (id, account_id, product_id, domain, checkout_id, payment_intent, subscription_id, paid_at, amount_cents, deliverable_issued, refunded_cents, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, product_id = excluded.product_id, domain = excluded.domain, checkout_id = excluded.checkout_id, payment_intent = excluded.payment_intent, subscription_id = excluded.subscription_id, paid_at = excluded.paid_at, amount_cents = excluded.amount_cents, deliverable_issued = excluded.deliverable_issued, refunded_cents = excluded.refunded_cents, status = excluded.status, created_at = COALESCE(purchases.created_at, excluded.created_at)",
+      p.id, p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, n(p.createdAt));
   }
   override async purchaseById(id: string) { const r = await this.one("SELECT * FROM purchases WHERE id = ?", id); return r && toPurchase(r); }
   override async purchaseByCheckout(c: string) { const r = await this.one("SELECT * FROM purchases WHERE checkout_id = ?", c); return r && toPurchase(r); }
@@ -66,6 +66,9 @@ export class D1PlanStore extends MemoryStore {
   }
   override async paidPurchasesBefore(cutoff: number) {
     return (await this.many("SELECT * FROM purchases p WHERE p.paid_at IS NOT NULL AND p.paid_at <= ? AND p.status IN ('paid', 'refunded') AND NOT EXISTS (SELECT 1 FROM invoices i WHERE i.purchase_id = p.id) ORDER BY p.paid_at, p.id", cutoff)).map(toPurchase);
+  }
+  override async pendingPurchasesBefore(cutoff: number) {
+    return (await this.many("SELECT * FROM purchases WHERE status = 'pending' AND COALESCE(created_at, 0) <= ? ORDER BY COALESCE(created_at, 0), id", cutoff)).map(toPurchase);
   }
   // Gap-free and atomic: one UPSERT...RETURNING on the single-row counter. Survives a restart; two stores over one D1 never repeat a number.
   override async nextInvoiceNumber() {

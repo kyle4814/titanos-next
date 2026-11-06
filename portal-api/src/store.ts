@@ -4,7 +4,7 @@ export interface Account { id: string; email: string; seat: string; stripeCustom
 export interface Session { hash: string; accountId: string; expiresAt: number }
 export interface LoginToken { hash: string; email: string; expiresAt: number; used: boolean }
 export interface DomainRow { id: string; accountId: string; domain: string; token: string; verifiedAt?: number }
-export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled" }
+export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled"; createdAt?: number }
 import type { PlanState } from "./plan_change.ts";
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number; plan?: PlanState }
 export interface Invoice { id: string; accountId: string; purchaseId?: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
@@ -45,6 +45,8 @@ export interface Store {
   purchaseInvoiced(purchaseId: string): Promise<boolean>;
   putInvoiceOnce(i: Invoice): Promise<boolean>;
   paidPurchasesBefore(cutoff: number): Promise<Purchase[]>;
+  // f210 pending reconciler. pendingPurchasesBefore: status pending, created at or before `cutoff` (a row with no createdAt predates the column and counts as oldest), oldest first.
+  pendingPurchasesBefore(cutoff: number): Promise<Purchase[]>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
@@ -111,6 +113,10 @@ export class MemoryStore implements Store {
   async paidPurchasesBefore(cutoff: number) {
     return [...this.purchases.values()].filter((p) => p.paidAt !== undefined && p.paidAt <= cutoff && (p.status === "paid" || p.status === "refunded")
       && ![...this.invoices.values()].some((o) => o.purchaseId === p.id)).sort((a, b) => a.paidAt! - b.paidAt! || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
+  }
+  async pendingPurchasesBefore(cutoff: number) {
+    return [...this.purchases.values()].filter((p) => p.status === "pending" && (p.createdAt ?? 0) <= cutoff)
+      .sort((a, b) => (a.createdAt ?? 0) - (b.createdAt ?? 0) || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
   }
   async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
   async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
