@@ -94,6 +94,8 @@ test("migration 0005 is additive, nullable and NOT APPLIED; the number counter i
   assert.ok(!/\b(DROP|DELETE|UPDATE)\b/i.test(sql.replace(/--.*$/gm, "")));
   assert.ok(/ADD COLUMN purchase_id TEXT REFERENCES purchases\(id\);/.test(sql), "nullable FK column");
   assert.ok(/CREATE TABLE IF NOT EXISTS invoice_seq \(id INTEGER PRIMARY KEY CHECK \(id = 1\), n INTEGER NOT NULL\)/.test(sql), "same counter DDL as f13 0004_store_counters");
+  // merge-order rule (f189 finding): web/f16 0003_enterprise already adds invoices.purchase_id; the merge strips this one standalone line (--strip)
+  assert.equal(sql.split("\n").filter((l) => l.startsWith("ALTER TABLE invoices ADD COLUMN purchase_id")).length, 1, "the ALTER stays one strippable line");
   const db = new FakeD1().db;
   assert.ok((db.prepare("PRAGMA table_info(invoices)").all() as any[]).some((c) => c.name === "purchase_id" && c.notnull === 0));
 });
