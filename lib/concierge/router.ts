@@ -2,6 +2,7 @@
 import type { Reply, Seat, Shelf, Tap, ConfigStub } from "./types.ts";
 import { tokens, normalise, findDomain } from "./text.ts";
 import { junkCheck } from "./guard.ts";
+import { familyToAsk, lostIntent } from "./askguard.ts";
 
 export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: unmatched
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
@@ -90,6 +91,10 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
   const raw = String(ask ?? "").slice(0, 500);      // bound the work
   if (junkCheck(raw).junk) return unmatched(raw, seat, "junk");   // F-C6: markup, SQL and prompt-injection shapes never reach an offer
   const q = tokens(raw);
+  if (lostIntent(raw)) {   // F60: "nothing fits / I am lost" is handed to a person and the FAQ, never forced onto a shelf
+    const doors = ["portal:contact", "portal:faq"].map((id) => index.docs.find((d) => d.shelf.id === id)).filter((d): d is Doc => !!d && (!d.shelf.only || d.shelf.only.includes(seat)));
+    if (doors.length) return { kind: "ask", question: "Which of these is closest to what you need?", taps: doors.map((d) => tap(d.shelf)), score: 0 };
+  }
   const domain = findDomain(raw);
   const ranked = index.docs.filter((d) => !d.shelf.only || d.shelf.only.includes(seat)).map((d) => { const r = score(index, q, d, seat); return { d, s: r.s, hit: r.hit, phrase: r.phrase }; }).sort((a, b) => b.s - a.s || (a.d.shelf.id < b.d.shelf.id ? -1 : 1));
   const top = ranked[0];
@@ -99,6 +104,12 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
     if (scan) return { kind: "match", shelf: scan.shelf, score: 99, margin: 1, answer: scan.shelf.answer, slots: { domain }, alternatives: [] };
   }
   if (!top || top.s < MIN_SCORE || (!top.hit && (top.s < CONF_FLOOR || unknownShare(index, q) >= MAX_UNKNOWN))) return unmatched(raw, seat, "no_match");
+  const fam = familyToAsk(q, top.d.shelf.id);   // F60: sibling offers are never a confident single pick unless the ask named the variant
+  if (fam) {
+    const byId = new Map(ranked.map((r) => [r.d.shelf.id, r]));
+    const members = fam.map((m) => byId.get(m.id)).filter((r): r is NonNullable<typeof r> => !!r).sort((a, b) => b.s - a.s).slice(0, 3);
+    if (members.length >= 2) return { kind: "ask", question: "Which of these is closest to what you need?", taps: members.map((r) => tap(r.d.shelf)), score: top.s };
+  }
   const second = ranked[1];
   const margin = second && top.s > 0 ? (top.s - second.s) / top.s : 1;
   if (second && margin < ASK_MARGIN && second.s >= MIN_SCORE) {
