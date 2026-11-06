@@ -15,6 +15,7 @@ export type NavItem = { label: string; href: string; external: boolean };
 export const LINKS: NavItem[] = [
   { label: "Find your offer", href: "/find", external: false },
   { label: "All offers", href: "/offers", external: false },
+  { label: "Shop", href: "/shop", external: false },
   { label: "Products and courses", href: "/products", external: false },
   { label: "Case studies", href: "/case-studies", external: false },
   { label: "Free consultation", href: "/audit", external: false },
