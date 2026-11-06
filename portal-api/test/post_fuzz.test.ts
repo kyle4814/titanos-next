@@ -11,6 +11,8 @@ import { MemoryZone } from "../src/owner/dnsw.ts";
 import { MemoryOwnerStore } from "../src/owner/engine.ts";
 import { MemoryMarketStore } from "../src/market/store.ts";
 import { MockPayments } from "../src/market/payments.ts";
+import { D1Store } from "../src/d1store.ts";
+import { FakeD1 } from "./fake_d1.ts";
 import { make, SECRET, RECEIPT_SECRET } from "./harness.ts";
 import { MockPayouts, INTERNAL as ENT_INTERNAL } from "./ent_harness.ts";
 import { healthy } from "./owner_harness.ts";
@@ -23,8 +25,17 @@ const MKT_INTERNAL = "market_fuzz_internal_secret";
 console.log(`FUZZ SEED=${SEED} (replay: FUZZ_SEED=${SEED}; FUZZ_ONLY="POST /keys" limits to one route)`);
 
 // ---------------- rig: every optional dep wired so no route stops at a 503 ----------------
+// FUZZ_STORE=d1 (f188): the Worker Store is D1Store over FakeD1 (node:sqlite, real migrations, foreign keys ON). owner/market/enterprise
+// stores stay in memory (no D1 adapter on any branch, f212 receipt) and are labelled so in the totals line.
+export const STORE_KIND = process.env.FUZZ_STORE === "d1" ? "d1" : "memory";
+export const fakeD1 = STORE_KIND === "d1" ? new FakeD1() : undefined;
+// Full-database dump (every table, rows ordered by their JSON) so a D1 write is visible to the snapshot exactly as a Map change is.
+function dumpD1(d: FakeD1): unknown {
+  const tabs = d.db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all() as { name: string }[];
+  return Object.fromEntries(tabs.map((t) => [t.name, (d.db.prepare(`SELECT * FROM "${t.name}"`).all() as unknown[]).map((r) => JSON.stringify(r)).sort()]));
+}
 async function buildRig() {
-  const h = make();
+  const h = fakeD1 ? make(new D1Store(fakeD1)) : make();
   const domain = "fuzz-a.com.au";
   const world = faulty(domain), zone = new MemoryZone(world);
   const marketStore = new MemoryMarketStore(), payments = new MockPayments(), ownerStore = new MemoryOwnerStore();
@@ -53,7 +64,7 @@ async function buildRig() {
   const mk = await h.j(await h.req("POST", "/keys", { token: a.session, body: { scopes: ["scan:read", "scan", "fix", "read", "write"] } }));
   const tk: string = mk.key;
   ids.subscriptions = "sub_x"; ids.invoices = "inv_x";
-  return { h, a, b, p, tk, ids, domain, stores: [h.store, entStore, marketStore, ownerStore, h.mailer, h.billing, payments, payouts, h.model] as unknown[] };
+  return { h, a, b, p, tk, ids, domain, stores: [...(fakeD1 ? [] : [h.store]), entStore, marketStore, ownerStore, h.mailer, h.billing, payments, payouts, h.model] as unknown[] };
 }
 const rig = await buildRig();
 const { h } = rig;
@@ -84,7 +95,7 @@ async function fire(key: string, method: string, path: string, auth: string, bod
   if (auth === "apikey") headers.authorization = `Bearer ${rig.tk}`;
   if (auth === "garbage") headers.authorization = `Bearer ${CANARY}`;
   if (path.startsWith("/stripe/webhook") || path === "/mcp") headers["content-type"] = "application/json";
-  const before = snapshot(...rig.stores);
+  const before = snapshot(...rig.stores, fakeD1 ? dumpD1(fakeD1) : null);
   const n = ++cases; perRoute.set(key, (perRoute.get(key) ?? 0) + 1);
   const o: Observed = { status: null, ctype: "", text: "", stateChanged: false, wrongMethod };
   try {
@@ -97,7 +108,7 @@ async function fire(key: string, method: string, path: string, auth: string, bod
   } catch (e) { o.threw = String((e as Error)?.stack ?? e).split("\n").slice(0, 2).join(" | "); }
   hist.set(o.status ?? "none", (hist.get(o.status ?? "none") ?? 0) + 1);
   if (!wrongMethod && o.status !== null && o.status !== 401 && o.status !== 503 && !/"path":/.test(o.text) && o.status !== 405) reached.add(key);
-  o.stateChanged = snapshot(...rig.stores) !== before;
+  o.stateChanged = snapshot(...rig.stores, fakeD1 ? dumpD1(fakeD1) : null) !== before;
   const why = judge(o, { canaries: [CANARY, CANARY2], secrets: [SECRET, RECEIPT_SECRET, ENT_INTERNAL, MKT_INTERNAL, "sso_secret_fixture"] });
   if (why.length) defects.push({ route: `${method} ${path}`, auth, body: body ? body.label : "(none)", why, n });
   return o;
@@ -165,7 +176,7 @@ test("coverage: every enumerated mutating route was fuzzed and the totals are re
   assert.deepEqual(unreached, [], "routes where no case got past auth/routing into a handler: the fuzz would be testing the 401 wall only");
   const mutated = en.routes.filter((r) => (perRoute.get(`${r.method} ${r.template}`) ?? 0) >= 100).length;
   assert.equal(mutated, en.routes.length, "every route got at least 100 cases");
-  console.log(`FUZZ SEED=${SEED} CASES=${cases} ROUTES=${en.routes.length} METHODS=${[...new Set(en.routes.map((r) => r.method))].join(",")} FIELDS=${fields.length} DEFECTS=${defects.length} STATUS=${JSON.stringify(Object.fromEntries([...hist].sort()))}`);
+  console.log(`FUZZ SEED=${SEED} CASES=${cases} ROUTES=${en.routes.length} METHODS=${[...new Set(en.routes.map((r) => r.method))].join(",")} STORE=${STORE_KIND}${STORE_KIND === "d1" ? "(D1Store/FakeD1; owner,market,ent in memory)" : ""} FIELDS=${fields.length} DEFECTS=${defects.length} STATUS=${JSON.stringify(Object.fromEntries([...hist].sort()))}`);
 });
 
 // ---------------- the judge itself must be able to fail (in-suite mutants) ----------------
