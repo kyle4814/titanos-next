@@ -62,3 +62,19 @@ test("flow16: generated note states the evidence, UNKNOWN for the 14, and never 
 test("flow16: the quoted kernel lines still say what we quote (skipped when the kernel is not on this box)", { skip: !existsSync(SOURCE_QUOTES[0].file) }, () => {
   assert.deepEqual(verifySource(), []);
 });
+
+test("flow16 docs: /terms and /trust are both TESTED routes, so all 16 flows have a verified test, and the terms-vs-billing findings are carried", () => {
+  const rows = buildRows();
+  const docs = rows.find((r) => r.id === "docs")!;
+  assert.deepEqual(docs.routes, [{ route: "/trust", tested: true }, { route: "/terms", tested: true }]);
+  assert.equal(rows.filter((r) => r.status === "OWNED-ELSEWHERE-UNTESTED").length, 0);
+  assert.ok((docs.findings ?? []).length >= 1 && docs.findings!.every((f) => f.includes("app/terms/page.tsx")), "findings name the terms file");
+  assert.ok(render(rows).includes("Routes tested: 2 of 2. Flows with a verified test: 16 of 16."), "count line is computed by the script");
+});
+
+test("flow16 docs mutation: remove the /terms test title and the docs flow drops back to UNTESTED with /terms UNTESTED", () => {
+  const bad = MANIFEST.map((m) => (m.id === "docs" ? { ...m, routes: m.routes!.map((r) => (r.route === "/terms" ? { ...r, evidence: [{ file: "scripts/test_terms_flow.mjs", title: "terms: this assertion was never written" }] } : r)) } : m));
+  const docs = buildRows(undefined, bad).find((r) => r.id === "docs")!;
+  assert.equal(docs.status, "OWNED-ELSEWHERE-UNTESTED");
+  assert.deepEqual(docs.routes!.find((r) => r.route === "/terms"), { route: "/terms", tested: false });
+});
