@@ -19,6 +19,12 @@ export function rateFor(table: RateTable, activeSources: number): { bps: number;
   return { bps, version: table.version };
 }
 export const commissionCents = (amountCents: number, bps: number) => Math.max(0, Math.floor((amountCents * bps) / 10_000));
+// REMAINDER RULE (f88): the partner share is rounded DOWN to a whole cent and the platform keeps the remainder, so
+// partner + platform === gross exactly and no cent is lost or created. Sub-cent dust never favours the partner.
+export function splitCents(grossCents: number, bps: number): { partnerCents: number; platformCents: number } {
+  const partnerCents = commissionCents(grossCents, bps);
+  return { partnerCents, platformCents: grossCents - partnerCents };
+}
 
 // Which partner, if any, earns on this invoice. SINGLE LEVEL: the payer's direct partner only. First the payer's client
 // tenant (sub-portal), then a referral claim. Never the payer's own partner tenant (self-dealing), never a deleted
@@ -69,7 +75,7 @@ export async function recordCommission(e: EntStore, table: RateTable, inv: Invoi
 export async function clawback(e: EntStore, invoices: Invoice[], refundedCents: number, now: number): Promise<void> {
   const total = invoices.reduce((n, i) => n + i.amountCents, 0);
   if (total <= 0 || refundedCents <= 0) return;
-  const fraction = Math.min(1, refundedCents / total);
+  refundedCents = Math.floor(refundedCents);
   for (const inv of invoices) {
     const all = await e.ledgerForInvoice(inv.id);
     for (const partnerId of new Set(all.map((x) => x.partnerId))) {
@@ -77,7 +83,9 @@ export async function clawback(e: EntStore, invoices: Invoice[], refundedCents: 
       const commissions = led.filter((x) => x.kind === "commission");
       const commission = commissions.reduce((n, x) => n + x.amountCents, 0);
       const already = -led.filter((x) => x.kind === "clawback").reduce((n, x) => n + x.amountCents, 0);
-      const target = fraction >= 1 ? commission : Math.floor(commission * fraction);
+      // f88: EXACT integer floor(commission * refunded / total). The old float fraction (refunded / total) lost a cent on
+      // some inputs (e.g. 53 instead of 54). BigInt keeps the product exact above 2^53.
+      const target = refundedCents >= total ? commission : Number((BigInt(commission) * BigInt(refundedCents)) / BigInt(total));
       const delta = target - already;
       if (delta <= 0) continue;
       const src = commissions[0];
@@ -94,7 +102,7 @@ export const balanceCents = async (e: EntStore, partnerId: string, now: number) 
 export function statement(partner: Tenant, entries: LedgerEntry[], month: string): string {
   const [y, m] = month.split("-").map(Number);
   const from = Date.UTC(y, m - 1, 1), to = Date.UTC(y, m, 1);
-  const inMonth = entries.filter((x) => x.at >= from && x.at < to);
+  const inMonth = entries.filter((x) => x.partnerId === partner.id && x.at >= from && x.at < to); // f88: a statement only ever counts its own tenant's lines
   const sum = (...k: string[]) => inMonth.filter((x) => k.includes(x.kind)).reduce((n, x) => n + x.amountCents, 0);
   const aud = (c: number) => `${c < 0 ? "-" : ""}AU$${(Math.abs(c) / 100).toFixed(2)}`;
   return [
