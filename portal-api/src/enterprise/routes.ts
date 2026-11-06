@@ -19,7 +19,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   const m = req.method, seg = path.split("/").filter(Boolean);
   const top = seg[0];
   if (!["enterprise", "partners", "sso", "portal", "tenants", "invites", "referrals", "savings", "internal"].includes(top)) return null;
-  if (top === "internal" && seg[1] !== "tenants" && seg[1] !== "payouts") return null;
+  if (top === "internal" && seg[1] !== "tenants" && seg[1] !== "payouts" && seg[1] !== "enterprise") return null;
   if (!d.ent) return json({ error: "enterprise_unavailable" }, 503);
 
   // public
@@ -29,6 +29,13 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   if (path === "/sso/callback" && m === "POST") return json(await s.ssoCallback(d, await body(req)));
 
   // operator (INTERNAL_API_SECRET); anything wrong looks like a 404
+  if (top === "internal" && seg[1] === "enterprise") {   // C8 f50: strict 401/503 guard, then exactly three routes
+    s.checkOperator(d, req.headers.get("x-internal-secret"));
+    if (path === "/internal/enterprise/payouts/held" && m === "GET") return json(await s.opHeldPayouts(d, new URL(req.url).searchParams.get("tenantId")));
+    if (path === "/internal/enterprise/payouts/retry" && m === "POST") return json(await s.opRetryPayouts(d, await body(req)));
+    if (path === "/internal/enterprise/payouts/sweep" && m === "POST") return json(await s.opSweepPayouts(d, await body(req)));
+    return json({ error: "not_found" }, 404);
+  }
   if (top === "internal") {
     s.checkInternal(d, req.headers.get("x-internal-secret"));
     if (path === "/internal/tenants/provision" && m === "POST") return json(await s.provisionTenant(d, await body(req)), 201);
