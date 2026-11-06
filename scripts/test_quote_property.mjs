@@ -1,8 +1,8 @@
 // F87 C5 property suite for lib/shop/quote.ts (Auto Builder quotes). Fixed seed, 2,000 SYNTHETIC quote requests against a
 // SYNTHETIC shelf set that is graded by the REAL grader. Zero model calls, zero network. Prints a pass count per invariant.
-// SPEC GAP (receipt FILL_f87): quote.ts has no scope, minimum, cap, validity window or assumptions list, so those spec
-// invariants have nothing to test; the "absent" block pins that fact so adding the feature later forces a property suite.
-import { quoteAsk, tokens } from "../lib/shop/quote.ts";
+// F207: quote.ts now has quoteScoped (scope, minimum, cap, validity window, assumptions); invariants S1-S11 below cover them.
+import { quoteAsk, quoteScoped, acceptQuote, isExpired, addDays, DEFAULT_POLICY, MAX_UNITS } from "../lib/shop/quote.ts";
+import { tokens } from "../lib/shop/quote.ts";
 import { gradeAll } from "../lib/shop/grader.ts";
 import { JOBS, SECTORS, COUNTRIES } from "../lib/shop/generator.ts";
 
@@ -119,8 +119,83 @@ for (const [label, v] of Object.entries({ NaN, Infinity, negative: -5, subcent: 
 {
   const q = quoteAsk("synthetic", shelves, vocab);
   const keys = Object.keys(q).sort().join(",");
-  inv("A1 Quote carries no scope/min/cap/validity/assumptions field today (pin; see receipt SPEC GAP)", keys === "cadence,generatorStub,line,matched,missing,priceAud,priceLabel,shelfId", { keys });
+  inv("A1 plain quoteAsk Quote key set is unchanged (scoped fields live only on quoteScoped)", keys === "cadence,generatorStub,line,matched,missing,priceAud,priceLabel,shelfId", { keys });
 }
+
+// ---- F207 scoped invariants (S1-S11), every one of the 2,000 asks gets a random scope, a random date and random assumptions.
+const ISO = (n) => addDays("2026-01-01", n);
+const P = DEFAULT_POLICY;
+let sOk = 0, sBelow = 0, sAbove = 0, sNoMatch = 0, sUnpriced = 0, sMono = 0, sBoundary = 0;
+const askAt = (s) => `${s.tags[0]} ${s.tags[1]} ${s.tags[2]} zq${s.id.split("-")[1]}`;
+const pricedGraded = graded.filter((s) => s.cadence !== "quote" && s.cadence !== "none" && s.priceLabel === "PUBLISHED");
+const quotedGraded = graded.filter((s) => s.cadence === "quote");
+const scopeOf = () => ({ units: 1 + int(40), extras: int(6) });
+const assumeOf = () => Array.from({ length: 1 + int(3) }, (_, k) => `Assumption ${k} ${pick(WORDS)}.`);
+for (let n = 0; n < N; n++) {
+  const aim = int(8);
+  const ask = aim < 5 ? askAt(pick(pricedGraded)) : aim === 5 ? askAt(pick(quotedGraded)) : genAsk();
+  const now = ISO(int(1500)), scope = scopeOf(), as = assumeOf();
+  const q = quoteScoped(ask, scope, as, shelves, vocab, now);
+  const q2 = quoteScoped(ask, scope, as, shelves, vocab, now);
+  inv("S1 deterministic: same ask, scope, date and assumptions give byte-identical JSON", JSON.stringify(q) === JSON.stringify(q2), { ask });
+  if (q.ok) {
+    sOk++;
+    const sh = byId.get(q.shelfId);
+    inv("S2 a scoped price is finite, whole cents, and within [min, cap]", cents(q.priceAud) && q.priceAud >= P.minAud && q.priceAud <= P.capAud, { ask, p: q.priceAud });
+    inv("S3 a scoped quote names a graded, PUBLISHED-priced shelf and never prices below that shelf's own price", !!sh && sh.grade.pass && sh.priceLabel === "PUBLISHED" && q.priceAud >= sh.priceAud, { ask, id: q.shelfId });
+    inv("S4 validity window is explicit: validFrom is the supplied date, validUntil is exactly validDays later", q.validFrom === now && q.validUntil === addDays(now, P.validDays) && q.validUntil > q.validFrom, { q });
+    inv("S5 the quote is usable on validFrom and on validUntil, and expires the day after", acceptQuote(q, q.validFrom).ok && acceptQuote(q, q.validUntil).ok && acceptQuote(q, addDays(q.validUntil, 1)).reason === "EXPIRED" && isExpired(q, addDays(q.validUntil, 1)) && !isExpired(q, q.validUntil), { q });
+    inv("S6 assumptions are echoed: every supplied assumption appears in order at the front, list is non-empty", q.assumptions.length > 0 && as.every((a, i) => q.assumptions[i] === a), { as, got: q.assumptions });
+    inv("S6b the quote states its own scope and window in the assumptions", q.assumptions.some((a) => a.includes(`${scope.units} units`)) && q.assumptions.some((a) => a.includes(q.validUntil)), { q });
+    // S7 monotone: growing units or extras never lowers the price (or turns an accepted quote into a below-minimum one).
+    const bigger = { units: Math.min(MAX_UNITS, scope.units + int(4)), extras: scope.extras + int(3) };
+    const qb = quoteScoped(ask, bigger, as, shelves, vocab, now);
+    sMono++;
+    inv("S7 monotone scope: a scope that is larger in units and extras never prices lower", qb.ok ? qb.priceAud >= q.priceAud : qb.reason === "ABOVE_CAP", { scope, bigger, a: q.priceAud, b: qb.ok ? qb.priceAud : qb.reason });
+  } else {
+    if (q.reason === "BELOW_MINIMUM") sBelow++; else if (q.reason === "ABOVE_CAP") sAbove++; else if (q.reason === "NO_MATCH") sNoMatch++; else if (q.reason === "UNPRICED") sUnpriced++;
+    inv("S8 a refusal carries a typed reason and a plain sentence, and no price", typeof q.reason === "string" && q.detail.length > 10 && !("priceAud" in q), { q });
+  }
+}
+// S9/S10 min and cap are refused, never clamped: probe with a policy built around a known shelf price.
+for (let n = 0; n < 300; n++) {
+  const sh = pick(pricedGraded), ask = askAt(sh), now = ISO(int(1500)), as = assumeOf();
+  const one = quoteScoped(ask, { units: 1, extras: 0 }, as, shelves, vocab, now);
+  if (!one.ok) continue;
+  const p = one.priceAud;
+  const exact = { ...P, minAud: p, capAud: p };
+  inv("S9a a price exactly at the minimum and the cap is accepted (inclusive bounds)", quoteScoped(ask, { units: 1, extras: 0 }, as, shelves, vocab, now, exact).ok, { p });
+  const above = quoteScoped(ask, { units: 1, extras: 0 }, as, shelves, vocab, now, { ...P, minAud: p + 0.01, capAud: p + 100 });
+  inv("S9 below the minimum is refused BELOW_MINIMUM, never raised to the minimum", !above.ok && above.reason === "BELOW_MINIMUM" && !("priceAud" in above), { p, above });
+  const over = quoteScoped(ask, { units: 1, extras: 0 }, as, shelves, vocab, now, { ...P, minAud: 0, capAud: p - 0.01 });
+  inv("S10 above the cap is refused ABOVE_CAP, never cut to the cap", !over.ok && over.reason === "ABOVE_CAP" && !("priceAud" in over), { p, over });
+  sBoundary++;
+}
+// S11 mandatory inputs: no assumptions, a blank assumption, a bad scope or a bad date is refused with its own reason.
+for (let n = 0; n < 300; n++) {
+  const ask = askAt(pick(pricedGraded)), now = ISO(int(1500));
+  const bad = (as) => quoteScoped(ask, { units: 1, extras: 0 }, as, shelves, vocab, now);
+  inv("S11a no assumptions is refused MISSING_ASSUMPTIONS", bad([]).reason === "MISSING_ASSUMPTIONS" && bad(undefined).reason === "MISSING_ASSUMPTIONS", {});
+  inv("S11b a blank or non-string assumption is refused MISSING_ASSUMPTIONS", bad(["ok", "  "]).reason === "MISSING_ASSUMPTIONS" && bad([42]).reason === "MISSING_ASSUMPTIONS", {});
+  const sc = pick([{ units: 0, extras: 0 }, { units: -1, extras: 0 }, { units: 1.5, extras: 0 }, { units: 1, extras: -1 }, { units: NaN, extras: 0 }, { units: MAX_UNITS + 1, extras: 0 }, { units: "2", extras: 0 }, null]);
+  inv("S11c an invalid scope (zero, negative, fractional, NaN, huge, string, null) is refused INVALID_SCOPE", quoteScoped(ask, sc, ["a"], shelves, vocab, now).reason === "INVALID_SCOPE", { sc });
+  const d = pick(["", "2026-13-01", "2026-02-30", "11/07/2026", "tomorrow", undefined]);
+  inv("S11d an invalid quote date is refused INVALID_DATE", quoteScoped(ask, { units: 1, extras: 0 }, ["a"], shelves, vocab, d).reason === "INVALID_DATE", { d });
+}
+inv("S12 acceptQuote on a refusal is NOT_A_QUOTE", acceptQuote({ ok: false, reason: "NO_MATCH", detail: "x" }, "2026-01-01").reason === "NOT_A_QUOTE", {});
+// Client-facing strings: no em or en dashes in any refusal detail or quote line.
+{
+  const lines = [];
+  for (const sc of [{ units: 0, extras: 0 }, { units: 1, extras: 0 }]) for (const as of [[], ["a"]]) for (const d of ["bad", "2026-01-01"]) for (const pol of [P, { ...P, minAud: 1e6 }, { ...P, minAud: 0, capAud: 0 }]) {
+    const r = quoteScoped(askAt(pricedGraded[0]), sc, as, shelves, vocab, d, pol); lines.push(r.ok ? r.line + r.assumptions.join(" ") : r.detail);
+  }
+  lines.push(quoteScoped("zzz", { units: 1, extras: 0 }, ["a"], shelves, vocab, "2026-01-01").detail, quoteScoped(askAt(quotedGraded[0]), { units: 1, extras: 0 }, ["a"], shelves, vocab, "2026-01-01").detail);
+  inv("S13 client-facing quote strings carry no em or en dash", lines.every((l) => !/[\u2013\u2014]/.test(l)), { lines: lines.filter((l) => /[\u2013\u2014]/.test(l)) });
+}
+inv("C5 scoped run exercised accepted quotes", sOk >= 400, { sOk });
+inv("C6 scoped run exercised ABOVE_CAP, NO_MATCH and UNPRICED naturally (BELOW_MINIMUM is probed by S9)", sAbove >= 5 && sNoMatch >= 5 && sUnpriced >= 5, { sBelow, sAbove, sNoMatch, sUnpriced });
+inv("C7 monotone and boundary probes ran", sMono >= 400 && sBoundary >= 100, { sMono, sBoundary });
+console.log(`scoped: ok ${sOk}, below-min ${sBelow}, above-cap ${sAbove}, no-match ${sNoMatch}, unpriced ${sUnpriced}`);
 
 let bad = 0;
 for (const [k, v] of Object.entries(counts)) { console.log(`${v.fail ? "FAIL" : "ok  "} ${k}: ${v.pass}/${v.pass + v.fail}`); bad += v.fail; }
