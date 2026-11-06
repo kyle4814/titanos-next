@@ -46,6 +46,11 @@ export class D1PlanStore extends MemoryStore {
     await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET version = subscriptions.version + 1, account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json",
       s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));
   }
+  override async createSubscription(s: Subscription) {
+    const r = (await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
+      s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan))) as { meta?: { changes?: number } };
+    return Number(r?.meta?.changes ?? 0) === 1;
+  }
   override async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
   override async subscriptionVersioned(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && { sub: toSub(r), version: Number(r.version) }; }
   // Compare-and-set (f175): ONE statement, so the check and the write cannot be separated by another writer. 0 rows changed = lost the race.
