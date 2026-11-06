@@ -127,6 +127,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
     if (!sub0) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
       if (!period) return "ignored";
       await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
+      await sweepLateFacts(d, subId); // f191: the row may have appeared between the read above and the hold
       return "handled";
     }
     const sub = await updateSubscription(d, subId, async (x, fx) => { await seedPeriod(d, x, period, !cycle, fx); return true; }) ?? sub0;
@@ -137,7 +138,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   }
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
-    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
+    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); await sweepLateFacts(d, String(o.id)); return "handled"; } // cancel before its payment: held; f191: re-check after the hold
     await updateSubscription(d, sub.id, (x) => { if (x.cancelledAt) return false; x.cancelledAt = d.now(); return true; }); // CAS: never overwrites a racing changePlan winner
     return "handled";
   }
@@ -173,6 +174,7 @@ async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId:
         return JSON.stringify(x) !== before;
       });
     }
+    await sweepLateFacts(d, sub.id); // f191: a webhook that held a fact after the take above but before the row existed
   }
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
@@ -230,12 +232,31 @@ async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefine
     sub.startedAt = p.start; sub.plan = initPlanFromStripe(sub.productId as Tier, p);
     let facts: Record<string, unknown>[];
     if (fx) { fx.taken ??= await d.store.takeFacts(`sub:${sub.id}`); fx.used = true; facts = fx.taken; } else facts = await d.store.takeFacts(`sub:${sub.id}`);
+    if (facts.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now(); // f191: a cancel held in the same bucket is taken with the periods; never consume it without effect
     for (const hp of heldPeriods(facts).rest) await seedPeriod(d, sub, hp, false, fx);
     return;
   }
   const r = observePeriod(sub.plan, p);
   if (r.applied === "advanced") sub.plan = r.state;
   else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${sub.id}: start ${p.start} (state untouched)`);
+}
+// f191: hold-then-create ordering window. A webhook reads "no subscription", holds its fact; markPaid takes facts, then creates the row.
+// If the hold lands after the take, the fact sits under a key nobody takes again. Both sides therefore re-check: the webhook sweeps after
+// its hold (row exists now?), markPaid sweeps after its create. takeFacts removes atomically, so each fact is applied exactly once, by
+// whichever side takes it, and a fact held while there is still no row is picked up by markPaid's sweep.
+async function sweepLateFacts(d: Deps, subId: string) {
+  if (!(await d.store.subscriptionById(subId))) return; // still no row: markPaid's post-create sweep will take it
+  const facts = await d.store.takeFacts(`sub:${subId}`);
+  if (!facts.length) return;
+  const cancel = facts.some((f) => f.kind === "cancel"), held = heldPeriods(facts), now = d.now();
+  await updateSubscription(d, subId, async (x, fx) => {
+    fx.taken = facts; fx.used = true; // consumed here on purpose
+    if (cancel && !x.cancelledAt) x.cancelledAt = now;
+    const planned = !!x.plan;
+    await seedPeriod(d, x, held.first, true, fx);
+    if (planned || !held.first) for (const hp of held.rest) await seedPeriod(d, x, hp, false, fx); // no first period and no plan: the rest are re-held (via fx) until the first arrives
+    return true;
+  });
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
