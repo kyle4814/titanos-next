@@ -5,6 +5,11 @@ import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
 import * as own from "./owner/service.ts";
 import * as mkt from "./market/service.ts";
+import { authenticateKey, handleMcp } from "./agent/mcp.ts";
+import { startTopup, handleCreditEvent, CREDIT_PACKS } from "./agent/credits.ts";
+import { TOOLS, publicTool } from "./agent/tools.ts";
+import { verifyReceipt } from "./agent/receipt.ts";
+import { agentCard } from "./agent/files.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -33,6 +38,8 @@ export async function health(env: Env): Promise<Response> {
 }
 
 const MAX_BODY = 64 * 1024;
+const apiOrigin = (req: Request) => new URL(req.url).origin;
+async function limited(req: Request): Promise<string> { const t = await req.text(); if (t.length > MAX_BODY) throw new HttpError(413, "body_too_large"); return t; }
 async function body(req: Request): Promise<Record<string, unknown>> {
   const t = await req.text();
   if (t.length > MAX_BODY) throw new HttpError(413, "body_too_large");
@@ -67,6 +74,22 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   const m = req.method;
   const seg = path.split("/").filter(Boolean);
   if (path === "/catalogue" && m === "GET") return json({ products: Object.values(PRODUCTS).map(({ id, name, amountCents, mode, interval, minMonths, needsVerifiedDomain }) => ({ id, name, amountCents, currency: "aud", mode, interval, minMonths, needsVerifiedDomain })) });
+  if (path === "/agent/tools" && m === "GET") return json({ tools: TOOLS.map(publicTool), creditPacks: Object.values(CREDIT_PACKS), creditRate: "1 credit = AU$0.01 (example rate)" });
+  if (path === "/.well-known/agent.json" && m === "GET") return json(agentCard(d.siteOrigin, apiOrigin(req)));
+  if (path === "/agent/receipts/verify" && m === "POST") { // stateless: anyone holding a receipt can check it; nothing is looked up or revealed
+    const r = (await body(req)).receipt as any;
+    const shape = r && typeof r === "object" && ["id", "tool", "keyId", "accountId", "inputSha", "outputSha", "mode", "sig"].every((k) => typeof r[k] === "string") && typeof r.at === "number" && typeof r.credits === "number";
+    return json({ valid: shape ? await verifyReceipt(d.receiptSecret ?? "", r) : false });
+  }
+  if (path === "/mcp") {
+    if (m === "GET") return json({ error: "use_post", hint: "MCP over HTTP: POST JSON-RPC 2.0 with Authorization: Bearer tk_..." }, 405);
+    if (m !== "POST") return json({ error: "method_not_allowed" }, 405);
+    const auth = await authenticateKey(d, req.headers.get("authorization"));
+    if (!auth) { const res = json({ jsonrpc: "2.0", id: null, error: { code: -32001, message: "unauthenticated" } }, 401); res.headers.set("www-authenticate", 'Bearer realm="titanos-mcp"'); return res; }
+    let msg; try { msg = JSON.parse(await limited(req)); } catch (e) { if (e instanceof HttpError) throw e; return json({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "parse_error" } }, 400); }
+    const out = await handleMcp(d, auth, msg, { idem: req.headers.get("idempotency-key"), byok: req.headers.get("x-model-key") });
+    return out === null ? new Response(null, { status: 202 }) : json(out);
+  }
   if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") return json(await svc.verifyLogin(d, (await body(req)).token));
   if (path === "/stripe/webhook" && m === "POST") {
@@ -80,7 +103,8 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
       const o = ev.data.object;
       return json({ result: await mkt.confirmFunded(d, { jobId: mj, checkoutId: String(o.id), paymentIntent: o.payment_intent ? String(o.payment_intent) : undefined, amountTotal: typeof o.amount_total === "number" ? o.amount_total : undefined }) });
     }
-    return json({ result: await svc.handleStripeEvent(d, ev) });
+    const credit = await handleCreditEvent(d, ev);
+    return json({ result: credit ?? (await svc.handleStripeEvent(d, ev)) });
   }
   if (path === "/market/leaderboard" && m === "GET") return json(await mkt.leaderboard(d));   // public, pseudonymous, proven fixes only
   if (seg[0] === "internal" && seg[1] === "market") {   // Kyle's tap and the cron: guarded by the internal secret, never a session
@@ -129,6 +153,8 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (path === "/keys" && m === "POST") return json(await svc.createKey(d, a, (await body(req)).scopes), 201);
   if (path === "/keys" && m === "GET") return json({ keys: await svc.listKeys(d, a) });
   if (seg[0] === "keys" && seg.length === 2 && m === "DELETE") { await svc.revokeKey(d, a, seg[1]); return json({ ok: true }); }
+  if (path === "/agent/credits" && m === "GET") return json({ balance: await d.store.creditBalance(a.id), entries: (await d.store.creditEntries(a.id)).slice(-50) });
+  if (path === "/agent/credits/topup" && m === "POST") return json(await startTopup(d, a, (await body(req)).pack), 201);
   if (path === "/account/export" && m === "GET") return json(await svc.exportData(d, a));
   if (path === "/account" && m === "DELETE") return json(await svc.deleteAccount(d, a, (await body(req)).confirm));
   return json({ error: "not_found", path }, 404);
