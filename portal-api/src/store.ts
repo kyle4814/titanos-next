@@ -5,7 +5,8 @@ export interface Session { hash: string; accountId: string; expiresAt: number }
 export interface LoginToken { hash: string; email: string; expiresAt: number; used: boolean }
 export interface DomainRow { id: string; accountId: string; domain: string; token: string; verifiedAt?: number }
 export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled" }
-export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
+import type { PlanState } from "./plan_change.ts";
+export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number; plan?: PlanState }
 export interface Invoice { id: string; accountId: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
 export type { RefundCase } from "./refund_card.ts";
