@@ -6,6 +6,7 @@ import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { MemoryStore, type Invoice, type Store } from "../src/store.ts";
 import { D1PlanStore } from "../src/d1_plan_store.ts";
+import { D1Store } from "../src/d1store.ts";
 import { FakeD1 } from "./fake_d1.ts";
 import { make, STORE_KINDS, T0 } from "./harness.ts";
 
@@ -76,6 +77,24 @@ for (const [name, fac] of [["memory", memory], ["d1", d1]] as const) {
   test(`[${name}] invoice contract C1..C7 holds`, async () => { const bad = await violations(fac); assert.deepEqual(bad, []); });
 }
 
+const d1store: Factory = () => { const db = new FakeD1(); return { open: () => new D1Store(db) }; }; // f215: the plain D1Store adapter, same contract
+test("[d1store] invoice contract C1..C7 holds (f215: D1Store persists purchaseId)", async () => { assert.deepEqual(await violations(d1store), []); });
+test("[parity] memory, D1PlanStore and D1Store give identical results on the same invoice script", async () => {
+  const run = async (fac: Factory) => {
+    const { open } = fac(), s = open(); await seed(s); const out: unknown[] = [];
+    const tryPut = async (i: Invoice) => { try { await s.putInvoice(i); out.push("ok"); } catch { out.push("refused"); } };
+    await tryPut(inv({ id: "p1" })); await tryPut(inv({ id: "p2", number: "TT-000002" })); // duplicate (purchase,event)
+    await tryPut(inv({ id: "p3", number: "TT-000003", stripeEventId: "evt_2" })); await tryPut(inv({ id: "p4", number: "TT-000004", purchaseId: undefined, stripeEventId: "evt_1" }));
+    await tryPut(inv({ id: "p5", number: "TT-000005", purchaseId: undefined, stripeEventId: "evt_1" })); await tryPut(inv({ id: "p6", number: "TT-000003", stripeEventId: "evt_9" })); // legacy twice, dup number
+    for (const id of ["p1", "p2", "p3", "p4", "p5", "p6"]) { const g = await open().invoiceById(id); out.push(g && Object.fromEntries(Object.entries(g).sort())); }
+    out.push((await open().invoicesFor("acc_a")).map((x) => x.id));
+    return JSON.stringify(out);
+  };
+  const [m, pl, d] = [await run(memory), await run(d1), await run(d1store)];
+  assert.equal(pl, m, "D1PlanStore differs from MemoryStore"); assert.equal(d, m, "D1Store differs from MemoryStore");
+  assert.ok(m.includes('"purchaseId":"pur_acc_a_1"') && m.includes('"refused"'), "script must exercise the round trip and a refusal");
+});
+
 // ---- D1-only: what the schema adds ----
 test("[d1] invoices.purchase_id is a foreign key: an invoice for a purchase that does not exist is refused", async () => {
   const db = new FakeD1(), s = new D1PlanStore(db); await seed(s);
@@ -142,6 +161,29 @@ test(`mutation: ${MUT.length} of ${MUT.length} adapter mutants are killed by the
       cpSync(SRC, join(dir, "src"), { recursive: true });
       writeFileSync(join(dir, "src", "d1_plan_store.ts"), text.replace(mu.from, mu.to));
       const { D1PlanStore: M } = await import(pathToFileURL(join(dir, "src", "d1_plan_store.ts")).href);
+      const bad = await violations(() => { const db = new FakeD1(); return { open: () => new M(db) as Store }; });
+      assert.ok(bad.length > 0, "SURVIVED: " + mu.id);
+      assert.ok(bad.some((b) => b.startsWith(mu.inv)), `killed, but not by ${mu.inv}: ${bad.slice(0, 3).join(" | ")}`);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }
+});
+
+// f215: the same mutation proof for D1Store (src/d1store.ts): each mutant must be killed by its named check.
+const MUT2: { id: string; inv: string; from: string; to: string }[] = [
+  { id: "S1 write drops purchase_id", inv: "C1", from: "i.accountId, i.purchaseId ?? null, i.number,", to: "i.accountId, null, i.number," },
+  { id: "S2 read drops purchase_id", inv: "C1", from: "const p = str(r.purchase_id); if (p !== undefined) i.purchaseId = p; return i;", to: "return i;" },
+  { id: "S3 absent purchaseId read as empty string", inv: "C6", from: "if (p !== undefined) i.purchaseId = p; return i;", to: "i.purchaseId = p ?? \"\"; return i;" },
+  { id: "S4 insert or ignore swallows a clash", inv: "C4", from: "INSERT INTO invoices (id,", to: "INSERT OR IGNORE INTO invoices (id," },
+];
+test(`mutation: ${MUT2.length} of ${MUT2.length} D1Store mutants are killed by their named check`, async () => {
+  const text = readFileSync(join(SRC, "d1store.ts"), "utf8");
+  for (const mu of MUT2) {
+    assert.equal(text.split(mu.from).length - 1, 1, `anchor must match exactly once: ${mu.id}`);
+    const dir = mkdtempSync(join(tmpdir(), "invd1s_mut_"));
+    try {
+      cpSync(SRC, join(dir, "src"), { recursive: true });
+      writeFileSync(join(dir, "src", "d1store.ts"), text.replace(mu.from, mu.to));
+      const { D1Store: M } = await import(pathToFileURL(join(dir, "src", "d1store.ts")).href);
       const bad = await violations(() => { const db = new FakeD1(); return { open: () => new M(db) as Store }; });
       assert.ok(bad.length > 0, "SURVIVED: " + mu.id);
       assert.ok(bad.some((b) => b.startsWith(mu.inv)), `killed, but not by ${mu.inv}: ${bad.slice(0, 3).join(" | ")}`);
