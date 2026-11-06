@@ -137,6 +137,7 @@ export default function OffersHub() {
       >
         <AnimatedButton href="/scan#request">START WITH THE FREE CHECK →</AnimatedButton>
         <AnimatedButton href="/find" variant="secondary" ariaLabel="Find my offer in 30 seconds">FIND MY OFFER IN 30 SECONDS →</AnimatedButton>
+        <AnimatedButton href="/shop" variant="secondary" ariaLabel="Open the shop">OPEN THE SHOP →</AnimatedButton>
       </PageHero>
       <Bluf>
         Every TITANOS offer has a plain price, a free first step and a way to say no. {ALL_OFFERS.length} listed.
