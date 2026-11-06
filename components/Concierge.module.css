@@ -1,8 +1,0 @@
-.box { border: 1px solid var(--border); border-radius: var(--radius-md, 10px); background: var(--card); padding: 20px; margin-bottom: 24px; }
-.note { color: var(--ice); opacity: 0.8; font-size: 0.95rem; margin: 0 0 12px; }
-.form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.label { flex-basis: 100%; color: var(--ice); font-weight: 500; }
-.input { flex: 1 1 260px; min-height: 44px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--ice); }
-.btn { min-height: 44px; padding: 8px 20px; border-radius: 8px; border: 1px solid var(--gold-dim); background: transparent; color: var(--ice); cursor: pointer; }
-.out { margin-top: 14px; color: var(--ice); }
-.out a { text-decoration: underline; }

@@ -3,7 +3,6 @@ import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import s from "@/components/w2b/w2b.module.css";
 import { NextStep, jsonLd } from "@/components/SiteBlocks";
-import Concierge from "@/components/Concierge";
 
 export const metadata: Metadata = {
   title: "FAQ · TITANOS",
@@ -32,7 +31,6 @@ export default function FaqPage() {
       <PageHero badge="FAQ" title="Straight answers before you ask" />
       <SectionReveal>
         <div className={s.wrap}>
-          <Concierge />
           <div className={s.faq}>
             {QA.map(([q, a]) => (
               <details key={q} className={s.item}>
