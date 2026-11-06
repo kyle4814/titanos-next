@@ -135,6 +135,15 @@ export class D1Store implements Store {
   }
   async receiptById(id: string) { const r = await this.one("SELECT * FROM agent_receipts WHERE id = ?", id); return r && toReceipt(r); }
   async receiptByIdem(keyId: string, idem: string) { const r = await this.one("SELECT * FROM agent_receipts WHERE key_id = ? AND idem = ?", keyId, idem); return r && toReceipt(r); }
+  // F17: one upsert statement. The row is inserted, or taken over only if the old claim has expired (expires_at <= now); a live
+  // claim makes the WHERE false, so no row comes back. ON CONFLICT keeps the old rid (not in the SET list).
+  async idemReserve(keyId: string, idem: string, rid: string, owner: string, now: number, ttlMs: number) {
+    const r = await this.one("INSERT INTO idem_reservations (key_id, idem, rid, owner, expires_at) VALUES (?1, ?2, ?3, ?4, ?5) ON CONFLICT(key_id, idem) DO UPDATE SET owner = excluded.owner, expires_at = excluded.expires_at WHERE idem_reservations.expires_at <= ?6 RETURNING rid", keyId, idem, rid, owner, now + ttlMs, now);
+    if (r) return { won: true, rid: String(r.rid) };
+    const cur = await this.one("SELECT rid FROM idem_reservations WHERE key_id = ? AND idem = ?", keyId, idem);
+    return { won: false, rid: String(cur?.rid ?? rid) };
+  }
+  async idemRelease(keyId: string, idem: string, owner: string) { await this.exec("DELETE FROM idem_reservations WHERE key_id = ? AND idem = ? AND owner = ?", keyId, idem, owner); }
   async callsSince(keyId: string, since: number) { const r = await this.one("SELECT COUNT(*) AS c FROM agent_calls WHERE key_id = ? AND at >= ?", keyId, since); return Number(r?.c ?? 0); }
   async noteCall(keyId: string, at: number) { await this.exec("INSERT INTO agent_calls (key_id, at) VALUES (?, ?)", keyId, at); }
 

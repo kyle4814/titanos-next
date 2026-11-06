@@ -242,8 +242,8 @@ for (const [name, mk] of ADAPTERS) describe(`Store contract: ${name}`, () => {
 
 // ---- D1-only: the shape of the SQL itself ----
 describe("D1Store SQL shape", () => {
-  test("the migrations it is written against are exactly 0001..0004, in order", () => {
-    assert.deepEqual(MIGRATIONS.map((m) => m.slice(0, 4)), ["0001", "0002", "0003", "0004"]);
+  test("the migrations it is written against are exactly 0001..0005, in order", () => {
+    assert.deepEqual(MIGRATIONS.map((m) => m.slice(0, 4)), ["0001", "0002", "0003", "0004", "0005"]);
   });
 
   test("the debit is ONE statement: a single conditional INSERT...SELECT, no preceding SELECT, one write per call", async () => {

@@ -1,5 +1,5 @@
 // A local D1 stand-in backed by node:sqlite (real SQLite, the same engine D1 runs). It applies the REAL migration files
-// 0001..0004 from migrations/, with foreign keys ON, so the adapter is exercised against the production schema.
+// 0001..0005 from migrations/, with foreign keys ON, so the adapter is exercised against the production schema.
 // Async on purpose: every call yields to the event loop first (random 0..2 ticks) so that interleavings between
 // concurrent callers actually happen. A read-then-write adapter loses races here; a single-statement one cannot.
 import { DatabaseSync } from "node:sqlite";
@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import type { D1Like, D1Statement } from "../src/env.ts";
 
 const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
-export const MIGRATIONS = readdirSync(dir).filter((f) => /^000[1-4].*\.sql$/.test(f)).sort();
+export const MIGRATIONS = readdirSync(dir).filter((f) => /^000[1-5].*\.sql$/.test(f)).sort();
 
 const tick = async () => { for (let i = Math.floor(Math.random() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
 
