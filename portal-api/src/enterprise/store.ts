@@ -47,6 +47,7 @@ export interface EntStore {
   transitionPayout(id: string, from: Payout["status"], to: Payout["status"]): Promise<Payout | undefined>;
   payoutById(id: string): Promise<Payout | undefined>;
   payoutsOf(partnerId: string): Promise<Payout[]>;
+  payoutsByStatus(status: Payout["status"], partnerId?: string): Promise<Payout[]>; // the sweep reads stuck "sending" rows; a D1 adapter: WHERE status = ? [AND partner_id = ?]
   noteFailure(where: string, detail: string, at: number): Promise<void>;
   failures(): Promise<{ where: string; detail: string; at: number }[]>;
 }
@@ -116,6 +117,7 @@ export class MemoryEntStore implements EntStore {
   async transitionPayout(id: string, from: Payout["status"], to: Payout["status"]) { const p = this.payouts.get(id); if (!p || p.status !== from) return undefined; p.status = to; return p; }
   async payoutById(id: string) { return this.payouts.get(id); }
   async payoutsOf(p: string) { return [...this.payouts.values()].filter((x) => x.partnerId === p); }
+  async payoutsByStatus(s: Payout["status"], partnerId?: string) { return [...this.payouts.values()].filter((x) => x.status === s && (partnerId === undefined || x.partnerId === partnerId)).map((x) => ({ ...x })); }
   async noteFailure(where: string, detail: string, at: number) { this.fails.push({ where, detail, at }); }
   async failures() { return this.fails; }
 }
