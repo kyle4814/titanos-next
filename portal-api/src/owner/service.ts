@@ -2,7 +2,7 @@
 import { HttpError, type Deps } from "../service.ts";
 import type { Account } from "../store.ts";
 import { PRODUCTS } from "../catalogue.ts";
-import { autoFix, loadOrInit, monitorTick, overview, report, scanNow, setMonitor, undoFix, withDomainLock, type Ctx, type DomainState } from "./engine.ts";
+import { autoFix, loadOrInit, monitorTick, overview, report, scanNow, setMonitor, undoFix, type Ctx, type DomainState } from "./engine.ts";
 
 const MIN_MANUAL_SCAN_GAP_MS = 60_000; // abuse guard: one manual scan per domain per minute
 const ctxOf = (d: Deps): Ctx => {
@@ -42,27 +42,21 @@ export async function listDomains(d: Deps, a: Account) {
 }
 export async function getOverview(d: Deps, a: Account, id: string) { const { c, s } = await open(d, a, id); await c.store.put(s); return overview(s, d.now()); }
 export async function scan(d: Deps, a: Account, id: string) {
-  return withDomainLock(id, async () => {
   const { c, s } = await open(d, a, id);
   if (s.lastScan && d.now() - s.lastScan.at < MIN_MANUAL_SCAN_GAP_MS) throw new HttpError(429, "scan_too_soon");
   await scanNow(c, s, "owner scan"); await c.store.put(s); return overview(s, d.now());
-  });
 }
 export async function fix(d: Deps, a: Account, id: string, check: unknown) {
   if (typeof check !== "string" || !/^[A-Z-]{2,8}$/.test(check)) throw new HttpError(400, "invalid_check");
-  return withDomainLock(id, async () => {
   const { c, s } = await open(d, a, id);
   const r = await autoFix(c, s, check); await c.store.put(s);
   return { result: r.ok ? r.result : r.reason, detail: r.ok ? r.fix.note : r.detail, plan: r.plan ? { auto: r.plan.auto, summary: r.plan.summary, edits: r.plan.edits.map((e) => ({ name: e.name, before: e.before, after: e.after })) } : null, fixId: r.ok ? r.fix.id : r.fix?.id ?? null, overview: overview(s, d.now()) };
-  });
 }
 export async function undo(d: Deps, a: Account, id: string, fixId: string) {
-  return withDomainLock(id, async () => {
   const { c, s } = await open(d, a, id);
   const r = await undoFix(c, s, fixId); await c.store.put(s);
   if (!r.ok) throw new HttpError(r.reason === "no_such_fix" ? 404 : 409, r.reason!);
   return overview(s, d.now());
-  });
 }
 export async function getReport(d: Deps, a: Account, id: string) { const { s } = await open(d, a, id); return report(s, d.now()); }
 // Run by the scheduler (a Worker cron trigger, owner-approved deploy). Mails the owner on a fault returning.

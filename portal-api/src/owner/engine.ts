@@ -122,19 +122,6 @@ export function observe(s: DomainState, r: ScanResult, now: number, cause = "sca
   }
 }
 
-// F174: every owner request is load, mutate, put on its OWN copy of the state, and the mutate step awaits DNS and the store. Two requests on one
-// domain used to interleave at those awaits: both undos could win, and the later put overwrote the other's fix record (lost update). Requests on one
-// domain now run one at a time. Scope: one runtime (one Worker isolate interleaves requests exactly like this); several isolates need a store-level
-// compare-and-set or a Durable Object, see the F174 receipt WOULD-FLIP.
-const domainTails = new Map<string, Promise<unknown>>();
-export async function withDomainLock<T>(domainId: string, fn: () => Promise<T>): Promise<T> {
-  const prev = domainTails.get(domainId) ?? Promise.resolve();
-  const run = prev.then(fn, fn);
-  const tail = run.then(() => undefined, () => undefined);
-  domainTails.set(domainId, tail);
-  try { return await run; } finally { if (domainTails.get(domainId) === tail) domainTails.delete(domainId); }
-}
-
 export async function loadOrInit(c: Ctx, domainId: string, domain: string, accountId: string, verified: boolean): Promise<DomainState> {
   const s = (await c.store.get(domainId)) ?? newState(domainId, domain, accountId, verified);
   s.domainVerified = verified; return s;
@@ -213,12 +200,10 @@ export async function monitorTick(c: Ctx): Promise<{ scanned: number; alerts: Al
   const alerts: Alert[] = []; let scanned = 0;
   for (const s0 of await c.store.all()) {
     if (!s0.monitor.active || s0.monitor.nextScanAt === undefined || s0.monitor.nextScanAt > c.now()) continue;
-    await withDomainLock(s0.domainId, async () => {
-      const s = (await c.store.get(s0.domainId))!; const mark = s.events.length;
-      await scanNow(c, s, "monitor"); scanned++;
-      for (const e of s.events.slice(mark)) if (e.kind === "regressed" || e.kind === "badge_lost") alerts.push({ domain: s.domain, accountId: s.accountId, kind: e.kind, detail: e.detail });
-      await c.store.put(s);
-    });
+    const s = (await c.store.get(s0.domainId))!; const mark = s.events.length;
+    await scanNow(c, s, "monitor"); scanned++;
+    for (const e of s.events.slice(mark)) if (e.kind === "regressed" || e.kind === "badge_lost") alerts.push({ domain: s.domain, accountId: s.accountId, kind: e.kind, detail: e.detail });
+    await c.store.put(s);
   }
   return { scanned, alerts };
 }
