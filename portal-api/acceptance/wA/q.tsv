@@ -1,0 +1,69 @@
+guest	portal:scan	check my website's email security for free
+guest	portal:scan	can people fake emails from my business domain
+guest	portal:scan	test acme.com.au please
+guest	portal:get-fixed	I ran the scan and want someone to sort out the problems
+guest	portal:get-fixed	can you fix what you found for me
+guest	portal:pricing	how much do your plans cost
+guest	portal:pricing	what are your prices
+guest	portal:proof-wall	show me evidence that this works
+guest	portal:proof-wall	do you have case studies or results
+guest	portal:trust-scan	do you hack into my systems when you scan
+guest	portal:trust-scan	is the scan safe and passive
+guest	portal:ai-disclosure	is a person or an AI writing your reports
+guest	portal:ai-disclosure	do you use artificial intelligence
+guest	portal:status	is your service down right now
+guest	portal:status	are you having an outage
+guest	portal:investors	I am an investor, where is your deck
+guest	portal:investors	can I see your investor materials
+guest	portal:privacy	what do you do with my personal information
+guest	portal:privacy	privacy policy
+guest	portal:contact	I want to speak to a real person
+guest	portal:contact	how do I get in touch with you
+guest	portal:faq	where are your frequently asked questions
+guest	portal:account-signup	how do I sign up
+guest	portal:account-signup	I want to register an account
+guest	portal:sector-index	which industries do you cover
+guest	portal:security	how do you secure my data
+owner	portal:billing-cancel	I want to cancel my subscription
+owner	portal:billing-cancel	stop billing me every month
+owner	portal:billing-refund	I would like my money back
+owner	portal:billing-refund	how do refunds work
+owner	portal:billing-invoices	where can I download my invoice
+owner	portal:billing-invoices	I need a receipt for my accountant
+owner	portal:domain-verify	prove I own my domain
+owner	portal:domain-verify	how do I add the TXT record to verify
+owner	portal:data-export	delete my account and data
+owner	portal:data-export	give me a copy of everything you hold on me
+owner	portal:hire-pro	I need an expert to do the DNS changes for me
+owner	portal:hire-pro	hire a specialist to fix my SPF
+owner	portal:auto-fix	apply the fix automatically
+owner	portal:auto-fix	can you change my DNS records for me one click and undo it
+owner	portal:reports	I need a pdf report for my insurer
+owner	portal:reports	download my security report
+owner	portal:monitor	keep watching my domain and tell me if it breaks again
+owner	portal:monitor	continuous monitoring
+owner	portal:findings	list the problems found on my domain
+owner	portal:quests	what should I fix next
+owner	portal:owner-level	what level is my domain
+pro	portal:pro-jobs	show me available jobs
+pro	portal:pro-jobs	where do I find work to claim
+pro	portal:pro-payouts	when do I get paid
+pro	portal:pro-payouts	set up my bank for payouts
+pro	portal:pro-rank	how is my ranking calculated
+pro	portal:pro-rank	what tier am I
+pro	portal:pro-whitelabel	put my own branding on the client report
+pro	portal:leads-export	I want a list of prospects
+agent	portal:agent-keys	create an api key
+agent	portal:agent-keys	how do I connect my mcp client
+agent	portal:agent-catalogue	which tools can my agent call
+agent	portal:agent-credits	how do I top up credits
+agent	portal:agent-credits	what does a call cost
+agent	portal:llms	where is your llms.txt
+enterprise	portal:sso	we want to log in with our identity provider
+enterprise	portal:sso	set up SAML or OIDC single sign on
+enterprise	portal:savings-calc	how much could we save
+enterprise	portal:enterprise	show all our domains in one view
+enterprise	portal:enterprise	estate dashboard for all subsidiaries
+partner	portal:partners	how much commission do I earn
+partner	portal:partners	how do I refer clients and get paid
+partner	portal:pro-whitelabel	white label the reports for my clients

@@ -65,15 +65,40 @@ export function tag(rec: string, t: string): string {
 const hasKey = (rec: string) => tag(rec.replace(/" "/g, "").trim().replace(/^"|"$/g, ""), "p").replace(/^"|"$/g, "").trim() !== "";
 const F = (check: string, status: Status, detail: string, fix = ""): Finding => ({ check, status, detail, fix });
 
+// SPF record helpers (RFC 7208). A record is SPF only if its FIRST term is exactly v=spf1 (word boundary:
+// v=spf10 is not SPF). Shared with the owner-seat auto-fix so scanner and fixer cannot disagree.
+export const isSpfRecord = (r: string) => /^v=spf1(\s|$)/i.test(r.trim());
+const SPF_KNOWN = /^[+\-~?]?(all|include:\S+|a(:\S+)?(\/\d+)?(\/\/\d+)?|mx(:\S+)?(\/\d+)?(\/\/\d+)?|ip4:\S+|ip6:\S+|exists:\S+|ptr(:\S+)?)$|^(redirect|exp)=\S+$/i;
+export interface SpfInfo { terms: string[]; allTerm: string | undefined; redirect: boolean; lookups: number; ptr: boolean; unknown: string[] }
+export function spfInfo(rec: string): SpfInfo {
+  const terms = rec.trim().split(/\s+/).slice(1);
+  let lookups = 0; let ptr = false; let redirect = false; const unknown: string[] = [];
+  for (const t of terms) {
+    const l = t.toLowerCase();
+    if (!SPF_KNOWN.test(t)) { unknown.push(t); continue; }
+    const m = l.replace(/^[+\-~?]/, "");
+    if (m.startsWith("redirect=")) { redirect = true; lookups++; }
+    else if (m.startsWith("include:") || m.startsWith("exists:") || m === "a" || m.startsWith("a:") || m.startsWith("a/") || m === "mx" || m.startsWith("mx:") || m.startsWith("mx/")) lookups++;
+    else if (m === "ptr" || m.startsWith("ptr:")) { ptr = true; lookups++; }
+  }
+  // First `all` mechanism wins (RFC 7208 4.6.2); a bare `all` means +all.
+  const allTerm = terms.map((t) => t.toLowerCase()).find((t) => t.replace(/^[+\-~?]+/, "") === "all");
+  return { terms, allTerm, redirect, lookups, ptr, unknown };
+}
+export const SPF_LOOKUP_LIMIT = 10;
 async function spf(domain: string, f: DohFetch): Promise<Finding> {
-  const recs = (await txt(domain, f)).filter((r) => r.toLowerCase().startsWith("v=spf1"));
+  const recs = (await txt(domain, f)).filter(isSpfRecord);
   if (!recs.length) return F("SPF", "FAIL", "No SPF record: anyone can forge email from this domain.", "Publish an SPF TXT record listing your mail senders, ending in -all (hard fail).");
   if (recs.length > 1) return F("SPF", "FAIL", `Multiple SPF records (${recs.length}): receivers ignore SPF entirely, so the domain is spoofable despite having SPF.`, "Publish exactly ONE SPF TXT record: merge every sender into a single v=spf1 record ending in -all.");
   const s = recs[0];
-  // First `all` mechanism wins (RFC 7208 4.6.2); a bare `all` means +all.
-  const a = s.toLowerCase().split(/\s+/).find((t) => t.replace(/^[+\-~?]+/, "") === "all");
-  if (a === "-all") return F("SPF", "PASS", `Strong SPF (hard fail): ${s}`);
+  const i = spfInfo(s);
+  const a = i.allTerm;
+  if (i.unknown.length) return F("SPF", "FAIL", `SPF has terms receivers cannot read (${i.unknown.join(" ")}): a permanent error, so SPF is ignored: ${s}`, "Remove or correct the unknown terms so the record uses only valid SPF mechanisms.");
+  if (i.lookups > SPF_LOOKUP_LIMIT) return F("SPF", "FAIL", `SPF needs ${i.lookups} DNS lookups, over the limit of ${SPF_LOOKUP_LIMIT}: receivers treat it as a permanent error and ignore it: ${s}`, "Cut the record to 10 lookups or fewer: remove unused senders or replace includes with ip4/ip6 ranges.");
+  if (i.redirect && a) return F("SPF", "FAIL", `SPF has both redirect= and ${a}: the redirect is ignored, so senders behind it are not authorised: ${s}`, "Remove the all mechanism so the redirect is used, or remove the redirect= and list the senders directly.");
   if (a === "+all" || a === "all") return F("SPF", "FAIL", `SPF authorises ALL senders (${a}): worse than no SPF: ${s}`, "Change the SPF record's ending to -all (hard fail). Never use +all.");
+  if (i.ptr) return F("SPF", "WARN", `SPF uses the ptr mechanism, which is slow, unreliable and deprecated (RFC 7208): ${s}`, "Replace ptr with explicit ip4/ip6 ranges or includes.");
+  if (a === "-all") return F("SPF", "PASS", `Strong SPF (hard fail): ${s}`);
   if (a === "~all" || a === "?all") return F("SPF", "WARN", `SPF present but soft or neutral, not enforced (${a}): ${s}`, "Change the SPF record's ending to -all so forged mail is rejected, not just flagged.");
   return F("SPF", "WARN", `SPF present, no explicit all mechanism: ${s}`, "Add a -all mechanism to the end of the SPF record.");
 }
