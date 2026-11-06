@@ -3,13 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { browserApi, signedIn, errorText, ApiError } from "@/lib/portal";
+import { hireAPro, aud, PRO_ERRORS } from "@/lib/pro";
 import { FIX_RESULT_TEXT, OWNER_ERRORS, STATE_LABEL, badgeLine, getOverview, hoursLine, levelBar, listOwnerDomains, oneTapFix, reportMarkdown, rescan, undoFix, type DomainRow, type OwnerOverview } from "@/lib/owner";
 
 const card = { background: "var(--surface, #111)", border: "1px solid var(--border)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column" as const, gap: 10 };
 const btn = { padding: "12px 16px", background: "var(--gold)", color: "#000", border: "none", borderRadius: 8, fontWeight: 600, cursor: "pointer", minHeight: 44 };
 const ghost = { ...btn, background: "transparent", color: "var(--gold)", border: "1px solid var(--gold)" };
 const when = (t: number) => new Date(t).toISOString().slice(0, 16).replace("T", " ") + " UTC";
-const msgOf = (e: unknown) => (e instanceof ApiError && OWNER_ERRORS[e.code]) || errorText(e);
+const msgOf = (e: unknown) => (e instanceof ApiError && (OWNER_ERRORS[e.code] || PRO_ERRORS[e.code])) || errorText(e);
 
 // The owner seat: My Level, Findings (with proof state), Quests (one tap), Monitor, Reports, hours given back.
 export default function OwnerClient() {
@@ -67,6 +68,7 @@ export default function OwnerClient() {
               {q.kind === "auto"
                 ? <button type="button" style={btn} disabled={busy} onClick={() => fix(q.check)}>FIX IT FOR ME (UNDOABLE)</button>
                 : <small>Guided: follow the steps on <Link href="/scan">the scan page</Link> or ask for a pro. We do not guess records only your provider knows.</small>}
+              <div style={{ marginTop: 6 }}><button type="button" style={ghost} disabled={busy} onClick={() => run(async () => { const r = await hireAPro(browserApi(), id, q.check); setMsg(`Job raised at ${aud(r.job.priceCents)}, paid out to the pro only after our re-scan shows it fixed. Opening payment.`); window.location.href = r.payUrl; })}>GET A PRO TO FIX IT (PAID ONLY AFTER RE-SCAN)</button></div>
             </div>
           ))}
           {lastFix && <button type="button" style={ghost} disabled={busy} onClick={() => run(async () => { setO(await undoFix(browserApi(), id, lastFix)); setLastFix(null); setMsg("Undone. The exact previous records are back."); })}>UNDO THE LAST CHANGE</button>}

@@ -9,7 +9,7 @@ export const FLOWS: Flow[] = [
   { id: "buy", owner: "C2", route: "POST /checkout" },
   { id: "cancel", owner: "C2", route: "POST /subscriptions/:id/cancel" },
   { id: "refund", owner: "C2", route: "POST /refunds" },
-  { id: "hire", owner: "C4" }, { id: "get_paid", owner: "C4" }, { id: "dispute", owner: "C4" },
+  { id: "hire", owner: "C4", route: "POST /market/jobs (get this fixed), POST /pro/jobs/:id/claim" }, { id: "get_paid", owner: "C4", route: "GET /pro/payouts; payout only after re-scan" }, { id: "dispute", owner: "C4", route: "POST /market/jobs/:id/dispute" },
   { id: "docs", owner: "static", route: "/trust and /terms pages" },
   { id: "status", owner: "C2", route: "GET /health" },
   { id: "api_keys", owner: "C2", route: "POST/GET/DELETE /keys" },

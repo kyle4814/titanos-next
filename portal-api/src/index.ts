@@ -4,6 +4,7 @@ import { HttpError, type Deps } from "./service.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
 import * as own from "./owner/service.ts";
+import * as mkt from "./market/service.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -73,9 +74,39 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (raw.length > 1_000_000) throw new HttpError(413, "body_too_large");
     if (!(await verifyStripeSignature(raw, req.headers.get("stripe-signature"), d.webhookSecret, Math.floor(d.now() / 1000)))) throw new HttpError(400, "bad_signature");
     let ev; try { ev = JSON.parse(raw); } catch { throw new HttpError(400, "invalid_json"); }
+    const mj = ev?.type === "checkout.session.completed" ? ev?.data?.object?.metadata?.market_job_id : undefined;
+    if (typeof mj === "string") {   // a marketplace job funding, not a C2 purchase
+      if (!(await d.store.claimEvent(String(ev.id)))) return json({ result: "duplicate" });
+      const o = ev.data.object;
+      return json({ result: await mkt.confirmFunded(d, { jobId: mj, checkoutId: String(o.id), paymentIntent: o.payment_intent ? String(o.payment_intent) : undefined, amountTotal: typeof o.amount_total === "number" ? o.amount_total : undefined }) });
+    }
     return json({ result: await svc.handleStripeEvent(d, ev) });
   }
+  if (path === "/market/leaderboard" && m === "GET") return json(await mkt.leaderboard(d));   // public, pseudonymous, proven fixes only
+  if (seg[0] === "internal" && seg[1] === "market") {   // Kyle's tap and the cron: guarded by the internal secret, never a session
+    if (!mkt.isInternal(d, req.headers.get("x-internal-secret"))) throw new HttpError(401, "unauthenticated");
+    if (seg[2] === "cards" && seg.length === 3 && m === "GET") return json({ cards: await d.market!.store.openCards() });
+    if (seg[2] === "cards" && seg[4] === "resolve" && m === "POST") return json(await mkt.resolveCard(d, seg[3], String((await body(req)).outcome ?? "")));
+    if (seg[2] === "sweep" && m === "POST") return json({ sweep: await mkt.sweep(d), warranty: await mkt.warrantySweep(d) });
+    return json({ error: "not_found", path }, 404);
+  }
   const a = await svc.authenticate(d, req.headers.get("authorization"));
+  if (seg[0] === "market" || seg[0] === "pro") {
+    if (path === "/market/jobs" && m === "POST") return json(await mkt.createJob(d, a, await body(req)), 201);
+    if (path === "/market/jobs" && m === "GET") return json(await mkt.myJobs(d, a));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "cancel" && m === "POST") return json(await mkt.cancelJob(d, a, seg[2]));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "dispute" && m === "POST") return json(await mkt.dispute(d, a, seg[2], (await body(req)).reason));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "rescan" && m === "POST") return json(await mkt.rescan(d, a, seg[2]));
+    if (path === "/pro/join" && m === "POST") return json(await mkt.joinPro(d, a, await body(req)), 201);
+    if (path === "/pro/onboarding" && m === "POST") return json(await mkt.onboard(d, a));
+    if (path === "/pro/onboarding/refresh" && m === "POST") return json(await mkt.refreshOnboarding(d, a));
+    if (path === "/pro/board" && m === "GET") return json(await mkt.board(d, a));
+    if (path === "/pro/rank" && m === "GET") return json(await mkt.myRank(d, a));
+    if (path === "/pro/payouts" && m === "GET") return json(await mkt.payouts(d, a));
+    if (seg[0] === "pro" && seg[1] === "jobs" && seg[3] === "claim" && m === "POST") return json(await mkt.claim(d, a, seg[2]));
+    if (seg[0] === "pro" && seg[1] === "jobs" && seg[3] === "deliver" && m === "POST") return json(await mkt.deliver(d, a, seg[2], (await body(req)).note));
+    return json({ error: "not_found", path }, 404);
+  }
   if (path === "/me" && m === "GET") return json({ id: a.id, email: a.email, seat: a.seat });
   if (path === "/domains" && m === "POST") return json(await svc.addDomain(d, a, (await body(req)).domain), 201);
   if (path === "/domains" && m === "GET") return json({ domains: (await d.store.domainsFor(a.id)).map((x) => ({ id: x.id, domain: x.domain, verified: !!x.verifiedAt })) });
