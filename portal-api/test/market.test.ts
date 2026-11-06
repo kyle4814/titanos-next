@@ -40,7 +40,7 @@ test("get_paid kill test: a delivery the re-scan does not confirm never pays, an
 test("a fix that is UNKNOWN on re-scan (DNS failure) is not a proof", async () => {
   const r = rig(); const o = await r.owner("o@u.com.au", "u.com.au"); const p = await r.pro("p@u.com");
   const id = (await r.hire(o)).job.id; await r.claim(p.session, id);
-  r.zones.get("u.com.au")!.world.servfail = true as unknown as string[];   // typecheck gate: runtime value kept as before (no behaviour change)
+  r.zones.get("u.com.au")!.world.servfail = true;
   const d = await r.h.j(await r.deliver(p.session, id)); assert.equal(d.reproved, false); assert.equal(r.payments.count("transfer"), 0);
 });
 
