@@ -1,0 +1,378 @@
+{
+  "label": "FIXTURE (FakeStripe, no network)",
+  "runId": "x2-mw5fyaca",
+  "steps": [
+    {
+      "step": "stripe.product_price",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "prod_fake000001 price_fake000002 AU$149.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "monitor_annual",
+      "ok": true,
+      "detail": "prod_fake000003 price_fake000004 AU$1490.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "compliance_pack",
+      "ok": true,
+      "detail": "prod_fake000005 price_fake000006 AU$5997.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "prod_fake000007 price_fake000008 AU$1500.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "ai_ops",
+      "ok": true,
+      "detail": "prod_fake000009 price_fake000010 AU$2500.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "ai_embedded",
+      "ok": true,
+      "detail": "prod_fake000011 price_fake000012 AU$5000.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "leads_starter",
+      "ok": true,
+      "detail": "prod_fake000013 price_fake000014 AU$497.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "leads_growth",
+      "ok": true,
+      "detail": "prod_fake000015 price_fake000016 AU$1497.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "leads_campaign",
+      "ok": true,
+      "detail": "prod_fake000017 price_fake000018 AU$3497.00"
+    },
+    {
+      "step": "stripe.product_price",
+      "product": "leads_retainer",
+      "ok": true,
+      "detail": "prod_fake000019 price_fake000020 AU$990.00"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "cs_test_fake000021 https://checkout.stripe.com/c/pay/cs_test_fake000021#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "monitor_annual",
+      "ok": true,
+      "detail": "cs_test_fake000024 https://checkout.stripe.com/c/pay/cs_test_fake000024#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "monitor_annual",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "monitor_annual",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "compliance_pack",
+      "ok": true,
+      "detail": "cs_test_fake000027 https://checkout.stripe.com/c/pay/cs_test_fake000027#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "compliance_pack",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "compliance_pack",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "cs_test_fake000030 https://checkout.stripe.com/c/pay/cs_test_fake000030#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "ai_ops",
+      "ok": true,
+      "detail": "cs_test_fake000033 https://checkout.stripe.com/c/pay/cs_test_fake000033#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "ai_ops",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "ai_ops",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "ai_embedded",
+      "ok": true,
+      "detail": "cs_test_fake000036 https://checkout.stripe.com/c/pay/cs_test_fake000036#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "ai_embedded",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "ai_embedded",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "leads_starter",
+      "ok": true,
+      "detail": "cs_test_fake000039 https://checkout.stripe.com/c/pay/cs_test_fake000039#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "leads_starter",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "leads_starter",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "leads_growth",
+      "ok": true,
+      "detail": "cs_test_fake000042 https://checkout.stripe.com/c/pay/cs_test_fake000042#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "leads_growth",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "leads_growth",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "leads_campaign",
+      "ok": true,
+      "detail": "cs_test_fake000045 https://checkout.stripe.com/c/pay/cs_test_fake000045#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "leads_campaign",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "leads_campaign",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "portal.checkout",
+      "product": "leads_retainer",
+      "ok": true,
+      "detail": "cs_test_fake000048 https://checkout.stripe.com/c/pay/cs_test_fake000048#fake"
+    },
+    {
+      "step": "portal.webhook_completed",
+      "product": "leads_retainer",
+      "ok": true,
+      "detail": "HTTP 200 {\"result\":\"handled\"}"
+    },
+    {
+      "step": "portal.purchase_paid_and_invoiced",
+      "product": "leads_retainer",
+      "ok": true,
+      "detail": "status=paid"
+    },
+    {
+      "step": "webhook.duplicate_event",
+      "product": "all",
+      "ok": true,
+      "detail": "replay of a claimed event id"
+    },
+    {
+      "step": "webhook.bad_signature_400",
+      "product": "all",
+      "ok": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "step": "webhook.stale_timestamp_400",
+      "product": "all",
+      "ok": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "step": "portal.refund_auto",
+      "product": "compliance_pack",
+      "ok": true,
+      "detail": "{\"status\":\"refunded\",\"amountCents\":599700}"
+    },
+    {
+      "step": "portal.refund_review_card",
+      "product": "monitor_monthly",
+      "ok": false,
+      "detail": "{}"
+    },
+    {
+      "step": "portal.cancel_scheduled",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "{\"status\":\"cancel_scheduled\",\"effectiveAt\":1796515200000}"
+    },
+    {
+      "step": "portal.webhook_sub_deleted",
+      "product": "monitor_monthly",
+      "ok": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "step": "portal.cancel_scheduled",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "{\"status\":\"cancel_scheduled\",\"effectiveAt\":1801872000000}"
+    },
+    {
+      "step": "portal.webhook_sub_deleted",
+      "product": "ai_growth",
+      "ok": true,
+      "detail": "HTTP 200"
+    }
+  ],
+  "ids": {
+    "monitor_monthly": {
+      "product": "prod_fake000001",
+      "price": "price_fake000002",
+      "checkoutSession": "cs_test_fake000021",
+      "subscription": "sub_fake000023",
+      "customer": "cus_fake000022"
+    },
+    "monitor_annual": {
+      "product": "prod_fake000003",
+      "price": "price_fake000004",
+      "checkoutSession": "cs_test_fake000024",
+      "subscription": "sub_fake000026",
+      "customer": "cus_fake000025"
+    },
+    "compliance_pack": {
+      "product": "prod_fake000005",
+      "price": "price_fake000006",
+      "checkoutSession": "cs_test_fake000027",
+      "paymentIntent": "pi_fake000029",
+      "customer": "cus_fake000028"
+    },
+    "ai_growth": {
+      "product": "prod_fake000007",
+      "price": "price_fake000008",
+      "checkoutSession": "cs_test_fake000030",
+      "subscription": "sub_fake000032",
+      "customer": "cus_fake000031"
+    },
+    "ai_ops": {
+      "product": "prod_fake000009",
+      "price": "price_fake000010",
+      "checkoutSession": "cs_test_fake000033",
+      "subscription": "sub_fake000035",
+      "customer": "cus_fake000034"
+    },
+    "ai_embedded": {
+      "product": "prod_fake000011",
+      "price": "price_fake000012",
+      "checkoutSession": "cs_test_fake000036",
+      "subscription": "sub_fake000038",
+      "customer": "cus_fake000037"
+    },
+    "leads_starter": {
+      "product": "prod_fake000013",
+      "price": "price_fake000014",
+      "checkoutSession": "cs_test_fake000039",
+      "paymentIntent": "pi_fake000041",
+      "customer": "cus_fake000040"
+    },
+    "leads_growth": {
+      "product": "prod_fake000015",
+      "price": "price_fake000016",
+      "checkoutSession": "cs_test_fake000042",
+      "paymentIntent": "pi_fake000044",
+      "customer": "cus_fake000043"
+    },
+    "leads_campaign": {
+      "product": "prod_fake000017",
+      "price": "price_fake000018",
+      "checkoutSession": "cs_test_fake000045",
+      "paymentIntent": "pi_fake000047",
+      "customer": "cus_fake000046"
+    },
+    "leads_retainer": {
+      "product": "prod_fake000019",
+      "price": "price_fake000020",
+      "checkoutSession": "cs_test_fake000048",
+      "subscription": "sub_fake000050",
+      "customer": "cus_fake000049"
+    }
+  },
+  "pass": false,
+  "failures": [
+    "portal.refund_review_card:monitor_monthly {}"
+  ],
+  "stripeCalls": 65,
+  "note": "ids only; no secret is ever written"
+}
