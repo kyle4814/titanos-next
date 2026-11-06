@@ -4,6 +4,7 @@ import { HttpError, type Deps } from "./service.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
 import { entRoute } from "./enterprise/routes.ts";
+import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -96,7 +97,21 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
+// Cron entry. With an env.payouts adapter set it runs ONE payout tick; without one it is a labelled no-op (never a crash, never a 503).
+// Nothing triggers this yet: no [triggers] crons in wrangler.toml (deploy is GATE5). ctx.waitUntil keeps the Worker alive for the tick.
+export type ScheduledOutcome = { ran: false; label: "payout_tick_noop_no_adapter" } | ({ ran: true; label: "payout_tick" } & TickResult);
+export async function scheduledTick(env: Env, now: number = Date.now()): Promise<ScheduledOutcome> {
+  const p = env.payouts;
+  if (!p) return { ran: false, label: "payout_tick_noop_no_adapter" };
+  const r = await runPayoutTick(p.store, p.transfer, now, { lookup: p.lookup, maxRows: p.maxRows, log: (l) => console.log(l) });
+  return { ran: true, label: "payout_tick", ...r };
+}
+
 export default {
+  scheduled(event: { scheduledTime?: number }, env: Env, ctx: { waitUntil(p: Promise<unknown>): void }): void {
+    const now = typeof event?.scheduledTime === "number" ? event.scheduledTime : Date.now();
+    ctx.waitUntil(scheduledTick(env, now).then((o) => console.log(`scheduled ${o.label}`)).catch(() => console.log("scheduled payout_tick_failed")));
+  },
   fetch(req: Request, env: Env): Promise<Response> {
     return handle(req, env).catch(() => json({ error: "internal" }, 500));
   },
