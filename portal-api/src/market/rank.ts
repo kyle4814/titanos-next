@@ -16,7 +16,7 @@ export function rankFor(proAccountId: string, jobs: Job[]): Rank {
   for (const j of jobs) {
     if (j.abandonedBy.includes(proAccountId)) abandoned++;
     if (j.proAccountId !== proAccountId || !j.proof || !(j.status === "paid" || j.status === "reproved")) continue;
-    if (wash.has(j.id)) { washExcluded++; continue; }
+    if (wash.has(j.id) || j.ownerAccountId === proAccountId) { washExcluded++; continue; }   // self-dealt (owner is the pro) never ranks, even if the claim guard is bypassed
     proven++;
     if (j.regressedAt) { regressed++; continue; }
     holding++; points += WEIGHT[j.severity];
@@ -24,3 +24,7 @@ export function rankFor(proAccountId: string, jobs: Job[]): Rank {
   const tier = TIERS.find((t) => points >= t.min)?.name ?? "Unranked";
   return { points, tier, provenFixes: proven, holding, regressed, abandoned, washExcluded, holdRate: proven ? Math.round((holding / proven) * 1000) / 10 : null, note: "Rank counts fixes a re-scan proved and that are still holding. Reviews and ratings do not exist in this system." };
 }
+
+/** Public board order: points desc, then proven fixes desc, then display, then account id. Total order, so the board never depends on store insertion order. */
+export const boardOrder = (x: { points: number; provenFixes: number; display: string; accountId: string }, y: typeof x): number =>
+  y.points - x.points || y.provenFixes - x.provenFixes || (x.display < y.display ? -1 : x.display > y.display ? 1 : 0) || (x.accountId < y.accountId ? -1 : x.accountId > y.accountId ? 1 : 0);

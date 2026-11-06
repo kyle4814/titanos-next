@@ -8,7 +8,7 @@ import { runScan, type DohFetch, type Finding } from "../../../lib/guestscan/sca
 import { fixFor } from "../../../lib/guestscan/fixes.ts";
 import type { JobPayments } from "./payments.ts";
 import { type Job, type MarketCard, type MarketStore, type ProProfile, type Tier } from "./store.ts";
-import { rankFor, WARRANTY_DAYS } from "./rank.ts";
+import { rankFor, boardOrder, WARRANTY_DAYS } from "./rank.ts";
 import { judgeAttribution, clawbackFor, mayRaisePayoutCard, proofKey, emailDomain } from "./attribution.ts";
 import { randomToken, timingSafeEqual } from "../util.ts";
 
@@ -310,8 +310,8 @@ export async function payouts(d: Deps, a: Account) {
 export async function myRank(d: Deps, a: Account) { const m = mk(d); const p = await requirePro(d, a); return { display: p.display, ...rankFor(a.id, await m.store.allJobs()) }; }
 export async function leaderboard(d: Deps) {
   const m = mk(d); const jobs = await m.store.allJobs(); const rows = [];
-  for (const p of await m.store.allPros()) { const r = rankFor(p.accountId, jobs); if (r.provenFixes > 0) rows.push({ display: p.display, points: r.points, tier: r.tier, provenFixes: r.provenFixes, holdRate: r.holdRate }); }
-  rows.sort((x, y) => y.points - x.points); return { rows: rows.slice(0, 50), basis: "Proven fixes only: a re-scan showed the fault gone. No reviews, no ratings." };
+  for (const p of await m.store.allPros()) { const r = rankFor(p.accountId, jobs); if (r.provenFixes > 0) rows.push({ accountId: p.accountId, display: p.display, points: r.points, tier: r.tier, provenFixes: r.provenFixes, holdRate: r.holdRate }); }
+  rows.sort(boardOrder); return { rows: rows.slice(0, 50).map(({ accountId: _a, ...pub }) => pub), basis: "Proven fixes only: a re-scan showed the fault gone. No reviews, no ratings." };
 }
 export async function marketExport(d: Deps, a: Account) {
   if (!d.market) return {};
