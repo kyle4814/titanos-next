@@ -126,6 +126,14 @@ export class MemoryStore implements Store {
   async putKey(k: ApiKey) { this.keys.set(k.id, k); }
   async keysFor(id: string) { return [...this.keys.values()].filter((k) => k.accountId === id); }
   async keyById(id: string) { return this.keys.get(id); }
+  // Data-rights support (src/dsr.ts DsrStore). Kept off the Store interface so existing adapters do not break.
+  async receiptsFor(id: string) { return [...this.receipts.values()].filter((r) => r.accountId === id); }
+  async creditOrdersFor(id: string) { return [...this.creditOrders.values()].filter((o) => o.accountId === id); }
+  async cardsFor(id: string) { return [...this.cards.values()].filter((c) => c.accountId === id); }
+  async purgeLoginStateFor(email: string) {
+    for (const [k, t] of this.loginTokens) if (t.email === email) this.loginTokens.delete(k);
+    this.loginLog.delete(email);
+  }
   // Account deletion: PII goes, financial records stay (tax law), tied to an opaque id only.
   async anonymiseAccount(id: string, at: number) {
     const a = this.accounts.get(id); if (!a) return;
