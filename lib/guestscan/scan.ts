@@ -5,6 +5,8 @@
 //
 // Rule kept from SpoofGuard: a failed read is UNKNOWN, never "absent".
 
+import { RequestMeter, meteredFetch, type FetchLike } from "./meter.ts";
+
 export type Status = "PASS" | "WARN" | "FAIL" | "UNKNOWN";
 export interface Finding {
   check: string; // SPF, DMARC, DKIM, DNSSEC, MX, MTA-STS
@@ -15,7 +17,8 @@ export interface Finding {
 export interface DohAnswer { name?: string; type?: number; data?: string }
 export interface DohResponse { Status?: number; Answer?: DohAnswer[] }
 // The only network seam. Tests inject a fake; the browser uses dohFetch().
-export type DohFetch = (name: string, rrtype: string) => Promise<DohResponse>;
+// A DohFetch may carry the RequestMeter that counts its outbound requests (dohFetch always does).
+export type DohFetch = ((name: string, rrtype: string) => Promise<DohResponse>) & { meter?: RequestMeter };
 
 export const DOH_HOSTS = ["cloudflare-dns.com", "dns.google"] as const;
 export const DKIM_SELECTORS = ["default", "google", "selector1", "selector2", "k1", "mail", "dkim", "s1", "s2", "zoho", "mandrill", "sendgrid"] as const;
@@ -30,17 +33,20 @@ export function normaliseDomain(input: string): string {
 }
 export function isScannable(d: string): boolean { return HOSTNAME_RE.test(d); }
 
-export function dohFetch(host: (typeof DOH_HOSTS)[number] = "cloudflare-dns.com", timeoutMs = 6000): DohFetch {
+export function dohFetch(host: (typeof DOH_HOSTS)[number] = "cloudflare-dns.com", timeoutMs = 6000, impl?: FetchLike, meter: RequestMeter = new RequestMeter()): DohFetch {
+  const mf = meteredFetch(meter, impl);
   const base = host === "dns.google" ? "https://dns.google/resolve" : "https://cloudflare-dns.com/dns-query";
-  return async (name, rrtype) => {
+  const doh: DohFetch = async (name, rrtype) => {
     const ctl = new AbortController();
     const t = setTimeout(() => ctl.abort(), timeoutMs);
     try {
-      const r = await fetch(`${base}?name=${encodeURIComponent(name)}&type=${rrtype}`, { headers: { Accept: "application/dns-json" }, signal: ctl.signal });
+      const r = await mf(`${base}?name=${encodeURIComponent(name)}&type=${rrtype}`, { headers: { Accept: "application/dns-json" }, signal: ctl.signal });
       if (!r.ok) throw new Error(`http ${r.status}`);
       return (await r.json()) as DohResponse;
     } finally { clearTimeout(t); }
   };
+  doh.meter = meter;
+  return doh;
 }
 
 async function query(name: string, rrtype: string, f: DohFetch): Promise<DohResponse> {
@@ -122,7 +128,8 @@ export interface ScanResult {
   grade: "A" | "B" | "C" | "D" | "F" | "?";
   score: number; // 0-100 or -1 when unreadable
   elapsedMs: number;
-  modelCalls: 0; // asserted by the tests, a literal type on purpose
+  modelCalls: number; // MEASURED: outbound requests to a known model API host (lib/modelhosts.ts), counted by the meter
+  outbound: { total: number; hosts: string[] }; // MEASURED: requests this scan made and the host set
 }
 
 export function grade(findings: Finding[]): { grade: ScanResult["grade"]; score: number } {
@@ -146,11 +153,14 @@ export async function runScan(input: string, f: DohFetch, now: () => number = Da
   const domain = normaliseDomain(input);
   if (!isScannable(domain)) throw new Error("invalid_domain");
   const t0 = now();
+  const meter = f.meter ?? new RequestMeter();
+  const before = meter.snapshot();
   // All checks (and all 12 DKIM selectors) run in parallel: one round of lookups, not 17 in a row.
   const findings = await Promise.all(CHECKS.map(async ([name, fn]) => {
     try { return await fn(domain, f); }
     catch (e) { return F(name, "UNKNOWN", "Could not read this record just now. This is not a pass or a fail.", ""); }
   }));
   const g = grade(findings);
-  return { domain, findings, ...g, elapsedMs: now() - t0, modelCalls: 0 };
+  const after = meter.snapshot();
+  return { domain, findings, ...g, elapsedMs: now() - t0, modelCalls: after.modelCalls - before.modelCalls, outbound: { total: after.total - before.total, hosts: [...new Set(meter.log.slice(before.at))].sort() } };
 }
