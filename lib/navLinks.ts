@@ -31,6 +31,7 @@ export const LINKS: NavItem[] = [
   { label: "Black Ice", href: "/black-ice", external: false },
   { label: "Leads", href: "/leads", external: false },
   { label: "Free Scan", href: "/scan", external: false },
+  { label: "Free X-Ray", href: "/x-ray", external: false },
   { label: "Evidence Pack", href: "/our-evidence-pack", external: false },
   { label: "Refer & Earn", href: "/refer", external: false },
   { label: "Methodology", href: "/methodology", external: false },
@@ -74,6 +75,7 @@ export const MORE_LINKS: NavItem[] = LINKS.filter(
 const META: Record<string, { group: string; blurb: string }> = {
   "/products": { group: "Tools", blurb: "Guides, templates and short courses to keep" },
   "/scan": { group: "Tools", blurb: "Free email security check" },
+  "/x-ray": { group: "Tools", blurb: "Free workflow X-Ray: find the bottleneck, in your browser" },
   "/our-evidence-pack": { group: "Tools", blurb: "What a TITANOS report looks like" },
   "/leads": { group: "Tools", blurb: "Verified local leads" },
   "/black-ice": { group: "Company", blurb: "How we work, calm and exact" },

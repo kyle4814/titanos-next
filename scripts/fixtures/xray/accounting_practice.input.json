@@ -1,0 +1,11 @@
+{"synthetic": true, "as_of": "2026-11-06", "business_label": "Fictional Ledger and Co", "industry": "professional_services",
+ "size_band": "20-99", "tools": ["accounting", "crm", "spreadsheet", "email"], "appetite": "automation", "hourly_rate": null,
+ "workflows": [
+  {"name": "Client document chasing", "category": "enquiry_triage", "n_per_week": 120, "t0_min": 9, "rework_pct": 25, "rework_min": 12,
+   "wait_hours": 96, "handoffs": 4, "systems_retyped": 1, "exception_pct": 22, "steps": 12, "visibility": "blind", "certainty": "measured_recently"},
+  {"name": "Month end reporting packs", "category": "reporting", "n_per_week": 15, "t0_min": 75, "rework_pct": 10, "rework_min": 30,
+   "wait_hours": 8, "handoffs": 2, "systems_retyped": 2, "exception_pct": 6, "steps": 10, "visibility": "patchy", "certainty": "rough_estimate"},
+  {"name": "New client onboarding", "category": "onboarding", "n_per_week": 3, "t0_min": 90, "rework_pct": 30, "rework_min": 25,
+   "wait_hours": 40, "handoffs": 5, "systems_retyped": 3, "exception_pct": 15, "steps": 14, "visibility": "patchy", "certainty": "rough_estimate"},
+  {"name": "Approval of tax lodgements", "category": "approvals", "n_per_week": 40, "t0_min": 10, "certainty": "dont_know"}
+ ]}

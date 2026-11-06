@@ -1,0 +1,10 @@
+{"synthetic": true, "as_of": "2026-11-06", "business_label": "Fictional Spark and Pipe Co", "industry": "trades",
+ "size_band": "5-19", "tools": ["accounting", "email", "paper"], "appetite": "either", "hourly_rate": 55,
+ "workflows": [
+  {"name": "Job quotes from site visits", "category": "quoting", "n_per_week": 14, "t0_min": 35, "rework_pct": 20, "rework_min": 20,
+   "wait_hours": 30, "handoffs": 2, "systems_retyped": 1, "exception_pct": 10, "steps": 9, "visibility": "patchy", "certainty": "rough_estimate"},
+  {"name": "End of job invoicing", "category": "invoicing_billing", "n_per_week": 22, "t0_min": 18, "rework_pct": 12, "rework_min": 15,
+   "wait_hours": 72, "handoffs": 3, "systems_retyped": 2, "exception_pct": 8, "steps": 7, "visibility": "blind", "certainty": "measured_recently"},
+  {"name": "Weekly timesheets", "category": "job_admin", "n_per_week": 8, "t0_min": 6, "rework_pct": 3, "rework_min": 5,
+   "wait_hours": 2, "handoffs": 1, "systems_retyped": 0, "exception_pct": 2, "steps": 4, "visibility": "clear", "certainty": "rough_estimate"}
+ ]}

@@ -1,0 +1,538 @@
+{
+ "as_of": "2026-11-06",
+ "banner": "ESTIMATE, not measured. SYNTHETIC DEMO: every figure comes from fictional answers and labelled assumptions.",
+ "business_label": "Fictional Bolt and Bracket Supply (SYNTHETIC)",
+ "context": {
+  "appetite": "quick_fix",
+  "industry": "Wholesale and distribution",
+  "size_band": "20-99",
+  "tools": [
+   "email",
+   "erp",
+   "spreadsheet"
+  ]
+ },
+ "executive_summary": "HYPOTHESIS from your own answers: the largest pressure in Copying web orders into the ERP is REPEATED WORK, because the same steps are done by hand every time. Base case: about 6.5 hours a week of capacity could be released IF the self-reported numbers and the labelled assumptions hold. Low to high: 1.5 to 12 hours.",
+ "level": 0,
+ "limitations": [
+  "This is a questionnaire result, not a measurement of your systems. Nothing was connected or scanned.",
+  "Free fixes and doing nothing are valid outcomes and are shown with the same weight as any paid route.",
+  "Existing-software tips are UNVERIFIED until a person checks the vendor and the version.",
+  "No individual staff member is assessed. The seven dimensions describe the work, not the people."
+ ],
+ "method": {
+  "assumed": {
+   "adoption": {
+    "base": 0.7,
+    "high": 0.85,
+    "low": 0.5
+   },
+   "overhead_min_per_week": {
+    "base": 45.0,
+    "high": 20.0,
+    "low": 90.0
+   },
+   "rework_reduction_factor": 0.8,
+   "time_reduction_by_category": {
+    "approvals": [
+     0.1,
+     0.25,
+     0.4
+    ],
+    "data_transfer": [
+     0.3,
+     0.55,
+     0.75
+    ],
+    "enquiry_triage": [
+     0.15,
+     0.3,
+     0.45
+    ],
+    "invoicing_billing": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "job_admin": [
+     0.2,
+     0.4,
+     0.6
+    ],
+    "onboarding": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "quoting": [
+     0.2,
+     0.35,
+     0.5
+    ],
+    "reporting": [
+     0.3,
+     0.5,
+     0.7
+    ],
+    "scheduling": [
+     0.25,
+     0.45,
+     0.6
+    ],
+    "stock_ordering": [
+     0.2,
+     0.4,
+     0.6
+    ]
+   }
+  },
+  "formula": "hours = max(0, (N * ((T0+E0) - (T1+E1)) * A - O) / 60)",
+  "statements": [
+   "Every input is SELF_REPORTED. Every reduction, adoption and overhead figure is ASSUMED.",
+   "Low, base and high are scenario bands, not statistical confidence intervals.",
+   "Waiting time is elapsed time. It is shown beside the hours and never added to them.",
+   "Capacity freed is not cash saved. Payroll savings need proof that actual costs change.",
+   "No implementation cost is known yet, so no return on investment is computed.",
+   "Measurement maturity rung for this report: SELF_REPORTED (next rung: INSTRUMENTED BASELINE)."
+  ],
+  "worked_example_fictional": "200 tasks a week, 12 min before, 7 min after, adoption 0.80, overhead 100 min: (200*5*0.8-100)/60 = 11.67 hours of capacity a week"
+ },
+ "monday_plan": [
+  {
+   "action": "Pick the system that is the source of truth and enter data there only",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Copying web orders into the ERP"
+  },
+  {
+   "action": "Set a minimum level for your top 20 items and order on a fixed day",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Supplier purchase orders"
+  },
+  {
+   "action": "Publish fixed booking windows so back-and-forth messages stop",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Delivery scheduling"
+  }
+ ],
+ "ranking": [
+  "W2",
+  "W1",
+  "W3"
+ ],
+ "schema": "mf.xray.v1",
+ "synthetic": true,
+ "synthetic_labels": "SYNTHETIC DEMO: fictional business, fictional answers, no real data.",
+ "totals": {
+  "base": 9.18,
+  "high": 17.63,
+  "low": 1.41
+ },
+ "totals_note": "Sum of the separate workflows. Overlap between workflows is possible and not subtracted.",
+ "workflows": [
+  {
+   "base_hours": 6.72,
+   "category": "data_transfer",
+   "category_label": "Copying data between systems",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether the two tools you use already have a built-in integration or a scheduled import. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Pick the system that is the source of truth and enter data there only",
+     "Use the import or CSV feature of the second system instead of retyping",
+     "List the fields you copy; drop the ones nobody reads"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that moves the listed fields between two named systems, read-only first. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "1 other place(s) the same detail is typed",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "5% of jobs are odd cases",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "3 elapsed hours of waiting across 1 handoffs (not staff time)",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "5 steps from start to finish",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "17.3 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "6% of jobs need rework",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is clear",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 4 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of Copying web orders into the ERP and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in Copying web orders into the ERP is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W2",
+   "inputs": {
+    "certainty": "measured_recently",
+    "exception_pct": 5,
+    "handoffs": 1,
+    "n_per_week": 260,
+    "rework_min": 10,
+    "rework_pct": 6,
+    "steps": 5,
+    "systems_retyped": 1,
+    "t0_min": 4,
+    "visibility": "clear",
+    "wait_hours": 3
+   },
+   "modelled_capacity_equivalent_per_week": [
+    67.68,
+    322.56,
+    577.92
+   ],
+   "name": "Copying web orders into the ERP",
+   "queue_hours_elapsed": 3,
+   "risk": {
+    "data_sensitivity": "MED",
+    "note": "Business data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 0.6,
+     "e1_min": 0.46,
+     "hours": 1.41,
+     "hours_display": 1.5,
+     "hours_signed": 1.41,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.3,
+     "scenario": "low",
+     "t0_min": 4,
+     "t1_min": 2.8
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 0.6,
+     "e1_min": 0.34,
+     "hours": 6.72,
+     "hours_display": 6.5,
+     "hours_signed": 6.72,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.55,
+     "scenario": "base",
+     "t0_min": 4,
+     "t1_min": 1.8
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 0.6,
+     "e1_min": 0.24,
+     "hours": 12.04,
+     "hours_display": 12.0,
+     "hours_signed": 12.04,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.75,
+     "scenario": "high",
+     "t0_min": 4,
+     "t1_min": 1.0
+    }
+   ],
+   "sensitivity": "MED",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 2.46,
+   "category": "stock_ordering",
+   "category_label": "Stock and supplier ordering",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your inventory or accounting tool already has reorder points and purchase order templates. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Set a minimum level for your top 20 items and order on a fixed day",
+     "Keep one supplier contact sheet with order cut-off times",
+     "Count the fast movers weekly and the rest monthly"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that drafts supplier orders from your reorder list for a person to approve. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "2 other place(s) the same detail is typed",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "12% of jobs are odd cases",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "12 elapsed hours of waiting across 2 handoffs (not staff time)",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "8 steps from start to finish",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "10.5 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "8% of jobs need rework",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is patchy",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 14 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of Supplier purchase orders and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in Supplier purchase orders is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W1",
+   "inputs": {
+    "certainty": "measured_recently",
+    "exception_pct": 12,
+    "handoffs": 2,
+    "n_per_week": 45,
+    "rework_min": 20,
+    "rework_pct": 8,
+    "steps": 8,
+    "systems_retyped": 2,
+    "t0_min": 14,
+    "visibility": "patchy",
+    "wait_hours": 12
+   },
+   "modelled_capacity_equivalent_per_week": [
+    0.0,
+    118.08,
+    264.48
+   ],
+   "name": "Supplier purchase orders",
+   "queue_hours_elapsed": 12,
+   "risk": {
+    "data_sensitivity": "LOW",
+    "note": "Low-sensitivity data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 1.6,
+     "e1_min": 1.34,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -0.35,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.2,
+     "scenario": "low",
+     "t0_min": 14,
+     "t1_min": 11.2
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 1.6,
+     "e1_min": 1.09,
+     "hours": 2.46,
+     "hours_display": 2.5,
+     "hours_signed": 2.46,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.4,
+     "scenario": "base",
+     "t0_min": 14,
+     "t1_min": 8.4
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 1.6,
+     "e1_min": 0.83,
+     "hours": 5.51,
+     "hours_display": 5.5,
+     "hours_signed": 5.51,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.6,
+     "scenario": "high",
+     "t0_min": 14,
+     "t1_min": 5.6
+    }
+   ],
+   "sensitivity": "LOW",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 0.0,
+   "category": "scheduling",
+   "category_label": "Scheduling and booking",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your calendar or booking tool already offers self-service booking links and reminders. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Publish fixed booking windows so back-and-forth messages stop",
+     "Use one shared calendar as the single source of truth",
+     "Send one standard confirmation message with the details people always ask for"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that proposes booking slots and drafts confirmations for a person to send. Not worth it at these numbers: the free fix or doing nothing is the honest advice."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "0 other place(s) the same detail is typed",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "3% of jobs are odd cases",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "1 elapsed hours of waiting across 1 handoffs (not staff time)",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "3 steps from start to finish",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "0.8 hands-on hours per week",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "2% of jobs need rework",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is clear",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": true,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 8 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows more runs or more minutes than reported",
+    "protocol": "For 5 working days, tally each run of Delivery scheduling and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows more runs or more minutes than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: Delivery scheduling shows no high pressure on any of the seven dimensions, so there is no standout bottleneck here.",
+   "id": "W3",
+   "inputs": {
+    "certainty": "rough_estimate",
+    "exception_pct": 3,
+    "handoffs": 1,
+    "n_per_week": 6,
+    "rework_min": 5,
+    "rework_pct": 2,
+    "steps": 3,
+    "systems_retyped": 0,
+    "t0_min": 8,
+    "visibility": "clear",
+    "wait_hours": 1
+   },
+   "modelled_capacity_equivalent_per_week": [
+    0.0,
+    0.0,
+    3.84
+   ],
+   "name": "Delivery scheduling",
+   "queue_hours_elapsed": 1,
+   "risk": {
+    "data_sensitivity": "MED",
+    "note": "Business data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 0.1,
+     "e1_min": 0.08,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -1.4,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.25,
+     "scenario": "low",
+     "t0_min": 8,
+     "t1_min": 6.0
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 0.1,
+     "e1_min": 0.06,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -0.5,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.45,
+     "scenario": "base",
+     "t0_min": 8,
+     "t1_min": 4.4
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 0.1,
+     "e1_min": 0.05,
+     "hours": 0.08,
+     "hours_display": 0.0,
+     "hours_signed": 0.08,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.6,
+     "scenario": "high",
+     "t0_min": 8,
+     "t1_min": 3.2
+    }
+   ],
+   "sensitivity": "MED",
+   "status": "SCORED",
+   "top_dimension": null
+  }
+ ]
+}

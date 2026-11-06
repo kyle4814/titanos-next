@@ -1,0 +1,538 @@
+{
+ "as_of": "2026-11-06",
+ "banner": "ESTIMATE, not measured. SYNTHETIC DEMO: every figure comes from fictional answers and labelled assumptions.",
+ "business_label": "Fictional Spark and Pipe Co (SYNTHETIC)",
+ "context": {
+  "appetite": "either",
+  "industry": "Trades and field services",
+  "size_band": "5-19",
+  "tools": [
+   "accounting",
+   "email",
+   "paper"
+  ]
+ },
+ "executive_summary": "HYPOTHESIS from your own answers: the largest pressure in Job quotes from site visits is REPEATED WORK, because the same steps are done by hand every time. Base case: about 1.5 hours a week of capacity could be released IF the self-reported numbers and the labelled assumptions hold. Low to high: 0 to 3.5 hours.",
+ "level": 0,
+ "limitations": [
+  "This is a questionnaire result, not a measurement of your systems. Nothing was connected or scanned.",
+  "Free fixes and doing nothing are valid outcomes and are shown with the same weight as any paid route.",
+  "Existing-software tips are UNVERIFIED until a person checks the vendor and the version.",
+  "No individual staff member is assessed. The seven dimensions describe the work, not the people."
+ ],
+ "method": {
+  "assumed": {
+   "adoption": {
+    "base": 0.7,
+    "high": 0.85,
+    "low": 0.5
+   },
+   "overhead_min_per_week": {
+    "base": 45.0,
+    "high": 20.0,
+    "low": 90.0
+   },
+   "rework_reduction_factor": 0.8,
+   "time_reduction_by_category": {
+    "approvals": [
+     0.1,
+     0.25,
+     0.4
+    ],
+    "data_transfer": [
+     0.3,
+     0.55,
+     0.75
+    ],
+    "enquiry_triage": [
+     0.15,
+     0.3,
+     0.45
+    ],
+    "invoicing_billing": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "job_admin": [
+     0.2,
+     0.4,
+     0.6
+    ],
+    "onboarding": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "quoting": [
+     0.2,
+     0.35,
+     0.5
+    ],
+    "reporting": [
+     0.3,
+     0.5,
+     0.7
+    ],
+    "scheduling": [
+     0.25,
+     0.45,
+     0.6
+    ],
+    "stock_ordering": [
+     0.2,
+     0.4,
+     0.6
+    ]
+   }
+  },
+  "formula": "hours = max(0, (N * ((T0+E0) - (T1+E1)) * A - O) / 60)",
+  "statements": [
+   "Every input is SELF_REPORTED. Every reduction, adoption and overhead figure is ASSUMED.",
+   "Low, base and high are scenario bands, not statistical confidence intervals.",
+   "Waiting time is elapsed time. It is shown beside the hours and never added to them.",
+   "Capacity freed is not cash saved. Payroll savings need proof that actual costs change.",
+   "No implementation cost is known yet, so no return on investment is computed.",
+   "Measurement maturity rung for this report: SELF_REPORTED (next rung: INSTRUMENTED BASELINE)."
+  ],
+  "worked_example_fictional": "200 tasks a week, 12 min before, 7 min after, adoption 0.80, overhead 100 min: (200*5*0.8-100)/60 = 11.67 hours of capacity a week"
+ },
+ "monday_plan": [
+  {
+   "action": "Save your 5 most common quotes as templates with the maths built in",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Job quotes from site visits"
+  },
+  {
+   "action": "Use one invoice template with locked fields so nothing is retyped",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "End of job invoicing"
+  },
+  {
+   "action": "Use one job sheet with the same fields every time",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Weekly timesheets"
+  }
+ ],
+ "ranking": [
+  "W1",
+  "W2",
+  "W3"
+ ],
+ "schema": "mf.xray.v1",
+ "synthetic": true,
+ "synthetic_labels": "SYNTHETIC DEMO: fictional business, fictional answers, no real data.",
+ "totals": {
+  "base": 2.68,
+  "high": 6.53,
+  "low": 0.0
+ },
+ "totals_note": "Sum of the separate workflows. Overlap between workflows is possible and not subtracted.",
+ "workflows": [
+  {
+   "base_hours": 1.43,
+   "category": "quoting",
+   "category_label": "Quotes and estimates",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your quoting or accounting tool already has quote templates and a price list feature. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Save your 5 most common quotes as templates with the maths built in",
+     "Keep one price list in one place and delete the others",
+     "Quote within a set window and track how many are accepted"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that drafts a quote from a short intake form for a person to review. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "1 other place(s) the same detail is typed",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "10% of jobs are odd cases",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "30 elapsed hours of waiting across 2 handoffs (not staff time)",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "9 steps from start to finish",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "8.2 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "20% of jobs need rework",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is patchy",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 35 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of Job quotes from site visits and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in Job quotes from site visits is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W1",
+   "inputs": {
+    "certainty": "rough_estimate",
+    "exception_pct": 10,
+    "handoffs": 2,
+    "n_per_week": 14,
+    "rework_min": 20,
+    "rework_pct": 20,
+    "steps": 9,
+    "systems_retyped": 1,
+    "t0_min": 35,
+    "visibility": "patchy",
+    "wait_hours": 30
+   },
+   "modelled_capacity_equivalent_per_week": [
+    0.0,
+    78.65,
+    189.75
+   ],
+   "name": "Job quotes from site visits",
+   "queue_hours_elapsed": 30,
+   "risk": {
+    "data_sensitivity": "MED",
+    "note": "Business data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 4.0,
+     "e1_min": 3.36,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -0.61,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.2,
+     "scenario": "low",
+     "t0_min": 35,
+     "t1_min": 28.0
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 4.0,
+     "e1_min": 2.88,
+     "hours": 1.43,
+     "hours_display": 1.5,
+     "hours_signed": 1.43,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.35,
+     "scenario": "base",
+     "t0_min": 35,
+     "t1_min": 22.75
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 4.0,
+     "e1_min": 2.4,
+     "hours": 3.45,
+     "hours_display": 3.5,
+     "hours_signed": 3.45,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.5,
+     "scenario": "high",
+     "t0_min": 35,
+     "t1_min": 17.5
+    }
+   ],
+   "sensitivity": "MED",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 1.25,
+   "category": "invoicing_billing",
+   "category_label": "Invoicing and billing",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your accounting package already offers repeat invoices or job-to-invoice conversion. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Use one invoice template with locked fields so nothing is retyped",
+     "Invoice on a fixed weekday from one list of finished jobs",
+     "Add a 5-line check (name, amount, date, reference, terms) before each send"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that drafts invoices from your finished-job list for a person to approve. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "2 other place(s) the same detail is typed",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "8% of jobs are odd cases",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "72 elapsed hours of waiting across 3 handoffs (not staff time)",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "7 steps from start to finish",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "6.6 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "12% of jobs need rework",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is blind",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 18 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of End of job invoicing and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in End of job invoicing is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W2",
+   "inputs": {
+    "certainty": "measured_recently",
+    "exception_pct": 8,
+    "handoffs": 3,
+    "n_per_week": 22,
+    "rework_min": 15,
+    "rework_pct": 12,
+    "steps": 7,
+    "systems_retyped": 2,
+    "t0_min": 18,
+    "visibility": "blind",
+    "wait_hours": 72
+   },
+   "modelled_capacity_equivalent_per_week": [
+    0.0,
+    68.75,
+    165.0
+   ],
+   "name": "End of job invoicing",
+   "queue_hours_elapsed": 72,
+   "risk": {
+    "data_sensitivity": "HIGH",
+    "note": "Financial or personal data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 1.8,
+     "e1_min": 1.51,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -0.79,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.2,
+     "scenario": "low",
+     "t0_min": 18,
+     "t1_min": 14.4
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 1.8,
+     "e1_min": 1.22,
+     "hours": 1.25,
+     "hours_display": 1.0,
+     "hours_signed": 1.25,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.4,
+     "scenario": "base",
+     "t0_min": 18,
+     "t1_min": 10.8
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 1.8,
+     "e1_min": 1.01,
+     "hours": 3.0,
+     "hours_display": 3.0,
+     "hours_signed": 3.0,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.55,
+     "scenario": "high",
+     "t0_min": 18,
+     "t1_min": 8.1
+    }
+   ],
+   "sensitivity": "HIGH",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 0.0,
+   "category": "job_admin",
+   "category_label": "Job paperwork and timesheets",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your project or accounting tool already has job sheets and timesheet capture. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Use one job sheet with the same fields every time",
+     "Fill timesheets daily in 2 minutes, not weekly from memory",
+     "Photograph the paperwork at the job and file it that day"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that turns a completed job sheet into the records you need. Not worth it at these numbers: the free fix or doing nothing is the honest advice."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "0 other place(s) the same detail is typed",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "2% of jobs are odd cases",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "2 elapsed hours of waiting across 1 handoffs (not staff time)",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "4 steps from start to finish",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "0.8 hands-on hours per week",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "3% of jobs need rework",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is clear",
+     "level": "LOW",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": true,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 6 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows more runs or more minutes than reported",
+    "protocol": "For 5 working days, tally each run of Weekly timesheets and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows more runs or more minutes than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: Weekly timesheets shows no high pressure on any of the seven dimensions, so there is no standout bottleneck here.",
+   "id": "W3",
+   "inputs": {
+    "certainty": "rough_estimate",
+    "exception_pct": 2,
+    "handoffs": 1,
+    "n_per_week": 8,
+    "rework_min": 5,
+    "rework_pct": 3,
+    "steps": 4,
+    "systems_retyped": 0,
+    "t0_min": 6,
+    "visibility": "clear",
+    "wait_hours": 2
+   },
+   "modelled_capacity_equivalent_per_week": [
+    0.0,
+    0.0,
+    4.4
+   ],
+   "name": "Weekly timesheets",
+   "queue_hours_elapsed": 2,
+   "risk": {
+    "data_sensitivity": "MED",
+    "note": "Business data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 0.15,
+     "e1_min": 0.13,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -1.42,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.2,
+     "scenario": "low",
+     "t0_min": 6,
+     "t1_min": 4.8
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 0.15,
+     "e1_min": 0.1,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -0.52,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.4,
+     "scenario": "base",
+     "t0_min": 6,
+     "t1_min": 3.6
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 0.15,
+     "e1_min": 0.08,
+     "hours": 0.08,
+     "hours_display": 0.0,
+     "hours_signed": 0.08,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.6,
+     "scenario": "high",
+     "t0_min": 6,
+     "t1_min": 2.4
+    }
+   ],
+   "sensitivity": "MED",
+   "status": "SCORED",
+   "top_dimension": null
+  }
+ ]
+}
