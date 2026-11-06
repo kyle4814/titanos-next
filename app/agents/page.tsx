@@ -20,7 +20,7 @@ export default function AgentsPage() {
       <h2 className="mt-12 text-2xl font-semibold">How it works</h2>
       <ul className="mt-4 list-disc space-y-2 pl-6">
         <li>MCP over HTTP at <code>https://api.titanos.tech/mcp</code> once deployed. Describe it with the agent card at <code>/.well-known/agent.json</code>.</li>
-        <li>Scoped API keys: you create a key in your account, choose its scopes, and it is shown once. We store only a hash.</li>
+        <li>Scoped API keys: you create a key in your account (on the <a href="/app/keys">API keys page</a>), choose its scopes and spending limit, and it is shown once. We store only a hash.</li>
         <li>Metered credits: 1 credit = AU$0.01 (example rate). The one model-backed tool runs on your own model key (sent per call, never stored) or on credits you have prepaid. We never run a paid model call on credit we have not been paid for.</li>
         <li>Receipts: every call returns an id, the tool, a hash of the input and output, the credits used and a signature you can check. A failed call is not charged.</li>
         <li>Passive only: public DNS records, nothing is probed or touched.</li>
