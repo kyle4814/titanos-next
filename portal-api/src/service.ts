@@ -6,6 +6,7 @@ import type { Store, Account, Purchase, Invoice } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
+import { SCOPES } from "./agent/tools.ts";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
@@ -197,7 +198,13 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
 
 // 7 API KEYS (shown once, hash stored) 8 DATA EXPORT 9 ACCOUNT DELETION
 export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
-  const scopes = Array.isArray(scopesIn) ? scopesIn.filter((s): s is string => typeof s === "string" && /^[a-z:_]{1,32}$/.test(s)).slice(0, 10) : [];
+  // F-C7: an allow-list, not a sanitiser. Any scope string the tool catalogue does not define (e.g. "admin") is a 400,
+  // never stored. Omitted or empty means a key with no scopes, as before.
+  if (scopesIn !== undefined && !Array.isArray(scopesIn)) throw new HttpError(400, "invalid_scope");
+  const allowed: readonly string[] = SCOPES;
+  const asked = (scopesIn ?? []) as unknown[];
+  if (asked.length > 10 || asked.some((s) => typeof s !== "string" || !allowed.includes(s))) throw new HttpError(400, "invalid_scope");
+  const scopes = [...new Set(asked as string[])];
   if ((await d.store.keysFor(a.id)).filter((k) => !k.revokedAt).length >= 10) throw new HttpError(409, "key_limit");
   const key = randomToken("tk", 24);
   const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), scopes, createdAt: d.now() };

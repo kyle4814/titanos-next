@@ -21,17 +21,20 @@ export function gradeShelf(s: Shelf): Grade {
   add("not-synthetic", !s.synthetic, "synthetic configs never show publicly");
 
   // Price honesty: a number needs a real label; a quote needs the QUOTE label; never a price on PROPOSED.
+  // Type check first (F-C5): the price is null or a finite number >= 0. Infinity, NaN and the string "49" never show.
+  // Zero is allowed only because a free step is a real PUBLISHED AU$0; a BUYABLE shelf must be finite and > 0 below.
+  const priceTyped = s.priceAud === null || (typeof s.priceAud === "number" && Number.isFinite(s.priceAud) && s.priceAud >= 0);
   const priced = s.priceAud !== null && s.cadence !== "quote" && s.cadence !== "none";
   add(
     "price-honest",
-    priced ? s.priceLabel === "PUBLISHED" && (s.priceAud as number) >= 0 : s.priceLabel === "QUOTE" || s.priceLabel === "UNKNOWN",
+    priceTyped && (priced ? s.priceLabel === "PUBLISHED" : s.priceLabel === "QUOTE" || s.priceLabel === "UNKNOWN"),
     "a shown price is PUBLISHED; otherwise the shelf says quote",
   );
 
   // Availability must be true: BUYABLE needs a real Stripe link and READY; FREE_STEP needs READY.
   let avOk = false;
   switch (s.availability) {
-    case "BUYABLE": avOk = s.status === "READY" && s.buyUrl !== null && STRIPE.test(s.buyUrl) && priced && (s.priceAud as number) > 0; break;
+    case "BUYABLE": avOk = s.status === "READY" && s.buyUrl !== null && STRIPE.test(s.buyUrl) && priced && priceTyped && (s.priceAud as number) > 0; break;
     case "FREE_STEP": avOk = s.status === "READY" && s.buyUrl === null; break;
     case "QUOTE": avOk = s.priceLabel === "QUOTE" && s.buyUrl === null; break;
     case "SOON": avOk = false; break; // a shelf that cannot be used never shows
