@@ -87,14 +87,20 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (m !== "POST") return json({ error: "method_not_allowed" }, 405);
     const auth = await authenticateKey(d, req.headers.get("authorization"));
     if (!auth) { const res = json({ jsonrpc: "2.0", id: null, error: { code: -32001, message: "unauthenticated" } }, 401); res.headers.set("www-authenticate", 'Bearer realm="titanos-mcp"'); return res; }
-    let msg; try { msg = JSON.parse(await limited(req)); } catch (e) { if (e instanceof HttpError) throw e; return json({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "parse_error" } }, 400); }
+    // F43: every pre-parse rejection on /mcp (wrong content-type 415, oversize 413, unparseable 400) is a JSON-RPC 2.0 error with id null and the same HTTP status. REST routes keep plain {error}.
+    const rpcFail = (status: number, code: number, message: string) => json({ jsonrpc: "2.0", id: null, error: { code, message, data: { status, error: message } } }, status);
+    const ct = req.headers.get("content-type");
+    if (ct !== null && !/^application\/(?:[\w.+-]+\+)?json\s*(?:;|$)/i.test(ct.trim())) return rpcFail(415, -32600, "unsupported_media_type");
+    let msg;
+    try { msg = JSON.parse(await limited(req)); }
+    catch (e) { if (e instanceof HttpError) return rpcFail(e.status, -32600, e.code); return rpcFail(400, -32700, "parse_error"); }
     let out;
     try { out = await handleMcp(d, auth, msg, { idem: req.headers.get("idempotency-key"), byok: req.headers.get("x-model-key") }); }
     catch (e) {
       // F39: a validation failure on the MCP route keeps its HTTP status but carries a JSON-RPC 2.0 error object, so a strict MCP client can parse it. REST routes are unchanged.
       if (!(e instanceof HttpError)) throw e;
       const rid = msg && !Array.isArray(msg) && (typeof msg.id === "string" || typeof msg.id === "number") ? msg.id : null;
-      return json({ jsonrpc: "2.0", id: rid, error: { code: e.status === 422 ? -32602 : -32600, message: e.code, data: { error: e.code } } }, e.status);
+      return json({ jsonrpc: "2.0", id: rid, error: { code: e.status === 422 ? -32602 : -32600, message: e.code, data: { status: e.status, error: e.code } } }, e.status);
     }
     return out === null ? new Response(null, { status: 202 }) : json(out);
   }
