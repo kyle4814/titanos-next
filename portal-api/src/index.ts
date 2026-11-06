@@ -10,18 +10,12 @@ import { startTopup, handleCreditEvent, CREDIT_PACKS } from "./agent/credits.ts"
 import { TOOLS, publicTool } from "./agent/tools.ts";
 import { verifyReceipt } from "./agent/receipt.ts";
 import { agentCard } from "./agent/files.ts";
+import { json, text, empty } from "./http.ts";
 import { entRoute } from "./enterprise/routes.ts";
 import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
-
-function json(body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { "content-type": "application/json", "cache-control": "no-store", "x-content-type-options": "nosniff" },
-  });
-}
 
 // GET /health: liveness plus a database probe. Reports only booleans and the Stripe MODE, never a secret value.
 export async function health(env: Env): Promise<Response> {
@@ -62,7 +56,7 @@ export async function handle(req: Request, env: Env, deps?: Deps): Promise<Respo
     if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405);
     return health(env);
   }
-  if (req.method === "OPTIONS") return cors(new Response(null, { status: 204 }), env);
+  if (req.method === "OPTIONS") return cors(empty(204), env);
   if (!deps) return json({ error: "store_unavailable" }, 503);
   try {
     return cors(await route(req, pathname, deps), env);
@@ -90,7 +84,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (!auth) { const res = json({ jsonrpc: "2.0", id: null, error: { code: -32001, message: "unauthenticated" } }, 401); res.headers.set("www-authenticate", 'Bearer realm="titanos-mcp"'); return res; }
     let msg; try { msg = JSON.parse(await limited(req)); } catch (e) { if (e instanceof HttpError) throw e; return json({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "parse_error" } }, 400); }
     const out = await handleMcp(d, auth, msg, { idem: req.headers.get("idempotency-key"), byok: req.headers.get("x-model-key") });
-    return out === null ? new Response(null, { status: 202 }) : json(out);
+    return out === null ? empty(202) : json(out);
   }
   if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") return json(await svc.verifyLogin(d, (await body(req)).token));
@@ -150,12 +144,12 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (seg[3] === "scan" && m === "POST") return json(await own.scan(d, a, id));
     if (seg[3] === "fix" && m === "POST") return json(await own.fix(d, a, id, (await body(req)).check));
     if (seg[3] === "fixes" && seg[5] === "undo" && m === "POST") return json(await own.undo(d, a, id, seg[4]));
-    if (seg[3] === "report" && m === "GET") { const r = await own.getReport(d, a, id); return new URL(req.url).searchParams.get("format") === "md" ? new Response(r.markdown, { headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-store" } }) : json(r.json); }
+    if (seg[3] === "report" && m === "GET") { const r = await own.getReport(d, a, id); return new URL(req.url).searchParams.get("format") === "md" ? text(r.markdown, "text/markdown; charset=utf-8") : json(r.json); }
   }
   if (path === "/checkout" && m === "POST") { const b = await body(req); return json(await svc.startCheckout(d, a, b.product, b.domain), 201); }
   if (path === "/billing" && m === "GET") return json({ purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), portalUrl: a.stripeCustomerId ? await d.billing.portalUrl(a.stripeCustomerId, d.siteOrigin + "/app/billing") : null });
   if (path === "/invoices" && m === "GET") return json({ invoices: await svc.listInvoices(d, a) });
-  if (seg[0] === "invoices" && seg.length === 2 && m === "GET") return new Response(await svc.renderInvoice(d, a, seg[1]), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
+  if (seg[0] === "invoices" && seg.length === 2 && m === "GET") return text(await svc.renderInvoice(d, a, seg[1]), "text/plain; charset=utf-8");
   if (seg[0] === "subscriptions" && seg[2] === "cancel" && m === "POST") return json(await svc.cancelSubscription(d, a, seg[1]));
   if (path === "/refunds" && m === "POST") return json(await svc.requestRefund(d, a, String((await body(req)).purchaseId ?? "")));
   if (path === "/keys" && m === "POST") return json(await svc.createKey(d, a, (await body(req)).scopes), 201);

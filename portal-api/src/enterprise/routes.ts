@@ -1,12 +1,7 @@
 import { HttpError, authenticate, type Deps } from "../service.ts";
 import * as s from "./service.ts";
+import { json, text } from "../http.ts";
 
-function json(body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json", "cache-control": "no-store", "x-content-type-options": "nosniff" } });
-}
-function text(body: string, type: string): Response {
-  return new Response(body, { headers: { "content-type": type, "cache-control": "no-store", "x-content-type-options": "nosniff", "content-disposition": type.startsWith("text/csv") ? 'attachment; filename="estate.csv"' : "inline" } });
-}
 async function body(req: Request): Promise<Record<string, unknown>> {
   const t = await req.text();
   if (t.length > 64 * 1024) throw new HttpError(413, "body_too_large");
@@ -55,7 +50,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
     const tid = seg[1], rest = seg.slice(2).join("/");
     if (rest === "" && m === "GET") { const { tenant, role } = await s.access(d, ctx, tid, "viewer"); return json({ id: tenant.id, name: tenant.name, kind: tenant.kind, role, ssoEnforced: tenant.ssoEnforced, partnerAccess: tenant.partnerAccess }); }
     if (rest === "estate" && m === "GET") return json(await s.estateView(d, ctx, tid));
-    if (rest === "estate.csv" && m === "GET") return text(await s.estateCsv(d, ctx, tid), "text/csv; charset=utf-8");
+    if (rest === "estate.csv" && m === "GET") return text(await s.estateCsv(d, ctx, tid), "text/csv; charset=utf-8", { "content-disposition": 'attachment; filename="estate.csv"' });
     if (rest === "assets" && m === "GET") return json(await s.listAssets(d, ctx, tid));
     if (rest === "assets" && m === "POST") return json(await s.addAsset(d, ctx, tid, await body(req)), 201);
     if (seg[2] === "assets" && seg[4] === "verify" && seg.length === 5 && m === "POST") return json(await s.verifyAsset(d, ctx, tid, seg[3]));
@@ -79,7 +74,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
     if (seg[2] === "portals" && seg[4] === "publish" && seg.length === 5 && m === "POST") return json(await s.publishPortal(d, ctx, pid, seg[3], (await body(req)).enabled));
     if (rest === "brand" && m === "PUT") return json(await s.setBrand(d, ctx, pid, await body(req)));
     if (rest === "ledger" && m === "GET") return json(await s.ledger(d, ctx, pid));
-    if (rest === "statement" && m === "GET") return text(await s.partnerStatement(d, ctx, pid, new URL(req.url).searchParams.get("month")), "text/plain; charset=utf-8");
+    if (rest === "statement" && m === "GET") return text(await s.partnerStatement(d, ctx, pid, new URL(req.url).searchParams.get("month")), "text/plain; charset=utf-8", { "content-disposition": "inline" });
     if (rest === "payouts" && m === "GET") return json(await s.listPayouts(d, ctx, pid));
     if (rest === "payouts" && m === "POST") return json(await s.requestPayout(d, ctx, pid), 201);
   }
