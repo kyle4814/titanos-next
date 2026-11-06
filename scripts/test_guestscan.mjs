@@ -117,5 +117,30 @@ for (const bad of ["", "localhost", "a b.com", "http://", "-x-.com", "1.2.3.4", 
   }
 }
 
+// R-C3 / F-C1 regressions: each SPF case must NOT pass (one assertion per case; mutation check in the receipt).
+{
+  const D = "acme.example.com.au";
+  const spfStatus = async (rec) => {
+    const w = JSON.parse(JSON.stringify(FIXTURES[0].world)); // any fixture world, then override the SPF TXT
+    w.txt = { ...(w.txt ?? {}), [D]: [rec] };
+    const r = await runScan(D, fakeDoh(w).fetch); return r.findings.find((x) => x.check === "SPF");
+  };
+  const inc = (n) => Array.from({ length: n }, (_, i) => `include:i${i}.example.com`).join(" ");
+  const cases = [
+    ["redirect + all is FAIL", `v=spf1 redirect=_spf.big.example.com -all`, "FAIL", /redirect/],
+    ["redirect + ~all is FAIL", `v=spf1 redirect=_spf.big.example.com ~all`, "FAIL", /redirect/],
+    ["redirect alone (valid) is not PASS", `v=spf1 redirect=_spf.big.example.com`, "WARN", /no explicit all/],
+    ["12 includes (over 10 lookups) is FAIL", `v=spf1 ${inc(12)} -all`, "FAIL", /12 DNS lookups/],
+    ["exactly 10 lookups still PASS", `v=spf1 ${inc(10)} -all`, "PASS", /Strong/],
+    ["11 lookups mixing a, mx, exists is FAIL", `v=spf1 a mx exists:x.example.com ${inc(8)} -all`, "FAIL", /11 DNS lookups/],
+    ["ptr is not PASS", `v=spf1 ptr -all`, "WARN", /ptr/],
+    ["unknown mechanism is FAIL", `v=spf1 bogus:thing -all`, "FAIL", /bogus:thing/],
+    ["v=spf10 lookalike is not an SPF record", `v=spf10 -all`, "FAIL", /No SPF record/],
+    ["v=spf1 with ip4/ip6/a/mx/exp still PASS", `v=spf1 a mx ip4:203.0.113.0/24 ip6:2001:db8::/32 include:_spf.google.com exp=e.example.com -all`, "PASS", /Strong/],
+    ["uppercase V=SPF1 is read", `V=SPF1 INCLUDE:_spf.google.com -ALL`, "PASS", /Strong/],
+  ];
+  for (const [label, rec, want, rx] of cases) { const f = await spfStatus(rec); ok(f.status === want && rx.test(f.detail), `SPF ${label} (got ${f.status}: ${f.detail.slice(0, 80)})`); }
+}
+
 if (fails) { console.error(`${fails} failure(s), ${passed} passed`); process.exit(1); }
 console.log(`PASS test_guestscan (${passed} assertions)`);
