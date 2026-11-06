@@ -3,6 +3,7 @@
 import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
 import { sha256Hex, randomToken } from "../util.ts";
+import { capsOf, dayStartOf } from "./caps.ts";
 import { hashOf, newReceiptId, ringOf, signWithRing } from "./receipt.ts";
 import { TOOLS, toolByName, publicTool, ToolError, type ToolDef } from "./tools.ts";
 
@@ -101,14 +102,22 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
     }
   }
   if (charge > 0 && !alreadyDebited) {
-    const bal = await d.store.creditApply(auth.account.id, -charge, "debit", ref, now);
-    if (bal === undefined) { await release(); return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true); }
+    // F176: balance + per-key daily cap + per-key total cap + ledger write are ONE atomic store step (F19). A leaked key stops at its cap.
+    const deb = await d.store.creditDebitCapped({ accountId: auth.account.id, keyId: auth.key.id, amount: charge, ref, at: now, dayStart: dayStartOf(now), ...capsOf(auth.key) });
+    if (!deb.ok) {
+      await release(); // a refused call frees its idempotency key; nothing was charged
+      if (deb.reason === "insufficient_credits") return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true);
+      if (deb.reason === "key_cap_daily" || deb.reason === "key_cap_total")
+        // F39 shape: a JSON-RPC 2.0 error object with data {status, error}. HTTP stays 200 (the transport worked; the call was refused).
+        return { jsonrpc: "2.0", id: id ?? null, error: { code: -32002, message: "key_spend_cap", data: { status: 429, error: "key_spend_cap", cap: deb.reason === "key_cap_daily" ? "daily" : "total", needed: charge, charged: 0 } } };
+      return err(id, -32603, "ledger_refused"); // key_not_in_tenant or duplicate_ref: never expected on this path, fail closed
+    }
   }
   let output: unknown;
   try {
     output = await t.run({ d, account: auth.account, args, byokKey: byok });
   } catch (e) {
-    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", ref, now); // a failed call costs nothing
+    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", ref, now, auth.key.id); // a failed call costs nothing
     await release();
     if (e instanceof ToolError) return toolText(id, { error: e.code, charged: 0 }, true);
     return toolText(id, { error: "tool_failed", charged: 0 }, true);

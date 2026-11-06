@@ -26,11 +26,17 @@ export class D1ShadowStore extends MemoryStore {
   // credits
   async creditBalance(id: string) { return this.agent.creditBalance(id); }
   async creditEntries(id: string) { return this.agent.creditEntries(id); }
-  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
-    const r = await this.agent.creditApply(id, delta, reason, ref, at);
-    if (r !== undefined) await super.creditApply(id, delta, reason, ref, at);
+  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string) {
+    const r = await this.agent.creditApply(id, delta, reason, ref, at, keyId);
+    if (r !== undefined) await super.creditApply(id, delta, reason, ref, at, keyId);
     return r;
   }
+  async creditDebitCapped(o: import("../src/agent/d1agent.ts").DebitInput) {
+    const r = await this.agent.creditDebitCapped(o);
+    if (r.ok) await super.creditDebitCapped(o);
+    return r;
+  }
+  async keySpend(keyId: string, dayStart: number, accountId?: string) { return this.agent.keySpend(keyId, dayStart, accountId); }
   async putCreditOrder(o: CreditOrder) { await this.agent.putCreditOrder(o); await super.putCreditOrder(o); }
   async creditOrderByCheckout(c: string) { return this.agent.creditOrderByCheckout(c); }
   // receipts and calls
