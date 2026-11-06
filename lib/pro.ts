@@ -8,7 +8,8 @@ export interface OwnerJob { id: string; domain: string; check: string; priceCent
 export interface RankView { display: string; points: number; tier: string; provenFixes: number; holding: number; regressed: number; abandoned: number; holdRate: number | null; note: string }
 export interface PayoutsView { paidCents: number; pendingReviewCents: number; waitingForProofCents: number; frozenByDisputeCents: number; paid: { jobId: string; domain: string; amountCents: number }[]; rule: string }
 
-export const joinPro = (api: Api, display: string, plan: "payg" | "seat") => call(api, "POST", "/pro/join", { acceptTerms: true, display, plan });
+// No plan field: the claim-fee discount comes from a server-side seat entitlement, never from what the browser sends.
+export const joinPro = (api: Api, display: string) => call(api, "POST", "/pro/join", { acceptTerms: true, display });
 export const startOnboarding = (api: Api): Promise<{ url: string }> => call(api, "POST", "/pro/onboarding");
 export const refreshOnboarding = (api: Api) => call(api, "POST", "/pro/onboarding/refresh");
 export const getBoard = (api: Api): Promise<{ jobs: BoardJob[]; onboarded: boolean; activeClaims: number }> => call(api, "GET", "/pro/board");

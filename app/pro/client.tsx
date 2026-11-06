@@ -23,7 +23,6 @@ export default function ProClient() {
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [display, setDisplay] = useState("");
-  const [plan, setPlan] = useState<"payg" | "seat">("payg");
   const [ok, setOk] = useState(false);
 
   const run = useCallback(async (fn: () => Promise<void>) => { setBusy(true); setMsg(""); try { await fn(); } catch (e) { setMsg(msgOf(e)); } finally { setBusy(false); } }, []);
@@ -42,10 +41,10 @@ export default function ProClient() {
       <h1>Join as a pro</h1>
       <p>Owners press &quot;get this fixed&quot; with the scan evidence attached. You claim the job, fix it, and we re-scan. You are paid only after the re-scan shows the fault gone. Your rank counts proven fixes only. Reviews do not exist here.</p>
       <label>Display name <input value={display} onChange={(e) => setDisplay(e.target.value)} maxLength={40} style={{ minHeight: 44 }} /></label>
-      <label>Plan <select value={plan} onChange={(e) => setPlan(e.target.value as "payg" | "seat")} style={{ minHeight: 44 }}><option value="payg">Pay per job (claim fee AU$29 to AU$149 by size)</option><option value="seat">Pro seat (lower claim fee, EXAMPLE AU$149 a month)</option></select></label>
+      <p style={{ margin: 0 }}>Claim fee AU$29 to AU$149 by size. A Pro seat (EXAMPLE AU$149 a month, billed separately) halves it while the seat is paid up; joining here never changes your fee.</p>
       <label><input type="checkbox" checked={ok} onChange={(e) => setOk(e.target.checked)} /> I accept the <Link href="/terms">terms</Link> and that payment follows proof.</label>
       {msg && <p role="status" style={{ color: "var(--ice)" }}>{msg}</p>}
-      <button type="button" style={btn} disabled={busy || !ok} onClick={() => run(async () => { await joinPro(browserApi(), display, plan); await load(); })}>JOIN THE PRO SEAT</button>
+      <button type="button" style={btn} disabled={busy || !ok} onClick={() => run(async () => { await joinPro(browserApi(), display); await load(); })}>JOIN THE PRO SEAT</button>
     </main>
   );
 
