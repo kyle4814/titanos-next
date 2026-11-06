@@ -44,9 +44,10 @@ export interface EntStore {
   reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }): Promise<Payout | undefined>;
   putPayout(p: Payout): Promise<void>;
   // ATOMIC compare-and-set on status; undefined when the payout is not in `from` (a D1 adapter: UPDATE ... WHERE status = ?)
-  transitionPayout(id: string, from: Payout["status"], to: Payout["status"]): Promise<Payout | undefined>;
+  transitionPayout(id: string, from: Payout["status"], to: Payout["status"], patch?: Partial<Payout>): Promise<Payout | undefined>; // patch lands in the SAME atomic step (D1: UPDATE ... SET status = ?, <patch cols> WHERE status = ?)
   payoutById(id: string): Promise<Payout | undefined>;
   payoutsOf(partnerId: string): Promise<Payout[]>;
+  payoutsByStatus(status: Payout["status"], partnerId?: string): Promise<Payout[]>; // the sweep reads stuck "sending" rows; a D1 adapter: WHERE status = ? [AND partner_id = ?]
   noteFailure(where: string, detail: string, at: number): Promise<void>;
   failures(): Promise<{ where: string; detail: string; at: number }[]>;
 }
@@ -113,9 +114,10 @@ export class MemoryEntStore implements EntStore {
     return payout;
   }
   async putPayout(p: Payout) { this.payouts.set(p.id, p); }
-  async transitionPayout(id: string, from: Payout["status"], to: Payout["status"]) { const p = this.payouts.get(id); if (!p || p.status !== from) return undefined; p.status = to; return p; }
+  async transitionPayout(id: string, from: Payout["status"], to: Payout["status"], patch?: Partial<Payout>) { const p = this.payouts.get(id); if (!p || p.status !== from) return undefined; p.status = to; if (patch) Object.assign(p, patch); return p; }
   async payoutById(id: string) { return this.payouts.get(id); }
   async payoutsOf(p: string) { return [...this.payouts.values()].filter((x) => x.partnerId === p); }
+  async payoutsByStatus(s: Payout["status"], partnerId?: string) { return [...this.payouts.values()].filter((x) => x.status === s && (partnerId === undefined || x.partnerId === partnerId)).map((x) => ({ ...x })); }
   async noteFailure(where: string, detail: string, at: number) { this.fails.push({ where, detail, at }); }
   async failures() { return this.fails; }
 }

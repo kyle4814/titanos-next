@@ -7,10 +7,16 @@ import { ROLES, ROLE_RANK, type Asset, type Brand, type IdpVerifier, type Payout
 import { SsoError } from "./sso.ts";
 import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement } from "./share.ts";
 import { grade, summarise } from "./estate.ts";
+import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
+import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
+import { releaseHeldPayout, refundHeldPayout } from "./payout_release.ts";
+import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
 export interface EntContext {
   store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string;
+  payoutLookup?: TransferLookup;   // C8 f50: provider lookup for the resume sweep; absent = the sweep route answers 503
+  approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
 const DAY = 86_400_000;
 export const SSO_STATE_TTL_MS = 10 * 60_000, INVITE_TTL_MS = 7 * DAY, MAX_ASSETS = 2000, MAX_OPEN_SSO_STATES = 1000, MAX_OPEN_SSO_STATES_PER_CLIENT = 20, MAX_PENDING_INVITES = 100;
@@ -47,6 +53,57 @@ const pub = (t: Tenant, role?: Role) => ({ id: t.id, slug: t.slug, name: t.name,
 export function checkInternal(d: Deps, header: string | null) {
   const s = ent(d).internalSecret;
   if (!s || !header || !timingSafeEqual(header, s)) throw new HttpError(404, "not_found");
+}
+// C8 f50: payout operator routes. Fail closed with distinct codes: 503 when no secret is configured, 401 on a missing or wrong one.
+export function checkOperator(d: Deps, header: string | null) {
+  const s = ent(d).internalSecret;
+  if (!s) throw new HttpError(503, "operator_unavailable");
+  if (!header || !timingSafeEqual(header, s)) throw new HttpError(401, "unauthorized");
+}
+const tenantParam = (v: unknown): string | undefined => (typeof v === "string" && /^[A-Za-z0-9_-]{1,64}$/.test(v) ? v : undefined);
+function boundedInt(v: unknown, dflt: number, lo: number, hi: number): number {
+  if (v === undefined) return dflt;
+  if (typeof v === "number" && Number.isInteger(v) && v >= lo && v <= hi) return v;
+  throw new HttpError(400, "invalid_input");
+}
+// Read-only. One tenant per call (tenantId required): the operator view never mixes tenants.
+export async function opHeldPayouts(d: Deps, tenantId: string | null) {
+  const tid = tenantParam(tenantId ?? undefined);
+  if (!tid) throw new HttpError(400, "tenant_required");
+  return { tenantId: tid, held: await listHeldPayouts(ent(d).store, tid, d.now()) };
+}
+// MOCK adapter only (whatever the Worker injected as `payouts`); an unconfigured adapter is 503 and nothing is sent.
+export async function opRetryPayouts(d: Deps, b: Record<string, unknown>) {
+  const c = ent(d);
+  if (!c.payouts || typeof c.payouts.transfer !== "function") throw new HttpError(503, "transfer_adapter_unconfigured");
+  if (b.tenantId !== undefined && !tenantParam(b.tenantId)) throw new HttpError(400, "invalid_input");
+  const r = await retryApprovedPayouts(c.store, c.payouts, d.now(), boundedInt(b.maxAttempts, 3, 1, 10), tenantParam(b.tenantId));
+  const count = (a: string) => r.items.filter((i) => i.action === a).length;
+  return { examined: r.examined, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
+}
+export async function opSweepPayouts(d: Deps, b: Record<string, unknown>) {
+  const c = ent(d);
+  if (!c.payoutLookup || typeof c.payoutLookup.lookup !== "function") throw new HttpError(503, "transfer_lookup_unconfigured");
+  if (b.tenantId !== undefined && !tenantParam(b.tenantId)) throw new HttpError(400, "invalid_input");
+  const r = await sweepStuckPayouts({ store: c.store, lookup: c.payoutLookup, now: d.now(), tenantId: tenantParam(b.tenantId) }, boundedInt(b.maxAgeMs, SWEEP_MAX_AGE_MS, 0, 7 * DAY));
+  const count = (a: string) => r.items.filter((i) => i.action === a).length;
+  return { examined: r.examined, skippedYoung: r.skippedYoung, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
+}
+// C8 f54: release / refund of a HELD payout. Never touches the transfer adapter. tenantId is mandatory in the body.
+export async function opReleaseRefund(d: Deps, payoutId: string, action: "release" | "refund", b: Record<string, unknown>) {
+  const c = ent(d);
+  const tid = tenantParam(b.tenantId);
+  if (!tid || !tenantParam(payoutId)) throw new HttpError(400, "invalid_input");
+  if (b.note !== undefined && typeof b.note !== "string") throw new HttpError(400, "invalid_input");
+  const env = { store: c.store, now: d.now(), newId: () => randomToken("led", 8) };
+  const r = await (action === "release" ? releaseHeldPayout : refundHeldPayout)(env, { payoutId, tenantId: tid, note: b.note as string | undefined });
+  if (!r.ok) {
+    if (r.refused === "not_found") throw nf();
+    throw new HttpError(409, r.refused);
+  }
+  if (r.outcome === "applied") await audit(d, tid, "operator", `payout_${action}`, payoutId);
+  const p = r.payout;
+  return { ok: true, outcome: r.outcome, action, payout: { id: p.id, tenantId: p.partnerId, status: p.status, amountCents: p.amountCents, attempts: p.attempts ?? 0, reason: p.reason, operatorNote: p.operatorNote } };
 }
 export async function provisionTenant(d: Deps, b: Record<string, unknown>) {
   const e = ent(d).store;
@@ -467,20 +524,17 @@ export async function listPayouts(d: Deps, ctx: Ctx, pid: string) {
   await access(d, ctx, pid, "analyst", "partner");
   return { payouts: (await ent(d).store.payoutsOf(pid)).map((p) => ({ id: p.id, amountCents: p.amountCents, status: p.status, createdAt: p.createdAt })) };
 }
+// The internal approve/reject route and the card tap share ONE core (payout_decision.ts). Legacy contract kept: a second tap is 409 not_pending.
 export async function decidePayout(d: Deps, id: string, approve: boolean) {
-  const c = ent(d), p0 = await c.store.payoutById(id);
-  if (!p0) throw new HttpError(409, "not_pending");
-  const t = (await c.store.tenantById(p0.partnerId))!;
-  if (approve && !t.payoutAccount) throw new HttpError(409, "payout_account_missing");
-  // compare-and-set: of two concurrent decisions exactly one wins, the other sees not_pending
-  const won = await c.store.transitionPayout(id, "pending_approval", approve ? "sending" : "rejected");
-  if (!won) throw new HttpError(409, "not_pending");
-  if (!approve) {
-    await c.store.addLedger({ id: randomToken("led", 8), uniq: `payout_reversal:${id}`, partnerId: won.partnerId, kind: "payout_reversal", amountCents: won.amountCents, at: d.now(), availableAt: d.now(), payoutId: id });
-    return { status: "rejected" };
-  }
-  await transfer(d, id, t.payoutAccount!);
-  return { status: (await c.store.payoutById(id))!.status };
+  const r = await decideCard(d, { payoutId: id, decision: approve ? "approve" : "deny", reason: approve ? undefined : "rejected by operator" });
+  if (!r.ok) throw new HttpError(409, r.refused === "payout_account_missing" ? "payout_account_missing" : r.refused === "expired" ? "card_expired" : "not_pending");
+  if (r.outcome === "replayed") throw new HttpError(409, "not_pending");
+  return { status: r.decision === "deny" ? "rejected" : r.state };
+}
+// The card tap (f31 card id, tenant-scoped). Mock transfer adapter only in this tree; idempotent on repeat taps.
+export async function decideCard(d: Deps, req: DecideReq) {
+  const c = ent(d);
+  return decidePayoutRecorded({ store: c.store, approvals: c.approvals, transfer: c.payouts, now: d.now(), newId: () => randomToken("led", 8) }, req);
 }
 
 // ---- hooks the C2 service calls ----
