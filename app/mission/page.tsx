@@ -73,8 +73,7 @@ export default function Mission() {
           <p style={BODY}>
             For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b>: compute,
             people, products and new countries, so the mission arrives years sooner. The founder lives on the rest. Once
-            TITANOS is established as a global company, a growing share goes to the people below. The full ladder is on
-            the <a href="/investors" style={A}>investors page</a>.
+            TITANOS is established as a global company, a growing share goes to the people below.
           </p>
 
           <OpenLoop>And who is it for, exactly?</OpenLoop>
@@ -114,8 +113,8 @@ export default function Mission() {
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/contact">Start a conversation</AnimatedButton>
-            <AnimatedButton href="/investors" variant="secondary">
-              Investors
+            <AnimatedButton href="/trust" variant="secondary">
+              Trust
             </AnimatedButton>
           </div>
         </div>

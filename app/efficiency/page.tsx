@@ -7,6 +7,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { withSeo } from "@/lib/seo";
 import data from "@/lib/efficiency/efficiency.json";
 import { LEDGER, AS_OF_LONG } from "@/lib/ledger";
+import Provenance from "@/components/Provenance";
 
 const META_TITLE = "Efficiency, measured | TITANOS";
 const META_DESC =
@@ -121,6 +122,7 @@ export default function Efficiency() {
         tagline={data.headline.analogy}
         sub={`${data.headline.caption} Updated ${data.updated}.`}
       />
+      <Provenance route="/efficiency" />
       <section style={SECTION}>
         <div className="w2a-measure" style={WRAP}>
           <p style={BODY}>{data.intro}</p>

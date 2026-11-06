@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import LoopOrbit from "@/components/charts/LoopOrbit";
 import StepCards from "@/components/w2a/StepCards";
 import { NumberBlock, NextStep } from "@/components/SiteBlocks";
+import Provenance from "@/components/Provenance";
 
 export const metadata: Metadata = {
   title: "The learning loop · TITANOS",
@@ -26,6 +27,7 @@ export default function LearningLoopPage() {
   return (
     <>
       <PageHero badge="THE LEARNING LOOP" title="We did not buy a bigger machine, we changed the system" tagline="Seven steps, and every turn leaves a receipt." />
+      <Provenance route="/learning-loop" />
       <NumberBlock
         fact={{
           value: `${int("fleet_jobs_24h")} jobs in 24 hours`,

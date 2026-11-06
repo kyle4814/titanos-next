@@ -1,0 +1,118 @@
+{
+ "dataset": "Sector Index",
+ "compiled": "2026-11-06",
+ "system": "TITANOS site data files (sectors.json, proof.json), compiled by scripts/gen_open_data.mjs",
+ "licence": "Free to use with attribution: cite titanos.tech and the compiled date. A formal open licence will be named here once the owner confirms it.",
+ "rows": [
+  {
+   "slug": "construction",
+   "name": "Construction",
+   "point": "Builders and trades lose money to fake invoices and payment redirects, and the cause is usually one missing email setting.",
+   "problem": "Builders pay and get paid by email all day, so a forged invoice or a changed bank detail is a real loss, not an IT detail.",
+   "value": "AU$152.6M",
+   "label": "MEASURED",
+   "note": "Business email compromise losses in Australia in 2024, up 66 percent on the year, as reported by the Australian Federal Police. A third party's figure, cited, not ours.",
+   "source": "PORTFOLIO_INDEX.md (AFP media release, construction BEC)",
+   "source_url": "https://www.afp.gov.au/news-centre/media-release/criminals-target-construction-sector-business-email-compromise-scams"
+  },
+  {
+   "slug": "councils",
+   "name": "Councils",
+   "point": "Local government buys locally and publishes how, so the first job is finding the door that fits you.",
+   "problem": "Councils buy through shared panels and their own portals, and the rules differ council to council.",
+   "value": "91%",
+   "label": "MEASURED",
+   "note": "Share of Cairns Regional Council spend that stayed local in 2025/26, from the council's own State of Procurement report. The council's PDF blocked our fetch, so we read it through a search snippet and mark it as such.",
+   "source": "deep/local_fnq.md",
+   "source_url": ""
+  },
+  {
+   "slug": "health",
+   "name": "Health",
+   "point": "A clinic holds the most private data a small business can hold, so a calm review of the basics comes first.",
+   "problem": "Patient records, referrals and billing all travel by email and shared drives.",
+   "value": "No single number",
+   "label": "UNKNOWN",
+   "note": "The health regulator guidance is qualitative. We have not measured clinics ourselves, so we show no figure.",
+   "source": "SOURCE_REGISTRY.md (ADHA managing cyber security threats)",
+   "source_url": "https://www.digitalhealth.gov.au/healthcare-providers/cyber-security/managing-cyber-security-threats"
+  },
+  {
+   "slug": "aged-care",
+   "name": "Aged care and disability",
+   "point": "Providers are expected to show they follow a recognised security standard, and many have never been asked how.",
+   "problem": "Participant data, rosters and funding claims sit across several systems run by different people.",
+   "value": "No count yet",
+   "label": "UNKNOWN",
+   "note": "The NDIS guidance says auditors increasingly expect providers to follow a recognised standard, without naming one. That is a quoted statement, not a count, so we show no number.",
+   "source": "deep2/compliance_retainers.md (NDIS cyber security requirements, May 2022)",
+   "source_url": "https://www.ndis.gov.au/media/4524"
+  },
+  {
+   "slug": "logistics",
+   "name": "Logistics",
+   "point": "Freight runs on bookings, invoices and bank details sent by email, which is where a forged message does the most harm.",
+   "problem": "Many parties, many inboxes, payments moving daily.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. To fix that we would scan a sample of freight and transport domains and publish the count with the date.",
+   "source": "",
+   "source_url": ""
+  },
+  {
+   "slug": "mining",
+   "name": "Mining and resources",
+   "point": "Suppliers to resource companies are asked to prove their security before they are paid, and the proof can be prepared early.",
+   "problem": "Large buyers send supplier questionnaires and the answers need public evidence behind them.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. A figure we once held for resource spend in one region could not be reproduced, so we dropped it.",
+   "source": "",
+   "source_url": ""
+  },
+  {
+   "slug": "education",
+   "name": "Education",
+   "point": "Schools hold family and child data and are rarely asked how their email is protected.",
+   "problem": "Small IT teams, many staff accounts, and parents who trust the school's email.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of school domains and publish the count with the date.",
+   "source": "",
+   "source_url": ""
+  },
+  {
+   "slug": "retail",
+   "name": "Retail",
+   "point": "A shop's brand is its email and web address, so a lookalike or forged message costs trust as well as money.",
+   "problem": "Customers are told to trust messages from your name.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of retail domains and publish the count with the date.",
+   "source": "",
+   "source_url": ""
+  },
+  {
+   "slug": "hospitality",
+   "name": "Hospitality",
+   "point": "Bookings, supplier invoices and staff rosters all live in email, and one forged message can redirect a payment.",
+   "problem": "Busy venues, thin margins, and no one whose job is email security.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of venue domains and publish the count with the date.",
+   "source": "",
+   "source_url": ""
+  },
+  {
+   "slug": "professional-services",
+   "name": "Professional services",
+   "point": "Advisers hold client money and client secrets, so clients quietly judge them on how safely they handle email.",
+   "problem": "Accountants, lawyers and consultants move sensitive files and payment details every day.",
+   "value": "Not measured yet",
+   "label": "UNKNOWN",
+   "note": "We have no sourced number for this sector, so we show none. We would scan a sample of practice domains and publish the count with the date.",
+   "source": "",
+   "source_url": ""
+  }
+ ]
+}
