@@ -124,8 +124,10 @@ test("D-08 FINDING F6 [P3]: key scopes are free-form strings; any account can mi
   const h = make();
   const s = await h.login("scopes@x3.test");
   const k = await h.j(await h.req("POST", "/keys", { token: s.session, body: { scopes: ["admin:all", "x_y", "explain:model"] } }));
-  assert.deepEqual(k.scopes, ["admin:all", "x_y", "explain:model"], "unknown scopes are stored, not rejected (harmless today: nothing reads them)");
+  // int3 (2c616c443) validates scopes: unknown scope strings are no longer stored. Pass on either behaviour; record which.
+  const scopesStored = Array.isArray(k.scopes) && k.scopes.includes("admin:all");
+  console.log(`X3-NOTE F6a unknown scopes ${scopesStored ? "STORED (open)" : "REJECTED (closed on int3)"}`);
   const keys = await Promise.all(Array.from({ length: 10 }, () => h.req("POST", "/keys", { token: s.session, body: { scopes: [...SCOPES] } })));
   assert.ok(keys.filter((r) => r.status === 201).length >= 7, "keys until the 10-key cap");
-  finding("F6", "P3", "scope strings unvalidated; rate limit (60/min) is per key so an account holds 10x and accounts are free", "scopes stored: admin:all,x_y,explain:model; 10 keys per account");
+  if (scopesStored) finding("F6", "P3", "scope strings unvalidated; rate limit (60/min) is per key so an account holds 10x and accounts are free", "scopes stored: admin:all,x_y,explain:model; 10 keys per account");
 });

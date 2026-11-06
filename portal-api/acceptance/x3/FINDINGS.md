@@ -19,3 +19,10 @@ Bearer forms and token confusion; login-link single use and expiry; 14 webhook f
 
 ## Not covered (stated, not assumed safe)
 D1 adapters and every web/f171..f211 branch (later than int2); the live titanos-api Worker (source lost); real Stripe, Cloudflare headers/CSP at the edge; the real Mailer and ModelClient (neither is in this branch); the RS256/JWKS verifier (f25); the browser pages beyond a grep for HTML sinks (one `document.write` into a new window, escaped by `esc()`).
+
+## RETRY 2 (2026-11-07): re-run against int3 `2c616c443` (web/obelisk-int3-2026-11-07)
+Probes 45/45 pass after two fixture updates (probes only, no product code touched).
+- F1 P1 STILL OPEN on int3 (D-06: `x-model-key: platform` runs the platform model key at 0 credits).
+- F2, F3, F4, F7 P2 still open (F3 and F4 events still `ignored`, F4 transfer and commission paid after a dispute event). F8, F9, F10, F18, F19, F5 P3 still open.
+- F6 P3 CLOSED on int3: unknown scope strings are rejected (D-08 now records which).
+- F-02 payout race: the old fixture fixed DNS before delivery; int3 f28 attribution now withholds pay when a sweep observes the fix first (`attribution_withheld: fix_observed_before_delivery`). Safe direction. Probe now asserts at most one transfer, status agrees with the transfer count, plus a serial control that pays exactly once.

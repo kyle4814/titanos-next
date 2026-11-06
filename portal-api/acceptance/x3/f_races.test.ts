@@ -21,8 +21,15 @@ test("F-02 BLOCKED: concurrent delivers/rescans/sweeps/owner rescans pay exactly
   const job = (await r.hire(o)).job; await r.claim(p.session, job.id); r.fix("race2.com.au");
   const jobs = [r.deliver(p.session, job.id), r.deliver(p.session, job.id), r.internal("POST", "/internal/market/sweep"), r.internal("POST", "/internal/market/sweep"), r.h.req("POST", `/market/jobs/${job.id}/rescan`, { token: o.session }), r.h.req("POST", `/market/jobs/${job.id}/rescan`, { token: p.session })];
   await Promise.all(jobs);
-  assert.equal(r.payments.count("transfer"), 1); assert.equal((await r.store.getJob(job.id))!.status, "paid");
-  blocked("F-02", "payout race");
+  // int3 (f28 attribution): a sweep that observes the fix before delivery WITHHOLDS pay (correct: the pro did not cause it). So the invariant is AT MOST one transfer, never two, and status agrees with the transfer count.
+  const n = r.payments.count("transfer"); const st = (await r.store.getJob(job.id))!.status;
+  assert.ok(n <= 1, `transfers=${n}`); assert.equal(st === "paid", n === 1, `status ${st} vs transfers ${n}`);
+  blocked("F-02", `payout race: ${n} transfer(s), status ${st}`);
+  // serial control: delivery observed first pays exactly once
+  const r2 = fullRig(); const o2 = await r2.owner("race-o3@x3.test", "race3.com.au"); const p2 = await r2.pro("race-p3@x3.test");
+  const j2 = (await r2.hire(o2)).job; await r2.claim(p2.session, j2.id); r2.fix("race3.com.au");
+  await r2.deliver(p2.session, j2.id); await r2.deliver(p2.session, j2.id);
+  assert.equal(r2.payments.count("transfer"), 1); assert.equal((await r2.store.getJob(j2.id))!.status, "paid");
 });
 
 test("F-03 BLOCKED: one login link used by 10 concurrent verifies yields one session; one event delivered 10 times yields one invoice", async () => {
