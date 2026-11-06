@@ -44,14 +44,14 @@ for (const f of ["../components/GuestScan.tsx", "../components/HoursCounter.tsx"
   ok([...hosts].every((h) => DOH_HOSTS.includes(h)) && hosts.size === 1, `only DoH host contacted: ${[...hosts]}`);
 }
 
-// 3. Speed: the scan is one parallel round. 200 ms per lookup, 17 lookups, must finish far under 10 s.
+// 3. Speed: one parallel round plus one nested SPF round (F38). 200 ms per lookup, 18 lookups, must finish far under 10 s.
 {
   const fx = FIXTURES[0];
   const fk = fakeDoh(fx.world, 200, sleep);
   const t0 = Date.now();
   const r = await runScan(fx.domain, fk.fetch);
   const wall = Date.now() - t0;
-  ok(fk.calls.length === 5 + DKIM_SELECTORS.length, `17 lookups (got ${fk.calls.length})`);
+  ok(fk.calls.length === 5 + DKIM_SELECTORS.length + 1, `18 lookups (17 + 1 nested include read, F38) (got ${fk.calls.length})`);
   ok(wall < 1000, `parallel: 17 x 200 ms lookups took ${wall} ms (serial would be 3400)`);
   ok(r.elapsedMs < 1000, "result.elapsedMs reported");
   // Worst case on a phone: 2 s per lookup (slow 3G round trips) must still beat 10 s.
@@ -235,6 +235,38 @@ for (const bad of ["", "localhost", "a b.com", "http://", "-x-.com", "1.2.3.4", 
   // Same record under the direct-only scanner count: documents the gap this closes.
   { const { spfInfo } = await import("../lib/guestscan/scan.ts");
     ok(spfInfo(`v=spf1 ${incs(5, "m")} -all`).lookups === 5, "F35 direct-only spfInfo still reports 5 (unchanged, autofix guards untouched)"); }
+}
+
+// F38. The nested walk is wired into runScan: the SPF finding's lookup count comes from the walk. Fake DoH worlds only.
+{
+  const D = "corp.example.com";
+  const spfF = async (txt) => { const fk = fakeDoh({ txt }); const r = await runScan(D, fk.fetch); return { f: r.findings.find((x) => x.check === "SPF"), calls: fk.calls.length }; };
+  const leaf = "v=spf1 ip4:203.0.113.0/24 -all";
+  // Root has 5 direct terms (under 10) but each include nests one more include and one a: 5 + 5 + 5 = 15 > 10.
+  const txt = { [D]: [`v=spf1 ${[0,1,2,3,4].map((i) => `include:n${i}.example.net`).join(" ")} -all`] };
+  for (let i = 0; i < 5; i++) txt[`n${i}.example.net`] = [`v=spf1 include:m${i}.example.net a -all`], txt[`m${i}.example.net`] = [leaf];
+  { const { f } = await spfF(txt);
+    ok(f.status === "FAIL" && /needs 11 DNS lookups, over the limit of 10/.test(f.detail), `F38 5 direct terms but over 10 nested reports OVER_LIMIT FAIL (${f.status}: ${f.detail.slice(0, 70)})`); }
+  { const flat = { [D]: [`v=spf1 ${[0,1,2,3,4].map((i) => `include:n${i}.example.net`).join(" ")} -all`] };
+    for (let i = 0; i < 5; i++) flat[`n${i}.example.net`] = [leaf];
+    const { f } = await spfF(flat); ok(f.status === "PASS", `F38 same 5 includes that stay flat (5 lookups) still PASS (${f.status})`); }
+  // Loop: a includes b includes a. Must terminate (bounded calls) and be reported, not hang.
+  { const loop = { [D]: ["v=spf1 include:a.example.net -all"], "a.example.net": ["v=spf1 include:b.example.net -all"], "b.example.net": ["v=spf1 include:a.example.net -all"] };
+    const t0 = Date.now(); const { f, calls } = await spfF(loop);
+    ok(Date.now() - t0 < 2000 && calls < 30 && f.status === "FAIL", `F38 include loop terminates and FAILs (${f.status}, ${calls} DoH calls total)`); }
+  // Depth cap: a chain longer than maxDepth 10 never walks past the cap; result is not a hang and not an invented FAIL.
+  { const chain = { [D]: ["v=spf1 include:c0.example.net -all"] };
+    for (let i = 0; i < 20; i++) chain[`c${i}.example.net`] = [`v=spf1 include:c${i + 1}.example.net -all`];
+    const fk = fakeDoh({ txt: chain }); const r = await runScan(D, fk.fetch);
+    const walked = fk.calls.filter((c) => /^c\d+\.example\.net$/.test(c.name) && c.type === "TXT").length;
+    const f = r.findings.find((x) => x.check === "SPF");
+    ok(walked <= 10 && f.status === "FAIL" && /needs 11 DNS lookups/.test(f.detail), `F38 a 20-deep include chain stops at the cap (walked ${walked} hops of 20) and FAILs at 11 (${f.status}: ${f.detail.slice(0, 50)})`);
+    // The explicit depth cap (maxDepth 10, shorter-than-limit chains via redirect-free a-less hops) is covered by the F35 depth block.
+  }
+  // Failed nested read never turns a clean record into a FAIL: UNKNOWN falls back to direct.
+  { const bad = { [D]: ["v=spf1 include:x.example.net -all"] };
+    const fk = fakeDoh({ txt: bad, servfail: ["x.example.net/TXT"] }); const r = await runScan(D, fk.fetch);
+    ok(r.findings.find((x) => x.check === "SPF").status === "PASS", "F38 failing nested read does not manufacture a FAIL"); }
 }
 
 if (fails) { console.error(`${fails} failure(s), ${passed} passed`); process.exit(1); }
