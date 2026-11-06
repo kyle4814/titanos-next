@@ -64,10 +64,10 @@ export class D1PlanStore extends MemoryStore {
   }
   // Held webhook facts (f194, migration 0006). holdFact appends in hold order; takeFacts is ONE statement (DELETE ... RETURNING), so two takers over one D1 never both
   // receive a fact (a SELECT then DELETE would). RETURNING order is not defined by SQL, so the rows carry seq and are sorted back into hold order here.
-  override async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (fact_key, fact_json) VALUES (?, ?)", key, JSON.stringify(fact)); }
+  override async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (key, fact) VALUES (?, ?)", key, JSON.stringify(fact)); }
   override async takeFacts(key: string) {
-    const rows = await this.many("DELETE FROM held_facts WHERE fact_key = ? RETURNING seq, fact_json", key);
-    return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact_json)) as Record<string, unknown>);
+    const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
+    return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
   // PII goes, the financial rows stay (same rule as MemoryStore). The in-memory parts (domains, keys, sessions) go through super.
   override async anonymiseAccount(id: string, at: number) {

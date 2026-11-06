@@ -99,9 +99,9 @@ class SelectThenDelete extends D1PlanStore {
   private d: FakeD1;
   constructor(db: FakeD1) { super(db); this.d = db; }
   override async takeFacts(key: string) {
-    const rows = (await this.d.prepare("SELECT seq, fact_json FROM held_facts WHERE fact_key = ? ORDER BY seq").bind(key).all<Record<string, unknown>>()).results;
+    const rows = (await this.d.prepare("SELECT seq, fact FROM held_facts WHERE key = ? ORDER BY seq").bind(key).all<Record<string, unknown>>()).results;
     for (const r of rows) await this.d.prepare("DELETE FROM held_facts WHERE seq = ?").bind(r.seq).run();
-    return rows.map((r) => JSON.parse(String(r.fact_json)) as Record<string, unknown>);
+    return rows.map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
 }
 test("mutant: SELECT then DELETE is caught by the race schedule (it double-delivers on at least one seed), the real adapter on none", async () => {
@@ -115,20 +115,20 @@ test("mutant: SELECT then DELETE is caught by the race schedule (it double-deliv
 });
 test("the real taker is one statement: DELETE ... RETURNING, a single prepared call per take", async () => {
   const db = new FakeD1(), s = new D1PlanStore(db); await s.holdFact("k", { id: "1" }); db.log.length = 0; await s.takeFacts("k");
-  assert.equal(db.log.length, 1); assert.match(db.log[0].sql, /^DELETE FROM held_facts WHERE fact_key = \? RETURNING/);
+  assert.equal(db.log.length, 1); assert.match(db.log[0].sql, /^DELETE FROM held_facts WHERE key = \? RETURNING/);
 });
 
 // ---- adapter mutants killed by the named contract check ----
 class Wrong extends D1PlanStore {
   private d: FakeD1; private mode: string;
   constructor(db: FakeD1, mode: string) { super(db); this.d = db; this.mode = mode; }
-  override async holdFact(key: string, fact: Record<string, unknown>) { await this.d.prepare("INSERT INTO held_facts (fact_key, fact_json) VALUES (?, ?)").bind(key, JSON.stringify(fact)).run(); }
+  override async holdFact(key: string, fact: Record<string, unknown>) { await this.d.prepare("INSERT INTO held_facts (key, fact) VALUES (?, ?)").bind(key, JSON.stringify(fact)).run(); }
   override async takeFacts(key: string) {
     const m = this.mode;
-    const sql = m === "like" ? "DELETE FROM held_facts WHERE fact_key LIKE ? RETURNING seq, fact_json" : m === "keep" ? "SELECT seq, fact_json FROM held_facts WHERE fact_key = ?" : "DELETE FROM held_facts WHERE fact_key = ? RETURNING seq, fact_json";
+    const sql = m === "like" ? "DELETE FROM held_facts WHERE key LIKE ? RETURNING seq, fact" : m === "keep" ? "SELECT seq, fact FROM held_facts WHERE key = ?" : "DELETE FROM held_facts WHERE key = ? RETURNING seq, fact";
     const rows = (await this.d.prepare(sql).bind(key).all<Record<string, unknown>>()).results;
     if (m !== "unsorted") rows.sort((a, b) => Number(a.seq) - Number(b.seq)); else rows.sort((a, b) => Number(b.seq) - Number(a.seq));
-    return rows.map((r) => JSON.parse(String(r.fact_json)) as Record<string, unknown>);
+    return rows.map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
 }
 for (const [mode, check] of [["like", "F3"], ["keep", "F2"], ["unsorted", "F1"]] as const) {
@@ -144,7 +144,9 @@ test("migration 0006 is additive, the next free number on this base, and NOT APP
   assert.ok(files.includes("0006_held_facts.sql")); assert.equal(files.filter((f) => f.startsWith("0006_")).length, 1);
   const sql = readFileSync(join(dir, "0006_held_facts.sql"), "utf8"), code = sql.replace(/--.*$/gm, "");
   assert.ok(/NOT applied/.test(sql)); assert.ok(!/\b(DROP|DELETE|UPDATE|ALTER)\b/i.test(code));
-  assert.ok(/seq INTEGER PRIMARY KEY AUTOINCREMENT/.test(code));
+  // merge-order rule (f194 finding): web/f171 0006_webhook_held_facts.sql creates the SAME table; the DDL must stay byte-identical so a merge of both is a no-op (IF NOT EXISTS)
+  const ddl = code.split("\n").map((l) => l.trim()).filter((l) => /held_facts/.test(l));
+  assert.deepEqual(ddl, ["CREATE TABLE IF NOT EXISTS held_facts (seq INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT NOT NULL, fact TEXT NOT NULL);", "CREATE INDEX IF NOT EXISTS idx_held_facts_key ON held_facts (key);"]);
 });
 for (const kind of STORE_KINDS) {
   test(`[${kind}] a cancel that arrives before its payment is held, taken once by markPaid, and the subscription ends up cancelled`, async () => {
