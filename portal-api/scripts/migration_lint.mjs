@@ -3,7 +3,7 @@
 // list (read from the schema AFTER all migrations, so table rebuilds and renames are honoured); (3) migrations apply in order.
 // Declared debt: scripts/migration_lint_declared.json {"gaps":[7],"duplicates":[3,4]}. A declared dup is a WARN, and a declaration that
 // no longer matches the tree is a FAIL (stale), so the debt cannot hide after a renumber.
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
@@ -85,7 +85,91 @@ export function sqlCheck(db, table, column) {
   return m ? { values: strLits(m[1]) } : { noCheck: true };
 }
 
-export function lint({ migDir = join(ROOT, "migrations"), srcRoot = ROOT, pairs = PAIRS, declaredPath = join(HERE, "migration_lint_declared.json") } = {}) {
+
+// ---- f178 auto-discovery: nothing about a status/kind union or a CHECK IN-list is hand-listed any more -------------------------
+// Unions: (a) `type X = "a" | "b"` aliases (identifier members are resolved one alias deep), (b) properties/fields named
+// status|kind|*Status|*Kind|*State carrying an inline literal union. CHECKs: every `CHECK (col IN (...))` in the final schema.
+// A union must have an explicit PAIR, or exactly one-set-equal CHECK, or be allowlisted; a CHECK must be matched by a union or
+// be allowlisted. Near-misses (Jaccard >= 0.5) are reported as "sets differ" naming the members on each side.
+export const ALLOW_PATH = join(HERE, "migration_lint_allow.json");
+const FIELD_RX = /^(status|kind|[a-z]\w*(Status|Kind|State))$/;
+const sameSet = (a, b) => a.length === b.length && a.every((v) => b.includes(v));
+const jaccard = (a, b) => { const A = new Set(a), B = new Set(b); let i = 0; for (const v of A) if (B.has(v)) i++; return i / (A.size + B.size - i || 1); };
+
+function walk(dir, out = []) {
+  for (const n of readdirSync(dir)) {
+    const f = join(dir, n);
+    if (statSync(f).isDirectory()) walk(f, out); else if (/\.ts$/.test(n) && !/\.d\.ts$/.test(n)) out.push(f);
+  }
+  return out;
+}
+const unionOf = (body) => { const v = strLits(body); return v.length >= 2 ? v : null; };
+
+export function discoverUnions(srcRoot, srcDir = "src") {
+  const root = join(srcRoot, srcDir), all = [], aliases = new Map();
+  for (const f of walk(root)) {
+    const rel = f.slice(srcRoot.length + 1).split("\\").join("/"), src = readFileSync(f, "utf8");
+    for (const m of src.matchAll(/(?:export\s+)?type\s+(\w+)\s*=\s*([^;]+);/g)) {
+      const body = m[2], idents = (body.replace(/"[^"]*"|'[^']*'/g, "").match(/[A-Za-z_]\w*/g) ?? []);
+      aliases.set(m[1], { body, idents, rel });
+    }
+    for (const m of src.matchAll(/\b([A-Za-z_]\w*)\??\s*:\s*((?:"[^"\\]*"|'[^'\\]*')(?:\s*\|\s*(?:"[^"\\]*"|'[^'\\]*'))+)/g)) {
+      if (!FIELD_RX.test(m[1])) continue;
+      const before = src.slice(0, m.index), ifc = [...before.matchAll(/(?:interface|type)\s+(\w+)[^{=]*[{=]/g)].at(-1)?.[1] ?? "?";
+      all.push({ key: `${rel}::${ifc}.${m[1]}`, rel, label: `${ifc}.${m[1]}`, field: m[1], values: unionOf(m[2]) });
+    }
+  }
+  const anyUnions = [];   // every literal alias, any name: lets a CHECK be matched by e.g. `type Role` (reverse direction only)
+  for (const [name, a] of aliases) {
+    let values = strLits(a.body);
+    for (const id of a.idents) { const r = aliases.get(id); if (r) values = values.concat(strLits(r.body)); }
+    values = [...new Set(values)];
+    if (values.length < 2) continue;
+    const u = { key: `${a.rel}::${name}`, rel: a.rel, label: name, field: name, values };
+    anyUnions.push(u);
+    if (/(Status|Kind|State)$/.test(name) || name === "Kind") all.push(u);
+  }
+  return { fieldUnions: all, anyUnions, aliasNames: new Set(aliases.keys()) };
+}
+
+// every CHECK (col IN (...)) in every table of the final schema.
+export function discoverChecks(db) {
+  const out = [];
+  for (const { name, sql } of db.prepare("SELECT name, sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").all())
+    for (const m of sql.matchAll(/CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]*)\)/gi)) out.push({ key: `${name}.${m[1]}`, table: name, column: m[1], values: strLits(m[2]) });
+  return out;
+}
+
+export function discoveryFindings({ unions, anyUnions = unions, checks, pairs, allow, warnings = [] }) {
+  const fails = [], usedAllow = new Set();
+  const allowU = new Map((allow.unions ?? []).map((e) => [e.key, e])), allowC = new Map((allow.checks ?? []).map((e) => [e.key, e]));
+  const pairKeys = new Set(pairs.map((p) => p.ts.file + "::" + (p.ts.type ?? `${p.ts.iface}.${p.ts.prop}`)));
+  const pairChecks = new Set(pairs.map((p) => `${p.sql.table}.${p.sql.column}`));
+  const matchedChecks = new Set(pairChecks);
+  for (const u of unions) {
+    if (pairKeys.has(u.key)) continue;
+    const eq = checks.filter((c) => sameSet(c.values, u.values));
+    if (allowU.has(u.key)) { usedAllow.add("u:" + u.key); if (eq.length) fails.push(`stale allowlist: union ${u.key} now matches CHECK ${eq[0].key}, remove it from migration_lint_allow.json`); continue; }
+    if (eq.length) { eq.forEach((c) => matchedChecks.add(c.key)); continue; }
+    const near = checks.map((c) => ({ c, j: jaccard(c.values, u.values) })).filter((x) => x.j >= 0.5).sort((a, b) => b.j - a.j)[0];
+    if (near) {
+      const onlyTs = u.values.filter((v) => !near.c.values.includes(v)), onlySql = near.c.values.filter((v) => !u.values.includes(v));
+      fails.push(`${u.key}: sets differ from CHECK ${near.c.key}: only in TS [${onlyTs.join(",")}], only in SQL [${onlySql.join(",")}]`);
+      matchedChecks.add(near.c.key);
+    } else fails.push(`${u.key}: union [${u.values.join(",")}] has no matching CHECK mapping (add a PAIR, a CHECK, or an allowlist entry with a reason)`);
+  }
+  for (const c of checks) {
+    if (matchedChecks.has(c.key) || anyUnions.some((u) => sameSet(u.values, c.values))) continue;
+    if (allowC.has(c.key)) { usedAllow.add("c:" + c.key); continue; }
+    fails.push(`CHECK ${c.key} IN [${c.values.join(",")}] has no TS union with the same members (add a union, a PAIR, or an allowlist entry with a reason)`);
+  }
+  for (const e of allow.unions ?? []) if (!usedAllow.has("u:" + e.key) && !unions.some((u) => u.key === e.key)) fails.push(`stale allowlist: union ${e.key} no longer exists`);
+  for (const e of allow.checks ?? []) if (!usedAllow.has("c:" + e.key) && !checks.some((c) => c.key === e.key)) fails.push(`stale allowlist: CHECK ${e.key} no longer exists`);
+  for (const e of [...(allow.unions ?? []), ...(allow.checks ?? [])]) if (!e.reason || e.reason.length < 10) fails.push(`allowlist entry ${e.key} needs a written reason`);
+  return fails;
+}
+
+export function lint({ migDir = join(ROOT, "migrations"), srcRoot = ROOT, pairs = PAIRS, declaredPath = join(HERE, "migration_lint_declared.json"), allowPath = ALLOW_PATH, discover = true } = {}) {
   const files = readdirSync(migDir).filter((f) => f.endsWith(".sql")).sort();
   const declared = existsSync(declaredPath) ? JSON.parse(readFileSync(declaredPath, "utf8")) : {};
   const warnings = [], failures = [...checkNames(files, declared, warnings)];
@@ -109,6 +193,11 @@ export function lint({ migDir = join(ROOT, "migrations"), srcRoot = ROOT, pairs 
   }
   // A check_debt entry that no longer fires (CHECK widened, or the TS value removed) is stale: it must be deleted.
   if (!errs.length) for (const d of checkDebt) if (!seenDebt.has(d) && pairs.some((p) => p.name === d.pair)) failures.push(`stale declaration: check debt '${d.value}' on pair '${d.pair}' no longer fails, remove it from the declared file`);
+  if (!errs.length && discover) {
+    const allow = existsSync(allowPath) ? JSON.parse(readFileSync(allowPath, "utf8")) : {};
+    const { fieldUnions, anyUnions } = discoverUnions(srcRoot);
+    failures.push(...discoveryFindings({ unions: fieldUnions, anyUnions: [...fieldUnions, ...anyUnions], checks: discoverChecks(db), pairs, allow, warnings }));
+  }
   return { files, failures, warnings };
 }
 
