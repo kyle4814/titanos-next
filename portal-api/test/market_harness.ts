@@ -2,6 +2,7 @@ import { make } from "./harness.ts";
 import { MemoryZone } from "../src/owner/dnsw.ts";
 import { MemoryMarketStore } from "../src/market/store.ts";
 import { MockPayments } from "../src/market/payments.ts";
+import { USE_D1, D1MarketStore } from "./d1_harness.ts";
 import { healthy } from "./owner_harness.ts";
 
 export const INTERNAL = "internal_test_secret";
@@ -12,7 +13,7 @@ export const FIXED_SPF = "v=spf1 include:_spf.google.com -all";
 export function rig() {
   const h = make();
   const zones = new Map<string, MemoryZone>();
-  const store = new MemoryMarketStore(), payments = new MockPayments();
+  const store = (USE_D1 ? new D1MarketStore(h.fake!) : new MemoryMarketStore()) as MemoryMarketStore, payments = new MockPayments();
   h.deps.market = { store, payments, doh: (dom) => { const z = zones.get(dom); if (!z) throw new Error("no zone " + dom); return z.doh; }, internalSecret: INTERNAL };
   const zone = (dom: string, w = faulty(dom)) => { const z = new MemoryZone(w); zones.set(dom, z); return z; };
   const fix = (dom: string) => { zones.get(dom)!.world.txt![dom] = [FIXED_SPF]; };

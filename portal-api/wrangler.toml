@@ -1,6 +1,7 @@
-# NOT DEPLOYED. Deploying is an owner card (GATE2/GATE5). database_id is a placeholder until the owner supplies the live D1 id.
+# NOT DEPLOYED. Deploying is an owner card (GATE2/GATE5). Both D1 ids are placeholders until the owner supplies the live ids.
+# Local: `npm run dev:local` (wrangler dev --local, a Miniflare D1 under .wrangler/state, nothing leaves the machine).
 name = "titanos-portal-api"
-main = "src/index.ts"
+main = "src/worker.ts"
 compatibility_date = "2026-11-01"
 
 [vars]
@@ -11,3 +12,4 @@ TITANOS_SITE_ORIGIN = "https://titanos.tech"
 binding = "DB"
 database_name = "titanos"
 database_id = "REPLACE_WITH_LIVE_D1_ID"
+migrations_dir = "migrations"

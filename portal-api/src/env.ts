@@ -16,4 +16,8 @@ export interface Env {
   STRIPE_SECRET_KEY?: string;      // never echoed
   STRIPE_WEBHOOK_SECRET?: string;  // never echoed
   INTERNAL_API_SECRET?: string;    // never echoed
+  RECEIPT_SECRET?: string;         // never echoed: signs agent receipts
+  SEAL_KEY?: string;               // never echoed: base64url 32 bytes, seals SSO client secrets
+  LOCAL_DEV?: string;              // "1" only under wrangler dev --local (.dev.vars): local stand-ins, no outbound
+  [k: string]: unknown;
 }

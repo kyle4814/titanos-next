@@ -10,14 +10,16 @@ import type { D1Like, D1Statement } from "../src/env.ts";
 const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
 export const MIGRATIONS = readdirSync(dir).filter((f) => /^(0001|0003_owner_seat|0005).*\.sql$/.test(f)).sort();
 
+export const ALL_MIGRATIONS = readdirSync(dir).filter((f) => /\.sql$/.test(f)).sort();
+
 const tick = async () => { for (let i = Math.floor(Math.random() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
 
 export class FakeD1 implements D1Like {
   db = new DatabaseSync(":memory:");
   log: { sql: string; args: unknown[] }[] = [];
-  constructor() {
+  constructor(all = false) {
     this.db.exec("PRAGMA foreign_keys = ON");
-    for (const f of MIGRATIONS) this.db.exec(readFileSync(dir + f, "utf8"));
+    for (const f of all ? ALL_MIGRATIONS : MIGRATIONS) this.db.exec(readFileSync(dir + f, "utf8"));
   }
   prepare(sql: string): D1Statement {
     const self = this;

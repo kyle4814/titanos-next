@@ -1,0 +1,7 @@
+# Copy to .dev.vars (gitignored). Fixture values only: none of these is a real secret. LOCAL_DEV=1 swaps in local stand-ins (console mailer,
+# mock billing/payments/IdP). Never put LOCAL_DEV in wrangler.toml [vars] or in a deployed secret store.
+LOCAL_DEV=1
+INTERNAL_API_SECRET=internal_local_fixture
+RECEIPT_SECRET=rcpt_local_fixture
+STRIPE_WEBHOOK_SECRET=whsec_local_fixture
+SEAL_KEY=AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8

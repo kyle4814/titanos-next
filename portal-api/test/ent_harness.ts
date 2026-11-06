@@ -1,3 +1,4 @@
+import { USE_D1, D1TestEntStore } from "./d1_harness.ts";
 import { make } from "./harness.ts";
 import { MemoryEntStore } from "../src/enterprise/store.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
@@ -19,7 +20,7 @@ export class MockPayouts implements PayoutProvider {
 
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const store = new MemoryEntStore(), payouts = new MockPayouts();
+  const store = (USE_D1 ? new D1TestEntStore(h.fake!) : new MemoryEntStore()) as MemoryEntStore, payouts = new MockPayouts();
   h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });

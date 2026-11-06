@@ -3,6 +3,7 @@ import { MemoryStore } from "../src/store.ts";
 import { MockBilling, signStripePayload, StripeHttpBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { MockMailer, type Deps } from "../src/service.ts";
+import { USE_D1, D1TestStore, newDb } from "./d1_harness.ts";
 
 export const RECEIPT_SECRET = "rcpt_test_fixture_secret";
 export class MockModel { calls: { apiKey: string; prompt: string }[] = []; fail = false; async complete(o: { apiKey: string; prompt: string }) { this.calls.push(o); if (this.fail) throw new Error("boom"); return "MOCK EXPLANATION"; } }
@@ -10,7 +11,8 @@ export const SECRET = "whsec_test_fixture";
 export const T0 = Date.UTC(2026, 10, 6, 0, 0, 0);
 export function make() {
   const clock = { t: T0 };
-  const store = new MemoryStore(), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
+  const fake = USE_D1 ? newDb() : undefined;
+  const store = (fake ? new D1TestStore(fake) : new MemoryStore()) as MemoryStore, billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
   const deps: Deps = { store, billing, dns, mailer, now: () => clock.t, siteOrigin: "https://titanos.tech", webhookSecret: SECRET, receiptSecret: RECEIPT_SECRET, model };
   const req = (method: string, path: string, opts: { token?: string; body?: unknown; headers?: Record<string, string> } = {}) =>
     handle(new Request("https://api.test" + path, { method, headers: { ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}), ...(opts.headers ?? {}) }, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) }), { TITANOS_SITE_ORIGIN: "https://titanos.tech" }, deps);
@@ -41,6 +43,6 @@ export function make() {
     const r = await webhook("checkout.session.completed", { id: purchase.checkoutId, payment_status: "paid", payment_intent: `pi_${purchase.id}`, customer: `cus_${purchase.accountId}`, ...(sub ? { subscription: `sub_${purchase.id}` } : {}) });
     return { purchase, res: r };
   }
-  return { model, clock, store, billing, dns, mailer, deps, req, j, login, verifiedDomain, webhook, pay };
+  return { fake, model, clock, store, billing, dns, mailer, deps, req, j, login, verifiedDomain, webhook, pay };
 }
 export { StripeHttpBilling };

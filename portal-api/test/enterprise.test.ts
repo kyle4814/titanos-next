@@ -500,7 +500,7 @@ test("F1: SSO trust cannot outlive the domain proof (asset removed, then verifie
 test("F1b: even with a stale allow-list entry, a login needs a currently verified asset for the email domain", async () => {
   const { h, tid, cfg } = await ssoWorld();
   const st = (h.deps.ent as any).store;
-  for (const a of [...st.assets.values()]) if (a.tenantId === tid) delete a.verifiedAt;   // proof lost behind the service's back
+  for (const a of [...st.assets.values()]) if (a.tenantId === tid) await st.putAsset({ ...a, verifiedAt: undefined });   // proof lost behind the service's back
   assert.equal((await h.ssoLogin("bigco", cfg, "a@bigco.com.au")).res.status, 403);
 });
 test("F2: a removed or demoted admin's pending invites die with them; invites can be revoked; an invite from a no-longer-admin inviter is refused", async () => {
