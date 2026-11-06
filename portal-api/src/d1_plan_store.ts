@@ -1,5 +1,5 @@
 // D1 adapter for the plan-bearing chain (f172): accounts, purchases, subscriptions (with PlanState in subscriptions.plan_json).
-// Invoices are durable too (f192). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
+// Invoices are durable too (f192), and so are held webhook facts (f194). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
 // events, cards, keys) lives on the web/f13_c2_d1store stack and has not been merged into this base. This class exists
 // so plan, period and minimum term can be proven to survive a restart against the real schema; it is not wired into the Worker.
 import { MemoryStore, type Account, type Invoice, type Purchase, type Subscription } from "./store.ts";
@@ -61,6 +61,13 @@ export class D1PlanStore extends MemoryStore {
   override async nextInvoiceNumber() {
     const r = await this.one("INSERT INTO invoice_seq (id, n) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET n = n + 1 RETURNING n");
     return `TT-${String(Number(r?.n)).padStart(6, "0")}`;
+  }
+  // Held webhook facts (f194, migration 0006). holdFact appends in hold order; takeFacts is ONE statement (DELETE ... RETURNING), so two takers over one D1 never both
+  // receive a fact (a SELECT then DELETE would). RETURNING order is not defined by SQL, so the rows carry seq and are sorted back into hold order here.
+  override async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (key, fact) VALUES (?, ?)", key, JSON.stringify(fact)); }
+  override async takeFacts(key: string) {
+    const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
+    return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
   // PII goes, the financial rows stay (same rule as MemoryStore). The in-memory parts (domains, keys, sessions) go through super.
   override async anonymiseAccount(id: string, at: number) {
