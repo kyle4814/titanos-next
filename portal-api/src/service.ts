@@ -2,12 +2,12 @@ import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
 import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
-import type { Store, Account, Purchase, Invoice } from "./store.ts";
+import type { Store, Account, Purchase, Invoice, Subscription } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
 import { SCOPES } from "./agent/tools.ts";
-import { isTier } from "./plan_change.ts";
+import { isTier, periodFromStripe, initPlanFromStripe, observePeriod, type StripePeriod, type Tier } from "./plan_change.ts";
 import { changePlan } from "./plan_change_service.ts";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
@@ -120,9 +120,18 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
     applyRefund(pur, Number(o.amount_refunded ?? 0)); await d.store.putPurchase(pur);
     return "handled";
   }
-  if (ev.type === "invoice.paid" && o.subscription && o.billing_reason === "subscription_cycle") {
-    const sub = await d.store.subscriptionById(String(o.subscription));
-    if (!sub) return "ignored";
+  if (ev.type === "invoice.paid" && o.subscription && (o.billing_reason === "subscription_cycle" || o.billing_reason === "subscription_create")) {
+    const subId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription), cycle = o.billing_reason === "subscription_cycle";
+    const period = invoicePeriod(o);
+    const sub = await d.store.subscriptionById(subId);
+    if (!sub) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
+      if (!period) return "ignored";
+      await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
+      return "handled";
+    }
+    await seedPeriod(d, sub, period, !cycle);
+    await d.store.putSubscription(sub);
+    if (!cycle) return "handled"; // the first invoice is issued by markPaid
     const pur = await d.store.purchaseById(sub.purchaseId);
     if (pur) await issueInvoice(d, pur, Number(o.amount_paid ?? PRODUCTS[sub.productId].amountCents), ev.id);
     return "handled";
@@ -146,14 +155,53 @@ async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId:
   pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
   let cancel = false;
   if (o.subscription) {
-    pur.subscriptionId = String(o.subscription);
-    cancel = (await d.store.takeFacts(`sub:${pur.subscriptionId}`)).length > 0;
-    await d.store.putSubscription({ id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: now, ...(cancel ? { cancelledAt: now } : {}) });
+    pur.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
+    const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
+    cancel = facts.some((f) => f.kind === "cancel");
+    const held = heldPeriods(facts), sp = stripePeriodOf(o.subscription) ?? held.first;
+    const sub: Subscription = { id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
+    await seedPeriod(d, sub, sp, true);
+    for (const hp of held.rest) await seedPeriod(d, sub, hp, false); // invoices that beat the checkout, oldest first
+    await d.store.putSubscription(sub);
   }
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
   await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+}
+// ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
+// checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
+// its first line (lines.data[0].period), which is the period just paid (the invoice's own period_start/end is the usage window).
+function stripePeriodOf(sub: unknown): StripePeriod | undefined {
+  if (!sub || typeof sub !== "object") return undefined;
+  const x = sub as Record<string, any>;
+  return periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+}
+function invoicePeriod(inv: Record<string, any>): StripePeriod | undefined {
+  const line = inv.lines?.data?.[0]?.period;
+  const anchor = typeof inv.subscription === "object" ? inv.subscription?.billing_cycle_anchor : inv.billing_cycle_anchor;
+  return line ? periodFromStripe(line.start, line.end, anchor) : undefined;
+}
+function heldPeriods(facts: Record<string, unknown>[]): { first?: StripePeriod; rest: StripePeriod[] } {
+  const ps = facts.filter((f) => f.kind === "period").map((f) => ({ create: f.create === true, p: periodFromStripe(Number(f.start) / 1000, Number(f.end) / 1000) })).filter((x): x is { create: boolean; p: StripePeriod } => !!x.p)
+    .sort((a, b) => a.p.start - b.p.start);
+  const first = ps.find((x) => x.create)?.p; // only a subscription_create invoice may define the start; a held cycle invoice alone never does
+  return { first, rest: ps.map((x) => x.p).filter((p) => p !== first) };
+}
+// Retainer tiers only (the three AI tiers own a PlanState). No period = no plan: calendar months apply until Stripe's numbers arrive.
+// Only the FIRST period (checkout's expanded subscription, or the subscription_create invoice) may define the start and the grid;
+// a later cycle period seen while no plan exists is held and replayed in order once the first arrives.
+async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefined, create: boolean) {
+  if (!p || !isTier(sub.productId)) return;
+  if (!sub.plan) {
+    if (!create) { await d.store.holdFact(`sub:${sub.id}`, { kind: "period", start: p.start, end: p.end, create: false }); return; }
+    sub.startedAt = p.start; sub.plan = initPlanFromStripe(sub.productId as Tier, p);
+    for (const hp of heldPeriods(await d.store.takeFacts(`sub:${sub.id}`)).rest) await seedPeriod(d, sub, hp, false);
+    return;
+  }
+  const r = observePeriod(sub.plan, p);
+  if (r.applied === "advanced") sub.plan = r.state;
+  else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${sub.id}: start ${p.start} (state untouched)`);
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
