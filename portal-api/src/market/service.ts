@@ -9,6 +9,7 @@ import { fixFor } from "../../../lib/guestscan/fixes.ts";
 import type { JobPayments } from "./payments.ts";
 import { type Job, type MarketCard, type MarketStore, type ProProfile, type Tier } from "./store.ts";
 import { rankFor, WARRANTY_DAYS } from "./rank.ts";
+import { judgeAttribution, clawbackFor, mayRaisePayoutCard, proofKey, emailDomain } from "./attribution.ts";
 import { randomToken, timingSafeEqual } from "../util.ts";
 
 export interface MarketDeps { store: MarketStore; payments: JobPayments; doh: (domain: string) => DohFetch; internalSecret?: string }
@@ -85,6 +86,7 @@ export async function createJob(d: Deps, a: Account, b: { domainId?: unknown; ch
   const j: Job = {
     id, ownerAccountId: a.id, domainId: dom.id, domain: dom.domain, check: b.check, severity: finding.status, tier, priceCents: t.priceCents, claimFeeCents: t.claimFeeCents,
     status: "awaiting_funds", createdAt: now, updatedAt: now, baseline: { at: now, status: finding.status, detail: finding.detail }, abandonedBy: [], rescans: 0, warrantyChecks: 0, events: [],
+    observations: [{ at: now, status: finding.status, src: "baseline" }], ownerEmailDomain: emailDomain(a.email),
   };
   const co = await m.payments.createJobCheckout({ jobId: id, ownerEmail: a.email, ownerAccountId: a.id, amountCents: j.priceCents, name: `TITANOS job: fix ${b.check} on ${dom.domain}`, successUrl: `${d.siteOrigin}/app?job=${id}`, cancelUrl: `${d.siteOrigin}/app`, idempotencyKey: `job_${id}` });
   j.checkoutId = co.id; ev(j, now, "created", `${finding.status} ${b.check} (${scanId}), tier ${tier}`);
@@ -92,11 +94,11 @@ export async function createJob(d: Deps, a: Account, b: { domainId?: unknown; ch
   return { job: presentOwner(j), payUrl: co.url };
 }
 // Called from the verified Stripe webhook (checkout.session.completed with metadata.market_job_id). Idempotent.
-export async function confirmFunded(d: Deps, o: { jobId: string; checkoutId: string; paymentIntent?: string; amountTotal?: number }): Promise<"funded" | "ignored"> {
+export async function confirmFunded(d: Deps, o: { jobId: string; checkoutId: string; paymentIntent?: string; amountTotal?: number; payerFingerprint?: string }): Promise<"funded" | "ignored"> {
   const m = mk(d); const j = await m.store.getJob(o.jobId);
   if (!j || j.status !== "awaiting_funds" || j.checkoutId !== o.checkoutId) return "ignored";
   if (o.amountTotal !== undefined && o.amountTotal !== j.priceCents) return "ignored";   // wrong amount never opens a job
-  j.status = "open"; j.fundedAt = d.now(); j.updatedAt = j.fundedAt; j.paymentIntent = o.paymentIntent; ev(j, j.fundedAt, "funded", "payment held on the platform balance");
+  j.status = "open"; j.fundedAt = d.now(); j.updatedAt = j.fundedAt; j.paymentIntent = o.paymentIntent; if (o.payerFingerprint) j.payerFp = o.payerFingerprint; ev(j, j.fundedAt, "funded", "payment held on the platform balance");
   return (await m.store.transition(["awaiting_funds"], j)) ? "funded" : "ignored";
 }
 export async function cancelJob(d: Deps, a: Account, id: string) {
@@ -133,9 +135,10 @@ export async function claim(d: Deps, a: Account, id: string) {
   if (finding?.status === "PASS") { j = await need(m, id); if (j.status === "open") await refundAndClose(d, j, "refunded", "already fixed before any claim (fresh scan PASS)"); throw new HttpError(409, "already_fixed"); }
   j = await need(m, id);
   const now = d.now(), fee = feeFor(p, j);
+  (j.observations ??= []).push({ at: now, status: finding?.status ?? "UNKNOWN", src: "claim" }); j.proEmailDomain = emailDomain(a.email);
   j.status = "claimed"; j.proAccountId = a.id; j.claimedAt = now; j.claimDeadline = now + CLAIM_WINDOW_MS; j.updatedAt = now; ev(j, now, "claimed", `claim fee ${fee} cents`);
   if (!(await m.store.transition(["open"], j))) throw new HttpError(409, "job_not_open");   // the loser of a race stops here, charged nothing
-  try { j.claimFeeRef = (await m.payments.chargeClaimFee(a.id, p.connectAccountId, fee, `claimfee_${j.id}`)).id; await m.store.putJob(j); }
+  try { const cf = await m.payments.chargeClaimFee(a.id, p.connectAccountId, fee, `claimfee_${j.id}`); j.claimFeeRef = cf.id; if ((cf as { fingerprint?: string }).fingerprint) j.proPayerFp = (cf as { fingerprint?: string }).fingerprint; await m.store.putJob(j); }
   catch { j.status = "open"; j.proAccountId = undefined; j.claimedAt = undefined; j.claimDeadline = undefined; ev(j, d.now(), "claim_failed", "claim fee not collected, job reopened"); await m.store.transition(["claimed"], j); throw new HttpError(402, "claim_fee_failed"); }
   return presentPro2(j);
 }
@@ -155,14 +158,26 @@ export async function deliver(d: Deps, a: Account, id: string, note: unknown) {
 export async function rescan(d: Deps, a: Account | "system", id: string, first = false) {
   const m = mk(d); const j = await need(m, id);
   if (a !== "system" && a.id !== j.ownerAccountId && a.id !== j.proAccountId) throw new HttpError(404, "not_found");
-  if (j.status !== "delivered") throw new HttpError(409, "nothing_to_reprove");
+  const reopen = j.status === "reproved" && !!j.payoutDenied && !j.payout;   // a denied payout card may be answered only by a NEW re-scan
+  if (j.status !== "delivered" && !reopen) throw new HttpError(409, "nothing_to_reprove");
   const now = d.now();
   if (a !== "system" && !first && j.lastRescan && now - j.lastRescan.at < MIN_RESCAN_GAP_MS) throw new HttpError(429, "rescan_too_soon");
   const { id: scanId, finding } = await readCheck(m, d, j.domain, j.check);
   j.rescans++; j.lastRescan = { at: now, status: finding?.status ?? "UNKNOWN", detail: finding?.detail ?? "check not returned" };
+  (j.observations ??= []).push({ at: now, status: j.lastRescan.status, src: "rescan" }); if (j.observations.length > 60) j.observations.splice(0, j.observations.length - 60);
   if (finding?.status === "PASS" && (j.baseline.status === "FAIL" || j.baseline.status === "WARN")) {
+    // F-C4(a): the pass must follow the pro's recorded delivery. Owner-side evidence is read from the owner seat's own event log.
+    const ownerEvents = (await d.owner?.store.get(j.domainId))?.events ?? [];
+    const verdict = judgeAttribution(j, ownerEvents);
+    if (!verdict.pay) {
+      if (!j.attribution) ev(j, now, "attribution_withheld", `${verdict.reason}${verdict.evidenceSrc ? ` (${verdict.evidenceSrc})` : ""}: the fix was observed before the pro's delivery, so no pay and no rank`);
+      j.attribution = { verdict: "withheld", reason: verdict.reason, evidenceAt: verdict.evidenceAt, evidenceSrc: verdict.evidenceSrc, at: j.attribution?.at ?? now };
+      await m.store.putJob(j);
+      return { job: presentPro2(j), reproved: false, payout: null as null };
+    }
+    const from = j.status as "delivered" | "reproved";
     j.status = "reproved"; j.updatedAt = now; j.proof = { scanId, at: now, baseline: j.baseline.status, now: "PASS", detail: finding.detail }; ev(j, now, "reproved", `re-scan ${scanId}: ${j.check} ${j.baseline.status} to PASS`);
-    if (!(await m.store.transition(["delivered"], j))) throw new HttpError(409, "state_changed");
+    if (!(await m.store.transition([from], j))) throw new HttpError(409, "state_changed");
     const payout = await releasePayout(d, j.id);
     return { job: presentPro2((await need(m, j.id))), reproved: true, payout };
   }
@@ -178,6 +193,7 @@ export async function releasePayout(d: Deps, id: string, approvedCardId?: string
   if (!pro?.connectAccountId || !pro.onboarded) throw new HttpError(409, "payout_onboarding_required");
   const amount = j.priceCents;
   if (amount >= PAYOUT_REVIEW_CENTS && !approvedCardId) {
+    if (!j.payout && !mayRaisePayoutCard(j)) return { status: "denied", amountCents: amount };   // F-C4(d): denied on this proof; only a new re-scan reopens it
     if (!j.payout) {
       const card: MarketCard = { id: randomToken("mc", 8), kind: "payout_review", jobId: j.id, reason: `payout ${amount} cents to ${j.proAccountId}, over the ${PAYOUT_REVIEW_CENTS} cent review line, re-proof ${j.proof.scanId}`, createdAt: d.now(), resolved: false };
       await m.store.putCard(card); j.payout = { status: "pending_review", amountCents: amount, cardId: card.id }; ev(j, d.now(), "payout_review", "held for owner approval (GATE1)"); await m.store.putJob(j);
@@ -217,9 +233,14 @@ export async function resolveCard(d: Deps, cardId: string, outcome: string) {
     if (outcome === "refund_owner") { await refundAndClose(d, j, "refunded", "dispute resolved: owner refunded"); }
     else if (outcome === "resume") { j.status = j.dispute!.priorStatus; j.dispute!.resolvedAt = d.now(); j.dispute!.outcome = "resume"; await m.store.transition(["disputed"], j); }
     else throw new HttpError(400, "invalid_outcome");
+  } else if (c.kind === "clawback_review") {
+    // Ledger only: approving marks the entry as awaiting a transfer. The money movement itself is a separate GATE1 act, never made here.
+    const cb = j.clawbacks?.find((x) => x.id === `cb_${j.id}`); if (!cb || cb.status !== "recorded") throw new HttpError(409, "state_changed");
+    if (outcome === "approve") cb.status = "approved_awaiting_transfer"; else if (outcome === "deny") cb.status = "waived"; else throw new HttpError(400, "invalid_outcome");
+    ev(j, d.now(), "clawback_" + cb.status, "ledger entry only, no money moved"); await m.store.putJob(j);
   } else {
     if (outcome === "approve") { if (j.payout?.cardId !== c.id) throw new HttpError(409, "state_changed"); await releasePayout(d, j.id, c.id); }
-    else if (outcome === "deny") { j.payout = undefined; ev(j, d.now(), "payout_denied", "payout denied at review; job stays reproved"); await m.store.putJob(j); }
+    else if (outcome === "deny") { j.payout = undefined; j.payoutDenied = { at: d.now(), cardId: c.id, proofKey: proofKey(j) }; ev(j, d.now(), "payout_denied", "payout denied at review; job stays reproved"); await m.store.putJob(j); }
     else throw new HttpError(400, "invalid_outcome");
   }
   c.resolved = true; c.outcome = outcome; await m.store.putCard(c);
@@ -228,9 +249,12 @@ export async function resolveCard(d: Deps, cardId: string, outcome: string) {
 
 // ---------- scheduled (a Worker cron trigger, owner-approved deploy; NOT scheduled today) ----------
 export async function sweep(d: Deps) {
-  const m = mk(d); const now = d.now(); const r = { reopened: 0, cancelled: 0, retriedRefunds: 0, retriedPayouts: 0 };
+  const m = mk(d); const now = d.now(); const r = { reopened: 0, cancelled: 0, retriedRefunds: 0, retriedPayouts: 0, watched: 0 };
   for (const j of await m.store.allJobs()) {
-    if (j.status === "claimed" && j.claimDeadline && now > j.claimDeadline) {
+    if (j.status === "claimed" && j.claimDeadline && now <= j.claimDeadline) {
+      // F-C4(a): watch a claimed job. A PASS seen here, before any delivery, is a fix the pro has not delivered (the owner or a third party made it).
+      try { const { finding } = await readCheck(m, d, j.domain, j.check); (j.observations ??= []).push({ at: now, status: finding?.status ?? "UNKNOWN", src: "watch" }); if (j.observations.length > 60) j.observations.splice(0, j.observations.length - 60); await m.store.putJob(j); r.watched++; } catch { /* a failed read is not an observation */ }
+    } else if (j.status === "claimed" && j.claimDeadline && now > j.claimDeadline) {
       j.abandonedBy.push(j.proAccountId!); ev(j, now, "claim_expired", `no delivery by ${new Date(j.claimDeadline).toISOString()}`);
       j.status = "open"; j.proAccountId = undefined; j.claimedAt = undefined; j.claimDeadline = undefined; j.updatedAt = now;
       if (await m.store.transition(["claimed"], j)) r.reopened++;
@@ -241,13 +265,21 @@ export async function sweep(d: Deps) {
   }
   return r;
 }
+// F-C4(c): a regression after pay writes ONE ledger entry and raises ONE GATE1 card. No money moves in this file for a clawback.
+async function recordClawback(m: MarketDeps, j: Job, now: number) {
+  const cb = clawbackFor(j, now); if (!cb) return;
+  (j.clawbacks ??= []).push(cb); ev(j, now, "clawback_recorded", `ledger entry ${cb.id} for ${cb.amountCents} cents; transfer needs a GATE1 tap`);
+  await m.store.putJob(j);
+  await m.store.putCard({ id: randomToken("mc", 8), kind: "clawback_review", jobId: j.id, reason: `warranty regression after pay: ${cb.reason}. Ledger entry ${cb.id}, ${cb.amountCents} cents. Approving marks it awaiting transfer; no money moves.`, createdAt: now, resolved: false });
+}
 // Warranty: for 30 days after a proof, a re-scan that shows the fault back marks the fix as regressed (rank loses it).
 export async function warrantySweep(d: Deps) {
-  const m = mk(d); const now = d.now(); const out = { checked: 0, regressed: 0, held: 0 };
+  const m = mk(d); const now = d.now(); const out = { checked: 0, regressed: 0, held: 0, clawbacks: 0 };
   for (const j of await m.store.allJobs()) {
+    if (j.regressedAt && j.status === "paid" && !j.clawbacks?.length) { await recordClawback(m, j, now); out.clawbacks++; continue; }   // backfill: regressed before the ledger existed
     if (!j.proof || j.regressedAt || j.warrantyOkAt || (j.status !== "paid" && j.status !== "reproved")) continue;
     const { finding } = await readCheck(m, d, j.domain, j.check); out.checked++; j.warrantyChecks++;
-    if (finding && (finding.status === "FAIL" || finding.status === "WARN")) { j.regressedAt = now; ev(j, now, "regressed", `${j.check} is ${finding.status} again ${Math.floor((now - j.proof.at) / DAY)} days after proof`); out.regressed++; }
+    if (finding && (finding.status === "FAIL" || finding.status === "WARN")) { j.regressedAt = now; ev(j, now, "regressed", `${j.check} is ${finding.status} again ${Math.floor((now - j.proof.at) / DAY)} days after proof`); out.regressed++; if (j.status === "paid") { await recordClawback(m, j, now); out.clawbacks++; } }
     else if (now - j.proof.at >= WARRANTY_DAYS * DAY && finding?.status === "PASS") { j.warrantyOkAt = now; ev(j, now, "warranty_held", `held ${WARRANTY_DAYS} days`); out.held++; }
     await m.store.putJob(j);
   }
