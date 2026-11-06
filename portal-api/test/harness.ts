@@ -1,5 +1,6 @@
 import { handle } from "../src/index.ts";
 import { MemoryStore } from "../src/store.ts";
+import { D1ShadowStore } from "./d1_agent_store.ts";
 import { MockBilling, signStripePayload, StripeHttpBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { MockMailer, type Deps } from "../src/service.ts";
@@ -8,9 +9,10 @@ export const RECEIPT_SECRET = "rcpt_test_fixture_secret";
 export class MockModel { calls: { apiKey: string; prompt: string }[] = []; fail = false; async complete(o: { apiKey: string; prompt: string }) { this.calls.push(o); if (this.fail) throw new Error("boom"); return "MOCK EXPLANATION"; } }
 export const SECRET = "whsec_test_fixture";
 export const T0 = Date.UTC(2026, 10, 6, 0, 0, 0);
-export function make() {
+export function make(opts: { d1?: boolean } = {}) {
   const clock = { t: T0 };
-  const store = new MemoryStore(), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
+  // PORTAL_STORE=d1agent runs the SAME tests with the agent door persisted in a fake D1 (F58). Default is MemoryStore.
+  const store: MemoryStore = opts.d1 || process.env.PORTAL_STORE === "d1agent" ? new D1ShadowStore() : new MemoryStore(), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
   const deps: Deps = { store, billing, dns, mailer, now: () => clock.t, siteOrigin: "https://titanos.tech", webhookSecret: SECRET, receiptSecret: RECEIPT_SECRET, model };
   const req = (method: string, path: string, opts: { token?: string; body?: unknown; headers?: Record<string, string> } = {}) =>
     handle(new Request("https://api.test" + path, { method, headers: { ...(opts.body === undefined ? {} : { "content-type": "application/json" }), ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}), ...(opts.headers ?? {}) }, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) }), { TITANOS_SITE_ORIGIN: "https://titanos.tech" }, deps);

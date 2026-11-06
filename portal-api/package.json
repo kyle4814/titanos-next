@@ -5,6 +5,7 @@
   "type": "module",
   "description": "The ONE home for the TITANOS portal backend (accounts, billing, marketplace, keys). Cloudflare Worker, D1. See BACKEND_DECISION.md in the kernel charter. Nothing here is deployed.",
   "scripts": {
-    "test": "node --test --experimental-strip-types test/*.test.ts"
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "test:d1agent": "PORTAL_STORE=d1agent node --test --experimental-strip-types test/*.test.ts"
   }
 }

@@ -10,3 +10,6 @@ Code: `src/agent/` (tools, mcp, credits, receipt, files). Tests: `test/agent.tes
 - Account: `GET /agent/credits`, `POST /agent/credits/topup {pack}` (mock checkout; webhook grants credits).
 - Site copies are generated: `node --experimental-strip-types scripts/gen_agent_files.ts`; a test fails on drift.
 - Adding a tool: add it to `TOOLS` AND to `FIXTURES` in test/agent.test.ts, or the coverage test fails.
+
+## D1 persistence (F58)
+`src/agent/d1agent.ts` (D1AgentStore) persists api_keys, agent_receipts, credit_ledger, credit_orders, agent_calls, plus the F17 idempotency reserve and the F19 per-key spend cap, each as one atomic statement. Migration 0006 (written, NOT applied, GATE5): key caps, ledger `key_id`, append-only triggers, `idem_reservations`. `account_id` is the tenant key. Run the same suite on both stores: `npm test` (memory) and `npm run test:d1agent` (agent door on a fake D1 over real SQLite). `test/fake_d1.ts` is a copy from the unmerged F13 branch.
