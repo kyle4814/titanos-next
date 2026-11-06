@@ -2,7 +2,8 @@ import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
 import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
-import type { Store, Account, Purchase, Invoice } from "./store.ts";
+import type { Store, Account, Purchase, Invoice, ApiKey } from "./store.ts";
+import { capsOf, dayStartOf, DEFAULT_KEY_CAP_DAILY, DEFAULT_KEY_CAP_TOTAL, MAX_KEY_CAP_DAILY, MAX_KEY_CAP_TOTAL } from "./agent/caps.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
@@ -197,7 +198,12 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
 }
 
 // 7 API KEYS (shown once, hash stored) 8 DATA EXPORT 9 ACCOUNT DELETION
-export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
+export function parseCap(v: unknown, max: number, name: string): number | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > max) throw new HttpError(400, `invalid_${name}`);
+  return v;
+}
+export async function createKey(d: Deps, a: Account, scopesIn: unknown, caps: { capDaily?: unknown; capTotal?: unknown } = {}) {
   // F-C7: an allow-list, not a sanitiser. Any scope string the tool catalogue does not define (e.g. "admin") is a 400,
   // never stored. Omitted or empty means a key with no scopes, as before.
   if (scopesIn !== undefined && !Array.isArray(scopesIn)) throw new HttpError(400, "invalid_scope");
@@ -205,13 +211,28 @@ export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
   const asked = (scopesIn ?? []) as unknown[];
   if (asked.length > 10 || asked.some((s) => typeof s !== "string" || !allowed.includes(s))) throw new HttpError(400, "invalid_scope");
   const scopes = [...new Set(asked as string[])];
+  const capDaily = parseCap(caps.capDaily, MAX_KEY_CAP_DAILY, "capDaily") ?? DEFAULT_KEY_CAP_DAILY;
+  const capTotal = parseCap(caps.capTotal, MAX_KEY_CAP_TOTAL, "capTotal") ?? DEFAULT_KEY_CAP_TOTAL;
   if ((await d.store.keysFor(a.id)).filter((k) => !k.revokedAt).length >= 10) throw new HttpError(409, "key_limit");
   const key = randomToken("tk", 24);
-  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), scopes, createdAt: d.now() };
+  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), scopes, createdAt: d.now(), capDaily, capTotal };
   await d.store.putKey(row);
-  return { id: row.id, key, scopes, note: "Shown once. Store it now." };
+  return { id: row.id, key, scopes, capDaily, capTotal, note: "Shown once. Store it now." };
 }
-export async function listKeys(d: Deps, a: Account) { return (await d.store.keysFor(a.id)).map((k) => ({ id: k.id, scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt })); }
+const keyView = async (d: Deps, k: ApiKey) => {
+  const sp = await d.store.keySpend(k.id, dayStartOf(d.now()));
+  return { id: k.id, prefix: k.id.slice(0, 8), scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt, ...capsOf(k), spentToday: sp.day, spentTotal: sp.total };
+};
+export async function listKeys(d: Deps, a: Account) { return Promise.all((await d.store.keysFor(a.id)).map((k) => keyView(d, k))); }
+// Owner-only (session auth, never an agent key, so a leaked key cannot raise its own cap).
+export async function setKeyCaps(d: Deps, a: Account, id: string, caps: { capDaily?: unknown; capTotal?: unknown }) {
+  const k = await d.store.keyById(id);
+  if (!k || k.accountId !== a.id) throw new HttpError(404, "not_found");
+  const capDaily = parseCap(caps.capDaily, MAX_KEY_CAP_DAILY, "capDaily"), capTotal = parseCap(caps.capTotal, MAX_KEY_CAP_TOTAL, "capTotal");
+  if (capDaily === undefined && capTotal === undefined) throw new HttpError(400, "no_caps");
+  await d.store.putKey({ ...k, ...(capDaily !== undefined ? { capDaily } : {}), ...(capTotal !== undefined ? { capTotal } : {}) });
+  return keyView(d, (await d.store.keyById(id))!);
+}
 export async function revokeKey(d: Deps, a: Account, id: string) {
   const k = await d.store.keyById(id);
   if (!k || k.accountId !== a.id) throw new HttpError(404, "not_found");

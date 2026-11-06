@@ -3,12 +3,12 @@
 import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
 import { sha256Hex } from "../util.ts";
+import { capsOf, dayStartOf } from "./caps.ts";
 import { hashOf, newReceiptId, ringOf, signWithRing } from "./receipt.ts";
 import { TOOLS, toolByName, publicTool, ToolError, type ToolDef } from "./tools.ts";
 
 export const PROTOCOL_VERSION = "2025-03-26";
 export const RATE_LIMIT_PER_MIN = 60;
-
 export interface AuthedKey { key: ApiKey; account: Account }
 export async function authenticateKey(d: Deps, bearer: string | null): Promise<AuthedKey | null> {
   const m = bearer?.match(/^Bearer (tk_[0-9a-f]{48})$/);
@@ -65,14 +65,18 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   const charge = mode === "prepaid" ? t.credits : 0;
   const rid = newReceiptId();
   if (charge > 0) {
-    const bal = await d.store.creditApply(auth.account.id, -charge, "debit", rid, now);
-    if (bal === undefined) return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true);
+    // balance + per-key daily cap + per-key total cap + ledger write: one atomic store step (a leaked key stops at its cap)
+    const deb = await d.store.creditDebitCapped({ accountId: auth.account.id, keyId: auth.key.id, amount: charge, ref: rid, at: now, dayStart: dayStartOf(now), ...capsOf(auth.key) });
+    if (!deb.ok) {
+      if (deb.reason === "insufficient_credits") return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true);
+      return toolText(id, { error: "key_spend_cap", cap: deb.reason === "key_cap_daily" ? "daily" : "total", needed: charge, charged: 0 }, true);
+    }
   }
   let output: unknown;
   try {
     output = await t.run({ d, account: auth.account, args, byokKey: byok });
   } catch (e) {
-    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", rid, now); // a failed call costs nothing
+    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", rid, now, auth.key.id); // a failed call costs nothing
     if (e instanceof ToolError) return toolText(id, { error: e.code, charged: 0 }, true);
     return toolText(id, { error: "tool_failed", charged: 0 }, true);
   }

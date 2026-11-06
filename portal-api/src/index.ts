@@ -51,7 +51,7 @@ async function body(req: Request): Promise<Record<string, unknown>> {
 }
 function cors(res: Response, env: Env): Response {
   const o = env.TITANOS_SITE_ORIGIN;
-  if (o) { res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, DELETE, OPTIONS"); res.headers.set("vary", "origin"); }
+  if (o) { res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, PATCH, DELETE, OPTIONS"); res.headers.set("vary", "origin"); }
   return res;
 }
 
@@ -177,8 +177,9 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (seg[0] === "invoices" && seg.length === 2 && m === "GET") return new Response(await svc.renderInvoice(d, a, seg[1]), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
   if (seg[0] === "subscriptions" && seg[2] === "cancel" && m === "POST") return json(await svc.cancelSubscription(d, a, seg[1]));
   if (path === "/refunds" && m === "POST") return json(await svc.requestRefund(d, a, String((await body(req)).purchaseId ?? "")));
-  if (path === "/keys" && m === "POST") return json(await svc.createKey(d, a, (await body(req)).scopes), 201);
+  if (path === "/keys" && m === "POST") { const b = await body(req); return json(await svc.createKey(d, a, b.scopes, { capDaily: b.capDaily, capTotal: b.capTotal }), 201); }
   if (path === "/keys" && m === "GET") return json({ keys: await svc.listKeys(d, a) });
+  if (seg[0] === "keys" && seg.length === 2 && m === "PATCH") { const b = await body(req); return json(await svc.setKeyCaps(d, a, seg[1], { capDaily: b.capDaily, capTotal: b.capTotal })); }
   if (seg[0] === "keys" && seg.length === 2 && m === "DELETE") { await svc.revokeKey(d, a, seg[1]); return json({ ok: true }); }
   if (path === "/agent/credits" && m === "GET") return json({ balance: await d.store.creditBalance(a.id), entries: (await d.store.creditEntries(a.id)).slice(-50) });
   if (path === "/agent/credits/topup" && m === "POST") return json(await startTopup(d, a, (await body(req)).pack), 201);
