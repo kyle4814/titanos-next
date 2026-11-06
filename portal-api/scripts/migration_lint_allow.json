@@ -56,6 +56,10 @@
   {
    "key": "src/owner/engine.ts::EventKind",
    "reason": "Owner event log kind in the engine store (memory/JSON), no CHECK column."
+  },
+  {
+   "key": "src/market/dispute.ts::AuditEntry.kind",
+   "reason": "Dispute audit-trail entry kind (DKind plus OPEN and IMPORT_PAID), kept in the in-memory DisputeCase, no CHECK column. Found by the f184 compiler-API scan (mixed identifier and literal union)."
   }
  ],
  "checks": [
