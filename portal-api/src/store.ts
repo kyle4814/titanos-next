@@ -8,6 +8,8 @@ export interface Purchase { id: string; accountId: string; productId: string; do
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
 export interface Invoice { id: string; accountId: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
+export type { RefundCase } from "./refund_card.ts";
+import type { RefundCase } from "./refund_card.ts";
 export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
 
 export interface Store {
@@ -38,6 +40,11 @@ export interface Store {
   nextInvoiceNumber(): Promise<string>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   putCard(c: ReviewCard): Promise<void>;
+  cardById(id: string): Promise<ReviewCard | undefined>;
+  allCards(): Promise<ReviewCard[]>;
+  putRefundCase(r: RefundCase): Promise<void>;
+  refundCaseById(id: string): Promise<RefundCase | undefined>;
+  refundCasesFor(purchaseId: string): Promise<RefundCase[]>;
   openCards(): Promise<ReviewCard[]>;
   putKey(k: ApiKey): Promise<void>;
   keysFor(accountId: string): Promise<ApiKey[]>;
@@ -49,7 +56,7 @@ export class MemoryStore implements Store {
   accounts = new Map<string, Account>(); loginTokens = new Map<string, LoginToken>(); loginLog = new Map<string, number[]>();
   sessions = new Map<string, Session>(); domains = new Map<string, DomainRow>(); purchases = new Map<string, Purchase>();
   subs = new Map<string, Subscription>(); invoices = new Map<string, Invoice>(); events = new Set<string>();
-  cards = new Map<string, ReviewCard>(); keys = new Map<string, ApiKey>(); private inv = 0;
+  cards = new Map<string, ReviewCard>(); refundCases = new Map<string, RefundCase>(); keys = new Map<string, ApiKey>(); private inv = 0;
   async accountByEmail(e: string) { return [...this.accounts.values()].find((a) => a.email === e); }
   async accountById(id: string) { return this.accounts.get(id); }
   async putAccount(a: Account) { this.accounts.set(a.id, a); }
@@ -77,6 +84,11 @@ export class MemoryStore implements Store {
   async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
   async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
   async putCard(c: ReviewCard) { this.cards.set(c.id, c); }
+  async cardById(id: string) { return this.cards.get(id); }
+  async allCards() { return [...this.cards.values()]; }
+  async putRefundCase(r: RefundCase) { this.refundCases.set(r.id, r); }
+  async refundCaseById(id: string) { return this.refundCases.get(id); }
+  async refundCasesFor(p: string) { return [...this.refundCases.values()].filter((r) => r.purchaseId === p); }
   async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
   async putKey(k: ApiKey) { this.keys.set(k.id, k); }
   async keysFor(id: string) { return [...this.keys.values()].filter((k) => k.accountId === id); }

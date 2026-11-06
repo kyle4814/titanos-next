@@ -1,4 +1,5 @@
 import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
+import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
 import type { Store, Account, Purchase, Invoice } from "./store.ts";
@@ -166,8 +167,18 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   if (pur.status !== "paid" || !pur.paymentIntent || !pur.paidAt) throw new HttpError(409, "not_refundable_yet");
   const v = refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
   if (!v.auto) {
-    await d.store.putCard({ id: randomToken("card", 8), accountId: a.id, purchaseId: pur.id, kind: "refund_outside_policy", reason: v.reason, createdAt: d.now(), resolved: false });
-    return { status: "needs_review" as const, reason: v.reason };
+    // Out of policy: one pending_review RefundCase per purchase (a repeat request returns the same case, never a second card),
+    // with the legacy ReviewCard kept in step (same id, resolved false). The card payload is returned as DATA ONLY: nothing is sent.
+    const prior = (await d.store.refundCasesFor(pur.id)).filter((r) => r.status !== "denied").sort((x, y) => x.createdAt - y.createdAt)[0];
+    let rc = prior;
+    if (!rc) {
+      const n = (await d.store.refundCasesFor(pur.id)).length;
+      rc = { id: n === 0 ? `rf_${pur.id}` : `rf_${pur.id}_${n + 1}`, accountId: a.id, purchaseId: pur.id, productName: PRODUCTS[pur.productId].name, amountCents: pur.amountCents - pur.refundedCents, reason: v.reason, inPolicy: false, status: "pending_review", createdAt: d.now() };
+      await d.store.putRefundCase(rc);
+      await d.store.putCard({ id: rc.id, accountId: a.id, purchaseId: pur.id, kind: "refund_outside_policy", reason: v.reason, createdAt: rc.createdAt, resolved: false });
+    }
+    const card = rc.status === "pending_review" ? buildRefundCard(rc) : undefined;
+    return { status: "needs_review" as const, reason: v.reason, refundId: rc.id, caseStatus: rc.status, card };
   }
   await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
   pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
@@ -202,4 +213,31 @@ export async function deleteAccount(d: Deps, a: Account, confirm: unknown) {
   for (const s of await d.store.subscriptionsFor(a.id)) if (!s.cancelledAt && !s.cancelAt) await cancelSubscription(d, a, s.id);
   await d.store.anonymiseAccount(a.id, d.now());
   return { status: "deleted" as const, retained: "invoices and payment records, kept without your email as required by tax law" };
+}
+
+// 6b REFUND DECISION (GATE1, Kyle's tap). Resolves the RefundCase through applyRefundDecision and keeps ReviewCard.resolved in step.
+// It moves NO money and sends NOTHING: an approve only records the decision; the Stripe refunds.create call is a CARD NEEDED (receipt).
+export async function decideRefund(d: Deps, refundId: string, decision: RefundDecision): Promise<{ changed: boolean; refund: RefundCase }> {
+  const rc = await d.store.refundCaseById(refundId);
+  if (!rc) throw new HttpError(404, "not_found");
+  const r = applyRefundDecision(rc, decision, d.now());
+  if (!r.ok) throw new HttpError(r.error === "bad_decision" ? 400 : 409, r.error);
+  if (r.changed) await d.store.putRefundCase(r.refund);
+  const card = await d.store.cardById(refundId);
+  if (card && !card.resolved) await d.store.putCard({ ...card, resolved: true }); // also heals a case decided before a crash
+  return { changed: r.changed, refund: r.refund };
+}
+
+// 6c MIGRATION of legacy synthetic ReviewCards (no RefundCase) into RefundCases. Idempotent. The old path never moved money for a card,
+// so a legacy resolved=true card maps to "denied" (conservative: no refund was ever issued for it); resolved=false maps to pending_review.
+export async function migrateReviewCards(d: Deps): Promise<{ migrated: number; skipped: number }> {
+  let migrated = 0, skipped = 0;
+  for (const c of await d.store.allCards()) {
+    if (c.kind !== "refund_outside_policy" || (await d.store.refundCaseById(c.id))) { skipped++; continue; }
+    const pur = await d.store.purchaseById(c.purchaseId);
+    if (!pur) { skipped++; continue; }
+    await d.store.putRefundCase({ id: c.id, accountId: c.accountId, purchaseId: c.purchaseId, productName: PRODUCTS[pur.productId]?.name ?? pur.productId, amountCents: pur.amountCents - pur.refundedCents, reason: c.reason, inPolicy: false, status: c.resolved ? "denied" : "pending_review", createdAt: c.createdAt, ...(c.resolved ? { decidedAt: c.createdAt } : {}) });
+    migrated++;
+  }
+  return { migrated, skipped };
 }
