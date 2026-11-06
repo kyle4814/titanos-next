@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, readdirSync, rmSyn
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { make } from "./harness.ts";
+import { make, STORE_KINDS, seedSub } from "./harness.ts";
 import { MemoryStore } from "../src/store.ts";
 import { MockBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
@@ -106,16 +106,17 @@ async function retainer(h: ReturnType<typeof make>, product = "ai_growth") {
 }
 // sessions last 30 days, so a cancel made after a long clock jump signs in again first (same account by email)
 const cancel = async (h: ReturnType<typeof make>, _a: unknown, subId: string) => { const a = await h.login("syn@example.invalid"); return h.j(await h.req("POST", `/subscriptions/${subId}/cancel`, { token: a.session })); };
-test("SYNTHETIC retainer started 2026-11-06: cancel at day 0 and day 91 land on 2027-02-06, day 92 (the boundary itself) on 2027-03-06", async () => {
+for (const kind of STORE_KINDS) {
+test(`[${kind}] SYNTHETIC retainer started 2026-11-06: cancel at day 0 and day 91 land on 2027-02-06, day 92 (the boundary itself) on 2027-03-06`, async () => {
   for (const [days, want] of [[0, "2027-02-06"], [1, "2027-02-06"], [91, "2027-02-06"], [92, "2027-03-06"], [93, "2027-03-06"]] as const) {
-    const h = make(); const { a, subId } = await retainer(h);
+    const h = make(kind); const { a, subId } = await retainer(h);
     h.clock.t += days * DAY;
     const c = await cancel(h, a, subId);
     assert.equal(c.status, "cancel_scheduled"); assert.equal(iso(c.effectiveAt), want, `day ${days}`);
-    assert.equal(legacy(h.store.subs.get(subId)!.startedAt, h.clock.t) >= c.effectiveAt, true, "never stricter than the old rule");
+    assert.equal(legacy((await h.store.subscriptionById(subId))!.startedAt, h.clock.t) >= c.effectiveAt, true, "never stricter than the old rule");
   }
 });
-test("SYNTHETIC month-end starts: the term ends on the clamped calendar date (89 to 92 days), not a flat 92 days", async () => {
+test(`[${kind}] SYNTHETIC month-end starts: the term ends on the clamped calendar date (89 to 92 days), not a flat 92 days`, async () => {
   const cases: [number, string, string][] = [
     [Date.UTC(2026, 11, 1), "2027-03-01", "1 Dec: 90-day term; f96 planChange alone would have said 2027-04-01"],
     [Date.UTC(2026, 7, 31), "2026-11-30", "31 Aug clamps to 30 Nov; the old live rule overflowed to 1 Dec"],
@@ -124,35 +125,35 @@ test("SYNTHETIC month-end starts: the term ends on the clamped calendar date (89
     [Date.UTC(2028, 1, 29), "2028-05-29", "leap-day start"],
   ];
   for (const [start, want, why] of cases) {
-    const h = make(); const a = await h.login("syn@example.invalid");
-    await h.store.putSubscription({ id: "sub_m", accountId: a.account.id, purchaseId: "p_m", productId: "ai_ops", startedAt: start });
+    const h = make(kind); const a = await h.login("syn@example.invalid");
+    await seedSub(h.store, a.account.id, { id: "sub_m", purchaseId: "p_m", productId: "ai_ops", startedAt: start });
     h.clock.t = start + DAY;
     const c = await cancel(h, a, "sub_m");
     assert.equal(iso(c.effectiveAt), want, why);
   }
 });
-test("SYNTHETIC cancel after the term ends at the next monthly boundary (day 130 of a 6 Nov start -> 2027-04-06)", async () => {
-  const h = make(); const { a, subId } = await retainer(h, "ai_embedded");
+test(`[${kind}] SYNTHETIC cancel after the term ends at the next monthly boundary (day 130 of a 6 Nov start -> 2027-04-06)`, async () => {
+  const h = make(kind); const { a, subId } = await retainer(h, "ai_embedded");
   h.clock.t += 130 * DAY; // 2027-03-16
   assert.equal(iso((await cancel(h, a, subId)).effectiveAt), "2027-04-06");
 });
-test("DEMONSTRATED legacy defect (repro, oracle only): a 30 Nov start cancelled on 28 Feb returned 2 Mar, which is not a billing boundary; the unified rule returns 30 Mar", async () => {
+test(`[${kind}] DEMONSTRATED legacy defect (repro, oracle only): a 30 Nov start cancelled on 28 Feb returned 2 Mar, which is not a billing boundary; the unified rule returns 30 Mar`, async () => {
   const start = Date.UTC(2026, 10, 30), now = Date.UTC(2027, 1, 28);
   assert.equal(iso(legacy(start, now)), "2027-03-02");
-  const h = make(); const a = await h.login("syn@example.invalid");
-  await h.store.putSubscription({ id: "sub_l", accountId: a.account.id, purchaseId: "p_l", productId: "ai_growth", startedAt: start });
+  const h = make(kind); const a = await h.login("syn@example.invalid");
+  await seedSub(h.store, a.account.id, { id: "sub_l", purchaseId: "p_l", productId: "ai_growth", startedAt: start });
   h.clock.t = now;
   assert.equal(iso((await cancel(h, a, "sub_l")).effectiveAt), "2027-03-30");
 });
-test("monitor is unchanged by the unification: ends at the next period boundary, no minimum", async () => {
-  const h = make(); const a = await h.login("syn@example.invalid");
+test(`[${kind}] monitor is unchanged by the unification: ends at the next period boundary, no minimum`, async () => {
+  const h = make(kind); const a = await h.login("syn@example.invalid");
   await h.verifiedDomain(a.session, "synthetic-acme.com.au");
   await h.req("POST", "/checkout", { token: a.session, body: { product: "monitor_monthly", domain: "synthetic-acme.com.au" } });
   const m = await h.pay("monitor_monthly"); h.clock.t += 10 * DAY;
   assert.equal(iso((await cancel(h, a, `sub_${m.purchase.id}`)).effectiveAt), "2026-12-06");
 });
-test("refund-in-policy: cancelling a retainer at day 0 refunds nothing; an in-policy compliance refund stays automatic and exact; a retainer refund still goes to review", async () => {
-  const h = make(); const a = await h.login("syn@example.invalid");
+test(`[${kind}] refund-in-policy: cancelling a retainer at day 0 refunds nothing; an in-policy compliance refund stays automatic and exact; a retainer refund still goes to review`, async () => {
+  const h = make(kind); const a = await h.login("syn@example.invalid");
   await h.verifiedDomain(a.session, "synthetic-acme.com.au");
   await h.req("POST", "/checkout", { token: a.session, body: { product: "compliance_pack", domain: "synthetic-acme.com.au" } });
   const comp = await h.pay("compliance_pack");
@@ -166,16 +167,17 @@ test("refund-in-policy: cancelling a retainer at day 0 refunds nothing; an in-po
   assert.equal(rr.status, "needs_review"); assert.equal(rr.reason, "scope_terms_apply");
   assert.equal(h.billing.calls.filter((x) => x.op === "refund").length, 1, "only the in-policy compliance refund moved money");
 });
-test("a cancelled retainer cannot be cancelled twice into a different date, and deleting the account reuses the same rule", async () => {
-  const h = make(); const { a, subId } = await retainer(h);
+test(`[${kind}] a cancelled retainer cannot be cancelled twice into a different date, and deleting the account reuses the same rule`, async () => {
+  const h = make(kind); const { a, subId } = await retainer(h);
   h.clock.t += 5 * DAY; const c1 = await cancel(h, a, subId);
   h.clock.t += 100 * DAY; const c2 = await cancel(h, a, subId);
   assert.equal(c2.effectiveAt, c1.effectiveAt, "replay returns the first date even after the boundary has passed");
-  const h2 = make(); const r2 = await retainer(h2); h2.clock.t += 3 * DAY;
+  const h2 = make(kind); const r2 = await retainer(h2); h2.clock.t += 3 * DAY;
   const s2 = await h2.login("syn@example.invalid");
   const del = await h2.req("DELETE", "/account", { token: s2.session, body: { confirm: "DELETE" } }); assert.equal(del.status, 200);
-  assert.equal(iso(h2.store.subs.get(r2.subId)!.cancelAt!), "2027-02-06");
+  assert.equal(iso((await h2.store.subscriptionById(r2.subId))!.cancelAt!), "2027-02-06");
 });
+}
 
 // ---------- mutation tests: each new invariant has a mutant that must be killed by that invariant ----------
 const MUT: { id: string; inv: string; edits: [string, string, string][] }[] = [
