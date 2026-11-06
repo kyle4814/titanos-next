@@ -132,6 +132,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
     if (!sub0) { // the invoice beat its checkout: hold the Stripe period for markPaid to seed from (a cycle invoice with no period stays "ignored", as before f101)
       if (!period) return "ignored";
       await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
+      await sweepLateFacts(d, subId); // f191: the row may have appeared between the read above and the hold
       return "handled";
     }
     const sub = await updateSubscription(d, subId, async (x, fx) => { await seedPeriod(d, x, period, !cycle, fx); return true; }) ?? sub0;
@@ -142,7 +143,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   }
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
-    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
+    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); await sweepLateFacts(d, String(o.id)); return "handled"; } // cancel before its payment: held; f191: re-check after the hold
     await updateSubscription(d, sub.id, (x) => { if (x.cancelledAt) return false; x.cancelledAt = d.now(); return true; }); // CAS: never overwrites a racing changePlan winner
     return "handled";
   }
@@ -193,7 +194,7 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
       const parts: SeedParts = {};
       const sub = await buildSubscription(d, pur, o.subscription, now, parts);
       if (await d.store.putSubscriptionOnce(sub)) await replayLateFacts(d, sub); // f245: a hold written during the winner window (after buildSubscription's takeFacts) is replayed onto the landed row
-      else await mergeLostSeed(d, sub, parts); // f186 on int3's shape: the facts THIS call took are applied to the row that won, never consumed without effect
+      else { await mergeLostSeed(d, sub, parts); await sweepLateFacts(d, sub.id); } // f191: a fact held after the take above lands on the standing row. f186 on int3's shape: the facts THIS call took are applied to the row that won, never consumed without effect
     }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
     Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
@@ -220,10 +221,14 @@ async function mergeLostSeed(d: Deps, mine: Subscription, p: SeedParts) {
 export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boolean> {
   const late = await d.store.takeFacts(`sub:${sub.id}`);
   if (late.length === 0) return false;
-  try { // f183: the replay is a CAS update (holds deferred until the write lands); the facts are taken once, so a lost CAS re-applies the same facts to the winner's row
+  const cancel = late.some((f) => f.kind === "cancel"), held = heldPeriods(late);
+  try { // f183: CAS update (holds deferred until the write lands); the facts are taken once, so a lost CAS re-applies the same facts to the winner's row
     const stored = await updateSubscription(d, sub.id, async (x, fx) => {
-      if (late.some((f) => f.kind === "cancel") && !x.cancelledAt) x.cancelledAt = d.now();
-      for (const hp of heldPeriods(late).rest) await seedPeriod(d, x, hp, false, fx);
+      fx.taken = late; fx.used = true; // consumed here on purpose: put back only if the update throws (below)
+      if (cancel && !x.cancelledAt) x.cancelledAt = d.now();
+      const planned = !!x.plan;
+      await seedPeriod(d, x, held.first, true, fx); // f191: a held create-period seeds a planless row (and replays the rest from fx.taken)
+      if (planned || !held.first) for (const hp of held.rest) await seedPeriod(d, x, hp, false, fx); // no first period and no plan: the rest are re-held (via fx) until the first arrives
       return true;
     });
     if (stored) Object.assign(sub, stored); // the caller's object follows the stored truth
@@ -293,12 +298,21 @@ async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefine
     sub.startedAt = p.start; sub.plan = initPlanFromStripe(sub.productId as Tier, p);
     let facts: Record<string, unknown>[];
     if (fx) { fx.taken ??= await d.store.takeFacts(`sub:${sub.id}`); fx.used = true; facts = fx.taken; } else facts = await d.store.takeFacts(`sub:${sub.id}`);
+    if (facts.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now(); // f191: a cancel held in the same bucket is taken with the periods; never consume it without effect
     for (const hp of heldPeriods(facts).rest) await seedPeriod(d, sub, hp, false, fx);
     return;
   }
   const r = observePeriod(sub.plan, p);
   if (r.applied === "advanced") sub.plan = r.state;
   else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${sub.id}: start ${p.start} (state untouched)`);
+}
+// f191: hold-then-create ordering window. A webhook reads "no subscription", holds its fact; markPaid takes facts, then creates the row.
+// If the hold lands after the take, the fact sits under a key nobody takes again. Both sides therefore re-check: the webhook sweeps after
+// its hold (row exists now?), markPaid sweeps after its create. takeFacts removes atomically, so each fact is applied exactly once, by
+// whichever side takes it, and a fact held while there is still no row is picked up by markPaid's sweep.
+async function sweepLateFacts(d: Deps, subId: string) {
+  const row = await d.store.subscriptionById(subId);
+  if (row) await replayLateFacts(d, row); // still no row: the winner's post-create replay will take it
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
