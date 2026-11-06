@@ -26,6 +26,7 @@ export type LedgerKind = "commission" | "clawback" | "payout" | "payout_reversal
 export interface LedgerEntry {
   id: string; uniq: string; partnerId: string; kind: LedgerKind; amountCents: number; at: number; availableAt: number;
   invoiceId?: string; sourceKey?: string; sourceLabel?: string; rateBps?: number; rateVersion?: string; payoutId?: string;
+  held?: boolean; holdReasons?: string[];   // SELF-DEAL-SUSPECT: not payable until the operator's tap (never auto-denied)
 }
 export interface Referral { accountId: string; partnerId: string; claimedAt: number }
 export type PayoutStatus = "pending_approval" | "sending" | "paid" | "failed" | "rejected";
@@ -37,3 +38,6 @@ export interface IdpClaims { iss: string; aud: string; sub: string; email: strin
 export interface IdpVerifier { verify(cfg: SsoConfig, idToken: string, nowMs: number): Promise<IdpClaims> }
 export interface ScanFinding { id: string; severity: "critical" | "high" | "medium" | "low"; title: string }
 export interface ScanProvider { source: string; scan(domain: string): Promise<ScanFinding[]> }
+
+// Signals a billing/signup adapter supplies per account (F5). The fingerprint and network token are opaque strings.
+export interface Party { accountId: string; email: string; createdAt: number; payerFingerprint?: string; signupNet?: string }
