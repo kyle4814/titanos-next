@@ -7,7 +7,7 @@ export interface DomainRow { id: string; accountId: string; domain: string; toke
 export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled" }
 import type { PlanState } from "./plan_change.ts";
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number; plan?: PlanState }
-export interface Invoice { id: string; accountId: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
+export interface Invoice { id: string; accountId: string; purchaseId?: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
 export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
@@ -85,9 +85,18 @@ export class MemoryStore implements Store {
   async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
-  async putInvoice(i: Invoice) { this.invoices.set(i.id, i); }
-  async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id); }
-  async invoiceById(id: string) { return this.invoices.get(id); }
+  // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,
+  // and one purchase carries at most one invoice per Stripe event. A violation throws; nothing is written.
+  async putInvoice(i: Invoice) {
+    for (const o of this.invoices.values()) {
+      if (o.id === i.id) continue;
+      if (o.number === i.number) throw new Error(`invoice number ${i.number} already issued`);
+      if (i.purchaseId !== undefined && o.purchaseId === i.purchaseId && o.stripeEventId === i.stripeEventId) throw new Error(`purchase ${i.purchaseId} already invoiced for event ${i.stripeEventId}`);
+    }
+    this.invoices.set(i.id, Object.fromEntries(Object.entries(i).filter(([, v]) => v !== undefined)) as unknown as Invoice); // absent optionals stay absent, as on D1
+  }
+  async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id).map((i) => ({ ...i })); }
+  async invoiceById(id: string) { const i = this.invoices.get(id); return i && { ...i }; }
   async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
   async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
   async putCard(c: ReviewCard) { this.cards.set(c.id, c); }

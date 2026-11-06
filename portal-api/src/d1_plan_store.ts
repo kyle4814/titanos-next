@@ -1,8 +1,8 @@
 // D1 adapter for the plan-bearing chain (f172): accounts, purchases, subscriptions (with PlanState in subscriptions.plan_json).
-// Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
-// invoices, events, cards, keys) lives on the web/f13_c2_d1store stack and has not been merged into this base. This class exists
+// Invoices are durable too (f192). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
+// events, cards, keys) lives on the web/f13_c2_d1store stack and has not been merged into this base. This class exists
 // so plan, period and minimum term can be proven to survive a restart against the real schema; it is not wired into the Worker.
-import { MemoryStore, type Account, type Purchase, type Subscription } from "./store.ts";
+import { MemoryStore, type Account, type Invoice, type Purchase, type Subscription } from "./store.ts";
 import type { D1Like } from "./env.ts";
 import type { PlanState } from "./plan_change.ts";
 
@@ -19,6 +19,8 @@ const toSub = (r: Row): Subscription => {
   if (r.plan_json !== null && r.plan_json !== undefined) s.plan = JSON.parse(String(r.plan_json)) as PlanState;
   return s;
 };
+
+const toInvoice = (r: Row): Invoice => clean({ id: String(r.id), accountId: String(r.account_id), purchaseId: str(r.purchase_id), number: String(r.number), productId: String(r.product_id), amountCents: Number(r.amount_cents), issuedAt: Number(r.issued_at), stripeEventId: String(r.stripe_event_id) });
 
 export class D1PlanStore extends MemoryStore {
   private db: D1Like;
@@ -48,6 +50,18 @@ export class D1PlanStore extends MemoryStore {
   }
   override async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
   override async subscriptionsFor(id: string) { return (await this.many("SELECT * FROM subscriptions WHERE account_id = ? ORDER BY rowid", id)).map(toSub); }
+  // Invoices (f192, migration 0005). Upsert on id; the UNIQUE number and the partial UNIQUE (purchase_id, stripe_event_id) make D1 throw where MemoryStore throws.
+  override async putInvoice(i: Invoice) {
+    await this.exec("INSERT INTO invoices (id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, number = excluded.number, product_id = excluded.product_id, amount_cents = excluded.amount_cents, issued_at = excluded.issued_at, stripe_event_id = excluded.stripe_event_id",
+      i.id, i.accountId, n(i.purchaseId), i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId);
+  }
+  override async invoicesFor(id: string) { return (await this.many("SELECT * FROM invoices WHERE account_id = ? ORDER BY rowid", id)).map(toInvoice); }
+  override async invoiceById(id: string) { const r = await this.one("SELECT * FROM invoices WHERE id = ?", id); return r && toInvoice(r); }
+  // Gap-free and atomic: one UPSERT...RETURNING on the single-row counter. Survives a restart; two stores over one D1 never repeat a number.
+  override async nextInvoiceNumber() {
+    const r = await this.one("INSERT INTO invoice_seq (id, n) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET n = n + 1 RETURNING n");
+    return `TT-${String(Number(r?.n)).padStart(6, "0")}`;
+  }
   // PII goes, the financial rows stay (same rule as MemoryStore). The in-memory parts (domains, keys, sessions) go through super.
   override async anonymiseAccount(id: string, at: number) {
     const a = await this.accountById(id); if (!a) return;

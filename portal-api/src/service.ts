@@ -195,7 +195,7 @@ async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefine
   else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${sub.id}: start ${p.start} (state untouched)`);
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
-  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
+  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
   await d.store.putInvoice(inv);
 }
 
