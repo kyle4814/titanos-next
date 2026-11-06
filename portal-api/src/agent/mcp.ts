@@ -4,7 +4,7 @@ import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
 import { sha256Hex } from "../util.ts";
 import { hashOf, newReceiptId, signReceipt } from "./receipt.ts";
-import { TOOLS, toolByName, publicTool, ToolError, type ToolDef } from "./tools.ts";
+import { TOOLS, toolByName, publicTool, ToolError, isPlatformSentinel, type ToolDef } from "./tools.ts";
 
 export const PROTOCOL_VERSION = "2025-03-26";
 export const RATE_LIMIT_PER_MIN = 60;
@@ -59,6 +59,7 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   if ((await d.store.callsSince(auth.key.id, now - 60_000)) >= RATE_LIMIT_PER_MIN) return toolText(id, { error: "rate_limited", perMinute: RATE_LIMIT_PER_MIN }, true);
   await d.store.noteCall(auth.key.id, now);
 
+  if (t.modelBacked && hdr.byok !== undefined && hdr.byok !== null && isPlatformSentinel(hdr.byok)) return toolText(id, { error: "invalid_model_key", charged: 0 }, true); // F1: the platform sentinel is not a caller key
   const byok = t.modelBacked && hdr.byok ? hdr.byok : undefined;
   const mode: "free" | "prepaid" | "byok" = t.credits === 0 ? "free" : byok ? "byok" : "prepaid";
   const charge = mode === "prepaid" ? t.credits : 0;
@@ -69,7 +70,7 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   }
   let output: unknown;
   try {
-    output = await t.run({ d, account: auth.account, args, byokKey: byok });
+    output = await t.run({ d, account: auth.account, args, byokKey: byok, prepaid: mode === "prepaid" });
   } catch (e) {
     if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", rid, now); // a failed call costs nothing
     if (e instanceof ToolError) return toolText(id, { error: e.code, charged: 0 }, true);

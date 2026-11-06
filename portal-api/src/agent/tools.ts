@@ -8,11 +8,15 @@ import type { Account } from "../store.ts";
 import type { Deps } from "../service.ts";
 import { verifyReceipt } from "./receipt.ts"; // own receipts only; a third party uses the public POST /agent/receipts/verify
 
-export interface ModelClient { complete(opts: { apiKey: string | "platform"; prompt: string }): Promise<string> }
+// F1 (x3 review): the credential is a typed union, never a string with a magic value. A caller-supplied string can only ever
+// become {kind:"byok"}; {kind:"platform"} is constructed here and only after prepaid credits were debited.
+export type ModelCredential = { kind: "byok"; key: string } | { kind: "platform" };
+export interface ModelClient { complete(opts: { credential: ModelCredential; prompt: string }): Promise<string> }
+export const isPlatformSentinel = (v: string) => /^\s*platform\s*$/i.test(v);
 export type Scope = "catalogue:read" | "scan:read" | "account:read" | "credits:read" | "explain:model" | "receipt:verify";
 export const SCOPES: readonly Scope[] = ["catalogue:read", "scan:read", "account:read", "credits:read", "explain:model", "receipt:verify"];
 
-export interface ToolCtx { d: Deps; account: Account; args: Record<string, any>; byokKey?: string }
+export interface ToolCtx { d: Deps; account: Account; args: Record<string, any>; byokKey?: string; prepaid?: boolean }
 export interface ToolDef {
   name: string; title: string; description: string; scope: Scope;
   credits: number;            // prepaid cost per call (1 credit = AU$0.01, EXAMPLE rate)
@@ -73,9 +77,12 @@ export const TOOLS: ToolDef[] = [
     async run({ d, account }) { return { balance: await d.store.creditBalance(account.id), recent: (await d.store.creditEntries(account.id)).slice(-20).map(({ delta, reason, ref, at }) => ({ delta, reason, ref, at })) }; } },
   { name: "explain_finding", title: "Explain a finding (model-backed)", description: "Plain-English explanation and fix steps for a finding id from domain_check. Runs on your own model key (header x-model-key, never stored) or on prepaid credits.", scope: "explain:model", credits: 25, modelBacked: true,
     input: { required: ["finding"], properties: { finding: { type: "string", maxLength: 40, enum: Object.keys(HELP), description: "A finding id." } } },
-    async run({ d, args, byokKey }) {
+    async run({ d, args, byokKey, prepaid }) {
       if (!d.model) throw new ToolError("model_unavailable");
-      const text = await d.model.complete({ apiKey: byokKey ?? "platform", prompt: `Explain in two plain sentences, for a small business owner, what this means and how to fix it: ${args.finding}. Known fix: ${HELP[args.finding]}` });
+      // platform key only when credits were debited for this call; otherwise a caller key is required (never fronted)
+      const credential: ModelCredential | undefined = byokKey ? { kind: "byok", key: byokKey } : prepaid ? { kind: "platform" } : undefined;
+      if (!credential) throw new ToolError("model_credential_required");
+      const text = await d.model.complete({ credential, prompt: `Explain in two plain sentences, for a small business owner, what this means and how to fix it: ${args.finding}. Known fix: ${HELP[args.finding]}` });
       return { finding: args.finding, explanation: text, fix: HELP[args.finding] };
     } },
   { name: "receipt_verify", title: "Verify a TITANOS receipt", description: "Checks that a receipt your own key was given was really issued by TITANOS and not altered. Free.", scope: "receipt:verify", credits: 0, modelBacked: false,

@@ -94,7 +94,8 @@ export async function createJob(d: Deps, a: Account, b: { domainId?: unknown; ch
   return { job: presentOwner(j), payUrl: co.url };
 }
 // Called from the verified Stripe webhook (checkout.session.completed with metadata.market_job_id). Idempotent.
-export async function confirmFunded(d: Deps, o: { jobId: string; checkoutId: string; paymentIntent?: string; amountTotal?: number; payerFingerprint?: string }): Promise<"funded" | "ignored"> {
+export async function confirmFunded(d: Deps, o: { jobId: string; checkoutId: string; paymentIntent?: string; amountTotal?: number; payerFingerprint?: string; paymentStatus?: string }): Promise<"funded" | "ignored"> {
+  if (o.paymentStatus !== "paid") return "ignored";   // F20 (x3): fail closed here, not only at the route; an unpaid/async checkout never opens a paid job
   const m = mk(d); const j = await m.store.getJob(o.jobId);
   if (!j || j.status !== "awaiting_funds" || j.checkoutId !== o.checkoutId) return "ignored";
   if (o.amountTotal !== undefined && o.amountTotal !== j.priceCents) return "ignored";   // wrong amount never opens a job

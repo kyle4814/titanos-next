@@ -115,7 +115,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
       // so the later async_payment_succeeded (a different event id) funds it with the same amount and checkout checks.
       if (o.payment_status !== "paid") return json({ result: "ignored" });
       if (!(await d.store.claimEvent(String(ev.id)))) return json({ result: "duplicate" });
-      return json({ result: await mkt.confirmFunded(d, { jobId: mj, checkoutId: String(o.id), paymentIntent: o.payment_intent ? String(o.payment_intent) : undefined, amountTotal: typeof o.amount_total === "number" ? o.amount_total : undefined }) });
+      return json({ result: await mkt.confirmFunded(d, { jobId: mj, paymentStatus: String(o.payment_status ?? ""), checkoutId: String(o.id), paymentIntent: o.payment_intent ? String(o.payment_intent) : undefined, amountTotal: typeof o.amount_total === "number" ? o.amount_total : undefined }) });
     }
     const credit = await handleCreditEvent(d, ev);
     return json({ result: credit ?? (await svc.handleStripeEvent(d, ev)) });

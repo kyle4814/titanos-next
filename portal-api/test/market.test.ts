@@ -307,6 +307,17 @@ test("R-C4 mutation check: with the paid guard removed from the webhook route th
     const payload = JSON.stringify({ id: "evt_mut", type: "checkout.session.completed", data: { object: { id: job.checkoutId, payment_status: "unpaid", amount_total: job.priceCents, metadata: { market_job_id: id } } } });
     const sig = await signStripePayload(payload, SECRET, Math.floor(r.h.clock.t / 1000));
     await mut.handle(new Request("https://api.test/stripe/webhook", { method: "POST", headers: { "stripe-signature": sig }, body: payload }), {}, r.h.deps);
-    assert.equal((await r.store.getJob(id))!.status, "open", "the mutant funds an unpaid job, so the real guard is what the tests above protect");
+    // x4 F20: defence in depth. The route-guard mutant alone no longer funds an unpaid job, because confirmFunded refuses it itself.
+    assert.equal((await r.store.getJob(id))!.status, "awaiting_funds", "service-level guard holds when the route guard is gone");
+    // ...and removing the SERVICE guard (the mutant) does fund it, so the service guard is what protects.
+    const sSrc = readFileSync(new URL("../src/market/service.ts", import.meta.url), "utf8");
+    const sGuard = 'if (o.paymentStatus !== "paid") return "ignored";';
+    assert.ok(sSrc.includes(sGuard), "service guard line present");
+    const sMut = new URL("../src/market/__mut_service.ts", import.meta.url);
+    try {
+      writeFileSync(sMut, sSrc.replace(sGuard, ""));
+      const ms = await import(sMut.href);
+      assert.equal(await ms.confirmFunded(r.h.deps, { jobId: id, checkoutId: job.checkoutId!, amountTotal: job.priceCents, paymentStatus: "unpaid" }), "funded", "the service mutant funds an unpaid job");
+    } finally { rmSync(sMut, { force: true }); }
   } finally { rmSync(mutUrl, { force: true }); }
 });

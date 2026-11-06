@@ -6,7 +6,7 @@ import { MockMailer, type Deps } from "../src/service.ts";
 import { USE_D1, D1TestStore, newDb } from "./d1_harness.ts";
 
 export const RECEIPT_SECRET = "rcpt_test_fixture_secret";
-export class MockModel { calls: { apiKey: string; prompt: string }[] = []; fail = false; async complete(o: { apiKey: string; prompt: string }) { this.calls.push(o); if (this.fail) throw new Error("boom"); return "MOCK EXPLANATION"; } }
+export class MockModel { calls: { apiKey: string; credential: { kind: string; key?: string }; prompt: string }[] = []; fail = false; async complete(o: { credential: { kind: "byok"; key: string } | { kind: "platform" }; prompt: string }) { this.calls.push({ ...o, apiKey: o.credential.kind === "byok" ? o.credential.key : "platform" }); if (this.fail) throw new Error("boom"); return "MOCK EXPLANATION"; } }
 export const SECRET = "whsec_test_fixture";
 export const T0 = Date.UTC(2026, 10, 6, 0, 0, 0);
 export function make() {
