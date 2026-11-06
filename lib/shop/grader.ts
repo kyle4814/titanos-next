@@ -3,7 +3,8 @@ import type { Shelf, Grade, Check, GradedShelf } from "./types";
 
 const TELLS = /\b(delve|leverag\w*|robust|holistic|landscape|cutting-edge|seamless\w*|streamlin\w*|synerg\w*|harness\w*|ecosystem)\b|[–—]/i;
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const STRIPE = /^https:\/\/buy\.stripe\.com\/[A-Za-z0-9_]+$/;
+// Public buy links are LIVE links only: a test_ link or a mock:// placeholder must never reach a public buy button.
+const STRIPE = /^https:\/\/buy\.stripe\.com\/(?!test_)[A-Za-z0-9_]+$/;
 
 function visibleText(s: Shelf): string[] {
   return [s.name, s.bluf, ...s.bullets, ...s.faq.flatMap((f) => [f.q, f.a])];

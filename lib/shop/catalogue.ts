@@ -26,9 +26,11 @@ export function shelfFromOffer(o: OfferIn, links: Record<string, string>): Shelf
 }
 
 // Products and courses take their price from the linked offer; a suggested price is never shown (it is a Stripe-card proposal).
-export function shelfFromProduct(p: ProductIn, offers: OfferIn[], links: Record<string, string>): Shelf {
+export function shelfFromProduct(p: ProductIn, offers: OfferIn[], links: Record<string, string>, gate?: (slug: string) => boolean): Shelf {
   const off = p.offerSlug ? offers.find((o) => o.slug === p.offerSlug) : undefined;
   const base = off ? shelfFromOffer(off, links) : null;
+  // C5 grade gate: when a gate is supplied, a product or course shelf stays CHECK/SOON until its entry grade is READY and honest.
+  if (gate && base && !gate(p.slug)) { base.status = "CHECK"; base.availability = "SOON"; base.buyUrl = null; }
   const isCourse = p.kind === "course";
   return {
     id: `${isCourse ? "course" : "product"}:${p.slug}`, kind: isCourse ? "course" : "product", slug: p.slug,
@@ -52,11 +54,11 @@ export function shelfFromConfig(c: GeneratorConfig): Shelf {
   };
 }
 
-export function buildShelves(i: { offers: OfferIn[]; products: ProductIn[]; configs: GeneratorConfig[]; links: Record<string, string>; productLinks?: Record<string, string> }): Shelf[] {
+export function buildShelves(i: { offers: OfferIn[]; products: ProductIn[]; configs: GeneratorConfig[]; links: Record<string, string>; productLinks?: Record<string, string>; productGate?: (slug: string) => boolean }): Shelf[] {
   const out: Shelf[] = [];
   const inProducts = new Set(i.products.map((p) => p.offerSlug).filter(Boolean));
   for (const o of i.offers) if (!inProducts.has(o.slug)) out.push(shelfFromOffer(o, i.links));
-  for (const p of i.products) out.push(shelfFromProduct(p, i.offers, i.links));
+  for (const p of i.products) out.push(shelfFromProduct(p, i.offers, i.links, i.productGate));
   for (const c of i.configs) out.push(shelfFromConfig(c));
   const seen = new Set<string>();
   for (const s of out) { if (seen.has(s.id)) throw new Error(`duplicate shelf ${s.id}`); seen.add(s.id); }
