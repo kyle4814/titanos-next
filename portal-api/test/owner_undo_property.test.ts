@@ -9,89 +9,24 @@
 // Mutation tests for every invariant: portal-api/scripts/mutate_undo_property.mjs (run by hand, see the F95 receipt).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MemoryZone } from "../src/owner/dnsw.ts";
-import { MemoryOwnerStore, loadOrInit, scanNow, setMonitor, autoFix, undoFix, monitorTick, type Ctx, type DomainState } from "../src/owner/engine.ts";
+import { scanNow, setMonitor, autoFix, undoFix, monitorTick, type Ctx, type DomainState } from "../src/owner/engine.ts";
 import { planFor } from "../src/owner/autofix.ts";
 import { FAULTS } from "./owner_faults.ts";
 import { healthy, T0, DAY } from "./owner_harness.ts";
 import type { World } from "../../lib/guestscan/fixtures.ts";
 
-// ---------- seeded PRNG + synthetic zone generator ----------
-function prng(seed: number) { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-type Rng = () => number;
-const pick = <T,>(r: Rng, a: T[]): T => a[Math.floor(r() * a.length)];
-const chance = (r: Rng, p: number) => r() < p;
-const int = (r: Rng, lo: number, hi: number) => lo + Math.floor(r() * (hi - lo + 1));
-const NINC = 16;
-const incName = (k: number) => `inc${k}.example`;
+import { prng, pick, chance, int, genWorld, RecZone, rigOf, writesSince, rescanAfterLastWrite, LABEL, NINC, incName, spfRecord, includeTargets, type Rng } from "./owner_undo_gen.ts";
 
-function spfRecord(r: Rng, o: { redirect?: boolean; minIncludes?: number; maxIncludes?: number; allTerm?: string | null } = {}): string {
-  const terms: string[] = [];
-  const nInc = int(r, o.minIncludes ?? 0, o.maxIncludes ?? 6);
-  const used = new Set<number>();
-  while (used.size < Math.min(nInc, NINC)) used.add(int(r, 0, NINC - 1));
-  for (const k of used) terms.push(`include:${incName(k)}`);
-  if (chance(r, 0.3)) terms.push("a"); if (chance(r, 0.3)) terms.push("mx");
-  if (chance(r, 0.5)) terms.push(`ip4:192.0.2.${int(r, 0, 250)}/24`); if (chance(r, 0.2)) terms.push("ip6:2001:db8::/32");
-  if (chance(r, 0.05)) terms.push("ptr"); if (chance(r, 0.04)) terms.push("foo:bar");
-  if (o.redirect) terms.push(`redirect=${incName(int(r, 0, NINC - 1))}`);
-  const all = o.allTerm !== undefined ? o.allTerm : pick(r, ["-all", "-all", "~all", "?all", "all", "+all", null]);
-  if (all) terms.push(all);
-  return ["v=spf1", ...terms].join(" ");
-}
-function includeTargets(r: Rng): Record<string, string[]> {
-  const t: Record<string, string[]> = {};
-  for (let k = 0; k < NINC; k++) {
-    const n = chance(r, 0.35) ? int(r, 1, 3) : 0; const terms = ["v=spf1", `ip4:198.51.100.${k}/32`];
-    for (let j = 0; j < n; j++) terms.push(`include:${incName((k + 1 + j) % NINC)}`); // nested, may loop: the scanner must cope
-    terms.push("-all"); t[incName(k)] = [terms.join(" ")];
-  }
-  return t;
-}
-function genWorld(r: Rng, domain: string): World {
-  const txt: Record<string, string[]> = { ...includeTargets(r) };
-  const apex: string[] = [];
-  const nSpf = pick(r, [0, 1, 1, 1, 1, 1, 1, 2, 2, 3]);
-  for (let i = 0; i < nSpf; i++) apex.push(spfRecord(r));
-  const other = ["google-site-verification=abc123", "MS=ms99887766", "atlassian-domain-verification=zzz"];
-  for (const o of other) if (chance(r, 0.4)) apex.push(o);
-  for (let i = apex.length - 1; i > 0; i--) { const j = int(r, 0, i); [apex[i], apex[j]] = [apex[j], apex[i]]; } // record order is part of the "exact" zone
-  if (apex.length) txt[domain] = apex;
-  const dm: string[] = []; const nD = pick(r, [0, 1, 1, 1, 1, 2, 2]);
-  for (let i = 0; i < nD; i++) { const p = pick(r, ["none", "quarantine", "reject", "reject", ""]); const pct = pick(r, ["", "; pct=100", "; pct=50", "; pct=0"]); dm.push(`v=DMARC1;${p ? ` p=${p};` : ""} rua=mailto:d${i}@${domain}${pct}`); }
-  if (chance(r, 0.06)) dm.push("some-stray-text-record");
-  if (dm.length) txt[`_dmarc.${domain}`] = dm;
-  if (chance(r, 0.6)) txt[`google._domainkey.${domain}`] = ["v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3"];
-  if (chance(r, 0.5)) txt[`_mta-sts.${domain}`] = ["v=STSv1; id=20261106"];
-  if (chance(r, 0.3)) txt[`www.${domain}`] = ["unrelated record the fixer must never touch"];
-  const w: World = { txt, mx: chance(r, 0.8) ? ["10 mx1.example.", "20 mx2.example."] : [], ds: chance(r, 0.5) };
-  if (chance(r, 0.04)) w.servfail = [`${domain}/TXT`];
-  return w;
-}
 
-// ---------- rig: a recording zone, so ORDER of writes and re-scan reads can be asserted ----------
-class RecZone extends MemoryZone {
-  log: ("w" | "r")[] = [];
-  async setTxt(n: string, v: string[]) { this.log.push("w"); return super.setTxt(n, v); }
-  async setMx(n: string, v: string[]) { this.log.push("w"); return super.setMx(n, v); }
-  async setDs(n: string, p: boolean) { this.log.push("w"); return super.setDs(n, p); }
-  get doh() { const d = super.doh; return ((n: string, t: string) => { this.log.push("r"); return d(n, t); }) as typeof d; }
-}
-function rigOf(world: World, domain: string) {
-  const clock = { t: T0 };
-  const zone = new RecZone(world);
-  const c: Ctx = { store: new MemoryOwnerStore(), doh: () => zone.doh, zones: { zoneFor: (d) => (d === domain ? zone : undefined) }, now: () => (clock.t += 1000) };
-  return { zone, c, domain, clock, open: () => loadOrInit(c, "dom_1", domain, "acc_1", true), snap: () => structuredClone(zone.world) };
-}
-const writesSince = (z: RecZone, mark: number) => z.log.slice(mark).filter((x) => x === "w").length;
-const rescanAfterLastWrite = (z: RecZone) => { const i = z.log.lastIndexOf("w"); return i >= 0 && z.log.slice(i + 1).includes("r"); };
-
+// F173: adopt the stored state WHOLESALE. A plain Object.assign keeps a stale key the store dropped: engine.ts:121 sets `s.badge = undefined`,
+// MemoryOwnerStore (structuredClone) keeps that key, D1OwnerStore (JSON) drops it, so assign would leave the old L9 badge on s under D1. A rig artefact, not a product defect.
+function replaceState(s: DomainState, fresh: DomainState) { for (const k of Object.keys(s)) delete (s as Record<string, unknown>)[k]; Object.assign(s, fresh); }
 const N = 200;
 const counts = { zones: 0, applied: 0, guided: 0, rolled_back: 0, not_open: 0, other: 0, undone: 0 };
 
 // ======================= P1 + P2 + P3 over 200 generated zones =======================
 for (const order of ["reverse", "forward"] as const) {
-  test(`P1 P2 P3 [${order} undo order] apply then undo restores the exact prior zone; undo twice is a no-op; re-scan always runs (${N} synthetic zones)`, async (t) => {
+  test(`${LABEL} P1 P2 P3 [${order} undo order] apply then undo restores the exact prior zone; undo twice is a no-op; re-scan always runs (${N} synthetic zones)`, async (t) => {
     const local = { applied: 0, guided: 0, rolled_back: 0, not_open: 0, other: 0, undone: 0 };
     for (let i = 0; i < N; i++) {
       const r = prng(1000 + i); const domain = `gen${i}.example`;
@@ -146,7 +81,7 @@ for (const order of ["reverse", "forward"] as const) {
 
 // ======================= P4 a PROVEN badge is dropped when the planted fault returns =======================
 const autoSingles = FAULTS.filter((f) => f.auto && !f.autoThenOwner && !f.id.startsWith("20"));
-test(`P4a owner-fixed domains: a returning planted fault drops the badge, by scan and by monitor (${N} trials, synthetic)`, async (t) => {
+test(`${LABEL} P4a owner-fixed domains: a returning planted fault drops the badge, by scan and by monitor (${N} trials, synthetic)`, async (t) => {
   let viaMonitor = 0, viaScan = 0;
   for (let i = 0; i < N; i++) {
     const r = prng(5000 + i); const domain = `badge${i}.example`;
@@ -164,7 +99,7 @@ test(`P4a owner-fixed domains: a returning planted fault drops the badge, by sca
     f.plant(R.zone, domain); // the fault returns
     R.clock.t += DAY;
     let alerts: string[] = [];
-    if (useMonitor) { viaMonitor++; const tick = await monitorTick(R.c); alerts = tick.alerts.map((a) => a.kind); Object.assign(s, (await R.c.store.get("dom_1"))!); }
+    if (useMonitor) { viaMonitor++; const tick = await monitorTick(R.c); alerts = tick.alerts.map((a) => a.kind); replaceState(s, (await R.c.store.get("dom_1"))!); }
     else { viaScan++; await scanNow(R.c, s); }
     assert.equal(s.findings[f.check].state, "REGRESSED", `trial ${i} ${f.id}: finding regressed`);
     assert.ok(!s.badge || s.badge.level < 9, `trial ${i} ${f.id}: the L9 badge is gone`);
@@ -175,7 +110,7 @@ test(`P4a owner-fixed domains: a returning planted fault drops the badge, by sca
   }
   t.diagnostic(`trials ${N}: via scan ${viaScan}, via monitor ${viaMonitor}`);
 });
-test(`P4b auto-fixed domains: badge earned by an auto-fix is dropped when the fault returns (${autoSingles.length} auto-fixable faults x 10 repeats, synthetic)`, async () => {
+test(`${LABEL} P4b auto-fixed domains: badge earned by an auto-fix is dropped when the fault returns (${autoSingles.length} auto-fixable faults x 10 repeats, synthetic)`, async () => {
   for (const f of autoSingles) for (let k = 0; k < 10; k++) {
     const domain = `auto${k}.example`; const R = rigOf(healthy(domain), domain);
     const s = await R.open(); f.plant(R.zone, domain); await scanNow(R.c, s);
@@ -190,7 +125,7 @@ test(`P4b auto-fixed domains: badge earned by an auto-fix is dropped when the fa
 // ======================= P5 redirect= and over-10-lookups are refused (guided) =======================
 // Independent oracle (does not call spfInfo): the lookup-bearing terms of the merged record.
 const lookupTerms = (recs: string[]) => { const set = new Set<string>(); for (const rec of recs) for (const t of rec.trim().split(/\s+/).slice(1)) { if (/^[+\-~?]*all$/i.test(t)) continue; set.add(t); } return [...set].filter((t) => /^(redirect=|[+\-~?]?(include:|exists:|a\b|mx\b|ptr\b))/i.test(t)); };
-test(`P5a SPF with redirect= is refused: guided, zero writes, zone untouched (${N} synthetic records)`, async () => {
+test(`${LABEL} P5a SPF with redirect= is refused: guided, zero writes, zone untouched (${N} synthetic records)`, async () => {
   for (let i = 0; i < N; i++) {
     const r = prng(9000 + i); const domain = `redir${i}.example`;
     const rec = spfRecord(r, { redirect: true, maxIncludes: 4, allTerm: pick(r, ["-all", "~all", "all", "+all", null]) });
@@ -204,7 +139,7 @@ test(`P5a SPF with redirect= is refused: guided, zero writes, zone untouched (${
     assert.deepEqual(R.snap(), S0); assert.equal(R.zone.log.filter((x) => x === "w").length, 0, "zero writes");
   }
 });
-test(`P5b SPF over 10 DNS lookups (one record, or two records that would merge over the limit) is refused; under the limit is NOT refused (${N} synthetic records)`, async (t) => {
+test(`${LABEL} P5b SPF over 10 DNS lookups (one record, or two records that would merge over the limit) is refused; under the limit is NOT refused (${N} synthetic records)`, async (t) => {
   let over = 0, under = 0;
   for (let i = 0; i < N; i++) {
     const r = prng(13000 + i); const domain = `lim${i}.example`;
@@ -223,7 +158,7 @@ test(`P5b SPF over 10 DNS lookups (one record, or two records that would merge o
   assert.ok(over >= 30 && under >= 20, `both sides exercised: over ${over}, under ${under}`);
   t.diagnostic(`over-limit or odd terms ${over}, allowed ${under}`);
 });
-test("P5c nested includes that push the real count over 10 while the top level is under: a fix never leaves the zone worse, and never claims a proof it lacks (synthetic)", async (t) => {
+test(`${LABEL} P5c nested includes that push the real count over 10 while the top level is under: a fix never leaves the zone worse, and never claims a proof it lacks (synthetic)`, async (t) => {
   let tried = 0, refused = 0, rolled = 0, applied = 0;
   for (let i = 0; i < N; i++) {
     const r = prng(17000 + i); const domain = `nest${i}.example`;
