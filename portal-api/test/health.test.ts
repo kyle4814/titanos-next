@@ -32,7 +32,8 @@ test("health: secrets never appear in the response", async () => {
 });
 test("routing: POST /health is 405, unknown path is 404 JSON", async () => {
   assert.equal((await call("/health", {}, "POST")).status, 405);
+  // C2: with no store wired, non-health routes fail closed (503) instead of 404 (see portal.test.ts "no deps wired").
   const r = await call("/nope", {});
-  assert.equal(r.status, 404);
-  assert.deepEqual(await r.json(), { error: "not_found", path: "/nope" });
+  assert.equal(r.status, 503);
+  assert.deepEqual(await r.json(), { error: "store_unavailable" });
 });

@@ -96,3 +96,10 @@ export const CONTACT = {
 // (free AI audit) or to /contact. Nothing books a calendar slot.
 export const AUDIT_MESSAGE_HREF = "/audit#message";
 export const CONTACT_HREF = "/contact";
+
+// C2 portal API (portal-api/ Worker). Same origin as the live Worker; the new routes mount beside the old ones on deploy.
+// Until that owner-approved deploy, these calls return 404 and the UI shows its "checkout not open yet" message.
+export const PORTAL = {
+  API_BASE: "https://api.titanos.tech",
+  SESSION_KEY: "titanos.session",
+};
