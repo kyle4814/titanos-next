@@ -10,3 +10,6 @@ Code: `src/agent/` (tools, mcp, credits, receipt, files). Tests: `test/agent.tes
 - Account: `GET /agent/credits`, `POST /agent/credits/topup {pack}` (mock checkout; webhook grants credits).
 - Site copies are generated: `node --experimental-strip-types scripts/gen_agent_files.ts`; a test fails on drift.
 - Adding a tool: add it to `TOOLS` AND to `FIXTURES` in test/agent.test.ts, or the coverage test fails.
+
+## Ten-agent kill-test harness (C7)
+`node --experimental-strip-types scripts/agents10.ts` runs 10 independent synthetic agents (own account, key and client identity) against the in-process handler: agent card + llms.txt discovery, MCP initialize and tools/list, one `domain_check` call with an Idempotency-Key, receipt signature verified offline, same-key replay (same receipt, no second charge). Prints a JSON scorecard. Tests: `test/agents10.test.ts` (tamper, unscoped key, no credits, wrong secret, cross-agent idempotency mutants). Live use is refused unless `AGENTS10_LIVE_OK=1` and is a gated action (needs a deployed Worker and D1).
