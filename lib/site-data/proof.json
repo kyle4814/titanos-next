@@ -2,6 +2,7 @@
   "generated": {
     "from": [
       "lib/site-data/source/BASELINE_2026-10-08.json",
+      "lib/site-data/source/FLEET_LEDGER_2026-10-12.json",
       "lib/efficiency/efficiency.json"
     ],
     "baselineTs": "2026-10-08T12:52:57",
@@ -77,7 +78,8 @@
       "improved": true,
       "factorText": "2x lower",
       "beforePct": 100,
-      "afterPct": 49.1
+      "afterPct": 49.1,
+      "system": "Linux memory counters on the build machine"
     },
     {
       "id": "vmmem",
@@ -95,7 +97,8 @@
       "improved": true,
       "factorText": "1.8x lower",
       "beforePct": 100,
-      "afterPct": 56.8
+      "afterPct": 56.8,
+      "system": "Windows process memory counter"
     },
     {
       "id": "win_free",
@@ -113,7 +116,8 @@
       "improved": true,
       "factorText": "4.1x higher",
       "beforePct": 24.5,
-      "afterPct": 100
+      "afterPct": 100,
+      "system": "Windows memory counter"
     },
     {
       "id": "cron_hours",
@@ -131,7 +135,8 @@
       "improved": true,
       "factorText": "1.3x lower",
       "beforePct": 100,
-      "afterPct": 75.8
+      "afterPct": 75.8,
+      "system": "Scheduled job run record (every run is logged)"
     },
     {
       "id": "jobs_per_hour",
@@ -140,16 +145,17 @@
       "better": "higher",
       "label": "MEASURED",
       "source": "Worker fleet job ledger",
-      "method": "Finished jobs in the ledger over 24 hours, divided by 24.",
-      "date": "2026-10-08",
+      "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished. The before figure is the 2026-10-08 baseline snapshot.",
+      "date": "2026-10-12",
       "before": 7.7,
-      "after": 10.46,
+      "after": 67.92,
       "beforeText": "7.7",
-      "afterText": "10.46",
+      "afterText": "67.92",
       "improved": true,
-      "factorText": "1.4x higher",
-      "beforePct": 73.6,
-      "afterPct": 100
+      "factorText": "8.8x higher",
+      "beforePct": 11.3,
+      "afterPct": 100,
+      "system": "TitanOS worker fleet job ledger (two accounts)"
     },
     {
       "id": "worker_start",
@@ -167,7 +173,8 @@
       "improved": true,
       "factorText": "7.4x lower",
       "beforePct": 100,
-      "afterPct": 13.5
+      "afterPct": 13.5,
+      "system": "Session start audit (tokens read before the first action)"
     },
     {
       "id": "cron_snapshot",
@@ -185,7 +192,8 @@
       "improved": true,
       "factorText": "72.3x lower",
       "beforePct": 100,
-      "afterPct": 1.4
+      "afterPct": 1.4,
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "cron_mirror",
@@ -203,7 +211,8 @@
       "improved": true,
       "factorText": "161x lower",
       "beforePct": 100,
-      "afterPct": 0.6
+      "afterPct": 0.6,
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "cron_ping",
@@ -221,7 +230,8 @@
       "improved": true,
       "factorText": "3,171x lower",
       "beforePct": 100,
-      "afterPct": 0
+      "afterPct": 0,
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "cron_bundle",
@@ -239,7 +249,8 @@
       "improved": true,
       "factorText": "14.2x lower",
       "beforePct": 100,
-      "afterPct": 7.1
+      "afterPct": 7.1,
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "titanos_suite",
@@ -257,7 +268,8 @@
       "improved": true,
       "factorText": "1.7x lower",
       "beforePct": 100,
-      "afterPct": 59.4
+      "afterPct": 59.4,
+      "system": "Round-2 brief, 2026-10-08 (raw log attaching)"
     },
     {
       "id": "repo_size",
@@ -275,7 +287,8 @@
       "improved": true,
       "factorText": "6.7x lower",
       "beforePct": 100,
-      "afterPct": 14.9
+      "afterPct": 14.9,
+      "system": "Round-2 brief, 2026-10-08 (raw log attaching)"
     },
     {
       "id": "daily_spend",
@@ -293,7 +306,8 @@
       "improved": true,
       "factorText": "3.6x lower",
       "beforePct": 100,
-      "afterPct": 27.8
+      "afterPct": 27.8,
+      "system": "Sigil ceiling report, 2026-10-08"
     }
   ],
   "loop": [
@@ -344,32 +358,35 @@
     {
       "id": "s_jobs",
       "group": "Fleet",
-      "display": "10.46 jobs an hour",
-      "caption": "Worker jobs finished in 24 hours (251 finished)",
+      "display": "67.92 jobs an hour",
+      "caption": "Worker jobs finished on 2026-10-12, one full day (1630 finished over 24 hours)",
       "label": "MEASURED",
       "source": "Worker fleet job ledger",
-      "date": "2026-10-08",
-      "method": "251 finished"
+      "system": "TitanOS worker fleet job ledger (two accounts)",
+      "date": "2026-10-12",
+      "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
     },
     {
       "id": "s_fail",
       "group": "Fleet",
-      "display": "10 of 251",
-      "caption": "Fleet jobs that failed, 4.0%",
+      "display": "170 of 1630",
+      "caption": "Fleet jobs that failed on 2026-10-12, 10.4%",
       "label": "MEASURED",
       "source": "Worker fleet job ledger",
-      "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "system": "TitanOS worker fleet job ledger (two accounts)",
+      "date": "2026-10-12",
+      "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
     },
     {
       "id": "s_median",
       "group": "Fleet",
-      "display": "6.0 min",
-      "caption": "Median time per job across 233 jobs",
+      "display": "6 min",
+      "caption": "Median time per job across 1460 jobs on 2026-10-12",
       "label": "MEASURED",
       "source": "Worker fleet job ledger",
-      "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "system": "TitanOS worker fleet job ledger (two accounts)",
+      "date": "2026-10-12",
+      "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
     },
     {
       "id": "s_usd_job",
@@ -379,7 +396,8 @@
       "label": "MEASURED",
       "source": "Token usage meter and the job ledger",
       "date": "2026-10-08",
-      "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+      "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound",
+      "system": "Token usage meter and the job ledger"
     },
     {
       "id": "s_usd_today",
@@ -389,7 +407,8 @@
       "label": "MEASURED",
       "source": "Token usage meter and the job ledger",
       "date": "2026-10-08",
-      "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+      "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound",
+      "system": "Token usage meter and the job ledger"
     },
     {
       "id": "s_tokens",
@@ -399,7 +418,8 @@
       "label": "MEASURED",
       "source": "Session start audit (tokens read before the first action)",
       "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "method": "Read from the source on the date shown.",
+      "system": "Session start audit (tokens read before the first action)"
     },
     {
       "id": "s_ram",
@@ -409,7 +429,8 @@
       "label": "MEASURED",
       "source": "Linux memory counters on the build machine",
       "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "method": "Read from the source on the date shown.",
+      "system": "Linux memory counters on the build machine"
     },
     {
       "id": "s_vm",
@@ -419,7 +440,8 @@
       "label": "MEASURED",
       "source": "Windows process memory counter",
       "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "method": "Read from the source on the date shown.",
+      "system": "Windows process memory counter"
     },
     {
       "id": "s_win",
@@ -429,7 +451,8 @@
       "label": "MEASURED",
       "source": "Windows memory counter",
       "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "method": "Read from the source on the date shown.",
+      "system": "Windows memory counter"
     },
     {
       "id": "s_load",
@@ -439,7 +462,8 @@
       "label": "MEASURED",
       "source": "Linux load average counter",
       "date": "2026-10-08",
-      "method": "8 cores"
+      "method": "8 cores",
+      "system": "Linux load average counter"
     },
     {
       "id": "s_cronh",
@@ -449,7 +473,8 @@
       "label": "MEASURED",
       "source": "Scheduled job run record (every run is logged)",
       "date": "2026-10-08",
-      "method": "4686 runs"
+      "method": "4686 runs",
+      "system": "Scheduled job run record (every run is logged)"
     },
     {
       "id": "s_cronf",
@@ -459,7 +484,8 @@
       "label": "MEASURED",
       "source": "Scheduled job run record (every run is logged)",
       "date": "2026-10-08",
-      "method": "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately."
+      "method": "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately.",
+      "system": "Scheduled job run record (every run is logged)"
     },
     {
       "id": "s_gate",
@@ -469,7 +495,8 @@
       "label": "MEASURED",
       "source": "Gate run record",
       "date": "2026-10-08",
-      "method": "Recorded by the gate runner at the time shown in the run record."
+      "method": "Recorded by the gate runner at the time shown in the run record.",
+      "system": "Gate run record"
     },
     {
       "id": "s_backup",
@@ -479,7 +506,8 @@
       "label": "MEASURED",
       "source": "Backup log",
       "date": "2026-10-08",
-      "method": "Read from the source on the date shown."
+      "method": "Read from the source on the date shown.",
+      "system": "Backup log"
     },
     {
       "id": "s_suite",
@@ -489,7 +517,8 @@
       "label": "UNKNOWN",
       "source": "No durable run record exists yet",
       "date": "2026-10-08",
-      "method": "That suite does not log its own run time, so we show no figure. A recorder is the next fix."
+      "method": "That suite does not log its own run time, so we show no figure. A recorder is the next fix.",
+      "system": "No durable run record exists yet"
     },
     {
       "id": "e_cost_per_job",
@@ -499,7 +528,8 @@
       "label": "MEASURED",
       "source": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",
       "date": "2026-10-08",
-      "method": "25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill."
+      "method": "25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill.",
+      "system": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08"
     },
     {
       "id": "e_daily_spend",
@@ -509,7 +539,8 @@
       "label": "MODELLED",
       "source": "Sigil ceiling report, 2026-10-08",
       "date": "2026-10-08",
-      "method": "The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast."
+      "method": "The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast.",
+      "system": "Sigil ceiling report, 2026-10-08"
     },
     {
       "id": "e_recall50",
@@ -519,7 +550,8 @@
       "label": "MEASURED",
       "source": "Kernel compression gate record, 2026-10-08",
       "date": "2026-10-08",
-      "method": "50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better."
+      "method": "50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better.",
+      "system": "Kernel compression gate record, 2026-10-08"
     },
     {
       "id": "e_heldout",
@@ -529,7 +561,8 @@
       "label": "MEASURED",
       "source": "Kernel compression gate record, 2026-10-08",
       "date": "2026-10-08",
-      "method": "Questions written by an independent agent that never saw the compact core."
+      "method": "Questions written by an independent agent that never saw the compact core.",
+      "system": "Kernel compression gate record, 2026-10-08"
     },
     {
       "id": "e_killtest",
@@ -539,7 +572,8 @@
       "label": "MEASURED",
       "source": "Kernel compression gate record, 2026-10-08",
       "date": "2026-10-08",
-      "method": "Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none."
+      "method": "Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none.",
+      "system": "Kernel compression gate record, 2026-10-08"
     },
     {
       "id": "e_cron_snapshot",
@@ -549,7 +583,8 @@
       "label": "MEASURED",
       "source": "PC optimisation report, 2026-10-08",
       "date": "2026-10-08",
-      "method": "Run record average before, a timed run after. The secret check now scans only files that could be committed."
+      "method": "Run record average before, a timed run after. The secret check now scans only files that could be committed.",
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "e_cron_mirror",
@@ -559,7 +594,8 @@
       "label": "MEASURED",
       "source": "PC optimisation report, 2026-10-08",
       "date": "2026-10-08",
-      "method": "Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass."
+      "method": "Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass.",
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "e_cron_bundle",
@@ -569,7 +605,8 @@
       "label": "MEASURED",
       "source": "PC optimisation report, 2026-10-08",
       "date": "2026-10-08",
-      "method": "One bundle per repository keyed on content, instead of re-bundling about 12 worktrees."
+      "method": "One bundle per repository keyed on content, instead of re-bundling about 12 worktrees.",
+      "system": "PC optimisation report, 2026-10-08"
     },
     {
       "id": "e_repo_size",
@@ -579,7 +616,8 @@
       "label": "MEASURED",
       "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
       "date": "2026-10-08",
-      "method": "Size of the repository directory before and after history and run-state cleanup."
+      "method": "Size of the repository directory before and after history and run-state cleanup.",
+      "system": "Round-2 brief, 2026-10-08 (raw log attaching)"
     },
     {
       "id": "e_titanos_suite",
@@ -589,7 +627,8 @@
       "label": "MEASURED",
       "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
       "date": "2026-10-08",
-      "method": "Wall-clock seconds for the full suite, before and after."
+      "method": "Wall-clock seconds for the full suite, before and after.",
+      "system": "Round-2 brief, 2026-10-08 (raw log attaching)"
     }
   ]
 }
