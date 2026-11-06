@@ -11,8 +11,9 @@ import { type Job, type MarketCard, type MarketStore, type ProProfile, type Tier
 import { rankFor, boardOrder, WARRANTY_DAYS } from "./rank.ts";
 import { judgeAttribution, clawbackFor, mayRaisePayoutCard, proofKey, emailDomain } from "./attribution.ts";
 import { randomToken, timingSafeEqual } from "../util.ts";
+import { commit, memoryTrail, report, TrailError, type DisputeTrail, type Step } from "./dispute_trail.ts";
 
-export interface MarketDeps { store: MarketStore; payments: JobPayments; doh: (domain: string) => DohFetch; internalSecret?: string }
+export interface MarketDeps { store: MarketStore; payments: JobPayments; doh: (domain: string) => DohFetch; internalSecret?: string; disputes?: DisputeTrail }
 const DAY = 86_400_000;
 // EXAMPLE prices (plan D1: AU$29 to AU$149 claim fee by size; the owner's job price is the pro's pay, no take rate on the fix).
 export const TIERS: Record<Tier, { priceCents: number; claimFeeCents: number }> = {
@@ -32,6 +33,8 @@ async function readCheck(m: MarketDeps, d: Deps, domain: string, check: string):
   return { id: `mscan_${d.now()}`, finding: r.findings.find((f) => f.check === check) };
 }
 const maskDomain = (dom: string) => { const [first, ...rest] = dom.split("."); return `${first[0]}***.${rest.join(".")}`; };
+const trailOf = (m: MarketDeps): DisputeTrail => (m.disputes ??= memoryTrail());   // in-memory default; the D1 anchor adapter is injected by the Worker (not live)
+const anchorFail = (e: unknown) => { throw new HttpError(e instanceof TrailError && !e.reason.startsWith("anchor_failed") ? 409 : 503, e instanceof TrailError ? e.reason : "anchor_unavailable"); };
 const need = async (m: MarketDeps, id: string) => { const j = await m.store.getJob(id); if (!j) throw new HttpError(404, "not_found"); return j; };
 export const isInternal = (d: Deps, header: string | null) => { const s = d.market?.internalSecret; return !!s && !!header && timingSafeEqual(header, s); };
 
@@ -218,9 +221,33 @@ export async function dispute(d: Deps, a: Account, id: string, reason: unknown) 
   const card: MarketCard = { id: randomToken("mc", 8), kind: "dispute", jobId: j.id, reason: text, createdAt: d.now(), resolved: false };
   const prior = j.status as "claimed" | "delivered";
   j.status = "disputed"; j.dispute = { at: d.now(), by: a.id, reason: text, priorStatus: prior, cardId: card.id }; j.updatedAt = d.now(); ev(j, d.now(), "disputed", "funds stay held; payout is frozen");
+  const before = await m.store.getJob(id);
   if (!(await m.store.transition([prior], j))) throw new HttpError(409, "state_changed");
+  // C4 anchor wire: the case and its audit head are recorded (and anchored) before the dispute is acknowledged; failure undoes the job write.
+  try {
+    const t = trailOf(m), reopened = !!(await t.cases.get(j.id));   // a job resumed after a dispute and disputed again keeps ONE chain
+    await commit(t, j.id, [reopened ? { event: { eventId: `redispute_${card.id}`, kind: "SUBMIT_EVIDENCE", at: d.now(), actor: a.id, detail: `disputed again: ${text}` } } : { open: { jobId: j.id, amountCents: j.priceCents, at: d.now(), actor: a.id, eventId: `open_${j.id}`, reason: text } }], d.now());
+  }
+  catch (e) { if (before) await m.store.transition(["disputed"], before); return anchorFail(e); }
   await m.store.putCard(card);
   return presentOwner(j);
+}
+// Either party adds evidence to an open dispute. Recorded in the hash chain and anchored; replay of the same eventId is a no-op.
+export async function disputeEvidence(d: Deps, a: Account, id: string, b: { note?: unknown; eventId?: unknown }) {
+  const m = mk(d); const j = await need(m, id);
+  if (j.ownerAccountId !== a.id && j.proAccountId !== a.id) throw new HttpError(404, "not_found");
+  if (j.status !== "disputed") throw new HttpError(409, "not_disputed");
+  const note = typeof b.note === "string" ? b.note.trim().slice(0, 2000) : ""; if (note.length < 3) throw new HttpError(400, "evidence_required");
+  const eventId = typeof b.eventId === "string" && /^[\w-]{1,64}$/.test(b.eventId) ? b.eventId : randomToken("ev", 8);
+  try { const c = await commit(trailOf(m), j.id, [{ event: { eventId, kind: "SUBMIT_EVIDENCE", at: d.now(), actor: a.id, detail: note } }], d.now()); return { ok: true, state: c.state, entries: c.audit.length }; }
+  catch (e) { return anchorFail(e); }
+}
+// Owner or the claiming pro only; anybody else gets 404, never 403 (no existence leak).
+export async function disputeAudit(d: Deps, a: Account, id: string) {
+  const m = mk(d); const j = await need(m, id);
+  if (j.ownerAccountId !== a.id && j.proAccountId !== a.id) throw new HttpError(404, "not_found");
+  const r = await report(trailOf(m), j.id); if (!r) throw new HttpError(404, "not_found");
+  return r;
 }
 // Internal (Kyle's tap, GATE1/GATE3). A resolution can refund the owner or put the job back in play. There is NO outcome that pays the pro:
 // money to a pro only ever flows through releasePayout, which needs a re-scan PASS.
@@ -230,6 +257,18 @@ export async function resolveCard(d: Deps, cardId: string, outcome: string) {
   const j = await need(m, c.jobId);
   if (c.kind === "dispute") {
     if (j.status !== "disputed") throw new HttpError(409, "state_changed");
+    if (outcome !== "refund_owner" && outcome !== "resume") throw new HttpError(400, "invalid_outcome");
+    // C4 anchor wire: the resolution is recorded and anchored BEFORE the job moves; an anchor failure leaves the dispute and the card open (retryable).
+    {
+      const t = trailOf(m), at = d.now(), steps: Step[] = [], have = await t.cases.get(j.id);
+      if (!have) steps.push({ open: { jobId: j.id, amountCents: j.priceCents, at: j.dispute!.at, actor: j.dispute!.by, eventId: `open_${j.id}`, reason: j.dispute!.reason } });
+      const state = have?.state ?? "OPEN";
+      if (outcome === "refund_owner") {
+        if (state === "OPEN") steps.push({ event: { eventId: `rev_${c.id}`, kind: "SUBMIT_EVIDENCE", at, actor: "reviewer", detail: "reviewer resolved with no further evidence" } });
+        steps.push({ event: { eventId: `res_${c.id}`, kind: "RESOLVE_REFUND", at, actor: "reviewer", detail: "owner refunded" } });
+      } else steps.push({ event: { eventId: `res_${c.id}`, kind: "SUBMIT_EVIDENCE", at, actor: "reviewer", detail: "reviewer resumed the job; the case stays in evidence (no paid edge: payout needs a re-scan PASS)" } });
+      try { await commit(t, j.id, steps, at); } catch (e) { return anchorFail(e); }
+    }
     if (outcome === "refund_owner") { await refundAndClose(d, j, "refunded", "dispute resolved: owner refunded"); }
     else if (outcome === "resume") { j.status = j.dispute!.priorStatus; j.dispute!.resolvedAt = d.now(); j.dispute!.outcome = "resume"; await m.store.transition(["disputed"], j); }
     else throw new HttpError(400, "invalid_outcome");
