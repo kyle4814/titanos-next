@@ -1,0 +1,444 @@
+{
+ "note": "Python outputs, SYNTHETIC probe strings only. Source: klinge-kernel origin/mf6-int bin/mf_claim_lint.py + origin/ent/e1_xray-2026-11-06 bin/mf_xray.py",
+ "lint_cases": [
+  "guaranteed savings",
+  "will save you money",
+  "certified",
+  "ISO 27001 compliant",
+  "100% secure",
+  "$50,000 saved",
+  "AI replaces staff",
+  "Essential Eight",
+  "Weekly stock order",
+  "Job quotes from site visits",
+  "risk free setup",
+  "foolproof filing",
+  "our clients love it",
+  "case study intake",
+  "equity in the firm",
+  "investor update",
+  "world first process",
+  "unique method",
+  "HIPAA records",
+  "SOC 2 audit",
+  "PCI DSS forms",
+  "passive income report",
+  "free build week",
+  "live connectors",
+  "live in 30 days",
+  "imagine halo",
+  "AU$2,500 quote",
+  "path 4 $100 job",
+  "Quote $500 ESTIMATED",
+  "trusted by trades",
+  "fully compliant",
+  "accredited trainer",
+  "zero risk",
+  "saves you hours",
+  "will definitely cut costs",
+  "minority stake",
+  "300k ask",
+  "cap table",
+  "valuation review",
+  "Monday rota",
+  "guarantee",
+  "GUARANTEED",
+  "g u a r a n t e e d",
+  "dash — here",
+  "en – dash",
+  "cert​ified",
+  "ｇｕａｒａｎｔｅｅｄ",
+  "сertified",
+  "guarаnteed",
+  "Email sam@example.com",
+  "Call 0412 345 678",
+  "Café orders",
+  "5 dollars a job",
+  "AUD 2500 quote",
+  "p4 pricing"
+ ],
+ "doc_labels": [
+  "name:guaranteed savings",
+  "name:will save you money",
+  "name:certified",
+  "name:ISO 27001 compliant",
+  "name:100% secure",
+  "name:$50,000 saved",
+  "name:AI replaces staff",
+  "name:Essential Eight",
+  "name:Weekly stock order",
+  "name:Job quotes from site visits",
+  "name:risk free setup",
+  "name:foolproof filing",
+  "name:our clients love it",
+  "name:case study intake",
+  "name:equity in the firm",
+  "name:investor update",
+  "name:world first process",
+  "name:unique method",
+  "name:HIPAA records",
+  "name:SOC 2 audit",
+  "name:PCI DSS forms",
+  "name:passive income report",
+  "name:free build week",
+  "name:live connectors",
+  "name:live in 30 days",
+  "name:imagine halo",
+  "name:AU$2,500 quote",
+  "name:path 4 $100 job",
+  "name:Quote $500 ESTIMATED",
+  "name:trusted by trades",
+  "name:fully compliant",
+  "name:accredited trainer",
+  "name:zero risk",
+  "name:saves you hours",
+  "name:will definitely cut costs",
+  "name:minority stake",
+  "name:300k ask",
+  "name:cap table",
+  "name:valuation review",
+  "name:Monday rota",
+  "name:guarantee",
+  "name:GUARANTEED",
+  "name:g u a r a n t e e d",
+  "name:dash — here",
+  "name:en – dash",
+  "name:cert​ified",
+  "name:ｇｕａｒａｎｔｅｅｄ",
+  "name:сertified",
+  "name:guarаnteed",
+  "name:Email sam@example.com",
+  "name:Call 0412 345 678",
+  "name:Café orders",
+  "name:5 dollars a job",
+  "name:AUD 2500 quote",
+  "name:p4 pricing",
+  "label:guaranteed savings",
+  "label:will save you money",
+  "label:certified",
+  "label:ISO 27001 compliant",
+  "label:100% secure",
+  "label:$50,000 saved",
+  "label:AI replaces staff",
+  "label:Essential Eight",
+  "label:Weekly stock order",
+  "label:Job quotes from site visits",
+  "label:risk free setup",
+  "label:foolproof filing",
+  "label:our clients love it",
+  "label:case study intake",
+  "label:equity in the firm",
+  "label:investor update",
+  "label:world first process",
+  "label:unique method",
+  "label:HIPAA records",
+  "label:SOC 2 audit",
+  "label:PCI DSS forms",
+  "label:passive income report",
+  "label:free build week",
+  "label:live connectors",
+  "label:live in 30 days",
+  "label:imagine halo",
+  "label:AU$2,500 quote",
+  "label:path 4 $100 job",
+  "label:Quote $500 ESTIMATED",
+  "label:trusted by trades",
+  "label:fully compliant",
+  "label:accredited trainer",
+  "label:zero risk",
+  "label:saves you hours",
+  "label:will definitely cut costs",
+  "label:minority stake",
+  "label:300k ask",
+  "label:cap table",
+  "label:valuation review",
+  "label:Monday rota",
+  "label:guarantee",
+  "label:GUARANTEED",
+  "label:g u a r a n t e e d",
+  "label:dash — here",
+  "label:en – dash",
+  "label:cert​ified",
+  "label:ｇｕａｒａｎｔｅｅｄ",
+  "label:сertified",
+  "label:guarаnteed",
+  "label:Email sam@example.com",
+  "label:Call 0412 345 678",
+  "label:Café orders",
+  "label:5 dollars a job",
+  "label:AUD 2500 quote",
+  "label:p4 pricing",
+  "top-level unknown key",
+  "workflow unknown key",
+  "workflow unknown key 2",
+  "fixture 1",
+  "fixture 2",
+  "fixture 3"
+ ],
+ "lint": [
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [],
+  [
+   "price-not-in-doctrine"
+  ],
+  [],
+  [
+   "forbidden-claim"
+  ],
+  [],
+  [],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "equity-language"
+  ],
+  [
+   "equity-language"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-name",
+   "retired-or-halo"
+  ],
+  [
+   "price-without-proposed"
+  ],
+  [
+   "p4-priced"
+  ],
+  [],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "equity-language",
+   "retired-or-halo"
+  ],
+  [
+   "equity-language"
+  ],
+  [
+   "equity-language"
+  ],
+  [
+   "equity-language"
+  ],
+  [],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [],
+  [
+   "dash"
+  ],
+  [
+   "dash"
+  ],
+  [
+   "forbidden-claim",
+   "hidden-characters"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [
+   "forbidden-claim"
+  ],
+  [],
+  [],
+  [],
+  [
+   "price-not-in-doctrine"
+  ],
+  [
+   "price-without-proposed"
+  ],
+  []
+ ],
+ "docs": [
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "accept",
+  "refuse",
+  "accept",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "accept",
+  "refuse",
+  "accept",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "refuse",
+  "refuse",
+  "refuse",
+  "accept",
+  "accept",
+  "accept"
+ ]
+}
