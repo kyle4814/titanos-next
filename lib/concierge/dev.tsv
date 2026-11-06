@@ -1,0 +1,159 @@
+guest	portal:scan	is my business email easy for crooks to copy
+guest	portal:scan	run a free check on my company website
+guest	portal:scan	could a scammer send mail that looks like it came from me
+guest	portal:scan	i want to test how safe my email setup is
+guest	portal:scan	check harrisjoinery.com.au for me
+guest	portal:proof-wall	show me what you have actually achieved for other firms
+guest	portal:proof-wall	any real examples of results
+guest	portal:sector-index	is my industry worse than others for email safety
+guest	portal:sector-index	how do builders stack up against dentists
+guest	portal:engineering	how do you build and test your software
+guest	portal:pricing	what do your plans run per month
+guest	portal:pricing	give me a rundown of what you charge
+guest	portal:shop	show me everything i can purchase from you
+guest	portal:shop	browse your products
+guest	portal:quote	i need a bespoke tool made for my business
+guest	portal:quote	can you quote me on building something custom
+guest	portal:courses	do you run any training sessions
+guest	portal:courses	i would like to learn how to use ai at work
+guest	portal:trust-scan	are you poking into my servers when you check
+guest	portal:trust-scan	will you break into anything on my network
+guest	portal:trust-scan	is it lawful for you to look at my domain
+guest	portal:trust-scan	how did you get my details in the first place
+guest	portal:privacy	what happens with my personal information when i use this
+guest	portal:privacy	do you pass my details on to anyone
+guest	portal:ai-disclosure	am i chatting with a person or software
+guest	portal:ai-disclosure	is there a human behind these answers
+guest	portal:ai-disclosure	are you a machine
+guest	portal:status	is your service up right now
+guest	portal:status	the site seems broken, is there an outage
+guest	portal:security	can i see your security paperwork
+guest	portal:security	how do you keep my information locked down
+guest	portal:investors	i have money and want to back your company
+guest	portal:investors	how do i buy a stake in the business
+guest	portal:contact	i would like to speak with someone on the team
+guest	portal:contact	what is the best way to get in touch
+guest	portal:contact	can a real person call me back
+guest	portal:faq	so what exactly does this company do
+guest	portal:faq	give me the short version of what this is
+guest	portal:tenders	where do i find government work to bid on
+guest	portal:tenders	help me win public sector contracts
+guest	portal:account-signup	how do i make a login
+guest	portal:account-signup	cannot remember my login details
+guest	portal:get-fixed	somebody please sort these problems out for me
+guest	portal:get-fixed	i would rather pay an expert to fix it
+guest	portal:billing-refund	i want my money returned
+guest	portal:data-export	remove everything you have about me
+guest	portal:data-export	send me whatever you have stored under my name
+guest	portal:monitor	keep an eye on my domain every month
+guest	portal:monitor	warn me if my email settings stop being right
+owner	portal:home-owner	take me to my main screen
+owner	portal:home-owner	where is my home page
+owner	portal:home-owner	show my overview
+owner	portal:owner-level	what stage is my business at
+owner	portal:owner-level	how far along am i on the ladder
+owner	portal:findings	what problems did the check turn up
+owner	portal:findings	list everything that is wrong with my setup
+owner	portal:quests	what small jobs should i tick off next
+owner	portal:quests	give me the easy things to do first
+owner	portal:quests	which fix is quickest
+owner	portal:monitor	is my domain still safe this month
+owner	portal:monitor	check my setup again every few weeks
+owner	portal:hire-pro	i need a skilled technician to do this for me
+owner	portal:hire-pro	find me a specialist
+owner	portal:hire-pro	put this on the board so a professional takes it
+owner	portal:auto-fix	can the system apply the repair itself
+owner	portal:auto-fix	let it make the change and let me undo it later
+owner	portal:reports	give me a summary i can send to my bookkeeper
+owner	portal:reports	i need a printout for the bank
+owner	portal:reports	make a pdf of my results
+owner	portal:billing-invoices	show earlier statements for my plan
+owner	portal:billing-invoices	get me the gst paperwork for the previous month
+owner	portal:billing-invoices	change the credit card on file
+owner	portal:billing-cancel	please halt the monthly charge for good
+owner	portal:billing-cancel	shut down my membership
+owner	portal:billing-refund	you charged me by accident
+owner	portal:domain-verify	what is needed to confirm that website belongs to me
+owner	portal:domain-verify	i need to add a second website to my account
+owner	portal:data-export	delete my account and everything on it
+owner	portal:shop	what else can i buy
+owner	portal:privacy	what is your policy on my data
+owner	portal:status	is the platform having problems today
+pro	portal:home-pro	take me to my pro home screen
+pro	portal:home-pro	open my control panel
+pro	portal:pro-jobs	where can i pick up work
+pro	portal:pro-jobs	show me what is open to claim
+pro	portal:pro-jobs	i want more customers through the board
+pro	portal:pro-rank	how do i climb up the pro table
+pro	portal:pro-rank	what decides my standing
+pro	portal:pro-payouts	when does the money land in my bank
+pro	portal:pro-payouts	how are contractors paid
+pro	portal:pro-payouts	cash out my earnings
+pro	portal:pro-whitelabel	our firm logo should appear on documents handed to customers
+pro	portal:pro-whitelabel	logo on the client report
+pro	portal:pro-seat	is there a subscription that cuts the claim fee
+pro	portal:pro-seat	what do i pay per job i take
+pro	portal:leads-export	i want a list of companies to pitch to
+pro	portal:leads-export	download a spreadsheet of prospects
+pro	portal:leads-export	where do i get sales leads
+pro	portal:contact	i need help from a human
+agent	portal:home-agent	take me to my agent home
+agent	portal:home-agent	where is my agent dashboard
+agent	portal:agent-keys	how does my bot log in to your api
+agent	portal:agent-keys	i lost my secret key, make a new one
+agent	portal:agent-keys	how do i get a token for my script
+agent	portal:agent-catalogue	what functions can my software call
+agent	portal:agent-catalogue	list the capabilities exposed to agents
+agent	portal:agent-credits	how do i pay for calls my agent makes
+agent	portal:agent-credits	add funds to my balance
+agent	portal:agent-credits	what is the limit on requests
+agent	portal:llms	a simple text page written for ai crawlers
+agent	portal:llms	do you publish an open data feed
+agent	portal:status	is the api reachable
+agent	portal:contact	i want to talk to a human
+enterprise	portal:home-enterprise	show me our company home screen
+enterprise	portal:home-enterprise	take me to the dashboard for our group
+enterprise	portal:enterprise	i manage hundreds of company domains
+enterprise	portal:enterprise	can you cover every subsidiary at once
+enterprise	portal:sso	we want staff to sign in with our corporate directory
+enterprise	portal:sso	do you support saml logins
+enterprise	portal:savings-calc	work out what this would save my company
+enterprise	portal:savings-calc	build a justification my finance chief can sign off
+enterprise	portal:security	send me your security questionnaire answers
+enterprise	portal:security	do you hold an iso certificate
+enterprise	portal:tenders	my agency wants a place on a government supplier list
+enterprise	portal:tenders	we are buying from public sector contracts
+enterprise	portal:engineering	how robust is the architecture behind this
+enterprise	portal:agent-credits	how do prepaid usage credits work for us
+partner	portal:home-partner	where is my reseller dashboard
+partner	portal:home-partner	take me to my partner screen
+partner	portal:partners	how do i join the referral scheme
+partner	portal:partners	how much do you pay people who send you customers
+partner	portal:partners	i want to resell your service
+partner	portal:partners	can i get my own branded client portal
+partner	portal:pro-whitelabel	put my agency logo on the reports
+partner	portal:contact	i want to discuss a deal with someone
+partner	portal:faq	what is this platform
+owner	offer:scam-shield-for-tradies	stop crooks pretending to be my supplier on invoices
+owner	offer:quote-chaser	nudge customers who never answered my quote
+owner	offer:subbie-finder	i need reliable subbies for my next job
+pro	offer:subbie-finder	i need reliable subbies for my next job
+enterprise	offer:global-tender-desk	tenders from other countries governments
+guest	offer:free-tender-digest	a free weekly email listing new tenders
+guest	offer:instant-email-domain-check	quick one off check on whether an email domain is set up
+partner	offer:monitor-wholesale	monitoring i can resell to my msp clients
+enterprise	offer:portfolio-watch	monthly watch on the companies in our fund
+guest	offer:payee-domain-change-watch	alert me when a supplier changes their bank details by email
+guest	offer:privacy-essential-eight-pack	a pack covering the privacy act and essential eight
+guest	none	will it rain over perth on friday
+guest	none	recipe for lamb shanks
+guest	none	who won the cricket last night
+guest	none	best way to change a punctured wheel
+guest	none	best movie of the decade
+owner	none	how tall is the eiffel tower
+pro	none	translate good morning into italian
+agent	none	compose a verse about the ocean
+enterprise	none	what is the population of tokyo
+partner	none	where can i buy a second hand ute
+guest	ask	do you have anything for subcontractors
+owner	ask	help with chasing money owed to me
