@@ -7,8 +7,8 @@ import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/
 import { DISPLAY } from "@/lib/pricing";
 
 const baseMetadata: Metadata = {
-  title: "Verified AU Leads Enquiry | TITANOS",
-  description: "Enquiry form for Titanos verified AU contact lists. Tell Kyle what type of business you want to reach, and he builds the verified list.",
+  title: "Verified AU Leads Checkout | TITANOS",
+  description: "Pay for a Titanos verified AU contact list. Sign in, choose your programme and pay securely with Stripe.",
   alternates: { canonical: "https://titanos.tech/order/leads" },
   robots: { index: false, follow: false },
 };
@@ -21,13 +21,13 @@ export default function OrderLeadsPage() {
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
           as="h1"
-          label="What this enquiry actually starts"
+          label="What this checkout actually starts"
           sub={`${DISPLAY.LEADS_STARTER_FROM}, hand-verified, not scraped and sold as-is.`}
         >
           A list built for the businesses you actually want to reach.
         </Inscription>
         <SystemLabel style={{ textAlign: "center", marginTop: 18 }}>
-          Enquiry → Kyle scopes the target profile → proposal → list delivered
+          Sign in → pay → send your target profile → list delivered
         </SystemLabel>
       </section>
 

@@ -1,0 +1,92 @@
+// Persistence interface for the portal. MemoryStore is the test/local adapter. A D1 adapter is NOT BUILT yet
+// (migration 0002 defines the tables); until it exists the Worker fails closed on every route except /health.
+export interface Account { id: string; email: string; seat: string; stripeCustomerId?: string; createdAt: number; deletedAt?: number }
+export interface Session { hash: string; accountId: string; expiresAt: number }
+export interface LoginToken { hash: string; email: string; expiresAt: number; used: boolean }
+export interface DomainRow { id: string; accountId: string; domain: string; token: string; verifiedAt?: number }
+export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled" }
+export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
+export interface Invoice { id: string; accountId: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
+export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
+export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
+
+export interface Store {
+  accountByEmail(email: string): Promise<Account | undefined>;
+  accountById(id: string): Promise<Account | undefined>;
+  putAccount(a: Account): Promise<void>;
+  putLoginToken(t: LoginToken): Promise<void>;
+  consumeLoginToken(hash: string, now: number): Promise<LoginToken | undefined>;
+  loginRequestsSince(email: string, sinceMs: number): Promise<number>;
+  noteLoginRequest(email: string, at: number): Promise<void>;
+  putSession(s: Session): Promise<void>;
+  sessionByHash(hash: string, now: number): Promise<Session | undefined>;
+  deleteSessionsFor(accountId: string): Promise<void>;
+  domainsFor(accountId: string): Promise<DomainRow[]>;
+  domainById(id: string): Promise<DomainRow | undefined>;
+  verifiedOwnerOf(domain: string): Promise<DomainRow | undefined>;
+  putDomain(d: DomainRow): Promise<void>;
+  putPurchase(p: Purchase): Promise<void>;
+  purchaseById(id: string): Promise<Purchase | undefined>;
+  purchaseByCheckout(checkoutId: string): Promise<Purchase | undefined>;
+  purchasesFor(accountId: string): Promise<Purchase[]>;
+  putSubscription(s: Subscription): Promise<void>;
+  subscriptionById(id: string): Promise<Subscription | undefined>;
+  subscriptionsFor(accountId: string): Promise<Subscription[]>;
+  putInvoice(i: Invoice): Promise<void>;
+  invoicesFor(accountId: string): Promise<Invoice[]>;
+  invoiceById(id: string): Promise<Invoice | undefined>;
+  nextInvoiceNumber(): Promise<string>;
+  claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
+  putCard(c: ReviewCard): Promise<void>;
+  openCards(): Promise<ReviewCard[]>;
+  putKey(k: ApiKey): Promise<void>;
+  keysFor(accountId: string): Promise<ApiKey[]>;
+  keyById(id: string): Promise<ApiKey | undefined>;
+  anonymiseAccount(id: string, at: number): Promise<void>;
+}
+
+export class MemoryStore implements Store {
+  accounts = new Map<string, Account>(); loginTokens = new Map<string, LoginToken>(); loginLog = new Map<string, number[]>();
+  sessions = new Map<string, Session>(); domains = new Map<string, DomainRow>(); purchases = new Map<string, Purchase>();
+  subs = new Map<string, Subscription>(); invoices = new Map<string, Invoice>(); events = new Set<string>();
+  cards = new Map<string, ReviewCard>(); keys = new Map<string, ApiKey>(); private inv = 0;
+  async accountByEmail(e: string) { return [...this.accounts.values()].find((a) => a.email === e); }
+  async accountById(id: string) { return this.accounts.get(id); }
+  async putAccount(a: Account) { this.accounts.set(a.id, a); }
+  async putLoginToken(t: LoginToken) { this.loginTokens.set(t.hash, t); }
+  async consumeLoginToken(h: string, now: number) { const t = this.loginTokens.get(h); if (!t || t.used || t.expiresAt < now) return undefined; t.used = true; return t; }
+  async loginRequestsSince(e: string, since: number) { return (this.loginLog.get(e) ?? []).filter((x) => x >= since).length; }
+  async noteLoginRequest(e: string, at: number) { this.loginLog.set(e, [...(this.loginLog.get(e) ?? []), at]); }
+  async putSession(s: Session) { this.sessions.set(s.hash, s); }
+  async sessionByHash(h: string, now: number) { const s = this.sessions.get(h); return s && s.expiresAt > now ? s : undefined; }
+  async deleteSessionsFor(id: string) { for (const [k, s] of this.sessions) if (s.accountId === id) this.sessions.delete(k); }
+  async domainsFor(id: string) { return [...this.domains.values()].filter((d) => d.accountId === id); }
+  async domainById(id: string) { return this.domains.get(id); }
+  async verifiedOwnerOf(domain: string) { return [...this.domains.values()].find((d) => d.domain === domain && d.verifiedAt); }
+  async putDomain(d: DomainRow) { this.domains.set(d.id, d); }
+  async putPurchase(p: Purchase) { this.purchases.set(p.id, p); }
+  async purchaseById(id: string) { return this.purchases.get(id); }
+  async purchaseByCheckout(c: string) { return [...this.purchases.values()].find((p) => p.checkoutId === c); }
+  async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
+  async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  async subscriptionById(id: string) { return this.subs.get(id); }
+  async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
+  async putInvoice(i: Invoice) { this.invoices.set(i.id, i); }
+  async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id); }
+  async invoiceById(id: string) { return this.invoices.get(id); }
+  async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
+  async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
+  async putCard(c: ReviewCard) { this.cards.set(c.id, c); }
+  async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
+  async putKey(k: ApiKey) { this.keys.set(k.id, k); }
+  async keysFor(id: string) { return [...this.keys.values()].filter((k) => k.accountId === id); }
+  async keyById(id: string) { return this.keys.get(id); }
+  // Account deletion: PII goes, financial records stay (tax law), tied to an opaque id only.
+  async anonymiseAccount(id: string, at: number) {
+    const a = this.accounts.get(id); if (!a) return;
+    this.accounts.set(id, { ...a, email: `deleted+${id}@deleted.invalid`, stripeCustomerId: undefined, deletedAt: at });
+    for (const [k, d] of this.domains) if (d.accountId === id) this.domains.delete(k);
+    for (const [k, key] of this.keys) if (key.accountId === id) this.keys.set(k, { ...key, revokedAt: key.revokedAt ?? at });
+    await this.deleteSessionsFor(id);
+  }
+}
