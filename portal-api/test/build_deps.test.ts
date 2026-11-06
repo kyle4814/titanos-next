@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { FakeD1 } from "./fake_d1.ts";
 import { MemoryStore } from "../src/store.ts";
+import { D1Store } from "../src/d1store.ts";
 import { MockBilling, StripeHttpBilling } from "../src/stripe.ts";
 import { sha256Hex } from "../src/util.ts";
 import worker, { createWorker } from "../src/index.ts";
@@ -13,7 +14,7 @@ import { MockMailer } from "../src/service.ts";
 
 const SRC = fileURLToPath(new URL("../src/build_deps.ts", import.meta.url));
 const MOD = process.env.BUILD_DEPS_SRC ?? SRC;
-const { buildDeps, BuildDepsError, billingFor, throttleFor } = (await import(MOD)) as typeof import("../src/build_deps.ts");
+const { buildDeps, BuildDepsError, billingFor, throttleFor, noStoreFactory } = (await import(MOD)) as typeof import("../src/build_deps.ts");
 const ORIGIN = "https://titanos.tech";
 const factory = () => new MemoryStore();
 const env = (extra: Record<string, unknown> = {}) => ({ DB: new FakeD1() as never, TITANOS_SITE_ORIGIN: ORIGIN, ...extra });
@@ -26,8 +27,9 @@ test("missing DB binding: typed error naming DB", () => {
 test("missing TITANOS_SITE_ORIGIN: typed error naming it", () => {
   assert.throws(() => buildDeps({ DB: new FakeD1() as never }, { storeFactory: factory }), (e: any) => e.reason === "missing_binding" && e.binding === "TITANOS_SITE_ORIGIN");
 });
-test("no store adapter wired: refuses with a named reason (never a Memory store by accident)", () => {
-  assert.throws(() => buildDeps(env()), (e: any) => e.reason === "store_adapter_unavailable");
+test("explicit noStoreFactory still refuses with the named reason; the DEFAULT factory is D1Store (f216)", () => {
+  assert.throws(() => buildDeps(env(), { storeFactory: noStoreFactory }), (e: any) => e.reason === "store_adapter_unavailable");
+  assert.ok(buildDeps(env()).store instanceof D1Store);
 });
 test("billing: fake by default, test key gives Stripe HTTP, live key refused", () => {
   assert.ok(billingFor({}) instanceof MockBilling);
@@ -52,11 +54,12 @@ test("entry, no DB: /health 200 (db unconfigured), other routes 503 with the nam
   assert.deepEqual(await r.json(), { error: "deps_unavailable", reason: "missing_binding:DB" });
   assert.equal((await get(w, "/me", {}, undefined, "OPTIONS")).status, 204);
 });
-test("DEFAULT export with a DB but no store adapter: 503 named reason, /health still ok", async () => {
+test("DEFAULT export with a DB: served by D1Store (f216); without a DB: 503 named reason, /health still ok", async () => {
   const e = env();
   assert.equal((await get(worker, "/health", e)).status, 200);
-  const r = await get(worker, "/catalogue", e); assert.equal(r.status, 503);
-  assert.equal(((await r.json()) as any).reason, "store_adapter_unavailable");
+  assert.equal((await get(worker, "/catalogue", e)).status, 200);
+  const r = await get(worker, "/catalogue", { TITANOS_SITE_ORIGIN: ORIGIN }); assert.equal(r.status, 503);
+  assert.equal(((await r.json()) as any).reason, "missing_binding:DB");
 });
 test("present binding: /health 200 plus one signed-in route end to end (D1 throttle wired)", async () => {
   const now = 1_800_000_000_000, logs: string[] = [], store = new MemoryStore(), e = env();
