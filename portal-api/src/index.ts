@@ -11,7 +11,7 @@ import { TOOLS, publicTool } from "./agent/tools.ts";
 import { verifyReceipt } from "./agent/receipt.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
-import { ThrottledError, throttleKey } from "./throttle.ts";
+import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -48,11 +48,27 @@ async function body(req: Request): Promise<Record<string, unknown>> {
   if (!t) return {};
   try { const j = JSON.parse(t); return j && typeof j === "object" ? j : {}; } catch { throw new HttpError(400, "invalid_json"); }
 }
-// Throttle wrapper: no d.throttle means no throttling (opt-in until the Worker wires one). Key = scope + hash(account, ip).
-const clientIp = (req: Request) => req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+// Throttle wrapper: no d.throttle means no throttling (opt-in for harness callers; the Worker entry ALWAYS injects one).
+// Key = scope + hash(account, ip). The IP comes from CF-Connecting-IP ONLY (Cloudflare sets it and strips a client-sent copy;
+// X-Forwarded-For is client-controlled, so it is never read). A missing header shares one fixed "noip" bucket, so omitting the
+// header cannot buy a fresh budget. FAIL CLOSED: any fault in the throttle itself (key, reserve) is a 503, never an allow-through.
+const clientIp = (req: Request) => { const v = req.headers.get("cf-connecting-ip")?.trim(); return v ? v.slice(0, 64) : "noip"; };
 async function throttled<T>(d: Deps, req: Request, scope: string, who: string, fn: () => Promise<T>): Promise<T> {
-  if (!d.throttle) return fn();
-  return d.throttle.guard(await throttleKey(scope, who, clientIp(req)), fn);   // any HttpError/throw counts as a failure
+  const th = d.throttle;
+  if (!th) return fn();
+  let key: string;
+  try {
+    key = await throttleKey(scope, who, clientIp(req));
+    const r = th.reserve(key);
+    if (!r.allowed) { th.note(`throttle block key=${key} retry_after=${r.retryAfterSec}`); throw new ThrottledError(r.retryAfterSec); }
+  } catch (e) {
+    if (e instanceof ThrottledError) throw e;
+    throw new HttpError(503, "throttle_unavailable");
+  }
+  let out: T;
+  try { out = await fn(); } catch (e) { th.note(`throttle fail key=${key}`); throw e; }   // keeps the reserved failure (counts toward the lockout)
+  try { th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
+  return out;
 }
 function cors(res: Response, env: Env): Response {
   const o = env.TITANOS_SITE_ORIGIN;
@@ -171,8 +187,21 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
-export default {
-  fetch(req: Request, env: Env): Promise<Response> {
-    return handle(req, env).catch(() => json({ error: "internal" }, 500));
-  },
-};
+// Worker entry factory: ONE Throttle (Memory adapter, injectable clock) is built per Worker and injected into Deps for every
+// request, so login verify, DNS-TXT verify and checkout start are always guarded. Memory state is per isolate: a shared
+// adapter (Durable Object / D1) behind ThrottleStore is the WOULD-FLIP. buildDeps is undefined until the D1 store lands
+// (every route except /health then fails closed with 503).
+export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; now?: () => number; log?: (line: string) => void }
+export const THROTTLE_LIMITS = { maxFailures: 5, windowMs: 15 * 60_000, lockoutMs: 15 * 60_000 };
+export function createWorker(opts: WorkerOpts = {}) {
+  const throttle = opts.throttle ?? new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log });
+  return {
+    fetch(req: Request, env: Env): Promise<Response> {
+      return Promise.resolve().then(() => {
+        const base = opts.buildDeps?.(env);
+        return handle(req, env, base ? { ...base, throttle } : undefined);
+      }).catch(() => json({ error: "internal" }, 500));
+    },
+  };
+}
+export default createWorker();
