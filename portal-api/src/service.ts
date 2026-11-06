@@ -158,7 +158,7 @@ async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId:
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-  await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+  await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
@@ -197,6 +197,13 @@ async function seedPeriod(d: Deps, sub: Subscription, p: StripePeriod | undefine
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
   await d.store.putInvoice(inv);
+}
+// The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a burned invoice number, the
+// store's atomic putInvoiceOnce is the real guard (two racers can both pass the pre-check; only one insert lands). The loser burns one number (known, receipt limit).
+export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
+  if (await d.store.purchaseInvoiced(pur.id)) return false;
+  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
+  return d.store.putInvoiceOnce(inv);
 }
 
 // 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.

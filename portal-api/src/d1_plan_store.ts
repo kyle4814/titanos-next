@@ -57,6 +57,16 @@ export class D1PlanStore extends MemoryStore {
   }
   override async invoicesFor(id: string) { return (await this.many("SELECT * FROM invoices WHERE account_id = ? ORDER BY rowid", id)).map(toInvoice); }
   override async invoiceById(id: string) { const r = await this.one("SELECT * FROM invoices WHERE id = ?", id); return r && toInvoice(r); }
+  // f203. putInvoiceOnce is ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (invoice for this purchase); changes === 1 means THIS call wrote the invoice.
+  override async purchaseInvoiced(id: string) { return (await this.one("SELECT 1 AS x FROM invoices WHERE purchase_id = ? LIMIT 1", id)) !== undefined; }
+  override async putInvoiceOnce(i: Invoice) {
+    const r = await this.exec("INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)",
+      i.id, i.accountId, i.purchaseId ?? null, i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId, i.purchaseId ?? null);
+    return r.meta.changes === 1;
+  }
+  override async paidPurchasesBefore(cutoff: number) {
+    return (await this.many("SELECT * FROM purchases p WHERE p.paid_at IS NOT NULL AND p.paid_at <= ? AND p.status IN ('paid', 'refunded') AND NOT EXISTS (SELECT 1 FROM invoices i WHERE i.purchase_id = p.id) ORDER BY p.paid_at, p.id", cutoff)).map(toPurchase);
+  }
   // Gap-free and atomic: one UPSERT...RETURNING on the single-row counter. Survives a restart; two stores over one D1 never repeat a number.
   override async nextInvoiceNumber() {
     const r = await this.one("INSERT INTO invoice_seq (id, n) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET n = n + 1 RETURNING n");
