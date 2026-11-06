@@ -10,6 +10,7 @@ import { startTopup, handleCreditEvent, CREDIT_PACKS } from "./agent/credits.ts"
 import { TOOLS, publicTool } from "./agent/tools.ts";
 import { verifyReceipt } from "./agent/receipt.ts";
 import { agentCard } from "./agent/files.ts";
+import { entRoute } from "./enterprise/routes.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -114,6 +115,8 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (seg[2] === "sweep" && m === "POST") return json({ sweep: await mkt.sweep(d), warranty: await mkt.warrantySweep(d) });
     return json({ error: "not_found", path }, 404);
   }
+  const er = await entRoute(req, path, d);
+  if (er) return er;
   const a = await svc.authenticate(d, req.headers.get("authorization"));
   if (seg[0] === "market" || seg[0] === "pro") {
     if (path === "/market/jobs" && m === "POST") return json(await mkt.createJob(d, a, await body(req)), 201);
