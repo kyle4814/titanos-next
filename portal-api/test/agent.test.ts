@@ -163,6 +163,93 @@ test("idempotency: the same Idempotency-Key replays the first receipt and charge
   assert.equal(await h.store.creditBalance(a.accountId), 2000 - 5);
 });
 
+// ---------- F-C7 backfill (wA backlog): scope allow-list, idempotency-key reuse (synthetic accounts, example.com.au) ----------
+test("POST /keys: an unknown scope string is a 400 and nothing is stored; known scopes still work", async () => {
+  const h = make(); const s = await h.login("scope@example.com.au");
+  for (const bad of [["admin"], ["scan:read", "admin"], ["<script>"], ["scan:read", 5], ["SCAN:READ"], "scan:read", { 0: "scan:read" }, new Array(11).fill("scan:read")]) {
+    const r = await h.req("POST", "/keys", { token: s.session, body: { scopes: bad } });
+    assert.equal(r.status, 400, JSON.stringify(bad)); assert.equal((await h.j(r)).error, "invalid_scope");
+  }
+  assert.equal(h.store.keys.size, 0, "no rejected request stored a key");
+  const ok = await h.req("POST", "/keys", { token: s.session, body: { scopes: [...SCOPES] } });
+  assert.equal(ok.status, 201); assert.deepEqual((await h.j(ok)).scopes, [...SCOPES]);
+  assert.equal((await h.req("POST", "/keys", { token: s.session, body: {} })).status, 201, "omitted scopes still allowed");
+});
+test("idempotency: the same key with different arguments is 422 idempotency_key_reuse, charged nothing, and the first receipt is not replayed", async () => {
+  const h = make(); setDns(h); const a = await agent(h); await topup(h, a);
+  const hd = { "idempotency-key": "job-9" };
+  const one = await call(h, a.key, "domain_check", { domain: "good.example.com.au" }, hd);
+  const bal = await h.store.creditBalance(a.accountId);
+  const r = await rpc(h, a.key, "tools/call", { name: "domain_check", arguments: { domain: "other.example.com.au" } }, hd);
+  assert.equal(r.status, 422); const b = await h.j(r);
+  assert.equal(b.error.message, "idempotency_key_reuse"); assert.equal(b.result, undefined);
+  assert.equal(await h.store.creditBalance(a.accountId), bal, "a rejected reuse charges nothing");
+  assert.equal(h.store.receipts.size, 1, "no second receipt");
+  // a different TOOL on the same key is also a reuse
+  const r2 = await rpc(h, a.key, "tools/call", { name: "catalogue_list", arguments: {} }, hd);
+  assert.equal(r2.status, 422); assert.equal((await h.j(r2)).error.message, "idempotency_key_reuse");
+  // same key, same arguments (key order irrelevant) still replays the first receipt
+  const two = await call(h, a.key, "domain_check", { domain: "good.example.com.au" }, hd);
+  assert.equal(two.result.structuredContent.replayed, true); assert.equal(two.result.structuredContent.receipt.id, one.result.structuredContent.receipt.id);
+  assert.equal(await h.store.creditBalance(a.accountId), bal);
+  // another key may use the same idempotency string freely (keys are scoped per API key)
+  const other = await agent(h, "other@example.com.au"); await topup(h, other);
+  const x = await call(h, other.key, "domain_check", { domain: "other.example.com.au" }, hd);
+  assert.ok(x.result.structuredContent.receipt && !x.result.structuredContent.replayed);
+});
+
+test("idempotency: the same key and identical (empty) arguments on a different tool is 422, not a replay", async () => {
+  const h = make(); const a = await agent(h);
+  const hd = { "idempotency-key": "job-10" };
+  const one = await call(h, a.key, "catalogue_list", {}, hd);
+  assert.ok(one.result.structuredContent.receipt);
+  const r = await rpc(h, a.key, "tools/call", { name: "credits_balance", arguments: {} }, hd);
+  assert.equal(r.status, 422); assert.equal((await h.j(r)).error.message, "idempotency_key_reuse");
+});
+
+// F39: every 422 on the MCP route is a valid JSON-RPC 2.0 error envelope; the REST route body is unchanged.
+const envelope = (b: any, id: unknown) => {
+  assert.deepEqual(Object.keys(b).sort(), ["error", "id", "jsonrpc"]);
+  assert.equal(b.jsonrpc, "2.0"); assert.strictEqual(b.id, id);
+  assert.equal(b.error.code, -32602); assert.equal(typeof b.error.message, "string");
+  const flat = JSON.stringify(b);
+  assert.ok(!/\bat \S+:\d+|stack|Error:|tk_|sk_|whsec|secret/i.test(flat), "no secret or stack text: " + flat);
+};
+test("mcp 422: idempotency reuse yields a JSON-RPC error with code -32602 and the request id echoed (number and string)", async () => {
+  const h = make(); const a = await agent(h);
+  const hd = { "idempotency-key": "job-f39" };
+  await call(h, a.key, "catalogue_list", {}, hd);
+  const r = await h.req("POST", "/mcp", { token: a.key, body: { jsonrpc: "2.0", id: 4242, method: "tools/call", params: { name: "credits_balance", arguments: {} } }, headers: hd });
+  assert.equal(r.status, 422); envelope(await h.j(r), 4242);
+  const r2 = await h.req("POST", "/mcp", { token: a.key, body: { jsonrpc: "2.0", id: "abc-1", method: "tools/call", params: { name: "credits_balance", arguments: {} } }, headers: hd });
+  assert.equal(r2.status, 422); envelope(await h.j(r2), "abc-1");
+});
+test("mcp 422: an id that is not a string or number (object, boolean) is echoed as null, never reflected", async () => {
+  const h = make(); const a = await agent(h);
+  const hd = { "idempotency-key": "job-f39b" };
+  await call(h, a.key, "catalogue_list", {}, hd);
+  for (const bad of [{ x: 1 }, true, [1]]) {
+    const r = await h.req("POST", "/mcp", { token: a.key, body: { jsonrpc: "2.0", id: bad, method: "tools/call", params: { name: "credits_balance", arguments: {} } }, headers: hd });
+    assert.equal(r.status, 422); envelope(await h.j(r), null);
+  }
+});
+test("mcp 422: a request with no id (notification-shaped call) gets id null; an unparseable body is -32700 with id null", async () => {
+  const h = make(); const a = await agent(h);
+  const hd = { "idempotency-key": "job-f39c" };
+  await call(h, a.key, "catalogue_list", {}, hd);
+  const r = await h.req("POST", "/mcp", { token: a.key, body: { jsonrpc: "2.0", method: "tools/call", params: { name: "credits_balance", arguments: {} } }, headers: hd });
+  assert.equal(r.status, 422); envelope(await h.j(r), null);
+  const raw = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${a.key}` }, body: "{not json" }), {}, h.deps);
+  const b = await raw.json() as any;
+  assert.equal(raw.status, 400); assert.equal(b.jsonrpc, "2.0"); assert.strictEqual(b.id, null); assert.equal(b.error.code, -32700);
+});
+test("rest 422 body is unchanged: POST /domains/verify with no TXT record is still plain {error}", async () => {
+  const h = make(); const s = await h.login("rest@example.com.au");
+  const d = await h.j(await h.req("POST", "/domains", { token: s.session, body: { domain: "norecord.example.com.au" } }));
+  const r = await h.req("POST", `/domains/${d.id}/verify`, { token: s.session, body: {} });
+  assert.equal(r.status, 422); assert.deepEqual(await h.j(r), { error: "txt_record_not_found" });
+});
+
 // ---------- BYOK ----------
 test("BYOK: with x-model-key the model tool costs 0 credits, uses the caller's key, and the key is never stored or returned", async () => {
   const h = make(); const a = await agent(h);
