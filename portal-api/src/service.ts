@@ -3,11 +3,13 @@ import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver 
 import type { BillingProvider } from "./stripe.ts";
 import type { Store, Account, Purchase, Invoice } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
+import type { EntContext } from "./enterprise/service.ts";
+import * as entSvc from "./enterprise/service.ts";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
 
-export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
+export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; ent?: EntContext }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
@@ -126,8 +128,9 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   return "ignored";
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
-  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
+  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
   await d.store.putInvoice(inv);
+  await entSvc.onInvoice(d, inv); // C8: partner commission, recorded; a failure is logged to the operator, never thrown into the webhook
 }
 
 // 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.
@@ -171,6 +174,7 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   }
   await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
   pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
+  await entSvc.onRefund(d, pur.id, pur.refundedCents); // C8: claw back the partner commission
   return { status: "refunded" as const, amountCents: pur.amountCents };
 }
 
@@ -195,11 +199,14 @@ export async function exportData(d: Deps, a: Account) {
     domains: (await d.store.domainsFor(a.id)).map((x) => ({ domain: x.domain, verified: !!x.verifiedAt })),
     purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), invoices: await d.store.invoicesFor(a.id),
     apiKeys: await listKeys(d, a),
+    enterprise: await entSvc.exportFor(d, a.id),
   };
 }
 export async function deleteAccount(d: Deps, a: Account, confirm: unknown) {
   if (confirm !== "DELETE") throw new HttpError(400, "confirmation_required");
+  await entSvc.assertCanDelete(d, a.id); // C8: refuse to orphan a tenant by deleting its last admin
   for (const s of await d.store.subscriptionsFor(a.id)) if (!s.cancelledAt && !s.cancelAt) await cancelSubscription(d, a, s.id);
   await d.store.anonymiseAccount(a.id, d.now());
+  await entSvc.onAccountDeleted(d, a.id); // C8: memberships, referral
   return { status: "deleted" as const, retained: "invoices and payment records, kept without your email as required by tax law" };
 }

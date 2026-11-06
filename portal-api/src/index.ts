@@ -3,6 +3,7 @@ import * as svc from "./service.ts";
 import { HttpError, type Deps } from "./service.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
+import { entRoute } from "./enterprise/routes.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -74,6 +75,8 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     let ev; try { ev = JSON.parse(raw); } catch { throw new HttpError(400, "invalid_json"); }
     return json({ result: await svc.handleStripeEvent(d, ev) });
   }
+  const er = await entRoute(req, path, d);
+  if (er) return er;
   const a = await svc.authenticate(d, req.headers.get("authorization"));
   if (path === "/me" && m === "GET") return json({ id: a.id, email: a.email, seat: a.seat });
   if (path === "/domains" && m === "POST") return json(await svc.addDomain(d, a, (await body(req)).domain), 201);
