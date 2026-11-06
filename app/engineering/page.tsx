@@ -11,6 +11,7 @@ import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import Tiles from "@/components/proof/Tiles";
 import { int, dec, aud, audShort, v, times, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
+import Provenance from "@/components/Provenance";
 
 const META_TITLE = "What one engineer built, and the maths | TITANOS";
 const META_DESC =
@@ -93,6 +94,7 @@ export default function EngineeringPage() {
           Jump to the method ↓
         </AnimatedButton>
       </PageHero>
+      <Provenance route="/engineering" />
 
       <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
         <div style={PROSE}>

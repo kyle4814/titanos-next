@@ -1,0 +1,9 @@
+{
+  "compiled": "2026-11-06",
+  "system": "TITANOS site data files (sectors.json, proof.json), compiled by scripts/gen_open_data.mjs",
+  "licence": "Free to use with attribution: cite titanos.tech and the compiled date. A formal open licence will be named here once the owner confirms it.",
+  "datasets": [
+    { "id": "sector-index", "title": "Sector Index", "file": "/data/sector-index.json", "csv": "/data/sector-index.csv", "about": "One row per sector: the plain-language problem, and one number with its claim label, its source and its source link." },
+    { "id": "claims-ledger", "title": "Claims ledger", "file": "/data/claims-ledger.json", "csv": "/data/claims-ledger.csv", "about": "Every headline figure on the Proof Wall with its label, source, date and method. Includes the UNKNOWN and MODELLED rows." }
+  ]
+}

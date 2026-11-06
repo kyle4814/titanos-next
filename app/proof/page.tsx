@@ -7,6 +7,7 @@ import ProofWall from "@/components/charts/ProofWall";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX, type Flex } from "@/lib/flex";
 import Tiles, { type TileItem } from "@/components/proof/Tiles";
+import Provenance from "@/components/Provenance";
 
 const REPLAY: Flex = {
   big: "250 of 250 tests, 57 saved versions",
@@ -62,6 +63,7 @@ export default function Proof() {
         title="Check it yourself."
         sub="Every claim on this site rests on a base you can check: public code, timestamped test logs, and a build you can replay commit by commit. The bigger numbers elsewhere are maths on top of this, and each says so."
       />
+      <Provenance route="/proof" />
       <ProofWall />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
         <div style={WRAP}>
