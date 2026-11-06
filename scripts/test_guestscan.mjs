@@ -142,5 +142,100 @@ for (const bad of ["", "localhost", "a b.com", "http://", "-x-.com", "1.2.3.4", 
   for (const [label, rec, want, rx] of cases) { const f = await spfStatus(rec); ok(f.status === want && rx.test(f.detail), `SPF ${label} (got ${f.status}: ${f.detail.slice(0, 80)})`); }
 }
 
+// F35. Nested SPF lookup walk (RFC 7208 4.6.4), fake resolver trees only: no live DNS.
+{
+  const { spfNestedLookups } = await import("../lib/guestscan/spfnest.ts");
+  const tree = (zone, onCall) => async (type, name) => {
+    if (onCall) onCall(type, name);
+    const z = zone[`${type}:${name}`];
+    if (z === "ERR") return { status: "error" };
+    if (z === undefined) return { status: "void" };
+    return { status: "ok", records: Array.isArray(z) ? z : [z] };
+  };
+  const incs = (n, pre) => Array.from({ length: n }, (_, i) => `include:${pre}${i}.example.net`).join(" ");
+  // Leaf zones: n includes, each a flat SPF with only ip4.
+  const leaves = (n, pre) => Object.fromEntries(Array.from({ length: n }, (_, i) => [`TXT:${pre}${i}.example.net`, "v=spf1 ip4:203.0.113.0/24 -all"]));
+  const run = (zone, opts) => spfNestedLookups("corp.example.com", tree(zone), opts);
+
+  { const r = await run({ "TXT:corp.example.com": "v=spf1 ip4:203.0.113.1 -all" });
+    ok(r.state === "WITHIN_LIMIT" && r.lookups === 0 && r.resolverCalls === 1, `F35 flat no-lookup record WITHIN_LIMIT (${JSON.stringify(r)})`); }
+  { const r = await run({ "TXT:corp.example.com": `v=spf1 ${incs(3, "i")} -all`, ...leaves(3, "i") });
+    ok(r.state === "WITHIN_LIMIT" && r.lookups === 3, `F35 flat 3 includes counted (${r.lookups})`); }
+  // Nested: 5 direct terms, each include has 2 more includes (flat leaves) = 5 + 10 = 15 > 10 though direct count is 5.
+  {
+    const zone = { "TXT:corp.example.com": `v=spf1 ${incs(5, "m")} -all` };
+    for (let i = 0; i < 5; i++) { zone[`TXT:m${i}.example.net`] = `v=spf1 include:l${i}a.example.org include:l${i}b.example.org -all`; zone[`TXT:l${i}a.example.org`] = "v=spf1 ip4:203.0.113.1 -all"; zone[`TXT:l${i}b.example.org`] = "v=spf1 ip4:203.0.113.2 -all"; }
+    const r = await run(zone);
+    ok(r.state === "OVER_LIMIT" && r.lookups === 11, `F35 nested 5 direct (spfInfo says 5) walks to OVER_LIMIT, stops at 11 (got ${r.state} ${r.lookups})`);
+    ok(r.reasons.some((x) => /over the limit of 10/.test(x)), "F35 OVER_LIMIT carries a reason");
+  }
+  // Nested, exactly 10 across the tree: 2 direct + 4 each = 2 + 8 = 10 -> WITHIN_LIMIT; adding one more term -> OVER.
+  {
+    const mk = (extra) => {
+      const zone = { "TXT:corp.example.com": `v=spf1 include:p.example.net include:q.example.net${extra ? " a" : ""} -all`, "A:corp.example.com": "ok" };
+      zone["TXT:p.example.net"] = "v=spf1 mx a include:p1.example.net include:p2.example.net -all";
+      zone["TXT:q.example.net"] = "v=spf1 mx a include:q1.example.net include:q2.example.net -all";
+      for (const n of ["p1", "p2", "q1", "q2"]) zone[`TXT:${n}.example.net`] = "v=spf1 ip4:203.0.113.3 -all";
+      zone["MX:p.example.net"] = "10 mail.p.example.net"; zone["A:p.example.net"] = "203.0.113.4";
+      zone["MX:q.example.net"] = "10 mail.q.example.net"; zone["A:q.example.net"] = "203.0.113.5";
+      return zone;
+    };
+    const under = await run(mk(false)); const over = await run(mk(true));
+    ok(under.state === "WITHIN_LIMIT" && under.lookups === 10, `F35 nested exactly 10 is WITHIN_LIMIT (${under.state} ${under.lookups})`);
+    ok(over.state === "OVER_LIMIT" && over.lookups === 11, `F35 nested 11 is OVER_LIMIT (${over.state} ${over.lookups})`);
+    // Mutation check on the counting: if mx/a/include did not count, the same tree would read WITHIN. Prove each term class bites.
+    for (const kind of ["include", "a", "mx"]) {
+      const z = mk(true);
+      const strip = (rec) => rec.split(" ").filter((t) => kind === "include" ? !t.startsWith("include:") : t !== kind).join(" ");
+      for (const k of Object.keys(z)) if (k.startsWith("TXT:")) z[k] = strip(z[k]);
+      const m = await run(z);
+      ok(m.lookups < 11 && m.state !== "OVER_LIMIT", `F35 mutation: dropping ${kind} terms changes the verdict (${m.state} ${m.lookups}), so the counter bites on ${kind}`);
+    }
+  }
+  // redirect, exists and ptr count too.
+  { const r = await run({ "TXT:corp.example.com": "v=spf1 exists:chk.example.net ptr redirect=r.example.net", "A:chk.example.net": "1.2.3.4", "TXT:r.example.net": "v=spf1 -all" });
+    ok(r.lookups === 3 && r.state === "WITHIN_LIMIT", `F35 exists + ptr + redirect each count (${r.lookups})`); }
+  // Cycle: a -> b -> a is OVER_LIMIT (receivers loop to the limit), flagged, and the walk terminates.
+  { let calls = 0; const zone = { "TXT:corp.example.com": "v=spf1 include:b.example.net -all", "TXT:b.example.net": "v=spf1 include:corp.example.com -all" };
+    const r = await spfNestedLookups("corp.example.com", tree(zone, () => calls++));
+    ok(r.cycle && r.state === "OVER_LIMIT" && calls <= 3, `F35 cycle detected, OVER_LIMIT, walk stopped (${calls} calls)`); }
+  // Depth cap: a chain of 6 with maxDepth 3 is UNKNOWN with a depth reason, never a guess.
+  { const zone = { "TXT:corp.example.com": "v=spf1 include:c1.example.net -all" };
+    for (let i = 1; i <= 6; i++) zone[`TXT:c${i}.example.net`] = i < 6 ? `v=spf1 include:c${i + 1}.example.net -all` : "v=spf1 -all";
+    const r = await run(zone, { maxDepth: 3 });
+    ok(r.state === "UNKNOWN" && r.reasons.some((x) => /depth cap of 3/.test(x)), `F35 depth cap gives UNKNOWN with reason (${r.state}: ${r.reasons})`);
+    const full = await run(zone);
+    ok(full.state === "WITHIN_LIMIT" && full.lookups === 6 && full.maxDepthSeen === 6, `F35 same chain under default depth is WITHIN_LIMIT with 6 lookups (${full.state} ${full.lookups})`); }
+  // Resolver budget: hard cap on resolver calls, UNKNOWN with reason, call count never exceeds the cap.
+  { let calls = 0; const zone = { "TXT:corp.example.com": `v=spf1 ${incs(9, "b")} -all`, ...leaves(9, "b") };
+    const r = await spfNestedLookups("corp.example.com", tree(zone, () => calls++), { maxResolverCalls: 4 });
+    ok(r.state === "UNKNOWN" && calls === 4 && r.reasons.some((x) => /budget of 4/.test(x)), `F35 resolver budget stops at 4 calls, UNKNOWN (${r.state}, ${calls} calls)`); }
+  // Failing lookup: SERVFAIL on a nested include is UNKNOWN naming the name, not WITHIN_LIMIT; a throw is treated the same.
+  { const zone = { "TXT:corp.example.com": "v=spf1 include:ok.example.net include:bad.example.net -all", "TXT:ok.example.net": "v=spf1 -all", "TXT:bad.example.net": "ERR" };
+    const r = await run(zone);
+    ok(r.state === "UNKNOWN" && r.reasons.some((x) => /TXT bad\.example\.net/.test(x)), `F35 failing nested lookup is UNKNOWN with the name (${r.state}: ${r.reasons})`);
+    const thrower = async () => { throw new Error("boom"); };
+    const t = await spfNestedLookups("corp.example.com", thrower);
+    ok(t.state === "UNKNOWN", `F35 throwing resolver is UNKNOWN (${t.state})`);
+    // OVER_LIMIT is still definitive when a later lookup fails: the count is a lower bound.
+    const z2 = { "TXT:corp.example.com": `v=spf1 ${incs(11, "d")} -all`, ...leaves(10, "d"), "TXT:d10.example.net": "ERR" };
+    const o = await run(z2);
+    ok(o.state === "OVER_LIMIT", `F35 over-limit is definitive despite a failing lookup (${o.state} ${o.lookups})`); }
+  // Void lookups: a, mx, exists and include-with-no-record that return nothing; more than 2 is flagged.
+  { const zone = { "TXT:corp.example.com": "v=spf1 a:gone1.example.net mx:gone2.example.net exists:gone3.example.net -all" };
+    const r = await run(zone);
+    ok(r.voidLookups === 3 && r.voidOver && r.state === "WITHIN_LIMIT" && r.reasons.some((x) => /void lookups/.test(x)), `F35 3 void lookups flagged (${r.voidLookups}, voidOver ${r.voidOver})`);
+    const two = await run({ "TXT:corp.example.com": "v=spf1 a:gone1.example.net mx:gone2.example.net -all" });
+    ok(two.voidLookups === 2 && !two.voidOver, `F35 exactly 2 void lookups not flagged (${two.voidLookups})`);
+    const none = await run({ "TXT:corp.example.com": "v=spf1 a:h.example.net -all", "A:h.example.net": "1.2.3.4" });
+    ok(none.voidLookups === 0, `F35 a resolving a-term is not void`); }
+  // Macros cannot be resolved without a sender: counted, UNKNOWN with reason.
+  { const r = await run({ "TXT:corp.example.com": "v=spf1 exists:%{i}._spf.example.net -all" });
+    ok(r.lookups === 1 && r.state === "UNKNOWN" && r.reasons.some((x) => /macro/.test(x)), `F35 macro target is UNKNOWN with reason (${r.state})`); }
+  // Same record under the direct-only scanner count: documents the gap this closes.
+  { const { spfInfo } = await import("../lib/guestscan/scan.ts");
+    ok(spfInfo(`v=spf1 ${incs(5, "m")} -all`).lookups === 5, "F35 direct-only spfInfo still reports 5 (unchanged, autofix guards untouched)"); }
+}
+
 if (fails) { console.error(`${fails} failure(s), ${passed} passed`); process.exit(1); }
 console.log(`PASS test_guestscan (${passed} assertions)`);
