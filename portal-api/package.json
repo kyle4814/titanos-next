@@ -6,6 +6,8 @@
   "description": "The ONE home for the TITANOS portal backend (accounts, billing, marketplace, keys). Cloudflare Worker, D1. See BACKEND_DECISION.md in the kernel charter. Nothing here is deployed.",
   "scripts": {
     "flow16": "node --experimental-strip-types scripts/flow16_matrix.ts",
-    "test": "node --test --experimental-strip-types test/*.test.ts"
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "test:d1": "ENT_STORE=d1 node --test --experimental-strip-types test/*.test.ts",
+    "test:mutate": "node test/mutate_ent_d1.mjs"
   }
 }
