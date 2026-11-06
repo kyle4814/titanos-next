@@ -7,25 +7,28 @@ import type { Account } from "../store.ts";
 import { runScan, type DohFetch, type Finding } from "../../../lib/guestscan/scan.ts";
 import { fixFor } from "../../../lib/guestscan/fixes.ts";
 import type { JobPayments } from "./payments.ts";
+import type { SeatEntitlements } from "./entitlements.ts";
 import { type Job, type MarketCard, type MarketStore, type ProProfile, type Tier } from "./store.ts";
 import { rankFor, boardOrder, WARRANTY_DAYS } from "./rank.ts";
 import { judgeAttribution, clawbackFor, mayRaisePayoutCard, proofKey, emailDomain } from "./attribution.ts";
 import { randomToken, timingSafeEqual } from "../util.ts";
 
-export interface MarketDeps { store: MarketStore; payments: JobPayments; doh: (domain: string) => DohFetch; internalSecret?: string }
+export interface MarketDeps { store: MarketStore; payments: JobPayments; seats?: SeatEntitlements; doh: (domain: string) => DohFetch; internalSecret?: string }
 const DAY = 86_400_000;
 // EXAMPLE prices (plan D1: AU$29 to AU$149 claim fee by size; the owner's job price is the pro's pay, no take rate on the fix).
 export const TIERS: Record<Tier, { priceCents: number; claimFeeCents: number }> = {
   small: { priceCents: 9_900, claimFeeCents: 2_900 }, standard: { priceCents: 24_900, claimFeeCents: 5_900 }, large: { priceCents: 59_900, claimFeeCents: 14_900 },
 };
-export const SEAT_FEE_FACTOR = 0.5;          // pro seat (AU$149 a month, EXAMPLE) halves the claim fee
+export const SEAT_FEE_FACTOR = 0.5;          // an ACTIVE pro seat (AU$149 a month, EXAMPLE), per SeatEntitlements, halves the claim fee
 export const PAYOUT_REVIEW_CENTS = 50_000;   // a payout at or above this waits for a Kyle tap (GATE1)
 export const CLAIM_WINDOW_MS = 7 * DAY, FUNDING_WINDOW_MS = DAY, OPEN_WINDOW_MS = 30 * DAY;
 export const MAX_ACTIVE_CLAIMS = 3, MAX_OPEN_JOBS_PER_OWNER = 10, MIN_RESCAN_GAP_MS = 60_000;
 const tierOf = (mins: number): Tier => (mins <= 20 ? "small" : mins <= 60 ? "standard" : "large");
 const mk = (d: Deps) => { if (!d.market) throw new HttpError(503, "marketplace_unavailable"); return d.market; };
 const ev = (j: Job, at: number, kind: string, detail: string) => { j.events.push({ at, kind, detail }); if (j.events.length > 100) j.events.splice(0, j.events.length - 100); };
-const feeFor = (p: ProProfile, j: Job) => (p.plan === "seat" ? Math.round(j.claimFeeCents * SEAT_FEE_FACTOR) : j.claimFeeCents);
+// Server-side only: no seat adapter wired, or no active subscription for THIS account id, means the full fee.
+const hasSeat = async (m: MarketDeps, d: Deps, accountId: string) => { try { return (await m.seats?.isActiveSeat(accountId, d.now())) === true; } catch { return false; } };
+const feeFor = (seat: boolean, j: Job) => (seat ? Math.round(j.claimFeeCents * SEAT_FEE_FACTOR) : j.claimFeeCents);
 
 async function readCheck(m: MarketDeps, d: Deps, domain: string, check: string): Promise<{ id: string; finding: Finding | undefined }> {
   const r = await runScan(domain, m.doh(domain), d.now);
@@ -36,19 +39,18 @@ const need = async (m: MarketDeps, id: string) => { const j = await m.store.getJ
 export const isInternal = (d: Deps, header: string | null) => { const s = d.market?.internalSecret; return !!s && !!header && timingSafeEqual(header, s); };
 
 // ---------- pro seat ----------
-export async function joinPro(d: Deps, a: Account, b: { acceptTerms?: unknown; display?: unknown; plan?: unknown }) {
+export async function joinPro(d: Deps, a: Account, b: { acceptTerms?: unknown; display?: unknown }) {
   const m = mk(d);
   if (b.acceptTerms !== true) throw new HttpError(400, "terms_required");
   const display = typeof b.display === "string" && /^[\w .&'-]{2,40}$/.test(b.display.trim()) ? b.display.trim() : `Pro ${a.id.slice(-4)}`;
-  const plan = b.plan === "seat" ? "seat" : "payg";   // the seat's AU$149 a month billing is a C2 product: NOT wired here, see receipt
   const had = await m.store.getPro(a.id);
-  const p: ProProfile = had ?? { accountId: a.id, joinedAt: d.now(), onboarded: false, plan, display };
-  if (had) { p.display = display; p.plan = plan; }
+  const p: ProProfile = had ?? { accountId: a.id, joinedAt: d.now(), onboarded: false, display };
+  if (had) p.display = display;   // any client-sent `plan` is ignored: the discount comes from SeatEntitlements only
   await m.store.putPro(p);
   if (a.seat !== "pro") await d.store.putAccount({ ...a, seat: "pro" });
-  return presentPro(p);
+  return presentPro(p, await hasSeat(m, d, a.id));
 }
-const presentPro = (p: ProProfile) => ({ accountId: p.accountId, display: p.display, plan: p.plan, onboarded: p.onboarded, connectLinked: !!p.connectAccountId });
+const presentPro = (p: ProProfile, seat: boolean) => ({ accountId: p.accountId, display: p.display, plan: seat ? "seat" : "payg", onboarded: p.onboarded, connectLinked: !!p.connectAccountId });
 async function requirePro(d: Deps, a: Account): Promise<ProProfile> {
   const p = await mk(d).store.getPro(a.id);
   if (a.seat !== "pro" || !p) throw new HttpError(403, "pro_seat_required");
@@ -63,7 +65,7 @@ export async function onboard(d: Deps, a: Account) {
 export async function refreshOnboarding(d: Deps, a: Account) {
   const m = mk(d); const p = await requirePro(d, a);
   p.onboarded = !!p.connectAccountId && (await m.payments.accountReady(p.connectAccountId)); await m.store.putPro(p);
-  return presentPro(p);
+  return presentPro(p, await hasSeat(m, d, a.id));
 }
 
 // ---------- owner: hand-raise ----------
@@ -117,9 +119,9 @@ async function refundAndClose(d: Deps, j: Job, to: "cancelled" | "refunded", why
 
 // ---------- pro: board, claim, deliver ----------
 export async function board(d: Deps, a: Account) {
-  const m = mk(d); const p = await requirePro(d, a);
+  const m = mk(d); const p = await requirePro(d, a); const seat = await hasSeat(m, d, a.id);
   const jobs = (await m.store.allJobs()).filter((j) => j.status === "open" && j.ownerAccountId !== a.id).sort((x, y) => y.createdAt - x.createdAt);
-  return { jobs: jobs.map((j) => ({ id: j.id, domainMasked: maskDomain(j.domain), check: j.check, severity: j.severity, tier: j.tier, payCents: j.priceCents, claimFeeCents: feeFor(p, j), postedAt: j.createdAt, note: "Hand-raised by the verified owner. The full domain shows after you claim." })), onboarded: p.onboarded, activeClaims: (await m.store.allJobs()).filter((j) => j.proAccountId === a.id && (j.status === "claimed" || j.status === "delivered")).length };
+  return { jobs: jobs.map((j) => ({ id: j.id, domainMasked: maskDomain(j.domain), check: j.check, severity: j.severity, tier: j.tier, payCents: j.priceCents, claimFeeCents: feeFor(seat, j), postedAt: j.createdAt, note: "Hand-raised by the verified owner. The full domain shows after you claim." })), onboarded: p.onboarded, activeClaims: (await m.store.allJobs()).filter((j) => j.proAccountId === a.id && (j.status === "claimed" || j.status === "delivered")).length };
 }
 export async function claim(d: Deps, a: Account, id: string) {
   const m = mk(d); const p = await requirePro(d, a); let j = await need(m, id);
@@ -134,7 +136,7 @@ export async function claim(d: Deps, a: Account, id: string) {
   const { finding } = await readCheck(m, d, j.domain, j.check);
   if (finding?.status === "PASS") { j = await need(m, id); if (j.status === "open") await refundAndClose(d, j, "refunded", "already fixed before any claim (fresh scan PASS)"); throw new HttpError(409, "already_fixed"); }
   j = await need(m, id);
-  const now = d.now(), fee = feeFor(p, j);
+  const now = d.now(), fee = feeFor(await hasSeat(m, d, a.id), j);
   (j.observations ??= []).push({ at: now, status: finding?.status ?? "UNKNOWN", src: "claim" }); j.proEmailDomain = emailDomain(a.email);
   j.status = "claimed"; j.proAccountId = a.id; j.claimedAt = now; j.claimDeadline = now + CLAIM_WINDOW_MS; j.updatedAt = now; ev(j, now, "claimed", `claim fee ${fee} cents`);
   if (!(await m.store.transition(["open"], j))) throw new HttpError(409, "job_not_open");   // the loser of a race stops here, charged nothing

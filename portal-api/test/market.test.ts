@@ -144,7 +144,7 @@ test("transfer failure leaves the job reproved (not paid); the sweep retries and
 });
 
 test("claim fee failure reopens the job; seat pros pay half; claim expiry reopens and marks the pro abandoned", async () => {
-  const r = rig(); const o = await r.owner("o@cf.com.au", "cf.com.au"); const seat = await r.pro("seat@x.com", { plan: "seat" }); const payg = await r.pro("payg@x.com");
+  const r = rig(); const o = await r.owner("o@cf.com.au", "cf.com.au"); const seat = await r.pro("seat@x.com", { plan: "seat", sub: { status: "active", paidThroughMs: r.h.clock.t + 30 * 86_400_000 } }); const payg = await r.pro("payg@x.com");
   const id = (await r.hire(o)).job.id; r.payments.failClaimFee = true;
   assert.equal((await r.claim(seat.session, id)).status, 402); assert.equal((await r.store.getJob(id))!.status, "open"); r.payments.failClaimFee = false;
   const board = async (k: string) => r.h.j(await r.h.req("GET", "/pro/board", { token: k }));
@@ -209,7 +209,7 @@ test("Stripe Connect adapter: refuses a mode-mismatched key, sends destination +
 });
 
 test("kill test C4: the first 10 jobs, 100% paid only after re-proof (6 honest pros, 4 who claim done without fixing)", async () => {
-  const r = rig(); const p = await r.pro("drill@x.com", { plan: "seat" }); const pros = [p];
+  const r = rig(); const p = await r.pro("drill@x.com", { plan: "seat", sub: { status: "active", paidThroughMs: r.h.clock.t + 365 * 86_400_000 } }); const pros = [p];
   for (let i = 1; i < 4; i++) pros.push(await r.pro(`drill${i}@x.com`));
   const ids: { id: string; honest: boolean; dom: string }[] = [];
   for (let i = 0; i < 10; i++) {

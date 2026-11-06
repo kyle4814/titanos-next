@@ -20,7 +20,7 @@ export interface Job {
   clawbacks?: Clawback[]; payoutDenied?: { at: number; cardId: string; proofKey: string };
   regressedAt?: number; warrantyChecks: number; warrantyOkAt?: number; events: { at: number; kind: string; detail: string }[];
 }
-export interface ProProfile { accountId: string; joinedAt: number; connectAccountId?: string; onboarded: boolean; plan: "payg" | "seat"; display: string }
+export interface ProProfile { accountId: string; joinedAt: number; connectAccountId?: string; onboarded: boolean; display: string }   // no plan: the seat is an entitlement (entitlements.ts), never a stored self-declared flag
 export interface MarketCard { id: string; kind: "payout_review" | "dispute" | "clawback_review"; jobId: string; reason: string; createdAt: number; resolved: boolean; outcome?: string }
 export interface MarketStore {
   getJob(id: string): Promise<Job | undefined>; putJob(j: Job): Promise<void>; allJobs(): Promise<Job[]>;
