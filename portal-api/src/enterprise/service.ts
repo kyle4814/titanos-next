@@ -5,12 +5,12 @@ import { normaliseEmail, randomToken, sha256Hex, timingSafeEqual } from "../util
 import type { EntStore } from "./store.ts";
 import { ROLES, ROLE_RANK, type Asset, type Brand, type IdpVerifier, type PayoutProvider, type RateTable, type Role, type ScanProvider, type Tenant, type TenantKind } from "./types.ts";
 import { SsoError } from "./sso.ts";
-import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement } from "./share.ts";
+import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement, type SelfDealCheck } from "./share.ts";
 import { grade, summarise } from "./estate.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
 export interface EntContext {
-  store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string;
+  store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string; selfDeal?: SelfDealCheck;
 }
 const DAY = 86_400_000;
 export const SSO_STATE_TTL_MS = 10 * 60_000, INVITE_TTL_MS = 7 * DAY, MAX_ASSETS = 2000, MAX_OPEN_SSO_STATES = 1000, MAX_OPEN_SSO_STATES_PER_CLIENT = 20, MAX_PENDING_INVITES = 100;
@@ -486,7 +486,7 @@ export async function decidePayout(d: Deps, id: string, approve: boolean) {
 // ---- hooks the C2 service calls ----
 export async function onInvoice(d: Deps, inv: Invoice) {
   const c = d.ent; if (!c) return;
-  try { await recordCommission(c.store, c.rates, inv, d.now()); }
+  try { await recordCommission(c.store, c.rates, inv, d.now(), c.selfDeal); }
   catch (e) { await c.store.noteFailure("commission", `${inv.id}: ${(e as Error).message}`.slice(0, 200), d.now()); }   // never hide: recorded for the operator
 }
 export async function onRefund(d: Deps, purchaseId: string, refundedCents: number) {

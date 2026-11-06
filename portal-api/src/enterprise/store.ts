@@ -35,6 +35,7 @@ export interface EntStore {
   addAudit(a: AuditEntry): Promise<void>;
   auditOf(tenantId: string, limit: number): Promise<AuditEntry[]>;
   addLedger(e: LedgerEntry): Promise<boolean>;   // false when uniq already exists (idempotent)
+  updateLedger(id: string, patch: Partial<Pick<LedgerEntry, "held" | "holdReasons">>): Promise<LedgerEntry | undefined>;
   ledgerOf(partnerId: string): Promise<LedgerEntry[]>;
   ledgerForInvoice(invoiceId: string): Promise<LedgerEntry[]>; // across partners
   putReferral(r: Referral): Promise<boolean>;    // false when the account already has one
@@ -53,7 +54,10 @@ export interface EntStore {
 
 export function availableCents(entries: LedgerEntry[], now: number): number {
   let n = 0;
-  for (const e of entries) if (e.amountCents < 0 || e.availableAt <= now) n += e.amountCents;
+  for (const e of entries) {
+    if (e.held) continue; // SELF-DEAL-SUSPECT commissions, and the clawbacks against them, sit out until the operator's tap
+    if (e.amountCents < 0 || e.availableAt <= now) n += e.amountCents;
+  }
   return n;
 }
 
@@ -100,6 +104,7 @@ export class MemoryEntStore implements EntStore {
   async addAudit(a: AuditEntry) { this.audit.push(a); }
   async auditOf(t: string, limit: number) { return this.audit.filter((a) => a.tenantId === t).slice(-limit).reverse(); }
   async addLedger(e: LedgerEntry) { for (const x of this.ledger.values()) if (x.partnerId === e.partnerId && x.uniq === e.uniq) return false; this.ledger.set(e.id, e); return true; }
+  async updateLedger(id: string, patch: Partial<Pick<LedgerEntry, "held" | "holdReasons">>) { const x = this.ledger.get(id); if (!x) return undefined; const n = { ...x, ...patch }; this.ledger.set(id, n); return n; }
   async ledgerOf(p: string) { return [...this.ledger.values()].filter((e) => e.partnerId === p).sort((a, b) => a.at - b.at); }
   async ledgerForInvoice(id: string) { return [...this.ledger.values()].filter((e) => e.invoiceId === id); }
   async putReferral(r: Referral) { if (this.referrals.has(r.accountId)) return false; this.referrals.set(r.accountId, r); return true; }
