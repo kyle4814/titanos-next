@@ -18,7 +18,7 @@ const baseMetadata: Metadata = {
   description: META_DESC,
   alternates: { canonical: "https://titanos.tech/investors" },
   openGraph: { title: META_TITLE, description: META_DESC, type: "website", url: "https://titanos.tech/investors" },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false }, // D6: private link, shared by invitation, never listed
 };
 
 export const metadata: Metadata = withSeo("/investors", baseMetadata);
@@ -51,7 +51,7 @@ export default function Investors() {
   return (
     <W2c>
       <PageHero
-        badge="Investors"
+        badge="Investors, by private link"
         title="What your money builds."
         sub="A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk, and a no is welcome."
       />

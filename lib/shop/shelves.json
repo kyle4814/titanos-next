@@ -1,0 +1,3066 @@
+{
+ "generated_by": "scripts/build_shop.mjs",
+ "counts": {
+  "total": 115,
+  "graded_pass": 30,
+  "graded_fail": 85,
+  "ungraded_shown": 0
+ },
+ "shelves": [
+  {
+   "id": "offer:portfolio-watch",
+   "kind": "offer",
+   "slug": "portfolio-watch",
+   "name": "Portfolio Watch: Monthly Posture Monitor for a Fund's Holdings",
+   "bluf": "A one-page monthly heat map that shows which of your holdings' email and privacy posture got worse since last month.",
+   "bullets": [
+    "A monthly one-page heat map across all holdings, with only the changes highlighted",
+    "Dated differences from the previous month, so you see movement and not just a score",
+    "Passive checks of email security and privacy policy for each holding",
+    "A quarterly summary you can drop into an LP report"
+   ],
+   "faq": [
+    {
+     "q": "Who is behind this?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with one person, and you can check the ABN on the public ABN Lookup."
+    },
+    {
+     "q": "Do the portfolio companies need to know or do anything?",
+     "a": "No. We read public records only and touch none of their systems. Whether you tell them is your call."
+    },
+    {
+     "q": "Does this replace our portfolio companies' IT or security teams?",
+     "a": "No. It tells you when something changes so you can ask them a better question. Their IT provider stays exactly as it is."
+    },
+    {
+     "q": "What if a record cannot be read?",
+     "a": "It shows as UNKNOWN. We never turn a failed lookup into a confident grade."
+    },
+    {
+     "q": "Can I cancel?",
+     "a": "Yes. It runs month to month and you can stop any time."
+    },
+    {
+     "q": "Is GST added?",
+     "a": "No. TITANOS is not registered for GST, so no GST is charged. The price shown is the price you pay."
+    },
+    {
+     "q": "Is there any pressure to buy?",
+     "a": "No. The free first step is yours to keep whether or not you go further. If it is not useful, a plain no is welcome and nothing follows."
+    }
+   ],
+   "priceAud": 499,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/00w9AT9BHdKh3KA4Xs1RD01",
+   "href": "/offers/portfolio-watch",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "enterprise"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:tender-intelligence-radar",
+   "kind": "offer",
+   "slug": "tender-intelligence-radar",
+   "name": "Tender Intelligence Radar: Competitor Win Maps",
+   "bluf": "A monthly sourced report that shows who is winning government contracts in your market, for how much, and when they expire.",
+   "bullets": [
+    "Competitor wins by value, agency and postcode from AusTender contract awards",
+    "Contracts nearing expiry, so you can see recompete windows",
+    "Likely subcontract targets under the primes",
+    "Matched upcoming opportunities for your keywords",
+    "Optional per-bid packs when you decide to go for one"
+   ],
+   "faq": [
+    {
+     "q": "Who is behind this?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with one person, and you can check the ABN on the public ABN Lookup."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "AusTender publishes contract awards as open data under a Creative Commons licence. We read that public feed and cite the source in every report."
+    },
+    {
+     "q": "Does this write my bid for me?",
+     "a": "No. The radar tells you what the market looks like. A bid pack gives you sourced material to work from. Your team writes and submits the bid."
+    },
+    {
+     "q": "Will this replace our bid team?",
+     "a": "No. It saves them the hours spent searching and sorting, so they spend time on the bid itself."
+    },
+    {
+     "q": "Are the numbers guaranteed to win anything?",
+     "a": "No. It shows what has been awarded in the past. It does not predict or promise future wins."
+    },
+    {
+     "q": "Is GST added?",
+     "a": "No. TITANOS is not registered for GST, so no GST is charged. The price shown is the price you pay."
+    },
+    {
+     "q": "Is there any pressure to buy?",
+     "a": "No. The free first step is yours to keep whether or not you go further. If it is not useful, a plain no is welcome and nothing follows."
+    }
+   ],
+   "priceAud": 499,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/7sYfZhbJPfSp80Q0Hc1RD02",
+   "href": "/offers/tender-intelligence-radar",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "enterprise"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:profit-mirror-care",
+   "kind": "offer",
+   "slug": "profit-mirror-care",
+   "name": "Profit Mirror for Charities, NDIS and Care Providers",
+   "bluf": "A sourced report from your own filed accounts that shows how many admin hours could come back to your team, with nobody replaced.",
+   "bullets": [
+    "A report built from your filed accounts (ACNC in Australia or Companies House in the UK)",
+    "Hours-back scenarios, each one labelled as a scenario",
+    "A plain statement of where nobody is replaced",
+    "A shortlist of AI opportunities that fit your size",
+    "A one-page executive summary"
+   ],
+   "faq": [
+    {
+     "q": "Who is behind this?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with one person, and you can check the ABN on the public ABN Lookup."
+    },
+    {
+     "q": "Where do the numbers come from?",
+     "a": "Your own public filings. Anything we model is labelled as a scenario and shows its method, so your finance person can reproduce it."
+    },
+    {
+     "q": "Will anyone lose their job?",
+     "a": "No. The aim is to give hours back to your people so more time goes to the people you serve. Nobody is replaced."
+    },
+    {
+     "q": "Do you need access to our systems or client data?",
+     "a": "No. We use public filings only. We do not need client or participant information."
+    },
+    {
+     "q": "Is this financial or legal advice?",
+     "a": "No. It is general information to start a conversation. Your auditor, accountant and lawyer remain the right people for advice."
+    },
+    {
+     "q": "Is GST added?",
+     "a": "No. TITANOS is not registered for GST, so no GST is charged. The price shown is the price you pay."
+    },
+    {
+     "q": "Is there any pressure to buy?",
+     "a": "No. The free first step is yours to keep whether or not you go further. If it is not useful, a plain no is welcome and nothing follows."
+    }
+   ],
+   "priceAud": 497,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/4gMeVd7tz0Xv6WM0Hc1RD03",
+   "href": "/offers/profit-mirror-care",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "enterprise"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:bid-pack",
+   "kind": "offer",
+   "slug": "bid-pack",
+   "name": "Bid Pack",
+   "bluf": "You get a submission-ready pack for one named tender, so you can review it and submit instead of losing days to the forms.",
+   "bullets": [
+    "A compliance matrix for the tender",
+    "Response drafts written from your own capability facts",
+    "A pricing schedule template",
+    "A declarations checklist",
+    "A gap list of facts only you can supply"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS, a sole trader business run by Kyle Deligny (ABN 34 318 502 254). You deal with a real person."
+    },
+    {
+     "q": "Do you submit the bid for us?",
+     "a": "No. You review and submit. That keeps you in control and the bid in your name."
+    },
+    {
+     "q": "Will you make up claims about my business?",
+     "a": "No. We only use facts you give us or public record. Anything missing goes on the gap list."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This gives your people hours back. Nobody is replaced, and the decisions stay with you."
+    },
+    {
+     "q": "What if I decide not to bid?",
+     "a": "That is a fine outcome. The free fit-check can tell you early whether a tender is worth your time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$497 per bid, one-off. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 497,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/eVqaEXeW1fSpch69dI1RD04",
+   "href": "/offers/bid-pack",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:charity-profit-mirror",
+   "kind": "offer",
+   "slug": "charity-profit-mirror",
+   "name": "Charity Profit Mirror",
+   "bluf": "You see, from your own filed numbers, where admin hours could be given back to funded work without cutting a single person.",
+   "bullets": [
+    "A sourced reading of your own filed numbers",
+    "Hours-back scenarios by function, clearly labelled MODELLED",
+    "Three do-this-now actions",
+    "A short hook version (5 pages), the full evidence version, and the TITANOS Edge document"
+   ],
+   "faq": [
+    {
+     "q": "Will this lead to people losing their jobs?",
+     "a": "No. This gives your people hours back. Nobody is replaced, and the decisions stay with you."
+    },
+    {
+     "q": "Where do the numbers come from?",
+     "a": "From your public ACNC filed accounts. Scenarios are labelled MODELLED so you can tell facts from estimates."
+    },
+    {
+     "q": "Do you need access to our systems?",
+     "a": "Public records only. We read published sources and never log in to, touch or test anything of yours."
+    },
+    {
+     "q": "Can my finance person check it?",
+     "a": "Yes. That is the design. Every line can be traced and reproduced."
+    },
+    {
+     "q": "What do I have to do?",
+     "a": "Read it. If it is useful, we can talk about next steps. If not, a no is welcome."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$497 one-off. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 497,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/aFacN53dj8pXdlacpU1RD05",
+   "href": "/offers/charity-profit-mirror",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:supplier-cyber-readiness-pass",
+   "kind": "offer",
+   "slug": "supplier-cyber-readiness-pass",
+   "name": "Supplier Cyber Readiness Pass",
+   "bluf": "You get a tender-ready security answers sheet and a ranked fix list, so security questions stop costing you points.",
+   "bullets": [
+    "A passive SpoofGuard reading of your domain (SPF, DKIM, DMARC, which are the email checks that stop spoofing), honest about anything unknown",
+    "A tender-ready security answers sheet drawn from verified facts",
+    "A fix list ranked by points gained",
+    "Monthly Monitor to keep your evidence dated"
+   ],
+   "faq": [
+    {
+     "q": "Will you test or probe our systems?",
+     "a": "No. It only reads public DNS records. Nothing of yours is touched or tested."
+    },
+    {
+     "q": "What if you can't tell something?",
+     "a": "We show it as UNKNOWN. We never guess to make a result look better."
+    },
+    {
+     "q": "Does this replace our IT provider?",
+     "a": "No. Your IT provider stays. We give them a clear list of what to fix."
+    },
+    {
+     "q": "Do I need to understand the technical terms?",
+     "a": "No. The sheet is in plain English, and each fix is a simple step."
+    },
+    {
+     "q": "Is there a lock-in?",
+     "a": "No. The Monitor is monthly and you can cancel any time. The readiness pass is one-off."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$149 a month for the Monitor, or AU$297 one-off for the readiness pass. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 149,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/dRm5kD15beOl2GwgGa1RD06",
+   "href": "/offers/supplier-cyber-readiness-pass",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:global-tender-desk",
+   "kind": "offer",
+   "slug": "global-tender-desk",
+   "name": "Global Tender Desk (UK, NZ, US, EU)",
+   "bluf": "You get a monthly feed of overseas government tenders that match your services, and a plain guide to which portals will accept a firm like yours.",
+   "bullets": [
+    "A monthly feed of matched notices from UK Contracts Finder, EU TED and verified open-contracting feeds",
+    "Eligibility notes for each portal, with the portal's own wording on individuals and foreign firms",
+    "A registration checklist"
+   ],
+   "faq": [
+    {
+     "q": "Where do the notices come from?",
+     "a": "From public government feeds and portals. Each notice links to its source."
+    },
+    {
+     "q": "Can a sole trader or foreign firm really bid?",
+     "a": "Some portals say yes in their own words and some do not. We quote the wording for each, so you can see it yourself."
+    },
+    {
+     "q": "Do you bid for me?",
+     "a": "No. We find and qualify. You decide, and you submit."
+    },
+    {
+     "q": "Does this replace anyone on my team?",
+     "a": "No. This gives your people hours back. Nobody is replaced, and the decisions stay with you."
+    },
+    {
+     "q": "Can I cancel?",
+     "a": "Yes, any time. It is a monthly plan."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$349 a month. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 349,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/4gM00j4hndKhepe61w1RD07",
+   "href": "/offers/global-tender-desk",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:incumbent-brief",
+   "kind": "offer",
+   "slug": "incumbent-brief",
+   "name": "Incumbent Brief for Bid Consultants",
+   "bluf": "For each tender you work on, you get a brief showing who the incumbent is, what they were paid and how the buyer has awarded before.",
+   "bullets": [
+    "The buying agency's last 3 years of awards in the category (value, supplier, suburb)",
+    "Who the incumbent is and what they won",
+    "Typical contract sizes and the sub-threshold pattern",
+    "The agency's published privacy and cyber posture to shape your response",
+    "A short hook and the full artifact"
+   ],
+   "faq": [
+    {
+     "q": "Where does the data come from?",
+     "a": "From public government contract awards. Each figure carries its source and date."
+    },
+    {
+     "q": "Do you tell me how to price the bid?",
+     "a": "No. We describe past awards. We do not predict wins or promise results."
+    },
+    {
+     "q": "Does this replace me as the bid writer?",
+     "a": "No. It gives you better material faster. The writing and judgement stay with you."
+    },
+    {
+     "q": "Can I use it with my clients?",
+     "a": "Yes, it is built for consultants. You can also use it alongside a Bid Pack."
+    },
+    {
+     "q": "Can I cancel the monthly plan?",
+     "a": "Yes, any time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$149 per brief, or AU$590 a month for 5. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 149,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/cNi28r5lr35Dbd2fC61RD08",
+   "href": "/offers/incumbent-brief",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:funder-fit-dossier",
+   "kind": "offer",
+   "slug": "funder-fit-dossier",
+   "name": "Funder-Fit Dossier for Grant Writers",
+   "bluf": "For each charity you write for, you get the financial story and funder-fit evidence as paste-ready, sourced blocks.",
+   "bullets": [
+    "An ACNC filed-accounts reading of income mix, surplus, reserves and trend",
+    "Government funding history where it is public",
+    "Comparable funded organisations",
+    "A privacy and cyber posture paragraph for the risk section",
+    "All as paste-ready evidence blocks with sources"
+   ],
+   "faq": [
+    {
+     "q": "Where do the numbers come from?",
+     "a": "From public ACNC filed accounts and other public records. Each one is sourced and dated."
+    },
+    {
+     "q": "Do you write the application?",
+     "a": "No. You do. We provide the evidence blocks."
+    },
+    {
+     "q": "Does this replace the grant writer?",
+     "a": "No. It saves you the number-gathering time so you can write."
+    },
+    {
+     "q": "Do I need my client's permission?",
+     "a": "We only use public records. Check your own client agreement for how you share them."
+    },
+    {
+     "q": "Can I stop the monthly plan?",
+     "a": "Yes, any time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$129 per charity, or AU$490 a month for 5. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 129,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/cNicN515b9u13KAey21RD09",
+   "href": "/offers/funder-fit-dossier",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:eu-ted-small-lot-radar",
+   "kind": "offer",
+   "slug": "eu-ted-small-lot-radar",
+   "name": "EU TED Small-Lot Radar",
+   "bluf": "You get a weekly digest of low-value EU tender lots that match your field, instead of searching roughly 397,000 open notices yourself.",
+   "bullets": [
+    "A weekly digest of matched lot-level notices",
+    "Industry code, country, estimated value and deadline for each",
+    "TED attribution under CC BY 4.0"
+   ],
+   "faq": [
+    {
+     "q": "Where does the data come from?",
+     "a": "From the EU's public TED notices, used under CC BY 4.0 with attribution."
+    },
+    {
+     "q": "Can a non-EU firm bid?",
+     "a": "It depends on the notice. Eligibility is stated in each one, so check it before you commit."
+    },
+    {
+     "q": "Do you bid for me?",
+     "a": "No. We find and sort. You decide."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This gives your people hours back. Nobody is replaced, and the decisions stay with you."
+    },
+    {
+     "q": "Can I cancel?",
+     "a": "Yes, any time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$79 a month. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/8x27sL3dj21z4OE89E1RD0a",
+   "href": "/offers/eu-ted-small-lot-radar",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:story-leads-weekly",
+   "kind": "offer",
+   "slug": "story-leads-weekly",
+   "name": "Story Leads Weekly (Open-Contracts Desk)",
+   "bluf": "Every week you get five sourced story leads from public spending data, so you do not need to dig for them.",
+   "bullets": [
+    "A weekly pack of 5 sourced leads: supplier concentration, regional spend, repeat winners and cross-country price gaps",
+    "Every figure dated and cited to the publisher, with its denominator and a method line",
+    "Public data only, with no accusations"
+   ],
+   "faq": [
+    {
+     "q": "Do you accuse anyone of anything?",
+     "a": "No. We state facts from the public record with attribution and dates, and make no claims about motive."
+    },
+    {
+     "q": "Do you name individuals?",
+     "a": "We deal with entities. Some supplier names may be sole traders, so we only state what is in the public record, with CC BY attribution and no inferences."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "From the publishers' own contract data. Every figure cites its source."
+    },
+    {
+     "q": "Does this replace our journalists?",
+     "a": "No. It hands them leads. Verifying, calling and writing stay with them."
+    },
+    {
+     "q": "Can we cancel?",
+     "a": "Yes, any time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$149 a month. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 149,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/bJe6oHg05gWt0yoey21RD0b",
+   "href": "/offers/story-leads-weekly",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:investigation-cut",
+   "kind": "offer",
+   "slug": "investigation-cut",
+   "name": "Investigation Cut (One-Off Deep Dive)",
+   "bluf": "You get one sourced 8 to 12 page analysis that tests your hunch about public spending against the full awards record.",
+   "bullets": [
+    "An 8 to 12 page sourced cut with tables",
+    "A chart-ready CSV",
+    "Methodology and denominators",
+    "What the data does and does not show",
+    "Publisher links and retrieval dates"
+   ],
+   "faq": [
+    {
+     "q": "Will you tell us who did something wrong?",
+     "a": "No. Facts only, with no accusations. We show what the data does and does not say."
+    },
+    {
+     "q": "Can we check your work?",
+     "a": "Yes. Methodology, denominators, links and retrieval dates are included."
+    },
+    {
+     "q": "What if the data cannot answer our question?",
+     "a": "The free note tells you that before you pay."
+    },
+    {
+     "q": "Does this replace our researchers?",
+     "a": "No. It saves them the data work."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$990 one-off. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 990,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/eVq9AT15bcGd80QgGa1RD0c",
+   "href": "/offers/investigation-cut",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:electorate-dollar-map",
+   "kind": "offer",
+   "slug": "electorate-dollar-map",
+   "name": "Electorate Dollar Map",
+   "bluf": "You see how much federal contract money lands in your postcode or electorate, and who keeps winning it.",
+   "bullets": [
+    "A postcode and region table of federal awards: total value, count and median",
+    "Top suppliers by suburb",
+    "The share going to local suppliers versus out-of-region suppliers",
+    "Dates and publisher citations",
+    "A quarterly map with a monthly update"
+   ],
+   "faq": [
+    {
+     "q": "Is this political?",
+     "a": "No. It reports where supplier addresses sit. It takes no side and makes no endorsement."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "From the Australian Government's public contract awards, with dates and citations."
+    },
+    {
+     "q": "Does it show where the work was delivered?",
+     "a": "It shows the supplier's locality, not necessarily where the work happens. We say so on the page."
+    },
+    {
+     "q": "Can we cancel?",
+     "a": "Yes, any time."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$149 a month. No GST is charged, because TITANOS is a sole trader that is not registered for GST."
+    }
+   ],
+   "priceAud": 149,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/bJe4gz8xD21z94U4Xs1RD0d",
+   "href": "/offers/electorate-dollar-map",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "government"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:msp-prospect-feed",
+   "kind": "offer",
+   "slug": "msp-prospect-feed",
+   "name": "MSP Prospect Feed with White-Label SpoofGuard",
+   "bluf": "Every week you get a list of local businesses with a dated email-security gap, plus a ready report you can send to each one under your own name.",
+   "bullets": [
+    "A weekly feed of local businesses in your postcode radius, each with a dated public email-security gap",
+    "A white-label SpoofGuard PDF per prospect, carrying your logo and name",
+    "Filters by industry, so the list matches the clients you want",
+    "A weekly cap you set, so you never get more than you can call",
+    "Plain wording on every report so the prospect can follow it without a technical background"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems. Each gap on a report carries its date so anyone can re-check it."
+    },
+    {
+     "q": "Is sending these to prospects allowed?",
+     "a": "The reports go out under your identity, so the Spam Act applies to you: business addresses only, a relevant message, a clear sender and a working unsubscribe. The reports are built from passive public DNS only. This is general information, not legal advice. The sender is responsible for complying with the Spam Act."
+    },
+    {
+     "q": "Does this replace anyone on my team?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost and can I stop?",
+     "a": "The price is on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown. The terms, including how to stop, are written down and agreed before anything is billed."
+    },
+    {
+     "q": "What if a prospect's result is unclear?",
+     "a": "The report says UNKNOWN. We would rather leave a line blank than put a wrong claim under your name."
+    }
+   ],
+   "priceAud": 299,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/6oU28r9BH21zbd20Hc1RD0e",
+   "href": "/offers/msp-prospect-feed",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:monitor-wholesale",
+   "kind": "offer",
+   "slug": "monitor-wholesale",
+   "name": "Monitor Wholesale for MSPs",
+   "bluf": "Resell our Compliance Monitor under your own brand, so each client domain gets a monthly dated email-security report and alerts, and you keep the margin.",
+   "bullets": [
+    "A monthly dated email-security report per client domain, under your brand",
+    "Change alerts sent to the inbox you choose",
+    "A client-facing letter that explains how a customer can tell a real email from a fake one",
+    "A simple way to add or remove client domains",
+    "Billing set up so you charge your client and we charge you the wholesale rate"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Does this touch my clients' systems?",
+     "a": "We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems."
+    },
+    {
+     "q": "Does my IT provider role stay the same?",
+     "a": "Yes. You stay the provider. This gives you a report and an alert to show the work you already do."
+    },
+    {
+     "q": "Does it replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The wholesale price is on this page and you set your own retail price. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can I stop?",
+     "a": "Yes. The terms, including how to stop, are written down and agreed before anything is billed."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/3cI6oHcNTay594U75A1RD0f",
+   "href": "/offers/monitor-wholesale",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:broker-renewal-scan",
+   "kind": "offer",
+   "slug": "broker-renewal-scan",
+   "name": "Broker Renewal Trigger Scan",
+   "bluf": "Give us your client domains and get back each client's email-security result, a ranked renewal call list and a one-page letter for every gap.",
+   "bullets": [
+    "A scan of up to 300 client domains you supply",
+    "Per-client email-security results, each with a date",
+    "A ranked call list ordered by your renewal month",
+    "A one-page client letter for each gap, on your letterhead",
+    "A monthly re-scan that shows what has improved"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Do you scan our clients without asking?",
+     "a": "We scan only the domains you send us, and you confirm your clients have agreed to it. We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems."
+    },
+    {
+     "q": "Does good email security lower a premium or satisfy cover terms?",
+     "a": "We make no such claim. We do not say that cyber cover requires any particular setting. The report shows what public records say, with dates. This is general information, not legal or insurance advice."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The prices are on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "What if a result is unclear?",
+     "a": "The report says UNKNOWN rather than guess."
+    }
+   ],
+   "priceAud": 1497,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/6oU3cv5lrbC90yoey21RD0g",
+   "href": "/offers/broker-renewal-scan",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:franchise-posture-board",
+   "kind": "offer",
+   "slug": "franchise-posture-board",
+   "name": "Franchise Network Posture Board",
+   "bluf": "One page shows the email-security and privacy-wording status of every franchisee domain, with a fix sheet each franchisee can hand to their own provider.",
+   "bullets": [
+    "A single dashboard or PDF covering every franchisee domain",
+    "A grade for each site's email protection (SPF, DKIM and DMARC are the three records that stop fake emails)",
+    "Privacy wording status for each site",
+    "A change log, so head office sees what moved",
+    "A copy-ready fix sheet for each franchisee to give their own provider"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Do you touch franchisee systems?",
+     "a": "We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems."
+    },
+    {
+     "q": "Do franchisees keep their own IT provider?",
+     "a": "Yes. The fix sheet is written so each franchisee's provider can make the change."
+    },
+    {
+     "q": "Does this replace anyone at head office?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The tiers are on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can I stop?",
+     "a": "Yes. The terms, including how to stop, are written down and agreed before anything is billed."
+    }
+   ],
+   "priceAud": 1500,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/bJe8wP6pv9u1bd2cpU1RD0h",
+   "href": "/offers/franchise-posture-board",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:association-member-kit",
+   "kind": "offer",
+   "slug": "association-member-kit",
+   "name": "Association Member Benefit Kit",
+   "bluf": "Give members a real benefit: a free email-security scan, a yearly sector report and a monthly scam bulletin, with no extra staff time for you.",
+   "bullets": [
+    "A member-benefit page offering a free scan per member domain",
+    "An annual sector report on your membership, aggregated and anonymised",
+    "A monthly member bulletin on current scams",
+    "A discount code members can use on Compliance Monitor",
+    "Your brand on all of it"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Will you name our members?",
+     "a": "Only members who have opted in. The sector report is aggregated and anonymised."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The prices are on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can we say no after the free report?",
+     "a": "Yes, and that is welcome. The free mini-report has no obligation attached."
+    }
+   ],
+   "priceAud": 490,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/4gMfZh0177lT3KA61w1RD0i",
+   "href": "/offers/association-member-kit",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:agency-white-label-audit",
+   "kind": "offer",
+   "slug": "agency-white-label-audit",
+   "name": "Agency White-Label Audit Rail",
+   "bluf": "Get a client audit under your agency's name from a list of domains, covering email security and privacy wording, and sell it at your own price.",
+   "bullets": [
+    "An agency-branded audit per client domain",
+    "An email-security check and a privacy-policy gap check in one report",
+    "A fix checklist the client can act on",
+    "Delivery to the inbox you choose",
+    "Your own pricing, since you resell the report"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Do you touch client sites?",
+     "a": "We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems."
+    },
+    {
+     "q": "Is the privacy check legal advice?",
+     "a": "No. It is general information, not legal advice."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost, and is there a minimum?",
+     "a": "AU$29 per report, with a minimum of 20 a month. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can I stop?",
+     "a": "Yes. The terms, including how to stop, are written down and agreed before anything is billed."
+    }
+   ],
+   "priceAud": 29,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/5kQbJ17tzbC9bd2ey21RD0j",
+   "href": "/offers/agency-white-label-audit",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:recruiter-contract-winner-feed",
+   "kind": "offer",
+   "slug": "recruiter-contract-winner-feed",
+   "name": "Recruiter and Labour-Hire Contract-Winner Feed",
+   "bluf": "See which local employers just won government contracts, so you can call them about staff before the job is advertised.",
+   "bullets": [
+    "A weekly feed of federal contract awards (from AusTender) by postcode",
+    "For each: the supplier, suburb, value and description",
+    "A note on the trades or roles the work is likely to need",
+    "A short outreach brief for each winner",
+    "Filters by sector and minimum value"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "The Australian Government publishes contract awards openly. We read that public data. We do not log in to anything."
+    },
+    {
+     "q": "Does a contract win mean they will hire?",
+     "a": "Not always. The feed shows who won work and what it was for. Whether they need staff is for you to find out on the call."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The price is on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can I stop?",
+     "a": "Yes. The terms, including how to stop, are written down and agreed before anything is billed."
+    }
+   ],
+   "priceAud": 390,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/4gM00j7tzeOl94U1Lg1RD0k",
+   "href": "/offers/recruiter-contract-winner-feed",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:subbie-finder-channel",
+   "kind": "offer",
+   "slug": "subbie-finder-channel",
+   "name": "Head-Contractor Subbie Finder for Chambers and Trade Bodies",
+   "bluf": "Give your members a weekly list of who just won local government work, so they can pitch for subcontracts.",
+   "bullets": [
+    "A member-only weekly list of recent contract winners near each member",
+    "One regional setup per area you serve",
+    "A member-facing page on your brand",
+    "A free regional list for your next newsletter",
+    "The option to offer individual members their own subscription"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "The Australian Government publishes contract awards openly. We read that public data."
+    },
+    {
+     "q": "Will members' details be shared?",
+     "a": "The list is about contract winners, who are public in the award data. Member email addresses are used only to deliver the list."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "Both prices are on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can we say no after the free list?",
+     "a": "Yes, and that is welcome."
+    }
+   ],
+   "priceAud": 590,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/4gM7sL6pv5dLepe4Xs1RD0l",
+   "href": "/offers/subbie-finder-channel",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:subbie-finder-lite",
+   "kind": "offer",
+   "slug": "subbie-finder-lite",
+   "name": "Job Flow Lite: Subbie Finder",
+   "bluf": "Each week, see who won government work near you, what it is worth, and how to reach them, so you can offer to help.",
+   "bullets": [
+    "A weekly list of nearby contract winners",
+    "The value and scope of each job",
+    "The suburb of the winner",
+    "How to reach them",
+    "Results matched to your trade keywords"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly."
+    },
+    {
+     "q": "Where does the data come from?",
+     "a": "The Australian Government publishes contract awards openly. We read that public data."
+    },
+    {
+     "q": "Will winners want a subcontractor?",
+     "a": "Not always. The list shows who won what. Whether they need help is for you to ask."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. This adds a service line or saves hours. Nobody is replaced."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "The price is on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown."
+    },
+    {
+     "q": "Can I stop?",
+     "a": "Yes. The terms, including how to stop, are written down and agreed before anything is billed."
+    }
+   ],
+   "priceAud": 99,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/dRm14n9BH9u14OE0Hc1RD0m",
+   "href": "/offers/subbie-finder-lite",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:payee-domain-change-watch",
+   "kind": "offer",
+   "slug": "payee-domain-change-watch",
+   "name": "Payee Domain Change Watch",
+   "bluf": "We watch your suppliers' email domains each week and tell you to check by phone if something changes before you pay.",
+   "bullets": [
+    "A saved list of 25 to 200 supplier domains, watched every week",
+    "Alerts when mail routing changes, email protection is dropped, or a lookalike domain appears",
+    "Alerts when a new nameserver appears",
+    "A plain \"check by phone before paying\" message with the evidence",
+    "Public DNS checks only. No active scanning."
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader (ABN 34 318 502 254) in Queensland. You deal with Kyle directly, not a call centre."
+    },
+    {
+     "q": "Where does the information come from?",
+     "a": "Public records only, such as government registers and published contract awards. Nothing is accessed that is not already public, and nothing on your own systems is touched."
+    },
+    {
+     "q": "Will the alert say a supplier is a fraudster?",
+     "a": "No. It says what changed and asks you to verify by phone. A change is a prompt to check, not an accusation."
+    },
+    {
+     "q": "Does it touch my suppliers' systems?",
+     "a": "No. It only reads public DNS records, the same ones anyone can look up."
+    },
+    {
+     "q": "Does this replace anyone on my team?",
+     "a": "No. It gives your people their hours back and gives them a better starting point. You stay the decision maker."
+    },
+    {
+     "q": "Is GST charged?",
+     "a": "No GST is charged. TITANOS is a sole trader that is not registered for GST, and the price you see is the price you pay."
+    },
+    {
+     "q": "Can I cancel?",
+     "a": "Yes. There are no tactics and no lock-in tricks. If it is not useful, say so and stop. A no is always welcome."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/6oU8wPbJP49Hdla61w1RD0n",
+   "href": "/offers/payee-domain-change-watch",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "multipliers"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:instant-email-domain-check",
+   "kind": "offer",
+   "slug": "instant-email-domain-check",
+   "name": "Instant Email Domain Check",
+   "bluf": "Type your domain, pay AU$19, and get a plain one-page report on whether scammers can send fake emails as you, with the exact fixes.",
+   "bullets": [
+    "A one-page PDF in plain English, in minutes",
+    "A grade for your email protection (called SPF, DKIM and DMARC, the three checks that stop fake senders)",
+    "The 3 exact lines to add to your domain settings",
+    "What each result means for your scam risk"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with Kyle, not a call centre."
+    },
+    {
+     "q": "Is anything on my systems touched?",
+     "a": "No. We read public domain records only, the same ones any mail server reads. Nothing is installed and nothing is accessed."
+    },
+    {
+     "q": "Do I need to be technical?",
+     "a": "No. The report is plain English, and you can pass the 3 lines to whoever looks after your domain. Your IT provider stays your IT provider."
+    },
+    {
+     "q": "What if you cannot tell?",
+     "a": "Then the report says unknown. We never guess a grade."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$19 once. No GST is charged. TITANOS is a sole trader that is not registered for GST, so the price you see is the price you pay."
+    },
+    {
+     "q": "What if it is not useful?",
+     "a": "Contact us and we will sort it out fairly."
+    }
+   ],
+   "priceAud": 19,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/8x27sL9BHbC94OEblQ1RD0o",
+   "href": "/offers/instant-email-domain-check",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "selfserve"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:free-tender-digest",
+   "kind": "offer",
+   "slug": "free-tender-digest",
+   "name": "Free Tender Digest",
+   "bluf": "A free weekly email with the 10 newest government tenders in your category and state.",
+   "bullets": [
+    "A weekly email with the 10 newest notices in your category and state",
+    "The value band and closing date for each",
+    "A one-line note on who won the last similar one, from award records",
+    "An unsubscribe link in every email"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with Kyle, not a call centre."
+    },
+    {
+     "q": "Why is it free?",
+     "a": "It shows what we can do. If a paid tool helps you later, such as the Tender Fit Score, that is your choice."
+    },
+    {
+     "q": "Will you sell my email?",
+     "a": "No. We only send you the digest you signed up for."
+    },
+    {
+     "q": "How do I stop it?",
+     "a": "Every email has an unsubscribe link, as the Spam Act requires. The sender is responsible for complying with the Spam Act."
+    },
+    {
+     "q": "Where do the notices come from?",
+     "a": "Public government tender and award records."
+    },
+    {
+     "q": "Does it cost anything?",
+     "a": "No. It is free. No GST is charged. TITANOS is a sole trader that is not registered for GST, so the price you see is the price you pay."
+    }
+   ],
+   "priceAud": 0,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "FREE_STEP",
+   "buyUrl": null,
+   "href": "/offers/free-tender-digest",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "selfserve"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:privacy-adm-fix",
+   "kind": "offer",
+   "slug": "privacy-adm-fix",
+   "name": "Privacy ADM Fix",
+   "bluf": "We read your live privacy policy and show you the exact wording it is missing for the 10 December 2026 automated-decision rule (as we read the Privacy Act amendments; confirm with your adviser), with wording you can adapt.",
+   "bullets": [
+    "A reading of your actual live privacy policy, with the missing automated-decision (ADM) wording pointed out",
+    "Compliant wording you can adapt and paste in",
+    "A 10-point checklist to work through",
+    "Every finding dated and sourced"
+   ],
+   "faq": [
+    {
+     "q": "Who are you and how did you find my policy?",
+     "a": "TITANOS is a Queensland sole trader business run by Kyle Deligny, ABN 34 318 502 254. We only read the privacy policy you have already published on your website."
+    },
+    {
+     "q": "Do you touch my systems?",
+     "a": "No. We read public pages only. Nothing is installed, scanned or accessed inside your business."
+    },
+    {
+     "q": "Is this legal advice?",
+     "a": "No. This is general information, not legal advice. Coverage statements should be confirmed with your own lawyer or advisor before you rely on them."
+    },
+    {
+     "q": "Does my IT provider or lawyer get replaced?",
+     "a": "No. Your IT provider and your lawyer stay exactly where they are. This gives them a clear starting point."
+    },
+    {
+     "q": "What does it cost, and is there GST?",
+     "a": "AU$197 once. We are not GST registered, so no GST is charged. There is no subscription."
+    },
+    {
+     "q": "What if I say no?",
+     "a": "A no is welcome. The free one-line result is yours to keep either way."
+    }
+   ],
+   "priceAud": 197,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/6oU7sLdRXfSp80QahM1RD0p",
+   "href": "/offers/privacy-adm-fix",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "specialist"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:privacy-essential-eight-pack",
+   "kind": "offer",
+   "slug": "privacy-essential-eight-pack",
+   "name": "Privacy Act and Essential Eight Pack",
+   "bluf": "A done-with-you pack that gives your practice a privacy policy, a breach plan, a supplier register and a checklist, so you hold evidence of your privacy and basic cyber controls.",
+   "bullets": [
+    "A privacy policy built for your sector",
+    "A breach response runbook (what to do, in order, if something goes wrong)",
+    "A vendor register listing the suppliers that hold your data",
+    "An Essential Eight checklist (the Australian Government's eight basic cyber controls)",
+    "A dated baseline of your current public email security and policy wording"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS is a Queensland sole trader business run by Kyle Deligny, ABN 34 318 502 254."
+    },
+    {
+     "q": "What do you look at to set the baseline?",
+     "a": "Public records only: your public DNS email settings and your published policy. Nothing inside your systems is touched."
+    },
+    {
+     "q": "Does this make me compliant?",
+     "a": "The pack gives you documents and evidence to work from. It is general information, not legal advice, and it does not certify compliance. We do not claim any law requires a specific setting such as DMARC."
+    },
+    {
+     "q": "Does my IT provider get replaced?",
+     "a": "No. Your IT provider stays. The pack gives them and you a shared checklist."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$5,997 once, with no GST charged. Ongoing monitoring is a separate, optional step."
+    },
+    {
+     "q": "Can I say no or ask for time?",
+     "a": "Yes. A no is welcome, and you can take time to talk it through with your team or accountant first."
+    }
+   ],
+   "priceAud": 5997,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/3cIfZh017cGd80QgGa1RC43",
+   "href": "/offers/privacy-essential-eight-pack",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "specialist"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:subbie-finder",
+   "kind": "offer",
+   "slug": "subbie-finder",
+   "name": "Subbie Finder",
+   "bluf": "Every week you get an email listing who just won a contract near you, so you can ring the head contractor before the work is staffed.",
+   "bullets": [
+    "A weekly email of contract winners near your postcode",
+    "The value band, the scope text and the suburb for each award",
+    "How to reach the winner, who is the head contractor and your buyer",
+    "Filtering to the trades that win subcontract work from that scope",
+    "Your radius and minimum job value set once, then it runs"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS, run by Kyle Deligny, a sole trader (ABN 34 318 502 254). You deal with a person, not a call centre."
+    },
+    {
+     "q": "Where does the information come from?",
+     "a": "Public government contract award records only. We touch nothing of yours and nothing of theirs."
+    },
+    {
+     "q": "Will it find me work for certain?",
+     "a": "No. It shows you who won and how to reach them. Whether they need your trade is your call and theirs. We make no promise of jobs."
+    },
+    {
+     "q": "Does it cover state and council contracts?",
+     "a": "Federal awards are covered now. State and council awards still need checking, so we do not promise them."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. It gives you back the hours you would spend searching portals. You still make every call."
+    },
+    {
+     "q": "What does it cost, and can I cancel?",
+     "a": "AU$99 a month, and no GST is charged. You can cancel any time."
+    }
+   ],
+   "priceAud": 99,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/9B6eVd6pvgWt3KA3To1RD0q",
+   "href": "/offers/subbie-finder",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "tradies"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:trade-panel-pack",
+   "kind": "offer",
+   "slug": "trade-panel-pack",
+   "name": "Trade Panel Pack",
+   "bluf": "We turn the panel paperwork into a submission-ready pack, so you can get on the list for government, council and large-company work.",
+   "bullets": [
+    "An eligibility check for the panel that fits you",
+    "A plain-English checklist",
+    "Draft answers written from the facts you give us",
+    "A list of what you still need, for example insurance",
+    "Honest notes on each panel's rules, with the source and date"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS, run by Kyle Deligny, a sole trader (ABN 34 318 502 254)."
+    },
+    {
+     "q": "Does this guarantee I get on a panel?",
+     "a": "No. We prepare the pack. The panel decides. If a rule blocks you, the free check tells you before you pay."
+    },
+    {
+     "q": "What if I do not have the insurance?",
+     "a": "We list it as something you still need. Some panels, such as Local Buy with its AU$20M public liability, may not suit you yet, and we say so plainly."
+    },
+    {
+     "q": "Do I hand over passwords?",
+     "a": "No. We work from the facts you give us and you submit the pack yourself."
+    },
+    {
+     "q": "Does this replace my accountant or advisor?",
+     "a": "No. Your people stay. We cut the form-filling."
+    },
+    {
+     "q": "What does it cost?",
+     "a": "AU$497 for one panel pack or AU$997 for three. No GST is charged."
+    }
+   ],
+   "priceAud": 497,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/8x2fZh8xDfSp1Cs61w1RD0r",
+   "href": "/offers/trade-panel-pack",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "tradies"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  },
+  {
+   "id": "offer:scam-shield-for-tradies",
+   "kind": "offer",
+   "slug": "scam-shield-for-tradies",
+   "name": "Scam Shield for Tradies",
+   "bluf": "We check every month whether someone could fake an email from your business, and give you the fix list and a notice that tells customers your real bank details.",
+   "bullets": [
+    "A monthly reading of your domain's email protection, dated and in plain English",
+    "A fix list for the settings that stop spoofing (SPF, DKIM and DMARC are the three email checks)",
+    "A customer notice template: we only ever ask for payment to these bank details",
+    "An honest result: if we cannot tell, we say unknown, never safe"
+   ],
+   "faq": [
+    {
+     "q": "Who are you?",
+     "a": "TITANOS, run by Kyle Deligny, a sole trader (ABN 34 318 502 254)."
+    },
+    {
+     "q": "Do you touch my systems?",
+     "a": "No. We read public DNS records only. Nothing is installed and we never log in to anything."
+    },
+    {
+     "q": "Does this stop all fake invoices?",
+     "a": "No. It shows whether your domain can be spoofed and how to close the gap. It does not stop every scam, and we do not claim it does."
+    },
+    {
+     "q": "Will my IT provider be involved?",
+     "a": "They stay in charge. The fix list is written so they can apply it, or you can hand it to whoever runs your email."
+    },
+    {
+     "q": "Does this replace anyone?",
+     "a": "No. It gives you and your provider a clear list."
+    },
+    {
+     "q": "What does it cost, and can I cancel?",
+     "a": "AU$149 a month, and no GST is charged. You can cancel any time."
+    }
+   ],
+   "priceAud": 149,
+   "cadence": "month",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": "https://buy.stripe.com/eVq28r15b21z94UahM1RD0s",
+   "href": "/offers/scam-shield-for-tradies",
+   "source": "lib/offers/data",
+   "synthetic": false,
+   "tags": [
+    "tradies"
+   ],
+   "grade": {
+    "pass": true,
+    "checks": [
+     {
+      "id": "slug",
+      "ok": true,
+      "why": "slug is kebab-case"
+     },
+     {
+      "id": "name",
+      "ok": true,
+      "why": "name 3 to 120 chars"
+     },
+     {
+      "id": "bluf",
+      "ok": true,
+      "why": "one-line answer 20 to 400 chars"
+     },
+     {
+      "id": "source",
+      "ok": true,
+      "why": "shelf traces to a source file"
+     },
+     {
+      "id": "copy",
+      "ok": true,
+      "why": "no AI-tell words, no em or en dashes"
+     },
+     {
+      "id": "not-synthetic",
+      "ok": true,
+      "why": "synthetic configs never show publicly"
+     },
+     {
+      "id": "price-honest",
+      "ok": true,
+      "why": "a shown price is PUBLISHED; otherwise the shelf says quote"
+     },
+     {
+      "id": "availability-true",
+      "ok": true,
+      "why": "the shelf does what its availability badge says"
+     },
+     {
+      "id": "content",
+      "ok": true,
+      "why": "at least one bullet and one FAQ"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+id,group,display,caption,label,source,date,method
+s_jobs,Fleet,10.46 jobs an hour,Worker jobs finished in 24 hours (251 finished),MEASURED,Worker fleet job ledger,2026-10-08,251 finished
+s_fail,Fleet,10 of 251,"Fleet jobs that failed, 4.0%",MEASURED,Worker fleet job ledger,2026-10-08,Read from the source on the date shown.
+s_median,Fleet,6.0 min,Median time per job across 233 jobs,MEASURED,Worker fleet job ledger,2026-10-08,Read from the source on the date shown.
+s_usd_job,AI cost,US$1.037,Fleet-wide cost per job over 243 jobs. An upper bound: it includes the orchestrator.,MEASURED,Token usage meter and the job ledger,2026-10-08,"orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+s_usd_today,AI cost,US$252.08,"Spent in one day, API-equivalent pricing",MEASURED,Token usage meter and the job ledger,2026-10-08,"orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+s_tokens,AI cost,"29,130 tokens","Median a worker reads before acting, 52 sessions",MEASURED,Session start audit (tokens read before the first action),2026-10-08,Read from the source on the date shown.
+s_ram,Machine,2.65 GB,Linux memory in use,MEASURED,Linux memory counters on the build machine,2026-10-08,Read from the source on the date shown.
+s_vm,Machine,11.5 GB,Windows VM memory,MEASURED,Windows process memory counter,2026-10-08,Read from the source on the date shown.
+s_win,Machine,12.3 GB,Windows memory free,MEASURED,Windows memory counter,2026-10-08,Read from the source on the date shown.
+s_load,Machine,8.02 load,One-minute load average on 8 cores,MEASURED,Linux load average counter,2026-10-08,8 cores
+s_cronh,Machine,32.84 h,"Scheduled work in 24 hours, 4686 runs",MEASURED,Scheduled job run record (every run is logged),2026-10-08,4686 runs
+s_cronf,Machine,16.5%,"Scheduled runs that failed, 773 of 4686. The 89 percent from before was one job, so we do not chart the two against each other.",MEASURED,Scheduled job run record (every run is logged),2026-10-08,"All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately."
+s_gate,Build,124 s,"Full gate run, 166 suites, green",MEASURED,Gate run record,2026-10-08,Recorded by the gate runner at the time shown in the run record.
+s_backup,Safety,40 min,Age of the newest backup,MEASURED,Backup log,2026-10-08,Read from the source on the date shown.
+s_suite,Build,No number yet,Wall time of the main codebase suite,UNKNOWN,No durable run record exists yet,2026-10-08,"That suite does not log its own run time, so we show no figure. A recorder is the next fix."
+e_cost_per_job,AI cost,US$0.973 to US$0.116,Cost per worker job (API-equivalent),MEASURED,"Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",2026-10-08,"25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill."
+e_daily_spend,AI cost,US$467 per day to US$130 per day,"Daily spend, modelled ceiling",MODELLED,"Sigil ceiling report, 2026-10-08",2026-10-08,"The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast."
+e_recall50,AI quality,48/50,"Recall test, 50 questions",MEASURED,"Kernel compression gate record, 2026-10-08",2026-10-08,"50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better."
+e_heldout,AI quality,24/25,"Held-out recall test, 25 questions",MEASURED,"Kernel compression gate record, 2026-10-08",2026-10-08,Questions written by an independent agent that never saw the compact core.
+e_killtest,AI quality,25/25,Fully good results on 25 matched jobs,MEASURED,"Kernel compression gate record, 2026-10-08",2026-10-08,Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none.
+e_cron_snapshot,Cron,224 s to 3.1 s,"5-minute snapshot, time per run",MEASURED,"PC optimisation report, 2026-10-08",2026-10-08,"Run record average before, a timed run after. The secret check now scans only files that could be committed."
+e_cron_mirror,Cron,"2,250 s to 14 s","Cloud mirror, time per run",MEASURED,"PC optimisation report, 2026-10-08",2026-10-08,"Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass."
+e_cron_bundle,Cron,51 s to 3.6 s,"Repository bundle step, time per run",MEASURED,"PC optimisation report, 2026-10-08",2026-10-08,"One bundle per repository keyed on content, instead of re-bundling about 12 worktrees."
+e_repo_size,Build,235 MB to 35 MB,Kernel repository size,MEASURED,"Round-2 brief, 2026-10-08 (raw log attaching)",2026-10-08,Size of the repository directory before and after history and run-state cleanup.
+e_titanos_suite,Build,975 s to 579 s,Main codebase test suite run time,MEASURED,"Round-2 brief, 2026-10-08 (raw log attaching)",2026-10-08,"Wall-clock seconds for the full suite, before and after."

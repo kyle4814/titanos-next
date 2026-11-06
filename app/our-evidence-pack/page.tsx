@@ -14,6 +14,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
 import W2d from "@/components/w2d/W2d";
+import Provenance from "@/components/Provenance";
 
 // The biggest true number for this page: the size of the report you can read in full before you pay.
 const PACK_FLEX: Flex = {
@@ -217,6 +218,7 @@ export default function OurEvidencePackPage() {
           REQUEST YOUR FREE SCAN
         </AnimatedButton>
       </PageHero>
+      <Provenance route="/our-evidence-pack" />
       <Bluf>
         This is our own security report, published in full, so you can see the quality of the work before you pay anything.
       </Bluf>

@@ -7,6 +7,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import TerminalSnippet from "@/components/TerminalSnippet";
 import ScanRequestForm from "@/components/ScanRequestForm";
+import GuestScan from "@/components/GuestScan";
 import Testimonials from "@/components/Testimonials";
 import ProcessSteps from "./ProcessSteps";
 import { CONTACT_HREF } from "@/lib/config";
@@ -474,6 +475,19 @@ export default function ScanPage() {
       </SectionReveal>
 
       <OpenLoop>Ready to see yours? It takes under a minute, and there is no card.</OpenLoop>
+
+      <div className="divider-gold" />
+
+      {/* C1: instant guest scan, zero model calls */}
+      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SectionHeading
+            title="Check your domain now"
+            lead="The email side takes seconds and needs no login. The full scan above is still personally reviewed."
+          />
+          <GuestScan />
+        </div>
+      </SectionReveal>
 
       <div className="divider-gold" />
 

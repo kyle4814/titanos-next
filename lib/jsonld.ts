@@ -115,3 +115,18 @@ export function breadcrumbs(trail: { name: string; path: string }[]): Json {
 export function serialise(data: Json): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
+
+export function dataset(d: { name: string; description: string; path: string; files: { url: string; format: string }[]; dateModified: string; licenceNote: string }): Json {
+  return {
+    "@context": CTX,
+    "@type": "Dataset",
+    name: d.name,
+    description: d.description,
+    url: `${SITE}${d.path}`,
+    dateModified: d.dateModified,
+    creator: { "@id": ORG_ID },
+    isAccessibleForFree: true,
+    license: d.licenceNote,
+    distribution: d.files.map((f) => ({ "@type": "DataDownload", encodingFormat: f.format, contentUrl: `${SITE}${f.url}` })),
+  };
+}

@@ -21,6 +21,7 @@ import JourneySteps from "@/components/JourneySteps";
 import TierQuiz from "@/components/TierQuiz";
 import RoiEstimator from "@/components/RoiEstimator";
 import StatsTicker from "@/components/StatsTicker";
+import HoursCounter from "@/components/HoursCounter";
 import ContactButtons from "@/components/ContactButtons";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { DISPLAY } from "@/lib/pricing";
@@ -323,6 +324,7 @@ export default function Home() {
           <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />
         </div>
+        <HoursCounter />
         <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 16 }}>
           Every finding is verifiable.{" "}
           <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>

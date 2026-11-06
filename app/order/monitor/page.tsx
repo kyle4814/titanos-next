@@ -5,8 +5,8 @@ import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/
 import { DISPLAY } from "@/lib/pricing";
 
 const baseMetadata: Metadata = {
-  title: "Monthly Security Monitor Enquiry | TITANOS",
-  description: "Structured intake for Titanos Continuous Monitor. Monthly external security scan with delta alerts.",
+  title: "Monthly Security Monitor Checkout | TITANOS",
+  description: "Prove your domain and subscribe to Titanos Continuous Monitor. Monthly external security scan with delta alerts.",
   alternates: { canonical: "https://titanos.tech/order/monitor" },
   robots: { index: false, follow: false },
 };
@@ -19,13 +19,13 @@ export default function OrderMonitorPage() {
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
           as="h1"
-          label="What this enquiry actually starts"
+          label="What this checkout actually starts"
           sub={`${DISPLAY.MONITOR_MONTHLY}, or ${DISPLAY.MONITOR_ANNUAL} paid annually. Cancel any time from the billing portal.`}
         >
           A monthly check that tells you what changed, not a one-off scan you forget about.
         </Inscription>
         <SystemLabel style={{ textAlign: "center", marginTop: 18 }}>
-          Subscribe online on the Monitor page (Stripe). Prefer an invoice? Use this enquiry: Kyle confirms scope → invoice → monitoring starts same day
+          Sign in → prove your domain → pay on Stripe → monitoring starts same day
         </SystemLabel>
       </section>
 
