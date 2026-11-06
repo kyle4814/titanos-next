@@ -1,0 +1,208 @@
+{
+ "blobs": {
+  "0001_portal_core.sql": "66bf8e67595610dbdf37be4914e40d93c724e1b0",
+  "0002_counter_buckets.sql": "baddb721423e7a8be51b300d88ef3da4f87f73e1",
+  "0002_portal_billing.sql": "f38ec9db6ca888fc1cd16928c90abddf0224569b",
+  "0003_refund_cases.sql": "2373d3108da6d363629890eb75aacc5b20936368",
+  "0003_agent_door.sql": "1b656da2a7d0f111a8d1e06c9b8135a60e30787c",
+  "0003_enterprise.sql": "a054b8b443129ecf5d059ad9b6a205f1898c447f",
+  "0003_owner_seat.sql": "49e3677888632d04247d57df23c08832501cfc1a",
+  "0004_market.sql": "86b2da9674bfc320845ee10eda5fece6b31557c0",
+  "0004_payouts_lifecycle.sql": "4adba4759c1a20ffe114ac13170ac7b67bda2099",
+  "0005_market_d1.sql": "c726c47e278ea95ad4b0ccb49df600c8585aad83",
+  "0006_audit_anchor.sql": "e66ace6ec77e931719fed4961698d0fd1a8411b0",
+  "0004_store_counters.sql": "36f920923b626f62f569abf97d9e3f588f67f02d",
+  "0005_owner_d1.sql": "6c6a979b6129ba009568b16a9123ccc9ba6e04ef",
+  "0005_enterprise_d1.sql": "9024596e8492a0639b5293ac27f3a8d1bd66d677",
+  "0005_idem_reservations.sql": "3adb6be7b41821af1b130faa71f2d029274e7b83",
+  "0006_webhook_held_facts.sql": "e40bd97e67fc0f9f61b1744fd9d6347d509f5df5",
+  "0004_subscription_plan.sql": "626bca4cd05f704a02324f3bdbd11d058b36bc5d",
+  "0005_subscription_version.sql": "9b094652d4251f8a7a991f0616e329080d39f77b",
+  "0005_key_prefix_index.sql": "d8bd21f2507f445dc6b79302b5e946c9840614e4",
+  "0006_agent_d1.sql": "9c241445a61ba275780c622c8e94007da4a785ff",
+  "0006_owner_state_rev.sql": "27bf514f576c094e18976ec2b8abac207cc9fe37",
+  "0007_dispute_case.sql": "1fc306fd61dceb7a2d559ff46c3da70def532bcd"
+ },
+ "strips": {
+  "0006_webhook_held_facts.sql": "ALTER TABLE subscriptions ADD COLUMN plan_json"
+ },
+ "branches": [
+  "origin/web/f09_site_counter_reader-2026-11-06",
+  "origin/web/f100_c2_cancel_term_unify-2026-11-07",
+  "origin/web/f101_c2_stripe_period_seed-2026-11-07",
+  "origin/web/f102_c4_audit_head_anchor-2026-11-07",
+  "origin/web/f103_c4_anchor_wire-2026-11-07",
+  "origin/web/f104_migration_lint-2026-11-07",
+  "origin/web/f10_c2_drill50-2026-11-06",
+  "origin/web/f13_c2_d1store-2026-11-06",
+  "origin/web/f14_c3_monitor_cron-2026-11-06",
+  "origin/web/f15_c3_d1ownerstore-2026-11-06",
+  "origin/web/f16_c8_entd1-2026-11-06",
+  "origin/web/f171_c2_webhook_d1_methods-2026-11-07",
+  "origin/web/f172_c2_plan_d1_adapter-2026-11-07",
+  "origin/web/f173_c3_undo_d1_rig-2026-11-07",
+  "origin/web/f174_c3_undo_concurrency-2026-11-07",
+  "origin/web/f175_c2_plan_cas-2026-11-07",
+  "origin/web/f176_c7_spendcap_mcp_wire-2026-11-07",
+  "origin/web/f177_c2_stripe_items_period-2026-11-07",
+  "origin/web/f178_c4_migration_pair_discover-2026-11-07",
+  "origin/web/f17_c7_idem_reserve-2026-11-06",
+  "origin/web/f181_c2_import_cycle_break-2026-11-07",
+  "origin/web/f182_c2_post_route_fuzz-2026-11-07",
+  "origin/web/f183_c2_cas_all_paths-2026-11-07",
+  "origin/web/f184_c4_union_ts_compiler-2026-11-07",
+  "origin/web/f185_c3_undo_state_cas-2026-11-07",
+  "origin/web/f186_c2_markpaid_dup_schedule-2026-11-07",
+  "origin/web/f187_c4_dispute_case_d1-2026-11-07",
+  "origin/web/f18_c4_marketd1-2026-11-06",
+  "origin/web/f19_c7_key_spend_cap-2026-11-06",
+  "origin/web/f20_c3_spf_proof-2026-11-06",
+  "origin/web/f21_c4_unpaid_fund-2026-11-06",
+  "origin/web/f22_c9_figure_lint-2026-11-06",
+  "origin/web/f23_c7_keys_page-2026-11-06",
+  "origin/web/f24_c8_partner_xacct-2026-11-06",
+  "origin/web/f25_c8_oidc_rs256-2026-11-06",
+  "origin/web/f27_c7_scope_idem_args-2026-11-06",
+  "origin/web/f28_c4_attribution_washtrade-2026-11-06",
+  "origin/web/f29_c4_alljobs_index-2026-11-06",
+  "origin/web/f30_c8_estate_scan-2026-11-06",
+  "origin/web/f31_c8_payout_card_builder-2026-11-06",
+  "origin/web/f32_c2_refund_card-2026-11-06",
+  "origin/web/f34_c8_estate_cache-2026-11-06",
+  "origin/web/f35_c3_spf_nested_includes-2026-11-06",
+  "origin/web/f36_c2_refund_service_wire-2026-11-06",
+  "origin/web/f38_c3_spf_nested_wire-2026-11-06",
+  "origin/web/f39_c7_mcp_jsonrpc_error-2026-11-06",
+  "origin/web/f40_c8_payout_approve_transition-2026-11-06",
+  "origin/web/f42_c8_payout_resume_sweep-2026-11-06",
+  "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+  "origin/web/f44_c4_seat_entitlement-2026-11-06",
+  "origin/web/f46_c8_payout_retry_executor-2026-11-06",
+  "origin/web/f47_c2_sixteen_flows_matrix-2026-11-06",
+  "origin/web/f48_c7_key_trace_rotation-2026-11-06",
+  "origin/web/f49_c7_ten_agents_harness-2026-11-06",
+  "origin/web/f50_c8_held_payout_routes-2026-11-06",
+  "origin/web/f51_c8_payout_permanent_error-2026-11-06",
+  "origin/web/f52_portal_typecheck_gate-2026-11-06",
+  "origin/web/f53_c2_terms_flow_test-2026-11-06",
+  "origin/web/f54_c8_held_payout_release_refund-2026-11-06",
+  "origin/web/f57_c8_payout_tick-2026-11-06",
+  "origin/web/f58_c7_agent_d1store-2026-11-06",
+  "origin/web/f59_c8_payout_d1_adapter-2026-11-06",
+  "origin/web/f62_c3_twenty_faults_drill-2026-11-06",
+  "origin/web/f63_c4_ten_jobs_drill-2026-11-06",
+  "origin/web/f64_c8_cross_tenant_route_matrix-2026-11-06",
+  "origin/web/f68_c9_disclosure_policy-2026-11-06",
+  "origin/web/f69_c3_report_trace-2026-11-06",
+  "origin/web/f75_c1_model_calls_meter-2026-11-06",
+  "origin/web/f81_c10_soak_portal_run-2026-11-06",
+  "origin/web/f84_c2_account_export_erase-2026-11-06",
+  "origin/web/f86_c9_worker_shared_headers-2026-11-07",
+  "origin/web/f88_c8_share_ledger_invariants-2026-11-07",
+  "origin/web/f90_c7_tool_receipt_coverage-2026-11-07",
+  "origin/web/f91_c4_rank_property_suite-2026-11-07",
+  "origin/web/f92_c2_webhook_order_suite-2026-11-07",
+  "origin/web/f95_c3_undo_property_suite-2026-11-07",
+  "origin/web/f96_c2_plan_change_proration-2026-11-07",
+  "origin/web/f97_c4_job_dispute_warranty-2026-11-07",
+  "origin/web/f98_c7_credit_ledger_invariants-2026-11-07",
+  "origin/web/f99_c4_dispute_wire-2026-11-07"
+ ],
+ "order": [
+  [
+   "0001_portal_core.sql",
+   "0001_portal_core.sql"
+  ],
+  [
+   "0002_counter_buckets.sql",
+   "0002_counter_buckets.sql"
+  ],
+  [
+   "0003_portal_billing.sql",
+   "0002_portal_billing.sql"
+  ],
+  [
+   "0004_agent_door.sql",
+   "0003_agent_door.sql"
+  ],
+  [
+   "0005_enterprise.sql",
+   "0003_enterprise.sql"
+  ],
+  [
+   "0006_owner_seat.sql",
+   "0003_owner_seat.sql"
+  ],
+  [
+   "0007_refund_cases.sql",
+   "0003_refund_cases.sql"
+  ],
+  [
+   "0008_market.sql",
+   "0004_market.sql"
+  ],
+  [
+   "0009_payouts_lifecycle.sql",
+   "0004_payouts_lifecycle.sql"
+  ],
+  [
+   "0010_store_counters.sql",
+   "0004_store_counters.sql"
+  ],
+  [
+   "0011_subscription_plan.sql",
+   "0004_subscription_plan.sql"
+  ],
+  [
+   "0012_enterprise_d1.sql",
+   "0005_enterprise_d1.sql"
+  ],
+  [
+   "0013_idem_reservations.sql",
+   "0005_idem_reservations.sql"
+  ],
+  [
+   "0014_key_prefix_index.sql",
+   "0005_key_prefix_index.sql"
+  ],
+  [
+   "0015_market_d1.sql",
+   "0005_market_d1.sql"
+  ],
+  [
+   "0016_owner_d1.sql",
+   "0005_owner_d1.sql"
+  ],
+  [
+   "0017_subscription_version.sql",
+   "0005_subscription_version.sql"
+  ],
+  [
+   "0018_agent_d1.sql",
+   "0006_agent_d1.sql"
+  ],
+  [
+   "0019_audit_anchor.sql",
+   "0006_audit_anchor.sql"
+  ],
+  [
+   "0020_owner_state_rev.sql",
+   "0006_owner_state_rev.sql"
+  ],
+  [
+   "0021_webhook_held_facts.sql",
+   "0006_webhook_held_facts.sql"
+  ],
+  [
+   "0022_dispute_case.sql",
+   "0007_dispute_case.sql"
+  ]
+ ],
+ "collisions": [
+  2,
+  3,
+  4,
+  5,
+  6
+ ]
+}
