@@ -138,7 +138,14 @@ const REWORK_FACTOR = 0.8;
 const MIN_HOURS_FOR_BUILD = 1.0;
 const PII_RX = /@|https?:\/\/|www\.|\d{6,}|\b\d{2,4}[\s-]\d{3}[\s-]\d{3,4}\b/i;
 
+import { firstUserFinding, lintReport, refusalMessage } from "./claimlint.ts";
+
 export class XrayError extends Error {}
+
+// Keys the Python engine accepts (bin/mf_xray.py KNOWN_KEYS / WF_KEYS); anything else is refused loudly.
+const KNOWN_KEYS = ["schema", "synthetic", "as_of", "business_label", "industry", "size_band", "tools", "appetite", "hourly_rate", "workflows"];
+const WF_INPUT_KEYS = ["name", "category", "n_per_week", "t0_min", "rework_pct", "rework_min", "wait_hours", "handoffs",
+  "systems_retyped", "exception_pct", "steps", "visibility", "certainty"];
 
 export type WorkflowInput = {
   name: string; category: string; n_per_week: number | null; t0_min: number | null; rework_pct?: number;
@@ -317,10 +324,15 @@ function text(v: unknown, name: string, maxlen = 80): string {
   if (typeof v !== "string" || !v.trim() || v.length > maxlen) throw new XrayError(`${name} must be 1 to ${maxlen} characters of text`);
   for (const c of v) if (c.charCodeAt(0) > 126 || c.charCodeAt(0) < 32) throw new XrayError(`${name} must be plain text with no accents or symbols`);
   if (PII_RX.test(v)) throw new XrayError(`${name} looks like contact details or an identifier; describe the task, not a person or company`);
+  const hit = firstUserFinding(v);
+  if (hit) throw new XrayError(refusalMessage(name, hit));
   return v.trim();
 }
 
 function validate(doc: XrayInput) {
+  if (!doc || typeof doc !== "object" || Array.isArray(doc)) throw new XrayError("input must be an object");
+  const extra = Object.keys(doc).filter((k) => !KNOWN_KEYS.includes(k));
+  if (extra.length) throw new XrayError(`unknown keys: ${extra.sort().join(",")}. WOULD-FLIP: send only the documented fields.`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(doc.as_of || "")) throw new XrayError("as_of must be an ISO date YYYY-MM-DD");
   if (!(doc.industry in SECTORS)) throw new XrayError("pick a sector");
   if (!(SIZE_BANDS as readonly string[]).includes(doc.size_band)) throw new XrayError("pick a size band");
@@ -332,6 +344,8 @@ function validate(doc: XrayInput) {
   if (!Array.isArray(wfs) || wfs.length < 1 || wfs.length > 5) throw new XrayError("add 1 to 5 workflows");
   const clean: CleanWf[] = wfs.map((w, idx) => {
     const i = idx + 1;
+    if (!w || typeof w !== "object" || Object.keys(w).some((k) => !WF_INPUT_KEYS.includes(k)))
+      throw new XrayError(`workflow ${i} has unknown keys. WOULD-FLIP: send only the documented fields.`);
     if (!(w.category in CATEGORIES)) throw new XrayError(`workflow ${i}: pick a type of work`);
     const cert = w.certainty ?? "rough_estimate";
     if (!(CERTAINTY as readonly string[]).includes(cert)) throw new XrayError(`workflow ${i}: unknown certainty`);
@@ -426,6 +440,9 @@ export function buildReport(doc: XrayInput): Report {
   rep.synthetic_labels = synthetic
     ? "SYNTHETIC DEMO: fictional business, fictional answers, no real data."
     : "Your answers stayed in your browser. Nothing was sent, saved or scanned.";
+  // Every generated string (all JSON strings and keys, every text line) passes the claim lint; fail closed.
+  const found = lintReport(rep, reportLines(rep));
+  if (found.length) throw new XrayError(refusalMessage("The report text", found[0]));
   return rep;
 }
 
