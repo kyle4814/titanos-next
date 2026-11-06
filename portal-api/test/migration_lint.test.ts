@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, mkdirSync, rmSync, readFileSync, readdirSyn
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 // @ts-ignore plain mjs
-import { lint, checkNames, tsUnion, ROOT } from "../scripts/migration_lint.mjs";
+import { lint, checkNames, tsUnion, discoverUnions, ROOT } from "../scripts/migration_lint.mjs";
 
 const mk = () => { const d = mkdtempSync(join(tmpdir(), "miglint-")); mkdirSync(join(d, "migrations")); mkdirSync(join(d, "src")); return d; };
 const PAIR = [{ name: "job states", ts: { file: "src/t.ts", type: "S" }, sql: { table: "t", column: "status" } }];
@@ -177,4 +177,56 @@ test("MUTATION on the real tree: add a member to JobStatus in a temp copy of src
     writeFileSync(mp, readFileSync(mp, "utf8").replace("'clawback_review'", "'zzz_other'"));
     assert.ok(lint(base).failures.some((m: string) => m.includes("clawback_review") || m.includes("zzz_other")), "changed CHECK must be caught");
   } finally { rmSync(d, { recursive: true, force: true }); }
+});
+
+// ---- f184: union discovery by the TypeScript compiler API --------------------------------------------------------------------
+const SHAPES: Record<string, { src: string; name: string; vals: string[] }> = {
+  multiline_alias: { name: "MlStatus", vals: ["m1", "m2", "m3"], src: `export type MlStatus =\n  | "m1"\n  // a comment between members\n  | "m2"\n  | "m3";\n` },
+  deep_alias_chain: { name: "DeepKind", vals: ["d1", "d2", "d3", "d4"], src: `type A1 = "d1" | "d2";\ntype A2 = A1 | "d3";\ntype A3 = (A2);\nexport type DeepKind = A3 | "d4";\n` },
+  as_const_array: { name: "ASC_STATES", vals: ["c1", "c2", "c3"], src: `export const ASC_STATES = ["c1", "c2", "c3"] as const;\nexport type AscState = typeof ASC_STATES[number];\n` },
+  string_enum: { name: "EnStatus", vals: ["e1", "e2"], src: `export enum EnStatus { One = "e1", Two = 'e2' }\n` },
+  as_const_object: { name: "ObjKind", vals: ["o1", "o2"], src: `export const OBJ = { A: "o1", B: "o2" } as const;\nexport type ObjKind = typeof OBJ[keyof typeof OBJ];\n` },
+  multiline_inline_field: { name: "Rec.status", vals: ["f1", "f2", "f3"], src: `export interface Rec {\n  id: string;\n  status:\n    | "f1"\n    | "f2"\n    | "f3";\n}\n` },
+};
+const shapeTree = (only: string[], mutate?: string) => {
+  const d = mk(); let n = 0;
+  for (const k of only) {
+    const s = SHAPES[k], vals = k === mutate ? [...s.vals.slice(0, -1), "zz_changed"] : s.vals;
+    writeFileSync(join(d, "src", `${k}.ts`), s.src.replace(new RegExp(`"${s.vals.at(-1)}"|'${s.vals.at(-1)}'`), `"${vals.at(-1)}"`));
+    writeFileSync(join(d, "migrations", `${String(++n).padStart(4, "0")}_${k}.sql`), `CREATE TABLE ${k} (id TEXT PRIMARY KEY, v TEXT CHECK (v IN (${s.vals.map((v) => `'${v}'`).join(",")})));\n`);
+  }
+  return d;
+};
+for (const [k, s] of Object.entries(SHAPES)) {
+  test(`f184 shape found by the compiler API and mapped to its CHECK: ${k}`, () => {
+    const d = shapeTree([k]);
+    try {
+      const u = discoverUnions(d).fieldUnions.find((x: any) => x.label === s.name);
+      assert.ok(u, `${s.name} not discovered`);
+      assert.deepEqual([...u.values].sort(), [...s.vals].sort());
+      assert.deepEqual(disc(d).failures, []);
+    } finally { rmSync(d, { recursive: true, force: true }); }
+  });
+  test(`f184 MUTATION: one member changed in the TS side (${k}) -> the gate fails naming it`, () => {
+    const d = shapeTree([k], k);
+    try { assert.ok(disc(d).failures.some((m: string) => m.includes("zz_changed")), disc(d).failures.join("|")); } finally { rmSync(d, { recursive: true, force: true }); }
+  });
+}
+test("f184 traps the regex fell for: string/comment text that looks like a union, a plain non-const array, a local const", () => {
+  const d = mk();
+  writeFileSync(join(d, "src", "t.ts"), 'const note = `type FakeStatus = "x" | "y";`;\n// type CommentKind = "p" | "q";\nexport const PLAIN_STATUSES = ["s1", "s2"];\nfunction f() { const LOCAL_KINDS = ["k1", "k2"] as const; return LOCAL_KINDS; }\n');
+  try {
+    const labels = [...discoverUnions(d).fieldUnions, ...discoverUnions(d).anyUnions].map((x: any) => x.label);
+    assert.ok(!labels.includes("FakeStatus") && !labels.includes("CommentKind") && !labels.includes("PLAIN_STATUSES"), labels.join(","));
+  } finally { rmSync(d, { recursive: true, force: true }); }
+});
+test("f184 alias cycles terminate", () => {
+  const d = mk(); writeFileSync(join(d, "src", "t.ts"), 'type XStatus = YStatus | "a";\ntype YStatus = XStatus | "b";\n');
+  try { assert.ok(discoverUnions(d).anyUnions.some((x: any) => x.label === "XStatus")); } finally { rmSync(d, { recursive: true, force: true }); }
+});
+test("f184 real tree: discovery finds the known unions and adds no unexplained failure", () => {
+  const r = discoverUnions(ROOT);
+  const labels = r.fieldUnions.map((x: any) => x.key);
+  for (const k of ["src/market/store.ts::JobStatus", "src/enterprise/types.ts::PayoutStatus", "src/market/dispute.ts::AuditEntry.kind", "src/market/dispute.ts::DState"]) assert.ok(labels.includes(k), k);
+  assert.deepEqual(lint().failures, []);
 });

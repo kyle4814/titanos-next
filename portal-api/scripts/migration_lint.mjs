@@ -7,6 +7,7 @@ import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
+import { createRequire } from "node:module";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(HERE, "..");
@@ -86,33 +87,92 @@ function walk(dir, out = []) {
   }
   return out;
 }
-const unionOf = (body) => { const v = strLits(body); return v.length >= 2 ? v : null; };
+// f184: union discovery uses the TypeScript compiler API (ts.createSourceFile, syntax only, no type-checker, no tsconfig).
+// Shapes found: type aliases (any depth of alias-to-alias composition, multi-line, parenthesised), `as const` arrays and objects
+// (and `typeof X[number]` / `typeof X[keyof typeof X]` aliases of them), string enums, and inline literal unions on fields.
+const req = createRequire(import.meta.url);
+let _ts;
+function loadTs() {
+  if (_ts) return _ts;
+  const tries = ["typescript", join(HERE, "../../node_modules/typescript"), join(HERE, "../node_modules/typescript")];
+  for (const t of tries) { try { return (_ts = req(t)); } catch { /* next */ } }
+  throw new Error("migration_lint needs the 'typescript' package (devDependency); run npm install at the site root");
+}
+const NAME_RX = /(Status|Kind|State)$/;
+const CONST_NAME_RX = /(status|kind|state)(es|s)?$/i;
+const litText = (n, ts) => (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) ? n.text : undefined;
+const unwrap = (n, ts) => { while (n && (ts.isParenthesizedExpression(n) || ts.isAsExpression(n) || ts.isSatisfiesExpression?.(n) || ts.isTypeAssertionExpression(n) || ts.isParenthesizedTypeNode(n))) n = n.expression ?? n.type; return n; };
+
+const isAsConst = (n) => { const ts = loadTs(); while (ts.isParenthesizedExpression(n)) n = n.expression; return ts.isAsExpression(n) && ts.isTypeReferenceNode(n.type) && n.type.typeName.getText() === "const"; };
 
 export function discoverUnions(srcRoot, srcDir = "src") {
-  const root = join(srcRoot, srcDir), all = [], aliases = new Map();
+  const ts = loadTs(), root = join(srcRoot, srcDir);
+  const decls = new Map();   // name -> [{ rel, kind: "alias"|"const"|"enum", node }]
+  const fields = [];         // { rel, owner, field, node (type node) }
+  const add = (name, d) => (decls.get(name) ?? decls.set(name, []).get(name)).push(d);
   for (const f of walk(root)) {
-    const rel = f.slice(srcRoot.length + 1).split("\\").join("/"), src = readFileSync(f, "utf8");
-    for (const m of src.matchAll(/(?:export\s+)?type\s+(\w+)\s*=\s*([^;]+);/g)) {
-      const body = m[2], idents = (body.replace(/"[^"]*"|'[^']*'/g, "").match(/[A-Za-z_]\w*/g) ?? []);
-      aliases.set(m[1], { body, idents, rel });
-    }
-    for (const m of src.matchAll(/\b([A-Za-z_]\w*)\??\s*:\s*((?:"[^"\\]*"|'[^'\\]*')(?:\s*\|\s*(?:"[^"\\]*"|'[^'\\]*'))+)/g)) {
-      if (!FIELD_RX.test(m[1])) continue;
-      const before = src.slice(0, m.index), ifc = [...before.matchAll(/(?:interface|type)\s+(\w+)[^{=]*[{=]/g)].at(-1)?.[1] ?? "?";
-      all.push({ key: `${rel}::${ifc}.${m[1]}`, rel, label: `${ifc}.${m[1]}`, field: m[1], values: unionOf(m[2]) });
-    }
+    const rel = f.slice(srcRoot.length + 1).split("\\").join("/");
+    const sf = ts.createSourceFile(f, readFileSync(f, "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+    const visit = (n) => {
+      if (ts.isTypeAliasDeclaration(n)) add(n.name.text, { rel, kind: "alias", node: n.type });
+      else if (ts.isEnumDeclaration(n)) add(n.name.text, { rel, kind: "enum", node: n });
+      else if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer && isAsConst(n.initializer)) add(n.name.text, { rel, kind: "const", node: unwrap(n.initializer, ts) });   // only `as const` literals: a plain string[] is data, not a closed set
+      else if ((ts.isPropertySignature(n) || ts.isPropertyDeclaration(n)) && n.type && n.name && (ts.isIdentifier(n.name) || ts.isStringLiteral(n.name))) {
+        let o = n.parent; while (o && !((ts.isInterfaceDeclaration(o) || ts.isTypeAliasDeclaration(o) || ts.isClassDeclaration(o)) && o.name)) o = o.parent;
+        fields.push({ rel, owner: o?.name.text ?? "?", field: n.name.text, node: n.type });
+      }
+      ts.forEachChild(n, visit);
+    };
+    visit(sf);
   }
-  const anyUnions = [];   // every literal alias, any name: lets a CHECK be matched by e.g. `type Role` (reverse direction only)
-  for (const [name, a] of aliases) {
-    let values = strLits(a.body);
-    for (const id of a.idents) { const r = aliases.get(id); if (r) values = values.concat(strLits(r.body)); }
-    values = [...new Set(values)];
+  // values of a type node / declaration; seen guards alias cycles. Non-literal members (string, undefined, null) are ignored.
+  const lookup = (name, rel) => { const l = decls.get(name); return l && (l.find((d) => d.rel === rel) ?? l[0]); };
+  const valuesOfDecl = (d, seen) => {
+    if (d.kind === "enum") return d.node.members.map((m) => m.initializer && litText(m.initializer, ts)).filter((v) => v !== undefined);
+    if (d.kind === "const") return ts.isArrayLiteralExpression(d.node) ? constValues(d.node, "values") : [];   // an as-const OBJECT is a union only when a type alias indexes it (below)
+    return valuesOfType(d.node, d.rel, seen);
+  };
+  const constValues = (init, mode) => {
+    if (!init) return [];
+    if (ts.isArrayLiteralExpression(init)) return init.elements.map((e) => litText(unwrap(e, ts), ts)).filter((v) => v !== undefined);
+    if (ts.isObjectLiteralExpression(init)) return init.properties.flatMap((p) => {
+      if (mode === "keys") return p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? [p.name.text] : [];
+      const v = ts.isPropertyAssignment(p) ? litText(unwrap(p.initializer, ts), ts) : undefined; return v === undefined ? [] : [v];
+    });
+    return [];
+  };
+  const valuesOfType = (t, rel, seen = new Set()) => {
+    t = unwrap(t, ts);
+    if (!t) return [];
+    if (ts.isUnionTypeNode(t)) return t.types.flatMap((x) => valuesOfType(x, rel, seen));
+    if (ts.isLiteralTypeNode(t)) { const v = litText(t.literal, ts); return v === undefined ? [] : [v]; }
+    if (ts.isTypeReferenceNode(t) && ts.isIdentifier(t.typeName)) {
+      const name = t.typeName.text, d = lookup(name, rel);
+      if (!d || seen.has(name)) return [];
+      return valuesOfDecl(d, new Set(seen).add(name));
+    }
+    if (ts.isIndexedAccessTypeNode(t) && ts.isTypeQueryNode(t.objectType) && ts.isIdentifier(t.objectType.exprName)) {   // typeof X[number] / typeof X[keyof typeof X]
+      const d = lookup(t.objectType.exprName.text, rel);
+      return d?.kind === "const" ? constValues(d.node, "values") : [];
+    }
+    return [];
+  };
+  const uniq = (v) => [...new Set(v)];
+  const fieldUnions = [], anyUnions = [];
+  for (const [name, list] of decls) for (const d of list) {
+    const values = uniq(valuesOfDecl(d, new Set([name])));
     if (values.length < 2) continue;
-    const u = { key: `${a.rel}::${name}`, rel: a.rel, label: name, field: name, values };
+    const u = { key: `${d.rel}::${name}`, rel: d.rel, label: name, field: name, values };
     anyUnions.push(u);
-    if (/(Status|Kind|State)$/.test(name) || name === "Kind") all.push(u);
+    if (d.kind === "const" ? CONST_NAME_RX.test(name) : (NAME_RX.test(name) || name === "Kind")) fieldUnions.push(u);
   }
-  return { fieldUnions: all, anyUnions, aliasNames: new Set(aliases.keys()) };
+  for (const f of fields) {
+    // only INLINE literal unions on a field; a field typed by a named alias is covered by that alias.
+    if (!FIELD_RX.test(f.field) || ts.isTypeReferenceNode(unwrap(f.node, ts))) continue;
+    const values = uniq(valuesOfType(f.node, f.rel));
+    if (values.length >= 2) fieldUnions.push({ key: `${f.rel}::${f.owner}.${f.field}`, rel: f.rel, label: `${f.owner}.${f.field}`, field: f.field, values });
+  }
+  return { fieldUnions, anyUnions, aliasNames: new Set(decls.keys()) };
 }
 
 // every CHECK (col IN (...)) in every table of the final schema.
