@@ -35,5 +35,5 @@ test("routing: POST /health is 405, unknown path is 404 JSON", async () => {
   // C2: with no store wired, non-health routes fail closed (503) instead of 404 (see portal.test.ts "no deps wired").
   const r = await call("/nope", {});
   assert.equal(r.status, 503);
-  assert.deepEqual(await r.json(), { error: "store_unavailable" });
+  assert.deepEqual(await r.json(), { error: "deps_unavailable", reason: "missing_binding:DB" });   // f208: the default entry names the missing binding
 });
