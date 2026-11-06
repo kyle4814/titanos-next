@@ -99,10 +99,14 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (raw.length > 1_000_000) throw new HttpError(413, "body_too_large");
     if (!(await verifyStripeSignature(raw, req.headers.get("stripe-signature"), d.webhookSecret, Math.floor(d.now() / 1000)))) throw new HttpError(400, "bad_signature");
     let ev; try { ev = JSON.parse(raw); } catch { throw new HttpError(400, "invalid_json"); }
-    const mj = ev?.type === "checkout.session.completed" ? ev?.data?.object?.metadata?.market_job_id : undefined;
+    const isCheckoutDone = ev?.type === "checkout.session.completed" || ev?.type === "checkout.session.async_payment_succeeded";
+    const mj = isCheckoutDone ? ev?.data?.object?.metadata?.market_job_id : undefined;
     if (typeof mj === "string") {   // a marketplace job funding, not a C2 purchase
-      if (!(await d.store.claimEvent(String(ev.id)))) return json({ result: "duplicate" });
       const o = ev.data.object;
+      // R-C4: money must exist before a job opens. An unpaid session (delayed method) is ignored WITHOUT claiming the event id,
+      // so the later async_payment_succeeded (a different event id) funds it with the same amount and checkout checks.
+      if (o.payment_status !== "paid") return json({ result: "ignored" });
+      if (!(await d.store.claimEvent(String(ev.id)))) return json({ result: "duplicate" });
       return json({ result: await mkt.confirmFunded(d, { jobId: mj, checkoutId: String(o.id), paymentIntent: o.payment_intent ? String(o.payment_intent) : undefined, amountTotal: typeof o.amount_total === "number" ? o.amount_total : undefined }) });
     }
     const credit = await handleCreditEvent(d, ev);

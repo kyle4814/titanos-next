@@ -99,9 +99,11 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
 
 // Stripe webhook. Signature is checked by the caller; this handles the verified event, once per event id.
 export async function handleStripeEvent(d: Deps, ev: { id: string; type: string; data: { object: Record<string, any> } }): Promise<"handled" | "duplicate" | "ignored"> {
-  if (!(await d.store.claimEvent(ev.id))) return "duplicate";
   const o = ev.data.object;
-  if (ev.type === "checkout.session.completed") {
+  const checkoutDone = ev.type === "checkout.session.completed" || ev.type === "checkout.session.async_payment_succeeded";
+  if (checkoutDone && o.payment_status === "unpaid") return "ignored";   // F-C2: an unpaid event must not burn its id; the async success arrives under another id
+  if (!(await d.store.claimEvent(ev.id))) return "duplicate";
+  if (checkoutDone) {
     const pur = await d.store.purchaseByCheckout(String(o.id));
     if (!pur || o.payment_status === "unpaid") return "ignored";
     const now = d.now();

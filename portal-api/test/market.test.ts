@@ -257,3 +257,56 @@ test("rank unit: a paid job with no proof object scores nothing, and a rating-sh
   const withProof = { ...base, proof: { scanId: "s", at: 1, baseline: "FAIL", now: "PASS", detail: "" }, stars: 5, review: "great" };
   assert.equal(rankFor("p", [withProof]).points, 3); assert.equal(rankFor("p", [{ ...withProof, stars: 1, review: "awful" }]).points, 3);
 });
+
+// ---------- R-C4 (wA acceptance): money must exist before a job opens ----------
+const mevent = (r: ReturnType<typeof rig>, id: string, status: string | undefined, o: { amount?: number; type?: string; evId?: string } = {}) => {
+  return (async () => {
+    const job = (await r.store.getJob(id))!;
+    return r.h.webhook(o.type ?? "checkout.session.completed", { id: job.checkoutId, ...(status ? { payment_status: status } : {}), payment_intent: `pi_${id}`, amount_total: o.amount ?? job.priceCents, metadata: { market_job_id: id } }, { id: o.evId });
+  })();
+};
+test("R-C4: an unpaid checkout.session.completed funds nothing and does not burn the event id", async () => {
+  const r = rig(); const o = await r.owner("o@u.com.au", "u.com.au"); const p = await r.pro("p@u.com");
+  const id = (await r.hire(o, "SPF", false)).job.id;
+  for (const st of ["unpaid", undefined, "no_payment_required", "PAID"]) assert.equal((await r.h.j(await mevent(r, id, st as string | undefined))).result, "ignored", `status ${st}`);
+  assert.equal((await r.store.getJob(id))!.status, "awaiting_funds");
+  assert.equal((await r.h.j(await r.claim(p.session, id))).error !== undefined, true, "pro cannot claim an unfunded job");
+  assert.equal(r.payments.count("claim_fee"), 0);
+  // the same event id, replayed later as paid (Stripe would not, but a burned id must not matter): still funds, id was never claimed
+  assert.equal((await r.h.j(await mevent(r, id, "unpaid", { evId: "evt_delayed" }))).result, "ignored");
+  assert.equal((await r.h.j(await mevent(r, id, "paid", { evId: "evt_delayed" }))).result, "funded");
+  assert.equal((await r.store.getJob(id))!.status, "open");
+});
+test("R-C4: async_payment_succeeded funds the job with the same signature, amount and checkout checks", async () => {
+  const r = rig(); const o = await r.owner("o@a.com.au", "a.com.au");
+  const id = (await r.hire(o, "SPF", false)).job.id; const T = "checkout.session.async_payment_succeeded";
+  assert.equal((await r.h.j(await mevent(r, id, "unpaid"))).result, "ignored");
+  const job = (await r.store.getJob(id))!;
+  const forged = await r.h.webhook(T, { id: job.checkoutId, payment_status: "paid", amount_total: job.priceCents, metadata: { market_job_id: id } }, { secret: "wrong" }); assert.equal(forged.status, 400);
+  assert.equal((await r.h.j(await mevent(r, id, "paid", { type: T, amount: 1 }))).result, "ignored", "wrong amount");
+  assert.equal((await r.h.j(await r.h.webhook(T, { id: "cs_other", payment_status: "paid", amount_total: job.priceCents, metadata: { market_job_id: id } }))).result, "ignored", "wrong checkout");
+  assert.equal((await r.h.j(await mevent(r, id, "unpaid", { type: T }))).result, "ignored", "async event that is not paid");
+  assert.equal((await r.store.getJob(id))!.status, "awaiting_funds");
+  assert.equal((await r.h.j(await mevent(r, id, "paid", { type: T, evId: "evt_async" }))).result, "funded");
+  assert.equal((await r.h.j(await mevent(r, id, "paid", { type: T, evId: "evt_async" }))).result, "duplicate");
+  assert.equal((await r.h.j(await mevent(r, id, "paid", { type: T }))).result, "ignored", "already open");
+  const j = (await r.store.getJob(id))!; assert.equal(j.status, "open"); assert.equal(j.paymentIntent, `pi_${id}`);
+});
+test("R-C4 mutation check: with the paid guard removed from the webhook route these regressions go red", async () => {
+  const { readFileSync, writeFileSync, rmSync } = await import("node:fs");
+  const src = readFileSync(new URL("../src/index.ts", import.meta.url), "utf8");
+  const guard = 'if (o.payment_status !== "paid") return json({ result: "ignored" });';
+  assert.ok(src.includes(guard), "guard line present in src/index.ts");
+  const mutUrl = new URL("../src/__mut_index.ts", import.meta.url);
+  try {
+    writeFileSync(mutUrl, src.replace(guard, ""));
+    const mut = await import(mutUrl.href);
+    const r = rig(); const o = await r.owner("o@m.com.au", "m.com.au");
+    const id = (await r.hire(o, "SPF", false)).job.id; const job = (await r.store.getJob(id))!;
+    const { signStripePayload } = await import("../src/stripe.ts"); const { SECRET } = await import("./harness.ts");
+    const payload = JSON.stringify({ id: "evt_mut", type: "checkout.session.completed", data: { object: { id: job.checkoutId, payment_status: "unpaid", amount_total: job.priceCents, metadata: { market_job_id: id } } } });
+    const sig = await signStripePayload(payload, SECRET, Math.floor(r.h.clock.t / 1000));
+    await mut.handle(new Request("https://api.test/stripe/webhook", { method: "POST", headers: { "stripe-signature": sig }, body: payload }), {}, r.h.deps);
+    assert.equal((await r.store.getJob(id))!.status, "open", "the mutant funds an unpaid job, so the real guard is what the tests above protect");
+  } finally { rmSync(mutUrl, { force: true }); }
+});
