@@ -1,12 +1,12 @@
 // C2 plan change (f96): upgrade, downgrade and cancel across the three AI retainer tiers, as a PURE module.
 // No I/O, no Stripe, no clock of its own: the caller passes `at` (ms). All money is integer AUD cents.
-// Rules mirror the terms page and NUM1: 92-day minimum term, no refund of a paid period, no GST line
+// Rules mirror the terms page and NUM1: 3-month minimum term (calendar months, the public promise; unified with live cancel in f100), no refund of a paid period, no GST line
 // (the supplier is not registered for GST, see service.ts invoice text), so nothing here models GST.
 import { PRODUCTS } from "./catalogue.ts";
 
 export const TIERS = ["ai_growth", "ai_ops", "ai_embedded"] as const;
 export type Tier = (typeof TIERS)[number];
-export const MIN_TERM_DAYS = 92;
+export const MIN_TERM_MONTHS = 3;
 const DAY = 86_400_000;
 export const priceOf = (t: Tier): number => PRODUCTS[t].amountCents;
 export const isTier = (x: unknown): x is Tier => typeof x === "string" && (TIERS as readonly string[]).includes(x);
@@ -38,7 +38,8 @@ export function periodStart(startedAt: number, k: number): number {
   const s = new Date(startedAt), m = s.getUTCMonth() + k, y = s.getUTCFullYear() + Math.floor(m / 12), mm = ((m % 12) + 12) % 12;
   return Date.UTC(y, mm, Math.min(s.getUTCDate(), dim(y, mm)), s.getUTCHours(), s.getUTCMinutes(), s.getUTCSeconds(), s.getUTCMilliseconds());
 }
-export const termEnd = (startedAt: number) => startedAt + MIN_TERM_DAYS * DAY;
+// The ONE minimum-term rule: three calendar months from the start (day clamped), i.e. 89 to 92 days. Never stricter than the public "3-month minimum".
+export const termEnd = (startedAt: number) => periodStart(startedAt, MIN_TERM_MONTHS);
 
 export function initPlan(startedAt: number, tier: Tier): PlanState {
   return { startedAt, tier, billedPeriods: 1, lastAt: startedAt, ledger: [{ kind: "period", cents: priceOf(tier), at: startedAt, tier }], outcomes: {} };
@@ -60,7 +61,7 @@ export function advance(s: PlanState, at: number): PlanState {
   return n;
 }
 
-// First period boundary that is >= the end of the minimum term and strictly after `at`.
+// First period boundary that is >= the end of the minimum term (termEnd) and strictly after `at`.
 export function earliestEffective(s: PlanState, at: number): number {
   const floor = termEnd(s.startedAt);
   let k = s.billedPeriods;
