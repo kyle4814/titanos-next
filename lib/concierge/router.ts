@@ -2,6 +2,7 @@
 import type { Reply, Seat, Shelf, Tap, ConfigStub } from "./types.ts";
 import { tokens, normalise, findDomain } from "./text.ts";
 import { junkCheck } from "./guard.ts";
+import { OFFTOPIC_CUES } from "./offtopic.ts";
 
 export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: unmatched
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
@@ -102,6 +103,9 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
     if (scan) return { kind: "match", shelf: scan.shelf, score: 99, margin: 1, answer: scan.shelf.answer, slots: { domain }, alternatives: [] };
   }
   if (!top || top.s < MIN_SCORE || (!top.hit && (top.s < CONF_FLOOR || unknownShare(index, q) >= MAX_UNKNOWN))) return unmatched(raw, seat, "no_match");
+  // F-66 off-topic guard (deterministic, 0 model calls): an ask that names something other than this business (offtopic.ts: other companies, everyday life; never a word any shelf uses)
+  // stays unmatched unless a keyword PHRASE of the top shelf is in it. One generic keyword ("price", "cancel", "contact", "status") is not enough to claim the ask.
+  if (!top.phrase && q.some((t) => OFFTOPIC_CUES.has(t))) return unmatched(raw, seat, "no_match");
   const second = ranked[1];
   const margin = second && top.s > 0 ? (top.s - second.s) / top.s : 1;
   if (second && margin < ASK_MARGIN && second.s >= MIN_SCORE) {

@@ -1,0 +1,73 @@
+guest	none	what is the weather like in brisbane tomorrow
+guest	none	ideas for baking a chocolate cake
+guest	none	how do i cancel my netflix subscription
+guest	none	what is the price of bitcoin today
+guest	none	what was the final score in the footy last weekend
+guest	none	how much does a new toyota corolla cost
+guest	none	what time does woolworths close
+guest	none	can you contact my landlord for me
+guest	none	is the telstra network down in my suburb
+guest	none	help me fix my leaking kitchen tap
+guest	none	how do i invest in the share market
+guest	none	teach me how to play the ukulele
+guest	none	tell me a joke about plumbers
+guest	none	translate good morning into french
+guest	none	how do i report my taxes to the ato
+guest	none	what is the tallest mountain in nepal
+owner	none	how long should i boil an egg
+owner	none	my car engine is making a strange noise
+owner	none	how do i reset my xbox password
+owner	none	what are the opening hours of the post office
+owner	none	check the status of my australia post parcel
+owner	none	how much is a flight to bali
+owner	none	which phone plan has the cheapest data
+owner	none	where can i get my teeth cleaned near brisbane
+owner	none	my bike wheel keeps going flat again
+owner	none	download the latest windows update
+pro	none	what is the best pizza near me
+pro	none	compose a short rhyme about the seasons
+pro	none	what does google charge for advertising
+pro	none	how do i monitor my heart rate on a smartwatch
+pro	none	cancel my gym membership
+pro	none	how many calories in a banana
+agent	none	who is the prime minister of canada
+agent	none	how do i scan a document with my phone
+agent	none	what is the status of my uber order
+agent	none	tell me about the history of rome
+enterprise	none	how much does microsoft 365 cost per user
+enterprise	none	can salesforce send me a contract
+enterprise	none	compare aws and azure pricing for storage
+enterprise	none	how do i contact the fair work commission
+partner	none	what is a good commission rate for real estate agents
+partner	none	how do i earn money playing online games
+partner	none	recommend a movie for friday night
+partner	none	what is the exchange rate for the us dollar
+partner	none	can i claim a refund off jetstar for a cancelled trip
+guest	none	check
+owner	none	help me with my garden
+pro	none	can you do my homework
+agent	none	i feel sad today
+enterprise	none	play some music
+guest	portal:pricing	pricing
+guest	portal:contact	contact
+guest	portal:pricing	how much will it cost me
+guest	portal:scan	check my domain
+guest	portal:contact	talk to a person
+owner	portal:reports	reports
+owner	portal:billing-invoices	invoice
+owner	portal:billing-cancel	cancel my plan
+owner	portal:get-fixed	fix my problems
+pro	portal:pro-payouts	payouts
+pro	portal:pro-payouts	my commission
+pro	portal:pro-rank	leaderboard
+agent	portal:agent-keys	api key
+agent	portal:partners	referral link
+enterprise	portal:savings-calc	savings calculator
+pro	portal:pro-rank	how do i rank higher
+partner	portal:partners	become a partner
+guest	portal:status	is the site down
+guest	portal:data-export	delete my data
+owner	portal:monitor	monitor my domain
+pro	portal:pro-payouts	subbie payments
+agent	portal:agent-keys	api key for my android app
+guest	portal:scan	email spoofing check for facebook
