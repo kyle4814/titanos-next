@@ -242,8 +242,8 @@ for (const [name, mk] of ADAPTERS) describe(`Store contract: ${name}`, () => {
 
 // ---- D1-only: the shape of the SQL itself ----
 describe("D1Store SQL shape", () => {
-  test("the migrations FakeD1 applies on the merged line (f212): the exact file list, in filename order", () => {
-    assert.deepEqual(MIGRATIONS, ["0001_portal_core.sql", "0002_counter_buckets.sql", "0002_portal_billing.sql", "0003_agent_door.sql", "0003_enterprise.sql", "0003_owner_seat.sql", "0003_refund_cases.sql", "0004_market.sql", "0004_store_counters.sql", "0004_subscription_plan.sql", "0005_idem_reservations.sql", "0005_invoice_d1.sql", "0005_owner_d1.sql", "0006_webhook_held_facts.sql", "0014_key_prefix_index.sql"]);
+  test("the migrations FakeD1 applies on the merged line (f212 + f208 throttle 0008): the exact file list, in filename order", () => {
+    assert.deepEqual(MIGRATIONS, ["0001_portal_core.sql", "0002_counter_buckets.sql", "0002_portal_billing.sql", "0003_agent_door.sql", "0003_enterprise.sql", "0003_owner_seat.sql", "0003_refund_cases.sql", "0004_market.sql", "0004_store_counters.sql", "0004_subscription_plan.sql", "0005_idem_reservations.sql", "0005_invoice_d1.sql", "0005_owner_d1.sql", "0006_webhook_held_facts.sql", "0008_throttle_state.sql", "0014_key_prefix_index.sql"]);
   });
 
   test("the debit is ONE statement: a single conditional INSERT...SELECT, no preceding SELECT, one write per call", async () => {
