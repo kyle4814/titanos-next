@@ -70,10 +70,6 @@
    "reason": "Request discriminator for the plan-change engine input, never persisted."
   },
   {
-   "key": "src/plan_change.ts::Request.kind",
-   "reason": "Request discriminator for the plan-change engine input, never persisted."
-  },
-  {
    "key": "src/stripe.ts::SessionInfo.status",
    "reason": "Provider (Stripe) response field mirrored in the BillingProvider interface, not our column."
   },
