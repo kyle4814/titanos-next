@@ -37,6 +37,7 @@ export default function LearningLoopPage() {
       <LoopOrbit />
       <StepCards label="The seven steps" span={4} steps={STEPS.map(([a, b], i) => ({ title: `${i + 1}. ${a}`, body: b }))} />
       <NextStep text="The same loop can run on your own repeat work." href="/ai-delivery" label="See how it applies to you" />
+      <NextStep text="Find where your own week is going, free, in your browser." href="/x-ray" label="Try the free X-Ray" />
     </>
   );
 }

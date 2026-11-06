@@ -1,0 +1,10 @@
+{"synthetic": true, "as_of": "2026-11-06", "business_label": "Fictional Bolt and Bracket Supply", "industry": "wholesale_distribution",
+ "size_band": "20-99", "tools": ["erp", "spreadsheet", "email"], "appetite": "quick_fix", "hourly_rate": 48,
+ "workflows": [
+  {"name": "Supplier purchase orders", "category": "stock_ordering", "n_per_week": 45, "t0_min": 14, "rework_pct": 8, "rework_min": 20,
+   "wait_hours": 12, "handoffs": 2, "systems_retyped": 2, "exception_pct": 12, "steps": 8, "visibility": "patchy", "certainty": "measured_recently"},
+  {"name": "Copying web orders into the ERP", "category": "data_transfer", "n_per_week": 260, "t0_min": 4, "rework_pct": 6, "rework_min": 10,
+   "wait_hours": 3, "handoffs": 1, "systems_retyped": 1, "exception_pct": 5, "steps": 5, "visibility": "clear", "certainty": "measured_recently"},
+  {"name": "Delivery scheduling", "category": "scheduling", "n_per_week": 6, "t0_min": 8, "rework_pct": 2, "rework_min": 5,
+   "wait_hours": 1, "handoffs": 1, "systems_retyped": 0, "exception_pct": 3, "steps": 3, "visibility": "clear", "certainty": "rough_estimate"}
+ ]}

@@ -1,0 +1,559 @@
+{
+ "as_of": "2026-11-06",
+ "banner": "ESTIMATE, not measured. SYNTHETIC DEMO: every figure comes from fictional answers and labelled assumptions.",
+ "business_label": "Fictional Ledger and Co (SYNTHETIC)",
+ "context": {
+  "appetite": "automation",
+  "industry": "Professional services",
+  "size_band": "20-99",
+  "tools": [
+   "accounting",
+   "crm",
+   "email",
+   "spreadsheet"
+  ]
+ },
+ "executive_summary": "HYPOTHESIS from your own answers: the largest pressure in Month end reporting packs is REPEATED WORK, because the same steps are done by hand every time. Base case: about 6 hours a week of capacity could be released IF the self-reported numbers and the labelled assumptions hold. Low to high: 1.5 to 11 hours.",
+ "level": 0,
+ "limitations": [
+  "This is a questionnaire result, not a measurement of your systems. Nothing was connected or scanned.",
+  "Free fixes and doing nothing are valid outcomes and are shown with the same weight as any paid route.",
+  "Existing-software tips are UNVERIFIED until a person checks the vendor and the version.",
+  "No individual staff member is assessed. The seven dimensions describe the work, not the people."
+ ],
+ "measurement_first": [
+  {
+   "do": "Count how many times it happens and time five runs with a watch. That one exercise is worth more than any estimate here.",
+   "workflow": "Approval of tax lodgements"
+  }
+ ],
+ "method": {
+  "assumed": {
+   "adoption": {
+    "base": 0.7,
+    "high": 0.85,
+    "low": 0.5
+   },
+   "overhead_min_per_week": {
+    "base": 45.0,
+    "high": 20.0,
+    "low": 90.0
+   },
+   "rework_reduction_factor": 0.8,
+   "time_reduction_by_category": {
+    "approvals": [
+     0.1,
+     0.25,
+     0.4
+    ],
+    "data_transfer": [
+     0.3,
+     0.55,
+     0.75
+    ],
+    "enquiry_triage": [
+     0.15,
+     0.3,
+     0.45
+    ],
+    "invoicing_billing": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "job_admin": [
+     0.2,
+     0.4,
+     0.6
+    ],
+    "onboarding": [
+     0.2,
+     0.4,
+     0.55
+    ],
+    "quoting": [
+     0.2,
+     0.35,
+     0.5
+    ],
+    "reporting": [
+     0.3,
+     0.5,
+     0.7
+    ],
+    "scheduling": [
+     0.25,
+     0.45,
+     0.6
+    ],
+    "stock_ordering": [
+     0.2,
+     0.4,
+     0.6
+    ]
+   }
+  },
+  "formula": "hours = max(0, (N * ((T0+E0) - (T1+E1)) * A - O) / 60)",
+  "statements": [
+   "Every input is SELF_REPORTED. Every reduction, adoption and overhead figure is ASSUMED.",
+   "Low, base and high are scenario bands, not statistical confidence intervals.",
+   "Waiting time is elapsed time. It is shown beside the hours and never added to them.",
+   "Capacity freed is not cash saved. Payroll savings need proof that actual costs change.",
+   "No implementation cost is known yet, so no return on investment is computed.",
+   "Measurement maturity rung for this report: SELF_REPORTED (next rung: INSTRUMENTED BASELINE)."
+  ],
+  "worked_example_fictional": "200 tasks a week, 12 min before, 7 min after, adoption 0.80, overhead 100 min: (200*5*0.8-100)/60 = 11.67 hours of capacity a week"
+ },
+ "monday_plan": [
+  {
+   "action": "Agree the 5 numbers that matter and drop the rest of the report",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Month end reporting packs"
+  },
+  {
+   "action": "Write 5 standard replies for the questions you answer most",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "Client document chasing"
+  },
+  {
+   "action": "Turn onboarding into one checklist with an owner for each line",
+   "owner": "the person who runs it today",
+   "success_metric": "hands-on minutes per run next week, from the same tally",
+   "time_needed_min": 30,
+   "workflow": "New client onboarding"
+  }
+ ],
+ "ranking": [
+  "W2",
+  "W1",
+  "W3",
+  "W4"
+ ],
+ "schema": "mf.xray.v1",
+ "synthetic": true,
+ "synthetic_labels": "SYNTHETIC DEMO: fictional business, fictional answers, no real data.",
+ "totals": {
+  "base": 10.65,
+  "high": 21.48,
+  "low": 1.61
+ },
+ "totals_note": "Sum of the separate workflows. Overlap between workflows is possible and not subtracted.",
+ "workflows": [
+  {
+   "base_hours": 6.02,
+   "category": "reporting",
+   "category_label": "Reporting and dashboards",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your accounting or CRM tool already has a saved report you can schedule. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Agree the 5 numbers that matter and drop the rest of the report",
+     "Build the report once as a template and only refresh the data",
+     "Set a fixed time each week to produce it, not on request"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that assembles the weekly numbers from named sources into a draft report. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "2 other place(s) the same detail is typed",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "6% of jobs are odd cases",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "8 elapsed hours of waiting across 2 handoffs (not staff time)",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "10 steps from start to finish",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "18.8 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "10% of jobs need rework",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is patchy",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 75 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of Month end reporting packs and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in Month end reporting packs is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W2",
+   "inputs": {
+    "certainty": "rough_estimate",
+    "exception_pct": 6,
+    "handoffs": 2,
+    "n_per_week": 15,
+    "rework_min": 30,
+    "rework_pct": 10,
+    "steps": 10,
+    "systems_retyped": 2,
+    "t0_min": 75,
+    "visibility": "patchy",
+    "wait_hours": 8
+   },
+   "name": "Month end reporting packs",
+   "queue_hours_elapsed": 8,
+   "risk": {
+    "data_sensitivity": "LOW",
+    "note": "Low-sensitivity data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 3.0,
+     "e1_min": 2.28,
+     "hours": 1.4,
+     "hours_display": 1.5,
+     "hours_signed": 1.4,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.3,
+     "scenario": "low",
+     "t0_min": 75,
+     "t1_min": 52.5
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 3.0,
+     "e1_min": 1.8,
+     "hours": 6.02,
+     "hours_display": 6.0,
+     "hours_signed": 6.02,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.5,
+     "scenario": "base",
+     "t0_min": 75,
+     "t1_min": 37.5
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 3.0,
+     "e1_min": 1.32,
+     "hours": 11.18,
+     "hours_display": 11.0,
+     "hours_signed": 11.18,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.7,
+     "scenario": "high",
+     "t0_min": 75,
+     "t1_min": 22.5
+    }
+   ],
+   "sensitivity": "LOW",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 4.04,
+   "category": "enquiry_triage",
+   "category_label": "Customer enquiries and triage",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your email or CRM tool already has saved replies, labels and shared inbox rules. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Write 5 standard replies for the questions you answer most",
+     "Use one shared inbox with an owner for each day",
+     "Add a short form that collects the details you always have to ask for"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that sorts incoming enquiries and drafts replies for a person to approve. Only after the free fix and a measured week."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "1 other place(s) the same detail is typed",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "22% of jobs are odd cases",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "96 elapsed hours of waiting across 4 handoffs (not staff time)",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "12 steps from start to finish",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "18.0 hands-on hours per week",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "25% of jobs need rework",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is blind",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": false,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 9 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+    "protocol": "For 5 working days, tally each run of Client document chasing and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "a one-week tally shows fewer runs or shorter hands-on time than reported",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in Client document chasing is REPEATED WORK, because the same steps are done by hand every time.",
+   "id": "W1",
+   "inputs": {
+    "certainty": "measured_recently",
+    "exception_pct": 22,
+    "handoffs": 4,
+    "n_per_week": 120,
+    "rework_min": 12,
+    "rework_pct": 25,
+    "steps": 12,
+    "systems_retyped": 1,
+    "t0_min": 9,
+    "visibility": "blind",
+    "wait_hours": 96
+   },
+   "name": "Client document chasing",
+   "queue_hours_elapsed": 96,
+   "risk": {
+    "data_sensitivity": "MED",
+    "note": "Business data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 3.0,
+     "e1_min": 2.64,
+     "hours": 0.21,
+     "hours_display": 0.0,
+     "hours_signed": 0.21,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.15,
+     "scenario": "low",
+     "t0_min": 9,
+     "t1_min": 7.65
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 3.0,
+     "e1_min": 2.28,
+     "hours": 4.04,
+     "hours_display": 4.0,
+     "hours_signed": 4.04,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.3,
+     "scenario": "base",
+     "t0_min": 9,
+     "t1_min": 6.3
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 3.0,
+     "e1_min": 1.92,
+     "hours": 8.39,
+     "hours_display": 8.5,
+     "hours_signed": 8.39,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.45,
+     "scenario": "high",
+     "t0_min": 9,
+     "t1_min": 4.95
+    }
+   ],
+   "sensitivity": "MED",
+   "status": "SCORED",
+   "top_dimension": "repeated_work"
+  },
+  {
+   "base_hours": 0.59,
+   "category": "onboarding",
+   "category_label": "New customer or staff onboarding",
+   "classes": {
+    "EXISTING_SOFTWARE": "Check whether your CRM or project tool already has checklist templates and forms. UNVERIFIED: vendor and version not checked.",
+    "FREE_DIY": [
+     "Turn onboarding into one checklist with an owner for each line",
+     "Send one welcome pack instead of several messages",
+     "Collect the details once, in one form"
+    ],
+    "OPTIONAL_TITANOS": "A bounded proof that runs the onboarding checklist and drafts the welcome messages. Not worth it at these numbers: the free fix or doing nothing is the honest advice."
+   },
+   "dimensions": {
+    "duplicated_entry": {
+     "basis": "3 other place(s) the same detail is typed",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "exceptions": {
+     "basis": "15% of jobs are odd cases",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "handoff_waiting": {
+     "basis": "40 elapsed hours of waiting across 5 handoffs (not staff time)",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "process_complexity": {
+     "basis": "14 steps from start to finish",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "repeated_work": {
+     "basis": "4.5 hands-on hours per week",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    },
+    "rework": {
+     "basis": "30% of jobs need rework",
+     "level": "HIGH",
+     "provenance": "SELF_REPORTED"
+    },
+    "visibility": {
+     "basis": "status is patchy",
+     "level": "MED",
+     "provenance": "SELF_REPORTED"
+    }
+   },
+   "do_nothing_reasonable": true,
+   "experiment_7_day": {
+    "decision": "If measured minutes are within 25% of the 90 reported, keep the estimate; otherwise re-run it with the measured numbers.",
+    "falsifies": "the same tally shows corrections on fewer than 1 in 20 jobs",
+    "protocol": "For 5 working days, tally each run of New client onboarding and time the hands-on minutes with a phone timer. Record waiting time separately."
+   },
+   "falsify": "the same tally shows corrections on fewer than 1 in 20 jobs",
+   "feasibility": {
+    "level": "HIGH",
+    "why": "you already use at least one business tool that usually has an export or an integration"
+   },
+   "hypothesis": "HYPOTHESIS from your own answers: the largest pressure in New client onboarding is REWORK, because information is missing or wrong the first time round.",
+   "id": "W3",
+   "inputs": {
+    "certainty": "rough_estimate",
+    "exception_pct": 15,
+    "handoffs": 5,
+    "n_per_week": 3,
+    "rework_min": 25,
+    "rework_pct": 30,
+    "steps": 14,
+    "systems_retyped": 3,
+    "t0_min": 90,
+    "visibility": "patchy",
+    "wait_hours": 40
+   },
+   "name": "New client onboarding",
+   "queue_hours_elapsed": 40,
+   "risk": {
+    "data_sensitivity": "HIGH",
+    "note": "Financial or personal data is involved, so any automation would need a named owner, least access and a person approving each output."
+   },
+   "rung": "SELF_REPORTED",
+   "scenarios": [
+    {
+     "adoption_assumed": 0.5,
+     "e0_min": 7.5,
+     "e1_min": 6.3,
+     "hours": 0.0,
+     "hours_display": 0.0,
+     "hours_signed": -1.02,
+     "overhead_min_assumed": 90.0,
+     "reduction_assumed": 0.2,
+     "scenario": "low",
+     "t0_min": 90,
+     "t1_min": 72.0
+    },
+    {
+     "adoption_assumed": 0.7,
+     "e0_min": 7.5,
+     "e1_min": 5.1,
+     "hours": 0.59,
+     "hours_display": 0.5,
+     "hours_signed": 0.59,
+     "overhead_min_assumed": 45.0,
+     "reduction_assumed": 0.4,
+     "scenario": "base",
+     "t0_min": 90,
+     "t1_min": 54.0
+    },
+    {
+     "adoption_assumed": 0.85,
+     "e0_min": 7.5,
+     "e1_min": 4.2,
+     "hours": 1.91,
+     "hours_display": 2.0,
+     "hours_signed": 1.91,
+     "overhead_min_assumed": 20.0,
+     "reduction_assumed": 0.55,
+     "scenario": "high",
+     "t0_min": 90,
+     "t1_min": 40.5
+    }
+   ],
+   "sensitivity": "HIGH",
+   "status": "SCORED",
+   "top_dimension": "rework"
+  },
+  {
+   "base_hours": null,
+   "category": "approvals",
+   "category_label": "Approvals and sign-off",
+   "dimensions": null,
+   "hypothesis": "Not enough evidence to name a bottleneck for Approval of tax lodgements. No score is shown.",
+   "id": "W4",
+   "inputs": {
+    "certainty": "dont_know",
+    "exception_pct": 0,
+    "handoffs": 0,
+    "n_per_week": 40,
+    "rework_min": 0,
+    "rework_pct": 0,
+    "steps": 1,
+    "systems_retyped": 0,
+    "t0_min": 10,
+    "visibility": "patchy",
+    "wait_hours": 0
+   },
+   "measurement": "Count how many times it happens and time five runs with a watch. That one exercise is worth more than any estimate here.",
+   "name": "Approval of tax lodgements",
+   "rung": "ASSUMPTION",
+   "scenarios": [],
+   "sensitivity": "MED",
+   "status": "NOT_ENOUGH_EVIDENCE",
+   "top_dimension": null
+  }
+ ]
+}
