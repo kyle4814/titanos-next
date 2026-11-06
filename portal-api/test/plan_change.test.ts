@@ -18,6 +18,12 @@ function rng(seed: number) { let s = seed >>> 0; return () => { s = (s + 0x6d2b7
 type M = typeof REAL;
 type Step = { at: number; req: any; replayOf?: number };
 
+// Independent oracle for the minimum term: start + 3 calendar months, day clamped to the target month (not periodStart).
+function calTermEnd(start: number): number {
+  const s = new Date(start), m = s.getUTCMonth() + 3, y = s.getUTCFullYear() + Math.floor(m / 12), mm = m % 12;
+  const last = new Date(Date.UTC(y, mm + 1, 0)).getUTCDate();
+  return Date.UTC(y, mm, Math.min(s.getUTCDate(), last), s.getUTCHours(), s.getUTCMinutes(), s.getUTCSeconds(), s.getUTCMilliseconds());
+}
 // ---------- generated histories ----------
 const GROW = "ai_growth", OPS = "ai_ops", EMB = "ai_embedded";
 function genHistory(r: () => number): { start: number; tier: any; steps: Step[] } {
@@ -42,7 +48,7 @@ function check(m: M, h: ReturnType<typeof genHistory>): string[] {
   const bad: string[] = [];
   let s = m.initPlan(h.start, h.tier);
   const first: Record<string, any> = {}; let modelPending: string = "none", modelTier = h.tier as string, modelCancelAt = 0;
-  const T = h.start + MIN_DAYS * DAY;
+  const T = calTermEnd(h.start);
   for (const st of h.steps) {
     const before = s, clockBefore = s.lastAt;
     let res: any;
@@ -83,7 +89,7 @@ function check(m: M, h: ReturnType<typeof genHistory>): string[] {
       void k;
     }
     if (o.kind === "downgrade" || o.kind === "cancel") {
-      // I4 minimum term: effective no earlier than 92 days, on a period boundary, in the future
+      // I4 minimum term: effective no earlier than 3 calendar months, on a period boundary, in the future
       if (o.effectiveAt < T) bad.push("I4 effective inside minimum term");
       if (o.effectiveAt <= st.at) bad.push("I4 effective not in future");
       if (o.chargeCents !== 0) bad.push("I4 downgrade/cancel charged");
@@ -120,7 +126,6 @@ function check(m: M, h: ReturnType<typeof genHistory>): string[] {
   if (!s.endedAt && !s.pending && end.tier !== modelTier && modelTier !== "") bad.push("I11 tier drift " + end.tier + " vs " + modelTier);
   return bad;
 }
-const MIN_DAYS = 92;
 const SEED = 96_2026_11_07, N = 500;
 const histories = (() => { const r = rng(SEED); return Array.from({ length: N }, () => genHistory(r)); })();
 
@@ -158,11 +163,11 @@ test("worked examples (synthetic): upgrade proration, downgrade deferral, cancel
   // replay of the same event: same outcome, state untouched, no second charge
   const again = REAL.planChange(u.state, { eventId: "e1", kind: "upgrade", to: OPS as any }, half + DAY);
   assert.equal(again.replayed, true); assert.deepEqual(again.state, u.state);
-  // downgrade at day 20: term end is 1 Jan + 92 days = 3 Apr 2026; the 1 Apr boundary is day 90, inside the term, so it lands on 1 May
+  // downgrade at day 20: term end is 1 Jan + 3 calendar months = 1 Apr 2026 (day 90); the 1 Apr boundary is on the term end, so it lands on 1 Apr (f100: was 1 May under the flat 92-day rule)
   const d = REAL.planChange(u.state, { eventId: "e2", kind: "downgrade", to: GROW as any }, Date.UTC(2026, 0, 21));
   assert.ok(d.outcome.ok && d.outcome.effectiveAt >= REAL.termEnd(s0.startedAt));
   assert.equal(d.outcome.ok && d.outcome.chargeCents, 0);
-  assert.equal(new Date((d.outcome as any).effectiveAt).toISOString(), "2026-05-01T00:00:00.000Z");
+  assert.equal(new Date((d.outcome as any).effectiveAt).toISOString(), "2026-04-01T00:00:00.000Z");
 });
 test("unknown tier, same tier, backwards clock and ended subscription are rejected without state change", () => {
   const s0 = REAL.initPlan(T0, OPS as any);

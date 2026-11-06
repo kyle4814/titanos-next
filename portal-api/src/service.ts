@@ -4,6 +4,8 @@ import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver 
 import type { BillingProvider } from "./stripe.ts";
 import type { Store, Account, Purchase, Invoice } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
+import { isTier } from "./plan_change.ts";
+import { changePlan } from "./plan_change_service.ts";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
@@ -165,10 +167,18 @@ export async function cancelSubscription(d: Deps, a: Account, subId: string) {
   if (!sub || sub.accountId !== a.id) throw new HttpError(404, "not_found");
   if (sub.cancelledAt) return { status: "already_cancelled" as const, effectiveAt: sub.cancelAt ?? sub.cancelledAt };
   const p = PRODUCTS[sub.productId];
-  const minEnd = p.minMonths ? addMonths(sub.startedAt, p.minMonths) : 0;
-  const periodEnd = Math.max(minEnd, nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now()));
+  let periodEnd: number;
+  if (isTier(sub.productId)) {
+    // Retainers: ONE minimum-term rule, owned by plan_change.planChange (3 calendar months, then the next period boundary). f100.
+    const r = await changePlan(d, a, subId, { eventId: `cancel:${sub.id}`, kind: "cancel" });
+    if (!r.outcome.ok) {
+      if (r.outcome.reason === "subscription_ended") return { status: "already_cancelled" as const, effectiveAt: (await d.store.subscriptionById(subId))?.plan?.endedAt ?? d.now() };
+      throw new HttpError(409, r.outcome.reason);
+    }
+    periodEnd = r.outcome.effectiveAt;
+  } else periodEnd = nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now());
   await d.billing.cancelSubscription(sub.id, true);
-  sub.cancelAt = periodEnd; await d.store.putSubscription(sub);
+  const fresh = (await d.store.subscriptionById(sub.id)) ?? sub; fresh.cancelAt = periodEnd; await d.store.putSubscription(fresh);
   return { status: "cancel_scheduled" as const, effectiveAt: periodEnd };
 }
 function addMonths(ms: number, n: number) { const x = new Date(ms); x.setUTCMonth(x.getUTCMonth() + n); return x.getTime(); }
