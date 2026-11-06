@@ -8,9 +8,9 @@ export interface Purchase { id: string; accountId: string; productId: string; do
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
 export interface Invoice { id: string; accountId: string; purchaseId?: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
-export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
+export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
 
-export interface CreditEntry { id: string; accountId: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
+export interface CreditEntry { id: string; accountId: string; keyId?: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
 export interface CreditOrder { id: string; accountId: string; checkoutId: string; packId: string; credits: number; paid: boolean }
 export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string; kid?: string }
 
@@ -21,7 +21,10 @@ export interface Store {
   receiptsForKey(keyId: string, limit: number, accountId?: string): Promise<AgentReceipt[]>; // newest first
   keyByHash(hash: string): Promise<ApiKey | undefined>;
   creditBalance(accountId: string): Promise<number>;
-  creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number): Promise<number | undefined>; // new balance, or undefined if it would go below 0
+  creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string): Promise<number | undefined>; // new balance, or undefined if it would go below 0. keyId books the row to a key (a reversal must carry it so the key's spend is given back)
+  // F176 (F19 wired): balance + per-key daily cap + per-key total cap + ledger write in ONE atomic step. A cap of N allows spend up to and including N.
+  creditDebitCapped(o: import("./agent/d1agent.ts").DebitInput): Promise<import("./agent/d1agent.ts").CappedDebit>;
+  keySpend(keyId: string, dayStart: number, accountId?: string): Promise<import("./agent/d1agent.ts").KeySpend>;
   creditEntries(accountId: string): Promise<CreditEntry[]>;
   putCreditOrder(o: CreditOrder): Promise<void>;
   creditOrderByCheckout(checkoutId: string): Promise<CreditOrder | undefined>;
@@ -109,13 +112,31 @@ export class MemoryStore implements Store {
   // F98: SYNCHRONOUS check-and-write (no await between the balance read and the push), and (reason, ref) is unique, as in the D1 ledger
   // (UNIQUE (reason, ref)). Before F98 this awaited creditBalance first, so 45 of 60 parallel 1-credit debits were served on a balance of 25,
   // and a replayed top-up or refund was granted twice.
-  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
+  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string) {
     if (this.ledger.some((e) => e.reason === reason && e.ref === ref)) return undefined;
     const bal = this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0);
     if (bal + delta < 0) return undefined;
-    this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at });
+    if (keyId !== undefined && this.keys.get(keyId)?.accountId !== id) return undefined;
+    this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at, ...(keyId !== undefined ? { keyId } : {}) });
     return bal + delta;
   }
+  // F176: the in-memory twin of D1AgentStore.creditDebitCapped. SYNCHRONOUS from the first read to the push (no await), so it is atomic.
+  async creditDebitCapped(o: import("./agent/d1agent.ts").DebitInput): Promise<import("./agent/d1agent.ts").CappedDebit> {
+    if (this.keys.get(o.keyId)?.accountId !== o.accountId) return { ok: false, reason: "key_not_in_tenant" };
+    if (this.ledger.some((e) => e.reason === "debit" && e.ref === o.ref)) return { ok: false, reason: "duplicate_ref" };
+    const bal = this.ledger.filter((e) => e.accountId === o.accountId).reduce((n, e) => n + e.delta, 0);
+    const sp = this.spendSync(o.keyId, o.dayStart, o.accountId);
+    if (sp.day + o.amount > o.capDaily) return { ok: false, reason: "key_cap_daily" };
+    if (sp.total + o.amount > o.capTotal) return { ok: false, reason: "key_cap_total" };
+    if (bal - o.amount < 0) return { ok: false, reason: "insufficient_credits" };
+    this.ledger.push({ id: `ent_${++this.ent}`, accountId: o.accountId, keyId: o.keyId, delta: -o.amount, reason: "debit", ref: o.ref, at: o.at });
+    return { ok: true, balance: bal - o.amount, spent: { day: sp.day + o.amount, total: sp.total + o.amount } };
+  }
+  private spendSync(keyId: string, dayStart: number, accountId?: string) {
+    const rows = this.ledger.filter((e) => e.keyId === keyId && (accountId === undefined || e.accountId === accountId));
+    return { day: -rows.filter((e) => e.at >= dayStart).reduce((n, e) => n + e.delta, 0), total: -rows.reduce((n, e) => n + e.delta, 0) };
+  }
+  async keySpend(keyId: string, dayStart: number, accountId?: string) { return this.spendSync(keyId, dayStart, accountId); }
   async creditEntries(id: string) { return this.ledger.filter((e) => e.accountId === id); }
   async putCreditOrder(o: CreditOrder) { this.creditOrders.set(o.id, o); }
   async creditOrderByCheckout(c: string) { return [...this.creditOrders.values()].find((o) => o.checkoutId === c); }
