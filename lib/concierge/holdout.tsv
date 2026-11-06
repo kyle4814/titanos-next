@@ -1,0 +1,120 @@
+guest	portal:scan	can you check if my business email is set up properly so scammers cant fake it
+guest	portal:scan	is there a free way to test my website for problems
+guest	portal:proof-wall	have you got any examples of work you have actually done for other businesses
+guest	portal:sector-index	how does my industry compare to others when it comes to online safety
+guest	portal:engineering	how did you guys build all this and what is it running on
+guest	portal:pricing	how much does it cost per month
+guest	portal:account-signup	i want to make a login so i can come back later
+guest	portal:shop	do you sell anything off the shelf that i can just buy today
+guest	portal:courses	are there any lessons i can do to learn this stuff myself
+guest	portal:trust-scan	what exactly do you look at when you scan me, are you poking around my servers
+guest	portal:privacy	what do you do with my details when i give them to you
+guest	portal:ai-disclosure	am i talking to a real person or a robot right now
+guest	portal:status	is the site down or is it just me
+guest	portal:investors	i am an investor and want to see the numbers
+guest	portal:tenders	can you help us win government contracts
+owner	portal:home-owner	take me back to my main page
+owner	portal:findings	show me what you found wrong with my site
+owner	portal:quests	what are the little tasks i can tick off to get better
+owner	portal:owner-level	what level am i up to
+owner	portal:monitor	will you keep watching my email setup so it does not break again
+owner	portal:hire-pro	i want a real tech person to sort this out for me
+owner	portal:auto-fix	can you just fix it automatically without me touching anything
+owner	portal:reports	i need a summary i can show my accountant
+owner	portal:billing-invoices	where do i find my tax invoice for last month
+owner	portal:billing-cancel	i want to stop paying, how do i end my plan
+owner	portal:billing-refund	i was charged twice, can i get my money back
+owner	portal:domain-verify	how do i prove the domain is mine
+owner	portal:data-export	i want a copy of everything you hold on me and then want it deleted
+owner	portal:get-fixed	who actually does the fixing once you find the problems
+owner	portal:pricing	what are the plan prices again
+pro	portal:home-pro	where is my contractor home screen
+pro	portal:pro-jobs	where do i see work that is up for grabs
+pro	portal:pro-rank	how do i move up the ladder and get picked more
+pro	portal:pro-payouts	when do i get paid for jobs i finished
+pro	portal:pro-whitelabel	can i put my own logo on the reports i hand to clients
+pro	portal:pro-seat	what do you take off me per job and what is the monthly seat
+pro	portal:leads-export	can i download the list of prospects as a spreadsheet
+pro	portal:contact	how do i get hold of someone in the team
+pro	offer:funder-fit-dossier	i write grant applications, is there something that tells me which funder suits my client
+pro	offer:recruiter-contract-winner-feed	i run a labour hire firm and want to know which companies just won big contracts
+pro	offer:grant-radar-nfp	i work for a not for profit and want to hear about grants we could apply for
+pro	offer:agency-white-label-audit	we are a web agency and want audits we can send out under our own name
+pro	offer:invoice-nudge-rail	my clients pay late, can something chase them politely
+pro	offer:quote-writer-from-job-notes	i scribble notes after a job, can they turn into a proper quote
+pro	portal:faq	where are the common questions answered
+agent	portal:home-agent	show me my agent console home
+agent	portal:agent-keys	where do i get a key to connect my assistant
+agent	portal:agent-catalogue	what tools can my bot call
+agent	portal:agent-credits	how do i top up the prepaid balance my bot uses
+agent	portal:llms	is there a plain text file describing your site for machines
+agent	portal:engineering	what does the architecture look like under the hood
+agent	portal:security	how do you keep our data safe when a bot connects
+agent	portal:status	is the api up right now
+agent	portal:pricing	what do calls cost
+agent	offer:outbound-gate-outreach-lint	i build outreach bots and want a check that stops them sending rubbish
+agent	offer:agent-preflight-test-harness	is there a way to test my agent before it goes live
+agent	offer:approval-rail-kit	i want a human to approve before my agent does anything risky
+agent	portal:contact	i need to talk to a person about an integration
+agent	portal:data-export	can my agent pull out all stored data as a file
+agent	portal:account-signup	how do i register a new agent account
+enterprise	portal:home-enterprise	take me to our company dashboard
+enterprise	portal:enterprise	can i see all our domains in one place
+enterprise	portal:sso	can our staff log in with our company directory
+enterprise	portal:savings-calc	how much would we save if we switched
+enterprise	portal:security	send me your security paperwork for our vendor review
+enterprise	portal:tenders	we are a council looking for a supplier panel
+enterprise	portal:engineering	our cto wants to know how it is built
+enterprise	offer:dd-pre-read	we are about to buy a company and want a quick look at their cyber exposure
+enterprise	offer:quarterly-board-cyber-privacy-briefing	our board wants a short update every quarter on cyber and privacy
+enterprise	offer:eu-ted-small-lot-radar	we want to find small european public tenders
+enterprise	offer:franchise-posture-board	we run a franchise with a hundred outlets and want one view of their email safety
+enterprise	offer:five-jurisdiction-privacy-bundle	we operate in several countries and need privacy cover for all of them
+enterprise	offer:supplier-check-dossier	procurement wants a background check on a new vendor
+enterprise	portal:contact	i need to speak to sales
+enterprise	portal:agent-credits	can we buy usage credits in bulk
+partner	portal:home-partner	where is my reseller home page
+partner	portal:partners	how does the revenue share work
+partner	portal:pro-whitelabel	can i brand the reports as mine
+partner	offer:monitor-wholesale	we are an it support company and want to resell monitoring to our clients
+partner	offer:broker-renewal-scan	i am an insurance broker and want to know who is up for renewal
+partner	offer:association-member-kit	our industry association wants to give members something useful
+partner	offer:dossier-reseller-licence	can we resell your dossiers under our own brand
+partner	offer:accountant-privacy-check	i am an accountant and want to check my clients privacy compliance
+partner	offer:subbie-finder-channel	our chamber of commerce wants to help head contractors find local subbies
+partner	offer:pack-factory-channel-partners	can we get packs made in bulk for our referral network
+partner	offer:tender-alerts-widget	we run a business directory and want tender alerts on our site
+partner	offer:procurement-training-feed	we teach procurement courses and want a data feed for students
+partner	portal:contact	how do i become a partner
+partner	portal:pricing	what does a partner pay
+partner	portal:quote	can i get a price for a custom build
+guest	none	what is the weather in brisbane tomorrow
+guest	none	who won the footy last night
+guest	none	give me a recipe for banana bread
+owner	none	how do i fix a leaking tap
+owner	none	what is a good name for my cat
+pro	none	write me a poem about the ocean
+pro	none	what is the capital of france
+agent	none	translate good morning into japanese
+agent	none	tell me a joke
+enterprise	none	what is the share price of apple
+enterprise	none	how long does it take to fly to london
+partner	none	can you recommend a good restaurant in sydney
+partner	none	how tall is mount everest
+guest	none	how do i lose ten kilos fast
+owner	none	what should i watch on netflix tonight
+owner	ask	i want the subbie thing
+owner	ask	find me tradies to subcontract to
+pro	ask	job flow for subbies, which one is it
+guest	ask	the profit mirror for charities, which one do i want
+partner	ask	a charity profit report
+owner	ask	check my privacy wording for automated decisions
+pro	ask	fix my privacy policy for automated decisions
+owner	ask	i need the privacy pack
+partner	ask	resell monitoring and get prospect leads for it
+guest	ask	catch bad email domains
+enterprise	ask	tell me who beat us on a tender
+pro	ask	who won the tender before us and how do i beat them
+owner	ask	tender help for tradies
+guest	ask	a tender pack for my trade business
+agent	ask	watch changes on a business domain
