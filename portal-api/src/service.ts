@@ -7,7 +7,10 @@ import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
 
-export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
+import type { OwnerStore, ZoneProvider } from "./owner/engine.ts";
+import type { DohFetch } from "../../lib/guestscan/scan.ts";
+export interface OwnerDeps { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider }
+export interface Deps { owner?: OwnerDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
