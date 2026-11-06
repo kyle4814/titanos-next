@@ -1,0 +1,12 @@
+{
+  "_note": "SYNTHETIC SAMPLE. These are invented rows used to exercise the status page. They are not measurements of any TITANOS system. Replace with real monitor output (jsonl: {component, at, ok}) via scripts/gen_status.mjs --monitor <file>.",
+  "synthetic": true,
+  "system": "Synthetic sample for the status page build (invented, not a live monitor)",
+  "window": "last 30 days",
+  "components": [
+    { "id": "site", "name": "Public website", "measures": "HTTP 200 on the home page from one probe", "up": 0, "total": 0, "lastChecked": null, "lastResult": null },
+    { "id": "scan", "name": "Free email security check", "measures": "A test domain returns a result", "up": 280, "total": 288, "lastChecked": "2026-11-06T08:00:00+10:00", "lastResult": "UP" },
+    { "id": "portal", "name": "Customer portal", "measures": "Sign-in page loads", "up": 140, "total": 144, "lastChecked": "2026-11-06T08:00:00+10:00", "lastResult": "DOWN" },
+    { "id": "billing", "name": "Billing links", "measures": "Checkout page loads (page load only, no payment)", "up": 100, "total": 100, "lastChecked": "2026-11-04T08:00:00+10:00", "lastResult": "UP" }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+ "dataset": "Status",
+ "synthetic": true,
+ "generatedAt": "2026-11-06T12:50:00.000Z",
+ "system": "Synthetic sample for the status page build (invented, not a live monitor)",
+ "window": "last 30 days",
+ "monitorInput": {
+  "present": false,
+  "reason": "no monitor output supplied; the f14 C3 monitor branch logs scan runs only and writes no uptime samples"
+ },
+ "staleAfterHours": 24,
+ "components": [
+  {
+   "id": "site",
+   "name": "Public website",
+   "measures": "HTTP 200 on the home page from one probe",
+   "state": "UNKNOWN",
+   "stale": false,
+   "lastKnown": null,
+   "window": "last 30 days",
+   "up": 0,
+   "total": 0,
+   "pct": null,
+   "lastChecked": null,
+   "note": "no data yet"
+  },
+  {
+   "id": "scan",
+   "name": "Free email security check",
+   "measures": "A test domain returns a result",
+   "state": "UP",
+   "stale": false,
+   "lastKnown": null,
+   "window": "last 30 days",
+   "up": 280,
+   "total": 288,
+   "pct": 97.2,
+   "lastChecked": "2026-11-06T08:00:00+10:00",
+   "note": ""
+  },
+  {
+   "id": "portal",
+   "name": "Customer portal",
+   "measures": "Sign-in page loads",
+   "state": "DOWN",
+   "stale": false,
+   "lastKnown": null,
+   "window": "last 30 days",
+   "up": 140,
+   "total": 144,
+   "pct": 97.2,
+   "lastChecked": "2026-11-06T08:00:00+10:00",
+   "note": ""
+  },
+  {
+   "id": "billing",
+   "name": "Billing links",
+   "measures": "Checkout page loads (page load only, no payment)",
+   "state": "UNKNOWN",
+   "stale": true,
+   "lastKnown": "UP",
+   "window": "last 30 days",
+   "up": 100,
+   "total": 100,
+   "pct": 100,
+   "lastChecked": "2026-11-04T08:00:00+10:00",
+   "note": "STALE: last check is more than 24 hours old"
+  }
+ ]
+}
