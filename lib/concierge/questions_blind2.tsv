@@ -1,0 +1,69 @@
+guest	portal:scan	could a scammer send emails that look like they come from my company
+guest	portal:scan	run a check on shopfront.com.au
+guest	portal:scan	is my domain locked down against spoofing
+guest	portal:get-fixed	what's the quickest way to have these issues taken care of
+guest	portal:pricing	give me your pricing
+guest	portal:pricing	how much would the monthly plan be
+guest	portal:proof-wall	prove it works
+guest	portal:sector-index	rank industries by how exposed they are
+guest	portal:engineering	how was the platform engineered
+owner	portal:owner-level	how mature is my business right now
+owner	portal:findings	display the faults you detected
+owner	portal:quests	which small job should I do today
+owner	portal:monitor	notify me if the fault returns
+owner	portal:reports	export a summary I can email to my insurer
+owner	portal:billing-invoices	where are my receipts
+owner	portal:billing-cancel	close my subscription
+owner	portal:billing-refund	I'd like to dispute a payment
+owner	portal:domain-verify	add a txt record to prove ownership of my domain
+owner	portal:data-export	remove my account and everything in it
+owner	portal:hire-pro	I'd like an agency to do the work
+owner	portal:auto-fix	apply the repair automatically and let me reverse it
+pro	portal:pro-jobs	show me the job board
+pro	portal:pro-rank	how do I climb the rankings
+pro	portal:pro-payouts	when does the money land in my bank
+pro	portal:pro-seat	is there a monthly seat to cut my fees
+pro	portal:pro-whitelabel	can I rebrand the reports as mine
+pro	portal:leads-export	I want a lead list to email
+agent	portal:agent-keys	how do I get credentials for my agent
+agent	portal:agent-catalogue	what can an agent do here
+agent	portal:agent-credits	prepaid usage for my agent
+agent	portal:llms	do you publish llms.txt
+enterprise	portal:enterprise	I'm responsible for hundreds of domains
+enterprise	portal:sso	can we use our identity provider to log in
+enterprise	portal:savings-calc	how much will it save our company
+enterprise	portal:security	are you soc 2 certified
+partner	portal:partners	I want to become a reseller
+guest	portal:shop	what do you have for sale
+guest	portal:quote	quote me for building a custom tool
+guest	portal:courses	do you have an online course
+guest	portal:trust-scan	do you touch my systems when you scan
+guest	portal:privacy	do you share my data with anyone
+guest	portal:ai-disclosure	am I chatting with a bot
+guest	portal:status	has the service gone down
+guest	portal:investors	I'd like to invest
+guest	portal:contact	I need to speak with a person
+guest	portal:faq	what does titanos do
+guest	portal:tenders	how do I win government contracts
+guest	offer:subbie-finder	find subcontractors for my building jobs
+guest	offer:scam-shield-for-tradies	stop fake invoices hitting my trade business
+guest	offer:trade-panel-pack	help getting on a builder's approved panel
+guest	offer:portfolio-watch	monthly posture check on a fund's holdings
+guest	offer:bid-pack	assemble a tender response pack
+guest	offer:global-tender-desk	international government tenders
+guest	offer:msp-prospect-feed	prospect feed with white label scans for an msp
+guest	offer:agency-white-label-audit	white label audit for a web agency
+guest	offer:privacy-essential-eight-pack	privacy act and essential eight in one pack
+guest	offer:invoice-nudge-rail	automatic reminders for unpaid invoices
+guest	offer:quote-chaser	chase up quotes I sent
+guest	offer:account-dossier-on-demand	company research dossier before I call them
+guest	offer:free-tender-digest	free tender digest
+guest	offer:electorate-dollar-map	government spending by electorate
+guest	offer:neighbour-alerts	notify me when new businesses open nearby
+guest	offer:solar-site-shortlist	monthly shortlist of sites for solar sales
+guest	none	what is the meaning of life
+guest	none	recommend a good movie
+guest	none	how do I change a flat tyre
+owner	none	what's the stock price of apple
+guest	none	sing me a song
+guest	none	who is the prime minister of canada

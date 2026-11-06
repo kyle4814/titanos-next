@@ -1,0 +1,61 @@
+guest	portal:scan	is my business email easy to fake
+guest	portal:scan	can you look at mybakery.com.au for me
+guest	portal:get-fixed	you found problems, who can sort them out for me
+owner	portal:findings	what did you find wrong on my domain
+owner	portal:quests	what's my next easy task
+owner	portal:monitor	keep an eye on my domain every month
+owner	portal:reports	I need a report to show my board
+owner	portal:auto-fix	can the fix be applied automatically and reversed
+owner	portal:billing-invoices	send me a copy of my last invoice
+owner	portal:billing-cancel	I want to end my subscription
+owner	portal:billing-refund	I'd like a refund please
+owner	portal:domain-verify	how do I confirm the domain is mine
+owner	portal:data-export	please delete all my data
+owner	portal:hire-pro	connect me with an agency that can fix this
+guest	portal:account-signup	how can I register
+guest	portal:pricing	what's the price of the monitor
+guest	portal:proof-wall	where can I see your results
+guest	portal:sector-index	how do plumbers compare to electricians on security
+guest	portal:engineering	tell me about how the system is engineered
+pro	portal:pro-jobs	where do I see jobs I can take
+pro	portal:pro-rank	what decides my ranking
+pro	portal:pro-payouts	how do payouts work
+pro	portal:pro-whitelabel	can I use my own branding on reports I send clients
+pro	portal:leads-export	where do I export a lead list
+agent	portal:agent-keys	I need an api key for my agent
+agent	portal:agent-catalogue	which tools are available to call
+agent	portal:agent-credits	how do I buy more credits
+enterprise	portal:enterprise	we manage domains for a large group, what do you offer
+enterprise	portal:sso	do you support saml login
+enterprise	portal:savings-calc	help me build the business case
+partner	portal:partners	how do I earn from referring customers
+guest	portal:shop	what's in the shop
+guest	portal:quote	I want a custom quote for a specific job
+guest	portal:courses	any courses I can do
+guest	portal:trust-scan	are you legally allowed to look at my domain
+guest	portal:privacy	what happens to my details
+guest	portal:ai-disclosure	is a human answering me
+guest	portal:status	is the website working right now
+guest	portal:investors	I want to put money into the company
+guest	portal:contact	how do I reach a real person
+guest	portal:faq	what exactly is this
+guest	portal:tenders	help me with government tenders
+guest	offer:subbie-finder	I need to find reliable subcontractors
+guest	offer:bid-pack	pack for a government bid
+guest	offer:global-tender-desk	tenders in the us and europe
+guest	offer:msp-prospect-feed	feed of prospects for my msp
+guest	offer:franchise-posture-board	one view of all my franchise locations
+guest	offer:privacy-adm-fix	fix our automated decision making for the privacy law
+guest	offer:invoice-nudge-rail	nudge customers who are late paying
+guest	offer:quote-chaser	follow up on my quotes
+guest	offer:account-dossier-on-demand	research one company before a meeting
+guest	offer:free-tender-digest	a free email of new tenders
+guest	offer:payee-domain-change-watch	warn me if a supplier changes their email domain
+guest	offer:story-leads-weekly	weekly story ideas from government contracts
+guest	offer:profit-mirror-care	care provider wants to see profit by service
+guest	none	what's the best phone to buy
+guest	none	how tall is mount everest
+guest	none	write python code to sort a list
+guest	none	translate hello into french
+owner	none	what should I have for dinner
+guest	none	pretend you are a pirate
