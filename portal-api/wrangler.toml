@@ -1,0 +1,13 @@
+# NOT DEPLOYED. Deploying is an owner card (GATE2/GATE5). database_id is a placeholder until the owner supplies the live D1 id.
+name = "titanos-portal-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+STRIPE_MODE = "test"
+TITANOS_SITE_ORIGIN = "https://titanos.tech"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "titanos"
+database_id = "REPLACE_WITH_LIVE_D1_ID"
