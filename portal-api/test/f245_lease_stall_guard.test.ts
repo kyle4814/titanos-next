@@ -141,7 +141,7 @@ test("f245 migration 0015_claim_leases: additive, one table, not applied, lint-c
 
 const MUT: [string, string, [string, string, string][]][] = [
   ["M1 winner writes with the upsert again (item 1)", "G1", [["service.ts", "if (await d.store.putSubscriptionOnce(sub)) await replayLateFacts(d, sub);", "if (await d.store.putSubscription(sub).then(() => true)) await replayLateFacts(d, sub);"]]],
-  ["M2 winner does not merge its cancel onto the sweep's row (item 1)", "G1b", [["service.ts", "else await mergeLostSeed(d, sub);", ";"]]],
+  ["M2 winner does not merge its cancel onto the sweep's row (item 1)", "G1b", [["service.ts", "else await mergeLostSeed(d, sub, parts);", ";"]]],
   ["M3 winner does not replay late facts (item 2)", "G2", [["service.ts", "if (await d.store.putSubscriptionOnce(sub)) await replayLateFacts(d, sub);", "if (await d.store.putSubscriptionOnce(sub)) await Promise.resolve(false);"]]],
   ["M4 D1 lease always steals (WHERE dropped) (item 3)", "G3", [["d1_plan_store.ts", " WHERE claim_leases.expires_at <= ? OR claim_leases.owner = excluded.owner", " WHERE ? >= 0"]]],
   ["M5 D1 expiry boundary off by one (<= becomes <) (item 3)", "G3", [["d1_plan_store.ts", "claim_leases.expires_at <= ?", "claim_leases.expires_at < ?"]]],

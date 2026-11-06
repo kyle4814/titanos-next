@@ -190,9 +190,10 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     if (o.subscription) {
       // f245: the winner writes ONCE. A winner that stalled past LEASE_MS may find the f237 sweep has already seeded the row (the lease expired, the sweep proceeded): an upsert here would overwrite the sweep's row. putSubscriptionOnce
       // leaves it alone (the sweep's row stands, and its own invoice path dedups on the purchase), and the only thing this winner took that the sweep may not have is the held cancel, which is merged onto the sweep's row.
-      const sub = await buildSubscription(d, pur, o.subscription, now);
+      const parts: SeedParts = {};
+      const sub = await buildSubscription(d, pur, o.subscription, now, parts);
       if (await d.store.putSubscriptionOnce(sub)) await replayLateFacts(d, sub); // f245: a hold written during the winner window (after buildSubscription's takeFacts) is replayed onto the landed row
-      else await mergeLostSeed(d, sub);
+      else await mergeLostSeed(d, sub, parts); // f186 on int3's shape: the facts THIS call took are applied to the row that won, never consumed without effect
     }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
     Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
@@ -202,9 +203,18 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
   } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
 }
 // f245: the winner lost putSubscriptionOnce to a sweep that seeded after the TTL. The sweep's row stands; a cancel this winner took from the held facts (and the sweep never saw) is carried onto it.
-async function mergeLostSeed(d: Deps, mine: Subscription) {
+async function mergeLostSeed(d: Deps, mine: Subscription, p: SeedParts) {
   const theirs = await d.store.subscriptionByPurchase(mine.purchaseId);
-  if (theirs && mine.cancelledAt) await updateSubscription(d, theirs.id, (x) => { if (x.cancelledAt) return false; x.cancelledAt = mine.cancelledAt; return true; }); // f183: CAS, never a blind put over a racing writer
+  if (!theirs) return;
+  await updateSubscription(d, theirs.id, async (x, fx) => { // f183 CAS; f186: the cancel AND the Stripe periods this winner took from the held facts are applied to the row that stands
+    const before = JSON.stringify(x);
+    fx.taken = p.facts; fx.used = true; // consumed here on purpose: never put back (nobody would ever take them again)
+    if (p.cancel && !x.cancelledAt) x.cancelledAt = mine.cancelledAt;
+    const planned = !!x.plan;
+    await seedPeriod(d, x, p.sp, true, fx); // no plan yet: seeds it and replays the held rest from fx.taken; a plan already there: observePeriod, idempotent
+    if (planned) for (const hp of p.rest ?? []) await seedPeriod(d, x, hp, false, fx);
+    return JSON.stringify(x) !== before;
+  });
 }
 // f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
 export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boolean> {
@@ -222,10 +232,12 @@ export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boole
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
 // and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.
-export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> {
+export type SeedParts = { facts?: Record<string, unknown>[]; cancel?: boolean; sp?: StripePeriod; rest?: StripePeriod[] }; // what buildSubscription consumed from the held facts (f186: a loser of putSubscriptionOnce re-applies it to the winner's row)
+export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number, out?: SeedParts): Promise<Subscription> {
   const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
   const cancel = facts.some((f) => f.kind === "cancel");
   const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
+  if (out) { out.facts = facts; out.cancel = cancel; out.sp = sp; out.rest = held.rest; }
   const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
   await seedPeriod(d as Deps, sub, sp, true);
   for (const hp of held.rest) await seedPeriod(d as Deps, sub, hp, false); // invoices that beat the checkout, oldest first
