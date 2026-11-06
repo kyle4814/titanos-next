@@ -73,10 +73,9 @@ export async function createJob(d: Deps, a: Account, b: { domainId?: unknown; ch
   const dom = await d.store.domainById(b.domainId);
   if (!dom || dom.accountId !== a.id) throw new HttpError(404, "not_found");
   if (!dom.verifiedAt) throw new HttpError(403, "domain_not_verified");   // only the proven owner of a domain can hire work on it
-  const all = await m.store.allJobs();
   const live = (j: Job) => !["cancelled", "refunded", "paid"].includes(j.status);
-  if (all.filter((j) => j.ownerAccountId === a.id && live(j)).length >= MAX_OPEN_JOBS_PER_OWNER) throw new HttpError(429, "too_many_open_jobs");
-  if (all.some((j) => j.domainId === dom.id && j.check === b.check && live(j))) throw new HttpError(409, "job_already_open_for_this_check");
+  if ((await m.store.jobsByOwner(a.id, true)).filter(live).length >= MAX_OPEN_JOBS_PER_OWNER) throw new HttpError(429, "too_many_open_jobs");
+  if ((await m.store.jobsByDomain(dom.id, true)).some((j) => j.check === b.check && live(j))) throw new HttpError(409, "job_already_open_for_this_check");
   const { id: scanId, finding } = await readCheck(m, d, dom.domain, b.check);
   if (!finding) throw new HttpError(400, "unknown_check");
   if (finding.status !== "FAIL" && finding.status !== "WARN") throw new HttpError(409, finding.status === "PASS" ? "nothing_to_fix" : "cannot_read_check");
@@ -118,8 +117,8 @@ async function refundAndClose(d: Deps, j: Job, to: "cancelled" | "refunded", why
 // ---------- pro: board, claim, deliver ----------
 export async function board(d: Deps, a: Account) {
   const m = mk(d); const p = await requirePro(d, a);
-  const jobs = (await m.store.allJobs()).filter((j) => j.status === "open" && j.ownerAccountId !== a.id).sort((x, y) => y.createdAt - x.createdAt);
-  return { jobs: jobs.map((j) => ({ id: j.id, domainMasked: maskDomain(j.domain), check: j.check, severity: j.severity, tier: j.tier, payCents: j.priceCents, claimFeeCents: feeFor(p, j), postedAt: j.createdAt, note: "Hand-raised by the verified owner. The full domain shows after you claim." })), onboarded: p.onboarded, activeClaims: (await m.store.allJobs()).filter((j) => j.proAccountId === a.id && (j.status === "claimed" || j.status === "delivered")).length };
+  const jobs = (await m.store.jobsByStatus(["open"], true)).filter((j) => j.ownerAccountId !== a.id).sort((x, y) => y.createdAt - x.createdAt);
+  return { jobs: jobs.map((j) => ({ id: j.id, domainMasked: maskDomain(j.domain), check: j.check, severity: j.severity, tier: j.tier, payCents: j.priceCents, claimFeeCents: feeFor(p, j), postedAt: j.createdAt, note: "Hand-raised by the verified owner. The full domain shows after you claim." })), onboarded: p.onboarded, activeClaims: (await m.store.jobsByPro(a.id, true)).filter((j) => j.status === "claimed" || j.status === "delivered").length };
 }
 export async function claim(d: Deps, a: Account, id: string) {
   const m = mk(d); const p = await requirePro(d, a); let j = await need(m, id);
@@ -128,8 +127,8 @@ export async function claim(d: Deps, a: Account, id: string) {
   const dom = await d.store.verifiedOwnerOf(j.domain);
   if (dom?.accountId === a.id) throw new HttpError(403, "cannot_claim_own_job");
   if (j.status !== "open") throw new HttpError(409, "job_not_open");
-  const all = await m.store.allJobs();
-  if (all.filter((x) => x.proAccountId === a.id && (x.status === "claimed" || x.status === "delivered")).length >= MAX_ACTIVE_CLAIMS) throw new HttpError(429, "too_many_active_claims");
+  const all = await m.store.jobsByPro(a.id, true);
+  if (all.filter((x) => (x.status === "claimed" || x.status === "delivered")).length >= MAX_ACTIVE_CLAIMS) throw new HttpError(429, "too_many_active_claims");
   // fresh read: if the fault is already gone (the owner fixed it themselves) nobody is paid for it.
   const { finding } = await readCheck(m, d, j.domain, j.check);
   if (finding?.status === "PASS") { j = await need(m, id); if (j.status === "open") await refundAndClose(d, j, "refunded", "already fixed before any claim (fresh scan PASS)"); throw new HttpError(409, "already_fixed"); }
@@ -250,7 +249,12 @@ export async function resolveCard(d: Deps, cardId: string, outcome: string) {
 // ---------- scheduled (a Worker cron trigger, owner-approved deploy; NOT scheduled today) ----------
 export async function sweep(d: Deps) {
   const m = mk(d); const now = d.now(); const r = { reopened: 0, cancelled: 0, retriedRefunds: 0, retriedPayouts: 0, watched: 0 };
-  for (const j of await m.store.allJobs()) {
+  const due = (j: Job) => (j.status === "claimed" && !!j.claimDeadline) || (j.status === "awaiting_funds" && now - j.createdAt > FUNDING_WINDOW_MS)
+    || (j.status === "open" && !!j.fundedAt && now - j.fundedAt > OPEN_WINDOW_MS) || ((j.status === "cancelled" || j.status === "refunded") && !!j.fundedAt && !!j.paymentIntent && !j.refundRef)
+    || (j.status === "reproved" && !!j.proof && !j.payout);   // a claimed job is always due: inside its deadline it is watched (F-C4a), past it it is reopened
+  // read-only view picks the jobs that need work; only those are fetched as private copies (a sweep over a big board must not clone every job)
+  for (const v of await m.store.jobsByStatus(["claimed", "awaiting_funds", "open", "cancelled", "refunded", "reproved"], true)) {   // every status sweep acts on; paid/disputed never matched
+    if (!due(v)) continue; const j = await m.store.getJob(v.id); if (!j) continue;
     if (j.status === "claimed" && j.claimDeadline && now <= j.claimDeadline) {
       // F-C4(a): watch a claimed job. A PASS seen here, before any delivery, is a fix the pro has not delivered (the owner or a third party made it).
       try { const { finding } = await readCheck(m, d, j.domain, j.check); (j.observations ??= []).push({ at: now, status: finding?.status ?? "UNKNOWN", src: "watch" }); if (j.observations.length > 60) j.observations.splice(0, j.observations.length - 60); await m.store.putJob(j); r.watched++; } catch { /* a failed read is not an observation */ }
@@ -275,9 +279,10 @@ async function recordClawback(m: MarketDeps, j: Job, now: number) {
 // Warranty: for 30 days after a proof, a re-scan that shows the fault back marks the fix as regressed (rank loses it).
 export async function warrantySweep(d: Deps) {
   const m = mk(d); const now = d.now(); const out = { checked: 0, regressed: 0, held: 0, clawbacks: 0 };
-  for (const j of await m.store.allJobs()) {
-    if (j.regressedAt && j.status === "paid" && !j.clawbacks?.length) { await recordClawback(m, j, now); out.clawbacks++; continue; }   // backfill: regressed before the ledger existed
-    if (!j.proof || j.regressedAt || j.warrantyOkAt || (j.status !== "paid" && j.status !== "reproved")) continue;
+  for (const v of await m.store.jobsByStatus(["paid", "reproved"], true)) {
+    const bf = v.regressedAt && v.status === "paid" && !v.clawbacks?.length;   // backfill: regressed before the ledger existed
+    if (!bf && (!v.proof || v.regressedAt || v.warrantyOkAt)) continue; const j = await m.store.getJob(v.id); if (!j) continue;
+    if (bf) { await recordClawback(m, j, now); out.clawbacks++; continue; }
     const { finding } = await readCheck(m, d, j.domain, j.check); out.checked++; j.warrantyChecks++;
     if (finding && (finding.status === "FAIL" || finding.status === "WARN")) { j.regressedAt = now; ev(j, now, "regressed", `${j.check} is ${finding.status} again ${Math.floor((now - j.proof.at) / DAY)} days after proof`); out.regressed++; if (j.status === "paid") { await recordClawback(m, j, now); out.clawbacks++; } }
     else if (now - j.proof.at >= WARRANTY_DAYS * DAY && finding?.status === "PASS") { j.warrantyOkAt = now; ev(j, now, "warranty_held", `held ${WARRANTY_DAYS} days`); out.held++; }
@@ -294,11 +299,11 @@ function presentPro2(j: Job) {
   return { id: j.id, domain: j.domain, check: j.check, severity: j.severity, tier: j.tier, payCents: j.priceCents, status: j.status, claimDeadline: j.claimDeadline ?? null, deliveredAt: j.deliveredAt ?? null, rescans: j.rescans, lastRescan: j.lastRescan ?? null, proof: j.proof ?? null, payout: j.payout ? { status: j.payout.status, amountCents: j.payout.amountCents } : null, regressedAt: j.regressedAt ?? null, events: j.events.slice(-20) };
 }
 export async function myJobs(d: Deps, a: Account) {
-  const m = mk(d); const all = await m.store.allJobs();
-  return { asOwner: all.filter((j) => j.ownerAccountId === a.id).map(presentOwner), asPro: all.filter((j) => j.proAccountId === a.id || j.abandonedBy.includes(a.id)).filter((j) => j.proAccountId === a.id).map(presentPro2) };
+  const m = mk(d);
+  return { asOwner: (await m.store.jobsByOwner(a.id, true)).map(presentOwner), asPro: (await m.store.jobsByPro(a.id, true)).map(presentPro2) };
 }
 export async function payouts(d: Deps, a: Account) {
-  const m = mk(d); await requirePro(d, a); const mine = (await m.store.allJobs()).filter((j) => j.proAccountId === a.id);
+  const m = mk(d); await requirePro(d, a); const mine = await m.store.jobsByPro(a.id, true);
   const sum = (f: (j: Job) => boolean) => mine.filter(f).reduce((s, j) => s + j.priceCents, 0);
   return {
     paidCents: sum((j) => j.status === "paid"), pendingReviewCents: sum((j) => j.status === "reproved" && j.payout?.status === "pending_review"),
@@ -307,18 +312,19 @@ export async function payouts(d: Deps, a: Account) {
     rule: "A payout is released only after our re-scan shows the fault gone.",
   };
 }
-export async function myRank(d: Deps, a: Account) { const m = mk(d); const p = await requirePro(d, a); return { display: p.display, ...rankFor(a.id, await m.store.allJobs()) }; }
+export async function myRank(d: Deps, a: Account) { const m = mk(d); const p = await requirePro(d, a); return { display: p.display, ...rankFor(a.id, await m.store.jobsTouchingPro(a.id, true)) }; }
 export async function leaderboard(d: Deps) {
-  const m = mk(d); const jobs = await m.store.allJobs(); const rows = [];
-  for (const p of await m.store.allPros()) { const r = rankFor(p.accountId, jobs); if (r.provenFixes > 0) rows.push({ accountId: p.accountId, display: p.display, points: r.points, tier: r.tier, provenFixes: r.provenFixes, holdRate: r.holdRate }); }
+  const m = mk(d); const rows = [];
+  for (const p of await m.store.allPros()) { const r = rankFor(p.accountId, await m.store.jobsTouchingPro(p.accountId, true)); if (r.provenFixes > 0) rows.push({ accountId: p.accountId, display: p.display, points: r.points, tier: r.tier, provenFixes: r.provenFixes, holdRate: r.holdRate }); }
   rows.sort(boardOrder); return { rows: rows.slice(0, 50).map(({ accountId: _a, ...pub }) => pub), basis: "Proven fixes only: a re-scan showed the fault gone. No reviews, no ratings." };
 }
 export async function marketExport(d: Deps, a: Account) {
   if (!d.market) return {};
-  const all = await d.market.store.allJobs();
-  return { marketJobsAsOwner: all.filter((j) => j.ownerAccountId === a.id).map(presentOwner), marketJobsAsPro: all.filter((j) => j.proAccountId === a.id).map(presentPro2), proProfile: (await d.market.store.getPro(a.id)) ?? null };
+  const st = d.market.store;
+  return { marketJobsAsOwner: (await st.jobsByOwner(a.id, true)).map(presentOwner), marketJobsAsPro: (await st.jobsByPro(a.id, true)).map(presentPro2), proProfile: (await d.market.store.getPro(a.id)) ?? null };
 }
 export async function hasActiveMarketJobs(d: Deps, a: Account): Promise<boolean> {
   if (!d.market) return false;
-  return (await d.market.store.allJobs()).some((j) => (j.ownerAccountId === a.id || j.proAccountId === a.id) && ["open", "claimed", "delivered", "disputed", "awaiting_funds"].includes(j.status) || (j.proAccountId === a.id && j.status === "reproved"));
+  const st = d.market.store, active = ["open", "claimed", "delivered", "disputed", "awaiting_funds"];
+  return (await st.jobsByOwner(a.id, true)).some((j) => active.includes(j.status)) || (await st.jobsByPro(a.id, true)).some((j) => active.includes(j.status) || j.status === "reproved");
 }
