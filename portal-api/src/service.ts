@@ -8,7 +8,7 @@ import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
 
-export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string }
+export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; log?: (line: string) => void }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
@@ -96,19 +96,17 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
 export async function handleStripeEvent(d: Deps, ev: { id: string; type: string; data: { object: Record<string, any> } }): Promise<"handled" | "duplicate" | "ignored"> {
   if (!(await d.store.claimEvent(ev.id))) return "duplicate";
   const o = ev.data.object;
-  if (ev.type === "checkout.session.completed") {
+  if (ev.type === "checkout.session.completed" || ev.type === "checkout.session.async_payment_succeeded") {
     const pur = await d.store.purchaseByCheckout(String(o.id));
-    if (!pur || o.payment_status === "unpaid") return "ignored";
-    const now = d.now();
-    const p = PRODUCTS[pur.productId];
-    pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
-    if (o.subscription) {
-      pur.subscriptionId = String(o.subscription);
-      await d.store.putSubscription({ id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: now });
-    }
-    await d.store.putPurchase(pur);
-    if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-    await issueInvoice(d, pur, p.amountCents, ev.id);
+    if (!pur || o.payment_status !== "paid") return "ignored"; // unpaid (async method) waits for async_payment_succeeded
+    if (pur.status === "pending") await markPaid(d, pur, o, ev.id); // a second paid signal for the same session never funds or invoices again
+    return "handled";
+  }
+  if (ev.type === "charge.refunded") {
+    const pi = String(o.payment_intent ?? ""), pur = pi ? await d.store.purchaseByPaymentIntent(pi) : undefined;
+    if (!pi) return "ignored";
+    if (!pur) { await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) }); return "handled"; } // refund before its payment: held, reconciled by markPaid
+    applyRefund(pur, Number(o.amount_refunded ?? 0)); await d.store.putPurchase(pur);
     return "handled";
   }
   if (ev.type === "invoice.paid" && o.subscription && o.billing_reason === "subscription_cycle") {
@@ -120,11 +118,31 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   }
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
-    if (!sub) return "ignored";
-    sub.cancelledAt = d.now(); await d.store.putSubscription(sub);
+    if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
+    if (!sub.cancelledAt) { sub.cancelledAt = d.now(); await d.store.putSubscription(sub); }
     return "handled";
   }
+  d.log?.(`webhook ignored unknown event type ${ev.type} (${ev.id})`);
   return "ignored";
+}
+// Cumulative Stripe amount_refunded: idempotent and monotone, clamped to [0, amount], never negative.
+function applyRefund(pur: Purchase, cents: number) {
+  pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
+  if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
+}
+async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
+  const now = d.now();
+  pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
+  let cancel = false;
+  if (o.subscription) {
+    pur.subscriptionId = String(o.subscription);
+    cancel = (await d.store.takeFacts(`sub:${pur.subscriptionId}`)).length > 0;
+    await d.store.putSubscription({ id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: now, ...(cancel ? { cancelledAt: now } : {}) });
+  }
+  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
+  await d.store.putPurchase(pur);
+  if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
+  await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
