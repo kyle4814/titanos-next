@@ -59,6 +59,7 @@ export default function CaseStudies() {
               sector={ARIANCE.sector}
               title={ARIANCE.title}
               teaser={ARIANCE.teaser}
+              label={ARIANCE.label}
             />
           )}
           {CASES.map((c, i) => (
@@ -71,6 +72,7 @@ export default function CaseStudies() {
               sector={c.sector}
               title={c.title}
               teaser={c.teaser}
+              label={c.label}
               big={c.facts[0]}
             />
           ))}

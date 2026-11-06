@@ -47,6 +47,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <section style={SECTION}>
         <div style={WRAP}>
           <FactBand facts={c.facts} />
+          <p style={{ ...BODY, textAlign: "center", marginTop: 16 }}>Evidence label: {c.label}</p>
 
           <div style={{ ...PROSE, marginTop: 28 }}>
           <p style={BODY}>
