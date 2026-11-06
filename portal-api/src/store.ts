@@ -59,6 +59,11 @@ export interface Store {
   invoicesFor(accountId: string): Promise<Invoice[]>;
   invoiceById(id: string): Promise<Invoice | undefined>;
   nextInvoiceNumber(): Promise<string>;
+  // f203 reconciler. purchaseInvoiced: the purchase has at least one invoice. putInvoiceOnce: write the invoice ONLY IF the purchase has none, atomically (false = lost the race, nothing written).
+  // paidPurchasesBefore: purchases paid at or before `cutoff` (status paid or refunded) that carry no invoice, oldest first.
+  purchaseInvoiced(purchaseId: string): Promise<boolean>;
+  putInvoiceOnce(i: Invoice): Promise<boolean>;
+  paidPurchasesBefore(cutoff: number): Promise<Purchase[]>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
@@ -116,6 +121,16 @@ export class MemoryStore implements Store {
   }
   async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id).map((i) => ({ ...i })); }
   async invoiceById(id: string) { const i = this.invoices.get(id); return i && { ...i }; }
+  async purchaseInvoiced(id: string) { return [...this.invoices.values()].some((o) => o.purchaseId === id); }
+  // No await between the check and the write: atomic on one object (putInvoice is async but runs synchronously to its end).
+  async putInvoiceOnce(i: Invoice) {
+    if ([...this.invoices.values()].some((o) => o.purchaseId === i.purchaseId)) return false;
+    await this.putInvoice(i); return true;
+  }
+  async paidPurchasesBefore(cutoff: number) {
+    return [...this.purchases.values()].filter((p) => p.paidAt !== undefined && p.paidAt <= cutoff && (p.status === "paid" || p.status === "refunded")
+      && ![...this.invoices.values()].some((o) => o.purchaseId === p.id)).sort((a, b) => a.paidAt! - b.paidAt! || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
+  }
   async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
   async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
   async putCard(c: ReviewCard) { this.cards.set(c.id, c); }
