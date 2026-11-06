@@ -25,11 +25,12 @@ export async function startTopup(d: Deps, a: Account, packId: unknown) {
 
 // Called by the webhook route BEFORE the purchase handler. Returns null when the event is not a credit order.
 export async function handleCreditEvent(d: Deps, ev: { id: string; type: string; data: { object: Record<string, any> } }): Promise<"handled" | "duplicate" | "ignored" | null> {
-  if (ev.type !== "checkout.session.completed") return null;
+  if (ev.type !== "checkout.session.completed" && ev.type !== "checkout.session.async_payment_succeeded") return null;
   const order = await d.store.creditOrderByCheckout(String(ev.data.object.id));
   if (!order) return null;
+  if (ev.data.object.payment_status === "unpaid") return "ignored";   // F-C2: do not burn the event id; async_payment_succeeded fulfils later
   if (!(await d.store.claimEvent(ev.id))) return "duplicate";
-  if (ev.data.object.payment_status === "unpaid" || order.paid) return "ignored";
+  if (order.paid) return "ignored";
   order.paid = true; await d.store.putCreditOrder(order);
   await d.store.creditApply(order.accountId, order.credits, "topup", ev.id, d.now());
   return "handled";

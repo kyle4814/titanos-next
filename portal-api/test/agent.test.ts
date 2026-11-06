@@ -258,3 +258,21 @@ test("worker default export still fails closed without deps (no store yet)", asy
   const r = await handle(new Request("https://api.test/mcp", { method: "POST", body: "{}" }), {});
   assert.equal(r.status, 503);
 });
+
+// ---------- F-C2: delayed payment methods ----------
+test("credits: unpaid completed does not burn the event; async_payment_succeeded fulfils once; wrong signature grants nothing", async () => {
+  const h = make(); const a = await agent(h);
+  await h.j(await h.req("POST", "/agent/credits/topup", { token: a.session, body: { pack: "credits_2000" } }));
+  const order = [...h.store.creditOrders.values()][0];
+  const unpaid = await h.webhook("checkout.session.completed", { id: order.checkoutId, payment_status: "unpaid" }, { id: "evt_u" });
+  assert.equal((await h.j(unpaid)).result, "ignored"); assert.equal(await h.store.creditBalance(a.accountId), 0);
+  const bad = await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }, { secret: "wrong" });
+  assert.equal(bad.status, 400); assert.equal(await h.store.creditBalance(a.accountId), 0);
+  assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "unpaid" }))).result, "ignored");
+  assert.equal(await h.store.creditBalance(a.accountId), 0, "an async event that is not paid grants nothing");
+  const ok = await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }, { id: "evt_ok" });
+  assert.equal((await h.j(ok)).result, "handled"); assert.equal(await h.store.creditBalance(a.accountId), order.credits);
+  assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }, { id: "evt_ok" }))).result, "duplicate");
+  assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }))).result, "ignored", "already fulfilled, new event id");
+  assert.equal(await h.store.creditBalance(a.accountId), order.credits);
+});
