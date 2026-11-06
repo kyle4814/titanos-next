@@ -1,0 +1,138 @@
+{
+ "seed": 31,
+ "seconds": 120,
+ "stat": {
+  "ops": 38209,
+  "exceptions": 0,
+  "s5xx": 0,
+  "s2xx": 26666,
+  "s4xx": 9064,
+  "s429": 2479
+ },
+ "leaks": 0,
+ "leakNotes": [],
+ "fundedWhileUnpaid": 0,
+ "fundedWrongAmount": 0,
+ "paidFromUnpaidFunding": 0,
+ "topCodes": [
+  [
+   "GET /market/jobs 200",
+   5102
+  ],
+  [
+   "POST /mcp 200",
+   4784
+  ],
+  [
+   "GET /enterprise/:id 200",
+   3393
+  ],
+  [
+   "POST /app/domains 200",
+   2865
+  ],
+  [
+   "GET /app/domains 200",
+   2610
+  ],
+  [
+   "POST /checkout 201",
+   2533
+  ],
+  [
+   "POST /refunds 200",
+   2503
+  ],
+  [
+   "GET /app/domains 404",
+   2491
+  ],
+  [
+   "GET /pro/board 200",
+   2455
+  ],
+  [
+   "POST /market/jobs 409",
+   2331
+  ],
+  [
+   "POST /app/domains 429",
+   2255
+  ],
+  [
+   "POST /domains 400",
+   2179
+  ],
+  [
+   "GET /enterprise/:id 404",
+   1654
+  ],
+  [
+   "POST /domains 409",
+   343
+  ]
+ ],
+ "exceptions": [],
+ "latencyMs": {
+  "p50": 7.17,
+  "p95": 28.84,
+  "p99": 44.5,
+  "max": 146
+ },
+ "heapMB": {
+  "start": 13,
+  "end": 38
+ },
+ "final": {
+  "tag": "final",
+  "jobs": 216,
+  "paid": 27,
+  "transfersLedger": 27,
+  "paidSum": 672300,
+  "trSum": 672300,
+  "unpaidFundedJobs": 0,
+  "bad": []
+ },
+ "checkpoints": [
+  {
+   "tSec": 30,
+   "ops": 13918,
+   "p50": 6.35,
+   "p99": 30.7,
+   "heapMB": 31,
+   "jobs": 95,
+   "paid": 14,
+   "bad": 0
+  },
+  {
+   "tSec": 60,
+   "ops": 23110,
+   "p50": 8.59,
+   "p99": 45.62,
+   "heapMB": 29,
+   "jobs": 148,
+   "paid": 17,
+   "bad": 0
+  },
+  {
+   "tSec": 90,
+   "ops": 30817,
+   "p50": 10.04,
+   "p99": 50.75,
+   "heapMB": 23,
+   "jobs": 182,
+   "paid": 22,
+   "bad": 0
+  },
+  {
+   "tSec": 120,
+   "ops": 38209,
+   "p50": 10.33,
+   "p99": 54.52,
+   "heapMB": 27,
+   "jobs": 216,
+   "paid": 27,
+   "bad": 0
+  }
+ ]
+}
