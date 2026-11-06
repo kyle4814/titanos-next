@@ -103,7 +103,7 @@ test("an upsert replaces the stored plan (second write wins) and clears cancelAt
 // ---------- mutation: each adapter mutant must be caught by a named check ----------
 const SRC = resolve(import.meta.dirname, "../src");
 const MUT: { id: string; inv: string; from: string; to: string }[] = [
-  { id: "A1 write omits plan_json", inv: "P1", from: "s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));", to: "s.cancelAt), n(s.cancelledAt), null);" },
+  { id: "A1 write omits plan_json", inv: "P3", from: "s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));", to: "s.cancelAt), n(s.cancelledAt), null);" },
   { id: "A2 read ignores plan_json", inv: "P1", from: "if (r.plan_json !== null && r.plan_json !== undefined) s.plan", to: "if (false) s.plan" },
   { id: "A3 upsert keeps the old plan_json", inv: "P2", from: "cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json", to: "cancelled_at = excluded.cancelled_at" },
   { id: "A4 upsert keeps the old cancel_at", inv: "P7", from: "cancel_at = excluded.cancel_at, cancelled_at", to: "cancelled_at" },

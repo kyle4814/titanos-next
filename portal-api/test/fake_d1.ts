@@ -10,15 +10,20 @@ import type { D1Like, D1Statement } from "../src/env.ts";
 const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
 export const MIGRATIONS = readdirSync(dir).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort();
 
-const tick = async () => { for (let i = Math.floor(Math.random() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
+export type Rng = () => number;
+// Seeded schedule (f175): mulberry32. Same seed = same sequence of yields, so an interleaving can be replayed.
+export const seeded = (seed: number): Rng => { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
 
 export class FakeD1 implements D1Like {
   db = new DatabaseSync(":memory:");
   log: { sql: string; args: unknown[] }[] = [];
-  constructor() {
+  rng: Rng;
+  constructor(rng: Rng = Math.random) {
+    this.rng = rng;
     this.db.exec("PRAGMA foreign_keys = ON");
     for (const f of MIGRATIONS) this.db.exec(readFileSync(dir + f, "utf8"));
   }
+  async tick() { for (let i = Math.floor(this.rng() * 4); i >= 0; i--) await new Promise((r) => setImmediate(r)); }
   prepare(sql: string): D1Statement {
     const self = this;
     let args: unknown[] = [];
@@ -26,14 +31,14 @@ export class FakeD1 implements D1Like {
       sql,
       get args() { return args; },
       bind(...a: unknown[]) { args = a.map((x) => (x === undefined ? null : x)); return st; },
-      async first<T>() { await tick(); self.log.push({ sql, args }); return (self.db.prepare(sql).get(...(args as never[])) as T | undefined) ?? null; },
-      async all<T>() { await tick(); self.log.push({ sql, args }); return { results: self.db.prepare(sql).all(...(args as never[])) as T[] }; },
-      async run() { await tick(); self.log.push({ sql, args }); const r = self.db.prepare(sql).run(...(args as never[])); return { meta: { changes: Number(r.changes) } }; },
+      async first<T>() { await self.tick(); self.log.push({ sql, args }); return (self.db.prepare(sql).get(...(args as never[])) as T | undefined) ?? null; },
+      async all<T>() { await self.tick(); self.log.push({ sql, args }); return { results: self.db.prepare(sql).all(...(args as never[])) as T[] }; },
+      async run() { await self.tick(); self.log.push({ sql, args }); const r = self.db.prepare(sql).run(...(args as never[])); return { meta: { changes: Number(r.changes) } }; },
     };
     return st as unknown as D1Statement;
   }
   async batch(stmts: D1Statement[]) {
-    await tick();
+    await this.tick();
     this.db.exec("BEGIN");
     try {
       const out: unknown[] = [];
