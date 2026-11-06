@@ -40,7 +40,7 @@ const CARD: CSSProperties = {
 const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15 };
 
 const SPLIT: [string, string, string][] = [
-  ["99%", "plain code", "Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again."],
+  ["99%", "plain code", "Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again. ESTIMATE: a design ratio, not a measured share."],
   ["1%", "AI", "The AI only does the judgement work: reading, writing and deciding what code cannot."],
   ["One tap", "you", "Anything that sends, spends or commits waits for a person to approve it."],
 ];
