@@ -161,7 +161,18 @@ async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId:
     const sub: Subscription = { id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
     await seedPeriod(d, sub, sp, true);
     for (const hp of held.rest) await seedPeriod(d, sub, hp, false); // invoices that beat the checkout, oldest first
-    await d.store.createSubscription(sub); // insert-if-absent: a row that already exists (changePlan, a racing writer) is never replaced by this fresh object
+    if (!(await d.store.createSubscription(sub))) { // insert-if-absent: a row that already exists (changePlan, a racing writer, a duplicate paid delivery) is never replaced by this fresh object
+      // f186: but the facts THIS call took (cancel, Stripe periods) must not be consumed without effect: apply them to the row that won, by CAS
+      await updateSubscription(d, sub.id, async (x, fx) => {
+        const before = JSON.stringify(x);
+        fx.taken = facts; fx.used = true; // consumed here on purpose: never put back (nobody would ever take them again)
+        if (cancel && !x.cancelledAt) x.cancelledAt = now;
+        const planned = !!x.plan;
+        await seedPeriod(d, x, sp, true, fx); // no plan yet: seeds it and replays the held rest from fx.taken; a plan already there: observePeriod, idempotent
+        if (planned) for (const hp of held.rest) await seedPeriod(d, x, hp, false, fx);
+        return JSON.stringify(x) !== before;
+      });
+    }
   }
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
