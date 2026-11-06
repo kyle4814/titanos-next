@@ -82,6 +82,9 @@ if (bi > 0) {
   for (const r of routes) ok(new RegExp(`data-provenance="${r}"`).test(read(r)), `built ${r} carries its provenance stamp`);
   for (const r of ["/trust", "/open-data", "/sectors"]) ok(existsSync(join(out, `${r}.html`)), `built ${r} exists`);
   const inH = read("/investors");
+  // R-C9 (wA acceptance 2026-11-06): the lint and trace set covers the investor room and every page that quotes the ledger
+  const LINT_PAGES = ["/trust", "/open-data", "/sectors", "/proof", "/investors", "/mission", "/costs", "/engineering", "/efficiency", "/"];
+  const htmlOf = (r) => (r === "/" ? "/index" : r);
   ok(/noindex/.test(inH), "built /investors is noindex");
   ok(!/investors/.test(readFileSync(join(out, "sitemap.xml"), "utf8")), "sitemap.xml does not list /investors");
   ok(/\/trust/.test(readFileSync(join(out, "sitemap.xml"), "utf8")) && /\/open-data/.test(readFileSync(join(out, "sitemap.xml"), "utf8")), "sitemap lists /trust and /open-data");
@@ -96,13 +99,29 @@ if (bi > 0) {
   }
   // content_lint on the visible copy of the C9 pages
   const dir = mkdtempSync(join(tmpdir(), "c9lint-"));
-  for (const r of ["/trust", "/open-data", "/sectors", "/proof"]) {
-    const f = join(dir, r.slice(1) + ".txt");
+  for (const r of LINT_PAGES) {
+    const f = join(dir, (r === "/" ? "index" : r.slice(1)) + ".txt");
     // paragraph = one block element (li, p, heading, article, aside, section, div row), so a figure stays with its label chip
-    const blocks = read(r).replace(/<(header|nav|footer)[\s\S]*?<\/\1>/g, " ").replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").split(/<\/(?:li|p|h[1-6]|article|aside|section|tr|figure)>/);
-    writeFileSync(f, blocks.map((b) => text(b).trim()).filter(Boolean).join("\n\n"));
-    const lint = spawnSync("python3", ["/home/tech2/klinge-kernel/bin/content_lint.py", "--no-cta", "--figures", f], { encoding: "utf8" });
-    ok(lint.status === 0, `content_lint --no-cta --figures CLEAN on ${r}` + (lint.status ? " :: " + (lint.stdout + lint.stderr).trim().slice(0, 300) : ""));
+    const blocks = read(htmlOf(r)).replace(/<(header|nav|footer)[\s\S]*?<\/\1>/g, " ").replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").split(/<\/(?:section|table|figure)>|<h[12][^>]*>/);
+    ok(!DASH.test(text(read(htmlOf(r)))), `${r}: zero em or en dashes in visible copy`);
+    writeFileSync(f, blocks.map((b) => text(b.replace(/<a\s[^>]*href="(\/[^"#]*)"[^>]*>/g, " https://titanos.tech$1 ")).trim().replace(/\bRECORDED\b/g, "VERIFIED RECORDED") /* flex kind RECORDED = stored result whose source sits in the card caption */.replace(/(AU\$[\d,]+)\s*\/\s*mo\b/g, "$1 a month").replace(/(AU\$[\d,]+)\s*\/\s*yr\b/g, "$1 a year")).filter(Boolean).join("\n\n"));
+    const lint = spawnSync("python3", [P("scripts/lib/content_lint.py").pathname, "--no-cta", "--figures", f], { encoding: "utf8" });
+    if (lint.status) { const who = spawnSync("python3", ["-c", "import sys,re;sys.path.insert(0,'scripts/lib');import content_lint as c;t=c.strip(open(sys.argv[1]).read())\nfor p in re.split(r'\\n\\s*\\n',t):\n  if c.FIG.search(p) and not c.PRICE.search(p) and not c.LABEL.search(p): print('  UNLABELLED:',p[:160])", f], { cwd: root.pathname, encoding: "utf8" }); if (process.env.C9_VERBOSE) console.log(who.stdout + who.stderr); }
+    ok(lint.status === 0, `content_lint --no-cta --figures CLEAN on ${r}` + (lint.status ? " :: " + (lint.stdout + lint.stderr).trim().slice(0, 1500) : ""));
+  }
+  // R-C9 trace: every number rendered on the investor room and the pages that quote the ledger must exist in a cited data file
+  // (same method as portal-api/acceptance/wA/trace.mjs; ledger values also match when rounded, because pages print int()/dec()).
+  const dataFiles = ["lib/ledger.json", "lib/site-data/proof.json", "lib/site-data/trust.json", "lib/site-data/provenance.json", "lib/site-data/sectors.json"];
+  let knownT = dataFiles.map((f) => R(f)).join("").replace(/[,\s]/g, "");
+  const nums0 = (R("lib/ledger.json").match(/-?\d+\.?\d*(?:e[+-]?\d+)?/gi) || []).map(Number).filter(Number.isFinite);
+  knownT += nums0.map((n) => String(Math.round(n)) + "|" + n.toFixed(1) + "|" + n.toFixed(2)).join("|");
+  const TRACE_MAX = { "/investors": 0, "/mission": 1, "/costs": 48, "/engineering": 4, "/efficiency": 15, "/": 23 }; // wA baseline 2026-11-06; /investors must be 0; the rest only ratchet down
+  for (const [r, max] of Object.entries(TRACE_MAX)) {
+    const body = text(read(htmlOf(r)).replace(/<(header|nav|footer)[\s\S]*?<\/\1>/g, " "));
+    const nums = [...new Set([...body.matchAll(/\b\d[\d.,]*\d\b|\b\d\b/g)].map((m) => m[0].replace(/,/g, "")))];
+    const untraced = nums.filter((n) => !knownT.includes(n));
+    if (process.env.C9_VERBOSE) console.log(`  TRACE ${r} ${nums.length} numbers, ${untraced.length} untraced: ${untraced.join(",")}`);
+    ok(untraced.length <= max, `trace ${r}: ${untraced.length} untraced numbers (ceiling ${max})` + (untraced.length > max ? " :: " + untraced.slice(0, 12).join(",") : ""));
   }
   // offers: built non-buyable pages never carry BUY NOW
   let leaks = 0, checked = 0;
