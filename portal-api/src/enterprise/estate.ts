@@ -11,7 +11,7 @@ export function summarise(f: ScanFinding[]) {
 export const grade = (score: number) => (score >= 90 ? "A" : score >= 75 ? "B" : score >= 60 ? "C" : score >= 40 ? "D" : "F");
 
 // SYNTHETIC findings from a hash of the domain, so the estate view is testable end to end. The real adapter is the C1
-// scan/grader (passive DNS only); wiring it is PENDING (C1 is a separate branch). This provider is always labelled.
+// scan/grader (passive DNS only), now in estate_dns.ts (dnsScan). This provider stays as the labelled test adapter.
 const TITLES: Record<ScanFinding["severity"], string[]> = {
   critical: ["SYNTHETIC: no SPF record", "SYNTHETIC: DMARC absent"],
   high: ["SYNTHETIC: DMARC policy is none"],

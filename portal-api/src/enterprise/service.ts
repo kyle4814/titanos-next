@@ -219,20 +219,40 @@ export async function removeAsset(d: Deps, ctx: Ctx, tid: string, aid: string) {
   await audit(d, tid, ctx.account.id, "asset.remove", a.domain);
 }
 // Only verified assets are assessed (we never scan a domain the tenant has not proven it controls).
+// Assessment concurrency is capped per estate view; an UNKNOWN assessment never carries a grade or a score.
+export type EstateRow = {
+  id: string; domain: string; label: string; group: string; verified: boolean;
+  status: "NOT_VERIFIED" | "ASSESSED" | "UNKNOWN"; reason: string | null;
+  grade: string | null; score: number | null; scannedAt: number | null; resolverSource: string | null;
+  findings: { critical: number; high: number; medium: number; low: number };
+};
+const NO_FINDINGS = () => ({ critical: 0, high: 0, medium: 0, low: 0 });
 export async function estate(d: Deps, tid: string) {
   const c = ent(d), tenant = (await c.store.tenantById(tid))!;
   const assets = await c.store.assetsOf(tid);
-  const rows = [];
-  for (let i = 0; i < assets.length; i += 25) {
-    rows.push(...(await Promise.all(assets.slice(i, i + 25).map(async (a) => {
-      if (!a.verifiedAt) return { id: a.id, domain: a.domain, label: a.label, group: a.group, verified: false, grade: null as string | null, score: null as number | null, findings: { critical: 0, high: 0, medium: 0, low: 0 } };
-      const f = await c.scan.scan(a.domain), s = summarise(f);
-      return { id: a.id, domain: a.domain, label: a.label, group: a.group, verified: true, grade: grade(s.score), score: s.score, findings: s.counts };
-    }))));
-  }
-  const verified = rows.filter((r) => r.verified);
-  const totals = { assets: rows.length, verified: verified.length, unverified: rows.length - verified.length, critical: 0, high: 0, medium: 0, low: 0, averageScore: verified.length ? Math.round(verified.reduce((n, r) => n + (r.score ?? 0), 0) / verified.length) : null as number | null };
-  for (const r of verified) { totals.critical += r.findings.critical; totals.high += r.findings.high; totals.medium += r.findings.medium; totals.low += r.findings.low; }
+  const cap = Math.max(1, Math.floor(c.scan.concurrency ?? 25));
+  const rows: EstateRow[] = new Array(assets.length);
+  let next = 0;
+  const one = async (i: number) => {
+    const a = assets[i];
+    const base = { id: a.id, domain: a.domain, label: a.label, group: a.group };
+    if (!a.verifiedAt) { rows[i] = { ...base, verified: false, status: "NOT_VERIFIED", reason: null, grade: null, score: null, scannedAt: null, resolverSource: null, findings: NO_FINDINGS() }; return; }
+    try {
+      if (c.scan.assess) {
+        const r = await c.scan.assess(a.domain);
+        rows[i] = r.status === "ASSESSED"
+          ? { ...base, verified: true, status: "ASSESSED", reason: null, grade: r.grade, score: r.score, scannedAt: r.scannedAt, resolverSource: r.resolverSource, findings: r.counts }
+          : { ...base, verified: true, status: "UNKNOWN", reason: r.reason, grade: null, score: null, scannedAt: r.scannedAt, resolverSource: r.resolverSource, findings: NO_FINDINGS() };
+      } else {
+        const f = await c.scan.scan(a.domain), s = summarise(f);
+        rows[i] = { ...base, verified: true, status: "ASSESSED", reason: null, grade: grade(s.score), score: s.score, scannedAt: d.now(), resolverSource: c.scan.source, findings: s.counts };
+      }
+    } catch { rows[i] = { ...base, verified: true, status: "UNKNOWN", reason: "scan_error", grade: null, score: null, scannedAt: d.now(), resolverSource: c.scan.source, findings: NO_FINDINGS() }; }
+  };
+  await Promise.all(Array.from({ length: Math.min(cap, assets.length) }, async () => { while (next < assets.length) await one(next++); }));
+  const verified = rows.filter((r) => r.verified), assessed = rows.filter((r) => r.status === "ASSESSED");
+  const totals = { assets: rows.length, verified: verified.length, unverified: rows.length - verified.length, assessed: assessed.length, unknown: verified.length - assessed.length, critical: 0, high: 0, medium: 0, low: 0, averageScore: assessed.length ? Math.round(assessed.reduce((n, r) => n + (r.score ?? 0), 0) / assessed.length) : null as number | null };
+  for (const r of assessed) { totals.critical += r.findings.critical; totals.high += r.findings.high; totals.medium += r.findings.medium; totals.low += r.findings.low; }
   return { tenant: { id: tenant.id, name: tenant.name }, dataSource: c.scan.source, totals, assets: rows };
 }
 export async function estateView(d: Deps, ctx: Ctx, tid: string) { await access(d, ctx, tid, "viewer"); return estate(d, tid); }
@@ -245,8 +265,8 @@ export const csvCell = (v: unknown) => {
 export async function estateCsv(d: Deps, ctx: Ctx, tid: string) {
   await access(d, ctx, tid, "analyst");
   const v = await estate(d, tid);
-  const lines = [["domain", "label", "group", "verified", "grade", "score", "critical", "high", "medium", "low"].join(",")];
-  for (const r of v.assets) lines.push([r.domain, r.label, r.group, r.verified, r.grade, r.score, r.findings.critical, r.findings.high, r.findings.medium, r.findings.low].map(csvCell).join(","));
+  const lines = [["domain", "label", "group", "verified", "status", "grade", "score", "critical", "high", "medium", "low", "scanned_at", "resolver_source"].join(",")];
+  for (const r of v.assets) lines.push([r.domain, r.label, r.group, r.verified, r.status, r.grade, r.score, r.findings.critical, r.findings.high, r.findings.medium, r.findings.low, r.scannedAt === null ? "" : new Date(r.scannedAt).toISOString(), r.resolverSource].map(csvCell).join(","));
   return lines.join("\n") + `\n# data source: ${v.dataSource}\n`;
 }
 
