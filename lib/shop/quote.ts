@@ -1,6 +1,7 @@
 // C5 shop: Auto Builder quote engine. Code only, deterministic, zero model calls. It can only say what is real:
 // a shelf, its published price, or "quote". Unmatched asks become a generator config stub (logged, built overnight).
 import type { GradedShelf, Quote, GeneratorConfig } from "./types";
+import { isValidPrice } from "./grader.ts";
 export type Vocab = { jobs: readonly string[]; sectors: readonly string[]; countries: readonly string[] };
 
 const STOP = new Set(["i", "a", "an", "the", "for", "to", "my", "of", "and", "need", "want", "please", "can", "you", "me", "with", "in", "on", "do"]);
@@ -26,7 +27,8 @@ export function quoteAsk(text: string, shelves: GradedShelf[], vocab: Vocab, now
   }
   const minHits = ask.size <= 1 ? 1 : 2;
   if (best && bestN >= minHits) {
-    const priced = best.priceAud !== null && best.cadence !== "quote" && best.cadence !== "none";
+    // Defence in depth (F87): a quote never relabels a PROPOSED or malformed price as PUBLISHED, whatever the grade flag says.
+    const priced = best.priceLabel === "PUBLISHED" && isValidPrice(best.priceAud) && best.cadence !== "quote" && best.cadence !== "none";
     return {
       matched: true, shelfId: best.id, priceAud: priced ? best.priceAud : null,
       priceLabel: priced ? "PUBLISHED" : "QUOTE", cadence: best.cadence,
