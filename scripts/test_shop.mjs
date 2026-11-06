@@ -46,6 +46,14 @@ t("mut: no stripe link fails availability", bad({ buyUrl: null }, "availability-
 t("mut: non-stripe link fails availability", bad({ buyUrl: "https://evil.example/x" }, "availability-true"));
 t("mut: not READY fails availability", bad({ status: "CHECK" }, "availability-true"));
 t("mut: PROPOSED price fails price-honest", bad({ priceLabel: "PROPOSED" }, "price-honest"));
+// F-C5 (wA backlog): the price must be a finite number >= 0 (or null). Each of these used to show.
+for (const [name, price] of [["Infinity", Infinity], ["-Infinity", -Infinity], ["NaN", NaN], ["string '49'", "49"], ["negative", -5], ["object", {}], ["boolean", true]]) {
+  t(`mut: ${name} price fails price-honest`, bad({ priceAud: price }, "price-honest"));
+  t(`mut: ${name} price is not visible`, visibleShelves(gradeAll([{ ...base, priceAud: price }])).length === 0);
+}
+t("mut: string price on a QUOTE shelf is hidden", visibleShelves(gradeAll([{ ...base, availability: "QUOTE", cadence: "quote", priceLabel: "QUOTE", buyUrl: null, priceAud: "49" }])).length === 0);
+t("mut: BUYABLE price 0 fails availability", bad({ priceAud: 0 }, "availability-true"));
+t("free step with PUBLISHED AU$0 still shows", shown.some((s) => s.availability === "FREE_STEP" && s.priceAud === 0));
 t("mut: synthetic fails", bad({ synthetic: true }, "not-synthetic"));
 t("mut: empty bluf fails", bad({ bluf: "short" }, "bluf"));
 t("mut: no source fails", bad({ source: "" }, "source"));

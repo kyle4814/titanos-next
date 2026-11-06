@@ -1,6 +1,6 @@
 // MCP over HTTP (JSON-RPC 2.0), POST /mcp. Auth: Authorization: Bearer tk_... (a scoped API key from POST /keys).
 // Methods: initialize, ping, tools/list, tools/call. A key sees and can call only the tools its scopes allow.
-import type { Deps } from "../service.ts";
+import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
 import { sha256Hex } from "../util.ts";
 import { hashOf, newReceiptId, signReceipt } from "./receipt.ts";
@@ -51,6 +51,8 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   const idem = hdr.idem && /^[\w.-]{1,64}$/.test(hdr.idem) ? hdr.idem : undefined;
   if (idem) { // a retry with the same Idempotency-Key returns the original receipt and charges nothing more
     const prev = await d.store.receiptByIdem(auth.key.id, idem);
+    // F-C7: the same key with a different tool or different arguments is a client bug, never a replay of the first receipt.
+    if (prev && (prev.tool !== t.name || prev.inputSha !== (await hashOf(args)))) throw new HttpError(422, "idempotency_key_reuse");
     if (prev) return toolText(id, { replayed: true, receipt: prev });
   }
   const now = d.now();
