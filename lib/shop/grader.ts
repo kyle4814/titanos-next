@@ -10,9 +10,33 @@ function visibleText(s: Shelf): string[] {
   return [s.name, s.bluf, ...s.bullets, ...s.faq.flatMap((f) => [f.q, f.a])];
 }
 
+// Every key a shelf may carry. Anything else could reach rendering unreviewed, so it hides the shelf.
+const ALLOWED_KEYS = new Set([
+  "id", "kind", "slug", "name", "bluf", "bullets", "faq", "priceAud", "cadence", "priceLabel", "status",
+  "availability", "buyUrl", "href", "source", "synthetic", "proof", "tags", "grade",
+]);
+const isStr = (v: unknown): v is string => typeof v === "string";
+const strArr = (v: unknown): v is string[] => Array.isArray(v) && v.every(isStr);
+// A price is a finite number >= 0 that lands on a safe-integer cent amount. "49", Infinity, NaN, null, 1e309, -1 all fail.
+export const isValidPrice = (v: unknown): v is number =>
+  typeof v === "number" && Number.isFinite(v) && v >= 0 && Number.isSafeInteger(Math.round(v * 100)) && Math.abs(v * 100 - Math.round(v * 100)) < 1e-6;
+
 export function gradeShelf(s: Shelf): Grade {
   const c: Check[] = [];
   const add = (id: string, ok: boolean, why: string) => c.push({ id, ok, why });
+
+  // Shape first: if the shape is wrong, nothing below may throw, and the shelf is hidden.
+  const o = (s !== null && typeof s === "object" ? s : {}) as unknown as Record<string, unknown>;
+  const faqOk = Array.isArray(o.faq) && (o.faq as unknown[]).every((f) => !!f && typeof f === "object" && isStr((f as { q?: unknown }).q) && isStr((f as { a?: unknown }).a));
+  const unknownKeys = s !== null && typeof s === "object" ? Object.keys(o).filter((k) => !ALLOWED_KEYS.has(k)) : ["<not an object>"];
+  const shapeOk =
+    !!s && typeof s === "object" && isStr(o.slug) && isStr(o.name) && isStr(o.bluf) && isStr(o.source) &&
+    strArr(o.bullets) && strArr(o.tags) && faqOk && typeof o.synthetic === "boolean" && (o.buyUrl === null || isStr(o.buyUrl));
+  add("types", shapeOk, "title, bluf, source are strings; bullets and tags are string arrays; faq is {q,a} strings");
+  add("no-unknown-fields", unknownKeys.length === 0, unknownKeys.length ? `unknown field: ${unknownKeys.join(", ")}` : "no fields outside the shelf schema");
+  const priceTyped = o.priceAud === null || isValidPrice(o.priceAud);
+  add("price-type", priceTyped, "price is null or a finite number of at least 0 on a whole-cent amount");
+  if (!shapeOk) return { pass: false, checks: c };
 
   add("slug", SLUG.test(s.slug), "slug is kebab-case");
   add("name", s.name.trim().length >= 3 && s.name.length <= 120, "name 3 to 120 chars");
@@ -22,10 +46,10 @@ export function gradeShelf(s: Shelf): Grade {
   add("not-synthetic", !s.synthetic, "synthetic configs never show publicly");
 
   // Price honesty: a number needs a real label; a quote needs the QUOTE label; never a price on PROPOSED.
-  const priced = s.priceAud !== null && s.cadence !== "quote" && s.cadence !== "none";
+  const priced = s.priceAud !== null && isValidPrice(s.priceAud) && s.cadence !== "quote" && s.cadence !== "none";
   add(
     "price-honest",
-    priced ? s.priceLabel === "PUBLISHED" && (s.priceAud as number) >= 0 : s.priceLabel === "QUOTE" || s.priceLabel === "UNKNOWN",
+    priced ? s.priceLabel === "PUBLISHED" && isValidPrice(s.priceAud) : s.priceLabel === "QUOTE" || s.priceLabel === "UNKNOWN",
     "a shown price is PUBLISHED; otherwise the shelf says quote",
   );
 
@@ -52,5 +76,5 @@ export function gradeAll(shelves: Shelf[]): GradedShelf[] {
 
 // The only door to the public page: graded and passing. Ungraded input cannot pass this.
 export function visibleShelves(graded: GradedShelf[]): GradedShelf[] {
-  return graded.filter((s) => s.grade && s.grade.pass === true && gradeShelf(s).pass);
+  return graded.filter((s) => s && s.grade && s.grade.pass === true && gradeShelf(s).pass);
 }
