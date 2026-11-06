@@ -25,7 +25,7 @@ const toCard = (r: Row): ReviewCard => ({ id: String(r.id), accountId: String(r.
 const toKey = (r: Row): ApiKey => ({ id: String(r.id), accountId: String(r.account_id), hash: String(r.key_hash), scopes: String(r.scopes ?? "") === "" ? [] : String(r.scopes).split(","), createdAt: Number(r.created_at), revokedAt: num(r.revoked_at) });
 const toEntry = (r: Row): CreditEntry => ({ id: String(r.id), accountId: String(r.account_id), delta: Number(r.delta), reason: String(r.reason) as CreditEntry["reason"], ref: String(r.ref), at: Number(r.at) });
 const toOrder = (r: Row): CreditOrder => ({ id: String(r.id), accountId: String(r.account_id), checkoutId: String(r.checkout_id), packId: String(r.pack_id), credits: Number(r.credits), paid: bool(r.paid) });
-const toReceipt = (r: Row): AgentReceipt => ({ id: String(r.id), tool: String(r.tool), keyId: String(r.key_id), accountId: String(r.account_id), at: Number(r.at), inputSha: String(r.input_sha), outputSha: String(r.output_sha), credits: Number(r.credits), mode: String(r.mode) as AgentReceipt["mode"], sig: String(r.sig), ...(r.idem === null || r.idem === undefined ? {} : { idem: String(r.idem) }) });
+const toReceipt = (r: Row): AgentReceipt => ({ id: String(r.id), tool: String(r.tool), keyId: String(r.key_id), accountId: String(r.account_id), at: Number(r.at), inputSha: String(r.input_sha), outputSha: String(r.output_sha), credits: Number(r.credits), mode: String(r.mode) as AgentReceipt["mode"], sig: String(r.sig), ...(r.idem === null || r.idem === undefined ? {} : { idem: String(r.idem) }), ...(r.kid ? { kid: String(r.kid) } : {}) });
 const b = (v: boolean) => (v ? 1 : 0);
 const n = (v: unknown) => (v === undefined ? null : v);
 
@@ -131,10 +131,19 @@ export class D1Store implements Store {
   }
   async creditOrderByCheckout(checkoutId: string) { const r = await this.one("SELECT * FROM credit_orders WHERE checkout_id = ?", checkoutId); return r && toOrder(r); }
   async putReceipt(r: AgentReceipt) {
-    await this.exec("INSERT INTO agent_receipts (id, tool, key_id, account_id, at, input_sha, output_sha, credits, mode, sig, idem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET tool = excluded.tool, key_id = excluded.key_id, account_id = excluded.account_id, at = excluded.at, input_sha = excluded.input_sha, output_sha = excluded.output_sha, credits = excluded.credits, mode = excluded.mode, sig = excluded.sig, idem = excluded.idem", r.id, r.tool, r.keyId, r.accountId, r.at, r.inputSha, r.outputSha, r.credits, r.mode, r.sig, n(r.idem));
+    await this.exec("INSERT INTO agent_receipts (id, tool, key_id, account_id, at, input_sha, output_sha, credits, mode, sig, idem, kid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET tool = excluded.tool, key_id = excluded.key_id, account_id = excluded.account_id, at = excluded.at, input_sha = excluded.input_sha, output_sha = excluded.output_sha, credits = excluded.credits, mode = excluded.mode, sig = excluded.sig, idem = excluded.idem, kid = excluded.kid", r.id, r.tool, r.keyId, r.accountId, r.at, r.inputSha, r.outputSha, r.credits, r.mode, r.sig, n(r.idem), n(r.kid));
   }
   async receiptById(id: string) { const r = await this.one("SELECT * FROM agent_receipts WHERE id = ?", id); return r && toReceipt(r); }
   async receiptByIdem(keyId: string, idem: string) { const r = await this.one("SELECT * FROM agent_receipts WHERE key_id = ? AND idem = ?", keyId, idem); return r && toReceipt(r); }
+  // F17: one upsert statement. The row is inserted, or taken over only if the old claim has expired (expires_at <= now); a live
+  // claim makes the WHERE false, so no row comes back. ON CONFLICT keeps the old rid (not in the SET list).
+  async idemReserve(keyId: string, idem: string, rid: string, owner: string, now: number, ttlMs: number) {
+    const r = await this.one("INSERT INTO idem_reservations (key_id, idem, rid, owner, expires_at) VALUES (?1, ?2, ?3, ?4, ?5) ON CONFLICT(key_id, idem) DO UPDATE SET owner = excluded.owner, expires_at = excluded.expires_at WHERE idem_reservations.expires_at <= ?6 RETURNING rid", keyId, idem, rid, owner, now + ttlMs, now);
+    if (r) return { won: true, rid: String(r.rid) };
+    const cur = await this.one("SELECT rid FROM idem_reservations WHERE key_id = ? AND idem = ?", keyId, idem);
+    return { won: false, rid: String(cur?.rid ?? rid) };
+  }
+  async idemRelease(keyId: string, idem: string, owner: string) { await this.exec("DELETE FROM idem_reservations WHERE key_id = ? AND idem = ? AND owner = ?", keyId, idem, owner); }
   async callsSince(keyId: string, since: number) { const r = await this.one("SELECT COUNT(*) AS c FROM agent_calls WHERE key_id = ? AND at >= ?", keyId, since); return Number(r?.c ?? 0); }
   async noteCall(keyId: string, at: number) { await this.exec("INSERT INTO agent_calls (key_id, at) VALUES (?, ?)", keyId, at); }
 
