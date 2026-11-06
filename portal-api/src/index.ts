@@ -11,6 +11,7 @@ import { TOOLS, publicTool } from "./agent/tools.ts";
 import { verifyReceipt } from "./agent/receipt.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
+import { workerScheduled } from "./owner/cron.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -166,5 +167,8 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
 export default {
   fetch(req: Request, env: Env): Promise<Response> {
     return handle(req, env).catch(() => json({ error: "internal" }, 500));
+  },
+  async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
+    await workerScheduled(event, env);
   },
 };
