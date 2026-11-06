@@ -45,6 +45,8 @@ t("mut: AI tell fails copy", bad({ name: "A robust thing" }, "copy"));
 t("mut: no stripe link fails availability", bad({ buyUrl: null }, "availability-true"));
 t("mut: non-stripe link fails availability", bad({ buyUrl: "https://evil.example/x" }, "availability-true"));
 t("mut: not READY fails availability", bad({ status: "CHECK" }, "availability-true"));
+t("mut: test-mode stripe link never a public buy link", bad({ buyUrl: "https://buy.stripe.com/test_abc123" }, "availability-true"));
+t("mut: mock stripe link never a public buy link", bad({ buyUrl: "mock://stripe/x" }, "availability-true"));
 t("mut: PROPOSED price fails price-honest", bad({ priceLabel: "PROPOSED" }, "price-honest"));
 // F-C5 (wA backlog): the price must be a finite number >= 0 (or null). Each of these used to show.
 for (const [name, price] of [["Infinity", Infinity], ["-Infinity", -Infinity], ["NaN", NaN], ["string '49'", "49"], ["negative", -5], ["object", {}], ["boolean", true]]) {
