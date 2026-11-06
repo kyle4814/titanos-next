@@ -1,6 +1,7 @@
 // C6 concierge router. Code-only, seat-aware, 0 model calls: no fetch, no model SDK, no clock, no random.
 import type { Reply, Seat, Shelf, Tap, ConfigStub } from "./types.ts";
 import { tokens, normalise, findDomain } from "./text.ts";
+import type { UnmatchedLog } from "./unmatched.ts";
 
 export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: unmatched
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
@@ -113,8 +114,9 @@ function unmatched(raw: string, seat: Seat): Reply {
 }
 
 // Unmatched asks are logged through an interface so a Worker/D1 adapter can replace the in-memory one.
-export interface UnmatchedLog { append(stub: ConfigStub): void | Promise<void> }
-export class MemoryLog implements UnmatchedLog { rows: ConfigStub[] = []; append(s: ConfigStub) { this.rows.push(s); } }
+// The interface and the MemoryLog adapter live in unmatched.ts (shared rules); D1UnmatchedLog is in d1log.ts.
+export { MemoryLog } from "./unmatched.ts";
+export type { UnmatchedLog } from "./unmatched.ts";
 
 export function concierge(index: Index, log: UnmatchedLog) {
   return (ask: string, seat: Seat = "guest"): Reply => {
