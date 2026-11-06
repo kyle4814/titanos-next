@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "The ONE home for the TITANOS portal backend (accounts, billing, marketplace, keys). Cloudflare Worker, D1. See BACKEND_DECISION.md in the kernel charter. Nothing here is deployed.",
+  "devDependencies": {
+    "typescript": "^5"
+  },
   "scripts": {
     "flow16": "node --experimental-strip-types scripts/flow16_matrix.ts",
     "lint:migrations": "node --disable-warning=ExperimentalWarning scripts/migration_lint.mjs",

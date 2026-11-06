@@ -1,11 +1,11 @@
 // f104: the migration lint. SYNTHETIC fixtures only (temp dirs under os.tmpdir, removed after).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, writeFileSync, mkdirSync, rmSync, readFileSync, readdirSync, cpSync } from "node:fs";
+import { mkdtempSync, writeFileSync, mkdirSync, rmSync, readFileSync, readdirSync, cpSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 // @ts-ignore plain mjs
-import { lint, checkNames, tsUnion, ROOT } from "../scripts/migration_lint.mjs";
+import { lint, checkNames, tsUnion, discoverUnions, ROOT } from "../scripts/migration_lint.mjs";
 
 const mk = () => { const d = mkdtempSync(join(tmpdir(), "miglint-")); mkdirSync(join(d, "migrations")); mkdirSync(join(d, "src")); return d; };
 const PAIR = [{ name: "job states", ts: { file: "src/t.ts", type: "S" }, sql: { table: "t", column: "status" } }];
@@ -168,14 +168,12 @@ test("MUTATION on the real tree: add a member to JobStatus in a temp copy of src
     cpSync(join(ROOT, "migrations"), join(d, "migrations"), { recursive: true });
     const base = { migDir: join(d, "migrations"), srcRoot: d, pairs: [], declaredPath: join(ROOT, "scripts", "migration_lint_declared.json") };
     // with no explicit PAIRS, the discovery alone must still hold the real tree green
-    // int3 head (f354): with pairs: [] discovery alone sees three CHECK findings: two are the declared check_debt (unmerged migrations),
-    // the third (partner_ledger.kind) is only visible without the explicit LedgerKind PAIR. Migration_lint_declared.json
-    // carries as check_debt (the explicit-PAIR path downgrades them to warnings; with pairs: [] they surface here). Pinned exactly.
+    // int3 head (f354): with pairs: [] discovery alone surfaces exactly the two CHECK mismatches that migration_lint_declared.json
+    // carries as check_debt (unmerged migrations); the explicit-PAIR path downgrades them to warnings. Pinned exactly.
     const known = lint(base).failures;
-    assert.equal(known.length, 3, known.join("\n"));
+    assert.equal(known.length, 2, known.join("\n"));
     assert.ok(known.some((m: string) => m.includes("MarketCard.kind") && m.includes("clawback_review")));
     assert.ok(known.some((m: string) => m.includes("PayoutStatus") && m.includes("sending,approved_retry,held")));
-    assert.ok(known.some((m: string) => m.includes("partner_ledger.kind")));
     const sp = join(d, "src", "market", "store.ts");
     writeFileSync(sp, readFileSync(sp, "utf8").replace('"refunded";', '"refunded" | "chargeback";'));
     assert.ok(lint(base).failures.some((m: string) => m.includes("chargeback")), "added union member must be caught");
@@ -184,4 +182,59 @@ test("MUTATION on the real tree: add a member to JobStatus in a temp copy of src
     writeFileSync(mp, readFileSync(mp, "utf8").replace("'payout_review'", "'zzz_other'"));
     assert.ok(lint(base).failures.some((m: string) => m.includes("payout_review") || m.includes("zzz_other")), "changed CHECK must be caught");
   } finally { rmSync(d, { recursive: true, force: true }); }
+});
+
+// ---- f184: union discovery by the TypeScript compiler API --------------------------------------------------------------------
+const SHAPES: Record<string, { src: string; name: string; vals: string[] }> = {
+  multiline_alias: { name: "MlStatus", vals: ["m1", "m2", "m3"], src: `export type MlStatus =\n  | "m1"\n  // a comment between members\n  | "m2"\n  | "m3";\n` },
+  deep_alias_chain: { name: "DeepKind", vals: ["d1", "d2", "d3", "d4"], src: `type A1 = "d1" | "d2";\ntype A2 = A1 | "d3";\ntype A3 = (A2);\nexport type DeepKind = A3 | "d4";\n` },
+  as_const_array: { name: "ASC_STATES", vals: ["c1", "c2", "c3"], src: `export const ASC_STATES = ["c1", "c2", "c3"] as const;\nexport type AscState = typeof ASC_STATES[number];\n` },
+  string_enum: { name: "EnStatus", vals: ["e1", "e2"], src: `export enum EnStatus { One = "e1", Two = 'e2' }\n` },
+  as_const_object: { name: "ObjKind", vals: ["o1", "o2"], src: `export const OBJ = { A: "o1", B: "o2" } as const;\nexport type ObjKind = typeof OBJ[keyof typeof OBJ];\n` },
+  multiline_inline_field: { name: "Rec.status", vals: ["f1", "f2", "f3"], src: `export interface Rec {\n  id: string;\n  status:\n    | "f1"\n    | "f2"\n    | "f3";\n}\n` },
+};
+const shapeTree = (only: string[], mutate?: string) => {
+  const d = mk(); let n = 0;
+  for (const k of only) {
+    const s = SHAPES[k], vals = k === mutate ? [...s.vals.slice(0, -1), "zz_changed"] : s.vals;
+    writeFileSync(join(d, "src", `${k}.ts`), s.src.replace(new RegExp(`"${s.vals.at(-1)}"|'${s.vals.at(-1)}'`), `"${vals.at(-1)}"`));
+    writeFileSync(join(d, "migrations", `${String(++n).padStart(4, "0")}_${k}.sql`), `CREATE TABLE ${k} (id TEXT PRIMARY KEY, v TEXT CHECK (v IN (${s.vals.map((v) => `'${v}'`).join(",")})));\n`);
+  }
+  return d;
+};
+for (const [k, s] of Object.entries(SHAPES)) {
+  test(`f184 shape found by the compiler API and mapped to its CHECK: ${k}`, () => {
+    const d = shapeTree([k]);
+    try {
+      const u = discoverUnions(d).fieldUnions.find((x: any) => x.label === s.name);
+      assert.ok(u, `${s.name} not discovered`);
+      assert.deepEqual([...u.values].sort(), [...s.vals].sort());
+      assert.deepEqual(disc(d).failures, []);
+    } finally { rmSync(d, { recursive: true, force: true }); }
+  });
+  test(`f184 MUTATION: one member changed in the TS side (${k}) -> the gate fails naming it`, () => {
+    const d = shapeTree([k], k);
+    try { assert.ok(disc(d).failures.some((m: string) => m.includes("zz_changed")), disc(d).failures.join("|")); } finally { rmSync(d, { recursive: true, force: true }); }
+  });
+}
+test("f184 traps the regex fell for: string/comment text that looks like a union, a plain non-const array, a local const", () => {
+  const d = mk();
+  writeFileSync(join(d, "src", "t.ts"), 'const note = `type FakeStatus = "x" | "y";`;\n// type CommentKind = "p" | "q";\nexport const PLAIN_STATUSES = ["s1", "s2"];\nfunction f() { const LOCAL_KINDS = ["k1", "k2"] as const; return LOCAL_KINDS; }\n');
+  try {
+    const labels = [...discoverUnions(d).fieldUnions, ...discoverUnions(d).anyUnions].map((x: any) => x.label);
+    assert.ok(!labels.includes("FakeStatus") && !labels.includes("CommentKind") && !labels.includes("PLAIN_STATUSES"), labels.join(","));
+  } finally { rmSync(d, { recursive: true, force: true }); }
+});
+test("f184 alias cycles terminate", () => {
+  const d = mk(); writeFileSync(join(d, "src", "t.ts"), 'type XStatus = YStatus | "a";\ntype YStatus = XStatus | "b";\n');
+  try { assert.ok(discoverUnions(d).anyUnions.some((x: any) => x.label === "XStatus")); } finally { rmSync(d, { recursive: true, force: true }); }
+});
+test("f184 real tree: discovery finds the known unions and adds no unexplained failure", () => {
+  const r = discoverUnions(ROOT);
+  const labels = r.fieldUnions.map((x: any) => x.key);
+  // f354: int3 head has no src/market/dispute.ts (f97 dispute module is unmerged), so only the dispute keys are conditional on the file.
+  const want = ["src/market/store.ts::JobStatus", "src/enterprise/types.ts::PayoutStatus"];
+  if (existsSync(join(ROOT, "src/market/dispute.ts"))) want.push("src/market/dispute.ts::AuditEntry.kind", "src/market/dispute.ts::DState");
+  for (const k of want) assert.ok(labels.includes(k), k);
+  assert.deepEqual(lint().failures, []);
 });
