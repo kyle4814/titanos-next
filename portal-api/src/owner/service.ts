@@ -16,7 +16,7 @@ async function mine(d: Deps, a: Account, id: string) {
   return row;
 }
 // The monitor is on while this account holds a live monitor subscription for this domain.
-async function monitorEntitled(d: Deps, a: Account, domain: string): Promise<boolean> {
+export async function monitorEntitled(d: Deps, a: Account, domain: string): Promise<boolean> {
   const subs = await d.store.subscriptionsFor(a.id);
   for (const s of subs) {
     if (s.cancelledAt && s.cancelledAt <= d.now()) continue;
