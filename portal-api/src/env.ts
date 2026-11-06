@@ -3,12 +3,11 @@
 export interface D1Statement {
   bind(...args: unknown[]): D1Statement;
   first<T = unknown>(): Promise<T | null>;
-  run(): Promise<{ meta?: { changes?: number } } | unknown>;
+  run(): Promise<unknown>;
   all<T = unknown>(): Promise<{ results: T[] }>;
 }
 export interface D1Like {
   prepare(sql: string): D1Statement;
-  batch?(stmts: D1Statement[]): Promise<unknown[]>; // D1 batch = one implicit transaction, all or nothing
 }
 export interface Env {
   DB?: D1Like;                 // D1 database (same one the live titanos-api uses)

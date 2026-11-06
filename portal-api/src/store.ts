@@ -110,8 +110,7 @@ export class MemoryStore implements Store {
   async keyByHash(h: string) { return [...this.keys.values()].find((k) => k.hash === h); }
   async creditBalance(id: string) { return this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0); }
   async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
-    // no await between the check and the push: the check-and-write is one synchronous step, so concurrent debits cannot oversell
-    const bal = this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0);
+    const bal = await this.creditBalance(id);
     if (bal + delta < 0) return undefined;
     this.ledger.push({ id: `ent_${++this.ent}`, accountId: id, delta, reason, ref, at });
     return bal + delta;
