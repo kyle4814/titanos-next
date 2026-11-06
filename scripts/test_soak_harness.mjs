@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { runSoak, buildBoard, Hist, assertLocal, mulberry32, chaosProfile, s1Value } from './soak_harness.mjs';
+import http from 'node:http';
+import { runSoak, buildBoard, Hist, assertLocal, mulberry32, chaosProfile, s1Value, memSlope, DEFAULT_THRESHOLDS } from './soak_harness.mjs';
 
 let pass = 0;
 const ok = (n) => { pass++; console.log('PASS', n); };
@@ -45,9 +46,10 @@ const mkRun = (over = {}) => ({
   total: { n: 1000, ok: 1000, errors: 0, e5xx: 0, transport: 0, timeouts: 0 }, samples: 10,
   hist: (() => { const x = new Hist(); for (let i = 0; i < 1000; i++) x.add(5); return x; })(),
   windows: Array.from({ length: 10 }, () => ({ n: 100, errors: 0, p95: 5 })),
-  durationS: 20, intervalS: 2, targets: [{ ok2xx: true }], faultsConfigured: false, faultsSeen: 0, ...over });
+  durationS: 20, intervalS: 2, targets: [{ ok2xx: true }], faultsConfigured: false, faultsSeen: 0,
+  memSeries: Array.from({ length: 10 }, (_, i) => ({ t: i * 2, heapUsed: 12e6, rss: 80e6 })), ...over });
 let b = buildBoard(mkRun());
-assert.equal(b.rows.length, 15); assert.ok(b.allGreen);
+assert.equal(b.rows.length, 16); assert.ok(b.allGreen);
 assert.ok(b.rows.every((r) => r.definition === 'PROPOSED'));
 b = buildBoard(mkRun({ targets: [{ ok2xx: false }], windows: [{ n: 0, errors: 0, p95: 0 }, ...mkRun().windows.slice(1)] }));
 assert.equal(b.rows.find((r) => r.id === 'S14').status, 'RED');
@@ -63,7 +65,7 @@ console.log('green run: n=%d rps=%s faultsSeen=%d', g.totals.n, (g.totals.n / 20
 assert.ok(g.totals.n > 1000, 'load delivered');
 assert.ok(g.faultsSeen > 0, 'chaos observed');
 assert.ok(g.windows.length >= 9);
-assert.equal(g.rows.length, 15);
+assert.equal(g.rows.length, 16);
 assert.ok(g.allGreen, 'expected GREEN: ' + JSON.stringify(g.rows.filter((r) => r.status !== 'GREEN')));
 ok('20 s stub run with light chaos: board GREEN');
 
@@ -169,5 +171,75 @@ const org = await runSoak({ durationS: 6, concurrency: 8, rps: 200, intervalS: 1
 assert.equal(rowOf(org, 'S1').value, 1, 'organic mode removes injected faults from S1');
 assert.equal(org.s1.mode, 'organic');
 ok('S1 treatment explicit: raw default, organic option, injected vs organic counts in the JSON');
+
+// ---- S16 memory growth: slope of retained heap after a warm-up, threshold stated in the row ----
+const MB = 1024 * 1024;
+// synthetic series, t = 0..19 s: `warm` ramps hard for the first 5 points (warm-up), then grows `perS` bytes/s
+const memRun = (perS, { warm = false, n = 20, over = {} } = {}) => mkRun({
+  memSeries: Array.from({ length: n }, (_, t) => ({ t, rss: 80 * MB,
+    heapUsed: 12 * MB + (warm && t < 5 ? t * 10 * MB : (warm ? 40 * MB : 0)) + perS * t })), ...over });
+const s16 = (r, bb = buildBoard) => bb(r).rows.find((x) => x.id === 'S16');
+const THR = DEFAULT_THRESHOLDS.S16;
+function s16Behaviour(bb) {
+  return s16(memRun(0), bb).status === 'GREEN'                       // flat heap
+    && s16(memRun(THR * 0.9), bb).status === 'GREEN'                 // just under the stated threshold
+    && s16(memRun(THR * 1.1), bb).status === 'RED'                   // just over it
+    && s16(memRun(THR * 10), bb).status === 'RED'                    // obvious leak
+    && s16(memRun(0, { warm: true }), bb).status === 'GREEN'         // warm-up ramp ignored
+    && s16(mkRun({ memSeries: undefined }), bb).status === 'RED'     // no series at all: blind, fail closed
+    && s16(memRun(0, { n: 4 }), bb).status === 'RED';                // too few post-warm-up points: blind
+}
+assert.ok(s16Behaviour((r) => buildBoard(r)), 'S16 boundary cases');
+const sl = memSlope(memRun(5000).memSeries);
+near(sl.slope, 5000, 0.001, 'memSlope recovers a known slope'); assert.ok(sl.warmupS > 0 && sl.points < 20);
+assert.equal(memSlope([{ t: 0, heapUsed: 1 }]).slope, null);
+ok('S16 board maths: flat/under GREEN, over/leak RED, warm-up ignored, blind runs RED');
+
+// live loopback runs (seconds): a leaking handler must FAIL S16, a clean handler must PASS it
+const serveHandler = async (handler) => {
+  const srv = http.createServer(handler);
+  await new Promise((res) => srv.listen(0, '127.0.0.1', res));
+  return { srv, url: `http://127.0.0.1:${srv.address().port}`, close: () => { srv.closeAllConnections(); srv.close(); } };
+};
+const memOpts = { durationS: 6, intervalS: 0.5, concurrency: 8, rps: 400, seed: 3 };
+{
+  const keep = [];   // LEAK: retains 4 KiB per request forever
+  const lk = await serveHandler((q, r) => { keep.push(Buffer.alloc(4096, 1), { q: q.url, pad: new Array(64).fill(keep.length) }); r.end('ok'); });
+  const leak = await runSoak({ ...memOpts, targets: [lk.url] }); lk.close();
+  const row = rowOf(leak, 'S16');
+  assert.equal(row.status, 'RED', 'leaking handler must FAIL S16: ' + JSON.stringify(row));
+  assert.ok(row.value > 4 * THR, 'leak slope is far over the threshold: ' + row.value);
+  assert.equal(leak.allGreen, false);
+  assert.equal(leak.memory.field, 'heapUsed'); assert.ok(leak.mem_series.length >= 8);
+  const cl = await serveHandler((q, r) => { r.end('ok'); });
+  const cleanM = await runSoak({ ...memOpts, targets: [cl.url] }); cl.close();
+  const crow = rowOf(cleanM, 'S16');
+  assert.equal(crow.status, 'GREEN', 'clean handler must PASS S16: ' + JSON.stringify(crow));
+  assert.ok(crow.value < THR / 2, 'clean slope has headroom under the threshold: ' + crow.value);
+  assert.ok(cleanM.allGreen, 'clean memory run, whole board GREEN: ' + JSON.stringify(cleanM.rows.filter((r) => r.status !== 'GREEN')));
+}
+ok('S16 live loopback: leaking handler FAILS, clean handler PASSES (6 s runs)');
+
+// MUTATION: break the S16 threshold comparison in the source; the boundary check must then FAIL
+{
+  const here2 = path.dirname(fileURLToPath(import.meta.url));
+  const src2 = fs.readFileSync(path.join(here2, 'soak_harness.mjs'), 'utf8');
+  const mutate2 = async (tag, from, to) => {
+    assert.ok(src2.includes(from), 'mutation anchor present: ' + from);
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'soakmem-'));
+    const f = path.join(dir, `m_${tag}.mjs`);
+    fs.writeFileSync(f, src2.replace(from, to));
+    try { return await import(pathToFileURL(f).href); } finally { fs.rmSync(f, { force: true }); fs.rmdirSync(dir); }
+  };
+  const real2 = await import('./soak_harness.mjs');
+  assert.ok(s16Behaviour((r) => real2.buildBoard(r)), 'control: unmutated harness passes the S16 cases');
+  const mk = async (tag, from, to) => { const m = await mutate2(tag, from, to); return !s16Behaviour((r) => m.buildBoard(r)); };
+  assert.ok(await mk('op', "['S16', 'Memory growth: slope of retained heap (forced GC, plus external buffers) or RSS (memPid), bytes/s, after a 25% warm-up', '<='", "['S16', 'Memory growth: slope of retained heap (forced GC, plus external buffers) or RSS (memPid), bytes/s, after a 25% warm-up', '>='"), 'mutant: comparison operator flipped must be caught');
+  assert.ok(await mk('thr', 'S16: 131072,', 'S16: 999999999,'), 'mutant: threshold loosened must be caught');
+  assert.ok(await mk('thr0', 'S16: 131072,', 'S16: 1,'), 'mutant: threshold tightened must be caught');
+  assert.ok(await mk('blind', 'S16: mem.slope === null ? Infinity : mem.slope', 'S16: mem.slope === null ? 0 : mem.slope'), 'mutant: blind run passes must be caught');
+  assert.ok(await mk('warm', 'export const MEM_WARMUP_FRAC = 0.25;', 'export const MEM_WARMUP_FRAC = 0;'), 'mutant: warm-up not ignored must be caught');
+}
+ok('S16 mutations (operator, threshold up and down, blind passes, warm-up) are all caught');
 
 console.log(`ALL PASS ${pass}`);

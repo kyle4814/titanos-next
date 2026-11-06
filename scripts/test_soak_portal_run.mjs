@@ -31,10 +31,10 @@ await bad.close();
 ok('mutation: a mismatched scan result is counted portal_wrong (502), not ok');
 
 const r = await portalSoak({ durationS: 6, rps: 40, seed: 3, faults: { drop: 0.01, err5xx: 0.01, delayRate: 0.05, delayMs: 50 } });
-assert.equal(r.rows.length, 15);
+assert.equal(r.rows.length, 16);
 assert.ok(r.per_target.every((t) => t.portal_wrong === 0 && t.portal_threw === 0), JSON.stringify(r.per_target));
 assert.ok(r.per_target.every((t) => t.requests_reaching_portal > 0));
 assert.ok(r.synthetic && r.localhost_only);
 assert.deepEqual(r.not_http_routes_in_portal_api, ['guest scan', 'concierge ask']);
-ok('6 s run with chaos: 15 rows, portal_wrong 0, portal_threw 0, every target reached');
+ok('6 s run with chaos: 16 rows, portal_wrong 0, portal_threw 0, every target reached');
 console.log(`ALL PASS ${pass}`);
