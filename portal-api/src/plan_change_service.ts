@@ -2,7 +2,8 @@
 // NO Stripe call is made here: the billing action a live change needs is returned as DATA (billingIntent) for a later
 // owner-approved wire (CARD NEEDED in the f96 receipt). Not mounted on any HTTP route.
 import type { Account } from "./store.ts";
-import { HttpError, type Deps } from "./service.ts";
+import type { Deps } from "./service.ts";
+import { HttpError } from "./util.ts";
 import { initPlan, periodStart, isTier, planChange, type Request, type Outcome } from "./plan_change.ts";
 
 export const PLAN_CAS_RETRIES = 8;
