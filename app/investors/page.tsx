@@ -11,7 +11,7 @@ import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
-  "The measured base, what each dollar of compute builds, the ladder to AU$1 million a month, and where the profits go. Not an offer of shares; an invitation to talk.";
+  "The measured base, what each dollar of compute builds, and where the profits go. Not an offer of shares; an invitation to talk.";
 
 const baseMetadata: Metadata = {
   title: META_TITLE,
@@ -34,17 +34,11 @@ const BASE: [string, string][] = [
   ["3.5 hours", "idea to a working, tested app (replay on the proof page)"],
   [`~${v("annual_ey")}`, `engineers' worth of output a year, priced by the COCOMO model (MODELLED, ${AS_OF_LONG})`],
   ["AU$300", "a month in AI tools behind all of it (operator figure, no receipt on file)"],
-  [`~${Math.round(v("per_dollar_full_today_x")).toLocaleString("en-AU")}x`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on AU$3,600 a year)`],
+  [`~${Math.round(v("per_dollar_full_today_x")).toLocaleString("en-AU")}x`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on the AU$300 a month tool spend, an operator figure with no receipt on file)`],
 ];
 
 const COMPUTE: [string, string, string][] = [
   ["AU$300 a month (today)", "1", `~${v("annual_ey")} engineers' worth a year (MODELLED: Basic COCOMO on measured lines)`],
-];
-
-const LADDER: [string, string, string, string, string][] = [
-  ["AU$10,000", "AU$1,000 (10%)", "AU$9,000 (90%)", "later", "Every dollar compounding into compute, people and reach"],
-  ["AU$100,000", "AU$10,000 (10%)", "AU$90,000 (90%)", "later", "~300 build accounts; new countries"],
-  ["AU$1,000,000", "AU$100,000 (10%)", "AU$900,000 (90%)", "later", "~3,000 build accounts; a global company"],
 ];
 
 export default function Investors() {
@@ -116,39 +110,13 @@ export default function Investors() {
           </div>
 
           <OpenLoop>And if it did scale, where would the money go?</OpenLoop>
-          <h2 className="w2c-h" style={H}>The ladder to AU$1 million a month, and where it goes</h2>
+          <h2 className="w2c-h" style={H}>Where the profits go</h2>
           <p style={BODY}>
-            Monthly revenue for the first two years, split between the founder and the system (compute, people, the next
-            product, new countries). About 90% compounds back into TITANOS until it is established globally; the world
-            share (charities, education, housing, jobs) starts after that and grows with the company.
-          </p>
-          <div tabIndex={0} style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640 }}>
-              <thead>
-                <tr>
-                  {["Revenue a month", "Founder", "System", "World", "What it means"].map((h) => (
-                    <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {LADDER.map((r) => (
-                  <tr key={r[0]}>
-                    {r.map((c, i) => (
-                      <td key={i} style={CELL}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.75, marginTop: 8 }}>
-            The split is the founder&apos;s stated plan, not a guarantee. More on the world share on the{" "}
-            <a href="/mission" style={A}>mission page</a>.
+            There is no revenue projection on this page, because there is no paying-client result behind one yet. What is on
+            record is the founder&apos;s stated plan (a plan, not a result and not a guarantee): profit goes back into
+            compute, people and reach first, and a world share follows once the company is established. The wording and
+            its limits live on the <a href="/mission" style={A}>mission page</a>, and the first real revenue figure will
+            appear here only once it is VERIFIED against a receipt.
           </p>
 
           <OpenLoop>Why would a big buyer pick this over the other options?</OpenLoop>
@@ -159,7 +127,7 @@ export default function Investors() {
               takes days, not months.
             </li>
             <li style={{ marginBottom: 8 }}>
-              The systems are 99% code, so they run for about AU$20 to AU$50 a month. See <a href="/costs" style={A}>costs</a>.
+              The systems are about 99% code (ESTIMATE: a design ratio, not a measured share), so they run for about AU$20 to AU$50 a month. See <a href="/costs" style={A}>costs</a>.
             </li>
             <li style={{ marginBottom: 8 }}>
               Nothing replaced and nobody replaced, which removes the biggest reason large buyers say no. See{" "}
@@ -171,7 +139,7 @@ export default function Investors() {
           <p style={BODY}>
             TITANOS is run by Kyle Deligny as a sole trader (ABN 34 318 502 254), so there are no shares to offer today.
             Any investment would follow incorporation, proper legal and accounting advice, and documents that meet the
-            law. The founder keeps control: total outside ownership stays under 49%. Nothing on this page is financial
+            law. The founder keeps control: total outside ownership is planned to stay under 49% (PROPOSED: the founder's stated position, not a legal commitment). Nothing on this page is financial
             advice or an offer of any financial product.
           </p>
 
