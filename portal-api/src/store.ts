@@ -61,6 +61,9 @@ export interface Store {
   // f237: purchases with status exactly 'paid', paid at or before `cutoff`, of a subscription-mode product, that have NO subscription row. Oldest first.
   paidWithoutSubscriptionBefore(cutoff: number, subscriptionProductIds: string[]): Promise<Purchase[]>;
   subscriptionById(id: string): Promise<Subscription | undefined>;
+  // Optimistic concurrency (f175). Read a COPY plus its version; write it back only if the version is unchanged (false = lost the race, re-read and retry).
+  subscriptionVersioned(id: string): Promise<{ sub: Subscription; version: number } | undefined>;
+  casSubscription(s: Subscription, expectedVersion: number): Promise<boolean>;
   subscriptionsFor(accountId: string): Promise<Subscription[]>;
   putInvoice(i: Invoice): Promise<void>;
   invoicesFor(accountId: string): Promise<Invoice[]>;
@@ -131,15 +134,21 @@ export class MemoryStore implements Store {
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
-  async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  subVer = new Map<string, number>();
+  async putSubscription(s: Subscription) { this.subs.set(s.id, s); this.subVer.set(s.id, (this.subVer.get(s.id) ?? 0) + 1); }
   async subscriptionByPurchase(pid: string) { return [...this.subs.values()].find((x) => x.purchaseId === pid); }
   async putSubscriptionOnce(s: Subscription) { // no await between check and write
     if (this.subs.has(s.id) || [...this.subs.values()].some((x) => x.purchaseId === s.purchaseId)) return false;
-    this.subs.set(s.id, s); return true;
+    this.subs.set(s.id, s); this.subVer.set(s.id, (this.subVer.get(s.id) ?? 0) + 1); return true;
   }
   async paidWithoutSubscriptionBefore(cutoff: number, ids: string[]) {
     return [...this.purchases.values()].filter((p) => p.status === "paid" && p.paidAt !== undefined && cutoff >= p.paidAt && ids.includes(p.productId)
       && ![...this.subs.values()].some((x) => x.purchaseId === p.id)).sort((a, b) => a.paidAt! - b.paidAt! || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
+  }
+  async subscriptionVersioned(id: string) { const s = this.subs.get(id); return s && { sub: { ...s }, version: this.subVer.get(id) ?? 0 }; }
+  async casSubscription(s: Subscription, expectedVersion: number) {
+    if (!this.subs.has(s.id) || (this.subVer.get(s.id) ?? 0) !== expectedVersion) return false;
+    this.subs.set(s.id, s); this.subVer.set(s.id, expectedVersion + 1); return true;
   }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
