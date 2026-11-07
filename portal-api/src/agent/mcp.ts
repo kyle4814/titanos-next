@@ -3,7 +3,7 @@
 import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
 import { sha256Hex } from "../util.ts";
-import { hashOf, newReceiptId, signReceipt } from "./receipt.ts";
+import { hashOf, newReceiptId, ringOf, signWithRing } from "./receipt.ts";
 import { TOOLS, toolByName, publicTool, ToolError, type ToolDef } from "./tools.ts";
 
 export const PROTOCOL_VERSION = "2025-03-26";
@@ -44,7 +44,8 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   const t = typeof name === "string" ? toolByName(name) : undefined;
   if (!t) return err(id, -32602, "unknown_tool");
   if (!auth.key.scopes.includes(t.scope)) return toolText(id, { error: "scope_denied", needs: t.scope }, true);
-  if (!d.receiptSecret) return err(id, -32603, "receipts_unavailable"); // fail closed: no signing secret, no calls
+  const ring = ringOf(d);
+  if (!ring) return err(id, -32603, "receipts_unavailable"); // fail closed: no signing secret, no calls
   const bad = validate(t, argsIn);
   if (bad) return err(id, -32602, bad);
   const args = (argsIn ?? {}) as Record<string, any>;
@@ -75,7 +76,7 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
     if (e instanceof ToolError) return toolText(id, { error: e.code, charged: 0 }, true);
     return toolText(id, { error: "tool_failed", charged: 0 }, true);
   }
-  const receipt = await signReceipt(d.receiptSecret, {
+  const receipt = await signWithRing(ring, {
     id: rid, tool: t.name, keyId: auth.key.id, accountId: auth.account.id, at: now,
     inputSha: await hashOf(args), outputSha: await hashOf(output), credits: charge, mode, ...(idem ? { idem } : {}),
   });

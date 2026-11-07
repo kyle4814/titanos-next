@@ -6,7 +6,7 @@ import { PRODUCTS } from "../catalogue.ts";
 import { normaliseDomain, type TxtResolver } from "../dns.ts";
 import type { Account } from "../store.ts";
 import type { Deps } from "../service.ts";
-import { verifyReceipt } from "./receipt.ts"; // own receipts only; a third party uses the public POST /agent/receipts/verify
+import { verifyWithRing, ringOf } from "./receipt.ts"; // own receipts only; a third party uses the public POST /agent/receipts/verify
 
 export interface ModelClient { complete(opts: { apiKey: string | "platform"; prompt: string }): Promise<string> }
 export type Scope = "catalogue:read" | "scan:read" | "account:read" | "credits:read" | "explain:model" | "receipt:verify";
@@ -80,7 +80,7 @@ export const TOOLS: ToolDef[] = [
     } },
   { name: "receipt_verify", title: "Verify a TITANOS receipt", description: "Checks that a receipt your own key was given was really issued by TITANOS and not altered. Free.", scope: "receipt:verify", credits: 0, modelBacked: false,
     input: { required: ["receipt_id"], properties: { receipt_id: { type: "string", maxLength: 40, description: "A receipt id (rcpt_...)." } } },
-    async run({ d, args, account }) { const r = await d.store.receiptById(args.receipt_id); if (!r || r.accountId !== account.id) return { found: false }; return { found: true, valid: await verifyReceipt(d.receiptSecret ?? "", r), tool: r.tool, at: r.at, credits: r.credits, mode: r.mode }; } },
+    async run({ d, args, account }) { const r = await d.store.receiptById(args.receipt_id); if (!r || r.accountId !== account.id) return { found: false }; return { found: true, valid: await verifyWithRing(ringOf(d), r), tool: r.tool, at: r.at, credits: r.credits, mode: r.mode }; } },
 ];
 export class ToolError extends Error { code: string; constructor(code: string) { super(code); this.code = code; } }
 export const toolByName = (n: string) => TOOLS.find((t) => t.name === n);
