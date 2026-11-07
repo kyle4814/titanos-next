@@ -206,6 +206,6 @@ test("F185 http: two isolates (two Deps over one store): concurrent undo POSTs g
     assert.equal(u3.status, 200, `round ${n}`);
     const rep = await (await h1.req("GET", `/app/domains/${id}/report?format=md`, { token: me.session })).text();
     const fj = await h1.j(f3);
-    if (fj.result === "proven" || fj.result === "partial") assert.match(rep, /DMARC: .*\((proven|partial)\)/, `round ${n}: the DMARC fix record was lost`);
+    if (fj.result === "proven" || fj.result === "partial") assert.match(rep, /DMARC: .*\((proven|partly fixed, not proven)\)/, `round ${n}: the DMARC fix record was lost`);
   }
 });
