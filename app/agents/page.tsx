@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import SeatAnchors from "@/components/SeatAnchors";
+import { ANCHORS } from "./anchors";
 import tools from "@/lib/agentTools.generated.json";
 
 // Preview page for the agent door (C7). noindex until the API is deployed and a real agent has been issued a receipt.
@@ -38,6 +40,7 @@ export default function AgentsPage() {
           </tbody>
         </table>
       </div>
+      <SeatAnchors rows={ANCHORS} />
     </main>
   );
 }

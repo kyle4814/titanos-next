@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import SeatAnchors from "@/components/SeatAnchors";
+import { ANCHORS } from "./anchors";
 import OwnerClient from "./client";
 
 export const metadata: Metadata = {
@@ -7,4 +9,4 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://titanos.tech/app" },
   robots: { index: false, follow: false },
 };
-export default function OwnerPage() { return <OwnerClient />; }
+export default function OwnerPage() { return <><OwnerClient /><SeatAnchors rows={ANCHORS} /></>; }
