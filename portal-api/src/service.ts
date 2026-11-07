@@ -232,10 +232,12 @@ async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId
 }
 // The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a burned invoice number, the
 // store's atomic putInvoiceOnce is the real guard (two racers can both pass the pre-check; only one insert lands). The loser burns one number (known, receipt limit).
-export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
+export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now"> & Partial<Pick<Deps, "ent">>, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
   if (await d.store.purchaseInvoiced(pur.id)) return false;
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
-  return d.store.putInvoiceOnce(inv);
+  const landed = await d.store.putInvoiceOnce(inv);
+  if (landed) await entSvc.onInvoice(d as Deps, inv); // C8: partner commission on the first invoice (no-op without d.ent); x5 rebase: f203 had dropped this call from the markPaid path
+  return landed;
 }
 
 // 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.
