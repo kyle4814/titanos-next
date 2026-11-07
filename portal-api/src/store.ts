@@ -36,6 +36,11 @@ export interface Store {
   purchaseByPaymentIntent(pi: string): Promise<Purchase | undefined>;
   purchasesFor(accountId: string): Promise<Purchase[]>;
   putSubscription(s: Subscription): Promise<void>;
+  // f237: write the subscription ONLY IF the purchase has none (keyed on purchase id), atomically; false = one already exists, nothing written.
+  putSubscriptionOnce(s: Subscription): Promise<boolean>;
+  subscriptionByPurchase(purchaseId: string): Promise<Subscription | undefined>;
+  // f237: purchases with status exactly 'paid', paid at or before `cutoff`, of a subscription-mode product, that have NO subscription row. Oldest first.
+  paidWithoutSubscriptionBefore(cutoff: number, subscriptionProductIds: string[]): Promise<Purchase[]>;
   subscriptionById(id: string): Promise<Subscription | undefined>;
   subscriptionsFor(accountId: string): Promise<Subscription[]>;
   putInvoice(i: Invoice): Promise<void>;
@@ -98,6 +103,15 @@ export class MemoryStore implements Store {
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
   async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  async subscriptionByPurchase(pid: string) { return [...this.subs.values()].find((x) => x.purchaseId === pid); }
+  async putSubscriptionOnce(s: Subscription) { // no await between check and write
+    if (this.subs.has(s.id) || [...this.subs.values()].some((x) => x.purchaseId === s.purchaseId)) return false;
+    this.subs.set(s.id, s); return true;
+  }
+  async paidWithoutSubscriptionBefore(cutoff: number, ids: string[]) {
+    return [...this.purchases.values()].filter((p) => p.status === "paid" && p.paidAt !== undefined && cutoff >= p.paidAt && ids.includes(p.productId)
+      && ![...this.subs.values()].some((x) => x.purchaseId === p.id)).sort((a, b) => a.paidAt! - b.paidAt! || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
+  }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
   // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,

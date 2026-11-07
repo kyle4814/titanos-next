@@ -54,6 +54,17 @@ export class D1PlanStore extends MemoryStore {
     await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json",
       s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));
   }
+  // f237. ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (a subscription for this purchase, or this id); changes === 1 means THIS call wrote the row.
+  override async putSubscriptionOnce(s: Subscription) {
+    const r = await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM subscriptions WHERE purchase_id = ? OR id = ?)",
+      s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), n(s.plan === undefined ? undefined : JSON.stringify(s.plan)), s.purchaseId, s.id);
+    return r.meta.changes === 1;
+  }
+  override async subscriptionByPurchase(pid: string) { const r = await this.one("SELECT * FROM subscriptions WHERE purchase_id = ? ORDER BY rowid LIMIT 1", pid); return r && toSub(r); }
+  override async paidWithoutSubscriptionBefore(cutoff: number, ids: string[]) {
+    if (ids.length === 0) return [];
+    return (await this.many(`SELECT * FROM purchases p WHERE p.status = 'paid' AND p.paid_at IS NOT NULL AND ? >= p.paid_at AND p.product_id IN (${ids.map(() => "?").join(",")}) AND NOT EXISTS (SELECT 1 FROM subscriptions s WHERE s.purchase_id = p.id) ORDER BY p.paid_at, p.id`, cutoff, ...ids)).map(toPurchase);
+  }
   override async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
   override async subscriptionsFor(id: string) { return (await this.many("SELECT * FROM subscriptions WHERE account_id = ? ORDER BY rowid", id)).map(toSub); }
   // Invoices (f192, migration 0005). Upsert on id; the UNIQUE number and the partial UNIQUE (purchase_id, stripe_event_id) make D1 throw where MemoryStore throws.

@@ -149,21 +149,23 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
   if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
   if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
   Object.assign(pur, claim);
-  let cancel = false;
-  if (o.subscription) {
-    const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
-    cancel = facts.some((f) => f.kind === "cancel");
-    const held = heldPeriods(facts), sp = stripePeriodOf(o.subscription) ?? held.first;
-    const sub: Subscription = { id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
-    await seedPeriod(d, sub, sp, true);
-    for (const hp of held.rest) await seedPeriod(d, sub, hp, false); // invoices that beat the checkout, oldest first
-    await d.store.putSubscription(sub);
-  }
+  if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
   if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
   await d.store.putPurchase(pur);
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
   await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
   return { won: true, purchase: pur };
+}
+// f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
+// and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.
+export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> {
+  const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
+  const cancel = facts.some((f) => f.kind === "cancel");
+  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
+  const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
+  await seedPeriod(d as Deps, sub, sp, true);
+  for (const hp of held.rest) await seedPeriod(d as Deps, sub, hp, false); // invoices that beat the checkout, oldest first
+  return sub;
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
