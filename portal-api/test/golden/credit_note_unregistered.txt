@@ -1,0 +1,10 @@
+CREDIT NOTE CN-TT-000042
+Credit note number: CN-TT-000042
+Date: 2026-11-09
+Against invoice: TT-000042 (2026-11-06)
+Reason: Refund within the terms refund window
+Supplier: Kyle Montrose Deligny, ABN 34 318 502 254, Brisbane QLD
+Billed to: buyer@example.invalid
+Item: Leads Starter (250 contacts)
+Amount credited: -AU$497.00 (AUD)
+No GST charged: the supplier is not registered for GST. This amount is refunded to the original payment method.
