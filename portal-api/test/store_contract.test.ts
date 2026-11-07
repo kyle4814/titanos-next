@@ -244,7 +244,7 @@ for (const [name, mk] of ADAPTERS) describe(`Store contract: ${name}`, () => {
 describe("D1Store SQL shape", () => {
   test("the migrations it is written against load in order (int line has several files per number: lanes share 0002..0004)", () => {
     assert.deepEqual([...MIGRATIONS], [...MIGRATIONS].sort());
-    for (const m of ["0001_portal_core.sql", "0002_portal_billing.sql", "0004_store_counters.sql", "0005_idem_reservations.sql"]) assert.ok(MIGRATIONS.includes(m), m);
+    for (const m of ["0001_portal_core.sql", "0002_portal_billing.sql", "0004_store_counters.sql", "0005_idem_reservations.sql", "0006_webhook_held_facts.sql"]) assert.ok(MIGRATIONS.includes(m), m);
   });
 
   test("the debit is ONE statement: a single conditional INSERT...SELECT, no preceding SELECT, one write per call", async () => {

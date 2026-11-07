@@ -9,7 +9,7 @@
 //  - Times are stored as epoch milliseconds. Migration 0001 declares a few of them TEXT; SQLite keeps the digits
 //    and we convert with Number() on the way out.
 import type { D1Like, D1Statement } from "./env.ts";
-import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, ReviewCard, Session, Store, Subscription } from "./store.ts";
+import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, Subscription } from "./store.ts";
 
 type Row = Record<string, unknown>;
 const num = (v: unknown): number | undefined => (v === null || v === undefined || v === "" ? undefined : Number(v));
@@ -19,7 +19,8 @@ const bool = (v: unknown): boolean => Number(v) === 1;
 const toAccount = (r: Row): Account => ({ id: String(r.id), email: String(r.email), seat: String(r.seat), stripeCustomerId: str(r.stripe_customer_id), createdAt: Number(r.created_at), deletedAt: num(r.deleted_at) });
 const toDomain = (r: Row): DomainRow => ({ id: String(r.id), accountId: String(r.account_id), domain: String(r.domain), token: String(r.verify_token), verifiedAt: num(r.verified_at) });
 const toPurchase = (r: Row): Purchase => ({ id: String(r.id), accountId: String(r.account_id), productId: String(r.product_id), domain: str(r.domain), checkoutId: String(r.checkout_id), paymentIntent: str(r.payment_intent), subscriptionId: str(r.subscription_id), paidAt: num(r.paid_at), amountCents: Number(r.amount_cents), deliverableIssued: bool(r.deliverable_issued), refundedCents: Number(r.refunded_cents), status: String(r.status) as Purchase["status"] });
-const toSub = (r: Row): Subscription => ({ id: String(r.id), accountId: String(r.account_id), purchaseId: String(r.purchase_id), productId: String(r.product_id), startedAt: Number(r.started_at), cancelAt: num(r.cancel_at), cancelledAt: num(r.cancelled_at) });
+const toSub = (r: Row): Subscription => ({ id: String(r.id), accountId: String(r.account_id), purchaseId: String(r.purchase_id), productId: String(r.product_id), startedAt: Number(r.started_at), cancelAt: num(r.cancel_at), cancelledAt: num(r.cancelled_at), ...(r.plan_json === null || r.plan_json === undefined ? {} : { plan: JSON.parse(String(r.plan_json)) }) });
+const toRefundCase = (r: Row): RefundCase => ({ id: String(r.id), accountId: String(r.account_id), purchaseId: String(r.purchase_id), productName: String(r.product_name), amountCents: Number(r.amount_cents), reason: String(r.reason), inPolicy: bool(r.in_policy), status: String(r.status) as RefundCase["status"], createdAt: Number(r.created_at), ...(r.decided_at === null || r.decided_at === undefined ? {} : { decidedAt: Number(r.decided_at) }) });
 const toInvoice = (r: Row): Invoice => ({ id: String(r.id), accountId: String(r.account_id), number: String(r.number), productId: String(r.product_id), amountCents: Number(r.amount_cents), issuedAt: Number(r.issued_at), stripeEventId: String(r.stripe_event_id) });
 const toCard = (r: Row): ReviewCard => ({ id: String(r.id), accountId: String(r.account_id), purchaseId: String(r.purchase_id), kind: String(r.kind) as ReviewCard["kind"], reason: String(r.reason), createdAt: Number(r.created_at), resolved: bool(r.resolved) });
 const toKey = (r: Row): ApiKey => ({ id: String(r.id), accountId: String(r.account_id), hash: String(r.key_hash), scopes: String(r.scopes ?? "") === "" ? [] : String(r.scopes).split(","), createdAt: Number(r.created_at), revokedAt: num(r.revoked_at) });
@@ -82,9 +83,17 @@ export class D1Store implements Store {
   }
   async purchaseById(id: string) { const r = await this.one("SELECT * FROM purchases WHERE id = ?", id); return r && toPurchase(r); }
   async purchaseByCheckout(c: string) { const r = await this.one("SELECT * FROM purchases WHERE checkout_id = ?", c); return r && toPurchase(r); }
+  async purchaseByPaymentIntent(pi: string) { const r = await this.one("SELECT * FROM purchases WHERE payment_intent = ? ORDER BY rowid LIMIT 1", pi); return r && toPurchase(r); }
+  // Out-of-order webhook facts (f92). One INSERT per fact; takeFacts is ONE DELETE...RETURNING so two concurrent takers
+  // cannot both receive the same fact. Arrival order is kept by the AUTOINCREMENT seq (sorted in JS: RETURNING order is unspecified).
+  async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (key, fact) VALUES (?, ?)", key, JSON.stringify(fact)); }
+  async takeFacts(key: string) {
+    const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
+    return rows.sort((a, c) => Number(a.seq) - Number(c.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
+  }
   async purchasesFor(accountId: string) { return (await this.many("SELECT * FROM purchases WHERE account_id = ? ORDER BY rowid", accountId)).map(toPurchase); }
   async putSubscription(s: Subscription) {
-    await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at", s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt));
+    await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json", s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));
   }
   async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
   async subscriptionsFor(accountId: string) { return (await this.many("SELECT * FROM subscriptions WHERE account_id = ? ORDER BY rowid", accountId)).map(toSub); }
@@ -102,6 +111,13 @@ export class D1Store implements Store {
   async putCard(c: ReviewCard) {
     await this.exec("INSERT INTO review_cards (id, account_id, purchase_id, kind, reason, created_at, resolved) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, kind = excluded.kind, reason = excluded.reason, created_at = excluded.created_at, resolved = excluded.resolved", c.id, c.accountId, c.purchaseId, c.kind, c.reason, c.createdAt, b(c.resolved));
   }
+  async cardById(id: string) { const r = await this.one("SELECT * FROM review_cards WHERE id = ?", id); return r && toCard(r); }
+  async allCards() { return (await this.many("SELECT * FROM review_cards ORDER BY rowid")).map(toCard); }
+  async putRefundCase(c: RefundCase) {
+    await this.exec("INSERT INTO refund_cases (id, account_id, purchase_id, product_name, amount_cents, reason, in_policy, status, created_at, decided_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_name = excluded.product_name, amount_cents = excluded.amount_cents, reason = excluded.reason, in_policy = excluded.in_policy, status = excluded.status, created_at = excluded.created_at, decided_at = excluded.decided_at", c.id, c.accountId, c.purchaseId, c.productName, c.amountCents, c.reason, b(c.inPolicy), c.status, c.createdAt, n(c.decidedAt));
+  }
+  async refundCaseById(id: string) { const r = await this.one("SELECT * FROM refund_cases WHERE id = ?", id); return r && toRefundCase(r); }
+  async refundCasesFor(purchaseId: string) { return (await this.many("SELECT * FROM refund_cases WHERE purchase_id = ? ORDER BY rowid", purchaseId)).map(toRefundCase); }
   async openCards() { return (await this.many("SELECT * FROM review_cards WHERE resolved = 0 ORDER BY rowid")).map(toCard); }
 
   // ---- API keys
