@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, readdirSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, readdirSync, rmSync, cpSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -74,16 +74,18 @@ async function violations(m: Mods): Promise<string[]> {
   return bad;
 }
 async function load(srcDir: string, edits: [string, string][] = []) {
-  const dir = mkdtempSync(join(tmpdir(), "f100-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
+  const root = mkdtempSync(join(tmpdir(), "f100-")); if (!root.startsWith(tmpdir())) throw new Error("bad tmp");
+  const dir = join(root, "portal-api", "src"); mkdirSync(dir, { recursive: true });
   try {
-    for (const f of readdirSync(srcDir)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(srcDir, f), "utf8"));
+    symlinkSync(resolve(srcDir, "../../lib"), join(root, "lib"));   // src/ value-imports ../../lib
+    cpSync(srcDir, dir, { recursive: true });   // whole src tree: service.ts now imports enterprise/, agent/, market/ siblings
     for (const [file, from, to] of edits.map((x) => x as unknown as [string, string, string])) {
       const t = readFileSync(join(dir, file), "utf8"); assert.equal(t.split(from).length - 1, 1, `mutation anchor must match exactly once: ${from}`);
       writeFileSync(join(dir, file), t.replace(from, to));
     }
     const imp = async (f: string) => import(pathToFileURL(join(dir, f)).href + "?" + Math.random());
     return { svc: await imp("service.ts"), MemoryStore: (await imp("store.ts")).MemoryStore, MockBilling: (await imp("stripe.ts")).MockBilling, fakeResolver: (await imp("dns.ts")).fakeResolver } as Mods;
-  } finally { /* modules are already evaluated; the dir is removed below */ setTimeout(() => rmSync(dir, { recursive: true, force: true }), 0); }
+  } finally { /* modules are already evaluated; the dir is removed below */ setTimeout(() => rmSync(root, { recursive: true, force: true }), 0); }
 }
 const SRC = resolve(import.meta.dirname, "../src");
 
