@@ -39,6 +39,12 @@ export class D1PlanStore extends MemoryStore {
     await this.exec("INSERT INTO purchases (id, account_id, product_id, domain, checkout_id, payment_intent, subscription_id, paid_at, amount_cents, deliverable_issued, refunded_cents, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, product_id = excluded.product_id, domain = excluded.domain, checkout_id = excluded.checkout_id, payment_intent = excluded.payment_intent, subscription_id = excluded.subscription_id, paid_at = excluded.paid_at, amount_cents = excluded.amount_cents, deliverable_issued = excluded.deliverable_issued, refunded_cents = excluded.refunded_cents, status = excluded.status, created_at = COALESCE(purchases.created_at, excluded.created_at)",
       p.id, p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, n(p.createdAt));
   }
+  // f236: ONE statement, UPDATE ... WHERE id = ? AND status = ?; changes === 1 means THIS call made the transition. No migration: id and status already exist.
+  override async casPurchase(p: Purchase, expected: Purchase["status"]) {
+    const r = await this.exec("UPDATE purchases SET account_id = ?, product_id = ?, domain = ?, checkout_id = ?, payment_intent = ?, subscription_id = ?, paid_at = ?, amount_cents = ?, deliverable_issued = ?, refunded_cents = ?, status = ? WHERE id = ? AND status = ?",
+      p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, p.id, expected);
+    return r.meta.changes === 1;
+  }
   override async purchaseById(id: string) { const r = await this.one("SELECT * FROM purchases WHERE id = ?", id); return r && toPurchase(r); }
   override async purchaseByCheckout(c: string) { const r = await this.one("SELECT * FROM purchases WHERE checkout_id = ?", c); return r && toPurchase(r); }
   override async purchaseByPaymentIntent(pi: string) { const r = await this.one("SELECT * FROM purchases WHERE payment_intent = ? ORDER BY rowid LIMIT 1", pi); return r && toPurchase(r); }

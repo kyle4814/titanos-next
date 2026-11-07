@@ -141,12 +141,16 @@ function applyRefund(pur: Purchase, cents: number) {
   pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
   if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
 }
-export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
+// f236: the pending -> paid transition is a compare-and-set that runs FIRST. Whoever wins it (webhook or the f210 sweep) runs the side effects (takeFacts, seeds, account, invoice) exactly once;
+// the loser is a no-op and returns the winner's purchase. `pur` is never mutated before the win (MemoryStore hands out live objects), and is brought up to date after it.
+export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string): Promise<{ won: boolean; purchase: Purchase }> {
   const now = d.now();
-  pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
+  const claim: Purchase = { ...pur, status: "paid", paidAt: now, paymentIntent: o.payment_intent ? String(o.payment_intent) : pur.paymentIntent };
+  if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
+  if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
+  Object.assign(pur, claim);
   let cancel = false;
   if (o.subscription) {
-    pur.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
     const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
     cancel = facts.some((f) => f.kind === "cancel");
     const held = heldPeriods(facts), sp = stripePeriodOf(o.subscription) ?? held.first;
@@ -159,6 +163,7 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
   await d.store.putPurchase(pur);
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
   await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+  return { won: true, purchase: pur };
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on

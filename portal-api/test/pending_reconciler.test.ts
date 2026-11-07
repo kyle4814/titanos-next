@@ -137,13 +137,13 @@ for (const kind of ["memory", "d1"] as const) {
 
 // Source mutants: each edit must make the contract fail on at least one store.
 const MUTANTS: [string, [string, string, string][]][] = [
-  ["M1 skip the markPaid path", [["pending_reconciler.ts", "await markPaid(d, fresh, { payment_intent: s.paymentIntent, customer: s.customer, subscription: s.subscription }, pendingReconcileEventId(p.id));", "void 0;"]]],
+  ["M1 skip the markPaid path", [["pending_reconciler.ts", "const r = await markPaid(d, fresh, { payment_intent: s.paymentIntent, customer: s.customer, subscription: s.subscription }, pendingReconcileEventId(p.id));", "const r = { won: false };"]]],
   ["M2 grace ignored", [["pending_reconciler.ts", "now - grace", "now"]]],
   ["M3 boundary exclusive (memory)", [["store.ts", "(p.createdAt ?? 0) <= cutoff", "(p.createdAt ?? 0) < cutoff"]]],
   ["M4 boundary exclusive (d1)", [["d1_plan_store.ts", "COALESCE(created_at, 0) <= ?", "COALESCE(created_at, 0) < ?"]]],
   ["M5 expired not abandoned", [["pending_reconciler.ts", 's.status === "expired" ||', "false ||"]]],
   ["M6 provider error swallowed", [["pending_reconciler.ts", "rep.errors++; ", ""]]],
-  ["M7 no re-read before finalising", [["pending_reconciler.ts", '!fresh || fresh.status !== "pending"', "!fresh"]]],
+  // M7 "no re-read before finalising" is RETIRED by f236: with the compare-and-set in markPaid the re-read is only an optimisation (the outcome is identical), so the mutant is equivalent. The CAS itself is mutation-tested in f236_purchase_cas.test.ts.
   ["M8 settling session abandoned", [["pending_reconciler.ts", '(now - (p.createdAt ?? 0) >= abandonAfterMs && s.status === "open")', "(now - (p.createdAt ?? 0) >= abandonAfterMs)"]]],
   ["M9 sweep stops at first error", [["pending_reconciler.ts", "rep.errors++;", "rep.errors++; return rep;"]]],
   ["M10 unpaid session treated as paid", [["pending_reconciler.ts", 's.paymentStatus === "paid" ||', 'true ||']]],

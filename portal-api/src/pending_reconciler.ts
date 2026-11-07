@@ -24,11 +24,10 @@ export async function reconcilePending(d: Deps, graceMs: number, abandonAfterMs 
       const fresh = await d.store.purchaseById(p.id); // a late webhook may have finished it while we were asking
       if (!fresh || fresh.status !== "pending") { rep.skipped++; continue; }
       if (s.paymentStatus === "paid" || s.paymentStatus === "no_payment_required") {
-        await markPaid(d, fresh, { payment_intent: s.paymentIntent, customer: s.customer, subscription: s.subscription }, pendingReconcileEventId(p.id));
-        rep.recovered++;
+        const r = await markPaid(d, fresh, { payment_intent: s.paymentIntent, customer: s.customer, subscription: s.subscription }, pendingReconcileEventId(p.id));
+        if (r.won) rep.recovered++; else rep.skipped++; // f236: the loser of a race is a no-op
       } else if (s.status === "expired" || (now - (p.createdAt ?? 0) >= abandonAfterMs && s.status === "open")) {
-        await d.store.putPurchase({ ...fresh, status: "abandoned" });
-        rep.abandoned++;
+        if (await d.store.casPurchase({ ...fresh, status: "abandoned" }, "pending")) rep.abandoned++; else rep.skipped++; // f236: a payment that landed since our read wins, the abandon is dropped
       } else rep.stillOpen++; // open and young, or complete with the payment still settling (async method)
     } catch (e) { rep.errors++; rep.errorDetails.push(`${p.id}: ${String((e as Error)?.message ?? e)}`); }
   }
