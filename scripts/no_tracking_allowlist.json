@@ -1,0 +1,54 @@
+{
+  "_note": "CT8 no-hidden-tracking allowlist. Every entry names rule, file (suffix match), a substring of the matching line, and a reason. Anything not listed fails the gate.",
+  "allow": [
+    {
+      "id": "f179",
+      "rule": "beacon",
+      "file": "components/SiteAnalytics.tsx",
+      "match": "sendBeacon",
+      "reason": "f179 first-party pageview beacon to vault.titanos.tech/api/site-event. Write-only, no cookies, no third-party script."
+    },
+    {
+      "id": "f179",
+      "rule": "beacon-url",
+      "file": "components/SiteAnalytics.tsx",
+      "match": "vault.titanos.tech/api/site-event",
+      "reason": "f179 endpoint (first-party host)."
+    },
+    {
+      "id": "f179-csp",
+      "rule": "tracker-host",
+      "file": "app/layout.tsx",
+      "match": "cloudflareinsights.com",
+      "reason": "CSP permits the Cloudflare edge-injected Insights beacon (privacy-first, cookieless). Not a tag in our source. Kyle decision whether to disable Web Analytics at the zone."
+    },
+    {
+      "id": "qr-decode",
+      "rule": "fingerprint",
+      "file": "app/demo/tix/scan/page.tsx",
+      "match": "jsQR(ctx.getImageData",
+      "reason": "Reads the visitor's own camera frame to decode a QR code in the demo; result stays in the browser, no fetch/beacon in the file (checked 2026-11-08)."
+    },
+    {
+      "id": "music-playback-type",
+      "rule": "fingerprint",
+      "file": "components/MusicToggle.tsx",
+      "match": "type Ctx = AudioContext",
+      "reason": "Audio PLAYBACK of own mp3 (no analyser, no channel-data read, no network send)."
+    },
+    {
+      "id": "music-playback-win",
+      "rule": "fingerprint",
+      "file": "components/MusicToggle.tsx",
+      "match": "window as unknown as { AudioContext",
+      "reason": "Audio playback constructor lookup, same as above."
+    },
+    {
+      "id": "music-playback-ctor",
+      "rule": "fingerprint",
+      "file": "components/MusicToggle.tsx",
+      "match": "w.AudioContext || w.webkitAudioContext",
+      "reason": "Audio playback constructor, same as above."
+    }
+  ]
+}
