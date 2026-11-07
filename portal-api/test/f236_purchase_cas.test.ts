@@ -90,7 +90,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     want("K3", (await st.invoicesFor("acc1")).length === 1, `${point}: want ONE invoice, got ${(await st.invoicesFor("acc1")).length}`);
     want("K3", (calls.takeFacts ?? 0) === 2, `${point}: want ONE markPaid run = takeFacts called twice (sub: + pi:), got ${calls.takeFacts}`);
     want("K3", (calls.nextInvoiceNumber ?? 0) === 1, `${point}: want one invoice number burned, got ${calls.nextInvoiceNumber}`);
-    want("K3", (calls.putAccount ?? 0) === 1 && (calls.putSubscription ?? 0) === 1, `${point}: account and subscription written once each, got ${JSON.stringify(calls)}`);
+    want("K3", (calls.putAccount ?? 0) === 1 && (calls.putSubscriptionOnce ?? 0) === 1, `${point}: account and subscription written once each, got ${JSON.stringify(calls)}`);
     const subs = await st.subscriptionsFor("acc1"); want("K3", subs.length === 1 && !!subs[0].cancelledAt, `${point}: the held cancel must survive on the one subscription, got ${JSON.stringify(subs)}`);
     want("K3", (await st.purchaseById("pur1")).status === "paid", `${point}: purchase must end paid`);
   }

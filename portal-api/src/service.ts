@@ -181,7 +181,16 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
     if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
     Object.assign(pur, claim);
-    if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
+    if (o.subscription) { // f250: the winner's first write is insert-if-absent, never a blind upsert. If the row already exists (the f237 sweep seeded it after our lease expired, and a cancel webhook may have landed on it) it stands,
+      // and the only thing this winner took that the sweep may not have is the held cancel and the plan: merged onto the stored row by CAS, never overwriting.
+      const built = await buildSubscription(d, pur, o.subscription, now);
+      if (!(await d.store.putSubscriptionOnce(built))) await casEditSubscription(d, built.id, (s) => {
+        let ch = false;
+        if (built.cancelledAt && !s.cancelledAt) { s.cancelledAt = built.cancelledAt; ch = true; }
+        if (!s.plan && built.plan) { s.plan = built.plan; ch = true; }
+        return ch;
+      });
+    }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
     Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
     if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
@@ -314,7 +323,7 @@ export async function cancelSubscription(d: Deps, a: Account, subId: string) {
     periodEnd = r.outcome.effectiveAt;
   } else periodEnd = nextPeriodEnd(sub.startedAt, p.interval ?? "month", d.now());
   await d.billing.cancelSubscription(sub.id, true);
-  const fresh = (await d.store.subscriptionById(sub.id)) ?? sub; fresh.cancelAt = periodEnd; await d.store.putSubscription(fresh);
+  await casEditSubscription(d, sub.id, (s) => { if (s.cancelAt === periodEnd) return false; s.cancelAt = periodEnd; return true; }); // f250: CAS on the row just read (was re-read-then-put: a webhook cancel landing in the gap was erased); a lost CAS re-reads and merges
   return { status: "cancel_scheduled" as const, effectiveAt: periodEnd };
 }
 function addMonths(ms: number, n: number) { const x = new Date(ms); x.setUTCMonth(x.getUTCMonth() + n); return x.getTime(); }

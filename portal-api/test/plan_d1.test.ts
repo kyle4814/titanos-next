@@ -66,6 +66,13 @@ async function violations(m: Mods): Promise<string[]> {
   const raw = d1.db.prepare("SELECT plan_json FROM subscriptions WHERE id = 'sub_m'").get() as any;
   if (raw.plan_json !== null) bad.push("P9 planless subscription stored a value");
   if ((await store.subscriptionById("sub_m"))!.plan !== undefined) bad.push("P9b planless subscription read back a plan");
+  // f250 P10: the plain upsert path (putSubscription) still persists a plan (changePlan now writes through casSubscription, so this path needs its own check)
+  await store.putPurchase({ id: "pur_x", accountId: a.id, productId: "ai_growth", checkoutId: "cs_x", amountCents: 1, deliverableIssued: false, refundedCents: 0, status: "paid" });
+  await store.putSubscription({ id: "sub_x", accountId: a.id, purchaseId: "pur_x", productId: "ai_growth", startedAt: T0, cancelAt: T0 + DAY, plan: { startedAt: T0, tier: "ai_growth", billedPeriods: 3, lastAt: T0, ledger: [], outcomes: {} } as any });
+  if ((await new m.D1PlanStore(d1).subscriptionById("sub_x"))!.plan?.billedPeriods !== 3) bad.push("P10 putSubscription did not persist the plan");
+  await store.putSubscription({ id: "sub_x", accountId: a.id, purchaseId: "pur_x", productId: "ai_ops", startedAt: T0, plan: { startedAt: T0, tier: "ai_ops", billedPeriods: 4, lastAt: T0, ledger: [], outcomes: {} } as any });
+  if ((await new m.D1PlanStore(d1).subscriptionById("sub_x"))!.plan?.billedPeriods !== 4) bad.push("P10 putSubscription upsert kept the old plan");
+  { const u = (await new m.D1PlanStore(d1).subscriptionById("sub_x"))!; if ("cancelAt" in u) bad.push("P10 putSubscription upsert kept the old cancel_at"); if (u.productId !== "ai_ops") bad.push("P10 putSubscription upsert kept the old product_id"); }
   return bad;
 }
 const REAL: Mods = { D1PlanStore, svc: { MockMailer, handleStripeEvent }, billing: { MockBilling }, resolver: { fakeResolver }, plan: { termEnd } };
@@ -103,14 +110,15 @@ test("an upsert replaces the stored plan (second write wins) and clears cancelAt
 // ---------- mutation: each adapter mutant must be caught by a named check ----------
 const SRC = resolve(import.meta.dirname, "../src");
 const MUT: { id: string; inv: string; from: string; to: string }[] = [
-  { id: "A1 write omits plan_json", inv: "P1", from: "s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));", to: "s.cancelAt), n(s.cancelledAt), null);" },
+  { id: "A1 CAS write omits plan_json (f250: changePlan persists through casSubscription)", inv: "P1", from: "n(next.cancelledAt), n(next.plan === undefined ? undefined : JSON.stringify(next.plan)),", to: "n(next.cancelledAt), null," },
+  { id: "A1b upsert write omits plan_json", inv: "P10", from: "s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));", to: "s.cancelAt), n(s.cancelledAt), null);" },
   { id: "A2 read ignores plan_json", inv: "P1", from: "if (r.plan_json !== null && r.plan_json !== undefined) s.plan", to: "if (false) s.plan" },
-  { id: "A3 upsert keeps the old plan_json", inv: "P2", from: "cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json", to: "cancelled_at = excluded.cancelled_at" },
-  { id: "A4 upsert keeps the old cancel_at", inv: "P7", from: "cancel_at = excluded.cancel_at, cancelled_at", to: "cancelled_at" },
+  { id: "A3 upsert keeps the old plan_json", inv: "P10", from: "cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json", to: "cancelled_at = excluded.cancelled_at" },
+  { id: "A4 upsert keeps the old cancel_at", inv: "P10", from: "cancel_at = excluded.cancel_at, cancelled_at", to: "cancelled_at" },
   { id: "A5 planless row stores the string null", inv: "P9", from: "s.plan === undefined ? null : JSON.stringify(s.plan)", to: "JSON.stringify(s.plan) ?? 'null'" },
   { id: "A6 started_at not persisted", inv: "P3", from: "n(s.cancelAt), n(s.cancelledAt), s.plan", to: "n(s.cancelAt), n(s.cancelledAt), s.plan" }, // placeholder replaced below
 ];
-MUT[5] = { id: "A6 product_id not updated on upsert", inv: "P2", from: "product_id = excluded.product_id, started_at = excluded.started_at, cancel_at", to: "started_at = excluded.started_at, cancel_at" };
+MUT[6] = { id: "A6 product_id not updated on upsert", inv: "P10", from: "product_id = excluded.product_id, started_at = excluded.started_at, cancel_at", to: "started_at = excluded.started_at, cancel_at" };
 test(`mutation: ${MUT.length} of ${MUT.length} adapter mutants are killed by their named check`, async () => {
   const text = readFileSync(join(SRC, "d1_plan_store.ts"), "utf8");
   for (const mu of MUT) {
@@ -121,7 +129,7 @@ test(`mutation: ${MUT.length} of ${MUT.length} adapter mutants are killed by the
       writeFileSync(join(dir, "src", "d1_plan_store.ts"), text.replace(mu.from, mu.to));
       const U = (f: string) => import(pathToFileURL(join(dir, "src", f)).href);
       const [ds, svc, st, dns, plan] = await Promise.all([U("d1_plan_store.ts"), U("service.ts"), U("stripe.ts"), U("dns.ts"), U("plan_change.ts")]);
-      const bad = await violations({ D1PlanStore: ds.D1PlanStore, svc, billing: st, resolver: dns, plan });
+      const bad = await violations({ D1PlanStore: ds.D1PlanStore, svc, billing: st, resolver: dns, plan }).catch((e) => [`${mu.inv} threw: ${String(e?.message ?? e)}`]); // f250: a CAS that can never match (the mutant corrupts a column it compares) surfaces as SubscriptionContention = killed
       assert.ok(bad.length > 0, "SURVIVED: " + mu.id);
       assert.ok(bad.some((b) => b.startsWith(mu.inv)), `killed, but not by ${mu.inv}: ${bad.slice(0, 3).join(" | ")}`);
     } finally { rmSync(dir, { recursive: true, force: true }); }

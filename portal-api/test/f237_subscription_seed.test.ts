@@ -59,7 +59,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   // S1 crash between the claim and the subscription seed: the winner dies, the sweep completes it. Exactly one subscription and one invoice, built from the session.
   for (const crashPoint of ["putSubscription", "putInvoiceOnce", "takeFacts"]) {
     const { open } = world(m, kind), s0 = open(); await seed(s0);
-    const d = D(m, crashAt(s0, crashPoint));
+    const d = D(m, crashAt(s0, crashPoint === "putSubscription" ? "putSubscriptionOnce" : crashPoint)); // f250: the winner's subscription write is insert-if-absent
     let threw = false; try { await m.svc.markPaid(d, { ...(await s0.purchaseById("pur1")) }, o, "evt1"); } catch { threw = true; }
     want("S1", threw, `S1 ${crashPoint}: the injected crash must surface`);
     const mid = await open().purchaseById("pur1"); want("S1", mid.status === "paid", `S1 ${crashPoint}: the claim must have landed (paid)`);
@@ -78,7 +78,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // S2 double-run idempotence: the second run changes nothing, asks Stripe nothing, burns no invoice number
   { const { open } = world(m, kind), s0 = open(); await seed(s0);
-    await m.svc.markPaid(D(m, crashAt(s0, "putSubscription")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
+    await m.svc.markPaid(D(m, crashAt(s0, "putSubscriptionOnce")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession()); const s = open();
     await m.rec.reconcileSubscriptions(s, bill, NOW, GRACE);
     const before = JSON.stringify([await s.subscriptionsFor("acc1"), await s.invoicesFor("acc1"), await s.nextInvoiceNumber()]);
@@ -102,7 +102,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // S4 two sweeps at once, both past the existence check: one row, and the held cancel survives (the loser's write must not overwrite)
   { const { open } = world(m, kind), s0 = open(); await seed(s0);
-    await m.svc.markPaid(D(m, crashAt(s0, "putSubscription")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
+    await m.svc.markPaid(D(m, crashAt(s0, "putSubscriptionOnce")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
     await s0.holdFact("sub:sub_1", { kind: "cancel" });
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession());
     // f246: no timers. The worst interleaving is forced by explicit barriers: sweep A takes the facts (the cancel), then PARKS just before its write; sweep B then runs start to finish; only
