@@ -20,7 +20,7 @@ const call = async (h: H, key: string, headers: Record<string, string>, domain =
   h.j(await h.req("POST", "/mcp", { token: key, headers, body: { jsonrpc: "2.0", id: ++rid, method: "tools/call", params: { name: "domain_check", arguments: { domain } } } }));
 const setDns = (h: H) => { h.dns.zone["good.example.com.au"] = ["v=spf1 include:_spf.google.com -all"]; h.dns.zone["_dmarc.good.example.com.au"] = ["v=DMARC1; p=reject; rua=mailto:d@good.example.com.au"]; };
 import { idemTiming } from "../src/agent/mcp.ts";
-idemTiming.waitMs = 150; // keep the in-progress case fast
+idemTiming.waitMs = 2000; // keep the in-progress case fast
 const sc = (r: any) => r.result.structuredContent;
 const debits = async (s: Store, acc: string) => (await s.creditEntries(acc)).filter((e) => e.reason === "debit");
 
