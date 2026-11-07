@@ -60,7 +60,7 @@ test("mutant: an unscoped key is refused, gets no tool listing, no receipt and n
   const { scorecard: s } = await go(p);
   assert.equal(s.agents_ok, "9/10"); assert.deepEqual(s.failures, [{ agent: "07", reason: "tool_not_listed_for_key" }]);
   // force the call anyway: the server must refuse it
-  const res = await p.fetchImpl(p.baseUrl + "/mcp", { method: "POST", headers: { authorization: `Bearer ${p.agents[6].key}`, "idempotency-key": "force-1" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "domain_check", arguments: { domain: "bad.example.com.au" } } }) });
+  const res = await p.fetchImpl(p.baseUrl + "/mcp", { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${p.agents[6].key}`, "idempotency-key": "force-1" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "domain_check", arguments: { domain: "bad.example.com.au" } } }) });
   const out = (await res.json()) as any;
   assert.equal(out.result.isError, true); assert.equal(out.result.structuredContent.error, "scope_denied");
   assert.equal(await p.h.store.creditBalance(p.accounts[6]), 2000, "refused call charged nothing");
@@ -75,7 +75,7 @@ test("mutant: a key with no credits is refused with insufficient_credits, not a 
 
 test("isolation: one agent cannot replay another agent's Idempotency-Key to read their receipt", async () => {
   const p = await provisionInProcess(2);
-  const call = (key: string) => p.fetchImpl(p.baseUrl + "/mcp", { method: "POST", headers: { authorization: `Bearer ${key}`, "idempotency-key": "shared-key-1" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "domain_check", arguments: { domain: "bad.example.com.au" } } }) }).then((r) => r.json()) as Promise<any>;
+  const call = (key: string) => p.fetchImpl(p.baseUrl + "/mcp", { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${key}`, "idempotency-key": "shared-key-1" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "domain_check", arguments: { domain: "bad.example.com.au" } } }) }).then((r) => r.json()) as Promise<any>;
   const a = await call(p.agents[0].key), b = await call(p.agents[1].key);
   assert.equal(b.result.structuredContent.replayed, undefined, "B did not get a replay of A");
   assert.notEqual(b.result.structuredContent.receipt.id, a.result.structuredContent.receipt.id);
