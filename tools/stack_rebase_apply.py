@@ -253,7 +253,7 @@ class Applier:
         return "applied"
 
 
-def run(repo, target, glob, limit=8, out_branch="web/stack1-rb-2026-11-08", make_branch=True):
+def run(repo, target, glob, limit=8, out_branch="web/stack1-rb-2026-11-08", make_branch=True, stack_index=0):
     pm, dry, pidmod = _mods()
     before = {ln.rsplit(" ", 1)[0]: ln.rsplit(" ", 1)[1] for ln in dry.refs(repo).splitlines()}
     p = pm.plan(repo, target, glob)
@@ -261,10 +261,11 @@ def run(repo, target, glob, limit=8, out_branch="web/stack1-rb-2026-11-08", make
     stacks = sorted(p["stacks"], key=lambda s: (-len(s["branches"]), s["rank"]))
     res = {"target": p["target"], "target_sha": tsha, "glob": glob, "limit": limit, "out_branch": out_branch,
            "rows": [], "applied_branches": 0, "stack_base": None, "out_sha": None, "renumbered": [], "auto_resolved": []}
-    if not stacks:
+    res["stack_index"], res["stack_count"] = stack_index, len(stacks)
+    if stack_index >= len(stacks):
         res["refs_unchanged"] = True
         return res
-    stack = stacks[0]
+    stack = stacks[stack_index]
     res["stack_base"], res["stack_size"] = stack["base"], len(stack["branches"])
     sc = dry.Scratch(repo, tsha)
     ap = Applier(repo, dry, pidmod, pm); ap.sc = sc
@@ -342,8 +343,17 @@ def main(argv=None):
     ap.add_argument("--out", default="web/stack1-rb-2026-11-08")
     ap.add_argument("--no-branch", action="store_true")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--stack", type=int, default=0, help="index into stacks sorted largest first")
+    ap.add_argument("--best", type=int, default=0, help="try the first K stacks (no branch), then re-run the one that lands most")
     a = ap.parse_args(argv)
-    r = run(a.repo, a.target, a.glob, a.limit, a.out, not a.no_branch)
+    si = a.stack
+    if a.best:
+        trial = [(run(a.repo, a.target, a.glob, a.limit, a.out, False, i), i) for i in range(a.best)]
+        for t, i in trial:
+            if t.get("stack_base"):
+                print("trial stack %d (%s, %s branches): landed %d" % (i, t["stack_base"], t.get("stack_size"), t["applied_branches"]))
+        si = max(trial, key=lambda x: (x[0]["applied_branches"], -x[1]))[1]
+    r = run(a.repo, a.target, a.glob, a.limit, a.out, not a.no_branch, si)
     print(json.dumps(r, indent=1) if a.json else render(r))
     return 0 if r["refs_unchanged"] else 3
 

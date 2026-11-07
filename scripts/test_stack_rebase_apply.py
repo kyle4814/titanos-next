@@ -136,6 +136,21 @@ def suite():
         check(git(d, "log", "--format=%s", "main..%s" % OUT).split() == ["e-second"], "E: only the missing commit added")
     finally:
         shutil.rmtree(d, ignore_errors=True)
+
+    # F. largest stack's bottom conflicts; stack_index=1 lands the other stack
+    d = fixture()
+    try:
+        old = git(d, "rev-parse", "HEAD").strip()
+        branch(d, "web/g1", old); commit(d, "a.txt", "1\nG\n3\n", "g1")
+        branch(d, "web/g2", "web/g1"); commit(d, "g.txt", "g2\n", "g2")
+        branch(d, "web/h1", old); commit(d, "h.txt", "h1\n", "h1")
+        branch(d, "main", old); commit(d, "a.txt", "1\nmain\n3\n", "target edits a")
+        r0 = S.run(d, "main", "web/*", 8, OUT, False, 0)
+        r1 = S.run(d, "main", "web/*", 8, OUT, False, 1)
+        check(r0["applied_branches"] == 0 and r0["rows"][0]["status"] == "CONFLICT", "F: stack 0 stops at its bottom")
+        check(r1["applied_branches"] == 1 and r1["stack_index"] == 1, "F: stack 1 lands %s" % r1["applied_branches"])
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
     return fails
 
 
