@@ -110,7 +110,8 @@ test("estate dns: per-estate concurrency cap is respected (and the pool does run
   // count domains with at least one query outstanding
   const out = new Map<string, number>(); let max = 0;
   const resolver: DohFetch = async (name, type) => {
-    const d = doms.find((x) => name === x || name.endsWith("." + x))!;
+    const d = doms.find((x) => name === x || name.endsWith("." + x));
+    if (!d) return fakeDoh(worlds[doms[0]]).fetch(name, type); // SPF include lookups (int scanner follows includes) are not an estate domain
     out.set(d, (out.get(d) ?? 0) + 1); max = Math.max(max, [...out.values()].filter((n) => n > 0).length);
     await sleep(5);
     out.set(d, out.get(d)! - 1);
@@ -155,7 +156,8 @@ test("estate dns: tenant isolation unchanged (B cannot read A's estate; A's view
   await h.addVerifiedAsset(ob.session, ob.tenant.id, db, "CANARY_B");
   rec.names.length = 0;
   const estA = await h.get(oa.session, `/enterprise/${ta}/estate`);
-  assert.ok(rec.names.length > 0 && rec.names.every((n) => n.endsWith(da)), "A's view only ever queried A's domain");
+  // the scanner follows SPF include targets (public records outside the estate); it must never query another tenant's domain
+  assert.ok(rec.names.length > 0 && rec.names.some((n) => n.endsWith(da)) && !rec.names.some((n) => n.endsWith(db)), "A's view only ever queried A's domain (plus SPF include targets)");
   assert.ok(!JSON.stringify(estA).includes(db) && !JSON.stringify(estA).includes("CANARY_B"));
   for (const path of [`/enterprise/${ta}/estate`, `/enterprise/${ta}/estate.csv`]) {
     const r = await h.req("GET", path, { token: ob.session });
