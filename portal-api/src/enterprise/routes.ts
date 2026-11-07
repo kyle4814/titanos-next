@@ -36,14 +36,6 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
     if (path === "/internal/enterprise/payouts/sweep" && m === "POST") return json(await s.opSweepPayouts(d, await body(req)));
     return json({ error: "not_found" }, 404);
   }
-  if (top === "internal" && seg[1] === "enterprise") {   // C8 f50: strict 401/503 guard, then exactly five routes
-    s.checkOperator(d, req.headers.get("x-internal-secret"));
-    if (path === "/internal/enterprise/payouts/held" && m === "GET") return json(await s.opHeldPayouts(d, new URL(req.url).searchParams.get("tenantId")));
-    if (path === "/internal/enterprise/payouts/retry" && m === "POST") return json(await s.opRetryPayouts(d, await body(req)));
-    if (path === "/internal/enterprise/payouts/sweep" && m === "POST") return json(await s.opSweepPayouts(d, await body(req)));
-    if (seg.length === 5 && seg[2] === "payouts" && m === "POST" && (seg[4] === "release" || seg[4] === "refund")) return json(await s.opReleaseRefund(d, seg[3], seg[4], await body(req)));
-    return json({ error: "not_found" }, 404);
-  }
   if (top === "internal") {
     s.checkInternal(d, req.headers.get("x-internal-secret"));
     if (path === "/internal/tenants/provision" && m === "POST") return json(await s.provisionTenant(d, await body(req)), 201);

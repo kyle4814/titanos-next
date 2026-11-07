@@ -9,9 +9,6 @@ import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordC
 import { grade, summarise } from "./estate.ts";
 import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
-import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
-import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
-import { releaseHeldPayout, refundHeldPayout } from "./payout_release.ts";
 import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
@@ -90,57 +87,6 @@ export async function opSweepPayouts(d: Deps, b: Record<string, unknown>) {
   const r = await sweepStuckPayouts({ store: c.store, lookup: c.payoutLookup, now: d.now(), tenantId: tenantParam(b.tenantId) }, boundedInt(b.maxAgeMs, SWEEP_MAX_AGE_MS, 0, 7 * DAY));
   const count = (a: string) => r.items.filter((i) => i.action === a).length;
   return { examined: r.examined, skippedYoung: r.skippedYoung, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
-}
-// C8 f50: payout operator routes. Fail closed with distinct codes: 503 when no secret is configured, 401 on a missing or wrong one.
-export function checkOperator(d: Deps, header: string | null) {
-  const s = ent(d).internalSecret;
-  if (!s) throw new HttpError(503, "operator_unavailable");
-  if (!header || !timingSafeEqual(header, s)) throw new HttpError(401, "unauthorized");
-}
-const tenantParam = (v: unknown): string | undefined => (typeof v === "string" && /^[A-Za-z0-9_-]{1,64}$/.test(v) ? v : undefined);
-function boundedInt(v: unknown, dflt: number, lo: number, hi: number): number {
-  if (v === undefined) return dflt;
-  if (typeof v === "number" && Number.isInteger(v) && v >= lo && v <= hi) return v;
-  throw new HttpError(400, "invalid_input");
-}
-// Read-only. One tenant per call (tenantId required): the operator view never mixes tenants.
-export async function opHeldPayouts(d: Deps, tenantId: string | null) {
-  const tid = tenantParam(tenantId ?? undefined);
-  if (!tid) throw new HttpError(400, "tenant_required");
-  return { tenantId: tid, held: await listHeldPayouts(ent(d).store, tid, d.now()) };
-}
-// MOCK adapter only (whatever the Worker injected as `payouts`); an unconfigured adapter is 503 and nothing is sent.
-export async function opRetryPayouts(d: Deps, b: Record<string, unknown>) {
-  const c = ent(d);
-  if (!c.payouts || typeof c.payouts.transfer !== "function") throw new HttpError(503, "transfer_adapter_unconfigured");
-  if (b.tenantId !== undefined && !tenantParam(b.tenantId)) throw new HttpError(400, "invalid_input");
-  const r = await retryApprovedPayouts(c.store, c.payouts, d.now(), boundedInt(b.maxAttempts, 3, 1, 10), tenantParam(b.tenantId));
-  const count = (a: string) => r.items.filter((i) => i.action === a).length;
-  return { examined: r.examined, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
-}
-export async function opSweepPayouts(d: Deps, b: Record<string, unknown>) {
-  const c = ent(d);
-  if (!c.payoutLookup || typeof c.payoutLookup.lookup !== "function") throw new HttpError(503, "transfer_lookup_unconfigured");
-  if (b.tenantId !== undefined && !tenantParam(b.tenantId)) throw new HttpError(400, "invalid_input");
-  const r = await sweepStuckPayouts({ store: c.store, lookup: c.payoutLookup, now: d.now(), tenantId: tenantParam(b.tenantId) }, boundedInt(b.maxAgeMs, SWEEP_MAX_AGE_MS, 0, 7 * DAY));
-  const count = (a: string) => r.items.filter((i) => i.action === a).length;
-  return { examined: r.examined, skippedYoung: r.skippedYoung, paid: count("paid"), retrying: count("approved_retry"), held: count("held"), lostRace: count("lost_race"), items: r.items };
-}
-// C8 f54: release / refund of a HELD payout. Never touches the transfer adapter. tenantId is mandatory in the body.
-export async function opReleaseRefund(d: Deps, payoutId: string, action: "release" | "refund", b: Record<string, unknown>) {
-  const c = ent(d);
-  const tid = tenantParam(b.tenantId);
-  if (!tid || !tenantParam(payoutId)) throw new HttpError(400, "invalid_input");
-  if (b.note !== undefined && typeof b.note !== "string") throw new HttpError(400, "invalid_input");
-  const env = { store: c.store, now: d.now(), newId: () => randomToken("led", 8) };
-  const r = await (action === "release" ? releaseHeldPayout : refundHeldPayout)(env, { payoutId, tenantId: tid, note: b.note as string | undefined });
-  if (!r.ok) {
-    if (r.refused === "not_found") throw nf();
-    throw new HttpError(409, r.refused);
-  }
-  if (r.outcome === "applied") await audit(d, tid, "operator", `payout_${action}`, payoutId);
-  const p = r.payout;
-  return { ok: true, outcome: r.outcome, action, payout: { id: p.id, tenantId: p.partnerId, status: p.status, amountCents: p.amountCents, attempts: p.attempts ?? 0, reason: p.reason, operatorNote: p.operatorNote } };
 }
 export async function provisionTenant(d: Deps, b: Record<string, unknown>) {
   const e = ent(d).store;
