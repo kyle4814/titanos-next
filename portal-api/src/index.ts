@@ -3,6 +3,7 @@ import * as svc from "./service.ts";
 import { HttpError, type Deps } from "./service.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
+import { runSweep, type SweepReport } from "./sweep.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -95,7 +96,14 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
+// scheduled(env, deps): the cron entry (f247). Fails closed like handle(): with no injected deps nothing runs. Attaching a [triggers] cron in wrangler.toml is a CARD NEEDED (GATE5).
+export async function scheduled(_env: Env, deps?: Deps): Promise<SweepReport | { skipped: "store_unavailable" }> {
+  if (!deps) return { skipped: "store_unavailable" };
+  return runSweep(deps);
+}
+
 export default {
+  scheduled(_ev: unknown, env: Env): Promise<unknown> { return scheduled(env); },
   fetch(req: Request, env: Env): Promise<Response> {
     return handle(req, env).catch(() => json({ error: "internal" }, 500));
   },

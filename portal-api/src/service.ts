@@ -10,7 +10,7 @@ import { changePlan } from "./plan_change_service.ts";
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
 
-export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; log?: (line: string) => void }
+export interface Deps { store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; sleep?: (ms: number) => Promise<void>; siteOrigin: string; webhookSecret?: string; log?: (line: string) => void }
 export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
@@ -152,7 +152,7 @@ function applyRefund(pur: Purchase, cents: number) {
 export class RefundContention extends Error { constructor(id: string) { super(`refund CAS lost ${REFUND_TRIES} times on purchase ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); } }
 const REFUND_TRIES = 8;
 // f243: how long an unfinished refund intent is respected before another caller may take it over, how many waits a rival makes for the winner, and when the reaper may delete a settled memo.
-export const MEMO_LEASE_MS = 60_000, MEMO_WAIT = 200, MEMO_TTL_MS = 7 * 86_400_000;
+export const MEMO_LEASE_MS = 60_000, MEMO_POLL_MS = 250, MEMO_TTL_MS = 7 * 86_400_000;
 export class RefundInFlight extends RefundContention { constructor(id: string) { super(id); this.message = `refund for purchase ${id} is in flight on another call; retry`; this.name = "RefundInFlight"; } }
 // f240: Stripe has ALREADY refunded when requestRefund's own recordRefund runs out of retries. This typed error (a RefundContention, so existing catches still match) carries the Stripe refund id and the idempotency key:
 // the caller gets a 503 refund_record_pending with the id, the next charge.refunded webhook (or a replayed requestRefund, which reuses the remembered refund and never calls Stripe again) heals the ledger. Never a silent drop, never a second refund.
@@ -303,13 +303,19 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   // f243: claim the memo with ONE conditional insert BEFORE anything else (was f240 take-then-hold). Exactly one caller inserts the intent and may call Stripe; a rival waits for its refund id (then only converges the ledger),
   // and an intent older than MEMO_LEASE_MS (its owner died) is taken over by CAS. A re-used Stripe idempotency key makes a takeover after a crash between the Stripe call and the remember harmless.
   let mine: Record<string, unknown> | undefined, sent: { refundId: string } | undefined;
-  for (let i = 0; i < MEMO_WAIT && !mine && !sent; i++) {
+  // f247: the rival wait is bounded by the CLOCK (d.now(), injectable), not a yield count: it ends at start + MEMO_LEASE_MS, the intent lease. d.sleep (injectable; the Worker supplies a real timer) paces the polls; with none the
+  // wait only yields, and `waited` (sum of the poll steps) is a second bound so a frozen test clock still ends. Past the deadline a live intent is RefundInFlight (503), never a Stripe call.
+  const deadline = d.now() + MEMO_LEASE_MS, nap = d.sleep ?? (() => new Promise<void>((r) => setImmediate(r)));
+  for (let waited = 0; !mine && !sent; waited += MEMO_POLL_MS) {
     const intent = { state: "intent", at: d.now() };
     if (await d.store.memoInsert(memo, intent)) { mine = intent; break; }
-    const cur = await d.store.memoPeek(memo); if (!cur) continue;
-    if (typeof cur.refundId === "string") { sent = cur as { refundId: string }; break; }
-    if (d.now() - Number(cur.at) > MEMO_LEASE_MS && await d.store.memoSwap(memo, cur, intent)) { mine = intent; break; }
-    await new Promise((r) => setImmediate(r));
+    const cur = await d.store.memoPeek(memo);
+    if (cur) {
+      if (typeof cur.refundId === "string") { sent = cur as { refundId: string }; break; }
+      if (d.now() - Number(cur.at) > MEMO_LEASE_MS && await d.store.memoSwap(memo, cur, intent)) { mine = intent; break; }
+    }
+    if (d.now() >= deadline || waited >= MEMO_LEASE_MS) break;
+    await nap(MEMO_POLL_MS);
   }
   if (mine) { // a winner may have finished (ledger moved, memo cleared) between our status read and our claim: re-read under the claim, never refund twice
     const fresh = await d.store.purchaseById(pur.id);
