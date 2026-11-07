@@ -20,8 +20,8 @@ export interface AgentReceipt { id: string; tool: string; keyId: string; account
 export interface Store {
   // agent door (C7). creditApply must be atomic: a D1 adapter does it with one conditional UPDATE, never read-then-write.
   // F48 abuse tracing. prefix = first 8 chars of the key ID (never the secret token, never the hash). A D1 adapter indexes substr(id,1,8) (migration 0005).
-  keysByPrefix(prefix: string): Promise<ApiKey[]>;
-  receiptsForKey(keyId: string, limit: number): Promise<AgentReceipt[]>; // newest first
+  keysByPrefix(prefix: string, accountId?: string): Promise<ApiKey[]>; // accountId (F58): the tenant filter, applied in the WHERE
+  receiptsForKey(keyId: string, limit: number, accountId?: string): Promise<AgentReceipt[]>; // newest first
   keyByHash(hash: string): Promise<ApiKey | undefined>;
   creditBalance(accountId: string): Promise<number>;
   creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number): Promise<number | undefined>; // new balance, or undefined if it would go below 0
@@ -29,8 +29,8 @@ export interface Store {
   putCreditOrder(o: CreditOrder): Promise<void>;
   creditOrderByCheckout(checkoutId: string): Promise<CreditOrder | undefined>;
   putReceipt(r: AgentReceipt): Promise<void>;
-  receiptById(id: string): Promise<AgentReceipt | undefined>;
-  receiptByIdem(keyId: string, idem: string): Promise<AgentReceipt | undefined>;
+  receiptById(id: string, accountId?: string): Promise<AgentReceipt | undefined>;
+  receiptByIdem(keyId: string, idem: string, accountId?: string): Promise<AgentReceipt | undefined>;
   callsSince(keyId: string, sinceMs: number): Promise<number>;
   noteCall(keyId: string, at: number): Promise<void>;
   accountByEmail(email: string): Promise<Account | undefined>;
@@ -91,7 +91,7 @@ export interface Store {
   openCards(): Promise<ReviewCard[]>;
   putKey(k: ApiKey): Promise<void>;
   keysFor(accountId: string): Promise<ApiKey[]>;
-  keyById(id: string): Promise<ApiKey | undefined>;
+  keyById(id: string, accountId?: string): Promise<ApiKey | undefined>;
   anonymiseAccount(id: string, at: number): Promise<void>;
 }
 
@@ -180,8 +180,8 @@ export class MemoryStore implements Store {
   async refundCasesFor(p: string) { return [...this.refundCases.values()].filter((r) => r.purchaseId === p); }
   async openCards() { return [...this.cards.values()].filter((c) => !c.resolved); }
   ledger: CreditEntry[] = []; creditOrders = new Map<string, CreditOrder>(); receipts = new Map<string, AgentReceipt>(); callLog = new Map<string, number[]>(); private ent = 0;
-  async keysByPrefix(p: string) { return [...this.keys.values()].filter((k) => k.id.startsWith(p)); }
-  async receiptsForKey(keyId: string, limit: number) { return [...this.receipts.values()].filter((r) => r.keyId === keyId).sort((a, b) => b.at - a.at).slice(0, limit); }
+  async keysByPrefix(p: string, accountId?: string) { return [...this.keys.values()].filter((k) => k.id.startsWith(p) && (accountId === undefined || k.accountId === accountId)); }
+  async receiptsForKey(keyId: string, limit: number, accountId?: string) { return [...this.receipts.values()].filter((r) => r.keyId === keyId && (accountId === undefined || r.accountId === accountId)).sort((a, b) => b.at - a.at).slice(0, limit); }
   async keyByHash(h: string) { return [...this.keys.values()].find((k) => k.hash === h); }
   async creditBalance(id: string) { return this.ledger.filter((e) => e.accountId === id).reduce((n, e) => n + e.delta, 0); }
   async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
@@ -195,13 +195,13 @@ export class MemoryStore implements Store {
   async putCreditOrder(o: CreditOrder) { this.creditOrders.set(o.id, o); }
   async creditOrderByCheckout(c: string) { return [...this.creditOrders.values()].find((o) => o.checkoutId === c); }
   async putReceipt(r: AgentReceipt) { this.receipts.set(r.id, r); }
-  async receiptById(id: string) { return this.receipts.get(id); }
-  async receiptByIdem(keyId: string, idem: string) { return [...this.receipts.values()].find((r) => r.keyId === keyId && r.idem === idem); }
+  async receiptById(id: string, accountId?: string) { const r = this.receipts.get(id); return r && (accountId === undefined || r.accountId === accountId) ? r : undefined; }
+  async receiptByIdem(keyId: string, idem: string, accountId?: string) { return [...this.receipts.values()].find((r) => r.keyId === keyId && r.idem === idem && (accountId === undefined || r.accountId === accountId)); }
   async callsSince(k: string, since: number) { return (this.callLog.get(k) ?? []).filter((x) => x >= since).length; }
   async noteCall(k: string, at: number) { this.callLog.set(k, [...(this.callLog.get(k) ?? []), at]); }
   async putKey(k: ApiKey) { this.keys.set(k.id, k); }
   async keysFor(id: string) { return [...this.keys.values()].filter((k) => k.accountId === id); }
-  async keyById(id: string) { return this.keys.get(id); }
+  async keyById(id: string, accountId?: string) { const k = this.keys.get(id); return k && (accountId === undefined || k.accountId === accountId) ? k : undefined; }
   // Data-rights support (src/dsr.ts DsrStore). Kept off the Store interface so existing adapters do not break.
   async receiptsFor(id: string) { return [...this.receipts.values()].filter((r) => r.accountId === id); }
   async creditOrdersFor(id: string) { return [...this.creditOrders.values()].filter((o) => o.accountId === id); }
