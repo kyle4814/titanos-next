@@ -71,6 +71,7 @@ export class Throttle {
     return a ? a.reserve(key, this.cfg, this.cfg.now()) : this.reserve(key);
   }
   async reset(key: string): Promise<void> { await this.store.delete(key); }
+  note(line: string) { this.cfg.log?.(line); }   // log sink for callers that use reserve()/reset() directly; callers pass hashed keys only
   // Run fn under the throttle. A thrown error or isFailure(result) keeps the reserved failure; anything else resets the key.
   async guard<T>(key: string, fn: () => Promise<T>, isFailure: (r: T) => boolean = () => false): Promise<T> {
     const r = await this.reserveAsync(key);

@@ -13,7 +13,8 @@ import { traceKeyPrefix, isOperator } from "./agent/keytrace.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
 import { workerScheduled } from "./owner/cron.ts";
-import { ThrottledError, throttleKey } from "./throttle.ts";
+import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
+import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -50,11 +51,27 @@ async function body(req: Request): Promise<Record<string, unknown>> {
   if (!t) return {};
   try { const j = JSON.parse(t); return j && typeof j === "object" ? j : {}; } catch { throw new HttpError(400, "invalid_json"); }
 }
-// Throttle wrapper: no d.throttle means no throttling (opt-in until the Worker wires one). Key = scope + hash(account, ip).
-const clientIp = (req: Request) => req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+// Throttle wrapper: no d.throttle means no throttling (opt-in for harness callers; the Worker entry ALWAYS injects one).
+// Key = scope + hash(account, ip). The IP comes from CF-Connecting-IP ONLY (Cloudflare sets it and strips a client-sent copy;
+// X-Forwarded-For is client-controlled, so it is never read). A missing header shares one fixed "noip" bucket, so omitting the
+// header cannot buy a fresh budget. FAIL CLOSED: any fault in the throttle itself (key, reserve) is a 503, never an allow-through.
+const clientIp = (req: Request) => { const v = req.headers.get("cf-connecting-ip")?.trim(); return v ? v.slice(0, 64) : "noip"; };
 async function throttled<T>(d: Deps, req: Request, scope: string, who: string, fn: () => Promise<T>): Promise<T> {
-  if (!d.throttle) return fn();
-  return d.throttle.guard(await throttleKey(scope, who, clientIp(req)), fn);   // any HttpError/throw counts as a failure
+  const th = d.throttle;
+  if (!th) return fn();
+  let key: string;
+  try {
+    key = await throttleKey(scope, who, clientIp(req));
+    const r = await th.reserveAsync(key);
+    if (!r.allowed) { th.note(`throttle block key=${key} retry_after=${r.retryAfterSec}`); throw new ThrottledError(r.retryAfterSec); }
+  } catch (e) {
+    if (e instanceof ThrottledError) throw e;
+    throw new HttpError(503, "throttle_unavailable");
+  }
+  let out: T;
+  try { out = await fn(); } catch (e) { th.note(`throttle fail key=${key}`); throw e; }   // keeps the reserved failure (counts toward the lockout)
+  try { await th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
+  return out;
 }
 function cors(res: Response, env: Env): Response {
   const o = env.TITANOS_SITE_ORIGIN;
@@ -195,11 +212,33 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   return json({ error: "not_found", path }, 404);
 }
 
-export default {
-  fetch(req: Request, env: Env): Promise<Response> {
-    return handle(req, env).catch(() => json({ error: "internal" }, 500));
-  },
-  async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
-    await workerScheduled(event, env);
-  },
-};
+// Worker entry factory: ONE Throttle (Memory adapter, injectable clock) is built per Worker and injected into Deps for every
+// request, so login verify, DNS-TXT verify and checkout start are always guarded. Memory state is per isolate: a shared
+// adapter (Durable Object / D1) behind ThrottleStore is the WOULD-FLIP. buildDeps is undefined until the D1 store lands
+// (every route except /health then fails closed with 503).
+export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; makeThrottle?: (env: Env) => Throttle | undefined; now?: () => number; log?: (line: string) => void }
+export const THROTTLE_LIMITS = LIMITS;
+export function createWorker(opts: WorkerOpts = {}) {
+  const fixed = opts.throttle ?? (opts.makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
+  return {
+    fetch(req: Request, env: Env): Promise<Response> {
+      return Promise.resolve().then(() => {
+        let base: Deps | undefined;
+        try { base = opts.buildDeps?.(env); } catch (e) {
+          if (!(e instanceof BuildDepsError)) throw e;
+          opts.log?.(`buildDeps refused: ${e.message}`);   // reason + binding NAME only, never a value
+          const p = new URL(req.url).pathname;
+          if (p === "/health" || req.method === "OPTIONS") return handle(req, env, undefined);
+          return json({ error: "deps_unavailable", reason: e.message }, 503);
+        }
+        const throttle = fixed ?? opts.makeThrottle?.(env);
+        return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
+      }).catch(() => json({ error: "internal" }, 500));
+    },
+    async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
+      await workerScheduled(event, env);
+    },
+  };
+}
+// The shipped default: real deps from the Env's D1 binding, shared D1 throttle. With no store adapter wired it refuses (503, named reason).
+export default createWorker({ buildDeps: (env) => defaultBuildDeps(env), makeThrottle: (env) => throttleFor(env) });
