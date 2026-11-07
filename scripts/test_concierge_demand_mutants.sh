@@ -15,7 +15,7 @@ mut() { # name, expected test id, sed expression
 }
 mut "drop distinct-asker dedupe (count records as askers)" T4 's/const askers = new Set(c.items.map((i) => i.asker));/const askers = new Set(c.items.map((_, k) => String(k)));/'
 mut "skip PII strip" T6 's/const clean = stripPii(r.ask);/const clean = String(r.ask);/'
-mut "allow ungraded through (stub claims it is graded and carries a pass flag)" T7e 's/sample_asks: samples, status: "UNGRADED_PROPOSAL" });/sample_asks: samples, status: "UNGRADED_PROPOSAL", grade: { pass: true } } as any);/'
+mut "allow ungraded through (stub claims it is graded and carries a pass flag)" T7e 's/status: "UNGRADED_PROPOSAL", first_seen/status: "UNGRADED_PROPOSAL", grade: { pass: true } as any, first_seen/'
 mut "unstable sort (input pre-sort and tie-breaks removed, input order leaks)" 'T9|T10' '/^  items.sort(/d; s/stubs.sort((a, b) => b.distinct_askers - a.distinct_askers || b.ask_count - a.ask_count || cmp(a.label, b.label) || cmp(a.cluster_id, b.cluster_id));/stubs.sort((a, b) => b.distinct_askers - a.distinct_askers);/'
 mut "off-topic guard disabled" T5 's/if (c.items.some((i) => off(i.toks))) continue;//'
 echo "mutants caught $caught of $n"
