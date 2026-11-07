@@ -95,6 +95,7 @@ export async function handle(req: Request, env: Env, deps?: Deps): Promise<Respo
   } catch (e) {
     if (e instanceof ThrottledError) { const r = cors(json({ error: e.code }, 429), env); r.headers.set("retry-after", String(e.retryAfterSec)); return r; }
     if (e instanceof HttpError) return cors(json({ error: e.code }, e.status), env);
+    if (e instanceof svc.RefundInFlight) return cors(json({ error: "refund_in_flight" }, 503), env);
     if (e instanceof svc.RefundRecordPending) return cors(json({ error: "refund_record_pending", refundId: e.refundId, purchaseId: e.purchaseId }, 503), env);
     throw e;
   }
