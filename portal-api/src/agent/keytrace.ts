@@ -11,13 +11,13 @@ export interface TraceHit { keyPrefix: string; keyId: string; accountId: string;
 export async function traceKeyPrefix(d: Deps, raw: string, o: { accountId?: string } = {}): Promise<{ prefix: string; matches: number; ambiguous: boolean; hits: TraceHit[] }> {
   const prefix = String(raw).trim().slice(0, PREFIX_LEN);
   if (prefix.length < MIN_PREFIX || !/^[a-z0-9_]+$/.test(prefix)) throw new HttpError(400, "bad_prefix"); // short or odd prefixes would enumerate every key
-  let keys = await d.store.keysByPrefix(prefix, o.accountId);
+  let keys = await d.store.keysByPrefix(prefix);
   if (o.accountId) keys = keys.filter((k) => k.accountId === o.accountId); // account-scoped lookup never reveals another tenant's key
   keys = keys.sort((a, b) => a.createdAt - b.createdAt).slice(0, MAX_MATCHES);
   const hits: TraceHit[] = [];
   for (const k of keys) {
     const acct = await d.store.accountById(k.accountId);
-    const calls = await d.store.receiptsForKey(k.id, RECENT_CALLS, k.accountId);
+    const calls = await d.store.receiptsForKey(k.id, RECENT_CALLS);
     hits.push({ keyPrefix: k.id.slice(0, PREFIX_LEN), keyId: k.id, accountId: k.accountId, seat: acct?.seat, accountDeleted: !!acct?.deletedAt, scopes: [...k.scopes], createdAt: k.createdAt, revokedAt: k.revokedAt,
       recentCalls: calls.map((r) => ({ receiptId: r.id, tool: r.tool, at: r.at, credits: r.credits, mode: r.mode })) });
   }

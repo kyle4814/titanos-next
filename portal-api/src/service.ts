@@ -364,7 +364,7 @@ export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
 }
 export async function listKeys(d: Deps, a: Account) { return (await d.store.keysFor(a.id)).map((k) => ({ id: k.id, scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt })); }
 export async function revokeKey(d: Deps, a: Account, id: string) {
-  const k = await d.store.keyById(id, a.id);
+  const k = await d.store.keyById(id);
   if (!k || k.accountId !== a.id) throw new HttpError(404, "not_found");
   k.revokedAt = k.revokedAt ?? d.now(); await d.store.putKey(k);
 }
