@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync, copyFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync, cpSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -81,8 +81,9 @@ function mutate(name: string, file: string, from: string, to: string) {
   const dir = mkdtempSync(join(tmpdir(), "f177-"));
   try {
     const src = join(dir, "portal-api"); mkdirSync(join(src, "src"), { recursive: true }); mkdirSync(join(src, "test"), { recursive: true });
-    for (const f of readdirSync(SRC)) copyFileSync(join(SRC, f), join(src, "src", f));
-    copyFileSync(join(HERE, "stripe_items_period.test.ts"), join(src, "test", "x.test.ts"));
+    cpSync(SRC, join(src, "src"), { recursive: true });
+    symlinkSync(join(SRC, "../../lib"), join(dir, "lib"));
+    cpSync(join(HERE, "stripe_items_period.test.ts"), join(src, "test", "x.test.ts"));
     const p = join(src, "src", file), t = readFileSync(p, "utf8");
     assert.equal(t.split(from).length - 1, 1, `${name}: anchor must be unique`);
     writeFileSync(p, t.replace(from, to));
