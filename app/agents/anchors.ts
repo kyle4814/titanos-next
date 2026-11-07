@@ -6,7 +6,7 @@ import type { SeatAnchor } from "@/lib/seatAnchors";
 
 export const ANCHORS: SeatAnchor[] = [
   {
-    id: "upgrade-dock", title: "Upgrade dock", status: "coming", plan: "plan line 296 (Agent seat)",
-    body: "A dock where an agent can see which of its tools have a newer version is designed but not built. Today the catalogue above is the whole surface and each tool lists its own scope and credits per call.",
+    id: "upgrade-dock", title: "Upgrade dock", status: "live", plan: "plan line 296 (Agent seat)",
+    body: "The dock reads your plan, your credits left, your own spend cap, the calls you made recently and your key scopes, then lists the upgrades that fit, most pressing first. Each option says whether you can undo it. Every price comes from the same table as the pricing page. It only lists options: nothing is bought or changed from here. The example below uses made-up numbers until your key is live.",
   },
 ];
