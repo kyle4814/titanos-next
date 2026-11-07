@@ -35,7 +35,7 @@ t("client posts the field names the Worker reads (email, token, domain, product,
     assert.ok(lib.includes(route), route);
     assert.ok(new RegExp(`\\b${field}\\b`).test(lib), field);
   }
-  assert.match(idx, /\(await body\(req\)\)\.email/); assert.match(idx, /\.token\)/); assert.match(idx, /b\.product, b\.domain/);
+  assert.match(idx, /\(await body\(req\)\)\.email/); assert.match(idx, /\.token[;)]/); assert.match(idx, /b\.product, b\.domain/);
   assert.match(read("app/app/billing/client.tsx"), /purchaseId/); assert.match(idx, /body\(req\)\)\.purchaseId/);
   assert.match(read("app/app/billing/client.tsx"), /confirm: "DELETE"/); assert.match(idx, /\.confirm\)/);
 });
