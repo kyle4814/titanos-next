@@ -3,7 +3,7 @@
 export interface D1Statement {
   bind(...args: unknown[]): D1Statement;
   first<T = unknown>(): Promise<T | null>;
-  run(): Promise<{ meta?: { changes?: number } } | unknown>;
+  run(): Promise<unknown>;
   all<T = unknown>(): Promise<{ results: T[] }>;
 }
 export interface D1Like {
