@@ -1,4 +1,6 @@
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
+// f196: when CONTRACT_LIB=1 another suite imports violations()/race() from here (miniflare_contract.test.ts); the FakeD1 tests below must not register again.
+const test: typeof nodeTest = process.env.CONTRACT_LIB === "1" ? ((() => undefined) as unknown as typeof nodeTest) : nodeTest;
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdtempSync, cpSync, rmSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -77,7 +79,7 @@ for (const [name, fac] of [["memory", memory], ["d1", d1]] as const) {
 }
 
 // ---- D1-only: what the schema adds ----
-test.skip("[d1] invoices.purchase_id is a foreign key (not on the merged line: 0003_enterprise adds a plain TEXT column, SQLite cannot add the FK later)", async () => {
+test("[d1] invoices.purchase_id is a foreign key (not on the merged line: 0003_enterprise adds a plain TEXT column, SQLite cannot add the FK later)", { skip: true }, async () => {
   const db = new FakeD1(), s = new D1PlanStore(db); await seed(s);
   await assert.rejects(() => s.putInvoice(inv({ id: "inv_fk", purchaseId: "pur_missing" })), /FOREIGN KEY/i);
 });

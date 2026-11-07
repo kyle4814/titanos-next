@@ -1,4 +1,6 @@
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
+// f196: when CONTRACT_LIB=1 another suite imports violations()/race() from here (miniflare_contract.test.ts); the FakeD1 tests below must not register again.
+const test: typeof nodeTest = process.env.CONTRACT_LIB === "1" ? ((() => undefined) as unknown as typeof nodeTest) : nodeTest;
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { resolve, join } from "node:path";
