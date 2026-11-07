@@ -7,6 +7,7 @@ import { ROLES, ROLE_RANK, type Asset, type Brand, type IdpVerifier, type Payout
 import { SsoError } from "./sso.ts";
 import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement, type SelfDealCheck } from "./share.ts";
 import { grade, summarise } from "./estate.ts";
+import { sealSecret, openSecret, isSealed, SealError, type SealKeyring } from "./seal.ts";
 import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
 import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
@@ -14,6 +15,7 @@ import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payo
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
 export interface EntContext {
   store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string; selfDeal?: SelfDealCheck;
+  sealKeys?: SealKeyring;   // C8 f286: SSO client secrets are sealed with this keyring before any store write; absent = putSso answers 503, never plaintext
   payoutLookup?: TransferLookup;   // C8 f50: provider lookup for the resume sweep; absent = the sweep route answers 503
   approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
@@ -311,6 +313,7 @@ export async function estateCsv(d: Deps, ctx: Ctx, tid: string) {
 }
 
 // ---- SSO ----
+const ssoSealCtx = (tenantId: string) => `sso:${tenantId}`;   // AAD: a sealed secret copied onto another tenant row fails to open
 export async function putSso(d: Deps, ctx: Ctx, tid: string, b: Record<string, unknown>) {
   const { tenant } = await access(d, ctx, tid, "admin");
   const e = ent(d).store;
@@ -328,7 +331,11 @@ export async function putSso(d: Deps, ctx: Ctx, tid: string, b: Record<string, u
     if (!dom || !verified.has(dom)) throw new HttpError(422, "allowed_domain_not_verified");     // an email domain must be one the tenant proved by TXT
     allowed.push(dom);
   }
-  await e.putSso({ tenantId: tenant.id, issuer, clientId, secret, allowedDomains: allowed, defaultRole: role });
+  const ring = ent(d).sealKeys;
+  if (!ring) throw new HttpError(503, "sso_seal_unavailable");                                     // fail closed: no keyring, no SSO config, no plaintext
+  let sealed: string;
+  try { sealed = await sealSecret(ring, secret, ssoSealCtx(tenant.id)); } catch (err) { if (err instanceof SealError) throw new HttpError(503, "sso_seal_unavailable"); throw err; }
+  await e.putSso({ tenantId: tenant.id, issuer, clientId, secret: sealed, allowedDomains: allowed, defaultRole: role });
   if (tenant.ssoEnforced) await e.putTenant({ ...tenant, ssoEnforced: false });                   // a changed IdP resets enforcement
   await audit(d, tenant.id, ctx.account.id, "sso.config", issuer);
   return ssoView(await e.ssoOf(tenant.id));
@@ -370,8 +377,14 @@ export async function ssoCallback(d: Deps, b: Record<string, unknown>) {
   if (!st) throw new HttpError(401, "sso_failed");
   const tenant = await c.store.tenantById(st.tenantId), cfg = await c.store.ssoOf(st.tenantId);
   if (!tenant || tenant.deletedAt || !cfg) throw new HttpError(401, "sso_failed");
+  // the stored secret is sealed; open it for this call only. Unsealed legacy row, no keyring, unknown key id, tamper => fail closed.
+  let open: string;
+  try {
+    if (!c.sealKeys || !isSealed(cfg.secret)) throw new SealError("unsealed");
+    open = await openSecret(c.sealKeys, cfg.secret, ssoSealCtx(tenant.id));
+  } catch (e) { if (e instanceof SealError) throw new HttpError(401, "sso_failed"); throw e; }
   let claims;
-  try { claims = await c.idp.verify(cfg, b.id_token, d.now()); } catch (e) { if (e instanceof SsoError) throw new HttpError(401, "sso_failed"); throw e; }
+  try { claims = await c.idp.verify({ ...cfg, secret: open }, b.id_token, d.now()); } catch (e) { if (e instanceof SsoError) throw new HttpError(401, "sso_failed"); throw e; }
   if (typeof b.nonce !== "string" || (await sha256Hex(b.nonce)) !== st.nonceHash || claims.nonce !== b.nonce) throw new HttpError(401, "sso_failed");
   const email = normaliseEmail(claims.email);
   const emailDomain = email?.split("@")[1];
