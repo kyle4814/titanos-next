@@ -18,8 +18,8 @@ const tick = async () => { for (let i = Math.floor(rand() * 3); i >= 0; i--) awa
 export class FakeD1 implements D1Like {
   db = new DatabaseSync(":memory:");
   log: { sql: string; args: unknown[] }[] = [];
-  constructor() {
-    this.db.exec("PRAGMA foreign_keys = ON");
+  constructor(o: { fk?: boolean } = {}) {
+    this.db.exec(`PRAGMA foreign_keys = ${o.fk === false ? "OFF" : "ON"}`);
     for (const f of MIGRATIONS) this.db.exec(readFileSync(dir + f, "utf8"));
   }
   prepare(sql: string): D1Statement {

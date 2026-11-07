@@ -243,7 +243,7 @@ for (const [name, mk] of ADAPTERS) describe(`Store contract: ${name}`, () => {
 // ---- D1-only: the shape of the SQL itself ----
 describe("D1Store SQL shape", () => {
   test("the migrations FakeD1 applies on the merged line (f212 + f208 throttle 0008): the exact file list, in filename order", () => {
-    assert.deepEqual(MIGRATIONS, ["0001_portal_core.sql", "0002_portal_billing.sql", "0003_agent_door.sql", "0003_enterprise.sql", "0003_owner_seat.sql", "0003_refund_cases.sql", "0004_market.sql", "0004_store_counters.sql", "0004_subscription_plan.sql", "0005_idem_reservations.sql", "0005_invoice_d1.sql", "0006_webhook_held_facts.sql", "0008_throttle_state.sql"]);
+    assert.deepEqual(MIGRATIONS, ["0001_portal_core.sql", "0002_portal_billing.sql", "0003_agent_door.sql", "0003_enterprise.sql", "0003_owner_seat.sql", "0003_refund_cases.sql", "0004_market.sql", "0004_store_counters.sql", "0004_subscription_plan.sql", "0005_enterprise_d1.sql", "0005_idem_reservations.sql", "0005_invoice_d1.sql", "0005_market_d1.sql", "0005_owner_d1.sql", "0006_webhook_held_facts.sql", "0008_throttle_state.sql"]);
   });
 
   test("the debit is ONE statement: a single conditional INSERT...SELECT, no preceding SELECT, one write per call", async () => {
@@ -269,7 +269,7 @@ describe("D1Store SQL shape", () => {
 
   test("tenant rule: no table in D1Store's own migrations carries tenant_id and D1Store implements no enterprise method (EntStore adapter is a separate lane)", () => {
     const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
-    const OTHER_LANES = /^(0003_enterprise|0003_owner_seat|0004_market)\.sql$/; // enterprise, owner and market tables carry tenant_id by design: not D1Store's
+    const OTHER_LANES = /^(0003_enterprise|0003_owner_seat|0004_market|0005_enterprise_d1|0005_market_d1|0005_owner_d1)\.sql$/; // enterprise, owner and market tables carry tenant_id by design: not D1Store's
     for (const m of MIGRATIONS.filter((m) => !OTHER_LANES.test(m))) assert.ok(!/tenant_id/i.test(readFileSync(dir + m, "utf8")), `${m} has no tenant table`);
     const src = readFileSync(fileURLToPath(new URL("../src/d1store.ts", import.meta.url)), "utf8").split("\n").filter((l) => !l.trim().startsWith("//")).join("\n");
     assert.ok(!/tenant|EntStore|reservePayout|transitionPayout/i.test(src));
