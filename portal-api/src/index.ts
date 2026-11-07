@@ -57,6 +57,7 @@ export async function handle(req: Request, env: Env, deps?: Deps): Promise<Respo
     return cors(await route(req, pathname, deps), env);
   } catch (e) {
     if (e instanceof HttpError) return cors(json({ error: e.code }, e.status), env);
+    if (e instanceof svc.RefundRecordPending) return cors(json({ error: "refund_record_pending", refundId: e.refundId, purchaseId: e.purchaseId }, 503), env);
     throw e;
   }
 }

@@ -151,6 +151,9 @@ function applyRefund(pur: Purchase, cents: number) {
 // markPaid never writes the purchase after its claim, so it can no longer erase a refund back to paid, and a late write can never revive refunded.
 export class RefundContention extends Error { constructor(id: string) { super(`refund CAS lost ${REFUND_TRIES} times on purchase ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); } }
 const REFUND_TRIES = 8;
+// f240: Stripe has ALREADY refunded when requestRefund's own recordRefund runs out of retries. This typed error (a RefundContention, so existing catches still match) carries the Stripe refund id and the idempotency key:
+// the caller gets a 503 refund_record_pending with the id, the next charge.refunded webhook (or a replayed requestRefund, which reuses the remembered refund and never calls Stripe again) heals the ledger. Never a silent drop, never a second refund.
+export class RefundRecordPending extends RefundContention { purchaseId: string; refundId: string; idempotencyKey: string; constructor(purchaseId: string, refundId: string, idempotencyKey: string) { super(purchaseId); this.purchaseId = purchaseId; this.refundId = refundId; this.idempotencyKey = idempotencyKey; this.name = "RefundRecordPending"; } }
 // f239: the CAS guards status AND the refunded_cents just read, so two concurrent partial refunds cannot lose the smaller cumulative: the loser re-reads, re-merges (cumulative, monotone, clamped) and retries.
 // Exhausting the bounded retries throws RefundContention (a webhook fails and is re-delivered); it never returns a stale row as if the refund had landed.
 export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, cents: number): Promise<Purchase | undefined> {
@@ -277,7 +280,10 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   const pur = await d.store.purchaseById(purchaseId);
   if (!pur || pur.accountId !== a.id) throw new HttpError(404, "not_found");
   if (pur.status !== "paid" || !pur.paymentIntent || !pur.paidAt) throw new HttpError(409, "not_refundable_yet");
-  const v = refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
+  // f240: a remembered Stripe refund (RefundRecordPending earlier) means the money already moved and policy was already passed: the replay only converges the ledger, so it skips the verdict (a rival partial now makes refundedCents > 0, which would wrongly route it to review).
+  const key = `refund-${pur.id}`, memo = `refundsent:${pur.id}`;
+  let sent = (await d.store.takeFacts(memo))[0] as { refundId: string } | undefined;
+  const v = sent ? { auto: true as const } : refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
   if (!v.auto) {
     // Out of policy: one pending_review RefundCase per purchase (a repeat request returns the same case, never a second card),
     // with the legacy ReviewCard kept in step (same id, resolved false). The card payload is returned as DATA ONLY: nothing is sent.
@@ -292,8 +298,13 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
     const card = rc.status === "pending_review" ? buildRefundCard(rc) : undefined;
     return { status: "needs_review" as const, reason: v.reason, refundId: rc.id, caseStatus: rc.status, card };
   }
-  await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
-  await recordRefund(d, pur.id, pur.amountCents); // f238: paid -> refunded by CAS; a webhook that got there first makes this a no-op
+  // f240: the Stripe call is made at most once per purchase key. The refund id is remembered (held fact) until the ledger CAS lands, so a replay after RefundRecordPending skips Stripe and only converges the ledger.
+  // A crash between the Stripe call and the remember is safe too: the replay reuses the same idempotency key, which Stripe answers with the same refund.
+  if (!sent) sent = { refundId: (await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, key)).id };
+  await d.store.holdFact(memo, sent);
+  try { await recordRefund(d, pur.id, pur.amountCents); } // f238: paid -> refunded by CAS; a webhook that got there first makes this a no-op
+  catch (e) { if (e instanceof RefundContention) throw new RefundRecordPending(pur.id, sent.refundId, key); throw e; }
+  await d.store.takeFacts(memo);
   return { status: "refunded" as const, amountCents: pur.amountCents };
 }
 
