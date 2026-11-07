@@ -56,7 +56,7 @@ const comp = fs.readFileSync(root + "components/Concierge.tsx", "utf8");
 const page = fs.readFileSync(root + "app/faq/page.tsx", "utf8");
 t("faq page imports and renders <Concierge />", /import Concierge from "@\/components\/Concierge"/.test(page) && /<Concierge \/>/.test(page));
 t("component is a client component", /^"use client"/.test(comp));
-t("component uses the no-op adapter by default (makeAsk() with no log)", /makeAsk\(\)/.test(comp));
+t("component uses the no-op adapter by default (loadAsk() with no log)", /loadAsk\(\)/.test(comp));
 t("component has no fetch / model / env / innerHTML", !/\bfetch\s*\(|anthropic|openai|process\.env|dangerouslySetInnerHTML|XMLHttpRequest|WebSocket/i.test(comp));
 t("makeAsk default adapter reports not saved", (await makeAsk()("how do I bake sourdough", "guest")).saved === false);
 let net = 0; const rf = globalThis.fetch; globalThis.fetch = () => { net++; throw new Error("network forbidden"); };
