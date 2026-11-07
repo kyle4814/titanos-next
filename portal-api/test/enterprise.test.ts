@@ -307,7 +307,7 @@ test("share: replaying the same Stripe event does not pay twice; a paying strang
   await h.req("POST", "/checkout", { token: stranger.session, body: { product: "leads_starter" } });
   await h.pay("leads_starter");
   const led = await h.get(p.session, `/partners/${p.tenant.id}/ledger`);
-  assert.equal(led.entries.filter((e: any) => e.kind === "commission").length, 2, "one for the original, one for the duplicate-id different event on the same purchase is an extra invoice by design");
+  assert.equal(led.entries.filter((e: any) => e.kind === "commission").length, 1, "one for the original; a second paid signal on an already-paid purchase never invoices again (f203/f209: one first invoice per purchase)");
   assert.ok(led.entries.every((e: any) => e.source === "Client Pty"));
 });
 test("share: monthly renewals keep earning; cancel stops them; a refund claws the commission back in full", async () => {
