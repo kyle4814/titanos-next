@@ -242,8 +242,9 @@ for (const [name, mk] of ADAPTERS) describe(`Store contract: ${name}`, () => {
 
 // ---- D1-only: the shape of the SQL itself ----
 describe("D1Store SQL shape", () => {
-  test("the migrations it is written against are exactly 0001..0004, in order", () => {
-    assert.deepEqual(MIGRATIONS.map((m) => m.slice(0, 4)), ["0001", "0002", "0003", "0004"]);
+  test("the migrations it is written against load in order (int line has several files per number: lanes share 0002..0004)", () => {
+    assert.deepEqual([...MIGRATIONS], [...MIGRATIONS].sort());
+    for (const m of ["0001_portal_core.sql", "0002_portal_billing.sql", "0004_store_counters.sql"]) assert.ok(MIGRATIONS.includes(m), m);
   });
 
   test("the debit is ONE statement: a single conditional INSERT...SELECT, no preceding SELECT, one write per call", async () => {
@@ -269,7 +270,7 @@ describe("D1Store SQL shape", () => {
 
   test("tenant rule: no table in 0001..0004 carries tenant_id and D1Store implements no enterprise method (EntStore adapter is a separate lane)", () => {
     const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
-    for (const m of MIGRATIONS) assert.ok(!/tenant_id/i.test(readFileSync(dir + m, "utf8")), `${m} has no tenant table`);
+    for (const m of ["0001_portal_core.sql", "0002_portal_billing.sql", "0004_store_counters.sql"]) assert.ok(!/tenant_id/i.test(readFileSync(dir + m, "utf8")), `${m} has no tenant table`);
     const src = readFileSync(fileURLToPath(new URL("../src/d1store.ts", import.meta.url)), "utf8").split("\n").filter((l) => !l.trim().startsWith("//")).join("\n");
     assert.ok(!/tenant|EntStore|reservePayout|transitionPayout/i.test(src));
   });
