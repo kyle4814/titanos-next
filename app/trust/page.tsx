@@ -16,8 +16,10 @@ export const metadata: Metadata = withSeo("/trust", {
   robots: { index: true, follow: true },
 });
 
-type Section = { id: string; heading: string; body: string; links?: string[][]; source: string };
+type Section = { id: string; anchor: string; heading: string; body: string; links?: string[][]; source: string };
 
+// Anchors on this page: #what-we-scan (passive, public records only), #security, #privacy, #ai-disclosure,
+// #status. Each id comes from lib/site-data/trust.json, so the site map table and the page cannot drift apart.
 export default function Trust() {
   const sections = trust.sections as Section[];
   return (
@@ -25,6 +27,7 @@ export default function Trust() {
       <PageHero badge="TRUST" title="The answers, before you have to ask." tagline="What we scan, what we never do, how AI is used, and what happens if you change your mind." />
       {sections.map((s) => (
         <Block key={s.id} point={s.heading}>
+          <span id={s.anchor} aria-hidden="true" />
           <p data-trust={s.id}>{s.body}</p>
           {s.links && (
             <p>

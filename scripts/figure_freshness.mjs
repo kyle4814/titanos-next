@@ -131,6 +131,9 @@ function trustCentre(d) {
   return items.map((s, i) => ({ id: `items.${s.id || i}`, system: s.system || d.system, date: s.date || s.asOf || d.asOf || d.updated,
     paths: s.source ? [s.source] : [], hasNumber: true }));
 }
+function pricingTrace(d) {
+  return (d.rows || []).map((r) => ({ id: `rows.${r.id}`, system: d.system, date: d.asOf, paths: r.source ? [r.source] : [], hasNumber: true }));
+}
 function investorLedger(d) {
   const keys = new Set([...Object.keys(d.n || {}), ...Object.keys(d.facts || {})]);
   const figs = Object.entries(d.n || {}).map(([k, f]) => ({ id: `n.${k}`, system: d.generated_by, date: f.as_of, source: f.source, derivedKeys: keys, hasNumber: true }));
@@ -151,6 +154,7 @@ export const ADAPTERS = [
   { file: "lib/ledger.json", surface: "Investor room", fn: investorLedger },
   { file: "lib/site-data/trust.json", surface: "Trust page", fn: trustSections },
   { file: "lib/trust-centre.json", surface: "Trust centre", fn: trustCentre },
+  { file: "lib/site-data/pricing-trace.json", surface: "Pricing page", fn: pricingTrace },
   { file: "lib/site-data/provenance.json", surface: "Evidence page stamps", fn: pageStamps },
 ];
 

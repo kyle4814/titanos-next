@@ -1,0 +1,18 @@
+{
+  "asOf": "2026-11-07",
+  "system": "titanos.tech price list (lib/pricing.ts), checked against plan chapter 5 section 5.2 and CORE NUM1",
+  "note": "Each row on /pricing traces to a constant in lib/pricing.ts. needle is the exact text that must still sit in that file. Owner tiers, marketplace fees, nuke instalments and metered usage are not published prices and are not on /pricing.",
+  "rows": [
+    {"id": "retainer-growth", "label": "AI Growth Partner retainer", "key": "AI_GROWTH_PARTNER", "unit": "month", "amount": 1500, "source": "lib/pricing.ts", "needle": "AI_GROWTH_PARTNER: 1500"},
+    {"id": "retainer-ops", "label": "AI Ops Partner retainer", "key": "AI_OPS_PARTNER", "unit": "month", "amount": 2500, "source": "lib/pricing.ts", "needle": "AI_OPS_PARTNER: 2500"},
+    {"id": "retainer-embedded", "label": "AI Embedded Partner retainer", "key": "AI_EMBEDDED_PARTNER", "unit": "month", "amount": 5000, "source": "lib/pricing.ts", "needle": "AI_EMBEDDED_PARTNER: 5000"},
+    {"id": "monitor", "label": "Compliance Monitor", "key": "MONITOR_MONTHLY", "unit": "month", "amount": 149, "source": "lib/pricing.ts", "needle": "MONITOR_MONTHLY: 149"},
+    {"id": "monitor-annual", "label": "Compliance Monitor, paid annually", "key": "MONITOR_ANNUAL", "unit": "year", "amount": 1490, "source": "lib/pricing.ts", "needle": "MONITOR_ANNUAL: 1490"},
+    {"id": "pack", "label": "Privacy Act and Essential Eight pack", "key": "PACK_PRICE", "unit": "one-off", "amount": 5997, "source": "lib/pricing.ts", "needle": "PACK_PRICE: 5997"},
+    {"id": "leads-starter", "label": "Leads Starter, 250 contacts", "key": "LEADS.STARTER", "unit": "one-off", "amount": 497, "source": "lib/pricing.ts", "needle": "price: 497"},
+    {"id": "leads-growth", "label": "Leads Growth, 1,000 contacts", "key": "LEADS.GROWTH", "unit": "one-off", "amount": 1497, "source": "lib/pricing.ts", "needle": "price: 1497"},
+    {"id": "leads-campaign", "label": "Leads Campaign, 3,000 contacts", "key": "LEADS.CAMPAIGN", "unit": "one-off", "amount": 3497, "source": "lib/pricing.ts", "needle": "price: 3497"},
+    {"id": "enterprise-low", "label": "Enterprise governance, from", "key": "ENTERPRISE_GOVERNANCE", "unit": "year", "amount": 49997, "source": "lib/pricing.ts", "needle": "ENTERPRISE_GOVERNANCE: 49997"},
+    {"id": "enterprise-high", "label": "Enterprise OEM licence, up to", "key": "OEM_LICENCE_ANNUAL", "unit": "year", "amount": 149997, "source": "lib/pricing.ts", "needle": "OEM_LICENCE_ANNUAL: 149997"}
+  ]
+}
