@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync, symlinkSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -17,8 +17,10 @@ const MIG = resolve(import.meta.dirname, "../migrations"), SRC = resolve(import.
 const M8 = "0008_purchase_abandoned_status.sql";
 const sql = (f: string) => readFileSync(join(MIG, f), "utf8");
 
-test("f234 migration 0008 is the highest number and widens only the CHECK", () => {
-  assert.equal(MIGRATIONS[MIGRATIONS.length - 1], M8);
+test("f234 migration 0008 is the LAST migration that rebuilds purchases, and widens only the CHECK", () => {
+  // on the merged line other lines own later numbers (0014_key_prefix_index): what matters is that nothing after 0008 rebuilds the purchases table
+  assert.ok(MIGRATIONS.includes(M8));
+  assert.deepEqual(MIGRATIONS.filter((f) => f > M8 && /DROP TABLE purchases\b/.test(sql(f))), []);
   assert.equal(MIGRATIONS.filter((f) => f.startsWith("0008")).length, 1);
   assert.match(sql(M8), /CHECK \(status IN \('pending','paid','refunded','cancelled','abandoned'\)\)/);
 });
@@ -51,13 +53,15 @@ test("f234 migration on a seeded db: rows, ids, columns, invoice_purchase_id and
   assert.equal((db.prepare("SELECT purchase_id FROM subscriptions WHERE id='s1'").get() as any).purchase_id, "p5");
   assert.deepEqual(db.prepare("PRAGMA foreign_key_check").all(), [], "no dangling link after the rebuild");
   // the links still bite: a child of a missing purchase is refused, and the rebuilt table is the one the FKs resolve to
-  assert.throws(() => db.exec("INSERT INTO invoices (id, account_id, number, product_id, amount_cents, issued_at, stripe_event_id, purchase_id) VALUES ('i2','a1','TT-000002','x',1,1,'ev2','nope')"), /FOREIGN KEY/);
+  // (invoices.purchase_id is a plain column on the merged line, 0003_enterprise; subscriptions.purchase_id is the FK that must still bite)
+  assert.throws(() => db.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at) VALUES ('s2','a1','nope','prod4',9)"), /FOREIGN KEY/);
   assert.equal((db.prepare("SELECT status FROM purchases WHERE id='p4'").get() as any).status, "cancelled");
 });
 
 test("f234 f104 migration lint passes on the tree, and sees Purchase.status vs the final CHECK", () => {
   const r = lint({ pairs: [{ name: "purchase states", ts: { file: "src/store.ts", iface: "Purchase", prop: "status" }, sql: { table: "purchases", column: "status" } }] });
-  assert.deepEqual(r.failures, []);
+  // numbering failures (duplicate prefixes, gaps) are tree-wide across the merged lines, not this pair's: only the pair's own failures count here
+  assert.deepEqual(r.failures.filter((f: string) => !/^(duplicate prefix|gap:)/.test(f)), []);
   assert.ok(r.files.includes(M8));
   // and it bites: if the TS union gains a value the final CHECK lacks, the lint names it
   const bad = lint({ pairs: [{ name: "purchase states", ts: { file: "src/store.ts", iface: "Purchase", prop: "status" }, sql: { table: "purchases", column: "status" } }], migDir: mkdtempSync(join(tmpdir(), "f234l-")) });
@@ -68,6 +72,7 @@ async function load(edits: [string, string, string][] = []) {
   const dir = mkdtempSync(join(tmpdir(), "f234-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
   try {
     for (const f of readdirSync(SRC)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(SRC, f), "utf8"));
+    for (const f of readdirSync(SRC)) if (statSync(join(SRC, f)).isDirectory()) symlinkSync(join(SRC, f), join(dir, f));   // src/enterprise, src/market
     for (const [file, from, to] of edits) { const t = readFileSync(join(dir, file), "utf8"); assert.equal(t.split(from).length - 1, 1, `anchor ${from}`); writeFileSync(join(dir, file), t.replace(from, to)); }
     const imp = (f: string) => import(pathToFileURL(join(dir, f)).href + "?" + Math.random());
     return { store: await imp("store.ts"), d1: await imp("d1_plan_store.ts"), svc: await imp("service.ts"), rec: await imp("pending_reconciler.ts") };
