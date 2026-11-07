@@ -21,6 +21,6 @@ mut "non-idempotent (republish what is already live)" 'G8' 's/if (have \&\& have
 mut "assertCatalogueAllGraded swallows" 'G10' 's/  if (bad.length) throw new Error(/  if (bad.length) void (/'
 mut "duplicate ids published" 'G6' 's/if ((counts.get(id) ?? 0) > 1) {/if (false) {/'
 mut "partial checks accepted" 'G7' 's/if (missing.length) return .*/\/\/ partial ok/'
-mut "assert ignores hash mismatch" 'G10' 's/if (e.content_hash !== contentHash(e.shelf)) {/if (false) {/'
+mut "assert ignores hash mismatch" 'G10' 's/if (e.content_hash !== h) {/if (false) {/'
 echo "mutants caught $caught of $n"
 [ "$caught" = "$n" ] && echo "MUTANTS OK" || { echo "MUTANTS FAILED"; exit 1; }

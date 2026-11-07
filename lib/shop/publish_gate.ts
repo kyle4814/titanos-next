@@ -93,8 +93,9 @@ export function assertCatalogueAllGraded(catalogue: Catalogue): void {
     if (!e || !e.shelf) { bad.push(id + ": no shelf"); continue; }
     if (!nonEmpty(e.label)) bad.push(id + ": missing label");
     const g = (e.shelf as GradedShelf).grade;
-    const run: GradeRun | null = g ? { content_hash: contentHash(e.shelf), pass: g.pass, checks: g.checks } : null;
-    if (e.content_hash !== contentHash(e.shelf)) { bad.push(id + ": hash mismatch (edited after grading)"); continue; }
+    const h = contentHash(e.shelf); // once per entry (f306: the 1,000-shelf read was hashing every shelf twice)
+    const run: GradeRun | null = g ? { content_hash: h, pass: g.pass, checks: g.checks } : null;
+    if (e.content_hash !== h) { bad.push(id + ": hash mismatch (edited after grading)"); continue; }
     const p = runProblem(run, e.content_hash);
     if (p) bad.push(id + ": " + p);
   }

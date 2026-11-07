@@ -5,7 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import OfferTile from "@/components/offers/OfferTile";
-import { SHOP } from "@/lib/shop";
+import { shopReader } from "@/lib/shop/reader";
 import { formatAUD, formatMonthly } from "@/lib/pricing";
 import type { GradedShelf } from "@/lib/shop/types";
 
@@ -29,7 +29,7 @@ function price(s: GradedShelf): string {
 const PILL: Record<string, string> = { BUYABLE: "Available now", FREE_STEP: "Free first step open", QUOTE: "Instant quote" };
 
 export default function Shop() {
-  const shelves = SHOP.shelves;
+  const shelves = shopReader.listShelves();
   const courses = shelves.filter((s) => s.kind === "course");
   const generator = shelves.filter((s) => s.kind === "generator");
   const rest = shelves.filter((s) => s.kind !== "course" && s.kind !== "generator");
