@@ -1,7 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdtempSync, cpSync, rmSync, readdirSync, statSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { FakeD1, seeded } from "./fake_d1.ts";
@@ -157,7 +156,7 @@ test(`SUBCAS mutation: ${MUT.length} of ${MUT.length} mutants are killed by the 
   for (const mu of MUT) {
     const text = readFileSync(join(SRC, mu.file), "utf8");
     assert.equal(text.split(mu.from).length - 1, 1, `anchor must match exactly once: ${mu.id}`);
-    const dir = mkdtempSync(join(tmpdir(), "subcas_mut_"));
+    const dir = mkdtempSync(join(resolve(SRC, "../.."), ".subcas_mut_"));
     try {
       cpSync(SRC, join(dir, "src"), { recursive: true });
       writeFileSync(join(dir, "src", mu.file), text.replace(mu.from, mu.to));
