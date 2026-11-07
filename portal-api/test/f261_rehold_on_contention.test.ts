@@ -127,7 +127,7 @@ const MUT: [string, [string, string, string][]][] = [
   ["M1 drop the re-hold (f251 behaviour)", [["service.ts", "if (e instanceof SubscriptionContention) for (const f of tookFacts) await d.store.holdFact(`sub:${pur.subscriptionId}`, f);", ""]]],
   ["M2 re-hold only the periods, drop the cancel", [["service.ts", "for (const f of tookFacts) await d.store", "for (const f of tookFacts.filter((x) => x.kind !== \"cancel\")) await d.store"]]],
   ["M3 re-hold twice (duplicate held facts)", [["service.ts", "for (const f of tookFacts) await d.store.holdFact(`sub:${pur.subscriptionId}`, f);", "for (const f of [...tookFacts, ...tookFacts]) await d.store.holdFact(`sub:${pur.subscriptionId}`, f);"]]],
-  ["M4 swallow the contention (no throw)", [["service.ts", "        throw e;\n      }\n    }\n    if (pur.paymentIntent)", "      }\n    }\n    if (pur.paymentIntent)"]]],
+  ["M4 re-hold under the wrong key (purchase id, not the subscription id)", [["service.ts", "await d.store.holdFact(`sub:${pur.subscriptionId}`, f);\n        throw e;", "await d.store.holdFact(`sub:${pur.id}`, f);\n        throw e;"]]],
 ];
 test("f261 mutants are all killed", async () => {
   let killed = 0;
