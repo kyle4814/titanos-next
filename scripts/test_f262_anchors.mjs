@@ -14,6 +14,12 @@ const EXPECT = {
 const comp = fs.readFileSync("components/SeatAnchors.tsx", "utf8");
 ok(/id=\{r\.id\}/.test(comp) && /href=\{`#\$\{r\.id\}`\}/.test(comp), "component renders id={r.id} once and links href=#id for every row");
 ok((comp.match(/id=\{r\.id\}/g) || []).length === 1, "component sets the section id in exactly one place");
+// /enterprise#estate moved from PARKED (coming) to built: live status, component wired into the section (f274).
+{
+  const a = fs.readFileSync("app/enterprise/anchors.ts", "utf8").split('id: "estate"')[1]?.split('id: "dossiers"')[0] || "";
+  ok(/status: "live"/.test(a), "/enterprise#estate anchor is built (live)");
+  ok(/<EstateView \/>/.test(comp), "/enterprise#estate section renders the EstateView component");
+}
 const builtIdx = process.argv.indexOf("--built");
 const out = builtIdx > 0 ? process.argv[builtIdx + 1] : null;
 const allText = [];

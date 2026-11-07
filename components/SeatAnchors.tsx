@@ -1,4 +1,5 @@
 import Link from "next/link";
+import EstateView from "@/components/EstateView";
 import type { SeatAnchor } from "@/lib/seatAnchors";
 
 // In-page anchor sections for a portal seat page. Server component: no state, no fetch, no model call.
@@ -17,6 +18,7 @@ export default function SeatAnchors({ rows }: { rows: SeatAnchor[] }) {
           <h2 id={`${r.id}-h`} style={{ margin: 0 }}>{r.title}</h2>
           <small>{r.status === "live" ? "Built" : "Coming, not built yet"}</small>
           <p style={{ margin: 0 }}>{r.body}</p>
+          {r.id === "estate" && r.status === "live" ? <EstateView /> : null}
         </section>
       ))}
     </div>
