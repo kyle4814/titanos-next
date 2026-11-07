@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync, symlinkSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -18,6 +18,7 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
   const dir = mkdtempSync(join(tmpdir(), "f203-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
   try {
     for (const f of readdirSync(SRC)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(SRC, f), "utf8"));
+    for (const f of readdirSync(SRC)) if (statSync(join(SRC, f)).isDirectory()) symlinkSync(join(SRC, f), join(dir, f));   // src/enterprise, src/market: subdirectories are not mutated
     for (const [file, from, to] of edits) {
       const t = readFileSync(join(dir, file), "utf8"); assert.equal(t.split(from).length - 1, 1, `mutation anchor must match exactly once: ${from}`);
       writeFileSync(join(dir, file), t.replace(from, to));
