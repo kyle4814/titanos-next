@@ -1,6 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MemoryStore } from "../src/store.ts";
+import { MemoryStore, type Store } from "../src/store.ts";
+import { D1Store } from "../src/d1store.ts";
+import { FakeD1 } from "./fake_d1.ts";
 import { MockBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { MockMailer, handleStripeEvent, type Deps } from "../src/service.ts";
@@ -38,34 +40,43 @@ function build(r: () => number, seq: number): Scenario {
 }
 function shuffle<T>(a: T[], r: () => number) { const x = [...a]; for (let i = x.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [x[i], x[j]] = [x[j], x[i]]; } return x; }
 
-function fresh(sc: Scenario) {
-  const store = new MemoryStore(), billing = new MockBilling(), mailer = new MockMailer(), log: string[] = [];
+type Kind = "memory" | "d1";
+const KINDS: Kind[] = ["memory", "d1"];
+// f171: the same suite on BOTH adapters. D1Store runs over FakeD1 (real SQLite, the real migrations 0001..0006).
+async function fresh(sc: Scenario, kind: Kind = "memory") {
+  const d1 = kind === "d1" ? new FakeD1() : undefined;
+  const store: Store = d1 ? new D1Store(d1) : new MemoryStore();
+  const heldCount = async () => (d1 ? Number((d1.db.prepare("SELECT COUNT(*) AS c FROM held_facts").get() as { c: number }).c) : [...(store as MemoryStore).held.entries()].filter(([, v]) => v.length).length);
+  const billing = new MockBilling(), mailer = new MockMailer(), log: string[] = [];
   const deps: Deps = { store, billing, dns: fakeResolver({}), mailer, now: () => T0, siteOrigin: "https://titanos.tech", log: (l) => log.push(l) };
   const p = PRODUCTS[sc.productId];
   const first = sc.events[0].data.object;
-  void store.putAccount({ id: "acc_test", email: "a@acme.com.au", seat: "owner", createdAt: T0 });
-  void store.putPurchase({ id: "pur_test", accountId: "acc_test", productId: p.id, checkoutId: String(first.id), amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending" });
-  return { store, billing, mailer, deps, log };
+  await store.putAccount({ id: "acc_test", email: "a@acme.com.au", seat: "owner", createdAt: T0 });
+  await store.putPurchase({ id: "pur_test", accountId: "acc_test", productId: p.id, checkoutId: String(first.id), amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending" });
+  return { store, billing, mailer, deps, log, heldCount };
 }
-async function snapshot(h: ReturnType<typeof fresh>) {
+async function snapshot(h: Awaited<ReturnType<typeof fresh>>) {
   const s = h.store, pur = (await s.purchaseById("pur_test"))!, acc = (await s.accountById("acc_test"))!;
   return {
     purchase: { status: pur.status, refundedCents: pur.refundedCents, paymentIntent: pur.paymentIntent, subscriptionId: pur.subscriptionId, paidAt: pur.paidAt, amountCents: pur.amountCents },
     customer: acc.stripeCustomerId,
     subs: (await s.subscriptionsFor("acc_test")).map((x) => ({ id: x.id, cancelledAt: x.cancelledAt ?? null, startedAt: x.startedAt })).sort((a, b) => a.id.localeCompare(b.id)),
     invoices: (await s.invoicesFor("acc_test")).map((i) => ({ productId: i.productId, amountCents: i.amountCents })),
-    held: [...s.held.entries()].filter(([, v]) => v.length).length,
+    held: await h.heldCount(),
   };
 }
 
-const COUNTS: Record<string, number> = { sequences: 0, order_independent: 0, no_double_fund: 0, no_double_refund: 0, no_double_email: 0, refund_before_payment_held_then_reconciled: 0, never_negative: 0, cancel_after_refund_closed_one_invoice: 0, unknown_ignored_with_log: 0, duplicates_injected: 0 };
+const ZERO: Record<string, number> = { sequences: 0, order_independent: 0, no_double_fund: 0, no_double_refund: 0, no_double_email: 0, refund_before_payment_held_then_reconciled: 0, never_negative: 0, cancel_after_refund_closed_one_invoice: 0, unknown_ignored_with_log: 0, duplicates_injected: 0 };
 
-test("WEBHOOKORDER: 1,000 shuffled + duplicated sequences, every invariant", async () => {
-  const r = rng(92_2026_11_07);
+const FINALS: Record<Kind, unknown[]> = { memory: [], d1: [] };
+const ALLCOUNTS: Record<string, Record<string, number>> = {};
+for (const kind of KINDS) test(`WEBHOOKORDER[${kind}]: 1,000 shuffled + duplicated sequences, every invariant`, async () => {
+  const COUNTS = { ...ZERO }; ALLCOUNTS[kind] = COUNTS;
+  const r = rng(92_2026_11_07); // same seed per adapter: both see the identical 1,000 sequences
   for (let seq = 0; seq < 1000; seq++) {
     const sc = build(r, seq), p = PRODUCTS[sc.productId];
     // reference: the event set applied once, in a fixed canonical order (payment signals first)
-    const ref = fresh(sc);
+    const ref = await fresh(sc, kind);
     const canon = [...sc.events].sort((a, b) => Number(/refunded|deleted/.test(a.type)) - Number(/refunded|deleted/.test(b.type)));
     for (const ev of canon) await handleStripeEvent(ref.deps, ev);
     const want = await snapshot(ref);
@@ -81,7 +92,7 @@ test("WEBHOOKORDER: 1,000 shuffled + duplicated sequences, every invariant", asy
     const seqEvents = [...order];
     for (let k = 0; k < dups; k++) seqEvents.splice(Math.floor(r() * (seqEvents.length + 1)), 0, sc.events[Math.floor(r() * sc.events.length)]);
     COUNTS.duplicates_injected += seqEvents.length - sc.events.length;
-    const h = fresh(sc);
+    const h = await fresh(sc, kind);
     let paidSeen = false, refundBeforePaid = false;
     const results: string[] = [];
     for (const ev of seqEvents) {
@@ -97,7 +108,7 @@ test("WEBHOOKORDER: 1,000 shuffled + duplicated sequences, every invariant", asy
     COUNTS.never_negative++;
     const got = await snapshot(h);
     assert.deepEqual(got, want, `seq ${seq}: final state differs from canonical order`);
-    COUNTS.order_independent++;
+    COUNTS.order_independent++; FINALS[kind].push({ want, got });
     assert.equal(got.invoices.length, 1); COUNTS.no_double_fund++;                       // one funding, one invoice, despite duplicates and replays under fresh ids
     assert.equal(h.billing.calls.length, 0); COUNTS.no_double_refund++;                  // the webhook records Stripe's refunds, it never issues one
     assert.equal(got.purchase.refundedCents, sc.maxRefund);
@@ -118,21 +129,28 @@ test("WEBHOOKORDER: 1,000 shuffled + duplicated sequences, every invariant", asy
     }
     COUNTS.sequences++;
   }
-  console.log("WEBHOOKORDER_COUNTS " + JSON.stringify(COUNTS));
+  console.log(`WEBHOOKORDER_COUNTS ${kind} ` + JSON.stringify(COUNTS));
   assert.equal(COUNTS.sequences, 1000);
 });
 
-test("regression: a cancel that arrives before its payment is held, then applied (it used to be dropped as ignored)", async () => {
+// f171: MemoryStore and D1Store (over FakeD1) must end every one of the 1,000 sequences in IDENTICAL state.
+test("WEBHOOKORDER: MemoryStore and D1Store give identical final state on all 1,000 sequences", () => {
+  assert.equal(FINALS.memory.length, 1000); assert.equal(FINALS.d1.length, 1000);
+  for (let i = 0; i < 1000; i++) assert.deepEqual(FINALS.d1[i], FINALS.memory[i], `seq ${i}: D1 differs from Memory`);
+  console.log("WEBHOOKORDER_PARITY memory==d1 1000/1000");
+});
+
+for (const kind of KINDS) test(`regression[${kind}]: a cancel that arrives before its payment is held, then applied (it used to be dropped as ignored)`, async () => {
   const sc = { events: [{ id: "e0", type: "checkout.session.completed", data: { object: { id: "cs_x", payment_status: "paid", payment_intent: "pi_x", subscription: "sub_x" } } }], productId: "ai_growth" } as unknown as Scenario;
-  const h = fresh(sc);
+  const h = await fresh(sc, kind);
   assert.equal(await handleStripeEvent(h.deps, { id: "e1", type: "customer.subscription.deleted", data: { object: { id: "sub_x" } } }), "handled");
   await handleStripeEvent(h.deps, sc.events[0]);
   assert.ok((await h.store.subscriptionById("sub_x"))!.cancelledAt);
 });
 
-test("regression: an unpaid completed session does not fund; async_payment_succeeded does, once", async () => {
+for (const kind of KINDS) test(`regression[${kind}]: an unpaid completed session does not fund; async_payment_succeeded does, once`, async () => {
   const sc = { events: [{ id: "e0", type: "x", data: { object: { id: "cs_y" } } }], productId: "compliance_pack" } as unknown as Scenario;
-  const h = fresh(sc);
+  const h = await fresh(sc, kind);
   const o = { id: "cs_y", payment_intent: "pi_y" };
   await handleStripeEvent(h.deps, { id: "u1", type: "checkout.session.completed", data: { object: { ...o, payment_status: "unpaid" } } });
   assert.equal((await h.store.purchaseById("pur_test"))!.status, "pending");
@@ -141,11 +159,11 @@ test("regression: an unpaid completed session does not fund; async_payment_succe
   assert.equal((await h.store.invoicesFor("acc_test")).length, 1);
 });
 
-test("hostile amounts: over-large, negative and non-numeric amount_refunded stay within [0, amount], before and after payment", async () => {
+for (const kind of KINDS) test(`hostile amounts[${kind}]: over-large, negative and non-numeric amount_refunded stay within [0, amount], before and after payment`, async () => {
   for (const bad of [10 ** 9, -500, NaN, "abc", null]) {
     const sc = { events: [{ id: "e0", type: "x", data: { object: { id: "cs_z" } } }], productId: "compliance_pack" } as unknown as Scenario;
     for (const beforePay of [true, false]) {
-      const h = fresh(sc), amt = PRODUCTS.compliance_pack.amountCents;
+      const h = await fresh(sc, kind), amt = PRODUCTS.compliance_pack.amountCents;
       const pay = () => handleStripeEvent(h.deps, { id: "p", type: "checkout.session.completed", data: { object: { id: "cs_z", payment_status: "paid", payment_intent: "pi_z" } } });
       const ref = () => handleStripeEvent(h.deps, { id: "r", type: "charge.refunded", data: { object: { payment_intent: "pi_z", amount_refunded: bad } } });
       if (beforePay) { await ref(); await pay(); } else { await pay(); await ref(); }

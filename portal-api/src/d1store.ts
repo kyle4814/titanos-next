@@ -110,6 +110,13 @@ export class D1Store implements Store {
   async putCard(c: ReviewCard) {
     await this.exec("INSERT INTO review_cards (id, account_id, purchase_id, kind, reason, created_at, resolved) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, kind = excluded.kind, reason = excluded.reason, created_at = excluded.created_at, resolved = excluded.resolved", c.id, c.accountId, c.purchaseId, c.kind, c.reason, c.createdAt, b(c.resolved));
   }
+  async cardById(id: string) { const r = await this.one("SELECT * FROM review_cards WHERE id = ?", id); return r && toCard(r); }
+  async allCards() { return (await this.many("SELECT * FROM review_cards ORDER BY rowid")).map(toCard); }
+  async putRefundCase(c: RefundCase) {
+    await this.exec("INSERT INTO refund_cases (id, account_id, purchase_id, product_name, amount_cents, reason, in_policy, status, created_at, decided_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_name = excluded.product_name, amount_cents = excluded.amount_cents, reason = excluded.reason, in_policy = excluded.in_policy, status = excluded.status, created_at = excluded.created_at, decided_at = excluded.decided_at", c.id, c.accountId, c.purchaseId, c.productName, c.amountCents, c.reason, b(c.inPolicy), c.status, c.createdAt, n(c.decidedAt));
+  }
+  async refundCaseById(id: string) { const r = await this.one("SELECT * FROM refund_cases WHERE id = ?", id); return r && toRefundCase(r); }
+  async refundCasesFor(purchaseId: string) { return (await this.many("SELECT * FROM refund_cases WHERE purchase_id = ? ORDER BY rowid", purchaseId)).map(toRefundCase); }
   async openCards() { return (await this.many("SELECT * FROM review_cards WHERE resolved = 0 ORDER BY rowid")).map(toCard); }
 
   // ---- API keys
