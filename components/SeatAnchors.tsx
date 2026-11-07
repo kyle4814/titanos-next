@@ -1,5 +1,10 @@
 import Link from "next/link";
 import type { SeatAnchor } from "@/lib/seatAnchors";
+import type { ReactElement } from "react";
+import SsoSetup from "@/components/SsoSetup";
+
+// Optional per-anchor detail, rendered inside the section when the anchor is built. Keyed by anchor id.
+const DETAIL: Record<string, () => ReactElement> = { sso: SsoSetup };
 
 // In-page anchor sections for a portal seat page. Server component: no state, no fetch, no model call.
 // Renders an "On this page" nav (every anchor is linked) and one section per anchor, honest about "coming".
@@ -17,6 +22,7 @@ export default function SeatAnchors({ rows }: { rows: SeatAnchor[] }) {
           <h2 id={`${r.id}-h`} style={{ margin: 0 }}>{r.title}</h2>
           <small>{r.status === "live" ? "Built" : "Coming, not built yet"}</small>
           <p style={{ margin: 0 }}>{r.body}</p>
+          {r.status === "live" && DETAIL[r.id] ? DETAIL[r.id]() : null}
         </section>
       ))}
     </div>
