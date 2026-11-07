@@ -16,6 +16,7 @@ function scratch(): { root: string; dir: string } {
   const dir = join(root, "portal-api");
   cpSync(ROOT, dir, { recursive: true, filter: (s) => !s.includes("node_modules") });
   cpSync(join(SITE, "lib", "guestscan"), join(root, "lib", "guestscan"), { recursive: true });
+  cpSync(join(SITE, "lib", "modelhosts.ts"), join(root, "lib", "modelhosts.ts")); // lib/guestscan/meter.ts imports it
   return { root, dir };
 }
 
