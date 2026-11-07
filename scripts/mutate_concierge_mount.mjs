@@ -18,7 +18,7 @@ const MUTANTS = [
   ["junk gets logged (b)", "lib/concierge/router.ts", 'if (r.kind !== "unmatched" || r.reason === "junk") return r;', 'if (r.kind !== "unmatched") return r;'],
   ["old 'I have logged it' text back (b)", "lib/concierge/router.ts", 'export const MSG_NOT_SAVED = "I do not have that on a shelf yet. This ask was not saved, so please use the contact page to reach a person.";', 'export const MSG_NOT_SAVED = "I do not have that on a shelf yet. I have logged it, and you will get a quote after review.";'],
   ["component unmounted (c)", "app/faq/page.tsx", "<Concierge />", ""],
-  ["component fetches (c)", "components/Concierge.tsx", "const askRef = useRef<Awaited<ReturnType<typeof loadAsk>> | null>(null);", "const askRef = useRef<Awaited<ReturnType<typeof loadAsk>> | null>(null); void fetch('/x');"],
+  ["component fetches (c)", "components/Concierge.tsx", "const askRef = useRef<Promise<Ask> | null>(null);", "const askRef = useRef<Promise<Ask> | null>(null); void fetch('/x');"],
   ["not-open shelf linked (c)", "lib/concierge/view.ts", 'const OPEN = new Set(["LIVE", "READY"]);', 'const OPEN = new Set(["LIVE", "READY", "PLANNED", "NOT_YET_OPEN"]);'],
   ["floor so high it drops correct asks (non-regression)", "lib/concierge/router.ts", "export const CONF_FLOOR = 7.0;", "export const CONF_FLOOR = 11.0;"],
 ];

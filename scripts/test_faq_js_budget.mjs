@@ -11,7 +11,9 @@ const src = (f) => fs.readFileSync(f, "utf8");
 const staticImports = (f) => [...src(f).matchAll(/^\s*import\s[^;]*?from\s+["']([^"']+)["']/gm)].map((m) => m[1]);
 const heavy = /lib\/concierge\/(catalogue|portal|offers)|lib\/offers\/data\//;
 ok(!staticImports("components/Concierge.tsx").some((i) => heavy.test(i)), "Concierge.tsx has no static import of the offer catalogue");
-ok(/import\(["']@\/lib\/concierge\/catalogue["']\)/.test(src("components/Concierge.tsx")), "Concierge.tsx loads the catalogue with a dynamic import()");
+// f330: either lazy route keeps the catalogue out of first-load JS: a dynamic import(), or the f307 JSON loader (lib/concierge/lazy.ts, which never imports the catalogue).
+const lazyJson = /from\s+["']@\/lib\/concierge\/lazy["']/.test(src("components/Concierge.tsx")) && !staticImports("lib/concierge/lazy.ts").some((i) => /catalogue/.test(i));
+ok(/import\(["']@\/lib\/concierge\/catalogue["']\)/.test(src("components/Concierge.tsx")) || lazyJson, "Concierge.tsx loads the catalogue lazily (dynamic import() or the JSON loader)");
 const i = process.argv.indexOf("--built");
 if (i > 0) {
   const OUT = path.resolve(process.argv[i + 1] || "out");
