@@ -9,7 +9,7 @@ import { makeEnt, SSO_CFG } from "./ent_harness.ts";
 
 interface Seat { email: string; session: string }
 async function world() {
-  const h = await makeEnt();
+  const h = makeEnt();
   const T: Record<string, any> = {};
   const seat = async (email: string): Promise<Seat> => ({ email, session: (await h.login(email)).session });
 
@@ -276,7 +276,7 @@ test("deleted account: its memberships are gone and its old session is dead; the
 test("mass assignment: extra fields on writes cannot set role, tenant, kind, parent or terms", async () => {
   const { h, T } = await world();
   const r = await h.j(await h.req("POST", `/partners/${T.P1.id}/portals`, { token: T.P1.admin.session, body: { name: "Mass", slug: "mass-portal", clientAdminEmail: "m@m.com.au", kind: "partner", parentId: T.P2.id, id: T.A.id, termsAcceptedAt: 1, partnerAccess: true, ssoEnforced: true } }));
-  const t = await (h.deps.ent as any).store.tenantById(r.id);
+  const t = (h.deps.ent as any).store.tenants.get(r.id);
   assert.equal(t.kind, "client");
   assert.equal(t.parentId, T.P1.id);
   assert.equal(t.partnerAccess, false);

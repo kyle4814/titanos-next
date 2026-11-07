@@ -1,7 +1,5 @@
 import { make } from "./harness.ts";
-import { MemoryEntStore, type EntStore } from "../src/enterprise/store.ts";
-import { D1EntStore, aesGcmSealer } from "../src/enterprise/d1store.ts";
-import { FakeD1 } from "./fake_d1.ts";
+import { MemoryEntStore } from "../src/enterprise/store.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
@@ -19,17 +17,9 @@ export class MockPayouts implements PayoutProvider {
   }
 }
 
-export const TEST_SEAL_KEY = Buffer.from("test-fixture-key-32-bytes-long!!").toString("base64");   // synthetic, test only
-// ENT_STORE=d1 runs the WHOLE enterprise suite against D1EntStore on a FakeD1 (real SQLite + the real migrations). Foreign keys
-// are OFF in this mode only because the portal accounts live in MemoryStore here; test/ent_store_contract.test.ts runs FK ON.
-export async function makeEntStore(kind = process.env.ENT_STORE ?? "memory"): Promise<EntStore> {
-  if (kind !== "d1") return new MemoryEntStore();
-  const fake = new FakeD1(); fake.db.exec("PRAGMA foreign_keys = OFF");
-  return new D1EntStore(fake, await aesGcmSealer(TEST_SEAL_KEY));
-}
-export async function makeEnt(rates: RateTable = RATE_V1) {
+export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const store = await makeEntStore(), payouts = new MockPayouts();
+  const store = new MemoryEntStore(), payouts = new MockPayouts();
   h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
