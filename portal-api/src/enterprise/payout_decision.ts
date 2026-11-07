@@ -66,11 +66,12 @@ export async function decidePayoutRecorded(env: DecideEnv, req: DecideReq): Prom
   const won = await env.store.transitionPayout(p0.id, "pending_approval", "sending"); // the existing sending transition, reachable only after the record above
   if (!won) return { ok: false, refused: "wrong_state", payout: p0 };
   const t = (await env.store.tenantById(p0.partnerId))!;
+  await env.store.putPayout({ ...won, sendingAt: env.now }); // age marker for the resume sweep (payout_sweep.ts); the sweep falls back to createdAt if a crash lands before this write
   try {
     const r = await env.transfer.transfer({ partnerId: won.partnerId, accountRef: t.payoutAccount!, amountCents: won.amountCents, idempotencyKey: won.id });
-    await env.store.putPayout({ ...won, status: "paid", providerRef: r.ref });
+    await env.store.putPayout({ ...won, status: "paid", providerRef: r.ref, sendingAt: env.now });
   } catch {
-    await env.store.putPayout({ ...won, status: "failed", reason: "provider_error" });
+    await env.store.putPayout({ ...won, status: "failed", reason: "provider_error", sendingAt: env.now });
     await env.store.addLedger({ id: env.newId(), uniq: `payout_reversal:${won.id}`, partnerId: won.partnerId, kind: "payout_reversal", amountCents: won.amountCents, at: env.now, availableAt: env.now, payoutId: won.id });
   }
   const after = (await env.store.payoutById(p0.id))!;
