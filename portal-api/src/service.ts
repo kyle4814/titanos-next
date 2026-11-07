@@ -5,6 +5,10 @@ import type { Store, Account, Purchase, Invoice } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
+import { renderInvoiceDoc, type GstMode, type RenderedDoc } from "./invoice_render.ts";
+
+// ONE config constant for the GST mode. app/terms/page.tsx says the seller is NOT registered for GST; flip to "registered" only when that changes.
+export const INVOICE_GST_MODE: GstMode = "not_registered";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
@@ -137,14 +141,26 @@ async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId
   await entSvc.onInvoice(d, inv); // C8: partner commission, recorded; a failure is logged to the operator, never thrown into the webhook
 }
 
-// 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.
+// 4 INVOICES. Rendered by the pure f281 renderer (invoice_render.ts). The GST wording comes from INVOICE_GST_MODE, never invented here.
 export async function listInvoices(d: Deps, a: Account) { return (await d.store.invoicesFor(a.id)).sort((x, y) => x.issuedAt - y.issuedAt); }
-export async function renderInvoice(d: Deps, a: Account, id: string): Promise<string> {
+async function ownInvoice(d: Deps, a: Account, id: string): Promise<Invoice> {
   const i = await d.store.invoiceById(id);
-  if (!i || i.accountId !== a.id) throw new HttpError(404, "not_found");
-  const p = PRODUCTS[i.productId];
-  return [`TAX INVOICE ${i.number}`, `Date: ${new Date(i.issuedAt).toISOString().slice(0, 10)}`, `Billed to: ${a.email}`, `Item: ${p.name}`,
-    `Amount: AU$${(i.amountCents / 100).toFixed(2)} (no GST charged: supplier not registered for GST)`, "Supplier: Kyle Montrose Deligny, ABN 34 318 502 254"].join("\n");
+  if (!i || i.accountId !== a.id) throw new HttpError(404, "not_found"); // another account's id is a 404, never a 403
+  return i;
+}
+export async function renderInvoice(d: Deps, a: Account, id: string): Promise<RenderedDoc> {
+  const i = await ownInvoice(d, a, id);
+  return renderInvoiceDoc({ invoice: i, billedToEmail: a.email, itemName: PRODUCTS[i.productId]?.name ?? i.productId, gst: INVOICE_GST_MODE });
+}
+// Credit note for a refunded purchase: attached to the purchase's first invoice, amount = refundedCents (capped at that invoice), dated refundedAt.
+export async function renderCreditNote(d: Deps, a: Account, id: string): Promise<RenderedDoc> {
+  const i = await ownInvoice(d, a, id);
+  const pur = i.purchaseId ? await d.store.purchaseById(i.purchaseId) : undefined;
+  if (!pur || pur.accountId !== a.id || pur.refundedCents <= 0 || pur.refundedAt === undefined) throw new HttpError(404, "not_found");
+  const first = (await d.store.invoicesFor(a.id)).filter((x) => x.purchaseId === pur.id).sort((x, y) => x.issuedAt - y.issuedAt || x.number.localeCompare(y.number))[0];
+  if (!first || first.id !== i.id) throw new HttpError(404, "not_found");
+  return renderInvoiceDoc({ invoice: i, billedToEmail: a.email, itemName: PRODUCTS[i.productId]?.name ?? i.productId, gst: INVOICE_GST_MODE,
+    creditNote: { amountCents: Math.min(pur.refundedCents, i.amountCents), issuedAt: pur.refundedAt, reason: "Refund of purchase" } });
 }
 
 // 5 CANCEL. Monitor: ends at period end. Retainers: not before the minimum term ends. No auto-refund of the current period.
@@ -177,7 +193,7 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
     return { status: "needs_review" as const, reason: v.reason };
   }
   await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
-  pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
+  pur.refundedCents = pur.amountCents; pur.refundedAt = d.now(); pur.status = "refunded"; await d.store.putPurchase(pur);
   await entSvc.onRefund(d, pur.id, pur.refundedCents); // C8: claw back the partner commission
   return { status: "refunded" as const, amountCents: pur.amountCents };
 }

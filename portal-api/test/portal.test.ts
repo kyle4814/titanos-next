@@ -171,7 +171,7 @@ test("invoices: owner sees own invoice text with ABN and no GST; another account
   await h.pay("leads_starter");
   const id = (await h.j(await h.req("GET", "/invoices", { token: a.session }))).invoices[0].id;
   const txt = await (await h.req("GET", `/invoices/${id}`, { token: a.session })).text();
-  assert.match(txt, /AU\$497\.00/); assert.match(txt, /ABN 34 318 502 254/); assert.match(txt, /no GST charged/);
+  assert.match(txt, /AU\$497\.00/); assert.match(txt, /ABN 34 318 502 254/); assert.match(txt, /No GST charged/); assert.doesNotMatch(txt, /TAX INVOICE/);
   assert.equal((await h.req("GET", `/invoices/${id}`, { token: b.session })).status, 404);
   assert.deepEqual((await h.j(await h.req("GET", "/invoices", { token: b.session }))).invoices, []);
 });

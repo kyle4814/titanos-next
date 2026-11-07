@@ -1,10 +1,10 @@
 // Persistence interface for the portal. MemoryStore is the test/local adapter. A D1 adapter is NOT BUILT yet
-// (migration 0002 defines the tables); until it exists the Worker fails closed on every route except /health.
+// (migration 0002 defines the tables; 0016 adds purchases.refunded_at, NULL until a refund is recorded); until it exists the Worker fails closed on every route except /health.
 export interface Account { id: string; email: string; seat: string; stripeCustomerId?: string; createdAt: number; deletedAt?: number }
 export interface Session { hash: string; accountId: string; expiresAt: number }
 export interface LoginToken { hash: string; email: string; expiresAt: number; used: boolean }
 export interface DomainRow { id: string; accountId: string; domain: string; token: string; verifiedAt?: number }
-export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; status: "pending" | "paid" | "refunded" | "cancelled" }
+export interface Purchase { id: string; accountId: string; productId: string; domain?: string; checkoutId: string; paymentIntent?: string; subscriptionId?: string; paidAt?: number; amountCents: number; deliverableIssued: boolean; refundedCents: number; refundedAt?: number; status: "pending" | "paid" | "refunded" | "cancelled" }
 export interface Subscription { id: string; accountId: string; purchaseId: string; productId: string; startedAt: number; cancelAt?: number; cancelledAt?: number }
 export interface Invoice { id: string; accountId: string; purchaseId?: string; number: string; productId: string; amountCents: number; issuedAt: number; stripeEventId: string }
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
