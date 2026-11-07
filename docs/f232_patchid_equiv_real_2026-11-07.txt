@@ -1,0 +1,80 @@
+origin/web/f100_c2_cancel_term_unify-2026-11-07 ABSENT
+origin/web/f101_c2_stripe_period_seed-2026-11-07 ABSENT
+origin/web/f102_c4_audit_head_anchor-2026-11-07 PARTIAL 11/23 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660
+origin/web/f103_c4_anchor_wire-2026-11-07 PARTIAL 11/24 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660 e9e65c022d
+origin/web/f104_migration_lint-2026-11-07 PARTIAL 11/24 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660 271bf6b753
+origin/web/f16_c8_entd1-2026-11-06 ABSENT
+origin/web/f171_c2_webhook_d1_methods-2026-11-07 PARTIAL 2/7 missing: 7d52c15618 642822767b 6a62a17b10 35ceec214c 56f9b66a56
+origin/web/f172_c2_plan_d1_adapter-2026-11-07 ABSENT
+origin/web/f175_c2_plan_cas-2026-11-07 ABSENT
+origin/web/f176_c7_spendcap_mcp_wire-2026-11-07 ABSENT
+origin/web/f177_c2_stripe_items_period-2026-11-07 ABSENT
+origin/web/f178_c4_migration_pair_discover-2026-11-07 PARTIAL 11/25 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660 271bf6b753 3889ceffaf
+origin/web/f179_c1_beacon_scan_id-2026-11-07 PARTIAL 1/2 missing: 924ec5f2e7
+origin/web/f17_c7_idem_reserve-2026-11-06 ABSENT
+origin/web/f181_c2_import_cycle_break-2026-11-07 ABSENT
+origin/web/f183_c2_cas_all_paths-2026-11-07 ABSENT
+origin/web/f184_c4_union_ts_compiler-2026-11-07 PARTIAL 11/26 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660 271bf6b753 3889ceffaf fb81d0ba56
+origin/web/f185_c3_undo_state_cas-2026-11-07 ABSENT
+origin/web/f186_c2_markpaid_dup_schedule-2026-11-07 ABSENT
+origin/web/f187_c4_dispute_case_d1-2026-11-07 PARTIAL 11/25 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a aadab94660 e9e65c022d 6b78152471
+origin/web/f188_c2_post_route_fuzz_d1-2026-11-07 PARTIAL 3/15 missing: 7d52c15618 642822767b 6a62a17b10 35ceec214c 56f9b66a56 7cdd03b8f9 a58112172e a05a684dbe 978cd34e87 199e6f7644 a6ad17f440 acd05b0292
+origin/web/f18_c4_marketd1-2026-11-06 ABSENT
+origin/web/f190_c2_invoice_once-2026-11-07 ABSENT
+origin/web/f191_c2_late_fact_race-2026-11-07 ABSENT
+origin/web/f192_c2_d1_invoice_store-2026-11-07 ABSENT
+origin/web/f194_c2_d1_facts_table-2026-11-07 ABSENT
+origin/web/f195_c10_soak_s9_quantise-2026-11-07 PARTIAL 1/3 missing: ed82db9c4c 6eb67e105a
+origin/web/f196_c2_miniflare_d1_probe-2026-11-07 ABSENT
+origin/web/f197_c2_claim_event_d1-2026-11-07 ABSENT
+origin/web/f19_c7_key_spend_cap-2026-11-06 ABSENT
+origin/web/f200_c4_unpaid_fund_recheck-2026-11-07 PARTIAL 1/3 missing: f26fc5f003 1ac2785783
+origin/web/f201_c10_soak_memory_row-2026-11-07 PARTIAL 1/4 missing: ed82db9c4c 6eb67e105a b61a240839
+origin/web/f203_c2_claim_reconciler-2026-11-07 ABSENT
+origin/web/f205_c2_throttle_worker_wire-2026-11-07 ABSENT
+origin/web/f206_c2_throttle_d1_adapter-2026-11-07 ABSENT
+origin/web/f207_c4_quote_missing_invariants-2026-11-07 ABSENT
+origin/web/f208_c2_worker_build_deps-2026-11-07 ABSENT
+origin/web/f209_c2_invoice_number_atomic-2026-11-07 ABSENT
+origin/web/f210_c2_pending_purchase_reconciler-2026-11-07 ABSENT
+origin/web/f211_c4_store_index_scans-2026-11-07 ABSENT
+origin/web/f212_c2_d1_store_reconcile-2026-11-07 PARTIAL 3/14 missing: 7d52c15618 642822767b 6a62a17b10 35ceec214c 56f9b66a56 7cdd03b8f9 a58112172e a05a684dbe 978cd34e87 199e6f7644 a6ad17f440
+origin/web/f213_c2_d1_race_miniflare-2026-11-07 ABSENT
+origin/web/f215_c2_d1_invoice_purchase_id-2026-11-07 PARTIAL 3/15 missing: 7d52c15618 642822767b 6a62a17b10 35ceec214c 56f9b66a56 7cdd03b8f9 a58112172e a05a684dbe 978cd34e87 199e6f7644 a6ad17f440 162fecf1ae
+origin/web/f216_c2_d1store_factory_wire-2026-11-07 PARTIAL 4/19 missing: 7d52c15618 642822767b 6a62a17b10 35ceec214c 56f9b66a56 7cdd03b8f9 a58112172e a05a684dbe 978cd34e87 199e6f7644 a6ad17f440 afb5fa8b57 4af9bd1259 d3c43264dd 60394e8975
+origin/web/f222_c2_side_stores_d1_wire-2026-11-07 PARTIAL 6/24 missing: ef61becc78 7d52c15618 3718fa6122 642822767b 6a62a17b10 35ceec214c 56f9b66a56 7cdd03b8f9 a58112172e a05a684dbe 978cd34e87 199e6f7644 a6ad17f440 afb5fa8b57 4af9bd1259 d3c43264dd 60394e8975 1dfcbb85d6
+origin/web/f231_stack_rebase_dryrun-2026-11-07 ABSENT
+origin/web/f23_c7_keys_page-2026-11-06 ABSENT
+origin/web/f29_c4_alljobs_index-2026-11-06 ABSENT
+origin/web/f30_c8_estate_scan-2026-11-06 PARTIAL 1/2 missing: 17c002a22e
+origin/web/f34_c8_estate_cache-2026-11-06 PARTIAL 1/3 missing: 17c002a22e 3e63b4809a
+origin/web/f40_c8_payout_approve_transition-2026-11-06 ABSENT
+origin/web/f42_c8_payout_resume_sweep-2026-11-06 ABSENT
+origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06 ABSENT
+origin/web/f44_c4_seat_entitlement-2026-11-06 ABSENT
+origin/web/f46_c8_payout_retry_executor-2026-11-06 ABSENT
+origin/web/f48_c7_key_trace_rotation-2026-11-06 ABSENT
+origin/web/f50_c8_held_payout_routes-2026-11-06 ABSENT
+origin/web/f51_c8_payout_permanent_error-2026-11-06 ABSENT
+origin/web/f54_c8_held_payout_release_refund-2026-11-06 ABSENT
+origin/web/f57_c8_payout_tick-2026-11-06 ABSENT
+origin/web/f58_c7_agent_d1store-2026-11-06 ABSENT
+origin/web/f59_c8_payout_d1_adapter-2026-11-06 ABSENT
+origin/web/f63_c4_ten_jobs_drill-2026-11-06 PARTIAL 11/21 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf
+origin/web/f64_c8_cross_tenant_route_matrix-2026-11-06 PARTIAL 11/22 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 0a49bc6431 810a15faf9
+origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06 ABSENT
+origin/web/f66_c6_offtopic_guard-2026-11-06 ABSENT
+origin/web/f72_c6_holdout_miss_taxonomy-2026-11-06 ABSENT
+origin/web/f78_c5_shelf_price_types-2026-11-06 ABSENT
+origin/web/f79_c6_fresh_offer_dev2-2026-11-06 ABSENT
+origin/web/f80_c6_near_dup_ask_raise-2026-11-06 ABSENT
+origin/web/f81_c10_soak_portal_run-2026-11-06 PARTIAL 1/2 missing: ed82db9c4c
+origin/web/f85_c5_shelf_search_index-2026-11-06 ABSENT
+origin/web/f86_c9_worker_shared_headers-2026-11-07 PARTIAL 16/27 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf 575c5f39b0
+origin/web/f87_c5_quote_property_suite-2026-11-07 ABSENT
+origin/web/f92_c2_webhook_order_suite-2026-11-07 ABSENT
+origin/web/f96_c2_plan_change_proration-2026-11-07 ABSENT
+origin/web/f97_c4_job_dispute_warranty-2026-11-07 PARTIAL 11/22 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a
+origin/web/f98_c7_credit_ledger_invariants-2026-11-07 ABSENT
+origin/web/f99_c4_dispute_wire-2026-11-07 PARTIAL 11/23 missing: 3718fa6122 9f03aa7465 4292a9ea3e ebeabd01e8 63c24ae491 70499a4e52 c87f0ce05e f4acc963ce 1d07b02494 6605e16ccf bc5719c14a 371eb77fa0
+TOTALS target=origin/web/obelisk-int3-2026-11-07 ancestors=60 ALREADY_IN=0 PARTIAL=24 ABSENT=55 EMPTY=0 (non-ancestors=79)
