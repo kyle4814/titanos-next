@@ -11,7 +11,7 @@ export interface ReviewCard { id: string; accountId: string; purchaseId: string;
 export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
 // capDaily / capTotal are in credits; undefined (a key made before F19) means the conservative defaults, never unlimited.
-export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
+export interface ApiKey { id: string; accountId: string; hash: string; prefix?: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
 export interface KeySpend { day: number; total: number }
 export type CappedDebit = { ok: true; balance: number; spent: KeySpend } | { ok: false; reason: "insufficient_credits" | "key_cap_daily" | "key_cap_total" }
 

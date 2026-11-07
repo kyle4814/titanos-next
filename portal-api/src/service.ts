@@ -215,13 +215,14 @@ export async function createKey(d: Deps, a: Account, scopesIn: unknown, caps: { 
   const capTotal = parseCap(caps.capTotal, MAX_KEY_CAP_TOTAL, "capTotal") ?? DEFAULT_KEY_CAP_TOTAL;
   if ((await d.store.keysFor(a.id)).filter((k) => !k.revokedAt).length >= 10) throw new HttpError(409, "key_limit");
   const key = randomToken("tk", 24);
-  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), scopes, createdAt: d.now(), capDaily, capTotal };
+  const prefix = key.slice(0, 11); // "tk_" + 8 hex: non-secret handle shown in the keys list (the id-based keytrace prefix is separate)
+  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), prefix, scopes, createdAt: d.now(), capDaily, capTotal };
   await d.store.putKey(row);
-  return { id: row.id, key, scopes, capDaily, capTotal, note: "Shown once. Store it now." };
+  return { id: row.id, key, prefix, scopes, capDaily, capTotal, note: "Shown once. Store it now." };
 }
 const keyView = async (d: Deps, k: ApiKey) => {
   const sp = await d.store.keySpend(k.id, dayStartOf(d.now()));
-  return { id: k.id, prefix: k.id.slice(0, 8), scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt, ...capsOf(k), spentToday: sp.day, spentTotal: sp.total };
+  return { id: k.id, prefix: k.prefix ?? null, scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt, ...capsOf(k), spentToday: sp.day, spentTotal: sp.total };
 };
 export async function listKeys(d: Deps, a: Account) { return Promise.all((await d.store.keysFor(a.id)).map((k) => keyView(d, k))); }
 // Owner-only (session auth, never an agent key, so a leaked key cannot raise its own cap).
