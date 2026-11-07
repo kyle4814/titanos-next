@@ -61,7 +61,7 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
   let key: string;
   try {
     key = await throttleKey(scope, who, clientIp(req));
-    const r = th.reserve(key);
+    const r = await th.reserveAsync(key);
     if (!r.allowed) { th.note(`throttle block key=${key} retry_after=${r.retryAfterSec}`); throw new ThrottledError(r.retryAfterSec); }
   } catch (e) {
     if (e instanceof ThrottledError) throw e;
@@ -69,7 +69,7 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
   }
   let out: T;
   try { out = await fn(); } catch (e) { th.note(`throttle fail key=${key}`); throw e; }   // keeps the reserved failure (counts toward the lockout)
-  try { th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
+  try { await th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
   return out;
 }
 function cors(res: Response, env: Env): Response {

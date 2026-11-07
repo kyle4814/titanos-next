@@ -4,15 +4,21 @@ import { spawnSync } from "node:child_process";
 import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { make } from "./harness.ts";
+import { FakeD1 } from "./fake_d1.ts";
 
 const SRC = fileURLToPath(new URL("../src/throttle.ts", import.meta.url));
 const MOD = process.env.THROTTLE_SRC ?? SRC;
 const { Throttle, MemoryThrottleStore, ThrottledError, throttleKey } = (await import(MOD)) as typeof import("../src/throttle.ts");
+// Shared contract (f206): THROTTLE_ADAPTER=d1 runs this same suite over D1ThrottleStore on FakeD1 (test/throttle_d1.test.ts spawns it).
+const ADAPTER = process.env.THROTTLE_ADAPTER ?? "memory";
+const D1MOD = process.env.THROTTLE_D1_SRC ?? fileURLToPath(new URL("../src/d1throttle.ts", import.meta.url));
+const { D1ThrottleStore } = ADAPTER === "d1" ? ((await import(D1MOD)) as typeof import("../src/d1throttle.ts")) : ({} as any);
+const mkStore = (max: number): any => (ADAPTER === "d1" ? new D1ThrottleStore(new FakeD1()) : new MemoryThrottleStore(max));
 
 const N = 3, WIN = 60_000, LOCK = 120_000;
 function rig(max = 1000) {
   const c = { t: 1_000_000 }, logs: string[] = [];
-  const store = new MemoryThrottleStore(max);
+  const store = mkStore(max);
   const th = new Throttle({ maxFailures: N, windowMs: WIN, lockoutMs: LOCK, now: () => c.t, log: (l) => logs.push(l) }, store);
   return { c, th, store, logs };
 }
@@ -45,7 +51,7 @@ test("window rollover: failures older than the window are forgotten", async () =
 });
 test("lockout shorter than window: still blocked to window end, Retry-After from the window", async () => {
   const c = { t: 5_000_000 };
-  const th = new Throttle({ maxFailures: N, windowMs: WIN, lockoutMs: 10_000, now: () => c.t });
+  const th = new Throttle({ maxFailures: N, windowMs: WIN, lockoutMs: 10_000, now: () => c.t }, mkStore(1000));
   for (let i = 0; i < N; i++) await run(th, "k");
   c.t += 20_000;                                                                  // lock over, window (60s) not
   const e = await run(th, "k"); assert.ok(e instanceof ThrottledError); assert.equal(e.retryAfterSec, 40);
@@ -66,7 +72,7 @@ test("isFailure result counts as a failure", async () => {
   const { th } = rig(); for (let i = 0; i < N; i++) await th.guard("k", async () => ({ verified: false }), (r: any) => !r.verified);
   await assert.rejects(th.guard("k", async () => ({ verified: true }), (r: any) => !r.verified), ThrottledError);
 });
-test("memory bound: 1000-key cap evicts oldest", async () => {
+test("memory bound: 1000-key cap evicts oldest", { skip: ADAPTER !== "memory" }, async () => {
   const { th, store } = rig(1000);
   for (let i = 0; i < 1500; i++) await run(th, "k" + i);
   assert.equal(store.size, 1000);
@@ -82,7 +88,7 @@ test("keys and logs never carry the raw email or IP", async () => {
   const { th, store, logs } = rig();
   const k = await throttleKey("login", "Victim@Example.com", "203.0.113.9");
   for (let i = 0; i < N + 1; i++) await run(th, k);
-  const blob = k + logs.join("\n") + JSON.stringify([...(store as any).m.keys()]);
+  const blob = k + logs.join("\n") + JSON.stringify(await store.allKeys());
   assert.ok(!/victim|example\.com|203\.0\.113/i.test(blob)); assert.ok(logs.length > 0);
   assert.equal(k, await throttleKey("login", " victim@example.com ", "203.0.113.9"));   // normalised
   assert.notEqual(k, await throttleKey("login", "victim@example.com", "203.0.113.10"));
@@ -90,7 +96,7 @@ test("keys and logs never carry the raw email or IP", async () => {
 
 // ---- route wiring (login verify, DNS-TXT verify, checkout start) ----
 test("routes: login verify, DNS verify, checkout-start return 429 + Retry-After after N failures; success resets", async () => {
-  const h = make(); const th = new Throttle({ maxFailures: N, windowMs: WIN, lockoutMs: LOCK, now: () => h.clock.t }); h.deps.throttle = th;
+  const h = make(); const th = new Throttle({ maxFailures: N, windowMs: WIN, lockoutMs: LOCK, now: () => h.clock.t }, mkStore(1000)); h.deps.throttle = th;
   const ipH = { "cf-connecting-ip": "198.51.100.7" };
   // login: bad tokens from one IP
   for (let i = 0; i < N; i++) assert.equal((await h.req("POST", "/auth/verify", { body: { token: "ll_bad" }, headers: ipH })).status, 401);
@@ -117,7 +123,7 @@ test("routes: no throttle injected means behaviour is unchanged", async () => {
 });
 
 // ---- mutation test: an off-by-one in the counter must fail this suite ----
-if (!process.env.THROTTLE_SRC) test("mutation: off-by-one in the counter is caught", () => {
+if (!process.env.THROTTLE_SRC && ADAPTER === "memory") test("mutation: off-by-one in the counter is caught", () => {
   const src = readFileSync(SRC, "utf8");
   const mutants: [string, string][] = [
     ["s.count >= this.cfg.maxFailures) return { allowed: false", "s.count > this.cfg.maxFailures) return { allowed: false"],
