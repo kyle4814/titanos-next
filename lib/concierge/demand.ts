@@ -6,10 +6,10 @@ import { tokens } from "./text.ts";
 import { OFFTOPIC_CUES } from "./offtopic.ts";
 
 // An UnmatchedLog row (ConfigStub) plus an optional asker id. Missing id = one shared "anon" bucket (conservative: anon spam counts once).
-export type AskRecord = { ask: string; askerId?: string | null; seat?: string };
+export type AskRecord = { ask: string; askerId?: string | null; seat?: string; seenAt?: string | null };   // seenAt: caller-supplied ISO-8601 (this module reads no clock)
 export type ShelfStub = {
   cluster_id: string; label: string; ask_count: number; distinct_askers: number;
-  sample_asks: string[]; status: "UNGRADED_PROPOSAL";
+  sample_asks: string[]; status: "UNGRADED_PROPOSAL"; first_seen: string | null; last_seen: string | null;
 };
 export type DemandOpts = { topN?: number; minAskers?: number; jac?: number; offTopic?: (toks: string[]) => boolean };
 
@@ -28,7 +28,7 @@ const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 function fnv1a(s: string): string { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(16).padStart(8, "0"); }
 const defaultOffTopic = (toks: string[]) => toks.some((t) => OFFTOPIC_CUES.has(t));
 
-type Item = { clean: string; key: string; set: Set<string>; toks: string[]; asker: string };
+type Item = { clean: string; key: string; set: Set<string>; toks: string[]; asker: string; seen: string | null };
 type Cluster = { rep: Item; items: Item[] };
 
 export function demandReport(records: AskRecord[], opts: DemandOpts = {}): ShelfStub[] {
@@ -40,7 +40,7 @@ export function demandReport(records: AskRecord[], opts: DemandOpts = {}): Shelf
     const toks = tokens(clean);
     if (!toks.length) continue;
     const uniq = [...new Set(toks)].sort(cmp);
-    items.push({ clean, key: uniq.join(" "), set: new Set(uniq), toks: uniq, asker: r.askerId ? String(r.askerId) : "anon" });
+    items.push({ clean, key: uniq.join(" "), set: new Set(uniq), toks: uniq, asker: r.askerId ? String(r.askerId) : "anon", seen: typeof r.seenAt === "string" && r.seenAt ? r.seenAt : null });
   }
   // Input order must not matter: sort by key, then asker, then text, before the greedy pass.
   items.sort((a, b) => cmp(a.key, b.key) || cmp(a.asker, b.asker) || cmp(a.clean, b.clean));
@@ -55,7 +55,8 @@ export function demandReport(records: AskRecord[], opts: DemandOpts = {}): Shelf
     const askers = new Set(c.items.map((i) => i.asker));
     if (askers.size < minAskers) continue;
     const samples = [...new Set(c.items.map((i) => i.clean.slice(0, SAMPLE_LEN)))].sort((a, b) => a.length - b.length || cmp(a, b)).slice(0, SAMPLE_MAX);
-    stubs.push({ cluster_id: "dc-" + fnv1a(c.rep.key), label: c.rep.key, ask_count: c.items.length, distinct_askers: askers.size, sample_asks: samples, status: "UNGRADED_PROPOSAL" });
+    const seen = c.items.map((i) => i.seen).filter((x): x is string => !!x).sort();
+    stubs.push({ cluster_id: "dc-" + fnv1a(c.rep.key), label: c.rep.key, ask_count: c.items.length, distinct_askers: askers.size, sample_asks: samples, status: "UNGRADED_PROPOSAL", first_seen: seen[0] ?? null, last_seen: seen[seen.length - 1] ?? null });
   }
   stubs.sort((a, b) => b.distinct_askers - a.distinct_askers || b.ask_count - a.ask_count || cmp(a.label, b.label) || cmp(a.cluster_id, b.cluster_id));
   return stubs.slice(0, Math.max(0, topN));
