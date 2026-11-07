@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SeatAnchors from "@/components/SeatAnchors";
+import UpgradeDock from "@/components/UpgradeDock";
+import { SYNTHETIC_EXAMPLE } from "@/lib/upgrade-dock";
 import { ANCHORS } from "./anchors";
 import tools from "@/lib/agentTools.generated.json";
 
@@ -40,7 +42,7 @@ export default function AgentsPage() {
           </tbody>
         </table>
       </div>
-      <SeatAnchors rows={ANCHORS} />
+      <SeatAnchors rows={ANCHORS} extras={{ "upgrade-dock": <UpgradeDock input={SYNTHETIC_EXAMPLE} example /> }} />
     </main>
   );
 }

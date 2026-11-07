@@ -23,7 +23,7 @@ for (const [route, dir] of Object.entries(PAGES)) {
   const ids = [...src.matchAll(/^\s*id: "([a-z0-9-]+)"/gm)].map((m) => m[1]);
   ok(JSON.stringify(ids) === JSON.stringify(EXPECT[route]), `${route} anchors = ${EXPECT[route].join(", ")}`);
   ok(new Set(ids).size === ids.length, `${route} anchor ids unique`);
-  ok(/<SeatAnchors rows=\{ANCHORS\} \/>/.test(page) && (page.match(/<SeatAnchors /g) || []).length === 1, `${route} page renders SeatAnchors exactly once (nav link + section per id)`);
+  ok(/<SeatAnchors rows=\{ANCHORS\}[ >]/.test(page) && (page.match(/<SeatAnchors /g) || []).length === 1, `${route} page renders SeatAnchors exactly once (nav link + section per id)`);
   for (const m of src.matchAll(/status: "(\w+)"/g)) ok(m[1] === "live" || m[1] === "coming", `${route} status ${m[1]} is live|coming`);
   for (const m of src.matchAll(/body: "([^"]*)"/g)) {
     allText.push(m[1]);
