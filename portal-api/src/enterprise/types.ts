@@ -47,7 +47,7 @@ export interface ScanProvider {
 }
 export type Assessment =
   | { status: "ASSESSED"; grade: "A" | "B" | "C" | "D" | "F"; score: number; counts: { critical: number; high: number; medium: number; low: number }; scannedAt: number; resolverSource: string; unreadableChecks: number }
-  | { status: "UNKNOWN"; reason: "timeout" | "resolver_failed" | "scan_error"; scannedAt: number; resolverSource: string };
+  | { status: "UNKNOWN"; reason: "timeout" | "resolver_failed" | "scan_error" | "rate_limited"; scannedAt: number; resolverSource: string };
 
 
 // Signals a billing/signup adapter supplies per account (F5). The fingerprint and network token are opaque strings.
