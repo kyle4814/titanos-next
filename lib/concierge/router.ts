@@ -8,6 +8,7 @@ export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
 export const MAX_UNKNOWN = 0.5;     // half or more of the asker's content words unknown to the catalogue: we do not pretend
 export const CONF_FLOOR = 7.0;         // F-C6: a match with no keyword hit must clear this; measured: lowest correct no-hit match 7.22 on the 269 labelled asks
 const HOME_BOOST = 1.25;
+export const OFFER_NOHIT = 0.9;      // F-65: tuned on lib/concierge/dev.tsv (synthetic), never on holdout.tsv
 const HIT_IDF = 1.2;               // a lone keyword counts as a deliberate hit only if it is selective
 
 type Doc = { shelf: Shelf; kw: string[][]; title: Set<string>; text: Set<string>; len: number };
@@ -74,6 +75,8 @@ function score(index: Index, q: string[], d: Doc, seat: Seat): { s: number; hit:
   const tt = [...d.title];
   if (tt.length >= 2 && tt.every((t) => qset.has(t))) s += 4;
   if (d.shelf.home.includes(seat)) s *= HOME_BOOST;
+  // F-65 wrong-shelf cause: a long offer blurb must not beat a portal page on vocabulary alone. An offer with no keyword hit is discounted.
+  if (d.shelf.kind === "offer" && !hit) s *= OFFER_NOHIT;
   return { s, hit, phrase };
 }
 
@@ -89,8 +92,8 @@ const tap = (s: Shelf): Tap => ({ label: s.title, shelfId: s.id, href: s.href })
 export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
   const raw = String(ask ?? "").slice(0, 500);      // bound the work
   if (junkCheck(raw).junk) return unmatched(raw, seat, "junk");   // F-C6: markup, SQL and prompt-injection shapes never reach an offer
-  const q = tokens(raw);
   const domain = findDomain(raw);
+  const q = tokens(domain ? raw.toLowerCase().replace(domain, " ") : raw);   // F-65: a domain's labels are not words (shop.example.com.au must not hit the Shop page)
   const ranked = index.docs.filter((d) => !d.shelf.only || d.shelf.only.includes(seat)).map((d) => { const r = score(index, q, d, seat); return { d, s: r.s, hit: r.hit, phrase: r.phrase }; }).sort((a, b) => b.s - a.s || (a.d.shelf.id < b.d.shelf.id ? -1 : 1));
   const top = ranked[0];
   // A domain with no strong signal is a scan request: the scan box is the front door.
