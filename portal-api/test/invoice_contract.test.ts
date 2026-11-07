@@ -79,7 +79,7 @@ for (const [name, fac] of [["memory", memory], ["d1", d1]] as const) {
 }
 
 // ---- D1-only: what the schema adds ----
-test.skip("[d1] invoices.purchase_id is a foreign key (not on the merged line: 0003_enterprise adds a plain TEXT column, SQLite cannot add the FK later)", async () => {
+test("[d1] invoices.purchase_id is a foreign key (not on the merged line: 0003_enterprise adds a plain TEXT column, SQLite cannot add the FK later)", { skip: true }, async () => {
   const db = new FakeD1(), s = new D1PlanStore(db); await seed(s);
   await assert.rejects(() => s.putInvoice(inv({ id: "inv_fk", purchaseId: "pur_missing" })), /FOREIGN KEY/i);
 });
