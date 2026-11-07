@@ -63,6 +63,11 @@ export interface Store {
   invoicesFor(accountId: string): Promise<Invoice[]>;
   invoiceById(id: string): Promise<Invoice | undefined>;
   nextInvoiceNumber(): Promise<string>;
+  // f203 reconciler. purchaseInvoiced: the purchase has at least one invoice. putInvoiceOnce: write the invoice ONLY IF the purchase has none, atomically (false = lost the race, nothing written).
+  // paidPurchasesBefore: purchases paid at or before `cutoff` (status paid or refunded) that carry no invoice, oldest first.
+  purchaseInvoiced(purchaseId: string): Promise<boolean>;
+  putInvoiceOnce(i: Invoice): Promise<boolean>;
+  paidPurchasesBefore(cutoff: number): Promise<Purchase[]>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
@@ -102,7 +107,7 @@ export class MemoryStore implements Store {
   async purchaseById(id: string) { return this.purchases.get(id); }
   async purchaseByCheckout(c: string) { return [...this.purchases.values()].find((p) => p.checkoutId === c); }
   async purchaseByPaymentIntent(pi: string) { return [...this.purchases.values()].find((p) => p.paymentIntent === pi); }
-  async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), f]); }
+  async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
   subVer = new Map<string, number>();
@@ -115,9 +120,28 @@ export class MemoryStore implements Store {
   async createSubscription(s: Subscription) { if (this.subs.has(s.id)) return false; this.subs.set(s.id, s); this.subVer.set(s.id, 1); return true; }
   async subscriptionById(id: string) { return this.subs.get(id); }
   async subscriptionsFor(id: string) { return [...this.subs.values()].filter((s) => s.accountId === id); }
-  async putInvoice(i: Invoice) { this.invoices.set(i.id, i); }
-  async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id); }
-  async invoiceById(id: string) { return this.invoices.get(id); }
+  // Reference semantics for the invoice contract (test/invoice_contract.test.ts runs it on every adapter): ids are upsert keys, numbers are unique,
+  // and one purchase carries at most one invoice per Stripe event. A violation throws; nothing is written.
+  async putInvoice(i: Invoice) {
+    for (const o of this.invoices.values()) {
+      if (o.id === i.id) continue;
+      if (o.number === i.number) throw new Error(`invoice number ${i.number} already issued`);
+      if (i.purchaseId !== undefined && o.purchaseId === i.purchaseId && o.stripeEventId === i.stripeEventId) throw new Error(`purchase ${i.purchaseId} already invoiced for event ${i.stripeEventId}`);
+    }
+    this.invoices.set(i.id, Object.fromEntries(Object.entries(i).filter(([, v]) => v !== undefined)) as unknown as Invoice); // absent optionals stay absent, as on D1
+  }
+  async invoicesFor(id: string) { return [...this.invoices.values()].filter((i) => i.accountId === id).map((i) => ({ ...i })); }
+  async invoiceById(id: string) { const i = this.invoices.get(id); return i && { ...i }; }
+  async purchaseInvoiced(id: string) { return [...this.invoices.values()].some((o) => o.purchaseId === id); }
+  // No await between the check and the write: atomic on one object (putInvoice is async but runs synchronously to its end).
+  async putInvoiceOnce(i: Invoice) {
+    if ([...this.invoices.values()].some((o) => o.purchaseId === i.purchaseId)) return false;
+    await this.putInvoice(i); return true;
+  }
+  async paidPurchasesBefore(cutoff: number) {
+    return [...this.purchases.values()].filter((p) => p.paidAt !== undefined && p.paidAt <= cutoff && (p.status === "paid" || p.status === "refunded")
+      && ![...this.invoices.values()].some((o) => o.purchaseId === p.id)).sort((a, b) => a.paidAt! - b.paidAt! || (a.id < b.id ? -1 : 1)).map((p) => ({ ...p }));
+  }
   async nextInvoiceNumber() { this.inv += 1; return `TT-${String(this.inv).padStart(6, "0")}`; }
   async claimEvent(id: string) { if (this.events.has(id)) return false; this.events.add(id); return true; }
   async putCard(c: ReviewCard) { this.cards.set(c.id, c); }

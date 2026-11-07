@@ -13,12 +13,15 @@ export const MIGRATIONS = readdirSync(dir).filter((f) => /^\d{4}_.*\.sql$/.test(
 export type Rng = () => number;
 // Seeded schedule (f175): mulberry32. Same seed = same sequence of yields, so an interleaving can be replayed.
 export const seeded = (seed: number): Rng => { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+// Interleaving source: Math.random by default; a suite may swap in a seeded generator (setFakeD1Rand) so a race schedule is replayable.
+let rand: () => number = Math.random;
+export const setFakeD1Rand = (f: (() => number) | undefined) => { rand = f ?? Math.random; };
 
 export class FakeD1 implements D1Like {
   db = new DatabaseSync(":memory:");
   log: { sql: string; args: unknown[] }[] = [];
   rng: Rng;
-  constructor(rng: Rng = Math.random) {
+  constructor(rng: Rng = () => rand()) {
     this.rng = rng;
     this.db.exec("PRAGMA foreign_keys = ON");
     for (const f of MIGRATIONS) this.db.exec(readFileSync(dir + f, "utf8"));
