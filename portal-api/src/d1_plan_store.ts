@@ -70,6 +70,9 @@ export class D1PlanStore extends MemoryStore {
   override async pendingPurchasesBefore(cutoff: number) {
     return (await this.many("SELECT * FROM purchases WHERE status = 'pending' AND COALESCE(created_at, 0) <= ? ORDER BY COALESCE(created_at, 0), id", cutoff)).map(toPurchase);
   }
+  override async countByStatus(status: Purchase["status"]) {
+    return Number((await this.many("SELECT COUNT(*) AS n FROM purchases WHERE status = ?", status))[0]?.n ?? 0);
+  }
   // Gap-free and atomic: one UPSERT...RETURNING on the single-row counter. Survives a restart; two stores over one D1 never repeat a number.
   override async nextInvoiceNumber() {
     const r = await this.one("INSERT INTO invoice_seq (id, n) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET n = n + 1 RETURNING n");
