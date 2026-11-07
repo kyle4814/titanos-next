@@ -60,6 +60,12 @@ export interface Store {
   // An expired lease is free to take (the holder died). releaseLease frees it only for the same owner. TEST ADAPTER ONLY (in memory, inherited by the D1 test store): a real D1 lease needs a table, a gated card.
   acquireLease(key: string, owner: string, now: number, ttlMs: number): Promise<boolean>;
   releaseLease(key: string, owner: string): Promise<void>;
+  // f243: refund MEMO, an atomic one-row-per-key record (fact carries `at`). memoInsert is ONE conditional insert (true = THIS call created it); memoSwap is a compare-and-set on the exact stored fact (next null = conditional delete).
+  // The f240 take-then-hold pair is gone: there is no window between reading and writing the memo, so a crash or a rival cannot lose it or re-run Stripe.
+  memoInsert(key: string, fact: Record<string, unknown>): Promise<boolean>;
+  memoPeek(key: string): Promise<Record<string, unknown> | undefined>;
+  memoSwap(key: string, expected: Record<string, unknown>, next: Record<string, unknown> | null): Promise<boolean>;
+  memoList(prefix: string): Promise<{ key: string; fact: Record<string, unknown> }[]>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
@@ -109,6 +115,14 @@ export class MemoryStore implements Store {
     this.leases.set(key, { owner, expiresAt: now + ttlMs }); return true;
   }
   async releaseLease(key: string, owner: string) { if (this.leases.get(key)?.owner === owner) this.leases.delete(key); }
+  memos = new Map<string, string>(); // key -> JSON; no await between check and write, so each op is atomic on one thread
+  async memoInsert(k: string, f: Record<string, unknown>) { if (this.memos.has(k)) return false; this.memos.set(k, JSON.stringify(f)); return true; }
+  async memoPeek(k: string) { const v = this.memos.get(k); return v === undefined ? undefined : (JSON.parse(v) as Record<string, unknown>); }
+  async memoSwap(k: string, expected: Record<string, unknown>, next: Record<string, unknown> | null) {
+    if (this.memos.get(k) !== JSON.stringify(expected)) return false;
+    if (next === null) this.memos.delete(k); else this.memos.set(k, JSON.stringify(next)); return true;
+  }
+  async memoList(prefix: string) { return [...this.memos].filter(([k]) => k.startsWith(prefix)).map(([key, v]) => ({ key, fact: JSON.parse(v) as Record<string, unknown> })); }
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
