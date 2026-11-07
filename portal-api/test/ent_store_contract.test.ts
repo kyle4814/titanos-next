@@ -297,7 +297,7 @@ test("LEAK coverage guard: every EntStore method is listed with its scoping rule
   const BY_DESIGN = [  // global-key lookups or account-scoped/system operations, each with a stated reason
     "tenantById", "tenantBySlug", "putTenant", "partnerByRefCode",   // the tenant row itself; slug / ref code are public identifiers
     "membershipsFor", "removeAccount", "invitesForEmail", "putReferral", "referralOf",   // keyed by ACCOUNT (the caller's own identity), not tenant
-    "verifiedAssetOwner",   // domain-uniqueness check: must see across tenants
+    "updateLedger",   /* ledger row id is globally unique; flips the SELF-DEAL hold on one row */ "verifiedAssetOwner",   // domain-uniqueness check: must see across tenants
     "consumeSsoState",      // keyed by the unguessable state hash (a capability); tenant comes back in the row
     "ledgerForInvoice",     // refund clawback walks every partner's rows for one invoice
     "noteFailure", "failures",   // operator log

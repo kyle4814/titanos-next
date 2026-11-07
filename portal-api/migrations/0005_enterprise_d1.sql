@@ -14,3 +14,6 @@ CREATE INDEX IF NOT EXISTS idx_ledger_partner ON partner_ledger(partner_id, at);
 CREATE INDEX IF NOT EXISTS idx_ledger_invoice ON partner_ledger(invoice_id);
 CREATE INDEX IF NOT EXISTS idx_sso_states_tenant ON sso_states(tenant_id, expires_at);
 -- One payout reservation per ledger row id is enforced by partner_ledger UNIQUE(partner_id, uniq) with uniq = payout:<id>.
+-- SELF-DEAL-SUSPECT hold (int line, share.ts / availableCents): a held ledger row is not payable until the operator's tap.
+ALTER TABLE partner_ledger ADD COLUMN held INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE partner_ledger ADD COLUMN hold_reasons TEXT; -- JSON array of reason strings

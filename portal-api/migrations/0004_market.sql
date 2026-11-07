@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS pro_profiles (
   account_id TEXT PRIMARY KEY REFERENCES accounts(id),
   state_json TEXT NOT NULL            -- display name, plan, connect account id, onboarded flag
 );
+-- (x5 rebase) kind also allows clawback_review: src/market/store.ts MarketCard.kind has had it since the clawback lane; the D1 market adapter hit the CHECK.
 CREATE TABLE IF NOT EXISTS market_cards (
-  id TEXT PRIMARY KEY, kind TEXT NOT NULL CHECK (kind IN ('payout_review','dispute')), job_id TEXT NOT NULL REFERENCES market_jobs(id),
+  id TEXT PRIMARY KEY, kind TEXT NOT NULL CHECK (kind IN ('payout_review','dispute','clawback_review')), job_id TEXT NOT NULL REFERENCES market_jobs(id),
   reason TEXT NOT NULL, created_at INTEGER NOT NULL, resolved INTEGER NOT NULL DEFAULT 0, outcome TEXT
 );

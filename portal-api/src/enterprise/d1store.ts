@@ -42,11 +42,12 @@ const assetOf_ = (r: Row): Asset => clean({ id: r.id, tenantId: r.tenant_id, dom
 const ledgerOf_ = (r: Row): LedgerEntry => clean({
   id: r.id, uniq: r.uniq, partnerId: r.partner_id, kind: r.kind, amountCents: Number(r.amount_cents), at: Number(r.at), availableAt: Number(r.available_at),
   invoiceId: r.invoice_id, sourceKey: r.source_key, sourceLabel: r.source_label, rateBps: r.rate_bps == null ? null : Number(r.rate_bps), rateVersion: r.rate_version, payoutId: r.payout_id,
+  ...(Number(r.held) === 1 ? { held: true, holdReasons: r.hold_reasons == null ? [] : (JSON.parse(String(r.hold_reasons)) as string[]) } : {}),
 }) as LedgerEntry;
 const payoutOf = (r: Row): Payout => clean({ id: r.id, partnerId: r.partner_id, amountCents: Number(r.amount_cents), status: r.status, createdAt: Number(r.created_at), providerRef: r.provider_ref, reason: r.reason }) as Payout;
 
-const LEDGER_INSERT_COLS = "id, uniq, partner_id, kind, amount_cents, at, available_at, invoice_id, source_key, source_label, rate_bps, rate_version, payout_id";
-const ledgerArgs = (e: LedgerEntry) => [e.id, e.uniq, e.partnerId, e.kind, e.amountCents, e.at, e.availableAt, nul(e.invoiceId), nul(e.sourceKey), nul(e.sourceLabel), nul(e.rateBps), nul(e.rateVersion), nul(e.payoutId)];
+const LEDGER_INSERT_COLS = "id, uniq, partner_id, kind, amount_cents, at, available_at, invoice_id, source_key, source_label, rate_bps, rate_version, payout_id, held, hold_reasons";
+const ledgerArgs = (e: LedgerEntry) => [e.id, e.uniq, e.partnerId, e.kind, e.amountCents, e.at, e.availableAt, nul(e.invoiceId), nul(e.sourceKey), nul(e.sourceLabel), nul(e.rateBps), nul(e.rateVersion), nul(e.payoutId), e.held ? 1 : 0, e.holdReasons ? JSON.stringify(e.holdReasons) : null];
 
 export class D1EntStore implements EntStore {
   private db: D1Like; private sealer: SecretSealer;
@@ -170,7 +171,15 @@ export class D1EntStore implements EntStore {
 
   // ---- partner ledger and referrals ----
   async addLedger(e: LedgerEntry) {
-    return (await this.run(`INSERT INTO partner_ledger (${LEDGER_INSERT_COLS}) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(partner_id, uniq) DO NOTHING`, ...ledgerArgs(e))) === 1;
+    return (await this.run(`INSERT INTO partner_ledger (${LEDGER_INSERT_COLS}) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(partner_id, uniq) DO NOTHING`, ...ledgerArgs(e))) === 1;
+  }
+  // SELF-DEAL-SUSPECT hold (int line): flip held / append hold reasons on one ledger row; id is globally unique, rows are not tenant data.
+  async updateLedger(id: string, patch: Partial<Pick<LedgerEntry, "held" | "holdReasons">>) {
+    const cur = await this.one("SELECT * FROM partner_ledger WHERE id = ?", id); if (!cur) return undefined;
+    const held = "held" in patch ? (patch.held ? 1 : 0) : Number(cur.held);
+    const reasons = "holdReasons" in patch ? (patch.holdReasons ? JSON.stringify(patch.holdReasons) : null) : (cur.hold_reasons ?? null);
+    await this.run("UPDATE partner_ledger SET held = ?, hold_reasons = ? WHERE id = ?", held, reasons, id);
+    const n = await this.one("SELECT * FROM partner_ledger WHERE id = ?", id); return n ? ledgerOf_(n) : undefined;
   }
   async ledgerOf(partnerId: string) { return (await this.all("SELECT * FROM partner_ledger WHERE partner_id = ? ORDER BY at, rowid", partnerId)).map(ledgerOf_); }
   // deliberately system-wide (clawback walks every partner's rows for one invoice); invoice ids belong to the payer, not to a tenant
@@ -184,14 +193,14 @@ export class D1EntStore implements EntStore {
   // (compare-and-set on the balance), and the payout row goes in only if that ledger row landed. Of N parallel callers exactly one
   // lands; a loser re-reads, sees the spent balance, and returns undefined (or retries if an unrelated credit moved the balance).
   async reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }) {
-    const AVAIL = "SELECT COALESCE(SUM(amount_cents), 0) FROM partner_ledger WHERE partner_id = ? AND (amount_cents < 0 OR available_at <= ?)";
+    const AVAIL = "SELECT COALESCE(SUM(amount_cents), 0) FROM partner_ledger WHERE partner_id = ? AND held = 0 AND (amount_cents < 0 OR available_at <= ?)";
     for (let attempt = 0; attempt < MAX_RESERVE_TRIES; attempt++) {
       const avail = Number((await this.one<{ a: number }>(`SELECT (${AVAIL}) AS a`, partnerId, now))?.a ?? 0);
       if (avail < minCents || avail <= 0) return undefined;
       const { payout, entry } = make(avail);
       if (payout.partnerId !== partnerId || entry.partnerId !== partnerId || entry.amountCents !== -payout.amountCents || payout.amountCents !== avail || entry.payoutId !== payout.id) throw new Error("reserve_mismatch");
       const res = await this.tx([
-        this.q(`INSERT INTO partner_ledger (${LEDGER_INSERT_COLS}) SELECT ?,?,?,?,?,?,?,?,?,?,?,?,? WHERE (${AVAIL}) = ?`, ...ledgerArgs(entry), partnerId, now, avail),
+        this.q(`INSERT INTO partner_ledger (${LEDGER_INSERT_COLS}) SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?,? WHERE (${AVAIL}) = ?`, ...ledgerArgs(entry), partnerId, now, avail),
         this.q(`INSERT INTO payouts (id, partner_id, amount_cents, status, created_at, provider_ref, reason) SELECT ?,?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM partner_ledger WHERE id = ? AND partner_id = ? AND payout_id = ?)`,
           payout.id, partnerId, payout.amountCents, payout.status, payout.createdAt, nul(payout.providerRef), nul(payout.reason), entry.id, partnerId, payout.id),
       ]);
