@@ -1,0 +1,8 @@
+TAX INVOICE TT-000042
+Invoice number: TT-000042
+Date: 2026-11-06
+Supplier: Kyle Montrose Deligny, ABN 34 318 502 254, Brisbane QLD
+Billed to: buyer@example.invalid
+Item: Leads Starter (250 contacts)
+Amount: AU$497.00 (AUD)
+Total includes GST of AU$45.18.
