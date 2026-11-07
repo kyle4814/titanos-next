@@ -7,8 +7,8 @@ export interface Api { fetchFn: typeof fetch; base: string; storage: Pick<Storag
 export const browserApi = (): Api => ({ fetchFn: (...a) => fetch(...a), base: PORTAL.API_BASE, storage: window.localStorage });
 
 export class ApiError extends Error {
-  status: number; code: string;
-  constructor(status: number, code: string) { super(code); this.status = status; this.code = code; }
+  status: number; code: string; body: Json | null;
+  constructor(status: number, code: string, body: Json | null = null) { super(code); this.status = status; this.code = code; this.body = body; }
 }
 // {EMAIL} is replaced with the site contact address at render time.
 export const ERROR_TEXT: Record<string, string> = {
@@ -37,7 +37,7 @@ export async function call(api: Api, method: string, path: string, body?: Json, 
   const r = await api.fetchFn(api.base + path, { method, headers, body: body ? JSON.stringify(body) : undefined });
   const text = await r.text();
   let j: any = null; try { j = text ? JSON.parse(text) : null; } catch { /* plain text body (invoice) */ }
-  if (!r.ok) throw new ApiError(r.status, j?.error ?? (r.status === 404 ? "store_unavailable" : "error"));
+  if (!r.ok) throw new ApiError(r.status, j?.error ?? (r.status === 404 ? "store_unavailable" : "error"), j && typeof j === "object" ? j : null);
   return j ?? text;
 }
 export const requestLogin = (api: Api, email: string) => call(api, "POST", "/auth/request", { email }, false);
