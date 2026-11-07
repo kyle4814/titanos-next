@@ -77,9 +77,9 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     const r = await sweep(open, b, T0 + GRACE, 24 * 3_600_000);
     want("P3", r.scanned === 4 && r.abandoned === 1 && r.stillOpen === 3 && r.recovered === 0, `want 1 abandoned 3 open, got ${JSON.stringify(r)}`);
     const st = async (n: number) => (await open().purchaseById(`pur${n}`)).status;
-    want("P3", (await st(10)) === "cancelled" && (await st(11)) === "pending" && (await st(12)) === "pending", "expired cancelled; open and settling untouched");
+    want("P3", (await st(10)) === "abandoned" && (await st(11)) === "pending" && (await st(12)) === "pending", "expired abandoned; open and settling untouched");
     const late = await sweep(open, b, T0 + 24 * 3_600_000, 24 * 3_600_000);
-    want("P3", late.abandoned === 2 && (await st(11)) === "cancelled" && (await st(13)) === "cancelled" && (await st(12)) === "pending", `open past abandonAfter must be cancelled, settling never, got ${JSON.stringify(late)}`);
+    want("P3", late.abandoned === 2 && (await st(11)) === "abandoned" && (await st(13)) === "abandoned" && (await st(12)) === "pending", `open past abandonAfter must be cancelled, settling never, got ${JSON.stringify(late)}`);
     want("P3", (await invCount(open())) === 0, "an abandoned purchase never gets an invoice");
   }
 
