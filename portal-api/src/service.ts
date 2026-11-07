@@ -2,7 +2,7 @@ import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
 import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
-import type { Store, Account, Purchase, Invoice, Subscription } from "./store.ts";
+import { subStateKey, type Store, type Account, type Purchase, type Invoice, type Subscription } from "./store.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import { isTier, periodFromStripe, initPlanFromStripe, observePeriod, type StripePeriod, type Tier } from "./plan_change.ts";
 import { changePlan } from "./plan_change_service.ts";
@@ -125,8 +125,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
       await d.store.holdFact(`sub:${subId}`, { kind: "period", start: period.start, end: period.end, create: !cycle });
       return "handled";
     }
-    await seedPeriod(d, sub, period, !cycle);
-    await d.store.putSubscription(sub);
+    await casEditSubscription(d, subId, async (s, dd) => { await seedPeriod(dd, s, period, !cycle); return true; }); // f248: CAS on the row just read, never a blind put of a stale copy (a cancel landing in between survives)
     if (!cycle) return "handled"; // the first invoice is issued by markPaid
     const pur = await d.store.purchaseById(sub.purchaseId);
     if (pur) await issueInvoice(d, pur, Number(o.amount_paid ?? PRODUCTS[sub.productId].amountCents), ev.id);
@@ -135,7 +134,7 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   if (ev.type === "customer.subscription.deleted") {
     const sub = await d.store.subscriptionById(String(o.id));
     if (!sub) { await d.store.holdFact(`sub:${String(o.id)}`, { kind: "cancel" }); return "handled"; } // cancel before its payment: held
-    if (!sub.cancelledAt) { sub.cancelledAt = d.now(); await d.store.putSubscription(sub); }
+    if (!sub.cancelledAt) await casEditSubscription(d, sub.id, (s) => { if (s.cancelledAt) return false; s.cancelledAt = d.now(); return true; }); // f248: CAS; a lost CAS re-reads, and a row already cancelled is left alone (cancelled is never undone, never re-stamped)
     return "handled";
   }
   d.log?.(`webhook ignored unknown event type ${ev.type} (${ev.id})`);
@@ -190,14 +189,46 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     return { won: true, purchase: pur };
   } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
 }
+// f248: the subscription row is changed by compare-and-set on the exact state read (as casPurchase does), never a blind put of a copy read earlier. A lost CAS re-reads the fresh row, re-runs `edit` on a clone of it and retries,
+// so a cancel (or a period advance) that landed in between is merged with, never overwritten. `edit` mutates the clone and returns true when it changed something; false = nothing to write (the stored row is returned).
+// Side effects of `edit` on held facts are made retry-safe: holdFact is deferred until the CAS lands, takeFacts is memoised per key across attempts (a destructive take happens once) and re-held if the retries run out.
+export class SubscriptionContention extends Error { constructor(id: string) { super(`subscription CAS lost ${SUB_TRIES} times on ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); this.name = "SubscriptionContention"; } }
+const SUB_TRIES = 8;
+export async function casEditSubscription(d: Pick<Deps, "store" | "log" | "now">, id: string, edit: (s: Subscription, dd: Deps) => Promise<boolean> | boolean): Promise<Subscription | undefined> {
+  const taken = new Map<string, Record<string, unknown>[]>();
+  let pending: [string, Record<string, unknown>][] = [];
+  const store = new Proxy(d.store, { get: (t, p) => {
+    if (p === "holdFact") return async (k: string, f: Record<string, unknown>) => { pending.push([k, f]); };
+    if (p === "takeFacts") return async (k: string) => { if (!taken.has(k)) taken.set(k, await t.takeFacts(k)); return taken.get(k)!.map((f) => ({ ...f })); };
+    const v = (t as any)[p]; return typeof v === "function" ? v.bind(t) : v;
+  } }) as Store;
+  const dd = { ...d, store } as Deps;
+  for (let i = 0; i < SUB_TRIES; i++) {
+    pending = [];
+    const cur = await d.store.subscriptionById(id);
+    if (!cur) break;
+    const expected = structuredClone(cur), next = structuredClone(cur);
+    if (!(await edit(next, dd)) || subStateKey(next) === subStateKey(expected)) { for (const [k, f] of pending) await d.store.holdFact(k, f); return cur; }
+    if (await d.store.casSubscription(next, expected)) { for (const [k, f] of pending) await d.store.holdFact(k, f); return next; }
+  }
+  for (const [k, fs] of taken) for (const f of fs) await d.store.holdFact(k, f); // gave up (or the row vanished): the facts this call consumed go back so the next replay applies them
+  if ((await d.store.subscriptionById(id))) throw new SubscriptionContention(id);
+  return undefined;
+}
 // f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
+// f248: the replay re-reads the stored row (the `sub` argument may be a stale copy) and writes through casEditSubscription: a cancel webhook that wrote between the read and the write is never resurrected.
 export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, sub: Subscription): Promise<boolean> {
-  const late = await d.store.takeFacts(`sub:${sub.id}`);
-  if (late.length === 0) return false;
-  if (late.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now();
-  for (const hp of heldPeriods(late).rest) await seedPeriod(d as Deps, sub, hp, false);
-  await d.store.putSubscription(sub);
-  return true;
+  let any = false;
+  const out = await casEditSubscription(d, sub.id, async (s, dd) => {
+    const late = await dd.store.takeFacts(`sub:${sub.id}`);
+    if (late.length === 0) return false;
+    any = true;
+    if (late.some((f) => f.kind === "cancel") && !s.cancelledAt) s.cancelledAt = d.now();
+    for (const hp of heldPeriods(late).rest) await seedPeriod(dd, s, hp, false);
+    return true;
+  });
+  if (out && out !== sub) Object.assign(sub, out);
+  return any;
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
 // and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.

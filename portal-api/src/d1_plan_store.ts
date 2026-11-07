@@ -55,6 +55,13 @@ export class D1PlanStore extends MemoryStore {
     await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json",
       s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));
   }
+  // f248. ONE conditional UPDATE on the exact state read (every mutable column, NULL-safe with IS); changes === 1 means THIS call moved the row, 0 = it moved on (or is gone) and nothing was written.
+  override async casSubscription(next: Subscription, e: Subscription) {
+    const r = await this.exec("UPDATE subscriptions SET account_id = ?, purchase_id = ?, product_id = ?, started_at = ?, cancel_at = ?, cancelled_at = ?, plan_json = ? WHERE id = ? AND account_id = ? AND purchase_id = ? AND product_id = ? AND started_at = ? AND cancel_at IS ? AND cancelled_at IS ? AND plan_json IS ?",
+      next.accountId, next.purchaseId, next.productId, next.startedAt, n(next.cancelAt), n(next.cancelledAt), n(next.plan === undefined ? undefined : JSON.stringify(next.plan)),
+      e.id, e.accountId, e.purchaseId, e.productId, e.startedAt, n(e.cancelAt), n(e.cancelledAt), n(e.plan === undefined ? undefined : JSON.stringify(e.plan)));
+    return r.meta.changes === 1;
+  }
   // f237. ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (a subscription for this purchase, or this id); changes === 1 means THIS call wrote the row.
   override async putSubscriptionOnce(s: Subscription) {
     const r = await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM subscriptions WHERE purchase_id = ? OR id = ?)",

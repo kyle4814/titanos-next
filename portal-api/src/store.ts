@@ -13,6 +13,9 @@ export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
 export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number }
 
+// f248: the whole mutable state of a subscription row as one comparable string (undefined and absent compare equal).
+export const subStateKey = (s: Subscription) => JSON.stringify([s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, s.cancelAt ?? null, s.cancelledAt ?? null, s.plan ?? null]);
+
 export interface Store {
   accountByEmail(email: string): Promise<Account | undefined>;
   accountById(id: string): Promise<Account | undefined>;
@@ -38,6 +41,8 @@ export interface Store {
   putSubscription(s: Subscription): Promise<void>;
   // f237: write the subscription ONLY IF the purchase has none (keyed on purchase id), atomically; false = one already exists, nothing written.
   putSubscriptionOnce(s: Subscription): Promise<boolean>;
+  // f248: compare-and-set. Writes `next` over the stored subscription ONLY IF the stored row still equals `expected` field for field (the exact state the caller read); true = written, false = the row moved on or is absent, nothing written.
+  casSubscription(next: Subscription, expected: Subscription): Promise<boolean>;
   subscriptionByPurchase(purchaseId: string): Promise<Subscription | undefined>;
   // f237: purchases with status exactly 'paid', paid at or before `cutoff`, of a subscription-mode product, that have NO subscription row. Oldest first.
   paidWithoutSubscriptionBefore(cutoff: number, subscriptionProductIds: string[]): Promise<Purchase[]>;
@@ -127,6 +132,11 @@ export class MemoryStore implements Store {
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
   async putSubscription(s: Subscription) { this.subs.set(s.id, s); }
+  async casSubscription(next: Subscription, expected: Subscription) { // no await between check and write
+    const cur = this.subs.get(expected.id);
+    if (!cur || subStateKey(cur) !== subStateKey(expected)) return false;
+    this.subs.set(next.id, structuredClone(next)); return true;
+  }
   async subscriptionByPurchase(pid: string) { return [...this.subs.values()].find((x) => x.purchaseId === pid); }
   async putSubscriptionOnce(s: Subscription) { // no await between check and write
     if (this.subs.has(s.id) || [...this.subs.values()].some((x) => x.purchaseId === s.purchaseId)) return false;
