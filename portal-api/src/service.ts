@@ -183,11 +183,12 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     Object.assign(pur, claim);
     if (o.subscription) { // f250: the winner's first write is insert-if-absent, never a blind upsert. If the row already exists (the f237 sweep seeded it after our lease expired, and a cancel webhook may have landed on it) it stands,
       // and the only thing this winner took that the sweep may not have is the held cancel and the plan: merged onto the stored row by CAS, never overwriting.
-      const built = await buildSubscription(d, pur, o.subscription, now);
+      const { sub: built, periods: taken } = await buildSubscriptionTaken(d, pur, o.subscription, now);
       if (!(await d.store.putSubscriptionOnce(built))) await casEditSubscription(d, built.id, (s) => {
         let ch = false;
         if (built.cancelledAt && !s.cancelledAt) { s.cancelledAt = built.cancelledAt; ch = true; }
         if (!s.plan && built.plan) { s.plan = built.plan; ch = true; }
+        else if (mergeTakenPeriods(d, s, taken)) ch = true; // f251: the periods this winner took (its session period, an invoice that beat the checkout) are observed onto the sweep's plan: the later one wins, a repeat is a no-op
         return ch;
       });
     }
@@ -241,14 +242,28 @@ export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, su
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
 // and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.
-export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> {
+export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> { return (await buildSubscriptionTaken(d, pur, stripeSub, now)).sub; }
+// f251: the same build, but it also returns every Stripe PERIOD it took (the session/subscription_create period, then each held invoice period oldest first). A winner whose row lost to the sweep's seed
+// (its lease stalled past the TTL) observes these onto the stored row (mergeTakenPeriods), so a period it consumed from the held facts is never lost with the row it built.
+export async function buildSubscriptionTaken(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<{ sub: Subscription; periods: StripePeriod[] }> {
   const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
   const cancel = facts.some((f) => f.kind === "cancel");
   const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
   const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
   await seedPeriod(d as Deps, sub, sp, true);
   for (const hp of held.rest) await seedPeriod(d as Deps, sub, hp, false); // invoices that beat the checkout, oldest first
-  return sub;
+  return { sub, periods: [...(sp ? [sp] : []), ...held.rest] };
+}
+// f251: observe periods onto a stored row's plan, oldest first. observePeriod is pure and idempotent by period start (older = stale, same = no change), so the later period wins and a replay changes nothing. True when the plan moved.
+export function mergeTakenPeriods(d: Pick<Deps, "log">, s: Subscription, periods: StripePeriod[]): boolean {
+  if (!s.plan || !isTier(s.productId)) return false;
+  let ch = false;
+  for (const p of [...periods].sort((a, b) => a.start - b.start)) {
+    const r = observePeriod(s.plan, p);
+    if (r.applied === "advanced") { s.plan = r.state; ch = true; }
+    else if (r.applied === "offgrid") d.log?.(`stripe period off the billing grid for ${s.id}: start ${p.start} (state untouched)`);
+  }
+  return ch;
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
