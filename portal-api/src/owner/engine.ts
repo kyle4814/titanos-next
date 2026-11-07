@@ -27,8 +27,27 @@ export interface OwnerStore { get(domainId: string): Promise<DomainState | undef
 export class MemoryOwnerStore implements OwnerStore {
   m = new Map<string, DomainState>();
   async get(id: string) { const s = this.m.get(id); return s ? structuredClone(s) : undefined; }
-  async put(s: DomainState) { this.m.set(s.domainId, structuredClone(s)); }
+  async put(s: DomainState) { const cur = this.m.get(s.domainId); if (cur && cur.accountId !== s.accountId) throw new Error("owner_state_account_mismatch"); this.m.set(s.domainId, structuredClone(s)); }
   async all() { return [...this.m.values()].map((s) => structuredClone(s)); }
+  // Account-scoped surface (same contract as D1OwnerStore, see src/owner/d1ownerstore.ts).
+  async getFor(accountId: string, id: string) { const s = this.m.get(id); return s && s.accountId === accountId ? structuredClone(s) : undefined; }
+  async allFor(accountId: string) { return [...this.m.values()].filter((s) => s.accountId === accountId).sort((a, b) => (a.domainId < b.domainId ? -1 : 1)).map((s) => structuredClone(s)); }
+  async due(now: number, limit: number) {
+    return [...this.m.values()].filter((s) => s.monitor.active && s.monitor.nextScanAt !== undefined && s.monitor.nextScanAt <= now)
+      .sort((a, b) => a.monitor.nextScanAt! - b.monitor.nextScanAt! || (a.domainId < b.domainId ? -1 : 1)).slice(0, Math.max(0, Math.floor(limit))).map((s) => structuredClone(s));
+  }
+  async claimDomain(s: DomainState): Promise<"created" | "exists" | "conflict"> {
+    const cur = this.m.get(s.domainId);
+    if (!cur) { this.m.set(s.domainId, structuredClone(s)); return "created"; }
+    return cur.accountId === s.accountId ? "exists" : "conflict";
+  }
+  async setMonitorSub(accountId: string, id: string, active: boolean, now: number, intervalMs?: number): Promise<"changed" | "unchanged" | "missing"> {
+    const cur = this.m.get(id);
+    if (!cur || cur.accountId !== accountId) return "missing";
+    if (cur.monitor.active === active) return "unchanged";
+    cur.monitor = { active, intervalMs: intervalMs ?? cur.monitor.intervalMs, nextScanAt: active ? now : undefined }; return "changed";
+  }
+  async anonymise(accountId: string) { let n = 0; for (const [k, s] of this.m) if (s.accountId === accountId) { this.m.delete(k); n++; } return n; }
 }
 export interface ZoneProvider { zoneFor(domain: string): DnsWriter | undefined }
 export interface Ctx { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider; now: () => number }
