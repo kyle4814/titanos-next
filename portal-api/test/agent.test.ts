@@ -51,7 +51,7 @@ test("mcp: initialize, notifications get 202, unknown method -32601, batch and m
   assert.equal((await h.j(await rpc(h, a.key, "nope"))).error.code, -32601);
   const batch = await h.j(await h.req("POST", "/mcp", { token: a.key, body: [{ jsonrpc: "2.0", id: 1, method: "ping" }] }));
   assert.equal(batch.error.code, -32600);
-  const raw = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${a.key}` }, body: "{not json" }), {}, h.deps);
+  const raw = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${a.key}`, "content-type": "application/json" }, body: "{not json" }), {}, h.deps);
   assert.equal((await raw.json() as any).error.code, -32700); assert.equal(raw.status, 400);
 });
 
@@ -239,7 +239,7 @@ test("mcp 422: a request with no id (notification-shaped call) gets id null; an 
   await call(h, a.key, "catalogue_list", {}, hd);
   const r = await h.req("POST", "/mcp", { token: a.key, body: { jsonrpc: "2.0", method: "tools/call", params: { name: "credits_balance", arguments: {} } }, headers: hd });
   assert.equal(r.status, 422); envelope(await h.j(r), null);
-  const raw = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${a.key}` }, body: "{not json" }), {}, h.deps);
+  const raw = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${a.key}`, "content-type": "application/json" }, body: "{not json" }), {}, h.deps);
   const b = await raw.json() as any;
   assert.equal(raw.status, 400); assert.equal(b.jsonrpc, "2.0"); assert.strictEqual(b.id, null); assert.equal(b.error.code, -32700);
 });
@@ -362,4 +362,40 @@ test("credits: unpaid completed does not burn the event; async_payment_succeeded
   assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }, { id: "evt_ok" }))).result, "duplicate");
   assert.equal((await h.j(await h.webhook("checkout.session.async_payment_succeeded", { id: order.checkoutId, payment_status: "paid" }))).result, "ignored", "already fulfilled, new event id");
   assert.equal(await h.store.creditBalance(a.accountId), order.credits);
+});
+
+// F43: pre-parse rejections on /mcp are JSON-RPC 2.0 errors (id null, same HTTP status, data.status); REST stays plain {error}.
+const rawMcp = (h: H, key: string, body: string, ct: string | null = "application/json") =>
+  handle(new Request("https://api.test/mcp", { method: "POST", headers: { authorization: `Bearer ${key}`, ...(ct === null ? {} : { "content-type": ct }) }, body: ct === null ? new TextEncoder().encode(body) : body }), {}, h.deps);
+const preParse = (b: any, code: number, status: number, msg: string) => {
+  assert.deepEqual(Object.keys(b).sort(), ["error", "id", "jsonrpc"]);
+  assert.equal(b.jsonrpc, "2.0"); assert.strictEqual(b.id, null);
+  assert.equal(b.error.code, code); assert.equal(b.error.message, msg); assert.equal(b.error.data.status, status);
+  assert.ok(!/\bat \S+:\d+|stack|Error:|tk_|sk_|whsec|secret/i.test(JSON.stringify(b)), "no secret or stack text");
+};
+test("mcp 413: an oversize body is HTTP 413 with a JSON-RPC -32600 envelope, id null, data.status 413", async () => {
+  const h = make(); const a = await agent(h);
+  const r = await rawMcp(h, a.key, JSON.stringify({ jsonrpc: "2.0", id: 1, method: "ping", params: { pad: "x".repeat(70_000) } }));
+  assert.equal(r.status, 413); preParse(await r.json(), -32600, 413, "body_too_large");
+});
+test("mcp: empty body and malformed JSON are HTTP 400 with JSON-RPC -32700, id null", async () => {
+  const h = make(); const a = await agent(h);
+  for (const bad of ["", "{not json", "{\"jsonrpc\":"]) { const r = await rawMcp(h, a.key, bad); assert.equal(r.status, 400, bad); preParse(await r.json(), -32700, 400, "parse_error"); }
+});
+test("mcp: a wrong content-type is HTTP 415 with JSON-RPC -32600, id null; application/json variants still pass", async () => {
+  const h = make(); const a = await agent(h);
+  const ok = JSON.stringify({ jsonrpc: "2.0", id: 7, method: "ping" });
+  for (const ct of ["text/plain", "application/x-www-form-urlencoded", "text/plain;charset=UTF-8", "application/jsonx"]) { const r = await rawMcp(h, a.key, ok, ct); assert.equal(r.status, 415, ct); preParse(await r.json(), -32600, 415, "unsupported_media_type"); }
+  for (const ct of ["application/json", "application/json; charset=utf-8", "Application/JSON", "application/vnd.api+json", null]) { const r = await rawMcp(h, a.key, ok, ct); assert.equal(r.status, 200, String(ct)); assert.equal((await r.json() as any).id, 7); }
+});
+test("mcp: unauthenticated stays 401 before any body or content-type check; a valid call is unchanged", async () => {
+  const h = make(); const a = await agent(h);
+  const r = await handle(new Request("https://api.test/mcp", { method: "POST", headers: { "content-type": "text/plain" }, body: "x".repeat(70_000) }), {}, h.deps);
+  assert.equal(r.status, 401);
+  const v = await rpc(h, a.key, "ping"); assert.equal(v.status, 200); const b = await h.j(v); assert.equal(b.jsonrpc, "2.0"); assert.ok(!b.error);
+});
+test("rest: an oversize body on a REST route is still HTTP 413 with the plain {error} body", async () => {
+  const h = make();
+  const r = await h.req("POST", "/auth/request", { body: { email: "x".repeat(70_000) + "@a.com" } });
+  assert.equal(r.status, 413); assert.deepEqual(await h.j(r), { error: "body_too_large" });
 });

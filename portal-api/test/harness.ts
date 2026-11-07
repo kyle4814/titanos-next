@@ -13,7 +13,7 @@ export function make() {
   const store = new MemoryStore(), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
   const deps: Deps = { store, billing, dns, mailer, now: () => clock.t, siteOrigin: "https://titanos.tech", webhookSecret: SECRET, receiptSecret: RECEIPT_SECRET, model };
   const req = (method: string, path: string, opts: { token?: string; body?: unknown; headers?: Record<string, string> } = {}) =>
-    handle(new Request("https://api.test" + path, { method, headers: { ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}), ...(opts.headers ?? {}) }, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) }), { TITANOS_SITE_ORIGIN: "https://titanos.tech" }, deps);
+    handle(new Request("https://api.test" + path, { method, headers: { ...(opts.body === undefined ? {} : { "content-type": "application/json" }), ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}), ...(opts.headers ?? {}) }, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) }), { TITANOS_SITE_ORIGIN: "https://titanos.tech" }, deps);
   const j = async (r: Response) => (await r.json()) as any;
   async function login(email: string) {
     await req("POST", "/auth/request", { body: { email } });
