@@ -68,8 +68,8 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     want("R1", r.scanned === 0 && r.repaired === 0 && r.skipped === 0 && r.errors.length === 0, `empty store must report zeros, got ${JSON.stringify(r)}`); }
 
   // R2 crash-after-claim at each step of markPaid: reconcilable ones are repaired exactly once; early ones are pinned as unrepairable
-  // f236: markPaid claims pending -> paid FIRST (casPurchase), so a crash there leaves the row pending (unrepairable, pinned) and a crash at the later putPurchase leaves a PAID row with no invoice (repairable).
-  const steps: [string, boolean][] = [["casPurchase", false], ["putPurchase", true], ["putAccount", true], ["nextInvoiceNumber", true], ["putInvoiceOnce", true]];
+  // f236: markPaid claims pending -> paid FIRST (casPurchase), so a crash there leaves the row pending (unrepairable, pinned) and a crash at the later takeFacts (f238: markPaid no longer writes the purchase again after its claim) leaves a PAID row with no invoice (repairable).
+  const steps: [string, boolean][] = [["casPurchase", false], ["takeFacts", true], ["putAccount", true], ["nextInvoiceNumber", true], ["putInvoiceOnce", true]];
   let n = 100;
   for (const [step, repairable] of steps) {
     n++; const { open } = world(m, kind), base = open(); await seedPending(base, n);

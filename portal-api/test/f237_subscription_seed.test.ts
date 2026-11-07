@@ -56,7 +56,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   const count = async (s: any) => ({ subs: (await s.subscriptionsFor("acc1")).length, inv: (await s.invoicesFor("acc1")).length });
 
   // S1 crash between the claim and the subscription seed: the winner dies, the sweep completes it. Exactly one subscription and one invoice, built from the session.
-  for (const crashPoint of ["putSubscription", "putInvoiceOnce", "putPurchase"]) {
+  for (const crashPoint of ["putSubscription", "putInvoiceOnce", "takeFacts"]) {
     const { open } = world(m, kind), s0 = open(); await seed(s0);
     const d = D(m, crashAt(s0, crashPoint));
     let threw = false; try { await m.svc.markPaid(d, { ...(await s0.purchaseById("pur1")) }, o, "evt1"); } catch { threw = true; }

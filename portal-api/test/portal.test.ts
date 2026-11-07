@@ -220,7 +220,7 @@ test("refund: day 15, deliverable issued, monitor, leads and retainers all go to
   const ps = [...h.store.purchases.values()];
   const pay = async (p: typeof ps[number], sub: boolean) => h.webhook("checkout.session.completed", { id: p.checkoutId, payment_status: "paid", payment_intent: `pi_${p.id}`, ...(sub ? { subscription: `sub_${p.id}` } : {}) });
   await pay(ps[0], false); await pay(ps[1], false); await pay(ps[2], true); await pay(ps[3], false); await pay(ps[4], true);
-  ps[1].deliverableIssued = true;
+  (await h.store.purchaseById(ps[1].id))!.deliverableIssued = true; // f238: the store holds its own copy after the CAS claim
   h.clock.t += 15 * DAY;
   const reasons: string[] = [];
   for (const p of ps) { const r = await h.j(await h.req("POST", "/refunds", { token: a.session, body: { purchaseId: p.id } })); assert.equal(r.status, "needs_review"); reasons.push(r.reason); }

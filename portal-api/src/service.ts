@@ -107,8 +107,13 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   if (ev.type === "charge.refunded") {
     const pi = String(o.payment_intent ?? ""), pur = pi ? await d.store.purchaseByPaymentIntent(pi) : undefined;
     if (!pi) return "ignored";
-    if (!pur) { await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) }); return "handled"; } // refund before its payment: held, reconciled by markPaid
-    applyRefund(pur, Number(o.amount_refunded ?? 0)); await d.store.putPurchase(pur);
+    if (!pur) { // refund before its payment: held, reconciled by markPaid
+      await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) });
+      const late = await d.store.purchaseByPaymentIntent(pi); // f238: the claim may have landed between the lookup and the hold, after markPaid's takeFacts: re-check and drain
+      if (late) for (const f of await d.store.takeFacts(`pi:${pi}`)) await recordRefund(d, late.id, Number(f.cents));
+      return "handled";
+    }
+    await recordRefund(d, pur.id, Number(o.amount_refunded ?? 0));
     return "handled";
   }
   if (ev.type === "invoice.paid" && o.subscription && (o.billing_reason === "subscription_cycle" || o.billing_reason === "subscription_create")) {
@@ -141,6 +146,19 @@ function applyRefund(pur: Purchase, cents: number) {
   pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
   if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
 }
+// f238: a refund is a compare-and-set from the status just read, never a blind put. paid -> refunded (and cancelled -> refunded when money moved, i.e. a payment intent exists);
+// pending / abandoned never took money, so a refund signal leaves them alone. A lost CAS re-reads and retries on the fresh row; a replay or a row already at the target changes nothing (no-op, stored row returned).
+// markPaid never writes the purchase after its claim, so it can no longer erase a refund back to paid, and a late write can never revive refunded.
+export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, cents: number): Promise<Purchase | undefined> {
+  for (let i = 0; i < 5; i++) {
+    const cur = await d.store.purchaseById(purchaseId);
+    if (!cur || !(cur.status === "paid" || cur.status === "refunded" || (cur.status === "cancelled" && cur.paymentIntent))) return cur;
+    const next: Purchase = { ...cur }; applyRefund(next, cents);
+    if (next.refundedCents === cur.refundedCents && next.status === cur.status) return cur;
+    if (await d.store.casPurchase(next, cur.status)) return next;
+  }
+  return d.store.purchaseById(purchaseId);
+}
 // f236: the pending -> paid transition is a compare-and-set that runs FIRST. Whoever wins it (webhook or the f210 sweep) runs the side effects (takeFacts, seeds, account, invoice) exactly once;
 // the loser is a no-op and returns the winner's purchase. `pur` is never mutated before the win (MemoryStore hands out live objects), and is brought up to date after it.
 export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string): Promise<{ won: boolean; purchase: Purchase }> {
@@ -150,8 +168,8 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
   if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
   Object.assign(pur, claim);
   if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
-  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
-  await d.store.putPurchase(pur);
+  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
+  Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
   if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
   await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
   return { won: true, purchase: pur };
@@ -271,7 +289,7 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
     return { status: "needs_review" as const, reason: v.reason, refundId: rc.id, caseStatus: rc.status, card };
   }
   await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
-  pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
+  await recordRefund(d, pur.id, pur.amountCents); // f238: paid -> refunded by CAS; a webhook that got there first makes this a no-op
   return { status: "refunded" as const, amountCents: pur.amountCents };
 }
 
