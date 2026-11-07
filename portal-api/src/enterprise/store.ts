@@ -14,10 +14,10 @@ export interface EntStore {
   removeAccount(accountId: string): Promise<void>;
   putInvite(i: Invite): Promise<void>;
   invitesForEmail(email: string, now: number): Promise<Invite[]>;
-  inviteById(id: string): Promise<Invite | undefined>;
+  inviteById(id: string, tenantId?: string): Promise<Invite | undefined>;   // tenantId optional: when given, another tenant's invite is invisible
   invitesOf(tenantId: string): Promise<Invite[]>;
   partnerByRefCode(code: string): Promise<Tenant | undefined>;
-  deleteInvite(id: string): Promise<void>;
+  deleteInvite(id: string, tenantId?: string): Promise<void>;
   deleteInvitesBy(accountId: string, tenantId?: string): Promise<void>;
   putAsset(a: Asset): Promise<void>;
   assetsOf(tenantId: string): Promise<Asset[]>;
@@ -45,8 +45,8 @@ export interface EntStore {
   reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }): Promise<Payout | undefined>;
   putPayout(p: Payout): Promise<void>;
   // ATOMIC compare-and-set on status; undefined when the payout is not in `from` (a D1 adapter: UPDATE ... WHERE status = ?)
-  transitionPayout(id: string, from: Payout["status"], to: Payout["status"]): Promise<Payout | undefined>;
-  payoutById(id: string): Promise<Payout | undefined>;
+  transitionPayout(id: string, from: Payout["status"], to: Payout["status"], partnerId?: string): Promise<Payout | undefined>;
+  payoutById(id: string, partnerId?: string): Promise<Payout | undefined>;
   payoutsOf(partnerId: string): Promise<Payout[]>;
   noteFailure(where: string, detail: string, at: number): Promise<void>;
   failures(): Promise<{ where: string; detail: string; at: number }[]>;
@@ -78,23 +78,23 @@ export class MemoryEntStore implements EntStore {
     this.members = this.members.filter((m) => m.accountId !== a); this.referrals.delete(a);
     await this.deleteInvitesBy(a);
   }
-  async putInvite(i: Invite) { this.invites.set(i.id, i); }
+  async putInvite(i: Invite) { const x = this.invites.get(i.id); if (x && x.tenantId !== i.tenantId) return; this.invites.set(i.id, i); } // never overwrites another tenant's row
   async invitesForEmail(e: string, now: number) { return [...this.invites.values()].filter((i) => i.email === e && i.expiresAt > now); }
-  async inviteById(id: string) { return this.invites.get(id); }
+  async inviteById(id: string, t?: string) { const i = this.invites.get(id); return i && (!t || i.tenantId === t) ? i : undefined; }
   async invitesOf(t: string) { return [...this.invites.values()].filter((i) => i.tenantId === t); }
   async partnerByRefCode(code: string) { return [...this.tenants.values()].find((t) => t.kind === "partner" && t.refCode === code && !t.deletedAt); }
-  async deleteInvite(id: string) { this.invites.delete(id); }
+  async deleteInvite(id: string, t?: string) { const i = this.invites.get(id); if (i && (!t || i.tenantId === t)) this.invites.delete(id); }
   async deleteInvitesBy(a: string, t?: string) { for (const [k, i] of this.invites) if (i.invitedBy === a && (!t || i.tenantId === t)) this.invites.delete(k); }
-  async putAsset(a: Asset) { this.assets.set(a.id, a); }
+  async putAsset(a: Asset) { const x = this.assets.get(a.id); if (x && x.tenantId !== a.tenantId) return; this.assets.set(a.id, a); } // never overwrites another tenant's row
   async assetsOf(t: string) { return [...this.assets.values()].filter((a) => a.tenantId === t); }
   async assetOf(t: string, id: string) { const a = this.assets.get(id); return a && a.tenantId === t ? a : undefined; }
   async verifiedAssetOwner(domain: string) { return [...this.assets.values()].find((a) => a.domain === domain && a.verifiedAt); }
   async deleteAsset(t: string, id: string) { const a = this.assets.get(id); if (a && a.tenantId === t) this.assets.delete(id); }
   async putSso(c: SsoConfig) { this.sso.set(c.tenantId, c); }
   async ssoOf(t: string) { return this.sso.get(t); }
-  async putSsoState(s: SsoState) { this.states.set(s.hash, s); }
+  async putSsoState(s: SsoState) { const x = this.states.get(s.hash); if (x && x.tenantId !== s.tenantId) return; this.states.set(s.hash, s); } // never overwrites another tenant's state
   async openSsoStates(t: string, now: number, key?: string) {
-    for (const [k, s] of this.states) if (s.used || s.expiresAt <= now) this.states.delete(k);
+    for (const [k, s] of this.states) if (s.tenantId === t && (s.used || s.expiresAt <= now)) this.states.delete(k);  // purges only this tenant's dead states
     return [...this.states.values()].filter((s) => s.tenantId === t && (!key || s.clientKey === key)).length;
   }
   async setEnforcement(t: string, enabled: boolean) { const x = this.tenants.get(t); if (x) this.tenants.set(t, { ...x, ssoEnforced: enabled }); }
@@ -114,12 +114,13 @@ export class MemoryEntStore implements EntStore {
     const avail = availableCents([...this.ledger.values()].filter((e) => e.partnerId === partnerId), now);
     if (avail < minCents) return undefined;
     const { payout, entry } = make(avail);
+    if (payout.partnerId !== partnerId || entry.partnerId !== partnerId || entry.amountCents !== -payout.amountCents || payout.amountCents !== avail || entry.payoutId !== payout.id) throw new Error("reserve_mismatch");
     this.payouts.set(payout.id, payout); this.ledger.set(entry.id, entry);
     return payout;
   }
-  async putPayout(p: Payout) { this.payouts.set(p.id, p); }
-  async transitionPayout(id: string, from: Payout["status"], to: Payout["status"]) { const p = this.payouts.get(id); if (!p || p.status !== from) return undefined; p.status = to; return p; }
-  async payoutById(id: string) { return this.payouts.get(id); }
+  async putPayout(p: Payout) { const x = this.payouts.get(p.id); if (x && x.partnerId !== p.partnerId) return; this.payouts.set(p.id, p); }
+  async transitionPayout(id: string, from: Payout["status"], to: Payout["status"], partnerId?: string) { const p = this.payouts.get(id); if (!p || p.status !== from || (partnerId && p.partnerId !== partnerId)) return undefined; p.status = to; return p; }
+  async payoutById(id: string, partnerId?: string) { const p = this.payouts.get(id); return p && (!partnerId || p.partnerId === partnerId) ? p : undefined; }
   async payoutsOf(p: string) { return [...this.payouts.values()].filter((x) => x.partnerId === p); }
   async noteFailure(where: string, detail: string, at: number) { this.fails.push({ where, detail, at }); }
   async failures() { return this.fails; }

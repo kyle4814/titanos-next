@@ -9,7 +9,7 @@ const DAY = 86_400_000;
 
 // ---------- provisioning ----------
 test("provision: needs the operator secret; wrong or missing secret looks like a 404", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   await h.login("boss@bigco.com.au");
   const body = { kind: "enterprise", name: "BigCo", slug: "bigco", adminEmail: "boss@bigco.com.au" };
   assert.equal((await h.ireq("/internal/tenants/provision", body, null)).status, 404);
@@ -17,7 +17,7 @@ test("provision: needs the operator secret; wrong or missing secret looks like a
   assert.equal((await h.ireq("/internal/tenants/provision", body, INTERNAL)).status, 201);
 });
 test("provision: admin must have signed in first; slug unique and not reserved; no HTML in names", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const r = await h.ireq("/internal/tenants/provision", { kind: "enterprise", name: "X", slug: "xcorp", adminEmail: "ghost@x.com.au" });
   assert.equal((await h.j(r)).error, "admin_must_sign_in_first");
   await h.login("a@x.com.au");
@@ -28,7 +28,7 @@ test("provision: admin must have signed in first; slug unique and not reserved; 
   assert.equal((await h.ireq("/internal/tenants/provision", { kind: "enterprise", name: "Y", slug: "xcorp", adminEmail: "a@x.com.au" })).status, 409);
 });
 test("enterprise routes fail closed (503) when the Worker has no enterprise context", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   delete (h.deps as any).ent;
   const u = await h.login("a@b.com.au");
   assert.equal((await h.req("GET", "/tenants", { token: u.session })).status, 503);
@@ -36,7 +36,7 @@ test("enterprise routes fail closed (503) when the Worker has no enterprise cont
 
 // ---------- estate ----------
 test("estate: assets need TXT proof; only verified assets are assessed; data is labelled SYNTHETIC", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "ciso@bigco.com.au", "BigCo", "bigco");
   const tid = o.tenant.id;
   const a1 = await h.addVerifiedAsset(o.session, tid, "bigco.com.au", "HQ site");
@@ -54,7 +54,7 @@ test("estate: assets need TXT proof; only verified assets are assessed; data is 
   assert.equal(est.totals.averageScore, ver.score);
 });
 test("estate: a domain verified by one tenant cannot be claimed by another or by a personal account", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const a = await h.provision("enterprise", "a@one.com.au", "One", "one");
   const b = await h.provision("enterprise", "b@two.com.au", "Two", "two");
   await h.addVerifiedAsset(a.session, a.tenant.id, "shared.com.au");
@@ -67,14 +67,14 @@ test("estate: a domain verified by one tenant cannot be claimed by another or by
   assert.equal(r2.error, "domain_already_verified_by_another_account");
 });
 test("estate: TXT value must match; another tenant's token does not verify my asset", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const a = await h.provision("enterprise", "a@one.com.au", "One", "one");
   const asset = await h.j(await h.req("POST", `/enterprise/${a.tenant.id}/assets`, { token: a.session, body: { domain: "mine.com.au" } }));
   h.dns.zone[asset.record.name] = ["titanos-verify=not_the_token"];
   assert.equal((await h.j(await h.req("POST", `/enterprise/${a.tenant.id}/assets/${asset.id}/verify`, { token: a.session }))).error, "txt_record_not_found");
 });
 test("estate CSV: analyst and up only; formula injection is neutralised", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "ciso@bigco.com.au", "BigCo", "bigco");
   const tid = o.tenant.id;
   await h.j(await h.req("POST", `/enterprise/${tid}/assets`, { token: o.session, body: { domain: "evil.bigco.com.au", label: "=HYPERLINK(1)" } }));
@@ -92,7 +92,7 @@ test("estate CSV: analyst and up only; formula injection is neutralised", async 
 
 // ---------- members and roles ----------
 test("members: invite is bound to the email; another account cannot accept it; single use; expiry", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "ciso@bigco.com.au", "BigCo", "bigco");
   const tid = o.tenant.id;
   const inv = await h.post(o.session, `/enterprise/${tid}/members`, { email: "new@bigco.com.au", role: "analyst" });
@@ -108,7 +108,7 @@ test("members: invite is bound to the email; another account cannot accept it; s
   assert.equal((await h.req("POST", `/invites/${inv2.id}/accept`, { token: l.session })).status, 404, "expired");
 });
 test("members: the last admin cannot be demoted or removed; an analyst cannot change roles", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "ciso@bigco.com.au", "BigCo", "bigco");
   const tid = o.tenant.id;
   const me = o.tenant;
@@ -127,7 +127,7 @@ test("members: the last admin cannot be demoted or removed; an analyst cannot ch
 
 // ---------- SSO ----------
 async function ssoWorld() {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "ciso@bigco.com.au", "BigCo", "bigco");
   const tid = o.tenant.id;
   await h.addVerifiedAsset(o.session, tid, "bigco.com.au");
@@ -189,7 +189,7 @@ test("sso: state is single use, expires, and the email domain must be an allowed
   assert.equal((await h.req("POST", "/sso/callback", { body: { state: st.state, nonce: st.nonce, id_token: tok } })).status, 401, "expired state");
 });
 test("sso: unknown slug and unconfigured tenant look the same; an open-state cap stops a flood", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   await h.provision("enterprise", "a@x.com.au", "X", "xcorp");
   assert.equal((await h.req("POST", "/sso/nope/start")).status, 404);
   assert.equal((await h.req("POST", "/sso/xcorp/start")).status, 404);
@@ -227,7 +227,7 @@ test("sso: SSO sessions last 8 hours, not 30 days", async () => {
 
 // ---------- partner: sub-portals, brand, consent ----------
 async function partnerWorld() {
-  const h = makeEnt();
+  const h = await makeEnt();
   const p = await h.provision("partner", "boss@msp.com.au", "Acme MSP", "acme-msp", { termsAccepted: true, payoutAccount: "acct_fixture_1" });
   const c = await h.login("owner@client.com.au");
   const portal = await h.post(p.session, `/partners/${p.tenant.id}/portals`, { name: "Client Pty", slug: "client-pty", clientAdminEmail: "owner@client.com.au", brand: { name: "Acme Secure", colour: "#112233", tagline: "Protected by Acme" } });
@@ -250,7 +250,7 @@ test("partner: sub-portal is its own tenant, the partner sees metadata only unti
   assert.equal((await h.req("GET", `/partners/${pid}/portals/${cid}/estate`, { token: p.session })).status, 404);
 });
 test("partner: a sub-portal needs accepted partner terms; clients cannot create portals (single level)", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const p = await h.provision("partner", "boss@msp.com.au", "No Terms MSP", "no-terms");
   const r = await h.j(await h.req("POST", `/partners/${p.tenant.id}/portals`, { token: p.session, body: { name: "C", slug: "ccc", clientAdminEmail: "c@c.com.au" } }));
   assert.equal(r.error, "partner_terms_not_accepted");
@@ -361,6 +361,16 @@ test("share: a partner's own member earns nothing for the partner (no self-deali
   await h.pay("leads_starter");
   assert.equal((await h.req("POST", "/referrals/claim", { token: late.session, body: { code } })).status, 409, "referral after a purchase");
 });
+test("share (EntD1 backfill): a referred customer who later joins the partner's own staff earns the partner nothing (referral path self-dealing)", async () => {
+  const { h, p } = await paidWorld();
+  const nu = await h.login("later.staff@shop.com.au");
+  assert.equal((await h.req("POST", "/referrals/claim", { token: nu.session, body: { code: p.tenant.refCode } })).status, 200);
+  const inv = await h.post(p.session, `/enterprise/${p.tenant.id}/members`, { email: "later.staff@shop.com.au", role: "viewer" });
+  assert.equal((await h.req("POST", `/invites/${inv.id}/accept`, { token: nu.session })).status, 200);
+  await h.req("POST", "/checkout", { token: nu.session, body: { product: "leads_growth" } });
+  await h.pay("leads_growth");
+  assert.equal((await h.get(p.session, `/partners/${p.tenant.id}/ledger`)).entries.length, 0, "own staff never earn the partner a commission, even via an earlier referral");
+});
 test("share: tiers raise the rate for later invoices only, and the rate table is versioned on every entry", async () => {
   const rates = { version: "v2-test", baseBps: 3000, tiers: [{ minActive: 2, bps: 4000 }] };
   assert.deepEqual(rateFor(rates, 1), { bps: 3000, version: "v2-test" });
@@ -433,7 +443,7 @@ test("payout: above the threshold waits for Kyle (GATE1); approve pays once; rej
   assert.ok((await h.get(p.session, `/partners/${pid}/ledger`)).availableCents > 0, "balance restored");
 });
 test("payout: needs accepted terms and a payout account set by the operator; statements say they are not tax invoices", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const p = await h.provision("partner", "boss@msp.com.au", "NoAcct MSP", "noacct", { termsAccepted: true });
   assert.equal((await h.j(await h.req("POST", `/partners/${p.tenant.id}/payouts`, { token: p.session }))).error, "payout_account_missing");
   const st = await (await h.req("GET", `/partners/${p.tenant.id}/statement?month=2026-11`, { token: p.session })).text();
@@ -465,7 +475,7 @@ test("account deletion drops memberships and the referral; export lists the tena
 
 // ---------- savings calculator ----------
 test("savings: arithmetic on the visitor's own inputs, labelled MODELLED, rejects out-of-range inputs", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const ok = await h.j(await h.req("POST", "/savings", { body: { manualHoursPerWeek: 20, hourlyRateAud: 80, automatedSharePct: 50, incidentsPerYear: 2, avgIncidentCostAud: 10000, incidentReductionPct: 25 } }));
   assert.equal(ok.hoursGivenBackPerYear, 520);
   assert.equal(ok.labourValueAud, 41_600);
@@ -500,11 +510,11 @@ test("F1: SSO trust cannot outlive the domain proof (asset removed, then verifie
 test("F1b: even with a stale allow-list entry, a login needs a currently verified asset for the email domain", async () => {
   const { h, tid, cfg } = await ssoWorld();
   const st = (h.deps.ent as any).store;
-  for (const a of [...st.assets.values()]) if (a.tenantId === tid) delete a.verifiedAt;   // proof lost behind the service's back
+  for (const a of await st.assetsOf(tid)) await st.putAsset({ ...a, verifiedAt: undefined });   // proof lost behind the service's back
   assert.equal((await h.ssoLogin("bigco", cfg, "a@bigco.com.au")).res.status, 403);
 });
 test("F2: a removed or demoted admin's pending invites die with them; invites can be revoked; an invite from a no-longer-admin inviter is refused", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const boss = await h.provision("enterprise", "boss@bigco.com.au", "BigCo", "bigco");
   const tid = boss.tenant.id;
   const evilInv = await h.post(boss.session, `/enterprise/${tid}/members`, { email: "evil@bigco.com.au", role: "admin" });
@@ -523,7 +533,7 @@ test("F2: a removed or demoted admin's pending invites die with them; invites ca
   assert.equal((await h.req("DELETE", `/enterprise/ten_00000000000000ff/invites/${inv.id}`, { token: boss.session })).status, 404);
 });
 test("F2b: a second admin's invite stops working if that admin is demoted before it is accepted", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const boss = await h.provision("enterprise", "boss@bigco.com.au", "BigCo", "bigco");
   const tid = boss.tenant.id;
   const i1 = await h.post(boss.session, `/enterprise/${tid}/members`, { email: "two@bigco.com.au", role: "admin" });
@@ -570,7 +580,7 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   assert.equal(await start("198.51.100.4"), 200, "everyone else still gets in");
   h.clock.t += 11 * 60_000;
   assert.equal(await start("203.0.113.9"), 200, "expired states no longer count");
-  assert.ok((h.deps.ent as any).store.states.size <= 2, "expired states were purged");
+  assert.ok((await (h.deps.ent as any).store.openSsoStates(tid, h.clock.t)) <= 2, "expired states were purged");
   // break-glass
   const inv = await h.post(o.session, `/enterprise/${tid}/members`, { email: "root@bigco.com.au", role: "admin" });
   const s1 = await h.ssoLogin("bigco", cfg, "root@bigco.com.au");
@@ -582,7 +592,7 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   assert.equal((await h.req("GET", `/enterprise/${tid}/estate`, { token: o.session })).status, 200);
 });
 test("F6: pending invites per tenant are capped", async () => {
-  const h = makeEnt();
+  const h = await makeEnt();
   const o = await h.provision("enterprise", "boss@bigco.com.au", "BigCo", "bigco");
   let last = 0;
   for (let i = 0; i < 101; i++) last = (await h.req("POST", `/enterprise/${o.tenant.id}/members`, { token: o.session, body: { email: `u${i}@x.com.au`, role: "viewer" } })).status;
