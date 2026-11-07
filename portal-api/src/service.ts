@@ -188,13 +188,24 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
     if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
     Object.assign(pur, claim);
-    if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
+    if (o.subscription) {
+      // f245: the winner writes ONCE. A winner that stalled past LEASE_MS may find the f237 sweep has already seeded the row (the lease expired, the sweep proceeded): an upsert here would overwrite the sweep's row. putSubscriptionOnce
+      // leaves it alone (the sweep's row stands, and its own invoice path dedups on the purchase), and the only thing this winner took that the sweep may not have is the held cancel, which is merged onto the sweep's row.
+      const sub = await buildSubscription(d, pur, o.subscription, now);
+      if (await d.store.putSubscriptionOnce(sub)) await replayLateFacts(d, sub); // f245: a hold written during the winner window (after buildSubscription's takeFacts) is replayed onto the landed row
+      else await mergeLostSeed(d, sub);
+    }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
     Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
     if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
     await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
     return { won: true, purchase: pur };
   } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
+}
+// f245: the winner lost putSubscriptionOnce to a sweep that seeded after the TTL. The sweep's row stands; a cancel this winner took from the held facts (and the sweep never saw) is carried onto it.
+async function mergeLostSeed(d: Pick<Deps, "store">, mine: Subscription) {
+  const theirs = await d.store.subscriptionByPurchase(mine.purchaseId);
+  if (theirs && mine.cancelledAt && !theirs.cancelledAt) await d.store.putSubscription({ ...theirs, cancelledAt: mine.cancelledAt });
 }
 // f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
 export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, sub: Subscription): Promise<boolean> {

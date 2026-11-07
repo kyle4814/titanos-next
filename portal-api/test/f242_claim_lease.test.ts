@@ -28,8 +28,8 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
 }
 type Kind = "memory" | "d1";
 function world(m: Mods, kind: Kind) {
-  const db = new FakeD1(), shared = new m.store.MemoryStore(), leases = new Map(); // D1 stores share one lease map: the in-memory stand-in for a shared lease row
-  return { open: (): any => { if (kind !== "d1") return shared; const s = new m.d1.D1PlanStore(db); s.leases = leases; return s; }, db };
+  const db = new FakeD1(), shared = new m.store.MemoryStore(); // f245: D1 leases are a real row (claim_leases), no shared map
+  return { open: (): any => { if (kind !== "d1") return shared; return new m.d1.D1PlanStore(db); }, db };
 }
 const base = { id: "pur1", accountId: "acc1", productId: "ai_growth", checkoutId: "cs_1", amountCents: 150000, deliverableIssued: false, refundedCents: 0, createdAt: T0 };
 async function seed(s: any, status: string = "pending", over: Record<string, unknown> = {}) {

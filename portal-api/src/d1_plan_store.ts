@@ -61,6 +61,14 @@ export class D1PlanStore extends MemoryStore {
       s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), n(s.plan === undefined ? undefined : JSON.stringify(s.plan)), s.purchaseId, s.id);
     return r.meta.changes === 1;
   }
+  // f245: the claim lease as a D1 row (migration 0015_claim_leases). ONE statement: insert, or on conflict take over only an EXPIRED lease (expires_at <= now) or renew our own;
+  // changes() === 1 is the win signal (a live lease held by another owner makes the DO UPDATE's WHERE false, so nothing changes and the answer is false). No read-then-write, so two Workers cannot both win.
+  override async acquireLease(key: string, owner: string, now: number, ttlMs: number) {
+    const r = await this.exec("INSERT INTO claim_leases (key, owner, expires_at) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET owner = excluded.owner, expires_at = excluded.expires_at WHERE claim_leases.expires_at <= ? OR claim_leases.owner = excluded.owner",
+      key, owner, now + ttlMs, now);
+    return r.meta.changes === 1;
+  }
+  override async releaseLease(key: string, owner: string) { await this.exec("DELETE FROM claim_leases WHERE key = ? AND owner = ?", key, owner); }
   override async subscriptionByPurchase(pid: string) { const r = await this.one("SELECT * FROM subscriptions WHERE purchase_id = ? ORDER BY rowid LIMIT 1", pid); return r && toSub(r); }
   override async paidWithoutSubscriptionBefore(cutoff: number, ids: string[]) {
     if (ids.length === 0) return [];

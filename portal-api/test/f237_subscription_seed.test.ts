@@ -29,8 +29,7 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
 type Kind = "memory" | "d1";
 function world(m: Mods, kind: Kind) {
   const db = new FakeD1(), shared = new m.store.MemoryStore();
-  const leases = new Map(); // f242: one lease table per world, shared by every D1 store instance (the in-memory stand-in for a shared lease row); this also removes a pre-existing ~1/6 flake in S4 (two unleased sweeps racing on the held cancel)
-  return { open: (): any => { if (kind !== "d1") return shared; const s = new m.d1.D1PlanStore(db); s.leases = leases; return s; }, db };
+  return { open: (): any => { if (kind !== "d1") return shared; return new m.d1.D1PlanStore(db); }, db }; // f245: the lease is a real claim_leases row on the shared FakeD1
 }
 const base = { id: "pur1", accountId: "acc1", productId: "ai_growth", checkoutId: "cs_1", amountCents: 150000, deliverableIssued: false, refundedCents: 0, createdAt: T0 };
 async function seed(s: any, status: string = "pending", over: Record<string, unknown> = {}) {
@@ -57,7 +56,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   const count = async (s: any) => ({ subs: (await s.subscriptionsFor("acc1")).length, inv: (await s.invoicesFor("acc1")).length });
 
   // S1 crash between the claim and the subscription seed: the winner dies, the sweep completes it. Exactly one subscription and one invoice, built from the session.
-  for (const crashPoint of ["putSubscription", "putInvoiceOnce", "takeFacts"]) {
+  for (const crashPoint of ["putSubscriptionOnce", "putInvoiceOnce", "takeFacts"]) {
     const { open } = world(m, kind), s0 = open(); await seed(s0);
     const d = D(m, crashAt(s0, crashPoint));
     let threw = false; try { await m.svc.markPaid(d, { ...(await s0.purchaseById("pur1")) }, o, "evt1"); } catch { threw = true; }
@@ -66,11 +65,11 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession());
     const s = open(), rep = await m.rec.reconcileSubscriptions(s, bill, NOW, GRACE);
     // the invoice step may need the f203 reconciler when the crash was after the seed: run it too (it is the existing repair for that window)
-    if (crashPoint !== "putSubscription") await m.rec.reconcile(s, NOW, GRACE); // an invoice-only crash is the f203 window; the seed crash must be fully repaired by the new sweep alone
+    if (crashPoint !== "putSubscriptionOnce") await m.rec.reconcile(s, NOW, GRACE); // an invoice-only crash is the f203 window; the seed crash must be fully repaired by the new sweep alone
     const c = await count(s); want("S1", c.subs === 1 && c.inv === 1, `S1 ${crashPoint}: expected 1 sub and 1 invoice, got ${JSON.stringify(c)} rep ${JSON.stringify(rep)}`);
     const sub = (await s.subscriptionsFor("acc1"))[0];
     want("S1", !!sub && sub.id === "sub_1" && sub.purchaseId === "pur1" && sub.productId === "ai_growth", `S1 ${crashPoint}: the row must be keyed on the purchase`);
-    if (crashPoint === "putSubscription") {
+    if (crashPoint === "putSubscriptionOnce") {
       want("S1", rep.seeded === 1, `S1 putSubscription: seeded must be 1, got ${JSON.stringify(rep)}`);
       want("S1", sub?.startedAt === T0 && !!sub?.plan, "S1 the row must carry Stripe's period and plan, as markPaid would have written it");
     }
@@ -78,7 +77,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // S2 double-run idempotence: the second run changes nothing, asks Stripe nothing, burns no invoice number
   { const { open } = world(m, kind), s0 = open(); await seed(s0);
-    await m.svc.markPaid(D(m, crashAt(s0, "putSubscription")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
+    await m.svc.markPaid(D(m, crashAt(s0, "putSubscriptionOnce")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession()); const s = open();
     await m.rec.reconcileSubscriptions(s, bill, NOW, GRACE);
     const before = JSON.stringify([await s.subscriptionsFor("acc1"), await s.invoicesFor("acc1"), await s.nextInvoiceNumber()]);
@@ -102,7 +101,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // S4 two sweeps at once, both past the existence check: one row, and the held cancel survives (the loser's write must not overwrite)
   { const { open } = world(m, kind), s0 = open(); await seed(s0);
-    await m.svc.markPaid(D(m, crashAt(s0, "putSubscription")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
+    await m.svc.markPaid(D(m, crashAt(s0, "putSubscriptionOnce")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
     await s0.holdFact("sub:sub_1", { kind: "cancel" });
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession());
     let waiting = 0; let release!: () => void; const gate = new Promise<void>((r) => (release = r));
