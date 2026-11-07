@@ -40,9 +40,10 @@ export class D1PlanStore extends MemoryStore {
       p.id, p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, n(p.createdAt));
   }
   // f236: ONE statement, UPDATE ... WHERE id = ? AND status = ?; changes === 1 means THIS call made the transition. No migration: id and status already exist.
-  override async casPurchase(p: Purchase, expected: Purchase["status"]) {
-    const r = await this.exec("UPDATE purchases SET account_id = ?, product_id = ?, domain = ?, checkout_id = ?, payment_intent = ?, subscription_id = ?, paid_at = ?, amount_cents = ?, deliverable_issued = ?, refunded_cents = ?, status = ? WHERE id = ? AND status = ?",
-      p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, p.id, expected);
+  override async casPurchase(p: Purchase, expected: Purchase["status"], expectedRefundedCents?: number) {
+    const g = expectedRefundedCents !== undefined; // f239: ... AND refunded_cents = ? when the caller read a refund total (no migration: the column exists)
+    const r = await this.exec("UPDATE purchases SET account_id = ?, product_id = ?, domain = ?, checkout_id = ?, payment_intent = ?, subscription_id = ?, paid_at = ?, amount_cents = ?, deliverable_issued = ?, refunded_cents = ?, status = ? WHERE id = ? AND status = ?" + (g ? " AND refunded_cents = ?" : ""),
+      p.accountId, p.productId, n(p.domain), p.checkoutId, n(p.paymentIntent), n(p.subscriptionId), n(p.paidAt), p.amountCents, p.deliverableIssued ? 1 : 0, p.refundedCents, p.status, p.id, expected, ...(g ? [expectedRefundedCents] : []));
     return r.meta.changes === 1;
   }
   override async purchaseById(id: string) { const r = await this.one("SELECT * FROM purchases WHERE id = ?", id); return r && toPurchase(r); }

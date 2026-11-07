@@ -134,12 +134,12 @@ for (const kind of ["memory", "d1"] as const) {
 }
 
 const MUT: { id: string; edits: [string, string, string][] }[] = [
-  { id: "M1 refund is a blind put again", edits: [["service.ts", "if (await d.store.casPurchase(next, cur.status)) return next;", "{ await d.store.putPurchase(next); return next; }"]] },
+  { id: "M1 refund is a blind put again", edits: [["service.ts", "if (await d.store.casPurchase(next, cur.status, cur.refundedCents)) return next;", "{ await d.store.putPurchase(next); return next; }"]] },
   { id: "M2 markPaid final write is a blind put again", edits: [["service.ts", "Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {});", "await d.store.putPurchase(pur);"]] },
   { id: "M3 status guard dropped (pending/abandoned refundable)", edits: [["service.ts", "if (!cur || !(cur.status === \"paid\" || cur.status === \"refunded\" || (cur.status === \"cancelled\" && cur.paymentIntent))) return cur;", "if (!cur) return cur;"]] },
   { id: "M4 no-op short-circuit dropped (replay rewrites)", edits: [["service.ts", "if (next.refundedCents === cur.refundedCents && next.status === cur.status) return cur;", ""]] },
   { id: "M5 post-hold re-check removed", edits: [["service.ts", "if (late) for (const f of", "if (false && late) for (const f of"]] },
-  { id: "M6 CAS expectation hardcoded to paid", edits: [["service.ts", "casPurchase(next, cur.status)) return next;", "casPurchase(next, \"paid\")) return next;"]] },
+  { id: "M6 CAS expectation hardcoded to paid", edits: [["service.ts", "casPurchase(next, cur.status, cur.refundedCents)) return next;", "casPurchase(next, \"paid\", cur.refundedCents)) return next;"]] },
 ];
 test(`mutation: ${MUT.length} of ${MUT.length} mutants fail the refund contract`, async () => {
   const survivors: string[] = [];

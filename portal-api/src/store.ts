@@ -30,7 +30,7 @@ export interface Store {
   putDomain(d: DomainRow): Promise<void>;
   putPurchase(p: Purchase): Promise<void>;
   // f236: compare-and-set. Writes `next` over the stored purchase ONLY IF its status is still `expected`; true = THIS call made the transition, false = lost (row moved on or is absent), nothing written.
-  casPurchase(next: Purchase, expected: Purchase["status"]): Promise<boolean>;
+  casPurchase(next: Purchase, expected: Purchase["status"], expectedRefundedCents?: number): Promise<boolean>;
   purchaseById(id: string): Promise<Purchase | undefined>;
   purchaseByCheckout(checkoutId: string): Promise<Purchase | undefined>;
   purchaseByPaymentIntent(pi: string): Promise<Purchase | undefined>;
@@ -92,8 +92,8 @@ export class MemoryStore implements Store {
   async verifiedOwnerOf(domain: string) { return [...this.domains.values()].find((d) => d.domain === domain && d.verifiedAt); }
   async putDomain(d: DomainRow) { this.domains.set(d.id, d); }
   async putPurchase(p: Purchase) { this.purchases.set(p.id, p); }
-  async casPurchase(next: Purchase, expected: Purchase["status"]) { // check and write in one synchronous step: no await between them, so two callers cannot both pass
-    const cur = this.purchases.get(next.id); if (!cur || cur.status !== expected) return false;
+  async casPurchase(next: Purchase, expected: Purchase["status"], expectedRefundedCents?: number) { // check and write in one synchronous step: no await between them, so two callers cannot both pass
+    const cur = this.purchases.get(next.id); if (!cur || cur.status !== expected || (expectedRefundedCents !== undefined && cur.refundedCents !== expectedRefundedCents)) return false; // f239: refunded_cents is part of the guard when given
     this.purchases.set(next.id, { ...next }); return true;
   }
   async purchaseById(id: string) { return this.purchases.get(id); }

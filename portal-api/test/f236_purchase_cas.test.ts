@@ -127,8 +127,8 @@ for (const kind of ["memory", "d1"] as const) {
 }
 
 const MUT: { id: string; edits: [string, string, string][] }[] = [
-  { id: "M1 d1 WHERE status guard removed", edits: [["d1_plan_store.ts", "WHERE id = ? AND status = ?\",", "WHERE id = ?\","]] },
-  { id: "M2 memory status guard removed", edits: [["store.ts", "if (!cur || cur.status !== expected) return false;", "if (!cur) return false;"]] },
+  { id: "M1 d1 WHERE status guard removed", edits: [["d1_plan_store.ts", "WHERE id = ? AND status = ?\" +", "WHERE id = ?\" +"]] },
+  { id: "M2 memory status guard removed", edits: [["store.ts", "cur.status !== expected || (expectedRefundedCents", "false || (expectedRefundedCents"]] },
   { id: "M3 d1 changes() not checked (always true)", edits: [["d1_plan_store.ts", "return r.meta.changes === 1;\n  }\n  override async purchaseById", "return true;\n  }\n  override async purchaseById"]] },
   { id: "M4 markPaid ignores a lost CAS", edits: [["service.ts", "if (!(await d.store.casPurchase(claim, \"pending\")))", "if (false && !(await d.store.casPurchase(claim, \"pending\")))"]] },
   { id: "M5 sweep abandon is a blind put again", edits: [["pending_reconciler.ts", "if (await d.store.casPurchase({ ...fresh, status: \"abandoned\" }, \"pending\")) rep.abandoned++; else rep.skipped++;", "await d.store.putPurchase({ ...fresh, status: \"abandoned\" }); rep.abandoned++;"]] },

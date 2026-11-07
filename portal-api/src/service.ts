@@ -149,15 +149,19 @@ function applyRefund(pur: Purchase, cents: number) {
 // f238: a refund is a compare-and-set from the status just read, never a blind put. paid -> refunded (and cancelled -> refunded when money moved, i.e. a payment intent exists);
 // pending / abandoned never took money, so a refund signal leaves them alone. A lost CAS re-reads and retries on the fresh row; a replay or a row already at the target changes nothing (no-op, stored row returned).
 // markPaid never writes the purchase after its claim, so it can no longer erase a refund back to paid, and a late write can never revive refunded.
+export class RefundContention extends Error { constructor(id: string) { super(`refund CAS lost ${REFUND_TRIES} times on purchase ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); } }
+const REFUND_TRIES = 8;
+// f239: the CAS guards status AND the refunded_cents just read, so two concurrent partial refunds cannot lose the smaller cumulative: the loser re-reads, re-merges (cumulative, monotone, clamped) and retries.
+// Exhausting the bounded retries throws RefundContention (a webhook fails and is re-delivered); it never returns a stale row as if the refund had landed.
 export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, cents: number): Promise<Purchase | undefined> {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < REFUND_TRIES; i++) {
     const cur = await d.store.purchaseById(purchaseId);
     if (!cur || !(cur.status === "paid" || cur.status === "refunded" || (cur.status === "cancelled" && cur.paymentIntent))) return cur;
     const next: Purchase = { ...cur }; applyRefund(next, cents);
     if (next.refundedCents === cur.refundedCents && next.status === cur.status) return cur;
-    if (await d.store.casPurchase(next, cur.status)) return next;
+    if (await d.store.casPurchase(next, cur.status, cur.refundedCents)) return next;
   }
-  return d.store.purchaseById(purchaseId);
+  throw new RefundContention(purchaseId);
 }
 // f236: the pending -> paid transition is a compare-and-set that runs FIRST. Whoever wins it (webhook or the f210 sweep) runs the side effects (takeFacts, seeds, account, invoice) exactly once;
 // the loser is a no-op and returns the winner's purchase. `pur` is never mutated before the win (MemoryStore hands out live objects), and is brought up to date after it.
