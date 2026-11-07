@@ -1,7 +1,8 @@
 // test_portal_refund_pending.mjs - f244: the billing page renders POST /refunds 503 refund_record_pending calmly, shows the
 // refundId, retries by replaying the same request, and still shows the generic error for other 5xx.
 // Run: node scripts/test_portal_refund_pending.mjs   (F244_MUTANTS=1 also runs the mutation suite)
-// F244_LIB / F244_CLIENT point the suite at a mutant copy of lib/refund.ts / app/app/billing/client.tsx.
+// Run with: node --import ./scripts/alias_loader.mjs --experimental-strip-types (portal.ts imports the "@/" alias).
+// F244_LIB / F244_CLIENT / F244_PORTAL point the suite at a mutant copy of lib/refund.ts / app/app/billing/client.tsx.
 import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, cpSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
@@ -12,6 +13,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const LIB = process.env.F244_LIB || path.join(ROOT, "lib/refund.ts");
 const CLIENT = process.env.F244_CLIENT || path.join(ROOT, "app/app/billing/client.tsx");
+const PORTAL = process.env.F244_PORTAL || path.join(ROOT, "lib/portal.ts");
 const lib = await import(pathToFileURL(LIB).href);
 const client = readFileSync(CLIENT, "utf8");
 
@@ -71,9 +73,23 @@ await t("existing outcomes unchanged: refunded, review reasons, unknown reason",
   assert.equal(r.kind, "review"); assert.match(r.text, /14-day/);
   assert.equal((await lib.submitRefund(async () => ({ status: "review", reason: "zzz" }), PUR)).text, "Sent for review.");
 });
-await t("ApiError carries the response body so refundId reaches the page", () => {
-  const p = readFileSync(path.join(ROOT, "lib/portal.ts"), "utf8");
-  assert.match(p, /body: Json \| null/); assert.match(p, /j && typeof j === "object" \? j : null/);
+await t("ApiError.body: portal.ts call() puts the JSON response body on the thrown ApiError (real import via alias loader)", async () => {
+  const portal = await import(pathToFileURL(PORTAL).href);
+  const api = (status, text) => ({ base: "http://x", storage: { getItem: () => null, setItem() {}, removeItem() {} },
+    fetchFn: async () => ({ ok: status < 400, status, text: async () => text }) });
+  const body = { error: "refund_record_pending", refundId: RF, purchaseId: PUR };
+  let err; try { await portal.call(api(503, JSON.stringify(body)), "POST", "/refunds", { purchaseId: PUR }); } catch (e) { err = e; }
+  assert.ok(err instanceof portal.ApiError); assert.equal(err.status, 503); assert.equal(err.code, "refund_record_pending");
+  assert.deepEqual(err.body, body);
+  // Real portal.ts error -> real submitRefund outcome, end to end (no hand-built apiErr).
+  const o = await lib.submitRefund(() => portal.call(api(503, JSON.stringify(body)), "POST", "/refunds", { purchaseId: PUR }), PUR);
+  assert.equal(o.kind, "pending"); assert.equal(o.refundId, RF); assert.equal(o.purchaseId, PUR);
+  // Non-JSON body and a JSON non-object body leave body null and never become pending.
+  for (const text of ["upstream down", "7", ""]) {
+    let e2; try { await portal.call(api(503, text), "POST", "/refunds", {}); } catch (e) { e2 = e; }
+    assert.equal(e2.body, null, JSON.stringify(text)); assert.equal(e2.code, "error");
+  }
+  assert.equal(typeof portal.errorText(err), "string");
 });
 await t("client copy: no em/en dashes, no AI-tell words", () => {
   const copy = [lib.PENDING_TEXT, lib.PENDING_STILL_TEXT, lib.PENDING_RETRY_LABEL, lib.REFUNDED_TEXT, ...Object.values(lib.REFUND_TEXT)].join("\n");
@@ -86,6 +102,8 @@ if (process.env.F244_MUTANTS === "1" && !process.env.F244_LIB) {
   const dir = mkdtempSync(path.join(tmpdir(), "f244-"));
   const libSrc = readFileSync(path.join(ROOT, "lib/refund.ts"), "utf8");
   const cliSrc = readFileSync(CLIENT, "utf8");
+  const portalSrc = readFileSync(PORTAL, "utf8");
+  const SRC = { lib: libSrc, cli: cliSrc, portal: portalSrc }, FILE = { lib: "refund.ts", cli: "client.tsx", portal: "portal.ts" };
   const M = [
     ["M1 lib drops the pending handler", "lib", (s) => s.replace("if (isPending(e)) {", "if (false) {")],
     ["M2 lib drops refundId", "lib", (s) => s.replace("const refundId = typeof e.body?.refundId === \"string\" ? e.body.refundId : \"\";", "const refundId = \"\";")],
@@ -94,16 +112,17 @@ if (process.env.F244_MUTANTS === "1" && !process.env.F244_LIB) {
     ["M5 page drops the pending branch", "cli", (s) => s.replace('o.kind === "pending"', "false")],
     ["M6 page never clears the notice", "cli", (s) => s.replace("setPending(null);", "")],
     ["M7 page drops the refundId line", "cli", (s) => s.replaceAll("pending.refundId", "false")],
+    ["M9 portal drops the response body from ApiError", "portal", (s) => s.replace("j && typeof j === \"object\" ? j : null", "null")],
     ["M8 retry sends a different request", "cli", (s) => s.replace("refund(pending.purchaseId, true)", "refund('other', true)")],
   ];
   let killed = 0;
   for (const [name, which, fn] of M) {
-    const out = fn(which === "lib" ? libSrc : cliSrc);
-    assert.notEqual(out, which === "lib" ? libSrc : cliSrc, `mutant did not apply: ${name}`);
-    const f = path.join(dir, which === "lib" ? "refund.ts" : "client.tsx"); writeFileSync(f, out);
+    const out = fn(SRC[which]);
+    assert.notEqual(out, SRC[which], `mutant did not apply: ${name}`);
+    const f = path.join(dir, FILE[which]); writeFileSync(f, out);
     const env = { ...process.env, F244_MUTANTS: "0" };
-    if (which === "lib") env.F244_LIB = f; else env.F244_CLIENT = f;
-    const r = spawnSync("node", [fileURLToPath(import.meta.url)], { env, encoding: "utf8" });
+    env[{ lib: "F244_LIB", cli: "F244_CLIENT", portal: "F244_PORTAL" }[which]] = f;
+    const r = spawnSync(process.execPath, [...process.execArgv, fileURLToPath(import.meta.url)], { env, encoding: "utf8" });
     if (r.status !== 0) { killed++; console.log("kill", name); } else console.log("SURVIVED", name);
   }
   rmSync(dir, { recursive: true });

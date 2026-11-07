@@ -128,3 +128,6 @@ node scripts/test_manifest_lint.mjs
 node scripts/test_restack_to_manifest.mjs
 node --test --experimental-strip-types portal-api/test/d1_store_parity.test.ts portal-api/test/d1_store_contract.test.ts
 F244_MUTANTS=1 node scripts/test_portal_refund_pending.mjs
+F244_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_portal_refund_pending.mjs
+node scripts/test_alias_loader.mjs
+ALIAS_LOADER_MUTANTS=1 node scripts/test_alias_loader.mjs
