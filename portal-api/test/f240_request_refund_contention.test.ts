@@ -90,7 +90,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     want("Q4", b.n === 1, `Q4 replay must not call Stripe again, got ${b.n} calls`);
     let code = ""; try { await m.svc.requestRefund(deps(m, open(), b), acct, "pur1"); } catch (e: any) { code = e.code ?? e.message; }
     want("Q4", code === "not_refundable_yet" && b.n === 1, `Q4 third call must be 409 not_refundable_yet with no Stripe call, got ${code} n=${b.n}`);
-    want("Q4", (await open().takeFacts("refundsent:pur1")).length === 0, "Q4 the remembered refund must be cleared once the ledger landed"); }
+    want("Q4", (await open().memoPeek("refundsent:pur1")) === undefined, "Q4 the remembered refund must be cleared once the ledger landed"); }
   return bad;
 }
 
@@ -103,7 +103,7 @@ const MUT: { id: string; edits: [string, string, string][] }[] = [
   { id: "M1 idempotency key not reused (fresh key per attempt)", edits: [["service.ts", "const key = `refund-${pur.id}`, memo", "const key = `refund-${pur.id}-${Math.random()}`, memo"]] },
   { id: "M2 RefundContention swallowed (requestRefund reports refunded)", edits: [["service.ts", "if (e instanceof RefundContention) throw new RefundRecordPending(pur.id, sent.refundId, key); throw e;", "if (e instanceof RefundContention) return { status: \"refunded\" as const, amountCents: pur.amountCents }; throw e;"]] },
   { id: "M3 refund id not carried on the error", edits: [["service.ts", "throw new RefundRecordPending(pur.id, sent.refundId, key)", "throw new RefundRecordPending(pur.id, \"\", key)"]] },
-  { id: "M4 replay ignores the remembered refund (calls Stripe again)", edits: [["service.ts", "let sent = (await d.store.takeFacts(memo))[0]", "let sent = (await d.store.takeFacts(memo), undefined)"]] },
+  { id: "M4 replay ignores the remembered refund (calls Stripe again)", edits: [["service.ts", "if (typeof cur.refundId === \"string\") { sent = cur as { refundId: string }; break; }", "if (typeof cur.refundId === \"string\") { await d.store.memoSwap(memo, cur, null); continue; }"]] },
   { id: "M5 Stripe re-called inside the retry (once per CAS attempt)", edits: [["service.ts", "try { await recordRefund(d, pur.id, pur.amountCents); }", "try { await d.billing.refund(pur.paymentIntent, 1, key); await recordRefund(d, pur.id, pur.amountCents); }"]] },
   { id: "M6 error is a bare RefundContention (not the typed pending error)", edits: [["service.ts", "throw new RefundRecordPending(pur.id, sent.refundId, key); throw e;", "throw e;"]] },
 ];
