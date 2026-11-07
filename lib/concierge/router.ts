@@ -113,13 +113,31 @@ function unmatched(raw: string, seat: Seat): Reply {
 }
 
 // Unmatched asks are logged through an interface so a Worker/D1 adapter can replace the in-memory one.
+// f301: a row is keyed by (normalised ask, askerId). A repeat by the same asker keeps firstSeenAt and moves lastSeenAt; a missing askerId is the one "anon" asker.
 export interface UnmatchedLog { append(stub: ConfigStub): void | Promise<void> }
-export class MemoryLog implements UnmatchedLog { rows: ConfigStub[] = []; append(s: ConfigStub) { this.rows.push(s); } }
+export const ANON_ASKER = "anon";
+export class MemoryLog implements UnmatchedLog {
+  rows: ConfigStub[] = [];
+  append(s: ConfigStub) {
+    const asker = s.askerId ? String(s.askerId) : ANON_ASKER, seen = s.lastSeenAt ?? s.firstSeenAt ?? null;
+    const hit = this.rows.find((r) => r.normalised === s.normalised && (r.askerId ?? ANON_ASKER) === asker);
+    if (!hit) { this.rows.push({ ...s, askerId: s.askerId ?? null, firstSeenAt: s.firstSeenAt ?? seen, lastSeenAt: seen, seenCount: 1 }); return; }
+    hit.seenCount = (hit.seenCount ?? 1) + 1;
+    if (seen !== null) {
+      if (hit.firstSeenAt == null || seen < hit.firstSeenAt) hit.firstSeenAt = seen;
+      if (hit.lastSeenAt == null || seen > hit.lastSeenAt) hit.lastSeenAt = seen;
+    }
+  }
+}
 
-export function concierge(index: Index, log: UnmatchedLog) {
-  return (ask: string, seat: Seat = "guest"): Reply => {
+// The caller supplies identity and time (this module reads no clock): opts.now() returns ISO-8601, askerId is an opaque session or account id.
+export function concierge(index: Index, log: UnmatchedLog, opts: { now?: () => string } = {}) {
+  return (ask: string, seat: Seat = "guest", askerId?: string | null): Reply => {
     const r = route(index, ask, seat);
-    if (r.kind === "unmatched") void log.append(r.configStub);
+    if (r.kind === "unmatched") {
+      const t = opts.now ? opts.now() : null;
+      void log.append({ ...r.configStub, askerId: askerId ?? null, firstSeenAt: t, lastSeenAt: t });
+    }
     return r;
   };
 }
