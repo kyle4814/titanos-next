@@ -77,7 +77,7 @@ for (const [name, fac] of [["memory", memory], ["d1", d1]] as const) {
 }
 
 // ---- D1-only: what the schema adds ----
-test("[d1] invoices.purchase_id is a foreign key: an invoice for a purchase that does not exist is refused", async () => {
+test.skip("[d1] invoices.purchase_id is a foreign key (not on the merged line: 0003_enterprise adds a plain TEXT column, SQLite cannot add the FK later)", async () => {
   const db = new FakeD1(), s = new D1PlanStore(db); await seed(s);
   await assert.rejects(() => s.putInvoice(inv({ id: "inv_fk", purchaseId: "pur_missing" })), /FOREIGN KEY/i);
 });
@@ -92,10 +92,8 @@ test("migration 0005 is additive, nullable and NOT APPLIED; the number counter i
   const sql = readFileSync(join(dir, f), "utf8");
   assert.equal(f, "0005_invoice_d1.sql"); assert.ok(/NOT applied/.test(sql));
   assert.ok(!/\b(DROP|DELETE|UPDATE)\b/i.test(sql.replace(/--.*$/gm, "")));
-  assert.ok(/ADD COLUMN purchase_id TEXT REFERENCES purchases\(id\);/.test(sql), "nullable FK column");
   assert.ok(/CREATE TABLE IF NOT EXISTS invoice_seq \(id INTEGER PRIMARY KEY CHECK \(id = 1\), n INTEGER NOT NULL\)/.test(sql), "same counter DDL as f13 0004_store_counters");
-  // merge-order rule (f189 finding): web/f16 0003_enterprise already adds invoices.purchase_id; the merge strips this one standalone line (--strip)
-  assert.equal(sql.split("\n").filter((l) => l.startsWith("ALTER TABLE invoices ADD COLUMN purchase_id")).length, 1, "the ALTER stays one strippable line");
+  assert.ok(!/ALTER TABLE invoices ADD COLUMN purchase_id/.test(sql), "0003_enterprise owns the column on this line");
   const db = new FakeD1().db;
   assert.ok((db.prepare("PRAGMA table_info(invoices)").all() as any[]).some((c) => c.name === "purchase_id" && c.notnull === 0));
 });
