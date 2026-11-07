@@ -1,7 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdtempSync, cpSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { D1PlanStore } from "../src/d1_plan_store.ts";
@@ -129,7 +128,7 @@ test(`PLANCAS mutation: ${MUT.length} of ${MUT.length} CAS mutants are killed by
   for (const mu of MUT) {
     const text = readFileSync(join(SRC, mu.file), "utf8");
     assert.equal(text.split(mu.from).length - 1, 1, `anchor must match exactly once: ${mu.id}`);
-    const dir = mkdtempSync(join(tmpdir(), "plancas_mut_"));
+    const dir = mkdtempSync(join(resolve(SRC, "../.."), ".plancas_mut_"));
     try {
       cpSync(SRC, join(dir, "src"), { recursive: true });
       writeFileSync(join(dir, "src", mu.file), text.replace(mu.from, mu.to));
