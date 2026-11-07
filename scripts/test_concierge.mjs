@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { index, shelves, questions, run, root } from "./concierge_eval.mjs";
-import { buildIndex, route, say, concierge, MemoryLog } from "../lib/concierge/router.ts";
+import { buildIndex, route, say, concierge, MemoryLog, MSG_NOT_SAVED, MSG_SAVED, MSG_JUNK } from "../lib/concierge/router.ts";
 import { PORTAL } from "../lib/concierge/portal.ts";
 import { tokens, findDomain } from "../lib/concierge/text.ts";
 
@@ -86,10 +86,10 @@ t("a bare domain routes to the scan with the slot filled", (() => { const r = ro
 
 // 7. UNMATCHED goes to the generator log with no invented price; the log is an interface.
 const log = new MemoryLog(); const ask = concierge(index, log);
-const u = ask("how do I bake sourdough", "owner");
+const u = await ask("how do I bake sourdough", "owner");
 t("unmatched is logged for the generator", u.kind === "unmatched" && log.rows.length === 1 && log.rows[0].status === "LOGGED_FOR_GENERATOR" && log.rows[0].quote === null && log.rows[0].seat === "owner");
-ask("pricing", "guest"); t("matched asks are not logged", log.rows.length === 1);
-t("an async log adapter is accepted", (() => { const rows = []; const c = concierge(index, { append: async (s) => { rows.push(s); } }); c("tell me a joke", "guest"); return true; })());
+await ask("pricing", "guest"); t("matched asks are not logged", log.rows.length === 1);
+t("an async log adapter is accepted", await (() => { const rows = []; const c = concierge(index, { append: async (s) => { rows.push(s); } }); return c("tell me a joke", "guest").then(() => rows.length === 1); })());
 
 // 8. MUTATION TESTS: break the router and the kill test must go red.
 const noKw = buildIndex(shelves.map((s) => ({ ...s, keywords: [] })));
@@ -100,7 +100,7 @@ t("MUTANT: duplicate shelf ids are refused", (() => { try { buildIndex([shelves[
 t("MUTANT: wrong seat loses the seat-only dashboard", sid(route(index, "my dashboard", "guest")) !== "portal:home-owner");
 
 // 9. COPY: every sentence the concierge can say passes the house lint, no em or en dashes.
-const lines = [...new Set([...shelves.map((s) => s.answer), "I do not have that on a shelf yet. I have logged it, and you will get a quote after review. You can also reach a person.", "Which of these is closest to what you need?"])];
+const lines = [...new Set([...shelves.map((s) => s.answer), ...[MSG_NOT_SAVED, MSG_SAVED, MSG_JUNK], "Which of these is closest to what you need?"])];
 t("no em or en dashes in any answer", lines.every((l) => !/[–—]/.test(l)));
 const tmp = fs.mkdtempSync("/tmp/concierge_lint_");
 fs.writeFileSync(tmp + "/answers.txt", lines.join("\n") + "\n");
