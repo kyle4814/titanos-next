@@ -5,9 +5,10 @@
  * visitor's own browser over DNS-over-HTTPS and grades the email-security posture in
  * seconds. Code only: zero model calls. GET THIS FIXED shows the exact records and steps.
  * The domain never leaves the browser except as a public DNS lookup; the button event
- * carries only an event name and a path (SiteAnalytics), never the domain.
+ * carries only an event name, a path, a timestamp and an opaque random scan id (SiteAnalytics), never the domain.
  */
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { newScanId } from "@/lib/beacon";
 import { runScan, dohFetch, type ScanResult } from "@/lib/guestscan/scan";
 import { buildPlan, type FixPlan } from "@/lib/guestscan/fixes";
 
@@ -20,11 +21,17 @@ export default function GuestScan() {
   const [res, setRes] = useState<ScanResult | null>(null);
   const [plan, setPlan] = useState<FixPlan | null>(null);
   const [fixOpen, setFixOpen] = useState(false);
+  // One opaque id per scan (beacon only; no domain, no personal data). nextId rides on "Check now";
+  // when a scan starts it moves to resId (rides on GET THIS FIXED) and a fresh nextId is made.
+  const [nextId, setNextId] = useState("");
+  const [resId, setResId] = useState("");
+  useEffect(() => { setNextId(newScanId()); }, []);
 
   const go = async (e: FormEvent) => {
     e.preventDefault();
     if (busy) return;
     setErr(""); setRes(null); setPlan(null); setFixOpen(false); setBusy(true);
+    setResId(nextId); setNextId(newScanId());
     try {
       const r = await runScan(domain, dohFetch());
       setRes(r); setPlan(buildPlan(r));
@@ -42,7 +49,7 @@ export default function GuestScan() {
           placeholder="yourbusiness.com.au" aria-label="Your domain" required
           style={{ flex: "1 1 220px", minHeight: 48, padding: "0 14px", fontSize: 16, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.3)", background: "transparent", color: "inherit" }}
         />
-        <button type="submit" disabled={busy} data-analytics="scan-instant-run" style={{ minHeight: 48, padding: "0 22px", borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.6)", background: "rgb(var(--gold-rgb) / 0.12)", color: "inherit", cursor: "pointer" }}>
+        <button type="submit" disabled={busy} data-analytics="scan-instant-run" data-scan-id={nextId || undefined} style={{ minHeight: 48, padding: "0 22px", borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.6)", background: "rgb(var(--gold-rgb) / 0.12)", color: "inherit", cursor: "pointer" }}>
           {busy ? "Checking..." : "Check now"}
         </button>
       </form>
@@ -66,7 +73,7 @@ export default function GuestScan() {
           </ul>
           {open ? (
             <>
-              <button type="button" onClick={() => setFixOpen((v) => !v)} aria-expanded={fixOpen} data-analytics="scan-get-fixed"
+              <button type="button" onClick={() => setFixOpen((v) => !v)} aria-expanded={fixOpen} data-analytics="scan-get-fixed" data-scan-id={resId || undefined}
                 style={{ minHeight: 52, width: "100%", marginTop: 12, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.8)", background: "rgb(var(--gold-rgb) / 0.18)", color: "inherit", fontSize: 17, fontWeight: 700, cursor: "pointer" }}>
                 GET THIS FIXED
               </button>
