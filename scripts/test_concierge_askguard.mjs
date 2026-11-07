@@ -42,7 +42,7 @@ t("lost ask offers the contact door", res.filter((x) => /cannot find what|none o
 const saved = new Map(G.FAMILY_OF);
 G.FAMILY_OF.clear();
 const m1 = dev.filter((x) => x.expect === "ask" && got(route(index, x.q, x.seat)) !== "ask").length;
-t("MUTANT families off: at least 15 dev ask rows go red", m1 >= 15, m1);
+t("MUTANT families off: at least 11 dev ask rows go red (F80 twin guard now also catches some of the 15 once the family skip is gone)", m1 >= 11, m1);
 for (const [k, v] of saved) G.FAMILY_OF.set(k, v);
 const m2 = dev.filter((x) => x.expect === "ask" && got(route(index, x.q, x.seat)) !== "ask").length;
 t("families restored: dev ask rows all green again", m2 === 0, m2);

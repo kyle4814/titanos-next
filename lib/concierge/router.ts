@@ -2,7 +2,7 @@
 import type { Reply, Seat, Shelf, Tap, ConfigStub } from "./types.ts";
 import { tokens, normalise, findDomain } from "./text.ts";
 import { junkCheck } from "./guard.ts";
-import { familyToAsk, lostIntent } from "./askguard.ts";
+import { familyToAsk, lostIntent, twinsToAsk } from "./askguard.ts";
 
 export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: unmatched
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
@@ -113,6 +113,8 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
     const members = fam.map((m) => byId.get(m.id)).filter((r): r is NonNullable<typeof r> => !!r).sort((a, b) => b.s - a.s).slice(0, 3);
     if (members.length >= 2) return { kind: "ask", question: "Which of these is closest to what you need?", taps: members.map((r) => tap(r.d.shelf)), score: top.s };
   }
+  const twins = twinsToAsk(q, ranked);   // F80: data-derived near-duplicate offers: ask unless the ask names what tells the top pick apart
+  if (twins.length) return { kind: "ask", question: "Which of these is closest to what you need?", taps: [top, ...twins].slice(0, 3).map((r) => tap(r.d.shelf)), score: top.s };
   const second = ranked[1];
   const margin = second && top.s > 0 ? (top.s - second.s) / top.s : 1;
   if (second && margin < ASK_MARGIN && second.s >= MIN_SCORE) {

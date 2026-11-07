@@ -1,0 +1,102 @@
+p01	guest	ask	I run finance for a not for profit and want to see where admin time could be freed up from our filed numbers
+p01	guest	offer:profit-mirror-care	I manage an NDIS and aged care provider and want the profit mirror that covers care providers
+p01	guest	offer:charity-profit-mirror	we are a registered charity and want the charity profit mirror from our own filed accounts
+p02	guest	ask	I am a cleaner and want to get in front of local businesses for commercial work
+p02	guest	offer:neighbour-alerts	every month tell me about new businesses opening near me so I can send them an intro note
+p02	guest	offer:commercial-customer-list	I want a bought list of commercial buyers with emails and phones for repeat contracts like strata and clinics
+p03	guest	ask	I work in a regional newsroom and want stories out of federal contract spending
+p03	guest	offer:story-leads-weekly	send me five sourced story leads from public spending data every week
+p03	guest	offer:electorate-dollar-map	how much federal contract money lands in my electorate and who keeps winning it
+p04	guest	ask	I am a researcher who wants to find stories hiding in government contract data
+p04	guest	offer:story-leads-weekly	a weekly pack of leads from the open contracts desk for our newsroom
+p04	guest	offer:contract-variation-watch	a monthly list of contracts whose value or term changed after they were signed
+p05	guest	ask	I am an electrician and I want more work to come in without chasing people myself
+p05	guest	offer:job-flow	a monthly list of who was just awarded government work near me with follow up messages
+p05	guest	offer:quote-chaser	chase my unanswered quotes at day three seven and fourteen and let me tap yes before they send
+p06	guest	ask	I am a pest controller and want local business names I can contact for work
+p06	guest	offer:tradie-starter-list	I want a first batch of fifty local businesses in my suburb I could work for
+p06	guest	offer:job-flow	give me contract winners near me each month plus ready follow ups in my own voice
+p07	guest	ask	I am a commercial insurance broker and want a reason to call clients
+p07	guest	offer:broker-renewal-scan	scan my client domains for email security and rank who to call before renewal
+p07	guest	offer:new-business-insurance-feed	a weekly list of newly started businesses and the cover they usually need
+p08	guest	ask	I run a labour hire firm and want to know which employers just won government work
+p08	guest	offer:recruiter-contract-winner-feed	a weekly feed of local employers that won federal contracts so we can call before the job is advertised
+p08	guest	offer:hiring-trigger-dossier	a one employer dossier showing their recent contract win for a recruiter call
+p09	guest	ask	I own a commercial solar installer and need new sites to call
+p09	guest	offer:solar-site-shortlist	a monthly batch of one hundred ranked commercial sites in my service area
+p09	guest	offer:solar-pipeline-desk	the full retainer with weekly call sheet drafted outreach and a Monday pipeline card
+p10	guest	ask	I am head office for a franchise and want to see how our franchisee websites and email are set up
+p10	guest	offer:franchise-site-audit	a fixed scope audit grading every franchisee website and email setup across our network
+p10	guest	offer:franchise-posture-board	one dashboard page showing the status of every franchisee domain with a fix sheet
+p11	guest	ask	I pay supplier invoices by bank transfer and worry about fake payment emails
+p11	guest	offer:payee-domain-change-watch	watch my suppliers email domains each week and warn me before I pay if one changes
+p11	guest	offer:scam-shield-for-tradies	check monthly whether someone could fake an email from my trade business and give me a customer notice of my real bank details
+p12	guest	ask	we are an Australian consultancy that wants overseas government work
+p12	guest	offer:export-market-tender-map	a one off map of which overseas public buyers purchase what we sell with the notices open now
+p12	guest	offer:global-tender-desk	a monthly feed of UK NZ US and EU government tenders plus which portals accept a firm like ours
+p13	guest	ask	I run a medical practice and need to sort out our privacy obligations
+p13	guest	offer:privacy-adm-fix	read my live privacy policy and show me the wording missing for the December automated decision rule
+p13	guest	offer:privacy-essential-eight-pack	a done with you pack with a privacy policy breach plan supplier register and checklist for my practice
+p14	guest	ask	I am an accountant and want something that helps me win or keep clients
+p14	guest	offer:accountant-new-client-feed	a weekly list of newly registered companies and trusts near me to welcome as new clients
+p14	guest	offer:accountant-chaser-pack	white label quote and invoice chasing for my tradie clients under my practice name
+p15	guest	ask	I build AI agents for clients and want to ship them safely
+p15	guest	offer:approval-rail-kit	a drop in kit with approval cards an audit trail and a kill switch for client agents
+p15	guest	offer:agent-preflight-test-harness	a test kit that attacks my agent before go live with a signed pre flight report
+p16	guest	ask	I work in procurement for a council and want a clear risk picture of our suppliers and domains
+p16	guest	offer:sub-threshold-intelligence-contract	one fixed scope engagement giving our board a single picture of cyber privacy and supplier exposure across our council
+p16	guest	offer:panel-risk-map	rank the exceptions in our panel of two hundred suppliers so the refresh is not manual
+p17	guest	ask	I run a marketing agency and want to sell a branded product to my clients
+p17	guest	offer:agency-white-label-audit	audit a list of client domains under my agency name for email security and privacy wording
+p17	guest	offer:dossier-reseller-licence	let me order research dossiers under my own logo for client reviews
+p18	guest	ask	I am a small builder and want to know who won government work near me
+p18	guest	offer:subbie-finder-lite	a weekly list of nearby contract winners with the value and how to reach them so I can offer to help
+p18	guest	offer:job-flow	a monthly winners near me list of up to fifty leads with follow up messages in my voice
+p19	guest	ask	I am an n8n consultant and want a ready made piece to add to my client builds
+p19	guest	offer:approval-rail-kit	a kit that adds approval steps an audit trail and a kill switch to my client agents
+p19	guest	offer:change-feed-connector-automation-agencies	company change events filtered per client and sent straight into my Make or n8n workflow
+p20	guest	ask	I run a trade association and want a real benefit for our members
+p20	guest	offer:association-member-kit	a member benefit page with a free email security scan a yearly sector report and a monthly scam bulletin
+p20	guest	offer:subbie-finder-channel	a member only weekly list of who just won local government work so our members can pitch for subcontracts
+p21	guest	ask	I am a landscaper looking for commercial customers nearby
+p21	guest	offer:tradie-starter-list	fifty local businesses in my postcode I could work for with a guide to contacting them properly
+p21	guest	offer:neighbour-alerts	a monthly list of freshly opened businesses near me with a ready to send intro note
+p22	guest	ask	I am a managed IT provider and want local businesses to call with a reason
+p22	guest	offer:msp-prospect-feed	every week a list of local businesses with a dated email security gap and a report to send under my name
+p22	guest	offer:msp-panel-white-label-feed	a weekly feed of public sector and charity bodies with email gaps for an MSP serving government
+p23	guest	ask	I want to resell email security to my clients under my own brand
+p23	guest	offer:monitor-wholesale	resell your compliance monitor under my brand so each client domain gets a monthly report and I keep the margin as an MSP
+p23	guest	offer:agency-white-label-audit	a one off client audit from a list of domains under my agency name that I sell at my own price
+p24	guest	ask	I want a list of businesses that each have a reason to buy from me right now
+p24	guest	offer:agency-signal-leads	a weekly list of local businesses with a sourced fault on their website for my web agency to mention
+p24	guest	offer:signal-leads-data	a dated csv subscription of contacts each with a named buying signal for my IT firm
+p25	guest	ask	I am a broker and want to reach businesses just after they start
+p25	guest	offer:finance-broker-trigger-feed	a weekly list of new companies and new contract wins in my patch for asset finance and equipment lease
+p25	guest	offer:new-business-insurance-feed	a weekly list of newly trading businesses with the insurance cover they typically need
+p26	guest	ask	I own a trade firm and want to know what is happening with government work in my area
+p26	guest	offer:rival-watch	tell me when a named rival wins a contract or changes their website
+p26	guest	offer:tender-radar-for-trades	each month the public contracts open for my trade and area with a fit note and a bid pack on request
+p27	guest	ask	I manage a shopping centre and want to understand business openings and closures
+p27	guest	offer:postcode-churn-index	a quarterly report of openings closures and moves by suburb for a landlord
+p27	guest	offer:commercial-property-tenant-trigger-feed	a weekly list of businesses that just opened or changed address so I hear about space needs early as a leasing agent
+p28	guest	ask	I own a small business with my own domain and want to know if scammers can fake my email
+p28	guest	offer:spoofguard-global-monitor	tell me when my business email settings change or break each month, I am based in the UK
+p28	guest	offer:instant-email-domain-check	I will type my domain and pay nineteen dollars for a one page report on whether scammers can fake my email
+p29	guest	ask	I work for an overseas vendor and want local credibility and partners in Australia
+p29	guest	offer:au-market-entry-reseller-shortlist	a ranked shortlist of one hundred Australian companies that could resell our product
+p29	guest	offer:au-email-security-report	paid custom cuts of the Australian email security report by industry or state for our marketing
+p30	guest	ask	I am a small trade business curious about government tenders near me
+p30	guest	offer:free-tender-digest	a free weekly email with the ten newest tenders in my category and state
+p30	guest	offer:tender-radar-for-trades	monthly matched public contracts for my trade with a fit note and a bid pack when I want one
+p31	guest	ask	I am preparing a bid and want facts on whoever holds the contract now
+p31	guest	offer:rebid-tender-brief	a fixed fee brief on the incumbent for one named rebid with their full award history
+p31	guest	offer:incumbent-brief	I write tender responses as an independent consultant and want an incumbent brief for each tender I work on
+p32	guest	ask	I am a small supplier who has never sold to government and wonder where to start
+p32	guest	offer:panel-door-map	which government panels and registers can I actually join today and what does each require
+p32	guest	offer:global-tender-desk	a monthly feed of overseas government tenders for my software firm with the portals that will accept us
+p33	guest	ask	I sell to other businesses and my lists are stale when I get them
+p33	guest	offer:signal-leads-data	a dated csv subscription where each contact has a named reason to buy now
+p33	guest	offer:business-change-feed	a weekly list of businesses matching my saved criteria that just changed so I reach them when they are ready
+p34	guest	ask	I am a commercial solar installer who wants help with outreach to businesses
+p34	guest	offer:solar-outreach-rail	check my own shortlist and email it in batches I approve with one tap with replies drafted for me
+p34	guest	offer:solar-pipeline-desk	a full new work machine with monthly shortlist weekly call sheet and Monday pipeline card

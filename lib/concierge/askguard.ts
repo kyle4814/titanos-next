@@ -75,3 +75,32 @@ export function lostIntent(raw: string): boolean {
   const rest = s.split(" ").filter((w) => w && !FILLER.has(w)).map((w) => tokens(w)[0]).filter((w) => w && !FILLER.has(w));
   return rest.length === 0;
 }
+
+// F80 data-derived twin guard. FAMILIES above is hand-written and covers six groups; the rest of the catalogue has near-duplicate offers too.
+// A twin of the top offer is any other offer whose title+keyword token set overlaps it (Jaccard >= TWIN_JAC), derived from catalogue data only.
+// The top pick is a confident single match unless a twin scores within TWIN_RATIO of it AND the ask does not name something that tells them apart
+// (a token in one's title/keywords but not the other's). Pure: no model call, no network, no clock, no random.
+export const TWIN_JAC = 0.15;
+export const TWIN_RATIO = 0.8;   // F80: tuned on lib/concierge/neardup.tsv only (grid jac x ratio); never on holdout.tsv
+type TwinDoc = { shelf: { id: string; kind: string }; title: Set<string>; kw: string[][] };
+const SIG = new WeakMap<object, Set<string>>();
+function sig(d: TwinDoc): Set<string> {
+  let s = SIG.get(d);
+  if (!s) { s = new Set<string>([...d.title, ...d.kw.flat()]); SIG.set(d, s); }
+  return s;
+}
+const jaccard = (a: Set<string>, b: Set<string>) => { let i = 0; for (const t of a) if (b.has(t)) i++; return i / (a.size + b.size - i || 1); };
+// Returns the twins to ask about (the top offer is not included), or [] when the top pick stands.
+export function twinsToAsk(q: string[], ranked: { d: TwinDoc; s: number }[], opts: { jac?: number; ratio?: number } = {}): { d: TwinDoc; s: number }[] {
+  const jac = opts.jac ?? TWIN_JAC, ratio = opts.ratio ?? TWIN_RATIO;
+  const top = ranked[0];
+  if (!top || top.d.shelf.kind !== "offer" || FAMILY_OF.has(top.d.shelf.id)) return [];   // a hand-declared family was already judged by familyToAsk
+  const qset = new Set(q);
+  const a = sig(top.d);
+  const twins = ranked.slice(1, 6).filter((r) => r.d.shelf.kind === "offer" && r.s >= ratio * top.s && jaccard(a, sig(r.d)) >= jac);
+  if (!twins.length) return [];
+  const names = (x: Set<string>, y: Set<string>) => [...x].some((t) => !y.has(t) && qset.has(t));
+  const topNamed = twins.every((r) => names(a, sig(r.d)));
+  const twinNamed = twins.some((r) => names(sig(r.d), a));
+  return topNamed && !twinNamed ? [] : twins;
+}
