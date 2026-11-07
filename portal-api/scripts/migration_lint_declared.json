@@ -1,1 +1,1 @@
-{"duplicates":[3,4],"gaps":[],"note":"f104 2026-11-07: known clashes 0003 x3 and 0004 x2, NOT renumbered (GATE5). Remove entries when the renumber map in the f104 receipt is applied; a stale entry fails the lint."}
+{"duplicates":[2,3,4],"gaps":[7,8,9,10,11,12,13],"note":"f104 2026-11-07: known clashes 0002 x2, 0003 x4 and 0004 x2, NOT renumbered (GATE5); gaps 0007-0013 are migrations carried by branches not yet merged to int. Remove entries when the renumber map in the f104 receipt is applied or the branches land; a stale entry fails the lint."}
