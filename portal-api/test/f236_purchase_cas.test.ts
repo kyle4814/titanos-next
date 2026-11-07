@@ -88,7 +88,8 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     want("K3", typeof r === "object" && r.errors === 0 && (both ? r.scanned === 1 && r.recovered + r.skipped === 1 : r.scanned === 0 && r.recovered === 0), `${point}: sweep must recover or skip, never error, got ${JSON.stringify(r)}`);
     const st = open();
     want("K3", (await st.invoicesFor("acc1")).length === 1, `${point}: want ONE invoice, got ${(await st.invoicesFor("acc1")).length}`);
-    want("K3", (calls.takeFacts ?? 0) === 2, `${point}: want ONE markPaid run = takeFacts called twice (sub: + pi:), got ${calls.takeFacts}`);
+    // f252: was 2 (sub: + pi:). markPaid now drains a fact held after its build with replayLateFacts (one more sub: take), so one run = 3; a run that took 4 would be a double-run.
+    want("K3", (calls.takeFacts ?? 0) === 3, `${point}: want ONE markPaid run = takeFacts called three times (sub: build, pi:, and f252 sub: late replay), got ${calls.takeFacts}`);
     want("K3", (calls.nextInvoiceNumber ?? 0) === 1, `${point}: want one invoice number burned, got ${calls.nextInvoiceNumber}`);
     want("K3", (calls.putAccount ?? 0) === 1 && (calls.putSubscriptionOnce ?? 0) === 1, `${point}: account and subscription written once each, got ${JSON.stringify(calls)}`);
     const subs = await st.subscriptionsFor("acc1"); want("K3", subs.length === 1 && !!subs[0].cancelledAt, `${point}: the held cancel must survive on the one subscription, got ${JSON.stringify(subs)}`);

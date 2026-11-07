@@ -191,6 +191,7 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
         else if (mergeTakenPeriods(d, s, taken)) ch = true; // f251: the periods this winner took (its session period, an invoice that beat the checkout) are observed onto the sweep's plan: the later one wins, a repeat is a no-op
         return ch;
       });
+      await replayLateFacts(d, built); // f252: a cancel or invoice period held AFTER buildSubscriptionTaken's takeFacts and before this write is drained now, through the f248 CAS helper; a second run finds nothing and writes nothing
     }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
     Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
