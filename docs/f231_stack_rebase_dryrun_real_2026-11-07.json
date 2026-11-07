@@ -1,0 +1,1378 @@
+{
+ "target": "origin/web/obelisk-int3-2026-11-07",
+ "target_sha": "dfdab97278abb276e8e4cdc9e90eeb4f9aa7225b",
+ "glob": "origin/web/f*",
+ "branch_count": 138,
+ "already_merged": 60,
+ "stacks": [
+  {
+   "rank": 1,
+   "base": "origin/web/f185_c3_undo_state_cas-2026-11-07",
+   "shape": "single",
+   "size": 1,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f185_c3_undo_state_cas-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/owner/engine.ts",
+       "portal-api/src/owner/service.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 1,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 0,
+    "first_conflict": "origin/web/f185_c3_undo_state_cas-2026-11-07",
+    "first_conflict_files": [
+     "portal-api/src/owner/engine.ts",
+     "portal-api/src/owner/service.ts"
+    ]
+   }
+  },
+  {
+   "rank": 2,
+   "base": "origin/web/f44_c4_seat_entitlement-2026-11-06",
+   "shape": "single",
+   "size": 1,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f44_c4_seat_entitlement-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/market/service.ts",
+       "portal-api/src/market/store.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 1,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 0,
+    "first_conflict": "origin/web/f44_c4_seat_entitlement-2026-11-06",
+    "first_conflict_files": [
+     "portal-api/src/market/service.ts",
+     "portal-api/src/market/store.ts"
+    ]
+   }
+  },
+  {
+   "rank": 3,
+   "base": "origin/web/f179_c1_beacon_scan_id-2026-11-07",
+   "shape": "single",
+   "size": 1,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f179_c1_beacon_scan_id-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "lib/guestscan/scan.ts",
+       "package.json",
+       "scripts/test_guestscan.mjs"
+      ],
+      "commits": 2,
+      "merges_skipped": 1
+     }
+    ],
+    "branches": 1,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 0,
+    "first_conflict": "origin/web/f179_c1_beacon_scan_id-2026-11-07",
+    "first_conflict_files": [
+     "lib/guestscan/scan.ts",
+     "package.json",
+     "scripts/test_guestscan.mjs"
+    ]
+   }
+  },
+  {
+   "rank": 4,
+   "base": "origin/web/f19_c7_key_spend_cap-2026-11-06",
+   "shape": "chain",
+   "size": 2,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f19_c7_key_spend_cap-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/service.ts",
+       "portal-api/src/store.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f23_c7_keys_page-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f19_c7_key_spend_cap-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 2,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 1,
+    "not_run": 0,
+    "first_conflict": "origin/web/f19_c7_key_spend_cap-2026-11-06",
+    "first_conflict_files": [
+     "portal-api/src/service.ts",
+     "portal-api/src/store.ts"
+    ]
+   }
+  },
+  {
+   "rank": 5,
+   "base": "origin/web/f29_c4_alljobs_index-2026-11-06",
+   "shape": "chain",
+   "size": 2,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f29_c4_alljobs_index-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/market/service.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f200_c4_unpaid_fund_recheck-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f29_c4_alljobs_index-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 2,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 1,
+    "not_run": 0,
+    "first_conflict": "origin/web/f29_c4_alljobs_index-2026-11-06",
+    "first_conflict_files": [
+     "portal-api/src/market/service.ts"
+    ]
+   }
+  },
+  {
+   "rank": 6,
+   "base": "origin/web/f30_c8_estate_scan-2026-11-06",
+   "shape": "chain",
+   "size": 2,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f30_c8_estate_scan-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/guestscan/scan.ts",
+       "package.json",
+       "scripts/test_guestscan.mjs"
+      ],
+      "commits": 2,
+      "merges_skipped": 1
+     },
+     {
+      "branch": "origin/web/f34_c8_estate_cache-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f30_c8_estate_scan-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 2,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 1,
+    "not_run": 0,
+    "first_conflict": "origin/web/f30_c8_estate_scan-2026-11-06",
+    "first_conflict_files": [
+     "lib/guestscan/scan.ts",
+     "package.json",
+     "scripts/test_guestscan.mjs"
+    ]
+   }
+  },
+  {
+   "rank": 7,
+   "base": "origin/web/f78_c5_shelf_price_types-2026-11-06",
+   "shape": "tree",
+   "size": 3,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f78_c5_shelf_price_types-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/shop/grader.ts",
+       "package.json"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f207_c4_quote_missing_invariants-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f78_c5_shelf_price_types-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f85_c5_shelf_search_index-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f78_c5_shelf_price_types-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 3,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 2,
+    "not_run": 0,
+    "first_conflict": "origin/web/f78_c5_shelf_price_types-2026-11-06",
+    "first_conflict_files": [
+     "lib/shop/grader.ts",
+     "package.json"
+    ]
+   }
+  },
+  {
+   "rank": 8,
+   "base": "origin/web/f81_c10_soak_portal_run-2026-11-06",
+   "shape": "chain",
+   "size": 3,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f81_c10_soak_portal_run-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "package.json"
+      ],
+      "commits": 2,
+      "merges_skipped": 1
+     },
+     {
+      "branch": "origin/web/f195_c10_soak_s9_quantise-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f81_c10_soak_portal_run-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f201_c10_soak_memory_row-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f195_c10_soak_s9_quantise-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 3,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 2,
+    "not_run": 0,
+    "first_conflict": "origin/web/f81_c10_soak_portal_run-2026-11-06",
+    "first_conflict_files": [
+     "package.json"
+    ]
+   }
+  },
+  {
+   "rank": 9,
+   "base": "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+   "shape": "chain",
+   "size": 5,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/test/agent.test.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f48_c7_key_trace_rotation-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f58_c7_agent_d1store-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f48_c7_key_trace_rotation-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f98_c7_credit_ledger_invariants-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f58_c7_agent_d1store-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f176_c7_spendcap_mcp_wire-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f98_c7_credit_ledger_invariants-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 5,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 4,
+    "not_run": 0,
+    "first_conflict": "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+    "first_conflict_files": [
+     "portal-api/test/agent.test.ts"
+    ]
+   },
+   "reverse": {
+    "rows": [
+     {
+      "branch": "origin/web/f176_c7_spendcap_mcp_wire-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/agent/d1agent.ts",
+       "portal-api/src/agent/mcp.ts",
+       "portal-api/src/store.ts",
+       "portal-api/test/d1_agent_store.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f98_c7_credit_ledger_invariants-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f58_c7_agent_d1store-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f48_c7_key_trace_rotation-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f43_c7_mcp_413_jsonrpc-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 5,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 4,
+    "first_conflict": "origin/web/f176_c7_spendcap_mcp_wire-2026-11-07",
+    "first_conflict_files": [
+     "portal-api/src/agent/d1agent.ts",
+     "portal-api/src/agent/mcp.ts",
+     "portal-api/src/store.ts",
+     "portal-api/test/d1_agent_store.ts"
+    ]
+   }
+  },
+  {
+   "rank": 10,
+   "base": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+   "shape": "tree",
+   "size": 5,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/concierge/router.ts",
+       "package.json"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f66_c6_offtopic_guard-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f72_c6_holdout_miss_taxonomy-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f79_c6_fresh_offer_dev2-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f72_c6_holdout_miss_taxonomy-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f80_c6_near_dup_ask_raise-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f72_c6_holdout_miss_taxonomy-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 5,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 4,
+    "not_run": 0,
+    "first_conflict": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+    "first_conflict_files": [
+     "lib/concierge/router.ts",
+     "package.json"
+    ]
+   },
+   "reverse": {
+    "rows": [
+     {
+      "branch": "origin/web/f80_c6_near_dup_ask_raise-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/concierge/router.ts",
+       "package.json"
+      ],
+      "commits": 1,
+      "merges_skipped": 1
+     },
+     {
+      "branch": "origin/web/f79_c6_fresh_offer_dev2-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f72_c6_holdout_miss_taxonomy-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f66_c6_offtopic_guard-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f65_c6_dev_split_wrong_shelf-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 5,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 4,
+    "first_conflict": "origin/web/f80_c6_near_dup_ask_raise-2026-11-06",
+    "first_conflict_files": [
+     "lib/concierge/router.ts",
+     "package.json"
+    ]
+   }
+  },
+  {
+   "rank": 11,
+   "base": "origin/web/f16_c8_entd1-2026-11-06",
+   "shape": "diamond",
+   "size": 52,
+   "forward": {
+    "rows": [
+     {
+      "branch": "origin/web/f16_c8_entd1-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/package.json"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f17_c7_idem_reserve-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/agent/mcp.ts",
+       "portal-api/src/d1store.ts",
+       "portal-api/test/owner_fake_d1.ts",
+       "portal-api/test/store_contract.test.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f18_c4_marketd1-2026-11-06",
+      "status": "CLEAN",
+      "files": [],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f205_c2_throttle_worker_wire-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/index.ts",
+       "portal-api/src/throttle.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f206_c2_throttle_d1_adapter-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/throttle.ts",
+       "portal-api/test/throttle.test.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f40_c8_payout_approve_transition-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/enterprise/service.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f92_c2_webhook_order_suite-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/src/service.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f208_c2_worker_build_deps-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f205_c2_throttle_worker_wire-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f42_c8_payout_resume_sweep-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f40_c8_payout_approve_transition-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f96_c2_plan_change_proration-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f92_c2_webhook_order_suite-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f100_c2_cancel_term_unify-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f96_c2_plan_change_proration-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f46_c8_payout_retry_executor-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f42_c8_payout_resume_sweep-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f101_c2_stripe_period_seed-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f100_c2_cancel_term_unify-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f50_c8_held_payout_routes-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f46_c8_payout_retry_executor-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f51_c8_payout_permanent_error-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f46_c8_payout_retry_executor-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f171_c2_webhook_d1_methods-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f101_c2_stripe_period_seed-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f172_c2_plan_d1_adapter-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f101_c2_stripe_period_seed-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f54_c8_held_payout_release_refund-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f50_c8_held_payout_routes-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f175_c2_plan_cas-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f172_c2_plan_d1_adapter-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f192_c2_d1_invoice_store-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f172_c2_plan_d1_adapter-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f57_c8_payout_tick-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f54_c8_held_payout_release_refund-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f177_c2_stripe_items_period-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f175_c2_plan_cas-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f183_c2_cas_all_paths-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f175_c2_plan_cas-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f194_c2_d1_facts_table-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f192_c2_d1_invoice_store-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f59_c8_payout_d1_adapter-2026-11-06",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f57_c8_payout_tick-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f181_c2_import_cycle_break-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f177_c2_stripe_items_period-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f186_c2_markpaid_dup_schedule-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f183_c2_cas_all_paths-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f196_c2_miniflare_d1_probe-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f194_c2_d1_facts_table-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f197_c2_claim_event_d1-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f194_c2_d1_facts_table-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f63_c4_ten_jobs_drill-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/site-data/trust.json",
+       "package.json",
+       "public/data/claims-ledger.csv",
+       "public/data/claims-ledger.json",
+       "scripts/gen_open_data.mjs",
+       "scripts/test_c9proof.mjs"
+      ],
+      "commits": 20,
+      "merges_skipped": 14
+     },
+     {
+      "branch": "origin/web/f64_c8_cross_tenant_route_matrix-2026-11-06",
+      "status": "CONFLICT",
+      "files": [
+       "lib/site-data/trust.json",
+       "package.json",
+       "public/data/claims-ledger.csv",
+       "public/data/claims-ledger.json",
+       "scripts/gen_open_data.mjs",
+       "scripts/test_c9proof.mjs"
+      ],
+      "commits": 21,
+      "merges_skipped": 14
+     },
+     {
+      "branch": "origin/web/f190_c2_invoice_once-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f186_c2_markpaid_dup_schedule-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f203_c2_claim_reconciler-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f197_c2_claim_event_d1-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f212_c2_d1_store_reconcile-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f171_c2_webhook_d1_methods-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f86_c9_worker_shared_headers-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f63_c4_ten_jobs_drill-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f97_c4_job_dispute_warranty-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f63_c4_ten_jobs_drill-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f102_c4_audit_head_anchor-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f97_c4_job_dispute_warranty-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f188_c2_post_route_fuzz_d1-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f212_c2_d1_store_reconcile-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f191_c2_late_fact_race-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f190_c2_invoice_once-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f209_c2_invoice_number_atomic-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f203_c2_claim_reconciler-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f210_c2_pending_purchase_reconciler-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f203_c2_claim_reconciler-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f213_c2_d1_race_miniflare-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f183_c2_cas_all_paths-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f215_c2_d1_invoice_purchase_id-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f212_c2_d1_store_reconcile-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f216_c2_d1store_factory_wire-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f208_c2_worker_build_deps-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f99_c4_dispute_wire-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f97_c4_job_dispute_warranty-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f103_c4_anchor_wire-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f102_c4_audit_head_anchor-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f104_migration_lint-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f102_c4_audit_head_anchor-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f211_c4_store_index_scans-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f210_c2_pending_purchase_reconciler-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f222_c2_side_stores_d1_wire-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f16_c8_entd1-2026-11-06",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f178_c4_migration_pair_discover-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f104_migration_lint-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f187_c4_dispute_case_d1-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f103_c4_anchor_wire-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f184_c4_union_ts_compiler-2026-11-07",
+      "status": "BLOCKED",
+      "blocked_by": "origin/web/f178_c4_migration_pair_discover-2026-11-07",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 52,
+    "clean": 1,
+    "conflicts": 8,
+    "blocked": 43,
+    "not_run": 0,
+    "first_conflict": "origin/web/f16_c8_entd1-2026-11-06",
+    "first_conflict_files": [
+     "portal-api/package.json"
+    ]
+   },
+   "reverse": {
+    "rows": [
+     {
+      "branch": "origin/web/f184_c4_union_ts_compiler-2026-11-07",
+      "status": "CONFLICT",
+      "files": [
+       "portal-api/scripts/migration_lint.mjs",
+       "portal-api/scripts/migration_lint_allow.json",
+       "portal-api/test/migration_lint.test.ts"
+      ],
+      "commits": 1,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f187_c4_dispute_case_d1-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f178_c4_migration_pair_discover-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f222_c2_side_stores_d1_wire-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f211_c4_store_index_scans-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f104_migration_lint-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f103_c4_anchor_wire-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f99_c4_dispute_wire-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f216_c2_d1store_factory_wire-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f215_c2_d1_invoice_purchase_id-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f213_c2_d1_race_miniflare-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f210_c2_pending_purchase_reconciler-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f209_c2_invoice_number_atomic-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f191_c2_late_fact_race-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f188_c2_post_route_fuzz_d1-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f102_c4_audit_head_anchor-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f97_c4_job_dispute_warranty-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f86_c9_worker_shared_headers-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f212_c2_d1_store_reconcile-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f203_c2_claim_reconciler-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f190_c2_invoice_once-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f64_c8_cross_tenant_route_matrix-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f63_c4_ten_jobs_drill-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f197_c2_claim_event_d1-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f196_c2_miniflare_d1_probe-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f186_c2_markpaid_dup_schedule-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f181_c2_import_cycle_break-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f59_c8_payout_d1_adapter-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f194_c2_d1_facts_table-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f183_c2_cas_all_paths-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f177_c2_stripe_items_period-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f57_c8_payout_tick-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f192_c2_d1_invoice_store-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f175_c2_plan_cas-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f54_c8_held_payout_release_refund-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f172_c2_plan_d1_adapter-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f171_c2_webhook_d1_methods-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f51_c8_payout_permanent_error-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f50_c8_held_payout_routes-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f101_c2_stripe_period_seed-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f46_c8_payout_retry_executor-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f100_c2_cancel_term_unify-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f96_c2_plan_change_proration-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f42_c8_payout_resume_sweep-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f208_c2_worker_build_deps-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f92_c2_webhook_order_suite-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f40_c8_payout_approve_transition-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f206_c2_throttle_d1_adapter-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f205_c2_throttle_worker_wire-2026-11-07",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f18_c4_marketd1-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f17_c7_idem_reserve-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     },
+     {
+      "branch": "origin/web/f16_c8_entd1-2026-11-06",
+      "status": "NOT_RUN",
+      "files": [],
+      "commits": 0,
+      "merges_skipped": 0
+     }
+    ],
+    "branches": 52,
+    "clean": 0,
+    "conflicts": 1,
+    "blocked": 0,
+    "not_run": 51,
+    "first_conflict": "origin/web/f184_c4_union_ts_compiler-2026-11-07",
+    "first_conflict_files": [
+     "portal-api/scripts/migration_lint.mjs",
+     "portal-api/scripts/migration_lint_allow.json",
+     "portal-api/test/migration_lint.test.ts"
+    ]
+   }
+  }
+ ],
+ "refs_unchanged": true,
+ "total_branches": 77,
+ "total_clean_forward": 1
+}
