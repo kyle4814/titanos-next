@@ -4,6 +4,7 @@ import { MemoryApprovalStore } from "../src/enterprise/payout_decision.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
+import { newSealKey, type SealKeyring } from "../src/enterprise/seal.ts";
 import type { PayoutProvider, RateTable } from "../src/enterprise/types.ts";
 
 export const INTERNAL = "internal_fixture_secret";
@@ -21,7 +22,7 @@ export class MockPayouts implements PayoutProvider {
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
   const store = new MemoryEntStore(), payouts = new MockPayouts();
-  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore() };
+  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
   // sign in, then the operator provisions the seat

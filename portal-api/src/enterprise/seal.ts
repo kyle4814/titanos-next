@@ -41,3 +41,22 @@ export async function openSecret(ring: SealKeyring, envelope: string, context: s
   } catch { throw new SealError("decrypt_failed"); }                            // wrong key, wrong context or tampered: one opaque error
 }
 export const newSealKey = (): string => b64u(crypto.getRandomValues(new Uint8Array(32)));
+
+// Env contract: SSO_SEAL_KEYS is a JSON string {"current":"k1","keys":{"k1":"<base64url 32 bytes>", ...}} (a Worker secret).
+// Absent, malformed, or any key not exactly 32 bytes => SealError("seal_keys_unavailable"): callers fail closed, never store plaintext.
+export function parseSealKeys(raw: string | undefined | null): SealKeyring {
+  if (typeof raw !== "string" || !raw.trim()) throw new SealError("seal_keys_unavailable");
+  let o: any;
+  try { o = JSON.parse(raw); } catch { throw new SealError("seal_keys_unavailable"); }
+  if (!o || typeof o !== "object" || typeof o.current !== "string" || !/^[A-Za-z0-9_-]{1,32}$/.test(o.current) || !o.keys || typeof o.keys !== "object" || Array.isArray(o.keys)) throw new SealError("seal_keys_unavailable");
+  const keys: Record<string, string> = Object.create(null);
+  for (const [id, v] of Object.entries(o.keys)) {
+    if (!/^[A-Za-z0-9_-]{1,32}$/.test(id) || typeof v !== "string") throw new SealError("seal_keys_unavailable");
+    let n = -1;
+    try { n = unb64u(v).length; } catch { /* malformed base64url */ }
+    if (n !== 32) throw new SealError("seal_keys_unavailable");
+    keys[id] = v;
+  }
+  if (!Object.prototype.hasOwnProperty.call(keys, o.current)) throw new SealError("seal_keys_unavailable");
+  return { current: o.current, keys };
+}

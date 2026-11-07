@@ -1,3 +1,4 @@
+import { isSealed } from "./seal.ts";
 import type { Asset, AuditEntry, Invite, LedgerEntry, Member, Payout, Referral, SsoConfig, SsoState, Tenant } from "./types.ts";
 
 // Every method that returns a tenant-owned object takes the tenant id. There is deliberately NO "assetById(id)".
@@ -91,7 +92,7 @@ export class MemoryEntStore implements EntStore {
   async assetOf(t: string, id: string) { const a = this.assets.get(id); return a && a.tenantId === t ? a : undefined; }
   async verifiedAssetOwner(domain: string) { return [...this.assets.values()].find((a) => a.domain === domain && a.verifiedAt); }
   async deleteAsset(t: string, id: string) { const a = this.assets.get(id); if (a && a.tenantId === t) this.assets.delete(id); }
-  async putSso(c: SsoConfig) { this.sso.set(c.tenantId, c); }
+  async putSso(c: SsoConfig) { if (!isSealed(c.secret)) throw new Error("sso_secret_not_sealed"); this.sso.set(c.tenantId, c); }   // fail closed: plaintext never lands in the store
   async ssoOf(t: string) { return this.sso.get(t); }
   async putSsoState(s: SsoState) { this.states.set(s.hash, s); }
   async openSsoStates(t: string, now: number, key?: string) {
