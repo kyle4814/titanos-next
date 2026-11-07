@@ -1,5 +1,5 @@
 -- F58: D1 persistence for the agent door (C7). ADDITIVE only. WRITTEN, NOT APPLIED (applying to the live D1 is GATE5).
--- Builds on 0001 (api_keys), 0003_agent_door (credit_ledger, agent_receipts, agent_calls) and 0005 (kid, prefix index).
+-- Builds on 0001 (api_keys), 0003_agent_door (credit_ledger, agent_receipts, agent_calls) and 0014 (kid, prefix index; renumbered from 0005 in the int branch).
 -- Tenant key: account_id IS the tenant_id for this door; every agent query filters on it (see src/agent/d1agent.ts).
 -- Secrets: api_keys.key_hash is SHA-256 of the tk_ token; the token and the receipt HMAC secret are never stored.
 -- Spend caps per key, in credits. NULL = the application default applies, never unlimited.

@@ -1,5 +1,5 @@
 // COPIED from web/f13_c2_d1store-2026-11-06 portal-api/test/fake_d1.ts (commit f279973b6; that branch is unmerged).
-// ONE CHANGE vs the original: MIGRATIONS now matches 0001..0009 (the original matched 0001..0004 only) so migrations 0005/0006 apply.
+// ONE CHANGE vs the original: MIGRATIONS now matches 0001..0019 (the original matched 0001..0004 only) so migrations 0005/0006 apply.
 // When F13 merges, delete this copy and import F13's file with the same one-line regex change.
 // A local D1 stand-in backed by node:sqlite (real SQLite, the same engine D1 runs). It applies the REAL migration files
 // 0001..0004 from migrations/, with foreign keys ON, so the adapter is exercised against the production schema.
@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import type { D1Like, D1Statement } from "../src/env.ts";
 
 const dir = fileURLToPath(new URL("../migrations/", import.meta.url));
-export const MIGRATIONS = readdirSync(dir).filter((f) => /^000[1-9].*\.sql$/.test(f)).sort();
+export const MIGRATIONS = readdirSync(dir).filter((f) => /^00(0[1-9]|1[0-9]).*\.sql$/.test(f)).sort();
 
 const tick = async () => { for (let i = Math.floor(Math.random() * 3); i >= 0; i--) await new Promise((r) => setImmediate(r)); };
 
