@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync, copyFileSync, cpSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { MemoryStore } from "../src/store.ts";
@@ -171,17 +171,18 @@ test("S9 property: 400 seeded shuffles with duplicates reach the canonical plan"
 
 // ---- mutation: each new invariant has a mutant that must be killed -------------------------------------------------------
 function load(edits: [string, string, string][]) { // [file, from, to]; each anchor must match exactly once
-  const dir = mkdtempSync(join(tmpdir(), "f101mut-")); mkdirSync(join(dir, "src")); mkdirSync(join(dir, "test"));
+  const root = mkdtempSync(join(tmpdir(), "f101mut-")); const dir = join(root, "portal-api"); mkdirSync(join(dir, "src"), { recursive: true }); mkdirSync(join(dir, "test"));
   try {
-    for (const f of ["catalogue.ts", "dns.ts", "env.ts", "flows.ts", "index.ts", "plan_change.ts", "plan_change_service.ts", "refund_card.ts", "service.ts", "store.ts", "stripe.ts", "util.ts"]) {
-      let t = readFileSync(join(SRC, f), "utf8");
-      for (const [ef, from, to] of edits) if (ef === f) { assert.equal(t.split(from).length - 1, 1, `anchor not unique in ${f}: ${from}`); t = t.replace(from, to); }
-      writeFileSync(join(dir, "src", f), t);
+    symlinkSync(resolve(SRC, "../../lib"), join(root, "lib"));   // src/ value-imports ../../lib
+    cpSync(SRC, join(dir, "src"), { recursive: true });          // whole tree: service.ts imports enterprise/, agent/, market/
+    for (const [ef, from, to] of edits) {
+      const t = readFileSync(join(dir, "src", ef), "utf8"); assert.equal(t.split(from).length - 1, 1, `anchor not unique in ${ef}: ${from}`);
+      writeFileSync(join(dir, "src", ef), t.replace(from, to));
     }
     copyFileSync(fileURLToPath(import.meta.url), join(dir, "test", "stripe_period.test.ts"));
     const run = spawnSync(process.execPath, ["--test", "--experimental-strip-types", "--test-name-pattern=^S[0-9]", join(dir, "test", "stripe_period.test.ts")], { encoding: "utf8", env: { ...Object.fromEntries(Object.entries(process.env).filter(([k]) => k !== "NODE_TEST_CONTEXT")), F101_MUTANT: "1" } });
     return { code: run.status, out: run.stdout + run.stderr };
-  } finally { rmSync(dir, { recursive: true, force: true }); }
+  } finally { rmSync(root, { recursive: true, force: true }); }
 }
 const MUT: { id: string; inv: string; edits: [string, string, string][] }[] = [
   { id: "M1 start from the handler clock, not Stripe", inv: "S1", edits: [["service.ts", "startedAt: sp ? sp.start : now,", "startedAt: now,"], ["service.ts", "sub.startedAt = p.start; sub.plan", "sub.plan"]] },
