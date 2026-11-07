@@ -97,7 +97,7 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
     email: a.email, mode: p.mode, name: p.name, amountCents: p.amountCents, interval: p.interval, accountId: a.id, productId: p.id,
     successUrl: `${d.siteOrigin}/app/billing?done=${purchaseId}`, cancelUrl: `${d.siteOrigin}/app/billing?cancelled=1`, idempotencyKey: purchaseId,
   });
-  await d.store.putPurchase({ id: purchaseId, accountId: a.id, productId: p.id, domain, checkoutId: cs.id, amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending" });
+  await d.store.putPurchase({ id: purchaseId, accountId: a.id, productId: p.id, domain, checkoutId: cs.id, amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending", createdAt: d.now() });
   return { purchaseId, checkoutUrl: cs.url };
 }
 
@@ -116,8 +116,13 @@ export async function handleStripeEvent(d: Deps, ev: { id: string; type: string;
   if (ev.type === "charge.refunded") {
     const pi = String(o.payment_intent ?? ""), pur = pi ? await d.store.purchaseByPaymentIntent(pi) : undefined;
     if (!pi) return "ignored";
-    if (!pur) { await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) }); return "handled"; } // refund before its payment: held, reconciled by markPaid
-    applyRefund(pur, Number(o.amount_refunded ?? 0)); await d.store.putPurchase(pur);
+    if (!pur) { // refund before its payment: held, reconciled by markPaid
+      await d.store.holdFact(`pi:${pi}`, { kind: "refund", cents: Number(o.amount_refunded ?? 0) });
+      const late = await d.store.purchaseByPaymentIntent(pi); // f238: the claim may have landed between the lookup and the hold, after markPaid's takeFacts: re-check and drain
+      if (late) for (const f of await d.store.takeFacts(`pi:${pi}`)) await recordRefund(d, late.id, Number(f.cents));
+      return "handled";
+    }
+    await recordRefund(d, pur.id, Number(o.amount_refunded ?? 0));
     return "handled";
   }
   if (ev.type === "invoice.paid" && o.subscription && (o.billing_reason === "subscription_cycle" || o.billing_reason === "subscription_create")) {
@@ -150,24 +155,66 @@ function applyRefund(pur: Purchase, cents: number) {
   pur.refundedCents = Math.max(pur.refundedCents, Math.min(pur.amountCents, Math.max(0, Math.trunc(cents) || 0)));
   if (pur.refundedCents >= pur.amountCents) pur.status = "refunded";
 }
-async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string) {
-  const now = d.now();
-  pur.status = "paid"; pur.paidAt = now; pur.paymentIntent = o.payment_intent ? String(o.payment_intent) : pur.paymentIntent;
-  let cancel = false;
-  if (o.subscription) {
-    pur.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
-    const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
-    cancel = facts.some((f) => f.kind === "cancel");
-    const held = heldPeriods(facts), sp = stripePeriodOf(o.subscription) ?? held.first;
-    const sub: Subscription = { id: pur.subscriptionId, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
-    await seedPeriod(d, sub, sp, true);
-    for (const hp of held.rest) await seedPeriod(d, sub, hp, false); // invoices that beat the checkout, oldest first
-    await d.store.putSubscription(sub);
+// f238: a refund is a compare-and-set from the status just read, never a blind put. paid -> refunded (and cancelled -> refunded when money moved, i.e. a payment intent exists);
+// pending / abandoned never took money, so a refund signal leaves them alone. A lost CAS re-reads and retries on the fresh row; a replay or a row already at the target changes nothing (no-op, stored row returned).
+// markPaid never writes the purchase after its claim, so it can no longer erase a refund back to paid, and a late write can never revive refunded.
+export class RefundContention extends Error { constructor(id: string) { super(`refund CAS lost ${REFUND_TRIES} times on purchase ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); } }
+const REFUND_TRIES = 8;
+// f240: Stripe has ALREADY refunded when requestRefund's own recordRefund runs out of retries. This typed error (a RefundContention, so existing catches still match) carries the Stripe refund id and the idempotency key:
+// the caller gets a 503 refund_record_pending with the id, the next charge.refunded webhook (or a replayed requestRefund, which reuses the remembered refund and never calls Stripe again) heals the ledger. Never a silent drop, never a second refund.
+export class RefundRecordPending extends RefundContention { purchaseId: string; refundId: string; idempotencyKey: string; constructor(purchaseId: string, refundId: string, idempotencyKey: string) { super(purchaseId); this.purchaseId = purchaseId; this.refundId = refundId; this.idempotencyKey = idempotencyKey; this.name = "RefundRecordPending"; } }
+// f239: the CAS guards status AND the refunded_cents just read, so two concurrent partial refunds cannot lose the smaller cumulative: the loser re-reads, re-merges (cumulative, monotone, clamped) and retries.
+// Exhausting the bounded retries throws RefundContention (a webhook fails and is re-delivered); it never returns a stale row as if the refund had landed.
+export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, cents: number): Promise<Purchase | undefined> {
+  for (let i = 0; i < REFUND_TRIES; i++) {
+    const cur = await d.store.purchaseById(purchaseId);
+    if (!cur || !(cur.status === "paid" || cur.status === "refunded" || (cur.status === "cancelled" && cur.paymentIntent))) return cur;
+    const next: Purchase = { ...cur }; applyRefund(next, cents);
+    if (next.refundedCents === cur.refundedCents && next.status === cur.status) return cur;
+    if (await d.store.casPurchase(next, cur.status, cur.refundedCents)) return next;
   }
-  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) applyRefund(pur, Number(f.cents));
-  await d.store.putPurchase(pur);
-  if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-  await issueInvoice(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+  throw new RefundContention(purchaseId);
+}
+// f236: the pending -> paid transition is a compare-and-set that runs FIRST. Whoever wins it (webhook or the f210 sweep) runs the side effects (takeFacts, seeds, account, invoice) exactly once;
+// the loser is a no-op and returns the winner's purchase. `pur` is never mutated before the win (MemoryStore hands out live objects), and is brought up to date after it.
+export const LEASE_MS = 5 * 60_000; // f242: how long a winner's claim lease lives (a killed isolate frees it by expiry); must stay below the sweep grace window
+export const leaseKey = (purchaseId: string) => `claim:${purchaseId}`;
+export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string): Promise<{ won: boolean; purchase: Purchase }> {
+  const now = d.now(), owner = randomToken("lease", 8);
+  // f242: the lease is taken BEFORE the claim, so no sweep can see this purchase paid without also seeing the lease. A caller that cannot get it lost to a live winner.
+  if (!(await d.store.acquireLease(leaseKey(pur.id), owner, now, LEASE_MS))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur };
+  try {
+    const claim: Purchase = { ...pur, status: "paid", paidAt: now, paymentIntent: o.payment_intent ? String(o.payment_intent) : pur.paymentIntent };
+    if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
+    if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
+    Object.assign(pur, claim);
+    if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
+    if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
+    Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
+    if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
+    await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+    return { won: true, purchase: pur };
+  } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
+}
+// f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
+export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, sub: Subscription): Promise<boolean> {
+  const late = await d.store.takeFacts(`sub:${sub.id}`);
+  if (late.length === 0) return false;
+  if (late.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now();
+  for (const hp of heldPeriods(late).rest) await seedPeriod(d as Deps, sub, hp, false);
+  await d.store.putSubscription(sub);
+  return true;
+}
+// f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
+// and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.
+export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> {
+  const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
+  const cancel = facts.some((f) => f.kind === "cancel");
+  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
+  const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
+  await seedPeriod(d as Deps, sub, sp, true);
+  for (const hp of held.rest) await seedPeriod(d as Deps, sub, hp, false); // invoices that beat the checkout, oldest first
+  return sub;
 }
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
@@ -207,6 +254,15 @@ async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId
   const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
   await d.store.putInvoice(inv);
   await entSvc.onInvoice(d, inv); // C8: partner commission, recorded; a failure is logged to the operator, never thrown into the webhook
+}
+// The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a burned invoice number, the
+// store's atomic putInvoiceOnce is the real guard (two racers can both pass the pre-check; only one insert lands). The loser burns one number (known, receipt limit).
+export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
+  if (await d.store.purchaseInvoiced(pur.id)) return false;
+  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
+  const won = await d.store.putInvoiceOnce(inv);
+  if (won) await entSvc.onInvoice(d as Deps, inv); // C8: partner commission, recorded once with the invoice that won
+  return won;
 }
 
 // 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.
@@ -251,7 +307,10 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   const pur = await d.store.purchaseById(purchaseId);
   if (!pur || pur.accountId !== a.id) throw new HttpError(404, "not_found");
   if (pur.status !== "paid" || !pur.paymentIntent || !pur.paidAt) throw new HttpError(409, "not_refundable_yet");
-  const v = refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
+  // f240: a remembered Stripe refund (RefundRecordPending earlier) means the money already moved and policy was already passed: the replay only converges the ledger, so it skips the verdict (a rival partial now makes refundedCents > 0, which would wrongly route it to review).
+  const key = `refund-${pur.id}`, memo = `refundsent:${pur.id}`;
+  let sent = (await d.store.takeFacts(memo))[0] as { refundId: string } | undefined;
+  const v = sent ? { auto: true as const } : refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
   if (!v.auto) {
     // Out of policy: one pending_review RefundCase per purchase (a repeat request returns the same case, never a second card),
     // with the legacy ReviewCard kept in step (same id, resolved false). The card payload is returned as DATA ONLY: nothing is sent.
@@ -266,9 +325,14 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
     const card = rc.status === "pending_review" ? buildRefundCard(rc) : undefined;
     return { status: "needs_review" as const, reason: v.reason, refundId: rc.id, caseStatus: rc.status, card };
   }
-  await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, `refund-${pur.id}`);
-  pur.refundedCents = pur.amountCents; pur.status = "refunded"; await d.store.putPurchase(pur);
-  await entSvc.onRefund(d, pur.id, pur.refundedCents); // C8: claw back the partner commission
+  // f240: the Stripe call is made at most once per purchase key. The refund id is remembered (held fact) until the ledger CAS lands, so a replay after RefundRecordPending skips Stripe and only converges the ledger.
+  // A crash between the Stripe call and the remember is safe too: the replay reuses the same idempotency key, which Stripe answers with the same refund.
+  if (!sent) sent = { refundId: (await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, key)).id };
+  await d.store.holdFact(memo, sent);
+  try { await recordRefund(d, pur.id, pur.amountCents); } // f238: paid -> refunded by CAS; a webhook that got there first makes this a no-op
+  catch (e) { if (e instanceof RefundContention) throw new RefundRecordPending(pur.id, sent.refundId, key); throw e; }
+  await d.store.takeFacts(memo);
+  await entSvc.onRefund(d, pur.id, pur.amountCents); // C8: claw back the partner commission
   return { status: "refunded" as const, amountCents: pur.amountCents };
 }
 
