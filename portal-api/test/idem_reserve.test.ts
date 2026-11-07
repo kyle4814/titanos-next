@@ -20,7 +20,7 @@ const call = async (h: H, key: string, headers: Record<string, string>, domain =
   h.j(await h.req("POST", "/mcp", { token: key, headers, body: { jsonrpc: "2.0", id: ++rid, method: "tools/call", params: { name: "domain_check", arguments: { domain } } } }));
 const setDns = (h: H) => { h.dns.zone["good.example.com.au"] = ["v=spf1 include:_spf.google.com -all"]; h.dns.zone["_dmarc.good.example.com.au"] = ["v=DMARC1; p=reject; rua=mailto:d@good.example.com.au"]; };
 import { idemTiming } from "../src/agent/mcp.ts";
-idemTiming.waitMs = 2000; // keep the in-progress case fast
+idemTiming.waitMs = 150; // keep the in-progress case fast
 const sc = (r: any) => r.result.structuredContent;
 const debits = async (s: Store, acc: string) => (await s.creditEntries(acc)).filter((e) => e.reason === "debit");
 
@@ -28,7 +28,8 @@ for (const [name, mk] of ADAPTERS) describe(`idempotency reserve: ${name}`, () =
   test("20 parallel calls, same key and Idempotency-Key, balance for ONE call: exactly one debit, one receipt, identical replays", async () => {
     const h = make(mk()); setDns(h); const a = await agent(h);
     await h.store.creditApply(a.accountId, 5, "topup", "seed", 0); // domain_check costs 5
-    const rs = await Promise.all(Array.from({ length: 20 }, () => call(h, a.key, { "idempotency-key": "job-race" })));
+    idemTiming.waitMs = 5000; // f212: under a loaded box 20 parallel D1 calls outlast 150 ms and a loser saw idempotency_in_progress; give the waiters room
+    const rs = await Promise.all(Array.from({ length: 20 }, () => call(h, a.key, { "idempotency-key": "job-race" }))).finally(() => { idemTiming.waitMs = 150; });
     assert.equal(rs.filter((r) => sc(r).error).length, 0, "no caller sees an error: " + JSON.stringify(rs.map(sc).filter((x) => x.error)));
     assert.equal((await debits(h.store, a.accountId)).length, 1, "exactly one debit");
     assert.equal(await h.store.creditBalance(a.accountId), 0);
@@ -43,7 +44,8 @@ for (const [name, mk] of ADAPTERS) describe(`idempotency reserve: ${name}`, () =
   test("20 parallel calls with ample balance (so insufficient_credits cannot hide a double charge): still exactly one debit", async () => {
     const h = make(mk()); setDns(h); const a = await agent(h);
     await h.store.creditApply(a.accountId, 1000, "topup", "seed", 0);
-    const rs = await Promise.all(Array.from({ length: 20 }, () => call(h, a.key, { "idempotency-key": "job-rich" })));
+    idemTiming.waitMs = 5000;
+    const rs = await Promise.all(Array.from({ length: 20 }, () => call(h, a.key, { "idempotency-key": "job-rich" }))).finally(() => { idemTiming.waitMs = 150; });
     assert.equal((await debits(h.store, a.accountId)).length, 1); assert.equal(await h.store.creditBalance(a.accountId), 995);
     assert.equal(new Set(rs.map((r) => sc(r).receipt.id)).size, 1);
   });
