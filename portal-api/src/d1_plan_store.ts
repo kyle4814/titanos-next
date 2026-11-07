@@ -65,12 +65,17 @@ export class D1PlanStore extends MemoryStore {
   override async issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard) {
     const g = guard === "purchase" ? "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)" : "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ? AND stripe_event_id = ?)";
     const ga = guard === "purchase" ? [d.purchaseId] : [d.purchaseId, d.stripeEventId];
+    // The purchase must exist: on the merged line invoices.purchase_id is a plain TEXT column (0003_enterprise), not a FOREIGN KEY, so the guard carries the check.
+    const gx = `${g} AND EXISTS (SELECT 1 FROM purchases WHERE id = ?)`, gxa = [...ga, d.purchaseId];
     const res = await this.db.batch([
-      this.db.prepare(`INSERT INTO invoice_seq (id, n) SELECT 1, 1 WHERE ${g} ON CONFLICT(id) DO UPDATE SET n = n + 1`).bind(...ga),
-      this.db.prepare(`INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, 'TT-' || printf('%06d', (SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${g}`)
-        .bind(d.id, d.accountId, d.purchaseId, d.productId, d.amountCents, d.issuedAt, d.stripeEventId, ...ga),
+      this.db.prepare(`INSERT INTO invoice_seq (id, n) SELECT 1, 1 WHERE ${gx} ON CONFLICT(id) DO UPDATE SET n = n + 1`).bind(...gxa),
+      this.db.prepare(`INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, 'TT-' || printf('%06d', (SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${gx}`)
+        .bind(d.id, d.accountId, d.purchaseId, d.productId, d.amountCents, d.issuedAt, d.stripeEventId, ...gxa),
     ]);
-    if (res[1].meta.changes !== 1) return undefined;
+    if (res[1].meta.changes !== 1) {
+      if (!(await this.one("SELECT 1 AS x FROM purchases WHERE id = ?", d.purchaseId))) throw new Error(`FOREIGN KEY: invoice for missing purchase ${d.purchaseId}`);
+      return undefined;
+    }
     return this.invoiceById(d.id);
   }
   override async paidPurchasesBefore(cutoff: number) {

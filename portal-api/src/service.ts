@@ -210,9 +210,11 @@ async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId
 }
 // The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a store round trip, the
 // store's atomic issueInvoiceNumbered is the real guard (two racers can both pass the pre-check; only one insert lands). f209: the loser consumes NO number (assigned inside the guard).
-export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
+export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now"> & Partial<Pick<Deps, "ent">>, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
   if (await d.store.purchaseInvoiced(pur.id)) return false;
-  return (await d.store.issueInvoiceNumbered({ id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId }, "purchase")) !== undefined;
+  const inv = await d.store.issueInvoiceNumbered({ id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId }, "purchase");
+  if (inv) await entSvc.onInvoice(d as Deps, inv); // C8: partner commission on the first invoice (no-op without d.ent), recorded, never thrown
+  return inv !== undefined;
 }
 
 // 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.

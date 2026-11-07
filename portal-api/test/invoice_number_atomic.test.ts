@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync, symlinkSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -16,6 +16,7 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
   const dir = mkdtempSync(join(tmpdir(), "f209-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
   try {
     for (const f of readdirSync(SRC)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(SRC, f), "utf8"));
+    for (const f of readdirSync(SRC)) if (statSync(join(SRC, f)).isDirectory()) symlinkSync(join(SRC, f), join(dir, f));   // src/enterprise, src/market
     for (const [file, from, to] of edits) {
       const t = readFileSync(join(dir, file), "utf8"); assert.equal(t.split(from).length - 1, 1, `mutation anchor must match exactly once: ${from}`);
       writeFileSync(join(dir, file), t.replace(from, to));
@@ -131,9 +132,9 @@ const MUT: { id: string; kind: Kind; inv: string; edits: [string, string, string
     ["store.ts", "this.writeInvoice(inv); this.inv += 1; return inv;", "this.writeInvoice(inv); return inv;"]] },
   // the old order (d1 form): the counter bump is no longer conditioned on the guard
   { id: "N2 d1: counter bump not conditioned on the guard (loser burns a number)", kind: "d1", inv: "A1", edits: [
-    ["d1_plan_store.ts", "SELECT 1, 1 WHERE ${g} ON CONFLICT", "SELECT 1, 1 WHERE (${g} OR 1) ON CONFLICT"]] },
+    ["d1_plan_store.ts", "SELECT 1, 1 WHERE ${gx} ON CONFLICT", "SELECT 1, 1 WHERE (${gx} OR 1) ON CONFLICT"]] },
   { id: "N3 d1: insert guard removed", kind: "d1", inv: "A1", edits: [
-    ["d1_plan_store.ts", "FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${g}", "FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE (${g} OR 1)"]] },
+    ["d1_plan_store.ts", "FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${gx}", "FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE (${gx} OR 1)"]] },
   { id: "N4 memory: guard removed", kind: "memory", inv: "A1", edits: [
     ["store.ts", "if ([...this.invoices.values()].some((o) => o.purchaseId === d.purchaseId && (guard === \"purchase\" || o.stripeEventId === d.stripeEventId))) return undefined;", ""]] },
   { id: "N5 memory: purchase guard also keys on the event", kind: "memory", inv: "A1", edits: [
@@ -148,7 +149,7 @@ const MUT: { id: string; kind: Kind; inv: string; edits: [string, string, string
     ["store.ts", "(guard === \"purchase\" || o.stripeEventId === d.stripeEventId)", "true"]] },
   { id: "N9 d1: numbering format changed", kind: "d1", inv: "A4", edits: [["d1_plan_store.ts", "'TT-' || printf('%06d',", "'TT-' || printf('%05d',"]] },
   { id: "N10 d1: separate counter (not invoice_seq)", kind: "d1", inv: "A5", edits: [
-    ["d1_plan_store.ts", "SELECT 1, 1 WHERE ${g} ON CONFLICT(id) DO UPDATE SET n = n + 1", "SELECT 1, 1 WHERE (${g} AND 0) ON CONFLICT(id) DO UPDATE SET n = n + 1"],
+    ["d1_plan_store.ts", "SELECT 1, 1 WHERE ${gx} ON CONFLICT(id) DO UPDATE SET n = n + 1", "SELECT 1, 1 WHERE (${gx} AND 0) ON CONFLICT(id) DO UPDATE SET n = n + 1"],
     ["d1_plan_store.ts", "(SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE", "(SELECT COALESCE(MAX(CAST(substr(number, 4) AS INTEGER)), 0) + 1 FROM invoices)), ?, ?, ?, ? WHERE"]] },
 ];
 test(`mutation: ${MUT.length} of ${MUT.length} mutants are killed by their named check`, async () => {
