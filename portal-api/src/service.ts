@@ -168,18 +168,33 @@ export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, c
 }
 // f236: the pending -> paid transition is a compare-and-set that runs FIRST. Whoever wins it (webhook or the f210 sweep) runs the side effects (takeFacts, seeds, account, invoice) exactly once;
 // the loser is a no-op and returns the winner's purchase. `pur` is never mutated before the win (MemoryStore hands out live objects), and is brought up to date after it.
+export const LEASE_MS = 5 * 60_000; // f242: how long a winner's claim lease lives (a killed isolate frees it by expiry); must stay below the sweep grace window
+export const leaseKey = (purchaseId: string) => `claim:${purchaseId}`;
 export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, eventId: string): Promise<{ won: boolean; purchase: Purchase }> {
-  const now = d.now();
-  const claim: Purchase = { ...pur, status: "paid", paidAt: now, paymentIntent: o.payment_intent ? String(o.payment_intent) : pur.paymentIntent };
-  if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
-  if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
-  Object.assign(pur, claim);
-  if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
-  if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
-  Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
-  if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
-  await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
-  return { won: true, purchase: pur };
+  const now = d.now(), owner = randomToken("lease", 8);
+  // f242: the lease is taken BEFORE the claim, so no sweep can see this purchase paid without also seeing the lease. A caller that cannot get it lost to a live winner.
+  if (!(await d.store.acquireLease(leaseKey(pur.id), owner, now, LEASE_MS))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur };
+  try {
+    const claim: Purchase = { ...pur, status: "paid", paidAt: now, paymentIntent: o.payment_intent ? String(o.payment_intent) : pur.paymentIntent };
+    if (o.subscription) claim.subscriptionId = String(typeof o.subscription === "object" ? o.subscription.id : o.subscription); // id, or expanded (f101)
+    if (!(await d.store.casPurchase(claim, "pending"))) return { won: false, purchase: (await d.store.purchaseById(pur.id)) ?? pur }; // lost the race: the winner does the work
+    Object.assign(pur, claim);
+    if (o.subscription) await d.store.putSubscription(await buildSubscription(d, pur, o.subscription, now));
+    if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
+    Object.assign(pur, (await d.store.purchaseById(pur.id)) ?? {}); // bring the caller's object to the stored truth (a concurrent refund may have landed)
+    if (o.customer) { const a = await d.store.accountById(pur.accountId); if (a) await d.store.putAccount({ ...a, stripeCustomerId: String(o.customer) }); }
+    await issueInvoiceOnce(d, pur, PRODUCTS[pur.productId].amountCents, eventId);
+    return { won: true, purchase: pur };
+  } finally { await d.store.releaseLease(leaseKey(pur.id), owner); }
+}
+// f242: a fact held for this subscription AFTER the seed read its facts (a webhook that looked the row up, found none, then held) is replayed onto the row once it is written. Take = remove, so each fact applies once.
+export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, sub: Subscription): Promise<boolean> {
+  const late = await d.store.takeFacts(`sub:${sub.id}`);
+  if (late.length === 0) return false;
+  if (late.some((f) => f.kind === "cancel") && !sub.cancelledAt) sub.cancelledAt = d.now();
+  for (const hp of heldPeriods(late).rest) await seedPeriod(d as Deps, sub, hp, false);
+  await d.store.putSubscription(sub);
+  return true;
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
 // and the f237 repair in reconcile.ts, so a repaired row is the row markPaid would have written.

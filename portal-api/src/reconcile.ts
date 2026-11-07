@@ -5,7 +5,8 @@
 // What it cannot repair (pinned in test): a crash BEFORE the purchase row flips to paid leaves the purchase pending, so nothing says it was paid; that needs Stripe's own record.
 import type { Store } from "./store.ts";
 import { PRODUCTS } from "./catalogue.ts";
-import { issueInvoiceOnce, buildSubscription } from "./service.ts";
+import { issueInvoiceOnce, buildSubscription, replayLateFacts, leaseKey, LEASE_MS } from "./service.ts";
+import { randomToken } from "./util.ts";
 import type { BillingProvider } from "./stripe.ts";
 
 export interface ReconcileReport { scanned: number; repaired: number; skipped: number; errors: string[] }
@@ -40,6 +41,10 @@ export async function reconcileSubscriptions(store: Store, billing: BillingProvi
   const d = { store, now: () => now };
   for (const p of await store.paidWithoutSubscriptionBefore(now - grace, ids)) {
     rep.scanned++;
+    const owner = randomToken("lease", 8);
+    // f242: the winner's claim lease. A live lease means the original markPaid is still mid-flight: it owns the held cancel and the seed, so this sweep leaves the purchase alone (the next sweep finds it).
+    // An expired lease means the winner died: proceed. The sweep holds the lease itself while it works, so two sweeps never seed one purchase together.
+    if (!(await store.acquireLease(leaseKey(p.id), owner, now, LEASE_MS))) { rep.skipped++; continue; }
     try {
       if (await store.subscriptionByPurchase(p.id)) { rep.skipped++; continue; } // existence check BEFORE takeFacts, which is destructive
       const s = await billing.retrieveSession(p.checkoutId);
@@ -51,11 +56,13 @@ export async function reconcileSubscriptions(store: Store, billing: BillingProvi
       const sub = await buildSubscription(d, pur, subRef, now);
       if (await store.putSubscriptionOnce(sub)) {
         rep.seeded++;
+        await replayLateFacts(d, sub); // f242: a holdFact written after buildSubscription took its facts is replayed onto the seeded row
         if (p.subscriptionId !== subId) await store.casPurchase(pur, "paid"); // persist an id the claim never stored
       } else rep.skipped++;
       const prod = PRODUCTS[p.productId];
       if (prod) await issueInvoiceOnce(d, pur, prod.amountCents, seedEventId(p.id));
     } catch (e) { rep.skipped++; rep.errors.push(`${p.id}: seed failed: ${String((e as Error)?.message ?? e)}`); }
+    finally { await store.releaseLease(leaseKey(p.id), owner); }
   }
   return rep;
 }

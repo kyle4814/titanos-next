@@ -29,7 +29,8 @@ async function load(edits: [string, string, string][] = []): Promise<Mods> {
 type Kind = "memory" | "d1";
 function world(m: Mods, kind: Kind) {
   const db = new FakeD1(), shared = new m.store.MemoryStore();
-  return { open: (): any => (kind === "d1" ? new m.d1.D1PlanStore(db) : shared), db };
+  const leases = new Map(); // f242: one lease table per world, shared by every D1 store instance (the in-memory stand-in for a shared lease row); this also removes a pre-existing ~1/6 flake in S4 (two unleased sweeps racing on the held cancel)
+  return { open: (): any => { if (kind !== "d1") return shared; const s = new m.d1.D1PlanStore(db); s.leases = leases; return s; }, db };
 }
 const base = { id: "pur1", accountId: "acc1", productId: "ai_growth", checkoutId: "cs_1", amountCents: 150000, deliverableIssued: false, refundedCents: 0, createdAt: T0 };
 async function seed(s: any, status: string = "pending", over: Record<string, unknown> = {}) {
@@ -112,6 +113,12 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     want("S4", a.seeded + b.seeded === 1, `S4 exactly one sweep seeds, got ${a.seeded}+${b.seeded}`);
     want("S4", subs[0]?.cancelledAt !== undefined, "S4 the held cancel must survive the race");
     await m.rec.reconcile(s, NOW, GRACE); want("S4", (await count(s)).inv === 1, "S4 one invoice");
+  }
+  // S4b f242: the claim lease now keeps two sweeps apart on one Memory store, so the store-level once-guard is pinned directly (defence in depth behind the lease)
+  { const { open } = world(m, kind), s = open(); await seed(s, "paid", { paidAt: T0, subscriptionId: "sub_1" });
+    const row = { id: "sub_1", accountId: "acc1", purchaseId: "pur1", productId: "ai_growth", startedAt: T0 };
+    const [a, b] = await Promise.all([s.putSubscriptionOnce({ ...row }), s.putSubscriptionOnce({ ...row, startedAt: T0 + 1 })]);
+    want("S4", a !== b && (await s.subscriptionsFor("acc1")).length === 1, `S4b putSubscriptionOnce twice: exactly one writes, got ${a}/${b}`);
   }
 
   // S5 untouched: refunded, abandoned, pending, cancelled never get a subscription (and Stripe is never asked); one-off products too

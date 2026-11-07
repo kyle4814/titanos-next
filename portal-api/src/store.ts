@@ -56,6 +56,10 @@ export interface Store {
   pendingPurchasesBefore(cutoff: number): Promise<Purchase[]>;
   // f234: how many purchases sit in each terminal-not-paid state, so a customer cancel and an abandoned checkout are counted apart.
   countByStatus(status: Purchase["status"]): Promise<number>;
+  // f242: a claim LEASE (owner token + expiry). acquireLease is true when no OTHER owner holds an unexpired lease on `key` (it then takes or renews it); false = a live lease is held by someone else.
+  // An expired lease is free to take (the holder died). releaseLease frees it only for the same owner. TEST ADAPTER ONLY (in memory, inherited by the D1 test store): a real D1 lease needs a table, a gated card.
+  acquireLease(key: string, owner: string, now: number, ttlMs: number): Promise<boolean>;
+  releaseLease(key: string, owner: string): Promise<void>;
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
@@ -99,6 +103,12 @@ export class MemoryStore implements Store {
   async purchaseById(id: string) { return this.purchases.get(id); }
   async purchaseByCheckout(c: string) { return [...this.purchases.values()].find((p) => p.checkoutId === c); }
   async purchaseByPaymentIntent(pi: string) { return [...this.purchases.values()].find((p) => p.paymentIntent === pi); }
+  leases = new Map<string, { owner: string; expiresAt: number }>();
+  async acquireLease(key: string, owner: string, now: number, ttlMs: number) { // no await between check and write
+    const cur = this.leases.get(key); if (cur && cur.owner !== owner && cur.expiresAt > now) return false;
+    this.leases.set(key, { owner, expiresAt: now + ttlMs }); return true;
+  }
+  async releaseLease(key: string, owner: string) { if (this.leases.get(key)?.owner === owner) this.leases.delete(key); }
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
