@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdtempSync, cpSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, cpSync, rmSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -115,8 +115,9 @@ test(`mutation: ${MUT.length} of ${MUT.length} adapter mutants are killed by the
   const text = readFileSync(join(SRC, "d1_plan_store.ts"), "utf8");
   for (const mu of MUT) {
     assert.equal(text.split(mu.from).length - 1, 1, `anchor must match exactly once: ${mu.id}`);
-    const dir = mkdtempSync(join(tmpdir(), "pland1_mut_"));
+    const root = mkdtempSync(join(tmpdir(), "pland1_mut_")), dir = join(root, "portal-api"); mkdirSync(dir);
     try {
+      symlinkSync(resolve(SRC, "../../lib"), join(root, "lib"));   // src/market value-imports ../../../lib
       cpSync(SRC, join(dir, "src"), { recursive: true });
       writeFileSync(join(dir, "src", "d1_plan_store.ts"), text.replace(mu.from, mu.to));
       const U = (f: string) => import(pathToFileURL(join(dir, "src", f)).href);
@@ -124,6 +125,6 @@ test(`mutation: ${MUT.length} of ${MUT.length} adapter mutants are killed by the
       const bad = await violations({ D1PlanStore: ds.D1PlanStore, svc, billing: st, resolver: dns, plan });
       assert.ok(bad.length > 0, "SURVIVED: " + mu.id);
       assert.ok(bad.some((b) => b.startsWith(mu.inv)), `killed, but not by ${mu.inv}: ${bad.slice(0, 3).join(" | ")}`);
-    } finally { rmSync(dir, { recursive: true, force: true }); }
+    } finally { rmSync(root, { recursive: true, force: true }); }
   }
 });
