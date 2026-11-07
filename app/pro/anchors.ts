@@ -7,7 +7,7 @@ import type { SeatAnchor } from "@/lib/seatAnchors";
 export const ANCHORS: SeatAnchor[] = [
   {
     id: "white-label-reports", title: "White-label reports", status: "coming", plan: "D8, plan line 322 (V2, after the soak)",
-    body: "Agency reports under your own brand are designed but not switched on. Today a pro sees the scan evidence attached to each job. Pricing and terms are on request when the feature opens.",
+    body: "Agency reports under your own brand are designed but not switched on. Below is a sample built from invented data: your logo goes in the empty slot and your brand colours set the page. Nothing is sent to anyone from this page. Pricing and terms are on request when the feature opens.",
   },
   {
     id: "leads", title: "Leads", status: "coming", plan: "D2, plan line 1477 (export-only, country gate)",

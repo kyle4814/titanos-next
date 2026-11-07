@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SeatAnchors from "@/components/SeatAnchors";
 import { ANCHORS } from "./anchors";
+import WhiteLabelReport from "@/components/WhiteLabelReport";
 import ProClient from "./client";
 
 export const metadata: Metadata = {
@@ -9,4 +10,4 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://titanos.tech/pro" },
   robots: { index: false, follow: false },
 };
-export default function ProPage() { return <><ProClient /><SeatAnchors rows={ANCHORS} /></>; }
+export default function ProPage() { return <><ProClient /><SeatAnchors rows={ANCHORS} extras={{ "white-label-reports": <WhiteLabelReport /> }} /></>; }
