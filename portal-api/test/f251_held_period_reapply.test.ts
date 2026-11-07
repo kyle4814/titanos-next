@@ -130,7 +130,7 @@ for (const kind of ["memory", "d1"] as Kind[]) {
 const MUT: [string, [string, string, string][]][] = [
   ["M1 drop the period merge (f250 behaviour)", [["service.ts", "else if (mergeTakenPeriods(d, s, taken)) ch = true;", ""]]],
   ["M3 merge overwrites the plan with the winner's (rewinds a newer sweep)", [["service.ts", "else if (mergeTakenPeriods(d, s, taken)) ch = true;", "else if (built.plan) { s.plan = built.plan; ch = true; }"]]],
-  ["M4 buildSubscriptionTaken forgets the held periods", [["service.ts", "periods: [...(sp ? [sp] : []), ...held.rest] };", "periods: [...(sp ? [sp] : [])] };"]]],
+  ["M4 buildSubscriptionTaken forgets the held periods", [["service.ts", "periods: [...(sp ? [sp] : []), ...held.rest], facts };", "periods: [...(sp ? [sp] : [])], facts };"]]],
 ];
 test("f251 mutants are all killed", async () => {
   let killed = 0;

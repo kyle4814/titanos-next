@@ -156,7 +156,7 @@ const PCS_FROM = "const out = await casEditSubscription(d, subId, (s) => {";
 const MUT: [string, [string, string, string][]][] = [
   ["M1 changePlan back to read-then-blind-put", [["plan_change_service.ts", PCS_FROM, "const out = await (async (f: (s: any) => boolean) => { const s = (await d.store.subscriptionById(subId))!; const ok = f(s); await d.store.putSubscription(s); return s; })((s) => {"]]],
   ["M2 cancelSubscription cancelAt back to re-read-then-put", [["service.ts", "await casEditSubscription(d, sub.id, (s) => { if (s.cancelAt === periodEnd) return false; s.cancelAt = periodEnd; return true; });", "{ const fresh = (await d.store.subscriptionById(sub.id)) ?? sub; fresh.cancelAt = periodEnd; await d.store.putSubscription(fresh); }"]]],
-  ["M3 markPaid first write back to a blind upsert", [["service.ts", "if (!(await d.store.putSubscriptionOnce(built))) await casEditSubscription(", "if ((await d.store.putSubscription(built), false)) await casEditSubscription("]]],
+  ["M3 markPaid first write back to a blind upsert", [["service.ts", "if (!(await d.store.putSubscriptionOnce(built))) try { await casEditSubscription(", "if ((await d.store.putSubscription(built), false)) try { await casEditSubscription("]]],
   ["M4 markPaid drops the held-cancel merge", [["service.ts", "if (built.cancelledAt && !s.cancelledAt) { s.cancelledAt = built.cancelledAt; ch = true; }", ""]]],
   ["M5 changePlan retry loses the fresh row (SUB_TRIES = 1)", [["service.ts", "const SUB_TRIES = 8;", "const SUB_TRIES = 1;"]]],
 ];

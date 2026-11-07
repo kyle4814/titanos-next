@@ -183,14 +183,18 @@ export async function markPaid(d: Deps, pur: Purchase, o: Record<string, any>, e
     Object.assign(pur, claim);
     if (o.subscription) { // f250: the winner's first write is insert-if-absent, never a blind upsert. If the row already exists (the f237 sweep seeded it after our lease expired, and a cancel webhook may have landed on it) it stands,
       // and the only thing this winner took that the sweep may not have is the held cancel and the plan: merged onto the stored row by CAS, never overwriting.
-      const { sub: built, periods: taken } = await buildSubscriptionTaken(d, pur, o.subscription, now);
-      if (!(await d.store.putSubscriptionOnce(built))) await casEditSubscription(d, built.id, (s) => {
+      const { sub: built, periods: taken, facts: tookFacts } = await buildSubscriptionTaken(d, pur, o.subscription, now);
+      if (!(await d.store.putSubscriptionOnce(built))) try { await casEditSubscription(d, built.id, (s) => {
         let ch = false;
         if (built.cancelledAt && !s.cancelledAt) { s.cancelledAt = built.cancelledAt; ch = true; }
         if (!s.plan && built.plan) { s.plan = built.plan; ch = true; }
         else if (mergeTakenPeriods(d, s, taken)) ch = true; // f251: the periods this winner took (its session period, an invoice that beat the checkout) are observed onto the sweep's plan: the later one wins, a repeat is a no-op
         return ch;
-      });
+      }); } catch (e) { // f261: the retries ran out after buildSubscriptionTaken CONSUMED the held periods and the held cancel; the webhook event is already claimed, so a redelivery is "duplicate" and cannot re-apply them.
+        // Put exactly the consumed facts back (same key, same wire shape) before the throw, so replayLateFacts (the sweep, a later webhook) finds them. A re-hold of a fact the take already removed cannot duplicate one.
+        if (e instanceof SubscriptionContention) for (const f of tookFacts) await d.store.holdFact(`sub:${pur.subscriptionId}`, f);
+        throw e;
+      }
       await replayLateFacts(d, built); // f252: a cancel or invoice period held AFTER buildSubscriptionTaken's takeFacts and before this write is drained now, through the f248 CAS helper; a second run finds nothing and writes nothing
     }
     if (pur.paymentIntent) for (const f of await d.store.takeFacts(`pi:${pur.paymentIntent}`)) await recordRefund(d, pur.id, Number(f.cents)); // f238: CAS merge, not a blind put (the claim already wrote the paid row)
@@ -246,14 +250,14 @@ export async function replayLateFacts(d: Pick<Deps, "store" | "log" | "now">, su
 export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<Subscription> { return (await buildSubscriptionTaken(d, pur, stripeSub, now)).sub; }
 // f251: the same build, but it also returns every Stripe PERIOD it took (the session/subscription_create period, then each held invoice period oldest first). A winner whose row lost to the sweep's seed
 // (its lease stalled past the TTL) observes these onto the stored row (mergeTakenPeriods), so a period it consumed from the held facts is never lost with the row it built.
-export async function buildSubscriptionTaken(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<{ sub: Subscription; periods: StripePeriod[] }> {
+export async function buildSubscriptionTaken(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number): Promise<{ sub: Subscription; periods: StripePeriod[]; facts: Record<string, unknown>[] }> {
   const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
   const cancel = facts.some((f) => f.kind === "cancel");
   const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
   const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
   await seedPeriod(d as Deps, sub, sp, true);
   for (const hp of held.rest) await seedPeriod(d as Deps, sub, hp, false); // invoices that beat the checkout, oldest first
-  return { sub, periods: [...(sp ? [sp] : []), ...held.rest] };
+  return { sub, periods: [...(sp ? [sp] : []), ...held.rest], facts };
 }
 // f251: observe periods onto a stored row's plan, oldest first. observePeriod is pure and idempotent by period start (older = stale, same = no change), so the later period wins and a replay changes nothing. True when the plan moved.
 export function mergeTakenPeriods(d: Pick<Deps, "log">, s: Subscription, periods: StripePeriod[]): boolean {
