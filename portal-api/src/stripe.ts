@@ -20,7 +20,13 @@ export interface CheckoutRequest {
   email: string; mode: "payment" | "subscription"; name: string; amountCents: number; interval?: "month" | "year";
   accountId: string; productId: string; successUrl: string; cancelUrl: string; idempotencyKey: string;
 }
+// f210: what the portal needs from a Checkout Session to decide a stuck purchase. status: open (customer can still pay), complete (finished; check paymentStatus), expired (can never be paid).
+export interface SessionInfo {
+  id: string; status: "open" | "complete" | "expired"; paymentStatus: "paid" | "unpaid" | "no_payment_required";
+  paymentIntent?: string; customer?: string; subscription?: string | Record<string, unknown>;
+}
 export interface BillingProvider {
+  retrieveSession(sessionId: string): Promise<SessionInfo>; // READ-ONLY lookup; throws on any provider error (the reconciler counts it and retries next sweep)
   createCheckout(r: CheckoutRequest): Promise<{ id: string; url: string }>;
   cancelSubscription(subId: string, atPeriodEnd: boolean): Promise<void>;
   refund(paymentIntentId: string, amountCents: number, idempotencyKey: string): Promise<{ id: string }>;
@@ -30,6 +36,14 @@ export interface BillingProvider {
 // Mock: records every call, makes no network request. Used by tests and by any run without a key.
 export class MockBilling implements BillingProvider {
   calls: { op: string; args: unknown }[] = [];
+  sessions = new Map<string, SessionInfo>(); // test control: the "Stripe side" of a session id
+  failNext: { id?: string; times: number } = { times: 0 }; // test control: make retrieveSession throw
+  async retrieveSession(id: string): Promise<SessionInfo> {
+    this.calls.push({ op: "retrieveSession", args: { id } });
+    if (this.failNext.times > 0 && (this.failNext.id === undefined || this.failNext.id === id)) { this.failNext.times--; throw new Error("stripe_503"); }
+    const s = this.sessions.get(id); if (!s) throw new Error("stripe_404");
+    return { ...s };
+  }
   async createCheckout(r: CheckoutRequest) { this.calls.push({ op: "checkout", args: r }); const id = randomToken("cs_test"); return { id, url: `https://checkout.mock.invalid/${id}` }; }
   async cancelSubscription(subId: string, atPeriodEnd: boolean) { this.calls.push({ op: "cancel", args: { subId, atPeriodEnd } }); }
   async refund(pi: string, amountCents: number, key: string) { this.calls.push({ op: "refund", args: { pi, amountCents, key } }); return { id: randomToken("re_test") }; }
@@ -53,6 +67,16 @@ export class StripeHttpBilling implements BillingProvider {
     });
     if (!r.ok) throw new Error(`stripe_${r.status}`);
     return (await r.json()) as Record<string, unknown>;
+  }
+  // GET only. NOT exercised against live Stripe (PENDING LIVE, GATE2): tests inject a fake fetch.
+  async retrieveSession(id: string): Promise<SessionInfo> {
+    const r = await this.fetchFn(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(id)}?expand[]=subscription`, { method: "GET", headers: { authorization: `Bearer ${this.key}` } });
+    if (!r.ok) throw new Error(`stripe_${r.status}`);
+    const j = (await r.json()) as Record<string, any>;
+    const status = j.status === "complete" || j.status === "expired" ? j.status : "open";
+    const ps = j.payment_status === "paid" || j.payment_status === "no_payment_required" ? j.payment_status : "unpaid";
+    const ref = (v: unknown) => (v && typeof v === "object" ? String((v as any).id) : v ? String(v) : undefined);
+    return { id: String(j.id), status, paymentStatus: ps, paymentIntent: ref(j.payment_intent), customer: ref(j.customer), subscription: j.subscription && typeof j.subscription === "object" ? j.subscription : ref(j.subscription) };
   }
   async createCheckout(r: CheckoutRequest) {
     const b: Record<string, string> = {

@@ -27,4 +27,4 @@ CREATE TABLE IF NOT EXISTS partner_ledger (
 CREATE TABLE IF NOT EXISTS referrals (account_id TEXT PRIMARY KEY REFERENCES accounts(id), partner_id TEXT NOT NULL REFERENCES tenants(id), claimed_at INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS payouts (id TEXT PRIMARY KEY, partner_id TEXT NOT NULL REFERENCES tenants(id), amount_cents INTEGER NOT NULL, status TEXT NOT NULL CHECK (status IN ('pending_approval','paid','failed','rejected')), created_at INTEGER NOT NULL, provider_ref TEXT, reason TEXT);
 CREATE TABLE IF NOT EXISTS ent_failures (id INTEGER PRIMARY KEY AUTOINCREMENT, where_ TEXT NOT NULL, detail TEXT NOT NULL, at INTEGER NOT NULL);
-ALTER TABLE invoices ADD COLUMN purchase_id TEXT;
+ALTER TABLE invoices ADD COLUMN purchase_id TEXT REFERENCES purchases(id); -- f245: carries the FK that f192 0005 used to add (its duplicate ALTER is stripped on this merged line)

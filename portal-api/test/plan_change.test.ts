@@ -6,6 +6,9 @@ import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import * as REAL from "../src/plan_change.ts";
 import { MemoryStore } from "../src/store.ts";
+import { D1PlanStore } from "../src/d1_plan_store.ts";
+import { FakeD1 } from "./fake_d1.ts";
+import { STORE_KINDS, newStore, seedSub, type StoreKind } from "./harness.ts";
 import { MockBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { MockMailer, type Deps } from "../src/service.ts";
@@ -219,13 +222,13 @@ for (const mu of MUTANTS) {
   });
 }
 
-// ---------- Store wiring (MemoryStore only; no Stripe call) ----------
-test("changePlan through the Store: persists plan, sets cancelAt, replay is a no-op, billing is data only", async () => {
-  const store = new MemoryStore(), billing = new MockBilling(); let t = T0 + 10 * DAY;
+// ---------- Store wiring, run against BOTH stores (f172): MemoryStore and D1PlanStore over FakeD1; no Stripe call ----------
+for (const kind of STORE_KINDS) test(`[${kind}] changePlan through the Store: persists plan, sets cancelAt, replay is a no-op, billing is data only`, async () => {
+  const store = newStore(kind), billing = new MockBilling(); let t = T0 + 10 * DAY;
   const d: Deps = { store, billing, dns: fakeResolver({}), mailer: new MockMailer(), now: () => t, siteOrigin: "https://titanos.tech", webhookSecret: "whsec_test_fixture" };
   const a = { id: "acc_syn1", email: "synthetic@example.invalid", seat: "owner", createdAt: T0 };
   await store.putAccount(a);
-  await store.putSubscription({ id: "sub_syn1", accountId: a.id, purchaseId: "pur_syn1", productId: GROW, startedAt: T0 });
+  await seedSub(store, a.id, { id: "sub_syn1", purchaseId: "pur_syn1", productId: GROW, startedAt: T0 });
   const up = await changePlan(d, a, "sub_syn1", { eventId: "evt_u", kind: "upgrade", to: EMB as any });
   assert.equal(up.outcome.ok, true); assert.ok(up.billingIntent && up.billingIntent.live === false && up.billingIntent.amountCents > 0);
   assert.equal((await store.subscriptionById("sub_syn1"))!.productId, EMB);
@@ -238,6 +241,40 @@ test("changePlan through the Store: persists plan, sets cancelAt, replay is a no
   assert.equal(sub.cancelAt, c.outcome.ok ? c.outcome.effectiveAt : -1); assert.ok(sub.cancelAt! >= REAL.termEnd(T0));
   assert.equal(billing.calls.length, 0, "no billing call is made by plan change");
   await assert.rejects(() => changePlan(d, { ...a, id: "acc_other" }, "sub_syn1", { eventId: "x", kind: "keep" }), /not_found/);
-  await store.putSubscription({ id: "sub_mon", accountId: a.id, purchaseId: "p", productId: "monitor_monthly", startedAt: T0 });
+  await seedSub(store, a.id, { id: "sub_mon", purchaseId: "p", productId: "monitor_monthly", startedAt: T0 });
   await assert.rejects(() => changePlan(d, a, "sub_mon", { eventId: "y", kind: "keep" }), /not_a_retainer/);
+});
+
+// ---------- generated histories through the Store, differential: memory vs D1 with a RESTART before every step (f172) ----------
+// The same seeded histories as the pure property run are driven through changePlan. The D1 run builds a NEW D1PlanStore over the same
+// FakeD1 before each step, so every read comes from SQLite rows and nothing survives in process memory. The final plan, cancelAt and
+// product must equal the MemoryStore run byte for byte, and every accepted cancel must respect the independent minimum-term oracle.
+const DN = 120;
+async function driveStore(kind: StoreKind, h: ReturnType<typeof genHistory>, restart: boolean) {
+  const d1 = new FakeD1(); let store = newStore(kind, d1), t = h.start; const billing = new MockBilling();
+  const mk = (): Deps => ({ store, billing, dns: fakeResolver({}), mailer: new MockMailer(), now: () => t, siteOrigin: "https://synthetic.invalid", webhookSecret: "whsec_test_fixture" });
+  const a = { id: "acc_h", email: "synthetic@example.invalid", seat: "owner", createdAt: h.start };
+  await store.putAccount(a); await seedSub(store, a.id, { id: "sub_h", purchaseId: "pur_h", productId: h.tier, startedAt: h.start });
+  const outs: string[] = [];
+  for (const st of h.steps) {
+    if (restart && kind === "d1") store = new D1PlanStore(d1);
+    t = st.at;
+    const r = await changePlan(mk(), a, "sub_h", st.req);
+    outs.push(JSON.stringify([r.outcome, r.replayed, r.billingIntent]));
+  }
+  if (restart && kind === "d1") store = new D1PlanStore(d1);
+  return { sub: await store.subscriptionById("sub_h"), outs, billing };
+}
+test(`[d1 restart vs memory] ${DN} seeded histories end in the same plan, cancelAt and product, with a new store before every step`, async () => {
+  const r = rng(SEED + 172); const hs = Array.from({ length: DN }, () => genHistory(r)); let steps = 0, cancels = 0;
+  for (const [i, h] of hs.entries()) {
+    const mem = await driveStore("memory", h, false), d1 = await driveStore("d1", h, true);
+    assert.deepEqual(d1.outs, mem.outs, `history ${i}: outcomes differ`);
+    assert.deepEqual(JSON.parse(JSON.stringify(d1.sub)), JSON.parse(JSON.stringify(mem.sub)), `history ${i}: stored subscription differs`);
+    assert.equal(d1.billing.calls.length, 0);
+    steps += h.steps.length;
+    if (d1.sub!.cancelAt !== undefined) { cancels += 1; assert.ok(d1.sub!.cancelAt >= calTermEnd(h.start), `history ${i}: cancel inside the minimum term`); }
+  }
+  assert.ok(cancels > 10, "the run must actually exercise cancels: " + cancels);
+  console.log(`PLAND1_COUNTS histories=${DN} steps=${steps} cancels=${cancels} stores=memory,d1(restart each step)`);
 });
