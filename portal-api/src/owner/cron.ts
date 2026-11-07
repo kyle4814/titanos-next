@@ -20,9 +20,10 @@ const msg = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0
 // A one-domain window onto the owner store, so monitorTick (which loops over all()) can only touch that domain.
 class OneDomain implements OwnerStore {
   base: OwnerStore; s: DomainState;
-  constructor(base: OwnerStore, s: DomainState) { this.base = base; this.s = s; }
+  constructor(base: OwnerStore, s: DomainState) { this.base = base; this.s = s; if (base.putCas) this.putCas = (x, r) => base.putCas!(x, r); }
   async get(id: string) { return this.base.get(id); }
   async put(s: DomainState) { return this.base.put(s); }
+  putCas?: (s: DomainState, expectedRev: number) => Promise<boolean>;
   async all() { return [this.s]; }
 }
 
