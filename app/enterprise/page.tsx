@@ -10,6 +10,7 @@ import { SystemLabel, DepthIndex } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import SeatAnchors from "@/components/SeatAnchors";
+import EnterpriseSavingsCalculator from "@/components/EnterpriseSavingsCalculator";
 import { ANCHORS } from "./anchors";
 import { FLEX } from "@/lib/flex";
 
@@ -86,7 +87,7 @@ export default function EnterprisePage() {
           </div>
         </div>
       </SectionReveal>
-      <SeatAnchors rows={ANCHORS} />
+      <SeatAnchors rows={ANCHORS} slots={{ "savings-calculator": <EnterpriseSavingsCalculator /> }} />
       <FrontLoad
         extra={[
           { q: "I run IT. Where does this sit?", a: "Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change. Your IT team stays in charge." },
