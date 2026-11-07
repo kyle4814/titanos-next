@@ -57,11 +57,11 @@ async function buildRig() {
   if (inv?.id) ids.invites = inv.id;
   const por = await h.j(await h.req("POST", `/partners/${par.id}/portals`, { token: p.session, body: { name: "Fuzz Portal" } }));
   if (por?.id) ids.portals = por.id;
-  const key = await h.j(await h.req("POST", "/keys", { token: a.session, body: { scopes: ["scan"] } }));
+  const key = await h.j(await h.req("POST", "/keys", { token: a.session, body: { scopes: ["scan:read"] } }));
   if (key?.id) ids.keys = key.id;
   const job = await h.j(await h.req("POST", "/market/jobs", { token: a.session, body: { domainId: d.id, check: "SPF" } }));
   if (job?.job?.id) ids.jobs = job.job.id;
-  const mk = await h.j(await h.req("POST", "/keys", { token: a.session, body: { scopes: ["scan:read", "scan", "fix", "read", "write"] } }));
+  const mk = await h.j(await h.req("POST", "/keys", { token: a.session, body: { scopes: ["scan:read", "account:read", "credits:read", "catalogue:read"] } }));
   const tk: string = mk.key;
   ids.subscriptions = "sub_x"; ids.invoices = "inv_x";
   return { h, a, b, p, tk, ids, domain, stores: [...(fakeD1 ? [] : [h.store]), entStore, marketStore, ownerStore, h.mailer, h.billing, payments, payouts, h.model] as unknown[] };
