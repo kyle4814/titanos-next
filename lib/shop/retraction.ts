@@ -14,6 +14,7 @@ export type RetractPolicy = {
   activeClusterIds?: string[];    // when given, an entry whose cluster is not listed is retracted (cluster removed)
 };
 export const DEFAULT_MAX_RETRACT_FRACTION = 0.2;
+export class RetractionCapError extends Error { constructor(message: string) { super(message); this.name = "RetractionCapError"; } }
 const DAY_MS = 86_400_000;
 
 type StoreView = StoredGraded[];
@@ -52,7 +53,7 @@ export function planRetractions(store: StoreView, now: string, policy: RetractPo
 export function assertRetractionCap(count: number, total: number, policy: RetractPolicy): void {
   const cap = policy?.maxRetractFraction ?? DEFAULT_MAX_RETRACT_FRACTION;
   if (total > 0 && count / total > cap) {
-    throw new Error(`retraction cap: ${count} of ${total} entries (${((count / total) * 100).toFixed(1)}%) would be retracted, over the ${(cap * 100).toFixed(1)}% cap; refusing to mass-delete`);
+    throw new RetractionCapError(`retraction cap: ${count} of ${total} entries (${((count / total) * 100).toFixed(1)}%) would be retracted, over the ${(cap * 100).toFixed(1)}% cap; refusing to mass-delete`);
   }
 }
 
