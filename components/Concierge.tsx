@@ -1,20 +1,23 @@
 "use client";
 // F-C6 mount. The rules-based concierge router behind a plain form. Zero model calls, zero network: the adapter is a no-op,
 // so an unmatched ask is never claimed as saved. Any visitor text is rendered as text by React, never as markup.
-import { useMemo, useState } from "react";
-import { makeAsk } from "@/lib/concierge/catalogue";
+import { useRef, useState } from "react";
 import { viewOf } from "@/lib/concierge/view";
 import type { View } from "@/lib/concierge/view";
 import s from "./Concierge.module.css";
 
+async function loadAsk() { return (await import("@/lib/concierge/catalogue")).makeAsk(); }
+
 export default function Concierge() {
-  const ask = useMemo(() => makeAsk(), []);
+  // The catalogue (every offer shelf, ~57 KB gz) loads on the first Ask, not with the page: keeps /faq under the 250 KB first-load budget.
+  const askRef = useRef<Awaited<ReturnType<typeof loadAsk>> | null>(null);
   const [q, setQ] = useState("");
   const [view, setView] = useState<View | null>(null);
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!q.trim()) return;
-    setView(viewOf(await ask(q, "guest")));
+    askRef.current ??= await loadAsk();
+    setView(viewOf(await askRef.current(q, "guest")));
   }
   return (
     <section className={s.box} aria-label="Ask the instant assistant">
