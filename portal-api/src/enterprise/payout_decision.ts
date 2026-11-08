@@ -13,13 +13,19 @@ export type DecisionKind = "approve" | "deny";
 export interface ApprovalRecord { payoutId: string; decision: DecisionKind; cardId: string; decidedAt: number; expiresAt: number; reason?: string }
 export interface ApprovalStore {
   // ATOMIC first-writer-wins: returns the stored record and whether this call created it. A D1 adapter: INSERT ... ON CONFLICT DO NOTHING then SELECT.
-  decide(r: ApprovalRecord): Promise<{ record: ApprovalRecord; created: boolean }>;
-  get(payoutId: string): Promise<ApprovalRecord | undefined>;
+  decide(r: ApprovalRecord, partnerId?: string): Promise<{ record: ApprovalRecord; created: boolean }>;   // partnerId (optional): another partner's payout is invisible
+  get(payoutId: string, partnerId?: string): Promise<ApprovalRecord | undefined>;
 }
 export class MemoryApprovalStore implements ApprovalStore {
-  private m = new Map<string, ApprovalRecord>();
-  async decide(r: ApprovalRecord) { const e = this.m.get(r.payoutId); if (e) return { record: e, created: false }; this.m.set(r.payoutId, r); return { record: r, created: true }; }
-  async get(id: string) { return this.m.get(id); }
+  private m = new Map<string, ApprovalRecord>(); private owner = new Map<string, string>();
+  async decide(r: ApprovalRecord, partnerId?: string) {
+    const e = this.m.get(r.payoutId), o = this.owner.get(r.payoutId);
+    if (partnerId !== undefined && o !== undefined && o !== partnerId) throw new Error("approval_payout_unknown");   // another partner's payout is invisible (matches D1)
+    if (e) return { record: e, created: false };
+    this.m.set(r.payoutId, r); if (partnerId !== undefined) this.owner.set(r.payoutId, partnerId);
+    return { record: r, created: true };
+  }
+  async get(id: string, partnerId?: string) { const o = this.owner.get(id); return partnerId !== undefined && o !== undefined && o !== partnerId ? undefined : this.m.get(id); }
 }
 
 export interface DecideEnv { store: EntStore; approvals: ApprovalStore; transfer: PayoutProvider; now: number; newId: () => string }
@@ -40,7 +46,7 @@ export async function decidePayoutRecorded(env: DecideEnv, req: DecideReq): Prom
   if (req.cardId !== undefined && req.cardId !== cardId) return { ok: false, refused: "card_mismatch", payout: p0 };
 
   // a decision already on record: same decision is a no-op success, the opposite one is refused
-  const prior = await env.approvals.get(p0.id);
+  const prior = await env.approvals.get(p0.id, p0.partnerId);
   if (prior) return prior.decision === req.decision ? replay(p0, prior) : { ok: false, refused: "already_decided", payout: p0 };
 
   if (p0.status !== "pending_approval") return { ok: false, refused: "wrong_state", payout: p0 };
@@ -52,7 +58,7 @@ export async function decidePayoutRecorded(env: DecideEnv, req: DecideReq): Prom
   }
 
   const reason = req.decision === "deny" ? clean(req.reason) || "denied" : undefined;
-  const { record, created } = await env.approvals.decide({ payoutId: p0.id, decision: req.decision, cardId, decidedAt: env.now, expiresAt, reason });
+  const { record, created } = await env.approvals.decide({ payoutId: p0.id, decision: req.decision, cardId, decidedAt: env.now, expiresAt, reason }, p0.partnerId);
   if (!created) return record.decision === req.decision ? replay((await env.store.payoutById(p0.id)) ?? p0, record) : { ok: false, refused: "already_decided", payout: p0 };
 
   // we own the decision. compare-and-set on the payout: only a pending_approval payout moves.
