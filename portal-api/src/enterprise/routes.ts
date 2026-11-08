@@ -53,7 +53,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   if (top === "enterprise" && seg.length >= 2) {
     const tid = seg[1], rest = seg.slice(2).join("/");
     if (rest === "" && m === "GET") { const { tenant, role } = await s.access(d, ctx, tid, "viewer"); return json({ id: tenant.id, name: tenant.name, kind: tenant.kind, role, ssoEnforced: tenant.ssoEnforced, partnerAccess: tenant.partnerAccess }); }
-    if (rest === "estate" && m === "GET") return json(await s.estateView(d, ctx, tid));
+    if (rest === "estate" && m === "GET") return json(await s.estateView(d, ctx, tid, new URL(req.url).searchParams.get("refresh") === "1"));
     if (rest === "estate.csv" && m === "GET") return text(await s.estateCsv(d, ctx, tid), "text/csv; charset=utf-8");
     if (rest === "assets" && m === "GET") return json(await s.listAssets(d, ctx, tid));
     if (rest === "assets" && m === "POST") return json(await s.addAsset(d, ctx, tid, await body(req)), 201);

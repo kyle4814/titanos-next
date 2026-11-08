@@ -49,8 +49,10 @@ export function estateCache(o: EstateCacheOpts) {
   }
   const limited = (): Assessment => ({ status: "UNKNOWN", reason: "rate_limited", scannedAt: now(), resolverSource: o.inner.source });
 
-  async function assess(tenant: string, domain: string, opts: { refresh?: boolean } = {}): Promise<Assessment> {
+  async function assess(tenant: string, domain: string, opts: { refresh?: boolean; cacheOnly?: boolean } = {}): Promise<Assessment> {
     const k = keyOf(tenant, domain), e = store.get(k);
+    // cacheOnly (f310): never call the resolver. Serve the entry even if expired (stale), else UNKNOWN rate_limited.
+    if (opts.cacheOnly) { if (e) { if (now() >= e.expires) stats.staleServed++; else stats.hits++; return e.a; } stats.rateLimited++; return limited(); }
     if (e && !opts.refresh && now() < e.expires) { store.delete(k); store.set(k, e); stats.hits++; return e.a; }
     const pending = inflight.get(k);
     if (pending) return pending;                          // concurrent identical request shares one scan
@@ -73,8 +75,10 @@ export function estateCache(o: EstateCacheOpts) {
     return run;
   }
   /** A ScanProvider scoped to one tenant, ready to drop into estate() later. */
-  function forTenant(tenant: string, opts: { refresh?: boolean } = {}): ScanProvider {
+  function forTenant(tenant: string, opts: { refresh?: boolean; cacheOnly?: boolean } = {}): ScanProvider {
     return { source: o.inner.source, concurrency: o.inner.concurrency, scan: (d) => o.inner.scan(d), assess: (d) => assess(tenant, d, opts) };
   }
   return { assess, forTenant, invalidate(tenant: string, domain: string) { store.delete(keyOf(tenant, domain)); }, stats: () => ({ ...stats, size: store.size }) };
 }
+
+export type EstateCache = ReturnType<typeof estateCache>;
