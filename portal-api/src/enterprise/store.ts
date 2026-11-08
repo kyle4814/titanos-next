@@ -41,6 +41,7 @@ export interface EntStore {
   ledgerForInvoice(invoiceId: string): Promise<LedgerEntry[]>; // across partners
   putReferral(r: Referral): Promise<boolean>;    // false when the account already has one
   referralOf(accountId: string): Promise<Referral | undefined>;
+  referralsOfPartner(partnerId: string): Promise<Referral[]>;   // f313: PARTNER-SCOPED (the book resolves referral identity from this partner's own rows only)
   // ATOMIC: compute the available balance and write the payout plus its negative ledger entry in one step. A D1
   // adapter must do this in one transaction (batch). Returns undefined when the balance is under `minCents`.
   reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }): Promise<Payout | undefined>;
@@ -111,6 +112,7 @@ export class MemoryEntStore implements EntStore {
   async ledgerForInvoice(id: string) { return [...this.ledger.values()].filter((e) => e.invoiceId === id); }
   async putReferral(r: Referral) { if (this.referrals.has(r.accountId)) return false; this.referrals.set(r.accountId, r); return true; }
   async referralOf(a: string) { return this.referrals.get(a); }
+  async referralsOfPartner(p: string) { return [...this.referrals.values()].filter((r) => r.partnerId === p); }
   async reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }) {
     // no await between the balance read and the writes: atomic in this single-threaded adapter
     const avail = availableCents([...this.ledger.values()].filter((e) => e.partnerId === partnerId), now);

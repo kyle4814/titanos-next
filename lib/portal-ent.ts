@@ -38,6 +38,7 @@ export const setPartnerAccess = (api: Api, tid: string, enabled: boolean) => cal
 export const portals = (api: Api, pid: string) => call(api, "GET", `/partners/${pid}/portals`);
 export const createPortal = (api: Api, pid: string, b: Json) => call(api, "POST", `/partners/${pid}/portals`, b);
 export const portalEstate = (api: Api, pid: string, cid: string) => call(api, "GET", `/partners/${pid}/portals/${cid}/estate`);
+export const book = (api: Api, pid: string, cursor?: string) => call(api, "GET", `/partner/book?partnerId=${encodeURIComponent(pid)}&limit=50${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`);   // f313: the partner's book of clients
 export const ledger = (api: Api, pid: string) => call(api, "GET", `/partners/${pid}/ledger`);
 export const requestPayout = (api: Api, pid: string) => call(api, "POST", `/partners/${pid}/payouts`);
 export const claimReferral = (api: Api, code: string) => call(api, "POST", "/referrals/claim", { code });
