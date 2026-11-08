@@ -1,0 +1,116 @@
+Skip to main content
+TITANOS
+THE LEARNING LOOP
+We did not buy a bigger machine, we changed the system
+
+Seven steps, and every turn leaves a receipt.
+
+THE BIGGEST TRUE NUMBER
+
+1,451 jobs in 24 hours
+
+MEASURED
+
+Finished by our own worker fleet, 1.1 percent failed or stuck. Counted from the job ledger on 9 October 2026 (195.7 worker-hours, median job 3 minutes).
+
+Source: Job ledger, via lib/ledger.json
+
+THE LEARNING LOOP
+
+Every turn of the loop leaves a receipt.
+LOOP
+1
+Work
+2
+Measure
+3
+Find waste
+4
+Turn the lesson into code
+5
+Re-run
+6
+Lower the cost
+7
+More work
+Work
+
+A job runs and leaves a record.
+
+RECEIPT
+
+1,451 jobs
+
+Worker jobs finished in the last 24 hours (job ledger)
+
+MEASURED 2026-10-09 · Worker fleet job ledger
+
+Work: A job runs and leaves a record. Receipt: 1,451 jobs, MEASURED.
+Measure: We count what it cost and how long it took. Receipt: 3 min, MEASURED.
+Find waste: We look for the part that did not need to happen. Receipt: 224 s to 3.1 s, MEASURED.
+Turn the lesson into code: A fix becomes a test so the mistake cannot return quietly. Receipt: 124 s, MEASURED.
+Re-run: The same job runs again on the improved system. Receipt: US$0.973 to US$0.116, MEASURED.
+Lower the cost: The new cost is measured against the old one. Receipt: US$0.973 to US$0.116, MEASURED.
+More work: The saving buys more jobs, and the loop turns again. Receipt: 1,451 jobs, MEASURED.
+1. Work
+A job runs and leaves a record.
+2. Measure
+We count what it cost and how long it took.
+3. Find waste
+We look for the part that did not need to happen.
+4. Turn the lesson into code
+A fix becomes a test so the mistake cannot return quietly.
+5. Re-run
+The same job runs again on the improved system.
+6. Lower the cost
+The new cost is measured against the old one.
+7. More work
+The saving buys more jobs, and the loop turns again.
+The same loop can run on your own repeat work.
+
+Would it be okay if we showed you? A no is welcome.
+
+See how it applies to you
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

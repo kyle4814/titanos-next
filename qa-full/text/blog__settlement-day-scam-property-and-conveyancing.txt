@@ -1,0 +1,116 @@
+Skip to main content
+TITANOS
+EMAIL SECURITY
+"Settlement is Friday, here are our updated bank details"
+← Back to the archive
+LOGGED 4 OCTOBER 2026 · 4 MIN READ
+
+One email, sent at exactly the right moment, can redirect a house deposit.
+
+Hi, I'm Kyle, a one-person Brisbane business (TITANOS). We check the public side of small-business email security. This is for agents, conveyancers and solicitors. It is a plain read, with nothing to buy.
+
+📬 The scam, step by step
+
+It slots into a conversation that already looks real.
+
+By settlement week, the buyer, seller, both firms, the bank and often the agent are all copied on one long email thread. A fake message fits straight in: "Bank details have changed, please use these for tomorrow's transfer."
+
+The ASD's Australian Cyber Security Centre has said it "has observed a growing trend of cybercriminals targeting the property and real estate sector to conduct business email compromise (BEC) scams in Australia". The pattern it describes is criminals impersonating a buyer, seller, agent, conveyancer or lender, then inserting fraudulent bank details for the settlement payment.
+
+😬 Can people spot the fake?
+
+Mostly, no. And that is not a character flaw.
+
+PEXA, which runs Australia's electronic property settlement platform, commissioned research in July 2025. It surveyed 1,030 people. 97% failed to spot the warning signs in a simulated property email, and most had believed beforehand that they would catch a fake.
+
+That is PEXA's own commissioned research, not government data. But it lines up with what the ACSC describes: the fake looks right, arrives at the right time, and asks for money to move somewhere new.
+
+💰 What one can cost
+
+These are all-industry figures, not property-only ones. We could not find an official real-estate-specific loss rate, and we will not make one up.
+
+ACSC Annual Cyber Threat Report 2024 to 2025: business email compromise losses passed $98 million, with an average of $64,000 per report.
+Average self-reported cost of a cybercrime incident for a business: $80,850, per the ACSC's business factsheet for the same year.
+☎️ The one habit that stops it
+
+A two-minute phone call, to a number you already had.
+
+Not the number in the email. Not a number the "new" sender gives you. The Queensland Law Society's trust account alert tells practices the same thing: never confirm bank details over email.
+
+Here is how to make it stick in a busy office:
+
+Keep one shared sheet of verified phone numbers for each solicitor, conveyancer and bank on a live deal, sourced from somewhere other than email.
+Make the rule firm policy: "no bank detail change without a call". Staff can point to it instead of feeling like they are holding up a deal.
+Brief the admin team who see settlement threads, not just principals.
+🔧 The technical side, in plain English
+
+Ask your IT provider three questions.
+
+Do we have SPF and DKIM set up for every system that sends email as us, including our CRM?
+What is our DMARC policy: none, quarantine or reject? ("None" watches but does not block.)
+Is multi-factor authentication on for every staff email login and for trust account or property software?
+
+This stops people faking your exact domain. It does not stop a lookalike address, which is why the phone call still comes first.
+
+📊 Our own number
+
+Not property-specific, so read it as a likelihood. Across 8 sampled bands of Australian small-business domains, 47.5% (172 of 362) had neither an enforced DMARC policy nor a security.txt file. If nobody at your firm has checked, the honest starting guess is close to a coin flip.
+
+👋 A calm next step
+
+Curious where your own domain sits? The free check takes a couple of minutes: titanos.tech/scan (https://titanos.tech/scan). Or book a free audit call at titanos.tech/audit (https://titanos.tech/audit) and we will go through it together. No pressure, and the free part stays free.
+
+Sources: ASD ACSC, property-related BEC alert: https://www.cyber.gov.au/about-us/alerts/property-related-business-email-compromise-scams-rising-australia - PEXA, "97% Of Aussies Miss Property Scam Warning Signs": https://www.pexa-group.com/content-hub/news/aussies-miss-property-scam-warning-signs/ - ASD ACSC, Annual Cyber Threat Report 2024 to 2025: https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025 - ASD ACSC, 2024 to 25 factsheet for businesses: https://www.cyber.gov.au/sites/default/files/2025-10/Annual%20Cyber%20Threat%20Report%202024-25%20factsheet%20for%20businesses%20and%20organisations.pdf - Queensland Law Society, Trust Account Alert: https://www.qls.com.au/news-media-advocacy/trust-account-alert - Our own measurement, Australian small-business domains (TITANOS research, 02_anz-smb-email-security-stat-report.md)
+
+Drafted with AI help (Claude) from sourced material, and approved by Kyle Deligny, TITANOS, ABN 34 318 502 254, before publishing.
+
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

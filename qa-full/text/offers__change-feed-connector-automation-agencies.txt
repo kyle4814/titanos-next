@@ -1,0 +1,124 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Change Feed Connector for Automation Agencies
+
+A ready-made trigger feed for Make, Zapier and n8n: company change events, filtered for each of your clients, sent straight to your workflow.
+
+Built for automation and CRM consultants who build lead flows for local clients. AU$199/mo. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free sandbox endpoint with sample events, so you can test your workflow first.
+
+The price is AU$199/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Make, Zapier and n8n consultants
+•
+CRM and lead-flow builders serving local businesses
+•
+Agencies that cannot build a company-change dataset themselves
+What you get
+✓
+A documented webhook (an automatic message sent to your workflow when something changes)
+✓
+A Make and Zapier trigger recipe
+✓
+Client-specific filtered change events posted to your endpoint
+✓
+A separate setting for each end client, with a white-label option
+
+And how does it go from a yes to a finished job?
+
+How it works
+You give us a web address for your workflow and the filters for each client.
+We send matching events to that address as they happen.
+Your automation takes it from there.
+Why TITANOS does it differently
+
+A ready-made trigger feed with history behind it. Each consultant becomes a channel to dozens of clients without building the data themselves.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$199/mo
+
+AU$199 a month plus AU$20 a month for each additional end client.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who are you?
++
+TITANOS is a Queensland sole trader business run by Kyle Deligny, ABN 34 318 502 254.
+Where do the events come from?
++
+Public company registers and published government contract awards.
+Do I keep my client relationships?
++
+Yes, entirely. The white-label option means your clients deal with you.
+What does it cost?
++
+The price is AU$199 a month plus AU$20 for each additional end client. No GST is charged.
+Can I test it first?
++
+Yes. The free sandbox sends sample events. A no after testing is welcome.
+
+Want more later? See AI partner retainers.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free sandbox endpoint with sample events, so you can test your workflow first.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

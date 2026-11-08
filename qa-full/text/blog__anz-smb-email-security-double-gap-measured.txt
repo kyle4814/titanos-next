@@ -1,0 +1,118 @@
+Skip to main content
+TITANOS
+SECURITY
+Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file
+← Back to the archive
+LOGGED 1 OCTOBER 2026 · 7 MIN READ
+
+Across 8 independently sampled bands of the Australian .com.au namespace, ranks 200,000 to 1,000,000 by traffic, between 37.5% and 55.0% of domains sampled have both no enforced DMARC policy and no published security.txt file. This report calls that combination the double gap. The pooled rate across all 8 Australian bands is 47.5%, 172 double-gap domains out of 362 sampled with both checks confirmed. The same method run on New Zealand and Singapore's namespaces lands in the same rough range, roughly one in three to three in five domains, depending on the band. Canada's namespace shows a similar or higher DMARC gap rate. This is a methodology report, not a sales pitch and not a list of targets. No domain, business or person is named anywhere in it.
+
+What this actually means for a business
+
+If a domain has no enforced DMARC policy, anyone can send an email that looks like it came from that business, and there is no rule telling the receiving mail server to reject or quarantine it. No guessing and no insider access needed, it is a check anyone can run against public DNS right now. If a security.txt file is also missing, there is no published channel for a researcher who finds a real problem to report it before it becomes a public problem. On these numbers, roughly half of small businesses across Australia, New Zealand, Singapore and Canada are carrying both gaps at once.
+
+What was measured, and how
+
+Two checks ran independently on each sampled domain. DMARC: a DNS lookup on the domain's DMARC record, cross-checked against two independent public resolvers to catch a resolver-specific false negative before concluding a record is genuinely absent. A domain counts as DMARC-gapped if the record is absent entirely or present but set to monitor-only, meaning it is not actually enforcing anything. Security.txt: a direct, honestly-identified request for the standard security.txt path. A domain counts as confirmed absent only on an actual not-found response or a confirmed catch-all redirect, never on a timeout or an ambiguous response, those are recorded as unknown and excluded from the count rather than guessed at. Nothing was called, emailed, registered, or otherwise contacted at any point in this research. Every data point is a passive DNS lookup or a public request for a file the relevant standard says is meant to be published.
+
+How domains were chosen
+
+The seed population is a research-grade, de-biased top one million domain ranking, filtered to the relevant country code. The rank band itself is the small-business filter: the bottom of that ranking sits well below where national brands, government, banks and major media operate, and well above total obscurity. Within each band, a cumulative denylist strips out brand names, franchises, government bodies, media outlets and hosting companies, since a hosting company having no DMARC record is not the finding, an independent trades or retail business having one is. Domains are sampled evenly spaced through the surviving pool, not randomly, which keeps the sample spread across the whole band. Before any domain is used, it is checked by eye, and anything that turns out to be a duplicate, a hijacked domain, or otherwise not a genuine independent business is swapped out before sampling.
+
+The findings
+Australia, pooled across all 8 bands: 47.5% double-gap rate, 172 of 362 domains sampled.
+The top four Australian bands sit in a tight cluster, 51.2% to 55.0%.
+New Zealand: 32.5% of the full first-batch sample, rising to 54.2% once unresolved checks are excluded.
+Singapore, three batches: 44.0%, 37.9% and 41.7% of full sample respectively.
+Canada: 75.0% DMARC-gap rate as the headline figure, 26.9% confirmed double-gap as the conservative floor.
+
+Two Australian bands came in lower than the rest, and both drops have a recorded, checked explanation rather than being left as unexplained noise. One band had a materially higher concentration of a storefront platform whose shared hosting produced timeouts on the security.txt check rather than a clean answer, those domains correctly landed in the unknown bucket, not the double-gap count. In another band, a bug was found mid-run in the brand-name filter, a short fragment was matching against any domain containing that string anywhere rather than as its own word. The tool was corrected and the cumulative filter list was cleaned within the same research session, every later band ran on the corrected tool end to end.
+
+Limitations, stated plainly
+Popularity is not a business census. The rank-band filter is a reasonable, cheap proxy for an independent small business, not a guarantee, which is why every sample still gets a manual check by eye.
+This is a single snapshot in time, not a trend. DMARC policies and security.txt files change, and nothing here is monitored longitudinally.
+Unknown is excluded on purpose, never counted as a confirmed double gap. This makes every double-gap number in this report a conservative floor, not an upper bound.
+Known instrument artefacts (the storefront-timeout effect and the filter bug) are disclosed because they measurably affected a batch's headline rate, not smoothed over.
+
+The United Kingdom and Ireland were legally cleared for this method but have not been scanned yet, no rate is claimed for either. The United States, India and South Africa were checked only for whether live outbound contact based on findings like these would be lawful, not for the DMARC or security.txt rate itself, and that legal question came back mixed across those three markets. No domain, business, or person is named in this report, the finding is a rate, not a target list.
+
+AI-assistance disclosure: this report was drafted by Claude (Anthropic) from raw scan data the same automated research pipeline collected. A human operator directed the scans, set the methodology, and reviewed this draft before publication. No underlying data was invented, every aggregate above traces to a dated source file.
+
+Want to know if your own domain has the double gap? Get your free scan, it checks your DMARC record and your security.txt in minutes, no login required.
+
+GET YOUR FREE SCAN →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+Is this a list of vulnerable businesses?
++
+No. No domain, business, or person is named in this report or in any published version of it. The finding is a rate, not a target list.
+What does 'no DMARC' actually mean for a business?
++
+DMARC with no policy, or a policy set to monitor-only, means a domain's mail can be spoofed by a third party, sent so it appears to come from that business, with no enforcement mechanism telling receiving mail servers to reject or quarantine the fake. It is a real, externally checkable gap that does not require guessing or insider access.
+Why check security.txt at all? Isn't DMARC the real issue?
++
+Security.txt is the standard place a security researcher looks first to report a vulnerability responsibly. A domain missing both signals at once, no enforced mail authentication and no published way to report a security issue, is a reasonable proxy for a business that has not engaged with basic security hygiene at all.
+Was any of this sold or used to contact anyone?
++
+No. This is a passive measurement exercise. Whether contacting businesses found this way would be lawful was checked separately for several markets and came back mixed, that legal question is independent of the measurement itself.
+RELATED RECORDS
+RESEARCH
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories
+
+Two independent lists that both try to count the same thing will always miss some of it. Count how much they overlap, and you can work out how much neither list found.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

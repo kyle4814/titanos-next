@@ -1,0 +1,122 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Anti-Fraud Check for Foreign Tenders
+
+Before you reply to an overseas tender, you get a quick check on whether the buyer's email domain looks genuine.
+
+Built for exporters and SMEs responding to overseas tenders, especially in emerging markets. AU$19/mo. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free check of one buyer domain you are unsure about.
+
+The price is AU$19/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Exporters and SMEs answering overseas tenders
+•
+Suppliers in markets where fake request notices circulate
+•
+Anyone unsure whether a buyer's contact email is the real one
+What you get
+✓
+A passive check of the buyer's published email settings (SPF, DKIM, DMARC, which are the checks that make email spoofing harder)
+✓
+A flag if the contact domain differs from the official publisher domain in the open-contracting record
+✓
+Honest UNKNOWN results where we cannot tell
+
+And how does it go from a yes to a finished job?
+
+How it works
+You tell us the country, the feed and the buyer domains you want watched.
+We read public DNS and compare it with the publisher record.
+You get an alert for each notice, with the flag if the domains differ.
+Why TITANOS does it differently
+
+The SpoofGuard passive grader joined to open-contracting publisher data, and honest about what it cannot tell.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$19/mo
+
+AU$19 a month, as an add-on to any country pack., because TITANOS is a sole trader that is not registered for GST.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Can this prove a tender is fake?
++
+No. It flags signs worth a second look, such as a mismatch in domains. It is one check, not a verdict.
+Do you touch the buyer's systems?
++
+No. Public DNS only.
+What if you cannot tell?
++
+We say UNKNOWN. We do not guess.
+What does it cost?
++
+The price is AU$19 a month as an add-on. No GST is charged, because TITANOS is a sole trader that is not registered for GST.
+Can I cancel?
++
+Yes, any time.
+
+Want more later? See Global Tender Desk (UK, NZ, US, EU).
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free check of one buyer domain you are unsure about.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

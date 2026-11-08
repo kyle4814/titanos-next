@@ -1,0 +1,33 @@
+{
+ "routes": 1,
+ "firstLoadJsGzKB": 262,
+ "brokenLinks": [],
+ "results": [
+  {
+   "route": "/",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 836,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5278,
+     "lcp": 1484,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1264,
+     "overflow": 0
+    }
+   }
+  }
+ ]
+}

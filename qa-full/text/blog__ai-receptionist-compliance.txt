@@ -1,0 +1,108 @@
+Skip to main content
+TITANOS
+AI IMPLEMENTATION
+Is an AI receptionist for your trade business actually Privacy Act compliant?
+← Back to the archive
+LOGGED 19 AUGUST 2026 · 5 MIN READ
+
+Short answer: usually yes, but only if you check three specific things first: call recording consent, where the transcript is stored, and whether the vendor is contractually accountable to you for it. Most AI-receptionist products for tradies don't mention any of the three on their pricing page.
+
+The pitch for these tools is consistent and genuinely true: tradies on tools all day can't answer calls, and a missed call is often a missed job. What's missing from almost every pitch is that the moment the tool starts recording and transcribing a customer's voice, you've created a new category of personal information you're responsible for under the Privacy Act, separate from the job data already sitting in ServiceM8 or Tradify.
+
+Does the tool need consent to record the call?
+
+Yes, in most cases. Australian call-recording law generally requires at least one party's consent, and reasonable practice is to disclose it up front ("this call may be recorded for quality and follow-up"). If the AI receptionist doesn't play a disclosure before it starts capturing audio, that's the first thing to raise with the vendor, not something to assume they've handled.
+
+Where does the recording and transcript actually live?
+
+A lot of these tools are US-built SaaS products, which means customer voice data and transcripts may be stored offshore, sometimes fed into a third-party AI model provider on top of that. Neither is automatically a problem, but it means your customer's phone number, name, and job details are now sitting in at least two more systems than they were before, and it's worth asking, in writing, whether the vendor uses your customers' calls to train their own model.
+
+Who's accountable if the vendor is breached?
+
+Disclosing customer information to a third-party tool doesn't transfer your responsibility for it. Under Australian Privacy Principle 11, you remain accountable for taking reasonable steps to protect information even once it's sitting with a supplier. A one-line data processing clause in the vendor's terms (or the lack of one) is worth reading before signing up, not after something goes wrong.
+
+None of this means don't use an AI receptionist. Missed-call revenue loss is real and these tools solve a genuine problem. It means asking the vendor these three questions before rollout costs you nothing and closes the actual gap.
+
+If you're weighing up an AI receptionist or any other automation tool, the free audit call covers the compliance side, not just whether it'll save you time.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+Do I need to tell customers an AI is answering the phone?
++
+Best practice, yes. A short disclosure at the start of the call (that it's an automated assistant, and that the call may be recorded) covers both the recording-consent question and sets honest expectations.
+Is it illegal to use an AI receptionist in Australia?
++
+No. There's no law against it. The obligations are the same ones that already apply to any tool handling customer personal information: consent to record, reasonable security, and accountability for what a vendor does with the data.
+RELATED RECORDS
+AI IMPLEMENTATION
+·
+LOGGED 29 JULY 2026
+·
+5 MIN READ
+What an AI audit actually finds in a trades or small-service business (real patterns, not hype)
+
+The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 22 JULY 2026
+·
+6 MIN READ
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+
+"We're too small for privacy law" stops being reliably true this year. Here's what changes and what doesn't.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,198 @@
+Skip to main content
+TITANOS
+HERO CASE STUDY · RESEARCH AND EDUCATION
+A hard to explain physics framework became a playable, tested web app in a single morning
+
+Ariance is a careful, hard to explain physics framework. We turned it into a game with accounts, saved labs, a Coupling Lab, simulators and four lenses, and every claim in it carries a status label.
+
+Preview only. This page is hidden from search, the menu and the site map until the client has agreed to it going public.
+
+51 min 16 s
+from the first build start (11:46:47) to the last commit (12:38:03), Brisbane time
+8
+commits on the record
+128 / 128
+tests passing on the main branch across 7 test files
++58
+further tests reported on two branches waiting to be merged
+US$0
+planned monthly hosting cost (modelled, not yet deployed)
+The brief, in the client's words
+
+Paraphrased from the owner's message. It is not a quote.
+
+He wanted people to play with the ideas, not just read them. In his words, this stuff should be fun.
+He wanted sliders, so a visitor can move a value and watch the picture change.
+He wanted each person to have a profile, with levels and experience points, and several named labs inside it to try different things.
+He wanted the open problem, the missing link between one level of the framework and the next, to be something a visitor can have a go at.
+He wanted the diagrams to agree with the equations, with no picture that contradicts its own maths.
+He wanted it to cost next to nothing to run, and to be ready to show an investor.
+The challenge
+
+Ariance is a framework with careful rules about what it does and does not claim. Some parts are plain mathematics. Some are an exact match to a known result, with the physical meaning left open. Some are proposals, some are the author's interpretation, and some are things that were tried and did not work.
+
+That makes it hard to explain. A normal app would flatten those differences and make everything look equally settled. For a framework that depends on honest labelling, that would be the worst possible outcome.
+
+So the job had two halves: make it playable and friendly, and keep every claim exactly as strong as the author says it is.
+
+What we built
+A game
+A map of four zones, from the stable zero where nothing moves, up to the unrestricted climb. The first zone is a puzzle that teaches the framework's own rule by letting you try the wrong move first.
+BUILT ON ITS OWN BRANCH, TESTED, NOT YET MERGED
+Labs
+Every profile can hold any number of named labs. A lab is a saved state that can be forked into a side branch, compared with another lab, and exported as a file or a shareable link.
+MERGED AND TESTED
+A Coupling Lab
+A sandbox for the open problem. A visitor writes a candidate law in a small, safe expression language, and the app grades it against the framework's own constraints. It checks consistency. It never claims physical truth.
+MERGED AND TESTED
+Simulators
+Six simulators drawn from the same functions that the tests check: the core curve, the refinement steps, a relativity match, a tunnelling match, a cup of water and a horizon slider.
+BUILT ON ITS OWN BRANCH, TESTED, NOT YET MERGED
+Four lenses
+One system viewed four ways, so a visitor can see that the same object has several valid descriptions.
+BUILT ON ITS OWN BRANCH, TESTED, NOT YET MERGED
+Accounts, profiles and levels
+Sign up, log in, experience points, levels and badges. A guest mode works with no account, and a guest profile can be claimed later. Each person can only see their own labs.
+MERGED AND TESTED
+Hosting that costs US$0 a month
+The plan is a static site on a free hosting tier with a free database tier behind the accounts.
+PLANNED, NOT DEPLOYED
+How fast
+
+Times below are measured from the first build start, because the moment the brief arrived was not recorded in a source we can cite. All times are Brisbane time on 8 October 2026 (UTC+10).
+
+Foundation: maths engine, design system, shell
+17 min 14 s of build time (11:46:47 to 12:04:01)
+commit 2d5d035 at 12:02:57, 16 min 10 s after the first start
+Accounts, profiles and experience points
+9 min 0 s of build time (12:10:01 to 12:19:01)
+commit 9b60e88 at 12:16:26, 29 min 39 s after the first start
+Labs and the Coupling Lab
+12 min 1 s of build time (12:19:01 to 12:31:02)
+commit b2e8c42 at 12:28:43, 41 min 56 s after the first start
+Investor page, case study page, archive and preprint drafts
+build window not logged
+commit 7c480b5 at 12:35:19, 48 min 32 s after the first start
+The game: map, first-zone puzzle, lessons
+5 min 59 s of build time (12:31:02 to 12:37:01)
+commit 51f295f at 12:36:06, 49 min 19 s after the first start
+Simulators and lenses
+build window not logged
+commit b3d7797 at 12:38:03, 51 min 16 s after the first start
+
+Counted with git log --all on the app repository: six feature commits, one screenshot commit and one merge.
+
+How it was checked
+
+On the main branch, 128 of 128 tests passed across 7 files when we ran them at 12:40:50. Every formula in the maths engine, the exact matches to known results, the frozen region, the evaluation seam at zero, the safe expression parser, the Coupling Lab grader, the account adapters and the experience point rules. Two further branches report their own test counts and are not merged yet, so no combined total is claimed.
+
+One label on every claim
+
+Every concept, chart and sentence in the app carries exactly one of these labels, taken from the author's own standard. A candidate or an interpretation is never shown as established physics.
+
+ESTABLISHED MATH
+Follows from the stated definitions. Pure mathematics.
+EXACT CORRESPONDENCE
+An exact reparameterisation of a known result. Whether the identity is physical is open.
+CANDIDATE
+A proposed construction. Not derived.
+INTERPRETIVE
+The framework's reading. Not a physics result.
+FAILED TEST
+Tried, and it did not work. Kept on the record.
+OPEN
+Not settled.
+
+The diagrams are drawn from the same functions the simulators use, so a picture cannot disagree with its own equation.
+
+Consistency findings, offered first
+
+While building, we checked the framework's own material against its own equations. We prepared the findings below for the author, as a gift and in plain terms, before asking anything of him.
+
+The worked relativity example. Equation 3 gives a value of 0.7353 at a speed of 0.6c with k equal to 1. The exact match to the Lorentz factor gives 0.64. The mapping dS = gamma squared minus 1 reproduces 0.64 exactly, so we suggested updating the example or labelling it as illustrative.
+A missing factor in one diagram. One panel writes the refinement step without its logarithm factor. Without that factor there is no frozen region, which would contradict the same panel's threshold graph and the formal operator.
+A bound that should allow equality. A diagram states a strict inequality for the range of A, but also says A equals E squared when dS is zero. The bound should read less than or equal to, and a k of zero gives half of E squared for any dS above zero.
+Two readings that are interpretive, not results. Two images show a breakout from the trap as if it were settled. By the author's own status table it is not established, because the current operator cannot leave the interval from zero to one. The app shows it as the open problem.
+Screens from the working app
+
+Taken by a headless browser at 390 pixels wide (phone) and 1440 pixels wide (desktop). Long pages are cropped to the top in this gallery.
+
+Home
+The game map
+Lessons
+Coupling Lab
+A saved lab
+Ideas and notes, attributed and labelled
+Profile
+What it cost
+
+No usage meter reading was taken before and after the build, so no build cost is stated. It ran inside an existing flat monthly AI subscription, with no extra spend.
+
+Hosting: US$0 a month (modelled). Planned on a free static hosting tier with a free database tier. Nothing is deployed yet, so this is a plan and not a bill. The free tier limits will be stated here from the providers' own pages on the day it goes live. It is not live yet.
+
+Where every figure comes from
+Build start and phase times
+The TITANOS fleet ledger, start and done events for the Ariance builds, written in local Brisbane time. Cross-checked against the commit times, which carry an explicit UTC+10 offset and fall inside each ledger window.
+Commit count and commit times
+git log --all on the Ariance app repository, read on 8 October 2026.
+Test counts
+Output of the vitest run named in the Quality section, read on 8 October 2026. Branch counts come from commit messages and have not been re-run.
+Brief to build time
+Not stated. The time the brief arrived was not recorded in a source we can cite, so the page measures from the first build start instead.
+Cost
+No usage reading was taken, so no build cost is claimed. The hosting figure is a plan and is labelled as one.
+Consistency findings
+Worked by hand from the framework's own repository text and checked against the engine: 1 / (1 + 0.36) = 0.7353 and 1 minus 0.36 = 0.64.
+Screens
+Screenshots from the app's own quality sweep, taken at 390 and 1440 pixels wide.
+
+Ariance (c) Jonathan Engle, CC BY-SA 4.0. Source: github.com/freely-given/Ariance. Last reviewed 2026-10-08.
+
+Want something like this for your business? A free consultation is the first step, with no pressure.
+
+Book a free consultation
+All case studies
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,129 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Business Change Feed
+
+A weekly list of businesses matching your criteria that just changed, so you reach them when they are ready to talk.
+
+Built for owner or sales lead at an Australian B2B seller such as a reseller, trade, broker or agency. AU$49/mo. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free one-off sample of what changed in your postcode this month, 10 rows.
+
+The price is AU$49/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Resellers, trades, brokers and agencies that sell to businesses
+•
+Sales leads who want to know the week a business changes
+•
+Owners whose lists are stale on arrival
+What you get
+✓
+A weekly list of changes filtered to your saved criteria: postcode, industry and business size
+✓
+Event types such as a new ABN, a new domain, a director change, a tender win, a lapse in email protection or a website stack change
+✓
+A CSV plus an email or Telegram digest
+✓
+A webhook (an automatic data feed to your own systems) on the higher tier
+✓
+Companies and trusts only, business addresses only, individuals filtered out
+
+And how does it go from a yes to a finished job?
+
+How it works
+Choose your postcodes, industries and the events you care about.
+We take a baseline and then compare each week.
+You receive the changes by CSV, email or Telegram.
+Why TITANOS does it differently
+
+We hold our own database of millions of Australian businesses together with government contract awards and public email-security records as one time series. The feed improves as weekly history builds up.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$49/mo
+
+AU$49 per month for a digest with 1 event type, AU$149 per month for all events as a CSV, AU$299 per month for webhook delivery with 5 saved filters.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who are you?
++
+TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with Kyle, not a call centre.
+Where does the data come from?
++
+Public registers, government contract awards and public domain records. Nothing is accessed or scanned intrusively.
+Is it legal to contact these businesses?
++
+Under the Spam Act you send to business addresses only, relevant to the business, saying who you are with an unsubscribe. You are the sender. We exclude individuals and sole traders, and do not include director personal data. This is general information, not legal advice. The sender is responsible for complying with the Spam Act.
+Will every website be live?
++
+Not all. We re-check liveness before delivery. In our sample 96% of domains resolved but only 65% of websites answered.
+What does it cost?
++
+AU$49, AU$149 or AU$299 per month depending on the tier. No GST is charged. TITANOS is a sole trader that is not registered for GST, so the price you see is the price you pay.
+Can I cancel?
++
+Yes, any time.
+
+Want more later? See TITANOS Monitor.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free one-off sample of what changed in your postcode this month, 10 rows.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

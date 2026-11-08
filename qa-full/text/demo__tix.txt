@@ -1,0 +1,70 @@
+Skip to main content
+TITANOS
+DEMO MODE. The signing key lives in this browser; in production verification runs server-side and the key never reaches a phone. No payments, no real fan data, no tracking. Data stays on this device.
+Start
+Organiser
+Fan wallet
+Gate scanner
+TIX-999 live demo
+
+One ticket, one real owner, one valid entry. Run the whole thing yourself in about three minutes with this computer and your phone.
+
+1
+Create an event
+On this computer: name it and set the highest price a ticket may be resold for.
+2
+Issue a ticket
+Give it to a fan. Their wallet shows a QR that changes every 15 seconds.
+3
+Pair your phone
+Point your phone camera at the pairing code on the organiser page. The phone becomes the gate scanner.
+4
+Scan it
+Aim the phone at the wallet QR on this screen. See ADMIT, then try to cheat it.
+Start the demo
+
+Afterwards, open the wallet and use the "Try to cheat it" panel: a screenshot, a second scan and a forged code all get stopped, each with a plain reason.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

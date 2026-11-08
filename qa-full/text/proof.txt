@@ -1,0 +1,195 @@
+Skip to main content
+TITANOS
+PROOF
+Check it yourself.
+
+Every claim on this site rests on a base you can check: public code, timestamped test logs, and a build you can replay commit by commit. The bigger numbers elsewhere are maths on top of this, and each says so.
+
+THE PROOF WALL
+
+Every number is a star. Open one to see what it is and where it came from.
+MEASURED 23
+REPRODUCED 0
+MODELLED 1
+ESTIMATE 0
+FORECAST 0
+EXAMPLE 0
+UNKNOWN 1
+
+Tap a label to filter. A label with a zero has nothing to show yet, and we leave it that way.
+
+1,451 jobs
+Worker jobs finished in the last 24 hours (job ledger)
+MEASURED
+1.1%
+Fleet jobs that failed or got stuck in the last 24 hours
+MEASURED
+3 min
+Median time per job over the last 24 hours
+MEASURED
+US$0.07
+Fleet-wide cost per job today over 1,451 jobs. An upper bound: it includes the interactive session.
+MEASURED
+US$104.98
+Spent in one day, API-equivalent pricing
+MEASURED
+29,000 tokens
+Median a worker reads before acting
+MEASURED
+2.65 GB
+Linux memory in use
+MEASURED
+11.5 GB
+Windows VM memory
+MEASURED
+12.3 GB
+Windows memory free
+MEASURED
+8.02 load
+One-minute load average on 8 cores
+MEASURED
+32.84 h
+Scheduled work in 24 hours, 4686 runs
+MEASURED
+16.5%
+Scheduled runs that failed, 773 of 4686. The 89 percent from before was one job, so we do not chart the two against each other.
+MEASURED
+124 s
+Full gate run, 166 suites, green
+MEASURED
+40 min
+Age of the newest backup
+MEASURED
+No number yet
+Wall time of the main codebase suite
+UNKNOWN
+US$0.973 to US$0.116
+Cost per worker job (API-equivalent)
+MEASURED
+US$467 per day to US$130 per day
+Daily spend, modelled ceiling
+MODELLED
+48/50
+Recall test, 50 questions
+MEASURED
+24/25
+Held-out recall test, 25 questions
+MEASURED
+25/25
+Fully good results on 25 matched jobs
+MEASURED
+224 s to 3.1 s
+5-minute snapshot, time per run
+MEASURED
+2,250 s to 14 s
+Cloud mirror, time per run
+MEASURED
+51 s to 3.6 s
+Repository bundle step, time per run
+MEASURED
+235 MB to 35 MB
+Kernel repository size
+MEASURED
+975 s to 579 s
+Main codebase test suite run time
+MEASURED
+
+RECORDED
+
+250 of 250 tests, 57 saved versions
+
+the trading app, replayed commit by commit
+
+Like watching a builder's time-lapse where the inspector signs off every single frame, not just the finished house.
+
+Where this number comes from
+
+Method: we checked out each saved version in order and ran its tests, and the command is shown below so you can repeat it. Nothing was touched except our own code, no one is replaced by any of it, and it costs you nothing to look.
+
+MEASURED
+
+6,314 test cases
+
+in the main TITANOS engine, plus automated safety suites on the control layer
+
+A pilot's pre-flight checklist, run before every take-off instead of once.
+
+Where this number comes from
+
+That is the headline. What did the replay find that we did not expect?
+
+1. Public code, every change timestamped
+This website's source, every change dated to the second: github.com/kyle4814/titanos-next
+SpoofGuard, our free open-source email security tool: github.com/kyle4814/spoofguard
+2. Full test runs, with timestamps
+
+Raw logs, each line stamped with the time it ran (7 October 2026, Brisbane time). No summary written afterwards, just the output:
+
+Trading app: 250 of 250 tests passed
+SpoofGuard: 83 of 83 tests passed
+3. The 3.5-hour build, replayed commit by commit
+
+Think of a builder's time-lapse. We checked out every one of the 57 saved versions of the trading app in order and ran its tests. Each line of the replay shows when that version was saved, its ID, and how many tests passed. Tests grew from 20 at 05:41 to 250 at 09:37.
+
+Open the full replay log
+
+Here is the part we did not expect, shown as found: five in-between versions each have one test that fails when replayed today. Those tests depend on the time of day or on live market data (for example, a session-clock label and a live one-tap trade). Every one passes at the final version, 250 of 250.
+
+How the replay was run, so anyone with the repository can repeat it:
+
+for c in $(git rev-list --reverse HEAD); do
+  git checkout -q "$c"
+  echo "$(git log -1 --format=%ci) $(node --test tests/*.test.js | grep '^# pass')"
+done
+What this proves, and what it does not
+
+It proves the base: real code, real tests, real timestamps, and the speed of that build. Our larger figures (the compounding, the second account, the engineer-equivalents) are calculations built on this base, and each is labelled as a model. They become facts only as weekly results confirm them, and we publish those results too.
+
+Would it be okay if I showed you what a build like this could look like for your business? A no is welcome.
+
+The case study
+Book a free consultation
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,175 @@
+Skip to main content
+TITANOS
+HOW WE OPERATE
+Every price, every cost, all the maths.
+
+What we offer, how we do business, what it costs to run, and what it can save you, with the working shown. 99% code, 1% AI, and you approve what matters.
+
+RECORDED
+
+US$0.97 to US$0.12
+
+cost of one worker job, 8 October 2026
+
+8.4 times more finished work for every dollar, and 25 of 25 jobs passed against 23 of 25 before.
+
+Where this number comes from
+
+Method: the same 25 jobs run before and after we turned proven steps into plain code, with the cost read from our own usage meter. Before you ask: this is our spend, not a quote for you. Nothing of yours is touched, nobody is replaced, your IT provider stays in charge, and your own running cost is shown further down.
+
+If the same job got that much cheaper, what else is going into the price?
+
+99%
+plain code
+Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again.
+1%
+AI
+The AI only does the judgement work: reading, writing and deciding what code cannot.
+One tap
+you
+Anything that sends, spends or commits waits for a person to approve it.
+Myelination: why it gets cheaper every week
+
+Think of a path through long grass. The first walk is slow, and by the hundredth there is a track you barely notice. Your brain does this by insulating the nerve paths it uses most. We do the same with software. The first time a job runs, the AI works it out. Once the steps are proven, we turn them into plain code, so the next run costs nothing. Every week, more of the system is code and less of it is AI, so it gets faster and cheaper without getting worse.
+
+The four levers that keep the AI bill tiny
+Lever	What we do	What it saves
+Code first	Every proven step becomes code	Zero AI cost for that step, forever
+Right-sized model	Claude Sonnet 5.5 for everyday work	US$2 in / US$10 out per million tokens, half the top model's US$4 / US$20
+Prompt caching	Repeated instructions are cached	Cached reads cost a tenth of the normal input price (US$0.20 per million)
+Batching	Non-urgent jobs run in batches	Half price for anything that can wait a few hours
+
+Prices are Anthropic's published API rates for Claude, in US dollars, checked October 2026.
+
+So what does that look like in dollars on a real piece of work?
+
+Our own numbers, measured
+
+We log the cost of every AI step we run. In October 2026, writing a full 18-section research pack on Claude Sonnet 5.5 cost US$0.69 to US$1.03, and an independent review of that pack cost US$0.77 to US$0.80. Together, that is less than the price of a coffee.
+
+Our own engineering runs on about AU$300 a month in tools. See what that builds on the case studies and engineering pages.
+
+What that means for you
+Typical running cost: about AU$20 to AU$50 a month for AI usage and hosting, once the system is built and settled. Busier systems cost more, and we tell you the expected number before you start.
+On your own accounts. The AI usage and hosting are billed to you directly by the provider. We add no markup, and you hold the keys.
+For scale:the median Australian employee earns AU$42.90 an hour (ABS, August 2025), so a month of running costs is about one hour of one person's time. A mid-level security contractor charges AU$700 to AU$900 a day (Hudson salary guide).
+Nobody gets replaced. The system takes the repetitive work off your people, so their hours go back into the work only they can do.
+
+The AU$20 to AU$50 range is our typical estimate for a settled system, not a quote; your proposal names the expected figure for your setup. Sources: ABS employee earnings, Hudson cyber security salary guide.
+
+That covers what it costs us. What does it cost you, and what can you walk away from?
+
+How we do business
+Every price on this page is a starting point. Scope, size and budget are all negotiable, so ask for the version that fits you.
+Start free. The scan and the consultation cost nothing, and what you learn is yours to keep whatever you decide.
+Start small. A first job can be sized to sit under your sign-off or procurement limit, then grow once it has earned it.
+Scale up or down. Move between options as your needs change. AI partner retainers have a 3-month minimum; Monitor cancels any time.
+No lock-in. The AI usage and hosting run on your own accounts, you hold the keys, and we add no markup to them.
+No pressure, and nobody replaced. The work goes to the machine so your people get their hours back.
+The main offers
+Free email security scan	Free
+Free consultation and report	Free
+TITANOS Monitor	AU$149 a month, or AU$1,490 a year
+Job Flow for tradies	AU$249 a month
+Lead lists	AU$497, AU$1,497 or AU$3,497 one-off; AU$990 a month ongoing
+Privacy Act and Essential Eight pack	AU$5,997 one-off, with 3 months of Monitor included
+AI Growth Partner	AU$1,500 a month
+AI Ops Partner	AU$2,500 a month
+Embedded AI Partner	From AU$5,000 a month
+Board advisory	AU$7,997 a month
+Enterprise governance	From AU$49,997 a year
+What it can save you: do the maths yourself
+
+The biggest number is not what you pay us. It is the hours your team gets back. Change any box below and every line of the working updates. The hourly cost starts at AU$54.83: the ABS full-time average of AU$2,083.70 a week (May 2026) over a 38-hour week. That is before super and overheads, so the real cost of an hour is higher.
+
+People on your team
+Hours given back, per person per week
+Cost of an hour (AU$)
+Working weeks a year
+Our monthly fee (AU$)
+Running cost a month (AU$)
+Hours given back a year
+20 × 2 × 46 = 1,840 hours
+That is the same as
+1.1 full-time people's worth of hours, with nobody replaced
+Value of those hours
+1,840 × AU$54.83 = AU$100,887 a year
+What it costs you
+(AU$1,500 + AU$50) × 12 = AU$18,600 a year
+Value left over
+AU$82,287 a year
+Every dollar in returns
+5.4 dollars of time
+Pays for itself in
+2.2 months
+Value of hours given back, a year
+Team size	1 hr a week each	2 hrs a week each	4 hrs a week each
+5 people	AU$12,611	AU$25,222	AU$50,444
+20 people	AU$50,444	AU$100,887	AU$201,774
+50 people	AU$126,109	AU$252,218	AU$504,436
+200 people	AU$504,436	AU$1,008,872	AU$2,017,744
+
+Working: people × hours a week × 46 working weeks × AU$54.83. For example, 20 people × 2 hours × 46 weeks = 1,840 hours, worth AU$100,887 a year: about five and a half times one AU$18,000 year of the entry AI retainer. These are scenarios you choose, not promises.
+
+What our research says
+
+For the large organisations we research, we model the value of time given back from their own filed accounts. Our top-down model puts it at 2% to 5% of staff costs (5% central, 2% as the floor). When we model the actual processes step by step, the figure comes in lower (in one case about 8% of the top-down number), so we always lead with the step-by-step figure and show the top-down one only as the ceiling. Either way, on a staff bill in the millions, the hours given back are worth many times the fee.
+
+Every offer, with its price
+
+The full catalogue, so nothing is hidden. Some are open to buy now; others start with a free first step while we finish them. Each one links to its own page.
+
+Tradies and trade businesses (13)
+Partners and multipliers (29)
+Government work (22)
+Enterprise and boards (15)
+Sales and growth (6)
+Self-serve tools (6)
+Specialist services (12)
+
+Would it be okay if we worked out the numbers for your business on a free consultation, or found a version that fits your budget? A no is welcome.
+
+Book a free consultation
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

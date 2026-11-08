@@ -1,0 +1,137 @@
+Skip to main content
+TITANOS
+INVESTORS
+What your money builds.
+
+A measured base you can check, what each dollar of compute turns into, and where every dollar of profit goes. This is not an offer of shares. It is an invitation to talk, and a no is welcome.
+
+The measured base
+
+Each card carries its own label. The first is modelled with the COCOMO method, the second is measured off the running system, and the third is a recorded same-25-job comparison. The source is one tap away on each. This is the base, not an offer.
+
+MODELLED
+
+24 engineers for 31 months
+
+what the industry COCOMO model says this build would take (MODELLED). One person built it in about 5 months, around a day job.
+
+A whole engineering department, for the price of one person.
+
+Where this number comes from
+
+MEASURED
+
+1,451 jobs in 24 hours
+
+finished by the machine, 1.1% failed or stuck
+
+About 196 worker-hours of finished jobs in a day, a median job taking 3 minutes.
+
+Where this number comes from
+
+RECORDED
+
+US$0.97 to US$0.12
+
+cost of one worker job, 8 October 2026
+
+8.4 times more finished work for every dollar, and 25 of 25 jobs passed against 23 of 25 before.
+
+Where this number comes from
+
+Think of it as a whole engineering department for the price of one person, with the receipts kept. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Everything here is built from public records and our own logs, nothing of anyone's is touched, and nobody is replaced.
+
+What does that look like as a few plain lines you can check yourself?
+
+3.5 hours
+idea to a working, tested app (replay on the proof page)
+~140
+engineers' worth of output a year, priced by the COCOMO model (MODELLED, 9 October 2026)
+AU$300
+a month in AI tools behind all of it (operator figure, no receipt on file)
+~6,840x
+engineering value per dollar of compute (MODELLED: AU$25 million a year of work on AU$3,600 a year)
+
+Check every line: public code, timestamped test logs and a replayable build, and the engineering maths.
+
+So what happens if the compute budget goes up? The next table is where that gets honest.
+
+What compute buys
+
+Each AU$300 a month buys one AI build account. Today that is about 60.6 engineer-years modelled over 158 days (Basic COCOMO on 230,797 measured lines). More accounts would run more work in parallel, but the scale-up rows are scenarios with no result behind them, so none is printed here until weekly results confirm one.
+
+Monthly compute	Build accounts	Engineering output
+AU$300 a month (today)	1	~140 engineers' worth a year (MODELLED: Basic COCOMO on measured lines)
+
+And if it did scale, where would the money go?
+
+The ladder to AU$1 million a month, and where it goes
+
+Monthly revenue, split between the founder, the system (compute, people, the next product) and the world (charities, education, housing, jobs). The founder's share is capped at what a good life needs; the rest compounds or goes back out.
+
+Revenue a month	Founder	System	World	What it means
+AU$10,000	AU$10,000 (living)	-	-	Founder full focus funded
+AU$20,000	AU$10,000	AU$10,000	-	~33 build accounts
+AU$100,000	AU$10,000 (10%)	AU$15,000 (15%)	AU$75,000 (75%)	~50 build accounts; AU$900k a year to the world
+AU$1,000,000	AU$50,000 (5%)	AU$150,000 (15%)	AU$800,000 (80%)	~500 build accounts; AU$9.6M a year to the world
+
+The split is the founder's stated plan, not a guarantee. More on the world share on the mission page.
+
+Why would a big buyer pick this over the other options?
+
+Why it is defensible
+We build one enterprise platform, once. Each client gets a configured copy on their own account, so delivery takes days, not months.
+The systems are 99% code, so they run for about AU$20 to AU$50 a month. See costs.
+Nothing replaced and nobody replaced, which removes the biggest reason large buyers say no. See Parallax.
+How investing works here
+
+TITANOS is run by Kyle Deligny as a sole trader (ABN 34 318 502 254), so there are no shares to offer today. Any investment would follow incorporation, proper legal and accounting advice, and documents that meet the law. The founder keeps control: total outside ownership stays under 49%. Nothing on this page is financial advice or an offer of any financial product.
+
+If the numbers interest you, would it be okay if we had a conversation? There is no pressure, and a no is welcome. Or book a free consultation.
+
+Start a conversation
+Check the proof
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

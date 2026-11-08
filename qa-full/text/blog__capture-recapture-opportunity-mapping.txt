@@ -1,0 +1,112 @@
+Skip to main content
+TITANOS
+RESEARCH
+How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories
+← Back to the archive
+LOGGED 1 OCTOBER 2026 · 6 MIN READ
+
+Two independent lists that both try to count the same thing will always miss some of it. Count how much they overlap, and the overlap tells you how much neither list found. That is the ninety-year-old Lincoln-Petersen estimator from wildlife biology: catch a sample, mark it, catch a second sample, count the overlap. It works just as well on directories as it does on fish. Run against two real bug bounty datasets, it puts the true population of paying bug bounty programmes at approximately 1,678, with the two source lists already having found 97.5% of that estimate between them. Run against two public API directories the same day, it estimates approximately 3,146 APIs, but with a weak confidence flag, because the two lists turn out to share a common ancestor. Knowing the difference between those two results, and saying so out loud, is the actual point of this piece.
+
+The problem this solves
+
+Cataloguing a public opportunity space, grant programmes, bug bounties, free APIs, hackathons, whatever it may be, usually produces a directory count, not a population count. A directory count answers how many a list has. It never answers how many actually exist, because every directory has blind spots: programmes never submitted to it, ones it delisted, ones a different maintainer catalogued under a different name.
+
+The method, step by step
+Parallel research passes, one topic region each. Each pass finds and catalogues meta-sources, the directories and registries that themselves list many individual opportunities, rather than re-verifying every individual listing by hand.
+A source registry, one line per meta-source: region, name, URL, type, and whether it is machine-readable.
+A gap score per region, weighing the sourced dollar value of the region, how open it actually is to enter, fit against real skills, how much prior research has already covered it, and a confidence weight that downgrades the score when the dollar figure is a guess rather than a sourced number.
+Capture-recapture, computed only where it is honestly possible: two independently maintained lists that both try to enumerate the same population, matched by name to find the overlap, then run through the formula.
+
+The formula: an estimated true population equals the size of list one multiplied by the size of list two, divided by how many entries appear on both. From that, the two lists combined have found their total distinct count minus the overlap, and dividing that by the estimated true population gives the share of the true population already found. The method only works when the two lists were built independently. If they share a common source, or one is a fork of the other, the overlap count is inflated and the estimate skews upward, which is the important part to say out loud instead of quietly reporting a clean-looking number.
+
+Worked example one: bug bounty programmes, high confidence
+
+Two open-source datasets both try to catalogue every public bug bounty and vulnerability disclosure programme. Restricting both to entries flagged as actually paying a bounty: list one has 439 entries, list two has 1,621, and 424 overlap by name. That gives an estimated true population of approximately 1,678, with the two lists having already found 97.5% of it between them. The confidence note attached to this result: two separately maintained open-source aggregators, plausibly independent methodology, a reasonable assumption.
+
+Worked example two: free APIs, same formula, much weaker confidence
+
+Two more lists both try to catalogue free and public APIs, one with 1,934 entries and one with 836, with 514 overlapping by name. That produces an estimated population of approximately 3,146 and a found-share of roughly 71.7%. On its face this looks like a clean, usable estimate. It is not, and the source record says so directly: one of the two lists is a post-hiatus continuation of the same original dataset as the other, not a methodologically independent census, so the estimate is likely an overestimate, treated as an upper-bound sanity check rather than a tight estimate. Two lists that share ancestry will always overlap more than two lists built from scratch, which inflates the overlap, which inflates the denominator, which pushes the population estimate up. The formula does not know the difference between real independence and shared lineage, only checking the provenance of each source tells you that.
+
+Where the method deliberately stops
+
+Most regions in this pass had two or more meta-sources but no computed estimate at all, because computing the overlap honestly requires fetching full name lists from both sources and matching them, not a quick or free job. Grants, hackathons, open-source sponsorship, and developer-tool registries are all flagged the same honest way: population unknown, a candidate pair identified, overlap uncounted, a candidate for the next pass. Regions with only a single meta-source are flagged population unknown and never guessed at. Inventing an overlap count to produce a tidier-looking number would be fabrication. The method's actual discipline is knowing which regions it can speak to, and saying nothing about the rest.
+
+This method exists to answer one question honestly: how much of a space has actually been measured, and how much is being guessed. That is the same question asked about a business before saying what is exposed. Not a scan that produces a scary number, a measurement with a stated confidence level attached, so the result can be trusted exactly as much as it has earned.
+
+AI-assistance disclosure: this explainer was drafted by Claude (Anthropic) from the operator's own dated research files. Every number above is cited to the source file it came from, nothing here was generated independently of those files.
+
+Want the same discipline run against your own exposure instead of someone's guess? Message me for a free audit and see exactly what is measured and what is still unknown.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+Why not just add the two list sizes together?
++
+Because some items appear on both lists. Simply summing double-counts every overlapping entry, which overstates the true population. Subtracting the counted overlap gives the distinct items seen, and the Lincoln-Petersen ratio then uses how much the two samples overlapped each other to infer how many more distinct items probably exist unseen by either.
+What breaks the method?
++
+Non-independence. If the two lists were built the same way, from the same root source, or by copying each other, the overlap is artificially high, which biases the population estimate upward. The method is only as good as the independence check that comes with it.
+Is this the final word on these spaces?
++
+No. These are dated estimates from a single pass, and most regions are still explicitly flagged as unmeasured by this technique. Every number is treated as provisional, tagged with how it was obtained.
+RELATED RECORDS
+SECURITY
+·
+LOGGED 1 OCT 2026
+·
+7 MIN READ
+Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file
+
+Across 8 independently sampled bands of the Australian domain namespace, between 37.5% and 55.0% of small-business domains have no enforced email security and no published way to report a problem.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

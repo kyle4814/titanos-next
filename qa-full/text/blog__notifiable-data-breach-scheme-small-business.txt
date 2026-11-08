@@ -1,0 +1,101 @@
+Skip to main content
+TITANOS
+COMPLIANCE
+The Notifiable Data Breach scheme: the 30-day rule small businesses miss
+← Back to the archive
+LOGGED 19 AUGUST 2026 · 4 MIN READ
+
+The Notifiable Data Breach (NDB) scheme is triggered by any unauthorised access to or disclosure of personal information that's likely to cause serious harm, not just a hack. Accidentally emailing a client's quote and contact details to the wrong recipient, or a lost phone with unencrypted client photos, can trigger the same 30-day obligation as an actual cyberattack.
+
+What actually starts the clock
+
+Once a business is aware of a suspected breach, it has 30 days to assess whether it's likely to cause serious harm to the people affected. Small operators often assume the scheme only applies to businesses that get "properly hacked." The trigger is broader than that, and it applies regardless of business size if the harm test is met (this is one of the areas where the small-business exemption doesn't fully shield you, since it's tied to the nature of the incident, not turnover).
+
+What counts as "serious harm"
+
+Financial loss, identity theft risk, and reputational or physical harm all count. A quote export with names, phone numbers and job addresses sent to the wrong person is a real example that can meet the threshold. It's not limited to financial or health information.
+
+What to do if it happens
+Contain it immediately: recall the email if possible, revoke access, stop the spread.
+Assess within 30 days whether serious harm is likely, documenting the reasoning either way.
+If serious harm is likely, notify the OAIC and the individuals affected, with what happened and what you're doing about it.
+Fix the process gap that caused it, not just the individual incident.
+
+This is exactly the kind of thing worth having a plain-English answer ready for before it happens, not scrambling to work out during the 30-day clock.
+
+Fixed-price Privacy Act compliance for AU small business, including a breach-response plan you can actually follow.
+
+SEE THE COMPLIANCE PACK →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+COMPLIANCE
+·
+LOGGED 22 JULY 2026
+·
+6 MIN READ
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+
+"We're too small for privacy law" stops being reliably true this year. Here's what changes and what doesn't.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+Do sole traders need a privacy policy in Australia?
+
+"I'm under $3 million turnover" is true for almost every sole trader. It's not the whole answer anymore.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

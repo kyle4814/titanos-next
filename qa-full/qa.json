@@ -1,0 +1,6152 @@
+{
+ "routes": 236,
+ "firstLoadJsGzKB": 262,
+ "brokenLinks": [],
+ "results": [
+  {
+   "route": "/",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 656,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0073,
+     "lcp": 804,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1280,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/about",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 700,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 776,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/ai-delivery",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 684,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1276,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/audit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 280,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 568,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/audit/booked",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 508,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/black-ice",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 524,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 728,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 856,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/black-ice/doctrine",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 616,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1508,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1324,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/ai-audit-what-we-actually-find",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 328,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/ai-automation-cost-small-business",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 328,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1716,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1628,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/ai-receptionist-compliance",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 680,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/anz-smb-email-security-double-gap-measured",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 460,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/black-ice-operating-doctrine",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 300,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/can-someone-send-email-pretending-to-be-my-business",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 336,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/capture-recapture-opportunity-mapping",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 488,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/dead-quotes-hidden-revenue",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1192,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/essential-eight-small-trade-business",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 596,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/free-scan-legitimacy-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 1912,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/headless-ai-research-loop-cant-rm-rf-your-home",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 960,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/invoice-scam-tradies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 804,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/notifiable-data-breach-scheme-small-business",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1640,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/outreach-that-actually-works",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1300,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1636,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/privacy-act-small-business-deadline",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 796,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/rm-rf-home-recovery-case-study",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 500,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/settlement-day-scam-property-and-conveyancing",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 500,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/sole-trader-privacy-policy-threshold",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 812,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/tap-to-approve-telegram-no-second-bot",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 856,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/the-bank-details-email-accountants-and-bookkeepers",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 644,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/blog/trade-software-quote-exports",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1828,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/case-studies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1528,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2012,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/case-studies/ariance",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1104,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2152,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/case-studies/trading-app",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1880,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/compliance",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1772,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2292,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2580,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/contact",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1232,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1732,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2228,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/costs",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1820,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 1748,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2412,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/courses",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 608,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/credits",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1264,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 980,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2340,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/deep-field",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1220,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/demo/tix",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1060,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2908,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/demo/tix/organiser",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1624,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2248,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/demo/tix/scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2324,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/demo/tix/wallet",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1816,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2292,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/efficiency",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1836,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2416,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/engineering",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2464,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/enterprise",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1256,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2268,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2320,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/faq",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1584,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/find",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1432,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/how-it-works",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2364,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/hud",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 956,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 1664,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/investors",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1220,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2096,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2136,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/leads",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2112,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2620,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/learning-loop",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2000,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 2440,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/methodology",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1056,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2064,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/mission",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1116,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1620,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/monitor",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1560,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 2040,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/monitor/cancelled",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1236,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2032,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/monitor/success",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1100,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2744,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 3320,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 1904,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1888,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/account-change-alert",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 852,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 880,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1300,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/account-dossier-on-demand",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2260,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0019,
+     "lcp": 3368,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/accountant-chaser-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2476,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2860,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/accountant-new-client-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1912,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 3600,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/accountant-privacy-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1184,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2792,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/agency-signal-leads",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1168,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1796,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2056,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/agency-white-label-audit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0041,
+     "lcp": 1576,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2848,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2440,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/agent-preflight-test-harness",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2688,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1828,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2328,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/approval-rail-kit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1632,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1752,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2236,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/association-member-kit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1320,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2588,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/au-email-security-report",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1704,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1992,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1904,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/au-market-entry-reseller-shortlist",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2116,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1552,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/award-price-benchmark",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1560,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2156,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2572,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/bid-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1916,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1984,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2676,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/bookkeeper-morning-board",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2292,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/broker-renewal-scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1500,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/business-change-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1980,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0078,
+     "lcp": 2324,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/change-feed-connector-automation-agencies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5036,
+     "lcp": 2992,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2284,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/charity-profit-mirror",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1132,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1700,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1600,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/club-sponsor-prospect-list",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1464,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2092,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/commercial-customer-list",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1048,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1968,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/commercial-property-tenant-trigger-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 912,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2180,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/contract-variation-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1464,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1120,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/council-resilience-report",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1924,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1736,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2420,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/counterparty-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1344,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1656,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0018,
+     "lcp": 2064,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/dd-pre-read",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1396,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 3004,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2812,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/dossier-reseller-licence",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1056,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1848,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2280,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/electorate-dollar-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1724,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2304,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/eu-ted-small-lot-radar",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 972,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2580,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/export-market-tender-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 944,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2464,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/finance-broker-trigger-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 756,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 608,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1064,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/five-jurisdiction-privacy-bundle",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 412,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 484,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 940,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/foreign-tender-anti-fraud-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 664,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 580,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 992,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/franchise-posture-board",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 504,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 624,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 712,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/franchise-site-audit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1164,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 776,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 784,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/free-tender-digest",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1120,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 700,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/funder-fit-dossier",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 616,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 512,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 668,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/global-tender-desk",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 568,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 652,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 696,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/governed-agent-proposal-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 288,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 540,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 752,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/grant-radar-nfp",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1176,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 488,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 724,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/health-trust-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 568,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 432,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 748,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/hiring-trigger-dossier",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1108,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 676,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/incumbent-brief",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1072,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 1524,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 796,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/instant-email-domain-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 536,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 432,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 584,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/insurer-book-scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1012,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 620,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 616,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/investigation-cut",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 416,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 476,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 724,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/invoice-nudge-rail",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1040,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 436,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 580,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/job-flow",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 400,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 440,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 704,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/latam-exporter-radar",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 976,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 504,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 696,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/member-posture-drift-alert",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1516,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 728,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/monitor-wholesale",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 996,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 656,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 776,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/msp-panel-white-label-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1024,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 476,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 748,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/msp-prospect-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 384,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 488,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 728,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/multi-domain-dmarc-lockdown",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 496,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 752,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/neighbour-alerts",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 464,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 472,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 716,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/new-business-insurance-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 940,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 604,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 720,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/outbound-gate-outreach-lint",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1532,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 464,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 764,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/owner-inbox-desk",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 808,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/owner-morning-cash-card",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 240,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 472,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 796,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/pack-factory-channel-partners",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 948,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 768,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/panel-door-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 628,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 480,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 780,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/panel-risk-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 248,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 472,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 720,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/payee-domain-change-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1004,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 476,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 732,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/pitch-hooks-page",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 1020,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 460,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 716,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/portfolio-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 532,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 460,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 704,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/postcode-churn-index",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 996,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 484,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 732,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/privacy-adm-fix",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 636,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 464,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 788,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/privacy-adm-wording-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 972,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 624,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 736,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/privacy-essential-eight-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 984,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 456,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 732,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/procurement-training-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 980,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 484,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 704,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/profit-mirror-care",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 508,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 480,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 776,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/public-posture-briefing",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1000,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 452,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 596,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/quarterly-board-cyber-privacy-briefing",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 1052,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 476,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 744,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/quote-chaser",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 492,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 712,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/quote-writer-from-job-notes",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 1504,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 772,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/rebid-tender-brief",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1492,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 504,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 736,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/recruiter-contract-winner-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 520,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 700,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/referrer-map-property-finance",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1028,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 552,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 652,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/review-reply-desk",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 588,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 684,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5067,
+     "lcp": 1012,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/rival-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1508,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 624,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1056,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/scam-shield-for-tradies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 592,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 628,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 740,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/sector-dossier-library",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 400,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 576,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 680,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/signal-leads-data",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 396,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 460,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 616,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/software-partner-stack-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 632,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 784,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/solar-outreach-rail",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 456,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 520,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 740,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/solar-pipeline-desk",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 544,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 444,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 728,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/solar-site-shortlist",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 512,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 448,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 756,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/sponsor-send-rail",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 628,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 680,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 812,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/spoofguard-global-monitor",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 284,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 480,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 608,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/story-leads-weekly",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1048,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 500,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 984,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/sub-threshold-intelligence-contract",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 972,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 520,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 764,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/subbie-finder",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 264,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 552,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 772,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/subbie-finder-channel",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1076,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 3040,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 3504,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/subbie-finder-lite",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1432,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2356,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1996,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/supplier-check-dossier",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1656,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1512,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2308,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/supplier-cyber-readiness-pass",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 920,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2008,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2804,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/tender-alerts-widget",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1796,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1840,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1724,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/tender-fit-score",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 912,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.015,
+     "lcp": 2324,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/tender-intelligence-radar",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1468,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1792,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/tender-radar-for-trades",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1328,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1920,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/trade-panel-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 932,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1060,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1976,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/tradie-starter-list",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 956,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1120,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1820,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers/wordpress-email-posture-widget",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 584,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1252,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/order/ai",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 2172,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/order/compliance",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 2020,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 3028,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/order/leads",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 2044,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 2016,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0002,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/order/monitor",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0008,
+     "lcp": 1156,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/our-evidence-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2456,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/our-scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/parallax",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1880,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2264,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/privacy",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 1892,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 1924,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1660,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/breach-response-runbook",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1760,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2020,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/course-ai-for-tradies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1996,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2868,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/course-email-security-for-owners",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1936,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2000,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/customer-dossier-method-guide",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1756,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 2392,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/dmarc-setup-guide",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 888,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/efficiency-proof-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1388,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/essential-eight-ml1-checklist",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/five-jurisdiction-privacy-bundle",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2196,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2376,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/invoice-chasing-playbook",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1940,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2784,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/privacy-adm-wording-guide",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1184,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 960,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1132,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/privacy-policy-template-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1492,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 4908,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2496,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/quote-follow-up-playbook",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1068,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0032,
+     "lcp": 2016,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2496,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/spoofguard-self-check-checklist",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 740,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1816,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1556,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products/vendor-risk-register-template",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 716,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1128,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1740,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/proof",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1128,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1208,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1272,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/refer",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0.0002,
+     "lcp": 788,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0,
+     "lcp": 1564,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2368,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.5205,
+     "lcp": 2416,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2292,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 1172,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/aged-care",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1076,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/construction",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1336,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/councils",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2588,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/education",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 912,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/health",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1244,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/hospitality",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1256,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/logistics",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 784,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/mining",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 2136,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/professional-services",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 820,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/sectors/retail",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1712,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/security",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 1324,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/services",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 352,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/speed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1556,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 532,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 848,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/system",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 468,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 556,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 828,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/terms",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 292,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0001,
+     "lcp": 532,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 820,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/tradies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 304,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 512,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 676,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/v/titanos-pitch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 812,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 952,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 756,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/agency-white-label-audit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 1124,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/association-member-kit",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 476,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1504,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/bid-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 1140,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/broker-renewal-scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 300,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1620,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/charity-profit-mirror",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0007,
+     "lcp": 528,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/electorate-dollar-map",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1188,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1236,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/eu-ted-small-lot-radar",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1404,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1572,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/franchise-posture-board",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 512,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/free-tender-digest",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 532,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/funder-fit-dossier",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 1192,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1600,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/global-tender-desk",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 612,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/incumbent-brief",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 484,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1428,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/instant-email-domain-check",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 348,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 1584,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/investigation-cut",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 276,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/monitor-wholesale",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1208,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/msp-prospect-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 1112,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/payee-domain-change-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 828,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/portfolio-watch",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 1484,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1564,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/privacy-adm-fix",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1232,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1312,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/privacy-essential-eight-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 1120,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1488,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/profit-mirror-care",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0003,
+     "lcp": 312,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1576,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/recruiter-contract-winner-feed",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1140,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/scam-shield-for-tradies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1172,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1520,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/story-leads-weekly",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1076,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1608,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/subbie-finder",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 1268,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1324,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/subbie-finder-channel",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 400,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/subbie-finder-lite",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 1360,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/supplier-cyber-readiness-pass",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 996,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 2088,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/tender-intelligence-radar",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0004,
+     "lcp": 424,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1636,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/welcome/trade-panel-pack",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 544,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1504,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/your-data",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0006,
+     "lcp": 380,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 840,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1024,
+     "overflow": 0
+    }
+   }
+  }
+ ]
+}

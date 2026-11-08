@@ -1,0 +1,127 @@
+Skip to main content
+TITANOS
+TITANOS · OPENING SOON
+Course: Email Security for Business Owners
+
+A short course that takes you from not knowing your email posture to a locked-down domain, a tested incident plan and evidence for clients.
+
+Price to be confirmed. No GST is charged. Delivered as course-email-security-for-owners.zip.
+
+TELL ME WHEN IT OPENS →
+
+Checkout is opening soon. Registering is free and commits you to nothing.
+
+Who it's for
+•
+Owners and managers of small businesses
+•
+Part-time IT and office staff
+•
+Suppliers asked to show their security evidence
+What you get
+✓
+Four modules and ten short lessons
+✓
+The DMARC guide, checklists and runbook as part of the bundle
+✓
+A one-page evidence summary for clients
+✓
+Lifetime access to the files as delivered
+Course outline
+Module 1: See your own posture
+How email faking works, in plain words. You can explain the risk to your team.
+Run the ten-point self-check. A scored baseline for your domain.
+Module 2: Lock the domain
+SPF and DKIM without tears. Both set up and checked.
+DMARC: monitor, quarantine, reject. A safe rollout plan for your mail.
+Test and keep it healthy. A monthly five-minute check.
+Module 3: Be ready
+The first 72 hours after a problem. A runbook with names filled in.
+Your supplier list. A vendor register started.
+Essential Eight at maturity level one. A gap sheet for your IT provider.
+Module 4: Show your work
+Build a one-page evidence summary. Something you can send a client or insurer.
+What to do next. A priority list for the next quarter.
+What is in the download bundle
+✓
+Lesson notes, 10 PDFs
+✓
+DMARC and SPF setup guide
+✓
+Email spoofing self-check checklist
+✓
+Data breach response runbook
+✓
+Vendor risk register template
+✓
+Essential Eight level one checklist
+✓
+Evidence summary template
+Delivery
+
+You receive course-email-security-for-owners.zip (ZIP: lesson notes (PDF), guides, templates, sheets) after payment. Delivered as a download bundle. Video is not part of version one.
+
+Price
+Price to be confirmed
+
+No GST is charged. One payment, yours to keep. Full terms: /terms
+
+Straight answers
+Can my IT provider use this too?
++
+Yes. The guides are written so you and your IT provider can work from the same pages.
+What if it is not right for me?
++
+Email us and we will sort it out in plain terms. Refund terms are in our terms page and are confirmed in writing before you pay.
+
+Want to start free? Run the free scan or see all products.
+
+If you like what you have read and it fits, would it be okay to go ahead? A no is welcome too.
+
+TELL ME WHEN IT OPENS →
+
+Checkout is opening soon. Registering is free and commits you to nothing.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

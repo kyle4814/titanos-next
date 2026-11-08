@@ -1,0 +1,140 @@
+Skip to main content
+TITANOS
+BUILD LOG
+A headless AI research loop that can't rm -rf your home directory
+← Back to the archive
+LOGGED 1 OCTOBER 2026 · 6 MIN READ
+
+An unattended AI agent that can run shell commands without a human watching is dangerous by default. One bad variable expansion and it can delete things for real. This describes a runner that fires an AI research pass on a schedule with no chat window open, and a second, independent guard in front of it that inspects every shell command before it runs and blocks the destructive or outward-facing ones. The guard was tested live: it blocked a real delete-everything command during a smoke test of the new runner. Sixteen out of sixteen automated tests pass for the combined runner and guard.
+
+This is a second, independent layer. A separate incident, covered elsewhere, involved an empty shell variable turning into a destructive delete inside a test. That was fixed at the filesystem-fixture level. This guard sits one level up, on the command boundary itself, and it exists specifically because unattended runs, with no human present to notice something has gone wrong, need a harder backstop than attended ones.
+
+The problem this closes
+
+A system that only does useful work while someone has a terminal open is not actually autonomous, it is a tool that waits for a human to press play. Getting a research loop to run on its own schedule, with nobody watching, means accepting that the system will sometimes issue a shell command with nobody there to catch a bad one before it runs.
+
+The architecture: four stop checks before anything runs
+
+The runner fires on a fixed schedule. Before it launches a single AI call, it runs through four independent stop conditions in order, and any one of them ends the run cleanly, logged, no error state.
+
+Kill switches. A stop file or a disable file halts it immediately. Either can be set by touching a file, no code change and no redeploy needed.
+Single-instance lock. If another instance is already running, this one stands aside rather than running two passes in parallel.
+Ownership check. If a human is actively driving a live session right now, the headless runner defers to it and does nothing.
+A daily cap. It counts how many passes have already started today and refuses to start another once a fixed limit is reached, a budget guard since the hosting plan exposes no usage figure to check against directly.
+
+Only after all four checks clear does it actually run, with a hard timeout, no session persistence, its output routed to a dated log file, and a settings file that wires in the guard described below. If the run exits with a failure code, including a timeout, the operator is pinged with the failure reason and the log location, so a failed unattended pass does not just go quiet.
+
+The guard: what it actually blocks
+
+A dedicated hook runs before every shell command the model tries to execute, reads the proposed command, and can refuse it outright, in every permission mode, so it cannot be bypassed by the run's own settings. It checks the command text against a fixed list of dangerous patterns, and the comment at the top of the file states the reason plainly: an unsandboxed run once turned an empty temp-directory variable into a home-directory wipe, so an unattended loop gets a hard guard on top of the fixture guard.
+
+A recursive force-delete targeting an absolute path, a home shorthand, or any shell variable, is blocked outright, unless the target is a literal scratch-space path.
+Any privilege-escalation command is blocked.
+A forced git push, and other destructive git operations, are blocked.
+Disk-destructive tools are blocked.
+Piping a download straight into a shell interpreter is blocked.
+Sending on the operator-facing channels stays interactive-only by design, an unattended pass can never trigger it.
+Reads of credential files are blocked.
+
+Anything that does not match one of those patterns is allowed through unmodified. This is a denylist of specific dangerous shapes, not a full sandbox, and the guard is explicit that its role is the unattended-run backstop on top of the separate fixture-guard fix, not a replacement for it.
+
+Headless loop runner live. Live smoke test: headless run OK in a cron-like environment, guard blocked a recursive delete against a home-rooted path. First scheduled fire correctly skipped, because a live session still owned the loop at that moment.
+Test coverage
+
+A dedicated test suite runs fully offline against a disposable fixture root with a stub command in place of a real model call, and covers both halves of the system: the four stop-check gates on the runner side, and nine separate command shapes against the guard directly, five that must be blocked and three that must be allowed through. Re-run directly: sixteen passed, zero failed.
+
+Why this is the part worth paying for
+
+Anyone can wire up a scheduled job. The part that actually protects a business is the part nobody sees: the stop checks, the denylist, the live test that proves the guard catches the exact command that caused real damage a day earlier. Fail closed by default, tested against the real failure and not a hypothetical one, is what gets built into every engagement. If your business runs anything unattended right now, a script, an integration, an automation nobody has watched run in months, it is worth finding out whether it would have caught this.
+
+AI-assistance disclosure: this post was drafted by Claude (Anthropic) as part of the operator's own build log. The code and commits described above are real, verified against the repository at the time of writing.
+
+Want this standard applied to what's running unattended in your business?
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+Is this a sandbox?
++
+No. It is a denylist hook that inspects the literal text of a proposed command against a fixed set of dangerous patterns before it executes. It blocks known-dangerous shapes, it does not isolate the process.
+Does this replace the earlier fixture-guard fix?
++
+No. It sits on top of the fixture guard, a second independent layer for unattended runs specifically, not a replacement.
+Can the unattended loop send messages or make outward contact on its own?
++
+No. The operator-facing send commands are explicitly on the blocklist. Those stay interactive-only, gated to a human-present session.
+How often does the loop run, and what stops it running forever?
++
+On a fixed schedule, capped at a default of 12 passes per calendar day, each pass bounded by a hard timeout, and either of two kill-switch files stops it immediately with no code change.
+RELATED RECORDS
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds
+
+Eight minutes and twelve seconds. That's how long it took to go from a wiped home directory to a fully working system, once the rebuild was done properly.
+
+Open the record
+→
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+5 MIN READ
+Tap-to-approve on Telegram without a second bot
+
+The final design sends one message with an approve and a deny button. A decision only counts if it carries the exact reference for that card, arrives before it expires, and nobody has already answered it.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

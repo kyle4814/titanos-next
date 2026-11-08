@@ -1,0 +1,122 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Agent Pre-Flight Test Kit
+
+A test kit that attacks your AI agent before the client sees it, plus a signed-off pre-flight report you can hand over.
+
+Built for freelancer or agency wanting a repeatable 'safe to ship' gate before go-live. AU$297 one-off. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free ten-case starter set (injection and empty-input cases) in our public write-up.
+
+The price is AU$297 one-off, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Freelancers and agencies handing AI agents to paying clients
+•
+Builders whose agents worked in a demo and nowhere else
+•
+Anyone who wants a repeatable go-live check
+What you get
+✓
+A test kit with ready-made cases: prompt-injection strings (text that tries to hijack the agent), empty and malformed inputs, and stale-data cases
+✓
+Fail-closed checks on every safety gate (if the gate cannot decide, it blocks)
+✓
+A pre-flight report template to give your client
+
+And how does it go from a yes to a finished job?
+
+How it works
+You tell us your agent's entry point and the gates to attack.
+We set up the test kit for that agent.
+You run it, fix what fails, and hand over the report.
+Why TITANOS does it differently
+
+It comes from how TITANOS tests its own work: we deliberately try to break passing tests and record the false greens we catch. Ordinary agencies ship without adversarial test cases.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$297 one-off
+
+AU$297 one-off, or AU$199 with the Core Kit.
+
+No GST is charged. Refund terms are in our terms and confirmed in writing before you pay. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who are you?
++
+TITANOS is a Queensland sole trader business run by Kyle Deligny, ABN 34 318 502 254.
+Does a pass mean my agent is safe?
++
+No. It means the agent survived these cases. It is a repeatable check, not a guarantee.
+Do you see my client's data?
++
+No. The test kit runs on your side with your own agent.
+What does it cost?
++
+The price is AU$297 once, or AU$199 with the Core Kit. No GST is charged.
+Can I look before buying?
++
+Yes. The free ten-case starter set is public. A no is welcome.
+
+Want more later? See AI partner retainers.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free ten-case starter set (injection and empty-input cases) in our public write-up.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

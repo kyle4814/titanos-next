@@ -1,0 +1,106 @@
+Skip to main content
+TITANOS
+COMPLIANCE
+Do sole traders need a privacy policy in Australia?
+← Back to the archive
+LOGGED 19 AUGUST 2026 · 4 MIN READ
+
+Short answer: most sole traders are still covered by the Privacy Act's small-business exemption (annual turnover under $3 million) today, but the exemption already has exceptions that catch some trade businesses, and it narrows further for specific business types from 1 July 2026, so "I'm too small" is worth double-checking rather than assuming.
+
+Who's already excluded from the exemption, regardless of size
+Health service providers, including anyone holding health-related records, which can catch businesses that don't think of themselves as health providers.
+Businesses that trade in personal information, buying or selling contact lists or data as part of the business.
+Businesses that collect or hold tax file numbers.
+What changes from 1 July 2026
+
+Businesses that become "reporting entities" under AML/CTF tranche-two reforms (a group that includes many accountants, lawyers, real estate agents, and some trust or company service providers) lose the small-business exemption from that date, regardless of turnover. If that doesn't describe your trade, this specific change doesn't catch you, but it's a sign the exemption is narrowing rather than staying fixed.
+
+Should you have a privacy policy anyway, even if exempt?
+
+Practically, yes, for reasons beyond strict legal obligation. If you're storing customer names, addresses, phone numbers, and job photos in ServiceM8 or a spreadsheet, having a plain-English one-pager on what you do with that information is the kind of thing that costs an afternoon and heads off an awkward conversation later, with a client, a platform you're selling through, or an insurer asking about your data practices.
+
+It's also simply good practice regardless of the legal threshold. The businesses that treat customer data carelessly before they're legally required to are usually the same ones scrambling when the requirement does eventually catch them.
+
+A straight answer on whether the reforms apply to your specific business, and what minimum-viable compliance actually looks like.
+
+SEE THE COMPLIANCE PACK →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+Is the Privacy Act small business exemption being removed completely?
++
+Not as a blanket change. As of now it's narrowed for specific categories (health providers, data traders, TFN holders always; AML/CTF reporting entities from 1 July 2026). A full removal for all small business has been proposed in reform discussions but isn't confirmed or dated. Treat claims that it's already gone for everyone with scepticism.
+What's the cheapest way to become compliant as a sole trader?
++
+A short, honest privacy policy covering what you collect, why, and how someone can ask you to delete it, plus basic habits like MFA on your accounts, covers most of the practical gap for a business below the exemption threshold with no unusual data handling.
+RELATED RECORDS
+COMPLIANCE
+·
+LOGGED 22 JULY 2026
+·
+6 MIN READ
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+
+"We're too small for privacy law" stops being reliably true this year. Here's what changes and what doesn't.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+The Notifiable Data Breach scheme: the 30-day rule small businesses miss
+
+It doesn't have to be a hack. An email sent to the wrong address can trigger the same 30-day clock.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

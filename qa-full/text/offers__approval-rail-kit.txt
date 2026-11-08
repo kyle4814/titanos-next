@@ -1,0 +1,132 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Approval-Rail Kit (Core)
+
+A drop-in kit that adds approval steps, an audit trail and a kill switch to the agents you build for clients.
+
+Built for freelance AI builders, Make and n8n agencies, AI consultants. AU$497 one-off. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free five-gate checklist one-pager and a sample approval card, published with the public write-up.
+
+The price is AU$497 one-off, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Solo builders who ship client agents
+•
+Small Make, n8n and AI automation agencies
+•
+Consultants whose name is on the line when an agent misfires
+What you get
+✓
+An approval-card format (what, why, cost, reversible, approve or deny)
+✓
+A five-gate checklist: money, credentials, legal commitments, outside contact and anything irreversible
+✓
+A receipt ledger format
+✓
+A rail contract template with tests
+✓
+A README and a settings file for your brand
+
+And how does it go from a yes to a finished job?
+
+How it works
+You fill in a settings file with your gates, card channel and spend ceiling.
+You wire the kit into the agents you build.
+Each risky step now waits for a tap and leaves a receipt.
+Why TITANOS does it differently
+
+This pattern is taken from the live approval rails TITANOS runs itself. The build is sized by a standard estimate (COCOMO, a MODELLED figure, shown on the Engineering page) and was made for about US$30 a month of AI tools (operator figure). Most agencies have no tested gate-and-receipt design to copy.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$497 one-off
+
+AU$99 a month for updates is optional.
+
+No GST is charged. Refund terms are in our terms and confirmed in writing before you pay. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who are you?
++
+TITANOS is run by Kyle Deligny, a sole trader (ABN 34 318 502 254) in Queensland. You deal with Kyle directly, not a call centre.
+Does the kit make my agents legally compliant?
++
+No. It is an engineering pattern, not a legal opinion or a compliance certificate. Check your own obligations with a professional.
+Does it include your private settings or client data?
++
+No. All private settings, tokens and client data are removed before anything is shared.
+Will it fit my stack?
++
+It is built around a plain settings file and a Telegram or email approval card. We will tell you honestly before you buy if your stack is a poor fit.
+Does this replace anyone on my team?
++
+No. It gives your people their hours back and gives them a better starting point. You stay the decision maker.
+Is GST charged?
++
+No GST is charged. TITANOS is a sole trader that is not registered for GST, and the price you see is the price you pay.
+Can I cancel?
++
+Yes. There are no tactics and no lock-in tricks. If it is not useful, say so and stop. A no is always welcome.
+
+Want more later? See Governed Agent Proposal Pack.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free five-gate checklist one-pager and a sample approval card, published with the public write-up.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

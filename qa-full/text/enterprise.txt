@@ -1,0 +1,132 @@
+Skip to main content
+TITANOS
+TITANOS ENTERPRISE
+Larger engagements, scoped on a call.
+
+For groups, regulated entities and boards. Every engagement is scoped on a call.
+
+These figures are starting points, not a price list, and they have not been market-tested. Nothing is signed until we have talked through what you actually need.
+
+BOOK A FREE ENTERPRISE CONSULTATION →
+
+Larger engagements are scoped on a call and priced before anything starts, built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and nobody replaced.
+
+Nobody gets replaced. Your people stay. They stop doing the boring parts and get their hours back.
+
+A whole engineering department, for the price of one person.
+
+Where that comes from
+
+MODELLED
+
+24 engineers for 31 months
+
+what the industry COCOMO model says this build would take (MODELLED). One person built it in about 5 months, around a day job.
+
+A whole engineering department, for the price of one person.
+
+Where this number comes from
+
+Method: the COCOMO model, explained on the Engineering page. A larger organisation will have questions first, so here they are answered up front. The scan reads public records only. Nothing inside your systems is touched. Nobody on your team is replaced. Your IT provider and your own people stay in charge of every change. And the price is agreed before anything starts.
+
+What would an engagement like that actually be called, and what might it cost to scope?
+
+01 / 01
+STARTING POINTS
+What We Can Scope Together
+
+Indicative starting points. Every engagement is scoped on a call.
+
+Board AI risk advisory
+AU$7,997/mo
+Enterprise continuous monitoring
+AU$14,997/mo
+Enterprise AI security operations
+AU$24,997/mo
+Enterprise AI governance program
+AU$49,997
+Multi-entity compliance program
+AU$74,997
+EU AI Act readiness program
+AU$99,997
+OEM platform licence
+AU$149,997/yr
+
+These are starting points, not quotes. The final scope and price are agreed with you on a call. Would it be okay if we started there? A no is welcome.
+
+Straight answers, before you ask
+I run IT. Where does this sit?
++
+Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change. Your IT team stays in charge.
+Is this safe?
++
+Yes, and here is how. Nothing we build goes live until it passes thousands of automated checks, like a pilot's pre-flight checklist, every single time. Anything important (money, legal, anything sent out, anything that cannot be undone) needs a person's tap first. Everything the system does is recorded.
+Will it replace my staff?
++
+No. Nobody gets replaced. Think power steering, not a self-driving car: you still drive, it takes the strain off your arms. Your people stay and get their hours back from the repetitive parts.
+How do you know it works?
++
+The industry-standard COCOMO model sizes the TITANOS build at about 24 engineers for about 31 months (MODELLED). One person built it in about 5 months, with 6,314 test cases guarding it. The method is shown in full on the Engineering page, so you can check it yourself.
+What does it cost?
++
+The first conversation and your report are free. After that the prices are published and you know yours before anything starts: Titanos Monitor AU$149/mo, the Privacy Act compliance pack AU$5,997, and AI retainers from AU$1,500/mo (3-month minimum). You pay for the result, not an open taxi meter.
+We already have an IT provider. Where does that leave them?
++
+Right beside you. This sits next to your IT provider, nothing goes live without passing the checks, and you keep control of every change. If it helps, I am happy to talk to them directly.
+What happens next?
++
+1. You message me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send you a free report on your business, so you can see what I see. 4. If you like it, you get a price before anything starts. If it is not for you, that is completely fine and the report is still yours.
+Start with a free consultation and a free report on your business
+
+I am Kyle, the founder of TITANOS. If you like me, you like the business and you like the offer, or we can shape it into something that works for you, would you be happy to start with a free half-hour? You leave with a clear picture of what you could do next and a report of your own. A no is welcome.
+
+Telegram @TitanOSofficial
+Email kyle@titanos.tech
+
+Kyle replies by email and Telegram within one business day.
+
+Or send a message first
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

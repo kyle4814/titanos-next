@@ -1,0 +1,262 @@
+Skip to main content
+TITANOS
+SEE WHAT YOU GET: MY OWN REPORT, PUBLISHED IN FULL
+Before you pay for anything, read exactly what you would get.
+
+This is my own security and compliance report, run on my own business and published in full, with only customer names removed. Nothing glossy, nothing hidden.
+
+The single PDF an insurer, regulator, or enterprise procurement team asks for as proof of reasonable steps: privacy policy, breach response plan, security scan results, third-party data list, email fraud protection, and the signed government security checklist. 17 pages. Same template every client receives, applied to my own business first.
+
+SEE THE COMPLIANCE PACK
+REQUEST YOUR FREE SCAN
+→
+
+Source: titanos.tech/scan · Methodology
+
+This is our own security report, published in full, so you can see the quality of the work before you pay anything.
+
+A black-box flight recorder: every action is recorded, so you can always see what happened and when.
+
+Where that comes from
+
+EXAMPLE
+
+13 sections, 17 pages
+
+my own report on my own business, published in full with only customer names removed
+
+A car dealer who hands you the service history of their own car first, before asking you to trust theirs.
+
+Where this number comes from
+
+Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254). The scan behind this report used public records only and touched nothing. Nobody is replaced, your IT person stays in charge, and reading this page costs you nothing.
+
+Why would anyone publish their own report in full? Fair question, and the answer is the next section.
+
+VERIFIED, NOT CLAIMED
+
+A plain-English report you can hand straight to your insurer or a big client as proof. Here is exactly what it looks like.
+
+01 / 05
+Why this report is published
+It is a real report
+
+Not a mock-up. Not a template with fake data. A real scan of a real domain, with the actual findings, run on the date shown. The only thing removed is names.
+
+You know what you are buying
+
+Most security consultants describe the deliverable in bullet points. I publish the actual document so there is no gap between what you expect and what you receive.
+
+I hold myself to the same standard
+
+If I ask clients to get their privacy policy right, their email fraud protection set up, and their breach plan documented, I should be able to show mine first.
+
+OPERATOR'S NOTE
+I ask clients to hand their insurer a report with nothing hidden. I don't get to ask that and keep mine private, so this is mine, unedited, first.
+
+Want to read the real thing? It is one tap away.
+
+02 / 05
+SAMPLE · REDACTED · REAL SCAN OF TITANOS.TECH
+
+This is a real security and compliance report run against my own website and business. It is the same format every client receives, so you can see exactly what you are paying for before committing to anything.
+
+The scan results, privacy policy, email security records, and signed checklists are all included. The sections built from your own data, like your staff access list, your specific software screenshots, or your signed attestation, are not in this sample, because those can only be written using your information. They are produced during the engagement.
+
+VIEW THE SAMPLE PDF →
+Download
+→
+
+Can't see the PDF? Open directly →
+
+And what is actually inside those 17 pages?
+
+03 / 05
+What's Inside: All 13 Sections
+
+Three groups, so you can see at a glance what the report covers. Every section is plain English, and none of it assumes you are technical.
+
+FOUNDATION DOCUMENTS
+The core documents every business needs, written for your business, plain English, ready to hand to anyone who asks.
+01
+Plain-English summary
+
+A one-page overview of what was checked, what was found, what was fixed, and what is still on the list. Written so a bank, insurer, or government contact can understand the whole picture in under two minutes, no technical knowledge needed.
+
+02
+Privacy policy + AI disclosure
+
+A ready-to-publish privacy policy updated for Australia's new privacy laws (December 2026), plus a plain-English section explaining which AI tools the business uses, what decisions they make about customers, and how a customer can ask for those decisions to be reviewed.
+
+03
+What to do if you get hacked
+
+A step-by-step action plan for a data breach: who to call, what to do in the first 24 hours, what to say to affected customers, and how to meet Australia's legal notification deadline (30 days under the Notifiable Data Breaches law). Built so you are not making decisions under pressure.
+
+04
+Third-party services that touch your data
+
+A one-page list of every external tool or platform that handles your customer data: what data they hold, what your agreement with them covers, and when you last reviewed their security. The kind of list a large client or insurer will ask for.
+
+TECHNICAL VERIFICATION
+Proof that the security controls are actually in place, verified and evidenced, not just claimed on paper.
+05
+Security scan results, every finding published
+
+The full results of an independent external security scan: every issue found, how serious it is, whether it has been fixed, and the evidence that the fix worked. Nothing hidden, nothing cherry-picked. The scan itself is passive: public DNS and configuration records only, and it only ever runs against a domain that has asked for it.
+
+06
+Email fraud protection setup
+
+Proof that your email domain is locked down so nobody can send fake emails pretending to be your business, a technique used in most phishing and invoice fraud attacks. Shows the three records (SPF, DKIM, DMARC) that block this, all verified and active.
+
+07
+Email and cloud account security checklist
+
+A documented checklist of the security settings applied to your Microsoft 365 or Google Workspace, things like who can access what, whether logins are logged, and whether two-factor authentication is required. Mapped to the Australian government's recommended security baseline.
+
+08
+Two-factor login, proof it is actually on
+
+Screenshots and written policy showing that two-factor authentication (the 'enter a code from your phone' login step) is switched on and enforced for everyone in the organisation, not just switched on for some people, not just a policy on paper.
+
+09
+Backup and recovery plan
+
+Documentation of what gets backed up, how often, where it is stored, and how quickly data can be restored if something is deleted, corrupted, or locked by ransomware. Answers the question every insurer eventually asks.
+
+10
+Software update schedule
+
+Proof that the operating systems, browsers, and applications in your business are kept up to date, with evidence of the update schedule, not just a claim. Outdated software is the most common entry point for attackers.
+
+LEGAL SIGN-OFFS
+The signed documents you hand to a regulator, insurer, or enterprise client when they ask what you have done about security and privacy.
+11
+Who has access to what
+
+A record of which staff can access which systems, how access is given to new staff, and how access is removed when someone leaves, plus when this was last reviewed. Stops ex-employees and over-privileged accounts from becoming a problem.
+
+12
+Government security checklist, signed
+
+A signed letter confirming which items from the Australian government's Essential Eight security checklist your business has completed: the document an enterprise client, government agency, or insurer typically asks for before doing business with you.
+
+13
+Privacy law compliance letter, signed
+
+A signed letter documenting the specific steps taken to comply with the Australian Privacy Act, with each step mapped to the relevant legal requirement. The document a lawyer, regulator, or large client asks to see.
+
+Still wondering about something? Most people are, so I wrote the answers down.
+
+04 / 05
+Questions People Usually Have
+
+If you have never seen a compliance report before, these are the things people usually ask first.
+
+Is this a real report or a made-up example?
++
+It is a real report, run on a real domain (titanos.tech) on the date shown in the document. Every finding is genuine: the issues that were found, the severity ratings, and the evidence of what was fixed are all from the actual scan. The only thing changed is that any customer names have been removed.
+What does 'redacted' mean? What has been removed?
++
+Only customer names and contact details have been removed from this sample. The scan results, technical findings, policy text, and security records are all shown exactly as they appear in the delivered document. Nothing has been softened, edited for presentation, or cherry-picked.
+Will I understand it without a security background?
++
+Yes, that is the point of the report. Every section is written in plain English. If something technical comes up, it is explained in terms of what it means for the business: what the risk is, what was done about it, and what an insurer or regulator would make of it. You do not need to know what SPF or DMARC stands for. The report explains it in context.
+Will my report look exactly like this?
++
+Same structure, same 13 sections, same format, but all the content will be specific to your business. The privacy policy will be written for your business. The scan findings will be from your domain. The vendor list will cover the tools you use. The signed letters will have your business name and ABN. This sample shows you the shape and quality of the deliverable, not a generic template you receive and fill in yourself.
+Why show your own report instead of a past client's?
++
+Two reasons. First, client confidentiality: publishing a client's security findings without their consent would be a privacy problem in itself. Second, credibility: if I ask clients to get their security and privacy right, showing that I have done it for myself first is more honest than just claiming it.
+What happens after I see this and decide I want one for my business?
++
+You message me to confirm the engagement is a fit, or you go straight to the compliance page and buy directly. After purchase: your domain gets scanned within 48 hours, your draft pack is delivered within 3 business days, and I schedule the 90-minute working call where I apply every change with you. The final evidence pack, with everything we applied together, lands within 24 hours of that call.
+05 / 05
+Would it be okay if we built yours?
+
+AU$5,997 one-time. Includes 3 months of Titanos Monitor at no extra charge (optional to continue at AU$149/mo after that, no automatic billing). One working session together: all 13 sections completed, written for your specific business, ready to hand to a client, insurer, or regulator. If you would rather read a bit more first, or this is not for you, a no is completely welcome.
+
+Kyle Deligny
+runs every engagement personally
+SEE THE COMPLIANCE PACK
+MESSAGE OR CALL KYLE
+→
+
+ABN 34 318 502 254· Every document reviewed and signed off by Kyle Deligny personally · Terms
+
+Ω
+13 SECTIONS. NOTHING HIDDEN, NOTHING CHERRY-PICKED.
+Straight answers, before you ask
+Is this safe?
++
+Yes, and here is how. Nothing we build goes live until it passes thousands of automated checks, like a pilot's pre-flight checklist, every single time. Anything important (money, legal, anything sent out, anything that cannot be undone) needs a person's tap first. Everything the system does is recorded.
+Will it replace my staff?
++
+No. Nobody gets replaced. Think power steering, not a self-driving car: you still drive, it takes the strain off your arms. Your people stay and get their hours back from the repetitive parts.
+How do you know it works?
++
+The industry-standard COCOMO model sizes the TITANOS build at about 24 engineers for about 31 months (MODELLED). One person built it in about 5 months, with 6,314 test cases guarding it. The method is shown in full on the Engineering page, so you can check it yourself.
+What does it cost?
++
+The first conversation and your report are free. After that the prices are published and you know yours before anything starts: Titanos Monitor AU$149/mo, the Privacy Act compliance pack AU$5,997, and AI retainers from AU$1,500/mo (3-month minimum). You pay for the result, not an open taxi meter.
+We already have an IT provider. Where does that leave them?
++
+Right beside you. This sits next to your IT provider, nothing goes live without passing the checks, and you keep control of every change. If it helps, I am happy to talk to them directly.
+What happens next?
++
+1. You message me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send you a free report on your business, so you can see what I see. 4. If you like it, you get a price before anything starts. If it is not for you, that is completely fine and the report is still yours.
+Start with a free consultation and a free report on your business
+
+I am Kyle, the founder of TITANOS. If you like me, you like the business and you like the offer, or we can shape it into something that works for you, would you be happy to start with a free half-hour? You leave with a clear picture of what you could do next and a report of your own. A no is welcome.
+
+Telegram @TitanOSofficial
+Email kyle@titanos.tech
+
+Kyle replies by email and Telegram within one business day.
+
+Or send a message first
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report
