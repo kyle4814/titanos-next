@@ -22,6 +22,6 @@ export type Tap = { label: string; shelfId: string; href: string };
 export type Reply =
   | { kind: "match"; shelf: Shelf; score: number; margin: number; answer: string; slots: Record<string, string>; alternatives: Tap[]; seatNote?: string }
   | { kind: "ask"; question: string; taps: Tap[]; score: number }
-  | { kind: "unmatched"; message: string; configStub: ConfigStub };
+  | { kind: "unmatched"; message: string; configStub: ConfigStub; reason: "no_match" | "junk"; saved: boolean };
 
 export type ConfigStub = { ask: string; normalised: string; seat: Seat; status: "LOGGED_FOR_GENERATOR"; quote: null };
