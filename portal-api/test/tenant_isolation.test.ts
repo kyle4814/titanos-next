@@ -5,13 +5,14 @@
 // appear in any response body, and no foreign tenant-scoped route may answer 2xx.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { makeEnt, SSO_CFG } from "./ent_harness.ts";
+import { makeEnt, constructEnt, SSO_CFG } from "./ent_harness.ts";
 import { BillingMarketBookFacts } from "../src/enterprise/book_facts.ts";
 import { MemoryMarketStore } from "../src/market/store.ts";
 
 interface Seat { email: string; session: string }
 async function world() {
   const h = makeEnt();
+  if (process.env.ENT_CTX === "1") h.deps.ent = constructEnt(h);   // C8 f314: run the whole matrix on the ent the production construction point builds
   const T: Record<string, any> = {};
   const seat = async (email: string): Promise<Seat> => ({ email, session: (await h.login(email)).session });
 

@@ -21,7 +21,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   const top = seg[0];
   if (!["enterprise", "partners", "sso", "portal", "tenants", "invites", "referrals", "savings", "internal", "partner"].includes(top)) return null;
   if (top === "internal" && seg[1] !== "tenants" && seg[1] !== "payouts" && seg[1] !== "enterprise") return null;
-  if (!d.ent) return json({ error: "enterprise_unavailable" }, 503);
+  if (!d.ent) return json(d.entError ? { error: "enterprise_unavailable", reason: d.entError } : { error: "enterprise_unavailable" }, 503);
 
   // public
   if (path === "/savings" && m === "POST") return json(s.savings(await body(req)));
