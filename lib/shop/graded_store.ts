@@ -90,6 +90,11 @@ export async function persistDrained(queue: DrainQueue, store: GradedRunStore, r
 // retract: when given, entries that fail the retraction policy are removed and listed (now is injected, there is no clock here).
 export type BuildOpts = { base?: Catalogue; expectIds?: string[]; strict?: boolean; retract?: RetractPolicy & { now: string } };
 export type BuildResult = { catalogue: Catalogue; published: CatalogueEntry[]; held: Held[]; retractions: Retraction[]; files: { "shelf_catalogue.json": string; "retractions.json": string } | null };
+export type Offender = { cluster_id: string; reason: string };
+export class BuildBlockedError extends Error {
+  readonly offenders: Offender[];
+  constructor(message: string, offenders: Offender[]) { super(message); this.name = "BuildBlockedError"; this.offenders = offenders; }
+}
 // Integrity holds (no run, stale hash, partial, malformed) block the build. A shelf that was honestly graded and FAILED is just held.
 const FAIL_ONLY = /^(failed checks|grader run not marked pass)/;
 // The build step: stored runs -> promoteDrained -> assertCatalogueAllGraded. Throws on ANY ungraded shelf (never builds around it).
@@ -107,7 +112,10 @@ export async function buildCatalogueFromStore(store: GradedRunStore, opts: Build
   const res = promoteDrained(opts.base ?? { entries: [] }, drained.filter((d) => d.shelf), new MemoryGraderPort(runs));
   for (const s of stored) if (!s.shelf) bad.push(s.cluster_id + ": ungraded: stored shelf unreadable");
   for (const h of res.held) if (opts.strict || !FAIL_ONLY.test(h.reason)) bad.push(h.cluster_id + ": " + h.reason);
-  if (bad.length) throw new Error(`graded store: ${bad.length} ungraded shelf(s) block the build: ` + bad.join("; "));
+  if (bad.length) {
+    const offenders = bad.map((b) => { const i = b.indexOf(": "); return { cluster_id: b.slice(0, i), reason: b.slice(i + 2) }; });
+    throw new BuildBlockedError(`graded store: ${bad.length} ungraded shelf(s) block the build: ` + bad.join("; "), offenders);
+  }
   let catalogue = res.catalogue;
   let retractions: Retraction[] = [];
   if (opts.retract) {
