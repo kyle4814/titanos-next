@@ -92,6 +92,8 @@ function routes(ids: { t: string[]; a: string[]; acc: string[]; inv: string[]; p
       { method: "POST", path: `${p}/payouts` }, { method: "POST", path: `${p}/portals`, body: { name: "Evil", slug: "evil-portal", clientAdminEmail: "m@evil.com.au" } },
       { method: "PUT", path: `${p}/brand`, body: { name: "Evil", colour: "#000000", tagline: "" } },
     );
+    // C8 f311: the partner book of clients, probed with every tenant id as partnerId on both spellings, and with a cursor lifted from another tenant
+    out.push({ method: "GET", path: `/partner/book?partnerId=${t}` }, { method: "GET", path: `/api/partner/book?partnerId=${t}&limit=1` }, { method: "GET", path: `/partner/book?partnerId=${t}&cursor=v1.0000000000000000.dGVuYW50OnRlbl8x` });
     for (const a of ids.a) out.push({ method: "GET", path: `${p}/portals/${a}/estate` }, { method: "POST", path: `${e}/assets/${a}/verify` }, { method: "DELETE", path: `${e}/assets/${a}` });
     for (const c of ids.t) out.push({ method: "POST", path: `${p}/portals/${c}/publish`, body: { enabled: true } });
     for (const i of ids.inv) out.push({ method: "DELETE", path: `${e}/invites/${i}` });
@@ -100,6 +102,7 @@ function routes(ids: { t: string[]; a: string[]; acc: string[]; inv: string[]; p
   for (const i of ids.inv) out.push({ method: "POST", path: `/invites/${i}/accept` });
   for (const x of ids.pay) out.push({ method: "POST", path: `/internal/payouts/${x}/approve` });
   for (const t of ids.t) out.push({ method: "POST", path: `/internal/tenants/${t}/sso-enforce`, body: { enabled: false } });
+  out.push({ method: "GET", path: "/partner/book" }, { method: "GET", path: "/api/partner/book" });
   out.push({ method: "GET", path: "/portal/client-c1" }, { method: "GET", path: "/portal/client-c2" }, { method: "GET", path: "/portal/ent-a" });
   return out;
 }
@@ -137,6 +140,14 @@ for (const trial of TRIALS) {
         const tid = m[1];
         const partnerReadingConsentedClient = /^portals\/ast_|^portals\/ten_/.test(m[2] ?? "") && own.has(tid);
         if (!own.has(tid) && !partnerReadingConsentedClient) { leaks.push(`${probe.method} ${probe.path} answered ${res.status} for a tenant the caller is not in`); crossTenantReads++; }
+      }
+      // C8 f311: the book route names its tenant in the query; a 2xx for a partner seat the caller does not hold is a cross-tenant read, a 403 must carry an empty body
+      const bk = probe.path.match(/^\/(?:api\/)?partner\/book\?partnerId=(ten_[0-9a-f]+)/);
+      if (bk && res.status < 300 && !own.has(bk[1])) { leaks.push(`${probe.method} ${probe.path} answered ${res.status} for a partner seat the caller does not hold`); crossTenantReads++; }
+      if (bk && res.status === 403 && text !== "") { leaks.push(`${probe.path} 403 carried a body`); crossTenantReads++; }
+      if (/^\/(?:api\/)?partner\/book/.test(probe.path) && /ClientC[0-9]Name/.test(text)) {   // client names are visible only to the partner that owns the client
+        const names = (text.match(/ClientC[0-9]Name/g) ?? []).filter((n) => !(trial.who === "P1" ? ["ClientC1Name", "ClientC2Name"] : trial.who === "P2" ? ["ClientC3Name"] : []).includes(n));
+        if (names.length) { leaks.push(`${probe.path} leaked client names ${names.join(",")}`); crossTenantReads++; }
       }
       // someone else's invite must never be accepted by anyone but its addressee
       if (probe.path.startsWith("/invites/") && res.status < 300) { leaks.push(`invite accepted by ${trial.who}`); crossTenantReads++; }
