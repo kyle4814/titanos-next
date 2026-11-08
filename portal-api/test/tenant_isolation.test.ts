@@ -6,6 +6,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { makeEnt, SSO_CFG } from "./ent_harness.ts";
+import { BillingMarketBookFacts } from "../src/enterprise/book_facts.ts";
+import { MemoryMarketStore } from "../src/market/store.ts";
 
 interface Seat { email: string; session: string }
 async function world() {
@@ -51,6 +53,10 @@ async function world() {
   await mkClient("C1", "P1", "client-c1", true);
   await mkClient("C2", "P1", "client-c2", false);     // P1's client that has NOT consented
   await mkClient("C3", "P2", "client-c3", true);
+  // C8 f313: the PRODUCTION book facts source (billing + market + estate) replaces the empty test source, with a re-scan proof canary per client
+  const mkt = new MemoryMarketStore();
+  h.deps.ent!.book = new BillingMarketBookFacts({ ent: h.store, billing: h.deps.store, market: mkt });
+  for (const k of ["C1", "C2", "C3"]) await mkt.putJob({ id: `job_${k}`, ownerAccountId: T[k].accountId, domainId: `d_${k}`, domain: `canary-${k.toLowerCase()}-estate.com.au`, check: "dmarc", severity: "FAIL", tier: "small", priceCents: 1000, claimFeeCents: 0, status: "reproved", createdAt: 1, updatedAt: 1, baseline: { at: 1, status: "FAIL", detail: "x" }, abandonedBy: [], rescans: 1, warrantyChecks: 0, events: [], proof: { scanId: `CANARYPROOF_${k}`, at: 5, baseline: "FAIL", now: "PASS", detail: "x" } } as never);
   const outsider = await seat("outsider@nowhere.com.au");
   const gone = await seat("gone@nowhere.com.au");
   await h.req("DELETE", "/account", { token: gone.session, body: { confirm: "DELETE" } });
@@ -58,7 +64,7 @@ async function world() {
 }
 
 // Canaries owned by each tenant: {data visible to the tenant's members, admin-only data}
-const CAN = (k: string) => ({ data: [`CANARY_ASSET_LABEL_${k}`, `canary-${k.toLowerCase()}-estate.com.au`], brand: [`CANARY_BRAND_${k}`, `CANARY_TAGLINE_${k}`], adminOnly: [`viewer-${k}@ent${k}.com.au`, `pending-${k}@ent${k}.com.au`, `admin-${k}@ent${k}.com.au`], secret: [`CANARY_SSO_SECRET_${k}`], payout: [`acct_canary_${k}`] });
+const CAN = (k: string) => ({ data: [`CANARY_ASSET_LABEL_${k}`, `canary-${k.toLowerCase()}-estate.com.au`], brand: [`CANARY_BRAND_${k}`, `CANARY_TAGLINE_${k}`], adminOnly: [`viewer-${k}@ent${k}.com.au`, `pending-${k}@ent${k}.com.au`, `admin-${k}@ent${k}.com.au`], secret: [`CANARY_SSO_SECRET_${k}`], payout: [`acct_canary_${k}`], proof: [`CANARYPROOF_${k}`] });
 const ALL_TENANTS = ["A", "B", "P1", "P2", "C1", "C2", "C3"];
 const SECRETS = ["CANARY_SSO_SECRET_A", "CANARY_SSO_SECRET_B", "acct_canary_P1", "acct_canary_P2", "sso_secret_fixture", "internal_fixture_secret"];
 
@@ -70,12 +76,12 @@ function entitled(who: string): Set<string> {
   if (who === "viewerA") add("A", ["data"]);
   if (who === "viewerB") add("B", ["data"]);
   if (who === "C1" || who === "C2" || who === "C3") { add(who, ["data", "brand"]); }
-  if (who === "P1") { add("C1", ["data", "brand"]); add("C2", ["brand"]); } // P1 reads consented C1; sees brands of its own clients (it set them)
-  if (who === "P2") { add("C3", ["data", "brand"]); }
+  if (who === "P1") { add("C1", ["data", "brand"]); add("C2", ["brand"]); (CAN("C1") as any).proof.forEach((x: string) => s.add(x)); }   // f313: the book shows P1 the proof id of consented C1 only; C2 has not consented, so neither its domain nor its proof may appear // P1 reads consented C1; sees brands of its own clients (it set them)
+  if (who === "P2") { add("C3", ["data", "brand"]); (CAN("C3") as any).proof.forEach((x: string) => s.add(x)); }
   // the partner's own brands: P1/P2's clients' brands are set by the partner
   return s;
 }
-const WHOLE = new Set<string>(ALL_TENANTS.flatMap((k) => { const c = CAN(k) as any; return [...c.data, ...c.adminOnly]; })); // brands are PUBLIC by design (GET /portal/:slug), so they are not canaries
+const WHOLE = new Set<string>(ALL_TENANTS.flatMap((k) => { const c = CAN(k) as any; return [...c.data, ...c.adminOnly, ...c.proof]; })); // brands are PUBLIC by design (GET /portal/:slug), so they are not canaries
 
 interface Probe { method: string; path: string; body?: unknown }
 function routes(ids: { t: string[]; a: string[]; acc: string[]; inv: string[]; pay: string[] }): Probe[] {
@@ -305,4 +311,16 @@ test("prototype pollution and odd bodies do not reach the store", async () => {
     const r = await (await import("../src/index.ts")).handle(new Request("https://api.test/enterprise/" + T.A.id + "/assets", { method: "POST", headers: { authorization: "Bearer " + T.A.admin.session }, body: bad }), {}, h.deps);
     assert.ok(r.status === 400, `${bad} -> ${r.status}`);
   }
+});
+
+// C8 f313: the matrix above only proves ABSENCE; this proves the production book source is really live in it (P1 sees consented C1's proof, never unconsented C2's or P2's).
+test("isolation matrix: the production book source is wired (P1 sees C1's proof id, not C2's or C3's)", async () => {
+  const w = await world();
+  const res = await w.h.req("GET", `/partner/book?partnerId=${w.T.P1.id}`, { token: w.T.P1.admin.session });
+  assert.equal(res.status, 200);
+  const text = await res.text();
+  assert.ok(text.includes("CANARYPROOF_C1") && text.includes("canary-c1-estate.com.au"));
+  assert.ok(!text.includes("CANARYPROOF_C2") && !text.includes("canary-c2-estate.com.au"), "unconsented client: domain and proof withheld");
+  assert.ok(!text.includes("CANARYPROOF_C3") && !text.includes("canary-c3-estate.com.au"));
+  assert.ok(text.includes("ClientC2Name"), "the unconsented client still appears (commercial relationship), only its estate facts are withheld");
 });

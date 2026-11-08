@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { browserApi, errorText, signedIn } from "@/lib/portal";
 import * as ent from "@/lib/portal-ent";
+import PartnerBook from "@/components/PartnerBook";
 
 const card = { background: "var(--surface, #111)", border: "1px solid var(--border)", borderRadius: 12, padding: 20, marginTop: 20 } as const;
 const input = { padding: "10px 12px", background: "var(--bg, #080808)", color: "var(--text)", border: "1px solid var(--border)", borderRadius: 8 } as const;
@@ -42,6 +43,7 @@ export default function PartnerClient() {
         <input aria-label="Client admin email" style={input} placeholder="client admin email" value={f.clientAdminEmail} onChange={(e) => setF({ ...f, clientAdminEmail: e.target.value })} />{" "}
         <button style={btn} onClick={() => act(async () => { await ent.createPortal(api(), partner.id, f); setF({ name: "", slug: "", clientAdminEmail: "" }); await load(partner); })}>Create portal</button>
       </div>
+      <PartnerBook partnerId={partner.id} />
       {led && (
         <div style={card}>
           <h2>Commission ledger</h2>
