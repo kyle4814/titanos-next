@@ -5,7 +5,7 @@
 // Bindings used: DB (D1), INTERNAL_API_SECRET, ENT_SEAL_KEYS. There is no KV binding on this Worker (Env has none), so the estate
 // cache and refresh limiter are per-isolate memory, keyed per tenant (UNKNOWN: a shared adapter is the follow-on).
 // What has NO production adapter on disk is a seam, and an absent seam is a typed refusal, never a Memory fallback:
-//   storeFactory (D1 EntStore), approvals (D1 ApprovalStore), payouts + payoutLookup (Stripe Connect transfers = GATE2), idp (needs fetchJwks).
+//   storeFactory (D1 EntStore), approvals (D1 ApprovalStore), payouts + payoutLookup (Stripe Connect transfers = GATE2), idp (built from the IDP_JWKS_URIS binding + the fetchJwks seam; absent binding = refusal).
 import type { D1Like, Env } from "./env.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import type { EntStore } from "./enterprise/store.ts";
@@ -19,19 +19,19 @@ import { makeBookFacts } from "./enterprise/book_facts.ts";
 import { estateCache, type EstateCache } from "./enterprise/estate_cache.ts";
 import { MemoryRefreshLimiter, type RefreshLimiter } from "./enterprise/estate_refresh.ts";
 import { dnsScan, publicDohResolver } from "./enterprise/estate_dns.ts";
-import { createOidcVerifier, type JwksFetcher } from "./enterprise/oidc.ts";
+import { createIdpVerifier, httpJwksFetcher, isSafeJwksUrl, type UrlJwksFetcher } from "./enterprise/idp_verifier.ts";
 
 export type EntBuildReason = "missing_binding" | "bad_binding" | "adapter_unavailable";
 export class EntBuildError extends Error {
   readonly reason: EntBuildReason; readonly binding: string;
   constructor(reason: EntBuildReason, binding: string) { super(`${reason}:${binding}`); this.name = "EntBuildError"; this.reason = reason; this.binding = binding; }
 }
-export type EntEnv = Pick<Env, "DB" | "INTERNAL_API_SECRET" | "ENT_SEAL_KEYS">;
+export type EntEnv = Pick<Env, "DB" | "INTERNAL_API_SECRET" | "ENT_SEAL_KEYS" | "IDP_JWKS_URIS">;
 export interface EntSeams {
   storeFactory?: (db: D1Like, env: EntEnv) => EntStore;
   approvals?: (db: D1Like, env: EntEnv) => ApprovalStore;
   payouts?: PayoutProvider; payoutLookup?: TransferLookup;
-  idp?: IdpVerifier; fetchJwks?: JwksFetcher;
+  idp?: IdpVerifier; fetchJwks?: UrlJwksFetcher; fetchFn?: typeof fetch;
   scan?: ScanProvider;
   accounts?: { accountById(id: string): Promise<{ id: string; email: string; createdAt: number } | undefined> };   // the billing store: feeds the self-deal check
   now?: () => number;
@@ -47,6 +47,15 @@ export function parseSealKeys(raw: string): SealKeyring {
   return { current: o.current, keys: keys as Record<string, string> };
 }
 
+export function parseIdpJwksUris(raw: string): Record<string, string> {
+  let k: unknown;
+  try { k = JSON.parse(raw); } catch { throw new EntBuildError("bad_binding", "IDP_JWKS_URIS"); }
+  if (!k || typeof k !== "object" || Array.isArray(k)) throw new EntBuildError("bad_binding", "IDP_JWKS_URIS");
+  const e = Object.entries(k as Record<string, unknown>);
+  if (!e.length || !e.every(([iss, u]) => typeof u === "string" && isSafeJwksUrl(iss) && isSafeJwksUrl(u))) throw new EntBuildError("bad_binding", "IDP_JWKS_URIS");
+  return Object.fromEntries(e) as Record<string, string>;
+}
+
 // One cache + limiter per DB binding object, so every request on an isolate shares them (buildDeps runs per request). Keyed per tenant inside.
 const shared = new WeakMap<object, { cache: EstateCache; limiter: RefreshLimiter; scan: ScanProvider }>();
 
@@ -60,7 +69,9 @@ export function buildEnterpriseDeps(env: EntEnv, seams: EntSeams = {}): EntConte
   if (!seams.approvals) throw new EntBuildError("adapter_unavailable", "approvals");
   if (!seams.payouts) throw new EntBuildError("adapter_unavailable", "payouts");
   if (!seams.payoutLookup) throw new EntBuildError("adapter_unavailable", "payoutLookup");
-  const idp = seams.idp ?? (seams.fetchJwks ? createOidcVerifier({ fetchJwks: seams.fetchJwks }) as unknown as IdpVerifier : undefined);
+  // idp: a supplied verifier wins; else it is BUILT only when the IDP_JWKS_URIS binding (issuer -> jwks url) is present. Absent = typed refusal.
+  const idpUrls = env.IDP_JWKS_URIS ? parseIdpJwksUris(env.IDP_JWKS_URIS) : undefined;
+  const idp = seams.idp ?? (idpUrls ? createIdpVerifier({ fetchJwks: seams.fetchJwks ?? httpJwksFetcher(seams.fetchFn ?? fetch), jwksUrls: idpUrls }) : undefined);
   if (!idp) throw new EntBuildError("adapter_unavailable", "idp");
   const book = makeBookFacts(env);
   if (!book) throw new EntBuildError("missing_binding", "DB");
