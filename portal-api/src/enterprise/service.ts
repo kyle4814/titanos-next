@@ -10,6 +10,7 @@ import { grade, summarise } from "./estate.ts";
 import { sealSecret, openSecret, isSealed, SealError, type SealKeyring } from "./seal.ts";
 import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
+import { listPartnerBook, FORBIDDEN, type BookFactsSource, type BookResult } from "./partner_book.ts";
 import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
@@ -17,6 +18,7 @@ export interface EntContext {
   store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string; selfDeal?: SelfDealCheck;
   sealKeys?: SealKeyring;   // C8 f286: SSO client secrets are sealed with this keyring before any store write; absent = putSso answers 503, never plaintext
   payoutLookup?: TransferLookup;   // C8 f50: provider lookup for the resume sweep; absent = the sweep route answers 503
+  book?: BookFactsSource;   // C8 f311: facts for the partner book (domain, plan, status, re-scan proof id); absent = the book route answers 503
   approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
 const DAY = 86_400_000;
@@ -596,4 +598,22 @@ export function savings(b: Record<string, unknown>) {
     inputs: { manualHoursPerWeek: hours, hourlyRateAud: rate, automatedSharePct: share, incidentsPerYear: incidents, avgIncidentCostAud: cost, incidentReductionPct: cut },
     hoursGivenBackPerYear: hoursBack, labourValueAud: Math.round(hoursBack * rate), incidentCostAvoidedAud: Math.round(incidents * cost * (cut / 100)),
   };
+}
+
+// C8 f311: GET /partner/book. Caller must be an analyst+ member of the named partner seat (partnerId omitted = the caller's
+// only partner seat). Anything else is an EMPTY 403, identical for a foreign, unknown or non-partner id. SSO-enforced seats
+// still require the SSO session (401, the caller is a member so nothing leaks).
+export async function partnerBook(d: Deps, ctx: Ctx, q: { partnerId?: string | null; limit?: string | null; cursor?: string | null }): Promise<BookResult> {
+  const c = ent(d);
+  if (!c.book) throw new HttpError(503, "book_unavailable");
+  let pid: string | null | undefined = q.partnerId;
+  if (pid === undefined || pid === null || pid === "") {
+    const mine: string[] = [];
+    for (const m of await c.store.membershipsFor(ctx.account.id)) { const t = await c.store.tenantById(m.tenantId); if (t && t.kind === "partner" && !t.deletedAt) mine.push(t.id); }
+    if (mine.length !== 1) return FORBIDDEN;
+    pid = mine[0];
+  }
+  try { await access(d, ctx, pid, "analyst", "partner"); }
+  catch (e) { if (e instanceof HttpError && (e.status === 404 || e.status === 403)) return FORBIDDEN; throw e; }
+  return listPartnerBook({ store: c.store, facts: c.book }, ctx.account.id, pid, { limit: q.limit ?? undefined, cursor: q.cursor ?? undefined });
 }
