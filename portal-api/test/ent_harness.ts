@@ -7,6 +7,8 @@ import { RATE_V1 } from "../src/enterprise/share.ts";
 import { MemoryBookFacts } from "../src/enterprise/partner_book.ts";
 import { newSealKey, type SealKeyring } from "../src/enterprise/seal.ts";
 import type { PayoutProvider, RateTable } from "../src/enterprise/types.ts";
+import { buildEnterpriseDeps, type EntSeams } from "../src/ent_context.ts";
+import { FakeD1 } from "./fake_d1.ts";
 
 export const INTERNAL = "internal_fixture_secret";
 export class MockPayouts implements PayoutProvider {
@@ -57,3 +59,15 @@ export function makeEnt(rates: RateTable = RATE_V1) {
   return { ...h, store, payouts, book, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
 }
 export const SSO_CFG = (clientId: string, secret = "sso_secret_fixture_0123456789") => ({ secret, issuer: "https://idp.mock.test", clientId });
+
+// C8 f314: the ent the PRODUCTION construction point builds, over a FakeD1 and the harness's own stores (seams), so a suite can swap it in.
+export const ENT_ENV = (extra: Record<string, unknown> = {}) => ({ DB: new FakeD1() as never, INTERNAL_API_SECRET: INTERNAL, ENT_SEAL_KEYS: JSON.stringify({ current: "k1", keys: { k1: newSealKey() } }), ...extra });
+export function entSeams(h: { store: MemoryEntStore; payouts: PayoutProvider; deps: { store: any } }, extra: EntSeams = {}): EntSeams {
+  return {
+    storeFactory: () => h.store, approvals: () => new MemoryApprovalStore(), payouts: h.payouts, payoutLookup: { async lookup() { return { found: false } as never; } },
+    idp: MockIdp, scan: SyntheticScan, accounts: h.deps.store, ...extra,
+  };
+}
+export function constructEnt(h: { store: MemoryEntStore; payouts: PayoutProvider; deps: { store: any } }, envExtra: Record<string, unknown> = {}, extra: EntSeams = {}) {
+  return buildEnterpriseDeps(ENT_ENV(envExtra) as never, entSeams(h, extra));
+}
