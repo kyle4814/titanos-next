@@ -7,8 +7,8 @@ EXISTS means the named test file is on disk and a `test(` line (or, for the site
 ## Summary
 
 - Registered flows: 16. By owner: C2 10, C1 2, C4 3, static 1.
-- TESTED 10 / OWNED-ELSEWHERE-TESTED 6 / OWNED-ELSEWHERE-UNTESTED 0. Flows with a PENDING LIVE note: 7 of 16.
-- C2 alone: 10 of 10 C2-owned flows have verified tests; all 16 are covered by a verified test only if the OWNED-ELSEWHERE-UNTESTED count is 0 (it is 0).
+- TESTED 10 / OWNED-ELSEWHERE-TESTED 5 / OWNED-ELSEWHERE-UNTESTED 1. Flows with a PENDING LIVE note: 7 of 16.
+- C2 alone: 10 of 10 C2-owned flows have verified tests; all 16 are covered by a verified test only if the OWNED-ELSEWHERE-UNTESTED count is 0 (it is 1).
 
 ## Matrix
 
@@ -24,27 +24,16 @@ EXISTS means the named test file is on disk and a `test(` line (or, for the site
 | 8 | hire | C4 | POST /market/jobs (get this fixed), POST /pro/jobs/:id/claim | OWNED-ELSEWHERE-TESTED | portal-api/test/market.test.ts | happy path: hire, fund, claim, deliver, re-scan proof, payout once, rank from the proof<br>naive stranger: hire, get_paid and dispute all have registered C4 routes | PENDING LIVE: funding through live Stripe |
 | 9 | get_paid | C4 | GET /pro/payouts; payout only after re-scan | OWNED-ELSEWHERE-TESTED | portal-api/test/market.test.ts | get_paid kill test: a delivery the re-scan does not confirm never pays, and no direct payout call can bypass the proof<br>payout twice, forced: two concurrent releases of one proven job produce one transfer and one refusal | PENDING LIVE: Stripe Connect accounts and transfers (GATE2; adapter tested against a mock only) |
 | 10 | dispute | C4 | POST /market/jobs/:id/dispute | OWNED-ELSEWHERE-TESTED | portal-api/test/market.test.ts | dispute freezes the money and NO resolution can pay the pro; only a refund or a resume exists<br>dispute then resume: the job returns to its prior state and can still only pay on proof | - |
-| 11 | docs | static | /trust and /terms pages | OWNED-ELSEWHERE-TESTED | scripts/test_c9proof.mjs<br>scripts/test_terms_flow.mjs | trust/status says UNKNOWN, no invented uptime figure<br>terms: compliance full refund window equals REFUND_WINDOW_DAYS<br>terms: monitor has no refund for the current billing period<br>terms (source): content_lint --no-cta CLEAN<br>terms: visible text has zero em or en dashes | - |
+| 11 | docs | static | /trust and /terms pages | OWNED-ELSEWHERE-UNTESTED | scripts/test_c9proof.mjs | trust/status says UNKNOWN, no invented uptime figure | - |
 | 12 | status | C2 | GET /health | TESTED | portal-api/test/health.test.ts | health: 200 with db ok and test mode by default<br>health: DB failure is 503, never a fake ok | - |
 | 13 | api_keys | C2 | POST/GET/DELETE /keys | TESTED | portal-api/test/portal.test.ts | keys: shown once, hash stored, revoke works, other accounts cannot revoke, scopes sanitised | - |
 | 14 | invoices | C2 | GET /invoices, GET /invoices/:id | TESTED | portal-api/test/portal.test.ts | invoices: owner sees own invoice text with ABN and no GST; another account gets 404 | - |
 | 15 | data_export | C2 | GET /account/export | TESTED | portal-api/test/portal.test.ts | export: carries the account's own data only, no hashes or secrets | - |
 | 16 | account_deletion | C2 | DELETE /account | TESTED | portal-api/test/portal.test.ts | deletion: needs the word DELETE, cancels subscriptions, wipes email/domains/sessions, keeps invoices without PII, email reusable | - |
 
-## Routes inside a flow (computed: a route is TESTED when every one of its titles is grep-verified)
-
-- docs /trust: TESTED
-- docs /terms: TESTED
-- Routes tested: 2 of 2. Flows with a verified test: 16 of 16.
-
 ## Gaps
 
-None.
-
-## Findings (test and billing disagree; neither is edited by the matrix job)
-
-- F1 /terms vs billing: portal-api/src/catalogue.ts minMonths (ai_growth, ai_ops, ai_embedded) and portal-api/src/service.ts cancelSubscription hold a retainer's cancel until the 3-month minimum ends, but app/terms/page.tsx never states a minimum term. Pinned by scripts/test_terms_flow.mjs (FINDING F1). Billing not edited; changing the terms wording is a legal edit (GATE3, Kyle).
-- F2 /terms vs billing: app/terms/page.tsx section 3 says monthly offers "cancel any time by email"; billing (service.ts cancelSubscription) schedules an ai_* retainer cancel no earlier than the minimum term end. Pinned by scripts/test_terms_flow.mjs (FINDING F2).
+- docs: /terms has no dedicated test in this tree (grep of scripts/ and portal-api/test finds none); only /trust is covered, so the flow is not claimed tested
 
 ## 14 versus 16 reconciliation (PROPOSAL, evidence labelled)
 

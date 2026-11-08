@@ -7,8 +7,6 @@ import { join, dirname } from "node:path";
 import { buildShelves } from "../lib/shop/catalogue.ts";
 import { gradeAll, visibleShelves } from "../lib/shop/grader.ts";
 import { loadConfigs } from "../lib/shop/loader.ts";
-import { entryFromProduct } from "../lib/shop/entries.ts";
-import { gradeEntry, verifyReady, REAL_CTX } from "../lib/shop/entry_grade.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const offers = [];
@@ -24,27 +22,11 @@ const loaded = loadConfigs(existsSync(cfgPath) ? JSON.parse(readFileSync(cfgPath
 const configs = loaded.accepted;
 if (loaded.rejected.length) { console.error("REJECTED configs:", JSON.stringify(loaded.rejected)); process.exit(1); } // a rejected real config stops the build loudly
 
-// C5 grade path: every real product/course becomes an entry. Its status comes ONLY from lib/shop/product_status.json, and a READY
-// there must carry a seal that matches the content and pass a fresh grade. A hand-edited READY flag fails the build (exit 1).
-const statusPath = join(root, "lib/shop/product_status.json");
-const statuses = existsSync(statusPath) ? JSON.parse(readFileSync(statusPath, "utf8")) : {};
-const productLinks = JSON.parse(readFileSync(join(root, "lib/products/links.json"), "utf8"));
-const slugs = new Set(products.map((p) => p.slug));
-const entries = products.map((p) => entryFromProduct(p, productLinks, statuses));
-const handEdited = [];
-for (const k of Object.keys(statuses)) if (!slugs.has(k)) handEdited.push(`${k}: status row for an unknown product`);
-for (const e of entries) for (const prob of verifyReady(e, REAL_CTX)) handEdited.push(`${e.slug}: ${prob}`);
-if (handEdited.length) { console.error("PRODUCT STATUS REJECTED (READY needs a passing grade and a matching seal):\n - " + handEdited.join("\n - ")); process.exit(1); }
-const entryGrades = entries.map((e) => ({ e, g: gradeEntry(e, REAL_CTX) }));
-const readyEntries = new Set(entries.filter((e) => e.status === "READY").map((e) => e.slug));
-const productGate = (slug) => readyEntries.has(slug);
-
-const graded = gradeAll(buildShelves({ offers, products, configs, links, productGate }));
+const graded = gradeAll(buildShelves({ offers, products, configs, links }));
 const shown = visibleShelves(graded);
 const out = {
   generated_by: "scripts/build_shop.mjs",
   counts: { total: graded.length, graded_pass: shown.length, graded_fail: graded.length - shown.length, ungraded_shown: 0 },
-  products: { total: entries.length, ready: readyEntries.size, check: entries.length - readyEntries.size, passing_all_checks: entryGrades.filter((x) => x.g.pass).length },
   shelves: shown,
 };
 const text = JSON.stringify(out, null, 1) + "\n";

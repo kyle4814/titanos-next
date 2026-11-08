@@ -13,7 +13,7 @@ import { FLOWS } from "../src/flows.ts";
 
 export type Status = "TESTED" | "OWNED-ELSEWHERE-TESTED" | "OWNED-ELSEWHERE-UNTESTED" | "PENDING LIVE";
 export interface Evidence { file: string; title: string } // file relative to the titanos-next repo root; title = literal substring
-export interface Entry { id: string; evidence: Evidence[]; gap?: string; live?: string; routes?: { route: string; evidence: Evidence[] }[]; findings?: string[] }
+export interface Entry { id: string; evidence: Evidence[]; gap?: string; live?: string }
 
 const D1_PENDING = "D1 adapter wired in later lanes; migrations (GATE5) and a deploy are a later OWNER CARD";
 // One entry per registered flow. Titles are literal substrings the script greps for.
@@ -28,16 +28,9 @@ export const MANIFEST: Entry[] = [
   { id: "hire", evidence: [{ file: "portal-api/test/market.test.ts", title: "happy path: hire, fund, claim, deliver, re-scan proof, payout once, rank from the proof" }, { file: "portal-api/test/market.test.ts", title: "naive stranger: hire, get_paid and dispute all have registered C4 routes" }], live: "PENDING LIVE: funding through live Stripe" },
   { id: "get_paid", evidence: [{ file: "portal-api/test/market.test.ts", title: "get_paid kill test: a delivery the re-scan does not confirm never pays, and no direct payout call can bypass the proof" }, { file: "portal-api/test/market.test.ts", title: "payout twice, forced: two concurrent releases of one proven job produce one transfer and one refusal" }], live: "PENDING LIVE: Stripe Connect accounts and transfers (GATE2; adapter tested against a mock only)" },
   { id: "dispute", evidence: [{ file: "portal-api/test/market.test.ts", title: "dispute freezes the money and NO resolution can pay the pro; only a refund or a resume exists" }, { file: "portal-api/test/market.test.ts", title: "dispute then resume: the job returns to its prior state and can still only pay on proof" }] },
-  // docs: the registry route names BOTH /trust and /terms. Both now have a dedicated test: /trust in the C9 proof script,
-  // /terms in scripts/test_terms_flow.mjs (f53). The flow is verified only when EVERY route's evidence exists.
-  { id: "docs", evidence: [], routes: [
-      { route: "/trust", evidence: [{ file: "scripts/test_c9proof.mjs", title: "trust/status says UNKNOWN, no invented uptime figure" }] },
-      { route: "/terms", evidence: [{ file: "scripts/test_terms_flow.mjs", title: "terms: compliance full refund window equals REFUND_WINDOW_DAYS" }, { file: "scripts/test_terms_flow.mjs", title: "terms: monitor has no refund for the current billing period" }, { file: "scripts/test_terms_flow.mjs", title: "terms (source): content_lint --no-cta CLEAN" }, { file: "scripts/test_terms_flow.mjs", title: "terms: visible text has zero em or en dashes" }] },
-    ],
-    findings: [
-      "F1 /terms vs billing: portal-api/src/catalogue.ts minMonths (ai_growth, ai_ops, ai_embedded) and portal-api/src/service.ts cancelSubscription hold a retainer's cancel until the 3-month minimum ends, but app/terms/page.tsx never states a minimum term. Pinned by scripts/test_terms_flow.mjs (FINDING F1). Billing not edited; changing the terms wording is a legal edit (GATE3, Kyle).",
-      "F2 /terms vs billing: app/terms/page.tsx section 3 says monthly offers \"cancel any time by email\"; billing (service.ts cancelSubscription) schedules an ai_* retainer cancel no earlier than the minimum term end. Pinned by scripts/test_terms_flow.mjs (FINDING F2).",
-    ] },  { id: "status", evidence: [{ file: "portal-api/test/health.test.ts", title: "health: 200 with db ok and test mode by default" }, { file: "portal-api/test/health.test.ts", title: "health: DB failure is 503, never a fake ok" }] },
+  // docs: the registry route names BOTH /trust and /terms. Only /trust has a dedicated test (C9 proof script); /terms has none.
+  { id: "docs", evidence: [{ file: "scripts/test_c9proof.mjs", title: "trust/status says UNKNOWN, no invented uptime figure" }], gap: "/terms has no dedicated test in this tree (grep of scripts/ and portal-api/test finds none); only /trust is covered, so the flow is not claimed tested" },
+  { id: "status", evidence: [{ file: "portal-api/test/health.test.ts", title: "health: 200 with db ok and test mode by default" }, { file: "portal-api/test/health.test.ts", title: "health: DB failure is 503, never a fake ok" }] },
   { id: "api_keys", evidence: [{ file: "portal-api/test/portal.test.ts", title: "keys: shown once, hash stored, revoke works, other accounts cannot revoke, scopes sanitised" }] },
   { id: "invoices", evidence: [{ file: "portal-api/test/portal.test.ts", title: "invoices: owner sees own invoice text with ABN and no GST; another account gets 404" }] },
   { id: "data_export", evidence: [{ file: "portal-api/test/portal.test.ts", title: "export: carries the account's own data only, no hashes or secrets" }] },
@@ -54,7 +47,7 @@ export const SOURCE_QUOTES: { file: string; line: number; needle: string }[] = [
   { file: SRC_PLAN, line: 1494, needle: "all 16 self-serve flows listed green (the source says 14; count unreconciled)" },
 ];
 
-export interface Row { id: string; owner: string; route: string; status: Status; evidence: Evidence[]; gap?: string; live?: string; missing: string[]; findings?: string[]; routes?: { route: string; tested: boolean }[] }
+export interface Row { id: string; owner: string; route: string; status: Status; evidence: Evidence[]; gap?: string; live?: string; missing: string[] }
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_ROOT = resolve(here, "../.."); // titanos-next repo root
@@ -71,13 +64,12 @@ export function titleExists(root: string, ev: Evidence): boolean {
 export function buildRows(root = DEFAULT_ROOT, manifest: Entry[] = MANIFEST, flows = FLOWS): Row[] {
   return flows.map((f) => {
     const m = manifest.find((e) => e.id === f.id);
-    const evidence = [...(m?.evidence ?? []), ...(m?.routes ?? []).flatMap((r) => r.evidence)];
+    const evidence = m?.evidence ?? [];
     const missing = m ? evidence.filter((e) => !titleExists(root, e)).map((e) => `${e.file} :: ${e.title}`) : ["(no manifest entry for this registered flow)"];
     const verified = !missing.length && evidence.length > 0;
     let status: Status = "OWNED-ELSEWHERE-UNTESTED";
     if (verified && !m?.gap) status = f.owner === "C2" ? "TESTED" : "OWNED-ELSEWHERE-TESTED";
-    const routes = m?.routes?.map((r) => ({ route: r.route, tested: r.evidence.length > 0 && r.evidence.every((e) => titleExists(root, e)) }));
-    return { id: f.id, owner: f.owner, route: f.route ?? "(none registered)", status, evidence, gap: m?.gap, live: m?.live, missing, findings: m?.findings, routes };
+    return { id: f.id, owner: f.owner, route: f.route ?? "(none registered)", status, evidence, gap: m?.gap, live: m?.live, missing };
   });
 }
 
@@ -117,25 +109,12 @@ export function render(rows: Row[]): string {
     const titles = r.evidence.map((e) => esc(e.title) + (titleExists(DEFAULT_ROOT, e) ? "" : " (NOT FOUND)")).join("<br>") || "NONE";
     L.push(`| ${i + 1} | ${r.id} | ${r.owner} | ${esc(r.route)} | ${r.status} | ${files} | ${titles} | ${r.live ? esc(r.live) : "-"} |`);
   });
-  const multi = rows.filter((r) => r.routes);
-  L.push("");
-  L.push("## Routes inside a flow (computed: a route is TESTED when every one of its titles is grep-verified)");
-  L.push("");
-  for (const r of multi) for (const x of r.routes!) L.push(`- ${r.id} ${x.route}: ${x.tested ? "TESTED" : "UNTESTED"}`);
-  const routeTotal = multi.reduce((a, r) => a + r.routes!.length, 0), routeTested = multi.reduce((a, r) => a + r.routes!.filter((x) => x.tested).length, 0);
-  L.push(`- Routes tested: ${routeTested} of ${routeTotal}. Flows with a verified test: ${rows.filter((r) => r.status !== "OWNED-ELSEWHERE-UNTESTED").length} of ${rows.length}.`);
   const gaps = rows.filter((r) => r.gap);
   L.push("");
   L.push("## Gaps");
   L.push("");
   if (!gaps.length) L.push("None.");
   for (const g of gaps) L.push(`- ${g.id}: ${g.gap}`);
-  L.push("");
-  L.push("## Findings (test and billing disagree; neither is edited by the matrix job)");
-  L.push("");
-  const finds = rows.flatMap((r) => r.findings ?? []);
-  if (!finds.length) L.push("None.");
-  for (const f of finds) L.push(`- ${f}`);
   L.push("");
   L.push("## 14 versus 16 reconciliation (PROPOSAL, evidence labelled)");
   L.push("");

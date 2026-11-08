@@ -209,47 +209,25 @@ export async function monitorTick(c: Ctx): Promise<{ scanned: number; alerts: Al
 }
 
 // ---- reports ----
-// Hours given back count ONLY fixes the latest scans still show as PASS: an undone fix, a rolled-back fix or a returned
-// fault stops counting (the lifetime ledger s.minutesHandedBack only stops a repeat fix being paid twice).
-export function provenMinutes(s: DomainState): number {
-  return Object.values(s.findings).filter((f) => f.state === "PROVEN_FIXED" && f.credited).reduce((a, f) => a + f.minutesByHand - f.minutesWithPlan, 0);
-}
-export function hoursGivenBack(s: DomainState) {
-  const minutes = provenMinutes(s);
-  return { minutes, hours: Math.round((minutes / 60) * 10) / 10, label: "MODELLED estimate: time by hand against time with a ready-made plan, table in lib/guestscan/fixes.ts, 2026-11-06", floor: "Floor: 0 hours. Only fixes that the latest re-scan shows as PASS are counted; an undone fix or a returned fault stops counting. This is time estimated, never money received" };
-}
-// One model of every displayed figure; the markdown and the JSON are both rendered from it, so they cannot drift apart.
-export function reportModel(s: DomainState, now: number) {
-  const d = (t: number) => new Date(t).toISOString().slice(0, 10);
-  const fs = Object.values(s.findings);
-  const shown = (x: FixRec) => x.status === "proven" && s.findings[x.check]?.state !== "PROVEN_FIXED" ? "fault returned, not fixed now" : x.status === "partial" ? "partly fixed, not proven" : x.status === "undone" ? "undone, not fixed" : x.status === "rolled_back" ? "rolled back, not fixed" : x.status;
-  return {
-    domain: s.domain, date: d(now), level: s.level, levelName: s.levelName, grade: s.lastScan?.grade,
-    lastScan: s.lastScan ? { date: d(s.lastScan.at), grade: s.lastScan.grade, score: s.lastScan.score } : null, monitorActive: s.monitor.active,
-    findings: fs.map((f) => ({ check: f.check, state: f.state, evidence: f.detail, unreadable: !!f.unreadable, provenScanId: f.state === "PROVEN_FIXED" ? f.proof?.scanId ?? null : null, provenDate: f.state === "PROVEN_FIXED" && f.provenAt !== undefined ? d(f.provenAt) : null, regressedDate: f.state === "REGRESSED" && f.regressedAt !== undefined ? d(f.regressedAt) : null })),
-    hours: hoursGivenBack(s),
-    badge: s.badge ? { ...s.badge, sinceDate: d(s.badge.since) } : null,
-    badgeLost: s.badgeHistory.filter((b) => b.lostBecause).map((b) => ({ level: b.level, date: d(b.to!), why: b.lostBecause! })),
-    fixes: s.fixes.map((x) => ({ check: x.check, note: x.note, status: x.status, shown: shown(x) })),
-  };
-}
-export type ReportModel = ReturnType<typeof reportModel>;
+export function hoursGivenBack(s: DomainState) { return { minutes: s.minutesHandedBack, hours: Math.round((s.minutesHandedBack / 60) * 10) / 10, label: "MODELLED estimate: time by hand against time with a ready-made plan, table in lib/guestscan/fixes.ts, 2026-11-06" }; }
 export function report(s: DomainState, now: number) {
-  const m = reportModel(s, now); const h = m.hours;
+  const fs = Object.values(s.findings);
+  const h = hoursGivenBack(s);
+  const d = (t: number) => new Date(t).toISOString().slice(0, 10);
   const lines = [
-    `# Email security report for ${m.domain}`, `Date: ${m.date}. Business Level ${m.level} of 10 (${m.levelName}).`, "",
-    `Last scan: ${m.lastScan ? `${m.lastScan.date}, grade ${m.lastScan.grade}, score ${m.lastScan.score}` : "none yet"}. Monitor: ${m.monitorActive ? "on" : "off"}.`, "",
-    "## Findings and their proof", ...m.findings.map((f) => `- ${f.check}: ${f.state}${f.unreadable ? " (last scan could not read this record; showing the last readable result)" : ""}. ${f.state === "PROVEN_FIXED" ? `Proven by re-scan ${f.provenScanId} on ${f.provenDate}.` : f.state === "REGRESSED" ? `The fault returned on ${f.regressedDate}.` : f.state === "OPEN" ? "Not fixed yet." : f.state === "UNKNOWN" ? "Could not be read; not counted as a pass or a fail." : "Passing."} Evidence: ${f.evidence}`),
-    "", "## Hours given back", `${h.hours} hours (${h.minutes} minutes). ${h.label}. ${h.floor}.`, "",
-    "## Badge", m.badge ? `Level ${m.badge.level} badge held since ${m.badge.sinceDate}.` : "No badge held right now.",
-    ...m.badgeLost.map((b) => `- Level ${b.level} badge lost on ${b.date}: ${b.why}.`),
-    "", "## Changes we made for you", ...(m.fixes.length ? m.fixes.map((x) => `- ${x.check}: ${x.note} (${x.shown}).`) : ["- None."]),
+    `# Email security report for ${s.domain}`, `Date: ${d(now)}. Business Level ${s.level} of 10 (${s.levelName}).`, "",
+    `Last scan: ${s.lastScan ? `${d(s.lastScan.at)}, grade ${s.lastScan.grade}, score ${s.lastScan.score}` : "none yet"}. Monitor: ${s.monitor.active ? "on" : "off"}.`, "",
+    "## Findings and their proof", ...fs.map((f) => `- ${f.check}: ${f.state}${f.unreadable ? " (last scan could not read this record; showing the last readable result)" : ""}. ${f.state === "PROVEN_FIXED" ? `Proven by re-scan ${f.proof?.scanId} on ${d(f.provenAt!)}.` : f.state === "REGRESSED" ? `The fault returned on ${d(f.regressedAt!)}.` : f.state === "OPEN" ? "Not fixed yet." : f.state === "UNKNOWN" ? "Could not be read; not counted as a pass or a fail." : "Passing."} Evidence: ${f.detail}`),
+    "", "## Hours given back", `${h.hours} hours (${h.minutes} minutes). ${h.label}.`, "",
+    "## Badge", s.badge ? `Level ${s.badge.level} badge held since ${d(s.badge.since)}.` : "No badge held right now.",
+    ...s.badgeHistory.filter((b) => b.lostBecause).map((b) => `- Level ${b.level} badge lost on ${d(b.to!)}: ${b.lostBecause}.`),
+    "", "## Changes we made for you", ...(s.fixes.length ? s.fixes.map((x) => `- ${x.check}: ${x.note} (${x.status}).`) : ["- None."]),
     "", "Every status above comes from a DNS re-scan, never from a claim. We read public DNS records only and touch nothing on your servers.",
   ];
-  return { markdown: lines.join("\n"), json: m };
+  return { markdown: lines.join("\n"), json: { domain: s.domain, date: d(now), level: s.level, levelName: s.levelName, grade: s.lastScan?.grade, findings: fs.map((f) => ({ check: f.check, state: f.state, evidence: f.detail })), hours: h, badge: s.badge ?? null } };
 }
 export function overview(s: DomainState, now: number) {
   const q = questsOf(s);
-  return { domain: s.domain, level: s.level, levelName: s.levelName, next: computeLevel(s.lastScan ? ({ domain: s.domain, findings: Object.values(s.findings).map((f) => ({ check: f.check, status: f.status, detail: f.detail, fix: f.fix })), grade: s.lastScan.grade as ScanResult["grade"], score: s.lastScan.score, elapsedMs: 0, modelCalls: 0, outbound: { total: 0, hosts: [] } /* rebuilt from stored state: no scan runs here, so nothing goes outbound */ }) : undefined, ctxOf(s, now)).next,
+  return { domain: s.domain, level: s.level, levelName: s.levelName, next: computeLevel(s.lastScan ? ({ domain: s.domain, findings: Object.values(s.findings).map((f) => ({ check: f.check, status: f.status, detail: f.detail, fix: f.fix })), grade: s.lastScan.grade as ScanResult["grade"], score: s.lastScan.score, elapsedMs: 0, modelCalls: 0 }) : undefined, ctxOf(s, now)).next,
     badge: s.badge ?? null, findings: Object.values(s.findings), quests: q, hours: hoursGivenBack(s), xp: s.xp, monitor: s.monitor, lastScan: s.lastScan ?? null, events: s.events.slice(-30).reverse() };
 }

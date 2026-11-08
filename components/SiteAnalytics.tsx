@@ -10,13 +10,11 @@
  */
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { buildPayload, payloadFromTarget, type BeaconPayload } from "@/lib/beacon";
 
 const ENDPOINT = "https://vault.titanos.tech/api/site-event";
 
-function send(payload: BeaconPayload) {
-  // Payload is {event, path, ts} plus an opaque scanId on the two scan buttons (lib/beacon.ts).
-  const body = JSON.stringify(payload);
+function send(event: string, path: string) {
+  const body = JSON.stringify({ event, path });
   // text/plain, NOT application/json — deliberate, and load-bearing.
   //
   // application/json is not a CORS-safelisted content type, so it forces a
@@ -42,15 +40,15 @@ export default function SiteAnalytics() {
   const pathname = usePathname();
 
   useEffect(() => {
-    send(buildPayload("pageview", pathname || "/"));
+    send("pageview", pathname || "/");
   }, [pathname]);
 
   useEffect(() => {
     const handler = (e: Event) => {
       const target = (e.target as HTMLElement)?.closest("[data-analytics]");
       if (!target) return;
-      const payload = payloadFromTarget(target, pathname || "/");
-      if (payload) send(payload);
+      const name = target.getAttribute("data-analytics");
+      if (name) send(name, pathname || "/");
     };
     document.addEventListener("click", handler, true);
     document.addEventListener("submit", handler, true);

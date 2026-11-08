@@ -10,11 +10,10 @@ export type CaseCardProps = {
   big?: [string, string];
   feature?: boolean;
   kicker?: string;
-  label: string;
 };
 
 /** One bento card: cover, the headline number big, then the words. The whole card is the link. */
-export default function CaseCard({ href, cover, coverAlt, sector, title, teaser, big, feature, kicker, label }: CaseCardProps) {
+export default function CaseCard({ href, cover, coverAlt, sector, title, teaser, big, feature, kicker }: CaseCardProps) {
   return (
     <a href={href} className={`${s.card} ${s.reveal} ${feature ? s.feature : ""}`}>
       <div className={s.coverWrap}>
@@ -30,7 +29,7 @@ export default function CaseCard({ href, cover, coverAlt, sector, title, teaser,
         )}
         <div className={s.sector}>
           {kicker ? `${kicker} · ` : ""}
-          {sector} · {label}
+          {sector}
         </div>
         <h2 className={s.cardTitle}>{title}</h2>
         <p className={s.cardText}>{teaser}</p>

@@ -1,6 +1,5 @@
 {
   "slug": "ariance",
-  "label": "REAL",
   "client_consent": false,
   "consent_note": "Flip to true only after the Ariance creator has said yes to being named and to this page going public. While false the page is noindex, off the sitemap, off the case-studies hero card and off the homepage.",
   "last_reviewed": "2026-10-08",

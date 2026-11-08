@@ -53,7 +53,6 @@ export default function ArianceCaseStudy() {
           )}
 
           <FactBand facts={facts} />
-          <p style={{ ...SMALL, textAlign: "center" }}>Evidence label: {A.label}</p>
 
           <h2 style={H}>{A.brief.heading}</h2>
           <p style={SMALL}>{A.brief.note}</p>

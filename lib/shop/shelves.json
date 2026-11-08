@@ -6,12 +6,6 @@
   "graded_fail": 85,
   "ungraded_shown": 0
  },
- "products": {
-  "total": 14,
-  "ready": 0,
-  "check": 14,
-  "passing_all_checks": 0
- },
  "shelves": [
   {
    "id": "offer:portfolio-watch",
