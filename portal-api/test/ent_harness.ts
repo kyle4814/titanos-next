@@ -4,6 +4,7 @@ import { MemoryApprovalStore } from "../src/enterprise/payout_decision.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
+import { MemoryBookFacts } from "../src/enterprise/partner_book.ts";
 import { newSealKey, type SealKeyring } from "../src/enterprise/seal.ts";
 import type { PayoutProvider, RateTable } from "../src/enterprise/types.ts";
 
@@ -21,8 +22,8 @@ export class MockPayouts implements PayoutProvider {
 
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const store = new MemoryEntStore(), payouts = new MockPayouts();
-  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
+  const store = new MemoryEntStore(), payouts = new MockPayouts(), book = new MemoryBookFacts();
+  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
   // sign in, then the operator provisions the seat
@@ -53,6 +54,6 @@ export function makeEnt(rates: RateTable = RATE_V1) {
     const res = await h.req("POST", "/sso/callback", { body: { state: st.state, nonce: st.nonce, id_token } });
     return { st, id_token, res, body: await h.j(res.clone()) };
   }
-  return { ...h, store, payouts, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
+  return { ...h, store, payouts, book, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
 }
 export const SSO_CFG = (clientId: string, secret = "sso_secret_fixture_0123456789") => ({ secret, issuer: "https://idp.mock.test", clientId });
