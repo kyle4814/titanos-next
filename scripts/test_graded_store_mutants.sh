@@ -19,7 +19,7 @@ mut "UPSERT always rewrites graded_at" 'S1' graded_store.ts 's/WHEN graded_run.c
 mut "memory store loses idempotent graded_at" 'S1' graded_store.ts 's/if (have \&\& have.content_hash === rec.content_hash) rec.graded_at = have.graded_at;/ /'
 mut "JSON parse dropped on read" 'S2|S4' graded_store.ts 's/try { return JSON.parse(raw) as T; }/try { return fallback; }/'
 mut "JSON stringify dropped on write (checks)" 'S2|S4' graded_store.ts 's/JSON.stringify(r.checks)/String(r.checks)/'
-mut "skip assertCatalogueAllGraded" 'S5' graded_store.ts 's/^  assertCatalogueAllGraded(res.catalogue);/  void res;/'
+mut "skip assertCatalogueAllGraded" 'S5' graded_store.ts 's/^  assertCatalogueAllGraded(catalogue);/  void res;/'
 mut "publish on fail (pass forced true)" 'S6|S4b' graded_store.ts 's/pass: run.pass, checks: run.checks, shelf: clone(graded)/pass: true, checks: run.checks, shelf: clone(graded)/'
 mut "publish on fail (publish_gate failure check dropped)" 'S6|S4b' publish_gate.ts 's/if (bad.length) return "failed checks: " + bad.join(",");/ /'
 mut "wrong cluster_id saved" 'S3|S7' graded_store.ts 's/await store.saveGraded(o.cluster_id, g, row.label);/await store.saveGraded(result.processed[0].cluster_id, g, row.label);/'
