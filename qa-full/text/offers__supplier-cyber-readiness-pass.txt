@@ -1,0 +1,126 @@
+Skip to main content
+TITANOS
+TITANOS · AVAILABLE NOW
+Supplier Cyber Readiness Pass
+
+You get a tender-ready security answers sheet and a ranked fix list, so security questions stop costing you points.
+
+Built for owner of a small supplier asked for security evidence in a tender. AU$149/mo. No GST is charged. Available to buy online now.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+
+The price is AU$149/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Small suppliers to government and councils
+•
+Owners who got a security questionnaire in a tender
+•
+Businesses that lose points on Essential Eight, email security or incident handling questions
+What you get
+✓
+A passive SpoofGuard reading of your domain (SPF, DKIM, DMARC, which are the email checks that stop spoofing), honest about anything unknown
+✓
+A tender-ready security answers sheet drawn from verified facts
+✓
+A fix list ranked by points gained
+✓
+Monthly Monitor to keep your evidence dated
+
+And how does it go from a yes to a finished job?
+
+How it works
+You give us your domain and, if you have it, the tender's security questionnaire.
+We read your public email settings and draft the answers from verified facts.
+You get the answers sheet and the ranked fixes.
+Why TITANOS does it differently
+
+SpoofGuard is passive and honest about unknowns, and it carries dated evidence. Nothing active is ever run against your systems. Reusable answer blocks give each tender's security section a head start.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$149/mo
+
+AU$149 a month for the Monitor (published price), or a AU$297 one-off readiness pass., because TITANOS is a sole trader that is not registered for GST.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Available to buy online now.
+Will you test or probe our systems?
++
+No. It only reads public DNS records. Nothing of yours is touched or tested.
+What if you can't tell something?
++
+We show it as UNKNOWN. We never guess to make a result look better.
+Does this replace our IT provider?
++
+No. Your IT provider stays. We give them a clear list of what to fix.
+Do I need to understand the technical terms?
++
+No. The sheet is in plain English, and each fix is a simple step.
+Is there a lock-in?
++
+No. The Monitor is monthly and you can cancel any time. The readiness pass is one-off.
+What does it cost?
++
+AU$149 a month for the Monitor, or AU$297 one-off for the readiness pass. No GST is charged, because TITANOS is a sole trader that is not registered for GST.
+
+Want more later? See Privacy Act + Essential Eight pack.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,302 @@
+Skip to main content
+TITANOS
+FIELD NOTES
+The archive
+
+What an AI audit actually finds, what the Privacy Act reforms mean in plain English, and where the money already in your business might be sitting.
+
+Written for Australian trades and small-service operators. Plain words, no filler, and nothing to sign up for.
+
+RECORDED
+
+232,912
+
+Australian businesses with 5 to 19 staff
+
+Each one holds the same repetitive work, and none of them has a spare engineering department.
+
+Where this number comes from
+
+Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I write these myself. Reading costs nothing, nothing of yours is touched, and nobody is replaced. These notes are for the owners of those businesses.
+
+Which of the notes below is worth your five minutes? Start with the newest and see.
+
+All posts
+21 DOCUMENTS RECOVERED · SORTED BY DATE LOGGED
+EMAIL SECURITY
+·
+LOGGED 4 OCT 2026
+·
+4 MIN READ
+"Settlement is Friday, here are our updated bank details"
+
+One email, sent at exactly the right moment, can redirect a house deposit.
+
+Open the record
+→
+EMAIL SECURITY
+·
+LOGGED 3 OCT 2026
+·
+4 MIN READ
+The "we've changed banks" email that finds accountants and bookkeepers
+
+You move other people's money.
+
+Open the record
+→
+EMAIL SECURITY
+·
+LOGGED 2 OCT 2026
+·
+4 MIN READ
+Can someone send email pretending to be my business?
+
+Short answer: yes, and it needs no hacking.
+
+Open the record
+→
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+5 MIN READ
+Tap-to-approve on Telegram without a second bot
+
+The final design sends one message with an approve and a deny button. A decision only counts if it carries the exact reference for that card, arrives before it expires, and nobody has already answered it.
+
+Open the record
+→
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+A headless AI research loop that can't rm -rf your home directory
+
+An unattended AI agent that can run shell commands without a human watching is dangerous by default. Here is the guard that sits in front of it, and the day it actually caught a bad one.
+
+Open the record
+→
+RESEARCH
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories
+
+Two independent lists that both try to count the same thing will always miss some of it. Count how much they overlap, and you can work out how much neither list found.
+
+Open the record
+→
+SECURITY
+·
+LOGGED 1 OCT 2026
+·
+7 MIN READ
+Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file
+
+Across 8 independently sampled bands of the Australian domain namespace, between 37.5% and 55.0% of small-business domains have no enforced email security and no published way to report a problem.
+
+Open the record
+→
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds
+
+Eight minutes and twelve seconds. That's how long it took to go from a wiped home directory to a fully working system, once the rebuild was done properly.
+
+Open the record
+→
+DOCTRINE
+·
+LOGGED 20 AUG 2026
+·
+4 MIN READ
+Black Ice: the operating doctrine TITANOS is actually built on
+
+Every system on this site was built using this. Publishing it because it's useful on its own, not because it's bait.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+Do sole traders need a privacy policy in Australia?
+
+"I'm under $3 million turnover" is true for almost every sole trader. It's not the whole answer anymore.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+The Notifiable Data Breach scheme: the 30-day rule small businesses miss
+
+It doesn't have to be a hack. An email sent to the wrong address can trigger the same 30-day clock.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 19 AUG 2026
+·
+5 MIN READ
+What should AI automation actually cost a small trade business?
+
+The number on the quote matters less than whether anyone looked at your business before writing it.
+
+Open the record
+→
+SECURITY
+·
+LOGGED 19 AUG 2026
+·
+6 MIN READ
+The ACSC Essential Eight, translated for a one-van trade business
+
+"Application whitelisting" means nothing to a solo electrician. "Only install apps from the app store" does.
+
+Open the record
+→
+SECURITY
+·
+LOGGED 19 AUG 2026
+·
+5 MIN READ
+Business email compromise: the invoice scam actually hitting Australian trade businesses
+
+It doesn't look like a scam. It looks like your supplier, in a normal email, saying their bank details changed.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 19 AUG 2026
+·
+5 MIN READ
+Is an AI receptionist for your trade business actually Privacy Act compliant?
+
+The pitch is always missed calls. Nobody selling these tools mentions where the recording of your customer's voice actually ends up.
+
+Open the record
+→
+TRUST
+·
+LOGGED 18 AUG 2026
+·
+4 MIN READ
+How to tell if a "free scan" offer is legitimate (and how to verify mine in five minutes)
+
+A free scan that asks for payment details before showing results isn't a free scan. Here's what a legitimate one looks like.
+
+Open the record
+→
+TRADE SOFTWARE
+·
+LOGGED 15 AUG 2026
+·
+6 MIN READ
+ServiceM8 vs Tradify vs simPRO: what your job data can (and can't) tell you
+
+Every platform records "quoted but nothing happened" differently. Knowing which field to trust matters more than which platform you're on.
+
+Open the record
+→
+NOTES
+·
+LOGGED 10 AUG 2026
+·
+4 MIN READ
+Why "book a call" gets ignored and "send me a spreadsheet" doesn't
+
+Asking a stranger for 20 minutes is a big ask. Asking them to export something they already have costs them nothing.
+
+Open the record
+→
+REVENUE
+·
+LOGGED 4 AUG 2026
+·
+5 MIN READ
+The dead-quote problem: how much revenue is sitting in your "maybe" pile
+
+You didn't lose these jobs. Nobody said no. They just went quiet, and quiet isn't the same as gone.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 29 JULY 2026
+·
+5 MIN READ
+What an AI audit actually finds in a trades or small-service business (real patterns, not hype)
+
+The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 22 JULY 2026
+·
+6 MIN READ
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+
+"We're too small for privacy law" stops being reliably true this year. Here's what changes and what doesn't.
+
+Open the record
+→
+
+If one of these sounds like your business, would it be okay if I had a look with you? A free chat is on the audit page, and a no is completely welcome.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

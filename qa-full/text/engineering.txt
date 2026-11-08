@@ -1,0 +1,150 @@
+Skip to main content
+TITANOS
+THE PROOF
+24 engineers for 31 months, or one person in about 5.
+
+On about US$30 (roughly AU$46) a month of AI tools while the main engine was built (operator figure, no receipt on file).
+
+That first figure is MODELLED, not a timesheet. One engineer, working around a day job, with commits on 66 of 158 days since the first commit on 4 May 2026. Re-measured 9 October 2026: 230,797 lines of production code across 12 repositories, 60.6 engineer-years (MODELLED, Basic COCOMO). Live pace: about 2.34 engineer-years a day over the last 7 days (MODELLED, four core repositories, ledger 2026-10-09). Every figure below has its method at the bottom of the page.
+
+Jump to the method ↓
+
+MODELLED
+
+24 engineers for 31 months
+
+what the industry COCOMO model says this build would take (MODELLED). One person built it in about 5 months, around a day job.
+
+A whole engineering department, for the price of one person.
+
+Where this number comes from
+
+Method in one line: count the lines of code, put them through the published COCOMO formulas, and compare. Before you ask, this page is about our own build. Nothing of yours is touched, nobody is replaced, and the whole calculation is at the bottom so you can re-run it.
+
+How do you get from lines of code to a number of engineers, and is it fair?
+
+The maths, in one line
+
+MODELLED, and labelled as such.
+
+230,797 lines of production code across 12 repositories since 4 May 2026 (measured 9 October 2026). The industry-standard COCOMO model prices that at60.6 engineer-years (MODELLED), about AU$11 millionat Australia's AU$800-a-day contractor rate, which is up to AU$25 million a year at this pace. The website began on 4 June, the main engine on 24 August and the operating kernel on 29 September.
+
+A whole engineering department, for the price of one person.
+
+Where that comes from
+The normal way vs the TITANOS way
+
+A department, or one person with a very good toolbox.
+
+	Normal (per the same model)	TITANOS
+People	About 24 engineers	1 engineer
+Time	About 31 months	About 5 months (4 May to 8 October 2026), around a day job
+Result	By the model, roughly 6 times faster with a 24th of the team (both MODELLED).
+Counted the hard way
+
+AI did much of the typing, so here is the figure with most of it taken off.
+
+Even counting only 10% of the model, that is AU$2.5 million a year of engineering. Even at 2%,AU$493,000 a year. The full model says AU$25 million a year.
+
+FLOOR (2%)
+AU$493k
+per year, MODELLED
+COUNTED (10%)
+AU$2.5M
+per year, MODELLED
+FULL MODEL
+AU$25M
+per year, MODELLED
+What a dollar of compute buys
+
+Counted at 10% (a MODELLED figure), that is AU$2.5 million a year of engineering on about AU$550 a year of compute (about US$30, roughly AU$46, a month, an operator figure with no receipt on file): about AU$4,500 of engineering per AU$1 on the original build spend, and about AU$680per AU$1 at today's AU$300 a month. On the full model (AU$11 million built on about AU$240 of compute over the 5 months), it is about AU$44,700 per AU$1.
+
+A model is only worth something if the work holds up. So does it?
+
+Like a pilot's pre-flight checklist: thousands of checks before every take-off, not just the first one.
+
+Where that comes from
+Built properly
+6,314 test cases in the main engine and 188 automated safety suites on the control layer (MEASURED, 9 October 2026). Nothing ships unless the test gate is green.
+From 5 commits a week in May to 1,141 this week across 12 repositories (MEASURED).
+OPERATOR'S NOTE
+I don't code by hand. I engineer with AI. The proof is the system.
+Imagine what this does with real investment
+
+A scenario, not a forecast.
+
+Today it is one person on AU$300 a month of AI tools. More accounts run more work in parallel and investment would add people, but there is no result behind any scale-up number yet, so this page does not print one.
+
+Nobody gets replaced
+
+We're not here to replace anyone. We make work simpler, give people their hours back, and help businesses make more money. If a process runs on a computer, we can automate it.
+
+Already running in TITANOS:
+
+Email security scanning: SPF, DKIM and DMARC checks from public records (the free scan).
+Lead research and verification: contact lists checked for deliverability before anyone sees them.
+Daily call lists with a script for every lead, and a log of every call outcome.
+Approval-gated email sending: nothing goes out until a person taps approve.
+Daily blog publishing: drafted, checked against a copy-rules linter, then shipped on its date after one approval.
+Document and dossier production: sourced research packs built and delivered as a set.
+Test-gated engineering: every change must pass the automated test gate before it lands.
+Method and sources
+Model: Basic COCOMO, organic mode. Effort = 2.4 x KSLOC^1.05 person-months. Schedule = 2.5 x effort^0.38 months.
+Size: KSLOC = 230.797, the non-blank, non-comment lines of production code across 12 repositories (mirrors, clones, worktrees and third-party code excluded), measured 9 October 2026. The window starts at the first commit on 4 May 2026 and runs 158 days, with commits on 66 of them.
+Result: 727 person-months (60.6 engineer-years) over a 30.6-month schedule, which is about 23.8engineers. The earlier 44 engineer-years figure was the same model on 170,651 lines, measured 4 October.
+Cost: AU$800 a day x 220 working days a year, the contractor rate from the Hudson Australia Cyber Security Salary Guide. 60.6 years x 220 days x AU$800 is about AU$11 million.
+Per year: that output landed in 158 days, so a year at the same pace is 60.6 / (158 / 365) = about 140 engineer-years, about AU$25 million. The 10% and 2% lines are 10% and 2% of that. All of these are MODELLED, never revenue.
+Compute: about US$30 (roughly AU$46) a month of AI tools while the main engine was built (to 29 September), and AU$300 a month since. Both are operator figures with no receipt on file.
+Re-run it yourself: count the non-blank, non-comment lines in your own repositories, put the thousands into the two formulas above, and multiply person-months by your own day rate.
+
+COCOMO estimates what a conventional team would take to write this much code. It is a model, not a timesheet, and it counts size, not value.
+
+Would it be okay if I ran the free security scan on your business as a first step? It reads public records only and touches nothing of yours. If you would rather talk it through, book a call. A no is welcome either way.
+
+Get your free security scan
+Book a call: kyle@titanos.tech
+→
+Ω
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,101 @@
+Skip to main content
+TITANOS
+SECURITY
+Business email compromise: the invoice scam actually hitting Australian trade businesses
+← Back to the archive
+LOGGED 19 AUGUST 2026 · 5 MIN READ
+
+Business email compromise (BEC), an attacker impersonating a supplier or client to redirect a payment, is the most-reported cybercrime category against Australian small businesses, and trade businesses are a specific target because of high-value supplier invoices and client progress payments moving through email with little friction.
+
+What the scam actually looks like
+
+It rarely looks like a scam. The two common patterns: a supplier's email account is compromised and sends a genuine-looking invoice with new bank details attached, or an attacker registers a lookalike domain (one character different from your supplier's real one) and emails you directly saying their account changed. Both arrive as ordinary business correspondence, often mid-conversation on a real, existing job.
+
+Why trade businesses specifically get targeted
+Supplier invoices are large and irregular enough that a changed amount or new account doesn't immediately look wrong.
+Client progress payments on bigger jobs move real money on a schedule an attacker can predict from a compromised inbox.
+Small teams often have one person handling payments, with no second check before a bank transfer goes out.
+What actually stops it
+Any bank-detail change, from anyone, gets confirmed by phone on a number you already have on file, never a number in the email.
+Multi-factor authentication on every email account that can send or receive invoices, not just the owner's.
+A second person (even informally) glances at any transfer over a set amount before it goes out.
+Check the sender's actual email address, not just the display name, on anything asking to change payment details.
+
+None of this requires new software. It's a habit change that costs nothing, and it's the single highest-value five minutes most trade businesses could spend on cybersecurity this month.
+
+Our free scan checks the parts of this attack surface you can verify externally: DKIM/SPF/DMARC on your own domain, and what's publicly exposed.
+
+RUN THE FREE SCAN →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+SECURITY
+·
+LOGGED 19 AUG 2026
+·
+6 MIN READ
+The ACSC Essential Eight, translated for a one-van trade business
+
+"Application whitelisting" means nothing to a solo electrician. "Only install apps from the app store" does.
+
+Open the record
+→
+TRUST
+·
+LOGGED 18 AUG 2026
+·
+4 MIN READ
+How to tell if a "free scan" offer is legitimate (and how to verify mine in five minutes)
+
+A free scan that asks for payment details before showing results isn't a free scan. Here's what a legitimate one looks like.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

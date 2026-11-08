@@ -1,0 +1,416 @@
+Skip to main content
+TITANOS
+PRIVACY ACT COMPLIANCE · DONE WITH YOU
+Six Privacy Act obligations. One working call. Nothing left to interpret afterwards.
+
+Most owners have heard of one of the six things regulators, insurers and courts now look for. I sort all six with you, on one working call. AU$5,997 one-time, with 3 months of Titanos Monitor included free. For comparison, an illustrative estimate for a Vanta subscription plus a consultant is roughly AU$18,000 or more in year one.
+
+Built for Australian small businesses (5 to 50 staff) on Squarespace, WordPress, Microsoft 365 and Google Workspace. Plain English on the call, no jargon, and no PDF dropped in your inbox with good luck. Health providers (clinic, allied health, pharmacy, any size) are already covered by the Privacy Act. There is no small-business exemption for health.
+
+GET COMPLIANT · AU$5,997
+BOOK A FREE CONSULTATION FIRST
+→
+
+14-day refund if no deliverable has been issued. Monitoring cancellable any time. Read full terms ›
+
+Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
+
+ABN 34 318 502 254 · Australian-owned ·957 organisations researched in full dossiers · Methodology
+
+Six Privacy Act obligations, sorted with you on one working call, for AU$5,997 with 3 months of Titanos Monitor included. The first conversation and your report are free.
+
+Nobody gets replaced. Your people stay. They stop doing the boring parts and get their hours back.
+
+Like a pilot's pre-flight checklist: thousands of checks before every take-off, not just the first one.
+
+Where that comes from
+
+EXAMPLE
+
+13 sections, about 17 pages
+
+the evidence pack you finish with. Mine is published in full, so you can read one before you decide anything.
+
+Think of the service history book that comes with a good used car. It cannot promise the car never breaks down, but it shows the car was looked after.
+
+Where this number comes from
+
+Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The scan reads public records only and touches nothing of yours. On the call you stay logged into your own accounts, and I never receive a password. Nobody is replaced, and your IT person stays in charge and is welcome on the call. The whole price is AU$5,997, once.
+
+So what actually happens in those 90 minutes, and why is it one call instead of a month of emails?
+
+SIX OBLIGATIONS · ONE WORKING CALL · NOTHING LEFT TO INTERPRET AFTERWARDS
+
+The obligations exist whether you look at them or not.
+We look at them together, once.
+
+The scan finds what's exposed. The call fixes it while you're on it. The letter says so, signed.
+
+See the kind of documentation this engagement produces. my own evidence pack, published in full →
+
+Not sure you have a problem? The free scan doubles as a compliance gap snapshot. Start there, no card, no commitment. Free scan →
+
+01 / 08
+THE WORKING SESSION
+What Happens on the Call
+
+90 minutes on a screen-share. We make every change together, live, so you leave with it done and not with homework.
+
+1
+I walk you through your gap report
+
+The findings I prepared for your business, in plain English, no jargon. You'll know exactly what's missing and why it matters before I touch a single setting.
+
+2
+I apply every change together with you, on screen
+
+Privacy policy live. Breach plan drafted. SPF/DKIM/DMARC records in your DNS. Two-factor rolled out. Data map completed. AI disclosure added. All six obligations done by the end of the call, not homework for later.
+
+3
+You leave with your evidence pack scoped
+
+Every gap assigned and the fixes underway. The signed attestation letter lands at your 30-day review, once the fixes are verified: a one-page proof you can hand to a regulator, your insurer, or an enterprise client asking for it.
+
+4
+3 months of Titanos Monitor, free
+
+Your business's exposure changes every month. You keep watching it without lifting a finger for 3 months, then AU$149/mo only if you choose to continue, and I'll flag anything new that needs attention.
+
+Why now, and not next year? Five rules are already in play, and only one has a date on it.
+
+02 / 08
+WHAT'S ALREADY LIVE
+Five Rules Worth Knowing About
+
+Ordered by how soon each one could touch a small business, not by date. The pack covers all five in one pass.
+
+LIVE NOW
+Your customers can sue you directly
+
+Since 10 June 2025, an individual whose data you seriously mishandle can sue you under the new privacy tort. No regulator, no OAIC queue. It applies even if your turnover currently exempts you from the rest of the Act.
+
+LIVE NOW
+Your insurer can refuse the claim
+
+Cyber insurers increasingly deny breach claims when baseline controls weren't in place, things like two-factor login and keeping software up to date (the Australian government's Essential Eight checklist). Policies commonly condition cover on documented security hygiene. Without a signed record, you're relying on goodwill at the worst possible moment.
+
+10 DECEMBER 2026
+ADM disclosure required in your privacy policy
+
+Automated decision-making, including AI tools your business uses, must be disclosed in your privacy policy with affected-decision categories, types of personal information used, and process explanation. Disclosure is required from 10 December 2026. Separately, serious or repeated privacy interference can attract penalties up to AU$50M.
+
+TRANCHE 2 · COMING
+Small-business exemption disappears
+
+The second reform tranche is positioned to remove the AU$3M turnover exemption, pulling a large number of additional small businesses into Privacy Act scope. If you’re currently exempt, that protection has a sunset on it.
+
+LIVE NOW
+The regulator is now checking proactively
+
+Since January 2026 the OAIC has run compliance sweeps across sectors including real estate, pharmacies, and licensed venues, examining businesses before any complaint is made. “We've had no problems” is no longer the same as “we won't be looked at.”
+
+Also on the calendar
+· 4 March 2026: mandatory IoT security standards live. Cascades to any business reselling or operating connected devices.
+· 2 August 2026: EU AI Act enforcement begins. Applies to AU companies with EU customers.
+
+Does the AI disclosure rule even apply to you? Two questions will tell you, and nothing you type leaves this page.
+
+03 / 08
+SELF-CHECK
+Does the ADM rule apply to you?
+
+Two questions. No data collected, nothing submitted.
+
+Q1 OF 2
+
+Is your business a health service provider (clinic, allied health, pharmacy, any size)?
+
+YES
+NO
+04 / 08
+THE SEQUENCE
+What the Engagement Looks Like
+
+Six steps from scan to signed letter. Nothing happens out of your sight.
+
+I
+STAGE 01 / 06
+Intake + External Scan
+
+You complete a 10-minute intake form (company, hosting, identity provider, MFA and backup state, what's driving compliance). I run an external scan on your domain: a look at what an attacker can see about your business from the outside, with version-by-version CVE matching against the public NVD database. Output: scan JSON plus a documented record of what you affirmed about internal posture.
+
+II
+STAGE 02 / 06
+Evidence Pack
+
+Within 3 business days I send your draft pack (about 17 pages, 13 sections): your privacy policy and ADM disclosure draft, your NDB runbook (the step-by-step plan for the day you get breached, so you hit the mandatory notification deadline instead of panicking), vendor risk register (a one-page record of every third-party service that touches your customer data), and scan findings split by what I directly verified versus what you affirmed. The final evidence pack, with everything we applied together, lands within 24 hours of the working call, regulator-ready as a single PDF.
+
+III
+STAGE 03 / 06
+90-Minute Implementation Call
+
+Screen-shared working session. I apply changes live: SPF, DKIM, DMARC and CAA records, Microsoft 365 or Google Workspace security defaults, MFA enabled across team, privacy policy and ADM disclosure deployed to your live site, breach-response runbook saved to your shared drive. You keep admin access throughout. Every change is yours.
+
+IV
+STAGE 04 / 06
+What You Control vs Your Host
+
+Some controls live on Squarespace, Shopify, Xero or Cliniko, not in your hands. You get a one-page escalation list: exactly what to ask your host to fix, with template wording. Anything they decline gets documented as 'reasonable steps taken' for your attestation.
+
+V
+STAGE 05 / 06
+30-Day Review Call + Attestation
+
+I audit what shipped: policy is live, MFA is enforced, runbook is shared. Anything that drifted gets re-applied. You receive a signed letter you can hand to a regulator, insurer, or enterprise client stating exactly what was checked and fixed against the Australian government’s baseline security checklist (Essential Eight, Maturity Level 1), plus a Privacy Act compliance posture letter.
+
+VI
+STAGE 06 / 06
+Months 1 to 3 · Titanos Monitor Free
+
+Monthly external scan with delta report, CVE alerts matched to your stack, and a regulatory-update briefing: same product as Titanos Monitor, included free for 3 months covering your 30-day review and beyond. After month 3 it continues at AU$149/mo only if you opt in. No silent continuity. I'll email you the exact date before any meter would start.
+
+05 / 08
+THE DIVISION OF OWNERSHIP
+You Control Some · Your Host Controls the Rest
+
+Your hosting service controls some things. I give you exactly what to ask them to fix, and document the rest as "reasonable steps taken."
+
+You Control
+
+I apply these with you on the working call.
+
+✓
+Privacy policy, written in plain English, covering what you hold, why, who sees it, plus the AI/automated tools disclosure
+✓
+Breach-response runbook: a step-by-step plan for the day you get hacked (legally required under NDB)
+✓
+DNS hygiene (SPF, DKIM, DMARC, CAA records) so scammers can't impersonate your domain
+✓
+Microsoft 365 / Google Workspace security defaults plus MFA enabled across your team
+✓
+Vendor risk register: one page mapping every third-party service that touches customer data
+✓
+Signed government security checklist (Essential Eight, Maturity Level 1)
+✓
+Staff access management
+Your Hosting Provider Controls
+
+I give you exactly how to escalate.
+
+→
+TLS/SSL certificate management on hosted sites
+→
+HSTS headers on Squarespace / Shopify / Wix
+→
+Server-side security configurations
+→
+DDoS protection on hosted infrastructure
+→
+Database security on SaaS like Xero, Cliniko, Vend
+
+So what does all of that cost, and what happens to the free months when they end?
+
+06 / 08
+THE SINGLE DOOR
+One Engagement · Done With You
+
+One door, no tiers. I make the changes with you on a 90-minute working call. Three months of monitoring are included, and I send a short briefing whenever the rules move.
+
+Kyle Deligny
+runs every engagement personally
+OPERATOR'S NOTE
+I sign the attestation myself, after I've checked the fixes actually shipped, not before. My ABN is on it because the accountability is mine, not a vendor's.
+DONE WITH YOU
+Privacy Act and Government Security Checklist, Done With You
+
+Illustrative estimate: a comparable Vanta subscription plus a DPO contractor, ~AU$18,000+ in year 1
+
+AU$5,997
+one-time · 3 months of Monitor included free
+Drafting before the call, the 90-minute implementation working call, 30-day review and signed attestation, 3 months of monitoring and quarterly re-scans. The 90 minutes is the central session, not the whole engagement.
+
+Six obligations sorted in one pass: privacy policy, breach plan, email security, login security, data mapping, and AI disclosure. Everything you need to demonstrate “reasonable steps” under the Privacy Act and the Australian government's baseline security checklist (Essential Eight, Maturity Level 1), applied together with you in a single working call, then maintained for the 3-month monitoring window.
+
+✓
+A proper privacy policy written and deployed live: covers what customer data you hold, why, how it's stored, who it's shared with (not a copy-paste from 2015)
+✓
+A breach-response runbook integrated into your shared drive: the step-by-step plan for the day you get hacked, so you hit the mandatory NDB notification deadline instead of panicking
+✓
+Email security records applied on the call (SPF, DKIM, DMARC), so scammers can't impersonate your business domain
+✓
+Login security hardening applied with you (Microsoft 365 / Google Workspace security defaults plus MFA across your team)
+✓
+Vendor risk register: a one-page record of every third-party service touching your customer data, so you know exactly what you hold and where it lives
+✓
+AI and automated tools disclosure added to your privacy policy: the new rule is that if you use AI on customer info, you have to say so
+✓
+90-minute implementation working call. I apply all six with you on a screen-share, no PDF-only hand-off
+✓
+Signed letter documenting the reasonable steps you've taken under the Privacy Act and the Australian government's security checklist (Essential Eight, Maturity Level 1), the evidence trail a regulator, insurer, or enterprise client looks for (not a guarantee against complaints, those are decided on the facts of an incident)
+✓
+30-day review call to re-audit anything that drifted, then sign the attestation
+✓
+13-section evidence pack documenting all of the above (about 17 pages), proof of work for your insurer or regulator
+✓
+External scan with a you-versus-host responsibility split (same engine as the free scan)
+✓
+Sample of the pack shape: my own, published in full at /our-evidence-pack
+✓
+3 months of Titanos Monitor included free (then optional at AU$149/mo, opt-in, no auto-charge)
+GET COMPLIANT · AU$5,997
+BOOK A FREE CONSULTATION FIRST
+→
+
+14-day refund if no deliverable has been issued. Monitoring cancellable any time. Read full terms ›
+
+Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
+
+07 / 08
+AFTER THE CALL
+How the Monitoring Works After the Pack
+
+The first 3 months of Titanos Monitor ship with the pack, automatic, no extra charge. What happens at the end of month 3 is the part most vendors get wrong.
+
+MONTHS 1 TO 3
+Free and automatic
+
+Monthly external scan, delta report, CVE alerts matched to your stack, and a regulatory briefing land in your inbox. Same product as Titanos Monitor, included with the pack.
+
+7 DAYS BEFORE MONTH 4
+I email you the exact date the meter would start
+
+Plain-English email: "Your 3 included months end on {date}. If you want it to continue at AU$149/mo, subscribe here. If you do nothing, it simply stops. No charge, no action needed."
+
+AFTER MONTH 3
+Opt-in continues, silence stops it
+
+Default mode: no charge unless you affirmatively subscribe. No auto-charge unless you choose to keep it. No retention sequence, no coupon games.
+
+08 / 08
+STRAIGHT ANSWERS
+Questions I Get
+How the working call works
++
+A single 90-minute video call where I apply the changes with you. You share screen for your DNS, your Microsoft 365 or Google Workspace admin console, and your website CMS. I walk you through each change as you make it, no opaque hand-offs, no "I'll send you instructions and check back next week." By the end of the call, the privacy policy is deployed, the ADM disclosure is live, the M365/Workspace hardening is applied, the DNS records are corrected, and the NDB runbook is integrated.
+What access you need to grant
++
+For the working call, you remain logged into your own admin consoles. I never receive credentials. You'll need owner or admin access to your DNS provider, your Microsoft 365 or Google Workspace tenant, your website CMS for privacy policy deployment, and (optionally) your customer-record systems for the vendor risk register.
+I'm too small for this to matter
++
+The statutory tort is live now. Since 10 June 2025, a customer or ex-employee can take you to court for a serious, intentional or reckless privacy breach, no regulator needed. Cyber insurers increasingly deny breach claims when baseline controls weren't in place. Penalties already reach AU$50M for serious or repeated interference. And Tranche 2 reforms are positioned to remove the AU$3M small-business turnover exemption, pulling many additional small businesses into Privacy Act scope.
+My website is on Squarespace. Can you even help?
++
+Yes. The audit works on any hosting provider. I document what you control (privacy policy, DNS records, account-level MFA, vendor register) versus what Squarespace controls (TLS, HSTS, server config), and you get the exact escalation language for the bits they own.
+I use Microsoft 365. Do you cover that?
++
+Yes. The pack includes a Microsoft 365 hardening guide with 8 admin-console changes that satisfy most Essential Eight Maturity Level 1 requirements. I apply these with you on the 90-minute working call, typically a 15-minute admin sequence covering MFA, conditional access, and audit logging.
+Is the monthly fee mandatory?
++
+No. The pack is a one-time AU$5,997. The first 3 months of Titanos Monitor are included free. After that it's entirely optional: AU$149/mo if you want ongoing scans and briefings, nothing if you don't. I'll email you the exact date before any meter would start, and it's one click to decline or cancel. No auto-charge unless you affirmatively subscribe.
+What's the difference between this and Vanta or Drata?
++
+Vanta and Drata are US$10 to 15K a year enterprise compliance tools shaped for SOC 2. This is a AU$5,997 one-time engagement (Monitor optional at AU$149/mo after the included 3 months) shaped for AU SMBs facing Privacy Act and Essential Eight. Different buyer, different price, different geography, different framework.
+Can you guarantee I'll be compliant?
++
+No vendor honestly can. Compliance is determined by the regulator on the facts of a specific incident. What you get is the evidence pack regulators expect to see when assessing whether you took "reasonable steps."
+What happens if you're unavailable later?
++
+You keep everything I produce: the signed self-attestation, the 13-section evidence pack, your privacy policy and ADM disclosure as deployed, your NDB runbook, the vendor risk register, and your DNS/M365 hardening notes. The attestation remains valid as a dated record of the reasonable steps taken at that point in time (compliance is always a snapshot, refresh annually), and I hand over a one-page continuity sheet so another consultant can pick up the file without re-doing the diagnostic. You keep everything built to that point plus a refund of any unearned milestone. You are never left holding a half-finished pack.
+How fast can this get done?
++
+External scan within 48 hours of purchase. Working call scheduled inside 7 days. 30-day review call scheduled at the working call. Quarterly re-scans recur for the life of the monitoring subscription.
+
+Want to see your current security exposure first? Free scan →
+
+Need an AI build instead? AI Implementation for Business →
+
+Would it be okay if we started with a free look?
+
+If the six obligations (privacy policy, breach plan, email security, login security, data mapping and AI disclosure) are on your mind, would it be okay if we had a free chat first? You would see where you stand, and you would know the price before anything starts. If you would rather sort it yourself, or not at all, a no is completely welcome.
+
+GET COMPLIANT · AU$5,997
+BOOK A FREE CONSULTATION FIRST
+→
+
+14-day refund if no deliverable has been issued. Monitoring cancellable any time. Read full terms ›
+
+Scoped enquiry → invoice within 1 business day → pay by card via Stripe · 14-day refund if no deliverable has been issued
+
+Ω
+BUILT WITH AI ASSISTANCE. EVERY DOCUMENT, EVERY SCAN FINDING, AND EVERY ATTESTATION IS REVIEWED AND SIGNED OFF BY KYLE DELIGNY (ABN 34 318 502 254) BEFORE IT REACHES YOU. THE ACCOUNTABILITY IS MINE, NOT THE MACHINE'S.
+Straight answers, before you ask
+Do I have to book the pack to get started?
++
+No. Start with the free consultation and free report. You see where you stand first, and you know the price before anything is booked. A no is completely fine.
+Is this safe?
++
+Yes, and here is how. Nothing we build goes live until it passes thousands of automated checks, like a pilot's pre-flight checklist, every single time. Anything important (money, legal, anything sent out, anything that cannot be undone) needs a person's tap first. Everything the system does is recorded.
+Will it replace my staff?
++
+No. Nobody gets replaced. Think power steering, not a self-driving car: you still drive, it takes the strain off your arms. Your people stay and get their hours back from the repetitive parts.
+How do you know it works?
++
+The industry-standard COCOMO model sizes the TITANOS build at about 24 engineers for about 31 months (MODELLED). One person built it in about 5 months, with 6,314 test cases guarding it. The method is shown in full on the Engineering page, so you can check it yourself.
+What does it cost?
++
+The first conversation and your report are free. After that the prices are published and you know yours before anything starts: Titanos Monitor AU$149/mo, the Privacy Act compliance pack AU$5,997, and AI retainers from AU$1,500/mo (3-month minimum). You pay for the result, not an open taxi meter.
+We already have an IT provider. Where does that leave them?
++
+Right beside you. This sits next to your IT provider, nothing goes live without passing the checks, and you keep control of every change. If it helps, I am happy to talk to them directly.
+What happens next?
++
+1. You message me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send you a free report on your business, so you can see what I see. 4. If you like it, you get a price before anything starts. If it is not for you, that is completely fine and the report is still yours.
+Start with a free consultation and a free report on your business
+
+I am Kyle, the founder of TITANOS. If you like me, you like the business and you like the offer, or we can shape it into something that works for you, would you be happy to start with a free half-hour? You leave with a clear picture of what you could do next and a report of your own. A no is welcome.
+
+Telegram @TitanOSofficial
+Email kyle@titanos.tech
+
+Kyle replies by email and Telegram within one business day.
+
+Or send a message first
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

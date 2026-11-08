@@ -1,0 +1,130 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Posture Drift Alert for Industry Body Member Lists
+
+A monthly report showing which members let their email protection lapse, so you can nudge them before it matters.
+
+Built for association, buying-group and franchise-group managers. AU$99/mo. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free baseline scan of 20 member domains.
+
+The price is AU$99/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Association and industry-body managers
+•
+Buying groups and franchise groups
+•
+Anyone who already ran a one-off member scan and wants to keep it current
+What you get
+✓
+A monthly report on your member domain list
+✓
+Members who dropped email protection (DMARC or SPF), changed mail routing, or let a domain lapse
+✓
+A member-friendly nudge email template
+✓
+Public DNS checks only
+
+And how does it go from a yes to a finished job?
+
+How it works
+You send your member domains and choose a report day.
+We check public records each month and compare with the last run.
+You get the drift report and the nudge template.
+Why TITANOS does it differently
+
+A change layer on top of our passive email-protection grader. You see movement over time, not just a single score.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$99/mo
+
+Up to 200 members. AU$199 a month for up to 1,000 members.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who are you?
++
+TITANOS is run by Kyle Deligny, a sole trader (ABN 34 318 502 254) in Queensland. You deal with Kyle directly, not a call centre.
+Where does the information come from?
++
+Public records only, such as government registers and published contract awards. Nothing is accessed that is not already public, and nothing on your own systems is touched.
+Do you contact my members?
++
+No. The report comes to you, and you decide whether to send the nudge, under your own name.
+Does it touch member systems?
++
+No. It only reads public DNS records. Nothing on a member's own systems is touched.
+Does this replace anyone on my team?
++
+No. It gives your people their hours back and gives them a better starting point. You stay the decision maker.
+Is GST charged?
++
+No GST is charged. TITANOS is a sole trader that is not registered for GST, and the price you see is the price you pay.
+Can I cancel?
++
+Yes. There are no tactics and no lock-in tricks. If it is not useful, say so and stop. A no is always welcome.
+
+Want more later? See TITANOS Monitor.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free baseline scan of 20 member domains.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

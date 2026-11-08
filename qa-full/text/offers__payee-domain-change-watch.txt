@@ -1,0 +1,131 @@
+Skip to main content
+TITANOS
+TITANOS · AVAILABLE NOW
+Payee Domain Change Watch
+
+We watch your suppliers' email domains each week and tell you to check by phone if something changes before you pay.
+
+Built for bookkeepers, accounts-payable teams and finance managers. AU$49/mo. No GST is charged. Available to buy online now.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+
+The price is AU$49/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Bookkeepers who pay supplier invoices by bank transfer
+•
+Accounts-payable teams
+•
+Finance managers who worry about payment-redirect scams
+What you get
+✓
+A saved list of 25 to 200 supplier domains, watched every week
+✓
+Alerts when mail routing changes, email protection is dropped, or a lookalike domain appears
+✓
+Alerts when a new nameserver appears
+✓
+A plain "check by phone before paying" message with the evidence
+✓
+Public DNS checks only. No active scanning.
+
+And how does it go from a yes to a finished job?
+
+How it works
+You send your supplier domains.
+We check public DNS records each week and compare with last time.
+If something changes, you get an alert with the evidence and a suggestion to verify by phone.
+Why TITANOS does it differently
+
+Our passive email-protection grader, run week after week on your own list. It has a control check built in and says UNKNOWN honestly when a lookup fails.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$49/mo
+
+AU$49 a month for 25 domains. AU$149 a month for up to 200 domains.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Available to buy online now.
+Who are you?
++
+TITANOS is run by Kyle Deligny, a sole trader (ABN 34 318 502 254) in Queensland. You deal with Kyle directly, not a call centre.
+Where does the information come from?
++
+Public records only, such as government registers and published contract awards. Nothing is accessed that is not already public, and nothing on your own systems is touched.
+Will the alert say a supplier is a fraudster?
++
+No. It says what changed and asks you to verify by phone. A change is a prompt to check, not an accusation.
+Does it touch my suppliers' systems?
++
+No. It only reads public DNS records, the same ones anyone can look up.
+Does this replace anyone on my team?
++
+No. It gives your people their hours back and gives them a better starting point. You stay the decision maker.
+Is GST charged?
++
+No GST is charged. TITANOS is a sole trader that is not registered for GST, and the price you see is the price you pay.
+Can I cancel?
++
+Yes. There are no tactics and no lock-in tricks. If it is not useful, say so and stop. A no is always welcome.
+
+Want more later? See TITANOS Monitor.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

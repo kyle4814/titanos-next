@@ -1,0 +1,119 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+WordPress Email Posture Widget
+
+A free WordPress plugin that shows your domain's email grade on your dashboard, with plain steps to fix it.
+
+Built for wordPress site owner or web freelancer. AU$0. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): The plugin itself.
+
+The price is AU$0, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+WordPress site owners
+•
+Web freelancers looking after client sites
+•
+Owners whose contact-form or order emails go missing
+What you get
+✓
+A free plugin that shows your domain's email grade
+✓
+Fix steps in plain English
+✓
+An optional upgrade to the monthly Monitor
+
+And how does it go from a yes to a finished job?
+
+How it works
+You install the plugin.
+It reads your domain and sends it to our grader.
+You see the grade and fix steps on your dashboard.
+Why TITANOS does it differently
+
+The grader is the hook. It only reads public DNS records, and it is honest when it cannot tell.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$0
+
+The plugin is free. The optional Monitor upgrade is AU$19 a month., because TITANOS is a sole trader that is not registered for GST.
+
+No GST is charged. Refund terms are in our terms and confirmed in writing before you pay. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+What does the plugin send?
++
+Your domain name, so the grader can read its public email records. Nothing else is needed.
+Will it change my site?
++
+No. It only shows you a grade.
+Does it cost anything?
++
+The plugin is free. The Monitor upgrade is optional.
+Do I need technical skills?
++
+No. The fix steps are in plain English.
+
+Want more later? See SpoofGuard Global Monitor.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): The plugin itself.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,103 @@
+Skip to main content
+TITANOS
+REVENUE
+The dead-quote problem: how much revenue is sitting in your "maybe" pile
+← Back to the archive
+LOGGED 4 AUGUST 2026 · 5 MIN READ
+
+If you run quotes through any job-management system (ServiceM8, Tradify, simPRO, or just a spreadsheet) you've got a pile of jobs sitting in a status that isn't "won" and isn't "lost" either. They're just there. Quoted, sent, and never followed up because you got busy and the next job came in.
+
+That pile is usually bigger than people expect, and it's rarely worth zero. Some of those jobs are genuinely dead: the client went with someone else, or the work isn't happening. But a meaningful share are just waiting on a follow-up that never happened, because chasing quotes competes with actually doing the work, and the work always wins.
+
+Why "went quiet" isn't the same as "said no"
+
+A client who explicitly declines tells you something. A client who never replies tells you nothing, and most people who ask for a quote and then go silent aren't rejecting you, they're just slow, distracted, comparing options, or waiting for their own funding to line up. Treating silence as a no means you're leaving a call or a follow-up email on the table for every one of those jobs.
+
+A rough way to size the pile yourself
+Pull every quote from the last 6-12 months that's still sitting at "quoted" status, not won, not marked unsuccessful.
+Drop anything you already know is genuinely dead (job cancelled, client told you no, scope changed).
+Add up what's left. That number is your dead-quote pile.
+Multiply by your historical quote-to-win rate for jobs you do follow up on. That's a rough floor on what re-chasing is worth.
+
+That last step matters: the honest answer for some businesses is "not much," and that's a useful answer too. It tells you the gap isn't in old quotes, it's somewhere else in the pipeline.
+
+Where this gets harder than a spreadsheet formula
+
+Different job-management platforms model "quoted but not converted" differently, and the field that looks like a decision date isn't always one. There's a field-by-field breakdown of what ServiceM8, Tradify and simPRO exports actually contain in the companion post on trade-software exports if you want to do this analysis yourself. If you'd rather someone just do it: that's the free audit offer below: send the export, get the number, no obligation either way.
+
+I'll go through your old quotes for free and tell you how many are still worth chasing.
+
+SEE WHAT I NEED FROM YOU →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+TRADE SOFTWARE
+·
+LOGGED 15 AUG 2026
+·
+6 MIN READ
+ServiceM8 vs Tradify vs simPRO: what your job data can (and can't) tell you
+
+Every platform records "quoted but nothing happened" differently. Knowing which field to trust matters more than which platform you're on.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 29 JULY 2026
+·
+5 MIN READ
+What an AI audit actually finds in a trades or small-service business (real patterns, not hype)
+
+The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

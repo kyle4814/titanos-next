@@ -1,0 +1,98 @@
+Skip to main content
+TITANOS
+TRUST
+How to tell if a "free scan" offer is legitimate (and how to verify mine in five minutes)
+← Back to the archive
+LOGGED 18 AUGUST 2026 · 4 MIN READ
+
+"Free scan" is a phrase scammers use too, which makes it a reasonable thing to be suspicious of, including from us. If someone offers to scan your business for free, here's what to check before you give them anything.
+
+What a legitimate free scan should never ask for
+Payment details or a card number before showing you any result.
+Login credentials to your own systems. A real external scan only needs your public domain, nothing you'd log into.
+Pressure to act immediately on a finding without being able to verify it yourself.
+What you can check about us specifically
+ABN 34 318 502 254, verifiable directly on the Australian Business Register, not just quoted on the site.
+The methodology page lists exactly what the scan checks and how to reproduce any finding yourself.
+We publish our own self-scan results in full, on the same page real client scans run from.
+Email from kyle@titanos.tech carries verified DKIM, SPF and DMARC, checkable in any email client's message headers.
+The general rule, beyond us
+
+A legitimate free offer can tell you, in plain language, exactly what it checks, exactly what it does with the result, and exactly how you'd verify the operator is who they say they are, before you've committed to anything. If any of those three answers is vague or missing, that's the signal to walk away, regardless of who's making the offer.
+
+See exactly what our scan checks, and every finding from scanning ourselves.
+
+READ THE METHODOLOGY →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+COMPLIANCE
+·
+LOGGED 22 JULY 2026
+·
+6 MIN READ
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+
+"We're too small for privacy law" stops being reliably true this year. Here's what changes and what doesn't.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 29 JULY 2026
+·
+5 MIN READ
+What an AI audit actually finds in a trades or small-service business (real patterns, not hype)
+
+The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,130 @@
+Skip to main content
+TITANOS
+TITANOS · AVAILABLE NOW
+Franchise Network Posture Board
+
+One page shows the email-security and privacy-wording status of every franchisee domain, with a fix sheet each franchisee can hand to their own provider.
+
+Built for head-office operations or compliance manager at a franchisor with 20 to 300 sites. AU$1,500/mo. No GST is charged. Available to buy online now.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+
+The price is AU$1,500/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Franchisors and multi-site operators
+•
+Head-office managers who cannot see how each site is set up
+•
+Brands worried that one spoofed franchisee site damages everyone
+What you get
+✓
+A single dashboard or PDF covering every franchisee domain
+✓
+A grade for each site's email protection (SPF, DKIM and DMARC are the three records that stop fake emails)
+✓
+Privacy wording status for each site
+✓
+A change log, so head office sees what moved
+✓
+A copy-ready fix sheet for each franchisee to give their own provider
+
+And how does it go from a yes to a finished job?
+
+How it works
+You send the list of site domains and the inbox that should receive reports.
+We check public records for every domain and build the board.
+You get a report on your chosen cadence and share the fix sheets with franchisees.
+Why TITANOS does it differently
+
+We scan hundreds of domains from public records and say UNKNOWN when we cannot tell. Head office gets evidence it can show its board.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$1,500/mo
+
+AU$1,500 a month for up to 100 sites, or AU$2,500 a month for up to 300 sites, in line with our published AI Growth and Ops tiers. TITANOS is run by a sole trader who is not registered for GST, so on the price shown.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Available to buy online now.
+Who are you?
++
+TITANOS is a one-person Australian business run by Kyle Deligny (ABN 34 318 502 254). You deal with Kyle directly.
+Do you touch franchisee systems?
++
+We only read public records, such as public DNS entries and public web pages. We do not log in to anything, scan your servers or touch your systems.
+Do franchisees keep their own IT provider?
++
+Yes. The fix sheet is written so each franchisee's provider can make the change.
+Does this replace anyone at head office?
++
+No. This adds a service line or saves hours. Nobody is replaced.
+What does it cost?
++
+The tiers are on this page. TITANOS is run by a sole trader who is not registered for GST, so no GST is charged on the price shown.
+Can I stop?
++
+Yes. The terms, including how to stop, are written down and agreed before anything is billed.
+
+General information, not legal advice.
+
+Want more later? See AI partner retainers.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

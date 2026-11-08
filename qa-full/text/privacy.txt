@@ -1,0 +1,108 @@
+Skip to main content
+TITANOS
+Privacy Policy
+
+Last updated 2026-10-05 · effective from this date
+
+WHERE THE EDGES ARE WRITTEN DOWN
+
+You can ask what we hold on you, and get a straight answer.
+
+Everything below is that rule, spelled out section by section: what we collect, why, how long we keep it, and how you get it corrected or removed.
+
+PRIVACY ACT 1988 (CTH) · SPAM ACT 2003 (CTH)
+
+Titanos (“we”, “us”) is operated by Kyle Deligny, ABN 34 318 502 254, an Australian operator providing external attack-surface scanning, Privacy Act + Essential Eight Compliance and AI Implementation services, an online catalogue of productised offers, public-record research dossiers and business lead lists, to businesses in Australia, New Zealand and Singapore. This policy explains how we handle the personal information we collect through titanos.tech.
+
+01 / 08
+What we collect
+Email address, name, and the domain you submit when you request a free scan via the form or email. If you message Kyle, your phone number or messaging username and whatever you choose to tell us.
+Email address, billing details, and ABN (if applicable) when you purchase a Compliance engagement through Stripe.
+Details you enter in the offer enquiry, order and welcome forms, and the details of any offer you buy through a Stripe Payment Link.
+Stripe processes your card data directly; we never see or store payment card numbers.
+We do not run third-party trackers, fingerprinting, or behavioural advertising scripts on titanos.tech.
+02 / 08
+Where we get contact details
+
+Beyond what you give us directly, business contact details come from public sources: public registers, government contract award notices and public DNS records. Our research dossiers (957 organisations so far) are built from those same public sources. Cold email goes only to publicly listed business addresses, every email can be stopped with a one-word STOP reply, and a stopped address is suppressed and never emailed again. In October 2026 we sent 28 outreach emails, through two sending inboxes.
+
+We use an AI model, Anthropic's Claude, to help draft reports and emails. Kyle reviews the output before it goes out. Material you send us is never used to train any model.
+
+03 / 08
+How we use it
+To deliver the scan or engagement you requested.
+To send occasional follow-up email about your scan, related findings, or Titanos services you have shown interest in.
+To comply with our legal obligations under the Privacy Act 1988 (Cth) and Spam Act 2003 (Cth).
+04 / 08
+How we store it
+Email and lead data is held in our own infrastructure on encrypted disks.
+Stripe holds billing data under their privacy framework (stripe.com/privacy).
+If you message Kyle through Telegram or a normal phone call, those services handle your message under their own privacy policies. Telegram has its own (telegram.org/privacy). Your phone carrier handles calls. We only see what you choose to send us.
+05 / 08
+Your rights
+Access: request a copy of the personal data we hold about you.
+Correction: ask us to correct anything that is wrong.
+Erasure: ask us to delete your data (subject to legal record-keeping obligations).
+Opt out: reply STOP to any email, or email kyle@titanos.tech.
+06 / 08
+How long we keep it
+
+Lead data is retained for 24 months after your last engagement with us, then deleted. Quote files you send for a free audit are deleted after 30 days. Stripe, Telegram and your phone carrier retain their portions per their own privacy frameworks.
+
+07 / 08
+Cookies + analytics
+
+We do not use cookies for analytics, advertising, or tracking. The site uses first-party session storage only (for UI continuity, e.g. so the hero animation only plays once per session). No third-party trackers are loaded.
+
+OPERATOR'S NOTE
+In plain terms: no ad trackers, no data broker deals, no fine print that undoes the list above. If you ask what we hold on you, you get an answer, not a form to fill out first.
+08 / 08
+Contact
+
+Email kyle@titanos.tech. We respond within 30 days per the Australian Privacy Principles. If unsatisfied, you can contact the Office of the Australian Information Commissioner at oaic.gov.au.
+
+Ω
+EIGHT SECTIONS. EVERY RIGHT ABOVE IS CHECKABLE: WRITE TO KYLE@TITANOS.TECH.
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

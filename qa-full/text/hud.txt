@@ -1,0 +1,345 @@
+Skip to main content
+TITANOS
+LIVE HUD
+The build, as it happens.
+
+Engineering counted, compute gauged, every build receipted.
+
+This is our own build, nothing of yours. Modelled figures are labelled modelled and are never revenue. Measured figures come straight from our own logs.
+
+LIVE ENGINEERING COUNTER
+MODELLED
+61.08370
+engineer-years built
+AU$31,853,976
+replacement value, what a conventional team would charge
+
+This is a model, not revenue and not a bank balance. It starts from the last ledger snapshot (2026-10-09 04:07:49 AEST: 230,797 lines of production code = 60.6 engineer-years) and ticks up at the measured 7-day pace of 2.34 engineer-years a day, at AU$521,481 per engineer-year. Extrapolation stops after 14 days. MODELLED: COCOMO, method
+
+0x
+336x
+3x
+REALISED OUTPUT
+REDLINE
+MODELLED CEILING: 336X
+
+MODELLED. Realised output is 3x against a modelled ceiling of 336x, under 1% of it, so the needle has barely moved. Realised is measured jobs per day; the ceiling is 40x capacity times 8.4x cheaper jobs. measured jobs/day 184 -> 548 (3.0x) / 336x modelled ceiling.
+
+COMPUTE PANEL
+COMPUTE CAPACITY
+40x
+two accounts at 20x usage each
+MODELLED
+COST PER JOB
+8.4x cheaper
+25 matched jobs, before and after
+MEASURED
+WORKER START
+7.4x leaner
+29,000 tokens of context instead of 215,000
+MEASURED
+FLEET JOBS, 24 H
+1451
+195.7 worker-hours
+MEASURED
+FAILURE RATE, 24 H
+1.1%
+failed or stuck of all finished
+MEASURED
+SAFETY SUITES
+189
+automated suites in the last green gate
+MEASURED
+
+Capacity is the vendor's published usage multiple, so it is modelled. Cost per job, worker start, fleet jobs, failure rate and suites are measured on our own systems. Fleet figures cover the 24 hours before the snapshot.
+
+RECEIPT FEED
+MEASURED
+09 Oct, 04:07
+A
+HV-DFC50F
+RECEIPT
+09 Oct, 04:04
+A
+HV-DCBC30
+RECEIPT
+09 Oct, 04:04
+A
+HV-77BFB1
+RECEIPT
+09 Oct, 04:04
+A
+HV-B8A48D
+RECEIPT
+09 Oct, 04:04
+A
+HV-533878
+RECEIPT
+09 Oct, 04:04
+A
+HV-252E62
+RECEIPT
+09 Oct, 04:04
+A
+HV-69305F
+RECEIPT
+09 Oct, 04:04
+A
+HV-352B26
+RECEIPT
+09 Oct, 04:04
+A
+HV-5D4474
+RECEIPT
+09 Oct, 04:04
+A
+HV-9AE4F8
+RECEIPT
+09 Oct, 04:04
+A
+HV-6D83F7
+RECEIPT
+09 Oct, 04:04
+B
+HV-74EAAD
+RECEIPT
+09 Oct, 03:22
+A
+heal
+RECEIPT
+09 Oct, 02:19
+A
+heal
+RECEIPT
+09 Oct, 01:34
+A
+heal
+RECEIPT
+09 Oct, 01:25
+A
+review
+RECEIPT
+09 Oct, 01:22
+B
+QUALITY-F2DF50
+RECEIPT
+09 Oct, 00:34
+B
+review
+RECEIPT
+09 Oct, 00:28
+B
+review
+RECEIPT
+08 Oct, 23:01
+B
+r2-omega-mutation-gates
+RECEIPT
+08 Oct, 22:49
+A
+site-ship
+RECEIPT
+08 Oct, 22:13
+A
+site-hud
+RECEIPT
+08 Oct, 22:07
+A
+facts-outbound-guard
+RECEIPT
+08 Oct, 22:04
+A
+BUILD-834D5E
+RECEIPT
+08 Oct, 22:01
+A
+BUILD-349428
+RECEIPT
+08 Oct, 21:58
+A
+earnings-model
+RECEIPT
+08 Oct, 21:34
+A
+site-final
+RECEIPT
+08 Oct, 21:31
+B
+QUALITY-4098E5
+RECEIPT
+08 Oct, 20:16
+B
+BUILD-35A0FB
+RECEIPT
+08 Oct, 20:13
+B
+BUILD-BCC22D
+RECEIPT
+08 Oct, 20:04
+B
+r2c-alpha-dispatch-stagger
+RECEIPT
+08 Oct, 19:55
+B
+BUILD-53E5A0
+RECEIPT
+08 Oct, 18:52
+B
+SITE-3F928E
+RECEIPT
+08 Oct, 17:40
+B
+reply-autopilot
+RECEIPT
+08 Oct, 17:31
+B
+p2-autopilot
+RECEIPT
+08 Oct, 17:19
+B
+SITE-278F08
+RECEIPT
+08 Oct, 16:52
+A
+OPS-347FDB
+RECEIPT
+08 Oct, 16:49
+A
+w6-site-qa
+RECEIPT
+08 Oct, 16:31
+A
+BUILD-9859BE
+RECEIPT
+08 Oct, 16:28
+A
+BUILD-17FA02
+RECEIPT
+08 Oct, 15:55
+A
+w2-site-images
+RECEIPT
+08 Oct, 15:46
+A
+w3-site-copy
+RECEIPT
+08 Oct, 15:43
+B
+BUILD-3001AC
+RECEIPT
+08 Oct, 15:31
+A
+BUILD-539E59
+RECEIPT
+08 Oct, 15:19
+B
+factory-phase2-prep
+RECEIPT
+08 Oct, 15:01
+B
+OPS-8F0174
+RECEIPT
+08 Oct, 13:40
+B
+r3-alpha-blog-engine
+RECEIPT
+08 Oct, 13:34
+A
+fl-alliance-groundwork
+RECEIPT
+08 Oct, 13:34
+B
+r3-alpha-site-beauty
+RECEIPT
+08 Oct, 13:31
+B
+w1-site-foundation
+RECEIPT
+08 Oct, 13:28
+B
+BUILD-44B732
+RECEIPT
+08 Oct, 13:25
+A
+fl-incorporation-pack
+RECEIPT
+08 Oct, 13:25
+B
+w7-site-pages
+RECEIPT
+08 Oct, 13:22
+A
+fl-routine-budget-brief
+RECEIPT
+08 Oct, 13:19
+A
+w8-site-sigils
+RECEIPT
+08 Oct, 13:19
+A
+w5-site-seo
+RECEIPT
+08 Oct, 13:07
+A
+fl-parallax-defensive-stack
+RECEIPT
+08 Oct, 13:07
+B
+BUILD-D00C76
+RECEIPT
+08 Oct, 13:07
+B
+capability-ledger
+RECEIPT
+08 Oct, 13:07
+B
+r2b-omega-cross-review
+RECEIPT
+
+The 60 most recent finished jobs from the build ledger, newest first: time (Brisbane), account, category and codename only. Jobs that name an organisation or a person are left out, so the feed shows the rhythm of the work and nothing about anyone else.
+
+Static page, updated at each build. Data snapshot 2026-10-09 04:07:49 AEST, feed generated 2026-10-08 18:09 UTC. The counter moves in your browser between builds.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

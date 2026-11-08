@@ -1,0 +1,97 @@
+Skip to main content
+TITANOS
+TITANOS · OPENING SOON
+DMARC and SPF Setup Guide for Small Business
+
+A plain-English walk through making your email domain hard to fake, in the order that keeps your real email flowing.
+
+Price to be confirmed. No GST is charged. Delivered as dmarc-setup-guide.pdf.
+
+TELL ME WHEN IT OPENS →
+
+Checkout is opening soon. Registering is free and commits you to nothing.
+
+Who it's for
+•
+Owners whose email goes to spam or whose name has been faked
+•
+Whoever looks after IT for a small team, even part time
+•
+Businesses asked by a client or insurer about email security
+What you get
+✓
+Step-by-step DNS changes for SPF, DKIM and DMARC
+✓
+A safe rollout order: monitor first, then quarantine, then reject
+✓
+A checklist for each common mail provider
+✓
+A one-page summary to hand to your IT provider
+Delivery
+
+You receive dmarc-setup-guide.pdf (PDF, about 20 pages) after payment. Built from the same method our free SpoofGuard check uses on public DNS records.
+
+Price
+Price to be confirmed
+
+No GST is charged. One payment, yours to keep. Full terms: /terms
+
+Straight answers
+Do I need to be technical?
++
+No. Each step says what to change, where, and how to check it worked.
+What if it is not right for me?
++
+Email us and we will sort it out in plain terms. Refund terms are in our terms page and are confirmed in writing before you pay.
+
+Want to start free? Run the free scan or see all products.
+
+If you like what you have read and it fits, would it be okay to go ahead? A no is welcome too.
+
+TELL ME WHEN IT OPENS →
+
+Checkout is opening soon. Registering is free and commits you to nothing.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

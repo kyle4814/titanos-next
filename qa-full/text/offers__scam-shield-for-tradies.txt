@@ -1,0 +1,126 @@
+Skip to main content
+TITANOS
+TITANOS · AVAILABLE NOW
+Scam Shield for Tradies
+
+We check every month whether someone could fake an email from your business, and give you the fix list and a notice that tells customers your real bank details.
+
+Built for owner who gets paid by bank transfer from emailed invoices. AU$149/mo. No GST is charged. Available to buy online now.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+
+The price is AU$149/mo, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Any trade or local service that invoices by email
+•
+Owners paid by bank transfer
+•
+Anyone worried about a faked invoice with swapped bank details
+What you get
+✓
+A monthly reading of your domain's email protection, dated and in plain English
+✓
+A fix list for the settings that stop spoofing (SPF, DKIM and DMARC are the three email checks)
+✓
+A customer notice template: we only ever ask for payment to these bank details
+✓
+An honest result: if we cannot tell, we say unknown, never safe
+
+And how does it go from a yes to a finished job?
+
+How it works
+Give us your business domain. That is all we need.
+We read your public DNS records and grade them.
+You get the dated reading, the fix list and the notice each month.
+Why TITANOS does it differently
+
+SpoofGuard is passive. It reads public DNS only and is honest on unknown, so a failed check is never graded as safe. The proof sits in public records and each reading is dated.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$149/mo
+
+AU$149 a month for the Monitor.
+
+No GST is charged. Cancel any time by email. No refund for the current month. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Available to buy online now.
+Who are you?
++
+TITANOS, run by Kyle Deligny, a sole trader (ABN 34 318 502 254).
+Do you touch my systems?
++
+No. We read public DNS records only. Nothing is installed and we never log in to anything.
+Does this stop all fake invoices?
++
+No. It shows whether your domain can be spoofed and how to close the gap. It does not stop every scam, and we do not claim it does.
+Will my IT provider be involved?
++
+They stay in charge. The fix list is written so they can apply it, or you can hand it to whoever runs your email.
+Does this replace anyone?
++
+No. It gives you and your provider a clear list.
+What does it cost, and can I cancel?
++
+AU$149 a month, and no GST is charged. You can cancel any time.
+
+Want more later? See TITANOS Monitor.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+BUY NOW →
+START WITH THE FREE STEP
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

@@ -1,0 +1,461 @@
+Skip to main content
+TITANOS
+EFFICIENCY, MEASURED
+The same budget now does 8.4 times the work.
+
+Think of a car that suddenly goes many times further on the same tank. Same tank, same road, same driver, and the same tests checking the work.
+
+Cost per worker job, 25 matched jobs, API-equivalent pricing. Updated 2026-10-08.
+
+Every figure on this page comes from a dated record of our own machine and our own AI workers. Each one is labelled MEASURED or MODELLED, and each one says how it was taken. Figures still being taken show as measuring, and are filled in when the record exists.
+
+21 figures have both a before and an after, 27 have at least one side filed, 32 are tracked. Round 1.
+
+8.4x
+Cost per worker job (API-equivalent)
+US$0.973 to US$0.116 (-88%)
+7.4x
+Tokens a worker reads before its first action
+215,000 tokens to 29,000 tokens (-87%)
+72x
+5-minute snapshot, time per run
+224 s to 3.1 s (-99%)
+161x
+Cloud mirror, time per run
+2,250 s to 14 s (-99%)
+6.7x
+Kernel repository size
+235 MB to 35 MB (-85%)
+1.7x
+Main codebase test suite run time
+975 s to 579 s (-41%)
+Before and after, every vector
+Machine
+Figure	Before	After	Change	Label
+Memory in use on the build machine	28 GB	measuring	measuring	MEASURED
+CPU busy while 'doing nothing'	84%	measuring	measuring	MEASURED
+Windows VM memory (vmmem) after a cache trim	13 GB	7.4 GB	-43%
+1.8x
+	MEASURED
+Load the worker fleet was allowed to put on 8 cores
+A ceiling, not an observed load. Observed load is a round-2 figure.
+	24	6	-75%
+4.0x
+	MEASURED
+Observed load average (24 hour mean)	measuring	measuring	measuring	MEASURED
+Memory per headless worker spent on tool servers	550 MB	0 MB	-100%	MEASURED
+Cron
+Figure	Before	After	Change	Label
+Cron work per 24 hour day
+Job-hours can exceed 24 because jobs overlap.
+	43.3 job-hours	measuring	measuring	MEASURED
+Failure rate of the 5-minute state snapshot job	89.2%	measuring	measuring	MEASURED
+5-minute snapshot, time per run	224 s	3.1 s	-99%
+72x
+	MEASURED
+Cloud mirror, time per run
+Before is the midpoint of a 30 to 45 minute range.
+	2,250 s	14 s	-99%
+161x
+	MEASURED
+Progress ping, time per run	222 s	0.07 s	-100%
+3171x
+	MEASURED
+Repository bundle step, time per run	51 s	3.6 s	-93%
+14x
+	MEASURED
+Most jobs firing in one minute	22	5	-77%
+4.4x
+	MEASURED
+Backups
+Figure	Before	After	Change	Label
+Backup success rate	measuring	measuring	measuring	MEASURED
+Files the cloud sync client tracks
+After is approximate.
+	235,274	142,700	-39%
+1.6x
+	MEASURED
+Fleet
+Figure	Before	After	Change	Label
+Fleet throughput (jobs completed per day)	measuring	measuring	measuring	MEASURED
+Jobs per hour	measuring	measuring	measuring	MEASURED
+AI cost
+Figure	Before	After	Change	Label
+Tokens a worker reads before its first action	215,000 tokens	29,000 tokens	-87%
+7.4x
+	MEASURED
+Cost per worker job (API-equivalent)	US$0.973	US$0.116	-88%
+8.4x
+	MEASURED
+Daily spend, modelled ceiling	US$467 per day	US$130 per day	-72%
+3.6x
+	MODELLED
+Interactive session start	118,369 tokens	78,105 tokens	-34%
+1.5x
+	MEASURED
+Session start inside the main codebase	139,579 tokens	101,493 tokens	-27%	MEASURED
+AI quality
+Figure	Before	After	Change	Label
+Recall test, 50 questions	50/50	48/50	measuring	MEASURED
+Held-out recall test, 25 questions	25/25	24/25	measuring	MEASURED
+Fully good results on 25 matched jobs	23/25	25/25	measuring	MEASURED
+Kernel compression gate	bar: 48/50	passed, 48/50	measuring	MEASURED
+Build
+Figure	Before	After	Change	Label
+Main codebase test suite run time	975 s	579 s	-41%
+1.7x
+	MEASURED
+Kernel gate run time	measuring	measuring	measuring	MEASURED
+Editor hook time per edit	1.7 s	0.1 s	-94%
+17x
+	MEASURED
+Reply hook time per reply	measuring	measuring	saves 3.5 s	MEASURED
+Kernel repository size	235 MB	35 MB	-85%
+6.7x
+	MEASURED
+Disk freed from stale worktrees	measuring	measuring	saves 2.94 GB	MEASURED
+How each figure was taken
+
+MEASURED means read from a dated record or a timed run. MODELLED means real measured quantities repriced under a stated scenario, which is a what-if and never a result. Where a before or after is not in yet, the table says measuring.
+
+Memory in use on the build machine
+MEASURED
+2026-10-08
+
+How: Windows memory reading while the fleet ran idle-looking; 28 of 31 GB in use before the work. Round 2 re-reads the same counter.
+
+Source: PC optimisation report, 2026-10-08
+
+CPU busy while 'doing nothing'
+MEASURED
+2026-10-08
+
+How: Windows CPU reading before the work. Round 2 re-reads it with the fleet running under its new ceilings.
+
+Source: PC optimisation report, 2026-10-08
+
+Windows VM memory (vmmem) after a cache trim
+MEASURED
+2026-10-08
+
+How: Measured around one cache-trim run: 13.0 GB before, 7.4 GB 20 seconds later. A scheduled trim now runs every 10 minutes.
+
+Source: PC optimisation report, 2026-10-08
+
+Load the worker fleet was allowed to put on 8 cores
+MEASURED
+2026-10-08
+
+How: Configured ceiling, read from the fleet governor settings: allowed load 24 before, 6 after. Workers dropped from 12 to 3 per account.
+
+Source: PC optimisation report, 2026-10-08
+
+Observed load average (24 hour mean)
+MEASURED
+2026-10-08
+
+How: Round 2: mean load average over 24 hours before and after, from the machine's own counters.
+
+Source: Round 2 (measuring)
+
+Memory per headless worker spent on tool servers
+MEASURED
+2026-10-08
+
+How: Each worker started about 7 tool servers (about 550 MB); a strict config now starts none.
+
+Source: PC optimisation report, 2026-10-08
+
+Cron work per 24 hour day
+MEASURED
+2026-10-08
+
+How: Summed run time of every scheduled job over 3 days of run records, per day. Round 2 repeats the sum on the same record.
+
+Source: PC optimisation report, 2026-10-08
+
+Failure rate of the 5-minute state snapshot job
+MEASURED
+2026-10-08
+
+How: 256 of 287 runs failed (89.2%), so state was not reaching the remote copy. The fix is in; the after rate needs a fresh run record.
+
+Source: PC optimisation report, 2026-10-08
+
+5-minute snapshot, time per run
+MEASURED
+2026-10-08
+
+How: Run record average before, a timed run after. The secret check now scans only files that could be committed.
+
+Source: PC optimisation report, 2026-10-08
+
+Cloud mirror, time per run
+MEASURED
+2026-10-08
+
+How: Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass.
+
+Source: PC optimisation report, 2026-10-08
+
+Progress ping, time per run
+MEASURED
+2026-10-08
+
+How: Ping re-ran a test suite that always timed out. The result is now cached until the code changes.
+
+Source: PC optimisation report, 2026-10-08
+
+Repository bundle step, time per run
+MEASURED
+2026-10-08
+
+How: One bundle per repository keyed on content, instead of re-bundling about 12 worktrees.
+
+Source: PC optimisation report, 2026-10-08
+
+Most jobs firing in one minute
+MEASURED
+2026-10-08
+
+How: Counted from the schedule. A lint check now fails any minute with more than 5 jobs.
+
+Source: PC optimisation report, 2026-10-08
+
+Backup success rate
+MEASURED
+2026-10-08
+
+How: Round 2: successful runs over total runs for the backup jobs, before and after, from run records.
+
+Source: Round 2 (measuring)
+
+Files the cloud sync client tracks
+MEASURED
+2026-10-08
+
+How: File count before; about 142,700 after a duplicate rolling copy (92,538 files) was excluded and moved out.
+
+Source: PC optimisation report, 2026-10-08
+
+Fleet throughput (jobs completed per day)
+MEASURED
+2026-10-08
+
+How: Round 2: completed worker jobs per day from the fleet ledger, before and after the ceilings.
+
+Source: Round 2 (measuring)
+
+Jobs per hour
+MEASURED
+2026-10-08
+
+How: Round 2: completed jobs divided by active hours, from the fleet ledger.
+
+Source: Round 2 (measuring)
+
+Tokens a worker reads before its first action
+MEASURED
+2026-10-08
+
+How: Counted at session start across 198 worker sessions (before, about 215k, because the rule book loaded twice) against sessions on the compact core (about 29k).
+
+Source: Sigil ceiling report, 2026-10-08
+
+Cost per worker job (API-equivalent)
+MEASURED
+2026-10-08
+
+How: 25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill.
+
+Source: Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08
+
+Daily spend, modelled ceiling
+MODELLED
+2026-10-08
+
+How: The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast.
+
+Source: Sigil ceiling report, 2026-10-08
+
+Recall test, 50 questions
+MEASURED
+2026-10-08
+
+How: 50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better.
+
+Source: Kernel compression gate record, 2026-10-08
+
+Held-out recall test, 25 questions
+MEASURED
+2026-10-08
+
+How: Questions written by an independent agent that never saw the compact core.
+
+Source: Kernel compression gate record, 2026-10-08
+
+Fully good results on 25 matched jobs
+MEASURED
+2026-10-08
+
+How: Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none.
+
+Source: Kernel compression gate record, 2026-10-08
+
+Kernel compression gate
+MEASURED
+2026-10-08
+
+How: The compact core is 17,143 bytes. It must clear the bar before it is allowed to load.
+
+Source: Kernel compression gate record, 2026-10-08
+
+Interactive session start
+MEASURED
+2026-10-08
+
+How: Tokens before the first reply with the old and new kernel layout.
+
+Source: Kernel compression gate record, 2026-10-08
+
+Session start inside the main codebase
+MEASURED
+2026-10-08
+
+How: Tokens before the first reply after 18 reference files moved to on-demand loading. The full test suite stayed green.
+
+Source: Sigil ceiling report, 2026-10-08
+
+Main codebase test suite run time
+MEASURED
+2026-10-08
+
+How: Wall-clock seconds for the full suite, before and after.
+
+Source: Round-2 brief, 2026-10-08 (raw log attaching)
+
+Kernel gate run time
+MEASURED
+2026-10-08
+
+How: Round 2: wall-clock seconds for the kernel verify gate, before and after.
+
+Source: Round 2 (measuring)
+
+Editor hook time per edit
+MEASURED
+2026-10-08
+
+How: Seconds of hook time per file edit, before and after.
+
+Source: Round-2 brief, 2026-10-08 (raw log attaching)
+
+Reply hook time per reply
+MEASURED
+2026-10-08
+
+How: Seconds removed from every reply. Saved time is the figure supplied; before and after are filed with the log.
+
+Source: Round-2 brief, 2026-10-08 (raw log attaching)
+
+Kernel repository size
+MEASURED
+2026-10-08
+
+How: Size of the repository directory before and after history and run-state cleanup.
+
+Source: Round-2 brief, 2026-10-08 (raw log attaching)
+
+Disk freed from stale worktrees
+MEASURED
+2026-10-08
+
+How: Gigabytes freed by removing finished worktrees.
+
+Source: Round-2 brief, 2026-10-08 (raw log attaching)
+
+Timeline
+7 Oct 19:45 to 8 Oct 08:09
+198 worker sessions found loading the rule book twice, about 215k tokens before the first action. It stopped on its own; a guard and an hourly audit now watch for it.
+Source: Sigil ceiling report, 2026-10-08
+8 Oct 05:21
+Schedule paused and backed up while the heaviest jobs were measured and rewritten.
+Source: PC optimisation report, 2026-10-08
+8 Oct 09:09
+Compact kernel core cleared its recall gate, 48 of 50 plus 24 of 25 on questions it had never seen.
+Source: Kernel compression gate record, 2026-10-08
+8 Oct 09:17
+25-job matched kill test finished: 25 of 25 fully good against 23 of 25, at US$0.116 against US$0.973 per job.
+Source: Kernel compression gate record, 2026-10-08
+8 Oct afternoon
+Interactive and main-codebase session starts measured on the new layout.
+Source: Sigil ceiling report, 2026-10-08
+Hardening
+
+Speed means nothing if it breaks things. These are the counts of the checks that stand behind the figures above.
+
+6,314
+Test cases in the main codebase
+def test_ count in titanos; kernel verify suite count, 9 October 2026. 188 automated safety suites guard the control layer.
+Source: state/numbers/estate_builds.json, state/verify_runs.jsonl
+measuring
+Adversary reviews
+Count of independent reviews that tried to break a change before it merged.
+Source: Round 2 (measuring)
+measuring
+Chaos drills
+Count of deliberate failure drills against the fleet.
+Source: Round 2 (measuring)
+measuring
+Mutation checks
+Count of deliberately broken lines that the tests caught.
+Source: Round 2 (measuring)
+measuring
+Restore drills
+Count of times a backup was restored and checked.
+Source: Round 2 (measuring)
+See the speed page →
+See the proof →
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

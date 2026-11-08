@@ -1,0 +1,127 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Cyber Insurer and Broker Portfolio Posture Scan
+
+An outside-in posture reading across your book of Australian policyholders, to sit beside the questionnaires they fill in themselves.
+
+Built for head of underwriting, portfolio risk or broker network manager at a cyber insurer, MGA or large broker. AU$18,000 one-off. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free grade of 50 domains taken from your own public client-logo list.
+
+The price is AU$18,000 one-off, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Heads of underwriting and portfolio risk
+•
+Managing general agents (MGAs) and large brokers
+•
+Broker network managers
+What you get
+✓
+A graded email-security posture for up to 2,000 domains
+✓
+A top-risk list
+✓
+Renewal-trigger flags
+✓
+An aggregate heat map
+✓
+A 90-day refresh
+
+And how does it go from a yes to a finished job?
+
+How it works
+You send the list of policyholder domains.
+We grade each one from public DNS records.
+You get the graded book, the heat map and a refresh at 90 days.
+Why TITANOS does it differently
+
+Passive grading at batch scale that says UNKNOWN when a record cannot be read, plus our own database of millions of Australian businesses for industry and technology segmentation.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$18,000 one-off
+
+Up to 2,000 domains. AU$35,000 for up to 10,000 domains. Refresh is AU$4,000 a quarter.
+
+No GST is charged. Refund terms are in our terms and confirmed in writing before you pay. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who is behind this?
++
+TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with one person, and you can check the ABN on the public ABN Lookup.
+Are you scanning third parties?
++
+Only passively. We read public DNS records. We do not probe or log into any policyholder system.
+Is this underwriting advice?
++
+No. The contract would say results are not underwriting advice. They are one outside-in input for your own underwriters.
+Does this replace our underwriters?
++
+No. It gives them another data point. Every decision stays with your team.
+What happens with domains that cannot be read?
++
+They are marked UNKNOWN and are never counted as good or bad.
+Is GST added?
++
+No. TITANOS is not registered for GST, so no GST is charged. The price shown is the price you pay.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): A free grade of 50 domains taken from your own public client-logo list.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

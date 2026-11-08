@@ -1,0 +1,102 @@
+Skip to main content
+TITANOS
+COMPLIANCE
+Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026
+← Back to the archive
+LOGGED 22 JULY 2026 · 6 MIN READ
+
+Most small businesses have operated for years under the assumption that the Privacy Act doesn't really apply to them: the small-business exemption (annual turnover under $3 million) has covered a lot of ground since 2001. The 2026 reforms narrow that safety margin, and the deadline that matters for anyone touching customer data is 10 December 2026.
+
+What's actually changing
+
+The exemption itself isn't gone outright, but new obligations (around notifiable data breaches, transparency about automated decision-making, and stronger consent standards) increasingly apply regardless of business size when certain triggers are met (health information, data trading, certain contracted government work, and businesses using automated tools to make decisions about people). If any of those apply to you, the size exemption stops being a reliable shield.
+
+Who this actually catches
+Anyone using AI tools that make or influence decisions about customers (credit, eligibility, pricing, risk scoring).
+Anyone handling health, biometric, or other sensitive information, regardless of turnover.
+Businesses that received a third party's customer data as part of a partnership, referral, or acquisition.
+Any business that's had, or could plausibly have, a data breach involving personal information.
+What it doesn't mean
+
+It doesn't mean every small business needs a compliance officer or a six-figure legal review. For most operators the real gap is smaller and more practical: knowing what personal data you actually hold, where it lives, who can access it, and having an honest answer ready if someone asks what happens to their information. That's a few days of work done properly, not a program.
+
+A useful gut check
+
+If you can't currently answer "what personal data do we hold, where does it live, and who can see it" in under two minutes without checking with someone else, that's the gap worth closing first, before the deadline, not after someone asks the question for you.
+
+Fixed-price Privacy Act compliance for AU small business, scoped to what actually applies to you.
+
+SEE THE COMPLIANCE PACK →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+Do sole traders need a privacy policy in Australia?
+
+"I'm under $3 million turnover" is true for almost every sole trader. It's not the whole answer anymore.
+
+Open the record
+→
+COMPLIANCE
+·
+LOGGED 19 AUG 2026
+·
+4 MIN READ
+The Notifiable Data Breach scheme: the 30-day rule small businesses miss
+
+It doesn't have to be a hack. An email sent to the wrong address can trigger the same 30-day clock.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

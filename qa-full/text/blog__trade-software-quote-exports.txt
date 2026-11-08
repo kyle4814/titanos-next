@@ -1,0 +1,101 @@
+Skip to main content
+TITANOS
+TRADE SOFTWARE
+ServiceM8 vs Tradify vs simPRO: what your job data can (and can't) tell you
+← Back to the archive
+LOGGED 15 AUGUST 2026 · 6 MIN READ
+
+If you're trying to work out which of your old quotes are still worth a follow-up call, the honest first step isn't analysis, it's checking whether your export actually says what you think it says. Every job-management platform models "still open" differently, and the wrong assumption here means chasing jobs that were already lost, or ignoring ones that weren't.
+
+ServiceM8
+
+ServiceM8 uses four job statuses: Quote, Work Order, Completed, Unsuccessful. There's no separate "declined" reason code: a quote that gets accepted moves to Work Order, one that gets rejected (or the job is cancelled) moves to Unsuccessful. A quote still worth chasing is one still sitting at status Quote, with a quote_sent date already in the past and no work_order_date or unsuccessful_date to show it ever moved. That combination (sent, and nothing since) is the signal, not the raw quote count.
+
+Amount fields aren't always on the job record itself in every export style; some exports carry totals on a linked invoice/materials object instead of the job row. Worth checking on one real export from your own account before assuming a column means what it looks like it means.
+
+Tradify and simPRO
+
+Both platforms give you an explicit quote status field (accepted / declined / sent, or similar), which is more direct than ServiceM8's job-status model, but the same rule applies: a quote that's "sent" with no accepted or declined outcome, and no activity since the send date, is your candidate list. Anything with an explicit decline should come out before you do anything else, whichever platform you're on.
+
+The mistake that skews the numbers
+
+The most common error isn't a wrong platform assumption, it's date confusion: using "job created" instead of "quote sent" as the reference point, or mixing GST-inclusive and exclusive totals when adding up value. Both of those will make a dead-quote audit look bigger or smaller than it actually is. If a number surprises you, check the date field and the tax treatment before the conclusion.
+
+This is exactly the kind of thing that's faster to hand off than to untangle yourself, especially across a full year of exports.
+
+Export however your system does it, send it over, and I'll do the field-mapping myself.
+
+WHAT HAPPENS TO YOUR DATA →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+RELATED RECORDS
+REVENUE
+·
+LOGGED 4 AUG 2026
+·
+5 MIN READ
+The dead-quote problem: how much revenue is sitting in your "maybe" pile
+
+You didn't lose these jobs. Nobody said no. They just went quiet, and quiet isn't the same as gone.
+
+Open the record
+→
+AI IMPLEMENTATION
+·
+LOGGED 29 JULY 2026
+·
+5 MIN READ
+What an AI audit actually finds in a trades or small-service business (real patterns, not hype)
+
+The task worth automating is rarely the flashy one. It's the boring five-minutes-a-day task nobody's counted.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

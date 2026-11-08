@@ -1,0 +1,116 @@
+Skip to main content
+TITANOS
+BUILD LOG
+How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds
+← Back to the archive
+LOGGED 1 OCTOBER 2026 · 6 MIN READ
+
+On 30 September 2026 at 12:32, a test run on this system's own automation deleted its operator's entire home directory. The cause was one unchecked command: mktemp was missing from PATH, it silently returned an empty string, and a cleanup step that meant to delete a temporary folder deleted the real home directory instead. The same day, the system was rebuilt end to end by one script, and a follow-up drill measured the recovery at 8 minutes 12 seconds, zero step failures. This is what broke, why, and what now makes that specific failure impossible.
+
+What actually happened
+
+Every test suite built a disposable working directory for each run, then deleted it afterward. The pattern looked like a normal shell idiom: create a temp folder with mktemp, point HOME at a subfolder of it, then remove that subfolder when done. That pattern carries one unstated assumption, that mktemp actually exists on PATH. During a resilience test that deliberately strips commands from PATH to see how the system degrades, mktemp was absent. The command substitution returned nothing, the target path collapsed to plain "home", and the cleanup step ran its delete command against the real filesystem instead of a scratch folder. No suite checked whether mktemp had actually returned a path before trusting it.
+
+The fix: make the class of bug impossible, not just this instance
+
+The repair was not a patch to one line. Every suite's temporary-directory handling now runs through a shared guard that refuses to even load unless every command it depends on (mktemp, rm, mkdir, realpath, stat, id) resolves on PATH. If one is missing, the suite dies immediately with a distinct exit code before touching anything. The one function suites are allowed to use for cleanup will only ever delete a path that resolves strictly inside a root it has already validated, and it carries an explicit denylist of real filesystem locations regardless, the actual home directory included. A missing dependency now fails loudly and safely instead of silently degrading into something dangerous.
+
+The rebuild: one script, no rm, safe to run twice
+
+Recovering after the wipe surfaced a second problem: manually following the setup docs brought back code but not a working machine. A single recovery script closed that gap. It contains no delete command and no privileged command anywhere, it prints the two steps that need root access instead of running them itself. Every copy step is non-destructive, it fills in what is missing and prints a skip notice for anything already present, which makes it safe to run against a half-restored or even a fully live machine. It never writes a credential, since none live in the recovery path to copy, it prints exactly which ones only the operator can re-supply.
+
+A separate, independent backup mirror runs on its own schedule, add-only, never deleting a prior version of anything it copies. Between the system's own git remote, that mirror, and the local disk itself, there are now three real, independent copies, so one local mistake can no longer take out the only record.
+
+The drill: 8 minutes 12 seconds, zero failures, idempotent
+Restore drill number two PASSED. Blank home to a working system in 8 minutes 12 seconds, zero step failures, and a clean idempotent re-run: 109 items already present, correctly skipped, with a canary file planted before the drill still intact afterward.
+
+That idempotent re-run detail matters as much as the timing. Running the recovery script a second time against the now-restored system did nothing destructive and changed nothing. It found 109 items already present and correctly skipped every one of them.
+
+What's permanently different now
+Destructive tests now run only inside a disposable root that has to pass an explicit validation check before anything is allowed to touch it.
+A missing dependency fails the test loudly and safely instead of silently degrading into something dangerous.
+Recovery order is now fixed and written down: authoritative remote, then durable local artifact, then verified backup, then reconstruction from evidence, then explicit operator input, and only then a clearly marked irrecoverable gap. A reconstruction is never passed off as authoritative history.
+Why this matters if you're the client, not the operator
+
+This was not a lucky recovery. It was a system built to fail closed: when something unexpected happens, the default is refuse and report, not guess and proceed. That is the same discipline applied to every client engagement, not just to internal tooling. No revenue, client, or business detail was involved anywhere in this incident, it concerned internal tooling only.
+
+AI-assistance disclosure: this post was drafted by Claude (Anthropic) directly from the operator's own commit history and internal logs, as part of the standard build-and-document workflow. It was reviewed and signed off before publication.
+
+Want the same standard applied to your own setup? Message me for a free audit and I'll tell you straight what I find.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE →
+Ω
+RECOVERED DOCUMENT, END OF RECORD.
+QUESTIONS ON RECORD
+What actually caused the deletion?
++
+A test suite trusted the output of a directory-creation command without checking it had succeeded. When that command was missing from PATH during a deliberate resilience test, it returned nothing, which turned a delete-the-temp-folder command into a delete-the-real-home-directory command.
+Was any data permanently lost?
++
+Some in-flight edits made after the last snapshot before the incident were lost. Draft files and raw captures from an in-progress research pass were recovered from a preserved working copy rather than being refetched from scratch. Nothing load-bearing had to be rebuilt from memory.
+How is this specific failure prevented now?
++
+A shared guard is sourced by every test suite. It refuses to run at all if a required command is missing, and its delete function will only ever remove a path that resolves inside a root it has already validated as safe, with an explicit denylist of real filesystem locations regardless.
+How long did full recovery actually take?
++
+The measured, repeatable figure is 8 minutes 12 seconds to bring a blank home directory to a working system, with zero step failures and a clean idempotent re-run.
+RELATED RECORDS
+BUILD LOG
+·
+LOGGED 1 OCT 2026
+·
+6 MIN READ
+A headless AI research loop that can't rm -rf your home directory
+
+An unattended AI agent that can run shell commands without a human watching is dangerous by default. Here is the guard that sits in front of it, and the day it actually caught a bad one.
+
+Open the record
+→
+APPLY THIS TO YOUR OWN OPERATION
+
+15 minutes is enough to know if there's a real gap worth closing.
+
+GET YOUR FREE AI AUDIT: MESSAGE KYLE
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

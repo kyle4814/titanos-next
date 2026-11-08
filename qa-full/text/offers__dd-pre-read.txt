@@ -1,0 +1,131 @@
+Skip to main content
+TITANOS
+TITANOS · LAUNCHING SOON
+Due Diligence Pre-Read: Cyber, Privacy and Email Posture
+
+A sourced, dated PDF on a target's cyber, privacy and email posture, so your first screen covers the risk most screens skip.
+
+Built for associate or principal at a boutique PE/VC fund or M&A adviser in AU, NZ or the UK. AU$297 one-off. No GST is charged. Launching soon. Register interest.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): One free pre-read on a target of your choice, delivered with the method page.
+
+The price is AU$297 one-off, and no GST is charged. Before you ask: I am Kyle Deligny, a sole trader (ABN 34 318 502 254). Public records only unless you invite us further in, nobody is replaced, and your IT provider stays in charge.
+
+Is this one actually for you? The next bit is a short, honest list.
+
+Who it's for
+•
+Associates and principals at boutique PE and VC funds
+•
+M&A advisers screening targets before a full review
+•
+Teams in Australia, New Zealand or the UK
+What you get
+✓
+Email-security grade (SPF, DKIM and DMARC, the three records that stop others spoofing a company's email), read passively from public DNS
+✓
+A privacy-policy gap reading, including missing automated-decision wording ahead of 10 December 2026 (as we read the Privacy Act amendments; confirm with your adviser)
+✓
+Technology-stack exposure drawn from our company database
+✓
+A snapshot of filed accounts where they are public
+✓
+A red, amber and green summary plus questions to ask management
+
+And how does it go from a yes to a finished job?
+
+How it works
+You send the target's domain and where it operates.
+We read public records only and date every finding.
+You get one PDF per target, with the method page attached.
+Why TITANOS does it differently
+
+Passive checks that say UNKNOWN when a record cannot be read, instead of guessing. Nothing is scanned actively, so there is no consent issue with the target.
+
+Now the part everyone scrolls to first.
+
+Price
+AU$297 one-off
+
+Per target domain. A 10-target pack is AU$1,997.
+
+No GST is charged. Refund terms are in our terms and confirmed in writing before you pay. Full terms: /terms
+
+Questions before you decide
+Can I buy this today?
++
+Launching soon. Register interest.
+Who is behind this?
++
+TITANOS is run by Kyle Deligny, a sole trader in Australia (ABN 34 318 502 254). You deal with one person, and you can check the ABN on the public ABN Lookup.
+Do you touch the target's systems?
++
+No. Everything comes from public DNS records, public web pages and public filings. Nothing is logged into, probed or scanned actively.
+Is this a full technical due diligence?
++
+No. It is a fast outside-in pre-read that helps you decide where to look harder. It is not an audit or a certification.
+What happens when a record cannot be read?
++
+The report says UNKNOWN for that item. We do not fill gaps with a guess.
+Does the privacy reading count as legal advice?
++
+No. It is general information only, not legal advice. Your lawyers make the call on anything that matters.
+Is GST added?
++
+No. TITANOS is not registered for GST, so no GST is charged. The price shown is the price you pay.
+
+General information, not legal advice.
+
+Want more later? See Portfolio Watch: Monthly Posture Monitor for a Fund's Holdings.
+
+If you have read this far and it feels like a fit, would it be okay to go ahead? And if it does not, a no is completely welcome.
+
+REGISTER INTEREST →
+
+Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): One free pre-read on a target of your choice, delivered with the method page.
+
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report

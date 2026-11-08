@@ -1,0 +1,347 @@
+Skip to main content
+TITANOS
+FREE · NO LOGIN · NO CARD
+Free Security Check for Your Business
+
+See what the public internet can already see about your business. No login. Your report lands in your inbox within 2 business days.
+
+A plain-English report on what your domain already shows the world: open ports, expired certificates, email spoofing gaps, known software weaknesses. It is a light, standard check using a port and service scan plus public records, and it touches nothing of yours. I only scan a domain someone has asked me to look at, and only one you own or are allowed to have checked. No card, no drip campaign: at most 3 relevant emails over 6 months, and STOP ends it forever.
+
+REQUEST YOUR FREE SCAN
+MESSAGE OR CALL KYLE
+→
+
+Personally reviewed · Australian-owned · ABN 34 318 502 254
+
+A free security check of your business, based on what the public internet can already see. Your report lands in your inbox within 2 business days.
+
+A free health check before any treatment, so you see exactly what needs work.
+
+Where that comes from
+
+RECORDED
+
+6 findings on my own site
+
+from running this exact check on titanos.tech first, published as found. Four are resolved or accepted with reasons, two remain open.
+
+A GP who books their own check-up before offering you one, and shows you the results, good and bad.
+
+Where this number comes from
+
+Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I read every report before it reaches you. The check uses public records only and touches nothing of yours, with no login and no password guessing. Nobody is replaced, your IT person stays in charge and is welcome to read the whole report, and it costs nothing.
+
+What does a check like this look like on the page? Here is the kind of output it reads.
+
+EXAMPLE OUTPUT · REDACTED
+$ nmap -sV --top-ports 15 [red▋acted].com.au
+  PORT      STATE  SERVICE   VERSION
+  443/tcp   open   ssl/http  nginx 1.18.0  (TLSv1.3 OK · cert 41d to expiry)
+  3306/tcp  open   mysql     MySQL 5.7.42  -> EOL Oct 2023, unsupported, public CVEs apply
+  21/tcp    open   ftp       vsftpd        -> cleartext auth, exposed to public internet
+
+Every line is a real fingerprint pattern I surface. Findings on your scan are anchored to a reproducible nmap command and matched to NVD.
+
+01 / 08
+SELF-SCAN · FINDINGS PUBLISHED VERBATIM
+
+I ran this check on myself first.
+
+Six findings, all published as found. Four are resolved or accepted with reasoning, and two remain open. Publishing them as found is the point.
+
+Findings from the scan of our own site
+RESOLVED
+Missing Content-Security-Policy
+
+CSP shipped via <meta http-equiv> in app/layout.tsx. default-src 'self' + script/style 'unsafe-inline' for Next.js inline blocks + /cdn-cgi/scripts/ for Cloudflare. connect-src extended to https://api.titanos.tech so the /scan-request form can POST cross-origin.
+
+RESOLVED
+Missing X-Frame-Options
+
+X-Frame-Options: SAMEORIGIN now served by Cloudflare Managed Transform ‘Add security headers’.
+
+OPEN
+Missing X-XSS-Protection
+
+Header is deprecated in modern browsers (Chrome/Edge ignore it). CSP covers the same threat model in 2026 browsers. Not planning to add.
+
+RESOLVED
+Missing Referrer-Policy
+
+Referrer-Policy: same-origin (stricter than recommendation) served by Cloudflare Managed Transform. Belt-and-braces <meta name='referrer'> in app/layout.tsx.
+
+PARTIAL
+Missing Permissions-Policy
+
+Site uses none of those APIs. Cloudflare Transform Rule to deny them is queued. No functional risk in the interim.
+
+OPEN
+Information disclosure: Server header
+
+Trade-off: keeping Server: cloudflare lets clients debug DNS/CDN issues. The disclosure is harmless because Cloudflare's role here is verifiable from any whois / DNS lookup anyway.
+
+FULL SCAN RUN 2026-06-01 · TLS 1.3 · 0 OPEN PORTS (CLOUDFLARE-FRONTED) · 0 CLEARTEXT SERVICES · 0 DB EXPOSURE. TLS 1.3 RE-CONFIRMED 5 OCTOBER 2026, CERTIFICATE VALID THROUGH 26 DECEMBER 2026.
+OPERATOR'S NOTE
+Publishing my own findings, warts included, was never optional. I ask clients to trust a report on their business. The least I can do is show mine first, unedited. This same scan is a light, standard check of what a domain already shows the internet, and it only ever runs against a domain someone has asked me to check.
+
+Want to see what a full evidence pack looks like? See my own evidence pack, published in full →
+
+02 / 08
+What It Is · Who It's For
+What It Is
+›
+A check of what a hacker can see about your business from the public internet. Every finding reproducible with one command
+›
+90-day window before any finding is published. Your time to fix it first
+›
+No break-in attempts, no password guessing, no overloading your site. Ever
+›
+Every finding verifiable: I show you the exact check I ran so you can confirm it yourself
+›
+Personally reviewed before delivery. No auto-generated noise
+Who It's For
+›
+Any AU/NZ/SG business with a website that wants to know what a hacker can see
+›
+Business owners who have heard about the December 2026 privacy deadline and want to understand their gaps
+›
+IT leads or founders about to roll out new software and want an outside check first
+›
+Businesses about to renew a managed IT contract, checking what they're actually getting
+›
+Anyone who wants a plain-English report, not a sales pitch
+
+Curious how it goes from a form to a finished report in two business days?
+
+03 / 08
+The Full Process
+
+Five steps from the form to the report in your inbox, and you can see each one.
+
+I
+Tell me your domain
+
+Your domain, your name, anything I should know. Under a minute.
+
+II
+I queue your scan
+
+You’re placed in the daily scan queue. No payment, no waiting-list game.
+
+III
+Scan runs
+
+Standard port scan, encrypted-connection check (TLS/SSL), email security records (SPF/DKIM/DMARC), certificate lookups, and known software vulnerability matching by version.
+
+IV
+Report delivered
+
+Hosted HTML report linked from an email to your inbox, within 2 business days.
+
+V
+You decide what’s next
+
+Fix it yourself, escalate to your host, or ask me for help. No pressure, no auto-renewal.
+
+And once it lands, what will you be looking at?
+
+04 / 08
+What's Inside the Report
+
+One report. Every finding is ranked, and every finding can be checked again.
+
+✓
+Services visible from the internet: what ports are open and what software is running on them
+✓
+Database exposure flags: any database port reachable from the public internet (a serious risk)
+✓
+Encrypted connection check: certificate validity, expiry, and protocol versions (TLS/SSL)
+✓
+Known software vulnerability matches: any published weakness in the software versions you're running
+✓
+Email security records: SPF, DKIM, DMARC, CAA (the records that stop hackers spoofing your domain)
+✓
+Host split: what you control vs what your hosting provider controls (so you know who needs to fix what)
+✓
+Severity ranking (Critical / High / Medium / Low / Info) with a plain-English remediation step per finding
+✓
+Verification command for every finding: run the same check yourself in 30 seconds
+
+Is it safe to let someone run this against your domain? Here is exactly what it does, and what it never does.
+
+05 / 08
+How the Check Works
+
+I only read what your server already tells the public internet, the same information anyone else can see. Nothing invasive, nothing touched.
+
+What I Check
+
+✓ Open ports and services (standard port scan)
+
+✓ Encrypted connection check (TLS/SSL)
+
+✓ Email security records + certificate lookups
+
+✓ Known software vulnerabilities, by version
+
+What I Never Do
+
+✗ Log in or try passwords
+
+✗ Attempt to break in
+
+✗ Overload your site
+
+✗ Access or extract your data
+
+Full methodology
+→
+
+Ready to see yours? It takes under a minute, and there is no card.
+
+06 / 08
+Request Your Free Scan
+
+Fill in the form and your report lands in your inbox within 2 business days, sent personally. Prefer to talk first? Message me instead.
+
+Your domain
+Your name
+Your email
+Anything I should know? (optional)
+
+By requesting a scan you consent to receive your report plus up to 3 related follow-ups over 6 months. Reply STOP to anything and you're suppressed forever. I never sell your data.
+
+REQUEST YOUR FREE SCAN
+Delivered within 2 business days.
+
+Prefer to talk? Message Kyle →
+
+Then what? Nothing, unless you want it to be something.
+
+07 / 08
+What Comes After the Scan
+
+Plenty of people use the free check to decide whether they need the Compliance engagement or an AI build, and plenty decide they need neither. Here is where each fits.
+
+Titanos Monitor
+
+If the check is clean today but you want to know when something changes, Monitor re-checks your business every month and emails you what’s new, plus a briefing on any privacy law updates relevant to your industry. AU$149/mo. Cancel in one click.
+
+See Monitor
+→
+Privacy Act Compliance
+
+If the check finds gaps and the 10 December 2026 privacy law deadline matters to you, the compliance engagement is the next step. One done-with-you call where I apply every change with you: privacy policy, email security, login security, the works.
+
+See the compliance pack
+→
+AI That Does Your Manual Work
+
+If the security check is clean and your real bottleneck is a manual task eating your team’s week, scope an AI build with me. Free call first, fixed-price quote, shipped working.
+
+See AI Implementation
+→
+08 / 08
+Questions I Get
+
+The ones people ask before they hit send, answered first.
+
+How long does the scan take?
++
+Your scan is queued the moment you submit. The report is delivered to your inbox within 2 business days. Most run faster than that. The SLA is just the worst-case promise.
+What if my domain is hosted on Squarespace / Webflow / GitHub Pages?
++
+The scan still works. I split findings into what you control vs what your hosting provider controls, so you don’t walk away with a list of things you can’t fix. Host-controlled findings come with the exact escalation language to send the provider.
+Is this a hacking attempt?
++
+No. I only read what the public internet can already see: service names and versions, certificate details, email security records. No login attempts. No break-in attempts. No overloading your site. No data access. It's passive and public-record only, and it only ever runs against a domain you've asked me to check. Full methodology at /methodology.
+Do you store my data?
++
+Scan results are kept in my database so I can track how exposure patterns change across AU businesses over time. Your email goes only into my contact list. Never sold, never shared with third parties. Suppressed forever if you reply remove.
+Would it be okay if I had a look at your domain?
+
+It is free, personally reviewed, and delivered within 2 business days. No card, no login. If you would rather not, a no is completely welcome.
+
+REQUEST YOUR FREE SCAN
+MESSAGE OR CALL KYLE
+
+Built with AI assistance. Every scan finding is reviewed and signed off by Kyle Deligny (ABN 34 318 502 254) before delivery. My ABN is on every page. The accountability is mine.
+
+Ω
+SIGNED OFF, NOT AUTOMATED AWAY
+Straight answers, before you ask
+Do you try to break in?
++
+No. It only reads what your domain already shows the public internet. No logins, no password guessing, nothing private. The method is published on the Methodology page.
+Is this safe?
++
+Yes, and here is how. Nothing we build goes live until it passes thousands of automated checks, like a pilot's pre-flight checklist, every single time. Anything important (money, legal, anything sent out, anything that cannot be undone) needs a person's tap first. Everything the system does is recorded.
+Will it replace my staff?
++
+No. Nobody gets replaced. Think power steering, not a self-driving car: you still drive, it takes the strain off your arms. Your people stay and get their hours back from the repetitive parts.
+How do you know it works?
++
+The industry-standard COCOMO model sizes the TITANOS build at about 24 engineers for about 31 months (MODELLED). One person built it in about 5 months, with 6,314 test cases guarding it. The method is shown in full on the Engineering page, so you can check it yourself.
+What does it cost?
++
+The first conversation and your report are free. After that the prices are published and you know yours before anything starts: Titanos Monitor AU$149/mo, the Privacy Act compliance pack AU$5,997, and AI retainers from AU$1,500/mo (3-month minimum). You pay for the result, not an open taxi meter.
+We already have an IT provider. Where does that leave them?
++
+Right beside you. This sits next to your IT provider, nothing goes live without passing the checks, and you keep control of every change. If it helps, I am happy to talk to them directly.
+What happens next?
++
+1. You message me. 2. We have a free half-hour where you tell me what is slowing you down. 3. I send you a free report on your business, so you can see what I see. 4. If you like it, you get a price before anything starts. If it is not for you, that is completely fine and the report is still yours.
+Start with a free consultation and a free report on your business
+
+I am Kyle, the founder of TITANOS. If you like me, you like the business and you like the offer, or we can shape it into something that works for you, would you be happy to start with a free half-hour? You leave with a clear picture of what you could do next and a report of your own. A no is welcome.
+
+Telegram @TitanOSofficial
+Email kyle@titanos.tech
+
+Kyle replies by email and Telegram within one business day.
+
+Or send a message first
+→
+TITANOS
+Kyle Deligny · Brisbane, Australia
+ABN 34 318 502 254
+Built without asking. Kept honest by what you can check.
+SERVICES
+Free consultation + report
+AI Partnership
+Monitor
+Compliance
+Leads & Intelligence
+Free Scan
+Find your offer
+All offers
+Sectors
+Courses
+PROOF
+60.6 engineer-years
+Methodology
+Black Ice doctrine
+Our scan
+Evidence pack
+How fast it was built
+Live HUD
+Free AI Readiness Guide (PDF)
+Blog
+Efficiency, measured
+How it works
+The learning loop
+Security and privacy
+FAQ
+The deep field
+Image credits
+COMPANY
+About
+Contact
+Message Kyle
+Privacy
+Terms
+I personally review every deliverable before it reaches you · titanos.tech
+
+Every symbol on this site means something. We do not explain them.
+
+Free consultation + report
