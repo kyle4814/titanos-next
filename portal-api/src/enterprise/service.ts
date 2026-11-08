@@ -7,6 +7,8 @@ import { ROLES, ROLE_RANK, type Asset, type Brand, type IdpVerifier, type Payout
 import { SsoError } from "./sso.ts";
 import { APPROVAL_ABOVE_CENTS, MIN_PAYOUT_CENTS, balanceCents, clawback, recordCommission, statement, type SelfDealCheck } from "./share.ts";
 import { grade, summarise } from "./estate.ts";
+import type { EstateCache } from "./estate_cache.ts";
+import type { RefreshLimiter } from "./estate_refresh.ts";
 import { sealSecret, openSecret, isSealed, SealError, type SealKeyring } from "./seal.ts";
 import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
@@ -17,6 +19,8 @@ export interface EntContext {
   store: EntStore; idp: IdpVerifier; payouts: PayoutProvider; scan: ScanProvider; rates: RateTable; internalSecret?: string; selfDeal?: SelfDealCheck;
   sealKeys?: SealKeyring;   // C8 f286: SSO client secrets are sealed with this keyring before any store write; absent = putSso answers 503, never plaintext
   payoutLookup?: TransferLookup;   // C8 f50: provider lookup for the resume sweep; absent = the sweep route answers 503
+  estateCache?: EstateCache;   // C8 f310: per-tenant TTL cache for the estate scan; absent = the bare provider (no caching)
+  refreshLimiter?: RefreshLimiter;   // C8 f310: limits refresh=1 per tenant; absent with a cache = refresh is refused (fail closed)
   approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
 const DAY = 86_400_000;
@@ -269,10 +273,18 @@ export type EstateRow = {
   findings: { critical: number; high: number; medium: number; low: number };
 };
 const NO_FINDINGS = () => ({ critical: 0, high: 0, medium: 0, low: 0 });
-export async function estate(d: Deps, tid: string) {
+export async function estate(d: Deps, tid: string, opts: { refresh?: boolean } = {}) {
   const c = ent(d), tenant = (await c.store.tenantById(tid))!;
+  // f310: one tenant-scoped provider per request. refresh=1 (within the limit) bypasses and repopulates; over the limit the
+  // cached view is served with stale=true and the resolver is never called.
+  let scan: ScanProvider = c.scan, stale = false, refreshed = false;
+  if (c.estateCache) {
+    if (opts.refresh && c.refreshLimiter && await c.refreshLimiter.allow(tid)) { scan = c.estateCache.forTenant(tid, { refresh: true }); refreshed = true; }
+    else if (opts.refresh) { scan = c.estateCache.forTenant(tid, { cacheOnly: true }); stale = true; }
+    else scan = c.estateCache.forTenant(tid);
+  }
   const assets = await c.store.assetsOf(tid);
-  const cap = Math.max(1, Math.floor(c.scan.concurrency ?? 25));
+  const cap = Math.max(1, Math.floor(scan.concurrency ?? 25));
   const rows: EstateRow[] = new Array(assets.length);
   let next = 0;
   const one = async (i: number) => {
@@ -280,24 +292,24 @@ export async function estate(d: Deps, tid: string) {
     const base = { id: a.id, domain: a.domain, label: a.label, group: a.group };
     if (!a.verifiedAt) { rows[i] = { ...base, verified: false, status: "NOT_VERIFIED", reason: null, grade: null, score: null, scannedAt: null, resolverSource: null, findings: NO_FINDINGS() }; return; }
     try {
-      if (c.scan.assess) {
-        const r = await c.scan.assess(a.domain);
+      if (scan.assess) {
+        const r = await scan.assess(a.domain);
         rows[i] = r.status === "ASSESSED"
           ? { ...base, verified: true, status: "ASSESSED", reason: null, grade: r.grade, score: r.score, scannedAt: r.scannedAt, resolverSource: r.resolverSource, findings: r.counts }
           : { ...base, verified: true, status: "UNKNOWN", reason: r.reason, grade: null, score: null, scannedAt: r.scannedAt, resolverSource: r.resolverSource, findings: NO_FINDINGS() };
       } else {
-        const f = await c.scan.scan(a.domain), s = summarise(f);
-        rows[i] = { ...base, verified: true, status: "ASSESSED", reason: null, grade: grade(s.score), score: s.score, scannedAt: d.now(), resolverSource: c.scan.source, findings: s.counts };
+        const f = await scan.scan(a.domain), s = summarise(f);
+        rows[i] = { ...base, verified: true, status: "ASSESSED", reason: null, grade: grade(s.score), score: s.score, scannedAt: d.now(), resolverSource: scan.source, findings: s.counts };
       }
-    } catch { rows[i] = { ...base, verified: true, status: "UNKNOWN", reason: "scan_error", grade: null, score: null, scannedAt: d.now(), resolverSource: c.scan.source, findings: NO_FINDINGS() }; }
+    } catch { rows[i] = { ...base, verified: true, status: "UNKNOWN", reason: "scan_error", grade: null, score: null, scannedAt: d.now(), resolverSource: scan.source, findings: NO_FINDINGS() }; }
   };
   await Promise.all(Array.from({ length: Math.min(cap, assets.length) }, async () => { while (next < assets.length) await one(next++); }));
   const verified = rows.filter((r) => r.verified), assessed = rows.filter((r) => r.status === "ASSESSED");
   const totals = { assets: rows.length, verified: verified.length, unverified: rows.length - verified.length, assessed: assessed.length, unknown: verified.length - assessed.length, critical: 0, high: 0, medium: 0, low: 0, averageScore: assessed.length ? Math.round(assessed.reduce((n, r) => n + (r.score ?? 0), 0) / assessed.length) : null as number | null };
   for (const r of assessed) { totals.critical += r.findings.critical; totals.high += r.findings.high; totals.medium += r.findings.medium; totals.low += r.findings.low; }
-  return { tenant: { id: tenant.id, name: tenant.name }, dataSource: c.scan.source, totals, assets: rows };
+  return { tenant: { id: tenant.id, name: tenant.name }, dataSource: scan.source, stale, refreshed, totals, assets: rows };
 }
-export async function estateView(d: Deps, ctx: Ctx, tid: string) { await access(d, ctx, tid, "viewer"); return estate(d, tid); }
+export async function estateView(d: Deps, ctx: Ctx, tid: string, refresh = false) { await access(d, ctx, tid, refresh ? "analyst" : "viewer"); return estate(d, tid, { refresh }); }
 // CSV with formula-injection neutralised: a cell starting = + - @ tab or CR is prefixed with an apostrophe.
 export const csvCell = (v: unknown) => {
   let s = String(v ?? "");
