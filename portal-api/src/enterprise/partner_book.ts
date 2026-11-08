@@ -11,15 +11,20 @@ import { ROLE_RANK, type LedgerEntry } from "./types.ts";
 import { sha256Hex } from "../util.ts";
 
 export type BookStatus = "active" | "pending" | "cancelled" | "refunded" | "closed" | "unknown";
-export interface BookFacts { domain: string | null; plan: string | null; status: BookStatus; lastRescanProofId: string | null }
-export interface BookFactsSource { factsFor(clientTenantId: string): Promise<BookFacts | undefined> }
+export interface BookFacts { domain: string | null; plan: string | null; status: BookStatus; lastRescanProofId: string | null; estateConsent?: boolean }
+// partnerId is passed so a production adapter can refuse a client that is not this partner's child (defence in depth: the book already filters).
+// factsForAccount resolves a REFERRAL's identity (domain, plan, status, proof); it must itself refuse an account not referred to this partner.
+export interface BookFactsSource { factsFor(clientTenantId: string, partnerId?: string): Promise<BookFacts | undefined>; factsForAccount?(accountId: string, partnerId: string): Promise<BookFacts | undefined> }
 export class MemoryBookFacts implements BookFactsSource {
   facts = new Map<string, BookFacts>();
   set(clientTenantId: string, f: Partial<BookFacts>) { this.facts.set(clientTenantId, { domain: null, plan: null, status: "active", lastRescanProofId: null, ...f }); }
+  byAccount = new Map<string, BookFacts>();
+  setAccount(accountId: string, f: Partial<BookFacts>) { this.byAccount.set(accountId, { domain: null, plan: null, status: "active", lastRescanProofId: null, ...f }); }
   async factsFor(id: string) { return this.facts.get(id); }
+  async factsForAccount(accountId: string) { return this.byAccount.get(accountId); }
 }
 
-export interface BookRow { clientId: string | null; kind: "tenant" | "referral"; label: string; domain: string | null; plan: string | null; status: BookStatus; shareCents: number; heldCents: number; lastRescanProofId: string | null }
+export interface BookRow { clientId: string | null; kind: "tenant" | "referral"; label: string; domain: string | null; plan: string | null; status: BookStatus; shareCents: number; heldCents: number; lastRescanProofId: string | null; identity: "attributed" | "unattributed"; estateConsent: boolean | null }
 export interface BookTotals { clients: number; accruedCents: number; commissionCents: number; clawbackCents: number; heldCents: number; unsourcedCents: number; paidOutCents: number }
 export interface BookPage { partnerId: string; rows: BookRow[]; totals: BookTotals; nextCursor: string | null; ledgerNote: string }
 export type BookResult = { status: 200; body: BookPage } | { status: 400; body: { error: "invalid_cursor" | "invalid_limit" } } | { status: 403; body: null };
@@ -75,6 +80,11 @@ export async function listPartnerBook(
 
   // 2) rows: every live child tenant (attributed by parentId) plus any source the ledger holds for this partner (deleted
   // clients and referrals keep their historic share). A tenant with neither a parent link nor ledger lines never appears.
+  const refHashes = new Map<string, string | null>();   // sha256(accountId)[0..10] -> accountId; null = ambiguous (two accounts share the hash)
+  for (const r of (await store.referralsOfPartner(partner.id)).filter((x) => x.partnerId === partner.id)) {
+    const h = (await sha256Hex(r.accountId)).slice(0, 10);
+    refHashes.set(h, refHashes.has(h) ? null : r.accountId);
+  }
   const keys = new Set<string>(bySource.keys());
   const tenantOf = new Map<string, (typeof children)[number]>();
   for (const c of children) { keys.add(`tenant:${c.id}`); tenantOf.set(`tenant:${c.id}`, c); }
@@ -90,12 +100,18 @@ export async function listPartnerBook(
       let t = tenantOf.get(key);
       if (!t) { const found = await store.tenantById(tid); t = found && found.parentId === partner.id && found.kind === "client" ? found : undefined; }   // a deleted client with history
       if (!t) continue;   // ledger line pointing at a tenant that is not this partner's child: never shown (and never counted in a row)
-      const f = await facts.factsFor(t.id);
+      const f = await facts.factsFor(t.id, partner.id);
       const fullyRefunded = comm > 0 && comm + claw <= 0;
       row = { clientId: t.id, kind: "tenant", label: t.name, domain: f?.domain ?? null, plan: f?.plan ?? null,
-        status: t.deletedAt ? "closed" : fullyRefunded ? "refunded" : f?.status ?? "unknown", shareCents: comm + claw, heldCents: heldC, lastRescanProofId: f?.lastRescanProofId ?? null };
+        status: t.deletedAt ? "closed" : fullyRefunded ? "refunded" : f?.status ?? "unknown", shareCents: comm + claw, heldCents: heldC, lastRescanProofId: f?.lastRescanProofId ?? null, identity: "attributed", estateConsent: f?.estateConsent ?? null };
     } else {
-      row = { clientId: null, kind: "referral", label: lines[0]?.sourceLabel ?? "Referral", domain: null, plan: null, status: comm > 0 && comm + claw <= 0 ? "refunded" : "active", shareCents: comm + claw, heldCents: heldC, lastRescanProofId: null };
+      // f313: referral identity by HASH LOOKUP through THIS partner's own referral rows (refHashes is built per call from referralsOfPartner(partner.id);
+      // there is no global hash-to-account index). A hash with no row, or two rows (a collision), is "unattributed", never a guess.
+      const acct = refHashes.get(key.slice(4)) ?? undefined;
+      const f = acct && facts.factsForAccount ? await facts.factsForAccount(acct, partner.id) : undefined;
+      const known = !!acct;   // attributed = this partner's own referral row owns the hash; the facts may still be thin (f undefined)
+      row = { clientId: null, kind: "referral", label: known ? "Referral" : "Unattributed", domain: f?.domain ?? null, plan: f?.plan ?? null,
+        status: comm > 0 && comm + claw <= 0 ? "refunded" : f?.status ?? "active", shareCents: comm + claw, heldCents: heldC, lastRescanProofId: f?.lastRescanProofId ?? null, identity: known ? "attributed" : "unattributed", estateConsent: null };
     }
     rows.push({ key, row });
   }
