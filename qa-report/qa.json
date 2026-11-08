@@ -1,0 +1,328 @@
+{
+ "routes": 12,
+ "firstLoadJsGzKB": 211.6,
+ "brokenLinks": [],
+ "results": [
+  {
+   "route": "/",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 664,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0073,
+     "lcp": 1052,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1316,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/about",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0011,
+     "lcp": 1532,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 636,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1268,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/case-studies",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.002,
+     "lcp": 388,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 708,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1332,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/contact",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0014,
+     "lcp": 1692,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 992,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 636,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/costs",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0013,
+     "lcp": 1532,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 744,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1004,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/enterprise",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0019,
+     "lcp": 744,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 748,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1484,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/faq",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0018,
+     "lcp": 1472,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1552,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/offers",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0014,
+     "lcp": 1712,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1012,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1236,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/products",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0022,
+     "lcp": 1452,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/proof",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0016,
+     "lcp": 492,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 484,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 932,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/refer",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0.0007,
+     "lcp": 440,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0,
+     "lcp": 548,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [
+      "requestfailed: https://vault.titanos.tech/partner",
+      "Framing 'https://vault.titanos.tech/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://titanos.tech\". The request has b"
+     ],
+     "cls": 0,
+     "lcp": 0,
+     "overflow": 0
+    }
+   }
+  },
+  {
+   "route": "/scan",
+   "widths": {
+    "390": {
+     "stub": false,
+     "errors": [],
+     "cls": 0.0005,
+     "lcp": 996,
+     "overflow": 0
+    },
+    "768": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1660,
+     "overflow": 0
+    },
+    "1440": {
+     "stub": false,
+     "errors": [],
+     "cls": 0,
+     "lcp": 1004,
+     "overflow": 0
+    }
+   }
+  }
+ ]
+}
