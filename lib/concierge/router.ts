@@ -1,11 +1,15 @@
 // C6 concierge router. Code-only, seat-aware, 0 model calls: no fetch, no model SDK, no clock, no random.
 import type { Reply, Seat, Shelf, Tap, ConfigStub } from "./types.ts";
 import { tokens, normalise, findDomain } from "./text.ts";
+import { junkCheck } from "./guard.ts";
+import { OFFTOPIC_CUES } from "./offtopic.ts";
 
 export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: unmatched
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
 export const MAX_UNKNOWN = 0.5;     // half or more of the asker's content words unknown to the catalogue: we do not pretend
+export const CONF_FLOOR = 7.0;         // F-C6: a match with no keyword hit must clear this; measured: lowest correct no-hit match 7.22 on the 269 labelled asks
 const HOME_BOOST = 1.25;
+export const OFFER_NOHIT = 0.9;      // F-65: tuned on lib/concierge/dev.tsv (synthetic), never on holdout.tsv
 const HIT_IDF = 1.2;               // a lone keyword counts as a deliberate hit only if it is selective
 
 type Doc = { shelf: Shelf; kw: string[][]; title: Set<string>; text: Set<string>; len: number };
@@ -72,6 +76,8 @@ function score(index: Index, q: string[], d: Doc, seat: Seat): { s: number; hit:
   const tt = [...d.title];
   if (tt.length >= 2 && tt.every((t) => qset.has(t))) s += 4;
   if (d.shelf.home.includes(seat)) s *= HOME_BOOST;
+  // F-65 wrong-shelf cause: a long offer blurb must not beat a portal page on vocabulary alone. An offer with no keyword hit is discounted.
+  if (d.shelf.kind === "offer" && !hit) s *= OFFER_NOHIT;
   return { s, hit, phrase };
 }
 
@@ -86,8 +92,9 @@ const tap = (s: Shelf): Tap => ({ label: s.title, shelfId: s.id, href: s.href })
 
 export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
   const raw = String(ask ?? "").slice(0, 500);      // bound the work
-  const q = tokens(raw);
+  if (junkCheck(raw).junk) return unmatched(raw, seat, "junk");   // F-C6: markup, SQL and prompt-injection shapes never reach an offer
   const domain = findDomain(raw);
+  const q = tokens(domain ? raw.toLowerCase().replace(domain, " ") : raw);   // F-65: a domain's labels are not words (shop.example.com.au must not hit the Shop page)
   const ranked = index.docs.filter((d) => !d.shelf.only || d.shelf.only.includes(seat)).map((d) => { const r = score(index, q, d, seat); return { d, s: r.s, hit: r.hit, phrase: r.phrase }; }).sort((a, b) => b.s - a.s || (a.d.shelf.id < b.d.shelf.id ? -1 : 1));
   const top = ranked[0];
   // A domain with no strong signal is a scan request: the scan box is the front door.
@@ -95,7 +102,10 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
     const scan = index.docs.find((d) => d.shelf.id === "portal:scan");
     if (scan) return { kind: "match", shelf: scan.shelf, score: 99, margin: 1, answer: scan.shelf.answer, slots: { domain }, alternatives: [] };
   }
-  if (!top || top.s < MIN_SCORE || (!top.hit && unknownShare(index, q) >= MAX_UNKNOWN)) return unmatched(raw, seat);
+  if (!top || top.s < MIN_SCORE || (!top.hit && (top.s < CONF_FLOOR || unknownShare(index, q) >= MAX_UNKNOWN))) return unmatched(raw, seat, "no_match");
+  // F-66 off-topic guard (deterministic, 0 model calls): an ask that names something other than this business (offtopic.ts: other companies, everyday life; never a word any shelf uses)
+  // stays unmatched unless a keyword PHRASE of the top shelf is in it. One generic keyword ("price", "cancel", "contact", "status") is not enough to claim the ask.
+  if (!top.phrase && q.some((t) => OFFTOPIC_CUES.has(t))) return unmatched(raw, seat, "no_match");
   const second = ranked[1];
   const margin = second && top.s > 0 ? (top.s - second.s) / top.s : 1;
   if (second && margin < ASK_MARGIN && second.s >= MIN_SCORE) {
@@ -107,20 +117,29 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
   return { kind: "match", seatNote, shelf: top.d.shelf, score: top.s, margin, answer: top.d.shelf.answer, slots, alternatives: ranked.slice(1, 3).filter((r) => r.s >= MIN_SCORE).map((r) => tap(r.d.shelf)) };
 }
 
-function unmatched(raw: string, seat: Seat): Reply {
-  const stub: ConfigStub = { ask: raw, normalised: normalise(raw), seat, status: "LOGGED_FOR_GENERATOR", quote: null };
-  return { kind: "unmatched", message: "I do not have that on a shelf yet. I have logged it, and you will get a quote after review. You can also reach a person.", configStub: stub };
+export const MSG_NOT_SAVED = "I do not have that on a shelf yet. This ask was not saved, so please use the contact page to reach a person.";
+export const MSG_SAVED = "I do not have that on a shelf yet. I have saved your ask for review, and you will get a quote after review. You can also reach a person.";
+export const MSG_JUNK = "I could not read that as a question, so I have not matched it to anything or saved it. Try a few plain words about what you need. You can also reach a person.";
+
+// route() is pure: it never writes anywhere, so an unmatched reply from it can only say "not saved".
+function unmatched(raw: string, seat: Seat, reason: "no_match" | "junk"): Reply {
+  const stub: ConfigStub = reason === "junk" ? { ask: "", normalised: "", seat, status: "LOGGED_FOR_GENERATOR", quote: null } : { ask: raw, normalised: normalise(raw), seat, status: "LOGGED_FOR_GENERATOR", quote: null };
+  return { kind: "unmatched", message: reason === "junk" ? MSG_JUNK : MSG_NOT_SAVED, configStub: stub, reason, saved: false };
 }
 
 // Unmatched asks are logged through an interface so a Worker/D1 adapter can replace the in-memory one.
-export interface UnmatchedLog { append(stub: ConfigStub): void | Promise<void> }
-export class MemoryLog implements UnmatchedLog { rows: ConfigStub[] = []; append(s: ConfigStub) { this.rows.push(s); } }
+// A write counts as saved only if append neither throws nor returns false, and the adapter does not declare itself non-durable.
+export interface UnmatchedLog { append(stub: ConfigStub): void | boolean | Promise<void | boolean>; readonly durable?: boolean }
+export class MemoryLog implements UnmatchedLog { rows: ConfigStub[] = []; readonly durable = false; append(s: ConfigStub) { this.rows.push(s); } }
+export class NoopLog implements UnmatchedLog { readonly durable = false; append(_s: ConfigStub): boolean { return false; } }
 
 export function concierge(index: Index, log: UnmatchedLog) {
-  return (ask: string, seat: Seat = "guest"): Reply => {
+  return async (ask: string, seat: Seat = "guest"): Promise<Reply> => {
     const r = route(index, ask, seat);
-    if (r.kind === "unmatched") void log.append(r.configStub);
-    return r;
+    if (r.kind !== "unmatched" || r.reason === "junk") return r;     // junk is never logged: it would poison the generator queue
+    let ok = false;
+    try { const res = await log.append(r.configStub); ok = log.durable !== false && res !== false; } catch { ok = false; }
+    return ok ? { ...r, saved: true, message: MSG_SAVED } : r;
   };
 }
 
