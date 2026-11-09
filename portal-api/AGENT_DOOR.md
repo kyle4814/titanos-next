@@ -13,3 +13,6 @@ Code: `src/agent/` (tools, mcp, credits, receipt, files). Tests: `test/agent.tes
 
 ## Ten-agent kill-test harness (C7)
 `node --experimental-strip-types scripts/agents10.ts` runs 10 independent synthetic agents (own account, key and client identity) against the in-process handler: agent card + llms.txt discovery, MCP initialize and tools/list, one `domain_check` call with an Idempotency-Key, receipt signature verified offline, same-key replay (same receipt, no second charge). Prints a JSON scorecard. Tests: `test/agents10.test.ts` (tamper, unscoped key, no credits, wrong secret, cross-agent idempotency mutants). Live use is refused unless `AGENTS10_LIVE_OK=1` and is a gated action (needs a deployed Worker and D1).
+
+## D1 persistence (F58)
+`src/agent/d1agent.ts` (D1AgentStore) persists api_keys, agent_receipts, credit_ledger, credit_orders, agent_calls, plus the F17 idempotency reserve and the F19 per-key spend cap, each as one atomic statement. Migration 0023_agent_d1 (renumbered from 0006 on int3; written, NOT applied, GATE5): key caps, ledger `key_id`, append-only triggers, `idem_reservations`. `account_id` is the tenant key. Run the same suite on both stores: `npm test` (memory) and `npm run test:d1agent` (agent door on a fake D1 over real SQLite). `test/fake_d1.ts` applies every migration in order.
