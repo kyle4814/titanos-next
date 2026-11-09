@@ -5,6 +5,8 @@ import type { GradedShelf, Check } from "./types";
 import type { DrainEntry, DrainQueue, DrainResult } from "./drain";
 import type { D1Port } from "./drain_d1";
 import { runFromGraded, promoteDrained, assertCatalogueAllGraded, MemoryGraderPort } from "./publish_gate.ts";
+import { planRetractions, assertRetractionCap, applyRetractions, renderCatalogueFiles } from "./retraction.ts";
+import type { Retraction, RetractPolicy } from "./retraction.ts";
 import type { Catalogue, DrainedShelf, GradeRun, Held, CatalogueEntry } from "./publish_gate.ts";
 
 export type StoredGraded = { cluster_id: string; label: string; content_hash: string; pass: boolean; checks: Check[]; shelf: GradedShelf; graded_at: string };
@@ -85,8 +87,14 @@ export async function persistDrained(queue: DrainQueue, store: GradedRunStore, r
   return saved;
 }
 
-export type BuildOpts = { base?: Catalogue; expectIds?: string[]; strict?: boolean };
-export type BuildResult = { catalogue: Catalogue; published: CatalogueEntry[]; held: Held[] };
+// retract: when given, entries that fail the retraction policy are removed and listed (now is injected, there is no clock here).
+export type BuildOpts = { base?: Catalogue; expectIds?: string[]; strict?: boolean; retract?: RetractPolicy & { now: string } };
+export type BuildResult = { catalogue: Catalogue; published: CatalogueEntry[]; held: Held[]; retractions: Retraction[]; files: { "shelf_catalogue.json": string; "retractions.json": string } | null };
+export type Offender = { cluster_id: string; reason: string };
+export class BuildBlockedError extends Error {
+  readonly offenders: Offender[];
+  constructor(message: string, offenders: Offender[]) { super(message); this.name = "BuildBlockedError"; this.offenders = offenders; }
+}
 // Integrity holds (no run, stale hash, partial, malformed) block the build. A shelf that was honestly graded and FAILED is just held.
 const FAIL_ONLY = /^(failed checks|grader run not marked pass)/;
 // The build step: stored runs -> promoteDrained -> assertCatalogueAllGraded. Throws on ANY ungraded shelf (never builds around it).
@@ -104,7 +112,19 @@ export async function buildCatalogueFromStore(store: GradedRunStore, opts: Build
   const res = promoteDrained(opts.base ?? { entries: [] }, drained.filter((d) => d.shelf), new MemoryGraderPort(runs));
   for (const s of stored) if (!s.shelf) bad.push(s.cluster_id + ": ungraded: stored shelf unreadable");
   for (const h of res.held) if (opts.strict || !FAIL_ONLY.test(h.reason)) bad.push(h.cluster_id + ": " + h.reason);
-  if (bad.length) throw new Error(`graded store: ${bad.length} ungraded shelf(s) block the build: ` + bad.join("; "));
-  assertCatalogueAllGraded(res.catalogue);
-  return { catalogue: res.catalogue, published: res.published, held: res.held };
+  if (bad.length) {
+    const offenders = bad.map((b) => { const i = b.indexOf(": "); return { cluster_id: b.slice(0, i), reason: b.slice(i + 2) }; });
+    throw new BuildBlockedError(`graded store: ${bad.length} ungraded shelf(s) block the build: ` + bad.join("; "), offenders);
+  }
+  let catalogue = res.catalogue;
+  let retractions: Retraction[] = [];
+  if (opts.retract) {
+    retractions = planRetractions(stored, opts.retract.now, opts.retract, catalogue);
+    assertRetractionCap(retractions.length, catalogue.entries.length, opts.retract);
+    catalogue = applyRetractions(catalogue, retractions);
+  }
+  assertCatalogueAllGraded(catalogue);
+  const published = res.published.filter((p) => catalogue.entries.some((e) => e.cluster_id === p.cluster_id));
+  const files = opts.retract ? renderCatalogueFiles(catalogue, retractions, opts.retract.now, opts.retract) : null;
+  return { catalogue, published, held: res.held, retractions, files };
 }

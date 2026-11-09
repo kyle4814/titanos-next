@@ -52,23 +52,24 @@ t("B3 stale shelf blocked", r.code === 1 && /OFFENDER b: stale grade/.test(r.std
 b = batchOf(["a", "x1", "x2", "x3"]); delete b.runs.x1; b.shelves[2].shelf.name = "edited"; b.shelves[3].label = "";
 r = cli(b, "b4.json");
 t("B4 all three offenders listed", ["x1", "x2", "x3"].every((id) => new RegExp("OFFENDER " + id + ":").test(r.stderr)) && r.code === 1, r.stderr);
-t("B4 summary count", /3 shelf\(s\) held/.test(r.stderr));
+t("B4 summary count", /\(blocked\).*3 ungraded shelf/.test(r.stderr));
 // B5 a failing shelf (synthetic:true) is held and named.
 b = batchOf(["a", "bad"]); b.shelves[1].shelf.synthetic = true; b.runs.bad = runFromGraded(gradeAll([b.shelves[1].shelf])[0]);
 r = cli(b, "b5.json");
-t("B5 failing shelf blocks the build", r.code === 1 && /OFFENDER bad: failed checks/.test(r.stderr), r.stderr);
+// f317: an honestly graded FAIL is held (named on stdout), never published, and is not a build failure; if it was live it is retracted (see test_catalogue_build_entry).
+t("B5 failing shelf is held, not published, build exits 0", r.code === 0 && /HELD bad: failed checks/.test(r.stdout) && JSON.parse(r.text).entries.map((e) => e.cluster_id).join() === "a", r.stdout + r.stderr);
 // B6 tampered EXISTING catalogue on disk: the assert catches it even with an empty drain.
 r = cli(batchOf(["a", "b"]), "b6.json");
 const tampered = JSON.parse(r.text); tampered.entries[0].shelf.name = "tampered after publish"; writeFileSync(r.out, JSON.stringify(tampered));
 const before = readFileSync(r.out, "utf8");
 const r6 = cli({ shelves: [], runs: {} }, "b6.json");
-t("B6 tampered existing entry fails the build", r6.code === 1 && /ASSERT catalogue has 1 ungraded/.test(r6.stderr) && r6.stderr.includes("a: hash mismatch"), r6.stderr);
+t("B6 tampered existing entry (1 of 2 live) trips the retraction cap, exit 2", r6.code === 2 && /\(cap\): retraction cap: 1 of 2/.test(r6.stderr), r6.stderr);
 t("B6 file left as it was", readFileSync(r.out, "utf8") === before);
 // B7 idempotent rerun: byte identical, and unchanged count reported.
 b = batchOf(["a", "b", "c"]);
 const r7a = cli(b, "b7.json"), r7b = cli(b, "b7.json");
 t("B7 rerun exit 0 and byte-identical", r7a.code === 0 && r7b.code === 0 && r7a.text === r7b.text && r7a.text.length > 100);
-t("B7 rerun reports 0 new, 3 unchanged", /0 new, 3 unchanged/.test(r7b.stdout), r7b.stdout);
+t("B7 rerun reports 0 new, 0 retracted", /0 new, 0 retracted/.test(r7b.stdout), r7b.stdout);
 // B8 deterministic regardless of input order and of key order.
 const rev = { shelves: [...b.shelves].reverse().map((s) => ({ label: s.label, shelf: Object.fromEntries(Object.entries(s.shelf).reverse()), cluster_id: s.cluster_id })), runs: b.runs };
 const r8 = cli(rev, "b8.json");
@@ -84,12 +85,16 @@ t("B10 unreadable source exits 1 and writes nothing", r10.status === 1 && !exist
 const r11a = cli(batchOf(["a"]), "b11.json");
 const edited = batchOf(["a"], { name: "Synthetic a pack, v2" });
 const r11b = cli(edited, "b11.json");
-t("B11 edited and re-graded shelf replaces the entry", r11b.code === 0 && /1 new, 0 unchanged/.test(r11b.stdout) && JSON.parse(r11b.text).entries[0].shelf.name.endsWith("v2"), r11b.stdout + r11b.stderr);
+t("B11 edited and re-graded shelf replaces the entry", r11b.code === 0 && /1 new, 0 retracted/.test(r11b.stdout) && JSON.parse(r11b.text).entries[0].shelf.name.endsWith("v2"), r11b.stdout + r11b.stderr);
 
 // L1 library: formatFailure lists every id.
 const lb = batchOf(["p", "q"]); delete lb.runs.p; delete lb.runs.q;
 const lres = await buildCatalogue(new MemoryDrainedStore(lb));
 t("L1 library fails and lists both", !lres.ok && formatFailure(lres).includes("OFFENDER p:") && formatFailure(lres).includes("OFFENDER q:"));
+// L2 library: a tampered existing catalogue fails through the assert even with an empty drain.
+{ const okb = await buildCatalogue(new MemoryDrainedStore(batchOf(["a", "b"]))); const tam = structuredClone(okb.catalogue); tam.entries[0].shelf.name = "tampered";
+  const l2 = await buildCatalogue(new MemoryDrainedStore(), tam);
+  t("L2 library: tampered existing entry fails via the assert", !l2.ok && /catalogue has 1 ungraded/.test(l2.assertError ?? "") && (l2.assertError ?? "").includes("a: hash mismatch"), JSON.stringify(l2)); }
 t("L1b store input not mutated by build", JSON.stringify(lb) === JSON.stringify((await new MemoryDrainedStore(lb).load())));
 
 // D1 round trip over a fake D1.
