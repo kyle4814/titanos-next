@@ -52,7 +52,7 @@ export class D1PlanStore extends MemoryStore {
   override async purchasesFor(id: string) { return (await this.many("SELECT * FROM purchases WHERE account_id = ? ORDER BY rowid", id)).map(toPurchase); }
   async allPurchases() { return (await this.many("SELECT * FROM purchases ORDER BY rowid")).map(toPurchase); }
   override async putSubscription(s: Subscription) {
-    await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json",
+    await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET version = subscriptions.version + 1, account_id = excluded.account_id, purchase_id = excluded.purchase_id, product_id = excluded.product_id, started_at = excluded.started_at, cancel_at = excluded.cancel_at, cancelled_at = excluded.cancelled_at, plan_json = excluded.plan_json",
       s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan));
   }
   // f237. ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (a subscription for this purchase, or this id); changes === 1 means THIS call wrote the row.
@@ -74,7 +74,19 @@ export class D1PlanStore extends MemoryStore {
     if (ids.length === 0) return [];
     return (await this.many(`SELECT * FROM purchases p WHERE p.status = 'paid' AND p.paid_at IS NOT NULL AND ? >= p.paid_at AND p.product_id IN (${ids.map(() => "?").join(",")}) AND NOT EXISTS (SELECT 1 FROM subscriptions s WHERE s.purchase_id = p.id) ORDER BY p.paid_at, p.id`, cutoff, ...ids)).map(toPurchase);
   }
+  override async createSubscription(s: Subscription) {
+    const r = (await this.exec("INSERT INTO subscriptions (id, account_id, purchase_id, product_id, started_at, cancel_at, cancelled_at, plan_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
+      s.id, s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan))) as { meta?: { changes?: number } };
+    return Number(r?.meta?.changes ?? 0) === 1;
+  }
   override async subscriptionById(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && toSub(r); }
+  override async subscriptionVersioned(id: string) { const r = await this.one("SELECT * FROM subscriptions WHERE id = ?", id); return r && { sub: toSub(r), version: Number(r.version) }; }
+  // Compare-and-set (f175): ONE statement, so the check and the write cannot be separated by another writer. 0 rows changed = lost the race.
+  override async casSubscription(s: Subscription, expectedVersion: number) {
+    const r = (await this.exec("UPDATE subscriptions SET account_id = ?, purchase_id = ?, product_id = ?, started_at = ?, cancel_at = ?, cancelled_at = ?, plan_json = ?, version = version + 1 WHERE id = ? AND version = ?",
+      s.accountId, s.purchaseId, s.productId, s.startedAt, n(s.cancelAt), n(s.cancelledAt), s.plan === undefined ? null : JSON.stringify(s.plan), s.id, expectedVersion)) as { meta?: { changes?: number } };
+    return Number(r?.meta?.changes ?? 0) === 1;
+  }
   override async subscriptionsFor(id: string) { return (await this.many("SELECT * FROM subscriptions WHERE account_id = ? ORDER BY rowid", id)).map(toSub); }
   // Invoices (f192, migration 0005). Upsert on id; the UNIQUE number and the partial UNIQUE (purchase_id, stripe_event_id) make D1 throw where MemoryStore throws.
   override async putInvoice(i: Invoice) {

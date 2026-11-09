@@ -191,7 +191,7 @@ const MUT: { id: string; inv: string; edits: [string, string, string][] }[] = [
   { id: "M4 replay re-applied (same start advances again)", inv: "S4", edits: [["plan_change.ts", "if (cur && p.start === cur.start) return { state: s, applied: \"same\" };", ""], ["plan_change.ts", "return { state: { ...advance(s, p.start), periodNow", "return { state: { ...s, billedPeriods: s.billedPeriods + 1, periodNow"]] },
   { id: "M5 stale period rewinds", inv: "S5", edits: [["plan_change.ts", "if (cur && p.start < cur.start) return { state: s, applied: \"stale\" };", ""]] },
   { id: "M6 any held fact cancels", inv: "S5", edits: [["service.ts", "cancel = facts.some((f) => f.kind === \"cancel\");", "cancel = facts.length > 0;"]] },
-  { id: "M7 a cycle invoice may define the start", inv: "S7", edits: [["service.ts", "if (!create) { await d.store.holdFact", "if (false as boolean) { await d.store.holdFact"]] },
+  { id: "M7 a cycle invoice may define the start", inv: "S7", edits: [["service.ts", "if (!create) { const f =", "if (false as boolean) { const f ="]] },
   { id: "M8 off-grid period applied", inv: "S8", edits: [["plan_change.ts", "if (boundary(s, k) !== p.start) return { state: s, applied: \"offgrid\" };", ""]] },
   { id: "M9 invalid period accepted", inv: "S8", edits: [["plan_change.ts", "if (!okSec(startSec) || !okSec(endSec) || startSec >= endSec) return undefined;", ""]] },
 ];
