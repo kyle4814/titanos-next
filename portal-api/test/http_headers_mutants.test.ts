@@ -10,13 +10,12 @@ import { spawnSync } from "node:child_process";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = join(ROOT, "..");
 
-// scratch root mirrors the repo layout: <root>/portal-api and <root>/lib/guestscan (the Worker imports ../../lib)
+// scratch root mirrors the repo layout: <root>/portal-api and <root>/lib (the Worker imports ../../lib)
 function scratch(): { root: string; dir: string } {
   const root = mkdtempSync(join(tmpdir(), "f86-"));
   const dir = join(root, "portal-api");
   cpSync(ROOT, dir, { recursive: true, filter: (s) => !s.includes("node_modules") });
-  cpSync(join(SITE, "lib", "guestscan"), join(root, "lib", "guestscan"), { recursive: true });
-  cpSync(join(SITE, "lib", "modelhosts.ts"), join(root, "lib", "modelhosts.ts")); // lib/guestscan/meter.ts imports it
+  cpSync(join(SITE, "lib"), join(root, "lib"), { recursive: true }); // whole lib/: guestscan/meter.ts, modelhosts.ts and shop/drain_grade_tick.ts (via drain_tick_worker) are imported by the Worker
   return { root, dir };
 }
 

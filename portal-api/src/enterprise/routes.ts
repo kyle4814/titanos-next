@@ -1,6 +1,6 @@
 import { HttpError, authenticate, type Deps } from "../service.ts";
 import * as s from "./service.ts";
-import { json, text } from "../http.ts";
+import { json, text, empty } from "../http.ts";
 
 async function body(req: Request): Promise<Record<string, unknown>> {
   const t = await req.text();
@@ -49,7 +49,7 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   if (path === "/partner/book" && m === "GET") {   // C8 f311: the partner's book of clients; a seat that is not the caller's answers an EMPTY 403
     const u = new URL(req.url).searchParams;
     const r = await s.partnerBook(d, ctx, { partnerId: u.get("partnerId"), limit: u.get("limit"), cursor: u.get("cursor") });
-    return r.body === null ? new Response(null, { status: r.status, headers: { "cache-control": "no-store", "x-content-type-options": "nosniff" } }) : json(r.body, r.status);
+    return r.body === null ? empty(r.status) : json(r.body, r.status);
   }
 
   if (top === "enterprise" && seg.length >= 2) {
