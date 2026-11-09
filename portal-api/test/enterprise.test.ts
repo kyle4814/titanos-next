@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { makeEnt, INTERNAL, SSO_CFG } from "./ent_harness.ts";
+import { makeEnt, INTERNAL, SSO_CFG, raw } from "./ent_harness.ts";
 import { commissionCents, rateFor, HOLD_DAYS, APPROVAL_ABOVE_CENTS } from "../src/enterprise/share.ts";
 import { csvCell } from "../src/enterprise/service.ts";
 import { PRODUCTS } from "../src/catalogue.ts";
@@ -196,7 +196,8 @@ test("sso: unknown slug and unconfigured tenant look the same; an open-state cap
   const { h: h2 } = await ssoWorld();
   let last = 0;
   for (let i = 0; i < 205; i++) last = (await h2.req("POST", "/sso/bigco/start")).status;
-  assert.equal(last, 429);
+  assert.equal(last, 200, "f358: a flooding source recycles its own oldest state instead of being refused");
+  assert.ok((await (h2.deps.ent as any).store.openSsoStates((await (h2.deps.ent as any).store.tenantBySlug("bigco")).id, h2.clock.t)) <= 20, "the flood is held at the per-source sub-cap");
 });
 test("sso: enforcement needs a proven SSO login first, then locks out non-SSO sessions of that tenant", async () => {
   const { h, o, tid, cfg } = await ssoWorld();
@@ -500,7 +501,7 @@ test("F1: SSO trust cannot outlive the domain proof (asset removed, then verifie
 test("F1b: even with a stale allow-list entry, a login needs a currently verified asset for the email domain", async () => {
   const { h, tid, cfg } = await ssoWorld();
   const st = (h.deps.ent as any).store;
-  for (const a of [...st.assets.values()]) if (a.tenantId === tid) delete a.verifiedAt;   // proof lost behind the service's back
+  raw.unverifyAssets(st, tid);   // proof lost behind the service's back
   assert.equal((await h.ssoLogin("bigco", cfg, "a@bigco.com.au")).res.status, 403);
 });
 test("F2: a removed or demoted admin's pending invites die with them; invites can be revoked; an invite from a no-longer-admin inviter is refused", async () => {
@@ -566,11 +567,12 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   const start = (ip: string) => h.deps && (async () => (await (await import("../src/index.ts")).handle(new Request("https://api.test/sso/bigco/start", { method: "POST", headers: { "cf-connecting-ip": ip } }), {}, h.deps)).status)();
   let last = 0;
   for (let i = 0; i < 25; i++) last = await start("203.0.113.9");
-  assert.equal(last, 429, "the noisy client is capped");
+  assert.equal(last, 200, "f358: the noisy client recycles its own oldest state");
+  assert.equal(raw.stateCount((h.deps.ent as any).store), 20, "the noisy client is held at its sub-cap");
   assert.equal(await start("198.51.100.4"), 200, "everyone else still gets in");
   h.clock.t += 11 * 60_000;
   assert.equal(await start("203.0.113.9"), 200, "expired states no longer count");
-  assert.ok((h.deps.ent as any).store.states.size <= 2, "expired states were purged");
+  assert.ok(raw.stateCount((h.deps.ent as any).store) <= 2, "expired states were purged");
   // break-glass
   const inv = await h.post(o.session, `/enterprise/${tid}/members`, { email: "root@bigco.com.au", role: "admin" });
   const s1 = await h.ssoLogin("bigco", cfg, "root@bigco.com.au");

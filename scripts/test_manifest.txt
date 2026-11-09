@@ -134,3 +134,7 @@ node scripts/test_leads_ui.mjs
 F244_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_portal_refund_pending.mjs
 node scripts/test_alias_loader.mjs
 ALIAS_LOADER_MUTANTS=1 node scripts/test_alias_loader.mjs
+F244_MUTANTS=1 node scripts/test_portal_refund_pending.mjs
+node scripts/test_xtenant_route_matrix.mjs
+node scripts/mutate_sso_cap.mjs
+node scripts/mutate_sso_cap_d1.mjs

@@ -276,7 +276,7 @@ function snapshot(w, victims) {
   for (const [sn, s] of stores) {
     if (!s) continue;
     for (const name of Object.keys(s).sort()) {
-      if (sn === "ent" && name === "states") continue; // DOCUMENTED EXEMPTION: POST /sso/:slug/start is public by design and writes one capped, 10-minute, data-free state row per call (see observations.ssoStartCap)
+      if (sn === "ent" && name === "states") continue; // DOCUMENTED EXEMPTION: POST /sso/:slug/start is public by design and writes one capped, 10-minute, data-free state row per call (see observations.ssoStartCap; f358: per-source sub-cap + newcomer reserve, legitUserBlocked must be false)
       const v = s[name];
       let rows = v instanceof Map ? [...v.values()] : v instanceof Set ? [...v] : Array.isArray(v) ? v : (v && typeof v === "object" && !(v instanceof Date) && typeof v !== "function") ? [v] : [];
       if (v && typeof v === "object" && !(v instanceof Map) && !(v instanceof Set) && !Array.isArray(v)) rows = v instanceof Map ? rows : (v.constructor === Object ? Object.values(v).flat?.() ?? [] : []);

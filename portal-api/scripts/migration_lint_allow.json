@@ -38,10 +38,6 @@
    "reason": "Derived: PayoutStatus plus card-only approved/denied outcomes, intentionally wider than payouts.status; PayoutStatus is pair-checked."
   },
   {
-   "key": "src/enterprise/payout_decision.ts::DecisionKind",
-   "reason": "Request verb on the decision API, not a stored value."
-  },
-  {
    "key": "src/owner/engine.ts::ProofState",
    "reason": "Owner proof state held in engine records, not a CHECK column."
   },
