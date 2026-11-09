@@ -201,7 +201,11 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (path === "/checkout" && m === "POST") { const b = await body(req); return json(await throttled(d, req, "checkout", a.id, () => svc.startCheckout(d, a, b.product, b.domain)), 201); }
   if (path === "/billing" && m === "GET") return json({ purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), portalUrl: a.stripeCustomerId ? await d.billing.portalUrl(a.stripeCustomerId, d.siteOrigin + "/app/billing") : null });
   if (path === "/invoices" && m === "GET") return json({ invoices: await svc.listInvoices(d, a) });
-  if (seg[0] === "invoices" && seg.length === 2 && m === "GET") return new Response(await svc.renderInvoice(d, a, seg[1]), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
+  if (seg[0] === "invoices" && (seg.length === 2 || (seg.length === 3 && seg[2] === "credit-note")) && m === "GET") {
+    const doc = seg.length === 3 ? await svc.renderCreditNote(d, a, seg[1]) : await svc.renderInvoice(d, a, seg[1]);
+    const html = /\btext\/html\b/i.test(req.headers.get("accept") ?? ""); // default is the text twin
+    return new Response(html ? doc.html : doc.text, { headers: { "content-type": html ? "text/html; charset=utf-8" : "text/plain; charset=utf-8", "cache-control": "no-store", vary: "accept" } });
+  }
   if (seg[0] === "subscriptions" && seg[2] === "cancel" && m === "POST") return json(await svc.cancelSubscription(d, a, seg[1]));
   if (path === "/refunds" && m === "POST") return json(await svc.requestRefund(d, a, String((await body(req)).purchaseId ?? "")));
   if (path === "/keys" && m === "POST") return json(await svc.createKey(d, a, (await body(req)).scopes), 201);

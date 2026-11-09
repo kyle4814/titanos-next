@@ -9,6 +9,10 @@ import * as entSvc from "./enterprise/service.ts";
 import { SCOPES } from "./agent/tools.ts";
 import { isTier, periodFromStripe, initPlanFromStripe, observePeriod, type StripePeriod, type Tier } from "./plan_change.ts";
 import { changePlan } from "./plan_change_service.ts";
+import { renderInvoiceDoc, type GstMode, type RenderedDoc } from "./invoice_render.ts";
+
+// ONE config constant for the GST mode. app/terms/page.tsx says the seller is NOT registered for GST; flip to "registered" only when that changes.
+export const INVOICE_GST_MODE: GstMode = "not_registered";
 
 export interface Mailer { send(to: string, subject: string, text: string): Promise<void> }
 export class MockMailer implements Mailer { outbox: { to: string; subject: string; text: string }[] = []; async send(to: string, subject: string, text: string) { this.outbox.push({ to, subject, text }); } }
@@ -165,11 +169,12 @@ const REFUND_TRIES = 8;
 export class RefundRecordPending extends RefundContention { purchaseId: string; refundId: string; idempotencyKey: string; constructor(purchaseId: string, refundId: string, idempotencyKey: string) { super(purchaseId); this.purchaseId = purchaseId; this.refundId = refundId; this.idempotencyKey = idempotencyKey; this.name = "RefundRecordPending"; } }
 // f239: the CAS guards status AND the refunded_cents just read, so two concurrent partial refunds cannot lose the smaller cumulative: the loser re-reads, re-merges (cumulative, monotone, clamped) and retries.
 // Exhausting the bounded retries throws RefundContention (a webhook fails and is re-delivered); it never returns a stale row as if the refund had landed.
-export async function recordRefund(d: Pick<Deps, "store">, purchaseId: string, cents: number): Promise<Purchase | undefined> {
+export async function recordRefund(d: Pick<Deps, "store"> & Partial<Pick<Deps, "now">>, purchaseId: string, cents: number): Promise<Purchase | undefined> {
   for (let i = 0; i < REFUND_TRIES; i++) {
     const cur = await d.store.purchaseById(purchaseId);
     if (!cur || !(cur.status === "paid" || cur.status === "refunded" || (cur.status === "cancelled" && cur.paymentIntent))) return cur;
     const next: Purchase = { ...cur }; applyRefund(next, cents);
+    if (d.now && next.status === "refunded" && next.refundedAt === undefined) next.refundedAt = d.now(); // f285: the moment a customer-requested refund landed (credit note date)
     if (next.refundedCents === cur.refundedCents && next.status === cur.status) return cur;
     if (await d.store.casPurchase(next, cur.status, cur.refundedCents)) return next;
   }
@@ -329,14 +334,26 @@ export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purc
   return won;
 }
 
-// 4 INVOICES. Plain text, no GST line: the terms page says the seller is not registered for GST.
+// 4 INVOICES. Rendered by the pure f281 renderer (invoice_render.ts). The GST wording comes from INVOICE_GST_MODE, never invented here.
 export async function listInvoices(d: Deps, a: Account) { return (await d.store.invoicesFor(a.id)).sort((x, y) => x.issuedAt - y.issuedAt); }
-export async function renderInvoice(d: Deps, a: Account, id: string): Promise<string> {
+async function ownInvoice(d: Deps, a: Account, id: string): Promise<Invoice> {
   const i = await d.store.invoiceById(id);
-  if (!i || i.accountId !== a.id) throw new HttpError(404, "not_found");
-  const p = PRODUCTS[i.productId];
-  return [`TAX INVOICE ${i.number}`, `Date: ${new Date(i.issuedAt).toISOString().slice(0, 10)}`, `Billed to: ${a.email}`, `Item: ${p.name}`,
-    `Amount: AU$${(i.amountCents / 100).toFixed(2)} (no GST charged: supplier not registered for GST)`, "Supplier: Kyle Montrose Deligny, ABN 34 318 502 254"].join("\n");
+  if (!i || i.accountId !== a.id) throw new HttpError(404, "not_found"); // another account's id is a 404, never a 403
+  return i;
+}
+export async function renderInvoice(d: Deps, a: Account, id: string): Promise<RenderedDoc> {
+  const i = await ownInvoice(d, a, id);
+  return renderInvoiceDoc({ invoice: i, billedToEmail: a.email, itemName: PRODUCTS[i.productId]?.name ?? i.productId, gst: INVOICE_GST_MODE });
+}
+// Credit note for a refunded purchase: attached to the purchase's first invoice, amount = refundedCents (capped at that invoice), dated refundedAt.
+export async function renderCreditNote(d: Deps, a: Account, id: string): Promise<RenderedDoc> {
+  const i = await ownInvoice(d, a, id);
+  const pur = i.purchaseId ? await d.store.purchaseById(i.purchaseId) : undefined;
+  if (!pur || pur.accountId !== a.id || pur.refundedCents <= 0 || pur.refundedAt === undefined) throw new HttpError(404, "not_found");
+  const first = (await d.store.invoicesFor(a.id)).filter((x) => x.purchaseId === pur.id).sort((x, y) => x.issuedAt - y.issuedAt || x.number.localeCompare(y.number))[0];
+  if (!first || first.id !== i.id) throw new HttpError(404, "not_found");
+  return renderInvoiceDoc({ invoice: i, billedToEmail: a.email, itemName: PRODUCTS[i.productId]?.name ?? i.productId, gst: INVOICE_GST_MODE,
+    creditNote: { amountCents: Math.min(pur.refundedCents, i.amountCents), issuedAt: pur.refundedAt, reason: "Refund of purchase" } });
 }
 
 // 5 CANCEL. Monitor: ends at period end. Retainers: not before the minimum term ends. No auto-refund of the current period.
