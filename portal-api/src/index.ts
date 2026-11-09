@@ -1,6 +1,7 @@
 import type { Env } from "./env.ts";
 import * as svc from "./service.ts";
-import { HttpError, type Deps } from "./service.ts";
+import type { Deps } from "./service.ts";
+import { HttpError } from "./util.ts";
 import { verifyStripeSignature } from "./stripe.ts";
 import { PRODUCTS } from "./catalogue.ts";
 import * as own from "./owner/service.ts";
