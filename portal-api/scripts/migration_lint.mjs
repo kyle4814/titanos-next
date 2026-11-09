@@ -108,7 +108,7 @@ export function lint({ migDir = join(ROOT, "migrations"), srcRoot = ROOT, pairs 
     for (const v of c.values) if (!ts.includes(v)) warnings.push(`${p.name}: '${v}' is in CHECK on ${p.sql.table}.${p.sql.column} but not in the TS union (harmless, tidy later)`);
   }
   // A check_debt entry that no longer fires (CHECK widened, or the TS value removed) is stale: it must be deleted.
-  if (!errs.length) for (const d of checkDebt) if (!seenDebt.has(d)) failures.push(`stale declaration: check debt '${d.value}' on pair '${d.pair}' no longer fails, remove it from the declared file`);
+  if (!errs.length) for (const d of checkDebt) if (!seenDebt.has(d) && pairs.some((p) => p.name === d.pair)) failures.push(`stale declaration: check debt '${d.value}' on pair '${d.pair}' no longer fails, remove it from the declared file`);
   return { files, failures, warnings };
 }
 
