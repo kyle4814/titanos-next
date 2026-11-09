@@ -123,6 +123,21 @@ export class D1PlanStore extends MemoryStore {
     const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
     return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
+  // f243 refund memo on held_facts (no migration; the row carries the memo JSON). Insert-if-absent is ONE statement, the swap is ONE conditional UPDATE/DELETE on the exact stored JSON, so two callers over one D1 cannot both win.
+  override async memoInsert(key: string, fact: Record<string, unknown>) {
+    const r = await this.exec("INSERT INTO held_facts (key, fact) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM held_facts WHERE key = ?)", key, JSON.stringify(fact), key);
+    return r.meta.changes === 1;
+  }
+  override async memoPeek(key: string) { const r = await this.one("SELECT fact FROM held_facts WHERE key = ? ORDER BY seq LIMIT 1", key); return r ? (JSON.parse(String(r.fact)) as Record<string, unknown>) : undefined; }
+  override async memoSwap(key: string, expected: Record<string, unknown>, next: Record<string, unknown> | null) {
+    const r = next === null ? await this.exec("DELETE FROM held_facts WHERE key = ? AND fact = ?", key, JSON.stringify(expected))
+      : await this.exec("UPDATE held_facts SET fact = ? WHERE key = ? AND fact = ?", JSON.stringify(next), key, JSON.stringify(expected));
+    return r.meta.changes === 1;
+  }
+  override async memoList(prefix: string) {
+    const rows = await this.many("SELECT key, fact FROM held_facts WHERE substr(key, 1, ?) = ? ORDER BY seq", prefix.length, prefix);
+    return rows.map((r) => ({ key: String(r.key), fact: JSON.parse(String(r.fact)) as Record<string, unknown> }));
+  }
   // Webhook event claim (f197). stripe_events (id PRIMARY KEY) already exists in migration 0002, so no new migration is needed. ONE statement: INSERT OR IGNORE, then
   // meta.changes === 1 means THIS call inserted the row. Two deliveries of one event id, on any number of store objects over one D1, cannot both see 1 (a SELECT then INSERT could).
   // The claim is durable the moment it is written: see test/claim_contract.test.ts for the chosen replay-after-crash behaviour (at-most-once, documented).

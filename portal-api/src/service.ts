@@ -164,6 +164,9 @@ function applyRefund(pur: Purchase, cents: number) {
 // markPaid never writes the purchase after its claim, so it can no longer erase a refund back to paid, and a late write can never revive refunded.
 export class RefundContention extends Error { constructor(id: string) { super(`refund CAS lost ${REFUND_TRIES} times on purchase ${id}; nothing silently dropped, the caller must retry (Stripe re-delivers the webhook)`); } }
 const REFUND_TRIES = 8;
+// f243: how long an unfinished refund intent is respected before another caller may take it over, how many waits a rival makes for the winner, and when the reaper may delete a settled memo.
+export const MEMO_LEASE_MS = 60_000, MEMO_WAIT = 200, MEMO_TTL_MS = 7 * 86_400_000;
+export class RefundInFlight extends RefundContention { constructor(id: string) { super(id); this.message = `refund for purchase ${id} is in flight on another call; retry`; this.name = "RefundInFlight"; } }
 // f240: Stripe has ALREADY refunded when requestRefund's own recordRefund runs out of retries. This typed error (a RefundContention, so existing catches still match) carries the Stripe refund id and the idempotency key:
 // the caller gets a 503 refund_record_pending with the id, the next charge.refunded webhook (or a replayed requestRefund, which reuses the remembered refund and never calls Stripe again) heals the ledger. Never a silent drop, never a second refund.
 export class RefundRecordPending extends RefundContention { purchaseId: string; refundId: string; idempotencyKey: string; constructor(purchaseId: string, refundId: string, idempotencyKey: string) { super(purchaseId); this.purchaseId = purchaseId; this.refundId = refundId; this.idempotencyKey = idempotencyKey; this.name = "RefundRecordPending"; } }
@@ -392,9 +395,29 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   if (pur.status !== "paid" || !pur.paymentIntent || !pur.paidAt) throw new HttpError(409, "not_refundable_yet");
   // f240: a remembered Stripe refund (RefundRecordPending earlier) means the money already moved and policy was already passed: the replay only converges the ledger, so it skips the verdict (a rival partial now makes refundedCents > 0, which would wrongly route it to review).
   const key = `refund-${pur.id}`, memo = `refundsent:${pur.id}`;
-  let sent = (await d.store.takeFacts(memo))[0] as { refundId: string } | undefined;
+  // f243: claim the memo with ONE conditional insert BEFORE anything else (was f240 take-then-hold). Exactly one caller inserts the intent and may call Stripe; a rival waits for its refund id (then only converges the ledger),
+  // and an intent older than MEMO_LEASE_MS (its owner died) is taken over by CAS. A re-used Stripe idempotency key makes a takeover after a crash between the Stripe call and the remember harmless.
+  let mine: Record<string, unknown> | undefined, sent: { refundId: string } | undefined;
+  for (let i = 0; i < MEMO_WAIT && !mine && !sent; i++) {
+    const intent = { state: "intent", at: d.now() };
+    if (await d.store.memoInsert(memo, intent)) { mine = intent; break; }
+    const cur = await d.store.memoPeek(memo); if (!cur) continue;
+    if (typeof cur.refundId === "string") { sent = cur as { refundId: string }; break; }
+    if (d.now() - Number(cur.at) > MEMO_LEASE_MS && await d.store.memoSwap(memo, cur, intent)) { mine = intent; break; }
+    await new Promise((r) => setImmediate(r));
+  }
+  if (mine) { // a winner may have finished (ledger moved, memo cleared) between our status read and our claim: re-read under the claim, never refund twice
+    const fresh = await d.store.purchaseById(pur.id);
+    if (!fresh || fresh.status !== "paid") { await d.store.memoSwap(memo, mine, null); if (fresh?.status === "refunded") return { status: "refunded" as const, amountCents: pur.amountCents }; throw new HttpError(409, "not_refundable_yet"); }
+  }
+  if (!mine && !sent) { // the winner finished while we waited (memo gone, ledger moved) or is still in flight
+    const now = await d.store.purchaseById(pur.id);
+    if (now && now.status === "refunded") return { status: "refunded" as const, amountCents: pur.amountCents };
+    throw new RefundInFlight(pur.id);
+  }
   const v = sent ? { auto: true as const } : refundVerdict(PRODUCTS[pur.productId], pur.paidAt, d.now(), pur.deliverableIssued, pur.refundedCents > 0);
   if (!v.auto) {
+    if (mine) await d.store.memoSwap(memo, mine, null); // no Stripe call was made: release the intent
     // Out of policy: one pending_review RefundCase per purchase (a repeat request returns the same case, never a second card),
     // with the legacy ReviewCard kept in step (same id, resolved false). The card payload is returned as DATA ONLY: nothing is sent.
     const prior = (await d.store.refundCasesFor(pur.id)).filter((r) => r.status !== "denied").sort((x, y) => x.createdAt - y.createdAt)[0];
@@ -410,13 +433,30 @@ export async function requestRefund(d: Deps, a: Account, purchaseId: string) {
   }
   // f240: the Stripe call is made at most once per purchase key. The refund id is remembered (held fact) until the ledger CAS lands, so a replay after RefundRecordPending skips Stripe and only converges the ledger.
   // A crash between the Stripe call and the remember is safe too: the replay reuses the same idempotency key, which Stripe answers with the same refund.
-  if (!sent) sent = { refundId: (await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, key)).id };
-  await d.store.holdFact(memo, sent);
+  if (!sent) { // we hold the intent: the only path that reaches Stripe
+    const refundId = (await d.billing.refund(pur.paymentIntent, pur.amountCents - pur.refundedCents, key)).id;
+    const next = { refundId, at: d.now() };
+    if (await d.store.memoSwap(memo, mine!, next)) mine = next; // lost swap = a takeover after our lease ran out; its Stripe call used the same key, so the refund id is the same
+    sent = { refundId };
+  }
   try { await recordRefund(d, pur.id, pur.amountCents); } // f238: paid -> refunded by CAS; a webhook that got there first makes this a no-op
   catch (e) { if (e instanceof RefundContention) throw new RefundRecordPending(pur.id, sent.refundId, key); throw e; }
-  await d.store.takeFacts(memo);
-  await entSvc.onRefund(d, pur.id, pur.amountCents); // C8: claw back the partner commission
+  const cur = await d.store.memoPeek(memo); if (cur) await d.store.memoSwap(memo, cur, null); // ledger landed: clear the memo
+  await entSvc.onRefund(d, pur.id, pur.amountCents); // C8: claw back the partner commission (kept from int3; f243's memo clear replaces the old takeFacts(memo))
   return { status: "refunded" as const, amountCents: pur.amountCents };
+}
+
+// f243 memo reaper: deletes refund memos older than the TTL whose purchase is no longer paid (settled by a webhook or an earlier replay). A memo whose purchase is still paid is a refund still pending
+// (Stripe moved the money, the ledger has not): it is NEVER reaped. The delete is a CAS on the exact fact, so a memo a live call just rewrote survives.
+export async function reapRefundMemos(d: Deps, ttlMs = MEMO_TTL_MS): Promise<{ reaped: string[]; kept: string[] }> {
+  const reaped: string[] = [], kept: string[] = [];
+  for (const { key, fact } of await d.store.memoList("refundsent:")) {
+    if (d.now() - Number(fact.at ?? 0) <= ttlMs) { kept.push(key); continue; }
+    const pur = await d.store.purchaseById(key.slice("refundsent:".length));
+    if (pur && pur.status === "paid") { kept.push(key); continue; }
+    if (await d.store.memoSwap(key, fact, null)) reaped.push(key); else kept.push(key);
+  }
+  return { reaped, kept };
 }
 
 // 7 API KEYS (shown once, hash stored) 8 DATA EXPORT 9 ACCOUNT DELETION
