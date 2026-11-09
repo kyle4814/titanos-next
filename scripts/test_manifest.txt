@@ -67,6 +67,7 @@ node scripts/test_receipt_findings_index.mjs
 node --experimental-strip-types scripts/test_beacon_scanid.mjs
 python3 -I scripts/test_stack_rebase_dryrun.py
 python3 -I scripts/test_patchid_equiv.py
+python3 -I scripts/test_tree_equiv.py
 node scripts/test_quote_property.mjs
 bash scripts/test_quote_property_mutants.sh
 bash scripts/test_miniflare_d1.sh
