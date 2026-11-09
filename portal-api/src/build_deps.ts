@@ -43,7 +43,7 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   // C8 f314: d.ent is built HERE, beside the other deps. A refusal (typed EntBuildError) takes down ONLY the enterprise routes
   // (503 with the binding NAME), never the whole portal; there is never a partial or default-tenant ent.
   let ent: Deps["ent"], entError: string | undefined;
-  try { ent = buildEnterpriseDeps(env, { accounts: store, now: opts.now, fetchFn: opts.fetchFn, ...opts.ent }); } catch (e) { if (!(e instanceof EntBuildError)) throw e; entError = e.message; }
+  try { ent = buildEnterpriseDeps(env, { accounts: store, now: opts.now, ...opts.ent }); } catch (e) { if (!(e instanceof EntBuildError)) throw e; entError = e.message; }
   return {
     ent, entError, store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? unavailableMailer, now: opts.now ?? (() => Date.now()), siteOrigin,
