@@ -35,7 +35,19 @@ export const startMiniflare = () => (boot ??= start());
 export async function stopMiniflare() { if (mf) { await mf.dispose(); mf = undefined; dbs = []; boot = undefined; next = 0; } }
 
 // Migrations hold no string literal containing "--" or ";" (asserted by the suite passing); comments are stripped to end of line.
-const stmts = (sql: string) => sql.split("\n").map((l) => l.replace(/--.*$/, "")).join("\n").split(";").map((s) => s.trim()).filter(Boolean);
+// m38 merge: a CREATE TRIGGER body holds inner ";" so pieces are re-joined until the closing END.
+const stmts = (sql: string) => {
+  const parts = sql.split("\n").map((l) => l.replace(/--.*$/, "")).join("\n").split(";").map((s) => s.trim()).filter(Boolean);
+  const out: string[] = [];
+  let cur = "";
+  for (const p of parts) {
+    cur = cur ? cur + ";\n" + p : p;
+    if (/\bCREATE\s+TRIGGER\b/i.test(cur) && !/\bEND$/i.test(cur)) continue;
+    out.push(cur); cur = "";
+  }
+  if (cur) out.push(cur);
+  return out;
+};
 
 async function reset(raw: Raw) {
   const objs = (await raw.prepare("SELECT name, type FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' AND name NOT LIKE '_cf_%'").all()).results;

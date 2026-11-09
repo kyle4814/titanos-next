@@ -21,7 +21,7 @@ test("the real tree is clean (declared 0003/0004 debt is a warning only)", () =>
 
 test("the declared debt is real: the real tree still has the clashes (stale declaration would fail)", () => {
   const f = readdirSync(join(ROOT, "migrations")).filter((x: string) => x.endsWith(".sql"));
-  assert.equal(f.filter((x: string) => x.startsWith("0004_")).length, 3); // int3 head: market, store_counters, subscription_plan (f354 widened the declaration)
+  assert.equal(f.filter((x: string) => x.startsWith("0004_")).length, 4); // m38 merge: market, payouts_lifecycle, store_counters, subscription_plan
   assert.ok(checkNames(f, { duplicates: [] }).some((m: string) => m.includes("duplicate prefix 0004")));
   assert.ok(checkNames(["0001_a.sql"], { duplicates: [4] }).some((m: string) => m.includes("stale declaration")));
 });
@@ -171,9 +171,7 @@ test("MUTATION on the real tree: add a member to JobStatus in a temp copy of src
     // int3 head (f354): with pairs: [] discovery alone surfaces exactly the two CHECK mismatches that migration_lint_declared.json
     // carries as check_debt (unmerged migrations); the explicit-PAIR path downgrades them to warnings. Pinned exactly.
     const known = lint(base).failures;
-    assert.equal(known.length, 2, known.join("\n"));
-    assert.ok(known.some((m: string) => m.includes("MarketCard.kind") && m.includes("clawback_review")));
-    assert.ok(known.some((m: string) => m.includes("PayoutStatus") && m.includes("sending,approved_retry,held")));
+    assert.equal(known.length, 0, known.join("\n")); // m38 merge: the f59/f222 migrations landed, no CHECK mismatch remains
     const sp = join(d, "src", "market", "store.ts");
     writeFileSync(sp, readFileSync(sp, "utf8").replace('"refunded";', '"refunded" | "chargeback";'));
     assert.ok(lint(base).failures.some((m: string) => m.includes("chargeback")), "added union member must be caught");
