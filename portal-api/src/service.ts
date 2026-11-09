@@ -243,7 +243,7 @@ export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boole
       return true;
     });
     if (stored) Object.assign(sub, stored); // the caller's object follows the stored truth
-  } catch (e) { for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; } // nothing written: put the facts back, never lose them
+  } catch (e) { if (!(e as { factsRestored?: boolean })?.factsRestored) for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; } // nothing written: put the facts back (once: updateSubscription may already have), never lose them
   return true;
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
@@ -314,7 +314,10 @@ export async function updateSubscription(d: Deps, id: string, mutate: (sub: Subs
     if (fx.taken && !fx.used) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);
     return v.sub;
   }
-  throw new HttpError(409, "subscription_conflict");
+  // f261 on int3's shape: no attempt landed, so nothing the callers took (fx.taken: held cancels and periods) was applied. Put them back before
+  // the 409, or a lost-CAS markPaid/sweep would consume them for good (the webhook event is already claimed: a redelivery is a duplicate).
+  if (fx.taken) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);
+  throw Object.assign(new HttpError(409, "subscription_conflict"), { factsRestored: !!fx.taken });
 }
 // Retainer tiers only (the three AI tiers own a PlanState). No period = no plan: calendar months apply until Stripe's numbers arrive.
 // Only the FIRST period (checkout's expanded subscription, or the subscription_create invoice) may define the start and the grid;

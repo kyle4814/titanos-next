@@ -127,6 +127,20 @@ test("SUBCAS: updateSubscription gives up with 409 subscription_conflict after S
   assert.equal((await s2.takeFacts("sub:sub_syn")).length, 1);
 });
 
+test("SUBCAS f261: facts a caller took and marked used are put back (once) when every CAS attempt loses", async () => {
+  const m = await base(), store = new m.store.MemoryStore(); await seedStore(store); const d = depsFor(m, store);
+  await store.holdFact("sub:sub_syn", { kind: "cancel" }); await store.holdFact("sub:sub_syn", { kind: "period", start: START, end: START + 30 * DAY, create: false });
+  store.casSubscription = async () => false;
+  const took = await store.takeFacts("sub:sub_syn"); assert.equal(took.length, 2);
+  await assert.rejects(m.svc.updateSubscription(d, "sub_syn", (x: any, fx: any) => { fx.taken = took; fx.used = true; x.cancelledAt = 7; return true; }), (e: any) => e.code === "subscription_conflict" && e.factsRestored === true);
+  assert.equal((await store.takeFacts("sub:sub_syn")).length, 2, "both facts are held again, not lost");
+  // replayLateFacts on the same contention re-holds exactly once (no duplicate from its own catch)
+  const s3 = new m.store.MemoryStore(); await seedStore(s3); const d3 = depsFor(m, s3);
+  await s3.holdFact("sub:sub_syn", { kind: "cancel" }); s3.casSubscription = async () => false;
+  await assert.rejects(m.svc.replayLateFacts(d3, await s3.subscriptionById("sub_syn")), (e: any) => e.code === "subscription_conflict");
+  assert.equal((await s3.takeFacts("sub:sub_syn")).length, 1, "held once, not twice");
+});
+
 // ---- source scan: no unconditional subscription write outside the store layer ----
 const STORE_LAYER = new Set(["store.ts", "d1_plan_store.ts", "d1store.ts"]);
 export function scanPut(files: Record<string, string>) {
