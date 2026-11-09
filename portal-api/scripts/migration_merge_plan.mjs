@@ -104,7 +104,7 @@ export async function verifyOnScratch(repo, plan, lintRef = DEFAULT_LINT_REF) {
     for (const p of plan.order) writeFileSync(join(mdir, p.newName), applyStrip(git(repo, ["cat-file", "blob", plan.chosen[p.oldName]]), plan.strips?.[p.oldName]));
     const lintPath = ensureLint(repo, lintRef, scratch);
     const { lint } = await import(pathToFileURL(lintPath).href + `?t=${Date.now()}`);
-    const r = lint({ migDir: mdir, srcRoot: scratch, pairs: [], declaredPath: join(scratch, "none.json") });
+    const r = lint({ migDir: mdir, srcRoot: scratch, pairs: [], discover: false, declaredPath: join(scratch, "none.json") });
     return { failures: r.failures, warnings: r.warnings, files: r.files.length };
   } finally { rmSync(scratch, { recursive: true, force: true }); }
 }
