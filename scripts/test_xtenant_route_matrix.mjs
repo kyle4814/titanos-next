@@ -11,6 +11,7 @@ const ok = (name, fn) => Promise.resolve().then(fn).then(() => console.log(`ok  
 
 const clean = await runMatrix({ reps: 21 });
 await ok("clean tree: 0 cross-tenant reads, 0 writes, 0 findings", () => { assert.deepEqual(clean.findings, []); assert.equal(clean.crossTenantReads, 0); assert.equal(clean.crossTenantWrites, 0); });
+await ok("f358: a many-address SSO start flood no longer blocks a legitimate new address", () => { assert.equal(clean.observations.ssoStartCap.legitUserBlocked, false); assert.equal(clean.observations.ssoStartCap.attempts, 1100); });
 await ok("route table has no drift against the two route sources", () => { assert.deepEqual(clean.drift.unclaimed, []); assert.deepEqual(clean.drift.stale, []); assert.ok(clean.sourceRouteLines >= 80); });
 await ok("every table route was fired as an attack (none skipped silently)", () => assert.deepEqual(clean.notFired, []));
 await ok("positive control: >= 55 routes answer 2xx for their own tenant (the matrix is not vacuous)", () => assert.ok(clean.controlRoutesAnswering2xx >= 55, String(clean.controlRoutesAnswering2xx)));
@@ -60,5 +61,5 @@ for (const [name, type, handler] of mutants) {
   const r = await runMatrix({ handler, reps: 7 });
   await ok(`mutant caught: ${name}`, () => { assert.ok(r.findings.some((f) => f.type === type), `expected a ${type} finding, got types ${[...new Set(r.findings.map((f) => f.type))].join(",") || "none"}`); assert.equal(r.ok, false); });
 }
-console.log(fails === 0 ? `XTENANT TEST OK (${9 + mutants.length} checks)` : `XTENANT TEST FAILED (${fails})`);
+console.log(fails === 0 ? `XTENANT TEST OK (${10 + mutants.length} checks)` : `XTENANT TEST FAILED (${fails})`);
 process.exit(fails === 0 ? 0 : 1);

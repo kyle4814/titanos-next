@@ -196,7 +196,8 @@ test("sso: unknown slug and unconfigured tenant look the same; an open-state cap
   const { h: h2 } = await ssoWorld();
   let last = 0;
   for (let i = 0; i < 205; i++) last = (await h2.req("POST", "/sso/bigco/start")).status;
-  assert.equal(last, 429);
+  assert.equal(last, 200, "f358: a flooding source recycles its own oldest state instead of being refused");
+  assert.ok((await (h2.deps.ent as any).store.openSsoStates((await (h2.deps.ent as any).store.tenantBySlug("bigco")).id, h2.clock.t)) <= 20, "the flood is held at the per-source sub-cap");
 });
 test("sso: enforcement needs a proven SSO login first, then locks out non-SSO sessions of that tenant", async () => {
   const { h, o, tid, cfg } = await ssoWorld();
@@ -566,7 +567,8 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   const start = (ip: string) => h.deps && (async () => (await (await import("../src/index.ts")).handle(new Request("https://api.test/sso/bigco/start", { method: "POST", headers: { "cf-connecting-ip": ip } }), {}, h.deps)).status)();
   let last = 0;
   for (let i = 0; i < 25; i++) last = await start("203.0.113.9");
-  assert.equal(last, 429, "the noisy client is capped");
+  assert.equal(last, 200, "f358: the noisy client recycles its own oldest state");
+  assert.equal((h.deps.ent as any).store.states.size, 20, "the noisy client is held at its sub-cap");
   assert.equal(await start("198.51.100.4"), 200, "everyone else still gets in");
   h.clock.t += 11 * 60_000;
   assert.equal(await start("203.0.113.9"), 200, "expired states no longer count");
