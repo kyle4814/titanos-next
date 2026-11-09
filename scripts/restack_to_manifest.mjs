@@ -58,6 +58,22 @@ export function analysePackage(repo, base, branch) {
   return { mergeBase: mb, added, nonTestEdits, touched };
 }
 
+/** Force the merged package.json "test" line back to base's; false if that cannot be proven. */
+function keepMergedPackage(wt, base, pkgPath) {
+  const baseTxt = git(wt, ["show", `${base}:package.json`]);
+  const rx = /^\s*"test":.*$/m;
+  const baseLine = baseTxt.match(rx)?.[0];
+  let txt = readFileSync(pkgPath, "utf8");
+  if (!baseLine || !rx.test(txt) || txt.includes("<<<<<<<")) return false;
+  txt = txt.replace(rx, () => baseLine.replace(/,?\s*$/, (txt.match(rx)[0].trimEnd().endsWith(",") ? "," : "")));
+  try {
+    if (JSON.parse(txt).scripts.test !== JSON.parse(baseTxt).scripts.test) return false;
+  } catch { return false; }
+  writeFileSync(pkgPath, txt);
+  git(wt, ["add", "package.json"]);
+  return true;
+}
+
 const unmerged = (wt) =>
   git(wt, ["diff", "--name-only", "--diff-filter=U"]).split("\n").filter(Boolean);
 
@@ -80,11 +96,17 @@ export function restack({ repo, branch, base, scratchRoot = DEFAULT_SCRATCH, pus
     // package.json
     const pkgPath = join(wt, "package.json");
     if (pkg.touched) {
+      let pkgOk = true;
       if (pkg.nonTestEdits /*MUT:nontest*/) {
-        left.add("package.json");
+        // Non-test edits are never dropped: a git conflict stays a CONFLICT; a git-clean merge is
+        // kept with its "test" line forced back to the base line.
+        pkgOk = !left.has("package.json") && keepMergedPackage(wt, base, pkgPath);
+        if (!pkgOk) left.add("package.json");
       } else {
         git(wt, ["checkout", base, "--", "package.json"]);
         left.delete("package.json");
+      }
+      if (pkgOk) {
         const mfPath = join(wt, MANIFEST);
         const have = new Set(existsSync(mfPath) ? readFileSync(mfPath, "utf8").split("\n").filter((l) => l && !l.startsWith("#")) : []);
         let text = existsSync(mfPath) ? readFileSync(mfPath, "utf8") : "";
