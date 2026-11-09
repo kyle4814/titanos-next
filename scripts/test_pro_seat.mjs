@@ -18,7 +18,7 @@ t("every API path the browser calls exists as a Worker route with the same metho
     const probe = path === "/pro/join" || path === "/pro/board" || path === "/pro/rank" || path === "/pro/payouts" || path === "/pro/onboarding" || path === "/pro/onboarding/refresh" || path === "/market/jobs" || path === "/market/leaderboard"
       ? `path === "${path}" && m === "${method}"`
       : `seg[0] === "${segs[0]}" && seg[1] === "jobs" && seg[3] === "${segs[3]}" && m === "${method}"`;
-    assert.ok(index.includes(probe), `${method} ${path} -> ${probe}`);
+    assert.ok(index.includes(probe) || index.includes(probe.replace(" && m ===", " && seg.length === 4 && m ===")), `${method} ${path} -> ${probe}`); // m38 merge: the anchor-wire rc adds a seg.length guard on the bare dispute POST
   }
 });
 t("field names posted match what the Worker reads (domainId, check, note, reason, acceptTerms)", () => {
