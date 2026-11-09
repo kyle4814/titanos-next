@@ -152,6 +152,29 @@ export const CASES: Case[] = [
     const got = await Promise.all([s.takeFacts("race"), s.takeFacts("race"), s.takeFacts("race")]);
     assert.equal(got.flat().length, 2, "two takers never both receive a fact");
   } },
+  { name: "refund memo: insert-if-absent, peek, CAS swap (stale expected loses), swap to null deletes, list by prefix in insert order, keys independent", covers: ["memoInsert", "memoPeek", "memoSwap", "memoList"], run: async (mk) => {
+    const s = mk().store;
+    assert.equal(await s.memoPeek("refund:p1"), undefined, "absent peek");
+    assert.equal(await s.memoInsert("refund:p1", { at: 1, st: "pending" }), true, "first insert creates");
+    assert.equal(await s.memoInsert("refund:p1", { at: 2, st: "other" }), false, "second insert loses");
+    assert.deepEqual(await s.memoPeek("refund:p1"), { at: 1, st: "pending" }, "the loser wrote nothing");
+    assert.equal(await s.memoSwap("refund:p1", { at: 9, st: "stale" }, { at: 3 }), false, "stale expected fails");
+    assert.deepEqual(await s.memoPeek("refund:p1"), { at: 1, st: "pending" }, "a failed swap writes nothing");
+    assert.equal(await s.memoSwap("refund:p1", { at: 1, st: "pending" }, { at: 3, st: "taken" }), true, "exact expected swaps");
+    assert.deepEqual(await s.memoPeek("refund:p1"), { at: 3, st: "taken" });
+    assert.equal(await s.memoSwap("refund:p1", { at: 1, st: "pending" }, { at: 4 }), false, "old expected now stale");
+    await s.memoInsert("refund:p2", { at: 5 }); await s.memoInsert("other:x", { at: 6 });
+    assert.deepEqual(await s.memoList("refund:"), [{ key: "refund:p1", fact: { at: 3, st: "taken" } }, { key: "refund:p2", fact: { at: 5 } }], "prefix only, insert order");
+    assert.deepEqual(await s.memoList("none:"), []);
+    assert.equal(await s.memoSwap("refund:p2", { at: 5 }, null), true, "swap to null deletes");
+    assert.equal(await s.memoPeek("refund:p2"), undefined);
+    assert.equal(await s.memoSwap("refund:p2", { at: 5 }, null), false, "delete of an absent memo loses");
+    assert.equal(await s.memoInsert("refund:p2", { at: 7 }), true, "a deleted key can be inserted again");
+    const ins = await Promise.all(Array.from({ length: 8 }, (_, i) => s.memoInsert("refund:race", { n: i })));
+    assert.equal(wins(ins), 1, "8 inserts, one memo");
+    const sw = await Promise.all(Array.from({ length: 8 }, (_, i) => s.memoSwap("refund:p1", { at: 3, st: "taken" }, { at: 10 + i })));
+    assert.equal(wins(sw), 1, "8 swaps on one expected, one winner");
+  } },
   { name: "review cards: cardById, allCards in insertion order including resolved, upsert keeps position", covers: ["cardById", "allCards"], run: async (mk) => {
     const s = mk().store;
     const c = (id: string, resolved = false) => ({ id, accountId: "a1", purchaseId: "p1", kind: "refund_outside_policy" as const, reason: "day 20", createdAt: 3, resolved });

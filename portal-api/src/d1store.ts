@@ -200,6 +200,21 @@ export class D1Store implements Store {
     const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
     return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
   }
+  // f243/f355 refund memo on held_facts (no migration; the row carries the memo JSON). Insert-if-absent is ONE statement; the swap is ONE conditional UPDATE/DELETE on the exact stored JSON,
+  // so two callers over one D1 cannot both win. exec() here returns the changes count.
+  async memoInsert(key: string, fact: Record<string, unknown>) {
+    return (await this.exec("INSERT INTO held_facts (key, fact) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM held_facts WHERE key = ?)", key, JSON.stringify(fact), key)) === 1;
+  }
+  async memoPeek(key: string) { const r = await this.one("SELECT fact FROM held_facts WHERE key = ? ORDER BY seq LIMIT 1", key); return r ? (JSON.parse(String(r.fact)) as Record<string, unknown>) : undefined; }
+  async memoSwap(key: string, expected: Record<string, unknown>, next: Record<string, unknown> | null) {
+    const c = next === null ? await this.exec("DELETE FROM held_facts WHERE key = ? AND fact = ?", key, JSON.stringify(expected))
+      : await this.exec("UPDATE held_facts SET fact = ? WHERE key = ? AND fact = ?", JSON.stringify(next), key, JSON.stringify(expected));
+    return c === 1;
+  }
+  async memoList(prefix: string) {
+    const rows = await this.many("SELECT key, fact FROM held_facts WHERE substr(key, 1, ?) = ? ORDER BY seq", prefix.length, prefix);
+    return rows.map((r) => ({ key: String(r.key), fact: JSON.parse(String(r.fact)) as Record<string, unknown> }));
+  }
   // Review cards and refund cases (migrations 0002, 0003). Upsert on id keeps the original position, as a Map.set does.
   async cardById(id: string) { const r = await this.one("SELECT * FROM review_cards WHERE id = ?", id); return r && toCard(r); }
   async allCards() { return (await this.many("SELECT * FROM review_cards ORDER BY rowid")).map(toCard); }
