@@ -30,6 +30,7 @@ export interface EntStore {
   putSsoState(s: SsoState): Promise<void>;
   openSsoStates(tenantId: string, now: number, clientKey?: string): Promise<number>; // also purges expired states
   setEnforcement(tenantId: string, enabled: boolean): Promise<void>;
+  evictOldestSsoState(tenantId: string, clientKey: string, now: number): Promise<void>; // drops the oldest open state of THAT source only (a D1 adapter: DELETE ... WHERE hash = (SELECT hash ... WHERE tenant_id = ? AND client_key = ? ORDER BY expires_at LIMIT 1))
   consumeSsoState(hash: string, now: number): Promise<SsoState | undefined>;
   markSsoSession(sessionHash: string, tenantId: string): Promise<void>;
   isSsoSession(sessionHash: string, tenantId: string): Promise<boolean>;
@@ -101,6 +102,11 @@ export class MemoryEntStore implements EntStore {
     return [...this.states.values()].filter((s) => s.tenantId === t && (!key || s.clientKey === key)).length;
   }
   async setEnforcement(t: string, enabled: boolean) { const x = this.tenants.get(t); if (x) this.tenants.set(t, { ...x, ssoEnforced: enabled }); }
+  async evictOldestSsoState(t: string, key: string, now: number) {
+    let oldest: SsoState | undefined;
+    for (const s of this.states.values()) if (s.tenantId === t && s.clientKey === key && !s.used && s.expiresAt > now && (!oldest || s.expiresAt < oldest.expiresAt)) oldest = s;
+    if (oldest) this.states.delete(oldest.hash);
+  }
   async consumeSsoState(h: string, now: number) { const s = this.states.get(h); if (!s || s.used || s.expiresAt < now) return undefined; s.used = true; return s; }
   async markSsoSession(h: string, t: string) { this.ssoSessions.add(`${t}:${h}`); }
   async isSsoSession(h: string, t: string) { return this.ssoSessions.has(`${t}:${h}`); }
