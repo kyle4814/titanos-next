@@ -84,6 +84,14 @@
   {
    "key": "src/plan_change.ts::LedgerKind",
    "reason": "Plan-change ledger entry kind kept inside plan_json, not a SQL column."
+  },
+  {
+   "key": "src/market/dispute.ts::DKind",
+   "reason": "Dispute action kind carried in the hash-chained audit JSON, no CHECK column; the persisted state column is covered by 0007 dispute_case."
+  },
+  {
+   "key": "src/market/dispute.ts::AuditEntry.kind",
+   "reason": "Audit-chain entry kind stored in the case JSON, not a CHECK column."
   }
  ],
  "checks": [

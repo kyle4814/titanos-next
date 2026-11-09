@@ -22,10 +22,11 @@
    "prefix": 4,
    "files": [
     "0004_market.sql",
+    "0004_payouts_lifecycle.sql",
     "0004_store_counters.sql",
     "0004_subscription_plan.sql"
    ],
-   "owner": "C4 market (cc19dbdac); f13 D1Store (8419fb3f2); f172 plan D1 (7cdd03b8f)"
+   "owner": "C4 market (cc19dbdac); f13 D1Store (8419fb3f2); f172 plan D1 (7cdd03b8f); f59 payout lifecycle"
   },
   {
    "prefix": 5,
@@ -39,10 +40,19 @@
   {
    "prefix": 6,
    "files": [
+    "0006_audit_anchor.sql",
     "0006_held_facts.sql",
     "0006_owner_state_rev.sql"
    ],
-   "owner": "f194 held facts (978cd34e8); f185 owner CAS (94a5f0a5b)"
+   "owner": "f194 held facts (978cd34e8); f185 owner CAS (94a5f0a5b); f102 audit anchor"
+  },
+  {
+   "prefix": 7,
+   "files": [
+    "0007_dispute_case.sql",
+    "0007_purchase_created_at.sql"
+   ],
+   "owner": "f187 dispute case D1; purchase created_at (m38 merge 2026-11-10, rc rebases)"
   },
   {
    "prefix": 8,
@@ -75,38 +85,13 @@
    "owner": "same"
   },
   {
-   "prefix": 16,
-   "owner": "f285_c2_invoice_render_wire 0016_purchase_refunded_at.sql (not on int3)"
-  },
-  {
    "prefix": 17,
    "owner": "f301 0017_unmatched_demand.sql (not on int3)"
   }
  ],
- "check_debt": [
-  {
-   "pair": "payout states",
-   "value": "sending",
-   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
-  },
-  {
-   "pair": "payout states",
-   "value": "approved_retry",
-   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
-  },
-  {
-   "pair": "payout states",
-   "value": "held",
-   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
-  },
-  {
-   "pair": "card kinds",
-   "value": "clawback_review",
-   "owner": "C4 kill-test drill 6605e16cc / f222 rebase 9a2504ca8 (market_cards.kind CHECK), not on int3"
-  }
- ],
+ "check_debt": [],
  "provenance": {
-  "measured": "2026-11-10 on origin/web/obelisk-int3-2026-11-07 @ 1265c502f",
+  "measured": "2026-11-10 on origin/web/obelisk-int3-2026-11-07 @ 1265c502f; m38 merge 2026-11-10 re-measured after merging 12 rb/rc branches: +2 declared files (0004, 0006), +dup prefix 0007, gap 0016 filled, 4 check debts landed",
   "command": "node portal-api/scripts/migration_lint.mjs",
   "before": "17 failures (6 duplicate prefixes, 7 gaps, 4 CHECK mismatches)",
   "route": "f354: widen declared debt to the exact measured set, no renumbering of possibly-applied migrations (GATE5). The lint still fails on any NEW duplicate, gap, undeclared file in a declared prefix, or stale entry.",
