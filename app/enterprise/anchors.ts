@@ -6,8 +6,8 @@ import type { SeatAnchor } from "@/lib/seatAnchors";
 
 export const ANCHORS: SeatAnchor[] = [
   {
-    id: "estate", title: "Estate view", status: "coming", plan: "C8, plan line 1496",
-    body: "One view over every domain a group owns is designed but not built. Tenant isolation has to be tested adversarially before it opens. Until then an estate is scoped on a call.",
+    id: "estate", title: "Estate view", status: "live", plan: "C8, plan line 1496",
+    body: "One view over every domain a group owns, with a grade for each, the owner entity and when it was last read. The example below uses made-up domains. Live estates open per tenant once isolation has passed an adversarial review, and until then an estate is scoped on a call.",
   },
   {
     id: "dossiers", title: "Dossiers", status: "coming", plan: "plan line 297 (Enterprise seat)",
