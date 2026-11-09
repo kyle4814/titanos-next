@@ -12,6 +12,7 @@ import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import SeatAnchors from "@/components/SeatAnchors";
 import { ANCHORS } from "./anchors";
 import { FLEX } from "@/lib/flex";
+import DossierSelfServe from "@/components/DossierSelfServe";
 
 // Unlinked on purpose: no nav, footer, sitemap or homepage link, and noindex,
 // until Kyle confirms the enterprise prices. The figures come from lib/pricing.ts
@@ -87,6 +88,13 @@ export default function EnterprisePage() {
         </div>
       </SectionReveal>
       <SeatAnchors rows={ANCHORS} />
+      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px", position: "relative", zIndex: 2 }}>
+        <div className="container-vault">
+          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Dossiers</SystemLabel>
+          <SectionHeading title="Request a dossier" lead="Prove you control the domain, then queue it. This preview shows the steps with a sample, clearly labelled." />
+          <DossierSelfServe />
+        </div>
+      </SectionReveal>
       <FrontLoad
         extra={[
           { q: "I run IT. Where does this sit?", a: "Beside your IT provider and your own team. Nothing goes live without passing thousands of automated checks, and you keep control of every change. Your IT team stays in charge." },

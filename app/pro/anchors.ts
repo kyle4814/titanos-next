@@ -10,7 +10,7 @@ export const ANCHORS: SeatAnchor[] = [
     body: "Agency reports under your own brand are designed but not switched on. Below is a sample built from invented data: your logo goes in the empty slot and your brand colours set the page. Nothing is sent to anyone from this page. Pricing and terms are on request when the feature opens.",
   },
   {
-    id: "leads", title: "Leads", status: "coming", plan: "D2, plan line 1477 (export-only, country gate)",
-    body: "Leads will be export-only: you send from your own inbox, and a per-country rules check runs before every export. It is not built yet, so there is nothing to download today. Terms are on request.",
+    id: "leads", title: "Leads", status: "live", plan: "D2, plan line 1477 (export-only, country gate)",
+    body: "Leads are export-only: you send from your own inbox, and a per-country rules check runs before every export. The check below shows allow or block for each row with the plain reason. The rules are a draft until a lawyer signs them off. Terms are on request.",
   },
 ];

@@ -128,3 +128,5 @@ node scripts/test_manifest_lint.mjs
 node scripts/test_restack_to_manifest.mjs
 node --test --experimental-strip-types portal-api/test/d1_store_parity.test.ts portal-api/test/d1_store_contract.test.ts
 node scripts/test_xtenant_route_matrix.mjs
+node --experimental-strip-types scripts/test_dossier_selfserve.mjs
+node scripts/test_leads_ui.mjs
