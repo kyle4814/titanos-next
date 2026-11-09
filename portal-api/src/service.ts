@@ -241,7 +241,7 @@ export type SeedParts = { facts?: Record<string, unknown>[]; cancel?: boolean; s
 export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number, out?: SeedParts): Promise<Subscription> {
   const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
   const cancel = facts.some((f) => f.kind === "cancel");
-  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
+  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub, d.log) ?? held.first;
   if (out) { out.facts = facts; out.cancel = cancel; out.sp = sp; out.rest = held.rest; }
   const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
   await seedPeriod(d as Deps, sub, sp, true);
@@ -251,10 +251,27 @@ export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Pur
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
 // its first line (lines.data[0].period), which is the period just paid (the invoice's own period_start/end is the usage window).
-function stripePeriodOf(sub: unknown): StripePeriod | undefined {
+// f177: newer Stripe API versions moved current_period_start/end onto subscription items (items.data[]). Read both shapes:
+// top-level wins when it is valid; else take the min start and max end across the valid items. Unusable input never throws:
+// it returns undefined (calendar months keep applying) and, when a logger is given, says why.
+export function stripePeriodOf(sub: unknown, log?: (m: string) => void): StripePeriod | undefined {
   if (!sub || typeof sub !== "object") return undefined;
   const x = sub as Record<string, any>;
-  return periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+  const top = periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+  if (top) return top;
+  const items: unknown[] = Array.isArray(x.items?.data) ? x.items.data : [];
+  let start = Infinity, end = -Infinity, bad = 0;
+  for (const it of items) {
+    const i = (it && typeof it === "object" ? it : {}) as Record<string, any>;
+    const p = periodFromStripe(i.current_period_start, i.current_period_end);
+    if (!p) { bad++; continue; }
+    start = Math.min(start, p.start); end = Math.max(end, p.end);
+  }
+  if (end > start) return periodFromStripe(start / 1000, end / 1000, x.billing_cycle_anchor);
+  const hinted = x.current_period_start !== undefined || x.current_period_end !== undefined || items.length > 0;
+  if (hinted) log?.(`stripe subscription ${typeof x.id === "string" ? x.id : "?"}: no usable period (top-level invalid, ${bad} of ${items.length} items invalid); calendar months apply`);
+  else if (x.id !== undefined) log?.(`stripe subscription ${String(x.id)}: no period fields at all (neither top-level nor items); calendar months apply`);
+  return undefined;
 }
 function invoicePeriod(inv: Record<string, any>): StripePeriod | undefined {
   const line = inv.lines?.data?.[0]?.period;
