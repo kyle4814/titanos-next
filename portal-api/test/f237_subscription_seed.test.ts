@@ -104,9 +104,15 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     await m.svc.markPaid(D(m, crashAt(s0, "putSubscriptionOnce")), { ...(await s0.purchaseById("pur1")) }, o, "evt1").catch(() => {});
     await s0.holdFact("sub:sub_1", { kind: "cancel" });
     const bill = new MockBilling(); bill.sessions.set("cs_1", paidSession());
-    let waiting = 0; let release!: () => void; const gate = new Promise<void>((r) => (release = r));
-    const mk = () => spy(open(), {}, { takeFacts: async () => { waiting++; if (waiting >= 2) release(); await Promise.race([gate, new Promise((r) => setTimeout(r, 300))]); } });
-    const [a, b] = await Promise.all([m.rec.reconcileSubscriptions(mk(), bill, NOW, GRACE), m.rec.reconcileSubscriptions(mk(), bill, NOW, GRACE)]);
+    // f246: no timers. The worst interleaving is forced by explicit barriers: sweep A takes the facts (the cancel), then PARKS just before its write; sweep B then runs start to finish; only
+    // then does A write. With the f242 lease B is skipped (A holds the lease) and A's write carries the cancel. Without the lease B seeds first from an empty fact list, A's write loses, and the
+    // held cancel is gone: the same outcome every run, where the f237 version raced a 300 ms timer against box load (7/20 failures at load ~62 on f241).
+    let aParked!: () => void; const aAtWrite = new Promise<void>((r) => (aParked = r));
+    let bDone!: () => void; const bFinished = new Promise<void>((r) => (bDone = r));
+    const sweepA = m.rec.reconcileSubscriptions(spy(open(), {}, { putSubscriptionOnce: async () => { aParked(); await bFinished; } }), bill, NOW, GRACE);
+    await aAtWrite; // A holds whatever it took from takeFacts and has not written yet
+    const sweepB = m.rec.reconcileSubscriptions(open(), bill, NOW, GRACE).finally(bDone);
+    const [a, b] = await Promise.all([sweepA, sweepB]);
     const s = open(), subs = await s.subscriptionsFor("acc1");
     want("S4", subs.length === 1, `S4 exactly one subscription, got ${subs.length}`);
     want("S4", a.seeded + b.seeded === 1, `S4 exactly one sweep seeds, got ${a.seeded}+${b.seeded}`);
@@ -161,6 +167,7 @@ const MUT: [string, [string, string, string][]][] = [
   ["M4 query lists refunded too (Memory)", [["store.ts", "p.status === \"paid\" && p.paidAt !== undefined && cutoff >= p.paidAt && ids.includes", "(p.status === \"paid\" || p.status === \"refunded\") && p.paidAt !== undefined && p.paidAt <= cutoff && ids.includes"]]],
   ["M5 unpaid session still seeds", [["reconcile.ts", "if (s.status !== \"complete\" || s.paymentStatus !== \"paid\")", "if (false)"]]],
   ["M6 first invoice not issued", [["reconcile.ts", "if (prod) await issueInvoiceOnce(d, pur, prod.amountCents, seedEventId(p.id));", ""]]],
+  ["M8 f246 claim lease dropped (two sweeps seed one purchase together)", [["reconcile.ts", "if (!(await store.acquireLease(leaseKey(p.id), owner, now, LEASE_MS))) { rep.skipped++; continue; }", ""]]],
   ["M7 grace ignored", [["reconcile.ts", "paidWithoutSubscriptionBefore(now - grace, ids)", "paidWithoutSubscriptionBefore(now, ids)"]]],
 ];
 test("f237 mutants are all killed", async () => {
