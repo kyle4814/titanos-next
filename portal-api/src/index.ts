@@ -175,7 +175,9 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (path === "/market/jobs" && m === "POST") return json(await mkt.createJob(d, a, await body(req)), 201);
     if (path === "/market/jobs" && m === "GET") return json(await mkt.myJobs(d, a));
     if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "cancel" && m === "POST") return json(await mkt.cancelJob(d, a, seg[2]));
-    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "dispute" && m === "POST") return json(await mkt.dispute(d, a, seg[2], (await body(req)).reason));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "dispute" && seg.length === 4 && m === "POST") return json(await mkt.dispute(d, a, seg[2], (await body(req)).reason));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "dispute" && seg[4] === "evidence" && m === "POST") return json(await mkt.disputeEvidence(d, a, seg[2], await body(req)));
+    if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "dispute" && seg[4] === "audit" && m === "GET") return json(await mkt.disputeAudit(d, a, seg[2]));
     if (seg[0] === "market" && seg[1] === "jobs" && seg[3] === "rescan" && m === "POST") return json(await mkt.rescan(d, a, seg[2]));
     if (path === "/pro/join" && m === "POST") return json(await mkt.joinPro(d, a, await body(req)), 201);
     if (path === "/pro/onboarding" && m === "POST") return json(await mkt.onboard(d, a));
