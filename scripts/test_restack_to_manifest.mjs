@@ -12,7 +12,7 @@ const tool = join(here, "restack_to_manifest.mjs");
 const tmp = mkdtempSync(join(tmpdir(), "restack-"));
 const sh = (cwd, ...args) => execFileSync("git", ["-c", "rerere.enabled=false", ...args], { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
 const put = (repo, rel, text) => { mkdirSync(dirname(join(repo, rel)), { recursive: true }); writeFileSync(join(repo, rel), text); };
-const pkg = (test, extra = {}) => JSON.stringify({ name: "fx", scripts: { test, build: "x" }, ...extra }, null, 2) + "\n";
+const pkg = (test, extra = {}, scripts = {}) => JSON.stringify({ name: "fx", scripts: { test, build: "x", ...scripts }, ...extra }, null, 2) + "\n";
 const OLD = "node scripts/test_a.mjs && node scripts/test_b.mjs";
 
 function fixture(name) {
@@ -26,10 +26,10 @@ function fixture(name) {
   copyFileSync(join(here, "test_manifest_lint.mjs"), join(repo, "scripts/test_manifest_lint.mjs"));
   sh(repo, "add", "-A"); sh(repo, "commit", "-qm", "old world");
   sh(repo, "tag", "old");
-  const fill = (id, { chain, extra, orphan, files = [] }) => {
+  const fill = (id, { chain, extra, orphan, files = [], scripts }) => {
     sh(repo, "switch", "-q", "-c", id, "old");
     for (const f of files) put(repo, `scripts/${f}`, "// t\n");
-    put(repo, "package.json", pkg(chain, extra));
+    put(repo, "package.json", pkg(chain, extra, scripts));
     if (orphan) put(repo, "scripts/test_no_orphan_scripts.sh", "# fill edit\n");
     sh(repo, "add", "-A"); sh(repo, "commit", "-qm", id);
   };
@@ -39,8 +39,12 @@ function fixture(name) {
   fill("fill3", { chain: `${OLD} && node scripts/test_x.mjs && node scripts/test_z.mjs`, files: ["test_x.mjs", "test_z.mjs"], orphan: true });
   // non-test edit in package.json
   fill("fill4", { chain: `${OLD} && node scripts/test_w.mjs`, extra: { dependencies: { left: "1.0.0" } }, files: ["test_w.mjs"] });
+  // adjacent non-test edit: the fill adds a script right under the test line (15-style hunk)
+  fill("fill5", { chain: `${OLD} && node scripts/test_v.mjs`, scripts: { postbuild: "pb" }, files: ["test_v.mjs"] });
+  // true same-key divergence: fill and base both change scripts.build differently
+  fill("fill6", { chain: `${OLD} && node scripts/test_u.mjs`, scripts: { build: "fill-build" }, files: ["test_u.mjs"] });
   sh(repo, "switch", "-q", "main");
-  put(repo, "package.json", pkg("node scripts/run_tests.mjs"));
+  put(repo, "package.json", pkg("node scripts/run_tests.mjs", {}, { build: "base-build", lint: "l" }));
   put(repo, "scripts/test_manifest.txt", "node scripts/test_a.mjs\nnode scripts/test_b.mjs\nnode scripts/test_x.mjs\n");
   put(repo, ".gitattributes", "scripts/test_manifest.txt merge=union\n");
   put(repo, "scripts/test_x.mjs", "// t\n");
@@ -75,7 +79,15 @@ async function checks(toolPath, label) {
   check("fill3 orphan-script conflict resolved to base", () => { assert.ok(r3.rawConflicts.includes("scripts/test_no_orphan_scripts.sh")); assert.equal(r3.status, "LANDED"); });
 
   const r4 = go("fill4");
-  check("non-test package.json edit stays CONFLICT package.json", () => assert.equal(format(r4), "CONFLICT package.json"));
+  check("non-test edit (new top-level key) is kept by the finer 3-way", () => assert.equal(r4.status, "LANDED"));
+  const r5 = go("fill5");
+  check("non-test adjacent hunk resolves LANDED, raw git conflict was package.json", () => {
+    assert.ok(r5.rawConflicts.includes("package.json"));
+    assert.equal(format(r5), "LANDED");
+    assert.deepEqual(r5.appended, ["node scripts/test_v.mjs"]);
+  });
+  const r6 = go("fill6");
+  check("non-test same-key divergence names the key", () => assert.equal(format(r6), "CONFLICT package.json[scripts.build]"));
 
   // --push: real remote (bare repo), new branch only
   const bare = join(tmp, `${label}-remote.git`);
@@ -100,6 +112,41 @@ async function checks(toolPath, label) {
     assert.equal(sh(repo, "rev-parse", "main").trim(), mainHead);
     assert.equal(sh(repo, "worktree", "list").trim().split("\n").length, 1);
   });
+  // pure 3-way: merged package.json content, valid JSON, idempotent
+  const { mergePackage } = await import(pathToFileURL(toolPath).href + `?${label}pure`);
+  const B = { name: "n", scripts: { test: "a && b", build: "x" } };
+  const O = { name: "n", scripts: { test: "run", build: "x", lint: "l" } };
+  const T = { name: "n", scripts: { test: "a && b && c", build: "x", postbuild: "pb" }, dependencies: { d: "1" } };
+  const m = mergePackage(B, O, T);
+  check("pure: clean, test line = ours, theirs non-test keys kept, ours kept", () => {
+    assert.deepEqual(m.conflicts, []);
+    assert.equal(m.merged.scripts.test, "run");
+    assert.equal(m.merged.scripts.postbuild, "pb");
+    assert.equal(m.merged.scripts.lint, "l");
+    assert.deepEqual(m.merged.dependencies, { d: "1" });
+  });
+  check("pure: output is valid JSON and idempotent", () => {
+    const txt = JSON.stringify(m.merged, null, 2);
+    assert.deepEqual(JSON.parse(txt), m.merged);
+    const m2 = mergePackage(B, m.merged, T);
+    assert.deepEqual(m2.merged, m.merged);
+    assert.deepEqual(m2.conflicts, []);
+  });
+  check("pure: same-key divergence is a precise conflict", () => {
+    const c = mergePackage(B, { ...O, scripts: { ...O.scripts, build: "o" } }, { ...T, scripts: { ...T.scripts, build: "t" } });
+    assert.deepEqual(c.conflicts, ["scripts.build"]);
+  });
+  // postbuild is a test chain: command-level union, so base and fill both extending it is clean
+  check("pure: postbuild chain merges as command sets (the 15-branch shape)", () => {
+    const pb = (c) => ({ name: "n", scripts: { test: "t", postbuild: c } });
+    const r = mergePackage(pb("a && z"), pb("a && b && c && z"), pb("a && d && z"));
+    assert.deepEqual(r.conflicts, []);
+    assert.equal(r.merged.scripts.postbuild, "a && d && b && c && z");
+    const dup = mergePackage(pb("a && z"), pb("a && b && z"), pb("a && b && z"));
+    assert.equal(dup.merged.scripts.postbuild, "a && b && z");
+    const rm = mergePackage(pb("a && b && z"), pb("a && b && c && z"), pb("a && z"));
+    assert.equal(rm.merged.scripts.postbuild, "a && c && z");
+  });
   return fails;
 }
 
@@ -120,6 +167,8 @@ try {
   t("mutation caught: duplicate commands appended twice", m1.some((f) => /duplicate/.test(f)), m1.join(" | "));
   const m2 = await mutate("dropnontest", "pkg.nonTestEdits /*MUT:nontest*/", "false");
   t("mutation caught: non-test package.json edits silently dropped", m2.some((f) => /non-test/.test(f)), m2.join(" | "));
+  const m3 = await mutate("nosplit", "if (c.scripts /*MUT:split*/) delete", "if (false) delete");
+  t("mutation caught: test-line/non-test split broken", m3.length > 0 && m3.some((f) => /adjacent|pure/.test(f)), m3.join(" | "));
   console.log(`test_restack_to_manifest: ${ok} checks passed`);
 } finally {
   rmSync(tmp, { recursive: true, force: true });

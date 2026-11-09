@@ -74,6 +74,107 @@ function keepMergedPackage(wt, base, pkgPath) {
   return true;
 }
 
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const isObj = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
+
+/** Key-level 3-way of plain JSON. Returns { value, conflicts: [dotted.path] }. Ours key order is kept,
+ *  keys only theirs added are appended. Deleting on one side and leaving the other alone is clean. */
+export function merge3(base, ours, theirs, path = "") {
+  const conflicts = [];
+  if (same(ours, theirs)) return { value: ours, conflicts };
+  if (same(base, ours)) return { value: theirs, conflicts };
+  if (same(base, theirs)) return { value: ours, conflicts };
+  if (!(isObj(base ?? {}) && isObj(ours) && isObj(theirs))) return { value: ours, conflicts: [path || "(root)"] };
+  const b = base ?? {};
+  const keys = [...new Set([...Object.keys(ours), ...Object.keys(theirs), ...Object.keys(b)])];
+  const out = {};
+  const order = [...Object.keys(ours), ...Object.keys(theirs).filter((k) => !(k in ours))];
+  for (const k of keys) {
+    const has = (o) => Object.prototype.hasOwnProperty.call(o, k);
+    const sub = path ? `${path}.${k}` : k;
+    const o = has(ours) ? ours[k] : undefined, t = has(theirs) ? theirs[k] : undefined, bb = has(b) ? b[k] : undefined;
+    let r;
+    if (same(o, t)) r = { value: o, conflicts: [] };
+    else if (same(bb, o)) r = { value: t, conflicts: [] };
+    else if (same(bb, t)) r = { value: o, conflicts: [] };
+    else if (isObj(o) && isObj(t)) r = merge3(isObj(bb) ? bb : {}, o, t, sub);
+    else r = { value: o, conflicts: [sub] };
+    conflicts.push(...r.conflicts);
+    if (r.value !== undefined) out[k] = r.value;
+  }
+  const ordered = {};
+  for (const k of order) if (k in out) ordered[k] = out[k];
+  for (const k of Object.keys(out)) if (!(k in ordered)) ordered[k] = out[k];
+  return { value: ordered, conflicts };
+}
+
+// scripts.* values that are `a && b && c` test chains (postbuild runs the built-output checks): merged as
+// command sets (union of what the fill added, honouring what either side removed), not as one string.
+const CHAIN_KEYS = new Set(["postbuild"]);
+const cmds = (v) => (typeof v === "string" ? v.split(" && ").map((x) => x.trim()).filter(Boolean) : null);
+
+/** Command-level 3-way of one chain. Ours order wins; theirs additions follow their predecessor in theirs. */
+export function mergeChain(base, ours, theirs) {
+  const B = cmds(base) ?? [], O = cmds(ours), T = cmds(theirs);
+  if (!O || !T) return null;
+  const bs = new Set(B), ts = new Set(T), os = new Set(O);
+  const removed = new Set(B.filter((c) => !ts.has(c)));
+  const out = O.filter((c) => !removed.has(c));
+  for (let i = 0; i < T.length; i++) {
+    const c = T[i];
+    if (bs.has(c) || os.has(c)) continue;
+    let at = -1;
+    for (let j = i - 1; j >= 0 && at < 0; j--) at = out.indexOf(T[j]);
+    out.splice(at + 1, 0, c);
+  }
+  return out.join(" && ");
+}
+
+/** Finer package.json 3-way. Splits scripts into the test-line (scripts.test: handled by the manifest,
+ *  the base line wins, the fill's added commands go to the manifest = union) and the non-test remainder
+ *  (key-level 3-way). Returns { merged, conflicts: ["scripts.build", ...] }. */
+export function mergePackage(base, ours, theirs) {
+  const strip = (p) => { const c = structuredClone(p ?? {}); const t = c.scripts?.test; if (c.scripts /*MUT:split*/) delete c.scripts.test; return { rest: c, test: t }; };
+  const B = strip(base), O = strip(ours), T = strip(theirs);
+  // chain keys: pull them out, merge as command sets, put the result back
+  const chainOut = {};
+  for (const k of CHAIN_KEYS) {
+    const vals = [B.rest, O.rest, T.rest].map((p) => p.scripts?.[k]);
+    if (vals[1] === undefined || vals[2] === undefined || vals[1] === vals[2] || vals[0] === vals[1] || vals[0] === vals[2]) continue;
+    const m = mergeChain(vals[0], vals[1], vals[2]);
+    if (m === null) continue;
+    chainOut[k] = m;
+    for (const p of [B.rest, O.rest, T.rest]) delete p.scripts[k];
+  }
+  const r = merge3(B.rest, O.rest, T.rest);
+  const merged = r.value;
+  for (const [k, v] of Object.entries(chainOut)) { merged.scripts = merged.scripts ?? {}; merged.scripts[k] = v; }
+  if (O.test !== undefined) {
+    merged.scripts = merged.scripts ?? {};
+    const scripts = {};
+    // keep ours key order, with test back in the slot it holds in ours
+    for (const k of Object.keys(ours.scripts ?? {})) scripts[k] = k === "test" ? O.test : merged.scripts[k];
+    for (const k of Object.keys(merged.scripts)) if (!(k in scripts)) scripts[k] = merged.scripts[k];
+    for (const k of Object.keys(scripts)) if (scripts[k] === undefined) delete scripts[k];
+    merged.scripts = scripts;
+  }
+  return { merged, conflicts: r.conflicts };
+}
+
+/** Write the finer 3-way into the worktree. Returns { ok, keys }. */
+function finerPackage(wt, repo, mergeBase, base, branch, pkgPath) {
+  let b, o, t;
+  try { b = pkgAt(repo, mergeBase); o = pkgAt(repo, base); t = pkgAt(repo, branch); } catch { return { ok: false, keys: [] }; }
+  if (!o || !t) return { ok: false, keys: [] };
+  const { merged, conflicts } = mergePackage(b, o, t);
+  if (conflicts.length) return { ok: false, keys: conflicts };
+  const oursTxt = git(wt, ["show", `${base}:package.json`]);
+  const indent = oursTxt.match(/^(\s+)"/m)?.[1] ?? "  ";
+  writeFileSync(pkgPath, JSON.stringify(merged, null, indent) + (oursTxt.endsWith("\n") ? "\n" : ""));
+  git(wt, ["add", "package.json"]);
+  return { ok: true, keys: [] };
+}
+
 const unmerged = (wt) =>
   git(wt, ["diff", "--name-only", "--diff-filter=U"]).split("\n").filter(Boolean);
 
@@ -100,8 +201,20 @@ export function restack({ repo, branch, base, scratchRoot = DEFAULT_SCRATCH, pus
       if (pkg.nonTestEdits /*MUT:nontest*/) {
         // Non-test edits are never dropped: a git conflict stays a CONFLICT; a git-clean merge is
         // kept with its "test" line forced back to the base line.
-        pkgOk = !left.has("package.json") && keepMergedPackage(wt, base, pkgPath);
-        if (!pkgOk) left.add("package.json");
+        if (left.has("package.json")) {
+          // adjacent-hunk case: git cannot split it, the key-level 3-way can
+          const f = finerPackage(wt, repo, pkg.mergeBase, base, branch, pkgPath);
+          pkgOk = f.ok;
+          if (f.ok) left.delete("package.json");
+          else {
+            left.delete("package.json");
+            if (f.keys.length) for (const k of f.keys) left.add(`package.json[${k}]`);
+            else left.add("package.json");
+          }
+        } else {
+          pkgOk = keepMergedPackage(wt, base, pkgPath);
+          if (!pkgOk) left.add("package.json");
+        }
       } else {
         git(wt, ["checkout", base, "--", "package.json"]);
         left.delete("package.json");
@@ -123,6 +236,13 @@ export function restack({ repo, branch, base, scratchRoot = DEFAULT_SCRATCH, pus
           git(wt, ["add", MANIFEST]);
         }
       }
+    }
+    else if (left.has("package.json")) {
+      // criss-cross history: git reports a conflict although the fill never touched package.json
+      // against the merge-base; the key-level 3-way settles it (their side == base, so ours wins).
+      const f = finerPackage(wt, repo, pkg.mergeBase, base, branch, pkgPath);
+      left.delete("package.json");
+      if (!f.ok) for (const k of (f.keys.length ? f.keys.map((x) => `package.json[${x}]`) : ["package.json"])) left.add(k);
     }
     // test_no_orphan_scripts.sh: base wins
     if (left.has(ORPHAN)) {
