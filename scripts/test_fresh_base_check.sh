@@ -1,39 +1,57 @@
 #!/usr/bin/env bash
-# Fixture-only test for fresh_base_check.sh. MUTATE=1 swaps in a broken ancestor check (suite must go RED).
+# Fixture-only test for fresh_base_check.sh, plus 2 mutation checks. Never touches a live repo.
 set -u
-HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-SRC=$HERE/fresh_base_check.sh
-T=$(mktemp -d "${TMPDIR:-/tmp}/fbc-test.XXXXXX") || exit 97
-case "$T" in */fbc-test.??????) ;; *) echo "bad fixture root '$T'" >&2; exit 97 ;; esac
-[ -d "$T" ] || exit 97
-cleanup() { case "${T:-}" in */fbc-test.??????) [ -d "$T" ] && { rm -rf -- "${T:?}/o.git" "${T:?}/w" "${T:?}/chk.sh"; rmdir "$T"; } ;; esac; }
-trap cleanup EXIT
-CHK=$T/chk.sh
-if [ "${MUTATE:-0}" = 1 ]; then
-  sed 's/git merge-base --is-ancestor "\$int" "\$branch"/false/' "$SRC" > "$CHK"
-  cmp -s "$SRC" "$CHK" && { echo "mutation did not apply"; exit 97; }
-else cp "$SRC" "$CHK"; fi
-export GIT_AUTHOR_NAME=t GIT_AUTHOR_EMAIL=t@t GIT_COMMITTER_NAME=t GIT_COMMITTER_EMAIL=t@t
-git init -q --bare "$T/o.git" && git clone -q "$T/o.git" "$T/w" 2>/dev/null && cd "$T/w" || exit 97
-git config commit.gpgsign false
+here="$(cd "$(dirname "$0")" && pwd)"; G="$here/fresh_base_check.sh"
+T=$(mktemp -d) || exit 1
+[ -n "$T" ] && [ -d "$T" ] && [ "$T" != "/" ] && [ "$T" != "$HOME" ] && [ -z "$(ls -A "$T")" ] || { echo "bad tmp"; exit 1; }
+trap 'rm -rf "${T:?}"' EXIT
 fail=0; n=0
-check() { # name want_rc want_out_prefix branch
-  n=$((n+1)); out=$(bash "$CHK" "$4" 2>&1); rc=$?
-  if [ "$rc" = "$2" ] && [[ "$out" == "$3"* ]]; then echo "ok $n $1: $out"; else echo "FAIL $n $1: rc=$rc out='$out' want rc=$2 '$3'"; fail=1; fi
-}
-cm() { GIT_COMMITTER_DATE="$1" GIT_AUTHOR_DATE="$1" git commit -q --allow-empty -m "$2"; }
-cm "2026-01-01T00:00:00" base; git branch -M main; git push -q origin main
-git branch old-work
-check "no int branch" 0 NOINT main
-git checkout -q -b web/obelisk-int-a; cm "2026-02-01T00:00:00" int-a1; git push -q origin web/obelisk-int-a
-git checkout -q -b web/obelisk-int2-b; cm "2026-03-01T00:00:00" int-b1; cm "2026-03-02T00:00:00" int-b2; git push -q origin web/obelisk-int2-b
-git fetch -q origin
-git checkout -q -b fresh-work origin/web/obelisk-int2-b; cm "2026-03-03T00:00:00" w1
-check "fresh branch" 0 FRESH fresh-work
-check "stale off main, two ints, picks newest, behind=3" 1 "STALE behind=3 commits, int=origin/web/obelisk-int2-b" old-work
-git checkout -q -b mid-work origin/web/obelisk-int-a
-check "behind older int only, behind=2" 1 "STALE behind=2 commits, int=origin/web/obelisk-int2-b" mid-work
-check "branch equal to int head is fresh" 0 FRESH origin/web/obelisk-int2-b
-check "unknown branch errors" 2 "ERROR" nope-branch
-[ $fail = 0 ] && echo "ALL $n PASS" || echo "SUITE RED"
-exit $fail
+ok(){ n=$((n+1)); if [ "$2" = "$3" ]; then echo "ok $n $1"; else echo "FAIL $n $1 (want $3 got $2)"; fail=$((fail+1)); fi; }
+F="$T/fx"; mkdir -p "$F"; cd "$F" || exit 1
+git init -q -b main r && cd r && git config user.email t@t && git config user.name t
+echo a > a; echo b > b; git add -A; git commit -qm base
+base=$(git rev-parse HEAD)
+git branch fresh; git branch behind; git branch conf
+git switch -q -c intx; echo i > i; git add i; git commit -qm i1; sleep 1
+echo changed > a; git commit -qam i2
+git update-ref refs/remotes/origin/web/obelisk-int-new HEAD
+git update-ref refs/remotes/origin/web/obelisk-int-old "$base"
+git switch -q fresh; git merge -q --ff-only intx; echo f > f; git add f; git commit -qm f
+git switch -q conf; echo mine > a; git commit -qam conf
+git switch -q behind; echo z > z; git add z; git commit -qm z
+# make intx 30 ahead of behind via extra commits
+git switch -q intx; for k in $(seq 1 30); do echo $k > "x$k"; git add "x$k"; git commit -qm "x$k"; done
+git update-ref refs/remotes/origin/web/obelisk-int-new HEAD
+git switch -q main
+before=$(git status --porcelain | wc -l)
+
+git switch -q -c tipfresh intx; echo t > t; git add t; git commit -qm t; git switch -q main
+out=$(bash "$G" tipfresh); rc=$?; ok "fresh rc" $rc 0
+case "$out" in "BEHIND=0 MERGE_BASE="*" CONFLICT=no") ok "fresh line shape" y y;; *) ok "fresh line shape: $out" n y;; esac
+# fresh branched from intx before the 30: behind=30 -> need threshold above
+FRESH_MAX_BEHIND=31 bash "$G" fresh >/dev/null; rc=$?; ok "fresh under raised threshold" $rc 0
+bash "$G" fresh >/dev/null; rc=$?; ok "default threshold 25 vs behind 30 is stale" $rc 3
+out=$(bash "$G" behind); rc=$?; ok "behind-only rc stale" $rc 3
+case "$out" in *"CONFLICT=no") ok "behind-only no conflict" y y;; *) ok "behind-only no conflict: $out" n y;; esac
+FRESH_MAX_BEHIND=100 bash "$G" behind >/dev/null; rc=$?; ok "behind-only passes with big threshold" $rc 0
+out=$(FRESH_MAX_BEHIND=100 bash "$G" conf); rc=$?; ok "conflicting rc stale even under threshold" $rc 3
+case "$out" in *"CONFLICT=yes") ok "conflict yes" y y;; *) ok "conflict yes: $out" n y;; esac
+out=$(bash "$G" nosuchbranch 2>&1); rc=$?; ok "bad branch rc" $rc 2
+bash "$G" >/dev/null 2>&1; rc=$?; ok "no args rc" $rc 2
+bash "$G" fresh refs/remotes/origin/nope >/dev/null 2>&1; rc=$?; ok "bad int ref rc" $rc 2
+bash "$G" "bad name;" >/dev/null 2>&1; rc=$?; ok "hostile branch name rc" $rc 2
+# default ref picks newest by date (new, not old)
+out=$(FRESH_MAX_BEHIND=100 bash "$G" fresh); case "$out" in *"BEHIND=30"*) ok "newest int picked" y y;; *) ok "newest int picked: $out" n y;; esac
+after=$(git status --porcelain | wc -l); ok "worktree untouched" "$after" "$before"
+# no integration ref
+for r in $(git for-each-ref --format='%(refname)' refs/remotes/origin/web); do git update-ref -d "$r"; done
+bash "$G" fresh >/dev/null 2>&1; rc=$?; ok "no integration ref rc" $rc 2
+git update-ref refs/remotes/origin/web/obelisk-int-new intx
+# mutations
+sed 's/\[ "\$behind" -lt "\$max" \] && //' "$G" > "$T/m_thr.sh"
+sed 's/^if git merge-tree --write-tree[^;]*; then/if true; then/' "$G" > "$T/m_con.sh"
+FRESH_MAX_BEHIND=25 bash "$T/m_thr.sh" fresh >/dev/null; rc=$?
+[ "$rc" = 0 ] && { n=$((n+1)); echo "ok $n mutation threshold-ignored turns test red (stale branch now rc 0)"; } || { fail=$((fail+1)); echo "FAIL mutation threshold survived"; }
+FRESH_MAX_BEHIND=100 bash "$T/m_con.sh" conf >/dev/null 2>&1; rc=$?
+[ "$rc" = 0 ] && { n=$((n+1)); echo "ok $n mutation conflict-ignored turns test red (conflicting branch now rc 0)"; } || { fail=$((fail+1)); echo "FAIL mutation conflict survived (rc $rc)"; }
+echo "TOTAL $n ok, $fail fail"; [ "$fail" = 0 ] && echo "PASS" || echo "FAILED"; exit $fail
