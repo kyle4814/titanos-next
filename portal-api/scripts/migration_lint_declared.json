@@ -1,0 +1,115 @@
+{
+ "duplicate_entries": [
+  {
+   "prefix": 2,
+   "files": [
+    "0002_counter_buckets.sql",
+    "0002_portal_billing.sql"
+   ],
+   "owner": "f13-era counter store (92251b16a); C2 billing (91897d3d9)"
+  },
+  {
+   "prefix": 3,
+   "files": [
+    "0003_agent_door.sql",
+    "0003_enterprise.sql",
+    "0003_owner_seat.sql",
+    "0003_refund_cases.sql"
+   ],
+   "owner": "C7 agent door (07f8c8e84); C8 enterprise (e07f422eb); C3 owner seat (b789961ff); C2 refund wire (684e100f6)"
+  },
+  {
+   "prefix": 4,
+   "files": [
+    "0004_market.sql",
+    "0004_store_counters.sql",
+    "0004_subscription_plan.sql"
+   ],
+   "owner": "C4 market (cc19dbdac); f13 D1Store (8419fb3f2); f172 plan D1 (7cdd03b8f)"
+  },
+  {
+   "prefix": 5,
+   "files": [
+    "0005_invoice_d1.sql",
+    "0005_owner_d1.sql",
+    "0005_subscription_version.sql"
+   ],
+   "owner": "f192 invoices D1 (a58112172); f15 owner D1 (be85ca1dd); f175 plan CAS (8ffd0121a)"
+  },
+  {
+   "prefix": 6,
+   "files": [
+    "0006_held_facts.sql",
+    "0006_owner_state_rev.sql"
+   ],
+   "owner": "f194 held facts (978cd34e8); f185 owner CAS (94a5f0a5b)"
+  },
+  {
+   "prefix": 8,
+   "files": [
+    "0008_purchase_abandoned_status.sql",
+    "0008_throttle_state.sql"
+   ],
+   "owner": "f234 abandoned status (2f057746f); D1ThrottleStore (5abc0cfed)"
+  }
+ ],
+ "gap_entries": [
+  {
+   "prefix": 9,
+   "owner": "unclaimed on any origin/web branch (searched 2026-11-10)"
+  },
+  {
+   "prefix": 10,
+   "owner": "same"
+  },
+  {
+   "prefix": 11,
+   "owner": "same"
+  },
+  {
+   "prefix": 12,
+   "owner": "same"
+  },
+  {
+   "prefix": 13,
+   "owner": "same"
+  },
+  {
+   "prefix": 16,
+   "owner": "f285_c2_invoice_render_wire 0016_purchase_refunded_at.sql (not on int3)"
+  },
+  {
+   "prefix": 17,
+   "owner": "f301 0017_unmatched_demand.sql (not on int3)"
+  }
+ ],
+ "check_debt": [
+  {
+   "pair": "payout states",
+   "value": "sending",
+   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
+  },
+  {
+   "pair": "payout states",
+   "value": "approved_retry",
+   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
+  },
+  {
+   "pair": "payout states",
+   "value": "held",
+   "owner": "f59_c8_payout_d1_adapter migration 0004 (widened payouts.status CHECK), not on int3"
+  },
+  {
+   "pair": "card kinds",
+   "value": "clawback_review",
+   "owner": "C4 kill-test drill 6605e16cc / f222 rebase 9a2504ca8 (market_cards.kind CHECK), not on int3"
+  }
+ ],
+ "provenance": {
+  "measured": "2026-11-10 on origin/web/obelisk-int3-2026-11-07 @ 1265c502f",
+  "command": "node portal-api/scripts/migration_lint.mjs",
+  "before": "17 failures (6 duplicate prefixes, 7 gaps, 4 CHECK mismatches)",
+  "route": "f354: widen declared debt to the exact measured set, no renumbering of possibly-applied migrations (GATE5). The lint still fails on any NEW duplicate, gap, undeclared file in a declared prefix, or stale entry.",
+  "removal": "delete an entry when its owning branch lands or the f189 renumber map is applied; a stale entry fails the lint."
+ }
+}
