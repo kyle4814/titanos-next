@@ -125,3 +125,4 @@ node scripts/test_partner_book_ui.mjs
 node scripts/test_test_manifest.mjs
 node scripts/test_manifest_lint.mjs
 bash scripts/test_soak_drift_guard.sh
+node scripts/test_restack_to_manifest.mjs
