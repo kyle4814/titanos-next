@@ -28,12 +28,23 @@ if [ -z "$TEST_SCRIPT" ]; then
   exit 1
 fi
 
+# C10: when "test" is the manifest runner, the executed set lives in scripts/test_manifest.txt.
+MANIFEST="$HERE/test_manifest.txt"
+case "$TEST_SCRIPT" in
+  *run_tests.mjs*)
+    [ -f "$MANIFEST" ] || { echo "FAIL test script is run_tests.mjs but $MANIFEST is missing"; exit 1; }
+    TEST_SCRIPT="$TEST_SCRIPT
+$(cat "$MANIFEST")"
+    ;;
+esac
+
 pass=0
 fail=0
 orphans=""
 for f in "$HERE"/test_*; do
   [ -f "$f" ] || continue
   base="$(basename "$f")"
+  [ "$base" = "test_manifest.txt" ] && continue  # the manifest itself, not a test
   case "$TEST_SCRIPT" in
     *"$base"*)
       pass=$((pass + 1))
