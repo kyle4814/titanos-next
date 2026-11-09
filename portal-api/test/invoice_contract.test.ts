@@ -90,7 +90,7 @@ test("[d1] account deletion keeps the invoices (tax records), without the email"
   assert.equal(r.length, 1); assert.equal((await new D1PlanStore(db).accountById("acc_a"))?.email.includes("example.invalid"), false);
 });
 test("migration 0005 is additive, nullable and NOT APPLIED; the number counter is the single-row table", () => {
-  const dir = resolve(import.meta.dirname, "../migrations"), f = readdirSync(dir).find((x) => x.startsWith("0005_"))!;
+  const dir = resolve(import.meta.dirname, "../migrations"), f = readdirSync(dir).find((x) => x.startsWith("0005_invoice"))!;
   const sql = readFileSync(join(dir, f), "utf8");
   assert.equal(f, "0005_invoice_d1.sql"); assert.ok(/NOT applied/.test(sql));
   assert.ok(!/\b(DROP|DELETE|UPDATE)\b/i.test(sql.replace(/--.*$/gm, "")));
