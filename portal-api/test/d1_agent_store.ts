@@ -26,11 +26,17 @@ export class D1ShadowStore extends MemoryStore {
   // credits
   async creditBalance(id: string) { return this.agent.creditBalance(id); }
   async creditEntries(id: string) { return this.agent.creditEntries(id); }
-  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
-    const r = await this.agent.creditApply(id, delta, reason, ref, at);
-    if (r !== undefined) await super.creditApply(id, delta, reason, ref, at);
+  async creditApply(id: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string) {
+    const r = await this.agent.creditApply(id, delta, reason, ref, at, keyId);
+    if (r !== undefined) await super.creditApply(id, delta, reason, ref, at, keyId);
     return r;
   }
+  async creditDebitCapped(o: import("../src/agent/d1agent.ts").DebitInput) {
+    const r = await this.agent.creditDebitCapped(o);
+    if (r.ok) await super.creditDebitCapped(o);
+    return r;
+  }
+  async keySpend(keyId: string, dayStart: number, accountId?: string) { return this.agent.keySpend(keyId, dayStart, accountId); }
   async putCreditOrder(o: CreditOrder) { await this.agent.putCreditOrder(o); await super.putCreditOrder(o); }
   async creditOrderByCheckout(c: string) { return this.agent.creditOrderByCheckout(c); }
   // receipts and calls
@@ -38,6 +44,8 @@ export class D1ShadowStore extends MemoryStore {
   async receiptById(id: string, accountId?: string) { return this.agent.receiptById(id, accountId); }
   async receiptByIdem(k: string, i: string, accountId?: string) { return this.agent.receiptByIdem(k, i, accountId); }
   async receiptsForKey(k: string, limit: number, accountId?: string) { return this.agent.receiptsForKey(k, limit, accountId); }
+  async idemReserve(k: string, i: string, rid: string, owner: string, now: number, ttl: number) { return this.agent.idemReserve(k, i, rid, owner, now, ttl); }
+  async idemRelease(k: string, i: string, owner: string) { await this.agent.idemRelease(k, i, owner); }
   async callsSince(k: string, since: number) { return this.agent.callsSince(k, since); }
   async noteCall(k: string, at: number) { await this.agent.noteCall(k, at); await super.noteCall(k, at); }
 }
