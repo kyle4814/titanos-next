@@ -18,10 +18,10 @@ for (const [name, mk] of [["MemoryStore", memory], ["D1Store(FakeD1)", d1]] as [
 // ---- mutation: neuter ONE D1Store method at a time (wrapper over the real one), run the whole contract, expect >= 1 failing case.
 type Kind = "bool" | "list" | "count" | "lookup" | "void";
 const METHODS: Record<string, Kind> = {
-  casPurchase: "bool", putSubscriptionOnce: "bool", createSubscription: "bool", putInvoiceOnce: "bool", purchaseInvoiced: "bool", acquireLease: "bool", casSubscription: "bool",
-  pendingPurchasesBefore: "list", paidPurchasesBefore: "list", paidWithoutSubscriptionBefore: "list", takeFacts: "list", allCards: "list", refundCasesFor: "list", keysByPrefix: "list", receiptsForKey: "list",
+  casPurchase: "bool", memoInsert: "bool", memoSwap: "bool", putSubscriptionOnce: "bool", createSubscription: "bool", putInvoiceOnce: "bool", purchaseInvoiced: "bool", acquireLease: "bool", casSubscription: "bool",
+  pendingPurchasesBefore: "list", paidPurchasesBefore: "list", paidWithoutSubscriptionBefore: "list", takeFacts: "list", allCards: "list", refundCasesFor: "list", keysByPrefix: "list", memoList: "list", receiptsForKey: "list",
   countByStatus: "count",
-  purchaseByPaymentIntent: "lookup", subscriptionByPurchase: "lookup", subscriptionVersioned: "lookup", cardById: "lookup", refundCaseById: "lookup",
+  purchaseByPaymentIntent: "lookup", memoPeek: "lookup", subscriptionByPurchase: "lookup", subscriptionVersioned: "lookup", cardById: "lookup", refundCaseById: "lookup",
   releaseLease: "void", holdFact: "void", putRefundCase: "void", putInvoice: "void",
 };
 const neuter = (kind: Kind, v: unknown): unknown => kind === "bool" ? !v : kind === "list" ? [] : kind === "count" ? Number(v) + 1 : kind === "lookup" ? undefined : undefined;
@@ -46,6 +46,14 @@ describe("D1Store parity contract: MUTATION (the contract must bite)", () => {
   });
   test("mutant: acquireLease ignores the owner (any caller takes a live lease) -> contract fails", async () => {
     const mk = mutant((s, db) => { (s as unknown as Record<string, unknown>).acquireLease = async (k: string, o: string, now: number, ttl: number) => { await db.prepare("INSERT INTO claim_leases (key, owner, expires_at) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET owner = excluded.owner, expires_at = excluded.expires_at").bind(k, o, now + ttl).run(); return true; }; });
+    assert.ok((await failures(mk)) >= 1);
+  });
+  test("mutant: memoSwap ignores the expected fact (blind write) -> contract fails", async () => {
+    const mk = mutant((s, db) => { (s as unknown as Record<string, unknown>).memoSwap = async (k: string, _e: unknown, next: unknown) => { await db.prepare("UPDATE held_facts SET fact = ? WHERE key = ?").bind(JSON.stringify(next), k).run(); return true; }; });
+    assert.ok((await failures(mk)) >= 1);
+  });
+  test("mutant: memoInsert overwrites instead of insert-if-absent -> contract fails", async () => {
+    const mk = mutant((s, db) => { (s as unknown as Record<string, unknown>).memoInsert = async (k: string, f: unknown) => { await db.prepare("INSERT INTO held_facts (key, fact) VALUES (?, ?)").bind(k, JSON.stringify(f)).run(); return true; }; });
     assert.ok((await failures(mk)) >= 1);
   });
   test("mutant: takeFacts as SELECT then DELETE (not atomic) -> contract fails under concurrent takers", async () => {
