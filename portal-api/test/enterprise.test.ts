@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { makeEnt, INTERNAL, SSO_CFG, raw } from "./ent_harness.ts";
+import { makeEnt, INTERNAL, SSO_CFG } from "./ent_harness.ts";
 import { commissionCents, rateFor, HOLD_DAYS, APPROVAL_ABOVE_CENTS } from "../src/enterprise/share.ts";
 import { csvCell } from "../src/enterprise/service.ts";
 import { PRODUCTS } from "../src/catalogue.ts";
@@ -500,7 +500,7 @@ test("F1: SSO trust cannot outlive the domain proof (asset removed, then verifie
 test("F1b: even with a stale allow-list entry, a login needs a currently verified asset for the email domain", async () => {
   const { h, tid, cfg } = await ssoWorld();
   const st = (h.deps.ent as any).store;
-  raw.unverifyAssets(st, tid);   // proof lost behind the service's back
+  for (const a of [...st.assets.values()]) if (a.tenantId === tid) delete a.verifiedAt;   // proof lost behind the service's back
   assert.equal((await h.ssoLogin("bigco", cfg, "a@bigco.com.au")).res.status, 403);
 });
 test("F2: a removed or demoted admin's pending invites die with them; invites can be revoked; an invite from a no-longer-admin inviter is refused", async () => {
@@ -570,7 +570,7 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   assert.equal(await start("198.51.100.4"), 200, "everyone else still gets in");
   h.clock.t += 11 * 60_000;
   assert.equal(await start("203.0.113.9"), 200, "expired states no longer count");
-  assert.ok(raw.stateCount((h.deps.ent as any).store) <= 2, "expired states were purged");
+  assert.ok((h.deps.ent as any).store.states.size <= 2, "expired states were purged");
   // break-glass
   const inv = await h.post(o.session, `/enterprise/${tid}/members`, { email: "root@bigco.com.au", role: "admin" });
   const s1 = await h.ssoLogin("bigco", cfg, "root@bigco.com.au");
