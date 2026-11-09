@@ -23,13 +23,13 @@ test("the real tree is clean with the exact declared debt, every entry carries a
   const r = lint();
   assert.deepEqual(r.failures, []);
   const d = declared();
-  assert.equal(d.duplicate_entries.length, 7);
+  assert.equal(d.duplicate_entries.length, 8);
   assert.deepEqual(d.gap_entries.map((e: any) => e.prefix), [9, 10, 11, 12, 13, 17]);
   assert.equal(d.check_debt.length, 0);
   for (const e of [...d.duplicate_entries, ...d.gap_entries, ...d.check_debt]) assert.ok(e.owner && e.owner.length > 3, JSON.stringify(e));
   for (const e of d.duplicate_entries) assert.ok(e.files.length >= 2);
   assert.ok(d.provenance.measured.includes("2026-11-10"));
-  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 7 + 6 + 0);
+  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 8 + 6 + 0);
 });
 
 test("a NEW duplicate prefix (an undeclared one) FAILS, naming both files", () => {
@@ -50,13 +50,13 @@ test("a new file joining an already-declared duplicate prefix FAILS (the declara
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
 
-test("a NEW gap FAILS (a migration numbered past the tree leaves 0022..N-1 undeclared)", () => {
+test("a NEW gap FAILS (a migration numbered past the tree leaves 0023..N-1 undeclared)", () => {
   const d = clone();
   try {
-    writeFileSync(join(d, "migrations/0024_skips_two.sql"), "CREATE TABLE zz_skip (id TEXT PRIMARY KEY);");
+    writeFileSync(join(d, "migrations/0025_skips_two.sql"), "CREATE TABLE zz_skip (id TEXT PRIMARY KEY);");
     const r = run(d);
-    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0022")), r.failures.join("\n"));
-    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0023")));
+    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0023")), r.failures.join("\n"));
+    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0024")));
     assert.ok(!r.failures.some((m: string) => m.includes("gap: no migration numbered 0009")), "declared gaps stay quiet");
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
@@ -102,9 +102,9 @@ test("mutation: emptying the declared file turns the real tree red (the declarat
   try {
     writeFileSync(join(d, "declared.json"), "{}");
     const r = run(d);
-    assert.ok(r.failures.filter((m: string) => m.startsWith("duplicate prefix")).length === 7, r.failures.join("\n"));
+    assert.ok(r.failures.filter((m: string) => m.startsWith("duplicate prefix")).length === 8, r.failures.join("\n"));
     assert.ok(r.failures.filter((m: string) => m.startsWith("gap:")).length === 6);
-    assert.equal(r.failures.length, 13);
+    assert.equal(r.failures.length, 14);
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
 

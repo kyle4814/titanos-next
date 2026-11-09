@@ -2,7 +2,7 @@
 // verifier sits behind IdpVerifier in ssoCallback. Synthetic data: the IdP keypair is generated here, in tests only.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { makeEnt } from "./ent_harness.ts";
+import { makeEnt, raw } from "./ent_harness.ts";
 import { createOidcVerifier } from "../src/enterprise/oidc.ts";
 import { sealSecret, openSecret, newSealKey, parseSealKeys, isSealed, SealError, type SealKeyring } from "../src/enterprise/seal.ts";
 import { MemoryEntStore } from "../src/enterprise/store.ts";
@@ -85,7 +85,7 @@ test("tamper is detected: any flipped ciphertext/iv/header byte fails to open, a
   const w = await world();
   const row = (await w.store.ssoOf(w.tid))!;
   const q = row.secret.split("."); q[3] = flip(q[3]);
-  w.store.sso.set(w.tid, { ...row, secret: q.join(".") });
+  raw.setSsoSecret(w.store, w.tid, row, q.join("."));
   const r = await w.login();
   assert.equal(r.res.status, 401); assert.equal(r.body.session, undefined);
 });
@@ -100,7 +100,7 @@ test("wrong or unknown key id is rejected, never falls back to another key", asy
   assert.equal(await code(openSecret({ current: "k1", keys: { k2: ring.keys.k2 } }, env, "c")), "unknown_key", "retired key id");
   const w = await world();
   const row = (await w.store.ssoOf(w.tid))!;
-  w.store.sso.set(w.tid, { ...row, secret: row.secret.replace("tsl1.k1.", "tsl1.zz.") });
+  raw.setSsoSecret(w.store, w.tid, row, row.secret.replace("tsl1.k1.", "tsl1.zz."));
   assert.equal((await w.login()).res.status, 401);
 });
 
@@ -128,9 +128,9 @@ test("fail closed: no keyring means putSso answers 503 and nothing is stored; th
 test("a legacy plaintext row (or a missing keyring at login) cannot sign anyone in", async () => {
   const w = await world();
   const row = (await w.store.ssoOf(w.tid))!;
-  w.store.sso.set(w.tid, { ...row, secret: PLAIN });                         // bypass the adapter guard to model an old row
+  raw.setSsoSecret(w.store, w.tid, row, PLAIN);                         // bypass the adapter guard to model an old row
   assert.equal((await w.login()).res.status, 401);
-  w.store.sso.set(w.tid, row);
+  raw.setSsoSecret(w.store, w.tid, row, row.secret);
   delete w.h.deps.ent!.sealKeys;
   assert.equal((await w.login()).res.status, 401);
 });

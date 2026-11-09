@@ -27,7 +27,7 @@ export interface EntContext {
   approvals: ApprovalStore;   // C8 f40: a payout above the card threshold reaches sending only through a record here
 }
 const DAY = 86_400_000;
-export const SSO_STATE_TTL_MS = 10 * 60_000, INVITE_TTL_MS = 7 * DAY, MAX_ASSETS = 2000, MAX_OPEN_SSO_STATES = 1000, MAX_OPEN_SSO_STATES_PER_CLIENT = 20, MAX_PENDING_INVITES = 100;
+export const SSO_STATE_TTL_MS = 10 * 60_000, INVITE_TTL_MS = 7 * DAY, MAX_ASSETS = 2000, MAX_OPEN_SSO_STATES = 1000, MAX_OPEN_SSO_STATES_PER_CLIENT = 20, SSO_NEWCOMER_RESERVE = MAX_OPEN_SSO_STATES / 10, MAX_PENDING_INVITES = 100;
 const RESERVED_SLUGS = new Set(["app", "api", "admin", "www", "login", "sso", "enterprise", "partners", "pro", "agents", "shop", "trust", "investors", "internal", "portal", "static", "titanos"]);
 const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{1,38})[a-z0-9]$/;
 const ent = (d: Deps): EntContext => { if (!d.ent) throw new HttpError(503, "enterprise_unavailable"); return d.ent; };
@@ -393,9 +393,13 @@ export async function enforceSso(d: Deps, ctx: Ctx, tid: string, enabled: unknow
 export async function ssoStart(d: Deps, slug: string, clientKey = "unknown") {
   const c = ent(d), t = await c.store.tenantBySlug(slug), cfg = t && !t.deletedAt ? await c.store.ssoOf(t.id) : undefined;
   if (!t || !cfg) throw nf();
-  if ((await c.store.openSsoStates(t.id, d.now(), clientKey)) >= MAX_OPEN_SSO_STATES_PER_CLIENT || (await c.store.openSsoStates(t.id, d.now())) >= MAX_OPEN_SSO_STATES) throw new HttpError(429, "too_many_requests");
+  // FAIRNESS (f358): a source can only ever displace ITS OWN oldest state. At its per-source sub-cap it recycles its own oldest row;
+  // a source that already holds states is held to (cap - reserve) so the top slice stays free for a source with none, and the tenant cap stays the outer bound.
+  const own = await c.store.openSsoStates(t.id, d.now(), clientKey), total = await c.store.openSsoStates(t.id, d.now());
+  if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || (own > 0 && total >= MAX_OPEN_SSO_STATES - SSO_NEWCOMER_RESERVE)) await c.store.evictOldestSsoState(t.id, clientKey, d.now());
+  else if (total >= MAX_OPEN_SSO_STATES) throw new HttpError(429, "too_many_requests");
   const state = randomToken("st", 16), nonce = randomToken("nn", 16);
-  await c.store.putSsoState({ hash: await sha256Hex(state), tenantId: t.id, clientKey, nonceHash: await sha256Hex(nonce), expiresAt: d.now() + SSO_STATE_TTL_MS, used: false });
+  await c.store.putSsoState({ hash: await sha256Hex(state), tenantId: t.id, clientKey, nonceHash: await sha256Hex(nonce), expiresAt: d.now() + SSO_STATE_TTL_MS, used: false, createdAt: d.now() });
   const q = new URLSearchParams({ client_id: cfg.clientId, response_type: "id_token", scope: "openid email", state, nonce, redirect_uri: `${d.siteOrigin}/app/estate` });
   return { authorizeUrl: `${cfg.issuer}/authorize?${q}`, state, nonce };
 }

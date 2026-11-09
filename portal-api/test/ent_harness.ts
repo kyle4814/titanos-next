@@ -1,6 +1,8 @@
 import { make } from "./harness.ts";
-import { MemoryEntStore } from "../src/enterprise/store.ts";
-import { MemoryApprovalStore } from "../src/enterprise/payout_decision.ts";
+import { MemoryEntStore, type EntStore } from "../src/enterprise/store.ts";
+import { MemoryApprovalStore, type ApprovalStore } from "../src/enterprise/payout_decision.ts";
+import { D1EntStore, D1ApprovalStore } from "../src/enterprise/d1store.ts";
+import { FakeD1 } from "./fake_d1.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
@@ -20,10 +22,25 @@ export class MockPayouts implements PayoutProvider {
   }
 }
 
+// ENT_STORE=d1 runs the WHOLE enterprise suite against D1EntStore + D1ApprovalStore on a FakeD1 (real SQLite + every real migration).
+// Foreign keys are OFF in this mode only because the portal accounts live in MemoryStore here; test/ent_store_contract.test.ts runs FK ON.
+const FAKES = new WeakMap<object, FakeD1>();
+// Raw row access for tests that deliberately go BEHIND the store interface (tamper, legacy rows, lost proof). Works on both adapters.
+export const raw = {
+  unverifyAssets(store: EntStore, tid: string) { const f = FAKES.get(store); if (f) f.db.prepare("UPDATE tenant_assets SET verified_at = NULL WHERE tenant_id = ?").run(tid); else for (const a of (store as MemoryEntStore).assets.values()) if (a.tenantId === tid) delete a.verifiedAt; },
+  stateCount(store: EntStore): number { const f = FAKES.get(store); return f ? Number((f.db.prepare("SELECT COUNT(*) AS n FROM sso_states").get() as any).n) : (store as MemoryEntStore).states.size; },
+  setSsoSecret(store: EntStore, tid: string, row: any, secret: string) { const f = FAKES.get(store); if (f) f.db.prepare("UPDATE sso_configs SET secret_enc = ? WHERE tenant_id = ?").run(secret, tid); else (store as MemoryEntStore).sso.set(tid, { ...row, secret }); },
+};
+export function makeEntStores(kind = process.env.ENT_STORE ?? "memory"): { store: EntStore; approvals: ApprovalStore; fake?: FakeD1 } {
+  if (kind !== "d1") return { store: new MemoryEntStore(), approvals: new MemoryApprovalStore() };
+  const fake = new FakeD1(); fake.db.exec("PRAGMA foreign_keys = OFF");
+  const store = new D1EntStore(fake); FAKES.set(store, fake);
+  return { store, approvals: new D1ApprovalStore(fake), fake };
+}
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const store = new MemoryEntStore(), payouts = new MockPayouts(), book = new MemoryBookFacts();
-  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
+  const { store, approvals } = makeEntStores(), payouts = new MockPayouts(), book = new MemoryBookFacts();
+  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals, book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
   // sign in, then the operator provisions the seat
@@ -57,3 +74,10 @@ export function makeEnt(rates: RateTable = RATE_V1) {
   return { ...h, store, payouts, book, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
 }
 export const SSO_CFG = (clientId: string, secret = "sso_secret_fixture_0123456789") => ({ secret, issuer: "https://idp.mock.test", clientId });
+// f360: adapter-neutral SSO state rows for the per-source fairness suite (Memory and FakeD1 both).
+export const ssoRows = {
+  count(store: EntStore, clientKey: string | null): number { const f = FAKES.get(store); if (f) return Number((f.db.prepare(clientKey === null ? "SELECT COUNT(*) AS n FROM sso_states WHERE client_key IS NULL" : "SELECT COUNT(*) AS n FROM sso_states WHERE client_key = ?").get(...(clientKey === null ? [] : [clientKey])) as any).n); return [...(store as MemoryEntStore).states.values()].filter((s) => (clientKey === null ? !(s as any).clientKey : s.clientKey === clientKey)).length; },
+  has(store: EntStore, hash: string): boolean { const f = FAKES.get(store); return f ? !!f.db.prepare("SELECT 1 FROM sso_states WHERE hash = ?").get(hash) : (store as MemoryEntStore).states.has(hash); },
+  // a row as written BEFORE the migration: no client_key, no created_at
+  legacy(store: EntStore, tenantId: string, hash: string, expiresAt: number) { const f = FAKES.get(store); if (f) f.db.prepare("INSERT INTO sso_states (hash, tenant_id, nonce_hash, expires_at, used) VALUES (?,?,?,?,0)").run(hash, tenantId, "n_" + hash, expiresAt); else (store as MemoryEntStore).states.set(hash, { hash, tenantId, clientKey: "", nonceHash: "n_" + hash, expiresAt, used: false }); },
+};

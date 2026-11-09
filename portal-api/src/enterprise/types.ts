@@ -19,7 +19,7 @@ export interface Member { tenantId: string; accountId: string; role: Role; added
 export interface Invite { id: string; tenantId: string; email: string; role: Role; invitedBy: string; createdAt: number; expiresAt: number }
 export interface Asset { id: string; tenantId: string; domain: string; label: string; group: string; token: string; verifiedAt?: number }
 export interface SsoConfig { tenantId: string; issuer: string; clientId: string; secret: string; allowedDomains: string[]; defaultRole: Exclude<Role, "admin">; lastSuccessAt?: number }
-export interface SsoState { hash: string; tenantId: string; clientKey: string; nonceHash: string; expiresAt: number; used: boolean }
+export interface SsoState { hash: string; tenantId: string; clientKey: string; nonceHash: string; expiresAt: number; used: boolean; createdAt?: number }
 export interface AuditEntry { id: string; tenantId: string; actor: string; action: string; target: string; at: number }
 
 export type LedgerKind = "commission" | "clawback" | "payout" | "payout_reversal";
