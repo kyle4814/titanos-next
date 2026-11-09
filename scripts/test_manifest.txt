@@ -1,4 +1,5 @@
 bash scripts/test_no_orphan_scripts.sh
+bash scripts/test_soak_drift_guard.sh
 node scripts/test_sigils.mjs
 bash scripts/test_no_doctrine_leak_bites.sh
 node scripts/test_no_doctrine_leak.mjs
