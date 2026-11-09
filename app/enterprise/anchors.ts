@@ -18,8 +18,8 @@ export const ANCHORS: SeatAnchor[] = [
     body: "A nuke is our name for the large evidence pack built for a single organisation, with the savings worked out from your own figures. It is agreed on a call, with the price set before anything starts. The price is on request.",
   },
   {
-    id: "savings-calculator", title: "Savings calculator", status: "coming", plan: "plan line 297; register P096 (SPEC)",
-    body: "A calculator that runs on your numbers is specified but not built, and no savings figure is published here. We work it out with you on a call and show the method.",
+    id: "savings-calculator", title: "Savings calculator", status: "live", plan: "C8, plan line 1496; register P096",
+    body: "Enter your own numbers to see a floor to ceiling band of hours given back to your team, set against the Enterprise band. The method is shown beside the result. Nobody is replaced, and nothing you type leaves the page.",
   },
   {
     id: "sso", title: "SSO", status: "coming", plan: "C8, plan line 1496",
