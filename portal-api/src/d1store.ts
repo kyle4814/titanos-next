@@ -196,6 +196,10 @@ export class D1Store implements Store {
   async releaseLease(key: string, owner: string) { await this.exec("DELETE FROM claim_leases WHERE key = ? AND owner = ?", key, owner); }
   // Held webhook facts (f194, migration 0006). takeFacts is ONE DELETE ... RETURNING; RETURNING order is undefined, so rows are sorted back into hold order by seq.
   async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (key, fact) VALUES (?, ?)", key, JSON.stringify(fact)); }
+  async heldFactKeys(prefix: string, after: string | undefined, limit: number) { // f356: ascending distinct keys after the cursor, bounded; substr (not LIKE) so a % or _ in a key is literal
+    const rows = await this.many("SELECT DISTINCT key FROM held_facts WHERE substr(key, 1, ?) = ? AND key > ? ORDER BY key LIMIT ?", prefix.length, prefix, after ?? "", Math.max(0, limit));
+    return rows.map((r) => String(r.key));
+  }
   async takeFacts(key: string) {
     const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
     return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);
