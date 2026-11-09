@@ -121,10 +121,24 @@ export const DEFAULT_THRESHOLDS = {
   S10: 0.005, // timeout rate <=
   S11: 0.01,  // transport (drop/reset) rate <=
   S12: 0.01,  // 5xx rate <=
-  S13: 1.5,   // late-quarter p95 / early-quarter p95 <=
+  S13: 1.5,   // late-quarter median p95 / max(early-quarter median p95, S13_FLOOR_MS) <=
   S14: 0,     // dead targets (never answered 2xx) <=
   S15: 1,     // chaos observed: injected faults seen / faults configured (1 = at least one seen)
 };
+// S13 drift (f320). Root cause of the load flake: p95 comes from 1 ms buckets, so a quiet box has early p95 of
+// 2-3 ms; a mean over only two quarter windows lets one noisy late window (8 ms) read 2.7x with no leak. Fix: use
+// the MEDIAN window p95 per quarter (one spike window cannot move it) and floor the denominator at the 1 ms
+// bucket noise band, S13_FLOOR_MS. A sustained drift that is real at a >=floor baseline still reads its true ratio.
+export const S13_FLOOR_MS = 10;
+export function latencyDrift(windows) {
+  const q = Math.max(1, Math.floor(windows.length / 4));
+  const med = (a) => { if (!a.length) return 0; const s = a.map((w) => w.p95).sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const early = windows.slice(0, q).filter((w) => w.n);
+  const late = windows.slice(-q).filter((w) => w.n);
+  if (!early.length || !late.length) return { ratio: 1, early: 0, late: 0, denominator: S13_FLOOR_MS };
+  const e = med(early), l = med(late), denominator = Math.max(e, S13_FLOOR_MS);
+  return { ratio: l / denominator, early: e, late: l, denominator };
+}
 const ROWS = [
   ['S1', 'Availability: success rate over the run', '>=', 'C1/C2 bar: 0 human touches, results always return'],
   ['S2', 'Worst single sample window error rate', '<=', 'no window may collapse'],
@@ -138,7 +152,7 @@ const ROWS = [
   ['S10', 'Timeout rate', '<=', 'hung requests'],
   ['S11', 'Transport error rate (drop, reset)', '<=', 'connection faults tolerated'],
   ['S12', '5xx rate', '<=', 'server faults tolerated'],
-  ['S13', 'Latency drift, late p95 / early p95', '<=', 'no degradation over time (leak signal)'],
+  ['S13', 'Latency drift, late median p95 / max(early median p95, 10 ms floor)', '<=', 'no degradation over time (leak signal)'],
   ['S14', 'Targets that never answered 2xx', '<=', 'every surface reachable'],
   ['S15', 'Chaos observed vs configured (1 = injected faults were seen)', '>=', 'the chaos actually ran'],
 ];
@@ -153,11 +167,7 @@ export function buildBoard(run, thresholds = {}) {
   let run_ = 0, longest = 0;
   for (const w of windows) { if (w.n && w.errors / w.n > 0.05) { run_++; longest = Math.max(longest, run_); } else run_ = 0; }
   const expected = Math.floor(durationS / intervalS);
-  const q = Math.max(1, Math.floor(windows.length / 4));
-  const early = windows.slice(0, q).filter((w) => w.n);
-  const late = windows.slice(-q).filter((w) => w.n);
-  const avg = (a) => (a.length ? a.reduce((s, w) => s + w.p95, 0) / a.length : 0);
-  const drift = early.length && late.length && avg(early) > 0 ? avg(late) / avg(early) : 1;
+  const drift = latencyDrift(windows).ratio;
   const dead = targets.filter((t) => !t.ok2xx).length;
   const chaos = faultsConfigured ? (faultsSeen > 0 ? 1 : 0) : 1;
   const values = {
@@ -177,7 +187,7 @@ export function buildBoard(run, thresholds = {}) {
 // ---- the runner ----
 export async function runSoak(opts = {}) {
   const o = { durationS: 20, concurrency: 8, rps: 400, intervalS: 2, timeoutMs: 3000, seed: 1,
-    faults: {}, thresholds: {}, targets: [], ...opts };
+    faults: {}, thresholds: {}, targets: [], latencyClock: null, ...opts };
   const cleanup = [];
   let targets = o.targets.map((u) => assertLocal(u) && u);
   const fcfg = { drop: 0, delayRate: 0, delayMs: 0, err5xx: 0, ...o.faults };
@@ -202,16 +212,18 @@ export async function runSoak(opts = {}) {
   const windows = [];
   const agent = new http.Agent({ keepAlive: true, maxSockets: o.concurrency * 2 });
   const rnd = mulberry32(o.seed + 99);
+  // latencyClock (tests): { start(): token, end(token): ms } replaces the wall-clock latency read. Sockets stay real.
+  const clk = o.latencyClock || { start: () => performance.now(), end: (t0) => performance.now() - t0 };
   const once = (t) => new Promise((resolve) => {
-    const t0 = performance.now();
+    const t0 = clk.start();
     const u = new URL(t.url);
     const req = http.get({ host: u.hostname, port: u.port, path: '/', agent, timeout: o.timeoutMs }, (res) => {
       res.resume();
-      res.on('end', () => resolve({ ms: performance.now() - t0, status: res.statusCode }));
-      res.on('error', () => resolve({ ms: performance.now() - t0, kind: 'transport' }));
+      res.on('end', () => resolve({ ms: clk.end(t0), status: res.statusCode }));
+      res.on('error', () => resolve({ ms: clk.end(t0), kind: 'transport' }));
     });
-    req.on('timeout', () => { req.destroy(); resolve({ ms: performance.now() - t0, kind: 'timeout' }); });
-    req.on('error', () => resolve({ ms: performance.now() - t0, kind: 'transport' }));
+    req.on('timeout', () => { req.destroy(); resolve({ ms: clk.end(t0), kind: 'timeout' }); });
+    req.on('error', () => resolve({ ms: clk.end(t0), kind: 'transport' }));
   });
   let stop = false;
   const perWorkerGap = (1000 * o.concurrency) / o.rps;
