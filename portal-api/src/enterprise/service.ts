@@ -399,7 +399,7 @@ export async function ssoStart(d: Deps, slug: string, clientKey = "unknown") {
   if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || (own > 0 && total >= MAX_OPEN_SSO_STATES - SSO_NEWCOMER_RESERVE)) await c.store.evictOldestSsoState(t.id, clientKey, d.now());
   else if (total >= MAX_OPEN_SSO_STATES) throw new HttpError(429, "too_many_requests");
   const state = randomToken("st", 16), nonce = randomToken("nn", 16);
-  await c.store.putSsoState({ hash: await sha256Hex(state), tenantId: t.id, clientKey, nonceHash: await sha256Hex(nonce), expiresAt: d.now() + SSO_STATE_TTL_MS, used: false });
+  await c.store.putSsoState({ hash: await sha256Hex(state), tenantId: t.id, clientKey, nonceHash: await sha256Hex(nonce), expiresAt: d.now() + SSO_STATE_TTL_MS, used: false, createdAt: d.now() });
   const q = new URLSearchParams({ client_id: cfg.clientId, response_type: "id_token", scope: "openid email", state, nonce, redirect_uri: `${d.siteOrigin}/app/estate` });
   return { authorizeUrl: `${cfg.issuer}/authorize?${q}`, state, nonce };
 }

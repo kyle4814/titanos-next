@@ -568,7 +568,7 @@ test("F4: one client cannot exhaust the SSO start budget for everyone; expired s
   let last = 0;
   for (let i = 0; i < 25; i++) last = await start("203.0.113.9");
   assert.equal(last, 200, "f358: the noisy client recycles its own oldest state");
-  assert.equal((h.deps.ent as any).store.states.size, 20, "the noisy client is held at its sub-cap");
+  assert.equal(raw.stateCount((h.deps.ent as any).store), 20, "the noisy client is held at its sub-cap");
   assert.equal(await start("198.51.100.4"), 200, "everyone else still gets in");
   h.clock.t += 11 * 60_000;
   assert.equal(await start("203.0.113.9"), 200, "expired states no longer count");

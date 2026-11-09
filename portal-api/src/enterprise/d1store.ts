@@ -9,6 +9,7 @@ import type { D1Like, D1Statement } from "../env.ts";
 import type { EntStore } from "./store.ts";
 import { isSealed } from "./seal.ts";
 import type { ApprovalRecord, ApprovalStore } from "./payout_decision.ts";
+import { SSO_STATE_TTL_MS } from "./service.ts";
 import type { Asset, AuditEntry, Invite, LedgerEntry, Member, Payout, Referral, Role, SsoConfig, SsoState, Tenant } from "./types.ts";
 
 type Row = Record<string, any>;
@@ -32,13 +33,13 @@ const ledgerOf_ = (r: Row): LedgerEntry => clean({
   invoiceId: r.invoice_id, sourceKey: r.source_key, sourceLabel: r.source_label, rateBps: r.rate_bps == null ? null : Number(r.rate_bps), rateVersion: r.rate_version, payoutId: r.payout_id,
   held: r.held ? true : null, holdReasons: r.hold_reasons == null ? null : JSON.parse(r.hold_reasons),
 }) as LedgerEntry;
-const payoutOf = (r: Row): Payout => clean({ id: r.id, partnerId: r.partner_id, amountCents: Number(r.amount_cents), status: r.status, createdAt: Number(r.created_at), providerRef: r.provider_ref, reason: r.reason, sendingAt: r.sending_at == null ? null : Number(r.sending_at), attempts: r.attempts == null ? null : Number(r.attempts), heldAt: r.held_at == null ? null : Number(r.held_at) }) as Payout;
+const payoutOf = (r: Row): Payout => clean({ id: r.id, partnerId: r.partner_id, amountCents: Number(r.amount_cents), status: r.status, createdAt: Number(r.created_at), providerRef: r.provider_ref, reason: r.reason, sendingAt: r.sending_at == null ? null : Number(r.sending_at), attempts: r.attempts == null ? null : Number(r.attempts), heldAt: r.held_at == null ? null : Number(r.held_at), releasedAt: r.released_at == null ? null : Number(r.released_at), tickAt: r.tick_at == null ? null : Number(r.tick_at), refundedAt: r.refunded_at == null ? null : Number(r.refunded_at), operatorNote: r.operator_note }) as Payout;
 
 const LEDGER_INSERT_COLS = "id, uniq, partner_id, kind, amount_cents, at, available_at, invoice_id, source_key, source_label, rate_bps, rate_version, payout_id, held, hold_reasons";
 const ledgerArgs = (e: LedgerEntry) => [e.id, e.uniq, e.partnerId, e.kind, e.amountCents, e.at, e.availableAt, nul(e.invoiceId), nul(e.sourceKey), nul(e.sourceLabel), nul(e.rateBps), nul(e.rateVersion), nul(e.payoutId), e.held ? 1 : 0, e.holdReasons ? JSON.stringify(e.holdReasons) : null];
 
 // lifecycle fields a transition patch may touch (never id, partner, amount or created_at: a patch must not move money between partners)
-const PATCH_COLS: Record<string, string> = { providerRef: "provider_ref", reason: "reason", sendingAt: "sending_at", attempts: "attempts", heldAt: "held_at" };
+const PATCH_COLS: Record<string, string> = { providerRef: "provider_ref", reason: "reason", sendingAt: "sending_at", attempts: "attempts", heldAt: "held_at", releasedAt: "released_at", tickAt: "tick_at", refundedAt: "refunded_at", operatorNote: "operator_note" };
 export class D1EntStore implements EntStore {
   private db: D1Like;
   constructor(db: D1Like) {
@@ -133,9 +134,9 @@ export class D1EntStore implements EntStore {
     return clean({ tenantId: r.tenant_id, issuer: r.issuer, clientId: r.client_id, secret: r.secret_enc, allowedDomains: JSON.parse(r.allowed_domains), defaultRole: r.default_role, lastSuccessAt: r.last_success_at == null ? null : Number(r.last_success_at) }) as SsoConfig;
   }
   async putSsoState(s: SsoState) {
-    await this.run(`INSERT INTO sso_states (hash, tenant_id, client_key, nonce_hash, expires_at, used) VALUES (?,?,?,?,?,?)
-      ON CONFLICT(hash) DO UPDATE SET client_key=excluded.client_key, nonce_hash=excluded.nonce_hash, expires_at=excluded.expires_at, used=excluded.used WHERE sso_states.tenant_id = excluded.tenant_id`,
-      s.hash, s.tenantId, s.clientKey, s.nonceHash, s.expiresAt, s.used ? 1 : 0);
+    await this.run(`INSERT INTO sso_states (hash, tenant_id, client_key, nonce_hash, expires_at, used, created_at) VALUES (?,?,?,?,?,?,?)
+      ON CONFLICT(hash) DO UPDATE SET client_key=excluded.client_key, created_at=excluded.created_at, nonce_hash=excluded.nonce_hash, expires_at=excluded.expires_at, used=excluded.used WHERE sso_states.tenant_id = excluded.tenant_id`,
+      s.hash, s.tenantId, s.clientKey, s.nonceHash, s.expiresAt, s.used ? 1 : 0, s.createdAt ?? null);
   }
   async openSsoStates(tenantId: string, now: number, clientKey?: string) {
     await this.run("DELETE FROM sso_states WHERE tenant_id = ? AND (used = 1 OR expires_at <= ?)", tenantId, now);   // purges only THIS tenant's dead states
@@ -144,10 +145,14 @@ export class D1EntStore implements EntStore {
       : await this.one<{ n: number }>("SELECT COUNT(*) AS n FROM sso_states WHERE tenant_id = ? AND client_key = ?", tenantId, clientKey);
     return Number(r?.n ?? 0);
   }
+  // f360: drops the oldest OPEN state of THAT source only, in ONE statement. NULL client_key (pre-0022 rows) never matches, so legacy rows are never evicted by the per-source rule.
+  async evictOldestSsoState(tenantId: string, clientKey: string, now: number) {
+    await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key = ? AND used = 0 AND expires_at > ? ORDER BY COALESCE(created_at, expires_at - ?), rowid LIMIT 1)`, tenantId, clientKey, now, SSO_STATE_TTL_MS);
+  }
   // single use: ONE conditional UPDATE ... RETURNING, so two concurrent callbacks cannot both consume the state
   async consumeSsoState(hash: string, now: number) {
     const r = await this.one("UPDATE sso_states SET used = 1 WHERE hash = ? AND used = 0 AND expires_at >= ? RETURNING *", hash, now);
-    return r && ({ hash: r.hash, tenantId: r.tenant_id, clientKey: r.client_key, nonceHash: r.nonce_hash, expiresAt: Number(r.expires_at), used: true } as SsoState);
+    return r && ({ hash: r.hash, tenantId: r.tenant_id, clientKey: r.client_key ?? "", nonceHash: r.nonce_hash, expiresAt: Number(r.expires_at), used: true } as SsoState);
   }
   async markSsoSession(sessionHash: string, tenantId: string) { await this.run("INSERT INTO sso_sessions (session_hash, tenant_id) VALUES (?,?) ON CONFLICT DO NOTHING", sessionHash, tenantId); }
   async isSsoSession(sessionHash: string, tenantId: string) { return !!(await this.one("SELECT 1 AS x FROM sso_sessions WHERE session_hash = ? AND tenant_id = ?", sessionHash, tenantId)); }
@@ -203,9 +208,9 @@ export class D1EntStore implements EntStore {
     return undefined;
   }
   async putPayout(p: Payout) {
-    await this.run(`INSERT INTO payouts (id, partner_id, amount_cents, status, created_at, provider_ref, reason, sending_at, attempts, held_at) VALUES (?,?,?,?,?,?,?,?,?,?)
-      ON CONFLICT(id) DO UPDATE SET status=excluded.status, provider_ref=excluded.provider_ref, reason=excluded.reason, sending_at=excluded.sending_at, attempts=excluded.attempts, held_at=excluded.held_at WHERE payouts.partner_id = excluded.partner_id`,
-      p.id, p.partnerId, p.amountCents, p.status, p.createdAt, nul(p.providerRef), nul(p.reason), nul(p.sendingAt), nul(p.attempts), nul(p.heldAt));
+    await this.run(`INSERT INTO payouts (id, partner_id, amount_cents, status, created_at, provider_ref, reason, sending_at, attempts, held_at, released_at, tick_at, refunded_at, operator_note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      ON CONFLICT(id) DO UPDATE SET status=excluded.status, provider_ref=excluded.provider_ref, reason=excluded.reason, sending_at=excluded.sending_at, attempts=excluded.attempts, held_at=excluded.held_at, released_at=excluded.released_at, tick_at=excluded.tick_at, refunded_at=excluded.refunded_at, operator_note=excluded.operator_note WHERE payouts.partner_id = excluded.partner_id`,
+      p.id, p.partnerId, p.amountCents, p.status, p.createdAt, nul(p.providerRef), nul(p.reason), nul(p.sendingAt), nul(p.attempts), nul(p.heldAt), nul(p.releasedAt), nul(p.tickAt), nul(p.refundedAt), nul(p.operatorNote));
   }
   // compare-and-set on status in ONE UPDATE ... RETURNING: of two concurrent decisions exactly one sees the row in `from`
   async transitionPayout(id: string, from: Payout["status"], to: Payout["status"], patch?: Partial<Payout>, partnerId?: string) {

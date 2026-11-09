@@ -61,6 +61,14 @@
     "0008_throttle_state.sql"
    ],
    "owner": "f234 abandoned status (2f057746f); D1ThrottleStore (5abc0cfed)"
+  },
+  {
+   "prefix": 21,
+   "files": [
+    "0021_enterprise_d1.sql",
+    "0021_partner_book_facts.sql"
+   ],
+   "owner": "f315 enterprise D1 store (a0e4da37e); f313 partner book facts (f360 2026-11-10: both numbered 0021 on separate branches, no renumber of possibly-applied files, GATE5)"
   }
  ],
  "gap_entries": [

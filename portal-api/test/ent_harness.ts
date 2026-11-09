@@ -2,6 +2,7 @@ import { make } from "./harness.ts";
 import { MemoryEntStore, type EntStore } from "../src/enterprise/store.ts";
 import { MemoryApprovalStore, type ApprovalStore } from "../src/enterprise/payout_decision.ts";
 import { D1EntStore, D1ApprovalStore } from "../src/enterprise/d1store.ts";
+import { FakeD1 } from "./fake_d1.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
@@ -73,3 +74,10 @@ export function makeEnt(rates: RateTable = RATE_V1) {
   return { ...h, store, payouts, book, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
 }
 export const SSO_CFG = (clientId: string, secret = "sso_secret_fixture_0123456789") => ({ secret, issuer: "https://idp.mock.test", clientId });
+// f360: adapter-neutral SSO state rows for the per-source fairness suite (Memory and FakeD1 both).
+export const ssoRows = {
+  count(store: EntStore, clientKey: string | null): number { const f = FAKES.get(store); if (f) return Number((f.db.prepare(clientKey === null ? "SELECT COUNT(*) AS n FROM sso_states WHERE client_key IS NULL" : "SELECT COUNT(*) AS n FROM sso_states WHERE client_key = ?").get(...(clientKey === null ? [] : [clientKey])) as any).n); return [...(store as MemoryEntStore).states.values()].filter((s) => (clientKey === null ? !(s as any).clientKey : s.clientKey === clientKey)).length; },
+  has(store: EntStore, hash: string): boolean { const f = FAKES.get(store); return f ? !!f.db.prepare("SELECT 1 FROM sso_states WHERE hash = ?").get(hash) : (store as MemoryEntStore).states.has(hash); },
+  // a row as written BEFORE the migration: no client_key, no created_at
+  legacy(store: EntStore, tenantId: string, hash: string, expiresAt: number) { const f = FAKES.get(store); if (f) f.db.prepare("INSERT INTO sso_states (hash, tenant_id, nonce_hash, expires_at, used) VALUES (?,?,?,?,0)").run(hash, tenantId, "n_" + hash, expiresAt); else (store as MemoryEntStore).states.set(hash, { hash, tenantId, clientKey: "", nonceHash: "n_" + hash, expiresAt, used: false }); },
+};

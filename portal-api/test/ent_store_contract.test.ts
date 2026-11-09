@@ -213,7 +213,7 @@ for (const [name, mk] of ADAPTERS) {
     await s.addLedger(led("p1", 9000));
     const p = (await s.reservePayout("p1", NOW, 1000, maker("p1", "pending_approval")))!;
     assert.equal(await s.transitionPayout(p.id, "sending", "paid"), undefined, "wrong from-state");
-    assert.equal(await s.transitionPayout(p.id, "pending_approval", "sending", "p2"), undefined, "wrong partner");
+    assert.equal(await s.transitionPayout(p.id, "pending_approval", "sending", undefined, "p2"), undefined, "wrong partner");
     const outs = await Promise.all(Array.from({ length: 30 }, (_, i) => s.transitionPayout(p.id, "pending_approval", i % 2 ? "sending" : "rejected")));
     assert.equal(outs.filter(Boolean).length, 1);
     const final = (await s.payoutById(p.id))!.status;
@@ -343,7 +343,7 @@ for (const [name, mk] of ADAPTERS) {
     await s.putAsset({ id: "as-B", tenantId: "A", domain: "evil.example.test", label: "EVIL", group: "g", token: "evil", verifiedAt: NOW });
     await s.putSsoState({ hash: "st-B-live", tenantId: "A", clientKey: "evil", nonceHash: "evil", expiresAt: NOW + 5, used: true });
     await s.markSsoSession("sess-B", "A");   // A marks its own pairing; B's pairing must be untouched
-    assert.equal(await s.transitionPayout(pb.id, "pending_approval", "paid", "PA"), undefined);
+    assert.equal(await s.transitionPayout(pb.id, "pending_approval", "paid", undefined, "PA"), undefined);
     await s.putPayout({ ...pb, partnerId: "PA", status: "paid", providerRef: "EVIL" });
     assert.equal(await s.reservePayout("PA", NOW, 1000, maker("PA")), undefined, "PA's own 100c is under the minimum; PB's 13,000c is not PA's");
     await assert.rejects(() => s.reservePayout("PA", NOW, 50, maker("PB")), /reserve_mismatch/, "a make() callback cannot redirect A's reservation at B");
@@ -365,7 +365,7 @@ for (const [name, mk] of ADAPTERS) {
 
 // every public method of D1EntStore must be covered by the leak test above: adding a method without listing it here fails the build
 test("LEAK coverage guard: every EntStore method is listed with its scoping rule", () => {
-  const SCOPED = ["referralsOfPartner", "payoutsByStatus", "memberOf", "membersOf", "removeMember", "putMember", "invitesOf", "putInvite", "deleteInvite", "deleteInvitesBy", "putAsset", "assetsOf", "assetOf", "deleteAsset", "putSso", "ssoOf", "putSsoState", "openSsoStates", "markSsoSession", "isSsoSession", "setEnforcement", "addAudit", "auditOf", "addLedger", "ledgerOf", "reservePayout", "putPayout", "transitionPayout", "payoutsOf", "childrenOf", "payoutById", "inviteById"];
+  const SCOPED = ["referralsOfPartner", "payoutsByStatus", "memberOf", "membersOf", "removeMember", "putMember", "invitesOf", "putInvite", "deleteInvite", "deleteInvitesBy", "putAsset", "assetsOf", "assetOf", "deleteAsset", "putSso", "ssoOf", "putSsoState", "openSsoStates", "evictOldestSsoState", "markSsoSession", "isSsoSession", "setEnforcement", "addAudit", "auditOf", "addLedger", "ledgerOf", "reservePayout", "putPayout", "transitionPayout", "payoutsOf", "childrenOf", "payoutById", "inviteById"];
   const BY_DESIGN = [  // global-key lookups or account-scoped/system operations, each with a stated reason
     "tenantById", "tenantBySlug", "putTenant", "partnerByRefCode",   // the tenant row itself; slug / ref code are public identifiers
     "membershipsFor", "removeAccount", "invitesForEmail", "putReferral", "referralOf",   // keyed by ACCOUNT (the caller's own identity), not tenant
