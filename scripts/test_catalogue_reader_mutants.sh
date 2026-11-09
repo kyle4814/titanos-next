@@ -15,13 +15,13 @@ mut() {
 }
 mut "skip the graded check" 'R3|R3b|R3c|R3d' 's/^  assertCatalogueAllGraded(cat);.*/  void cat;/'
 mut "swallow the parse error (treat as absent)" 'R4' 's/catch (e) { throw new Error("shelf_catalogue.json is not valid JSON: .*/catch { return null; }/'
-mut "ignore the fallback" 'R2' 's/const shelves: GradedShelf\[\] = fromCat ?? fallback;/const shelves: GradedShelf[] = fromCat ?? [];/'
+mut "ignore the fallback" 'R2' 's/: fallback\.map((s) => ({ key/: [].map((s: GradedShelf) => ({ key/'
 mut "unsorted output" 'R1|R6' 's/const sorted = \[\.\.\.cat\.entries\]\.sort(byClusterId);/const sorted = [...cat.entries];/'
 mut "return ungraded entries (drop the shape+graded gate on entries)" 'R3|R3b|R3c|R3d' 's/^  assertCatalogueAllGraded(cat);.*/  \/\/ gate removed/'
 mut "empty entries throw instead of fallback" 'R2' 's/if (entries.length === 0) return null;/if (entries.length === 0) throw new Error("empty");/'
 mut "unknown slug returns first shelf" 'R5' 's/getShelf: (slug) => bySlug.get(slug),/getShelf: (slug) => bySlug.get(slug) ?? shelves[0],/'
 mut "duplicate slug allowed" 'R4d' 's/if (dup.length) throw/if (false) throw/'
-mut "from flag always catalogue" 'R2' 's/from: fromCat ? "catalogue" : "fallback",/from: "catalogue",/'
+mut "from flag always catalogue" 'R2' 's/from: entries ? "catalogue" : "fallback",/from: "catalogue",/'
 mut "search ignores the shelves" 'R7' 's/index ??= buildShelfIndex(shelves as never);/index ??= buildShelfIndex([]);/'
 echo "mutants caught $caught of $n"
 [ "$caught" = "$n" ] && echo "MUTANTS OK" || { echo "MUTANTS FAILED"; exit 1; }

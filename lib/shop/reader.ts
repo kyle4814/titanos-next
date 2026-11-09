@@ -6,4 +6,10 @@ import { createCatalogueReader } from "./catalogue_reader.ts";
 import { SHOP } from "./index.ts";
 
 export const CATALOGUE_PATH = join(process.cwd(), "lib", "shop", "shelf_catalogue.json");
-export const shopReader = createCatalogueReader(() => (existsSync(CATALOGUE_PATH) ? readFileSync(CATALOGUE_PATH, "utf8") : null), SHOP.shelves);
+export const RETRACTIONS_PATH = join(process.cwd(), "lib", "shop", "retractions.json"); // written next to the catalogue by build:catalogue (f317)
+export const shopReader = createCatalogueReader(
+  () => (existsSync(CATALOGUE_PATH) ? readFileSync(CATALOGUE_PATH, "utf8") : null),
+  SHOP.shelves,
+  () => (existsSync(RETRACTIONS_PATH) ? readFileSync(RETRACTIONS_PATH, "utf8") : null),
+);
+if (shopReader.retractionError) console.error("shop: " + shopReader.retractionError + "; serving no shelves (fail closed)");
