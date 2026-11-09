@@ -1,4 +1,5 @@
 bash scripts/test_no_orphan_scripts.sh
+bash scripts/test_soak_drift_guard.sh
 node scripts/test_sigils.mjs
 bash scripts/test_no_doctrine_leak_bites.sh
 node scripts/test_no_doctrine_leak.mjs
@@ -124,5 +125,5 @@ node scripts/test_merge_base_red_precheck.mjs
 node scripts/test_partner_book_ui.mjs
 node scripts/test_test_manifest.mjs
 node scripts/test_manifest_lint.mjs
-bash scripts/test_soak_drift_guard.sh
 node scripts/test_restack_to_manifest.mjs
+node --test --experimental-strip-types portal-api/test/d1_store_parity.test.ts portal-api/test/d1_store_contract.test.ts
