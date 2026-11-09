@@ -119,6 +119,10 @@ export class D1PlanStore extends MemoryStore {
   // Held webhook facts (f194, migration 0006). holdFact appends in hold order; takeFacts is ONE statement (DELETE ... RETURNING), so two takers over one D1 never both
   // receive a fact (a SELECT then DELETE would). RETURNING order is not defined by SQL, so the rows carry seq and are sorted back into hold order here.
   override async holdFact(key: string, fact: Record<string, unknown>) { await this.exec("INSERT INTO held_facts (key, fact) VALUES (?, ?)", key, JSON.stringify(fact)); }
+  override async heldFactKeys(prefix: string, after: string | undefined, limit: number) { // f356: ascending distinct keys after the cursor, bounded; substr (not LIKE) so a % or _ in a key is literal
+    const rows = await this.many("SELECT DISTINCT key FROM held_facts WHERE substr(key, 1, ?) = ? AND key > ? ORDER BY key LIMIT ?", prefix.length, prefix, after ?? "", Math.max(0, limit));
+    return rows.map((r) => String(r.key));
+  }
   override async takeFacts(key: string) {
     const rows = await this.many("DELETE FROM held_facts WHERE key = ? RETURNING seq, fact", key);
     return rows.sort((a, b) => Number(a.seq) - Number(b.seq)).map((r) => JSON.parse(String(r.fact)) as Record<string, unknown>);

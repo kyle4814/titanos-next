@@ -92,6 +92,8 @@ export interface Store {
   claimEvent(eventId: string): Promise<boolean>; // true the first time only (webhook idempotency)
   holdFact(key: string, fact: Record<string, unknown>): Promise<void>;   // an out-of-order webhook fact waiting for its payment
   takeFacts(key: string): Promise<Record<string, unknown>[]>;            // removes and returns them
+  // f356: the distinct held-fact keys that start with `prefix` and sort strictly after `after` (a cursor), ascending, at most `limit`. READ-ONLY: it never takes a fact (takeFacts is the only reader that removes).
+  heldFactKeys(prefix: string, after: string | undefined, limit: number): Promise<string[]>;
   putCard(c: ReviewCard): Promise<void>;
   cardById(id: string): Promise<ReviewCard | undefined>;
   allCards(): Promise<ReviewCard[]>;
@@ -148,6 +150,7 @@ export class MemoryStore implements Store {
   async memoList(prefix: string) { return [...this.memos].filter(([k]) => k.startsWith(prefix)).map(([key, v]) => ({ key, fact: JSON.parse(v) as Record<string, unknown> })); }
   async holdFact(k: string, f: Record<string, unknown>) { this.held.set(k, [...(this.held.get(k) ?? []), JSON.parse(JSON.stringify(f))]); } // JSON copy: same wire shape as the D1 adapter (absent stays absent)
   async takeFacts(k: string) { const f = this.held.get(k) ?? []; this.held.delete(k); return f; }
+  async heldFactKeys(prefix: string, after: string | undefined, limit: number) { return [...this.held.entries()].filter(([k, v]) => v.length > 0 && k.startsWith(prefix) && (after === undefined || k > after)).map(([k]) => k).sort().slice(0, Math.max(0, limit)); }
   async purchasesFor(id: string) { return [...this.purchases.values()].filter((p) => p.accountId === id); }
   subVer = new Map<string, number>();
   async putSubscription(s: Subscription) { this.subs.set(s.id, s); this.subVer.set(s.id, (this.subVer.get(s.id) ?? 0) + 1); }
