@@ -73,7 +73,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // R2 three-point pause race: markPaid has won its claim and is paused at takeFacts / putAccount / putInvoiceOnce while a PARTIAL refund webhook lands; markPaid finishes.
   // Ends paid with the partial recorded, ONE invoice, the partial never erased back to 0.
-  for (const pause of ["takeFacts", "putAccount", "putInvoiceOnce"]) {
+  for (const pause of ["takeFacts", "putAccount", "issueInvoiceNumbered"]) {
     const { open } = world(m, kind), b = new MockBilling(); await seed(open()); const landed: any[] = [], g = gate(), reached = gate();
     const pay = m.svc.handleStripeEvent(deps(m, track(open(), landed, { before: { [pause]: async () => { reached.go(); await g.p; } } }), b), ev("evt_p")).catch((e: Error) => "THREW " + e.message);
     await reached.p;

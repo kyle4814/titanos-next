@@ -105,10 +105,10 @@ test("adapter mutants are killed by the contract", async () => {
 // is answered "duplicate" (200): the invoice is NOT issued by replay. A hard crash cannot be told apart from a completed delivery by a claim table that carries no
 // completion marker, and the handlers are not replay-safe mid-way (markPaid only runs while the purchase is pending, so a replay after the purchase row flips to paid
 // would skip the invoice anyway). Recovery is a reconciler (paid purchase with no invoice), PENDING LIVE; this test pins the behaviour so a change is deliberate.
-class CrashOnInvoice extends D1PlanStore { crashed = false; override async putInvoiceOnce(i: any) { if (!this.crashed) { this.crashed = true; throw new Error("isolate killed"); } return super.putInvoiceOnce(i); } }
+class CrashOnInvoice extends D1PlanStore { crashed = false; override async issueInvoiceNumbered(i: any, g: any) { if (!this.crashed) { this.crashed = true; throw new Error("isolate killed"); } return super.issueInvoiceNumbered(i, g); } }
 for (const kind of ["memory", "d1"] as const) {
   test(`[${kind}] replay after crash (claim written, invoice not): the retry is a duplicate, no invoice, no double funding`, async () => {
-    const db = new FakeD1(), a = kind === "d1" ? new CrashOnInvoice(db) : new (class extends MemoryStore { crashed = false; override async putInvoiceOnce(i: any) { if (!this.crashed) { this.crashed = true; throw new Error("isolate killed"); } return super.putInvoiceOnce(i); } })();
+    const db = new FakeD1(), a = kind === "d1" ? new CrashOnInvoice(db) : new (class extends MemoryStore { crashed = false; override async issueInvoiceNumbered(i: any, g: any) { if (!this.crashed) { this.crashed = true; throw new Error("isolate killed"); } return super.issueInvoiceNumbered(i, g); } })();
     const mk = (store: Store): Deps => ({ store, billing: new MockBilling(), dns: fakeResolver({}), mailer: new MockMailer(), now: () => T0, siteOrigin: "https://titanos.tech", webhookSecret: SECRET });
     await a.putAccount({ id: "acc1", email: "x@example.test", seat: "pro", createdAt: T0 });
     await a.putPurchase({ id: "pur1", accountId: "acc1", productId: "compliance_pack", checkoutId: "cs_1", amountCents: 0, deliverableIssued: false, refundedCents: 0, status: "pending" });

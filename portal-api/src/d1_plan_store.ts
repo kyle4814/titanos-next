@@ -2,7 +2,7 @@
 // Invoices are durable too (f192), and so are held webhook facts (f194) and the webhook event claim (f197). Every other Store method is inherited from MemoryStore and is NOT durable here: the full D1Store (login, sessions, domains,
 // events, cards, keys) lives on the web/f13_c2_d1store stack and has not been merged into this base. This class exists
 // so plan, period and minimum term can be proven to survive a restart against the real schema; it is not wired into the Worker.
-import { MemoryStore, type Account, type Invoice, type Purchase, type Subscription } from "./store.ts";
+import { MemoryStore, type Account, type Invoice, type InvoiceDraft, type InvoiceGuard, type Purchase, type Subscription } from "./store.ts";
 import type { D1Like } from "./env.ts";
 import type { PlanState } from "./plan_change.ts";
 
@@ -95,12 +95,26 @@ export class D1PlanStore extends MemoryStore {
   }
   override async invoicesFor(id: string) { return (await this.many("SELECT * FROM invoices WHERE account_id = ? ORDER BY rowid", id)).map(toInvoice); }
   override async invoiceById(id: string) { const r = await this.one("SELECT * FROM invoices WHERE id = ?", id); return r && toInvoice(r); }
-  // f203. putInvoiceOnce is ONE statement: INSERT ... SELECT ... WHERE NOT EXISTS (invoice for this purchase); changes === 1 means THIS call wrote the invoice.
+  // f203. purchaseInvoiced is the cheap pre-check; the real first-invoice guard is issueInvoiceNumbered (f209, below).
   override async purchaseInvoiced(id: string) { return (await this.one("SELECT 1 AS x FROM invoices WHERE purchase_id = ? LIMIT 1", id)) !== undefined; }
-  override async putInvoiceOnce(i: Invoice) {
-    const r = await this.exec("INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)",
-      i.id, i.accountId, i.purchaseId ?? null, i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId, i.purchaseId ?? null);
-    return r.meta.changes === 1;
+  // f209. The number is assigned INSIDE the guard: ONE D1 batch (one transaction) of two statements that carry the SAME NOT EXISTS guard. Statement 1 bumps the invoice_seq counter
+  // only if the guard holds; statement 2 inserts the invoice numbered from the counter only if the guard holds. A loser of the guard changes nothing (no bump, no row), so numbers stay
+  // gap-free. A winner whose insert is refused (UNIQUE/FK) rolls the bump back with it. changes === 1 on statement 2 means THIS call wrote the invoice.
+  override async issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard) {
+    const g = guard === "purchase" ? "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)" : "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ? AND stripe_event_id = ?)";
+    const ga = guard === "purchase" ? [d.purchaseId] : [d.purchaseId, d.stripeEventId];
+    // The purchase must exist: on the merged line invoices.purchase_id is a plain TEXT column (0003_enterprise), not a FOREIGN KEY, so the guard carries the check.
+    const gx = `${g} AND EXISTS (SELECT 1 FROM purchases WHERE id = ?)`, gxa = [...ga, d.purchaseId];
+    const res = await this.db.batch([
+      this.db.prepare(`INSERT INTO invoice_seq (id, n) SELECT 1, 1 WHERE ${gx} ON CONFLICT(id) DO UPDATE SET n = n + 1`).bind(...gxa),
+      this.db.prepare(`INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, 'TT-' || printf('%06d', (SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${gx}`)
+        .bind(d.id, d.accountId, d.purchaseId, d.productId, d.amountCents, d.issuedAt, d.stripeEventId, ...gxa),
+    ]);
+    if (res[1].meta.changes !== 1) {
+      if (!(await this.one("SELECT 1 AS x FROM purchases WHERE id = ?", d.purchaseId))) throw new Error(`FOREIGN KEY: invoice for missing purchase ${d.purchaseId}`);
+      return undefined;
+    }
+    return this.invoiceById(d.id);
   }
   override async paidPurchasesBefore(cutoff: number) {
     return (await this.many("SELECT * FROM purchases p WHERE p.paid_at IS NOT NULL AND p.paid_at <= ? AND p.status IN ('paid', 'refunded') AND NOT EXISTS (SELECT 1 FROM invoices i WHERE i.purchase_id = p.id) ORDER BY p.paid_at, p.id", cutoff)).map(toPurchase);

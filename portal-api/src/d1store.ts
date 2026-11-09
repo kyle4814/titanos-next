@@ -10,7 +10,7 @@
 //    and we convert with Number() on the way out.
 import type { D1Like, D1Statement } from "./env.ts";
 import type { PlanState } from "./plan_change.ts";
-import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, Subscription } from "./store.ts";
+import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, InvoiceDraft, InvoiceGuard, Subscription } from "./store.ts";
 
 type Row = Record<string, unknown>;
 const num = (v: unknown): number | undefined => (v === null || v === undefined || v === "" ? undefined : Number(v));
@@ -187,6 +187,24 @@ export class D1Store implements Store {
   async putInvoiceOnce(i: Invoice) {
     return (await this.exec("INSERT INTO invoices (id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id IS ?)",
       i.id, i.accountId, n(i.purchaseId), i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId, n(i.purchaseId))) === 1;
+  }
+  // f209 on D1Store: number assigned INSIDE the guarded write (same two-statement batch as D1PlanStore); a guard loser changes nothing, so no number is consumed.
+  // The guard also requires the purchase to exist (invoices.purchase_id is a plain TEXT column on this line, not a FOREIGN KEY).
+  async issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard) {
+    if (!this.db.batch) throw new Error("D1Store.issueInvoiceNumbered needs db.batch (one transaction)");
+    const g = guard === "purchase" ? "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)" : "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ? AND stripe_event_id = ?)";
+    const ga = guard === "purchase" ? [d.purchaseId] : [d.purchaseId, d.stripeEventId];
+    const gx = `${g} AND EXISTS (SELECT 1 FROM purchases WHERE id = ?)`, gxa = [...ga, d.purchaseId];
+    const res = await this.db.batch([
+      this.q(`INSERT INTO invoice_seq (id, n) SELECT 1, 1 WHERE ${gx} ON CONFLICT(id) DO UPDATE SET n = n + 1`, ...gxa),
+      this.q(`INSERT INTO invoices(id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, 'TT-' || printf('%06d', (SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${gx}`,
+        d.id, d.accountId, d.purchaseId, d.productId, d.amountCents, d.issuedAt, d.stripeEventId, ...gxa),
+    ]) as unknown as { meta: { changes: number } }[];
+    if (res[1].meta.changes !== 1) {
+      if (!(await this.one("SELECT 1 AS x FROM purchases WHERE id = ?", d.purchaseId))) throw new Error(`FOREIGN KEY: invoice for missing purchase ${d.purchaseId}`);
+      return undefined;
+    }
+    return this.invoiceById(d.id);
   }
   // Claim lease (f242/f245, migration 0015): insert, or on conflict take over only an EXPIRED lease or renew our own. changes === 1 = we hold it.
   async acquireLease(key: string, owner: string, now: number, ttlMs: number) {

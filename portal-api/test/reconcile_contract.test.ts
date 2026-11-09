@@ -69,7 +69,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // R2 crash-after-claim at each step of markPaid: reconcilable ones are repaired exactly once; early ones are pinned as unrepairable
   // f236: markPaid claims pending -> paid FIRST (casPurchase), so a crash there leaves the row pending (unrepairable, pinned) and a crash at the later takeFacts (f238: markPaid no longer writes the purchase again after its claim) leaves a PAID row with no invoice (repairable).
-  const steps: [string, boolean][] = [["casPurchase", false], ["takeFacts", true], ["putAccount", true], ["nextInvoiceNumber", true], ["putInvoiceOnce", true]];
+  const steps: [string, boolean][] = [["casPurchase", false], ["takeFacts", true], ["putAccount", true], ["issueInvoiceNumbered", true]];
   let n = 100;
   for (const [step, repairable] of steps) {
     n++; const { open } = world(m, kind), base = open(); await seedPending(base, n);
@@ -105,7 +105,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   }
 
   // R4 a reconcile racing a late delivery whose handler is still in flight, paused at each point of the invoice path: one invoice only
-  for (const [pause, when] of [["purchaseInvoiced", "after"], ["nextInvoiceNumber", "before"], ["putInvoiceOnce", "before"]] as const) {
+  for (const [pause, when] of [["purchaseInvoiced", "after"], ["issueInvoiceNumbered", "before"]] as const) {
     n++; const { open } = world(m, kind), base = open(); await seedPending(base, n);
     const g = gate(), reached = gate();
     const slow = spy(base, { [when]: { [pause]: async () => { reached.go(); await g.p; } } });
@@ -160,13 +160,13 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   { n++; const { open } = world(m, kind), base = open(); await seedPaid(base, n, T0);
     n++; await seedPending(base, n, "compliance_pack"); const q = await base.purchaseById(`pur${n}`); await base.putPurchase({ ...q, productId: "ghost_product", status: "paid", paidAt: T0 + 1 });
     n++; await seedPaid(base, n, T0 + 2); // the first store write of the run throws once (a D1 hiccup); the unknown product is skipped; the third purchase must still be repaired
-    const r = await reconcile(spy(open(), { throwOnce: "putInvoiceOnce" }), T0 + GRACE + 5, GRACE).catch((e: Error) => ({ scanned: -1, repaired: -1, skipped: -1, errors: [] as string[], threw: e.message }));
+    const r = await reconcile(spy(open(), { throwOnce: "issueInvoiceNumbered" }), T0 + GRACE + 5, GRACE).catch((e: Error) => ({ scanned: -1, repaired: -1, skipped: -1, errors: [] as string[], threw: e.message }));
     want("R9", r.scanned === 3 && r.repaired === 1 && r.skipped === 2 && r.errors.length === 2, `want 1 repaired 2 skipped with both errors reported, got ${JSON.stringify(r)}`);
   }
 
   // R10 a replayed delivery after the repair stays "duplicate" and adds no invoice
   { n++; const { open } = world(m, kind), base = open(); await seedPending(base, n);
-    try { await m.svc.handleStripeEvent(deps(m, spy(base, { throwOnce: "putInvoiceOnce" })), evFor(n, `cs_${n}`)); } catch { /* the crash */ }
+    try { await m.svc.handleStripeEvent(deps(m, spy(base, { throwOnce: "issueInvoiceNumbered" })), evFor(n, `cs_${n}`)); } catch { /* the crash */ }
     await reconcile(open(), T0 + GRACE, GRACE);
     want("R10", (await m.svc.handleStripeEvent(deps(m, open()), evFor(n, `cs_${n}`))) === "duplicate" && (await invCount(base)) === 1, "R10 the Stripe retry stays duplicate, one invoice");
   }
@@ -179,9 +179,9 @@ for (const kind of ["memory", "d1"] as const) {
 
 // ---- mutation: each mutant must be killed by its named check, on the adapter it lives in ----
 const MUT: { id: string; kind: Kind; inv: string; edits: [string, string, string][] }[] = [
-  { id: "M1 service pre-check removed (the already-invoiced check)", kind: "memory", inv: "R5", edits: [["service.ts", "if (await d.store.purchaseInvoiced(pur.id)) return false;", ""]] },
-  { id: "M2 memory atomic guard removed", kind: "memory", inv: "R4", edits: [["store.ts", "if ([...this.invoices.values()].some((o) => o.purchaseId === i.purchaseId)) return false;", ""]] },
-  { id: "M3 d1 atomic guard removed", kind: "d1", inv: "R4", edits: [["d1_plan_store.ts", "WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)\",", "WHERE ? IS NOT NULL\","]] },
+  // M1 (service pre-check removed) retired in f209: the number is now assigned inside the guard, so the pre-check is a round-trip saving only and removing it is an EQUIVALENT mutant; the guard itself is mutated in invoice_number_atomic.test.ts.
+  { id: "M2 memory atomic guard removed", kind: "memory", inv: "R4", edits: [["store.ts", "if ([...this.invoices.values()].some((o) => o.purchaseId === d.purchaseId && (guard === \"purchase\" || o.stripeEventId === d.stripeEventId))) return undefined;", ""]] },
+  { id: "M3 d1 atomic guard removed", kind: "d1", inv: "R4", edits: [["d1_plan_store.ts", "const g = guard === \"purchase\" ? \"NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)\"", "const g = guard === \"purchase\" ? \"? IS NOT NULL\""]] },
   { id: "M4 memory listing ignores existing invoices", kind: "memory", inv: "R8", edits: [["store.ts", "&& ![...this.invoices.values()].some((o) => o.purchaseId === p.id)).sort(", ").sort("]] },
   { id: "M5 d1 listing ignores existing invoices", kind: "d1", inv: "R8", edits: [["d1_plan_store.ts", "AND NOT EXISTS (SELECT 1 FROM invoices i WHERE i.purchase_id = p.id) ORDER", "ORDER"]] },
   { id: "M6 grace ignored", kind: "memory", inv: "R6", edits: [["reconcile.ts", "store.paidPurchasesBefore(now - grace)", "store.paidPurchasesBefore(now)"]] },

@@ -69,7 +69,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
   };
 
   // F1 THE RACE, markPaid already won its claim: the refund webhook lands while markPaid is paused (at takeFacts, then at putInvoiceOnce), then markPaid finishes. Ends refunded, never paid.
-  for (const pause of ["takeFacts", "putInvoiceOnce"]) {
+  for (const pause of ["takeFacts", "issueInvoiceNumbered"]) {
     const { open } = world(m, kind), b = new MockBilling(); await seed(open()); const wins = { refunded: 0 }, g = gate(), reached = gate();
     const wsx = track(open(), wins, { before: { [pause]: async () => { reached.go(); await g.p; } } });
     const pay = m.svc.handleStripeEvent(deps(m, wsx, b), { ...ev("evt_p"), data: { object: { ...ev("evt_p").data.object, subscription: undefined } } }).catch((e: Error) => "THREW " + e.message);

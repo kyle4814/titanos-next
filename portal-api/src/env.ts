@@ -6,6 +6,7 @@ export interface D1Statement {
   run(): Promise<{ meta?: { changes?: number } } | unknown>;
   all<T = unknown>(): Promise<{ results: T[] }>;
 }
+export interface D1BatchResult { meta: { changes: number } }
 export interface D1Like {
   prepare(sql: string): D1Statement;
   batch?(stmts: D1Statement[]): Promise<unknown[]>; // D1 batch = one implicit transaction, all or nothing
