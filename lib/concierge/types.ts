@@ -24,4 +24,5 @@ export type Reply =
   | { kind: "ask"; question: string; taps: Tap[]; score: number }
   | { kind: "unmatched"; message: string; configStub: ConfigStub; reason: "no_match" | "junk"; saved: boolean };
 
-export type ConfigStub = { ask: string; normalised: string; seat: Seat; status: "LOGGED_FOR_GENERATOR"; quote: null };
+export type ConfigStub = { ask: string; normalised: string; seat: Seat; status: "LOGGED_FOR_GENERATOR"; quote: null;
+  askerId?: string | null; firstSeenAt?: string | null; lastSeenAt?: string | null; seenCount?: number };   // f301: asker + first/last seen (caller-supplied, ISO-8601)

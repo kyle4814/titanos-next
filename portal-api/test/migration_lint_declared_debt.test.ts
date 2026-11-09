@@ -24,12 +24,12 @@ test("the real tree is clean with the exact declared debt, every entry carries a
   assert.deepEqual(r.failures, []);
   const d = declared();
   assert.equal(d.duplicate_entries.length, 8);
-  assert.deepEqual(d.gap_entries.map((e: any) => e.prefix), [9, 10, 11, 12, 13, 17]);
+  assert.deepEqual(d.gap_entries.map((e: any) => e.prefix), [9, 10, 11, 12, 13]);
   assert.equal(d.check_debt.length, 0);
   for (const e of [...d.duplicate_entries, ...d.gap_entries, ...d.check_debt]) assert.ok(e.owner && e.owner.length > 3, JSON.stringify(e));
   for (const e of d.duplicate_entries) assert.ok(e.files.length >= 2);
   assert.ok(d.provenance.measured.includes("2026-11-10"));
-  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 8 + 6 + 0);
+  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 8 + 5 + 0); // 2026-11-10 hand merge: gap 0017 closed by f301
 });
 
 test("a NEW duplicate prefix (an undeclared one) FAILS, naming both files", () => {
@@ -103,8 +103,8 @@ test("mutation: emptying the declared file turns the real tree red (the declarat
     writeFileSync(join(d, "declared.json"), "{}");
     const r = run(d);
     assert.ok(r.failures.filter((m: string) => m.startsWith("duplicate prefix")).length === 8, r.failures.join("\n"));
-    assert.ok(r.failures.filter((m: string) => m.startsWith("gap:")).length === 6);
-    assert.equal(r.failures.length, 14);
+    assert.ok(r.failures.filter((m: string) => m.startsWith("gap:")).length === 5);
+    assert.equal(r.failures.length, 13);
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
 

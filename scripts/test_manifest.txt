@@ -139,3 +139,4 @@ node scripts/mutate_sso_cap.mjs
 node scripts/mutate_sso_cap_d1.mjs
 node --experimental-strip-types scripts/test_concierge_dev2.mjs
 node --experimental-strip-types scripts/test_concierge_miss_taxonomy.mjs
+bash scripts/test_demand_d1_mutants.sh

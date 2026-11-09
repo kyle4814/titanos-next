@@ -9,6 +9,8 @@ export type QueueEntry = {
   first_seen: string | null; last_seen: string | null; sample_asks: string[]; status: "QUEUED_FOR_GENERATOR";
 };
 export interface GeneratorQueue { list(): QueueEntry[]; replaceAll(entries: QueueEntry[]): void }
+// f301: the async twin for a D1 adapter (D1 calls are promises). Same two methods, same snapshot semantics.
+export interface AsyncGeneratorQueue { list(): Promise<QueueEntry[]>; replaceAll(entries: QueueEntry[]): Promise<void> }
 export class MemoryQueue implements GeneratorQueue {
   rows: QueueEntry[] = [];
   list() { return this.rows.map((r) => ({ ...r, sample_asks: [...r.sample_asks] })); }
@@ -67,5 +69,15 @@ export function enqueueDemand(queue: GeneratorQueue, records: AskRecord[], opts:
   const after = mergeDemand(before, demandReport(records, { ...opts, topN: opts.topN ?? 1000 }));
   const changed = after.length !== before.length || after.some((e, i) => !sameEntry(e, rankQueue(before)[i]));
   if (changed) queue.replaceAll(after);
+  return { queued: after.length, changed, entries: after };
+}
+
+// Async entry point for a D1-backed queue: identical merge and change-detection, so a re-run over the same log writes nothing.
+export async function enqueueDemandAsync(queue: AsyncGeneratorQueue, records: AskRecord[], opts: DemandOpts = {}): Promise<EnqueueResult> {
+  const before = await queue.list();
+  const after = mergeDemand(before, demandReport(records, { ...opts, topN: opts.topN ?? 1000 }));
+  const sortedBefore = rankQueue(before);
+  const changed = after.length !== before.length || after.some((e, i) => !sameEntry(e, sortedBefore[i]));
+  if (changed) await queue.replaceAll(after);
   return { queued: after.length, changed, entries: after };
 }
