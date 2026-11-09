@@ -16,12 +16,11 @@ async function body(req: Request): Promise<Record<string, unknown>> {
 
 // Returns null when the path is not an enterprise path, so the caller falls through to the C2 routes.
 export async function entRoute(req: Request, path: string, d: Deps): Promise<Response | null> {
-  if (path === "/api/partner/book") path = "/partner/book";   // C8 f311: the site proxies /api/*; both spellings reach the one guarded handler
   const m = req.method, seg = path.split("/").filter(Boolean);
   const top = seg[0];
-  if (!["enterprise", "partners", "sso", "portal", "tenants", "invites", "referrals", "savings", "internal", "partner"].includes(top)) return null;
+  if (!["enterprise", "partners", "sso", "portal", "tenants", "invites", "referrals", "savings", "internal"].includes(top)) return null;
   if (top === "internal" && seg[1] !== "tenants" && seg[1] !== "payouts" && seg[1] !== "enterprise") return null;
-  if (!d.ent) return json(d.entError ? { error: "enterprise_unavailable", reason: d.entError } : { error: "enterprise_unavailable" }, 503);
+  if (!d.ent) return json({ error: "enterprise_unavailable" }, 503);
 
   // public
   if (path === "/savings" && m === "POST") return json(s.savings(await body(req)));
@@ -50,12 +49,6 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
   if (path === "/invites" && m === "GET") return json(await s.myInvites(d, ctx));
   if (top === "invites" && seg[2] === "accept" && m === "POST") return json(await s.acceptInvite(d, ctx, seg[1]));
   if (path === "/referrals/claim" && m === "POST") return json(await s.claimReferral(d, ctx, (await body(req)).code));
-
-  if (path === "/partner/book" && m === "GET") {   // C8 f311: the partner's book of clients; a seat that is not the caller's answers an EMPTY 403
-    const u = new URL(req.url).searchParams;
-    const r = await s.partnerBook(d, ctx, { partnerId: u.get("partnerId"), limit: u.get("limit"), cursor: u.get("cursor") });
-    return r.body === null ? new Response(null, { status: r.status, headers: { "cache-control": "no-store", "x-content-type-options": "nosniff" } }) : json(r.body, r.status);
-  }
 
   if (top === "enterprise" && seg.length >= 2) {
     const tid = seg[1], rest = seg.slice(2).join("/");

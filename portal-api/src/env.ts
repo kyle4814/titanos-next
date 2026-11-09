@@ -17,5 +17,4 @@ export interface Env {
   STRIPE_SECRET_KEY?: string;      // never echoed
   STRIPE_WEBHOOK_SECRET?: string;  // never echoed
   INTERNAL_API_SECRET?: string;    // never echoed
-  ENT_SEAL_KEYS?: string;          // never echoed: JSON {"current":"k1","keys":{"k1":"<base64url 32 bytes>"}}; seals SSO client secrets (f286)
 }

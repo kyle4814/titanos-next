@@ -10,7 +10,6 @@ import { MockBilling, StripeHttpBilling, type BillingProvider } from "./stripe.t
 import { dohResolver, type TxtResolver } from "./dns.ts";
 import { Throttle } from "./throttle.ts";
 import { D1ThrottleStore } from "./d1throttle.ts";
-import { buildEnterpriseDeps, EntBuildError, type EntSeams } from "./ent_context.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
 export class BuildDepsError extends Error {
@@ -18,7 +17,7 @@ export class BuildDepsError extends Error {
   constructor(reason: BuildDepsReason, binding?: string) { super(binding ? `${reason}:${binding}` : reason); this.name = "BuildDepsError"; this.reason = reason; this.binding = binding; }
 }
 export type StoreFactory = (db: NonNullable<Env["DB"]>, env: Env) => Store;
-export interface BuildOpts { storeFactory?: StoreFactory; billing?: BillingProvider; dns?: TxtResolver; mailer?: Mailer; ent?: EntSeams; now?: () => number; fetchFn?: typeof fetch }
+export interface BuildOpts { storeFactory?: StoreFactory; billing?: BillingProvider; dns?: TxtResolver; mailer?: Mailer; now?: () => number; fetchFn?: typeof fetch }
 export const THROTTLE_LIMITS = { maxFailures: 5, windowMs: 15 * 60_000, lockoutMs: 15 * 60_000 };
 
 // No mail transport is bound yet (PENDING LIVE): refuse loudly instead of dropping login links on the floor.
@@ -40,12 +39,8 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   const siteOrigin = env.TITANOS_SITE_ORIGIN;
   if (!siteOrigin) throw new BuildDepsError("missing_binding", "TITANOS_SITE_ORIGIN");
   const store = (opts.storeFactory ?? noStore)(db, env);
-  // C8 f314: d.ent is built HERE, beside the other deps. A refusal (typed EntBuildError) takes down ONLY the enterprise routes
-  // (503 with the binding NAME), never the whole portal; there is never a partial or default-tenant ent.
-  let ent: Deps["ent"], entError: string | undefined;
-  try { ent = buildEnterpriseDeps(env, { accounts: store, now: opts.now, ...opts.ent }); } catch (e) { if (!(e instanceof EntBuildError)) throw e; entError = e.message; }
   return {
-    ent, entError, store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
+    store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? unavailableMailer, now: opts.now ?? (() => Date.now()), siteOrigin,
     webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
   };

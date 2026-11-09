@@ -4,11 +4,8 @@ import { MemoryApprovalStore } from "../src/enterprise/payout_decision.ts";
 import { MockIdp } from "../src/enterprise/sso.ts";
 import { SyntheticScan } from "../src/enterprise/estate.ts";
 import { RATE_V1 } from "../src/enterprise/share.ts";
-import { MemoryBookFacts } from "../src/enterprise/partner_book.ts";
 import { newSealKey, type SealKeyring } from "../src/enterprise/seal.ts";
 import type { PayoutProvider, RateTable } from "../src/enterprise/types.ts";
-import { buildEnterpriseDeps, type EntSeams } from "../src/ent_context.ts";
-import { FakeD1 } from "./fake_d1.ts";
 
 export const INTERNAL = "internal_fixture_secret";
 export class MockPayouts implements PayoutProvider {
@@ -24,8 +21,8 @@ export class MockPayouts implements PayoutProvider {
 
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const store = new MemoryEntStore(), payouts = new MockPayouts(), book = new MemoryBookFacts();
-  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
+  const store = new MemoryEntStore(), payouts = new MockPayouts();
+  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals: new MemoryApprovalStore(), sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
   // sign in, then the operator provisions the seat
@@ -56,18 +53,6 @@ export function makeEnt(rates: RateTable = RATE_V1) {
     const res = await h.req("POST", "/sso/callback", { body: { state: st.state, nonce: st.nonce, id_token } });
     return { st, id_token, res, body: await h.j(res.clone()) };
   }
-  return { ...h, store, payouts, book, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
+  return { ...h, store, payouts, ireq, provision, get, post, addVerifiedAsset, configureSso, idToken, ssoLogin };
 }
 export const SSO_CFG = (clientId: string, secret = "sso_secret_fixture_0123456789") => ({ secret, issuer: "https://idp.mock.test", clientId });
-
-// C8 f314: the ent the PRODUCTION construction point builds, over a FakeD1 and the harness's own stores (seams), so a suite can swap it in.
-export const ENT_ENV = (extra: Record<string, unknown> = {}) => ({ DB: new FakeD1() as never, INTERNAL_API_SECRET: INTERNAL, ENT_SEAL_KEYS: JSON.stringify({ current: "k1", keys: { k1: newSealKey() } }), ...extra });
-export function entSeams(h: { store: MemoryEntStore; payouts: PayoutProvider; deps: { store: any } }, extra: EntSeams = {}): EntSeams {
-  return {
-    storeFactory: () => h.store, approvals: () => new MemoryApprovalStore(), payouts: h.payouts, payoutLookup: { async lookup() { return { found: false } as never; } },
-    idp: MockIdp, scan: SyntheticScan, accounts: h.deps.store, ...extra,
-  };
-}
-export function constructEnt(h: { store: MemoryEntStore; payouts: PayoutProvider; deps: { store: any } }, envExtra: Record<string, unknown> = {}, extra: EntSeams = {}) {
-  return buildEnterpriseDeps(ENT_ENV(envExtra) as never, entSeams(h, extra));
-}
