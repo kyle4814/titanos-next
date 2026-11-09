@@ -151,6 +151,34 @@ def suite():
         check(r1["applied_branches"] == 1 and r1["stack_index"] == 1, "F: stack 1 lands %s" % r1["applied_branches"])
     finally:
         shutil.rmtree(d, ignore_errors=True)
+    # G (f323). per-hunk union cannot see a key the target MOVED out of the hunk; the whole-file 3-way must land it,
+    # keep the target's no-trailing-newline convention, and refuse a delete-vs-change on one key.
+    d = fixture()
+    try:
+        base = {"name": "x", "scripts": {"test": "a", "postbuild": "p", "cat": "c", "seo": "s", "spy": "y", "last": "l"}}
+        fm = lambda o, nl="\n": json.dumps(o, indent=2) + nl
+        commit(d, "package.json", fm(base), "pj base")
+        old = git(d, "rev-parse", "HEAD").strip()
+        branch(d, "web/k1", old)
+        b2 = json.loads(json.dumps(base)); b2["scripts"]["test"] = "a && k"; b2["scripts"]["cat"] = "c2"
+        commit(d, "package.json", fm(b2), "k1 pj")
+        branch(d, "main", old)
+        m = {"name": "x", "scripts": {"test": "a && m", "postbuild": "p", "seo": "s", "spy": "y", "last": "l", "cat": "c"}}   # target moved cat to the end
+        commit(d, "package.json", fm(m, ""), "target moves cat, adds m")
+        r = apply(d)
+        got = show(d, OUT, "package.json") if r["applied_branches"] else ""
+        sc = json.loads(got)["scripts"] if got else {}
+        check(r["applied_branches"] == 1, "G: moved-key package.json lands %s" % r["rows"])
+        check(sc.get("test") == "a && m && k" and sc.get("cat") == "c2", "G: both sides kept %s" % sc)
+        check(r["applied_branches"] and not got.endswith("\n"), "G: target end-of-file convention kept")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+    J = lambda o: json.dumps(o, indent=2) + "\n"
+    bj = {"scripts": {"a": "1", "b": "2"}}
+    check(S.merge_package_json(J(bj), J({"scripts": {"a": "1"}}), J({"scripts": {"a": "1", "b": "9"}})) is None, "G: delete-vs-change refused")
+    check(S.merge_package_json(J(bj), J({"scripts": {"a": "1", "b": "2"}}).replace("  ", "    "), J(bj)) is None, "G: non-canonical ours refused")
+    check(json.loads(S.merge_package_json(J(bj), J({"scripts": {"a": "1", "b": "2", "o": "o"}}), J({"scripts": {"a": "1", "b": "2", "t": "t"}})))["scripts"] == {"a": "1", "b": "2", "o": "o", "t": "t"}, "G: both-add keys union")
+    check(S.merge_package_json(J(bj), '{"scripts": {"a": "1", "a": "2"}}', J(bj)) is not None and "\"a\": \"2\"" in S.merge_package_json(J(bj), '{"scripts": {"a": "1", "a": "2"}}', J(bj)), "G: duplicate key in ours collapses last-wins")
     return fails
 
 
@@ -160,7 +188,7 @@ def main():
         print("FAIL " + f)
     ok = not base
     print(("ok   " if ok else "FAIL ") + "baseline suite clean (%d failures)" % len(base))
-    for flag in ("STOP_ON_CONFLICT", "DEDUPE"):
+    for flag in ("STOP_ON_CONFLICT", "DEDUPE", "PKG_WHOLE_FILE"):
         setattr(S, flag, False)
         try:
             mf = suite()
