@@ -16,6 +16,7 @@ import { workerScheduled } from "./owner/cron.ts";
 import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drain_tick_worker.ts";
 import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
+import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
@@ -237,11 +238,29 @@ export function createWorker(opts: WorkerOpts = {}) {
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
       }).catch(() => json({ error: "internal" }, 500));
     },
-    async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
-      if (isDrainTick(event)) { await drainTickScheduled(event, env, { now: opts.now, ...opts.drainTick }); return; }   // f334: the shop drain tick owns ONLY its own cron expression
-      await workerScheduled(event, env);
+    // f334: the shop drain tick owns ONLY its own cron expression. Any other cron runs the owner cron and then the C8 payout tick.
+    // C8 f57: with a ctx, the work is handed to ctx.waitUntil (the Worker stays alive for the tick); without one it is awaited (tests, drain).
+    scheduled(event: { scheduledTime?: number; cron?: string }, env: Env, ctx?: { waitUntil(p: Promise<unknown>): void }): Promise<void> {
+      const run = async (): Promise<void> => {
+        if (isDrainTick(event)) { await drainTickScheduled(event, env, { now: opts.now, ...opts.drainTick }); return; }
+        await workerScheduled(event, env);
+        const now = typeof event?.scheduledTime === "number" ? event.scheduledTime : (opts.now ?? (() => Date.now()))();
+        const o = await scheduledTick(env, now);
+        console.log(`scheduled ${o.label}`);
+      };
+      if (ctx?.waitUntil) { ctx.waitUntil(run().catch(() => console.log("scheduled failed"))); return Promise.resolve(); }
+      return run();
     },
   };
 }
 // The shipped default: real deps from the Env's D1 binding, shared D1 throttle. With no store adapter wired it refuses (503, named reason).
 export default createWorker({ buildDeps: (env) => defaultBuildDeps(env), makeThrottle: (env) => throttleFor(env) });
+// Cron entry. With an env.payouts adapter set it runs ONE payout tick; without one it is a labelled no-op (never a crash, never a 503).
+// Nothing triggers this yet: no [triggers] crons in wrangler.toml (deploy is GATE5). ctx.waitUntil keeps the Worker alive for the tick.
+export type ScheduledOutcome = { ran: false; label: "payout_tick_noop_no_adapter" } | ({ ran: true; label: "payout_tick" } & TickResult);
+export async function scheduledTick(env: Env, now: number = Date.now()): Promise<ScheduledOutcome> {
+  const p = env.payouts;
+  if (!p) return { ran: false, label: "payout_tick_noop_no_adapter" };
+  const r = await runPayoutTick(p.store, p.transfer, now, { lookup: p.lookup, maxRows: p.maxRows, log: (l) => console.log(l) });
+  return { ran: true, label: "payout_tick", ...r };
+}
