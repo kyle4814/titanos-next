@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, cpSync, symlinkSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -15,16 +15,20 @@ const SRC = resolve(import.meta.dirname, "../src");
 const DAY = 86_400_000;
 type Mods = { store: any; d1: any; svc: any };
 async function load(edits: [string, string, string][] = []): Promise<Mods> {
-  const dir = mkdtempSync(join(tmpdir(), "f243-")); if (!dir.startsWith(tmpdir())) throw new Error("bad tmp");
+  const root = mkdtempSync(join(tmpdir(), "f243-")); if (!root.startsWith(tmpdir())) throw new Error("bad tmp");
+  // f344 restack: int3's service.ts imports ./enterprise/* (which reaches ../../../lib/guestscan), so the whole src tree is copied
+  // under <root>/portal-api/src and the repo lib/ is linked at <root>/lib. The mutations still edit only the copy.
+  const dir = join(root, "portal-api", "src");
   try {
-    for (const f of readdirSync(SRC)) if (f.endsWith(".ts")) writeFileSync(join(dir, f), readFileSync(join(SRC, f), "utf8"));
+    cpSync(SRC, dir, { recursive: true });
+    symlinkSync(resolve(SRC, "../../lib"), join(root, "lib"));
     for (const [file, from, to] of edits) {
       const t = readFileSync(join(dir, file), "utf8"); assert.equal(t.split(from).length - 1, 1, `mutation anchor must match exactly once: ${from}`);
       writeFileSync(join(dir, file), t.replace(from, to));
     }
     const imp = (f: string) => import(pathToFileURL(join(dir, f)).href + "?" + Math.random());
     return { store: await imp("store.ts"), d1: await imp("d1_plan_store.ts"), svc: await imp("service.ts") };
-  } finally { setTimeout(() => rmSync(dir, { recursive: true, force: true }), 50); }
+  } finally { setTimeout(() => rmSync(root, { recursive: true, force: true }), 50); }
 }
 type Kind = "memory" | "d1";
 function world(m: Mods, kind: Kind) {
