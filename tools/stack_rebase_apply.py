@@ -23,6 +23,7 @@ import argparse, importlib.util, json, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STOP_ON_CONFLICT = True      # mutation switch: False = keep going past a conflict (tests prove the suite notices)
+PKG_WHOLE_FILE = True        # mutation switch: False = no whole-file package.json 3-way fallback (f323; tests prove the suite notices)
 DEDUPE = True                # mutation switch: False = union without dedupe (tests prove the suite notices)
 LIST_FILES = re.compile(r"(registry|manifest|index)\.(ts|tsx|js|mjs|json|py)$|(^|/)docs?/.+\.(md|json)$|\.gitignore$|CHANGELOG")
 MIG_RE = re.compile(r"^(portal-api/migrations/)(\d{4})(_[a-z0-9_]+\.sql)$")
@@ -140,6 +141,79 @@ def package_json_candidates(o, b, t):
     return cands
 
 
+# ---------- whole-file package.json three-way merge (f323) ----------
+def _no_dup_pairs(pairs):
+    keys = [k for k, _ in pairs]
+    if len(keys) != len(set(keys)):
+        raise ValueError("duplicate key")
+    return dict(pairs)
+
+
+def _merge_val(b, o, t, path):
+    """three-way on parsed JSON. Returns (value, ok). Chain strings joined by ' && ' are unioned; dicts recurse per key."""
+    if o == t:
+        return o, True
+    if o == b:
+        return t, True
+    if t == b:
+        return o, True
+    if isinstance(o, dict) and isinstance(t, dict):
+        return _merge_dict(b if isinstance(b, dict) else {}, o, t, path)
+    if isinstance(o, str) and isinstance(t, str) and " && " in (o + t) and isinstance(b, (str, type(None))):
+        res = _union_entries(_entries(b or ""), _entries(o), _entries(t))
+        return " && ".join(res), True
+    return None, False
+
+
+_GONE = object()
+
+
+def _merge_dict(b, o, t, path):
+    out = {}
+    for k in list(dict.fromkeys(list(o) + list(t))):
+        vb, vo, vt = b.get(k, _GONE), o.get(k, _GONE), t.get(k, _GONE)
+        if vo is _GONE and vt is _GONE:
+            continue
+        if vo is _GONE or vt is _GONE:
+            keep = vt if vo is _GONE else vo
+            if vb is _GONE:
+                out[k] = keep                      # added by one side only
+            elif keep == vb:
+                continue                           # deleted by one side, untouched by the other
+            else:
+                return None, False                 # deleted on one side, changed on the other
+            continue
+        if vb is _GONE:
+            vb = None if isinstance(vo, str) and isinstance(vt, str) else {}
+        v, ok = _merge_val(vb, vo, vt, path + [k])
+        if not ok:
+            return None, False
+        out[k] = v
+    return out, True
+
+
+def merge_package_json(base_s, ours_s, theirs_s):
+    """whole-file three-way merge of package.json texts -> merged text, or None when not mechanical.
+    Needs ours to round-trip byte-identically through json.dumps(indent=2) so the output carries no formatting noise."""
+    try:
+        b, o, t = (json.loads(x) for x in (base_s, ours_s, theirs_s))        # duplicate keys: last wins, as JSON.parse does
+    except ValueError:
+        return None
+    if not all(isinstance(x, dict) for x in (b, o, t)):
+        return None
+    nl = "\n" if ours_s.endswith("\n") else ""              # keep ours' end-of-file convention
+    fmt = lambda d: json.dumps(d, indent=2, ensure_ascii=False) + nl
+    try:
+        json.loads(ours_s, object_pairs_hook=_no_dup_pairs)
+        clean_ours = True
+    except ValueError:
+        clean_ours = False                                  # dup keys in ours: output is the last-wins canonical form
+    if clean_ours and fmt(o) != ours_s:
+        return None
+    m, ok = _merge_dict(b, o, t, [])
+    return fmt(m) if ok else None
+
+
 def resolve_text(path, text):
     """-> (new_text, hunks_resolved) or (None, reason)."""
     segs = parse_hunks(text)
@@ -178,7 +252,7 @@ def resolve_text(path, text):
         res = build(choice)
         if os.path.basename(path) == "package.json":
             try:
-                json.loads(res)
+                json.loads(res, object_pairs_hook=_no_dup_pairs)       # a duplicate key parses (last wins) but is corruption
             except ValueError:
                 continue
         return res, n
@@ -234,6 +308,12 @@ class Applier:
             except (OSError, UnicodeDecodeError):
                 fixes = None; break
             new, info = resolve_text(f, text)
+            if new is None and PKG_WHOLE_FILE and os.path.basename(f) == "package.json":
+                st = [self.d("show", ":%d:%s" % (n, f)) for n in (1, 2, 3)]
+                if all(x.returncode == 0 for x in st):
+                    m = merge_package_json(*(x.stdout for x in st))
+                    if m is not None:
+                        new, info = m, "whole-file"
             if new is None:
                 fixes = None; break
             fixes[f] = (new, info)
