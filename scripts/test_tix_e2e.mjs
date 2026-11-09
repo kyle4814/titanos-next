@@ -24,6 +24,27 @@ const ok = (c, m) => { console.log(`${c ? "PASS" : "FAIL"} ${m}`); if (!c) fail+
 const shot = (pg, n) => shots ? pg.screenshot({ path: path.join(shots, n), fullPage: true }) : null;
 const watch = (pg, who) => { pg.on("pageerror", (e) => errs.push(`${who}: ${e}`)); pg.on("console", (m) => { if (m.type() === "error") errs.push(`${who}: ${m.text()}`); }); };
 
+
+// LOAD-AWARE BUDGETS (f324). Every wait budget = nominal idle-box ms x SCALE, where SCALE is measured in THIS run
+// (a fixed CPU micro-benchmark vs its idle reference), clamped to [1, SCALE_MAX]. The ratio and denominator are printed.
+// A wait only ever ends early on a REAL signal (selector present / verdict shown); the budget bounds a genuine break,
+// so a removed selector or a 500 route still goes red, within nominal x SCALE (never an unbounded wait).
+const REF_MS = 60, SCALE_MAX = 10;
+const sample = () => { const t = performance.now(); let x = 0; for (let i = 0; i < 3e7; i++) x += i % 7; return performance.now() - t; };
+const med = [sample(), sample(), sample()].sort((m, n) => m - n)[1];
+const SCALE = Math.min(SCALE_MAX, Math.max(1, med / REF_MS));
+const T = (nominal) => Math.ceil(nominal * SCALE);
+console.log(`BUDGET baseline ${med.toFixed(0)}ms (median of 3) / idle ref ${REF_MS}ms = scale x${SCALE.toFixed(2)} (cap x${SCALE_MAX}); budget = nominal ms x scale`);
+const steps = [];
+const step = async (name, nominal, fn) => {
+  const budget = T(nominal), t0 = performance.now();
+  try { const r = await fn(budget); steps.push([name, performance.now() - t0, budget]); return r; }
+  catch (e) { console.log(`FAIL step "${name}" after ${(performance.now() - t0).toFixed(0)}ms of ${budget}ms budget (nominal ${nominal} x${SCALE.toFixed(2)}): ${String(e.message).split("\n")[0]}`); throw e; }
+};
+const waitSel = (pg, sel, nominal = 20000, name = sel) => step(name, nominal, (t) => pg.waitForSelector(sel, { timeout: t }));
+// TIX_E2E_MUTATE=selector|route500 proves the test still goes red on a genuine break (see test_tix_e2e_mutants.sh).
+const MUT = process.env.TIX_E2E_MUTATE || "";
+
 const b = await chromium.launch();
 const A = await b.newContext({ viewport: { width: 1280, height: 800 } });
 const P = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
@@ -40,6 +61,9 @@ await P.addInitScript(() => {
   };
 });
 const a = await A.newPage(); const p = await P.newPage(); watch(a, "desktop"); watch(p, "phone");
+for (const pg of [a, p]) { pg.setDefaultTimeout(T(20000)); pg.setDefaultNavigationTimeout(T(30000)); }
+if (MUT === "route500") await P.route("**/demo/tix/scan**", (r) => r.fulfill({ status: 500, body: "boom" }));
+if (MUT === "selector") await P.addInitScript(() => { new MutationObserver(() => document.querySelectorAll('[data-testid="paired"]').forEach((e) => e.removeAttribute("data-testid"))).observe(document, { subtree: true, childList: true, attributes: true }); });
 
 // start page + guide
 await a.goto(base + "/demo/tix");
@@ -47,52 +71,52 @@ ok((await a.locator('[data-testid="guide"] li').count()) === 4, "start page show
 ok((await a.locator("meta[name=robots]").getAttribute("content")).includes("noindex"), "start page is noindex");
 ok((await a.textContent("main")).includes("DEMO MODE"), "DEMO MODE note visible");
 await shot(a, "01_start_desktop.png");
-await a.click("text=Start the demo"); await a.waitForSelector("text=Create event");
+await a.click("text=Start the demo"); await waitSel(a, "text=Create event");
 await a.fill('[aria-label="Event name"]', "Demo Fest 2026"); await a.click("text=Create event");
 await a.fill('[aria-label="Fan name"]', "Sam Fan"); await a.click("text=Issue ticket");
-await a.click("text=Show pairing code"); await a.waitForSelector('[data-testid="pair"]');
+await a.click("text=Show pairing code"); await waitSel(a, '[data-testid="pair"]');
 const link = await a.inputValue('[aria-label="Pairing link"]');
 ok(link.includes("/scan#p="), "organiser shows a pairing link/QR");
 await shot(a, "02_organiser_pairing_desktop.png");
 
 // phone shares only the link
 await p.goto(base + "/demo/tix/scan");
-await p.waitForSelector('[data-testid="unpaired"]'); ok(true, "phone before pairing says Not paired");
+await waitSel(p, '[data-testid="unpaired"]'); ok(true, "phone before pairing says Not paired");
 await shot(p, "03_scanner_unpaired_phone.png");
-await p.goto(link); await p.waitForSelector('[data-testid="paired"]');
+await p.goto(link); await waitSel(p, '[data-testid="paired"]');
 ok((await p.textContent('[data-testid="paired"]')).includes("Demo Fest 2026"), "phone paired from the link alone");
 ok(!p.url().includes("#p="), "pairing key scrubbed from the address bar");
 
 // wallet on desktop; camera path ADMIT
-await a.goto(base + "/demo/tix/wallet"); await a.waitForSelector('[data-testid="token"]:not(:empty)');
+await a.goto(base + "/demo/tix/wallet"); await waitSel(a, '[data-testid="token"]:not(:empty)');
 await shot(a, "04_wallet_desktop.png");
 const frame = (sel) => a.evaluate((s) => document.querySelector(s).toDataURL("image/png"), sel);
 const t1 = await a.textContent('[data-testid="token"]');
 await p.click("text=Start camera");
 await p.evaluate((u) => { window.__frame = u; }, await frame('canvas[aria-label="Rotating ticket QR code"]'));
-await p.waitForSelector("text=ADMIT", { timeout: 15000 });
+await waitSel(p, "text=ADMIT", 15000, "camera verdict ADMIT");
 ok((await p.textContent('[data-testid="sentence"]')).length > 20, "ADMIT shows a plain sentence");
 await shot(p, "05_scanner_admit_phone.png");
 
 // DUPLICATE (same live token pasted; camera dedupe window skipped by paste)
 await p.fill('[aria-label="Ticket code"]', t1); await p.click("text=Verify code");
-await p.waitForSelector("text=DUPLICATE");
+await waitSel(p, "text=DUPLICATE");
 ok((await p.textContent('[data-testid="verdict"]')).includes("First scanned at"), "DUPLICATE shows first-scan time");
 await shot(p, "06_scanner_duplicate_phone.png");
 
 // screenshot copy goes stale -> EXPIRED through the camera
-await a.click("text=Save a screenshot copy"); await a.waitForSelector('[data-testid="copy-qr"]');
-await a.waitForFunction(() => document.querySelector('[data-testid="copy-age"]').textContent.startsWith("Stale"), null, { timeout: 45000 });
+await a.click("text=Save a screenshot copy"); await waitSel(a, '[data-testid="copy-qr"]');
+await step("copy goes stale (2 x 15s real clock + slack)", 45000, (t) => a.waitForFunction(() => document.querySelector('[data-testid="copy-age"]').textContent.startsWith("Stale"), null, { timeout: t }));
 await shot(a, "07_wallet_cheat_desktop.png");
 await p.evaluate((u) => { window.__frame = u; }, await frame('[data-testid="copy-qr"]'));
-await p.waitForSelector("text=EXPIRED", { timeout: 15000 });
+await waitSel(p, "text=EXPIRED", 15000, "camera verdict EXPIRED");
 ok(true, "stale screenshot copy scanned by camera reads EXPIRED");
 await shot(p, "08_scanner_expired_phone.png");
 
 // forged code -> FAKE
-await a.click("text=Show a forged code"); await a.waitForSelector('[data-testid="forged-qr"]');
+await a.click("text=Show a forged code"); await waitSel(a, '[data-testid="forged-qr"]');
 await p.evaluate((u) => { window.__frame = u; }, await frame('[data-testid="forged-qr"]'));
-await p.waitForSelector("text=FAKE", { timeout: 15000 });
+await waitSel(p, "text=FAKE", 15000, "camera verdict FAKE");
 ok(true, "forged code scanned by camera reads FAKE");
 await shot(p, "09_scanner_fake_phone.png");
 
@@ -100,14 +124,14 @@ await shot(p, "09_scanner_fake_phone.png");
 const P2 = await b.newContext({ viewport: { width: 390, height: 844 } });
 await P2.addInitScript(() => { navigator.mediaDevices.getUserMedia = async () => { throw new DOMException("denied", "NotAllowedError"); }; });
 const q = await P2.newPage(); watch(q, "phone-nocam");
-await q.goto(link); await q.waitForSelector('[data-testid="paired"]'); await q.click("text=Start camera");
-await q.waitForSelector('[role="alert"]');
+await q.goto(link); await waitSel(q, '[data-testid="paired"]'); await q.click("text=Start camera");
+await waitSel(q, '[role="alert"]');
 await q.fill('[aria-label="Ticket code"]', await a.textContent('[data-testid="token"]')); await q.click("text=Verify code");
-await q.waitForSelector("text=ADMIT");
+await waitSel(q, "text=ADMIT");
 ok(true, "camera refused: alert shown and paste-code fallback ADMITs");
 await shot(q, "10_scanner_camera_refused_paste.png");
 q.on("dialog", (d) => d.accept()); await q.click("text=Reset scanner");
-await q.waitForSelector('[data-testid="unpaired"]');
+await waitSel(q, '[data-testid="unpaired"]');
 ok(true, "scanner reset returns to Not paired");
 a.on("dialog", (d) => d.accept()); await a.goto(base + "/demo/tix/organiser"); await a.click("text=Reset demo");
 await a.waitForFunction(() => !document.body.textContent.includes("Demo Fest 2026"));
@@ -115,4 +139,5 @@ ok(true, "organiser reset clears the demo");
 
 ok(errs.length === 0, `no console/page errors (${errs.length}) ${errs.slice(0, 3).join(" | ")}`);
 await b.close(); srv.close();
+console.log("STEPS " + steps.map(([n, ms, bud]) => `${n.slice(0, 28)}=${ms.toFixed(0)}/${bud}`).join(" | "));
 console.log(fail ? `FAIL ${fail}` : "ALL PASS"); process.exit(fail ? 1 : 0);
