@@ -92,6 +92,10 @@
   {
    "key": "src/market/dispute.ts::AuditEntry.kind",
    "reason": "Audit-chain entry kind stored in the case JSON, not a CHECK column."
+  },
+  {
+   "key": "src/market/entitlements.ts::SubStatus",
+   "reason": "f44 seat subscription status lives only in MemorySeatEntitlements today; no D1 table or CHECK column exists (the Stripe-fed adapter is NOT BUILT, GATE2). Add a PAIR when that table lands."
   }
  ],
  "checks": [
