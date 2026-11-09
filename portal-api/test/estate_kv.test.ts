@@ -10,6 +10,14 @@ class FakeKV implements KVPort {
   clock: { t: number };
   constructor(clock: { t: number }) { this.clock = clock; }
   async get(k: string) { if (this.failGet) throw new Error("kv down"); const e = this.m.get(k); if (!e) return null; if (this.clock.t >= e.exp) { this.m.delete(k); return null; } return e.v; }
+  listCalls: { prefix: string; cursor?: string; limit?: number }[] = []; failList = false; noList = false; pageOverride: number | null = null; brokenCursor = false; leakForeign = false;
+  async list(o: { prefix: string; cursor?: string; limit?: number }) {
+    this.listCalls.push(o); if (this.failList) throw new Error("list down");
+    let names = [...this.m.entries()].filter(([k, e]) => this.clock.t < e.exp && (this.leakForeign || k.startsWith(o.prefix))).map(([k]) => k).sort();
+    const page = this.pageOverride ?? o.limit ?? 1000, start = o.cursor ? Number(o.cursor) : 0;
+    const slice = names.slice(start, start + page), more = start + page < names.length;
+    return { keys: slice.map((name) => ({ name })), list_complete: !more, cursor: more ? (this.brokenCursor ? o.cursor ?? "0" : String(start + page)) : undefined };
+  }
   async put(k: string, v: string, o?: { expirationTtl?: number }) { if (this.failPut) throw new Error("kv down"); this.puts.push({ key: k, ttl: o?.expirationTtl }); this.m.set(k, { v, exp: o?.expirationTtl && !this.ignoreTtl ? this.clock.t + o.expirationTtl * 1000 : Infinity }); }
 }
 const assessed = (tag: string): Assessment => ({ status: "ASSESSED", grade: "B", score: 80, counts: { critical: 0, high: 1, medium: 2, low: 3 }, scannedAt: 1, resolverSource: "FAKE:" + tag, unreadableChecks: 0 });
@@ -161,4 +169,92 @@ test("limiter window resets on its own clock even when KV TTL eviction is late (
   const l = new KvRefreshLimiter({ kv, now: () => clock.t, max: 2, windowMs: 600_000 });
   assert.equal(await l.allow("tenA"), true); assert.equal(await l.allow("tenA"), true); assert.equal(await l.allow("tenA"), false);
   clock.t += 601_000; assert.equal(await l.allow("tenA"), true);
+});
+
+// ---- f335: stats().size is truthful (bounded KV list), "unknown" rather than 0 when it cannot be counted ----
+const dom = (i: number) => `d${i}.synthetic.test`;
+test("size: equals live key count after puts, TTL expiry (live vs stale-grace) and invalidate (delete)", async () => {
+  const m = mk({ bucketCapacity: 1000 });
+  assert.equal(await m.c.liveSize("tenA"), 0);                       // listed and truly empty = a real 0
+  for (let i = 0; i < 5; i++) await m.c.assess("tenA", dom(i));
+  assert.equal(await m.c.liveSize("tenA"), 5);
+  await m.c.assess("tenA", dom(0), { refresh: true } as never);      // overwrite, same key: still 5
+  assert.equal(await m.c.liveSize("tenA"), 5);
+  await m.c.invalidate("tenA", dom(1));                              // delete = expired marker: not live
+  assert.equal(await m.c.liveSize("tenA"), 4);
+  m.clock.t += 16 * 60_000;                                          // past logical ttl (15 min), inside grace (1 h)
+  assert.equal(await m.c.liveSize("tenA"), 0);                       // none fresh
+  assert.equal(await m.c.liveSize("tenA", { includeStale: true }), 4);   // stale-grace still servable
+  m.clock.t += 61 * 60_000;                                          // KV drops them
+  assert.equal(await m.c.liveSize("tenA", { includeStale: true }), 0);
+  assert.equal((await m.c.statsFor("tenA")).size, 0);
+});
+test("size: sync stats().size is unknown, never a fake 0", async () => {
+  const m = mk(); await m.c.assess("tenA", dom(1));
+  assert.equal((m.c.stats() as { size: unknown }).size, "unknown");
+  assert.equal((await m.c.statsFor("tenA")).size, 1);
+});
+test("size: foreign tenant keys excluded, even if the list leaks them or a lookalike prefix exists", async () => {
+  const m = mk({ bucketCapacity: 1000 });
+  for (let i = 0; i < 3; i++) await m.c.assess("tenA", dom(i));
+  for (let i = 0; i < 4; i++) await m.c.assess("tenB", dom(i));
+  await m.c.assess("tenAB", dom(0));                                 // prefix lookalike
+  assert.equal(await m.c.liveSize("tenA"), 3); assert.equal(await m.c.liveSize("tenB"), 4); assert.equal(await m.c.liveSize("tenAB"), 1);
+  assert.ok(m.kv.listCalls.every((c) => c.prefix.startsWith("estate:v1:ten") && c.prefix.endsWith(":")));
+  m.kv.leakForeign = true;                                           // a misbehaving list that ignores the prefix
+  assert.equal(await m.c.liveSize("tenA"), 3);
+  const [kB, eB] = [...m.kv.m.entries()].find(([k]) => k.includes(":tenB:") && !m.kv.m.has(k.replace(":tenB:", ":tenA:")))!;
+  m.kv.m.set(kB.replace(":tenB:", ":tenA:"), eB);                    // tenB value planted under tenA's key: invalid, not counted
+  assert.equal(await m.c.liveSize("tenA"), 3);
+  m.kv.m.set("estate:v1:tenA:not-a-hash", eB);                       // not a bare domain hash: not counted
+  m.kv.m.set("estate:v1:tenA:" + "a".repeat(32) + ":x", eB);
+  assert.equal(await m.c.liveSize("tenA"), 3);
+  // self-consistent values (t and d match the planted key's own text) under keys that are not tenA's bare-hash keys: still not counted
+  const [kA0, eA0] = [...m.kv.m.entries()].find(([k]) => k.startsWith("estate:v1:tenA:"))!;
+  const v0 = JSON.parse(eA0.v), h0 = kA0.slice("estate:v1:tenA:".length);
+  m.kv.m.set("estate:v1:tenB:" + h0.replace(/^./, h0[0] === "0" ? "1" : "0"), { v: JSON.stringify({ ...v0, d: h0.replace(/^./, h0[0] === "0" ? "1" : "0") }), exp: Infinity });   // foreign-named, tenant-A-claiming
+  const odd = "Z".repeat(32);
+  m.kv.m.set("estate:v1:tenA:" + odd, { v: JSON.stringify({ ...v0, d: odd }), exp: Infinity });                                                                         // not a hex hash
+  assert.equal(await m.c.liveSize("tenA"), 3);
+});
+test("size: delimiter-injection and bad tenant ids are refused with no list call", async () => {
+  const m = mk();
+  for (const evil of ["tenA:x", "a:b", "../tenB", "", "x".repeat(65), "ten\nB", "tenA "]) assert.equal(await m.c.liveSize(evil), "unknown");
+  assert.equal(m.kv.listCalls.length, 0);
+});
+test("size: list throw = unknown, not 0; a get error while counting = unknown", async () => {
+  const m = mk(); await m.c.assess("tenA", dom(1));
+  m.kv.failList = true; assert.equal(await m.c.liveSize("tenA"), "unknown"); assert.equal((await m.c.statsFor("tenA")).size, "unknown");
+  m.kv.failList = false; assert.equal(await m.c.liveSize("tenA"), 1);
+  m.kv.failGet = true; assert.equal(await m.c.liveSize("tenA"), "unknown");
+});
+test("size: a KV port with no list = unknown", async () => {
+  const m = mk(); await m.c.assess("tenA", dom(1));
+  const noList: KVPort = { get: (k) => m.kv.get(k), put: (k, v, o) => m.kv.put(k, v, o) };
+  const c = fresh(noList, m.clock, m.inner);
+  assert.equal(await c.liveSize("tenA"), "unknown");
+});
+test("size: cap hit = unknown (no partial count); exactly at the cap is counted", async () => {
+  const m = mk({ bucketCapacity: 1000 });
+  for (let i = 0; i < 7; i++) await m.c.assess("tenA", dom(i));
+  assert.equal(await m.c.liveSize("tenA", { maxKeys: 7, pageSize: 3 }), 7);
+  assert.equal(await m.c.liveSize("tenA", { maxKeys: 6, pageSize: 3 }), "unknown");
+  assert.equal(await m.c.liveSize("tenA", { maxKeys: 1 }), "unknown");
+});
+test("size: pagination across more than one page (cursor followed, no double count)", async () => {
+  const m = mk({ bucketCapacity: 1000 });
+  for (let i = 0; i < 25; i++) await m.c.assess("tenA", dom(i));
+  m.kv.listCalls.length = 0;
+  assert.equal(await m.c.liveSize("tenA", { pageSize: 10 }), 25);
+  assert.equal(m.kv.listCalls.length, 3); assert.equal(m.kv.listCalls[0].cursor, undefined); assert.equal(m.kv.listCalls[1].cursor, "10"); assert.equal(m.kv.listCalls[2].cursor, "20");
+  assert.ok(m.kv.listCalls.every((c) => c.limit === 10));
+  m.kv.pageOverride = 4;                                             // server returns smaller pages than asked
+  assert.equal(await m.c.liveSize("tenA", { pageSize: 10 }), 25);
+});
+test("size: a list that never advances its cursor = unknown (bounded, no infinite loop)", async () => {
+  const m = mk({ bucketCapacity: 1000 });
+  for (let i = 0; i < 6; i++) await m.c.assess("tenA", dom(i));
+  m.kv.pageOverride = 2; m.kv.brokenCursor = true;
+  assert.equal(await m.c.liveSize("tenA", { pageSize: 2 }), "unknown");
+  assert.ok(m.kv.listCalls.length <= 5);
 });
