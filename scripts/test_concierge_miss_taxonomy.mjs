@@ -23,7 +23,7 @@ for (const k of ["holdout", "dev"]) {
   t(`${k}: top10 has at most 10 and sorted desc`, s.top10.length <= 10 && s.top10.every((p, i, arr) => !i || arr[i - 1].n >= p.n));
   t(`${k}: top5 diagnoses are DESIGN ONLY text`, s.top5.length <= 5 && s.top5.every((p) => /^DESIGN ONLY/.test(p.recommendation) && p.diagnosis.length > 20));
 }
-t("holdout accuracy reproduces the f65 figure 76/120", T.holdout.right === 76, String(T.holdout.right));
+t("holdout accuracy on the int3 router: 77/120 (f65 measured 76; re-pinned 2026-11-10 hand merge, router moved +1)", T.holdout.right === 77, String(T.holdout.right));
 t("matrix is deterministic across two runs (byte identical)", a === b);
 t("CLI --json output equals in-process output", JSON.stringify(JSON.parse(execFileSync("node", ["--experimental-strip-types", root + "scripts/concierge_miss_taxonomy.mjs", "--json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).replace(/\n$/, ""))) === a);
 const after = files.map(sha);

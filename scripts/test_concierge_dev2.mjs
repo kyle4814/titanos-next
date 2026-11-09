@@ -31,7 +31,7 @@ t("no ask duplicates a dev.tsv ask", overlap(dev2, dev).length === 0, "count " +
 const res = runDev2(), s = summary(res);
 t("every ask got a verdict", res.length === dev2.length);
 t("deterministic: two runs identical", JSON.stringify(runDev2()) === JSON.stringify(res));
-t("pinned measured number: 135/207", s.ok === 135 && s.n === 207, s.ok + "/" + s.n);
+t("pinned measured number on the int3 router: 134/207 (f79 measured 135; re-pinned 2026-11-10 hand merge, router moved -1)", s.ok === 134 && s.n === 207, s.ok + "/" + s.n);
 t("wilson interval brackets the point estimate", s.w[0] < s.ok / s.n && s.ok / s.n < s.w[1]);
 t("confusion classes sum to misses", Object.values(classes(s.miss)).reduce((a, b) => a + b, 0) === s.miss.length);
 t("mutant: a wrong label is scored a miss", summary([{ ...res[0], ok: false, got: "x" }]).ok === 0);
