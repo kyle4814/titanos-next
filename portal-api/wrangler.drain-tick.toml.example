@@ -1,0 +1,9 @@
+# f334 C5: NOT LIVE. A separate example file, so the deployed portal-api/wrangler.toml binding is untouched.
+# Applying it is GATE5 (Cloudflare cron registration + deploy) and needs the generator_queue (0018) and graded_run (0020) migrations applied first.
+# Merge by hand ONLY after the owner card is approved:
+#   [triggers]
+#   crons = ["*/10 * * * *"]      # must equal DRAIN_TICK_CRON in src/shop/drain_tick_worker.ts
+#   [vars]
+#   DRAIN_TICK_ENABLED = "1"      # leave unset/"0" to keep the tick off even with the cron registered
+[triggers]
+crons = ["*/10 * * * *"]

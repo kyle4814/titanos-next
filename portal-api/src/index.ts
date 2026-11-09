@@ -13,6 +13,7 @@ import { traceKeyPrefix, isOperator } from "./agent/keytrace.ts";
 import { agentCard } from "./agent/files.ts";
 import { entRoute } from "./enterprise/routes.ts";
 import { workerScheduled } from "./owner/cron.ts";
+import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drain_tick_worker.ts";
 import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
 
@@ -217,7 +218,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
 // request, so login verify, DNS-TXT verify and checkout start are always guarded. Memory state is per isolate: a shared
 // adapter (Durable Object / D1) behind ThrottleStore is the WOULD-FLIP. buildDeps is undefined until the D1 store lands
 // (every route except /health then fails closed with 503).
-export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; makeThrottle?: (env: Env) => Throttle | undefined; now?: () => number; log?: (line: string) => void }
+export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; makeThrottle?: (env: Env) => Throttle | undefined; now?: () => number; log?: (line: string) => void; drainTick?: DrainTickOpts }
 export const THROTTLE_LIMITS = LIMITS;
 export function createWorker(opts: WorkerOpts = {}) {
   const fixed = opts.throttle ?? (opts.makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
@@ -237,6 +238,7 @@ export function createWorker(opts: WorkerOpts = {}) {
       }).catch(() => json({ error: "internal" }, 500));
     },
     async scheduled(event: { scheduledTime?: number; cron?: string }, env: Env): Promise<void> {
+      if (isDrainTick(event)) { await drainTickScheduled(event, env, { now: opts.now, ...opts.drainTick }); return; }   // f334: the shop drain tick owns ONLY its own cron expression
       await workerScheduled(event, env);
     },
   };

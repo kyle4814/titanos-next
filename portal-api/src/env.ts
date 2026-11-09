@@ -12,6 +12,7 @@ export interface D1Like {
 }
 export interface Env {
   DB?: D1Like;                 // D1 database (same one the live titanos-api uses)
+  DRAIN_TICK_ENABLED?: string; // f334: shop drain tick runs only when exactly "1"; absent = off
   STRIPE_MODE?: string;        // "test" | "live"; anything else is treated as "test"
   TITANOS_SITE_ORIGIN?: string;
   STRIPE_SECRET_KEY?: string;      // never echoed
