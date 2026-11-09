@@ -2,6 +2,7 @@
 // (written by klinge-kernel bin/site_ledger_export.py from NUMBERS.json). Everything else stays a dated baseline receipt.
 import raw from "./proof.json";
 import { v, int, dec, AS_OF_NUMBERS } from "../ledger";
+import { markStale } from "./markStale.mjs";
 
 const day = AS_OF_NUMBERS.slice(0, 10);
 const usd2 = (k: Parameters<typeof v>[0]) => `US$${v(k).toFixed(2)}`;
@@ -16,7 +17,11 @@ const OVERLAY: Record<string, Partial<Star>> = {
   s_tokens: { display: `${int("tokens_after")} tokens`, caption: "Median a worker reads before acting" },
 };
 
-export const proof = {
+// EV6: a row measured more than 30 days before the build renders as UNKNOWN (last measured <date>), never the old number.
+const TODAY = process.env.PROOF_TODAY || new Date().toISOString().slice(0, 10);
+type Stamped<T> = T & { stale?: boolean; lastMeasured?: string; staleReason?: string };
+
+const live = {
   ...raw,
   stars: raw.stars.map((s) => (OVERLAY[s.id] ? { ...s, ...OVERLAY[s.id], date: day } : s)),
   fleetCost: {
@@ -29,4 +34,12 @@ export const proof = {
     todayText: usd2("spend_today_usd"),
     date: day,
   },
+};
+
+export const proof = {
+  ...live,
+  headline: markStale([live.headline], TODAY)[0] as Stamped<typeof live.headline>,
+  fleetCost: markStale([live.fleetCost], TODAY)[0] as Stamped<typeof live.fleetCost>,
+  charts: markStale(live.charts, TODAY) as Stamped<(typeof live.charts)[number]>[],
+  stars: markStale(live.stars, TODAY) as Stamped<(typeof live.stars)[number]>[],
 };
