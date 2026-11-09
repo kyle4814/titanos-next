@@ -22,6 +22,6 @@ CREATE TABLE IF NOT EXISTS pro_profiles (
   state_json TEXT NOT NULL            -- display name, plan, connect account id, onboarded flag
 );
 CREATE TABLE IF NOT EXISTS market_cards (
-  id TEXT PRIMARY KEY, kind TEXT NOT NULL CHECK (kind IN ('payout_review','dispute')), job_id TEXT NOT NULL REFERENCES market_jobs(id),
+  id TEXT PRIMARY KEY, kind TEXT NOT NULL CHECK (kind IN ('payout_review','dispute','clawback_review')), job_id TEXT NOT NULL REFERENCES market_jobs(id),
   reason TEXT NOT NULL, created_at INTEGER NOT NULL, resolved INTEGER NOT NULL DEFAULT 0, outcome TEXT
 );
