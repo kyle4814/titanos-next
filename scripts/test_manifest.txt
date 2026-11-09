@@ -143,3 +143,4 @@ node --experimental-strip-types scripts/test_estate_ui.mjs
 node scripts/test_keys_page.mjs
 node scripts/test_savings_calculator_ui.mjs
 bash scripts/test_savings_calculator_ui_mutations.sh
+node --experimental-strip-types scripts/test_sso_section.mjs

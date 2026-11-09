@@ -22,7 +22,7 @@ export const ANCHORS: SeatAnchor[] = [
     body: "Enter your own numbers to see a floor to ceiling band of hours given back to your team, set against the Enterprise band. The method is shown beside the result. Nobody is replaced, and nothing you type leaves the page.",
   },
   {
-    id: "sso", title: "SSO", status: "coming", plan: "C8, plan line 1496",
-    body: "Single sign-on for a group is designed but not built. It will not open until tenant isolation has passed an adversarial review. Timing is on request.",
+    id: "sso", title: "SSO", status: "live", plan: "C8, plan line 1496",
+    body: "Single sign-on over OpenID Connect is built and tested against generated keys. The setup steps are below. No live identity provider is connected yet, and connecting yours is arranged on a call.",
   },
 ];
