@@ -66,11 +66,18 @@ export default function CostCurve() {
 
         <aside className="w4-second-look" data-phi-reveal data-w4-chart="fleet_cost">
           <h3>The honest second look</h3>
-          <p>
-            Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.
-            That is higher, not lower, and {f.todayText} was spent in the day. The matched-job drop above compares the same task text on the old
-            and new rule book. Both are real. We show both.
-          </p>
+          {f.stale ? (
+            <p>
+              The fleet-wide cost per job is UNKNOWN right now. It was last measured {f.lastMeasured}, and a figure that old is not carried onto this page.
+              The matched-job drop above compares the same task text on the old and new rule book. We show what we can still stand behind.
+            </p>
+          ) : (
+            <p>
+              Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.
+              That is higher, not lower, and {f.todayText} was spent in the day. The matched-job drop above compares the same task text on the old
+              and new rule book. Both are real. We show both.
+            </p>
+          )}
           <p className="w4-meta">
             <span className="w4-chip" data-label={f.label}>{f.label}</span> {f.date} · {f.source} · {f.note}
           </p>
