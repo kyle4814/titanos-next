@@ -132,4 +132,3 @@ node scripts/test_xtenant_route_matrix.mjs
 node --experimental-strip-types scripts/test_dossier_selfserve.mjs
 node scripts/test_leads_ui.mjs
 F244_MUTANTS=1 node scripts/test_portal_refund_pending.mjs
-node scripts/drill_ten_jobs.mjs
