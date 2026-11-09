@@ -5,6 +5,8 @@
 -- Spend caps per key, in credits. NULL = the application default applies, never unlimited.
 ALTER TABLE api_keys ADD COLUMN cap_daily INTEGER;
 ALTER TABLE api_keys ADD COLUMN cap_total INTEGER;
+-- F23: non-secret display handle ("tk_" + 8 hex of the token) for the keys page. Not a secret, not unique, not a lookup key.
+ALTER TABLE api_keys ADD COLUMN prefix TEXT;
 -- Which key spent it (NULL for top-ups). Lets a per-key spend cap be summed in the same statement as the debit.
 ALTER TABLE credit_ledger ADD COLUMN key_id TEXT REFERENCES api_keys(id);
 CREATE INDEX IF NOT EXISTS credit_ledger_key_at ON credit_ledger(key_id, at);

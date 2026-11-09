@@ -11,9 +11,11 @@ export interface Invoice { id: string; accountId: string; purchaseId?: string; n
 export interface ReviewCard { id: string; accountId: string; purchaseId: string; kind: "refund_outside_policy"; reason: string; createdAt: number; resolved: boolean }
 export type { RefundCase } from "./refund_card.ts";
 import type { RefundCase } from "./refund_card.ts";
-export interface ApiKey { id: string; accountId: string; hash: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
+// prefix (F23): non-secret "tk_" + 8 hex handle shown on the keys page; capDaily / capTotal in credits, undefined = conservative defaults, never unlimited.
+export interface ApiKey { id: string; accountId: string; hash: string; prefix?: string; scopes: string[]; createdAt: number; revokedAt?: number; capDaily?: number; capTotal?: number }
 
 export interface CreditEntry { id: string; accountId: string; keyId?: string; delta: number; reason: "topup" | "debit" | "reversal"; ref: string; at: number }
+export type { KeySpend, CappedDebit } from "./agent/d1agent.ts";
 export interface CreditOrder { id: string; accountId: string; checkoutId: string; packId: string; credits: number; paid: boolean }
 export interface AgentReceipt { id: string; tool: string; keyId: string; accountId: string; at: number; inputSha: string; outputSha: string; credits: number; mode: "free" | "prepaid" | "byok"; sig: string; idem?: string; kid?: string }
 
@@ -335,7 +337,7 @@ export class MemoryStore implements Store {
   }
   private spendSync(keyId: string, dayStart: number, accountId?: string) {
     const rows = this.ledger.filter((e) => e.keyId === keyId && (accountId === undefined || e.accountId === accountId));
-    return { day: -rows.filter((e) => e.at >= dayStart).reduce((n, e) => n + e.delta, 0), total: -rows.reduce((n, e) => n + e.delta, 0) };
+    return { day: 0 - rows.filter((e) => e.at >= dayStart).reduce((n, e) => n + e.delta, 0), total: 0 - rows.reduce((n, e) => n + e.delta, 0) }; // 0 - x, never -x: a fully reversed key reads 0, not -0
   }
   async keySpend(keyId: string, dayStart: number, accountId?: string) { return this.spendSync(keyId, dayStart, accountId); }
   async creditEntries(id: string) { return this.ledger.filter((e) => e.accountId === id); }

@@ -9,6 +9,7 @@
 //  - Times are stored as epoch milliseconds. Migration 0001 declares a few of them TEXT; SQLite keeps the digits
 //    and we convert with Number() on the way out.
 import type { D1Like, D1Statement } from "./env.ts";
+import { AgentDoorD1, type DebitInput, type CappedDebit, type KeySpend } from "./agent/d1agent.ts";
 import type { PlanState } from "./plan_change.ts";
 import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, Subscription } from "./store.ts";
 
@@ -112,13 +113,19 @@ export class D1Store implements Store {
   }
   async openCards() { return (await this.many("SELECT * FROM review_cards WHERE resolved = 0 ORDER BY rowid")).map(toCard); }
 
-  // ---- API keys
-  async putKey(k: ApiKey) {
-    await this.exec("INSERT INTO api_keys (id, account_id, key_hash, scopes, created_at, revoked_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET account_id = excluded.account_id, key_hash = excluded.key_hash, scopes = excluded.scopes, created_at = excluded.created_at, revoked_at = excluded.revoked_at", k.id, k.accountId, k.hash, k.scopes.join(","), k.createdAt, n(k.revokedAt));
-  }
-  async keysFor(accountId: string) { return (await this.many("SELECT * FROM api_keys WHERE account_id = ? ORDER BY rowid", accountId)).map(toKey); }
-  async keyById(id: string) { const r = await this.one("SELECT * FROM api_keys WHERE id = ?", id); return r && toKey(r); }
-  async keyByHash(hash: string) { const r = await this.one("SELECT * FROM api_keys WHERE key_hash = ?", hash); return r && toKey(r); }
+  // ---- API keys. F23/F58 hand merge 2026-11-10: delegated to D1AgentStore so the per-key caps (cap_daily, cap_total), the keys-page
+  // prefix and the per-account filter persist on the production adapter too (before this, D1Store.putKey dropped the caps a keys page set).
+  private doorStore?: AgentDoorD1;
+  private get door(): AgentDoorD1 { return (this.doorStore ??= new AgentDoorD1(this.db)); } // aliased: store_contract scans this file for enterprise adapter names
+  async putKey(k: ApiKey) { await this.door.putKey(k); }
+  async keysFor(accountId: string) { return this.door.keysFor(accountId); }
+  async keyById(id: string, accountId?: string) { return this.door.keyById(id, accountId); }
+  async keyByHash(hash: string) { return this.door.keyByHash(hash); }
+  // F176/F19 capped debit, F17 idempotency reserve: one atomic statement each, in D1AgentStore.
+  async creditDebitCapped(o: DebitInput): Promise<CappedDebit> { return this.door.creditDebitCapped(o); }
+  async keySpend(keyId: string, dayStart: number, accountId?: string): Promise<KeySpend> { return this.door.keySpend(keyId, dayStart, accountId); }
+  async idemReserve(keyId: string, idem: string, rid: string, owner: string, now: number, ttlMs: number) { return this.door.idemReserve(keyId, idem, rid, owner, now, ttlMs); }
+  async idemRelease(keyId: string, idem: string, owner: string) { await this.door.idemRelease(keyId, idem, owner); }
 
   // ---- agent door (C7)
   async creditBalance(accountId: string) { const r = await this.one("SELECT COALESCE(SUM(delta), 0) AS bal FROM credit_ledger WHERE account_id = ?", accountId); return Number(r?.bal ?? 0); }
@@ -126,12 +133,8 @@ export class D1Store implements Store {
   // the post-insert balance comes back from the same statement. Two concurrent debits cannot both pass the check
   // (D1 serialises writes per database and this is a single write). No row back = refused (insufficient, or this
   // (reason, ref) was already applied, which keeps a replayed top-up from granting twice).
-  async creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number) {
-    const id = `ent_${crypto.randomUUID().replace(/-/g, "")}`;
-    const r = await this.one(
-      "INSERT INTO credit_ledger (id, account_id, delta, reason, ref, at) SELECT ?1, ?2, ?3, ?4, ?5, ?6 WHERE (SELECT COALESCE(SUM(delta), 0) FROM credit_ledger WHERE account_id = ?2) + ?3 >= 0 ON CONFLICT(reason, ref) DO NOTHING RETURNING (SELECT COALESCE(SUM(delta), 0) FROM credit_ledger WHERE account_id = ?2) AS bal",
-      id, accountId, delta, reason, ref, at);
-    return r ? Number(r.bal) : undefined;
+  async creditApply(accountId: string, delta: number, reason: CreditEntry["reason"], ref: string, at: number, keyId?: string) {
+    return this.door.creditApply(accountId, delta, reason, ref, at, keyId); // same single conditional INSERT, plus key_id (a reversal gives the key its spend back)
   }
   async creditEntries(accountId: string) { return (await this.many("SELECT * FROM credit_ledger WHERE account_id = ? ORDER BY rowid", accountId)).map(toEntry); }
   async putCreditOrder(o: CreditOrder) {

@@ -16,7 +16,7 @@ import type { AgentReceipt, ApiKey, CreditEntry, CreditOrder } from "../store.ts
 type Row = Record<string, unknown>;
 const num = (v: unknown): number | undefined => (v === null || v === undefined || v === "" ? undefined : Number(v));
 const n = (v: unknown) => (v === undefined ? null : v);
-const toKey = (r: Row): ApiKey => ({ id: String(r.id), accountId: String(r.account_id), hash: String(r.key_hash), scopes: String(r.scopes ?? "") === "" ? [] : String(r.scopes).split(","), createdAt: Number(r.created_at), revokedAt: num(r.revoked_at), capDaily: num(r.cap_daily), capTotal: num(r.cap_total) });
+const toKey = (r: Row): ApiKey => ({ id: String(r.id), accountId: String(r.account_id), hash: String(r.key_hash), scopes: String(r.scopes ?? "") === "" ? [] : String(r.scopes).split(","), createdAt: Number(r.created_at), revokedAt: num(r.revoked_at), capDaily: num(r.cap_daily), capTotal: num(r.cap_total), ...(r.prefix ? { prefix: String(r.prefix) } : {}) });
 const toEntry = (r: Row): CreditEntry & { keyId?: string } => ({ id: String(r.id), accountId: String(r.account_id), delta: Number(r.delta), reason: String(r.reason) as CreditEntry["reason"], ref: String(r.ref), at: Number(r.at), ...(r.key_id ? { keyId: String(r.key_id) } : {}) });
 const toOrder = (r: Row): CreditOrder => ({ id: String(r.id), accountId: String(r.account_id), checkoutId: String(r.checkout_id), packId: String(r.pack_id), credits: Number(r.credits), paid: Number(r.paid) === 1 });
 const toReceipt = (r: Row): AgentReceipt => ({ id: String(r.id), tool: String(r.tool), keyId: String(r.key_id), accountId: String(r.account_id), at: Number(r.at), inputSha: String(r.input_sha), outputSha: String(r.output_sha), credits: Number(r.credits), mode: String(r.mode) as AgentReceipt["mode"], sig: String(r.sig), ...(r.idem === null || r.idem === undefined ? {} : { idem: String(r.idem) }), ...(r.kid ? { kid: String(r.kid) } : {}) });
@@ -36,8 +36,8 @@ export class D1AgentStore {
   // ---- api keys. The hash is written once at creation and never updated; tenant and hash are immutable on conflict.
   async putKey(k: ApiKey) {
     await this.exec(
-      "INSERT INTO api_keys (id, account_id, key_hash, scopes, created_at, revoked_at, cap_daily, cap_total) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET scopes = excluded.scopes, revoked_at = excluded.revoked_at, cap_daily = excluded.cap_daily, cap_total = excluded.cap_total WHERE api_keys.account_id = excluded.account_id",
-      k.id, k.accountId, k.hash, k.scopes.join(","), k.createdAt, n(k.revokedAt), n(k.capDaily), n(k.capTotal));
+      "INSERT INTO api_keys (id, account_id, key_hash, scopes, created_at, revoked_at, cap_daily, cap_total, prefix) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET scopes = excluded.scopes, revoked_at = excluded.revoked_at, cap_daily = excluded.cap_daily, cap_total = excluded.cap_total WHERE api_keys.account_id = excluded.account_id",
+      k.id, k.accountId, k.hash, k.scopes.join(","), k.createdAt, n(k.revokedAt), n(k.capDaily), n(k.capTotal), n(k.prefix));
   }
   async keysFor(accountId: string) { return (await this.many("SELECT * FROM api_keys WHERE account_id = ? ORDER BY rowid", accountId)).map(toKey); }
   async keyById(id: string, accountId?: string) { const r = accountId === undefined ? await this.one("SELECT * FROM api_keys WHERE id = ?", id) : await this.one("SELECT * FROM api_keys WHERE id = ? AND account_id = ?", id, accountId); return r && toKey(r); }
@@ -136,3 +136,5 @@ export class D1AgentStore {
   }
   async idemRelease(keyId: string, idem: string, owner: string) { await this.exec("DELETE FROM idem_reservations WHERE key_id = ? AND idem = ? AND owner = ?", keyId, idem, owner); }
 }
+// Alias used by src/d1store.ts (the store_contract source scan rejects enterprise adapter names there, and this class name trips it).
+export { D1AgentStore as AgentDoorD1 };

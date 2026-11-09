@@ -140,3 +140,4 @@ node --experimental-strip-types scripts/test_concierge_dev2.mjs
 node --experimental-strip-types scripts/test_concierge_miss_taxonomy.mjs
 bash scripts/test_demand_d1_mutants.sh
 node --experimental-strip-types scripts/test_estate_ui.mjs
+node scripts/test_keys_page.mjs
