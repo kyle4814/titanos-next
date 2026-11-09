@@ -17,7 +17,22 @@ import { estateCache } from "./estate_cache.ts";
 export interface KVPort {
   get(key: string): Promise<string | null>;
   put(key: string, value: string, opts?: { expirationTtl?: number }): Promise<void>;
+  /** Optional (Workers KV list): a port without it makes size UNKNOWN, never 0. */
+  list?(o: { prefix: string; cursor?: string; limit?: number }): Promise<{ keys: { name: string }[]; list_complete: boolean; cursor?: string }>;
 }
+
+/** size is a count, or "unknown" when it could not be counted truthfully (no list, list/get error, cap hit, broken cursor). Never a guessed 0. */
+export type KvSize = number | "unknown";
+export interface KvSizeOpts {
+  /** Also count entries past logical expiry but inside the stale grace (still servable cacheOnly). Default false: live = not expired. */
+  includeStale?: boolean;
+  /** Keys per list page. Default 100, clamped 1..1000. */
+  pageSize?: number;
+  /** Hard cap on keys listed for one tenant. More than this = "unknown". Default 1000. */
+  maxKeys?: number;
+}
+export type KvCacheStats = Omit<CacheStats, "size"> & { size: KvSize };
+export type KvEstateCache = EstateCache & { liveSize(tenant: string, o?: KvSizeOpts): Promise<KvSize>; statsFor(tenant: string, o?: KvSizeOpts): Promise<KvCacheStats> };
 
 const TENANT_RX = /^[A-Za-z0-9_-]{1,64}$/;
 export const validTenant = (t: unknown): t is string => typeof t === "string" && TENANT_RX.test(t);
@@ -46,13 +61,13 @@ export interface KvEstateCacheOpts {
   bucketCapacity?: number; refillEveryMs?: number;
 }
 
-export function kvEstateCache(o: KvEstateCacheOpts): EstateCache {
+export function kvEstateCache(o: KvEstateCacheOpts): KvEstateCache {
   const now = o.now ?? Date.now;
   const ttl = o.ttlMs ?? 15 * 60_000, unkTtl = o.unknownTtlMs ?? 60_000, grace = o.staleGraceMs ?? 3_600_000;
   const cap = Math.max(1, o.bucketCapacity ?? 50), refill = Math.max(1, o.refillEveryMs ?? 1000);
   const buckets = new Map<string, { tokens: number; last: number }>();
   const inflight = new Map<string, Promise<Assessment>>();
-  const stats: CacheStats = { hits: 0, misses: 0, staleServed: 0, rateLimited: 0, evictions: 0, freshScans: 0, size: 0 };
+  const stats: Omit<CacheStats, "size"> = { hits: 0, misses: 0, staleServed: 0, rateLimited: 0, evictions: 0, freshScans: 0 };
   const unknown = (reason: "scan_error" | "rate_limited"): Assessment => ({ status: "UNKNOWN", reason, scannedAt: now(), resolverSource: o.inner.source });
 
   function take(tenant: string): boolean {
@@ -110,7 +125,43 @@ export function kvEstateCache(o: KvEstateCacheOpts): EstateCache {
     const { key } = await keyOf(tenant, domain);
     try { await o.kv.put(key, "null", { expirationTtl: 60 }); } catch { /* best effort */ }
   }
-  return { assess, forTenant, invalidate, stats: () => ({ ...stats }) } as unknown as EstateCache;   // size is UNKNOWN on KV (no list), reported 0
+  /** Counts this tenant's live entries via a bounded KV list. Tenant bound: validated id + exact prefix + the remainder must be a bare domain hash. */
+  async function liveSize(tenant: string, so: KvSizeOpts = {}): Promise<KvSize> {
+    if (!validTenant(tenant) || typeof o.kv.list !== "function") return "unknown";
+    const prefix = `estate:v1:${tenant}:`;
+    const page = Math.min(1000, Math.max(1, Math.floor(so.pageSize ?? 100))), cap = Math.max(1, Math.floor(so.maxKeys ?? 1000));
+    const maxPages = Math.ceil(cap / page) + 1;
+    const names = new Set<string>();
+    let cursor: string | undefined;
+    for (let i = 0; i < maxPages; i++) {
+      let r;
+      try { r = await o.kv.list({ prefix, ...(cursor ? { cursor } : {}), limit: page }); } catch { return "unknown"; }
+      if (!r || !Array.isArray(r.keys)) return "unknown";
+      for (const k of r.keys) {
+        const n = k?.name;
+        if (typeof n !== "string" || !n.startsWith(prefix)) continue;      // foreign or malformed name: never counted
+        const rest = n.slice(prefix.length);
+        if (!/^[0-9a-f]{32}$/.test(rest)) continue;                         // not a bare domain hash: not ours
+        names.add(n);
+        if (names.size > cap) return "unknown";                              // cap hit: do not report a partial count
+      }
+      if (r.list_complete) {
+        let live = 0;
+        for (const n of names) {
+          const e = await read(n, tenant, n.slice(prefix.length));
+          if (e === "ERR") return "unknown";
+          if (e && (so.includeStale || now() < e.exp)) live++;
+        }
+        return live;
+      }
+      if (!r.cursor || r.cursor === cursor) return "unknown";               // incomplete with no usable cursor: cannot finish
+      cursor = r.cursor;
+    }
+    return "unknown";
+  }
+  const statsFor = async (tenant: string, so?: KvSizeOpts): Promise<KvCacheStats> => ({ ...stats, size: await liveSize(tenant, so) });
+  // The sync stats() cannot list, so its size is "unknown" (it used to report 0); statsFor(tenant) carries the real count.
+  return { assess, forTenant, invalidate, liveSize, statsFor, stats: () => ({ ...stats, size: "unknown" as KvSize }) } as unknown as KvEstateCache;
 }
 
 export interface KvRefreshLimiterOpts { kv: KVPort; now?: () => number; max?: number; windowMs?: number }
