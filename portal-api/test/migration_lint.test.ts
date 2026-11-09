@@ -21,7 +21,7 @@ test("the real tree is clean (declared 0003/0004 debt is a warning only)", () =>
 
 test("the declared debt is real: the real tree still has the clashes (stale declaration would fail)", () => {
   const f = readdirSync(join(ROOT, "migrations")).filter((x: string) => x.endsWith(".sql"));
-  assert.equal(f.filter((x: string) => x.startsWith("0004_")).length, 2);
+  assert.equal(f.filter((x: string) => x.startsWith("0004_")).length, 3); // int3 head: market, store_counters, subscription_plan (f354 widened the declaration)
   assert.ok(checkNames(f, { duplicates: [] }).some((m: string) => m.includes("duplicate prefix 0004")));
   assert.ok(checkNames(["0001_a.sql"], { duplicates: [4] }).some((m: string) => m.includes("stale declaration")));
 });
@@ -89,14 +89,14 @@ test("interface property unions parse (card kinds)", () => {
   assert.deepEqual(tsUnion(`export interface C { id: string; kind: "a" | "b"; x: number }`, { iface: "C", prop: "kind" }), ["a", "b"]);
 });
 
-test("mutation: real tree with a value dropped from the market_cards CHECK fails", () => {
+test("mutation: real tree with a value dropped from the market_jobs CHECK fails", () => {
   const d = mk();
   try {
     cpSync(join(ROOT, "migrations"), join(d, "migrations"), { recursive: true });
     cpSync(join(ROOT, "src"), join(d, "src"), { recursive: true });
     const p = join(d, "migrations/0004_market.sql");
-    writeFileSync(p, readFileSync(p, "utf8").replace(",'clawback_review'", ""));
+    writeFileSync(p, readFileSync(p, "utf8").replace(",'refunded')", ")"));
     const r = lint({ migDir: join(d, "migrations"), srcRoot: d });
-    assert.ok(r.failures.some((m: string) => m.includes("'clawback_review'") && m.includes("market_cards.kind")), r.failures.join("\n"));
+    assert.ok(r.failures.some((m: string) => m.includes("'refunded'") && m.includes("market_jobs.status")), r.failures.join("\n"));
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
