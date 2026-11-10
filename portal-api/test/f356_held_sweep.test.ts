@@ -139,7 +139,7 @@ const MUTANTS: [string, [string, string, string][]][] = [
   ["M1 skip the paid check", [["held_sweep.ts", 'if (!pur || pur.status !== "paid") {', "if (!pur) {"]]],
   ["M2 drain without the claim lease", [["held_sweep.ts", "if (!(await store.acquireLease(leaseKey(pur.id), owner, now, LEASE_MS))) {", "if (false) {"]]],
   ["M3 drain without CAS (blind write)", [["service.ts", "if (!(await d.store.casSubscription(v.sub, v.version))) continue;", "await d.store.putSubscription(v.sub);"]]],
-  ["M4 contention loses the facts (no re-hold)", [["service.ts", "} catch (e) { for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; }", "} catch (e) { throw e; }"]]],
+  ["M4 contention loses the facts (no re-hold)", [["service.ts", "} catch (e) { if (!(e as { factsRestored?: boolean })?.factsRestored) for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; }", "} catch (e) { throw e; }"], ["service.ts", "  if (fx.taken) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);\n  throw Object.assign(", "  throw Object.assign("]]], // hand merge 2026-11-10: the f261 port moved the contention re-hold into updateSubscription, so M4 removes both
   ["M5 unbounded scan", [["held_sweep.ts", "heldFactKeys(SUB_HELD_PREFIX, opts.cursor, b)", "heldFactKeys(SUB_HELD_PREFIX, opts.cursor, 1e9)"]]],
   ["M6 cursor ignored (head-of-line starvation)", [["held_sweep.ts", "heldFactKeys(SUB_HELD_PREFIX, opts.cursor, b)", "heldFactKeys(SUB_HELD_PREFIX, undefined, b)"]]],
   ["M7 sweep touches an unseeded row's facts (reads rows with no subscription)", [["held_sweep.ts", "if (!sub) { rep.skipped++; continue; }", "if (!sub) { await store.takeFacts(key); rep.skipped++; continue; }"]]],
