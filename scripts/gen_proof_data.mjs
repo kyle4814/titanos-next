@@ -1,31 +1,60 @@
 // gen_proof_data.mjs: builds lib/site-data/proof.json (charts, learning-loop receipts, proof-wall stars) from
-//   lib/site-data/source/BASELINE_2026-10-08.json  (snapshot of klinge-kernel state/baseline, refresh with --refresh)
+//   lib/site-data/source/BASELINE_<day>.json  (snapshots of klinge-kernel state/baseline, made by bin/ceiling_board.py --json;
+//                                              --refresh copies the newest kernel BASELINE_*.json in)
+// The newest snapshot wins row by row. A row it does not carry, or carries as UNKNOWN (or a zero-sample median), falls back
+// to the newest older snapshot that measured it, WITH that snapshot's date, so markStale shows it as UNKNOWN once it is
+// over 30 days old instead of the old figure looking current (EV6). Every chart and star carries its own row's date.
 //   lib/efficiency/efficiency.json                 (the efficiency page's own data)
 // No number is typed here: every figure is parsed or computed from those two files. A baseline row whose source has no
 // public label stops the run, so an internal path or tool name can never reach the page by accident.
 // Usage: node scripts/gen_proof_data.mjs [--refresh] [--check]   (--check: exit 1 if proof.json is stale)
-import { readFileSync, writeFileSync, copyFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, copyFileSync, existsSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { homedir } from "node:os";
 
 const root = new URL("../", import.meta.url);
 const P = (p) => new URL(p, root);
-const SNAP = "lib/site-data/source/BASELINE_2026-10-08.json";
+const SRC = "lib/site-data/source";
+const BASE_RE = /^BASELINE_\d{4}-\d{2}-\d{2}\.json$/;
+const baselines = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => BASE_RE.test(f)).sort() : []);
 const FLEET_SNAP = "lib/site-data/source/FLEET_LEDGER_2026-10-12.json"; // scripts/measure_fleet_ledger.mjs: the fleet row, re-measured
 const OUT = "lib/site-data/proof.json";
 
 if (process.argv.includes("--refresh")) {
-  copyFileSync(`${homedir()}/klinge-kernel/state/baseline/BASELINE_2026-10-08.json`, P(SNAP));
+  const kdir = `${homedir()}/klinge-kernel/state/baseline`;
+  const newest = baselines(kdir).at(-1);
+  if (!newest) throw new Error(`--refresh: no BASELINE_*.json in ${kdir}`);
+  copyFileSync(`${kdir}/${newest}`, P(`${SRC}/${newest}`));
 }
+const snapFiles = baselines(new URL(SRC, root)).reverse(); // newest first
+if (!snapFiles.length) throw new Error(`no BASELINE_*.json in ${SRC}`);
+const SNAP = `${SRC}/${snapFiles[0]}`;
 const snapText = readFileSync(P(SNAP), "utf8");
+const snaps = snapFiles.map((f) => {
+  const b = JSON.parse(readFileSync(P(`${SRC}/${f}`), "utf8"));
+  return { file: `${SRC}/${f}`, date: b.ts.slice(0, 10), rows: b.rows };
+});
 const base = JSON.parse(snapText);
 const eff = JSON.parse(readFileSync(P("lib/efficiency/efficiency.json"), "utf8"));
-const date = base.ts.slice(0, 10);
 const fleet = JSON.parse(readFileSync(P(FLEET_SNAP), "utf8"));
 
-const row = (vector, nth = 0) => {
-  const r = base.rows.filter((x) => x.vector === vector)[nth];
-  if (!r) throw new Error(`baseline row missing: ${vector}`);
+// A row counts as measured when it has a reading: not UNKNOWN, and a median is not taken over zero samples.
+const measured = (r) => !/^UNKNOWN/.test(String(r.now)) && !/\(0 sessions/.test(String(r.now));
+// row(names): the first snapshot (newest first) holding any of the names with a measured reading; its date rides along.
+// Several names because the generator renamed some vectors over time (e.g. "(last 24 h)" suffixes). A row no snapshot
+// measured comes from the newest snapshot that has it at all, so an UNKNOWN stays UNKNOWN.
+const usedSnaps = new Set();
+const row = (names) => {
+  names = [].concat(names);
+  const pick = (ok) => {
+    for (const s of snaps) for (const n of names) {
+      const r = s.rows.find((x) => x.vector === n);
+      if (r && ok(r)) { usedSnaps.add(s.file); return { ...r, date: s.date }; }
+    }
+    return null;
+  };
+  const r = pick(measured) ?? pick(() => true);
+  if (!r) throw new Error(`baseline row missing: ${names.join(" / ")}`);
   return r;
 };
 const num = (s, re, label) => {
@@ -101,12 +130,12 @@ const startTok = row("worker start tokens (median)");
 
 const headline = fromEff("cost_per_job", "Cost of one worker job");
 const charts = [
-  mk({ id: "ram", title: "Memory in use, Linux side", group: "Machine", suffix: " GB", dp: 2, before: num(ramRow.baseline, /^([\d.]+) used/, "ram before"), after: num(ramRow.now, /^([\d.]+) used/, "ram now"), better: "lower", label: ramRow.kind, source: pubSource(ramRow.source), method: "Read from the memory counters before and after the optimisation pass.", date }),
-  mk({ id: "vmmem", title: "Windows VM memory", group: "Machine", suffix: " GB", dp: 1, before: num(vmRow.baseline, /^([\d.]+) GB/, "vmmem before"), after: mbToGb(num(vmRow.now, /^([\d.]+)/, "vmmem now")), better: "lower", label: vmRow.kind, source: pubSource(vmRow.source), method: "Process memory counter, megabytes divided by 1024.", date }),
-  mk({ id: "win_free", title: "Windows memory free", group: "Machine", suffix: " GB", dp: 1, before: num(winRow.baseline, /^([\d.]+) GB/, "win before"), after: mbToGb(num(winRow.now, /^([\d.]+)/, "win now")), better: "higher", label: winRow.kind, source: pubSource(winRow.source), method: "Memory counter, megabytes divided by 1024.", date }),
-  mk({ id: "cron_hours", title: "Scheduled work per day", group: "Machine", suffix: " h", dp: 2, before: num(cronH.baseline, /^([\d.]+) h/, "cron before"), after: num(cronH.now, /^([\d.]+) h/, "cron now"), better: "lower", label: cronH.kind, source: pubSource(cronH.source), method: "Sum of job run time over a 24 hour window.", date }),
-  mk({ id: "jobs_per_hour", title: "Worker jobs finished per hour", group: "Fleet", dp: 2, before: num(jph.baseline, /\(([\d.]+)\/h\)/, "jph before"), after: fleet.jobsPerHour, better: "higher", label: jph.kind, source: pubSource(jph.source), method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished. The before figure is the 2026-10-08 baseline snapshot.`, date: fleet.measuredAt }),
-  mk({ id: "worker_start", title: "Tokens a worker reads before its first action", group: "AI cost", dp: 0, suffix: " tokens", before: num(startTok.baseline, /~(\d+)k/, "tok before") * 1000, after: num(startTok.now, /^([\d,]+)/, "tok now"), better: "lower", label: startTok.kind, source: pubSource(startTok.source), method: "Median across worker sessions at start.", date }),
+  mk({ id: "ram", title: "Memory in use, Linux side", group: "Machine", suffix: " GB", dp: 2, before: num(ramRow.baseline, /^([\d.]+) used/, "ram before"), after: num(ramRow.now, /^([\d.]+) used/, "ram now"), better: "lower", label: ramRow.kind, source: pubSource(ramRow.source), method: "Read from the memory counters before and after the optimisation pass.", date: ramRow.date }),
+  mk({ id: "vmmem", title: "Windows VM memory", group: "Machine", suffix: " GB", dp: 1, before: num(vmRow.baseline, /^([\d.]+) GB/, "vmmem before"), after: mbToGb(num(vmRow.now, /^([\d.]+)/, "vmmem now")), better: "lower", label: vmRow.kind, source: pubSource(vmRow.source), method: "Process memory counter, megabytes divided by 1024.", date: vmRow.date }),
+  mk({ id: "win_free", title: "Windows memory free", group: "Machine", suffix: " GB", dp: 1, before: num(winRow.baseline, /^([\d.]+) GB/, "win before"), after: mbToGb(num(winRow.now, /^([\d.]+)/, "win now")), better: "higher", label: winRow.kind, source: pubSource(winRow.source), method: "Memory counter, megabytes divided by 1024.", date: winRow.date }),
+  mk({ id: "cron_hours", title: "Scheduled work per day", group: "Machine", suffix: " h", dp: 2, before: num(cronH.baseline, /^([\d.]+) h/, "cron before"), after: num(cronH.now, /^([\d.]+) h/, "cron now"), better: "lower", label: cronH.kind, source: pubSource(cronH.source), method: "Sum of job run time over a 24 hour window.", date: cronH.date }),
+  mk({ id: "jobs_per_hour", title: "Worker jobs finished per hour", group: "Fleet", dp: 2, before: num(jph.baseline, /\(([\d.]+)\/h\)/, "jph before"), after: fleet.jobsPerHour, better: "higher", label: jph.kind, source: pubSource(jph.source), method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished. The before figure is the ${jph.date} baseline snapshot.`, date: fleet.measuredAt }),
+  mk({ id: "worker_start", title: "Tokens a worker reads before its first action", group: "AI cost", dp: 0, suffix: " tokens", before: num(startTok.baseline, /~(\d+)k/, "tok before") * 1000, after: num(startTok.now, /^([\d,]+)/, "tok now"), better: "lower", label: startTok.kind, source: pubSource(startTok.source), method: "Median across worker sessions at start.", date: startTok.date }),
   fromEff("cron_snapshot", "State snapshot, time per run"),
   fromEff("cron_mirror", "Cloud mirror, time per run"),
   fromEff("cron_ping", "Progress ping, time per run"),
@@ -126,19 +155,19 @@ const usdToday = num(usdRow.now, /US\$([\d.]+) today/, "usd today");
 const fleetCost = {
   before: usdBefore, after: usdNow, jobs: usdJobs, today: usdToday,
   beforeText: `US$${fmt(usdBefore, 3)}`, afterText: `US$${fmt(usdNow, 3)}`, jobsText: fmt(usdJobs, 0), todayText: `US$${fmt(usdToday, 2)}`,
-  note: usdRow.note, label: usdRow.kind, source: pubSource(usdRow.source), date,
+  note: usdRow.note, label: usdRow.kind, source: pubSource(usdRow.source), date: usdRow.date,
 };
 
 // ---- stars --------------------------------------------------------------------------------------------------------
 const stars = [];
 const star = (s) => stars.push(s);
 const baseStar = (id, group, r, display, caption, label = "MEASURED", method) =>
-  star({ id, group, display, caption, label, source: pubSource(r.source), date, method: method ?? (r.note || "Read from the source on the date shown.") });
+  star({ id, group, display, caption, label, source: pubSource(r.source), date: r.date, method: method ?? (r.note || "Read from the source on the date shown.") });
 
 const loadRow = row("load 1m / 5m");
 const cronF = row("cron failure rate (last 24 h)");
 const fFail = row("fleet fail rate (last 24 h)");
-const fMed = row("fleet median minutes/job");
+const fMed = row(["fleet median minutes/job (last 24 h)", "fleet median minutes/job"]);
 const gate = row("kernel gate wall (latest)");
 const suite = row("titanos suite wall (latest)");
 const bak = row("newest backup age (archive.log)");
@@ -154,12 +183,12 @@ baseStar("s_ram", "Machine", ramRow, `${fmt(num(ramRow.now, /^([\d.]+) used/, "r
 baseStar("s_vm", "Machine", vmRow, `${fmt(mbToGb(num(vmRow.now, /^([\d.]+)/, "v")), 1)} GB`, "Windows VM memory", vmRow.kind);
 baseStar("s_win", "Machine", winRow, `${fmt(mbToGb(num(winRow.now, /^([\d.]+)/, "w")), 1)} GB`, "Windows memory free", winRow.kind);
 baseStar("s_load", "Machine", loadRow, `${loadRow.now.split(" / ")[0]} load`, `One-minute load average on ${loadRow.note}`, loadRow.kind);
-baseStar("s_cronh", "Machine", cronH, `${fmt(num(cronH.now, /^([\d.]+)/, "c"), 2)} h`, `Scheduled work in 24 hours, ${cronH.note}`, cronH.kind);
+baseStar("s_cronh", "Machine", cronH, `${fmt(num(cronH.now, /^([\d.]+)/, "c"), 2)} h`, `Scheduled work in 24 hours, ${num(cronH.note, /(\d+) runs/, "cron runs")} runs`, cronH.kind);
 baseStar("s_cronf", "Machine", cronF, cronF.now.match(/\(([\d.]+%)\)/)[1], `Scheduled runs that failed, ${cronF.now.replace(/ \(.*/, "")}. The 89 percent from before was one job, so we do not chart the two against each other.`, cronF.kind,
   "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately.");
-baseStar("s_gate", "Build", gate, gate.now.match(/^(\d+ s)/)[1], `Full gate run, ${gate.now.match(/(\d+) suites/)[1]} suites, green`, "MEASURED", "Recorded by the gate runner at the time shown in the run record.");
+baseStar("s_gate", "Build", gate, gate.now.match(/^(\d+ s)/)[1], `Latest gate run, ${gate.now.match(/(\d+) suites/)[1]} suites, green`, "MEASURED", "Recorded by the gate runner at the time shown in the run record.");
 baseStar("s_backup", "Safety", bak, bak.now.replace(" old", ""), "Age of the newest backup", bak.kind);
-star({ id: "s_suite", group: "Build", display: "No number yet", caption: "Wall time of the main codebase suite", label: "UNKNOWN", source: pubSource(suite.source), date, method: "That suite does not log its own run time, so we show no figure. A recorder is the next fix." });
+star({ id: "s_suite", group: "Build", display: "No number yet", caption: "Wall time of the main codebase suite", label: "UNKNOWN", source: pubSource(suite.source), date: suite.date, method: "That suite does not log its own run time, so we show no figure. A recorder is the next fix." });
 
 for (const id of ["cost_per_job", "daily_spend", "recall50", "heldout", "killtest", "cron_snapshot", "cron_mirror", "cron_bundle", "repo_size", "titanos_suite"]) {
   const m = E(id);
@@ -179,7 +208,7 @@ charts.find((c) => c.id === "jobs_per_hour").system = fleet.system;
 for (const x of [...charts, ...stars]) x.system ??= x.source;
 const labelCounts = Object.fromEntries(Object.keys(LABELS).map((k) => [k, stars.filter((s) => s.label === k).length]));
 const out = {
-  generated: { from: [SNAP, FLEET_SNAP, "lib/efficiency/efficiency.json"], baselineTs: base.ts, sha256: createHash("sha256").update(snapText).digest("hex").slice(0, 16) },
+  generated: { from: [...snaps.map((s) => s.file).filter((f) => usedSnaps.has(f)), FLEET_SNAP, "lib/efficiency/efficiency.json"], baselineTs: base.ts, sha256: createHash("sha256").update(snapText).digest("hex").slice(0, 16) },
   labels: LABELS,
   labelCounts,
   headline: { ...headline, titleText: eff.headline.title.replace("{factor}", fmt(headline.before / headline.after, 1)), analogy: eff.headline.analogy, caption: eff.headline.caption },

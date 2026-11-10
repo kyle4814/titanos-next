@@ -2,7 +2,7 @@
   "_note": "EV6 stamp for every evidence page: WHICH system and WHAT DATE. dateFrom 'ledger' reads lib/ledger.json facts_as_of; a literal ISO date is checked against the named source by scripts/test_c9proof.mjs.",
   "/proof": { "system": "Recorded test logs and the trading-app build replay", "date": "2026-10-07", "source": "public/proof/*.log", "scope": "Test counts, timings and the replay on this page." },
   "/engineering": { "system": "TITANOS build ledger", "dateFrom": "ledger", "source": "lib/ledger.json", "scope": "Every figure drawn from the build ledger." },
-  "/efficiency": { "system": "Baseline snapshot and efficiency data", "date": "2026-10-08", "source": "lib/site-data/proof.json", "scope": "Before and after figures, each with its method." },
+  "/efficiency": { "system": "Baseline snapshot and efficiency data", "date": "2026-11-10", "source": "lib/site-data/proof.json", "scope": "Before and after figures, each with its method." },
   "/costs": { "system": "TITANOS build ledger and public price list", "dateFrom": "ledger", "source": "lib/ledger.json", "scope": "Cost and price figures; prices follow the live price list." },
   "/methodology": { "system": "TITANOS build ledger", "dateFrom": "ledger", "source": "lib/ledger.json", "scope": "The method behind every ledger figure." },
   "/learning-loop": { "system": "Worker fleet job ledger", "dateFrom": "ledger", "source": "lib/ledger.json", "scope": "Fleet job counts and failure rate." },

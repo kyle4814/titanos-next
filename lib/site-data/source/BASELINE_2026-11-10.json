@@ -1,0 +1,238 @@
+{
+ "ts": "2026-11-10T13:19:51",
+ "generator": "bin/ceiling_board.py --json --no-hooks (read-only; hook latency probes skipped, they are not used by the site)",
+ "rows": [
+  {
+   "vector": "Linux RAM used / available (GB)",
+   "baseline": "5.4 used (Vmmem 20.2 with Linux 5.4)",
+   "now": "10.65 used / 12.83 available of 23.47",
+   "kind": "MEASURED",
+   "source": "/proc/meminfo",
+   "note": ""
+  },
+  {
+   "vector": "vmmem MB",
+   "baseline": "20.2 GB (13.0 -> 7.4 after cache_trim)",
+   "now": "22521",
+   "kind": "MEASURED",
+   "source": "powershell.exe Get-Process vmmem",
+   "note": ""
+  },
+  {
+   "vector": "Windows available MB",
+   "baseline": "3 GB free of 31 (28/31 used)",
+   "now": "4830",
+   "kind": "MEASURED",
+   "source": "powershell.exe Win32_OperatingSystem",
+   "note": ""
+  },
+  {
+   "vector": "load 1m / 5m",
+   "baseline": "fleet allowed load 24 on 8 cores (84% CPU)",
+   "now": "32.63 / 29.80",
+   "kind": "MEASURED",
+   "source": "/proc/loadavg",
+   "note": "8 cores"
+  },
+  {
+   "vector": "cron job-hours/day (last 24 h)",
+   "baseline": "43.3 h/day of work",
+   "now": "36.58 h",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": "36.58 h over 24.0 h window, 813 runs"
+  },
+  {
+   "vector": "cron failure rate (last 24 h)",
+   "baseline": "snapshot job 256 of 287 runs failed (89%)",
+   "now": "45 of 813 (5.5%)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "cron failing jobs (last 24 h)",
+   "baseline": "not broken down by job",
+   "now": "snapshot_commit 44 of 286; payment_watch 1 of 288",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "cron top job-hours (last 24 h)",
+   "baseline": "not broken down by job",
+   "now": "snapshot_commit 23.50 h; disk_guard 11.79 h; cache_trim 1.10 h",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "cron job-hours/day (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "43.3 h/day of work",
+   "now": "9.76 h",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": "323.98 h over 796.5 h window, 43990 runs"
+  },
+  {
+   "vector": "cron failure rate (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "snapshot job 256 of 287 runs failed (89%)",
+   "now": "2767 of 43990 (6.3%)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "cron failing jobs (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "not broken down by job",
+   "now": "snapshot_commit 2329 of 6911; disk_guard 384 of 2307; context_audit 23 of 117",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "cron top job-hours (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "not broken down by job",
+   "now": "snapshot_commit 131.55 h; disk_guard 63.56 h; fleet_runner 45.26 h",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/cron_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "fleet jobs/hour (last 24 h)",
+   "baseline": "184 worker jobs/day (7.7/h)",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": "no finished jobs in window"
+  },
+  {
+   "vector": "fleet fail rate (last 24 h)",
+   "baseline": "not recorded",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": "no finished jobs in window"
+  },
+  {
+   "vector": "fleet median minutes/job (last 24 h)",
+   "baseline": "not recorded",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": "no finished jobs in window"
+  },
+  {
+   "vector": "fleet jobs/hour (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "184 worker jobs/day (7.7/h)",
+   "now": "7.74",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": "6164 finished over 796.5 h"
+  },
+  {
+   "vector": "fleet fail rate (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "not recorded",
+   "now": "448 of 6164 (7.3%)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "fleet median minutes/job (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "not recorded",
+   "now": "6.0 min (n=5712)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "US$/job, workers only (last 24 h)",
+   "baseline": "US$0.973/job (full doctrine); US$467/day",
+   "now": "UNKNOWN (no jobs in window); worker US$0.00",
+   "kind": "MEASURED",
+   "source": "worker transcripts (first prompt = fleet rules) via bin/usage_meter.py fitted pricing + fleet ledger",
+   "note": "orchestrator and non-worker sessions (US$400.02) excluded"
+  },
+  {
+   "vector": "US$/job, workers only (since 2026-10-08T08:50:00+10:00)",
+   "baseline": "US$0.973/job (full doctrine); US$467/day",
+   "now": "US$0.017/job over 6164 jobs; worker US$103.19",
+   "kind": "MEASURED",
+   "source": "worker transcripts (first prompt = fleet rules) via bin/usage_meter.py fitted pricing + fleet ledger",
+   "note": "orchestrator and non-worker sessions (US$10518.37) excluded"
+  },
+  {
+   "vector": "worker start tokens (median)",
+   "baseline": "~215k tokens (doctrine loaded twice, 198 of 198 sessions)",
+   "now": "0 (0 sessions, 0 flagged)",
+   "kind": "MEASURED",
+   "source": "bin/context_audit.py",
+   "note": ""
+  },
+  {
+   "vector": "kernel gate wall (latest)",
+   "baseline": "not recorded pre-optimisation",
+   "now": "7 s (GREEN, 7 suites, jobs=8) at 2026-11-07T04:14:55",
+   "kind": "RECORDED",
+   "source": "state/verify_runs.jsonl",
+   "note": ""
+  },
+  {
+   "vector": "titanos suite wall (latest)",
+   "baseline": "timed out at 222 s in the nuke ping (never finished)",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/.titanos/titanos_suite.jsonl or /home/tech2/klinge-kernel/state/titanos_suite_runs.jsonl",
+   "note": "no record yet: ~/titanos/run_all_tests.sh appends one line per full run once the logging branch is merged"
+  },
+  {
+   "vector": "hook latencies",
+   "baseline": "not recorded",
+   "now": "UNKNOWN",
+   "kind": "RECORDED",
+   "source": "/home/tech2/.claude/settings.json + /home/tech2/.claude/settings.local.json + /home/tech2/.claude-b/settings.json + /home/tech2/.claude-b/settings.local.json",
+   "note": "skipped (--no-hooks)"
+  },
+  {
+   "vector": "newest backup age (archive.log)",
+   "baseline": "not recorded",
+   "now": "644.6 h old",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/archive.log",
+   "note": ""
+  },
+  {
+   "vector": "newest bundle age",
+   "baseline": "bundle step 51 s/run, 492 files / 204 MB in OneDrive",
+   "now": "486.5 h old",
+   "kind": "MEASURED",
+   "source": "~/.titanos/backups + state/bundles",
+   "note": ""
+  },
+  {
+   "vector": "OneDrive archive status",
+   "baseline": "OneDrive tracking 235,274 files, 19.4 h/day mirror",
+   "now": "last OK 645.0 h ago (STALE >26 h)",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/archive_onedrive.lastok",
+   "note": ""
+  },
+  {
+   "vector": "disk use /",
+   "baseline": "not recorded",
+   "now": "48.0% (519 of 1081 GB)",
+   "kind": "MEASURED",
+   "source": "statvfs /",
+   "note": ""
+  },
+  {
+   "vector": "disk use /mnt/c",
+   "baseline": "not recorded",
+   "now": "8.4% (84 of 1000 GB)",
+   "kind": "MEASURED",
+   "source": "statvfs /mnt/c",
+   "note": ""
+  }
+ ]
+}
