@@ -4,13 +4,13 @@
  "facts_as_of": "2026-10-09",
  "rows": {
   "sloc": {
-   "value": 230797,
+   "value": 256217,
    "unit": "lines",
    "label": "MEASURED",
    "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded"
   },
   "engineer_years": {
-   "value": 60.6,
+   "value": 67.6,
    "unit": "engineer-years",
    "label": "MODELLED",
    "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12"
@@ -22,31 +22,31 @@
    "method": "COCOMO now minus COCOMO 7 day(s) ago, divided by 7"
   },
   "replacement_cost_aud": {
-   "value": 31601734,
+   "value": 35256236,
    "unit": "AU$",
    "label": "MODELLED",
    "method": "engineer-years x the engineering page's rate (44.1 ey ~ AU$23M); what a conventional team would charge, never revenue"
   },
   "fleet_jobs_24h": {
-   "value": 1451,
+   "value": 1549,
    "unit": "jobs",
    "label": "MEASURED",
    "method": "ledger 'done' events in the last 24 h"
   },
   "fleet_fail_rate_24h": {
-   "value": 1.1,
+   "value": 7.3,
    "unit": "%",
    "label": "MEASURED",
    "method": "fail+stuck / (done+fail+stuck), last 24 h"
   },
   "fleet_worker_hours_24h": {
-   "value": 195.7,
+   "value": 303.4,
    "unit": "worker-hours",
    "label": "MEASURED",
    "method": "sum of start->done durations, last 24 h"
   },
   "fleet_median_job_min": {
-   "value": 3.0,
+   "value": 12,
    "unit": "min",
    "label": "MEASURED",
    "method": "median start->done, last 24 h"
@@ -59,8 +59,8 @@
   }
  },
  "needle": {
-  "realised": 3.0,
-  "ceiling": 336.0,
+  "realised": 3,
+  "ceiling": 336,
   "label": "MODELLED",
   "text": "The needle has barely moved: realised output is 3x so far against a 336x ceiling, under 1% of it.",
   "method": "measured jobs/day 184 -> 548 (3.0x) / 336x modelled ceiling"
@@ -92,19 +92,21 @@
    "method": "def test_ count in titanos; kernel verify suite count"
   },
   "estate": {
-   "text": "12 code repositories built since 4 May 2026: 230,797 lines of production code.",
+   "text": "12 code repositories built since 4 May 2026: 256,217 lines of production code.",
    "label": "MEASURED",
    "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded"
   },
   "estate_ey": {
-   "text": "Priced by the industry standard COCOMO model, that is 60.6 engineer-years of conventional engineering.",
+   "text": "Priced by the industry standard COCOMO model, that is 67.6 engineer-years of conventional engineering.",
    "label": "MODELLED",
-   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 230.8 KSLOC"
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 256.2 KSLOC"
   },
   "estate_cost": {
-   "text": "A conventional team would charge about AU$31.6 million to build it.",
+   "text": "A conventional team would charge about AU$35.3 million to build it.",
    "label": "MODELLED",
-   "method": "60.6 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)"
+   "method": "67.6 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)"
   }
- }
+ },
+ "ledger_as_of": "2026-10-13T04:05:02",
+ "ledger_as_of_ms": 1791828302000
 }

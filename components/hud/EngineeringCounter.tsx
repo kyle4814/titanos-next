@@ -8,7 +8,7 @@ const AUD = new Intl.NumberFormat("en-AU", { maximumFractionDigits: 0 });
 
 export default function EngineeringCounter() {
   // Start on the snapshot so server HTML and first client paint match; then tick.
-  const [now, setNow] = useState(NUM.snapshot_ms);
+  const [now, setNow] = useState(NUM.ledger_as_of_ms);
   useEffect(() => {
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     setNow(Date.now());
@@ -33,7 +33,7 @@ export default function EngineeringCounter() {
         </div>
       </div>
       <p className="hud-note">
-        This is a model, not revenue and not a bank balance. It starts from the last ledger snapshot ({NUM.snapshot_ts.replace("T", " ")} AEST: {NUM.rows.sloc.value.toLocaleString("en-AU")} lines
+        This is a model, not revenue and not a bank balance. It starts from the last ledger snapshot ({NUM.ledger_as_of.replace("T", " ")} AEST: {NUM.rows.sloc.value.toLocaleString("en-AU")} lines
         of production code = {NUM.rows.engineer_years.value} engineer-years) and ticks up at the measured 7-day pace of {pace} engineer-years a day, at AU${AUD.format(Math.round(AUD_PER_EY))} per engineer-year.
         Extrapolation stops after {MAX_EXTRAPOLATE_DAYS} days. <Link href="/engineering#method" className="hud-link">MODELLED: COCOMO, method</Link>
       </p>

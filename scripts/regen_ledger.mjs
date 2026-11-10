@@ -9,6 +9,7 @@
 // Writes only the --ledger file. No network.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
+import { diffShared, derive as deriveHud, serialize as serializeHud } from "./hud_numbers_from_ledger.mjs";
 import { deriveRows, factTexts, checkLedger, DERIVED_KEYS, SOURCE_EXPORTER } from "./ledger_derive.mjs";
 
 // ledger key -> NUMBERS.json key. Explicit on purpose: nothing is matched by guesswork.
@@ -102,10 +103,10 @@ function check(ledgerPath) {
   const lr = rd(ledgerPath);
   if (lr.err) { console.error(`ERROR ledger: ${lr.err}`); process.exit(2); }
   const bad = checkLedger(lr.v);
+  // f394: the HUD feed shares figures with the ledger; any shared field that differs is a FAILURE (was a WARN in f393).
   const hud = rd(new URL("../lib/hud/numbers.json", import.meta.url).pathname);
-  if (!hud.err && hud.v?.rows?.engineer_years && lr.v.n?.estate_ey && hud.v.rows.engineer_years.value !== lr.v.n.estate_ey.value) {
-    console.log(`WARN lib/hud/numbers.json (separate HUD snapshot, ts ${hud.v.snapshot_ts}) shows engineer_years ${hud.v.rows.engineer_years.value} vs ledger estate_ey ${lr.v.n.estate_ey.value}: NOT regenerated here (kernel HUD exporter feed)`);
-  }
+  if (hud.err) bad.push(`lib/hud/numbers.json: ${hud.err}`);
+  else for (const d of diffShared(lr.v, hud.v)) bad.push(`HUD single-source (run node scripts/hud_numbers_from_ledger.mjs): ${d}`);
   if (bad.length) { for (const b of bad) console.error("FAIL " + b); console.error(`LEDGER CHECK RED (${bad.length})`); process.exit(1); }
   console.log("LEDGER CHECK GREEN: one estate_ey/estate_sloc in rows and facts text; derived rows equal the recovered formula");
 }
@@ -133,5 +134,13 @@ function main() {
   if (a.includes("--dry-run")) { console.log("DRY RUN: nothing written"); return; }
   writeFileSync(ledgerPath, JSON.stringify(res.ledger, null, 2) + "\n");
   console.log(`wrote ${ledgerPath}`);
+  // f394: the HUD feed follows the ledger in the same run (HUD-only fields untouched).
+  // Only for the real ledger (or an explicit --hud): a fixture ledger (--ledger <tmp>) must never rewrite the committed HUD feed.
+  const hudPath = v("--hud", a.includes("--ledger") ? null : new URL("../lib/hud/numbers.json", import.meta.url).pathname);
+  const hudNow = hudPath ? rd(hudPath) : { err: "skipped" };
+  if (!hudNow.err) {
+    const { hud: hudNext } = deriveHud(res.ledger, hudNow.v);
+    if (serializeHud(hudNext) !== readFileSync(hudPath, "utf8")) { writeFileSync(hudPath, serializeHud(hudNext)); console.log(`wrote ${hudPath}`); }
+  }
 }
 if (process.argv[1] && process.argv[1].endsWith("regen_ledger.mjs")) main();

@@ -8,6 +8,9 @@ export const FEED = feed as { generated: number; shown: number; dropped_orgs: nu
 export const NUM = numbers as unknown as {
   snapshot_ms: number;
   snapshot_ts: string;
+  /** Date of the ledger rows the shared figures come from (hud_numbers_from_ledger.mjs); engineer-years extrapolate from here. */
+  ledger_as_of: string;
+  ledger_as_of_ms: number;
   facts_as_of: string;
   rows: Record<string, Row>;
   needle: { realised: number; ceiling: number; label: string; text: string; method: string };
@@ -21,7 +24,7 @@ export const MAX_EXTRAPOLATE_DAYS = 14;
 const DAY_MS = 86_400_000;
 
 export function engineerYearsAt(nowMs: number): number {
-  const days = Math.min(Math.max((nowMs - NUM.snapshot_ms) / DAY_MS, 0), MAX_EXTRAPOLATE_DAYS);
+  const days = Math.min(Math.max((nowMs - NUM.ledger_as_of_ms) / DAY_MS, 0), MAX_EXTRAPOLATE_DAYS);
   return NUM.rows.engineer_years.value + NUM.rows.engineer_years_per_day_7d.value * days;
 }
 export function audAt(nowMs: number): number {
