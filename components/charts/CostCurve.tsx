@@ -1,4 +1,5 @@
 import { proof } from "@/lib/site-data/proofLive";
+import PhoneFold from "@/components/PhoneFold";
 import SectionReveal from "@/components/SectionReveal";
 import InView from "./InView";
 import "./charts.css";
@@ -83,11 +84,11 @@ export default function CostCurve() {
           </p>
         </aside>
 
-        <div className="w4-grid">
+        <PhoneFold className="w4-grid" keep={2} label="Show all measured charts">
           {proof.charts.map((c) => (
             <Card key={c.id} c={c} />
           ))}
-        </div>
+        </PhoneFold>
         <p className="w4-note">Every bar is drawn from one data file generated from our own measurements. No figure on this page is typed by hand.</p>
       </InView>
       <span data-w4-end="cost-curve" hidden />

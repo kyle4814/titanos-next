@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { proof } from "@/lib/site-data/proofLive";
+import PhoneFold from "@/components/PhoneFold";
 import InView from "./InView";
 import "./charts.css";
 
@@ -42,7 +43,7 @@ export default function ProofWall() {
         })}
       </div>
       <p className="w4-note">{only ? proof.labels[only as keyof typeof proof.labels] : "Tap a label to filter. A label with a zero has nothing to show yet, and we leave it that way."}</p>
-      <ul className="w4-stars">
+      <PhoneFold as="ul" className="w4-stars" keep={6} label="Show every number">
         {shown.map((s) => {
           const isOpen = open === s.id;
           return (
@@ -63,7 +64,7 @@ export default function ProofWall() {
             </li>
           );
         })}
-      </ul>
+      </PhoneFold>
       </InView>
       <span data-w4-end="proof-wall" hidden />
     </section>
