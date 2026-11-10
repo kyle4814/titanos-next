@@ -93,7 +93,7 @@ export default function VaultFrame({ playEntrance = false }: { playEntrance?: bo
 
   return (
     <div
-      aria-hidden="true"
+      aria-hidden="true" data-no-print
       style={{
         position: "fixed",
         inset: 0,
