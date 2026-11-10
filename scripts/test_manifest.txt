@@ -150,3 +150,5 @@ node --experimental-strip-types scripts/test_sso_section.mjs
 node scripts/test_worker_headers.mjs
 node scripts/test_import_cycles.mjs
 node scripts/test_text_sanity.mjs
+node scripts/test_regen_ledger.mjs
+node scripts/test_proof_feed_freshness.mjs

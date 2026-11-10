@@ -275,27 +275,27 @@
       "traceable": false
     },
     "core_ey": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12",
       "source": "sloc row",
       "unit": "engineer-years",
-      "value": 60.6,
+      "value": 67.6,
       "source_path": null,
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": false
     },
     "core_sloc": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded",
-      "source": "klinge-kernel 43,000, titanos 122,524, titanos_launch/titanos-next 30,876, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,422, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 1,663, titan 3,448",
+      "source": "klinge-kernel 66,879, titanos 122,524, titanos_launch/titanos-next 31,325, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,712, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 2,465, titan 3,448",
       "unit": "lines",
-      "value": 230797,
+      "value": 256217,
       "source_path": null,
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": false
     },
     "cost_job_after": {
@@ -347,15 +347,15 @@
       "traceable": false
     },
     "estate_ey": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
-      "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 230.8 KSLOC",
+      "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12",
       "source": "bin/sloc_count.py",
       "unit": "engineer-years",
-      "value": 60.6,
+      "value": 67.6,
       "source_path": "bin/sloc_count.py",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "estate_repos": {
@@ -371,51 +371,51 @@
       "traceable": true
     },
     "estate_sloc": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
-      "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded",
+      "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded",
       "source": "state/numbers/NUMBERS.json (numbers_ledger.py, 12-repo estate)",
       "unit": "lines",
-      "value": 230797,
+      "value": 256217,
       "source_path": "state/numbers/NUMBERS.json",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "fleet_fail_rate_24h": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "fail+stuck / (done+fail+stuck), last 24 h",
       "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
       "unit": "%",
-      "value": 1.1,
+      "value": 7.3,
       "source_path": "state/fleet/ledger.jsonl",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "fleet_jobs_24h": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "ledger 'done' events in the last 24 h",
       "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
       "unit": "jobs",
-      "value": 1451,
+      "value": 1549,
       "source_path": "state/fleet/ledger.jsonl",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "fleet_median_job_min": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "median start->done, last 24 h",
       "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
       "unit": "min",
-      "value": 3,
+      "value": 12,
       "source_path": "state/fleet/ledger.jsonl",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "fleet_share_pct": {
@@ -431,15 +431,15 @@
       "traceable": true
     },
     "fleet_worker_hours_24h": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "sum of start->done durations, last 24 h",
       "source": "/home/tech2/klinge-kernel/state/fleet/ledger.jsonl",
       "unit": "worker-hours",
-      "value": 195.7,
+      "value": 303.4,
       "source_path": "state/fleet/ledger.jsonl",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "gate_suites": {
@@ -497,15 +497,15 @@
       "traceable": true
     },
     "pace_ey_per_day_1d": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "COCOMO now minus COCOMO 1 day(s) ago, divided by 1",
       "source": "git archive at both dates",
       "unit": "engineer-years/day",
-      "value": 6.1,
+      "value": 0.24,
       "source_path": null,
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": false
     },
     "pace_ey_per_day_7d": {
@@ -631,15 +631,15 @@
       "traceable": true
     },
     "spend_today_usd": {
-      "as_of": "2026-10-09T04:07:49",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
-      "method": "usage_meter today (API-equivalent, account A)",
+      "method": "usage_meter today (API-equivalent, account A, since midnight; NOT the cost-multiple window)",
       "source": "bin/usage_meter.py",
       "unit": "US$",
-      "value": 104.98,
+      "value": 17.55,
       "source_path": "bin/usage_meter.py",
       "derived_from": [],
-      "measured": "2026-10-09",
+      "measured": "2026-10-13",
       "traceable": true
     },
     "suites_now": {
@@ -741,6 +741,6 @@
       "traceable": false
     }
   },
-  "numbers_as_of": "2026-10-09T04:07:49",
+  "numbers_as_of": "2026-10-13T04:05:02",
   "rate_note": "AU$800 a day x 220 working days = AU$176,000 per engineer-year"
 }
