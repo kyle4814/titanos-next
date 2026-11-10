@@ -105,6 +105,10 @@ print(json.dumps(d))
 PY
 run >/dev/null
 [ "$(st C1)" = WOULD-FLIP ] && [ "$(st C2)" = FAILED ] && ok "gated row with a passing verifier stays WOULD-FLIP; failing verifier shows FAILED" || no "gated verifier"
+python3 -c "
+import json;c={x['id']:x for x in json.load(open('$S/o.json'))['chunks']}
+assert c['C1']['code_proof']=='INDEPENDENTLY VERIFIED' and c['C1']['status']=='WOULD-FLIP' and c['C3']['code_proof'] is None and c['C2']['code_proof'] is None" && ok "gated row with a passing verifier carries code_proof INDEPENDENTLY VERIFIED beside WOULD-FLIP (f399)" || no "code_proof field"
+run --out-md "$S/gv.md" >/dev/null; grep -q '^| C1 .*WOULD-FLIP (code proof INDEPENDENTLY VERIFIED)' "$S/gv.md" && grep -q '^Code-proof IV .*: 1 (C1)' "$S/gv.md" && ok "markdown shows the code proof beside WOULD-FLIP and counts it" || no "markdown code proof"
 
 # named test file absent -> PROPOSED, not run; --no-run -> IMPLEMENTED
 python3 - > "$S/spec.json" <<'PY'
@@ -127,6 +131,19 @@ import sys,re; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
 m.check_verifiers(m.SPEC)
 assert all(k in m.SPEC for k in ("C2","C3","C7","C8","C10")) and all(m.SPEC[k].get("verifier") for k in ("C2","C3","C7","C8","C10"))
 PY
+python3 - <<'PY' || no "C1/C4 verifier fields"
+import sys; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
+for k in ("C1","C4"):
+    v=m.SPEC[k]; assert v.get("verifier") and v.get("gate"), k
+    assert not (m._files(v["verifier"]) & m._files(v["command"])), k
+assert m.SPEC["C1"]["verifier"]=="python3 scripts/c1_funnel_verify.py" and m.SPEC["C4"]["verifier"]=="python3 scripts/c4_paid_reproof_verify.py"
+# the matrix refuses a C1/C4 verifier that reuses the primary's command or a test basename (planted)
+for k,bad in (("C1","node scripts/test_funnel_killtest.mjs"),("C4","node scripts/drill_ten_jobs.mjs"),("C4","cd portal-api && node --test test/payout_release.test.ts")):
+    spec={**m.SPEC,k:{**m.SPEC[k],"verifier":bad}}
+    try: m.check_verifiers(spec); raise SystemExit("not refused: "+bad)
+    except m.Structural: pass
+PY
+ok "C1/C4 verifiers wired, independent, and a verifier reusing the primary's command or test basename is refused (f399)"
 ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C9 C10 wired)"
 PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
 if [ -f "$PLAN" ]; then

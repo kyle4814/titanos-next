@@ -34,6 +34,7 @@ NS = "node --experimental-strip-types"
 SPEC = {
     "C1": {"command": f"{NS} scripts/test_guestscan.mjs && node scripts/test_funnel_killtest.mjs",
            "files": ["scripts/test_guestscan.mjs", "scripts/test_funnel_killtest.mjs"],
+           "verifier": "python3 scripts/c1_funnel_verify.py", "verifier_files": ["scripts/c1_funnel_verify.py", "scripts/fixtures/funnel_synthetic.ndjson"],
            "gate": "LIVE TRAFFIC: needs the first 1,000 real scans"},
     "C2": {"command": f"{PA} test/drill.test.ts)", "files": ["portal-api/test/drill.test.ts"],
            "verifier": f"(cd portal-api && {NS} scripts/flow16_matrix.ts --check)", "verifier_files": ["portal-api/scripts/flow16_matrix.ts"]},
@@ -41,6 +42,7 @@ SPEC = {
            "verifier": "node scripts/drill_twenty_faults.mjs", "verifier_files": ["scripts/drill_twenty_faults.mjs"]},
     "C4": {"command": f"node scripts/drill_ten_jobs.mjs && {PA} test/drill_ten_jobs.test.ts test/payout_release.test.ts)",
            "files": ["scripts/drill_ten_jobs.mjs", "portal-api/test/drill_ten_jobs.test.ts", "portal-api/test/payout_release.test.ts"],
+           "verifier": "python3 scripts/c4_paid_reproof_verify.py", "verifier_files": ["scripts/c4_paid_reproof_verify.py", "portal-api/scripts/c4_ledger_dump.ts"],
            "gate": "GATE2 Stripe Connect: real first 10 jobs and live payouts"},
     "C5": {"command": "node scripts/test_graded_store.mjs && node scripts/test_shelves_fetch_budget.mjs",
            "files": ["scripts/test_graded_store.mjs", "scripts/test_shelves_fetch_budget.mjs"],
@@ -140,7 +142,7 @@ def run_cmd(cmd, cwd, timeout):
 
 def evaluate(row, entry, repo, run, timeout):
     out = dict(row)
-    out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None})
+    out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None, "code_proof": None})
     if not entry or not entry.get("command"):
         stage = (entry or {}).get("stage") or "UNASSIGNED"
         out.update({"status": "UNKNOWN", "stage": stage, "detail": f"no command; stage id that would supply it: {stage}"})
@@ -170,6 +172,7 @@ def evaluate(row, entry, repo, run, timeout):
             out.update({"status": "FAILED", "detail": f"verifier exit {v['exit']}: {v['tail']}"})
             return out
         status = "INDEPENDENTLY VERIFIED"
+        out["code_proof"] = status   # the CODE proof has an independent second verifier; a gated chunk keeps its live status below
     if entry.get("gate"):
         out.update({"status": "WOULD-FLIP", "detail": f"code proof exit 0 in {res['seconds']}s" + ("; verifier exit 0" if out["verifier_result"] else "") + f"; kill test needs {entry['gate']}"})
     else:
@@ -187,8 +190,10 @@ def render_md(results, head, counts):
         shown = f"exit {res['exit']} in {res['seconds']}s: {res['tail']}" if res else r["detail"]
         if r["verifier_result"]:
             shown += f"; verifier exit {r['verifier_result']['exit']} in {r['verifier_result']['seconds']}s"
-        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {r['status']} | {esc(r['gate'] or r['stage'] or '')} |")
+        word = r["status"] + (" (code proof INDEPENDENTLY VERIFIED)" if r["status"] == "WOULD-FLIP" and r["code_proof"] else "")
+        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {word} | {esc(r['gate'] or r['stage'] or '')} |")
     L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES), ""]
+    L += ["Code-proof IV (an independent verifier also exited 0, whatever the live status): " + str(sum(1 for r in results if r["code_proof"])) + " (" + " ".join(r["id"] for r in results if r["code_proof"]) + ")", ""]
     return "\n".join(L)
 
 
