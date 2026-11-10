@@ -5,9 +5,17 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-const S = "src/enterprise/service.ts", D = "src/enterprise/d1store.ts", T = ["test/f360_sso_start_d1_parity.test.ts"];
+const S = "src/enterprise/service.ts", ST = "src/enterprise/store.ts", D = "src/enterprise/d1store.ts", T = ["test/f360_sso_start_d1_parity.test.ts"];
 const api = join(dirname(fileURLToPath(import.meta.url)), "..", "portal-api");
 const M = [
+  [S, "legacy relief removed on the shared path (f365)", "const freedLegacy = own < MAX_OPEN_SSO_STATES_PER_CLIENT && total >= MAX_OPEN_SSO_STATES && await c.store.evictOldestLegacySsoState(t.id, d.now());", "const freedLegacy = false;"],
+  [D, "D1 legacy eviction is a no-op (f365)", "const n = await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key IS NULL", "return false; const n = await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key IS NULL"],
+  [D, "D1 legacy eviction newest-first (f365)", "client_key IS NULL AND used = 0 AND expires_at > ? ORDER BY COALESCE(created_at, expires_at - ?), rowid LIMIT 1", "client_key IS NULL AND used = 0 AND expires_at > ? ORDER BY COALESCE(created_at, expires_at - ?) DESC, rowid DESC LIMIT 1"],
+  [D, "D1 legacy eviction crosses tenants (f365)", "WHERE tenant_id = ? AND client_key IS NULL AND used = 0 AND expires_at > ? ORDER BY", "WHERE ? IS NOT NULL AND client_key IS NULL AND used = 0 AND expires_at > ? ORDER BY"],
+  [D, "D1 legacy eviction takes keyed rows too (f365)", "WHERE tenant_id = ? AND client_key IS NULL AND used = 0", "WHERE tenant_id = ? AND client_key IS NOT NULL AND used = 0"],
+  [ST, "Memory legacy eviction is a no-op (f365)", "    if (oldest) this.states.delete(oldest.hash);\n    return !!oldest;", "    return false;"],
+  [ST, "Memory legacy eviction crosses tenants (f365)", "s.tenantId === t && !s.clientKey && !s.used", "!s.clientKey && !s.used"],
+
   [S, "sub-cap + reserve removed on the shared path (plain 429)", "if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || (own > 0 && total >= MAX_OPEN_SSO_STATES - SSO_NEWCOMER_RESERVE)) await c.store.evictOldestSsoState(t.id, clientKey, d.now());\n  else if (total >= MAX_OPEN_SSO_STATES) throw new HttpError(429, \"too_many_requests\");", "if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || total >= MAX_OPEN_SSO_STATES) throw new HttpError(429, \"too_many_requests\");"],
   [D, "D1 eviction is a no-op (sub-cap removed on the D1 path)", "await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key = ?", "return; await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key = ?"],
   [D, "D1 eviction ignores the source (evicts anyone's oldest)", "WHERE tenant_id = ? AND client_key = ? AND used = 0 AND expires_at > ? ORDER BY", "WHERE tenant_id = ? AND ? IS NOT NULL AND used = 0 AND expires_at > ? ORDER BY"],

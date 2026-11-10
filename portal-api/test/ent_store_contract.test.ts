@@ -365,7 +365,7 @@ for (const [name, mk] of ADAPTERS) {
 
 // every public method of D1EntStore must be covered by the leak test above: adding a method without listing it here fails the build
 test("LEAK coverage guard: every EntStore method is listed with its scoping rule", () => {
-  const SCOPED = ["referralsOfPartner", "payoutsByStatus", "memberOf", "membersOf", "removeMember", "putMember", "invitesOf", "putInvite", "deleteInvite", "deleteInvitesBy", "putAsset", "assetsOf", "assetOf", "deleteAsset", "putSso", "ssoOf", "putSsoState", "openSsoStates", "evictOldestSsoState", "markSsoSession", "isSsoSession", "setEnforcement", "addAudit", "auditOf", "addLedger", "ledgerOf", "reservePayout", "putPayout", "transitionPayout", "payoutsOf", "childrenOf", "payoutById", "inviteById"];
+  const SCOPED = ["referralsOfPartner", "payoutsByStatus", "memberOf", "membersOf", "removeMember", "putMember", "invitesOf", "putInvite", "deleteInvite", "deleteInvitesBy", "putAsset", "assetsOf", "assetOf", "deleteAsset", "putSso", "ssoOf", "putSsoState", "openSsoStates", "evictOldestSsoState", "evictOldestLegacySsoState", "markSsoSession", "isSsoSession", "setEnforcement", "addAudit", "auditOf", "addLedger", "ledgerOf", "reservePayout", "putPayout", "transitionPayout", "payoutsOf", "childrenOf", "payoutById", "inviteById"];
   const BY_DESIGN = [  // global-key lookups or account-scoped/system operations, each with a stated reason
     "tenantById", "tenantBySlug", "putTenant", "partnerByRefCode",   // the tenant row itself; slug / ref code are public identifiers
     "membershipsFor", "removeAccount", "invitesForEmail", "putReferral", "referralOf",   // keyed by ACCOUNT (the caller's own identity), not tenant
