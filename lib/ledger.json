@@ -126,7 +126,7 @@
    "as_of": "2026-10-09",
    "label": "MODELLED",
    "method": "60.6 engineer-years x AU$800 a day x 220 working days = AU$176,000 per engineer-year",
-   "source": "estate_ey; rate: Hudson Australia Cyber Security Salary Guide",
+   "source": "estate_ey (rate: Hudson Australia Cyber Security Salary Guide)",
    "unit": "AU$",
    "value": 10670000
   },
@@ -182,7 +182,7 @@
    "as_of": "2026-10-09",
    "label": "OPERATOR_STATED",
    "method": "about US$30 a month of AI tools while the main engine was built (to 29 September); no receipt on file",
-   "source": "SITE_NUMBERS_AUDIT_2026-10-08 (UNSOURCED row)",
+   "source": "state/numbers/SITE_NUMBERS_AUDIT_2026-10-08.md (UNSOURCED row: the audit marks this figure unsourced)",
    "unit": "AU$/month",
    "value": 46
   },
@@ -198,7 +198,7 @@
    "as_of": "2026-10-09",
    "label": "OPERATOR_STATED",
    "method": "AU$300 a month of AI tools since 29 September; no receipt on file",
-   "source": "SITE_NUMBERS_AUDIT_2026-10-08 (UNSOURCED row)",
+   "source": "state/numbers/SITE_NUMBERS_AUDIT_2026-10-08.md (UNSOURCED row: the audit marks this figure unsourced)",
    "unit": "AU$/month",
    "value": 300
   },
@@ -206,7 +206,7 @@
    "as_of": "2026-10-09T04:07:49",
    "label": "MODELLED",
    "method": "Basic COCOMO organic 2.4*KSLOC^1.05 pm / 12",
-   "source": "sloc row",
+   "source": "bin/sloc_count.py (sloc row)",
    "unit": "engineer-years",
    "value": 60.6
   },
@@ -214,7 +214,7 @@
    "as_of": "2026-10-09T04:07:49",
    "label": "MEASURED",
    "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded",
-   "source": "klinge-kernel 43,000, titanos 122,524, titanos_launch/titanos-next 30,876, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,422, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 1,663, titan 3,448",
+   "source": "bin/sloc_count.py (klinge-kernel 43,000, titanos 122,524, titanos_launch/titanos-next 30,876, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,422, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 1,663, titan 3,448)",
    "unit": "lines",
    "value": 230797
   },
@@ -350,7 +350,7 @@
    "as_of": "2026-10-09T04:07:49",
    "label": "MODELLED",
    "method": "COCOMO now minus COCOMO 1 day(s) ago, divided by 1",
-   "source": "git archive at both dates",
+   "source": "bin/sloc_count.py (git archive at both dates)",
    "unit": "engineer-years/day",
    "value": 6.1
   },
@@ -358,7 +358,7 @@
    "as_of": "2026-10-09T04:07:49",
    "label": "MODELLED",
    "method": "COCOMO now minus COCOMO 7 day(s) ago, divided by 7",
-   "source": "git archive at both dates",
+   "source": "bin/sloc_count.py (git archive at both dates)",
    "unit": "engineer-years/day",
    "value": 2.34
   },
@@ -494,7 +494,7 @@
    "as_of": "2026-10-09T04:07:49",
    "label": "MODELLED",
    "method": "today's API-equivalent spend / fleet jobs done in 24 h (an upper bound: includes the interactive session)",
-   "source": "usage_meter + ledger",
+   "source": "bin/usage_meter.py, state/fleet/ledger.jsonl",
    "unit": "US$/job",
    "value": 0.072
   }
