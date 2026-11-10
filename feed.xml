@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TITANOS blog</title>
+    <link>https://titanos.tech/blog</link>
+    <description>Notes on AI implementation, Privacy Act compliance and revenue already sitting in your business.</description>
+    <language>en-AU</language>
+    <lastBuildDate>Sat, 03 Oct 2026 14:00:00 GMT</lastBuildDate>
+    <atom:link href="https://titanos.tech/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>&quot;Settlement is Friday, here are our updated bank details&quot;</title>
+      <link>https://titanos.tech/blog/settlement-day-scam-property-and-conveyancing</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/settlement-day-scam-property-and-conveyancing</guid>
+      <pubDate>Sat, 03 Oct 2026 14:00:00 GMT</pubDate>
+      <category>Email security</category>
+      <description>One email, sent at exactly the right moment, can redirect a house deposit. Hi, I&apos;m Kyle, a one-person Brisbane business (TITANOS).</description>
+    </item>
+    <item>
+      <title>The &quot;we&apos;ve changed banks&quot; email that finds accountants and bookkeepers</title>
+      <link>https://titanos.tech/blog/the-bank-details-email-accountants-and-bookkeepers</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/the-bank-details-email-accountants-and-bookkeepers</guid>
+      <pubDate>Fri, 02 Oct 2026 14:00:00 GMT</pubDate>
+      <category>Email security</category>
+      <description>You move other people&apos;s money. That is why someone wants to pretend to be you.</description>
+    </item>
+    <item>
+      <title>Can someone send email pretending to be my business?</title>
+      <link>https://titanos.tech/blog/can-someone-send-email-pretending-to-be-my-business</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/can-someone-send-email-pretending-to-be-my-business</guid>
+      <pubDate>Thu, 01 Oct 2026 14:00:00 GMT</pubDate>
+      <category>Email security</category>
+      <description>Short answer: yes, and it needs no hacking. No insider access either.</description>
+    </item>
+    <item>
+      <title>Tap-to-approve on Telegram without a second bot</title>
+      <link>https://titanos.tech/blog/tap-to-approve-telegram-no-second-bot</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/tap-to-approve-telegram-no-second-bot</guid>
+      <pubDate>Wed, 30 Sep 2026 14:00:00 GMT</pubDate>
+      <category>Build log</category>
+      <description>How a one-person AI ops system built a fail-closed Telegram approve and deny button in one session, including the conflict that killed the first two designs.</description>
+    </item>
+    <item>
+      <title>A headless AI research loop that can&apos;t rm -rf your home directory</title>
+      <link>https://titanos.tech/blog/headless-ai-research-loop-cant-rm-rf-your-home</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/headless-ai-research-loop-cant-rm-rf-your-home</guid>
+      <pubDate>Wed, 30 Sep 2026 14:00:00 GMT</pubDate>
+      <category>Build log</category>
+      <description>How an unattended AI research loop runs on a schedule with a command-inspection hook that blocked a real destructive command in testing.</description>
+    </item>
+    <item>
+      <title>How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories</title>
+      <link>https://titanos.tech/blog/capture-recapture-opportunity-mapping</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/capture-recapture-opportunity-mapping</guid>
+      <pubDate>Wed, 30 Sep 2026 14:00:00 GMT</pubDate>
+      <category>Research</category>
+      <description>A repeatable method for sizing a public opportunity space: parallel research passes, a gap score, and capture-recapture population estimates.</description>
+    </item>
+    <item>
+      <title>Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file</title>
+      <link>https://titanos.tech/blog/anz-smb-email-security-double-gap-measured</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/anz-smb-email-security-double-gap-measured</guid>
+      <pubDate>Wed, 30 Sep 2026 14:00:00 GMT</pubDate>
+      <category>Security</category>
+      <description>Independent DNS sampling across AU, NZ, Singapore and Canada finds roughly half of small-business domains have no DMARC enforcement and no security.txt.</description>
+    </item>
+    <item>
+      <title>How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds</title>
+      <link>https://titanos.tech/blog/rm-rf-home-recovery-case-study</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/rm-rf-home-recovery-case-study</guid>
+      <pubDate>Wed, 30 Sep 2026 14:00:00 GMT</pubDate>
+      <category>Build log</category>
+      <description>A test run deleted a home directory when mktemp silently failed. The root cause, the fail-closed fix, and the 8-minute recovery drill that proved it.</description>
+    </item>
+    <item>
+      <title>Black Ice: the operating doctrine TITANOS is actually built on</title>
+      <link>https://titanos.tech/blog/black-ice-operating-doctrine</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/black-ice-operating-doctrine</guid>
+      <pubDate>Wed, 19 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Doctrine</category>
+      <description>A free field guide to the operating framework behind TITANOS: Sub-Zero Murmur, Child/Operator, the 99/1 principle, and where metaphor stops and mechanism starts.</description>
+    </item>
+    <item>
+      <title>Do sole traders need a privacy policy in Australia?</title>
+      <link>https://titanos.tech/blog/sole-trader-privacy-policy-threshold</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/sole-trader-privacy-policy-threshold</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Compliance</category>
+      <description>Most sole traders assume the Privacy Act&apos;s small-business exemption covers them completely. It&apos;s narrower than that, and narrowing further for some businesses from mid-2026.</description>
+    </item>
+    <item>
+      <title>The Notifiable Data Breach scheme: the 30-day rule small businesses miss</title>
+      <link>https://titanos.tech/blog/notifiable-data-breach-scheme-small-business</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/notifiable-data-breach-scheme-small-business</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Compliance</category>
+      <description>If your business emails the wrong attachment to the wrong client, that can trigger the Notifiable Data Breach scheme. Here&apos;s the actual trigger and the 30-day assessment clock.</description>
+    </item>
+    <item>
+      <title>What should AI automation actually cost a small trade business?</title>
+      <link>https://titanos.tech/blog/ai-automation-cost-small-business</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/ai-automation-cost-small-business</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>AI implementation</category>
+      <description>Published pricing for AI automation ranges from $2k to $12k+ setup and $50-$600/month. Here&apos;s how to tell whether a quote is scoped to your business or just a package price.</description>
+    </item>
+    <item>
+      <title>The ACSC Essential Eight, translated for a one-van trade business</title>
+      <link>https://titanos.tech/blog/essential-eight-small-trade-business</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/essential-eight-small-trade-business</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Security</category>
+      <description>The Australian Cyber Security Centre&apos;s Essential Eight is written for IT departments. Here&apos;s what each control actually means for a 1-3 person trade business.</description>
+    </item>
+    <item>
+      <title>Business email compromise: the invoice scam actually hitting Australian trade businesses</title>
+      <link>https://titanos.tech/blog/invoice-scam-tradies</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/invoice-scam-tradies</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Security</category>
+      <description>Fake supplier bank-detail-change emails are the most-reported cybercrime against Australian small businesses. Here&apos;s how the scam works and what stops it.</description>
+    </item>
+    <item>
+      <title>Is an AI receptionist for your trade business actually Privacy Act compliant?</title>
+      <link>https://titanos.tech/blog/ai-receptionist-compliance</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/ai-receptionist-compliance</guid>
+      <pubDate>Tue, 18 Aug 2026 14:00:00 GMT</pubDate>
+      <category>AI implementation</category>
+      <description>AI phone-answering tools for tradies are booming. Before installing one, here&apos;s what to check about call recording consent and where the data actually goes.</description>
+    </item>
+    <item>
+      <title>How to tell if a &quot;free scan&quot; offer is legitimate (and how to verify mine in five minutes)</title>
+      <link>https://titanos.tech/blog/free-scan-legitimacy-check</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/free-scan-legitimacy-check</guid>
+      <pubDate>Mon, 17 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Trust</category>
+      <description>Free security scans are an easy vehicle for a scam. Here&apos;s how to check whether one is legitimate before handing anything over, including this one.</description>
+    </item>
+    <item>
+      <title>ServiceM8 vs Tradify vs simPRO: what your job data can (and can&apos;t) tell you</title>
+      <link>https://titanos.tech/blog/trade-software-quote-exports</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/trade-software-quote-exports</guid>
+      <pubDate>Fri, 14 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Trade software</category>
+      <description>A field-by-field look at how ServiceM8, Tradify and simPRO record quote status, and what to check before trusting any export for follow-up decisions.</description>
+    </item>
+    <item>
+      <title>Why &quot;book a call&quot; gets ignored and &quot;send me a spreadsheet&quot; doesn&apos;t</title>
+      <link>https://titanos.tech/blog/outreach-that-actually-works</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/outreach-that-actually-works</guid>
+      <pubDate>Sun, 09 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Notes</category>
+      <description>A note on why smaller, more specific asks get better replies than generic call-booking outreach, and what that means for how offers should be built.</description>
+    </item>
+    <item>
+      <title>The dead-quote problem: how much revenue is sitting in your &quot;maybe&quot; pile</title>
+      <link>https://titanos.tech/blog/dead-quotes-hidden-revenue</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/dead-quotes-hidden-revenue</guid>
+      <pubDate>Mon, 03 Aug 2026 14:00:00 GMT</pubDate>
+      <category>Revenue</category>
+      <description>Most trade businesses have a few hundred quotes that never got a yes or a no. Here&apos;s how to work out what they&apos;re actually worth.</description>
+    </item>
+    <item>
+      <title>What an AI audit actually finds in a trades or small-service business (real patterns, not hype)</title>
+      <link>https://titanos.tech/blog/ai-audit-what-we-actually-find</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/ai-audit-what-we-actually-find</guid>
+      <pubDate>Tue, 28 Jul 2026 14:00:00 GMT</pubDate>
+      <category>AI implementation</category>
+      <description>The recurring manual-work patterns a free AI audit surfaces in trades and small-service businesses, and which ones are actually worth automating.</description>
+    </item>
+    <item>
+      <title>Australia&apos;s Privacy Act changes: what small businesses actually need to do before 10 December 2026</title>
+      <link>https://titanos.tech/blog/privacy-act-small-business-deadline</link>
+      <guid isPermaLink="true">https://titanos.tech/blog/privacy-act-small-business-deadline</guid>
+      <pubDate>Tue, 21 Jul 2026 14:00:00 GMT</pubDate>
+      <category>Compliance</category>
+      <description>The Privacy Act reforms remove the small-business exemption for some obligations. Here&apos;s what actually changes for AU small businesses, in plain English.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,177 @@
+{
+  "name": "TITANOS",
+  "description": "Passive, public-record email-security checks and a priced catalogue for small businesses, callable by software. Every call returns a signed receipt.",
+  "url": "https://titanos.tech",
+  "status": "preview",
+  "statusNote": "Built and tested locally with synthetic data. The MCP endpoint is not deployed yet, so no live key can be issued today.",
+  "provider": {
+    "organization": "TITANOS",
+    "url": "https://titanos.tech"
+  },
+  "documentationUrl": "https://titanos.tech/agents",
+  "protocols": [
+    {
+      "type": "mcp",
+      "transport": "streamable-http-post",
+      "protocolVersion": "2025-03-26",
+      "url": "https://api.titanos.tech/mcp"
+    }
+  ],
+  "authentication": {
+    "schemes": [
+      "bearer"
+    ],
+    "description": "Create a scoped API key in your TITANOS account. Send it as Authorization: Bearer tk_... Keys are shown once and stored only as a hash.",
+    "header": "Authorization"
+  },
+  "billing": {
+    "model": "metered credits",
+    "unit": "1 credit = AU$0.01 (example rate)",
+    "byok": "Model-backed tools accept your own model key in the x-model-key header (never stored, never logged) and then cost 0 credits.",
+    "prepaid": "Otherwise a call debits prepaid credits. TITANOS never runs a paid model call on credit it has not been paid for."
+  },
+  "guarantees": [
+    "Passive public DNS only; no active scanning of any domain.",
+    "Zero model calls except explain_finding.",
+    "Each call returns a receipt (id, tool, input hash, output hash, credits, HMAC signature) you can verify.",
+    "A failed call is not charged."
+  ],
+  "tools": [
+    {
+      "name": "catalogue_list",
+      "title": "List the catalogue",
+      "description": "Every product TITANOS sells, with the price in AUD cents (no GST). Pure lookup, no model.",
+      "scope": "catalogue:read",
+      "credits": 0,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "price_quote",
+      "title": "Quote one product",
+      "description": "Price, billing mode and minimum term for one product id. Pure lookup, no model.",
+      "scope": "catalogue:read",
+      "credits": 0,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "product"
+        ],
+        "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "A product id from catalogue_list."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "domain_check",
+      "title": "Passive email-security check",
+      "description": "Reads the public SPF and DMARC records of a domain and grades them. Passive public DNS only, nothing is touched or probed, no model.",
+      "scope": "scan:read",
+      "credits": 5,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "domain"
+        ],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "maxLength": 253,
+            "description": "A public domain, for example example.com.au."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "my_domains",
+      "title": "List my domains",
+      "description": "The domains on your account and whether each is verified.",
+      "scope": "account:read",
+      "credits": 0,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "credits_balance",
+      "title": "Credit balance",
+      "description": "Your prepaid credit balance and the last 20 ledger entries. 1 credit = AU$0.01 (example rate).",
+      "scope": "credits:read",
+      "credits": 0,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "explain_finding",
+      "title": "Explain a finding (model-backed)",
+      "description": "Plain-English explanation and fix steps for a finding id from domain_check. Runs on your own model key (header x-model-key, never stored) or on prepaid credits.",
+      "scope": "explain:model",
+      "credits": 25,
+      "modelBacked": true,
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "finding"
+        ],
+        "properties": {
+          "finding": {
+            "type": "string",
+            "maxLength": 40,
+            "enum": [
+              "spf_missing",
+              "dmarc_missing",
+              "dmarc_not_enforced"
+            ],
+            "description": "A finding id."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "receipt_verify",
+      "title": "Verify a TITANOS receipt",
+      "description": "Checks that a receipt your own key was given was really issued by TITANOS and not altered. Free.",
+      "scope": "receipt:verify",
+      "credits": 0,
+      "modelBacked": false,
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "receipt_id"
+        ],
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "A receipt id (rcpt_...)."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ],
+  "updatedFor": "2026-11-06"
+}

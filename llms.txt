@@ -33,6 +33,13 @@ TITANOS lists 103 productised offers with published prices in AUD (no GST). 29 h
 
 Evidence labels used on this site: MEASURED (read from a real record), REPRODUCED (re-run and matched), MODELLED (a stated model), ESTIMATE, FORECAST, EXAMPLE. A modelled number is never presented as revenue.
 
+## Agent door (preview, not live)
+
+- Agent card (JSON): https://titanos.tech/.well-known/agent.json
+- Tool catalogue and billing rules: https://titanos.tech/agents
+- Status: preview. The tools are built and tested locally with synthetic data. The MCP endpoint (https://api.titanos.tech/mcp) is not deployed yet, so no live key can be issued today.
+- Keys are scoped, credits are prepaid or you bring your own model key, and every call returns a signed receipt.
+
 ## Content
 
 - 21 blog posts: https://titanos.tech/blog
