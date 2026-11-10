@@ -24,7 +24,8 @@ import argparse, json, os, re, shlex, subprocess, sys, time
 DEFAULT_PLAN = "/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md"
 EXPECTED = [f"C{i}" for i in range(1, 11)]
 STATUSES = ["UNKNOWN", "PROPOSED", "IMPLEMENTED", "TESTED", "INDEPENDENTLY VERIFIED", "FAILED", "WOULD-FLIP"]
-ALLOWED_KEYS = {"command", "verifier", "gate", "stage", "files"}
+ALLOWED_KEYS = {"command", "verifier", "gate", "stage", "files", "verifier_stage", "verifier_files"}
+FILE_TOK = re.compile(r"[\w./-]+\.(?:mjs|cjs|js|ts|py|sh)\b")
 PA = "(cd portal-api && node --test --experimental-strip-types"
 NS = "node --experimental-strip-types"
 
@@ -34,8 +35,10 @@ SPEC = {
     "C1": {"command": f"{NS} scripts/test_guestscan.mjs && node scripts/test_funnel_killtest.mjs",
            "files": ["scripts/test_guestscan.mjs", "scripts/test_funnel_killtest.mjs"],
            "gate": "LIVE TRAFFIC: needs the first 1,000 real scans"},
-    "C2": {"command": f"{PA} test/drill.test.ts)", "files": ["portal-api/test/drill.test.ts"]},
-    "C3": {"command": "node scripts/test_drill_twenty_faults.mjs", "files": ["scripts/test_drill_twenty_faults.mjs"]},
+    "C2": {"command": f"{PA} test/drill.test.ts)", "files": ["portal-api/test/drill.test.ts"],
+           "verifier": f"(cd portal-api && {NS} scripts/flow16_matrix.ts --check)", "verifier_files": ["portal-api/scripts/flow16_matrix.ts"]},
+    "C3": {"command": "node scripts/test_drill_twenty_faults.mjs", "files": ["scripts/test_drill_twenty_faults.mjs"],
+           "verifier": "node scripts/drill_twenty_faults.mjs", "verifier_files": ["scripts/drill_twenty_faults.mjs"]},
     "C4": {"command": f"node scripts/drill_ten_jobs.mjs && {PA} test/drill_ten_jobs.test.ts test/payout_release.test.ts)",
            "files": ["scripts/drill_ten_jobs.mjs", "portal-api/test/drill_ten_jobs.test.ts", "portal-api/test/payout_release.test.ts"],
            "gate": "GATE2 Stripe Connect: real first 10 jobs and live payouts"},
@@ -45,11 +48,15 @@ SPEC = {
     "C6": {"command": f"{NS} scripts/test_concierge_holdout.mjs", "files": ["scripts/test_concierge_holdout.mjs"]},
     "C7": {"command": f"{PA} test/agents10.test.ts test/agent.test.ts test/keycap.test.ts)",
            "files": ["portal-api/test/agents10.test.ts", "portal-api/test/agent.test.ts", "portal-api/test/keycap.test.ts"],
+           "verifier": f"(cd portal-api && {NS} scripts/agents10.ts)", "verifier_files": ["portal-api/scripts/agents10.ts"],
            "gate": "LIVE TRAFFIC: 10 EXTERNAL agents calling a deployed door"},
     "C8": {"command": f"{PA} test/tenant_isolation.test.ts) && node scripts/test_xtenant_route_matrix.mjs",
-           "files": ["portal-api/test/tenant_isolation.test.ts", "scripts/test_xtenant_route_matrix.mjs"]},
+           "files": ["portal-api/test/tenant_isolation.test.ts", "scripts/test_xtenant_route_matrix.mjs"],
+           "verifier": "node scripts/xtenant_route_matrix.mjs", "verifier_files": ["scripts/xtenant_route_matrix.mjs"]},
     "C9": {"command": "node scripts/test_c9proof.mjs", "files": ["scripts/test_c9proof.mjs"]},
     "C10": {"command": "node scripts/test_soak_harness.mjs", "files": ["scripts/test_soak_harness.mjs"],
+            "verifier": 'd=$(mktemp -d /tmp/f389soak.XXXXXX) && node scripts/soak_harness.mjs --duration 2 --interval 1 --rps 50 --out "$d/board.json"; rc=$?; rm -rf "${d:?}"; exit $rc',
+            "verifier_files": ["scripts/soak_harness.mjs"],
             "gate": "LIVE TRAFFIC: 24 h chaos and load soak (VAL8 gate flip)"},
 }
 
@@ -89,6 +96,30 @@ def check_structure(rows, spec):
         bad = set(v) - ALLOWED_KEYS
         if bad:
             raise Structural(f"{k}: spec key(s) {sorted(bad)} not allowed (status is derived from exit codes, never written)")
+    check_verifiers(spec)
+
+
+def _norm(c):
+    return " ".join(c.split())
+
+
+def _files(c):
+    return {os.path.basename(t) for t in FILE_TOK.findall(c)}
+
+
+def check_verifiers(spec):
+    """A verifier counts only if it is a DIFFERENT command on DIFFERENT files. Refused structurally (exit 2), never ignored."""
+    for k, v in spec.items():
+        ver = v.get("verifier")
+        if not ver:
+            continue
+        if not v.get("command"):
+            raise Structural(f"{k}: verifier set but no primary command")
+        if _norm(ver) == _norm(v["command"]):
+            raise Structural(f"{k}: verifier is identical to the primary command (refused: no independence)")
+        shared = _files(ver) & _files(v["command"])
+        if shared:
+            raise Structural(f"{k}: verifier shares test file(s) {sorted(shared)} with the primary command (refused: no independence)")
 
 
 def run_cmd(cmd, cwd, timeout):
@@ -106,14 +137,15 @@ def run_cmd(cmd, cwd, timeout):
 
 def evaluate(row, entry, repo, run, timeout):
     out = dict(row)
-    out.update({"command": None, "gate": None, "stage": None, "result": None, "verifier_result": None})
+    out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None})
     if not entry or not entry.get("command"):
         stage = (entry or {}).get("stage") or "UNASSIGNED"
         out.update({"status": "UNKNOWN", "stage": stage, "detail": f"no command; stage id that would supply it: {stage}"})
         return out
     out["command"] = entry["command"]
+    out["verifier"] = entry.get("verifier")
     out["gate"] = entry.get("gate")
-    absent = [f for f in entry.get("files", []) if not os.path.exists(os.path.join(repo, f))]
+    absent = [f for f in entry.get("files", []) + entry.get("verifier_files", []) if not os.path.exists(os.path.join(repo, f))]
     if absent:
         out.update({"status": "PROPOSED", "detail": f"named test file(s) not on disk: {absent}"})
         return out
@@ -126,7 +158,9 @@ def evaluate(row, entry, repo, run, timeout):
         out.update({"status": "FAILED", "detail": f"exit {res['exit']}: {res['tail']}"})
         return out
     status, detail = "TESTED", f"exit 0 in {res['seconds']}s"
-    if entry.get("verifier") and entry["verifier"] != entry["command"]:
+    if not entry.get("verifier"):
+        out["detail_note"] = "no verifier configured" + (f"; stage that would supply one: {entry.get('verifier_stage') or 'UNASSIGNED'}")
+    if entry.get("verifier"):
         v = run_cmd(entry["verifier"], repo, timeout)
         out["verifier_result"] = v
         if v["exit"] != 0:
@@ -134,9 +168,9 @@ def evaluate(row, entry, repo, run, timeout):
             return out
         status = "INDEPENDENTLY VERIFIED"
     if entry.get("gate"):
-        out.update({"status": "WOULD-FLIP", "detail": f"code proof exit 0 in {res['seconds']}s; kill test needs {entry['gate']}"})
+        out.update({"status": "WOULD-FLIP", "detail": f"code proof exit 0 in {res['seconds']}s" + ("; verifier exit 0" if out["verifier_result"] else "") + f"; kill test needs {entry['gate']}"})
     else:
-        out.update({"status": status, "detail": detail})
+        out.update({"status": status, "detail": detail + ("" if status == "INDEPENDENTLY VERIFIED" else "; " + out.get("detail_note", ""))})
     return out
 
 
@@ -148,7 +182,9 @@ def render_md(results, head, counts):
     for r in results:
         res = r["result"]
         shown = f"exit {res['exit']} in {res['seconds']}s: {res['tail']}" if res else r["detail"]
-        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}` | {esc(shown)} | {r['status']} | {esc(r['gate'] or r['stage'] or '')} |")
+        if r["verifier_result"]:
+            shown += f"; verifier exit {r['verifier_result']['exit']} in {r['verifier_result']['seconds']}s"
+        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {r['status']} | {esc(r['gate'] or r['stage'] or '')} |")
     L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES), ""]
     return "\n".join(L)
 

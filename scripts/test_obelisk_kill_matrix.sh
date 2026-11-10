@@ -67,17 +67,44 @@ PY
 python3 "$M" --plan "$S/plan.md" --repo "$S/repo" --spec "$S/spec.json" >/dev/null 2>"$S/err"; rc=$?
 [ $rc = 2 ] && grep -q "status" "$S/err" && ok "spec status key rejected (exit 2)" || no "status key rc=$rc"
 
-# INDEPENDENTLY VERIFIED needs a second, different command that also exits 0
+# INDEPENDENTLY VERIFIED needs a second, different verifier command on different files that also exits 0
 python3 - > "$S/spec.json" <<'PY'
 import json
 d={f"C{i}":{"command":"true"} for i in range(1,11)}
 d["C8"]={"command":"true","verifier":"test -e present.txt"}
 d["C9"]={"command":"true","verifier":"test -e absent.txt"}
+print(json.dumps(d))
+PY
+run >/dev/null; rc=$?
+[ "$(st C8)" = "INDEPENDENTLY VERIFIED" ] && [ "$(cnt "INDEPENDENTLY VERIFIED")" = 1 ] && ok "verifier exit 0 + different command -> INDEPENDENTLY VERIFIED" || no "iv pass"
+[ "$rc" = 1 ] && [ "$(st C9)" = FAILED ] && grep -q "verifier exit" "$S/o.json" && ok "verifier exit 1 -> FAILED (never downgraded to TESTED), matrix exit 1" || no "verifier fail rc=$rc"
+mkspec "true"; run >/dev/null
+[ "$(st C6)" = TESTED ] && [ "$(cnt "INDEPENDENTLY VERIFIED")" = 0 ] && grep -q "no verifier configured" "$S/o.json" && ok "missing verifier keeps TESTED, noted as no verifier" || no "missing verifier"
+python3 - > "$S/spec.json" <<'PY'
+import json
+d={f"C{i}":{"command":"true"} for i in range(1,11)}
 d["C6"]={"command":"true","verifier":"true"}
 print(json.dumps(d))
 PY
+run >/dev/null; rc=$?
+[ $rc = 2 ] && grep -q "identical" "$S/err" && grep -q C6 "$S/err" && ok "identical verifier and command refused (exit 2)" || no "identical rc=$rc"
+python3 - > "$S/spec.json" <<'PY'
+import json
+d={f"C{i}":{"command":"true"} for i in range(1,11)}
+d["C4"]={"command":"node scripts/a_test.mjs && true","verifier":"(cd portal-api && node other/a_test.mjs)"}
+print(json.dumps(d))
+PY
+run >/dev/null; rc=$?
+[ $rc = 2 ] && grep -q "shares test file" "$S/err" && grep -q a_test.mjs "$S/err" && ok "verifier sharing a test file with the primary refused (exit 2)" || no "shared file rc=$rc"
+python3 - > "$S/spec.json" <<'PY'
+import json
+d={f"C{i}":{"command":"true"} for i in range(1,11)}
+d["C1"]={"command":"true","gate":"LIVE TRAFFIC x","verifier":"test -e present.txt"}
+d["C2"]={"command":"true","gate":"LIVE TRAFFIC x","verifier":"false"}
+print(json.dumps(d))
+PY
 run >/dev/null
-[ "$(st C8)" = "INDEPENDENTLY VERIFIED" ] && [ "$(st C9)" = FAILED ] && [ "$(st C6)" = TESTED ] && ok "verifier: pass -> IV, fail -> FAILED, same command -> only TESTED" || no "verifier"
+[ "$(st C1)" = WOULD-FLIP ] && [ "$(st C2)" = FAILED ] && ok "gated row with a passing verifier stays WOULD-FLIP; failing verifier shows FAILED" || no "gated verifier"
 
 # named test file absent -> PROPOSED, not run; --no-run -> IMPLEMENTED
 python3 - > "$S/spec.json" <<'PY'
@@ -95,6 +122,12 @@ mkspec "sleep 5"; run --timeout 1 >/dev/null; [ "$(st C1)" = FAILED ] && ok "tim
 # markdown has one table row per chunk and a Counts line; real SPEC covers C1..C10 against the real plan
 mkspec "true"; run --out-md "$S/o.md" >/dev/null
 [ "$(grep -c '^| C[0-9]' "$S/o.md")" = 10 ] && grep -q '^Counts:' "$S/o.md" && ok "markdown: 10 rows + counts" || no "markdown"
+python3 - <<'PY' || no "real SPEC verifier fields"
+import sys,re; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
+m.check_verifiers(m.SPEC)
+assert all(k in m.SPEC for k in ("C2","C3","C7","C8","C10")) and all(m.SPEC[k].get("verifier") for k in ("C2","C3","C7","C8","C10"))
+PY
+ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C10 wired)"
 PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
 if [ -f "$PLAN" ]; then
   python3 "$M" --plan "$PLAN" --no-run >/dev/null 2>"$S/err"; rc=$?
