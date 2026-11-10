@@ -58,7 +58,7 @@ export default function DeclarationPopup() {
   function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     if (e.key === "Escape") { e.stopPropagation(); close(); return; }
     if (e.key !== "Tab" || !dialog.current) return;
-    const nodes = Array.from(dialog.current.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((n) => n.offsetParent !== null || n === document.activeElement);
+    const nodes = Array.from(dialog.current.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((n) => n.tabIndex >= 0 && (n.offsetParent !== null || n === document.activeElement));
     if (!nodes.length) return;
     const first = nodes[0], last = nodes[nodes.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
