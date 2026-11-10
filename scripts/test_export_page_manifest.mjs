@@ -1,0 +1,46 @@
+// f416: determinism, planted extra and missing pages fail --check, empty or absent out/ fails closed.
+import fs from "node:fs"; import os from "node:os"; import path from "node:path"; import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+const tool = path.join(path.dirname(fileURLToPath(import.meta.url)), "export_page_manifest.mjs");
+const run = (...a) => spawnSync(process.execPath, [tool, ...a], { encoding: "utf8" });
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "f416-"));
+if (!tmp.startsWith(os.tmpdir() + path.sep)) throw new Error("unsafe tmp");
+const put = (root, rel) => { const f = path.join(root, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, "<html></html>"); };
+const mk = (name, pages) => { const r = path.join(tmp, name); fs.mkdirSync(r, { recursive: true }); pages.forEach((p) => put(r, p)); return r; };
+const BASE = ["index.html", "about.html", "blog/post-b.html", "blog/post-a.html", "404.html", "_not-found.html", "a/index.html", "Zeta.html"];
+let n = 0; const ok = (m) => { n++; console.log("ok -", m); };
+try {
+  const out = mk("out", BASE); fs.mkdirSync(path.join(out, "_next/static"), { recursive: true }); fs.writeFileSync(path.join(out, "x.txt"), "n");
+  const m1 = path.join(tmp, "m1.json"), m2 = path.join(tmp, "m2.json");
+  assert.equal(run("--out", out, "--manifest", m1, "--write").status, 0);
+  assert.equal(run("--out", out, "--manifest", m2, "--write").status, 0);
+  assert.ok(fs.readFileSync(m1).equals(fs.readFileSync(m2))); ok("two runs are byte-identical");
+  const m = JSON.parse(fs.readFileSync(m1, "utf8"));
+  assert.deepEqual(m.pages, ["404.html", "Zeta.html", "_not-found.html", "a/index.html", "about.html", "blog/post-a.html", "blog/post-b.html", "index.html"]);
+  assert.equal(m.count, 8); assert.equal(m.routes_count, 7); assert.deepEqual(m.system_pages, ["404.html", "_not-found.html"]); ok("sorted, codepoint order, non-html ignored, counts right");
+  assert.equal(run("--out", out, "--manifest", m1, "--check").status, 0); ok("clean out/ passes --check");
+  const extra = mk("extra", [...BASE, "planted/new.html"]);
+  let r = run("--out", extra, "--manifest", m1, "--check");
+  assert.equal(r.status, 1); assert.match(r.stderr, /ADDED\s+planted\/new\.html/); ok("planted extra page fails --check and is named");
+  const missing = mk("missing", BASE.filter((p) => p !== "about.html"));
+  r = run("--out", missing, "--manifest", m1, "--check");
+  assert.equal(r.status, 1); assert.match(r.stderr, /REMOVED\s+about\.html/); ok("planted missing page fails --check and is named");
+  const both = mk("both", [...BASE.filter((p) => p !== "about.html"), "planted/new.html"]);
+  r = run("--out", both, "--manifest", m1, "--check");
+  assert.equal(r.status, 1); assert.match(r.stderr, /ADDED/); assert.match(r.stderr, /REMOVED/); ok("add plus remove both reported");
+  const tampered = path.join(tmp, "t.json"); fs.writeFileSync(tampered, fs.readFileSync(m1, "utf8").replace('"count": 8', '"count": 9'));
+  assert.equal(run("--out", out, "--manifest", tampered, "--check").status, 1); ok("hand-edited manifest fields fail --check");
+  const empty = path.join(tmp, "empty"); fs.mkdirSync(empty);
+  r = run("--out", empty, "--manifest", m1, "--check"); assert.equal(r.status, 2); assert.match(r.stderr, /fails closed/); ok("empty out/ fails closed on --check");
+  assert.equal(run("--out", empty, "--manifest", path.join(tmp, "w.json"), "--write").status, 2);
+  assert.ok(!fs.existsSync(path.join(tmp, "w.json"))); ok("empty out/ never writes a manifest");
+  const nohtml = mk("nohtml", []); put(nohtml, "x.txt".replace(".txt", ".js"));
+  assert.equal(run("--out", nohtml, "--manifest", m1, "--check").status, 2); ok("out/ with no html fails closed");
+  assert.equal(run("--out", path.join(tmp, "nope"), "--manifest", m1, "--check").status, 2); ok("absent out/ fails closed");
+  assert.equal(run("--out", out, "--manifest", path.join(tmp, "none.json"), "--check").status, 2); ok("missing manifest fails closed");
+  fs.writeFileSync(path.join(tmp, "empty.json"), JSON.stringify({ schema: "export-pages/1", count: 0, pages: [] }));
+  assert.equal(run("--out", out, "--manifest", path.join(tmp, "empty.json"), "--check").status, 2); ok("empty committed manifest fails closed");
+  assert.equal(run("--bogus").status, 2); ok("unknown flag exits 2");
+  console.log(`test_export_page_manifest: ${n} checks passed`);
+} finally { fs.rmSync(tmp, { recursive: true, force: true }); }
