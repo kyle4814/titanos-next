@@ -18,6 +18,7 @@ import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drai
 import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
 import { bookingRoute, BOOKING_PATH } from "./booking/routes.ts";
+import { parseSubscribe, CONSENT_TEXT } from "./subscribe.ts";
 import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
@@ -120,6 +121,20 @@ async function handleInner(req: Request, env: Env, deps?: Deps): Promise<Respons
 async function route(req: Request, path: string, d: Deps): Promise<Response> {
   const m = req.method;
   const seg = path.split("/").filter(Boolean);
+  if (path === "/v1/subscribe") {   // public mailing-list capture (declaration page). Capture only: no mail is ever sent from here.
+    if (m !== "POST") return json({ error: "method_not_allowed" }, 405);
+    if (!d.subscribers) throw new HttpError(503, "subscribe_unavailable");
+    // Every attempt counts toward the per-IP budget (reserve, never reset on success), so a loop of valid signups is throttled too. Fail closed.
+    if (d.throttle) {
+      let r;
+      try { r = await d.throttle.reserveAsync(await throttleKey("subscribe", "", clientIp(req))); } catch { throw new HttpError(503, "throttle_unavailable"); }
+      if (!r.allowed) throw new ThrottledError(r.retryAfterSec);
+    }
+    const p = parseSubscribe(await body(req));
+    if (p.honeypot) return json({ ok: true }, 202);   // a bot filled the hidden field: same answer, nothing stored
+    const out = await d.subscribers.upsert(p.email, p.tags, CONSENT_TEXT, p.source, d.now());
+    return json({ ok: true, created: out.created }, out.created ? 201 : 200);
+  }
   if (path === "/catalogue" && m === "GET") return json({ products: Object.values(PRODUCTS).map(({ id, name, amountCents, mode, interval, minMonths, needsVerifiedDomain }) => ({ id, name, amountCents, currency: "aud", mode, interval, minMonths, needsVerifiedDomain })) });
   if (path === "/agent/tools" && m === "GET") return json({ tools: TOOLS.map(publicTool), creditPacks: Object.values(CREDIT_PACKS), creditRate: "1 credit = AU$0.01 (example rate)" });
   if (path === "/.well-known/agent.json" && m === "GET") return json(agentCard(d.siteOrigin, apiOrigin(req)));

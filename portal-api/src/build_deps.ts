@@ -30,6 +30,7 @@ import { parseSealKeys, type SealKeyring } from "./enterprise/seal.ts";
 import { D1BookingStore } from "./booking/store.ts";
 import { telegramNotifier } from "./booking/telegram.ts";
 import type { PayoutProvider } from "./enterprise/types.ts";
+import { D1SubscriberStore } from "./subscribe.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
 export class BuildDepsError extends Error {
@@ -132,6 +133,7 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   const now = opts.now ?? (() => Date.now());
   return {
     ...(opts.side === false ? {} : sideDeps(env, opts.fetchFn)),
+    subscribers: new D1SubscriberStore(db),
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? mailerFor(env, now), now, siteOrigin,
     webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
