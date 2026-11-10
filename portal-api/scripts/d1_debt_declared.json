@@ -1,0 +1,31 @@
+{
+ "provenance": {
+  "measured": "2026-11-10, node scripts/d1_debt_gate.mjs --json on base 34115f498 (origin/web/obelisk-int3-2026-11-07 head), read-only",
+  "rule": "A Memory* store constructed in src/** or test/*harness*.ts with no durable D1/Kv adapter must be listed here with reason, owner (a stage id in STAGES.tsv) and would_flip. When the adapter lands, the entry goes STALE and the gate fails until it is removed."
+ },
+ "adapter_aliases": {
+  "MemoryThrottleStore": [
+   "D1ThrottleStore"
+  ]
+ },
+ "debt": [
+  {
+   "store": "MemoryMarketStore",
+   "reason": "No D1 market store adapter on the int3 base; test/market_harness.ts builds the market service on it, so STORE=d1 market runs stay in memory (f367 residual).",
+   "owner": "f378_c3_owner_market_store_d1_inventory",
+   "would_flip": "Land a D1MarketStore implementing MarketStore (migrations exist for market tables), add a d1 switch to test/market_harness.ts like ent_harness.ts makeEntStores; the gate then reports this entry stale."
+  },
+  {
+   "store": "MemorySeatEntitlements",
+   "reason": "Seat (claim-fee discount) records have no D1 adapter on int3; the market harness constructs the memory one.",
+   "owner": "f378_c3_owner_market_store_d1_inventory",
+   "would_flip": "Merge web/f378 (D1SeatEntitlements + migration 0026, parity test), then delete this entry; wiring into prod sideDeps waits on the Stripe webhook feed (GATE2)."
+  },
+  {
+   "store": "MemoryZone",
+   "reason": "DnsWriter test double for owner/market harnesses; prod writes no DNS (noZones by design, GATE5), so there is nothing durable to adapt.",
+   "owner": "f378_c3_owner_market_store_d1_inventory",
+   "would_flip": "Only if a real zone writer is ever approved (GATE5 card); until then this stays declared by design."
+  }
+ ]
+}
