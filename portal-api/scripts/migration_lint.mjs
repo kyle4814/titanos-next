@@ -16,6 +16,7 @@ export const ROOT = join(HERE, "..");
 export const PAIRS = [
   { name: "job states", ts: { file: "src/market/store.ts", type: "JobStatus" }, sql: { table: "market_jobs", column: "status" } },
   { name: "payout states", ts: { file: "src/enterprise/types.ts", type: "PayoutStatus" }, sql: { table: "payouts", column: "status" } },
+  { name: "seat states", ts: { file: "src/market/entitlements.ts", type: "SubStatus" }, sql: { table: "seat_subscriptions", column: "status" } },
   { name: "card kinds", ts: { file: "src/market/store.ts", iface: "MarketCard", prop: "kind" }, sql: { table: "market_cards", column: "kind" } },
   { name: "ledger kinds", ts: { file: "src/enterprise/types.ts", type: "LedgerKind" }, sql: { table: "partner_ledger", column: "kind" } },
   { name: "tenant kinds", ts: { file: "src/enterprise/types.ts", type: "TenantKind" }, sql: { table: "tenants", column: "kind" } },
