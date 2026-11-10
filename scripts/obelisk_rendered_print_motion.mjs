@@ -13,7 +13,7 @@ import { readFileSync, existsSync, statSync } from "node:fs";
 import { resolve, join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { shardOf, enumerateAllPages, coverage, mapLimit, allFlags, writeReport } from "./lib/allpages.mjs";
+import { shardOf, enumerateAllPages, manifestRoutes, ManifestError, coverage, mapLimit, allFlags, writeReport } from "./lib/allpages.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(join(here, "..", "package.json"));
@@ -143,14 +143,17 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const outDir = arg("--out", "out");
   const fl = allFlags(a);
   let pages = arg("--pages", null)?.split(",").filter(Boolean) ?? DEFAULT_PAGES;
-  let cov = null;
+  let cov = null, manifestList = null;
   if (fl.all) {
     try {
       const { loadAllowlist } = await import("./lib/allpages.mjs");
       const allow = new Set(loadAllowlist(fl.allowlist).entries.map((e) => e.route));
-      pages = enumerateAllPages(outDir).filter((p) => !allow.has(p));
-      pages = shardOf(pages, fl.shard);
-    } catch (e) { console.error("harness error: " + e.message); process.exit(2); }
+      ({ routes: manifestList } = manifestRoutes(outDir, fl.manifest));
+      pages = shardOf(manifestList.filter((p) => !allow.has(p)), fl.shard);
+    } catch (e) {
+      if (e instanceof ManifestError) { console.error(`PRINTMOTION MANIFEST ${e.kind}: ${e.message}`); console.log("ALLPAGES COVERAGE FAILED print_motion (export manifest " + e.kind + ")"); process.exit(e.kind === "OUTDIR" ? 2 : 4); }
+      console.error("harness error: " + e.message); process.exit(2);
+    }
     if (fl.drop) pages = pages.filter((p) => p !== fl.drop);
   }
   let results;
@@ -164,7 +167,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   }
   console.log(`rendered print+motion: ${results.length - bad.length}/${results.length} pages pass`);
   if (fl.all) {
-    cov = coverage({ outDir, swept: results.filter((r) => r.swept).map((r) => r.route), allowlistFile: fl.allowlist, shard: fl.shard });
+    cov = coverage({ outDir, swept: results.filter((r) => r.swept).map((r) => r.route), allowlistFile: fl.allowlist, shard: fl.shard, routes: manifestList });
     if (fl.report) writeReport(fl.report, { probe: "print_motion", cov, perPage: results.map((r) => ({ route: r.route, status: r.status, swept: r.swept, defects: r.failures })) });
     console.log(`ALLPAGES print_motion pages_enumerated=${cov.pages_enumerated} allowlisted=${cov.pages_allowlisted} pages_total=${cov.pages_total} pages_swept=${cov.pages_swept} with_defects=${bad.length}`);
     if (!cov.ok) {

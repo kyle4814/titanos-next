@@ -16,7 +16,7 @@
 //   exit 4 "KBFOC COVERAGE FAILED" if pages_swept < pages_total. Only scripts/allpages_allowlist.json (route + reason) may skip a page.
 //   --mutate-drop ROUTE is a TEST HOOK that drops one route from the sweep list; the independent total must catch it.
 // Exit 0 clean (or labelled SKIP when chromium/playwright is absent), 1 violations or a requested page missing, 2 usage.
-import { shardOf, enumerateAllPages, loadAllowlist, coverage, mapLimit, allFlags, ALLFLAGS, writeReport } from "./lib/allpages.mjs";
+import { shardOf, enumerateAllPages, manifestRoutes, ManifestError, loadAllowlist, coverage, mapLimit, allFlags, ALLFLAGS, writeReport } from "./lib/allpages.mjs";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 
 export const DEFAULT_PAGES = ["/", "/scan", "/pricing", "/app", "/pro", "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/investors", "/sectors"];
@@ -219,11 +219,16 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const outDir = arg("--out", "out");
   if (!fs.existsSync(outDir)) { console.error(`KBFOC FAILED no such directory ${outDir}`); process.exit(2); }
   const fl = allFlags(argv);
+  let manifestList = null;
   let pages = arg("--pages", "") ? arg("--pages").split(",") : DEFAULT_PAGES;
   if (fl.all) {
     const allow = new Set(loadAllowlist(fl.allowlist).entries.map((e) => e.route));
-    pages = enumerateAllPages(outDir).filter((p) => !allow.has(p));
-    pages = shardOf(pages, fl.shard);
+    try { ({ routes: manifestList } = manifestRoutes(outDir, fl.manifest)); }
+    catch (e) {
+      if (!(e instanceof ManifestError)) throw e;
+      console.error(`KBFOC MANIFEST ${e.kind}: ${e.message}`); console.log(`KBFOC COVERAGE FAILED export manifest ${e.kind}`); process.exit(4);
+    }
+    pages = shardOf(manifestList.filter((p) => !allow.has(p)), fl.shard);
     if (fl.drop) pages = pages.filter((p) => p !== fl.drop);
   }
   const viewports = arg("--viewports", "desktop,mobile").split(",");
@@ -242,7 +247,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   if (fl.all) {
     // a page counts as swept only if EVERY requested viewport produced a result for it with no harness ERROR
     const okPages = pages.filter((p) => viewports.every((vp) => r.results.some((x) => x.page === p && x.vp === vp && !x.violations.some((v) => v.code === "ERROR"))));
-    const cov = coverage({ outDir, swept: okPages, allowlistFile: fl.allowlist, shard: fl.shard });
+    const cov = coverage({ outDir, swept: okPages, allowlistFile: fl.allowlist, shard: fl.shard, routes: manifestList });
     const perPage = pages.map((p) => ({ route: p, swept: okPages.includes(p), viewports: viewports, defects: r.results.filter((x) => x.page === p).flatMap((x) => x.violations.map((v) => `${v.code} [${x.vp}] ${v.detail}`)) }));
     if (fl.report) writeReport(fl.report, { probe: "keyboard_focus", cov, perPage });
     console.log(`ALLPAGES keyboard_focus pages_enumerated=${cov.pages_enumerated} allowlisted=${cov.pages_allowlisted} pages_total=${cov.pages_total} pages_swept=${cov.pages_swept} with_defects=${perPage.filter((x) => x.defects.length).length}`);

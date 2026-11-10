@@ -6,8 +6,43 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { listExportedPages, readManifest, diffPages, SYSTEM_PAGES } from "../export_page_manifest.mjs";
 
+export const DEFAULT_MANIFEST = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "export_pages.json");
 export const DEFAULT_ALLOWLIST = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "allpages_allowlist.json");
+
+/** "about.html" -> "/about", "blog/index.html" -> "/blog", "index.html" -> "/". */
+export function pageToRoute(rel) {
+  const route = "/" + rel.replace(/(^|\/)index\.html$/, "").replace(/\.html$/, "");
+  return route === "" || route === "/" ? "/" : route.replace(/\/$/, "");
+}
+
+/**
+ * f420_c10: the page list for --all comes from the committed manifest (scripts/export_pages.json), with routes_count
+ * semantics (every exported .html except 404.html). Fails closed with a named ManifestError (callers exit 4) when the
+ * manifest is missing/unreadable, internally inconsistent, stale against the output dir, or disagrees with this
+ * module's own walk of the output dir. Returns {routes, count, manifest}.
+ */
+export class ManifestError extends Error { constructor(kind, msg) { super(msg); this.kind = kind; } }
+export function manifestRoutes(outDir, manifestFile = DEFAULT_MANIFEST) {
+  let m;
+  try { m = readManifest(manifestFile); } catch (e) { throw new ManifestError("MISSING", e.message); }
+  const routesPages = m.pages.filter((p) => p !== "404.html");
+  if (m.count !== m.pages.length || m.routes_count !== routesPages.length || new Set(m.pages).size !== m.pages.length)
+    throw new ManifestError("INCONSISTENT", `manifest ${manifestFile} count=${m.count} routes_count=${m.routes_count} disagree with its own pages list (${m.pages.length} pages, ${routesPages.length} routes)`);
+  let actual;
+  try { actual = listExportedPages(outDir); } catch (e) { throw new ManifestError("OUTDIR", e.message); }
+  const { added, removed } = diffPages(m.pages, actual);
+  if (added.length || removed.length)
+    throw new ManifestError("STALE", `manifest ${manifestFile} is stale against ${outDir}: ` + [...added.map((p) => "ADDED " + p), ...removed.map((p) => "REMOVED " + p)].join(", ") + " (run npm run export:manifest and commit)");
+  const routes = routesPages.map(pageToRoute).sort();
+  const walked = enumerateAllPages(outDir).filter((r) => r !== "/404");
+  const a = new Set(routes), b = new Set(walked);
+  const only = [...routes.filter((r) => !b.has(r)).map((r) => "manifest-only " + r), ...walked.filter((r) => !a.has(r)).map((r) => "walk-only " + r)];
+  if (only.length || routes.length !== m.routes_count)
+    throw new ManifestError("DISAGREES", `manifest routes disagree with the independent walk of ${outDir}: ${only.join(", ") || "count mismatch"}`);
+  return { routes, count: m.routes_count, manifest: m };
+}
 
 /** Walk root for *.html and return sorted unique routes ("/", "/scan", "/blog/post"). */
 export function enumerateAllPages(root) {
@@ -19,9 +54,7 @@ export function enumerateAllPages(root) {
       const f = path.join(d, e.name);
       if (e.isDirectory()) walk(f);
       else if (e.name.endsWith(".html")) {
-        const rel = path.relative(r, f).split(path.sep).join("/");
-        const route = "/" + rel.replace(/(^|\/)index\.html$/, "").replace(/\.html$/, "");
-        found.add(route === "" || route === "/" ? "/" : route.replace(/\/$/, ""));
+        found.add(pageToRoute(path.relative(r, f).split(path.sep).join("/")));
       }
     }
   };
@@ -54,14 +87,14 @@ export function loadAllowlist(file = DEFAULT_ALLOWLIST) {
  *   total       enumerated minus allowlisted: every one of these MUST be swept
  *   swept       the routes the probe actually swept (set of route strings)
  */
-export function coverage({ outDir, swept, allowlistFile = DEFAULT_ALLOWLIST, shard = null }) {
+export function coverage({ outDir, swept, allowlistFile = DEFAULT_ALLOWLIST, shard = null, routes = null }) {
   const enumerated = enumerateAllPages(outDir);
   const { entries, problems } = loadAllowlist(allowlistFile);
   const allow = new Map(entries.map((e) => [e.route, e.reason]));
   const exists = new Set(enumerated);
   const stale = entries.filter((e) => !exists.has(e.route)).map((e) => e.route);
   for (const s of stale) problems.push(`allowlist entry ${s} is not an exported page (stale)`);
-  const total = shardOf(enumerated.filter((p) => !allow.has(p)), shard);
+  const total = shardOf((routes || enumerated).filter((p) => !allow.has(p)), shard); // routes = manifest routes (f420); null = legacy walk
   const sweptSet = new Set(swept);
   const notSwept = total.filter((p) => !sweptSet.has(p));
   const allowlisted = enumerated.filter((p) => allow.has(p)).map((p) => ({ route: p, reason: allow.get(p) }));
@@ -74,6 +107,8 @@ export function coverage({ outDir, swept, allowlistFile = DEFAULT_ALLOWLIST, sha
     allowlisted,
     problems,
     shard,
+    source: routes ? "manifest" : "walk",
+    manifest_routes_count: routes ? routes.length : null,
     ok: notSwept.length === 0 && problems.length === 0,
   };
 }
@@ -108,17 +143,18 @@ export function allFlags(argv) {
     // TEST HOOK ONLY: drops this route from the sweep list (not from the independent total) so the mutation test can prove it is caught.
     drop: arg("--mutate-drop", ""),
     shard: parseShard(arg("--shard", "")),
+    manifest: arg("--manifest", DEFAULT_MANIFEST),
   };
 }
 
-export const ALLFLAGS = ["--all", "--concurrency", "--report", "--allowlist", "--mutate-drop", "--shard"];
+export const ALLFLAGS = ["--all", "--concurrency", "--report", "--allowlist", "--mutate-drop", "--shard", "--manifest"];
 
 /** Write the one JSON the task asks for: pages_total / pages_swept / per-page defects. */
 export function writeReport(file, { probe, cov, perPage }) {
   const doc = {
     probe, generated: new Date().toISOString(),
     pages_enumerated: cov.pages_enumerated, pages_allowlisted: cov.pages_allowlisted,
-    shard: cov.shard || null, pages_total: cov.pages_total, pages_swept: cov.pages_swept,
+    shard: cov.shard || null, source: cov.source || "walk", manifest_routes_count: cov.manifest_routes_count ?? null, pages_total: cov.pages_total, pages_swept: cov.pages_swept,
     not_swept: cov.not_swept, allowlisted: cov.allowlisted, problems: cov.problems,
     pages_with_defects: perPage.filter((p) => p.defects.length).length,
     pages: perPage,
