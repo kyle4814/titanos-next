@@ -50,14 +50,16 @@ test("a new file joining an already-declared duplicate prefix FAILS (the declara
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
 
-test("a NEW gap FAILS (a migration numbered past the tree leaves 0024..N-1 undeclared)", () => {
-  // re-pinned +1 on hand/int3 2026-11-10: 0023_agent_d1 (F58, renumbered from 0006) is now the highest migration
+test("a NEW gap FAILS (a migration numbered past the tree leaves the numbers in between undeclared)", () => {
+  // 2026-11-10: the highest prefix is read from the tree (it was hard-coded and re-pinned by hand at 0022 and 0023)
   const d = clone();
   try {
-    writeFileSync(join(d, "migrations/0026_skips_two.sql"), "CREATE TABLE zz_skip (id TEXT PRIMARY KEY);");
+    const top = Math.max(...readdirSync(join(d, "migrations")).map((f) => /^(\d{4})_/.exec(f)?.[1]).filter(Boolean).map(Number));
+    const p4 = (n: number) => String(n).padStart(4, "0");
+    writeFileSync(join(d, `migrations/${p4(top + 3)}_skips_two.sql`), "CREATE TABLE zz_skip (id TEXT PRIMARY KEY);");
     const r = run(d);
-    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0024")), r.failures.join("\n"));
-    assert.ok(r.failures.some((m: string) => m.includes("gap: no migration numbered 0025")));
+    assert.ok(r.failures.some((m: string) => m.includes(`gap: no migration numbered ${p4(top + 1)}`)), r.failures.join("\n"));
+    assert.ok(r.failures.some((m: string) => m.includes(`gap: no migration numbered ${p4(top + 2)}`)));
     assert.ok(!r.failures.some((m: string) => m.includes("gap: no migration numbered 0009")), "declared gaps stay quiet");
   } finally { rmSync(d, { recursive: true, force: true }); }
 });
