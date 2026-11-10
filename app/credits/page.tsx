@@ -4,6 +4,7 @@ import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import { SPACE_IMAGES } from "@/lib/space-images";
 import W2d from "@/components/w2d/W2d";
+import Provenance from "@/components/Provenance";
 
 const META_TITLE = "Image credits and licences | TITANOS";
 const META_DESC =
@@ -36,6 +37,7 @@ export default function Credits() {
         title="The universe is not ours. Here is whose it is."
         sub={`${n} real images from NASA, ESA/Webb and ESA/Hubble appear on this site. Each is listed here with its source, licence and the credit line its owner asks for.`}
       />
+      <Provenance route="/credits" />
       <section style={SECTION}>
         <div style={WRAP}>
           <p style={BODY}>

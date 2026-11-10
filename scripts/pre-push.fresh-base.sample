@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# OPT-IN pre-push snippet. Install per clone only if you want it:
+#   cp scripts/pre-push.fresh-base.sample "$(git rev-parse --git-path hooks)/pre-push" && chmod +x that file
+# Never installed globally. Refuses a push of a web/* branch that is behind the newest origin/web/obelisk-int*.
+# Bypass once: git push --no-verify
+root=$(git rev-parse --show-toplevel)
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_ref" in refs/heads/web/*) ;; *) continue ;; esac
+  [ "$local_sha" = "0000000000000000000000000000000000000000" ] && continue
+  out=$(bash "$root/scripts/fresh_base_check.sh" "$local_sha") || { echo "pre-push: $local_ref $out; rebase onto the int head first (git fetch origin && git rebase <int>)" >&2; exit 1; }
+done
+exit 0

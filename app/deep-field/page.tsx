@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import SpaceImage from "@/components/SpaceImage";
 import { SPACE_IMAGES } from "@/lib/space-images";
 import W2d from "@/components/w2d/W2d";
+import Provenance from "@/components/Provenance";
 
 const META_TITLE = "The deep field: real images of the universe | TITANOS";
 const META_DESC =
@@ -35,6 +36,7 @@ export default function DeepField() {
         title="Every number here is a point of light."
         sub="The universe is the oldest data set there is. These are real images, credited to the people who made them."
       />
+      <Provenance route="/deep-field" />
       <section style={SECTION}>
         <div style={GRID}>
           {SPACE_IMAGES.map((m, i) => (

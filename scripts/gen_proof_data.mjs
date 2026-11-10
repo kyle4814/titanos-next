@@ -11,6 +11,7 @@ import { homedir } from "node:os";
 const root = new URL("../", import.meta.url);
 const P = (p) => new URL(p, root);
 const SNAP = "lib/site-data/source/BASELINE_2026-10-08.json";
+const FLEET_SNAP = "lib/site-data/source/FLEET_LEDGER_2026-10-12.json"; // scripts/measure_fleet_ledger.mjs: the fleet row, re-measured
 const OUT = "lib/site-data/proof.json";
 
 if (process.argv.includes("--refresh")) {
@@ -20,6 +21,7 @@ const snapText = readFileSync(P(SNAP), "utf8");
 const base = JSON.parse(snapText);
 const eff = JSON.parse(readFileSync(P("lib/efficiency/efficiency.json"), "utf8"));
 const date = base.ts.slice(0, 10);
+const fleet = JSON.parse(readFileSync(P(FLEET_SNAP), "utf8"));
 
 const row = (vector, nth = 0) => {
   const r = base.rows.filter((x) => x.vector === vector)[nth];
@@ -103,7 +105,7 @@ const charts = [
   mk({ id: "vmmem", title: "Windows VM memory", group: "Machine", suffix: " GB", dp: 1, before: num(vmRow.baseline, /^([\d.]+) GB/, "vmmem before"), after: mbToGb(num(vmRow.now, /^([\d.]+)/, "vmmem now")), better: "lower", label: vmRow.kind, source: pubSource(vmRow.source), method: "Process memory counter, megabytes divided by 1024.", date }),
   mk({ id: "win_free", title: "Windows memory free", group: "Machine", suffix: " GB", dp: 1, before: num(winRow.baseline, /^([\d.]+) GB/, "win before"), after: mbToGb(num(winRow.now, /^([\d.]+)/, "win now")), better: "higher", label: winRow.kind, source: pubSource(winRow.source), method: "Memory counter, megabytes divided by 1024.", date }),
   mk({ id: "cron_hours", title: "Scheduled work per day", group: "Machine", suffix: " h", dp: 2, before: num(cronH.baseline, /^([\d.]+) h/, "cron before"), after: num(cronH.now, /^([\d.]+) h/, "cron now"), better: "lower", label: cronH.kind, source: pubSource(cronH.source), method: "Sum of job run time over a 24 hour window.", date }),
-  mk({ id: "jobs_per_hour", title: "Worker jobs finished per hour", group: "Fleet", dp: 2, before: num(jph.baseline, /\(([\d.]+)\/h\)/, "jph before"), after: num(jph.now, /^([\d.]+)/, "jph now"), better: "higher", label: jph.kind, source: pubSource(jph.source), method: "Finished jobs in the ledger over 24 hours, divided by 24.", date }),
+  mk({ id: "jobs_per_hour", title: "Worker jobs finished per hour", group: "Fleet", dp: 2, before: num(jph.baseline, /\(([\d.]+)\/h\)/, "jph before"), after: fleet.jobsPerHour, better: "higher", label: jph.kind, source: pubSource(jph.source), method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished. The before figure is the 2026-10-08 baseline snapshot.`, date: fleet.measuredAt }),
   mk({ id: "worker_start", title: "Tokens a worker reads before its first action", group: "AI cost", dp: 0, suffix: " tokens", before: num(startTok.baseline, /~(\d+)k/, "tok before") * 1000, after: num(startTok.now, /^([\d,]+)/, "tok now"), better: "lower", label: startTok.kind, source: pubSource(startTok.source), method: "Median across worker sessions at start.", date }),
   fromEff("cron_snapshot", "State snapshot, time per run"),
   fromEff("cron_mirror", "Cloud mirror, time per run"),
@@ -141,9 +143,10 @@ const gate = row("kernel gate wall (latest)");
 const suite = row("titanos suite wall (latest)");
 const bak = row("newest backup age (archive.log)");
 
-baseStar("s_jobs", "Fleet", jph, `${fmt(num(jph.now, /^([\d.]+)/, "j"), 2)} jobs an hour`, `Worker jobs finished in 24 hours (${jph.note})`, jph.kind);
-baseStar("s_fail", "Fleet", fFail, fFail.now.replace(/ \(.*/, "").replace("of", "of"), `Fleet jobs that failed, ${fFail.now.match(/\(([\d.]+%)\)/)[1]}`, fFail.kind);
-baseStar("s_median", "Fleet", fMed, fMed.now.replace(/ \(n=.*/, ""), `Median time per job across ${fMed.now.match(/n=(\d+)/)[1]} jobs`, fMed.kind);
+const fleetStar = (id, display, caption) => star({ id, group: "Fleet", display, caption, label: "MEASURED", source: "Worker fleet job ledger", system: fleet.system, date: fleet.measuredAt, method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished (${fleet.counts.done} done, ${fleet.counts.fail + fleet.counts.stuck} failed or stuck). Live reading now: ${fleet.liveNow}.` });
+fleetStar("s_jobs", `${fmt(fleet.jobsPerHour, 2)} jobs an hour`, `Worker jobs finished on ${fleet.measuredAt}, one full day (${fleet.counts.finished} finished over 24 hours)`);
+fleetStar("s_fail", `${fleet.counts.fail + fleet.counts.stuck} of ${fleet.counts.finished}`, `Fleet jobs that failed on ${fleet.measuredAt}, ${fleet.failRatePct}%`);
+fleetStar("s_median", `${fmt(fleet.medianMinutes, 1)} min`, `Median time per job across ${fleet.counts.startToDonePairs} jobs on ${fleet.measuredAt}`);
 baseStar("s_usd_job", "AI cost", usdRow, fleetCost.afterText, `Fleet-wide cost per job over ${fleetCost.jobsText} jobs. An upper bound: it includes the orchestrator.`, usdRow.kind, usdRow.note);
 baseStar("s_usd_today", "AI cost", usdRow, fleetCost.todayText, "Spent in one day, API-equivalent pricing", usdRow.kind, usdRow.note);
 baseStar("s_tokens", "AI cost", startTok, `${fmt(num(startTok.now, /^([\d,]+)/, "t"), 0)} tokens`, `Median a worker reads before acting, ${startTok.now.match(/\((\d+) sessions/)[1]} sessions`, startTok.kind);
@@ -172,9 +175,11 @@ const receiptIds = ["s_jobs", "s_median", "e_cron_snapshot", "s_gate", "e_cost_p
 if (steps.length !== receiptIds.length) throw new Error(`loop has ${steps.length} steps, receipts ${receiptIds.length}`);
 const loop = steps.map((s, i) => ({ n: i + 1, ...s, receipt: receiptIds[i] }));
 
+charts.find((c) => c.id === "jobs_per_hour").system = fleet.system;
+for (const x of [...charts, ...stars]) x.system ??= x.source;
 const labelCounts = Object.fromEntries(Object.keys(LABELS).map((k) => [k, stars.filter((s) => s.label === k).length]));
 const out = {
-  generated: { from: [SNAP, "lib/efficiency/efficiency.json"], baselineTs: base.ts, sha256: createHash("sha256").update(snapText).digest("hex").slice(0, 16) },
+  generated: { from: [SNAP, FLEET_SNAP, "lib/efficiency/efficiency.json"], baselineTs: base.ts, sha256: createHash("sha256").update(snapText).digest("hex").slice(0, 16) },
   labels: LABELS,
   labelCounts,
   headline: { ...headline, titleText: eff.headline.title.replace("{factor}", fmt(headline.before / headline.after, 1)), analogy: eff.headline.analogy, caption: eff.headline.caption },

@@ -1,0 +1,1 @@
+# Tolerated runtime import edges, one "a.ts -> b.ts" per line. MUST stay empty (scripts/test_import_cycles.mjs enforces it).

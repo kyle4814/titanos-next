@@ -6,9 +6,9 @@ import OrderAiClient from "./client";
 import { Inscription, SystemLabel, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { DISPLAY } from "@/lib/pricing";
 
-const META_TITLE = "AI Partnership Enquiry | TITANOS";
+const META_TITLE = "AI Partnership Checkout | TITANOS";
 const META_DESC =
-  "Structured intake for a Titanos AI partnership retainer. Describe the manual work you want automated, and Kyle confirms your tier and scopes month 1.";
+  "Start a Titanos AI partnership retainer. Choose your tier, pay on Stripe, and month 1 scoping begins.";
 
 const baseMetadata: Metadata = {
   title: META_TITLE,
@@ -26,13 +26,13 @@ export default function OrderAiPage() {
       <section aria-label="What this gets you" style={{ padding: "var(--space-16) 20px 0" }}>
         <Inscription
           as="h1"
-          label="What this enquiry actually starts"
+          label="What this checkout actually starts"
           sub={`${DISPLAY.AI_LADDER_ENTRY}. Month 1 is the build, months 2 to 3 optimise, then it runs month-to-month. Cancel any time.`}
         >
           One system, built around the work you already do manually.
         </Inscription>
         <SystemLabel style={{ textAlign: "center", marginTop: 18 }}>
-          Enquiry → Kyle scopes your tier → invoice → month 1 build begins
+          Sign in → choose your tier → pay → month 1 scoping begins
         </SystemLabel>
       </section>
 
@@ -42,11 +42,11 @@ export default function OrderAiPage() {
 
       <section aria-label="After you submit" style={{ padding: "0 20px var(--space-16)" }}>
         <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
-          I read every enquiry myself. No sales team, no queue. If your tier isn&apos;t obvious
-          from what you write, I&apos;ll ask before I quote, not after.
+          I scope every build myself. No sales team, no queue. If the tier you pick is wrong for
+          the work, I will tell you in week one and move you before the next charge.
         </OperatorNote>
         <OmegaSeal
-          caption="Scope confirmed before anything is invoiced."
+          caption="Month 1 scoping before any build starts."
           style={{ margin: "0 auto" }}
         />
       </section>

@@ -52,7 +52,7 @@ const CSP =
   // analytics beacon (SiteAnalytics.tsx — write-only, no cookies).
   // fetch() is governed by connect-src; the legacy form-action
   // 'mailto:' directive below covers the noscript mailto fallback only.
-  "connect-src 'self' https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
+  "connect-src 'self' https://cloudflare-dns.com https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
   // frame-src allows the vault.titanos.tech partner-signup embed only.
   "frame-src 'self' https://vault.titanos.tech; " +
   "base-uri 'self'; " +

@@ -1,0 +1,23 @@
+{
+ "system": "TitanOS worker fleet job ledger (two accounts)",
+ "measuredAt": "2026-10-12",
+ "window": "2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h)",
+ "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days).",
+ "counts": {
+  "done": 1460,
+  "fail": 170,
+  "stuck": 0,
+  "finished": 1630,
+  "startToDonePairs": 1460
+ },
+ "jobsPerHour": 67.92,
+ "failRatePct": 10.4,
+ "medianMinutes": 6,
+ "ledger": {
+  "lines": 12816,
+  "firstTs": "2026-10-07T21:15:02",
+  "lastTs": "2026-10-13T07:57:29",
+  "sha256": "abdbac7fbf04631b"
+ },
+ "liveNow": "UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote"
+}

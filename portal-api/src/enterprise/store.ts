@@ -1,0 +1,138 @@
+import { isSealed } from "./seal.ts";
+import type { Asset, AuditEntry, Invite, LedgerEntry, Member, Payout, Referral, SsoConfig, SsoState, Tenant } from "./types.ts";
+
+// Every method that returns a tenant-owned object takes the tenant id. There is deliberately NO "assetById(id)".
+export interface EntStore {
+  putTenant(t: Tenant): Promise<void>;
+  tenantById(id: string): Promise<Tenant | undefined>;
+  tenantBySlug(slug: string): Promise<Tenant | undefined>;
+  childrenOf(parentId: string): Promise<Tenant[]>;
+  putMember(m: Member): Promise<void>;
+  memberOf(tenantId: string, accountId: string): Promise<Member | undefined>;
+  membersOf(tenantId: string): Promise<Member[]>;
+  membershipsFor(accountId: string): Promise<Member[]>;
+  removeMember(tenantId: string, accountId: string): Promise<void>;
+  removeAccount(accountId: string): Promise<void>;
+  putInvite(i: Invite): Promise<void>;
+  invitesForEmail(email: string, now: number): Promise<Invite[]>;
+  inviteById(id: string, tenantId?: string): Promise<Invite | undefined>;   // tenantId optional: when given, another tenant's invite is invisible
+  invitesOf(tenantId: string): Promise<Invite[]>;
+  partnerByRefCode(code: string): Promise<Tenant | undefined>;
+  deleteInvite(id: string, tenantId?: string): Promise<void>;
+  deleteInvitesBy(accountId: string, tenantId?: string): Promise<void>;
+  putAsset(a: Asset): Promise<void>;
+  assetsOf(tenantId: string): Promise<Asset[]>;
+  assetOf(tenantId: string, id: string): Promise<Asset | undefined>;
+  verifiedAssetOwner(domain: string): Promise<Asset | undefined>;
+  deleteAsset(tenantId: string, id: string): Promise<void>;
+  putSso(c: SsoConfig): Promise<void>;
+  ssoOf(tenantId: string): Promise<SsoConfig | undefined>;
+  putSsoState(s: SsoState): Promise<void>;
+  openSsoStates(tenantId: string, now: number, clientKey?: string): Promise<number>; // also purges expired states
+  setEnforcement(tenantId: string, enabled: boolean): Promise<void>;
+  evictOldestSsoState(tenantId: string, clientKey: string, now: number): Promise<void>; // drops the oldest open state of THAT source only (a D1 adapter: DELETE ... WHERE hash = (SELECT hash ... WHERE tenant_id = ? AND client_key = ? ORDER BY expires_at LIMIT 1))
+  consumeSsoState(hash: string, now: number): Promise<SsoState | undefined>;
+  markSsoSession(sessionHash: string, tenantId: string): Promise<void>;
+  isSsoSession(sessionHash: string, tenantId: string): Promise<boolean>;
+  addAudit(a: AuditEntry): Promise<void>;
+  auditOf(tenantId: string, limit: number): Promise<AuditEntry[]>;
+  addLedger(e: LedgerEntry): Promise<boolean>;   // false when uniq already exists (idempotent)
+  updateLedger(id: string, patch: Partial<Pick<LedgerEntry, "held" | "holdReasons">>): Promise<LedgerEntry | undefined>;
+  ledgerOf(partnerId: string): Promise<LedgerEntry[]>;
+  ledgerForInvoice(invoiceId: string): Promise<LedgerEntry[]>; // across partners
+  putReferral(r: Referral): Promise<boolean>;    // false when the account already has one
+  referralOf(accountId: string): Promise<Referral | undefined>;
+  referralsOfPartner(partnerId: string): Promise<Referral[]>;   // f313: PARTNER-SCOPED (the book resolves referral identity from this partner's own rows only)
+  // ATOMIC: compute the available balance and write the payout plus its negative ledger entry in one step. A D1
+  // adapter must do this in one transaction (batch). Returns undefined when the balance is under `minCents`.
+  reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }): Promise<Payout | undefined>;
+  putPayout(p: Payout): Promise<void>;
+  // ATOMIC compare-and-set on status; undefined when the payout is not in `from` (a D1 adapter: UPDATE ... WHERE status = ?)
+  transitionPayout(id: string, from: Payout["status"], to: Payout["status"], patch?: Partial<Payout>, partnerId?: string): Promise<Payout | undefined>; // patch lands in the SAME atomic step (D1: UPDATE ... SET status = ?, <patch cols> WHERE status = ?)
+  payoutById(id: string, partnerId?: string): Promise<Payout | undefined>;
+  payoutsOf(partnerId: string): Promise<Payout[]>;
+  payoutsByStatus(status: Payout["status"], partnerId?: string): Promise<Payout[]>; // the sweep reads stuck "sending" rows; a D1 adapter: WHERE status = ? [AND partner_id = ?]
+  noteFailure(where: string, detail: string, at: number): Promise<void>;
+  failures(): Promise<{ where: string; detail: string; at: number }[]>;
+}
+
+export function availableCents(entries: LedgerEntry[], now: number): number {
+  let n = 0;
+  for (const e of entries) {
+    if (e.held) continue; // SELF-DEAL-SUSPECT commissions, and the clawbacks against them, sit out until the operator's tap
+    if (e.amountCents < 0 || e.availableAt <= now) n += e.amountCents;
+  }
+  return n;
+}
+
+export class MemoryEntStore implements EntStore {
+  tenants = new Map<string, Tenant>(); members: Member[] = []; invites = new Map<string, Invite>(); assets = new Map<string, Asset>();
+  sso = new Map<string, SsoConfig>(); states = new Map<string, SsoState>(); ssoSessions = new Set<string>(); audit: AuditEntry[] = [];
+  ledger = new Map<string, LedgerEntry>(); referrals = new Map<string, Referral>(); payouts = new Map<string, Payout>(); fails: { where: string; detail: string; at: number }[] = [];
+  async putTenant(t: Tenant) { this.tenants.set(t.id, t); }
+  async tenantById(id: string) { return this.tenants.get(id); }
+  async tenantBySlug(slug: string) { return [...this.tenants.values()].find((t) => t.slug === slug); }
+  async childrenOf(pid: string) { return [...this.tenants.values()].filter((t) => t.parentId === pid && !t.deletedAt); }
+  async putMember(m: Member) { const i = this.members.findIndex((x) => x.tenantId === m.tenantId && x.accountId === m.accountId); if (i >= 0) this.members[i] = m; else this.members.push(m); } // keeps join order
+  async memberOf(t: string, a: string) { return this.members.find((m) => m.tenantId === t && m.accountId === a); }
+  async membersOf(t: string) { return this.members.filter((m) => m.tenantId === t); }
+  async membershipsFor(a: string) { return this.members.filter((m) => m.accountId === a); }
+  async removeMember(t: string, a: string) { this.members = this.members.filter((m) => !(m.tenantId === t && m.accountId === a)); }
+  async removeAccount(a: string) {
+    this.members = this.members.filter((m) => m.accountId !== a); this.referrals.delete(a);
+    await this.deleteInvitesBy(a);
+  }
+  async putInvite(i: Invite) { const x = this.invites.get(i.id); if (x && x.tenantId !== i.tenantId) return; this.invites.set(i.id, i); } // never overwrites another tenant's row
+  async invitesForEmail(e: string, now: number) { return [...this.invites.values()].filter((i) => i.email === e && i.expiresAt > now); }
+  async inviteById(id: string, t?: string) { const i = this.invites.get(id); return i && (!t || i.tenantId === t) ? i : undefined; }
+  async invitesOf(t: string) { return [...this.invites.values()].filter((i) => i.tenantId === t); }
+  async partnerByRefCode(code: string) { return [...this.tenants.values()].find((t) => t.kind === "partner" && t.refCode === code && !t.deletedAt); }
+  async deleteInvite(id: string, t?: string) { const i = this.invites.get(id); if (i && (!t || i.tenantId === t)) this.invites.delete(id); }
+  async deleteInvitesBy(a: string, t?: string) { for (const [k, i] of this.invites) if (i.invitedBy === a && (!t || i.tenantId === t)) this.invites.delete(k); }
+  async putAsset(a: Asset) { const x = this.assets.get(a.id); if (x && x.tenantId !== a.tenantId) return; this.assets.set(a.id, a); } // never overwrites another tenant's row
+  async assetsOf(t: string) { return [...this.assets.values()].filter((a) => a.tenantId === t); }
+  async assetOf(t: string, id: string) { const a = this.assets.get(id); return a && a.tenantId === t ? a : undefined; }
+  async verifiedAssetOwner(domain: string) { return [...this.assets.values()].find((a) => a.domain === domain && a.verifiedAt); }
+  async deleteAsset(t: string, id: string) { const a = this.assets.get(id); if (a && a.tenantId === t) this.assets.delete(id); }
+  async putSso(c: SsoConfig) { if (!isSealed(c.secret)) throw new Error("sso_secret_not_sealed"); this.sso.set(c.tenantId, c); }   // fail closed: plaintext never lands in the store
+  async ssoOf(t: string) { return this.sso.get(t); }
+  async putSsoState(s: SsoState) { const x = this.states.get(s.hash); if (x && x.tenantId !== s.tenantId) return; this.states.set(s.hash, s); } // never overwrites another tenant's state
+  async openSsoStates(t: string, now: number, key?: string) {
+    for (const [k, s] of this.states) if (s.tenantId === t && (s.used || s.expiresAt <= now)) this.states.delete(k);  // purges only this tenant's dead states
+    return [...this.states.values()].filter((s) => s.tenantId === t && (!key || s.clientKey === key)).length;
+  }
+  async setEnforcement(t: string, enabled: boolean) { const x = this.tenants.get(t); if (x) this.tenants.set(t, { ...x, ssoEnforced: enabled }); }
+  async evictOldestSsoState(t: string, key: string, now: number) {
+    let oldest: SsoState | undefined;
+    for (const s of this.states.values()) if (s.tenantId === t && s.clientKey === key && !s.used && s.expiresAt > now && (!oldest || s.expiresAt < oldest.expiresAt)) oldest = s;
+    if (oldest) this.states.delete(oldest.hash);
+  }
+  async consumeSsoState(h: string, now: number) { const s = this.states.get(h); if (!s || s.used || s.expiresAt < now) return undefined; s.used = true; return s; }
+  async markSsoSession(h: string, t: string) { this.ssoSessions.add(`${t}:${h}`); }
+  async isSsoSession(h: string, t: string) { return this.ssoSessions.has(`${t}:${h}`); }
+  async addAudit(a: AuditEntry) { this.audit.push(a); }
+  async auditOf(t: string, limit: number) { return this.audit.filter((a) => a.tenantId === t).slice(-limit).reverse(); }
+  async addLedger(e: LedgerEntry) { for (const x of this.ledger.values()) if (x.partnerId === e.partnerId && x.uniq === e.uniq) return false; this.ledger.set(e.id, e); return true; }
+  async updateLedger(id: string, patch: Partial<Pick<LedgerEntry, "held" | "holdReasons">>) { const x = this.ledger.get(id); if (!x) return undefined; const n = { ...x, ...patch }; this.ledger.set(id, n); return n; }
+  async ledgerOf(p: string) { return [...this.ledger.values()].filter((e) => e.partnerId === p).sort((a, b) => a.at - b.at); }
+  async ledgerForInvoice(id: string) { return [...this.ledger.values()].filter((e) => e.invoiceId === id); }
+  async putReferral(r: Referral) { if (this.referrals.has(r.accountId)) return false; this.referrals.set(r.accountId, r); return true; }
+  async referralOf(a: string) { return this.referrals.get(a); }
+  async referralsOfPartner(p: string) { return [...this.referrals.values()].filter((r) => r.partnerId === p); }
+  async reservePayout(partnerId: string, now: number, minCents: number, make: (amount: number) => { payout: Payout; entry: LedgerEntry }) {
+    // no await between the balance read and the writes: atomic in this single-threaded adapter
+    const avail = availableCents([...this.ledger.values()].filter((e) => e.partnerId === partnerId), now);
+    if (avail < minCents) return undefined;
+    const { payout, entry } = make(avail);
+    if (payout.partnerId !== partnerId || entry.partnerId !== partnerId || entry.amountCents !== -payout.amountCents || payout.amountCents !== avail || entry.payoutId !== payout.id || entry.held) throw new Error("reserve_mismatch");
+    this.payouts.set(payout.id, payout); this.ledger.set(entry.id, entry);
+    return payout;
+  }
+  async putPayout(p: Payout) { const x = this.payouts.get(p.id); if (x && x.partnerId !== p.partnerId) return; this.payouts.set(p.id, p); }
+  async transitionPayout(id: string, from: Payout["status"], to: Payout["status"], patch?: Partial<Payout>, partnerId?: string) { const p = this.payouts.get(id); if (!p || p.status !== from || (partnerId && p.partnerId !== partnerId)) return undefined; p.status = to; if (patch) Object.assign(p, patch); return p; }
+  async payoutById(id: string, partnerId?: string) { const p = this.payouts.get(id); return p && (!partnerId || p.partnerId === partnerId) ? p : undefined; }
+  async payoutsOf(p: string) { return [...this.payouts.values()].filter((x) => x.partnerId === p); }
+  async payoutsByStatus(s: Payout["status"], partnerId?: string) { return [...this.payouts.values()].filter((x) => x.status === s && (partnerId === undefined || x.partnerId === partnerId)).map((x) => ({ ...x })); }
+  async noteFailure(where: string, detail: string, at: number) { this.fails.push({ where, detail, at }); }
+  async failures() { return this.fails; }
+}

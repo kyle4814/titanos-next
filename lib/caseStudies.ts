@@ -3,6 +3,8 @@
 export type CaseShot = { src: string; alt: string };
 export type CaseStudy = {
   slug: string;
+  /** Evidence label, shown on the page and the card: REAL (a build that happened), SYNTHETIC (invented data) or MODELLED (a calculation). */
+  label: "REAL" | "SYNTHETIC" | "MODELLED";
   sector: string;
   title: string;
   teaser: string;
@@ -20,6 +22,7 @@ export type CaseStudy = {
 export const CASES: CaseStudy[] = [
   {
     slug: "dealer-command-centre",
+    label: "REAL",
     sector: "Used vehicle dealership",
     title: "A dealership command centre, built and independently reviewed in about 70 minutes",
     teaser:
@@ -60,6 +63,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: "sales-coaching-course",
+    label: "REAL",
     sector: "Sales coaching",
     title: "A 1,900-lesson sales course with its own coach, built in under 90 minutes",
     teaser:
@@ -99,6 +103,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: "trading-app",
+    label: "REAL",
     sector: "Education and practice trading",
     title: "A full trading-education app, idea to working product in one morning",
     teaser:

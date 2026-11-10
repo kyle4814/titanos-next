@@ -1,0 +1,123 @@
+{
+ "note": "f178 2026-11-07: justified exceptions to migration lint auto-discovery. Every entry needs a reason; an entry that no longer applies FAILS (stale).",
+ "unions": [
+  {
+   "key": "src/market/attribution.ts::Clawback.status",
+   "reason": "In-memory/ledger-record state, not persisted to a CHECK column today; revisit if a clawbacks table is added."
+  },
+  {
+   "key": "src/market/store.ts::Payout.status",
+   "reason": "Embedded in the market job record (JSON), not a SQL column; payouts.status CHECK belongs to the enterprise payout lifecycle."
+  },
+  {
+   "key": "src/market/store.ts::Job.priorStatus",
+   "reason": "Subset of JobStatus held inside the dispute record; guarded by the JobStatus pair."
+  },
+  {
+   "key": "src/owner/autofix.ts::Edit.kind",
+   "reason": "DNS edit kind inside an in-memory fix record, never a column."
+  },
+  {
+   "key": "src/owner/engine.ts::FixRec.status",
+   "reason": "Owner-engine record state, stored as JSON or memory, no CHECK column exists."
+  },
+  {
+   "key": "src/owner/engine.ts::Quest.kind",
+   "reason": "Owner quest descriptor, generated in code, not persisted."
+  },
+  {
+   "key": "src/owner/engine.ts::Alert.kind",
+   "reason": "Transient alert shape computed per scan, not persisted."
+  },
+  {
+   "key": "src/catalogue.ts::Kind",
+   "reason": "Product catalogue kind is a code constant, not a column."
+  },
+  {
+   "key": "src/enterprise/payout_card.ts::DecisionStatus",
+   "reason": "Derived: PayoutStatus plus card-only approved/denied outcomes, intentionally wider than payouts.status; PayoutStatus is pair-checked."
+  },
+  {
+   "key": "src/owner/engine.ts::ProofState",
+   "reason": "Owner proof state held in engine records, not a CHECK column."
+  },
+  {
+   "key": "src/owner/engine.ts::EventKind",
+   "reason": "Owner event log kind in the engine store (memory/JSON), no CHECK column."
+  },
+  {
+   "key": "src/enterprise/partner_book.ts::BookRow.kind",
+   "reason": "Read-model row built from billing, market and estate facts (f313), not a persisted column; 0021 stores facts, not this label."
+  },
+  {
+   "key": "src/enterprise/service.ts::EstateRow.status",
+   "reason": "Estate view row computed per request from assets, never stored in a column."
+  },
+  {
+   "key": "src/invoice_render.ts::RenderedDoc.kind",
+   "reason": "Render output type for an invoice/credit-note document, not persisted as a CHECK column."
+  },
+  {
+   "key": "src/plan_change.ts::Pending.kind",
+   "reason": "Pending change held inside the subscription plan_json record, not a SQL column."
+  },
+  {
+   "key": "src/plan_change.ts::Request.kind",
+   "reason": "Request discriminator for the plan-change engine input, never persisted."
+  },
+  {
+   "key": "src/stripe.ts::SessionInfo.status",
+   "reason": "Provider (Stripe) response field mirrored in the BillingProvider interface, not our column."
+  },
+  {
+   "key": "src/stripe.ts::SessionInfo.paymentStatus",
+   "reason": "Provider (Stripe) response field mirrored in the BillingProvider interface, not our column."
+  },
+  {
+   "key": "src/enterprise/partner_book.ts::BookStatus",
+   "reason": "Read-model status label for the partner book view (f313), not a persisted column."
+  },
+  {
+   "key": "src/plan_change.ts::LedgerKind",
+   "reason": "Plan-change ledger entry kind kept inside plan_json, not a SQL column."
+  },
+  {
+   "key": "src/market/dispute.ts::DKind",
+   "reason": "Dispute action kind carried in the hash-chained audit JSON, no CHECK column; the persisted state column is covered by 0007 dispute_case."
+  },
+  {
+   "key": "src/market/dispute.ts::AuditEntry.kind",
+   "reason": "Audit-chain entry kind stored in the case JSON, not a CHECK column."
+  },
+  {
+   "key": "src/market/entitlements.ts::SubStatus",
+   "reason": "f44 seat subscription status lives only in MemorySeatEntitlements today; no D1 table or CHECK column exists (the Stripe-fed adapter is NOT BUILT, GATE2). Add a PAIR when that table lands."
+  }
+ ],
+ "checks": [
+  {
+   "key": "accounts.seat",
+   "reason": "Seat list has no TS union yet (checked as string at the boundary). WOULD-FLIP: add a Seat type and pair it."
+  },
+  {
+   "key": "jobs.status",
+   "reason": "Legacy 0001 jobs table superseded by market_jobs (0004); no code reads it. Real drift versus JobStatus is deliberate history."
+  },
+  {
+   "key": "credit_ledger.reason",
+   "reason": "Agent-door reason enum has no TS union yet. WOULD-FLIP: add type and pair."
+  },
+  {
+   "key": "agent_receipts.mode",
+   "reason": "Agent-door mode enum has no TS union yet. WOULD-FLIP: add type and pair."
+  },
+  {
+   "key": "generator_queue.status",
+   "reason": "C5 drain queue states live in the generator pipeline outside portal-api (scripts/test_drain_grade_tick.mjs); the D1 drain adapter maps strings, covered by its own tests."
+  },
+  {
+   "key": "graded_run.pass",
+   "reason": "Integer 0/1 flag, no string members to compare; the TS side is a boolean."
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+// C8 Enterprise and partner: tenancy types. A tenant is the isolation boundary. Every tenant-scoped read in the
+// store takes the tenant id, so a guessed id from another tenant returns nothing (isolation by construction),
+// and every route checks membership before it touches anything.
+export type TenantKind = "enterprise" | "partner" | "client";
+export type Role = "viewer" | "analyst" | "admin";
+export const ROLE_RANK: Record<Role, number> = { viewer: 1, analyst: 2, admin: 3 };
+export const ROLES = Object.keys(ROLE_RANK) as Role[];
+
+export interface Brand { name: string; colour: string; tagline: string }
+export interface Tenant {
+  id: string; slug: string; name: string; kind: TenantKind; parentId?: string; createdAt: number; deletedAt?: number;
+  ssoEnforced: boolean; partnerAccess: boolean;   // partnerAccess: a client tenant consents to its partner reading its estate
+  brand?: Brand; brandPublic?: boolean;          // a client portal brand is served publicly only after its partner publishes it
+  refCode?: string;                               // partners only: the referral code
+  termsAcceptedAt?: number;                       // partners only: set by the operator after the partner terms are signed (GATE3)
+  payoutAccount?: string;                         // partners only: opaque payout-provider reference, never returned to a client
+}
+export interface Member { tenantId: string; accountId: string; role: Role; addedAt: number }
+export interface Invite { id: string; tenantId: string; email: string; role: Role; invitedBy: string; createdAt: number; expiresAt: number }
+export interface Asset { id: string; tenantId: string; domain: string; label: string; group: string; token: string; verifiedAt?: number }
+export interface SsoConfig { tenantId: string; issuer: string; clientId: string; secret: string; allowedDomains: string[]; defaultRole: Exclude<Role, "admin">; lastSuccessAt?: number }
+export interface SsoState { hash: string; tenantId: string; clientKey: string; nonceHash: string; expiresAt: number; used: boolean; createdAt?: number }
+export interface AuditEntry { id: string; tenantId: string; actor: string; action: string; target: string; at: number }
+
+export type LedgerKind = "commission" | "clawback" | "payout" | "payout_reversal";
+export interface LedgerEntry {
+  id: string; uniq: string; partnerId: string; kind: LedgerKind; amountCents: number; at: number; availableAt: number;
+  invoiceId?: string; sourceKey?: string; sourceLabel?: string; rateBps?: number; rateVersion?: string; payoutId?: string;
+  held?: boolean; holdReasons?: string[];   // SELF-DEAL-SUSPECT: not payable until the operator's tap (never auto-denied)
+}
+export interface Referral { accountId: string; partnerId: string; claimedAt: number }
+export type PayoutStatus = "pending_approval" | "sending" | "paid" | "failed" | "rejected" | "approved_retry" | "held" | "refunded";
+export interface Payout { id: string; partnerId: string; amountCents: number; status: PayoutStatus; createdAt: number; providerRef?: string; reason?: string; sendingAt?: number; attempts?: number; heldAt?: number; releasedAt?: number; tickAt?: number; refundedAt?: number; operatorNote?: string }
+
+export interface RateTable { version: string; baseBps: number; tiers: { minActive: number; bps: number }[] }
+export interface PayoutProvider { transfer(p: { partnerId: string; accountRef: string; amountCents: number; idempotencyKey: string }): Promise<{ ref: string }> }
+export interface IdpClaims { iss: string; aud: string; sub: string; email: string; email_verified: boolean; nonce: string; exp: number; iat: number }
+export interface IdpVerifier { verify(cfg: SsoConfig, idToken: string, nowMs: number): Promise<IdpClaims> }
+export interface ScanFinding { id: string; severity: "critical" | "high" | "medium" | "low"; title: string }
+export interface ScanProvider {
+  source: string;
+  scan(domain: string): Promise<ScanFinding[]>;
+  /** Richer path: a real grade, scan time and resolver source, or an honest UNKNOWN. When absent the estate derives the grade from scan(). */
+  assess?(domain: string): Promise<Assessment>;
+  /** Max domains assessed at once within ONE estate view (default 25). */
+  concurrency?: number;
+}
+export type Assessment =
+  | { status: "ASSESSED"; grade: "A" | "B" | "C" | "D" | "F"; score: number; counts: { critical: number; high: number; medium: number; low: number }; scannedAt: number; resolverSource: string; unreadableChecks: number }
+  | { status: "UNKNOWN"; reason: "timeout" | "resolver_failed" | "scan_error" | "rate_limited"; scannedAt: number; resolverSource: string };
+
+
+// Signals a billing/signup adapter supplies per account (F5). The fingerprint and network token are opaque strings.
+export interface Party { accountId: string; email: string; createdAt: number; payerFingerprint?: string; signupNet?: string }

@@ -57,6 +57,7 @@ export default function ProofWall() {
                 <p><b>{s.label}.</b> {proof.labels[s.label as keyof typeof proof.labels]}</p>
                 <p><b>Source.</b> {s.source}</p>
                 <p><b>Date.</b> {s.date}</p>
+                {s.stale ? <p><b>Last measured.</b> {s.lastMeasured}. Re-measure needed.</p> : null}
                 <p><b>Method.</b> {s.method}</p>
               </div>
             </li>

@@ -1,0 +1,292 @@
+{
+ "dataset": "Claims ledger",
+ "compiled": "2026-11-06",
+ "system": "TITANOS site data files (sectors.json, proof.json), compiled by scripts/gen_open_data.mjs",
+ "licence": "Free to use with attribution: cite titanos.tech and the compiled date. A formal open licence will be named here once the owner confirms it.",
+ "labels": {
+  "MEASURED": "Counted or timed on our own system, on the date shown.",
+  "REPRODUCED": "Measured, then repeated on a second run with the same result.",
+  "MODELLED": "Computed from measured inputs under stated assumptions. A scenario, not a result.",
+  "ESTIMATE": "A reasoned figure with a published method and a range.",
+  "FORECAST": "What we expect, with no result behind it yet.",
+  "EXAMPLE": "An illustration. Not a record of any real client.",
+  "UNKNOWN": "We have not measured this yet, so we do not show a number."
+ },
+ "rows": [
+  {
+   "id": "s_jobs",
+   "group": "Fleet",
+   "display": "67.92 jobs an hour",
+   "caption": "Worker jobs finished on 2026-10-12, one full day (1630 finished over 24 hours)",
+   "label": "MEASURED",
+   "system": "TitanOS worker fleet job ledger (two accounts)",
+   "source": "Worker fleet job ledger",
+   "date": "2026-10-12",
+   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
+  },
+  {
+   "id": "s_fail",
+   "group": "Fleet",
+   "display": "170 of 1630",
+   "caption": "Fleet jobs that failed on 2026-10-12, 10.4%",
+   "label": "MEASURED",
+   "system": "TitanOS worker fleet job ledger (two accounts)",
+   "source": "Worker fleet job ledger",
+   "date": "2026-10-12",
+   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
+  },
+  {
+   "id": "s_median",
+   "group": "Fleet",
+   "display": "6 min",
+   "caption": "Median time per job across 1460 jobs on 2026-10-12",
+   "label": "MEASURED",
+   "system": "TitanOS worker fleet job ledger (two accounts)",
+   "source": "Worker fleet job ledger",
+   "date": "2026-10-12",
+   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
+  },
+  {
+   "id": "s_usd_job",
+   "group": "AI cost",
+   "display": "US$1.037",
+   "caption": "Fleet-wide cost per job over 243 jobs. An upper bound: it includes the orchestrator.",
+   "label": "MEASURED",
+   "system": "Token usage meter and the job ledger",
+   "source": "Token usage meter and the job ledger",
+   "date": "2026-10-08",
+   "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+  },
+  {
+   "id": "s_usd_today",
+   "group": "AI cost",
+   "display": "US$252.08",
+   "caption": "Spent in one day, API-equivalent pricing",
+   "label": "MEASURED",
+   "system": "Token usage meter and the job ledger",
+   "source": "Token usage meter and the job ledger",
+   "date": "2026-10-08",
+   "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
+  },
+  {
+   "id": "s_tokens",
+   "group": "AI cost",
+   "display": "29,130 tokens",
+   "caption": "Median a worker reads before acting, 52 sessions",
+   "label": "MEASURED",
+   "system": "Session start audit (tokens read before the first action)",
+   "source": "Session start audit (tokens read before the first action)",
+   "date": "2026-10-08",
+   "method": "Read from the source on the date shown."
+  },
+  {
+   "id": "s_ram",
+   "group": "Machine",
+   "display": "2.65 GB",
+   "caption": "Linux memory in use",
+   "label": "MEASURED",
+   "system": "Linux memory counters on the build machine",
+   "source": "Linux memory counters on the build machine",
+   "date": "2026-10-08",
+   "method": "Read from the source on the date shown."
+  },
+  {
+   "id": "s_vm",
+   "group": "Machine",
+   "display": "11.5 GB",
+   "caption": "Windows VM memory",
+   "label": "MEASURED",
+   "system": "Windows process memory counter",
+   "source": "Windows process memory counter",
+   "date": "2026-10-08",
+   "method": "Read from the source on the date shown."
+  },
+  {
+   "id": "s_win",
+   "group": "Machine",
+   "display": "12.3 GB",
+   "caption": "Windows memory free",
+   "label": "MEASURED",
+   "system": "Windows memory counter",
+   "source": "Windows memory counter",
+   "date": "2026-10-08",
+   "method": "Read from the source on the date shown."
+  },
+  {
+   "id": "s_load",
+   "group": "Machine",
+   "display": "8.02 load",
+   "caption": "One-minute load average on 8 cores",
+   "label": "MEASURED",
+   "system": "Linux load average counter",
+   "source": "Linux load average counter",
+   "date": "2026-10-08",
+   "method": "8 cores"
+  },
+  {
+   "id": "s_cronh",
+   "group": "Machine",
+   "display": "32.84 h",
+   "caption": "Scheduled work in 24 hours, 4686 runs",
+   "label": "MEASURED",
+   "system": "Scheduled job run record (every run is logged)",
+   "source": "Scheduled job run record (every run is logged)",
+   "date": "2026-10-08",
+   "method": "4686 runs"
+  },
+  {
+   "id": "s_cronf",
+   "group": "Machine",
+   "display": "16.5%",
+   "caption": "Scheduled runs that failed, 773 of 4686. The 89 percent from before was one job, so we do not chart the two against each other.",
+   "label": "MEASURED",
+   "system": "Scheduled job run record (every run is logged)",
+   "source": "Scheduled job run record (every run is logged)",
+   "date": "2026-10-08",
+   "method": "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately."
+  },
+  {
+   "id": "s_gate",
+   "group": "Build",
+   "display": "124 s",
+   "caption": "Full gate run, 166 suites, green",
+   "label": "MEASURED",
+   "system": "Gate run record",
+   "source": "Gate run record",
+   "date": "2026-10-08",
+   "method": "Recorded by the gate runner at the time shown in the run record."
+  },
+  {
+   "id": "s_backup",
+   "group": "Safety",
+   "display": "40 min",
+   "caption": "Age of the newest backup",
+   "label": "MEASURED",
+   "system": "Backup log",
+   "source": "Backup log",
+   "date": "2026-10-08",
+   "method": "Read from the source on the date shown."
+  },
+  {
+   "id": "s_suite",
+   "group": "Build",
+   "display": "No number yet",
+   "caption": "Wall time of the main codebase suite",
+   "label": "UNKNOWN",
+   "system": "No durable run record exists yet",
+   "source": "No durable run record exists yet",
+   "date": "2026-10-08",
+   "method": "That suite does not log its own run time, so we show no figure. A recorder is the next fix."
+  },
+  {
+   "id": "e_cost_per_job",
+   "group": "AI cost",
+   "display": "US$0.973 to US$0.116",
+   "caption": "Cost per worker job (API-equivalent)",
+   "label": "MEASURED",
+   "system": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",
+   "source": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill."
+  },
+  {
+   "id": "e_daily_spend",
+   "group": "AI cost",
+   "display": "US$467 per day to US$130 per day",
+   "caption": "Daily spend, modelled ceiling",
+   "label": "MODELLED",
+   "system": "Sigil ceiling report, 2026-10-08",
+   "source": "Sigil ceiling report, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast."
+  },
+  {
+   "id": "e_recall50",
+   "group": "AI quality",
+   "display": "48/50",
+   "caption": "Recall test, 50 questions",
+   "label": "MEASURED",
+   "system": "Kernel compression gate record, 2026-10-08",
+   "source": "Kernel compression gate record, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better."
+  },
+  {
+   "id": "e_heldout",
+   "group": "AI quality",
+   "display": "24/25",
+   "caption": "Held-out recall test, 25 questions",
+   "label": "MEASURED",
+   "system": "Kernel compression gate record, 2026-10-08",
+   "source": "Kernel compression gate record, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "Questions written by an independent agent that never saw the compact core."
+  },
+  {
+   "id": "e_killtest",
+   "group": "AI quality",
+   "display": "25/25",
+   "caption": "Fully good results on 25 matched jobs",
+   "label": "MEASURED",
+   "system": "Kernel compression gate record, 2026-10-08",
+   "source": "Kernel compression gate record, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none."
+  },
+  {
+   "id": "e_cron_snapshot",
+   "group": "Cron",
+   "display": "224 s to 3.1 s",
+   "caption": "5-minute snapshot, time per run",
+   "label": "MEASURED",
+   "system": "PC optimisation report, 2026-10-08",
+   "source": "PC optimisation report, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "Run record average before, a timed run after. The secret check now scans only files that could be committed."
+  },
+  {
+   "id": "e_cron_mirror",
+   "group": "Cron",
+   "display": "2,250 s to 14 s",
+   "caption": "Cloud mirror, time per run",
+   "label": "MEASURED",
+   "system": "PC optimisation report, 2026-10-08",
+   "source": "PC optimisation report, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass."
+  },
+  {
+   "id": "e_cron_bundle",
+   "group": "Cron",
+   "display": "51 s to 3.6 s",
+   "caption": "Repository bundle step, time per run",
+   "label": "MEASURED",
+   "system": "PC optimisation report, 2026-10-08",
+   "source": "PC optimisation report, 2026-10-08",
+   "date": "2026-10-08",
+   "method": "One bundle per repository keyed on content, instead of re-bundling about 12 worktrees."
+  },
+  {
+   "id": "e_repo_size",
+   "group": "Build",
+   "display": "235 MB to 35 MB",
+   "caption": "Kernel repository size",
+   "label": "MEASURED",
+   "system": "Round-2 brief, 2026-10-08 (raw log attaching)",
+   "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
+   "date": "2026-10-08",
+   "method": "Size of the repository directory before and after history and run-state cleanup."
+  },
+  {
+   "id": "e_titanos_suite",
+   "group": "Build",
+   "display": "975 s to 579 s",
+   "caption": "Main codebase test suite run time",
+   "label": "MEASURED",
+   "system": "Round-2 brief, 2026-10-08 (raw log attaching)",
+   "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
+   "date": "2026-10-08",
+   "method": "Wall-clock seconds for the full suite, before and after."
+  }
+ ]
+}

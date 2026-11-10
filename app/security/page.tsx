@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import { PointCard, PointGrid, PointItem, StatBlock, StepBlock } from "@/components/w2e/Blocks";
 import stats from "@/lib/stats.json";
+import { Block } from "@/components/SiteBlocks";
+import disclosure from "@/lib/site-data/disclosure.json";
+import { longDate } from "@/lib/provenance";
 
 export const metadata: Metadata = {
   title: "Security and privacy · TITANOS",
@@ -37,6 +40,18 @@ export default function SecurityPage() {
           </PointCard>
         </PointItem>
       </PointGrid>
+      {disclosure.sections.map((s) => (
+        <Block key={s.id} point={s.heading}>
+          <p data-disclosure={s.id}>{s.body}</p>
+          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)" }}>Record: {s.source}</p>
+        </Block>
+      ))}
+      <Block point="Machine readable contact">
+        <p data-disclosure="securitytxt">
+          Contact: <a href={disclosure.securityTxt.contact} style={{ color: "var(--gold)" }}>{disclosure.securityTxt.contact.replace("mailto:", "")}</a>. The same details are published at <a href="/.well-known/security.txt" style={{ color: "var(--gold)" }}>/.well-known/security.txt</a>, which expires {longDate(disclosure.securityTxt.expires.slice(0, 10))}.
+        </p>
+        <p data-provenance="/security" style={{ color: "var(--dim)", fontSize: "var(--fs-sm)" }}>{disclosure.system}, read {longDate(disclosure.asOf)}.</p>
+      </Block>
       <StepBlock text="Ask us anything about how we handle data before you start." href="/contact" label="Ask a question" />
     </>
   );

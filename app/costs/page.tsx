@@ -11,6 +11,7 @@ import SavingsCalculator from "@/components/SavingsCalculator";
 import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
 import { offersByGroup } from "@/lib/offers";
 import { GROUP_LABELS, formatOfferPrice, type OfferGroup } from "@/lib/offers/types";
+import Provenance from "@/components/Provenance";
 
 const META_TITLE = "Prices, costs and savings | TITANOS";
 const META_DESC =
@@ -39,7 +40,7 @@ const CARD: CSSProperties = {
 const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15 };
 
 const SPLIT: [string, string, string][] = [
-  ["99%", "plain code", "Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again."],
+  ["99%", "plain code", "Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again. ESTIMATE: a design ratio, not a measured share."],
   ["1%", "AI", "The AI only does the judgement work: reading, writing and deciding what code cannot."],
   ["One tap", "you", "Anything that sends, spends or commits waits for a person to approve it."],
 ];
@@ -90,6 +91,7 @@ export default function Costs() {
         title="Every price, every cost, all the maths."
         sub="What we offer, how we do business, what it costs to run, and what it can save you, with the working shown. 99% code, 1% AI, and you approve what matters."
       />
+      <Provenance route="/costs" />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
         <div className="w2a-measure" style={WRAP}>
           <FlexNumber f={FLEX.costPerJob} />

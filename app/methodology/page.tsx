@@ -11,6 +11,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import Provenance from "@/components/Provenance";
 
 const SECTION_COUNT = 9;
 
@@ -140,6 +141,7 @@ export default function MethodologyPage() {
         title="How the Security Check Works"
         tagline="No break-in attempts. No password guessing. I only read what your server already announces to the public internet: the same information a hacker can see from their desk."
       />
+      <Provenance route="/methodology" />
       <Bluf>
         The free security check only reads what your business already shows the public internet. It never tries a single door.
       </Bluf>
