@@ -19,6 +19,7 @@ let fail = 0; const ok = (c, m) => { console.log(`${c ? "PASS" : "FAIL"} ${m}`);
 let b;
 try { b = await chromium.launch(); } catch (e) { console.log("SKIP test_guestscan_e2e (no browser): " + String(e.message).split("\n")[0]); srv.close(); process.exit(0); }
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+await ctx.addInitScript(() => { try { localStorage.setItem("titanos.declaration.dismissed.2026-11", "1"); } catch {} });  // keep the declaration popup out of this flow
 const pg = await ctx.newPage();
 const errs = [], external = new Set();
 pg.on("pageerror", (e) => errs.push(String(e)));

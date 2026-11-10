@@ -64,6 +64,7 @@ const base = `http://127.0.0.1:${srv.address().port}`;
 let b;
 try { b = await chromium.launch(); } catch (e) { console.log("SKIP part B (no browser): " + String(e.message).split("\n")[0]); srv.close(); process.exit(0); }
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+await ctx.addInitScript(() => { try { localStorage.setItem("titanos.declaration.dismissed.2026-11", "1"); } catch {} });  // keep the declaration popup out of this flow
 await ctx.addInitScript(() => { window.__beacons = []; navigator.sendBeacon = (url, blob) => { blob.text().then((x) => window.__beacons.push(x)); return true; }; });
 const world = fakeDoh(FIXTURES.find((x) => x.id === "nothing-published").world);
 await ctx.route("**/*", async (route) => {
