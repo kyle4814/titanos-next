@@ -14,7 +14,10 @@
     "render-spy": "node scripts/render_spy.mjs out",
     "build:catalogue": "node --experimental-strip-types --no-warnings scripts/build_shelf_catalogue.mjs",
     "gates:built": "node scripts/run_built_gates.mjs",
-    "kbfocus": "node scripts/obelisk_rendered_keyboard_focus.mjs --out out"
+    "kbfocus": "node scripts/obelisk_rendered_keyboard_focus.mjs --out out",
+    "kbfocus:all": "node scripts/obelisk_rendered_keyboard_focus.mjs --out out --all --report out_allpages_kbfocus.json",
+    "allpages:merge": "node scripts/merge_allpages_reports.mjs --out out",
+    "printmotion:all": "node scripts/obelisk_rendered_print_motion.mjs --out out --all --report out_allpages_print_motion.json"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.81",

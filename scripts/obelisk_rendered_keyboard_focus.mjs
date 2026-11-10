@@ -11,7 +11,12 @@
 //   ESCAPE           a dialog/menu opened by keyboard must close on Escape (aria-expanded false / dialog gone)
 // Zero model calls, localhost only (every non-localhost request is aborted), synthetic fixtures for the self-test.
 // Usage: node scripts/obelisk_rendered_keyboard_focus.mjs [--out out] [--pages /a,/b] [--viewports desktop,mobile] [--json] [--receipt path]
+//   --all (f414): enumerate EVERY exported page from --out (no hand list), sweep both viewports with bounded concurrency
+//   (--concurrency N, default 3, one browser per worker), write --report FILE (pages_total / pages_swept / per-page defects), and
+//   exit 4 "KBFOC COVERAGE FAILED" if pages_swept < pages_total. Only scripts/allpages_allowlist.json (route + reason) may skip a page.
+//   --mutate-drop ROUTE is a TEST HOOK that drops one route from the sweep list; the independent total must catch it.
 // Exit 0 clean (or labelled SKIP when chromium/playwright is absent), 1 violations or a requested page missing, 2 usage.
+import { shardOf, enumerateAllPages, loadAllowlist, coverage, mapLimit, allFlags, ALLFLAGS, writeReport } from "./lib/allpages.mjs";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 
 export const DEFAULT_PAGES = ["/", "/scan", "/pricing", "/app", "/pro", "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/investors", "/sectors"];
@@ -179,7 +184,7 @@ async function sweepPage(browser, base, page, vpName) {
 }
 
 /** Run the sweep. Returns { skipped?, results[], missing[], uncovered[] }. */
-export async function run({ out = "out", pages = DEFAULT_PAGES, viewports = ["desktop", "mobile"] } = {}) {
+export async function run({ out = "out", pages = DEFAULT_PAGES, viewports = ["desktop", "mobile"], concurrency = 1 } = {}) {
   const root = path.resolve(out);
   let chromium;
   const has = (d) => { try { return fs.readdirSync(d).some((x) => x.startsWith("chromium")); } catch { return false; } };
@@ -191,13 +196,13 @@ export async function run({ out = "out", pages = DEFAULT_PAGES, viewports = ["de
   });
   await new Promise((r) => srv.listen(0, "127.0.0.1", r));
   const base = `http://127.0.0.1:${srv.address().port}`;
-  let browser; try { browser = await chromium.launch(); } catch (e) { srv.close(); return { skipped: "chromium absent: " + String(e.message).split("\n")[0] }; }
-  const results = []; const missing = [];
-  for (const p of pages) {
-    if (!resolveFile(root, p)) { missing.push(p); continue; }
-    for (const vp of viewports) results.push(await sweepPage(browser, base, p, vp));
-  }
-  await browser.close(); srv.close();
+  const nWorkers = Math.max(1, Math.min(concurrency, pages.length * viewports.length || 1));
+  let browsers; try { browsers = await Promise.all(Array.from({ length: nWorkers }, () => chromium.launch())); } catch (e) { srv.close(); return { skipped: "chromium absent: " + String(e.message).split("\n")[0] }; }
+  const missing = pages.filter((p) => !resolveFile(root, p));
+  const tasks = []; for (const p of pages) if (!missing.includes(p)) for (const vp of viewports) tasks.push([p, vp]);
+  // one browser per worker (focus emulation is per-browser), tasks pulled from a shared queue; results keep input order
+  const results = await mapLimit(tasks, nWorkers, ([p, vp], w) => sweepPage(browsers[w], base, p, vp));
+  await Promise.all(browsers.map((b) => b.close())); srv.close();
   // uncovered: exported html pages in out/ that this sweep did not touch (top-level doors only counted by path)
   const all = []; const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const f = path.join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name.endsWith(".html")) all.push("/" + path.relative(root, f).replace(/(^|\/)index\.html$/, "").replace(/\.html$/, "")); } };
   try { walk(root); } catch {}
@@ -209,15 +214,22 @@ export async function run({ out = "out", pages = DEFAULT_PAGES, viewports = ["de
 const argv = process.argv.slice(2);
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const arg = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
-  const known = new Set(["--out", "--pages", "--viewports", "--json", "--receipt"]);
+  const known = new Set(["--out", "--pages", "--viewports", "--json", "--receipt", ...ALLFLAGS]);
   for (const a of argv) if (a.startsWith("--") && !known.has(a)) { console.error("usage: obelisk_rendered_keyboard_focus.mjs [--out out] [--pages /a,/b] [--viewports desktop,mobile] [--json] [--receipt file]"); process.exit(2); }
   const outDir = arg("--out", "out");
   if (!fs.existsSync(outDir)) { console.error(`KBFOC FAILED no such directory ${outDir}`); process.exit(2); }
-  const pages = arg("--pages", "") ? arg("--pages").split(",") : DEFAULT_PAGES;
+  const fl = allFlags(argv);
+  let pages = arg("--pages", "") ? arg("--pages").split(",") : DEFAULT_PAGES;
+  if (fl.all) {
+    const allow = new Set(loadAllowlist(fl.allowlist).entries.map((e) => e.route));
+    pages = enumerateAllPages(outDir).filter((p) => !allow.has(p));
+    pages = shardOf(pages, fl.shard);
+    if (fl.drop) pages = pages.filter((p) => p !== fl.drop);
+  }
   const viewports = arg("--viewports", "desktop,mobile").split(",");
   for (const v of viewports) if (!VIEWPORTS[v]) { console.error("unknown viewport " + v); process.exit(2); }
-  const r = await run({ out: outDir, pages, viewports });
-  if (r.skipped) { console.log("KBFOC SKIP " + r.skipped); process.exit(0); }
+  const r = await run({ out: outDir, pages, viewports, concurrency: fl.all ? fl.concurrency : 1 });
+  if (r.skipped) { console.log("KBFOC SKIP " + r.skipped); if (fl.all) { console.log("KBFOC COVERAGE FAILED nothing swept (--all cannot SKIP)"); process.exit(4); } process.exit(0); }
   const viol = r.results.flatMap((x) => x.violations.map((v) => ({ page: x.page, vp: x.vp, ...v })));
   if (argv.includes("--json")) console.log(JSON.stringify({ ...r, violations: viol }, null, 1));
   else {
@@ -227,6 +239,20 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     if (r.uncovered.length) console.log(`UNCOVERED exported pages: ${r.uncovered.length}`);
   }
   if (arg("--receipt", "")) fs.writeFileSync(arg("--receipt"), JSON.stringify({ results: r.results, missing: r.missing, uncovered: r.uncovered }, null, 1));
+  if (fl.all) {
+    // a page counts as swept only if EVERY requested viewport produced a result for it with no harness ERROR
+    const okPages = pages.filter((p) => viewports.every((vp) => r.results.some((x) => x.page === p && x.vp === vp && !x.violations.some((v) => v.code === "ERROR"))));
+    const cov = coverage({ outDir, swept: okPages, allowlistFile: fl.allowlist, shard: fl.shard });
+    const perPage = pages.map((p) => ({ route: p, swept: okPages.includes(p), viewports: viewports, defects: r.results.filter((x) => x.page === p).flatMap((x) => x.violations.map((v) => `${v.code} [${x.vp}] ${v.detail}`)) }));
+    if (fl.report) writeReport(fl.report, { probe: "keyboard_focus", cov, perPage });
+    console.log(`ALLPAGES keyboard_focus pages_enumerated=${cov.pages_enumerated} allowlisted=${cov.pages_allowlisted} pages_total=${cov.pages_total} pages_swept=${cov.pages_swept} with_defects=${perPage.filter((x) => x.defects.length).length}`);
+    if (!cov.ok) {
+      for (const p of cov.not_swept) console.log("   NOT SWEPT " + p);
+      for (const p of cov.problems) console.log("   PROBLEM " + p);
+      console.log(`KBFOC COVERAGE FAILED swept ${cov.pages_swept} of ${cov.pages_total}`);
+      process.exit(4);
+    }
+  }
   const failed = viol.length > 0 || r.missing.length > 0;
   console.log(failed ? `KBFOC FAILED ${viol.length} violations, ${r.missing.length} missing pages` : `KBFOC OK ${r.results.length} page-viewport sweeps clean`);
   process.exit(failed ? 1 : 0);
