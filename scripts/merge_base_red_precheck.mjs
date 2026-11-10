@@ -90,6 +90,13 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const baseRef = a[0];
   if (!baseRef || baseRef.startsWith("--")) { console.error("usage: merge_base_red_precheck.mjs <baseRef> [--out f] [--out-dir d] [--gates spec] [--repo p]"); process.exit(2); }
   const repo = opt("--repo") || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  // SOAK RULE (f412): a merge while a soak pin is live restarts the soak. --soak-pin <PIN.json> [--accept-restart] [--soak-marker f]; fail closed, exit 1.
+  if (opt("--soak-pin")) {
+    const { mergeGate } = await import("./soak_pin_wire.mjs");
+    const g = mergeGate({ pin: opt("--soak-pin"), repo, marker: opt("--soak-marker") || undefined, acceptRestart: a.includes("--accept-restart") });
+    console.log(g.line);
+    if (g.code !== 0) process.exit(1);
+  }
   const gates = opt("--gates") ? parseGates(opt("--gates")) : DEFAULT_GATES;
   const v = run({ baseRef, repo, outDir: opt("--out-dir"), gates, build: a.includes("--build") });
   const json = JSON.stringify(v, null, 2);
