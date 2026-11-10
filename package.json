@@ -13,7 +13,8 @@
     "mailto-sweep": "node scripts/mailto_order_sweep.mjs",
     "render-spy": "node scripts/render_spy.mjs out",
     "build:catalogue": "node --experimental-strip-types --no-warnings scripts/build_shelf_catalogue.mjs",
-    "gates:built": "node scripts/run_built_gates.mjs"
+    "gates:built": "node scripts/run_built_gates.mjs",
+    "gate:reduced-motion": "node scripts/reduced_motion_gate.mjs --table && node scripts/test_reduced_motion_gate.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.81",

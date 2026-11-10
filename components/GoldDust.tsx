@@ -132,7 +132,7 @@ export default function GoldDust() {
   return (
     <canvas
       ref={canvasRef}
-      aria-hidden="true"
+      aria-hidden="true" data-no-print
       style={{
         position: "fixed",
         inset: 0,

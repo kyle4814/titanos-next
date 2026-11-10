@@ -64,3 +64,4 @@ ol.list li::marker { font-family: var(--font-mono, monospace); font-size: 0.9em;
   .feature .excerpt { font-size: var(--fs-body); max-width: 62ch; }
 }
 @media (prefers-reduced-motion: reduce) { .card, .arrow, .ctitle { transition: none; } }
+@media print { .progress { display: none !important; } }

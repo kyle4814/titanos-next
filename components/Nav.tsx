@@ -208,12 +208,14 @@ export default function Nav() {
                   pointerEvents: "auto",
                 }}
                 aria-hidden="true"
+                data-no-print
               />
 
               {/* Drawer panel */}
               <motion.div
                 key="drawer"
                 id="nav-drawer"
+                data-no-print
                 role="dialog"
                 aria-modal="true"
                 aria-label="Site navigation"

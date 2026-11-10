@@ -38,7 +38,7 @@ export default function VaultBackground() {
           CSS animation. Layered with screen blend so they tint the
           base canvas without overpowering it. */}
       <div
-        aria-hidden="true"
+        aria-hidden="true" data-no-print
         className="vault-mesh"
         style={{
           position: "fixed",
