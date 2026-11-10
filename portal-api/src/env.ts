@@ -36,5 +36,7 @@ export interface Env {
   STRIPE_SECRET_KEY?: string;      // never echoed
   STRIPE_WEBHOOK_SECRET?: string;  // never echoed
   INTERNAL_API_SECRET?: string;    // never echoed
+  SSO_SEAL_KEYS?: string;          // JSON keyring for sealing SSO client secrets (never echoed); absent = SSO config answers 503
+  DEV_OUTBOX?: string;             // TEST MODE only: "1" parks outgoing mail in the dev_outbox table (0025); refused when STRIPE_MODE is "live"
   ESTATE_KV?: { get(key: string): Promise<string | null>; put(key: string, value: string, opts?: { expirationTtl?: number }): Promise<void> };  // C8 f321: optional KV namespace for the estate cache + refresh limiter; absent = Memory adapters
 }

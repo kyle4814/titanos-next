@@ -6,6 +6,9 @@ compatibility_date = "2026-11-01"
 [vars]
 STRIPE_MODE = "test"
 TITANOS_SITE_ORIGIN = "https://titanos.tech"
+# TEST MODE ONLY (2026-11-10): no mail transport is bound, so login mail is parked in the D1 dev_outbox table (migration 0025)
+# and read by the operator through wrangler. buildDeps refuses this with STRIPE_MODE="live". Remove when a real mailer is bound.
+DEV_OUTBOX = "1"
 
 [[d1_databases]]
 binding = "DB"
