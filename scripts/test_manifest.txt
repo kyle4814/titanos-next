@@ -153,3 +153,4 @@ node scripts/test_import_cycles.mjs
 bash scripts/test_obelisk_kill_matrix.sh
 bash scripts/test_c6_holdout_verify.sh
 node --experimental-strip-types --no-warnings scripts/test_c5_ungraded_verify.mjs
+node scripts/test_soak_pin_matrix_gate.mjs
