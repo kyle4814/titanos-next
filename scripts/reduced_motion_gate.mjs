@@ -204,6 +204,13 @@ export function checkPrint(tree, per, layoutSet) {
     if (/position:\s*["']fixed["']/.test(t) && !/data-no-print/.test(t) && !printRules.some((r) => r.file === f && hides(r.decls)) && !f.includes("/demo/")) fixedFiles.push(f);
   }
   for (const f of fixedFiles) fails.push({ rule: "PR3", file: f, msg: "inline position:fixed element without data-no-print or a print hide rule" });
+  // PR6 (f410): the fixed decorative layers the rendered probe found on every page must stay hidden in print by name,
+  // so removing the rule fails even if a component loses its data-no-print. Labelled canvases carry data and are not hidden.
+  const hid = hiddenSels(printRules).join(" , ");
+  for (const need of [".vault-mesh", "canvas", ".finder-fab", ".music-toggle", ".fx-thread"]) {
+    if (!hid.includes(need)) fails.push({ rule: "PR6", file: "app/globals.css", msg: `print stylesheet no longer hides "${need}" (rendered probe f406: fixed layer prints on every page)` });
+  }
+  if (/canvas(?![:\[])/.test(hid.replace(/canvas:not\(\[aria-label\]\)/g, ""))) fails.push({ rule: "PR6", file: "app/globals.css", msg: "print hides every canvas, labelled data canvases need a static fallback" });
   // PR4 clipping
   const clipFix = global.some((r) => r.sels.some((s) => /^(html|body|html, body|\*)$/.test(s) || ["html", "body"].includes(s)) && r.decls.some((d) => d.prop === "overflow" && /^visible/.test(d.value)) && r.decls.some((d) => d.prop === "height" && /^auto/.test(d.value)));
   if (!clipFix) fails.push({ rule: "PR4", file: "app/globals.css", msg: "print stylesheet does not set html/body overflow:visible + height:auto (content can be clipped)" });
