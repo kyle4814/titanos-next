@@ -16,8 +16,8 @@ const SITE = "https://titanos.tech";
 export function printHtml() {
   const caseHtml = D.CASE_LIST.map((c) => `<div class="card"><p class="meta">${esc(c.sector)} · ${esc(c.label)}</p><p class="ct">${esc(c.title)}</p><ul>${c.facts.map(([v, t]) => `<li><b>${esc(v)}</b> ${esc(t)}</li>`).join("")}</ul><p class="meta">${SITE}${esc(c.href)}</p></div>`).join("");
   const courses = D.COURSES.map((c) => {
-    const url = D.COURSE_LINKS[c.id];
-    return `<div class="card"><p class="ct">${esc(c.title)}</p><p>${esc(c.blurb)}</p><p class="meta">${url ? esc(url) : `Join the waitlist at ${SITE}${D.DECLARATION_PATH}#courses`}. Case study: ${SITE}/case-studies/${esc(c.caseSlug)}</p></div>`;
+    const a = D.courseAction(c); const url = a.kind === "link" ? a.url : null;
+    return `<div class="card"><p class="ct">${esc(c.title)}</p><p>${esc(c.blurb)}</p><p class="meta">${url ? `Sign up: ${esc(url)}` : `Join the waitlist at ${SITE}${D.DECLARATION_PATH}#courses`}. Case study: ${SITE}/case-studies/${esc(c.caseSlug)}</p></div>`;
   }).join("");
   const rows = D.FIGURES.map((f) => `<tr><td>${esc(f.value)}</td><td>${esc(f.status)}</td><td>${esc(f.source)}. ${esc(f.method)}</td><td>${esc(f.asOf)}</td></tr>`).join("");
   return `<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>${esc(D.HEADLINE)} | TITANOS</title><style>

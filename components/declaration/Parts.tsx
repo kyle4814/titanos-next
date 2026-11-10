@@ -1,6 +1,6 @@
 // Shared presentational pieces of the declaration. Every string comes from lib/declaration.ts (the one content source).
 import Link from "next/link";
-import { ACHIEVEMENTS, CAPABILITY, CASE_LIST, CASES_NOTE, COURSES, COURSE_LINKS, FIGURES, METHOD, METHOD_NOTE, SUBSCRIPTIONS, SUBSCRIPTIONS_NOTE, APPENDIX_CASES, APPENDIX_INTRO, STILL_UNKNOWN, PDF_PATH, PDF_NAME } from "@/lib/declaration";
+import { ACHIEVEMENTS, CAPABILITY, CASE_LIST, CASES_NOTE, COURSES, courseAction, FIGURES, METHOD, METHOD_NOTE, SUBSCRIPTIONS, SUBSCRIPTIONS_NOTE, APPENDIX_CASES, APPENDIX_INTRO, STILL_UNKNOWN, PDF_PATH, PDF_NAME } from "@/lib/declaration";
 import SubscribeForm from "./SubscribeForm";
 import s from "./declaration.module.css";
 
@@ -48,17 +48,17 @@ export function CourseCards() {
   return (
     <div className={s.grid} data-course-cards>
       {COURSES.map((c) => {
-        const url = COURSE_LINKS[c.id];
+        const act = courseAction(c);
         return (
           <div key={c.id} className={s.card} data-course={c.id}>
             <p className={s.cardTitle}>{c.title}</p>
             <p className={s.small}>{c.blurb}</p>
-            {url ? (
-              <a className={s.btn} href={url} rel="noopener noreferrer">Sign up</a>
+            {act.kind === "link" ? (
+              <a className={s.btn} href={act.url} rel="noopener noreferrer">Sign up</a>
             ) : (
               <details className={s.details} data-waitlist>
                 <summary>Join the waitlist</summary>
-                <SubscribeForm tag={`course-${c.caseSlug}`} source="declaration-waitlist" label="Join the waitlist" />
+                <SubscribeForm tag={act.tag} source={act.source} label="Join the waitlist" />
               </details>
             )}
             <p className={s.small} style={{ margin: "8px 0 0" }}><Link className={s.link} href={`/case-studies/${c.caseSlug}`}>See how it was built</Link></p>
