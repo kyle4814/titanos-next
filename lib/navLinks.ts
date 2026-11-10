@@ -13,6 +13,10 @@ export type NavItem = { label: string; href: string; external: boolean };
 
 // Drawer (mobile) shows every door. Offers and the finder lead.
 export const LINKS: NavItem[] = [
+  { label: "Your account (sign in)", href: "/app", external: false },
+  { label: "For business (Enterprise)", href: "/enterprise", external: false },
+  { label: "For pros", href: "/pro", external: false },
+  { label: "For AI agents", href: "/agents", external: false },
   { label: "Find your offer", href: "/find", external: false },
   { label: "All offers", href: "/offers", external: false },
   { label: "Shop", href: "/shop", external: false },
