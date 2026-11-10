@@ -244,9 +244,9 @@ test("enumerator mutant: a planted router line is picked up, so a new route can 
 });
 
 // f368: the STATE CHANGED check for the owner rejections the route fuzz cannot reach on its own (they need an applied fix and a tampered zone first).
-test("owner rejected paths (undo already_reverted, undo zone_changed_since, fix not_open, fix unknown_check): no state change, synthetic data", async () => {
+test("owner rejected paths (f368 four + f375 scan_too_soon, fix invalid_check, undo no_such_fix, fix no_zone, undo no_zone): no state change, synthetic data", async () => {
   const R = await buildOwnerRejectRig(STORE_KIND);
   const cs = await ownerRejectedPaths(R);
-  assert.equal(cs.length, 4, "all four owner rejections were reached");
+  assert.equal(cs.length, 9, "all nine owner rejections were reached");
   assert.deepEqual(cs.filter((c) => c.changed).map((c) => c.path), [], "STATE CHANGED on a rejected request");
 });

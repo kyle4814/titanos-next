@@ -11,12 +11,12 @@ const dumpD1 = (d: FakeD1) => Object.fromEntries((d.db.prepare("SELECT name FROM
   .map((t) => [t.name, (d.db.prepare(`SELECT * FROM "${t.name}"`).all() as unknown[]).map((r) => JSON.stringify(r)).sort()]));
 
 export async function buildOwnerRejectRig(kind: "memory" | "d1"): Promise<OwnerRejectRig & { rev: () => Promise<number | undefined> }> {
-  const domain = "rej368.com.au", d1 = kind === "d1" ? new FakeD1() : undefined;
+  let connected = true; const domain = "rej368.com.au", d1 = kind === "d1" ? new FakeD1() : undefined;
   const h = make();
   const zone = new MemoryZone(healthy(domain));
   zone.world.txt![domain] = ["v=spf1 include:_spf.google.com ~all"];
   const store = d1 ? new D1OwnerStore(d1, () => h.clock.t) : new MemoryOwnerStore();
-  h.deps.owner = { store, doh: () => zone.doh, zones: { zoneFor: (x) => (x === domain ? zone : undefined) } };
+  h.deps.owner = { store, doh: () => zone.doh, zones: { zoneFor: (x) => (x === domain && connected ? zone : undefined) } };
   const me = await h.login("rej368@example.com");
   const { d } = await h.verifiedDomain(me.session, domain);
   if (d1) {   // the owner store is D1 (FakeD1, real migrations, FK ON); its FK parents are seeded to match the Worker store's ids
@@ -26,6 +26,8 @@ export async function buildOwnerRejectRig(kind: "memory" | "d1"): Promise<OwnerR
   return {
     req: h.req, token: me.session, domainId: d.id, domain, zone, clock: h.clock,
     snap: () => snapshot(d1 ? dumpD1(d1) : store, h.store, zone.world),
+    zoneConnected: (on: boolean) => { connected = on; },
+    audit: async () => { const s = await store.get(d.id); return JSON.stringify({ events: s?.events ?? null, fixes: s?.fixes ?? null }); },
     rev: async () => (await store.get(d.id))?.rev,
   };
 }
