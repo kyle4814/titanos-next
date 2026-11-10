@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import StepCards from "@/components/w2a/StepCards";
 import { NumberBlock, NextStep } from "@/components/SiteBlocks";
 import stats from "@/lib/stats.json";
+import { HowSections } from "@/components/home/MovedSections";
 
 export const metadata: Metadata = {
   title: "How it works · TITANOS",
@@ -32,6 +33,7 @@ export default function HowItWorksPage() {
           { title: "Step three: we hand back a short list of changes.", body: "Your IT provider stays in charge, nobody is replaced, and you decide what happens next." },
         ]}
       />
+      <HowSections />
       <NextStep text="See step one on your own domain, free." href="/scan" label="Run the free scan" />
     </>
   );

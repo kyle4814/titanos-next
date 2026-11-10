@@ -14,6 +14,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import { WhatWeBuild } from "@/components/home/MovedSections";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;
@@ -277,6 +278,7 @@ export default function AiDeliveryPage() {
 
       <div className="divider-gold" />
 
+      <WhatWeBuild />
       {/* FINAL CTA */}
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />

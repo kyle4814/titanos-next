@@ -8,6 +8,7 @@ import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX, type Flex } from "@/lib/flex";
 import Tiles, { type TileItem } from "@/components/proof/Tiles";
 import Provenance from "@/components/Provenance";
+import { ProofCharts } from "@/components/home/MovedSections";
 
 const REPLAY: Flex = {
   big: "250 of 250 tests, 57 saved versions",
@@ -150,6 +151,7 @@ done`}</code>
           </div>
         </div>
       </section>
+      <ProofCharts />
     </div>
   );
 }

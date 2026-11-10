@@ -55,7 +55,7 @@ if (bi > 0) {
   // the whole generated ledger joins the pool (its dates too: the fleet card shows the ledger's own date, 2026-10-09
   // failed the gate because only the ledger's values were pooled). Still generated, never hand-typed.
   const pool = JSON.stringify(data).replace(/\\"/g, '"') + " " + JSON.stringify(ledger) + " " + fmts.join(" ");
-  const pages = [["index.html", ["cost-curve", "loop", "proof-wall"]], ["proof.html", ["proof-wall"]], ["learning-loop.html", ["loop"]]];
+  const pages = [["proof.html", ["cost-curve", "proof-wall"]], ["learning-loop.html", ["loop"]]];
   for (const [file, regions] of pages) {
     const p = `${dir}/${file}`;
     if (!existsSync(p)) { ok(false, `${file} exists in build`); continue; }
