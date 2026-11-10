@@ -79,6 +79,7 @@ ok(/role="dialog"/.test(pop) && /aria-modal="true"/.test(pop) && /aria-labelledb
 ok(/e\.key === "Escape"/.test(pop) && /e\.key !== "Tab"/.test(pop) && /\.focus\(\)/.test(pop), "popup closes on Esc, traps Tab and manages focus");
 ok(/aria-label="Close the declaration"/.test(pop) && /data-close/.test(pop), "popup has an X close button");
 ok(/try \{ return window\.localStorage/.test(pop) && /try \{ window\.localStorage\.setItem/.test(pop) && /catch/.test(pop), "localStorage reads and writes are wrapped in try/catch");
+ok(/navigator\.webdriver === true/.test(pop) && /declaration"\) !== "show"/.test(pop), "popup stands down for automation unless ?declaration=show");
 ok(/DECLARATION_PATH/.test(pop) && /onDeclaration/.test(pop), "popup is suppressed on /declaration");
 ok(/prefers-reduced-motion: reduce/.test(read("components/declaration/declaration.module.css")), "entrance motion is switched off for reduced motion");
 ok(/declaration\/DeclarationPopup/.test(read("components/DeferredShell.tsx")), "popup is mounted through the deferred shell (own chunk)");

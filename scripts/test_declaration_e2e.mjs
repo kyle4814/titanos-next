@@ -22,7 +22,7 @@ try {
   // 1 first visit: popup renders as a modal dialog with the content
   const ctx = await browser.newContext({ viewport: { width: 390, height: 800 } });
   const page = await ctx.newPage();
-  await page.goto(base + "/", { waitUntil: "load" });
+  await page.goto(base + "/?declaration=show", { waitUntil: "load" });
   await page.waitForSelector(DLG, { timeout: 15000 }).catch(() => {});
   ok(await page.locator(DLG).count() === 1, "popup renders on first visit");
   ok((await page.locator(DLG).getAttribute("aria-modal")) === "true", "popup is aria-modal");
@@ -34,6 +34,10 @@ try {
   let inside = true;
   for (let i = 0; i < 40; i++) { await page.keyboard.press("Tab"); inside = inside && (await page.evaluate(() => !!document.activeElement?.closest("[role=dialog]"))); }
   ok(inside, "Tab stays inside the dialog (focus trap)");
+  // 2b an automated browser without the show flag gets no popup (so other browser tests are not blocked)
+  const pa = await (await browser.newContext()).newPage();
+  await pa.goto(base + "/", { waitUntil: "load" }); await pa.waitForTimeout(1500);
+  ok(await pa.locator(DLG).count() === 0, "automation (navigator.webdriver) without ?declaration=show sees no popup");
   // 3 X dismisses and is remembered across a reload
   await page.locator("[data-close]").click();
   ok(await page.locator(DLG).count() === 0, "X closes the popup");
@@ -42,19 +46,19 @@ try {
   ok(await page.locator(DLG).count() === 0, "popup does not return after a reload (remembered)");
   // 4 Esc closes
   const p2 = await (await browser.newContext()).newPage();
-  await p2.goto(base + "/", { waitUntil: "load" }); await p2.waitForSelector(DLG, { timeout: 15000 });
+  await p2.goto(base + "/?declaration=show", { waitUntil: "load" }); await p2.waitForSelector(DLG, { timeout: 15000 });
   await p2.keyboard.press("Escape");
   ok(await p2.locator(DLG).count() === 0, "Esc closes the popup");
   // 5 not shown on /declaration, which is a normal page with the content
   const p3 = await (await browser.newContext()).newPage();
-  await p3.goto(base + "/declaration", { waitUntil: "load" }); await p3.waitForTimeout(1500);
+  await p3.goto(base + "/declaration?declaration=show", { waitUntil: "load" }); await p3.waitForTimeout(1500);
   ok(await p3.locator(DLG).count() === 0, "popup is not shown on /declaration");
   ok(await p3.locator("h1").innerText().then((x) => /final business declaration/i.test(x)), "/declaration renders its headline");
   // 6 storage that throws must not break anything: popup still shows once, closes, no page error
   const ctx4 = await browser.newContext();
   await ctx4.addInitScript(() => { const boom = () => { throw new DOMException("blocked", "SecurityError"); }; Object.defineProperty(window, "localStorage", { get: boom }); });
   const p4 = await ctx4.newPage(); const errs = []; p4.on("pageerror", (e) => errs.push(String(e)));
-  await p4.goto(base + "/", { waitUntil: "load" }); await p4.waitForSelector(DLG, { timeout: 15000 });
+  await p4.goto(base + "/?declaration=show", { waitUntil: "load" }); await p4.waitForSelector(DLG, { timeout: 15000 });
   await p4.locator("[data-close]").click();
   ok(await p4.locator(DLG).count() === 0 && !errs.some((e) => /localStorage|SecurityError|blocked/.test(e)), "blocked localStorage: popup still opens and closes with no page error");
   // 7 mailing-list signup posts consent (the course-tag waitlist branch is covered in test_declaration.mjs via courseAction) (network intercepted, nothing leaves the machine)

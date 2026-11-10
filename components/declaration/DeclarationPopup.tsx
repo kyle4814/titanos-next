@@ -16,6 +16,11 @@ import s from "./declaration.module.css";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 
+/** Browsers driven by automation (navigator.webdriver) are not visitors: skip the popup so site probes and browser tests are not blocked by it.
+ *  ?declaration=show forces it on, which is how the popup's own browser test sees it. Real visitors and crawlers are unaffected. */
+function suppressedForAutomation(): boolean {
+  try { return navigator.webdriver === true && new URLSearchParams(window.location.search).get("declaration") !== "show"; } catch { return false; }
+}
 function wasDismissed(): boolean {
   try { return window.localStorage.getItem(DISMISS_KEY) === "1"; } catch { return false; }
 }
@@ -32,7 +37,7 @@ export default function DeclarationPopup() {
 
   useEffect(() => {
     if (onDeclaration) { setOpen(false); return; }
-    if (!wasDismissed()) { opener.current = document.activeElement; setOpen(true); }
+    if (!suppressedForAutomation() && !wasDismissed()) { opener.current = document.activeElement; setOpen(true); }
   }, [onDeclaration]);
 
   const close = useCallback(() => {
