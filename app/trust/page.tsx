@@ -32,7 +32,7 @@ export default function Trust() {
           {s.links && (
             <p>
               {s.links.map(([href, text]) => (
-                <a key={href} href={href} style={{ color: "var(--gold)", marginRight: 16 }}>{text}</a>
+                <a key={href} href={href} className="tap-pad" style={{ color: "var(--gold)", marginRight: 16 }}>{text}</a>
               ))}
             </p>
           )}

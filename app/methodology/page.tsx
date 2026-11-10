@@ -70,6 +70,7 @@ const VERIFY: VerifyKey[] = [
         Confirm <strong style={{ color: "var(--gold)" }}>34 318 502 254</strong> at{" "}
         <a
           href="https://abr.business.gov.au/"
+          className="tap-pad"
           target="_blank"
           rel="noopener noreferrer"
           style={{ color: "var(--ice)" }}
@@ -97,12 +98,12 @@ const VERIFY: VerifyKey[] = [
     body: (
       <>
         Email{" "}
-        <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+        <a href="mailto:kyle@titanos.tech" className="tap-pad" style={{ color: "var(--ice)" }}>
           kyle@titanos.tech
         </a>{" "}
         directly to confirm any communication is genuine. (This is the footer/about
         contact mention. Not a scan request route. Use the form on{" "}
-        <a href="/scan#request" style={{ color: "var(--ice)" }}>/scan</a> for that.)
+        <a href="/scan#request" className="tap-pad" style={{ color: "var(--ice)" }}>/scan</a> for that.)
       </>
     ),
   },
@@ -332,15 +333,15 @@ export default function MethodologyPage() {
           </p>
           <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
             Beyond the free check, two paid engagements:{" "}
-            <a href="/compliance" style={{ color: "var(--ice)" }}>
+            <a href="/compliance" className="tap-pad" style={{ color: "var(--ice)" }}>
               Privacy Act Compliance (done with you)
             </a>{" "}
             (done with you) and{" "}
-            <a href="/ai-delivery" style={{ color: "var(--ice)" }}>
+            <a href="/ai-delivery" className="tap-pad" style={{ color: "var(--ice)" }}>
               AI Implementation for Business
             </a>{" "}
             (project-quoted). Both are listed at{" "}
-            <a href="/" style={{ color: "var(--ice)" }}>
+            <a href="/" className="tap-pad" style={{ color: "var(--ice)" }}>
               titanos.tech
             </a>
             .
