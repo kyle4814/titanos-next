@@ -9,6 +9,7 @@
 // Writes only the --ledger file. No network.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
+import { deriveRows, factTexts, checkLedger, DERIVED_KEYS, SOURCE_EXPORTER } from "./ledger_derive.mjs";
 
 // ledger key -> NUMBERS.json key. Explicit on purpose: nothing is matched by guesswork.
 export const MAP = {
@@ -56,6 +57,33 @@ export function regen(ledger, numbers, baselineTs) {
   }
   const out = { ...ledger, n };
   if (moved.size) out.numbers_as_of = srcTs;
+  // f393: derived rows recompute from the (refreshed) source rows by the formulas recovered from bin/site_ledger_export.py @ b857355428,
+  // stamped MODELLED with the formula text and the source ts of estate_ey (the input that moves them); inputs_as_of lists every input's own date.
+  // Any input missing = the DERIVED-STALE report above stands and the rows are left alone (UNKNOWN, never invented).
+  const d = deriveRows(n);
+  if (d) {
+    const stampTs = n.estate_ey.as_of;
+    const rep = (k) => report.find((r) => r.key === k);
+    for (const k of DERIVED_KEYS) {
+      const cur = n[k]; if (!cur) continue;
+      const nx = d[k];
+      if (cur.value === nx.value && cur.method === nx.method) { rep(k).status = "UNMOVED"; continue; }
+      n[k] = { ...cur, value: nx.value, method: nx.method, as_of: stampTs, measured: stampTs.slice(0, 10), inputs_as_of: Object.fromEntries(["estate_ey", "span_days"].filter((x) => n[x]).map((x) => [x, n[x].as_of])), formula_source: SOURCE_EXPORTER };
+      if (k !== "elapsed_months" && k !== "compute_build_total_aud") n[k].label = "MODELLED";
+      const r = rep(k); r.status = "DERIVED-UPDATED"; r.old = cur.value; r.new = nx.value;
+    }
+    out.rate_note = d._rate;
+    const ft = factTexts(n, ledger.facts);
+    if (Object.keys(ft).length) {
+      out.facts = { ...ledger.facts };
+      for (const [fid, t] of Object.entries(ft)) {
+        const cur = ledger.facts[fid];
+        if (cur.text === t.text && (!t.method || cur.method === t.method)) continue;
+        out.facts[fid] = { ...cur, text: t.text, ...(t.method ? { method: t.method } : {}), as_of: stampTs };
+        report.push({ key: `facts.${fid}`, status: "FACT-REGEN", old: cur.text, new: t.text });
+      }
+    }
+  }
   return { ledger: out, report, srcTs, baselineTs };
 }
 
@@ -65,8 +93,21 @@ export function table(report, srcPath) {
   const lines = [w("ROW", 26) + w("OLD", 12) + w("NEW", 12) + w("STATUS", 30) + "SOURCE"];
   for (const r of rows) lines.push(w(r.key, 26) + w(r.old, 12) + w(r.new ?? "-", 12) + w(r.status, 30) + srcPath + (r.note ? ` (${r.note})` : ""));
   const c = (p) => report.filter((r) => r.status.startsWith(p)).length;
-  lines.push(`UPDATED ${c("UPDATED")}  UNMOVED ${c("UNMOVED")}  UNKNOWN ${c("UNKNOWN")}  HELD ${c("HELD")}  DERIVED-STALE ${c("DERIVED")}  UNMAPPED ${c("UNMAPPED")}`);
+  lines.push(`UPDATED ${c("UPDATED")}  UNMOVED ${c("UNMOVED")}  UNKNOWN ${c("UNKNOWN")}  HELD ${c("HELD")}  DERIVED-UPDATED ${c("DERIVED-UPDATED")}  DERIVED-STALE ${c("DERIVED-STALE")}  FACT-REGEN ${c("FACT-REGEN")}  UNMAPPED ${c("UNMAPPED")}`);
   return lines.join("\n");
+}
+
+/** --check: internal consistency of the ledger file only (no kernel read). Exit 0 green, 1 red. */
+function check(ledgerPath) {
+  const lr = rd(ledgerPath);
+  if (lr.err) { console.error(`ERROR ledger: ${lr.err}`); process.exit(2); }
+  const bad = checkLedger(lr.v);
+  const hud = rd(new URL("../lib/hud/numbers.json", import.meta.url).pathname);
+  if (!hud.err && hud.v?.rows?.engineer_years && lr.v.n?.estate_ey && hud.v.rows.engineer_years.value !== lr.v.n.estate_ey.value) {
+    console.log(`WARN lib/hud/numbers.json (separate HUD snapshot, ts ${hud.v.snapshot_ts}) shows engineer_years ${hud.v.rows.engineer_years.value} vs ledger estate_ey ${lr.v.n.estate_ey.value}: NOT regenerated here (kernel HUD exporter feed)`);
+  }
+  if (bad.length) { for (const b of bad) console.error("FAIL " + b); console.error(`LEDGER CHECK RED (${bad.length})`); process.exit(1); }
+  console.log("LEDGER CHECK GREEN: one estate_ey/estate_sloc in rows and facts text; derived rows equal the recovered formula");
 }
 
 function main() {
@@ -74,6 +115,7 @@ function main() {
   const v = (f, d) => { const i = a.indexOf(f); return i >= 0 ? a[i + 1] : d; };
   const state = v("--kernel-state", `${homedir()}/klinge-kernel/state`);
   const ledgerPath = v("--ledger", new URL("../lib/ledger.json", import.meta.url).pathname);
+  if (a.includes("--check")) return check(ledgerPath);
   const nr = rd(`${state}/numbers/NUMBERS.json`);
   if (nr.err) { console.error(`UNKNOWN kernel numbers: ${nr.err}; ledger untouched`); process.exit(2); }
   const bdir = `${state}/baseline`;
