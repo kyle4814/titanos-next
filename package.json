@@ -10,7 +10,7 @@
     "export:manifest:check": "node scripts/export_page_manifest.mjs --check",
     "start": "next start",
     "test": "node scripts/run_tests.mjs",
-    "postbuild": "node scripts/gen_og.mjs out && node scripts/test_proof_numbers.mjs --built out && node scripts/test_c9proof.mjs --built out && node scripts/test_status.mjs && node scripts/test_f262_anchors.mjs --built out && node --experimental-strip-types scripts/test_white_label.mjs --built out && node scripts/js_budget.mjs out 250 && node scripts/gen_security_txt.mjs --check && node scripts/test_disclosure.mjs && node scripts/test_faq_js_budget.mjs --built out && node --experimental-strip-types scripts/test_sso_section.mjs --built out && node scripts/text_sanity_fast.mjs --out out --allow-no-browser && node scripts/test_home_height.mjs out",
+    "postbuild": "node scripts/gen_og.mjs out && node scripts/test_proof_numbers.mjs --built out && node scripts/test_c9proof.mjs --built out && node scripts/test_status.mjs && node scripts/test_f262_anchors.mjs --built out && node --experimental-strip-types scripts/test_white_label.mjs --built out && node scripts/js_budget.mjs out 250 && node scripts/gen_security_txt.mjs --check && node scripts/test_disclosure.mjs && node scripts/test_faq_js_budget.mjs --built out && node --experimental-strip-types scripts/test_sso_section.mjs --built out && node scripts/text_sanity_fast.mjs --out out --allow-no-browser && node scripts/test_home_height.mjs out && node --experimental-strip-types scripts/test_declaration.mjs --built out",
     "seo": "node scripts/seo_audit.mjs out && node scripts/link_map.mjs out",
     "mailto-sweep": "node scripts/mailto_order_sweep.mjs",
     "render-spy": "node scripts/render_spy.mjs out",
