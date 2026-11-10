@@ -143,10 +143,12 @@ export function observe(s: DomainState, r: ScanResult, now: number, cause = "sca
 export class OwnerConflictError extends Error { constructor() { super("owner_state_conflict"); } }
 export const CAS_MAX_TRIES = 8;
 const committed = new WeakSet<DomainState>(); // states whose final write the engine already did itself
-export async function casTx<T>(c: Ctx, body: () => Promise<{ s: DomainState; out: T }>, tries = CAS_MAX_TRIES): Promise<{ s: DomainState; out: T }> {
+// f368: a body that returns write:false (a rejected request that mutated nothing) is returned as read; no putCas, so the rev does not move.
+export async function casTx<T>(c: Ctx, body: () => Promise<{ s: DomainState; out: T; write?: boolean }>, tries = CAS_MAX_TRIES): Promise<{ s: DomainState; out: T }> {
   for (let i = 0; i < tries; i++) {
-    let r: { s: DomainState; out: T };
+    let r: { s: DomainState; out: T; write?: boolean };
     try { r = await body(); } catch (e) { if (e instanceof OwnerConflictError && i + 1 < tries) continue; throw e; } // a body may lose the race BEFORE any side effect (autoFix phase 1)
+    if (r.write === false) return r;
     if (committed.has(r.s)) { committed.delete(r.s); return r; } // autoFix already committed its own final state (see commitMerged)
     if (!c.store.putCas) { await c.store.put(r.s); return r; }
     if (await c.store.putCas(r.s, r.s.rev ?? 0)) return r;

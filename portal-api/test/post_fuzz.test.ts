@@ -17,6 +17,8 @@ import { make, SECRET, RECEIPT_SECRET } from "./harness.ts";
 import { makeEntDeps, INTERNAL as ENT_INTERNAL } from "./ent_harness.ts";
 import { healthy } from "./owner_harness.ts";
 import { faulty } from "./market_harness.ts";
+import { ownerRejectedPaths } from "./post_fuzz_lib.ts";
+import { buildOwnerRejectRig } from "./owner_reject_rig.ts";
 import { enumerateRoutes, prng, structuralBodies, fieldBodies, fieldNames, snapshot, judge, WEIRD_IDS, CANARY, CANARY2, CAP, MUTATING, type Route, type BodyCase, type Observed } from "./post_fuzz_lib.ts";
 
 export const SEED = Number(process.env.FUZZ_SEED ?? 0x5eedf182) >>> 0;
@@ -239,4 +241,12 @@ test("enumerator mutant: a planted router line is picked up, so a new route can 
   const { enumerateRoutes: en2 } = await import("./post_fuzz_lib.ts");
   assert.ok(en2().routes.some((r) => r.template === "/keys/:id" && r.method === "DELETE"));
   assert.ok(en2().routes.some((r) => r.template === "/internal/payouts/:id/approve") && en2().routes.some((r) => r.template === "/internal/payouts/:id/reject"), "|| alternatives expand");
+});
+
+// f368: the STATE CHANGED check for the owner rejections the route fuzz cannot reach on its own (they need an applied fix and a tampered zone first).
+test("owner rejected paths (undo already_reverted, undo zone_changed_since, fix not_open, fix unknown_check): no state change, synthetic data", async () => {
+  const R = await buildOwnerRejectRig(STORE_KIND);
+  const cs = await ownerRejectedPaths(R);
+  assert.equal(cs.length, 4, "all four owner rejections were reached");
+  assert.deepEqual(cs.filter((c) => c.changed).map((c) => c.path), [], "STATE CHANGED on a rejected request");
 });
