@@ -30,7 +30,7 @@ export default function BillingClient() {
   };
   const invoice = async (id: string) => { try { const t = await call(browserApi(), "GET", `/invoices/${id}`); const w = window.open("", "_blank"); if (w) { w.document.write(`<pre>${esc(String(t))}</pre>`); w.document.close(); } } catch (e) { setMsg(errorText(e)); } };
   const exportData = async () => { try { const j = await call(browserApi(), "GET", "/account/export"); const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(j, null, 2)], { type: "application/json" })); a.download = "titanos-my-data.json"; a.click(); } catch (e) { setMsg(errorText(e)); } };
-  const del = () => { if (window.confirm("Delete your account? Subscriptions are cancelled and your details are erased. Invoices are kept without your email, as tax law requires.")) act(async () => { await call(browserApi(), "DELETE", "/account", { confirm: "DELETE" }); signOut(browserApi()); setData(null); return "Account deleted."; }); };
+  const del = () => { if (window.confirm("Delete your account? Subscriptions are cancelled and your details are erased. Invoices are kept without your email, as tax law requires.")) act(async () => { await call(browserApi(), "DELETE", "/account", { confirm: "DELETE" }); await signOut(browserApi()); setData(null); return "Account deleted."; }); };
 
   return (
     <main style={{ padding: "100px 20px 80px", maxWidth: 760, margin: "0 auto", color: "var(--text)" }}>

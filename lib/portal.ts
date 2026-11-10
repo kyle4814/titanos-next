@@ -47,7 +47,13 @@ export async function completeLogin(api: Api, token: string) {
   return r.account as { id: string; email: string; seat: string };
 }
 export const signedIn = (api: Api) => !!api.storage.getItem(PORTAL.SESSION_KEY);
-export const signOut = (api: Api) => api.storage.removeItem(PORTAL.SESSION_KEY);
+// f404: revoke the token on the server first (POST /auth/logout, sends the Bearer token via call), then clear local state
+// whether or not the POST worked (offline, 401 on an already-revoked token, 5xx). Never throws; safe to call twice.
+export async function signOut(api: Api): Promise<void> {
+  try { if (api.storage.getItem(PORTAL.SESSION_KEY)) await call(api, "POST", "/auth/logout"); }
+  catch { /* the server could not be told; the local clear below still signs this browser out */ }
+  finally { api.storage.removeItem(PORTAL.SESSION_KEY); }
+}
 export const addDomain = (api: Api, domain: string) => call(api, "POST", "/domains", { domain });
 export const verifyDomain = (api: Api, id: string) => call(api, "POST", `/domains/${id}/verify`);
 export const startCheckout = (api: Api, product: string, domain?: string) => call(api, "POST", "/checkout", { product, domain });
