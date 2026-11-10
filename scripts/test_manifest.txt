@@ -191,3 +191,4 @@ node --experimental-strip-types scripts/test_declaration.mjs
 node scripts/test_declaration_e2e.mjs out
 node scripts/test_xray.mjs
 node scripts/test_xray_lint.mjs
+node --experimental-strip-types scripts/test_adm_offer.mjs
