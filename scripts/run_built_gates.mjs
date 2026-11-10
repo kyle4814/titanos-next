@@ -19,6 +19,7 @@ export const GATES = [
   { name: "perf_budget", glob: /^test_perf_budget\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "no_hidden_tracking", glob: /^test_no_hidden_tracking[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "no_doctrine_leak", glob: /^test_no_doctrine_leak\.(mjs|sh|py)$/, args: (o) => [o] },
+  { name: "text_sanity_fast", glob: /^text_sanity_fast\.mjs$/, args: (o) => ["--out", o] }, // f384: fixed-sample rendered-text sweep, strict (no browser = FAIL)
   { name: "sitemap", glob: /^test_[\w-]*sitemap[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
 ];
 

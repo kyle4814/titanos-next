@@ -1,0 +1,17 @@
+{
+  "_doc": "C9 FAST text-sanity sample (f384). A fixed route list swept at 390 and 1280 px by scripts/text_sanity_fast.mjs inside gates:built / postbuild (budget 60 s). It must cover: the three pages Kyle watches (/, /proof, /learning-loop), one page per seat (guest /scan, owner /app, pro /pro, agent /agents, enterprise /enterprise, partner /partners), every route family in the export (a family is a first path segment with 2+ routes under it, plus the root and one group for the single top-level pages), and every route an F1-style followup cap applies to. scripts/test_text_sanity_fast.mjs enumerates the families from the built export and fails if one is uncovered, so adding a family without adding it here fails the gate.",
+  "routes": [
+    "/", "/proof", "/learning-loop",
+    "/scan", "/app", "/pro", "/agents", "/enterprise", "/partners",
+    "/pricing", "/shop", "/trust", "/status", "/engineering", "/faq", "/contact", "/open-data",
+    "/sectors", "/sectors/health",
+    "/labs", "/labs/issue-001",
+    "/offers", "/offers/bid-pack",
+    "/welcome/bid-pack",
+    "/blog", "/blog/privacy-act-small-business-deadline",
+    "/products", "/products/dmarc-setup-guide",
+    "/black-ice", "/black-ice/dossiers/seven-question-proof-test",
+    "/case-studies", "/case-studies/ariance",
+    "/app/billing", "/demo/tix", "/order/ai", "/monitor/success", "/audit/booked", "/v/titanos-pitch"
+  ]
+}
