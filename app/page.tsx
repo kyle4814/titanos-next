@@ -44,7 +44,7 @@ const AUDIT_STEPS: ThreadStep[] = [
   { num: "IV", title: "We start in month 1", body: "If it makes sense, we build your first system inside month 1 of a retainer." },
 ];
 
-// The homepage stays short: each long section lives on the page that owns its topic (components/home/MovedSections.tsx).
+// The homepage stays short: each long section lives on the page that owns its topic (components/home/moved/).
 const GO_DEEPER = [
   { href: "/proof", title: "The proof", body: "The cost curve, the measured cards and the replayed build, each with its source." },
   { href: "/pricing", title: "Partnerships and prices", body: "Pick a partnership, see every door from free to enterprise, and test the cost of manual work with your own figures." },

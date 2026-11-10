@@ -9,7 +9,7 @@ import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
-import { OperatorSections } from "@/components/home/MovedSections";
+import { OperatorSections } from "@/components/home/moved/OperatorSections";
 
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 

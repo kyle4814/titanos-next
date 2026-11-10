@@ -14,7 +14,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
-import { WhatWeBuild } from "@/components/home/MovedSections";
+import { WhatWeBuild } from "@/components/home/moved/WhatWeBuild";
 
 const META_TITLE = "AI Partnership Retainers for Australian Businesses | Titanos";
 const META_DESC = `Monthly AI partnerships that build, optimise and scale your business, from ${DISPLAY.AI_GROWTH_PARTNER}. Privacy-compliant by design. ${DISPLAY.AI_RETAINER_MIN}.`;

@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import StepCards from "@/components/w2a/StepCards";
 import { NumberBlock, NextStep } from "@/components/SiteBlocks";
 import stats from "@/lib/stats.json";
-import { HowSections } from "@/components/home/MovedSections";
+import { HowSections } from "@/components/home/moved/HowSections";
 
 export const metadata: Metadata = {
   title: "How it works · TITANOS",
