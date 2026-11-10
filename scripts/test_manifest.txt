@@ -149,3 +149,4 @@ node scripts/test_worker_headers.mjs
 node scripts/test_import_cycles.mjs
 node scripts/test_soak_pin_matrix_gate.mjs
 node scripts/test_soak_pin_wire.mjs
+node scripts/test_export_page_manifest.mjs
