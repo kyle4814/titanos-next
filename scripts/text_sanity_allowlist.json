@@ -1,0 +1,39 @@
+{
+  "_doc": "C9 rendered-text sanity allowlist (f373). Every rule needs id, token, routes (regex), text (regex), class (intended|followup) and a reason. intended = by design and labelled on the page. followup = a known defect that needs a data refresh, capped by max (the count of hits at 390+1280 may fall, never rise). A hit matching no rule fails scripts/test_text_sanity.mjs.",
+  "textRules": [
+    {
+      "id": "F1-stale-feed",
+      "token": "UNKNOWN",
+      "routes": "^/(proof|learning-loop)?$",
+      "text": "^UNKNOWN$|UNKNOWN now|cost per job is UNKNOWN right now",
+      "class": "followup",
+      "max": 328,
+      "reason": "lib/site-data/markStale.mjs (EV6) correctly renders any Proof Wall row measured more than 30 days before the build as UNKNOWN with the last-measured date. The underlying lib/ledger.json and lib/site-data/proof.json are dated 2026-10-08/09, so on 2026-11-10 every live-feed tile reads UNKNOWN. The rule is right; the feed is stale. Fix is a re-export (follow-up 1 in the receipt), not a code change."
+    },
+    {
+      "id": "I1-doctrine-copy",
+      "token": "UNKNOWN",
+      "routes": "^/(offers|labs|black-ice|faq|sectors|trust|open-data|status)(/|$)",
+      "text": "\\S+\\s+\\S+\\s+\\S+\\s+\\S+",
+      "class": "intended",
+      "reason": "Sentences that state the honest-UNKNOWN method (we say UNKNOWN when a record cannot be read; claim-label legends). Four or more words, so a bare UNKNOWN value slot never matches this rule."
+    },
+    {
+      "id": "I2-claim-chip",
+      "token": "UNKNOWN",
+      "routes": "^/(sectors/[a-z-]+|status|black-ice/dossiers/[a-z-]+)$",
+      "text": "^UNKNOWN$",
+      "class": "intended",
+      "reason": "Labelled claim chip beside a visible 'Not measured yet' / status-state / label legend (data-claim-label or data-status-state attribute). Sectors: no sector figure has been measured; /status: no live uptime samples yet (page says so)."
+    },
+    {
+      "id": "I3-labs-null-prose",
+      "token": "null",
+      "routes": "^/labs/issue-001$",
+      "text": "returns null, never zero",
+      "class": "intended",
+      "reason": "Prose explaining that a ratio with an empty denominator returns null; the word is the subject of the sentence."
+    }
+  ],
+  "ctaRules": []
+}
