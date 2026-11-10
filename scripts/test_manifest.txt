@@ -150,3 +150,4 @@ node scripts/test_worker_headers.mjs
 node scripts/test_import_cycles.mjs
 bash scripts/test_obelisk_rendered_print_motion.sh
 bash scripts/test_obelisk_rendered_keyboard_focus.sh
+bash scripts/test_obelisk_allpages.sh

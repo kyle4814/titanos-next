@@ -49,3 +49,4 @@ _shot*.js
 
 # discovery_check generated review output (never deployed)
 /generated/
+out_allpages_*.json
