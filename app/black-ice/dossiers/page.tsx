@@ -24,7 +24,7 @@ export default function DossierIndexPage() {
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <p className={s.p}>
-            <Link href="/black-ice" className={s.link}>Back to Black Ice</Link>
+            <Link href="/black-ice" className={`${s.link} tap-pad`}>Back to Black Ice</Link>
           </p>
           {list.length === 0 ? (
             <p className={s.p}>The first dossiers are in preparation.</p>

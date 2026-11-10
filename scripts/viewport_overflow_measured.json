@@ -1,11 +1,9 @@
 {
- "_doc": "Measured 360px tap-target hits per allowlist rule, from the f392 full-export sweep (266 routes, 2026-11-10). test_viewport_overflow.mjs fails if any cap is above its measured count. Update only after a fresh sweep. Summary and button rules were fixed to 0 and removed (a new hit there is now an unclassified defect).",
+ "_doc": "Measured 360px tap-target hits per allowlist rule, from the f392 full-export sweep (266 routes, 2026-11-10). test_viewport_overflow.mjs fails if any cap is above its measured count. Update only after a fresh sweep. Link, nav, footer, summary and button rules (link/nav/footer fixed by f411) were fixed to 0 and removed (a new hit there is now an unclassified defect).",
  "measured": {
-  "tap-link-360": 29,
-  "tap-input-360": 13,
-  "tap-nav-360": 3,
-  "tap-footer-360": 1
+  "tap-input-360": 13
  },
- "total": 46,
- "before_f392_total": 538
+ "total": 13,
+ "before_f392_total": 538,
+ "before_f411_total": 46
 }
