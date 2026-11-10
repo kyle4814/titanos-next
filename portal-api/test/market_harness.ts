@@ -1,6 +1,6 @@
 import { make } from "./harness.ts";
 import { MemoryZone } from "../src/owner/dnsw.ts";
-import { MemoryMarketStore } from "../src/market/store.ts";
+import { makeMarketStore } from "./store_switch.ts";
 import { MockPayments } from "../src/market/payments.ts";
 import { MemorySeatEntitlements, type SubStatus } from "../src/market/entitlements.ts";
 import { healthy } from "./owner_harness.ts";
@@ -13,7 +13,7 @@ export const FIXED_SPF = "v=spf1 include:_spf.google.com -all";
 export function rig() {
   const h = make();
   const zones = new Map<string, MemoryZone>();
-  const store = new MemoryMarketStore(), payments = new MockPayments(), seats = new MemorySeatEntitlements();   // SYNTHETIC subscription records
+  const store = makeMarketStore(), payments = new MockPayments(), seats = new MemorySeatEntitlements();   // SYNTHETIC subscription records
   h.deps.market = { store, payments, seats, doh: (dom) => { const z = zones.get(dom); if (!z) throw new Error("no zone " + dom); return z.doh; }, internalSecret: INTERNAL };
   const zone = (dom: string, w = faulty(dom)) => { const z = new MemoryZone(w); zones.set(dom, z); return z; };
   const fix = (dom: string) => { zones.get(dom)!.world.txt![dom] = [FIXED_SPF]; };
