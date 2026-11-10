@@ -60,6 +60,18 @@ ok(only("/plant-footer").defects.some((d) => d.metric === "footer" && /outside-v
 ok(only("/plant-tap").defects.some((d) => d.metric === "tap" && d.width === 360) && !only("/plant-tap").defects.some((d) => d.metric === "tap" && d.width !== 360), "a planted 20px tap target fails at 360 only");
 fs.rmSync(dir, { recursive: true, force: true });
 
+
+// f392: caps must not sit above the measured counts, and the total stays within half of the f385 baseline (538).
+{
+  const meas = JSON.parse(fs.readFileSync(new URL("./viewport_overflow_measured.json", import.meta.url), "utf8"));
+  const above = (al.rules || []).filter((r) => r.class === "followup" && r.max > (meas.measured[r.id] ?? 0)).map((r) => `${r.id}: cap ${r.max} > measured ${meas.measured[r.id] ?? 0}`);
+  ok(above.length === 0, "no allowlist cap is above its measured count" + (above.length ? ": " + above.join("; ") : ""));
+  const capTotal = (al.rules || []).filter((r) => r.class === "followup").reduce((a, r) => a + r.max, 0);
+  ok(capTotal <= 270, `total tap caps ${capTotal} <= 270 (half of 538)`);
+  const fake = { rules: al.rules.map((r) => (r.id === "tap-link-360" ? { ...r, max: r.max + 1 } : r)) };
+  ok((fake.rules.find((r) => r.id === "tap-link-360").max > meas.measured["tap-link-360"]), "planted cap above measured is detected");
+}
+
 // Part B
 const bi = process.argv.indexOf("--built");
 if (bi > 0) {
@@ -69,6 +81,8 @@ if (bi > 0) {
   const ev = evaluate(real.results, al);
   ok(ev.errors.length === 0, `every route rendered (${routes.length} routes x ${WIDTHS.length} widths)` + (ev.errors.length ? ": " + ev.errors.slice(0, 3).join("; ") : ""));
   ok(ev.defects.length === 0, `zero unclassified viewport defects` + (ev.defects.length ? ":\n  " + ev.defects.slice(0, 15).map((d) => `${d.route}@${d.width} [${d.metric}] ${d.detail}`).join("\n  ") : ""));
+  const loose = (al.rules || []).filter((r) => r.class === "followup" && r.max > (ev.followupCounts[r.id] || 0)).map((r) => `${r.id}: cap ${r.max} > live ${ev.followupCounts[r.id] || 0}`);
+  ok(loose.length === 0, "no cap is above the live measured count" + (loose.length ? ": " + loose.join("; ") : ""));
   ok(ev.overCap.length === 0, "follow-up counts within their caps " + JSON.stringify(ev.followupCounts) + ev.overCap.join("; "));
 }
 console.log(fails ? `\nviewport_overflow: ${fails} FAILED` : "\nviewport_overflow: all passed");
