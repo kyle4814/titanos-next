@@ -9,6 +9,7 @@ const GoldDust = dynamic(() => import("@/components/GoldDust"), { ssr: false });
 const CursorTrail = dynamic(() => import("@/components/CursorTrail"), { ssr: false });
 const EasterEgg = dynamic(() => import("@/components/EasterEgg"), { ssr: false });
 const FlowDriver = dynamic(() => import("@/components/flow/FlowDriver"), { ssr: false });
+const DeclarationPopup = dynamic(() => import("@/components/declaration/DeclarationPopup"), { ssr: false });
 const FinderLauncher = dynamic(() => import("@/components/FinderLauncher"), { ssr: false });
 
 export default function DeferredShell() {
@@ -20,6 +21,7 @@ export default function DeferredShell() {
       <FinderLauncher />
       <MotionLayer />
       <FlowDriver />
+      <DeclarationPopup />
     </>
   );
 }

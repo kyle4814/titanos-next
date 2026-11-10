@@ -34,6 +34,7 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     links: [
       { label: `${dec("estate_ey")} engineer-years`, href: "/engineering" },
       { label: "Case studies", href: "/case-studies" },
+      { label: "The declaration", href: "/declaration" },
       { label: "Methodology", href: "/methodology" },
       { label: "Black Ice doctrine", href: "/black-ice" },
       { label: "Our scan", href: "/scan#self-scan" },
