@@ -40,7 +40,9 @@ export async function listDomains(d: Deps, a: Account) {
   }
   return { domains: out };
 }
-export async function getOverview(d: Deps, a: Account, id: string) { const { c, s } = await open(d, a, id); await c.store.put(s); return overview(s, d.now()); }
+// F377: a READ. open() derives the default monitor_on view in memory (setMonitor on the loaded or fresh state) and nothing is persisted: no put,
+// no rev bump, no row created, no monitor_on audit event stored. The first real mutation (tx) runs open() again and persists the derived state.
+export async function getOverview(d: Deps, a: Account, id: string) { const { s } = await open(d, a, id); return overview(s, d.now()); }
 // F185: every mutation is load, mutate, compare-and-set on the store's per-domain revision (casTx); a lost race re-runs on a fresh load.
 async function tx<T>(d: Deps, a: Account, id: string, f: (c: Ctx, s: DomainState) => Promise<T>) {
   try { const r = await casTx(ctxOf(d), async () => { const { c, s } = await open(d, a, id); return { s, out: await f(c, s) }; }); return { s: r.s, out: r.out }; }
@@ -65,7 +67,23 @@ export async function undo(d: Deps, a: Account, id: string, fixId: string) {
 }
 export async function getReport(d: Deps, a: Account, id: string) { const { s } = await open(d, a, id); return report(s, d.now()); }
 // Run by the scheduler (a Worker cron trigger, owner-approved deploy). Mails the owner on a fault returning.
+// F377: entitlement -> stored monitor flag is reconciled HERE (a write path), not on a GET. Only stored rows whose flag disagrees with the live
+// entitlement are written, through casTx like every other mutation; a second pass finds nothing to change.
+export async function reconcileMonitorEntitlements(d: Deps): Promise<number> {
+  const c = ctxOf(d); let changed = 0;
+  for (const st of await c.store.all()) {
+    const row = await d.store.domainById(st.domainId);
+    if (!row || !row.verifiedAt || row.accountId !== st.accountId) continue;
+    const acct = await d.store.accountById(row.accountId); if (!acct) continue;
+    if (st.monitor.active === await monitorEntitled(d, acct, row.domain)) continue;
+    try {
+      await casTx(c, async () => { const { s } = await open(d, acct, row.id); return { s, out: undefined }; }); changed++;
+    } catch (e) { if (!(e instanceof OwnerConflictError)) throw e; }
+  }
+  return changed;
+}
 export async function runMonitor(d: Deps) {
+  await reconcileMonitorEntitlements(d);
   const c = ctxOf(d); const t = await monitorTick(c);
   for (const al of t.alerts) {
     const acct = await d.store.accountById(al.accountId);
