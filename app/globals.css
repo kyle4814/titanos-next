@@ -1119,3 +1119,6 @@ p, li, blockquote { text-wrap: pretty; }
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
 }
+
+/* C10 viewport sweep (f385): a fixed-width wordmark svg must not push a 360 px page sideways. */
+.ds-wordmark { max-width: 100%; height: auto; }

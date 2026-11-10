@@ -70,6 +70,7 @@ function FooterAnchor({ l }: { l: FooterLink }) {
     display: "inline-flex",
     alignItems: "center",
     minHeight: 44,
+    minWidth: 44,
   } as const;
   return l.external ? (
     <a href={l.href} target="_blank" rel="noopener noreferrer" style={style}>
