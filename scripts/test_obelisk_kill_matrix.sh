@@ -128,6 +128,35 @@ m.check_verifiers(m.SPEC)
 assert all(k in m.SPEC for k in ("C2","C3","C7","C8","C10")) and all(m.SPEC[k].get("verifier") for k in ("C2","C3","C7","C8","C10"))
 PY
 ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C9 C10 wired)"
+# f398: a gated row whose verifier passes shows the CODE as INDEPENDENTLY VERIFIED while the status stays WOULD-FLIP; a failing verifier shows neither
+python3 - > "$S/spec.json" <<'PY'
+import json
+d={f"C{i}":{"command":"true"} for i in range(1,11)}
+d["C1"]={"command":"true","gate":"LIVE TRAFFIC x","verifier":"test -e present.txt"}
+d["C2"]={"command":"true","gate":"LIVE TRAFFIC x"}
+d["C3"]={"command":"true","verifier":"test -e present.txt"}
+print(json.dumps(d))
+PY
+run >/dev/null
+vf() { python3 -c "import json;print([c['verification'] for c in json.load(open('$S/o.json'))['chunks'] if c['id']=='$1'][0])"; }
+[ "$(st C1)" = WOULD-FLIP ] && [ "$(vf C1)" = "INDEPENDENTLY VERIFIED" ] && [ "$(vf C2)" = None ] && [ "$(vf C3)" = "INDEPENDENTLY VERIFIED" ] && ok "gated row + passing verifier: status WOULD-FLIP, verification INDEPENDENTLY VERIFIED; no verifier: None" || no "verification field"
+run --out-md "$S/v.md" >/dev/null
+grep -q '^| C1 .*WOULD-FLIP; code INDEPENDENTLY VERIFIED' "$S/v.md" && grep -q 'code INDEPENDENTLY VERIFIED (any gate) 2' "$S/v.md" && ok "markdown shows 'WOULD-FLIP; code INDEPENDENTLY VERIFIED' and the any-gate count" || no "verification markdown"
+# f398: real SPEC carries independent verifiers for C5 and C7 (different command AND different basenames), and the matrix still refuses a copy of the primary
+python3 - <<'PY' || no "C5/C7 real verifiers"
+import sys,copy; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
+for k in ("C5","C7"):
+    v=m.SPEC[k]; assert v.get("verifier") and v.get("gate"), k
+    assert not (m._files(v["verifier"]) & m._files(v["command"])), k
+    assert any("c5_" in f or "c7_" in f for f in v["verifier_files"]), k
+    bad=copy.deepcopy(m.SPEC); bad[k]["verifier"]=bad[k]["command"]
+    try: m.check_verifiers(bad); raise SystemExit(k+" identical verifier accepted")
+    except m.Structural: pass
+    bad=copy.deepcopy(m.SPEC); bad[k]["verifier"]="node x/"+sorted(m._files(bad[k]["command"]))[0]
+    try: m.check_verifiers(bad); raise SystemExit(k+" shared-basename verifier accepted")
+    except m.Structural: pass
+PY
+ok "real C5 and C7 verifiers are independent; identical or shared-basename verifier for either is refused (exit 2)"
 PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
 if [ -f "$PLAN" ]; then
   python3 "$M" --plan "$PLAN" --no-run >/dev/null 2>"$S/err"; rc=$?
