@@ -224,19 +224,22 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
 export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; makeThrottle?: (env: Env) => Throttle | undefined; now?: () => number; log?: (line: string) => void; drainTick?: DrainTickOpts }
 export const THROTTLE_LIMITS = LIMITS;
 export function createWorker(opts: WorkerOpts = {}) {
-  const fixed = opts.throttle ?? (opts.makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
+  // f216: with no explicit buildDeps the default is the real one (D1Store over env.DB, shared D1 throttle); no DB binding still 503s.
+  const build = opts.buildDeps ?? ((env: Env) => defaultBuildDeps(env));
+  const makeThrottle = opts.makeThrottle ?? (opts.buildDeps || opts.throttle ? undefined : (env: Env) => throttleFor(env, opts.now, opts.log));
+  const fixed = opts.throttle ?? (makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
   return {
     fetch(req: Request, env: Env): Promise<Response> {
       return Promise.resolve().then(() => {
         let base: Deps | undefined;
-        try { base = opts.buildDeps?.(env); } catch (e) {
+        try { base = build(env); } catch (e) {
           if (!(e instanceof BuildDepsError)) throw e;
           opts.log?.(`buildDeps refused: ${e.message}`);   // reason + binding NAME only, never a value
           const p = new URL(req.url).pathname;
           if (p === "/health" || req.method === "OPTIONS") return handle(req, env, undefined);
           return json({ error: "deps_unavailable", reason: e.message }, 503);
         }
-        const throttle = fixed ?? opts.makeThrottle?.(env);
+        const throttle = fixed ?? makeThrottle?.(env);
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
       }).catch(() => json({ error: "internal" }, 500));
     },
