@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { walk } from "./seo_audit.mjs";
-import { evaluate } from "./home_reach.mjs";
+import { evaluate, STATIC_DOORS } from "./home_reach.mjs";
 
 const bi = process.argv.indexOf("--built");
 const out = bi > 0 ? process.argv[bi + 1] : null;
@@ -43,6 +43,17 @@ try {
     const p = f; fs.writeFileSync(p, fs.readFileSync(p, "utf8").replace(/href="\/(pro|agents|enterprise|app\/login)"/g, 'href="#"'));
   }
   ok(evaluate(tmp, allow).bad.some((b) => b.startsWith("PRODUCT")), "removing the seat links trips the product check");
+  // f374: the six formerly client-only doors are within 2 clicks of / from raw HTML, no JS executed.
+  for (const r of STATIC_DOORS) ok(staticDepth.get(r) <= 2, `static door ${r} at ${staticDepth.get(r)} click(s) from / in raw HTML`);
+  console.log(`STATIC-ONLY REACH ${STATIC_DOORS.filter((r) => staticDepth.get(r) <= 2).length}/${STATIC_DOORS.length} of the six doors`);
+  // Mutation: strip the portal links and the no-JS menu list from every page -> the doors must fail.
+  const tmp2 = fs.mkdtempSync(path.join(os.tmpdir(), "homereach2-"));
+  try {
+    fs.cpSync(out, tmp2, { recursive: true });
+    for (const f of walk(tmp2)) fs.writeFileSync(f, fs.readFileSync(f, "utf8").replace(/href="\/(app\/billing|app\/estate|app\/partner|mission|parallax|products)"/g, 'href="#"'));
+    const m3 = evaluate(tmp2, allow).bad.filter((b) => b.startsWith("STATIC-DOOR"));
+    ok(m3.length >= 1, `planted removal of the door links fails (${m3.length} STATIC-DOOR failures)`);
+  } finally { fs.rmSync(tmp2, { recursive: true, force: true }); }
   // Mutation: an allowlist entry with no reason, and a stale one.
   ok(evaluate(out, { orphans: { "/zzz": "" } }).bad.some((b) => /no written reason/.test(b)), "allowlist entry without a reason fails");
   ok(evaluate(out, { orphans: { "/zzz": "stale test" } }).bad.some((b) => /STALE/.test(b)), "stale allowlist entry fails");

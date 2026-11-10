@@ -128,6 +128,15 @@ export default function Nav() {
           TITANOS
         </Link>
 
+        {/* No-JS fallback: the More menu and drawer are client-only, so list every door as plain links. */}
+        <noscript>
+          <nav aria-label="All pages">
+            {LINKS.map((l) => (
+              <a key={l.href} href={l.href} style={{ marginRight: 12 }}>{l.label}</a>
+            ))}
+          </nav>
+        </noscript>
+
         {/* Desktop link strip — hidden on mobile via media query */}
         <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center" }}>
           {DESKTOP_LINKS.map((l) => (

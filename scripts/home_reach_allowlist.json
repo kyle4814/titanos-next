@@ -1,8 +1,5 @@
 {
  "orphans": {
-  "/app/billing": "portal sub-page reached by in-app tabs (client-rendered) after sign-in; noindex. Follow-up 1: render tab links server-side.",
-  "/app/estate": "portal sub-page reached by in-app tabs after sign-in; noindex. Follow-up 1.",
-  "/app/partner": "portal sub-page reached by in-app tabs after sign-in; noindex. Follow-up 1.",
   "/audit/booked": "post-booking return page, only reached by redirect after a booking; noindex.",
   "/monitor/success": "Stripe return URL, only reached after checkout; noindex.",
   "/monitor/cancelled": "Stripe return URL, only reached after cancelling checkout; noindex.",

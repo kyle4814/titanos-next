@@ -37,6 +37,9 @@ export function crawl(out) {
 }
 
 export const PRODUCT_PAGES = { scan: "/scan", shop: "/shop", pricing: "/pricing", account: "/app/login", portalEntry: "/app", ownerSeat: "/app", proSeat: "/pro", agentSeat: "/agents", enterpriseSeat: "/enterprise", partnerSeat: "/partners" };
+// f374: doors that used to exist only behind client-rendered UI (in-app tabs, the More menu). Each must be
+// reachable within 2 clicks of / from the raw static HTML alone (no JS, no menu edges).
+export const STATIC_DOORS = ["/app/billing", "/app/estate", "/app/partner", "/mission", "/parallax", "/products"];
 export const MAX_DEPTH = 3;
 export const MAX_PRODUCT_DEPTH = 2;
 
@@ -60,6 +63,10 @@ export function evaluate(out, allow) {
   for (const [name, r] of Object.entries(PRODUCT_PAGES)) {
     if (!pages.has(r)) bad.push(`PRODUCT ${name} ${r} is not exported`);
     else if (!(staticDepth.get(r) <= MAX_PRODUCT_DEPTH)) bad.push(`PRODUCT ${name} ${r} is ${staticDepth.get(r) ?? "unreachable"} clicks by visible link (max ${MAX_PRODUCT_DEPTH})`);
+  }
+  for (const r of STATIC_DOORS) {
+    if (!pages.has(r)) bad.push(`STATIC-DOOR ${r} is not exported`);
+    else if (!(staticDepth.get(r) <= MAX_PRODUCT_DEPTH)) bad.push(`STATIC-DOOR ${r} is ${staticDepth.get(r) ?? "unreachable"} clicks from static HTML alone (max ${MAX_PRODUCT_DEPTH})`);
   }
   return { bad, pages, staticDepth, menuDepth };
 }
