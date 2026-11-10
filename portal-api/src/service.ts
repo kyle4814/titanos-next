@@ -346,18 +346,17 @@ async function sweepLateFacts(d: Deps, subId: string) {
   if (row) await replayLateFacts(d, row); // still no row: the winner's post-create replay will take it
 }
 async function issueInvoice(d: Deps, pur: Purchase, amountCents: number, eventId: string) {
-  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
-  await d.store.putInvoice(inv);
-  await entSvc.onInvoice(d, inv); // C8: partner commission, recorded; a failure is logged to the operator, never thrown into the webhook
+  // Renewal invoice: one per (purchase, event). The number is taken inside the guarded write (f366); a duplicate event is a clean no-op and burns no number.
+  const inv = await d.store.issueInvoiceNumbered({ id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId }, "purchase_event");
+  if (inv) await entSvc.onInvoice(d, inv); // C8: partner commission, recorded; a failure is logged to the operator, never thrown into the webhook
 }
-// The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a burned invoice number, the
-// store's atomic putInvoiceOnce is the real guard (two racers can both pass the pre-check; only one insert lands). The loser burns one number (known, receipt limit).
+// The FIRST invoice of a purchase (markPaid, and the f203 reconciler). At most one per purchase, whoever gets there first: the pre-check saves a round trip, the store's
+// issueInvoiceNumbered is the real guard AND takes the number inside the same atomic write (f366), so a race loser burns NO number and the sequence stays gap-free.
 export async function issueInvoiceOnce(d: Pick<Deps, "store" | "now">, pur: Purchase, amountCents: number, eventId: string): Promise<boolean> {
   if (await d.store.purchaseInvoiced(pur.id)) return false;
-  const inv: Invoice = { id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, number: await d.store.nextInvoiceNumber(), productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId };
-  const won = await d.store.putInvoiceOnce(inv);
-  if (won) await entSvc.onInvoice(d as Deps, inv); // C8: partner commission, recorded once with the invoice that won
-  return won;
+  const inv = await d.store.issueInvoiceNumbered({ id: randomToken("inv", 8), accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, amountCents, issuedAt: d.now(), stripeEventId: eventId }, "purchase");
+  if (inv) await entSvc.onInvoice(d as Deps, inv); // C8: partner commission, recorded once with the invoice that won
+  return inv !== undefined;
 }
 
 // 4 INVOICES. Rendered by the pure f281 renderer (invoice_render.ts). The GST wording comes from INVOICE_GST_MODE, never invented here.

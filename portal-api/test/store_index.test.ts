@@ -49,7 +49,7 @@ async function randomRun(seed: number, steps: number) {
     else if (op === "purMutate") { const p = [...s.purchases.values()][N(Math.max(1, s.purchases.size))]; if (p) { p.paymentIntent = pick([undefined, `pi${N(6)}`]); if (r() < 0.3) p.checkoutId = `cs${N(6)}`; if (r() < 0.2) p.accountId = A(); await s.putPurchase(p); } }
     else if (op === "sub") await s.putSubscription({ id: `s${N(8)}`, accountId: A(), purchaseId: `p${N(6)}`, productId: "x", startedAt: 1 });
     else if (op === "inv") { try { await s.putInvoice({ id: `i${N(8)}`, accountId: A(), purchaseId: pick([undefined, `p${N(6)}`]), number: `N${N(6)}`, productId: "x", amountCents: 1, issuedAt: 1, stripeEventId: `ev${N(3)}` }); } catch { /* uniqueness violation: nothing written */ } }
-    else if (op === "invOnce") { try { await s.putInvoiceOnce({ id: `io${invSeq++}`, accountId: A(), purchaseId: `p${N(6)}`, number: `Z${invSeq}`, productId: "x", amountCents: 1, issuedAt: 1, stripeEventId: `ev${N(3)}` }); } catch { /* ok */ } }
+    else if (op === "invOnce") { try { await s.issueInvoiceNumbered({ id: `io${invSeq++}`, accountId: A(), purchaseId: `p${N(6)}`, productId: "x", amountCents: 1, issuedAt: 1, stripeEventId: `ev${N(3)}` }, pick(["purchase", "purchase_event"] as const)); } catch { /* ok */ } }
     else if (op === "key") await s.putKey({ id: `k${N(8)}`, accountId: A(), hash: `kh${N(8)}`, scopes: [], createdAt: step });
     else if (op === "keyRevoke") { const k = [...s.keys.values()][0]; if (k) await s.putKey({ ...k, accountId: A() }); }
     else await s.putRefundCase({ id: `r${N(8)}`, purchaseId: `p${N(6)}` } as any);
