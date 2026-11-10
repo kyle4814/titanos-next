@@ -11,6 +11,7 @@ import { TOOLS, publicTool } from "./agent/tools.ts";
 import { verifyWithRing, ringOf } from "./agent/receipt.ts";
 import { traceKeyPrefix, isOperator } from "./agent/keytrace.ts";
 import { agentCard } from "./agent/files.ts";
+import { json, text, empty } from "./http.ts";
 import { entRoute } from "./enterprise/routes.ts";
 import { workerScheduled } from "./owner/cron.ts";
 import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drain_tick_worker.ts";
@@ -20,13 +21,6 @@ import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
 export const VERSION = "0.1.0";
-
-function json(body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { "content-type": "application/json", "cache-control": "no-store", "x-content-type-options": "nosniff" },
-  });
-}
 
 // GET /health: liveness plus a database probe. Reports only booleans and the Stripe MODE, never a secret value.
 export async function health(env: Env): Promise<Response> {
@@ -77,7 +71,7 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
 }
 function cors(res: Response, env: Env): Response {
   const o = env.TITANOS_SITE_ORIGIN;
-  if (o) { res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, DELETE, OPTIONS"); res.headers.set("vary", "origin"); }
+  if (o) { res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, PATCH, DELETE, OPTIONS"); res.headers.set("vary", "origin"); }
   return res;
 }
 
@@ -89,7 +83,7 @@ export async function handle(req: Request, env: Env, deps?: Deps): Promise<Respo
     if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405);
     return health(env);
   }
-  if (req.method === "OPTIONS") return cors(new Response(null, { status: 204 }), env);
+  if (req.method === "OPTIONS") return cors(empty(204), env);
   if (!deps) return json({ error: "store_unavailable" }, 503);
   try {
     return cors(await route(req, pathname, deps), env);
@@ -133,7 +127,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
       const rid = msg && !Array.isArray(msg) && (typeof msg.id === "string" || typeof msg.id === "number") ? msg.id : null;
       return json({ jsonrpc: "2.0", id: rid, error: { code: e.status === 422 ? -32602 : -32600, message: e.code, data: { status: e.status, error: e.code } } }, e.status);
     }
-    return out === null ? new Response(null, { status: 202 }) : json(out);
+    return out === null ? empty(202) : json(out);
   }
   if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") { const tok = (await body(req)).token; return json(await throttled(d, req, "login", "", () => svc.verifyLogin(d, tok))); }
@@ -200,7 +194,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     if (seg[3] === "scan" && m === "POST") return json(await own.scan(d, a, id));
     if (seg[3] === "fix" && m === "POST") return json(await own.fix(d, a, id, (await body(req)).check));
     if (seg[3] === "fixes" && seg[5] === "undo" && m === "POST") return json(await own.undo(d, a, id, seg[4]));
-    if (seg[3] === "report" && m === "GET") { const r = await own.getReport(d, a, id); return new URL(req.url).searchParams.get("format") === "md" ? new Response(r.markdown, { headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-store" } }) : json(r.json); }
+    if (seg[3] === "report" && m === "GET") { const r = await own.getReport(d, a, id); return new URL(req.url).searchParams.get("format") === "md" ? text(r.markdown, "text/markdown; charset=utf-8") : json(r.json); }
   }
   if (path === "/checkout" && m === "POST") { const b = await body(req); return json(await throttled(d, req, "checkout", a.id, () => svc.startCheckout(d, a, b.product, b.domain)), 201); }
   if (path === "/billing" && m === "GET") return json({ purchases: await d.store.purchasesFor(a.id), subscriptions: await d.store.subscriptionsFor(a.id), portalUrl: a.stripeCustomerId ? await d.billing.portalUrl(a.stripeCustomerId, d.siteOrigin + "/app/billing") : null });
@@ -208,12 +202,13 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   if (seg[0] === "invoices" && (seg.length === 2 || (seg.length === 3 && seg[2] === "credit-note")) && m === "GET") {
     const doc = seg.length === 3 ? await svc.renderCreditNote(d, a, seg[1]) : await svc.renderInvoice(d, a, seg[1]);
     const html = /\btext\/html\b/i.test(req.headers.get("accept") ?? ""); // default is the text twin
-    return new Response(html ? doc.html : doc.text, { headers: { "content-type": html ? "text/html; charset=utf-8" : "text/plain; charset=utf-8", "cache-control": "no-store", vary: "accept" } });
+    return text(html ? doc.html : doc.text, html ? "text/html; charset=utf-8" : "text/plain; charset=utf-8", { vary: "accept" }); // f86 shared headers
   }
   if (seg[0] === "subscriptions" && seg[2] === "cancel" && m === "POST") return json(await svc.cancelSubscription(d, a, seg[1]));
   if (path === "/refunds" && m === "POST") return json(await svc.requestRefund(d, a, String((await body(req)).purchaseId ?? "")));
-  if (path === "/keys" && m === "POST") return json(await svc.createKey(d, a, (await body(req)).scopes), 201);
+  if (path === "/keys" && m === "POST") { const b = await body(req); return json(await svc.createKey(d, a, b.scopes, { capDaily: b.capDaily, capTotal: b.capTotal }), 201); }
   if (path === "/keys" && m === "GET") return json({ keys: await svc.listKeys(d, a) });
+  if (seg[0] === "keys" && seg.length === 2 && m === "PATCH") { const b = await body(req); return json(await svc.setKeyCaps(d, a, seg[1], { capDaily: b.capDaily, capTotal: b.capTotal })); }
   if (seg[0] === "keys" && seg.length === 2 && m === "DELETE") { await svc.revokeKey(d, a, seg[1]); return json({ ok: true }); }
   if (path === "/agent/credits" && m === "GET") return json({ balance: await d.store.creditBalance(a.id), entries: (await d.store.creditEntries(a.id)).slice(-50) });
   if (path === "/agent/credits/topup" && m === "POST") return json(await startTopup(d, a, (await body(req)).pack), 201);
@@ -229,19 +224,22 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
 export interface WorkerOpts { buildDeps?: (env: Env) => Deps | undefined; throttle?: Throttle; makeThrottle?: (env: Env) => Throttle | undefined; now?: () => number; log?: (line: string) => void; drainTick?: DrainTickOpts }
 export const THROTTLE_LIMITS = LIMITS;
 export function createWorker(opts: WorkerOpts = {}) {
-  const fixed = opts.throttle ?? (opts.makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
+  // f216: with no explicit buildDeps the default is the real one (D1Store over env.DB, shared D1 throttle); no DB binding still 503s.
+  const build = opts.buildDeps ?? ((env: Env) => defaultBuildDeps(env));
+  const makeThrottle = opts.makeThrottle ?? (opts.buildDeps || opts.throttle ? undefined : (env: Env) => throttleFor(env, opts.now, opts.log));
+  const fixed = opts.throttle ?? (makeThrottle ? undefined : new Throttle({ ...THROTTLE_LIMITS, now: opts.now ?? (() => Date.now()), log: opts.log }));
   return {
     fetch(req: Request, env: Env): Promise<Response> {
       return Promise.resolve().then(() => {
         let base: Deps | undefined;
-        try { base = opts.buildDeps?.(env); } catch (e) {
+        try { base = build(env); } catch (e) {
           if (!(e instanceof BuildDepsError)) throw e;
           opts.log?.(`buildDeps refused: ${e.message}`);   // reason + binding NAME only, never a value
           const p = new URL(req.url).pathname;
           if (p === "/health" || req.method === "OPTIONS") return handle(req, env, undefined);
           return json({ error: "deps_unavailable", reason: e.message }, 503);
         }
-        const throttle = fixed ?? opts.makeThrottle?.(env);
+        const throttle = fixed ?? makeThrottle?.(env);
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
       }).catch(() => json({ error: "internal" }, 500));
     },

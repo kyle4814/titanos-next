@@ -129,16 +129,32 @@ function unmatched(raw: string, seat: Seat, reason: "no_match" | "junk"): Reply 
 
 // Unmatched asks are logged through an interface so a Worker/D1 adapter can replace the in-memory one.
 // A write counts as saved only if append neither throws nor returns false, and the adapter does not declare itself non-durable.
+// f301: a row is keyed by (normalised ask, askerId). A repeat by the same asker keeps firstSeenAt and moves lastSeenAt; a missing askerId is the one "anon" asker.
 export interface UnmatchedLog { append(stub: ConfigStub): void | boolean | Promise<void | boolean>; readonly durable?: boolean }
-export class MemoryLog implements UnmatchedLog { rows: ConfigStub[] = []; readonly durable = false; append(s: ConfigStub) { this.rows.push(s); } }
+export const ANON_ASKER = "anon";
+export class MemoryLog implements UnmatchedLog {
+  rows: ConfigStub[] = []; readonly durable = false;
+  append(s: ConfigStub) {
+    const asker = s.askerId ? String(s.askerId) : ANON_ASKER, seen = s.lastSeenAt ?? s.firstSeenAt ?? null;
+    const hit = this.rows.find((r) => r.normalised === s.normalised && (r.askerId ?? ANON_ASKER) === asker);
+    if (!hit) { this.rows.push({ ...s, askerId: s.askerId ?? null, firstSeenAt: s.firstSeenAt ?? seen, lastSeenAt: seen, seenCount: 1 }); return; }
+    hit.seenCount = (hit.seenCount ?? 1) + 1;
+    if (seen !== null) {
+      if (hit.firstSeenAt == null || seen < hit.firstSeenAt) hit.firstSeenAt = seen;
+      if (hit.lastSeenAt == null || seen > hit.lastSeenAt) hit.lastSeenAt = seen;
+    }
+  }
+}
 export class NoopLog implements UnmatchedLog { readonly durable = false; append(_s: ConfigStub): boolean { return false; } }
 
-export function concierge(index: Index, log: UnmatchedLog) {
-  return async (ask: string, seat: Seat = "guest"): Promise<Reply> => {
+// The caller supplies identity and time (this module reads no clock): opts.now() returns ISO-8601, askerId is an opaque session or account id.
+export function concierge(index: Index, log: UnmatchedLog, opts: { now?: () => string } = {}) {
+  return async (ask: string, seat: Seat = "guest", askerId?: string | null): Promise<Reply> => {
     const r = route(index, ask, seat);
     if (r.kind !== "unmatched" || r.reason === "junk") return r;     // junk is never logged: it would poison the generator queue
+    const t = opts.now ? opts.now() : null;
     let ok = false;
-    try { const res = await log.append(r.configStub); ok = log.durable !== false && res !== false; } catch { ok = false; }
+    try { const res = await log.append({ ...r.configStub, askerId: askerId ?? null, firstSeenAt: t, lastSeenAt: t }); ok = log.durable !== false && res !== false; } catch { ok = false; }
     return ok ? { ...r, saved: true, message: MSG_SAVED } : r;
   };
 }

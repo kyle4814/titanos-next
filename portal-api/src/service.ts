@@ -2,7 +2,8 @@ import { PRODUCTS, refundVerdict, type Product } from "./catalogue.ts";
 import { buildRefundCard, applyRefundDecision, type RefundCase, type RefundCard, type RefundDecision } from "./refund_card.ts";
 import { normaliseDomain, verifyRecordName, verifyRecordValue, type TxtResolver } from "./dns.ts";
 import type { BillingProvider } from "./stripe.ts";
-import type { Store, Account, Purchase, Invoice, Subscription } from "./store.ts";
+import type { Store, Account, Purchase, Invoice, Subscription, ApiKey } from "./store.ts";
+import { capsOf, dayStartOf, DEFAULT_KEY_CAP_DAILY, DEFAULT_KEY_CAP_TOTAL, MAX_KEY_CAP_DAILY, MAX_KEY_CAP_TOTAL } from "./agent/caps.ts";
 import { normaliseEmail, randomToken, sha256Hex } from "./util.ts";
 import type { EntContext } from "./enterprise/service.ts";
 import * as entSvc from "./enterprise/service.ts";
@@ -22,7 +23,9 @@ import type { DohFetch } from "../../lib/guestscan/scan.ts";
 export interface OwnerDeps { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider }
 import { marketExport, hasActiveMarketJobs, type MarketDeps } from "./market/service.ts";
 export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; receiptSecret?: string; receiptKeyring?: import("./agent/receipt.ts").ReceiptKeyring; operatorSecret?: string; log?: (line: string) => void; model?: import("./agent/tools.ts").ModelClient; ent?: EntContext; throttle?: import("./throttle.ts").Throttle }
-export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }
+// f181: HttpError lives in util.ts (service.ts <-> plan_change_service.ts was a runtime import cycle); re-exported so every caller keeps working.
+export { HttpError } from "./util.ts";
+import { HttpError } from "./util.ts";
 const DAY = 86_400_000;
 export const LOGIN_TTL_MS = 15 * 60_000, SESSION_TTL_MS = 30 * DAY, LOGIN_LIMIT = 5, LOGIN_WINDOW_MS = 3_600_000;
 
@@ -240,7 +243,7 @@ export async function replayLateFacts(d: Deps, sub: Subscription): Promise<boole
       return true;
     });
     if (stored) Object.assign(sub, stored); // the caller's object follows the stored truth
-  } catch (e) { for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; } // nothing written: put the facts back, never lose them
+  } catch (e) { if (!(e as { factsRestored?: boolean })?.factsRestored) for (const f of late) await d.store.holdFact(`sub:${sub.id}`, f); throw e; } // nothing written: put the facts back (once: updateSubscription may already have), never lose them
   return true;
 }
 // f237: the subscription row for a paid subscription purchase, built from held facts (cancels, periods) and Stripe's own subscription (id or expanded). Shared by markPaid (winner)
@@ -249,7 +252,7 @@ export type SeedParts = { facts?: Record<string, unknown>[]; cancel?: boolean; s
 export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Purchase, stripeSub: unknown, now: number, out?: SeedParts): Promise<Subscription> {
   const facts = await d.store.takeFacts(`sub:${pur.subscriptionId}`); // held facts are cancels AND (f101) Stripe periods: only a cancel cancels
   const cancel = facts.some((f) => f.kind === "cancel");
-  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub) ?? held.first;
+  const held = heldPeriods(facts), sp = stripePeriodOf(stripeSub, d.log) ?? held.first;
   if (out) { out.facts = facts; out.cancel = cancel; out.sp = sp; out.rest = held.rest; }
   const sub: Subscription = { id: pur.subscriptionId as string, accountId: pur.accountId, purchaseId: pur.id, productId: pur.productId, startedAt: sp ? sp.start : now, ...(cancel ? { cancelledAt: now } : {}) };
   await seedPeriod(d as Deps, sub, sp, true);
@@ -259,10 +262,27 @@ export async function buildSubscription(d: Pick<Deps, "store" | "log">, pur: Pur
 // ---- f101: seed PlanState from Stripe's own period (current_period_start/end, billing_cycle_anchor), seconds on the wire ----
 // checkout.session.completed carries `subscription` as an id, or expanded as an object; invoice.paid carries the service period on
 // its first line (lines.data[0].period), which is the period just paid (the invoice's own period_start/end is the usage window).
-function stripePeriodOf(sub: unknown): StripePeriod | undefined {
+// f177: newer Stripe API versions moved current_period_start/end onto subscription items (items.data[]). Read both shapes:
+// top-level wins when it is valid; else take the min start and max end across the valid items. Unusable input never throws:
+// it returns undefined (calendar months keep applying) and, when a logger is given, says why.
+export function stripePeriodOf(sub: unknown, log?: (m: string) => void): StripePeriod | undefined {
   if (!sub || typeof sub !== "object") return undefined;
   const x = sub as Record<string, any>;
-  return periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+  const top = periodFromStripe(x.current_period_start, x.current_period_end, x.billing_cycle_anchor);
+  if (top) return top;
+  const items: unknown[] = Array.isArray(x.items?.data) ? x.items.data : [];
+  let start = Infinity, end = -Infinity, bad = 0;
+  for (const it of items) {
+    const i = (it && typeof it === "object" ? it : {}) as Record<string, any>;
+    const p = periodFromStripe(i.current_period_start, i.current_period_end);
+    if (!p) { bad++; continue; }
+    start = Math.min(start, p.start); end = Math.max(end, p.end);
+  }
+  if (end > start) return periodFromStripe(start / 1000, end / 1000, x.billing_cycle_anchor);
+  const hinted = x.current_period_start !== undefined || x.current_period_end !== undefined || items.length > 0;
+  if (hinted) log?.(`stripe subscription ${typeof x.id === "string" ? x.id : "?"}: no usable period (top-level invalid, ${bad} of ${items.length} items invalid); calendar months apply`);
+  else if (x.id !== undefined) log?.(`stripe subscription ${String(x.id)}: no period fields at all (neither top-level nor items); calendar months apply`);
+  return undefined;
 }
 function invoicePeriod(inv: Record<string, any>): StripePeriod | undefined {
   const line = inv.lines?.data?.[0]?.period;
@@ -294,7 +314,10 @@ export async function updateSubscription(d: Deps, id: string, mutate: (sub: Subs
     if (fx.taken && !fx.used) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);
     return v.sub;
   }
-  throw new HttpError(409, "subscription_conflict");
+  // f261 on int3's shape: no attempt landed, so nothing the callers took (fx.taken: held cancels and periods) was applied. Put them back before
+  // the 409, or a lost-CAS markPaid/sweep would consume them for good (the webhook event is already claimed: a redelivery is a duplicate).
+  if (fx.taken) for (const f of fx.taken) await d.store.holdFact(`sub:${id}`, f);
+  throw Object.assign(new HttpError(409, "subscription_conflict"), { factsRestored: !!fx.taken });
 }
 // Retainer tiers only (the three AI tiers own a PlanState). No period = no plan: calendar months apply until Stripe's numbers arrive.
 // Only the FIRST period (checkout's expanded subscription, or the subscription_create invoice) may define the start and the grid;
@@ -460,7 +483,12 @@ export async function reapRefundMemos(d: Deps, ttlMs = MEMO_TTL_MS): Promise<{ r
 }
 
 // 7 API KEYS (shown once, hash stored) 8 DATA EXPORT 9 ACCOUNT DELETION
-export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
+export function parseCap(v: unknown, max: number, name: string): number | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > max) throw new HttpError(400, `invalid_${name}`);
+  return v;
+}
+export async function createKey(d: Deps, a: Account, scopesIn: unknown, caps: { capDaily?: unknown; capTotal?: unknown } = {}) {
   // F-C7: an allow-list, not a sanitiser. Any scope string the tool catalogue does not define (e.g. "admin") is a 400,
   // never stored. Omitted or empty means a key with no scopes, as before.
   if (scopesIn !== undefined && !Array.isArray(scopesIn)) throw new HttpError(400, "invalid_scope");
@@ -468,15 +496,31 @@ export async function createKey(d: Deps, a: Account, scopesIn: unknown) {
   const asked = (scopesIn ?? []) as unknown[];
   if (asked.length > 10 || asked.some((s) => typeof s !== "string" || !allowed.includes(s))) throw new HttpError(400, "invalid_scope");
   const scopes = [...new Set(asked as string[])];
+  const capDaily = parseCap(caps.capDaily, MAX_KEY_CAP_DAILY, "capDaily") ?? DEFAULT_KEY_CAP_DAILY;
+  const capTotal = parseCap(caps.capTotal, MAX_KEY_CAP_TOTAL, "capTotal") ?? DEFAULT_KEY_CAP_TOTAL;
   if ((await d.store.keysFor(a.id)).filter((k) => !k.revokedAt).length >= 10) throw new HttpError(409, "key_limit");
   const key = randomToken("tk", 24);
-  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), scopes, createdAt: d.now() };
+  const prefix = key.slice(0, 11); // "tk_" + 8 hex: non-secret handle shown in the keys list (the id-based keytrace prefix is separate)
+  const row = { id: randomToken("key", 6), accountId: a.id, hash: await sha256Hex(key), prefix, scopes, createdAt: d.now(), capDaily, capTotal };
   await d.store.putKey(row);
-  return { id: row.id, key, scopes, note: "Shown once. Store it now." };
+  return { id: row.id, key, prefix, scopes, capDaily, capTotal, note: "Shown once. Store it now." };
 }
-export async function listKeys(d: Deps, a: Account) { return (await d.store.keysFor(a.id)).map((k) => ({ id: k.id, scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt })); }
+const keyView = async (d: Deps, k: ApiKey) => {
+  const sp = await d.store.keySpend(k.id, dayStartOf(d.now()), k.accountId);
+  return { id: k.id, prefix: k.prefix ?? null, scopes: k.scopes, createdAt: k.createdAt, revoked: !!k.revokedAt, ...capsOf(k), spentToday: sp.day, spentTotal: sp.total };
+};
+export async function listKeys(d: Deps, a: Account) { return Promise.all((await d.store.keysFor(a.id)).map((k) => keyView(d, k))); }
+// Owner-only (session auth, never an agent key, so a leaked key cannot raise its own cap).
+export async function setKeyCaps(d: Deps, a: Account, id: string, caps: { capDaily?: unknown; capTotal?: unknown }) {
+  const k = await d.store.keyById(id, a.id);
+  if (!k || k.accountId !== a.id) throw new HttpError(404, "not_found");
+  const capDaily = parseCap(caps.capDaily, MAX_KEY_CAP_DAILY, "capDaily"), capTotal = parseCap(caps.capTotal, MAX_KEY_CAP_TOTAL, "capTotal");
+  if (capDaily === undefined && capTotal === undefined) throw new HttpError(400, "no_caps");
+  await d.store.putKey({ ...k, ...(capDaily !== undefined ? { capDaily } : {}), ...(capTotal !== undefined ? { capTotal } : {}) });
+  return keyView(d, (await d.store.keyById(id, a.id))!);
+}
 export async function revokeKey(d: Deps, a: Account, id: string) {
-  const k = await d.store.keyById(id);
+  const k = await d.store.keyById(id, a.id);
   if (!k || k.accountId !== a.id) throw new HttpError(404, "not_found");
   k.revokedAt = k.revokedAt ?? d.now(); await d.store.putKey(k);
 }

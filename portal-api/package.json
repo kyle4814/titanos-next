@@ -10,6 +10,7 @@
   "scripts": {
     "flow16": "node --experimental-strip-types scripts/flow16_matrix.ts",
     "lint:migrations": "node --disable-warning=ExperimentalWarning scripts/migration_lint.mjs",
-    "test": "node scripts/migration_lint.mjs && node --test --experimental-strip-types test/*.test.ts"
+    "test": "node scripts/migration_lint.mjs && node --test --experimental-strip-types test/*.test.ts",
+    "test:d1agent": "PORTAL_STORE=d1agent node --test --experimental-strip-types test/*.test.ts"
   }
 }

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import LeadsExport from "@/components/LeadsExport";
+import EstateView from "@/components/EstateView";
 import type { SeatAnchor } from "@/lib/seatAnchors";
 
 // In-page anchor sections for a portal seat page. Server component: no state, no fetch, no model call.
@@ -19,7 +20,7 @@ export default function SeatAnchors({ rows, extras }: { rows: SeatAnchor[]; extr
           <h2 id={`${r.id}-h`} style={{ margin: 0 }}>{r.title}</h2>
           <small>{r.status === "live" ? "Built" : "Coming, not built yet"}</small>
           <p style={{ margin: 0 }}>{r.body}</p>
-          {extras?.[r.id] ?? (r.id === "leads" && r.status === "live" ? <LeadsExport /> : null)}
+          {extras?.[r.id] ?? (r.status === "live" ? (r.id === "leads" ? <LeadsExport /> : r.id === "estate" ? <EstateView /> : null) : null)}
         </section>
       ))}
     </div>

@@ -35,6 +35,7 @@ export default function BillingClient() {
   return (
     <main style={{ padding: "100px 20px 80px", maxWidth: 760, margin: "0 auto", color: "var(--text)" }}>
       <h1 style={{ color: "var(--ice)" }}>Billing</h1>
+      <p><a href="/app/keys">API keys for software and agents</a></p>
       {msg && <p role="status">{msg}</p>}
       {pending && (
         <div role="status" data-testid="refund-pending" style={{ border: "1px solid var(--border)", borderRadius: 10, padding: 14, marginBottom: 14 }}>

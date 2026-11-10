@@ -50,4 +50,8 @@ t("no em or en dashes, no model call, no secret in the new client files", () => 
     assert.doesNotMatch(c, /[–—]/, n); assert.doesNotMatch(c, /anthropic|openai|sk_live|sk_test|whsec_/i, n);
   }
 });
+t("the browser never sends a plan: the seat discount is a server-side entitlement (f44)", () => {
+  assert.doesNotMatch(lib.split("\n").filter((l) => l.includes("/pro/join")).join(""), /plan/); assert.doesNotMatch(client, /setPlan|value="seat"/);
+  assert.match(read("portal-api/src/market/service.ts"), /isActiveSeat/); assert.doesNotMatch(read("portal-api/src/market/service.ts"), /\.plan\b|b\.plan/);
+});
 console.log(`PASS ${passed} tests`);

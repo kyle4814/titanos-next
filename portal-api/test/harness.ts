@@ -2,6 +2,7 @@ import { handle } from "../src/index.ts";
 import { MemoryStore, type Store, type Subscription } from "../src/store.ts";
 import { D1PlanStore } from "../src/d1_plan_store.ts";
 import { FakeD1 } from "./fake_d1.ts";
+import { D1ShadowStore } from "./d1_agent_store.ts";
 import { MockBilling, signStripePayload, StripeHttpBilling } from "../src/stripe.ts";
 import { fakeResolver } from "../src/dns.ts";
 import { MockMailer, type Deps } from "../src/service.ts";
@@ -20,9 +21,12 @@ export async function seedSub(s: Store, accountId: string, sub: Omit<Subscriptio
   await s.putPurchase({ id: sub.purchaseId, accountId, productId: sub.productId, checkoutId: `cs_${sub.purchaseId}`, amountCents: 0, deliverableIssued: false, refundedCents: 0, status: "paid" });
   await s.putSubscription({ ...sub, accountId });
 }
-export function make(kind: StoreKind = "memory", d1?: FakeD1) {
+// F58: make({ d1: true }) (or PORTAL_STORE=d1agent on a memory run) persists the agent door in a fake D1 (D1ShadowStore).
+export function make(kindOrOpts: StoreKind | { d1?: boolean } = "memory", d1?: FakeD1) {
   const clock = { t: T0 };
-  const store = newStore(kind, d1), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
+  const kind: StoreKind = typeof kindOrOpts === "string" ? kindOrOpts : "memory";
+  const agentD1 = (typeof kindOrOpts === "object" && !!kindOrOpts.d1) || (kind === "memory" && process.env.PORTAL_STORE === "d1agent");
+  const store: MemoryStore = agentD1 ? new D1ShadowStore() : newStore(kind, d1), billing = new MockBilling(), dns = fakeResolver({}), mailer = new MockMailer(), model = new MockModel();
   const deps: Deps = { store, billing, dns, mailer, now: () => clock.t, siteOrigin: "https://titanos.tech", webhookSecret: SECRET, receiptSecret: RECEIPT_SECRET, model };
   const req = (method: string, path: string, opts: { token?: string; body?: unknown; headers?: Record<string, string> } = {}) =>
     handle(new Request("https://api.test" + path, { method, headers: { ...(opts.body === undefined ? {} : { "content-type": "application/json" }), ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}), ...(opts.headers ?? {}) }, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) }), { TITANOS_SITE_ORIGIN: "https://titanos.tech" }, deps);

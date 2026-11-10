@@ -6,8 +6,8 @@ import type { SeatAnchor } from "@/lib/seatAnchors";
 
 export const ANCHORS: SeatAnchor[] = [
   {
-    id: "estate", title: "Estate view", status: "coming", plan: "C8, plan line 1496",
-    body: "One view over every domain a group owns is designed but not built. Tenant isolation has to be tested adversarially before it opens. Until then an estate is scoped on a call.",
+    id: "estate", title: "Estate view", status: "live", plan: "C8, plan line 1496",
+    body: "One view over every domain a group owns, with a grade for each, the owner entity and when it was last read. The example below uses made-up domains. Live estates open per tenant once isolation has passed an adversarial review, and until then an estate is scoped on a call.",
   },
   {
     id: "dossiers", title: "Dossiers", status: "coming", plan: "plan line 297 (Enterprise seat)",
@@ -18,11 +18,11 @@ export const ANCHORS: SeatAnchor[] = [
     body: "A nuke is our name for the large evidence pack built for a single organisation, with the savings worked out from your own figures. It is agreed on a call, with the price set before anything starts. The price is on request.",
   },
   {
-    id: "savings-calculator", title: "Savings calculator", status: "coming", plan: "plan line 297; register P096 (SPEC)",
-    body: "A calculator that runs on your numbers is specified but not built, and no savings figure is published here. We work it out with you on a call and show the method.",
+    id: "savings-calculator", title: "Savings calculator", status: "live", plan: "C8, plan line 1496; register P096",
+    body: "Enter your own numbers to see a floor to ceiling band of hours given back to your team, set against the Enterprise band. The method is shown beside the result. Nobody is replaced, and nothing you type leaves the page.",
   },
   {
-    id: "sso", title: "SSO", status: "coming", plan: "C8, plan line 1496",
-    body: "Single sign-on for a group is designed but not built. It will not open until tenant isolation has passed an adversarial review. Timing is on request.",
+    id: "sso", title: "SSO", status: "live", plan: "C8, plan line 1496",
+    body: "Single sign-on over OpenID Connect is built and tested against generated keys. The setup steps are below. No live identity provider is connected yet, and connecting yours is arranged on a call.",
   },
 ];

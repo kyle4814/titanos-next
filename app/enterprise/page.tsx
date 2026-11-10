@@ -10,6 +10,8 @@ import { SystemLabel, DepthIndex } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import SeatAnchors from "@/components/SeatAnchors";
+import EnterpriseSavingsCalculator from "@/components/EnterpriseSavingsCalculator";
+import SsoSetup from "@/components/SsoSetup";
 import { ANCHORS } from "./anchors";
 import { FLEX } from "@/lib/flex";
 import DossierSelfServe from "@/components/DossierSelfServe";
@@ -87,7 +89,7 @@ export default function EnterprisePage() {
           </div>
         </div>
       </SectionReveal>
-      <SeatAnchors rows={ANCHORS} />
+      <SeatAnchors rows={ANCHORS} extras={{ "savings-calculator": <EnterpriseSavingsCalculator />, sso: <SsoSetup /> }} />
       <SectionReveal style={{ padding: "var(--space-12, 32px) 20px", position: "relative", zIndex: 2 }}>
         <div className="container-vault">
           <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Dossiers</SystemLabel>

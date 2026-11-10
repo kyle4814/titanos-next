@@ -1,10 +1,13 @@
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdtempSync, cpSync, rmSync, readdirSync, statSync, mkdirSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { FakeD1, seeded } from "./fake_d1.ts";
+import { MiniflareD1 } from "./miniflare_d1.ts";
+// f213: when CONTRACT_LIB=1 another suite imports runSchedule()/base() from here (miniflare_race.test.ts); the FakeD1 tests below must not register again.
+const test: typeof nodeTest = process.env.CONTRACT_LIB === "1" ? ((() => undefined) as unknown as typeof nodeTest) : nodeTest;
 
 // C2 every subscription writer is compare-and-set (f183, extends f175). SYNTHETIC labelled fixtures only (example.invalid, sub_syn).
 // Each schedule fires 2..4 CONCURRENT writers at one subscription: changePlan (upgrade/downgrade/keep/cancel), cancelSubscription,
@@ -21,7 +24,7 @@ const U = (dir: string) => async () => {
   const [store, d1, svc, pcs, pc, st, dns] = await Promise.all([f("store.ts"), f("d1_plan_store.ts"), f("service.ts"), f("plan_change_service.ts"), f("plan_change.ts"), f("stripe.ts"), f("dns.ts")]);
   return { store, d1, svc, pcs, pc, st, dns } as M;
 };
-const base = U(SRC);
+export const base = U(SRC);
 const depsFor = (m: M, store: any) => ({ store, billing: new m.st.MockBilling(), dns: m.dns.fakeResolver({}), mailer: new m.svc.MockMailer(), now: () => NOW, siteOrigin: "https://titanos.tech", webhookSecret: "whsec_test_fixture" });
 async function seedStore(store: any) {
   await store.putAccount(acc);
@@ -64,9 +67,9 @@ async function serialEnds(m: M, os: Op[]) {
   }
   return ends;
 }
-async function runSchedule(m: M, kind: "memory" | "d1", seed: number) {
+export async function runSchedule(m: M, kind: "memory" | "d1" | "mf", seed: number) {
   const bad: string[] = [], rng = seeded(seed);
-  const raw = kind === "d1" ? new m.d1.D1PlanStore(new FakeD1(seeded(seed))) : new m.store.MemoryStore();
+  const raw = kind === "d1" ? new m.d1.D1PlanStore(new FakeD1(seeded(seed))) : kind === "mf" ? new m.d1.D1PlanStore(new MiniflareD1()) : new m.store.MemoryStore(); // mf (f213): real local miniflare D1; the seeded Proxy ticks below still vary the interleaving per seed
   await seedStore(raw);
   const v0 = (await raw.subscriptionVersioned("sub_syn"))!.version; // the seed write's version (memory 1, D1 0)
   const c = { lost: 0, wins: 0, puts: 0, creates: 0 };
@@ -125,6 +128,20 @@ test("SUBCAS: updateSubscription gives up with 409 subscription_conflict after S
   s2.casSubscription = async (s: any, v: number) => { if (first) { first = false; return false; } return cas(s, v); };
   await m.svc.updateSubscription(d2, "sub_syn", async (x: any, fx: any) => { fx.taken ??= await s2.takeFacts("sub:sub_syn"); fx.used = false; x.cancelledAt = 5; return true; });
   assert.equal((await s2.takeFacts("sub:sub_syn")).length, 1);
+});
+
+test("SUBCAS f261: facts a caller took and marked used are put back (once) when every CAS attempt loses", async () => {
+  const m = await base(), store = new m.store.MemoryStore(); await seedStore(store); const d = depsFor(m, store);
+  await store.holdFact("sub:sub_syn", { kind: "cancel" }); await store.holdFact("sub:sub_syn", { kind: "period", start: START, end: START + 30 * DAY, create: false });
+  store.casSubscription = async () => false;
+  const took = await store.takeFacts("sub:sub_syn"); assert.equal(took.length, 2);
+  await assert.rejects(m.svc.updateSubscription(d, "sub_syn", (x: any, fx: any) => { fx.taken = took; fx.used = true; x.cancelledAt = 7; return true; }), (e: any) => e.code === "subscription_conflict" && e.factsRestored === true);
+  assert.equal((await store.takeFacts("sub:sub_syn")).length, 2, "both facts are held again, not lost");
+  // replayLateFacts on the same contention re-holds exactly once (no duplicate from its own catch)
+  const s3 = new m.store.MemoryStore(); await seedStore(s3); const d3 = depsFor(m, s3);
+  await s3.holdFact("sub:sub_syn", { kind: "cancel" }); s3.casSubscription = async () => false;
+  await assert.rejects(m.svc.replayLateFacts(d3, await s3.subscriptionById("sub_syn")), (e: any) => e.code === "subscription_conflict");
+  assert.equal((await s3.takeFacts("sub:sub_syn")).length, 1, "held once, not twice");
 });
 
 // ---- source scan: no unconditional subscription write outside the store layer ----

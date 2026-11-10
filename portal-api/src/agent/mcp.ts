@@ -2,12 +2,16 @@
 // Methods: initialize, ping, tools/list, tools/call. A key sees and can call only the tools its scopes allow.
 import { HttpError, type Deps } from "../service.ts";
 import type { Account, ApiKey } from "../store.ts";
-import { sha256Hex } from "../util.ts";
+import { sha256Hex, randomToken } from "../util.ts";
+import { capsOf, dayStartOf } from "./caps.ts";
 import { hashOf, newReceiptId, ringOf, signWithRing } from "./receipt.ts";
 import { TOOLS, toolByName, publicTool, ToolError, type ToolDef } from "./tools.ts";
 
 export const PROTOCOL_VERSION = "2025-03-26";
 export const RATE_LIMIT_PER_MIN = 60;
+export const IDEM_TTL_MS = 30_000; // a claim older than this (by d.now()) belongs to a crashed worker and may be taken over
+export const idemTiming = { waitMs: 5_000, pollMs: 5 }; // how long a loser waits for the winner's receipt (real time) before idempotency_in_progress
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export interface AuthedKey { key: ApiKey; account: Account }
 export async function authenticateKey(d: Deps, bearer: string | null): Promise<AuthedKey | null> {
@@ -50,35 +54,77 @@ export async function callTool(d: Deps, auth: AuthedKey, id: unknown, name: unkn
   if (bad) return err(id, -32602, bad);
   const args = (argsIn ?? {}) as Record<string, any>;
   const idem = hdr.idem && /^[\w.-]{1,64}$/.test(hdr.idem) ? hdr.idem : undefined;
-  if (idem) { // a retry with the same Idempotency-Key returns the original receipt and charges nothing more
-    const prev = await d.store.receiptByIdem(auth.key.id, idem);
-    // F-C7: the same key with a different tool or different arguments is a client bug, never a replay of the first receipt.
-    if (prev && (prev.tool !== t.name || prev.inputSha !== (await hashOf(args)))) throw new HttpError(422, "idempotency_key_reuse");
-    if (prev) return toolText(id, { replayed: true, receipt: prev });
+  // RESERVE FIRST (F17, ported by F98). Insert-first on (key, Idempotency-Key): exactly one concurrent caller wins and may debit; the rest
+  // wait for the winner's receipt and replay it. A claim that expires (crashed owner) is taken over and keeps its rid, so a debit the dead
+  // owner already made is recognised below instead of repeated. A failed or refused call releases the claim so the key can be retried.
+  let rid = newReceiptId(), owner: string | undefined, recovered = false;
+  const release = async () => { if (owner && idem) await d.store.idemRelease(auth.key.id, idem, owner); owner = undefined; };
+  const hashArgs = await hashOf(args);
+  // F-C7: the same key with a different tool or different arguments is a client bug, never a replay of the first receipt.
+  const replay = (prev: NonNullable<Awaited<ReturnType<typeof d.store.receiptByIdem>>>) => {
+    if (prev.tool !== t.name || prev.inputSha !== hashArgs) throw new HttpError(422, "idempotency_key_reuse");
+    return toolText(id, { replayed: true, receipt: prev });
+  };
+  if (idem) {
+    const deadline = Date.now() + idemTiming.waitMs;
+    for (;;) {
+      const prev = await d.store.receiptByIdem(auth.key.id, idem, auth.account.id);
+      if (prev) return replay(prev);
+      const mine = randomToken("own", 12);
+      const r = await d.store.idemReserve(auth.key.id, idem, rid, mine, d.now(), IDEM_TTL_MS);
+      if (r.won) {
+        owner = mine; recovered = r.rid !== rid; rid = r.rid;
+        const done = await d.store.receiptByIdem(auth.key.id, idem, auth.account.id); // the previous owner may have finished between our check and our claim
+        if (done) { await release(); return replay(done); }
+        break;
+      }
+      if (Date.now() >= deadline) return toolText(id, { error: "idempotency_in_progress", retryAfterMs: IDEM_TTL_MS }, true);
+      await sleep(idemTiming.pollMs);
+    }
   }
   const now = d.now();
-  if ((await d.store.callsSince(auth.key.id, now - 60_000)) >= RATE_LIMIT_PER_MIN) return toolText(id, { error: "rate_limited", perMinute: RATE_LIMIT_PER_MIN }, true);
+  if ((await d.store.callsSince(auth.key.id, now - 60_000)) >= RATE_LIMIT_PER_MIN) { await release(); return toolText(id, { error: "rate_limited", perMinute: RATE_LIMIT_PER_MIN }, true); }
   await d.store.noteCall(auth.key.id, now);
 
   const byok = t.modelBacked && hdr.byok ? hdr.byok : undefined;
   const mode: "free" | "prepaid" | "byok" = t.credits === 0 ? "free" : byok ? "byok" : "prepaid";
   const charge = mode === "prepaid" ? t.credits : 0;
-  const rid = newReceiptId();
-  if (charge > 0) {
-    const bal = await d.store.creditApply(auth.account.id, -charge, "debit", rid, now);
-    if (bal === undefined) return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true);
+  // ledger ref for this call's debit. Normally rid. After a takeover, look for what the crashed owner left: a debit with no reversal is ours
+  // to keep (do not debit again); a debit already reversed means that attempt was refunded, so charge under a fresh ref (rid~n).
+  let ref = rid, alreadyDebited = false;
+  if (charge > 0 && recovered) {
+    const es = await d.store.creditEntries(auth.account.id);
+    for (let n = 0; ; n++) {
+      ref = n ? `${rid}~${n}` : rid;
+      const deb = es.some((e) => e.reason === "debit" && e.ref === ref), rev = es.some((e) => e.reason === "reversal" && e.ref === ref);
+      if (deb && !rev) { alreadyDebited = true; break; }
+      if (!deb) break;
+    }
+  }
+  if (charge > 0 && !alreadyDebited) {
+    // F176: balance + per-key daily cap + per-key total cap + ledger write are ONE atomic store step (F19). A leaked key stops at its cap.
+    const deb = await d.store.creditDebitCapped({ accountId: auth.account.id, keyId: auth.key.id, amount: charge, ref, at: now, dayStart: dayStartOf(now), ...capsOf(auth.key) });
+    if (!deb.ok) {
+      await release(); // a refused call frees its idempotency key; nothing was charged
+      if (deb.reason === "insufficient_credits") return toolText(id, { error: "insufficient_credits", needed: charge, balance: await d.store.creditBalance(auth.account.id) }, true);
+      if (deb.reason === "key_cap_daily" || deb.reason === "key_cap_total")
+        // F39 shape: a JSON-RPC 2.0 error object with data {status, error}. HTTP stays 200 (the transport worked; the call was refused).
+        return { jsonrpc: "2.0", id: id ?? null, error: { code: -32002, message: "key_spend_cap", data: { status: 429, error: "key_spend_cap", cap: deb.reason === "key_cap_daily" ? "daily" : "total", needed: charge, charged: 0 } } };
+      return err(id, -32603, "ledger_refused"); // key_not_in_tenant or duplicate_ref: never expected on this path, fail closed
+    }
   }
   let output: unknown;
   try {
     output = await t.run({ d, account: auth.account, args, byokKey: byok });
   } catch (e) {
-    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", rid, now); // a failed call costs nothing
+    if (charge > 0) await d.store.creditApply(auth.account.id, charge, "reversal", ref, now, auth.key.id); // a failed call costs nothing
+    await release();
     if (e instanceof ToolError) return toolText(id, { error: e.code, charged: 0 }, true);
     return toolText(id, { error: "tool_failed", charged: 0 }, true);
   }
   const receipt = await signWithRing(ring, {
     id: rid, tool: t.name, keyId: auth.key.id, accountId: auth.account.id, at: now,
-    inputSha: await hashOf(args), outputSha: await hashOf(output), credits: charge, mode, ...(idem ? { idem } : {}),
+    inputSha: hashArgs, outputSha: await hashOf(output), credits: charge, mode, ...(idem ? { idem } : {}),
   });
   await d.store.putReceipt(receipt);
   return toolText(id, { result: output, receipt });

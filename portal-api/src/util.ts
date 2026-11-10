@@ -26,3 +26,6 @@ export function normaliseEmail(s: unknown): string | null {
   const e = s.trim().toLowerCase();
   return e.length <= 254 && EMAIL_RE.test(e) ? e : null;
 }
+
+// f181: the error every route turns into a JSON status. Here (not service.ts) so modules service.ts imports can throw it without a cycle.
+export class HttpError extends Error { status: number; code: string; constructor(status: number, code: string) { super(code); this.status = status; this.code = code; } }

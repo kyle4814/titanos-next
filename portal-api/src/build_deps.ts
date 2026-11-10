@@ -1,7 +1,7 @@
 // f208: buildDeps(env) assembles the real Deps for the Worker entry from an Env. FAIL CLOSED: a missing binding throws a typed
 // BuildDepsError naming the binding (never a secret value); the entry turns it into a 503 with a named reason.
-// Nothing here is deployed. The Store adapter is an injected seam (see StoreFactory): this base has no D1 Store, and a
-// per-isolate MemoryStore must never pretend to be the shared database, so the default factory refuses.
+// Nothing here is deployed. The default StoreFactory (f216) is D1Store over env.DB; a per-isolate MemoryStore must never
+// pretend to be the shared database, so with no DB binding buildDeps refuses (missing_binding:DB).
 import type { Env } from "./env.ts";
 import type { Deps, Mailer } from "./service.ts";
 import { HttpError } from "./service.ts";
@@ -10,6 +10,7 @@ import { MockBilling, StripeHttpBilling, type BillingProvider } from "./stripe.t
 import { dohResolver, type TxtResolver } from "./dns.ts";
 import { Throttle } from "./throttle.ts";
 import { D1ThrottleStore } from "./d1throttle.ts";
+import { D1Store } from "./d1store.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
 export class BuildDepsError extends Error {
@@ -22,7 +23,11 @@ export const THROTTLE_LIMITS = { maxFailures: 5, windowMs: 15 * 60_000, lockoutM
 
 // No mail transport is bound yet (PENDING LIVE): refuse loudly instead of dropping login links on the floor.
 export const unavailableMailer: Mailer = { async send() { throw new HttpError(503, "mailer_unavailable"); } };
-const noStore: StoreFactory = () => { throw new BuildDepsError("store_adapter_unavailable"); };
+// Explicit opt-out seam (tests, or a deploy that must refuse): throws the typed store_adapter_unavailable reason.
+export const noStoreFactory: StoreFactory = () => { throw new BuildDepsError("store_adapter_unavailable"); };
+// f216: the shipped default. D1Store over the DB binding ONLY (no secret is read). Missing DB is caught earlier in buildDeps
+// as missing_binding:DB, so a per-isolate MemoryStore can never stand in for the shared database.
+export const d1StoreFactory: StoreFactory = (db) => new D1Store(db);
 
 // Fake billing unless the Env carries a TEST key. A live key is refused outright (live Stripe is GATE2, not this lane).
 export function billingFor(env: Env, fetchFn?: typeof fetch): BillingProvider {
@@ -38,7 +43,7 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   if (!db) throw new BuildDepsError("missing_binding", "DB");
   const siteOrigin = env.TITANOS_SITE_ORIGIN;
   if (!siteOrigin) throw new BuildDepsError("missing_binding", "TITANOS_SITE_ORIGIN");
-  const store = (opts.storeFactory ?? noStore)(db, env);
+  const store = (opts.storeFactory ?? d1StoreFactory)(db, env);
   return {
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? unavailableMailer, now: opts.now ?? (() => Date.now()), siteOrigin,

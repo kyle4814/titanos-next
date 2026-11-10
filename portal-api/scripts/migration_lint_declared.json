@@ -91,10 +91,6 @@
   {
    "prefix": 13,
    "owner": "same"
-  },
-  {
-   "prefix": 17,
-   "owner": "f301 0017_unmatched_demand.sql (not on int3)"
   }
  ],
  "check_debt": [],

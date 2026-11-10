@@ -133,5 +133,18 @@ node scripts/test_xtenant_route_matrix.mjs
 node --experimental-strip-types scripts/test_dossier_selfserve.mjs
 node scripts/test_leads_ui.mjs
 F244_MUTANTS=1 node scripts/test_portal_refund_pending.mjs
+F244_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_portal_refund_pending.mjs
+node scripts/test_alias_loader.mjs
+ALIAS_LOADER_MUTANTS=1 node scripts/test_alias_loader.mjs
 node scripts/mutate_sso_cap.mjs
 node scripts/mutate_sso_cap_d1.mjs
+node --experimental-strip-types scripts/test_concierge_dev2.mjs
+node --experimental-strip-types scripts/test_concierge_miss_taxonomy.mjs
+bash scripts/test_demand_d1_mutants.sh
+node --experimental-strip-types scripts/test_estate_ui.mjs
+node scripts/test_keys_page.mjs
+node scripts/test_savings_calculator_ui.mjs
+bash scripts/test_savings_calculator_ui_mutations.sh
+node --experimental-strip-types scripts/test_sso_section.mjs
+node scripts/test_worker_headers.mjs
+node scripts/test_import_cycles.mjs
