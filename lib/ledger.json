@@ -183,6 +183,7 @@
    "label": "OPERATOR_STATED",
    "method": "about US$30 a month of AI tools while the main engine was built (to 29 September); no receipt on file",
    "source": "state/numbers/SITE_NUMBERS_AUDIT_2026-10-08.md (UNSOURCED row: the audit marks this figure unsourced)",
+   "source_status": "UNSOURCED",
    "unit": "AU$/month",
    "value": 46
   },
@@ -199,6 +200,7 @@
    "label": "OPERATOR_STATED",
    "method": "AU$300 a month of AI tools since 29 September; no receipt on file",
    "source": "state/numbers/SITE_NUMBERS_AUDIT_2026-10-08.md (UNSOURCED row: the audit marks this figure unsourced)",
+   "source_status": "UNSOURCED",
    "unit": "AU$/month",
    "value": 300
   },

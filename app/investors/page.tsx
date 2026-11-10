@@ -7,7 +7,7 @@ import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import W2c from "@/components/w2c/W2c";
 import GlowCard from "@/components/house/GlowCard";
-import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
+import { int, dec, aud, times, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
@@ -33,12 +33,12 @@ const A: CSSProperties = { color: "var(--gold)" };
 const BASE: [string, string][] = [
   ["3.5 hours", "idea to a working, tested app (replay on the proof page)"],
   [`~${v("annual_ey")}`, `engineers' worth of output a year, priced by the COCOMO model (MODELLED, ${AS_OF_LONG})`],
-  ["AU$300", "a month in AI tools behind all of it (operator figure, no receipt on file)"],
-  [`~${Math.round(v("per_dollar_full_today_x")).toLocaleString("en-AU")}x`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on the AU$300 a month tool spend, an operator figure with no receipt on file)`],
+  [aud("compute_today_aud_month"), "a month in AI tools behind all of it (operator figure, no receipt on file)"],
+  [`~${times("per_dollar_full_today_x")}`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on the ${aud("compute_today_aud_month")} a month tool spend, an operator figure with no receipt on file)`],
 ];
 
 const COMPUTE: [string, string, string][] = [
-  ["AU$300 a month (today)", "1", `~${v("annual_ey")} engineers' worth a year (MODELLED: Basic COCOMO on measured lines)`],
+  [`${aud("compute_today_aud_month")} a month (today)`, "1", `~${v("annual_ey")} engineers' worth a year (MODELLED: Basic COCOMO on measured lines)`],
 ];
 
 export default function Investors() {
@@ -80,7 +80,7 @@ export default function Investors() {
           <OpenLoop>So what happens if the compute budget goes up? The next table is where that gets honest.</OpenLoop>
           <h2 className="w2c-h" style={H}>What compute buys</h2>
           <p style={BODY}>
-            Each AU$300 a month buys one AI build account. Today that is about {dec("estate_ey")} engineer-years modelled over {v("span_days")} days
+            Each {aud("compute_today_aud_month")} a month buys one AI build account. Today that is about {dec("estate_ey")} engineer-years modelled over {v("span_days")} days
             (Basic COCOMO on {int("estate_sloc")} measured lines). More accounts would run more work in parallel, but the scale-up rows are
             scenarios with no result behind them, so none is printed here until weekly results confirm one.
           </p>

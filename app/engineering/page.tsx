@@ -10,7 +10,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import Tiles from "@/components/proof/Tiles";
-import { int, dec, aud, audShort, v, times, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
+import { int, dec, aud, audShort, v, rnd, times, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
 import Provenance from "@/components/Provenance";
 
 const META_TITLE = "What one engineer built, and the maths | TITANOS";
@@ -87,7 +87,7 @@ export default function EngineeringPage() {
       <PageHero
         badge="The proof"
         title={`${Math.round(v("model_team"))} engineers for ${Math.round(v("model_schedule_months"))} months, or one person in about ${Math.round(v("elapsed_months"))}.`}
-        tagline="On about US$30 (roughly AU$46) a month of AI tools while the main engine was built (operator figure, no receipt on file)."
+        tagline={`On about US$30 (roughly ${aud("compute_build_aud_month")}) a month of AI tools while the main engine was built (operator figure, no receipt on file).`}
         sub={`That first figure is MODELLED, not a timesheet. One engineer, working around a day job, with commits on ${v("active_days")} of ${v("span_days")} days since the first commit on 4 May 2026. ${HERO_STRIP} Every figure below has its method at the bottom of the page.`}
       >
         <AnimatedButton href="#method" variant="secondary">
@@ -182,10 +182,10 @@ export default function EngineeringPage() {
 
       <Block title="What a dollar of compute buys">
         <p style={BODY}>
-          Counted at 10% (a MODELLED figure), that is {aud("annual_cost_10pct_aud")} a year of engineering on about AU$550 a year of compute (about US$30, roughly AU$46, a month, an operator figure with no receipt on file): about
-          AU${Math.round(v("per_dollar_build_x")).toLocaleString("en-AU")} of engineering per AU$1 on the original build spend, and about AU${Math.round(v("per_dollar_today_x")).toLocaleString("en-AU")} per AU$1 at
-          today&apos;s AU$300 a month. On the full model ({aud("build_cost_aud")} built on about AU${Math.round(v("compute_build_total_aud"))} of compute over
-          the {Math.round(v("elapsed_months"))} months), it is about AU${Math.round(v("per_dollar_full_x")).toLocaleString("en-AU")} per AU$1.
+          Counted at 10% (a MODELLED figure), that is {aud("annual_cost_10pct_aud")} a year of engineering on compute of about {aud("compute_build_aud_month")} a month (roughly US$30, an operator figure with no receipt on file): about
+          AU${rnd("per_dollar_build_x")} of engineering per AU$1 on the original build spend, and about AU${rnd("per_dollar_today_x")} per AU$1 at
+          today&apos;s {aud("compute_today_aud_month")} a month. On the full model ({aud("build_cost_aud")} built on about AU${rnd("compute_build_total_aud")} of compute over
+          the {Math.round(v("elapsed_months"))} months), it is about AU${rnd("per_dollar_full_x")} per AU$1.
         </p>
       </Block>
 
@@ -220,7 +220,7 @@ export default function EngineeringPage() {
         lead="A scenario, not a forecast."
       >
         <p style={BODY}>
-          Today it is one person on AU$300 a month of AI tools. More accounts run more work in parallel and investment would add people, but there is no result behind any scale-up number yet, so this page does not print one.
+          Today it is one person on {aud("compute_today_aud_month")} a month of AI tools. More accounts run more work in parallel and investment would add people, but there is no result behind any scale-up number yet, so this page does not print one.
         </p>
       </Block>
 
@@ -261,7 +261,7 @@ export default function EngineeringPage() {
             about {aud("annual_cost_aud")}. The 10% and 2% lines are 10% and 2% of that. All of these are MODELLED, never revenue.
           </li>
           <li>
-            Compute: about US$30 (roughly AU$46) a month of AI tools while the main engine was built (to 29 September), and AU$300 a month since. Both are operator figures with no receipt on file.
+            Compute: about US$30 (roughly {aud("compute_build_aud_month")}) a month of AI tools while the main engine was built (to 29 September), and {aud("compute_today_aud_month")} a month since. Both are operator figures with no receipt on file.
           </li>
           <li>
             Re-run it yourself: count the non-blank, non-comment lines in your own repositories, put the
