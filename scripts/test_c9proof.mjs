@@ -27,7 +27,7 @@ for (const r of routes) {
   ok(!e.source.includes("*") ? existsSync(P(e.source)) : readdirSync(P(e.source.replace(/\*.*/, "").replace(/[^/]*$/, ""))).length > 0, `${r}: named source exists on disk (${e.source})`);
 }
 ok(readFileSync(P("public/proof/trading-app-tests.log"), "utf8").startsWith(prov["/proof"].date), "/proof literal date matches the first line of the test log it cites");
-ok(prov["/efficiency"].date === J("lib/site-data/proof.json").generated.baselineTs.slice(0, 10), "/efficiency date equals the baseline snapshot date in proof.json");
+ok(prov["/efficiency"].date === J("lib/efficiency/efficiency.json").updated, "/efficiency date equals the efficiency data date (lib/efficiency/efficiency.json updated)");
 
 // 2. Trust page: every claim names a file, and the file really says it
 const trust = J("lib/site-data/trust.json");

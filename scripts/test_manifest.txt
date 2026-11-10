@@ -43,6 +43,7 @@ node scripts/measure_shelf1000.mjs
 node scripts/test_shelf_search.mjs
 bash scripts/test_shelf_search_mutants.sh
 node scripts/test_proof_freshness.mjs
+node scripts/test_proof_feed_reexport.mjs
 node --experimental-strip-types scripts/test_terms_flow.mjs
 node scripts/test_status.mjs
 node scripts/test_killtest_ledger.mjs
