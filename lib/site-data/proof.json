@@ -7,7 +7,7 @@
       "lib/efficiency/efficiency.json"
     ],
     "baselineTs": "2026-11-10T13:19:51",
-    "sha256": "63b331a1558438a5"
+    "sha256": "79c55dce474eafb8"
   },
   "labels": {
     "MEASURED": "Counted or timed on our own system, on the date shown.",
@@ -502,13 +502,13 @@
     {
       "id": "s_backup",
       "group": "Safety",
-      "display": "644.6 h",
+      "display": "7 min",
       "caption": "Age of the newest backup",
       "label": "MEASURED",
-      "source": "Backup log",
+      "source": "Rolling backup history (time of the newest saved pass)",
       "date": "2026-11-10",
-      "method": "Read from the source on the date shown.",
-      "system": "Backup log"
+      "method": "Time since the newest saved backup pass, read from the backup history on the date shown.",
+      "system": "Rolling backup history (time of the newest saved pass)"
     },
     {
       "id": "s_suite",

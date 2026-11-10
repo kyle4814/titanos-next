@@ -159,13 +159,13 @@
   {
    "id": "s_backup",
    "group": "Safety",
-   "display": "644.6 h",
+   "display": "7 min",
    "caption": "Age of the newest backup",
    "label": "MEASURED",
-   "system": "Backup log",
-   "source": "Backup log",
+   "system": "Rolling backup history (time of the newest saved pass)",
+   "source": "Rolling backup history (time of the newest saved pass)",
    "date": "2026-11-10",
-   "method": "Read from the source on the date shown."
+   "method": "Time since the newest saved backup pass, read from the backup history on the date shown."
   },
   {
    "id": "s_suite",

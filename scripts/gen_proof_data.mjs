@@ -78,6 +78,7 @@ const SOURCE_LABELS = [
   [/verify_runs/, "Gate run record"],
   [/titanos_suite/, "No durable run record exists yet"],
   [/archive\.log/, "Backup log"],
+  [/backup\/rolling/, "Rolling backup history (time of the newest saved pass)"],
 ];
 const pubSource = (s) => {
   for (const [re, label] of SOURCE_LABELS) if (re.test(s)) return label;
@@ -170,7 +171,9 @@ const fFail = row("fleet fail rate (last 24 h)");
 const fMed = row(["fleet median minutes/job (last 24 h)", "fleet median minutes/job"]);
 const gate = row("kernel gate wall (latest)");
 const suite = row("titanos suite wall (latest)");
-const bak = row("newest backup age (archive.log)");
+// The live backup is the rolling backup (newest commit = last saved pass). archive.log is the archive cron, frozen since
+// 2026-10-13, so it is only the fallback; a snapshot without the rolling row falls back to it with its own date.
+const bak = row(["newest rolling backup age (git commit)", "newest backup age (archive.log)"]);
 
 const fleetStar = (id, display, caption) => star({ id, group: "Fleet", display, caption, label: "MEASURED", source: "Worker fleet job ledger", system: fleet.system, date: fleet.measuredAt, method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished (${fleet.counts.done} done, ${fleet.counts.fail + fleet.counts.stuck} failed or stuck). Live reading now: ${fleet.liveNow}.` });
 fleetStar("s_jobs", `${fmt(fleet.jobsPerHour, 2)} jobs an hour`, `Worker jobs finished on ${fleet.measuredAt}, one full day (${fleet.counts.finished} finished over 24 hours)`);
@@ -187,7 +190,7 @@ baseStar("s_cronh", "Machine", cronH, `${fmt(num(cronH.now, /^([\d.]+)/, "c"), 2
 baseStar("s_cronf", "Machine", cronF, cronF.now.match(/\(([\d.]+%)\)/)[1], `Scheduled runs that failed, ${cronF.now.replace(/ \(.*/, "")}. The 89 percent from before was one job, so we do not chart the two against each other.`, cronF.kind,
   "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately.");
 baseStar("s_gate", "Build", gate, gate.now.match(/^(\d+ s)/)[1], `Latest gate run, ${gate.now.match(/(\d+) suites/)[1]} suites, green`, "MEASURED", "Recorded by the gate runner at the time shown in the run record.");
-baseStar("s_backup", "Safety", bak, bak.now.replace(" old", ""), "Age of the newest backup", bak.kind);
+baseStar("s_backup", "Safety", bak, bak.now.replace(" old", ""), "Age of the newest backup", bak.kind, "Time since the newest saved backup pass, read from the backup history on the date shown.");
 star({ id: "s_suite", group: "Build", display: "No number yet", caption: "Wall time of the main codebase suite", label: "UNKNOWN", source: pubSource(suite.source), date: suite.date, method: "That suite does not log its own run time, so we show no figure. A recorder is the next fix." });
 
 for (const id of ["cost_per_job", "daily_spend", "recall50", "heldout", "killtest", "cron_snapshot", "cron_mirror", "cron_bundle", "repo_size", "titanos_suite"]) {

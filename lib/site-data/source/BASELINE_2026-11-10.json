@@ -203,6 +203,14 @@
    "note": ""
   },
   {
+   "vector": "newest rolling backup age (git commit)",
+   "baseline": "not recorded",
+   "now": "7 min old",
+   "kind": "MEASURED",
+   "source": "/home/tech2/.titanos/backup/rolling/repo (git log -1 %ct)",
+   "note": "index.lock present; row added at 2026-11-10T13:47:26 by ceiling_board.rolling_row() (same read as hud.py backup()); the rest of this file is the 13:19:51 run"
+  },
+  {
    "vector": "newest bundle age",
    "baseline": "bundle step 51 s/run, 492 files / 204 MB in OneDrive",
    "now": "486.5 h old",
