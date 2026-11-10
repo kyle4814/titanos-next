@@ -46,6 +46,8 @@ export default function HeroDustBurst() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Own guard (f403_c1): the burst never runs under prefers-reduced-motion, whoever mounts it.
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");

@@ -91,7 +91,7 @@ export function SigilConstellation({ count = 13 }: { count?: number }) {
   const GA = 137.50776;
   return (
     <div
-      aria-hidden="true"
+      aria-hidden="true" data-no-print
       style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden", opacity: 0.07 }}
     >
       {Array.from({ length: count }).map((_, i) => {
