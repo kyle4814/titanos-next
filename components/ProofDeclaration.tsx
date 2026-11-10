@@ -12,7 +12,9 @@ export default function ProofDeclaration() {
   const previousFocus = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (pathname !== "/") return;
+    // Leaving "/" (Back button, a client-side Link) must close the dialog, or its scroll lock and Escape listener
+    // would stay live on a page with no visible dialog (independent review 2026-11-10, P1).
+    if (pathname !== "/") { setOpen(false); return; }
     try {
       if (window.sessionStorage.getItem(DISMISS_KEY) !== "1") {
         previousFocus.current = document.activeElement as HTMLElement;
@@ -60,7 +62,7 @@ export default function ProofDeclaration() {
         style={{ position:"relative", width:"min(100%,720px)", maxHeight:"min(90dvh,850px)", overflowY:"auto", background:"#0c0c0e", color:"#f6f2e9", border:"1px solid #67542d", borderRadius:16, padding:"clamp(22px,5vw,48px)", boxShadow:"0 24px 90px #000" }}>
         <button ref={closeButton} onClick={dismiss} aria-label="Close introduction"
           style={{ position:"absolute", right:16, top:12, border:"1px solid #746342", borderRadius:8, background:"transparent", color:"#f6f2e9", padding:"6px 12px", cursor:"pointer", fontSize:20 }}>×</button>
-        <p style={{ color:"#d7b76c", fontSize:12, letterSpacing:3, margin:"0 36px 24px 0" }}>PARRALAX TECHNOLOGIES / TITANOS</p>
+        <p style={{ color:"#d7b76c", fontSize:12, letterSpacing:3, margin:"0 36px 24px 0" }}>PARALLAX TECHNOLOGIES / TITANOS</p>
         <p style={{ color:"#d7b76c", fontSize:12, letterSpacing:2, marginBottom:12 }}>THE FINAL DECLARATION</p>
         <h2 id="titanos-proof-title" style={{ fontSize:"clamp(30px,6vw,52px)", lineHeight:1.08, margin:"0 0 20px", fontWeight:600 }}>The proof economy starts here.</h2>
         <p style={{ color:"#d2c9b7", fontSize:17, lineHeight:1.65, marginBottom:28 }}>We don't sell hype. We build infrastructure. Explore the engineering evidence, business systems and working demonstrations behind TitanOS.</p>
