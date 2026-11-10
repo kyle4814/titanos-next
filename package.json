@@ -13,7 +13,8 @@
     "mailto-sweep": "node scripts/mailto_order_sweep.mjs",
     "render-spy": "node scripts/render_spy.mjs out",
     "build:catalogue": "node --experimental-strip-types --no-warnings scripts/build_shelf_catalogue.mjs",
-    "gates:built": "node scripts/run_built_gates.mjs"
+    "gates:built": "node scripts/run_built_gates.mjs",
+    "kbfocus": "node scripts/obelisk_rendered_keyboard_focus.mjs --out out"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.81",
