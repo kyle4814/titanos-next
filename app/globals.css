@@ -822,7 +822,8 @@ audio:focus-visible {
     display: none !important;
   }
   /* f403_c1: the footer (ABN, privacy, terms) stays in print; only the nav chrome and overlays go. */
-  nav, [data-no-print], .fx-thread, .finder-fab, .finder-sheet, .music-toggle, .sticky-mobile-cta {
+  nav, [data-no-print], .fx-thread, .finder-fab, .finder-sheet, .music-toggle, .sticky-mobile-cta,
+  .vault-mesh, canvas:not([aria-label]) {
     display: none !important;
   }
   /* f403_c1: nothing clipped. The screen layout pins height and hides overflow on the scroll root. */

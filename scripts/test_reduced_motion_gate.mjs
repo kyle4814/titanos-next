@@ -39,7 +39,11 @@ const MUTANTS = [
   ["PR2 print hides the footer again", "PR2", (x) => sub(x, "app/globals.css", "  nav, [data-no-print],", "  nav, footer, [data-no-print],")],
   ["PR2 footer loses the ABN", "PR2", (x) => sub(x, "components/Footer.tsx", /ABN 34 318 502 254/g, "")],
   ["PR3 Sigil overlay not marked", "PR3", (x) => sub(x, "components/Sigil.tsx", " data-no-print", "")],
-  ["PR3 sticky CTA not hidden in print", "PR3", (x) => sub(x, "app/globals.css", ", .sticky-mobile-cta {", " {")],
+  ["PR3 sticky CTA not hidden in print", "PR3", (x) => sub(x, "app/globals.css", ", .sticky-mobile-cta,\n", ",\n")],
+  ["PR6 vault-mesh print hide removed", "PR6", (x) => sub(x, "app/globals.css", "  .vault-mesh, canvas:not([aria-label]) {", "  .vault-edge-zz, canvas:not([aria-label]) {")],
+  ["PR6 canvas print hide removed", "PR6", (x) => sub(x, "app/globals.css", ", canvas:not([aria-label]) {", " {")],
+  ["PR6 finder-fab print hide removed", "PR6", (x) => sub(x, "app/globals.css", ".finder-fab, ", "")],
+  ["PR6 hide-all-canvas is rejected", "PR6", (x) => sub(x, "app/globals.css", "canvas:not([aria-label]) {", "canvas {")],
   ["PR4 print clipping fix removed", "PR4", (x) => sub(x, "app/globals.css", "    overflow: visible !important;\n  }\n  main, main * {", "  }\n  main, main * {")],
   ["PR5 print colour reset removed", "PR5", (x) => sub(x, "app/globals.css", "    color: black !important;\n    -webkit-text-fill-color: black !important;\n", "")],
 ];
