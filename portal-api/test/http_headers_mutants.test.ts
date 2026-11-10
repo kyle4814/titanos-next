@@ -1,3 +1,4 @@
+// F364: the error-path mutant target moved when F363 wrapped handle() in one cors() exit (handleInner).
 // f86 mutation proof: copy portal-api to a scratch dir, break the header plumbing six ways, and the header suite MUST fail each time.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -25,7 +26,7 @@ const MUTANTS: Array<{ name: string; file: string; from: string; to: string }> =
   { name: "wrong HSTS value", file: "src/http.ts", from: "includeSubDomains${preload}", to: "${preload}" },
   { name: "override a stricter caller value", file: "src/http.ts", from: "Math.max(HSTS_MAX_AGE, m ? Number(m[1]) : 0)", to: "HSTS_MAX_AGE" },
   { name: "one raw Response left (report markdown)", file: "src/index.ts", from: 'text(r.markdown, "text/markdown; charset=utf-8")', to: 'new Response(r.markdown, { headers: { "content-type": "text/markdown; charset=utf-8" } })' },
-  { name: "helper bypassed on the error path", file: "src/index.ts", from: "cors(json({ error: e.code }, e.status), env)", to: "cors(new Response(JSON.stringify({ error: e.code }), { status: e.status, headers: { \"content-type\": \"application/json\" } }), env)" },
+  { name: "helper bypassed on the error path", file: "src/index.ts", from: "if (e instanceof HttpError) return json({ error: e.code }, e.status);", to: "if (e instanceof HttpError) return new Response(JSON.stringify({ error: e.code }), { status: e.status, headers: { \"content-type\": \"application/json\" } });" },
   { name: "no-store dropped", file: "src/http.ts", from: '  if (!cc || !/\\bno-store\\b/i.test(cc)) res.headers.set("cache-control", "no-store");\n', to: "" },
 ];
 
