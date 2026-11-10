@@ -12,6 +12,65 @@ export const TAP_MIN = 44;
 export const TAP_WIDTH = 360;
 export const SLACK = 1; // px of rounding slack on right edge and scroll width
 
+// f413: deterministic readiness. Measuring before the stylesheet applied gave 40, 38 and 29 tap hits for the same route under load.
+// A page is READY only when (1) document.fonts.ready resolved, (2) every link[rel=stylesheet] has a sheet with readable, non-empty cssRules
+// and no <link> is still pending, and (3) a computed-style probe confirms an app rule applied (a throw-away element carrying a known class).
+// On timeout the render is a MEASURE ERROR (rec.error), which evaluate() counts and the sweep exits non-zero on: never a pass.
+export const READY_TIMEOUT_MS = 15000;
+export const DEFAULT_PROBE = "auto"; // "auto": the page's own first plain-class rule; or { cls, prop, value }; or null for sheet checks only
+function readyInPage(probe) {
+  const why = [];
+  if (document.readyState !== "complete") why.push("document.readyState=" + document.readyState);
+  if (!window.__fontsReady) { window.__fontsReady = false; document.fonts.ready.then(() => { window.__fontsReady = true; }); }
+  if (!window.__fontsReady) why.push("fonts not ready");
+  for (const l of document.querySelectorAll("link[rel~=stylesheet]")) {
+    let n = -1; try { n = l.sheet ? l.sheet.cssRules.length : -1; } catch { n = -2; }
+    if (n === -2) continue; // cross-origin sheet: unreadable, rely on the probe
+    if (n <= 0) why.push("stylesheet not applied: " + (l.getAttribute("href") || "").slice(-40));
+  }
+  if (!document.styleSheets.length) why.push("no stylesheets at all");
+  if (probe) {
+    let p = probe;
+    if (probe === "auto") { // first top-level `.class{decl}` rule in a readable sheet, declaration free of var()/inherit
+      p = null;
+      outer: for (const sh of document.styleSheets) {
+        let rules; try { rules = sh.cssRules; } catch { continue; }
+        for (const r of rules) {
+          if (r.type !== 1 || !/^\.[A-Za-z_][\w-]*$/.test(r.selectorText)) continue;
+          for (let i = 0; i < r.style.length; i++) {
+            const prop = r.style[i], value = r.style.getPropertyValue(prop);
+            if (prop.startsWith("--") || /var\(|inherit|initial|unset|revert|env\(|calc\(/.test(value)) continue;
+            p = { cls: r.selectorText.slice(1), prop, value, auto: true }; break outer;
+          }
+        }
+      }
+    }
+    if (p) {
+      const mk = () => { const e = document.createElement("div"); e.style.cssText = "position:absolute;left:-9999px;top:0"; document.body.appendChild(e); return e; };
+      const el = mk(); el.className = p.cls; const ref = mk();
+      const got = getComputedStyle(el)[p.prop];
+      let want = p.value;
+      if (p.auto) { ref.style.setProperty(p.prop, p.value); want = getComputedStyle(ref)[p.prop]; }
+      el.remove(); ref.remove();
+      if (got !== want) why.push(`probe .${p.cls} ${p.prop}=${got} want ${want}`);
+    }
+  }
+  return why;
+}
+export async function waitReady(page, { probe = DEFAULT_PROBE, timeoutMs = READY_TIMEOUT_MS } = {}) {
+  const start = Date.now(); let why = ["not polled"];
+  while (Date.now() - start < timeoutMs) {
+    try { why = await page.evaluate(readyInPage, probe); }
+    catch (e) { // a meta-refresh stub navigated mid-poll: follow it to the destination document and poll again
+      if (!/context was destroyed|navigation/i.test(String(e.message))) throw e;
+      why = ["navigating"]; try { await page.waitForLoadState("load", { timeout: Math.max(1000, timeoutMs - (Date.now() - start)) }); } catch {}
+    }
+    if (!why.length) return { ms: Date.now() - start };
+    await page.waitForTimeout(50);
+  }
+  throw new Error("MEASURE ERROR: page not ready after " + timeoutMs + " ms: " + why.join("; "));
+}
+
 // Runs inside the page. args: { tapMin, tapOn, slack }.
 function inPage(args) {
   const { tapMin, tapOn, slack } = args;
@@ -86,15 +145,15 @@ function inPage(args) {
   return { hscroll, offenders, footer, taps };
 }
 
-export async function sweep({ root, routes, widths = WIDTHS, settleMs = 350, concurrency = 4, log = () => {}, tapOn = (w) => w === TAP_WIDTH }) {
+export async function sweep({ root, routes, widths = WIDTHS, settleMs = 350, concurrency = 4, probe = DEFAULT_PROBE, readyTimeoutMs = READY_TIMEOUT_MS, server = null, log = () => {}, tapOn = (w) => w === TAP_WIDTH }) {
   const has = (d) => { try { return fs.readdirSync(d).some((x) => x.startsWith("chromium")); } catch { return false; } };
   const dflt = path.join(process.env.HOME || "", ".cache", "ms-playwright");
   if (!has(process.env.PLAYWRIGHT_BROWSERS_PATH || dflt) && has(dflt)) process.env.PLAYWRIGHT_BROWSERS_PATH = dflt;
   let chromium;
   try { ({ chromium } = await import("playwright")); } catch (e) { return { skipped: "playwright not importable: " + String(e.message).split("\n")[0] }; }
-  const { srv, base } = await serve(root);
+  const { srv, base } = server || await serve(root);
   let browser;
-  try { browser = await chromium.launch({ args: ["--no-sandbox", "--disable-gpu"] }); } catch (e) { srv.close(); return { skipped: "chromium absent: " + String(e.message).split("\n")[0] }; }
+  try { browser = await chromium.launch({ args: ["--no-sandbox", "--disable-gpu"] }); } catch (e) { if (!server) srv.close(); return { skipped: "chromium absent: " + String(e.message).split("\n")[0] }; }
   const results = [];
   try {
     const jobs = []; for (const route of routes) for (const width of widths) jobs.push({ route, width });
@@ -108,6 +167,7 @@ export async function sweep({ root, routes, widths = WIDTHS, settleMs = 350, con
       for (let attempt = 0; attempt < 2; attempt++) {
         try {
           await page.goto(base + route, { waitUntil: "load", timeout: 30000 });
+          await waitReady(page, { probe, timeoutMs: readyTimeoutMs });
           await page.waitForTimeout(settleMs * (attempt + 1));
           Object.assign(rec, await page.evaluate(inPage, { tapMin: TAP_MIN, tapOn: tapOn(width), slack: SLACK })); rec.error = null; break;
         } catch (e) { rec.error = String(e.message).split("\n")[0]; }
@@ -116,6 +176,6 @@ export async function sweep({ root, routes, widths = WIDTHS, settleMs = 350, con
     } };
     await Promise.all(Array.from({ length: concurrency }, worker));
     results.sort((a, b) => a.route.localeCompare(b.route) || a.width - b.width);
-  } finally { await browser.close(); srv.close(); }
+  } finally { await browser.close(); if (!server) srv.close(); }
   return { results };
 }
