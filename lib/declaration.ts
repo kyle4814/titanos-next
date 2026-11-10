@@ -20,8 +20,8 @@ export const CONSENT_LINE = "Daily artifacts from TITANOS. Unsubscribe any time.
 export const DEFAULT_TAG = "daily-artifacts";
 
 export type CourseId = "trading" | "sales";
-/** Sign-up URLs are not known yet. null = the card shows "Join the waitlist" and tags the signup with the course. */
-export const COURSE_LINKS: Record<CourseId, string | null> = { trading: null, sales: null };
+/** Sign-up URLs (decided 2026-11-10, not deployed until the site approval card). null = the card shows "Join the waitlist" and tags the signup with the course. */
+export const COURSE_LINKS: Record<CourseId, string | null> = { trading: "https://learn-trading.titanos.tech", sales: "https://learn-sales.titanos.tech" };
 
 export type FigureStatus = "MEASURED" | "COMPUTED" | "PUBLISHED" | "OPERATOR_STATED";
 export interface Figure { id: string; value: string; line: string; status: FigureStatus; source: string; asOf: string; method: string }
@@ -125,6 +125,13 @@ export const COURSES: CourseDef[] = [
   { id: "sales", title: "Sales course", blurb: "A sales course of 190 modules and 1,900 lessons with quizzes and an AI coach for questions, role-play and speaking practice, built for a sales coach.", caseSlug: "sales-coaching-course" },
 ];
 
+export type CourseAction = { kind: "link"; url: string } | { kind: "waitlist"; tag: string; source: string };
+/** The one place a course card decides link or waitlist. A null link always falls back to the waitlist, tagged with the course. */
+export function courseAction(c: CourseDef, links: Record<CourseId, string | null> = COURSE_LINKS): CourseAction {
+  const url = links[c.id];
+  return url ? { kind: "link", url } : { kind: "waitlist", tag: `course-${c.caseSlug}`, source: "declaration-waitlist" };
+}
+
 export interface CaseItem { slug: string; title: string; sector: string; label: string; href: string; facts: [string, string][] }
 /** Built straight from CASES: a new case study appears here, on the page and in the PDF with no edit to this file. */
 export const CASE_LIST: CaseItem[] = CASES.map((c) => ({ slug: c.slug, title: c.title, sector: c.sector, label: c.label, href: `/case-studies/${c.slug}`, facts: c.facts.slice(0, 4) as [string, string][] }));
@@ -143,7 +150,7 @@ export function declarationText(): string {
   out.push("Subscriptions and prices", ...SUBSCRIPTIONS.flatMap((s) => [s.name, s.price]), SUBSCRIPTIONS_NOTE);
   out.push("Case studies", CASES_NOTE, ...CASE_LIST.flatMap((c) => [c.title, c.sector, ...c.facts.flat()]));
   out.push("How we do it", ...METHOD.flatMap((s) => [s.title, s.text]), METHOD_NOTE);
-  out.push("Courses", ...COURSES.flatMap((c) => [c.title, c.blurb]));
+  out.push("Courses", ...COURSES.flatMap((c) => { const a = courseAction(c); return [c.title, c.blurb, a.kind === "link" ? a.url : "Join the waitlist"]; }));
   out.push("Daily artifacts", CONSENT_LINE);
   out.push("Appendix: sources", APPENDIX_INTRO, ...FIGURES.flatMap((f) => [f.value, f.status, f.source, f.asOf, f.method]), APPENDIX_CASES, STILL_UNKNOWN);
   return out.join("\n");

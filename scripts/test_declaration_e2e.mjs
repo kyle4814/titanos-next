@@ -28,7 +28,7 @@ try {
   ok((await page.locator(DLG).getAttribute("aria-modal")) === "true", "popup is aria-modal");
   const t = await page.locator(DLG).innerText();
   ok(/final business declaration/i.test(t) && /Case studies/.test(t) && /Trading platform \(includes the AI course\)/.test(t) && /Sales course/.test(t), "popup shows headline, case studies and both course cards");
-  ok(/Join the waitlist/.test(t), "course cards offer the waitlist while links are null");
+  ok(await page.locator('[data-declaration-popup] a[href="https://learn-trading.titanos.tech"]').count() === 1 && await page.locator('[data-declaration-popup] a[href="https://learn-sales.titanos.tech"]').count() === 1, "course cards link to the sign-up URLs");
   ok(await page.evaluate(() => document.activeElement?.hasAttribute("data-close")), "focus starts on the X button");
   // 2 focus trap: Tab many times, focus never leaves the dialog
   let inside = true;
@@ -57,15 +57,15 @@ try {
   await p4.goto(base + "/", { waitUntil: "load" }); await p4.waitForSelector(DLG, { timeout: 15000 });
   await p4.locator("[data-close]").click();
   ok(await p4.locator(DLG).count() === 0 && !errs.some((e) => /localStorage|SecurityError|blocked/.test(e)), "blocked localStorage: popup still opens and closes with no page error");
-  // 7 waitlist posts a course-tagged signup (network intercepted, nothing leaves the machine)
+  // 7 mailing-list signup posts consent (the course-tag waitlist branch is covered in test_declaration.mjs via courseAction) (network intercepted, nothing leaves the machine)
   const ctx5 = await browser.newContext(); const p5 = await ctx5.newPage();
   let posted = null;
   await ctx5.route("**/v1/subscribe", async (route) => { posted = JSON.parse(route.request().postData() || "{}"); await route.fulfill({ status: 201, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: '{"ok":true}' }); });
   await p5.goto(base + "/declaration", { waitUntil: "load" });
-  const card = p5.locator('[data-course="trading"] details'); await card.locator("summary").click();
+  const card = p5.locator('#daily-artifacts ~ form').first();
   await card.locator('input[name="email"]').fill("reader@example.test"); await card.locator("button[type=submit]").click();
   await p5.waitForTimeout(800);
-  ok(posted && posted.consent === true && posted.email === "reader@example.test" && posted.tags.includes("course-trading-app") && posted.tags.includes("daily-artifacts"), "waitlist signup posts consent and the course tag");
+  ok(posted && posted.consent === true && posted.email === "reader@example.test" && posted.tags.includes("daily-artifacts") && posted.source === "declaration-page", "mailing-list signup posts consent and the daily-artifacts tag");
 } finally { await browser.close(); srv.kill(); }
 console.log(fail ? `FAIL ${fail}` : "ALL PASS");
 process.exit(fail ? 1 : 0);

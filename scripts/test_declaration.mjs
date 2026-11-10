@@ -54,9 +54,16 @@ ok(D.COURSES.every((c) => CASES.some((x) => x.slug === c.caseSlug)), "both cours
 ok(JSON.stringify(D.COURSES.map((c) => c.caseSlug)) === JSON.stringify(["trading-app", "sales-coaching-course"]), "the two courses are the trading and sales case studies");
 
 // courses: links null -> waitlist
-ok(D.COURSE_LINKS.trading === null && D.COURSE_LINKS.sales === null, "COURSE_LINKS are null until the URLs exist");
+ok(D.COURSE_LINKS.trading === "https://learn-trading.titanos.tech" && D.COURSE_LINKS.sales === "https://learn-sales.titanos.tech", "COURSE_LINKS hold the decided sign-up URLs");
+ok(Object.values(D.COURSE_LINKS).every((u) => u === null || /^https:\/\/[a-z0-9.-]+\.titanos\.tech$/.test(u)), "course links are https on titanos.tech or null");
 const parts = read("components/declaration/Parts.tsx");
-ok(/COURSE_LINKS\[c\.id\]/.test(parts) && /Join the waitlist/.test(parts) && /course-\$\{c\.caseSlug\}/.test(parts), "null link renders Join the waitlist tagged with the course");
+ok(/courseAction\(c\)/.test(parts) && /Join the waitlist/.test(parts) && /act\.tag/.test(parts), "course card renders from courseAction and keeps the waitlist branch");
+for (const c of D.COURSES) {
+  const none = D.courseAction(c, { trading: null, sales: null });
+  ok(none.kind === "waitlist" && none.tag === `course-${c.caseSlug}` && none.source === "declaration-waitlist", `${c.id}: null link -> waitlist tagged course-${c.caseSlug}`);
+  ok(D.courseAction(c, { trading: "https://x.titanos.tech", sales: "https://x.titanos.tech" }).kind === "link", `${c.id}: a URL -> sign-up link`);
+  ok(/^course-[a-z0-9-]{1,40}$/.test(none.tag), `${c.id}: waitlist tag is accepted by the backend tag pattern`);
+}
 ok(D.COURSES.map((c) => c.title).join("|") === "Trading platform (includes the AI course)|Sales course", "course card titles are Kyle's wording");
 
 // mailing list contract
@@ -92,7 +99,7 @@ if (bi > -1) {
   ok(fs.existsSync(f), "build output has /declaration");
   if (fs.existsSync(f)) {
     const html = read(f);
-    ok(html.includes(D.HEADLINE) && html.includes("Join the waitlist") && html.includes(D.CONSENT_LINE.replace("TITANOS.", "TITANOS.")), "built page has headline, waitlist action and consent line");
+    ok(html.includes(D.HEADLINE) && html.includes(D.COURSE_LINKS.trading) && html.includes(D.COURSE_LINKS.sales) && html.includes(D.CONSENT_LINE.replace("TITANOS.", "TITANOS.")), "built page has headline, both course sign-up links and consent line");
     for (const c of CASES) ok(html.includes(`/case-studies/${c.slug}`), `built page links case study ${c.slug}`);
     ok(html.includes(D.PDF_PATH), "built page links the PDF");
     ok(!/[–—]/.test(html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")), "built page body has no em or en dash");
