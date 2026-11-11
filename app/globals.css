@@ -812,8 +812,28 @@ select:focus-visible,
   .vault-edge-thread, .vault-specular {
     display: none !important;
   }
-  nav, footer, [data-no-print] {
+  /* f403_c1: the footer (ABN, privacy, terms) stays in print; only the nav chrome and overlays go. */
+  nav, [data-no-print], .fx-thread, .finder-fab, .finder-sheet, .music-toggle, .sticky-mobile-cta {
     display: none !important;
+  }
+  /* f403_c1: nothing clipped. The screen layout pins height and hides overflow on the scroll root. */
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  main, main * {
+    overflow: visible !important;
+  }
+  /* f403_c1: the screen theme is light-on-dark; print forces dark ink on white so body text, prices and the
+     footer survive (gradient text is filled solid, shadows and glass are dropped). */
+  main, main *, footer, footer * {
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    background: transparent !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
   }
   h1, h2, h3, h4, h5, h6 {
     color: black !important;

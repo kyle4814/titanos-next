@@ -55,6 +55,8 @@ bash scripts/test_product_grade_mutants.sh
 node scripts/test_phone_budget.mjs
 node scripts/test_discovery_check.mjs
 node scripts/test_a11y_static.mjs
+node scripts/reduced_motion_gate.mjs
+node scripts/test_reduced_motion_gate.mjs
 node --experimental-strip-types scripts/test_guestscan_meter.mjs
 node scripts/test_headers_lint.mjs
 node scripts/test_mailto_order_sweep.mjs

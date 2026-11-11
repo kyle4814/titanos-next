@@ -110,7 +110,7 @@ export default function CursorTrail() {
   return (
     <>
       <motion.div
-        aria-hidden="true"
+        aria-hidden="true" data-no-print
         style={{
           position: "fixed",
           top: 0,
@@ -140,7 +140,7 @@ export default function CursorTrail() {
       {/* Inner solid dot — appears over interactive elements */}
       {state === "interactive" && (
         <motion.div
-          aria-hidden="true"
+          aria-hidden="true" data-no-print
           style={{
             position: "fixed",
             top: 0,
