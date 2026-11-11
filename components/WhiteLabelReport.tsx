@@ -25,7 +25,6 @@ export default async function WhiteLabelReport() {
           <span data-wl-grade style={{ background: "var(--wl-accent)", color: "var(--wl-on-accent)", borderRadius: 10, minWidth: 64, minHeight: 64, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 32, fontWeight: 700 }}>{r.scan.grade}</span>
           <span>Score {r.scan.score} out of 100. Public DNS records only, nothing on the client&apos;s servers was touched.</span>
         </div>
-        <div style={{ overflowX: "auto", maxWidth: "100%" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <caption style={{ textAlign: "left", paddingBottom: 6 }}>What we checked</caption>
           <thead><tr><th scope="col" style={{ textAlign: "left" }}>Control</th><th scope="col" style={{ textAlign: "left" }}>Result</th><th scope="col" style={{ textAlign: "left" }}>Detail</th></tr></thead>
@@ -39,7 +38,6 @@ export default async function WhiteLabelReport() {
             ))}
           </tbody>
         </table>
-        </div>
         <section aria-label="Fix plan">
           <strong>Fix plan, most important first</strong>
           <ol style={{ margin: "6px 0 0", paddingLeft: 20 }}>

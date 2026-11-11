@@ -24,7 +24,6 @@ export default function EstateView() {
         <input type="checkbox" checked={showStale} onChange={(e) => setShowStale(e.target.checked)} /> Show out of date scans
       </label>
       {view.empty || rows.length === 0 ? <p style={{ margin: 0 }}>{view.emptyText}</p> : (
-        <div style={{ overflowX: "auto", maxWidth: "100%" }}>
         <table>
           <thead><tr><th>Domain</th><th>Grade</th><th>Owner</th><th>Last scanned</th></tr></thead>
           <tbody>
@@ -38,7 +37,6 @@ export default function EstateView() {
             ))}
           </tbody>
         </table>
-        </div>
       )}
     </div>
   );

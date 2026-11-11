@@ -123,9 +123,6 @@ export default function Nav() {
             fontSize: "var(--fs-lg)",
             textDecoration: "none",
             letterSpacing: "0.06em",
-            display: "inline-flex",
-            alignItems: "center",
-            minHeight: 44,
           }}
         >
           TITANOS
@@ -451,7 +448,7 @@ export default function Nav() {
         }
         @media (max-width: ${MOBILE_BREAKPOINT}px) {
           .nav-desktop-links { display: none !important; }
-          .nav-burger { display: inline-flex !important; min-height: 44px; }
+          .nav-burger { display: inline-flex !important; }
         }
         .drawer-link {
           display: flex;
