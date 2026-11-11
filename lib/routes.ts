@@ -34,6 +34,7 @@ const STATIC_PAGES: { path: string; file: string; priority: number }[] = [
   { path: "/labs/issue-009", file: "public/labs/issue-009/index.html", priority: 0.8 },
   { path: "/labs/issue-010", file: "public/labs/issue-010/index.html", priority: 0.8 },
   { path: "/labs/issue-011", file: "public/labs/issue-011/index.html", priority: 0.8 },
+  { path: "/labs/issue-012", file: "public/labs/issue-012/index.html", priority: 0.8 },
 ];
 
 const PRIORITY: Record<string, number> = {

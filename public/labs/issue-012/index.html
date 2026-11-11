@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My proof page now refuses numbers older than 30 days | Demonblade Labs</title>
+<meta name="description" content="A proof page that shows UNKNOWN instead of a number older than 30 days. What I re-measured, the one honest catch, and what is live and what is not.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-012/">
+<meta property="og:title" content="My proof page now refuses numbers older than 30 days">
+<meta property="og:description" content="A number is only true on the day you measured it. The 30 day rule, one re-measure from the lane record, and a tap deploy with a rollback branch.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-012/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-012.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. My proof page now refuses numbers older than 30 days.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-012.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 012</p>
+<h1>My proof page now refuses numbers older than 30 days</h1>
+<p class="deck">If you publish numbers about your own work, this one is for you. It sells nothing and costs nothing to read. It is about my own site at TitanOS in Brisbane, so nobody else is named.</p>
+<h2>The rule</h2>
+<p>A number on a proof page is only true on the day you measured it. After that it is a memory. So the proof page on titanos.tech has a rule in code: any figure measured more than 30 days ago is not shown as a number. It is shown as UNKNOWN, with the date it was last measured, until someone measures it again.</p>
+<h2>The edge case</h2>
+<p>The rule had a test, but I hit its real edge this week. The headline work-rate figure came from my old job ledger, a count for 12 October of 1,630 finished jobs. That ledger stopped writing at 07:57 on 13 October. So there was no current reading to put beside it, and the figure was about to turn into UNKNOWN on its own.</p>
+<h2>Measured again</h2>
+<p>I took the honest route. I did not keep the old number alive and I did not leave a blank. I measured again, from a different record: the status file of every build lane.</p>
+<h2>The numbers</h2>
+<p>For the whole of 10 November, local time, 24 hours: 281 lanes finished. 278 are done and 3 failed. That is 11.7 an hour, a failure rate of 1.1 percent, and a median of 10.4 minutes from start to finish. The method is printed on the page: finished divided by 24, median taken from the latest start to the finish, a lane that failed and was re-run counted once on its final status.</p>
+<h2>The catch</h2>
+<p>One honest catch. This is a different record from the old ledger, so I do not draw a trend between 1,630 and 281. They count different things. The page says which record each number came from and on which date.</p>
+<h2>Retired, not blanked</h2>
+<p>Cards with no live source behind them were retired instead of left showing UNKNOWN: cost per day, token counts, the repository size and a few others. They are listed with the date each was last measured, so nothing disappeared quietly. A new test fails the build if any row older than 30 days is kept on the page.</p>
+<h2>The deploy</h2>
+<p>The same day, the site went live from a single tap on my phone. The tap approved one card. A cloud runner then built the site and ran the full test manifest, 151 of 151 passing, and published only that tested build. The previous version stays on a rollback branch, gh-pages-backup-20261111-1124, so going back is possible.</p>
+<h2>What is live and what is not</h2>
+<p>What is true right now, as a plan and not as done: the live site is the version from before the re-measure. The re-measured figures are on my main branch and publish with the next tap. Until then the live page does not have them.</p>
+<p>Which number on your site would you be embarrassed to see dated?</p>
+<hr>
+<p class="fine">Previous issues: <a href="/labs/issue-011/">Zero green in 58: I was tuning the wrong dial</a>, <a href="/labs/issue-010/">Busy is not finished: 561 jobs done, and every final gate held</a>, <a href="/labs/issue-009/">The ninth bug: my heartbeat went quiet when I needed it most</a>, <a href="/labs/issue-008/">Eight bugs in a chain that was meant to run itself</a>, <a href="/labs/issue-007/">Twelve blockers behind a green suite</a>, <a href="/labs/issue-006/">The exam the builder never saw</a>, <a href="/labs/issue-005/">The button that ignored a fast thumb</a>, <a href="/labs/issue-004/">I built a product assistant that is not allowed to guess</a>, <a href="/labs/issue-003/">I built a gym that judges its own best strategies as luck</a>, <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 012, 11 November 2026.
+    Every figure in this article is a log timestamp, a test run result or a measured count from my own build. Nobody else is named.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>
