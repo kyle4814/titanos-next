@@ -606,6 +606,15 @@ select:focus-visible,
   border-radius: inherit;
 }
 
+/* Embedded media (f421): video and audio fell through every rule above, so focusing them showed no ring. Inset offset keeps the ring
+   inside overflow:hidden wrappers (a positive offset is clipped there). iframes are NOT listed: Chromium never matches :focus-visible on the
+   parent for a focused iframe (tested), so a rule would be dead; see components/PdfViewer.tsx. */
+video:focus-visible,
+audio:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
 /* Skip-link */
 .skip-link {
   position: absolute;
