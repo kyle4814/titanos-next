@@ -74,9 +74,9 @@ export default function CostCurve() {
             </p>
           ) : (
             <p>
-              Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.
-              That is higher, not lower, and {f.todayText} was spent in the day. The matched-job drop above compares the same task text on the old
-              and new rule book. Both are real. We show both.
+              Across the workers alone, one job cost {f.afterText} over {f.jobsText} jobs ({f.workerSpendText} in all). The {f.beforeText} figure from
+              8 October also counted the orchestrator, so the two are different bases and we do not call this a drop. The matched-job drop above
+              compares the same task text on the old and new rule book. Both are real. We show both.
             </p>
           )}
           <p className="w4-meta">
