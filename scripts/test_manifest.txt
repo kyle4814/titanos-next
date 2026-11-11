@@ -160,3 +160,4 @@ node scripts/test_proof_feed_freshness.mjs
 node scripts/test_hud_numbers_single_source.mjs
 node scripts/test_soak_pin_matrix_gate.mjs
 bash scripts/test_obelisk_killflip_runbook.sh
+F404_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_portal_signout.mjs
