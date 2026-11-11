@@ -14,6 +14,7 @@ import { retryApprovedPayouts, listHeldPayouts } from "./payout_retry.ts";
 import { sweepStuckPayouts, SWEEP_MAX_AGE_MS, type TransferLookup } from "./payout_sweep.ts";
 import { listPartnerBook, FORBIDDEN, type BookFactsSource, type BookResult } from "./partner_book.ts";
 import { releaseHeldPayout, refundHeldPayout } from "./payout_release.ts";
+import { listPayoutsNeedingAttention, planRetriesForTenant } from "./payout_held_view.ts";
 import { decidePayoutRecorded, type ApprovalStore, type DecideReq } from "./payout_decision.ts";
 
 // The context a Worker wires in. Hooks are what the C2 service calls (invoice, refund, deletion, export).
@@ -574,6 +575,20 @@ async function transfer(d: Deps, payoutId: string, account: string) {
 export async function listPayouts(d: Deps, ctx: Ctx, pid: string) {
   await access(d, ctx, pid, "analyst", "partner");
   return { payouts: (await ent(d).store.payoutsOf(pid)).map((p) => ({ id: p.id, amountCents: p.amountCents, status: p.status, createdAt: p.createdAt })) };
+}
+// C8 f426: read-only operator view of payouts that need a human (f425 payout_held_view). Owner (admin) of a PARTNER tenant only.
+// The tenant is the one `access` resolved from the session membership; the path id only NAMES a seat the session must already hold, and a query string is never read.
+// Nothing here writes, sends or schedules. wouldCallProvider stays false and the real send is flagged CARD NEEDED GATE1/GATE2.
+const ATTENTION_NOTE = "Read only. Nothing is sent from this view. A real send needs a card (GATE1 money, GATE2 provider credentials).";
+export async function payoutAttention(d: Deps, ctx: Ctx, pid: string) {
+  const { tenant } = await access(d, ctx, pid, "admin", "partner");
+  const items = await listPayoutsNeedingAttention(ent(d).store, tenant.id, d.now());
+  return { tenantId: tenant.id, readOnly: true, executes: false, wouldCallProvider: false, cardNeeded: "GATE1/GATE2", note: ATTENTION_NOTE, count: items.length, items };
+}
+export async function payoutRetryPlan(d: Deps, ctx: Ctx, pid: string) {
+  const { tenant } = await access(d, ctx, pid, "admin", "partner");
+  const plan = await planRetriesForTenant(ent(d).store, tenant.id);
+  return { tenantId: tenant.id, readOnly: true, executes: false, wouldCallProvider: false, cardNeeded: "GATE1/GATE2", note: ATTENTION_NOTE, plannedCount: plan.items.length, items: plan.items, skipped: plan.skipped };
 }
 // The internal approve/reject route and the card tap share ONE core (payout_decision.ts). Legacy contract kept: a second tap is 409 not_pending.
 export async function decidePayout(d: Deps, id: string, approve: boolean) {
