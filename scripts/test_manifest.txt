@@ -164,3 +164,4 @@ F404_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experime
 bash scripts/test_obelisk_rendered_print_motion.sh
 node scripts/test_soak_pin_matrix_gate.mjs
 node scripts/test_soak_pin_wire.mjs
+node scripts/test_export_page_manifest.mjs
