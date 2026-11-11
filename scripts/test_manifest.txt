@@ -154,3 +154,4 @@ bash scripts/test_obelisk_rendered_keyboard_focus.sh
 bash scripts/test_obelisk_allpages.sh
 node scripts/test_export_page_manifest.mjs
 bash scripts/test_sweeps_use_export_manifest.sh
+node scripts/test_print_chrome_class.mjs
