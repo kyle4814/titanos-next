@@ -16,6 +16,7 @@ import HoursCounter from "@/components/HoursCounter";
 import ContactButtons from "@/components/ContactButtons";
 import { BOOK_HREF } from "@/lib/config";
 import { Inscription } from "@/components/Myth";
+import PriceStrip from "@/components/home/PriceStrip";
 import { OpenLoop } from "@/components/FlexBlock";
 
 import { Analogy, FrontLoad, FreeStart } from "@/components/SalesKit";
@@ -62,6 +63,7 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <FlowThread />
       <Hero />
+      <PriceStrip />
       {/* FLOW STAGE: space image is a full-bleed BACKGROUND layers (slow parallax, feathered masks, breathing), not blocks. */}
       <div className="fx-bleed">
         <div className="fx-bg fx-bg--img" data-flow="0.22">
