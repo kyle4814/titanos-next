@@ -176,3 +176,4 @@ node --experimental-strip-types --no-warnings scripts/test_c5_ungraded_verify.mj
 node scripts/test_soak_pin_matrix_gate.mjs
 bash scripts/test_c1_funnel_verify.sh
 bash scripts/test_c4_paid_reproof_verify.sh
+bash scripts/test_obelisk_rendered_keyboard_focus.sh

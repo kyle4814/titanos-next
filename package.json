@@ -18,7 +18,8 @@
     "gates:built": "node scripts/run_built_gates.mjs",
     "gate:reduced-motion": "node scripts/reduced_motion_gate.mjs --table && node scripts/test_reduced_motion_gate.mjs",
     "audit:text-sanity": "node scripts/audit_text_sanity.mjs --out out",
-    "gates:text-fast": "node scripts/text_sanity_fast.mjs --out out"
+    "gates:text-fast": "node scripts/text_sanity_fast.mjs --out out",
+    "kbfocus": "node scripts/obelisk_rendered_keyboard_focus.mjs --out out"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.81",
