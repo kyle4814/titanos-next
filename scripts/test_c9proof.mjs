@@ -117,11 +117,11 @@ if (bi > 0) {
   // (same method as portal-api/acceptance/wA/trace.mjs; ledger values also match when rounded, because pages print int()/dec()).
   // lib/efficiency/efficiency.json is the data file /efficiency renders its before/after table from (proof.json generated.from
   // cites it). Before 2026-11-10 those figures only "traced" by accidental substring hits inside proof.json (a sha, "773").
-  const dataFiles = ["lib/ledger.json", "lib/site-data/proof.json", "lib/site-data/trust.json", "lib/site-data/provenance.json", "lib/site-data/sectors.json", "lib/efficiency/efficiency.json"];
+  const dataFiles = ["lib/ledger.json", "lib/site-data/proof.json", "lib/site-data/trust.json", "lib/site-data/provenance.json", "lib/site-data/sectors.json", "lib/efficiency/efficiency.json", "lib/site-data/pricing-trace.json", "lib/flex.ts"]; // 2026-11-11: pricing-trace.json and flex.ts are the real sources of the price and matched-job figures that used to trace only by substring luck inside the retired proof rows
   let knownT = dataFiles.map((f) => R(f)).join("").replace(/[,\s]/g, "");
   const nums0 = (R("lib/ledger.json").match(/-?\d+\.?\d*(?:e[+-]?\d+)?/gi) || []).map(Number).filter(Number.isFinite);
   knownT += nums0.map((n) => String(Math.round(n)) + "|" + n.toFixed(1) + "|" + n.toFixed(2)).join("|");
-  const TRACE_MAX = { "/investors": 0, "/mission": 1, "/costs": 48, "/engineering": 4, "/efficiency": 4, "/": 23 }; // wA baseline 2026-11-06 (/efficiency 15 -> 4 on 2026-11-10: efficiency.json joined the pool; the 4 left are computed change ratios); /investors must be 0; the rest only ratchet down
+  const TRACE_MAX = { "/investors": 0, "/mission": 1, "/costs": 48, "/engineering": 4, "/efficiency": 6, "/": 23 }; // 2026-11-11 /efficiency 4 -> 6: the 3,171x and 161x change ratios were printed in proof.json charts that were retired (no live source); the page still computes them from efficiency.json. // wA baseline 2026-11-06 (/efficiency 15 -> 4 on 2026-11-10: efficiency.json joined the pool; the 4 left are computed change ratios); /investors must be 0; the rest only ratchet down
   for (const [r, max] of Object.entries(TRACE_MAX)) {
     const body = text(read(htmlOf(r)).replace(/<(header|nav|footer)[\s\S]*?<\/\1>/g, " "));
     const nums = [...new Set([...body.matchAll(/\b\d[\d.,]*\d\b|\b\d\b/g)].map((m) => m[0].replace(/,/g, "")))];
