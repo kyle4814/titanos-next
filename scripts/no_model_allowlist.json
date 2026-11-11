@@ -1,0 +1,4 @@
+{
+  "_comment": "Reviewed exceptions for scripts/no_model_import_graph.mjs. Each entry: path (repo-relative file), kind (sdk|host), match (the SDK spec or host), reason. Empty means no guest or owner path reaches a model. Adding an entry needs review.",
+  "entries": []
+}
