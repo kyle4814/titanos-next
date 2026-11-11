@@ -7,12 +7,16 @@ import { markStale } from "./markStale.mjs";
 const TODAY = process.env.PROOF_TODAY || new Date().toISOString().slice(0, 10);
 type Stamped<T> = T & { stale?: boolean; lastMeasured?: string; staleReason?: string };
 
-const live = raw;
+// headline and fleetCost are null in proof.json when the generator retired them; their shape is fixed here so the page types hold either way.
+type Row = Stamped<{ id: string; beforeText: string; afterText: string; beforePct: number; afterPct: number; factorText: string; label: string; date: string; source: string; method?: string; title?: string }>;
+type Hero = Row & { titleText: string; analogy: string; caption: string };
+type FleetCost = Stamped<{ afterText: string; jobsText: string; beforeText: string; todayText: string; label: string; date: string; source: string; note: string }>;
+const live = raw as unknown as Omit<typeof raw, "headline" | "fleetCost"> & { headline: Hero | null; fleetCost: FleetCost | null };
 
 export const proof = {
   ...live,
-  headline: live.headline ? (markStale([live.headline], TODAY)[0] as Stamped<NonNullable<typeof live.headline>>) : null,
-  fleetCost: live.fleetCost ? (markStale([live.fleetCost], TODAY)[0] as Stamped<NonNullable<typeof live.fleetCost>>) : null,
+  headline: live.headline ? (markStale([live.headline], TODAY)[0] as Hero) : null,
+  fleetCost: live.fleetCost ? (markStale([live.fleetCost], TODAY)[0] as FleetCost) : null,
   charts: markStale(live.charts, TODAY) as Stamped<(typeof live.charts)[number]>[],
   stars: markStale(live.stars, TODAY) as Stamped<(typeof live.stars)[number]>[],
 };
