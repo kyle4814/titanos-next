@@ -68,8 +68,8 @@ fs.rmSync(dir, { recursive: true, force: true });
   ok(above.length === 0, "no allowlist cap is above its measured count" + (above.length ? ": " + above.join("; ") : ""));
   const capTotal = (al.rules || []).filter((r) => r.class === "followup").reduce((a, r) => a + r.max, 0);
   ok(capTotal <= 270, `total tap caps ${capTotal} <= 270 (half of 538)`);
-  const fake = { rules: al.rules.map((r) => (r.id === "tap-input-360" ? { ...r, max: r.max + 1 } : r)) };
-  ok((fake.rules.find((r) => r.id === "tap-input-360").max > meas.measured["tap-input-360"]), "planted cap above measured is detected");
+  const fake = { rules: al.rules.map((r) => (r.id === "tap-link-360" ? { ...r, max: r.max + 1 } : r)) };
+  ok((fake.rules.find((r) => r.id === "tap-link-360").max > meas.measured["tap-link-360"]), "planted cap above measured is detected");
 }
 
 // Part B

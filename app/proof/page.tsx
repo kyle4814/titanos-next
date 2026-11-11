@@ -99,12 +99,12 @@ export default function Proof() {
           <p style={BODY}>Raw logs, each line stamped with the time it ran (7 October 2026, Brisbane time). No summary written afterwards, just the output:</p>
           <ul style={{ ...BODY, paddingLeft: 20 }}>
             <li>
-              <a href="/proof/trading-app-tests.log" className="tap-pad" style={A}>
+              <a href="/proof/trading-app-tests.log" style={A}>
                 Trading app: 250 of 250 tests passed
               </a>
             </li>
             <li>
-              <a href="/proof/spoofguard-tests.log" className="tap-pad" style={A}>
+              <a href="/proof/spoofguard-tests.log" style={A}>
                 SpoofGuard: 83 of 83 tests passed
               </a>
             </li>
@@ -117,7 +117,7 @@ export default function Proof() {
             250 at 09:37.
           </p>
           <p style={BODY}>
-            <a href="/proof/trading-app-build-replay.log" className="tap-pad" style={A}>
+            <a href="/proof/trading-app-build-replay.log" style={A}>
               Open the full replay log
             </a>
           </p>

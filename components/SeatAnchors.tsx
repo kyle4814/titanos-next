@@ -13,7 +13,7 @@ export default function SeatAnchors({ rows, extras }: { rows: SeatAnchor[]; extr
   return (
     <div style={wrap}>
       <nav aria-label="On this page" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {rows.map((r) => <Link key={r.id} href={`#${r.id}`} style={{ minHeight: 44, minWidth: 44, justifyContent: "center", display: "inline-flex", alignItems: "center" }}>{r.title}</Link>)}
+        {rows.map((r) => <Link key={r.id} href={`#${r.id}`} style={{ minHeight: 44, display: "inline-flex", alignItems: "center" }}>{r.title}</Link>)}
       </nav>
       {rows.map((r) => (
         <section key={r.id} id={r.id} aria-labelledby={`${r.id}-h`} style={card}>

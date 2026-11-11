@@ -82,7 +82,7 @@ export default function ContactPage() {
             <SystemLabel style={{ marginBottom: 16 }}>Direct contact · no form, no gatekeeper</SystemLabel>
             <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
               <strong>Email:</strong>{" "}
-              <a href={`mailto:${SITE.KYLE_EMAIL}`} className="tap-pad" style={{ color: "var(--gold)" }}>
+              <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>
                 {SITE.KYLE_EMAIL}
               </a>
             </p>
@@ -90,7 +90,6 @@ export default function ContactPage() {
               <strong>ABN:</strong> 34 318 502 254 ·{" "}
               <a
                 href="https://abr.business.gov.au/ABN/View?id=34318502254"
-                className="tap-pad"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "var(--gold)" }}

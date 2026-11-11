@@ -124,7 +124,7 @@
   svg { max-width: 100%; height: auto; display: block; }
   header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; }
   header .head-text { flex: 1 1 260px; min-width: 0; }
-  .toggle { flex: 0 0 auto; min-height: 44px; padding: 6px 12px; font-size: 0.8125rem; }
+  .toggle { flex: 0 0 auto; min-height: 36px; padding: 6px 12px; font-size: 0.8125rem; }
 </style>
 </head>
 <body>
@@ -134,7 +134,7 @@
     <h1>Accepted Agent Throughput Scorecard</h1>
     <p class="lede">Running workers are not output. This measures accepted results per worker-hour, cost per accepted result, and whether your instrument can see your workers at all.</p>
   </div>
-  <div style="display:flex;gap:8px;align-items:center"><a id="backlink" href="/labs/issue-001/" style="display:inline-flex;align-items:center;min-height:44px;font-size:.8125rem;color:var(--series-1);text-decoration:none">&larr; the article</a><button class="toggle" id="theme" type="button" aria-label="Switch colour theme">Theme</button></div>
+  <div style="display:flex;gap:8px;align-items:center"><a id="backlink" href="/labs/issue-001/" style="font-size:.8125rem;color:var(--series-1);text-decoration:none">&larr; the article</a><button class="toggle" id="theme" type="button" aria-label="Switch colour theme">Theme</button></div>
 </header>
 
 <section class="card">
@@ -186,7 +186,7 @@
   <div id="chart"></div>
   <div class="scroll">
     <table id="bucketTable">
-      <caption>Lane-minutes per accepted result by concurrent worker count. Window 2026-10-17 07:47 to 2026-10-22 04:48 (+10:00). Method, dataset and limits: <a href="/labs/issue-001/" style="display:inline-block;padding:14px 0;margin:-14px 0">the article</a>.</caption>
+      <caption>Lane-minutes per accepted result by concurrent worker count. Window 2026-10-17 07:47 to 2026-10-22 04:48 (+10:00). Method, dataset and limits: <a href="/labs/issue-001/">the article</a>.</caption>
       <thead><tr><th scope="col">Concurrent workers</th><th scope="col">Wall hours</th><th scope="col">Worker minutes</th><th scope="col">Accepted</th><th scope="col">Not accepted</th><th scope="col">Worker min / accepted</th></tr></thead>
       <tbody></tbody>
     </table>

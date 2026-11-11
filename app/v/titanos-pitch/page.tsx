@@ -60,10 +60,10 @@ export default function PitchPage() {
         </div>
 
         <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}>
-          <Link className="btn tap-link" href="/offers">See every offer</Link>
-          <Link className="btn tap-link" href="/find">Try the offer finder</Link>
-          <a className="btn tap-link" href="/d/titanos-deck-2026-10.pdf">Investor deck (PDF)</a>
-          <Link className="btn tap-link" href="/engineering">How it was built</Link>
+          <Link className="btn" href="/offers">See every offer</Link>
+          <Link className="btn" href="/find">Try the offer finder</Link>
+          <a className="btn" href="/d/titanos-deck-2026-10.pdf">Investor deck (PDF)</a>
+          <Link className="btn" href="/engineering">How it was built</Link>
         </div>
         <p style={{ marginTop: 24, color: "var(--dim)" }}>
           Contact: Kyle Deligny · <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>kyle@titanos.tech</a> · titanos.tech

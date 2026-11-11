@@ -16,7 +16,7 @@ export default function Hero() {
     <section className="ds-hero" aria-labelledby="ds-hero-h">
       <SpaceImage id={HERO_IMAGE_ID} className="ds-hero__poster" sizes="100vw" priority alt="" portrait={HERO_PORTRAIT_MEDIA} />
       <HeroMesh />
-      <a className="ds-hero__credit tap-pad" href="/credits#nasa-black-hole-jet">Image: NASA/JPL-Caltech, artist's concept</a>
+      <a className="ds-hero__credit" href="/credits#nasa-black-hole-jet">Image: NASA/JPL-Caltech, artist's concept</a>
       <div className="ds-hero__copy">
         <div className="ds-hero__col">
           <div className="ds-hero__enter"><PhiWordmark height={26} /></div>

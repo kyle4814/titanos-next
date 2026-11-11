@@ -33,7 +33,7 @@ export default function SectorsPage() {
         </ul>
       </SectionReveal>
       <Block point="The Sector Index is open data.">
-        Every sector number above is in a file you can download, with its label and source. <a href="/open-data" className="tap-pad" style={{ color: "var(--gold)" }}>Get the files</a>.
+        Every sector number above is in a file you can download, with its label and source. <a href="/open-data" style={{ color: "var(--gold)" }}>Get the files</a>.
       </Block>
       <NextStep text="Start with the free scan on your own domain." href="/scan" label="Run the free scan" />
     </>

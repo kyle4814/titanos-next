@@ -591,7 +591,7 @@ export default function CompliancePage() {
                   }}
                 >
                   one-time · {PRICING.PACK_INCLUDED_MONITOR_MONTHS} months of{" "}
-                  <a href="/monitor" className="tap-pad" style={{ color: "var(--ice)" }}>Monitor</a> included free
+                  <a href="/monitor" style={{ color: "var(--ice)" }}>Monitor</a> included free
                 </span>
                 <span
                   style={{

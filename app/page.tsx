@@ -208,7 +208,7 @@ export default function Home() {
         <div className="fx-bg fx-bg--img" data-flow="0.22">
           <div className="fx-pulse fx-pulse--slow"><SpaceImage id="webb-cosmic-cliffs" sizes="100vw" /></div>
         </div>
-        <a className="fx-bleed__cap tap-pad" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
+        <a className="fx-bleed__cap" href="/credits#webb-cosmic-cliffs">NASA, ESA, CSA, STScI</a>
       {/* FIND YOUR OFFER: early door to the finder and the full list. */}
       <section
         aria-label="Find the right offer"
@@ -341,7 +341,7 @@ export default function Home() {
           </p>
         )}
         <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
-          <a href="/case-studies" className="tap-pad" style={{ color: "var(--dim)", textDecoration: "underline", textUnderlineOffset: 3 }}>
+          <a href="/case-studies" style={{ color: "var(--dim)", textDecoration: "underline", textUnderlineOffset: 3 }}>
             See the case studies
           </a>
         </p>
