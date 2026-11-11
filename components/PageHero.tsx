@@ -104,6 +104,7 @@ export default function PageHero({
         )}
         {children && (
           <div
+            className="ph-cta"
             style={{
               marginTop: 24,
               display: "flex",

@@ -1046,6 +1046,9 @@ p > a:not([class]), li > a:not([class]) {
 /* PageHero entrance: CSS only so hero text is visible at first paint (no JS gate). */
 @keyframes ph-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 .ph-in { animation: ph-in 0.5s cubic-bezier(0, 0, 0.2, 1) backwards; }
+/* f373 C9: a note (<p>) placed with the hero buttons takes its own full-width centred line, so it cannot share the button row and drag the buttons off-centre. */
+/* specificity above .w2c p:not(.ph-in), which sets max-inline-size:58ch !important */
+main .ph-cta > p:not(.ph-in) { flex: 0 0 100%; max-width: none !important; max-inline-size: none !important; margin-left: 0 !important; margin-right: 0 !important; text-align: center; text-wrap: balance; }
 @media (prefers-reduced-motion: reduce) { .ph-in { animation: none; } }
 
 /* ═══════════════════════════════════════════════════════════════
