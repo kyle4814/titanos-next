@@ -1170,6 +1170,15 @@ p, li, blockquote { text-wrap: pretty; }
     min-width: 44px;
   }
   .w4-chip.w4-chip--btn { display: inline-flex; align-items: center; min-height: 44px; }
+  /* f411: text links in prose get a 44px hit box with no layout shift (padding cancelled by negative margin). */
+  .tap-pad {
+    display: inline-block;
+    padding-block: 12px;
+    margin-block: -12px;
+    min-height: 44px;
+    min-width: 44px;
+    box-sizing: border-box;
+  }
 }
 
 /* C10 f405: form-control tap targets at phone width (decision recorded in FILL_f405_c10_form_control_tap44_RECEIPT.md).

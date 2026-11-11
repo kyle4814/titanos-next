@@ -1,44 +1,44 @@
 {
- "_doc": "C10 viewport overflow allowlist (f385). A rule needs id, metric, routes (regex), class (intended|followup), a reason of 40+ characters and, for a followup, max (the count of hits may fall, never rise: test_viewport_overflow.mjs compares against HEAD) and a followup number from the receipt. Anything matching no rule fails the sweep. Overflow, off-viewport element and footer defects have no rules: all were fixed.",
- "rules": [
-  {
-   "id": "tap-nav-360",
-   "metric": "tap",
-   "routes": ".*",
-   "widths": [
-    360
-   ],
-   "sel": "^nav ",
-   "class": "followup",
-   "max": 3,
-   "followup": 5,
-   "reason": "Nav wordmark backlink, theme toggle and text links under 44px at 360 after the wordmark and burger fix; remaining ones are small nav chips, a CSS pass on the nav is follow-up 5 in the f385 receipt."
-  },
-  {
-   "id": "tap-footer-360",
-   "metric": "tap",
-   "routes": ".*",
-   "widths": [
-    360
-   ],
-   "sel": "^footer ",
-   "class": "followup",
-   "max": 1,
-   "followup": 6,
-   "reason": "Footer links outside the main link columns (seal row and legal strip) measure 15px tall at 360; follow-up 6 in the f385 receipt, needs a footer layout decision."
-  },
-  {
-   "id": "tap-link-360",
-   "metric": "tap",
-   "routes": ".*",
-   "widths": [
-    360
-   ],
-   "sel": "^a([.#]|$)",
-   "class": "followup",
-   "max": 29,
-   "followup": 1,
-   "reason": "Body and card text links 18 to 29px tall at 360, mostly the offers and welcome catalogues; follow-up 1 in the f385 receipt, a list-row padding pass."
-  }
- ]
+  "_doc": "C10 viewport overflow allowlist (f385). A rule needs id, metric, routes (regex), class (intended|followup), a reason of 40+ characters and, for a followup, max (the count of hits may fall, never rise: test_viewport_overflow.mjs compares against HEAD) and a followup number from the receipt. Anything matching no rule fails the sweep. Overflow, off-viewport element and footer defects have no rules: all were fixed.",
+  "rules": [
+    {
+      "id": "tap-nav-360",
+      "metric": "tap",
+      "routes": ".*",
+      "widths": [
+        360
+      ],
+      "sel": "^nav ",
+      "class": "followup",
+      "max": 3,
+      "followup": 5,
+      "reason": "Nav wordmark backlink, theme toggle and text links under 44px at 360 after the wordmark and burger fix; remaining ones are small nav chips, a CSS pass on the nav is follow-up 5 in the f385 receipt."
+    },
+    {
+      "id": "tap-footer-360",
+      "metric": "tap",
+      "routes": ".*",
+      "widths": [
+        360
+      ],
+      "sel": "^footer ",
+      "class": "followup",
+      "max": 1,
+      "followup": 6,
+      "reason": "Footer links outside the main link columns (seal row and legal strip) measure 15px tall at 360; follow-up 6 in the f385 receipt, needs a footer layout decision."
+    },
+    {
+      "id": "tap-link-360",
+      "metric": "tap",
+      "routes": ".*",
+      "widths": [
+        360
+      ],
+      "sel": "^a([.#]|$)",
+      "class": "followup",
+      "max": 29,
+      "followup": 1,
+      "reason": "Body and card text links 18 to 29px tall at 360, mostly the offers and welcome catalogues; follow-up 1 in the f385 receipt, a list-row padding pass."
+    }
+  ]
 }

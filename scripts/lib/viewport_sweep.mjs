@@ -108,6 +108,7 @@ export async function sweep({ root, routes, widths = WIDTHS, settleMs = 350, con
       for (let attempt = 0; attempt < 2; attempt++) {
         try {
           await page.goto(base + route, { waitUntil: "load", timeout: 30000 });
+          await page.waitForFunction(() => Array.from(document.querySelectorAll('link[rel="stylesheet"]')).every((l) => l.sheet && l.sheet.cssRules.length > 0), null, { timeout: 15000 }).catch(() => {});
           await page.waitForTimeout(settleMs * (attempt + 1));
           Object.assign(rec, await page.evaluate(inPage, { tapMin: TAP_MIN, tapOn: tapOn(width), slack: SLACK })); rec.error = null; break;
         } catch (e) { rec.error = String(e.message).split("\n")[0]; }
