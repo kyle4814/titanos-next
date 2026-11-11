@@ -32,8 +32,8 @@ export default function OpenData() {
         <Block key={d.id} point={d.title}>
           <p data-dataset={d.id}>{d.about}</p>
           <p>
-            <a href={d.file} style={{ color: "var(--gold)", marginRight: 16 }}>JSON</a>
-            <a href={d.csv} style={{ color: "var(--gold)" }}>CSV</a>
+            <a href={d.file} className="tap-link" style={{ color: "var(--gold)", marginRight: 16 }}>JSON</a>
+            <a href={d.csv} className="tap-link" style={{ color: "var(--gold)" }}>CSV</a>
           </p>
         </Block>
       ))}

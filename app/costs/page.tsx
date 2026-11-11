@@ -226,7 +226,7 @@ export default function Costs() {
                 {CORE.map(([n, p, href]) => (
                   <tr key={n}>
                     <td style={CELL}>
-                      <a href={href} style={{ color: "var(--gold)" }}>
+                      <a href={href} className="tap-link" style={{ color: "var(--gold)" }}>
                         {n}
                       </a>
                     </td>
@@ -312,7 +312,7 @@ export default function Costs() {
                         flexWrap: "wrap",
                       }}
                     >
-                      <a href={`/offers/${o.slug}`} style={{ color: "var(--ice)", flex: "1 1 220px" }}>
+                      <a href={`/offers/${o.slug}`} className="tap-link" style={{ color: "var(--ice)", flex: "1 1 220px" }}>
                         {o.name}
                       </a>
                       <span style={{ color: "var(--gold)", whiteSpace: "nowrap" }}>{formatOfferPrice(o)}</span>

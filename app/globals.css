@@ -1158,3 +1158,16 @@ p, li, blockquote { text-wrap: pretty; }
 }
 /* C10 viewport sweep (f385): a fixed-width wordmark svg must not push a 360 px page sideways. */
 .ds-wordmark { max-width: 100%; height: auto; }
+
+/* C10 f392: 44px tap targets at phone width. Layout-only; no copy or colour change; desktop untouched. */
+@media (max-width: 640px) {
+  summary { padding-block: 11px; }
+  .secondary-link,
+  .tap-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .w4-chip.w4-chip--btn { display: inline-flex; align-items: center; min-height: 44px; }
+}
