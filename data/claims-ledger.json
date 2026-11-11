@@ -16,68 +16,35 @@
   {
    "id": "s_jobs",
    "group": "Fleet",
-   "display": "67.92 jobs an hour",
-   "caption": "Worker jobs finished on 2026-10-12, one full day (1630 finished over 24 hours)",
+   "display": "11.71 lanes an hour",
+   "caption": "Build lanes finished on 2026-11-10, one full day (281 finished over 24 hours)",
    "label": "MEASURED",
-   "system": "TitanOS worker fleet job ledger (two accounts)",
-   "source": "Worker fleet job ledger",
-   "date": "2026-10-12",
-   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
+   "system": "TitanOS build lanes (status record of every lane)",
+   "source": "Build lane status record",
+   "date": "2026-11-10",
+   "method": "Count lanes whose final status (done or failed) is stamped that day; lanes an hour = finished / 24; fail rate = failed / finished; median = latest start to finish, in minutes. A lane that failed and was re-run shows only its final status. Window: 2026-11-10 00:00 to 23:59 local (one complete calendar day, 24 h). 281 finished (278 done, 3 failed)."
   },
   {
    "id": "s_fail",
    "group": "Fleet",
-   "display": "170 of 1630",
-   "caption": "Fleet jobs that failed on 2026-10-12, 10.4%",
+   "display": "3 of 281",
+   "caption": "Build lanes that failed on 2026-11-10, 1.1%",
    "label": "MEASURED",
-   "system": "TitanOS worker fleet job ledger (two accounts)",
-   "source": "Worker fleet job ledger",
-   "date": "2026-10-12",
-   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
+   "system": "TitanOS build lanes (status record of every lane)",
+   "source": "Build lane status record",
+   "date": "2026-11-10",
+   "method": "Count lanes whose final status (done or failed) is stamped that day; lanes an hour = finished / 24; fail rate = failed / finished; median = latest start to finish, in minutes. A lane that failed and was re-run shows only its final status. Window: 2026-11-10 00:00 to 23:59 local (one complete calendar day, 24 h). 281 finished (278 done, 3 failed)."
   },
   {
    "id": "s_median",
    "group": "Fleet",
-   "display": "6 min",
-   "caption": "Median time per job across 1460 jobs on 2026-10-12",
+   "display": "10.4 min",
+   "caption": "Median time per lane across 278 lanes on 2026-11-10",
    "label": "MEASURED",
-   "system": "TitanOS worker fleet job ledger (two accounts)",
-   "source": "Worker fleet job ledger",
-   "date": "2026-10-12",
-   "method": "Count ledger events dated that day: finished = done + fail + stuck; jobs an hour = finished / 24; fail rate = (fail + stuck) / finished; median = start to done minutes (starts paired across days). Window: 2026-10-12 00:00 to 23:59 local (one complete calendar day, 24 h). 1630 finished (1460 done, 170 failed or stuck). Live reading now: UNKNOWN: the ledger stopped writing at 2026-10-13T07:57:29, so there is no current-day reading to quote."
-  },
-  {
-   "id": "s_usd_job",
-   "group": "AI cost",
-   "display": "US$1.037",
-   "caption": "Fleet-wide cost per job over 243 jobs. An upper bound: it includes the orchestrator.",
-   "label": "MEASURED",
-   "system": "Token usage meter and the job ledger",
-   "source": "Token usage meter and the job ledger",
-   "date": "2026-10-08",
-   "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
-  },
-  {
-   "id": "s_usd_today",
-   "group": "AI cost",
-   "display": "US$252.08",
-   "caption": "Spent in one day, API-equivalent pricing",
-   "label": "MEASURED",
-   "system": "Token usage meter and the job ledger",
-   "source": "Token usage meter and the job ledger",
-   "date": "2026-10-08",
-   "method": "orchestrator spend dominates; US$/job is total spend / fleet jobs, an upper bound"
-  },
-  {
-   "id": "s_tokens",
-   "group": "AI cost",
-   "display": "29,130 tokens",
-   "caption": "Median a worker reads before acting, 52 sessions",
-   "label": "MEASURED",
-   "system": "Session start audit (tokens read before the first action)",
-   "source": "Session start audit (tokens read before the first action)",
-   "date": "2026-10-08",
-   "method": "Read from the source on the date shown."
+   "system": "TitanOS build lanes (status record of every lane)",
+   "source": "Build lane status record",
+   "date": "2026-11-10",
+   "method": "Count lanes whose final status (done or failed) is stamped that day; lanes an hour = finished / 24; fail rate = failed / finished; median = latest start to finish, in minutes. A lane that failed and was re-run shows only its final status. Window: 2026-11-10 00:00 to 23:59 local (one complete calendar day, 24 h). 281 finished (278 done, 3 failed)."
   },
   {
    "id": "s_ram",
@@ -166,127 +133,6 @@
    "source": "Rolling backup history (time of the newest saved pass)",
    "date": "2026-11-10",
    "method": "Time since the newest saved backup pass, read from the backup history on the date shown."
-  },
-  {
-   "id": "s_suite",
-   "group": "Build",
-   "display": "No number yet",
-   "caption": "Wall time of the main codebase suite",
-   "label": "UNKNOWN",
-   "system": "No durable run record exists yet",
-   "source": "No durable run record exists yet",
-   "date": "2026-11-10",
-   "method": "That suite does not log its own run time, so we show no figure. A recorder is the next fix."
-  },
-  {
-   "id": "e_cost_per_job",
-   "group": "AI cost",
-   "display": "US$0.973 to US$0.116",
-   "caption": "Cost per worker job (API-equivalent)",
-   "label": "MEASURED",
-   "system": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",
-   "source": "Kernel compression gate record, 2026-10-08; Sigil ceiling report, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "25 matched jobs: same task text as earlier runs on the full rule book, re-run on the compact core. Cost is API-equivalent token pricing, not a bill."
-  },
-  {
-   "id": "e_daily_spend",
-   "group": "AI cost",
-   "display": "US$467 per day to US$130 per day",
-   "caption": "Daily spend, modelled ceiling",
-   "label": "MODELLED",
-   "system": "Sigil ceiling report, 2026-10-08",
-   "source": "Sigil ceiling report, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "The same measured token counts repriced under five layers of change. The last layer needs a decision not yet taken. A scenario, not a forecast."
-  },
-  {
-   "id": "e_recall50",
-   "group": "AI quality",
-   "display": "48/50",
-   "caption": "Recall test, 50 questions",
-   "label": "MEASURED",
-   "system": "Kernel compression gate record, 2026-10-08",
-   "source": "Kernel compression gate record, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "50 questions about the rule book, read-only tools, judged. Before is the full rule book, after is the compact core. Bar was 48 or better."
-  },
-  {
-   "id": "e_heldout",
-   "group": "AI quality",
-   "display": "24/25",
-   "caption": "Held-out recall test, 25 questions",
-   "label": "MEASURED",
-   "system": "Kernel compression gate record, 2026-10-08",
-   "source": "Kernel compression gate record, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "Questions written by an independent agent that never saw the compact core."
-  },
-  {
-   "id": "e_killtest",
-   "group": "AI quality",
-   "display": "25/25",
-   "caption": "Fully good results on 25 matched jobs",
-   "label": "MEASURED",
-   "system": "Kernel compression gate record, 2026-10-08",
-   "source": "Kernel compression gate record, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "Same 25 tasks. Two full-rule-book results claimed clean lint on files that fail lint. The compact core had none."
-  },
-  {
-   "id": "e_cron_snapshot",
-   "group": "Cron",
-   "display": "224 s to 3.1 s",
-   "caption": "5-minute snapshot, time per run",
-   "label": "MEASURED",
-   "system": "PC optimisation report, 2026-10-08",
-   "source": "PC optimisation report, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "Run record average before, a timed run after. The secret check now scans only files that could be committed."
-  },
-  {
-   "id": "e_cron_mirror",
-   "group": "Cron",
-   "display": "2,250 s to 14 s",
-   "caption": "Cloud mirror, time per run",
-   "label": "MEASURED",
-   "system": "PC optimisation report, 2026-10-08",
-   "source": "PC optimisation report, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "Before: 30 to 45 minutes a run (midpoint shown, 37.5 minutes). After: 14 seconds, incremental with a daily full pass."
-  },
-  {
-   "id": "e_cron_bundle",
-   "group": "Cron",
-   "display": "51 s to 3.6 s",
-   "caption": "Repository bundle step, time per run",
-   "label": "MEASURED",
-   "system": "PC optimisation report, 2026-10-08",
-   "source": "PC optimisation report, 2026-10-08",
-   "date": "2026-10-08",
-   "method": "One bundle per repository keyed on content, instead of re-bundling about 12 worktrees."
-  },
-  {
-   "id": "e_repo_size",
-   "group": "Build",
-   "display": "235 MB to 35 MB",
-   "caption": "Kernel repository size",
-   "label": "MEASURED",
-   "system": "Round-2 brief, 2026-10-08 (raw log attaching)",
-   "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
-   "date": "2026-10-08",
-   "method": "Size of the repository directory before and after history and run-state cleanup."
-  },
-  {
-   "id": "e_titanos_suite",
-   "group": "Build",
-   "display": "975 s to 579 s",
-   "caption": "Main codebase test suite run time",
-   "label": "MEASURED",
-   "system": "Round-2 brief, 2026-10-08 (raw log attaching)",
-   "source": "Round-2 brief, 2026-10-08 (raw log attaching)",
-   "date": "2026-10-08",
-   "method": "Wall-clock seconds for the full suite, before and after."
   }
  ]
 }
