@@ -30,6 +30,20 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
     ],
   },
   {
+    heading: "Shop and account",
+    links: [
+      { label: "Shop", href: "/shop" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Sign in", href: "/app/login" },
+      { label: "Owner portal", href: "/app" },
+      { label: "Pro seat", href: "/pro" },
+      { label: "Agent seat", href: "/agents" },
+      { label: "Enterprise", href: "/enterprise" },
+      { label: "Partners", href: "/partners" },
+      { label: "Trust", href: "/trust" },
+    ],
+  },
+  {
     heading: "Proof",
     links: [
       { label: `${dec("estate_ey")} engineer-years`, href: "/engineering" },
@@ -42,6 +56,8 @@ const COLUMNS: Array<{ heading: string; links: FooterLink[] }> = [
       { label: "Live HUD", href: "/hud" },
       { label: "Free AI Readiness Guide (PDF)", href: "/ai-readiness-guide.pdf", external: true },
       { label: "Blog", href: "/blog" },
+      { label: "Demonblade Labs", href: "/labs/" },
+      { label: "Black Ice dossiers", href: "/black-ice/dossiers" },
       { label: "Efficiency, measured", href: "/efficiency" },
       { label: "How it works", href: "/how-it-works" },
       { label: "The learning loop", href: "/learning-loop" },

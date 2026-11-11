@@ -27,6 +27,7 @@ export function freshnessMode(root) {
 export const GATES = [
   { name: "proof_feed_freshness", glob: /^proof_feed_freshness_gate\.mjs$/, args: () => ["--mode", freshnessMode(path.resolve(HERE, ".."))] },
   { name: "f262_anchors", glob: /^test_f262_anchors\.(mjs|sh|py)$/, args: (o) => ["--built", o] },
+  { name: "home_reach", glob: /^test_home_reach\.(mjs|sh|py)$/, args: (o) => ["--built", o] },
   { name: "perf_budget", glob: /^test_perf_budget\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "no_hidden_tracking", glob: /^test_no_hidden_tracking[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "no_doctrine_leak", glob: /^test_no_doctrine_leak\.(mjs|sh|py)$/, args: (o) => [o] },
