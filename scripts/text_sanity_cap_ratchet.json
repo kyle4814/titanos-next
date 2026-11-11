@@ -1,0 +1,4 @@
+{
+  "_doc": "C9 cap ratchet (f384). The highest count each followup rule in text_sanity_allowlist.json may ever carry. A cap may fall (lower the allowlist max, then lower this number to match); it may never rise above this file. Raising a number here is a visible, reviewed change to a gate file, not a quiet edit of the allowlist.",
+  "caps": { "F1-stale-feed": 328 }
+}
