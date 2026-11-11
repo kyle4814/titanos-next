@@ -57,7 +57,7 @@ export default function ProofDeclaration() {
   if (!open || pathname !== "/") return null;
 
   return (
-    <div role="presentation" style={{ position:"fixed", inset:0, zIndex:10000, background:"rgba(0,0,0,.88)", display:"grid", placeItems:"center", padding:16 }}>
+    <div role="presentation" data-no-print style={{ position:"fixed", inset:0, zIndex:10000, background:"rgba(0,0,0,.88)", display:"grid", placeItems:"center", padding:16 }}>
       <section id="titanos-proof-dialog" role="dialog" aria-modal="true" aria-labelledby="titanos-proof-title"
         style={{ position:"relative", width:"min(100%,720px)", maxHeight:"min(90dvh,850px)", overflowY:"auto", background:"#0c0c0e", color:"#f6f2e9", border:"1px solid #67542d", borderRadius:16, padding:"clamp(22px,5vw,48px)", boxShadow:"0 24px 90px #000" }}>
         <button ref={closeButton} onClick={dismiss} aria-label="Close introduction"

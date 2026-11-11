@@ -60,18 +60,8 @@
    "reason": "Investor-room ledger frozen at facts_as_of 2026-10-09; the kernel numbers ledger was last written 2026-10-13 and the generator named in generated_by (bin/site_ledger_export.py) no longer exists, so there is no newer source to take. Real: needs a re-measure and a new exporter, not a re-date."
   },
   {
-   "file": "lib/site-data/proof.json",
-   "cap": 36,
-   "reason": "Proof Wall figures generated from BASELINE_2026-10-08 by scripts/gen_proof_data.mjs. The kernel now writes BASELINE_2026-11-10 from ceiling_board.py with a different row set, so a refresh is a content change needing a review, not a date bump. Real: followup."
-  },
-  {
-   "file": "public/data/claims-ledger.json",
-   "cap": 22,
-   "reason": "Open-data copy of the Proof Wall claims (scripts/gen_open_data.mjs reads proof.json); it goes stale with proof.json and is refreshed in the same pass. Real: followup."
-  },
-  {
    "file": "lib/site-data/provenance.json",
-   "cap": 8,
+   "cap": 7,
    "reason": "Evidence page stamps whose date comes from lib/ledger.json facts_as_of or from the proof baseline; they follow those two files. Real: followup."
   }
  ]
