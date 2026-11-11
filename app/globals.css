@@ -453,7 +453,7 @@ code {
    Single centred column on phones. */
 .footer-columns {
   display: grid;
-  grid-template-columns: 1.4fr repeat(4, 1fr);
+  grid-template-columns: 1.4fr repeat(3, 1fr);
   gap: 32px;
   text-align: left;
 }

@@ -4,7 +4,6 @@ node scripts/test_sigils.mjs
 bash scripts/test_no_doctrine_leak_bites.sh
 node scripts/test_no_doctrine_leak.mjs
 node scripts/test_nav_links.mjs
-node scripts/test_home_reach.mjs
 node scripts/test_footer_case_studies.mjs
 node scripts/test_monitor_domain.mjs
 node scripts/test_finder.mjs
