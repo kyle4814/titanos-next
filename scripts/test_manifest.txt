@@ -59,6 +59,7 @@ node scripts/test_headers_lint.mjs
 node scripts/test_mailto_order_sweep.mjs
 node scripts/test_invoice_render.mjs
 node scripts/test_case_trace.mjs
+node scripts/test_ariance_trace_gate.mjs
 node scripts/test_funnel_killtest.mjs
 node scripts/test_figure_freshness.mjs
 node scripts/test_f260_routes.mjs
