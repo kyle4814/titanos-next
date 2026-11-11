@@ -14,7 +14,18 @@ const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(n);
 const val = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 
+// proof_feed_freshness_gate (f388): WARN while the text-sanity F1-stale-feed cap is still at its f382 level (debt tolerated, printed),
+// FAIL as soon as that cap is lowered below F1_WARN_CAP (the data refresh is landing, so stale feeds must break the build).
+export const F1_WARN_CAP = 176;
+export function freshnessMode(root) {
+  try {
+    const al = JSON.parse(fs.readFileSync(path.join(root, "scripts/text_sanity_allowlist.json"), "utf8"));
+    const f1 = (al.textRules || []).find((r) => r.id === "F1-stale-feed");
+    return f1 && Number(f1.max) < F1_WARN_CAP ? "fail" : "warn";
+  } catch { return "warn"; }
+}
 export const GATES = [
+  { name: "proof_feed_freshness", glob: /^proof_feed_freshness_gate\.mjs$/, args: () => ["--mode", freshnessMode(path.resolve(HERE, ".."))] },
   { name: "f262_anchors", glob: /^test_f262_anchors\.(mjs|sh|py)$/, args: (o) => ["--built", o] },
   { name: "perf_budget", glob: /^test_perf_budget\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "no_hidden_tracking", glob: /^test_no_hidden_tracking[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
