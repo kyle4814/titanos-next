@@ -52,7 +52,8 @@ G clone -q "$T/origin.git" "$T/repo" 2>/dev/null; mkdir -p "$T/repo/node_modules
 [ "$(G -C "$T/repo" symbolic-ref --short HEAD)" = main ] && [ -f "$T/repo/scripts/deploy.sh" ] || { echo "fixture setup failed"; exit 97; }
 
 STUBENV=(PATH="$T/bin:$PATH" STUB_LOG="$T/stub.log" STUB_APPROVED="$T/approved" STUB_REPO="$T/repo"
-         APPROVAL_CHECK_CMD="$T/bin/approval_stub" WORKTREE="$T/wt" DEPLOY_PROPAGATION_WAIT=0 DEPLOY_BUILD=local)
+         APPROVAL_CHECK_CMD="$T/bin/approval_stub" WORKTREE="$T/wt" DEPLOY_PROPAGATION_WAIT=0 DEPLOY_BUILD=local
+         DEPLOY_LOCK_FILE="$T/lock" DEPLOY_LOCK_WAIT_SECS=2)
 run(){    # run [VAR=value ...]: the fixture deploy.sh, no terminal, every knob explicit (never the caller's env)
   : > "$T/stub.log"
   env -u DEPLOY_APPROVAL_REF -u DEPLOY_INTERACTIVE "${STUBENV[@]}" "$@" bash "$T/repo/scripts/deploy.sh" </dev/null >"$T/out" 2>&1
@@ -120,6 +121,19 @@ ok $? "default build is the cloud runner, for the exact source SHA; the laptop r
 PAGE=$(G -C "$T/origin.git" show gh-pages:index.html)
 [ "$PAGE" = "<html>$(cat "$T/repo/.next/BUILD_ID")</html>" ] && [[ $PAGE == "<html>CLOUD"* ]]
 ok $? "gh-pages holds the output the cloud build tested (the tested bytes ship)"
+# --- the lock half (2026-11-11) ---------------------------------------------------------------------------------
+GPB=$(G -C "$T/origin.git" rev-parse gh-pages)
+flock "$T/lock" sleep 6 & HOLDER=$!; sleep 0.5
+run DEPLOY_APPROVAL_REF=ok-1; rc=$?
+refused $rc "another site deploy holds" && [ "$(G -C "$T/origin.git" rev-parse gh-pages)" = "$GPB" ]
+ok $? "a second deploy while the lock is held: waits, then refuses; gh-pages untouched"
+wait $HOLDER
+flock "$T/lock" sleep 1 & HOLDER=$!; sleep 0.3
+run DEPLOY_APPROVAL_REF=ok-1 DEPLOY_LOCK_WAIT_SECS=10; rc=$?
+[ "$rc" -eq 0 ] && grep -q "lock held:" "$T/out"; ok $? "a deploy that waits for the lock proceeds once it is released"
+wait $HOLDER
+run DEPLOY_APPROVAL_REF=ok-1 DEPLOY_LOCK_WAIT_SECS=abc; refused $? "DEPLOY_LOCK_WAIT_SECS must be whole seconds"
+ok $? "a bad lock wait value: refused"
 PAGES1=$(G -C "$T/origin.git" rev-parse gh-pages)
 crun DEPLOY_APPROVAL_REF=ok-1 CLOUD_STUB_FAIL=1; rc=$?
 [ "$rc" -eq 1 ] && grep -q "REFUSED: the cloud build/test of ${SRC:0:12} did not pass" "$T/out" \
@@ -140,6 +154,21 @@ if grep -q '"$BUILD_ID" 2 0' "$T/repo/scripts/deploy.sh"; then   # else the next
 else
   ok 1 "fixture could not shorten the verify loop (deploy.sh's verify line changed): update this test"
 fi
+
+# --- no older build over a newer one (2026-11-11) -----------------------------------------------------------------
+GPKEEP=$(G -C "$T/origin.git" rev-parse gh-pages)
+G -C "$T/repo" checkout -q -b newer; echo newer >> "$T/repo/app.txt"; G -C "$T/repo" commit -qam newer
+NEWER=$(G -C "$T/repo" rev-parse HEAD); G -C "$T/repo" checkout -q main
+G clone -q "$T/origin.git" "$T/ghp" 2>/dev/null; G -C "$T/ghp" checkout -q gh-pages
+G -C "$T/ghp" commit -q --allow-empty -m "Deploy newer" -m "source: $NEWER"; G -C "$T/ghp" push -q origin gh-pages 2>/dev/null
+GPNEW=$(G -C "$T/origin.git" rev-parse gh-pages)
+run DEPLOY_APPROVAL_REF=ok-1; rc=$?
+refused $rc "[0-9a-f]* is OLDER than the build live" && [ "$(G -C "$T/origin.git" rev-parse gh-pages)" = "$GPNEW" ]
+ok $? "HEAD is an ancestor of the source live on gh-pages: refused before the build, gh-pages untouched"
+G -C "$T/ghp" commit -q --allow-empty -m "Deploy same" -m "source: $(G -C "$T/repo" rev-parse HEAD)"; G -C "$T/ghp" push -q origin gh-pages 2>/dev/null
+run DEPLOY_APPROVAL_REF=ok-1; rc=$?
+built && ! grep -q REFUSED "$T/out"; ok $? "live source == HEAD (not strictly older): the deploy is allowed"
+G -C "$T/origin.git" update-ref refs/heads/gh-pages "$GPKEEP"; G -C "$T/repo" branch -qD newer; rm -rf -- "$T/ghp"
 
 # --- Kyle at a real terminal (a pty via script(1)) ------------------------------------------------------------
 if command -v script >/dev/null 2>&1; then

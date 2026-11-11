@@ -21,6 +21,11 @@
 # stub and is refused unless origin is a local path, so a stub can never ship the real site.
 # BUILD + TESTS (2026-11-10): on the cloud runner by default (scripts/cloud_build.sh), never on the laptop; the tested
 # out/ is what ships. DEPLOY_BUILD=local is the owner's escape at a terminal.
+# LOCK + NO-DOWNGRADE (2026-11-11, after two approved deploys ran at once from one checkout and one gh-pages worktree):
+#   1. an exclusive flock (DEPLOY_LOCK_FILE, default ~/.titanos/locks/site_deploy.lock) is held for the WHOLE run; a second
+#      run waits DEPLOY_LOCK_WAIT_SECS (default 600) and then refuses, so there are never two pushes to gh-pages at once;
+#   2. it refuses when the SHA about to ship is a strict ancestor of the source SHA currently live on gh-pages (the
+#      gh-pages commit records "source: <sha>"), so an older build can never overwrite a newer one.
 # Exit: 0 deployed and verified (or nothing to publish); 1 refused or failed before the push; 3 pushed, NOT verified.
 # ─────────────────────────────────────────────────────────────────────
 set -euo pipefail
@@ -31,6 +36,16 @@ WORKTREE="${WORKTREE:-/tmp/titanos-ghpages}"
 cd "$REPO_ROOT"
 
 refuse() { echo "REFUSED: $*" >&2; echo "  nothing was built or pushed." >&2; exit 1; }
+
+echo "▸ Deploy lock"
+LOCK_FILE="${DEPLOY_LOCK_FILE:-${HOME:-/tmp}/.titanos/locks/site_deploy.lock}"
+LOCK_WAIT="${DEPLOY_LOCK_WAIT_SECS:-600}"
+[[ "$LOCK_WAIT" =~ ^[0-9]+$ ]] || refuse "DEPLOY_LOCK_WAIT_SECS must be whole seconds, not '$LOCK_WAIT'"
+command -v flock >/dev/null 2>&1 || refuse "flock is not installed, so two deploys could not be kept apart"
+mkdir -p "$(dirname "$LOCK_FILE")" || refuse "cannot create the lock directory for $LOCK_FILE"
+exec 9>"$LOCK_FILE" || refuse "cannot open the lock file $LOCK_FILE"
+flock -w "$LOCK_WAIT" 9 || refuse "another site deploy holds $LOCK_FILE and did not finish within ${LOCK_WAIT}s; run again when it is done"
+echo "  lock held: $LOCK_FILE"
 is_local_path() { case "$1" in /*) return 0;; *) return 1;; esac; }
 
 echo "▸ Publish gate"
@@ -64,6 +79,17 @@ BRANCH=$(git symbolic-ref --short -q HEAD || echo "a detached HEAD")
 git fetch -q origin main || refuse "git fetch origin main failed, so HEAD cannot be proved equal to origin/main"
 SRC_SHA=$(git rev-parse HEAD)
 [ "$SRC_SHA" = "$(git rev-parse origin/main)" ] || refuse "HEAD ${SRC_SHA:0:12} is not origin/main $(git rev-parse --short=12 origin/main); push or pull first"
+# No older build over a newer one: the live gh-pages commit records the source SHA it was built from.
+git fetch -q origin gh-pages 2>/dev/null || true
+LIVE_SRC=$(git log -1 --format=%B origin/gh-pages 2>/dev/null | sed -n 's/^source: \([0-9a-f]\{40\}\)$/\1/p' | head -1 || true)
+if [ -n "$LIVE_SRC" ] && git cat-file -e "$LIVE_SRC^{commit}" 2>/dev/null; then
+  if [ "$LIVE_SRC" != "$SRC_SHA" ] && git merge-base --is-ancestor "$SRC_SHA" "$LIVE_SRC"; then
+    refuse "${SRC_SHA:0:12} is OLDER than the build live on gh-pages (${LIVE_SRC:0:12}); an older build never overwrites a newer one"
+  fi
+  echo "  live source ${LIVE_SRC:0:12}: not newer than ${SRC_SHA:0:12}"
+else
+  echo "  live source SHA unknown or not in this clone: downgrade check skipped"
+fi
 if [ "$APPROVED_BY" = interactive ]; then
   SHORT=$(git rev-parse --short=7 HEAD)
   # 2026-10-28: the prompt and the answer both go to /dev/tty, never to inherited stdin. Kyle pastes this command
