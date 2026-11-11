@@ -22,6 +22,7 @@ import http from "node:http"; import fs from "node:fs"; import path from "node:p
 export const DEFAULT_PAGES = ["/", "/scan", "/pricing", "/app", "/pro", "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/investors", "/sectors"];
 export const VIEWPORTS = { desktop: { width: 1280, height: 800 }, mobile: { width: 390, height: 844 } };
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".txt": "text/plain", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".woff": "font/woff", ".ico": "image/x-icon" };
+const MEDIA_STOPS_MAX = 20;
 const TABBABLE = 'a[href],area[href],button,input:not([type="hidden"]),select,textarea,summary,iframe,[tabindex],[contenteditable=""],[contenteditable="true"],audio[controls],video[controls]';
 
 const resolveFile = (root, p) => {
@@ -61,7 +62,7 @@ const PAGE_INIT = () => {
     const r = el.getBoundingClientRect(); const vw = innerWidth, vh = innerHeight;
     let hiddenAnc = false; for (let a = el; a && a.nodeType === 1; a = a.parentElement) if (a.getAttribute("aria-hidden") === "true" || a.hasAttribute("inert")) hiddenAnc = true;
     const inVp = r.right > 0 && r.bottom > 0 && r.left < vw && r.top < vh;
-    const label = (el.getAttribute("aria-label") || el.textContent || el.getAttribute("href") || el.getAttribute("name") || "").trim().replace(/\s+/g, " ").slice(0, 40);
+    const label = (el.getAttribute("aria-label") || el.getAttribute("title") || el.textContent || el.getAttribute("href") || el.getAttribute("name") || "").trim().replace(/\s+/g, " ").slice(0, 40);
     const now = snap(el); let base = window.__kbBase.get(el); let baseSource = "pre";
     if (!base) { baseSource = "blur"; el.blur(); base = snap(el); el.focus(); }
     const primary = (now.oStyle !== "none" && now.oWidth > 0 && now.oColor !== "rgba(0, 0, 0, 0)" && (now.oStyle !== base.oStyle || now.oWidth !== base.oWidth || now.oColor !== base.oColor || now.oOffset !== base.oOffset))
@@ -86,10 +87,24 @@ async function sweepPage(browser, base, page, vpName) {
   };
   const PAGE_INIT_READY = `(() => { if (!window.__kbCount) throw new Error("init missing"); window.__kbBaseline(${JSON.stringify(TABBABLE)}); })()`;
   try {
+    // f421: an instant meta-refresh redirect page (e.g. /our-scan -> /scan#self-scan) navigates away mid-walk, so Tab/Shift+Tab state is
+    // meaningless on it. It has no interactive content of its own: verify the destination is exported and 200, note it, and sweep the destination as its own page.
+    const raw = await ctx.request.get(base + page);
+    const mr = raw.status() === 200 ? /<meta[^>]+http-equiv=["']?refresh["']?[^>]*content=["']?\s*0\s*;\s*url=([^"'>\s]+)/i.exec(await raw.text()) : null;
+    if (mr) {
+      out.status = 200; out.skip = "redirect";
+      const dest = mr[1].split("#")[0];
+      const dr = await ctx.request.get(base + dest);
+      if (dr.status() !== 200) bad("LOAD", `meta-refresh redirect target ${dest} returned ${dr.status()}`);
+      else out.notes.push(`meta-refresh redirect to ${mr[1]}; destination is swept as its own page`);
+      await ctx.close(); return out;
+    }
     const resp = await load(); out.status = resp ? resp.status() : 0;
     if (out.status !== 200) { bad("LOAD", `status ${out.status}`); await ctx.close(); return out; }
     out.n = await pg.evaluate((s) => window.__kbCount(s), TABBABLE);
-    const limit = out.n + 5;
+    // f421: the press budget must also cover keyboard-focusable scroll containers (Chromium focuses overflow scrollers, tabIndex stays -1) and native media-control stops, or a long but finite walk is misread as a trap
+    const extra = await pg.evaluate((mx) => { let sc = 0, md = 0; for (const e of document.querySelectorAll("*")) { const cs = getComputedStyle(e); if (/^(auto|scroll)$/.test(cs.overflowX + "") && e.scrollWidth > e.clientWidth + 1 || /^(auto|scroll)$/.test(cs.overflowY + "") && e.scrollHeight > e.clientHeight + 1) sc++; if (/^(VIDEO|AUDIO)$/.test(e.tagName) && e.hasAttribute("controls")) md += mx; } return sc + md; }, MEDIA_STOPS_MAX);
+    const limit = out.n + 5 + extra;
 
     // ---- skip link: first Tab stop that is an in-page #hash link with "skip" text
     await pg.keyboard.press("Tab");
@@ -110,14 +125,17 @@ async function sweepPage(browser, base, page, vpName) {
         else out.skip = "works";
       }
       await load();
-    } else out.skip = "absent";
+    } else { out.skip = "absent"; await load(); /* the probe Tab above consumed the first real stop: reload so the forward walk starts from the document (f421: was a probe-side REVERSE_MISMATCH on pages with no skip link) */ }
 
     // ---- forward Tab walk
-    const seq = []; const seen = new Set(); let returned = null;
+    const seq = []; const seen = new Set(); let returned = null; let mediaRun = 0;
     for (let i = 1; i <= limit; i++) {
       await pg.keyboard.press("Tab"); out.presses++;
       const s = await pg.evaluate(() => window.__kbState());
       if (s.doc) { returned = "document"; break; }
+      // f421: a <video controls>/<audio controls> keeps document.activeElement on the media element while Tab walks its native control shadow-DOM stops; consecutive presses on the same media element are internal stops (bounded), not a cycle
+      if (seq.length && seq[seq.length - 1].id === s.id && /^(video|audio)$/.test(s.tag) && ++mediaRun <= MEDIA_STOPS_MAX) continue;
+      mediaRun = 0;
       if (seen.has(s.id)) { returned = seq[0] && seq[0].id === s.id ? "wrap-to-first" : "cycle"; if (returned === "cycle") { bad("TRAP", `focus cycles back to ${s.tag} "${s.label}" at press ${i}, never reaching the document`); } break; }
       seen.add(s.id); seq.push(s);
       const where = `${s.tag} "${s.label}"`;
@@ -130,11 +148,12 @@ async function sweepPage(browser, base, page, vpName) {
 
     // ---- reverse: from the document state walk Shift+Tab; must reproduce forward order reversed and exit
     if (returned === "document" && seq.length) {
-      const rev = []; let back = null;
+      const rev = []; let back = null; let revRun = 0;
       for (let i = 1; i <= limit; i++) {
         await pg.keyboard.press("Shift+Tab"); out.presses++;
         const s = await pg.evaluate(() => window.__kbState());
         if (s.doc) { back = "document"; break; }
+        if (rev.length && rev[rev.length - 1] === s.id && /^(video|audio)$/.test(s.tag) && ++revRun <= MEDIA_STOPS_MAX) continue; revRun = 0;
         rev.push(s.id);
         if (rev.length > seq.length + 2) break;
       }

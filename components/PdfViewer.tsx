@@ -15,6 +15,10 @@ export default function PdfViewer({
         src={src}
         title={label ?? "PDF viewer"}
         aria-label={label}
+        // f421: Chromium never matches :focus / :focus-visible / :focus-within on the parent for a focused iframe, so no CSS
+        // ring can show here. When a keyboard-reachable "Open directly" link is supplied it is the keyboard route to the PDF,
+        // so the frame is taken out of the Tab order instead of being a stop with no visible indicator.
+        tabIndex={fallbackHref ? -1 : undefined}
         style={{ width: "100%", height: 700, border: "none", display: "block" }}
       />
       {fallbackHref && (
