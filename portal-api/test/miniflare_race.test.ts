@@ -7,6 +7,7 @@ import { miniflareAvailable, MiniflareD1, stopMiniflare } from "./miniflare_d1.t
 // f213: the f183 / f197 / f203 WOULD-FLIP ("same suite on miniflare/test D1"). The SAME functions that run on FakeD1 (node:sqlite) run here on a real local
 // miniflare D1 binding (workerd): f183 seeded subscription-CAS schedules, f197 two-deliverer claimEvent race, f203 reconciler contract incl. concurrent reconcilers.
 // Skips cleanly when miniflare is absent (not a dependency). SYNTHETIC fixtures only; nothing leaves the machine.
+// f369 budget: measured 517 s wall (5/5 pass, exit 0) at load 25/8 cores with the default 30 seeds; a harness limit under ~900 s will cut it off. Not a hang: after() disposes miniflare.
 // Seeds: MF_SEEDS (default 30, minimum meaningful 20). Single isolate caveat in the receipt: this is NOT a cross-isolate real D1.
 process.env.CONTRACT_LIB = "1";
 const skip = miniflareAvailable() ? false : "miniflare not resolvable (set MINIFLARE_DIR to a dir holding node_modules/miniflare); skipped";
