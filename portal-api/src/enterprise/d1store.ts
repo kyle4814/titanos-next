@@ -145,6 +145,11 @@ export class D1EntStore implements EntStore {
       : await this.one<{ n: number }>("SELECT COUNT(*) AS n FROM sso_states WHERE tenant_id = ? AND client_key = ?", tenantId, clientKey);
     return Number(r?.n ?? 0);
   }
+  // f365: oldest OPEN legacy row (client_key IS NULL) of THIS tenant, one statement; true when a row went.
+  async evictOldestLegacySsoState(tenantId: string, now: number) {
+    const n = await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key IS NULL AND used = 0 AND expires_at > ? ORDER BY COALESCE(created_at, expires_at - ?), rowid LIMIT 1)`, tenantId, now, SSO_STATE_TTL_MS);
+    return n > 0;
+  }
   // f360: drops the oldest OPEN state of THAT source only, in ONE statement. NULL client_key (pre-0022 rows) never matches, so legacy rows are never evicted by the per-source rule.
   async evictOldestSsoState(tenantId: string, clientKey: string, now: number) {
     await this.run(`DELETE FROM sso_states WHERE hash = (SELECT hash FROM sso_states WHERE tenant_id = ? AND client_key = ? AND used = 0 AND expires_at > ? ORDER BY COALESCE(created_at, expires_at - ?), rowid LIMIT 1)`, tenantId, clientKey, now, SSO_STATE_TTL_MS);

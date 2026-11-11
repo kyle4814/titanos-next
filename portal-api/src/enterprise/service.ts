@@ -396,7 +396,10 @@ export async function ssoStart(d: Deps, slug: string, clientKey = "unknown") {
   // FAIRNESS (f358): a source can only ever displace ITS OWN oldest state. At its per-source sub-cap it recycles its own oldest row;
   // a source that already holds states is held to (cap - reserve) so the top slice stays free for a source with none, and the tenant cap stays the outer bound.
   const own = await c.store.openSsoStates(t.id, d.now(), clientKey), total = await c.store.openSsoStates(t.id, d.now());
-  if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || (own > 0 && total >= MAX_OPEN_SSO_STATES - SSO_NEWCOMER_RESERVE)) await c.store.evictOldestSsoState(t.id, clientKey, d.now());
+  // f365: rows written before migration 0022 have no client_key. At the tenant cap the oldest such row is the first victim (a source can never evict another source's keyed rows); a source at its own sub-cap still recycles its own.
+  const freedLegacy = own < MAX_OPEN_SSO_STATES_PER_CLIENT && total >= MAX_OPEN_SSO_STATES && await c.store.evictOldestLegacySsoState(t.id, d.now());
+  if (freedLegacy) { /* a legacy slot was freed: no 429, no own-row eviction */ }
+  else if (own >= MAX_OPEN_SSO_STATES_PER_CLIENT || (own > 0 && total >= MAX_OPEN_SSO_STATES - SSO_NEWCOMER_RESERVE)) await c.store.evictOldestSsoState(t.id, clientKey, d.now());
   else if (total >= MAX_OPEN_SSO_STATES) throw new HttpError(429, "too_many_requests");
   const state = randomToken("st", 16), nonce = randomToken("nn", 16);
   await c.store.putSsoState({ hash: await sha256Hex(state), tenantId: t.id, clientKey, nonceHash: await sha256Hex(nonce), expiresAt: d.now() + SSO_STATE_TTL_MS, used: false, createdAt: d.now() });
