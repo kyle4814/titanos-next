@@ -28,6 +28,19 @@
    "reason": "Footer links outside the main link columns (seal row and legal strip) measure 15px tall at 360; follow-up 6 in the f385 receipt, needs a footer layout decision."
   },
   {
+   "id": "tap-input-360",
+   "metric": "tap",
+   "routes": ".*",
+   "widths": [
+    360
+   ],
+   "sel": "^input",
+   "class": "followup",
+   "max": 13,
+   "followup": 4,
+   "reason": "Checkbox and small form inputs under 44px at 360; follow-up 4 in the f385 receipt, needs label-wrapped hit areas per form."
+  },
+  {
    "id": "tap-link-360",
    "metric": "tap",
    "routes": ".*",
