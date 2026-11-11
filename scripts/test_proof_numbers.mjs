@@ -27,7 +27,7 @@ const ids = new Set(data.stars.map((s) => s.id));
 ok(ids.size === data.stars.length, "star ids are unique");
 ok(data.loop.length >= 7 && data.loop.every((l) => ids.has(l.receipt)), "every loop node's receipt resolves to a star");
 ok(!/\/home\/|~\/|\.py\b|\.jsonl\b|\.sh\b|bin\/|klinge|state\/|SOUL|LEXICON|CORE\.md/i.test(JSON.stringify(data.stars) + JSON.stringify(data.charts) + JSON.stringify(data.fleetCost)), "no internal path, tool name or doctrine term in star/chart data");
-ok(data.charts.every((c) => c.label === "UNKNOWN" ? c.beforePct === 0 && c.afterPct === 0 : c.beforePct <= 100 && c.afterPct <= 100 && Math.max(c.beforePct, c.afterPct) === 100), "bar widths are shares of the larger value");
+ok(data.charts.every((c) => c.beforePct <= 100 && c.afterPct <= 100 && Math.max(c.beforePct, c.afterPct) === 100), "bar widths are shares of the larger value");
 ok(data.charts.some((c) => !c.improved) || data.fleetCost.after > data.fleetCost.before, "the page keeps a figure that went the wrong way (the fleet-wide cost per job)");
 
 // 2: digit-bearing literals in the components

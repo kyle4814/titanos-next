@@ -7,8 +7,8 @@
       "routes": "^/(proof|learning-loop)?$",
       "text": "^UNKNOWN$|UNKNOWN now|cost per job is UNKNOWN right now",
       "class": "followup",
-      "max": 176,
-      "reason": "lib/site-data/markStale.mjs (EV6) renders any Proof Wall row measured more than 30 days before the build as UNKNOWN with the last-measured date, and a row whose source reading is UNKNOWN stays UNKNOWN. f382 re-exported proof.json and ledger.json from the 2026-11-10 kernel baseline, so every baseline-fed tile now shows a traced figure (cap 328 to 176). What is left is the efficiency-round data (lib/efficiency/efficiency.json, measured 2026-10-08: the cost-per-job headline, 7 charts, 10 stars) plus three baseline readings the baseline itself calls UNKNOWN (worker start tokens, spend today, suite wall). Those need a re-measured efficiency round, not a code change. WOULD-FLIP: F1 = 0 once that round is re-measured."
+      "max": 328,
+      "reason": "lib/site-data/markStale.mjs (EV6) correctly renders any Proof Wall row measured more than 30 days before the build as UNKNOWN with the last-measured date. The underlying lib/ledger.json and lib/site-data/proof.json are dated 2026-10-08/09, so on 2026-11-10 every live-feed tile reads UNKNOWN. The rule is right; the feed is stale. Fix is a re-export (follow-up 1 in the receipt), not a code change."
     },
     {
       "id": "I1-doctrine-copy",

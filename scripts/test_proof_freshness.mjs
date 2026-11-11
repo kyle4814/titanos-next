@@ -75,10 +75,12 @@ if (process.argv[1] && process.argv[1].endsWith("test_proof_freshness.mjs")) {
   const unk = render(rows).filter((r) => r.value === "UNKNOWN"), unkC = render(claims.rows).filter((r) => r.value === "UNKNOWN");
   console.log(`REPORT ${unk.length} of ${rows.length} proof.json rows and ${unkC.length} of ${claims.rows.length} claims-ledger rows now render UNKNOWN (older than ${MAX_DAYS} days on ${today}); re-measure queue: ${[...new Set([...unk, ...unkC].map((r) => `${r.id}@${r.lastMeasured}`))].join(", ") || "none"}`);
 
-  // the fleet row of the 2026-10-12 snapshot still reproduces from the kernel ledger (the proof stars now read the newest baseline; see test_proof_feed_reexport)
+  // the fleet row reproduces from the ledger
   const snap = J("lib/site-data/source/FLEET_LEDGER_2026-10-12.json");
   const star = (id) => proof.stars.find((s) => s.id === id);
-  ok(star("s_jobs").sourceRow.startsWith("fleet jobs/hour") && star("s_jobs").date >= snap.measuredAt, "s_jobs reads a baseline fleet row at least as new as the 2026-10-12 snapshot");
+  ok(star("s_jobs").date === snap.measuredAt && star("s_jobs").display.startsWith(String(snap.jobsPerHour)), "s_jobs equals the fleet snapshot (value and date)");
+  ok(star("s_fail").caption.includes(`${snap.failRatePct}%`), "s_fail equals the fleet snapshot");
+  ok(/UNKNOWN/.test(star("s_jobs").method), "s_jobs method states the live reading is UNKNOWN while the ledger is not writing");
   const ledger = `${homedir()}/klinge-kernel/state/fleet/ledger.jsonl`;
   if (existsSync(ledger)) {
     const m = spawnSync("node", ["scripts/measure_fleet_ledger.mjs", "--day", snap.measuredAt, "--ledger", ledger], { cwd: root.pathname, encoding: "utf8" });
