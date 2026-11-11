@@ -150,3 +150,4 @@ node scripts/test_worker_headers.mjs
 node scripts/test_import_cycles.mjs
 node --experimental-strip-types scripts/test_declaration.mjs
 node scripts/test_declaration_e2e.mjs out
+node --experimental-strip-types scripts/test_home_price_strip.mjs --built out
