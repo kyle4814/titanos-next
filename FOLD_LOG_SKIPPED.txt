@@ -53,3 +53,4 @@ f414_c10_rendered_probes_all_pages-2026-11-11 MERGED-RESOLVED
 f420_c10_sweeps_use_export_manifest-2026-11-11 MERGED
 f431_c10_soak_pin_manifest_digest-2026-11-11 SKIP scripts/soak_pin_matrix_gate.mjs scripts/soak_pin_wire.mjs scripts/test_soak_pin_wire.mjs 
 f405_c10_form_control_tap44-2026-11-11 MERGED-RESOLVED
+web/f382_c9_proof_feed_reexport-2026-11-10 deferred: superseded by main 1b38ce14e proof regen
