@@ -287,6 +287,15 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   if (!targets.length && a['serve-out']) {
     const s = createStaticServer(a['serve-out']); extra.push(s); targets = [await listen(s)];
   }
+  // SOAK RULE (f412): the pin gate runs before the soak and again after it; a head that moved mid-soak means the result does not count.
+  const pinGate = async () => {
+    if (!a['pin-gate']) return;
+    const { tickGate } = await import('./soak_pin_wire.mjs');
+    const r = tickGate({ matrix: a.matrix, pin: a.pin, x3: a.x3 ? String(a.x3).split(',') : [], repo: a.repo, ref: a.ref, marker: a.marker });
+    console.log(r.line);
+    if (r.code !== 0) { for (const s of extra) s.close(); process.exit(1); }
+  };
+  await pinGate();
   const result = await runSoak({
     durationS: num('duration', 20), concurrency: num('concurrency', 8), rps: num('rps', 400),
     intervalS: num('interval', 2), seed: num('seed', 1), targets,
@@ -294,6 +303,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     thresholds: a.thresholds ? JSON.parse(a.thresholds) : {},
   });
   for (const s of extra) s.close();
+  await pinGate();
   const out = a.out || 'soak_board.json';
   fs.writeFileSync(out, JSON.stringify(result, null, 2));
   for (const r of result.rows) console.log(`${r.status.padEnd(5)} ${r.id.padEnd(3)} ${String(r.value).padStart(10)} ${r.op} ${r.threshold}  ${r.name}`);

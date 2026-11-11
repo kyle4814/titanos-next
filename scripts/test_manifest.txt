@@ -162,3 +162,5 @@ node scripts/test_soak_pin_matrix_gate.mjs
 bash scripts/test_obelisk_killflip_runbook.sh
 F404_MUTANTS=1 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_portal_signout.mjs
 bash scripts/test_obelisk_rendered_print_motion.sh
+node scripts/test_soak_pin_matrix_gate.mjs
+node scripts/test_soak_pin_wire.mjs
