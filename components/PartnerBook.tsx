@@ -24,6 +24,7 @@ export function PartnerBookView({ state, synthetic = false, onMore }: { state: B
       </ul>
       {!v.reconciled && <p role="alert" style={{ margin: 0 }}>The rows below do not add up to the ledger total. Do not rely on this list. Email us and we will check it.</p>}
       {v.empty ? <p style={{ margin: 0 }}>{v.emptyText}</p> : (
+        <div style={{ overflowX: "auto", maxWidth: "100%" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead><tr><th align="left">Client</th><th align="left">Domain</th><th align="left">Plan</th><th align="left">Status</th><th align="right">Share accrued</th><th align="left">Re-scan proof</th></tr></thead>
           <tbody>
@@ -34,6 +35,7 @@ export function PartnerBookView({ state, synthetic = false, onMore }: { state: B
             ))}
           </tbody>
         </table>
+        </div>
       )}
       <p style={{ margin: 0 }}>{v.note}</p>
       {v.more && onMore && <button style={btn} onClick={onMore}>Next page</button>}

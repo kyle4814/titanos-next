@@ -308,6 +308,7 @@ function Field({
   };
   const fieldStyle: React.CSSProperties = {
     width: "100%",
+    boxSizing: "border-box",
     background: "var(--vault-bg, #0a0a0a)",
     border: `1px solid ${error ? "var(--warn)" : "var(--border)"}`,
     borderRadius: "var(--radius-sm)",

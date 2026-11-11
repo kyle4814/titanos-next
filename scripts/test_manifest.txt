@@ -167,3 +167,4 @@ node scripts/test_soak_pin_matrix_gate.mjs
 node scripts/test_soak_pin_wire.mjs
 node scripts/test_export_page_manifest.mjs
 node scripts/test_text_sanity_fast.mjs
+node scripts/test_viewport_overflow.mjs
