@@ -138,6 +138,8 @@ ALIAS_LOADER_MUTANTS=1 node scripts/test_alias_loader.mjs
 node scripts/mutate_sso_cap.mjs
 node scripts/mutate_sso_cap_d1.mjs
 node --experimental-strip-types scripts/test_concierge_dev2.mjs
+node --experimental-strip-types scripts/test_concierge_ask_router.mjs
+node --experimental-strip-types scripts/mutate_concierge_ask_router.mjs
 node --experimental-strip-types scripts/test_concierge_miss_taxonomy.mjs
 bash scripts/test_demand_d1_mutants.sh
 node --experimental-strip-types scripts/test_estate_ui.mjs
