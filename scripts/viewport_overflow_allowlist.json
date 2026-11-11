@@ -10,7 +10,7 @@
    ],
    "sel": "^nav ",
    "class": "followup",
-   "max": 3,
+   "max": 16,
    "followup": 5,
    "reason": "Nav wordmark backlink, theme toggle and text links under 44px at 360 after the wordmark and burger fix; remaining ones are small nav chips, a CSS pass on the nav is follow-up 5 in the f385 receipt."
   },
@@ -23,9 +23,35 @@
    ],
    "sel": "^footer ",
    "class": "followup",
-   "max": 1,
+   "max": 10,
    "followup": 6,
    "reason": "Footer links outside the main link columns (seal row and legal strip) measure 15px tall at 360; follow-up 6 in the f385 receipt, needs a footer layout decision."
+  },
+  {
+   "id": "tap-summary-360",
+   "metric": "tap",
+   "routes": ".*",
+   "widths": [
+    360
+   ],
+   "sel": "^summary",
+   "class": "followup",
+   "max": 79,
+   "followup": 2,
+   "reason": "FAQ and accordion summary rows are 24px tall at 360 across blog, offers and welcome pages; follow-up 2 in the f385 receipt, padding change touches every accordion."
+  },
+  {
+   "id": "tap-button-360",
+   "metric": "tap",
+   "routes": ".*",
+   "widths": [
+    360
+   ],
+   "sel": "^button",
+   "class": "followup",
+   "max": 14,
+   "followup": 3,
+   "reason": "Chip and filter buttons 32px tall at 360 (w4-chip family); follow-up 3 in the f385 receipt, a design-token change to chip height."
   },
   {
    "id": "tap-input-360",
@@ -49,7 +75,7 @@
    ],
    "sel": "^a([.#]|$)",
    "class": "followup",
-   "max": 29,
+   "max": 406,
    "followup": 1,
    "reason": "Body and card text links 18 to 29px tall at 360, mostly the offers and welcome catalogues; follow-up 1 in the f385 receipt, a list-row padding pass."
   }

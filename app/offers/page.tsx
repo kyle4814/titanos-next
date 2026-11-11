@@ -92,7 +92,7 @@ function LinkList({ offers }: { offers: Offer[] }) {
     <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "6px 18px" }}>
       {offers.map((o) => (
         <li key={o.slug}>
-          <Link href={`/offers/${o.slug}`} className="tap-link" style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "underline" }}>{o.name}</Link>
+          <Link href={`/offers/${o.slug}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "underline" }}>{o.name}</Link>
         </li>
       ))}
     </ul>

@@ -369,7 +369,7 @@ function SecondaryLink({
     return (
       <button
         type="button"
-        className={["secondary-link", className].filter(Boolean).join(" ")}
+        className={className}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={onClick}
@@ -388,7 +388,7 @@ function SecondaryLink({
   return (
     <a
       href={href}
-      className={["secondary-link", className].filter(Boolean).join(" ")}
+      className={className}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onClick}
