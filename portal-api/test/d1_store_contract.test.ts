@@ -18,7 +18,7 @@ for (const [name, mk] of [["MemoryStore", memory], ["D1Store(FakeD1)", d1]] as [
 // ---- mutation: neuter ONE D1Store method at a time (wrapper over the real one), run the whole contract, expect >= 1 failing case.
 type Kind = "bool" | "list" | "count" | "lookup" | "void";
 const METHODS: Record<string, Kind> = {
-  casPurchase: "bool", memoInsert: "bool", memoSwap: "bool", putSubscriptionOnce: "bool", createSubscription: "bool", putInvoiceOnce: "bool", purchaseInvoiced: "bool", acquireLease: "bool", casSubscription: "bool",
+  casPurchase: "bool", memoInsert: "bool", memoSwap: "bool", putSubscriptionOnce: "bool", createSubscription: "bool", issueInvoiceNumbered: "lookup", purchaseInvoiced: "bool", acquireLease: "bool", casSubscription: "bool",
   pendingPurchasesBefore: "list", paidPurchasesBefore: "list", paidWithoutSubscriptionBefore: "list", takeFacts: "list", allCards: "list", refundCasesFor: "list", keysByPrefix: "list", memoList: "list", receiptsForKey: "list",
   countByStatus: "count",
   purchaseByPaymentIntent: "lookup", memoPeek: "lookup", subscriptionByPurchase: "lookup", subscriptionVersioned: "lookup", cardById: "lookup", refundCaseById: "lookup",

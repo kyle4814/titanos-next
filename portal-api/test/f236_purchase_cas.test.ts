@@ -69,7 +69,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
 
   // K3 THE RACE (f203 R4 style, three points). The webhook and the sweep both reach the write; a held cancel fact + a subscription product make a doubled side effect visible
   // (the loser's takeFacts would return [] and its putSubscription would erase the cancel). Exactly one markPaid side effect, one invoice, one takeFacts seed, one subscription, cancel kept.
-  for (const point of ["both paused before casPurchase, released together", "webhook paused at takeFacts (won), sweep runs through", "webhook paused at putInvoiceOnce (won), sweep runs through"]) {
+  for (const point of ["both paused before casPurchase, released together", "webhook paused at takeFacts (won), sweep runs through", "webhook paused at issueInvoiceNumbered (won), sweep runs through"]) {
     const { open } = world(m, kind), b = new MockBilling(), s0 = open(); await seed(s0); await s0.holdFact("sub:sub_1", { kind: "cancel" });
     b.sessions.set("cs_1", paidSession);
     const calls: Record<string, number> = {}, g = gate(), reachedW = gate(), reachedS = gate();
@@ -77,7 +77,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     if (point.startsWith("both")) {
       wsx = spy(open(), calls, { before: { casPurchase: async () => { reachedW.go(); await g.p; } } });
       ssx = spy(open(), calls, { before: { casPurchase: async () => { reachedS.go(); await g.p; } } });
-    } else wsx = spy(open(), calls, { before: { [point.includes("takeFacts") ? "takeFacts" : "putInvoiceOnce"]: async () => { reachedW.go(); await g.p; } } });
+    } else wsx = spy(open(), calls, { before: { [point.includes("takeFacts") ? "takeFacts" : "issueInvoiceNumbered"]: async () => { reachedW.go(); await g.p; } } });
     const webhook = m.svc.handleStripeEvent(deps(m, wsx, b), ev("evt_1")).catch((e: Error) => "THREW " + e.message);
     let sweep: Promise<any>;
     if (point.startsWith("both")) { sweep = m.rec.reconcilePending(deps(m, ssx, b), GRACE).catch((e: Error) => "THREW " + e.message); await Promise.all([reachedW.p, reachedS.p]); g.go(); }
@@ -89,7 +89,7 @@ export async function violations(m: Mods, kind: Kind): Promise<string[]> {
     const st = open();
     want("K3", (await st.invoicesFor("acc1")).length === 1, `${point}: want ONE invoice, got ${(await st.invoicesFor("acc1")).length}`);
     want("K3", (calls.takeFacts ?? 0) === 3, `${point}: want ONE markPaid run = takeFacts called three times (sub: + the f245 late-fact replay + pi:), got ${calls.takeFacts}`);
-    want("K3", (calls.nextInvoiceNumber ?? 0) === 1, `${point}: want one invoice number burned, got ${calls.nextInvoiceNumber}`);
+    want("K3", (calls.issueInvoiceNumbered ?? 0) === 1 && (calls.nextInvoiceNumber ?? 0) === 0, `${point}: want ONE atomic numbered issue and no stand-alone number taken (f366), got ${JSON.stringify({ issue: calls.issueInvoiceNumbered, next: calls.nextInvoiceNumber })}`);
     want("K3", (calls.putAccount ?? 0) === 1 && (calls.putSubscriptionOnce ?? 0) === 1 && (calls.putSubscription ?? 0) === 0 // f245: the winner writes with putSubscriptionOnce (never the upsert)
       , `${point}: account and subscription written once each, got ${JSON.stringify(calls)}`);
     const subs = await st.subscriptionsFor("acc1"); want("K3", subs.length === 1 && !!subs[0].cancelledAt, `${point}: the held cancel must survive on the one subscription, got ${JSON.stringify(subs)}`);

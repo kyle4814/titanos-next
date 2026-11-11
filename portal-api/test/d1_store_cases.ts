@@ -14,7 +14,7 @@ const sub = (id: string, accountId: string, purchaseId: string, x: Partial<Subsc
 const inv = (id: string, accountId: string, purchaseId: string | undefined, x: Partial<Invoice> = {}): Invoice => ({ id, accountId, ...(purchaseId === undefined ? {} : { purchaseId }), number: `TT-${id}`, productId: "monitor_monthly", amountCents: 14900, issuedAt: 8, stripeEventId: `evt_${id}`, ...x });
 const base = async (s: Store) => { await s.putAccount(acct("a1")); await s.putAccount(acct("a2")); };
 const ids = (xs: { id: string }[]) => xs.map((x) => x.id);
-const wins = (rs: boolean[]) => rs.filter(Boolean).length;
+const wins = (rs: unknown[]) => rs.filter(Boolean).length;
 
 export const CASES: Case[] = [
   { name: "casPurchase: writes only while the status still matches; absent row and wrong status lose and write nothing; the whole row (createdAt too) is replaced", covers: ["casPurchase"], run: async (mk) => {
@@ -57,21 +57,23 @@ export const CASES: Case[] = [
     assert.deepEqual(ids(await s.pendingPurchasesBefore(1000)), ["pOld", "pA", "pB", "pNew"]);
     assert.deepEqual([await s.countByStatus("pending"), await s.countByStatus("abandoned"), await s.countByStatus("cancelled"), await s.countByStatus("paid"), await s.countByStatus("refunded")], [4, 1, 2, 1, 0]);
   } },
-  { name: "invoice reconciler: purchaseInvoiced, putInvoiceOnce (once per purchase, no-purchase rows collide like undefined === undefined), paidPurchasesBefore", covers: ["purchaseInvoiced", "putInvoiceOnce", "paidPurchasesBefore", "putInvoice"], run: async (mk) => {
+  { name: "invoice reconciler: purchaseInvoiced, issueInvoiceNumbered (number taken atomically with the guarded insert; once per purchase; a loser consumes no number), paidPurchasesBefore", covers: ["purchaseInvoiced", "issueInvoiceNumbered", "paidPurchasesBefore", "putInvoice"], run: async (mk) => {
     const s = mk().store; await base(s);
     await s.putPurchase(pur("p2", "a1", { status: "paid", paidAt: 20 })); await s.putPurchase(pur("p1", "a1", { status: "paid", paidAt: 20 })); await s.putPurchase(pur("p3", "a1", { status: "refunded", paidAt: 10 }));
     await s.putPurchase(pur("p4", "a1", { status: "pending" })); await s.putPurchase(pur("p5", "a1", { status: "paid", paidAt: 99 })); await s.putPurchase(pur("p6", "a2", { status: "paid", paidAt: 5 }));
     assert.deepEqual(ids(await s.paidPurchasesBefore(20)), ["p6", "p3", "p1", "p2"], "paid or refunded, at or before cutoff, oldest first, id breaks ties");
     assert.equal(await s.purchaseInvoiced("p6"), false);
-    assert.equal(await s.putInvoiceOnce(inv("i6", "a2", "p6")), true);
-    assert.equal(await s.putInvoiceOnce(inv("i6b", "a2", "p6", { number: "TT-other", stripeEventId: "evt_other" })), false, "second invoice for the purchase loses");
+    const draft = (id: string, a: string, p: string, x: Partial<Invoice> = {}) => { const { number: _n, purchaseId: _p, ...d } = inv(id, a, p, x); return { ...d, purchaseId: p }; };
+    const w6 = await s.issueInvoiceNumbered(draft("i6", "a2", "p6"), "purchase");
+    assert.equal(w6?.number, "TT-000001", "the winner carries the first number");
+    assert.equal(await s.issueInvoiceNumbered(draft("i6b", "a2", "p6", { stripeEventId: "evt_other" }), "purchase"), undefined, "second invoice for the purchase loses");
     assert.equal(await s.purchaseInvoiced("p6"), true);
-    assert.deepEqual(plain(await s.invoicesFor("a2")), [inv("i6", "a2", "p6")], "the loser wrote nothing; purchaseId round-trips");
+    assert.deepEqual(plain(await s.invoicesFor("a2")), [inv("i6", "a2", "p6", { number: "TT-000001" })], "the loser wrote nothing; purchaseId round-trips");
     assert.deepEqual(ids(await s.paidPurchasesBefore(20)), ["p3", "p1", "p2"], "invoiced purchase drops out");
-    assert.equal(await s.putInvoiceOnce(inv("n1", "a1", undefined)), true);
-    assert.equal(await s.putInvoiceOnce(inv("n2", "a1", undefined)), false, "no purchase id: the second no-purchase invoice collides, as in MemoryStore");
-    const race = await Promise.all(["x1", "x2", "x3", "x4", "x5", "x6"].map((id) => s.putInvoiceOnce(inv(id, "a1", "p1"))));
-    assert.equal(wins(race), 1, "concurrent putInvoiceOnce: exactly one writer");
+    // f366: the draft requires a purchase id, so the old no-purchase collision case is gone with the old API (the reconciler only ever issues for a purchase).
+    const race = await Promise.all(["x1", "x2", "x3", "x4", "x5", "x6"].map((id) => s.issueInvoiceNumbered(draft(id, "a1", "p1"), "purchase")));
+    assert.equal(wins(race), 1, "concurrent issueInvoiceNumbered: exactly one writer");
+    assert.equal(await s.nextInvoiceNumber(), "TT-000003", "6 racers consumed exactly ONE number (TT-000002); the losers burned none");
     assert.equal(await s.purchaseInvoiced("zz"), false);
   } },
   { name: "putInvoice: purchaseId round-trips, upsert on id, duplicate number and duplicate (purchase, event) are refused and write nothing", covers: ["putInvoice"], run: async (mk) => {

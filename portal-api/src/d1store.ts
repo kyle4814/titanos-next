@@ -11,7 +11,7 @@
 import type { D1Like, D1Statement } from "./env.ts";
 import { AgentDoorD1, type DebitInput, type CappedDebit, type KeySpend } from "./agent/d1agent.ts";
 import type { PlanState } from "./plan_change.ts";
-import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, Subscription } from "./store.ts";
+import type { Account, AgentReceipt, ApiKey, CreditEntry, CreditOrder, DomainRow, Invoice, InvoiceDraft, InvoiceGuard, LoginToken, Purchase, RefundCase, ReviewCard, Session, Store, Subscription } from "./store.ts";
 
 type Row = Record<string, unknown>;
 const num = (v: unknown): number | undefined => (v === null || v === undefined || v === "" ? undefined : Number(v));
@@ -187,9 +187,20 @@ export class D1Store implements Store {
   }
   // Invoices (f203). `purchase_id IS ?` is NULL-safe equality, so an invoice with no purchase id behaves as in MemoryStore (undefined === undefined).
   async purchaseInvoiced(id: string) { return (await this.one("SELECT 1 AS x FROM invoices WHERE purchase_id = ? LIMIT 1", id)) !== undefined; }
-  async putInvoiceOnce(i: Invoice) {
-    return (await this.exec("INSERT INTO invoices (id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id IS ?)",
-      i.id, i.accountId, n(i.purchaseId), i.number, i.productId, i.amountCents, i.issuedAt, i.stripeEventId, n(i.purchaseId))) === 1;
+  // f366 (port of f209). The number is assigned INSIDE the guard: ONE D1 batch (one transaction) of two statements carrying the SAME NOT EXISTS guard. Statement 1 bumps invoice_seq
+  // only if the guard holds; statement 2 inserts the invoice numbered from the counter only if the guard holds. A loser changes nothing (no bump, no row), so numbers stay gap-free;
+  // a winner whose insert is refused (UNIQUE/FK) rolls the bump back with it. changes === 1 on statement 2 means THIS call wrote the invoice.
+  async issueInvoiceNumbered(d: InvoiceDraft, guard: InvoiceGuard) {
+    if (!this.db.batch) throw new Error("D1 batch unavailable: refusing a non-atomic invoice number");
+    const g = guard === "purchase" ? "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ?)" : "NOT EXISTS (SELECT 1 FROM invoices WHERE purchase_id = ? AND stripe_event_id = ?)";
+    const ga = guard === "purchase" ? [d.purchaseId] : [d.purchaseId, d.stripeEventId];
+    const res = (await this.db.batch([
+      this.q(`INSERT INTO invoice_seq (id, n) SELECT 1, 1 WHERE ${g} ON CONFLICT(id) DO UPDATE SET n = n + 1`, ...ga),
+      this.q(`INSERT INTO invoices (id, account_id, purchase_id, number, product_id, amount_cents, issued_at, stripe_event_id) SELECT ?, ?, ?, 'TT-' || printf('%06d', (SELECT n FROM invoice_seq WHERE id = 1)), ?, ?, ?, ? WHERE ${g}`,
+        d.id, d.accountId, d.purchaseId, d.productId, d.amountCents, d.issuedAt, d.stripeEventId, ...ga),
+    ])) as { meta?: { changes?: number } }[];
+    if (res[1]?.meta?.changes !== 1) return undefined;
+    return this.invoiceById(d.id);
   }
   // Claim lease (f242/f245, migration 0015): insert, or on conflict take over only an EXPIRED lease or renew our own. changes === 1 = we hold it.
   async acquireLease(key: string, owner: string, now: number, ttlMs: number) {
