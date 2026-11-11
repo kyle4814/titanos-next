@@ -1,0 +1,4 @@
+{
+  "_doc": "f414_c10: pages the all-pages rendered probes (obelisk_rendered_print_motion.mjs --all, obelisk_rendered_keyboard_focus.mjs --all) may skip. Each entry is {route, reason}; reason must be a real sentence (15+ chars). A route that is not an exported page is a stale entry and fails the run. Empty today: all exported pages are swept, including /404 and /_not-found. Checked by scripts/test_obelisk_allpages.sh.",
+  "skipped": []
+}
