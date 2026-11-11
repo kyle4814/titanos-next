@@ -10,7 +10,7 @@ const al = loadAllowlist(); const lint = lintAllowlist(al);
 if (lint.length) { console.error("allowlist lint:\n" + lint.join("\n")); process.exit(2); }
 const prev = allowlistAt("HEAD"); const rise = prev ? capsRise(prev, al) : [];
 if (rise.length) { console.error("caps may fall, never rise:\n" + rise.join("\n")); process.exit(2); }
-const sw = await sweep({ root, routes, concurrency: Number(process.env.SWEEP_CONC || 4) });
+const sw = await sweep({ root, routes });
 if (sw.skipped) { console.log("SKIP " + sw.skipped); process.exit(0); }
 if (arg("--raw")) fs.writeFileSync(arg("--raw"), JSON.stringify(sw));
 const ev = evaluate(sw.results, al);
