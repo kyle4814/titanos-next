@@ -5,6 +5,7 @@ import { Block } from "@/components/SiteBlocks";
 import trace from "@/lib/site-data/pricing-trace.json";
 import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
 import { longDate } from "@/lib/provenance";
+import { PartnershipStack } from "@/components/home/moved/PartnershipStack";
 
 const META_TITLE = "Pricing: what each service costs, in AUD | TITANOS";
 const META_DESC = "Every published price in one place: retainers, Compliance Monitor, the Privacy Act and Essential Eight pack, leads and enterprise. Each number names the file it comes from.";
@@ -53,6 +54,7 @@ export default function Pricing() {
           </ul>
         </Block>
       ))}
+      <PartnershipStack />
       <Block point="What is not on this page">
         <p>
           Owner plans for the portal, marketplace fees and metered usage for agents are still being designed, so there is no price to publish and we will not guess one. When one is set it appears here with its source. Until then, ask on the{" "}

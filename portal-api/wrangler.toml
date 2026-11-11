@@ -1,4 +1,4 @@
-# NOT DEPLOYED. Deploying is an owner card (GATE2/GATE5). database_id is a placeholder until the owner supplies the live D1 id.
+# DEPLOYED 2026-11-10 to workers.dev only (titanos-portal-api.<subdomain>.workers.dev), TEST MODE (STRIPE_MODE="test", no live Stripe key). No route/custom domain: api.titanos.tech still belongs to titanos-api.
 name = "titanos-portal-api"
 main = "src/index.ts"
 compatibility_date = "2026-11-01"
@@ -6,8 +6,11 @@ compatibility_date = "2026-11-01"
 [vars]
 STRIPE_MODE = "test"
 TITANOS_SITE_ORIGIN = "https://titanos.tech"
+# TEST MODE ONLY (2026-11-10): no mail transport is bound, so login mail is parked in the D1 dev_outbox table (migration 0025)
+# and read by the operator through wrangler. buildDeps refuses this with STRIPE_MODE="live". Remove when a real mailer is bound.
+DEV_OUTBOX = "1"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "titanos"
-database_id = "REPLACE_WITH_LIVE_D1_ID"
+database_name = "titanos-portal"
+database_id = "cd81007b-6de4-4f1e-bf91-9bd482eaae74"

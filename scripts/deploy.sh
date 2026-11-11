@@ -19,6 +19,8 @@
 #      ships is exactly what the public source shows.
 # The gh-pages commit carries the source SHA and the approval ref. APPROVAL_CHECK_CMD swaps approval.py for a test
 # stub and is refused unless origin is a local path, so a stub can never ship the real site.
+# BUILD + TESTS (2026-11-10): on the cloud runner by default (scripts/cloud_build.sh), never on the laptop; the tested
+# out/ is what ships. DEPLOY_BUILD=local is the owner's escape at a terminal.
 # Exit: 0 deployed and verified (or nothing to publish); 1 refused or failed before the push; 3 pushed, NOT verified.
 # ─────────────────────────────────────────────────────────────────────
 set -euo pipefail
@@ -86,15 +88,35 @@ echo "  gate ok: main @ ${SRC_SHA:0:12} == origin/main, clean tree, $APPROVED_BY
 
 echo "▸ Clean build"
 rm -rf .next out node_modules/.cache
-if [ ! -d node_modules ]; then
-  npm ci
-fi
-# Build BEFORE the tests (2026-10-09): the release's doctrine-leak and numbers tests read the built out/, so with tests
-# first every deploy of the redesign refused with "built output not found". A red test still never ships: the publish
-# step below only runs if npm test passes on this exact build.
-npm run build
-echo "▸ Tests on the built output (a red test never ships)"
-npm test
+# 2026-11-10 (Kyle, 4th repeat: "Tests should be on cloud runner... never let it happen again"): the laptop runs no
+# suite. The default builds AND tests this exact SRC_SHA on the cloud runner and publishes the very out/ that passed
+# (scripts/cloud_build.sh); a red step refuses before anything is pushed. DEPLOY_BUILD=local is Kyle's own escape at
+# a terminal (the old in-place path). CLOUD_BUILD_CMD is a test hook and, like APPROVAL_CHECK_CMD, is refused unless
+# origin is a local path, so a stub can never stand in for the real tests on the real site.
+case "${DEPLOY_BUILD:-cloud}" in
+  cloud)
+    if [ -n "${CLOUD_BUILD_CMD:-}" ]; then
+      { is_local_path "$ORIGIN_FETCH" && is_local_path "$ORIGIN_PUSH"; } \
+        || refuse "CLOUD_BUILD_CMD is a test hook; it is not honoured when origin is '$ORIGIN_PUSH'"
+      read -r -a CLOUD_BUILD <<<"$CLOUD_BUILD_CMD"
+    else
+      CLOUD_BUILD=(bash "$REPO_ROOT/scripts/cloud_build.sh")
+    fi
+    echo "▸ Build + full tests on the cloud runner (a red test never ships; the laptop runs no suite)"
+    "${CLOUD_BUILD[@]}" "$SRC_SHA" || refuse "the cloud build/test of ${SRC_SHA:0:12} did not pass"
+    ;;
+  local)
+    if [ ! -d node_modules ]; then
+      npm ci
+    fi
+    # Build BEFORE the tests (2026-10-09): the release's doctrine-leak and numbers tests read the built out/, so with
+    # tests first every deploy of the redesign refused with "built output not found".
+    npm run build
+    echo "▸ Tests on the built output (a red test never ships)"
+    npm test
+    ;;
+  *) refuse "DEPLOY_BUILD must be cloud (default) or local, not '$DEPLOY_BUILD'";;
+esac
 
 echo "▸ Verify out/ artefacts"
 for f in out/.nojekyll out/CNAME out/index.html; do

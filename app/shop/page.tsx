@@ -68,7 +68,9 @@ export default function Shop() {
       )}
       <SectionReveal>
         <SectionHeading title="Not on a shelf?" lead="Tell us what you need. If it is not listed we build it, check it, and send you a quote." />
-        <AnimatedButton href="/contact">ASK FOR A QUOTE →</AnimatedButton>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <AnimatedButton href="/contact">ASK FOR A QUOTE →</AnimatedButton>
+        </div>
       </SectionReveal>
     </>
   );

@@ -15,6 +15,7 @@ import MotionProvider from "@/components/MotionProvider";
 import PageMood from "@/components/PageMood";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import ProofDeclaration from "@/components/ProofDeclaration";
 import MusicToggle from "@/components/MusicToggle";
 import JsonLd from "@/components/JsonLd";
 import { organization, website } from "@/lib/jsonld";
@@ -191,6 +192,7 @@ export default function RootLayout({
         <SigilConstellation />
         <EasterEgg />
         <SiteAnalytics />
+        <ProofDeclaration />
         <Nav />
         <main id="main" style={{ position: "relative", zIndex: 2 }}>
           {children}

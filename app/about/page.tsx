@@ -9,6 +9,7 @@ import { SITE, CONTACT, AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import { OperatorSections } from "@/components/home/moved/OperatorSections";
 
 const ABR_VERIFY = "https://abr.business.gov.au/ABN/View?id=34318502254";
 
@@ -425,6 +426,7 @@ export default function AboutPage() {
           </AnimatedButton>
         </div>
       </SectionReveal>
+      <OperatorSections />
       <FrontLoad
         extra={[
           { q: "Who will I actually deal with?", a: "Me. There is no agency layer and no junior team you will never meet. If you message or call, you get Kyle." },

@@ -22,13 +22,15 @@ const LABELS = Object.keys(data.labels);
 ok(LABELS.join() === "MEASURED,REPRODUCED,MODELLED,ESTIMATE,FORECAST,EXAMPLE,UNKNOWN", "the seven claim labels are defined, in ladder order");
 ok(data.stars.every((s) => LABELS.includes(s.label) && s.source && s.date && s.method && s.display && s.caption), "every star has label, source, date, method, display, caption");
 ok(data.charts.every((c) => LABELS.includes(c.label) && c.source && c.date && c.method), "every chart has label, source, date, method");
-ok(data.stars.some((s) => s.label === "UNKNOWN") && data.stars.some((s) => s.label === "MODELLED"), "the wall shows an UNKNOWN and a MODELLED star, not only wins");
+// 2026-11-11: the UNKNOWN star ("No number yet") and the MODELLED daily-spend star were retired (no live source; better absent than "UNKNOWN now").
+ok(data.stars.every((s) => s.label !== "UNKNOWN"), "no star on the wall is an UNKNOWN card (retired instead)");
+ok(Array.isArray(data.retired) && data.retired.length > 0, "retired rows are recorded in proof.json");
 const ids = new Set(data.stars.map((s) => s.id));
 ok(ids.size === data.stars.length, "star ids are unique");
 ok(data.loop.length >= 7 && data.loop.every((l) => ids.has(l.receipt)), "every loop node's receipt resolves to a star");
 ok(!/\/home\/|~\/|\.py\b|\.jsonl\b|\.sh\b|bin\/|klinge|state\/|SOUL|LEXICON|CORE\.md/i.test(JSON.stringify(data.stars) + JSON.stringify(data.charts) + JSON.stringify(data.fleetCost)), "no internal path, tool name or doctrine term in star/chart data");
 ok(data.charts.every((c) => c.beforePct <= 100 && c.afterPct <= 100 && Math.max(c.beforePct, c.afterPct) === 100), "bar widths are shares of the larger value");
-ok(data.charts.some((c) => !c.improved) || data.fleetCost.after > data.fleetCost.before, "the page keeps a figure that went the wrong way (the fleet-wide cost per job)");
+ok(data.charts.some((c) => !c.improved) || (data.fleetCost && data.fleetCost.after > data.fleetCost.before), "the page keeps a figure that went the wrong way");
 
 // 2: digit-bearing literals in the components
 const FILES = ["components/charts/CostCurve.tsx", "components/charts/LoopOrbit.tsx", "components/charts/ProofWall.tsx", "components/charts/InView.tsx"];
@@ -55,7 +57,7 @@ if (bi > 0) {
   // the whole generated ledger joins the pool (its dates too: the fleet card shows the ledger's own date, 2026-10-09
   // failed the gate because only the ledger's values were pooled). Still generated, never hand-typed.
   const pool = JSON.stringify(data).replace(/\\"/g, '"') + " " + JSON.stringify(ledger) + " " + fmts.join(" ");
-  const pages = [["index.html", ["cost-curve", "loop", "proof-wall"]], ["proof.html", ["proof-wall"]], ["learning-loop.html", ["loop"]]];
+  const pages = [["proof.html", ["cost-curve", "proof-wall"]], ["learning-loop.html", ["loop"]]];
   for (const [file, regions] of pages) {
     const p = `${dir}/${file}`;
     if (!existsSync(p)) { ok(false, `${file} exists in build`); continue; }

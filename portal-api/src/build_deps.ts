@@ -11,6 +11,20 @@ import { dohResolver, type TxtResolver } from "./dns.ts";
 import { Throttle } from "./throttle.ts";
 import { D1ThrottleStore } from "./d1throttle.ts";
 import { D1Store } from "./d1store.ts";
+import type { OwnerDeps } from "./service.ts";
+import type { ZoneProvider } from "./owner/engine.ts";
+import { D1OwnerStore } from "./owner/d1ownerstore.ts";
+import { D1MarketStore } from "./market/d1store.ts";
+import { StripeConnectPayments, type JobPayments } from "./market/payments.ts";
+import type { MarketDeps } from "./market/service.ts";
+import type { EntContext } from "./enterprise/service.ts";
+import { D1EntStore, D1ApprovalStore } from "./enterprise/d1store.ts";
+import { createOidcVerifier, type Jwks } from "./enterprise/oidc.ts";
+import { dnsScan, publicDohResolver } from "./enterprise/estate_dns.ts";
+import { RATE_V1 } from "./enterprise/share.ts";
+import { makeBookFacts } from "./enterprise/book_facts.ts";
+import { parseSealKeys, type SealKeyring } from "./enterprise/seal.ts";
+import type { PayoutProvider } from "./enterprise/types.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
 export class BuildDepsError extends Error {
@@ -18,7 +32,7 @@ export class BuildDepsError extends Error {
   constructor(reason: BuildDepsReason, binding?: string) { super(binding ? `${reason}:${binding}` : reason); this.name = "BuildDepsError"; this.reason = reason; this.binding = binding; }
 }
 export type StoreFactory = (db: NonNullable<Env["DB"]>, env: Env) => Store;
-export interface BuildOpts { storeFactory?: StoreFactory; billing?: BillingProvider; dns?: TxtResolver; mailer?: Mailer; now?: () => number; fetchFn?: typeof fetch }
+export interface BuildOpts { side?: boolean; storeFactory?: StoreFactory; billing?: BillingProvider; dns?: TxtResolver; mailer?: Mailer; now?: () => number; fetchFn?: typeof fetch }
 export const THROTTLE_LIMITS = { maxFailures: 5, windowMs: 15 * 60_000, lockoutMs: 15 * 60_000 };
 
 // No mail transport is bound yet (PENDING LIVE): refuse loudly instead of dropping login links on the floor.
@@ -38,15 +52,76 @@ export function billingFor(env: Env, fetchFn?: typeof fetch): BillingProvider {
   return new MockBilling();
 }
 
+// ---- 2026-11-10 self-serve wiring (TEST MODE): the owner, market and enterprise seats over the same D1 binding ----
+// Every provider below either works with no secret (D1 stores, passive public DoH, OIDC JWKS discovery) or REFUSES with a typed
+// 503 (money movement, DNS writes). Nothing here moves money or writes anyone's DNS: binding a payout or live payments provider
+// is GATE1/GATE2 and stays out of this file.
+const refuse = (code: string) => { throw new HttpError(503, code); };
+export const refusingPayouts: PayoutProvider = { async transfer() { return refuse("payouts_unavailable"); } };
+export const refusingJobPayments: JobPayments = {
+  async createJobCheckout() { return refuse("payments_unavailable"); }, async chargeClaimFee() { return refuse("payments_unavailable"); },
+  async refundHold() { return refuse("payments_unavailable"); }, async transfer() { return refuse("payments_unavailable"); },
+  async onboardingLink() { return refuse("payments_unavailable"); }, async accountReady() { return false; },
+};
+// No zone write access to any customer's DNS: auto-fix answers no_zone (the engine's own honest path), the checks still run.
+export const noZones: ZoneProvider = { zoneFor: () => undefined };
+// Market payments: Stripe Connect in TEST mode only when a test key is bound; otherwise refuse. A live key never reaches here
+// (billingFor already threw live_key_refused for the same env).
+export function jobPaymentsFor(env: Env, fetchFn?: typeof fetch): JobPayments {
+  const k = env.STRIPE_SECRET_KEY?.trim();
+  if (k && env.STRIPE_MODE !== "live" && (k.startsWith("sk_test_") || k.startsWith("rk_test_"))) return new StripeConnectPayments(k, "test", fetchFn);
+  return refusingJobPayments;
+}
+// OIDC discovery: issuer -> /.well-known/openid-configuration -> jwks_uri, https only, 5 s budget per fetch.
+export function discoveryJwks(fetchFn: typeof fetch = fetch): (issuer: string) => Promise<Jwks> {
+  const get = async (url: string) => {
+    if (!/^https:\/\//.test(url)) throw new Error("oidc_https_only");
+    const r = await fetchFn(url, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(5000) });
+    if (!r.ok) throw new Error("oidc_fetch_" + r.status);
+    return r.json() as Promise<any>;
+  };
+  return async (issuer) => { const conf = await get(issuer.replace(/\/+$/, "") + "/.well-known/openid-configuration"); return get(String(conf?.jwks_uri ?? "")); };
+}
+const sealKeysOf = (env: Env): SealKeyring | undefined => { try { return parseSealKeys(env.SSO_SEAL_KEYS); } catch { return undefined; } };   // absent = putSso 503, never plaintext
+// TEST MODE mailer: DEV_OUTBOX="1" parks each message in the dev_outbox table (0025) instead of sending it. Refused in live mode.
+export function devOutboxMailer(db: NonNullable<Env["DB"]>, now: () => number): Mailer {
+  return { async send(to, subject, text) {
+    const t = now();
+    await db.prepare("DELETE FROM dev_outbox WHERE created_at < ?").bind(t - 86_400_000).run();   // keep one day, never a growing pile of login links
+    await db.prepare("INSERT INTO dev_outbox (to_addr, subject, body, created_at) VALUES (?, ?, ?, ?)").bind(to, subject, text, t).run();
+  } };
+}
+export function mailerFor(env: Env, now: () => number): Mailer {
+  if (env.DEV_OUTBOX !== "1" || !env.DB) return unavailableMailer;
+  if (env.STRIPE_MODE === "live") throw new BuildDepsError("live_key_refused", "DEV_OUTBOX");
+  return devOutboxMailer(env.DB, now);
+}
+export function sideDeps(env: Env, fetchFn?: typeof fetch): { owner: OwnerDeps; market: MarketDeps; ent: EntContext } {
+  const db = env.DB; if (!db) throw new BuildDepsError("missing_binding", "DB");
+  const doh = () => publicDohResolver();
+  const internalSecret = env.INTERNAL_API_SECRET || undefined;
+  return {
+    owner: { store: new D1OwnerStore(db), doh, zones: noZones },
+    market: { store: new D1MarketStore(db), payments: jobPaymentsFor(env, fetchFn), doh, internalSecret },
+    ent: {
+      store: new D1EntStore(db), approvals: new D1ApprovalStore(db), idp: createOidcVerifier({ fetchJwks: discoveryJwks(fetchFn) }),
+      payouts: refusingPayouts, scan: dnsScan({ resolver: publicDohResolver(), resolverSource: "cloudflare-dns.com (DNS-over-HTTPS, passive public records)" }),
+      rates: RATE_V1, internalSecret, sealKeys: sealKeysOf(env), book: makeBookFacts(env as { DB?: any }),
+    },
+  };
+}
+
 export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   const db = env.DB;
   if (!db) throw new BuildDepsError("missing_binding", "DB");
   const siteOrigin = env.TITANOS_SITE_ORIGIN;
   if (!siteOrigin) throw new BuildDepsError("missing_binding", "TITANOS_SITE_ORIGIN");
   const store = (opts.storeFactory ?? d1StoreFactory)(db, env);
+  const now = opts.now ?? (() => Date.now());
   return {
+    ...(opts.side === false ? {} : sideDeps(env, opts.fetchFn)),
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
-    mailer: opts.mailer ?? unavailableMailer, now: opts.now ?? (() => Date.now()), siteOrigin,
+    mailer: opts.mailer ?? mailerFor(env, now), now, siteOrigin,
     webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
   };
 }

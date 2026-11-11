@@ -55,34 +55,38 @@ export default function CostCurve() {
         <p className="w4-eyebrow">THE COST CURVE</p>
         <h2 className="w4-h2">We did not buy a bigger machine. We changed the system.</h2>
 
-        <div className="w4-hero-chart" data-phi-reveal data-w4-chart={h.id}>
-          <p className="w4-hero-title">{h.titleText}</p>
-          <Bars c={h} big />
-          <p className="w4-factor w4-factor--big" data-count>{h.factorText}</p>
-          <p className="w4-note">{h.analogy}</p>
-          <p className="w4-meta">
-            <span className="w4-chip" data-label={h.label}>{h.label}</span> {h.date} · {h.caption} · {h.source}
-          </p>
-        </div>
+        {h ? (
+          <div className="w4-hero-chart" data-phi-reveal data-w4-chart={h.id}>
+            <p className="w4-hero-title">{h.titleText}</p>
+            <Bars c={h} big />
+            <p className="w4-factor w4-factor--big" data-count>{h.factorText}</p>
+            <p className="w4-note">{h.analogy}</p>
+            <p className="w4-meta">
+              <span className="w4-chip" data-label={h.label}>{h.label}</span> {h.date} · {h.caption} · {h.source}
+            </p>
+          </div>
+        ) : null}
 
-        <aside className="w4-second-look" data-phi-reveal data-w4-chart="fleet_cost">
-          <h3>The honest second look</h3>
-          {f.stale ? (
-            <p>
-              The fleet-wide cost per job is UNKNOWN right now. It was last measured {f.lastMeasured}, and a figure that old is not carried onto this page.
-              The matched-job drop above compares the same task text on the old and new rule book. We show what we can still stand behind.
+        {f ? (
+          <aside className="w4-second-look" data-phi-reveal data-w4-chart="fleet_cost">
+            <h3>The honest second look</h3>
+            {f.stale ? (
+              <p>
+                The fleet-wide cost per job is UNKNOWN right now. It was last measured {f.lastMeasured}, and a figure that old is not carried onto this page.
+                The matched-job drop above compares the same task text on the old and new rule book. We show what we can still stand behind.
+              </p>
+            ) : (
+              <p>
+                Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.
+                That is higher, not lower, and {f.todayText} was spent in the day. The matched-job drop above compares the same task text on the old
+                and new rule book. Both are real. We show both.
+              </p>
+            )}
+            <p className="w4-meta">
+              <span className="w4-chip" data-label={f.label}>{f.label}</span> {f.date} · {f.source} · {f.note}
             </p>
-          ) : (
-            <p>
-              Across the whole fleet, including the orchestrator, one job cost {f.afterText} over {f.jobsText} jobs, against {f.beforeText} before.
-              That is higher, not lower, and {f.todayText} was spent in the day. The matched-job drop above compares the same task text on the old
-              and new rule book. Both are real. We show both.
-            </p>
-          )}
-          <p className="w4-meta">
-            <span className="w4-chip" data-label={f.label}>{f.label}</span> {f.date} · {f.source} · {f.note}
-          </p>
-        </aside>
+          </aside>
+        ) : null}
 
         <PhoneFold className="w4-grid" keep={2} label="Show all measured charts">
           {proof.charts.map((c) => (

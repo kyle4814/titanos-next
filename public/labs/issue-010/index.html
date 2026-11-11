@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busy is not finished: 561 jobs done, and every final gate held | Demonblade Labs</title>
+<meta name="description" content="561 jobs marked done overnight, every final gate held, and only 11 of about 427 branches merged. What I changed so the finish line moves, not just the counter.">
+<link rel="canonical" href="https://titanos.tech/labs/issue-010/">
+<meta property="og:title" content="Busy is not finished: 561 jobs done, and every final gate held">
+<meta property="og:description" content="A done counter rose all night while the finish line did not move. Three fixes from my own build.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://titanos.tech/labs/issue-010/">
+<meta property="og:site_name" content="TITANOS">
+<meta property="og:image" content="https://titanos.tech/og/labs-issue-010.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TITANOS. Busy is not finished: 561 jobs done, and every final gate held.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://titanos.tech/og/labs-issue-010.png">
+<meta name="twitter:site" content="@Titanosofficial">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #13161b; --line: #262b33;
+    --ink: #f2f3f5; --ink-2: #b9bfc9; --ink-3: #8b929e;
+    --accent: #3987e5; --accent-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  .kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+  .deck { font-size: 1.1rem; color: var(--ink-2); margin: 0 0 24px; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 40px 0 10px; letter-spacing: -.01em; }
+  p { color: var(--ink-2); margin: 14px 0; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  ul, ol { color: var(--ink-2); padding-left: 22px; }
+  li { margin: 6px 0; }
+  blockquote { margin: 20px 0; padding: 14px 18px; background: var(--surface);
+    border-left: 3px solid var(--accent-2); border-radius: 0 8px 8px 0; }
+  blockquote p { margin: 0; color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875em;
+    background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fcfcfb; }
+  figcaption { font-size: .8125rem; color: var(--ink-3); margin-top: 8px; }
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .875rem; min-width: 520px; }
+  th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--ink); font-weight: 650; }
+  .cta { margin: 36px 0 8px; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 14px 20px; border-radius: 10px; min-height: 44px; }
+  .fine { font-size: .8125rem; color: var(--ink-3); }
+  .top-cover { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 24px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--ink-3); }
+  footer a { color: var(--ink-2); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:28px; }
+  .brand .mark { font: 600 20px/1 'Courier New', ui-monospace, monospace; letter-spacing:.32em; color:#D4AF37; }
+  .brand .rule { flex:1; height:1px; background:linear-gradient(90deg,#D4AF37 0%,var(--line) 100%); }
+  .brand:hover .mark { color:#e8c766; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/" aria-label="TITANOS home"><span class="mark">TITANOS</span><span class="rule"></span></a>
+  <p class="kicker">Demonblade Labs &middot; Issue 010</p>
+<h1>Busy is not finished: 561 jobs done, and every final gate held</h1>
+<p class="deck">If you run agents, cron jobs or any pipeline you leave alone, this one is for you. It sells nothing and costs nothing to read. It is about my own build at TitanOS in Brisbane, so nobody else is named.</p>
+<p>On 6 and 7 November three build chains ran overnight: my main system, the enterprise build and the website. About 530 jobs. The heartbeat on my phone said 561 DONE and the number kept rising.</p>
+<p>All three final acceptance gates were held.</p>
+<p>The main re-home gate held at 23:02. The enterprise acceptance held at 18:44, because an approval check let a person approve their own request. The website acceptance held at 20:24, with three of nine modules rejected: an auto-fix that could break mail, a marketplace job funded from an unpaid checkout, and investor figures with no labels.</p>
+<p>Agents fixed every one of those blockers by 04:34. The gates still sat held for 6 to 9 hours. The commander only re-armed a held stage when one of its dependencies finished, and the fixes were separate jobs, so nothing ever told the gate that its problem was gone. The counter kept climbing the whole time.</p>
+<h2>Fix one: a held stage re-arms when the fixes land</h2>
+<p>The fix shipped at about 05:15. A held stage now re-arms when an <code>.unblock</code> file newer than the hold appears, and the planners touch that file when fixes close the blockers. I proved it by mutation: the old code fails the 2 new tests. Within about an hour both re-runs passed: enterprise ACCEPT 4/4, website ACCEPT 9/9.</p>
+<h2>Fix two: count the finish line, not the activity</h2>
+<p>The second lesson came the same morning, from one plain question: how much has actually got done? Of the 561 DONE, about 130 were planning jobs and about 410 were real code jobs. Only 11 of roughly 427 branches had been merged into the product. So now every chain starts with a merge batch, the planners are throttled while more than 30 branches are waiting, and the heartbeat carries a MERGED x/y figure next to the DONE count.</p>
+<h2>Fix three: a babysitter that lives outside the lane</h2>
+<p>The third piece is a two layer babysitter on the heartbeat. Layer one is code reflexes for every failure I have already seen: a dead pid, an infrastructure refusal burning a retry, a held gate whose fixes landed, a stale commander, a chain with free slots and nothing in them. Layer two is one capped agent for the unexpected. It has 34 tests, and they are proven by mutation too. A reader on X pointed out that a lane cannot report its own death, so the check lives outside the lane. Silence is the alarm.</p>
+<p>If you want to copy one thing: put a finish line number on your dashboard, not only an activity number. Mine is merged branches out of total branches.</p>
+<h2>What is still open</h2>
+<p>Plainly: nothing is live. The modules were accepted on stand-in adapters. Next is a real local database, Stripe test mode and an independent security review.</p>
+<p>The lesson I am keeping: busy is not finished. A done counter can rise all night while the finish line does not move.</p>
+<p>Which number on your dashboard counts activity when it should count finished work?</p>
+<hr>
+<p class="fine">Previous issues: <a href="/labs/issue-009/">The ninth bug: my heartbeat went quiet when I needed it most</a>, <a href="/labs/issue-008/">Eight bugs in a chain that was meant to run itself</a>, <a href="/labs/issue-007/">Twelve blockers behind a green suite</a>, <a href="/labs/issue-006/">The exam the builder never saw</a>, <a href="/labs/issue-005/">The button that ignored a fast thumb</a>, <a href="/labs/issue-004/">I built a product assistant that is not allowed to guess</a>, <a href="/labs/issue-003/">I built a gym that judges its own best strategies as luck</a>, <a href="/labs/issue-002/">I freed 334 gigabytes and the disk got smaller</a>, <a href="/labs/issue-001/">Why more AI agents don't automatically mean more output</a>. All issues: <a href="/labs/">Demonblade Labs</a>.</p>
+<p class="fine">Next issue: <a href="/labs/issue-011/">Zero green in 58: I was tuning the wrong dial</a>.</p>
+  <footer>
+    <p>Demonblade Labs is the research publication of TitanOS. Issue 010, 7 November 2026.
+    Every figure in this article is a log timestamp, a test run result or a measured count from my own build. Nobody else is named.</p>
+    <p><span style="font:600 14px/1 'Courier New',ui-monospace,monospace;letter-spacing:.32em;color:#D4AF37">TITANOS</span> &nbsp; <a href="/">titanos.tech</a></p>
+  </footer>
+</main>
+</body>
+</html>

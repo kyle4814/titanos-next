@@ -52,7 +52,7 @@ G clone -q "$T/origin.git" "$T/repo" 2>/dev/null; mkdir -p "$T/repo/node_modules
 [ "$(G -C "$T/repo" symbolic-ref --short HEAD)" = main ] && [ -f "$T/repo/scripts/deploy.sh" ] || { echo "fixture setup failed"; exit 97; }
 
 STUBENV=(PATH="$T/bin:$PATH" STUB_LOG="$T/stub.log" STUB_APPROVED="$T/approved" STUB_REPO="$T/repo"
-         APPROVAL_CHECK_CMD="$T/bin/approval_stub" WORKTREE="$T/wt" DEPLOY_PROPAGATION_WAIT=0)
+         APPROVAL_CHECK_CMD="$T/bin/approval_stub" WORKTREE="$T/wt" DEPLOY_PROPAGATION_WAIT=0 DEPLOY_BUILD=local)
 run(){    # run [VAR=value ...]: the fixture deploy.sh, no terminal, every knob explicit (never the caller's env)
   : > "$T/stub.log"
   env -u DEPLOY_APPROVAL_REF -u DEPLOY_INTERACTIVE "${STUBENV[@]}" "$@" bash "$T/repo/scripts/deploy.sh" </dev/null >"$T/out" 2>&1
@@ -98,6 +98,36 @@ grep -q "source: $SRC" <<<"$MSG" && grep -q "approval: ok-1" <<<"$MSG" && grep -
 ok $? "the gh-pages commit carries the source SHA and the approval ref"
 [ "$(G -C "$T/origin.git" show gh-pages:index.html)" = "<html>$(cat "$T/repo/.next/BUILD_ID")</html>" ]; ok $? "origin gh-pages holds this build"
 G -C "$T/origin.git" for-each-ref --format='%(refname:short)' 'refs/heads/gh-pages-backup-*' | grep -q .; ok $? "a backup branch was pushed before the deploy"
+
+# --- the cloud half (2026-11-10, Kyle: "Tests should be on cloud runner... never let it happen again") -----------
+# The DEFAULT (no DEPLOY_BUILD) builds and tests on the cloud runner and publishes that output; the laptop runs no npm.
+cat > "$T/bin/cloud_stub" <<'EOS'
+#!/usr/bin/env bash
+echo "cloud $*" >> "$STUB_LOG"
+[ -n "${CLOUD_STUB_FAIL:-}" ] && { echo "cloud: RED"; exit 1; }
+id="CLOUD$(date +%s%N)"; mkdir -p .next out/_next/static/chunks
+echo "$id" > .next/BUILD_ID; : > out/.nojekyll; echo titanos.tech > out/CNAME
+echo "<html>$id</html>" > out/index.html; : > out/_next/static/chunks/a.css
+EOS
+chmod +x "$T/bin/cloud_stub"
+CENV=(); for kv in "${STUBENV[@]}"; do [[ $kv == DEPLOY_BUILD=* ]] || CENV+=("$kv"); done
+crun(){ : > "$T/stub.log"; env -u DEPLOY_APPROVAL_REF -u DEPLOY_INTERACTIVE -u DEPLOY_BUILD "${CENV[@]}" \
+        CLOUD_BUILD_CMD="$T/bin/cloud_stub" "$@" bash "$T/repo/scripts/deploy.sh" </dev/null >"$T/out" 2>&1; }
+SRC=$(G -C "$T/repo" rev-parse HEAD)
+crun DEPLOY_APPROVAL_REF=ok-1; rc=$?
+[ "$rc" -eq 0 ] && grep -qx "cloud $SRC" "$T/stub.log" && ! grep -q '^npm ' "$T/stub.log"
+ok $? "default build is the cloud runner, for the exact source SHA; the laptop runs no npm build or test"
+PAGE=$(G -C "$T/origin.git" show gh-pages:index.html)
+[ "$PAGE" = "<html>$(cat "$T/repo/.next/BUILD_ID")</html>" ] && [[ $PAGE == "<html>CLOUD"* ]]
+ok $? "gh-pages holds the output the cloud build tested (the tested bytes ship)"
+PAGES1=$(G -C "$T/origin.git" rev-parse gh-pages)
+crun DEPLOY_APPROVAL_REF=ok-1 CLOUD_STUB_FAIL=1; rc=$?
+[ "$rc" -eq 1 ] && grep -q "REFUSED: the cloud build/test of ${SRC:0:12} did not pass" "$T/out" \
+  && [ "$(G -C "$T/origin.git" rev-parse gh-pages)" = "$PAGES1" ]
+ok $? "a red cloud build/test: refused, gh-pages untouched"
+crun DEPLOY_APPROVAL_REF=ok-1 DEPLOY_BUILD=sideways; rc=$?
+[ "$rc" -eq 1 ] && grep -q "REFUSED: DEPLOY_BUILD must be cloud" "$T/out" && ! grep -q '^cloud ' "$T/stub.log" && ! grep -q '^npm ' "$T/stub.log"
+ok $? "an unknown DEPLOY_BUILD value: refused, nothing built"
 cat > "$T/bin/curl" <<'EOS'
 #!/usr/bin/env bash
 echo "curl $*" >> "$STUB_LOG"; echo "<html>BUILDold</html>"
@@ -127,6 +157,14 @@ if command -v script >/dev/null 2>&1; then
   # and whitespace around a correctly typed SHA is still a match, never a silent refusal
   pty "  $SHORT  "; built && grep -q "gate ok: .*interactive, SHA typed at a terminal" "$T/out"; ok $? "a SHA typed with stray spaces is accepted"
   G -C "$T/origin.git" log -1 --format=%B gh-pages | grep -q "approval: interactive, SHA typed at a terminal" && ! G -C "$T/origin.git" log -1 --format=%B gh-pages | grep -q "$(id -un)"; ok $? "an interactive deploy is stamped as interactive, with no local username in public history"
+  # the cloud-build hook can never stand in for the real tests on the real site: refused when the push origin is not local
+  G -C "$T/repo" remote set-url --push origin https://example.invalid/kyle4814/titanos-next.git
+  : > "$T/stub.log"; printf '%s\n' "$SHORT" | env -u DEPLOY_APPROVAL_REF -u APPROVAL_CHECK_CMD -u DEPLOY_BUILD \
+    PATH="$T/bin:$PATH" STUB_LOG="$T/stub.log" STUB_REPO="$T/repo" WORKTREE="$T/wt" DEPLOY_PROPAGATION_WAIT=0 \
+    DEPLOY_INTERACTIVE=1 CLOUD_BUILD_CMD="$T/bin/cloud_stub" script -qec "bash $T/repo/scripts/deploy.sh" /dev/null >"$T/out" 2>&1
+  grep -q "REFUSED: CLOUD_BUILD_CMD is a test hook" "$T/out" && ! grep -q '^cloud ' "$T/stub.log"
+  ok $? "the cloud-build test hook is refused when origin is not a local path"
+  G -C "$T/repo" remote set-url --push origin "$T/origin.git"
 else
   ok 1 "script(1) missing: the interactive path cannot be proven (FAIL, not skip)"
 fi
