@@ -10,12 +10,6 @@
  },
  "debt": [
   {
-   "store": "MemoryMarketStore",
-   "reason": "No D1 market store adapter on the int3 base; test/market_harness.ts builds the market service on it, so STORE=d1 market runs stay in memory (f367 residual).",
-   "owner": "f378_c3_owner_market_store_d1_inventory",
-   "would_flip": "Land a D1MarketStore implementing MarketStore (migrations exist for market tables), add a d1 switch to test/market_harness.ts like ent_harness.ts makeEntStores; the gate then reports this entry stale."
-  },
-  {
    "store": "MemorySeatEntitlements",
    "reason": "Seat (claim-fee discount) records have no D1 adapter on int3; the market harness constructs the memory one.",
    "owner": "f378_c3_owner_market_store_d1_inventory",

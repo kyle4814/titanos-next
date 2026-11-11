@@ -30,9 +30,9 @@ test("the real tree is clean: every Memory-only store is declared, owners are re
   const r = gate();
   assert.deepEqual(r.failures, []);
   const debt = realDebt().debt, stages = stageIds();
-  assert.deepEqual(debt.map((e: any) => e.store).sort(), ["MemoryMarketStore", "MemorySeatEntitlements", "MemoryZone"]);
+  assert.deepEqual(debt.map((e: any) => e.store).sort(), ["MemorySeatEntitlements", "MemoryZone"]);
   for (const e of debt) { assert.ok(stages.has(e.owner), e.owner); assert.ok(e.reason.length > 20 && e.would_flip.length > 20, e.store); }
-  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 3);
+  assert.equal(r.warnings.filter((w: string) => w.startsWith("DECLARED DEBT")).length, 2);
 });
 
 test("a planted UNDECLARED Memory-only store in a service entrypoint FAILS, naming store and site", () => withTmp((d) => {
@@ -92,5 +92,5 @@ test("mutation: removing the structural alias makes MemoryThrottleStore Memory-o
 
 test("a stage-id fixture is the one passed in: an empty fixture fails every owner", () => withTmp((d) => {
   writeFileSync(join(d, "stages.tsv"), "# id\n");
-  assert.equal(run(d).failures.filter((m: string) => m.includes("is not a stage id")).length, 3);
+  assert.equal(run(d).failures.filter((m: string) => m.includes("is not a stage id")).length, 2);
 }));
