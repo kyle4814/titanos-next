@@ -54,3 +54,10 @@ f420_c10_sweeps_use_export_manifest-2026-11-11 MERGED
 f431_c10_soak_pin_manifest_digest-2026-11-11 SKIP scripts/soak_pin_matrix_gate.mjs scripts/soak_pin_wire.mjs scripts/test_soak_pin_wire.mjs 
 f405_c10_form_control_tap44-2026-11-11 MERGED-RESOLVED
 web/f382_c9_proof_feed_reexport-2026-11-10 deferred: superseded by main 1b38ce14e proof regen
+web/f385_c10_viewport_overflow_sweep-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f392_c10_tap_target_360-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f405_c10_form_control_tap44-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f405_c10_form_control_tap44-2026-11-11 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f410_c10_print_fixed_layers_fix-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f411_c10_tap_residual_burndown-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f413_c10_sweep_stylesheet_wait-2026-11-11 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
