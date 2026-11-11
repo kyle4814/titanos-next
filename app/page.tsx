@@ -6,6 +6,7 @@ import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance
 import SpaceImage from "@/components/SpaceImage";
 import FlowThread from "@/components/flow/FlowThread";
 import OfferCard from "@/components/OfferCard";
+import PhoneFold from "@/components/PhoneFold";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
@@ -454,7 +455,7 @@ export default function Home() {
             lead="From a free scan with no card, to enterprise programs across a whole group. If none of it fits yet, the free scan and the audit call are still yours."
           />
 
-          <div className="ladder-grid">
+          <PhoneFold className="ladder-grid" keep={2} label="Show every door">
             {LADDER.map((band) => (
               <div key={band.name} className="ladder-band" data-phi-reveal>
                 <div className="ladder-band-head">
@@ -477,7 +478,7 @@ export default function Home() {
                 </a>
               </div>
             ))}
-          </div>
+          </PhoneFold>
 
           <p className="ladder-note">
             Nobody gets turned away for budget. If the ladder does not reach you yet, take the free
