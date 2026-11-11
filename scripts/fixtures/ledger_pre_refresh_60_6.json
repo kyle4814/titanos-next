@@ -1,0 +1,86 @@
+{
+ "_note": "REAL (not synthetic) pre-refresh fixture: the ledger rows (origin/web/f391~1 lib/ledger.json, estate_ey 60.6, kernel export of 2026-10-09). Used to prove the ported formulas reproduce the exporter's own output.",
+ "n": {
+  "estate_ey": {
+   "value": 60.6,
+   "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 230.8 KSLOC"
+  },
+  "span_days": {
+   "value": 158,
+   "method": "union of days with a non-bot commit in any repo, 2026-05-04 to 2026-10-08"
+  },
+  "compute_build_aud_month": {
+   "value": 46,
+   "method": "about US$30 a month of AI tools while the main engine was built (to 29 September); no receipt on file"
+  },
+  "compute_today_aud_month": {
+   "value": 300,
+   "method": "AU$300 a month of AI tools since 29 September; no receipt on file"
+  },
+  "model_effort_pm": {
+   "value": 727,
+   "method": "60.6 engineer-years x 12"
+  },
+  "model_schedule_months": {
+   "value": 30.6,
+   "method": "Basic COCOMO organic: effort = 2.4 x KSLOC^1.05 person-months, schedule = 2.5 x effort^0.38 months"
+  },
+  "model_team": {
+   "value": 23.8,
+   "method": "effort person-months / schedule months"
+  },
+  "elapsed_months": {
+   "value": 5.2,
+   "method": "158 days from the first commit (4 May 2026) / 30.4375"
+  },
+  "speed_x": {
+   "value": 5.9,
+   "method": "model schedule months / months elapsed"
+  },
+  "team_smaller_x": {
+   "value": 24,
+   "method": "model team / 1 engineer"
+  },
+  "build_cost_aud": {
+   "value": 10670000,
+   "method": "60.6 engineer-years x AU$800 a day x 220 working days = AU$176,000 per engineer-year"
+  },
+  "annual_ey": {
+   "value": 140,
+   "method": "60.6 engineer-years / 0.433 years elapsed"
+  },
+  "annual_cost_aud": {
+   "value": 24600000,
+   "method": "140.0 engineer-years a year x AU$176,000"
+  },
+  "annual_cost_10pct_aud": {
+   "value": 2460000,
+   "method": "10% of annual_cost_aud"
+  },
+  "annual_cost_2pct_aud": {
+   "value": 493000,
+   "method": "2% of annual_cost_aud"
+  },
+  "compute_build_total_aud": {
+   "value": 240,
+   "method": "AU$46 x 5.2 months elapsed"
+  },
+  "per_dollar_build_x": {
+   "value": 4500,
+   "method": "10% annual value / (AU$46 x 12) on the build spend"
+  },
+  "per_dollar_today_x": {
+   "value": 680,
+   "method": "10% annual value / (AU$300 x 12) at today's spend"
+  },
+  "per_dollar_full_x": {
+   "value": 44700,
+   "method": "full-model build cost / build-stage compute"
+  },
+  "per_dollar_full_today_x": {
+   "value": 6840,
+   "method": "full-model annual value / (AU$300 x 12)"
+  }
+ },
+ "rate_note": "AU$800 a day x 220 working days = AU$176,000 per engineer-year"
+}

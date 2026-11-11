@@ -22,19 +22,22 @@
       "label": "MEASURED",
       "method": "non-blank non-comment lines, mirrors/clones/worktrees/third-party excluded",
       "source": "state/numbers/NUMBERS.json (numbers_ledger.py, 12-repo estate)",
-      "text": "12 code repositories built since 4 May 2026: 230,797 lines of production code."
+      "text": "12 code repositories built since 4 May 2026: 256,217 lines of production code.",
+      "as_of": "2026-10-13T04:05:02"
     },
     "estate_cost": {
       "label": "MODELLED",
-      "method": "60.6 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)",
+      "method": "67.6 engineer-years x the engineering page's own rate (44.1 engineer-years ~ AU$23M)",
       "source": "titanos.tech/engineering",
-      "text": "A conventional team would charge about AU$31.6 million to build it."
+      "text": "A conventional team would charge about AU$35.3 million to build it.",
+      "as_of": "2026-10-13T04:05:02"
     },
     "estate_ey": {
       "label": "MODELLED",
-      "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 230.8 KSLOC",
+      "method": "Basic COCOMO organic 2.4*KSLOC^1.05 person-months / 12 on 256.2 KSLOC",
       "source": "bin/sloc_count.py",
-      "text": "Priced by the industry standard COCOMO model, that is 60.6 engineer-years of conventional engineering."
+      "text": "Priced by the industry standard COCOMO model, that is 67.6 engineer-years of conventional engineering.",
+      "as_of": "2026-10-13T04:05:02"
     },
     "fleet_share": {
       "label": "MEASURED",
@@ -95,74 +98,99 @@
       "traceable": true
     },
     "annual_cost_10pct_aud": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "10% of annual_cost_aud",
       "source": "annual_cost_aud",
       "unit": "AU$ a year",
-      "value": 2460000,
+      "value": 2750000,
       "source_path": null,
       "derived_from": [
         "annual_cost_aud"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "annual_cost_2pct_aud": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "2% of annual_cost_aud",
       "source": "annual_cost_aud",
       "unit": "AU$ a year",
-      "value": 493000,
+      "value": 550000,
       "source_path": null,
       "derived_from": [
         "annual_cost_aud"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "annual_cost_aud": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
-      "method": "140.0 engineer-years a year x AU$176,000",
+      "method": "156.2 engineer-years a year x AU$176,000",
       "source": "estate_ey, parttime",
       "unit": "AU$ a year",
-      "value": 24600000,
+      "value": 27500000,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "annual_ey": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
-      "method": "60.6 engineer-years / 0.433 years elapsed",
+      "method": "67.6 engineer-years / 0.433 years elapsed",
       "source": "estate_ey, parttime",
       "unit": "engineers' worth a year",
-      "value": 140,
+      "value": 156,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "build_cost_aud": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
-      "method": "60.6 engineer-years x AU$800 a day x 220 working days = AU$176,000 per engineer-year",
+      "method": "67.6 engineer-years x AU$800 a day x 220 working days = AU$176,000 per engineer-year",
       "source": "estate_ey; rate: Hudson Australia Cyber Security Salary Guide",
       "unit": "AU$",
-      "value": 10670000,
+      "value": 11900000,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "capacity_x": {
       "as_of": "2026-10-09",
@@ -455,46 +483,61 @@
       "traceable": true
     },
     "model_effort_pm": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
-      "method": "60.6 engineer-years x 12",
+      "method": "67.6 engineer-years x 12",
       "source": "estate_ey",
       "unit": "person-months",
-      "value": 727,
+      "value": 811,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "model_schedule_months": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "Basic COCOMO organic: effort = 2.4 x KSLOC^1.05 person-months, schedule = 2.5 x effort^0.38 months",
       "source": "estate_ey",
       "unit": "months",
-      "value": 30.6,
+      "value": 31.9,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "model_team": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "effort person-months / schedule months",
       "source": "estate_ey",
       "unit": "engineers",
-      "value": 23.8,
+      "value": 25.5,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "pace_ey_per_day_1d": {
       "as_of": "2026-10-13T04:05:02",
@@ -533,64 +576,84 @@
       "traceable": true
     },
     "per_dollar_build_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "10% annual value / (AU$46 x 12) on the build spend",
       "source": "annual_cost_10pct_aud, compute_build_aud_month",
       "unit": "x",
-      "value": 4500,
+      "value": 5000,
       "source_path": null,
       "derived_from": [
         "annual_cost_10pct_aud",
         "compute_build_aud_month"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "per_dollar_full_today_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "full-model annual value / (AU$300 x 12)",
       "source": "annual_cost_aud, compute_today_aud_month",
       "unit": "x",
-      "value": 6840,
+      "value": 7630,
       "source_path": null,
       "derived_from": [
         "annual_cost_aud",
         "compute_today_aud_month"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "per_dollar_full_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "full-model build cost / build-stage compute",
       "source": "build_cost_aud, compute_build_total_aud",
       "unit": "x",
-      "value": 44700,
+      "value": 49800,
       "source_path": null,
       "derived_from": [
         "build_cost_aud",
         "compute_build_total_aud"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "per_dollar_today_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "10% annual value / (AU$300 x 12) at today's spend",
       "source": "annual_cost_10pct_aud, compute_today_aud_month",
       "unit": "x",
-      "value": 680,
+      "value": 760,
       "source_path": null,
       "derived_from": [
         "annual_cost_10pct_aud",
         "compute_today_aud_month"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "realised_x": {
       "as_of": "2026-10-09",
@@ -617,18 +680,23 @@
       "traceable": true
     },
     "speed_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "model schedule months / months elapsed",
       "source": "estate_ey, parttime",
       "unit": "x",
-      "value": 5.9,
+      "value": 6.1,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "spend_today_usd": {
       "as_of": "2026-10-13T04:05:02",
@@ -655,18 +723,23 @@
       "traceable": true
     },
     "team_smaller_x": {
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13T04:05:02",
       "label": "MODELLED",
       "method": "model team / 1 engineer",
       "source": "estate_ey",
       "unit": "x",
-      "value": 24,
+      "value": 25,
       "source_path": null,
       "derived_from": [
         "estate_ey"
       ],
-      "measured": "2026-10-09",
-      "traceable": true
+      "measured": "2026-10-13",
+      "traceable": true,
+      "inputs_as_of": {
+        "estate_ey": "2026-10-13T04:05:02",
+        "span_days": "2026-10-09"
+      },
+      "formula_source": "bin/site_ledger_export.py @ b857355428"
     },
     "tests_before": {
       "as_of": "2026-10-09",
