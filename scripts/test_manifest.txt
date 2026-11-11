@@ -155,3 +155,4 @@ bash scripts/test_obelisk_kill_matrix.sh
 node scripts/test_regen_ledger.mjs
 node scripts/test_ledger_derived.mjs
 node scripts/test_proof_feed_freshness.mjs
+node scripts/test_hud_numbers_single_source.mjs
