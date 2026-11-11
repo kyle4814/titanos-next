@@ -70,29 +70,37 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
   return out;
 }
 function cors(res: Response, env: Env): Response {
-  const o = env.TITANOS_SITE_ORIGIN;
-  if (o) { res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, PATCH, DELETE, OPTIONS"); res.headers.set("vary", "origin"); }
+  const o = env.TITANOS_SITE_ORIGIN?.trim();
+  // F363: a wildcard or "null" origin is a misconfiguration, never echoed (fail closed: no CORS header). The request Origin is never read.
+  if (o && o !== "*" && o !== "null") {
+    res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, PATCH, DELETE, OPTIONS");
+    const v = res.headers.get("vary");   // append, never overwrite (an invoice already says vary: accept)
+    if (!v || !/(^|,)\s*(origin|\*)\s*(,|$)/i.test(v)) res.headers.set("vary", v ? `${v}, origin` : "origin");
+  }
   return res;
 }
 
 // handle(req, env, deps): deps is the injected store/billing/dns/mailer. With no deps every route except /health
 // fails closed with 503 (the D1 store is not built yet), so a half-wired deploy can never pretend to bill anyone.
 export async function handle(req: Request, env: Env, deps?: Deps): Promise<Response> {
+  return cors(await handleInner(req, env, deps), env);   // F363: ONE exit, so no path (health, no-deps 503, error paths) can skip CORS
+}
+async function handleInner(req: Request, env: Env, deps?: Deps): Promise<Response> {
   const { pathname } = new URL(req.url);
   if (pathname === "/health") {
     if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405);
     return health(env);
   }
-  if (req.method === "OPTIONS") return cors(empty(204), env);
+  if (req.method === "OPTIONS") return empty(204);
   if (!deps) return json({ error: "store_unavailable" }, 503);
   try {
-    return cors(await route(req, pathname, deps), env);
+    return await route(req, pathname, deps);
   } catch (e) {
-    if (e instanceof ThrottledError) { const r = cors(json({ error: e.code }, 429), env); r.headers.set("retry-after", String(e.retryAfterSec)); return r; }
-    if (e instanceof HttpError) return cors(json({ error: e.code }, e.status), env);
-    if (e instanceof svc.RefundInFlight) return cors(json({ error: "refund_in_flight" }, 503), env);
-    if (e instanceof svc.RefundRecordPending) return cors(json({ error: "refund_record_pending", refundId: e.refundId, purchaseId: e.purchaseId }, 503), env);
-    throw e;
+    if (e instanceof ThrottledError) { const r = json({ error: e.code }, 429); r.headers.set("retry-after", String(e.retryAfterSec)); return r; }
+    if (e instanceof HttpError) return json({ error: e.code }, e.status);
+    if (e instanceof svc.RefundInFlight) return json({ error: "refund_in_flight" }, 503);
+    if (e instanceof svc.RefundRecordPending) return json({ error: "refund_record_pending", refundId: e.refundId, purchaseId: e.purchaseId }, 503);
+    throw e;   // unexpected: handle() rejects (pinned by http_headers.test.ts); the Worker entry turns it into a CORS-carrying generic 500
   }
 }
 
@@ -237,11 +245,11 @@ export function createWorker(opts: WorkerOpts = {}) {
           opts.log?.(`buildDeps refused: ${e.message}`);   // reason + binding NAME only, never a value
           const p = new URL(req.url).pathname;
           if (p === "/health" || req.method === "OPTIONS") return handle(req, env, undefined);
-          return json({ error: "deps_unavailable", reason: e.message }, 503);
+          return cors(json({ error: "deps_unavailable", reason: e.message }, 503), env);
         }
         const throttle = fixed ?? makeThrottle?.(env);
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
-      }).catch(() => json({ error: "internal" }, 500));
+      }).catch(() => cors(json({ error: "internal" }, 500), env));
     },
     // f334: the shop drain tick owns ONLY its own cron expression. Any other cron runs the owner cron and then the C8 payout tick.
     // C8 f57: with a ctx, the work is handed to ctx.waitUntil (the Worker stays alive for the tick); without one it is awaited (tests, drain).
