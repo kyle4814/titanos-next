@@ -173,3 +173,6 @@ node --experimental-strip-types --no-warnings scripts/test_ledger_unsourced.mjs
 node scripts/test_figure_freshness_forecast.mjs
 bash scripts/test_c6_holdout_verify.sh
 node --experimental-strip-types --no-warnings scripts/test_c5_ungraded_verify.mjs
+node scripts/test_soak_pin_matrix_gate.mjs
+bash scripts/test_c1_funnel_verify.sh
+bash scripts/test_c4_paid_reproof_verify.sh

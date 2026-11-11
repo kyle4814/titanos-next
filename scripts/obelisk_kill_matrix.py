@@ -34,6 +34,7 @@ NS = "node --experimental-strip-types"
 SPEC = {
     "C1": {"command": f"{NS} scripts/test_guestscan.mjs && node scripts/test_funnel_killtest.mjs",
            "files": ["scripts/test_guestscan.mjs", "scripts/test_funnel_killtest.mjs"],
+           "verifier": "python3 scripts/c1_funnel_verify.py", "verifier_files": ["scripts/c1_funnel_verify.py", "scripts/fixtures/funnel_synthetic.ndjson"],
            "gate": "LIVE TRAFFIC: needs the first 1,000 real scans"},
     "C2": {"command": f"{PA} test/drill.test.ts)", "files": ["portal-api/test/drill.test.ts"],
            "verifier": f"(cd portal-api && {NS} scripts/flow16_matrix.ts --check)", "verifier_files": ["portal-api/scripts/flow16_matrix.ts"]},
@@ -41,6 +42,7 @@ SPEC = {
            "verifier": "node scripts/drill_twenty_faults.mjs", "verifier_files": ["scripts/drill_twenty_faults.mjs"]},
     "C4": {"command": f"node scripts/drill_ten_jobs.mjs && {PA} test/drill_ten_jobs.test.ts test/payout_release.test.ts)",
            "files": ["scripts/drill_ten_jobs.mjs", "portal-api/test/drill_ten_jobs.test.ts", "portal-api/test/payout_release.test.ts"],
+           "verifier": "python3 scripts/c4_paid_reproof_verify.py", "verifier_files": ["scripts/c4_paid_reproof_verify.py", "portal-api/scripts/c4_ledger_dump.ts"],
            "gate": "GATE2 Stripe Connect: real first 10 jobs and live payouts"},
     "C5": {"command": "node scripts/test_graded_store.mjs && node scripts/test_shelves_fetch_budget.mjs",
            "files": ["scripts/test_graded_store.mjs", "scripts/test_shelves_fetch_budget.mjs"],
@@ -141,6 +143,24 @@ def run_cmd(cmd, cwd, timeout):
     return {"cmd": cmd, "exit": code, "seconds": round(time.time() - t, 1), "tail": lines[-1][:160] if lines else ""}
 
 
+VERIFICATION = ["IV", "CODE-PROOF-IV", "WOULD-FLIP", "FAILED"]
+
+
+def verification_of(r, verifier_passed):
+    """One field (f400 reconcile of f398 'verification' and f399 'code_proof'):
+    IV = ungated chunk, independent verifier exited 0; CODE-PROOF-IV = gated chunk, code proof AND independent verifier exited 0
+    (the live kill test is still WOULD-FLIP); WOULD-FLIP = gated chunk, no independent verifier; FAILED = any command failed."""
+    if r["status"] == "FAILED":
+        return "FAILED"
+    if verifier_passed and r["status"] == "INDEPENDENTLY VERIFIED":
+        return "IV"
+    if verifier_passed and r["status"] == "WOULD-FLIP":
+        return "CODE-PROOF-IV"
+    if r["status"] == "WOULD-FLIP":
+        return "WOULD-FLIP"
+    return None
+
+
 def evaluate(row, entry, repo, run, timeout):
     out = dict(row)
     out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None, "verification": None})
@@ -161,7 +181,7 @@ def evaluate(row, entry, repo, run, timeout):
     res = run_cmd(entry["command"], repo, timeout)
     out["result"] = res
     if res["exit"] != 0:
-        out.update({"status": "FAILED", "detail": f"exit {res['exit']}: {res['tail']}"})
+        out.update({"status": "FAILED", "detail": f"exit {res['exit']}: {res['tail']}", "verification": "FAILED"})
         return out
     status, detail = "TESTED", f"exit 0 in {res['seconds']}s"
     if not entry.get("verifier"):
@@ -170,15 +190,19 @@ def evaluate(row, entry, repo, run, timeout):
         v = run_cmd(entry["verifier"], repo, timeout)
         out["verifier_result"] = v
         if v["exit"] != 0:
-            out.update({"status": "FAILED", "detail": f"verifier exit {v['exit']}: {v['tail']}"})
+            out.update({"status": "FAILED", "detail": f"verifier exit {v['exit']}: {v['tail']}", "verification": "FAILED"})
             return out
         status = "INDEPENDENTLY VERIFIED"
-        out["verification"] = "INDEPENDENTLY VERIFIED"  # f398: the CODE proof is independently verified even when a live gate keeps the row at WOULD-FLIP
     if entry.get("gate"):
         out.update({"status": "WOULD-FLIP", "detail": f"code proof exit 0 in {res['seconds']}s" + ("; verifier exit 0" if out["verifier_result"] else "") + f"; kill test needs {entry['gate']}"})
     else:
         out.update({"status": status, "detail": detail + ("" if status == "INDEPENDENTLY VERIFIED" else "; " + out.get("detail_note", ""))})
+    out["verification"] = verification_of(out, bool(entry.get("verifier")))
     return out
+
+
+def verification_counts(results):
+    return {k: sum(1 for r in results if r["verification"] == k) for k in VERIFICATION}
 
 
 def render_md(results, head, counts):
@@ -191,9 +215,13 @@ def render_md(results, head, counts):
         shown = f"exit {res['exit']} in {res['seconds']}s: {res['tail']}" if res else r["detail"]
         if r["verifier_result"]:
             shown += f"; verifier exit {r['verifier_result']['exit']} in {r['verifier_result']['seconds']}s"
-        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {r['status']}{('; code INDEPENDENTLY VERIFIED' if r['verification'] and r['status'] != r['verification'] else '')} | {esc(r['gate'] or r['stage'] or '')} |")
-    ivany = sum(1 for r in results if r["verification"])
-    L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES) + f", code INDEPENDENTLY VERIFIED (any gate) {ivany}", ""]
+        word = r["status"] + (f"; code proof {r['verification']}" if r["verification"] == "CODE-PROOF-IV" else "")
+        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {word} | {esc(r['gate'] or r['stage'] or '')} |")
+    L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES), ""]
+    vc = verification_counts(results)
+    L += ["Verification (one field, `verification`): " + ", ".join(f"{k} {vc[k]}" for k in VERIFICATION)
+          + f". Code-proof IV (IV + CODE-PROOF-IV, an independent verifier also exited 0, whatever the live status): {vc['IV'] + vc['CODE-PROOF-IV']} ("
+          + " ".join(r["id"] for r in results if r["verification"] in ("IV", "CODE-PROOF-IV")) + ")", ""]
     return "\n".join(L)
 
 
@@ -209,7 +237,8 @@ def build(plan_text, spec, repo, run=True, timeout=900):
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo, capture_output=True, text=True).stdout.strip() or "UNKNOWN"
     except OSError:
         head = "UNKNOWN"
-    counts_v = {"code_independently_verified_any_gate": sum(1 for r in results if r["verification"]), "ids": [r["id"] for r in results if r["verification"]]}
+    vc = verification_counts(results)
+    counts_v = {**vc, "code_proof_iv": vc["IV"] + vc["CODE-PROOF-IV"], "ids": [r["id"] for r in results if r["verification"] in ("IV", "CODE-PROOF-IV")]}
     return {"head": head, "counts": counts, "verification": counts_v, "chunks": results}
 
 

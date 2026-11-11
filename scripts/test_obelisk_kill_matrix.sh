@@ -105,6 +105,10 @@ print(json.dumps(d))
 PY
 run >/dev/null
 [ "$(st C1)" = WOULD-FLIP ] && [ "$(st C2)" = FAILED ] && ok "gated row with a passing verifier stays WOULD-FLIP; failing verifier shows FAILED" || no "gated verifier"
+python3 -c "
+import json;c={x['id']:x for x in json.load(open('$S/o.json'))['chunks']}
+assert c['C1']['verification']=='CODE-PROOF-IV' and c['C1']['status']=='WOULD-FLIP' and c['C3']['verification'] is None and c['C2']['verification']=='FAILED'" && ok "gated row with a passing verifier carries verification CODE-PROOF-IV beside WOULD-FLIP; failing verifier FAILED (f399 into f400)" || no "verification field (gated)"
+run --out-md "$S/gv.md" >/dev/null; grep -q '^| C1 .*WOULD-FLIP; code proof CODE-PROOF-IV' "$S/gv.md" && grep -q 'Code-proof IV .*: 1 (C1)' "$S/gv.md" && ok "markdown shows the code proof beside WOULD-FLIP and counts it" || no "markdown code proof"
 
 # named test file absent -> PROPOSED, not run; --no-run -> IMPLEMENTED
 python3 - > "$S/spec.json" <<'PY'
@@ -127,6 +131,19 @@ import sys,re; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
 m.check_verifiers(m.SPEC)
 assert all(k in m.SPEC for k in ("C2","C3","C7","C8","C10")) and all(m.SPEC[k].get("verifier") for k in ("C2","C3","C7","C8","C10"))
 PY
+python3 - <<'PY' || no "C1/C4 verifier fields"
+import sys; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
+for k in ("C1","C4"):
+    v=m.SPEC[k]; assert v.get("verifier") and v.get("gate"), k
+    assert not (m._files(v["verifier"]) & m._files(v["command"])), k
+assert m.SPEC["C1"]["verifier"]=="python3 scripts/c1_funnel_verify.py" and m.SPEC["C4"]["verifier"]=="python3 scripts/c4_paid_reproof_verify.py"
+# the matrix refuses a C1/C4 verifier that reuses the primary's command or a test basename (planted)
+for k,bad in (("C1","node scripts/test_funnel_killtest.mjs"),("C4","node scripts/drill_ten_jobs.mjs"),("C4","cd portal-api && node --test test/payout_release.test.ts")):
+    spec={**m.SPEC,k:{**m.SPEC[k],"verifier":bad}}
+    try: m.check_verifiers(spec); raise SystemExit("not refused: "+bad)
+    except m.Structural: pass
+PY
+ok "C1/C4 verifiers wired, independent, and a verifier reusing the primary's command or test basename is refused (f399)"
 ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C9 C10 wired)"
 # f398: a gated row whose verifier passes shows the CODE as INDEPENDENTLY VERIFIED while the status stays WOULD-FLIP; a failing verifier shows neither
 python3 - > "$S/spec.json" <<'PY'
@@ -139,9 +156,9 @@ print(json.dumps(d))
 PY
 run >/dev/null
 vf() { python3 -c "import json;print([c['verification'] for c in json.load(open('$S/o.json'))['chunks'] if c['id']=='$1'][0])"; }
-[ "$(st C1)" = WOULD-FLIP ] && [ "$(vf C1)" = "INDEPENDENTLY VERIFIED" ] && [ "$(vf C2)" = None ] && [ "$(vf C3)" = "INDEPENDENTLY VERIFIED" ] && ok "gated row + passing verifier: status WOULD-FLIP, verification INDEPENDENTLY VERIFIED; no verifier: None" || no "verification field"
+[ "$(st C1)" = WOULD-FLIP ] && [ "$(vf C1)" = "CODE-PROOF-IV" ] && [ "$(vf C2)" = WOULD-FLIP ] && [ "$(vf C3)" = IV ] && [ "$(vf C4)" = None ] && ok "verification: gated+verifier CODE-PROOF-IV, gated alone WOULD-FLIP, ungated+verifier IV, neither None" || no "verification field"
 run --out-md "$S/v.md" >/dev/null
-grep -q '^| C1 .*WOULD-FLIP; code INDEPENDENTLY VERIFIED' "$S/v.md" && grep -q 'code INDEPENDENTLY VERIFIED (any gate) 2' "$S/v.md" && ok "markdown shows 'WOULD-FLIP; code INDEPENDENTLY VERIFIED' and the any-gate count" || no "verification markdown"
+grep -q '^| C1 .*WOULD-FLIP; code proof CODE-PROOF-IV' "$S/v.md" && grep -q 'Verification (one field, `verification`): IV 1, CODE-PROOF-IV 1, WOULD-FLIP 1, FAILED 0' "$S/v.md" && grep -q 'Code-proof IV .*: 2 (C1 C3)' "$S/v.md" && ok "markdown shows 'WOULD-FLIP; code proof CODE-PROOF-IV' and the unified verification counts" || no "verification markdown"
 # f398: real SPEC carries independent verifiers for C5 and C7 (different command AND different basenames), and the matrix still refuses a copy of the primary
 python3 - <<'PY' || no "C5/C7 real verifiers"
 import sys,copy; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
@@ -157,6 +174,35 @@ for k in ("C5","C7"):
     except m.Structural: pass
 PY
 ok "real C5 and C7 verifiers are independent; identical or shared-basename verifier for either is refused (exit 2)"
+
+# f400 regression: the two old field names. f398 'verification' used to hold "INDEPENDENTLY VERIFIED"; f399 'code_proof' used to exist.
+python3 -c "
+import json;d=json.load(open('$S/o.json'))
+for c in d['chunks']:
+    assert 'code_proof' not in c, 'old f399 field code_proof came back'
+    assert c['verification'] in (None,'IV','CODE-PROOF-IV','WOULD-FLIP','FAILED'), c['verification']
+    assert c['verification']!='INDEPENDENTLY VERIFIED', 'old f398 value came back'
+assert 'code_independently_verified_any_gate' not in d['verification'] and d['verification']['code_proof_iv']==2" && ok "regression f398/f399: no 'code_proof' key, no 'INDEPENDENTLY VERIFIED' in verification, only IV/CODE-PROOF-IV/WOULD-FLIP/FAILED" || no "old field names"
+python3 - <<'PY' && ok "regression f399: the old code_proof value cannot be reintroduced (verification_of maps every status; unknown stays None)" || no "verification_of"
+import sys; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
+f=m.verification_of
+assert f({"status":"FAILED"},True)=="FAILED" and f({"status":"WOULD-FLIP"},True)=="CODE-PROOF-IV" and f({"status":"WOULD-FLIP"},False)=="WOULD-FLIP"
+assert f({"status":"INDEPENDENTLY VERIFIED"},True)=="IV" and f({"status":"TESTED"},False) is None and f({"status":"UNKNOWN"},False) is None
+PY
+# f400: the whole REAL matrix, run fresh against the real plan: C1..C10 all carry code-proof IV, the five gated kill tests stay WOULD-FLIP, nothing claimed that a live gate has not flipped
+PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
+if [ -f "$PLAN" ] && [ "${KM_SKIP_WHOLE:-0}" != 1 ]; then
+  python3 "$M" --plan "$PLAN" --repo "$HERE/.." --out-json "$S/w.json" --out-md "$S/w.md" >"$S/w.out" 2>"$S/w.err"; rc=$?
+  [ $rc = 0 ] && ok "whole matrix runs fresh, exit 0" || no "whole matrix rc=$rc $(tail -3 "$S/w.err")"
+  grep -q '^Counts: UNKNOWN 0, PROPOSED 0, IMPLEMENTED 0, TESTED 0, INDEPENDENTLY VERIFIED 5, FAILED 0, WOULD-FLIP 5$' "$S/w.md" && ok "counts line: INDEPENDENTLY VERIFIED 5, WOULD-FLIP 5, FAILED 0" || no "counts line: $(grep '^Counts' "$S/w.md")"
+  grep -q 'Verification (one field, `verification`): IV 5, CODE-PROOF-IV 5, WOULD-FLIP 0, FAILED 0. Code-proof IV .*: 10 (C1 C2 C3 C4 C5 C6 C7 C8 C9 C10)' "$S/w.md" && ok "rendered markdown: code-proof IV 10 (C1..C10 together)" || no "verification line: $(grep '^Verification' "$S/w.md")"
+  python3 -c "
+import json;c={x['id']:x for x in json.load(open('$S/w.json'))['chunks']}
+g=[k for k in c if c[k]['status']=='WOULD-FLIP']
+assert g==['C1','C4','C5','C7','C10'],g
+assert all(c[k]['verification']=='CODE-PROOF-IV' for k in g)
+assert all(c[k]['verification']=='IV' and c[k]['status']=='INDEPENDENTLY VERIFIED' for k in c if k not in g)" && ok "gated C1 C4 C5 C7 C10 stay WOULD-FLIP with CODE-PROOF-IV; the other five are IV" || no "gated rows"
+fi
 PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
 if [ -f "$PLAN" ]; then
   python3 "$M" --plan "$PLAN" --no-run >/dev/null 2>"$S/err"; rc=$?
