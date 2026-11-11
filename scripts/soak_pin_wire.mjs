@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // soak_pin_wire.mjs - WIRING for the SOAK RULE (f412, C10, 2026-11-11). Calls f397 scripts/soak_pin_matrix_gate.mjs (never re-implements it).
 //   soak tick : node scripts/soak_pin_wire.mjs tick  --matrix M --pin P --x3 X [--x3 X ...] --repo R --ref REF [--marker state/soak/RESTART.json]
+//   stamp     : node scripts/soak_pin_wire.mjs stamp --pin P [--manifest scripts/export_pages.json]   adds manifest_sha256 + routes_count to the pin (f431)
+//   (tick always passes --manifest, default scripts/export_pages.json: a changed manifest = the gate's RESTART, same marker, x3 must re-run)
 //   pre-merge : node scripts/soak_pin_wire.mjs merge --pin P --repo R [--marker ...] [--accept-restart]
 // tick: gate PASS (exit 0) is the only pass. FAIL/ERROR/RESTART/anything else = exit 1 and a restart marker (the soak does not count; x3 must re-run on the new sha).
 // merge: no PIN.json = no soak running = exit 0. A live pin means a merge moves the head and restarts the soak: exit 1 + marker unless --accept-restart,
@@ -8,10 +10,23 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+import { manifestFacts } from "./soak_pin_matrix_gate.mjs";
 import { fileURLToPath } from "node:url";
 
 export const GATE = fileURLToPath(new URL("./soak_pin_matrix_gate.mjs", import.meta.url));
 export const DEFAULT_MARKER = "state/soak/RESTART.json";
+export const DEFAULT_MANIFEST = fileURLToPath(new URL("./export_pages.json", import.meta.url));
+
+// Adds manifest_sha256 + routes_count to an existing pin record. Fails closed (code 1) on a bad manifest or unreadable pin; never writes then.
+export function stampPin({ pin, manifest = DEFAULT_MANIFEST }) {
+  const f = manifestFacts(manifest);
+  if (f.err) return { code: 1, line: `SOAKWIRE STAMP FAIL ${f.err}` };
+  let j;
+  try { j = JSON.parse(readFileSync(pin || "", "utf8")); } catch { return { code: 1, line: `SOAKWIRE STAMP FAIL pin unreadable or not JSON: ${pin}` }; }
+  if (!j || typeof j !== "object" || Array.isArray(j)) return { code: 1, line: `SOAKWIRE STAMP FAIL pin is not a JSON object: ${pin}` };
+  writeFileSync(pin, JSON.stringify({ ...j, manifest_sha256: f.sha256, routes_count: f.routes_count }, null, 2));
+  return { code: 0, line: `SOAKWIRE STAMP OK manifest_sha256 ${f.sha256.slice(0, 12)} routes_count ${f.routes_count}` };
+}
 
 export function writeMarker(path, reason, extra = {}) {
   mkdirSync(dirname(path), { recursive: true });
@@ -19,8 +34,8 @@ export function writeMarker(path, reason, extra = {}) {
 }
 
 // -> {code, line}. code 0 only when the f397 gate printed PASS and exited 0.
-export function tickGate({ matrix, pin, x3 = [], repo, ref, head, marker = DEFAULT_MARKER, gate = GATE }) {
-  const args = [gate, "--matrix", matrix || "", "--pin", pin || "", ...x3.flatMap((x) => ["--x3", x])];
+export function tickGate({ matrix, pin, x3 = [], repo, ref, head, marker = DEFAULT_MARKER, gate = GATE, manifest = DEFAULT_MANIFEST }) {
+  const args = [gate, "--matrix", matrix || "", "--pin", pin || "", ...x3.flatMap((x) => ["--x3", x]), "--manifest", manifest];
   if (head) args.push("--head", head); else args.push("--repo", repo || "", "--ref", ref || "");
   const r = spawnSync("node", args, { encoding: "utf8" });
   const line = ((r.stdout || "") + (r.stderr || "")).trim().split("\n").pop() || "";
@@ -55,7 +70,7 @@ function parse(argv) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [mode, ...rest] = process.argv.slice(2);
   const a = parse(rest);
-  const r = mode === "tick" ? tickGate(a) : mode === "merge" ? mergeGate(a) : { code: 1, line: "SOAKWIRE FAIL usage: tick|merge" };
+  const r = mode === "tick" ? tickGate(a) : mode === "stamp" ? stampPin(a) : mode === "merge" ? mergeGate(a) : { code: 1, line: "SOAKWIRE FAIL usage: tick|merge|stamp" };
   console.log(r.line);
   process.exit(r.code);
 }

@@ -13,14 +13,18 @@ const A = "a".repeat(40), B = "b".repeat(40);
 const d = mkdtempSync(join(tmpdir(), "spw-"));
 if (!d.startsWith(tmpdir())) throw new Error("bad tmp");
 const w = (n, o) => { const p = join(d, n); writeFileSync(p, typeof o === "string" ? o : JSON.stringify(o)); return p; };
+const manifest = w("export_pages.json", JSON.stringify({ routes_count: 2, routes: ["/", "/a"] }, null, 2) + "\n");
+const { manifestFacts } = await import("./soak_pin_matrix_gate.mjs");
+const mf = manifestFacts(manifest);
+const stamp = (o) => ({ ...o, manifest_sha256: mf.sha256, routes_count: mf.routes_count });
 const marker = join(d, "state", "soak", "RESTART.json");
 const clear = () => rmSync(join(d, "state"), { recursive: true, force: true });
 const x3 = (sha, i, extra = {}) => w(`X3_${i}.json`, { sha, verdict: "CLEAN", x3_open_p0p1: 0, ...extra });
 const node = (script, args) => { const r = spawnSync("node", [script, ...args], { encoding: "utf8" }); return { code: r.status, out: (r.stdout + r.stderr).trim() }; };
 const tickArgs = (o = {}) => {
   const xs = o.x3 === null ? [] : (o.x3 ?? [A, A, A]).map((s, i) => x3(s, i + 1, o.extra?.[i] ?? {}));
-  return ["tick", "--matrix", w("m.json", { head: o.mh ?? A }), "--pin", o.noPin ? join(d, "none.json") : w("pin.json", { sha: o.ps ?? A }),
-    ...xs.flatMap((x) => ["--x3", x]), "--head", o.head ?? A, "--marker", marker];
+  return ["tick", "--matrix", w("m.json", { head: o.mh ?? A }), "--pin", o.noPin ? join(d, "none.json") : w("pin.json", stamp({ sha: o.ps ?? A })),
+    ...xs.flatMap((x) => ["--x3", x]), "--head", o.head ?? A, "--manifest", manifest, "--marker", marker];
 };
 const tick = (name, o, code, word, wantMarker) => {
   clear(); const r = node(WIRE, tickArgs(o));
@@ -70,8 +74,8 @@ mg("merge, short sha pin fails closed", w("short.json", { sha: "abc" }), ["--acc
   mkdirSync(join(d, "repo")); g("init", "-q", "-b", "main"); g("config", "user.email", "t@t"); g("config", "user.name", "t");
   writeFileSync(join(d, "repo", "f"), "1"); g("add", "."); g("commit", "-qm", "one");
   const sha1 = g("rev-parse", "HEAD").stdout.trim();
-  const args = (sha) => ["tick", "--matrix", w("m2.json", { head: sha }), "--pin", w("p2.json", { sha }),
-    ...[1, 2, 3].flatMap((i) => ["--x3", x3(sha, "g" + i)]), "--repo", join(d, "repo"), "--ref", "main", "--marker", marker];
+  const args = (sha) => ["tick", "--matrix", w("m2.json", { head: sha }), "--pin", w("p2.json", stamp({ sha })),
+    ...[1, 2, 3].flatMap((i) => ["--x3", x3(sha, "g" + i)]), "--repo", join(d, "repo"), "--ref", "main", "--manifest", manifest, "--marker", marker];
   clear(); let r = node(WIRE, args(sha1)); ok(r.code === 0 && r.out.includes("PASS"), "real git head == pin passes");
   writeFileSync(join(d, "repo", "f"), "2"); g("commit", "-qam", "two");
   clear(); r = node(WIRE, args(sha1)); ok(r.code === 1 && existsSync(marker), "real git: commit merged after pin restarts the soak");
