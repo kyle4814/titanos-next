@@ -63,3 +63,5 @@ web/f411_c10_tap_residual_burndown-2026-11-10 deferred: homepage height budget 3
 web/f413_c10_sweep_stylesheet_wait-2026-11-11 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
 web/f372_c10_home_reachability_depth-2026-11-10 deferred: homepage height budget 31500 exceeded (footer column adds phone height); re-fold after the shorter homepage (97a93e827 line) is on the int branch
 web/f425_c8_payout_held_operator_view-2026-11-11 deferred: migration_lint fails (AttentionStatus union [held,approved_retry] has no CHECK mapping or allowlist entry); needs a PAIR/allowlist entry on its own branch
+web/f377_c2_getoverview_read_no_write-2026-11-10 deferred: removes the write on GET /app/domains/:id that portal-api/test/cron.test.ts relies on to switch the monitor on (cron: 11 failures); branch must update cron.test rig
+web/f402_c2_state_change_origin_session_matrix-2026-11-10 deferred: new origin check returns 403 for POST with foreign origin, breaking cors_all_paths (11) and post_fuzz (~30) tests; those tests must send an allowed origin or the check must exempt them
