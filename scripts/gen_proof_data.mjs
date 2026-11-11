@@ -5,6 +5,9 @@
 // to the newest older snapshot that measured it, WITH that snapshot's date, so markStale shows it as UNKNOWN once it is
 // over 30 days old instead of the old figure looking current (EV6). Every chart and star carries its own row's date.
 //   lib/efficiency/efficiency.json                 (the efficiency page's own data)
+// A row (chart, star, headline, fleet-cost note) whose own measurement date is more than MAX_DAYS before the newest snapshot
+// has no live source, so it is RETIRED from the page instead of showing "UNKNOWN now". The ids are listed in proof.json
+// "retired" with the date last measured, so nothing disappears silently. markStale in proofLive.ts stays as the render-time backstop.
 // No number is typed here: every figure is parsed or computed from those two files. A baseline row whose source has no
 // public label stops the run, so an internal path or tool name can never reach the page by accident.
 // Usage: node scripts/gen_proof_data.mjs [--refresh] [--check]   (--check: exit 1 if proof.json is stale)
@@ -17,7 +20,10 @@ const P = (p) => new URL(p, root);
 const SRC = "lib/site-data/source";
 const BASE_RE = /^BASELINE_\d{4}-\d{2}-\d{2}\.json$/;
 const baselines = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => BASE_RE.test(f)).sort() : []);
-const FLEET_SNAP = "lib/site-data/source/FLEET_LEDGER_2026-10-12.json"; // scripts/measure_fleet_ledger.mjs: the fleet row, re-measured
+const LANE_RE = /^LANES_\d{4}-\d{2}-\d{2}\.json$/; // scripts/measure_chain_lanes.mjs: the work-rate row, re-measured from the build-lane status record
+const laneFile = readdirSync(new URL("lib/site-data/source", root)).filter((f) => LANE_RE.test(f)).sort().at(-1);
+if (!laneFile) throw new Error("no LANES_<day>.json in lib/site-data/source: run scripts/measure_chain_lanes.mjs --day <day> --write");
+const FLEET_SNAP = `lib/site-data/source/${laneFile}`;
 const OUT = "lib/site-data/proof.json";
 
 if (process.argv.includes("--refresh")) {
@@ -126,7 +132,6 @@ const ramRow = row("Linux RAM used / available (GB)");
 const vmRow = row("vmmem MB");
 const winRow = row("Windows available MB");
 const cronH = row("cron job-hours/day (last 24 h)");
-const jph = row("fleet jobs/hour (last 24 h)");
 const startTok = row("worker start tokens (median)");
 
 const headline = fromEff("cost_per_job", "Cost of one worker job");
@@ -135,7 +140,6 @@ const charts = [
   mk({ id: "vmmem", title: "Windows VM memory", group: "Machine", suffix: " GB", dp: 1, before: num(vmRow.baseline, /^([\d.]+) GB/, "vmmem before"), after: mbToGb(num(vmRow.now, /^([\d.]+)/, "vmmem now")), better: "lower", label: vmRow.kind, source: pubSource(vmRow.source), method: "Process memory counter, megabytes divided by 1024.", date: vmRow.date }),
   mk({ id: "win_free", title: "Windows memory free", group: "Machine", suffix: " GB", dp: 1, before: num(winRow.baseline, /^([\d.]+) GB/, "win before"), after: mbToGb(num(winRow.now, /^([\d.]+)/, "win now")), better: "higher", label: winRow.kind, source: pubSource(winRow.source), method: "Memory counter, megabytes divided by 1024.", date: winRow.date }),
   mk({ id: "cron_hours", title: "Scheduled work per day", group: "Machine", suffix: " h", dp: 2, before: num(cronH.baseline, /^([\d.]+) h/, "cron before"), after: num(cronH.now, /^([\d.]+) h/, "cron now"), better: "lower", label: cronH.kind, source: pubSource(cronH.source), method: "Sum of job run time over a 24 hour window.", date: cronH.date }),
-  mk({ id: "jobs_per_hour", title: "Worker jobs finished per hour", group: "Fleet", dp: 2, before: num(jph.baseline, /\(([\d.]+)\/h\)/, "jph before"), after: fleet.jobsPerHour, better: "higher", label: jph.kind, source: pubSource(jph.source), method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished. The before figure is the ${jph.date} baseline snapshot.`, date: fleet.measuredAt }),
   mk({ id: "worker_start", title: "Tokens a worker reads before its first action", group: "AI cost", dp: 0, suffix: " tokens", before: num(startTok.baseline, /~(\d+)k/, "tok before") * 1000, after: num(startTok.now, /^([\d,]+)/, "tok now"), better: "lower", label: startTok.kind, source: pubSource(startTok.source), method: "Median across worker sessions at start.", date: startTok.date }),
   fromEff("cron_snapshot", "State snapshot, time per run"),
   fromEff("cron_mirror", "Cloud mirror, time per run"),
@@ -167,18 +171,15 @@ const baseStar = (id, group, r, display, caption, label = "MEASURED", method) =>
 
 const loadRow = row("load 1m / 5m");
 const cronF = row("cron failure rate (last 24 h)");
-const fFail = row("fleet fail rate (last 24 h)");
-const fMed = row(["fleet median minutes/job (last 24 h)", "fleet median minutes/job"]);
 const gate = row("kernel gate wall (latest)");
-const suite = row("titanos suite wall (latest)");
 // The live backup is the rolling backup (newest commit = last saved pass). archive.log is the archive cron, frozen since
 // 2026-10-13, so it is only the fallback; a snapshot without the rolling row falls back to it with its own date.
 const bak = row(["newest rolling backup age (git commit)", "newest backup age (archive.log)"]);
 
-const fleetStar = (id, display, caption) => star({ id, group: "Fleet", display, caption, label: "MEASURED", source: "Worker fleet job ledger", system: fleet.system, date: fleet.measuredAt, method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished (${fleet.counts.done} done, ${fleet.counts.fail + fleet.counts.stuck} failed or stuck). Live reading now: ${fleet.liveNow}.` });
-fleetStar("s_jobs", `${fmt(fleet.jobsPerHour, 2)} jobs an hour`, `Worker jobs finished on ${fleet.measuredAt}, one full day (${fleet.counts.finished} finished over 24 hours)`);
-fleetStar("s_fail", `${fleet.counts.fail + fleet.counts.stuck} of ${fleet.counts.finished}`, `Fleet jobs that failed on ${fleet.measuredAt}, ${fleet.failRatePct}%`);
-fleetStar("s_median", `${fmt(fleet.medianMinutes, 1)} min`, `Median time per job across ${fleet.counts.startToDonePairs} jobs on ${fleet.measuredAt}`);
+const fleetStar = (id, display, caption) => star({ id, group: "Fleet", display, caption, label: "MEASURED", source: "Build lane status record", system: fleet.system, date: fleet.measuredAt, method: `${fleet.method} Window: ${fleet.window}. ${fleet.counts.finished} finished (${fleet.counts.done} done, ${fleet.counts.fail + fleet.counts.stuck} failed).` });
+fleetStar("s_jobs", `${fmt(fleet.jobsPerHour, 2)} lanes an hour`, `Build lanes finished on ${fleet.measuredAt}, one full day (${fleet.counts.finished} finished over 24 hours)`);
+fleetStar("s_fail", `${fleet.counts.fail + fleet.counts.stuck} of ${fleet.counts.finished}`, `Build lanes that failed on ${fleet.measuredAt}, ${fleet.failRatePct}%`);
+fleetStar("s_median", `${fmt(fleet.medianMinutes, 1)} min`, `Median time per lane across ${fleet.counts.startToDonePairs} lanes on ${fleet.measuredAt}`);
 baseStar("s_usd_job", "AI cost", usdRow, fleetCost.afterText, `Fleet-wide cost per job over ${fleetCost.jobsText} jobs. An upper bound: it includes the orchestrator.`, usdRow.kind, usdRow.note);
 baseStar("s_usd_today", "AI cost", usdRow, fleetCost.todayText, "Spent in one day, API-equivalent pricing", usdRow.kind, usdRow.note);
 baseStar("s_tokens", "AI cost", startTok, `${fmt(num(startTok.now, /^([\d,]+)/, "t"), 0)} tokens`, `Median a worker reads before acting, ${startTok.now.match(/\((\d+) sessions/)[1]} sessions`, startTok.kind);
@@ -191,7 +192,6 @@ baseStar("s_cronf", "Machine", cronF, cronF.now.match(/\(([\d.]+%)\)/)[1], `Sche
   "All scheduled jobs in 24 hours now, against one failing snapshot job before. Different bases, shown separately.");
 baseStar("s_gate", "Build", gate, gate.now.match(/^(\d+ s)/)[1], `Latest gate run, ${gate.now.match(/(\d+) suites/)[1]} suites, green`, "MEASURED", "Recorded by the gate runner at the time shown in the run record.");
 baseStar("s_backup", "Safety", bak, bak.now.replace(" old", ""), "Age of the newest backup", bak.kind, "Time since the newest saved backup pass, read from the backup history on the date shown.");
-star({ id: "s_suite", group: "Build", display: "No number yet", caption: "Wall time of the main codebase suite", label: "UNKNOWN", source: pubSource(suite.source), date: suite.date, method: "That suite does not log its own run time, so we show no figure. A recorder is the next fix." });
 
 for (const id of ["cost_per_job", "daily_spend", "recall50", "heldout", "killtest", "cron_snapshot", "cron_mirror", "cron_bundle", "repo_size", "titanos_suite"]) {
   const m = E(id);
@@ -199,23 +199,34 @@ for (const id of ["cost_per_job", "daily_spend", "recall50", "heldout", "killtes
   star({ id: `e_${id}`, group: m.group, display: id === "recall50" || id === "heldout" || id === "killtest" ? f(m.after) : `${f(m.before)} to ${f(m.after)}`, caption: m.label, label: m.status, source: m.source, date: m.date, method: m.method });
 }
 
+// ---- retire rows with no live source --------------------------------------------------------------------------------
+const baseDay = base.ts.slice(0, 10);
+const ageOf = (d) => Math.floor((Date.parse(baseDay) - Date.parse(d)) / 86400000);
+const stale = (x) => x && ageOf(x.date) > 30;
+const retired = [];
+const keep = (kind, list) => list.filter((x) => { if (stale(x)) { retired.push({ kind, id: x.id, lastMeasured: x.date, reason: "no live source; removed instead of showing UNKNOWN" }); return false; } return true; });
+const keptCharts = keep("chart", charts), keptStars = keep("star", stars);
+if (stale(headline)) retired.push({ kind: "headline", id: headline.id, lastMeasured: headline.date, reason: "no live source; removed instead of showing UNKNOWN" });
+if (stale(fleetCost)) retired.push({ kind: "fleetCost", id: "fleet_cost", lastMeasured: fleetCost.date, reason: "no live source; removed instead of showing UNKNOWN" });
+charts.splice(0, charts.length, ...keptCharts); stars.splice(0, stars.length, ...keptStars);
+
 // ---- learning loop: each node opens a receipt (a star id) ------------------------------------------------------------
 const loopSrc = readFileSync(P("app/learning-loop/page.tsx"), "utf8");
 const stepBlock = loopSrc.match(/const STEPS = \[([\s\S]*?)\n\];/)[1];
 const steps = [...stepBlock.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map((m) => ({ name: m[1], text: m[2] }));
-const receiptIds = ["s_jobs", "s_median", "e_cron_snapshot", "s_gate", "e_cost_per_job", "e_cost_per_job", "s_jobs"];
+const receiptIds = ["s_jobs", "s_median", "s_ram", "s_gate", "s_fail", "s_cronh", "s_jobs"];
 if (steps.length !== receiptIds.length) throw new Error(`loop has ${steps.length} steps, receipts ${receiptIds.length}`);
 const loop = steps.map((s, i) => ({ n: i + 1, ...s, receipt: receiptIds[i] }));
 
-charts.find((c) => c.id === "jobs_per_hour").system = fleet.system;
 for (const x of [...charts, ...stars]) x.system ??= x.source;
 const labelCounts = Object.fromEntries(Object.keys(LABELS).map((k) => [k, stars.filter((s) => s.label === k).length]));
 const out = {
   generated: { from: [...snaps.map((s) => s.file).filter((f) => usedSnaps.has(f)), FLEET_SNAP, "lib/efficiency/efficiency.json"], baselineTs: base.ts, sha256: createHash("sha256").update(snapText).digest("hex").slice(0, 16) },
   labels: LABELS,
   labelCounts,
-  headline: { ...headline, titleText: eff.headline.title.replace("{factor}", fmt(headline.before / headline.after, 1)), analogy: eff.headline.analogy, caption: eff.headline.caption },
-  fleetCost,
+  headline: stale(headline) ? null : { ...headline, titleText: eff.headline.title.replace("{factor}", fmt(headline.before / headline.after, 1)), analogy: eff.headline.analogy, caption: eff.headline.caption },
+  fleetCost: stale(fleetCost) ? null : fleetCost,
+  retired,
   charts,
   loop,
   stars,

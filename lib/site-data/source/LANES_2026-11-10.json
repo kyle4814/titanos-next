@@ -1,0 +1,21 @@
+{
+ "system": "TitanOS build lanes (status record of every lane)",
+ "measuredAt": "2026-11-10",
+ "window": "2026-11-10 00:00 to 23:59 local (one complete calendar day, 24 h)",
+ "method": "Count lanes whose final status (done or failed) is stamped that day; lanes an hour = finished / 24; fail rate = failed / finished; median = latest start to finish, in minutes. A lane that failed and was re-run shows only its final status.",
+ "counts": {
+  "done": 278,
+  "fail": 3,
+  "stuck": 0,
+  "finished": 281,
+  "startToDonePairs": 278
+ },
+ "jobsPerHour": 11.71,
+ "failRatePct": 1.1,
+ "medianMinutes": 10.4,
+ "record": {
+  "lanes": 1565,
+  "runningNow": 6,
+  "sha256": "cb2342c9270f973e"
+ }
+}

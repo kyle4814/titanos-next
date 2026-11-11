@@ -75,18 +75,21 @@ if (process.argv[1] && process.argv[1].endsWith("test_proof_freshness.mjs")) {
   const unk = render(rows).filter((r) => r.value === "UNKNOWN"), unkC = render(claims.rows).filter((r) => r.value === "UNKNOWN");
   console.log(`REPORT ${unk.length} of ${rows.length} proof.json rows and ${unkC.length} of ${claims.rows.length} claims-ledger rows now render UNKNOWN (older than ${MAX_DAYS} days on ${today}); re-measure queue: ${[...new Set([...unk, ...unkC].map((r) => `${r.id}@${r.lastMeasured}`))].join(", ") || "none"}`);
 
-  // the fleet row reproduces from the ledger
-  const snap = J("lib/site-data/source/FLEET_LEDGER_2026-10-12.json");
+  // the work-rate row reproduces from the build-lane record, and nothing stale is left on the page
+  const snap = J("lib/site-data/source/LANES_2026-11-10.json");
   const star = (id) => proof.stars.find((s) => s.id === id);
-  ok(star("s_jobs").date === snap.measuredAt && star("s_jobs").display.startsWith(String(snap.jobsPerHour)), "s_jobs equals the fleet snapshot (value and date)");
-  ok(star("s_fail").caption.includes(`${snap.failRatePct}%`), "s_fail equals the fleet snapshot");
-  ok(/UNKNOWN/.test(star("s_jobs").method), "s_jobs method states the live reading is UNKNOWN while the ledger is not writing");
-  const ledger = `${homedir()}/klinge-kernel/state/fleet/ledger.jsonl`;
-  if (existsSync(ledger)) {
-    const m = spawnSync("node", ["scripts/measure_fleet_ledger.mjs", "--day", snap.measuredAt, "--ledger", ledger], { cwd: root.pathname, encoding: "utf8" });
+  ok(star("s_jobs").date === snap.measuredAt && star("s_jobs").display.startsWith(String(snap.jobsPerHour)), "s_jobs equals the lane snapshot (value and date)");
+  ok(star("s_fail").caption.includes(`${snap.failRatePct}%`), "s_fail equals the lane snapshot");
+  ok(star("s_median").display.startsWith(String(snap.medianMinutes)), "s_median equals the lane snapshot");
+  ok(Array.isArray(proof.retired) && proof.retired.every((r) => r.id && r.lastMeasured), "retired rows are listed with their last-measured date, none dropped silently");
+  const shown = [...proof.charts, ...proof.stars, ...[proof.headline, proof.fleetCost].filter(Boolean)];
+  ok(shown.every((r) => (Date.parse(proof.generated.baselineTs.slice(0, 10)) - Date.parse(r.date)) / 86400000 <= MAX_DAYS), "no row older than 30 days at the snapshot date is kept on the page (retired, not shown as UNKNOWN)");
+  const lanes = `${homedir()}/klinge-kernel/state/charter`;
+  if (existsSync(`${lanes}/chain`)) {
+    const m = spawnSync("node", ["scripts/measure_chain_lanes.mjs", "--day", snap.measuredAt, "--root", lanes], { cwd: root.pathname, encoding: "utf8" });
     const live = m.status === 0 ? JSON.parse(m.stdout) : null;
-    ok(live && live.counts.finished === snap.counts.finished && live.jobsPerHour === snap.jobsPerHour && live.failRatePct === snap.failRatePct, "fleet row re-derived from the live ledger matches the snapshot");
-  } else console.log("SKIP ledger not readable here, reproduction check not run");
+    ok(live && live.counts.finished === snap.counts.finished && live.jobsPerHour === snap.jobsPerHour && live.failRatePct === snap.failRatePct && live.medianMinutes === snap.medianMinutes, "lane row re-derived from the live lane record matches the snapshot");
+  } else console.log("SKIP lane record not readable here, reproduction check not run");
   console.log(`${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

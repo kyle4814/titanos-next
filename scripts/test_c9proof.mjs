@@ -63,7 +63,8 @@ ok(sec.rows.length === J("lib/site-data/sectors.json").length && sec.rows.length
 ok(sec.rows.every((r) => labels.includes(r.label) && r.value && r.note), "every sector row has a valid claim label, a value and a note");
 ok(sec.rows.every((r) => r.label === "UNKNOWN" || r.source), "every non-UNKNOWN sector number names a source");
 ok(claims.rows.every((r) => labels.includes(r.label) && r.source && /^\d{4}-\d{2}-\d{2}/.test(r.date) && r.method), "every claims-ledger row has label, source, date and method");
-ok(claims.rows.some((r) => r.label === "UNKNOWN") && claims.rows.some((r) => r.label === "MODELLED"), "claims ledger keeps its UNKNOWN and MODELLED rows");
+// 2026-11-11: the UNKNOWN suite row and the MODELLED daily-spend row were retired from proof.json (no live source), so the ledger no longer carries them.
+ok(claims.rows.every((r) => r.label !== "UNKNOWN"), "claims ledger carries no UNKNOWN row (retired, not shown)");
 ok(sec.compiled && sec.licence && claims.licence, "datasets carry a compiled date and a licence line");
 ok(R("public/data/sector-index.csv").trim().split("\n").length === sec.rows.length + 1, "CSV row count equals JSON row count");
 ok(R("app/sectors/page.tsx").includes('href="/open-data"'), "Sector Index links to the open data page");
