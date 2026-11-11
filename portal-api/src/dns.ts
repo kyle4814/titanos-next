@@ -29,7 +29,8 @@ export function dohResolver(fetchFn: typeof fetch = fetch, opts: { timeoutMs?: n
       const work = (async () => {
         const r = await fetchFn(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=TXT`, { headers: { accept: "application/dns-json" }, signal: ctl.signal });
         if (!r.ok) throw new Error(`doh_${r.status}`);
-        const j = (await r.json()) as { Answer?: { type: number; data: string }[] };
+        const j = (await r.json()) as { Status?: number; Answer?: { type: number; data: string }[] };
+        if (j.Status !== undefined && j.Status !== 0) return []; // NXDOMAIN/SERVFAIL etc: never trust an Answer beside a failure code
         return (j.Answer ?? []).filter((a) => a.type === 16).map((a) => a.data.replace(/^"|"$/g, "").replace(/" "/g, ""));
       })();
       work.catch(() => {}); // a late rejection after the deadline must not surface as unhandled
