@@ -124,6 +124,7 @@ node --experimental-strip-types --no-warnings scripts/test_catalogue_reader.mjs
 bash scripts/test_catalogue_reader_mutants.sh
 node --experimental-strip-types --no-warnings scripts/test_retraction_read.mjs
 bash scripts/test_retraction_read_mutants.sh
+node --experimental-strip-types --no-warnings scripts/test_shelf_scale_drill.mjs
 node scripts/test_merge_base_red_precheck.mjs
 node scripts/test_partner_book_ui.mjs
 node scripts/test_test_manifest.mjs
