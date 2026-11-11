@@ -33,10 +33,15 @@ function readyInPage(probe) {
     let p = probe;
     if (probe === "auto") { // first top-level `.class{decl}` rule in a readable sheet, declaration free of var()/inherit
       p = null;
+      // A class named by more than one rule (a media override, a grouped selector) is not a safe probe: the cascade may legitimately differ from its base declaration.
+      const uses = new Map();
+      const tally = (rs) => { for (const r of rs) { if (r.cssRules) tally(r.cssRules); if (!r.selectorText) continue; for (const m of r.selectorText.matchAll(/\.([A-Za-z_][\w-]*)/g)) uses.set(m[1], (uses.get(m[1]) || 0) + 1); } };
+      for (const sh of document.styleSheets) { try { tally(sh.cssRules); } catch { /* cross-origin */ } }
       outer: for (const sh of document.styleSheets) {
         let rules; try { rules = sh.cssRules; } catch { continue; }
         for (const r of rules) {
           if (r.type !== 1 || !/^\.[A-Za-z_][\w-]*$/.test(r.selectorText)) continue;
+          if (uses.get(r.selectorText.slice(1)) !== 1) continue;
           for (let i = 0; i < r.style.length; i++) {
             const prop = r.style[i], value = r.style.getPropertyValue(prop);
             if (prop.startsWith("--") || /var\(|inherit|initial|unset|revert|env\(|calc\(/.test(value)) continue;
