@@ -169,3 +169,5 @@ node scripts/test_soak_pin_wire.mjs
 node scripts/test_export_page_manifest.mjs
 node scripts/test_text_sanity_fast.mjs
 node scripts/test_viewport_overflow.mjs
+node --experimental-strip-types --no-warnings scripts/test_ledger_unsourced.mjs
+node scripts/test_figure_freshness_forecast.mjs

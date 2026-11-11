@@ -274,7 +274,8 @@
       "source_path": null,
       "derived_from": [],
       "measured": "2026-10-09",
-      "traceable": false
+      "traceable": false,
+      "source_status": "UNSOURCED"
     },
     "compute_build_total_aud": {
       "as_of": "2026-10-09",
@@ -300,7 +301,8 @@
       "source_path": null,
       "derived_from": [],
       "measured": "2026-10-09",
-      "traceable": false
+      "traceable": false,
+      "source_status": "UNSOURCED"
     },
     "core_ey": {
       "as_of": "2026-10-13T04:05:02",

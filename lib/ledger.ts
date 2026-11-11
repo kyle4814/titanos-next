@@ -3,31 +3,47 @@
 import ledger from "./ledger.json";
 
 export type LedgerKey = keyof typeof ledger.n;
-export type Entry = { value: number; unit: string; label: string; method: string; source: string; as_of: string };
+export type Entry = { value: number; unit: string; label: string; method: string; source: string; as_of: string; source_status?: string };
 
 export const LEDGER = ledger.n as unknown as Record<LedgerKey, Entry>;
+/** Raw number. Math on an UNSOURCED key must go through tag() or the label is lost (scripts/test_ledger_unsourced.mjs scans for this). */
 export const v = (k: LedgerKey): number => LEDGER[k].value;
+
+/** C9 (f395): a row with source_status "UNSOURCED" has no receipt behind it. It may only be shown with this label. */
+export const ESTIMATE_LABEL = "estimate, source pending";
+/** True when the row is marked UNSOURCED, or any ledger key named in its source field is (derived rows inherit). */
+export function isUnsourced(k: string, seen: Set<string> = new Set()): boolean {
+  const e = (LEDGER as Record<string, Entry | undefined>)[k];
+  if (!e || seen.has(k)) return false;
+  seen.add(k);
+  if (e.source_status === "UNSOURCED") return true;
+  return String(e.source || "").split(/[^A-Za-z0-9_]+/).some((t) => t !== k && t in LEDGER && isUnsourced(t, seen));
+}
+/** Wrap a rendered figure: an UNSOURCED figure can never come out as plain fact. */
+export const tag = (k: LedgerKey, text: string): string => (isUnsourced(k) ? `${text} (${ESTIMATE_LABEL})` : text);
 export const label = (k: LedgerKey): string => LEDGER[k].label;
 export const method = (k: LedgerKey): string => LEDGER[k].method;
 
 /** 226892 -> "226,892" */
-export const int = (k: LedgerKey): string => Math.round(v(k)).toLocaleString("en-AU");
+export const int = (k: LedgerKey): string => tag(k, Math.round(v(k)).toLocaleString("en-AU"));
 /** 59.5 -> "59.5"; keeps the ledger's own decimals */
-export const dec = (k: LedgerKey): string => String(v(k));
+export const dec = (k: LedgerKey): string => tag(k, String(v(k)));
 /** 24200000 -> "AU$24 million"; 10470000 -> "AU$10.5 million"; 484000 -> "AU$484,000" */
 export function aud(k: LedgerKey): string {
   const x = v(k);
-  if (x >= 1_000_000) return `AU$${(x / 1_000_000).toFixed(x >= 10_000_000 ? 0 : 1).replace(/\.0$/, "")} million`;
-  return `AU$${Math.round(x).toLocaleString("en-AU")}`;
+  if (x >= 1_000_000) return tag(k, `AU$${(x / 1_000_000).toFixed(x >= 10_000_000 ? 0 : 1).replace(/\.0$/, "")} million`);
+  return tag(k, `AU$${Math.round(x).toLocaleString("en-AU")}`);
 }
 /** compact tile form: 24200000 -> "AU$24M", 2420000 -> "AU$2.4M", 484000 -> "AU$484k" */
 export function audShort(k: LedgerKey): string {
   const x = v(k);
-  if (x >= 1_000_000) return `AU$${(x / 1_000_000).toFixed(x >= 10_000_000 ? 0 : 1).replace(/\.0$/, "")}M`;
-  return `AU$${Math.round(x / 1000)}k`;
+  if (x >= 1_000_000) return tag(k, `AU$${(x / 1_000_000).toFixed(x >= 10_000_000 ? 0 : 1).replace(/\.0$/, "")}M`);
+  return tag(k, `AU$${Math.round(x / 1000)}k`);
 }
 /** "~6,720" style rounded multiple */
-export const times = (k: LedgerKey): string => `${Math.round(v(k)).toLocaleString("en-AU")}x`;
+export const times = (k: LedgerKey): string => tag(k, `${Math.round(v(k)).toLocaleString("en-AU")}x`);
+/** rounded whole number with grouping, no unit: 44700 -> "44,700" */
+export const rnd = (k: LedgerKey): string => tag(k, Math.round(v(k)).toLocaleString("en-AU"));
 
 export const AS_OF_FACTS = ledger.facts_as_of; // "2026-10-08"
 export const AS_OF_NUMBERS = ledger.numbers_as_of; // "2026-10-08T21:22:37"

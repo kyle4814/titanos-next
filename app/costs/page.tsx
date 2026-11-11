@@ -12,6 +12,7 @@ import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
 import { offersByGroup } from "@/lib/offers";
 import { GROUP_LABELS, formatOfferPrice, type OfferGroup } from "@/lib/offers/types";
 import Provenance from "@/components/Provenance";
+import { aud } from "@/lib/ledger";
 
 const META_TITLE = "Prices, costs and savings | TITANOS";
 const META_DESC =
@@ -161,7 +162,7 @@ export default function Costs() {
             Together, that is less than the price of a coffee.
           </p>
           <p style={BODY}>
-            Our own engineering runs on about <b>AU$300 a month</b> in tools. See what that builds on the{" "}
+            Our own engineering runs on about <b>{aud("compute_today_aud_month")} a month</b> in tools. See what that builds on the{" "}
             <a href="/case-studies" style={{ color: "var(--gold)" }}>
               case studies
             </a>{" "}
