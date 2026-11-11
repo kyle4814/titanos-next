@@ -80,6 +80,21 @@ function cors(res: Response, env: Env): Response {
   return res;
 }
 
+// f402 C2 hardening: the portal session is a bearer token (Authorization header, never a cookie), so a browser cannot attach it
+// ambiently. This guard is the second wall: a browser-initiated state-changing request must come from the site (or the API itself).
+// Browsers always send Origin on POST/PUT/PATCH/DELETE; Sec-Fetch-Site covers the no-Origin case. Non-browser clients send neither and pass.
+// Allow-list (each has its own credential, never a session): signed Stripe webhook, bearer-key MCP door, stateless verify/calculator,
+// the IdP callback (single-use state), and the secret-header operator routes under /internal. Names + reasons: scripts/state_change_matrix.mjs.
+export const ORIGIN_ALLOW_PATHS = ["/stripe/webhook", "/mcp", "/agent/receipts/verify", "/savings", "/sso/callback"];
+export function crossOriginRefused(req: Request, pathname: string, siteOrigin: string | undefined): boolean {
+  if (!["POST", "PUT", "PATCH", "DELETE"].includes(req.method)) return false;
+  if (ORIGIN_ALLOW_PATHS.includes(pathname) || pathname.startsWith("/internal/")) return false;
+  const origin = req.headers.get("origin");
+  if (origin !== null) return origin !== siteOrigin && origin !== new URL(req.url).origin;
+  const sfs = req.headers.get("sec-fetch-site");
+  return sfs !== null && sfs !== "same-origin" && sfs !== "none";
+}
+
 // handle(req, env, deps): deps is the injected store/billing/dns/mailer. With no deps every route except /health
 // fails closed with 503 (the D1 store is not built yet), so a half-wired deploy can never pretend to bill anyone.
 export async function handle(req: Request, env: Env, deps?: Deps): Promise<Response> {
@@ -93,6 +108,7 @@ async function handleInner(req: Request, env: Env, deps?: Deps): Promise<Respons
   }
   if (req.method === "OPTIONS") return empty(204);
   if (!deps) return json({ error: "store_unavailable" }, 503);
+  if (crossOriginRefused(req, pathname, deps.siteOrigin)) return cors(json({ error: "cross_origin_refused" }, 403), env);   // f402: before any handler, so a refused request has no side effect
   try {
     return await route(req, pathname, deps);
   } catch (e) {
@@ -139,6 +155,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   }
   if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") { const tok = (await body(req)).token; return json(await throttled(d, req, "login", "", () => svc.verifyLogin(d, tok))); }
+  if (path === "/auth/logout" && m === "POST") { const a = await svc.authenticate(d, req.headers.get("authorization")); await d.store.deleteSessionsFor(a.id); return json({ ok: true }); }   // f402: server-side sign-out (every session of the account), so a stolen token stops working
   if (path === "/stripe/webhook" && m === "POST") {
     const raw = await req.text();
     if (raw.length > 1_000_000) throw new HttpError(413, "body_too_large");
