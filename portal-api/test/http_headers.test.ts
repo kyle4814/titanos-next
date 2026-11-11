@@ -100,7 +100,7 @@ test("route table: every route x method x credential state answers with all five
     p, `${p}/partner-access`, `${p}/portals`, `${p}/portals/x/estate`, `${p}/portals/x/publish`, `${p}/brand`, `${p}/ledger`, `${p}/statement?month=2026-11`, `${p}/statement?month=2026-13`, `${p}/payouts`,
     `/invites/i1/accept`, `/referrals/claim`, `/enterprise/tnt_missing/estate`, `/totally/unknown/path`, `/`,
   ];
-  const paths = [...new Set([...literalPaths(), ...templated])].filter((x) => x !== "/account" && x !== "/auth/logout");   // both destroy the sessions the later asserts reuse; the matrix test covers them
+  const paths = [...new Set([...literalPaths(), ...templated])].filter((x) => x !== "/account");
   assert.ok(paths.length > 70, `route table too small: ${paths.length}`);
   const methods = ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD"];
   const auth: Array<[string, Record<string, string>]> = [
