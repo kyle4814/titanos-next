@@ -1,0 +1,55 @@
+f80_c6_near_dup_ask_raise-2026-11-06 SKIP lib/concierge/askguard.ts lib/concierge/router.ts package.json scripts/test_concierge_askguard.mjs scripts/test_concierge_miss_taxonomy.mjs 
+Updating files: 100% (8/8)Updating files: 100% (8/8), done.
+f209_c2_invoice_number_atomic-2026-11-07 SKIP portal-api/src/d1_plan_store.ts portal-api/src/env.ts portal-api/src/service.ts portal-api/src/store.ts portal-api/test/invoice_number_atomic.test.ts portal-api/test/reconcile_contract.test.ts 
+x2_stripe_testmode-2026-11-07 SKIP portal-api/src/index.ts 
+x1_d1_worker_local-2026-11-07 SKIP portal-api/.gitignore portal-api/package.json portal-api/src/enterprise/d1store.ts portal-api/src/env.ts portal-api/src/index.ts portal-api/test/ent_harness.ts portal-api/test/enterprise.test.ts portal-api/test/harness.ts portal-api/test/market_harness.ts portal-api/test/portal.test.ts 
+x4_escape_fixes-2026-11-07 SKIP portal-api/.gitignore portal-api/acceptance/x3/FINDINGS.md portal-api/acceptance/x3/c_money.test.ts portal-api/acceptance/x3/d_agent.test.ts portal-api/package.json portal-api/src/agent/mcp.ts portal-api/src/enterprise/d1store.ts portal-api/src/env.ts portal-api/src/index.ts portal-api/test/ent_harness.ts portal-api/test/enterprise.test.ts portal-api/test/harness.ts portal-api/test/market_harness.ts portal-api/test/portal.test.ts 
+f188_c2_post_route_fuzz_d1-2026-11-07 MERGED
+f222_c2_side_stores_d1_wire-2026-11-07 SKIP portal-api/src/build_deps.ts portal-api/src/index.ts portal-api/src/service.ts portal-api/test/fake_d1.ts portal-api/test/owner_fake_d1.ts portal-api/test/store_contract.test.ts 
+f80_c6_near_dup_ask_raise-2026-11-06-rb SKIP lib/concierge/router.ts package.json scripts/test_concierge_miss_taxonomy.mjs 
+f209_c2_invoice_number_atomic-2026-11-07-rb SKIP portal-api/src/d1_plan_store.ts portal-api/src/env.ts portal-api/src/service.ts portal-api/src/store.ts portal-api/test/invoice_number_atomic.test.ts portal-api/test/owner_fake_d1.ts portal-api/test/reconcile_contract.test.ts 
+f222_c2_side_stores_d1_wire-2026-11-07-rb SKIP portal-api/src/build_deps.ts portal-api/src/enterprise/d1store.ts portal-api/src/enterprise/store.ts portal-api/test/ent_harness.ts portal-api/test/ent_store_contract.test.ts portal-api/test/enterprise.test.ts portal-api/test/fake_d1.ts portal-api/test/market_harness.ts portal-api/test/mutate_ent_d1.mjs portal-api/test/owner_fake_d1.ts portal-api/test/store_contract.test.ts portal-api/test/tenant_isolation.test.ts 
+stack1-rb-2026-11-08 SKIP components/Concierge.tsx lib/concierge/router.ts package.json scripts/mutate_concierge_mount.mjs scripts/test_concierge_dev2.mjs scripts/test_concierge_miss_taxonomy.mjs scripts/test_concierge_mount.mjs 
+Updating files:  57% (4/7)Updating files:  71% (5/7)Updating files:  85% (6/7)Updating files: 100% (7/7)Updating files: 100% (7/7), done.
+stack2-rb-2026-11-08 SKIP components/Concierge.tsx lib/concierge/genqueue.ts lib/concierge/router.ts package.json scripts/mutate_concierge_mount.mjs scripts/run_built_gates.mjs scripts/test_concierge_dev2.mjs scripts/test_concierge_miss_taxonomy.mjs scripts/test_concierge_mount.mjs scripts/test_run_built_gates.mjs 
+stack3-rb-2026-11-09 SKIP components/charts/CostCurve.tsx lib/shop/catalogue_reader.ts lib/shop/reader.ts lib/site-data/proofLive.ts package.json portal-api/src/build_deps.ts portal-api/src/enterprise/d1store.ts portal-api/src/enterprise/routes.ts portal-api/src/enterprise/service.ts portal-api/src/enterprise/store.ts portal-api/src/env.ts portal-api/src/service.ts portal-api/test/ent_harness.ts portal-api/test/ent_store_contract.test.ts portal-api/test/tenant_isolation.test.ts scripts/run_built_gates.mjs scripts/test_catalogue_reader_mutants.sh scripts/test_concierge_dev2.mjs scripts/test_concierge_miss_taxonomy.mjs scripts/test_proof_freshness.mjs scripts/test_run_built_gates.mjs 
+stack4-rb-2026-11-09 SKIP portal-api/src/enterprise/routes.ts portal-api/src/enterprise/service.ts portal-api/test/ent_harness.ts 
+restack/f211_c4_store_index_scans-2026-11-09 SKIP portal-api/src/store.ts portal-api/test/store_index.test.ts 
+restack/f17_c7_idem_reserve-2026-11-09 SKIP portal-api/src/agent/mcp.ts portal-api/src/d1store.ts portal-api/src/store.ts 
+restack/f171_c2_webhook_d1_methods-2026-11-09 SKIP portal-api/src/agent/mcp.ts portal-api/src/store.ts 
+restack/f181_c2_import_cycle_break-2026-11-10 SKIP portal-api/src/service.ts portal-api/src/util.ts 
+restack/f209_c2_invoice_number_atomic-2026-11-10 SKIP portal-api/src/d1_plan_store.ts portal-api/src/d1store.ts portal-api/src/service.ts portal-api/src/store.ts portal-api/test/f238_refund_cas.test.ts portal-api/test/invoice_number_atomic.test.ts portal-api/test/reconcile_contract.test.ts 
+restack/f57_c8_payout_tick-2026-11-10 SKIP portal-api/src/env.ts portal-api/src/index.ts 
+restack/f59_c8_payout_d1_adapter-2026-11-10 SKIP portal-api/src/env.ts portal-api/src/index.ts 
+restack/f86_c9_worker_shared_headers-2026-11-10 SKIP portal-api/src/enterprise/routes.ts portal-api/src/env.ts portal-api/src/index.ts portal-api/test/http_headers.test.ts portal-api/test/http_headers_mutants.test.ts 
+restack/f97_c4_job_dispute_warranty-2026-11-10 SKIP portal-api/src/env.ts portal-api/src/index.ts 
+restack/f99_c4_dispute_wire-2026-11-10 SKIP portal-api/src/env.ts portal-api/src/index.ts portal-api/src/market/dispute.ts portal-api/src/market/service.ts 
+restack/f274_c8_estate_view_ui-2026-11-10 SKIP components/SeatAnchors.tsx 
+f367_c2_post_fuzz_ent_harness-2026-11-10 SKIP portal-api/test/post_fuzz.test.ts portal-api/test/post_fuzz_d1.test.ts portal-api/test/post_fuzz_lib.ts 
+f368_c2_owner_rejected_paths_no_rev_bump-2026-11-10 SKIP portal-api/test/post_fuzz.test.ts portal-api/test/post_fuzz_d1.test.ts portal-api/test/post_fuzz_lib.ts 
+f372_c10_home_reachability_depth-2026-11-10 ALREADY
+f374_c10_server_rendered_doors-2026-11-10 SKIP scripts/home_reach.mjs scripts/home_reach_allowlist.json scripts/test_home_reach.mjs 
+Updating files: 100% (6/6)Updating files: 100% (6/6), done.
+f375_c2_owner_rejected_remaining_paths-2026-11-10 SKIP portal-api/test/post_fuzz.test.ts portal-api/test/post_fuzz_d1.test.ts portal-api/test/post_fuzz_lib.ts 
+f378_c3_owner_market_store_d1_inventory-2026-11-10 SKIP app/page.tsx lib/site-data/proof.json lib/site-data/provenance.json public/data/claims-ledger.csv public/data/claims-ledger.json scripts/gen_proof_data.mjs 
+f381_c3_dispute_trail_d1_wiring-2026-11-10 SKIP app/page.tsx lib/site-data/proof.json lib/site-data/provenance.json public/data/claims-ledger.csv public/data/claims-ledger.json scripts/gen_proof_data.mjs 
+f380_c3_owner_market_harness_d1_switch-2026-11-10 SKIP app/page.tsx lib/site-data/proof.json lib/site-data/provenance.json public/data/claims-ledger.csv public/data/claims-ledger.json scripts/gen_proof_data.mjs 
+f384_c9_text_sanity_build_gate-2026-11-10 MERGED-RESOLVED
+f385_c10_viewport_overflow_sweep-2026-11-10 MERGED-RESOLVED
+f390_c9_figure_freshness_verifier-2026-11-10 MERGED-RESOLVED
+f395_c9_unsourced_figures_clock-2026-11-10 MERGED-RESOLVED
+f396_c6_killiv_independent_verifier-2026-11-10 MERGED
+f392_c10_tap_target_360-2026-11-10 MERGED
+f398_c5_c7_killiv_verifiers-2026-11-10 MERGED
+declaration-popup-2026-11-10 SKIP app/page.tsx lib/site-data/proof.json lib/site-data/provenance.json package.json public/data/claims-ledger.csv public/data/claims-ledger.json scripts/gen_proof_data.mjs 
+f399_c1_c4_killiv_verifiers-2026-11-10 SKIP scripts/obelisk_kill_matrix.py 
+f400_c10_killmatrix_reconcile-2026-11-10 MERGED
+f407_c10_rendered_keyboard_focus_sweep-2026-11-10 MERGED-RESOLVED
+f405_c10_form_control_tap44-2026-11-10 MERGED
+f410_c10_print_fixed_layers_fix-2026-11-10 SKIP scripts/reduced_motion_gate.mjs scripts/test_reduced_motion_gate.mjs 
+f411_c10_tap_residual_burndown-2026-11-10 MERGED-RESOLVED
+f413_c10_sweep_stylesheet_wait-2026-11-11 SKIP scripts/lib/viewport_sweep.mjs 
+f414_c10_rendered_probes_all_pages-2026-11-11 MERGED-RESOLVED
+f420_c10_sweeps_use_export_manifest-2026-11-11 MERGED
+f431_c10_soak_pin_manifest_digest-2026-11-11 SKIP scripts/soak_pin_matrix_gate.mjs scripts/soak_pin_wire.mjs scripts/test_soak_pin_wire.mjs 
+f405_c10_form_control_tap44-2026-11-11 MERGED-RESOLVED
