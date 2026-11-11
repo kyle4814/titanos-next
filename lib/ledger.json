@@ -320,7 +320,7 @@
       "as_of": "2026-10-13T04:05:02",
       "label": "MEASURED",
       "method": "non-blank non-comment .py/.sh/.ts/.tsx/.js, 12 repos (bin/estate_repos.txt), state/ corpus/ vendor/ excluded",
-      "source": "klinge-kernel 66,879, titanos 122,524, titanos_launch/titanos-next 31,325, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,712, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 2,465, titan 3,448",
+      "source": "bin/sloc_count.py (klinge-kernel 66,879, titanos 122,524, titanos_launch/titanos-next 31,325, titanos_launch/titanos-state 11,997, titanos_launch/titanos-tech 0, pala-garden 7,712, spoofguard 2,245, spoofguard-actor 943, spoofguard-worker 1,001, ariance-app 5,678, titanos-enterprise 2,465, titan 3,448)",
       "unit": "lines",
       "value": 256217,
       "source_path": null,

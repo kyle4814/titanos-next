@@ -56,7 +56,7 @@
  "stale": [
   {
    "file": "lib/ledger.json",
-   "cap": 65,
+   "cap": 41,
    "reason": "Investor-room ledger frozen at facts_as_of 2026-10-09; the kernel numbers ledger was last written 2026-10-13 and the generator named in generated_by (bin/site_ledger_export.py) no longer exists, so there is no newer source to take. Real: needs a re-measure and a new exporter, not a re-date."
   },
   {

@@ -31,6 +31,10 @@ git archive --format=tar "$SRC" | "${SSH[@]}" "$HOST" "mkdir -p \"\$HOME/$DIR\" 
 set -u
 DIR="$1"; MAX="$2"
 export PATH="$HOME/node22/bin:$PATH" CI=1
+# The runner holds only a partial kernel stub (content_lint.py + a few state files), so the allowlist-rot check that every
+# kernel path exists would fail here for the wrong reason. A missing dir makes figure_freshness report those paths unverified;
+# the real check runs on the laptop, where the full kernel lives (2026-11-12 fold build 9).
+export FIGFRESH_KERNEL=/nonexistent-kernel-on-runner
 cd "$HOME/$DIR" || exit 10
 timeout "$MAX" bash -c '
   npm ci --no-audit --no-fund >ci.log 2>&1 || { echo "npm ci FAILED"; tail -40 ci.log; exit 11; }
