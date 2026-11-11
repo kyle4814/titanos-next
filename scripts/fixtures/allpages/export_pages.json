@@ -1,0 +1,15 @@
+{
+  "schema": "export-pages/1",
+  "count": 5,
+  "routes_count": 4,
+  "system_pages": [
+    "404.html"
+  ],
+  "pages": [
+    "404.html",
+    "about.html",
+    "blog/index.html",
+    "blog/post.html",
+    "index.html"
+  ]
+}

@@ -8,6 +8,7 @@ cd "$(dirname "$0")/.." || exit 2
 PM=scripts/obelisk_rendered_print_motion.mjs
 KB=scripts/obelisk_rendered_keyboard_focus.mjs
 FX=scripts/fixtures/allpages
+MAN="$FX/export_pages.json"   # f420: --all reads its page list from the manifest
 fail=0
 ok() { echo "ok   $1"; }
 no() { echo "FAIL $1"; fail=1; }
@@ -20,7 +21,7 @@ o=$(node "$KB" --out "$FX/site" --pages /index.html --viewports desktop 2>&1); e
 for P in PM KB; do
   S=$PM; [ $P = KB ] && S=$KB
   extra=""; [ $P = KB ] && extra="--viewports desktop"
-  o=$(node "$S" --out "$FX/site" --all --allowlist "$FX/allowlist.json" --report "$T/$P.json" $extra 2>&1); rc=$?
+  o=$(node "$S" --out "$FX/site" --all --allowlist "$FX/allowlist.json" --manifest "$MAN" --report "$T/$P.json" $extra 2>&1); rc=$?
   [ "$rc" = 0 ] && ok "$P good site passes (rc 0)" || { no "$P good site should pass (rc=$rc)"; echo "$o" | tail -5; }
   [ "$(jq_ "$T/$P.json" 'd.pages_total+"/"+d.pages_swept+"/"+d.pages_allowlisted+"/"+d.pages_enumerated')" = "4/4/1/5" ] && ok "$P report total=4 swept=4 allowlisted=1 enumerated=5" || no "$P report counts wrong"
   [ "$(jq_ "$T/$P.json" 'd.pages.some(p=>p.route==="/blog/post"&&p.swept)')" = true ] && ok "$P swept nested /blog/post" || no "$P missed nested route"
@@ -31,7 +32,7 @@ done
 for P in PM KB; do
   S=$PM; [ $P = KB ] && S=$KB
   extra=""; [ $P = KB ] && extra="--viewports desktop"
-  o=$(node "$S" --out "$FX/site" --all --allowlist "$FX/allowlist.json" --report "$T/d$P.json" --mutate-drop /about $extra 2>&1); rc=$?
+  o=$(node "$S" --out "$FX/site" --all --allowlist "$FX/allowlist.json" --manifest "$MAN" --report "$T/d$P.json" --mutate-drop /about $extra 2>&1); rc=$?
   [ "$rc" = 4 ] && ok "$P dropped page exits 4" || no "$P dropped page must exit 4 (rc=$rc)"
   echo "$o" | grep -q "COVERAGE FAILED" && echo "$o" | grep -q "NOT SWEPT /about" && ok "$P names /about as NOT SWEPT" || no "$P did not name the dropped page"
   [ "$(jq_ "$T/d$P.json" 'd.pages_total+"/"+d.pages_swept')" = "4/3" ] && ok "$P report shows swept 3 of 4" || no "$P report did not show 3 of 4"
@@ -39,11 +40,12 @@ done
 
 # 3. MUTATION: a planted-bad page added to a copy of the site is found and named per page
 mkdir -p "$T/site" && cp -r "$FX/site/." "$T/site/" && cp scripts/fixtures/kbfocus/bad_outline.html "$T/site/planted_bad.html" && cp scripts/fixtures/rendpm/bad/index.html "$T/site/planted_pm_bad.html"
-o=$(node "$KB" --out "$T/site" --all --allowlist "$FX/allowlist.json" --report "$T/kbbad.json" --viewports desktop 2>&1); rc=$?
+node scripts/export_page_manifest.mjs --write --out "$T/site" --manifest "$T/site_manifest.json" >/dev/null
+o=$(node "$KB" --out "$T/site" --all --allowlist "$FX/allowlist.json" --manifest "$T/site_manifest.json" --report "$T/kbbad.json" --viewports desktop 2>&1); rc=$?
 [ "$rc" = 1 ] && ok "KB planted-bad page exits 1" || no "KB planted-bad should exit 1 (rc=$rc)"
 [ "$(jq_ "$T/kbbad.json" 'd.pages.find(p=>p.route==="/planted_bad").defects.some(x=>x.startsWith("NO_INDICATOR"))')" = true ] && ok "KB per-page defect NO_INDICATOR on /planted_bad" || no "KB per-page defect missing"
 [ "$(jq_ "$T/kbbad.json" 'd.pages_swept===d.pages_total')" = true ] && ok "KB still sweeps every page with a defect present" || no "KB coverage should be full"
-o=$(node "$PM" --out "$T/site" --all --allowlist "$FX/allowlist.json" --report "$T/pmbad.json" 2>&1); rc=$?
+o=$(node "$PM" --out "$T/site" --all --allowlist "$FX/allowlist.json" --manifest "$T/site_manifest.json" --report "$T/pmbad.json" 2>&1); rc=$?
 [ "$rc" = 1 ] && ok "PM planted-bad page exits 1" || no "PM planted-bad should exit 1 (rc=$rc)"
 [ "$(jq_ "$T/pmbad.json" 'd.pages.find(p=>p.route==="/planted_pm_bad").defects.some(x=>x.startsWith("PRINT-CHROME"))')" = true ] && ok "PM per-page defect PRINT-CHROME on /planted_pm_bad" || no "PM per-page defect missing"
 [ "$(jq_ "$T/pmbad.json" 'd.pages.find(p=>p.route==="/about").defects.length')" = 0 ] && ok "PM clean pages stay clean" || no "PM clean page polluted"
@@ -53,7 +55,7 @@ printf '%s\n' '{"skipped":[{"route":"/404","reason":"x"}]}' > "$T/noreason.json"
 printf '%s\n' '{"skipped":[{"route":"/does-not-exist","reason":"This page is not exported at all, stale entry."}]}' > "$T/stale.json"
 printf '%s\n' 'not json' > "$T/broken.json"
 for A in noreason stale broken; do
-  o=$(node "$PM" --out "$FX/site" --all --allowlist "$T/$A.json" 2>&1); rc=$?
+  o=$(node "$PM" --out "$FX/site" --all --allowlist "$T/$A.json" --manifest "$MAN" 2>&1); rc=$?
   [ "$rc" = 4 ] && echo "$o" | grep -q "PROBLEM" && ok "allowlist $A fails the run (exit 4)" || no "allowlist $A must fail with PROBLEM (rc=$rc)"
 done
 
