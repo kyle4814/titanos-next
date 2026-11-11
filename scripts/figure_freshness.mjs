@@ -6,12 +6,15 @@
 //   UNDATED  date absent, or not an ISO date (YYYY-MM-DD, optionally with a time and offset), or not a real calendar day
 //   ORPHAN   no source path, or a named source path exists neither in the repo nor in the --receipts folder
 //   NOSYSTEM no system name (EV6: WHICH system)
+//   ALLOWED  (warning, never silent) the only defect is a source path that lives in another repo (the kernel) and is named in
+//            scripts/figure_freshness_allowlist.json with a reason and an EXACT cap. A cap that is too high, too low or missing
+//            fails the run, so the cap can only fall as figures are fixed; a path absent from the kernel checkout fails too.
 //   FUTURE   date is after --as-of (warning)
 //   STALE    date is more than 30 days before --as-of (warning); day 30 is FRESH, day 31 is STALE
 //   FRESH    everything above is clean
-// Exit 1 on any UNDATED, ORPHAN or NOSYSTEM. STALE and FUTURE are warnings only. Exit 2 on a usage error.
+// Exit 1 on any UNDATED, ORPHAN or NOSYSTEM. FUTURE is a warning. STALE is a warning when no allowlist is loaded; with the allowlist it must be classified per file with an exact cap or the run fails. Exit 2 on a usage error.
 //
-// Usage: node scripts/figure_freshness.mjs [--as-of YYYY-MM-DD] [--receipts DIR] [--root DIR] [--json] [--quiet]
+// Usage: node scripts/figure_freshness.mjs [--as-of YYYY-MM-DD] [--receipts DIR] [--root DIR] [--allowlist FILE] [--kernel DIR] [--json] [--quiet]
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, dirname, basename, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,7 +22,7 @@ import { fileURLToPath } from "node:url";
 export const STALE_DAYS = 30;
 const DAY_MS = 86400000;
 export const FAILING = ["UNDATED", "ORPHAN", "NOSYSTEM"];
-const PRIORITY = ["UNDATED", "ORPHAN", "NOSYSTEM", "FUTURE", "STALE", "FRESH"];
+const PRIORITY = ["UNDATED", "ORPHAN", "NOSYSTEM", "ALLOWED", "FUTURE", "STALE", "FRESH"];
 
 // ---- dates ------------------------------------------------------------------------------------
 const ISO = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})?)?$/;
@@ -75,8 +78,9 @@ export function pathExists(p, roots) {
 
 // derivedKeys: Set of other figure ids a source may point at ("estate_ey, parttime"). Returns {ok, reason, paths, external, derived}.
 export function checkSource(source, roots, derivedKeys = new Set(), derivedResolve = null, seen = new Set()) {
-  const out = { ok: false, reason: "", paths: [], external: false, derived: [] };
-  if (typeof source !== "string" || !source.trim()) { out.reason = "no source"; return out; }
+  const out = { ok: false, reason: "", paths: [], external: false, derived: [], missing: [], hard: false };
+  // missing = source paths that do not exist; hard = a defect no allowlist may excuse (no source, no checkable path, a loop)
+  if (typeof source !== "string" || !source.trim()) { out.reason = "no source"; out.hard = true; return out; }
   // Text in brackets is commentary on the source, not a source: strip it before looking for paths.
   const bare = source.replace(/\([^)]*\)/g, " ");
   const paths = [...bare.matchAll(PATH_RX)].map((m) => m[0]);
@@ -85,19 +89,20 @@ export function checkSource(source, roots, derivedKeys = new Set(), derivedResol
   if (paths.length) {
     const missing = paths.filter((p) => !pathExists(p, roots));
     out.paths = paths;
-    if (missing.length) { out.reason = `source path not found: ${missing.join(", ")}`; return out; }
+    if (missing.length) { out.reason = `source path not found: ${missing.join(", ")}`; out.missing = missing; return out; }
     out.ok = true; return out;
   }
   if (derived.length && derived.length === parts.length && derivedResolve) {
     for (const d of derived) {
-      if (seen.has(d)) { out.reason = `derived source loops at ${d}`; return out; }
+      if (seen.has(d)) { out.reason = `derived source loops at ${d}`; out.hard = true; return out; }
       const r = derivedResolve(d, new Set([...seen, d]));
-      if (!r.ok) { out.reason = `derived from ${d}: ${r.reason}`; out.derived = derived; return out; }
+      if (!r.ok) { out.reason = `derived from ${d}: ${r.reason}`; out.derived = derived; out.missing = r.missing || []; out.hard = !!r.hard || !(r.missing && r.missing.length); return out; }
     }
     out.ok = true; out.derived = derived; return out;
   }
   if (parts.length === 1 && URL_RX.test(parts[0])) { out.ok = true; out.external = true; return out; }
   out.reason = `source names no checkable path: ${JSON.stringify(source.slice(0, 80))}`;
+  out.hard = true;
   return out;
 }
 
@@ -159,11 +164,57 @@ export const ADAPTERS = [
 ];
 
 // ---- scan ---------------------------------------------------------------------------------------
-export function scan({ root, receipts = null, asOf, adapters = ADAPTERS }) {
+// Kernel-relative form of a source path, so one allowlist key covers "bin/x.py", "~/bin/x.py" and "/home/u/klinge-kernel/bin/x.py".
+export function kernelRel(p) {
+  const m = /klinge-kernel\/(.+)$/.exec(p);
+  return (m ? m[1] : p).replace(/^~\//, "");
+}
+
+// Validates the allowlist against what the scan found. Returns an array of error strings (empty = honest).
+export function checkAllowlist(allowlist, used, kernel, staleUsed = new Map()) {
+  const errs = [];
+  if (!allowlist || !Array.isArray(allowlist.paths)) return ["allowlist has no paths array"];
+  const seen = new Set();
+  let sum = 0;
+  for (const e of allowlist.paths) {
+    const tag = `allowlist ${JSON.stringify(e && e.path)}`;
+    if (!e || typeof e.path !== "string" || !e.path.trim()) { errs.push("allowlist entry without a path"); continue; }
+    if (e.path !== kernelRel(e.path)) errs.push(`${tag}: write the kernel-relative path`);
+    if (seen.has(e.path)) errs.push(`${tag}: duplicate entry`);
+    seen.add(e.path);
+    if (typeof e.reason !== "string" || e.reason.trim().length < 20) errs.push(`${tag}: needs a real reason (20+ characters)`);
+    if (!Number.isInteger(e.cap) || e.cap < 1) { errs.push(`${tag}: cap must be an integer of 1 or more`); continue; }
+    sum += e.cap;
+    const n = used.get(e.path) || 0;
+    if (n > e.cap) errs.push(`${tag}: ${n} figure(s) use it, cap is ${e.cap} (fix the figures, a cap never rises)`);
+    if (n < e.cap) errs.push(`${tag}: only ${n} figure(s) use it, lower cap ${e.cap} to ${n}`);
+    if (kernel && !existsSync(join(kernel, e.path))) errs.push(`${tag}: not found in the kernel checkout ${kernel} (allowlist rot)`);
+  }
+  // STALE figures are classified per data file: each file carries a reason and an exact cap, and an unlisted file may hold none.
+  const stale = Array.isArray(allowlist.stale) ? allowlist.stale : [];
+  const sfiles = new Set();
+  for (const e of stale) {
+    const tag = `stale ${JSON.stringify(e && e.file)}`;
+    if (!e || typeof e.file !== "string" || !e.file) { errs.push("stale entry without a file"); continue; }
+    if (sfiles.has(e.file)) errs.push(`${tag}: duplicate entry`);
+    sfiles.add(e.file);
+    if (typeof e.reason !== "string" || e.reason.trim().length < 20) errs.push(`${tag}: needs a real reason (20+ characters)`);
+    if (!Number.isInteger(e.cap) || e.cap < 1) { errs.push(`${tag}: cap must be an integer of 1 or more`); continue; }
+    const n = staleUsed.get(e.file) || 0;
+    if (n > e.cap) errs.push(`${tag}: ${n} STALE figure(s), cap is ${e.cap} (refresh the figures, a cap never rises)`);
+    if (n < e.cap) errs.push(`${tag}: only ${n} STALE figure(s), lower cap ${e.cap} to ${n}`);
+  }
+  for (const [f, n] of staleUsed) if (!sfiles.has(f)) errs.push(`stale ${JSON.stringify(f)}: ${n} STALE figure(s) with no classified entry`);
+  if (allowlist.total_cap !== sum) errs.push(`allowlist total_cap ${allowlist.total_cap} must equal the sum of entry caps ${sum}`);
+  return errs;
+}
+
+export function scan({ root, receipts = null, asOf, adapters = ADAPTERS, allowlist = null, kernel = null }) {
   const asOfDay = parseIsoDay(asOf);
   if (asOfDay === null || !/^\d{4}-\d{2}-\d{2}$/.test(asOf)) throw new Error(`--as-of must be YYYY-MM-DD, got ${JSON.stringify(asOf)}`);
   const roots = [root, receipts];
-  const report = { asOf, root, receipts, staleDays: STALE_DAYS, scanned: [], notPresent: [], skippedNoNumber: [], figures: [], counts: {}, flagCounts: {}, externalSources: 0 };
+  const used = new Map();
+  const report = { allowed: [], allowlistErrors: [], kernel, asOf, root, receipts, staleDays: STALE_DAYS, scanned: [], notPresent: [], skippedNoNumber: [], figures: [], counts: {}, flagCounts: {}, externalSources: 0 };
   for (const a of adapters) {
     const full = join(root, a.file);
     if (!existsSync(full)) { report.notPresent.push(a.file); continue; }
@@ -184,21 +235,38 @@ export function scan({ root, receipts = null, asOf, adapters = ADAPTERS }) {
       // source check
       const srcs = f.paths ? f.paths : [f.source];
       if (f.paths && !f.paths.length) { flags.push("ORPHAN"); why.push("no source"); }
+      const missingAll = []; let hard = false;
       for (const s of f.paths ? f.paths : [f.source]) {
-        const resolveDerived = (key, seen) => { const t = byId.get(key); return t ? checkSource(t.source, roots, f.derivedKeys, resolveDerived, seen) : { ok: false, reason: `unknown figure ${key}` }; };
+        const resolveDerived = (key, seen) => { const t = byId.get(key); return t ? checkSource(t.source, roots, f.derivedKeys, resolveDerived, seen) : { ok: false, hard: true, reason: `unknown figure ${key}` }; };
         const r = f.paths ? checkSource(s, roots) : checkSource(s, roots, f.derivedKeys || new Set(), resolveDerived, new Set([f.id.replace(/^(n|facts)\./, "")]));
         if (r.external) report.externalSources++;
+        if (!r.ok) { missingAll.push(...(r.missing || [])); if (r.hard || !(r.missing && r.missing.length)) hard = true; }
         if (!r.ok && !flags.includes("ORPHAN")) { flags.push("ORPHAN"); why.push(r.reason); }
         else if (!r.ok) why.push(r.reason);
       }
+      // An ORPHAN whose only defect is missing cross-repo paths, all named in the allowlist, becomes ALLOWED (still listed).
+      if (allowlist && flags.includes("ORPHAN") && !hard && missingAll.length && !flags.some((x) => x === "UNDATED" || x === "NOSYSTEM")) {
+        const keys = [...new Set(missingAll.map(kernelRel))];
+        const listed = new Set((allowlist.paths || []).map((e) => e && e.path));
+        if (keys.every((k) => listed.has(k))) {
+          flags.splice(flags.indexOf("ORPHAN"), 1, "ALLOWED");
+          keys.forEach((k) => used.set(k, (used.get(k) || 0) + 1));
+          report.allowed.push({ file: a.file, id: f.id, paths: keys });
+        }
+      }
       report.figures.push(rec(a, f, flags, why, dc.age));
     }
+  }
+  if (allowlist) {
+    const staleUsed = new Map();
+    for (const f of report.figures) if (f.flags.includes("STALE")) staleUsed.set(f.file, (staleUsed.get(f.file) || 0) + 1);
+    report.allowlistErrors = checkAllowlist(allowlist, used, kernel, staleUsed);
   }
   for (const s of PRIORITY) { report.counts[s] = 0; report.flagCounts[s] = 0; }
   for (const f of report.figures) { report.counts[f.state]++; f.flags.forEach((x) => report.flagCounts[x]++); }
   report.failing = report.figures.filter((f) => f.flags.some((x) => FAILING.includes(x)));
   report.warnings = report.figures.filter((f) => !f.flags.some((x) => FAILING.includes(x)) && f.flags.length);
-  report.exitCode = report.failing.length ? 1 : 0;
+  report.exitCode = report.failing.length || report.allowlistErrors.length ? 1 : 0;
   return report;
 }
 function rec(a, f, flags, why, age) {
@@ -208,17 +276,26 @@ function rec(a, f, flags, why, age) {
 
 // ---- CLI ----------------------------------------------------------------------------------------
 function main(argv) {
-  const opt = { root: join(dirname(fileURLToPath(import.meta.url)), ".."), receipts: null, asOf: new Date().toISOString().slice(0, 10), json: false, quiet: false };
+  const opt = { root: join(dirname(fileURLToPath(import.meta.url)), ".."), receipts: null, asOf: new Date().toISOString().slice(0, 10), json: false, quiet: false, allowlist: undefined, kernel: undefined };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--as-of") opt.asOf = argv[++i];
     else if (a === "--receipts") opt.receipts = argv[++i];
     else if (a === "--root") opt.root = argv[++i];
+    else if (a === "--allowlist") opt.allowlist = argv[++i];
+    else if (a === "--kernel") opt.kernel = argv[++i];
     else if (a === "--json") opt.json = true;
     else if (a === "--quiet") opt.quiet = true;
     else { console.error(`unknown argument ${a}`); return 2; }
   }
   if (opt.receipts && !(existsSync(opt.receipts) && statSync(opt.receipts).isDirectory())) { console.error(`--receipts is not a folder: ${opt.receipts}`); return 2; }
+  // The allowlist defaults to <root>/scripts/figure_freshness_allowlist.json when present (none = every hit counts).
+  // The kernel checkout defaults to $FIGFRESH_KERNEL, then /home/tech2/klinge-kernel when it exists; absent = allowlisted paths are reported unverified.
+  const alPath = opt.allowlist ?? join(opt.root, "scripts", "figure_freshness_allowlist.json");
+  if (opt.allowlist && !existsSync(alPath)) { console.error(`--allowlist file not found: ${alPath}`); return 2; }
+  if (existsSync(alPath)) { try { opt.allowlist = JSON.parse(readFileSync(alPath, "utf8")); } catch (e) { console.error(`allowlist unreadable: ${e.message}`); return 2; } } else opt.allowlist = null;
+  const kd = opt.kernel ?? process.env.FIGFRESH_KERNEL ?? "/home/tech2/klinge-kernel";
+  opt.kernel = existsSync(kd) && statSync(kd).isDirectory() ? kd : null;
   let r;
   try { r = scan(opt); } catch (e) { console.error(e.message); return 2; }
   if (opt.json) { console.log(JSON.stringify(r, null, 2)); return r.exitCode; }
@@ -230,7 +307,9 @@ function main(argv) {
     for (const f of r.failing) console.log(`FAIL ${f.state} ${f.file}#${f.id} [${f.flags.join("+")}] ${f.why.join("; ")}`);
     for (const f of r.warnings) console.log(`WARN ${f.state} ${f.file}#${f.id} ${f.why.join("; ")}`);
   }
-  console.log(r.exitCode ? `FAIL ${r.failing.length} figure(s) UNDATED, ORPHAN or NOSYSTEM` : "PASS no UNDATED, ORPHAN or NOSYSTEM figure");
+  if (opt.allowlist) console.log(`allowlist: ${r.allowed.length} figure(s) ALLOWED on ${opt.allowlist.paths.length} kernel path(s); ` + (r.kernel ? `every path verified present in ${r.kernel}` : "kernel checkout absent, paths UNVERIFIED here"));
+  for (const e of r.allowlistErrors) console.log(`FAIL ALLOWLIST ${e}`);
+  console.log(r.exitCode ? `FAIL ${r.failing.length} figure(s) UNDATED, ORPHAN or NOSYSTEM, ${r.allowlistErrors.length} allowlist or STALE-classification error(s)` : "PASS no UNDATED, ORPHAN or NOSYSTEM figure");
   return r.exitCode;
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) process.exit(main(process.argv.slice(2)));

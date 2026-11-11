@@ -66,6 +66,7 @@ node scripts/test_case_trace.mjs
 node scripts/test_ariance_trace_gate.mjs
 node scripts/test_funnel_killtest.mjs
 node scripts/test_figure_freshness.mjs
+node scripts/test_figure_freshness_allowlist.mjs
 node scripts/test_f260_routes.mjs
 node scripts/test_render_spy.mjs
 node scripts/test_receipt_findings_index.mjs

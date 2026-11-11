@@ -127,7 +127,7 @@ import sys,re; sys.path.insert(0,"scripts"); import obelisk_kill_matrix as m
 m.check_verifiers(m.SPEC)
 assert all(k in m.SPEC for k in ("C2","C3","C7","C8","C10")) and all(m.SPEC[k].get("verifier") for k in ("C2","C3","C7","C8","C10"))
 PY
-ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C10 wired)"
+ok "real SPEC verifiers pass the independence check (C2 C3 C7 C8 C9 C10 wired)"
 PLAN=/home/tech2/klinge-kernel/FULL_BUSINESS_PROJECT/01_BUSINESS_PLAN_2026-10-10.md
 if [ -f "$PLAN" ]; then
   python3 "$M" --plan "$PLAN" --no-run >/dev/null 2>"$S/err"; rc=$?
