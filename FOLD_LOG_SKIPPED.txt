@@ -61,3 +61,4 @@ web/f405_c10_form_control_tap44-2026-11-11 deferred: homepage height budget 3150
 web/f410_c10_print_fixed_layers_fix-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
 web/f411_c10_tap_residual_burndown-2026-11-10 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
 web/f413_c10_sweep_stylesheet_wait-2026-11-11 deferred: homepage height budget 31500 exceeded (32117 px); re-fold after the shorter homepage (97a93e827 line) is on the int branch
+web/f372_c10_home_reachability_depth-2026-11-10 deferred: homepage height budget 31500 exceeded (footer column adds phone height); re-fold after the shorter homepage (97a93e827 line) is on the int branch
