@@ -44,12 +44,15 @@ SPEC = {
            "gate": "GATE2 Stripe Connect: real first 10 jobs and live payouts"},
     "C5": {"command": "node scripts/test_graded_store.mjs && node scripts/test_shelves_fetch_budget.mjs",
            "files": ["scripts/test_graded_store.mjs", "scripts/test_shelves_fetch_budget.mjs"],
+           "verifier": f"{NS} --no-warnings scripts/c5_ungraded_verify.mjs 1000 && {NS} --no-warnings scripts/test_c5_ungraded_verify.mjs",
+           "verifier_files": ["scripts/c5_ungraded_verify.mjs", "scripts/test_c5_ungraded_verify.mjs", "scripts/shelf_scale_drill.mjs"],
            "gate": "DEPLOY: 1,000 shelves live needs the site deployed"},
     "C6": {"command": f"{NS} scripts/test_concierge_holdout.mjs", "files": ["scripts/test_concierge_holdout.mjs"],
            "verifier": "python3 scripts/c6_holdout_verify.py", "verifier_files": ["scripts/c6_holdout_verify.py", "scripts/concierge_asklog_dump.mjs"]},
     "C7": {"command": f"{PA} test/agents10.test.ts test/agent.test.ts test/keycap.test.ts)",
            "files": ["portal-api/test/agents10.test.ts", "portal-api/test/agent.test.ts", "portal-api/test/keycap.test.ts"],
-           "verifier": f"(cd portal-api && {NS} scripts/agents10.ts)", "verifier_files": ["portal-api/scripts/agents10.ts"],
+           "verifier": f"(cd portal-api && {NS} scripts/agents10.ts && {NS} scripts/c7_ledger_verify.ts && node --test --experimental-strip-types test/c7_ledger_verify.test.ts)",
+           "verifier_files": ["portal-api/scripts/agents10.ts", "portal-api/scripts/c7_ledger_verify.ts", "portal-api/test/c7_ledger_verify.test.ts"],
            "gate": "LIVE TRAFFIC: 10 EXTERNAL agents calling a deployed door"},
     "C8": {"command": f"{PA} test/tenant_isolation.test.ts) && node scripts/test_xtenant_route_matrix.mjs",
            "files": ["portal-api/test/tenant_isolation.test.ts", "scripts/test_xtenant_route_matrix.mjs"],
@@ -140,7 +143,7 @@ def run_cmd(cmd, cwd, timeout):
 
 def evaluate(row, entry, repo, run, timeout):
     out = dict(row)
-    out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None})
+    out.update({"command": None, "verifier": None, "gate": None, "stage": None, "result": None, "verifier_result": None, "verification": None})
     if not entry or not entry.get("command"):
         stage = (entry or {}).get("stage") or "UNASSIGNED"
         out.update({"status": "UNKNOWN", "stage": stage, "detail": f"no command; stage id that would supply it: {stage}"})
@@ -170,6 +173,7 @@ def evaluate(row, entry, repo, run, timeout):
             out.update({"status": "FAILED", "detail": f"verifier exit {v['exit']}: {v['tail']}"})
             return out
         status = "INDEPENDENTLY VERIFIED"
+        out["verification"] = "INDEPENDENTLY VERIFIED"  # f398: the CODE proof is independently verified even when a live gate keeps the row at WOULD-FLIP
     if entry.get("gate"):
         out.update({"status": "WOULD-FLIP", "detail": f"code proof exit 0 in {res['seconds']}s" + ("; verifier exit 0" if out["verifier_result"] else "") + f"; kill test needs {entry['gate']}"})
     else:
@@ -187,8 +191,9 @@ def render_md(results, head, counts):
         shown = f"exit {res['exit']} in {res['seconds']}s: {res['tail']}" if res else r["detail"]
         if r["verifier_result"]:
             shown += f"; verifier exit {r['verifier_result']['exit']} in {r['verifier_result']['seconds']}s"
-        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {r['status']} | {esc(r['gate'] or r['stage'] or '')} |")
-    L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES), ""]
+        L.append(f"| {r['id']} | {esc(r['chunk'])} | {esc(r['kill'])} | `{esc(r['command'] or 'none')}`{(' verifier: `' + esc(r['verifier']) + '`') if r['verifier'] else ''} | {esc(shown)} | {r['status']}{('; code INDEPENDENTLY VERIFIED' if r['verification'] and r['status'] != r['verification'] else '')} | {esc(r['gate'] or r['stage'] or '')} |")
+    ivany = sum(1 for r in results if r["verification"])
+    L += ["", "Counts: " + ", ".join(f"{s} {counts[s]}" for s in STATUSES) + f", code INDEPENDENTLY VERIFIED (any gate) {ivany}", ""]
     return "\n".join(L)
 
 
@@ -204,7 +209,8 @@ def build(plan_text, spec, repo, run=True, timeout=900):
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo, capture_output=True, text=True).stdout.strip() or "UNKNOWN"
     except OSError:
         head = "UNKNOWN"
-    return {"head": head, "counts": counts, "chunks": results}
+    counts_v = {"code_independently_verified_any_gate": sum(1 for r in results if r["verification"]), "ids": [r["id"] for r in results if r["verification"]]}
+    return {"head": head, "counts": counts, "verification": counts_v, "chunks": results}
 
 
 def main(argv=None):
