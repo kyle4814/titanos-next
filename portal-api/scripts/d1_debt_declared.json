@@ -10,12 +10,6 @@
  },
  "debt": [
   {
-   "store": "MemorySeatEntitlements",
-   "reason": "Seat (claim-fee discount) records have no D1 adapter on int3; the market harness constructs the memory one.",
-   "owner": "f378_c3_owner_market_store_d1_inventory",
-   "would_flip": "Merge web/f378 (D1SeatEntitlements + migration 0026, parity test), then delete this entry; wiring into prod sideDeps waits on the Stripe webhook feed (GATE2)."
-  },
-  {
    "store": "MemoryZone",
    "reason": "DnsWriter test double for owner/market harnesses; prod writes no DNS (noZones by design, GATE5), so there is nothing durable to adapt.",
    "owner": "f378_c3_owner_market_store_d1_inventory",
