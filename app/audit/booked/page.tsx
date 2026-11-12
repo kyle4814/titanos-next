@@ -52,7 +52,7 @@ export default function AuditBookedPage() {
           lineHeight: 1.7,
         }}
       >
-        No booking, no forms. Pick whichever is easiest for you and Kyle replies himself.
+        Book a call, or pick whichever way is easiest for you. Kyle replies himself.
       </p>
 
       <div style={{ margin: "0 auto var(--space-10)" }}>

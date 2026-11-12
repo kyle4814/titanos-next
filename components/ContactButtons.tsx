@@ -1,9 +1,9 @@
 import AnimatedButton from "@/components/AnimatedButton";
-import { CONTACT, SITE } from "@/lib/config";
+import { BOOK_HREF, CONTACT, SITE } from "@/lib/config";
 
 /**
  * ContactButtons: the one place people reach Kyle directly.
- * Telegram or email. No booking, no forms. (Kyle, 2026-10-01: Telegram is the main base.)
+ * Primary: book a call on our own page. Secondary: Telegram or email. (Kyle, 2026-10-01: Telegram is the main base; 2026-11-12: booking added.)
  * Numbers and links live in lib/config.ts (CONTACT).
  */
 type Props = {
@@ -35,17 +35,20 @@ export default function ContactButtons({ heading = null, align = "center", showH
           alignItems: "stretch",
         }}
       >
+        <AnimatedButton href={BOOK_HREF} variant="primary" ariaLabel="Book a call with Kyle">
+          Book a call
+        </AnimatedButton>
         <AnimatedButton
           href={CONTACT.TELEGRAM_URL}
           external
-          variant="primary"
+          variant="secondary"
           ariaLabel="Message Kyle on Telegram"
         >
           Telegram {CONTACT.TELEGRAM_HANDLE}
         </AnimatedButton>
         <AnimatedButton
           href={`mailto:${SITE.KYLE_EMAIL}`}
-          variant="primary"
+          variant="secondary"
           ariaLabel="Email Kyle"
         >
           Email {SITE.KYLE_EMAIL}

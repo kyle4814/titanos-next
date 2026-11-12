@@ -177,3 +177,7 @@ bash scripts/test_obelisk_rendered_keyboard_focus.sh
 bash scripts/test_obelisk_allpages.sh
 bash scripts/test_sweeps_use_export_manifest.sh
 node scripts/test_home_height.mjs out
+node --experimental-strip-types --no-warnings scripts/test_booking_ui.mjs
+node scripts/test_home_pricing.mjs out
+node scripts/test_book_page.mjs out
+node scripts/test_book_flow.mjs out
