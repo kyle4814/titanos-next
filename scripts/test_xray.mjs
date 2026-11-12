@@ -59,7 +59,7 @@ const refuses = (patch, why) => {
   ok(threw, `refuses: ${why}`);
 };
 refuses({ workflows: [{ name: "Email sam@example.com", category: "reporting", n_per_week: 5, t0_min: 10 }] }, "email address in free text");
-refuses({ workflows: [{ name: "Call 0412 345 678", category: "reporting", n_per_week: 5, t0_min: 10 }] }, "phone number in free text");
+refuses({ workflows: [{ name: "Call 0491 570 156", category: "reporting", n_per_week: 5, t0_min: 10 }] }, "phone number in free text");
 refuses({ workflows: [{ name: "see https://x.example", category: "reporting", n_per_week: 5, t0_min: 10 }] }, "URL in free text");
 refuses({ workflows: [{ name: "Café orders", category: "reporting", n_per_week: 5, t0_min: 10 }] }, "non-ASCII text");
 refuses({ workflows: [{ name: "Task", category: "reporting", n_per_week: -1, t0_min: 10 }] }, "negative jobs per week");
