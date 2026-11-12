@@ -212,3 +212,42 @@ export function judge(o: Observed, sent: { canaries: string[]; secrets: string[]
   for (const c of [...sent.canaries, ...sent.secrets]) if (c && echoed.includes(c)) bad.push(`ECHO of secret-shaped string ${c.slice(0, 12)}...`);
   return bad;
 }
+
+// ---------- f368: owner-service rejected paths must not change state ----------
+// f367 fixed undo() answering 404 before the CAS write. The other rejected returns inside service.ts tx() (undoFix: already_reverted, zone_changed_since,
+// no_zone; autoFix: unknown_check, not_open, no_zone) used to fall through casTx and bump the domain rev. The generic fuzz cannot reach them (it needs a
+// real applied fix and a tampered zone first), so this driver builds that state with SYNTHETIC data (.example zone, no network) and fires each rejection.
+export interface OwnerRejectRig {
+  req: (method: string, path: string, opts?: { token?: string; body?: unknown }) => Promise<Response>;
+  token: string; domainId: string; domain: string;
+  zone: { world: { txt?: Record<string, string[]> }; setTxt: (n: string, v: string[]) => Promise<void> };
+  rev?: () => Promise<number | undefined>;
+  snap: () => Promise<string> | string;   // full state dump: every store row plus the rev, via the caller's store (Memory or FakeD1)
+  clock: { t: number };
+}
+export interface OwnerRejectCase { path: string; status: number; reason: string; changed: boolean; revBefore?: number; revAfter?: number }
+export async function ownerRejectedPaths(R: OwnerRejectRig, onlyPaths?: string[]): Promise<OwnerRejectCase[]> {
+  const out: OwnerRejectCase[] = [];
+  const base = `/app/domains/${R.domainId}`;
+  const post = (p: string, body?: unknown) => R.req("POST", base + p, { token: R.token, body });
+  const reject = async (path: string, p: string, body?: unknown) => {
+    const before = await R.snap(), revBefore = await R.rev?.(); const r = await post(p, body); const text = await r.text();
+    out.push({ path, status: r.status, reason: text.slice(0, 80), changed: (await R.snap()) !== before, revBefore, revAfter: await R.rev?.() });
+  };
+  const want = (n: string) => !onlyPaths || onlyPaths.includes(n);
+  R.clock.t += 120_000; await post("/scan");
+  // 1 + 2: an applied fix, undone, undone again (already_reverted); a re-fix whose zone is then edited by someone else (zone_changed_since)
+  const f1 = await (await post("/fix", { check: "SPF" })).json() as { fixId?: string };
+  if (f1.fixId) {
+    await post(`/fixes/${f1.fixId}/undo`);
+    if (want("undo already_reverted")) await reject("undo already_reverted", `/fixes/${f1.fixId}/undo`);
+    const f2 = await (await post("/fix", { check: "SPF" })).json() as { fixId?: string };
+    if (f2.fixId) {
+      if (want("fix not_open")) await reject("fix not_open", "/fix", { check: "SPF" });
+      const d = R.domain; R.zone.world.txt![d] = ["v=spf1 include:_somebody-else.example -all"];
+      if (want("undo zone_changed_since")) await reject("undo zone_changed_since", `/fixes/${f2.fixId}/undo`);
+    }
+  }
+  if (want("fix unknown_check")) await reject("fix unknown_check", "/fix", { check: "ZZZ" });
+  return out;
+}

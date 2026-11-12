@@ -42,8 +42,10 @@ export async function listDomains(d: Deps, a: Account) {
 }
 export async function getOverview(d: Deps, a: Account, id: string) { const { c, s } = await open(d, a, id); await c.store.put(s); return overview(s, d.now()); }
 // F185: every mutation is load, mutate, compare-and-set on the store's per-domain revision (casTx); a lost race re-runs on a fresh load.
-async function tx<T>(d: Deps, a: Account, id: string, f: (c: Ctx, s: DomainState) => Promise<T>) {
-  try { const r = await casTx(ctxOf(d), async () => { const { c, s } = await open(d, a, id); return { s, out: await f(c, s) }; }); return { s: r.s, out: r.out }; }
+// f368: `rejected(out)` is true when the body refused the request BEFORE mutating anything (undoFix and autoFix return ok:false first); that outcome is
+// not written, so a rejected request leaves the rev and every row as it found them.
+async function tx<T>(d: Deps, a: Account, id: string, f: (c: Ctx, s: DomainState) => Promise<T>, rejected: (out: T) => boolean = () => false) {
+  try { const r = await casTx(ctxOf(d), async () => { const { c, s } = await open(d, a, id); const out = await f(c, s); return { s, out, write: !rejected(out) }; }); return { s: r.s, out: r.out }; }
   catch (e) { if (e instanceof OwnerConflictError) throw new HttpError(409, "state_conflict_retry"); throw e; }
 }
 export async function scan(d: Deps, a: Account, id: string) {
@@ -55,13 +57,13 @@ export async function scan(d: Deps, a: Account, id: string) {
 }
 export async function fix(d: Deps, a: Account, id: string, check: unknown) {
   if (typeof check !== "string" || !/^[A-Z-]{2,8}$/.test(check)) throw new HttpError(400, "invalid_check");
-  const { s, out: r } = await tx(d, a, id, (c, s) => autoFix(c, s, check));
+  const { s, out: r } = await tx(d, a, id, (c, s) => autoFix(c, s, check), (r) => !r.ok && (r.reason === "unknown_check" || r.reason === "not_open" || r.reason === "no_zone"));
   return { result: r.ok ? r.result : r.reason, detail: r.ok ? r.fix.note : r.detail, plan: r.plan ? { auto: r.plan.auto, summary: r.plan.summary, edits: r.plan.edits.map((e) => ({ name: e.name, before: e.before, after: e.after })) } : null, fixId: r.ok ? r.fix.id : r.fix?.id ?? null, overview: overview(s, d.now()) };
 }
 export async function undo(d: Deps, a: Account, id: string, fixId: string) {
   // f367: an unknown fix id is rejected BEFORE the CAS write; a rejected request must not bump the domain's revision (route fuzz: STATE CHANGED on a 404)
   if (!(await open(d, a, id)).s.fixes.some((x) => x.id === fixId)) throw new HttpError(404, "no_such_fix");
-  const { s, out: r } = await tx(d, a, id, (c, s) => undoFix(c, s, fixId));
+  const { s, out: r } = await tx(d, a, id, (c, s) => undoFix(c, s, fixId), (r) => !r.ok);
   if (!r.ok) throw new HttpError(r.reason === "no_such_fix" ? 404 : 409, r.reason!);
   return overview(s, d.now());
 }
