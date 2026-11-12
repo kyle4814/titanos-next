@@ -83,8 +83,8 @@ export const SITE: SiteConfig = {
   ORDER_SUBMIT_URL: "https://api.titanos.tech/order/submit",
 };
 
-// Direct contact. Kyle takes messages by email and Telegram: no booking
-// system, no calendar. The mobile number is never published. Change a number here and every page follows.
+// Direct contact. Kyle takes booked calls through his own booking page (BOOK_HREF, below) and messages by email and Telegram.
+// The mobile number is never published. Change a number here and every page follows.
 export const CONTACT = {
   TELEGRAM_URL: "https://t.me/TitanOSofficial",
   TELEGRAM_HANDLE: "@TitanOSofficial",
@@ -93,8 +93,10 @@ export const CONTACT = {
 
 // Derived helpers.
 // Sitewide primary CTAs route to the on-page message/call block on /audit
-// (free AI audit) or to /contact. Nothing books a calendar slot.
+// (free AI audit) or to /contact. The primary CTA is BOOK_HREF; Telegram stays the secondary door.
 export const AUDIT_MESSAGE_HREF = "/audit#message";
+// The primary action everywhere: book a 20 minute call on our own booking page (portal-api /api/slots + /api/book).
+export const BOOK_HREF = "/book";
 export const CONTACT_HREF = "/contact";
 
 // C2 portal API (portal-api/ Worker). Same origin as the live Worker; the new routes mount beside the old ones on deploy.

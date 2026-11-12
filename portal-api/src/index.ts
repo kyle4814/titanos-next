@@ -17,6 +17,7 @@ import { workerScheduled } from "./owner/cron.ts";
 import { drainTickScheduled, isDrainTick, type DrainTickOpts } from "./shop/drain_tick_worker.ts";
 import { Throttle, ThrottledError, throttleKey } from "./throttle.ts";
 import { buildDeps as defaultBuildDeps, BuildDepsError, throttleFor, THROTTLE_LIMITS as LIMITS } from "./build_deps.ts";
+import { bookingRoute, BOOKING_PATH } from "./booking/routes.ts";
 import { runPayoutTick, type TickResult } from "./enterprise/payout_tick.ts";
 
 export const SERVICE = "titanos-portal-api";
@@ -68,6 +69,18 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
   try { out = await fn(); } catch (e) { th.note(`throttle fail key=${key}`); throw e; }   // keeps the reserved failure (counts toward the lockout)
   try { await th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
   return out;
+}
+// Counts EVERY attempt against the caller's IP (no reset on success), for public routes that create rows. Same fail-closed rules as throttled().
+async function counted(d: Deps, req: Request, scope: string): Promise<void> {
+  const th = d.throttle;
+  if (!th) return;
+  try {
+    const r = await th.reserveAsync(await throttleKey(scope, "", clientIp(req)));
+    if (!r.allowed) { th.note(`throttle block scope=${scope} retry_after=${r.retryAfterSec}`); throw new ThrottledError(r.retryAfterSec); }
+  } catch (e) {
+    if (e instanceof ThrottledError) throw e;
+    throw new HttpError(503, "throttle_unavailable");
+  }
 }
 function cors(res: Response, env: Env): Response {
   const o = env.TITANOS_SITE_ORIGIN?.trim();
@@ -156,6 +169,9 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     }
     const credit = await handleCreditEvent(d, ev);
     return json({ result: credit ?? (await svc.handleStripeEvent(d, ev)) });
+  }
+  if (BOOKING_PATH.test(path)) {   // 2026-11-12 own booking system: public, no account; the origin guard and the per-IP count live in booking/routes.ts + counted()
+    return bookingRoute(req, path, d, () => counted(d, req, "book"));
   }
   if (path === "/market/leaderboard" && m === "GET") return json(await mkt.leaderboard(d));   // public, pseudonymous, proven fixes only
   if (seg[0] === "internal" && seg[1] === "keys" && seg[2] === "trace" && seg.length === 3 && m === "GET") { // operator abuse tracing: key prefix -> account -> recent calls

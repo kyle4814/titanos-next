@@ -15,7 +15,7 @@ const SITE = join(ROOT, "..");
 function scratch(): { root: string; dir: string } {
   const root = mkdtempSync(join(tmpdir(), "f86-"));
   const dir = join(root, "portal-api");
-  cpSync(ROOT, dir, { recursive: true, filter: (s) => !s.includes("node_modules") });
+  cpSync(ROOT, dir, { recursive: true, filter: (s) => !s.includes("node_modules") && !/[\\/]\.mut-[^\\/]*/.test(s) });
   // int3: the Worker also imports lib/shop (drain tick) and lib/concierge (demand), so the whole site lib/ (~1.6 MB) is copied
   cpSync(join(SITE, "lib"), join(root, "lib"), { recursive: true });
   return { root, dir };

@@ -1,7 +1,7 @@
 {
   "schema": "export-pages/1",
-  "count": 267,
-  "routes_count": 266,
+  "count": 269,
+  "routes_count": 268,
   "system_pages": [
     "404.html",
     "_not-found.html"
@@ -46,6 +46,8 @@
     "blog/tap-to-approve-telegram-no-second-bot.html",
     "blog/the-bank-details-email-accountants-and-bookkeepers.html",
     "blog/trade-software-quote-exports.html",
+    "book.html",
+    "book/confirmed.html",
     "case-studies.html",
     "case-studies/ariance.html",
     "case-studies/dealer-command-centre.html",

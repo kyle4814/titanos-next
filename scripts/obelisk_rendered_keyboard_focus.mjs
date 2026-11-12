@@ -19,7 +19,7 @@
 import { shardOf, enumerateAllPages, manifestRoutes, ManifestError, loadAllowlist, coverage, mapLimit, allFlags, ALLFLAGS, writeReport } from "./lib/allpages.mjs";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 
-export const DEFAULT_PAGES = ["/", "/scan", "/pricing", "/app", "/pro", "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/investors", "/sectors"];
+export const DEFAULT_PAGES = ["/", "/scan", "/pricing", "/app", "/pro", "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/investors", "/sectors", "/book"];
 export const VIEWPORTS = { desktop: { width: 1280, height: 800 }, mobile: { width: 390, height: 844 } };
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".txt": "text/plain", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".woff": "font/woff", ".ico": "image/x-icon" };
 const TABBABLE = 'a[href],area[href],button,input:not([type="hidden"]),select,textarea,summary,iframe,[tabindex],[contenteditable=""],[contenteditable="true"],audio[controls],video[controls]';

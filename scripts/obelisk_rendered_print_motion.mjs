@@ -21,7 +21,7 @@ const require = createRequire(join(here, "..", "package.json"));
 // home, /scan, pricing, account (/app), portal (/pro) + 8 more doors from plan ch6 site map (line 1444).
 export const DEFAULT_PAGES = [
   "/", "/scan", "/pricing", "/app", "/pro",
-  "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/sectors",
+  "/agents", "/enterprise", "/partners", "/shop", "/trust", "/proof", "/engineering", "/sectors", "/book",
 ];
 
 const MIME = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".mjs": "text/javascript",

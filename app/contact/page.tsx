@@ -30,11 +30,11 @@ export default function ContactPage() {
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
-        sub="No form maze, no booking system, no ticket queue. Message Kyle directly and you hear back from the same person who does the work."
+        sub="No form maze and no ticket queue. Book a call or message Kyle directly, and you deal with the same person who does the work."
         trustLine={<>ABN 34 318 502 254 · Brisbane, Australia</>}
       />
       <Bluf>
-        Message Kyle. You hear back from the person who does the work, and the first conversation and your report are free.
+        Book a call or message Kyle. You deal with the person who does the work, and the first conversation and your report are free.
       </Bluf>
       <Analogy k="healthcheck" />
 
@@ -53,7 +53,7 @@ export default function ContactPage() {
 
       <section aria-label="Message Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="w2c-contact">
-          <ContactButtons heading="Message Kyle for a free consultation and report, ask a quick question, or just say hi. Whichever is easiest." />
+          <ContactButtons heading="Book a call for a free consultation and report, or message Kyle to ask a quick question or just say hi. Whichever is easiest." />
         </div>
       </section>
 

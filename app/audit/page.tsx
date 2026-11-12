@@ -124,8 +124,8 @@ export default function AuditPage() {
       </SectionReveal>
 
       <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <AnimatedButton href="#message" variant="primary">
-          Message Kyle for a free consultation and report →
+        <AnimatedButton href="/book" variant="primary">
+          Book a free call with Kyle →
         </AnimatedButton>
       </section>
 
@@ -202,8 +202,8 @@ export default function AuditPage() {
             I&apos;ll tell you that too.
           </p>
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            <AnimatedButton href="#message" variant="primary">
-              Message Kyle for a free consultation and report →
+            <AnimatedButton href="/book" variant="primary">
+              Book a free call with Kyle →
             </AnimatedButton>
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function AuditPage() {
           <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
             Direct line. No gatekeeper
           </SystemLabel>
-          <SectionHeading title="Would it be okay if you messaged me?" lead="Send a message on Telegram, or just call. No booking, no forms, no waiting for a slot. A no is welcome." />
+          <SectionHeading title="Would it be okay if you messaged me?" lead="Book a 20 minute call, send a message on Telegram, or just call. Whichever suits you. A no is welcome." />
           <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
             I take every one of these myself. If automation isn&apos;t worth it for your
             business, I&apos;ll tell you on the call rather than sell you something that
@@ -238,7 +238,7 @@ export default function AuditPage() {
             Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in your business yet, I'll tell you that too.
           </FaqItem>
           <FaqItem question="How long is the call?">
-            As long as it takes to understand your business. There's no booking and no fixed slot, so we talk until it's clear.
+            As long as it takes to understand your business. The first call is booked for 20 minutes, and if you both want to keep going we keep going until it's clear.
           </FaqItem>
           <FaqItem question="What happens after the call?">
             If it makes sense, we start with your first system inside month 1 of a retainer. If it doesn't, you walk away with an honest answer and nothing owed.

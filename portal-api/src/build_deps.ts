@@ -27,6 +27,8 @@ import { dnsScan, publicDohResolver } from "./enterprise/estate_dns.ts";
 import { RATE_V1 } from "./enterprise/share.ts";
 import { makeBookFacts } from "./enterprise/book_facts.ts";
 import { parseSealKeys, type SealKeyring } from "./enterprise/seal.ts";
+import { D1BookingStore } from "./booking/store.ts";
+import { telegramNotifier } from "./booking/telegram.ts";
 import type { PayoutProvider } from "./enterprise/types.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
@@ -133,6 +135,7 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? mailerFor(env, now), now, siteOrigin,
     webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
+    booking: { store: new D1BookingStore(db), notify: telegramNotifier(env, opts.fetchFn), log: (l) => console.log(l) },
   };
 }
 

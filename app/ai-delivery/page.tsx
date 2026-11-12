@@ -288,8 +288,8 @@ export default function AiDeliveryPage() {
         <p className={s.ctaP}>
           No cost, no obligation, no pitch deck. Just a straight conversation about the most repetitive job in your business, and a report of your own to keep. If it is not for you, a no is welcome.
         </p>
-        <AnimatedButton href="/audit" variant="primary">
-          Message Kyle for a free consultation and report →
+        <AnimatedButton href="/book" variant="primary">
+          Book a free call with Kyle →
         </AnimatedButton>
       </SectionReveal>
       <FrontLoad

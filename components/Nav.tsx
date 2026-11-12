@@ -26,7 +26,7 @@ import { AnimatePresence, m as motion, useReducedMotion } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
-import { AUDIT_MESSAGE_HREF } from "@/lib/config";
+import { BOOK_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 import { LINKS, DESKTOP_LINKS, groupMore } from "@/lib/navLinks";
 
@@ -135,7 +135,7 @@ export default function Nav() {
           ))}
           <MoreMenu />
           <Link
-            href={AUDIT_MESSAGE_HREF}
+            href={BOOK_HREF}
             style={{
               marginLeft: 18,
               padding: "8px 16px",
@@ -149,8 +149,8 @@ export default function Nav() {
               whiteSpace: "nowrap",
             }}
           >
-            <span className="nav-cta-long">Message Kyle for a free consultation and report</span>
-            <span className="nav-cta-short">Free consultation</span>
+            <span className="nav-cta-long">Book a free call with Kyle</span>
+            <span className="nav-cta-short">Book a call</span>
           </Link>
         </div>
 
@@ -294,7 +294,7 @@ export default function Nav() {
               </div>
 
               <Link
-                href={AUDIT_MESSAGE_HREF}
+                href={BOOK_HREF}
                 onClick={() => setDrawerOpen(false)}
                 style={{
                   display: "flex",
@@ -314,7 +314,7 @@ export default function Nav() {
                   marginBottom: 24,
                 }}
               >
-                Message Kyle for a free consultation and report
+                Book a free call with Kyle
               </Link>
 
               <nav>

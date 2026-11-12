@@ -14,11 +14,12 @@ import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import StatsTicker from "@/components/StatsTicker";
 import HoursCounter from "@/components/HoursCounter";
 import ContactButtons from "@/components/ContactButtons";
-import { AUDIT_MESSAGE_HREF } from "@/lib/config";
+import { BOOK_HREF } from "@/lib/config";
 import { Inscription } from "@/components/Myth";
 import { OpenLoop } from "@/components/FlexBlock";
 
 import { Analogy, FrontLoad, FreeStart } from "@/components/SalesKit";
+import PricingGlance from "@/components/home/PricingGlance";
 
 const baseMetadata: Metadata = {
   title: "Titanos | AI automation and Privacy Act compliance, Brisbane",
@@ -147,8 +148,8 @@ export default function Home() {
 
         <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
-              Message Kyle for a free consultation and report →
+            <AnimatedButton href={BOOK_HREF} variant="primary">
+              Book a free call with Kyle →
             </AnimatedButton>
             <AnimatedButton href="/how-it-works" variant="secondary">
               See how it works →
@@ -219,7 +220,7 @@ export default function Home() {
             If there&apos;s nothing worth automating yet, <strong style={{ color: "var(--gold)" }}>I&apos;ll tell you that too</strong>.
           </p>
           <div style={{ marginTop: 24 }}>
-            <ContactButtons heading="Message Kyle. No booking, no forms." />
+            <ContactButtons heading="Book a call, or message Kyle. Whichever is easiest." />
           </div>
         </div>
       </SectionReveal>
@@ -268,6 +269,9 @@ export default function Home() {
           { q: "Is my data safe?", a: "Every system is built privacy-compliant by design. That is the other half of my practice, not a bolt-on." },
         ]}
       />
+
+      {/* ═══ PRICES: compact list, same numbers and wording as /pricing (2026-11-12) ═══ */}
+      <PricingGlance />
 
       {/* ═══ Final CTA ═══ */}
       <OpenLoop>You have seen the receipts. Would it be okay if I looked at your business the same way, free, and told you straight what I find? A no is welcome.</OpenLoop>

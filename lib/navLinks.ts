@@ -22,6 +22,7 @@ export const LINKS: NavItem[] = [
   { label: "Shop", href: "/shop", external: false },
   { label: "Products and courses", href: "/products", external: false },
   { label: "Case studies", href: "/case-studies", external: false },
+  { label: "Book a call", href: "/book", external: false },
   { label: "Free consultation", href: "/audit", external: false },
   { label: "AI Partnership", href: "/ai-delivery", external: false },
   { label: "Compliance", href: "/compliance", external: false },
@@ -61,7 +62,7 @@ export const DESKTOP_LINKS: NavItem[] = [
 ];
 
 // The gold CTA on desktop stands in for these LINKS hrefs.
-export const CTA_HREFS: string[] = ["/audit"];
+export const CTA_HREFS: string[] = ["/book"];
 
 export const MORE_LINKS: NavItem[] = LINKS.filter(
   (l) =>
@@ -90,6 +91,7 @@ const META: Record<string, { group: string; blurb: string }> = {
   "/speed": { group: "Company", blurb: "Fast because it is code, precise because it is checked" },
   "/refer": { group: "Company", blurb: "Introduce a business, get rewarded" },
   "/contact": { group: "Company", blurb: "Talk to Kyle directly" },
+  "/audit": { group: "Company", blurb: "A free consultation and report on your business" },
 };
 const GROUP_ORDER = ["Tools", "Company", "More"];
 

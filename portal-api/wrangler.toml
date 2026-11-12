@@ -10,6 +10,11 @@ TITANOS_SITE_ORIGIN = "https://titanos.tech"
 # and read by the operator through wrangler. buildDeps refuses this with STRIPE_MODE="live". Remove when a real mailer is bound.
 DEV_OUTBOX = "1"
 
+# Booking alert (2026-11-12): two worker SECRETS, never vars, never committed:
+#   wrangler secret put TELEGRAM_BOT_TOKEN     (the bot token Kyle's kernel already uses for his DM alerts)
+#   wrangler secret put TELEGRAM_CHAT_ID       (Kyle's own chat id)
+# Without them /api/book still stores the booking and just sends no alert. Migration 0026_bookings.sql must be applied first.
+
 [[d1_databases]]
 binding = "DB"
 database_name = "titanos-portal"

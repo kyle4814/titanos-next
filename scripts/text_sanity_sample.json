@@ -3,7 +3,7 @@
   "routes": [
     "/", "/proof", "/learning-loop",
     "/scan", "/app", "/pro", "/agents", "/enterprise", "/partners",
-    "/pricing", "/shop", "/trust", "/status", "/engineering", "/faq", "/contact", "/open-data",
+    "/pricing", "/book", "/book/confirmed", "/shop", "/trust", "/status", "/engineering", "/faq", "/contact", "/open-data",
     "/sectors", "/sectors/health",
     "/labs", "/labs/issue-001",
     "/offers", "/offers/bid-pack",
