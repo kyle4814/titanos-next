@@ -59,6 +59,8 @@ export async function fix(d: Deps, a: Account, id: string, check: unknown) {
   return { result: r.ok ? r.result : r.reason, detail: r.ok ? r.fix.note : r.detail, plan: r.plan ? { auto: r.plan.auto, summary: r.plan.summary, edits: r.plan.edits.map((e) => ({ name: e.name, before: e.before, after: e.after })) } : null, fixId: r.ok ? r.fix.id : r.fix?.id ?? null, overview: overview(s, d.now()) };
 }
 export async function undo(d: Deps, a: Account, id: string, fixId: string) {
+  // f367: an unknown fix id is rejected BEFORE the CAS write; a rejected request must not bump the domain's revision (route fuzz: STATE CHANGED on a 404)
+  if (!(await open(d, a, id)).s.fixes.some((x) => x.id === fixId)) throw new HttpError(404, "no_such_fix");
   const { s, out: r } = await tx(d, a, id, (c, s) => undoFix(c, s, fixId));
   if (!r.ok) throw new HttpError(r.reason === "no_such_fix" ? 404 : 409, r.reason!);
   return overview(s, d.now());

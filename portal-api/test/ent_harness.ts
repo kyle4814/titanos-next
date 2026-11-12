@@ -37,10 +37,16 @@ export function makeEntStores(kind = process.env.ENT_STORE ?? "memory"): { store
   const store = new D1EntStore(fake); FAKES.set(store, fake);
   return { store, approvals: new D1ApprovalStore(fake), fake };
 }
+// f367: the ONE place the full enterprise dep set is composed (store, approvals, book, seal keys), so the route fuzz rig cannot drift to a half-wired ent that answers 503/500.
+export function makeEntDeps(rates: RateTable = RATE_V1, kind?: string) {
+  const { store, approvals } = makeEntStores(kind), payouts = new MockPayouts(), book = new MemoryBookFacts();
+  const ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals, book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
+  return { ent, store, approvals, payouts, book };
+}
 export function makeEnt(rates: RateTable = RATE_V1) {
   const h = make();
-  const { store, approvals } = makeEntStores(), payouts = new MockPayouts(), book = new MemoryBookFacts();
-  h.deps.ent = { store, idp: MockIdp, payouts, scan: SyntheticScan, rates, internalSecret: INTERNAL, approvals, book, sealKeys: { current: "k1", keys: { k1: newSealKey() } } as SealKeyring };
+  const { ent, store, payouts, book } = makeEntDeps(rates);
+  h.deps.ent = ent;
   const ireq = (path: string, body: unknown, secret: string | null = INTERNAL) =>
     h.req("POST", path, { body, headers: secret ? { "x-internal-secret": secret } : {} });
   // sign in, then the operator provisions the seat
