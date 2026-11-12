@@ -8,6 +8,8 @@ export const MIN_SCORE = 3.0;      // below this nothing is real enough to say: 
 export const ASK_MARGIN = 0.02;    // top-2 within 2%: ask with tap buttons
 export const MAX_UNKNOWN = 0.5;     // half or more of the asker's content words unknown to the catalogue: we do not pretend
 export const CONF_FLOOR = 7.0;         // F-C6: a match with no keyword hit must clear this; measured: lowest correct no-hit match 7.22 on the 269 labelled asks
+export const THIN_MATCH = 2;        // F-434: distinct asker words found anywhere in the top shelf; this few or fewer, with no keyword phrase, is thin evidence
+export const ASK_MARGIN_THIN = 0.2;   // F-434: thin evidence and a runner-up within 20%: raise the clarifying ask instead of guessing. Tuned on dev3.tsv only.
 const HOME_BOOST = 1.25;
 export const OFFER_NOHIT = 0.9;      // F-65: tuned on lib/concierge/dev.tsv (synthetic), never on holdout.tsv
 const HIT_IDF = 1.2;               // a lone keyword counts as a deliberate hit only if it is selective
@@ -108,7 +110,10 @@ export function route(index: Index, ask: string, seat: Seat = "guest"): Reply {
   if (!top.phrase && q.some((t) => OFFTOPIC_CUES.has(t))) return unmatched(raw, seat, "no_match");
   const second = ranked[1];
   const margin = second && top.s > 0 ? (top.s - second.s) / top.s : 1;
-  if (second && margin < ASK_MARGIN && second.s >= MIN_SCORE) {
+  const cover = (d: Doc) => new Set(q.filter((t) => d.title.has(t) || d.text.has(t) || d.kw.some((k) => k.includes(t)))).size;
+  // F-434: the winner won on weight, not on coverage: thin evidence (few of the asker's words found, no keyword phrase), fewer words found than the runner-up, and the runner-up close behind.
+  const thin = !!second && !top.phrase && cover(top.d) <= THIN_MATCH && cover(top.d) < cover(second.d);
+  if (second && margin < (thin ? ASK_MARGIN_THIN : ASK_MARGIN) && second.s >= MIN_SCORE) {
     return { kind: "ask", question: "Which of these is closest to what you need?", taps: ranked.slice(0, 3).filter((r) => r.s >= MIN_SCORE).map((r) => tap(r.d.shelf)), score: top.s };
   }
   const slots: Record<string, string> = domain ? { domain } : {};

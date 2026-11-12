@@ -1,0 +1,209 @@
+guest	ask	i am a subbie and want more work, what have you got
+pro	ask	something to help me find subcontractors or get found by head contractors
+owner	ask	i need help with tenders but not sure which one
+guest	ask	help me win government work
+guest	ask	do you have a tender thing for small businesses
+owner	ask	i want to know which tenders are worth my time
+guest	ask	something about privacy for my practice
+owner	ask	help me with the privacy act stuff
+guest	ask	watch my competitors for me
+owner	ask	keep an eye on other businesses in my area
+pro	ask	i want leads for my accounting practice
+owner	ask	help me chase customers who owe me money
+guest	ask	i need quotes sorted
+owner	ask	help me with my quotes
+guest	ask	something for solar installers
+enterprise	ask	we want help with grants and tenders for our charity
+guest	ask	i run a charity and want to understand our numbers and find funding
+owner	ask	help with fake emails pretending to be my suppliers
+guest	ask	i want to find new commercial customers for my trade business
+owner	ask	i need more jobs coming in for my trade business
+guest	ask	do you track new businesses opening up
+pro	ask	new clients for my bookkeeping practice
+partner	ask	something for my msp to resell
+agent	ask	i build ai agents for clients and need tools to ship them safely
+guest	ask	report on a company i am about to deal with
+enterprise	ask	look at the security of a few organisations for me
+guest	ask	i want to sell overseas to governments
+guest	ask	help me with overseas tenders
+owner	ask	help me with my tender response
+guest	ask	i am a grant writer and want something to help my clients
+pro	ask	monitor the email setup of lots of my clients
+guest	ask	feed of leads for my agency
+partner	ask	white label something for my customers
+owner	ask	review my domain email and tell me who is copying it
+guest	ask	help me understand which public contracts my rivals hold
+owner	ask	weekly list of businesses that might need what i sell
+guest	ask	something for property agents and brokers
+owner	ask	i want people to stop being late paying me and also win more quotes
+enterprise	ask	reports on the privacy and cyber risk of our group
+guest	ask	cheap way to see government opportunities
+guest	none	name the capital city of new zealand
+owner	none	method for baking a sourdough loaf
+guest	none	who plays in the grand final this weekend
+pro	none	suggest a cute name for our new kitten
+guest	none	can you recommend a plumber in geelong
+owner	none	what time does the post office close
+enterprise	none	explain how a jet engine works
+guest	none	joke about cats please
+guest	none	cheapest phone plan with big data allowance
+agent	none	how many days until christmas
+guest	none	steps to renew my licence for driving
+owner	none	yen exchange rate today
+guest	none	where is the nearest petrol station
+owner	none	help me write a poem for my wedding
+guest	none	what should i cook for dinner tonight
+guest	portal:scan	free health check for my company site
+guest	portal:scan	test www.bluegumplumbing.com.au for email problems
+guest	portal:pricing	what are your prices for the monthly plans
+owner	portal:pricing	how much do you charge for the paid tier
+guest	portal:proof-wall	where can i see results you got for real clients
+guest	portal:sector-index	how safe are cafes online compared to other trades
+guest	portal:engineering	what technology is this website made with
+guest	portal:trust-scan	are you allowed to inspect my domain
+guest	portal:trust-scan	will your scan break anything on my site
+guest	portal:ai-disclosure	is there a human typing these replies or a program
+guest	portal:privacy	what happens with the information i give you
+guest	portal:contact	i would like to ring someone
+owner	portal:contact	could someone from your team ring me back
+guest	portal:faq	what are the common questions people ask about this
+guest	portal:account-signup	i want to open a login
+guest	portal:status	is your website having an outage right now
+owner	portal:billing-cancel	stop the recurring charge on my card
+owner	portal:billing-refund	give me a refund for this purchase
+owner	portal:billing-invoices	locate the tax invoice for last quarter
+owner	portal:data-export	erase all personal records you keep about me
+owner	portal:domain-verify	verifying domain control through a dns record, how
+owner	portal:findings	list the issues the scan turned up on my site
+owner	portal:quests	what is the next small thing i should fix
+owner	portal:owner-level	how am i scoring overall
+owner	portal:reports	i need a pdf for my insurer
+owner	portal:auto-fix	can you repair the dns records for me automatically
+owner	portal:hire-pro	i would like a specialist to do the work
+owner	portal:monitor	alert me if my email protection stops working
+pro	portal:pro-jobs	which jobs can i pick up today
+pro	portal:pro-payouts	the day my earnings are paid out to my account
+pro	portal:pro-rank	how are the leaderboard positions worked out
+pro	portal:pro-whitelabel	our own branding on the exported pdf please
+pro	portal:pro-seat	what do i get for the pro subscription
+pro	portal:leads-export	download the lead list as a spreadsheet
+agent	portal:agent-keys	obtain an api key for the mcp server
+agent	portal:agent-catalogue	what tools can an agent call here
+agent	portal:agent-credits	add more prepaid credit to my agent account
+agent	portal:llms	is there an llms txt file
+enterprise	portal:enterprise	central view for every domain we own
+enterprise	portal:sso	can we log in with okta
+enterprise	portal:savings-calc	estimate the savings this gives our group
+partner	portal:partners	explain the partner revenue split
+guest	portal:shop	what do you have for sale
+guest	portal:quote	i need a bespoke job priced
+guest	portal:courses	do you teach anything
+guest	portal:investors	can i put money into the company
+guest	portal:security	have you done a penetration test on your platform
+guest	portal:tenders	where do i look for government tenders
+guest	portal:get-fixed	please just sort out the problems for me
+guest	portal:sector-index	industry safety scores by sector
+pro	portal:home-pro	open the pro home screen
+owner	portal:home-owner	go to my owner home
+agent	portal:home-agent	open my agent home
+guest	offer:subbie-finder	find reliable subcontractors for my building jobs
+guest	offer:quote-chaser	follow up the quotes nobody replied to
+guest	offer:invoice-nudge-rail	nudge customers whose invoices are overdue
+guest	offer:free-tender-digest	send me a free email of new tenders
+guest	offer:global-tender-desk	show me tenders out of the uk and us
+guest	offer:tender-fit-score	is this tender worth bidding on
+guest	offer:bid-pack	i have a tender due and nobody to write it
+guest	offer:panel-door-map	how do i get onto a government panel for the first time
+guest	offer:grant-radar-nfp	grants for my not for profit
+guest	offer:rival-watch	track what my local rivals are doing
+guest	offer:instant-email-domain-check	quick check of my domains email protection
+guest	offer:wordpress-email-posture-widget	email check widget for my wordpress site
+guest	offer:payee-domain-change-watch	warn me if a suppliers payment details email changes domain
+guest	offer:scam-shield-for-tradies	protect me from fake invoice scams
+guest	offer:counterparty-check	check a small supplier before i hire them
+guest	offer:quote-writer-from-job-notes	draft a quote document out of the notes i took on site
+guest	offer:tradie-starter-list	starter set of nearby company prospects for my cleaning business
+guest	offer:job-flow	a steady flow of new work for my electrical business
+guest	offer:neighbour-alerts	tell me when new businesses open near me
+guest	offer:commercial-customer-list	a list of offices and strata who could be repeat customers
+guest	offer:trade-panel-pack	help getting my trade business on a panel
+guest	offer:tender-radar-for-trades	tender alerts for my trade business
+guest	offer:account-dossier-on-demand	a research brief on one named company i want to sell to
+guest	offer:sector-dossier-library	ready made briefs on a whole sector
+guest	offer:account-change-alert	tell me when my named accounts change
+guest	offer:pitch-hooks-page	pitch angles for a law firm
+guest	offer:business-change-feed	a feed of australian businesses that changed recently
+guest	offer:signal-leads-data	a subscription to buying signal data
+guest	offer:agency-white-label-audit	sell website audits under my agency brand
+guest	offer:monitor-wholesale	resell domain monitoring to my msp clients
+guest	offer:dossier-reseller-licence	licence to resell dossiers with my own label
+guest	offer:broker-renewal-scan	spot which business clients are due for cyber renewal
+guest	offer:accountant-privacy-check	privacy check i can offer my accounting clients
+guest	offer:bookkeeper-morning-board	a morning dashboard for my bookkeeping clients
+guest	offer:accountant-chaser-pack	help my tradie clients chase invoices
+guest	offer:franchise-posture-board	one view of email security across all my franchisees
+guest	offer:association-member-kit	a benefit kit for my trade association members
+guest	offer:multi-domain-dmarc-lockdown	lock down email on dozens of our domains
+guest	offer:privacy-adm-wording-check	check the wording of our automated decision notice
+guest	offer:privacy-adm-fix	fix our automated decision privacy problems
+guest	offer:privacy-essential-eight-pack	essential eight and privacy act bundle for our medical clinic
+guest	offer:five-jurisdiction-privacy-bundle	privacy rules for customers in five countries
+guest	offer:quarterly-board-cyber-privacy-briefing	a quarterly cyber briefing for our board
+guest	offer:solar-outreach-rail	outreach tooling for my commercial solar business
+guest	offer:solar-site-shortlist	monthly shortlist of sites for commercial solar
+guest	offer:solar-pipeline-desk	a retainer to build my solar pipeline
+guest	offer:approval-rail-kit	approval steps so my client agents cannot send without a tap
+guest	offer:agent-preflight-test-harness	a safe to ship test before my agent goes live
+guest	offer:outbound-gate-outreach-lint	lint my agents outreach before it sends
+guest	offer:governed-agent-proposal-pack	proposal pack to sell governed agent retainers
+guest	offer:club-sponsor-prospect-list	sponsor prospects for our junior football club
+guest	offer:sponsor-send-rail	let a volunteer tap to send sponsor emails
+guest	offer:owner-inbox-desk	help the owner clear the inbox at night
+guest	offer:review-reply-desk	replies to my google reviews for my cafe
+guest	offer:owner-morning-cash-card	a morning card showing my cash position
+guest	offer:profit-mirror-care	profit view for my ndis provider
+guest	offer:charity-profit-mirror	charity profit analysis please
+guest	offer:health-trust-map	privacy and email trust map for a hospital group
+guest	offer:insurer-book-scan	scan the policy book of an insurer for cyber posture
+guest	offer:supplier-check-dossier	supplier check dossier for our procurement team
+guest	offer:panel-risk-map	supplier risk map for a state agency procurement unit
+guest	offer:tender-intelligence-radar	which competitors win the contracts in my category
+guest	offer:rebid-tender-brief	brief to displace the incumbent on a tender rebid
+guest	offer:incumbent-brief	incumbent brief for a bid consultant
+guest	offer:funder-fit-dossier	funder fit dossier for a grant writer
+guest	offer:award-price-benchmark	what do winning tenders get paid in my category
+guest	offer:eu-ted-small-lot-radar	small eu public tenders for a micro business
+guest	offer:latam-exporter-radar	radar for exporters into colombia and chile
+guest	offer:export-market-tender-map	which overseas public buyers purchase what i export
+guest	offer:foreign-tender-anti-fraud-check	check an overseas tender is not a fraud
+guest	offer:story-leads-weekly	weekly story leads from open contracts for our newsroom
+guest	offer:investigation-cut	single deep dive into public spending
+guest	offer:electorate-dollar-map	map of government dollars by electorate
+guest	offer:contract-variation-watch	alert me when government contracts get varied
+guest	offer:sub-threshold-intelligence-contract	fixed scope intelligence contract for a council
+guest	offer:council-resilience-report	local resilience report for our regional council
+guest	offer:public-posture-briefing	public posture briefing for a university
+guest	offer:au-market-entry-reseller-shortlist	resellers shortlist for entering the australian market
+guest	offer:msp-prospect-feed	prospects for my msp with white label spoofguard
+guest	offer:msp-panel-white-label-feed	white label feed for my msp public sector clients
+guest	offer:agency-signal-leads	signal leads for my web agency
+guest	offer:recruiter-contract-winner-feed	feed of contract winners for my labour hire firm
+guest	offer:hiring-trigger-dossier	hiring trigger dossier for recruiters
+guest	offer:finance-broker-trigger-feed	new entity feed for a finance broker
+guest	offer:new-business-insurance-feed	new entity feed for insurance brokers
+guest	offer:software-partner-stack-feed	stack change feed for software partners
+guest	offer:accountant-new-client-feed	new client trigger feed for my accounting practice
+guest	offer:member-posture-drift-alert	posture drift alert for our industry body members
+guest	offer:procurement-training-feed	white label feed for a procurement training body
+guest	offer:tender-alerts-widget	tender alerts embed for my directory site
+guest	offer:subbie-finder-channel	subbie finder for a chamber of commerce
+guest	offer:subbie-finder-lite	job flow lite subbie finder for a tradie
+guest	offer:spoofguard-global-monitor	monitor my domain email from outside australia
+guest	offer:au-email-security-report	sponsor the state of email security report
+guest	offer:franchise-site-audit	local presence audit across a franchise network
+guest	offer:postcode-churn-index	index of business churn by postcode
+guest	offer:referrer-map-property-finance	referrer map for a mortgage broker
+guest	offer:commercial-property-tenant-trigger-feed	tenant trigger feed for commercial leasing agents
+guest	offer:change-feed-connector-automation-agencies	change feed connector for my automation agency
+guest	offer:supplier-cyber-readiness-pass	cyber readiness pass because a tender asked for security evidence
+guest	offer:pack-factory-channel-partners	pack factory for a grant consultant channel partner
