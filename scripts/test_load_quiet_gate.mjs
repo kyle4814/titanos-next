@@ -85,7 +85,7 @@ try {
   ok(row && row.verdict === "LOAD-TAINTED" && row.stamp.quiet === false, "run_built_gates labels a noisy sweep LOAD-TAINTED");
   ok(/load-tainted=1 .*NOT-PROVEN/.test(G.render(rows).split("\n").pop()), "summary is NOT-PROVEN, not PASS or FAIL");
   const quiet = mkDeps([1]); quiet.spawn = real;
-  rows = G.runAll({ root: tmp, scriptsDir: sc, out, guard: { env: {}, deps: quiet } });
+  rows = G.runAll({ root: tmp, scriptsDir: sc, out, guard: { env: { PATH: process.env.PATH }, deps: quiet } });
   ok(rows.find((x) => x.gate === "test_viewport_overflow.mjs").verdict === "PASS", "same sweep on a quiet box is an unlabelled PASS");
 } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
 
