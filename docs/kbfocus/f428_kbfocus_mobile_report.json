@@ -1,0 +1,2178 @@
+{
+ "probe": "keyboard_focus",
+ "generated": "2026-11-11T06:28:01.471Z",
+ "pages_enumerated": 267,
+ "pages_allowlisted": 0,
+ "shard": null,
+ "source": "manifest",
+ "manifest_routes_count": 266,
+ "pages_total": 266,
+ "pages_swept": 266,
+ "not_swept": [],
+ "allowlisted": [],
+ "problems": [],
+ "pages_with_defects": 16,
+ "pages": [
+  {
+   "route": "/",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/_not-found",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/about",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/agents",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/ai-delivery",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app/billing",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app/estate",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app/keys",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app/login",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/app/partner",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/audit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/audit/booked",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/black-ice",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/black-ice/doctrine",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/black-ice/dossiers",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/black-ice/dossiers/seven-question-proof-test",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/ai-audit-what-we-actually-find",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/ai-automation-cost-small-business",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/ai-receptionist-compliance",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/anz-smb-email-security-double-gap-measured",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/black-ice-operating-doctrine",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/can-someone-send-email-pretending-to-be-my-business",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/capture-recapture-opportunity-mapping",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/dead-quotes-hidden-revenue",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/essential-eight-small-trade-business",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/free-scan-legitimacy-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/headless-ai-research-loop-cant-rm-rf-your-home",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/invoice-scam-tradies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/notifiable-data-breach-scheme-small-business",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/outreach-that-actually-works",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/privacy-act-small-business-deadline",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/rm-rf-home-recovery-case-study",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/settlement-day-scam-property-and-conveyancing",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/sole-trader-privacy-policy-threshold",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/tap-to-approve-telegram-no-second-bot",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/the-bank-details-email-accountants-and-bookkeepers",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/blog/trade-software-quote-exports",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/case-studies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/case-studies/ariance",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/case-studies/dealer-command-centre",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/case-studies/sales-coaching-course",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/case-studies/trading-app",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/compliance",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/contact",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/costs",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/courses",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/credits",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/deep-field",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/demo/tix",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/demo/tix/organiser",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/demo/tix/scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/demo/tix/wallet",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/efficiency",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "TRAP [mobile] no return to document or wrap within 44 presses (N=39, 44 distinct stops): keyboard trap"
+   ]
+  },
+  {
+   "route": "/engineering",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/enterprise",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/faq",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/find",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/how-it-works",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/hud",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/investors",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/labs",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
+   ]
+  },
+  {
+   "route": "/labs/issue-001",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 5 stops, forward visited 4; first differing index 4"
+   ]
+  },
+  {
+   "route": "/labs/issue-001/scorecard",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
+   ]
+  },
+  {
+   "route": "/labs/issue-002",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 7 stops, forward visited 6; first differing index 6"
+   ]
+  },
+  {
+   "route": "/labs/issue-003",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 10 stops, forward visited 9; first differing index 9"
+   ]
+  },
+  {
+   "route": "/labs/issue-004",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 10 stops, forward visited 9; first differing index 9"
+   ]
+  },
+  {
+   "route": "/labs/issue-005",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 9 stops, forward visited 8; first differing index 8"
+   ]
+  },
+  {
+   "route": "/labs/issue-006",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
+   ]
+  },
+  {
+   "route": "/labs/issue-007",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
+   ]
+  },
+  {
+   "route": "/labs/issue-008",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
+   ]
+  },
+  {
+   "route": "/labs/issue-009",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
+   ]
+  },
+  {
+   "route": "/leads",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/learning-loop",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/methodology",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/mission",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/monitor",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/monitor/cancelled",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/monitor/success",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/account-change-alert",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/account-dossier-on-demand",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/accountant-chaser-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/accountant-new-client-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/accountant-privacy-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/agency-signal-leads",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/agency-white-label-audit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/agent-preflight-test-harness",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/approval-rail-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/association-member-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/au-email-security-report",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/au-market-entry-reseller-shortlist",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/award-price-benchmark",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/bid-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/bookkeeper-morning-board",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/broker-renewal-scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/business-change-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/change-feed-connector-automation-agencies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/charity-profit-mirror",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/club-sponsor-prospect-list",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/commercial-customer-list",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/commercial-property-tenant-trigger-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/contract-variation-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/council-resilience-report",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/counterparty-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/dd-pre-read",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/dossier-reseller-licence",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/electorate-dollar-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/eu-ted-small-lot-radar",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/export-market-tender-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/finance-broker-trigger-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/five-jurisdiction-privacy-bundle",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/foreign-tender-anti-fraud-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/franchise-posture-board",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/franchise-site-audit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/free-tender-digest",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/funder-fit-dossier",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/global-tender-desk",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/governed-agent-proposal-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/grant-radar-nfp",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/health-trust-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/hiring-trigger-dossier",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/incumbent-brief",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/instant-email-domain-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/insurer-book-scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/investigation-cut",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/invoice-nudge-rail",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/job-flow",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/latam-exporter-radar",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/member-posture-drift-alert",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/monitor-wholesale",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/msp-panel-white-label-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/msp-prospect-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/multi-domain-dmarc-lockdown",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/neighbour-alerts",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/new-business-insurance-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/outbound-gate-outreach-lint",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/owner-inbox-desk",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/owner-morning-cash-card",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/pack-factory-channel-partners",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/panel-door-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/panel-risk-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/payee-domain-change-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/pitch-hooks-page",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/portfolio-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/postcode-churn-index",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/privacy-adm-fix",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/privacy-adm-wording-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/privacy-essential-eight-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/procurement-training-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/profit-mirror-care",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/public-posture-briefing",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/quarterly-board-cyber-privacy-briefing",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/quote-chaser",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/quote-writer-from-job-notes",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/rebid-tender-brief",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/recruiter-contract-winner-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/referrer-map-property-finance",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/review-reply-desk",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/rival-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/scam-shield-for-tradies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/sector-dossier-library",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/signal-leads-data",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/software-partner-stack-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/solar-outreach-rail",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/solar-pipeline-desk",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/solar-site-shortlist",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/sponsor-send-rail",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/spoofguard-global-monitor",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/story-leads-weekly",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/sub-threshold-intelligence-contract",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/subbie-finder",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/subbie-finder-channel",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/subbie-finder-lite",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/supplier-check-dossier",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/supplier-cyber-readiness-pass",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/tender-alerts-widget",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/tender-fit-score",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/tender-intelligence-radar",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/tender-radar-for-trades",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/trade-panel-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/tradie-starter-list",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/offers/wordpress-email-posture-widget",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/open-data",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/order/ai",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/order/compliance",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/order/leads",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/order/monitor",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/our-evidence-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "NO_INDICATOR [mobile] iframe \"Sample external evidence pack PDF previe\": outline none 3px, shadow none, no alt change"
+   ]
+  },
+  {
+   "route": "/our-scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "REVERSE_MISMATCH [mobile] Shift+Tab did not return to the document within 78 presses"
+   ]
+  },
+  {
+   "route": "/parallax",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/partners",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/pricing",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/privacy",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/pro",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/breach-response-runbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/course-ai-for-tradies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/course-email-security-for-owners",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/customer-dossier-method-guide",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/dmarc-setup-guide",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/efficiency-proof-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/essential-eight-ml1-checklist",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/five-jurisdiction-privacy-bundle",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/invoice-chasing-playbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/privacy-adm-wording-guide",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/privacy-policy-template-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/quote-follow-up-playbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/spoofguard-self-check-checklist",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/products/vendor-risk-register-template",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/proof",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/refer",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "UNREACHABLE [mobile] iframe \"\": visible=true ariaHiddenAncestor=false inViewport=false rect=1,2221,388,420",
+    "NO_INDICATOR [mobile] iframe \"\": outline none 3px, shadow none, no alt change"
+   ]
+  },
+  {
+   "route": "/scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/aged-care",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/construction",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/councils",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/education",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/health",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/hospitality",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/logistics",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/mining",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/professional-services",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/sectors/retail",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/security",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/services",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/speed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/status",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/system",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/terms",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/tradies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/trust",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/v/titanos-pitch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": [
+    "TRAP [mobile] focus cycles back to video \"Your browser cannot play this video. Dow\" at press 5, never reaching the document"
+   ]
+  },
+  {
+   "route": "/welcome/agency-white-label-audit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/association-member-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/bid-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/broker-renewal-scan",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/charity-profit-mirror",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/electorate-dollar-map",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/eu-ted-small-lot-radar",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/franchise-posture-board",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/free-tender-digest",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/funder-fit-dossier",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/global-tender-desk",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/incumbent-brief",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/instant-email-domain-check",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/investigation-cut",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/monitor-wholesale",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/msp-prospect-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/payee-domain-change-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/portfolio-watch",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/privacy-adm-fix",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/privacy-essential-eight-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/profit-mirror-care",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/recruiter-contract-winner-feed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/scam-shield-for-tradies",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/story-leads-weekly",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/subbie-finder",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/subbie-finder-channel",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/subbie-finder-lite",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/supplier-cyber-readiness-pass",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/tender-intelligence-radar",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/welcome/trade-panel-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/your-data",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  }
+ ]
+}
