@@ -69,7 +69,7 @@ test("STALE debt: a declared store no longer constructed anywhere FAILS", () => 
 }));
 
 test("a debt owner that is not a stage id FAILS; a missing field FAILS", () => withTmp((d) => {
-  setDebt(d, (j) => { j.debt[0].owner = "f9999_not_a_stage"; delete j.debt[1].would_flip; });
+  setDebt(d, (j) => { j.debt[0].owner = "f9999_not_a_stage"; delete j.debt[0].would_flip; });
   const r = run(d);
   assert.ok(r.failures.some((m: string) => m.includes("owner \"f9999_not_a_stage\" is not a stage id")), r.failures.join("\n"));
   assert.ok(r.failures.some((m: string) => m.includes("missing would_flip")), r.failures.join("\n"));
