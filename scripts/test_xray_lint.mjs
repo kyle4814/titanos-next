@@ -28,7 +28,7 @@ const MORE = [
   "Quote $500 ESTIMATED", "trusted by trades", "fully compliant", "accredited trainer", "zero risk", "saves you hours", "will definitely cut costs",
   "minority stake", "300k ask", "cap table", "valuation review", "Monday rota", "guarantee", "GUARANTEED", "g u a r a n t e e d",
   "dash — here", "en – dash", "cert​ified", "ｇｕａｒａｎｔｅｅｄ", "сertified", "guarаnteed",
-  "Email sam@example.com", "Call 0412 345 678", "Café orders", "5 dollars a job", "AUD 2500 quote", "p4 pricing",
+  "Email sam@example.com", "Call 0491 570 156", "Café orders", "5 dollars a job", "AUD 2500 quote", "p4 pricing",
 ];
 const LINT_CASES = [...F8, ...MORE];
 const withName = (s) => ({ ...fixture, workflows: [{ ...fixture.workflows[0], name: s }, ...fixture.workflows.slice(1)] });
