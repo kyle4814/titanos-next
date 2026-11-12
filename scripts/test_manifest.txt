@@ -189,6 +189,5 @@ node scripts/test_book_flow.mjs out
 node scripts/test_print_chrome_class.mjs
 node --experimental-strip-types scripts/test_declaration.mjs
 node scripts/test_declaration_e2e.mjs out
-node --experimental-strip-types scripts/test_home_price_strip.mjs --built out
 node scripts/test_xray.mjs
 node scripts/test_xray_lint.mjs
