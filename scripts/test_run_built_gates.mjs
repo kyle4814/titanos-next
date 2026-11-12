@@ -25,7 +25,7 @@ try {
   ok(/^FAIL\s+exit=3\s+test_no_hidden_tracking\.mjs\s+tracker found/m.test(r.stdout), "FAIL row carries exit code and last line");
   ok(/^SKIPPED-GATE-ABSENT .*no_doctrine_leak/m.test(r.stdout) && /^SKIPPED-GATE-ABSENT .*sitemap/m.test(r.stdout) && /^SKIPPED-GATE-ABSENT .*text_sanity_fast/m.test(r.stdout), "absent gates reported, not assumed (incl. text_sanity_fast)");
   ok(r.status === 1, "exit non-zero on FAIL");
-  ok(/SUMMARY pass=1 fail=1 skipped=5 .*RESULT=FAIL/.test(r.stdout), "summary counts skips: " + r.stdout.split("\n").pop());
+  ok(/SUMMARY pass=1 fail=1 skipped=6 .*RESULT=FAIL/.test(r.stdout), "summary counts skips: " + r.stdout.split("\n").pop());
   // no out/ -> every present gate SKIPPED-NO-BUILD
   r = run(sc, path.join(tmp, "nope"));
   ok(!/^PASS/m.test(r.stdout) && (r.stdout.match(/^SKIPPED-NO-BUILD/gm) || []).length === 3, "missing out/ gives SKIPPED-NO-BUILD for each present gate");
