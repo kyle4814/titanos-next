@@ -8,6 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { runGuarded } from "./load_quiet_gate.mjs";
 
 const HERE = path.dirname(new URL(import.meta.url).pathname);
 const argv = process.argv.slice(2);
@@ -32,12 +33,14 @@ export const GATES = [
   { name: "no_doctrine_leak", glob: /^test_no_doctrine_leak\.(mjs|sh|py)$/, args: (o) => [o] },
   { name: "text_sanity_fast", glob: /^text_sanity_fast\.mjs$/, args: (o) => ["--out", o] }, // f384: fixed-sample rendered-text sweep, strict (no browser = FAIL)
   { name: "sitemap", glob: /^test_[\w-]*sitemap[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
+  // rendered sweeps (Chromium): wrapped by the load-quiet gate; a noisy-load result is LOAD-TAINTED, never PASS or FAIL
+  { name: "c10_sweeps", rendered: true, glob: /^test_(viewport_overflow|tap_targets?|kbfocus|print_motion)[\w-]*\.(mjs|sh|py)$/, args: (o) => [o] },
 ];
 
 const runner = (f) => (f.endsWith(".mjs") ? ["node", [f]] : f.endsWith(".py") ? ["python3", ["-I", f]] : ["bash", [f]]);
 const lastLine = (s) => (s.trim().split("\n").filter(Boolean).pop() || "(no output)").replace(/\s+/g, " ").slice(0, 160);
 
-export function runAll({ root, scriptsDir, out, build }) {
+export function runAll({ root, scriptsDir, out, build, guard = {} }) {
   const rows = [];
   let buildFailed = false;
   if (build) {
@@ -58,13 +61,22 @@ export function runAll({ root, scriptsDir, out, build }) {
     for (const f of found) {
       if (!haveOut) { rows.push({ gate: f, verdict: "SKIPPED-NO-BUILD", code: "-", line: buildFailed ? "build failed" : `no built export at ${out}` }); continue; }
       const [bin, pre] = runner(path.join(scriptsDir, f));
-      const r = spawnSync(bin, [...pre, ...g.args(out)], { cwd: root, encoding: "utf8", maxBuffer: 1 << 28 });
+      let r, stamp;
+      if (g.rendered) {
+        const gr = runGuarded({ cmd: bin, args: [...pre, ...g.args(out)], cwd: root }, guard);
+        r = { status: gr.verdict === "LOAD-TAINTED" ? gr.status : gr.status, stdout: gr.stdout, stderr: gr.stderr };
+        stamp = gr.stamp;
+        if (gr.loadTainted) {
+          rows.push({ gate: f, verdict: "LOAD-TAINTED", code: gr.status, line: `load1=${stamp.load1} cores=${stamp.cores} quiet=false retried=${stamp.retry.retried}: ${lastLine((gr.stdout || "") + (gr.stderr || ""))}`, stamp });
+          continue;
+        }
+      } else r = spawnSync(bin, [...pre, ...g.args(out)], { cwd: root, encoding: "utf8", maxBuffer: 1 << 28 });
       const text = (r.stdout || "") + (r.stderr || "");
       const line = lastLine(text);
       let verdict = r.status === 0 ? "PASS" : "FAIL";
       // a gate that exits 0 but says it did not check anything is a skip, never a pass
       if (r.status === 0 && /^SKIPPED-NO-BUILD\b/m.test(text)) verdict = "SKIPPED-NO-BUILD";
-      rows.push({ gate: f, verdict, code: r.status ?? `signal:${r.signal ?? r.error}`, line });
+      rows.push({ gate: f, verdict, code: r.status ?? `signal:${r.signal ?? r.error}`, line, ...(stamp ? { stamp } : {}) });
     }
   }
   return rows;
@@ -74,7 +86,8 @@ export function render(rows) {
   const n = (v) => rows.filter((r) => r.verdict === v).length;
   const lines = rows.map((r) => `${r.verdict.padEnd(20)} exit=${String(r.code).padEnd(4)} ${r.gate.padEnd(34)} ${r.line}`);
   const skipped = n("SKIPPED-NO-BUILD") + n("SKIPPED-GATE-ABSENT");
-  lines.push(`SUMMARY pass=${n("PASS")} fail=${n("FAIL")} skipped=${skipped} (no-build=${n("SKIPPED-NO-BUILD")}, gate-absent=${n("SKIPPED-GATE-ABSENT")}) ${n("FAIL") ? "RESULT=FAIL" : skipped ? "RESULT=NOT-PROVEN (skips are not passes)" : "RESULT=PASS"}`);
+  const tainted = n("LOAD-TAINTED");
+  lines.push(`SUMMARY pass=${n("PASS")} fail=${n("FAIL")} skipped=${skipped} (no-build=${n("SKIPPED-NO-BUILD")}, gate-absent=${n("SKIPPED-GATE-ABSENT")}) load-tainted=${tainted} ${n("FAIL") ? "RESULT=FAIL" : tainted ? "RESULT=NOT-PROVEN (load-tainted is neither pass nor defect)" : skipped ? "RESULT=NOT-PROVEN (skips are not passes)" : "RESULT=PASS"}`);
   return lines.join("\n");
 }
 
