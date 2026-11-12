@@ -224,18 +224,25 @@ export interface OwnerRejectRig {
   rev?: () => Promise<number | undefined>;
   snap: () => Promise<string> | string;   // full state dump: every store row plus the rev, via the caller's store (Memory or FakeD1)
   clock: { t: number };
+  audit?: () => Promise<string>;   // f375: JSON of the domain's events and fixes (the audit rows) read straight from the owner store
+  zoneConnected?: (on: boolean) => void;   // f375: false = the owner has no DNS provider connected (zoneFor returns undefined), to reach the no_zone rejections
 }
-export interface OwnerRejectCase { path: string; status: number; reason: string; changed: boolean; revBefore?: number; revAfter?: number }
+export interface OwnerRejectCase { path: string; status: number; reason: string; changed: boolean; revBefore?: number; revAfter?: number; auditBefore?: string; auditAfter?: string }
 export async function ownerRejectedPaths(R: OwnerRejectRig, onlyPaths?: string[]): Promise<OwnerRejectCase[]> {
   const out: OwnerRejectCase[] = [];
   const base = `/app/domains/${R.domainId}`;
   const post = (p: string, body?: unknown) => R.req("POST", base + p, { token: R.token, body });
   const reject = async (path: string, p: string, body?: unknown) => {
-    const before = await R.snap(), revBefore = await R.rev?.(); const r = await post(p, body); const text = await r.text();
-    out.push({ path, status: r.status, reason: text.slice(0, 80), changed: (await R.snap()) !== before, revBefore, revAfter: await R.rev?.() });
+    const before = await R.snap(), revBefore = await R.rev?.(), auditBefore = await R.audit?.(); const r = await post(p, body); const text = await r.text();
+    out.push({ path, status: r.status, reason: text.slice(0, 80), changed: (await R.snap()) !== before, revBefore, revAfter: await R.rev?.(), auditBefore, auditAfter: await R.audit?.() });
   };
   const want = (n: string) => !onlyPaths || onlyPaths.includes(n);
   R.clock.t += 120_000; await post("/scan");
+  // f375: the remaining rejections that mutate nothing. scan_too_soon throws inside the body; invalid_check is a 400 before tx; no_such_fix is the f367 404 pre-check.
+  if (want("scan scan_too_soon")) await reject("scan scan_too_soon", "/scan");
+  if (want("fix invalid_check")) await reject("fix invalid_check", "/fix", { check: "not a check!" });
+  if (want("undo no_such_fix")) await reject("undo no_such_fix", "/fixes/fix_999/undo");
+  if (want("fix no_zone") && R.zoneConnected) { R.zoneConnected(false); await reject("fix no_zone", "/fix", { check: "SPF" }); R.zoneConnected(true); }
   // 1 + 2: an applied fix, undone, undone again (already_reverted); a re-fix whose zone is then edited by someone else (zone_changed_since)
   const f1 = await (await post("/fix", { check: "SPF" })).json() as { fixId?: string };
   if (f1.fixId) {
@@ -244,6 +251,7 @@ export async function ownerRejectedPaths(R: OwnerRejectRig, onlyPaths?: string[]
     const f2 = await (await post("/fix", { check: "SPF" })).json() as { fixId?: string };
     if (f2.fixId) {
       if (want("fix not_open")) await reject("fix not_open", "/fix", { check: "SPF" });
+      if (want("undo no_zone") && R.zoneConnected) { R.zoneConnected(false); await reject("undo no_zone", `/fixes/${f2.fixId}/undo`); R.zoneConnected(true); }
       const d = R.domain; R.zone.world.txt![d] = ["v=spf1 include:_somebody-else.example -all"];
       if (want("undo zone_changed_since")) await reject("undo zone_changed_since", `/fixes/${f2.fixId}/undo`);
     }

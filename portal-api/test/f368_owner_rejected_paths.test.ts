@@ -9,7 +9,7 @@ for (const kind of ["memory", "d1"] as const) {
   test(`f368 ${kind}: every owner rejection leaves rev and all rows byte-identical`, async () => {
     const R = await build(kind);
     const cases = await ownerRejectedPaths(R);
-    assert.deepEqual(cases.map((c) => c.path).sort(), ["fix not_open", "fix unknown_check", "undo already_reverted", "undo zone_changed_since"], "every rejected path was reached");
+    assert.deepEqual(cases.map((c) => c.path).sort(), ["fix invalid_check", "fix no_zone", "fix not_open", "fix unknown_check", "scan scan_too_soon", "undo already_reverted", "undo no_such_fix", "undo no_zone", "undo zone_changed_since"], "every rejected path was reached");
     for (const c of cases) { assert.ok(c.status < 500 && !/"proven"/.test(c.reason), `${c.path}: not a 5xx and not a success, got ${c.status} ${c.reason}`); }
     assert.deepEqual(cases.filter((c) => c.changed).map((c) => c.path), [], "STATE CHANGED on a rejected request");
   });
