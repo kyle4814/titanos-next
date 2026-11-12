@@ -15,6 +15,9 @@ import type { OwnerDeps } from "./service.ts";
 import type { ZoneProvider } from "./owner/engine.ts";
 import { D1OwnerStore } from "./owner/d1ownerstore.ts";
 import { D1MarketStore } from "./market/d1store.ts";
+import { D1DisputeCaseStore } from "./market/dispute_case_store.ts";
+import { D1AnchorStore } from "./market/audit_anchor.ts";
+import type { DisputeTrail } from "./market/dispute_trail.ts";
 import { StripeConnectPayments, type JobPayments } from "./market/payments.ts";
 import type { MarketDeps } from "./market/service.ts";
 import type { EntContext } from "./enterprise/service.ts";
@@ -96,13 +99,20 @@ export function mailerFor(env: Env, now: () => number): Mailer {
   if (env.STRIPE_MODE === "live") throw new BuildDepsError("live_key_refused", "DEV_OUTBOX");
   return devOutboxMailer(env.DB, now);
 }
+// f381: the dispute trail over D1 (migrations 0006 audit_anchor + 0007 dispute_case). The tenant of a case is the job's owner account,
+// resolved from the market store; an unknown job is absent on read and refused on write (D1 invariant). CAS state lives in the
+// instance, so sideDeps (one call per request) builds a fresh store each time. No DB bound = the caller keeps memoryTrail (service.ts).
+export function disputeTrailFor(db: NonNullable<Env["DB"]>, market: Pick<MarketDeps["store"], "getJob">): DisputeTrail {
+  return { cases: new D1DisputeCaseStore(db, async (jobId) => (await market.getJob(jobId))?.ownerAccountId), anchors: new D1AnchorStore(db) };
+}
 export function sideDeps(env: Env, fetchFn?: typeof fetch): { owner: OwnerDeps; market: MarketDeps; ent: EntContext } {
   const db = env.DB; if (!db) throw new BuildDepsError("missing_binding", "DB");
   const doh = () => publicDohResolver();
   const internalSecret = env.INTERNAL_API_SECRET || undefined;
+  const marketStore = new D1MarketStore(db);
   return {
     owner: { store: new D1OwnerStore(db), doh, zones: noZones },
-    market: { store: new D1MarketStore(db), payments: jobPaymentsFor(env, fetchFn), doh, internalSecret },
+    market: { store: marketStore, payments: jobPaymentsFor(env, fetchFn), doh, internalSecret, disputes: disputeTrailFor(db, marketStore) },
     ent: {
       store: new D1EntStore(db), approvals: new D1ApprovalStore(db), idp: createOidcVerifier({ fetchJwks: discoveryJwks(fetchFn) }),
       payouts: refusingPayouts, scan: dnsScan({ resolver: publicDohResolver(), resolverSource: "cloudflare-dns.com (DNS-over-HTTPS, passive public records)" }),
