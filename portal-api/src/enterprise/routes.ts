@@ -83,8 +83,6 @@ export async function entRoute(req: Request, path: string, d: Deps): Promise<Res
     if (rest === "ledger" && m === "GET") return json(await s.ledger(d, ctx, pid));
     if (rest === "statement" && m === "GET") return text(await s.partnerStatement(d, ctx, pid, new URL(req.url).searchParams.get("month")), "text/plain; charset=utf-8", { "content-disposition": "inline" });
     if (rest === "payouts" && m === "GET") return json(await s.listPayouts(d, ctx, pid));
-    if (rest === "payouts/attention" && m === "GET") return json(await s.payoutAttention(d, ctx, pid));   // C8 f426: read-only, GET only
-    if (rest === "payouts/retry-plan" && m === "GET") return json(await s.payoutRetryPlan(d, ctx, pid));   // C8 f426: preview only, executes nothing
     if (rest === "payouts" && m === "POST") return json(await s.requestPayout(d, ctx, pid), 201);
   }
   return json({ error: "not_found", path }, 404);

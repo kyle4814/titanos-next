@@ -142,8 +142,6 @@ export const ROUTES = [
   R("GET", "/partners/:pid/ledger", "scoped", 'rest === "ledger"'),
   R("GET", "/partners/:pid/statement", "scoped", 'rest === "statement"'),
   R("GET", "/partners/:pid/payouts", "scoped", 'rest === "payouts" && m === "GET"'),
-  R("GET", "/partners/:pid/payouts/attention", "scoped", 'rest === "payouts/attention" && m === "GET"'),
-  R("GET", "/partners/:pid/payouts/retry-plan", "scoped", 'rest === "payouts/retry-plan" && m === "GET"'),
   R("POST", "/partners/:pid/payouts", "scoped", 'rest === "payouts" && m === "POST"'),
 ];
 export const NOT_ROUTES_BUT_LISTED = [
