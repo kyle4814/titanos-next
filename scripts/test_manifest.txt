@@ -182,3 +182,4 @@ node scripts/test_home_height.mjs out
 node scripts/test_soak_restart_consumer.mjs
 node scripts/test_kbfocus_mobile_report.mjs
 node --experimental-strip-types scripts/test_no_model_import_graph.mjs
+node scripts/test_load_quiet_gate.mjs
