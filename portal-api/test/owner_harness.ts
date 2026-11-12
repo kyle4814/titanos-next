@@ -1,5 +1,6 @@
 import { MemoryZone } from "../src/owner/dnsw.ts";
-import { MemoryOwnerStore, loadOrInit, scanNow, setMonitor, type Ctx, type DomainState } from "../src/owner/engine.ts";
+import { loadOrInit, scanNow, setMonitor, type Ctx, type DomainState } from "../src/owner/engine.ts";
+import { makeOwnerStore } from "./store_switch.ts";
 import type { World } from "../../lib/guestscan/fixtures.ts";
 
 export const T0 = Date.UTC(2026, 10, 6, 0, 0, 0);
@@ -11,7 +12,7 @@ export const healthy = (d: string): World => ({
 export function rig(domain = "owner.example") {
   const clock = { t: T0 };
   const zone = new MemoryZone(healthy(domain));
-  const c: Ctx = { store: new MemoryOwnerStore(), doh: () => zone.doh, zones: { zoneFor: (d) => (d === domain ? zone : undefined) }, now: () => clock.t };
+  const c: Ctx = { store: makeOwnerStore(undefined, () => clock.t), doh: () => zone.doh, zones: { zoneFor: (d) => (d === domain ? zone : undefined) }, now: () => clock.t };
   const open = async (verified = true): Promise<DomainState> => loadOrInit(c, "dom_1", domain, "acc_1", verified);
   const save = (s: DomainState) => c.store.put(s);
   return { clock, zone, c, domain, open, save, scan: async (s: DomainState, cause?: string) => { const r = await scanNow(c, s, cause); await save(s); return r; }, monitorOn: (s: DomainState) => setMonitor(s, true, clock.t) };

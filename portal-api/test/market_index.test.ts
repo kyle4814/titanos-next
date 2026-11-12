@@ -79,9 +79,9 @@ test("no request path or sweep calls allJobs(): the whole marketplace flow runs 
 test("hasActiveMarketJobs: owner side and pro side through the indexes (account deletion guard)", async () => {
   const { hasActiveMarketJobs } = await import("../src/market/service.ts"); const r = rig(); const d = r.h.deps;
   const acct = (id: string) => ({ id } as any);
-  await r.store.putJob(job("a", { ownerAccountId: "ownA", status: "awaiting_funds" })); await r.store.putJob(job("b", { ownerAccountId: "ownB", status: "cancelled" }));
-  await r.store.putJob(job("c", { ownerAccountId: "ownC", status: "paid", proAccountId: "proC" })); await r.store.putJob(job("e", { ownerAccountId: "ownD", status: "reproved", proAccountId: "proE" }));
-  await r.store.putJob(job("f", { ownerAccountId: "ownF", status: "claimed", proAccountId: "proF" }));
+  await r.store.putJob(job("a", { domainId: "dom_a", ownerAccountId: "ownA", status: "awaiting_funds" })); await r.store.putJob(job("b", { domainId: "dom_b", ownerAccountId: "ownB", status: "cancelled" }));
+  await r.store.putJob(job("c", { domainId: "dom_c", ownerAccountId: "ownC", status: "paid", proAccountId: "proC" })); await r.store.putJob(job("e", { domainId: "dom_e", ownerAccountId: "ownD", status: "reproved", proAccountId: "proE" }));
+  await r.store.putJob(job("f", { domainId: "dom_f", ownerAccountId: "ownF", status: "claimed", proAccountId: "proF" }));
   assert.equal(await hasActiveMarketJobs(d, acct("ownA")), true); assert.equal(await hasActiveMarketJobs(d, acct("ownB")), false);
   assert.equal(await hasActiveMarketJobs(d, acct("proC")), false, "paid is settled"); assert.equal(await hasActiveMarketJobs(d, acct("ownC")), false);
   assert.equal(await hasActiveMarketJobs(d, acct("proE")), true, "a pro with an un-paid reproved job is active"); assert.equal(await hasActiveMarketJobs(d, acct("ownD")), false, "owner side of reproved is not in the active list");
@@ -90,11 +90,11 @@ test("hasActiveMarketJobs: owner side and pro side through the indexes (account 
 
 test("sweep reaches every status it acts on through jobsByStatus: expired claim reopens, unfunded job cancels, open job stays", async () => {
   const { sweep, CLAIM_WINDOW_MS } = await import("../src/market/service.ts"); const r = rig(); const now = r.h.clock.t;
-  await r.store.putJob(job("x1", { status: "claimed", proAccountId: "p1", claimedAt: now - 2 * CLAIM_WINDOW_MS, claimDeadline: now - 1000, createdAt: now - 2 * CLAIM_WINDOW_MS, fundedAt: now - 2 * CLAIM_WINDOW_MS }));
-  await r.store.putJob(job("x2", { status: "awaiting_funds", createdAt: now - 25 * 3600_000 }));
-  await r.store.putJob(job("x3", { status: "open", fundedAt: now - 1000, createdAt: now - 1000 }));
-  await r.store.putJob(job("x4", { status: "paid", createdAt: now - 400 * 86_400_000 }));
-  await r.store.putJob(job("x5", { status: "open", fundedAt: now - 31 * 86_400_000, createdAt: now - 31 * 86_400_000 }));   // nobody claimed it in 30 days
+  await r.store.putJob(job("x1", { domainId: "dom_x1", status: "claimed", proAccountId: "p1", claimedAt: now - 2 * CLAIM_WINDOW_MS, claimDeadline: now - 1000, createdAt: now - 2 * CLAIM_WINDOW_MS, fundedAt: now - 2 * CLAIM_WINDOW_MS }));
+  await r.store.putJob(job("x2", { domainId: "dom_x2", status: "awaiting_funds", createdAt: now - 25 * 3600_000 }));
+  await r.store.putJob(job("x3", { domainId: "dom_x3", status: "open", fundedAt: now - 1000, createdAt: now - 1000 }));
+  await r.store.putJob(job("x4", { domainId: "dom_x4", status: "paid", createdAt: now - 400 * 86_400_000 }));
+  await r.store.putJob(job("x5", { domainId: "dom_x5", status: "open", fundedAt: now - 31 * 86_400_000, createdAt: now - 31 * 86_400_000 }));   // nobody claimed it in 30 days
   const out = await sweep(r.h.deps);
   assert.equal(out.reopened, 1); assert.equal(out.cancelled, 2); assert.equal((await r.store.getJob("x5"))!.status, "cancelled");
   const x1 = (await r.store.getJob("x1"))!; assert.equal(x1.status, "open"); assert.deepEqual(x1.abandonedBy, ["p1"]); assert.equal(x1.proAccountId, undefined);
