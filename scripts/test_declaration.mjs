@@ -64,7 +64,7 @@ ok(D.CONSENT_LINE === "Daily artifacts from TITANOS. Unsubscribe any time.", "co
 const form = read("components/declaration/SubscribeForm.tsx");
 ok(/consent: true/.test(form) && /website/.test(form) && /SUBSCRIBE_ENDPOINT/.test(form), "form posts consent, honeypot and the endpoint constant");
 ok(/\/v1\/subscribe$/.test(D.SUBSCRIBE_ENDPOINT) && /api\.titanos\.tech/.test(read("app/layout.tsx")), "endpoint host is allowed by the site CSP connect-src");
-ok(/"\/v1\/subscribe"/.test(read("portal-api/src/index.ts")) && fs.existsSync("portal-api/migrations/0026_subscribers.sql"), "backend route and migration exist");
+ok(/"\/v1\/subscribe"/.test(read("portal-api/src/index.ts")) && fs.existsSync("portal-api/migrations/0027_subscribers.sql"), "backend route and migration exist");
 
 // popup source contract
 const pop = read("components/declaration/DeclarationPopup.tsx");
