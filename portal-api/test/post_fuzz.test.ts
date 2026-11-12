@@ -1,5 +1,6 @@
 // C2 naive-user residual (f182): seeded fuzz over every mutating route of the portal-api worker. Synthetic data only.
 // Replay: FUZZ_SEED=<n> npm test -- or FUZZ_ONLY="POST /keys" to run one route.
+import { MemorySubscriberStore } from "../src/subscribe.ts";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { handle } from "../src/index.ts";
@@ -43,6 +44,7 @@ async function buildRig() {
   const marketStore = new MemoryMarketStore(), payments = new MockPayments(), ownerStore = new MemoryOwnerStore();
   const ed = makeEntDeps(RATE_V1, "memory"), entStore = ed.store, payouts = ed.payouts;   // f367: full ent deps from ent_harness (store, approvals, book, seal keys)
   h.deps.market = { store: marketStore, payments, doh: (d) => { if (d !== domain) throw new Error("no zone " + d); return zone.doh; }, internalSecret: MKT_INTERNAL };
+  h.deps.subscribers = new MemorySubscriberStore();   // release 2026-11-13: /v1/subscribe returns 503 without its store, which the fuzz judge rightly flags
   h.deps.owner = { store: ownerStore, doh: () => zone.doh, zones: { zoneFor: (x) => (x === domain ? zone : undefined) } };
   h.deps.ent = { ...ed.ent, payoutLookup: { async lookup() { return { found: false as const }; } } };   // f367: sweep route needs the provider lookup, else 503
   const a = await h.login("fuzz.a@example.com"), b = await h.login("fuzz.b@example.com"), p = await h.login("fuzz.p@example.com");
