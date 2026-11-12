@@ -67,7 +67,7 @@ export default function DeclarationPopup() {
 
   if (!open || onDeclaration) return null;
   return (
-    <div className={s.overlay} data-declaration-popup>
+    <div className={s.overlay} data-declaration-popup data-no-print>
       <div ref={dialog} className={s.dialog} role="dialog" aria-modal="true" aria-labelledby="decl-title" onKeyDown={onKeyDown}>
         <button type="button" className={s.close} data-close aria-label="Close the declaration" onClick={close}>×</button>
         <p className={s.eyebrow}>Declaration · {DECLARATION_DATE}</p>
