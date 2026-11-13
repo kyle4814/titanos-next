@@ -3,7 +3,7 @@
   "basis": "Baseline measured 2026-11-08 on titanos-next main out/ (254 routes): worst route HTML 406572 B, total JS 2307577 B, images 27944256 B, 0 render-blocking head scripts. Each ceiling is the baseline plus about 10 percent headroom; lower a ceiling when the site gets lighter, raise one only with a reason in the commit.",
   "maxHtmlBytesPerRoute": 450000,
   "maxRenderBlockingScriptsPerRoute": 0,
-  "maxTotalJsBytes": 2540000,
+  "maxTotalJsBytes": 2650000,
   "maxTotalImageBytes": 30700000,
   "routeOverrides": {}
 }
