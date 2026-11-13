@@ -54,7 +54,7 @@ ok(D.COURSES.every((c) => CASES.some((x) => x.slug === c.caseSlug)), "both cours
 ok(JSON.stringify(D.COURSES.map((c) => c.caseSlug)) === JSON.stringify(["trading-app", "sales-coaching-course"]), "the two courses are the trading and sales case studies");
 
 // courses: links null -> waitlist
-ok(D.COURSE_LINKS.trading === "https://learn-trading.titanos.tech" && D.COURSE_LINKS.sales === "https://learn-sales.titanos.tech", "COURSE_LINKS hold the decided sign-up URLs");
+ok(D.COURSE_LINKS.trading === "https://learn-trading.titanos.tech" && D.COURSE_LINKS.sales === null, "COURSE_LINKS: trading is live, sales is null (no DNS record for learn-sales yet, card shows the waitlist)");
 ok(Object.values(D.COURSE_LINKS).every((u) => u === null || /^https:\/\/[a-z0-9.-]+\.titanos\.tech$/.test(u)), "course links are https on titanos.tech or null");
 const parts = read("components/declaration/Parts.tsx");
 ok(/courseAction\(c\)/.test(parts) && /Join the waitlist/.test(parts) && /act\.tag/.test(parts), "course card renders from courseAction and keeps the waitlist branch");
@@ -76,6 +76,7 @@ ok(/"\/v1\/subscribe"/.test(read("portal-api/src/index.ts")) && fs.existsSync("p
 // popup source contract
 const pop = read("components/declaration/DeclarationPopup.tsx");
 ok(/role="dialog"/.test(pop) && /aria-modal="true"/.test(pop) && /aria-labelledby/.test(pop), "popup is a modal dialog with a label");
+ok(/document\.addEventListener\("keydown"/.test(pop) && /document\.removeEventListener\("keydown"/.test(pop), "Escape is also handled at document level while open and removed on close");
 ok(/e\.key === "Escape"/.test(pop) && /e\.key !== "Tab"/.test(pop) && /\.focus\(\)/.test(pop), "popup closes on Esc, traps Tab and manages focus");
 ok(/aria-label="Close the declaration"/.test(pop) && /data-close/.test(pop), "popup has an X close button");
 ok(/try \{ return window\.localStorage/.test(pop) && /try \{ window\.localStorage\.setItem/.test(pop) && /catch/.test(pop), "localStorage reads and writes are wrapped in try/catch");
@@ -100,7 +101,7 @@ if (bi > -1) {
   ok(fs.existsSync(f), "build output has /declaration");
   if (fs.existsSync(f)) {
     const html = read(f);
-    ok(html.includes(D.HEADLINE) && html.includes(D.COURSE_LINKS.trading) && html.includes(D.COURSE_LINKS.sales) && html.includes(D.CONSENT_LINE.replace("TITANOS.", "TITANOS.")), "built page has headline, both course sign-up links and consent line");
+    ok(html.includes(D.HEADLINE) && html.includes(D.COURSE_LINKS.trading) && !html.includes("learn-sales.titanos.tech") && html.includes(D.CONSENT_LINE.replace("TITANOS.", "TITANOS.")), "built page has headline, trading link, no dead sales link, and consent line");
     for (const c of CASES) ok(html.includes(`/case-studies/${c.slug}`), `built page links case study ${c.slug}`);
     ok(html.includes(D.PDF_PATH), "built page links the PDF");
     ok(!/[–—]/.test(html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "")), "built page body has no em or en dash");

@@ -28,7 +28,7 @@ try {
   ok((await page.locator(DLG).getAttribute("aria-modal")) === "true", "popup is aria-modal");
   const t = await page.locator(DLG).innerText();
   ok(/final business declaration/i.test(t) && /Case studies/.test(t) && /Trading platform \(includes the AI course\)/.test(t) && /Sales course/.test(t), "popup shows headline, case studies and both course cards");
-  ok(await page.locator('[data-declaration-popup] a[href="https://learn-trading.titanos.tech"]').count() === 1 && await page.locator('[data-declaration-popup] a[href="https://learn-sales.titanos.tech"]').count() === 1, "course cards link to the sign-up URLs");
+  ok(await page.locator('[data-declaration-popup] a[href="https://learn-trading.titanos.tech"]').count() === 1 && await page.locator('[data-declaration-popup] a[href*="learn-sales"]').count() === 0, "trading card links to its sign-up URL, sales card shows the waitlist");
   ok(await page.evaluate(() => document.activeElement?.hasAttribute("data-close")), "focus starts on the X button");
   // 2 focus trap: Tab many times, focus never leaves the dialog
   let inside = true;
@@ -49,6 +49,12 @@ try {
   await p2.goto(base + "/?declaration=show", { waitUntil: "load" }); await p2.waitForSelector(DLG, { timeout: 15000 });
   await p2.keyboard.press("Escape");
   ok(await p2.locator(DLG).count() === 0, "Esc closes the popup");
+  // 4b Esc closes even after focus has left the dialog (blur it to the page body)
+  const p2b = await (await browser.newContext()).newPage();
+  await p2b.goto(base + "/?declaration=show", { waitUntil: "load" }); await p2b.waitForSelector(DLG, { timeout: 15000 });
+  await p2b.evaluate(() => { const a = document.activeElement; if (a instanceof HTMLElement) a.blur(); });
+  await p2b.keyboard.press("Escape");
+  ok(await p2b.locator(DLG).count() === 0, "Esc closes the popup when focus is outside the dialog");
   // 5 not shown on /declaration, which is a normal page with the content
   const p3 = await (await browser.newContext()).newPage();
   await p3.goto(base + "/declaration?declaration=show", { waitUntil: "load" }); await p3.waitForTimeout(1500);

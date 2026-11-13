@@ -21,7 +21,7 @@ export const DEFAULT_TAG = "daily-artifacts";
 
 export type CourseId = "trading" | "sales";
 /** Sign-up URLs (decided 2026-11-10, not deployed until the site approval card). null = the card shows "Join the waitlist" and tags the signup with the course. */
-export const COURSE_LINKS: Record<CourseId, string | null> = { trading: "https://learn-trading.titanos.tech", sales: "https://learn-sales.titanos.tech" };
+export const COURSE_LINKS: Record<CourseId, string | null> = { trading: "https://learn-trading.titanos.tech", sales: null };
 
 export type FigureStatus = "MEASURED" | "COMPUTED" | "PUBLISHED" | "OPERATOR_STATED";
 export interface Figure { id: string; value: string; line: string; status: FigureStatus; source: string; asOf: string; method: string }
@@ -137,10 +137,10 @@ export interface CaseItem { slug: string; title: string; sector: string; label: 
 export const CASE_LIST: CaseItem[] = CASES.map((c) => ({ slug: c.slug, title: c.title, sector: c.sector, label: c.label, href: `/case-studies/${c.slug}`, facts: c.facts.slice(0, 4) as [string, string][] }));
 export const CASES_NOTE = "Each case links to its own page with dates, costs and what was tested. Client names are never published, and every figure traces to the build's git log or a dated usage reading.";
 
-export const APPENDIX_INTRO = `Every figure in this declaration, with where it came from and when. Measured on ${DECLARATION_DATE} unless a different date is shown. MEASURED means counted from a real source. COMPUTED means arithmetic on measured figures. PUBLISHED means read from the live price file. OPERATOR_STATED means the operator's own figure with no receipt on file. Figures dated 9 October 2026 come from the site ledger and were not re-measured for this document.`;
+export const APPENDIX_INTRO = `Every figure in this declaration, with where it came from and when. Measured on ${DECLARATION_DATE} unless a different date is shown. MEASURED means counted from a real source. COMPUTED means arithmetic on measured figures. PUBLISHED means read from the live price file. OPERATOR_STATED means the operator's own figure with no receipt on file. Figures dated 9 October 2026 or 13 October 2026 come from the site ledger and were not re-measured for this document.`;
 export const APPENDIX_CASES = "Case study figures: taken from lib/caseStudies.ts as at the date above. Each is traceable to that build's git log or a dated usage reading, and the case page shows the detail.";
 
-export const STILL_UNKNOWN = "Not measured yet: a receipted subscription ledger, lines of code re-counted after 9 October 2026, and any revenue figure. They are left out rather than guessed.";
+export const STILL_UNKNOWN = "Not measured yet: a receipted subscription ledger, lines of code re-counted after 13 October 2026, and any revenue figure. They are left out rather than guessed.";
 
 /** Plain text of the whole declaration. The PDF's content hash is taken over this, so the PDF cannot drift from the source. */
 export function declarationText(): string {

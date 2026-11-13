@@ -55,6 +55,14 @@ export default function DeclarationPopup() {
     return () => { document.body.style.overflow = prev; };
   }, [open]);
 
+  // Escape works wherever focus is (for example after a click on the overlay), not only inside the dialog.
+  useEffect(() => {
+    if (!open) return;
+    const onDocKey = (e: globalThis.KeyboardEvent) => { if (e.key === "Escape") close(); };
+    document.addEventListener("keydown", onDocKey);
+    return () => document.removeEventListener("keydown", onDocKey);
+  }, [open, close]);
+
   function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     if (e.key === "Escape") { e.stopPropagation(); close(); return; }
     if (e.key !== "Tab" || !dialog.current) return;
