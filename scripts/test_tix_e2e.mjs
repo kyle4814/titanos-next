@@ -46,9 +46,9 @@ const waitSel = (pg, sel, nominal = 20000, name = sel) => step(name, nominal, (t
 const MUT = process.env.TIX_E2E_MUTATE || "";
 
 const b = await chromium.launch();
-const A = await b.newContext({ viewport: { width: 1280, height: 800 } });
+const A = await b.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
 await A.addInitScript(() => { try { localStorage.setItem("titanos.declaration.dismissed.2026-11", "1"); } catch {} });  // keep the declaration popup out of this flow
-const P = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+const P = await b.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce", deviceScaleFactor: 2, hasTouch: true, isMobile: true });
 await P.addInitScript(() => { try { localStorage.setItem("titanos.declaration.dismissed.2026-11", "1"); } catch {} });  // keep the declaration popup out of this flow
 await P.addInitScript(() => {
   window.__frame = null;
@@ -123,7 +123,7 @@ ok(true, "forged code scanned by camera reads FAKE");
 await shot(p, "09_scanner_fake_phone.png");
 
 // camera refused -> paste fallback visible and working; reset
-const P2 = await b.newContext({ viewport: { width: 390, height: 844 } });
+const P2 = await b.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
 await P2.addInitScript(() => { try { localStorage.setItem("titanos.declaration.dismissed.2026-11", "1"); } catch {} });  // keep the declaration popup out of this flow
 await P2.addInitScript(() => { navigator.mediaDevices.getUserMedia = async () => { throw new DOMException("denied", "NotAllowedError"); }; });
 const q = await P2.newPage(); watch(q, "phone-nocam");
