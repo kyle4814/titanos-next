@@ -52,6 +52,16 @@ export async function verifyLogin(d: Deps, tokenIn: unknown): Promise<{ session:
   await d.store.putSession({ hash: await sha256Hex(session), accountId: acct.id, expiresAt: now + SESSION_TTL_MS });
   return { session, account: { id: acct.id, email: acct.email, seat: acct.seat } };
 }
+// POST /auth/logout: expire THIS session server-side (the row is overwritten with an already-past expiry, which sessionByHash
+// and authenticate both refuse). Idempotent and enumeration-safe: an unknown, malformed, missing or already-expired token
+// answers the same as a live one. Other sessions of the same account are untouched.
+export async function logout(d: Deps, bearer: string | null): Promise<void> {
+  const m = bearer?.match(/^Bearer (ss_[0-9a-f]+)$/);
+  if (!m) return;
+  const hash = await sha256Hex(m[1]);
+  const s = await d.store.sessionByHash(hash, d.now());
+  if (s) await d.store.putSession({ hash, accountId: s.accountId, expiresAt: 0 });
+}
 export async function authenticate(d: Deps, bearer: string | null): Promise<Account> {
   const m = bearer?.match(/^Bearer (ss_[0-9a-f]+)$/);
   if (!m) throw new HttpError(401, "unauthenticated");
@@ -90,6 +100,15 @@ export async function verifyDomain(d: Deps, a: Account, id: string) {
 }
 
 // 3 BUY: Stripe checkout (mock in tests). Domain-bound products need a domain this account has verified.
+const billingCheckout = (d: Deps, r: Parameters<Deps["billing"]["createCheckout"]>[0]) => d.billing.createCheckout(r);
+// A Stripe refusal (stripe_<status>, e.g. 403 from a restricted key missing a permission, 401 bad key, 5xx outage) is logged with its status
+// only (never a key or body) and shown to the visitor as a retryable 503 billing_unavailable. NEVER a mock link and never a false success.
+function checkoutFailure(d: Deps, e: unknown): unknown {
+  const m = e instanceof Error ? /^stripe_(\d{3})$/.exec(e.message) : null;
+  if (!m) return e;
+  (d.log ?? console.log)(`checkout failed: stripe returned ${m[1]}${m[1] === "403" || m[1] === "401" ? " (check the Stripe key's permissions in the dashboard)" : ""}`);
+  return new HttpError(503, "billing_unavailable");
+}
 export async function startCheckout(d: Deps, a: Account, productId: unknown, domainIn: unknown) {
   const p: Product | undefined = typeof productId === "string" ? PRODUCTS[productId] : undefined;
   if (!p) throw new HttpError(400, "unknown_product");
@@ -100,10 +119,11 @@ export async function startCheckout(d: Deps, a: Account, productId: unknown, dom
     if (!ok) throw new HttpError(403, "verified_domain_required");
   }
   const purchaseId = randomToken("pur", 8);
-  const cs = await d.billing.createCheckout({
+  let cs: { id: string; url: string };
+  try { cs = await billingCheckout(d, {
     email: a.email, mode: p.mode, name: p.name, amountCents: p.amountCents, interval: p.interval, accountId: a.id, productId: p.id,
     successUrl: `${d.siteOrigin}/app/billing?done=${purchaseId}`, cancelUrl: `${d.siteOrigin}/app/billing?cancelled=1`, idempotencyKey: purchaseId,
-  });
+  }); } catch (e) { throw checkoutFailure(d, e); }
   await d.store.putPurchase({ id: purchaseId, accountId: a.id, productId: p.id, domain, checkoutId: cs.id, amountCents: p.amountCents, deliverableIssued: false, refundedCents: 0, status: "pending", createdAt: d.now() });
   return { purchaseId, checkoutUrl: cs.url };
 }

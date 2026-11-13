@@ -69,8 +69,14 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
   try { await th.reset(key); } catch { /* reset failure only leaves the failure counted: safe direction */ }
   return out;
 }
-function cors(res: Response, env: Env): Response {
-  const o = env.TITANOS_SITE_ORIGIN?.trim();
+// Extra allowed origins (TITANOS_EXTRA_ORIGINS, comma list, exact match, https only). The request Origin is consulted ONLY to pick an
+// entry from this operator-set allowlist; it is never echoed otherwise, so with no list (or no match) the header is the configured
+// TITANOS_SITE_ORIGIN exactly as before.
+const extraOrigins = (env: Env): string[] => (env.TITANOS_EXTRA_ORIGINS ?? "").split(",").map((x) => x.trim()).filter((x) => /^https:\/\/[a-z0-9.-]+(:\d+)?$/.test(x));
+function cors(res: Response, env: Env, req?: Request): Response {
+  let o = env.TITANOS_SITE_ORIGIN?.trim();
+  const asked = req?.headers.get("origin")?.trim();
+  if (o && o !== "*" && o !== "null" && asked && asked !== o && extraOrigins(env).includes(asked)) o = asked;
   // F363: a wildcard or "null" origin is a misconfiguration, never echoed (fail closed: no CORS header). The request Origin is never read.
   if (o && o !== "*" && o !== "null") {
     res.headers.set("access-control-allow-origin", o); res.headers.set("access-control-allow-headers", "authorization, content-type"); res.headers.set("access-control-allow-methods", "GET, POST, PATCH, DELETE, OPTIONS");
@@ -83,7 +89,7 @@ function cors(res: Response, env: Env): Response {
 // handle(req, env, deps): deps is the injected store/billing/dns/mailer. With no deps every route except /health
 // fails closed with 503 (the D1 store is not built yet), so a half-wired deploy can never pretend to bill anyone.
 export async function handle(req: Request, env: Env, deps?: Deps): Promise<Response> {
-  return cors(await handleInner(req, env, deps), env);   // F363: ONE exit, so no path (health, no-deps 503, error paths) can skip CORS
+  return cors(await handleInner(req, env, deps), env, req);   // F363: ONE exit, so no path (health, no-deps 503, error paths) can skip CORS
 }
 async function handleInner(req: Request, env: Env, deps?: Deps): Promise<Response> {
   const { pathname } = new URL(req.url);
@@ -139,6 +145,14 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
   }
   if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") { const tok = (await body(req)).token; return json(await throttled(d, req, "login", "", () => svc.verifyLogin(d, tok))); }
+  if (path === "/auth/logout" && m === "POST") {
+    await svc.logout(d, req.headers.get("authorization"));
+    // The session is a bearer token held by the browser (no cookie is ever set by this API); the Set-Cookie below is a belt-and-braces clear
+    // of any legacy "ss" cookie and is harmless when none exists.
+    const res = json({ ok: true });
+    res.headers.append("set-cookie", "ss=; Path=/; Max-Age=0; Secure; HttpOnly; SameSite=Lax");
+    return res;
+  }
   if (path === "/stripe/webhook" && m === "POST") {
     const raw = await req.text();
     if (raw.length > 1_000_000) throw new HttpError(413, "body_too_large");
@@ -245,11 +259,11 @@ export function createWorker(opts: WorkerOpts = {}) {
           opts.log?.(`buildDeps refused: ${e.message}`);   // reason + binding NAME only, never a value
           const p = new URL(req.url).pathname;
           if (p === "/health" || req.method === "OPTIONS") return handle(req, env, undefined);
-          return cors(json({ error: "deps_unavailable", reason: e.message }, 503), env);
+          return cors(json({ error: "deps_unavailable", reason: e.message }, 503), env, req);
         }
         const throttle = fixed ?? makeThrottle?.(env);
         return handle(req, env, base && throttle ? { ...base, throttle } : undefined);
-      }).catch(() => cors(json({ error: "internal" }, 500), env));
+      }).catch(() => cors(json({ error: "internal" }, 500), env, req));
     },
     // f334: the shop drain tick owns ONLY its own cron expression. Any other cron runs the owner cron and then the C8 payout tick.
     // C8 f57: with a ctx, the work is handed to ctx.waitUntil (the Worker stays alive for the tick); without one it is awaited (tests, drain).

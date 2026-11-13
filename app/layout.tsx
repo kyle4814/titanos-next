@@ -18,6 +18,7 @@ import SiteAnalytics from "@/components/SiteAnalytics";
 import ProofDeclaration from "@/components/ProofDeclaration";
 import MusicToggle from "@/components/MusicToggle";
 import JsonLd from "@/components/JsonLd";
+import { PORTAL, DEFAULT_PORTAL_API_BASE } from "@/lib/config";
 import { organization, website } from "@/lib/jsonld";
 
 // SEC-01 — Content-Security-Policy via meta http-equiv (repo-owned).
@@ -53,7 +54,10 @@ const CSP =
   // analytics beacon (SiteAnalytics.tsx — write-only, no cookies).
   // fetch() is governed by connect-src; the legacy form-action
   // 'mailto:' directive below covers the noscript mailto fallback only.
-  "connect-src 'self' https://cloudflare-dns.com https://api.titanos.tech https://vault.titanos.tech https://cloudflareinsights.com; " +
+  "connect-src 'self' https://cloudflare-dns.com https://api.titanos.tech " +
+  // The configured portal API base (NEXT_PUBLIC_PORTAL_API_BASE) is allowed too; at the default this adds nothing, so the CSP is byte-identical.
+  (PORTAL.API_BASE === DEFAULT_PORTAL_API_BASE ? "" : PORTAL.API_BASE + " ") +
+  "https://vault.titanos.tech https://cloudflareinsights.com; " +
   // frame-src allows the vault.titanos.tech partner-signup embed only.
   "frame-src 'self' https://vault.titanos.tech; " +
   "base-uri 'self'; " +

@@ -99,7 +99,15 @@ export const CONTACT_HREF = "/contact";
 
 // C2 portal API (portal-api/ Worker). Same origin as the live Worker; the new routes mount beside the old ones on deploy.
 // Until that owner-approved deploy, these calls return 404 and the UI shows its "checkout not open yet" message.
+export const DEFAULT_PORTAL_API_BASE = "https://api.titanos.tech";
+// Build-time override (NEXT_PUBLIC_PORTAL_API_BASE) for pointing the site at the portal Worker's own hostname at cutover.
+// Accepts only a bare https origin (no path, query, credentials or whitespace); anything else falls back to today's URL, so a typo
+// can never widen the CSP or send the session token somewhere unintended. The literal env access below is what Next inlines.
+export function resolvePortalApiBase(raw: string | undefined): string {
+  const v = (raw ?? "").trim().replace(/\/+$/, "");
+  return /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d{1,5})?$/.test(v) ? v : DEFAULT_PORTAL_API_BASE;
+}
 export const PORTAL = {
-  API_BASE: "https://api.titanos.tech",
+  API_BASE: resolvePortalApiBase(process.env.NEXT_PUBLIC_PORTAL_API_BASE),
   SESSION_KEY: "titanos.session",
 };

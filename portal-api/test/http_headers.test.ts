@@ -100,7 +100,7 @@ test("route table: every route x method x credential state answers with all five
     p, `${p}/partner-access`, `${p}/portals`, `${p}/portals/x/estate`, `${p}/portals/x/publish`, `${p}/brand`, `${p}/ledger`, `${p}/statement?month=2026-11`, `${p}/statement?month=2026-13`, `${p}/payouts`,
     `/invites/i1/accept`, `/referrals/claim`, `/enterprise/tnt_missing/estate`, `/totally/unknown/path`, `/`,
   ];
-  const paths = [...new Set([...literalPaths(), ...templated])].filter((x) => x !== "/account");
+  const paths = [...new Set([...literalPaths(), ...templated])].filter((x) => x !== "/account" && x !== "/auth/logout");   // both end the session: exercised last, below
   assert.ok(paths.length > 70, `route table too small: ${paths.length}`);
   const methods = ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD"];
   const auth: Array<[string, Record<string, string>]> = [
@@ -123,6 +123,7 @@ test("route table: every route x method x credential state answers with all five
   assert.ok(n > 3000, `only ${n} requests`);
   // destructive route last
   check(await h.req("DELETE", "/account", { token: me.session }), "DELETE /account");
+  for (const m of ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD"]) for (const t of [me.session, ent.session, "nope", undefined]) check(await h.req(m, "/auth/logout", { token: t }), `${m} /auth/logout`);
 });
 
 test("preflight: with and without a configured site origin, and an unknown path", async () => {

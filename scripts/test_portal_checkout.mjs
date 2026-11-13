@@ -49,7 +49,9 @@ t("portal pages are noindex and not in the sitemap", () => {
 });
 t("CSP connect-src already allows the API origin the client calls", () => {
   assert.match(read("app/layout.tsx"), /connect-src 'self'( https:\/\/cloudflare-dns\.com)? https:\/\/api\.titanos\.tech/); // C1 added the DoH host ahead of the API
-  assert.match(read("lib/config.ts"), /PORTAL = \{\s*API_BASE: "https:\/\/api\.titanos\.tech"/);
+  const cfg = read("lib/config.ts");
+  assert.match(cfg, /DEFAULT_PORTAL_API_BASE = "https:\/\/api\.titanos\.tech"/);   // the default is still today's URL
+  assert.match(cfg, /PORTAL = \{\s*API_BASE: resolvePortalApiBase\(process\.env\.NEXT_PUBLIC_PORTAL_API_BASE\)/);   // overridable at build time only
 });
 t("no em dashes or en dashes in the new client-facing files", () => {
   for (const p of ["components/PortalCheckout.tsx", "lib/portal.ts", "app/app/login/client.tsx", "app/app/billing/client.tsx", ...PAGES.flatMap((x) => [`app/order/${x}/client.tsx`, `app/order/${x}/page.tsx`])])

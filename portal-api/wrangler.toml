@@ -14,3 +14,16 @@ DEV_OUTBOX = "1"
 binding = "DB"
 database_name = "titanos-portal"
 database_id = "cd81007b-6de4-4f1e-bf91-9bd482eaae74"
+
+# ---- PRODUCTION CUTOVER (prepared 2026-11-13, INERT: every line below is commented out; see PRODUCTION_CUTOVER.md) ----
+# New hostname for this Worker. api.titanos.tech stays with the old titanos-api Worker and is never touched.
+# Uncomment ONLY at the cutover "deploy" step, once the titanos.tech zone is confirmed to be on the deploying Cloudflare account:
+# routes = [{ pattern = "portal-api.titanos.tech", custom_domain = true }]
+#
+# Cutover [vars] (non-secret). In [vars] above replace STRIPE_MODE with "live", delete DEV_OUTBOX, and add:
+# TITANOS_EXTRA_ORIGINS = "https://www.titanos.tech"
+# MAIL_PROVIDER = "resend"
+# MAIL_FROM = "<sender on a domain verified with Resend>"
+# LIVE_BILLING_ARMED = "yes-<YYYY-MM-DD of the owner's go>"
+# Secrets (never in this file; set with hidden input): STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY,
+# INTERNAL_API_SECRET, RECEIPT_SECRET, SSO_SEAL_KEYS (optional: absent = SSO config answers 503).

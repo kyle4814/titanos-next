@@ -28,8 +28,9 @@ import { RATE_V1 } from "./enterprise/share.ts";
 import { makeBookFacts } from "./enterprise/book_facts.ts";
 import { parseSealKeys, type SealKeyring } from "./enterprise/seal.ts";
 import type { PayoutProvider } from "./enterprise/types.ts";
+import { ResendMailer, MAIL_PROVIDERS } from "./mail.ts";
 
-export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused";
+export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused" | "live_not_armed" | "mail_config_invalid";
 export class BuildDepsError extends Error {
   readonly reason: BuildDepsReason; readonly binding?: string;
   constructor(reason: BuildDepsReason, binding?: string) { super(binding ? `${reason}:${binding}` : reason); this.name = "BuildDepsError"; this.reason = reason; this.binding = binding; }
@@ -46,11 +47,28 @@ export const noStoreFactory: StoreFactory = () => { throw new BuildDepsError("st
 // as missing_binding:DB, so a per-isolate MemoryStore can never stand in for the shared database.
 export const d1StoreFactory: StoreFactory = (db) => new D1Store(db);
 
-// Fake billing unless the Env carries a TEST key. A live key is refused outright (live Stripe is GATE2, not this lane).
+// Fake billing unless the Env carries a TEST key. A live key is used ONLY when live mode is fully armed (assertLiveArmed);
+// every other live-ish combination (live key in test mode, test key in live mode) is refused exactly as before.
+const isLiveKey = (k: string | undefined) => !!k && (k.startsWith("sk_live_") || k.startsWith("rk_live_"));
+export const ARMING_RE = /^yes-\d{4}-\d{2}-\d{2}$/;
+// LIVE BILLING IS ARMED ONLY WHEN ALL OF: STRIPE_MODE="live", a live-shaped STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, a real mail
+// transport (MAIL_PROVIDER + its key + MAIL_FROM), LIVE_BILLING_ARMED="yes-YYYY-MM-DD", and DEV_OUTBOX unset. Otherwise it throws
+// live_not_armed naming exactly what is missing (names only, never values).
+export function assertLiveArmed(env: Env): void {
+  const missing: string[] = [];
+  if (!isLiveKey(env.STRIPE_SECRET_KEY?.trim())) missing.push("STRIPE_SECRET_KEY(live)");
+  if (!env.STRIPE_WEBHOOK_SECRET?.trim()) missing.push("STRIPE_WEBHOOK_SECRET");
+  if (!env.MAIL_PROVIDER || !(MAIL_PROVIDERS as readonly string[]).includes(env.MAIL_PROVIDER)) missing.push("MAIL_PROVIDER");
+  else { if (!env.RESEND_API_KEY?.trim()) missing.push("RESEND_API_KEY"); if (!env.MAIL_FROM?.trim()) missing.push("MAIL_FROM"); }
+  if (!ARMING_RE.test(env.LIVE_BILLING_ARMED ?? "")) missing.push("LIVE_BILLING_ARMED");
+  if (env.DEV_OUTBOX) missing.push("DEV_OUTBOX(must be unset)");
+  if (missing.length) throw new BuildDepsError("live_not_armed", missing.join(","));
+}
 export function billingFor(env: Env, fetchFn?: typeof fetch): BillingProvider {
   const k = env.STRIPE_SECRET_KEY?.trim();
+  if (env.STRIPE_MODE === "live" && isLiveKey(k)) { assertLiveArmed(env); return new StripeHttpBilling(k!, "live", fetchFn); }
   if (!k) return new MockBilling();
-  if (env.STRIPE_MODE === "live" || k.startsWith("sk_live_") || k.startsWith("rk_live_")) throw new BuildDepsError("live_key_refused");
+  if (env.STRIPE_MODE === "live" || isLiveKey(k)) throw new BuildDepsError("live_key_refused");
   if (k.startsWith("sk_test_") || k.startsWith("rk_test_")) return new StripeHttpBilling(k, "test", fetchFn);
   return new MockBilling();
 }
@@ -68,8 +86,8 @@ export const refusingJobPayments: JobPayments = {
 };
 // No zone write access to any customer's DNS: auto-fix answers no_zone (the engine's own honest path), the checks still run.
 export const noZones: ZoneProvider = { zoneFor: () => undefined };
-// Market payments: Stripe Connect in TEST mode only when a test key is bound; otherwise refuse. A live key never reaches here
-// (billingFor already threw live_key_refused for the same env).
+// Market payments: Stripe Connect in TEST mode only when a test key is bound; otherwise refuse. In LIVE mode (and for payouts, always)
+// every call answers 503 payments_unavailable / payouts_unavailable: marketplace money movement is out of scope for the live cutover.
 export function jobPaymentsFor(env: Env, fetchFn?: typeof fetch): JobPayments {
   const k = env.STRIPE_SECRET_KEY?.trim();
   if (k && env.STRIPE_MODE !== "live" && (k.startsWith("sk_test_") || k.startsWith("rk_test_"))) return new StripeConnectPayments(k, "test", fetchFn);
@@ -94,7 +112,15 @@ export function devOutboxMailer(db: NonNullable<Env["DB"]>, now: () => number): 
     await db.prepare("INSERT INTO dev_outbox (to_addr, subject, body, created_at) VALUES (?, ?, ?, ?)").bind(to, subject, text, t).run();
   } };
 }
-export function mailerFor(env: Env, now: () => number): Mailer {
+export function mailerFor(env: Env, now: () => number, fetchFn?: typeof fetch): Mailer {
+  if (env.MAIL_PROVIDER) {   // a real transport was asked for: build it or refuse naming the missing binding
+    if (env.STRIPE_MODE === "live" && env.DEV_OUTBOX) throw new BuildDepsError("live_key_refused", "DEV_OUTBOX");
+    if (!(MAIL_PROVIDERS as readonly string[]).includes(env.MAIL_PROVIDER)) throw new BuildDepsError("mail_config_invalid", "MAIL_PROVIDER");
+    const key = env.RESEND_API_KEY?.trim(), from = env.MAIL_FROM?.trim();
+    if (!key) throw new BuildDepsError("missing_binding", "RESEND_API_KEY");
+    if (!from) throw new BuildDepsError("missing_binding", "MAIL_FROM");
+    return new ResendMailer(key, from, fetchFn);
+  }
   if (env.DEV_OUTBOX !== "1" || !env.DB) return unavailableMailer;
   if (env.STRIPE_MODE === "live") throw new BuildDepsError("live_key_refused", "DEV_OUTBOX");
   return devOutboxMailer(env.DB, now);
@@ -126,13 +152,16 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
   if (!db) throw new BuildDepsError("missing_binding", "DB");
   const siteOrigin = env.TITANOS_SITE_ORIGIN;
   if (!siteOrigin) throw new BuildDepsError("missing_binding", "TITANOS_SITE_ORIGIN");
+  if (env.STRIPE_MODE === "live") assertLiveArmed(env);   // fail closed before anything is built; test mode never runs this line
   const store = (opts.storeFactory ?? d1StoreFactory)(db, env);
   const now = opts.now ?? (() => Date.now());
   return {
     ...(opts.side === false ? {} : sideDeps(env, opts.fetchFn)),
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
-    mailer: opts.mailer ?? mailerFor(env, now), now, siteOrigin,
+    mailer: opts.mailer ?? mailerFor(env, now, opts.fetchFn), now, siteOrigin,
     webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
+    operatorSecret: env.INTERNAL_API_SECRET || undefined,   // /internal/keys/trace: unset = nobody (401)
+    receiptSecret: env.RECEIPT_SECRET || undefined,
   };
 }
 
