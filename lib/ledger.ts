@@ -1,6 +1,6 @@
 // The site's system numbers. NEVER hand-typed: lib/ledger.json is written by klinge-kernel bin/site_ledger_export.py from
 // state/numbers/FACTS.json (curated, each fact traced to a receipt) and NUMBERS.json (the live ledger). Re-run the export, rebuild, redeploy.
-import ledger from "./ledger.json";
+import ledger from "./ledger.json" with { type: "json" };
 
 export type LedgerKey = keyof typeof ledger.n;
 export type Entry = { value: number; unit: string; label: string; method: string; source: string; as_of: string; source_status?: string };

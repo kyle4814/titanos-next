@@ -4,6 +4,7 @@
 // Keep this file free of path aliases and JSON imports so node tests can load it directly (node --experimental-strip-types).
 import { PRICING, LEADS, formatAUD } from "./pricing.ts";
 import { CASES } from "./caseStudies.ts";
+import { aud } from "./ledger.ts";
 
 export const DECLARATION_VERSION = "2026-11";
 export const DECLARATION_DATE = "10 November 2026";
@@ -41,7 +42,7 @@ export const FIGURES: Figure[] = [
   { id: "hw_local", value: "8 cores, 23 GB", line: "The workstation is a laptop: Intel Core i7-7700HQ (8 logical CPUs), 23 GB of RAM, running Linux under Windows.", status: "MEASURED", source: "nproc, free -g and lscpu on the workstation", asOf: "2026-11-10", method: "Commands run on the day." },
   { id: "hw_cloud", value: "4 cores, 15 GB", line: "Full test suites run on a cloud test runner: AMD EPYC 7B12, 4 cores, 15 GB of RAM.", status: "MEASURED", source: "nproc, free -g and lscpu on the cloud test runner", asOf: "2026-11-10", method: "Commands run on the day. The runner's address is deliberately not published." },
   { id: "cost_build", value: "about US$30 a month", line: "About US$30 a month of AI tools while the main engine was built (to 29 September 2026).", status: "OPERATOR_STATED", source: "titanos.tech/engineering, operator figure; no receipt on file", asOf: "2026-10-09", method: "Stated by the operator. Not receipted." },
-  { id: "cost_now", value: "about AU$300 a month", line: "About AU$300 a month of AI tool subscriptions since then.", status: "OPERATOR_STATED", source: "titanos.tech/engineering and /costs, operator figure; no receipt on file", asOf: "2026-10-09", method: "Stated by the operator. Not receipted. A receipted subscription ledger is not measured yet." },
+  { id: "cost_now", value: `about ${aud("compute_today_aud_month")} a month`, line: `About ${aud("compute_today_aud_month")} a month of AI tool subscriptions since then.`, status: "OPERATOR_STATED", source: "titanos.tech/engineering and /costs, operator figure; no receipt on file", asOf: "2026-10-09", method: "Stated by the operator. Not receipted. A receipted subscription ledger is not measured yet." },
   { id: "prices", value: "AU$0 to AU$149,997", line: "Published prices run from a free scan to enterprise programmes, all from the site's own price file.", status: "PUBLISHED", source: "lib/pricing.ts in the website repository", asOf: "2026-11-10", method: "Read from the file the live site renders its prices from." },
 ];
 
