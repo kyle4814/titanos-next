@@ -235,6 +235,6 @@ const nonStorage = hits.filter((h) => h.phase === "optin" && !OPTIN_STORAGE_OK.h
 ok(nonStorage.length === 0, `opt-in path: no network, cookie or localStorage hit (${nonStorage.length})`);
 
 let sha = "unknown";
-try { sha = execFileSync("git", ["-C", site, "rev-parse", "--short=10", "HEAD"], { encoding: "utf8" }).trim(); } catch { /* not a git tree */ }
+try { sha = execFileSync("git", ["-C", site, "rev-parse", "--short=10", "HEAD"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim(); } catch { /* not a git tree */ }
 console.log(fail === 0 ? `XRAYL0 OK site=${sha} level0_trap_hits=0 optin_storage_only=1` : `XRAYL0 FAILED site=${sha} fails=${fail} level0_trap_hits=${level0Hits.length}`);
 process.exit(fail ? 1 : 0);
