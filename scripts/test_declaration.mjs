@@ -35,10 +35,10 @@ ok(D.FIGURES.every((f) => f.source && /^\d{4}-\d{2}-\d{2}$/.test(f.asOf) && ["ME
 ok(new Set(D.FIGURES.map((f) => f.id)).size === D.FIGURES.length, "figure ids are unique");
 ok(D.ACHIEVEMENT_IDS.every((id) => D.FIG[id]), "every achievement points at a figure");
 const ledger = JSON.parse(read("lib/ledger.json")).n;
-ok(ledger.estate_sloc.value === 230797 && D.FIG.loc.value === "230,797", "LOC figure matches the site ledger");
+ok(ledger.estate_sloc.value === 256217 && D.FIG.loc.value === "256,217", "LOC figure matches the site ledger");
 ok(ledger.tests_main.value === 6314 && D.FIG.ledger_tests.value === "6,314", "test-case figure matches the site ledger");
 ok(ledger.cost_job_x.value === 8.4 && ledger.cost_job_before.value === 0.97 && ledger.cost_job_after.value === 0.12 && /8\.4 times/.test(D.FIG.cost_job.line), "cost-per-job figure matches the site ledger");
-ok(ledger.fleet_jobs_24h.value === 1451 && ledger.fleet_fail_rate_24h.value === 1.1 && ledger.fleet_median_job_min.value === 3, "fleet figures match the site ledger");
+ok(ledger.fleet_jobs_24h.value === 1549 && ledger.fleet_fail_rate_24h.value === 7.3 && ledger.fleet_median_job_min.value === 12, "fleet figures match the site ledger");
 ok(ledger.compute_build_aud_month.value === 46 && ledger.compute_today_aud_month.value === 300 && ledger.compute_build_aud_month.label === "OPERATOR_STATED", "cost figures match the ledger and stay labelled operator-stated");
 const manifestLines = read("scripts/test_manifest.txt").split("\n").filter((l) => l && !l.startsWith("#"));
 ok(D.FIG.site_tests.value === String(manifestLines.length) || manifestLines.length > Number(D.FIG.site_tests.value), "test-manifest figure is not above the real count (the manifest only grows)");
