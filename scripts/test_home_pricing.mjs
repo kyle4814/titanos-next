@@ -8,7 +8,7 @@ const ok = (c, m) => { console.log(`${c ? "PASS" : "FAIL"} ${m}`); if (!c) fail 
 const out = process.argv[2] || "out";
 const txt = (h) => h.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/\s+/g, " ");
 const sectionOf = (html) => { const i = html.indexOf("data-home-pricing"); if (i < 0) return null; const j = html.indexOf("</ul>", i); return html.slice(i, html.indexOf("</div></div>", j) > 0 ? html.indexOf("</div></div>", j) + 12 : j + 600); };
-const amounts = (s) => [...new Set(s.match(/AU\$[0-9][0-9,]*/g) ?? [])];
+const amounts = (s) => [...new Set(s.match(/AU\$[0-9]+(?:,[0-9]{3})*/g) ?? [])];
 
 // The pure check, so the mutation below can prove this test is able to fail.
 export function check(homeHtml, pricingHtml) {
@@ -36,7 +36,7 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop()
   const errs = check(home, pricing);
   ok(errs.length === 0, errs.length ? errs.join("; ") : "homepage pricing: canonical prices, matches /pricing, links /pricing and /book, placed before the final CTA");
   // mutations: each must be caught
-  ok(check(home.replace("AU$5,997", "AU$5,998"), pricing).some((e) => /5,998|5,997/.test(e)), "mutation: a changed price is caught");
+  ok(check(home.replaceAll("AU$5,997", "AU$5,998"), pricing).some((e) => /5,998|5,997/.test(e)), "mutation: a changed price is caught");
   ok(check(home.replace(/data-home-pricing/g, "data-nope"), pricing).length > 0, "mutation: removing the section is caught");
   ok(check(home, pricing.replace(/AU\$149,997/g, "AU$150,000")).some((e) => /149,997/.test(e)), "mutation: a price the pricing page does not show is caught");
   ok(check(home.replace(/href="\/book"/g, 'href="/x"'), pricing).some((e) => /\/book/.test(e)), "mutation: a missing /book link is caught");

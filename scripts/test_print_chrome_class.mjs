@@ -23,7 +23,7 @@ function stripPrint(css) {
   }
   return out + css.slice(i);
 }
-const BASE = "34115f498"; // obelisk-int3 merge the branch is built on
+const BASE = "a56bef788"; // main plus f421 (video/audio focus ring, screen CSS) and f410 (print rule): the base this f427 change sits on in the 2026-11-13 release
 let baseCss = null;
 try { baseCss = execFileSync("git", ["show", `${BASE}:app/globals.css`], { cwd: root, encoding: "utf8" }); } catch { /* shallow clone */ }
 const cur = readFileSync(path.join(root, "app/globals.css"), "utf8");

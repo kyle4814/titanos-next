@@ -1,17 +1,17 @@
 {
  "probe": "keyboard_focus",
- "generated": "2026-11-11T06:28:01.471Z",
- "pages_enumerated": 267,
+ "generated": "2026-11-13T03:00:38.577Z",
+ "pages_enumerated": 274,
  "pages_allowlisted": 0,
  "shard": null,
  "source": "manifest",
- "manifest_routes_count": 266,
- "pages_total": 266,
- "pages_swept": 266,
+ "manifest_routes_count": 273,
+ "pages_total": 273,
+ "pages_swept": 273,
  "not_swept": [],
  "allowlisted": [],
  "problems": [],
- "pages_with_defects": 16,
+ "pages_with_defects": 1,
  "pages": [
   {
    "route": "/",
@@ -326,6 +326,22 @@
    "defects": []
   },
   {
+   "route": "/book",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/book/confirmed",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
    "route": "/case-studies",
    "swept": true,
    "viewports": [
@@ -406,6 +422,14 @@
    "defects": []
   },
   {
+   "route": "/declaration",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
    "route": "/deep-field",
    "swept": true,
    "viewports": [
@@ -451,9 +475,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "TRAP [mobile] no return to document or wrap within 44 presses (N=39, 44 distinct stops): keyboard trap"
-   ]
+   "defects": []
   },
   {
    "route": "/engineering",
@@ -517,9 +539,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-001",
@@ -527,9 +547,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 5 stops, forward visited 4; first differing index 4"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-001/scorecard",
@@ -537,9 +555,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-002",
@@ -547,9 +563,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 7 stops, forward visited 6; first differing index 6"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-003",
@@ -557,9 +571,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 10 stops, forward visited 9; first differing index 9"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-004",
@@ -567,9 +579,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 10 stops, forward visited 9; first differing index 9"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-005",
@@ -577,9 +587,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 9 stops, forward visited 8; first differing index 8"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-006",
@@ -587,9 +595,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-007",
@@ -597,9 +603,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-008",
@@ -607,9 +611,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 12 stops, forward visited 11; first differing index 11"
-   ]
+   "defects": []
   },
   {
    "route": "/labs/issue-009",
@@ -617,9 +619,31 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab visited 11 stops, forward visited 10; first differing index 10"
-   ]
+   "defects": []
+  },
+  {
+   "route": "/labs/issue-010",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/labs/issue-011",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/labs/issue-012",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
   },
   {
    "route": "/leads",
@@ -1555,9 +1579,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "NO_INDICATOR [mobile] iframe \"Sample external evidence pack PDF previe\": outline none 3px, shadow none, no alt change"
-   ]
+   "defects": []
   },
   {
    "route": "/our-scan",
@@ -1565,9 +1587,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "REVERSE_MISMATCH [mobile] Shift+Tab did not return to the document within 78 presses"
-   ]
+   "defects": []
   },
   {
    "route": "/parallax",
@@ -1744,8 +1764,8 @@
     "mobile"
    ],
    "defects": [
-    "UNREACHABLE [mobile] iframe \"\": visible=true ariaHiddenAncestor=false inViewport=false rect=1,2221,388,420",
-    "NO_INDICATOR [mobile] iframe \"\": outline none 3px, shadow none, no alt change"
+    "UNREACHABLE [mobile] iframe \"Apply to the Titanos partner network\": visible=true ariaHiddenAncestor=false inViewport=false rect=1,2221,388,420",
+    "NO_INDICATOR [mobile] iframe \"Apply to the Titanos partner network\": outline none 3px, shadow none, no alt change"
    ]
   },
   {
@@ -1922,9 +1942,7 @@
    "viewports": [
     "mobile"
    ],
-   "defects": [
-    "TRAP [mobile] focus cycles back to video \"Your browser cannot play this video. Dow\" at press 5, never reaching the document"
-   ]
+   "defects": []
   },
   {
    "route": "/welcome/agency-white-label-audit",
@@ -2160,6 +2178,14 @@
   },
   {
    "route": "/welcome/trade-panel-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/x-ray",
    "swept": true,
    "viewports": [
     "mobile"
