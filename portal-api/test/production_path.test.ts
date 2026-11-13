@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { FakeD1 } from "./fake_d1.ts";
 import { make } from "./harness.ts";
 import { MemoryStore } from "../src/store.ts";
-import { buildDeps, billingFor, mailerFor, jobPaymentsFor, assertLiveArmed, BuildDepsError } from "../src/build_deps.ts";
+import { throttleFor, buildDeps, billingFor, mailerFor, jobPaymentsFor, assertLiveArmed, BuildDepsError } from "../src/build_deps.ts";
 import { StripeHttpBilling, MockBilling } from "../src/stripe.ts";
 import { ResendMailer, RESEND_URL } from "../src/mail.ts";
 import { createWorker, handle } from "../src/index.ts";
@@ -31,7 +31,11 @@ test("live: fully armed starts, with real Stripe billing and the Resend mailer",
 for (const [name, patch, missing] of [
   ["no key", { STRIPE_SECRET_KEY: undefined }, "STRIPE_SECRET_KEY(live)"],
   ["test key in live mode", { STRIPE_SECRET_KEY: fakeTest }, "STRIPE_SECRET_KEY(live)"],
-  ["no webhook secret", { STRIPE_WEBHOOK_SECRET: undefined }, "STRIPE_WEBHOOK_SECRET"],
+  ["no webhook secret", { STRIPE_WEBHOOK_SECRET: undefined }, "STRIPE_WEBHOOK_SECRET(whsec_...)"],
+  ["empty webhook secret", { STRIPE_WEBHOOK_SECRET: "" }, "STRIPE_WEBHOOK_SECRET(whsec_...)"],
+  ["space-only webhook secret", { STRIPE_WEBHOOK_SECRET: " " }, "STRIPE_WEBHOOK_SECRET(whsec_...)"],
+  ["wrong-prefix webhook secret", { STRIPE_WEBHOOK_SECRET: "sk" + "_live_FAKE0000" }, "STRIPE_WEBHOOK_SECRET(whsec_...)"],
+  ["bare whsec_ prefix", { STRIPE_WEBHOOK_SECRET: "whsec" + "_" }, "STRIPE_WEBHOOK_SECRET(whsec_...)"],
   ["no mail provider", { MAIL_PROVIDER: undefined }, "MAIL_PROVIDER"],
   ["no resend key", { RESEND_API_KEY: undefined }, "RESEND_API_KEY"],
   ["no mail from", { MAIL_FROM: undefined }, "MAIL_FROM"],
@@ -46,7 +50,7 @@ for (const [name, patch, missing] of [
 }
 test("live: the refusal lists every missing item at once and never a value", () => {
   try { buildDeps({ DB: new FakeD1() as never, TITANOS_SITE_ORIGIN: ORIGIN, STRIPE_MODE: "live" }, { storeFactory: factory }); assert.fail(); }
-  catch (e: any) { assert.equal(e.binding, "STRIPE_SECRET_KEY(live),STRIPE_WEBHOOK_SECRET,MAIL_PROVIDER,LIVE_BILLING_ARMED"); }
+  catch (e: any) { assert.equal(e.binding, "STRIPE_SECRET_KEY(live),STRIPE_WEBHOOK_SECRET(whsec_...),MAIL_PROVIDER,LIVE_BILLING_ARMED"); }
 });
 test("live key without STRIPE_MODE=live is still refused exactly as before (test mode unchanged)", () => {
   assert.throws(() => billingFor({ STRIPE_SECRET_KEY: live }), (e: any) => e.reason === "live_key_refused");
@@ -199,4 +203,67 @@ test("checkout: a Stripe 403 (restricted key lacks a permission) is logged and s
   assert.equal((await h.store.purchasesFor(a.account.id)).length, 0, "no pending purchase is left behind");
   h.deps.billing = new StripeHttpBilling("rk" + "_live_FAKE0000", "live", (async () => new Response("x", { status: 500 })) as any);
   assert.equal((await h.req("POST", "/checkout", { token: a.session, body: { product: "ai_growth" } })).status, 503);
+});
+
+// ---- hardening round (security review of ad383a68): webhook secret shape, login mail abuse, strict email ----
+test("webhook secret: a padded well-formed secret arms and the verifier gets the TRIMMED value", () => {
+  const d = buildDeps(armedEnv({ STRIPE_WEBHOOK_SECRET: "  " + wh + "\n" }), { storeFactory: factory });
+  assert.equal(d.webhookSecret, wh);
+});
+test("webhook secret: a whitespace-only secret never reaches the verifier, even in test mode", () => {
+  const d = buildDeps({ DB: new FakeD1() as never, TITANOS_SITE_ORIGIN: ORIGIN, STRIPE_WEBHOOK_SECRET: "   " }, { storeFactory: factory });
+  assert.equal(d.webhookSecret, undefined);
+});
+import { normaliseEmail, EMAIL_RE } from "../src/util.ts";
+test("email: display-name tricks, separators, quotes and control shapes are refused; ordinary addresses still pass", () => {
+  for (const bad of ["x<a@evil.example>", "<a@evil.example>", "a@evil.example>", "a,b@evil.example", "a@evil.example,b@other.example", 'a"b@evil.example', "a;b@evil.example", "a b@evil.example", "a@evil", "a@-evil.example", "a@evil..example", "a@evil.example.", "a@ev'il.example", "a@evil.e", "a@@evil.example", "@evil.example", "a\r\nbcc:b@evil.example", "o'brien@evil.example", "a(b)@evil.example"]) {
+    assert.equal(normaliseEmail(bad), null, JSON.stringify(bad)); 
+  }
+  for (const good of ["a@b.example", "First.Last+tag@Sub.Example.com.au", "u_1%x@example.co", "x@xn--bcher-kva.example"]) assert.ok(normaliseEmail(good), good);
+  assert.equal(normaliseEmail(" A@B.Example "), "a@b.example");
+  assert.ok(EMAIL_RE.test("a@b.example"));
+});
+
+const loginWorker = (limits: object = {}, now = () => Date.now()) => {
+  const db = new FakeD1();
+  const w = createWorker({ buildDeps: (e) => buildDeps(e, { now }), makeThrottle: (e) => throttleFor(e, now) });
+  const env = { DB: db as never, TITANOS_SITE_ORIGIN: ORIGIN, DEV_OUTBOX: "1", ...limits };
+  const post = (email: string, ip?: string) => w.fetch(new Request("https://api.test/auth/request", { method: "POST", headers: ip ? { "cf-connecting-ip": ip } : {}, body: JSON.stringify({ email }) }), env as any);
+  return { post, db };
+};
+test("login abuse: many distinct addresses from one IP are throttled (429, nothing leaked); other IPs are independent", async () => {
+  const { post } = loginWorker({ LOGIN_IP_LIMIT: "3", LOGIN_GLOBAL_LIMIT: "1000" });
+  for (let i = 0; i < 3; i++) assert.equal((await post(`u${i}@x.example`, "203.0.113.7")).status, 202);
+  const r = await post("u9@x.example", "203.0.113.7");
+  assert.equal(r.status, 429); assert.deepEqual(await r.json(), { error: "too_many_attempts" }); assert.ok(Number(r.headers.get("retry-after")) >= 1);
+  const text = JSON.stringify([...r.headers]) + JSON.stringify({ error: "too_many_attempts" });
+  assert.ok(!text.includes("203.0.113.7") && !text.includes("u9@x.example"));
+  assert.equal((await post("v1@x.example", "203.0.113.8")).status, 202, "a different IP is independent");
+  assert.equal((await post("w1@x.example", "203.0.113.7")).status, 429, "still locked");
+});
+test("login abuse: the global hourly cap trips across different IPs", async () => {
+  const { post } = loginWorker({ LOGIN_IP_LIMIT: "50", LOGIN_GLOBAL_LIMIT: "4" });
+  for (let i = 0; i < 4; i++) assert.equal((await post(`g${i}@x.example`, `198.51.100.${i + 1}`)).status, 202);
+  assert.equal((await post("g9@x.example", "198.51.100.99")).status, 429);
+});
+test("login abuse: the window expires after an hour", async () => {
+  let t = Date.UTC(2026, 10, 13);
+  const { post } = loginWorker({ LOGIN_IP_LIMIT: "1" }, () => t);
+  assert.equal((await post("a1@x.example", "203.0.113.1")).status, 202);
+  assert.equal((await post("a2@x.example", "203.0.113.1")).status, 429);
+  t += 3_600_001;
+  assert.equal((await post("a3@x.example", "203.0.113.1")).status, 202);
+});
+test("login abuse: defaults, and bad env values fall back to the defaults", async () => {
+  const { loginLimitsFor, LOGIN_REQUEST_LIMITS } = await import("../src/build_deps.ts");
+  assert.deepEqual(loginLimitsFor({}), LOGIN_REQUEST_LIMITS);
+  for (const bad of ["0", "-1", "abc", "1.5", "99999999999"]) assert.deepEqual(loginLimitsFor({ LOGIN_IP_LIMIT: bad, LOGIN_GLOBAL_LIMIT: bad }), LOGIN_REQUEST_LIMITS, bad);
+  assert.deepEqual(loginLimitsFor({ LOGIN_IP_LIMIT: "5", LOGIN_GLOBAL_LIMIT: "9" }), { perIpPerHour: 5, globalPerHour: 9 });
+});
+test("login abuse: test-mode dev_outbox flow is unchanged (mail parked, 202) and a bad email still 400s before any mail", async () => {
+  const { post, db } = loginWorker();
+  assert.equal((await post("dev@x.example", "203.0.113.50")).status, 202);
+  const row = await (db as any).prepare("SELECT to_addr FROM dev_outbox").first();
+  assert.equal(row.to_addr, "dev@x.example");
+  assert.equal((await post("x<a@evil.example>", "203.0.113.51")).status, 400);
 });

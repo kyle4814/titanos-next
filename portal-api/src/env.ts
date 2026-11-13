@@ -39,10 +39,14 @@ export interface Env {
   SSO_SEAL_KEYS?: string;          // JSON keyring for sealing SSO client secrets (never echoed); absent = SSO config answers 503
   RECEIPT_SECRET?: string;         // HMAC secret that signs agent receipts (never echoed)
   LIVE_BILLING_ARMED?: string;     // "yes-YYYY-MM-DD": the explicit arming word live Stripe mode requires (build_deps.ts assertLiveArmed)
-  MAIL_PROVIDER?: string;          // "resend"; unset = DEV_OUTBOX / 503 behaviour unchanged
+  MAIL_RELAY?: { fetch(req: Request): Promise<Response> };   // service binding to the titanos-api Worker (MAIL_PROVIDER="relay")
+  MAIL_RELAY_SECRET?: string;      // shared bearer secret for the relay route (never echoed)
+  MAIL_PROVIDER?: string;          // "relay" | "resend"; unset = DEV_OUTBOX / 503 behaviour unchanged
   RESEND_API_KEY?: string;         // never echoed
   MAIL_FROM?: string;              // sender address for login mail, on a domain verified with the provider
   TITANOS_EXTRA_ORIGINS?: string;  // optional comma list of additional browser origins CORS may echo (e.g. https://www.titanos.tech)
+  LOGIN_IP_LIMIT?: string;         // optional: login-link requests allowed per client IP per hour (default 10)
+  LOGIN_GLOBAL_LIMIT?: string;     // optional: login-link requests allowed in total per hour (default 200)
   DEV_OUTBOX?: string;            // TEST MODE only: "1" parks outgoing mail in the dev_outbox table (0025); refused when STRIPE_MODE is "live"
   ESTATE_KV?: { get(key: string): Promise<string | null>; put(key: string, value: string, opts?: { expirationTtl?: number }): Promise<void> };  // C8 f321: optional KV namespace for the estate cache + refresh limiter; absent = Memory adapters
 }

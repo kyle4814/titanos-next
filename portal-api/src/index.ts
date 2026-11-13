@@ -73,6 +73,25 @@ async function throttled<T>(d: Deps, req: Request, scope: string, who: string, f
 // entry from this operator-set allowlist; it is never echoed otherwise, so with no list (or no match) the header is the configured
 // TITANOS_SITE_ORIGIN exactly as before.
 const extraOrigins = (env: Env): string[] => (env.TITANOS_EXTRA_ORIGINS ?? "").split(",").map((x) => x.trim()).filter((x) => /^https:\/\/[a-z0-9.-]+(:\d+)?$/.test(x));
+// /auth/request abuse guard: per client IP, then a global hourly cap, on the SAME throttle store as the rest (Memory or D1; new keys only).
+// Counted on every request (never reset on success) because each one can cost a real email. IP first, so one noisy IP is refused before it
+// can spend the global budget. Answer is the standard 429 too_many_attempts + Retry-After: no address, IP or counter is revealed.
+// FAIL CLOSED: a fault in the throttle itself is a 503. No throttle injected (harness callers) = no guard, as for every other throttled route.
+const HOUR = 3_600_000;
+async function loginAbuseGuard(d: Deps, req: Request): Promise<void> {
+  const th = d.throttle; if (!th) return;
+  const lim = d.loginLimits ?? { perIpPerHour: 10, globalPerHour: 200 };
+  const mk = (n: number) => new Throttle({ maxFailures: n, windowMs: HOUR, lockoutMs: HOUR, now: d.now }, th.store);
+  try {
+    for (const [key, t] of [[await throttleKey("login_ip", clientIp(req)), mk(lim.perIpPerHour)], ["login_global:all", mk(lim.globalPerHour)]] as const) {
+      const r = await t.reserveAsync(key);
+      if (!r.allowed) { th.note(`throttle block key=${key} retry_after=${r.retryAfterSec}`); throw new ThrottledError(r.retryAfterSec); }
+    }
+  } catch (e) {
+    if (e instanceof ThrottledError) throw e;
+    throw new HttpError(503, "throttle_unavailable");
+  }
+}
 function cors(res: Response, env: Env, req?: Request): Response {
   let o = env.TITANOS_SITE_ORIGIN?.trim();
   const asked = req?.headers.get("origin")?.trim();
@@ -143,7 +162,7 @@ async function route(req: Request, path: string, d: Deps): Promise<Response> {
     }
     return out === null ? empty(202) : json(out);
   }
-  if (path === "/auth/request" && m === "POST") { await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
+  if (path === "/auth/request" && m === "POST") { await loginAbuseGuard(d, req); await svc.requestLogin(d, (await body(req)).email); return json({ ok: true }, 202); } // same answer for known and unknown emails
   if (path === "/auth/verify" && m === "POST") { const tok = (await body(req)).token; return json(await throttled(d, req, "login", "", () => svc.verifyLogin(d, tok))); }
   if (path === "/auth/logout" && m === "POST") {
     await svc.logout(d, req.headers.get("authorization"));

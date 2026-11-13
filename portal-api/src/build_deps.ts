@@ -28,7 +28,7 @@ import { RATE_V1 } from "./enterprise/share.ts";
 import { makeBookFacts } from "./enterprise/book_facts.ts";
 import { parseSealKeys, type SealKeyring } from "./enterprise/seal.ts";
 import type { PayoutProvider } from "./enterprise/types.ts";
-import { ResendMailer, MAIL_PROVIDERS } from "./mail.ts";
+import { ResendMailer, RelayMailer, MAIL_PROVIDERS } from "./mail.ts";
 
 export type BuildDepsReason = "missing_binding" | "store_adapter_unavailable" | "live_key_refused" | "live_not_armed" | "mail_config_invalid";
 export class BuildDepsError extends Error {
@@ -37,6 +37,11 @@ export class BuildDepsError extends Error {
 }
 export type StoreFactory = (db: NonNullable<Env["DB"]>, env: Env) => Store;
 export interface BuildOpts { side?: boolean; storeFactory?: StoreFactory; billing?: BillingProvider; dns?: TxtResolver; mailer?: Mailer; now?: () => number; fetchFn?: typeof fetch }
+// /auth/request sends real mail in production, so besides the per-email limit (service.ts LOGIN_LIMIT) it is capped per client IP and globally.
+// Defaults here; override per deploy with env LOGIN_IP_LIMIT / LOGIN_GLOBAL_LIMIT (positive integers, per hour). Every request counts, sent or not.
+export const LOGIN_REQUEST_LIMITS = { perIpPerHour: 10, globalPerHour: 200 };
+const posInt = (v: string | undefined, d: number) => { const n = Number(v); return Number.isInteger(n) && n >= 1 && n <= 1_000_000 ? n : d; };
+export const loginLimitsFor = (env: Env) => ({ perIpPerHour: posInt(env.LOGIN_IP_LIMIT, LOGIN_REQUEST_LIMITS.perIpPerHour), globalPerHour: posInt(env.LOGIN_GLOBAL_LIMIT, LOGIN_REQUEST_LIMITS.globalPerHour) });
 export const THROTTLE_LIMITS = { maxFailures: 5, windowMs: 15 * 60_000, lockoutMs: 15 * 60_000 };
 
 // No mail transport is bound yet (PENDING LIVE): refuse loudly instead of dropping login links on the floor.
@@ -57,8 +62,10 @@ export const ARMING_RE = /^yes-\d{4}-\d{2}-\d{2}$/;
 export function assertLiveArmed(env: Env): void {
   const missing: string[] = [];
   if (!isLiveKey(env.STRIPE_SECRET_KEY?.trim())) missing.push("STRIPE_SECRET_KEY(live)");
-  if (!env.STRIPE_WEBHOOK_SECRET?.trim()) missing.push("STRIPE_WEBHOOK_SECRET");
+  const wh = env.STRIPE_WEBHOOK_SECRET?.trim();
+  if (!wh || !wh.startsWith("whsec_") || wh.length <= "whsec_".length) missing.push("STRIPE_WEBHOOK_SECRET(whsec_...)");
   if (!env.MAIL_PROVIDER || !(MAIL_PROVIDERS as readonly string[]).includes(env.MAIL_PROVIDER)) missing.push("MAIL_PROVIDER");
+  else if (env.MAIL_PROVIDER === "relay") { if (!env.MAIL_RELAY || typeof env.MAIL_RELAY.fetch !== "function") missing.push("MAIL_RELAY"); if (!env.MAIL_RELAY_SECRET?.trim()) missing.push("MAIL_RELAY_SECRET"); }
   else { if (!env.RESEND_API_KEY?.trim()) missing.push("RESEND_API_KEY"); if (!env.MAIL_FROM?.trim()) missing.push("MAIL_FROM"); }
   if (!ARMING_RE.test(env.LIVE_BILLING_ARMED ?? "")) missing.push("LIVE_BILLING_ARMED");
   if (env.DEV_OUTBOX) missing.push("DEV_OUTBOX(must be unset)");
@@ -116,6 +123,11 @@ export function mailerFor(env: Env, now: () => number, fetchFn?: typeof fetch): 
   if (env.MAIL_PROVIDER) {   // a real transport was asked for: build it or refuse naming the missing binding
     if (env.STRIPE_MODE === "live" && env.DEV_OUTBOX) throw new BuildDepsError("live_key_refused", "DEV_OUTBOX");
     if (!(MAIL_PROVIDERS as readonly string[]).includes(env.MAIL_PROVIDER)) throw new BuildDepsError("mail_config_invalid", "MAIL_PROVIDER");
+    if (env.MAIL_PROVIDER === "relay") {
+      if (!env.MAIL_RELAY || typeof env.MAIL_RELAY.fetch !== "function") throw new BuildDepsError("missing_binding", "MAIL_RELAY");
+      const rs = env.MAIL_RELAY_SECRET?.trim(); if (!rs) throw new BuildDepsError("missing_binding", "MAIL_RELAY_SECRET");
+      return new RelayMailer(env.MAIL_RELAY, rs);
+    }
     const key = env.RESEND_API_KEY?.trim(), from = env.MAIL_FROM?.trim();
     if (!key) throw new BuildDepsError("missing_binding", "RESEND_API_KEY");
     if (!from) throw new BuildDepsError("missing_binding", "MAIL_FROM");
@@ -159,9 +171,10 @@ export function buildDeps(env: Env, opts: BuildOpts = {}): Deps {
     ...(opts.side === false ? {} : sideDeps(env, opts.fetchFn)),
     store, billing: opts.billing ?? billingFor(env, opts.fetchFn), dns: opts.dns ?? dohResolver(opts.fetchFn),
     mailer: opts.mailer ?? mailerFor(env, now, opts.fetchFn), now, siteOrigin,
-    webhookSecret: env.STRIPE_WEBHOOK_SECRET || undefined,
+    webhookSecret: env.STRIPE_WEBHOOK_SECRET?.trim() || undefined,   // the SAME trimmed value assertLiveArmed checked
     operatorSecret: env.INTERNAL_API_SECRET || undefined,   // /internal/keys/trace: unset = nobody (401)
     receiptSecret: env.RECEIPT_SECRET || undefined,
+    loginLimits: loginLimitsFor(env),
   };
 }
 

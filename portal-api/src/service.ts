@@ -22,7 +22,7 @@ import type { OwnerStore, ZoneProvider } from "./owner/engine.ts";
 import type { DohFetch } from "../../lib/guestscan/scan.ts";
 export interface OwnerDeps { store: OwnerStore; doh: (domain: string) => DohFetch; zones: ZoneProvider }
 import { marketExport, hasActiveMarketJobs, type MarketDeps } from "./market/service.ts";
-export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; receiptSecret?: string; receiptKeyring?: import("./agent/receipt.ts").ReceiptKeyring; operatorSecret?: string; log?: (line: string) => void; model?: import("./agent/tools.ts").ModelClient; ent?: EntContext; throttle?: import("./throttle.ts").Throttle }
+export interface Deps { owner?: OwnerDeps; market?: MarketDeps; store: Store; billing: BillingProvider; dns: TxtResolver; mailer: Mailer; now: () => number; siteOrigin: string; webhookSecret?: string; receiptSecret?: string; receiptKeyring?: import("./agent/receipt.ts").ReceiptKeyring; operatorSecret?: string; log?: (line: string) => void; model?: import("./agent/tools.ts").ModelClient; ent?: EntContext; throttle?: import("./throttle.ts").Throttle; loginLimits?: { perIpPerHour: number; globalPerHour: number } }
 // f181: HttpError lives in util.ts (service.ts <-> plan_change_service.ts was a runtime import cycle); re-exported so every caller keeps working.
 export { HttpError } from "./util.ts";
 import { HttpError } from "./util.ts";

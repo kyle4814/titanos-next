@@ -20,7 +20,9 @@ export function timingSafeEqual(a: string, b: string): boolean {
   for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return d === 0;
 }
-export const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
+// Strict on purpose: the address goes to a mail provider, so no `<`, `>`, `,`, `"`, `;`, quotes or spaces (a display-name trick like `x<a@evil.com>`
+// must not parse). Local part [A-Za-z0-9._%+-]; domain = dot-separated hostname labels with an alphabetic (or punycode) TLD.
+export const EMAIL_RE = /^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z][A-Za-z0-9-]{1,62}$/;
 export function normaliseEmail(s: unknown): string | null {
   if (typeof s !== "string") return null;
   const e = s.trim().toLowerCase();
