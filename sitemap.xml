@@ -817,6 +817,11 @@
 <priority>0.6</priority>
 </url>
 <url>
+<loc>https://titanos.tech/book</loc>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
 <loc>https://titanos.tech/case-studies</loc>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
@@ -838,6 +843,11 @@
 </url>
 <url>
 <loc>https://titanos.tech/credits</loc>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://titanos.tech/declaration</loc>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
@@ -1058,6 +1068,11 @@
 </url>
 <url>
 <loc>https://titanos.tech/trust</loc>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://titanos.tech/x-ray</loc>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
