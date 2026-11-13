@@ -12,8 +12,10 @@ import {
 } from "@/lib/xray/pdf";
 
 // The whole X-Ray runs in this browser tab. No request is made with your answers: there is no fetch,
-// no upload, no account, no cookie. Drafts live in sessionStorage so a refresh does not lose them, and
-// vanish when the tab closes (or when you press "Clear my answers").
+// no upload, no account, no cookie. Nothing touches storage unless you tick "Keep a draft in this tab"
+// (off by default): then a draft lives in sessionStorage so a refresh does not lose it, and it vanishes when the
+// tab closes (or when you press "Clear my answers"). That opt-in save and its restore button are the only code
+// here that may touch storage (scripts/xray-level0-flow-probe enforces it with throwing traps).
 
 type Wf = {
   name: string; category: string; unknown: boolean; n: string; t0: string; reworkPct: string; reworkMin: string;
@@ -139,10 +141,19 @@ export default function XrayWizard() {
   const [f, setF] = useState<Form>(blank);
   const [asOf, setAsOf] = useState("");
   const [restored, setRestored] = useState(false);
+  const [keep, setKeep] = useState(false);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
     setAsOf(new Date().toISOString().slice(0, 10));
+  }, []);
+  // OPT-IN SAVE: the only automatic storage write, and only while the box is ticked.
+  useEffect(() => {
+    if (!keep) return;
+    try { sessionStorage.setItem(KEY, JSON.stringify(f)); } catch { /* storage blocked: fine */ }
+  }, [f, keep]);
+  // OPT-IN RESTORE: runs only when the person presses the button.
+  const restore = () => {
     try {
       const raw = sessionStorage.getItem(KEY);
       if (raw) {
@@ -150,10 +161,11 @@ export default function XrayWizard() {
         if (d && Array.isArray(d.wfs) && d.wfs.length >= 1 && d.wfs.length <= 5) { setF(d); setRestored(true); }
       }
     } catch { /* a blocked or corrupt draft is just ignored */ }
-  }, []);
-  useEffect(() => {
-    try { sessionStorage.setItem(KEY, JSON.stringify(f)); } catch { /* storage blocked: fine */ }
-  }, [f]);
+  };
+  const keepToggle = (on: boolean) => {
+    setKeep(on);
+    if (!on) { try { sessionStorage.removeItem(KEY); } catch { /* */ } }
+  };
 
   const { report, error } = useMemo<{ report: Report | null; error: string }>(() => {
     if (!asOf) return { report: null, error: "" };
@@ -167,7 +179,7 @@ export default function XrayWizard() {
   const set = <K extends keyof Form>(k: K, v: Form[K]) => setF((s) => ({ ...s, [k]: v }));
   const setWf = (i: number, patch: Partial<Wf>) => setF((s) => ({ ...s, wfs: s.wfs.map((w, j) => (j === i ? { ...w, ...patch } : w)) }));
   const toggleTool = (t: string) => set("tools", f.tools.includes(t) ? f.tools.filter((x) => x !== t) : [...f.tools, t]);
-  const clear = () => { setF(blank()); setShown(false); setRestored(false); try { sessionStorage.removeItem(KEY); } catch { /* */ } };
+  const clear = () => { setF(blank()); setShown(false); setRestored(false); if (keep) { try { sessionStorage.removeItem(KEY); } catch { /* */ } } };
 
   const downloadPdf = () => {
     if (!report) return;
@@ -183,7 +195,7 @@ export default function XrayWizard() {
         <h2 style={H3}>PRIVATE BY DESIGN</h2>
         <p style={{ ...P, marginBottom: 0 }}>
           Your answers are worked out inside this page, on your device. Nothing is sent, saved on our side, or scanned. There
-          is no login. A draft is kept in this tab only so a refresh does not lose your place, and it disappears when you
+          is no login. Nothing is kept unless you tick <strong>Keep a draft in this tab</strong>. If you do, the draft stays in this tab only so a refresh does not lose your place, and it disappears when you
           close the tab or press <strong>Clear my answers</strong>.
         </p>
       </div>
@@ -193,8 +205,13 @@ export default function XrayWizard() {
           Try the SYNTHETIC example
         </button>
         <button type="button" style={BTN} onClick={clear}>Clear my answers</button>
+        <label style={{ ...BTN, display: "inline-flex", gap: 8, alignItems: "center", cursor: "pointer" }}>
+          <input type="checkbox" checked={keep} onChange={(e) => keepToggle(e.target.checked)} />
+          Keep a draft in this tab (optional)
+        </label>
+        {keep && <button type="button" style={BTN} onClick={restore}>Restore my saved draft</button>}
       </div>
-      {restored && <p role="status" style={HINT}>We kept your earlier answers from this tab. Press Clear my answers to start fresh.</p>}
+      {restored && <p role="status" style={HINT}>We restored your saved draft from this tab. Press Clear my answers to start fresh.</p>}
       {f.example && (
         <p role="status" style={{ ...P, color: "var(--gold)" }}>
           SYNTHETIC EXAMPLE: a fictional trades business with made-up answers. Edit anything to see the result move, or clear it and enter your own.

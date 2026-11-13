@@ -1,0 +1,240 @@
+#!/usr/bin/env node
+// X-Ray Level 0 flow probe (charter ANNEX J / J01, K1). NO network, NO browser.
+// It loads the REAL wizard (components/XrayWizard.tsx) and the engine/pdf/claimlint modules (TypeScript is
+// transpiled in memory; React is replaced by a tiny hook runtime), runs a SYNTHETIC questionnaire to the free
+// result, and does it with fetch, XMLHttpRequest, WebSocket, navigator.sendBeacon, document.cookie,
+// localStorage and sessionStorage replaced by THROWING traps that also log every hit (a swallowed throw still
+// counts). Asserts: result + estimate reached, zero trap hits, no account/email/phone/password control,
+// and that the opt-in "Keep a draft" box is the only thing that makes the wizard touch storage.
+// Usage: node scripts/xray-level0-flow-probe [--site DIR]   (typescript is found in DIR/node_modules or
+// $XRAY_PROBE_TS_DIR/node_modules). Exit 0 = OK, 1 = FAILED, 2 = probe broken (a canary trap did not fire).
+import fs from "node:fs";
+import path from "node:path";
+import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const argv = process.argv.slice(2);
+const site = path.resolve(argv.includes("--site") ? argv[argv.indexOf("--site") + 1] : path.join(here, ".."));
+let fail = 0;
+const ok = (c, m) => { console.log(`${c ? "PASS" : "FAIL"} ${m}`); if (!c) fail++; };
+
+// ---- typescript (transpile only) ----
+let ts;
+for (const base of [site, process.env.XRAY_PROBE_TS_DIR].filter(Boolean)) {
+  try { ts = createRequire(path.join(base, "package.json"))("typescript"); break; } catch { /* next */ }
+}
+if (!ts) { console.log("XRAYL0 FAILED typescript not found (set XRAY_PROBE_TS_DIR)"); process.exit(1); }
+
+// ---- throwing traps (installed BEFORE any module loads) ----
+const hits = [];
+let phase = "level0";
+const store = new Map();
+const trapFn = (api) => (...a) => { hits.push({ api, phase }); throw new Error(`TRAP ${api}`); };
+const OPTIN_STORAGE_OK = new Set(["sessionStorage.setItem", "sessionStorage.getItem", "sessionStorage.removeItem"]);
+const storageTrap = (name) => new Proxy({}, {
+  get(_t, k) {
+    const api = `${name}.${String(k)}`;
+    if (name === "sessionStorage" && phase === "optin" && OPTIN_STORAGE_OK.has(api)) {
+      hits.push({ api, phase });
+      return (key, v) => (k === "setItem" ? store.set(key, String(v)) : k === "getItem" ? (store.get(key) ?? null) : store.delete(key));
+    }
+    hits.push({ api, phase }); throw new Error(`TRAP ${api}`);
+  },
+  set(_t, k) { hits.push({ api: `${name}.${String(k)}=`, phase }); throw new Error(`TRAP ${name} write`); },
+});
+const downloads = [];
+function installTraps() {
+  const def = (k, v) => Object.defineProperty(globalThis, k, { value: v, configurable: true, writable: true });
+  def("fetch", trapFn("fetch"));
+  def("XMLHttpRequest", function XMLHttpRequest() { hits.push({ api: "XMLHttpRequest", phase }); throw new Error("TRAP XMLHttpRequest"); });
+  def("WebSocket", function WebSocket() { hits.push({ api: "WebSocket", phase }); throw new Error("TRAP WebSocket"); });
+  def("navigator", { sendBeacon: trapFn("navigator.sendBeacon"), userAgent: "probe" });
+  def("localStorage", storageTrap("localStorage"));
+  def("sessionStorage", storageTrap("sessionStorage"));
+  const doc = {
+    createElement: () => ({ click() { downloads.push("click"); }, remove() {}, set href(v) {}, set download(v) { downloads.push(v); } }),
+    body: { appendChild() {} },
+  };
+  Object.defineProperty(doc, "cookie", {
+    get() { hits.push({ api: "document.cookie(get)", phase }); throw new Error("TRAP cookie"); },
+    set(_v) { hits.push({ api: "document.cookie(set)", phase }); throw new Error("TRAP cookie"); },
+  });
+  def("document", doc);
+  def("window", globalThis);
+  const URLc = globalThis.URL; // keep the real URL class; stub only the blob helpers (local, no network)
+  URLc.createObjectURL = () => "blob:probe"; URLc.revokeObjectURL = () => {};
+}
+installTraps();
+// canary: every trap must fire and be logged, else the probe itself is broken (exit 2)
+{
+  const probes = [
+    () => fetch("x"), () => new XMLHttpRequest(), () => new WebSocket("x"), () => navigator.sendBeacon("x"),
+    () => document.cookie, () => { document.cookie = "a=b"; }, () => localStorage.setItem("a", "b"), () => sessionStorage.setItem("a", "b"),
+  ];
+  let fired = 0;
+  for (const p of probes) { const n = hits.length; try { p(); } catch { /* expected */ } if (hits.length === n + 1) fired++; }
+  if (fired !== probes.length) { console.log(`XRAYL0 PROBE BROKEN canary traps fired ${fired}/${probes.length}`); process.exit(2); }
+  hits.length = 0;
+  console.log(`PASS canary: all ${probes.length} traps fire and log (a swallowed throw still counts)`);
+}
+
+// ---- tiny React hook runtime + module loader ----
+const inst = { hooks: [], i: 0, dirty: false, effects: [], Comp: null };
+const useState = (init) => {
+  const i = inst.i++;
+  if (!(i in inst.hooks)) inst.hooks[i] = { v: typeof init === "function" ? init() : init };
+  const h = inst.hooks[i];
+  return [h.v, (nv) => { const n = typeof nv === "function" ? nv(h.v) : nv; if (n !== h.v) { h.v = n; inst.dirty = true; } }];
+};
+const same = (a, b) => a && b && a.length === b.length && a.every((x, k) => Object.is(x, b[k]));
+const useEffect = (fn, deps) => {
+  const i = inst.i++; const h = inst.hooks[i];
+  if (!h || !deps || !same(h.deps, deps)) { inst.hooks[i] = { deps }; inst.effects.push(fn); }
+};
+const useMemo = (fn, deps) => {
+  const i = inst.i++; const h = inst.hooks[i];
+  if (h && same(h.deps, deps)) return h.v;
+  inst.hooks[i] = { deps, v: fn() }; return inst.hooks[i].v;
+};
+const jsx = (type, props, key) => ({ type, props: props || {}, key });
+const reactShim = { useState, useEffect, useMemo, Fragment: "fragment" };
+const jsxShim = { jsx, jsxs: jsx, Fragment: "fragment" };
+
+const cache = new Map();
+function load(file) {
+  if (cache.has(file)) return cache.get(file).exports;
+  const out = ts.transpileModule(fs.readFileSync(file, "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true },
+  }).outputText;
+  const mod = { exports: {} }; cache.set(file, mod);
+  const req = (id) => {
+    if (id === "react") return reactShim;
+    if (id === "react/jsx-runtime" || id === "react/jsx-dev-runtime") return jsxShim;
+    if (id.startsWith("@/")) return load(resolveTs(path.join(site, id.slice(2))));
+    if (id.startsWith(".")) return load(resolveTs(path.resolve(path.dirname(file), id)));
+    throw new Error(`probe: unexpected import ${id} in ${file}`);
+  };
+  new Function("exports", "require", "module", out)(mod.exports, req, mod);
+  return mod.exports;
+}
+function resolveTs(p) {
+  for (const c of [p, `${p}.ts`, `${p}.tsx`, `${p}/index.ts`]) if (fs.existsSync(c) && fs.statSync(c).isFile()) return c;
+  throw new Error(`probe: cannot resolve ${p}`);
+}
+
+// render: expand function components into a normalised host tree
+function expand(n) {
+  if (n === null || n === undefined || typeof n === "boolean") return null;
+  if (typeof n === "string" || typeof n === "number") return { text: String(n) };
+  if (Array.isArray(n)) return { type: "fragment", props: {}, kids: n.map(expand).filter(Boolean) };
+  if (typeof n.type === "function") return expand(n.type(n.props));
+  const ch = n.props.children;
+  return { type: n.type, props: n.props, kids: (ch === undefined ? [] : [].concat(ch)).map(expand).filter(Boolean) };
+}
+function walk(n, f) { if (!n || n.text !== undefined) return; f(n); n.kids.forEach((k) => walk(k, f)); }
+const textOf = (n) => (n.text !== undefined ? n.text : n.kids.map(textOf).join(""));
+let tree = null;
+function renderOnce() { inst.i = 0; tree = expand(inst.Comp({})); }
+function flush() {
+  for (let r = 0; r < 60; r++) {
+    inst.dirty = false; renderOnce();
+    const fx = inst.effects.splice(0); fx.forEach((f) => f());
+    if (!inst.dirty && inst.effects.length === 0) return;
+  }
+  throw new Error("probe: render loop did not settle");
+}
+const all = (pred) => { const o = []; walk(tree, (n) => { if (pred(n)) o.push(n); }); return o; };
+const fieldByLabel = (start) => {
+  const lab = all((n) => n.type === "label" && n.kids[0] && n.kids[0].type === "span" && textOf(n.kids[0]).startsWith(start))[0];
+  if (!lab) throw new Error(`probe: no field "${start}"`);
+  let ctl = null; walk(lab, (n) => { if (!ctl && (n.type === "input" || n.type === "select")) ctl = n; });
+  return ctl;
+};
+const setField = (start, value) => fieldByLabel(start).props.onChange({ target: { value } }); // then flush()
+const clickButton = (start) => {
+  const b = all((n) => n.type === "button" && textOf(n).startsWith(start))[0];
+  if (!b) throw new Error(`probe: no button "${start}"`);
+  b.props.onClick(); flush();
+};
+
+// ---- the run ----
+let engine, rep = null;
+try {
+  engine = load(path.join(site, "lib/xray/engine.ts"));
+  inst.Comp = load(path.join(site, "components/XrayWizard.tsx")).default;
+  flush(); // mount + effects
+  ok(hits.length === 0, `mount: zero trap hits (${hits.length})`);
+
+  // no account / identity control anywhere in the Level 0 tree
+  const ID_RX = /e-?mail|phone|mobile|password|passwd|username|log ?in|sign ?(in|up)|account|surname|full ?name/i;
+  const bad = [];
+  walk(tree, (n) => {
+    if (n.type !== "input" && n.type !== "select" && n.type !== "textarea" && n.type !== "form") return;
+    const p = n.props;
+    const attrs = [p.type, p.name, p.id, p.placeholder, p["aria-label"], p.autoComplete].filter(Boolean).join(" ");
+    if (p.required || p["aria-required"] || /^(email|tel|password|url)$/.test(String(p.type)) || ID_RX.test(attrs) || (p.action && n.type === "form")) bad.push(`${n.type}[${attrs}]${p.required ? " required" : ""}`);
+  });
+  all((n) => n.type === "label").forEach((l) => { let c = null; walk(l, (x) => { if (!c && x.type === "input") c = x; }); if (c && /^(checkbox|radio)$/.test(String(c.props.type))) return; const t = l.kids[0] && l.kids[0].type === "span" ? textOf(l.kids[0]) : textOf(l); if (ID_RX.test(t) && !/^Keep a draft/.test(t)) bad.push(`label[${t.slice(0, 40)}]`); });
+  ok(bad.length === 0, `no account/email/phone/password control or required field${bad.length ? ": " + bad.join("; ") : ""}`);
+
+  // SYNTHETIC questionnaire (fictional trades business, made-up numbers)
+  const cat = Object.keys(engine.CATEGORIES)[0];
+  setField("What kind of business?", "trades"); flush();
+  setField("How many people work in it?", "5-19"); flush();
+  setField("A nickname for the report", "Fictional Probe Co"); flush();
+  fieldByLabel("Which tools") ?? null;
+} catch (e) {
+  if (!/probe: no field "Which tools"/.test(String(e.message))) { ok(false, `questionnaire run threw: ${String(e.stack || e).split("\n").slice(0, 3).join(" | ")}`); }
+}
+try {
+  setField("Describe the task", "Weekly quote follow-ups (SYNTHETIC)"); flush();
+  setField("What sort of work is it?", Object.keys(engine.CATEGORIES)[0]); flush();
+  setField("How many times a week?", "12"); flush();
+  setField("Active minutes each time?", "25"); flush();
+  ok(all((n) => n.type === "section" && n.props["aria-label"] === "Your X-Ray").length === 0, "no result is shown before the form is submitted");
+  const form = all((n) => n.type === "form")[0];
+  form.props.onSubmit({ preventDefault() {} }); flush();
+  const sec = all((n) => n.type === "section" && n.props["aria-label"] === "Your X-Ray")[0];
+  ok(!!sec, "Level 0 questionnaire (no account, no email) reaches the free result");
+  const txt = sec ? textOf(sec) : "";
+  const m = /low \/ base \/ high: ([\d.,]+) \/ ([\d.,]+) \/ ([\d.,]+) hours a week \(ESTIMATE\)/.exec(txt);
+  ok(!!m && parseFloat(m[2]) > 0, `result carries an hours estimate${m ? ` (low/base/high ${m[1]}/${m[2]}/${m[3]} h/week)` : ""}`);
+  ok(/ESTIMATE, not measured/.test(txt) && /YOUR RESULT/.test(txt), "result is labelled YOUR RESULT and ESTIMATE, not measured");
+  ok(/No email is asked for/.test(txt), "result page states no email is asked for");
+  ok(hits.length === 0, `questionnaire to result: zero trap hits (${hits.length})`);
+
+  // the free downloads are local (Blob + object URL), not network
+  clickButton("Download the PDF"); clickButton("Download the data");
+  ok(downloads.some((d) => /\.pdf$/.test(String(d))) && downloads.some((d) => /\.json$/.test(String(d))), "PDF and JSON downloads happen locally");
+  ok(hits.length === 0, `after downloads: zero trap hits (${hits.length})`);
+  // editing answers after the result must not touch storage either
+  setField("How many times a week?", "15"); flush();
+  ok(hits.length === 0, `editing after the result: zero trap hits (${hits.length})`);
+  clickButton("Clear my answers");
+  ok(hits.length === 0, `Clear my answers without opt-in: zero trap hits (${hits.length})`);
+} catch (e) { ok(false, `result run threw: ${String(e.stack || e).split("\n").slice(0, 3).join(" | ")}`); }
+const level0Hits = hits.slice();
+ok(level0Hits.length === 0, `LEVEL 0 TOTAL trap hits = ${level0Hits.length}${level0Hits.length ? " " + JSON.stringify(level0Hits) : ""}`);
+
+// ---- opt-in save: the only code allowed to touch storage ----
+try {
+  phase = "optin";
+  const box = all((n) => n.type === "input" && n.props.type === "checkbox" && /Keep a draft/.test(textOfParent(n)))[0];
+  function textOfParent(inp) { const l = all((n) => n.type === "label").find((x) => x.kids.includes(inp)); return l ? textOf(l) : ""; }
+  ok(!!box && box.props.checked === false, "opt-in 'Keep a draft in this tab' exists and is OFF by default");
+  if (box) {
+    box.props.onChange({ target: { checked: true } }); flush();
+    const writes = hits.filter((h) => h.phase === "optin");
+    ok(writes.some((h) => h.api === "sessionStorage.setItem"), "after the opt-in tick the draft is saved to sessionStorage");
+    ok(writes.every((h) => OPTIN_STORAGE_OK.has(h.api)), `opt-in touches only sessionStorage get/set/remove (${[...new Set(writes.map((h) => h.api))].join(", ")})`);
+  }
+} catch (e) { ok(false, `opt-in run threw: ${String(e.stack || e).split("\n").slice(0, 3).join(" | ")}`); }
+const nonStorage = hits.filter((h) => h.phase === "optin" && !OPTIN_STORAGE_OK.has(h.api));
+ok(nonStorage.length === 0, `opt-in path: no network, cookie or localStorage hit (${nonStorage.length})`);
+
+let sha = "unknown";
+try { sha = execFileSync("git", ["-C", site, "rev-parse", "--short=10", "HEAD"], { encoding: "utf8" }).trim(); } catch { /* not a git tree */ }
+console.log(fail === 0 ? `XRAYL0 OK site=${sha} level0_trap_hits=0 optin_storage_only=1` : `XRAYL0 FAILED site=${sha} fails=${fail} level0_trap_hits=${level0Hits.length}`);
+process.exit(fail ? 1 : 0);
