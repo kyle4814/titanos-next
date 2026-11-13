@@ -1,7 +1,7 @@
 {
   "schema": "export-pages/1",
-  "count": 269,
-  "routes_count": 268,
+  "count": 275,
+  "routes_count": 274,
   "system_pages": [
     "404.html",
     "_not-found.html"
@@ -10,6 +10,7 @@
     "404.html",
     "_not-found.html",
     "about.html",
+    "adm-sprint.html",
     "agents.html",
     "ai-delivery.html",
     "app.html",
@@ -58,6 +59,7 @@
     "costs.html",
     "courses.html",
     "credits.html",
+    "declaration.html",
     "deep-field.html",
     "demo/tix.html",
     "demo/tix/organiser.html",
@@ -83,6 +85,9 @@
     "labs/issue-007/index.html",
     "labs/issue-008/index.html",
     "labs/issue-009/index.html",
+    "labs/issue-010/index.html",
+    "labs/issue-011/index.html",
+    "labs/issue-012/index.html",
     "leads.html",
     "learning-loop.html",
     "methodology.html",
@@ -275,6 +280,7 @@
     "welcome/supplier-cyber-readiness-pass.html",
     "welcome/tender-intelligence-radar.html",
     "welcome/trade-panel-pack.html",
+    "x-ray.html",
     "your-data.html"
   ]
 }
