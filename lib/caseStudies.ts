@@ -19,6 +19,43 @@ export type CaseStudy = {
 
 export const CASES: CaseStudy[] = [
   {
+    slug: "titanos-engine",
+    sector: "Our own engine",
+    title: "TITANOS: the engine behind every build on this page, 7,878 commits since 29 September",
+    teaser:
+      "One person directing an AI orchestrator and a separate builder: 543 tools, a 666-suite test gate, receipts for every change and five human gates on money, credentials, legal, outbound messages and anything irreversible. It held a 48-hour soak test on 18 November 2026.",
+    cover: "/case-studies/titanos-commits.webp",
+    coverAlt: "Commits per day for the TITANOS engine, 29 September to 22 November 2026",
+    facts: [
+      ["7,878", "commits from 29 September to 22 November 2026, counted from the git log; 722 on the busiest day"],
+      ["48 hours", "soak test finished 18 November 2026: 8 health checks passed about 290 samples each, 1 left open"],
+      ["666", "test suites in the full gate a change must clear before it merges"],
+      ["5", "human gates: money, credentials, legal, outbound messages and anything that cannot be undone"],
+    ],
+    brief:
+      "One person with a day job and a small budget needed the output of an engineering team: research, build, test and report around the clock, while every decision that matters stays with him.",
+    built: [
+      "An orchestrator that plans and reviews the work, and a separate builder account that writes the code, so no part of the system signs off its own work.",
+      "543 command-line tools for research, building, reviewing, backups and reports, each covered by tests.",
+      "A full test gate of 666 suites. Nothing merges on a red result, and every bug found becomes a regression test the same day.",
+      "Five human gates: spending money, credentials, legal commitments, messages to anyone outside, and anything that cannot be undone. Each one arrives as an approval card on the owner's phone saying what, why, the cost and whether it can be reversed.",
+      "Receipts for everything: each change records what was inspected, changed, tested and committed, so any claim can be traced back to a commit.",
+      "Recovery built in: backups, a restore drill, and a check that the whole system comes back by itself after the computer restarts.",
+      "The other case studies here came out of it: a dealership command centre in about 70 minutes, a 1,900-lesson course in 83 minutes and a trading app in one morning.",
+    ],
+    speed:
+      "7,878 commits between 29 September and 22 November 2026, across 47 working days: about 168 a working day, with 722 on the busiest (8 October 2026). Counted with git on the main repository, so the chart on this page is the log itself.",
+    cost:
+      "No extra spend beyond flat-rate AI subscriptions that were already paid for. Usage is not metered per change, so no per-change dollar figure is claimed. Anything that runs live for a client runs on the client's own AI key, so we never front their usage.",
+    tested:
+      "The 48-hour soak ran from 16 to 18 November 2026 on commit 369924574e, with the worker fleet deliberately held. Nine checks were sampled about every ten minutes: fleet health, scheduled jobs, clean merges, zero orphan workers, injected faults, missed or false alerts, the full test gate on that commit, reboot recovery and cost per merge. Eight passed every sample. Cost per merge had no numeric reading, so it was waived and is shown here as open, not passed. AI usage forecasting was taken out of the soak by the owner, because it measures budget rather than health.",
+    shots: [
+      { src: "/case-studies/titanos-commits.webp", alt: "Commits per day from the git log, 29 September to 22 November 2026" },
+      { src: "/case-studies/titanos-soak.webp", alt: "The 48-hour soak: eight checks passed, one left open" },
+      { src: "/case-studies/titanos-architecture.webp", alt: "How it is built: orchestrator, builder, test gate and five human gates" },
+    ],
+  },
+  {
     slug: "dealer-command-centre",
     sector: "Used vehicle dealership",
     title: "A dealership command centre, built and independently reviewed in about 70 minutes",

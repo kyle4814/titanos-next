@@ -3,6 +3,7 @@ import { TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
 import Hero from "@/components/hero/Hero";
 import { withSeo } from "@/lib/seo";
 import { ARIANCE, arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import { CASES } from "@/lib/caseStudies";
 import SpaceImage from "@/components/SpaceImage";
 import FlowThread from "@/components/flow/FlowThread";
 import OfferCard from "@/components/OfferCard";
@@ -334,6 +335,14 @@ export default function Home() {
             Latest build:{" "}
             <a href={ariancePath} style={{ color: "var(--gold)" }}>
               {ARIANCE.title} →
+            </a>
+          </p>
+        )}
+        {!arianceVisible && (
+          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+            Hero case study:{" "}
+            <a href={`/case-studies/${CASES[0].slug}`} style={{ color: "var(--gold)" }}>
+              {CASES[0].title} →
             </a>
           </p>
         )}
