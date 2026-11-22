@@ -66,6 +66,7 @@ export default function CaseStudies() {
             <CaseCard
               key={c.slug}
               feature={!arianceVisible && i === 0}
+              kicker={!arianceVisible && i === 0 ? "Hero case study" : undefined}
               href={`/case-studies/${c.slug}`}
               cover={c.cover}
               coverAlt={c.coverAlt}
