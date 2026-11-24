@@ -51,8 +51,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
           <div style={{ ...PROSE, marginTop: 28 }}>
           <p style={BODY}>
-            The biggest number comes first, with its method underneath. Every figure is read from the build&apos;s own git log or a dated
-            usage reading, and nothing here touched anyone&apos;s private data.
+            {c.note ??
+              "The biggest number comes first, with its method underneath. Every figure is read from the build's own git log or a dated usage reading, and nothing here touched anyone's private data."}
           </p>
 
           <h2 style={H}>How fast</h2>
@@ -78,8 +78,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p style={BODY}>{c.tested}</p>
           </div>
 
-          <h2 style={{ ...H, textAlign: "center", marginTop: 56 }}>Screens from the working app</h2>
-          <PhoneGallery shots={c.shots} />
+          {c.shots.length > 0 && (
+            <>
+              <h2 style={{ ...H, textAlign: "center", marginTop: 56 }}>Screens from the working app</h2>
+              <PhoneGallery shots={c.shots} />
+            </>
+          )}
 
           <p style={{ ...BODY, textAlign: "center", marginTop: 40 }}>
             Would it be okay if we talked about something like this for your business? A free consultation is the first step, and a no is welcome.

@@ -17,6 +17,8 @@ export type CaseStudy = {
   cost: string;
   tested: string;
   shots: CaseShot[];
+  /** Optional plain-words note shown above the sections in place of the standard git-log line (used where the sources are not a git log). */
+  note?: string;
 };
 
 export const CASES: CaseStudy[] = [
@@ -174,6 +176,40 @@ export const CASES: CaseStudy[] = [
       { src: "/case-studies/trading-app-chart.webp", alt: "Live coin chart: price, liquidity, buys and sells, candles" },
       { src: "/case-studies/trading-app-lesson.webp", alt: "A course lesson on brokers and US regulation" },
     ],
+  },
+  {
+    slug: "sika-product-assistant",
+    label: "REAL",
+    sector: "Building products manufacturer",
+    title: "An AI product assistant for Sika Australia's product range",
+    teaser:
+      "A working prototype built from Sika Australia's public data sheets and shown to Sika: plain-words answers with the data sheet cited, quantities from published coverage rates, and a specifier mode. 460 products, 15,212 specification clauses and 2,157 standards citations indexed.",
+    cover: "/case-studies/sika-assistant-numbers.webp",
+    coverAlt: "460 products, 15,212 specification clauses and 2,157 standards citations indexed from public data sheets",
+    facts: [
+      ["460", "products indexed from Sika Australia's public data sheets"],
+      ["15,212", "specification clauses indexed"],
+      ["2,157", "standards citations indexed"],
+      ["3", "anomalies found in the published data sheets"],
+    ],
+    brief:
+      "A manufacturer's Australian range spans hundreds of products, each with its own data sheet, coverage rates and standards references. Builders, applicators and specifiers ask the same questions every day: which system, how much product, which standard applies.",
+    built: [
+      "An assistant that answers in plain words and cites the data sheet behind every answer.",
+      "Quantities worked out from the published coverage rates.",
+      "A one-page system sheet a customer can keep.",
+      "A specifier mode carrying clause text and standards references.",
+      "Three anomalies flagged in the manufacturer's own published sheets.",
+    ],
+    speed:
+      "No build timing is claimed for this prototype. The scale is the measure: 460 products, 15,212 specification clauses and 2,157 standards citations indexed from the public data sheets.",
+    cost:
+      "No cost figure is claimed. The prototype was built independently from public information only. Anything like this running live for a customer would run on the customer's own AI key, so we never front their usage.",
+    tested:
+      "Every answer carries a citation to the data sheet it came from, so a reader can check it against the source. The index was built only from public pages. The three anomalies were found in Sika Australia's own published sheets.",
+    shots: [],
+    note:
+      "This is a working prototype built from Sika Australia's public data sheets and shown to Sika. Sika is not a client and this is not in production. Sika and the Sika name are trademarks of their owner; this prototype was built independently from public information. The figures are counts from our index of those public sheets.",
   },
 ];
 

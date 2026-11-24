@@ -80,6 +80,12 @@
       "contains": [
         "fleet_jobs_24h"
       ]
+    },
+    "R_SIKA_PIPELINE": {
+      "external": true,
+      "system": "Sika data-sheet index: pipeline log, specs_lane_ready event",
+      "date": "2026-10-30",
+      "locator": "klinge-kernel state/sika/pipeline.jsonl, event specs_lane_ready: products 460, clauses 15212, standards_citations 2157, anomalies_in_sika_sheets 3"
     }
   },
   "cases": {
@@ -102,9 +108,20 @@
       "label": "REAL",
       "client_named": true,
       "consent": false
+    },
+    "sika-product-assistant": {
+      "label": "REAL",
+      "client_named": true,
+      "consent": false
     }
   },
   "rules": [
+    {
+      "match": "^cases\\.sika-product-assistant\\.",
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
     {
       "match": "^cases\\.dealer-command-centre\\.",
       "src": [
@@ -926,6 +943,68 @@
       ],
       "src": [
         "F_LEDGER"
+      ]
+    },
+    "cases.sika-product-assistant.teaser": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.coverAlt": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[0][0]": {
+      "figs": [
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[1][0]": {
+      "figs": [
+        "15,212"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[2][0]": {
+      "figs": [
+        "2,157"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[3][0]": {
+      "figs": [
+        "3"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.speed": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
       ]
     }
   }
