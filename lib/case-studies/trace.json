@@ -86,6 +86,36 @@
       "system": "Sika data-sheet index: pipeline log, specs_lane_ready event",
       "date": "2026-10-30",
       "locator": "klinge-kernel state/sika/pipeline.jsonl, event specs_lane_ready: products 460, clauses 15212, standards_citations 2157, anomalies_in_sika_sheets 3"
+    },
+    "R_ENGINE_GIT": {
+      "external": true,
+      "system": "TITANOS engine main repository (klinge-kernel): git log",
+      "date": "2026-11-22",
+      "locator": "git rev-list --count --since=2026-09-29T00:00+10:00 --until=2026-11-22T18:54:41+10:00 HEAD = 7878 (re-run 2026-11-24); busiest day 2026-10-08 = 722 commits by author date"
+    },
+    "R_ENGINE_SOAK": {
+      "external": true,
+      "system": "48-hour soak checkpoint and owner override notes",
+      "date": "2026-11-18",
+      "locator": "klinge-kernel state/soak/run_20261116T070737/checkpoint: elapsed=172807 s, last_sample 2026-11-18T09:50:08, sha 369924574e, pass counts 287 to 290 per scenario; state/soak/overrides/S9_AND_GAP_OWNER_OVERRIDE_2026-11-17.md for the waived cost-per-merge reading"
+    },
+    "R_ENGINE_GATE": {
+      "external": true,
+      "system": "Full test gate baseline reading",
+      "date": "2026-11-18",
+      "locator": "klinge-kernel state/baseline/BASELINE_2026-11-22.json: gate reading at 2026-11-18T15:48:44 on 666 suites, jobs=8"
+    },
+    "R_ENGINE_HUMAN_GATES": {
+      "external": true,
+      "system": "Operating rules: the five human gates",
+      "date": "2026-11-24",
+      "locator": "klinge-kernel CORE.md, GATE1 to GATE5 (money, credentials, legal commitment, outbound to a third party, irreversible)"
+    },
+    "R_ENGINE_TOOLS": {
+      "external": true,
+      "system": "TITANOS engine main repository (klinge-kernel): file listing",
+      "date": "2026-11-22",
+      "locator": "git ls-tree --name-only d58afc75bc bin/ | grep -c '\\.py$' = 543 (the last commit before 2026-11-22T18:54:41+10:00; counts every Python file in bin/, test files included; re-run 2026-11-24)"
     }
   },
   "cases": {
@@ -113,9 +143,59 @@
       "label": "REAL",
       "client_named": true,
       "consent": false
+    },
+    "titanos-engine": {
+      "label": "REAL",
+      "client_named": false,
+      "consent": null
     }
   },
   "rules": [
+    {
+      "match": "^cases\\.titanos-engine\\.built\\[1\\]",
+      "src": [
+        "R_ENGINE_TOOLS"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.teaser",
+      "src": [
+        "R_ENGINE_SOAK",
+        "R_ENGINE_GATE",
+        "R_ENGINE_TOOLS"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.built\\[6\\]",
+      "src": [
+        "R_DEALER_BUILD",
+        "R_SALES_GIT"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.facts\\[3\\]",
+      "src": [
+        "R_ENGINE_HUMAN_GATES"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.(facts\\[2\\]|built\\[2\\])",
+      "src": [
+        "R_ENGINE_GATE"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.(facts\\[1\\]|tested|shots\\[1\\])",
+      "src": [
+        "R_ENGINE_SOAK"
+      ]
+    },
+    {
+      "match": "^cases\\.titanos-engine\\.",
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
     {
       "match": "^cases\\.sika-product-assistant\\.",
       "src": [
@@ -206,6 +286,158 @@
     }
   ],
   "fields": {
+    "cases.titanos-engine.title": {
+      "figs": [
+        "29 September",
+        "7,878"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.teaser": {
+      "figs": [
+        "18 November 2026",
+        "48",
+        "543",
+        "666"
+      ],
+      "src": [
+        "R_ENGINE_SOAK",
+        "R_ENGINE_GATE",
+        "R_ENGINE_TOOLS"
+      ]
+    },
+    "cases.titanos-engine.coverAlt": {
+      "figs": [
+        "22 November 2026",
+        "29 September"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.facts[0][0]": {
+      "figs": [
+        "7,878"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.facts[0][1]": {
+      "figs": [
+        "22 November 2026",
+        "29 September",
+        "722"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.facts[1][0]": {
+      "figs": [
+        "48"
+      ],
+      "src": [
+        "R_ENGINE_SOAK"
+      ]
+    },
+    "cases.titanos-engine.facts[1][1]": {
+      "figs": [
+        "1",
+        "18 November 2026",
+        "290",
+        "8"
+      ],
+      "src": [
+        "R_ENGINE_SOAK"
+      ]
+    },
+    "cases.titanos-engine.facts[2][0]": {
+      "figs": [
+        "666"
+      ],
+      "src": [
+        "R_ENGINE_GATE"
+      ]
+    },
+    "cases.titanos-engine.facts[3][0]": {
+      "figs": [
+        "5"
+      ],
+      "src": [
+        "R_ENGINE_HUMAN_GATES"
+      ]
+    },
+    "cases.titanos-engine.built[1]": {
+      "figs": [
+        "543"
+      ],
+      "src": [
+        "R_ENGINE_TOOLS"
+      ]
+    },
+    "cases.titanos-engine.built[2]": {
+      "figs": [
+        "666"
+      ],
+      "src": [
+        "R_ENGINE_GATE"
+      ]
+    },
+    "cases.titanos-engine.built[6]": {
+      "figs": [
+        "1,900",
+        "70",
+        "83"
+      ],
+      "src": [
+        "R_DEALER_BUILD",
+        "R_SALES_GIT"
+      ]
+    },
+    "cases.titanos-engine.speed": {
+      "figs": [
+        "168",
+        "22 November 2026",
+        "29 September",
+        "47",
+        "7,878",
+        "722",
+        "8 October 2026"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.tested": {
+      "figs": [
+        "16",
+        "18 November 2026",
+        "48"
+      ],
+      "src": [
+        "R_ENGINE_SOAK"
+      ]
+    },
+    "cases.titanos-engine.shots[0].alt": {
+      "figs": [
+        "22 November 2026",
+        "29 September"
+      ],
+      "src": [
+        "R_ENGINE_GIT"
+      ]
+    },
+    "cases.titanos-engine.shots[1].alt": {
+      "figs": [
+        "48"
+      ],
+      "src": [
+        "R_ENGINE_SOAK"
+      ]
+    },
     "cases.dealer-command-centre.title": {
       "figs": [
         "70"
@@ -533,6 +765,68 @@
       ],
       "src": [
         "R_TRADING_METER"
+      ]
+    },
+    "cases.sika-product-assistant.teaser": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.coverAlt": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[0][0]": {
+      "figs": [
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[1][0]": {
+      "figs": [
+        "15,212"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[2][0]": {
+      "figs": [
+        "2,157"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.facts[3][0]": {
+      "figs": [
+        "3"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
+      ]
+    },
+    "cases.sika-product-assistant.speed": {
+      "figs": [
+        "15,212",
+        "2,157",
+        "460"
+      ],
+      "src": [
+        "R_SIKA_PIPELINE"
       ]
     },
     "ariance.last_reviewed": {
@@ -943,68 +1237,6 @@
       ],
       "src": [
         "F_LEDGER"
-      ]
-    },
-    "cases.sika-product-assistant.teaser": {
-      "figs": [
-        "15,212",
-        "2,157",
-        "460"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.coverAlt": {
-      "figs": [
-        "15,212",
-        "2,157",
-        "460"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.facts[0][0]": {
-      "figs": [
-        "460"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.facts[1][0]": {
-      "figs": [
-        "15,212"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.facts[2][0]": {
-      "figs": [
-        "2,157"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.facts[3][0]": {
-      "figs": [
-        "3"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
-      ]
-    },
-    "cases.sika-product-assistant.speed": {
-      "figs": [
-        "15,212",
-        "2,157",
-        "460"
-      ],
-      "src": [
-        "R_SIKA_PIPELINE"
       ]
     }
   }
