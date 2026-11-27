@@ -59,4 +59,6 @@ export const HERO_STRIP =
 /** "about 24 engineers for about 30 months" (MODELLED) */
 export const TEAM_LINE = `about ${Math.round(v("model_team"))} engineers for about ${Math.round(v("model_schedule_months"))} months`;
 /** "about 5 months" of calendar time, around a day job */
+/** "roughly 26-person team", from the same ledger row as TEAM_LINE so the site never gives two team sizes (2026-11-27: was a typed "20-person"). */
+export const TEAM_SIZE_PHRASE = `roughly ${Math.round(v("model_team"))}-person team`;
 export const ELAPSED_LINE = `about ${Math.round(v("elapsed_months"))} months`;

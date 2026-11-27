@@ -1,3 +1,4 @@
+import { TEAM_SIZE_PHRASE } from "@/lib/ledger";
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
@@ -137,7 +138,7 @@ export default function AiDeliveryPage() {
     <>
       <PageHero
         badge={`AI GROWTH PARTNER · RETAINER FROM ${DISPLAY.AI_GROWTH_PARTNER.toUpperCase()}`}
-        title="A roughly 20-person team's output behind your build, for one monthly price."
+        title={`A ${TEAM_SIZE_PHRASE}'s output behind your build, for one monthly price.`}
         sub="That figure is modelled with the COCOMO method, and the method is on the Engineering page. Pick your tier and the first system goes live in month 1, inside the retainer, with no separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>

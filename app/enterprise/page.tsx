@@ -1,3 +1,4 @@
+import { TEAM_SIZE_PHRASE } from "@/lib/ledger";
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
@@ -54,7 +55,7 @@ export default function EnterprisePage() {
         </AnimatedButton>
       </PageHero>
       <Bluf replaced>
-        Larger engagements are scoped on a call and priced before anything starts, built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and nobody replaced.
+        Larger engagements are scoped on a call and priced before anything starts, built by one engineer at the output of a {TEAM_SIZE_PHRASE} by the COCOMO estimate, and nobody replaced.
       </Bluf>
       <Analogy k="department" />
 

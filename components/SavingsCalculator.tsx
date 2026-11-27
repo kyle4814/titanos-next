@@ -106,6 +106,9 @@ export default function SavingsCalculator() {
         <Num label="Our monthly fee (AU$)" value={fee} set={setFee} step={100} />
         <Num label="Running cost a month (AU$)" value={run} set={setRun} step={10} />
       </div>
+      <p data-illustration-note style={{ color: "var(--gold)", margin: "16px 0 0", fontSize: 15 }}>
+        Illustration only. The numbers above are placeholder inputs, not a result we have delivered and not a quote or forecast. Replace them with your own to see your own figures.
+      </p>
       <div style={{ marginTop: 16 }}>
         <div style={ROW}>
           <span>Hours given back a year</span>
@@ -134,11 +137,11 @@ export default function SavingsCalculator() {
           <b>{aud(net)} a year</b>
         </div>
         <div style={ROW}>
-          <span>Every dollar in returns</span>
+          <span>Return per dollar, on these inputs</span>
           <b>{multiple.toFixed(1)} dollars of time</b>
         </div>
         <div style={{ ...ROW, borderBottom: 0 }}>
-          <span>Pays for itself in</span>
+          <span>Payback, on these inputs</span>
           <b>{payback > 0 ? `${payback.toFixed(1)} months` : "n/a"}</b>
         </div>
       </div>

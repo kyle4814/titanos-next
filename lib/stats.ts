@@ -8,12 +8,18 @@ export const STATS = {
   asOf: counted.asOf,
 } as const;
 
+// 2026-11-27: the count is a dated snapshot, so every label names its date instead of saying "the last 30 days".
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const [Y, M, D] = counted.asOf.slice(0, 10).split("-").map(Number);
+export const STATS_ASOF_LONG = `${D} ${MONTHS[M - 1]} ${Y}`;
+export const SCANS_PHRASE = `domains checked in the 30 days to ${STATS_ASOF_LONG}`;
+
 export const STAT_LABELS = {
-  scansShort: "domains checked in the last 30 days",
+  scansShort: SCANS_PHRASE,
   researchedShort: "organisations researched in full dossiers",
 } as const;
 
 const fmt = (n: number) => n.toLocaleString("en-AU");
 
 export const STAT_COMBINED =
-  `${fmt(STATS.scansLast30Days)} domains checked in the last 30 days · ${fmt(STATS.organisationsResearched)} organisations researched in full dossiers`;
+  `${fmt(STATS.scansLast30Days)} ${SCANS_PHRASE} · ${fmt(STATS.organisationsResearched)} organisations researched in full dossiers`;

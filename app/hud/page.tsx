@@ -7,8 +7,8 @@ import ComputePanel from "@/components/hud/ComputePanel";
 import ReceiptFeed from "@/components/hud/ReceiptFeed";
 import { NUM, FEED } from "@/lib/hud/data";
 
-const TITLE = "TITANOS HUD: live build statistics | TITANOS";
-const DESC = "A live display of what we have built, how fast, and how little of our modelled ceiling we have used. Every number is labelled measured or modelled.";
+const TITLE = "TITANOS HUD: build statistics | TITANOS";
+const DESC = "A display of what we have built, and how fast. Every number is labelled measured or modelled, and every figure carries its date.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -24,8 +24,8 @@ export default function HudPage() {
     <>
       <HudStyle />
       <PageHero
-        badge="Live HUD"
-        title="The build, as it happens."
+        badge="HUD snapshot"
+        title="The build, as last measured."
         tagline="Engineering counted, compute gauged, every build receipted."
         sub="This is our own build, nothing of yours. Modelled figures are labelled modelled and are never revenue. Measured figures come straight from our own logs."
       />
@@ -38,7 +38,7 @@ export default function HudPage() {
         </div>
       </div>
       <p className="hud-stamp" style={{ padding: "20px 16px 56px", position: "relative", zIndex: 2 }}>
-        Static page, updated at each build. Data snapshot {NUM.snapshot_ts.replace("T", " ")} AEST, feed generated {new Date(FEED.generated).toISOString().slice(0, 16).replace("T", " ")} UTC. The counter moves in your browser between builds.
+        Static page, updated at each build. Data snapshot {NUM.snapshot_ts.replace("T", " ")} AEST, feed generated {new Date(FEED.generated).toISOString().slice(0, 16).replace("T", " ")} UTC. The engineer-year figure is a dated model snapshot and does not move after 14 days.
       </p>
     </>
   );

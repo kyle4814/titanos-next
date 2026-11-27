@@ -1,3 +1,4 @@
+import { TEAM_SIZE_PHRASE } from "@/lib/ledger";
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
@@ -88,7 +89,7 @@ export default function AboutPage() {
         </AnimatedButton>
       </PageHero>
       <Bluf replaced>
-        TITANOS is one engineer, Kyle Deligny, built to give your business the output of a roughly 20-person team (by the COCOMO estimate), safely, and without replacing anyone.
+        TITANOS is one engineer, Kyle Deligny, built to give your business the output of a {TEAM_SIZE_PHRASE} (by the COCOMO estimate), safely, and without replacing anyone.
       </Bluf>
       <Analogy k="department" />
 

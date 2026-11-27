@@ -7,7 +7,7 @@ import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import W2c from "@/components/w2c/W2c";
 import GlowCard from "@/components/house/GlowCard";
-import { int, dec, aud, times, v, AS_OF_LONG } from "@/lib/ledger";
+import { int, dec, aud, v, AS_OF_LONG } from "@/lib/ledger";
 
 const META_TITLE = "Investors: what your money builds | TITANOS";
 const META_DESC =
@@ -34,7 +34,6 @@ const BASE: [string, string][] = [
   ["3.5 hours", "idea to a working, tested app (replay on the proof page)"],
   [`~${v("annual_ey")}`, `engineers' worth of output a year, priced by the COCOMO model (MODELLED, ${AS_OF_LONG})`],
   [aud("compute_today_aud_month"), "a month in AI tools behind all of it (operator figure, no receipt on file)"],
-  [`~${times("per_dollar_full_today_x")}`, `engineering value per dollar of compute (MODELLED: ${aud("annual_cost_aud")} a year of work on the ${aud("compute_today_aud_month")} a month tool spend, an operator figure with no receipt on file)`],
 ];
 
 const COMPUTE: [string, string, string][] = [

@@ -90,8 +90,8 @@
     "R_ENGINE_GIT": {
       "external": true,
       "system": "TITANOS engine main repository (klinge-kernel): git log",
-      "date": "2026-11-22",
-      "locator": "git rev-list --count --since=2026-09-29T00:00+10:00 --until=2026-11-22T18:54:41+10:00 HEAD = 7878 (re-run 2026-11-24); busiest day 2026-10-08 = 722 commits by author date"
+      "date": "2026-11-27",
+      "locator": "git log --no-merges --since=2026-09-29T00:00+10:00 --until=2026-11-27T00:00+10:00 at a04686dffa = 6563 non-merge commits, of which 3020 have an automated subject (cron N-min snapshot, state snapshot, wt_reap: rescue); work commits = 3543 over 50 active days; busiest day 2026-10-09 = 474 by author date; 1340 merges excluded (7903 raw)"
     },
     "R_ENGINE_SOAK": {
       "external": true,
@@ -289,7 +289,7 @@
     "cases.titanos-engine.title": {
       "figs": [
         "29 September",
-        "7,878"
+        "3,543"
       ],
       "src": [
         "R_ENGINE_GIT"
@@ -310,7 +310,7 @@
     },
     "cases.titanos-engine.coverAlt": {
       "figs": [
-        "22 November 2026",
+        "26 November 2026",
         "29 September"
       ],
       "src": [
@@ -319,7 +319,7 @@
     },
     "cases.titanos-engine.facts[0][0]": {
       "figs": [
-        "7,878"
+        "3,543"
       ],
       "src": [
         "R_ENGINE_GIT"
@@ -327,9 +327,10 @@
     },
     "cases.titanos-engine.facts[0][1]": {
       "figs": [
-        "22 November 2026",
+        "26 November 2026",
+        "27 November",
         "29 September",
-        "722"
+        "474"
       ],
       "src": [
         "R_ENGINE_GIT"
@@ -362,6 +363,16 @@
         "R_ENGINE_GATE"
       ]
     },
+    "cases.titanos-engine.facts[2][1]": {
+      "figs": [
+        "14",
+        "18 November 2026",
+        "652"
+      ],
+      "src": [
+        "R_ENGINE_GATE"
+      ]
+    },
     "cases.titanos-engine.facts[3][0]": {
       "figs": [
         "5"
@@ -380,6 +391,9 @@
     },
     "cases.titanos-engine.built[2]": {
       "figs": [
+        "14",
+        "18 November 2026",
+        "652",
         "666"
       ],
       "src": [
@@ -399,13 +413,15 @@
     },
     "cases.titanos-engine.speed": {
       "figs": [
-        "168",
-        "22 November 2026",
+        "26 November 2026",
+        "27 November 2026",
         "29 September",
-        "47",
-        "7,878",
-        "722",
-        "8 October 2026"
+        "3,000",
+        "3,543",
+        "474",
+        "50",
+        "71",
+        "9 October 2026"
       ],
       "src": [
         "R_ENGINE_GIT"
@@ -423,7 +439,7 @@
     },
     "cases.titanos-engine.shots[0].alt": {
       "figs": [
-        "22 November 2026",
+        "26 November 2026",
         "29 September"
       ],
       "src": [

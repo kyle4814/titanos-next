@@ -25,7 +25,7 @@ export const FLEX = {
     label: "cost of one worker job, 8 October 2026",
     kind: "RECORDED",
     analogy: `${dec("cost_job_x")} times more finished work for every dollar, and 25 of 25 jobs passed against 23 of 25 before.`,
-    source: "Same-25-job comparison recorded 8 Oct 2026 (investor_outreach.md). The baseline sheet's all-in figure, US$1.037 per job, also counts orchestrator spend.",
+    source: "Same-25-job comparison recorded 8 Oct 2026. The baseline sheet's all-in figure, US$1.037 per job, also counts orchestrator spend.",
   },
   fleetJobs: {
     big: `${int("fleet_jobs_24h")} jobs in 24 hours`,

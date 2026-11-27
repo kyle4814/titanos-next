@@ -9,7 +9,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import NumberCounter from "@/components/NumberCounter";
 import AnimatedButton from "@/components/AnimatedButton";
-import { STATS } from "@/lib/stats";
+import { STATS, SCANS_PHRASE } from "@/lib/stats";
 import HeroScrollCue from "@/components/HeroScrollCue";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import StatsTicker from "@/components/StatsTicker";
@@ -180,7 +180,7 @@ export default function Home() {
             background: "rgb(var(--gold-rgb) / 0.02)",
           }}
         >
-          <TrustUnit big={<><NumberCounter value={STATS.scansLast30Days} /></>} small="domains checked in the last 30 days" />
+          <TrustUnit big={<><NumberCounter value={STATS.scansLast30Days} /></>} small={SCANS_PHRASE} />
           <TrustUnit big={<><NumberCounter value={STATS.organisationsResearched} /></>} small="organisations researched in full dossiers" />
           <TrustUnit big="ABN 34 318 502 254" small="Australian-owned" tone="text" />
           <TrustUnit big="Personally reviewed" small="by Kyle before delivery" tone="text" last />

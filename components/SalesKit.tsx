@@ -13,7 +13,7 @@
  * No urgency, no scarcity, no countdowns. A "no" is welcome.
  */
 
-import { int, TEAM_LINE, ELAPSED_LINE } from "@/lib/ledger";
+import { int, TEAM_LINE, ELAPSED_LINE, TEAM_SIZE_PHRASE } from "@/lib/ledger";
 import type { ReactNode } from "react";
 import FaqItem from "@/components/FaqItem";
 import SectionReveal from "@/components/SectionReveal";
@@ -181,7 +181,7 @@ export function Analogy({ k }: { k: AnalogyKey }) {
 const PILLARS: { head: string; body: string }[] = [
   {
     head: "The team you would never afford",
-    body: "TITANOS was built by one engineer at the output of a roughly 20-person team by the COCOMO estimate, and that is the standard you get.",
+    body: `TITANOS was built by one engineer at the output of a ${TEAM_SIZE_PHRASE} by the COCOMO estimate, and that is the standard you get.`,
   },
   {
     head: "Speed you can feel",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import { STATS } from "@/lib/stats";
+import { STATS, STATS_ASOF_LONG } from "@/lib/stats";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -18,7 +18,7 @@ import type { Flex } from "@/lib/flex";
 // The biggest true number for this page: domains this same engine checked in the last 30 days. Read from our own count, not typed.
 const SCANS_FLEX: Flex = {
   big: `${STATS.scansLast30Days.toLocaleString("en-AU")} domains`,
-  label: "checked by this same engine in the last 30 days",
+  label: `checked by this same engine in the 30 days to ${STATS_ASOF_LONG}`,
   kind: "RECORDED",
   analogy: "A smoke alarm in every room: it makes a quiet noise when something changes, long before there is a fire.",
   source: `lib/stats.json, written from our own scan records, as of ${STATS.asOf}.`,

@@ -6,10 +6,10 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { STATS } from "@/lib/stats";
+import { STATS, SCANS_PHRASE } from "@/lib/stats";
 
 const LINES = [
-  `${STATS.scansLast30Days.toLocaleString("en-AU")} domains checked in the last 30 days`,
+  `${STATS.scansLast30Days.toLocaleString("en-AU")} ${SCANS_PHRASE}`,
   `${STATS.organisationsResearched.toLocaleString("en-AU")} organisations researched in full dossiers`,
   "ABN 34 318 502 254, Australian-owned, verifiable",
   "Every finding verifiable: see the real evidence pack",

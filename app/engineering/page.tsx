@@ -10,7 +10,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import Tiles from "@/components/proof/Tiles";
-import { int, dec, aud, audShort, v, rnd, times, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
+import { int, dec, aud, v, AS_OF_LONG, HERO_STRIP } from "@/lib/ledger";
 import Provenance from "@/components/Provenance";
 
 const META_TITLE = "What one engineer built, and the maths | TITANOS";
@@ -123,8 +123,7 @@ export default function EngineeringPage() {
       <Block title="The maths, in one line" lead="MODELLED, and labelled as such.">
         <p style={BODY}>
           {int("estate_sloc")} lines of production code across {int("estate_repos")} repositories since 4 May 2026 (measured {AS_OF_LONG}). The industry-standard COCOMO model prices that at
-          {dec("estate_ey")} engineer-years (MODELLED), about {aud("build_cost_aud")} at Australia&apos;s AU$800-a-day contractor rate, which is up
-          to {aud("annual_cost_aud")} a year at this pace. The website began on 4 June, the main engine on 24 August and the operating kernel on 29 September.
+          {dec("estate_ey")} engineer-years (MODELLED). This page prints no dollar value for that model. The website began on 4 June, the main engine on 24 August and the operating kernel on 29 September.
         </p>
       </Block>
 
@@ -162,33 +161,6 @@ export default function EngineeringPage() {
         </div>
       </Block>
 
-      <Block
-        title="Counted the hard way"
-        lead="AI did much of the typing, so here is the figure with most of it taken off."
-      >
-        <p style={BODY}>
-          Even counting only 10% of the model, that is {aud("annual_cost_10pct_aud")} a year of engineering. Even at 2%,
-          {aud("annual_cost_2pct_aud")} a year. The full model says {aud("annual_cost_aud")} a year.
-        </p>
-        <Tiles
-          label="Annual cost, three counting rules"
-          items={[
-            { n: audShort("annual_cost_2pct_aud"), l: "Floor (2%), per year", tag: "MODELLED" },
-            { n: audShort("annual_cost_10pct_aud"), l: "Counted (10%), per year", tag: "MODELLED" },
-            { n: audShort("annual_cost_aud"), l: "Full model, per year", tag: "MODELLED" },
-          ]}
-        />
-      </Block>
-
-      <Block title="What a dollar of compute buys">
-        <p style={BODY}>
-          Counted at 10% (a MODELLED figure), that is {aud("annual_cost_10pct_aud")} a year of engineering on compute of about {aud("compute_build_aud_month")} a month (roughly US$30, an operator figure with no receipt on file): about
-          AU${rnd("per_dollar_build_x")} of engineering per AU$1 on the original build spend, and about AU${rnd("per_dollar_today_x")} per AU$1 at
-          today&apos;s {aud("compute_today_aud_month")} a month. On the full model ({aud("build_cost_aud")} built on about AU${rnd("compute_build_total_aud")} of compute over
-          the {Math.round(v("elapsed_months"))} months), it is about AU${rnd("per_dollar_full_x")} per AU$1.
-        </p>
-      </Block>
-
       <OpenLoop>A model is only worth something if the work holds up. So does it?</OpenLoop>
 
       <Analogy k="preflight" />
@@ -196,7 +168,7 @@ export default function EngineeringPage() {
       <Block title="Built properly">
         <ul style={{ ...PROSE, listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
           {[
-            `${int("tests_main")} test cases in the main engine and ${int("suites_now")} automated safety suites on the control layer (MEASURED, ${AS_OF_LONG}). Nothing ships unless the test gate is green.`,
+            `${int("tests_main")} test cases in the main engine and ${int("suites_now")} automated safety suites on the control layer (MEASURED, ${AS_OF_LONG}). A test gate runs before a change is merged; its latest full reading is on the engine case study.`,
             `From ${v("commits_week_before")} commits a week in May to ${int("commits_week_now")} this week across ${int("estate_repos")} repositories (MEASURED).`,
           ].map((t) => (
             <li key={t} style={{ ...CARD, color: "var(--ice)", lineHeight: 1.6 }}>
@@ -253,12 +225,7 @@ export default function EngineeringPage() {
             engineers. The earlier 44 engineer-years figure was the same model on 170,651 lines, measured 4 October.
           </li>
           <li>
-            Cost: AU$800 a day x 220 working days a year, the contractor rate from the Hudson Australia Cyber
-            Security Salary Guide. {dec("estate_ey")} years x 220 days x AU$800 is about {aud("build_cost_aud")}.
-          </li>
-          <li>
-            Per year: that output landed in {v("span_days")} days, so a year at the same pace is {dec("estate_ey")} / ({v("span_days")} / 365) = about {v("annual_ey")} engineer-years,
-            about {aud("annual_cost_aud")}. The 10% and 2% lines are 10% and 2% of that. All of these are MODELLED, never revenue.
+            Dollars: this page prints no dollar value for the engineer-years. A day-rate model of that kind is an internal estimate, not a result, and it is not revenue.
           </li>
           <li>
             Compute: about US$30 (roughly {aud("compute_build_aud_month")}) a month of AI tools while the main engine was built (to 29 September), and {aud("compute_today_aud_month")} a month since. Both are operator figures with no receipt on file.
