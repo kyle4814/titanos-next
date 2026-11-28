@@ -476,7 +476,7 @@ export const OBLIGATIONS: Obligation[] = [
     faq: [
       {
         q: "Does the AU$3 million exemption still exist?",
-        a: "Yes. Section 6D is in the current compilation of the Privacy Act (Compilation No. 104, 4 June 2026). Re-check the Federal Register of Legislation before relying on it, because legislation changes.",
+        a: "Yes. Section 6D is in the current compilation of the Privacy Act (Compilation No. 104, 4 June 2026). Reform to narrow or remove the exemption has been proposed, so check the OAIC for the current position and re-check the Federal Register of Legislation before relying on this.",
       },
       {
         q: "Is a sole trader a small business operator?",
