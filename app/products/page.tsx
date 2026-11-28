@@ -6,6 +6,8 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import OfferTile from "@/components/offers/OfferTile";
 import { PRODUCTS, formatProductPrice, productBuyHref } from "@/lib/products";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, itemList } from "@/lib/jsonld";
 import type { Product } from "@/lib/products/types";
 
 const TITLE = "Digital Products and Courses | TITANOS";
@@ -49,6 +51,8 @@ export default function ProductsPage() {
   const others = PRODUCTS.filter((p) => p.kind !== "course");
   return (
     <>
+      <JsonLd data={itemList(PRODUCTS.map((p) => ({ name: p.name, path: `/products/${p.slug}` })))} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Products", path: "/products" }])} />
       <PageHero
         badge="TITANOS · DIGITAL PRODUCTS"
         title="Digital products and courses"

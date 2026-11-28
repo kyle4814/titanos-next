@@ -8,7 +8,9 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
-import { PRODUCTS, getProduct, formatProductPrice, productBuyHref } from "@/lib/products";
+import { PRODUCTS, getProduct, formatProductPrice, productBuyHref, productPriceAud } from "@/lib/products";
+import JsonLd from "@/components/JsonLd";
+import { product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import type { Product } from "@/lib/products/types";
 
 export const dynamicParams = false;
@@ -66,8 +68,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!p) notFound();
   const live = productBuyHref(p) !== null;
   const privacyRelated = /privacy|breach/i.test([p.name, p.bluf].join(" "));
+  const path = `/products/${p.slug}`;
+  const priceAud = productPriceAud(p);
   return (
     <>
+      <JsonLd data={product({ path, name: p.name, description: p.bluf, priceAud, buyable: live && priceAud != null, preOrder: !live, sku: p.slug })} />
+      <JsonLd data={faqPage(p.faq)} />
+      <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Products", path: "/products" }, { name: p.name, path }])} />
       <PageHero
         badge={`TITANOS · ${live ? "AVAILABLE NOW" : "OPENING SOON"}`}
         title={p.name}

@@ -94,6 +94,9 @@ export function product(p: {
   description: string;
   priceAud: number | null;
   buyable: boolean;
+  /** Set for a priced product that is not yet purchasable: the Offer is still emitted, as PreOrder, never InStock. */
+  preOrder?: boolean;
+  sku?: string;
 }): Json {
   const url = `${SITE}${p.path}`;
   return {
@@ -104,14 +107,15 @@ export function product(p: {
     url,
     image: `${SITE}${ogUrl(p.path)}`,
     brand: { "@id": ORG_ID },
-    ...(p.buyable && p.priceAud != null
+    ...(p.sku ? { sku: p.sku } : {}),
+    ...((p.buyable || p.preOrder) && p.priceAud != null
       ? {
           offers: {
             "@type": "Offer",
             url,
             price: p.priceAud,
             priceCurrency: "AUD",
-            availability: "https://schema.org/InStock",
+            availability: p.buyable ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
             seller: { "@id": ORG_ID },
           },
         }
@@ -124,6 +128,16 @@ export function breadcrumbs(trail: { name: string; path: string }[]): Json {
     "@context": CTX,
     "@type": "BreadcrumbList",
     itemListElement: trail.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: t.name, item: `${SITE}${t.path}` })),
+  };
+}
+
+/** A list page's members as an ItemList (names and URLs that are on the visible page). */
+export function itemList(items: { name: string; path: string }[]): Json | null {
+  if (!items.length) return null;
+  return {
+    "@context": CTX,
+    "@type": "ItemList",
+    itemListElement: items.map((i, n) => ({ "@type": "ListItem", position: n + 1, name: i.name, url: `${SITE}${i.path}` })),
   };
 }
 
