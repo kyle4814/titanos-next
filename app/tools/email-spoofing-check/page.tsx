@@ -140,7 +140,7 @@ export default function EmailSpoofingCheckPage() {
             <li><strong>List your real senders.</strong> Your mailbox provider, your newsletter tool, your invoicing and booking systems, anything that emails as your domain.</li>
             <li><strong>Publish one SPF record</strong> covering them, ending in <code>~all</code>.</li>
             <li><strong>Switch on DKIM</strong> in each sender&rsquo;s admin settings. Google Workspace and Microsoft 365 both have a DKIM setting.</li>
-            <li><strong>Add DMARC in monitor mode:</strong> a TXT record at <code>_dmarc.yourdomain</code> with <code>v=DMARC1; p=none; rua=mailto:a mailbox you read</code>.</li>
+            <li><strong>Add DMARC in monitor mode:</strong> a TXT record at <code>_dmarc.yourdomain</code> with <code>v=DMARC1; p=none; rua=mailto:a mailbox you read</code>. Our <Link href="/tools/dmarc-generator">free DMARC record generator</Link> builds the exact record.</li>
             <li><strong>Read the reports for two to four weeks</strong> and fix any real sender that fails.</li>
             <li><strong>Move to <code>p=quarantine</code>, then <code>p=reject</code></strong>, re-running this check after each change.</li>
           </ol>

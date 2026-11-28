@@ -55,6 +55,12 @@ export const TOOL_RELATED: Record<string, { guides: string[]; products: string[]
     tools: ["/tools/essential-eight-score", "/tools/privacy-act-checker"],
     posts: ["can-someone-send-email-pretending-to-be-my-business", "anz-smb-email-security-double-gap-measured"],
   },
+  "/tools/dmarc-generator": {
+    guides: ["email-security-small-business-australia"],
+    products: ["dmarc-setup-guide", "spoofguard-self-check-checklist"],
+    tools: ["/tools/email-spoofing-check", "/tools/essential-eight-score"],
+    posts: ["can-someone-send-email-pretending-to-be-my-business"],
+  },
   "/tools/essential-eight-score": {
     guides: ["essential-eight-small-business", "government-tenders-small-business-australia"],
     products: ["essential-eight-ml1-checklist"],
