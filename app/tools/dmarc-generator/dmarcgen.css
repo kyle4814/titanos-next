@@ -1,0 +1,18 @@
+/* DMARC generator: extends the .dmc styles from ../email-spoofing-check/spoofcheck.css */
+.dmc-gen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.dmc-gen-wide { grid-column: 1 / -1; }
+.dmc-field { width: 100%; min-height: 48px; padding: 0 14px; font: 500 16px/1 var(--font-body), system-ui, sans-serif; color: #fff; background: #07080a; border: 1px solid rgba(255,255,255,.28); border-radius: 8px; }
+.dmc-gen-grid label { display: block; font-weight: 600; margin-bottom: 8px; }
+.dmc-gen-out { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--pe-line, rgba(255,255,255,.1)); }
+.dmc-gen-out h3 { font-size: 1.3rem; color: #fff; }
+.dmc-gen-fields { margin: 14px 0 0; display: grid; gap: 10px; }
+.dmc-gen-fields > div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: start; }
+.dmc-gen-fields dt { color: var(--pe-mute, #b4b2ad); font-size: 14px; padding-top: 12px; }
+.dmc-gen-fields dd { margin: 0; }
+.dmc-gen-fields code { overflow-wrap: anywhere; }
+.dmc-gen-h4 { margin-top: 24px; font-size: 1.05rem; color: #fff; }
+.dmc-gen-tags { list-style: none; padding: 0; margin-top: 10px; display: grid; gap: 8px; }
+.dmc-gen-tags code { color: var(--pe-gold-hi, #f3d98c); }
+.dmc-gen-tags span { color: #d6d4ce; font-size: 15px; }
+.dmc-gen-out .dmc-findings { margin-top: 20px; }
+@media (max-width: 560px) { .dmc-gen-fields > div { grid-template-columns: 1fr; } .dmc-gen-fields dt { padding-top: 0; } }
