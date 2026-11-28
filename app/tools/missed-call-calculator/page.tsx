@@ -5,6 +5,7 @@ import { faqPage, breadcrumbs } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
 import Calculator from "./Calculator";
 import { calculate, EXAMPLE } from "./calc";
+import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./calculator.css";
 
@@ -101,7 +102,7 @@ export default function Page() {
             <li><strong>Batch your callbacks.</strong> Block two fixed windows a day so a missed call gets a ring back the same day.</li>
             <li><strong>Hand off the phone.</strong> A partner, office helper or answering service lowers the missed share directly.</li>
           </ul>
-          <p>If you want the texting option set up for you, see the <Link href="/shop">TITANOS shop</Link> for the missed-call text-back kit and what each item includes. Want the follow-up and review messages written in your voice? <Link href="/offers/job-flow">Job Flow</Link> covers that. To see how a tradie flow looks end to end, open the <a href="/d/plumber/">plumber demo</a>. Tradie-specific scams and email security: <Link href="/tradies">TITANOS for tradies</Link>.</p>
+          <p>If you want the texting option set up for you, see the <Link href="/shop">TITANOS shop</Link> for the missed-call text-back kit and what each item includes. Want the follow-up and review messages written in your voice? <Link href="/offers/job-flow">Job Flow</Link> covers that. Tradie-specific scams and email security: <Link href="/tradies">TITANOS for tradies</Link>.</p>
         </section>
 
         <section className="mc-sec">
@@ -116,11 +117,12 @@ export default function Page() {
           <p>Browse the missed-call text-back kit in the shop, or ask for a quote. A no is welcome.</p>
           <div>
             <Link href="/shop" className="pe-btn pe-btn--gold pe-btn--lg">See the shop</Link>
-            <a href="/d/plumber/" className="pe-btn pe-btn--dark pe-btn--lg">Open the plumber demo</a>
+            <Link href="/tradies" className="pe-btn pe-btn--dark pe-btn--lg">TITANOS for tradies</Link>
           </div>
           <p className="mc-small">Built by Kyle Deligny, Brisbane. ABN 34 318 502 254. Public information and your own numbers only.</p>
         </aside>
       </div>
+      <RelatedLinks path={PATH} />
     </main>
   );
 }

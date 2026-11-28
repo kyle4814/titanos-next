@@ -1,4 +1,4 @@
-import type { ContentBlock } from "../blog";
+import type { ContentBlock } from "@/lib/blog";
 
 export const p = (text: string): ContentBlock => ({ type: "p", text });
 export const h2 = (text: string): ContentBlock => ({ type: "h2", text });

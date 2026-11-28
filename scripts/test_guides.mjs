@@ -28,6 +28,7 @@ function routeExists(h) {
   if (seg[0] === "products" && seg[1]) return prodSlugs.has(seg[1]);
   if (seg[0] === "offers" && seg[1]) return offerSlugs.has(seg[1]);
   if (seg[0] === "guides" && seg[1]) return guideSlugs.has(seg[1]);
+  if (seg[0] === "tools" && seg[1]) return seg.length === 2 && fs.existsSync(path.join(root, "app/tools", seg[1], "page.tsx"));
   return appDirs.includes(seg[0]) && seg.length === 1;
 }
 

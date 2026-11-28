@@ -13,7 +13,7 @@
  * them, don't rename after publishing (redirect if you must).
  */
 
-import { SEO_POSTS } from "./blog-seo";
+import { SEO_POSTS } from "@/lib/blog-seo";
 
 export type ContentBlock =
   | { type: "p"; text: string }

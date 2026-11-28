@@ -5,6 +5,7 @@ import { breadcrumbs, faqPage, ORG_ID } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
 import HomeNav from "@/components/home-redesign/HomeNav";
 import HomeFooter from "@/components/home-redesign/HomeFooter";
+import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./privacy-checker.css";
 import Checker from "./Checker";
@@ -133,6 +134,7 @@ export default function PrivacyActChecker() {
           </div>
         </aside>
       </div>
+      <RelatedLinks path={PATH} />
       <HomeFooter />
     </div>
   );

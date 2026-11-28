@@ -3,6 +3,7 @@ import Link from "next/link";
 import { withSeo, SITE } from "@/lib/seo";
 import { ORG_ID, breadcrumbs, faqPage, serialise } from "@/lib/jsonld";
 import Checker from "./Checker";
+import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./spoofcheck.css";
 
@@ -203,6 +204,7 @@ export default function EmailSpoofingCheckPage() {
           Built and maintained by Kyle Deligny, Brisbane (ABN 34 318 502 254). General information, not legal or security advice for your specific systems. Last reviewed 28 November 2026.
         </p>
       </div>
+      <RelatedLinks path={PATH} />
     </div>
   );
 }

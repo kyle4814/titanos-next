@@ -1,5 +1,5 @@
-import type { BlogPost } from "../blog";
-import { p, h2, h3, ul, ol, quote, link, cta, DISCLOSURE } from "./h";
+import type { BlogPost } from "@/lib/blog";
+import { p, h2, h3, ul, ol, quote, link, cta, DISCLOSURE } from "@/lib/blog-seo/h";
 
 export const post: BlogPost = {
   slug: "austender-contract-awards-subcontractor-leads",

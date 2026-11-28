@@ -5,6 +5,7 @@ import { faqPage, breadcrumbs, ORG_ID } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
 import HomeNav from "@/components/home-redesign/HomeNav";
 import HomeFooter from "@/components/home-redesign/HomeFooter";
+import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./e8.css";
 import Tool from "./Tool";
@@ -128,6 +129,7 @@ export default function Page() {
           <Link href="/shop">Shop<small>Checklists, templates and packs</small></Link>
         </div>
       </div>
+      <RelatedLinks path={PATH} />
     </main>
     <HomeFooter />
     </>

@@ -6,6 +6,7 @@ import { privacyAct } from "@/lib/guides-content/privacy-act-small-business-aust
 import { essentialEight } from "@/lib/guides-content/essential-eight-small-business";
 import { emailSecurity } from "@/lib/guides-content/email-security-small-business-australia";
 import { tenders } from "@/lib/guides-content/government-tenders-small-business-australia";
+import { GUIDE_EXTRA, POST_RELATED, TOOLS, PRODUCT_LINKS, type RelLink } from "@/lib/seo-links";
 
 /** Inline markup inside any string: [text](href) for links, **bold** for emphasis. Nothing else. */
 export type Block =
@@ -41,7 +42,17 @@ export type Guide = {
   nextStep: { label: string; href: string; text: string };
 };
 
-export const GUIDES: Guide[] = [tradieAutomation, aiReceptionist, privacyAct, essentialEight, emailSecurity, tenders];
+const merge = (base: GuideLink[], extra: RelLink[]): GuideLink[] => [...extra.filter((e) => !base.some((b) => b.href === e.href)), ...base];
+/** Adds the interactive tools and shop products to each guide's related lists (see lib/seo-links.ts). */
+const withTools = (g: Guide): Guide => {
+  const x = GUIDE_EXTRA[g.slug] ?? { tools: [], products: [] };
+  const tools = x.tools.map((h) => TOOLS.find((t) => t.href === h)!);
+  const products = x.products.map((s) => PRODUCT_LINKS[s]);
+  const posts = [...g.related.posts, ...Object.entries(POST_RELATED).filter(([slug, r]) => r.guide === g.slug && !g.related.posts.includes(slug)).map(([slug]) => slug)];
+  return { ...g, related: { ...g.related, posts, tools: merge(g.related.tools, tools), products: merge(g.related.products, products) } };
+};
+
+export const GUIDES: Guide[] = [tradieAutomation, aiReceptionist, privacyAct, essentialEight, emailSecurity, tenders].map(withTools);
 
 export function getGuide(slug: string): Guide | undefined {
   return GUIDES.find((g) => g.slug === slug);

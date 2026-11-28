@@ -36,7 +36,7 @@ export default function Tool() {
           <header>
             <span className="e8-num">{i + 1}</span>
             <div>
-              <h3 id={`e8-h-${s.id}`}>{s.name}</h3>
+              <h2 id={`e8-h-${s.id}`}>{s.name}</h2>
               <p>{s.plain}</p>
             </div>
           </header>
@@ -58,7 +58,7 @@ export default function Tool() {
       ))}
 
       <section className="e8-result" aria-labelledby="e8-result-h" id="your-score">
-        <h3 id="e8-result-h">Your quick score</h3>
+        <h2 id="e8-result-h">Your quick score</h2>
         {r.answered === 0 ? (
           <p className="e8-muted">Answer the questions above and your score, strategy breakdown and gap list appear here. If you are unsure, answer No: an honest No is more useful than an optimistic Yes.</p>
         ) : (
@@ -80,7 +80,7 @@ export default function Tool() {
               ))}
             </ul>
 
-            <h4>Your gap list ({r.gaps.length})</h4>
+            <h3>Your gap list ({r.gaps.length})</h3>
             {r.gaps.length === 0 ? (
               <p className="e8-muted">{done ? "No gaps in your answers." : "No gaps so far in the questions you have answered."}</p>
             ) : (

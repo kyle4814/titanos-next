@@ -27,5 +27,5 @@ ok(/<html[^>]*lang="en-AU"/.test(html), "lang en-AU");
 const text = html.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ");
 ok(!/[–—]/.test(text), "no em or en dash in copy");
 ok(text.includes("example numbers, not industry statistics"), "example inputs labelled");
-for (const h of ["/shop", "/offers/job-flow", "/d/plumber/"]) ok(html.includes(`href="${h}"`), `links to ${h}`);
+for (const h of ["/shop", "/offers/job-flow", "/tradies"]) ok(html.includes(`href="${h}"`), `links to ${h}`);
 process.exit(fail);

@@ -50,3 +50,4 @@
 .mc a.pe-btn--gold { color: #17110a; }
 .mc a.pe-btn--dark { color: var(--pe-text, #f4f2ec); }
 .mc-lede { margin-top: 24px; }
+@media print { .mc-out { display: none; } }

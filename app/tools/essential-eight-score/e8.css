@@ -31,7 +31,7 @@
 .e8-strategy { background: var(--pe-card); border: 1px solid var(--pe-line); border-radius: 14px; padding: 22px; margin-bottom: 18px; }
 .e8-strategy > header { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 8px; }
 .e8-num { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--pe-line-gold); color: var(--pe-gold-hi); display: grid; place-items: center; font-weight: 700; font-size: 15px; }
-.e8-strategy h3 { font-size: 20px; line-height: 1.25; }
+.e8-strategy h2 { font-size: 20px; line-height: 1.25; }
 .e8-strategy header p { color: var(--pe-mute); font-size: 15px; margin-top: 2px; }
 .e8-q { border: 0; border-top: 1px solid var(--pe-line); padding: 16px 0 0 !important; margin-top: 16px !important; min-width: 0; }
 .e8-q legend { font-weight: 600; font-size: 16px; line-height: 1.45; padding: 0; color: var(--pe-text); }
@@ -46,8 +46,8 @@
 .e8-opt--na[data-on="true"] span { background: var(--pe-card2); color: var(--pe-text); border-color: var(--pe-gold); }
 
 .e8-result { background: var(--pe-card2); border: 1px solid var(--pe-line-gold); border-radius: 14px; padding: 26px 22px; margin-top: 28px; }
-.e8-result h3 { font-size: 24px; margin-bottom: 14px; }
-.e8-result h4 { font-size: 18px; margin: 28px 0 12px; }
+.e8-result h2 { font-size: 24px; margin-bottom: 14px; }
+.e8-result h3 { font-size: 18px; margin: 28px 0 12px; }
 .e8-muted { color: var(--pe-mute); font-size: 15px; }
 .e8-score { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
 .e8-score__n { display: flex; align-items: baseline; color: var(--pe-gold-hi); }
