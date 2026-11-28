@@ -6,6 +6,8 @@ export const invoiceFraudEmail: Guide = {
   h1: "Invoice Fraud Email Scams in Australia: How They Work and How to Protect Your Business",
   description:
     "How invoice fraud and fake bank detail emails work in Australia, the warning signs, controls that stop payment diversion and what to do if money has been sent.",
+  answer:
+    'Invoice fraud happens when a criminal sends a fake invoice, or a note that bank details have changed, and someone pays it. The best controls cost nothing: confirm any change of bank details by calling a known number, require a second check on payments, and protect your own domain from spoofing. If you have paid, contact your bank straight away.',
   cluster: "Invoice fraud",
   targetTerms: ["invoice fraud email scam australia", "fake invoice email scam", "change of bank details email scam", "business email compromise australia", "scamwatch false billing"],
   date: "2026-11-29",

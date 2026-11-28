@@ -6,6 +6,8 @@ export const googleReviewsTradies: Guide = {
   h1: "How Tradies Can Get More Google Reviews in Australia, Within Google's Rules",
   description:
     "A practical way for tradies to ask for Google reviews: when to ask, what to say, what Google bans, how to reply to bad reviews and how to automate the ask.",
+  answer:
+    "A steady stream of recent, honest Google reviews gives a tradie a visible edge in local search. Ask right after a finished job, use a direct review link or QR code, and follow Google's rules on what is allowed. Reply to bad reviews calmly, and make the ask automatic so it happens every time.",
   cluster: "Reviews",
   targetTerms: ["how to get more google reviews tradie", "google reviews for plumbers australia", "ask customers for google review text", "google review request template", "google business profile reviews tradies"],
   date: "2026-11-29",

@@ -6,6 +6,8 @@ export const whatIsDkim: Guide = {
   h1: "What Is a DKIM Record? A Plain Guide for Small Business Owners",
   description:
     "A DKIM record publishes the public key that proves your email is genuine. Learn how DKIM works, what a record looks like, how to set it up and how to check it.",
+  answer:
+    "A DKIM record is a public key published in your domain's DNS. It lets receiving mail systems check the digital signature your mail system adds to each message, which shows the message came from a system holding your private key and was not altered in transit. A missing or broken record quietly weakens your email.",
   cluster: "What is DKIM",
   targetTerms: ["what is a dkim record", "dkim record explained", "how to set up dkim", "dkim selector explained", "check dkim record"],
   date: "2026-11-29",

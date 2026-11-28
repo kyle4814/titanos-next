@@ -6,6 +6,8 @@ export const spfRecord: Guide = {
   h1: "What Is an SPF Record? A Plain Guide for Small Business, With Examples",
   description:
     "An SPF record lists the servers allowed to send email for your domain. Learn the syntax, the 10 lookup limit, ~all versus -all and how to fix common errors.",
+  answer:
+    "An SPF record is a line of text in your domain's DNS that lists the mail servers allowed to send email for your domain. Receivers check it and record a pass or fail. Watch the ten-lookup limit, and know that SPF alone cannot stop forged email, so pair it with DKIM and DMARC.",
   cluster: "What is SPF",
   targetTerms: ["what is an spf record", "spf record example", "spf record too many lookups", "spf softfail vs fail", "how to create an spf record"],
   date: "2026-11-29",

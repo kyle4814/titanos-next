@@ -6,6 +6,8 @@ export const appointmentReminders: Guide = {
   h1: "Automated Appointment Reminders for Australian Tradies and Service Businesses",
   description:
     "How to set up automated appointment reminders by SMS and email for a trade or service business: timing, wording, Spam Act consent and a worked example.",
+  answer:
+    'A short reminder message the day before an appointment is one of the cheapest ways to cut no-shows for trades, cleaners and mobile services. This guide covers what to send and when, how to set it up with tools you may already pay for, how the Spam Act 2003 applies, and how to measure results.',
   cluster: "Appointments",
   targetTerms: ["automated appointment reminders", "sms appointment reminders australia", "appointment reminder text for tradies", "reduce no shows service business", "spam act appointment reminders"],
   date: "2026-11-29",

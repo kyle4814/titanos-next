@@ -6,6 +6,8 @@ export const dmarcMicrosoft365: Guide = {
   h1: "DMARC for Microsoft 365: A Step-by-Step Setup Guide for Small Business",
   description:
     "How to set up SPF, DKIM and DMARC for Microsoft 365 on a custom domain: where each record goes, a safe p=none to p=reject rollout and how to fix failures.",
+  answer:
+    'Microsoft 365 does not turn on DMARC for your own domain by default. To protect it, set up SPF, enable DKIM signing for the custom domain, publish a DMARC record and raise the policy in stages. Check third-party senders first, because they cause most failures along the way.',
   cluster: "DMARC for Microsoft 365",
   targetTerms: ["dmarc microsoft 365", "set up dmarc office 365", "microsoft 365 dkim setup", "dmarc record microsoft 365 small business"],
   date: "2026-11-29",

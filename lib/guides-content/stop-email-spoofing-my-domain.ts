@@ -6,6 +6,8 @@ export const stopEmailSpoofing: Guide = {
   h1: "How to Stop Email Spoofing of Your Domain: A Plain Guide for Small Business",
   description:
     "How to stop someone sending email as your business domain: check your SPF, DKIM and DMARC records, fix them in a safe order and cover what DMARC cannot stop.",
+  answer:
+    'Email spoofing means someone puts your domain in the From line of a message you did not send. For a domain you own, it is fixable with three DNS records: SPF, DKIM and DMARC. Fix them in order so your own email keeps working, and know what the records cannot stop.',
   cluster: "Stop spoofing",
   targetTerms: ["stop email spoofing my domain", "how to stop someone spoofing my email address", "someone is sending emails from my domain", "prevent email spoofing small business australia"],
   date: "2026-11-29",

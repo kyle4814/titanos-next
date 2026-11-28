@@ -6,6 +6,8 @@ export const bimiSmallBusiness: Guide = {
   h1: "BIMI for Small Business: Getting Your Logo in the Inbox, and Whether It Is Worth It",
   description:
     "BIMI can show your logo beside your email in supporting inboxes. See what it needs (DMARC enforcement, an SVG logo, a certificate) and who it suits.",
+  answer:
+    'BIMI, Brand Indicators for Message Identification, shows your logo beside your emails in mailbox providers that support it. It only works once SPF, DKIM and an enforced DMARC policy are in place. The logo is a finish, not a protection, and many very small businesses can reasonably skip it.',
   cluster: "BIMI",
   targetTerms: ["bimi for small business", "what is bimi email", "bimi record setup", "bimi vmc cmc australia", "show logo in gmail inbox"],
   date: "2026-11-29",

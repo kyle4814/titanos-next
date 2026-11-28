@@ -6,6 +6,8 @@ export const servicem8Automation: Guide = {
   h1: "ServiceM8 Automation for Tradies: What Is Built In and What Needs Extra Tools",
   description:
     "What ServiceM8 automates on its own (quote follow-up, payment reminders, feedback) and what needs Zapier, Make or the API, with settings paths and sources.",
+  answer:
+    "ServiceM8's Automation add-on follows up unaccepted quotes, nudges unpaid invoices and asks for feedback after a job. A text to a caller you missed is not something we found in ServiceM8's help centre, so it needs a phone tool and a connector. We have not tested these set-ups in a live account.",
   cluster: "Job software",
   targetTerms: ["servicem8 automation", "servicem8 quote follow up", "servicem8 zapier", "servicem8 missed call text back", "servicem8 payment reminders"],
   date: "2026-11-29",

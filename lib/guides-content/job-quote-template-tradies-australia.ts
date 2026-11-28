@@ -6,6 +6,8 @@ export const quoteTemplates: Guide = {
   h1: "Job Quote Template for Australian Tradies: What to Include and How to Word It",
   description:
     "A plain job quote template for Australian tradies: what to put in, how to handle GST, variations and validity, plus wording for scope, exclusions and follow-up.",
+  answer:
+    'A good tradie quote states the scope, inclusions and exclusions, price with GST shown, payment terms, validity period and how variations are handled. This guide gives a plain template to copy and explains each part. It is general information, not legal or tax advice, and rules differ by state and trade.',
   cluster: "Quotes",
   targetTerms: ["job quote template australia", "quote template for tradies", "builder quote template", "what to include in a quote australia", "quote vs estimate australia"],
   date: "2026-11-29",
