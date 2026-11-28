@@ -200,6 +200,7 @@ node --experimental-strip-types --no-warnings scripts/test_e8_score.mjs
 node --experimental-strip-types --no-warnings scripts/test_missed_call_calculator.mjs out
 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_seo_crosslinks.mjs out
 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_guides.mjs
+node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_guides_batch2.mjs
 node --experimental-strip-types --no-warnings scripts/test_privacy_act_checker.mjs
 node --experimental-strip-types --no-warnings scripts/test_email_spoof_check.mjs
 node scripts/test_blog_seo.mjs out
