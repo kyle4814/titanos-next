@@ -18,15 +18,15 @@ export const metadata: Metadata = {
 
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 900, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 24, margin: "46px 0 12px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
+const H: CSSProperties = { color: "var(--pe-text)", fontWeight: 700, letterSpacing: "-0.01em", fontSize: 24, margin: "46px 0 12px" };
+const BODY: CSSProperties = { color: "var(--pe-mute)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
 const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
+  background: "var(--pe-card)",
+  border: "1px solid var(--pe-line)",
+  borderRadius: "var(--pe-r-card)",
   padding: "16px 18px",
 };
-const SMALL: CSSProperties = { color: "var(--ice)", opacity: 0.75, fontSize: 13, lineHeight: 1.5 };
+const SMALL: CSSProperties = { color: "var(--pe-faint)", fontSize: 13, lineHeight: 1.5 };
 
 export default function ArianceCaseStudy() {
   const sp = A.speed;
@@ -47,7 +47,7 @@ export default function ArianceCaseStudy() {
       <section style={SECTION}>
         <div style={WRAP}>
           {!arianceVisible && (
-            <p style={{ ...CARD, ...BODY, borderColor: "var(--gold-dim)", textAlign: "center" }}>
+            <p style={{ ...CARD, ...BODY, borderColor: "var(--pe-line-gold)", textAlign: "center" }}>
               Preview only. This page is hidden from search, the menu and the site map until the client has agreed to it going public.
             </p>
           )}
@@ -72,8 +72,8 @@ export default function ArianceCaseStudy() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14 }}>
             {A.built.items.map((b) => (
               <div key={b.name} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 17, fontWeight: 700, marginBottom: 6 }}>{b.name}</div>
-                <div style={{ color: "var(--ice)", fontSize: 15, lineHeight: 1.6 }}>{b.detail}</div>
+                <div style={{ color: "var(--pe-gold-hi)", fontSize: 17, fontWeight: 700, marginBottom: 6 }}>{b.name}</div>
+                <div style={{ color: "var(--pe-mute)", fontSize: 15, lineHeight: 1.6 }}>{b.detail}</div>
                 <div style={{ ...SMALL, marginTop: 10, textTransform: "uppercase", letterSpacing: 0.8 }}>{b.state}</div>
               </div>
             ))}
@@ -92,7 +92,7 @@ export default function ArianceCaseStudy() {
               const sinceStart = between(firstBuild, p.committed);
               return (
                 <div key={p.id} style={{ ...CARD, display: "flex", flexWrap: "wrap", gap: "6px 20px", alignItems: "baseline" }}>
-                  <div style={{ color: "var(--ice)", fontSize: 16, flex: "1 1 260px" }}>{p.label}</div>
+                  <div style={{ color: "var(--pe-mute)", fontSize: 16, flex: "1 1 260px" }}>{p.label}</div>
                   <div style={{ ...SMALL, flex: "0 1 auto" }}>
                     {run ? `${run} of build time (${clock(p.started as string)} to ${clock(p.finished as string)})` : "build window not logged"}
                   </div>
@@ -121,7 +121,7 @@ export default function ArianceCaseStudy() {
             {A.quality.status_chips.map((c) => (
               <div key={c.label} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 13, letterSpacing: 1.2, fontWeight: 700 }}>{c.label}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.55, marginTop: 4 }}>{c.meaning}</div>
+                <div style={{ color: "var(--pe-mute)", fontSize: 14, lineHeight: 1.55, marginTop: 4 }}>{c.meaning}</div>
               </div>
             ))}
           </div>
@@ -191,7 +191,7 @@ export default function ArianceCaseStudy() {
             {A.methodology.rows.map((r) => (
               <div key={r.figure} style={CARD}>
                 <div style={{ color: "var(--gold)", fontSize: 14, fontWeight: 700 }}>{r.figure}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.6 }}>{r.source}</div>
+                <div style={{ color: "var(--pe-mute)", fontSize: 14, lineHeight: 1.6 }}>{r.source}</div>
               </div>
             ))}
           </div>
