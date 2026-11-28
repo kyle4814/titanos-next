@@ -5,6 +5,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { SITE } from "@/lib/seo";
 import { POSTS } from "@/lib/blog";
+import { GUIDES } from "@/lib/guides";
 import { ALL_OFFERS } from "@/lib/offers";
 import { CASES } from "@/lib/caseStudies";
 import { PRODUCTS } from "@/lib/products";
@@ -83,6 +84,7 @@ export function indexableRoutes(): SiteRoute[] {
   for (const sp of STATIC_PAGES) out.push(mk(sp.path, sp.file, { priority: sp.priority }));
   for (const o of ALL_OFFERS) out.push(mk(`/offers/${o.slug}`, "lib/offers", { priority: 0.7 }));
   for (const p of POSTS) out.push(mk(`/blog/${p.slug}`, undefined, { priority: 0.6, lastModified: new Date(p.updated || p.date) }));
+  for (const g of GUIDES) out.push(mk(`/guides/${g.slug}`, undefined, { priority: 0.8, lastModified: new Date(g.updated) }));
   for (const c of CASES) out.push(mk(`/case-studies/${c.slug}`, "lib/caseStudies.ts", { priority: 0.7 }));
   for (const p of PRODUCTS) out.push(mk(`/products/${p.slug}`, "lib/products", { priority: 0.6 }));
   for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
