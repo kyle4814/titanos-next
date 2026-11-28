@@ -205,3 +205,4 @@ node scripts/test_indexnow_ping.mjs
 node --experimental-strip-types --no-warnings scripts/test_ai_search_entity.mjs --built out
 node scripts/test_integrations.mjs
 node --experimental-strip-types scripts/test_dmarc_setup.mjs out
+node --experimental-strip-types --no-warnings scripts/test_trade_problems.mjs
