@@ -38,7 +38,11 @@ ok('board maths (stall, dead target, chaos-never-ran)');
 // injected-clock tests below). 11 runs at 2x nproc busy loops read 0.05 to 2.29 (one 2.29 failed the 1.5 rule), so
 // 4x clears box-load swing with margin; a real 3x drift is pinned deterministically in tests 6 and 7.
 const SMOKE_S13 = 4;
-const g = await runSoak({ durationS: 20, concurrency: 8, rps: 400, intervalS: 2, seed: 7, thresholds: { S13: SMOKE_S13 },
+// S2 on the wall clock: a loaded cloud runner can starve one 2 s window to a handful of requests, so one injected
+// fault reads 1/3 (2026-11-28: 0.3333 blocked two deploys, the same test passed alone twice). Smoke threshold 0.4
+// keeps the gross-failure meaning; the strict 0.05 rule is still pinned by test 5 (50% 5xx must turn S2 RED).
+const SMOKE_S2 = 0.4;
+const g = await runSoak({ durationS: 20, concurrency: 8, rps: 400, intervalS: 2, seed: 7, thresholds: { S13: SMOKE_S13, S2: SMOKE_S2 },
   faults: { drop: 0.002, err5xx: 0.002, delayRate: 0.02, delayMs: 50 } });
 console.log('green run: n=%d rps=%s faultsSeen=%d', g.totals.n, (g.totals.n / 20).toFixed(0), g.faultsSeen);
 assert.ok(g.totals.n > 1000, 'load delivered');
