@@ -29,6 +29,8 @@ ol.list li::marker { font-family: var(--font-mono, monospace); font-size: 0.9em;
 .back { color: var(--dim); font-size: var(--fs-sm); text-decoration: none; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; transition: color 0.2s; }
 .back:hover { color: var(--gold); }
 .back:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.byline { max-width: 65ch; margin: -1rem auto 2rem; font-size: var(--fs-sm); color: var(--dim); line-height: 1.6; }
+.byline a { color: var(--gold); }
 .end { margin-top: var(--space-16); text-align: center; }
 
 /* Reading progress: pure CSS scroll-timeline, hidden where unsupported */

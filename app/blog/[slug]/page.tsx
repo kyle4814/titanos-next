@@ -62,7 +62,7 @@ export default async function BlogPostPage({
 
   const related = getRelatedPosts(post);
 
-  const articleJsonLd = article({ path: `/blog/${post.slug}`, headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date });
+  const articleJsonLd = article({ path: `/blog/${post.slug}`, headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date, authorPath: "/authors/kyle-deligny" });
 
   const breadcrumbJsonLd = breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }]);
 
@@ -90,6 +90,10 @@ export default async function BlogPostPage({
               logged {formatDate(post.date)} · {post.readMinutes} min read
             </SystemLabel>
           </div>
+
+          <p className={s.byline} data-eeat="byline">
+            By <Link href="/authors/kyle-deligny" rel="author">Kyle Deligny</Link>, Brisbane. Published {formatDate(post.date)}. Last reviewed {formatDate(post.updated || post.date)}. General information, not legal advice. <Link href="/editorial-policy">How we write and check</Link>.
+          </p>
 
           <BlogBody blocks={post.body} />
 
