@@ -62,7 +62,7 @@ export default function SetupHub() {
               <li><strong>Read the reports for about a month,</strong> fix any legitimate sender that fails, then tighten the policy in stages.</li>
             </ol>
             <p className={s.p}>
-              The {ROLLOUT.length} stages are laid out in the timeline further down. Primary specifications, for the curious, are linked at the foot of the page: SPF is RFC 7208, DKIM is RFC 6376 and DMARC is RFC 7489.
+              The {ROLLOUT.length} stages are laid out in the timeline further down. Choosing a tool to read the reports? See <Link href="/email-security/compare">DMARC tools compared</Link>. Primary specifications, for the curious, are linked at the foot of the page: SPF is RFC 7208, DKIM is RFC 6376 and DMARC is RFC 7489.
             </p>
           </section>
 
