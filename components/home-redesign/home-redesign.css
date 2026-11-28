@@ -348,3 +348,10 @@ body:has(.pe-hero) .finder-fab { z-index: 40; }
 /* More menu: long list, scrolls inside the viewport */
 .pe-nav__menu--wide { min-width: 300px; max-height: min(70vh, 560px); overflow-y: auto; right: 0; left: auto; }
 .pe-nav__menu--wide a small { display: none; }
+
+/* ---------- brand film ---------- */
+.pe-film-sec { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 28px 44px; align-items: center; padding-block: 56px !important; }
+.pe-film-copy h2 { margin-bottom: 12px; font: 700 clamp(26px, 3.2vw, 38px)/1.12 var(--font-display, var(--font-body)), system-ui, sans-serif; letter-spacing: -0.01em; }
+.pe-film-copy p:last-child { color: var(--pe-text-2, var(--pe-text)); line-height: 1.6; }
+.pe-film { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--pe-bg); border: 1px solid var(--pe-line-gold); border-radius: var(--pe-r-card); }
+@media (max-width: 820px) { .pe-film-sec { grid-template-columns: minmax(0, 1fr); padding-block: 36px !important; } }

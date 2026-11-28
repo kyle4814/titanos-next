@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
 import Icon from "./Icon";
+import JsonLd from "@/components/JsonLd";
+import { SITE } from "@/lib/seo";
 import type { IconName } from "./Icon";
 import { HERO_STRIP, dec, int, v } from "@/lib/ledger";
 import { METRICS, SERVICES, STEPS, TRUST, CASE_OUTCOMES, PROOF_DOCS, ENGINE, ENGINE_SLUG } from "./homepageContent";
@@ -190,6 +192,46 @@ export function Trust() {
       <ul>
         {TRUST.map((t) => <li key={t.label}><Icon name={t.icon as IconName} size={18} /> {t.label}</li>)}
       </ul>
+    </section>
+  );
+}
+
+/** The brand film. No autoplay, no sound until the viewer presses play; the box reserves 16:9 so nothing shifts. */
+export function Film() {
+  const videoLd = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "TITANOS: AI automation and email security from Brisbane",
+    description: "A 53 second film: repetitive work turned into a reliable system with a person reviewing anything that matters, and four free tools for Australian small business.",
+    thumbnailUrl: `${SITE}/video/titanos-film-poster.webp`,
+    uploadDate: "2026-11-28",
+    duration: "PT53S",
+    contentUrl: `${SITE}/video/titanos-film.mp4`,
+    inLanguage: "en-AU",
+  };
+  return (
+    <section className="pe-wrap pe-film-sec" aria-labelledby="pe-film-h">
+      <JsonLd data={videoLd} />
+      <div className="pe-film-copy">
+        <p className="pe-kicker">The film</p>
+        <h2 id="pe-film-h">See what we do in 53 seconds</h2>
+        <p>Repetitive work turned into a reliable system, your team kept, and four free tools you can use today. Captions are on the picture.</p>
+      </div>
+      <video
+        className="pe-film"
+        controls
+        playsInline
+        preload="none"
+        width={1280}
+        height={720}
+        poster="/video/titanos-film-poster.webp"
+        aria-label="TITANOS brand film, 53 seconds: AI automation and email security from Brisbane, with four free tools for Australian small business"
+      >
+        <source src="/video/titanos-film.webm" type="video/webm" />
+        <source src="/video/titanos-film.mp4" type="video/mp4" />
+        <track kind="captions" src="/video/titanos-film.vtt" srcLang="en-AU" label="English" />
+        Your browser cannot play this video. <a href="/video/titanos-film.mp4">Download the film (MP4)</a>.
+      </video>
     </section>
   );
 }

@@ -7,7 +7,7 @@
 import fs from "node:fs";
 import { measureHome } from "./home_height.mjs";
 
-export const BUDGET_PX = 13000;   // TEMPORARY while the pricing section is measured
+export const BUDGET_PX = 13500;   // was 13000 (TEMPORARY while the pricing section is measured); +500 on 2026-11-28 for the Kyle-approved brand film section (about 550 px at 390)
 const out = process.argv[2] || "out";
 if (!fs.existsSync(`${out}/index.html`)) { console.error(`test_home_height: ${out}/index.html missing, build first`); process.exit(2); }
 
