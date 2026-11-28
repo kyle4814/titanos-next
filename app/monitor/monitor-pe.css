@@ -1,0 +1,15 @@
+/* Monitor routes: obsidian and gold page-level layer. Scoped under .g18 so it never leaks. */
+.g18 [style*="italic"] { font-style: normal !important; }
+.g18 .pe-section { position: relative; z-index: 2; }
+.g18 .mo-price { max-width: 760px; margin-inline: auto; text-align: center; padding: clamp(24px, 3vw, 40px); }
+.g18 .mo-final { color: var(--pe-text); letter-spacing: -0.02em; }
+.mo-wrap { width: min(100% - 2 * var(--pe-gutter), 760px); margin-inline: auto; text-align: center; padding-block: clamp(64px, 10vw, 140px); position: relative; z-index: 2; }
+.mo-wrap h1 { font: 800 var(--pe-fs-h1)/1.06 var(--font-body), system-ui, sans-serif; letter-spacing: -0.03em; color: #fff; margin: 14px auto 16px; text-wrap: balance; }
+.mo-wrap .mo-lead { color: var(--pe-mute); font-size: var(--pe-fs-lead); line-height: 1.6; max-width: 62ch; margin: 0 auto 32px; }
+.mo-wrap .mo-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.mo-wrap .mo-note { color: var(--pe-faint); font-size: var(--pe-fs-sm); line-height: 1.7; margin: 32px auto 0; max-width: 62ch; }
+.mo-cadence { list-style: none; margin: 32px auto 0; padding: 0; max-width: 560px; text-align: left; display: grid; gap: 12px; }
+.mo-cadence li { padding: 16px 20px; }
+.mo-cadence .mo-k { display: block; margin-bottom: 4px; font: 600 12px/1.2 var(--font-body), system-ui, sans-serif; letter-spacing: var(--pe-track-eyebrow); text-transform: uppercase; color: var(--pe-gold); }
+.mo-cadence .mo-v { color: var(--pe-text); line-height: 1.6; }
+.g18 :has(> p[data-phi-reveal][style*="italic"]) { padding-bottom: var(--pe-sp-6) !important; }

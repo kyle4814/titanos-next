@@ -11,6 +11,7 @@ import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
 import { ALL_OFFERS, offersByGroup, availability, AVAILABILITY_TEXT } from "@/lib/offers";
 import { formatAUD } from "@/lib/pricing";
+import "./offers-pe.css";
 import { GROUP_LABELS, formatOfferPrice, type Offer, type OfferGroup } from "@/lib/offers/types";
 
 const TITLE = "Offers: An Offer for Every Business | TITANOS";
@@ -77,7 +78,7 @@ function Card({ o }: { o: Offer }) {
 
 function Grid({ offers }: { offers: Offer[] }) {
   if (offers.length === 0) {
-    return <p style={{ color: "var(--dim)", textAlign: "center" }}>Offers in this section are being added.</p>;
+    return <p className="pe-muted" style={{ textAlign: "center" }}>Offers in this section are being added.</p>;
   }
   return (
     <div className="ox-grid">
@@ -87,12 +88,12 @@ function Grid({ offers }: { offers: Offer[] }) {
 }
 
 function LinkList({ offers }: { offers: Offer[] }) {
-  if (offers.length === 0) return <p style={{ color: "var(--dim)" }}>Nothing in this list yet.</p>;
+  if (offers.length === 0) return <p className="pe-muted">Nothing in this list yet.</p>;
   return (
-    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "6px 18px" }}>
+    <ul className="of-links">
       {offers.map((o) => (
         <li key={o.slug}>
-          <Link href={`/offers/${o.slug}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "underline" }}>{o.name}</Link>
+          <Link href={`/offers/${o.slug}`}>{o.name}</Link>
         </li>
       ))}
     </ul>
@@ -101,7 +102,7 @@ function LinkList({ offers }: { offers: Offer[] }) {
 
 function Chips({ items }: { items: { id: string; label: string }[] }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 28 }}>
+    <div className="of-chips">
       {items.map((i) => (
         <a
           key={i.id}
@@ -126,9 +127,9 @@ export default function OffersHub() {
     source: "Counted from the TITANOS offer catalogue (lib/offers) when this page is built.",
   };
   const groups = Object.keys(GROUP_LABELS) as OfferGroup[];
-  const section = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 } as const;
   return (
     <>
+      <div className="g18">
       <PageHero
         badge="TITANOS · OFFERS"
         title="An offer for every business."
@@ -154,13 +155,13 @@ export default function OffersHub() {
       </SectionReveal>
       <OpenLoop>Not sure where you fit? There are three ways to look below, and the finder up top takes about 30 seconds.</OpenLoop>
 
-      <SectionReveal style={section}>
-        <div className="container-vault">
-          <SectionHeading title="By who you are" lead="Start with the line that sounds most like you." />
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <SectionHeading showKeyhole={false} title="By who you are" lead="Start with the line that sounds most like you." />
           <Chips items={groups.map((g) => ({ id: `group-${g}`, label: GROUP_LABELS[g] }))} />
           {groups.map((g) => (
             <div key={g} id={`group-${g}`} style={{ marginBottom: 40 }}>
-              <h3 style={{ color: "var(--ice)", marginBottom: 14 }}>{GROUP_LABELS[g]}</h3>
+              <h3 className="of-h3">{GROUP_LABELS[g]}</h3>
               <Grid offers={byGroup[g]} />
             </div>
           ))}
@@ -169,15 +170,13 @@ export default function OffersHub() {
 
       <OpenLoop>What if you know the problem but not the product?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={section}>
-        <div className="container-vault">
-          <SectionHeading title="By what you need" lead="Start with the job you want done." />
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <SectionHeading showKeyhole={false} title="By what you need" lead="Start with the job you want done." />
           <Chips items={NEEDS} />
           {NEEDS.map((n) => (
             <div key={n.id} id={n.id} style={{ marginBottom: 28 }}>
-              <h3 style={{ color: "var(--ice)", marginBottom: 10 }}>{n.label}</h3>
+              <h3 className="of-h3">{n.label}</h3>
               <LinkList offers={ALL_OFFERS.filter((o) => n.groups.includes(o.group))} />
             </div>
           ))}
@@ -186,27 +185,26 @@ export default function OffersHub() {
 
       <OpenLoop>And if the number on the invoice is what you care about most?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={section}>
-        <div className="container-vault">
-          <SectionHeading title="By budget" lead="Free first, then upwards. Every price is the price." />
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <SectionHeading showKeyhole={false} title="By budget" lead="Free first, then upwards. Every price is the price." />
           <Chips items={BUDGETS} />
           {BUDGETS.map((b) => (
             <div key={b.id} id={b.id} style={{ marginBottom: 28 }}>
-              <h3 style={{ color: "var(--ice)", marginBottom: 10 }}>{b.label}</h3>
+              <h3 className="of-h3">{b.label}</h3>
               <LinkList offers={ALL_OFFERS.filter(b.test)} />
             </div>
           ))}
         </div>
       </SectionReveal>
 
-      <SectionReveal style={{ ...section, textAlign: "center" }}>
+      <SectionReveal className="pe-section" style={{ textAlign: "center" }}>
         <p style={{ color: "var(--ice)", maxWidth: "var(--maxw-prose)", margin: "0 auto", lineHeight: 1.7 }}>
           Not sure which one fits? Would it be okay to start with the free check, look at what it finds, and
           decide from there? A no is completely welcome.
         </p>
       </SectionReveal>
+      </div>
     </>
   );
 }
