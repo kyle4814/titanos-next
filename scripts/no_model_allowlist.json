@@ -1,4 +1,11 @@
 {
   "_comment": "Reviewed exceptions for scripts/no_model_import_graph.mjs. Each entry: path (repo-relative file), kind (sdk|host), match (the SDK spec or host), reason. Empty means no guest or owner path reaches a model. Adding an entry needs review.",
-  "entries": []
+  "entries": [
+    {
+      "path": "lib/glossary.ts",
+      "kind": "host",
+      "match": "support.anthropic.com",
+      "reason": "2026-11-28 release: a citation URL in a glossary source link (API key best practices, shown as text and a link). No model is called; llmsFacts.ts only imports the glossary term list for llms.txt."
+    }
+  ]
 }
