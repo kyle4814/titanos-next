@@ -13,6 +13,8 @@
  * them, don't rename after publishing (redirect if you must).
  */
 
+import { SEO_POSTS } from "@/lib/blog-seo";
+
 export type ContentBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -26,6 +28,12 @@ export type ContentBlock =
 export type BlogPost = {
   slug: string;
   title: string;
+  /**
+   * Optional search title, 50 characters or fewer so the page can append
+   * " | Titanos" and stay at 60. Keep the long headline in `title` for the H1.
+   * Use `seoTitle ?? title` when building <title> in app/blog/[slug]/page.tsx.
+   */
+  seoTitle?: string;
   /** SEO meta description, keep under 155 chars. */
   description: string;
   /** One-line hook shown on the index card. */
@@ -1515,6 +1523,36 @@ export const POSTS: BlogPost[] = [
     ],
   },
 ];
+
+/** Search titles for posts whose headline is too long for a <title>. Applied below, existing post objects untouched. */
+const SEO_TITLES: Record<string, string> = {
+  "dead-quotes-hidden-revenue": "Dead Quotes: Hidden Revenue in Your Maybe Pile",
+  "trade-software-quote-exports": "ServiceM8, Tradify, simPRO: Quote Data Exports",
+  "privacy-act-small-business-deadline": "Privacy Act 10 December 2026: What to Do",
+  "ai-audit-what-we-actually-find": "What an AI Audit Finds in a Trade Business",
+  "outreach-that-actually-works": "Why Book a Call Gets Ignored in Outreach",
+  "free-scan-legitimacy-check": "Is That Free Security Scan Legitimate?",
+  "ai-receptionist-compliance": "Is an AI Receptionist Privacy Act Compliant?",
+  "invoice-scam-tradies": "Invoice Scams Hitting Australian Tradies",
+  "essential-eight-small-trade-business": "Essential Eight for a One-Van Trade Business",
+  "ai-automation-cost-small-business": "AI Automation Cost for a Small Trade Business",
+  "notifiable-data-breach-scheme-small-business": "Notifiable Data Breaches: The 30-Day Rule",
+  "black-ice-operating-doctrine": "Black Ice: The TITANOS Operating Doctrine",
+  "rm-rf-home-recovery-case-study": "rm -rf /home Recovery Case Study in 8 Minutes",
+  "anz-smb-email-security-double-gap-measured": "No DMARC, No security.txt: ANZ Small Business",
+  "capture-recapture-opportunity-mapping": "Capture-Recapture to Map Public Opportunities",
+  "headless-ai-research-loop-cant-rm-rf-your-home": "A Headless AI Research Loop That Cannot rm -rf",
+  "can-someone-send-email-pretending-to-be-my-business": "Can Someone Fake Email From My Business?",
+  "the-bank-details-email-accountants-and-bookkeepers": "The We Have Changed Banks Email Scam",
+  "settlement-day-scam-property-and-conveyancing": "Settlement Day Bank Details Scam: Conveyancing",
+};
+for (const post of POSTS) {
+  const t = SEO_TITLES[post.slug];
+  if (t && !post.seoTitle) post.seoTitle = t;
+}
+
+// SEO push 2026-11-28: long-form posts live in lib/blog-seo/ (one file per post).
+POSTS.push(...SEO_POSTS);
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return POSTS.find((p) => p.slug === slug);

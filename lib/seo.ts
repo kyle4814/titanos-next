@@ -22,6 +22,18 @@ export function clipDescription(text: string, max = 160): string {
   return head.slice(0, head.lastIndexOf(" ")).replace(/[,;:\s]+$/, "") + "...";
 }
 
+/** Fit "Name | TITANOS" inside Google's ~60 character title display: drop the suffix first, then clip on a word. */
+export function fitTitle(name: string, suffix = " | TITANOS", max = 60): string {
+  if (name.length + suffix.length <= max) return name + suffix;
+  if (name.length <= max) return name;
+  const head = name.slice(0, max + 1);
+  const cut = head.lastIndexOf(" ");
+  return (cut > 20 ? head.slice(0, cut) : name.slice(0, max)).replace(/[,;:\s-]+$/, "");
+}
+
+/** The one RSS feed we advertise (feed.xml is kept for old subscribers but not advertised). */
+export const FEED_URL = `${SITE}/rss.xml`;
+
 /**
  * Complete a page's Metadata so every route carries canonical, Open Graph
  * (with the per-page generated card) and Twitter tags. Next replaces a
@@ -37,7 +49,11 @@ export function withSeo(path: string, base: Metadata): Metadata {
   return {
     ...base,
     description,
-    alternates: { ...base.alternates, canonical: base.alternates?.canonical ?? url },
+    alternates: {
+      ...base.alternates,
+      canonical: base.alternates?.canonical ?? url,
+      types: { "application/rss+xml": [{ url: FEED_URL, title: "TITANOS" }], ...(base.alternates?.types ?? {}) },
+    },
     openGraph: {
       siteName: "TITANOS",
       locale: "en_AU",

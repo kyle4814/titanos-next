@@ -4,7 +4,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { SITE } from "@/lib/seo";
+import { offerIndexable, SECTOR_PAGES_INDEXABLE } from "@/lib/seo-indexing";
 import { POSTS } from "@/lib/blog";
+import { GUIDES } from "@/lib/guides";
 import { ALL_OFFERS } from "@/lib/offers";
 import { CASES } from "@/lib/caseStudies";
 import { PRODUCTS } from "@/lib/products";
@@ -44,7 +46,25 @@ const PRIORITY: Record<string, number> = {
 };
 const FREQ: Record<string, SiteRoute["changeFrequency"]> = { "/": "weekly", "/blog": "weekly", "/offers": "weekly", "/compliance": "weekly" };
 
+let headDate: Date | undefined | null = null;
+function repoHeadDate(): Date | undefined {
+  if (headDate !== null) return headDate;
+  try {
+    const out = execFileSync("git", ["log", "-1", "--format=%cI"], { cwd: process.cwd(), stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
+    headDate = out ? new Date(out) : undefined;
+  } catch {
+    headDate = undefined;
+  }
+  return headDate;
+}
+
+// Last commit touching the file or folder; falls back to the commit date of the checked-out revision (a real date
+// the site content was last changed, stable between builds of the same commit) so every URL carries a lastmod.
 function lastCommit(rel: string): Date | undefined {
+  return lastCommitExact(rel) ?? repoHeadDate();
+}
+
+function lastCommitExact(rel: string): Date | undefined {
   try {
     const out = execFileSync("git", ["log", "-1", "--format=%cI", "--", rel], { cwd: process.cwd(), stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
     return out ? new Date(out) : undefined;
@@ -76,16 +96,17 @@ export function indexableRoutes(): SiteRoute[] {
     url: `${SITE}${p === "/" ? "/" : p}`,
     priority: PRIORITY[p] ?? 0.6,
     changeFrequency: FREQ[p] ?? "monthly",
-    lastModified: file ? lastCommit(file) : undefined,
+    lastModified: file ? lastCommit(file) : repoHeadDate(),
     ...extra,
   });
   const out: SiteRoute[] = staticRoutes().filter((r) => !r.noindex).map((r) => mk(r.route, r.file));
   for (const sp of STATIC_PAGES) out.push(mk(sp.path, sp.file, { priority: sp.priority }));
-  for (const o of ALL_OFFERS) out.push(mk(`/offers/${o.slug}`, "lib/offers", { priority: 0.7 }));
+  for (const o of ALL_OFFERS.filter(offerIndexable)) out.push(mk(`/offers/${o.slug}`, "lib/offers", { priority: 0.7 }));
   for (const p of POSTS) out.push(mk(`/blog/${p.slug}`, undefined, { priority: 0.6, lastModified: new Date(p.updated || p.date) }));
+  for (const g of GUIDES) out.push(mk(`/guides/${g.slug}`, undefined, { priority: 0.8, lastModified: new Date(g.updated) }));
   for (const c of CASES) out.push(mk(`/case-studies/${c.slug}`, "lib/caseStudies.ts", { priority: 0.7 }));
   for (const p of PRODUCTS) out.push(mk(`/products/${p.slug}`, "lib/products", { priority: 0.6 }));
-  for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
+  if (SECTOR_PAGES_INDEXABLE) for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
   for (const d of DOSSIERS) if (d.published) out.push(mk(`/black-ice/dossiers/${d.slug}`, "lib/black-ice", { priority: 0.7 }));
   // Consent-gated: the page file always reads as noindex (its robots is conditional), so it is added only when Kyle flips the switch.
   if (arianceVisible) out.push(mk(ariancePath, "lib/case-studies", { priority: 0.8 }));

@@ -45,11 +45,11 @@ ok(dup.length === 0, `no two indexable routes share a title${dup.length ? ": " +
 // structured data parses, and uses the types the spec names
 const types = new Set();
 let badLd = 0;
-for (const r of rows) for (const j of r.jsonld) { try { const o = JSON.parse(j); types.add(o["@type"]); } catch { badLd++; } }
+for (const r of rows) for (const j of r.jsonld) { try { const o = JSON.parse(j); for (const t of [].concat(o["@type"])) types.add(t); } catch { badLd++; } }
 ok(badLd === 0, "every JSON-LD block parses");
 for (const t of ["Organization", "WebSite", "Product", "FAQPage", "Article"]) ok(types.has(t), `JSON-LD ${t} emitted somewhere`);
 const home = rows.find((r) => r.route === "/");
-ok(home.jsonld.filter((j) => JSON.parse(j)["@type"] === "Organization").length === 1, "home has exactly one Organization block");
+ok(home.jsonld.filter((j) => [].concat(JSON.parse(j)["@type"]).includes("Organization")).length === 1, "home has exactly one Organization block");
 
 // sitemap = exactly the indexable routes
 const sm = fs.readFileSync(path.join(OUT, "sitemap.xml"), "utf8");
