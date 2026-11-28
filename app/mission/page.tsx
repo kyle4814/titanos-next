@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
-import { GlowCard } from "@/components/house";
+import "./mission.css";
 import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
@@ -21,18 +20,6 @@ const baseMetadata: Metadata = {
 };
 
 export const metadata: Metadata = withSeo("/mission", baseMetadata);
-
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "16px 18px",
-};
-const A: CSSProperties = { color: "var(--gold)" };
 
 const GIVE: [string, string][] = [
   ["Children", "First in line: support for kids who need it, through registered charities and programs."],
@@ -56,69 +43,82 @@ export default function Mission() {
         title="Give people their time back, and build the company that proves it."
         sub="TITANOS exists to prove AI can hand people their hours back instead of taking their jobs, and to grow fast enough to prove it in every country."
       />
-      <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div className="w2a-measure" style={WRAP}>
-          <FlexNumber f={FLEX.market} />
-          <p style={BODY}>
-            Method: the ABS count of actively trading Australian businesses with 5 to 19 staff, June 2026. Each one is carrying hours of
-            repetitive work, and that is the time we want to hand back. We only use public records, we touch nothing without being asked,
-            nobody is replaced, and your IT provider stays in charge.
-          </p>
-        </div>
-      </section>
+      <div className="pe-page pe-page--narrow">
+        <section className="pe-section">
+          <div className="w2a-measure">
+            <FlexNumber f={FLEX.market} />
+            <p className="pe-muted" style={{ lineHeight: 1.75, margin: "14px 0 0" }}>
+              Method: the ABS count of actively trading Australian businesses with 5 to 19 staff, June 2026. Each one is carrying hours of
+              repetitive work, and that is the time we want to hand back. We only use public records, we touch nothing without being asked,
+              nobody is replaced, and your IT provider stays in charge.
+            </p>
+          </div>
+        </section>
+      </div>
       <OpenLoop>If that much time could come back, where should the money we earn go?</OpenLoop>
-      <section style={SECTION}>
-        <div className="w2a-measure" style={WRAP}>
-          <h2 style={H}>Where the money goes as we grow</h2>
-          <p style={BODY}>
+      <div className="pe-page pe-page--narrow">
+        <section className="pe-section">
+          <p className="pe-eyebrow-line">The plan</p>
+          <h2>Where the money goes as we grow</h2>
+          <p className="pe-prose">
             For the first two years, about <b>90% of what TITANOS earns goes straight back into the company</b> (PROPOSED: the founder&apos;s stated plan, not a result and not a guarantee): compute,
             people, products and new countries, so the mission arrives years sooner. The founder lives on the rest. Once
             TITANOS is established as a global company, a growing share goes to the people below.
           </p>
+        </section>
 
-          <OpenLoop>And who is it for, exactly?</OpenLoop>
-          <h2 style={H}>Who it goes to</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
+        <OpenLoop>And who is it for, exactly?</OpenLoop>
+        <section className="pe-section">
+          <p className="pe-eyebrow-line">The giving</p>
+          <h2>Who it goes to</h2>
+          <div className="pe-grid" style={{ marginTop: 20 }}>
             {GIVE.map(([t, d]) => (
-              <GlowCard key={t} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 18, fontWeight: 600 }}>{t}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.6, marginTop: 4 }}>{d}</div>
-              </GlowCard>
+              <div key={t} className="pe-card pe-card--pad">
+                <h3 style={{ color: "var(--pe-gold-hi)", fontSize: 18, margin: 0 }}>{t}</h3>
+                <p className="pe-muted" style={{ fontSize: 15, lineHeight: 1.6, margin: "8px 0 0" }}>{d}</p>
+              </div>
             ))}
           </div>
+        </section>
 
-          <h2 style={H}>Why the numbers can get this big</h2>
-          <p style={BODY}>
+        <section className="pe-section">
+          <p className="pe-eyebrow-line">The numbers</p>
+          <h2>Why the numbers can get this big</h2>
+          <p className="pe-prose">
             The world economy is about US$110 trillion a year (ESTIMATE, IMF World Economic Outlook, nominal world GDP). At 3% growth it
             doubles in about 23 years; at 7%, in about 10 (MODELLED arithmetic). Every extra point of productivity growth, held over time, is worth more than US$1 trillion a year.
             AI that gives people their hours back moves that growth rate, and that is the engine behind the giving.
           </p>
+        </section>
 
-          <h2 style={H}>The rules we hold ourselves to</h2>
-          <ul style={{ ...BODY, paddingLeft: 20 }}>
+        <section className="pe-section">
+          <p className="pe-eyebrow-line">Our rules</p>
+          <h2>The rules we hold ourselves to</h2>
+          <ul className="pe-prose" style={{ marginTop: 14 }}>
             {RULES.map((r) => (
-              <li key={r} style={{ marginBottom: 8 }}>
+              <li key={r} style={{ marginBottom: 10 }}>
                 {r}
               </li>
             ))}
           </ul>
-
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.75 }}>
+          <p className="pe-muted" style={{ fontSize: 14, lineHeight: 1.7 }}>
             This is the founder&apos;s stated plan and direction, not a promise of any amount by any date. What has
             actually been given will be listed here, with receipts, as it happens.
           </p>
+        </section>
 
-          <p style={{ ...BODY, textAlign: "center", marginTop: 30 }}>
-            Would it be okay if we started with a conversation, whether you want to help, partner, or point us at a cause that needs it? Or <a href="/audit" style={{ color: "var(--gold)" }}>book a free consultation</a>. A no is welcome.
+        <section className="pe-section" style={{ textAlign: "center" }}>
+          <p className="pe-lead" style={{ margin: "0 auto 24px" }}>
+            Would it be okay if we started with a conversation, whether you want to help, partner, or point us at a cause that needs it? Or <a href="/audit">book a free consultation</a>. A no is welcome.
           </p>
-          <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <AnimatedButton href="/contact">Start a conversation</AnimatedButton>
             <AnimatedButton href="/trust" variant="secondary">
               Trust
             </AnimatedButton>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

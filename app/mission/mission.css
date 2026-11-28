@@ -1,0 +1,2 @@
+/* Page-local heading scale; tokens come from app/site-system.css. */
+.pe-page .pe-section > h2 { font-size: var(--pe-fs-h2); line-height: 1.12; margin: 0 0 18px; }
