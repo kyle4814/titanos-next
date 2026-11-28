@@ -211,3 +211,4 @@ node --experimental-strip-types scripts/test_dmarc_setup.mjs out
 node --experimental-strip-types --no-warnings scripts/test_trade_problems.mjs
 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_seo_meta_limits.mjs
 node --import ./scripts/alias_loader.mjs --experimental-strip-types --no-warnings scripts/test_schema_jsonld.mjs
+node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_internal_links.mjs

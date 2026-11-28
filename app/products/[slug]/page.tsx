@@ -11,6 +11,7 @@ import FaqItem from "@/components/FaqItem";
 import { PRODUCTS, getProduct, formatProductPrice, productBuyHref, productPriceAud } from "@/lib/products";
 import JsonLd from "@/components/JsonLd";
 import { product, faqPage, breadcrumbs } from "@/lib/jsonld";
+import RelatedReading from "@/components/seo/RelatedReading";
 import type { Product } from "@/lib/products/types";
 
 export const dynamicParams = false;
@@ -134,6 +135,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 14 }}>General information, not legal advice.</p>
         )}
       </Block>
+
+      <RelatedReading path={`/products/${p.slug}`} />
 
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
         <p style={{ color: "var(--ice)", marginBottom: 18 }}>
