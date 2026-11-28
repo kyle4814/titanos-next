@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
-import { GlowCard } from "@/components/house";
-import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
@@ -28,17 +26,12 @@ const baseMetadata: Metadata = {
 
 export const metadata: Metadata = withSeo("/costs", baseMetadata);
 
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "16px 18px",
-};
-const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15 };
+const SECTION: CSSProperties = { padding: "var(--pe-sp-6) 0", position: "relative", zIndex: 2 };
+const WRAP: CSSProperties = { maxWidth: 860, margin: "0 auto" };
+const H: CSSProperties = { fontSize: "var(--pe-fs-h2)", margin: "var(--pe-sp-7) 0 var(--pe-sp-3)", paddingTop: "var(--pe-sp-6)", borderTop: "1px solid var(--pe-line)" };
+const BODY: CSSProperties = { color: "var(--pe-mute)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
+const CARD: CSSProperties = {};
+const CELL: CSSProperties = { padding: "12px 14px", borderBottom: "1px solid var(--pe-line)", color: "var(--pe-text)", fontSize: 15 };
 
 const SPLIT: [string, string, string][] = [
   ["99%", "plain code", "Anything that repeats becomes ordinary code once it is proven. Code costs nothing to run again. ESTIMATE: a design ratio, not a measured share."],
@@ -94,7 +87,7 @@ export default function Costs() {
       />
       <Provenance route="/costs" />
       <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div className="w2a-measure" style={WRAP}>
+        <div className="pe-page" style={{ maxWidth: 860 }}>
           <FlexNumber f={FLEX.costPerJob} />
           <p style={BODY}>
             Method: the same 25 jobs run before and after we turned proven steps into plain code, with the cost read from our own usage
@@ -105,14 +98,14 @@ export default function Costs() {
       </section>
       <OpenLoop>If the same job got that much cheaper, what else is going into the price?</OpenLoop>
       <section style={SECTION}>
-        <div className="w2a-measure" style={WRAP}>
+        <div className="pe-page" style={{ maxWidth: 860 }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
             {SPLIT.map(([n, l, d]) => (
-              <GlowCard key={l} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontWeight: 600, marginBottom: 6 }}>{l}</div>
-                <div style={{ color: "var(--ice)", opacity: 0.8, fontSize: 14, lineHeight: 1.6 }}>{d}</div>
-              </GlowCard>
+              <div key={l} className="pe-card pe-card--pad">
+                <div style={{ color: "var(--pe-gold-hi)", fontSize: 28, fontWeight: 700 }}>{n}</div>
+                <div style={{ color: "#fff", fontWeight: 600, marginBottom: 6 }}>{l}</div>
+                <div style={{ color: "var(--pe-mute)", fontSize: 14, lineHeight: 1.6 }}>{d}</div>
+              </div>
             ))}
           </div>
 
@@ -125,12 +118,12 @@ export default function Costs() {
           </p>
 
           <h2 style={H}>The four levers that keep the AI bill tiny</h2>
-          <div tabIndex={0} style={{ overflowX: "auto" }}>
+          <div className="pe-table-wrap" tabIndex={0}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}>
               <thead>
                 <tr>
                   {["Lever", "What we do", "What it saves"].map((h) => (
-                    <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>
+                    <th key={h} style={{ ...CELL, textAlign: "left" }}>
                       {h}
                     </th>
                   ))}
@@ -149,7 +142,7 @@ export default function Costs() {
               </tbody>
             </table>
           </div>
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.7, marginTop: 8 }}>
+          <p style={{ ...BODY, fontSize: 13, color: "var(--pe-faint)", marginTop: 8 }}>
             Prices are Anthropic&apos;s published API rates for Claude, in US dollars, checked October 2026.
           </p>
 
@@ -163,11 +156,11 @@ export default function Costs() {
           </p>
           <p style={BODY}>
             Our own engineering runs on about <b>{aud("compute_today_aud_month")} a month</b> in tools. See what that builds on the{" "}
-            <a href="/case-studies" style={{ color: "var(--gold)" }}>
+            <a href="/case-studies">
               case studies
             </a>{" "}
             and{" "}
-            <a href="/engineering" style={{ color: "var(--gold)" }}>
+            <a href="/engineering">
               engineering
             </a>{" "}
             pages.
@@ -194,14 +187,14 @@ export default function Costs() {
             </li>
           </ul>
 
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.7 }}>
+          <p style={{ ...BODY, fontSize: 13, color: "var(--pe-faint)" }}>
             The AU$20 to AU$50 range is our typical estimate for a settled system, not a quote; your proposal names the
             expected figure for your setup. Sources:{" "}
-            <a href="https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/employee-earnings" style={{ color: "var(--gold)" }}>
+            <a href="https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/employee-earnings">
               ABS employee earnings
             </a>
             ,{" "}
-            <a href="https://au.hudson.com/salary-guide-cyber-security/" style={{ color: "var(--gold)" }}>
+            <a href="https://au.hudson.com/salary-guide-cyber-security/">
               Hudson cyber security salary guide
             </a>
             .
@@ -220,13 +213,13 @@ export default function Costs() {
           </ul>
 
           <h2 style={H}>The main offers</h2>
-          <div tabIndex={0} style={{ overflowX: "auto" }}>
+          <div className="pe-table-wrap" tabIndex={0}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
               <tbody>
                 {CORE.map(([n, p, href]) => (
                   <tr key={n}>
                     <td style={CELL}>
-                      <a href={href} style={{ color: "var(--gold)" }}>
+                      <a href={href}>
                         {n}
                       </a>
                     </td>
@@ -246,13 +239,13 @@ export default function Costs() {
           <SavingsCalculator />
 
           <h3 style={{ ...H, fontSize: 18 }}>Value of hours given back, a year</h3>
-          <div tabIndex={0} style={{ overflowX: "auto" }}>
+          <div className="pe-table-wrap" tabIndex={0}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 480 }}>
               <thead>
                 <tr>
-                  <th style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>Team size</th>
+                  <th style={{ ...CELL, textAlign: "left" }}>Team size</th>
                   {HOURS_OPTS.map((h) => (
-                    <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "right" }}>
+                    <th key={h} style={{ ...CELL, textAlign: "right" }}>
                       {h} hr{h > 1 ? "s" : ""} a week each
                     </th>
                   ))}
@@ -272,7 +265,7 @@ export default function Costs() {
               </tbody>
             </table>
           </div>
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.7, marginTop: 8 }}>
+          <p style={{ ...BODY, fontSize: 13, color: "var(--pe-faint)", marginTop: 8 }}>
             Working: people × hours a week × {WEEKS} working weeks × AU${HOURLY}. For example, 20 people × 2 hours × {WEEKS}{" "}
             weeks = 1,840 hours, worth {formatAUD(Math.round(yearValue(20, 2)))} a year: about five and a half times one{" "}
             {formatAUD(PRICING.AI_GROWTH_PARTNER * 12)} year of the entry AI retainer. These are scenarios you choose, not
@@ -295,8 +288,8 @@ export default function Costs() {
           </p>
           {(Object.keys(GROUP_LABELS) as OfferGroup[]).map((g) =>
             groups[g].length ? (
-              <details key={g} style={{ ...CARD, marginBottom: 10 }}>
-                <summary style={{ color: "var(--gold)", cursor: "pointer", fontSize: 17 }}>
+              <details key={g} className="pe-card pe-card--pad" style={{ marginBottom: 10 }}>
+                <summary style={{ color: "var(--pe-gold-hi)", cursor: "pointer", fontSize: 17 }}>
                   {GROUP_LABELS[g]} ({groups[g].length})
                 </summary>
                 <div style={{ marginTop: 10 }}>
@@ -312,10 +305,10 @@ export default function Costs() {
                         flexWrap: "wrap",
                       }}
                     >
-                      <a href={`/offers/${o.slug}`} style={{ color: "var(--ice)", flex: "1 1 220px" }}>
+                      <a href={`/offers/${o.slug}`} style={{ color: "var(--pe-text)", flex: "1 1 220px" }}>
                         {o.name}
                       </a>
-                      <span style={{ color: "var(--gold)", whiteSpace: "nowrap" }}>{formatOfferPrice(o)}</span>
+                      <span style={{ color: "var(--pe-gold-hi)", whiteSpace: "nowrap" }}>{formatOfferPrice(o)}</span>
                     </div>
                   ))}
                 </div>
