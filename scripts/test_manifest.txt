@@ -192,3 +192,4 @@ node scripts/test_declaration_e2e.mjs out
 node scripts/test_xray.mjs
 node scripts/test_xray_lint.mjs
 node scripts/test_home_redesign.mjs
+node --experimental-strip-types --no-warnings scripts/test_missed_call_calculator.mjs out
