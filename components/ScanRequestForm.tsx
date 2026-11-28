@@ -132,10 +132,10 @@ export default function ScanRequestForm() {
       >
         <div
           style={{
-            fontFamily: "var(--font-display), Georgia, serif",
+            fontFamily: "var(--font-body)",
+            fontWeight: 700,
             color: "var(--gold)",
             fontSize: "var(--fs-lg)",
-            letterSpacing: "0.06em",
             marginBottom: 12,
           }}
         >
@@ -154,8 +154,8 @@ export default function ScanRequestForm() {
       noValidate
       style={{
         background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
-        borderRadius: "var(--radius-md)",
+        border: "1px solid var(--pe-line-gold)",
+        borderRadius: "var(--pe-r-card)",
         padding: "var(--pad-card)",
         display: "flex",
         flexDirection: "column",
@@ -215,14 +215,14 @@ export default function ScanRequestForm() {
             justifyContent: "center",
             padding: "14px 28px",
             minHeight: 48,
-            borderRadius: "var(--radius-sm)",
-            border: "1px solid var(--gold)",
-            color: status === "submitting" ? "var(--dim)" : "var(--gold)",
-            background: "transparent",
-            fontFamily: "var(--font-display), Georgia, serif",
-            fontStyle: "italic",
+            borderRadius: "var(--pe-r-md)",
+            border: "1px solid var(--pe-gold)",
+            color: status === "submitting" ? "var(--pe-mute)" : "#1a1405",
+            background: status === "submitting" ? "var(--pe-card2)" : "var(--pe-gold-grad)",
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
             fontSize: "var(--fs-sm)",
-            letterSpacing: "0.08em",
+            letterSpacing: "0.04em",
             textTransform: "uppercase",
             cursor: status === "submitting" ? "wait" : "pointer",
           }}
@@ -308,7 +308,7 @@ function Field({
   };
   const fieldStyle: React.CSSProperties = {
     width: "100%",
-    background: "var(--vault-bg, #0a0a0a)",
+    background: "var(--pe-card2)",
     border: `1px solid ${error ? "var(--warn)" : "var(--border)"}`,
     borderRadius: "var(--radius-sm)",
     padding: "12px 14px",

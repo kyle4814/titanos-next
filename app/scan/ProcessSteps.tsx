@@ -19,15 +19,7 @@ export type ProcStep = {
 
 export default function ProcessSteps({ steps }: { steps: ProcStep[] }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-        gap: 18,
-        maxWidth: "var(--maxw-wide)",
-        margin: "0 auto",
-      }}
-    >
+    <div className="pe-grid g17-steps">
       {steps.map((s, i) => (
         <Card key={s.num} step={s} index={i} />
       ))}
@@ -47,13 +39,7 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
       initial={reduce ? false : { opacity: 0, y: 30 }}
       animate={reduce || inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: reduce ? 0 : 0.55, ease: [0, 0, 0.2, 1], delay: reduce ? 0 : delay }}
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
-        borderRadius: "var(--radius-md)",
-        padding: "28px 22px",
-        position: "relative",
-      }}
+      className="pe-card pe-card--pad g17-card"
     >
       <motion.div
         aria-hidden="true"
@@ -64,32 +50,15 @@ function Card({ step, index }: { step: ProcStep; index: number }) {
           ease: [0.4, 0, 0.2, 1],
           delay: reduce ? 0 : delay + 0.2,
         }}
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-h3)",
-          letterSpacing: "0.05em",
-          marginBottom: 8,
-          lineHeight: 1,
-          display: "inline-block",
-          transformOrigin: "left center",
-        }}
+        className="g17-num"
+        style={{ display: "inline-block", transformOrigin: "left center" }}
       >
         {step.num}
       </motion.div>
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-sm)",
-          letterSpacing: "0.08em",
-          marginBottom: 10,
-          lineHeight: 1.4,
-        }}
-      >
+      <h3 className="g17-h3">
         {step.title}
       </h3>
-      <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.65 }}>
+      <p className="g17-body">
         {step.body}
       </p>
     </motion.article>
