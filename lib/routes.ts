@@ -11,6 +11,7 @@ import { PRODUCTS } from "@/lib/products";
 import { SECTORS } from "@/lib/site-data";
 import { DOSSIERS } from "@/lib/black-ice/dossiers";
 import { arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
+import { PROVIDERS as DMARC_PROVIDERS, providerPath as dmarcProviderPath } from "@/lib/dmarcSetup";
 
 export type SiteRoute = { path: string; url: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" | "yearly"; lastModified?: Date };
 
@@ -87,6 +88,7 @@ export function indexableRoutes(): SiteRoute[] {
   for (const p of PRODUCTS) out.push(mk(`/products/${p.slug}`, "lib/products", { priority: 0.6 }));
   for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
   for (const d of DOSSIERS) if (d.published) out.push(mk(`/black-ice/dossiers/${d.slug}`, "lib/black-ice", { priority: 0.7 }));
+  for (const d of DMARC_PROVIDERS) out.push(mk(dmarcProviderPath(d.slug), "lib/dmarcSetup.ts", { priority: 0.6 }));
   // Consent-gated: the page file always reads as noindex (its robots is conditional), so it is added only when Kyle flips the switch.
   if (arianceVisible) out.push(mk(ariancePath, "lib/case-studies", { priority: 0.8 }));
   return out.sort((a, b) => b.priority - a.priority || a.path.localeCompare(b.path));
