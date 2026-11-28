@@ -1,10 +1,11 @@
 "use client";
 
+import "@/app/app/portal.css";
+
 import { useCallback, useEffect, useState } from "react";
 import { browserApi, call, errorText, signOut, signedIn } from "@/lib/portal";
 import { PENDING_RETRY_LABEL, PENDING_STILL_TEXT, submitRefund } from "@/lib/refund";
 
-const btn = { padding: "8px 14px", background: "transparent", color: "var(--ice)", border: "1px solid var(--border)", borderRadius: 8, cursor: "pointer" } as const;
 const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string));
 
 export default function BillingClient() {
@@ -33,15 +34,15 @@ export default function BillingClient() {
   const del = () => { if (window.confirm("Delete your account? Subscriptions are cancelled and your details are erased. Invoices are kept without your email, as tax law requires.")) act(async () => { await call(browserApi(), "DELETE", "/account", { confirm: "DELETE" }); await signOut(browserApi()); setData(null); return "Account deleted."; }); };
 
   return (
-    <main style={{ padding: "100px 20px 80px", maxWidth: 760, margin: "0 auto", color: "var(--text)" }}>
-      <h1 style={{ color: "var(--ice)" }}>Billing</h1>
+    <main className="pp-main pp-main--narrow">
+      <h1>Billing</h1>
       <p><a href="/app/keys">API keys for software and agents</a></p>
       {msg && <p role="status">{msg}</p>}
       {pending && (
-        <div role="status" data-testid="refund-pending" style={{ border: "1px solid var(--border)", borderRadius: 10, padding: 14, marginBottom: 14 }}>
+        <div role="status" data-testid="refund-pending" className="pp-row pp-row--live">
           <p>{pending.text}</p>
           {pending.refundId && <p>Refund reference: <code>{pending.refundId}</code></p>}
-          <button style={btn} onClick={() => refund(pending.purchaseId, true)}>{PENDING_RETRY_LABEL}</button>
+          <button className="pe-btn pe-btn--dark pe-btn--sm" onClick={() => refund(pending.purchaseId, true)}>{PENDING_RETRY_LABEL}</button>
         </div>
       )}
       {data && (<>
@@ -50,11 +51,11 @@ export default function BillingClient() {
         {data.purchases.map((p: any) => {
           const sub = data.subscriptions.find((s: any) => s.purchaseId === p.id);
           return (
-            <div key={p.id} style={{ border: "1px solid var(--border)", borderRadius: 10, padding: 14, marginBottom: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+            <div key={p.id} className="pp-row" style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
               <span>{p.productId.replace(/_/g, " ")} · AU${(p.amountCents / 100).toFixed(2)} · {p.status}{sub?.cancelAt ? ` · ends ${new Date(sub.cancelAt).toLocaleDateString("en-AU")}` : ""}</span>
               <span style={{ display: "flex", gap: 8 }}>
-                {sub && !sub.cancelAt && !sub.cancelledAt && <button style={btn} onClick={() => cancel(sub.id)}>Cancel</button>}
-                {p.status === "paid" && <button style={btn} onClick={() => refund(p.id)}>Request refund</button>}
+                {sub && !sub.cancelAt && !sub.cancelledAt && <button className="pe-btn pe-btn--dark pe-btn--sm" onClick={() => cancel(sub.id)}>Cancel</button>}
+                {p.status === "paid" && <button className="pe-btn pe-btn--dark pe-btn--sm" onClick={() => refund(p.id)}>Request refund</button>}
               </span>
             </div>
           );
@@ -62,9 +63,9 @@ export default function BillingClient() {
         {data.portalUrl && <p><a href={data.portalUrl}>Update your card on Stripe</a></p>}
         <h2>Invoices</h2>
         {invoices.length === 0 && <p>No invoices yet.</p>}
-        {invoices.map((i) => (<p key={i.id}><button style={btn} onClick={() => invoice(i.id)}>{i.number}</button> AU${(i.amountCents / 100).toFixed(2)}</p>))}
+        {invoices.map((i) => (<p key={i.id}><button className="pe-btn pe-btn--dark pe-btn--sm" onClick={() => invoice(i.id)}>{i.number}</button> AU${(i.amountCents / 100).toFixed(2)}</p>))}
         <h2>Your data</h2>
-        <p style={{ display: "flex", gap: 10 }}><button style={btn} onClick={exportData}>Download my data</button><button style={{ ...btn, color: "#ff6b6b" }} onClick={del}>Delete my account</button></p>
+        <p style={{ display: "flex", gap: 10 }}><button className="pe-btn pe-btn--dark pe-btn--sm" onClick={exportData}>Download my data</button><button className="pe-btn pe-btn--dark pe-btn--sm pe-btn--danger" onClick={del}>Delete my account</button></p>
       </>)}
     </main>
   );
