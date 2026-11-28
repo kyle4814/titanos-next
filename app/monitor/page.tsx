@@ -5,12 +5,13 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
-import { Bento, GlowFrame } from "@/components/offers/Bento";
+import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
 import MonitorCheckoutButton from "@/components/MonitorCheckoutButton";
 import Testimonials from "@/components/Testimonials";
 import { PRICING, DISPLAY } from "@/lib/pricing";
-import { Inscription, SystemLabel, DepthIndex, TempleFrame, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Inscription, OperatorNote, OmegaSeal } from "@/components/Myth";
+import "./monitor-pe.css";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import type { Flex } from "@/lib/flex";
@@ -140,6 +141,7 @@ export default function MonitorPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
+      <div className="g18">
       <PageHero
         badge="TITANOS MONITOR · RECURRING"
         title="Your business's security picture changes every month. Here is a quiet way to keep an eye on it."
@@ -211,11 +213,11 @@ export default function MonitorPage() {
       <div className="divider-gold" />
 
       {/* WHAT YOU GET */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <DepthIndex index={1} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The monthly email</SystemLabel>
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <p className="pe-eyebrow-line" style={{ textAlign: "center" }}>01 / 04 · The monthly email</p>
           <SectionHeading
+            showKeyhole={false}
             title="What Lands in Your Inbox Each Month"
             lead="One email a month, on the same date. If it is not worth reading, you stop it."
           />
@@ -230,11 +232,11 @@ export default function MonitorPage() {
       <div className="divider-gold" />
 
       {/* WHAT IT IS NOT */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <DepthIndex index={2} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The refusal list</SystemLabel>
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <p className="pe-eyebrow-line" style={{ textAlign: "center" }}>02 / 04 · The refusal list</p>
           <SectionHeading
+            showKeyhole={false}
             title="What It Is Not"
             lead="The opt-out is built in. The product is the email, and there is no sales funnel wrapped around it."
           />
@@ -253,20 +255,16 @@ export default function MonitorPage() {
       <div className="divider-gold" />
 
       {/* PRICING CARD */}
-      <SectionReveal id="pricing" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <DepthIndex index={3} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The commitment</SystemLabel>
+      <SectionReveal id="pricing" className="pe-section">
+        <div className="pe-page">
+          <p className="pe-eyebrow-line" style={{ textAlign: "center" }}>03 / 04 · The commitment</p>
           <SectionHeading
+            showKeyhole={false}
             title="One Price. Cancel in One Click."
             lead="Monthly or annual. Annual saves about two months. No contract either way."
           />
-          <GlowFrame><TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <article
-              style={{
-                textAlign: "center",
-              }}
-            >
+          <div className="pe-card pe-card--gold pe-card--pad mo-price">
+            <article>
               <div
                 style={{
                   fontFamily: "var(--font-display), Georgia, serif",
@@ -337,7 +335,7 @@ export default function MonitorPage() {
                 </AnimatedButton>
               </div>
             </article>
-          </TempleFrame></GlowFrame>
+          </div>
         </div>
       </SectionReveal>
 
@@ -367,11 +365,10 @@ export default function MonitorPage() {
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <DepthIndex index={4} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
-          <SectionHeading title="Questions I Get" lead="The ones people ask before they subscribe, answered here first." />
+      <SectionReveal id="faq" className="pe-section">
+        <div className="pe-page">
+          <p className="pe-eyebrow-line" style={{ textAlign: "center" }}>04 / 04 · Straight answers</p>
+          <SectionHeading showKeyhole={false} title="Questions I Get" lead="The ones people ask before they subscribe, answered here first." />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
             <FaqItem question="What's actually in the monthly email?">
               A plain-English summary with three sections: what&apos;s new since last month
@@ -427,14 +424,10 @@ export default function MonitorPage() {
           zIndex: 2,
         }}
       >
-        <h2
+        <h2 className="mo-final"
           style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
             fontSize: "var(--fs-h2)",
-            fontWeight: 700,
             marginBottom: 14,
-            letterSpacing: "0.05em",
           }}
         >
           Would it be okay if I kept an eye on it for you?
@@ -477,6 +470,7 @@ export default function MonitorPage() {
         ]}
       />
       <FreeStart />
+      </div>
     </>
   );
 }

@@ -26,7 +26,7 @@ export default function MonitorPortalLink() {
     return (
       <p
         style={{
-          color: "var(--dim)",
+          color: "var(--pe-mute)",
           fontSize: "var(--fs-sm)",
           lineHeight: 1.6,
         }}
@@ -34,7 +34,7 @@ export default function MonitorPortalLink() {
         Reply to your Stripe receipt or email{" "}
         <a
           href={`mailto:${SITE.KYLE_EMAIL}`}
-          style={{ color: "var(--ice)", textDecoration: "underline" }}
+          style={{ textDecoration: "underline" }}
         >
           {SITE.KYLE_EMAIL}
         </a>{" "}
@@ -47,19 +47,7 @@ export default function MonitorPortalLink() {
     <a
       href={href}
       data-analytics="monitor-portal-link"
-      style={{
-        display: "inline-flex",
-        padding: "14px 28px",
-        borderRadius: "var(--radius-sm)",
-        border: "1px solid var(--gold)",
-        color: "var(--gold)",
-        fontFamily: "var(--font-display), Georgia, serif",
-        fontStyle: "italic",
-        fontSize: "var(--fs-sm)",
-        letterSpacing: "0.08em",
-        textTransform: "uppercase",
-        textDecoration: "none",
-      }}
+      className="pe-btn pe-btn--gold"
     >
       Manage your subscription →
     </a>

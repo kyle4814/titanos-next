@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
-import { SystemLabel, OmegaSeal } from "@/components/Myth";
+import { OmegaSeal } from "@/components/Myth";
 import MonitorPortalLink from "./MonitorPortalLink";
+import "../monitor-pe.css";
 
 // Site Fix 6, Stripe Checkout success redirect target. The Checkout
 // Session is configured server-side to redirect here with
@@ -27,65 +28,32 @@ const CADENCE = [
 
 export default function MonitorSuccessPage() {
   return (
-    <SectionReveal
-      style={{ padding: "var(--space-30) 20px", position: "relative", zIndex: 2, textAlign: "center" }}
-    >
-      <OmegaSeal caption="The watch has begun." />
+    <div className="g18">
+      <SectionReveal className="mo-wrap">
+        <OmegaSeal caption="The watch has begun." />
+        <h1>Something is now running on your behalf.</h1>
+        <p className="mo-lead">
+          Quietly, continuously, on the schedule below. The receipt is already in your inbox.
+        </p>
 
-      <h1
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          fontStyle: "italic",
-          fontWeight: 400,
-          color: "var(--ice)",
-          fontSize: "var(--fs-h3)",
-          marginTop: 28,
-          marginBottom: 12,
-        }}
-      >
-        Something is now running on your behalf.
-      </h1>
-      <p
-        style={{
-          color: "var(--dim)",
-          fontSize: "var(--fs-body)",
-          maxWidth: "var(--maxw-prose)",
-          margin: "0 auto var(--space-8)",
-          lineHeight: 1.7,
-        }}
-      >
-        Quietly, continuously, on the schedule below. The receipt is already in your inbox.
-      </p>
-
-      <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", textAlign: "left" }}>
-        <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 16 }}>
-          Cadence
-        </SystemLabel>
-        <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+        <p className="pe-eyebrow-line" style={{ marginTop: 40 }}>Cadence</p>
+        <ul className="mo-cadence">
           {CADENCE.map((c) => (
-            <li key={c.label} style={{ padding: "12px 0", borderTop: "1px solid var(--border)" }}>
-              <span className="label-system" style={{ color: "var(--gold-dim)", display: "block", marginBottom: 4 }}>
-                {c.label}
-              </span>
-              <span style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.6 }}>
-                {c.detail}
-              </span>
+            <li key={c.label} className="pe-card">
+              <span className="mo-k">{c.label}</span>
+              <span className="mo-v">{c.detail}</span>
             </li>
           ))}
         </ul>
-      </div>
 
-      <div style={{ marginTop: "var(--space-8)" }}>
-        <MonitorPortalLink />
-      </div>
+        <div style={{ marginTop: "var(--space-8)" }}>
+          <MonitorPortalLink />
+        </div>
 
-      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: "var(--space-8)" }}>
-        Know someone who&apos;d want this? You can{" "}
-        <a href="/refer" style={{ color: "var(--gold)" }}>
-          refer them here
-        </a>
-        , no pressure.
-      </p>
-    </SectionReveal>
+        <p className="mo-note">
+          Know someone who&apos;d want this? You can <a href="/refer">refer them here</a>, no pressure.
+        </p>
+      </SectionReveal>
+    </div>
   );
 }

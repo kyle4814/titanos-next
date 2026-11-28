@@ -1,0 +1,17 @@
+/* Offers routes: obsidian and gold page-level layer. Scoped under .g18 so it never leaks. */
+.g18 [style*="italic"] { font-style: normal !important; }
+.g18 .pe-section { position: relative; z-index: 2; }
+.g18 .of-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+.g18 .offer-chip { border-color: var(--pe-line-strong); color: var(--pe-text); background: var(--pe-card); font-weight: 500; transition: border-color var(--pe-dur), color var(--pe-dur); }
+.g18 .offer-chip:hover { border-color: var(--pe-gold); color: var(--pe-gold-hi); }
+.g18 .of-h3 { font-size: var(--pe-fs-h3); margin: 0 0 16px; }
+.g18 .of-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.g18 .of-links a { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 14px; border: 1px solid var(--pe-line); border-radius: var(--pe-r-pill); background: var(--pe-card); color: var(--pe-text); font-size: var(--pe-fs-sm); text-decoration: none; transition: border-color var(--pe-dur), color var(--pe-dur); }
+.g18 .of-links a:hover { border-color: var(--pe-gold); color: var(--pe-gold-hi); }
+.g18 .of-steps { list-style: decimal; color: var(--pe-text); line-height: 1.8; padding-left: 22px; margin: 0; }
+.g18 .of-steps li::marker { color: var(--pe-gold); font-weight: 700; }
+.g18 .of-edge { color: var(--pe-text); line-height: 1.75; margin: 0; }
+.g18 .of-price { text-align: center; }
+.g18 .of-price__amt { color: var(--pe-gold-hi); font: 800 var(--pe-fs-h2)/1.1 var(--font-body), system-ui, sans-serif; letter-spacing: -0.02em; }
+.g18 .of-price__terms { color: var(--pe-mute); line-height: 1.7; margin: 14px 0 0; }
+.g18 :has(> p[data-phi-reveal][style*="italic"]) { padding-bottom: var(--pe-sp-6) !important; }

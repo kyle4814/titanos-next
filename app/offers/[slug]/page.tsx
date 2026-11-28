@@ -12,6 +12,7 @@ import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
 import { ALL_OFFERS, getOffer, buyHref, availability, AVAILABILITY_TEXT, LADDER_ROUTES } from "@/lib/offers";
 import { formatOfferPrice, type Offer } from "@/lib/offers/types";
+import "../offers-pe.css";
 import { OpenLoop } from "@/components/FlexBlock";
 
 export const dynamicParams = false;
@@ -42,9 +43,9 @@ function List({ items, mark }: { items: string[]; mark: string }) {
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <SectionReveal style={{ padding: "var(--space-12) 20px", position: "relative", zIndex: 2 }}>
-      <div className="container-vault">
-        <SectionHeading title={title} />
+    <SectionReveal className="pe-section">
+      <div className="pe-page">
+        <SectionHeading showKeyhole={false} title={title} />
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>{children}</div>
       </div>
     </SectionReveal>
@@ -68,7 +69,7 @@ function Cta({ o }: { o: Offer }) {
     return (
       <>
         <AnimatedButton href="/scan#request">START WITH THE FREE STEP →</AnimatedButton>
-        <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+        <p className="pe-muted" style={{ fontSize: "var(--fs-sm)", marginTop: 10 }}>
           Free first step open now: {hook}. Online checkout opening soon.
         </p>
       </>
@@ -77,7 +78,7 @@ function Cta({ o }: { o: Offer }) {
   return (
     <>
       <AnimatedButton href={interest} external>REGISTER INTEREST →</AnimatedButton>
-      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 10 }}>
+      <p className="pe-muted" style={{ fontSize: "var(--fs-sm)", marginTop: 10 }}>
         Launching soon. Registering is free and commits you to nothing. Planned free step (when it launches): {hook}.
       </p>
     </>
@@ -109,6 +110,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
       <JsonLd data={product({ path: `/offers/${o.slug}`, name: o.name, description: o.bluf, priceAud: o.priceAud, buyable: av === "BUYABLE" })} />
       <JsonLd data={faqPage(o.faq)} />
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Offers", path: "/offers" }, { name: o.name, path: `/offers/${o.slug}` }])} />
+      <div className="g18">
       <PageHero
         badge={`TITANOS · ${AVAILABILITY_TEXT[av].badge}`}
         title={o.name}
@@ -127,47 +129,42 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
       </SectionReveal>
       <OpenLoop>Is this one actually for you? The next bit is a short, honest list.</OpenLoop>
       <Block title="Who it's for"><List items={o.forWho} mark="•" /></Block>
-      <div className="divider-gold" />
       <Block title="What you get"><List items={o.youGet} mark="✓" /></Block>
       <OpenLoop>And how does it go from a yes to a finished job?</OpenLoop>
-      <div className="divider-gold" />
       <Block title="How it works">
-        <ol style={{ color: "var(--text)", lineHeight: 1.8, paddingLeft: 22, margin: 0 }}>
+        <ol className="of-steps">
           {o.howItWorks.map((s) => <li key={s}>{s}</li>)}
         </ol>
       </Block>
-      <div className="divider-gold" />
       <Block title="Why TITANOS does it differently">
-        <p style={{ color: "var(--text)", lineHeight: 1.75, margin: 0 }}>{o.edge}</p>
+        <p className="of-edge">{o.edge}</p>
       </Block>
       <OpenLoop>Now the part everyone scrolls to first.</OpenLoop>
-      <div className="divider-gold" />
       <Block title="Price">
-        <div style={{ background: "var(--card)", border: "1px solid var(--gold-dim)", borderRadius: "var(--radius-md)", padding: "26px 28px", textAlign: "center" }}>
-          <div style={{ color: "var(--gold)", fontFamily: "var(--font-display), Georgia, serif", fontSize: "var(--fs-h2)", fontWeight: 700 }}>
+        <div className="pe-card pe-card--gold pe-card--pad of-price">
+          <div className="of-price__amt">
             {formatOfferPrice(o)}
           </div>
           {o.priceNote && o.priceNote.replace(/\s*No GST is charged\.?/gi, "").trim() && (
-            <p style={{ color: "var(--ice)", margin: "10px 0 0" }}>{o.priceNote.replace(/\s*No GST is charged\.?/gi, "").trim()}</p>
+            <p className="pe-muted" style={{ margin: "10px 0 0" }}>{o.priceNote.replace(/\s*No GST is charged\.?/gi, "").trim()}</p>
           )}
-          <p style={{ color: "var(--text)", lineHeight: 1.7, margin: "14px 0 0" }}>
-            No GST is charged. {refundLine(o)} Full terms: <Link href="/terms" style={{ color: "var(--gold)" }}>/terms</Link>
+          <p className="of-price__terms">
+            No GST is charged. {refundLine(o)} Full terms: <Link href="/terms">/terms</Link>
           </p>
         </div>
       </Block>
-      <div className="divider-gold" />
       <Block title="Questions before you decide">
         <FaqItem question="Can I buy this today?">{AVAILABILITY_TEXT[av].line}</FaqItem>
         {o.faq.map((f) => <FaqItem key={f.q} question={f.q}>{f.a}</FaqItem>)}
         {privacyRelated && (
-          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 14 }}>General information, not legal advice.</p>
+          <p className="pe-muted" style={{ fontSize: "var(--fs-sm)", marginTop: 14 }}>General information, not legal advice.</p>
         )}
       </Block>
 
-      <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
+      <SectionReveal className="pe-section" style={{ textAlign: "center" }}>
         {ladder && (
           <p style={{ color: "var(--ice)", marginBottom: 18 }}>
-            Want more later? See <Link href={ladder.href} style={{ color: "var(--gold)" }}>{ladder.label}</Link>.
+            Want more later? See <Link href={ladder.href}>{ladder.label}</Link>.
           </p>
         )}
         <p style={{ color: "var(--ice)", maxWidth: "var(--maxw-prose)", margin: "0 auto 22px", lineHeight: 1.7 }}>
@@ -175,6 +172,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}><Cta o={o} /></div>
       </SectionReveal>
+      </div>
     </>
   );
 }
