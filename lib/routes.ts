@@ -58,6 +58,9 @@ function repoHeadDate(): Date | undefined {
   } catch {
     headDate = undefined;
   }
+  // A source tree with no .git (the cloud runner builds from `git archive`) gets the commit date via SOURCE_DATE_EPOCH,
+  // so every sitemap URL still carries a real lastmod (test_tech_seo "lastmod on all sitemap URLs").
+  if (!headDate && /^\d+$/.test(process.env.SOURCE_DATE_EPOCH || "")) headDate = new Date(Number(process.env.SOURCE_DATE_EPOCH) * 1000);
   return headDate;
 }
 

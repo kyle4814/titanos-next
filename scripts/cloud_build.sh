@@ -27,10 +27,12 @@ DIR="gates/deploy-${SRC:0:12}-$(date +%Y%m%d%H%M%S)-$$"   # [a-z0-9/-] only, saf
 rm -rf -- out .next
 echo "  cloud: ~/$DIR on the runner (npm ci, build, full test manifest)"
 git archive --format=tar "$SRC" | "${SSH[@]}" "$HOST" "mkdir -p \"\$HOME/$DIR\" && tar -xf - -C \"\$HOME/$DIR\""
-"${SSH[@]}" "$HOST" bash -s -- "$DIR" "${CLOUD_BUILD_MAX_S:-2700}" <<'REMOTE'
+SRC_EPOCH="$(git show -s --format=%ct "$SRC")"   # git archive drops .git; the build reads the commit date from this
+"${SSH[@]}" "$HOST" bash -s -- "$DIR" "${CLOUD_BUILD_MAX_S:-2700}" "$SRC_EPOCH" <<'REMOTE'
 set -u
-DIR="$1"; MAX="$2"
+DIR="$1"; MAX="$2"; EPOCH="${3:-}"
 export PATH="$HOME/node22/bin:$PATH" CI=1
+[[ "$EPOCH" =~ ^[0-9]+$ ]] && export SOURCE_DATE_EPOCH="$EPOCH"
 # The runner holds only a partial kernel stub (content_lint.py + a few state files), so the allowlist-rot check that every
 # kernel path exists would fail here for the wrong reason. A missing dir makes figure_freshness report those paths unverified;
 # the real check runs on the laptop, where the full kernel lives (2026-11-12 fold build 9).

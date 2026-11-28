@@ -193,6 +193,7 @@ node scripts/test_xray.mjs
 node scripts/test_xray_lint.mjs
 node scripts/test_home_redesign.mjs
 node scripts/test_tech_seo.mjs
+node scripts/test_lastmod_without_git.mjs
 node --experimental-strip-types --no-warnings scripts/test_e8_score.mjs
 node --experimental-strip-types --no-warnings scripts/test_missed_call_calculator.mjs out
 node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-types scripts/test_seo_crosslinks.mjs out
