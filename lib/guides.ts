@@ -6,6 +6,11 @@ import { privacyAct } from "@/lib/guides-content/privacy-act-small-business-aust
 import { essentialEight } from "@/lib/guides-content/essential-eight-small-business";
 import { emailSecurity } from "@/lib/guides-content/email-security-small-business-australia";
 import { tenders } from "@/lib/guides-content/government-tenders-small-business-australia";
+import { servicem8Automation } from "@/lib/guides-content/servicem8-automation-tradies";
+import { tradifyVsServicem8 } from "@/lib/guides-content/tradify-vs-servicem8-automation";
+import { googleReviewsTradies } from "@/lib/guides-content/google-reviews-tradies-australia";
+import { appointmentReminders } from "@/lib/guides-content/automated-appointment-reminders-australia";
+import { quoteTemplates } from "@/lib/guides-content/job-quote-template-tradies-australia";
 import { GUIDE_EXTRA, POST_RELATED, TOOLS, PRODUCT_LINKS, type RelLink } from "@/lib/seo-links";
 
 /** Inline markup inside any string: [text](href) for links, **bold** for emphasis. Nothing else. */
@@ -53,6 +58,9 @@ const withTools = (g: Guide): Guide => {
 };
 
 export const GUIDES: Guide[] = [tradieAutomation, aiReceptionist, privacyAct, essentialEight, emailSecurity, tenders].map(withTools);
+
+// SEO20 batch 3 (tradie and service business guides), added on its own lines to keep merges clean.
+GUIDES.push(...[servicem8Automation, tradifyVsServicem8, googleReviewsTradies, appointmentReminders, quoteTemplates].map(withTools));
 
 export function getGuide(slug: string): Guide | undefined {
   return GUIDES.find((g) => g.slug === slug);

@@ -78,6 +78,12 @@ export const GUIDE_EXTRA: Record<string, { tools: string[]; products: string[] }
   "email-security-small-business-australia": { tools: ["/tools/email-spoofing-check", "/tools/essential-eight-score"], products: ["dmarc-setup-guide", "spoofguard-self-check-checklist"] },
   "government-tenders-small-business-australia": { tools: ["/tools/essential-eight-score", "/tools/privacy-act-checker"], products: ["essential-eight-ml1-checklist"] },
 };
+// SEO20 batch 3 guides
+GUIDE_EXTRA["servicem8-automation-tradies"] = { tools: ["/tools/missed-call-calculator", "/tools/privacy-act-checker"], products: ["quote-follow-up-playbook"] };
+GUIDE_EXTRA["tradify-vs-servicem8-automation"] = { tools: ["/tools/missed-call-calculator"], products: ["quote-follow-up-playbook"] };
+GUIDE_EXTRA["google-reviews-tradies-australia"] = { tools: ["/tools/privacy-act-checker"], products: ["privacy-policy-template-pack"] };
+GUIDE_EXTRA["automated-appointment-reminders-australia"] = { tools: ["/tools/missed-call-calculator", "/tools/privacy-act-checker"], products: ["privacy-policy-template-pack"] };
+GUIDE_EXTRA["job-quote-template-tradies-australia"] = { tools: ["/tools/missed-call-calculator"], products: ["quote-follow-up-playbook"] };
 export const toolLink = tool;
 
 /** Per new blog post: the guide and product that close it. */
