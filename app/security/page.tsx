@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import { PointCard, PointGrid, PointItem, StatBlock, StepBlock } from "@/components/w2e/Blocks";
 import stats from "@/lib/stats.json";
@@ -6,12 +7,12 @@ import { Block } from "@/components/SiteBlocks";
 import disclosure from "@/lib/site-data/disclosure.json";
 import { longDate } from "@/lib/provenance";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/security", {
   title: "Security and privacy · TITANOS",
   description: "Public records only, nothing touched, nobody replaced. How we handle your data and what we never do.",
   alternates: { canonical: "https://titanos.tech/security" },
   robots: { index: true, follow: true },
-};
+});
 
 export default function SecurityPage() {
   return (

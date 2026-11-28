@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/courses", {
   title: "Courses · TITANOS",
   description: "Courses are not on sale yet. Here is what is true today and the free way to learn from us now.",
   alternates: { canonical: "https://titanos.tech/courses" },
   robots: { index: true, follow: true },
-};
+});
 
 export default function CoursesPage() {
   return (

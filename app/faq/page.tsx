@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import s from "./faq.module.css";
 import { NextStep, jsonLd } from "@/components/SiteBlocks";
 import Concierge from "@/components/Concierge";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/faq", {
   title: "FAQ · TITANOS",
   description: "Straight answers: who we are, what we touch, what it costs, and who stays in charge.",
   alternates: { canonical: "https://titanos.tech/faq" },
   robots: { index: true, follow: true },
-};
+});
 
 const QA: [string, string][] = [
   ["Do you touch my systems?", "No. The first reading uses public records only, such as your public DNS and website."],

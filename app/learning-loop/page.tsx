@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import LoopOrbit from "@/components/charts/LoopOrbit";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
 import Provenance from "@/components/Provenance";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/learning-loop", {
   title: "The learning loop · TITANOS",
   description: "Work, measure, find waste, turn the lesson into code, re-run, lower cost, do more work. Every turn leaves a receipt.",
   alternates: { canonical: "https://titanos.tech/learning-loop" },
   robots: { index: true, follow: true },
-};
+});
 
 import { int, dec, AS_OF_LONG } from "@/lib/ledger";
 const STEPS = [

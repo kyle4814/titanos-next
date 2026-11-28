@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedButton from "@/components/AnimatedButton";
 import s from "./sectors.module.css";
 import { SECTORS } from "@/lib/site-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/sectors", {
   title: "AI and Privacy Act Help by Industry | TITANOS",
   description: "Ten Australian sectors, one method: we read public records, grade what a stranger can see and hand back a plain list of changes. Start with your industry.",
   alternates: { canonical: "https://titanos.tech/sectors" },
   robots: { index: true, follow: true },
-};
+});
 
 export default function SectorsPage() {
   return (

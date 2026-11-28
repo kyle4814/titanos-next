@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import StepCards from "@/components/w2a/StepCards";
 import { NumberBlock, NextStep } from "@/components/SiteBlocks";
 import stats from "@/lib/stats.json";
 import { HowSections } from "@/components/home/moved/HowSections";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/how-it-works", {
   title: "How it works · TITANOS",
   description: "Three steps: we read public records, grade what a stranger can see, and hand back a plain list of changes.",
   alternates: { canonical: "https://titanos.tech/how-it-works" },
   robots: { index: true, follow: true },
-};
+});
 
 export default function HowItWorksPage() {
   return (
