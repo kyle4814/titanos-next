@@ -105,6 +105,33 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: { label: "The invoice scam hitting Australian trade businesses", href: "/blog/invoice-scam-tradies" },
   },
   {
+    id: "mta-sts",
+    term: "MTA-STS",
+    group: "email",
+    definition:
+      "MTA-STS (Mail Transfer Agent Strict Transport Security) is a standard that lets a domain tell other mail servers to deliver its email only over an encrypted, correctly certified connection. Without it, server-to-server email encryption is opportunistic: if a secure connection cannot be set up, the sending server usually falls back to plain text, and an attacker on the network path can force that fallback. MTA-STS closes the gap with two parts, a TXT record at _mta-sts.yourdomain and a short policy file served over HTTPS that names the mail servers allowed to receive your mail and whether to enforce the rule. It protects mail arriving at your domain from being read or altered in transit. It does not stop forged email, which is the job of SPF, DKIM and DMARC.",
+    source: { label: "RFC 8461, SMTP MTA Strict Transport Security", url: "https://www.rfc-editor.org/rfc/rfc8461" },
+    related: { label: "TLS-RPT, the reports that go with MTA-STS", href: "/glossary#tls-rpt" },
+  },
+  {
+    id: "tls-rpt",
+    term: "TLS-RPT",
+    group: "email",
+    definition:
+      "TLS-RPT (SMTP TLS Reporting) is a DNS record that asks other mail servers to send your domain a daily summary of any trouble they had delivering email to you securely. When a certificate has expired, a policy does not match a mail server's name or a server does not offer encryption, the sender records the failure and, if you have published TLS-RPT, reports it. You publish it as a TXT record at _smtp._tls.yourdomain with the version v=TLSRPTv1 and a rua= address for reports, which arrive as compressed JSON files. It is the reporting partner of MTA-STS and is best switched on before it, so you can see failures while the policy is still in testing mode and before they cost you real mail.",
+    source: { label: "RFC 8460, SMTP TLS Reporting", url: "https://www.rfc-editor.org/rfc/rfc8460" },
+    related: { label: "MTA-STS", href: "/glossary#mta-sts" },
+  },
+  {
+    id: "phishing",
+    term: "Phishing",
+    group: "email",
+    definition:
+      "Phishing is the use of deceptive messages, most often email, text or phone calls, to trick a person into giving up a password, opening malware, approving a payment or sharing other sensitive information. The message imitates someone the target trusts, such as a bank, a courier, a government agency, a software provider or a colleague. Targeted versions are called spear phishing, and business email compromise is a form aimed at redirecting a payment. Defences combine technology and habit: DMARC enforcement stops criminals using your exact domain, multi-factor authentication limits what a stolen password can do, and a firm habit of typing a website address yourself or phoning a number you already hold takes away most of what the criminal is relying on. Incidents can be reported through ReportCyber.",
+    source: { label: "NIST glossary, phishing", url: "https://csrc.nist.gov/glossary/term/phishing" },
+    related: { label: "Business email compromise", href: "/glossary#bec" },
+  },
+  {
     id: "security-txt",
     term: "security.txt",
     group: "email",
