@@ -1,0 +1,43 @@
+/* Layout for the Australian email domain security study. Colours come from the shared obsidian and gold tokens (:root --pe-*). */
+.shell { background: var(--pe-bg, #060708); color: var(--pe-text, #f4f2ec); font-family: var(--font-body), system-ui, sans-serif; padding: 28px 0 72px; overflow-x: clip; }
+.wrap { width: min(100% - 32px, 920px); margin-inline: auto; }
+.crumbs { font-size: 13px; color: var(--pe-mute, #b4b2ad); margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
+.crumbs li + li::before { content: "/"; margin-right: 6px; color: var(--pe-faint, #8f8d88); }
+.crumbs a { color: var(--pe-gold-hi, #f3d98c); text-decoration: none; }
+.kicker { font: 600 12px/1 var(--font-body), system-ui, sans-serif; letter-spacing: 0.24em; text-transform: uppercase; color: var(--pe-gold, #d4af37); margin: 0 0 14px; }
+.h1 { font: 800 clamp(2rem, 4.4vw, 3.1rem)/1.08 var(--font-body), system-ui, sans-serif; letter-spacing: -0.025em; color: #fff; margin: 0 0 16px; }
+.byline { font-size: 14px; color: var(--pe-mute, #b4b2ad); margin: 0 0 24px; }
+.byline a { color: var(--pe-gold-hi, #f3d98c); }
+.bluf { border: 1px solid var(--pe-line-gold, rgba(212,175,55,.34)); border-radius: 12px; padding: 18px 20px; background: rgba(212,175,55,.06); font-size: 17px; line-height: 1.55; margin: 0 0 28px; }
+.sec { padding-top: 34px; margin-top: 34px; border-top: 1px solid var(--pe-line, rgba(255,255,255,.1)); }
+.sec h2 { font: 700 clamp(1.4rem, 2.4vw, 1.8rem)/1.15 var(--font-body), system-ui, sans-serif; color: #fff; margin: 0 0 14px; letter-spacing: -0.015em; }
+.p { font-size: 16.5px; line-height: 1.7; color: #e7e5df; margin: 0 0 14px; }
+.p a, .list a, .sources a { color: var(--pe-gold-hi, #f3d98c); }
+.list { padding-left: 22px; margin: 0 0 16px; font-size: 16.5px; line-height: 1.7; color: #e7e5df; list-style: disc; }
+.list li { margin-bottom: 8px; padding-left: 4px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 8px; padding: 0; list-style: none; }
+.stat { border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 10px; padding: 14px 16px; background: #0e1013; }
+.stat b { display: block; font-size: 2rem; line-height: 1.1; color: var(--pe-gold-hi, #f3d98c); }
+.stat span { font-size: 14px; line-height: 1.45; color: #d3d1cb; }
+.fig { margin: 0 0 22px; }
+.fig svg { width: 100%; height: auto; display: block; background: #0b0c0e; border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 10px; }
+.fig figcaption { font-size: 14px; line-height: 1.55; color: var(--pe-mute, #b4b2ad); margin-top: 8px; }
+.tablewrap { overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 10px; }
+.table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.5; min-width: 640px; }
+.table th { text-align: left; font-weight: 600; color: var(--pe-gold-hi, #f3d98c); background: #0e1013; padding: 10px 12px; border-bottom: 1px solid var(--pe-line-gold, rgba(212,175,55,.34)); }
+.table td { padding: 10px 12px; border-bottom: 1px solid var(--pe-line, rgba(255,255,255,.1)); vertical-align: top; color: #e7e5df; }
+.table tr:last-child td { border-bottom: 0; }
+.note { font-size: 14px; line-height: 1.55; color: var(--pe-mute, #b4b2ad); border-left: 3px solid var(--pe-gold-lo, #b8892e); padding: 4px 0 4px 14px; margin: 0 0 16px; }
+.faq dt { font-weight: 700; color: #fff; margin-top: 16px; font-size: 16.5px; }
+.faq dd { margin: 6px 0 0; color: #e7e5df; line-height: 1.65; font-size: 16px; }
+.sources { padding-left: 20px; line-height: 1.8; font-size: 15.5px; color: #e7e5df; margin: 0 0 14px; }
+.dl { display: inline-block; border: 1px solid var(--pe-gold, #d4af37); border-radius: 8px; padding: 10px 16px; color: var(--pe-gold-hi, #f3d98c); text-decoration: none; font-weight: 600; }
+.t { fill: #e7e5df; font: 12px system-ui, sans-serif; }
+.tm { fill: #b4b2ad; font: 11px system-ui, sans-serif; }
+.tb { fill: #fff; font: 600 12px system-ui, sans-serif; }
+.gold { fill: #d4af37; }
+.goldlo { fill: #8a6d1f; }
+.slate { fill: #5b6470; }
+.teal { fill: #3e8f86; }
+.axis { stroke: #3a3d42; stroke-width: 1; }
+.ref { stroke: #f3d98c; stroke-width: 1.5; stroke-dasharray: 5 4; }

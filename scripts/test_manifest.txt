@@ -215,3 +215,4 @@ node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-type
 node scripts/test_cwv_hygiene.mjs
 node --experimental-strip-types --no-warnings scripts/test_dmarc_generator.mjs
 node --experimental-strip-types --no-warnings scripts/test_spf_builder.mjs
+node --experimental-strip-types --no-warnings scripts/test_email_domain_study.mjs
