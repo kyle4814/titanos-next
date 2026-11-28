@@ -6,6 +6,7 @@ import SectionReveal from "@/components/SectionReveal";
 import { SystemLabel } from "@/components/Myth";
 import { publishedDossiers } from "@/lib/black-ice/dossiers";
 import s from "@/components/w2b/blog.module.css";
+import "../bi.css";
 
 export const metadata: Metadata = withSeo("/black-ice/dossiers", {
   title: "Black Ice dossiers | Titanos",
@@ -22,7 +23,7 @@ export default function DossierIndexPage() {
       <PageHero badge="BLACK ICE" title="Dossiers" sub="Guides and free worksheets. Each one says what it argues, what was tested, and what it does not prove." />
       <div className="divider-gold" />
       <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="bi-dossier-list" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <p className={s.p}>
             <Link href="/black-ice" className={s.link}>Back to Black Ice</Link>
           </p>
@@ -30,11 +31,11 @@ export default function DossierIndexPage() {
             <p className={s.p}>The first dossiers are in preparation.</p>
           ) : (
             list.map((d) => (
-              <div key={d.slug} style={{ marginBottom: "2rem" }}>
+              <div key={d.slug} className="bi-dossier">
                 <SystemLabel>
                   {d.rung} · review: {d.review.replace(/_/g, " ").toLowerCase()}
                 </SystemLabel>
-                <h2 className={s.h2}>
+                <h2 className="bi-h2">
                   <Link href={`/black-ice/dossiers/${d.slug}`} className={s.link}>{d.title}</Link>
                 </h2>
                 <p className={s.p}>{d.excerpt}</p>
