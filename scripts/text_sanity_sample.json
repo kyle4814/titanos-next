@@ -12,6 +12,6 @@
     "/products", "/products/dmarc-setup-guide",
     "/black-ice", "/black-ice/dossiers/seven-question-proof-test",
     "/case-studies", "/case-studies/ariance",
-    "/app/billing", "/demo/tix", "/order/ai", "/monitor/success", "/audit/booked", "/v/titanos-pitch"
+    "/app/billing", "/demo/tix", "/order/ai", "/monitor/success", "/audit/booked", "/v/titanos-pitch", "/integrations/servicem8"
   ]
 }

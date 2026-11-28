@@ -1,0 +1,49 @@
+/* Integration guides: new, scoped under .ig-*, built on the shared obsidian and gold tokens in home-redesign.css (imported by each page). */
+body:has(.ig-page) { background: var(--pe-bg); }
+main:has(.ig-page) { background: var(--pe-bg); color: var(--pe-text); font-family: var(--font-body), system-ui, sans-serif; overflow-x: clip; }
+.ig-page { padding-block: 40px 88px; line-height: 1.65; }
+.ig-page *, .ig-page *::before, .ig-page *::after { box-sizing: border-box; }
+.ig-wrap { width: min(100% - 32px, 920px); margin-inline: auto; }
+.ig-crumbs { font-size: 13.5px; color: var(--pe-faint); margin-bottom: 24px; }
+.ig-crumbs ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.ig-crumbs li + li::before { content: "/"; margin-right: 6px; color: var(--pe-faint); }
+.ig-crumbs a { color: var(--pe-gold-hi); }
+.ig-page h1 { font: 800 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--font-body), system-ui, sans-serif; letter-spacing: -0.02em; color: #fff; margin: 0 0 20px; }
+.ig-page h2 { font: 700 clamp(1.35rem, 2.6vw, 1.8rem)/1.2 var(--font-body), system-ui, sans-serif; color: #fff; margin: 48px 0 14px; }
+.ig-page h3 { font: 700 1.05rem/1.3 var(--font-body), system-ui, sans-serif; color: var(--pe-gold-hi); margin: 24px 0 8px; }
+.ig-page p { color: #e4e2dc; margin: 0 0 14px; max-width: 70ch; }
+.ig-page a { color: var(--pe-gold-hi); text-decoration: underline; text-underline-offset: 3px; }
+.ig-page a.pe-btn { text-decoration: none; }
+.ig-meta { font-size: 14px; color: var(--pe-mute); margin-bottom: 24px; }
+.ig-disclaimer { border: 1px solid var(--pe-line-gold); border-radius: 10px; padding: 14px 18px; background: #0b0c0e; color: #e4e2dc; font-size: 15px; margin: 20px 0 8px; }
+.ig-task { padding: 24px; margin-top: 20px; }
+.ig-task h2 { margin-top: 0; }
+.ig-pill { display: inline-block; font: 600 11px/1 var(--font-body), system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 10px; border: 1px solid var(--pe-line-gold); border-radius: 999px; color: var(--pe-gold-hi); margin-bottom: 14px; }
+.ig-page ol.ig-steps { padding-left: 22px; margin: 0 0 14px; }
+.ig-page ol.ig-steps li { margin-bottom: 8px; color: #e4e2dc; max-width: 70ch; }
+.ig-src { font-size: 14px; color: var(--pe-mute); }
+.ig-src ul { margin: 6px 0 0; padding-left: 20px; }
+.ig-table-wrap { overflow-x: auto; border: 1px solid var(--pe-line); border-radius: 10px; }
+.ig-table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 640px; }
+.ig-table th, .ig-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--pe-line); vertical-align: top; }
+.ig-table th { color: var(--pe-gold); font-weight: 600; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; background: #0b0c0e; }
+.ig-table tr:last-child td { border-bottom: 0; }
+.ig-example { padding: 24px; margin-top: 16px; }
+.ig-example dl { margin: 0 0 14px; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; }
+.ig-example dt { color: var(--pe-mute); }
+.ig-example dd { margin: 0; text-align: right; color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ig-example .ig-result { color: var(--pe-gold-hi); font-weight: 600; }
+.ig-cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
+.ig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+.ig-tile { display: block; padding: 20px; text-decoration: none !important; color: var(--pe-text) !important; }
+.ig-tile strong { display: block; color: #fff; font-size: 1.1rem; margin-bottom: 6px; }
+.ig-tile span { color: var(--pe-mute); font-size: 14.5px; }
+.ig-faq details { border: 1px solid var(--pe-line); border-radius: 10px; margin-bottom: 10px; background: var(--pe-card); }
+.ig-faq summary { cursor: pointer; padding: 14px 16px; font-weight: 600; color: #fff; min-height: 44px; }
+.ig-faq details p { padding: 0 16px; }
+.ig-list { padding-left: 20px; }
+.ig-list li { margin-bottom: 8px; color: #e4e2dc; max-width: 70ch; }
+@media (max-width: 640px) { .ig-task, .ig-example { padding: 18px; } .ig-page { padding-block: 24px 64px; } }
+.ig-page a.pe-btn { text-decoration: none; }
+.ig-page a.pe-btn--gold { color: #1a1304; }
+.ig-page a.pe-btn--dark { color: var(--pe-gold-hi); }
