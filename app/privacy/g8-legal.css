@@ -1,0 +1,36 @@
+/* G8: legal and policy pages (privacy, terms, your-data). Scoped to .g8-legal; uses site-system tokens only. */
+.g8-legal { position: relative; }
+.g8-legal [style*="italic"] { font-style: normal !important; }
+.g8-legal .g8-doc {
+  width: min(100% - 2 * var(--pe-gutter, 20px), 820px);
+  margin: 0 auto;
+  padding: var(--pe-sp-7, 48px) clamp(20px, 4vw, 48px);
+  background: var(--pe-card);
+  border: 1px solid var(--pe-line);
+  border-top: 1px solid var(--pe-line-gold);
+  border-radius: var(--pe-r-card, 12px);
+  box-shadow: var(--pe-shadow-card);
+  color: var(--pe-text);
+  font-size: var(--pe-fs-body);
+  line-height: 1.75;
+}
+.g8-legal .g8-doc h2 {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--pe-text);
+  font-size: var(--pe-fs-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 8px 0 12px;
+  padding-top: 0;
+}
+.g8-legal .g8-doc h2::before { content: none; }
+.g8-legal .g8-doc li::marker { color: var(--pe-gold); }
+.g8-legal .g8-doc strong { color: var(--pe-text); }
+.g8-legal .g8-doc a { color: var(--pe-gold-hi); }
+.g8-legal .g8-doc .label-system { color: var(--pe-gold); letter-spacing: var(--pe-track-eyebrow, 0.28em); margin-top: 36px; }
+.g8-legal .g8-doc > .label-system:first-child, .g8-legal .g8-doc > p:first-child + .label-system { margin-top: 32px; }
+.g8-legal .g8-doc blockquote, .g8-legal .g8-doc [style*="border-left"] { border-left-color: var(--pe-gold) !important; }
+.g8-legal .g8-doc table { width: 100%; }
+@media (max-width: 720px) {
+  .g8-legal .g8-doc { padding: var(--pe-sp-5, 24px) 20px; }
+}

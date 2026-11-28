@@ -13,13 +13,16 @@ export const metadata: Metadata = withSeo("/services", baseMetadata);
 // 2026-10-08). A plain meta refresh with a visible link is instant, shift-free and works without JavaScript.
 export default function ServicesRedirect() {
   return (
-    <main style={{ minHeight: "60vh", display: "grid", placeItems: "center", padding: 24 }}>
+    <main className="pe-page" style={{ minHeight: "60vh", display: "grid", placeItems: "center", textAlign: "center" }}>
       <meta httpEquiv="refresh" content="0; url=/audit" />
       {/* a redirect page opts out of the cross-document view transition: an instant refresh would skip it and log "Transition was skipped" */}
       <style>{"@view-transition{navigation:none}"}</style>
-      <p>
-        Taking you to the <a href="/audit">audit page</a>.
-      </p>
+      <div className="pe-card pe-card--pad">
+        <p className="pe-eyebrow-line">Services</p>
+        <p style={{ margin: 0, fontSize: "var(--pe-fs-lead)" }}>
+          Taking you to the <a href="/audit">audit page</a>.
+        </p>
+      </div>
     </main>
   );
 }

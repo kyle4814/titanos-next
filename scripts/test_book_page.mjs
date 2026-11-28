@@ -40,7 +40,7 @@ const cb = rd("components/ContactButtons.tsx");
 const iBook = cb.indexOf("href={BOOK_HREF}"), iTg = cb.indexOf("href={CONTACT.TELEGRAM_URL}");
 ok(iBook > 0 && iTg > iBook, "ContactButtons: Book a call comes first");
 ok(/href=\{BOOK_HREF\} variant="primary"/.test(cb) && /variant="secondary"/.test(cb.slice(iTg, iTg + 200)), "ContactButtons: Book a call is primary, Telegram is secondary");
-ok(/href=\{BOOK_HREF\}/.test(rd("components/Nav.tsx")) && !/AUDIT_MESSAGE_HREF/.test(rd("components/Nav.tsx")), "Nav primary CTA goes to /book");
+ok(/href=\{BOOK_HREF\}/.test(rd("components/home-redesign/HomeNav.tsx")) && !/AUDIT_MESSAGE_HREF/.test(rd("components/home-redesign/HomeNav.tsx")), "Nav book CTA (mobile drawer) goes to /book; /book is also in the desktop More menu via lib/navLinks.ts");
 ok(/href=\{BOOK_HREF\}/.test(rd("components/StickyMobileCta.tsx")), "sticky mobile CTA goes to /book");
 const home = rd(`${out}/index.html`);
 ok(/href="\/book"/.test(home) && /Book a free call with Kyle/.test(txt(home)), "homepage carries the Book a call CTA");

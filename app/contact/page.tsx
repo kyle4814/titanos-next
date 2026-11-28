@@ -9,6 +9,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import W2c from "@/components/w2c/W2c";
+import "@/components/g4/g4.css";
 
 const META_TITLE = "Contact · Kyle Deligny · TITANOS";
 const META_DESC =
@@ -27,6 +28,7 @@ export const metadata: Metadata = withSeo("/contact", baseMetadata);
 export default function ContactPage() {
   return (
     <W2c>
+     <div className="g4">
       <PageHero
         badge="CONTACT"
         title="Talk to Kyle directly."
@@ -38,10 +40,10 @@ export default function ContactPage() {
       </Bluf>
       <Analogy k="healthcheck" />
 
-      <SectionReveal style={{ padding: "0 20px var(--space-8, 32px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page--narrow">
           <FlexNumber f={FLEX.fleetJobs} />
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 14 }}>
+          <p className="pe-muted" style={{ lineHeight: 1.7, marginTop: 14 }}>
             Method: counted from our own job log over 24 hours. That is the machine. The person who answers your message is Kyle. Before you
             ask: the first look uses public records only, nothing of yours is touched, nobody is replaced, your IT provider stays in
             charge, and the first conversation and report cost nothing.
@@ -51,60 +53,46 @@ export default function ContactPage() {
 
       <OpenLoop>So how do you actually reach him?</OpenLoop>
 
-      <section aria-label="Message Kyle" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2, textAlign: "center" }}>
+      <section aria-label="Message Kyle" className="pe-section g4-center">
         <div className="w2c-contact">
           <ContactButtons heading="Book a call for a free consultation and report, or message Kyle to ask a quick question or just say hi. Whichever is easiest." />
         </div>
       </section>
 
-      <div className="divider-gold" />
-
-      <section aria-label="Direct line" style={{ padding: "0 20px var(--space-8)", position: "relative", zIndex: 2 }}>
-        <Inscription label="One person.">
-          There is no queue and no ticket number.
-          <br />
-          <span style={{ color: "var(--gold)" }}>Message Kyle and Kyle messages back.</span>
-        </Inscription>
+      <section aria-label="Direct line" className="pe-section">
+        <div className="pe-page--narrow">
+          <Inscription label="One person.">
+            There is no queue and no ticket number.
+            <br />
+            <span style={{ color: "var(--pe-gold)" }}>Message Kyle and Kyle messages back.</span>
+          </Inscription>
+        </div>
       </section>
 
-      <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <div
-            className="w2c-card"
-            style={{
-              background: "var(--card)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--radius-md)",
-              padding: "28px 26px",
-              marginBottom: 24,
-            }}
-          >
+      <SectionReveal className="pe-section g4-center">
+        <div className="pe-page--narrow">
+          <div className="pe-card pe-card--gold pe-card--pad w2c-card" style={{ marginBottom: 24 }}>
             <SystemLabel style={{ marginBottom: 16 }}>Direct contact · no form, no gatekeeper</SystemLabel>
-            <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: "0 0 16px" }}>
-              <strong>Email:</strong>{" "}
-              <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>
-                {SITE.KYLE_EMAIL}
-              </a>
-            </p>
-            <p style={{ color: "var(--ice)", fontSize: "var(--fs-lg)", margin: 0 }}>
-              <strong>ABN:</strong> 34 318 502 254 ·{" "}
-              <a
-                href="https://abr.business.gov.au/ABN/View?id=34318502254"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--gold)" }}
-              >
-                verify on the ABR ↗
-              </a>
-            </p>
+            <div className="g4-kv">
+              <p>
+                <strong>Email:</strong> <a href={`mailto:${SITE.KYLE_EMAIL}`}>{SITE.KYLE_EMAIL}</a>
+              </p>
+              <p>
+                <strong>ABN:</strong> 34 318 502 254 ·{" "}
+                <a href="https://abr.business.gov.au/ABN/View?id=34318502254" target="_blank" rel="noopener noreferrer">
+                  verify on the ABR ↗
+                </a>
+              </p>
+            </div>
           </div>
 
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", margin: 0 }}>
+          <p className="pe-muted" style={{ margin: 0 }}>
             Would it be okay if you messaged Kyle for a free consultation and a free report on your business? No obligation, no pitch deck, and a no is welcome.
           </p>
         </div>
       </SectionReveal>
       <FrontLoad/>
+     </div>
     </W2c>
   );
 }

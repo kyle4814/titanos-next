@@ -45,34 +45,9 @@ function SelectField({
   onChange?: (value: string) => void;
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <label
-        htmlFor={`order-${name}`}
-        style={{
-          color: "var(--ice)",
-          fontSize: "var(--fs-sm)",
-          fontWeight: 500,
-          display: "block",
-          marginBottom: 6,
-        }}
-      >
-        {label}
-      </label>
-      <select
-        id={`order-${name}`}
-        name={name}
-        onChange={(e) => onChange?.(e.target.value)}
-        style={{
-          width: "100%",
-          background: "var(--vault-bg, #0a0a0a)",
-          border: "1px solid var(--border)",
-          borderRadius: "var(--radius-sm)",
-          padding: "11px 13px",
-          color: "var(--text)",
-          fontSize: "var(--fs-sm)",
-          boxSizing: "border-box",
-        }}
-      >
+    <div className="pe-field">
+      <label htmlFor={`order-${name}`}>{label}</label>
+      <select id={`order-${name}`} name={name} onChange={(e) => onChange?.(e.target.value)}>
         <option value="">Select</option>
         {options.map((o) => (
           <option key={o} value={o}>
@@ -96,11 +71,11 @@ export default function AuditRequestClient() {
       submitLabel="SEND IT TO KYLE →"
       successMessage="Received. Kyle will read it and reach out to you directly."
     >
-      <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "4px 0" }} />
+      <hr style={{ border: "none", borderTop: "1px solid var(--pe-line)", margin: "4px 0" }} />
 
       <SelectField label="Industry" name="scope_industry" options={INDUSTRIES} onChange={setIndustry} />
       {hint && (
-        <p style={{ color: "var(--gold)", fontSize: "var(--fs-xs)", lineHeight: 1.6, margin: "-8px 0 0" }}>
+        <p style={{ color: "var(--pe-gold-hi)", fontSize: "var(--fs-xs)", lineHeight: 1.6, margin: "-8px 0 0" }}>
           {hint}
         </p>
       )}

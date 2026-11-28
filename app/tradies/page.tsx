@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
-import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import Faq from "@/components/w2e/Faq";
-import s from "@/components/w2e/w2e.module.css";
-import { GlowCard, BentoGrid, BentoItem } from "@/components/house";
+import s from "./tradies.module.css";
 import { PRICING, DISPLAY } from "@/lib/pricing";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
-import { SystemLabel, DepthIndex, TempleFrame } from "@/components/Myth";
 import { Bluf, FrontLoad } from "@/components/SalesKit";
-import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FlexNumber } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 
 // Job Flow: tradie entry offer, approved by Kyle 2026-10-05.
@@ -132,7 +129,7 @@ export default function TradiesPage() {
         sub="For sparkies, plumbers, builders, cleaners, landscapers and other small service businesses. Want a taste today? Subbie Finder, the contract-winners list on its own, is available now at /offers/subbie-finder."
         trustLine={
           <>
-            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned · Run by Kyle Deligny
+            <strong style={{ color: "var(--pe-gold)" }}>ABN 34 318 502 254</strong> · Australian-owned · Run by Kyle Deligny
           </>
         }
       >
@@ -149,8 +146,8 @@ export default function TradiesPage() {
         Job Flow finds you new work before it is advertised, for {DISPLAY.JOB_FLOW_MONTHLY} when it launches. Subbie Finder is available now.
       </Bluf>
 
-      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
           <FlexNumber f={FLEX.market} />
           <p className={s.intro}>
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and you deal with me directly. The
@@ -160,65 +157,61 @@ export default function TradiesPage() {
           </p>
         </div>
       </SectionReveal>
-      <OpenLoop>So what does a month of Job Flow actually put in your hands?</OpenLoop>
+      <div className="pe-page"><p className={s.bridge}>So what does a month of Job Flow actually put in your hands?</p></div>
 
-      <div className="divider-gold" />
-
-      {/* WHAT YOU GET */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={1} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Every month, done for you</SystemLabel>
-          <SectionHeading title="What You Get" lead="Five things, every month, for one flat price." />
-          <BentoGrid className={s.wide}>
-            {WHAT_YOU_GET.map((it, i) => (
-              <BentoItem key={it} as="div" span={i < 2 ? 6 : 4} style={{ padding: 0 }}>
-                <GlowCard className={s.tick}>
-                  <span className={s.tickMark} aria-hidden="true" />
-                  <span>{it}</span>
-                </GlowCard>
-              </BentoItem>
+            {/* WHAT YOU GET */}
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">Every month, done for you</span>
+            <h2>What You Get</h2>
+            <p className={s.lead}>Five things, every month, for one flat price.</p>
+          </div>
+          <div className="pe-grid">
+            {WHAT_YOU_GET.map((it) => (
+              <div key={it} className={`pe-card pe-card--pad ${s.tick}`}>
+                <span className={s.tickMark} aria-hidden="true" />
+                <span>{it}</span>
+              </div>
             ))}
-          </BentoGrid>
+          </div>
         </div>
       </SectionReveal>
 
-      <OpenLoop>That is a lot of work found for you. How much of it is on you?</OpenLoop>
+      <div className="pe-page"><p className={s.bridge}>That is a lot of work found for you. How much of it is on you?</p></div>
 
-      <div className="divider-gold" />
-
-      {/* HOW IT WORKS */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={2} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Three steps</SystemLabel>
-          <SectionHeading title="How It Works" lead="You stay in control of everything that reaches a customer." />
-          <BentoGrid className={s.wide}>
+            {/* HOW IT WORKS */}
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">Three steps</span>
+            <h2>How It Works</h2>
+            <p className={s.lead}>You stay in control of everything that reaches a customer.</p>
+          </div>
+          <div className="pe-grid">
             {STEPS.map((st) => (
-              <BentoItem key={st.n} span={4} style={{ padding: 0 }}>
-                <GlowCard as="article" className={s.step}>
-                  <div className={s.stepN} aria-hidden="true">{st.n}</div>
-                  <h3>{st.t}</h3>
-                  <p>{st.d}</p>
-                </GlowCard>
-              </BentoItem>
+              <article key={st.n} className={`pe-card pe-card--pad ${s.step}`}>
+                <div className={s.stepN} aria-hidden="true">{st.n}</div>
+                <h3>{st.t}</h3>
+                <p>{st.d}</p>
+              </article>
             ))}
-          </BentoGrid>
+          </div>
         </div>
       </SectionReveal>
 
-      <OpenLoop>And what does it cost, and how do you stop it if it is not working?</OpenLoop>
+      <div className="pe-page"><p className={s.bridge}>And what does it cost, and how do you stop it if it is not working?</p></div>
 
-      <div className="divider-gold" />
-
-      {/* PRICE + LADDER */}
-      <SectionReveal id="pricing" className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={3} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>The price</SystemLabel>
-          <SectionHeading title="One Price. Cancel Any Time." lead="No lock-in. No setup fee. One email to stop." />
-          <TempleFrame style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-            <article className={s.priceBox}>
+            {/* PRICE + LADDER */}
+      <SectionReveal id="pricing" className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">The price</span>
+            <h2>One Price. Cancel Any Time.</h2>
+            <p className={s.lead}>No lock-in. No setup fee. One email to stop.</p>
+          </div>
+          <div className={`pe-card pe-card--pad pe-card--gold ${s.priceBox}`}>
+            <article>
               <div className={s.priceTag}>JOB FLOW</div>
               <div className={s.priceBig}>{DISPLAY.JOB_FLOW_MONTHLY}</div>
               <p className={s.priceNote}>
@@ -228,7 +221,7 @@ export default function TradiesPage() {
                 START WITH THE FREE CHECK →
               </AnimatedButton>
             </article>
-          </TempleFrame>
+          </div>
           <p className={s.proseTop}>
             Where it sits: <a href="/monitor" className={s.link}>Titanos Monitor</a> on its own is{" "}
             {DISPLAY.MONITOR_MONTHLY}, and Job Flow includes it. Job Flow is {DISPLAY.JOB_FLOW_MONTHLY}. If you later want
@@ -238,22 +231,21 @@ export default function TradiesPage() {
         </div>
       </SectionReveal>
 
-      <OpenLoop>A few things tradies ask before they trust a stranger with this.</OpenLoop>
+      <div className="pe-page"><p className={s.bridge}>A few things tradies ask before they trust a stranger with this.</p></div>
 
-      <div className="divider-gold" />
-
-      {/* FAQ */}
-      <SectionReveal id="faq" className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={4} total={4} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Straight answers</SystemLabel>
-          <SectionHeading title="Before You Ask" />
-          <Faq items={FAQ_ITEMS} />
+            {/* FAQ */}
+      <SectionReveal id="faq" className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">Straight answers</span>
+            <h2>Before You Ask</h2>
+          </div>
+          <div className={s.faqWrap}><Faq items={FAQ_ITEMS} /></div>
         </div>
       </SectionReveal>
 
-      <SectionReveal style={{ textAlign: "center", padding: "var(--space-8) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+      <SectionReveal className={s.center}>
+        <div className="pe-page">
           <AnimatedButton href="/offers" variant="secondary" ariaLabel="See every offer">
             SEE EVERY OFFER →
           </AnimatedButton>
@@ -263,8 +255,8 @@ export default function TradiesPage() {
       <FrontLoad />
 
       {/* PERMISSION CLOSE */}
-      <SectionReveal className={s.sec} style={{ paddingBottom: "var(--space-20)" }}>
-        <div className={s.close}>
+      <SectionReveal className="pe-section">
+        <div className={`pe-page ${s.close}`}>
           <h2>Would it be okay if I sent you a free sample?</h2>
           <p>
             If it looks useful and you are comfortable with all of that, would it be okay if I sent you five

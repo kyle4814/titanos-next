@@ -89,10 +89,8 @@ export default async function BlogPostPage({
         title={post.title}
       />
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page pe-page--narrow">
           <div className={s.meta}>
             <Link href="/blog" className={s.back}>
               ← Back to the archive
@@ -112,19 +110,10 @@ export default async function BlogPostPage({
 
       {post.faq && post.faq.length > 0 && (
         <>
-          <div className="divider-gold" />
-          <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-            <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-h3)",
-                  letterSpacing: "0.06em",
-                  marginBottom: 20,
-                }}
-              >
-                QUESTIONS ON RECORD
+          <SectionReveal className="pe-section">
+            <div className="pe-page pe-page--narrow">
+              <p className="pe-eyebrow-line">On record</p>
+              <h2 style={{ marginBottom: 20 }}>Questions on record
               </h2>
               {post.faq.map((item) => (
                 <FaqItem key={item.q} question={item.q}>
@@ -138,19 +127,10 @@ export default async function BlogPostPage({
 
       {related.length > 0 && (
         <>
-          <div className="divider-gold" />
-          <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
-            <div style={{ maxWidth: "var(--maxw-wide)", margin: "0 auto" }}>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  color: "var(--gold)",
-                  fontSize: "var(--fs-h3)",
-                  letterSpacing: "0.06em",
-                  marginBottom: 20,
-                }}
-              >
-                RELATED RECORDS
+          <SectionReveal className="pe-section">
+            <div className="pe-page">
+              <p className="pe-eyebrow-line">Keep reading</p>
+              <h2 style={{ marginBottom: 20 }}>Related records
               </h2>
               <div className={s.grid}>
                 {related.map((r) => (
@@ -162,41 +142,17 @@ export default async function BlogPostPage({
         </>
       )}
 
-      <div className="divider-gold" />
-
-      <SectionReveal
-        style={{
-          textAlign: "center",
-          padding: "var(--space-16) 20px var(--space-30)",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            letterSpacing: "0.06em",
-            marginBottom: 18,
-          }}
-        >
-          APPLY THIS TO YOUR OWN OPERATION
+      <SectionReveal className="pe-section" style={{ textAlign: "center" }}>
+        <div className="pe-page pe-page--narrow">
+        <h2 style={{ marginBottom: 18 }}>Apply this to your own operation
         </h2>
-        <p
-          style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-lg)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto 26px",
-            lineHeight: 1.7,
-          }}
-        >
+        <p className="pe-lead" style={{ margin: "0 auto 26px" }}>
           15 minutes is enough to know if there's a real gap worth closing.
         </p>
         <AnimatedButton href={AUDIT_MESSAGE_HREF} variant="primary">
           GET YOUR FREE AI AUDIT: MESSAGE KYLE
         </AnimatedButton>
+        </div>
       </SectionReveal>
     </>
   );

@@ -6,6 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FaqRow } from "@/components/w2e/Faq";
+import "./g8-compliance.css";
 import s from "@/components/w2e/w2e.module.css";
 import { GlowCard } from "@/components/house";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
@@ -258,7 +259,7 @@ export default function CompliancePage() {
   };
 
   return (
-    <>
+    <div className="g8-compliance">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -902,7 +903,7 @@ export default function CompliancePage() {
       />
       <FreeStart />
       </div>
-    </>
+    </div>
   );
 }
 

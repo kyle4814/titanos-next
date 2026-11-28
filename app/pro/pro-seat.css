@@ -1,0 +1,6 @@
+/* White-label sample sits on a light "paper" card: keep every table cell on the report ink, not the page text colour. */
+[data-wl-report] caption,
+[data-wl-report] th,
+[data-wl-report] td { color: var(--wl-ink); background: transparent; opacity: 1; }
+[data-wl-report] th[scope="col"] { color: var(--wl-ink); }
+[data-wl-report] tr { background: transparent; }

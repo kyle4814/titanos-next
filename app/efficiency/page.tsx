@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
-import { GlowCard } from "@/components/house";
-import "@/components/w2a/w2a.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { withSeo } from "@/lib/seo";
 import data from "@/lib/efficiency/efficiency.json";
@@ -43,18 +41,13 @@ const METRICS = data.metrics as Metric[];
 const BY_ID = new Map(METRICS.map((m) => [m.id, m]));
 const GROUPS = Array.from(new Set(METRICS.map((m) => m.group)));
 
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 980, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "40px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "16px 18px",
-};
-const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15, verticalAlign: "top" };
-const MUTED: CSSProperties = { color: "var(--ice)", opacity: 0.7, fontSize: 13, lineHeight: 1.5 };
+const SECTION: CSSProperties = { padding: 0 };
+const WRAP: CSSProperties = {};
+const H: CSSProperties = { fontSize: "var(--pe-fs-h2)", margin: "var(--pe-sp-7) 0 var(--pe-sp-3)", paddingTop: "var(--pe-sp-6)", borderTop: "1px solid var(--pe-line)" };
+const BODY: CSSProperties = { color: "var(--pe-mute)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75, margin: "0 0 14px", maxWidth: "72ch" };
+const CARD: CSSProperties = {};
+const CELL: CSSProperties = { padding: "12px 14px", borderBottom: "1px solid var(--pe-line)", color: "var(--pe-text)", fontSize: 15, verticalAlign: "top" };
+const MUTED: CSSProperties = { color: "var(--pe-faint)", fontSize: 13, lineHeight: 1.5 };
 
 function fmtNum(m: Metric, n: number): string {
   const s = n.toLocaleString("en-AU", { maximumFractionDigits: m.dp ?? 2 });
@@ -91,8 +84,8 @@ function Badge({ status }: { status: string }) {
         letterSpacing: 1,
         padding: "2px 7px",
         borderRadius: 4,
-        border: "1px solid var(--border)",
-        color: measured ? "var(--gold)" : "var(--ice)",
+        border: "1px solid var(--pe-line-gold)",
+        color: measured ? "var(--pe-gold-hi)" : "var(--pe-mute)",
         opacity: measured ? 1 : 0.8,
         whiteSpace: "nowrap",
       }}
@@ -104,7 +97,7 @@ function Badge({ status }: { status: string }) {
 
 function Cell({ m, v }: { m: Metric; v: Val }) {
   const pending = v === null || v === undefined;
-  return <span style={pending ? { opacity: 0.55, fontStyle: "italic" } : undefined}>{fmt(m, v)}</span>;
+  return <span style={pending ? { opacity: 0.55 } : undefined}>{fmt(m, v)}</span>;
 }
 
 export default function Efficiency() {
@@ -123,8 +116,8 @@ export default function Efficiency() {
         sub={`${data.headline.caption} Updated ${data.updated}.`}
       />
       <Provenance route="/efficiency" />
-      <section style={SECTION}>
-        <div className="w2a-measure" style={WRAP}>
+      <section className="pe-page" style={{ paddingBottom: "var(--pe-sp-8)" }}>
+        <div>
           <p style={BODY}>{data.intro}</p>
           <p style={MUTED}>
             {complete} figures have both a before and an after, {inCount} have at least one side filed, {METRICS.length} are tracked. Round {data.round}.
@@ -136,16 +129,16 @@ export default function Efficiency() {
               if (!m) return null;
               const c = change(m);
               return (
-                <GlowCard key={id} style={CARD}>
-                  <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700 }}>
+                <div key={id} className="pe-card pe-card--pad">
+                  <div style={{ color: "var(--pe-gold-hi)", fontSize: 28, fontWeight: 700 }}>
                     {c.factor ? `${factorText(c.factor)}x` : (c.pct ?? "measuring")}
                   </div>
-                  <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{m.label}</div>
+                  <div style={{ color: "var(--pe-text)", fontSize: 14, lineHeight: 1.5 }}>{m.label}</div>
                   <div style={MUTED}>
                     {fmt(m, m.before)} to {fmt(m, m.after)}
                     {c.pct && c.factor ? ` (${c.pct})` : ""}
                   </div>
-                </GlowCard>
+                </div>
               );
             })}
           </div>
@@ -153,13 +146,13 @@ export default function Efficiency() {
           <h2 style={H}>Before and after, every vector</h2>
           {GROUPS.map((g) => (
             <div key={g} style={{ marginBottom: 22 }}>
-              <h3 style={{ color: "var(--ice)", fontSize: 17, margin: "18px 0 6px" }}>{g}</h3>
-              <div style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640 }}>
+              <h3 style={{ color: "#fff", fontSize: 17, margin: "18px 0 6px" }}>{g}</h3>
+              <div className="pe-table-wrap" tabIndex={0}>
+                <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 640, background: "transparent" }}>
                   <thead>
                     <tr>
                       {["Figure", "Before", "After", "Change", "Label"].map((h) => (
-                        <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>
+                        <th key={h} style={{ ...CELL, textAlign: "left" }}>
                           {h}
                         </th>
                       ))}
@@ -203,24 +196,24 @@ export default function Efficiency() {
           </p>
           <div style={{ display: "grid", gap: 10 }}>
             {METRICS.map((m) => (
-              <GlowCard key={m.id} style={CARD}>
+              <div key={m.id} className="pe-card pe-card--pad">
                 <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-                  <strong style={{ color: "var(--ice)", fontSize: 15 }}>{m.label}</strong>
+                  <strong style={{ color: "var(--pe-text)", fontSize: 15 }}>{m.label}</strong>
                   <Badge status={m.status} />
                   <span style={MUTED}>{m.date}</span>
                 </div>
                 <p style={{ ...MUTED, margin: "6px 0 2px" }}>How: {m.method}</p>
                 <p style={{ ...MUTED, margin: 0 }}>Source: {m.source}</p>
-              </GlowCard>
+              </div>
             ))}
           </div>
 
           <h2 style={H}>Timeline</h2>
-          <div style={{ borderLeft: "2px solid var(--gold)", paddingLeft: 16, display: "grid", gap: 14 }}>
+          <div style={{ borderLeft: "2px solid var(--pe-gold)", paddingLeft: 16, display: "grid", gap: 14 }}>
             {data.timeline.map((t) => (
               <div key={t.time + t.text}>
-                <div style={{ color: "var(--gold)", fontSize: 14 }}>{t.time}</div>
-                <div style={{ color: "var(--ice)", fontSize: 15, lineHeight: 1.6 }}>{t.text}</div>
+                <div style={{ color: "var(--pe-gold-hi)", fontSize: 14 }}>{t.time}</div>
+                <div style={{ color: "var(--pe-text)", fontSize: 15, lineHeight: 1.6 }}>{t.text}</div>
                 <div style={MUTED}>Source: {t.source}</div>
               </div>
             ))}
@@ -234,14 +227,14 @@ export default function Efficiency() {
                 ? { ...raw, label: "Test cases in the main codebase", value: LEDGER.tests_main.value, source: LEDGER.tests_main.source, method: `${LEDGER.tests_main.method}, ${AS_OF_LONG}. ${LEDGER.suites_now.value} automated safety suites guard the control layer.` }
                 : raw;
               return (
-              <GlowCard key={h.label} style={CARD}>
-                <div style={{ color: "var(--gold)", fontSize: 28, fontWeight: 700, ...(h.value === null ? { opacity: 0.55, fontStyle: "italic", fontSize: 20 } : {}) }}>
+              <div key={h.label} className="pe-card pe-card--pad">
+                <div style={{ color: "var(--pe-gold-hi)", fontSize: 28, fontWeight: 700, ...(h.value === null ? { opacity: 0.55, fontSize: 20 } : {}) }}>
                   {h.value === null ? "measuring" : h.value.toLocaleString("en-AU")}
                 </div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.5 }}>{h.label}</div>
+                <div style={{ color: "var(--pe-text)", fontSize: 14, lineHeight: 1.5 }}>{h.label}</div>
                 <div style={MUTED}>{h.method}</div>
                 <div style={MUTED}>Source: {h.source}</div>
-              </GlowCard>
+              </div>
               );
             })}
           </div>

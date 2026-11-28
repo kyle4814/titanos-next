@@ -9,7 +9,7 @@ import type { SeatAnchor } from "@/lib/seatAnchors";
 export default function SeatAnchors({ rows, extras }: { rows: SeatAnchor[]; extras?: Record<string, ReactNode> }) {
   if (!rows.length) return null;
   const wrap = { maxWidth: 960, margin: "0 auto", padding: "0 20px 60px", display: "flex", flexDirection: "column", gap: 16 } as const;
-  const card = { border: "1px solid var(--border)", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 8, scrollMarginTop: 80 } as const;
+  const card = { border: "1px solid var(--pe-line, var(--border))", background: "var(--pe-card, transparent)", borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 8, scrollMarginTop: 80 } as const;
   return (
     <div style={wrap}>
       <nav aria-label="On this page" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

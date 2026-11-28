@@ -36,7 +36,7 @@ export default function PitchPage() {
         tagline="Kyle Deligny, founder. Public records in, new work and protection out, for small businesses."
         sub="Thanks for taking a look. The key facts and links are under the video."
       />
-      <section className="container-vault" style={{ maxWidth: 900, margin: "0 auto", padding: "0 16px 48px" }}>
+      <section className="pe-page pe-page--narrow pe-section">
         <video
           controls
           playsInline
@@ -44,7 +44,7 @@ export default function PitchPage() {
           poster="/v/titanos-pitch-poster.jpg"
           width={1280}
           height={1706}
-          style={{ display: "block", width: "100%", maxWidth: 480, margin: "0 auto", aspectRatio: "1280 / 1706", objectFit: "contain", borderRadius: "var(--radius-md)", border: "1px solid var(--gold-dim)", background: "#000" }}
+          style={{ display: "block", width: "100%", maxWidth: 480, margin: "0 auto", aspectRatio: "1280 / 1706", objectFit: "contain", borderRadius: "var(--pe-r-card)", border: "1px solid var(--pe-line-gold)", background: "#000" }}
         >
           <source src="/v/titanos-pitch.mp4" type="video/mp4" />
           Your browser cannot play this video. <a href="/v/titanos-pitch.mp4">Download it here</a>.
@@ -52,21 +52,21 @@ export default function PitchPage() {
 
         <div style={{ marginTop: 32, display: "grid", gap: 14 }}>
           {FACTS.map((f) => (
-            <div key={f.k} style={{ background: "var(--card)", border: "1px solid var(--gold-dim)", borderRadius: "var(--radius-md)", padding: "14px 18px" }}>
-              <div style={{ color: "var(--gold)", fontWeight: 700, marginBottom: 4 }}>{f.k}</div>
-              <div style={{ color: "var(--text)", lineHeight: 1.65 }}>{f.v}</div>
+            <div key={f.k} className="pe-card pe-card--pad">
+              <div className="pe-kicker" style={{ marginBottom: 6 }}>{f.k}</div>
+              <div style={{ color: "var(--pe-text)", lineHeight: 1.65 }}>{f.v}</div>
             </div>
           ))}
         </div>
 
         <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}>
-          <Link className="btn" href="/offers">See every offer</Link>
-          <Link className="btn" href="/find">Try the offer finder</Link>
-          <a className="btn" href="/d/titanos-deck-2026-10.pdf">Investor deck (PDF)</a>
-          <Link className="btn" href="/engineering">How it was built</Link>
+          <Link className="pe-btn pe-btn--gold" href="/offers">See every offer</Link>
+          <Link className="pe-btn pe-btn--dark" href="/find">Try the offer finder</Link>
+          <a className="pe-btn pe-btn--dark" href="/d/titanos-deck-2026-10.pdf">Investor deck (PDF)</a>
+          <Link className="pe-btn pe-btn--dark" href="/engineering">How it was built</Link>
         </div>
-        <p style={{ marginTop: 24, color: "var(--dim)" }}>
-          Contact: Kyle Deligny · <a href="mailto:kyle@titanos.tech" style={{ color: "var(--gold)" }}>kyle@titanos.tech</a> · titanos.tech
+        <p style={{ marginTop: 24, color: "var(--pe-mute)" }}>
+          Contact: Kyle Deligny · <a href="mailto:kyle@titanos.tech" >kyle@titanos.tech</a> · titanos.tech
         </p>
       </section>
     </>

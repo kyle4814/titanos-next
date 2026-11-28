@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
+import "./leads-page.css";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -255,10 +256,10 @@ export default function LeadsPage() {
       </Bluf>
       <Analogy k="scouts" />
 
-      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+      <SectionReveal className="pe-page pe-section">
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={RESEARCH_FLEX} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p style={{ color: "var(--pe-mute)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254). The sources are public records and
             businesses&apos; own public websites, nothing is touched or logged into, and nobody is replaced. You own the file,
             and your own team still decides who gets contacted and how. The prices are below.
@@ -267,9 +268,7 @@ export default function LeadsPage() {
       </SectionReveal>
       <OpenLoop>Why do so many bought lists bounce on the first send, and what did we do differently?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      <section aria-label="What this list is" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+            <section aria-label="What this list is" className="pe-page g17-inscription">
         <Inscription
           label="Sourced from public record · verified before delivery"
           sub="Not a scraper dump. A research outcome, checked deliverable one row at a time, backed by a 30-day bounce replacement."
@@ -281,35 +280,18 @@ export default function LeadsPage() {
       </section>
 
       {/* ═══ 1.2 — The problem ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={1} total={7} />
           <SystemLabel style={{ marginBottom: 10 }}>Why most contact lists fail on first send</SystemLabel>
           <SectionHeading title="Why Bought Lists Bounce" lead="Three things go wrong with most lists, and none of them is your fault." />
           <div
-            className="grid-auto-cards"
-            style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
+            className="pe-grid"
           >
             {PROBLEMS.map((p) => (
               <article
-                key={p.title}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: 28,
-                }}
-              >
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--gold)",
-                    fontSize: "var(--fs-body)",
-                    letterSpacing: "0.04em",
-                    marginBottom: 12,
-                    lineHeight: 1.4,
-                  }}
-                >
+                key={p.title} className="pe-card pe-card--pad g17-card">
+                <h3 className="g17-h3">
                   {p.title}
                 </h3>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
@@ -323,37 +305,18 @@ export default function LeadsPage() {
 
       <OpenLoop>So what would a list look like if every row had been checked by a person first?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.3 — Differentiators ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* ═══ 1.3 — Differentiators ═══ */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={2} total={7} />
           <SectionHeading title="What Makes This Different" />
           <div
-            className="grid-auto-cards"
-            style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
+            className="pe-grid"
           >
             {DIFFERENTIATORS.map((d) => (
               <article
-                key={d.title}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: 28,
-                }}
-              >
-                <h3
-                  style={{
-                    color: "var(--ice)",
-                    fontSize: "var(--fs-body)",
-                    fontWeight: 600,
-                    marginBottom: 10,
-                    lineHeight: 1.35,
-                    fontFamily: "var(--font-body), system-ui, sans-serif",
-                  }}
-                >
+                key={d.title} className="pe-card pe-card--pad g17-card">
+                <h3 className="g17-h3">
                   <span style={{ color: "var(--ok)", marginRight: 8, fontWeight: 400 }}>✓</span>
                   {d.title}
                 </h3>
@@ -368,22 +331,17 @@ export default function LeadsPage() {
 
       <OpenLoop>And what does that cost? There is a 10 to 20 row sample you can look at before you pay anything.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.4 — Pricing tiers ═══ */}
+            {/* ═══ 1.4 — Pricing tiers ═══ */}
       <SectionReveal
-        id="pricing"
-        style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}
-      >
-        <div className="container-vault">
+        id="pricing" className="pe-page pe-section">
+        <div>
           <DepthIndex index={3} total={7} />
           <SectionHeading
             title="Pricing"
             lead="One-off lists or an ongoing feed. Every tier is verified at delivery, and every tier is covered by the 30-day bounce replacement."
           />
           <div
-            className="grid-auto-cards"
-            style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
+            className="pe-grid"
           >
             <LeadsTier
               tag="THE TRY-IT TIER"
@@ -447,7 +405,7 @@ export default function LeadsPage() {
           <p
             style={{
               textAlign: "center",
-              color: "var(--ice)",
+              color: "var(--pe-mute)",
               fontSize: "var(--fs-body)",
               lineHeight: 1.7,
               maxWidth: "var(--maxw-prose)",
@@ -460,7 +418,7 @@ export default function LeadsPage() {
           <p
             style={{
               textAlign: "center",
-              color: "var(--ice)",
+              color: "var(--pe-mute)",
               fontSize: "var(--fs-body)",
               lineHeight: 1.7,
               maxWidth: "var(--maxw-prose)",
@@ -490,50 +448,21 @@ export default function LeadsPage() {
 
       <OpenLoop>Once you have picked a tier, what actually happens next?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.5 — How it works ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* ═══ 1.5 — How it works ═══ */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={4} total={7} />
           <SectionHeading title="How It Works" lead="Three steps, and you see the price before any of them." />
           <div
-            className="grid-auto-cards"
-            style={{ gap: 22, maxWidth: "var(--maxw-wide)", margin: "0 auto" }}
+            className="pe-grid"
           >
             {STEPS.map((s) => (
               <article
-                key={s.num}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--gold-dim)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "32px 26px 26px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--gold)",
-                    fontSize: "var(--fs-h3)",
-                    letterSpacing: "0.05em",
-                    marginBottom: 8,
-                    lineHeight: 1,
-                  }}
-                  aria-hidden="true"
-                >
+                key={s.num} className="pe-card pe-card--pad g17-card">
+                <div className="g17-num" aria-hidden="true">
                   {s.num}
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--gold)",
-                    fontSize: "var(--fs-body)",
-                    letterSpacing: "0.08em",
-                    marginBottom: 14,
-                    lineHeight: 1.4,
-                  }}
-                >
+                <h3 className="g17-h3">
                   {s.title}
                 </h3>
                 <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>
@@ -547,11 +476,9 @@ export default function LeadsPage() {
 
       <OpenLoop>Is it even legal to hold this data? Fair question, and it is the one I get asked most.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.6 — Legal-by-design (load-bearing) ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* ═══ 1.6 — Legal-by-design (load-bearing) ═══ */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={5} total={7} />
           <SectionHeading title="Built by a Compliance Practice, on Purpose" lead="I do Privacy Act work for a living, so the list is built the way I would want mine built." />
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
@@ -569,28 +496,11 @@ export default function LeadsPage() {
               build theirs:
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div className="g17-pillars" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {LEGAL_PILLARS.map((l) => (
                 <article
-                  key={l.title}
-                  style={{
-                    background: "var(--card)",
-                    border: "1px solid var(--gold-dim)",
-                    borderLeft: "3px solid var(--gold)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "18px 22px",
-                  }}
-                >
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display), Georgia, serif",
-                      color: "var(--gold)",
-                      fontSize: "var(--fs-body)",
-                      letterSpacing: "0.04em",
-                      marginBottom: 6,
-                      lineHeight: 1.4,
-                    }}
-                  >
+                  key={l.title} className="pe-card pe-card--pad g17-card">
+                  <h3 className="g17-h3">
                     {l.title}
                   </h3>
                   <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7, margin: 0 }}>
@@ -602,7 +512,7 @@ export default function LeadsPage() {
 
             <p
               style={{
-                color: "var(--ice)",
+                color: "var(--pe-mute)",
                 fontSize: "var(--fs-body)",
                 lineHeight: 1.75,
                 marginTop: 28,
@@ -625,11 +535,9 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.6b — SPAM ACT ═══ */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* ═══ 1.6b — SPAM ACT ═══ */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
             <DepthIndex index={6} total={7} />
             <SectionHeading title="Using the List the Right Way" />
@@ -648,11 +556,9 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.7 — FAQ ═══ */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* ═══ 1.7 — FAQ ═══ */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={7} total={7} />
           <SectionHeading title="The Questions Buyers Ask First" />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -704,33 +610,15 @@ export default function LeadsPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* ═══ 1.8 — Closing CTA ═══ */}
-      <SectionReveal
-        style={{
-          textAlign: "center",
-          padding: "var(--space-20) 20px",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+            {/* ═══ 1.8 — Closing CTA ═══ */}
+      <SectionReveal className="pe-page pe-section g17-cta">
         <OmegaSeal caption="Public record only. Suppression honoured. You own the file." style={{ marginBottom: "var(--space-8)" }} />
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            fontWeight: 700,
-            marginBottom: 14,
-            letterSpacing: "0.05em",
-          }}
-        >
+        <h2 className="g17-cta-h2">
           Would it be okay if you told me who you are trying to reach?
         </h2>
         <p
           style={{
-            color: "var(--ice)",
+            color: "var(--pe-mute)",
             fontSize: "var(--fs-lg)",
             marginBottom: 32,
             maxWidth: "var(--maxw-prose)",
@@ -782,90 +670,19 @@ function LeadsTier({
   highlight?: boolean;
 }) {
   return (
-    <article
-      style={{
-        background: "var(--card)",
-        border: highlight ? "1px solid var(--gold)" : "1px solid var(--gold-dim)",
-        boxShadow: highlight ? "0 0 0 1px rgb(var(--gold-rgb) / 0.35)" : undefined,
-        borderRadius: "var(--radius-md)",
-        padding: "32px 28px",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "var(--font-mono), monospace",
-          color: highlight ? "var(--gold)" : "var(--ice)",
-          fontSize: "var(--fs-xs)",
-          letterSpacing: "0.16em",
-          marginBottom: 10,
-          textTransform: "uppercase",
-        }}
-      >
-        {tag}
-      </div>
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-h3)",
-          fontWeight: 700,
-          letterSpacing: "0.04em",
-          lineHeight: 1.25,
-          marginBottom: 10,
-        }}
-      >
+    <article className={`pe-card pe-card--pad g17-card g17-tier${highlight ? " pe-card--gold" : ""}`}>
+      <div className="pe-eyebrow-line g17-tag">{tag}</div>
+      <h3 className="g17-h3">
         {title}
       </h3>
-      <div
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-h3)",
-          fontWeight: 700,
-          lineHeight: 1.1,
-        }}
-      >
+      <div className="g17-price">
         {price}
-        <span
-          style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-xs)",
-            fontWeight: 400,
-            display: "block",
-            marginTop: 4,
-            letterSpacing: "0.02em",
-          }}
-        >
-          {priceUnit}
-        </span>
+        <span>{priceUnit}</span>
       </div>
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: "20px 0 22px",
-          flexGrow: 1,
-          color: "var(--text)",
-          fontSize: "var(--fs-sm)",
-          lineHeight: 1.6,
-        }}
-      >
+      <ul className="g17-ticks">
         {bullets.map((b) => (
-          <li key={b} style={{ marginBottom: 10, paddingLeft: 18, position: "relative" }}>
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 1,
-                color: "var(--ok)",
-              }}
-            >
-              ✓
-            </span>
+          <li key={b}>
+            <span aria-hidden="true">✓</span>
             {b}
           </li>
         ))}

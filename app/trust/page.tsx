@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
-import { Block } from "@/components/SiteBlocks";
+import "../proof/proof-page.css";
 import trust from "@/lib/site-data/trust.json";
 import { longDate } from "@/lib/provenance";
 
@@ -25,23 +25,29 @@ export default function Trust() {
   return (
     <>
       <PageHero badge="TRUST" title="The answers, before you have to ask." tagline="What we scan, what we never do, how AI is used, and what happens if you change your mind." />
-      {sections.map((s) => (
-        <Block key={s.id} point={s.heading}>
-          <span id={s.anchor} aria-hidden="true" />
-          <p data-trust={s.id}>{s.body}</p>
-          {s.links && (
-            <p>
-              {s.links.map(([href, text]) => (
-                <a key={href} href={href} style={{ color: "var(--gold)", marginRight: 16 }}>{text}</a>
-              ))}
-            </p>
-          )}
-          <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)" }}>Record: {s.source}</p>
-        </Block>
-      ))}
-      <Block point="Where this page comes from">
-        <p data-provenance="/trust">{trust.system}, read {longDate(trust.asOf)}. Each section names the file it rests on.</p>
-      </Block>
+      <div className="pe-trustpage">
+        <div className="pe-page pe-page--narrow pe-trust__list">
+          {sections.map((s) => (
+            <section key={s.id} className="pe-card pe-card--pad pe-trust__card" aria-labelledby={`${s.anchor}-h`}>
+              <span id={s.anchor} className="pe-trust__anchor" aria-hidden="true" />
+              <h2 id={`${s.anchor}-h`}>{s.heading}</h2>
+              <p data-trust={s.id}>{s.body}</p>
+              {s.links && (
+                <p className="pe-trust__links">
+                  {s.links.map(([href, text]) => (
+                    <a key={href} href={href}>{text}</a>
+                  ))}
+                </p>
+              )}
+              <p className="pe-trust__rec">Record: {s.source}</p>
+            </section>
+          ))}
+          <section className="pe-card pe-card--pad pe-trust__card pe-card--gold">
+            <h2>Where this page comes from</h2>
+            <p data-provenance="/trust">{trust.system}, read {longDate(trust.asOf)}. Each section names the file it rests on.</p>
+          </section>
+        </div>
+      </div>
     </>
   );
 }

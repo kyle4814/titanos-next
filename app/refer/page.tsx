@@ -8,6 +8,7 @@ import { Inscription, SystemLabel, DepthIndex, OperatorNote } from "@/components
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
+import "./refer.css";
 import W2d from "@/components/w2d/W2d";
 
 const baseMetadata: Metadata = {
@@ -89,7 +90,7 @@ export default function ReferPage() {
       <SectionReveal style={{ padding: "var(--space-8) 20px 0" }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={FLEX.market} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p className="pe-muted refer-note">
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I review every application myself.
             Nothing is sent to anyone without your say. Nobody is replaced by what we build, and the business you
             introduce keeps its own IT person in charge. It costs you nothing to join.
@@ -102,7 +103,7 @@ export default function ReferPage() {
         <Inscription label="The final stage" sub="You may already know a business that would be glad of an introduction. This is where you can make one.">
           You already know who&apos;s drowning in manual work.
           <br />
-          <span style={{ color: "var(--gold)" }}>Point us at them. Get paid when it closes.</span>
+          <span className="pe-goldtext">Point us at them. Get paid when it closes.</span>
         </Inscription>
       </section>
 
@@ -110,28 +111,10 @@ export default function ReferPage() {
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "40px auto 40px", textAlign: "center" }}>
           <DepthIndex index={1} total={3} style={{ textAlign: "center" }} />
           <SystemLabel style={{ marginBottom: 8 }}>Attribution log · timestamped, not judged</SystemLabel>
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h2)",
-              letterSpacing: "0.06em",
-              marginBottom: 18,
-            }}
-          >
+          <h2 className="refer-h2">
             How it works, step by step
           </h2>
-          <ol
-            style={{
-              textAlign: "left",
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.8,
-              maxWidth: 520,
-              margin: "0 auto",
-              paddingLeft: 20,
-            }}
-          >
+          <ol className="refer-steps">
             <li>Apply below, takes under a minute, no fee.</li>
             <li>Kyle reviews and approves your application personally.</li>
             <li>You get a private portal link. Submit warm introductions from there.</li>
@@ -159,16 +142,7 @@ export default function ReferPage() {
       <SectionReveal>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "50px auto 0" }}>
           <DepthIndex index={3} total={3} style={{ textAlign: "center" }} />
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h2)",
-              letterSpacing: "0.06em",
-              marginBottom: 18,
-              textAlign: "center",
-            }}
-          >
+          <h2 className="refer-h2">
             Questions before you apply
           </h2>
           <FaqItem question="How much can I earn?">
@@ -190,7 +164,7 @@ export default function ReferPage() {
         </div>
       </SectionReveal>
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-8) 20px var(--space-4)" }}>
-        <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <p className="pe-muted refer-note">
           Would it be okay if you had a look at the form when you have a quiet minute? If it is not for you, a no is
           completely welcome and we stay friends.
         </p>

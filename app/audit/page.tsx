@@ -14,6 +14,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import W2c from "@/components/w2c/W2c";
+import "@/components/g4/g4.css";
 
 const META_TITLE = "Free AI Audit Call for Australian Businesses | Titanos";
 const META_DESC =
@@ -89,6 +90,7 @@ export default function AuditPage() {
 
   return (
     <W2c>
+     <div className="g4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -103,7 +105,7 @@ export default function AuditPage() {
         sub="You tell me what is eating your week. We work out together what is automatable in your business and what it is worth, and you get a free report to keep. No cost, no pitch deck, no obligation. Just a straight conversation."
         trustLine={
           <>
-            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Kyle takes the call personally
+            <strong style={{ color: "var(--pe-gold)" }}>ABN 34 318 502 254</strong> · Kyle takes the call personally
           </>
         }
       />
@@ -112,114 +114,70 @@ export default function AuditPage() {
       </Bluf>
       <Analogy k="healthcheck" />
 
-      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page--narrow">
           <FlexNumber f={FLEX.fleetJobs} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p className="pe-muted" style={{ lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
             That is the machine I would be pointing at your repetitive work. Before you ask: I am Kyle Deligny, a sole
             trader (ABN 34 318 502 254), and I take the call myself. I touch nothing in your business on the call, nobody
             is replaced, your IT person stays in charge, and it costs nothing.
           </p>
+          <div className="g4-cta">
+            <AnimatedButton href="/book" variant="primary">
+              Book a free call with Kyle →
+            </AnimatedButton>
+          </div>
         </div>
       </SectionReveal>
 
-      <section style={{ padding: "0 20px 28px", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <AnimatedButton href="/book" variant="primary">
-          Book a free call with Kyle →
-        </AnimatedButton>
-      </section>
-
-      {/* THE DOOR — this page is where an observer becomes a participant.
-          The inscription states the trade plainly before anything is asked
-          of them. */}
-      <section style={{ padding: "var(--space-6) 20px var(--space-12)", position: "relative", zIndex: 2 }}>
-        <Inscription
-          label="No cost · No pitch deck · No obligation"
-          sub="Thirty minutes. You describe how the work actually gets done. I tell you which parts a machine can carry, and which parts shouldn't leave your hands. One thing worth bringing: the task you repeat every single week."
-        >
-          You bring the problem.
-          <br />
-          <span style={{ color: "var(--gold)" }}>I bring the machine.</span>
-        </Inscription>
+      {/* THE DOOR: the inscription states the trade plainly before anything is asked of them. */}
+      <section className="pe-section">
+        <div className="pe-page--narrow">
+          <Inscription
+            label="No cost · No pitch deck · No obligation"
+            sub="Thirty minutes. You describe how the work actually gets done. I tell you which parts a machine can carry, and which parts shouldn't leave your hands. One thing worth bringing: the task you repeat every single week."
+          >
+            You bring the problem.
+            <br />
+            <span style={{ color: "var(--pe-gold)" }}>I bring the machine.</span>
+          </Inscription>
+        </div>
       </section>
 
       <OpenLoop>So what actually happens in that half-hour, and what do you walk away with?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SectionHeading title="What happens on the call" lead="Four steps, and the last one is allowed to be a no." />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: 18,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
-          >
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <SectionHeading title="What happens on the call" lead="Four steps, and the last one is allowed to be a no." showKeyhole={false} />
+          <div className="pe-grid">
             {STEPS.map((s) => (
-              <div
-                key={s.num}
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-md)",
-                  padding: "22px 24px",
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minWidth: 34,
-                    height: 24,
-                    padding: "0 8px",
-                    background: "rgb(var(--gold-rgb) / 0.12)",
-                    border: "1px solid var(--gold-dim)",
-                    color: "var(--gold)",
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    fontSize: "var(--fs-xs)",
-                    letterSpacing: "0.08em",
-                    borderRadius: 999,
-                    marginBottom: 12,
-                    fontWeight: 700,
-                  }}
-                >
-                  {s.num}
-                </span>
-                <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.65, margin: 0 }}>
-                  {s.title}
-                </p>
+              <div key={s.num} className="pe-card pe-card--pad g4-step">
+                <span aria-hidden="true" className="g4-step__num">{s.num}</span>
+                <p>{s.title}</p>
               </div>
             ))}
           </div>
-          <p style={{ textAlign: "center", color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 28, maxWidth: "var(--maxw-prose)", marginLeft: "auto", marginRight: "auto", lineHeight: 1.7 }}>
+          <p className="g4-note">
             No cost. No obligation. No pitch deck. If there&apos;s nothing worth automating yet,
             I&apos;ll tell you that too.
           </p>
-          <p style={{ textAlign: "center", marginTop: 24 }}>
+          <div className="g4-cta">
             <AnimatedButton href="/book" variant="primary">
               Book a free call with Kyle →
             </AnimatedButton>
-          </p>
+          </div>
         </div>
       </SectionReveal>
 
       <OpenLoop>How do you get hold of me? Probably more simply than you expect.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="message">
-        <div className="container-vault">
+      <SectionReveal className="pe-section" id="message">
+        <div className="pe-page pe-page--narrow">
           <SystemLabel tone="gold" style={{ textAlign: "center", marginBottom: 12 }}>
             Direct line. No gatekeeper
           </SystemLabel>
-          <SectionHeading title="Would it be okay if you messaged me?" lead="Book a 20 minute call, send a message on Telegram, or just call. Whichever suits you. A no is welcome." />
-          <OperatorNote style={{ margin: "0 auto var(--space-8)" }}>
+          <SectionHeading title="Would it be okay if you messaged me?" lead="Book a 20 minute call, send a message on Telegram, or just call. Whichever suits you. A no is welcome." showKeyhole={false} />
+          <OperatorNote style={{ margin: "0 auto var(--pe-sp-6, 32px)" }}>
             I take every one of these myself. If automation isn&apos;t worth it for your
             business, I&apos;ll tell you on the call rather than sell you something that
             won&apos;t pay for itself.
@@ -229,11 +187,9 @@ export default function AuditPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-          <SectionHeading title="Questions before you message" lead="The ones people ask first, answered here." />
+      <SectionReveal className="pe-section">
+        <div className="pe-page pe-page--narrow">
+          <SectionHeading title="Questions before you message" lead="The ones people ask first, answered here." showKeyhole={false} />
           <FaqItem question="Is this actually free?">
             Yes. No card, no obligation, no pitch deck. If there's nothing worth automating in your business yet, I'll tell you that too.
           </FaqItem>
@@ -249,25 +205,10 @@ export default function AuditPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }} id="request">
-        <div className="container-vault">
-          <details>
-            <summary
-              style={{
-                cursor: "pointer",
-                textAlign: "center",
-                fontFamily: "var(--font-body), system-ui, sans-serif",
-                fontWeight: 500,
-                fontSize: "var(--fs-body)",
-                color: "var(--ice)",
-                listStyle: "none",
-                marginBottom: 24,
-              }}
-            >
-              Prefer to write it all down first?
-            </summary>
+      <SectionReveal className="pe-section" id="request">
+        <div className="pe-page pe-page--narrow">
+          <details className="g4-details">
+            <summary>Prefer to write it all down first?</summary>
             <Suspense>
               <AuditRequestClient />
             </Suspense>
@@ -275,15 +216,15 @@ export default function AuditPage() {
         </div>
       </SectionReveal>
 
-      {/* The seal closes the door page — the one Omega on this route. */}
-      <SectionReveal style={{ padding: "0 20px var(--space-20)", position: "relative", zIndex: 2 }}>
+      {/* The seal closes the door page: the one Omega on this route. */}
+      <SectionReveal className="pe-section">
         <OmegaSeal
           withStem={false}
           caption="One operator. One call. No sales team behind this door."
-          style={{ marginTop: "var(--space-8)" }}
         />
       </SectionReveal>
       <FrontLoad/>
+     </div>
     </W2c>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import ProofWall from "@/components/charts/ProofWall";
@@ -9,6 +8,7 @@ import { FLEX, type Flex } from "@/lib/flex";
 import Tiles, { type TileItem } from "@/components/proof/Tiles";
 import Provenance from "@/components/Provenance";
 import { ProofCharts } from "@/components/home/moved/ProofCharts";
+import "./proof-page.css";
 
 const REPLAY: Flex = {
   big: "250 of 250 tests, 57 saved versions",
@@ -39,26 +39,9 @@ const baseMetadata: Metadata = {
 
 export const metadata: Metadata = withSeo("/proof", baseMetadata);
 
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const A: CSSProperties = { color: "var(--gold)" };
-const CODE: CSSProperties = {
-  display: "block",
-  background: "#000",
-  border: "1px solid var(--border)",
-  borderRadius: 8,
-  padding: "12px 14px",
-  color: "var(--ice)",
-  fontSize: 13,
-  overflowX: "auto",
-  whiteSpace: "pre",
-};
-
 export default function Proof() {
   return (
-    <div>
+    <div className="pe-proofpage">
       <PageHero
         badge="Proof"
         title="Check it yourself."
@@ -66,11 +49,11 @@ export default function Proof() {
       />
       <Provenance route="/proof" />
       <ProofWall />
-      <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div style={WRAP}>
+      <section className="pe-proof__sec" style={{ paddingBottom: 0 }}>
+        <div className="pe-page pe-page--narrow">
           <Tiles label="Recorded build figures" items={RECEIPTS} />
           <FlexNumber f={REPLAY} />
-          <p style={BODY}>
+          <p className="pe-proof__p">
             Method: we checked out each saved version in order and ran its tests, and the command is shown below so you can repeat it.
             Nothing was touched except our own code, no one is replaced by any of it, and it costs you nothing to look.
           </p>
@@ -78,76 +61,78 @@ export default function Proof() {
         </div>
       </section>
       <OpenLoop>That is the headline. What did the replay find that we did not expect?</OpenLoop>
-      <section style={SECTION}>
-        <div style={WRAP}>
-          <h2 style={H}>1. Public code, every change timestamped</h2>
-          <ul style={{ ...BODY, paddingLeft: 20 }}>
+      <section className="pe-proof__sec">
+        <div className="pe-page pe-page--narrow">
+          <h2 className="pe-proof__h">1. Public code, every change timestamped</h2>
+          <ul className="pe-proof__p">
             <li>
               This website&apos;s source, every change dated to the second:{" "}
-              <a href="https://github.com/kyle4814/titanos-next/commits/main" style={A}>
+              <a href="https://github.com/kyle4814/titanos-next/commits/main">
                 github.com/kyle4814/titanos-next
               </a>
             </li>
             <li>
               SpoofGuard, our free open-source email security tool:{" "}
-              <a href="https://github.com/kyle4814/spoofguard" style={A}>
+              <a href="https://github.com/kyle4814/spoofguard">
                 github.com/kyle4814/spoofguard
               </a>
             </li>
           </ul>
 
-          <h2 style={H}>2. Full test runs, with timestamps</h2>
-          <p style={BODY}>Raw logs, each line stamped with the time it ran (7 October 2026, Brisbane time). No summary written afterwards, just the output:</p>
-          <ul style={{ ...BODY, paddingLeft: 20 }}>
+          <h2 className="pe-proof__h">2. Full test runs, with timestamps</h2>
+          <p className="pe-proof__p">Raw logs, each line stamped with the time it ran (7 October 2026, Brisbane time). No summary written afterwards, just the output:</p>
+          <ul className="pe-proof__p">
             <li>
-              <a href="/proof/trading-app-tests.log" style={A}>
+              <a href="/proof/trading-app-tests.log">
                 Trading app: 250 of 250 tests passed
               </a>
             </li>
             <li>
-              <a href="/proof/spoofguard-tests.log" style={A}>
+              <a href="/proof/spoofguard-tests.log">
                 SpoofGuard: 83 of 83 tests passed
               </a>
             </li>
           </ul>
 
-          <h2 style={H}>3. The 3.5-hour build, replayed commit by commit</h2>
-          <p style={BODY}>
+          <h2 className="pe-proof__h">3. The 3.5-hour build, replayed commit by commit</h2>
+          <p className="pe-proof__p">
             Think of a builder&apos;s time-lapse. We checked out every one of the 57 saved versions of the trading app in order and ran its tests. Each line of
             the replay shows when that version was saved, its ID, and how many tests passed. Tests grew from 20 at 05:41 to
             250 at 09:37.
           </p>
-          <p style={BODY}>
-            <a href="/proof/trading-app-build-replay.log" style={A}>
+          <p className="pe-proof__p">
+            <a href="/proof/trading-app-build-replay.log">
               Open the full replay log
             </a>
           </p>
-          <p style={BODY}>
+          <p className="pe-proof__p">
             Here is the part we did not expect, shown as found: five in-between versions each have one test that fails when replayed today. Those tests depend on
             the time of day or on live market data (for example, a session-clock label and a live one-tap trade). Every one
             passes at the final version, 250 of 250.
           </p>
-          <p style={BODY}>How the replay was run, so anyone with the repository can repeat it:</p>
-          <code tabIndex={0} style={CODE}>{`for c in $(git rev-list --reverse HEAD); do
+          <p className="pe-proof__p">How the replay was run, so anyone with the repository can repeat it:</p>
+          <code tabIndex={0} className="pe-proof__code">{`for c in $(git rev-list --reverse HEAD); do
   git checkout -q "$c"
   echo "$(git log -1 --format=%ci) $(node --test tests/*.test.js | grep '^# pass')"
 done`}</code>
 
-          <h2 style={H}>What this proves, and what it does not</h2>
-          <p style={BODY}>
+          <h2 className="pe-proof__h">What this proves, and what it does not</h2>
+          <p className="pe-proof__p">
             It proves the base: real code, real tests, real timestamps, and the speed of that build. Our larger figures (the
             compounding, the second account, the engineer-equivalents) are calculations built on this base, and each is labelled
             as a model. They become facts only as weekly results confirm them, and we publish those results too.
           </p>
 
-          <p style={{ ...BODY, textAlign: "center", marginTop: 32 }}>
+          <div className="pe-proof__close">
+          <p className="pe-proof__p">
             Would it be okay if I showed you what a build like this could look like for your business? A no is welcome.
           </p>
-          <div style={{ textAlign: "center", marginTop: 12, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="pe-proof__cta">
             <AnimatedButton href="/case-studies/trading-app">The case study</AnimatedButton>
             <AnimatedButton href="/audit" variant="secondary">
               Book a free consultation
             </AnimatedButton>
+          </div>
           </div>
         </div>
       </section>

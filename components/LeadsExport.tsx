@@ -27,7 +27,7 @@ export default function LeadsExport() {
         </select>
       </label>
       <label>Example list (JSON) <textarea value={text} onChange={(e) => setText(e.target.value)} rows={10} style={{ width: "100%", fontFamily: "monospace" }} /></label>
-      <button type="button" onClick={run} style={{ minHeight: 44 }}>Check rows</button>
+      <button type="button" className="pe-btn pe-btn--gold pe-btn--sm" onClick={run} style={{ minHeight: 44 }}>Check rows</button>
       {!view.ok ? (
         <p role="alert" data-testid="leads-error">{view.message}</p>
       ) : (
@@ -39,7 +39,7 @@ export default function LeadsExport() {
             ))}
           </ul>
           <small>{view.method}</small>
-          <button type="button" onClick={download} disabled={view.emitted === 0} style={{ minHeight: 44 }}>Download CSV of allowed rows</button>
+          <button type="button" className="pe-btn pe-btn--dark pe-btn--sm" onClick={download} disabled={view.emitted === 0} style={{ minHeight: 44 }}>Download CSV of allowed rows</button>
         </div>
       )}
     </div>

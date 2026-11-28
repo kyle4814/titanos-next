@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
+import "./scan-page.css";
 import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
@@ -247,10 +248,10 @@ export default function ScanPage() {
       </Bluf>
       <Analogy k="healthcheck" />
 
-      <SectionReveal style={{ padding: "var(--space-8) 20px 0", position: "relative", zIndex: 2 }}>
+      <SectionReveal className="pe-page pe-section">
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
           <FlexNumber f={SELF_SCAN_FLEX} />
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
+          <p style={{ color: "var(--pe-mute)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "18px 0 0", textAlign: "center" }}>
             Before you ask. I am Kyle Deligny, a sole trader (ABN 34 318 502 254), and I read every report before it
             reaches you. The check uses public records only and touches nothing of yours, with no login and no
             password guessing. Nobody is replaced, your IT person stays in charge and is welcome to read the whole
@@ -260,22 +261,18 @@ export default function ScanPage() {
       </SectionReveal>
       <OpenLoop>What does a check like this look like on the page? Here is the kind of output it reads.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* AES-19 — terminal-snippet product-evidence visual */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px 0", position: "relative", zIndex: 2 }}>
+            {/* AES-19 — terminal-snippet product-evidence visual */}
+      <SectionReveal className="pe-page pe-section">
         <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
           <TerminalSnippet />
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* SELF-SCAN — merged from /our-scan (consolidated 2026-07-05).
+            {/* SELF-SCAN — merged from /our-scan (consolidated 2026-07-05).
           Source: /home/userland/clawd/products/vuln_scanner/results/titanos.tech.json
           Scan ID 40e4f6c4db8b · timestamp 2026-06-01T02:46:25Z */}
-      <SectionReveal id="self-scan" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-content)" }}>
+      <SectionReveal id="self-scan" className="pe-page pe-section">
+        <div>
           <DepthIndex index={1} total={8} />
           <Inscription
             label="Self-scan · findings published verbatim"
@@ -285,17 +282,10 @@ export default function ScanPage() {
             I ran this check on myself first.
           </Inscription>
           <h2 className="sr-only">Findings from the scan of our own site</h2>
+          <div className="g17-findings">
           {SELF_SCAN_FINDINGS.map((f) => (
             <article
-              key={f.title}
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-md)",
-                padding: "20px 22px",
-                marginBottom: 14,
-              }}
-            >
+              key={f.title} className="pe-card pe-card--pad g17-card">
               <header style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, marginBottom: 8 }}>
                 <SystemLabel
                   style={{
@@ -307,22 +297,14 @@ export default function ScanPage() {
                 >
                   {f.status}
                 </SystemLabel>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display), Georgia, serif",
-                    color: "var(--ice)",
-                    fontSize: "var(--fs-body)",
-                    letterSpacing: "0.04em",
-                    margin: 0,
-                    flex: "1 1 100%",
-                  }}
-                >
+                <h3 className="g17-h3">
                   {f.title}
                 </h3>
               </header>
               <p style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>{f.resolution}</p>
             </article>
           ))}
+          </div>
           <SystemLabel style={{ textAlign: "center", marginTop: 20 }}>
             Full scan run 2026-06-01 · TLS 1.3 · 0 open ports (Cloudflare-fronted) · 0 cleartext services · 0 DB exposure.
             TLS 1.3 re-confirmed 5 October 2026, certificate valid through 26 December 2026.
@@ -335,7 +317,7 @@ export default function ScanPage() {
             internet, and it only ever runs against a domain someone has asked me to check.
           </OperatorNote>
 
-          <p style={{ color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
+          <p style={{ color: "var(--pe-mute)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
             Want to see what a full evidence pack looks like?{" "}
             <a href="/our-evidence-pack" style={{ color: "var(--gold)" }}>
               See my own evidence pack, published in full →
@@ -345,17 +327,12 @@ export default function ScanPage() {
       </SectionReveal>
 
       {/* WHAT IT IS / WHO IT'S FOR */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={2} total={8} />
           <SectionHeading title="What It Is · Who It&apos;s For" />
           <div
-            className="grid-auto-cards"
-            style={{
-              gap: 22,
-              maxWidth: "var(--maxw-wide)",
-              margin: "0 auto",
-            }}
+            className="pe-grid"
           >
             <CardCol title="What It Is" items={WHAT_IT_IS} />
             <CardCol title="Who It&apos;s For" items={WHO_ITS_FOR} />
@@ -365,11 +342,9 @@ export default function ScanPage() {
 
       <OpenLoop>Curious how it goes from a form to a finished report in two business days?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* THE FULL PROCESS */}
-      <SectionReveal id="process" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* THE FULL PROCESS */}
+      <SectionReveal id="process" className="pe-page pe-section">
+        <div>
           <DepthIndex index={3} total={8} />
           <SectionHeading
             title="The Full Process"
@@ -381,49 +356,19 @@ export default function ScanPage() {
 
       <OpenLoop>And once it lands, what will you be looking at?</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* WHAT'S INSIDE THE REPORT */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* WHAT'S INSIDE THE REPORT */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={4} total={8} />
           <SectionHeading
             title="What&apos;s Inside the Report"
             lead="One report. Every finding is ranked, and every finding can be checked again."
           />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
-            <ul
-              style={{
-                listStyle: "none",
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-md)",
-                padding: "24px 28px",
-                margin: 0,
-              }}
-            >
+            <ul className="pe-card pe-card--pad g17-ticks g17-report">
               {REPORT_ITEMS.map((it) => (
-                <li
-                  key={it}
-                  style={{
-                    color: "var(--text)",
-                    fontSize: "var(--fs-body)",
-                    lineHeight: 1.7,
-                    padding: "8px 0 8px 26px",
-                    position: "relative",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      color: "var(--ok)",
-                      fontWeight: 700,
-                    }}
-                  >
-                    ✓
-                  </span>
+                <li key={it}>
+                  <span aria-hidden="true">✓</span>
                   {it}
                 </li>
               ))}
@@ -434,11 +379,9 @@ export default function ScanPage() {
 
       <OpenLoop>Is it safe to let someone run this against your domain? Here is exactly what it does, and what it never does.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* METHODOLOGY MINI */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* METHODOLOGY MINI */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={5} total={8} />
           <SectionHeading
             title="How the Check Works"
@@ -476,11 +419,9 @@ export default function ScanPage() {
 
       <OpenLoop>Ready to see yours? It takes under a minute, and there is no card.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* C1: instant guest scan, zero model calls */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* C1: instant guest scan, zero model calls */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <SectionHeading
             title="Check your domain now"
             lead="The email side takes seconds and needs no login. The full scan above is still personally reviewed."
@@ -489,11 +430,9 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* REQUEST YOUR FREE SCAN — Fix 1: real form replaces mailto card */}
-      <SectionReveal id="request" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* REQUEST YOUR FREE SCAN — Fix 1: real form replaces mailto card */}
+      <SectionReveal id="request" className="pe-page pe-section">
+        <div>
           <DepthIndex index={6} total={8} />
           <SectionHeading
             title="Request Your Free Scan"
@@ -511,7 +450,7 @@ export default function ScanPage() {
               }}
             >
               Prefer to talk?{" "}
-              <a href={CONTACT_HREF} style={{ color: "var(--ice)" }}>
+              <a href={CONTACT_HREF} style={{ color: "var(--pe-mute)" }}>
                 Message Kyle →
               </a>
             </p>
@@ -521,23 +460,16 @@ export default function ScanPage() {
 
       <OpenLoop>Then what? Nothing, unless you want it to be something.</OpenLoop>
 
-      <div className="divider-gold" />
-
-      {/* WHAT COMES AFTER THE SCAN */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* WHAT COMES AFTER THE SCAN */}
+      <SectionReveal className="pe-page pe-section">
+        <div>
           <DepthIndex index={7} total={8} />
           <SectionHeading
             title="What Comes After the Scan"
             lead="Plenty of people use the free check to decide whether they need the Compliance engagement or an AI build, and plenty decide they need neither. Here is where each fits."
           />
           <div
-            className="grid-auto-cards"
-            style={{
-              gap: 22,
-              maxWidth: "var(--maxw-content)",
-              margin: "0 auto",
-            }}
+            className="pe-grid"
           >
             <BridgeCard
               title="Titanos Monitor"
@@ -564,11 +496,9 @@ export default function ScanPage() {
       {/* Render-only-if-non-empty testimonials block — Fix 2c */}
       <Testimonials offer="scan" heading="What Scan Customers Said" />
 
-      <div className="divider-gold" />
-
-      {/* FAQ */}
-      <SectionReveal id="faq" style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+            {/* FAQ */}
+      <SectionReveal id="faq" className="pe-page pe-section">
+        <div>
           <DepthIndex index={8} total={8} />
           <SectionHeading title="Questions I Get" lead="The ones people ask before they hit send, answered first." />
           <div style={{ maxWidth: "var(--maxw-content)", margin: "0 auto" }}>
@@ -589,7 +519,7 @@ export default function ScanPage() {
               break-in attempts. No overloading your site. No data access. It's passive and
               public-record only, and it only ever runs against a domain you've asked me to
               check. Full methodology at{" "}
-              <a href="/methodology" style={{ color: "var(--ice)" }}>/methodology</a>.
+              <a href="/methodology" style={{ color: "var(--pe-mute)" }}>/methodology</a>.
             </FaqItem>
             <FaqItem question="Do you store my data?">
               Scan results are kept in my database so I can track how exposure patterns
@@ -601,32 +531,14 @@ export default function ScanPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
-      {/* FOOTER CTA */}
-      <SectionReveal
-        style={{
-          textAlign: "center",
-          padding: "var(--space-20) 20px",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            fontWeight: 700,
-            marginBottom: 14,
-            letterSpacing: "0.05em",
-          }}
-        >
+            {/* FOOTER CTA */}
+      <SectionReveal className="pe-page pe-section g17-cta">
+        <h2 className="g17-cta-h2">
           Would it be okay if I had a look at your domain?
         </h2>
         <p
           style={{
-            color: "var(--ice)",
+            color: "var(--pe-mute)",
             fontSize: "var(--fs-body)",
             marginBottom: 32,
             maxWidth: "var(--maxw-prose)",
@@ -676,49 +588,14 @@ export default function ScanPage() {
 /* ─── helpers ────────────────────────────────────────────── */
 function CardCol({ title, items }: { title: string; items: string[] }) {
   return (
-    <article
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
-        borderRadius: "var(--radius-md)",
-        padding: "30px 26px",
-      }}
-    >
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-lg)",
-          letterSpacing: "0.06em",
-          marginBottom: 14,
-          lineHeight: 1.3,
-        }}
-      >
+    <article className="pe-card pe-card--pad g17-card">
+      <h3 className="g17-h3">
         {title}
       </h3>
-      <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+      <ul className="g17-chev">
         {items.map((item) => (
-          <li
-            key={item}
-            style={{
-              color: "var(--text)",
-              fontSize: "var(--fs-body)",
-              lineHeight: 1.7,
-              padding: "6px 0 6px 22px",
-              position: "relative",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: 0,
-                color: "var(--gold)",
-                fontFamily: "var(--font-display), Georgia, serif",
-              }}
-            >
-              ›
-            </span>
+          <li key={item}>
+            <span aria-hidden="true">›</span>
             {item}
           </li>
         ))}
@@ -736,23 +613,8 @@ function Cross() {
 
 function MiniCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-md)",
-        padding: "24px 22px",
-      }}
-    >
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-body)",
-          letterSpacing: "0.06em",
-          marginBottom: 12,
-        }}
-      >
+    <div className="pe-card pe-card--pad g17-card">
+      <h3 className="g17-h3">
         {title}
       </h3>
       <div style={{ color: "var(--text)", fontSize: "var(--fs-sm)", lineHeight: 1.7 }}>{children}</div>
@@ -772,23 +634,8 @@ function BridgeCard({
   cta: string;
 }) {
   return (
-    <article
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--gold-dim)",
-        borderRadius: "var(--radius-md)",
-        padding: "26px 24px",
-      }}
-    >
-      <h3
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          color: "var(--gold)",
-          fontSize: "var(--fs-body)",
-          letterSpacing: "0.06em",
-          marginBottom: 10,
-        }}
-      >
+    <article className="pe-card pe-card--pad g17-card">
+      <h3 className="g17-h3">
         {title}
       </h3>
       <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginBottom: 14 }}>

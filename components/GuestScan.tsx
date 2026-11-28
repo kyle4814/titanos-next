@@ -47,9 +47,9 @@ export default function GuestScan() {
         <input
           value={domain} onChange={(e) => setDomain(e.target.value)} inputMode="url" autoCapitalize="none" autoCorrect="off" spellCheck={false}
           placeholder="yourbusiness.com.au" aria-label="Your domain" required
-          style={{ flex: "1 1 220px", minHeight: 48, padding: "0 14px", fontSize: 16, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.3)", background: "transparent", color: "inherit" }}
+          style={{ flex: "1 1 220px", minHeight: 48, padding: "0 14px", fontSize: 16, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.3)", background: "var(--pe-card2)", color: "inherit" }}
         />
-        <button type="submit" disabled={busy} data-analytics="scan-instant-run" data-scan-id={nextId || undefined} style={{ minHeight: 48, padding: "0 22px", borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.6)", background: "rgb(var(--gold-rgb) / 0.12)", color: "inherit", cursor: "pointer" }}>
+        <button type="submit" disabled={busy} data-analytics="scan-instant-run" data-scan-id={nextId || undefined} style={{ minHeight: 48, padding: "0 22px", borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.6)", background: "var(--pe-gold-grad)", color: "#1a1405", fontWeight: 600, cursor: "pointer" }}>
           {busy ? "Checking..." : "Check now"}
         </button>
       </form>
@@ -74,7 +74,7 @@ export default function GuestScan() {
           {open ? (
             <>
               <button type="button" onClick={() => setFixOpen((v) => !v)} aria-expanded={fixOpen} data-analytics="scan-get-fixed" data-scan-id={resId || undefined}
-                style={{ minHeight: 52, width: "100%", marginTop: 12, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.8)", background: "rgb(var(--gold-rgb) / 0.18)", color: "inherit", fontSize: 17, fontWeight: 700, cursor: "pointer" }}>
+                style={{ minHeight: 52, width: "100%", marginTop: 12, borderRadius: "var(--radius-md)", border: "1px solid rgb(var(--gold-rgb) / 0.8)", background: "var(--pe-gold-grad)", color: "#1a1405", fontSize: 17, fontWeight: 700, cursor: "pointer" }}>
                 GET THIS FIXED
               </button>
               {fixOpen && plan && (

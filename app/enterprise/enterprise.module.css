@@ -1,0 +1,9 @@
+/* Enterprise page: obsidian and gold layout on the shared pe-* primitives. */
+.head { display: grid; gap: 10px; margin-bottom: var(--pe-sp-6); }
+.head h2 { margin: 0; }
+.lead { max-width: 60ch; margin: 0; color: var(--pe-mute); font-size: var(--pe-fs-lead); line-height: 1.6; }
+.method { max-width: 68ch; margin: var(--pe-sp-4) 0 0; color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.75; }
+.bridge { margin: 0; padding: var(--pe-sp-5) 0; color: var(--pe-mute); font-size: var(--pe-fs-lead); line-height: 1.5; border-top: 1px solid var(--pe-line); }
+.bridge::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--pe-gold); vertical-align: middle; margin-right: 14px; }
+.tiles { max-width: 760px; }
+.fine { color: var(--pe-faint); font-size: var(--pe-fs-sm); line-height: 1.7; margin: var(--pe-sp-4) 0 0; }

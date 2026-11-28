@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
-import SectionHeading from "@/components/SectionHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import { OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
@@ -39,21 +38,6 @@ const baseMetadata: Metadata = {
 
 export const metadata: Metadata = withSeo("/engineering", baseMetadata);
 
-const SECTION: CSSProperties = { padding: "var(--space-16) 20px", position: "relative", zIndex: 2 };
-const PROSE: CSSProperties = { maxWidth: "var(--maxw-prose)", margin: "0 auto" };
-const BODY: CSSProperties = {
-  color: "var(--ice)",
-  fontSize: "var(--fs-body)",
-  lineHeight: 1.75,
-  margin: "0 auto 16px",
-};
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "22px 24px",
-};
-
 const AUTOMATES = [
   "Email security scanning: SPF, DKIM and DMARC checks from public records (the free scan).",
   "Lead research and verification: contact lists checked for deliverability before anyone sees them.",
@@ -66,20 +50,19 @@ const AUTOMATES = [
 
 function Block({ id, title, lead, children }: { id?: string; title: string; lead?: ReactNode; children?: ReactNode }) {
   return (
-    <>
-      <SectionReveal style={SECTION}>
-        <div id={id} style={PROSE}>
-          <SectionHeading title={title} lead={lead} />
+    <div className="pe-page pe-page--narrow">
+      <SectionReveal className="pe-section">
+        <div id={id} style={{ scrollMarginTop: 96 }}>
+          <div className="pe-section__head">
+            <h2>{title}</h2>
+            {lead ? <p>{lead}</p> : null}
+          </div>
           {children}
         </div>
       </SectionReveal>
-      <div className="divider-gold" />
-    </>
+    </div>
   );
 }
-
-const th: CSSProperties = { textAlign: "left", padding: "12px 14px", color: "var(--gold)", fontWeight: 600, borderBottom: "1px solid var(--border)" };
-const td: CSSProperties = { padding: "12px 14px", color: "var(--ice)", borderBottom: "1px solid var(--border)" };
 
 export default function EngineeringPage() {
   return (
@@ -96,8 +79,8 @@ export default function EngineeringPage() {
       </PageHero>
       <Provenance route="/engineering" />
 
-      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={PROSE}>
+      <div className="pe-page pe-page--narrow">
+        <SectionReveal className="pe-section">
           <Tiles
             label="Measured build figures"
             items={[
@@ -108,21 +91,20 @@ export default function EngineeringPage() {
             ]}
           />
           <FlexNumber f={FLEX.engineers} />
-          <p style={{ ...BODY, marginTop: 18 }}>
+          <p className="pe-prose" style={{ marginTop: 18 }}>
             Method in one line: count the lines of code, put them through the published COCOMO formulas, and compare. Before you ask,
             this page is about our own build. Nothing of yours is touched, nobody is replaced, and the whole calculation is at the bottom
             so you can re-run it.
           </p>
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <OpenLoop>How do you get from lines of code to a number of engineers, and is it fair?</OpenLoop>
 
-      <div className="divider-gold" />
 
       <Block title="The maths, in one line" lead="MODELLED, and labelled as such.">
-        <p style={BODY}>
-          {int("estate_sloc")} lines of production code across {int("estate_repos")} repositories since 4 May 2026 (measured {AS_OF_LONG}). The industry-standard COCOMO model prices that at
+        <p className="pe-prose">
+          {int("estate_sloc")} lines of production code across {int("estate_repos")} repositories since 4 May 2026 (measured {AS_OF_LONG}). The industry-standard COCOMO model prices that at{" "}
           {dec("estate_ey")} engineer-years (MODELLED). This page prints no dollar value for that model. The website began on 4 June, the main engine on 24 August and the operating kernel on 29 September.
         </p>
       </Block>
@@ -130,29 +112,29 @@ export default function EngineeringPage() {
       <Analogy k="department" />
 
       <Block title="The normal way vs the TITANOS way" lead="A department, or one person with a very good toolbox.">
-        <div style={{ ...CARD, padding: 0, overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "var(--fs-body)" }}>
+        <div className="pe-table-wrap">
+          <table>
             <thead>
               <tr>
-                <th style={th} />
-                <th style={th}>Normal (per the same model)</th>
-                <th style={th}>TITANOS</th>
+                <th />
+                <th>Normal (per the same model)</th>
+                <th>TITANOS</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={td}>People</td>
-                <td style={td}>About {Math.round(v("model_team"))} engineers</td>
-                <td style={td}>1 engineer</td>
+                <td>People</td>
+                <td>About {Math.round(v("model_team"))} engineers</td>
+                <td>1 engineer</td>
               </tr>
               <tr>
-                <td style={td}>Time</td>
-                <td style={td}>About {Math.round(v("model_schedule_months"))} months</td>
-                <td style={td}>About {Math.round(v("elapsed_months"))} months (4 May to 8 October 2026), around a day job</td>
+                <td>Time</td>
+                <td>About {Math.round(v("model_schedule_months"))} months</td>
+                <td>About {Math.round(v("elapsed_months"))} months (4 May to 8 October 2026), around a day job</td>
               </tr>
               <tr>
-                <td style={{ ...td, borderBottom: "none" }}>Result</td>
-                <td style={{ ...td, borderBottom: "none" }} colSpan={2}>
+                <td>Result</td>
+                <td colSpan={2}>
                   By the model, roughly {Math.round(v("speed_x"))} times faster with a {Math.round(v("team_smaller_x"))}th of the team (both MODELLED).
                 </td>
               </tr>
@@ -166,43 +148,42 @@ export default function EngineeringPage() {
       <Analogy k="preflight" />
 
       <Block title="Built properly">
-        <ul style={{ ...PROSE, listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
+        <ul className="pe-grid" style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {[
             `${int("tests_main")} test cases in the main engine and ${int("suites_now")} automated safety suites on the control layer (MEASURED, ${AS_OF_LONG}). A test gate runs before a change is merged; its latest full reading is on the engine case study.`,
             `From ${v("commits_week_before")} commits a week in May to ${int("commits_week_now")} this week across ${int("estate_repos")} repositories (MEASURED).`,
           ].map((t) => (
-            <li key={t} style={{ ...CARD, color: "var(--ice)", lineHeight: 1.6 }}>
+            <li key={t} className="pe-card pe-card--pad" style={{ lineHeight: 1.6 }}>
               {t}
             </li>
           ))}
         </ul>
       </Block>
 
-      <SectionReveal style={SECTION}>
-        <div style={PROSE}>
+      <div className="pe-page pe-page--narrow">
+        <SectionReveal className="pe-section">
           <OperatorNote>
             I don&apos;t code by hand. I engineer with AI. The proof is the system.
           </OperatorNote>
-        </div>
-      </SectionReveal>
-      <div className="divider-gold" />
+        </SectionReveal>
+      </div>
 
       <Block
         title="Imagine what this does with real investment"
         lead="A scenario, not a forecast."
       >
-        <p style={BODY}>
+        <p className="pe-prose">
           Today it is one person on {aud("compute_today_aud_month")} a month of AI tools. More accounts run more work in parallel and investment would add people, but there is no result behind any scale-up number yet, so this page does not print one.
         </p>
       </Block>
 
       <Block title="Nobody gets replaced">
-        <p style={BODY}>
+        <p className="pe-prose">
           We&apos;re not here to replace anyone. We make work simpler, give people their hours back, and help
           businesses make more money. If a process runs on a computer, we can automate it.
         </p>
-        <p style={{ ...BODY, color: "var(--gold)" }}>Already running in TITANOS:</p>
-        <ul style={{ margin: 0, paddingLeft: 22, color: "var(--ice)", lineHeight: 1.7, display: "grid", gap: 8 }}>
+        <p className="pe-prose pe-eyebrow-line" style={{ marginTop: 24 }}>Already running in TITANOS:</p>
+        <ul className="pe-prose" style={{ margin: 0, display: "grid", gap: 8, listStyle: "disc" }}>
           {AUTOMATES.map((a) => (
             <li key={a}>{a}</li>
           ))}
@@ -210,7 +191,7 @@ export default function EngineeringPage() {
       </Block>
 
       <Block id="method" title="Method and sources">
-        <ul style={{ margin: 0, paddingLeft: 22, color: "var(--ice)", lineHeight: 1.75, display: "grid", gap: 10 }}>
+        <ul className="pe-prose" style={{ margin: 0, display: "grid", gap: 10, listStyle: "disc" }}>
           <li>
             Model: Basic COCOMO, organic mode. Effort = 2.4 x KSLOC^1.05 person-months. Schedule = 2.5 x
             effort^0.38 months.
@@ -221,7 +202,7 @@ export default function EngineeringPage() {
             and runs {v("span_days")} days, with commits on {v("active_days")} of them.
           </li>
           <li>
-            Result: {int("model_effort_pm")} person-months ({dec("estate_ey")} engineer-years) over a {dec("model_schedule_months")}-month schedule, which is about {dec("model_team")}
+            Result: {int("model_effort_pm")} person-months ({dec("estate_ey")} engineer-years) over a {dec("model_schedule_months")}-month schedule, which is about {dec("model_team")}{" "}
             engineers. The earlier 44 engineer-years figure was the same model on 170,651 lines, measured 4 October.
           </li>
           <li>
@@ -235,15 +216,15 @@ export default function EngineeringPage() {
             thousands into the two formulas above, and multiply person-months by your own day rate.
           </li>
         </ul>
-        <p style={{ ...BODY, marginTop: 18, color: "var(--dim)", fontSize: "var(--fs-sm)" }}>
+        <p className="pe-prose pe-muted" style={{ marginTop: 18, fontSize: "var(--pe-fs-sm)" }}>
           COCOMO estimates what a conventional team would take to write this much code. It is a model, not a
           timesheet, and it counts size, not value.
         </p>
       </Block>
 
-      <SectionReveal style={{ ...SECTION, textAlign: "center" }}>
-        <div style={PROSE}>
-          <p style={BODY}>
+      <div className="pe-page pe-page--narrow">
+        <SectionReveal className="pe-section" style={{ textAlign: "center" }}>
+          <p className="pe-lead" style={{ margin: "0 auto 24px", maxWidth: "62ch" }}>
             Would it be okay if I ran the free security scan on your business as a first step? It reads public records only
             and touches nothing of yours. If you would rather talk it through, book a call. A no is welcome either way.
           </p>
@@ -258,8 +239,8 @@ export default function EngineeringPage() {
           <div style={{ marginTop: 32 }}>
             <OmegaSeal />
           </div>
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
     </>
   );
 }

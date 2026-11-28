@@ -1,0 +1,23 @@
+/* LoopOrbit, obsidian and gold restyle. Only LoopOrbit uses .w4-loop, so these are scoped to it. */
+.w4-loop .w4-h2 { font-size: var(--pe-fs-h2); max-width: 28ch; letter-spacing: -0.02em; }
+.w4-loop .w4-eyebrow { font-size: 12px; letter-spacing: var(--pe-track-eyebrow); text-transform: uppercase; }
+.w4-loop .w4-panel {
+  position: relative; padding: clamp(18px, 1.4vw + 12px, 28px);
+  background: var(--pe-card); border: 1px solid var(--pe-line); border-radius: var(--pe-r-card);
+  box-shadow: var(--pe-shadow-card);
+}
+.w4-loop .w4-panel::before { display: none; }
+.w4-loop .w4-panel h3 { font-size: var(--pe-fs-h3); color: var(--pe-text); }
+.w4-loop .w4-panel p { color: var(--pe-mute); }
+.w4-loop .w4-receipt { border-top: 1px solid var(--pe-line); }
+.w4-loop .w4-receipt-num { font-size: var(--pe-fs-h2) !important; color: var(--pe-gold-hi) !important; }
+.w4-loop .w4-chip { color: var(--pe-gold-hi); }
+.w4-loop .w4-orbit-ring { background: none; border: 1px solid var(--pe-line-gold); animation: none; }
+.w4-loop .w4-node {
+  background: var(--pe-card2); border: 1px solid var(--pe-line); border-radius: var(--pe-r-card); color: var(--pe-text);
+}
+.w4-loop .w4-node[aria-pressed="true"] { border-color: var(--pe-gold); background: var(--pe-card2); box-shadow: 0 0 0 1px var(--pe-line-gold); }
+.w4-loop .w4-node:focus-visible { outline: 2px solid var(--pe-gold-hi); outline-offset: 2px; }
+.w4-loop .w4-node b { color: var(--pe-gold-hi); }
+.w4-loop .w4-orbit-core { color: var(--pe-gold); }
+.w4-loop.pe-page { max-width: none; }

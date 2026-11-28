@@ -102,14 +102,10 @@ export default function MonitorCheckoutButton({
             aria-invalid={invalid || undefined}
             data-analytics={`monitor-checkout-domain-${plan}`}
             style={{
-              padding: "10px 12px",
               minHeight: 44,
-              minWidth: 260,
-              borderRadius: "var(--radius-sm)",
-              border: `1px solid ${invalid ? "var(--gold)" : "var(--gold-dim)"}`,
-              background: "transparent",
-              color: "var(--ice)",
-              fontSize: "var(--fs-sm)",
+              minWidth: "min(100%, 260px)",
+              fontSize: 16,
+              ...(invalid ? { borderColor: "var(--pe-gold)" } : null),
             }}
           />
           {invalid && (
@@ -126,21 +122,8 @@ export default function MonitorCheckoutButton({
         aria-label={ariaLabel ?? label}
         aria-busy={status === "submitting" || undefined}
         data-analytics={`monitor-checkout-${plan}`}
+        className={isPrimary ? "pe-btn pe-btn--gold" : "pe-btn pe-btn--dark"}
         style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "14px 28px",
-          minHeight: 48,
-          borderRadius: "var(--radius-sm)",
-          border: `1px solid ${isPrimary ? "var(--gold)" : "var(--gold-dim)"}`,
-          color: isPrimary ? "var(--gold)" : "var(--ice)",
-          background: "transparent",
-          fontFamily: "var(--font-display), Georgia, serif",
-          fontStyle: "italic",
-          fontSize: "var(--fs-sm)",
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
           cursor: status === "submitting" ? "wait" : "pointer",
           opacity: status === "submitting" ? 0.6 : 1,
         }}
@@ -151,7 +134,7 @@ export default function MonitorCheckoutButton({
         <span
           role="alert"
           data-analytics={`monitor-checkout-error-${plan}`}
-          style={{ color: "var(--text)", fontSize: "var(--fs-xs)", lineHeight: 1.5 }}
+          style={{ color: "var(--pe-mute)", fontSize: "var(--fs-xs)", lineHeight: 1.5 }}
         >
           Checkout couldn&apos;t open.{" "}
           <a

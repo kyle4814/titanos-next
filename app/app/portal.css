@@ -1,0 +1,32 @@
+/* Portal seats (/app, /app/*, /pro): obsidian and gold. Page-scoped; shared tokens come from site-system.css. */
+.pp-main { width: min(100% - 2 * var(--pe-gutter), 960px); margin-inline: auto; padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); color: var(--pe-text); display: flex; flex-direction: column; gap: 20px; }
+.pp-main--narrow { width: min(100% - 2 * var(--pe-gutter), 760px); }
+.pp-main--center { text-align: center; align-items: center; min-height: 60vh; justify-content: center; }
+.pp-main > * { margin-block: 0; }
+.pp-main h1 { font: 800 var(--pe-fs-h1)/1.06 var(--font-body), system-ui, sans-serif; letter-spacing: -0.03em; color: #fff; }
+.pp-main h1::before { content: "TITANOS"; display: block; font: 600 12px/1 var(--font-mono), monospace; letter-spacing: var(--pe-track-eyebrow); color: var(--pe-gold); margin-bottom: 14px; }
+.pp-main h2 { font: 700 var(--pe-fs-h3)/1.2 var(--font-body), system-ui, sans-serif; color: #fff; letter-spacing: -0.02em; margin: 0 0 6px; }
+.pp-card { display: flex; flex-direction: column; gap: 10px; }
+.pp-card--pad, .pp-main .pe-card--pad { padding: clamp(18px, 2.4vw, 26px); }
+.pp-main .pe-btn { cursor: pointer; font-family: var(--font-body), system-ui, sans-serif; }
+.pp-main .pe-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; filter: none; }
+.pp-main .pe-btn--sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
+.pp-main .pe-btn--danger { color: #ff9b9b; border-color: rgba(255, 107, 107, 0.45); }
+.pp-main .pe-btn--danger:hover { border-color: #ff9b9b; }
+.pp-rows { display: flex; flex-direction: column; gap: 10px; }
+.pp-row { border: 1px solid var(--pe-line); border-radius: var(--pe-r-card); background: var(--pe-card2); padding: 14px; }
+.pp-row--live { border-color: var(--pe-line-gold); }
+.pp-line { border-top: 1px solid var(--pe-line); padding-top: 10px; }
+.pp-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.pp-ok { color: var(--pe-ok, #4ade80); }
+.pp-bad { color: #f87171; }
+.pp-warn { color: var(--pe-gold); }
+.pp-dim { color: var(--pe-mute); }
+.pp-main fieldset { border: 1px solid var(--pe-line); border-radius: var(--pe-r-card); background: var(--pe-card2); }
+.pp-main select, .pp-main input:not([type="checkbox"]) { min-height: 44px; font-size: 16px; max-width: 100%; }
+.pp-main input[type="checkbox"] { accent-color: var(--pe-gold); width: 18px; height: 18px; vertical-align: middle; }
+.pp-main pre { background: var(--pe-bg2); border: 1px solid var(--pe-line); border-radius: var(--pe-r-md); padding: 14px; overflow-x: auto; font-family: var(--font-mono), monospace; font-size: 13px; color: var(--pe-text); }
+.pp-main .pp-tablewrap { overflow-x: auto; }
+@media (prefers-reduced-motion: reduce) { .pp-main .pe-btn { transition: none; } }
+.pp-main .pp-card table { display: block; overflow-x: auto; }
+.pp-main .pp-card table thead, .pp-main .pp-card table tbody { white-space: nowrap; }

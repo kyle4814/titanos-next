@@ -2,14 +2,13 @@ import { TEAM_SIZE_PHRASE } from "@/lib/ledger";
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
-import SectionHeading from "@/components/SectionHeading";
+import s from "./enterprise.module.css";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { PriceTiles } from "@/components/offers/Bento";
 import { DISPLAY } from "@/lib/pricing";
-import { SystemLabel, DepthIndex } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
-import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
+import { FlexNumber } from "@/components/FlexBlock";
 import SeatAnchors from "@/components/SeatAnchors";
 import EnterpriseSavingsCalculator from "@/components/EnterpriseSavingsCalculator";
 import SsoSetup from "@/components/SsoSetup";
@@ -59,10 +58,10 @@ export default function EnterprisePage() {
       </Bluf>
       <Analogy k="department" />
 
-      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
           <FlexNumber f={FLEX.engineers} />
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 16 }}>
+          <p className={s.method}>
             Method: the COCOMO model, explained on the Engineering page. A larger organisation will have questions first, so here they are
             answered up front. The scan reads public records only. Nothing inside your systems is touched. Nobody on your team is replaced.
             Your IT provider and your own people stay in charge of every change. And the price is agreed before anything starts.
@@ -70,31 +69,31 @@ export default function EnterprisePage() {
         </div>
       </SectionReveal>
 
-      <OpenLoop>What would an engagement like that actually be called, and what might it cost to scope?</OpenLoop>
+      <div className="pe-page"><p className={s.bridge}>What would an engagement like that actually be called, and what might it cost to scope?</p></div>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <DepthIndex index={1} total={1} />
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Starting points</SystemLabel>
-          <SectionHeading
-            title="What We Can Scope Together"
-            lead="Indicative starting points. Every engagement is scoped on a call."
-          />
-          <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">Starting points</span>
+            <h2>What We Can Scope Together</h2>
+            <p className={s.lead}>Indicative starting points. Every engagement is scoped on a call.</p>
+          </div>
+          <div className={s.tiles}>
             <PriceTiles rows={ENTERPRISE_OFFERS} />
-            <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.7, marginTop: 16, textAlign: "center" }}>
+            <p className={s.fine}>
               These are starting points, not quotes. The final scope and price are agreed with you on a call. Would it be okay if we started there? A no is welcome.
             </p>
           </div>
         </div>
       </SectionReveal>
       <SeatAnchors rows={ANCHORS} extras={{ "savings-calculator": <EnterpriseSavingsCalculator />, sso: <SsoSetup /> }} />
-      <SectionReveal style={{ padding: "var(--space-12, 32px) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
-          <SystemLabel style={{ textAlign: "center", marginBottom: 10 }}>Dossiers</SystemLabel>
-          <SectionHeading title="Request a dossier" lead="Prove you control the domain, then queue it. This preview shows the steps with a sample, clearly labelled." />
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <div className={s.head}>
+            <span className="pe-eyebrow-line">Dossiers</span>
+            <h2>Request a dossier</h2>
+            <p className={s.lead}>Prove you control the domain, then queue it. This preview shows the steps with a sample, clearly labelled.</p>
+          </div>
           <DossierSelfServe />
         </div>
       </SectionReveal>

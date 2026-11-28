@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
-import { Block } from "@/components/SiteBlocks";
+import { Panel, PanelList } from "@/components/panel/DataPanel";
 import status from "../../public/data/status.json";
 
 // Data file: public/data/status.json, built by scripts/gen_status.mjs. UNKNOWN is never shown as UP; no samples renders "no data yet".
@@ -28,13 +28,14 @@ export default function Status() {
   return (
     <>
       <PageHero badge="STATUS" title="What is up, and what we do not know." tagline="Each component shows its state, the window, how many checks sit behind it and when it was last checked." />
+      <PanelList>
       {status.synthetic && (
-        <Block point="Sample data">
+        <Panel point="Sample data">
           <p data-status-synthetic="true">SYNTHETIC SAMPLE. The rows below are invented to show the format. They are not measurements of TITANOS. No uptime figure is claimed.</p>
-        </Block>
+        </Panel>
       )}
       {comps.map((c) => (
-        <Block key={c.id} point={c.name}>
+        <Panel key={c.id} point={c.name}>
           <p data-status-state={c.state} data-status-component={c.id}>
             <strong>{c.state}</strong>
             {c.stale ? <> <strong data-status-stale="true">STALE</strong></> : null}
@@ -46,13 +47,14 @@ export default function Status() {
           ) : (
             <p data-status-nodata="true">no data yet</p>
           )}
-          {c.note && hasData(c) ? <p style={{ color: "var(--dim)" }}>{c.note}</p> : null}
-        </Block>
+          {c.note && hasData(c) ? <p className="pe-muted">{c.note}</p> : null}
+        </Panel>
       ))}
-      <Block point="Where this page comes from">
-        <p data-provenance="/status">{status.system}. Page data built {fmt(status.generatedAt)}; a component whose last check is more than a day old is flagged STALE and is not shown as UP. Data file: <a href="/data/status.json" style={{ color: "var(--gold)" }}>/data/status.json</a>.</p>
+      <Panel point="Where this page comes from">
+        <p data-provenance="/status">{status.system}. Page data built {fmt(status.generatedAt)}; a component whose last check is more than a day old is flagged STALE and is not shown as UP. Data file: <a href="/data/status.json">/data/status.json</a>.</p>
         <p>{status.monitorInput.present ? "Monitor output was merged into this build." : "No monitor output was available when this was built, so nothing here is a live reading."}</p>
-      </Block>
+      </Panel>
+      </PanelList>
     </>
   );
 }

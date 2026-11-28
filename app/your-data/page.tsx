@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import "../privacy/g8-legal.css";
 import AnimatedButton from "@/components/AnimatedButton";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
 import { Inscription, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
@@ -19,10 +20,10 @@ const baseMetadata: Metadata = {
 export const metadata: Metadata = withSeo("/your-data", baseMetadata);
 
 const headingStyle = {
-  fontFamily: "var(--font-display), Georgia, serif",
-  color: "var(--gold)",
-  fontSize: "var(--fs-h3)",
-  letterSpacing: "0.06em",
+  color: "var(--pe-text)",
+  fontSize: "var(--pe-fs-h3)",
+  fontWeight: 700,
+  letterSpacing: "0.01em",
   marginBottom: 14,
   marginTop: 34,
 } as const;
@@ -36,7 +37,7 @@ const bodyStyle = {
 
 export default function YourDataPage() {
   return (
-    <>
+    <div className="g8-legal">
       <PageHero
         badge="THE QUOTE AUDIT"
         title="What happens to your data"
@@ -62,7 +63,7 @@ export default function YourDataPage() {
       <div className="divider-gold" />
 
       <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+        <div className="g8-doc">
           <DepthIndex index={1} total={SECTION_COUNT} />
           <h2 style={{ ...headingStyle, marginTop: 0 }}>WHAT I ACTUALLY NEED</h2>
           <p style={bodyStyle}>
@@ -136,7 +137,7 @@ export default function YourDataPage() {
           </p>
           <p style={{ ...bodyStyle, color: "var(--dim)" }}>
             Kyle Deligny · Titanos · ABN 34 318 502 254 · Brisbane QLD ·{" "}
-            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--pe-gold-hi)" }}>
               kyle@titanos.tech
             </a>
           </p>
@@ -149,6 +150,6 @@ export default function YourDataPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
-    </>
+    </div>
   );
 }
