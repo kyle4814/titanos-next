@@ -29,6 +29,7 @@ export default function OperatorByline() {
       <img
         src={SITE.PHOTO_PATH}
         alt="Kyle Deligny, Titanos, Brisbane"
+        decoding="async"
         width={40}
         height={40}
         style={{ borderRadius: "50%", objectFit: "cover" }}

@@ -9,7 +9,7 @@ export default function PhoneGallery({ shots }: { shots: CaseShot[] }) {
         <li key={sh.src} className={s.shot}>
           <figure style={{ margin: 0 }} className={s.reveal}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={sh.src} alt="" loading="lazy" width={780} height={1688} className={s.phone} />
+            <img src={sh.src} alt="" loading="lazy" decoding="async" width={780} height={1688} className={s.phone} />
             <figcaption className={s.caption}>{sh.alt}</figcaption>
           </figure>
         </li>

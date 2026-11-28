@@ -50,7 +50,7 @@ export default function KyleAuthorPage() {
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start", marginBottom: 12 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/kyle.jpg" alt="Kyle Deligny, founder of Titanos, Brisbane" width={180} height={220} style={{ width: 180, height: 220, objectFit: "cover", borderRadius: 10, border: "1px solid var(--pe-line-gold)" }} />
+          <img src="/kyle.jpg" alt="Kyle Deligny, founder of Titanos, Brisbane" decoding="async" width={180} height={220} style={{ width: 180, height: 220, objectFit: "cover", borderRadius: 10, border: "1px solid var(--pe-line-gold)" }} />
           <div style={{ flex: "1 1 320px" }}>
             <p style={p}>
               I am Kyle Deligny, the founder and only operator of <Link href="/" style={a}>Titanos</Link>, an AI implementation, Privacy Act compliance and email security practice based in Brisbane, Queensland. My business is registered as a sole trader under ABN 34 318 502 254, and you can check that on the Australian Business Register.

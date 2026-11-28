@@ -19,7 +19,7 @@ export default function CaseCard({ href, cover, coverAlt, sector, title, teaser,
     <a href={href} className={`${s.card} ${s.reveal} ${feature ? s.feature : ""}`}>
       <div className={s.coverWrap}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={cover} alt={coverAlt} loading={feature ? "eager" : "lazy"} width={780} height={1688} className={s.cover} />
+        <img src={cover} alt={coverAlt} loading={feature ? "eager" : "lazy"} decoding="async" width={780} height={1688} className={s.cover} />
       </div>
       <div className={s.cardBody}>
         {big && (

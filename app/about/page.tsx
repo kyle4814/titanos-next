@@ -118,6 +118,7 @@ export default function AboutPage() {
               <img
                 src={SITE.PHOTO_PATH}
                 alt="Kyle Deligny, founder of Titanos, Brisbane"
+                decoding="async"
                 width={220}
                 height={270}
                 className="pe-origin__photo"

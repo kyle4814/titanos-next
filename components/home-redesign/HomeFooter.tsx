@@ -26,7 +26,7 @@ export default function HomeFooter() {
           <Link href="/" className="pe-brand" aria-label="TITANOS home">
             <picture>
               <source type="image/webp" srcSet="/site-redesign/t-mark.webp" />
-              <img src="/site-redesign/t-mark.png" alt="" width={40} height={40} className="pe-brand__mark" loading="lazy" />
+              <img src="/site-redesign/t-mark.png" alt="" width={40} height={40} className="pe-brand__mark" loading="lazy" decoding="async" />
             </picture>
             <PhiWordmark height={18} title="TITANOS" />
           </Link>
