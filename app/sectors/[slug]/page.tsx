@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     alternates: { canonical: `${SITE_URL}/sectors/${s.slug}` },
     openGraph: { title: `${s.name} · TITANOS`, description: s.point, url: `${SITE_URL}/sectors/${s.slug}`, images: [{ url: "/og-image.png", width: 1200, height: 630 }] },
     twitter: { card: "summary_large_image", images: ["/og-image.png"] },
-    robots: { index: true, follow: true },
+    // 285-300 words each, one number and no sector-specific tool yet: noindex until each page carries its own data and 800+ words.
+    robots: { index: false, follow: true },
   };
 }
 

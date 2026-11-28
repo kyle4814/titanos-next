@@ -7,8 +7,8 @@ import s from "@/components/w2b/w2b.module.css";
 import { SECTORS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "Sectors · TITANOS",
-  description: "Ten sectors, one method: read public records, grade what a stranger can see, hand back a plain list of changes.",
+  title: "AI and Privacy Act Help by Industry | TITANOS",
+  description: "Ten Australian sectors, one method: we read public records, grade what a stranger can see and hand back a plain list of changes. Start with your industry.",
   alternates: { canonical: "https://titanos.tech/sectors" },
   robots: { index: true, follow: true },
 };

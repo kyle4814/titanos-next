@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { withSeo } from "@/lib/seo";
+import { withSeo, fitTitle } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import { article, product, faqPage, breadcrumbs } from "@/lib/jsonld";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
+import { offerIndexable } from "@/lib/seo-indexing";
 import { ALL_OFFERS, getOffer, buyHref, availability, AVAILABILITY_TEXT, LADDER_ROUTES } from "@/lib/offers";
 import { formatOfferPrice, type Offer } from "@/lib/offers/types";
 import { OpenLoop } from "@/components/FlexBlock";
@@ -28,11 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!o) return {};
   const url = `https://titanos.tech/offers/${o.slug}`;
   return withSeo(`/offers/${o.slug}`, {
-    title: `${o.name} | TITANOS`,
+    title: fitTitle(o.name),
     description: o.bluf,
     alternates: { canonical: url },
     openGraph: { title: o.name, description: o.bluf, type: "website", url },
-    robots: { index: true, follow: true },
+    // Only offers with a live checkout are search entry points; the rest are launching-soon copies of one template.
+    robots: offerIndexable(o) ? { index: true, follow: true } : { index: false, follow: true },
   });
 }
 
