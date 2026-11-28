@@ -8,6 +8,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Bento } from "@/components/offers/Bento";
 import FaqItem from "@/components/FaqItem";
+import RelatedReading from "@/components/seo/RelatedReading";
 import { PRODUCTS, getProduct, formatProductPrice, productBuyHref } from "@/lib/products";
 import type { Product } from "@/lib/products/types";
 
@@ -127,6 +128,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", marginTop: 14 }}>General information, not legal advice.</p>
         )}
       </Block>
+
+      <RelatedReading path={`/products/${p.slug}`} />
 
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
         <p style={{ color: "var(--ice)", marginBottom: 18 }}>

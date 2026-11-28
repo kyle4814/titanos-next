@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import { article, breadcrumbs, faqPage } from "@/lib/jsonld";
 import { GUIDES, getGuide, guideWordCount } from "@/lib/guides";
 import { getPostBySlug } from "@/lib/blog";
+import RelatedReading from "@/components/seo/RelatedReading";
 import GuideBlocks from "@/components/guides/GuideBlocks";
 import Inline from "@/components/guides/Inline";
 import "@/components/home-redesign/home-redesign.css";
@@ -132,6 +133,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <p className="gd-legal">This guide is general information for Australian small businesses, not legal, tax or financial advice. Laws and programs change: check the linked primary sources and ask a qualified adviser about your own situation.</p>
               </div>
             </section>
+            <RelatedReading path={path} />
             <section id="sources" aria-labelledby="sources-h" className="gd-sources">
               <h2 id="sources-h">Sources</h2>
               <ol>
