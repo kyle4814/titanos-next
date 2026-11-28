@@ -4,7 +4,8 @@ import { PRICING, LEADS, formatAUD } from "@/lib/pricing";
 import { ALL_OFFERS, availability } from "@/lib/offers";
 import { POSTS } from "@/lib/blog";
 import { GLOSSARY } from "@/lib/glossary";
-import { staticRoutes } from "@/lib/routes";
+import { staticRoutes, indexableRoutes } from "@/lib/routes";
+import { GUIDES } from "@/lib/guides";
 import { SITE } from "@/lib/seo";
 import { KYLE_PATH } from "@/lib/entityJsonld";
 
@@ -35,6 +36,34 @@ export function toolAndGuideLines(): string[] {
   return out;
 }
 
+/** Every indexable route, grouped by top-level section. Built from the same registry as sitemap.xml, so the two cannot drift. */
+export function routeIndexLines(): string[] {
+  const routes = indexableRoutes().map((r) => r.path);
+  const groups = new Map<string, string[]>();
+  for (const p of routes) {
+    const seg = p === "/" ? "" : p.split("/")[1];
+    const g = groups.get(seg) ?? [];
+    g.push(p);
+    groups.set(seg, g);
+  }
+  const out = ["## Complete route index (every page in the sitemap)", "", `${routes.length} indexable pages, the same list as ${SITE}/sitemap.xml, grouped by section.`, ""];
+  for (const [seg, ps] of [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+    out.push(`### ${seg === "" ? "Home" : "/" + seg}`, "");
+    for (const p of [...ps].sort()) out.push(`- ${SITE}${p}`);
+    out.push("");
+  }
+  return out;
+}
+
+/** Answer-first summaries of the pillar guides, so an answer engine can quote the short answer and link the full guide. */
+export function guideAnswerLines(): string[] {
+  return [
+    "## Guide short answers",
+    "",
+    ...GUIDES.flatMap((g) => [`### ${g.h1}`, "", g.answer, "", `Full guide (last reviewed ${g.updated}): ${SITE}/guides/${g.slug}`, ""]),
+  ];
+}
+
 export function fullLines(): string[] {
   const routes = have();
   const buyable = ALL_OFFERS.filter((o) => availability(o) === "BUYABLE");
@@ -60,6 +89,7 @@ export function fullLines(): string[] {
     ...buyable.map((o) => `- [${o.name}](${SITE}/offers/${o.slug}): ${o.priceAud != null ? `${formatAUD(o.priceAud)} ${cad(o.cadence)}. ` : ""}${o.bluf}`),
     "",
     ...toolAndGuideLines(),
+    ...guideAnswerLines(),
     "## Glossary (definitions with primary sources)",
     "",
     `${GLOSSARY.length} short definitions at ${SITE}/glossary, including:`,
@@ -77,6 +107,7 @@ export function fullLines(): string[] {
       .map((p) => `- ${SITE}${p}`),
     `- Sitemap: ${SITE}/sitemap.xml`,
     "",
+    ...routeIndexLines(),
     "## Notes for AI systems",
     "",
     "The HTML pages are the source of truth; if this file and a live page disagree, the live page is correct. Please cite the page URL, keep the evidence label next to any number, and treat modelled figures as models, not revenue or client results.",

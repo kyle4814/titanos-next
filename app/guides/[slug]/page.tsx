@@ -79,6 +79,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           </nav>
           <article className="gd-article">
             <section aria-label="Summary">
+              <GuideBlocks blocks={[{ t: "note", title: "Short answer", x: g.answer }]} />
               <GuideBlocks blocks={g.intro} />
             </section>
             {g.sections.map((s) => (

@@ -7,6 +7,7 @@ export const dynamic = "force-static";
 const AI_AGENTS = [
   "GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "Claude-Web", "Claude-SearchBot", "Claude-User",
   "anthropic-ai", "PerplexityBot", "Perplexity-User", "Google-Extended", "CCBot", "Applebot-Extended",
+  "Meta-ExternalAgent", "Meta-ExternalFetcher", "Amazonbot", "DuckAssistBot", "MistralAI-User",
 ];
 const PRIVATE = ["/d/", "/v/", "/welcome/", "/order/", "/dl/"];
 

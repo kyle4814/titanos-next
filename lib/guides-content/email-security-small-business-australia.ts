@@ -10,6 +10,8 @@ export const emailSecurity: Guide = {
   targetTerms: ["dmarc small business australia", "spf dkim dmarc explained", "can someone send email pretending to be my business", "business email compromise australia"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "Stop fake email sent as your business by publishing SPF, DKIM and DMARC records and moving DMARC from monitoring to an enforcing policy. DMARC does not stop lookalike domains or a hacked mailbox, so pair it with MFA and a habit of verifying bank-detail changes by phone.",
   intro: [
     {
       t: "p",

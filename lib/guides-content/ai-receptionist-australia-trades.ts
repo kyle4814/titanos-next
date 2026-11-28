@@ -10,6 +10,8 @@ export const aiReceptionist: Guide = {
   targetTerms: ["ai receptionist australia trades", "is an ai receptionist privacy act compliant", "ai receptionist call recording consent australia", "ai receptionist cost australia"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "Using an AI receptionist is legal in Australia. It is compliant in practice when you tell callers up front, keep the data where you can account for it, get a written commitment from the vendor about storage and training, and give every urgent call a path to a human.",
   intro: [
     {
       t: "p",
@@ -18,11 +20,6 @@ export const aiReceptionist: Guide = {
     {
       t: "p",
       x: "The risks are less obvious. The moment the system records or transcribes a customer's voice, you hold a new kind of personal information, you may be disclosing it to overseas companies and, depending on your state, you may be recording a private conversation. This guide explains how these systems work, what they cost, what Australian privacy and recording rules say, how to test one before you trust it and how to set it up so a bad call does not cost you a job or a complaint.",
-    },
-    {
-      t: "note",
-      title: "Short answer",
-      x: "Using an AI receptionist is legal in Australia. It is compliant in practice when you tell callers up front, keep the data where you can account for it, get a written commitment from the vendor about storage and training, and give every urgent call a path to a human. Each of those is covered below.",
     },
   ],
   sections: [

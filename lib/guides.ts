@@ -34,6 +34,8 @@ export type Guide = {
   targetTerms: string[];
   date: string;
   updated: string;
+  /** Answer-first summary (40 to 70 words): shown above the intro, repeated in llms-full.txt for answer engines. */
+  answer: string;
   intro: Block[];
   sections: { id: string; h2: string; blocks: Block[] }[];
   faq: { q: string; a: string }[];
@@ -70,7 +72,7 @@ function blockText(b: Block): string[] {
 }
 /** Every visible string of a guide (body, FAQ, link blurbs), markup stripped. */
 export function guideTexts(g: Guide): string[] {
-  const out: string[] = [g.h1, g.description];
+  const out: string[] = [g.h1, g.description, g.answer];
   for (const b of g.intro) out.push(...blockText(b));
   for (const s of g.sections) { out.push(s.h2); for (const b of s.blocks) out.push(...blockText(b)); }
   for (const f of g.faq) out.push(f.q, f.a);

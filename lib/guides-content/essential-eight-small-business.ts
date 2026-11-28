@@ -10,6 +10,8 @@ export const essentialEight: Guide = {
   targetTerms: ["essential eight small business", "essential eight maturity level 1 checklist", "acsc essential eight for small business australia", "essential eight explained"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "The Essential Eight is the ACSC's baseline of eight cyber security controls. For most small businesses it is guidance, not law, though clients, insurers and tender evaluators increasingly ask for it. This guide turns each control into plain steps for a business of one to twenty people.",
   intro: [
     {
       t: "p",
