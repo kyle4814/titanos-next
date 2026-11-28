@@ -194,3 +194,4 @@ node scripts/test_xray_lint.mjs
 node scripts/test_home_redesign.mjs
 node scripts/test_tech_seo.mjs
 node --experimental-strip-types --no-warnings scripts/test_e8_score.mjs
+node --experimental-strip-types --no-warnings scripts/test_missed_call_calculator.mjs out
