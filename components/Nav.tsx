@@ -29,12 +29,13 @@ import { GOLD_BRIGHT, ICE, DIM } from "@/lib/tokens";
 import { BOOK_HREF } from "@/lib/config";
 import VaultKeyhole from "./VaultKeyhole";
 import { LINKS, DESKTOP_LINKS, groupMore } from "@/lib/navLinks";
+import HomeNav from "./home-redesign/HomeNav";
 
 const SESSION_KEY = "titanos.vault.entranceShown";
 const REVEAL_DELAY_MS = 800;
 const MOBILE_BREAKPOINT = 1024; // the desktop strip is ~970px wide: 768 overflowed by 204px at the old 720
 
-export default function Nav() {
+function SiteNav() {
   const reduce = useReducedMotion();
   const [revealed, setRevealed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -705,4 +706,10 @@ function MoreMenu() {
       )}
     </div>
   );
+}
+
+/** The homepage (2026-11-28 redesign) carries its own header, HomeNav; every other route keeps SiteNav unchanged. */
+export default function Nav() {
+  const pathname = usePathname();
+  return pathname === "/" ? <HomeNav /> : <SiteNav />;
 }

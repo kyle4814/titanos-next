@@ -1,0 +1,142 @@
+{
+  "generated": "2026-11-28",
+  "note": "Owner-supplied AI-generated renders. The building is an illustrative architectural concept, not a real TITANOS office. Metadata stripped from every derivative.",
+  "sources": [
+    {
+      "id": "hero-mountain",
+      "basename": "hero-src.png",
+      "bytes": 2162434,
+      "sha256": "961af5b3b28f3b15065ef22ca4535f9913b9c4745eb1c087f20b29f3765e920e",
+      "width": 1199,
+      "height": 1312,
+      "format": "png",
+      "ai_generated": true,
+      "concept_render_not_real_building": false
+    },
+    {
+      "id": "building-concept",
+      "basename": "building-src.png",
+      "bytes": 1834358,
+      "sha256": "3df0ec27b64326bd2c2c494583e737f3baf5e19aa18aefd822fe86817e40577d",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "ai_generated": true,
+      "concept_render_not_real_building": true
+    }
+  ],
+  "derivatives": [
+    {
+      "file": "public/site-redesign/hero-mountain-480.avif",
+      "from": "hero-mountain",
+      "width": 480,
+      "height": 525,
+      "bytes": 26251,
+      "sha256": "39f0007aa2e0b6f850a19eefeb872b6c0454e5876bcc3655a3b8bc6d08691186"
+    },
+    {
+      "file": "public/site-redesign/hero-mountain-480.webp",
+      "from": "hero-mountain",
+      "width": 480,
+      "height": 525,
+      "bytes": 28980,
+      "sha256": "070bbd3bca8c8814b1dcc7906be160d742c020c11046cc330f979c1d71daf60b"
+    },
+    {
+      "file": "public/site-redesign/hero-mountain-768.avif",
+      "from": "hero-mountain",
+      "width": 768,
+      "height": 840,
+      "bytes": 55225,
+      "sha256": "74fcba67dbd27364da544467f6cf03ad6ced30287a419bf3636c230abeda0551"
+    },
+    {
+      "file": "public/site-redesign/hero-mountain-768.webp",
+      "from": "hero-mountain",
+      "width": 768,
+      "height": 840,
+      "bytes": 62232,
+      "sha256": "3ef9525dcc047a32c77db0a96bfc7a39034fe1de5f977995585cbc18a2d05ef0"
+    },
+    {
+      "file": "public/site-redesign/hero-mountain-1199.avif",
+      "from": "hero-mountain",
+      "width": 1199,
+      "height": 1312,
+      "bytes": 101753,
+      "sha256": "8aaf090052b19d9d791a6ead7c218f4e0b467f03d1d894fdd37d400679ea2d53"
+    },
+    {
+      "file": "public/site-redesign/hero-mountain-1199.webp",
+      "from": "hero-mountain",
+      "width": 1199,
+      "height": 1312,
+      "bytes": 124846,
+      "sha256": "cabf10d64c88a83ebe15a9a7aa8cd742cddd73e61913957232a78f1972d6dad7"
+    },
+    {
+      "file": "public/site-redesign/building-concept-640.avif",
+      "from": "building-concept",
+      "width": 640,
+      "height": 360,
+      "bytes": 18303,
+      "sha256": "dcf622df2411e7347fe53d1971f84d749da50a1801454787d2061c5dbd82ccb9"
+    },
+    {
+      "file": "public/site-redesign/building-concept-640.webp",
+      "from": "building-concept",
+      "width": 640,
+      "height": 360,
+      "bytes": 23320,
+      "sha256": "ded3f5b38f99eb6a4c0583a291b317be2328c1e5bb333933477842d217201e4f"
+    },
+    {
+      "file": "public/site-redesign/building-concept-960.avif",
+      "from": "building-concept",
+      "width": 960,
+      "height": 540,
+      "bytes": 31213,
+      "sha256": "4232aba08b4ec3808d4af9ee9a6860142953184a39bab6b91cfb838804d54b31"
+    },
+    {
+      "file": "public/site-redesign/building-concept-960.webp",
+      "from": "building-concept",
+      "width": 960,
+      "height": 540,
+      "bytes": 40690,
+      "sha256": "1405bb4870de9723df1b33886720d6b419507fca534fceb54289f3b6d3b1b2ef"
+    },
+    {
+      "file": "public/site-redesign/building-concept-1280.avif",
+      "from": "building-concept",
+      "width": 1280,
+      "height": 720,
+      "bytes": 43622,
+      "sha256": "d6d73b324116c2062deb9aa422b5ec2b864376930f4f6da494a2b81631751f3a"
+    },
+    {
+      "file": "public/site-redesign/building-concept-1280.webp",
+      "from": "building-concept",
+      "width": 1280,
+      "height": 720,
+      "bytes": 60716,
+      "sha256": "8e88a7a975df83546a2857dc8decfad3771a483ac5c15dce6c7f61f00414008f"
+    },
+    {
+      "file": "public/site-redesign/building-concept-1672.avif",
+      "from": "building-concept",
+      "width": 1672,
+      "height": 941,
+      "bytes": 59485,
+      "sha256": "29ec5087e39a225ff7fb3ad82f7fd1e9a179ecd7c6af6594d4bfcc1a6b68df95"
+    },
+    {
+      "file": "public/site-redesign/building-concept-1672.webp",
+      "from": "building-concept",
+      "width": 1672,
+      "height": 941,
+      "bytes": 87440,
+      "sha256": "6e3296f152934c96399e542ee656b68222b3b6ca4cb890b9e429652ce1622a4b"
+    }
+  ]
+}

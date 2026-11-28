@@ -3,6 +3,8 @@
 import { dec } from "@/lib/ledger";
 import Link from "next/link";
 import { SigilSeals } from "./Sigil";
+import { usePathname } from "next/navigation";
+import HomeFooter from "./home-redesign/HomeFooter";
 
 /**
  * Enterprise footer — three link columns + identity block.
@@ -84,7 +86,7 @@ function FooterAnchor({ l }: { l: FooterLink }) {
   );
 }
 
-export default function Footer() {
+function SiteFooter() {
   return (
     <footer
       style={{
@@ -175,4 +177,10 @@ export default function Footer() {
       <p aria-hidden="true" style={{ textAlign: "center", fontSize: 12, color: "var(--dim)", margin: "10px 0 0" }}>Every symbol on this site means something. We do not explain them.</p>
     </footer>
   );
+}
+
+/** The homepage (2026-11-28 redesign) carries its own footer, HomeFooter; every other route keeps SiteFooter unchanged. */
+export default function Footer() {
+  const pathname = usePathname();
+  return pathname === "/" ? <HomeFooter /> : <SiteFooter />;
 }
