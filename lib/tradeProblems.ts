@@ -92,7 +92,7 @@ export const TRADE_PROBLEMS: TradeProblem[] = [
     ],
     exampleHeading: "Worked example: what a text back could recover for a one-van plumber",
     exampleIntro: "Every number below is an example I made up to show the method. They are not averages, and nobody measured them. Replace each one with your own from two weeks of call history.",
-    example: { kind: "missed-calls", callsPerWeek: 25, missedPct: 24, replyPct: 33, bookPct: 50, jobValue: 380, weeks: 48 },
+    example: { kind: "missed-calls", callsPerWeek: 25, missedPct: 24, replyPct: 40, bookPct: 50, jobValue: 380, weeks: 48 },
     stepsHeading: "How to set it up, in order",
     steps: [
       "Count first. Over two weeks, note every incoming call and how many went unanswered. Your phone's call history or your job app's call log has it. Without this count you cannot tell whether the fix is worth doing.",

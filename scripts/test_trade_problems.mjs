@@ -17,7 +17,7 @@ ok(new Set(TRADE_PROBLEMS.map((p) => p.title)).size === TRADE_PROBLEMS.length, "
 
 // the arithmetic is computed, so check one by hand
 const plumber = computeExample(TRADE_PROBLEMS[0].example);
-ok(plumber.headline === "$18,240", `plumber example yearly = $18,240 (got ${plumber.headline})`);
+ok(plumber.headline === "$21,888", `plumber example yearly = $21,888 (got ${plumber.headline})`);
 const inv = computeExample(TRADE_PROBLEMS[3].example);
 ok(inv.headline === "$930", `invoice example cash difference = $930 (got ${inv.headline})`);
 
