@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { Block, NextStep } from "@/components/SiteBlocks";
 import SectionReveal from "@/components/SectionReveal";
-import { GlowCard } from "@/components/house";
-import s from "@/components/w2b/w2b.module.css";
+import AnimatedButton from "@/components/AnimatedButton";
+import s from "./sectors.module.css";
 import { SECTORS } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -17,25 +16,41 @@ export default function SectorsPage() {
   return (
     <>
       <PageHero badge="SECTORS" title="Ten sectors, one method" tagline="We read public records about your business and tell you what a stranger could see." />
-      <Block point="Every sector page shows one number with its label, or says plainly that we have none yet.">
-        Where a number is not measured, we write UNKNOWN and say what would measure it.
-      </Block>
-      <SectionReveal>
-        <ul className={s.sectors}>
-          {SECTORS.map((x) => (
-            <li key={x.slug}>
-              <GlowCard as="a" href={`/sectors/${x.slug}`} className={s.sector}>
-                <h3>{x.name}</h3>
-                <p>{x.point}</p>
-              </GlowCard>
-            </li>
-          ))}
-        </ul>
+      <SectionReveal className="pe-section">
+        <div className={`pe-page ${s.block}`}>
+          <h2>Every sector page shows one number with its label, or says plainly that we have none yet.</h2>
+          <p>Where a number is not measured, we write UNKNOWN and say what would measure it.</p>
+        </div>
       </SectionReveal>
-      <Block point="The Sector Index is open data.">
-        Every sector number above is in a file you can download, with its label and source. <a href="/open-data" style={{ color: "var(--gold)" }}>Get the files</a>.
-      </Block>
-      <NextStep text="Start with the free scan on your own domain." href="/scan" label="Run the free scan" />
+      <SectionReveal className="pe-section">
+        <div className="pe-page">
+          <ul className={s.list}>
+            {SECTORS.map((x) => (
+              <li key={x.slug}>
+                <a href={`/sectors/${x.slug}`} className={`pe-card pe-card--pad pe-card--link ${s.card}`}>
+                  <h3>{x.name}</h3>
+                  <p>{x.point}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </SectionReveal>
+      <SectionReveal className="pe-section">
+        <div className={`pe-page ${s.block}`}>
+          <h2>The Sector Index is open data.</h2>
+          <p>
+            Every sector number above is in a file you can download, with its label and source. <a href="/open-data">Get the files</a>.
+          </p>
+        </div>
+      </SectionReveal>
+      <SectionReveal className="pe-section">
+        <div className={`pe-page ${s.block}`}>
+          <h2>Start with the free scan on your own domain.</h2>
+          <p className={s.ask}>Would it be okay if we showed you? A no is welcome.</p>
+          <AnimatedButton href="/scan">Run the free scan</AnimatedButton>
+        </div>
+      </SectionReveal>
     </>
   );
 }

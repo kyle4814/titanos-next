@@ -1,0 +1,14 @@
+/* Sectors pages: obsidian and gold, on the shared pe-* primitives. */
+.list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--pe-sp-4); }
+.list li { display: flex; }
+.card { display: flex; flex-direction: column; gap: 10px; width: 100%; min-height: 44px; text-decoration: none; }
+.card h3 { margin: 0; font-size: var(--pe-fs-h3); color: var(--pe-text); }
+.card p { margin: 0; color: var(--pe-mute); line-height: 1.6; }
+.go { margin-top: auto; padding-top: 8px; color: var(--pe-gold-hi); font-size: var(--pe-fs-sm); font-weight: 600; }
+.block > * { max-width: 760px; }
+.block h2 { margin: 0 0 14px; font-size: var(--pe-fs-h2); line-height: 1.2; text-wrap: balance; }
+.block p { color: var(--pe-mute); line-height: 1.7; font-size: var(--pe-fs-lead); margin: 0; }
+.ask { margin: 0 0 18px !important; font-size: var(--pe-fs-body) !important; }
+.num { color: var(--pe-gold-hi); font-size: var(--pe-fs-display); font-weight: 700; line-height: 1.05; margin: 10px 0 !important; font-variant-numeric: tabular-nums; }
+.label { color: var(--pe-gold); font-size: var(--pe-fs-xs) !important; letter-spacing: var(--pe-track-eyebrow); text-transform: uppercase; font-weight: 600; }
+.src { font-size: var(--pe-fs-sm) !important; color: var(--pe-faint) !important; margin-top: 10px !important; }
