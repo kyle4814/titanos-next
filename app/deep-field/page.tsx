@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
 import SpaceImage from "@/components/SpaceImage";
@@ -19,13 +18,6 @@ export const metadata: Metadata = withSeo("/deep-field", {
   robots: { index: true, follow: true },
 });
 
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const GRID: CSSProperties = {
-  maxWidth: 1240, margin: "0 auto", display: "grid", gap: 20,
-  gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))",
-};
-const FIG: CSSProperties = { margin: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", overflow: "hidden" };
-const CAP: CSSProperties = { padding: "10px 14px 14px", color: "var(--ice)", fontSize: 14, lineHeight: 1.55 };
 
 export default function DeepField() {
   return (
@@ -37,16 +29,16 @@ export default function DeepField() {
         sub="The universe is the oldest data set there is. These are real images, credited to the people who made them."
       />
       <Provenance route="/deep-field" />
-      <section style={SECTION}>
-        <div style={GRID}>
+      <section className="pe-page pe-section">
+        <div className="pe-grid">
           {SPACE_IMAGES.map((m, i) => (
-            <figure key={m.id} style={FIG}>
+            <figure key={m.id} className="pe-card" style={{ margin: 0, overflow: "hidden" }}>
               <SpaceImage id={m.id} sizes="(max-width: 800px) 100vw, 340px" priority={i === 0} className="ds-deepfield__img" />
-              <figcaption style={CAP}>
-                <b style={{ color: "var(--gold)" }}>{m.title}</b>
+              <figcaption style={{ padding: "14px 18px 18px", color: "var(--pe-mute)", fontSize: 14, lineHeight: 1.6 }}>
+                <b style={{ color: "var(--pe-text)" }}>{m.title}</b>
                 <br />
                 Credit: {m.credit}.{" "}
-                <a href={`/credits#${m.id}`} style={{ color: "var(--gold)" }}>Licence and source</a>
+                <a href={`/credits#${m.id}`} className="pe-textlink">Licence and source</a>
               </figcaption>
             </figure>
           ))}

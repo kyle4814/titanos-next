@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import W2d from "@/components/w2d/W2d";
@@ -18,17 +17,6 @@ const baseMetadata: Metadata = {
 };
 
 export const metadata: Metadata = withSeo("/parallax", baseMetadata);
-
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "18px 20px",
-};
 
 const YOURS: [string, string][] = [
   ["1", "One conversation. Tell us where the hours go. That is the whole brief."],
@@ -59,44 +47,44 @@ export default function Parallax() {
         title="The simplest way to bring AI into a large organisation."
         sub="Nothing replaced, nothing to learn, nothing to install. You do three things. We do everything else, beside the systems you already run."
       />
-      <section style={SECTION}>
-        <div style={WRAP}>
-          <h2 style={H}>Your part: three things</h2>
+      <section className="pe-page pe-page--narrow pe-section">
+        <div>
+          <h2 style={{ margin: "48px 0 16px", fontSize: "var(--pe-fs-h2)" }}>Your part: three things</h2>
           <div style={{ display: "grid", gap: 12 }}>
             {YOURS.map(([n, t]) => (
-              <div key={n} style={{ ...CARD, display: "flex", gap: 16, alignItems: "center" }}>
-                <div style={{ color: "var(--gold)", fontSize: 34, fontWeight: 700, minWidth: 30 }}>{n}</div>
-                <div style={{ color: "var(--ice)", fontSize: 17, lineHeight: 1.6 }}>{t}</div>
+              <div key={n} className="pe-card pe-card--pad" style={{ display: "flex", gap: 16, alignItems: "center" }}>
+                <div style={{ color: "var(--pe-gold)", fontSize: 34, fontWeight: 700, minWidth: 30 }}>{n}</div>
+                <div style={{ color: "var(--pe-text)", fontSize: 17, lineHeight: 1.6 }}>{t}</div>
               </div>
             ))}
           </div>
 
-          <h2 style={H}>Our part: everything else</h2>
-          <p style={BODY}>
+          <h2 style={{ margin: "48px 0 16px", fontSize: "var(--pe-fs-h2)" }}>Our part: everything else</h2>
+          <p className="pe-lead" style={{ margin: "0 0 18px", maxWidth: "none" }}>
             Finding where the hours go, building the system, testing it end to end, running it, and reporting what it gave
             back. It is 99% code and 1% AI, so it runs for about AU$20 to AU$50 a month on your own accounts, with nothing
-            marked up. See the <a href="/costs" style={{ color: "var(--gold)" }}>costs</a> and the{" "}
-            <a href="/proof" style={{ color: "var(--gold)" }}>proof</a>.
+            marked up. See the <a href="/costs">costs</a> and the{" "}
+            <a href="/proof">proof</a>.
           </p>
 
-          <h2 style={H}>Go as deep as you like, one step at a time</h2>
+          <h2 style={{ margin: "48px 0 16px", fontSize: "var(--pe-fs-h2)" }}>Go as deep as you like, one step at a time</h2>
           <div style={{ display: "grid", gap: 10 }}>
             {LEVELS.map(([l, n, d]) => (
-              <div key={l} style={CARD}>
-                <div style={{ color: "var(--gold)", fontWeight: 600 }}>
+              <div key={l} className="pe-card pe-card--pad">
+                <div style={{ color: "var(--pe-gold-hi)", fontWeight: 600 }}>
                   {l}: {n}
                 </div>
-                <div style={{ color: "var(--ice)", fontSize: 15, lineHeight: 1.6, marginTop: 4 }}>{d}</div>
+                <div style={{ color: "var(--pe-mute)", fontSize: 15, lineHeight: 1.6, marginTop: 4 }}>{d}</div>
               </div>
             ))}
           </div>
-          <p style={{ ...BODY, marginTop: 12 }}>
+          <p className="pe-lead" style={{ margin: "16px 0 0", maxWidth: "none" }}>
             Most organisations start at Level 0 and only move up once the numbers have earned it. Stopping at any level is
             fine.
           </p>
 
-          <h2 style={H}>What we never do</h2>
-          <ul style={{ ...BODY, paddingLeft: 20 }}>
+          <h2 style={{ margin: "48px 0 16px", fontSize: "var(--pe-fs-h2)" }}>What we never do</h2>
+          <ul className="pe-prose" style={{ paddingLeft: 20 }}>
             {NEVER.map((t) => (
               <li key={t} style={{ marginBottom: 8 }}>
                 {t}
@@ -104,7 +92,7 @@ export default function Parallax() {
             ))}
           </ul>
 
-          <p style={{ ...BODY, textAlign: "center", marginTop: 36 }}>
+          <p className="pe-lead" style={{ textAlign: "center", margin: "48px auto 20px" }}>
             The first step is a conversation, with no pressure and nothing to sign.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
