@@ -12,10 +12,7 @@ const FIELDS: { name: string; label: string; type?: string; required?: boolean }
   { name: "postcode", label: "Postcode" },
 ];
 
-const input = {
-  width: "100%", padding: "12px 14px", background: "var(--card)", color: "var(--text)",
-  border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", font: "inherit",
-} as const;
+const label = { color: "var(--pe-text)", fontSize: "var(--pe-fs-sm, 0.9rem)", fontWeight: 600, display: "grid", gap: 6 } as const;
 
 export default function WelcomeForm({ offerName }: { offerName: string }) {
   const [vals, setVals] = useState<Record<string, string>>({});
@@ -26,18 +23,18 @@ export default function WelcomeForm({ offerName }: { offerName: string }) {
     window.location.href = `mailto:kyle@titanos.tech?subject=${encodeURIComponent(`Onboarding: ${offerName}`)}&body=${encodeURIComponent(body)}`;
   };
   return (
-    <form onSubmit={submit} style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", display: "grid", gap: 14 }}>
+    <form onSubmit={submit} className="pe-card pe-card--pad" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", display: "grid", gap: 16 }}>
       {FIELDS.map((f) => (
-        <label key={f.name} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)" }}>
+        <label key={f.name} style={label}>
           {f.label}{f.required ? " *" : ""}
-          <input style={input} type={f.type ?? "text"} required={f.required} value={vals[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} />
+          <input type={f.type ?? "text"} required={f.required} value={vals[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} />
         </label>
       ))}
-      <label style={{ color: "var(--ice)", fontSize: "var(--fs-sm)" }}>
+      <label style={label}>
         Anything we should know
-        <textarea style={{ ...input, minHeight: 100 }} value={vals.notes ?? ""} onChange={(e) => set("notes", e.target.value)} />
+        <textarea style={{ minHeight: 110 }} value={vals.notes ?? ""} onChange={(e) => set("notes", e.target.value)} />
       </label>
-      <button type="submit" style={{ padding: "14px 20px", background: "var(--gold)", color: "var(--vault-black, #0a0a0a)", border: 0, borderRadius: 999, fontWeight: 700, cursor: "pointer" }}>
+      <button type="submit" className="pe-btn pe-btn--gold pe-btn--lg" style={{ justifySelf: "start" }}>
         SEND TO KYLE →
       </button>
     </form>

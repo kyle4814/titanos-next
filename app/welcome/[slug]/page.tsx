@@ -40,13 +40,13 @@ export default async function WelcomePage({ params }: { params: Promise<{ slug: 
           <WelcomeForm offerName={o.name} />
           <p style={{ maxWidth: "var(--maxw-prose)", margin: "18px auto 0", color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>
             We use these details only to set up this service. They arrive in Kyle&apos;s email inbox; this site stores nothing. See our{" "}
-            <Link href="/privacy" style={{ color: "var(--gold)" }}>privacy policy</Link>.
+            <Link href="/privacy" style={{ color: "var(--pe-gold-hi)" }}>privacy policy</Link>.
           </p>
         </div>
       </SectionReveal>
       <SectionReveal style={{ padding: "var(--space-8) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
-        <div className="container-vault" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", color: "var(--text)", lineHeight: 1.75 }}>
-          <h3 style={{ color: "var(--ice)" }}>What happens next</h3>
+        <div className="container-vault pe-card pe-card--pad" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto", color: "var(--text)", lineHeight: 1.75 }}>
+          <h3 style={{ marginTop: 0 }}>What happens next</h3>
           <ol style={{ paddingLeft: 22 }}>
             <li>You send the details. Public records only; nothing on your systems is touched.</li>
             <li>Kyle reviews and confirms within one business day.</li>

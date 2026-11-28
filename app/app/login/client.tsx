@@ -1,5 +1,7 @@
 "use client";
 
+import "@/app/app/portal.css";
+
 import { useEffect, useState } from "react";
 import { browserApi, completeLogin, errorText, loginTokenFromHash } from "@/lib/portal";
 
@@ -14,8 +16,8 @@ export default function LoginClient() {
     completeLogin(browserApi(), token).then(() => { setState("done"); window.location.href = "/app/billing"; }).catch((e) => { setState("error"); setMsg(errorText(e)); });
   }, []);
   return (
-    <main style={{ minHeight: "60vh", padding: "120px 20px", color: "var(--text)", textAlign: "center" }}>
-      <h1 style={{ color: "var(--ice)" }}>{state === "working" ? "Signing you in" : state === "done" ? "Signed in" : "Sign in"}</h1>
+    <main className="pp-main pp-main--narrow pp-main--center">
+      <h1>{state === "working" ? "Signing you in" : state === "done" ? "Signed in" : "Sign in"}</h1>
       {msg && <p role="alert">{msg}</p>}
     </main>
   );
