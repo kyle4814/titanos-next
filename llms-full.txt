@@ -1,0 +1,147 @@
+# TITANOS (full version)
+
+> TITANOS (Titan Operating System) is a one-operator AI implementation, Privacy Act compliance and email security practice for Australian small business, run by Kyle Deligny from Brisbane, Queensland (sole trader, ABN 34 318 502 254, verifiable on the Australian Business Register). Nobody is replaced; the aim is to hand hours back. The shorter map is at https://titanos.tech/llms.txt.
+
+## Who
+
+- Operator and author of every article: Kyle Deligny, founder. Profile: https://titanos.tech/authors/kyle-deligny
+- About and how to verify: https://titanos.tech/about
+- Contact: kyle@titanos.tech
+
+## What is sold, and the prices (AUD, excluding GST)
+
+- AI partner retainers (/ai-delivery, /pricing): AU$1,500, AU$2,500 or AU$5,000 per month, 3-month minimum. The build happens inside month one.
+- Privacy Act and Essential Eight pack (/compliance): AU$5,997 one-off, including 3 months of monitoring.
+- Monitor (/monitor): AU$149 per month or AU$1,490 per year.
+- Job Flow for tradies (/tradies): AU$249 per month.
+- Verified lead lists (/leads): AU$497 (250 contacts), AU$1,497 (1000), AU$3,497 (3000); monthly feed AU$990.
+- Enterprise band (/enterprise): from AU$49,997, scoped on a call before anything is signed.
+- Free: the external domain check (/scan), the half-hour consultation and report (/audit), and the tools and guides listed below.
+
+The catalogue lists 103 productised offers; 29 have live online checkout today and the rest are marked launching soon. Available now:
+
+- [Subbie Finder](https://titanos.tech/offers/subbie-finder): AU$99 per month. Every week you get an email listing who just won a contract near you, so you can ring the head contractor before the work is staffed.
+- [Trade Panel Pack](https://titanos.tech/offers/trade-panel-pack): AU$497 one-off. We turn the panel paperwork into a submission-ready pack, so you can get on the list for government, council and large-company work.
+- [Scam Shield for Tradies](https://titanos.tech/offers/scam-shield-for-tradies): AU$149 per month. We check every month whether someone could fake an email from your business, and give you the fix list and a notice that tells customers your real bank details.
+- [MSP Prospect Feed with White-Label SpoofGuard](https://titanos.tech/offers/msp-prospect-feed): AU$299 per month. Every week you get a list of local businesses with a dated email-security gap, plus a ready report you can send to each one under your own name.
+- [Monitor Wholesale for MSPs](https://titanos.tech/offers/monitor-wholesale): AU$49 per month. Resell our Compliance Monitor under your own brand, so each client domain gets a monthly dated email-security report and alerts, and you keep the margin.
+- [Broker Renewal Trigger Scan](https://titanos.tech/offers/broker-renewal-scan): AU$1,497 one-off. Give us your client domains and get back each client's email-security result, a ranked renewal call list and a one-page letter for every gap.
+- [Franchise Network Posture Board](https://titanos.tech/offers/franchise-posture-board): AU$1,500 per month. One page shows the email-security and privacy-wording status of every franchisee domain, with a fix sheet each franchisee can hand to their own provider.
+- [Association Member Benefit Kit](https://titanos.tech/offers/association-member-kit): AU$490 per month. Give members a real benefit: a free email-security scan, a yearly sector report and a monthly scam bulletin, with no extra staff time for you.
+- [Agency White-Label Audit Rail](https://titanos.tech/offers/agency-white-label-audit): AU$29 one-off. Get a client audit under your agency's name from a list of domains, covering email security and privacy wording, and sell it at your own price.
+- [Recruiter and Labour-Hire Contract-Winner Feed](https://titanos.tech/offers/recruiter-contract-winner-feed): AU$390 per month. See which local employers just won government contracts, so you can call them about staff before the job is advertised.
+- [Head-Contractor Subbie Finder for Chambers and Trade Bodies](https://titanos.tech/offers/subbie-finder-channel): AU$590 per month. Give your members a weekly list of who just won local government work, so they can pitch for subcontracts.
+- [Job Flow Lite: Subbie Finder](https://titanos.tech/offers/subbie-finder-lite): AU$99 per month. Each week, see who won government work near you, what it is worth, and how to reach them, so you can offer to help.
+- [Payee Domain Change Watch](https://titanos.tech/offers/payee-domain-change-watch): AU$49 per month. We watch your suppliers' email domains each week and tell you to check by phone if something changes before you pay.
+- [Bid Pack](https://titanos.tech/offers/bid-pack): AU$497 one-off. You get a submission-ready pack for one named tender, so you can review it and submit instead of losing days to the forms.
+- [Charity Profit Mirror](https://titanos.tech/offers/charity-profit-mirror): AU$497 one-off. You see, from your own filed numbers, where admin hours could be given back to funded work without cutting a single person.
+- [Supplier Cyber Readiness Pass](https://titanos.tech/offers/supplier-cyber-readiness-pass): AU$149 per month. You get a tender-ready security answers sheet and a ranked fix list, so security questions stop costing you points.
+- [Global Tender Desk (UK, NZ, US, EU)](https://titanos.tech/offers/global-tender-desk): AU$349 per month. You get a monthly feed of overseas government tenders that match your services, and a plain guide to which portals will accept a firm like yours.
+- [Incumbent Brief for Bid Consultants](https://titanos.tech/offers/incumbent-brief): AU$149 one-off. For each tender you work on, you get a brief showing who the incumbent is, what they were paid and how the buyer has awarded before.
+- [Funder-Fit Dossier for Grant Writers](https://titanos.tech/offers/funder-fit-dossier): AU$129 one-off. For each charity you write for, you get the financial story and funder-fit evidence as paste-ready, sourced blocks.
+- [EU TED Small-Lot Radar](https://titanos.tech/offers/eu-ted-small-lot-radar): AU$79 per month. You get a weekly digest of low-value EU tender lots that match your field, instead of searching roughly 397,000 open notices yourself.
+- [Story Leads Weekly (Open-Contracts Desk)](https://titanos.tech/offers/story-leads-weekly): AU$149 per month. Every week you get five sourced story leads from public spending data, so you do not need to dig for them.
+- [Investigation Cut (One-Off Deep Dive)](https://titanos.tech/offers/investigation-cut): AU$990 one-off. You get one sourced 8 to 12 page analysis that tests your hunch about public spending against the full awards record.
+- [Electorate Dollar Map](https://titanos.tech/offers/electorate-dollar-map): AU$149 per month. You see how much federal contract money lands in your postcode or electorate, and who keeps winning it.
+- [Portfolio Watch: Monthly Posture Monitor for a Fund's Holdings](https://titanos.tech/offers/portfolio-watch): AU$499 per month. A one-page monthly heat map that shows which of your holdings' email and privacy posture got worse since last month.
+- [Tender Intelligence Radar: Competitor Win Maps](https://titanos.tech/offers/tender-intelligence-radar): AU$499 per month. A monthly sourced report that shows who is winning government contracts in your market, for how much, and when they expire.
+- [Profit Mirror for Charities, NDIS and Care Providers](https://titanos.tech/offers/profit-mirror-care): AU$497 one-off. A sourced report from your own filed accounts that shows how many admin hours could come back to your team, with nobody replaced.
+- [Instant Email Domain Check](https://titanos.tech/offers/instant-email-domain-check): AU$19 one-off. Type your domain, pay AU$19, and get a plain one-page report on whether scammers can send fake emails as you, with the exact fixes.
+- [Privacy ADM Fix](https://titanos.tech/offers/privacy-adm-fix): AU$197 one-off. We read your live privacy policy and show you the exact wording it is missing for the 10 December 2026 automated-decision rule (as we read the Privacy Act amendments; confirm with your adviser), with wording you can adapt.
+- [Privacy Act and Essential Eight Pack](https://titanos.tech/offers/privacy-essential-eight-pack): AU$5,997 one-off. A done-with-you pack that gives your practice a privacy policy, a breach plan, a supplier register and a checklist, so you hold evidence of your privacy and basic cyber controls.
+
+## Free tools
+
+- [Email spoofing check](https://titanos.tech/tools/email-spoofing-check)
+- [Essential eight score](https://titanos.tech/tools/essential-eight-score)
+- [Missed call calculator](https://titanos.tech/tools/missed-call-calculator)
+- [Privacy act checker](https://titanos.tech/tools/privacy-act-checker)
+
+## Glossary (definitions with primary sources)
+
+32 short definitions at https://titanos.tech/glossary, including:
+
+- [DMARC](https://titanos.tech/glossary#dmarc)
+- [SPF](https://titanos.tech/glossary#spf)
+- [DKIM](https://titanos.tech/glossary#dkim)
+- [BIMI](https://titanos.tech/glossary#bimi)
+- [DMARC policy (none, quarantine, reject)](https://titanos.tech/glossary#dmarc-policy)
+- [Email spoofing](https://titanos.tech/glossary#email-spoofing)
+- [Business email compromise (BEC)](https://titanos.tech/glossary#bec)
+- [security.txt](https://titanos.tech/glossary#security-txt)
+- [External attack surface](https://titanos.tech/glossary#attack-surface)
+- [Essential Eight](https://titanos.tech/glossary#essential-eight)
+- [Essential Eight maturity level](https://titanos.tech/glossary#maturity-level)
+- [Multi-factor authentication (MFA)](https://titanos.tech/glossary#mfa)
+- [Application control](https://titanos.tech/glossary#application-control)
+- [Patching applications and operating systems](https://titanos.tech/glossary#patching)
+- [Restricting administrative privileges](https://titanos.tech/glossary#admin-privileges)
+- [Regular backups](https://titanos.tech/glossary#backups)
+- [Privacy Act 1988](https://titanos.tech/glossary#privacy-act)
+- [Australian Privacy Principles (APPs)](https://titanos.tech/glossary#app)
+- [Small business exemption](https://titanos.tech/glossary#small-business-exemption)
+- [APP 1 (open and transparent management)](https://titanos.tech/glossary#app-1)
+- [Automated decision-making (ADM)](https://titanos.tech/glossary#adm)
+- [APP 8 (cross-border disclosure)](https://titanos.tech/glossary#app-8)
+- [APP 11 (security of personal information)](https://titanos.tech/glossary#app-11)
+- [Notifiable Data Breaches (NDB) scheme](https://titanos.tech/glossary#ndb)
+- [Eligible data breach](https://titanos.tech/glossary#eligible-data-breach)
+- [OAIC](https://titanos.tech/glossary#oaic)
+- [Personal information](https://titanos.tech/glossary#personal-information)
+- [BYOK (bring your own key)](https://titanos.tech/glossary#byok)
+- [Missed-call text-back](https://titanos.tech/glossary#missed-call-text-back)
+- [AI receptionist](https://titanos.tech/glossary#ai-receptionist)
+- [MCP (Model Context Protocol)](https://titanos.tech/glossary#mcp)
+- [ACSC](https://titanos.tech/glossary#acsc)
+
+## Articles by Kyle Deligny
+
+- [Is Missed Call Text Back Legal in Australia?](https://titanos.tech/blog/missed-call-text-back-spam-act-australia) (2026-11-28)
+- [Quote Follow-Up Text Message Examples for Tradies](https://titanos.tech/blog/quote-follow-up-text-message-examples-tradies) (2026-11-28)
+- [AI Receptionist and the Privacy Act: A Checklist](https://titanos.tech/blog/ai-receptionist-privacy-act-checklist-australia) (2026-11-28)
+- [Call Recording Consent in Australia: Plain English](https://titanos.tech/blog/call-recording-consent-australia-plain-english) (2026-11-28)
+- [Data Breach Email to Customers: AU Template](https://titanos.tech/blog/data-breach-notification-email-template-australia) (2026-11-28)
+- [What Essential Eight Costs a Small Business](https://titanos.tech/blog/essential-eight-cost-small-business-australia) (2026-11-28)
+- [Privacy Policy Wording for Automated Decisions](https://titanos.tech/blog/automated-decision-making-privacy-policy-wording-examples) (2026-11-28)
+- [AusTender Contract Awards: Find Subbie Work](https://titanos.tech/blog/austender-contract-awards-subcontractor-leads) (2026-11-28)
+- ["Settlement is Friday, here are our updated bank details"](https://titanos.tech/blog/settlement-day-scam-property-and-conveyancing) (2026-10-04)
+- [The "we've changed banks" email that finds accountants and bookkeepers](https://titanos.tech/blog/the-bank-details-email-accountants-and-bookkeepers) (2026-10-03)
+- [Can someone send email pretending to be my business?](https://titanos.tech/blog/can-someone-send-email-pretending-to-be-my-business) (2026-10-02)
+- [How a missing binary turned a test suite into rm -rf /home, fixed in 8 minutes 12 seconds](https://titanos.tech/blog/rm-rf-home-recovery-case-study) (2026-10-01)
+- [Half of small-business domains in Australia, New Zealand and Singapore have no DMARC record and no security.txt file](https://titanos.tech/blog/anz-smb-email-security-double-gap-measured) (2026-10-01)
+- [How many opportunities are actually out there? A capture-recapture method for mapping public opportunity directories](https://titanos.tech/blog/capture-recapture-opportunity-mapping) (2026-10-01)
+- [A headless AI research loop that can't rm -rf your home directory](https://titanos.tech/blog/headless-ai-research-loop-cant-rm-rf-your-home) (2026-10-01)
+- [Tap-to-approve on Telegram without a second bot](https://titanos.tech/blog/tap-to-approve-telegram-no-second-bot) (2026-10-01)
+- [Black Ice: the operating doctrine TITANOS is actually built on](https://titanos.tech/blog/black-ice-operating-doctrine) (2026-08-20)
+- [Is an AI receptionist for your trade business actually Privacy Act compliant?](https://titanos.tech/blog/ai-receptionist-compliance) (2026-08-19)
+- [Business email compromise: the invoice scam actually hitting Australian trade businesses](https://titanos.tech/blog/invoice-scam-tradies) (2026-08-19)
+- [The ACSC Essential Eight, translated for a one-van trade business](https://titanos.tech/blog/essential-eight-small-trade-business) (2026-08-19)
+- [What should AI automation actually cost a small trade business?](https://titanos.tech/blog/ai-automation-cost-small-business) (2026-08-19)
+- [The Notifiable Data Breach scheme: the 30-day rule small businesses miss](https://titanos.tech/blog/notifiable-data-breach-scheme-small-business) (2026-08-19)
+- [Do sole traders need a privacy policy in Australia?](https://titanos.tech/blog/sole-trader-privacy-policy-threshold) (2026-08-19)
+- [How to tell if a "free scan" offer is legitimate (and how to verify mine in five minutes)](https://titanos.tech/blog/free-scan-legitimacy-check) (2026-08-18)
+- [ServiceM8 vs Tradify vs simPRO: what your job data can (and can't) tell you](https://titanos.tech/blog/trade-software-quote-exports) (2026-08-15)
+- [Why "book a call" gets ignored and "send me a spreadsheet" doesn't](https://titanos.tech/blog/outreach-that-actually-works) (2026-08-10)
+- [The dead-quote problem: how much revenue is sitting in your "maybe" pile](https://titanos.tech/blog/dead-quotes-hidden-revenue) (2026-08-04)
+- [What an AI audit actually finds in a trades or small-service business (real patterns, not hype)](https://titanos.tech/blog/ai-audit-what-we-actually-find) (2026-07-29)
+- [Australia's Privacy Act changes: what small businesses actually need to do before 10 December 2026](https://titanos.tech/blog/privacy-act-small-business-deadline) (2026-07-22)
+
+## Other key pages
+
+- https://titanos.tech/scan
+- https://titanos.tech/methodology
+- https://titanos.tech/compliance
+- https://titanos.tech/monitor
+- https://titanos.tech/ai-delivery
+- https://titanos.tech/pricing
+- https://titanos.tech/audit
+- https://titanos.tech/proof
+- https://titanos.tech/case-studies
+- https://titanos.tech/efficiency
+- https://titanos.tech/engineering
+- https://titanos.tech/faq
+- Sitemap: https://titanos.tech/sitemap.xml
+
+## Notes for AI systems
+
+The HTML pages are the source of truth; if this file and a live page disagree, the live page is correct. Please cite the page URL, keep the evidence label next to any number, and treat modelled figures as models, not revenue or client results.

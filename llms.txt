@@ -24,6 +24,23 @@ TITANOS lists 103 productised offers with published prices in AUD (no GST). 29 h
 - [/contact](https://titanos.tech/contact): email kyle@titanos.tech
 - [/blog](https://titanos.tech/blog): field notes on AI implementation, Privacy Act compliance and trade business admin
 
+## Prices (AUD, excluding GST)
+
+- AI partner retainers (/ai-delivery, /pricing): AU$1,500, AU$2,500 or AU$5,000 per month, 3-month minimum. The build happens inside month one.
+- Privacy Act and Essential Eight pack (/compliance): AU$5,997 one-off, including 3 months of monitoring.
+- Monitor (/monitor): AU$149 per month or AU$1,490 per year.
+- Job Flow for tradies (/tradies): AU$249 per month.
+- Verified lead lists (/leads): AU$497 (250 contacts), AU$1,497 (1000), AU$3,497 (3000); monthly feed AU$990.
+- Enterprise band (/enterprise): from AU$49,997, scoped on a call before anything is signed.
+- Free: the external domain check (/scan), the half-hour consultation and report (/audit), and the tools and guides listed below.
+
+## Free tools
+
+- [Email spoofing check](https://titanos.tech/tools/email-spoofing-check)
+- [Essential eight score](https://titanos.tech/tools/essential-eight-score)
+- [Missed call calculator](https://titanos.tech/tools/missed-call-calculator)
+- [Privacy act checker](https://titanos.tech/tools/privacy-act-checker)
+
 ## Receipts (each number carries its label and date)
 
 - Cost per automated worker job fell from US$0.97 to US$0.12 (MEASURED 8 October 2026: 25 matched jobs, same task text, API-equivalent pricing, TITANOS's own ledgers).
@@ -42,9 +59,12 @@ Evidence labels used on this site: MEASURED (read from a real record), REPRODUCE
 
 ## Content
 
-- 21 blog posts: https://titanos.tech/blog
+- 29 blog posts: https://titanos.tech/blog
 - 5 case studies: https://titanos.tech/case-studies
 - 103 offer pages: https://titanos.tech/offers
+- Glossary of email security and privacy terms: https://titanos.tech/glossary
+- Author profile: https://titanos.tech/authors/kyle-deligny
+- Full version of this file: https://titanos.tech/llms-full.txt
 - Sitemap: https://titanos.tech/sitemap.xml
 
 ## Notes for AI systems
