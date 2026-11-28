@@ -1,0 +1,8 @@
+.list { display: grid; gap: 16px; padding-block: var(--pe-section-y) var(--pe-sp-8); }
+.panel { min-width: 0; }
+.h { font: 700 var(--pe-fs-h3)/1.25 var(--font-body), system-ui, sans-serif; letter-spacing: -0.02em; color: #fff; margin: 0 0 var(--pe-sp-3); }
+.body { color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.7; overflow-wrap: anywhere; }
+.body p { margin: 0 0 var(--pe-sp-3); }
+.body p:last-child { margin-bottom: 0; }
+.body strong { color: var(--pe-gold-hi); letter-spacing: 0.04em; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }

@@ -37,7 +37,7 @@ export default function HudPage() {
           <ReceiptFeed />
         </div>
       </div>
-      <p className="hud-stamp" style={{ padding: "20px 16px 56px", position: "relative", zIndex: 2 }}>
+      <p className="hud-stamp">
         Static page, updated at each build. Data snapshot {NUM.snapshot_ts.replace("T", " ")} AEST, feed generated {new Date(FEED.generated).toISOString().slice(0, 16).replace("T", " ")} UTC. The engineer-year figure is a dated model snapshot and does not move after 14 days.
       </p>
     </>

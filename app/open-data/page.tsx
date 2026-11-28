@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import PageHero from "@/components/PageHero";
-import { Block } from "@/components/SiteBlocks";
+import { Panel, PanelList, panelActions } from "@/components/panel/DataPanel";
 import JsonLd from "@/components/JsonLd";
 import { dataset } from "@/lib/jsonld";
 import { longDate } from "@/lib/provenance";
@@ -28,19 +28,21 @@ export default function OpenData() {
         />
       ))}
       <PageHero badge="OPEN DATA" title="The numbers, as files." tagline="Download them, check them, quote them. Every row names its label, its source and its date." />
+      <PanelList>
       {od.datasets.map((d) => (
-        <Block key={d.id} point={d.title}>
+        <Panel key={d.id} point={d.title}>
           <p data-dataset={d.id}>{d.about}</p>
-          <p>
-            <a href={d.file} style={{ color: "var(--gold)", marginRight: 16 }}>JSON</a>
-            <a href={d.csv} style={{ color: "var(--gold)" }}>CSV</a>
+          <p className={panelActions}>
+            <a className="pe-btn pe-btn--dark" href={d.file}>JSON</a>{" "}
+            <a className="pe-btn pe-btn--dark" href={d.csv}>CSV</a>
           </p>
-        </Block>
+        </Panel>
       ))}
-      <Block point="Source, date and licence">
+      <Panel point="Source, date and licence">
         <p data-provenance="/open-data">{od.system}, compiled {longDate(od.compiled)}. Figures from a third party are cited as theirs and keep that source&apos;s own date.</p>
         <p>{od.licence}</p>
-      </Block>
+      </Panel>
+      </PanelList>
     </>
   );
 }
