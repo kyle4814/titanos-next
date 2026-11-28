@@ -151,6 +151,7 @@ export default function ArianceCaseStudy() {
                     src={g.desktop}
                     alt={g.alt_desktop}
                     loading="lazy"
+                    decoding="async"
                     style={{ flex: "1 1 0", minWidth: 0, width: "100%", height: 190, objectFit: "cover", objectPosition: "top", borderRadius: 6, border: "1px solid #1c2730" }}
                   />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -158,6 +159,7 @@ export default function ArianceCaseStudy() {
                     src={g.phone}
                     alt={g.alt_phone}
                     loading="lazy"
+                    decoding="async"
                     style={{ width: 92, height: 190, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "3px solid #1c2730", flex: "0 0 auto" }}
                   />
                 </div>
