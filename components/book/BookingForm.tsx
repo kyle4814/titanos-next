@@ -4,18 +4,8 @@
 // If the API cannot be reached the page says so and offers Telegram and email, so a visitor is never stuck.
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PORTAL, CONTACT, SITE } from "@/lib/config";
+import "@/components/g4/g4.css";
 import { groupSlots, visitorTimeZone, bookingError, confirmedHref, BRISBANE_TZ, type ApiSlot } from "@/lib/booking-ui";
-
-const field: React.CSSProperties = {
-  width: "100%", minHeight: 48, padding: "10px 14px", fontSize: 16, lineHeight: 1.4, color: "var(--text)",
-  background: "rgb(var(--gold-rgb) / 0.04)", border: "1px solid rgb(var(--gold-rgb) / 0.35)", borderRadius: "var(--radius-sm, 6px)", boxSizing: "border-box",
-};
-const label: React.CSSProperties = { display: "block", color: "var(--ice)", fontSize: "var(--fs-sm)", margin: "0 0 6px" };
-const chip = (on: boolean): React.CSSProperties => ({
-  minHeight: 48, minWidth: 48, padding: "8px 14px", fontSize: "var(--fs-sm)", cursor: "pointer", borderRadius: 999,
-  color: on ? "var(--vault-black, #0a0a0a)" : "var(--ice)", background: on ? "var(--gold)" : "transparent",
-  border: `1px solid ${on ? "var(--gold)" : "rgb(var(--gold-rgb) / 0.4)"}`, fontWeight: on ? 700 : 400,
-});
 
 type Load = { state: "loading" } | { state: "ready"; slots: ApiSlot[] } | { state: "error" };
 
@@ -61,64 +51,64 @@ export default function BookingForm() {
     finally { setBusy(false); }
   }
 
-  const telegram = <a href={CONTACT.TELEGRAM_URL} style={{ color: "var(--gold)" }}>Telegram {CONTACT.TELEGRAM_HANDLE}</a>;
-  const email = <a href={`mailto:${SITE.KYLE_EMAIL}`} style={{ color: "var(--gold)" }}>{SITE.KYLE_EMAIL}</a>;
+  const telegram = <a href={CONTACT.TELEGRAM_URL}>Telegram {CONTACT.TELEGRAM_HANDLE}</a>;
+  const email = <a href={`mailto:${SITE.KYLE_EMAIL}`}>{SITE.KYLE_EMAIL}</a>;
 
   return (
-    <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 16px var(--space-12)", position: "relative", zIndex: 2 }}>
-      <h2 style={{ fontSize: "var(--fs-h3, 1.5rem)", color: "var(--gold)", margin: "0 0 8px" }}>1. Pick a time</h2>
-      <p style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6, margin: "0 0 14px" }}>
+    <div className="g4"><div className="g4-book">
+      <h2>1. Pick a time</h2>
+      <p className="pe-muted" style={{ fontSize: "var(--pe-fs-sm)", lineHeight: 1.6, margin: "0 0 16px" }}>
         20 minutes, Monday to Friday afternoons. Times show in your time zone ({tz.replace(/_/g, " ")}) with Brisbane time beside each one.
       </p>
       <div aria-live="polite">
-        {load.state === "loading" && <p style={{ color: "var(--dim)" }}>Loading times...</p>}
+        {load.state === "loading" && <p className="pe-muted">Loading times...</p>}
         {load.state === "error" && (
-          <p style={{ color: "var(--ice)", lineHeight: 1.7 }}>
+          <p className="pe-card pe-card--pad" style={{ lineHeight: 1.7 }}>
             The booking times did not load just now. You can still reach Kyle directly: {telegram} or {email}.
           </p>
         )}
         {load.state === "ready" && days.length === 0 && (
-          <p style={{ color: "var(--ice)", lineHeight: 1.7 }}>No times are open right now. Message Kyle on {telegram} or {email} and he will find one.</p>
+          <p className="pe-card pe-card--pad" style={{ lineHeight: 1.7 }}>No times are open right now. Message Kyle on {telegram} or {email} and he will find one.</p>
         )}
       </div>
       {activeDay && (
         <>
-          <div role="group" aria-label="Day" style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "0 0 12px" }}>
+          <div role="group" aria-label="Day" className="g4-chips">
             {days.map((d) => (
-              <button key={d.key} type="button" aria-pressed={d.key === activeDay.key} style={chip(d.key === activeDay.key)} onClick={() => { setDay(d.key); setSlot(null); }}>{d.label}</button>
+              <button key={d.key} type="button" className="g4-chip" aria-pressed={d.key === activeDay.key} onClick={() => { setDay(d.key); setSlot(null); }}>{d.label}</button>
             ))}
           </div>
-          <div role="group" aria-label={`Times on ${activeDay.label}`} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 8, margin: "0 0 22px" }}>
+          <div role="group" aria-label={`Times on ${activeDay.label}`} className="g4-times">
             {activeDay.slots.map((s) => (
-              <button key={s.iso} type="button" aria-pressed={slot === s.iso} style={{ ...chip(slot === s.iso), borderRadius: "var(--radius-sm, 6px)", lineHeight: 1.3 }} onClick={() => setSlot(s.iso)}>
+              <button key={s.iso} type="button" className="g4-chip" aria-pressed={slot === s.iso} onClick={() => setSlot(s.iso)}>
                 {s.local}
-                <span style={{ display: "block", fontSize: "var(--fs-xs)", fontWeight: 400, opacity: 0.85 }}>Brisbane {s.brisbane}</span>
+                <small>Brisbane {s.brisbane}</small>
               </button>
             ))}
           </div>
         </>
       )}
 
-      <h2 style={{ fontSize: "var(--fs-h3, 1.5rem)", color: "var(--gold)", margin: "8px 0 8px" }}>2. Your details</h2>
-      <form onSubmit={submit} noValidate={false} style={{ display: "grid", gap: 14 }}>
-        <div><label htmlFor="bk-name" style={label}>Your name</label><input id="bk-name" name="name" type="text" autoComplete="name" required maxLength={100} style={field} /></div>
-        <div><label htmlFor="bk-business" style={label}>Your business</label><input id="bk-business" name="business" type="text" autoComplete="organization" required maxLength={120} style={field} /></div>
-        <div><label htmlFor="bk-email" style={label}>Email</label><input id="bk-email" name="email" type="email" autoComplete="email" required maxLength={254} style={field} /></div>
-        <div><label htmlFor="bk-phone" style={label}>Phone (optional)</label><input id="bk-phone" name="phone" type="tel" autoComplete="tel" maxLength={24} style={field} /></div>
-        <div><label htmlFor="bk-eats" style={label}>What eats your week?</label><textarea id="bk-eats" name="eatsWeek" required maxLength={1000} rows={4} style={{ ...field, resize: "vertical" }} /></div>
+      <h2>2. Your details</h2>
+      <form onSubmit={submit} noValidate={false} className="g4-form pe-card pe-card--pad">
+        <div className="pe-field"><label htmlFor="bk-name">Your name</label><input id="bk-name" name="name" type="text" autoComplete="name" required maxLength={100} /></div>
+        <div className="pe-field"><label htmlFor="bk-business">Your business</label><input id="bk-business" name="business" type="text" autoComplete="organization" required maxLength={120} /></div>
+        <div className="pe-field"><label htmlFor="bk-email">Email</label><input id="bk-email" name="email" type="email" autoComplete="email" required maxLength={254} /></div>
+        <div className="pe-field"><label htmlFor="bk-phone">Phone (optional)</label><input id="bk-phone" name="phone" type="tel" autoComplete="tel" maxLength={24} /></div>
+        <div className="pe-field"><label htmlFor="bk-eats">What eats your week?</label><textarea id="bk-eats" name="eatsWeek" required maxLength={1000} rows={4} style={{ resize: "vertical" }} /></div>
         {/* Honeypot: invisible to people and to the keyboard, bots fill it. A filled value is dropped on the server. */}
-        <div aria-hidden="true" style={{ position: "absolute", left: -10000, top: "auto", width: 1, height: 1, overflow: "hidden" }}>
+        <div aria-hidden="true" className="g4-hp">
           <label htmlFor="bk-website">Leave this empty</label>
           <input id="bk-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
-        <p style={{ color: "var(--dim)", fontSize: "var(--fs-xs)", lineHeight: 1.6, margin: 0 }}>
+        <p className="g4-fine">
           Kyle sees only what you type here. Your details are used to confirm this call and nothing else, and no one is added to a list. A no is always welcome.
         </p>
-        <div role="alert" style={{ color: "var(--warn)", fontSize: "var(--fs-sm)", minHeight: err ? undefined : 0 }}>{err}</div>
-        <button type="submit" disabled={busy || load.state !== "ready" || days.length === 0} style={{ ...chip(true), minHeight: 52, borderRadius: "var(--radius-sm, 6px)", fontSize: "var(--fs-body)", opacity: busy ? 0.7 : 1 }}>
+        <div role="alert" className="g4-err">{err}</div>
+        <button type="submit" className="pe-btn pe-btn--gold pe-btn--lg g4-submit" disabled={busy || load.state !== "ready" || days.length === 0}>
           {busy ? "Booking..." : "Book my call"}
         </button>
       </form>
-    </div>
+    </div></div>
   );
 }
