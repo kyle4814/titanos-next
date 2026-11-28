@@ -83,6 +83,12 @@ export const GUIDE_EXTRA: Record<string, { tools: string[]; products: string[] }
   "essential-eight-small-business": { tools: ["/tools/essential-eight-score", "/tools/email-spoofing-check"], products: ["essential-eight-ml1-checklist"] },
   "email-security-small-business-australia": { tools: ["/tools/email-spoofing-check", "/tools/essential-eight-score"], products: ["dmarc-setup-guide", "spoofguard-self-check-checklist"] },
   "government-tenders-small-business-australia": { tools: ["/tools/essential-eight-score", "/tools/privacy-act-checker"], products: ["essential-eight-ml1-checklist"] },
+  "stop-email-spoofing-my-domain": { tools: ["/tools/email-spoofing-check"], products: ["dmarc-setup-guide", "spoofguard-self-check-checklist"] },
+  "dmarc-for-microsoft-365": { tools: ["/tools/email-spoofing-check"], products: ["dmarc-setup-guide"] },
+  "what-is-a-dkim-record": { tools: ["/tools/email-spoofing-check"], products: ["dmarc-setup-guide"] },
+  "bimi-for-small-business": { tools: ["/tools/email-spoofing-check"], products: ["dmarc-setup-guide"] },
+  "invoice-fraud-email-scams-australia": { tools: ["/tools/email-spoofing-check"], products: ["spoofguard-self-check-checklist"] },
+  "what-is-an-spf-record": { tools: ["/tools/email-spoofing-check"], products: ["dmarc-setup-guide"] },
 };
 export const toolLink = tool;
 

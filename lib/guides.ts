@@ -6,6 +6,12 @@ import { privacyAct } from "@/lib/guides-content/privacy-act-small-business-aust
 import { essentialEight } from "@/lib/guides-content/essential-eight-small-business";
 import { emailSecurity } from "@/lib/guides-content/email-security-small-business-australia";
 import { tenders } from "@/lib/guides-content/government-tenders-small-business-australia";
+import { stopEmailSpoofing } from "@/lib/guides-content/stop-email-spoofing-my-domain";
+import { dmarcMicrosoft365 } from "@/lib/guides-content/dmarc-for-microsoft-365";
+import { whatIsDkim } from "@/lib/guides-content/what-is-a-dkim-record";
+import { bimiSmallBusiness } from "@/lib/guides-content/bimi-for-small-business";
+import { invoiceFraudEmail } from "@/lib/guides-content/invoice-fraud-email-scams-australia";
+import { spfRecord } from "@/lib/guides-content/what-is-an-spf-record";
 import { GUIDE_EXTRA, POST_RELATED, TOOLS, PRODUCT_LINKS, type RelLink } from "@/lib/seo-links";
 
 /** Inline markup inside any string: [text](href) for links, **bold** for emphasis. Nothing else. */
@@ -52,7 +58,7 @@ const withTools = (g: Guide): Guide => {
   return { ...g, related: { ...g.related, posts, tools: merge(g.related.tools, tools), products: merge(g.related.products, products) } };
 };
 
-export const GUIDES: Guide[] = [tradieAutomation, aiReceptionist, privacyAct, essentialEight, emailSecurity, tenders].map(withTools);
+export const GUIDES: Guide[] = [tradieAutomation, aiReceptionist, privacyAct, essentialEight, emailSecurity, tenders, stopEmailSpoofing, dmarcMicrosoft365, whatIsDkim, bimiSmallBusiness, invoiceFraudEmail, spfRecord].map(withTools);
 
 export function getGuide(slug: string): Guide | undefined {
   return GUIDES.find((g) => g.slug === slug);

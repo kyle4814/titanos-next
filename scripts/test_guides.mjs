@@ -11,7 +11,7 @@ const TELLS = /\b(delve|leverag\w*|robust|holistic|landscape|cutting-edge|seamle
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 
 const EXPECT = ["tradie-automation-australia", "ai-receptionist-australia-trades", "privacy-act-small-business-australia", "essential-eight-small-business", "email-security-small-business-australia", "government-tenders-small-business-australia"];
-if (GUIDES.map((g) => g.slug).join() !== EXPECT.join()) bad(`guide slugs differ: ${GUIDES.map((g) => g.slug)}`);
+for (const s of EXPECT) if (!GUIDES.some((g) => g.slug === s)) bad(`guide missing: ${s}`);
 
 const appDirs = fs.readdirSync(path.join(root, "app"), { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name);
 const postSlugs = new Set(POSTS.map((p) => p.slug));
