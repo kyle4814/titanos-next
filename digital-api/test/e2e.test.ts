@@ -28,7 +28,7 @@ test("e2e: the whole sale path, no human in the loop", async () => {
   const wh = await go(signedRequest(ev, { now: clock.t }));
   assert.equal(wh.status, 200); assert.deepEqual(await wh.json(), { result: "emailed" });
   const sent = await go(new Request(`https://digital.test/digital/order?s=${sessionId}`));
-  assert.deepEqual(await sent.json(), { state: "sent", title: "Demo Pack" });
+  const sentJ = (await sent.json()) as any; assert.equal(sentJ.state, "sent"); assert.equal(sentJ.title, "Demo Pack"); assert.match(sentJ.download_url, /\/digital\/download\?t=v1\./);
 
   // 3. the buyer got a private link by email
   assert.equal(mailer.outbox.length, 1); assert.equal(mailer.outbox[0].to, "customer@example.com");

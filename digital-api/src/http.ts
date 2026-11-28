@@ -1,7 +1,7 @@
 // Every Response this Worker builds goes through here, so each one carries the five portal security headers
 // (reuses portal-api/src/http.ts) and, for the file, no-store plus nosniff.
 import { json, empty, withSecurityHeaders } from "../../portal-api/src/http.ts";
-export { json, empty };
+export { json, empty, withSecurityHeaders };
 
 export function fileStream(body: ReadableStream, o: { filename: string; size: number; etag?: string }): Response {
   const h: Record<string, string> = {

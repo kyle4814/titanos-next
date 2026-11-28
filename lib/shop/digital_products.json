@@ -80,7 +80,7 @@
     ],
     "filename": "ai-prompt-library-au-smb.zip",
     "fileSize": "537 KB",
-    "sha256": "8be27a67aaa1c396dc25164db45fa0972fdc0904450957818bd4c0ee991f55fe"
+    "sha256": "d82b438ee7b44308ff783019f4aa24ba07ec2a662bbd8ce2b4bde6757de029ab"
    }
   },
   {
@@ -183,14 +183,14 @@
     ],
     "filename": "ai-receptionist-prompt-pack.zip",
     "fileSize": "134 KB",
-    "sha256": "451d4005b41c2a1879522a7f6098e83c2f04364b4737024a7328856318e23207"
+    "sha256": "386dd54e6a380f69c3057d7c4df70daebbb453563afc2b960fccc6c5de2a164f"
    }
   },
   {
    "id": "product:automation-audit-workbook",
    "kind": "product",
    "slug": "automation-audit-workbook",
-   "name": "Find 10 Hours a Week: Business Automation Audit Workbook",
+   "name": "Business Automation Audit Workbook",
    "bluf": "Time, score and rank your repeated tasks, then build a 90-day automation plan.",
    "bullets": [
     "Blank audit workbook (.xlsx, 7 sheets, working formulas, no macros)",
@@ -262,7 +262,7 @@
     ],
     "filename": "automation-audit-workbook.zip",
     "fileSize": "120 KB",
-    "sha256": "8a03313e2fe6d9c0be339a87f9813c7e42cbdb5db52479238a354bb8133da336"
+    "sha256": "9c2bbf8147e7d0f799f6cce1682af8d7a247696ae67af21cdf6ab91ebd954675"
    }
   },
   {
@@ -556,7 +556,7 @@
     ],
     "filename": "client-onboarding-automation.zip",
     "fileSize": "127 KB",
-    "sha256": "db63b1e7cdc18c03d3322c2f174f02938e80ea61046c56614dd374591c140540"
+    "sha256": "3374a13cfebe8bdfd8568f963839f3f0886e0e8cec7af3663d5a142e536a7bf6"
    }
   },
   {
@@ -793,8 +793,8 @@
      "Covers Maturity Level 1 only."
     ],
     "filename": "essential-eight-workbook.zip",
-    "fileSize": "67 KB",
-    "sha256": "a4c0ce7f30a30b3f9e64bcd7b034c6e2e1a8eb325a3674fcbd92ba906fc67646"
+    "fileSize": "68 KB",
+    "sha256": "9688cb7553c2b4b8625b00a33c9a1d308675c65b48db9d586cdc67108a7098cf"
    }
   },
   {
@@ -802,7 +802,7 @@
    "kind": "product",
    "slug": "google-review-engine",
    "name": "Google Review Request Engine",
-   "bluf": "n8n workflows that ask happy customers for reviews, with an opt-out and feedback path",
+   "bluf": "n8n workflows that ask customers for honest reviews, with an opt-out and feedback path",
    "bullets": [
     "Workflow 1: send requests and one reminder by SMS (Twilio) or email (SMTP), every 30 minutes",
     "Workflow 2: private feedback form receiver with owner alert on low ratings or call-back requests",
@@ -1422,7 +1422,7 @@
     ],
     "filename": "social-content-engine.zip",
     "fileSize": "138 KB",
-    "sha256": "c828184a4952319ceecf3eec79a7814db56cee9a0fccc4e8dc4de2738a4b29c5"
+    "sha256": "e25d18c9327a1a422bd1941e6a4556f9ff8681e54aca4c613a29fb788b8295f5"
    }
   },
   {

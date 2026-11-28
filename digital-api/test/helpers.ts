@@ -70,7 +70,7 @@ export function makeEnv(db = new FakeD1(), bucket = new FakeBucket(), extra: Par
   bucket.files.set(ITEM.r2Key, ZIP);
   bucket.files.set(ITEM2.r2Key, ZIP);
   return { db, bucket, env: {
-    DB: db, DIGITAL_BUCKET: bucket, DIGITAL_STRIPE_MODE: "test", DIGITAL_STRIPE_SECRET_KEY: "sk_test_fake_key_for_unit_tests", DIGITAL_WEBHOOK_SECRET: WEBHOOK_SECRET,
+    DB: db, DIGITAL_BUCKET: bucket, DIGITAL_STRIPE_MODE: "test", DIGITAL_CHECKOUT_ENABLED: "true", DIGITAL_STRIPE_SECRET_KEY: "sk_test_fake_key_for_unit_tests", DIGITAL_WEBHOOK_SECRET: WEBHOOK_SECRET,
     DIGITAL_TOKEN_SECRET: TOKEN_SECRET, SITE_ORIGIN: "https://titanos.tech", ...extra,
   } };
 }

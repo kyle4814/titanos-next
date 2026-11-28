@@ -3,14 +3,16 @@
 //   POST /digital/webhook    Stripe webhook         -> verify signature, idempotent, order log, mint token, email, revoke on refund/dispute
 //   GET  /digital/download?t=<token>                -> verify token + order, stream the zip from the PRIVATE R2 bucket
 //   GET  /digital/order?s=<session id>              -> { state: pending | processing | sent | revoked } for the thank-you page
+//   GET  /digital/get?s=<session id>                -> 302 to a fresh signed download link for a paid order (the link the kernel mailer emails)
 //   GET  /health                                    -> booleans only, never a secret
 // Nothing here is deployed: wrangler deploy is Kyle's tap (docs/ops/DIGITAL_PRODUCTS_GO_LIVE_2026-11-28.md).
 import { ITEMS, type DigitalItem } from "./catalogue.ts";
 import type { Env } from "./env.ts";
 import { empty, json } from "./http.ts";
 import { mailerFor, type DigitalMailer } from "./mailer.ts";
-import { HttpError, handleDownload, handleWebhook, orderStatus, startCheckout, type Deps } from "./service.ts";
+import { HttpError, handleDownload, handleWebhook, linkRedirect, orderStatus, startCheckout, type Deps } from "./service.ts";
 import { DigitalStore } from "./store.ts";
+import { storageFor } from "./storage.ts";
 
 export const SERVICE = "titanos-digital";
 export interface WorkerOpts { now?: () => number; fetchFn?: typeof fetch; mailer?: DigitalMailer; items?: readonly DigitalItem[]; log?: (l: string) => void }
@@ -34,9 +36,9 @@ export function buildDeps(env: Env, opts: WorkerOpts = {}): Deps {
   const siteOrigin = env.SITE_ORIGIN?.trim();
   if (!siteOrigin) throw new HttpError(503, "missing_binding:SITE_ORIGIN");
   return {
-    store, bucket: env.DIGITAL_BUCKET, mailer: opts.mailer ?? mailerFor(env, store, now, opts.fetchFn), items: opts.items ?? ITEMS,
+    store, bucket: storageFor(env), mailer: opts.mailer ?? mailerFor(env, store, now, opts.fetchFn), items: opts.items ?? ITEMS,
     mode: env.DIGITAL_STRIPE_MODE === "live" ? "live" : "test",
-    stripeKey: env.DIGITAL_STRIPE_SECRET_KEY?.trim() || undefined, webhookSecret: env.DIGITAL_WEBHOOK_SECRET?.trim() || undefined,
+    stripeKey: env.DIGITAL_STRIPE_SECRET_KEY?.trim() || undefined, checkoutEnabled: env.DIGITAL_CHECKOUT_ENABLED === "true", webhookSecret: env.DIGITAL_WEBHOOK_SECRET?.trim() || undefined,
     tokenSecret: env.DIGITAL_TOKEN_SECRET && env.DIGITAL_TOKEN_SECRET.length >= 16 ? env.DIGITAL_TOKEN_SECRET : undefined,
     siteOrigin, publicOrigin: env.DIGITAL_PUBLIC_ORIGIN?.trim() || undefined, fetchFn: opts.fetchFn, now, log: opts.log ?? ((l) => console.log(l)),
   };
@@ -54,14 +56,15 @@ async function route(req: Request, env: Env, opts: WorkerOpts): Promise<Response
   const path = url.pathname.replace(/\/+$/, "") || "/";
   if (path === "/health" && req.method === "GET") {
     return json({ ok: true, service: SERVICE, stripe_mode: env.DIGITAL_STRIPE_MODE === "live" ? "live" : "test", products: (opts.items ?? ITEMS).length,
-      bindings: { db: !!env.DB, bucket: !!env.DIGITAL_BUCKET, stripe_key: !!env.DIGITAL_STRIPE_SECRET_KEY, webhook_secret: !!env.DIGITAL_WEBHOOK_SECRET, token_secret: !!env.DIGITAL_TOKEN_SECRET, mailer: !!(env.RESEND_API_KEY && env.MAIL_FROM) } });
+      bindings: { db: !!env.DB, storage: env.DIGITAL_BUCKET ? "r2" : env.DIGITAL_FILES ? "kv" : "none", bucket: !!storageFor(env), checkout_enabled: env.DIGITAL_CHECKOUT_ENABLED === "true", stripe_key: !!env.DIGITAL_STRIPE_SECRET_KEY, webhook_secret: !!env.DIGITAL_WEBHOOK_SECRET, token_secret: !!env.DIGITAL_TOKEN_SECRET, mailer: !!(env.RESEND_API_KEY && env.MAIL_FROM) } });
   }
   if (req.method === "OPTIONS") return empty(204);
   const d = buildDeps(env, opts);
   if (path === "/digital/checkout") { if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405); return startCheckout(d, await readBody(req), clientIp(req)); }
   if (path === "/digital/webhook") { if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405); return handleWebhook(d, await req.text(), req.headers.get("stripe-signature"), url.origin); }
   if (path === "/digital/download") { if (req.method !== "GET" && req.method !== "HEAD") return json({ error: "method_not_allowed" }, 405); return handleDownload(d, url.searchParams.get("t"), req.method); }
-  if (path === "/digital/order") { if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405); return orderStatus(d, url.searchParams.get("s")); }
+  if (path === "/digital/get") { if (req.method !== "GET" && req.method !== "HEAD") return json({ error: "method_not_allowed" }, 405); return linkRedirect(d, url.searchParams.get("s"), url.origin); }
+  if (path === "/digital/order") { if (req.method !== "GET") return json({ error: "method_not_allowed" }, 405); return orderStatus(d, url.searchParams.get("s"), url.origin); }
   return json({ error: "not_found" }, 404);
 }
 

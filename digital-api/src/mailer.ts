@@ -8,7 +8,7 @@ export interface MailMessage { to: string; subject: string; text: string; idempo
 export interface DigitalMailer { send(m: MailMessage): Promise<void> }
 export class MailerUnavailable extends Error { constructor() { super("mailer_unavailable"); } }
 
-export const unavailableMailer: DigitalMailer = { async send() { throw new MailerUnavailable(); } };
+export const unavailableMailer: DigitalMailer = { async send() { throw new MailerUnavailable(); } };   // no transport on the Worker: the kernel-side mailer (bin/digital_mailer.py) polls D1 and emails instead
 
 // Test double: records every message, sends nothing.
 export class MockMailer implements DigitalMailer {

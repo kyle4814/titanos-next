@@ -8,8 +8,8 @@ export const GENERATED_ITEMS: DigitalItem[] = [
     "priceCents": 2900,
     "r2Key": "products/ai-prompt-library-au-smb/ai-prompt-library-au-smb.zip",
     "filename": "ai-prompt-library-au-smb.zip",
-    "bytes": 549966,
-    "sha256": "8be27a67aaa1c396dc25164db45fa0972fdc0904450957818bd4c0ee991f55fe"
+    "bytes": 549961,
+    "sha256": "d82b438ee7b44308ff783019f4aa24ba07ec2a662bbd8ce2b4bde6757de029ab"
   },
   {
     "slug": "ai-receptionist-prompt-pack",
@@ -17,17 +17,17 @@ export const GENERATED_ITEMS: DigitalItem[] = [
     "priceCents": 7900,
     "r2Key": "products/ai-receptionist-prompt-pack/ai-receptionist-prompt-pack.zip",
     "filename": "ai-receptionist-prompt-pack.zip",
-    "bytes": 137331,
-    "sha256": "451d4005b41c2a1879522a7f6098e83c2f04364b4737024a7328856318e23207"
+    "bytes": 137328,
+    "sha256": "386dd54e6a380f69c3057d7c4df70daebbb453563afc2b960fccc6c5de2a164f"
   },
   {
     "slug": "automation-audit-workbook",
-    "title": "Find 10 Hours a Week: Business Automation Audit Workbook",
+    "title": "Business Automation Audit Workbook",
     "priceCents": 5900,
     "r2Key": "products/automation-audit-workbook/automation-audit-workbook.zip",
     "filename": "automation-audit-workbook.zip",
-    "bytes": 122402,
-    "sha256": "8a03313e2fe6d9c0be339a87f9813c7e42cbdb5db52479238a354bb8133da336"
+    "bytes": 122738,
+    "sha256": "9c2bbf8147e7d0f799f6cce1682af8d7a247696ae67af21cdf6ab91ebd954675"
   },
   {
     "slug": "capability-statement-pack",
@@ -53,8 +53,8 @@ export const GENERATED_ITEMS: DigitalItem[] = [
     "priceCents": 4900,
     "r2Key": "products/client-onboarding-automation/client-onboarding-automation.zip",
     "filename": "client-onboarding-automation.zip",
-    "bytes": 129682,
-    "sha256": "db63b1e7cdc18c03d3322c2f174f02938e80ea61046c56614dd374591c140540"
+    "bytes": 129678,
+    "sha256": "3374a13cfebe8bdfd8568f963839f3f0886e0e8cec7af3663d5a142e536a7bf6"
   },
   {
     "slug": "cold-email-compliance-playbook",
@@ -80,8 +80,8 @@ export const GENERATED_ITEMS: DigitalItem[] = [
     "priceCents": 4900,
     "r2Key": "products/essential-eight-workbook/essential-eight-workbook.zip",
     "filename": "essential-eight-workbook.zip",
-    "bytes": 68942,
-    "sha256": "a4c0ce7f30a30b3f9e64bcd7b034c6e2e1a8eb325a3674fcbd92ba906fc67646"
+    "bytes": 69853,
+    "sha256": "9688cb7553c2b4b8625b00a33c9a1d308675c65b48db9d586cdc67108a7098cf"
   },
   {
     "slug": "google-review-engine",
@@ -143,8 +143,8 @@ export const GENERATED_ITEMS: DigitalItem[] = [
     "priceCents": 4900,
     "r2Key": "products/social-content-engine/social-content-engine.zip",
     "filename": "social-content-engine.zip",
-    "bytes": 141461,
-    "sha256": "c828184a4952319ceecf3eec79a7814db56cee9a0fccc4e8dc4de2738a4b29c5"
+    "bytes": 141458,
+    "sha256": "e25d18c9327a1a422bd1941e6a4556f9ff8681e54aca4c613a29fb788b8295f5"
   },
   {
     "slug": "sop-template-library",
