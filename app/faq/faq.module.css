@@ -1,0 +1,11 @@
+.faq { display: grid; gap: 12px; margin-top: 24px; }
+.item { border: 1px solid var(--pe-line); border-top-color: var(--pe-line-gold); border-radius: var(--pe-r-card, 12px); background: var(--pe-card); transition: border-color var(--pe-dur, .18s); }
+.item[open] { border-color: var(--pe-line-gold); }
+.q { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 14px 22px; color: var(--pe-text); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.2rem); font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.q::-webkit-details-marker { display: none; }
+.q::after { content: "+"; flex: none; font-size: 1.6rem; line-height: 1; color: var(--pe-gold); transition: transform .25s; }
+.item[open] .q::after { transform: rotate(45deg); }
+.q:focus-visible { outline: 2px solid var(--pe-gold); outline-offset: -2px; border-radius: var(--pe-r-card, 12px); }
+.a { margin: 0; padding: 0 22px 22px; max-width: 62ch; color: var(--pe-mute); font-size: 1.05rem; line-height: 1.75; }
+@media (hover: hover) { .item:hover { border-color: var(--pe-line-gold); } }
+@media (prefers-reduced-motion: reduce) { .q::after, .item { transition: none; } }

@@ -175,7 +175,7 @@ export default function OfferFinder({ compact = false }: { compact?: boolean }) 
         .finder { max-width: 720px; margin: 0 auto; text-align: left; }
         .finder-log { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
         .bubble { max-width: 88%; padding: 12px 16px; border-radius: var(--radius-lg); font-size: var(--fs-body); line-height: 1.55; outline: none; }
-        .bubble.bot { background: var(--card); border: 1px solid var(--gold-dim); color: var(--text); align-self: flex-start; }
+        .bubble.bot { background: var(--pe-card, var(--card)); border: 1px solid var(--pe-line, var(--border)); color: var(--text); align-self: flex-start; }
         .bubble.me { background: rgb(var(--gold-rgb) / 0.14); border: 1px solid var(--gold-dim); color: var(--ice); align-self: flex-end; }
         .bubble:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
         .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
@@ -186,9 +186,9 @@ export default function OfferFinder({ compact = false }: { compact?: boolean }) 
         .textrow input { flex: 1; min-width: 0; min-height: 44px; padding: 8px 14px; background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-md); font: inherit; font-size: 16px; }
         .chip.send { background: var(--gold); color: var(--vault-black, #0a0a0a); border-color: var(--gold); font-weight: 600; }
         .results { display: grid; gap: 14px; margin-top: 6px; }
-        .rcard { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 20px; }
+        .rcard { background: var(--pe-card, var(--card)); border: 1px solid var(--pe-line, var(--border)); border-top-color: var(--pe-line-gold, var(--gold-dim)); border-radius: var(--pe-r-card, 12px); padding: 20px 22px; }
         .rcard header { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-        .rcard strong { color: var(--gold); font-family: var(--font-display), Georgia, serif; }
+        .rcard strong { color: var(--gold); font-family: var(--font-body); font-weight: 700; }
         .badge { font-size: var(--fs-xs); border-radius: 999px; padding: 2px 10px; border: 1px solid var(--border); color: var(--dim); white-space: nowrap; }
         .badge.open { color: var(--ok); border-color: var(--ok); }
         .rcard .bluf { color: var(--text); font-size: var(--fs-sm); line-height: 1.6; margin: 10px 0 6px; }
@@ -197,8 +197,8 @@ export default function OfferFinder({ compact = false }: { compact?: boolean }) 
         .rcard .why span { color: var(--ice); }
         .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
         .actions.foot { justify-content: center; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 18px; border-radius: var(--radius-lg); font: inherit; font-size: var(--fs-sm); font-weight: 600; text-decoration: none; cursor: pointer; }
-        .btn.solid { background: var(--gold); color: var(--vault-black, #0a0a0a); border: 1px solid var(--gold); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 18px; border-radius: var(--pe-r-md, 8px); font: inherit; font-size: var(--fs-sm); font-weight: 600; text-decoration: none; cursor: pointer; }
+        .btn.solid { background: var(--pe-gold-grad, var(--gold)); color: #0a0a0a; border: 1px solid var(--pe-gold, var(--gold)); }
         .btn.ghost { background: transparent; color: var(--ice); border: 1px solid var(--gold-dim); }
         .btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
         .also { color: var(--dim); font-size: var(--fs-sm); }

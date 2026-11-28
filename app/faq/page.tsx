@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
-import s from "@/components/w2b/w2b.module.css";
+import s from "./faq.module.css";
 import { NextStep, jsonLd } from "@/components/SiteBlocks";
 import Concierge from "@/components/Concierge";
 
@@ -31,7 +31,7 @@ export default function FaqPage() {
       })}
       <PageHero badge="FAQ" title="Straight answers before you ask" />
       <SectionReveal>
-        <div className={s.wrap}>
+        <div className="pe-page pe-page--narrow pe-section">
           <Concierge />
           <div className={s.faq}>
             {QA.map(([q, a]) => (
