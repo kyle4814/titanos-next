@@ -71,7 +71,7 @@ export default function ProductsPage() {
       <SectionReveal style={{ textAlign: "center", padding: "var(--space-12) 20px var(--space-20)", position: "relative", zIndex: 2 }}>
         <p style={{ color: "var(--ice)", maxWidth: "var(--maxw-prose)", margin: "0 auto 18px", lineHeight: 1.7 }}>
           Not sure where to start? <Link href="/scan" style={{ color: "var(--gold)" }}>Run the free scan</Link> or{" "}
-          <Link href="/audit" style={{ color: "var(--gold)" }}>book a free audit call</Link>. Prices marked to be confirmed will be set before checkout opens.
+          <Link href="/audit" style={{ color: "var(--gold)" }}>book a free audit call</Link>.
         </p>
       </SectionReveal>
     </>

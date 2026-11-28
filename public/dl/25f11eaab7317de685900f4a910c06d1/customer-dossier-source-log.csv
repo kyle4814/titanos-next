@@ -1,0 +1,5 @@
+ID,Fact,Source name,Address,Date seen,Date of fact,Label,Confidence,Personal information (Y/N and why needed),Capture file
+PURPOSE,"I am researching [organisation] so that I can [purpose]",,,,,,,,
+S01,,,,,,Recorded,High,N,
+S02,,,,,,Stated,Medium,N,
+S03,,,,,,Observed,High,N,

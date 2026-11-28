@@ -8,7 +8,7 @@ const AI_AGENTS = [
   "GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "Claude-Web", "Claude-SearchBot", "Claude-User",
   "anthropic-ai", "PerplexityBot", "Perplexity-User", "Google-Extended", "CCBot", "Applebot-Extended",
 ];
-const PRIVATE = ["/d/", "/v/", "/welcome/", "/order/"];
+const PRIVATE = ["/d/", "/v/", "/welcome/", "/order/", "/dl/"];
 
 export default function robots(): MetadataRoute.Robots {
   return {

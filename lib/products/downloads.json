@@ -1,0 +1,207 @@
+{
+  "dmarc-setup-guide": {
+    "dir": "2d6d5b302bcc5d2b3ecd6d8b11528098",
+    "files": [
+      {
+        "name": "dmarc-setup-guide.pdf",
+        "label": "The guide (PDF)",
+        "bytes": 317973
+      }
+    ]
+  },
+  "spoofguard-self-check-checklist": {
+    "dir": "e2ad7637d5dbbd6d60dee624feac4fdf",
+    "files": [
+      {
+        "name": "spoofguard-self-check-checklist.pdf",
+        "label": "The checklist (PDF)",
+        "bytes": 133513
+      }
+    ]
+  },
+  "essential-eight-ml1-checklist": {
+    "dir": "50221461a886d8f0208217af0c98b117",
+    "files": [
+      {
+        "name": "essential-eight-ml1-checklist.pdf",
+        "label": "The checklist (PDF)",
+        "bytes": 265597
+      }
+    ]
+  },
+  "privacy-policy-template-pack": {
+    "dir": "f11f72760665cdfe3eff19ad25d28703",
+    "files": [
+      {
+        "name": "privacy-policy-template-pack.pdf",
+        "label": "The full pack (PDF)",
+        "bytes": 204920
+      },
+      {
+        "name": "privacy-policy-template-pack-00-start-here.docx",
+        "label": "Start here (Word)",
+        "bytes": 5367
+      },
+      {
+        "name": "privacy-policy-template-pack-01-privacy-policy-template.docx",
+        "label": "Privacy policy template (Word)",
+        "bytes": 7999
+      },
+      {
+        "name": "privacy-policy-template-pack-02-collection-notices.docx",
+        "label": "Collection notices (Word)",
+        "bytes": 5145
+      },
+      {
+        "name": "privacy-policy-template-pack-03-staff-handout.docx",
+        "label": "Staff handout (Word)",
+        "bytes": 4252
+      },
+      {
+        "name": "privacy-policy-template-pack-04-annual-review-checklist.docx",
+        "label": "Annual review checklist (Word)",
+        "bytes": 4496
+      }
+    ]
+  },
+  "privacy-adm-wording-guide": {
+    "dir": "acb4d41cb5d5f4eba3e0197e690fc3ac",
+    "files": [
+      {
+        "name": "privacy-adm-wording-guide.pdf",
+        "label": "The guide (PDF)",
+        "bytes": 120239
+      }
+    ]
+  },
+  "five-jurisdiction-privacy-bundle": {
+    "dir": "f4e0d76344db9031c514dae9989ab151",
+    "files": [
+      {
+        "name": "five-jurisdiction-privacy-bundle.zip",
+        "label": "The bundle (ZIP: PDF plus Word files)",
+        "bytes": 563648
+      }
+    ]
+  },
+  "breach-response-runbook": {
+    "dir": "aed72d6f6d12b96e2632b15efc7912b0",
+    "files": [
+      {
+        "name": "breach-response-runbook.pdf",
+        "label": "The runbook (PDF)",
+        "bytes": 182999
+      },
+      {
+        "name": "breach-response-runbook.docx",
+        "label": "The runbook (Word, editable)",
+        "bytes": 55897
+      }
+    ]
+  },
+  "vendor-risk-register-template": {
+    "dir": "91a67fc128c21656cd396f0d162b3b23",
+    "files": [
+      {
+        "name": "vendor-risk-register-template.xlsx",
+        "label": "The register (Excel and Google Sheets)",
+        "bytes": 17279
+      },
+      {
+        "name": "vendor-risk-register-template.pdf",
+        "label": "Printable companion (PDF)",
+        "bytes": 123953
+      }
+    ]
+  },
+  "customer-dossier-method-guide": {
+    "dir": "25f11eaab7317de685900f4a910c06d1",
+    "files": [
+      {
+        "name": "customer-dossier-method-guide.pdf",
+        "label": "The guide (PDF)",
+        "bytes": 205458
+      },
+      {
+        "name": "customer-dossier-brief-template.md",
+        "label": "One-page brief template (text)",
+        "bytes": 1153
+      },
+      {
+        "name": "customer-dossier-source-log.csv",
+        "label": "Source log (CSV, opens in Excel)",
+        "bytes": 275
+      }
+    ]
+  },
+  "quote-follow-up-playbook": {
+    "dir": "f4a5c0eddd502b717f8ed54f89f3d43f",
+    "files": [
+      {
+        "name": "quote-follow-up-playbook.pdf",
+        "label": "The playbook (PDF)",
+        "bytes": 101719
+      },
+      {
+        "name": "quote-follow-up-tracker.xlsx",
+        "label": "Tracking sheet (Excel and Google Sheets)",
+        "bytes": 9328
+      }
+    ]
+  },
+  "invoice-chasing-playbook": {
+    "dir": "b577f86f4abef0b9a05b4085f4de8920",
+    "files": [
+      {
+        "name": "invoice-chasing-playbook.pdf",
+        "label": "The playbook (PDF)",
+        "bytes": 213043
+      },
+      {
+        "name": "invoice-chasing-tracker.xlsx",
+        "label": "Tracking sheet (Excel and Google Sheets)",
+        "bytes": 18712
+      }
+    ]
+  },
+  "efficiency-proof-pack": {
+    "dir": "971b2e8d07151eb77666519e86cfdc27",
+    "files": [
+      {
+        "name": "efficiency-proof-pack.pdf",
+        "label": "The pack (PDF)",
+        "bytes": 164345
+      },
+      {
+        "name": "efficiency-time-log.xlsx",
+        "label": "Time log (Excel and Google Sheets)",
+        "bytes": 8723
+      },
+      {
+        "name": "efficiency-results-sheet.xlsx",
+        "label": "Results sheet (Excel and Google Sheets)",
+        "bytes": 9866
+      }
+    ]
+  },
+  "course-ai-for-tradies": {
+    "dir": "4b04aeff0599bfed6eb69dd1b3eb2c98",
+    "files": [
+      {
+        "name": "course-ai-for-tradies.zip",
+        "label": "The course bundle (ZIP)",
+        "bytes": 954632
+      }
+    ]
+  },
+  "course-email-security-for-owners": {
+    "dir": "5744de999bf781c8e9f349ccb89e101b",
+    "files": [
+      {
+        "name": "course-email-security-for-owners.zip",
+        "label": "The course bundle (ZIP)",
+        "bytes": 2153514
+      }
+    ]
+  }
+}

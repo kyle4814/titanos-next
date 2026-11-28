@@ -22,7 +22,7 @@ export function entryFromProduct(p: ProductIn, links: Record<string, string>, st
   return {
     slug: p.slug, kind: p.kind === "course" ? "course" : "product", name: p.name, bluf: p.bluf,
     outcome: p.youGet[0] ?? "", forWho: p.forWho, youGet: p.youGet,
-    priceAud: p.suggestedPriceAud, currency: "AUD", priceLabel: "PROPOSED",
+    priceAud: p.suggestedPriceAud, currency: "AUD", priceLabel: "PUBLISHED",
     refundLine: refund, stripe: stripeFromLink(links[p.slug]), delivery: p.delivery, outline: p.outline,
     synthetic: false, status: st?.status === "READY" ? "READY" : "CHECK", ...(st?.seal ? { seal: st.seal } : {}),
   };

@@ -3,6 +3,7 @@ import { PRODUCTS } from "./products";
 import offers from "../offers/offers.json";
 import links from "./links.json";
 import { formatAUD } from "../pricing";
+import { PRICEBOOK } from "../shop/pricebook";
 
 export { PRODUCTS };
 
@@ -22,8 +23,10 @@ export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);
 }
 
-// Price comes from offers.json only. No offerSlug (or a null price) means TBC.
+// Published price: the pricebook row for the slug (label PUBLISHED, Kyle 2026-11-29), else the offers.json price, else TBC.
 export function productPriceAud(p: Product): number | null {
+  const row = PRICEBOOK[p.slug];
+  if (row && row.label === "PUBLISHED" && row.priceAud === p.suggestedPriceAud) return row.priceAud;
   if (!p.offerSlug) return null;
   const o = (offers as { slug: string; priceAud: number | null }[]).find((x) => x.slug === p.offerSlug);
   return o && typeof o.priceAud === "number" ? o.priceAud : null;

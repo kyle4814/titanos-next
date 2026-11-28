@@ -19,6 +19,7 @@ node scripts/test_css_polish.mjs
 node scripts/test_offer_copy.mjs
 node scripts/test_w1_foundation.mjs
 node scripts/test_products.mjs
+node --experimental-strip-types --no-warnings scripts/test_product_delivery.mjs --built out
 node scripts/test_seo.mjs
 node scripts/test_dossiers.mjs
 node scripts/test_ariance_case_study.mjs

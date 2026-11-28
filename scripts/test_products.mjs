@@ -1,7 +1,7 @@
 // Digital product catalogue gate. Run via `npm test`.
 // Regression targets (all fail on the old code, where lib/products and app/products do not exist):
 //  - at least 10 products and 2 courses; courses carry outline + lessons + bundle
-//  - price only from offers.json via offerSlug, else TBC (no hardcoded prices)
+//  - price from the PUBLISHED pricebook row, else offers.json, else TBC
 //  - payment-link data file exists, every slug present, links empty or https only
 //  - no em/en dashes, no dollar-digit literals, no AI-tell words in any copy
 //  - pages exist for the catalogue and per product

@@ -12,7 +12,7 @@ export const SITE = "https://titanos.tech";
 // Paths that must never be advertised and must be disallowed. The first four are the plan's gated surfaces;
 // the rest are this site's existing private areas (app/robots.ts PRIVATE).
 export const PLAN_GATED = ["/account", "/seats", "/admin", "/api"];
-export const SITE_PRIVATE = ["/app", "/d", "/v", "/welcome", "/order"];
+export const SITE_PRIVATE = ["/app", "/d", "/v", "/welcome", "/order", "/dl"];
 export const GATED = [...PLAN_GATED, ...SITE_PRIVATE];
 // API routes declared by the backend decision (w0) that a discovery file may link to on api.titanos.tech.
 export const DECLARED_API = ["/", "/checkout/monitor", "/stripe/webhook", "/scan/request", "/order/submit", "/billing/portal", "/mcp"];

@@ -12,9 +12,9 @@ export type Product = {
   youGet: string[];
   // The file the buyer receives after paying. Staged: the file is produced when the payment link goes live.
   delivery: { file: string; format: string; note: string };
-  // When set, the price is read from lib/offers/offers.json (single source of truth). Otherwise the price is TBC.
+  // Related offer in lib/offers/offers.json (used only if the pricebook has no published row).
   offerSlug?: string;
-  // Staged proposal for Kyle's Stripe card only. Never shown on the site as a price.
+  // The published price in AUD (Kyle 2026-11-29). lib/shop/pricebook.ts carries the same figure and its source.
   suggestedPriceAud: number;
   // Courses only.
   outline?: Module[];
