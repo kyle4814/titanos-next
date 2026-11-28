@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
-import type { CSSProperties } from "react";
 import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
@@ -22,18 +21,6 @@ const baseMetadata: Metadata = {
 
 export const metadata: Metadata = withSeo("/speed", baseMetadata);
 
-const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
-const WRAP: CSSProperties = { maxWidth: 820, margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
-const CARD: CSSProperties = {
-  background: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-md)",
-  padding: "16px 18px",
-};
-const CELL: CSSProperties = { padding: "10px 8px", borderBottom: "1px solid var(--border)", color: "var(--ice)", fontSize: 15 };
-const A: CSSProperties = { color: "var(--gold)" };
 
 const FACTS: [string, string][] = [
   ["3.5 hours", "RECORDED: from idea to a working, tested app with 56 commits (7 October 2026)"],
@@ -71,10 +58,10 @@ export default function Speed() {
         title="Fast because it is code. Precise because it is checked."
         sub="Every number here is measured from our own work or taken from a published source, and each one says which."
       />
-      <section style={{ ...SECTION, paddingBottom: 0 }}>
-        <div style={WRAP}>
+      <section className="pe-page pe-page--narrow pe-section">
+        <div>
           <FlexNumber f={FLEX.fleetJobs} />
-          <p style={BODY}>
+          <p>
             Method: counted from the log our own system writes every time it finishes a job, over the last 24 hours. Before you ask:
             this is our own build machine working on our own code. It touches nothing of yours, it replaces nobody, and your IT
             provider stays in charge of anything we build for you.
@@ -82,29 +69,29 @@ export default function Speed() {
         </div>
       </section>
       <OpenLoop>One finished job every six minutes sounds quick. But is quick any use if it is wrong?</OpenLoop>
-      <section style={SECTION}>
-        <div style={WRAP}>
+      <section className="pe-page pe-page--narrow pe-section">
+        <div className="pe-prose" style={{ maxWidth: "none" }}>
           <Tiles label="Measured speed figures" items={FACTS.map(([n, l]) => ({ n, l: l.replace(/^[A-Z]+: /, ""), tag: l.split(": ")[0] }))} />
 
-          <h2 style={H}>Why it is fast</h2>
-          <p style={BODY}>Think of a kitchen where the prep is already chopped. Nobody works faster, there is just less to do at the last minute.</p>
-          <p style={BODY}>
+          <h2 style={{ margin: "var(--pe-sp-7) 0 var(--pe-sp-3)" }}>Why it is fast</h2>
+          <p>Think of a kitchen where the prep is already chopped. Nobody works faster, there is just less to do at the last minute.</p>
+          <p>
             Most of what we build is plain code, and code runs in seconds, every time, at any hour. The AI handles only the
             judgement work, and many builds run side by side instead of one after another. That morning&apos;s app was 14
             features built in parallel and merged into one product, about one commit every three minutes. See the{" "}
-            <a href="/case-studies/trading-app" style={A}>
+            <a href="/case-studies/trading-app">
               case study
             </a>
             .
           </p>
 
-          <h2 style={H}>How that compares</h2>
-          <div tabIndex={0} style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 560 }}>
+          <h2 style={{ margin: "var(--pe-sp-7) 0 var(--pe-sp-3)" }}>How that compares</h2>
+          <div tabIndex={0} className="pe-table-wrap" role="region" aria-label="Speed comparison">
+            <table style={{ minWidth: 560 }}>
               <thead>
                 <tr>
                   {["Job", "Typical published timeline", "Our measured speed"].map((h) => (
-                    <th key={h} style={{ ...CELL, color: "var(--gold)", textAlign: "left" }}>
+                    <th key={h} scope="col">
                       {h}
                     </th>
                   ))}
@@ -114,7 +101,7 @@ export default function Speed() {
                 {COMPARE.map((r) => (
                   <tr key={r[0]}>
                     {r.map((c) => (
-                      <td key={c} style={CELL}>
+                      <td key={c}>
                         {c}
                       </td>
                     ))}
@@ -123,53 +110,53 @@ export default function Speed() {
               </tbody>
             </table>
           </div>
-          <p style={{ ...BODY, fontSize: 13, opacity: 0.7, marginTop: 8 }}>
+          <p className="pe-muted" style={{ fontSize: "var(--pe-fs-xs)", marginTop: "var(--pe-sp-2)" }}>
             Sources:{" "}
-            <a href="https://octopus.com/blog/2024-devops-performance-clusters" style={A}>
+            <a href="https://octopus.com/blog/2024-devops-performance-clusters">
               DORA 2024 performance clusters (Octopus)
             </a>
             ,{" "}
-            <a href="https://www.cyberforte.com.au/advanced-penetration-testing/" style={A}>
+            <a href="https://www.cyberforte.com.au/advanced-penetration-testing/">
               CyberForte, penetration testing
             </a>
             . A public-record check is not a full penetration test; the row compares turnaround, not scope.
           </p>
 
-          <h2 style={H}>Why it is precise</h2>
-          <ul style={{ ...BODY, paddingLeft: 20 }}>
-            <li style={{ marginBottom: 8 }}>
+          <h2 style={{ margin: "var(--pe-sp-7) 0 var(--pe-sp-3)" }}>Why it is precise</h2>
+          <ul>
+            <li style={{ marginBottom: "var(--pe-sp-3)" }}>
               <b>Tests before claims.</b> The main engine carries {int("tests_main")} test cases and the control layer {int("suites_now")} safety suites, and a change is accepted only when
               every one passes.
             </li>
-            <li style={{ marginBottom: 8 }}>
+            <li style={{ marginBottom: "var(--pe-sp-3)" }}>
               <b>Checked the way you will use it.</b> Apps are tapped through on real phone screen sizes before release. In
               the trading-app build, that check caught two layout bugs the tests had missed.
             </li>
-            <li style={{ marginBottom: 8 }}>
+            <li style={{ marginBottom: "var(--pe-sp-3)" }}>
               <b>Every figure sourced or labelled.</b> In our reports a number is either measured, taken from a named public
               source, or clearly marked as a model you can re-run. See the{" "}
-              <a href="/methodology" style={A}>
+              <a href="/methodology">
                 methodology
               </a>
               .
             </li>
-            <li style={{ marginBottom: 8 }}>
+            <li style={{ marginBottom: "var(--pe-sp-3)" }}>
               <b>A person approves what matters.</b> Anything that sends, spends or commits waits for a one-tap approval, and
               every change is backed up before it goes live.
             </li>
           </ul>
 
-          <h2 style={H}>Every angle of value, in one place</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
+          <h2 style={{ margin: "var(--pe-sp-7) 0 var(--pe-sp-3)" }}>Every angle of value, in one place</h2>
+          <div className="pe-grid">
             {ANGLES.map(([t, d, href]) => (
-              <a key={t} href={href} style={{ ...CARD, textDecoration: "none", display: "block" }}>
-                <div style={{ color: "var(--gold)", fontSize: 18, fontWeight: 600 }}>{t}</div>
-                <div style={{ color: "var(--ice)", fontSize: 14, lineHeight: 1.6, marginTop: 4 }}>{d}</div>
+              <a key={t} href={href} className="pe-card pe-card--pad pe-card--link" style={{ textDecoration: "none", display: "block" }}>
+                <div className="pe-kicker">{t}</div>
+                <div className="pe-muted" style={{ fontSize: "var(--pe-fs-sm)", lineHeight: 1.6, marginTop: 4 }}>{d}</div>
               </a>
             ))}
           </div>
 
-          <p style={{ ...BODY, textAlign: "center", marginTop: 36 }}>
+          <p style={{ textAlign: "center", marginTop: "var(--pe-sp-7)", maxWidth: "none" }}>
             Want to see how fast this could move for your business? Would it be okay if we looked at one of your slow jobs on a free consultation? A no is welcome.
           </p>
           <div style={{ textAlign: "center", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>

@@ -11,18 +11,21 @@ export const metadata: Metadata = {
 
 export default function SystemPage() {
   return (
-    <div style={{ background: "var(--ds-void)", color: "var(--ds-star)", paddingTop: "var(--phi-s8)" }}>
-      <div className="container-vault" style={{ padding: "0 var(--phi-s4) var(--phi-s7)" }}>
+    <main className="pe-system" style={{ ["--ds-void" as string]: "var(--pe-bg)" }}>
+      <div className="pe-page" style={{ paddingTop: "var(--pe-sp-7)", paddingBottom: "var(--pe-sp-7)" }}>
+        <p className="pe-eyebrow-line">Design system</p>
         <PhiWordmark height={64} />
-        <p style={{ color: "var(--ds-mist)", maxWidth: "38ch", margin: "var(--phi-s4) 0" }}>
+        <p className="pe-lead" style={{ maxWidth: "38ch", margin: "var(--pe-sp-5) 0" }}>
           Every letter sits in a 1 by 1.618 golden rectangle. Crossbars sit at the golden section. The S is two stacked circles.
         </p>
-        <h1 style={{ fontFamily: "var(--font-display)", fontSize: "var(--phi-t3)", fontWeight: 400, margin: "var(--phi-s6) 0" }}>
-          Phi scale: {TYPE_PX.join(", ")} px
-        </h1>
-        <p style={{ color: "var(--ds-mist)" }}>Spacing {SPACE_PX.join(", ")} px. Motion {Object.values(DUR).join(", ")} s.</p>
+        <div className="pe-card pe-card--pad" style={{ maxWidth: 760 }}>
+          <h1 style={{ fontSize: "var(--pe-fs-h1)", fontWeight: 700, margin: "0 0 var(--pe-sp-4)" }}>
+            Phi scale: <span className="pe-goldtext">{TYPE_PX.join(", ")} px</span>
+          </h1>
+          <p className="pe-muted" style={{ margin: 0 }}>Spacing {SPACE_PX.join(", ")} px. Motion {Object.values(DUR).join(", ")} s.</p>
+        </div>
       </div>
       <GoldenSpiralField />
-    </div>
+    </main>
   );
 }
