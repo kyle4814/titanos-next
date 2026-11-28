@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import "./g8-legal.css";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import W2d from "@/components/w2d/W2d";
 
@@ -29,6 +30,7 @@ export const metadata: Metadata = withSeo("/privacy", baseMetadata);
 export default function PrivacyPage() {
   return (
     <W2d>
+      <div className="g8-legal">
       <PageHero title="Privacy Policy" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
@@ -51,15 +53,7 @@ export default function PrivacyPage() {
       </SectionReveal>
 
       <SectionReveal style={{ padding: "0 20px 100px", position: "relative", zIndex: 2 }}>
-        <article
-          style={{
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto",
-            color: "var(--text)",
-            fontSize: "var(--fs-body)",
-            lineHeight: 1.75,
-          }}
-        >
+        <article className="g8-doc">
           <p style={{ marginBottom: 18 }}>
             Titanos (“we”, “us”) is operated by Kyle Deligny, ABN 34 318 502 254, an Australian
             operator providing external attack-surface scanning, Privacy Act + Essential Eight
@@ -133,7 +127,7 @@ export default function PrivacyPage() {
               Stripe holds billing data under their privacy framework (
               <a
                 href="https://stripe.com/privacy"
-                style={{ color: "var(--ice)" }}
+                style={{ color: "var(--pe-gold-hi)" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -146,7 +140,7 @@ export default function PrivacyPage() {
               handle your message under their own privacy policies. Telegram has its own (
               <a
                 href="https://telegram.org/privacy"
-                style={{ color: "var(--ice)" }}
+                style={{ color: "var(--pe-gold-hi)" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -171,7 +165,7 @@ export default function PrivacyPage() {
             </Li>
             <Li>
               <strong>Opt out:</strong> reply STOP to any email, or email{" "}
-              <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+              <a href="mailto:kyle@titanos.tech" style={{ color: "var(--pe-gold-hi)" }}>
                 kyle@titanos.tech
               </a>
               .
@@ -203,14 +197,14 @@ export default function PrivacyPage() {
           <H2>Contact</H2>
           <p>
             Email{" "}
-            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--pe-gold-hi)" }}>
               kyle@titanos.tech
             </a>
             . We respond within 30 days per the Australian Privacy Principles. If unsatisfied, you
             can contact the Office of the Australian Information Commissioner at{" "}
             <a
               href="https://oaic.gov.au"
-              style={{ color: "var(--ice)" }}
+              style={{ color: "var(--pe-gold-hi)" }}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -227,6 +221,7 @@ export default function PrivacyPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
+          </div>
     </W2d>
   );
 }
@@ -242,12 +237,11 @@ function H2({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontFamily: "var(--font-display), Georgia, serif",
-        color: "var(--gold)",
-        fontSize: "var(--fs-h3)",
+        color: "var(--pe-text)",
+        fontSize: "var(--pe-fs-h3)",
         fontWeight: 700,
-        margin: "36px 0 12px",
-        letterSpacing: "0.04em",
+        margin: "8px 0 12px",
+        letterSpacing: "-0.01em",
       }}
     >
       {children}
