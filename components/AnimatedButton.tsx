@@ -179,23 +179,22 @@ function PrimaryCTA({
     overflow: "hidden",
     padding: "14px 28px",
     minHeight: 48,
-    borderRadius: "var(--radius-sm)",
-    border: `${proximityActive ? 1.5 : 1}px solid var(--gold)`,
-    color: hovered ? "var(--vault-black)" : "var(--gold)",
-    fontFamily: "var(--font-display), Georgia, serif",
-    fontWeight: 400,
-    fontStyle: "italic",
-    fontSize: "var(--fs-sm)",
-    letterSpacing: "0.04em",
-    background: "transparent",
+    borderRadius: "var(--pe-r-md, 8px)",
+    border: `1px solid #f0d48a`,
+    color: "#17110a",
+    fontFamily: "var(--font-body), system-ui, sans-serif",
+    fontWeight: 600,
+    fontStyle: "normal",
+    fontSize: "var(--fs-body)",
+    letterSpacing: "0.01em",
+    background: "var(--pe-gold-grad, linear-gradient(180deg, #f6df9a 0%, #e0bb62 48%, #c99a3b 100%))",
+    boxShadow: "var(--pe-shadow-btn, none)",
     cursor: "pointer",
     // Magnetic translate + colour/border/filter transitions.
     transition:
-      "color 250ms ease, border-width 200ms ease, filter 200ms ease, transform 220ms cubic-bezier(0.4, 0, 0.2, 1)",
+      "filter 200ms ease, transform 220ms cubic-bezier(0.4, 0, 0.2, 1)",
     transform: reduce ? undefined : `translate3d(${magnet.x}px, ${magnet.y}px, 0)`,
-    filter: proximityActive
-      ? "drop-shadow(0 0 12px rgb(var(--gold-rgb) / 0.45))"
-      : "none",
+    filter: proximityActive || hovered ? "brightness(1.06)" : "none",
     textTransform: "none",
     textDecoration: "none",
   };
@@ -212,7 +211,7 @@ function PrimaryCTA({
         style={{
           position: "absolute",
           inset: 0,
-          background: "var(--gold)",
+          background: "linear-gradient(180deg, #fbe9b0 0%, #ecc971 100%)",
           zIndex: 0,
         }}
       />
@@ -332,7 +331,8 @@ function SecondaryLink({
         display: "inline-flex",
         alignItems: "center",
         gap: 6,
-        color: "var(--ice)",
+        color: "var(--pe-gold-hi, var(--ice))",
+        fontWeight: 600,
         fontFamily: "var(--font-body), system-ui, sans-serif",
         fontSize: "var(--fs-sm)",
         letterSpacing: "0.02em",
@@ -349,7 +349,7 @@ function SecondaryLink({
             left: 0,
             bottom: -2,
             height: 1,
-            background: "var(--ice)",
+            background: "var(--pe-gold-hi, var(--ice))",
           }}
         />
       </span>

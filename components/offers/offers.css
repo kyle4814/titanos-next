@@ -11,7 +11,7 @@
   background:
     linear-gradient(160deg, color-mix(in srgb, var(--gold) 7%, var(--card)) 0%, var(--card) 55%);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--pe-r-card, 12px);
   padding: 22px 24px;
   text-decoration: none;
   color: inherit;
@@ -47,14 +47,15 @@
 a.ox-tile:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
 .ox-tile__top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-.ox-tile__name { color: var(--gold); font-family: var(--font-display), Georgia, serif; font-size: var(--fs-body); }
+.ox-tile__name { color: #fff; font-family: var(--font-body), system-ui, sans-serif; font-weight: 700; font-size: var(--fs-lg); letter-spacing: -0.01em; }
 .ox-tile__kicker { color: var(--dim); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 1px; }
 .ox-tile__body { color: var(--text); font-size: var(--fs-sm); line-height: 1.6; margin: 0; }
 .ox-tile__price {
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid var(--border);
-  color: var(--ice);
+  color: var(--pe-gold-hi, var(--ice));
+  font-weight: 600;
   font-size: var(--fs-sm);
   font-variant-numeric: tabular-nums;
 }

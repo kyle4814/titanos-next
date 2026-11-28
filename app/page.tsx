@@ -17,7 +17,6 @@ import { Analogy, FrontLoad, FreeStart } from "@/components/SalesKit";
 import PhoneFold from "@/components/PhoneFold";
 import PricingGlance from "@/components/home/PricingGlance";
 import { Hero, Metrics, LedgerLine, Receipts, Systems, CaseStudy, Model, Trust, FindOffer } from "@/components/home-redesign/Sections";
-import "@/components/home-redesign/home-redesign.css";
 
 const baseMetadata: Metadata = {
   title: "Titanos | AI automation and Privacy Act compliance, Brisbane",

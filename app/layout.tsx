@@ -6,6 +6,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./design-system.css";
 import "../components/house/house.css";
+import "../components/home-redesign/home-redesign.css";
+import "./site-system.css"; // obsidian + gold tokens and shared primitives; keep LAST so it wins over the legacy Vault layers
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import VaultFrame from "@/components/VaultFrame";

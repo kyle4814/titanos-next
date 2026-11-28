@@ -9,6 +9,14 @@ const COLS: { h: string; links: [string, string][] }[] = [
   { h: "Company", links: [["About", "/about"], ["Case studies", "/case-studies"], ["Proof", "/proof"], ["Evidence pack", "/our-evidence-pack"], ["The declaration", "/declaration"], ["Pricing", "/pricing"], ["FAQ", "/faq"], ["Sectors", "/sectors"], ["The deep field", "/deep-field"], ["Contact", "/contact"]] },
 ];
 
+// Links the previous site footer carried that are not in lib/navLinks.ts LINKS: kept reachable in the collapsed "All pages" list.
+const EXTRA: [string, string][] = [
+  ["Sectors", "/sectors"], ["Courses", "/courses"], ["The declaration", "/declaration"], ["Engineering record", "/engineering"],
+  ["The learning loop", "/learning-loop"], ["The deep field", "/deep-field"], ["FAQ", "/faq"], ["How it works", "/how-it-works"],
+  ["Security and privacy", "/security"], ["Our scan", "/scan#self-scan"], ["Image credits", "/credits"], ["Privacy", "/privacy"], ["Terms", "/terms"],
+];
+const ALL_PAGES: [string, string][] = [...LINKS.map((l): [string, string] => [l.label, l.href]), ...EXTRA.filter(([, h]) => !LINKS.some((l) => l.href === h))];
+
 export default function HomeFooter() {
   const year = 2026; // fixed: static export, so a clock would bake in the build date
   return (
@@ -23,12 +31,13 @@ export default function HomeFooter() {
             <PhiWordmark height={18} title="TITANOS" />
           </Link>
           <p>AI automation and engineering with the evidence kept. Kyle Deligny, Brisbane, Australia. ABN 34 318 502 254.</p>
+          
           <p className="pe-footer__tag">Built without asking. Kept honest by what you can check. I personally review every deliverable before it reaches you.</p>
         </div>
         {COLS.map((c) => (
           <nav key={c.h} aria-label={c.h} className="pe-footer__col">
             <h2>{c.h}</h2>
-            <ul>{c.links.map(([l, h]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul>
+            <ul>{c.links.map(([l, h]) => <li key={h}>{h.endsWith(".pdf") ? <a href={h} target="_blank" rel="noopener noreferrer">{l}</a> : <Link href={h}>{l}</Link>}</li>)}</ul>
           </nav>
         ))}
         <div className="pe-card pe-ready">
@@ -39,7 +48,7 @@ export default function HomeFooter() {
       </div>
       <details className="pe-wrap pe-allpages">
         <summary>All pages</summary>
-        <ul>{LINKS.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}</ul>
+        <ul>{ALL_PAGES.map(([l, h]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul>
       </details>
       <div className="pe-wrap pe-footer__legal">
         <p>&copy; {year} TITANOS. All rights reserved.</p>

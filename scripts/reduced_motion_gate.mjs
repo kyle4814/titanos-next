@@ -180,9 +180,9 @@ export function checkPrint(tree, per, layoutSet) {
   // PR2
   const footerHidden = hiddenSels(printRules).some((s) => /(^|[\s,>])footer\b/.test(s));
   if (footerHidden) fails.push({ rule: "PR2", file: "app/globals.css", msg: "print stylesheet hides footer (legal footer must print)" });
-  const foot = tree.get("components/Footer.tsx") || "";
-  if (!/ABN/.test(foot) || !/\/privacy/.test(foot) || !/\/terms/.test(foot)) fails.push({ rule: "PR2", file: "components/Footer.tsx", msg: "footer lacks ABN or privacy/terms links" });
-  if (/<footer[^>]*data-no-print/.test(foot)) fails.push({ rule: "PR2", file: "components/Footer.tsx", msg: "footer carries data-no-print" });
+  const foot = tree.get("components/home-redesign/HomeFooter.tsx") || "";
+  if (!/ABN/.test(foot) || !/\/privacy/.test(foot) || !/\/terms/.test(foot)) fails.push({ rule: "PR2", file: "components/home-redesign/HomeFooter.tsx", msg: "footer lacks ABN or privacy/terms links" });
+  if (/<footer[^>]*data-no-print/.test(foot)) fails.push({ rule: "PR2", file: "components/home-redesign/HomeFooter.tsx", msg: "footer carries data-no-print" });
   // PR3 fixed overlays: CSS position:fixed owners and inline-style fixed files
   const fixedFiles = [];
   for (const [f, p] of per) {
@@ -249,7 +249,7 @@ export function runGate(tree) {
     const failures = [];
     for (const f of set) failures.push(...(byFile.get(f) || []));
     for (const pfail of printFails) if (set.has(pfail.file) || pfail.file === "app/globals.css") failures.push(pfail);
-    for (const x of set) if (tree.get(x) && x.endsWith(".tsx") && x !== "components/Footer.tsx") { /* print overlay findings already per file */ }
+    for (const x of set) if (tree.get(x) && x.endsWith(".tsx") && x !== "components/home-redesign/HomeFooter.tsx") { /* print overlay findings already per file */ }
     const uniq = [...new Map(failures.map((x) => [`${x.rule}|${x.file}|${x.msg}`, x])).values()];
     return { route: routeOf(pf), files: set.size, status: uniq.length ? "FAIL" : "PASS", failures: uniq };
   });

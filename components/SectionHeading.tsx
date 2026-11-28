@@ -16,48 +16,14 @@ export default function SectionHeading({
   sigilIndex?: number;
 }) {
   return (
-    <div data-phi-reveal style={{ textAlign: "center", marginBottom: 42, position: "relative", zIndex: 2 }}>
+    <div data-phi-reveal className="pe-sechead">
       <SigilMark index={sigilIndex} />
-      <h2
-        style={{
-          fontFamily: "var(--font-display), Georgia, serif",
-          fontWeight: 400,
-          fontStyle: "italic",
-          fontSize: "var(--fs-h2)",
-          color: "var(--gold)",
-          letterSpacing: "0.02em",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <h2>
         {showKeyhole && <VaultKeyhole />}
         {title}
       </h2>
-      <div
-        aria-hidden="true"
-        style={{
-          width: 60,
-          height: 2,
-          background:
-            "linear-gradient(90deg, transparent, var(--ice), transparent)",
-          margin: "18px auto 0",
-        }}
-      />
-      {lead && (
-        <p
-          style={{
-            color: "var(--ice)",
-            fontSize: "var(--fs-body)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "18px auto 0",
-            lineHeight: 1.7,
-            textWrap: "pretty",
-          }}
-        >
-          {lead}
-        </p>
-      )}
+      <div aria-hidden="true" className="pe-sechead__rule" />
+      {lead && <p className="pe-sechead__lead">{lead}</p>}
     </div>
   );
 }

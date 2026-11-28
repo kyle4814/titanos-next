@@ -1,19 +1,5 @@
-/* Homepage redesign 2026-11-28: obsidian, graphite and warm metallic gold. Everything is scoped under .pe-* so no other route is affected. */
-:root {
-  --pe-bg: #060708;
-  --pe-bg2: #0a0b0d;
-  --pe-card: #0e1013;
-  --pe-card2: #121418;
-  --pe-line: rgba(255, 255, 255, 0.1);
-  --pe-line-gold: rgba(212, 175, 55, 0.34);
-  --pe-gold: #d4af37;
-  --pe-gold-hi: #f3d98c;
-  --pe-gold-lo: #b8892e;
-  --pe-text: #f4f2ec;
-  --pe-mute: #b4b2ad;
-  --pe-faint: #8f8d88;
-  --pe-wrap: 1340px;
-}
+/* Obsidian, graphite and warm metallic gold (homepage + shared chrome: .pe-nav, .pe-footer, .pe-btn, .pe-card). Section-level homepage rules sit under main:has(.pe-hero) so other routes are unaffected. */
+/* Tokens live in app/site-system.css (imported once in app/layout.tsx). */
 
 /* The redesigned page owns its own canvas: quiet the sitewide ambient layers on "/" only. */
 body:has(.pe-hero) { background: var(--pe-bg); }
@@ -358,3 +344,7 @@ body:has(.pe-hero) .finder-fab { z-index: 40; }
 .pe-allpages a:hover { color: var(--pe-gold-hi); }
 
 @media print { .pe-nav, .pe-drawer { display: none !important; } }
+
+/* More menu: long list, scrolls inside the viewport */
+.pe-nav__menu--wide { min-width: 300px; max-height: min(70vh, 560px); overflow-y: auto; right: 0; left: auto; }
+.pe-nav__menu--wide a small { display: none; }

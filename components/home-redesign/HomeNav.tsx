@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * HomeNav: the homepage-only header for the redesign. The global Nav (components/Nav.tsx) renders nothing on "/" and keeps serving every other route.
- * Desktop: logo, Platform and Products disclosure menus, Proof, Case Studies, Contact, gold CTA.
+ * HomeNav: the site-wide header (obsidian and gold). components/Nav.tsx renders it on every route.
+ * Desktop: logo, Platform and Products disclosure menus, Proof, Case Studies, Contact, a More menu holding every other page in lib/navLinks.ts, gold CTA.
  * Mobile: burger opens a full-height panel (Escape closes, scroll locked, focus moved in and returned). The panel also lists every page in
  * lib/navLinks.ts so no route becomes undiscoverable.
  */
@@ -11,6 +11,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import PhiWordmark from "@/components/hero/PhiWordmark";
 import { LINKS } from "@/lib/navLinks";
+import { BOOK_HREF } from "@/lib/config";
 
 type L = { label: string; href: string; blurb?: string };
 
@@ -30,7 +31,7 @@ const PRODUCTS: L[] = [
   { label: "Products and courses", href: "/products", blurb: "Guides, templates, short courses" },
 ];
 
-function Dropdown({ id, label, items, open, setOpen, btnRef }: { id: string; label: string; items: L[]; open: boolean; setOpen: (v: boolean) => void; btnRef: (el: HTMLButtonElement | null) => void }) {
+function Dropdown({ id, label, items, open, setOpen, btnRef, wide }: { wide?: boolean; id: string; label: string; items: L[]; open: boolean; setOpen: (v: boolean) => void; btnRef: (el: HTMLButtonElement | null) => void }) {
   const menuId = useId();
   const [focusFirst, setFocusFirst] = useState(false);
   // ArrowDown opens the menu, then this effect (after the list is shown) moves focus to its first link.
@@ -47,7 +48,7 @@ function Dropdown({ id, label, items, open, setOpen, btnRef }: { id: string; lab
       >
         {label} <ChevronDown size={14} strokeWidth={2} aria-hidden="true" />
       </button>
-      <ul id={menuId} className="pe-nav__menu" hidden={!open}>
+      <ul id={menuId} className={wide ? "pe-nav__menu pe-nav__menu--wide" : "pe-nav__menu"} hidden={!open}>
         {items.map((it) => (
           <li key={it.href}>
             <Link href={it.href} onClick={() => setOpen(false)}>
@@ -62,7 +63,7 @@ function Dropdown({ id, label, items, open, setOpen, btnRef }: { id: string; lab
 }
 
 export default function HomeNav() {
-  const [menu, setMenu] = useState<null | "platform" | "products">(null);
+  const [menu, setMenu] = useState<null | "platform" | "products" | "more">(null);
   const [drawer, setDrawer] = useState(false);
   const burger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -132,6 +133,7 @@ export default function HomeNav() {
             <li><Link className="pe-nav__link" href="/case-studies">Case Studies</Link></li>
             <Dropdown id="products" label="Products" items={PRODUCTS} open={menu === "products"} setOpen={(v) => setMenu(v ? "products" : null)} btnRef={(el) => { btns.current.products = el; }} />
             <li><Link className="pe-nav__link" href="/contact">Contact</Link></li>
+            <Dropdown id="more" label="More" items={rest.map((l) => ({ label: l.label, href: l.href }))} open={menu === "more"} setOpen={(v) => setMenu(v ? "more" : null)} btnRef={(el) => { btns.current.more = el; }} wide />
           </ul>
         </nav>
         <Link href="/app" className="pe-btn pe-btn--gold pe-nav__cta">Enter TitanOS <ArrowRight size={16} strokeWidth={2} aria-hidden="true" /></Link>
@@ -153,6 +155,7 @@ export default function HomeNav() {
           </ul>
           <p className="pe-drawer__h">All other pages</p>
           <ul className="pe-drawer__more">{rest.map((l) => <li key={l.href}><Link href={l.href} onClick={closeAll}>{l.label}</Link></li>)}</ul>
+          <Link href={BOOK_HREF} className="pe-btn pe-btn--dark pe-drawer__cta" onClick={closeAll}>Book a free call</Link>
           <Link href="/app" className="pe-btn pe-btn--gold pe-drawer__cta" onClick={closeAll}>Enter TitanOS <ArrowRight size={16} strokeWidth={2} aria-hidden="true" /></Link>
         </nav>
       </div>

@@ -13,10 +13,11 @@ ok(page("app/black-ice/doctrine/page.tsx").split("\n").some((l) => /<a href=\{`#
 ok(/aspectRatio:\s*"1280 \/ 1706"/.test(page("app/v/titanos-pitch/page.tsx")), "pitch video reserves its box (no CLS from late metadata)");
 const charts = fs.readFileSync(new URL("../components/charts/charts.css", import.meta.url), "utf8");
 ok(!/font-size:\s*0\.(6|7[0-4])\d*rem/.test(charts) && /\.w4-chip \{[^}]*font-size: 0\.75rem/.test(charts), "chart chips and nodes keep labels at 12px or more");
-const nav = page("components/Nav.tsx");
-ok(/\.nav-desktop-links \.nav-more-panel a \{ white-space: normal; \}/.test(nav), "More dropdown items wrap (the strip's nowrap pushed blurbs through the panel border, Kyle 2026-10-09)");
-ok(/\.nav-more-item > span:first-child \{ flex: 0 0 12px; \}/.test(nav), "More dropdown icon column is fixed width (labels line up)");
-ok(/padding: "12px 22px",\s*textAlign: "center"/.test(nav), "mobile drawer CTA has inner padding (text stays inside the pill on 390px)");
+const hnav = page("components/home-redesign/HomeNav.tsx");
+const hcss = page("components/home-redesign/home-redesign.css");
+ok(/pe-nav__menu--wide/.test(hnav) && /\.pe-nav__menu--wide \{[^}]*max-height[^}]*overflow-y: auto/.test(hcss), "header More menu scrolls inside the viewport (long list never runs off screen)");
+ok(/\.pe-nav__menu a \{ display: block;/.test(hcss), "header menu items are block links (labels wrap inside the panel)");
+ok(/pe-drawer__cta/.test(hnav) && /\.pe-drawer__cta \{ margin-top: 24px; width: 100%; \}/.test(hcss), "mobile drawer CTA is full width (text stays inside the button at 390px)");
 ok(/grid-template-columns: 4rem minmax\(0, 1fr\) auto/.test(page("components/charts/charts.css")), "cost-curve bar label column fits BEFORE");
 console.log(fail ? `FAIL ${fail}` : "ALL PASS");
 process.exit(fail ? 1 : 0);
