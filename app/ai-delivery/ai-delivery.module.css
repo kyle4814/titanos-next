@@ -1,0 +1,11 @@
+/* ai-delivery page-only styling on the obsidian and gold system (tokens from app/site-system.css). */
+.tier { display: flex; flex-direction: column; position: relative; }
+.tier > :last-child { margin-top: auto; }
+.tierName { margin: 12px 0 6px; color: #fff; font: 700 var(--pe-fs-h3) / 1.2 var(--font-body), system-ui, sans-serif; letter-spacing: -0.01em; }
+.price { margin: 0 0 4px; color: var(--pe-gold-hi); font: 800 clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem) / 1.1 var(--font-body), system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.min { margin: 0 0 14px; color: var(--pe-faint); font-size: var(--pe-fs-xs); }
+.who { margin: 0 0 10px; color: var(--pe-text); font-size: var(--pe-fs-sm); font-weight: 600; }
+.tierBody { margin: 0 0 20px; color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.65; }
+.cardH { margin: 0 0 8px; color: #fff; font: 700 var(--pe-fs-h3) / 1.25 var(--font-body), system-ui, sans-serif; font-size: 1.15rem; text-wrap: balance; }
+.cardP { margin: 0; color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.65; }
+.ctaH { margin: 0 auto 14px; color: #fff; font: 800 var(--pe-fs-h2) / 1.1 var(--font-body), system-ui, sans-serif; letter-spacing: -0.02em; text-wrap: balance; max-width: 24ch; }

@@ -7,11 +7,11 @@ import PageHero from "@/components/PageHero";
 import AnimatedButton from "@/components/AnimatedButton";
 import Faq from "@/components/w2e/Faq";
 import s from "@/components/w2e/w2e.module.css";
-import { GlowCard, BentoGrid, BentoItem } from "@/components/house";
+import s2 from "./ai-delivery.module.css";
 import GoldThread, { type ThreadStep } from "@/components/GoldThread";
 import Testimonials from "@/components/Testimonials";
 import { DISPLAY } from "@/lib/pricing";
-import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
+import { Inscription, OperatorNote, OmegaSeal } from "@/components/Myth";
 import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/SalesKit";
 import { FlexGrid, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
@@ -142,7 +142,7 @@ export default function AiDeliveryPage() {
         sub="That figure is modelled with the COCOMO method, and the method is on the Engineering page. Pick your tier and the first system goes live in month 1, inside the retainer, with no separate build fee. Every plan is privacy-compliant by design."
         trustLine={
           <>
-            <strong style={{ color: "var(--gold)" }}>ABN 34 318 502 254</strong> · Australian-owned
+            <strong style={{ color: "var(--pe-gold-hi)" }}>ABN 34 318 502 254</strong> · Australian-owned
             · single-operator practice · {DISPLAY.AI_RETAINER_MIN} on every tier
           </>
         }
@@ -176,80 +176,74 @@ export default function AiDeliveryPage() {
         >
           One system live in month 1.
           <br />
-          <span style={{ color: "var(--gold)" }}>Everything after that is tuning.</span>
+          <span className="pe-goldtext">Everything after that is tuning.</span>
         </Inscription>
       </section>
 
       {/* TIERS */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={1} total={5} />
-          <SystemLabel style={{ marginBottom: 10 }}>Partnership tiers · scoped on the audit call</SystemLabel>
+      <div className="pe-page">
+        <SectionReveal className="pe-section">
+          <p className="pe-eyebrow-line" style={{ textAlign: "center", width: "100%", lineHeight: 1.5 }}>Partnership tiers · scoped on the audit call</p>
           <SectionHeading title="Choose Your Partnership" lead={`Three retainer tiers. ${DISPLAY.AI_RETAINER_MIN} on all of them.`} />
-          <div className={s.tiers}>
+          <div className="pe-grid">
             {TIERS.map((t) => (
-              <GlowCard key={t.tier} as="article" className={`${s.tier}${t.popular ? ` ${s.tierPop}` : ""}`}>
-                {t.popular && <span className={s.badge}>Most Popular</span>}
-                <h3 className={s.tierName}>{t.name}</h3>
-                <p className={s.price}>{t.price}</p>
-                <p className={s.min}>{DISPLAY.AI_RETAINER_MIN}</p>
-                <p className={s.who}>{t.who}</p>
-                <p className={s.tierBody}>{t.body}</p>
+              <article key={t.tier} className={`pe-card pe-card--pad ${s2.tier}${t.popular ? " pe-card--gold" : ""}`}>
+                {t.popular && <span className="pe-tag--pill">Most Popular</span>}
+                <h3 className={s2.tierName}>{t.name}</h3>
+                <p className={s2.price}>{t.price}</p>
+                <p className={s2.min}>{DISPLAY.AI_RETAINER_MIN}</p>
+                <p className={s2.who}>{t.who}</p>
+                <p className={s2.tierBody}>{t.body}</p>
                 <AnimatedButton href={`/order/ai?tier=${t.tier}`} variant={t.popular ? "primary" : "secondary"}>
-                  Order {t.name} →
+                  Order {t.name}
                 </AnimatedButton>
-              </GlowCard>
+              </article>
             ))}
           </div>
           <p className={s.small}>
             Every plan includes: {INCLUDED.join(" · ")}
           </p>
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <OpenLoop>What kinds of jobs do these partnerships take off your plate? Here is the list.</OpenLoop>
 
       <div className="divider-gold" />
 
       {/* WHAT I BUILD */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={2} total={5} />
+      <div className="pe-page">
+        <SectionReveal className="pe-section">
           <SectionHeading title="What We Build" lead="If it is repetitive, it is a candidate. Which of these already eats your week?" />
-          <BentoGrid className={s.wide}>
-            {WHAT_I_BUILD.map((item, i) => (
-              <BentoItem key={item.title} span={i < 3 ? 4 : 6} style={{ padding: 0 }}>
-                <GlowCard as="article" className={s.card}>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </GlowCard>
-              </BentoItem>
+          <div className="pe-grid">
+            {WHAT_I_BUILD.map((item) => (
+              <article key={item.title} className="pe-card pe-card--pad">
+                <h3 className={s2.cardH}>{item.title}</h3>
+                <p className={s2.cardP}>{item.body}</p>
+              </article>
             ))}
-          </BentoGrid>
-        </div>
-      </SectionReveal>
+          </div>
+        </SectionReveal>
+      </div>
 
       <OpenLoop>And what does the first month look like, hour by hour?</OpenLoop>
 
       <div className="divider-gold" />
 
       {/* HOW IT WORKS */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={3} total={5} />
+      <div className="pe-page">
+        <SectionReveal className="pe-section">
           <SectionHeading title="How It Works" lead="Five steps, and the first one is a free conversation." />
           <GoldThread steps={HOW_IT_WORKS} />
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <OpenLoop>One more thing people ask me early: what happens to your customers&apos; data?</OpenLoop>
 
       <div className="divider-gold" />
 
       {/* PRIVACY */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={4} total={5} />
+      <div className="pe-page pe-page--narrow">
+        <SectionReveal className="pe-section">
           <SectionHeading title="Privacy Built In, Not Bolted On" lead="Compliance is my other practice, so it comes along for free." />
           <p className={s.proseLg}>
             Building a chatbot is the easy part. Making it privacy-compliant by design is where my other
@@ -261,29 +255,28 @@ export default function AiDeliveryPage() {
             have to fix for someone else. That&apos;s the whole reason both practices sit
             with the one person.
           </OperatorNote>
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <Testimonials offer="ai-delivery" heading="What AI Partnership Customers Said" />
 
       <div className="divider-gold" />
 
       {/* FAQ */}
-      <SectionReveal className={s.sec}>
-        <div className="container-vault">
-          <DepthIndex index={5} total={5} />
+      <div className="pe-page pe-page--narrow">
+        <SectionReveal className="pe-section">
           <SectionHeading title="Questions I Get" lead="The ones people ask before they commit to anything." />
           <Faq items={FAQS} />
-        </div>
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <div className="divider-gold" />
 
       <WhatWeBuild />
       {/* FINAL CTA */}
-      <SectionReveal style={{ textAlign: "center", padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
+      <SectionReveal className="pe-section" style={{ textAlign: "center", padding: "var(--pe-section-y) 20px", position: "relative", zIndex: 2 }}>
         <OmegaSeal caption="Retainer. Privacy-compliant by design. No permission required to start." style={{ marginBottom: "var(--space-8)" }} />
-        <h2 className={s.ctaH}>
+        <h2 className={s2.ctaH}>
           Would it be okay if we started with a free chat?
         </h2>
         <p className={s.ctaP}>
