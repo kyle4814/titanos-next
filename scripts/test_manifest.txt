@@ -192,3 +192,5 @@ node scripts/test_declaration_e2e.mjs out
 node scripts/test_xray.mjs
 node scripts/test_xray_lint.mjs
 node scripts/test_home_redesign.mjs
+node scripts/test_indexnow_ping.mjs
+node --experimental-strip-types --no-warnings scripts/test_ai_search_entity.mjs --built out

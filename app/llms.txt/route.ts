@@ -4,6 +4,7 @@ import { POSTS } from "@/lib/blog";
 import { CASES } from "@/lib/caseStudies";
 import { staticRoutes } from "@/lib/routes";
 import { SITE } from "@/lib/seo";
+import { priceLines, toolAndGuideLines } from "@/lib/llmsFacts";
 
 export const dynamic = "force-static";
 
@@ -52,6 +53,11 @@ export function GET() {
     "",
     ...KEY_PAGES.filter(([p]) => have.has(p)).map(([p, d]) => `- [${p}](${SITE}${p}): ${d}`),
     "",
+    "## Prices (AUD, excluding GST)",
+    "",
+    ...priceLines(),
+    "",
+    ...toolAndGuideLines(),
     "## Receipts (each number carries its label and date)",
     "",
     ...RECEIPTS.map((r) => `- ${r}`),
@@ -70,6 +76,9 @@ export function GET() {
     `- ${POSTS.length} blog posts: ${SITE}/blog`,
     `- ${CASES.length} case studies: ${SITE}/case-studies`,
     `- ${ALL_OFFERS.length} offer pages: ${SITE}/offers`,
+    `- Glossary of email security and privacy terms: ${SITE}/glossary`,
+    `- Author profile: ${SITE}/authors/kyle-deligny`,
+    `- Full version of this file: ${SITE}/llms-full.txt`,
     `- Sitemap: ${SITE}/sitemap.xml`,
     "",
     "## Notes for AI systems",
