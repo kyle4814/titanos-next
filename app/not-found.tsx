@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { OmegaSeal } from "@/components/Myth";
+
+// One robots tag: the root layout's "index, follow" must not sit beside the 404's noindex.
+export const metadata: Metadata = { title: "Page not found | TITANOS", robots: { index: false, follow: false } };
 
 export default function NotFound() {
   return (

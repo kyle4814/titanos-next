@@ -8,19 +8,34 @@ export const SITE_ID = `${SITE}/#website`;
 
 export type Json = Record<string, unknown>;
 
+/**
+ * One entity, typed Organization and ProfessionalService, so search engines read Titanos as an Australian
+ * service business and not the Titan OS television platform. No street address is published (Brisbane
+ * locality only). sameAs lists only profiles that exist and are public; add each new profile (Google
+ * Business Profile, LinkedIn, Crunchbase) here once it is live.
+ */
+export const ORG_SAME_AS = ["https://github.com/kyle4814"];
+
 export function organization(): Json {
   return {
     "@context": CTX,
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": ORG_ID,
     name: "Titanos",
+    alternateName: ["TITANOS", "Titanos AI automation Brisbane"],
     url: SITE,
     logo: `${SITE}/apple-touch-icon.png`,
+    image: `${SITE}/og-image.png`,
     description:
-      "Solo AI implementation, Privacy Act compliance and external security monitoring practice for Australian small business.",
-    founder: { "@type": "Person", name: "Kyle Deligny" },
-    areaServed: ["AU", "NZ", "SG"],
+      "Solo AI implementation, Privacy Act compliance and external security monitoring practice for Australian small business, based in Brisbane.",
+    slogan: "AI automation and Privacy Act compliance for Australian small business",
+    founder: { "@type": "Person", name: "Kyle Deligny", url: `${SITE}/about` },
+    areaServed: { "@type": "Country", name: "Australia" },
+    serviceType: ["AI automation", "Privacy Act compliance", "External security monitoring", "Essential Eight assessment"],
+    knowsAbout: ["AI automation for small business", "Privacy Act 1988", "Essential Eight", "DMARC and email security"],
     address: { "@type": "PostalAddress", addressLocality: "Brisbane", addressRegion: "QLD", addressCountry: "AU" },
+    contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: "kyle@titanos.tech", areaServed: "AU", availableLanguage: "en-AU" },
+    sameAs: ORG_SAME_AS,
     identifier: { "@type": "PropertyValue", name: "ABN", value: "34318502254" },
   };
 }
@@ -66,7 +81,7 @@ export function article(a: {
     url,
     image: `${SITE}${ogUrl(a.path)}`,
     ...(a.datePublished ? { datePublished: a.datePublished, dateModified: a.dateModified ?? a.datePublished } : {}),
-    author: { "@type": "Person", name: "Kyle Deligny" },
+    author: { "@type": "Person", name: "Kyle Deligny", url: `${SITE}/about` },
     publisher: { "@id": ORG_ID },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
