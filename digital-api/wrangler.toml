@@ -1,0 +1,34 @@
+# NOT DEPLOYED. titanos-digital: the digital products sale path (Stripe Checkout -> webhook -> signed link -> private R2).
+# Deploy is Kyle's tap: docs/ops/DIGITAL_PRODUCTS_GO_LIVE_2026-11-28.md. A separate Worker on purpose: going live here
+# cannot change how titanos-portal-api behaves (it refuses live Stripe keys by design).
+name = "titanos-digital"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+DIGITAL_STRIPE_MODE = "test"          # flip to "live" ONLY at go-live, together with the live key (runbook step 6)
+SITE_ORIGIN = "https://titanos.tech"
+# DIGITAL_PUBLIC_ORIGIN = "https://api.titanos.tech"   # set once the route below is live, so emailed links use the pretty origin
+MAIL_REPLY_TO = "kyle@titanos.tech"
+# MAIL_FROM = "TITANOS <orders@titanos.tech>"           # a Resend-verified sender (runbook step 4)
+
+# Worker SECRETS (wrangler secret put ..., never vars, never committed):
+#   DIGITAL_STRIPE_SECRET_KEY   sk_test_... now, sk_live_... at go-live
+#   DIGITAL_WEBHOOK_SECRET      whsec_... of the /digital/webhook endpoint
+#   DIGITAL_TOKEN_SECRET        32+ random characters (openssl rand -hex 32)
+#   RESEND_API_KEY              transactional mail
+
+[[d1_databases]]
+binding = "DB"
+database_name = "titanos-digital"
+database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+migrations_dir = "migrations"
+
+# PRIVATE bucket: never enable the r2.dev public URL and never attach a custom domain to it. Only this Worker can read it.
+[[r2_buckets]]
+binding = "DIGITAL_BUCKET"
+bucket_name = "titanos-digital-products"
+
+# Route for the pretty origin (the site's CSP connect-src already allows api.titanos.tech). Uncomment at go-live, runbook step 8.
+# api.titanos.tech is served by the older titanos-api Worker; a path route on /digital/* sits in front of it for this path only.
+# routes = [{ pattern = "api.titanos.tech/digital/*", zone_name = "titanos.tech" }]

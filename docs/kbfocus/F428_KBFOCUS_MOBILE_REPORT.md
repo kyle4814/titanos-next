@@ -17,3 +17,6 @@ Shard results: 54/54 with 3, 53/53 with 2, 53/53 with 4, 53/53 with 2, 53/53 wit
 
 ## Backlog line (not fixed here; f421 owns desktop fixes)
 BACKLOG mobile-only: /efficiency keyboard trap at 390px (focus stops exceed 44 presses without wrapping).
+
+## 2026-11-28 addition (digital products pipeline)
+20 new pages (/order/digital/thanks and 19 /shop/digital/<slug>) swept at the mobile viewport with `node scripts/obelisk_rendered_keyboard_focus.mjs --out out --pages <those routes> --viewports mobile`: 20/20 swept, 0 defects. Merged into f428_kbfocus_mobile_report.json (pages_total 293). Two case-study pages (sika-product-assistant, titanos-engine) were already missing from export_pages.json on main and are left as they were.

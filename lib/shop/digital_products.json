@@ -1,0 +1,1728 @@
+{
+ "generated_by": "scripts/gen_digital_catalogue.mjs",
+ "count": 19,
+ "shelves": [
+  {
+   "id": "product:ai-prompt-library-au-smb",
+   "kind": "product",
+   "slug": "ai-prompt-library-au-smb",
+   "name": "AI Prompt Library for Australian Small Business",
+   "bluf": "200 fill-in AI prompts for quotes, emails, ads, SOPs, hiring and more",
+   "bullets": [
+    "200 prompts in 10 job categories (20 each), each with a fill-in template, example input and filled-in example",
+    "PDF guide (about 105 pages) with how-to-use, safe AI use and Australian rules notes",
+    "Excel workbook: filterable library, Prompt Builder that fills templates with formulas, and a Tracker with summary",
+    "Markdown version of the guide for searching and pasting",
+    "prompts.csv and prompts.json for your own tools",
+    "Optional offline Python script to list, search and fill prompts",
+    "README with setup steps"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Access to an AI assistant of your choice (free or paid), such as ChatGPT, Claude or Gemini. A PDF reader. Excel, LibreOffice Calc or Google Sheets for the workbook (optional). Python 3.8 or later for the optional script (optional)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Owners and staff of Australian small businesses, sole traders and tradies who write quotes, emails, ads and procedures themselves and want a faster, more consistent starting point."
+    }
+   ],
+   "priceAud": 29,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/ai-prompt-library-au-smb",
+   "source": "digital_products_2026-11-28/ai-prompt-library-au-smb/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "This is a library of 200 prompts written for Australian small businesses. Each prompt is a fill-in template: you replace the words in square brackets with your own details, paste it into an AI assistant such as ChatGPT, Claude or Gemini, and check the result before you use it. Every prompt comes with a worked example so you can see what a good input looks like. The prompts are grouped by job: quotes and proposals, emails, ads and marketing, social media and website content, SOPs, hiring and people, customer service, finance summaries, operations and admin, and planning. Where a prompt touches Australian rules such as the Spam Act, the Australian Consumer Law, the Privacy Act, Fair Work or the ATO, it points you to the official source to check. You get a PDF to read or print, a spreadsheet with a filterable library, a Prompt Builder sheet that fills a template for you, and a simple tracker, plus the prompts as CSV and JSON. Nothing needs installing and no API keys are involved.",
+    "whatsIncluded": [
+     "200 prompts in 10 job categories (20 each), each with a fill-in template, example input and filled-in example",
+     "PDF guide (about 105 pages) with how-to-use, safe AI use and Australian rules notes",
+     "Excel workbook: filterable library, Prompt Builder that fills templates with formulas, and a Tracker with summary",
+     "Markdown version of the guide for searching and pasting",
+     "prompts.csv and prompts.json for your own tools",
+     "Optional offline Python script to list, search and fill prompts",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "Access to an AI assistant of your choice (free or paid), such as ChatGPT, Claude or Gemini",
+     "A PDF reader",
+     "Excel, LibreOffice Calc or Google Sheets for the workbook (optional)",
+     "Python 3.8 or later for the optional script (optional)"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "AI-Prompt-Library-AU-SMB.pdf",
+     "AI-Prompt-Library-AU-SMB.xlsx",
+     "AI-Prompt-Library-AU-SMB.md",
+     "prompts.csv",
+     "prompts.json",
+     "tools/fill_prompt.py",
+     "tests/test_library.py"
+    ],
+    "disclaimers": [
+     "General information, not legal, tax, financial or professional advice. Check tax, employment, privacy and legal matters with the official source or a qualified professional.",
+     "AI tools can produce wrong or invented content. You must check every output before using it.",
+     "No income, sales or time-saving results are promised or guaranteed.",
+     "Do not enter personal or confidential information into public AI tools. Check the tool's data handling first.",
+     "You use the prompts with your own AI account. Any cost of that account is yours. No API keys are included or needed.",
+     "Not affiliated with or endorsed by any AI provider or government body named in the pack."
+    ],
+    "filename": "ai-prompt-library-au-smb.zip",
+    "fileSize": "537 KB",
+    "sha256": "8be27a67aaa1c396dc25164db45fa0972fdc0904450957818bd4c0ee991f55fe"
+   }
+  },
+  {
+   "id": "product:ai-receptionist-prompt-pack",
+   "kind": "product",
+   "slug": "ai-receptionist-prompt-pack",
+   "name": "AI Receptionist Prompt Pack for Australian Trades and Clinics",
+   "bluf": "Prompts, call flows, FAQs and escalation design for a voice or chat receptionist",
+   "bullets": [
+    "Voice and chat master system prompts",
+    "Seven industry modules for trades and clinics",
+    "Four finished example prompts built from the templates",
+    "Call flows for trades (7) and clinics (7)",
+    "FAQ templates for both sectors",
+    "Escalation-to-human design guide and escalation_rules.json",
+    "Prompt builder script (Python, no dependencies) with tests",
+    "Excel workbook: setup checklist, escalation matrix, cost planner, 23-scenario test scorecard, call log"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "A voice or chat AI platform that accepts a system prompt and tools (your own account and your own API keys). A phone number or website chat widget. Python 3.8 or newer to run the prompt builder (optional, you can also edit the templates by hand). Excel, LibreOffice or Google Sheets for the workbook."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Owners and office managers of Australian trade businesses and clinics who want to set up an AI receptionist themselves or with their IT provider, and agencies or IT providers setting one up for a single client business."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/ai-receptionist-prompt-pack",
+   "source": "digital_products_2026-11-28/ai-receptionist-prompt-pack/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "A complete set of original text and tools for setting up an AI receptionist that answers calls or website chat for an Australian trade business or clinic. You get a voice prompt and a chat prompt with fill-in fields, seven industry modules (plumbing, electrical, air conditioning, general trades, GP, dental, physio and allied health), call flows, FAQ templates, and a written escalation-to-human design with a rules file. A small script builds your finished prompt from a short config file and flags any example text you forgot to change. A workbook gives you a setup checklist, escalation matrix, cost planner, test scorecard and call log. A PDF guide explains setup, testing, and Australian privacy points to check, with a clear general information disclaimer. Works with any platform that accepts a system prompt. You bring your own platform, phone number and API keys.",
+    "whatsIncluded": [
+     "Voice and chat master system prompts",
+     "Seven industry modules for trades and clinics",
+     "Four finished example prompts built from the templates",
+     "Call flows for trades (7) and clinics (7)",
+     "FAQ templates for both sectors",
+     "Escalation-to-human design guide and escalation_rules.json",
+     "Prompt builder script (Python, no dependencies) with tests",
+     "Excel workbook: setup checklist, escalation matrix, cost planner, 23-scenario test scorecard, call log",
+     "PDF and Markdown setup and operating guide",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "A voice or chat AI platform that accepts a system prompt and tools (your own account and your own API keys)",
+     "A phone number or website chat widget",
+     "Python 3.8 or newer to run the prompt builder (optional, you can also edit the templates by hand)",
+     "Excel, LibreOffice or Google Sheets for the workbook"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "guide/ai-receptionist-guide.pdf",
+     "guide/ai-receptionist-guide.md",
+     "templates/voice_system_prompt.md",
+     "templates/chat_system_prompt.md",
+     "templates/modules/trades_plumbing.md",
+     "templates/modules/trades_electrical.md",
+     "templates/modules/trades_hvac.md",
+     "templates/modules/trades_general.md",
+     "templates/modules/clinic_gp.md",
+     "templates/modules/clinic_dental.md",
+     "templates/modules/clinic_allied.md",
+     "config/example_trades_plumber.json",
+     "config/example_clinic_physio.json",
+     "prompts/built/trades_plumber_voice.md",
+     "prompts/built/trades_plumber_chat.md",
+     "prompts/built/clinic_physio_voice.md",
+     "prompts/built/clinic_physio_chat.md",
+     "call_flows/trades_call_flows.md",
+     "call_flows/clinic_call_flows.md",
+     "faq/faq_templates.md",
+     "escalation/escalation_design.md",
+     "escalation/escalation_rules.json",
+     "workbook/Receptionist_Setup_Workbook.xlsx",
+     "tools/build_prompt.py",
+     "tools/tests/test_build_prompt.py",
+     "tools/tests/test_workbook.py"
+    ],
+    "disclaimers": [
+     "General information, not legal, medical or professional advice. Check privacy, call recording and advertising obligations with your own adviser.",
+     "AI systems can make mistakes. Test thoroughly, keep a human fallback and review calls regularly.",
+     "This pack does not include a phone number, voice platform or booking system, and is not affiliated with any platform.",
+     "No results, savings or income are promised.",
+     "Single business licence. Not for resale or redistribution."
+    ],
+    "filename": "ai-receptionist-prompt-pack.zip",
+    "fileSize": "134 KB",
+    "sha256": "451d4005b41c2a1879522a7f6098e83c2f04364b4737024a7328856318e23207"
+   }
+  },
+  {
+   "id": "product:automation-audit-workbook",
+   "kind": "product",
+   "slug": "automation-audit-workbook",
+   "name": "Find 10 Hours a Week: Business Automation Audit Workbook",
+   "bluf": "Time, score and rank your repeated tasks, then build a 90-day automation plan.",
+   "bullets": [
+    "Blank audit workbook (.xlsx, 7 sheets, working formulas, no macros)",
+    "Filled-in example workbook with 21 made-up tasks",
+    "Timing Sheet with five trials per task, average, fastest and slowest",
+    "Task Log for up to 50 tasks with score and rank",
+    "Ranking sheet for the top 20 tasks",
+    "90-Day Plan with phases, build effort, hours recovered and payback",
+    "Review sheet for logging real hours saved",
+    "9-page PDF guide with worked example, difficulty scale and compliance checklist"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Microsoft Excel 2010 or later, LibreOffice Calc, or Google Sheets. A PDF reader for the guide. A phone stopwatch for timing tasks. No paid software, accounts or API keys."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Owners and managers of small and medium businesses who want an evidence-based list of what to automate first, and consultants who run automation audits for clients."
+    }
+   ],
+   "priceAud": 59,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/automation-audit-workbook",
+   "source": "digital_products_2026-11-28/automation-audit-workbook/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Most small businesses know some of their work is repetitive, but not which tasks are worth fixing first. This workbook gives you a way to find out. You time each repeated task, enter how often it happens and how many people do it, and rate how hard it would be to automate. The workbook scores every task, ranks the top twenty, and turns the top ten into a 90-day plan with build effort, hours recovered and payback in weeks. A Review sheet lets you log the hours you actually save, so the plan is checked against reality. You also get a filled-in example with 21 made-up tasks, and a nine-page PDF guide with a worked example, a difficulty scale, and plain notes on privacy, spam and security points to check before you switch anything on. It uses ordinary spreadsheet formulas, no macros, and works in Excel, LibreOffice and Google Sheets.",
+    "whatsIncluded": [
+     "Blank audit workbook (.xlsx, 7 sheets, working formulas, no macros)",
+     "Filled-in example workbook with 21 made-up tasks",
+     "Timing Sheet with five trials per task, average, fastest and slowest",
+     "Task Log for up to 50 tasks with score and rank",
+     "Ranking sheet for the top 20 tasks",
+     "90-Day Plan with phases, build effort, hours recovered and payback",
+     "Review sheet for logging real hours saved",
+     "9-page PDF guide with worked example, difficulty scale and compliance checklist",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "Microsoft Excel 2010 or later, LibreOffice Calc, or Google Sheets",
+     "A PDF reader for the guide",
+     "A phone stopwatch for timing tasks",
+     "No paid software, accounts or API keys"
+    ],
+    "deliveryFiles": [
+     "Automation_Audit_Workbook.xlsx",
+     "Automation_Audit_Workbook_EXAMPLE.xlsx",
+     "Automation_Audit_Guide.pdf",
+     "README.md"
+    ],
+    "disclaimers": [
+     "Figures are estimates calculated from your own inputs. They are not a promise or forecast of any saving or result.",
+     "The worked example uses made-up data and is not a benchmark.",
+     "Compliance notes on the Privacy Act 1988, Spam Act 2003 and cyber security are general information, not legal advice. Speak to a qualified adviser about your situation.",
+     "Build effort and recovery share on the Settings sheet are assumptions you should replace with your own.",
+     "Digital product delivered as files. Australian Consumer Law rights apply."
+    ],
+    "filename": "automation-audit-workbook.zip",
+    "fileSize": "120 KB",
+    "sha256": "8a03313e2fe6d9c0be339a87f9813c7e42cbdb5db52479238a354bb8133da336"
+   }
+  },
+  {
+   "id": "product:capability-statement-pack",
+   "kind": "product",
+   "slug": "capability-statement-pack",
+   "name": "Government-Ready Capability Statement Pack",
+   "bluf": "Capability statements, tender checklist, portal guide and response templates",
+   "bullets": [
+    "Capability Statement Guide (PDF and Markdown): structure, wording, formatting and common mistakes",
+    "Tender Readiness Checklist (PDF and Markdown): 44 weighted items and a ten question go or no-go test",
+    "AusTender and State Portal Registration Guide (PDF and Markdown): Commonwealth, BuyICT, state, territory and council steps with a one-hour routine",
+    "Response Writing Templates (PDF, Markdown and Word): cover letter, criteria answers, risk table, compliance matrix, emails",
+    "Three editable capability statement layouts (Word): services, trades and construction, ICT and professional services",
+    "Tender Readiness Tracker (Excel workbook with formulas): readiness score, pipeline, past projects, insurance dates, rate card, compliance matrix, registrations",
+    "Capability statement checker and builder (Python script with tests and an example profile)",
+    "README with setup steps"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "A PDF reader. Microsoft Word, LibreOffice Writer or Google Docs for the templates. Excel, LibreOffice Calc or Google Sheets for the tracker. Optional: Python 3.8 or later for the script (PDF output also needs the free Playwright package). No API keys or paid accounts needed."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian sole traders and small businesses, from about one to fifty staff, that want to start supplying government agencies, councils or prime contractors, or that want to tidy up the documents they already send."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/capability-statement-pack",
+   "source": "digital_products_2026-11-28/capability-statement-pack/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "This pack helps an Australian small business get ready to supply government. It brings together a step by step guide to writing a capability statement, three editable statement layouts, a 44 item tender readiness checklist, and a registration guide covering AusTender, BuyICT, each state and territory portal and local councils. A response writing set gives you reusable wording for common tender criteria, a compliance matrix, and short emails for questions, referees and debriefs. A spreadsheet tracks your readiness score, opportunities, past projects and referees, insurance and licence expiry dates, and a costed rate card. An optional script checks an ABN and a draft profile, flags vague or unverifiable wording, and builds a clean one or two page statement you can print to PDF. Everything is written in plain Australian English, cites public sources, and is delivered as PDF guides, Word templates, a workbook and a small Python tool. It is general information, not legal advice, and it does not promise any tender outcome.",
+    "whatsIncluded": [
+     "Capability Statement Guide (PDF and Markdown): structure, wording, formatting and common mistakes",
+     "Tender Readiness Checklist (PDF and Markdown): 44 weighted items and a ten question go or no-go test",
+     "AusTender and State Portal Registration Guide (PDF and Markdown): Commonwealth, BuyICT, state, territory and council steps with a one-hour routine",
+     "Response Writing Templates (PDF, Markdown and Word): cover letter, criteria answers, risk table, compliance matrix, emails",
+     "Three editable capability statement layouts (Word): services, trades and construction, ICT and professional services",
+     "Tender Readiness Tracker (Excel workbook with formulas): readiness score, pipeline, past projects, insurance dates, rate card, compliance matrix, registrations",
+     "Capability statement checker and builder (Python script with tests and an example profile)",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "A PDF reader",
+     "Microsoft Word, LibreOffice Writer or Google Docs for the templates",
+     "Excel, LibreOffice Calc or Google Sheets for the tracker",
+     "Optional: Python 3.8 or later for the script (PDF output also needs the free Playwright package)",
+     "No API keys or paid accounts needed"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "README.pdf",
+     "guides/01_Capability_Statement_Guide.md",
+     "guides/01_Capability_Statement_Guide.pdf",
+     "guides/02_Tender_Readiness_Checklist.md",
+     "guides/02_Tender_Readiness_Checklist.pdf",
+     "guides/03_AusTender_and_State_Portal_Registration_Guide.md",
+     "guides/03_AusTender_and_State_Portal_Registration_Guide.pdf",
+     "guides/04_Response_Writing_Templates.md",
+     "guides/04_Response_Writing_Templates.pdf",
+     "scripts/capstatement.py",
+     "scripts/profile_example.json",
+     "scripts/tests/test_capstatement.py",
+     "spreadsheets/tender_readiness_tracker.xlsx",
+     "templates/capability_statement_templates.docx",
+     "templates/response_templates.docx"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Not financial or procurement advice.",
+     "Portals, thresholds, policies and web addresses change. Confirm details with the official source before relying on them.",
+     "The pack does not guarantee that any tender response will be compliant, shortlisted or successful.",
+     "The example business, ABN and projects in the script profile are fictional.",
+     "Prepared by TITANOS (ABN 34 318 502 254). Content last reviewed 28 November 2026."
+    ],
+    "filename": "capability-statement-pack.zip",
+    "fileSize": "450 KB",
+    "sha256": "68b04df4be075fdf2fa74229f0dbaa3f9503e213615d2eec05c3179bcccaade6"
+   }
+  },
+  {
+   "id": "product:claude-agent-starter-kit",
+   "kind": "product",
+   "slug": "claude-agent-starter-kit",
+   "name": "Claude Agent Starter Kit for Developers",
+   "bluf": "Tested Python templates for agents, RAG and workflows, with evals and cost tracking",
+   "bullets": [
+    "Tool-using agent template: step limit, dollar budget stop, approval gate, safe calculator, sandboxed file reader",
+    "RAG assistant template: chunking, BM25 retrieval with no vector database, cited answers, citation checking",
+    "Multi-step workflow template: LLM and Python steps, JSON validation with retry, checkpoint and resume, ticket triage example",
+    "Eval harness: 14 check types, optional LLM judge, repeat trials, JSON and Markdown reports, baseline comparison, CI exit code",
+    "Cost tracker with cache token pricing and a hard budget",
+    "51 pytest tests that need no API key or network, including one that runs the real SDK against a local test server",
+    "Runnable example scripts for each template, all with an --offline mode",
+    "Starter eval cases and sample documents"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Python 3.10 or newer. An Anthropic API account and your own API key (usage is billed by Anthropic to you). pip, to install the anthropic and pytest packages. Internet access for the first install and for live runs (the tests and offline demos need neither)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Developers comfortable with Python who want a tested starting point for a Claude-based agent, document question answering assistant or multi-step automation, and who want evals and cost limits in place from the first day."
+    }
+   ],
+   "priceAud": 69,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/claude-agent-starter-kit",
+   "source": "digital_products_2026-11-28/claude-agent-starter-kit/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Claude Agent Starter Kit is a set of working Python templates for developers building with the Anthropic API. It includes a tool-using agent with step limits, a dollar budget and an approval gate for risky tools. It includes a RAG assistant that retrieves passages, answers with citations and checks that every citation was actually retrieved. It includes a multi-step workflow with JSON validation, retries and checkpoint and resume, with a worked support ticket example. Around the templates you get an eval harness with fourteen check types, repeat trials and regression comparison, and cost tracking that estimates spend from token usage and stops at a budget you set. There are 51 tests that run without an API key or network, example scripts that run offline, and a 7 page PDF guide with a pre-launch checklist. The code is plain Python with one dependency, the official Anthropic SDK. You use your own Anthropic API key. The kit does not include hosting, a user interface or a vector database, and model prices and names change, so check them before you deploy.",
+    "whatsIncluded": [
+     "Tool-using agent template: step limit, dollar budget stop, approval gate, safe calculator, sandboxed file reader",
+     "RAG assistant template: chunking, BM25 retrieval with no vector database, cited answers, citation checking",
+     "Multi-step workflow template: LLM and Python steps, JSON validation with retry, checkpoint and resume, ticket triage example",
+     "Eval harness: 14 check types, optional LLM judge, repeat trials, JSON and Markdown reports, baseline comparison, CI exit code",
+     "Cost tracker with cache token pricing and a hard budget",
+     "51 pytest tests that need no API key or network, including one that runs the real SDK against a local test server",
+     "Runnable example scripts for each template, all with an --offline mode",
+     "Starter eval cases and sample documents",
+     "PDF guide (7 pages) and the same guide in Markdown, with a pre-launch checklist",
+     "README with 5 minute setup"
+    ],
+    "requirements": [
+     "Python 3.10 or newer",
+     "An Anthropic API account and your own API key (usage is billed by Anthropic to you)",
+     "pip, to install the anthropic and pytest packages",
+     "Internet access for the first install and for live runs (the tests and offline demos need neither)"
+    ],
+    "deliveryFiles": [
+     "claude-agent-starter-kit/README.md",
+     "claude-agent-starter-kit/Claude-Agent-Starter-Kit-Guide.pdf",
+     "claude-agent-starter-kit/docs/GUIDE.md",
+     "claude-agent-starter-kit/requirements.txt",
+     "claude-agent-starter-kit/.env.example",
+     "claude-agent-starter-kit/.gitignore",
+     "claude-agent-starter-kit/agentkit/__init__.py",
+     "claude-agent-starter-kit/agentkit/agent.py",
+     "claude-agent-starter-kit/agentkit/client.py",
+     "claude-agent-starter-kit/agentkit/costs.py",
+     "claude-agent-starter-kit/agentkit/evals.py",
+     "claude-agent-starter-kit/agentkit/rag.py",
+     "claude-agent-starter-kit/agentkit/testing.py",
+     "claude-agent-starter-kit/agentkit/workflow.py",
+     "claude-agent-starter-kit/examples/offline.py",
+     "claude-agent-starter-kit/examples/run_agent.py",
+     "claude-agent-starter-kit/examples/run_rag.py",
+     "claude-agent-starter-kit/examples/run_workflow.py",
+     "claude-agent-starter-kit/examples/run_evals.py",
+     "claude-agent-starter-kit/evals/agent_cases.json",
+     "claude-agent-starter-kit/evals/rag_cases.json",
+     "claude-agent-starter-kit/evals/workflow_cases.json",
+     "claude-agent-starter-kit/sample_docs/expenses.md",
+     "claude-agent-starter-kit/sample_docs/leave_policy.md",
+     "claude-agent-starter-kit/tests/conftest.py",
+     "claude-agent-starter-kit/tests/test_agent.py",
+     "claude-agent-starter-kit/tests/test_costs.py",
+     "claude-agent-starter-kit/tests/test_evals.py",
+     "claude-agent-starter-kit/tests/test_rag.py",
+     "claude-agent-starter-kit/tests/test_real_sdk_wire.py",
+     "claude-agent-starter-kit/tests/test_workflow.py"
+    ],
+    "disclaimers": [
+     "Code and guidance are general information, not legal, privacy or compliance advice.",
+     "Live use calls Anthropic's API with your own key and is billed to your account. Cost figures in the kit are estimates from a price table dated 2026-11-03; prices and model names change, so check Anthropic's current documentation.",
+     "Tests and offline demos use scripted fakes. They show the code works, not how a live model will respond. Build evals from your own data.",
+     "The kit has not been run against the live Anthropic API by the author; request shapes were checked against the official SDK and documentation and tested against a local server.",
+     "Provided as is, with no warranty. Not affiliated with or endorsed by Anthropic.",
+     "For use in your own projects and client work. Do not resell or redistribute the kit itself."
+    ],
+    "filename": "claude-agent-starter-kit.zip",
+    "fileSize": "148 KB",
+    "sha256": "bde4444436dfc4ebfcc874c87b199a9961895e11259faa682b2f313676afbdac"
+   }
+  },
+  {
+   "id": "product:client-onboarding-automation",
+   "kind": "product",
+   "slug": "client-onboarding-automation",
+   "name": "Client Onboarding Automation Kit",
+   "bluf": "Web form to CRM, welcome emails and task list, as ready to import n8n workflows",
+   "bullets": [
+    "3 importable n8n workflow files (intake and welcome, daily email sequence, error alert)",
+    "Google Sheets tracker (xlsx) with Clients, Tasks, TaskTemplate, EmailLog and a formula Dashboard",
+    "Plain HTML intake form with spam trap and consent box",
+    "5 onboarding emails as HTML and plain text, with subject lines",
+    "Onboarding checklist (Markdown and PDF)",
+    "Setup guide with testing steps and troubleshooting (Markdown and PDF)",
+    "README and the test scripts used to check the pack"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "An n8n instance (Cloud or self hosted, 1.x). A Google account with Google Sheets and Gmail. Google OAuth credentials created in your own n8n. A website or page where you can add an HTML form."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Freelancers, consultants, agencies and small service businesses that already use or are willing to use n8n and Google Workspace, and want a consistent first month for each new client."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/client-onboarding-automation",
+   "source": "digital_products_2026-11-28/client-onboarding-automation/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "This kit gives a small service business a working client onboarding flow in n8n. A visitor fills in a web form. The workflow checks the details, stops duplicates, sends a welcome email, adds the client to a Google Sheet that acts as a simple CRM, and builds a task list with due dates from a template you can edit. A second workflow sends follow up emails on days 2, 5, 14 and 30 for active clients, and a third emails you if anything fails. The pack includes the importable workflow files, a tracker spreadsheet with a dashboard, a plain HTML form, five email templates in HTML and text, a printable checklist and a step by step setup guide. Everything runs on your own n8n, Google and Gmail accounts, and no keys are included.",
+    "whatsIncluded": [
+     "3 importable n8n workflow files (intake and welcome, daily email sequence, error alert)",
+     "Google Sheets tracker (xlsx) with Clients, Tasks, TaskTemplate, EmailLog and a formula Dashboard",
+     "Plain HTML intake form with spam trap and consent box",
+     "5 onboarding emails as HTML and plain text, with subject lines",
+     "Onboarding checklist (Markdown and PDF)",
+     "Setup guide with testing steps and troubleshooting (Markdown and PDF)",
+     "README and the test scripts used to check the pack"
+    ],
+    "requirements": [
+     "An n8n instance (Cloud or self hosted, 1.x)",
+     "A Google account with Google Sheets and Gmail",
+     "Google OAuth credentials created in your own n8n",
+     "A website or page where you can add an HTML form"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "workflows/01-intake-and-welcome.json",
+     "workflows/02-welcome-sequence-scheduler.json",
+     "workflows/03-error-alert.json",
+     "sheets/onboarding-tracker.xlsx",
+     "form/intake-form.html",
+     "checklist/onboarding-checklist.md",
+     "checklist/onboarding-checklist.pdf",
+     "guides/setup-guide.md",
+     "guides/setup-guide.pdf",
+     "email-templates/D0-day0.html",
+     "email-templates/D0-day0.txt",
+     "email-templates/D14-day14.html",
+     "email-templates/D14-day14.txt",
+     "email-templates/D2-day2.html",
+     "email-templates/D2-day2.txt",
+     "email-templates/D30-day30.html",
+     "email-templates/D30-day30.txt",
+     "email-templates/D5-day5.html",
+     "email-templates/D5-day5.txt",
+     "email-templates/subjects.json",
+     "tests/validate_kit.py",
+     "tests/test_code_nodes.js",
+     "tests/test_dashboard_formulas.py"
+    ],
+    "disclaimers": [
+     "General information only, not legal advice. Privacy and spam rules (Privacy Act 1988, Spam Act 2003) depend on your circumstances; check with a qualified adviser.",
+     "Supplied as is. Review every workflow before using it with real client data.",
+     "Not affiliated with n8n, Google or any CRM vendor. No results or income are promised.",
+     "The workflows were validated structurally and their code logic was tested, but they have not been run against a live n8n instance or Google account (see the guide for how to test in your own)."
+    ],
+    "filename": "client-onboarding-automation.zip",
+    "fileSize": "127 KB",
+    "sha256": "db63b1e7cdc18c03d3322c2f174f02938e80ea61046c56614dd374591c140540"
+   }
+  },
+  {
+   "id": "product:cold-email-compliance-playbook",
+   "kind": "product",
+   "slug": "cold-email-compliance-playbook",
+   "name": "Compliant Cold Email Playbook (Australia)",
+   "bluf": "Spam Act 2003 made practical, with 15 templates and a pre-send checklist",
+   "bullets": [
+    "PDF playbook (about 8 pages) and Markdown source: consent, identification, unsubscribe, privacy, deliverability setup, workflow, complaints, sources",
+    "15 email templates as PDF and Markdown: first contact, follow-ups, replies, existing customers, events, free resources",
+    "Excel workbook: pre-send checklist with STOP or READY result, consent log, suppression list with 5 working day timer, weekly campaign health sheet",
+    "presend_lint.py: checks a draft for unsubscribe, sender details, ABN checksum, subject and wording issues",
+    "dns_check.py: reads public SPF, DKIM and DMARC records",
+    "Test suite for both tools and a sample draft",
+    "README with setup steps"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "A PDF reader. Excel, LibreOffice Calc or Google Sheets (any spreadsheet app that opens .xlsx). Python 3.8 or later for the two optional tools (no extra packages). Access to your domain's DNS settings to apply the deliverability steps."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian small businesses, sole traders, agencies and sales teams that send business-to-business email and want a clear process they can follow and show to others."
+    }
+   ],
+   "priceAud": 59,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/cold-email-compliance-playbook",
+   "source": "digital_products_2026-11-28/cold-email-compliance-playbook/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "A practical guide to sending business email in Australia within the Spam Act 2003. It explains the three core rules (consent, sender identification and unsubscribe), how inferred consent works for conspicuously published work addresses, what to record so you can show your reasoning, and how to set up SPF, DKIM and DMARC on a separate sending domain. You also get 15 plain-language email templates covering first contact, follow-ups, replies and existing customers, a pre-send checklist workbook with a consent log, a suppression list that times the 5 working day rule, and a weekly campaign health sheet. Two small Python tools check a draft for the required elements and read your domain's public DNS records. Everything is written for small businesses and sole traders, uses Australian examples, and lists its sources. It is general information to help you plan a careful process. It does not replace advice from a lawyer, and it cannot decide whether a particular recipient has consented.",
+    "whatsIncluded": [
+     "PDF playbook (about 8 pages) and Markdown source: consent, identification, unsubscribe, privacy, deliverability setup, workflow, complaints, sources",
+     "15 email templates as PDF and Markdown: first contact, follow-ups, replies, existing customers, events, free resources",
+     "Excel workbook: pre-send checklist with STOP or READY result, consent log, suppression list with 5 working day timer, weekly campaign health sheet",
+     "presend_lint.py: checks a draft for unsubscribe, sender details, ABN checksum, subject and wording issues",
+     "dns_check.py: reads public SPF, DKIM and DMARC records",
+     "Test suite for both tools and a sample draft",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "A PDF reader",
+     "Excel, LibreOffice Calc or Google Sheets (any spreadsheet app that opens .xlsx)",
+     "Python 3.8 or later for the two optional tools (no extra packages)",
+     "Access to your domain's DNS settings to apply the deliverability steps"
+    ],
+    "deliveryFiles": [
+     "Cold_Email_Compliance_Workbook.xlsx",
+     "Compliant_Cold_Email_Playbook_AU.md",
+     "Compliant_Cold_Email_Playbook_AU.pdf",
+     "Email_Templates_AU.md",
+     "Email_Templates_AU.pdf",
+     "README.md",
+     "scripts/dns_check.py",
+     "scripts/presend_lint.py",
+     "scripts/sample_draft.txt",
+     "scripts/tests/test_all.py"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Speak to a qualified Australian lawyer about your circumstances.",
+     "The pack cannot decide whether a recipient has consented. That judgement is yours.",
+     "Laws and regulator guidance change. Check the sources listed in the guide before relying on them.",
+     "No results are promised. Deliverability and replies depend on your list, offer and sending setup.",
+     "Covers Australian rules for email only. Other countries' laws, SMS and phone calls are outside its scope."
+    ],
+    "filename": "cold-email-compliance-playbook.zip",
+    "fileSize": "171 KB",
+    "sha256": "6ebe862942797205484aa002d466452656c225b8c5f85d2e2bec22268f6f8fa0"
+   }
+  },
+  {
+   "id": "product:email-spoofing-shield-guide",
+   "kind": "product",
+   "slug": "email-spoofing-shield-guide",
+   "name": "Email Spoofing Shield: SPF, DKIM and DMARC Setup Guide",
+   "bluf": "Plain-English SPF, DKIM and DMARC setup for Microsoft 365, Google Workspace and cPanel",
+   "bullets": [
+    "13 page PDF guide (also supplied as Markdown for copying commands)",
+    "Step-by-step sections for Microsoft 365, Google Workspace and cPanel",
+    "Staged DMARC rollout plan from monitoring to reject",
+    "spoofcheck.py: Python checker for SPF, DKIM and DMARC using public DNS only, with plain-English and JSON output",
+    "DNS record templates for each provider",
+    "Sender inventory worksheet, rollout checklist and troubleshooting tables",
+    "Offline test suite for the checker (31 tests)",
+    "README with setup steps"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Access to your domain's DNS settings (registrar, web host or DNS service). Admin access to your mail system (Microsoft 365, Google Workspace or cPanel). Python 3.8 or newer to run the checker (free from python.org); the guide works without it. A PDF reader."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian small business owners, office managers and IT contractors who manage their own domain's DNS and want to make it harder for others to send email that pretends to be them."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/email-spoofing-shield-guide",
+   "source": "digital_products_2026-11-28/email-spoofing-shield-guide/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Email Spoofing Shield is a step-by-step guide to setting up SPF, DKIM and DMARC so other people find it harder to send email that pretends to come from your business domain. It covers Microsoft 365, Google Workspace and cPanel hosting, with the exact screens to open, the records to publish and a staged DMARC plan that avoids blocking your own mail. It also includes a Python checker that reads public DNS only and prints a plain-English report with pass, warning and fail results. The checker sends no email, scans nothing and needs no accounts, keys or extra packages. You also get copy and paste record templates, a sender inventory worksheet, a rollout checklist, troubleshooting tables and a short section on what to do if fake email has already been sent as your business.",
+    "whatsIncluded": [
+     "13 page PDF guide (also supplied as Markdown for copying commands)",
+     "Step-by-step sections for Microsoft 365, Google Workspace and cPanel",
+     "Staged DMARC rollout plan from monitoring to reject",
+     "spoofcheck.py: Python checker for SPF, DKIM and DMARC using public DNS only, with plain-English and JSON output",
+     "DNS record templates for each provider",
+     "Sender inventory worksheet, rollout checklist and troubleshooting tables",
+     "Offline test suite for the checker (31 tests)",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "Access to your domain's DNS settings (registrar, web host or DNS service)",
+     "Admin access to your mail system (Microsoft 365, Google Workspace or cPanel)",
+     "Python 3.8 or newer to run the checker (free from python.org); the guide works without it",
+     "A PDF reader"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "guide/email-spoofing-shield-guide.pdf",
+     "guide/email-spoofing-shield-guide.md",
+     "spoofcheck.py",
+     "dns-record-templates.txt",
+     "tests/test_spoofcheck.py"
+    ],
+    "disclaimers": [
+     "General information, not legal or professional advice.",
+     "Provider screens and DNS tools change; confirm steps against your provider's current documentation.",
+     "You are responsible for changes made to your own DNS. Keep a backup of existing records.",
+     "Does not guarantee that spoofing, phishing or fraud will stop, and does not protect against lookalike domains or compromised mailboxes.",
+     "The checker cannot list DKIM selectors from DNS; it tries common ones and accepts a selector you supply.",
+     "Not affiliated with Microsoft, Google or cPanel."
+    ],
+    "filename": "email-spoofing-shield-guide.zip",
+    "fileSize": "152 KB",
+    "sha256": "0145c8fd90ceef8c30a497ed178c9999a0ed46d11c8b635bece8bb94cb4f1003"
+   }
+  },
+  {
+   "id": "product:essential-eight-workbook",
+   "kind": "product",
+   "slug": "essential-eight-workbook",
+   "name": "Essential Eight Self-Assessment Workbook (Maturity Level 1)",
+   "bluf": "Excel workbook and PDF guide to self-assess the ACSC Essential Eight at Level 1",
+   "bullets": [
+    "Excel workbook with 35 Maturity Level 1 controls across all eight Essential Eight strategies, in plain English",
+    "Status drop-downs (Yes, Partial, No, N/A), evidence column and suggested first step for every control",
+    "Summary sheet with per-strategy scores, status and chart",
+    "Gap List sheet that builds itself from your No and Partial answers",
+    "Action Plan sheet with priority, owner, due date and progress tracking",
+    "PDF guide explaining each strategy and how to build an action plan",
+    "README with setup steps"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Microsoft Excel 2016 or later, Microsoft 365, LibreOffice Calc or Google Sheets. A PDF reader. Access to someone who can view your device and account settings (for example your IT provider or Microsoft 365 or Google Workspace admin)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian small and medium businesses, and the owners, office managers or IT providers who look after their systems, who want a clear view of their Essential Eight position before a customer, insurer or tender asks."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/essential-eight-workbook",
+   "source": "digital_products_2026-11-28/essential-eight-workbook/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "A plain, practical workbook for working out where your business stands against the Australian Cyber Security Centre's Essential Eight at Maturity Level 1. It lists 35 controls across all eight strategies in everyday language, with a drop-down status, an evidence column and a suggested first step for each. Your answers feed a summary that scores each strategy, a gap list that builds itself from your No and Partial answers, and an action plan where you assign owners and due dates. A short PDF guide explains each strategy and how to turn gaps into a plan. It is a self-assessment aid based on public ACSC guidance, not a formal assessment or legal advice. Everything is a file you keep and edit yourself, so there is no account to create and nothing is sent anywhere. Fill in the cream cells, review the summary, and work through the action plan at your own pace.",
+    "whatsIncluded": [
+     "Excel workbook with 35 Maturity Level 1 controls across all eight Essential Eight strategies, in plain English",
+     "Status drop-downs (Yes, Partial, No, N/A), evidence column and suggested first step for every control",
+     "Summary sheet with per-strategy scores, status and chart",
+     "Gap List sheet that builds itself from your No and Partial answers",
+     "Action Plan sheet with priority, owner, due date and progress tracking",
+     "PDF guide explaining each strategy and how to build an action plan",
+     "README with setup steps"
+    ],
+    "requirements": [
+     "Microsoft Excel 2016 or later, Microsoft 365, LibreOffice Calc or Google Sheets",
+     "A PDF reader",
+     "Access to someone who can view your device and account settings (for example your IT provider or Microsoft 365 or Google Workspace admin)"
+    ],
+    "deliveryFiles": [
+     "Essential-Eight-Self-Assessment-Workbook.xlsx",
+     "Essential-Eight-Self-Assessment-Guide.pdf",
+     "README.txt"
+    ],
+    "disclaimers": [
+     "General information only, not legal advice, not professional advice and not a formal Essential Eight assessment.",
+     "Control wording is paraphrased from public ACSC guidance. The ACSC updates the maturity model from time to time, so check the current version at cyber.gov.au before relying on any answer.",
+     "Scores are a progress guide and are not an official ACSC rating. A Partial answer does not meet Maturity Level 1.",
+     "Does not guarantee compliance with any law, contract, insurance condition or standard.",
+     "TITANOS is not affiliated with or endorsed by the Australian Signals Directorate or the ACSC.",
+     "Covers Maturity Level 1 only."
+    ],
+    "filename": "essential-eight-workbook.zip",
+    "fileSize": "67 KB",
+    "sha256": "a4c0ce7f30a30b3f9e64bcd7b034c6e2e1a8eb325a3674fcbd92ba906fc67646"
+   }
+  },
+  {
+   "id": "product:google-review-engine",
+   "kind": "product",
+   "slug": "google-review-engine",
+   "name": "Google Review Request Engine",
+   "bluf": "n8n workflows that ask happy customers for reviews, with an opt-out and feedback path",
+   "bullets": [
+    "Workflow 1: send requests and one reminder by SMS (Twilio) or email (SMTP), every 30 minutes",
+    "Workflow 2: private feedback form receiver with owner alert on low ratings or call-back requests",
+    "Workflow 3: STOP replies, email unsubscribe link and customer reply forwarding",
+    "Google Sheets tracker (xlsx) with Jobs, OptOuts, Feedback, Dashboard and Settings tabs, formulas and drop-down lists",
+    "One-page private feedback form (HTML) to host on your own site",
+    "SMS templates, email templates and service recovery and public reply wording",
+    "Dry-run script that previews messages without sending anything",
+    "Review link builder from your Google Place ID"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "n8n 1.x (cloud or self-hosted, reachable from the internet). Google account with Google Sheets and a Google Business Profile. SMTP email account (for email sending). Twilio account with an SMS-capable number (for SMS sending, billed to you by Twilio). Somewhere to host one static HTML page. Node.js 18 or later (optional, for the dry-run script and tests)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian service businesses such as trades, clinics, salons, cleaners and professional services that already use n8n, or are comfortable setting it up, and want a steady, rule-based way to ask customers for honest reviews."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/google-review-engine",
+   "source": "digital_products_2026-11-28/google-review-engine/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Google Review Request Engine sends one honest review request after a job is finished, then a single reminder, and stops. It includes three importable n8n workflows, a Google Sheets tracker, SMS and email wording, a private feedback form and a PDF guide. Timing rules are built in: a delay after the job, a daytime send window, a cooldown per customer, daily caps and a maximum job age. Every customer gets the same Google link, with a private feedback option beside it, so nothing is hidden or filtered by rating. Low private ratings and call-back requests email you so you can follow up personally. Opt-outs from SMS replies and email links are recorded and honoured. Everything runs on your own n8n, Google, Twilio and email accounts, and the pack ships with 52 automated checks. It does not promise any number of reviews, and the guide covers Google's review policy, the Spam Act and privacy basics as general information.",
+    "whatsIncluded": [
+     "Workflow 1: send requests and one reminder by SMS (Twilio) or email (SMTP), every 30 minutes",
+     "Workflow 2: private feedback form receiver with owner alert on low ratings or call-back requests",
+     "Workflow 3: STOP replies, email unsubscribe link and customer reply forwarding",
+     "Google Sheets tracker (xlsx) with Jobs, OptOuts, Feedback, Dashboard and Settings tabs, formulas and drop-down lists",
+     "One-page private feedback form (HTML) to host on your own site",
+     "SMS templates, email templates and service recovery and public reply wording",
+     "Dry-run script that previews messages without sending anything",
+     "Review link builder from your Google Place ID",
+     "52 automated checks and a run-all script",
+     "PDF guide (setup, timing rules, compliance notes, troubleshooting) plus README"
+    ],
+    "requirements": [
+     "n8n 1.x (cloud or self-hosted, reachable from the internet)",
+     "Google account with Google Sheets and a Google Business Profile",
+     "SMTP email account (for email sending)",
+     "Twilio account with an SMS-capable number (for SMS sending, billed to you by Twilio)",
+     "Somewhere to host one static HTML page",
+     "Node.js 18 or later (optional, for the dry-run script and tests)"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "docs/Review-Engine-Guide.md",
+     "docs/Review-Engine-Guide.pdf",
+     "feedback-form/index.html",
+     "scripts/decide.js",
+     "scripts/dry-run.js",
+     "scripts/review-link.js",
+     "scripts/sample-jobs.csv",
+     "spreadsheet/review-engine-tracker.xlsx",
+     "templates/email-templates.txt",
+     "templates/service-recovery-and-public-replies.txt",
+     "templates/sms-templates.txt",
+     "tests/decide.test.js",
+     "tests/run-all.sh",
+     "tests/scripts.test.js",
+     "tests/test_tracker.py",
+     "tests/workflows.test.js",
+     "workflows/1-send-requests-and-reminders.json",
+     "workflows/2-private-feedback-catch-path.json",
+     "workflows/3-optouts-and-customer-replies.json"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Check the Spam Act, privacy, Google and ACCC guidance linked in the guide for your own situation.",
+     "No results are promised. The pack cannot guarantee any number of reviews or any rating.",
+     "You are responsible for collecting and recording customer consent before messaging them.",
+     "Do not offer rewards for reviews and do not use the feedback form to hide your Google link from anyone.",
+     "Runs on your own accounts and keys. Twilio and email costs are yours. No credentials are included.",
+     "Workflows were validated structurally and their logic tested, but not executed against a live n8n instance, Google Sheets or Twilio before release. Run the test steps in the guide before going live."
+    ],
+    "filename": "google-review-engine.zip",
+    "fileSize": "157 KB",
+    "sha256": "58087fd62ae5285984c541c379b211e20b7e88afbe4d85722592366a068cfb2e"
+   }
+  },
+  {
+   "id": "product:invoice-chaser-xero",
+   "kind": "product",
+   "slug": "invoice-chaser-xero",
+   "name": "Invoice Chaser for Xero",
+   "bluf": "Staged, polite overdue invoice reminders for Xero, built for n8n.",
+   "bullets": [
+    "Importable n8n workflow with Xero, SMTP and a daily schedule",
+    "Three reminder email templates (7, 14 and 30 days overdue)",
+    "Pause list spreadsheet (.xlsx) with review flags and paste-ready lists",
+    "Optional overdue tracker spreadsheet with working formulas",
+    "Setup guide (PDF and Markdown) covering Xero connection, testing and go-live",
+    "Compliance and good practice notes with public source references",
+    "Test suite (34 logic checks and 30+ structure checks) and the Code node source"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "An n8n instance (Cloud or self-hosted). A Xero organisation and a Xero developer app for the n8n connection. An SMTP email account to send from. About 30 minutes for setup and a dry run."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian small businesses and bookkeepers who invoice through Xero, use or are willing to use n8n, and want consistent, polite follow-up on late invoices without chasing by hand."
+    }
+   ],
+   "priceAud": 39,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/invoice-chaser-xero",
+   "source": "digital_products_2026-11-28/invoice-chaser-xero/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Invoice Chaser for Xero is an n8n workflow that reads your open sales invoices from Xero each weekday and sends a polite reminder when one is 7, 14 and 30 days overdue. Each invoice receives each stage once, and an invoice that is already far overdue when you start gets only its current stage. Three plain email templates are included and can be edited to suit your voice. A pause list lets you hold back any contact or invoice while a payment plan or dispute is sorted out. The workflow starts in dry run mode so you can read every email before anything is sent. The pack includes a setup guide in PDF, a spreadsheet for managing the pause list, and the test suite used to check the logic. Everything runs on your own n8n, Xero and email accounts.",
+    "whatsIncluded": [
+     "Importable n8n workflow with Xero, SMTP and a daily schedule",
+     "Three reminder email templates (7, 14 and 30 days overdue)",
+     "Pause list spreadsheet (.xlsx) with review flags and paste-ready lists",
+     "Optional overdue tracker spreadsheet with working formulas",
+     "Setup guide (PDF and Markdown) covering Xero connection, testing and go-live",
+     "Compliance and good practice notes with public source references",
+     "Test suite (34 logic checks and 30+ structure checks) and the Code node source"
+    ],
+    "requirements": [
+     "An n8n instance (Cloud or self-hosted)",
+     "A Xero organisation and a Xero developer app for the n8n connection",
+     "An SMTP email account to send from",
+     "About 30 minutes for setup and a dry run"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "workflow/invoice-chaser-xero.n8n.json",
+     "templates/stage1-friendly-7day.txt",
+     "templates/stage2-follow-up-14day.txt",
+     "templates/stage3-final-30day.txt",
+     "pause-list/invoice-chaser-pause-list.xlsx",
+     "pause-list/pause-list-example.csv",
+     "docs/setup-guide.pdf",
+     "docs/setup-guide.md",
+     "code/decide-stage.js",
+     "code/build-email.js",
+     "code/record-sent.js",
+     "tests/run_tests.js",
+     "tests/test_package.py"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Check your own obligations, including the ACCC Debt collection guideline, the Spam Act 2003 and the Privacy Act 1988.",
+     "Not affiliated with or endorsed by Xero or n8n. Xero and n8n are trademarks of their owners.",
+     "You are responsible for the emails your own n8n instance sends. Start in dry run mode and test before going live.",
+     "Provided as is, without a support contract. No outcome, such as faster payment, is promised."
+    ],
+    "filename": "invoice-chaser-xero.zip",
+    "fileSize": "107 KB",
+    "sha256": "871c12de0c79e6d6bf9290f00ae67e819e94474f2f13e703702ea43d30d5ae7f"
+   }
+  },
+  {
+   "id": "product:job-reminder-sms-kit",
+   "kind": "product",
+   "slug": "job-reminder-sms-kit",
+   "name": "Job Booking Reminder Kit",
+   "bluf": "Confirmation, day-before and on-the-way texts for bookings, set up in n8n.",
+   "bullets": [
+    "Workflow 1: Google Calendar to confirmation and day-before reminders (n8n JSON)",
+    "Workflow 2: technician taps a link to send an on the way message (n8n JSON)",
+    "Workflow 3: Cal.com or Calendly webhook to confirmation and day-before reminder (n8n JSON)",
+    "One settings file holding business details and all message wording",
+    "Message library for trades, cleaning, mobile services and site visits",
+    "No-show cost calculator spreadsheet (.xlsx, working formulas, your own figures)",
+    "Setup guide as PDF and Markdown, with troubleshooting and an Australian rules overview",
+    "Readable logic script, workflow rebuild script and 30 automated tests"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "n8n 1.x (self-hosted or n8n Cloud). Google account with the calendar that holds your bookings (workflow 1 and 2). Twilio account for SMS (optional, billed by Twilio). SMTP email account for email (optional). Node.js 18 or newer (optional, only to run tests or rebuild workflows)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian trades, cleaners, mobile service providers and small appointment businesses that already keep bookings in Google Calendar, Cal.com or Calendly and are comfortable importing a workflow into n8n."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/job-reminder-sms-kit",
+   "source": "digital_products_2026-11-28/job-reminder-sms-kit/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "The Job Booking Reminder Kit sends customers a confirmation when a booking is made, a reminder inside the day before, and an on the way message when your technician taps a link. It reads bookings from Google Calendar, or from Cal.com or Calendly, and sends by SMS through your own Twilio account or by email through your own SMTP account. You get three importable n8n workflows, one settings file that holds all your wording, a message library for trades, cleaning and mobile services, a no-show cost calculator spreadsheet, and a PDF setup guide. Built-in checks stop duplicate messages, skip cancelled and all-day events, and avoid texting existing customers when you first switch it on. Thirty automated tests are included. It runs on your own accounts, so you pay Twilio, n8n and your email provider directly. The guide includes a plain overview of Australian spam and privacy rules, with links to the ACMA and OAIC.",
+    "whatsIncluded": [
+     "Workflow 1: Google Calendar to confirmation and day-before reminders (n8n JSON)",
+     "Workflow 2: technician taps a link to send an on the way message (n8n JSON)",
+     "Workflow 3: Cal.com or Calendly webhook to confirmation and day-before reminder (n8n JSON)",
+     "One settings file holding business details and all message wording",
+     "Message library for trades, cleaning, mobile services and site visits",
+     "No-show cost calculator spreadsheet (.xlsx, working formulas, your own figures)",
+     "Setup guide as PDF and Markdown, with troubleshooting and an Australian rules overview",
+     "Readable logic script, workflow rebuild script and 30 automated tests"
+    ],
+    "requirements": [
+     "n8n 1.x (self-hosted or n8n Cloud)",
+     "Google account with the calendar that holds your bookings (workflow 1 and 2)",
+     "Twilio account for SMS (optional, billed by Twilio)",
+     "SMTP email account for email (optional)",
+     "Node.js 18 or newer (optional, only to run tests or rebuild workflows)"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "docs/SETUP_GUIDE.md",
+     "docs/SETUP_GUIDE.pdf",
+     "no-show-cost-calculator.xlsx",
+     "scripts/build_workflows.js",
+     "scripts/reminder_lib.js",
+     "templates/config.default.json",
+     "templates/message-library.md",
+     "tests/lib.test.js",
+     "tests/run_tests.sh",
+     "tests/workflows.test.js",
+     "workflows/1-calendar-confirmation-and-day-before.json",
+     "workflows/2-on-the-way-link.json",
+     "workflows/3-booking-tool-cal-calendly.json"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Check the ACMA, the OAIC or a qualified adviser about your own obligations under the Spam Act 2003 and the Privacy Act 1988.",
+     "No promise of fewer no-shows or any other result. The calculator uses only the figures you enter.",
+     "You supply and pay for your own n8n, Google, Twilio and email accounts. No keys are included.",
+     "Workflows were checked for structure and logic with automated tests but were not run inside a live n8n instance, so test with your own phone number before going live.",
+     "Twilio, n8n, Google, Cal.com and Calendly are trademarks of their owners. This kit is not affiliated with or endorsed by them."
+    ],
+    "filename": "job-reminder-sms-kit.zip",
+    "fileSize": "123 KB",
+    "sha256": "b46f66c1e61b986c80a7294c06ffed9a5a1f08cc2b0287f49c409d8c41857da9"
+   }
+  },
+  {
+   "id": "product:lead-list-builder-scripts",
+   "kind": "product",
+   "slug": "lead-list-builder-scripts",
+   "name": "Public Lead List Builder (Python scripts)",
+   "bluf": "Build a business lead list from ABN Lookup and Google Places, on your own keys.",
+   "bullets": [
+    "Command line tool (lead_list.py) and Python package",
+    "ABN Lookup client with offline ABN checksum validation",
+    "Google Places (New) text search client with paging and a result cap",
+    "Rate limiter and retry with backoff",
+    "Merge, filter and de-duplicate across sources",
+    "CSV export for HubSpot, Salesforce, Pipedrive and a generic CRM",
+    "Terms-of-use checklist (Markdown and PDF)",
+    "Guide (Markdown and PDF)"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Python 3.9 or newer. A free ABN Lookup web services GUID, registered by you at abr.business.gov.au. Optional: your own Google Cloud project with billing and a Places API key. Basic comfort with a terminal."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian small business owners, freelancers and agencies who are comfortable running a few terminal commands and want a repeatable way to build a prospect list from public sources they have the right to use."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/lead-list-builder-scripts",
+   "source": "digital_products_2026-11-28/lead-list-builder-scripts/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Public Lead List Builder is a set of Python scripts that turn two public sources into a clean business list. It looks up ABNs and searches names through the ABN Lookup web service, and runs text searches through the Google Places API, both on your own keys and your own billing. It then merges the results, removes duplicates, filters out cancelled ABNs and closed businesses, and writes CSV files ready for HubSpot, Salesforce, Pipedrive or a generic CRM. Requests are rate limited and retried politely. A terms-of-use checklist covers the ABR agreement, Google's terms, the Privacy Act, the Spam Act and the Do Not Call Register, and live calls stay off until you confirm you have read it. The pack includes a PDF guide, example data and 30 offline tests. It does not collect email addresses and it is not legal advice.",
+    "whatsIncluded": [
+     "Command line tool (lead_list.py) and Python package",
+     "ABN Lookup client with offline ABN checksum validation",
+     "Google Places (New) text search client with paging and a result cap",
+     "Rate limiter and retry with backoff",
+     "Merge, filter and de-duplicate across sources",
+     "CSV export for HubSpot, Salesforce, Pipedrive and a generic CRM",
+     "Terms-of-use checklist (Markdown and PDF)",
+     "Guide (Markdown and PDF)",
+     "Example data and config template",
+     "30 offline unit tests"
+    ],
+    "requirements": [
+     "Python 3.9 or newer",
+     "A free ABN Lookup web services GUID, registered by you at abr.business.gov.au",
+     "Optional: your own Google Cloud project with billing and a Places API key",
+     "Basic comfort with a terminal"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "requirements.txt",
+     "config.example.json",
+     "lead_list.py",
+     "leadlist/__init__.py",
+     "leadlist/abn.py",
+     "leadlist/cli.py",
+     "leadlist/config.py",
+     "leadlist/exporters.py",
+     "leadlist/filters.py",
+     "leadlist/model.py",
+     "leadlist/places.py",
+     "leadlist/ratelimit.py",
+     "docs/guide.pdf",
+     "docs/guide.md",
+     "docs/terms-of-use-checklist.pdf",
+     "docs/terms-of-use-checklist.md",
+     "examples/sample_abns.txt",
+     "examples/sample_abn_response.json",
+     "examples/sample_abn_search_response.json",
+     "examples/sample_places_response.json",
+     "tests/test_leadlist.py"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Check the current terms of each source and speak to a qualified Australian lawyer about your own use.",
+     "You are responsible for complying with the ABN Lookup agreement, Google Maps Platform terms, the Privacy Act 1988, the Spam Act 2003 and the Do Not Call Register Act 2006.",
+     "Google API usage is billed by Google to your account. Set a budget alert before you start.",
+     "Public data can be out of date or wrong. No results or sales outcomes are promised.",
+     "Provided as is, without warranty. Not affiliated with or endorsed by the Australian Business Register or Google."
+    ],
+    "filename": "lead-list-builder-scripts.zip",
+    "fileSize": "175 KB",
+    "sha256": "0807002cc4103d8678ea8a1905c097171b64cc707a1647c50190a969799518e2"
+   }
+  },
+  {
+   "id": "product:missed-call-text-back-kit",
+   "kind": "product",
+   "slug": "missed-call-text-back-kit",
+   "name": "Missed-Call Text-Back Kit",
+   "bluf": "n8n workflows and 10 trade templates that text back missed callers",
+   "bullets": [
+    "Twilio n8n workflow (voice forwarding plus SMS text-back)",
+    "Cellcast or generic-webhook n8n workflow with manual dry-run trigger",
+    "Message templates for 10 trades plus a general template, in-hours and after-hours versions (JSON, CSV, Markdown)",
+    "Setup Guide PDF and Markdown: setup, settings, testing checklist, troubleshooting",
+    "Compliance notes (Spam Act, privacy) with ACMA and OAIC links, general information only",
+    "Test suite (Node and Python) that runs the shipped workflow logic on your own computer",
+    "README with quick start"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "An n8n instance reachable over HTTPS (n8n Cloud or self-hosted). Twilio account with a voice and SMS capable Australian number (Twilio path), or a Cellcast account and a phone system that can call a webhook (Cellcast path). Your own API credentials, added inside n8n. Node 18+ and Python 3 only if you want to run the included tests."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian trades and service businesses that miss calls while on a job, and have, or are willing to set up, an n8n instance and a Twilio or Cellcast account."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/missed-call-text-back-kit",
+   "source": "digital_products_2026-11-28/missed-call-text-back-kit/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "When a call to your business goes unanswered, this kit texts the caller back within about a minute, says who you are, and asks one question that helps you sort the job. It also sends you a one-line alert so you know who to ring. You get two importable n8n workflows: one for Twilio (voice and SMS in one place) and one for Cellcast or any phone system that can call a webhook. There are message templates for ten trades, each with an in-hours and after-hours version, a plain-English setup guide in PDF, and a test suite you can run on your own computer. The workflows skip landlines and withheld numbers, avoid repeat texts to the same caller, cap daily sends, and refuse to run until you have set your own details. Everything runs on your own n8n, Twilio or Cellcast accounts, so no keys are shared with anyone. The guide includes general information about the Spam Act and privacy, with links to the ACMA and OAIC.",
+    "whatsIncluded": [
+     "Twilio n8n workflow (voice forwarding plus SMS text-back)",
+     "Cellcast or generic-webhook n8n workflow with manual dry-run trigger",
+     "Message templates for 10 trades plus a general template, in-hours and after-hours versions (JSON, CSV, Markdown)",
+     "Setup Guide PDF and Markdown: setup, settings, testing checklist, troubleshooting",
+     "Compliance notes (Spam Act, privacy) with ACMA and OAIC links, general information only",
+     "Test suite (Node and Python) that runs the shipped workflow logic on your own computer",
+     "README with quick start"
+    ],
+    "requirements": [
+     "An n8n instance reachable over HTTPS (n8n Cloud or self-hosted)",
+     "Twilio account with a voice and SMS capable Australian number (Twilio path), or a Cellcast account and a phone system that can call a webhook (Cellcast path)",
+     "Your own API credentials, added inside n8n",
+     "Node 18+ and Python 3 only if you want to run the included tests"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "Setup-Guide.pdf",
+     "Setup-Guide.md",
+     "workflows/missed-call-text-back-twilio.json",
+     "workflows/missed-call-text-back-cellcast-generic.json",
+     "templates/templates.json",
+     "templates/templates.csv",
+     "templates/trade-templates.md",
+     "tests/run_tests.js",
+     "tests/validate_workflows.py"
+    ],
+    "disclaimers": [
+     "General information only, not legal advice. Check Spam Act 2003 and Privacy Act obligations for your own business.",
+     "Provider fees (n8n, Twilio, Cellcast) are charged by those providers and are not included.",
+     "The workflows were tested for logic with the included tests; they were not run against live Twilio, Cellcast or n8n accounts by the author. Follow the testing checklist before relying on them.",
+     "Cellcast request fields should be confirmed against Cellcast's current API documentation before going live.",
+     "No guarantee of message delivery, bookings or any business result."
+    ],
+    "filename": "missed-call-text-back-kit.zip",
+    "fileSize": "119 KB",
+    "sha256": "476aa5480b9c996728a27be6678ebbdf41705c2b275524b49afb1aa00e7042b7"
+   }
+  },
+  {
+   "id": "product:privacy-policy-pack-au",
+   "kind": "product",
+   "slug": "privacy-policy-pack-au",
+   "name": "Australian Small Business Privacy Template Pack",
+   "bluf": "Privacy policy, breach plan, notices and staff checklist for Australian small business",
+   "bullets": [
+    "Start Here Guide: does the Privacy Act apply to you, key rules, three hour setup plan, sources",
+    "Privacy Policy template with optional automated decision making section for 10 December 2026",
+    "Data Breach Response Plan with roles, containment checklist, serious harm assessment questions, OAIC and individual notification steps, and a notice template",
+    "Collection Notice templates: ten short APP 5 notices (forms, checkout, newsletter, calls, referrals, applicants, employees, CCTV, photos, health information)",
+    "Staff Privacy Checklist: ten rules, monthly self check, incident steps and sign-off table",
+    "Breach Assessment Register (Excel): Information Map, Incident Register with 30 day deadline flags, Harm Score prompt sheet, Summary",
+    "placeholder_check.py: finds unfinished [[PLACEHOLDER]] fields and drafting notes in Word, Markdown, HTML and Excel files",
+    "Test files showing how the spreadsheet formulas and the checker were tested"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Microsoft Word, LibreOffice Writer or Google Docs to edit the .docx files. Excel, LibreOffice Calc or Google Sheets for the register. Optional: Python 3.8 or newer to run placeholder_check.py (no extra packages). No accounts, subscriptions or API keys needed."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian sole traders and small businesses (roughly 1 to 50 staff), and the consultants, bookkeepers and IT providers who support them, who want a solid starting point for privacy documents and a breach plan they can adapt themselves."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/privacy-policy-pack-au",
+   "source": "digital_products_2026-11-28/privacy-policy-pack-au/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "This pack gives an Australian small business a complete, editable set of privacy documents in one download. It includes a privacy policy template built around the Australian Privacy Principles, a data breach response plan aligned to the Notifiable Data Breaches scheme, ten short collection notices for forms, calls, staff and CCTV, and a one page staff privacy checklist with a sign-off sheet. A spreadsheet register helps you map the personal information you hold, log incidents, and track the 30 day assessment window. A small script checks your finished documents for any placeholder you forgot to fill in. A plain guide explains whether the Privacy Act applies to you, what changes on 10 December 2026, and how to put everything in place in about three hours. Every document comes as a Word file, a Markdown file and a PDF. The pack is general information and not legal advice. Check the current law on the OAIC website and have a lawyer review anything high stakes.",
+    "whatsIncluded": [
+     "Start Here Guide: does the Privacy Act apply to you, key rules, three hour setup plan, sources",
+     "Privacy Policy template with optional automated decision making section for 10 December 2026",
+     "Data Breach Response Plan with roles, containment checklist, serious harm assessment questions, OAIC and individual notification steps, and a notice template",
+     "Collection Notice templates: ten short APP 5 notices (forms, checkout, newsletter, calls, referrals, applicants, employees, CCTV, photos, health information)",
+     "Staff Privacy Checklist: ten rules, monthly self check, incident steps and sign-off table",
+     "Breach Assessment Register (Excel): Information Map, Incident Register with 30 day deadline flags, Harm Score prompt sheet, Summary",
+     "placeholder_check.py: finds unfinished [[PLACEHOLDER]] fields and drafting notes in Word, Markdown, HTML and Excel files",
+     "Test files showing how the spreadsheet formulas and the checker were tested",
+     "Editable Word, Markdown and PDF versions of every document, and a README"
+    ],
+    "requirements": [
+     "Microsoft Word, LibreOffice Writer or Google Docs to edit the .docx files",
+     "Excel, LibreOffice Calc or Google Sheets for the register",
+     "Optional: Python 3.8 or newer to run placeholder_check.py (no extra packages)",
+     "No accounts, subscriptions or API keys needed"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "markdown/01_Start_Here_Guide.md",
+     "markdown/02_Privacy_Policy_Template.md",
+     "markdown/03_Data_Breach_Response_Plan.md",
+     "markdown/04_Collection_Notice_Templates.md",
+     "markdown/05_Staff_Privacy_Checklist.md",
+     "pdf/01_Start_Here_Guide.pdf",
+     "pdf/02_Privacy_Policy_Template.pdf",
+     "pdf/03_Data_Breach_Response_Plan.pdf",
+     "pdf/04_Collection_Notice_Templates.pdf",
+     "pdf/05_Staff_Privacy_Checklist.pdf",
+     "spreadsheet/Breach_Assessment_Register.xlsx",
+     "tools/placeholder_check.py",
+     "tools/tests/test_placeholder_check.py",
+     "tools/tests/test_register.py",
+     "word/01_Start_Here_Guide.docx",
+     "word/02_Privacy_Policy_Template.docx",
+     "word/03_Data_Breach_Response_Plan.docx",
+     "word/04_Collection_Notice_Templates.docx",
+     "word/05_Staff_Privacy_Checklist.docx"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. The pack does not create a lawyer and client relationship.",
+     "Whether the Privacy Act applies to your business depends on your facts, including turnover and the kind of information you hold. Check the OAIC guidance.",
+     "Laws and guidance change. Dates and thresholds were checked against public sources in November 2026. Confirm them before you rely on a document.",
+     "The templates do not cover overseas laws such as the GDPR, state and territory health records laws, or industry specific rules.",
+     "The Harm Score sheet is a discussion prompt, not a legal test. A person must decide whether a breach is an eligible data breach.",
+     "Nothing in this pack is a promise of compliance, certification or any commercial result."
+    ],
+    "filename": "privacy-policy-pack-au.zip",
+    "fileSize": "455 KB",
+    "sha256": "ae3546a51ee0833626c3943236503f0e0799edfa60f8d99e0f725e5d3156a7aa"
+   }
+  },
+  {
+   "id": "product:social-content-engine",
+   "kind": "product",
+   "slug": "social-content-engine",
+   "name": "Social Content Engine for Local Business",
+   "bluf": "90-day calendar, 120 post templates, AI prompts and Buffer scheduling workflow",
+   "bullets": [
+    "Social-Content-Calendar.xlsx: 90-day calendar with working formulas, settings, weekly rhythm, template library and prompts",
+    "120 original post templates in 12 categories (spreadsheet, Markdown and CSV)",
+    "15 AI prompts for adapting, checking and reviewing posts",
+    "Guide PDF with setup, weekly routine and Australian posting rules (general information)",
+    "Optional n8n workflow JSON that schedules Ready posts to Buffer, with dry run mode and setup notes",
+    "Pack integrity tests"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Excel or Google Sheets. Optional for the workflow: an n8n instance (Cloud or self-hosted), a Buffer account with API access and your own API key, and a Google account with Google Sheets."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Owners and managers of Australian local service and retail businesses who run their own social media and want a steady plan without starting from a blank page each week."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/social-content-engine",
+   "source": "digital_products_2026-11-28/social-content-engine/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Posting regularly is hard when every week starts with a blank page. The Social Content Engine gives you a 90-day calendar that has already chosen a topic for each day, built from 120 original post templates across twelve categories such as tips, behind the scenes, local community, questions and process. Enter your business name, area, service and call to action once, and the spreadsheet fills them into every post. You then replace the bracketed details with your own true facts and photos. The pack also includes 15 prompts you can use with an AI assistant you already have, a guide in PDF with a weekly one-hour routine, and plain notes on Australian rules for reviews, testimonials and customer photos. If you use n8n and Buffer, an optional workflow can schedule posts marked Ready. It starts in a safe preview mode and uses your own keys. No results are promised.",
+    "whatsIncluded": [
+     "Social-Content-Calendar.xlsx: 90-day calendar with working formulas, settings, weekly rhythm, template library and prompts",
+     "120 original post templates in 12 categories (spreadsheet, Markdown and CSV)",
+     "15 AI prompts for adapting, checking and reviewing posts",
+     "Guide PDF with setup, weekly routine and Australian posting rules (general information)",
+     "Optional n8n workflow JSON that schedules Ready posts to Buffer, with dry run mode and setup notes",
+     "Pack integrity tests"
+    ],
+    "requirements": [
+     "Excel or Google Sheets",
+     "Optional for the workflow: an n8n instance (Cloud or self-hosted), a Buffer account with API access and your own API key, and a Google account with Google Sheets"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "Social-Content-Engine-Guide.pdf",
+     "spreadsheet/Social-Content-Calendar.xlsx",
+     "templates/120-post-templates.md",
+     "templates/post-templates.csv",
+     "prompts/ai-prompts.md",
+     "n8n/buffer-scheduler.workflow.json",
+     "n8n/SETUP.md",
+     "docs/Social-Content-Engine-Guide.md",
+     "tests/test_pack.py",
+     "tests/run_code_node.js"
+    ],
+    "disclaimers": [
+     "General information and tools only. Not legal, financial or marketing advice.",
+     "No results, followers, enquiries or income are promised.",
+     "You are responsible for the accuracy of everything you publish, including permission for customer names, photos and reviews.",
+     "Buffer, n8n, Google and social platforms are third parties. Their features, terms and APIs can change. The workflow has not been run against a live Buffer account.",
+     "AI prompts are for use with your own AI tool and account. Check AI output before publishing."
+    ],
+    "filename": "social-content-engine.zip",
+    "fileSize": "138 KB",
+    "sha256": "c828184a4952319ceecf3eec79a7814db56cee9a0fccc4e8dc4de2738a4b29c5"
+   }
+  },
+  {
+   "id": "product:sop-template-library",
+   "kind": "product",
+   "slug": "sop-template-library",
+   "name": "SOP Template Library for Trades and Service Businesses",
+   "bluf": "25 editable SOP templates for quoting, site safety, close-out and complaints",
+   "bullets": [
+    "25 SOP templates in Markdown (quoting 5, site safety 6, job close-out 5, onboarding 4, complaints 5)",
+    "Print-ready PDF of each template plus one combined PDF",
+    "How to Write SOPs guide (PDF and Markdown)",
+    "Blank SOP template in the same layout",
+    "SOP register to track owners, versions and review dates",
+    "README with setup steps and index of all templates"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "Any text editor, Word or Google Docs to edit the templates. Any PDF reader to view the PDFs. No accounts, subscriptions or API keys needed."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Owners and office managers of small trades and service businesses in Australia, such as electricians, plumbers, builders, garden maintenance crews, cleaners and installers, who want consistent procedures written down."
+    }
+   ],
+   "priceAud": 49,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/sop-template-library",
+   "source": "digital_products_2026-11-28/sop-template-library/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Twenty-five standard operating procedure templates written for Australian trades and service businesses. They cover quoting (enquiry intake, site visits, pricing, follow-up, variations), site safety (inductions, pre-starts, risk assessment, SWMS, incident reporting, plant checks), job close-out (walkthroughs, defects, invoicing, clean-up, handover), onboarding (employees, subcontractors, customers, apprentices) and complaints (intake, investigation, escalation, online reviews, refunds). Every template uses the same layout with purpose, scope, roles, numbered steps, checks, records and a sign-off table. You get editable Markdown files you can paste into Word or Google Docs, print-ready PDFs, a guide on writing and rolling out SOPs, a blank template and a register. Bracketed placeholders show what to customise. All text is original. You edit the placeholders, walk each template through a real job and adapt it to your trade and state. The content is general information, not legal advice.",
+    "whatsIncluded": [
+     "25 SOP templates in Markdown (quoting 5, site safety 6, job close-out 5, onboarding 4, complaints 5)",
+     "Print-ready PDF of each template plus one combined PDF",
+     "How to Write SOPs guide (PDF and Markdown)",
+     "Blank SOP template in the same layout",
+     "SOP register to track owners, versions and review dates",
+     "README with setup steps and index of all templates"
+    ],
+    "requirements": [
+     "Any text editor, Word or Google Docs to edit the templates",
+     "Any PDF reader to view the PDFs",
+     "No accounts, subscriptions or API keys needed"
+    ],
+    "deliveryFiles": [
+     "INDEX.md",
+     "README.md",
+     "guide/How-to-Write-SOPs.md",
+     "guide/How-to-Write-SOPs.pdf",
+     "pdf/01-enquiry-intake-and-qualification.pdf",
+     "pdf/02-site-visit-and-measure-up.pdf",
+     "pdf/03-pricing-and-quote-build.pdf",
+     "pdf/04-quote-follow-up-and-acceptance.pdf",
+     "pdf/05-variation-and-change-request.pdf",
+     "pdf/06-site-induction-and-sign-in.pdf",
+     "pdf/07-daily-pre-start-and-toolbox-talk.pdf",
+     "pdf/08-hazard-identification-and-risk-assessment.pdf",
+     "pdf/09-safe-work-method-statement-preparation.pdf",
+     "pdf/10-incident-and-near-miss-reporting.pdf",
+     "pdf/11-plant-tools-and-vehicle-check.pdf",
+     "pdf/12-completion-walkthrough-and-sign-off.pdf",
+     "pdf/13-defects-and-rectification.pdf",
+     "pdf/14-final-invoice-and-payment-follow-up.pdf",
+     "pdf/15-site-clean-up-and-waste-removal.pdf",
+     "pdf/16-handover-pack-and-warranty-record.pdf",
+     "pdf/17-new-employee-first-week.pdf",
+     "pdf/18-subcontractor-onboarding.pdf",
+     "pdf/19-customer-job-start-onboarding.pdf",
+     "pdf/20-apprentice-and-trainee-supervision.pdf",
+     "pdf/21-complaint-intake-and-acknowledgement.pdf",
+     "pdf/22-complaint-investigation-and-resolution.pdf",
+     "pdf/23-complaint-escalation-and-external-dispute-resolution.pdf",
+     "pdf/24-online-review-response.pdf",
+     "pdf/25-refund-rework-and-goodwill-decisions.pdf",
+     "pdf/All-SOP-Templates.pdf",
+     "templates/00-blank-sop-template.md",
+     "templates/00-sop-register.md",
+     "templates/complaints/21-complaint-intake-and-acknowledgement.md",
+     "templates/complaints/22-complaint-investigation-and-resolution.md",
+     "templates/complaints/23-complaint-escalation-and-external-dispute-resolution.md",
+     "templates/complaints/24-online-review-response.md",
+     "templates/complaints/25-refund-rework-and-goodwill-decisions.md",
+     "templates/job-close-out/12-completion-walkthrough-and-sign-off.md",
+     "templates/job-close-out/13-defects-and-rectification.md",
+     "templates/job-close-out/14-final-invoice-and-payment-follow-up.md",
+     "templates/job-close-out/15-site-clean-up-and-waste-removal.md",
+     "templates/job-close-out/16-handover-pack-and-warranty-record.md",
+     "templates/onboarding/17-new-employee-first-week.md",
+     "templates/onboarding/18-subcontractor-onboarding.md",
+     "templates/onboarding/19-customer-job-start-onboarding.md",
+     "templates/onboarding/20-apprentice-and-trainee-supervision.md",
+     "templates/quoting/01-enquiry-intake-and-qualification.md",
+     "templates/quoting/02-site-visit-and-measure-up.md",
+     "templates/quoting/03-pricing-and-quote-build.md",
+     "templates/quoting/04-quote-follow-up-and-acceptance.md",
+     "templates/quoting/05-variation-and-change-request.md",
+     "templates/site-safety/06-site-induction-and-sign-in.md",
+     "templates/site-safety/07-daily-pre-start-and-toolbox-talk.md",
+     "templates/site-safety/08-hazard-identification-and-risk-assessment.md",
+     "templates/site-safety/09-safe-work-method-statement-preparation.md",
+     "templates/site-safety/10-incident-and-near-miss-reporting.md",
+     "templates/site-safety/11-plant-tools-and-vehicle-check.md"
+    ],
+    "disclaimers": [
+     "General information, not legal advice. Nothing in this pack guarantees compliance with any law, licence condition, award or insurance requirement.",
+     "Work health and safety, building, employment, consumer and privacy laws differ by state and territory and change over time. Confirm current requirements with your regulator or a qualified adviser.",
+     "Numbers in square brackets are starting suggestions, not requirements.",
+     "Templates are for use within your own business and may not be resold or redistributed."
+    ],
+    "filename": "sop-template-library.zip",
+    "fileSize": "1.1 MB",
+    "sha256": "e8eebac628aadb7029dd70296c54697c3c7356abe43e42e25b3862fa2d24d087"
+   }
+  },
+  {
+   "id": "product:tradie-quote-to-cash-kit",
+   "kind": "product",
+   "slug": "tradie-quote-to-cash-kit",
+   "name": "Tradie Quote-to-Cash Automation Kit",
+   "bluf": "Enquiry to quote, job, invoice and payment reminders in n8n and Google Sheets",
+   "bullets": [
+    "Five importable n8n workflows: enquiry to quote, quote accepted to job, job complete to invoice, payment reminders, mark paid",
+    "Google Sheets template with Quotes, Jobs, Invoices and a formula Dashboard",
+    "Website enquiry form with spam guard and consent tick box",
+    "Private phone page for finishing a job and marking an invoice paid",
+    "Setup guide (PDF), test checklist (PDF) and compliance notes for Australian trades (PDF)",
+    "Test scripts covering the quote, invoice and reminder logic, with sample data"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "n8n 1.x, self-hosted or n8n Cloud, reachable over HTTPS. A Google account for Google Sheets. An SMTP email account (host, port, username, password). A website where you can paste an HTML form. Your ABN, GST status, rates and bank details."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Australian sole traders and small trade businesses who already use, or are willing to set up, n8n and Google Sheets and want quoting, invoicing and payment chasing to run from one record."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/tradie-quote-to-cash-kit",
+   "source": "digital_products_2026-11-28/tradie-quote-to-cash-kit/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "Turn a website enquiry into a priced quote, a booked job, a GST invoice and polite payment reminders, without retyping anything. The kit gives you five importable n8n workflows and a Google Sheet template that records every quote, job and invoice in one place. Customers get a quote by email and accept it with one click. You finish a job from your phone and the invoice goes out with your bank details. Each morning unpaid invoices past their due date get up to three reminders, and you are told when the final one is sent. By default every draft quote comes to you first, so you stay in control. You bring your own n8n, Google account and email account. The pack includes a setup guide, a test checklist and plain-English compliance notes for Australian trades, and the tests used to check the logic.",
+    "whatsIncluded": [
+     "Five importable n8n workflows: enquiry to quote, quote accepted to job, job complete to invoice, payment reminders, mark paid",
+     "Google Sheets template with Quotes, Jobs, Invoices and a formula Dashboard",
+     "Website enquiry form with spam guard and consent tick box",
+     "Private phone page for finishing a job and marking an invoice paid",
+     "Setup guide (PDF), test checklist (PDF) and compliance notes for Australian trades (PDF)",
+     "Test scripts covering the quote, invoice and reminder logic, with sample data"
+    ],
+    "requirements": [
+     "n8n 1.x, self-hosted or n8n Cloud, reachable over HTTPS",
+     "A Google account for Google Sheets",
+     "An SMTP email account (host, port, username, password)",
+     "A website where you can paste an HTML form",
+     "Your ABN, GST status, rates and bank details"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "guides/01-setup-guide.pdf",
+     "guides/02-test-checklist.pdf",
+     "guides/03-compliance-notes.pdf",
+     "guides/01-setup-guide.md",
+     "guides/02-test-checklist.md",
+     "guides/03-compliance-notes.md",
+     "sheet/quote-to-cash-sheet.xlsx",
+     "workflows/01-enquiry-to-quote.json",
+     "workflows/02-quote-accepted-to-job.json",
+     "workflows/03-job-complete-to-invoice.json",
+     "workflows/04-payment-reminders.json",
+     "workflows/05-mark-invoice-paid.json",
+     "website/enquiry-form.html",
+     "website/PRIVATE-complete-job.html",
+     "tests/run_tests.js",
+     "tests/check_sheet.py"
+    ],
+    "disclaimers": [
+     "General information, not legal, tax or accounting advice. Check GST, invoicing, privacy and contract rules with your accountant, the ATO or a lawyer.",
+     "The workflows were tested against sample data and checked for structure. They were not run on your n8n server, so complete the included test checklist before using them with customers.",
+     "You supply and pay for your own n8n, Google and email services. No keys or logins are included.",
+     "The kit does not take card payments, connect to accounting software or send text messages.",
+     "Quotes are estimates produced from your own rate card. You are responsible for the quotes and invoices you send."
+    ],
+    "filename": "tradie-quote-to-cash-kit.zip",
+    "fileSize": "195 KB",
+    "sha256": "1d4bf2a94f76d52073b71b38d90a0e2c01b649a97b1198e4967baec8a36ab966"
+   }
+  },
+  {
+   "id": "product:website-lead-chatbot-kit",
+   "kind": "product",
+   "slug": "website-lead-chatbot-kit",
+   "name": "Website Lead Capture Chatbot Kit",
+   "bluf": "A chat widget that asks five questions and sends the lead to your inbox.",
+   "bullets": [
+    "widget/leadbot.js: the chat widget",
+    "examples/index.html: demo page to copy from",
+    "server/google-apps-script.gs: free email and Google Sheet lead receiver",
+    "server/relay.js: optional Node relay with webhook forwarding and AI answer proxy (your own key)",
+    "docs/SETUP_GUIDE.pdf and .md: step-by-step setup, configuration reference, troubleshooting",
+    "docs/PRIVACY_NOTES.pdf and .md: general information for Australian small businesses (not legal advice)",
+    "tests/: 14 Node tests and 18 real-browser checks you can re-run",
+    "README.md"
+   ],
+   "faq": [
+    {
+     "q": "How do I get the files?",
+     "a": "Right after payment we email you a private download link. It works for 7 days and for up to 5 downloads. Nothing is posted and no account is needed."
+    },
+    {
+     "q": "What do I need to use it?",
+     "a": "A website where you can add a script tag. A destination for leads: a Google account (for the Apps Script route), or any webhook URL, or a Node.js 18+ server for the relay. Optional: your own Anthropic or OpenAI API key, only for AI answers (billed to you by the provider)."
+    },
+    {
+     "q": "Who is it for?",
+     "a": "Small business owners, tradies, agencies and freelancers with an HTML, WordPress or other website who want a simple lead capture chat without a monthly subscription, and who are comfortable pasting code into a page or hiring someone to do it."
+    }
+   ],
+   "priceAud": 79,
+   "cadence": "one-off",
+   "priceLabel": "PUBLISHED",
+   "status": "READY",
+   "availability": "BUYABLE",
+   "buyUrl": null,
+   "href": "/shop/digital/website-lead-chatbot-kit",
+   "source": "digital_products_2026-11-28/website-lead-chatbot-kit/listing.json",
+   "synthetic": false,
+   "tags": [
+    "digital"
+   ],
+   "digital": {
+    "description": "A small chat bubble for your website, written in plain HTML and JavaScript with no dependencies. It asks a visitor five questions (name, email, phone, what they need, and when they want to start), checks the answers, and sends the lead to you. The quickest route is a free Google Apps Script that emails you and logs each lead in a Google Sheet, and the pack includes the script ready to paste. You can also point it at any webhook, such as n8n, Make or Zapier, or run the included Node relay on your own server. You can change the questions, colours and wording. Optional FAQ answers need no AI. Optional AI answers run through your own server using your own API key, and no key is ever placed in the browser. The pack includes a PDF setup guide, general privacy notes for Australian businesses, a demo page, and the tests we ran. You host everything yourself and there is no monthly fee from us.",
+    "whatsIncluded": [
+     "widget/leadbot.js: the chat widget",
+     "examples/index.html: demo page to copy from",
+     "server/google-apps-script.gs: free email and Google Sheet lead receiver",
+     "server/relay.js: optional Node relay with webhook forwarding and AI answer proxy (your own key)",
+     "docs/SETUP_GUIDE.pdf and .md: step-by-step setup, configuration reference, troubleshooting",
+     "docs/PRIVACY_NOTES.pdf and .md: general information for Australian small businesses (not legal advice)",
+     "tests/: 14 Node tests and 18 real-browser checks you can re-run",
+     "README.md"
+    ],
+    "requirements": [
+     "A website where you can add a script tag",
+     "A destination for leads: a Google account (for the Apps Script route), or any webhook URL, or a Node.js 18+ server for the relay",
+     "Optional: your own Anthropic or OpenAI API key, only for AI answers (billed to you by the provider)"
+    ],
+    "deliveryFiles": [
+     "README.md",
+     "docs/PRIVACY_NOTES.md",
+     "docs/PRIVACY_NOTES.pdf",
+     "docs/SETUP_GUIDE.md",
+     "docs/SETUP_GUIDE.pdf",
+     "examples/index.html",
+     "server/google-apps-script.gs",
+     "server/relay.js",
+     "tests/relay.test.js",
+     "tests/test_widget_browser.py",
+     "tests/widget_unit.test.js",
+     "widget/leadbot.js"
+    ],
+    "disclaimers": [
+     "General information only. The privacy notes are not legal advice. Check your own obligations under the Privacy Act 1988, the Spam Act 2003 and any other law that applies to you.",
+     "You are responsible for your privacy policy, consent wording and how you handle the leads you collect.",
+     "AI answers can be wrong. Review them and set a spend limit with your AI provider.",
+     "Google Apps Script, webhook tools and AI providers are third-party services with their own terms, limits and pricing, which may change.",
+     "No income, lead volume or conversion results are promised.",
+     "Provided as is, without warranty. Licence: use on your own sites and client sites, no resale of the kit."
+    ],
+    "filename": "website-lead-chatbot-kit.zip",
+    "fileSize": "159 KB",
+    "sha256": "b2565fc41c16a9a815d640556e54cf25bdc6ecded349e7210f3dd768520fd909"
+   }
+  }
+ ]
+}

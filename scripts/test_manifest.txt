@@ -29,6 +29,8 @@ node --experimental-strip-types scripts/test_guestscan.mjs
 node --experimental-strip-types scripts/test_guestscan_e2e.mjs
 node scripts/test_portal_checkout.mjs
 npm --prefix portal-api test
+npm --prefix digital-api test
+node scripts/test_digital_catalogue.mjs
 node scripts/test_owner_seat.mjs
 node scripts/test_pro_seat.mjs
 node scripts/build_shop.mjs --check

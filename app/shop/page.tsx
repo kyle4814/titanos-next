@@ -8,6 +8,7 @@ import OfferTile from "@/components/offers/OfferTile";
 import { shopReader } from "@/lib/shop/reader";
 import { formatAUD, formatMonthly } from "@/lib/pricing";
 import type { GradedShelf } from "@/lib/shop/types";
+import { DIGITAL_SHELVES } from "@/lib/shop/digital";
 
 const TITLE = "Shop: Ready to Buy, Checked Before You See It | TITANOS";
 const DESC = "Every item in the shop is checked before it appears. Prices in AUD, no GST charged. Not on a shelf? Ask and we quote.";
@@ -64,6 +65,16 @@ export default function Shop() {
         <SectionReveal>
           <SectionHeading title="Built for your sector" lead="Pick the job, the sector and the country. You get a fixed quote first." />
           {grid(generator)}
+        </SectionReveal>
+      )}
+      {DIGITAL_SHELVES.length > 0 && (
+        <SectionReveal>
+          <SectionHeading title="Digital products" lead="Templates, kits and guides you download in minutes. Pay once, get a private link by email." />
+          <div className="ox-grid">
+            {DIGITAL_SHELVES.map((s) => (
+              <OfferTile key={s.id} href={s.href} name={s.name} pill="Instant download" body={s.bluf} price={`${formatAUD(s.priceAud ?? 0)} one-off`} open />
+            ))}
+          </div>
         </SectionReveal>
       )}
       <SectionReveal>

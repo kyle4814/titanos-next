@@ -1,13 +1,13 @@
 {
  "probe": "keyboard_focus",
  "generated": "2026-11-13T03:00:38.577Z",
- "pages_enumerated": 274,
+ "pages_enumerated": 294,
  "pages_allowlisted": 0,
  "shard": null,
  "source": "manifest",
- "manifest_routes_count": 273,
- "pages_total": 273,
- "pages_swept": 273,
+ "manifest_routes_count": 293,
+ "pages_total": 293,
+ "pages_swept": 293,
  "not_swept": [],
  "allowlisted": [],
  "problems": [],
@@ -1558,6 +1558,14 @@
    "defects": []
   },
   {
+   "route": "/order/digital/thanks",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
    "route": "/order/leads",
    "swept": true,
    "viewports": [
@@ -1882,6 +1890,158 @@
   },
   {
    "route": "/shop",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/ai-prompt-library-au-smb",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/ai-receptionist-prompt-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/automation-audit-workbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/capability-statement-pack",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/claude-agent-starter-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/client-onboarding-automation",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/cold-email-compliance-playbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/email-spoofing-shield-guide",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/essential-eight-workbook",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/google-review-engine",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/invoice-chaser-xero",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/job-reminder-sms-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/lead-list-builder-scripts",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/missed-call-text-back-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/privacy-policy-pack-au",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/social-content-engine",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/sop-template-library",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/tradie-quote-to-cash-kit",
+   "swept": true,
+   "viewports": [
+    "mobile"
+   ],
+   "defects": []
+  },
+  {
+   "route": "/shop/digital/website-lead-chatbot-kit",
    "swept": true,
    "viewports": [
     "mobile"

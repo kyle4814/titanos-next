@@ -50,3 +50,7 @@ _shot*.js
 # discovery_check generated review output (never deployed)
 /generated/
 out_allpages_*.json
+
+# digital-api local wrangler state
+/digital-api/.wrangler/
+/digital-api/.dev.vars
