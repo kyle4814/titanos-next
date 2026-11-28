@@ -12,7 +12,7 @@
     "/products", "/products/dmarc-setup-guide",
     "/black-ice", "/black-ice/dossiers/seven-question-proof-test",
     "/case-studies", "/case-studies/ariance",
-    "/guides/tradie-automation-australia", "/tools/missed-call-calculator", "/tools/privacy-act-checker",
+    "/guides/tradie-automation-australia", "/glossary/dmarc", "/industries/plumbers", "/tools/missed-call-calculator", "/tools/privacy-act-checker",
     "/app/billing", "/demo/tix", "/order/ai", "/monitor/success", "/audit/booked", "/v/titanos-pitch", "/integrations/servicem8", "/privacy-act", "/privacy-act/app-1-automated-decisions", "/email-security/setup"
   ]
 }
