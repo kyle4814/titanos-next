@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const SECTION: CSSProperties = { padding: "var(--space-12) 20px", position: "relative", zIndex: 2 };
 const WRAP: CSSProperties = { maxWidth: 1020, margin: "0 auto" };
 const PROSE: CSSProperties = { maxWidth: "54ch", margin: "0 auto" };
-const H: CSSProperties = { color: "var(--gold)", fontSize: 22, margin: "34px 0 10px" };
-const BODY: CSSProperties = { color: "var(--ice)", fontSize: "var(--fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
+const H: CSSProperties = { color: "var(--pe-text)", fontWeight: 700, letterSpacing: "-0.01em", fontSize: 22, margin: "34px 0 10px" };
+const BODY: CSSProperties = { color: "var(--pe-mute)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75, margin: "0 0 14px" };
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const c = getCase((await params).slug);

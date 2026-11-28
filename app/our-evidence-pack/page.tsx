@@ -282,19 +282,18 @@ export default function OurEvidencePackPage() {
             <article
               key={card.icon}
               style={{
-                background: "var(--card)",
-                border: "1px solid var(--gold-dim)",
-                borderLeft: "3px solid var(--gold)",
-                borderRadius: "var(--radius-md)",
+                background: "var(--pe-card)",
+                border: "1px solid var(--pe-line-gold)",
+                borderRadius: "var(--pe-r-card)",
                 padding: "22px 20px",
               }}
             >
               <h3
                 style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
+                  fontFamily: "var(--font-body), system-ui, sans-serif", fontWeight: 700,
                   color: "var(--ice)",
                   fontSize: "var(--fs-body)",
-                  letterSpacing: "0.04em",
+                  letterSpacing: "-0.01em",
                   marginBottom: 8,
                   lineHeight: 1.3,
                 }}
@@ -325,10 +324,9 @@ export default function OurEvidencePackPage() {
             maxWidth: "var(--maxw-prose)",
             margin: "0 auto",
             padding: "26px 28px",
-            background: "var(--card)",
-            border: "1px solid var(--gold-dim)",
-            borderLeft: "3px solid var(--gold)",
-            borderRadius: "var(--radius-md)",
+            background: "var(--pe-card)",
+            border: "1px solid var(--pe-line-gold)",
+            borderRadius: "var(--pe-r-card)",
             fontFamily: "var(--font-body), system-ui, sans-serif",
             fontSize: "var(--fs-sm)",
             lineHeight: 1.7,
@@ -370,8 +368,8 @@ export default function OurEvidencePackPage() {
           style={{
             maxWidth: "var(--maxw-prose)",
             margin: "18px auto 0",
-            border: "1px solid var(--gold-dim)",
-            borderRadius: "var(--radius-md)",
+            border: "1px solid var(--pe-line-gold)",
+            borderRadius: "var(--pe-r-card)",
             overflow: "hidden",
           }}
         >
@@ -406,7 +404,7 @@ export default function OurEvidencePackPage() {
                   gap: 14,
                   marginBottom: 20,
                   paddingBottom: 12,
-                  borderBottom: `1px solid ${group.accent === "gold" ? "var(--gold-dim)" : "var(--border)"}`,
+                  borderBottom: `1px solid ${group.accent === "gold" ? "var(--pe-line-gold)" : "var(--pe-line)"}`,
                 }}
               >
                 <SystemLabel
@@ -432,9 +430,9 @@ export default function OurEvidencePackPage() {
                   <article
                     key={s.num}
                     style={{
-                      background: "var(--card)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "var(--radius-md)",
+                      background: "var(--pe-card)",
+                      border: "1px solid var(--pe-line)",
+                      borderRadius: "var(--pe-r-card)",
                       padding: "20px 22px",
                       display: "grid",
                       gridTemplateColumns: "44px 1fr",
@@ -445,10 +443,10 @@ export default function OurEvidencePackPage() {
                     <span
                       aria-hidden="true"
                       style={{
-                        fontFamily: "var(--font-display), Georgia, serif",
-                        color: "var(--gold-dim)",
+                        fontFamily: "var(--font-body), system-ui, sans-serif", fontWeight: 700,
+                        color: "var(--pe-gold)",
                         fontSize: "var(--fs-h3)",
-                        letterSpacing: "0.04em",
+                        letterSpacing: "-0.01em",
                         lineHeight: 1,
                       }}
                     >
@@ -457,10 +455,10 @@ export default function OurEvidencePackPage() {
                     <div>
                       <h3
                         style={{
-                          fontFamily: "var(--font-display), Georgia, serif",
+                          fontFamily: "var(--font-body), system-ui, sans-serif", fontWeight: 700,
                           color: "var(--ice)",
                           fontSize: "var(--fs-body)",
-                          letterSpacing: "0.03em",
+                          letterSpacing: "-0.01em",
                           marginBottom: 6,
                           lineHeight: 1.35,
                         }}
@@ -543,10 +541,10 @@ export default function OurEvidencePackPage() {
         <DepthIndex index={5} total={5} style={{ textAlign: "center" }} />
         <h2
           style={{
-            fontFamily: "var(--font-display), Georgia, serif",
+            fontFamily: "var(--font-body), system-ui, sans-serif", fontWeight: 700,
             color: "var(--gold)",
             fontSize: "var(--fs-h2)",
-            letterSpacing: "0.06em",
+            letterSpacing: "-0.01em",
             marginBottom: 18,
           }}
         >
