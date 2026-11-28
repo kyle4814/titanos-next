@@ -1,0 +1,41 @@
+#,Directory,URL,Free or paid,Type,Fields needed,What Kyle must do personally,Gate,Status
+1,Google Business Profile (service-area),https://business.google.com,Free,Core citation,"Name, category, service areas (hide address), phone, website, hours, services, description 750, logo, cover",Google login; phone/video verification,GATE2,DRAFT: not submitted
+2,Bing Places for Business,https://www.bingplaces.com,Free,Core citation,"Import from GBP or enter NAP, categories, service area, description, logo",Microsoft login; verification,GATE2,DRAFT: not submitted
+3,Apple Business Connect,https://businessconnect.apple.com,Free,Core citation,"Name, service area, phone, website, categories, description, logo",Apple ID; verification call/code,GATE2,DRAFT: not submitted
+4,LinkedIn company page,https://www.linkedin.com/company/setup/new/,Free,Entity profile,"Name, tagline 50, description 750, website, industry, size, logo 300x300, cover 1128x191",LinkedIn login (personal profile must be admin),GATE2,DRAFT: not submitted
+5,Facebook business page,https://www.facebook.com/business,Free,Entity profile,"Name, category, description 150, website, email, logo, cover",Facebook login,GATE2,DRAFT: not submitted
+6,True Local,https://www.truelocal.com.au/business/add,Free basic (decline paid),AU citation,"NAP, category, description 150/300, website, logo",Email/phone verification,GATE2,DRAFT: not submitted
+7,Yellow Pages Australia,https://www.yellowpages.com.au,Free basic (decline paid),AU citation,"NAP, category, description 300, website, hours",Verification call/SMS,GATE2,DRAFT: not submitted
+8,Hotfrog Australia,https://www.hotfrog.com.au,Free basic,AU citation,"NAP, category, description 150/300, website, logo",Email confirmation,GATE2,DRAFT: not submitted
+9,StartLocal,https://www.startlocal.com.au,Free,AU citation,"NAP, category, description 150, website",Email confirmation,GATE2,DRAFT: not submitted
+10,Localsearch,https://www.localsearch.com.au,Free listing (decline ads),AU citation,"NAP, category, description 150, website",Verification call/SMS,GATE2,DRAFT: not submitted
+11,Yelp Australia,https://biz.yelp.com,Free,AU citation,"NAP, category, description 300, photos",Yelp login; verification,GATE2,DRAFT: not submitted
+12,Crunchbase,https://www.crunchbase.com,Free profile,Entity profile,"Name, short description 150, long description 750, founded, location (city only), website, founder",Account; email verification,GATE2,DRAFT: not submitted
+13,ABN Lookup consistency check,https://abr.business.gov.au,Free,Foundation,Confirm trading name matches NAP exactly,Only if ABR needs changing (myGovID),GATE2,DRAFT: not submitted
+14,Capterra Vendor listing,https://www.capterra.com.au/vendors,Free listing (decline pay-per-click),Software directory,"Product name, category, description 150/750, pricing, screenshots, logo",Vendor account; verification. Wait until a product is purchasable,GATE2,DRAFT: not submitted
+15,GetApp,https://www.getapp.com.au,Free (shared with Capterra vendor account),Software directory,Same as Capterra,None beyond Capterra vendor account,GATE2,DRAFT: not submitted
+16,Software Advice,https://www.softwareadvice.com.au,Free (shared with Capterra vendor account),Software directory,Same as Capterra,None beyond Capterra vendor account,GATE2,DRAFT: not submitted
+17,G2,https://sell.g2.com,Free profile,Software directory,"Product name, tagline, description, category, logo, screenshots, pricing",G2 account; work email verification,GATE2,DRAFT: not submitted
+18,Product Hunt,https://www.producthunt.com,Free,Launch platform,"Name, tagline 60, description 260, topics, gallery, first comment, maker",Account; launch-day presence; needs account history,GATE2,DRAFT: not submitted
+19,AlternativeTo,https://alternativeto.net,Free,Software directory,"Name, description, platform, licence, alternatives, screenshots",Account,GATE2,DRAFT: not submitted
+20,SaaSHub,https://www.saashub.com,Free,Software directory,"Name, tagline, description, category, logo, URL",Account,GATE2,DRAFT: not submitted
+21,BetaList,https://betalist.com,Free queue (decline fast-track),Launch platform,"Name, tagline, description, URL, screenshot",Account,GATE2,DRAFT: not submitted
+22,Indie Hackers,https://www.indiehackers.com,Free,Community profile,"Product page: name, tagline, description, revenue (true figures only), URL",Account,GATE2,DRAFT: not submitted
+23,SourceBottle,https://www.sourcebottle.com,Free source registration (verify plan),Expert platform,"Bio 150/300, topics, headshot, contact, website",Account; each reply sent as Kyle needs approval,"GATE2, GATE4",DRAFT: not submitted
+24,Qwoted,https://www.qwoted.com,Free tier,Expert platform,"Bio, expertise tags, headshot, website",Account; identity check,"GATE2, GATE4",DRAFT: not submitted
+25,Featured.com,https://featured.com,Free to answer,Expert platform,"Bio, expertise, headshot, website",Account; each answer sent as Kyle,"GATE2, GATE4",DRAFT: not submitted
+26,Help a B2B Writer,https://helpab2bwriter.com,Free,Expert platform,Email subscription; replies per request,Subscribe; send replies as Kyle,"GATE2, GATE4",DRAFT: not submitted
+27,PodMatch,https://podmatch.com,Free tier,Podcast guest platform,"Bio 300, topics, headshot, links",Account; voice/intro,"GATE2, GATE4",DRAFT: not submitted
+28,Podchaser,https://www.podchaser.com,Free,Podcast guest platform,"Creator profile, bio, website",Account,GATE2,DRAFT: not submitted
+29,Hashnode,https://hashnode.com,Free,Developer community,"Profile, bio 150, website, canonical-linked posts",Account,GATE2,DRAFT: not submitted
+30,dev.to,https://dev.to,Free,Developer community,"Profile, bio 150, website, posts with canonical",Account,GATE2,DRAFT: not submitted
+31,GitHub organisation profile,https://github.com,Free,Developer community,"Org name, description 150, website, email, logo",GitHub login; Kyle decides what is published,"GATE2, GATE5",DRAFT: not submitted
+32,Kaggle,https://www.kaggle.com,Free,Open data,"Profile, dataset page with methodology and licence",Account; Kyle approves dataset release,"GATE2, GATE5",DRAFT: not submitted
+33,data.gov.au,https://data.gov.au,Free,Open data,"Organisation, dataset metadata, licence",Account; Kyle approves release,"GATE2, GATE5",DRAFT: not submitted
+34,ACSC Partnership Program,https://www.cyber.gov.au/partnershipprogram,Free (verify),Government partner,"Business details, ABN, contact, purpose",Identity and application; read terms for claim limits,"GATE2, GATE3",DRAFT: not submitted
+35,COSBOA Cyber Wardens,https://www.cyberwardens.com.au,Free (verify),Industry body,Enquiry as resource provider,Kyle contacts them (acting as Kyle),GATE4,DRAFT: not submitted
+36,Brisbane City Council business support,https://www.brisbane.qld.gov.au,Free (verify),Local government,Ask to be listed as local provider,Kyle contacts them,GATE4,DRAFT: not submitted
+37,Business Queensland provider pages,https://www.business.qld.gov.au,Free (verify),Local government,Resource suggestion only; low odds,Kyle sends if approved,GATE4,DRAFT: not submitted
+38,Reddit (AU small business and sysadmin subs),https://www.reddit.com,Free,Community,"Profile only; answer questions, check each sub's rules",Account; Kyle posts,"GATE2, GATE4",DRAFT: not submitted
+39,Stack Exchange (Security),https://security.stackexchange.com,Free,Community,Profile link; answer DMARC questions,Account,GATE2,DRAFT: not submitted
+40,Quora,https://www.quora.com,Free,Community,"Profile, credentials line, sourced answers",Account,GATE2,DRAFT: not submitted
