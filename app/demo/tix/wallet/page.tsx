@@ -5,7 +5,7 @@ import Link from "next/link";
 import { WINDOW_MS, checkResale, makeToken, tamper, ticketState } from "@/lib/tix";
 import { qrRGBA } from "@/lib/tixQr";
 import { useTix } from "@/components/tix/useTix";
-import { BTN, CARD, H2, INPUT, MUTED } from "@/components/tix/ui";
+import { BTN, CARD, EYEBROW, H2, INPUT, MUTED } from "@/components/tix/ui";
 
 function Wallet() {
   const { st, ready, commit } = useTix();
@@ -69,7 +69,8 @@ function Wallet() {
 
   return (
     <div>
-      <h1 style={{ ...H2, fontSize: 26 }}>Fan wallet</h1>
+      <p style={EYEBROW}>TIX-999 demo</p>
+      <h1 style={{ ...H2, fontSize: 28 }}>Fan wallet</h1>
       <section style={{ ...CARD, textAlign: "center" }}>
         <div style={MUTED}>{ev?.name}</div>
         <div style={{ fontSize: 22, margin: "4px 0 10px" }}>{ticket.owner}</div>
@@ -80,7 +81,7 @@ function Wallet() {
           <canvas ref={canvas} aria-label="Rotating ticket QR code" style={{ width: 240, height: 240, imageRendering: "pixelated", display: "block" }} />
         </div>
         <svg width="80" height="80" viewBox="0 0 80 80" role="img" aria-label={`Code refreshes in ${Math.ceil(left / 1000)} seconds`}>
-          <circle cx="40" cy="40" r={R} fill="none" stroke="#333" strokeWidth="6" />
+          <circle cx="40" cy="40" r={R} fill="none" stroke="rgba(255,255,255,.14)" strokeWidth="6" />
           <circle cx="40" cy="40" r={R} fill="none" stroke="#d4af37" strokeWidth="6" strokeDasharray={C} strokeDashoffset={C * (1 - frac)} transform="rotate(-90 40 40)" />
           <text x="40" y="46" textAnchor="middle" fill="#fff" fontSize="20" data-testid="countdown">{Math.ceil(left / 1000)}</text>
         </svg>

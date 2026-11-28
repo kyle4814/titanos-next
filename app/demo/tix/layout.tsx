@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const WRAP: CSSProperties = { maxWidth: 560, margin: "0 auto", padding: "110px 16px 60px", position: "relative", zIndex: 2, color: "var(--ice)" };
+const WRAP: CSSProperties = { maxWidth: 560, margin: "0 auto", padding: "clamp(48px, 8vw, 88px) 20px 72px", position: "relative", zIndex: 2, color: "var(--pe-text, var(--ice))" };
 
 export default function TixLayout({ children }: { children: React.ReactNode }) {
   return (

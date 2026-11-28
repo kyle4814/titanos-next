@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { SENTENCE, verifyAndRecord, type Verdict } from "@/lib/tix";
 import { useTix } from "@/components/tix/useTix";
-import { BTN, CARD, H2, INPUT, MUTED } from "@/components/tix/ui";
+import { BTN, BTN_DARK, CARD, EYEBROW, H2, INPUT, MUTED } from "@/components/tix/ui";
 
 const COLOUR: Record<string, string> = { ADMIT: "#0f7a3a", DUPLICATE: "#b36b00", EXPIRED: "#8a6d00", FAKE: "#a11a1a" };
 
@@ -72,7 +72,8 @@ export default function Scanner() {
 
   return (
     <div>
-      <h1 style={{ ...H2, fontSize: 26 }}>Gate scanner</h1>
+      <p style={EYEBROW}>TIX-999 demo</p>
+      <h1 style={{ ...H2, fontSize: 28 }}>Gate scanner</h1>
       <section style={CARD}>
         <video ref={video} playsInline muted style={{ width: "100%", borderRadius: 8, background: "#000", display: cam === "on" ? "block" : "none" }} />
         <canvas ref={work} style={{ display: "none" }} />
@@ -83,7 +84,7 @@ export default function Scanner() {
           : <p data-testid="paired" style={MUTED}>Paired for: <b>{st.events[0].name}</b>. Point the camera at a fan wallet QR.</p>}
       </section>
 
-      <section data-testid="verdict" style={{ ...CARD, textAlign: "center", background: verdict ? COLOUR[verdict.result] : "#0b0b0b", minHeight: 120 }}>
+      <section data-testid="verdict" style={{ ...CARD, textAlign: "center", background: verdict ? COLOUR[verdict.result] : "var(--pe-card, #0e1013)", minHeight: 120 }}>
         {verdict ? (
           <>
             <div style={{ fontSize: 44, fontWeight: 800, color: "#fff" }}>{verdict.result}</div>
@@ -99,7 +100,7 @@ export default function Scanner() {
         <input style={INPUT} placeholder="TIX1...." value={manual} onChange={(e) => setManual(e.target.value)} aria-label="Ticket code" />
         <button style={BTN} onClick={() => { lastTok.current = { t: "", at: 0 }; check(manual); }}>Verify code</button>
       </section>
-      <button style={{ ...BTN, background: "#222", color: "var(--ice)" }} onClick={() => { if (confirm("Clear scan history and pairing on this device?")) { setVerdict(null); lastTok.current = { t: "", at: 0 }; reset(); } }}>Reset scanner</button>
+      <button style={BTN_DARK} onClick={() => { if (confirm("Clear scan history and pairing on this device?")) { setVerdict(null); lastTok.current = { t: "", at: 0 }; reset(); } }}>Reset scanner</button>
     </div>
   );
 }

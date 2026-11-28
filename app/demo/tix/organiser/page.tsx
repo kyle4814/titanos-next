@@ -4,7 +4,7 @@ import Link from "next/link";
 import { createEvent, issueTicket, money, setResaleCap, exportPairing, ticketState } from "@/lib/tix";
 import { useTix } from "@/components/tix/useTix";
 import { qrRGBA } from "@/lib/tixQr";
-import { BTN, CARD, H2, INPUT, MUTED } from "@/components/tix/ui";
+import { BTN, BTN_DARK, CARD, EYEBROW, H2, INPUT, MUTED } from "@/components/tix/ui";
 
 export default function Organiser() {
   const { st, ready, commit, reset } = useTix();
@@ -28,7 +28,8 @@ export default function Organiser() {
 
   return (
     <div>
-      <h1 style={{ ...H2, fontSize: 26 }}>Organiser panel</h1>
+      <p style={EYEBROW}>TIX-999 demo</p>
+      <h1 style={{ ...H2, fontSize: 28 }}>Organiser panel</h1>
       <p style={MUTED}>One ticket, one real owner, one valid entry. Steps 1 to 3 here, then step 4 is scanning.</p>
 
       <section style={CARD}>
@@ -91,7 +92,7 @@ export default function Organiser() {
           ))}
         </div>
       </section>
-      <button style={{ ...BTN, background: "#222", color: "var(--ice)" }} onClick={() => { if (confirm("Clear all demo data on this device?")) reset(); }}>Reset demo</button>
+      <button style={BTN_DARK} onClick={() => { if (confirm("Clear all demo data on this device?")) reset(); }}>Reset demo</button>
     </div>
   );
 }
