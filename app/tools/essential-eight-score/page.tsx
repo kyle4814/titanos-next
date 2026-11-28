@@ -3,8 +3,6 @@ import Link from "next/link";
 import { withSeo, SITE } from "@/lib/seo";
 import { faqPage, breadcrumbs, ORG_ID } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
-import HomeNav from "@/components/home-redesign/HomeNav";
-import HomeFooter from "@/components/home-redesign/HomeFooter";
 import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./e8.css";
@@ -56,7 +54,6 @@ export default function Page() {
 
   return (
     <>
-    <HomeNav />
     <main className="e8">
       <JsonLd data={webApp} />
       <JsonLd data={crumbs} />
@@ -131,7 +128,6 @@ export default function Page() {
       </div>
       <RelatedLinks path={PATH} />
     </main>
-    <HomeFooter />
     </>
   );
 }

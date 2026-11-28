@@ -3,8 +3,6 @@ import Link from "next/link";
 import { withSeo, SITE } from "@/lib/seo";
 import { breadcrumbs, organization } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
-import HomeNav from "@/components/home-redesign/HomeNav";
-import HomeFooter from "@/components/home-redesign/HomeFooter";
 import { TOOLS, GUIDE_LINKS } from "@/lib/seo-links";
 import "@/components/home-redesign/home-redesign.css";
 import "./tools-hub.css";
@@ -66,7 +64,6 @@ export default function ToolsHub() {
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Free tools", path: PATH }])} />
       <JsonLd data={itemList} />
       <JsonLd data={organization()} />
-      <HomeNav />
       <main className="th-wrap">
         <nav className="th-crumbs" aria-label="Breadcrumb"><Link href="/">Home</Link> / <span aria-current="page">Free tools</span></nav>
         <header className="th-hero">
@@ -100,7 +97,6 @@ export default function ToolsHub() {
           <p>A tool tells you where you stand. The next step is the paperwork or the fix. Our <Link href="/guides">guides</Link> explain each topic in depth with sources, the <Link href="/blog">blog</Link> covers the questions people search for, and the <Link href="/shop">shop</Link> has checklists and templates priced in AUD with no GST. If you would rather have it done with you, see <Link href="/compliance">Privacy Act and Essential Eight compliance</Link>.</p>
         </section>
       </main>
-      <HomeFooter />
     </div>
   );
 }

@@ -14,6 +14,7 @@ import { SECTORS } from "@/lib/site-data";
 import { DOSSIERS } from "@/lib/black-ice/dossiers";
 import { arianceVisible, ariancePath } from "@/lib/case-studies/ariance";
 import { PROVIDERS as DMARC_PROVIDERS, providerPath as dmarcProviderPath } from "@/lib/dmarcSetup";
+import { OBLIGATIONS as PRIVACY_OBLIGATIONS, LAST_REVIEWED as PRIVACY_REVIEWED } from "@/lib/privacyObligations";
 import { TRADE_PROBLEMS, pagePath as tradeProblemPath } from "@/lib/tradeProblems";
 
 export type SiteRoute = { path: string; url: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" | "yearly"; lastModified?: Date };
@@ -111,6 +112,7 @@ export function indexableRoutes(): SiteRoute[] {
   if (SECTOR_PAGES_INDEXABLE) for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));
   for (const t of TRADE_PROBLEMS) out.push(mk(tradeProblemPath(t), undefined, { priority: 0.6, lastModified: new Date(t.reviewed) }));
   for (const d of DOSSIERS) if (d.published) out.push(mk(`/black-ice/dossiers/${d.slug}`, "lib/black-ice", { priority: 0.7 }));
+  for (const o of PRIVACY_OBLIGATIONS) out.push(mk(`/privacy-act/${o.slug}`, undefined, { priority: 0.7, lastModified: new Date(PRIVACY_REVIEWED) }));
   for (const d of DMARC_PROVIDERS) out.push(mk(dmarcProviderPath(d.slug), "lib/dmarcSetup.ts", { priority: 0.6 }));
   // Consent-gated: the page file always reads as noindex (its robots is conditional), so it is added only when Kyle flips the switch.
   if (arianceVisible) out.push(mk(ariancePath, "lib/case-studies", { priority: 0.8 }));

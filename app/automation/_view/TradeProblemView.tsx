@@ -4,6 +4,10 @@ import { SITE } from "@/lib/seo";
 import { article, faqPage, breadcrumbs } from "@/lib/jsonld";
 import { TRADE_PROBLEMS, pagePath, computeExample, type TradeProblem } from "@/lib/tradeProblems";
 
+// /shop/digital/* (build/digital-products-pipeline) and /d/* (build/prospect-demos) are not in the 2026-11-28 release.
+// Flip to true once both lanes are merged, and flip LINK_UNMERGED_LANES in scripts/test_trade_problems.mjs with it.
+const LINK_UNMERGED_LANES = false;
+
 const AUTHOR = { "@type": "Person", name: "Kyle Deligny", url: `${SITE}/about` };
 
 function longDate(iso: string): string {
@@ -93,9 +97,9 @@ export default function TradeProblemView({ p }: { p: TradeProblem }) {
           <h2>The ready-made kit and where to go next</h2>
           <p>{p.kit.fit}</p>
           <div className="tp-links">
-            <Link href={`/shop/digital/${p.kit.slug}`}>{p.kit.name}<small>The matching kit in the shop</small></Link>
+            {LINK_UNMERGED_LANES && <Link href={`/shop/digital/${p.kit.slug}`}>{p.kit.name}<small>The matching kit in the shop</small></Link>}
             <Link href="/tools/missed-call-calculator">Missed call calculator<small>Free, runs in your browser</small></Link>
-            {p.demo && <a href={p.demo.href}>{p.demo.label}<small>A demonstration with made-up details</small></a>}
+            {LINK_UNMERGED_LANES && p.demo && <a href={p.demo.href}>{p.demo.label}<small>A demonstration with made-up details</small></a>}
             <Link href="/automation">All trade guides<small>Hub for this series</small></Link>
             {siblings.map((s) => (
               <Link key={pagePath(s)} href={pagePath(s)}>{s.tradeLabel}: {s.problemLabel.toLowerCase()}<small>{s.title}</small></Link>

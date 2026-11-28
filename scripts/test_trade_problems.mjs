@@ -5,6 +5,7 @@
 // Usage: node --experimental-strip-types --no-warnings scripts/test_trade_problems.mjs [outDir=out]
 import fs from "node:fs";
 import path from "node:path";
+const LINK_UNMERGED_LANES = false; // keep in step with app/automation/_view/TradeProblemView.tsx
 import { TRADE_PROBLEMS, pagePath, computeExample } from "../lib/tradeProblems.ts";
 
 const out = process.argv[2] || "out";
@@ -50,8 +51,8 @@ for (const { route, p } of pages) {
   ok(words >= 600, `${route} ${words} words`);
   ok(/Spam Act 2003/.test(body) && html.includes('href="https://www.acma.gov.au/avoid-sending-spam"'), `${route} Spam Act note cites ACMA`);
   ok(body.includes("Example numbers, not data"), `${route} worked example labelled`);
-  for (const h of ["/tools/missed-call-calculator", `/shop/digital/${p.kit.slug}`, "/automation", "/about"]) ok(html.includes(`href="${h}"`), `${route} links to ${h}`);
-  if (p.demo) ok(html.includes(`href="${p.demo.href}"`), `${route} links to ${p.demo.href}`);
+  for (const h of ["/tools/missed-call-calculator", ...(LINK_UNMERGED_LANES ? [`/shop/digital/${p.kit.slug}`] : []), "/automation", "/about"]) ok(html.includes(`href="${h}"`), `${route} links to ${h}`);
+  if (LINK_UNMERGED_LANES && p.demo) ok(html.includes(`href="${p.demo.href}"`), `${route} links to ${p.demo.href}`);
   ok(TRADE_PROBLEMS.filter((s) => s !== p && html.includes(`href="${pagePath(s)}"`)).length >= 3, `${route} links to 3 siblings`);
   bodies.set(route, sentences(body));
 }

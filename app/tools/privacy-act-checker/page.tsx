@@ -3,8 +3,6 @@ import Link from "next/link";
 import { withSeo, SITE } from "@/lib/seo";
 import { breadcrumbs, faqPage, ORG_ID } from "@/lib/jsonld";
 import JsonLd from "@/components/JsonLd";
-import HomeNav from "@/components/home-redesign/HomeNav";
-import HomeFooter from "@/components/home-redesign/HomeFooter";
 import RelatedLinks from "@/components/seo/RelatedLinks";
 import "@/components/home-redesign/home-redesign.css";
 import "./privacy-checker.css";
@@ -66,7 +64,6 @@ export default function PrivacyActChecker() {
       <JsonLd data={APP_LD} />
       <JsonLd data={faqPage(FAQ)} />
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Privacy Act checker", path: PATH }])} />
-      <HomeNav />
       <div className="pt-wrap">
         <header className="pt-hero">
           <p className="pt-crumbs"><Link href="/">Home</Link> / Free tools / Privacy Act checker</p>
@@ -135,7 +132,6 @@ export default function PrivacyActChecker() {
         </aside>
       </div>
       <RelatedLinks path={PATH} />
-      <HomeFooter />
     </div>
   );
 }
