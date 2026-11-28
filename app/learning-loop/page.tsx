@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import LoopOrbit from "@/components/charts/LoopOrbit";
-import StepCards from "@/components/w2a/StepCards";
-import { NumberBlock, NextStep } from "@/components/SiteBlocks";
+import SectionReveal from "@/components/SectionReveal";
+import AnimatedButton from "@/components/AnimatedButton";
 import Provenance from "@/components/Provenance";
 
 export const metadata: Metadata = {
@@ -27,19 +27,51 @@ export default function LearningLoopPage() {
   return (
     <>
       <PageHero badge="THE LEARNING LOOP" title="We did not buy a bigger machine, we changed the system" tagline="Seven steps, and every turn leaves a receipt." />
-      <Provenance route="/learning-loop" />
-      <NumberBlock
-        fact={{
-          value: `${int("fleet_jobs_24h")} jobs in 24 hours`,
-          label: "MEASURED",
-          note: `Finished by our own worker fleet, ${dec("fleet_fail_rate_24h")} percent failed or stuck. Counted from the job ledger on ${AS_OF_LONG} (${dec("fleet_worker_hours_24h")} worker-hours, median job ${dec("fleet_median_job_min")} minutes).`,
-          source: "Job ledger, via lib/ledger.json",
-        }}
-      />
+      <div className="pe-page">
+        <Provenance route="/learning-loop" />
+        <SectionReveal className="pe-section">
+          <article className="pe-card pe-card--pad pe-card--gold">
+            <p className="pe-eyebrow-line">The biggest true number</p>
+            <p className="pe-goldtext" style={{ fontSize: "var(--pe-fs-h1)", fontWeight: 700, lineHeight: 1.1, margin: "0 0 8px" }}>
+              {`${int("fleet_jobs_24h")} jobs in 24 hours`}
+            </p>
+            <p data-claim-label="MEASURED" className="pe-kicker" style={{ margin: "0 0 12px" }}>MEASURED</p>
+            <p className="pe-muted" style={{ margin: 0, maxWidth: "68ch" }}>
+              {`Finished by our own worker fleet, ${dec("fleet_fail_rate_24h")} percent failed or stuck. Counted from the job ledger on ${AS_OF_LONG} (${dec("fleet_worker_hours_24h")} worker-hours, median job ${dec("fleet_median_job_min")} minutes).`}
+            </p>
+            <p style={{ fontSize: "var(--pe-fs-sm)", color: "var(--pe-faint)", margin: "10px 0 0" }}>Source: Job ledger, via lib/ledger.json</p>
+          </article>
+        </SectionReveal>
+      </div>
       <LoopOrbit />
-      <StepCards label="The seven steps" span={4} steps={STEPS.map(([a, b], i) => ({ title: `${i + 1}. ${a}`, body: b }))} />
-      <NextStep text="The same loop can run on your own repeat work." href="/ai-delivery" label="See how it applies to you" />
-      <NextStep text="Find where your own week is going, free, in your browser." href="/x-ray" label="Try the free X-Ray" />
+      <div className="pe-page">
+        <SectionReveal className="pe-section">
+          <p className="pe-eyebrow-line">The seven steps</p>
+          <ol className="pe-grid" role="group" aria-label="The seven steps" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {STEPS.map(([a, b], i) => (
+              <li key={a} className="pe-card pe-card--pad">
+                <span className="pe-kicker" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <h2 style={{ fontSize: "var(--pe-fs-h3)", margin: "8px 0 8px" }}>{`${i + 1}. ${a}`}</h2>
+                <p className="pe-muted" style={{ margin: 0 }}>{b}</p>
+              </li>
+            ))}
+          </ol>
+        </SectionReveal>
+        <SectionReveal className="pe-section">
+          <div className="pe-grid pe-grid--2">
+            <div className="pe-card pe-card--pad pe-card--gold">
+              <h2 style={{ fontSize: "var(--pe-fs-h3)", margin: "0 0 10px" }}>The same loop can run on your own repeat work.</h2>
+              <p className="pe-muted" style={{ margin: "0 0 18px" }}>Would it be okay if we showed you? A no is welcome.</p>
+              <AnimatedButton href="/ai-delivery">See how it applies to you</AnimatedButton>
+            </div>
+            <div className="pe-card pe-card--pad">
+              <h2 style={{ fontSize: "var(--pe-fs-h3)", margin: "0 0 10px" }}>Find where your own week is going, free, in your browser.</h2>
+              <p className="pe-muted" style={{ margin: "0 0 18px" }}>Would it be okay if we showed you? A no is welcome.</p>
+              <AnimatedButton href="/x-ray">Try the free X-Ray</AnimatedButton>
+            </div>
+          </div>
+        </SectionReveal>
+      </div>
     </>
   );
 }

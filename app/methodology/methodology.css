@@ -1,0 +1,6 @@
+/* Methodology page only: restyles shared kit blocks (Bluf, OpenLoop, FreeStart, FlexNumber) that still carry old serif italics inline. Scoped to .g10-method. */
+.g10-method h2[style*="italic"],
+.g10-method p[style*="italic"] { font-style: normal !important; font-family: var(--font-body), system-ui, sans-serif !important; }
+.g10-method h2[style*="italic"] { color: var(--pe-text) !important; font-weight: 700 !important; font-size: var(--pe-fs-h2) !important; letter-spacing: -0.02em !important; }
+.g10-method p[style*="italic"] { color: var(--pe-gold-hi) !important; font-size: var(--pe-fs-lead) !important; }
+.g10-method figure p[style*="Georgia"] { font-family: var(--font-body), system-ui, sans-serif !important; font-weight: 700; }

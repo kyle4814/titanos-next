@@ -4,6 +4,7 @@ import SectionReveal from "@/components/SectionReveal";
 import SectionHeading from "@/components/SectionHeading";
 import PageHero from "@/components/PageHero";
 import "@/components/w2a/w2a.css";
+import "./methodology.css";
 import MirrorLists from "@/components/MirrorLists";
 import VerifyKeys, { type VerifyKey } from "@/components/VerifyKeys";
 import FaqItem from "@/components/FaqItem";
@@ -72,7 +73,7 @@ const VERIFY: VerifyKey[] = [
           href="https://abr.business.gov.au/"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "var(--ice)" }}
+          style={{ color: "var(--pe-gold-hi)" }}
         >
           abr.business.gov.au
         </a>
@@ -97,12 +98,12 @@ const VERIFY: VerifyKey[] = [
     body: (
       <>
         Email{" "}
-        <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+        <a href="mailto:kyle@titanos.tech" style={{ color: "var(--pe-gold-hi)" }}>
           kyle@titanos.tech
         </a>{" "}
         directly to confirm any communication is genuine. (This is the footer/about
         contact mention. Not a scan request route. Use the form on{" "}
-        <a href="/scan#request" style={{ color: "var(--ice)" }}>/scan</a> for that.)
+        <a href="/scan#request" style={{ color: "var(--pe-gold-hi)" }}>/scan</a> for that.)
       </>
     ),
   },
@@ -132,7 +133,7 @@ export default function MethodologyPage() {
   };
 
   return (
-    <>
+    <div className="g10-method">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -147,10 +148,10 @@ export default function MethodologyPage() {
       </Bluf>
       <Analogy k="scouts" />
 
-      <SectionReveal style={{ padding: "var(--space-8, 32px) 20px 0", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <FlexNumber f={FLEX.tests} />
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.7, marginTop: 14 }}>
+          <p style={{ color: "var(--pe-text)", fontSize: "var(--pe-fs-body)", lineHeight: 1.7, marginTop: 14 }}>
             Method: one full pass of our own test suite, recorded 8 October 2026. The same habit applies to the security check: every
             finding is checked before it reaches you. Before you ask, it reads public records only, touches nothing of yours, replaces
             nobody, leaves your IT provider in charge, and costs nothing.
@@ -160,7 +161,7 @@ export default function MethodologyPage() {
 
       <OpenLoop>If nothing is touched, what exactly gets read?</OpenLoop>
 
-      <section aria-label="The commitment" style={{ padding: "0 20px var(--space-12)", position: "relative", zIndex: 2 }}>
+      <section aria-label="The commitment" className="pe-page pe-page--narrow pe-section">
         <Inscription
           label="The rule this whole practice runs on"
           sub="Everything below is the same rule written out in detail: what gets read, what gets left alone, and how you check I kept my word. Worth asking: could a stranger run the same checks on your own site right now?"
@@ -171,10 +172,8 @@ export default function MethodologyPage() {
         </Inscription>
       </section>
 
-      <div className="divider-gold" />
-
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={1} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="What I Check · What I Never Do"
@@ -189,26 +188,15 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* TOOLS USED */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={2} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Tools Used"
             lead="Industry-standard open-source security tooling: the same tools your auditors and threat-modellers use."
           />
-          <ul
-            style={{
-              listStyle: "none",
-              background: "var(--card)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--radius-md)",
-              padding: "24px 28px",
-              margin: 0,
-            }}
-          >
+          <ul className="pe-card pe-card--pad" style={{ listStyle: "none", margin: 0 }}>
             <ToolItem>
               <code>nmap</code> with banner detection (<code>-sV</code>): port + service
               identification
@@ -232,23 +220,14 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* RESPONSIBLE DISCLOSURE */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <OpenLoop>And if something is found, who hears about it first?</OpenLoop>
           <DepthIndex index={3} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Your 90-Day Window to Fix Before Anything Is Published" />
-          <div
-            style={{
-              background: "var(--card)",
-              borderLeft: "3px solid var(--gold)",
-              padding: "20px 24px",
-              borderRadius: "var(--radius-sm)",
-            }}
-          >
-            <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
+          <div className="pe-card pe-card--pad pe-card--gold">
+            <p style={{ color: "var(--pe-text)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75 }}>
               <strong style={{ color: "var(--gold)" }}>
                 Every Titanos finding ships with a 90-day responsible disclosure window.
               </strong>{" "}
@@ -271,11 +250,9 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* SCOPE */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={4} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
             title="Scope"
@@ -292,11 +269,9 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* WHAT YOU GET */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={5} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="What You Get" lead="The standard external scan output:" />
           <SimpleList
@@ -310,11 +285,9 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* HOW I DELIVER */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={6} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="How I Deliver" />
           <p
@@ -330,17 +303,17 @@ export default function MethodologyPage() {
             into. Reply to the email if you need the findings in a different format for your
             auditor.
           </p>
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
+          <p style={{ color: "var(--pe-text)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75 }}>
             Beyond the free check, two paid engagements:{" "}
-            <a href="/compliance" style={{ color: "var(--ice)" }}>
+            <a href="/compliance" style={{ color: "var(--pe-gold-hi)" }}>
               Privacy Act Compliance (done with you)
             </a>{" "}
             (done with you) and{" "}
-            <a href="/ai-delivery" style={{ color: "var(--ice)" }}>
+            <a href="/ai-delivery" style={{ color: "var(--pe-gold-hi)" }}>
               AI Implementation for Business
             </a>{" "}
             (project-quoted). Both are listed at{" "}
-            <a href="/" style={{ color: "var(--ice)" }}>
+            <a href="/" style={{ color: "var(--pe-gold-hi)" }}>
               titanos.tech
             </a>
             .
@@ -352,11 +325,9 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* HOW TO VERIFY ME - three-key vault interlock */}
-      <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
-        <div className="container-vault">
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div>
           <OpenLoop>That is my word. How would you check it without taking it?</OpenLoop>
           <DepthIndex index={7} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading
@@ -367,11 +338,9 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* FAQ */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={8} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Questions I get" />
           <FaqItem question="Is this a hacking attempt?">
@@ -386,21 +355,19 @@ export default function MethodologyPage() {
         </div>
       </SectionReveal>
 
-      <div className="divider-gold" />
-
       {/* REMOVAL */}
-      <SectionReveal style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
-        <div className="w2a-measure" style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
+      <SectionReveal className="pe-page pe-page--narrow pe-section">
+        <div className="w2a-measure">
           <DepthIndex index={9} total={SECTION_COUNT} style={{ textAlign: "center" }} />
           <SectionHeading title="Removal" />
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.75 }}>
+          <p style={{ color: "var(--pe-text)", fontSize: "var(--pe-fs-body)", lineHeight: 1.75 }}>
             Reply <code>remove</code> to any email from me and your domain is suppressed
             permanently. I honour the request immediately. And would it be okay if I ran the free check on your domain? A no is welcome.
           </p>
         </div>
       </SectionReveal>
 
-      <section aria-label="The seal" style={{ padding: "var(--space-16) 20px var(--space-30)", position: "relative", zIndex: 2 }}>
+      <section aria-label="The seal" className="pe-page pe-page--narrow pe-section">
         <OmegaSeal
           caption="Nine sections. Every commitment reproducible. Nothing here moves for a sale."
           style={{ margin: "0 auto" }}
@@ -408,7 +375,7 @@ export default function MethodologyPage() {
       </section>
       <FrontLoad/>
       <FreeStart />
-    </>
+    </div>
   );
 }
 
@@ -429,7 +396,6 @@ function ToolItem({ children }: { children: React.ReactNode }) {
           position: "absolute",
           left: 0,
           color: "var(--gold)",
-          fontFamily: "var(--font-display), Georgia, serif",
         }}
       >
         ›
@@ -441,22 +407,13 @@ function ToolItem({ children }: { children: React.ReactNode }) {
 
 function SimpleList({ items }: { items: string[] }) {
   return (
-    <ul
-      style={{
-        listStyle: "none",
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-md)",
-        padding: "24px 28px",
-        margin: 0,
-      }}
-    >
+    <ul className="pe-card pe-card--pad" style={{ listStyle: "none", margin: 0 }}>
       {items.map((it) => (
         <li
           key={it}
           style={{
             color: "var(--text)",
-            fontSize: "var(--fs-body)",
+            fontSize: "var(--pe-fs-body)",
             lineHeight: 1.7,
             padding: "8px 0 8px 26px",
             position: "relative",
@@ -468,8 +425,7 @@ function SimpleList({ items }: { items: string[] }) {
               position: "absolute",
               left: 0,
               color: "var(--gold)",
-              fontFamily: "var(--font-display), Georgia, serif",
-            }}
+                }}
           >
             ›
           </span>
